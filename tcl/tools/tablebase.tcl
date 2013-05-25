@@ -15,9 +15,13 @@ namespace eval ::tb {
   set proxyhost "127.0.0.1"
   set proxyport 3128
   set token {}
-  set afterid {}
+  # caching results of queries
+  set afterid(update) {}
+  set afterid(connect) {}
   array set hash {}
   set history {}
+  # helper for a flick-free display
+  set noresult 0
 }
 
 set tbInfo(section) 21
@@ -297,6 +301,15 @@ proc ::tb::name {s} {
   return $new
 }
 
+### Clear the text widget.
+
+proc ::tb::clearText {t} {
+  $t configure -state normal
+  $t delete 1.0 end
+  $t configure -state disabled
+  set ::tb::noresult 0
+}
+
 ### Updates the tablebase list for the specified section.
 
 proc ::tb::section {{sec 0}} {
@@ -307,8 +320,9 @@ proc ::tb::section {{sec 0}} {
   set tbInfo(section) $sec
   if {! [info exists tbInfo($sec)]} { return }
   set t $w.info.list.text
+  ::tb::clearText $t
+  set ::tb::tagonline 0
   $t configure -state normal
-  $t delete 1.0 end
   $t configure -height 10
   set count 0
   set linecount 1
@@ -351,8 +365,8 @@ proc ::tb::summary {{material ""}} {
   if {$material == ""} { set material $tbInfo(material) }
   set tbInfo(material) $material
   set t $w.info.data.text
+  ::tb::clearText $t
   $t configure -state normal
-  $t delete 1.0 end
   $t insert end [format "%-6s" [::tb::name $material]] fen
   if {! [info exists tbs($material)]} {
     $t insert end "\nNo summary for this tablebase."
@@ -493,65 +507,96 @@ proc ::tb::results {} {
   ::board::clearText $w.board
   ::board::update $w.board [sc_pos board]
 
-  # Update results panel:
   set t $w.pos.text
-  $t delete 1.0 end
+
+  # Update results panel:
   if {$tbTraining} {
-    $t insert end "\n (Training mode; results are hidden)"
+    ::tb::clearText $t
+    ::tb::insertText "\n (Training mode; results are hidden)"
   } else {
     if { $tbOnline } {
+      if {!$::tb::noresult} {
+        ::tb::clearText $t
+      }
       if { $::tb::online_available} {
         set cmd ::tb::updateOnline
       } else {
-        return
+        set cmd {}
       }
     } else {
-      set cmd [list $t insert end [sc_pos probe report] indent]
+      ::tb::clearText $t
+      set cmd [list ::tb::insertText [sc_pos probe report] indent]
     }
-    variable afterid
-    after cancel $afterid
-    set afterid [after 100 $cmd]
+    if {[llength $cmd]} {
+      variable afterid
+      after cancel $afterid(update)
+      set afterid(update) [after 100 $cmd]
+    }
   }
 }
 
+proc ::tb::insertText {s {tag {}}} {
+  set t .tbWin.pos.text
+  $t configure -state normal
+  $t insert end $s {*}$tag
+  $t configure -state disabled
+}
+
 if { $::tb::online_available } {
+
   proc ::tb::zeroOnline {} {
     set t .tbWin.pos.text
+    $t configure -state normal
     # delete previous online output
-    foreach tag {tagonline} {
-      while {1} {
-        set del [$t tag nextrange $tag 1.0]
-        if {$del == ""} {break}
-        catch {$t delete [lindex $del 0] [lindex $del 1]}
-      }
+    while {1} {
+      set del [$t tag nextrange tagonline 1.0]
+      if {$del == ""} {break}
+      catch {$t delete [lindex $del 0] [lindex $del 1]}
+    }
+    $t configure -state disabled
+    set ::tb::noresult 0
+  }
+
+  proc ::tb::insertNoResult {} {
+    variable noresult
+
+    # This proc will be called often, so don't
+    # update text widget with same content,
+    # otherwise the display is flickering.
+    if {!$noresult} {
+      set t .tbWin.pos.text
+      ::tb::zeroOnline
+      ::tb::insertText "Online: No result" tagonline
+      set noresult 1
     }
   }
 
   proc ::tb::updateOnline {} {
-    global tbTraining
     global env
     variable token
     variable hash
+    variable afterid
+
+    set afterid(update) {}
 
     set w .tbWin
     if {! [winfo exists $w]} { return }
 
     set pieceCount [sc_pos pieceCount]
-    if {$pieceCount > 6 || $pieceCount == 0} {
-      ::tb::zeroOnline
-      .tbWin.pos.text insert end "Online: No result" tagonline
+    if {$pieceCount > 6 || 2 >= $pieceCount} {
+      ::tb::insertNoResult
       return
     }
 
     set fen [sc_pos fen]
-    if {[info exists hash($fen)]} {
-      ::tb::showResult $fen {*}$hash($fen)
+    if {![catch { set result $hash($fen) }]} {
+      # show result from cache
+      ::tb::showResult $fen {*}$result
       return
     }
 
-    .tbWin.pos.text insert end "Contacting server" tagonline
-
     if {[llength $token]} {
+      # reset current http request
       ::http::reset $token ignore
       ::http::cleanup $token
       set token {}
@@ -569,7 +614,6 @@ if { $::tb::online_available } {
       }
     }
 
-    set t $w.pos.text
     append envelope \
       "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n" \
       "<soapenv:Envelope" \
@@ -591,30 +635,42 @@ if { $::tb::online_available } {
       SOAPAction http://lokasoft.org/action/TB2ComObj.GetBestMoves \
       ;
 
+    # Delay the contacting message a bit, this avoids flickering in most cases.
+    after cancel $afterid(connect)
+    set afterid(connect) [after 500 ::tb::showContactMsg]
+
     set cmd [list ::tb::httpCallback $fen]
     if {[catch {::http::geturl $::tb::url -timeout 5000 -headers $headers -query $envelope -command $cmd} ::tb::token]} {
-      # Connection failed, flash old message before issuing No connection
-      set token {}
+      # Cancel contact message.
+      after cancel $afterid(connect)
+      set afterid(connect) {}
+      set token {} ;# to be sure
+      # Connection failed, flash old message before issuing "No connection"
       after 100
       ::tb::zeroOnline
-      .tbWin.pos.text insert end "No connection." tagonline
+      ::tb::insertText "No connection." tagonline
     }
   }
 
+  proc ::tb::showContactMsg {} {
+    variable afterid
+    set afterid(connect) {}
+    ::tb::zeroOnline
+    ::tb::insertText "Contacting server" tagonline
+  }
+
   proc ::tb::httpCallback { fen token } {
+    # Cancel contact message.
+    variable afterid
+    after cancel $afterid(connect)
+    set afterid(connect) {}
 
-    if {! [winfo exists .tbWin]} {
-      ::http::cleanup $token
-      set ::tb::token {}
-      return
+    if {[winfo exists .tbWin] && [::http::status $token] != "ignore"} {
+      ::tb::showResult $fen {*}[::tb::getResult $fen $token]
     }
 
-    # this call is hashing the result, and is doing the cleanup
-    lassign [::tb::getResult $fen $token] err result
-
-    if {[::http::status $token] != "ignore"} {
-      ::tb::showResult $fen $err $result
-    }
+    ::http::cleanup $token
+    set ::tb::token {}
   }
 
   proc ::tb::getResult { fen token } {
@@ -646,6 +702,8 @@ if { $::tb::online_available } {
         variable history
 
         set result [string trim [string range $data [expr {$i + 8}] [expr {$k - 1}]]]
+
+        # cache the result, but not more than 500 queries
         if {[llength $history] > 500} {
           array unset hash [lindex $history 0]
           set history [lrange $history 1 end]
@@ -655,16 +713,14 @@ if { $::tb::online_available } {
       }
     }
 
-    ::http::cleanup $token
-    set ::tb::token {}
-
     return [list $err $result]
   }
 
   proc ::tb::showResult { fen err result } {
-    set t .tbWin.pos.text
-    # $t insert end \n tagonline
     ::tb::zeroOnline
+    set t .tbWin.pos.text
+    $t configure -state normal
+    # $t insert end \n tagonline
 
     if {[string length $err]} {
       $t insert end "Online: $err" tagonline
@@ -682,10 +738,15 @@ if { $::tb::online_available } {
       }
 
       if {$empty} {
-        set ::tb::hash($fen) [list "No Result" ""]
+        variable hash
+        if {[info exists hash($fen)]} {
+          set hash($fen) [list "No Result" ""]
+        }
         $t insert end "Online: No result" tagonline
       }
     }
+
+    $t configure -state disabled
   }
 }
 
