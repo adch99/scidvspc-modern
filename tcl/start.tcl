@@ -881,13 +881,14 @@ proc createToplevel { w } {
     frame $f  -container 1
     toplevel .$name -use [ winfo id $f ]
     ::docking::add_tab $f e
-    
-    # auto focus mode : when the mouse enters a toplevel, it gets a forced focus to handle mouse wheel
-    # only the highest stacked window can get the focus forced or on windows any time the mouse enters the main window, it will be raised
+
+    # auto focus mode: when the mouse enters a toplevel, it gets a forced focus to handle mouse wheel
+    # only the highest stacked window is considered and only if it is docked (.main)
+    # undocked windows should not receive auto-focus to avoid focus stealing
     bind .$name <Enter> {
       set tl [winfo toplevel %W]
       set atTop [lindex [wm stackorder . ] end]
-      if { $tl == $atTop || $atTop == "." } {
+      if { $tl == ".main" && $atTop == "." && [focus] != "" } {
         if {$tl == ".fics"} {
           focus -force .fics.command.entry
         } else {
