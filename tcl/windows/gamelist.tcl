@@ -628,6 +628,8 @@ proc ::windows::gamelist::displayButtons {} {
 }
 
 proc ::windows::gamelist::Configure {window} {
+  recordWidths
+  recordWinSize .glistWin
   if {$window == {.glistWin.tree}} {
     recordWinSize .glistWin
     ::windows::gamelist::Refresh
