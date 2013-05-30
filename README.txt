@@ -138,8 +138,8 @@
   browse files
   <https://sourceforge.net/project/showfiles.php?group_id=263836>
 
-  The latest code is available from subversion -  svn co
-  https://scidvspc.svn.sourceforge.net/svnroot/scidvspc
+  The latest code is available from subversion -  svn checkout
+  svn://svn.code.sf.net/p/scidvspc/code/ scidvspc-code
 
   4.  installation
 
