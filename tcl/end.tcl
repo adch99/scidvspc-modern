@@ -1791,21 +1791,6 @@ while {$argc > 0} {
 ### Main window initialisation ###
 ##################################
 
-# Init start-up windows
-
-# In docked mode, reopen only the windows that are not dockable
-if { !$::docking::USE_DOCKING } {
-  foreach {type action} {
-    stats      ::windows::stats::Open
-    crosstable ::crosstab::Open
-    finder     ::file::finder::Open
-    book       ::book::OpenClose
-    fics       ::fics::config
-  } {
-    if {$startup($type)} { $action }
-  }
-}
-
 updateBoard
 updateStatusBar
 updateTitle
@@ -1996,8 +1981,6 @@ if { $::docking::USE_DOCKING } {
 wm deiconify $dot_w
 focus .main
 
-if {$startup(tip)} { ::tip::show }
-
 ### Raise pgn import window if open
 if {[winfo exists .ipgnWin]} {
   raiseWin .ipgnWin
@@ -2008,6 +1991,37 @@ if {$::splash::keepopen} {
   after 100 {raiseWin .splash}
 } else {
   after 500 { wm withdraw .splash }
+}
+
+# Init start-up windows
+
+if { $::docking::USE_DOCKING } {
+  # In docked mode, reopen only the windows that are not dockable
+  set startup_windows {
+    stats      ::windows::stats::Open
+    crosstable ::crosstab::Open
+    finder     ::file::finder::Open
+    book       ::book::OpenClose
+    fics       ::fics::config
+    tip		::tip::show
+  }
+} else {
+  set startup_windows {
+    switcher   ::windows::switcher::Open
+    pgn        ::pgn::OpenClose
+    gamelist   ::windows::gamelist::OpenClose
+    tree       ::tree::OpenClose
+    stats      ::windows::stats::Open
+    crosstable ::crosstab::Open
+    finder     ::file::finder::Open
+    book       ::book::OpenClose
+    tip		::tip::show
+  }
+}
+foreach {type action} $startup_windows {
+  if {$startup($type)} {
+    $action
+  }
 }
 
 ### End of file: end.tcl
