@@ -262,9 +262,13 @@ proc ::preport::makeReportWin {args} {
     button $w.b.viewHTML -text $::tr(OprepViewHTML) -command ::preport::previewHTML
     button $w.b.update -textvar ::tr(Update) -command ::preport::preportDlg
     button $w.b.close -textvar ::tr(Close) -command "focus .main ; destroy $w"
+
+    entry $w.b.find -width 10 -textvariable ::preport(find) -highlightthickness 0
+    configFindEntryBox $w.b.find ::preport .preportWin.text
+
     pack $w.b -side bottom -fill x
     pack $w.scroll -side top -fill both -expand yes
-    pack $w.b.close $w.b.update -side right -padx 2 -pady 2
+    pack $w.b.close $w.b.find $w.b.update -side right -padx 2 -pady 2
     if {$::windowsOS} {
       pack $w.b.viewHTML -side left -padx 2 -pady 2
     }

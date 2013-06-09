@@ -232,10 +232,14 @@ proc ::optable::makeReportWin {args} {
     button $w.b.mergeGames -textvar ::tr(MergeGames) -command ::optable::mergeGames
     button $w.b.help -textvar ::tr(Help) -command {helpWindow Reports Opening}
     button $w.b.close -textvar ::tr(Close) -command "focus .main ; destroy $w"
+
+    entry $w.b.find -width 10 -textvariable ::oreport(find) -highlightthickness 0
+    configFindEntryBox $w.b.find ::oreport .oprepWin.text
+
     pack $w.b -side bottom -fill x
     pack $w.ybar -side right -fill y
     pack $w.text -side left -fill both -expand yes
-    pack $w.b.close $w.b.update -side right -padx 1 -pady 2
+    pack $w.b.close $w.b.find $w.b.update -side right -padx 1 -pady 2
     if {! $::windowsOS} {
       pack $w.b.previewLaTeX -side left -padx 1 -pady 2
     } else {
