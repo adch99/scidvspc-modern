@@ -124,6 +124,9 @@ proc placeWinOverParent {w parent {where 0}} {
   if {!$::docking::USE_DOCKING && $parent == "."} {
     set parent .main
   }
+  if {[winfo exists .fdock[string range $parent 1 end]]} {
+    set parent .fdock[string range $parent 1 end]
+  }
 
   set reqwidth [winfo reqwidth $w]
   set reqheight [winfo reqheight $w]
