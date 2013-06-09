@@ -289,9 +289,11 @@ proc ::optable::makeReportWin {args} {
 ################################################################################
 proc ::optable::mergeGames { {game_count 50} {ply 999} } {
   set base  $::optable::opReportBase
+  set current [sc_game number]
+  sc_game undoPoint
   set games [split [sc_report opening best a $game_count] "\n"]
   foreach g $games {
-    if {$g == "" } { continue }
+    if {$g == "" } {continue}
     set res [scan $g "%d:  <g_%d>" d1 game_number]
     if {$res != 2} {
       if {[info exists game_number]} {
@@ -301,12 +303,15 @@ proc ::optable::mergeGames { {game_count 50} {ply 999} } {
       }
       break
     }
+    # dont merge current game with itself
+    if {$game_number == $current} {continue}
     set err [ catch { sc_game merge $base $game_number $ply } result ]
     if {$err} {
       tk_messageBox -title "Scid" -type ok -icon info -message "Unable to merge the selected game:\n$result"
       break
     }
   }
+  tk_messageBox -title "Scid: Merge Complete" -type ok -icon info -message "Merge Complete."
   updateBoard -pgn
 }
 ################################################################################
@@ -336,7 +341,9 @@ proc ::optable::setOptions {} {
     return
   }
   toplevel $w
-  placeWinOverParent $w .oprepWin
+  wm withdraw $w
+  wm resizable $w 0 0
+  wm title $w  "[tr ToolsOpReport]: [tr OprepFileOptions]"
 
   pack [frame $w.f] -side top -fill x -padx 5 -pady 5
   set row 0
@@ -420,9 +427,11 @@ proc ::optable::setOptions {} {
   packbuttons left $w.b.defaults
   packbuttons right $w.b.cancel $w.b.ok
   array set ::optable::backup [array get ::optable]
-  wm resizable $w 0 0
-  wm title $w  "[tr ToolsOpReport]: [tr OprepFileOptions]"
   bind $w <Escape> "$w.b.cancel invoke"
+
+  update
+  placeWinOverParent $w .oprepWin
+  wm deiconify $w
 }
 
 # previewLaTeX:

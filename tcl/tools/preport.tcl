@@ -294,9 +294,14 @@ proc ::preport::makeReportWin {args} {
 proc ::preport::setOptions {} {
   set w .preportOptions
   if {[winfo exists $w]} {
+    raiseWin $w
     return
   }
   toplevel $w
+  wm withdraw $w
+  wm title $w  "[tr ToolsPlayerReport]: [tr OprepFileOptions]"
+  wm resizable $w 0 0
+
   pack [frame $w.f] -side top -fill x -padx 5 -pady 5
   set row 0
   foreach i {Stats AvgPerf Results MovesFrom Themes Endgames} {
@@ -328,7 +333,7 @@ proc ::preport::setOptions {} {
       grid $w.f.t$i -row $row -column 1 -sticky w -columnspan 3
     } else {
       scale $w.f.s$i -variable ::preport($i) -from $from -to $to \
-        -width 8 -length 200 -tickinterval $tick -orient horizontal \
+        -width 10 -length 200 -tickinterval $tick -orient horizontal \
         -font font_Small -resolution $res -showvalue 0
       label $w.f.t$i -textvar ::tr(Oprep$i) -font font_Small
       grid $w.f.s$i -row $row -column 0 -sticky we
@@ -359,12 +364,12 @@ proc ::preport::setOptions {} {
   pack $w.b.defaults -side left -padx 5 -pady 5
   pack $w.b.cancel $w.b.ok -side right -padx 5 -pady 5
 
-  placeWinCenter $w
-
   array set ::preport::backup [array get ::preport]
-  wm resizable $w 0 0
-  wm title $w  "[tr ToolsPlayerReport]: [tr OprepFileOptions]"
   bind $w <Escape> "$w.b.cancel invoke"
+
+  update
+  placeWinOverParent $w .preportWin
+  wm deiconify $w
 }
 
 
