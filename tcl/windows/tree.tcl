@@ -60,7 +60,7 @@ proc ::tree::OpenClose {{baseNumber 0}} {
   set w .treeWin$baseNumber
 
   if {[winfo exists $w]} {
-    ::tree::closeTree $baseNumber
+    destroy $w
     return
   }
 

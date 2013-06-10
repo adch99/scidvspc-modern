@@ -52,7 +52,6 @@ menuText E FileSavePgn "Save PGN" 0 {Save this game to file}
 menuText E FileClose "Close" 0 {Close the active Scid database}
 menuText E FileFinder "Finder" 0 {Open the File Finder window}
 menuText E FileBookmarks "Bookmarks" 0 {Bookmarks menu}
-menuText E FileHistory "Game History" 5 {Game history menu}
 menuText E FileBookmarksAdd "Add Bookmark" 0 \
   {Bookmark the current database game and position}
 menuText E FileBookmarksFile "File Bookmark" 0 \
