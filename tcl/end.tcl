@@ -15,7 +15,9 @@ proc findNovelty {} {
     updateNoveltyWin
     return
   }
+
   toplevel $w
+  wm withdraw $w
   wm title $w "$::tr(FindNovelty)"
 
   pack [frame $w.help] -side top -fill x
@@ -85,6 +87,10 @@ proc findNovelty {} {
   bind $w <KeyPress-3> "$w.b3 invoke"
   bind $w <KeyPress-4> "$w.b4 invoke"
   updateNoveltyWin
+
+  update
+  placeWinOverParent $w .
+  wm deiconify $w
 }
 
 proc updateNoveltyWin {} {
@@ -1795,6 +1801,7 @@ updateBoard
 updateStatusBar
 updateTitle
 updateLocale
+updateMenuStates
 update
 bind $dot_w <Configure> {recordWinSize $dot_w}
 

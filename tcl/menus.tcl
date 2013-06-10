@@ -164,6 +164,8 @@ foreach menuname { file edit game search windows play tools options help } {
 
 set menuindex -1
 set m .menu.file
+# If altering .menu.file, must change the 'set idx ...' value below
+
 $m add command -label FileNew -acc "Ctrl+N" -command ::file::New
 bind .main <Control-n> ::file::New
 set helpMessage($m,[incr menuindex]) FileNew
@@ -183,7 +185,7 @@ $m add command -label FileFinder -acc "Ctrl+/" -command ::file::finder::Open
 bind .main <Control-slash> ::file::finder::Open
 set helpMessage($m,[incr menuindex]) FileFinder
 
-$m add cascade -label FileBookmarks -accelerator "Ctrl+B" -menu $m.bookmarks
+$m add cascade -label FileBookmarks -menu $m.bookmarks
 set helpMessage($m,[incr menuindex]) FileBookmarks
 menu $m.bookmarks
 
@@ -1427,15 +1429,11 @@ proc updateMenuStates {} {
   # update recent Tree list (open base as Tree)
   set ntreerecent [::recentFiles::treeshow .menu.file.recenttrees]
 
-  ### S.A
   # Remove and reinsert the Recent files list and Exit command:
   $m.file add separator
   set idx 14
   $m.file delete $idx end
-  set nrecent [::recentFiles::show $m.file]
-
-  # &&& remove
-  if {$nrecent > 0} {
+  if {[::recentFiles::show $m.file] > 0} {
     $m.file add separator
   }
   set idx [$m.file index end]
@@ -1443,7 +1441,6 @@ proc updateMenuStates {} {
   $m.file add command -label [tr FileExit] -accelerator "Ctrl+Q" \
       -command ::file::Exit
   set helpMessage($m.file,$idx) FileExit
-  # &&& remove
 
   # Configure File menu entry states::
   if {[sc_base inUse]} {

@@ -182,9 +182,10 @@ proc ::game::LoadNumber {} {
   }
 
   if {[sc_base numGames] < 1} { return }
+
   set w [toplevel .glnumDialog]
   wm title $w "Scid: [tr GameNumber]"
-  grab $w
+  wm state $w withdrawn
 
   label $w.label -text $::tr(LoadGameNumber)
   pack $w.label -side top -pady 5 -padx 5
@@ -198,6 +199,7 @@ proc ::game::LoadNumber {} {
   pack $b -side top -fill x
   dialogbutton $b.load -text "OK" -command {
     grab release .glnumDialog
+    # todo: Can we integrate this into ::file::Open
     if {[catch {sc_game load $::game::entryLoadNumber} result]} {
       tk_messageBox -type ok -icon info -title "Scid" -message $result
     }
@@ -206,6 +208,7 @@ proc ::game::LoadNumber {} {
     flipBoardForPlayerNames $::myPlayerNames
     updateBoard -pgn
     ::windows::gamelist::Refresh
+    ::bookmarks::AddCurrentGame 
     updateTitle
   }
   dialogbutton $b.cancel -text $::tr(Cancel) -command {
@@ -219,11 +222,15 @@ proc ::game::LoadNumber {} {
   set x [ expr {[winfo width .] / 4 + [winfo rootx .] }]
   set y [ expr {[winfo height .] / 4 + [winfo rooty .] }]
   wm geometry $w "+$x+$y"
+  update
+  placeWinOverParent $w .
+  wm state $w normal
+  grab $w
 
   focus $w.entry
 }
 
-#   Loads a specified game from the active database.
+### Loads a specified game from the active database.
 
 proc ::game::Load { selection {update 1} {raise 1}} {
   # If an invalid game number, just return:
@@ -256,6 +263,7 @@ proc ::game::Load { selection {update 1} {raise 1}} {
     raiseWin .
   }
   ::tools::graphs::score::Refresh
+  ::bookmarks::AddCurrentGame
   ::windows::gamelist::Refresh
 }
 

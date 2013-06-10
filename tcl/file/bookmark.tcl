@@ -1,7 +1,12 @@
-# bookmark.tcl:
-# Bookmarks list and Recently-used files list in Scid.
+###
+### bookmark.tcl
+###
+
+# Bookmarks, Game History and Recently-used files lists
+# The Game History (RefreshMenuGame) makes heavy use of bookmarks, and for simplicity is included here
 
 set bookmarks(data) {}
+set bookmarks(gamehistory) {}
 set bookmarks(subMenus) 0
 
 # Read the bookmarks file if it exists:
@@ -21,13 +26,13 @@ proc ::bookmarks::PostMenu {} {
   }
 }
 
-# ::bookmarks::Refresh:
-#   Updates all bookmarks submenus.
-#
+### Updates all bookmarks and game history submenus
+
 proc ::bookmarks::Refresh {} {
   foreach menu {.menu.file.bookmarks .main.tb.bkm.menu} {
     ::bookmarks::RefreshMenu $menu
   }
+  ::bookmarks::RefreshMenuGame .menu.game
 }
 
 proc ::bookmarks::RefreshMenu {menu} {
@@ -87,6 +92,35 @@ proc ::bookmarks::RefreshMenu {menu} {
   }
 }
 
+### Update the Game History Menu
+
+proc ::bookmarks::RefreshMenuGame {menu} {
+  global bookmarks helpMessage
+
+  # Remove the old game history
+  $menu delete 21 end
+
+  set numBookmarkEntries [llength $bookmarks(gamehistory)]
+
+  if {$numBookmarkEntries == 0} { return }
+
+  $menu add separator
+
+  # Add each bookmark entry:
+  foreach entry $bookmarks(gamehistory) {
+    if {$entry != ""} {
+      set text [::bookmarks::Text $entry]
+      set comma [string first , $text]
+      if {$comma > 0} {
+        set text [string range $text 0 $comma-1]
+      }
+      # doesnt allow for spaces in name
+      # set text [string range [lrange [::bookmarks::Text $entry] 0 3] 0 end-1]
+      $menu add command -label $text -command [list ::bookmarks::Go $entry]
+    }
+  }
+}
+
 # ::bookmarks::CanAdd:
 #   Returns 1 if the current game can be added as a bookmark.
 #   It must be in an open database, not a PGN file, and not game number 0.
@@ -102,9 +136,9 @@ proc ::bookmarks::CanAdd {} {
   return 1
 }
 
-# ::bookmarks::AddCurrent:
-#   Adds the current game to the bookmarks list.
-#
+### Adds the current game to the bookmarks list.
+## (variable 'folder' seems unused)
+
 proc ::bookmarks::AddCurrent {{folder 0}} {
   global bookmarks
   if {! [sc_base inUse]} {
@@ -120,13 +154,30 @@ proc ::bookmarks::AddCurrent {{folder 0}} {
     }
   }
   set bookmarks(data) [linsert $bookmarks(data) $i $text]
+
   ::bookmarks::Save
   ::bookmarks::Refresh
 }
 
-# ::bookmarks::New:
-#   Returns a bookmarks list entry for the current game or a new folder.
-#
+proc ::bookmarks::AddCurrentGame {} {
+  global bookmarks
+  if {! [sc_base inUse] || [sc_base current] == 9} {
+    return
+  }
+  set text [::bookmarks::New game]
+  set i [lsearch $bookmarks(gamehistory) $text]
+  if {$i > -1} {
+    set bookmarks(gamehistory) [lreplace $bookmarks(gamehistory) $i $i]
+  }
+
+  set bookmarks(gamehistory) [lrange [linsert $bookmarks(gamehistory) 0 $text] 0 $::recentFiles(gamehistory)-1]
+
+  # ::bookmarks::Save
+  ::bookmarks::Refresh
+}
+
+### Returns a bookmarks list entry for the current game or a new folder.
+
 proc ::bookmarks::New {type} {
   if {$type == "folder"} { return [list "f" "new folder"] }
 
@@ -204,10 +255,8 @@ proc ::bookmarks::Go {entry} {
   updateStatusBar
 }
 
-# ::bookmarks::DeleteChildren
-#
-#   Deletes all submenus of a bookmark menu.
-#
+### Deletes all submenus of a bookmark menu.
+
 proc ::bookmarks::DeleteChildren {w} {
   foreach child [winfo children $w] {
     ::bookmarks::DeleteChildren $child
@@ -521,11 +570,8 @@ proc ::bookmarks::EditNew {{type "folder"}} {
   ::bookmarks::EditSelect
 }
 
-# ::bookmarks::Save
-#
-#   Saves the bookmarks file, reporting any error in a message box if
-#   reportError is true.
-#
+### Saves the bookmarks file, reporting any error in a message box if reportError is true.
+
 proc ::bookmarks::Save {{reportError 0}} {
   global bookmarks
   set f {}

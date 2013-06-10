@@ -51,7 +51,8 @@ menuText E FileOpen "Open" 0 {Open an existing Scid database}
 menuText E FileSavePgn "Save PGN" 0 {Save this game to file}
 menuText E FileClose "Close" 0 {Close the active Scid database}
 menuText E FileFinder "Finder" 0 {Open the File Finder window}
-menuText E FileBookmarks "Bookmarks" 0 {Bookmarks menu (shortcut: Ctrl+B)}
+menuText E FileBookmarks "Bookmarks" 0 {Bookmarks menu}
+menuText E FileHistory "Game History" 5 {Game history menu}
 menuText E FileBookmarksAdd "Add Bookmark" 0 \
   {Bookmark the current database game and position}
 menuText E FileBookmarksFile "File Bookmark" 0 \
@@ -329,7 +330,7 @@ menuText E OptionsSpell "Load Spellcheck File" 11 \
   {Load the Scid spellcheck file}
 menuText E OptionsTable "Tablebase Directory" 10 \
   {Select a tablebase file; all tablebases in its directory will be used}
-menuText E OptionsRecent "Recent Files" 0 {Change the number of recent files displayed in the File menu}
+menuText E OptionsRecent "Recent Entries" 0 {Change the number of entries shown in the File/Game-History menus}
 menuText E OptionsBooksDir "Books Directory" 0 {Sets the opening books directory}
 menuText E OptionsTacticsBasesDir "Bases Directory" 0 {Sets the tactics (training) bases directory}
 menuText E OptionsSave "Save Options" 0 "Save all settable options to the file $::optionsFile"
@@ -1340,7 +1341,7 @@ Do you want to upgrade this database now?
 
 # Recent files options:
 translate E RecentFilesMenu {Number of files in File menu}
-translate E RecentFilesExtra {Number of files in Sub menu}
+translate E RecentFilesExtra {Number of files in Submenu}
 
 translate E MyPlayerNamesDescription {
 Enter preferred player names below, one name per line.

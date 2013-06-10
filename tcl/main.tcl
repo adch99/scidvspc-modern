@@ -845,7 +845,7 @@ proc updateBoard3 {pgnNeedsUpdate} {
     # after cancel ::tb::results
     # after idle   ::tb::results
   }
-  updateMenuStates
+  # updateMenuStates
 
   # Show a warning message in the statusbar if Fics is playing
   # The statusbar is updated by moveEntry_Clear

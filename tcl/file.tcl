@@ -119,9 +119,7 @@ proc ::file::New {} {
   refreshSearchDBs
 }
 
-# ::file::Open
-#
-#    Opens file-open dialog and opens the selected Scid database.
+### Main file open procedure. If no filename given, shows a file-open dialog
 
 # This proc should return an error status...
 # But it is used everywhere, and will take some time to fix
@@ -244,6 +242,7 @@ proc ::file::Open {{fName ""} {parent .} {update 1}} {
   refreshSearchDBs
 
   if {$update} {
+    ::bookmarks::AddCurrentGame
     updateBoard -pgn
   }
 }
