@@ -313,7 +313,7 @@ namespace eval tactics {
     focus .main
     destroy $w
 
-    set ::gameInfo(hideNextMove) 1
+    set ::gameInfo(hideNextMove) 0
 
     catch { ::uci::closeUCIengine $::tactics::engineSlot }
   }
