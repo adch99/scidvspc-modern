@@ -6,11 +6,11 @@ LINK = g++
 
 # BINDIR: where the Scid programs are copied for "make install".
 
-BINDIR = /usr/bin/
+BINDIR = /usr/local/bin
 
-SHAREDIR = /usr/share/scid/
+SHAREDIR = /usr/local/share/scid
 
-FONTDIR = /usr/share/fonts/truetype/Scid
+FONTDIR = /Library/Fonts/
 
 ### TCL_VERSION: Set this according to the version of Tcl/Tk you have
 #   installed that you want Scid to use: 8.5 / 8.6 / ...
@@ -24,9 +24,9 @@ TCL_VERSION = 8.5
 #
 # The settings determined by "./configure" are:
 
-TCL_INCLUDE = -I/usr/local/include
-TCL_LIBRARY = -L/usr/local/lib -ltcl$(TCL_VERSION)
-TK_LIBRARY  = $(TCL_LIBRARY) -ltk$(TCL_VERSION) -L/usr/lib64 -lX11
+TCL_INCLUDE = -F/Library/Frameworks/Tcl.framework -F/Library/Frameworks/Tk.framework
+TCL_LIBRARY = -framework Tcl -ldl
+TK_LIBRARY  = $(TCL_LIBRARY) -framework Tk
 
 ### Nalimov tablebases
 # TB =                   for no tablebase support
@@ -54,11 +54,11 @@ WARNINGS = -Wall
 #      On some systems, adding "-fno-rtti" and "-fno-exceptions" produces
 #      smaller, faster programs since Scid does not use those C++ features.
 
-CFLAGS = -O2 -fno-exceptions $(WARNINGS) $(DEBUG)
+CFLAGS = -arch i386 $(WARNINGS) $(DEBUG)
 
 CXXFLAGS = -fno-rtti $(CFLAGS) $(SCIDFLAGS)
 
-LDFLAGS = 
+LDFLAGS = -arch i386
 
 ### LANGUAGES: List of additional Tcl files to include in Scid for
 #       multi-language menu support.
@@ -76,10 +76,9 @@ LANGUAGES = tcl/lang/deutsch.tcl tcl/lang/francais.tcl tcl/lang/italian.tcl tcl/
 ############################################################
 
 ### EXECS: executable programs compiled from C++ files.
-#     Note: scidt and eco2epd are obsolete and not compiled by default.
-#			PG : put back scidt has it appears to be useful in certain cases
+# Note: scidt and eco2epd are obsolete and not compiled by default.
 
-EXECS= pgnscid tkscid tcscid scmerge scidlet scidt
+EXECS= pgnscid tkscid tcscid scmerge scidlet
 
 ### SCIDOBJS: not all the .o files that make up Scid, just the standard ones 
 #     that most of the programs include.
@@ -146,9 +145,8 @@ TCLS= \
     tcl/tools/reper.tcl tcl/tools/graphs.tcl tcl/tools/tablebase.tcl tcl/tools/ptracker.tcl \
   tcl/help/help.tcl tcl/help/tips.tcl \
   tcl/menus.tcl tcl/board.tcl tcl/move.tcl tcl/main.tcl tcl/tools/correspondence.tcl \
-    tcl/lang/english.tcl $(LANGUAGES)  tcl/dnd/tkdnd.tcl tcl/dnd/tkdnd_unix.tcl \
-  tcl/tools/fics.tcl tcl/tools/uci.tcl tcl/end.tcl tcl/tools/tacgame.tcl tcl/tools/sergame.tcl tcl/tools/calvar.tcl tcl/tools/tactics.tcl \
-  tcl/tools/novag.tcl tcl/misc/flags.tcl tcl/tools/inputengine.tcl
+    tcl/lang/english.tcl $(LANGUAGES) \
+  tcl/tools/fics.tcl tcl/tools/uci.tcl tcl/end.tcl tcl/tools/tacgame.tcl tcl/tools/sergame.tcl tcl/tools/calvar.tcl tcl/tools/tactics.tcl tcl/tools/novag.tcl tcl/misc/flags.tcl tcl/tools/inputengine.tcl
 
 
 ### SCRIPTS:
@@ -168,10 +166,10 @@ all_scid: scid $(SCRIPTS) $(EXECS)
 engines: phalanx toga
 
 phalanx:
-	$(MAKE) -C engines/phalanx/ -f Makefile CC="$(CC)" LINK="$(LINK)" CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)" 
+	$(MAKE) -C engines/phalanx/ -f Makefile CC="$(CC)" LINK="$(LINK)" CFLAGS="$(CFLAGS)" LDFLAGS="$(LDFLAGS)"
 
 toga:
-	$(MAKE) -C engines/toga/src -f Makefile CXX="$(CXX)" LINK="$(LINK)" CXXFLAGS="$(CXXFLAGS)" LDFLAGS="$(LDFLAGS)" 
+	$(MAKE) -C engines/toga/src -f Makefile CXX="$(CXX)" LINK="$(LINK)" CXXFLAGS="$(CXXFLAGS)" LDFLAGS="$(LDFLAGS)"
 
 ### To copy all executables to $BINDIR, with read and execute permission 
 #   for all users, and put extra files in $SHAREDIR, type "make install".
@@ -196,39 +194,17 @@ install_scid: all_scid
 	cp -r ./bitmaps/* $(SHAREDIR)/bitmaps/
 	chmod -R 0777 $(SHAREDIR)/bitmaps/*
 	@if [ "`id -u`" -eq 0 ]; then \
-		install -m 755 -d $(FONTDIR); \
 		install -m 644 -p fonts/*.ttf $(FONTDIR); \
 	else \
-		install -m 755 -d ~/.fonts; \
-		install -m 644 -p fonts/*.ttf ~/.fonts; \
-	fi
-	@if [ ! -z "`which fc-cache`" ]; then \
-		if [ "`id -u`" -eq 0 ]; then \
- 			fc-cache -fv $(FONTDIR); \
-		else \
-			fc-cache -fv ~/.fonts; \
-		fi; \
-	else \
-		echo "Don't know how to setup truetype fonts (fc-cache not available)."; \
-		echo "Please contact your system administrator."; \
+		install -m 644 -p fonts/*.ttf ~/Library/Fonts; \
 	fi
 
 install_engines: engines
 	install -m 755 -d $(SHAREDIR)/engines
 	install -m 755 -d $(SHAREDIR)/engines/phalanx
-	install -m 666 ./engines/phalanx/eco.phalanx $(SHAREDIR)/engines/phalanx
-	install -m 644 ./engines/phalanx/HISTORY $(SHAREDIR)/engines/phalanx
-	install -m 644 ./engines/phalanx/pbook.phalanx $(SHAREDIR)/engines/phalanx
-	install -m 644 ./engines/phalanx/README $(SHAREDIR)/engines/phalanx
-	install ./engines/phalanx/phalanx $(BINDIR)
+	install ./engines/phalanx/phalanx $(SHAREDIR)/engines/phalanx
 	install -m 755 -d $(SHAREDIR)/engines/toga
-	install -m 644 ./engines/toga/copying.txt $(SHAREDIR)/engines/toga
-	install -m 644 ./engines/toga/readme.txt $(SHAREDIR)/engines/toga
-	install ./engines/toga/src/fruit $(BINDIR)
-
-install_gui: scid
-	install -m 755 scid $(BINDIR)
-	scid
+	install ./engines/toga/src/fruit $(SHAREDIR)/engines/toga/
 
 uninstall:
 	rm -rf $(SHAREDIR)/engines
@@ -246,40 +222,20 @@ uninstall:
 	rm -f $(BINDIR)/phalanx $(BINDIR)/fruit
 	rm -rf $(SHAREDIR)/html
 	rm -rf $(SHAREDIR)/bitmaps
-	@if [ "`id -u`" -eq 0 ]; then \
-		for f in `ls fonts/*.ttf`; do \
-			rm -f $(FONTDIR)/`basename $$f`; \
-		done; \
-		if [ ! -z "`which fc-cache`" ]; then \
-			fc-cache -fv $(FONTDIR); \
-		fi; \
-		if [ "`find $(FONTDIR) -type d -empty`" = "$(FONTDIR)" ]; then \
-			rmdir $(FONTDIR); \
-		fi; \
-	else \
-		for f in `ls fonts/*.ttf`; do \
-			rm -f ~/.$$f; \
-		done; \
-		if [ ! -z "`which fc-cache`" ]; then \
-			fc-cache -fv ~/.fonts; \
-		fi; \
-		if [ "`find ~/.fonts -type d -empty`" = "`ls -d ~/.fonts`" ]; then \
-			rmdir ~/.fonts; \
-		fi; \
-	fi
+	# Not going to uninstall OSX fonts....
+	# They all exist in the one directory, and don't want to trash it by accident
 
-### To remove Scid files placed in the BINDIR and SHAREDIR directories,
-#   type "make distclean".
+#   Get us back to as nearly a fresh distro state as we can
+#
 
-distclean:
-	cd $(BINDIR) && rm -f $(EXECS) $(SCRIPTS)
-	-rm -f $(SHAREDIR)/scid.eco
+distclean: clean
+	rm -f engines/toga/src/fruit
+	rm -rf ./dist
 
 clean:
-	rm -f game.* tkscid.so tkscid.dll position.* src/*.o src/zlib/*.o src/zlib/*.a src/polyglot/*.o $(EXECS) scid $(SCRIPTS)
+	rm -f game.* tkscid.so position.* src/*.o src/zlib/*.o src/zlib/*.a src/polyglot/*.o $(EXECS) scid $(SCRIPTS)
 	cd engines/phalanx/ && make clean && cd ../../
 	cd engines/toga/src/ && make clean && cd ../../../
-	cd src/tkdnd/ && make clean && cd ../..
 
 strip:
 	strip $(EXECS)
@@ -295,7 +251,61 @@ scid: $(TCLS)
 	cat $(TCLS) > ./scid
 	chmod +x scid
 
-### Some of these targets are totally unused, and need sorting out. S.A
+### Mac OSX App
+
+mac_app: all_scid engines
+	install -m 755 -d dist/ScidvsMac.app/Contents/MacOS
+	install -m 755 -d dist/ScidvsMac.app/Contents/Resources/data
+	install -m 755 -d dist/ScidvsMac.app/Contents/Resources/books
+	install -m 755 -d dist/ScidvsMac.app/Contents/Resources/bases
+	install -m 755 -d dist/ScidvsMac.app/Contents/Resources/engines
+	install -m 755 -d dist/ScidvsMac.app/Contents/Resources/engines/phalanx
+	install -m 755 -d dist/ScidvsMac.app/Contents/Resources/engines/toga
+	install -m 755 -d dist/ScidvsMac.app/Contents/Resources/html
+	install -m 755 -d dist/ScidvsMac.app/Contents/Resources/bitmaps
+	install -m 755 $(SCRIPTS) $(EXECS) dist/ScidvsMac.app/Contents/MacOS
+	install -m 755 scid dist/ScidvsMac.app/Contents/MacOS
+	install -m 644 -p scid.eco dist/ScidvsMac.app/Contents/Resources/data/
+	install -m 644 -p spelling.ssp dist/ScidvsMac.app/Contents/Resources/
+	install -m 666 ./books/* dist/ScidvsMac.app/Contents/Resources/books/
+	install -m 666 ./bases/* dist/ScidvsMac.app/Contents/Resources/bases/
+	install -m 755 ./engines/phalanx/phalanx dist/ScidvsMac.app/Contents/Resources/engines/phalanx/
+	install -m 755 ./engines/toga/*.txt dist/ScidvsMac.app/Contents/Resources/engines/toga/
+	install -m 755 ./engines/toga/src/fruit dist/ScidvsMac.app/Contents/Resources/engines/toga/ 
+	install -m 644 icons/scid.icns dist/ScidvsMac.app/Contents/Resources/
+	install -m 644 Info.plist dist/ScidvsMac.app/Contents/
+	cp -r ./html/* dist/ScidvsMac.app/Contents/Resources/html/
+	cp -r ./bitmaps/* dist/ScidvsMac.app/Contents/Resources/bitmaps/
+	cp -r README.html images dist/
+
+mac_install: mac_app
+	install -m 755 -d /Applications/ScidvsMac.app
+	cp -rp dist/ScidvsMac.app/* /Applications/ScidvsMac.app
+
+### Compress App into an OSX disk image
+
+mac_dmg: mac_app
+	hdiutil create -fs "HFS+" -volname "Scid vs. PC" -srcfolder dist ScidvsMac.dmg
+
+# Change menu bindings and description
+
+mac_menus:
+	sed -i "" -e "s/Control-/Command-/g" -e "s/Ctrl+/Command-/g" tcl/menus.tcl
+
+mac_rename:
+	install_name_tool -change /Library/Frameworks/Tcl.framework/Versions/8.5/Tcl \
+	@executable_path/../Frameworks/Tcl.framework/Versions/8.5/Tcl tkscid
+	install_name_tool -change /Library/Frameworks/Tk.framework/Versions/8.5/Tk \
+	@executable_path/../Frameworks/Tk.framework/Versions/8.5/Tk tkscid
+mac_buttons:
+	patch -p0 scid <patches/swap_buttons-2-3.patch
+
+mac_install_gui: scid
+	install -m 755 scid /Applications/ScidvsMac.app/Contents/MacOS/
+	/Applications/ScidvsMac.app/Contents/MacOS/scid
+
+mac:
+	@echo "mac_app, mac_install, mac_dmg, mac_menus, mac_rename, mac_buttons, mac_install_gui"
 
 sc_addmove: scripts/sc_addmove.tcl
 	cp scripts/sc_addmove.tcl ./sc_addmove
@@ -358,34 +368,30 @@ twic2pgn: scripts/twic2pgn.py
 	chmod +x twic2pgn
 
 scmerge: src/scmerge.o src/misc.o src/index.o src/date.o src/namebase.o \
-         src/gfile.o src/bytebuf.o src/textbuf.o src/myassert.o \
-         src/stralloc.o src/position.o
+          src/gfile.o src/bytebuf.o src/textbuf.o src/myassert.o \
+          src/stralloc.o src/position.o
 	$(LINK) $(LDFLAGS) -o scmerge src/scmerge.o $(OBJS) $(ZLIB)
 
 pgnscid: src/pgnscid.o $(OBJS)
-	$(LINK) $(LDFLAGS) -o pgnscid src/pgnscid.o $(OBJS) $(ZLIB)
+	$(LINK) $(LDFLAGS) -o pgnscid src/pgnscid.o $(OBJS) $(ZLIB) $(TCL_LIBRARY)
 
 scidlet: src/scidlet.o src/engine.o src/recog.o src/misc.o src/position.o \
-         src/dstring.o src/movelist.o src/myassert.o
-	$(LINK) $(LDFLAGS) -o scidlet src/scidlet.o src/engine.o src/recog.o src/misc.o src/position.o src/movelist.o src/dstring.o src/myassert.o
+          src/dstring.o src/movelist.o src/myassert.o
+	$(LINK) $(LDFLAGS) -o scidlet src/scidlet.o src/engine.o src/recog.o src/misc.o src/position.o src/movelist.o src/dstring.o src/myassert.o $(TCL_LIBRARY)
 
 scidt: src/scidt.o $(OBJS)
-	$(LINK) $(LDFLAGS) -o scidt src/scidt.o $(OBJS) $(ZLIB)
+	$(LINK) $(LDFLAGS) -o scidt src/scidt.o $(OBJS) $(ZLIB) $(TCL_LIBRARY)
 
-tkscid: src/tkscid.o $(OBJS) src/tree.o src/filter.o src/pbook.o src/crosstab.o src/spellchk.o \
-        src/probe.o src/optable.o src/engine.o src/recog.o src/tkdnd/TkDND_XDND.o src/tk_selection.o
-	$(LINK) $(LDFLAGS) -o tkscid src/tkscid.o $(OBJS) src/tree.o \
-        src/filter.o src/pbook.o src/crosstab.o src/spellchk.o src/probe.o src/optable.o \
-        src/engine.o src/recog.o src/tkdnd/TkDND_XDND.o src/tk_selection.o $(ZLIB) $(TK_LIBRARY)
+tkscid: src/tkscid.o $(OBJS) src/tree.o src/filter.o src/pbook.o src/crosstab.o \
+          src/spellchk.o src/probe.o src/optable.o src/engine.o src/recog.o
+	$(LINK) $(LDFLAGS) -o tkscid src/tkscid.o $(OBJS) src/tree.o src/filter.o src/pbook.o src/crosstab.o src/spellchk.o src/probe.o src/optable.o src/engine.o src/recog.o $(ZLIB) $(TK_LIBRARY)
 
 tcscid: src/tcscid.o $(OBJS) src/tree.o src/filter.o src/pbook.o src/crosstab.o \
-        src/spellchk.o src/probe.o src/optable.o src/engine.o src/recog.o
-	$(LINK) $(LDFLAGS) -o tcscid src/tcscid.o $(OBJS) src/tree.o src/filter.o src/pbook.o \
-        src/crosstab.o src/spellchk.o src/probe.o src/optable.o src/engine.o src/recog.o $(ZLIB) $(TCL_LIBRARY)
+          src/spellchk.o src/probe.o src/optable.o src/engine.o src/recog.o
+	$(LINK) $(LDFLAGS) -o tcscid src/tcscid.o $(OBJS) src/tree.o src/filter.o src/pbook.o src/crosstab.o src/spellchk.o src/probe.o src/optable.o src/engine.o src/recog.o $(ZLIB) $(TCL_LIBRARY)
 
 # eco2epd is now optional extra program NOT compiled by default, since
 # scid now reads the .eco file format directly.
-
 eco2epd: src/eco2epd.o $(OBJS) src/pbook.o
 	$(LINK) $(LDFLAGS) -o eco2epd src/eco2epd.o $(OBJS) src/pbook.o $(ZLIB)
 
@@ -411,10 +417,5 @@ src/probe.o: src/probe.cpp src/egtb/tbindex.cpp src/egtb/tbdecode.c
 
 src/zlib/%.o: src/zlib/%.c
 	$(CC) $(CFLAGS) -o $@ -c $<
-
-src/tkdnd/TkDND_XDND.o: src/tkdnd/unix/TkDND_XDND.c
-	$(MAKE) -C src/tkdnd/ -f Makefile CC="$(CC)" LINK="$(LINK)" CFLAGS="$(CFLAGS)" \
-	       LDFLAGS="$(LDFLAGS)" TCL_VERSION="$(TCL_VERSION)" TCL_INCLUDE="$(TCL_INCLUDE)" \
-	       TCL_LIBRARY="$(TCL_LIBRARY)" TK_INCLUDE="$(TK_INCLUDE)" TK_LIBRARY="$(TK_LIBRARY)"
 
 ### End of Makefile

@@ -196,8 +196,8 @@ proc ::tb::OpenClose {} {
     pack $f.results.online -side right -padx 6 -pady 2
   }
   
-  pack [text $f.text -width 30 -height 20 -font font_Fixed -relief flat \
-      -wrap word -foreground black -setgrid 1] -side bottom
+  text $f.text -width 30 -height 20 -font font_Fixed -relief flat -wrap word -foreground black -setgrid 1
+  pack $f.text -side bottom
 
   $f.text tag configure indent -lmargin2 [font measure font_Fixed  "        "]
   $f.text tag configure title -font font_Regular -justify center
