@@ -520,9 +520,14 @@ proc ::commenteditor::storeComment {} {
 proc ::commenteditor::Refresh {} {
   if {![winfo exists .commentWin]} { return }
 
-  # Zero undo stack... re-enabling it when Refresh is finished
-  # (There's still issues though)
-  .commentWin.cf.text configure -undo 0
+  # Zero undo stack... re-enabling it when Refresh is finished (there's still issues though)
+  if {[catch {
+    .commentWin.cf.text configure -undo 0
+  }]} {
+    # Under certain conditions (docked OS X only?), Refresh can get called before comment window
+    # init is complete, so exit gracefully
+    return
+  }
 
   set nag [sc_pos getNags]
   .commentWin.nf.tf.text configure -state normal
