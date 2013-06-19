@@ -13,8 +13,8 @@
 exec `dirname $0`/tkscid "$0" "$@"
 
 # Alter the version if any patches have been made to the Tcl code only:
-set scidVersion 4.9
-set scidVersionDate {May 4, 2013}
+set scidVersion 4.9.2
+set scidVersionDate {June 19, 2013}
 
 # Set to 0 before releasing, so some alpha-state code is not included
 # Set to 1 to have access to all code
@@ -413,7 +413,11 @@ set pgnColor(Background) "\#ffffff"
 
 array set findopponent {}
 set ::fics::use_timeseal 0
-set ::fics::timeseal_exec "timeseal"
+if {$::macOS} {
+  set ::fics::timeseal_exec "$scidExeDir/timeseal"
+} else {
+  set ::fics::timeseal_exec "timeseal"
+}
 set ::fics::port_fics 5000
 set ::fics::port_timeseal 5001
 set ::fics::login ""
@@ -812,9 +816,9 @@ set autoIconify 1
 # windowsDock:
 # if true, most of toplevel windows are dockable and embedded in a main window
 # windows can be moves among tabs (drag and drop) or undocked (right-clicking on tab)
-# (Disable by default on OS X)
 
-set windowsDock [expr {!$::macOS}]
+set windowsDock 1
+# set windowsDock [expr {!$::macOS}]
 
 # autoLoadLayout :
 # Automatic loading of layout # 1 at startup (docked windows mode only)

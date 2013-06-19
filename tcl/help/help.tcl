@@ -5769,9 +5769,14 @@ set helpText(Sound) {<h1>Sound</h1>
 set helpTitle(Changelog) "Scid vs PC Changelog"
 set helpText(Changelog) {<h1>Scid vs. PC</h1>
 
+<h4>4.9.2 (June 19, 2013)</h4>
+<ul>
+<li>OS X changes, including docked mode fixes.</li>
+</ul>
+
 <h4>4.9.1 (May 4, 2013)</h4>
 <ul>
-<li><item>Fix promotion bug in non-docked mode</li>
+<li>Fix promotion bug in non-docked mode</li>
 <li>Small pictures allign top/bottom in game info</li>
 <li>Clickable crosstable columns</li>
 <li>Make an undo point with Setup Board, and disable undo for Trial mode</li>
