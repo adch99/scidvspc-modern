@@ -891,7 +891,8 @@ proc createToplevel { w } {
     bind .$name <Enter> {
       set tl [winfo toplevel %W]
       set atTop [lindex [wm stackorder . ] end]
-      if { $tl == $atTop || $atTop == "." } {
+      # stackorder on OS X is broke
+      if { $tl == $atTop || $atTop == "." || $::macOS } {
         if {$tl == ".fics"} {
           focus -force .fics.command.entry
         } else {
