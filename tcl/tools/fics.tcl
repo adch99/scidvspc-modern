@@ -59,12 +59,12 @@ namespace eval fics {
     set w .ficsConfig
 
     if {[winfo exists $w]} {
-      focus $w
+      raiseWin $w
       return
     }
 
     if {[winfo exists .fics]} {
-      focus .fics
+      raiseWin .fics
       return
     }
     set logged 0
