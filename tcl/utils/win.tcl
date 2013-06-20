@@ -779,8 +779,9 @@ proc  ::docking::tabChanged  {path} {
   if { ! [ info exists ::docking::activeTab($path)] } {
     return
   }
-  if { [$path select] != $::docking::activeTab($path)} {
-    set ::docking::activeTab($path) [$path select]
+  set select [$path select]
+  if { $select != $::docking::activeTab($path)} {
+    set ::docking::activeTab($path) $select
     set ::docking::changedTab($path) 1
   }
 }
