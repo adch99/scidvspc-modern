@@ -1454,8 +1454,7 @@ set helpText(Switcher) {<h1>The Database Switcher</h1>
   <p>
   Right-clicking a database produces a popup menu
   from which one can reset its <a Filter>filter</a>, mark base as Read-Only or
-  close the database. It is also possible to change the base's icon, or
-  hide them altogether.
+  close the database. Middle clicking a base will show/hide the icons.
   </p>
   <h2><name draganddrop>Drag and Drop</name></h2>
   <p>
@@ -1621,6 +1620,7 @@ This can be done by the <b>Compact</b> button, or
 <li>Multiple games can be selected by using Shift or Control while single clicking. <lt>Control+A<gt> selects all visible games.</li>
 <li>Resize column widths by dragging the column edge.</li>
 <li>Drag and Drop files to the switcher (from Windows/KDE/Gnome).</li>
+<li>Right-click the gamelist to hide the button bar.</li>
 </ul>
 
   <h3><name Browsing>Browsing and Merging Games</name></h3>

@@ -927,6 +927,7 @@ proc ::windows::switcher::Open {} {
     foreach win {"" .img .name} {
       bind $f$win <ButtonPress-1> [list ::windows::switcher::pressMouseEvent $i]
       bind $f$win <ButtonRelease-1> [list ::windows::switcher::releaseMouseEvent $i %X %Y %W %R %S]
+      bind $f$win <ButtonPress-2> ::windows::switcher::toggleicons
     }
 
     menu $f.menu -tearoff 0
@@ -938,13 +939,6 @@ proc ::windows::switcher::Open {} {
     if {$i == [sc_info clipbase]} { set closeLabel [tr EditReset] }
 
     $f.menu add command -label $closeLabel -command [list ::file::Close $i]
-
-    $f.menu add separator
-
-    $f.menu add command -label [tr ChangeIcon] -command "changeBaseType $i .glistWin"
-
-    $f.menu add checkbutton -label {Show icons} -variable ::windows::switcher::icons \
-      -command ::windows::switcher::Refresh
 
     foreach win {"" .img .name} {
       bind $f$win <ButtonPress-3> "tk_popup $f.menu %X %Y"
@@ -1071,6 +1065,11 @@ proc ::windows::switcher::Refresh {} {
     }
   }
 
+}
+
+proc ::windows::switcher::toggleicons {} {
+  set ::windows::switcher::icons [expr !$::windows::switcher::icons]
+  ::windows::switcher::Refresh
 }
 
 proc copyFilter {frombaseNum tobaseNum} {
