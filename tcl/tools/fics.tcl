@@ -46,6 +46,7 @@ namespace eval fics {
   set ignore_takeback 0
 
   set ping {}
+  set timecontrol {}
   array set shorttype {
     crazyhouse crazy
     bughouse bug
