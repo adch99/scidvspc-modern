@@ -73,11 +73,11 @@ source <url url="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_p
 
 windows <url url="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.9.1.exe/download" name="Scid vs PC-4.9.1.exe">
 
-mac <url url="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.9.1.dmg/download" name="ScidvsMac-4.9.1.dmg">
+mac <url url="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.9.2.dmg/download" name="ScidvsMac-4.9.2.dmg">
 
 <url url="https://sourceforge.net/project/showfiles.php?group_id=263836" name="browse files">
 
-<em>The latest code is available from subversion - </em> <bf>svn checkout svn://svn.code.sf.net/p/scidvspc/code/ scidvspc-code</bf>
+<em>The latest code is available from subversion - </em> <bf>svn checkout http://svn.code.sf.net/p/scidvspc/code/ scidvspc-code</bf>
 
 <sect> installation <p>
 
@@ -117,7 +117,7 @@ C:\Users\[USERNAME]\AppData\Local\VirtualStore\Program Files\Scid vs PC
 
 <sect2> Mac OS X <p>
 
-The <ref name="ScidvsMac-4.9.1 app" id="download_"> should include everything you need. Simply drag and drop the App into /Applications (or similar).
+The <ref name="ScidvsMac-4.9.2 app" id="download_"> should include everything you need. Simply drag and drop the App into /Applications (or similar).
 
 <em>Users upgrading may have to remove (or edit) <bf>$HOME/.scidvspc/config/engines.dat</bf>
 to properly configure the chess engines.</em>
@@ -309,6 +309,11 @@ and lesser popularity than Scid.</p>
 
 <label id="changes_">
 <sect> changes <p>
+
+<sect2> Scid vs. PC 4.9.2<p>
+<itemize>
+<item>OS X changes, including docked mode fixes.
+</itemize></p>
 
 <sect2> Scid vs. PC 4.9.1 <p>
 <itemize>
