@@ -1,8 +1,6 @@
 #
 # tkdnd.tcl --
 # 
-# vi:set ts=2 sw=2 et:
-#
 #    This file implements some utility procedures that are used by the TkDND
 #    package.
 #
@@ -36,7 +34,9 @@
 # IS PROVIDED ON AN "AS IS" BASIS, AND THE AUTHORS AND DISTRIBUTORS HAVE
 # NO OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR
 # MODIFICATIONS.
-#
+
+# Copyright: (C) 2011-2013 Gregor Cramer
+# Modified by Gregor Cramer to make it useful.
 
 package require Tk
 package require tkDND 2.3
@@ -50,15 +50,16 @@ namespace eval tkdnd {
   variable _platform_namespace
   variable _drop_file_temp_dir
   variable _auto_update 1
+  array set _drag_cursors {}
 
   variable _windowingsystem
 
-  bind TkDND_Drag1 <ButtonPress-1> {tkdnd::_begin_drag press  %W %s %X %Y}
-  bind TkDND_Drag1 <B1-Motion>     {tkdnd::_begin_drag motion %W %s %X %Y}
-  bind TkDND_Drag2 <ButtonPress-2> {tkdnd::_begin_drag press  %W %s %X %Y}
-  bind TkDND_Drag2 <B2-Motion>     {tkdnd::_begin_drag motion %W %s %X %Y}
-  bind TkDND_Drag3 <ButtonPress-3> {tkdnd::_begin_drag press  %W %s %X %Y}
-  bind TkDND_Drag3 <B3-Motion>     {tkdnd::_begin_drag motion %W %s %X %Y}
+  bind TkDND_Drag1 <ButtonPress-1> {tkdnd::_begin_drag press  1 %W %s %X %Y}
+  bind TkDND_Drag1 <B1-Motion>     {tkdnd::_begin_drag motion 1 %W %s %X %Y}
+  bind TkDND_Drag2 <ButtonPress-2> {tkdnd::_begin_drag press  2 %W %s %X %Y}
+  bind TkDND_Drag2 <B2-Motion>     {tkdnd::_begin_drag motion 2 %W %s %X %Y}
+  bind TkDND_Drag3 <ButtonPress-3> {tkdnd::_begin_drag press  3 %W %s %X %Y}
+  bind TkDND_Drag3 <B3-Motion>     {tkdnd::_begin_drag motion 3 %W %s %X %Y}
   
   # ----------------------------------------------------------------------------
   #  Command tkdnd::initialise: Initialise the TkDND package.
@@ -176,7 +177,10 @@ namespace eval tkdnd {
 # ----------------------------------------------------------------------------
 proc tkdnd::get_drop_target {} {
   variable _platform_namespace
-  return [${_platform_namespace}::_DropTarget]
+  if {[info exists ${_platform_namespace}::_drop_target]} {
+    return [set ${_platform_namespace}::_drop_target]
+  }
+  return ""
 }
 
 # ----------------------------------------------------------------------------
@@ -263,7 +267,7 @@ proc tkdnd::drop_target { mode path { types {} } } {
 # ----------------------------------------------------------------------------
 #  Command tkdnd::_begin_drag
 # ----------------------------------------------------------------------------
-proc tkdnd::_begin_drag { event source state X Y } {
+proc tkdnd::_begin_drag { event button source state X Y } {
   variable _x0
   variable _y0
   variable _state
@@ -283,7 +287,7 @@ proc tkdnd::_begin_drag { event source state X Y } {
       if { [string equal $_state "press"] } {
         if { abs($_x0-$X) > 3 || abs($_y0-$Y) > 3 } {
           set _state "done"
-          _init_drag $source $state $X $Y
+          _init_drag $button $source $state $X $Y
         }
       }
     }
@@ -293,26 +297,27 @@ proc tkdnd::_begin_drag { event source state X Y } {
 # ----------------------------------------------------------------------------
 #  Command tkdnd::_init_drag
 # ----------------------------------------------------------------------------
-proc tkdnd::_init_drag { source state rootX rootY } {
+proc tkdnd::_init_drag { button source state rootX rootY } {
   # Call the <<DragInitCmd>> binding.
   set cmd [bind $source <<DragInitCmd>>]
   if {[string length $cmd]} {
     set cmd [string map [list %W $source %X $rootX %Y $rootY \
                               %S $state  %e <<DragInitCmd>> %A \{\} \
-                              %t [bind $source <<DragSourceTypes>>]] $cmd]
+                              %t [list [bind $source <<DragSourceTypes>>]]] $cmd]
     set info [uplevel \#0 $cmd]
     if { $info != "" } {
       variable _windowingsystem
-      foreach { actions types data } $info { break }
+      lassign $info actions types data
       set types [platform_specific_types $types]
       set action refuse_drop
       switch $_windowingsystem {
         x11 {
-          error "dragging from Tk widgets not yet supported"
+          # NOTE: too early, we don't know the action at this time
+          set action [xdnd::_dodragdrop $source $actions $types $data $button]
         }
         win32 -
         windows {
-          set action [_DoDragDrop $source $actions $types $data]
+          set action [_DoDragDrop $source $actions $types $data $button]
         }
         aqua {
           set action [macdnd::dodragdrop $source $actions $types $data]
@@ -323,7 +328,7 @@ proc tkdnd::_init_drag { source state rootX rootY } {
       }
       ## Call _end_drag to notify the widget of the result of the drag
       ## operation...
-      _end_drag $source {} $action {} $data {} $state $rootX $rootY
+      _end_drag $button $source {} $action {} $data {} $state $rootX $rootY
     }
   }
 };# tkdnd::_init_drag
@@ -331,7 +336,7 @@ proc tkdnd::_init_drag { source state rootX rootY } {
 # ----------------------------------------------------------------------------
 #  Command tkdnd::_end_drag
 # ----------------------------------------------------------------------------
-proc tkdnd::_end_drag { source target action type data result
+proc tkdnd::_end_drag { button source target action type data result
                         state rootX rootY } {
   set rootX 0
   set rootY 0
@@ -340,32 +345,25 @@ proc tkdnd::_end_drag { source target action type data result
   if {[string length $cmd]} {
     set cmd [string map [list %W $source %X $rootX %Y $rootY \
                               %S $state %e <<DragEndCmd>> %A \{$action\}] $cmd]
-    set info [uplevel \#0 $cmd]
-    if { $info != "" } {
-      variable _windowingsystem
-      foreach { actions types data } $info { break }
-      set types [platform_specific_types $types]
-      switch $_windowingsystem {
-        x11 {
-          error "dragging from Tk widgets not yet supported"
-        }
-        win32 -
-        windows {
-          set action [_DoDragDrop $source $actions $types $data]
-        }
-        aqua {
-          macdnd::dodragdrop $source $actions $types $data
-        }
-        default {
-          error "unknown Tk windowing system"
-        }
-      }
-      ## Call _end_drag to notify the widget of the result of the drag
-      ## operation...
-      _end_drag $source {} $action {} $data {} $state $rootX $rootY
-    }
+    uplevel \#0 $cmd
   }
 };# tkdnd::_end_drag
+
+# ----------------------------------------------------------------------------
+#  Command tkdnd::set_drag_cursors
+# ----------------------------------------------------------------------------
+proc tkdnd::set_drag_cursors { w args } {
+  if {[llength $args] % 2 == 1} {
+    error "Even number of arguments expected"
+  }
+  variable _drag_cursors
+  array unset _drag_cursors $w:*
+  foreach {actions cursor} $args {
+    foreach action $actions {
+      set _drag_cursors($w:$action) $cursor
+    }
+  }
+}
 
 # ----------------------------------------------------------------------------
 #  Command tkdnd::platform_specific_types
@@ -399,5 +397,4 @@ proc tkdnd::platform_independent_type { type } {
   return [${_platform_namespace}::_platform_independent_type $type]
 }; # tkdnd::platform_independent_type
 
-# end of tkdnd.tcl
-
+# vi:set ts=2 sw=2 et:

@@ -179,6 +179,7 @@ proc ::file::Open {{fName ""} {parent .} {update 1}} {
       if {![string match {*doesn't exist*} $result]} {
         set result "$result\nCan't open $fName."
       }
+      unbusyCursor .
       tk_messageBox -icon warning -type ok -parent $parent \
           -title "Scid: Error opening file" -message "$result"
       ::recentFiles::remove "$fName.si4"
@@ -197,6 +198,7 @@ proc ::file::Open {{fName ""} {parent .} {update 1}} {
     if {![file exists $fName]} {
       set err 1
       ::recentFiles::remove $fName
+      unbusyCursor .
       tk_messageBox -icon warning -type ok -parent $parent \
           -title "Scid: Error opening file" -message "File $fName doesn't exist."
     } else {
@@ -209,6 +211,7 @@ proc ::file::Open {{fName ""} {parent .} {update 1}} {
       if {(![file readable $fName])  || \
 	    [catch {sc_base create $fName true} result]} {
 	set err 1
+	unbusyCursor .
 	tk_messageBox -icon warning -type ok -parent $parent \
 	    -title "Scid: Error opening file" -message $result
       } else {
@@ -640,31 +643,26 @@ proc HandleDropEvent {action window} {
     leave  {}
     default {
       # It is important that HandleDropEvent is returning as fast as possible.
-      after idle "
-        [namespace code [list OpenUri $action]]
-        if {[string match .glistWin* $window]} {
-          raiseWin .glistWin
-        } else {
-          raiseWin .
-        }
-      "
+      after idle [namespace code [list OpenUri $window $action]]
     }
   }
 
   return copy
 }
 
-proc OpenUri {uriFiles} {
+proc OpenUri {window uriFiles} {
+
+  if {[string match .glistWin* $window]} {
+	 raiseWin .glistWin
+  } else {
+	 raiseWin .
+  }
+  update idletasks
 
   set errorList {}
   set rejectList {}
   set databaseList {}
-
-  if {$::windowsOS} {
-    set filelist $uriFiles
-  } else {
-    set filelist [split $uriFiles \n]
-  }
+  set filelist $uriFiles
 
   foreach file $filelist {
     set uri [string trimright $file]
@@ -701,14 +699,13 @@ proc OpenUri {uriFiles} {
       }
 
       set file [file normalize $file]
-
     }
-        if {[file exists $file]} {
-          lappend databaseList $file
-        } else {
-          puts "Dnd: no such file $file"
-        }
 
+    if {[file exists $file]} {
+      lappend databaseList $file
+    } else {
+      puts "Dnd: no such file $file"
+    }
   }
 
   foreach file $databaseList {
@@ -753,7 +750,7 @@ proc OpenUri {uriFiles} {
 proc bgerror {err} {
        if {$err eq "selection owner didn't respond"} {
       set parent [::tkdnd::get_drop_target]
-      if {[llength $parent] == 0} { set parent .application }
+      if {[llength $parent] == 0} { set parent . }
       after idle [list tk_messageBox -icon error \
          -parent $parent \
          -message $::mc::SelectionOwnerDidntRespond \

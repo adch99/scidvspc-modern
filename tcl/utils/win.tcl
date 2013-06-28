@@ -895,6 +895,10 @@ proc ::docking::undock {srctab} {
   wm deiconify $f
   set ::docking::notebook_name($f) [list $srctab $o]
   setTabStatus
+
+  if {$f eq ".fdockglistWin"} {
+	  after idle [list RegisterDropEvents $f]
+  }
 }
 
 ################################################################################
