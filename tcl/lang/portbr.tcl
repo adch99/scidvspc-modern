@@ -1331,9 +1331,9 @@ translate B NoUnusedNames "There are no unused names, so the name file is alread
 # ====== TODO To be translated ======
 translate B NoUnusedGames "The game file is already fully compacted."
 # ====== TODO To be translated ======
-translate B NameFileCompacted {The name file for the database "[file tail [sc_base filename]]" was compacted.}
+translate B NameFileCompacted {The name file for "[file tail [sc_base filename]]" was compacted.}
 # ====== TODO To be translated ======
-translate B GameFileCompacted {The game file for the database "[file tail [sc_base filename]]" was compacted.}
+translate B GameFileCompacted {The game file for "[file tail [sc_base filename]]" was compacted.}
 
 # Sorting:
 translate B SortCriteria {Criterio}

@@ -1256,8 +1256,8 @@ translate E CompactNames {Compact Name file}
 translate E CompactGames {Compact Game file}
 translate E NoUnusedNames "There are no unused names, so the name file is already fully compacted."
 translate E NoUnusedGames "The game file is already fully compacted."
-translate E NameFileCompacted {The name file for the database "[file tail [sc_base filename]]" was compacted.}
-translate E GameFileCompacted {The game file for the database "[file tail [sc_base filename]]" was compacted.}
+translate E NameFileCompacted {The name file for "[file tail [sc_base filename]]" was compacted.}
+translate E GameFileCompacted {The game file for "[file tail [sc_base filename]]" was compacted.}
 
 # Sorting:
 translate E SortCriteria {Criteria}
