@@ -1604,6 +1604,7 @@ proc compactNames {} {
   updateBoard
   ::windows::gamelist::Refresh
   ::maint::Refresh
+  raiseWin .maintWin
 }
 
 # returns true is no deletions marked
@@ -1653,6 +1654,7 @@ proc compactGames {parent} {
   }
   if {$parent == {.compactWin}} {
     destroy $parent
+    raiseWin .maintWin
   }
 }
 
