@@ -890,9 +890,12 @@ proc createToplevel { w } {
     # only the highest stacked window can get the focus forced or on windows any time the mouse enters the main window, it will be raised
     bind .$name <Enter> {
       set tl [winfo toplevel %W]
-      set atTop [lindex [wm stackorder . ] end]
-      # stackorder on OS X is broke
-      if { $tl == $atTop || $atTop == "." || $::macOS } {
+      set focus [focus]
+      if {[catch {set focus [winfo toplevel $focus]}]} {
+         # if [focus] is {}, try to grab it again
+	 focus .fdockmain
+      }
+      if {$focus != $tl} {
         if {$tl == ".fics"} {
           focus -force .fics.command.entry
         } else {
