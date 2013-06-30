@@ -893,7 +893,7 @@ proc createToplevel { w } {
       set focus [focus]
       if {[catch {set focus [winfo toplevel $focus]}]} {
          # if [focus] is {}, try to grab it again
-	 focus .fdockmain
+	 focus -force .fdockmain
       }
       if {$focus != $tl} {
         if {$tl == ".fics"} {
