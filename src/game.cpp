@@ -202,12 +202,12 @@ game_printNag (byte nag, char * str, bool asSymbol, gameFormatT format)
 
     if (asSymbol) {
        if (format == PGN_FORMAT_LaTeX) {
-         if (nag <= evalNagsLatex_Max)
+         if (nag < (sizeof evalNagsLatex / sizeof (const char *)))
            strcpy (str, evalNagsLatex[nag]);
          else
            strcpy (str , "");
        } else {
-         if (nag <= evalNagsRegular_Max)
+         if (nag < (sizeof evalNagsRegular / sizeof (const char *)))
 	   strcpy (str, evalNagsRegular[nag]);
          else
            sprintf (str, "$%i", nag);

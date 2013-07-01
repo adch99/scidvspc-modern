@@ -233,8 +233,6 @@ const char * evalNagsRegular [] =
    "⌋",               // $215 without
 };
 
-#define evalNagsRegular_Max 215
-
 
 //-------------------- UTF-8 Edition --------------------
 // to follow

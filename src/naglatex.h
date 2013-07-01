@@ -230,5 +230,3 @@ const char * evalNagsLatex [] =
 	"{\\with}",  		// $214
 	"{\\without}",  	// $215
 };
-
-#define evalNagsLatex_Max 215
