@@ -3828,11 +3828,13 @@ set helpText(Options) {<h1>Options and Preferences</h1>
 }
 
 set helpTitle(NAGs) "NAG values"
-set helpText(NAGs) {<h1>Standard NAG Values</h1>
+set helpText(NAGs) {<h1>NAG Values</h1>
+  <h3>Standard NAGs</h3>
   <p>
-  Standard NAG (Numeric Annotation Glyph) values are defined in the
-  <a Related>PGN Standard</a> and described below.
-  Scid's use of Ascii strings to represent annotations is common, <i>but against the PGN standard</i>.
+  Standard <b>Numeric Annotation Glyphs</b> are defined in the
+  <a Related>PGN Standard</a> and are listed below.
+  <br>
+  <i>Scid's use of Ascii strings to represent annotations is common, but against the PGN standard.</i>
   </p>
   <cyan>
   <ul>
@@ -3978,8 +3980,9 @@ set helpText(NAGs) {<h1>Standard NAG Values</h1>
   </ul>
   </cyan>
 
+  <h3>Proposed NAGs</h3>
   <p>
-  Other proposed NAG values for Chess Informant publication symbols include:
+  NAG values proposed by the Chess Informant publication.
   </p>
   <cyan>
   <ul>
@@ -4001,9 +4004,7 @@ set helpText(NAGs) {<h1>Standard NAG Values</h1>
   </ul>
   </cyan>
 
-  <p>
-  Other suggested values are:
-  </p>
+  <h3>Other Suggested Values</h3>
   <cyan>
   <ul>
   <li>190   Etc. </li>
@@ -4015,16 +4016,23 @@ set helpText(NAGs) {<h1>Standard NAG Values</h1>
   </ul>
   </cyan>
 
+  <h3>Scid NAGs</h3>
   <p>
-  Symbols defined by Scid for its own use are:
+  Defined by Scid for its own use.
   </p>
   <cyan>
   <ul>
   <li>201   Diagram ("D", sometimes denoted "#") </li>
+  <li>210   see            : —     </li>
+  <li>211   mate           : #     </li>
+  <li>212   passed pawn    : ⚨     </li>
+  <li>213   more pawns     :       </li>
+  <li>214   with           : ⌊     </li>
+  <li>215   without        : ⌋     </li>
   </ul>
   </cyan>
 
-  <p><footer>Updated: Scid 3.6.2, December 2006</footer></p>
+  <p><footer>Updated: Scid vs. PC July 2013</footer></p>
 }
 
 
@@ -4371,7 +4379,21 @@ chess.
 <p>
 If any of the correspondence chess functions are accessed from the
 menu a new window opens up. It can be opened manually from the window
-menu. This window contains the neccessary buttons to navigate through
+menu or one can use the keyboard shortcut F12. There are two
+additional shortcuts:
+<ul>
+   <li><b>Ctrl-F12</b>
+      This will open the correspondence chess window and the default
+      database. It will also process your current Inbox.
+   </li>
+   <li><b>Alt-F12</b>
+      This will open the correspondence chess window, the default
+      database and also initiate the fetch of Xfcc games in one go.
+   </li
+</ul>
+Please see below for further details.
+
+This window contains the neccessary buttons to navigate through
 ongoing games, shortcut keys to fetch games by means of the Xfcc
 protocol and sync in eMail based games as well as a console stating
 which messages where sent or retrieved. Additionally this window

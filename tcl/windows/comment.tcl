@@ -126,6 +126,9 @@ proc ::commenteditor::Open {} {
     grid $nagbuttons.b$i -row [expr {$i % 2}] -column [expr {int($i / 2)}] -padx 2 -pady 2
     incr i
   }
+  ## Unused
+  # +-- WhiteCrushing
+  # --+ BlackCrushing
 
   label $w.nf.label -font font_Regular -textvar ::tr(AnnotationSymbols)
   pack $w.nf -side top -pady 2 -padx 5 -fill x 

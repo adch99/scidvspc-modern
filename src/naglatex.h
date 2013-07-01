@@ -3,13 +3,10 @@
 //  FILE:       naglatex.h
 //              Translationtable for NAG values to Tex.
 //
-//  Part of:    Scid (Shane's Chess Information Database)
-//  Version:    3.6
-//
-//  Notice:     Copyright (c) 2000-2003 Shane Hudson.  All rights reserved.
+//  Copyright (c) 2000-2013 Shane Hudson and others.
 //
 //  Author:     Shane Hudson (sgh@users.sourceforge.net)
-//	Updated:	W. van den Akker
+//  Updated:	W. van den Akker
 //
 //////////////////////////////////////////////////////////////////////
 
@@ -217,7 +214,6 @@ const char * evalNagsLatex [] =
 	"",  // $198
 	"",  // $199
 	"",  // $200
-	"",  // $200
 	"",  // $201
 	"",  // $202
 	"",  // $203
@@ -233,13 +229,6 @@ const char * evalNagsLatex [] =
 	"{\\morepawns}",  	// $213
 	"{\\with}",  		// $214
 	"{\\without}",  	// $215
-	"",  // $216
-	"",  // $217
-	"",  // $218
-	"",  // $219
-	"",  // $220
-	"",  // $221
-	"",  // $222
-	"",  // $223
-	""   // $224
 };
+
+#define evalNagsLatex_Max 215
