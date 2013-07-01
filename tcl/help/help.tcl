@@ -3552,50 +3552,45 @@ and
 set helpTitle(Bookmarks) "Bookmarks"
 set helpText(Bookmarks) {<h1>Bookmarks</h1>
   <p>
-  Scid allows you to <term>Bookmark</term> important games for easy
-  future reference. The bookmarks menu is available from
-  <green>File-<gt>Bookmarks</green> or the toolbar.
+  Scid allows you to bookmark important games for easy
+  future reference. The bookmarks menu is found in
+  <green>File-<gt>Bookmarks</green>, or from the toolbar bookmark icon.
   </p>
   <p>
-  When you select a bookmarked game , Scid will automatically
-  open the appropriate database and game, and move to the
-  position at which it was bookmarked.
-  </p>
+  When you open a bookmark Scid will automatically
+  load the appropriate database, game and position.
+  But if the database has been sorted or compacted, the bookmark
+  details may be out of date. In this case Scid will search 
+  for the best matching game (comparing player names, site, etc),
+  but it is possible that a different game will match the criteria,
+  and be incorrectly loaded.</p>
   <p><i>
-  Games in a PGN file or the Clipbase can not be bookmarked.
-  </p>
-  <p>
-  If the database is sorted or compacted, the bookmark
-  details may become out of date. In this case, Scid will search the
-  database for the best matching game (comparing player names, site, etc).
-  If details of the bookmarked game have changed, it is possible
-  that a different game will match the criteria better and be
-  loaded instead.</p>
-  <p><i>It is a good idea to re-bookmark a game if you edit
-  its Players, Site, Result, Round or Year.</i>
-  </p>
+  It is a good idea to re-bookmark a game if you edit its Players, Site, Result, Round or Year.
+  </i></p>
+  <p><i>
+  Games in a PGN file or the Clipbase cannot be bookmarked.
+  </i></p>
 
-  <h3>Editing Bookmarks</h3>
+  <h3>Editing and Arranging Bookmarks</h3>
   <p>
   With the bookmark editor you can change the label for
   each bookmark, and add folders for better organization.
-  Double clicking entries will load the game.
+  Double clicking entries will load the game, and the 'Delete' , 'Up' and 'Down' keys
+  can be used to delete a bookmark, or reorder it in the list.
   </p>
 
   <h3>Hints</h3>
   <p>
   You can use bookmarks for fast access to common databases
-  by bookmarking a game from each database. Another good use for
-  bookmarks is to add important games you find when studying a
-  particular chess opening.
+  by bookmarking a game from each database. 
   </p>
   <p>
   The bookmark editor contains a checkbox for controlling the display of
-  bookmark folders: they can be shown as submenus (useful when there are
+  folders. They can be shown as submenus (useful when there are
   many games), or as a single list.
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.3, January 2010</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.10, July 2013</footer></p>
 }
 
 set helpTitle(Cmdline) "Command-line options"

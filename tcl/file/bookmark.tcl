@@ -367,6 +367,9 @@ proc ::bookmarks::Edit {} {
     ::bookmarks::Go [lindex $bookmarks(data) [lindex [.bmedit.f.list curselection] 0]]
     if {[::bookmarks::CanAdd]} { .bmedit.b1.newGame configure -state normal }
   }
+  bind $w.f.list <Up> "$w.b1.up invoke ; break"
+  bind $w.f.list <Down> "$w.b1.down invoke ; break"
+  bind $w.f.list <Delete> ::bookmarks::EditDelete
   pack $w.f.ybar -side right -fill y
   pack $w.f.list -side left -fill both -expand yes
   foreach entry $bookmarks(data) {
