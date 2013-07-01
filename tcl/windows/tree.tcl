@@ -537,7 +537,6 @@ proc ::tree::dorefresh { baseNumber } {
     set glstart 1
     ::windows::gamelist::Refresh
   }
-  updateTitle
 
   # Only the most recent tree_search succeeds
   if { $moves == "canceled" } { return "canceled"}
