@@ -905,10 +905,6 @@ proc ::windows::switcher::Open {} {
   bind $w <F1> { helpWindow Switcher }
   standardShortcuts $w
 
-  button $w.bookmarks -relief flat
-  bind   $w.bookmarks <ButtonPress-1> "tk_popup .main.tb.bkm.menu %X %Y ; break"
-  grid $w.bookmarks -row 0 -column 0 -padx 5
-
   canvas $w.c -borderwidth 0 -highlightthickness 0 
 
   grid $w.c -row 0 -column 1 -sticky ew
@@ -966,11 +962,9 @@ proc ::windows::switcher::Refresh {} {
   foreach i {9 1 2 3 4 5 6 7 8} {
     if {$icons} {
       grid $w.c.f$i.img -row 0 -column 0 -rowspan 2
-      $w.bookmarks configure -image bookmark_file 
       $w.c configure -height 36
     } else {
       grid forget $w.c.f$i.img
-      $w.bookmarks configure -image tb_bkm
       $w.c configure -height 24
     }
   }

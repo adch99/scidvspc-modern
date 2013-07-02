@@ -434,6 +434,9 @@ proc ::windows::gamelist::OpenClose {} {
     }
   }
 
+  button $w.b.bkm -relief flat -image tb_bkm
+  bind   $w.b.bkm <ButtonPress-1> "tk_popup .main.tb.bkm.menu %X %Y ; break"
+
   button $w.b.gfirst -image tb_gfirst -command "
     event generate $w.tree <Home>
     ::game::LoadNextPrev first 0" -relief flat
@@ -511,7 +514,7 @@ proc ::windows::gamelist::OpenClose {} {
   pack $w.b.findcase -side right
   pack $w.b.find -side right ; # -expand 1 -fill x
   pack $w.b.findlabel $w.b.filter $w.b.reset -side right
-  pack $w.b.save $w.b.gfirst $w.b.gprev $w.b.gnext $w.b.glast $w.b.select $w.b.remove $w.b.removeabove $w.b.removebelow -side left
+  pack $w.b.save $w.b.bkm $w.b.gfirst $w.b.gprev $w.b.gnext $w.b.glast $w.b.select $w.b.remove $w.b.removeabove $w.b.removebelow -side left
 
   ### Bottom row of buttons , etc
 

@@ -1564,7 +1564,7 @@ set helpText(GameList) {<h1>The Game List</h1>
 <p>The <run ::windows::gamelist::OpenClose><green>Game List</green></run>
 widget allows easy perusal of all filtered games in the currently open Database / PGN archive.</p>
 <p>Below the Gamelist are two rows of buttons (which can be hidden by right-clicking the Gamelist),
-and at the bottom you'll find the <a Bookmarks>Bookmark</a> icon and <a Switcher>Database Switcher</a>.</p>
+and at the bottom you'll find the <a Switcher>Database Switcher</a>.</p>
 <p>Quick searches can be performed by entering text in the entry box and clicking the <b>Find</b> or <b>Filter</b> buttons.
 Use "+" as a logical AND with the <b>Filter</b> button. For example: "Kasparov+Karpov".</p>
 <p><i>For more info about Searches and Filters, <a Searches>see here</a> or below</i>.</p>
@@ -1594,6 +1594,8 @@ This can be done by the <b>Compact</b> button, or
 
 <h3>Buttons</h3>
 <ul>
+<li><img tb_save> - eplace current game</li>
+<li><img tb_bkm> - show bookmarks</li>
 <li><img tb_gfirst> - load first filter game</li>
 <li><img tb_gprev> - load previous filter game</li>
 <li><img tb_gnext> - load next filter game</li>
