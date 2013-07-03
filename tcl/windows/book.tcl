@@ -443,8 +443,8 @@ if {0} {
       return
     }
 
-    toplevel $w
-    wm title $w {Book Tuning}
+    ::createToplevel $w
+    ::setTitle $w "$::tr(Book) Tuning"
     # wm resizable $w 0 0
 
     bind $w <F1> { helpWindow BookTuningWindow }
@@ -501,17 +501,19 @@ if {0} {
     pack $w.left.close $w.left.help $w.left.space2 $w.left.export $w.left.save -side bottom -padx 5 -pady 3
 
     bind $w.left.combo <<ComboboxSelected>> ::book::bookTuningSelect
-    bind $w <Destroy> "::book::closeTuningBook"
+    bind $w <Destroy> {
+      if {"%W" == ".bookTuningWin"} {
+        ::book::closeTuningBook
+      }
+    }
     bind $w <Escape> { destroy  .bookTuningWin }
     bind $w <F1> {helpWindow BookTuning}
+    ::createToplevelFinalize $w
     bind $w <Configure> "recordWinSize $w"
-
     bookTuningSelect
-
   }
-  ################################################################################
-  #
-  ################################################################################
+
+
   proc closeTuningBook {} {
     if { $::book::currentTuningBook == "" } { return }
     focus .main
@@ -594,7 +596,6 @@ if {0} {
     set moves [sc_book moves $::book::bookTuningSlot]
 
     set w .bookTuningWin
-    bind $w <Destroy> "" ;# avoid the closing of the book
     # erase previous children
     set children [winfo children $w.f]
     foreach c $children {
@@ -630,7 +631,6 @@ if {0} {
         $w.left.add.otherMoves add command -label [::trans $move] -command "::book::addBookMove $move"
       }
     }
-    bind $w <Destroy> ::book::closeTuningBook
   }
 
   ################################################################################

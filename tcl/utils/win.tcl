@@ -1145,16 +1145,17 @@ proc ::docking::layout_restore_nb { pw name tabs} {
       $nb add $d -text $::tr(Board)
       raise $d
     }
-    if { $d == ".fdockpgnWin" } { ::pgn::OpenClose }
-    if { $d == ".fdockbaseWin" } {  ::windows::switcher::Open }
-    if { $d == ".fdockecograph" } {  ::windows::eco::OpenClose }
-    if { $d == ".fdocktbWin" } { ::tb::Open }
-    if { $d == ".fdockcommentWin" } {set ::commentWin 1 ; ::commenteditor::Open }
-    if { $d == ".fdockglistWin" } {::windows::gamelist::OpenClose}
-    if { $d == ".fdockccWindow" } {::CorrespondenceChess::CCWindow}
-    if { $d == ".fdockplayerInfoWin" } {::playerInfo}
-    if { $d == ".fdockcrosstabWin" } {::crosstab::Open}
-    if { $d == ".fdockbookWin" } {::book::OpenClose}
+    if { $d == ".fdockpgnWin" }        { ::pgn::OpenClose }
+    if { $d == ".fdockbaseWin" }       {  ::windows::switcher::Open }
+    if { $d == ".fdockecograph" }      {  ::windows::eco::OpenClose }
+    if { $d == ".fdocktbWin" }         { ::tb::Open }
+    if { $d == ".fdockcommentWin" }    { set ::commentWin 1 ; ::commenteditor::Open }
+    if { $d == ".fdockglistWin" }      { ::windows::gamelist::OpenClose }
+    if { $d == ".fdockccWindow" }      { ::CorrespondenceChess::CCWindow }
+    if { $d == ".fdockplayerInfoWin" } { ::playerInfo }
+    if { $d == ".fdockcrosstabWin" }   { ::crosstab::Open }
+    if { $d == ".fdockbookWin" }       { ::book::OpenClose }
+    if { $d == ".fdockbookTuningWin" } { ::book::tuning }
     if { [ scan $d ".fdocktreeWin%d" base ] == 1 } {::tree::OpenClose $base}
     if { [ scan $d ".fdocktreeBest%d" base ] == 1 } {::tree::best $base}
     if { [ scan $d ".fdockanalysisWin%d" n ] == 1 } {
