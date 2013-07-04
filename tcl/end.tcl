@@ -527,12 +527,15 @@ proc exportGames {selection exportType} {
   }
   set fName [$getfile -initialdir $idir -filetypes $ftype \
       -defaultextension $default -title $title]
-  if {$fName == ""} { return }
+  if {$fName == ""} {
+    return
+  }
 
   if {$exportFilter} {
     progressWindow "Scid" "Exporting games..." $::tr(Cancel) "sc_progressBar"
   }
   busyCursor .
+  set error [catch {
   sc_base export $selection $exportType $fName -append $exportFlags(append) \
       -starttext $exportStartFile($exportType) \
       -endtext $exportEndFile($exportType) \
@@ -541,17 +544,22 @@ proc exportGames {selection exportType} {
       -indentC $exportFlags(indentc) -indentV $exportFlags(indentv) \
       -column $exportFlags(column) -noMarkCodes $exportFlags(stripMarks) \
       -convertNullMoves $exportFlags(convertNullMoves)
+  }]
 
+  if {$exportFilter} {
+    closeProgressWindow
+  }
   unbusyCursor .
+
+  if {$error} {
+    tk_messageBox -title "Scid: Oops" -type ok -icon error -message "File export/save failed."
+  }
 
   if {$exportType == "HTML"} {
     set sourcedir [file nativename $::scidShareDir/bitmaps/]
     catch { file copy -force $sourcedir [file dirname $fName] }
   }
 
-  if {$exportFilter} {
-    closeProgressWindow
-  }
 }
 
 ### Global variables used in gameSave
