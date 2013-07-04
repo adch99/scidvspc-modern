@@ -554,8 +554,6 @@ proc ::tree::dorefresh { baseNumber } {
     displayLines $baseNumber $moves
   }
   # ========================================
-
-
 }
 
 ### Insert lines into the tree widget S.A.

@@ -5089,7 +5089,7 @@ filter_reset (scidBaseT * base, byte value)
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// sc_filter: filter commands.  Valid minor commands:
+// sc_filter: filter commands.  (Some) valid minor commands:
 //    count:     returns the number of games in the filter.
 //    reset:     resets the filter so all games are included.
 //    remove:    removes game number <x> from the filter.
@@ -5265,8 +5265,8 @@ sc_filter_copy (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             return errorResult (ti, "Error reading game file.");
         }
 
-		if (sc_savegame (ti, sourceBase, sourceBase->bbuf, ie, targetBase) != TCL_OK) {
-			return TCL_ERROR;
+	if (sc_savegame (ti, sourceBase, sourceBase->bbuf, ie, targetBase) != TCL_OK) {
+		return TCL_ERROR;
         }
     }
 
@@ -5498,7 +5498,7 @@ sc_filter_negate (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         for (uint i=0; i < db->numGames; i++) {
 	  filter->Set (i, filter->Get(i) == 0 ? 1 : 0);
         }
-	updateMainFilter( db);
+	updateMainFilter(db);
     }
     return TCL_OK;
 }
@@ -5627,11 +5627,10 @@ sc_filter_end (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     return TCL_OK;
 }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// sc_filter_clear:
 //    Takes an optional base number (defaults to current base) and 
 //    clears all filters ie. db filter as well as tree filter
 //    To clear only the tree filter use sc_tree clean
+
 int
 sc_filter_clear (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
@@ -14118,25 +14117,20 @@ sc_tree_clean (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         return setResult (ti, errMsgNotOpen(ti));
     }
 
-	if(base->treeFilter)
-	{
-		delete base->treeFilter;
-		base->treeFilter = NULL;
-	}
-	// Clone
-	if( base->dbFilter && base->dbFilter != base->filter)
-	{
-	   	for (uint i=0; i < base->numGames; i++)
-			base->filter->Set( i, base->dbFilter->Get(i));
+    if(base->treeFilter) {
+        delete base->treeFilter;
+        base->treeFilter = NULL;
+    }
 
-		delete base->dbFilter;
-		base->dbFilter = base->filter;
-	}
-	// else
-        //   base->filter->Fill (1);
-	// Hmmm... breaks the db filter &&&
+    if( base->dbFilter && base->dbFilter != base->filter) {
+        for (uint i=0; i < base->numGames; i++)
+            base->filter->Set( i, base->dbFilter->Get(i));
 
-	return TCL_OK;
+        delete base->dbFilter;
+        base->dbFilter = base->filter;
+    }
+
+    return TCL_OK;
 }
 
 
@@ -14294,9 +14288,8 @@ sortTreeMoves (treeT * tree, int sortMethod, colorT toMove)
     return;
 }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// sc_tree_search:
-//    Returns the tree for the current position
+// Returns the tree for the current position
+
 int
 sc_tree_search (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
@@ -14378,7 +14371,6 @@ db->bbuf->Empty();
     {
 	    base->dbFilter = base->filter->Clone();
 	    base->treeFilter = new Filter( base->numGames);
-	    // Clone
     }
 
     bool showProgress = startProgressBar();

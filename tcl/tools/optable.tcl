@@ -231,7 +231,14 @@ proc ::optable::makeReportWin {args} {
     }
     button $w.b.mergeGames -textvar ::tr(MergeGames) -command ::optable::mergeGames
     button $w.b.help -textvar ::tr(Help) -command {helpWindow Reports Opening}
-    button $w.b.close -textvar ::tr(Close) -command "focus .main ; destroy $w"
+    button $w.b.close -textvar ::tr(Close) -command "
+      destroy $w"
+    bind $w <Destroy> {
+      if {"%W" == ".oprepWin"} {
+	focus .main
+	sc_tree clean $::optable::opReportBase
+      }
+    }
 
     entry $w.b.find -width 10 -textvariable ::oreport(find) -highlightthickness 0
     configFindEntryBox $w.b.find ::oreport .oprepWin.text
