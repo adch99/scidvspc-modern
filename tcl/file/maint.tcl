@@ -1066,13 +1066,13 @@ proc updateTwinChecker {} {
   set t $w.f.left.t.text
   $t configure -state normal
   $t delete 1.0 end
-  $t insert end [sc_game pgn]
+  $t insert end [twinTrimNewlines [sc_game pgn]]
 
   set t $w.f.right.t.text
   $t configure -state normal
   $t delete 1.0 end
   if {$dup > 0} {
-    $t insert end [sc_game pgn -gameNumber $dup]
+    $t insert end [twinTrimNewlines [sc_game pgn -gameNumber $dup]]
   } else {
     $t insert end $::tr(TwinCheckNoTwinfound)
   }
@@ -1123,7 +1123,8 @@ proc updateTwinChecker {} {
               set diff_end -1
               set k1 0
               set k2 0
-              while {$k1 < $char_count1 && $k2 < $char_count2} {
+              set sanity 0
+              while {$k1 < $char_count1 && $k2 < $char_count2 && $sanity < 500} {
                 #Mark diff region
                 if {$token_match == 1} {
                   if {[lindex $diff_start $rav_count] != -1} {
@@ -1228,14 +1229,14 @@ proc updateTwinChecker {} {
                     if {[lindex $diff_start $rav_count] == -1} {
                       set diff_start [lreplace $diff_start $rav_count end $k1]
                     }
-                    set k1 [doRAVSkip $line1 $k1]
+                    set k1 [twinRavSkip $line1 $k1]
                     set diff_end [lreplace $diff_end $rav_count end $k1]
                     incr k1 2
                   }
 
                   .[(] {
                   #Side2 has variation
-                    set k2 [doRAVSkip $line2 $k2]
+                    set k2 [twinRavSkip $line2 $k2]
                     incr k2 2
                   }
 
@@ -1272,7 +1273,7 @@ proc updateTwinChecker {} {
 
                   [)]. {
                   #Side1 has variation end
-                    set k2 [doRAVSkip $line2 $k2]
+                    set k2 [twinRavSkip $line2 $k2]
                   }
 
                   .[(] {
@@ -1280,7 +1281,7 @@ proc updateTwinChecker {} {
                     if {[lindex $diff_start $rav_count] == -1} {
                       set diff_start [lreplace $diff_start $rav_count end $k1]
                     }
-                    set k1 [doRAVSkip $line1 $k1]
+                    set k1 [twinRavSkip $line1 $k1]
                     set diff_end \
                      [lreplace $diff_end $rav_count end [expr {$k1 - 2}]]
                   }
@@ -1329,6 +1330,7 @@ proc updateTwinChecker {} {
                     set k2 [incr token_end2]
                   }
                 }
+                incr sanity
               }
               if {[lindex $diff_start $rav_count] != -1} {
                 if {$token_match == 1} {
@@ -1366,10 +1368,19 @@ proc updateTwinChecker {} {
 
 }
 
-# doRAVSkip:
+proc twinTrimNewlines  {s} {
+  # Newlines in comments make diffing impossible, so remove them
+  set n [string first "\n1." $s]
+  if {$n == -1} {
+    return $s
+  } else {
+    return "[string range $s 0 $n][string map {"\n" {}} [string range $s $n+1 end]]\n"
+  }
+}
+
 #   Skips RAVs for diff checking in Twin Checker Window
 
-proc doRAVSkip {line k} {
+proc twinRavSkip {line k} {
   # What are we doing here ! Skipping variations ?
   # Rewrite it a bit. Just don't get fooled by any braces ( or ) inside comments {}
   set recurse 1
