@@ -566,8 +566,8 @@ proc showVars {} {
   bind $w <Button-4> { destroy .variations }
 
   if { $::docking::USE_DOCKING } {
-      # This has been disabled. It seems to lose keyboard inputs after using "v" "1" to enter a var
-      # not sure why though
+      ### This (and another below) have been disabled.
+      # It seems to lose keyboard inputs after using "v" "1" to enter a var not sure why though
 
       # Needed or the main window loses the focus
       # bind .variations <Destroy> {focus -force .main }
@@ -598,13 +598,15 @@ proc enterVar {{n {}}} {
     set n [.variations.lbVar curselection]
   }
   catch {destroy .variations}
-  # need to use "-force" to keep keyboared bindings after wheelmouse
   if {$n == 0} {
     sc_move forward; updateBoard -animate
   } else  {
     sc_var moveInto [expr $n - 1]; updateBoard -animate
   }
-  focus -force .main
+
+  ### Disabled. See another focus -force above
+  # need to use "-force" to keep keyboared bindings after wheelmouse
+  # focus -force .main
 }
 
 ################################################################################
