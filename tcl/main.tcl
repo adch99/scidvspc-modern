@@ -495,7 +495,10 @@ proc showVars {} {
   sc_info preMoveCmd {}
 
   set w .variations
-  if {[winfo exists $w]} { return }
+  if {[winfo exists $w]} {
+    raiseWin $w
+    return
+  }
 
   set varList [sc_var list]
   set numVars [sc_var count]
@@ -560,11 +563,14 @@ proc showVars {} {
   bind $w <Left> { destroy .variations }
   bind $w <Escape>   { destroy .variations }
   # need to use "-force" to keep keyboared bindings after wheelmouse
-  bind $w <Button-4> { destroy .variations ; focus -force .main.board }
+  bind $w <Button-4> { destroy .variations }
 
-  # Needed or the main window loses the focus
   if { $::docking::USE_DOCKING } {
-      bind .variations <Destroy> { focus -force .main }
+      # This has been disabled. It seems to lose keyboard inputs after using "v" "1" to enter a var
+      # not sure why though
+
+      # Needed or the main window loses the focus
+      # bind .variations <Destroy> {focus -force .main }
   }
 
 
@@ -593,12 +599,12 @@ proc enterVar {{n {}}} {
   }
   catch {destroy .variations}
   # need to use "-force" to keep keyboared bindings after wheelmouse
-  focus -force .main.board 
   if {$n == 0} {
     sc_move forward; updateBoard -animate
   } else  {
     sc_var moveInto [expr $n - 1]; updateBoard -animate
   }
+  focus -force .main
 }
 
 ################################################################################
