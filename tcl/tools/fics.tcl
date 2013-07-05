@@ -652,6 +652,12 @@ namespace eval fics {
 	  updateBoard -pgn
           return
       } 
+      ex* {
+	  set confirm [::game::ConfirmDiscard2]
+	  if {$confirm == 2} {return}
+	  if {$confirm == 0} {sc_game save [sc_game number]}
+          sc_game new
+      }
       default {
 	  if {[string match uno* $c]} {
 	      set ::fics::catchRemoving 1
