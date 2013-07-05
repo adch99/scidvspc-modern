@@ -656,9 +656,7 @@ $m add checkbutton -label WindowsStats -variable ::windows::stats::isOpen \
 bind .main <Control-i> ::windows::stats::Open
 set helpMessage($m,[incr menuindex]) WindowsStats
 
-$m add checkbutton -label WindowsTree \
-    -variable treeWin -command ::tree::OpenClose -accelerator "Ctrl+T"
-# 'treeWin' is only used above, and is not very accurate because multiple trees can be open
+$m add command -label WindowsTree -command ::tree::OpenClose -accelerator "Ctrl+T"
 bind .main <Control-t> { .menu.windows invoke [tr WindowsTree] }
 set helpMessage($m,[incr menuindex]) WindowsTree
 
@@ -668,7 +666,7 @@ bind .main <Control-equal> ::tb::OpenClose
 set helpMessage($m,[incr menuindex]) WindowsTB
 
 $m add checkbutton -label WindowsBook -variable ::book::isOpen -command ::book::OpenClose \
-    -accelerator "Ctrl+b"
+    -accelerator "Ctrl+B"
 set helpMessage($m,[incr menuindex]) WindowsBook
 bind .main <Control-b>  ::book::OpenClose
 
