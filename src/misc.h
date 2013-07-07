@@ -103,6 +103,7 @@ inline uint strTrimRight (char * target) {
 uint   strTrimSuffix (char * target, char suffixChar);
 void   strTrimDate (char * str);
 void   strTrimMarkCodes (char * str);
+void   strConvertBraces (char * str);
 void   strTrimMarkup (char * str);
 void   strTrimSurname (char * str, uint initials);
 inline void strTrimSurname (char * str) { strTrimSurname (str, 0); }

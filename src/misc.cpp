@@ -642,10 +642,27 @@ strTrimMarkCodes (char * str)
     *out = 0;
 }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// strTrimMarkup():
+//    Converts braces to parenthesis.  PGN standard doesnt allow for
+//    '{' and '}'  inside comments, and it breaks Scid's parser too.
+//    Perhaps other chars are illegal in PGN comment ?? They can be added here.
+
+void
+strConvertBraces (char * str)
+{
+    while (*str != 0) {
+        if (*str == '{') {
+            *str = '(';
+        }
+        if (*str == '}') {
+            *str = ')';
+        }
+        str++;
+    }
+}
+
 //    Trims in-place all HTML-like markup codes (<b>, </i>, etc)
 //    from the provided string.
+
 void
 strTrimMarkup (char * str)
 {

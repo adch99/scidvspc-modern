@@ -2204,10 +2204,15 @@ Game::WriteComment (TextBuffer * tb, const char * preStr,
     char * s = NULL;
 
     if (PgnStyle & PGN_STYLE_STRIP_MARKS) {
-        s = strDuplicate (comment);
-        strTrimMarkCodes (s);
+      s = strDuplicate (comment);
+      strTrimMarkCodes (s);
     } else {
-      s = (char *) comment;
+      if (PgnStyle & PGN_STYLE_STRIP_BRACES) {
+	s = strDuplicate (comment);
+	strConvertBraces (s);
+      } else {
+	s = (char *) comment;
+      }
     }
 
     if (s[0] != '\0') {

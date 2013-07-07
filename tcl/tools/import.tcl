@@ -59,7 +59,7 @@ proc importPgnGame {} {
   pack $pane.err.text -side left -expand true -fill both
 
   dialogbutton $w.b.paste -text "$::tr(PasteCurrentGame)" -command {
-    .importWin.pane.edit.text insert end [sc_game pgn -width 70]
+    .importWin.pane.edit.text insert end [sc_game pgn -width 70 -stripbraces 1]
     .importWin.pane.err.text delete 0.0 end
   }
 

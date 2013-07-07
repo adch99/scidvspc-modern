@@ -336,7 +336,7 @@ namespace eval pgn {
 	    [sc_game pgn -width 75 -symbols $::pgn::symbolicNags \
 	    -indentVar $::pgn::indentVars -indentCom $::pgn::indentComments \
 	    -space $::pgn::moveNumberSpaces -format plain -column $::pgn::columnFormat \
-	    -markCodes $::pgn::stripMarks]
+	    -markCodes $::pgn::stripMarks -stripbraces 1]
 	close $tempfile
         ::recentFiles::add $fname
         set ::initialDir(file) [file tail $fname]
@@ -349,7 +349,7 @@ namespace eval pgn {
   proc copyPgn {} {
     setLanguageTemp E
     set pgnStr [sc_game pgn -width 75 -indentComments $::pgn::indentComments \
-	-indentVariations $::pgn::indentVars -space $::pgn::moveNumberSpaces]
+	-indentVariations $::pgn::indentVars -space $::pgn::moveNumberSpaces -stripbraces 1]
     setLanguageTemp $::language
     
     setClipboard $pgnStr

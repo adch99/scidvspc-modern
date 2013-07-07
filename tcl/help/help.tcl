@@ -374,7 +374,7 @@ append helpText(Index) {
   <h3><name P>P</name></h3>
   <ul>
   <li><a PGN>PGN</a> window</li>
-  <li><a Export Null>PGN and Scid</a> (exporting)</li>
+  <li><a BrowsingPGN>PGN and Scid</a></li>
   <li><a Variations Paste>Paste variation</a></li>
   <li><a Export PDF>PDF</a> support</li>
   <li><a Pgnscid>Pgnscid</a></li>
@@ -1760,7 +1760,8 @@ set helpText(Export) {<h1>Exporting Games</h1>
 
   <h3><name Null>PGN Compatability Issues</name></h3>
   <p>
-  The PGN Standard has no <a Variations Null>null move</a> concept. So
+  The <url www.saremba.de/chessgml/standards/pgn/pgn-complete.htm>PGN Standard</url>
+  has no <a Variations Null>null move</a> concept. So
   if you export games including them to PGN, other
   software may not be able to read these games correctly.
   </p>
@@ -1773,8 +1774,11 @@ set helpText(Export) {<h1>Exporting Games</h1>
   Scid's use of Ascii strings (such as <b>+=</b> to represent annotations is also against the PGN standard.
   For compatability, <b>Symbolic annotation style</b> should be set to <b>$2 $14</b>.
   </p>
+  <p>
+  The use of '{' and '}' inside comments is also against the standard, and Scid vs. PC replaces these with parenthesis when exporting PGN.
+  </p>
 
-  <p><footer>Updated: Scid vs. PC 4.8 April 2012</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.10 July 2013</footer></p>
 }
 
 set helpTitle(LaTeX) "Scid and LaTeX"
@@ -1819,26 +1823,24 @@ the chess font files </i></p>
   <p><footer>Updated: Scid vs. PC 4.8, April 2011</footer></p>
 }
 
-set helpTitle(PGN) "PGN"
-set helpText(PGN) {<h1>PGN</h1>
+set helpTitle(PGN) "PGN Window"
+set helpText(PGN) {<h1>PGN Window</h1>
 
   <p>
-  Scid's <run ::pgn::OpenClose><green>PGN Window</green></run> shows the
-  current game in standard PGN representation.  In the move text, comments appear
-  in braces "<b>{}</b>" and variations in parentheses "<b>()</b>".
+  This section explains how to use Scid's <run ::pgn::OpenClose><green>PGN Window</green></run>.
   </p>
 
-  <p>
-  The <b>Chess Pieces</b> option displays small chess figurines instead of letters, to represent pieces (<a PGN ttf>see below</a>).
-  </p>
+  <p> <i>Other help subjects include <a BrowsingPGN>PGN files and Scid</a>,
+  <a Export>Exporting</a>, and <a Import>Importing games</a></i> </p>
 
   <p>
-  <i>Portable Game Notation is a common standard for representing
-  chess games.  A PGN file consists of two
+  <i>Portable Game Notation is a common 
+  <url www.saremba.de/chessgml/standards/pgn/pgn-complete.htm>standard</url>
+  for representing chess games.  A PGN file consists of two
   sections - a 'Header' containing tags such as
   [White "Kasparov, Gary"] and
   [Result "1/2-1/2"], and a 'Body' containing the actual moves in standard
-  algebraic notation (SAN) along with any variations, <a NAGs>annotation
+  algebraic notation (SAN) along with any <a Variations>variations</a>, <a NAGs>annotation
   symbols</a> and <a Comment>comments</a></i>.
   </p>
 
@@ -1853,13 +1855,16 @@ set helpText(PGN) {<h1>PGN</h1>
 
   <h3><name ttf>Chess Figurines</name></h3>
   <p>
-  If truetype fonts are supported, and ScidChessBerin.ttf has successfully been installed, the <b>Chess Pieces</b> option will
-  show chess figures instead of letters. This feature may incur a small performance loss.
+  The <b>Chess Pieces</b> option displays small chess figurines instead of letters, to represent pieces.
+  This feature is only available if truetype fonts are supported, and ScidChessStandard.ttf has successfully been installed,
+  and may incur a small performance loss.
   </p>
   <p>
   On <b>Microsoft Windows</b>, the fonts are installed automatically, but may
   not be available until Windows has updated the font cache. If they aren't available, browse the Windows\Fonts directory
   and double click the Scid fonts.
+  </p>
+  <p> <b>OS X</b> users should also manually install the ttf fonts.
   </p>
 
   <h3>Options</h3>
@@ -1872,12 +1877,6 @@ set helpText(PGN) {<h1>PGN</h1>
   One slow systems, deselecting <b>Color Display</b>, will speed things up but with reduced features.
   You can also alter the format of comments and variations, choosing
   to display them indented on a separate line for greater visibility.
-  </p>
-
-  <h3>Editing PGN</h3>
-  <p>
-  You cannot use the PGN window to edit a game. Correcting moves
-  is done in the <a Import>Import game</a> window.
   </p>
 
   <h3>Context Menu</h3>
@@ -1894,7 +1893,7 @@ set helpText(PGN) {<h1>PGN</h1>
      <li><term>Strip:Moves to the End</term> </li>
   </ul>
 
-  <p><footer>Updated: Scid vs. PC 4.3, February 2011</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.10, July 2013</footer></p>
 }
 
 
