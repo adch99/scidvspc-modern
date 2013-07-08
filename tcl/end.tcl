@@ -1319,22 +1319,31 @@ bind .main <Tab> raiseAllWindows
 
 # Bindings for quick move annotation entry in the main window:
 
-bind .main <exclam><Return> "sc_pos addNag !; updateBoard -pgn"
-bind .main <exclam><exclam><Return> "sc_pos addNag !!; updateBoard -pgn"
-bind .main <exclam><question><Return> "sc_pos addNag !?; updateBoard -pgn"
-bind .main <question><Return> "sc_pos addNag ?; updateBoard -pgn"
-bind .main <question><question><Return> "sc_pos addNag ??; updateBoard -pgn"
-bind .main <question><exclam><Return> "sc_pos addNag ?!; updateBoard -pgn"
+proc shortcutAddNag {nag} {
+  sc_game undoPoint
+  sc_pos addNag $nag
+  updateBoard -pgn
+}
 
-bind .main <plus><minus> "sc_pos addNag +-; updateBoard -pgn"
-bind .main <plus><slash> "sc_pos addNag +/-; updateBoard -pgn"
-bind .main <plus><equal> "sc_pos addNag +=; updateBoard -pgn"
-bind .main <equal><Return> "sc_pos addNag =; updateBoard -pgn"
-bind .main <minus><plus> "sc_pos addNag -+; updateBoard -pgn"
-bind .main <minus><slash> "sc_pos addNag -/+; updateBoard -pgn"
-bind .main <equal><plus> "sc_pos addNag =+; updateBoard -pgn"
-bind .main <asciitilde><Return> "sc_pos addNag ~; updateBoard -pgn"
-bind .main <asciitilde><equal><Return> "sc_pos addNag ~=; updateBoard -pgn"
+foreach {i j} {
+  <exclam><Return>         !
+  <exclam><exclam><Return> !!
+  <question><Return>       ?
+  <plus><minus>            +-
+  <plus><slash>            +/-
+  <plus><equal>            +=
+  <equal><Return>          =
+  <minus><plus>            -+
+  <minus><slash>           -/+
+  <equal><plus>            =+
+  <asciitilde><Return>     ~
+  <exclam><question><Return>   !?
+  <question><question><Return> ??
+  <question><exclam><Return>   ?!
+  <asciitilde><equal><Return>  ~=
+} {
+  bind .main $i "shortcutAddNag $j"
+}
 
 # Null move entry:
 bind .main <minus><minus> "addMove null null"

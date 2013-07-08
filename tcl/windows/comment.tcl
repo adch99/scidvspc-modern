@@ -500,6 +500,7 @@ proc ::commenteditor::storeComment {} {
   set nag [sc_pos getNags]
   if {$nag == "0"} { set nag "" }
   if { $nag != [.commentWin.nf.tf.text get] } {
+    sc_game undoPoint
     sc_pos clearNags
     foreach i [split [.commentWin.nf.tf.text get] " "] {
       sc_pos addNag $i
