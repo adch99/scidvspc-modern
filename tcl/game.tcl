@@ -249,9 +249,8 @@ proc ::game::Load { selection {update 1} {raise 1}} {
   if {$update} {
     updateBoard -pgn
   }
-  ### don't S.A
-  # ::windows::gamelist::Refresh
   updateTitle
+  updateMenuStates
 
   if {$raise && \
       ![winfo exists .tourney] && \
