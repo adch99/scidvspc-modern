@@ -45,7 +45,7 @@
 #endif
 
 #ifndef PACKAGE_VERSION
-# define PACKAGE_VERSION "2.3"
+# define PACKAGE_VERSION "3.0"
 #endif
 
 int TkDND_RegisterDragDropObjCmd(ClientData clientData, Tcl_Interp *interp,

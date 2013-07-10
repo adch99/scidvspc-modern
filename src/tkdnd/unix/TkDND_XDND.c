@@ -39,46 +39,81 @@
 
 // ======================================================================
 // Copyright: (C) 2012-2013 Gregor Cramer
+// Heavily changed to get it work with GNOME.
 // ======================================================================
 
 #include "tcl.h"
 #include "tk.h"
 #include <stdlib.h>
+#include <string.h>
 #include <X11/Xlib.h>
 #include <X11/X.h>
 #include <X11/Xatom.h>
 #include <X11/keysym.h>
 
-#ifdef HAVE_LIMITS_H
-#include "limits.h"
-#else
-#define LONG_MAX 0x7FFFFFFFL
-#endif
-
 #define XDND_VERSION 5
 
 #define GNOME_SUPPORT
+#define SUPPORT_EMBEDDED_TOPLEVEL
+//#define USE_CURSORS
 //#define DEBUG_CLIENTMESSAGE_HANDLER
+
+#ifndef GNOME_SUPPORT
+# ifdef SUPPORT_EMBEDDED_TOPLEVEL
+#  undef SUPPORT_EMBEDDED_TOPLEVEL
+# endif
+#endif
 
 #ifndef PACKAGE_NAME
 # define PACKAGE_NAME "tkDND"
 #endif
 
 #ifndef PACKAGE_VERSION
-# define PACKAGE_VERSION "2.3"
+# define PACKAGE_VERSION "3.0"
 #endif
 
-#define TKDND_SET_XDND_PROPERTY_ON_TOPLEVEL
+#ifdef SUPPORT_EMBEDDED_TOPLEVEL
+enum { WrapEnter, WrapLeave, WrapPosition, WrapDrop };
 
-#define TkDND_TkWin(x) \
-  (Tk_NameToWindow(interp, Tcl_GetString(x), Tk_MainWindow(interp)))
+struct Wrapper
+{
+  Window    win;
+  Tk_Window tkwin;
+};
 
-#if 0
+typedef struct Wrapper Wrapper;
+
+struct WrapperList
+{
+  Wrapper* targets;
+  unsigned capacity;
+  unsigned size;
+};
+
+static struct WrapperList wrapperList;
+
+#endif
+
+static const char *DropActions[] = {
+  "XdndActionCopy", "XdndActionMove", "XdndActionLink", "XdndActionAsk",  "XdndActionPrivate"
+};
+static const char *ActionNames[] = {
+  "copy", "move", "link", "ask", "private"
+};
+
+static Tk_Window FindTarget(Tk_Window tkwin, XClientMessageEvent* cm, int state);
+
+#ifdef USE_CURSORS
 extern Tk_Cursor TkDND_GetCursor(Tcl_Interp *interp, Tcl_Obj *name);
 extern void TkDND_InitialiseCursors(Tcl_Interp *interp);
 #endif
 
-int
+static Tk_Window
+TkDND_TkWin(Tcl_Interp* interp, Tcl_Obj* path) {
+  return Tk_NameToWindow(interp, Tcl_GetString(path), Tk_MainWindow(interp));
+}
+
+static int
 TkDND_Eval(Tcl_Interp* interp, int objc, Tcl_Obj* const* objv)
 {
   int i;
@@ -94,6 +129,13 @@ TkDND_Eval(Tcl_Interp* interp, int objc, Tcl_Obj* const* objv)
   return status;
 }
 
+static KeySym
+KeycodeToKeysym(Display* display, KeyCode keycode, int index)
+{
+  int keysyms_per_keycode_return;
+  return *XGetKeyboardMapping(display, keycode, 1, &keysyms_per_keycode_return);
+}
+
 #ifdef GNOME_SUPPORT
 
 # include <string.h>
@@ -106,12 +148,12 @@ static Tk_Window
 GetWmFrameChild(Tk_Window tkwin) {
   if (Tk_PathName(tkwin) == NULL) {
     Window    xroot;
-    Window    xwmwin;
+    Window    parent;
     Window*   childs;
     unsigned  nchilds;
 
     if (XQueryTree(Tk_Display(tkwin), Tk_WindowId(tkwin),
-                   &xroot, &xwmwin, &childs, &nchilds) && childs) {
+                   &xroot, &parent, &childs, &nchilds) && childs) {
       /* This is GNOME. We have to use the child window. */
       if (nchilds == 1) {
         tkwin = Tk_IdToWindow(Tk_Display(tkwin), childs[0]);
@@ -145,9 +187,7 @@ CoordsToWindow(int rootX, int rootY, Tk_Window tkwin) {
   int baseX, baseY;
   int childX, childY;
 
-  tkwin = GetWmFrameChild(tkwin);
-
-  if (Tk_PathName(tkwin) == NULL)
+  if (tkwin == NULL || Tk_PathName(tkwin) == NULL)
     return NULL; /* something was going wrong */
 
   Tk_GetRootCoords(tkwin, &childX, &childY);
@@ -156,6 +196,9 @@ CoordsToWindow(int rootX, int rootY, Tk_Window tkwin) {
   mouse_tkwin = tkwin;
 
   while (tkwin != NULL) {
+    int newBaseX = baseX;
+    int newBaseY = baseY;
+
 #ifdef USE_TKINT_H
     TkWindow* winPtr = ((TkWindow*)tkwin)->childList;
     tkwin = NULL;
@@ -177,23 +220,24 @@ CoordsToWindow(int rootX, int rootY, Tk_Window tkwin) {
                 && rootY < childY + height) {
               tkwin = child;
               mouse_tkwin = child;
-              baseX = rootX - childX;
-              baseY = rootY - childY;
+              newBaseX = rootX - childX;
+              newBaseY = rootY - childY;
               break;
             }
           } else {
             int x = Tk_X(child);
             int y = Tk_Y(child);
 
-          	if (   x <= baseX
+            if (   x <= baseX
                 && y <= baseY
                 && baseX < x + width
                 && baseY < y + height) {
               tkwin = child;
               mouse_tkwin = child;
-              baseX -= x;
-              baseY -= y;
-              break;
+              newBaseX = baseX - x;
+              newBaseY = baseY - y;
+              if (Tk_TopWinHierarchy(child))
+                break;
             }
           }
         }
@@ -237,9 +281,9 @@ CoordsToWindow(int rootX, int rootY, Tk_Window tkwin) {
                   && rootY < childY + height) {
                 tkwin = child;
                 mouse_tkwin = child;
-                baseX = rootX - childX;
-                baseY = rootY - childY;
-					 break;
+                newBaseX = rootX - childX;
+                newBaseY = rootY - childY;
+                break;
               }
             } else {
               int x = Tk_X(child);
@@ -251,9 +295,10 @@ CoordsToWindow(int rootX, int rootY, Tk_Window tkwin) {
                   && baseY < y + height) {
                 tkwin = child;
                 mouse_tkwin = child;
-                baseX -= x;
-                baseY -= y;
-                break;
+                newBaseX = baseX - x;
+                newBaseY = baseY - y;
+                if (Tk_TopWinHierarchy(child))
+                  break;
               }
             }
           }
@@ -263,46 +308,102 @@ CoordsToWindow(int rootX, int rootY, Tk_Window tkwin) {
 
     Tcl_DecrRefCount(result);
 #endif
+
+    baseX = newBaseX;
+    baseY = newBaseY;
   }
 
   return mouse_tkwin;
 }
 
-static void
-SetWmFrameAware(Tk_Window path) {
+static Window
+GetWmFrame (Tk_Window path) {
   Tk_Window toplevel = path;
   Display*  display  = Tk_Display(path);
   Window    xroot;
-  Window    xwmwin;
+  Window    wmFrame;
   Window*   childs;
   unsigned  nchilds;
 
   while (!Tk_IsTopLevel(toplevel)) {
     toplevel = Tk_Parent(toplevel);
     if (!toplevel)
-      return;
+      return None;
   }
 
   if (!Tk_IsMapped(toplevel)) {
     /* What a pitty, no window manager frame exists. */
-    return;
+    return None;
   }
 
   if (XQueryTree(display, Tk_WindowId(toplevel),
-                 &xroot, &xwmwin, &childs, &nchilds)) {
-    if (xwmwin != None &&
-        xwmwin != RootWindow(display, Tk_ScreenNumber(path))) {
-      Atom version = XDND_VERSION;
-      /* Set XdndAware to window manager frame, otherwise GNOME will not work. */
-      XChangeProperty(Tk_Display(toplevel), xwmwin,
-                      Tk_InternAtom(path, "XdndAware"),
-                      XA_ATOM, 32, PropModeReplace,
-                      (unsigned char *) &version, 1);
+                 &xroot, &wmFrame, &childs, &nchilds)) {
+    if (wmFrame == xroot) {
+      wmFrame = None;
     }
     if (childs)
       XFree(childs);
   }
+
+  return wmFrame;
 }
+
+static void
+ChangeAwarenessProperty(Tk_Window tkwin, Window win) {
+  Atom version = XDND_VERSION;
+
+  XChangeProperty(Tk_Display(tkwin), win,
+                  Tk_InternAtom(tkwin, "XdndAware"),
+                  XA_ATOM, 32, PropModeReplace,
+                  (unsigned char *) &version, 1);
+}
+
+static Window
+SetWmFrameAware(Tk_Window path) {
+  Window wmFrame = GetWmFrame(path);
+
+  if (wmFrame != None) {
+    /* Set XdndAware to window manager frame, otherwise GNOME will not work.*/
+    ChangeAwarenessProperty(path, wmFrame);
+  }
+
+  return wmFrame;
+}
+
+static int
+IsXdndAware(Tk_Window tkwin) {
+  int f;
+  unsigned long n, a;
+  unsigned char* data;
+  Atom actual = None;
+  XGetWindowProperty(Tk_Display(tkwin),
+                     Tk_WindowId(tkwin),
+                     Tk_InternAtom(tkwin, "XdndAware"),
+                     0, 0,
+                     False,
+                     AnyPropertyType,
+                     &actual,
+                     &f, &n, &a, &data);
+  if (data) XFree(data);
+  return actual != None;
+}
+
+#endif
+
+#ifdef SUPPORT_EMBEDDED_TOPLEVEL
+
+#if 0
+static void
+SetPossiblyWmFrameUnaware(Tk_Window toplevel) {
+  Window wmFrame = GetWmFrame(toplevel);
+
+  if (wmFrame != None && !IsXdndAware(toplevel)) {
+    /* XXX we have to check all sub-windows, whether all are unaware */
+    XDeleteProperty(Tk_Display(toplevel), wmFrame,
+                    Tk_InternAtom(toplevel, "XdndAware"));
+  }
+}
+#endif
 
 #endif
 
@@ -361,26 +462,6 @@ Window TkDND_GetVirtualRootWindowOfScreen(Tk_Window tkwin) {
 }; /* TkDND_GetVirtualRootWindowOfScreen */
 #endif
 
-Tk_Window TkDND_GetToplevelFromWrapper(Tk_Window tkwin) {
-#if 0
-  Window root_return, parent, *children_return = 0;
-  unsigned int nchildren_return;
-  Tk_Window toplevel = NULL;
-  if (tkwin == NULL || Tk_IsTopLevel(tkwin))
-    return tkwin;
-  XQueryTree(Tk_Display(tkwin), Tk_WindowId(tkwin),
-           &root_return, &parent,
-           &children_return, &nchildren_return);
-  if (nchildren_return == 1) {
-    toplevel = Tk_IdToWindow(Tk_Display(tkwin), children_return[0]);
-  }
-  if (children_return) XFree(children_return);
-  return toplevel;
-#else
-  return tkwin;
-#endif
-}
-
 void TkDND_Dict_PutLong(Tcl_Interp* interp, Tcl_Obj* dict, char const* key, long long value) {
   Tcl_DictObjPut(interp, dict, Tcl_NewStringObj(key, -1), Tcl_NewWideIntObj(value));
 }
@@ -393,31 +474,89 @@ void TkDND_Dict_Put(Tcl_Interp* interp, Tcl_Obj* dict, char const* key, char con
   Tcl_DictObjPut(interp, dict, Tcl_NewStringObj(key, -1), Tcl_NewStringObj(value, -1));
 }
 
+int TkDND_RegisterWrapperObjCmd(ClientData clientData, Tcl_Interp *interp,
+                              int objc, Tcl_Obj *CONST objv[]) {
+#ifdef SUPPORT_EMBEDDED_TOPLEVEL
+  Tk_Window tkwin;
+  if (objc != 3) {
+    Tcl_WrongNumArgs(interp, 1, objv, "path");
+    return TCL_ERROR;
+  }
+  tkwin = TkDND_TkWin(interp, objv[1]);
+  if (!Tk_IsTopLevel(tkwin)) {
+    return TCL_ERROR;
+  }
+  if (wrapperList.size == wrapperList.capacity) {
+    Wrapper* targets = wrapperList.targets;
+    wrapperList.capacity = wrapperList.capacity ? 2*wrapperList.capacity : 1;
+    wrapperList.targets = malloc(wrapperList.capacity*sizeof(Wrapper));
+    if (targets) {
+      memcpy(wrapperList.targets, targets, wrapperList.size*sizeof(Wrapper));
+      free(targets);
+    }
+  }
+  {
+    Wrapper* entry = &wrapperList.targets[wrapperList.size++];
+
+    entry->win = SetWmFrameAware(tkwin);
+    if (*Tcl_GetString(objv[2])) {
+      entry->tkwin = TkDND_TkWin(interp, objv[2]);
+    } else {
+      entry->tkwin = tkwin;
+    }
+
+    /* In newer versions of GTK something has changed. It seems that now it is
+     * required that the top level window has to be aware, too. It's not anymore
+     * sufficient that the window manager frame is aware.
+     */
+    ChangeAwarenessProperty(tkwin, Tk_WindowId(tkwin));
+  }
+#endif
+  return TCL_OK;
+}
+
+#if 0
+int TkDND_UnregisterWrapperObjCmd(ClientData clientData, Tcl_Interp *interp,
+                              int objc, Tcl_Obj *CONST objv[]) {
+#ifdef SUPPORT_EMBEDDED_TOPLEVEL
+  Tk_Window tkwin;
+  unsigned i;
+  if (objc != 2) {
+    Tcl_WrongNumArgs(interp, 1, objv, "path");
+    return TCL_ERROR;
+  }
+  Window wmFrame = GetWmFrame(TkDND_TkWin(interp, objv[1]));
+  for (i = 0; i < wrapperList.size; ++i) {
+    if (wrapperList.targets[i].win == wmFrame) {
+      memcpy(wrapperList.targets + i*sizeof(Wrapper),
+             wrapperList.targets + (i + 1)*sizeof(Wrapper),
+             (wrapperList.size - i - 1)*sizeof(Wrapper));
+      wrapperList.size -= 1;
+      SetPossiblyWmFrameUnaware(tkwin, wmFrame);
+    }
+  }
+#endif
+  return TCL_OK;
+}
+#endif
+
 int TkDND_RegisterTypesObjCmd(ClientData clientData, Tcl_Interp *interp,
                               int objc, Tcl_Obj *CONST objv[]) {
 
-  Atom version       = XDND_VERSION;
+  Tk_Window path;
 
   if (objc != 4) {
     Tcl_WrongNumArgs(interp, 1, objv, "path toplevel types-list");
     return TCL_ERROR;
   }
 
-  Tk_Window path     = TkDND_TkWin(objv[1]);
+  path = TkDND_TkWin(interp, objv[1]);
 
   if (!path)
     return TCL_ERROR;
 
-  /*
-   * We must make the toplevel that holds this widget XDND aware. This means
-   * that we have to set the XdndAware property on our toplevel.
-   */
   Tk_MakeWindowExist(path);
-
-  XChangeProperty(Tk_Display(path), Tk_WindowId(path),
-                  Tk_InternAtom(path, "XdndAware"),
-                  XA_ATOM, 32, PropModeReplace,
-                  (unsigned char *) &version, 1);
+  ChangeAwarenessProperty(path, Tk_WindowId(path));
 
 #ifdef GNOME_SUPPORT
   /* For GNOME support we have to set the awareness to the window manager
@@ -429,18 +568,14 @@ int TkDND_RegisterTypesObjCmd(ClientData clientData, Tcl_Interp *interp,
    * we have to live with this. Furthermore GNOME's decision is causing much
    * superfluous X traffic. GNOME's decision for the window manager frame,
    * which is not belonging to our own process, is nonsense.
-   *
-   * Furthermore this behaviour is not working if the target top level window
-   * is docked into another another top level window. I don't know how to tell
-   * GNOME that this docked window is aware.
-  */
+   */
   SetWmFrameAware(path);
 #endif
 
   return TCL_OK;
 } /* TkDND_RegisterTypesObjCmd */
 
-int TkDND_HandleXdndEnter(Tk_Window tkwin, XClientMessageEvent *cm) {
+int TkDND_HandleXdndEnter(Tk_Window tkwin, Tk_Window target, XClientMessageEvent *cm) {
   Tcl_Interp *interp = Tk_Interp(tkwin);
   Atom *typelist;
   const long *l = cm->data.l;
@@ -463,7 +598,7 @@ int TkDND_HandleXdndEnter(Tk_Window tkwin, XClientMessageEvent *cm) {
     unsigned char *data;
     XGetWindowProperty(cm->display, drag_source,
                        Tk_InternAtom(tkwin, "XdndTypeList"), 0,
-                       LONG_MAX, False, XA_ATOM, &actualType, &actualFormat,
+                       4096, False, XA_ATOM, &actualType, &actualFormat,
                        &itemCount, &remainingBytes, &data);
     typelist = (Atom *) Tcl_Alloc(sizeof(Atom)*(itemCount+1));
     if (typelist == NULL)
@@ -482,7 +617,7 @@ int TkDND_HandleXdndEnter(Tk_Window tkwin, XClientMessageEvent *cm) {
   }
   /* We have all the information we need. Its time to pass it at the Tcl level.*/
   objv[0] = Tcl_NewStringObj("tkdnd::xdnd::_HandleXdndEnter", -1);
-  objv[1] = Tcl_NewStringObj(Tk_PathName(TkDND_GetToplevelFromWrapper(tkwin)), -1);
+  objv[1] = Tcl_NewStringObj(Tk_PathName(target ? target : tkwin), -1);
   objv[2] = Tcl_NewLongObj(drag_source);
   objv[3] = Tcl_NewListObj(0, NULL);
   for (i=0; typelist[i] != None; ++i) {
@@ -494,16 +629,15 @@ int TkDND_HandleXdndEnter(Tk_Window tkwin, XClientMessageEvent *cm) {
   return True;
 } /* TkDND_HandleXdndEnter */
 
-int TkDND_HandleXdndPosition(Tk_Window tkwin, XClientMessageEvent *cm) {
+int TkDND_HandleXdndPosition(Tk_Window tkwin, Tk_Window target, XClientMessageEvent *cm) {
   Tcl_Interp *interp = Tk_Interp(tkwin);
-  Tk_Window mouse_tkwin = NULL;
   Tcl_Obj* result;
   Tcl_Obj* objv[5];
   const unsigned long *l = (const unsigned long *) cm->data.l;
   int rootX, rootY, index, status;
   XClientMessageEvent response;
   int width = 1, height = 1;
-  static char *DropActions[] = {
+  static const char *DropActions[] = {
     "copy", "move", "link", "ask",  "private", "refuse_drop", "default",
     (char *) NULL
   };
@@ -518,32 +652,35 @@ int TkDND_HandleXdndPosition(Tk_Window tkwin, XClientMessageEvent *cm) {
   rootX = (l[2] & 0xffff0000) >> 16;
   rootY =  l[2] & 0x0000ffff;
 
+  if (target == NULL) {
 #ifdef GNOME_SUPPORT
-  if (Tk_PathName(tkwin) == NULL) {
-    /* The GNOME shape is confusing Tk_CoordsToWindow(), because this shape has
-     * the root window as parent. What the hell is GNOME doing? */
-    mouse_tkwin = CoordsToWindow(rootX, rootY, tkwin);
-  }
+    if (Tk_PathName(tkwin) == NULL) {
+      /* The GNOME shape is confusing Tk_CoordsToWindow(), because this shape has
+       * the root window as parent. What the hell is GNOME doing? */
+      target = CoordsToWindow(rootX, rootY, GetWmFrameChild(tkwin));
+    }
 #endif
-  if (mouse_tkwin == NULL) {
-    mouse_tkwin = Tk_CoordsToWindow(rootX, rootY, tkwin);
-    if (mouse_tkwin == NULL) {
-      int dx, dy;
-      Tk_GetRootCoords(tkwin, &dx, &dy);
-      mouse_tkwin = Tk_CoordsToWindow(rootX + dx, rootY + dy, tkwin);
+    if (target == NULL) {
+      target = Tk_CoordsToWindow(rootX, rootY, tkwin);
+      if (target == NULL) {
+        int dx, dy;
+        Tk_GetRootCoords(tkwin, &dx, &dy);
+        target = Tk_CoordsToWindow(rootX + dx, rootY + dy, tkwin);
+      }
     }
   }
   /* Ask the Tk widget whether it will accept the drop... */
   index = refuse_drop;
-  if (mouse_tkwin != NULL) {
+  if (target != NULL) {
     objv[0] = Tcl_NewStringObj("tkdnd::xdnd::_HandleXdndPosition", -1);
-    objv[1] = Tcl_NewStringObj(Tk_PathName(mouse_tkwin), -1);
+    objv[1] = Tcl_NewStringObj(Tk_PathName(target), -1);
     objv[2] = Tcl_NewIntObj(rootX);
     objv[3] = Tcl_NewIntObj(rootY);
     objv[4] = Tcl_NewLongObj(cm->data.l[0]);
     if (TkDND_Eval(Tk_Interp(tkwin), 5, objv) == TCL_OK) {
       /* Get the returned action... */
-      result = Tcl_GetObjResult(interp); Tcl_IncrRefCount(result);
+      result = Tcl_GetObjResult(interp);
+      Tcl_IncrRefCount(result);
       status = Tcl_GetIndexFromObj(interp, result, (const char **) DropActions,
                               "dropactions", 0, &index);
       Tcl_DecrRefCount(result);
@@ -582,7 +719,7 @@ int TkDND_HandleXdndPosition(Tk_Window tkwin, XClientMessageEvent *cm) {
   return True;
 } /* TkDND_HandleXdndPosition */
 
-int TkDND_HandleXdndLeave(Tk_Window tkwin, XClientMessageEvent *cm) {
+int TkDND_HandleXdndLeave(Tk_Window tkwin, Tk_Window target, XClientMessageEvent *cm) {
   Tcl_Interp *interp = Tk_Interp(tkwin);
   Tcl_Obj* objv[1];
   if (interp == NULL)
@@ -592,13 +729,13 @@ int TkDND_HandleXdndLeave(Tk_Window tkwin, XClientMessageEvent *cm) {
   return True;
 } /* TkDND_HandleXdndLeave */
 
-int TkDND_HandleXdndDrop(Tk_Window tkwin, XClientMessageEvent *cm) {
+int TkDND_HandleXdndDrop(Tk_Window tkwin, Tk_Window target, XClientMessageEvent *cm) {
   XClientMessageEvent finished;
   Tcl_Interp *interp = Tk_Interp(tkwin);
   Tcl_Obj* objv[2], *result;
   int status, index;
   Time time = (sizeof(Time) == 8 && cm->data.l[2] < 0) ? (unsigned)cm->data.l[2] : cm->data.l[2];
-  static char *DropActions[] = {
+  static const char *DropActions[] = {
     "copy", "move", "link", "ask",  "private", "refuse_drop", "default",
     (char *) NULL
   };
@@ -632,19 +769,19 @@ int TkDND_HandleXdndDrop(Tk_Window tkwin, XClientMessageEvent *cm) {
     switch ((enum dropactions) index) {
       case ActionDefault:
       case ActionCopy:
-        finished.data.l[1] = 2;
+        finished.data.l[1] = 1;
         finished.data.l[2] = Tk_InternAtom(tkwin, "XdndActionCopy");    break;
       case ActionMove:
-        finished.data.l[1] = 2;
+        finished.data.l[1] = 1;
         finished.data.l[2] = Tk_InternAtom(tkwin, "XdndActionMove");    break;
       case ActionLink:
-        finished.data.l[1] = 2;
+        finished.data.l[1] = 1;
         finished.data.l[2] = Tk_InternAtom(tkwin, "XdndActionLink");    break;
       case ActionAsk:
-        finished.data.l[1] = 2;
+        finished.data.l[1] = 1;
         finished.data.l[2] = Tk_InternAtom(tkwin, "XdndActionAsk");     break;
       case ActionPrivate:
-        finished.data.l[1] = 2;
+        finished.data.l[1] = 1;
         finished.data.l[2] = Tk_InternAtom(tkwin, "XdndActionPrivate"); break;
       case refuse_drop:
         break; // no action
@@ -735,6 +872,90 @@ int TkDND_HandleXdndFinished(Tk_Window tkwin, XClientMessageEvent *cm) {
   return True;
 } /* TkDND_HandleXdndFinished */
 
+#ifdef SUPPORT_EMBEDDED_TOPLEVEL
+
+static Tk_Window
+FindTarget(Tk_Window tkwin, XClientMessageEvent* cm, int state) {
+  static Tk_Window currentTarget = NULL;
+  static Tk_Window currentWrapper = NULL;
+  static XClientMessageEvent enter;
+
+  Window win = Tk_WindowId(tkwin);
+  Tk_Window wrapper = NULL;
+  unsigned i;
+
+  for (i = 0; i < wrapperList.size; ++i) {
+    if (wrapperList.targets[i].win == win) {
+      wrapper = wrapperList.targets[i].tkwin;
+      break;
+    }
+  }
+  if (wrapper == NULL) return NULL;
+
+  switch (state) {
+    case WrapEnter:
+      currentTarget = NULL;
+      currentWrapper = wrapper;
+      memcpy(&enter, cm, sizeof(enter));
+      break;
+
+    case WrapLeave:
+      if (currentTarget) {
+        TkDND_HandleXdndLeave(tkwin, currentTarget, cm);
+        currentTarget = NULL;
+      }
+      currentWrapper = NULL;
+      break;
+
+    case WrapPosition:
+    {
+      if (currentWrapper) {
+        int rootX = (cm->data.l[2] & 0xffff0000) >> 16;
+        int rootY = cm->data.l[2] & 0x0000ffff;
+        // Tk_CoordsToWindow() is not working as expected!
+        Tk_Window w = CoordsToWindow(rootX, rootY, wrapper);
+        while (w && !Tk_IsTopLevel(w) && !IsXdndAware(w)) {
+          w = Tk_Parent(w);
+        }
+        if (w == tkwin) w = NULL;
+        if (currentTarget && !Tk_IsMapped(currentTarget)) {
+          currentTarget = NULL;
+        }
+        if (currentTarget && currentTarget != w) {
+          TkDND_HandleXdndLeave(tkwin, currentTarget, cm);
+          currentTarget = NULL;
+        }
+        if (w != currentTarget) {
+          if (w && IsXdndAware(w)) {
+            currentTarget = w;
+            TkDND_HandleXdndEnter(tkwin, currentTarget, &enter);
+          }
+        }
+      }
+      break;
+    }
+
+    case WrapDrop:
+    {
+      Tk_Window target = currentTarget;
+      currentTarget = NULL;
+      currentWrapper = NULL;
+      return target;
+    }
+  }
+
+  return currentTarget;
+}
+
+#else
+
+static Tk_Window
+FindTarget(Tk_Window tkwin, XClientMessageEvent* cm, int state) {
+  return NULL;
+}
+
+#endif
+
 static int TkDND_XDNDHandler(Tk_Window tkwin, XEvent *xevent) {
   XClientMessageEvent *clientMessage;
   if (xevent->type != ClientMessage)
@@ -742,30 +963,34 @@ static int TkDND_XDNDHandler(Tk_Window tkwin, XEvent *xevent) {
   clientMessage = &xevent->xclient;
 
   if (clientMessage->message_type == Tk_InternAtom(tkwin, "XdndPosition")) {
+    Tk_Window target = FindTarget(tkwin, clientMessage, WrapPosition);
 #ifdef DEBUG_CLIENTMESSAGE_HANDLER
     printf("XDND_HandleClientMessage: Received XdndPosition\n");
 #endif /* DEBUG_CLIENTMESSAGE_HANDLER */
-    return TkDND_HandleXdndPosition(tkwin, clientMessage);
+    return TkDND_HandleXdndPosition(tkwin, target, clientMessage);
   } else if (clientMessage->message_type == Tk_InternAtom(tkwin, "XdndEnter")) {
+    Tk_Window target = FindTarget(tkwin, clientMessage, WrapEnter);
 #ifdef DEBUG_CLIENTMESSAGE_HANDLER
     printf("XDND_HandleClientMessage: Received XdndEnter\n");
 #endif /* DEBUG_CLIENTMESSAGE_HANDLER */
-    return TkDND_HandleXdndEnter(tkwin, clientMessage);
+    return TkDND_HandleXdndEnter(tkwin, target, clientMessage);
   } else if (clientMessage->message_type == Tk_InternAtom(tkwin, "XdndStatus")) {
 #ifdef DEBUG_CLIENTMESSAGE_HANDLER
     printf("XDND_HandleClientMessage: Received XdndStatus\n");
 #endif /* DEBUG_CLIENTMESSAGE_HANDLER */
     return TkDND_HandleXdndStatus(tkwin, clientMessage);
   } else if (clientMessage->message_type == Tk_InternAtom(tkwin, "XdndLeave")) {
+    Tk_Window target = FindTarget(tkwin, clientMessage, WrapLeave);
 #ifdef DEBUG_CLIENTMESSAGE_HANDLER
     printf("XDND_HandleClientMessage: Received XdndLeave\n");
 #endif /* DEBUG_CLIENTMESSAGE_HANDLER */
-    return TkDND_HandleXdndLeave(tkwin, clientMessage);
+    return TkDND_HandleXdndLeave(tkwin, target, clientMessage);
   } else if (clientMessage->message_type == Tk_InternAtom(tkwin, "XdndDrop")) {
+    Tk_Window target = FindTarget(tkwin, clientMessage, WrapDrop);
 #ifdef DEBUG_CLIENTMESSAGE_HANDLER
     printf("XDND_HandleClientMessage: Received XdndDrop\n");
 #endif /* DEBUG_CLIENTMESSAGE_HANDLER */
-    return TkDND_HandleXdndDrop(tkwin, clientMessage);
+    return TkDND_HandleXdndDrop(tkwin, target, clientMessage);
   } else if (clientMessage->message_type == Tk_InternAtom(tkwin, "XdndFinished")) {
 #ifdef DEBUG_CLIENTMESSAGE_HANDLER
     printf("XDND_HandleClientMessage: Received XdndFinished\n");
@@ -775,7 +1000,8 @@ static int TkDND_XDNDHandler(Tk_Window tkwin, XEvent *xevent) {
   return False;
 } /* TkDND_XDNDHandler */
 
-#if 0
+#ifdef USE_CURSORS
+
 int TkDND_SetPointerCursorObjCmd(ClientData clientData, Tcl_Interp *interp,
                             int objc, Tcl_Obj *CONST objv[]) {
   Tk_Window path;
@@ -786,7 +1012,7 @@ int TkDND_SetPointerCursorObjCmd(ClientData clientData, Tcl_Interp *interp,
     return TCL_ERROR;
   }
 
-  path = TkDND_TkWin(objv[1]);
+  path = TkDND_TkWin(interp, objv[1]);
   if (!path)
     return TCL_ERROR;
   Tk_MakeWindowExist(path);
@@ -807,6 +1033,7 @@ int TkDND_SetPointerCursorObjCmd(ClientData clientData, Tcl_Interp *interp,
   }
   return TCL_OK;
 }; /* TkDND_SetPointerCursorObjCmd */
+
 #endif
 
 void TkDND_AddStateInformation(Tcl_Interp *interp, Tcl_Obj *dict,
@@ -881,8 +1108,8 @@ int TkDND_HandleGenericEvent(ClientData clientData, XEvent *eventPtr) {
       TkDND_AddStateInformation(interp, dict,     eventPtr->xkey.state);
       TkDND_Dict_PutInt(interp, dict,  "keycode", eventPtr->xkey.keycode);
       main_window = Tk_MainWindow(interp);
-      sym = XKeycodeToKeysym(Tk_Display(main_window),
-                             eventPtr->xkey.keycode, 0);
+      sym = KeycodeToKeysym(Tk_Display(main_window),
+                            eventPtr->xkey.keycode, 0);
       TkDND_Dict_Put(interp, dict,     "keysym",   XKeysymToString(sym));
       break;
     case KeyRelease:
@@ -895,8 +1122,8 @@ int TkDND_HandleGenericEvent(ClientData clientData, XEvent *eventPtr) {
       TkDND_AddStateInformation(interp, dict,     eventPtr->xkey.state);
       TkDND_Dict_PutInt(interp, dict,  "keycode", eventPtr->xkey.keycode);
       main_window = Tk_MainWindow(interp);
-      sym = XKeycodeToKeysym(Tk_Display(main_window),
-                             eventPtr->xkey.keycode, 0);
+      sym = KeycodeToKeysym(Tk_Display(main_window),
+                            eventPtr->xkey.keycode, 0);
       TkDND_Dict_Put(interp, dict,     "keysym",   XKeysymToString(sym));
       break;
     case EnterNotify:
@@ -964,7 +1191,7 @@ int TkDND_UnregisterGenericEventHandlerObjCmd(ClientData clientData,
 }; /* TkDND_UnegisterGenericEventHandlerObjCmd */
 
 int TkDND_AnnounceTypeListObjCmd(ClientData clientData, Tcl_Interp *interp,
-                            int objc, Tcl_Obj *CONST objv[]) {
+                         int objc, Tcl_Obj *CONST objv[]) {
   Tk_Window path;
   Tcl_Obj **type;
   int status, i, types;
@@ -974,7 +1201,7 @@ int TkDND_AnnounceTypeListObjCmd(ClientData clientData, Tcl_Interp *interp,
     Tcl_WrongNumArgs(interp, 1, objv, "path types-list");
     return TCL_ERROR;
   }
-  path = TkDND_TkWin(objv[1]);
+  path = TkDND_TkWin(interp, objv[1]);
   if (!path)
     return TCL_ERROR;
   status = Tcl_ListObjGetElements(interp, objv[2], &types, &type);
@@ -995,17 +1222,18 @@ int TkDND_AnnounceTypeListObjCmd(ClientData clientData, Tcl_Interp *interp,
 }; /* TkDND_AnnounceTypeListObjCmd */
 
 int TkDND_AnnounceActionListObjCmd(ClientData clientData, Tcl_Interp *interp,
-                            int objc, Tcl_Obj *CONST objv[]) {
+                         int objc, Tcl_Obj *CONST objv[]) {
   Tk_Window path;
   Tcl_Obj **action, **description;
-  int status, i, actions, descriptions;
+  int status, i, k, actions, descriptions;
+  int count = 0;
   Atom actionlist[10], descriptionlist[10];
 
   if (objc != 4) {
     Tcl_WrongNumArgs(interp, 1, objv, "path actions-list descriptions-list");
     return TCL_ERROR;
   }
-  path = TkDND_TkWin(objv[1]);
+  path = TkDND_TkWin(interp, objv[1]);
   if (!path)
     return TCL_ERROR;
   status = Tcl_ListObjGetElements(interp, objv[2], &actions, &action);
@@ -1025,19 +1253,76 @@ int TkDND_AnnounceActionListObjCmd(ClientData clientData, Tcl_Interp *interp,
   }
 
   for (i = 0; i < actions; ++i) {
-    actionlist[i]      = Tk_InternAtom(path, Tcl_GetString(action[i]));
-    descriptionlist[i] = Tk_InternAtom(path, Tcl_GetString(description[i]));
+    int valid = 0;
+    for (k = 0; k < sizeof(ActionNames)/sizeof(ActionNames[0]); ++k) {
+      if (strcmp(Tcl_GetString(action[i]), ActionNames[k]) == 0) {
+        actionlist[count] = Tk_InternAtom(path, DropActions[k]);
+        valid = 1;
+      }
+    }
+    if (valid) {
+      descriptionlist[count++] = Tk_InternAtom(path, Tcl_GetString(description[i]));
+    }
   }
   XChangeProperty(Tk_Display(path), Tk_WindowId(path),
                   Tk_InternAtom(path, "XdndActionList"),
                   XA_ATOM, 32, PropModeReplace,
-                  (unsigned char*) actionlist, actions);
+                  (unsigned char*) actionlist, count);
   XChangeProperty(Tk_Display(path), Tk_WindowId(path),
                   Tk_InternAtom(path, "XdndActionDescription"),
                   XA_ATOM, 32, PropModeReplace,
-                  (unsigned char*) descriptionlist, descriptions);
+                  (unsigned char*) descriptionlist, count);
   return TCL_OK;
 }; /* TkDND_AnnounceActionListObjCmd */
+
+int TkDND_FetchActionListObjCmd(ClientData clientData, Tcl_Interp *interp,
+                         int objc, Tcl_Obj *CONST objv[]) {
+  Tk_Window tkwin;
+  Window source;
+  Atom actual_type;
+  int actual_format;
+  unsigned long nitems, bytes_after;
+  unsigned char* data = NULL;
+  Tcl_Obj* actionlist[5];
+  int count = 0;
+
+  if (objc != 2) {
+    Tcl_WrongNumArgs(interp, 1, objv, "path");
+    return TCL_ERROR;
+  }
+
+  tkwin = Tk_MainWindow(interp);
+  source = atoi(Tcl_GetString(objv[1]));
+
+  int result = XGetWindowProperty(Tk_Display(tkwin), source,
+                                  Tk_InternAtom(tkwin, "XdndActionList"),
+                                  0, 4096, False, XA_ATOM, &actual_type,
+                                  &actual_format, &nitems, &bytes_after,
+                                  &data);
+
+  if (result == Success && actual_type != None && data && actual_format == 32) {
+    Atom atoms[5];
+    int i, k;
+
+    memset(atoms, 0, sizeof(atoms));
+
+    for (i = 0; i < nitems; ++i) {
+      Atom action = ((Atom*)data)[i];
+      for (k = 0; k < sizeof(DropActions)/sizeof(DropActions[0]); ++k) {
+        if (atoms[k] == (Atom)0) {
+          atoms[k] = Tk_InternAtom(tkwin, DropActions[k]);
+        }
+        if (action == atoms[k]) {
+          actionlist[count++] = Tcl_NewStringObj(ActionNames[k], -1);
+        }
+      }
+    }
+  }
+
+  if (data) XFree(data);
+  Tcl_SetObjResult(interp, Tcl_NewListObj(count, actionlist));
+  return TCL_OK;
+}
 
 int TkDND_FindDropTargetWindowObjCmd(ClientData clientData,
                          Tcl_Interp *interp, int objc, Tcl_Obj *CONST objv[]) {
@@ -1057,7 +1342,7 @@ int TkDND_FindDropTargetWindowObjCmd(ClientData clientData,
     Tcl_WrongNumArgs(interp, 1, objv, "path rootx rooty");
     return TCL_ERROR;
   }
-  path = TkDND_TkWin(objv[1]);
+  path = TkDND_TkWin(interp, objv[1]);
   if (!path)
     return TCL_ERROR;
   if (Tcl_GetIntFromObj(interp, objv[2], &rootx) != TCL_OK)
@@ -1112,7 +1397,7 @@ int TkDND_FindDropTargetProxyObjCmd(ClientData clientData,
     return TCL_ERROR;
   }
 
-  path = TkDND_TkWin(objv[1]);
+  path = TkDND_TkWin(interp, objv[1]);
   if (!path)
     return TCL_ERROR;
   if (Tcl_GetLongFromObj(interp, objv[2], (long *) &target) != TCL_OK) {
@@ -1158,7 +1443,7 @@ int TkDND_SendXdndEnterObjCmd(ClientData clientData,
     return TCL_ERROR;
   }
 
-  source = TkDND_TkWin(objv[1]);
+  source = TkDND_TkWin(interp, objv[1]);
   if (!source)
     return TCL_ERROR;
   if (Tcl_GetLongFromObj(interp, objv[2], (long *) &target) != TCL_OK) {
@@ -1205,7 +1490,7 @@ int TkDND_SendXdndEnterObjCmd(ClientData clientData,
 
 int TkDND_SendXdndPositionObjCmd(ClientData clientData,
                          Tcl_Interp *interp, int objc, Tcl_Obj *CONST objv[]) {
-  static char *DropActions[] = {
+  static const char *DropActions[] = {
     "copy", "move", "link", "ask",  "private", "default",
     (char *) NULL
   };
@@ -1224,7 +1509,7 @@ int TkDND_SendXdndPositionObjCmd(ClientData clientData,
     return TCL_ERROR;
   }
 
-  source = TkDND_TkWin(objv[1]);
+  source = TkDND_TkWin(interp, objv[1]);
   if (!source)
     return TCL_ERROR;
   if (Tcl_GetLongFromObj(interp, objv[2], (long *) &target) != TCL_OK) {
@@ -1282,7 +1567,7 @@ int TkDND_SendXdndLeaveObjCmd(ClientData clientData,
     return TCL_ERROR;
   }
 
-  source = TkDND_TkWin(objv[1]);
+  source = TkDND_TkWin(interp, objv[1]);
   if (!source)
     return TCL_ERROR;
   if (Tcl_GetLongFromObj(interp, objv[2], (long *) &target) != TCL_OK) {
@@ -1313,7 +1598,7 @@ int TkDND_SendXdndDropObjCmd(ClientData clientData,
     return TCL_ERROR;
   }
 
-  source = TkDND_TkWin(objv[1]);
+  source = TkDND_TkWin(interp, objv[1]);
   if (!source)
     return TCL_ERROR;
   if (Tcl_GetLongFromObj(interp, objv[2], (long *) &target) != TCL_OK)
@@ -1350,7 +1635,7 @@ int TkDND_XChangePropertyObjCmd(ClientData clientData,
     return TCL_ERROR;
   }
 
-  source = TkDND_TkWin(objv[1]);
+  source = TkDND_TkWin(interp, objv[1]);
   if (!source)
     return TCL_ERROR;
   if (Tcl_GetLongFromObj(interp, objv[2], (long *) &target) != TCL_OK) {
@@ -1472,12 +1757,39 @@ int Tkdnd_Init(Tcl_Interp *interp) {
     return TCL_ERROR;
   }
 
-#if 0
+#ifdef SUPPORT_EMBEDDED_TOPLEVEL
+
+  wrapperList.targets = NULL;
+  wrapperList.capacity = 0;
+  wrapperList.size = 0;
+
+#endif
+
+  /* Register a wrapper for embedded toplevel windows,
+   * required for GNOME support.
+   */
+  if (Tcl_CreateObjCommand(interp, "_register_wrapper",
+           (Tcl_ObjCmdProc*) TkDND_RegisterWrapperObjCmd,
+           (ClientData) NULL, (Tcl_CmdDeleteProc *) NULL) == NULL) {
+    return TCL_ERROR;
+  }
+
+# if 0
+  if (Tcl_CreateObjCommand(interp, "_unregister_wrapper",
+           (Tcl_ObjCmdProc*) TkDND_UnregisterWrapperObjCmd,
+           (ClientData) NULL, (Tcl_CmdDeleteProc *) NULL) == NULL) {
+    return TCL_ERROR;
+  }
+# endif
+
+#ifdef USE_CURSORS
+
   if (Tcl_CreateObjCommand(interp, "_set_pointer_cursor",
            (Tcl_ObjCmdProc*) TkDND_SetPointerCursorObjCmd,
            (ClientData) NULL, (Tcl_CmdDeleteProc *) NULL) == NULL) {
     return TCL_ERROR;
   }
+
 #endif
 
   if (Tcl_CreateObjCommand(interp, "_register_generic_event_handler",
@@ -1500,6 +1812,12 @@ int Tkdnd_Init(Tcl_Interp *interp) {
 
   if (Tcl_CreateObjCommand(interp, "_announce_action_list",
            (Tcl_ObjCmdProc*) TkDND_AnnounceActionListObjCmd,
+           (ClientData) NULL, (Tcl_CmdDeleteProc *) NULL) == NULL) {
+    return TCL_ERROR;
+  }
+
+  if (Tcl_CreateObjCommand(interp, "_fetch_action_list",
+           (Tcl_ObjCmdProc*) TkDND_FetchActionListObjCmd,
            (ClientData) NULL, (Tcl_CmdDeleteProc *) NULL) == NULL) {
     return TCL_ERROR;
   }
@@ -1549,7 +1867,7 @@ int Tkdnd_Init(Tcl_Interp *interp) {
   /* Finally, register the XDND Handler... */
   Tk_CreateClientMessageHandler(&TkDND_XDNDHandler);
 
-#if 0
+#ifdef USE_CURSORS
   TkDND_InitialiseCursors(interp);
 #endif
   Tcl_PkgProvide(interp, PACKAGE_NAME, PACKAGE_VERSION);

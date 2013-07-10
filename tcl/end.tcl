@@ -1978,10 +1978,6 @@ wm protocol $dot_w WM_DELETE_WINDOW { ::file::Exit }
 # wm focusmodel . active
 # Trying to grab focus from the windowmanager after a drop event, but this doesnt work
 
-### Must be done after the toplevel window has been mapped
-after idle [namespace code {RegisterDropEvents .main.gameInfoFrame}]
-after idle [namespace code {RegisterDropEvents .main.gameInfo}]
-
 if { $::docking::USE_DOCKING } {
   setTitle .main [ ::tr "Board" ]
   # restore geometry
@@ -1998,8 +1994,25 @@ if { $::docking::USE_DOCKING } {
   }
 
   standardShortcuts TNotebook
+
+  if {[tk windowingsystem] eq "x11"} {
+    ### Must be done after the toplevel window has been mapped.
+    bind . <Map> {
+      after idle { RegisterDropEvents .main.gameInfoFrame }
+      after idle { RegisterDropEvents .main.gameInfo }
+      ### This wrapper is required for GNOME support. It supplies
+      ### a wrapper window for the dnd handling, because the GNOME
+      ### handling will be confused by embedded top level windows.
+      after idle { ::tkdnd::xdnd::registerWrapper . }
+      bind . <Map> {#}
+    }
+  }
 } else {
   setWinLocation $dot_w
+
+  ### Must be done after the toplevel window has been mapped.
+  after idle { RegisterDropEvents .main.gameInfoFrame }
+  after idle { RegisterDropEvents .main.gameInfo }
 }
 
 wm deiconify $dot_w

@@ -35,11 +35,13 @@
 # NO OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR
 # MODIFICATIONS.
 
+# ======================================================================
 # Copyright: (C) 2011-2013 Gregor Cramer
 # Modified by Gregor Cramer to make it useful.
+# ======================================================================
 
 package require Tk
-package require tkDND 2.3
+package require tkDND 3.0
 
 namespace eval tkdnd {
   variable _topw ".drag"

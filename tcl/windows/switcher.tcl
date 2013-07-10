@@ -942,7 +942,8 @@ proc ::windows::switcher::Open {} {
   }
 
   ::windows::switcher::Refresh
-  after idle [namespace code "RegisterDropEvents $w.c"]
+
+  after idle [list RegisterDropEvents $w.c]
 }
 
 proc ::windows::switcher::Refresh {} {

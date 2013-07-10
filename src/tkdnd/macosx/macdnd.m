@@ -19,6 +19,10 @@
 #import <tkMacOSXInt.h>
 #import <Cocoa/Cocoa.h>
 
+#ifndef PACKAGE_VERSION
+# define PACKAGE_VERSION "3.0"
+#endif
+
 #define TkDND_Tag    1234
 
 #define TkDND_TkWin(x)                                                  \

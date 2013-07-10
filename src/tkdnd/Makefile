@@ -7,7 +7,7 @@ EXTRA_CFLAGS  	= -pipe -Wno-format-security #-fno-stack-protector
 .PRECIOUS:
 
 INCLUDE	= $(TCL_INCLUDE) $(TK_INCLUDE) $(X_INCLUDE) -I../tk$(TCL_VERSION)
-CFLAGS	+= $(OPTIMIZE) $(C_DEBUG) $(PROFILING)
+CFLAGS	+= $(OPTIMIZE) $(C_DEBUG) $(PROFILING) -Wall
 
 SRC	= unix/TkDND_XDND.c
 OBJS	= $(SRC:.c=.o)
@@ -25,6 +25,6 @@ depend:
 #	fi
 
 .c.o:
-	@echo "Compiling `awk 'BEGIN { printf "%-30s", "$<" }'`  [$(CFLAGS:  = )]"
-	@$(CC) -c $(CFLAGS) $(EXTRA_CFLAGS) $(INCLUDE) $<
+#	@echo "Compiling `awk 'BEGIN { printf "%-30s", "$<" }'`  [$(CFLAGS:  = )]"
+	$(CC) -c $(CFLAGS) $(EXTRA_CFLAGS) $(INCLUDE) $<
 

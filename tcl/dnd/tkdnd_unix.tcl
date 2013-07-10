@@ -1,18 +1,3 @@
-# ======================================================================
-# Author : $Author$
-# Version: $Revision: 861 $
-# Date   : $Date: 2013-06-27 21:31:01 +0200 (Thu, 27 Jun 2013) $
-# Url    : $URL$
-# ======================================================================
-
-# ======================================================================
-# Copyright: (C) 2011-2013 Gregor Cramer
-# ======================================================================
-
-# ======================================================================
-# Modified by Gregor Cramer to make it useful.
-# ======================================================================
-
 #
 # tkdnd_unix.tcl --
 # 
@@ -49,7 +34,11 @@
 # IS PROVIDED ON AN "AS IS" BASIS, AND THE AUTHORS AND DISTRIBUTORS HAVE
 # NO OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS, OR
 # MODIFICATIONS.
-#
+
+# ======================================================================
+# Copyright: (C) 2011-2013 Gregor Cramer
+# Modified by Gregor Cramer to make it useful.
+# ======================================================================
 
 namespace eval tkdnd {
 namespace eval xdnd {
@@ -57,6 +46,7 @@ namespace eval xdnd {
   variable _typelist {}
   variable _codelist {}
   variable _actionlist {}
+  variable _fetch_action_list 0
   variable _pressedkeys {}
   variable _action {}
   variable _common_drag_source_types {}
@@ -70,6 +60,8 @@ namespace eval xdnd {
   proc debug {msg} {
     puts $msg
   };# debug
+
+  proc registerWrapper {w {alias ""}} { return [_register_wrapper $w $alias] }
 };# namespace xdnd
 
 # ----------------------------------------------------------------------------
@@ -85,6 +77,7 @@ proc xdnd::_HandleXdndEnter { path drag_source typelist } {
   variable _drop_target;              set _drop_target {}
   variable _actionlist;               set _actionlist  \
                                            {copy move link ask private}
+  variable _fetch_action_list;        set _fetch_action_list 1
   # debug "\n==============================================================="
   # debug "xdnd::_HandleXdndEnter: path=$path, drag_source=$drag_source,\
   #        typelist=$typelist"
@@ -99,6 +92,7 @@ proc xdnd::_HandleXdndPosition { drop_target rootX rootY drag_source } {
   variable _types
   variable _typelist
   variable _actionlist
+  variable _fetch_action_list
   variable _pressedkeys
   variable _action
   variable _common_drag_source_types
@@ -116,6 +110,12 @@ proc xdnd::_HandleXdndPosition { drop_target rootX rootY drag_source } {
   if {$drag_source ne "" && $drag_source ne $_drag_source} {
     # debug "XDND position event from unexpected source: $_drag_source != $drag_source"
     return refuse_drop
+  }
+
+  if {$_fetch_action_list} {
+    set actions [_fetch_action_list $drag_source]
+    if {[llength $actions]} { set _actionlist $actions }
+    set _fetch_action_list 0
   }
 
   ## Does the new drop target support any of our new types? 
@@ -223,6 +223,7 @@ proc xdnd::_HandleXdndLeave {  } {
   variable _types
   variable _typelist
   variable _actionlist
+  variable _fetch_action_list
   variable _pressedkeys
   variable _action
   variable _common_drag_source_types
@@ -249,10 +250,10 @@ proc xdnd::_HandleXdndLeave {  } {
       set _action [uplevel \#0 $cmd]
     }
   }
-  lassign {{} {} {} {} {} {} {} {} {}} \
+  lassign {{} {} {} {} {} {} {} {} {} 1} \
     _types _typelist _actionlist _pressedkeys _action \
     _common_drag_source_types _common_drop_target_types \
-    _drag_source _drop_target
+    _drag_source _drop_target _fetch_action_list
 };# xdnd::_HandleXdndLeave
 
 # ----------------------------------------------------------------------------
@@ -262,6 +263,7 @@ proc xdnd::_HandleXdndDrop { time } {
   variable _types
   variable _typelist
   variable _actionlist
+  variable _fetch_action_list
   variable _pressedkeys
   variable _action
   variable _common_drag_source_types
@@ -278,6 +280,13 @@ proc xdnd::_HandleXdndDrop { time } {
     return refuse_drop
   }
   if {![llength $_common_drag_source_types]} {return refuse_drop}
+
+  if {$_fetch_action_list} {
+    set actions [_fetch_action_list $drag_source]
+    if {[llength $actions]} { set _actionlist $actions }
+    set _fetch_action_list 0
+  }
+
   lassign [winfo pointerxy .] rootX rootY
   ## Get the dropped data.
   set data [_GetDroppedData $time]
