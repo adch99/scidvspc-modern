@@ -509,7 +509,8 @@ int TkDND_RegisterWrapperObjCmd(ClientData clientData, Tcl_Interp *interp,
      * required that the top level window has to be aware, too. It's not anymore
      * sufficient that the window manager frame is aware.
      */
-    ChangeAwarenessProperty(tkwin, Tk_WindowId(tkwin));
+    // Latest news is this hack is unneeded
+    // ChangeAwarenessProperty(tkwin, Tk_WindowId(tkwin));
   }
 #endif
   return TCL_OK;

@@ -1174,7 +1174,7 @@ proc ::docking::layout_restore_nb { pw name tabs} {
   # force the selection of first tab
   if {$::windowsOS} {
     # Fixme: windows hack to stop main board getting overwrit by some second tab elsewhere (init only)
-    after 100 "$nb select [ lindex [ $nb tabs] 0 ]"
+    after 200 "$nb select [ lindex [ $nb tabs] 0 ]"
   } else {
     $nb select [ lindex [ $nb tabs] 0 ]
   }

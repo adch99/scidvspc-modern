@@ -895,7 +895,7 @@ proc createToplevel { w } {
          # if [focus] is {}, try to grab it again
 	 focus -force .fdockmain
       }
-      if {$focus != $tl} {
+      if {$focus != $tl && [lindex [wm stackorder .] end] == "."} {
         if {$tl == ".fics"} {
           focus -force .fics.command.entry
         } else {
