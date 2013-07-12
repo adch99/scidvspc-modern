@@ -1,6 +1,6 @@
 default:
 	sgml2html -s 0 -T 2 README.sgml 2>/dev/null
-	cat htdocs/logo >> README.html
+	cat images/sf_logo.txt >> README.html
 all:	default text
 text txt:
 	sgml2rawtxt README
