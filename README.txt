@@ -139,8 +139,10 @@
   browse files
   <https://sourceforge.net/project/showfiles.php?group_id=263836>
 
-  The latest code is available from subversion -  svn checkout
+  The latest code is available from subversion - svn checkout
   http://svn.code.sf.net/p/scidvspc/code/ scidvspc-code
+  or as a tarball https://sourceforge.net/p/scidvspc/code/HEAD/tarball
+  <https://sourceforge.net/p/scidvspc/code/HEAD/tarball>
 
   4.  installation
 
@@ -183,6 +185,7 @@
 
   People with Visual Studio 11 should now be able to compile the project
   fairly easily (see Makefile.vc for more details).
+
   4.0.3.  Mac OS X
 
   The ``ScidvsMac-4.9.2 app'' should include everything you need. Simply
@@ -245,10 +248,12 @@
 
   Release 3.6.26.9 includes a Fics accept/decline offers widget.
 
+
    December 20, 2009
 
   Thanks to Dorothy for making me a Mac DMG package with this release ,
   3.6.26.8.
+
    August 16, 2009
 
   With 3.6.26.6 I've fixed Phalanx's illegal castling. There is also
@@ -310,8 +315,6 @@
         button, then watch the available games as they are announced in
         the console. Enter play [game number] to accept a game
         challenge.
-
-
   There is more information about the Fics and Tactical Game features in
   the Scid Help menus.
 
@@ -510,9 +513,9 @@
 
   o  FICS: 'upload' command for uploading local games to FICS examine
      mode
-
   o  Allow the Name editor to glob '*' for Site, Event and Round fields
      (but not for 'All Games', too dangerous when used by mistake)
+
   o  The material board can display *all* taken pieces
 
   o  Gamelist button rows can be hidden by right-clicking the list, and
@@ -574,6 +577,7 @@
 
 
   o  Drag and Drop file open(s) on Windows and Unix
+
 
   o  Custom background images (jpegs, gifs and pngs)
 
@@ -639,6 +643,7 @@
      Computer Tournament
 
   o  Computer Tournament Book feature
+
 
   o  Dont' kill tournament if engine crashes.
 
@@ -706,11 +711,11 @@
 
   o  FICS: Support loading old/interupted games for analysis (using
      'smoves' command)
-
   o  FICs: Add an Abort button. Other minor fixes.
 
   o  Serious Game overhaul (though still has minor issues) Add pause,
      resume features and mate, game drawn dialogs.
+
   o  Computer Tournament: Add 'first engine only' feature for testing a
      single engine against others.
 
@@ -770,6 +775,7 @@
 
   o  Hungarian, Swedish and Potugese Spanish were broken if Piece
      translation enabled (which was default). Fixed.
+
 
   o  Fix up Tacgame score-isn't-updated bug
 
@@ -836,6 +842,7 @@
   o  Catch a nasty wish8.5.10 bug with the gamelist (Wish-8.5.10 should
      be avoided)
 
+
   o  Remove the broken integer field validation and replace it with
      something that allows backspace to work.
 
@@ -901,12 +908,12 @@
 
   o  FICs console fg and bg colours are now configurable
 
+
   o  Name Editor tidy up and documentation review
 
   o  Player Info: add a 'Refine Filter' result group
 
   o  Typing 'OO' castles (previously only 'OK','OQ')
-
 
   o  Mask Search widget fixes
 
@@ -967,12 +974,12 @@
 
   o  Catch unmatched braces in gamelist values
 
+
   o  Fix 'Paste FEN' castling sanity check
 
   o  Browser previously highlighted Next move instead of Current move
 
   o  Fix scid.eco unicode bug
-
 
   o  Remove 'newlines' from Mask Search results
 
@@ -1105,7 +1112,6 @@
 
   o  An engine can now be run in the Statusbar
 
-
   o  Allow engines to be reordered
 
   o  Simplify the Bestgames Widget : Remove the PGN pane, nice-ify the
@@ -1170,7 +1176,6 @@
   o  Reincluded Merida2 pieces
 
   o  Remove Repertoire editor (same functionality via Tree Masks)
-
 
   o  New Finder rename fucntion
 
@@ -1237,7 +1242,6 @@
      o  Columns now sort in both directions, with arrow depicting
         direction
 
-
      o  Deleting items works better
 
      o  Can be sorted by ELO
@@ -1301,7 +1305,6 @@
 
   o  Add a background colour option that applies to many text widgets,
      including gameinfo, pgn window and help window
-
   o  Restructured the analysis widgets, putting toolbar on top, tiny
      board at bottom, tweaking toolbar icons and reparenting analysis
      died error dialog
@@ -1367,8 +1370,8 @@
 
   o  Comment editor bugfix - unbind left/right from main board
 
-  o  Fix for matsig.cpp overflow (unapplied? , untested)
 
+  o  Fix for matsig.cpp overflow (unapplied? , untested)
 
   o  Key binding for first/last game is now Control+Home/End instead of
      Control+Shift+Up/Down
@@ -1434,8 +1437,6 @@
 
   o  Changed a heap of menus (for example) PGN::File is now PGN::PGN, to
      avoid confusion with the Scid::File menu
-
-
   o  Player Report configuration widget reniced.
 
   o  Menu name and key-bindings changes for PGN and FEN import

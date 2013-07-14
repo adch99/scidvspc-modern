@@ -77,7 +77,10 @@ mac <url url="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.9.2
 
 <url url="https://sourceforge.net/project/showfiles.php?group_id=263836" name="browse files">
 
-<em>The latest code is available from subversion - </em> <bf>svn checkout http://svn.code.sf.net/p/scidvspc/code/ scidvspc-code</bf>
+The latest code is available from subversion - <bf>svn checkout http://svn.code.sf.net/p/scidvspc/code/ scidvspc-code</bf>
+<newline>
+or as a tarball <url url="https://sourceforge.net/p/scidvspc/code/HEAD/tarball" name="https://sourceforge.net/p/scidvspc/code/HEAD/tarball">
+
 
 <sect> installation <p>
 
