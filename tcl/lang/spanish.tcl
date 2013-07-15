@@ -1655,6 +1655,15 @@ translate S DockLeft {Mover a la izquierda}
 translate S DockRight {Mover a la derecha}
 translate S Undock {Ventana flotante}
 translate S ChangeIcon {Cambiar icono}
+
+# Drag & Drop
+translate S CannotOpenUri {No se puede abrir la siguiente URI:}
+translate S InvalidUri {Descartar contenido no es una lista URI válida.}
+translate S UriRejected	{Los siguientes archivos fueron rechazados:}
+translate S UriRejectedDetail {Sólo pueden manejarse los tipos de archivo listados:}
+translate S EmptyUriList {Descartar contenido está vacóo.}
+translate S SelectionOwnerDidntRespond {Tiempo excedido durante la operación: el propietario de la selección no respondió.}
+
 }
 # end of spanish.tcl
 

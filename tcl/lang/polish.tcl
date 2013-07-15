@@ -1627,6 +1627,21 @@ translate P Undock {Undock}
 # ====== TODO To be translated ======
 translate P ChangeIcon {Change icon}
 # ====== TODO To be translated ======
+
+# Drag & Drop
+# ====== TODO To be translated ======
+translate P CannotOpenUri {Cannot open the following URI:}
+# ====== TODO To be translated ======
+translate P InvalidUri {Drop content is not a valid URI list.}
+# ====== TODO To be translated ======
+translate P UriRejected	{The following files are rejected:}
+# ====== TODO To be translated ======
+translate P UriRejectedDetail {Only the listed file types can be handled:}
+# ====== TODO To be translated ======
+translate P EmptyUriList {Drop content is empty.}
+# ====== TODO To be translated ======
+translate P SelectionOwnerDidntRespond {Timeout during drop action: selection owner didn't respond.}
+
 }
 
 ### Tips of the day in Polish:

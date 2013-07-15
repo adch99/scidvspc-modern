@@ -2076,6 +2076,21 @@ translate R DockRight {Move to right}
 translate R Undock {Undock}
 # ====== TODO To be translated ======
 translate R ChangeIcon {Change icon}
+
+# Drag & Drop
+# ====== TODO To be translated ======
+translate R CannotOpenUri {Cannot open the following URI:}
+# ====== TODO To be translated ======
+translate R InvalidUri {Drop content is not a valid URI list.}
+# ====== TODO To be translated ======
+translate R UriRejected	{The following files are rejected:}
+# ====== TODO To be translated ======
+translate R UriRejectedDetail {Only the listed file types can be handled:}
+# ====== TODO To be translated ======
+translate R EmptyUriList {Drop content is empty.}
+# ====== TODO To be translated ======
+translate R SelectionOwnerDidntRespond {Timeout during drop action: selection owner didn't respond.}
+
 }
 # end of russian.tcl
 

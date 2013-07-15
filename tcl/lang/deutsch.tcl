@@ -1662,6 +1662,15 @@ translate D DockLeft {Nach links}
 translate D DockRight {Nach rechts}
 translate D Undock {Fenster befreien}
 translate D ChangeIcon {Symbol ändern}
+
+# Drag & Drop
+translate D CannotOpenUri {Die folgenden URI können nicht geöffnet werden:}
+translate D InvalidUri {Der Drop-Inhalt ist keine gültige URI-Liste.}
+translate D UriRejected	{Die folgenden Dateien wurden zurückgewiesen:}
+translate D UriRejectedDetail {Nur die aufgelisteten Dateitypen können gehandhabt werden:}
+translate D EmptyUriList {Der Drop-Inhalt ist leer.}
+translate D SelectionOwnerDidntRespond {Zeitüberschreitung während der Drop-Aktion: der Eigentümer des Drop-Inhalts antwortete nicht.}
+
 }
 
 ##########

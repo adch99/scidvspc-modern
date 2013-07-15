@@ -1740,6 +1740,14 @@ translate I Undock {Undock}
 # ====== TODO To be translated ======
 translate I ChangeIcon {Change icon}
 
+# Drag & Drop
+translate I CannotOpenUri {Impossibile aprire il seguente URI:}
+translate I InvalidUri {Il contenuto trascinato non è una lista valida di URI.}
+translate I UriRejected	{I seguenti file sono rifiutati:}
+translate I UriRejectedDetail {Solo i seguenti tipi di file possono essere gestiti;}
+translate I EmptyUriList {Gli archivi trascinati sono vuoti.}
+translate I SelectionOwnerDidntRespond {Tempo scaduto durante operazione di trascinamento: intestatario selezione non ha risposto.}
+
 }
 
 ############################################################

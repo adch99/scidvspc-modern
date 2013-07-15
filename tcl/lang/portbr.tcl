@@ -1846,6 +1846,20 @@ translate B DockRight {Mover para a direita}
 translate B Undock {Desacoplar}
 translate B ChangeIcon {Alterar icone}
 
+# Drag & Drop
+# ====== TODO To be translated ======
+translate B CannotOpenUri {Cannot open the following URI:}
+# ====== TODO To be translated ======
+translate B InvalidUri {Drop content is not a valid URI list.}
+# ====== TODO To be translated ======
+translate B UriRejected	{The following files are rejected:}
+# ====== TODO To be translated ======
+translate B UriRejectedDetail {Only the listed file types can be handled:}
+# ====== TODO To be translated ======
+translate B EmptyUriList {Drop content is empty.}
+# ====== TODO To be translated ======
+translate B SelectionOwnerDidntRespond {Timeout during drop action: selection owner didn't respond.}
+
 }
 
 # end of portbr.tcl

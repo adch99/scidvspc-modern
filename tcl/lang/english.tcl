@@ -1655,5 +1655,13 @@ translate E Undock {Undock}
 # Switcher window
 translate E ChangeIcon {Change icon}
 
+# Drag & Drop
+translate E CannotOpenUri {Cannot open the following URI:}
+translate E InvalidUri {Drop content is not a valid URI list.}
+translate E UriRejected	{The following files are rejected:}
+translate E UriRejectedDetail {Only the listed file types can be handled:}
+translate E EmptyUriList {Drop content is empty.}
+translate E SelectionOwnerDidntRespond {Timeout during drop action: selection owner didn't respond.}
+
 }
 # end of english.tcl

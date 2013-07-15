@@ -1932,6 +1932,21 @@ translate H DockRight {Mozgatás jobbra}
 translate H Undock {Feloldás}
 # ====== TODO To be translated ======
 translate H ChangeIcon {Change icon}
+
+# Drag & Drop
+# ====== TODO To be translated ======
+translate H CannotOpenUri {Cannot open the following URI:}
+# ====== TODO To be translated ======
+translate H InvalidUri {Drop content is not a valid URI list.}
+# ====== TODO To be translated ======
+translate H UriRejected	{The following files are rejected:}
+# ====== TODO To be translated ======
+translate H UriRejectedDetail {Only the listed file types can be handled:}
+# ====== TODO To be translated ======
+translate H EmptyUriList {Drop content is empty.}
+# ====== TODO To be translated ======
+translate H SelectionOwnerDidntRespond {Timeout during drop action: selection owner didn't respond.}
+
 }
 
 # Tips of the day in Hungarian

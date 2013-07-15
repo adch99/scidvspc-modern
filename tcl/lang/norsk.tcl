@@ -2043,6 +2043,20 @@ translate O Undock {Undock}
 translate O ChangeIcon {Change icon...}
 # ====== TODO To be translated ======
 
+# Drag & Drop
+# ====== TODO To be translated ======
+translate O CannotOpenUri {Cannot open the following URI:}
+# ====== TODO To be translated ======
+translate O InvalidUri {Drop content is not a valid URI list.}
+# ====== TODO To be translated ======
+translate O UriRejected	{The following files are rejected:}
+# ====== TODO To be translated ======
+translate O UriRejectedDetail {Only the listed file types can be handled:}
+# ====== TODO To be translated ======
+translate O EmptyUriList {Drop content is empty.}
+# ====== TODO To be translated ======
+translate O SelectionOwnerDidntRespond {Timeout during drop action: selection owner didn't respond.}
+
 }
 
 # norsk.tcl

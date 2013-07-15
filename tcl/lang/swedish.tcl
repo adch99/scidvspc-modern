@@ -1602,6 +1602,16 @@ translate W DockLeft {Drag till vänster}
 translate W DockRight {Drag till höger}
 translate W Undock {Avdocka}
 translate W ChangeIcon {Ändra ikon...}
+
+# Drag & Drop
+translate W CannotOpenUri {Åtkomst nekad för foldern '%s'.}
+translate W InvalidUri {Innehåll som släpps är inte en giltig URI-lista.}
+translate W UriRejected	{Följande filer är förkastade:}
+translate W UriRejectedDetail {Bara listade filtyper kan behandlas:}
+translate W EmptyUriList {Innehåll som släpps är tomt.}
+# ====== TODO To be translated ======
+translate W SelectionOwnerDidntRespond {Timeout during drop action: selection owner didn't respond.}
+
 }
 
 ##########

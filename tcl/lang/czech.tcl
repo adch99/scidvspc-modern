@@ -1921,6 +1921,21 @@ translate C DockRight {Pøesunout doprava}
 # ====== TODO To be translated ======
 translate C Undock {Undock}
 translate C ChangeIcon {Zmìnit ikonu}
+
+# Drag & Drop
+# ====== TODO To be translated ======
+translate C CannotOpenUri {Cannot open the following URI:}
+# ====== TODO To be translated ======
+translate C InvalidUri {Drop content is not a valid URI list.}
+# ====== TODO To be translated ======
+translate C UriRejected	{The following files are rejected:}
+# ====== TODO To be translated ======
+translate C UriRejectedDetail {Only the listed file types can be handled:}
+# ====== TODO To be translated ======
+translate C EmptyUriList {Drop content is empty.}
+# ====== TODO To be translated ======
+translate C SelectionOwnerDidntRespond {Timeout during drop action: selection owner didn't respond.}
+
 }
 
 

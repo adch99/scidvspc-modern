@@ -1904,6 +1904,20 @@ translate N DockRight {Zend naar rechts}
 translate N Undock {Undock}
 translate N ChangeIcon {Verander ikoon}
 
+# Drag & Drop
+# ====== TODO To be translated ======
+translate N CannotOpenUri {Cannot open the following URI:}
+# ====== TODO To be translated ======
+translate N InvalidUri {Drop content is not a valid URI list.}
+# ====== TODO To be translated ======
+translate N UriRejected	{The following files are rejected:}
+# ====== TODO To be translated ======
+translate N UriRejectedDetail {Only the listed file types can be handled:}
+# ====== TODO To be translated ======
+translate N EmptyUriList {Drop content is empty.}
+# ====== TODO To be translated ======
+translate N SelectionOwnerDidntRespond {Timeout during drop action: selection owner didn't respond.}
+
 }
 # End of nederlan.tcl
 
