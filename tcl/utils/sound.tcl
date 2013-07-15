@@ -195,12 +195,13 @@ proc ::utils::sound::OptionsDialog {} {
   wm title $w "Scid: Sound Options"
   # wm transient $w .
 
-  label $w.status -text ""
+  pack [frame $w.b] -side bottom -fill x -pady 2
+
   if {! $::utils::sound::hasSnackPackage} {
-    $w.status configure -text "Scid could not find the Snack audio package at startup; Sound is disabled."
+    label $w.status -text "Scid could not find the Snack audio package at startup. Sound is disabled."
     pack $w.status -side bottom
   }
-  pack [frame $w.b] -side bottom -fill x -pady 2
+
   pack [frame $w.f -relief groove -borderwidth 2] \
       -side top -fill x -padx 5 -pady 5 -ipadx 4 -ipady 4
 
