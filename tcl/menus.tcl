@@ -391,7 +391,7 @@ incr menuindex
 $m add command -label GameInfo -command {gameSave -1} -underline 9
 set helpMessage($m,[incr menuindex]) GameInfo
 
-$m add command -label GameBrowse -command {::gbrowser::new [sc_base current] [sc_game number]}
+$m add command -label GameBrowse -command {::gbrowser::new [sc_base current] [sc_game number] [sc_pos location]}
 set helpMessage($m,[incr menuindex]) GameBrowse
 
 $m add command -label GameList -command ::windows::gamelist::OpenClose 

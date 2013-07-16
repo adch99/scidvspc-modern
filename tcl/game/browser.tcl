@@ -39,7 +39,7 @@ proc ::gbrowser::new {base gnum {ply -1} {w {}}} {
 
     pack [frame $w.b] -side bottom -fill x
 
-    ::board::new $w.bd $::gbrowser::size 1
+    ::board::new $w.bd $::gbrowser::size 1 [::board::isFlipped .main.board]
     # $w.bd configure -relief solid -borderwidth 1
     pack $w.bd -side left -padx 4 -pady 4
 
@@ -91,7 +91,6 @@ proc ::gbrowser::new {base gnum {ply -1} {w {}}} {
     button $w.b.forward -image tb_next -command "::gbrowser::update $n +1" -relief flat
     button $w.b.end -image tb_end -command "::gbrowser::update $n end" -relief flat
     button $w.b.autoplay -image autoplay_off -command "::gbrowser::autoplay $n" -relief flat
-    set ::gbrowser::flip($n) [::board::isFlipped .main.board]
     button $w.b.flip -image tb_flip -command "::gbrowser::flip $n" -relief flat
 
     # hack to center the lower button bar
