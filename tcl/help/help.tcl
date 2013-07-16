@@ -2929,12 +2929,14 @@ set helpText(Tourney) {<h1>Computer Tournament</h1>
 
   <h3>Notes</h3>
 <br>
+  * Engine scores (and times) can be stored as comments by enabling "set comp(showscores) 1" in the GUI.
+<br><br>
   * Updating Scid's interface does take some CPU activity, but effort is made to not include this time in each engine's time-slice.
   Additionally, the Clock Widgets> take a small CPU slice - around .0005 seconds per move on my 2600MHz Core2Quad.
 <br>
   <h3>Todo</h3>
 <br>
-  * Enable use of polyglot books
+  * Move options to a menu Options-<gt>Tournament
 <br>
   <h3>Engines</h3>
 <p>
@@ -2979,7 +2981,7 @@ Faile seems not to work well with time-per-move.
 Arasanx UCI <lt>= 14.1 does not work with Permanent Thinking.
 </p>
 
-<p><footer>Updated: Scid vs. PC 4.8, March 2012</footer></p>
+<p><footer>Updated: Scid vs. PC 4.10, July 2013</footer></p>
 
 }
 

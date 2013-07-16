@@ -9,8 +9,8 @@
 # semaphores/vwait instead of the often abused dig-deeper procedural flow 
 # sometimes evident in tcl programs.
 
-# Opening books are disabled for UCI engines... which makes doing a computer
-# tournament Xboard openings will work if configured individually.
+# User defineable variable
+set comp(showscores) 0 ; # add engine scores as comments
 
 set comp(playing) 0
 set comp(current) 0
@@ -772,6 +772,18 @@ proc compNM {n m k} {
     }
 
     if {[makeCompMove $current_engine]} {
+      ### Store evaluation (and time)
+      if {$comp(showscores)} {
+        if {1} {
+	  set comment $analysis(score$current_engine)
+	  if {$comment > 0} {set comment +$comment}
+	  sc_pos setComment $comment
+        } else {
+	  sc_pos setComment "\[%ms $expired\]\[%eval $analysis(score$current_engine)\]"
+        }
+      }
+
+
       ### Move success
 
       after cancel compTimeout
