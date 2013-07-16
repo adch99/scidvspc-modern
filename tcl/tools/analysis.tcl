@@ -3208,17 +3208,16 @@ proc addMoveNumbers { e pv } {
   }
   return $ret
 }
-################################################################################
-# toggleAnalysisBoard
-#   Toggle whether the small analysis board is shown.
-################################################################################
+
+###  Toggle whether the small analysis board is shown
+
 proc toggleAnalysisBoard {n} {
   global analysis
   set w .analysisWin$n
 
   # init if doesnt exist
   if {![winfo exists $w.bd]} {
-    ::board::new $w.bd 25
+    ::board::new $w.bd 25 0 $::board::_flip(.main.board)
     $w.bd configure -relief solid -borderwidth 1
   }
 
@@ -3233,12 +3232,6 @@ proc toggleAnalysisBoard {n} {
     pack $w.bd -side bottom -before $w.hist 
 
     update
-    ### these are too wayward S.A
-    # .analysisWin$n.hist.text configure -setgrid 0
-    # .analysisWin$n.text configure -setgrid 0
-    # set x [winfo reqwidth .analysisWin$n]
-    # set y [winfo reqheight .analysisWin$n]
-    # wm geometry .analysisWin$n ${x}x${y}
     $w.hist.text configure -setgrid 1
     $w.text configure -setgrid 1
   }
@@ -3261,10 +3254,13 @@ proc toggleEngineInfo {n} {
 
 proc updateAnalysisBoard {n moves} {
   global analysis
-  # PG : this should not be commented
-  if {! $analysis(showBoard$n)} { return }
+
+  if {! $analysis(showBoard$n)} {
+    return
+  }
 
   set bd .analysisWin$n.bd
+if {$::board::_flip($bd) != $::board::_flip(.main.board)} {::board::flip $bd}
   # Temporarily wipe the premove command:
   sc_info preMoveCmd {}
   # Push a temporary copy of the current game:

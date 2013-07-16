@@ -1185,19 +1185,18 @@ proc ::board::san {sqno} {
 
 }
 
-# ::board::new
-#   Creates a new board in the specified frame.
+#   Creates a new chess board in the specified frame.
 #   The psize option should be a piece bitmap size supported
 #   in Scid (see the boardSizes variable in start.tcl).
 #   The showmat parameter adds a frame to display material balance
 
-proc ::board::new {w {psize 40} {showmat 0} } {
+proc ::board::new {w {psize 40} {showmat 0} {flip 0}} {
   if {[winfo exists $w]} { return }
 
   set ::board::_size($w) $psize
   set ::board::_border($w) $::borderwidth
   set ::board::_coords($w) 0
-  set ::board::_flip($w) 0
+  set ::board::_flip($w) $flip
   set ::board::_data($w) [sc_pos board]
   set ::board::_stm($w) 1
   set ::board::_showMarks($w) 0
@@ -1260,11 +1259,12 @@ proc ::board::new {w {psize 40} {showmat 0} } {
       -insertborderwidth 0 -borderwidth 0 -highlightthickness 0
   }
 
+  grid $w.wtm -row 8 -column 0
+  grid $w.btm -row 1 -column 0
+
   ### Hmm... is this correct ? &&&
   set ::board::_showmat($w) [expr $::gameInfo(showMaterial) && $::board::_showmat($w)]
 
-  grid $w.wtm -row 8 -column 0
-  grid $w.btm -row 1 -column 0
   if {$::board::_showmat($w)} {
     grid $w.mat -row 1 -column 12 -rowspan 8
   }
@@ -2204,9 +2204,8 @@ proc ::board::isFlipped {w} {
   return $::board::_flip($w)
 }
 
-#   Rotate the board 180 degrees.
+###  Rotate the board 180 degrees.
 
-# ::board::flip .gb$n.bd
 proc ::board::flip {w {newstate -1}} {
   if {! [info exists ::board::_flip($w)]} { return }
   if {$newstate == $::board::_flip($w)} { return }
@@ -2247,7 +2246,10 @@ proc ::board::flip {w {newstate -1}} {
     }
   }
   ::board::update $w
-  ::board::togglematerial $w
+
+  if {$::board::_showmat($w)} {
+    ::board::togglematerial $w
+  }
   ::board::ficslabels $w
   return $w
 }
