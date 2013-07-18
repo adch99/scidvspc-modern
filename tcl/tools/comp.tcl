@@ -9,9 +9,6 @@
 # semaphores/vwait instead of the often abused dig-deeper procedural flow 
 # sometimes evident in tcl programs.
 
-# User defineable variable
-set comp(showscores) 0 ; # add engine scores as comments
-
 set comp(playing) 0
 set comp(current) 0
 set comp(games) {}
@@ -148,6 +145,13 @@ proc compInit {} {
 
   grid $w.config.loglabel -row $row -column 0 -sticky w -padx 5 
   grid $w.config.logvalue -row $row -column 1 -padx 5 
+
+  incr row
+  label $w.config.scorelabel -text {Engine Scores as Comments}
+  checkbutton $w.config.scorevalue -variable comp(showscores)
+
+  grid $w.config.scorelabel -row $row -column 0 -sticky w -padx 5 
+  grid $w.config.scorevalue -row $row -column 1 -padx 5 
 
   incr row
   label $w.config.firstonlylabel -text {First engine plays others}
@@ -529,7 +533,7 @@ proc compNM {n m k} {
     set analysis(movesDisplay$current_engine) 2
     toggleMovesDisplay $current_engine
 
-    if {$::analysis(uci$current_engine)} {
+    if {$analysis(uci$current_engine)} {
         ### UCI initialisation
 
         # fulvio issues isready every move ??
@@ -658,7 +662,7 @@ proc compNM {n m k} {
     set lastmove [lindex $movehistory end]
     set comp(bookmove) {}
 
-    if {$::analysis(uci$current_engine)} {
+    if {$analysis(uci$current_engine)} {
       ### UCI main loop
       if {$comp(inbook) && $comp(book) != ""} {
 	set comp(bookmove) [::book::getMove $comp(book) [sc_pos fen] $::sergame::bookSlot]
@@ -753,7 +757,7 @@ proc compNM {n m k} {
     set expired [expr [clock clicks -milli] - $comp(lasttime)]
     puts_ "Time expired $expired"
 
-    if {$::analysis(uci$other_engine) && $comp(ponder) && ($uciInfo(ponder$other_engine) != "")} {
+    if {$analysis(uci$other_engine) && $comp(ponder) && ($uciInfo(ponder$other_engine) != "")} {
       ### UCI other engine
 
       # position
@@ -776,8 +780,12 @@ proc compNM {n m k} {
       if {$comp(showscores)} {
         if {1} {
 	  set comment $analysis(score$current_engine)
-	  if {$comment > 0} {set comment +$comment}
-	  sc_pos setComment $comment
+          if {$comment != 0} {
+	    if {$comment > 0} {
+              set comment +$comment
+            }
+	    sc_pos setComment $comment
+          }
         } else {
 	  sc_pos setComment "\[%ms $expired\]\[%eval $analysis(score$current_engine)\]"
         }

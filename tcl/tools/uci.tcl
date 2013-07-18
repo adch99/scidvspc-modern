@@ -65,7 +65,7 @@ namespace eval uci {
   # todo: sort out the analyze var with computer tournament feature &&&
 
   proc processAnalysisInput { { n 1 } { analyze 1 } } {
-    global analysis ::uci::uciInfo ::uci::optionToken
+    global analysis ::uci::uciInfo ::uci::optionToken comp
 
     if {$analyze} {
       set pipe $analysis(pipe$n)
@@ -111,7 +111,7 @@ namespace eval uci {
 
       # Sometimes Umko issues a bad bestmove, and then good ones, but not always a "pv" line
       # We rely on "pv" lines (and uciInfo(pv$n)) for getting the best UCI move, so this hack addresses this
-      if {[winfo exists .comp]} {
+      if {$comp(playing)} {
 	set analysis(moves$n) [lindex $data 1]
       }
 
@@ -129,9 +129,12 @@ namespace eval uci {
     ### Parse info line
 
     if {[string match "info*" $line]} {
-      # For a speed bump, ignore info lines if no display...
-      # But the "Add move" button no longer works, so leave this line out i think
-      # if {!$::analysis(movesDisplay$n)} { return }
+      # For a speed bump, ignore info lines if no display and playing a comp
+      # Note - the "Add move" button requires parsing of these info lines
+
+      if {$comp(playing) && !$comp(showscores) && !$analysis(movesDisplay$n) } {
+         return
+      }
 
       # keep UI responsive when engine outputs lots of info (garbage ?)
       update idletasks
@@ -367,7 +370,7 @@ namespace eval uci {
 
     # Hmmmm.... What happens if we're playing computer tournaments with the same engine against itself
     # So if tourney, don't rename engine
-    if {!$::comp(playing) && [string match "id name *" $line]} {
+    if {!$comp(playing) && [string match "id name *" $line]} {
       set name [ regsub {id[ ]?name[ ]?} $line "" ]
       if {$analyze} {
         set analysis(name$n) $name
@@ -810,7 +813,7 @@ namespace eval uci {
 
   proc startEngine {n} {
 
-    global ::uci::uciInfo
+    global ::uci::uciInfo analysis
 
     resetUciInfo $n
     resetUciInfo2 $n
@@ -845,7 +848,7 @@ namespace eval uci {
       return
     }
 
-    set ::analysis(pipe$n) $uciInfo(pipe$n)
+    set analysis(pipe$n) $uciInfo(pipe$n)
 
     # Return to original dir if necessary:
     if {$oldpwd != ""} { catch {cd $oldpwd} }
@@ -870,12 +873,11 @@ namespace eval uci {
     catch {puts $::uci::uciInfo(pipe$n) $text}
   }
 
-  ### ::uci::checkEngineIsAlive
   ### returns 0 if engine died abruptly or 1 otherwise
 
   proc checkEngineIsAlive { n } {
 
-    global ::uci::uciInfo errorCode
+    global ::uci::uciInfo errorCode comp
 
     if {![eof $uciInfo(pipe$n)]} {
       return 1
@@ -893,7 +895,7 @@ namespace eval uci {
     set uciInfo(pipe$n) ""
     logEngineNote $n {Engine terminated without warning.}
 
-    if {[winfo exists .comp] && $comp(playing)} {
+    if {$comp(playing)} {
       puts "Engine $n terminated without warning. Game over"
       compGameEnd [expr {!($n == $comp(white))}] {Engine crashed}
     } else {

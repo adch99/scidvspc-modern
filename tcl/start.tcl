@@ -186,6 +186,7 @@ set comp(firstonly) 0
 set comp(ponder) 0
 set comp(usebook) 0
 set comp(book) {}
+set comp(showscores) 0 ; # add engine scores as comments
 set photosMinimized 0
 
 
