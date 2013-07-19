@@ -5,7 +5,6 @@
 ### Copyright Stevenaaus 2010-2012
 
 namespace eval fics {
-  set server "freechess.org"
   set sockchan 0
   set seeklist {}
   set mainGame -1
@@ -96,7 +95,12 @@ namespace eval fics {
       $w.timeseal_entry configure -state disabled
       $w.timeseal_browse configure -state disabled
     }
-    # label IP address, Refresh button
+
+    # Server URL, IP address, Refresh button
+
+    label $w.lServer -text URL   
+    entry $w.eServer -textvariable ::fics::server
+
     label $w.lFICS_ip -text $tr(FICSServerAddress)
     entry $w.ipserver -textvariable ::fics::server_ip -state readonly
     button $w.bRefresh -text $tr(FICSRefresh) -command ::fics::getIP -pady 0.8
@@ -150,8 +154,12 @@ namespace eval fics {
     grid $w.timeseal_browse -column 2 -row $row -sticky ew -padx 2
 
     incr row
+    grid $w.lServer -column 0 -row $row 
+    grid $w.eServer -column 1 -row $row -sticky ew -padx 2
+
+    incr row
     grid $w.lFICS_ip -column 0 -row $row
-    grid $w.ipserver -column 1 -row $row -sticky ew
+    grid $w.ipserver -column 1 -row $row -sticky ew -padx 2
     grid $w.bRefresh -column 2 -row $row
 
     incr row
