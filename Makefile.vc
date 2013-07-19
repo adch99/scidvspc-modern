@@ -72,7 +72,6 @@
 #				nederlan	-- Dutch
 #				norsk		-- Norwegian
 #				polish		-- Polish
-#				russian		-- Russian
 #				serbian		-- Serbian
 #				swedish		-- Swedish
 
@@ -264,23 +263,6 @@ SCID_TK_OBJS = \
 	$(TMP_DIR)\tk_selection.obj \
 	$(TMP_DIR)\tkdnd\TkDND_OleDND.obj
 
-##	SCID_LANG: all the extra language files for Scid.
-
-SCID_LANG = \
-	tcl\lang\english.tcl \
-	tcl\lang\portbr.tcl \
-	tcl\lang\czech.tcl \
-	tcl\lang\deutsch.tcl \
-	tcl\lang\spanish.tcl \
-	tcl\lang\francais.tcl \
-	tcl\lang\hungary.tcl \
-	tcl\lang\italian.tcl \
-	tcl\lang\nederlan.tcl \
-	tcl\lang\norsk.tcl \
-	tcl\lang\polish.tcl \
-	tcl\lang\russian.tcl \
-	tcl\lang\serbian.tcl \
-	tcl\lang\swedish.tcl
 
 ### LANGUAGES: List of additional Tcl files to include in Scid for
 #       multi-language menu support.
@@ -288,7 +270,7 @@ SCID_LANG = \
 #       can reduce the size of the Scid program by only specifying
 #       the languages you want supported.
 
-LANGUAGES = tcl\lang\deutsch.tcl tcl\lang\francais.tcl tcl\lang\italian.tcl tcl\lang\nederlan.tcl tcl\lang\spanish.tcl tcl\lang\portbr.tcl tcl\lang\swedish.tcl tcl\lang\norsk.tcl tcl\lang\polish.tcl tcl\lang\czech.tcl tcl\lang\hungary.tcl tcl\lang\serbian.tcl tcl\lang\russian.tcl
+LANGUAGES = tcl\lang\deutsch.tcl tcl\lang\francais.tcl tcl\lang\italian.tcl tcl\lang\nederlan.tcl tcl\lang\spanish.tcl tcl\lang\portbr.tcl tcl\lang\swedish.tcl tcl\lang\norsk.tcl tcl\lang\polish.tcl tcl\lang\czech.tcl tcl\lang\hungary.tcl tcl\lang\serbian.tcl
 	
 ##	SCID_TCLS: Setup the .tcl files for scid
 

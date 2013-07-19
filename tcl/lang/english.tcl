@@ -1,6 +1,5 @@
+#
 # english.tcl:
-# Text for menu names and status bar help messages in English.
-# Part of Scid (Shane's Chess Information Database).
 #
 # Instructions for adding a new language:
 #
@@ -13,32 +12,28 @@
 #     new language. The final digit in each line is the index of the
 #     letter to underline in the menu, counting from 0 as the first letter.
 #
-# (3) Copy the section of English menu and help message details below (all
-#     the commands that start "menuText E ..." or "helpMsg E ..." or
-#     "translate E ...") and change all the "E" letters to the letter you
-#     assigned for the new language.
-#
-# (4) Write the translations. This involves changing anything "in quotes"
-#     or {in braces} for the menuText, helpMsg and translate commands.
+# (3) Change anything "in quotes" or {in braces} for the menuText and translate commands.
 #
 #     A menu command has the format:
-#         menuText L tag "Name..." underline {HelpMessage...}
-#
-#     A status bar help message for a button has the format:
-#         helpMsg L tag {HelpMessage...}
+#         menuText L tag "Name..." underline {HelpMessage}
 #
 #     A general word or message translation has the format:
-#         translate L tag {message...}
+#         translate L tag {message}
 #
-#     where "L" is the language letter, "tag" is the name of the menu entry
-#     or the button widget name, and "underline" is the index of the letter
-#     to underline, counting from zero as the first letter. Two menu entries
+# Notes:
+#
+#     "HelpMessage" can be left out if desired, as they are not currently used in Scid vs. PC
+#
+#     "underline" is the index of the letter to underline, counting from 0
+#     as the first letter. Two menu entries
 #     that appear in the same menu should have a different underlined letter.
-#     If in doubt, just make them all "0" and I'll assign sensible underlined
-#     letters when your translations are incorporated into Scid.
+#     If in doubt, just make them all "0"
 #
-# Additions, corrections? Email: sgh@users.sourceforge.net
-
+# (4) Optionally, make new help entries such as
+#
+#     set helpTitle(D,Contents) "Inhaltsverzeichnis"
+#     set helpText(D,Contents) {<h1>Inhaltsverzeichnis Scid-Hilfe</h1>
+#     ..... see deutsch.tcl for an example.
 
 addLanguage E English 0
 

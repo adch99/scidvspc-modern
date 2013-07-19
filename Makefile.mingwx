@@ -83,7 +83,7 @@ ZLIBOBJS= src/zlib/adler32.o src/zlib/compress.o src/zlib/crc32.o \
 
 OBJS= $(SCIDOBJS) $(ZLIBOBJS)
 
-LANGUAGES = tcl/lang/deutsch.tcl tcl/lang/francais.tcl tcl/lang/italian.tcl tcl/lang/nederlan.tcl tcl/lang/spanish.tcl tcl/lang/portbr.tcl tcl/lang/swedish.tcl tcl/lang/norsk.tcl tcl/lang/polish.tcl tcl/lang/czech.tcl tcl/lang/hungary.tcl tcl/lang/serbian.tcl tcl/lang/russian.tcl
+LANGUAGES = tcl/lang/deutsch.tcl tcl/lang/francais.tcl tcl/lang/italian.tcl tcl/lang/nederlan.tcl tcl/lang/spanish.tcl tcl/lang/portbr.tcl tcl/lang/swedish.tcl tcl/lang/norsk.tcl tcl/lang/polish.tcl tcl/lang/czech.tcl tcl/lang/hungary.tcl tcl/lang/serbian.tcl
 
 ### TCLS: all the .tcl files that make up "scid".
 TCLS= \

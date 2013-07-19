@@ -1,4 +1,7 @@
-#!/usr/bin/tclsh
+#!/bin/sh
+# The next line restarts using tkscid: \
+exec tclsh "$0" "$@"
+
 ###
 ### checklangs.tcl
 ###
@@ -68,7 +71,13 @@ proc checkfile {code langfile} {
   set tmp [split $data "\n"]
   set englishData [multiLines $tmp]
 
-  set f [open $langfile.tcl r]
+  if {[catch {
+    set f [open $langfile.tcl r]
+  }]} {
+    puts "\nOops - file $langfile.tcl can't be opened.\n"
+    return
+  }
+
   set data [read $f]
   close $f
   set tmp [split $data "\n"]

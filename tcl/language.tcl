@@ -79,14 +79,6 @@ proc menuText {lang tag label underline {helpMsg ""}} {
     set ::helpMessage($lang,$tag) $helpMsg
   }
 }
-################################################################################
-# helpMsg:
-#    Assigns the help message for a particular language for a button.
-# ################################################################################
-proc helpMsg {lang button message} {
-
-  set ::helpMessage($lang,$button) $message
-}
 
 array set tr {}
 array set translations {}

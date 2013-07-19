@@ -97,7 +97,7 @@ ZLIBOBJS= src\zlib\adler32.obj src\zlib\compress.obj src\zlib\crc32.obj \
 OBJS= $(SCIDOBJS) $(ZLIBOBJS)
 
 ### LANGUAGES: all the extra language files for scid.
-LANGUAGES = tcl\lang\deutsch.tcl tcl\lang\francais.tcl tcl\lang\italian.tcl tcl\lang\russian.tcl \
+LANGUAGES = tcl\lang\deutsch.tcl tcl\lang\francais.tcl tcl\lang\italian.tcl
       tcl\lang\nederlan.tcl tcl\lang\spanish.tcl tcl\lang\portbr.tcl tcl\lang\swedish.tcl \
       tcl\lang\norsk.tcl tcl\lang\polish.tcl tcl\lang\czech.tcl tcl\lang\hungary.tcl tcl\lang\serbian.tcl
 
