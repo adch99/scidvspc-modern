@@ -163,8 +163,6 @@ menuText P WindowsCorrChess "Gra korespondencyjna" 0 {Otwórz/zamknij okno gry ko
 menuText P Tools "Narzêdzia" 0
 menuText P ToolsAnalysis "Program analizuj±cy..." 8 \
   {Uruchom/zatrzymaj program analizuj±cy}
-menuText P ToolsAnalysis2 "Program analizuj±cy 2..." 21 \
-  {Uruchom/zatrzymaj program analizuj±cy}
 menuText P ToolsEmail "Zarz±dzanie poczt± e-mail" 0 \
   {Otwórz/zamknij zarz±dzanie adresami e-mail}
 menuText P ToolsFilterGraph "U¶redniony wykres filtra" 7 \
@@ -177,7 +175,6 @@ menuText P ToolsOpenRecentBaseAsTree "Otwórz ostatnio otwieran± bazê jako drzewo
 menuText P ToolsTracker "¦ledzenie figur"  1 {Otwórz/zamknij okno ¶ledzenia figur} 
 menuText P ToolsTraining "Trening"  0 {Narzêdzia do treningu taktyki i debiutów}
 menuText P ToolsComp "Turniej komputerowy" 2 {Turniej programów komputerowych}
-menuText P ToolsComp "Turniej komputerowy" 2 {Turniej programów komputerowych}
 menuText P ToolsTacticalGame "Partia taktyczna"  0 {Rozegraj partiê z taktyk±}
 menuText P ToolsSeriousGame "Partia turniejowa"  1 {Rozegraj partiê turniejow±}
 menuText P ToolsTrainTactics "Taktyka"  0 {Rozwi±zuj zadania taktyczne}
@@ -185,6 +182,7 @@ menuText P ToolsTrainCalvar "Liczenie wariantów"  0 {Æwicz liczenie wariantów}
 menuText P ToolsTrainFindBestMove "Znajd¼ najlepszy ruch"  0 {Znajd¼ najlepszy ruch}
 menuText P ToolsTrainFics "Internet"  0 {Graj w szachy na freechess.org}
 menuText P ToolsBookTuning "Konfiguracja ksi±¿ki debiutowej" 0 {Konfiguruj ksi±¿kê debiutow±}
+
 menuText P ToolsConnectHardware "Pod³±cz urz±dzenie" 0 {Pod³±cz zewnêtrzne urz±dzenie}
 menuText P ToolsConnectHardwareConfigure "Konfiguruj..." 0 {Konfiguruj zewnêtrzne urz±dzenie i po³±czenie}
 menuText P ToolsConnectHardwareNovagCitrineConnect "Pod³±cz Novag Citrine" 0 {Pod³±cz Novag Citrine}
@@ -345,6 +343,8 @@ menuText P GInfoMark "W³±cz/wy³±cz zaznaczenie tej partii" 0
 menuText P GInfoInformant "Konfiguruj oceny Informatora" 0
 
 # General buttons:
+# ====== TODO To be translated ======
+translate P Apply {Apply}
 translate P Back {Z powrotem}
 translate P Browse {Przegl±daj}
 translate P Cancel {Anuluj}
@@ -426,7 +426,7 @@ translate P allGames {wszystkie partie}
 translate P empty {brak}
 translate P clipbase {schowek}
 translate P score {punkty}
-translate N Start {Pozycja}
+translate P Start {Pozycja}
 translate P StartPos {Pozycja pocz±tkowa}
 translate P Total {Razem}
 translate P readonly {tylko do odczytu}
@@ -536,6 +536,8 @@ translate P TreeTotal {RAZEM}
 translate P DoYouWantToSaveFirst {Zapisaæ najpierw}
 translate P AddToMask {Dodaj do maski}
 translate P RemoveFromMask {Usuñ z maski}
+# TODO
+translate P AddThisMoveToMask {Add Move to Mask}
 # ====== TODO To be translated ======
 translate P SearchMask {Search in Mask}
 # ====== TODO To be translated ======
@@ -1209,7 +1211,6 @@ translate P NameEditSelect {Partie do edycji}
 translate P NameEditReplace {Zast±p}
 translate P NameEditWith {przez}
 translate P NameEditMatches {Pasuj±ce: Ctrl+1 do Ctrl+9 wybiera}
-translate P CheckGames {Sprawd¼ partie}
 translate P CheckGamesWhich {Sprawd¼ partie}
 translate P CheckAll {Wszystkie}
 translate P CheckSelectFilterGames {Tylko partie z filtra}
@@ -1360,6 +1361,8 @@ translate P limitanalysis {ogranicz czas analizy}
 translate P seconds {sekund}
 translate P Abort {Przerwij}
 translate P Resume {Wznów}
+# TODO
+translate P Restart {Restart}
 translate P OutOfOpening {Po debiucie}
 translate P NotFollowedLine {Nie gra³e¶ wariantu}
 translate P DoYouWantContinue {Na pewno kontynuowaæ?}
@@ -1420,6 +1423,8 @@ translate P Nodes {Pozycje}
 translate P Depth {G³êboko¶æ}
 translate P Time {Czas} 
 translate P SecondsPerMove {Sekundy na posuniêcie}
+# TODO
+translate P TimeLabel {Time per move}
 translate P Engine {Program}
 translate P TimeMode {Tempo gry}
 translate P TimeBonus {Czas + inkrement}

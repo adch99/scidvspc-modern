@@ -1531,7 +1531,7 @@ proc ::tree::mask::contextMenu {win move x y xc yc} {
     # split the moves in several menus
     for {set idxMenu 0} { $idxMenu <= [expr int([llength $lMatchMoves ] / 16) ]} {incr idxMenu} {
       menu $mctxt.matchmoves$idxMenu
-      $mctxt add cascade -label "Add Move to Mask" -menu $mctxt.matchmoves$idxMenu
+      $mctxt add cascade -label [ tr AddThisMoveToMask ] -menu $mctxt.matchmoves$idxMenu
       # -label [ tr AddThisMoveToMask ]
       for {set i 0} {$i < 16} {incr i} {
         if {[expr $i + $idxMenu * 16 +1] > [llength $lMatchMoves ] } {

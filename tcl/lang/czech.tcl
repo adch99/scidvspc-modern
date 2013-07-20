@@ -156,8 +156,6 @@ menuText C WindowsCorrChess "Correspondence Window" 0 {Open/close the Correspond
 menuText C Tools "Nástroje" 3
 menuText C ToolsAnalysis "Program pro analýzu..." 0 \
   {Spustit/zastavit ¹achový program pro analýzu pozice}
-menuText C ToolsAnalysis2 "Program pro analýzu #2..." 20 \
-  {Spustit/zastavit druhý ¹achový program pro analýzu pozice}
 menuText C ToolsEmail "Email mana¾er" 1 \
   {Otevøít/zavøít okno emailového mana¾era}
 menuText C ToolsFilterGraph "Graf filtru" 0 \
@@ -363,6 +361,8 @@ menuText C GInfoMark "Oznaèit/Odznaèit tuto partii" 0
 menuText C GInfoInformant "Configure informant values" 0
 
 # General buttons:
+# ====== TODO To be translated ======
+translate C Apply {Apply}
 translate C Back {Zpìt}
 translate C Browse {Prohlí¾et}
 translate C Cancel {Zru¹it}
@@ -604,7 +604,6 @@ menuText C FinderHelp "Nápovìda" 0
 menuText C FinderHelpFinder "Nápovìda - Vyhledávaè souborù" 11
 menuText C FinderHelpIndex "Index nápovìdy" 0
 translate C FileFinder {Vyhledávaè souborù}
-translate C FileSavePgn {Save PGN}
 translate C FinderDir {Adresáø}
 translate C FinderDirs {Adresáøe}
 translate C FinderFiles {Soubory}
@@ -1293,8 +1292,6 @@ translate C NameEditReplace {Nahradit}
 translate C NameEditWith {}
 translate C NameEditMatches {Shoduje se: Stiskni Ctrl+1 a¾ Ctrl+9 pro výbìr}
 # ====== TODO To be translated ======
-translate C CheckGames {Check games}
-# ====== TODO To be translated ======
 translate C CheckGamesWhich {Check games}
 # ====== TODO To be translated ======
 translate C CheckAll {All games}
@@ -1478,6 +1475,8 @@ translate C Abort {Abort}
 # ====== TODO To be translated ======
 translate C Resume {Resume}
 # ====== TODO To be translated ======
+translate C Restart {Restart}
+# ====== TODO To be translated ======
 translate C OutOfOpening {Out of opening}
 # ====== TODO To be translated ======
 translate C NotFollowedLine {You did not follow the line}
@@ -1526,11 +1525,7 @@ translate C OnlyFlaggedLines {Only flagged lines}
 # ====== TODO To be translated ======
 translate C resetStats {Reset statistics}
 # ====== TODO To be translated ======
-translate C Repertoiretrainingconfiguration {Repertoire training configuration}
-# ====== TODO To be translated ======
 translate C Movesloaded {Moves loaded}
-# ====== TODO To be translated ======
-translate C Repertoirenotfound {Repertoire not found}
 # ====== TODO To be translated ======
 translate C PositionsNotPlayed {Positions not played}
 # ====== TODO To be translated ======
@@ -1539,11 +1534,6 @@ translate C PositionsPlayed {Positions played}
 translate C Success {Success}
 # ====== TODO To be translated ======
 translate C DubiousMoves {Dubious moves}
-# ====== TODO To be translated ======
-translate C OutOfRepertoire {OutOfRepertoire}
-# ====== TODO To be translated ======
-# ====== TODO To be translated ======
-# ====== TODO To be translated ======
 # ====== TODO To be translated ======
 translate C ConfigureTactics {Configure tactics}
 # ====== TODO To be translated ======
@@ -1606,6 +1596,8 @@ translate C Depth {Depth}
 translate C Time {Time} 
 # ====== TODO To be translated ======
 translate C SecondsPerMove {Seconds per move}
+# ====== TODO To be translated ======
+translate C TimeLabel {Time per move}
 # ====== TODO To be translated ======
 translate C Engine {Engine}
 # ====== TODO To be translated ======
@@ -1778,15 +1770,12 @@ translate C FICSGuest {Pøihlásit jako host}
 translate C FICSServerPort {Port serveru}
 translate C FICSServerAddress {IP adresa}
 translate C FICSRefresh {Obnovit}
+# TODO
+translate C FICSTimeseal {Timeseal}
 translate C FICSTimesealPort {Port timesealu}
 translate C FICSSilence {Ticho}
 translate C FICSOffers {Nabídky}
-translate C FICSConsole {Konzola}
 translate C FICSGames {Hry}
-translate C FICSUnobserve {Ukonèit sledování partie}
-translate C FICSProfile {Zobrazit va¹i historii a profil}
-# ====== TODO To be translated ======
-translate C FICSRelayedGames {Relayed games}
 translate C FICSFindOpponent {Najít soupeøe}
 translate C FICSTakeback {Vrátit tah}
 translate C FICSTakeback2 {Vrátit tah 2}
@@ -1799,8 +1788,6 @@ translate C FICSFilterFormula {Filtrovat formulí}
 # ====== TODO To be translated ======
 translate C FICSIssueSeek {Issue seek}
 # ====== TODO To be translated ======
-translate C FICSChallenge {Challenge}
-# ====== TODO To be translated ======
 translate C FICSAccept {accept}
 # ====== TODO To be translated ======
 translate C FICSDecline {decline}
@@ -1808,8 +1795,6 @@ translate C FICSColour {Barva}
 # ====== TODO To be translated ======
 translate C FICSSend {send}
 translate C FICSConnect {Pøipojit}
-translate C FICSdefaultuservars {Pou¾ít výchozí promìnné}
-translate C FICSObserveconfirm {Chcete sledovat partii}
 
 translate C CCDlgConfigureWindowTitle {Konfigurovat korespondenèní ¹ach}
 translate C CCDlgCGeneraloptions {Obecná nastavení}
@@ -1877,10 +1862,6 @@ translate C CCOrderOppTimeTxt {Soupeøovy hodiny}
 translate C CCDlgConfigRelay {Konfigurovat sledování ICCF}
 translate C CCDlgConfigRelayHelp {Bì¾te na stránku partií na http://www.iccf-webchess.com a zobrazte partii, která má být sledována. Pokud vidíte ¹achovnici, zkopírujte URL z prohlí¾eèe do seznamu ní¾e. Pouze jediné URL na ka¾dém øádku!\nPøíklad: http://www.iccf-webchess.com/MakeAMove.aspx?id=266452}
 
-# ====== TODO To be translated ======
-translate C CCEmptyBtn {Empty In- and Outbox}
-# ====== TODO To be translated ======
-translate C CCHelpBtn {Help on icons and status indicators.\nFor general Help press F1!}
 # ====== TODO To be translated ======
 translate C ExtHWConfigConnection {Configure external hardware}
 # ====== TODO To be translated ======

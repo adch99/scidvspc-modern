@@ -105,10 +105,10 @@ proc checkfile {code langfile} {
     if {$lang == "E"  &&  ($command == "menuText" || $command == "translate" || $command == "helpMsg")} {
       set thisMatch [lsearch -exact $langNames $command:$name]
       if {$thisMatch < 0} {
-        puts "$langfile - MISSING: $name"
+        puts "$langfile - MISSING:    $name ($command)"
       } else {
         if {$thisMatch != $lastMatch + 1} {
-          puts "$langfile - OUT OF ORDER: $command $lang $name"
+          puts "$langfile - NO ORDER: $lang $name"
         }
         set lastMatch $thisMatch
       }
@@ -120,6 +120,7 @@ proc checkfile {code langfile} {
 if {[llength $argv] == 0} { set argv $languages }
 
 foreach language $argv {
+  set language [file rootname $language]
   if {[info exists codes($language)]} {
     checkfile $codes($language) $language
   } else {

@@ -159,8 +159,6 @@ menuText W WindowsCorrChess "Korrespondensfönster" 0 {Öppna/stäng Korrespondensf
 menuText W Tools "Verktyg" 0
 menuText W ToolsAnalysis "Analysmotor..." 6 \
   {Starta/ stoppa en analysmotor}
-menuText W ToolsAnalysis2 "Analysmotor 2..." 12 \
-  {Starta/ stoppa en andra analysmotor}
 menuText W ToolsEmail "Eposthanterare" 0 \
   {Öppna/ stäng eposthanteraren}
 menuText W ToolsFilterGraph "Filterdiagram" 7 \
@@ -175,7 +173,6 @@ menuText W ToolsTraining "Träning"  0 {Träningsverktyg (taktik, öppningar,...) }
 menuText W ToolsComp "Turnering" 2 {Schackmotorturnering}
 menuText W ToolsTacticalGame "Taktiskt parti"  0 {Spela ett parti med taktik}
 menuText W ToolsSeriousGame "Seriöst parti"  0 {Spela ett seriöst parti}
-menuText W ToolsTrainOpenings "Öppningar"  0 {Träna med en repetoar}
 menuText W ToolsTrainTactics "Taktik"  0 {Lösa taktik}
 menuText W ToolsTrainCalvar "Variantberäkning"  0 {Variantberäkningsträning}
 menuText W ToolsTrainFindBestMove "Hitta bäst drag"  0 {Hitta bästa draget}
@@ -334,6 +331,8 @@ menuText W GInfoMark "(Av-)Markera detta parti" 5
 menuText W GInfoInformant "Konfigurera Informant-parametrar" 0
 
 # General buttons:
+# ====== TODO To be translated ======
+translate W Apply {Apply}
 translate W Back {Tillbaka}
 translate W Browse {Bläddra}
 translate W Cancel {Avbryt}
@@ -525,6 +524,8 @@ translate W TreeTotal {TOTALT}
 translate W DoYouWantToSaveFirst {Vill du spara först}
 translate W AddToMask {Lägg till i Sökmask}
 translate W RemoveFromMask {Ta bort från Sökmask}
+# TODO
+translate W AddThisMoveToMask {Add Move to Mask}
 translate W SearchMask {Sök i sökmask}
 translate W DisplayMask {Visa sökmask}
 translate W Nag {NAG-kod}
@@ -1194,7 +1195,6 @@ translate W NameEditSelect {Partier att redigera}
 translate W NameEditReplace {Ersätt}
 translate W NameEditWith {med}
 translate W NameEditMatches {Matchar: Tryck Ctrl+1 till Ctrl+9 för att välja}
-translate W CheckGames {Kontrollera partier}
 translate W CheckGamesWhich {Kontrollera partier}
 translate W CheckAll {Alla partier}
 translate W CheckSelectFilterGames {Bara partier i filter}
@@ -1343,6 +1343,8 @@ translate W limitanalysis {begränsa schackmotors analystid}
 translate W seconds {sekunder}
 translate W Abort {Avbryt}
 translate W Resume {Fortsätt}
+# TODO
+translate W Restart {Restart}
 translate W OutOfOpening {utanför öppning}
 translate W NotFollowedLine {Du följde inte variationen}
 translate W DoYouWantContinue {Vill du fortsätta ?}
@@ -1403,6 +1405,8 @@ translate W Nodes {Noder}
 translate W Depth {Sökdjup}
 translate W Time {Tid}
 translate W SecondsPerMove {Sekunder per drag}
+# TODO
+translate W TimeLabel {Time per move}
 translate W Engine {Schackmotor}
 translate W TimeMode {Tidsmod}
 translate W TimeBonus {Tid + bonus}
@@ -1589,7 +1593,6 @@ translate W ExtHWNoBoard {Inget bräde}
 translate W IEConsole {Inmatningsmotorkonsol}
 translate W IESending {Drag skickade för}
 translate W IESynchronise {Synkronisera}
-translate W IESyncrhonise {Synkronisera}
 translate W IERotate  {Rotera}
 translate W IEUnableToStart {Kan inte starta Inmatningsmotor:}
 translate W DoneWithPosition {Klar med position}

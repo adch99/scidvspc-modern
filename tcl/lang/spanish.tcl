@@ -165,8 +165,6 @@ menuText S WindowsCorrChess "Correo electrónico" 0 {Abrir/Cerrar la ventra de Co
 menuText S Tools "Herramientas" 0
 menuText S ToolsAnalysis "Motor de análisis..." 0 \
   {Inicia/para el análisis de un motor de ajedrez}
-menuText S ToolsAnalysis2 "Motor de análisis #2..." 18 \
-  {Inicia/para el análisis de un motor de ajedrez}
 menuText S ToolsEmail "Administrador de Email" 0 \
   {Abre/cierra la ventana del administrador de Email}
 menuText S ToolsFilterGraph "Filtro gráfico" 7 \
@@ -358,6 +356,8 @@ menuText S GInfoMark "(No)Marcar esta partida" 4
 menuText S GInfoInformant "Configurar Valores de Información" 0
 
 # General buttons:
+# ====== TODO To be translated ======
+translate S Apply {Apply}
 translate S Back {Atrás}
 translate S Browse {Examinar}
 translate S Cancel {Cancelar}
@@ -567,6 +567,8 @@ translate S AddToMask {Añadir a máscara}
 translate S RemoveFromMask {Elimina desde la máscara}
 translate S AddThisMoveToMask {Añadir este movimiento a la Máscara}
 translate S SearchMask {Buscar en máscara}
+# TODO
+translate S DisplayMask {Display Mask}
 translate S Nag {Código de regaño}
 translate S Marker {Marcador}
 translate S Include {Incluir}
@@ -1232,7 +1234,6 @@ translate S NameEditSelect {Partidas a Editar}
 translate S NameEditReplace {Reemplazar}
 translate S NameEditWith {Con}
 translate S NameEditMatches {Partidas: Presionar Ctrl+1 a Ctrl+9 para seleccionarla}
-translate S CheckGames {Revisar partidas}
 translate S CheckGamesWhich {Revisar partidas}
 translate S CheckAll {Todas las partidas}
 translate S CheckSelectFilterGames {Solo partidas en filtro}
@@ -1383,6 +1384,8 @@ translate S limitanalysis {Tiempo límite para análisis del motor}
 translate S seconds {segundos}
 translate S Abort {Abortar}
 translate S Resume {Reanudar}
+# TODO
+translate S Restart {Restart}
 translate S OutOfOpening {Fuera de apertura}
 translate S NotFollowedLine {Tú no sigues la linea}
 translate S DoYouWantContinue {¿Quieres continuar?}
@@ -1443,6 +1446,8 @@ translate S Nodes {Nodos}
 translate S Depth {Profundidad}
 translate S Time {Tiempo} 
 translate S SecondsPerMove {Segundos por movimiento}
+# TODO
+translate S TimeLabel {Time per move}
 translate S Engine {Motor}
 translate S TimeMode {Modo de tiempo}
 translate S TimeBonus {Tiempo + bonus}
@@ -1532,15 +1537,11 @@ translate S FICSGuest {Autentificación como invitado}
 translate S FICSServerPort {Puerto del servidor}
 translate S FICSServerAddress {Dirección IP}
 translate S FICSRefresh {Refrescar}
-translate E FICSTimeseal {Timeseal}
+translate S FICSTimeseal {Timeseal}
 translate S FICSTimesealPort {Puerto Timeseal}
 translate S FICSSilence {Silencio}
 translate S FICSOffers {Ofertas}
-translate S FICSConsole {Consola}
 translate S FICSGames {Partidas}
-translate S FICSUnobserve {Parar vistazo de partida}
-translate S FICSProfile {Muestra tu historia y perfil}
-translate S FICSRelayedGames {Partidas retransmitidas}
 translate S FICSFindOpponent {Buscar oponente}
 translate S FICSTakeback {Retrocede}
 translate S FICSTakeback2 {Retrocede 2}
@@ -1551,14 +1552,11 @@ translate S FICSAutoColour {automático}
 translate S FICSManualConfirm {confirma manualmente}
 translate S FICSFilterFormula {Filtrar con fórmula}
 translate S FICSIssueSeek {Panel de retos}
-translate S FICSChallenge {Retar}
 translate S FICSAccept {aceptar}
 translate S FICSDecline {rechazar}
 translate S FICSColour {Color}
 translate S FICSSend {enviar}
 translate S FICSConnect {Conectar}
-translate S FICSdefaultuservars {Usa valores por defecto}
-translate S FICSObserveconfirm {Quieres observar la partida}
 
 # Correspondence Chess Dialogs:
 translate S CCDlgConfigureWindowTitle {Configurar Ajedrez por correo}

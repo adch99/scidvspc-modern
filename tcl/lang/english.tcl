@@ -43,9 +43,9 @@ proc setLanguage_E {} {
 menuText E File "File" 0
 menuText E FileNew "New" 0 {Create a new Scid database}
 menuText E FileOpen "Open" 0 {Open an existing Scid database}
-menuText E FileSavePgn "Save PGN" 0 {Save this game to file}
 menuText E FileClose "Close" 0 {Close the active Scid database}
 menuText E FileFinder "Finder" 0 {Open the File Finder window}
+menuText E FileSavePgn "Save PGN" 0 {Save this game to file}
 menuText E FileBookmarks "Bookmarks" 0 {Bookmarks menu}
 menuText E FileBookmarksAdd "Add Bookmark" 0 \
   {Bookmark the current database game and position}
@@ -150,8 +150,8 @@ menuText E Search "Search" 0
 menuText E SearchReset "Reset Filter" 0 {Reset the filter so all games are included}
 menuText E SearchNegate "Negate Filter" 0 {Negate the filter to only include excluded games}
 menuText E SearchEnd "Filter to Last Move" 15 {All filter games load at the end position}
-menuText E SearchHeader "General" 0 {Search by Header (player, event, etc) information}
 menuText E SearchCurrent "Current Board" 0 {Search for the current board position}
+menuText E SearchHeader "General" 0 {Search by Header (player, event, etc) information}
 menuText E SearchMaterial "Material/Pattern" 0 {Search for material or board patterns}
 menuText E SearchMoves "Moves" 0 {}
 menuText E SearchUsing "Load Search File" 0 {Search using a SearchOptions file}
@@ -197,14 +197,15 @@ menuText E ToolsTrainFindBestMove "Find Best Move"  0 {Find best move}
 menuText E ToolsTrainFics "Internet (FICS)"  0 {Play on freechess.org}
 menuText E ToolsBookTuning "Book tuning" 0 {Book tuning}
 
-### menuText E ToolsNovagCitrine "Novag Citrine" 0 {Novag Citrine}
-### menuText E ToolsNovagCitrineConfig "Configuration" 0 {Novag Citrine configuration}
-### menuText E ToolsNovagCitrineConnect "Connect" 0 {Novag Citrine connect}
 
 menuText E ToolsConnectHardware "Connect Hardware" 0 {Connect external hardware}
 menuText E ToolsConnectHardwareConfigure "Configure..." 0 {Configure external hardware and connection}
 menuText E ToolsConnectHardwareNovagCitrineConnect "Connect Novag Citrine" 9 {Connect Novag Citrine with Scid}
 menuText E ToolsConnectHardwareInputEngineConnect "Connect Input Engine" 9 {Connect Input Engine (e.g. DGT board) with Scid}
+# these three unused
+menuText E ToolsNovagCitrine "Novag Citrine" 0 {Novag Citrine}
+menuText E ToolsNovagCitrineConfig "Configuration" 0 {Novag Citrine configuration}
+menuText E ToolsNovagCitrineConnect "Connect" 0 {Novag Citrine connect}
 
 menuText E ToolsPInfo "Player Information"  0 \
   {Open/update the Player Information window}
@@ -390,7 +391,6 @@ translate E None {None}
 translate E First {First}
 translate E Current {Current}
 translate E Last {Last}
-translate E Start {Start}
 
 # General messages:
 translate E game {game}
@@ -441,6 +441,7 @@ translate E allGames {all}
 translate E empty {empty}
 translate E clipbase {clipbase}
 translate E score {score}
+translate E Start {Start}
 translate E StartPos {Start position}
 translate E Total {Total}
 translate E readonly {read-only}
@@ -550,6 +551,7 @@ translate E TreeTotal {TOTAL}
 translate E DoYouWantToSaveFirst {Do you want to save}
 translate E AddToMask {Add to Mask}
 translate E RemoveFromMask {Remove from Mask}
+translate E AddThisMoveToMask {Add Move to Mask}
 translate E SearchMask {Search in Mask}
 translate E DisplayMask {Display Mask}
 translate E Nag {Nag code}
@@ -596,7 +598,6 @@ menuText E FinderHelp "Help" 0
 menuText E FinderHelpFinder "Finder Help" 0
 menuText E FinderHelpIndex "Index" 0
 translate E FileFinder {File Finder}
-translate E FileSavePgn {Save PGN}
 translate E FinderDir {Directory}
 translate E FinderDirs {Directories}
 translate E FinderFiles {Files}
@@ -712,8 +713,8 @@ menuText E StatsOpt "Options" 0
 
 # PGN window menus:
 menuText E PgnFile "Pgn" 0
-menuText E PgnFilePrint "Save Game as" 0
 menuText E PgnFileCopy "Copy to Clipboard" 0
+menuText E PgnFilePrint "Save Game as" 0
 menuText E PgnFileClose "Close" 10
 menuText E PgnOpt "Options" 0
 menuText E PgnOptColor "Color Display" 0
@@ -724,9 +725,9 @@ menuText E PgnOptIndentV "Indent Variations" 7
 menuText E PgnOptColumn "Column Style" 1
 menuText E PgnOptSpace "Space after Move Numbers" 18
 menuText E PgnOptStripMarks "Hide Square/Arrow Codes" 1
-menuText E PgnOptBoldMainLine "Bold Main Line" 4
 menuText E PgnOptChess "Chess Pieces" 6
 menuText E PgnOptScrollbar "Scrollbar" 6
+menuText E PgnOptBoldMainLine "Bold Main Line" 4
 menuText E PgnColor "Colors" 0
 menuText E PgnColorHeader "Header" 0
 menuText E PgnColorAnno "Annotations" 0
@@ -1223,7 +1224,6 @@ translate E NameEditWith {With}
 translate E NameEditMatches {Matches: Press Ctrl+1 to Ctrl+9 to select}
 
 # Check games window:
-translate E CheckGames {Check Games}
 translate E CheckGamesWhich {Check Games}
 translate E CheckAll {All games}
 translate E CheckSelectFilterGames {Filter games}

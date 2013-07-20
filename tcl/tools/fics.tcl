@@ -1353,6 +1353,7 @@ namespace eval fics {
       if {$::fics::no_requests} {
         writechan decline
       } else {
+        # todo: use translation for Accept
 	set ans [tk_dialog .fics_dialog Abort "$line\nDo you accept ?" question {} Yes No Ignore]
 	switch -- $ans {
 	  0 {writechan accept}

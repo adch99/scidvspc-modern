@@ -161,8 +161,6 @@ menuText Y WindowsCorrChess "Correspondence Window" 0 {Open/close the Correspond
 menuText Y Tools "Alati" 0
 menuText Y ToolsAnalysis "Program za analizu..." 0 \
   {Pokreni/zaustavi ¹ahovski program za analizu}
-menuText Y ToolsAnalysis2 "Program za analizu #2..." 17 \
-  {Pokreni/zaustavi drugi ¹ahovski program za analizu}
 menuText Y ToolsEmail "Email menad¾er" 0 \
   {Otvori/zatvori menad¾er za korespodentske partije preko email-a}
 menuText Y ToolsFilterGraph "Filter graph" 7 \
@@ -391,6 +389,8 @@ menuText Y GInfoMark "Mark/Unmark this game" 0 ;# ***
 menuText Y GInfoInformant "Configure informant values" 0
 
 # General buttons:
+# ====== TODO To be translated ======
+translate Y Apply {Apply}
 translate Y Back {Nazad}
 translate Y Browse {Browse} ;# ***
 translate Y Cancel {Poni¹ti}
@@ -608,6 +608,8 @@ translate Y DoYouWantToSaveFirst {Do you want to save}
 translate Y AddToMask {Add to Mask}
 # ====== TODO To be translated ======
 translate Y RemoveFromMask {Remove from Mask}
+# TODO
+translate Y AddThisMoveToMask {Add Move to Mask}
 # ====== TODO To be translated ======
 translate Y SearchMask {Search in Mask}
 # ====== TODO To be translated ======
@@ -1372,8 +1374,6 @@ translate Y NameEditReplace {Zameni}
 translate Y NameEditWith {sa}
 translate Y NameEditMatches {Podudara se: Pritisni Ctrl+1 do Ctrl+9 za izbor}
 # ====== TODO To be translated ======
-translate Y CheckGames {Check games}
-# ====== TODO To be translated ======
 translate Y CheckGamesWhich {Check games}
 # ====== TODO To be translated ======
 translate Y CheckAll {All games}
@@ -1557,6 +1557,8 @@ translate Y Abort {Abort}
 # ====== TODO To be translated ======
 translate Y Resume {Resume}
 # ====== TODO To be translated ======
+translate Y Restart {Restart}
+# ====== TODO To be translated ======
 translate Y OutOfOpening {Out of opening}
 # ====== TODO To be translated ======
 translate Y NotFollowedLine {You did not follow the line}
@@ -1676,6 +1678,8 @@ translate Y Depth {Depth}
 translate Y Time {Time} 
 # ====== TODO To be translated ======
 translate Y SecondsPerMove {Seconds per move}
+# ====== TODO To be translated ======
+translate Y TimeLabel {Time per move}
 # ====== TODO To be translated ======
 translate Y Engine {Engine}
 # ====== TODO To be translated ======
@@ -1999,8 +2003,6 @@ translate Y CCDlgConfigRelay {Configure ICCF observations}
 translate Y CCDlgConfigRelayHelp {Go to the games page on http://www.iccf-webchess.com and display the game to be observed.  If you see the chessboard copy the URL from your browser to the list below. One URL per line only!\nExample: http://www.iccf-webchess.com/MakeAMove.aspx?id=266452}
 
 # ====== TODO To be translated ======
-translate Y CCHelpBtn {Help on icons and status indicators.\nFor general Help press F1!}
-# ====== TODO To be translated ======
 translate Y ExtHWConfigConnection {Configure external hardware}
 # ====== TODO To be translated ======
 translate Y ExtHWPort {Port}
@@ -2024,8 +2026,6 @@ translate Y IEConsole {Input Engine Console}
 translate Y IESending {Moves sent for}
 # ====== TODO To be translated ======
 translate Y IESynchronise {Synchronise}
-# ====== TODO To be translated ======
-translate Y IESyncrhonise {Synchronise}
 # ====== TODO To be translated ======
 translate Y IERotate  {Rotate}
 # ====== TODO To be translated ======

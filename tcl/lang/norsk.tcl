@@ -162,8 +162,6 @@ menuText O WindowsCorrChess "Correspondence Window" 0 {Open/close the Correspond
 menuText O Tools "Verktøy" 0
 menuText O ToolsAnalysis "Analysemotor..." 0 \
   {Start/stopp en sjakkanalysemotor}
-menuText O ToolsAnalysis2 "Analysemotor #2..." 0 \
-  {Start/stopp enda en sjakkanalysemotor}
 menuText O ToolsEmail "Epostbehandler" 0 \
   {Åpne/lukk epostbehandlingsvinduet}
 menuText O ToolsFilterGraph "Filtergraf" 7 \
@@ -392,6 +390,8 @@ menuText O GInfoMark "(Av)Merk dette partiet" 0
 menuText O GInfoInformant "Configure informant values" 0
 
 # General buttons:
+# ====== TODO To be translated ======
+translate O Apply {Apply}
 translate O Back {Tilbake}
 translate O Browse {Browse} ;# ***
 translate O Cancel {Avbryt}
@@ -608,6 +608,8 @@ translate O DoYouWantToSaveFirst {Do you want to save}
 translate O AddToMask {Add to Mask}
 # ====== TODO To be translated ======
 translate O RemoveFromMask {Remove from Mask}
+# TODO
+translate O AddThisMoveToMask {Add Move to Mask}
 # ====== TODO To be translated ======
 translate O SearchMask {Search in Mask}
 # ====== TODO To be translated ======
@@ -1368,8 +1370,6 @@ translate O NameEditReplace {Erstatt}
 translate O NameEditWith {med}
 translate O NameEditMatches {Treff: Trykk Ctrl+1 til Ctrl+9 for å velge}
 # ====== TODO To be translated ======
-translate O CheckGames {Check games}
-# ====== TODO To be translated ======
 translate O CheckGamesWhich {Check games}
 # ====== TODO To be translated ======
 translate O CheckAll {All games}
@@ -1551,6 +1551,8 @@ translate O Abort {Abort}
 # ====== TODO To be translated ======
 translate O Resume {Resume}
 # ====== TODO To be translated ======
+translate O Restart {Restart}
+# ====== TODO To be translated ======
 translate O OutOfOpening {Out of opening}
 # ====== TODO To be translated ======
 translate O NotFollowedLine {You did not follow the line}
@@ -1671,6 +1673,8 @@ translate O Depth {Depth}
 translate O Time {Time} 
 # ====== TODO To be translated ======
 translate O SecondsPerMove {Seconds per move}
+# ====== TODO To be translated ======
+translate O TimeLabel {Time per move}
 # ====== TODO To be translated ======
 translate O Engine {Engine}
 # ====== TODO To be translated ======

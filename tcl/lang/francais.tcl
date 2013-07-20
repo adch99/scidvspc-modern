@@ -165,8 +165,6 @@ menuText F WindowsCorrChess "Jeu par correspondance" 0 {Ouvrir/Fermer la fenêtre
 menuText F Tools "Outils" 2
 menuText F ToolsAnalysis "Moteur d'analyse..." 9 \
   {Démarrer/Arrêter un moteur d'analyses}
-menuText F ToolsAnalysis2 "Moteur d'analyse #2..." 18 \
-  {Démarrer/Arrêter un moteur d'analyses}
 menuText F ToolsEmail "Gestion des messages" 0 \
   {Ouvrir/Fermer la fenêtre de gestion des messages électroniques}
 menuText F ToolsFilterGraph "Graphique de filtre" 7 {Ouvrir/Fermer la fenêtre du graphique de filtre}
@@ -179,7 +177,6 @@ menuText F ToolsTraining "Entrainement"  0 {Entrainement (tactique, ouvertures, 
 menuText F ToolsComp "Tournament" 2 {Chess engine tournament}
 menuText F ToolsTacticalGame "Partie tactique"  0 {Jouer une partie tactique}
 menuText F ToolsSeriousGame "Partie sérieuse"  0 {Jouer une partie sans handicap}
-menuText F ToolsTrainOpenings "Ouvertures"  0 {Entrainement sur un répertoire}
 menuText F ToolsTrainTactics "Tactique"  0 {Résoudre des problèmes tactiques}
 menuText F ToolsTrainCalvar "Calcul de variantes"  0 {Entrainement au calcul de variantes}
 menuText F ToolsTrainFindBestMove "Trouver le meilleur coup"  0 {Trouver le meilleur coup}
@@ -343,6 +340,8 @@ menuText F GInfoMark "(Dé)Marquer cette partie" 4
 menuText F GInfoInformant "Configurer les valeurs de notation" 0
 
 # General buttons:
+# todo
+translate F Apply {Apply}
 translate F Back {Retour}
 translate F Browse {Parcourir}
 translate F Cancel {Annuler}
@@ -532,6 +531,8 @@ translate F TreeTotal {TOTAL}
 translate F DoYouWantToSaveFirst {voulez-vous d'abord sauvegarder}
 translate F AddToMask {Ajouter au masque}
 translate F RemoveFromMask {Enlever du masque}
+# TODO
+translate F AddThisMoveToMask {Add Move to Mask}
 translate F SearchMask {Recherche dans masque}
 translate F DisplayMask {Affichage du masque}
 translate F Nag {Code Nag}
@@ -1207,8 +1208,6 @@ translate F NameEditReplace {Remplacer}
 translate F NameEditWith {avec}
 translate F NameEditMatches {Correspondances: Presser Alt+1 à Alt+9 pour sélectionner}
 # ====== TODO To be translated ======
-translate F CheckGames {Check games}
-# ====== TODO To be translated ======
 translate F CheckGamesWhich {Check games}
 # ====== TODO To be translated ======
 translate F CheckAll {All games}
@@ -1361,6 +1360,8 @@ translate F limitanalysis {limiter le temps d'analyse}
 translate F seconds {secondes}
 translate F Abort {Arrêter}
 translate F Resume {Reprendre}
+# TODO
+translate F Restart {Restart}
 translate F OutOfOpening {Hors de l'ouverture}
 translate F NotFollowedLine {Vous n'avez pas suivi la ligne}
 translate F DoYouWantContinue {Voulez-vous continuer ?}
@@ -1421,6 +1422,7 @@ translate F Nodes {Noeuds}
 translate F Depth {Profondeur}
 translate F Time {Temps} 
 translate F SecondsPerMove {Secondes par coup}
+translate F TimeLabel {Time per move}
 translate F Engine {Moteur}
 translate F TimeMode {Mode de réflexion}
 translate F TimeBonus {Temps + bonus}
@@ -1509,14 +1511,11 @@ translate F FICSGuest {Login comme invité}
 translate F FICSServerPort {Port du serveur}
 translate F FICSServerAddress {Adresse IP}
 translate F FICSRefresh {Rafraîchir}
+translate F FICSTimeseal {Timeseal}
 translate F FICSTimesealPort {Port Timeseal}
 translate F FICSSilence {Silence}
 translate F FICSOffers {Offres}
-translate F FICSConsole {Console}
 translate F FICSGames {Parties}
-translate F FICSUnobserve {Arrêter de suivre la partie}
-translate F FICSProfile {Afficher mon historique et mes données}
-translate F FICSRelayedGames {Parties retransmises}
 translate F FICSFindOpponent {Trouver adversaire}
 translate F FICSTakeback {Reprendre un coup}
 translate F FICSTakeback2 {Rependre deux coups}
@@ -1527,14 +1526,11 @@ translate F FICSAutoColour {automatique}
 translate F FICSManualConfirm {accepter manuellement}
 translate F FICSFilterFormula {Filtrer avec formule}
 translate F FICSIssueSeek {Envoyer seek}
-translate F FICSChallenge {Challenge}
 translate F FICSAccept {accepter}
 translate F FICSDecline {refuser}
 translate F FICSColour {Couleur}
 translate F FICSSend {envoyer}
 translate F FICSConnect {Connecter}
-translate F FICSdefaultuservars {Variables par défaut}
-translate F FICSObserveconfirm {Voulez-vous suivre la partie}
 
 translate F CCDlgConfigureWindowTitle {Configurer échecs par correspondance}
 translate F CCDlgCGeneraloptions {Options générales}

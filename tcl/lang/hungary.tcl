@@ -160,8 +160,6 @@ menuText H WindowsCorrChess "Correspondence Window" 0 {Open/close the Correspond
 menuText H Tools "Eszközök" 0
 menuText H ToolsAnalysis "Elemzõ motor..." 0 \
   {Elindít/leállít egy sakkelemzõ programot.}
-menuText H ToolsAnalysis2 "2. elemzõ motor..." 0 \
-  {Elindítja/leállítja a 2. sakkelemzõ programot.}
 menuText H ToolsEmail "Levelezési sakk" 0 \
   {Kinyitja/becsukja az elektronikus sakklevelezés lebonyolítására szolgáló ablakot.}
 menuText H ToolsFilterGraph "Szûrõgrafikon" 0 \
@@ -367,6 +365,8 @@ menuText H GInfoMark "Megjelöli ezt a játszmát/megszünteti a jelölést." 0
 menuText H GInfoInformant "Configure informant values" 0
 
 # General buttons:
+# ====== TODO To be translated ======
+translate H Apply {Apply}
 translate H Back {Vissza}
 translate H Browse {Browse}
 translate H Cancel {Mégse}
@@ -1301,8 +1301,6 @@ translate H NameEditReplace {Cserél}
 translate H NameEditWith {Erre}
 translate H NameEditMatches {Egyezések: Ctrl+1...Ctrl+9 választ.}
 # ====== TODO To be translated ======
-translate H CheckGames {Check games}
-# ====== TODO To be translated ======
 translate H CheckGamesWhich {Check games}
 # ====== TODO To be translated ======
 translate H CheckAll {All games}
@@ -1486,6 +1484,8 @@ translate H Abort {Abort}
 # ====== TODO To be translated ======
 translate H Resume {Resume}
 # ====== TODO To be translated ======
+translate H Restart {Restart}
+# ====== TODO To be translated ======
 translate H OutOfOpening {Out of opening}
 # ====== TODO To be translated ======
 translate H NotFollowedLine {You did not follow the line}
@@ -1605,6 +1605,8 @@ translate H Depth {Depth}
 translate H Time {Time} 
 # ====== TODO To be translated ======
 translate H SecondsPerMove {Seconds per move}
+# ====== TODO To be translated ======
+translate H TimeLabel {Time per move}
 # ====== TODO To be translated ======
 translate H Engine {Engine}
 # ====== TODO To be translated ======
@@ -1779,18 +1781,11 @@ translate H FICSServerPort {Szerverport}
 translate H FICSServerAddress {IP Address}
 # ====== TODO To be translated ======
 translate H FICSRefresh {Refresh}
+translate H FICSTimeseal {Idõbélyeg}
 translate H FICSTimesealPort {Idõbélyegport}
 translate H FICSSilence {Csend}
 translate H FICSOffers {Ajánlatok}
-# ====== TODO To be translated ======
-translate H FICSConsole {Console}
 translate H FICSGames {Játszmák}
-# ====== TODO To be translated ======
-translate H FICSUnobserve {Stop observing game}
-# ====== TODO To be translated ======
-translate H FICSProfile {Display your history and profile}
-# ====== TODO To be translated ======
-translate H FICSRelayedGames {Relayed games}
 translate H FICSFindOpponent {Ellenfélkeresõ}
 translate H FICSTakeback {Visszavétel}
 translate H FICSTakeback2 {Visszavétel 2}
@@ -1801,16 +1796,11 @@ translate H FICSAutoColour {automatikus}
 translate H FICSManualConfirm {kézi megerõsítés}
 translate H FICSFilterFormula {Szûrõformula}
 translate H FICSIssueSeek {Keresés}
-translate H FICSChallenge {Kihívás}
 translate H FICSAccept {elfogad}
 translate H FICSDecline {elutasít}
 translate H FICSColour {Szín}
 translate H FICSSend {küld}
 translate H FICSConnect {Csatlakozás}
-# ====== TODO To be translated ======
-translate H FICSdefaultuservars {Use default variables}
-# ====== TODO To be translated ======
-translate H FICSObserveconfirm {Do you want to observe game}
 
 
 translate H CCDlgConfigureWindowTitle {Levelezési sakk beállításai}

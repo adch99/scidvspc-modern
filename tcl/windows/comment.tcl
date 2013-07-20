@@ -193,7 +193,7 @@ proc ::commenteditor::Open {} {
                 destroy .commentWin"
   set helpMessage(E,$w.b.ok) {Apply changes and exit}
 
-  dialogbutton $w.b.apply -text Apply -command ::commenteditor::storeComment
+  dialogbutton $w.b.apply -textvar ::tr(Apply) -command ::commenteditor::storeComment
   set helpMessage(E,$w.b.apply) {Apply changes}
 
   dialogbutton $w.b.clear -textvar ::tr(Clear) -pady 1 -command "

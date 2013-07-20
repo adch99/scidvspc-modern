@@ -162,8 +162,6 @@ menuText B WindowsCorrChess "Correspondence Window" 0 {Open/close the Correspond
 menuText B Tools "Ferramentas" 0
 menuText B ToolsAnalysis "Analisador #1..." 0 \
   {Inicia ou para o 1o. Analisador}
-menuText B ToolsAnalysis2 "Analisador #2..." 17 \
-  {Inicia ou para o 2o. Analisador}
 menuText B ToolsEmail "Gerenciador de e-mails" 0 \
   {Abre/fecha a janela do gerenciador de e-mails}
 menuText B ToolsFilterGraph "Filter graph" 7 \
@@ -194,17 +192,17 @@ menuText B ToolsTrainFindBestMove "Find best move"  0 {Find best move}
 menuText B ToolsTrainFics "Internet"  0 {Play on freechess.org}
 # ====== TODO To be translated ======
 menuText B ToolsBookTuning "Book tuning" 0 {Book tuning}
+
+menuText B ToolsConnectHardware "Connect Hardware" 0 {Connect external hardware}
+menuText B ToolsConnectHardwareConfigure "Configure..." 0 {Configure external hardware and connection}
+menuText B ToolsConnectHardwareNovagCitrineConnect "Connect Novag Citrine" 9 {Connect Novag Citrine with Scid}
+menuText B ToolsConnectHardwareInputEngineConnect "Connect Input Engine" 9 {Connect Input Engine (e.g. DGT board) with Scid}
 # ====== TODO To be translated ======
 menuText B ToolsNovagCitrine "Novag Citrine" 0 {Novag Citrine}
 # ====== TODO To be translated ======
 menuText B ToolsNovagCitrineConfig "Configuration" 0 {Novag Citrine configuration}
 # ====== TODO To be translated ======
 menuText B ToolsNovagCitrineConnect "Connect" 0 {Novag Citrine connect}
-
-menuText B ToolsConnectHardware "Connect Hardware" 0 {Connect external hardware}
-menuText B ToolsConnectHardwareConfigure "Configure..." 0 {Configure external hardware and connection}
-menuText B ToolsConnectHardwareNovagCitrineConnect "Connect Novag Citrine" 9 {Connect Novag Citrine with Scid}
-menuText B ToolsConnectHardwareInputEngineConnect "Connect Input Engine" 9 {Connect Input Engine (e.g. DGT board) with Scid}
 
 menuText B ToolsPInfo "Informacao do Jogador"  0 \
   {Abre/atualiza a janela de informacao do jogador}
@@ -364,6 +362,8 @@ menuText B GInfoMark "Desmarcar este jogo" 0
 menuText B GInfoInformant "Configure informant values" 0
 
 # General buttons:
+# ====== TODO To be translated ======
+translate B Apply {Apply}
 translate B Back {Voltar}
 translate B Browse {Browse} ;# ***
 translate B Cancel {Cancelar}
@@ -447,6 +447,7 @@ translate B allGames {todos os jogos}
 translate B empty {vazio}
 translate B clipbase {base de trabalho}
 translate B score {Pontuacao}
+translate B Start {Posicao}
 translate B StartPos {Posicao Inicial}
 translate B Total {Total}
 translate B readonly {apenas leitura}
@@ -705,8 +706,8 @@ translate B AnnotateBlundersOnly {When game move is an obvious blunder}
 translate B AnnotateBlundersOnlyScoreChange {Analysis reports blunder, with score change from/to: }
 # ====== TODO To be translated ======
 translate B AnnotateTitle {Configure Annotation}
-translate B AnnotateWhichMoves {Com anotações}
 translate B AnnotateWith {Que se Move}
+translate B AnnotateWhichMoves {Com anotações}
 translate B AnnotateComment {Adicionar anotador a comentar}
 translate B BlundersThreshold {Threshold}
 translate B LowPriority {Low CPU priority} ;# ***
@@ -1297,8 +1298,6 @@ translate B NameEditReplace {Substituir}
 translate B NameEditWith {com}
 translate B NameEditMatches {Confere: Pressione Ctrl+1 a Ctrl+9 para selecionar}
 # ====== TODO To be translated ======
-translate B CheckGames {Check games}
-# ====== TODO To be translated ======
 translate B CheckGamesWhich {Check games}
 # ====== TODO To be translated ======
 translate B CheckAll {All games}
@@ -1482,6 +1481,8 @@ translate B Abort {Abort}
 # ====== TODO To be translated ======
 translate B Resume {Resume}
 # ====== TODO To be translated ======
+translate B Restart {Restart}
+# ====== TODO To be translated ======
 translate B OutOfOpening {Out of opening}
 # ====== TODO To be translated ======
 translate B NotFollowedLine {You did not follow the line}
@@ -1601,6 +1602,8 @@ translate B Depth {Depth}
 translate B Time {Time} 
 # ====== TODO To be translated ======
 translate B SecondsPerMove {Seconds per move}
+# ====== TODO To be translated ======
+translate B TimeLabel {Time per move}
 # ====== TODO To be translated ======
 translate B Engine {Engine}
 # ====== TODO To be translated ======
@@ -1767,6 +1770,35 @@ translate B KingsIndianSamisch {King's Indian Sämisch}
 translate B KingsIndianMainLine {King's Indian Main Line}
 # ====== TODO To be translated ======
 
+# FICS
+# TODO
+translate B ConfigureFics {Configure FICS}
+translate B FICSLogin {Login}
+translate B FICSGuest {Login as Guest}
+translate B FICSServerPort {Server port}
+translate B FICSServerAddress {IP Address}
+translate B FICSRefresh {Refresh}
+translate B FICSTimeseal {Timeseal}
+translate B FICSTimesealPort {Timeseal port}
+translate B FICSSilence {Console filter}
+translate B FICSOffers {Offers}
+translate B FICSGames {Games}
+translate B FICSFindOpponent {Find Opponent}
+translate B FICSTakeback {Takeback}
+translate B FICSTakeback2 {Takeback 2}
+translate B FICSInitTime {Time (min)}
+translate B FICSIncrement {Increment (sec)}
+translate B FICSRatedGame {Rated Game}
+translate B FICSAutoColour {Automatic}
+translate B FICSManualConfirm {Confirm manually}
+translate B FICSFilterFormula {Filter with formula}
+translate B FICSIssueSeek {Issue seek}
+translate B FICSAccept {Accept}
+translate B FICSDecline {Decline}
+translate B FICSColour {Colour}
+translate B FICSSend {Send}
+translate B FICSConnect {Connect}
+
 translate B CCDlgConfigureWindowTitle {Configurar Xadrez por correspondencia}
 translate B CCDlgCGeneraloptions {Opções Gerais}
 translate B CCDlgDefaultDB {Base default:}
@@ -1835,6 +1867,27 @@ translate B CCDlgConfigRelay {Observe games}
 # ====== TODO To be translated ======
 translate B CCDlgConfigRelayHelp {Go to the games page on http://www.iccf-webchess.com and display the game to be observed.  If you see the chessboard copy the URL from your browser to the list below. One URL per line only!\nExample: http://www.iccf-webchess.com/MakeAMove.aspx?id=266452}
 
+# Connect Hardware dialoges
+# TODO....
+translate B ExtHWConfigConnection {Configure external hardware}
+translate B ExtHWPort {Port}
+translate B ExtHWEngineCmd {Engine command}
+translate B ExtHWEngineParam {Engine parameter}
+translate B ExtHWShowButton {Show button in main window}
+translate B ExtHWHardware {Hardware}
+translate B ExtHWNovag {Novag Citrine}
+translate B ExtHWInputEngine {Input Engine}
+translate B ExtHWNoBoard {No board}
+
+# Input Engine dialogs
+# TODO....
+translate B IEConsole {Input Engine Console}
+translate B IESending {Moves sent for}
+translate B IESynchronise {Synchronise}
+translate B IERotate  {Rotate}
+translate B IEUnableToStart {Unable to start Input Engine:}
+
+# Calculation of Variations
 translate B DoneWithPosition {Posição definida}
 translate B Board {Tabuleiro}
 translate B showGameInfo {Mostrar informações do jogo}

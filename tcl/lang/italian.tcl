@@ -158,8 +158,6 @@ menuText I WindowsCorrChess "Gioco per corrispondenza" 0 {Apre/chiude la finestr
 menuText I Tools "Strumenti" 0
 menuText I ToolsAnalysis "Motore di analisi..." 10 \
   {Inizia/termina il motore di analisi scacchistica}
-menuText I ToolsAnalysis2 "Motore di analisi #2..." 19 \
-  {Inizia/termina il motore di analisi scacchistica}
 menuText I ToolsEmail "Gestione Email" 10 \
   {Apre/chiude la finestra di gestione di partite per posta elettronica}
 menuText I ToolsFilterGraph "Grafici relativi" 7 \
@@ -352,6 +350,8 @@ menuText I GInfoMark "Smarca/Marca questa partita" 7
 menuText I GInfoInformant "Configura i valori informativi" 0
 
 # General buttons:
+# ====== TODO To be translated ======
+translate I Apply {Apply}
 translate I Back {Indietro}
 translate I Browse {Browse}
 translate I Cancel {Cancella}
@@ -562,6 +562,8 @@ translate I DoYouWantToSaveFirst {Do you want to save}
 translate I AddToMask {Add to Mask}
 # ====== TODO To be translated ======
 translate I RemoveFromMask {Remove from Mask}
+# TODO
+translate I AddThisMoveToMask {Add Move to Mask}
 # ====== TODO To be translated ======
 translate I SearchMask {Search in Mask}
 # ====== TODO To be translated ======
@@ -1261,8 +1263,6 @@ translate I NameEditReplace {Sostituisci}
 translate I NameEditWith {con}
 translate I NameEditMatches {Corrispondenze: Digita da Ctrl+1 ad Ctrl+9 per scegliere}
 # ====== TODO To be translated ======
-translate I CheckGames {Check games}
-# ====== TODO To be translated ======
 translate I CheckGamesWhich {Check games}
 # ====== TODO To be translated ======
 translate I CheckAll {All games}
@@ -1416,6 +1416,8 @@ translate I seconds {secondi}
 translate I Abort {Annulla}
 # ====== TODO To be translated ======
 translate I Resume {Resume}
+# ====== TODO To be translated ======
+translate I Restart {Restart}
 translate I OutOfOpening {Fuori dall'apertura}
 translate I NotFollowedLine {Non hai seguito la linea}
 translate I DoYouWantContinue {Vuoi continuare?}
@@ -1483,6 +1485,8 @@ translate I Nodes {Nodi}
 translate I Depth {Profondità}
 translate I Time {Tempo}
 translate I SecondsPerMove {Secondi per mossa}
+# ====== TODO To be translated ======
+translate I TimeLabel {Time per move}
 # ====== TODO To be translated ======
 translate I Engine {Engine}
 # ====== TODO To be translated ======

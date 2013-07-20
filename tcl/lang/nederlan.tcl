@@ -173,8 +173,6 @@ menuText N WindowsCorrChess "Correspondentievenster" 0 {Openen/Sluiten van het c
 menuText N Tools "Gereedschappen" 0
 menuText N ToolsAnalysis "Schaakengine ..." 3 \
   {Start/stop schaak-analyse engine 1}
-menuText N ToolsAnalysis2 "Schaakengine #2..." 17 \
-  {Start/stop  schaak-analyse engine 2}
 menuText N ToolsEmail "E-mail Beheer" 0 {Open/sluit het e-mail beheervenster}
 menuText N ToolsFilterGraph "Grafisch filter" 7 \
   {Openen/sluiten grafisch filter venster}
@@ -202,9 +200,9 @@ menuText N ToolsNovagCitrineConfig "Configuratie" 0 {Novag Citrine configuratie}
 menuText N ToolsNovagCitrineConnect "Aansluiten" 0 {Novag Citrine aansluiten}
 menuText N ToolsPInfo "Spelerinformatie"  7 \
   {Open/wijzig het spelerinformatievenster}
-menuText N ToolsPlayerReport "Speler rapport " 3 \
-  {Genereer een speler rapport} ;
-menuText E ToolsRating "Spelers Elo-rating" 0 \
+menuText N ToolsPlayerReport "Speler rapport" 3 \
+  {Genereer een speler rapport}
+menuText N ToolsRating "Spelers Elo-rating" 0 \
   {Grafiek met Elo ratingoverzicht van de spelers van deze partij}
 menuText N ToolsScore "Partij score" 7 \
   {Laat het partij-score venster zien}
@@ -349,6 +347,8 @@ menuText N GInfoMark "Partij markeren/niet markeren" 7
 menuText N GInfoInformant "Configureer informant waarden" 0
 
 # General buttons:
+# ====== TODO To be translated ======
+translate N Apply {Apply}
 translate N Back {Terug}
 translate N Browse {Bladeren} ;
 translate N Cancel {Annuleren}
@@ -1208,7 +1208,6 @@ translate N NameEditSelect {Partijen om te wijzigen}
 translate N NameEditReplace {Vervangen}
 translate N NameEditWith {met}
 translate N NameEditMatches {Gelijken: Druk Ctrl+1 tot Ctrl+9 om te selecteren}
-translate N CheckGames {Controleer partijen}
 translate N CheckGamesWhich {Controleer partijen met}
 translate N CheckAll {Alle partijen}
 translate N CheckSelectFilterGames {Alleen partijen binnen het filter}
@@ -1364,7 +1363,8 @@ translate N seconds {seconden}
 
 translate N Abort {Geeft op}
 translate N Resume {Hervatten}
-
+# TODO
+translate N Restart {Restart}
 translate N OutOfOpening {Uit de opening}
 
 translate N NotFollowedLine {Je volgde de variant niet}
@@ -1450,6 +1450,7 @@ translate N Nodes {Nodes}
 translate N Depth {Diepte}
 translate N Time {Tijd} 
 translate N SecondsPerMove {Seconden per zet}
+translate N TimeLabel {Time per move}
 translate N Engine {Engine}
 translate N TimeMode {Tijd modus}
 translate N TimeBonus {Tijd + bonus}
@@ -1542,14 +1543,11 @@ translate N FICSGuest {Login als Gast}
 translate N FICSServerPort {Server poort}
 translate N FICSServerAddress {IP-adres}
 translate N FICSRefresh {Ververs}
+translate N FICSTimeseal {Tijdsoverschrijdings}
 translate N FICSTimesealPort {Tijdsoverschrijdingspoort}
 translate N FICSSilence {Stilte}
 translate N FICSOffers {Biedt aan}
-translate N FICSConsole {Console}
 translate N FICSGames {Partijen}
-translate N FICSUnobserve {Stop bekijken partij}
-translate N FICSProfile {Toon jouw geschiedenis en profiel}
-translate N FICSRelayedGames {Doorgezonden partijen}
 translate N FICSFindOpponent {Zoek tegenstander}
 translate N FICSTakeback {Terugnemen}
 translate N FICSTakeback2 {Terugnemen 2}
@@ -1560,14 +1558,11 @@ translate N FICSAutoColour {Automatisch}
 translate N FICSManualConfirm {Bevestig manueel}
 translate N FICSFilterFormula {Filter met formule}
 translate N FICSIssueSeek {Zoek uitdager}
-translate N FICSChallenge {Uitdagen}
 translate N FICSAccept {Aanvaard}
 translate N FICSDecline {weiger}
 translate N FICSColour {Kleur}
 translate N FICSSend {Zend}
 translate N FICSConnect {Verbind}
-translate N FICSdefaultuservars {Gebruik standaard waarden}
-translate N FICSObserveconfirm {Wil je de partij bekijken}
 
 
 translate N CCDlgConfigureWindowTitle {Configureer correspondentieschaak}

@@ -181,8 +181,6 @@ menuText D WindowsCorrChess "Fernschachfenster" 0 {Öffnet/schließt das Fernschac
 menuText D Tools "Werkzeuge" 0
 menuText D ToolsAnalysis "Analyse-Engine..." 0 \
   {Schachanalyse-Programm starten/beenden}
-menuText D ToolsAnalysis2 "Analyse-Engine #2..." 16 \
-  {Schachanalyse-Programm Nr.2 starten/beenden}
 menuText D ToolsEmail "E-Mail-Manager" 7 \
   {E-Mail-Manager öffnen/schließen}
 menuText D ToolsFilterGraph "Rel. Filtergrafik" 0 \
@@ -357,6 +355,8 @@ menuText D GInfoMark "(Un)Markiere diese Partie" 4
 menuText D GInfoInformant "Informatorwerte konfigurieren" 0
 
 # General buttons:
+# todo
+translate D Apply {Apply}
 translate D Back {Zurück}
 translate D Browse {Blättern}
 translate D Cancel {Abbrechen}
@@ -555,6 +555,8 @@ translate D TreeTotal {SUMME}
 translate D DoYouWantToSaveFirst {Soll zuerst gespeichert werden}
 translate D AddToMask {Addiere zu Maske}
 translate D RemoveFromMask {Entferne von Maske}
+# TODO
+translate D AddThisMoveToMask {Add Move to Mask}
 translate D SearchMask {Suche in einer Maske}
 translate D DisplayMask {Maske als Zugbaum}
 translate D Nag {NAG Code}
@@ -680,7 +682,6 @@ translate D AnnotateTitle {konfigurieren Annotation}
 translate D AnnotateWith {Kommentieren mit}
 translate D AnnotateWhichMoves {welche Moves}
 translate D AnnotateComment {Add Kommentator Kommentar}
-translate D AnnotateTitle {ConfigureAnnotation} ;# todo
 translate D BlundersThreshold {Grenze}
 translate D LowPriority {Niedrige CPU-Priorität}
 translate D ClickHereToSeeMoves {Hier klicken um Züge anzuzeigen}
@@ -909,6 +910,7 @@ translate D AddEloRatings {ELO-Zahlen hinzufügen}
 translate D AutoloadGame {Automatisch Partie Nr. laden}
 translate D StripTags {PGN-Markierungen entfernen}
 translate D StripTag {Markierung entfernen}
+translate D CheckGames {Konsistenzprüfung}
 translate D Cleaner {Bereiniger}
 translate D CleanerHelp {
 Der Scid-Bereiniger wird für die aktuelle Datenbank alle
@@ -1241,7 +1243,6 @@ translate D NameEditSelect {Welche Spiele sollen geändert werden?}
 translate D NameEditReplace {Ersetze}
 translate D NameEditWith {durch}
 translate D NameEditMatches {Entsprechungen: Drücke Strg+1 bis Strg+9 zum Auswählen}
-translate D CheckGames {Konsistenzprüfung}
 translate D CheckGamesWhich {Konsistenzprüfung}
 translate D CheckAll {Alle Partien}
 translate D CheckSelectFilterGames {Partien im Filter}
@@ -1397,6 +1398,8 @@ translate D limitanalysis {Analysezeit der Engine begrenzen}
 translate D seconds {Sekunden}
 translate D Abort {Abbrechen}
 translate D Resume {Fortfahren}
+# TODO
+translate D Restart {Restart}
 translate D OutOfOpening {Ende der Eröffnung}
 translate D NotFollowedLine {You did not follow the line}
 translate D DoYouWantContinue {Möchten sie fortfahren?}
@@ -1457,6 +1460,7 @@ translate D Nodes {Knoten}
 translate D Depth {Tiefe}
 translate D Time {Zeit} 
 translate D SecondsPerMove {Sekunden pro Zug}
+translate D TimeLabel {Time per move}
 translate D Engine {Engine}
 translate D TimeMode {Zeitmodus}
 translate D TimeBonus {Zeit + Bonus}
@@ -1544,14 +1548,11 @@ translate D FICSGuest {Gastlogin}
 translate D FICSServerPort {Serverport}
 translate D FICSServerAddress {IP Adresse}
 translate D FICSRefresh {Aktualisieren}
+translate D FICSTimeseal {Timeseal}
 translate D FICSTimesealPort {Timeseal Port}
 translate D FICSSilence {Konsolenfilter}
 translate D FICSOffers {Herausforderungen}
-translate D FICSConsole {Konsole}
 translate D FICSGames {laufende Partien}
-translate D FICSUnobserve {Beobachtung abbrechen}
-translate D FICSProfile {Eigenes Profil ausgeben}
-translate D FICSRelayedGames {Übertragene Partien}
 translate D FICSFindOpponent {Gegner suchen}
 translate D FICSTakeback {Zurücknehmen}
 translate D FICSTakeback2 {2 zurücknehmen}
@@ -1562,14 +1563,11 @@ translate D FICSAutoColour {automatisch}
 translate D FICSManualConfirm {manuell bestätigen}
 translate D FICSFilterFormula {Filterformel anwenden}
 translate D FICSIssueSeek {Partie anbieten}
-translate D FICSChallenge {Herausfordern}
 translate D FICSAccept {Annehmen}
 translate D FICSDecline {Ablehnen}
 translate D FICSColour {Seite wählen:}
 translate D FICSSend {senden}
 translate D FICSConnect {Verbinden}
-translate D FICSdefaultuservars {Standardvariablen verwenden}
-translate D FICSObserveconfirm {Bestätige Beobachtung der Partie}
 
 # Correspondence Chess Dialogs:
 translate D CCDlgConfigureWindowTitle {Einstellungen für Fernschach}
