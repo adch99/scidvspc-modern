@@ -413,40 +413,43 @@ set pgnColor(NextMove) "\#fefe80"
 set pgnColor(Background) "\#ffffff"
 
 array set findopponent {}
-set ::fics::use_timeseal 0
-if {$::macOS} {
-  set ::fics::timeseal_exec "$scidExeDir/timeseal"
-} else {
-  set ::fics::timeseal_exec "timeseal"
+
+proc initFICSDefaults {} {
+  set ::fics::use_timeseal 0
+  if {$::macOS} {
+    set ::fics::timeseal_exec "$scidExeDir/timeseal"
+  } else {
+    set ::fics::timeseal_exec "timeseal"
+  }
+  set ::fics::server        freechess.org
+  set ::fics::port_fics     5000
+  set ::fics::port_timeseal 5001
+  set ::fics::login         ""
+  set ::fics::password      ""
+  set ::fics::findopponent(initTime) 10
+  set ::fics::findopponent(incTime)  10
+  set ::fics::findopponent(rated)    rated
+  set ::fics::findopponent(color)    ""
+  set ::fics::findopponent(limitrating) 0
+  set ::fics::findopponent(rating1)  1000
+  set ::fics::findopponent(rating2)  1500
+  set ::fics::findopponent(manual)   manual
+  set ::fics::findopponent(formula)  ""
+  set ::fics::consolebg	grey35
+  set ::fics::consolefg	LimeGreen
+  set ::fics::chanoff	1
+  set ::fics::shouts	1
+  set ::fics::server_ip   0.0.0.0
+  set ::fics::autopromote 0
+  set ::fics::autoraise 1
+  set ::fics::smallclocks 1
+  set ::fics::size        30
+  set ::fics::sound	0
+  set ::fics::no_results	0
+  set ::fics::no_requests	0
 }
 
-set ::fics::server        freechess.org
-set ::fics::port_fics     5000
-set ::fics::port_timeseal 5001
-set ::fics::login         ""
-set ::fics::password      ""
-set ::fics::findopponent(initTime) 10
-set ::fics::findopponent(incTime)  10
-set ::fics::findopponent(rated)    rated
-set ::fics::findopponent(color)    ""
-set ::fics::findopponent(limitrating) 0
-set ::fics::findopponent(rating1)  1000
-set ::fics::findopponent(rating2)  1500
-set ::fics::findopponent(manual)   manual
-set ::fics::findopponent(formula)  ""
-set ::fics::consolebg	grey35
-set ::fics::consolefg	LimeGreen
-set ::fics::chanoff	1
-set ::fics::shouts	1
-set ::fics::server_ip   0.0.0.0
-set ::fics::autopromote 0
-set ::fics::autoraise 1
-set ::fics::smallclocks 1
-set ::fics::size        30
-set ::fics::sound	0
-set ::fics::no_results	0
-set ::fics::no_requests	0
-
+initFICSDefaults
 
 # Defaults for initial directories:
 set initialDir(base) $::env(HOME)

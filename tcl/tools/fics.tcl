@@ -125,6 +125,12 @@ namespace eval fics {
 
     button $w.button.help -text $tr(Help) -command {helpWindow FICS}
 
+    button $w.button.defaults -text $tr(Defaults) -command {
+      if {[tk_dialog .fics_dialog Abort "This will reset all FICS options. Do you wish to continue ?" question {} [tr Yes] [tr No]] == 0} {
+	initFICSDefaults
+      }
+    }
+
     button $w.button.cancel -text $tr(Cancel) -command {
       destroy .ficsConfig
     }
@@ -177,7 +183,7 @@ namespace eval fics {
 
     incr row
     grid $w.button -column 0 -row $row -columnspan 4 -sticky ew -pady 3 -padx 5
-    foreach i {connect connectguest help cancel} {
+    foreach i {connect connectguest help defaults cancel} {
       pack $w.button.$i -side left -padx 3 -pady 3 -expand 1 -fill x
     }
 
@@ -207,6 +213,7 @@ namespace eval fics {
           set sockChan [socket -async $::fics::server $::fics::port_fics]
        } err ]} {
 	  ::fics::unbusy_config
+	  $b configure -state normal
           tk_messageBox -icon error -type ok -title "Unable to contact $::fics::server" -message $err -parent .ficsConfig
           return
     }
@@ -829,7 +836,7 @@ namespace eval fics {
     incr row
     grid $w.seek   -column 0 -row $row -padx 3 -pady 8
     grid $w.help   -column 1 -row $row -padx 3 -pady 8 -sticky e
-    grid $w.cancel -column 2 -row $row -padx 3 -pady 8 -sticky e
+    grid $w.cancel -column 3 -row $row -padx 3 -pady 8 -sticky e
 
     update
     placeWinOverParent $w .fics

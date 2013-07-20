@@ -5316,7 +5316,7 @@ set helpText(FICSlogin) {<h1>FICS Login</h1>
 If you're having problems logging in, try deselecting "timeseal".</i></p>
 
 <ul>
-<li><term>Username</term> This is your login name on the FICS
+<li><term>Login Name</term> This is your user name on the FICS
 server. To login anonymously, use the "Login as guest" button.
 <i> .... It is also possible to login anonymously with a particular name. Enter
 you favourite name into the login field and clear the password field. If this
@@ -5339,6 +5339,14 @@ Timeseal is available from the
 <url http://sourceforge.net/projects/scidvspc>Scid vs. PC project page</url>.
 </li>
 
+<li><term>URL</term> This is normally "freechess.org", but during outages, it is
+also worth trying "fics2.freechess.org".
+</li>
+
+<li><term>IP Address</term> If you need to change the URL, press "Refresh" for Scid to search for a new IP Address,
+but normally you shouldnt have to worry about this field. After FICS has connected once, the IP Address shouldn't change again.
+</li>
+
 <li><term>Server port</term> specifies the port on the server.
 The default is 5000 and should be ok for almost all needs.</li>
 <li><term>Timeseal port</term> specifies the port where the
@@ -5346,7 +5354,7 @@ timeseal program is listening. The default is 5001
 and should be ok for almost all needs.</li>
 </ul>
 
-  <p><footer>Updated: Scid vs. PC 4.8 June 2012</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.10 July 2013</footer></p>
 }
 
 # FICS Find Opponent
