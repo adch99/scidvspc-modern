@@ -900,7 +900,11 @@ proc createToplevel { w } {
       set focus [focus]
       if {[catch {set focus [winfo toplevel $focus]}]} {
          # if [focus] is {}, try to grab it again
-	 focus -force .fdockmain
+         if {$::windowsOS} {
+	   break
+         } else {
+	   focus -force .fdockmain
+         }
       }
       if {$focus != $tl && ([lindex [wm stackorder .] end] == "." || $::macOS)} {
         if {$tl == ".fics"} {
