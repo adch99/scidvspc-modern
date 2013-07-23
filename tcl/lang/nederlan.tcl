@@ -3,7 +3,7 @@
 #  Added by J.Kees Hofkamp.
 #  Changes by J. Krabbenbos.
 #  Changes by Leander Laruelle.
-#  Changes by Peter C. Tak (juni 2013 // 4.9.2 - 17 juli 2013 // 4.9.2)
+#  Changes by Peter C. Tak (juni 2013 // 4.9.2 - 21 juli 2013 // 4.9.2)
 # Untranslated messages are marked with a TODO comment.
 
 
@@ -17,19 +17,19 @@ menuText N FileNew "Nieuw..." 0 {Maak een nieuwe Scid database}
 menuText N FileOpen "Openen..." 0 {Open een bestaande Scid database}
 menuText N FileClose "Sluiten" 0 {Sluit de  actieve Scid database}
 menuText N FileFinder "Bestandzoeker" 0 {Open het bestandszoekvenster}
-menuText N FileSavePgn "PGN opslaan..." 0 {}
-menuText N FileBookmarks "Bladwijzers" 0 {Bladwijzer menu (sneltoets: Ctrl+B)}
+menuText N FileSavePgn "PGN opslaan..." 0 {Deze partij als PGN-bestand opslaan}
+menuText N FileBookmarks "Bladwijzers" 2 {Bladwijzer menu (sneltoets: Ctrl+B)}
 menuText N FileBookmarksAdd "Toevoegen bladwijzer" 0 \
   {Bladwijzer naar huidige databasepartij en stelling}
 menuText N FileBookmarksFile "Bladwijzer-bestand" 0 \
   {Maak een bladwijzerbestand voor de huidige partij en stelling}
-menuText N FileBookmarksEdit "Wijzigen Bladwijzers..." 0 \
+menuText N FileBookmarksEdit "Wijzigen bladwijzers..." 0 \
   {Bladwijzermenu's}
 menuText N FileBookmarksList "Weergeven bladwijzers als lijst" 0 \
   {Weergeven bladwijzers als lijst, niet als submenu's}
 menuText N FileBookmarksSub "Weergeven bladwijzers als submenu's" 0 \
   {Weergeven bladwijzers als submenu's, niet als lijst}
-menuText N FileMaint "Onderhoud" 2 {Onderhoud Scid database}
+menuText N FileMaint "Onderhoud" 3 {Onderhoud Scid database}
 menuText N FileMaintWin "Onderhoudsvenster" 2 \
   {Open/sluit het Scid onderhoudsvenster}
 menuText N FileMaintCompact "Reorganiseer database..." 0 \
@@ -38,10 +38,10 @@ menuText N FileMaintClass "Partijen ECO-classificeren..." 10 \
   {Herbereken de ECO code van alle partijen}
 menuText N FileMaintSort "Sorteren..." 0 \
   {Sorteer alle partijen in de database}
-menuText N FileMaintDelete "Dubbele verwijderen..." 0 \
+menuText N FileMaintDelete "Dubbele partijen verwijderen..." 0 \
   {Vind dubbele partijen om ze te verwijderen}
-menuText N FileMaintTwin "Dubbele venster" 1 \
-  {Open/bijwerken het dubbele controlevenster}
+menuText N FileMaintTwin "Dubbele partijenvenster" 1 \
+  {Open/bijwerken het dubbele partijen controlevenster}
 menuText N FileMaintName "Namen" 0 \
   {Corrigeer namen/spelling}
 menuText N FileMaintNameEditor "Namen-bewerker" 6 \
@@ -56,77 +56,74 @@ menuText N FileMaintNameRound "Corrigeer ronde..." 10 \
   {Controleer rondenamen via spelling-bestand}
 menuText N FileReadOnly "Alleen lezen..." 7 \
   {Zet huidige database op alleen-lezen en voorkom wijzigingen}
-menuText N FileSwitch "Schakel naar andere database" 0 \
+menuText N FileSwitch "Schakel naar andere database" 1 \
   {Schakel naar een andere geopende database} 
-menuText N FileExit "Programma afsluiten" 0 {Einde ScidVsPC programma}
+menuText N FileExit "Programma afsluiten" 3 {Einde ScidVsPC programma}
 menuText N FileMaintFixBase "Herstel beschadigde database" 0 {Proberen een beschadigde database te herstellen}
 
 # Edit menu:
-menuText N Edit "Bewerken" 0
-menuText N EditAdd "Nieuwe variant" 8 \
+menuText N Edit "Bewerken" 2
+menuText N EditAdd "Nieuwe variant" 4 \
  {Voeg op dit punt een variant toe}
-menuText N EditPasteVar "Plakken variatie" 0
-menuText N EditDelete "Variant verwijderen" 11 \
+menuText N EditPasteVar "Plakken variant" 1
+menuText N EditDelete "Verwijderen variant" 6 \
  {Verwijder een variant voor deze zet}
 menuText N EditFirst "Maak hoofdvariant" 5 \
   {Maak deze variant de eerste in de lijst}
-menuText N EditMain "Variatie op hoofdvariant" 13 \
-   {Promoveerd de variant als hoofdvariant}
-menuText N EditTrial "Probeer variatie" 0 \
-  {Start/stop probeer modus, om een idee op het bord te testen}
-menuText N EditStrip "Verwijder analyse" 2 {Verwijder commentaar of varianten uit deze partij}
-menuText N EditUndo "Ongedaan" 0 {Maak laatset verandering ongedaan}
-menuText N EditRedo "Opnieuw" 0
-menuText N EditStripComments "Commentaar" 0 \
+menuText N EditMain "Variant op hoofdvariant" 1 \
+   {Promoveert de variant tot hoofdvariant}
+menuText N EditTrial "Variant uitproberen" 14 \
+  {Start/stop probeer modus, om een idee/variant op het bord te testen}
+menuText N EditStrip "Verwijder analyse" 1 {Verwijder commentaar of varianten uit deze partij}
+menuText N EditUndo "Ongedaan" 0 {Maak laatste verandering ongedaan}
+menuText N EditRedo "Opnieuw" 5
+menuText N EditStripComments "- commentaar" 0 \
   {Verwijder alle commentaar en annotaties uit deze partij}
-menuText N EditStripVars "Varianten" 0 {Verwijder alle varianten uit deze partij}
-menuText N EditStripBegin " Zetten vanaf begin " 1 \
-  {Verwijder alle zetten vanaf begin van de partij} ;
-menuText N EditStripEnd " Zetten tot het einde  " 0 \
-  {Verwijder alle verdere zetten tot het einde van de partij} ;
-menuText N EditReset "Clipbase leegmaken" 0 \
-  {Maak Clipbase helemaal leeg}
-menuText N EditCopy "Partij naar Clipbase" 7 \
-  {Kopieer deze partij naar het Clipbase}
-menuText N EditPaste "Partij vanuit Clipbase" 7 \
-  {Plak actieve Clipbase-partij hier}
-menuText N EditPastePGN "Plak de klembord-tekst als PGN partij..." 10 \
-  {Interpreteer de klembord-tekst als een partij in PGN notatie en plak die hier} ;
+menuText N EditStripVars "- varianten" 0 {Verwijder alle varianten uit deze partij}
+menuText N EditStripBegin "- zetten vanaf begin" 1 \
+  {Verwijder alle zetten vanaf begin van de partij}
+menuText N EditStripEnd "- zetten tot het einde" 0 \
+  {Verwijder alle verdere zetten tot het einde van de partij}
+menuText N EditReset "Clipbase leegmaken" 0  {Maak Clipbase helemaal leeg}
+menuText N EditCopy "Partij naar Clipbase" 7  {Kopieer deze partij naar het Clipbase}
+menuText N EditPaste "Partij vanuit Clipbase" 7  {Plak actieve Clipbase-partij hier}
+menuText N EditPastePGN "Plak de klembord-tekst als PGN partij..." 0 \
+  {Interpreteer de klembord-tekst als een partij in PGN notatie en plak die hier}
 menuText N EditSetup "Stelling opzetten..." 0 \
   {Kies een start-stelling voor de partij}
-menuText N EditCopyBoard "Kopieer stelling " 6 \
-  {Kopieer de huidige stelling in FEN notatie naar de tekst het tekst klembord } ;
-menuText N EditCopyPGN "Kopieer PGN " 0 {}
-menuText N EditPasteBoard "Invoegen start stelling" 12 \
-  {Maak de start stelling van de huidige tekst selectie (klembord)}
+menuText N EditCopyBoard "Kopieer stelling " 0 \
+  {Kopieer de huidige stelling in FEN notatie naar het geheugen (klembord)}
+menuText N EditCopyPGN "Kopieer PGN " 9 {Kopieer de PGN naar het geheugen (klembord)}
+menuText N EditPasteBoard "Invoegen start stelling" 0 \
+  {Maak de beginstelling van de huidige tekst selectie (van klembord)}
 
 # Game menu:
 menuText N Game "Partij" 0
 menuText N GameNew "Partij leegmaken" 7 \
   {Maak partij leeg; sla veranderingen niet op}
-menuText N GameFirst "Eerste partij laden" 5 {Laad de eerste gefilterde partij}
-menuText N GamePrev "Vorige partij laden" 0 \
+menuText N GameFirst "Eerste partij laden" 0 {Laad de eerste gefilterde partij}
+menuText N GamePrev "Vorige partij laden" 2 \
   {Laad vorige partij in het filter}
-menuText N GameReload "Partij opnieuw laden" 7 \
+menuText N GameReload "Partij opnieuw laden" 1 \
   {Laad partij opnieuw; sla veranderingen niet op}
 menuText N GameNext "Volgende partij laden" 3 \
   {Laad volgende partij in het filter}
-menuText N GameLast "Laatste partij laden" 6 {Laad de laatste gefilterde partij}
-menuText N GameRandom "Laad willekeurige partij" 8 {Laad een willekeurige partij}
+menuText N GameLast "Laatste partij laden" 4 {Laad de laatste gefilterde partij}
+menuText N GameRandom "Laad willekeurige partij" 5 {Laad een willekeurige partij}
 menuText N GameNumber "Laad partijnummer..." 12 \
   {Laad partijnummer:}
-menuText N GameReplace "Partij overschrijven..." 11 \
-  {Bewaar partij; overschrijf oude versie}
+menuText N GameReplace "Partij overschrijven..." 7 \
+  {Bewaar partij; overschrijf de oude versie}
 menuText N GameAdd "Partij toevoegen..." 7 \
   {Bewaar partij en voeg toe aan de database}
-menuText N GameInfo "Partij informatie invoeren" 9
+menuText N GameInfo "Partij informatie invoeren" 0
 menuText N GameBrowse "Door de partijen bladeren" 0
 menuText N GameList "Laat alle partijen zien" 0
-menuText N GameDeepest "Opening bepalen" 8 \
+menuText N GameDeepest "Opening bepalen" 0 \
   {Ga naar de diepste stelling uit het ECO openingboek}
 menuText N GameGotoMove "Zetnummer..." 0 \
   {Ga naar zetnummer .. in de partij}
-menuText N GameNovelty "Vind nieuwtje..." 7 \
+menuText N GameNovelty "Vind nieuwtje..." 0 \
   {Vind de eerste zet in deze partij die nog niet eerder is gespeeld}
 
 # Search menu:
@@ -134,36 +131,36 @@ menuText N Search "Zoeken" 0
 menuText N SearchReset "Alle partijen" 0 \
   {Reset filter en toon alle partijen}
 menuText N SearchNegate "Selectie omdraaien" 9 {Draai filter om en toon de andere partijen uit de database}
-menuText N SearchEnd "Ga naar laatste Filter" 0
+menuText N SearchEnd "Ga naar laatste filter" 0
 menuText N SearchCurrent "Zoek huidige stelling" 5 \
   {Zoek in database naar huidige stelling}
-menuText N SearchHeader "Partijgegevens..." 5 \
+menuText N SearchHeader "Partijgegevens..." 0 \
   {Zoek op speciale informatie: speler, evenement enz.}
 menuText N SearchMaterial "Materiaal/Kenmerken..." 0 \
   {Zoek op patroon: bord, materiaal enz.}
-menuText N SearchMoves {Zetten} 0 {}
-menuText N SearchUsing "Zoekopties" 0 \
+menuText N SearchMoves {Zetten} 1 {}
+menuText N SearchUsing "Zoekopties" 3 \
   {Zoek met gebruikmaking van opgeslagen opties}
 
 # Windows menu:
 menuText N Windows "Venster" 0
 menuText N WindowsGameinfo "Partij informatie" 0 {Toon de informatiedetails over de partij}
 menuText N WindowsComment "Bewerk commentaar" 0 \
- {Open/sluit commentaar bewerkings venster}
+ {Open/sluit commentaar bewerkingsvenster}
 menuText N WindowsGList "Toon alle partijen" 0 \
   {Open/sluit lijst met partijen}
-menuText N WindowsPGN "PGN-venster" 0 {Open/sluit het PGN-notatie venster}
+menuText N WindowsPGN "PGN-venster" 4 {Open/sluit het PGN-notatie venster}
 menuText N WindowsCross "Kruistabel" 0 {Toon toernooi kruistabel voor huidige partij}
-menuText N WindowsPList "Spelervinder" 2 {Open/sluit de spelervinder} ;
-menuText N WindowsTmt "Toernooi Zoeker" 2 {Open/sluit het toernooi zoekvenster}
+menuText N WindowsPList "Speler zoeker" 0 {Open/sluit venster om spelers te zoeken}
+menuText N WindowsTmt "Toernooi zoeker" 9 {Open/sluit het toernooi zoekvenster}
 menuText N WindowsSwitcher  "Database wisselen" 0 \
   {Open/sluit het database-wisselen venster}
-menuText N WindowsMaint "Onderhoudsvenster" 5 \
+menuText N WindowsMaint "Onderhoudsvenster" 0 \
   {Open/sluit het onderhoudsvenster}
 menuText N WindowsECO "ECO Browser" 0 {Open/sluit het ECO browser venster}
-menuText N WindowsStats "Statistiek" 0 \
+menuText N WindowsStats "Statistiek" 4 \
   {Open/sluit het filter statiekenvenster}
-menuText N WindowsTree "Openingoverzicht" 0 {Open/sluit het Openingoverzichtvenster}
+menuText N WindowsTree "Openingoverzicht" 3 {Open/sluit het Openingoverzichtvenster}
 menuText N WindowsTB "Tablebase venster" 1 \
   {Open/sluit het Tablebase venster}
 menuText N WindowsBook "Boek venster" 0 {Open/sluit het boek venster}
@@ -171,26 +168,26 @@ menuText N WindowsCorrChess "Correspondentievenster" 0 {Openen/Sluiten van het c
 
 # Tools menu:
 menuText N Tools "Gereedschappen" 0
-menuText N ToolsAnalysis "Schaakengine ..." 3 \
+menuText N ToolsAnalysis "Schaakengine ..." 0 \
   {Start/stop schaak-analyse engine 1}
-menuText N ToolsEmail "E-mail Beheer" 0 {Open/sluit het e-mail beheervenster}
-menuText N ToolsFilterGraph "Grafisch filter" 7 \
+menuText N ToolsEmail "E-mail beheer" 0 {Open/sluit het e-mail beheervenster}
+menuText N ToolsFilterGraph "Grafisch filter" 0 \
   {Openen/sluiten grafisch filter venster}
-menuText N ToolsAbsFilterGraph "Abs. grafisch filter" 7 {Open/sluit het grafische filtervenster voor absolute waarden}
-menuText N ToolsOpReport "Openingen rapportering" 0 \
+menuText N ToolsAbsFilterGraph "Abs. grafisch filter" 0 {Open/sluit het grafische filtervenster voor absolute waarden}
+menuText N ToolsOpReport "Openingen rapportering" 3 \
   {Genereer een openingenrapport voor de huidige stelling}
-menuText N ToolsOpenBaseAsTree "Open database als boom" 0   {Open een database en toon deze als een boomweergave}
-menuText N ToolsOpenRecentBaseAsTree "Open recente database als boom" 0   {Open een recent gebruikte database als boomweergave}
-menuText N ToolsTracker "Stuk spoorvolger"  0 {Open het stuk spoorvolger venster}
-menuText N ToolsTraining "Training"  0 {Training gereedschappen (tactiek, openingen,...) }
-menuText N ToolsComp "Toernooi" 2 {Schaak-engine toernooi}
+menuText N ToolsOpenBaseAsTree "Open database als boom" 5  {Open een database en toon deze als een boomweergave}
+menuText N ToolsOpenRecentBaseAsTree "Open recente database als boom" 5  {Open een recent gebruikte database als boomweergave}
+menuText N ToolsTracker "Stuk spoorvolger" 1 {Open het stuk spoorvolger venster}
+menuText N ToolsTraining "Training" 1 {Training gereedschappen (tactiek, openingen,...) }
+menuText N ToolsComp "Toernooi" 1 {Schaak-engine toernooi}
 menuText N ToolsTacticalGame "Tactische partij"  0 {Speel en tactische partij}
 menuText N ToolsSeriousGame "Serieuze partij"  0 {Speel een serieuze partij}
-menuText N ToolsTrainTactics "Tactiek "  0 {Los tactische stellingen op }
+menuText N ToolsTrainTactics "Tactiek " 1 {Los tactische stellingen op }
 menuText N ToolsTrainCalvar "Bereken varianten"  0 {Training in het berekenen van varianten}
 menuText N ToolsTrainFindBestMove "Vind de beste zet"  0 {Vind de beste zet}
 menuText N ToolsTrainFics "Internet"  0 {Spelen op FICS - freechess.org}
-menuText N ToolsBookTuning "Openingenboek afstemming " 0 {Openingenboek afstemming}
+menuText N ToolsBookTuning "Openingenboek afstemmen" 0 {Openingenboek afstemmen}
 menuText N ToolsConnectHardware "Verbind hardware" 0 {Externe hardware verbinden cq aansluiten}
 menuText N ToolsConnectHardwareConfigure "Configureer..." 0 {Configureer externe hardware en verbinding}
 menuText N ToolsConnectHardwareNovagCitrineConnect "Verbind Novag Citrine" 0 {Verbind Novag Citrine met ScidVsPC}
@@ -198,13 +195,13 @@ menuText N ToolsConnectHardwareInputEngineConnect "Invoer Engine aansluiten" 0 {
 menuText N ToolsNovagCitrine "Novag Citrine" 0 {Novag Citrine}
 menuText N ToolsNovagCitrineConfig "Configuratie" 0 {Novag Citrine configuratie}
 menuText N ToolsNovagCitrineConnect "Aansluiten" 0 {Novag Citrine aansluiten}
-menuText N ToolsPInfo "Spelerinformatie"  7 \
+menuText N ToolsPInfo "Spelerinformatie"  6 \
   {Open/wijzig het spelerinformatievenster}
-menuText N ToolsPlayerReport "Speler rapport" 3 \
+menuText N ToolsPlayerReport "Speler rapport " 7 \
   {Genereer een speler rapport}
-menuText N ToolsRating "Spelers Elo-rating" 0 \
+menuText N ToolsRating "Spelers Elo-rating" 3 \
   {Grafiek met Elo ratingoverzicht van de spelers van deze partij}
-menuText N ToolsScore "Partij score" 7 \
+menuText N ToolsScore "Partij score" 0 \
   {Laat het partij-score venster zien}
 menuText N ToolsExpCurrent "Partij exporteren" 8 \
   {Exporteer huidige partij naar een bestand}
@@ -224,21 +221,21 @@ menuText N ToolsExpFilterHTML "Filter in HTML-formaat exporteren..." 10 \
 menuText N ToolsExpFilterHTMLJS "Exporteer filter naar HTML/Javascript bestand..." 17 {Schrijf alle via filter geselecteerde partijen naar een HTML/Javascript bestand}
 menuText N ToolsExpFilterLaTeX "Filter in LaTeX-formaat exporteren..." 10 \
   {Schrijf selectie naar LaTex-bestand}
-menuText N ToolsImportOne "Een PGN partij importeren..." 4 \
+menuText N ToolsImportOne "Een PGN partij importeren..." 16 \
   {Importeer PGN partij}
 menuText N ToolsImportFile "PGN database importeren..." 4 \
   {Importeer PGN bestand}
-menuText N ToolsStartEngine1 "Start engine 1" 0  {Start engine 1}
-menuText N ToolsStartEngine2 "Start engine 2" 0  {Start engine 2}
+menuText N ToolsStartEngine1 "Start engine 1" 13  {Start engine 1}
+menuText N ToolsStartEngine2 "Start engine 2" 13  {Start engine 2}
 menuText N ToolsScreenshot "Kopieer diagram" 0
-menuText N Play "Speel" 0
 
+menuText N Play "Speel" 0
 menuText N CorrespondenceChess "Correspondentieschaak" 0 {Functies voor e-mail en Xfcc gebaseerde correspondentieschaak}
 menuText N CCConfigure "Configureer..." 0 {Configureer externe gereedschappen en algemene instellingen}
 menuText N CCConfigRelay "Bekijk partijen..." 10 {Configureer partijen die je wilt bekijken}
 menuText N CCOpenDB "Open database..." 0 {Open de standaard correspondentieschaak database}
-menuText N CCRetrieve "Haal Partijen op" 0 {Haal partijen op via externe (Xfcc-)helper}
-menuText N CCInbox "Verwerk Inbox" 0 {Verwerk alle bestanden in ScidVsPC Inbox}
+menuText N CCRetrieve "Haal partijen op" 0 {Haal partijen op via externe (Xfcc-)helper}
+menuText N CCInbox "Verwerk inbox" 0 {Verwerk alle bestanden in ScidVsPC inbox}
 menuText N CCSend "Stuur de zet op" 0 {Stuur de zet op via e-mail of de externe (Xfcc-)helper}
 menuText N CCResign "Geef op" 0 {Geef op (niet via e-mail)}
 menuText N CCClaimDraw "Eis remise" 0 {Stuur de zet op en eis remise (niet via e-mail)}
@@ -265,7 +262,7 @@ menuText N OptionsGInfo "Partij informatie" 0 {Parij-informatie opties}
 menuText N OptionsFics "FICS" 0
 menuText N OptionsFicsAuto "Autopromotie koningin" 0
 menuText N OptionsFicsClock "Digitale klok" 0
-menuText N OptionsLanguage "Kies taal" 5 {Kies taal}
+menuText N OptionsLanguage "Kies taal" 0 {Kies taal}
 menuText N OptionsMovesTranslatePieces "Stukken vertalen" 0 {Vertalen eerste letters van de stukken}
 menuText N OptionsMovesHighlightLastMove "Markeren laatste zet" 0 {De laatst gespeelde zet markeren}
 menuText N OptionsMovesHighlightLastMoveDisplay "Tonen" 0 {Tonen laatste zet markering}
@@ -286,49 +283,49 @@ menuText N OptionsShowVarPopup "Toon variantenvenster" 0 {In-/Uitschakelen weerg
 menuText N OptionsMovesSpace "Spaties zetten achter zetnummer" 0 {Zet spaties na het zetnummer}  
 menuText N OptionsMovesKey "Auto-aanvullen" 0 \
   {Aan/uitschakelen van toetsenbordzet auto-aanvullen}
-menuText N OptionsMovesShowVarArrows "Toon pijlen voor varianten" 0 {Zet aan/af pijlen om variantenzetten te tonen}
+menuText N OptionsMovesShowVarArrows "Toon pijlen voor varianten" 0 {Aan-/Uitzetten weergave pijlen van varianten}
 menuText N OptionsNumbers "Getalformaat" 5 \
   {Kies de manier waarop getallen te zien zijn}
-menuText N OptionsStartup "Opstarten" 3 {Selecteer de vensters die tijdens starten geopend worden}
+menuText N OptionsStartup "Opstarten" 0 {Selecteer de vensters die tijdens starten geopend worden}
 menuText N OptionsTheme "Thema" 0 {Verander het uitzicht van de interface}
 menuText N OptionsWindows "Vensters" 0 {Venster opties}
 menuText N OptionsWindowsIconify "Auto-icon" 5 \
   {Breng alle vensters in iconvorm als het hoofdvenster naar icon gaat.}
 menuText N OptionsWindowsRaise "Auto-voorgrond" 0 \
   {Breng vensters terug naar de voorgrond (bvb. voortgangsbalken) wanneer ze onzichtbaar zijn.}
-menuText N OptionsSounds "Geluiden ..." 2 {Configureer zet aankondigingsgeluiden} ;
+menuText N OptionsSounds "Geluiden ..." 4 {Configureer zet aankondigingsgeluiden} ;
 menuText N OptionsWindowsDock "Veranker de vensters" 0 {Veranker de vensters}
 menuText N OptionsWindowsSaveLayout "Opmaak opslaan" 0 {Opmaak opslaan}
 menuText N OptionsWindowsRestoreLayout "Opmaak herstellen" 0 {Opmaak herstellen}
 menuText N OptionsWindowsShowGameInfo "Toon de informatie over de partij" 0 {Toon de informatie over de partij}
 menuText N OptionsWindowsAutoLoadLayout "Auto laad eerste layout" 0 {Auto laad eerste layout bij opstarten}
 menuText N OptionsWindowsAutoResize "Bordgrootte automatisch aanpassen" 0 {}
-menuText N OptionsToolbar "Gereedschappenbalk" 12 \
+menuText N OptionsToolbar "Gereedschappenbalk" 0 \
   {Weergeven/verbergen hoofdvenster gereedschappenbalk}
-menuText N OptionsECO "ECO data laden..." 0 \
+menuText N OptionsECO "ECO data laden..." 1 \
   {Laad het ECO classificatie bestand}
 menuText N OptionsSpell "Laad spelling (namen)..." 5 \
   {Laad het ScidVsPC spelling-bestand}
-menuText N OptionsTable "Eindspeldatabase laden..." 9 \
+menuText N OptionsTable "Eindspeldatabase laden..." 0 \
   {Kies een eindspeldatabase, alle in de map aanwezige bestanden worden gebruikt}
 menuText N OptionsRecent "Recente bestanden..." 0 \
   {Wijzig het aantal recent gebruikte bestanden in het Bestand menu}
-menuText N OptionsBooksDir "Openingboek map..." 0 {Map met openingboeken instellen}
+menuText N OptionsBooksDir "Openingboek map..." 3 {Map met openingboeken instellen}
 menuText N OptionsTacticsBasesDir "Databases map..." 0 {Map met de tactieken (training) databases instellen}
-menuText N OptionsSave "Opties bewaren" 0 \
+menuText N OptionsSave "Opties bewaren" 9 \
   "Bewaar alle instellingen in het bestand $::optionsFile"
-menuText N OptionsAutoSave "Automatisch bewaren opties tijdens afsluiten" 0 \
+menuText N OptionsAutoSave "Automatisch bewaren opties tijdens afsluiten" 1 \
   {Automatisch bewaren alle gewijzigde opties bij het afsluiten van ScidVsPC}
 
 # Help menu:
 menuText N Help "Help" 0
 menuText N HelpContents "Inhoud" 0 {Toon de help inhoudspagina} ;
-menuText N HelpIndex "Index" 0 {Toon de help indexpagina}
+menuText N HelpIndex "Index" 1 {Toon de help indexpagina}
 menuText N HelpGuide "Snelle help" 0 {Laat de snelle helppagina zien}
 menuText N HelpHints "Hints" 0 {Laat de hints helppagina zien}
 menuText N HelpContact "Contact-info" 0 {Laat de contact-infopagina zien}
 menuText N HelpTip "Tip van de dag" 0 {Laat een handige ScidVsPC tip zien}
-menuText N HelpStartup "Startvenster" 5 {Laat het startvenster zien}
+menuText N HelpStartup "Startvenster" 0 {Laat het startvenster zien}
 menuText N HelpAbout "Over Scid" 0 {Informatie over ScidVsPC}
 
 # Game info box popup menu:
@@ -338,7 +335,7 @@ menuText N GInfoFEN "FEN" 0
 menuText N GInfoMarks "Toon gekleurde velden en pijlen. " 5
 menuText N GInfoWrap "Lange regels op schermbreedte splitsen." 0
 menuText N GInfoFullComment "Volledig commentaar weergeven" 10
-menuText N GInfoPhotos "Toon fotos" 5 ;
+menuText N GInfoPhotos "Toon foto's" 5 ;
 menuText N GInfoTBNothing "Eindspel tablebases: niets" 12
 menuText N GInfoTBResult  "Eindspel tablebases: alleen resultaat" 12
 menuText N GInfoTBAll "Eindspel tablebases: resultaat en beste zetten" 19
@@ -347,8 +344,7 @@ menuText N GInfoMark "Partij markeren/niet markeren" 7
 menuText N GInfoInformant "Configureer informant waarden" 0
 
 # General buttons:
-# ====== TODO To be translated ======
-translate N Apply {Apply}
+translate N Apply {Toepassen}
 translate N Back {Terug}
 translate N Browse {Bladeren} ;
 translate N Cancel {Annuleren}
@@ -373,7 +369,7 @@ translate N Search {Zoeken}
 translate N Stop {Stop}
 translate N Store {Opbergen}
 translate N Update {Bijwerken}
-translate N ChangeOrient {Wijzigen venster orientatie}
+translate N ChangeOrient {Wijzigen venster oriëntatie}
 translate N ShowIcons {Toon iconen} ;
 translate N None {Geen}
 translate N First {Eerste}
@@ -400,7 +396,7 @@ translate N Black {Zwart}
 translate N Player {Speler}
 translate N Rating {Eloklassering}
 translate N RatingDiff {Verschil Elo klassering (Wit - Zwart)}
-translate N AverageRating {Gemiddelde Elo rangschikking} ;
+translate N AverageRating {Gemiddelde Elo rangschikking}
 translate N Event {Evenement}
 translate N Site {Plaats}
 translate N Country {Land}
@@ -435,9 +431,9 @@ translate N Total {Totaal}
 translate N readonly {alleen-lezen}
 
 # Standard error messages:
-translate N ErrNotOpen {Deze database is niet geopend.} ;
-translate N ErrReadOnly {Deze database is alleen lezen; kan niet veranderd worded.} ;
-translate N ErrSearchInterrupted {Zoeken werd onderbroken; de resultaten zijn onvolledig.} ;
+translate N ErrNotOpen {Deze database is niet geopend.}
+translate N ErrReadOnly {Deze database is alleen lezen; kan niet veranderd worden.}
+translate N ErrSearchInterrupted {Zoeken werd onderbroken; de resultaten zijn onvolledig.}
 
 # Game information:
 translate N twin {Dubbele partijen}
@@ -459,7 +455,7 @@ translate N PInfoMostWhite {Meest gespeelde opening als wit}
 translate N PInfoMostBlack {Meest gespeelde opening als zwart}
 translate N PInfoRating {Geschiedenis Elo klassering}
 translate N PInfoBio {Biografie}
-translate N PInfoEditRatings {Bewerk Elo rangschikking} ;
+translate N PInfoEditRatings {Bewerk Elo rangschikking}
 
 # Tablebase information:
 translate N Draw {Remise}
@@ -474,10 +470,10 @@ translate N allOthersLose {alle overigen verliezen}
 translate N matesIn {Mat in}
 translate N hasCheckmated {geeft mat}
 translate N longest {langste}
-translate N WinningMoves {Winnende zetten} ;
-translate N DrawingMoves {Remise zetten} ;
-translate N LosingMoves {Verliezende zetten} ;
-translate N UnknownMoves {Onbekend resultaat zetten} ;
+translate N WinningMoves {Winnende zetten}
+translate N DrawingMoves {Remise zetten}
+translate N LosingMoves {Verliezende zetten}
+translate N UnknownMoves {Onbekend resultaat zetten}
 
 # Tip of the day:
 translate N Tip {Tip}
@@ -496,11 +492,11 @@ menuText N TreeFileBest "Lijst beste partijen" 0 {Weergeven van de lijst met bes
 menuText N TreeFileGraph "Grafiek-venster" 0 \
   {Weergeven van de grafiek voor deze tak}
 menuText N TreeFileCopy "Kopieer boom tekst naar klembord" 0 \
-  {Kopieren van de boomstatistieken naar het klembord}
+  {Kopiëren van de boomstatistieken naar het klembord}
 menuText N TreeFileClose "Zoekboom venster sluiten" 0 {Sluiten van het zoekboom venster}
 menuText N TreeMask "Masker" 0
 menuText N TreeMaskNew "Nieuw" 0 {Nieuw masker}
-menuText N TreeMaskOpen "Open" 0 {Open mask}
+menuText N TreeMaskOpen "Open" 0 {Open masker}
 menuText N TreeMaskOpenRecent "Open recent" 0 {Open recent masker}
 menuText N TreeMaskSave "Bewaar" 0 {Bewaar het masker}
 menuText N TreeMaskClose "Sluiten" 0 {Sluit het masker}
@@ -518,7 +514,7 @@ menuText N TreeOpt "Opties" 0
 menuText N TreeOptSlowmode "Trage modus" 0 {Trage modus voor updates (hoge nauwkeurigheid)}
 menuText N TreeOptFastmode "Snelle modus" 0 {Snelle modus voor updates (geen omwisselingen van zetten)}
 menuText N TreeOptFastAndSlowmode "Snelle en trage modus" 0 {Eerst snelle modus en daarna trage modus voor updates}
-menuText N TreeOptStartStop "Auto verversing" 0 {Zet automatische verversing van het boomvenster op/af}
+menuText N TreeOptStartStop "Automatisch verversen" 0 {Zet automatisch verversen van het boomvenster aan/uit}
 menuText N TreeOptLock "Vergrendelen" 0 {Vergrendelen/Ontgrendelen van de boom bij de huidige database}
 menuText N TreeOptTraining "Training" 0 {Aan/Uit zetten training modus}
 menuText N TreeOptAutosave "Autom.cache-data Bewaren" 4 \
@@ -601,18 +597,18 @@ translate N FinderCtxDelete {Verwijderen}
 # Player finder:
 menuText N PListFile "Bestand" 0
 menuText N PListFileUpdate "Bijwerken" 0
-menuText N PListFileClose "Dichtbij Speler Vinder" 0 ;
+menuText N PListFileClose "Sluiten" 0
 menuText N PListSort "Sorteren" 0
-menuText N PListSortName "Naam" 0 ;
+menuText N PListSortName "Naam" 0
 menuText N PListSortElo "Elo" 0
-menuText N PListSortGames "Partijen" 0 ;
-menuText N PListSortOldest "Oudste" 0 ;
-menuText N PListSortNewest "Niewste" 0 ;
+menuText N PListSortGames "Partijen" 0
+menuText N PListSortOldest "Oudste" 0
+menuText N PListSortNewest "Nieuwste" 0
 
 # Tournament finder:
 menuText N TmtFile "Bestand" 0
 menuText N TmtFileUpdate "Bijwerken" 0
-menuText N TmtFileClose "Sluiten Toernooi zoeker" 0
+menuText N TmtFileClose "Sluiten toernooi zoeker" 0
 menuText N TmtSort "Sorteren" 0
 menuText N TmtSortDate "Datum" 0
 menuText N TmtSortPlayers "Spelers" 0
@@ -621,7 +617,7 @@ menuText N TmtSortElo "Elo" 0
 menuText N TmtSortSite "Plaats" 0
 menuText N TmtSortEvent "Evenement" 1
 menuText N TmtSortWinner "Winnaar" 0
-translate N TmtLimit "Limiet Lijst"
+translate N TmtLimit "Lijst grootte"
 translate N TmtMeanElo "Laagste gem. Elo" 
 translate N TmtNone "Geen toernooien gevonden."
 
@@ -661,14 +657,14 @@ translate N AnnotateAllMoves {Annotateer alle zetten}
 translate N AnnotateWhite {Alleen voor zetten van Wit}
 translate N AnnotateBlack {Alleen voor zetten van Zwart}
 translate N AnnotateNotBest {Als de partijzet niet de beste is.}
-translate N AnnotateBlundersOnly {Als de partijzet een klaarblijjelijke blunder is}
-translate N AnnotateBlundersOnlyScoreChange {Blunder Analyse rapport, met scorewijziging van/naar: }
-translate N AnnotateTitle {Configureren Annotatie}
-translate N AnnotateWith {Annoteren Met}
+translate N AnnotateBlundersOnly {Als de partijzet een blunder is}
+translate N AnnotateBlundersOnlyScoreChange {Blunder analyse rapport, met scorewijziging van/naar: }
+translate N AnnotateTitle {Configureren annotatie}
+translate N AnnotateWith {Annoteren met}
 translate N AnnotateWhichMoves {welke zetten}
 translate N AnnotateComment {Voeg annotator commentaar te leveren}
 translate N BlundersThreshold {Ondergrens}
-translate N LowPriority {Lage CPU prioriteit} ;
+translate N LowPriority {Lage CPU prioriteit}
 translate N ClickHereToSeeMoves {Klik hier om zetten te zien}
 translate N ConfigureInformant {Annotaties configureren}
 translate N Informant!? {Interessante zet}
@@ -682,7 +678,7 @@ translate N Informant++- {Je mag stellen dat de partij gewonnen is}
 translate N Book {Openingenboek}
 
 # Analysis Engine open dialog:
-translate N EngineList {Analyse Enginelijst}
+translate N EngineList {Analyse enginelijst}
 translate N EngineName {Naam}
 translate N EngineCmd {Commando}
 translate N EngineArgs {Parameters}
@@ -701,7 +697,7 @@ menuText N StatsOpt "Opties" 0
 
 # PGN window menus:
 menuText N PgnFile "Bestand" 0
-menuText N PgnFileCopy "Kopieer partij naar klembord" 0 ;#
+menuText N PgnFileCopy "Kopieer partij naar klembord" 0
 menuText N PgnFilePrint "Als PGN bestand Bewaren..." 0
 menuText N PgnFileClose "PGN-venster sluiten" 0
 menuText N PgnOpt "Opties" 0
@@ -715,7 +711,7 @@ menuText N PgnOptSpace "Spatie na zetnummer" 0
 menuText N PgnOptStripMarks "Verwijder gekleurde vierkante haken codes" 1
 menuText N PgnOptChess "Schaakstukken" 0
 menuText N PgnOptScrollbar "Scrollbalk" 6
-menuText N PgnOptBoldMainLine "Gebruik vette tekst voor zetten hoofdvariant" 4 ;
+menuText N PgnOptBoldMainLine "Gebruik vette tekst voor zetten hoofdvariant" 4
 menuText N PgnColor "Kleuren" 0
 menuText N PgnColorHeader "Kop..." 0
 menuText N PgnColorAnno "Annotaties..." 0
@@ -781,16 +777,16 @@ menuText N OprepFileLaTeX " Bewaren in LaTeX-formaat..." 13
 menuText N OprepFileOptions "Opties..." 0
 menuText N OprepFileClose "Sluit rapportvenster" 0
 menuText N OprepFavorites "Favorieten" 1 ;
-menuText N OprepFavoritesAdd "Voeg Rapport toe..." 0 ;
-menuText N OprepFavoritesEdit "Bewerk Favoriete Rapport..." 0 ;
-menuText N OprepFavoritesGenerate "Genereer Rapporten..." 0 ;
+menuText N OprepFavoritesAdd "Voeg rapport toe..." 0 ;
+menuText N OprepFavoritesEdit "Bewerk favoriete rapport..." 0 ;
+menuText N OprepFavoritesGenerate "Genereer rapporten..." 0 ;
 menuText N OprepHelp "Help" 0
 menuText N OprepHelpReport "Help (openingsrapport)" 0
 menuText N OprepHelpIndex "Inhoud" 0
 
 # Header search:
 translate N HeaderSearch {Zoek naar kop}
-translate N EndSideToMove {Zijde aan zet bij partijeinde} ;
+translate N EndSideToMove {Kleur aan zet bij partijeinde} ;
 translate N GamesWithNoECO {Partijen zonder ECO?}
 translate N GameLength {Lengte partij}
 translate N FindGamesWith {Vind partijen met vlag}
@@ -805,7 +801,7 @@ translate N BlackOpFlag {Zwart opening}
 translate N MiddlegameFlag {Middenspel}
 translate N EndgameFlag {Eindspel}
 translate N NoveltyFlag {Nieuwtje}
-translate N PawnFlag {Pionnenstructur}
+translate N PawnFlag {Pionnenstructuur}
 translate N TacticsFlag {Tactiek}
 translate N QsideFlag {Damevleugel}
 translate N KsideFlag {Koningsvleugel}
@@ -828,10 +824,10 @@ translate N GlistYear {Jaar}
 translate N GlistEDate {Datum evenement}
 translate N GlistResult {Uitslag}
 translate N GlistLength {Lengte}
-translate N GlistCountry {Country}
+translate N GlistCountry {Land}
 translate N GlistECO {ECO}
 translate N GlistOpening {Opening}
-translate N GlistEndMaterial {Eind-Material}
+translate N GlistEndMaterial {Eind-Materiaal}
 translate N GlistDeleted {Verwijderd}
 translate N GlistFlags {Markeringen}
 translate N GlistVars {Varianten}
@@ -872,7 +868,7 @@ translate N DeleteAll {Wis alle partijen}
 translate N UndeleteCurrent {Haal huidige partij terug}
 translate N UndeleteFilter {Haal geselecteerde partijen terug}
 translate N UndeleteAll {Haal alle partijen terug}
-translate N DeleteTwins {Wis doublures}
+translate N DeleteTwins {Wis dubbelen}
 translate N MarkCurrent {Markeer huidige partij}
 translate N MarkFilter {Markeer geselecteerde partijen}
 translate N MarkAll {Markeer alle partijen}
@@ -896,16 +892,16 @@ translate N CheckGames {Controleer partijen}
 translate N Cleaner {Reiniger}
 translate N CleanerHelp {
 De Scid Reiniger zal alle onderhoudsactiviteiten die u selecteert uit onderstaande lijst, uitvoeren op de huidige database. 
-De dialogen van de huidige instellingen in de ECO classificatie en verwijderen van doublures zullen worden toegepast indien u deze functies selecteert.
+De dialogen van de huidige instellingen in de ECO classificatie en verwijderen van dubbelen zullen worden toegepast indien u deze functies selecteert.
 }
 translate N CleanerConfirm {
-Eens het Reiniger onderhoud is gestart, kan dit niet worden onderbroken!
+Wanneer het Reinigeronderhoud is gestart, kan dit niet worden onderbroken!
 
 Dit kan lang duren op een grote database, afhankelijk van de geselecteerde functies en de huidige instellingen.
 
 Weet u zeker dat u de geselecteerde onderhoudsfuncties wilt uitvoeren?
 }
-translate N TwinCheckUndelete {Omdraaien; "u" herstelt beiden)}
+translate N TwinCheckUndelete {Omdraaien; "u" hersteld beiden)}
 translate N TwinCheckprevPair {Vorig paar}
 translate N TwinChecknextPair {Volgend paar}
 translate N TwinChecker {Scid: Controle dubbele partijen}
@@ -922,7 +918,7 @@ translate N TwinCriteria3 {Aanbeveling om minimaal twee keer "JA" te kiezen bij 
 translate N TwinCriteriaConfirm {ScidVsPC: instelling voor dubbelen bevestigen}
 translate N TwinChangeTag "Wijzig de volgende partij tags:\n\n"
 translate N AllocRatingDescription "Deze opdracht gebruikt het spelling-bestand om Elo ratings aan partijen in de database toe te voegen. Als een speler geen rating is heeft, maar zijn/haar rating op het moment van de partij wel in het spelling-bestand staat, dan wordt die rating toegevoegd."
-translate N RatingOverride "Ook de niet nul ratings overschrijven?"
+translate N RatingOverride "Ongelijk ratings overschrijven?"
 translate N AddRatings "Rating toevoegen aan:"
 translate N AddedRatings {ScidVsPC voegde $r Elo ratings aan $g partijen toe.}
 translate N NewSubmenu "Nieuw submenu"
@@ -930,28 +926,28 @@ translate N NewSubmenu "Nieuw submenu"
 # Comment editor:
 translate N AnnotationSymbols  {Symbolen voor annotatie:}
 translate N Comment {Commentaar:}
-translate N InsertMark {Voeg markering toe} ;
+translate N InsertMark {Voeg markering toe}
 translate N InsertMarkHelp {
 Voeg toe/verwijder markering: Selecteer  kleur, type, veld.
 Voeg toe/verwijder pijl: Rechtsklik twee velden.
 } ;
 
 # Nag buttons in comment editor:
-translate N GoodMove {Goede zet} ;
-translate N PoorMove {Slechte zet} ;
-translate N ExcellentMove {Excellente zet} ;
+translate N GoodMove {Goede zet}
+translate N PoorMove {Slechte zet}
+translate N ExcellentMove {Excellente zet}
 translate N Blunder {Blunder}
-translate N InterestingMove {Interessante zet} ;
-translate N DubiousMove {Twijfelachtige zet} ;
-translate N WhiteDecisiveAdvantage {Wit heeft beslissend voordeel} ;
-translate N BlackDecisiveAdvantage {Zwart heeft beslissend voordee} ;
-translate N WhiteClearAdvantage {Wit heeft duidelijk voordeel} ;
-translate N BlackClearAdvantage {Zwart heeft beslissend voordeel} ;
-translate N WhiteSlightAdvantage {Wit heeft licht voordeel} ;
-translate N BlackSlightAdvantage {Zwart heeft licht voordee} ;
-translate N Equality {Gelijk} ;
-translate N Unclear {Onduidelijk} ;
-translate N Diagram {Diagram} ;
+translate N InterestingMove {Interessante zet}
+translate N DubiousMove {Twijfelachtige zet}
+translate N WhiteDecisiveAdvantage {Wit heeft beslissend voordeel}
+translate N BlackDecisiveAdvantage {Zwart heeft beslissend voordeel}
+translate N WhiteClearAdvantage {Wit heeft duidelijk voordeel}
+translate N BlackClearAdvantage {Zwart heeft beslissend voordeel}
+translate N WhiteSlightAdvantage {Wit heeft licht voordeel}
+translate N BlackSlightAdvantage {Zwart heeft licht voordeel}
+translate N Equality {Gelijk}
+translate N Unclear {Onduidelijk}
+translate N Diagram {Diagram}
 
 # Board search:
 translate N BoardSearch {Zoeken Bord}
@@ -964,19 +960,19 @@ translate N SearchBoardExact {Exacte stelling (stukken op dezelfde velden)}
 translate N SearchBoardPawns {Pionnen (hetzelfde materiaal, alle pionnen op dezelfde velden)}
 translate N SearchBoardFiles {Lijnen (hetzelfde materiaal, alle pionnen op dezelfde lijnen)}
 translate N SearchBoardAny {Willekeurig (hetzelfde materiaal, pionnen en stukken willekeurig)}
-translate N SearchInRefDatabase { Zoek in database }
+translate N SearchInRefDatabase {Zoek in database }
 translate N LookInVars {Zoek in varianten}
 
 # Material search:
-translate N MaterialSearch {Zoeken Materiaal}
+translate N MaterialSearch {Zoeken materiaal}
 translate N Material {Materiaal}
 translate N Patterns {Patroon}
 translate N Zero {Niets}
 translate N Any {Willekeurig}
 translate N CurrentBoard {Huidige stelling}
-translate N CommonEndings {Veel Voorkomende Eindspelen}
-translate N CommonPatterns { Veel Voorkomende patronen}
-translate N MaterialDiff {Material onevenwicht}
+translate N CommonEndings {Veel voorkomende eindspelen}
+translate N CommonPatterns {Veel voorkomende patronen}
+translate N MaterialDiff {Materiaal onevenwicht}
 translate N squares {Velden}
 translate N SameColor {Gelijke kleur}
 translate N OppColor {Ongelijke kleur}
@@ -986,35 +982,35 @@ translate N MatchForAtLeast {Op z'n minst gelijk}
 translate N HalfMoves {halve zetten}
 
 # Common endings in material search:
-translate N EndingPawns {Pionnen eindspel} ;
-translate N EndingRookVsPawns {Toren tegen Pion(nen)} ;
-translate N EndingRookPawnVsRook {Toren en 1 Pion tegen Toren} ;
-translate N EndingRookPawnsVsRook {Toren en Pionnen tegen Toren} ;
-translate N EndingRooks {Toren tegen Toren Eindspel} ;
-translate N EndingRooksPassedA {Toren tegen Toren met een vrije a-pion} ;
-translate N EndingRooksDouble {Dubbele Toren eindspelen} ;
-translate N EndingBishops {Loper tegen Loper eindspel} ;
-translate N EndingBishopVsKnight {Loper tegen Paard eindspe} ;
-translate N EndingKnights {Paard tegenPaard eindspel} ;
-translate N EndingQueens {Dame tegen Dame eindspel} ;
-translate N EndingQueenPawnVsQueen {Dame +1 pion tegen Dame} ;
-translate N BishopPairVsKnightPair {Loperpaar tegen 2 Paarden middenspel} ;
+translate N EndingPawns {Pionnen eindspel}
+translate N EndingRookVsPawns {Toren tegen Pion(nen)}
+translate N EndingRookPawnVsRook {Toren en 1 Pion tegen Toren}
+translate N EndingRookPawnsVsRook {Toren en Pionnen tegen Toren}
+translate N EndingRooks {Toren tegen Toren eindspel}
+translate N EndingRooksPassedA {Toren tegen Toren met een vrije a-pion}
+translate N EndingRooksDouble {Dubbele Toren eindspelen}
+translate N EndingBishops {Loper tegen Loper eindspel}
+translate N EndingBishopVsKnight {Loper tegen Paard eindspel}
+translate N EndingKnights {Paard tegenPaard eindspel}
+translate N EndingQueens {Dame tegen Dame eindspel}
+translate N EndingQueenPawnVsQueen {Dame +1 pion tegen Dame}
+translate N BishopPairVsKnightPair {Loperpaar tegen 2 Paarden middenspel}
 
 # Common patterns in material search:
-translate N PatternWhiteIQP {Witte Geïsoleerde pion} ;
-translate N PatternWhiteIQPBreakE6 {Witte Geïsoleerde pion: d4-d5 doorbraak vs. e6} ;
-translate N PatternWhiteIQPBreakC6 {Witte Geïsoleerde pion: d4-d5 doorbraak vs. c6} ;
-translate N PatternBlackIQP {Zwarte Geïsoleerde pion} ;
-translate N PatternWhiteBlackIQP {Witte Geïsoleerde pion  vs. Zwarte Geïsoleerde pion} ;
-translate N PatternCoupleC3D4 {Witte hangende pionnen c3+d4 } ;
-translate N PatternHangingC5D5 {Zwarte hangende pionnen c5+d5} ;
-translate N PatternMaroczy {Maroczy Centrum ( Pionnen op c4 en e4)} ;
-translate N PatternRookSacC3 {Torenoffer op c3} ;
-translate N PatternKc1Kg8 {O-O-O vs. O-O (Kc1 vs. Kg8)} ;
-translate N PatternKg1Kc8 {O-O vs. O-O-O (Kg1 vs. Kc8)} ;
-translate N PatternLightFian {Light-Square Fianchettos (Loper-g2 vs. Loper-b7)} ;
-translate N PatternDarkFian {Dark-Square Fianchettos (Loper-b2 vs. Loper-g7)} ;
-translate N PatternFourFian {Four Fianchettos (Lopers op b2,g2,b7,g7)} ;
+translate N PatternWhiteIQP {Witte geïsoleerde pion}
+translate N PatternWhiteIQPBreakE6 {Witte geïsoleerde pion: d4-d5 doorbraak vs. e6}
+translate N PatternWhiteIQPBreakC6 {Witte geïsoleerde pion: d4-d5 doorbraak vs. c6}
+translate N PatternBlackIQP {Zwarte geïsoleerde pion}
+translate N PatternWhiteBlackIQP {Witte geïsoleerde pion  vs. Zwarte geïsoleerde pion}
+translate N PatternCoupleC3D4 {Witte hangende pionnen c3+d4}
+translate N PatternHangingC5D5 {Zwarte hangende pionnen c5+d5}
+translate N PatternMaroczy {Maroczy Centrum (Pionnen op c4 en e4)}
+translate N PatternRookSacC3 {Torenoffer op c3}
+translate N PatternKc1Kg8 {O-O-O vs. O-O (Kc1 vs. Kg8)}
+translate N PatternKg1Kc8 {O-O vs. O-O-O (Kg1 vs. Kc8)}
+translate N PatternLightFian {Lichte velden Fianchettos (Loper-g2 vs. Loper-b7)}
+translate N PatternDarkFian {Donkere velden Fianchettos (Loper-b2 vs. Loper-g7)}
+translate N PatternFourFian {Vier Fianchettos (Lopers op b2,g2,b7,g7)}
 
 # Game saving:
 translate N Today {Nu}
@@ -1035,13 +1031,13 @@ translate N GoBack {Terug}
 
 # Replace move dialog:
 translate N ReplaceMove {Zet vervangen}
-translate N AddNewVar {Voeg Nieuwe Variant Toe}
+translate N AddNewVar {Voeg nieuwe variant toe}
 translate N NewMainLine {Nieuwe hoofdvariant}
 translate N ReplaceMoveMessage {Hier is al een zet.  
 
 U kunt hem vervangen en alle volgende zetten wissen, of uw zet toevoegen als een nieuwe variant.
 
-(U kunt deze boodschap in de toekeomst vermijden door de optie "Zet vervangen bevestigen" uit te zetten in het menu:Zetten)}
+(U kunt deze melding in de toekomst onderdrukken door "Bevestiging voor overschrijven" uit te zetten in het menu:Opties - Zetten)}
 
 # Make database read-only dialog:
 translate N ReadOnlyDialog {Als u deze database "alleen-lezen" maakt, zijn geen veranderingen toegestaan.
@@ -1060,7 +1056,7 @@ Wilt u echt doorgaan en de wijzigingen niet doorvoeren?
 
 # Exit dialog:
 translate N ExitDialog {Wilt u ScidVsPC werkelijk afsluiten?}
-translate N ExitUnsaved {De volgende databases hebben nog onopgeslagen wijzigingen in hun partijen.  Als u nu afsluit zullen deze wijzigingen verloren gaan.}
+translate N ExitUnsaved {In de volgende databases zijn partijen gewijzigd en niet opgeslagen. Als u nu afsluit zullen deze wijzigingen verloren gaan.}
 
 # Import window:
 translate N PasteCurrentGame {Plak huidige partij}
@@ -1075,17 +1071,17 @@ translate N ECOSummary {Samenvatting voor}
 translate N ECOFrequency {Frequentie van subcodes voor}
 
 # Opening Report:
-translate N OprepTitle {Openings Rapportage}
+translate N OprepTitle {Openingsrapportage}
 translate N OprepReport {Rapportage}
 translate N OprepGenerated {Samengesteld door }
 translate N OprepStatsHist {Statistieken en Geschiedenis}
 translate N OprepStats {Statistieken}
-translate N OprepStatAll {Alle Rapportage Partijen}
-translate N OprepStatBoth {Elo beide Spelers}
+translate N OprepStatAll {Alle rapportage partijen}
+translate N OprepStatBoth {Elo beide spelers}
 translate N OprepStatSince {Sinds}
 translate N OprepOldest {Oudste partijen}
 translate N OprepNewest {Meest recente partijen}
-translate N OprepPopular {Huidige Populariteit}
+translate N OprepPopular {Huidige populariteit}
 translate N OprepFreqAll {Frequentie over alle jaren: }
 translate N OprepFreq1   {In het afgelopen jaar:      }
 translate N OprepFreq5   {In de afgelopen 5 jaar:    }
@@ -1110,7 +1106,7 @@ translate N OprepFrequency {Frequentie}
 translate N OprepWWins {Overwinningen wit:   }
 translate N OprepBWins {Overwinningen zwart: }
 translate N OprepDraws {Remises: }
-translate N OprepWholeDB {hele database}
+translate N OprepWholeDB {Hele database}
 translate N OprepShortest {Kortste winst}
 # translate N OprepShortWhite {Kortste witte overwinningen}
 # translate N OprepShortBlack {Kortste zwarte overwinningen}
@@ -1159,7 +1155,7 @@ translate N PReportClipbase {Maak clipbase leeg en kopieer de geselecteerde part
 # Piece Tracker window:
 translate N TrackerSelectSingle {Linker muisknop selecteert dit stuk.}
 translate N TrackerSelectPair { Linker muisknop selecteert dit stuk; de rechtermuisknop selecteert zijn buur.}
-translate N TrackerSelectPawn { Linker muisknop selcteert deze pion; ; de rechtermuisknop selecteert alle 8 pionnen.}
+translate N TrackerSelectPawn { Linker muisknop selecteert deze pion; de rechtermuisknop selecteert alle 8 pionnen.}
 translate N TrackerStat {Statistiek}
 translate N TrackerGames {% partijen met zet naar dit veld.}
 translate N TrackerTime {% keer op ieder veld.}
@@ -1174,7 +1170,7 @@ translate N SelectTournamentGames {Alleen partijen in huidig toernooi}
 translate N SelectOlderGames {Alleen oudere partijen}
 
 # Delete Twins window:
-translate N TwinsNote {Om een dubbele partij te zijn moet deze minimaal dezelfde twee spelers en de onderstaande te selecteren criteria bevatten. Bij vondst van twee dubbele partijen wordt de kortste verwijderd. Hint: Controleer de database op spelfouten voordat doublures worden verwijderd. Dit verhoogt de kans op vinden van dubbele partijen. }
+translate N TwinsNote {Om een dubbele partij te zijn moet deze minimaal dezelfde twee spelers en de onderstaande te selecteren criteria bevatten. Bij vondst van twee dubbele partijen wordt de kortste verwijderd. Hint: Controleer de database op spelfouten voordat dubbelen worden verwijderd. Dit verhoogt de kans op vinden van dubbele partijen. }
 translate N TwinsCriteria {Criteria: Dubbele partijen moeten hebben...}
 translate N TwinsWhich {Onderzoek welke partijen}
 translate N TwinsColors {Spelers dezelfde kleur?}
@@ -1208,6 +1204,8 @@ translate N NameEditSelect {Partijen om te wijzigen}
 translate N NameEditReplace {Vervangen}
 translate N NameEditWith {met}
 translate N NameEditMatches {Gelijken: Druk Ctrl+1 tot Ctrl+9 om te selecteren}
+
+# Check games window:
 translate N CheckGamesWhich {Controleer partijen met}
 translate N CheckAll {Alle partijen}
 translate N CheckSelectFilterGames {Alleen partijen binnen het filter}
@@ -1229,7 +1227,7 @@ translate N GameFile {Partijenbestand}
 translate N Names {Namen}
 translate N Unused {Ongebruikt}
 translate N SizeKb {Grootte (Kb)}
-translate N CurrentState {Huidige toestand}
+translate N CurrentState {Huidige status}
 translate N AfterCompaction {Na comprimeren}
 translate N CompactNames {Gecomprimeerde namenbestand}
 translate N CompactGames {Gecomprimeerd partijenbestand}
@@ -1261,12 +1259,12 @@ translate N GotoMoveNumber {Ga naar zetnummer:}
 # Copy games dialog:
 translate N CopyGames {Kopiëren partijen}
 translate N CopyConfirm {
- Wilt u echt kopieren
+ Wilt u echt kopiëren
  de [::utils::thousands $nGamesToCopy] geselecteerde partijen
  van database "$fromName"
  naar database "$targetName"?
 }
-translate N CopyErr {Kan partijen niet kopieren}
+translate N CopyErr {Kan partijen niet kopiëren}
 translate N CopyErrSource {de bron database}
 translate N CopyErrTarget {de doel database}
 translate N CopyErrNoGames {heeft geen partijen in het filter}
@@ -1327,7 +1325,7 @@ translate N RecentFilesExtra {Aantal recente bestand in extra submenu}
 
 # My Player Names options:
 translate N MyPlayerNamesDescription {Voeg hieronder een lijst met voorkeur spelernamen in, 1 speler per regel. Jokers (bvb "?" voor elke letter, "*" voor een reeks letters) zijn toegelaten.
-Telkens een partij uit de lijst word geladen, zal het schaakbord worden gedraaid indien nodig om de partij vanuit die speler zijn perspektief te tonen.
+Telkens een partij uit de lijst word geladen, zal het schaakbord worden gedraaid indien nodig om de partij vanuit die speler zijn perspectief te tonen.
 } ;
 
 translate N showblunderexists {toon dat er een blunder is}
@@ -1363,8 +1361,7 @@ translate N seconds {seconden}
 
 translate N Abort {Geeft op}
 translate N Resume {Hervatten}
-# TODO
-translate N Restart {Restart}
+translate N Restart {Herstarten}
 translate N OutOfOpening {Uit de opening}
 
 translate N NotFollowedLine {Je volgde de variant niet}
@@ -1395,7 +1392,7 @@ translate N OnlyFlaggedLines {Enkel gemarkeerde varianten}
 translate N resetStats {Statistieken wissen}
 translate N Movesloaded {Zetten geladen}
 translate N PositionsNotPlayed {Positie niet gespeeld}
-translate N PositionsPlayed {Positite gespeeld}
+translate N PositionsPlayed {Positie gespeeld}
 translate N Success {Succes}
 translate N DubiousMoves {Dubieuze zet}
 
@@ -1450,7 +1447,7 @@ translate N Nodes {Nodes}
 translate N Depth {Diepte}
 translate N Time {Tijd} 
 translate N SecondsPerMove {Seconden per zet}
-translate N TimeLabel {Time per move}
+translate N TimeLabel {Tijd per zet}
 translate N Engine {Engine}
 translate N TimeMode {Tijd modus}
 translate N TimeBonus {Tijd + bonus}
@@ -1464,7 +1461,7 @@ translate N AnnotateSeveralGames {Becommentarieer verschillende partijen \n van 
 translate N FindOpeningErrors {Vind openingsfouten}
 translate N MarkTacticalExercises {Markeer tactische oefeningen}
 translate N UseBook {Gebruik boek}
-translate N MultiPV {Meerder varianten}
+translate N MultiPV {Meerdere varianten}
 translate N Hash {Hash Geheugentabel}
 translate N OwnBook {Gebruik engineboek}
 translate N BookFile {Opening boek}
@@ -1543,8 +1540,8 @@ translate N FICSGuest {Login als Gast}
 translate N FICSServerPort {Server poort}
 translate N FICSServerAddress {IP-adres}
 translate N FICSRefresh {Ververs}
-translate N FICSTimeseal {Tijdsoverschrijdings}
-translate N FICSTimesealPort {Tijdsoverschrijdingspoort}
+translate N FICSTimeseal {Timeseal}
+translate N FICSTimesealPort {Timeseal poort}
 translate N FICSSilence {Stilte}
 translate N FICSOffers {Biedt aan}
 translate N FICSGames {Partijen}
@@ -1569,10 +1566,10 @@ translate N CCDlgConfigureWindowTitle {Configureer correspondentieschaak}
 translate N CCDlgCGeneraloptions {Algemene opties}
 translate N CCDlgDefaultDB {Standaard database:}
 translate N CCDlgInbox {Inbox (pad):}
-translate N CCDlgOutbox {Outbox (pad):}
+translate N CCDlgOutbox {Uitbox (pad):}
 translate N CCDlgXfcc {Xfcc Configuratie:}
 translate N CCDlgExternalProtocol {Externe protocol verwerker (b.v. Xfcc)}
-translate N CCDlgFetchTool {Verwerf tool:}
+translate N CCDlgFetchTool {Ontvangst tool:}
 translate N CCDlgSendTool {Zend tool:}
 translate N CCDlgEmailCommunication {E-mail communicatie}
 translate N CCDlgMailPrg {Mail programma:}
@@ -1580,38 +1577,38 @@ translate N CCDlgBCCAddr {(B)CC adres:}
 translate N CCDlgMailerMode {Mode:}
 translate N CCDlgThunderbirdEg {b.v. Thunderbird, Mozilla Mail, Icedove...}
 translate N CCDlgMailUrlEg {b.v. Evolution}
-translate N CCDlgClawsEg {b.v Sylpheed Claws}
+translate N CCDlgClawsEg {b.v. Sylpheed Claws}
 translate N CCDlgmailxEg {b.v. mailx, mutt, nail...}
 translate N CCDlgAttachementPar {Aanhangsel parameter:}
 translate N CCDlgInternalXfcc {Gebruik interne Xfcc ondersteuning}
 translate N CCDlgConfirmXfcc {Bevestig de zetten}
 translate N CCDlgSubjectPar {Onderwerp parameter:}
-translate N CCDlgDeleteBoxes {Lege In-/Uitbox}
-translate N CCDlgDeleteBoxesText {Wil je echt de  In-/Uitbox mappen voor correspondentieschaak ledigen? Dit vereist een nieuwe synchronisatie om de laatste staat van je partijen te tonen.}
+translate N CCDlgDeleteBoxes {Lege in-/uitbox}
+translate N CCDlgDeleteBoxesText {Wil je echt de  in-/uitbox mappen voor correspondentieschaak ledigen? Dit vereist een nieuwe synchronisatie om de laatste staat van je partijen te tonen.}
 translate N CCDlgConfirmMove {Bevestig zet}
 translate N CCDlgConfirmMoveText {Als je bevestigt zal volgende zet en commentaar naar de server gestuurd worden:}
 translate N CCDlgDBGameToLong {Onverenigbare hoofdvariant}
-translate N CCDlgDBGameToLongError {De hoofdvariant in jouw database is langer dan de partij in je Inbox. Als de Inbox huidige partijen bevat bvb. vlak na een synchronisatie, dan werden enkele verkeerde zetten toegevoegd aan de hoofdvariant.\nIn dit geval verkort de hoofdvariant tot (max) zetten\n}
+translate N CCDlgDBGameToLongError {De hoofdvariant in jouw database is langer dan de partij in je inbox. Als de inbox huidige partijen bevat bvb. vlak na een synchronisatie, dan werden enkele verkeerde zetten toegevoegd aan de hoofdvariant.\nIn dit geval verkort de hoofdvariant tot (max) zetten\n}
 translate N CCDlgStartEmail {Start een nieuwe e-mail partij}
 translate N CCDlgYourName {Uw naam:}
 translate N CCDlgYourMail {Uw e-mail adres:}
 translate N CCDlgOpponentName {Naam van de tegenstander:}
 translate N CCDlgOpponentMail {E-mail adres van de tegenstander:}
 translate N CCDlgGameID {Game ID (uniek):}
-translate N CCDlgTitNoOutbox {Scid: Correspondentieschaak Outbox}
-translate N CCDlgTitNoInbox {Scid: Correspondentieschaak Inbox}
+translate N CCDlgTitNoOutbox {Scid: Correspondentieschaak uitbox}
+translate N CCDlgTitNoInbox {Scid: Correspondentieschaak inbox}
 translate N CCDlgTitNoGames {Scid: Geen correspondentieschaak partijen}
 translate N CCErrInboxDir {Correspondentieschaak inbox map:}
-translate N CCErrOutboxDir {Correspondentieschaak outbox map:}
-translate N CCErrDirNotUsable {dit bestaat niet of is niet toegankelijk!\nVerifieer en corrigeer de instellingen.}
-translate N CCErrNoGames {dit bevat geen partijen!\nHaal ze alstublieft eerst op.}
+translate N CCErrOutboxDir {Correspondentieschaak uitbox map:}
+translate N CCErrDirNotUsable {bestaat niet of is niet toegankelijk!\nVerifieer en corrigeer de instellingen.}
+translate N CCErrNoGames {bevat geen partijen!\nHaal ze alstublieft eerst op.}
 translate N CCDlgTitNoCCDB {Scid: Geen correspondentie database}
 translate N CCErrNoCCDB {Er werd geen database van type 'Correspondentie' geopend. U moet er eerst een openen alvorens de correspondentieschaak functies te gebruiken.}
-translate N CCFetchBtn {Haal de partijen van de server en verwerk de Inbox}
+translate N CCFetchBtn {Haal de partijen van de server en verwerk de inbox}
 translate N CCPrevBtn {Ga naar de vorige partij}
 translate N CCNextBtn {Ga naar de volgende}
 translate N CCSendBtn {Stuur de zet op}
-translate N CCEmptyBtn {Ledig In-/Uitbox}
+translate N CCEmptyBtn {Ledig in-/uitbox}
 translate N CCHelpBtn {Hulp over iconen en status indicatoren.\nVoor algemene hulp: druk F1!}
 translate N CCDlgServerName {Server naam:}
 translate N CCDlgLoginName  {Login naam:}
@@ -1662,6 +1659,6 @@ translate N UriRejected        {De volgende bestanden zijn afgekeurd:}
 translate N UriRejectedDetail {Alleen de vermelde bestandstypes kunnen worden verwerkt:}
 translate N EmptyUriList {Geplakte inhoud is leeg.}
 translate N SelectionOwnerDidntRespond {Time-out tijdens plakken data: geen reactie van geselecteerde eigenaar.}
-
 }
 # End of nederlan.tcl
+
