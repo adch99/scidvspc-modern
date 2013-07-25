@@ -102,7 +102,7 @@ namespace eval fics {
     entry $w.eServer -textvariable ::fics::server
 
     label $w.lFICS_ip -text $tr(FICSServerAddress)
-    entry $w.ipserver -textvariable ::fics::server_ip -state readonly
+    entry $w.ipserver -textvariable ::fics::server_ip 
     button $w.bRefresh -text $tr(FICSRefresh) -command ::fics::getIP -pady 0.8
 
     label $w.lFICS_port -text $tr(FICSServerPort)
