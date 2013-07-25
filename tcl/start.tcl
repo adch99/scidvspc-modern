@@ -417,7 +417,7 @@ array set findopponent {}
 proc initFICSDefaults {} {
   set ::fics::use_timeseal 0
   if {$::macOS} {
-    set ::fics::timeseal_exec "$scidExeDir/timeseal"
+    set ::fics::timeseal_exec "$::scidExeDir/timeseal"
   } else {
     set ::fics::timeseal_exec "timeseal"
   }
