@@ -726,7 +726,7 @@ proc OpenUri {window uriFiles} {
     } else {
       append message \n\n [join $rejectList \n]
     }
-    set detail [tr UriRejectedDetail]
+    set detail [tr UriRejectedDetail]
     append detail " .sci, .si4, .si3, .cbh, .pgn, .pgn.gz, .zip"
     tk_messageBox -icon info -type ok -parent . -message $message -detail $detail
   }
