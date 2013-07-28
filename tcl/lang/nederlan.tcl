@@ -119,6 +119,8 @@ menuText N GameAdd "Partij toevoegen..." 7 \
 menuText N GameInfo "Partij informatie invoeren" 0
 menuText N GameBrowse "Door de partijen bladeren" 0
 menuText N GameList "Laat alle partijen zien" 0
+# ====== TODO To be translated ======
+menuText N GameDelete "Delete Game" 0
 menuText N GameDeepest "Opening bepalen" 0 \
   {Ga naar de diepste stelling uit het ECO openingboek}
 menuText N GameGotoMove "Zetnummer..." 0 \
@@ -262,6 +264,12 @@ menuText N OptionsGInfo "Partij informatie" 0 {Parij-informatie opties}
 menuText N OptionsFics "FICS" 0
 menuText N OptionsFicsAuto "Autopromotie koningin" 0
 menuText N OptionsFicsClock "Digitale klok" 0
+# ====== TODO To be translated ======
+menuText N OptionsFicsColour "Text Colour" 0
+# ====== TODO To be translated ======
+menuText N OptionsFicsNoRes "No Results" 0
+# ====== TODO To be translated ======
+menuText N OptionsFicsNoReq "No Requests" 0
 menuText N OptionsLanguage "Kies taal" 0 {Kies taal}
 menuText N OptionsMovesTranslatePieces "Stukken vertalen" 0 {Vertalen eerste letters van de stukken}
 menuText N OptionsMovesHighlightLastMove "Markeren laatste zet" 0 {De laatst gespeelde zet markeren}
@@ -330,6 +338,10 @@ menuText N HelpAbout "Over Scid" 0 {Informatie over ScidVsPC}
 
 # Game info box popup menu:
 menuText N GInfoHideNext "Verberg volgende zet" 0
+# ====== TODO To be translated ======
+menuText N GInfoShow "Side to Move" 0
+# ====== TODO To be translated ======
+menuText N GInfoCoords "Toggle Coords" 0
 menuText N GInfoMaterial "Materiaalverhouding" 0
 menuText N GInfoFEN "FEN" 0
 menuText N GInfoMarks "Toon gekleurde velden en pijlen. " 5

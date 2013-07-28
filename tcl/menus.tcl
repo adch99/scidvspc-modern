@@ -400,13 +400,13 @@ set helpMessage($m,[incr menuindex]) GameList
 $m add separator
 incr menuindex
 
-$m  add command -label {Delete Game} -command {
+$m  add command -label GameDelete -command {
   sc_game flag delete [sc_game number] invert
   updateBoard
   ::windows::gamelist::Refresh
 }  -underline 0
-set helpMessage($m,[incr menuindex]) {Mark game as deleted}
-bind .main <Control-Delete> "$m invoke {Delete Game}"
+set helpMessage($m,[incr menuindex]) GameDelete
+bind .main <Control-Delete> "$m invoke \[tr GameDelete\]"
 
 $m add command -label GameReload -command ::game::Reload -accelerator "Ctrl+Shift+L"
 bind .main <Control-L> ::game::Reload
@@ -1111,7 +1111,7 @@ set helpMessage($m,[incr menuindex]) OptionsAutoSave
 menu $m.ginfo -tearoff 1
 $m.ginfo add checkbutton -label GInfoHideNext \
     -variable gameInfo(hideNextMove) -offvalue 0 -onvalue 1 -command updateBoard
-$m.ginfo add checkbutton -label {Show Side to Move} \
+$m.ginfo add checkbutton -label GInfoShow \
     -variable boardSTM -offvalue 0 -onvalue 1 -command {::board::togglestm .main.board}
 $m.ginfo add checkbutton -label GInfoFEN \
     -variable gameInfo(showFEN) -offvalue 0 -onvalue 1 -command checkGameInfoHeight
@@ -1125,7 +1125,7 @@ $m.ginfo add checkbutton -label GInfoPhotos \
     -variable gameInfo(photos) -offvalue 0 -onvalue 1 \
     -command {updatePlayerPhotos -force}
 $m.ginfo add command -label GInfoMaterial -command toggleMat
-$m.ginfo add command -label {Toggle Coords} -command toggleCoords
+$m.ginfo add command -label GInfoCoords -command toggleCoords
 $m.ginfo add separator
 $m.ginfo add radiobutton -label GInfoTBNothing \
     -variable gameInfo(showTB) -value 0 -command checkGameInfoHeight
@@ -1231,16 +1231,16 @@ $m add checkbutton -label OptionsWindowsRaise -variable ::fics::autoraise
 $m add checkbutton -label  OptionsFicsAuto -variable ::fics::autopromote
 $m add checkbutton -label OptionsFicsClock -variable ::fics::smallclocks -command ::fics::showClocks
 $m add checkbutton -label OptionsSounds -variable ::fics::sound
-$m add command     -label {Text Colour} -command ::fics::setForeGround
+$m add command     -label OptionsFicsColour -command ::fics::setForeGround
 $m add command     -label OptionsColour -command ::fics::setBackGround
 $m add separator
-$m add checkbutton -label "No Results"    -variable ::fics::no_results
-$m add checkbutton -label "No Requests"    -variable ::fics::no_requests
+$m add checkbutton -label OptionsFicsNoRes    -variable ::fics::no_results
+$m add checkbutton -label OptionsFicsNoReq    -variable ::fics::no_requests
 
 set m .menu.options.export
 menu $m -tearoff -1
 foreach format {PGN HTML LaTeX} {
-  $m add command -label "$format file text" -underline 0 \
+  $m add command -label $format -underline 0 \
       -command "setExportText $format"
 }
 
@@ -1469,7 +1469,7 @@ proc updateMenuStates {} {
     if {[sc_game number]} {set state normal} else {set state disabled}
     $m.game entryconfig [tr GameReload] -state $state
     if {$isReadOnly} {set state disabled}
-    $m.game entryconfig {Delete Game} -state $state
+    $m.game entryconfig [tr GameDelete] -state $state
 
     # Save add button:
     set state normal
@@ -1491,7 +1491,7 @@ proc updateMenuStates {} {
 
     # This gets called occasionally after closing tree and others (?)
     # but dont disable 'Info Browse List' as they never get re-enabled !
-    foreach i {Replace Add First Prev Reload Next Last Random Number Info Browse List} {
+    foreach i {Replace Add First Prev Reload Next Last Random Number Info Browse List Delete} {
       $m.game entryconfig [tr Game$i] -state disabled
     }
     # .main.tb.gprev configure -state disabled
@@ -1587,7 +1587,7 @@ proc setLanguageMenus {{lang ""}} {
   configMenuText .menu.search [tr WindowsPList $oldLang] WindowsPList $lang
   configMenuText .menu.search [tr WindowsTmt $oldLang] WindowsTmt $lang
 
-  foreach tag {Replace Add New First Prev Reload Next Last Random Number Info Browse List
+  foreach tag {Replace Add New First Prev Reload Next Last Random Number Info Browse List Delete
     Deepest GotoMove Novelty} {
     configMenuText .menu.game [tr Game$tag $oldLang] Game$tag $lang
   }
@@ -1624,7 +1624,7 @@ proc setLanguageMenus {{lang ""}} {
         OptionsFonts$tag $lang
   }
 
-  foreach tag {HideNext Material FEN Marks Wrap FullComment Photos \
+  foreach tag {HideNext Show Coords Material FEN Marks Wrap FullComment Photos \
         TBNothing TBResult TBAll Informant} {
     configMenuText .menu.options.ginfo [tr GInfo$tag $oldLang] \
         GInfo$tag $lang
@@ -1640,8 +1640,10 @@ proc setLanguageMenus {{lang ""}} {
   configMenuText .menu.options.fics [tr OptionsFicsAuto $oldLang] OptionsFicsAuto $lang
   configMenuText .menu.options.fics [tr OptionsFicsClock $oldLang] OptionsFicsClock $lang
   configMenuText .menu.options.fics [tr OptionsSounds $oldLang] OptionsSounds $lang
-  # configMenuText .menu.options.fics [tr OptionsFG $oldLang] OptionsFG $lang
+  configMenuText .menu.options.fics [tr OptionsFicsColour $oldLang] OptionsFicsColour $lang
   configMenuText .menu.options.fics [tr OptionsColour $oldLang] OptionsColour $lang
+  configMenuText .menu.options.fics [tr OptionsFicsNoRes $oldLang] OptionsFicsNoRes $lang
+  configMenuText .menu.options.fics [tr OptionsFicsNoReq $oldLang] OptionsFicsNoReq $lang
 
   foreach tag { Color Width Display } {
     configMenuText .menu.options.entry.highlightlastmove [tr OptionsMovesHighlightLastMove$tag $oldLang] OptionsMovesHighlightLastMove$tag $lang
@@ -1669,9 +1671,9 @@ proc setLanguageMenus {{lang ""}} {
 
   # Should sort out what the Delete , Mark menus did.
   # Its' proably tied in with my half-baked Gamelist Widget, and FLAGS
-  #  foreach tag {HideNext Material FEN Marks Wrap FullComment Photos TBNothing TBResult TBAll Delete Mark} 
+  #  foreach tag {HideNext Show Coords Material FEN Marks Wrap FullComment Photos TBNothing TBResult TBAll Delete Mark} 
 
-  foreach tag {HideNext Material FEN} {
+  foreach tag {HideNext Show Coords Material FEN} {
     configMenuText .main.gameInfo.menu [tr GInfo$tag $oldLang] GInfo$tag $lang
   }
 

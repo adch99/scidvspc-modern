@@ -115,6 +115,8 @@ menuText P GameAdd "Zapisz: dodaj now± partiê..." 8 \
 menuText P GameInfo "Ustaw informacje o partii" 0
 menuText P GameBrowse "Przegl±daj partie" 0
 menuText P GameList "Lista partii" 0
+# ====== TODO To be translated ======
+menuText P GameDelete "Delete Game" 0
 menuText P GameDeepest "Rozpoznaj debiut" 0 \
   {Przejd¼ do najd³u¿szego wariantu z ksi±¿ki debiutowej}
 menuText P GameGotoMove "Przejd¼ do posuniêcia nr..." 13 \
@@ -254,6 +256,12 @@ menuText P OptionsGInfo "Informacje o partii" 0 {Sposób wy¶wietlania informacji 
 menuText P OptionsFics "FICS" 0
 menuText P OptionsFicsAuto "Autopromote Królowa" 0
 menuText P OptionsFicsClock "Zegar Cyfrowy" 0
+# ====== TODO To be translated ======
+menuText P OptionsFicsColour "Text Colour" 0
+# ====== TODO To be translated ======
+menuText P OptionsFicsNoRes "No Results" 0
+# ====== TODO To be translated ======
+menuText P OptionsFicsNoReq "No Requests" 0
 menuText P OptionsLanguage "Jêzyk" 0 {Wybierz jêzyk}
 menuText P OptionsMovesTranslatePieces "T³umacz oznaczenia figur" 0 {T³umacz pierwsze litery figur}
 menuText P OptionsMovesHighlightLastMove "Pod¶wietl ostatnie posuniêcie" 0 {Pod¶wietl ostatnie posuniêcie}
@@ -329,6 +337,10 @@ menuText P HelpAbout "O programie" 0 {Informacje o programie Scid}
 
 # Game info box popup menu:
 menuText P GInfoHideNext "Ukryj nastêpne posuniêcie" 0
+# ====== TODO To be translated ======
+menuText P GInfoShow "Side to Move" 0
+# ====== TODO To be translated ======
+menuText P GInfoCoords "Toggle Coords" 0
 menuText P GInfoMaterial "Poka¿ materia³" 0
 menuText P GInfoFEN "Poka¿ pozycjê w formacie FEN" 16
 menuText P GInfoMarks "Pokazuj kolorowe pola i strza³ki" 5 

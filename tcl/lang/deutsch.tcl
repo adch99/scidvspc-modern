@@ -135,6 +135,8 @@ menuText D GameAdd "Partie speichern..." 7 \
 menuText D GameInfo "Set Game Information" 9
 menuText D GameBrowse "Spiele durchsuchen" 0
 menuText D GameList "Alle Spiele" 0
+# ====== TODO To be translated ======
+menuText D GameDelete "Delete Game" 0
 menuText D GameDeepest "Eröffnung identifizieren" 10 \
   {Zur Position der längstmöglichen Zugfolge nach ECO-Klassifikation gehen}
 menuText D GameGotoMove "Zugnummer..." 0 \
@@ -275,6 +277,12 @@ menuText D OptionsGInfo "Partieinformation" 0 {Optionen für Informationsbereich}
 menuText D OptionsFics "FICS" 0
 menuText D OptionsFicsAuto "Autopromote Königin" 0
 menuText D OptionsFicsClock "Digitale Uhr" 0
+# ====== TODO To be translated ======
+menuText D OptionsFicsColour "Text Colour" 0
+# ====== TODO To be translated ======
+menuText D OptionsFicsNoRes "No Results" 0
+# ====== TODO To be translated ======
+menuText D OptionsFicsNoReq "No Requests" 0
 menuText D OptionsLanguage "Sprache" 0 {Sprache wählen}
 menuText D OptionsMovesTranslatePieces "Figurennamen übersetzen" 0 {Übersetze den ersten Buchstaben der Figurenbezeichnung}
 menuText D OptionsMovesHighlightLastMove "Letzen Zug hervorheben" 0 {Rahmt Start- und Zielfeld des letzten Zuges farbig ein}
@@ -341,6 +349,10 @@ menuText D HelpAbout "Über Scid" 0 {Informationen zu Scid}
 
 # Game info box popup menu:
 menuText D GInfoHideNext "Nächsten Zug verstecken" 13
+# ====== TODO To be translated ======
+menuText D GInfoShow "Side to Move" 0
+# ====== TODO To be translated ======
+menuText D GInfoCoords "Toggle Coords" 0
 menuText D GInfoMaterial "Materialwerte zeigen" 0
 menuText D GInfoFEN "FEN zeigen" 0
 menuText D GInfoMarks "Gefärbte Felder und Pfeile zeigen" 0

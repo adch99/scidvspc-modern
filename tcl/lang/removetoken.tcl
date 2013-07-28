@@ -1,4 +1,7 @@
-#!/usr/bin/tclsh
+#!/bin/sh
+# The next line restarts using tkscid: \
+exec tclsh "$0" "$@"
+
 ###
 ### removetoken.tcl
 ###

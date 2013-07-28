@@ -114,6 +114,8 @@ menuText S GameAdd "Añadir Partida" 0 \
 menuText S GameInfo "Juego Set de Información" 0
 menuText S GameBrowse "Examinar Partidas" 0
 menuText S GameList "Listar Todas las Partidas" 0
+# ====== TODO To be translated ======
+menuText S GameDelete "Delete Game" 0
 menuText S GameDeepest "Identificar apertura" 0 \
   {Va a la posición más avanzada de la partida según el libro ECO}
 menuText S GameGotoMove "Ir al Movimiento Número" 5 \
@@ -269,6 +271,12 @@ menuText S OptionsGInfo "Información de la partida" 0 {Información de la partida
 menuText S OptionsFics "FICS" 0
 menuText S OptionsFicsAuto "Autopromoción Reina" 0
 menuText S OptionsFicsClock "Reloj Digital" 0
+# ====== TODO To be translated ======
+menuText S OptionsFicsColour "Text Colour" 0
+# ====== TODO To be translated ======
+menuText S OptionsFicsNoRes "No Results" 0
+# ====== TODO To be translated ======
+menuText S OptionsFicsNoReq "No Requests" 0
 menuText S OptionsLanguage "Lenguaje" 0 {Selecciona el lenguaje del menú}
 menuText S OptionsMovesTranslatePieces "Traducir piezas" 0 {Traducir la primera letra de las piezas}
 menuText S OptionsMovesHighlightLastMove "Resalta última jugada" 0 {Resalta la última jugada}
@@ -342,6 +350,10 @@ menuText S HelpAbout "Acerca de Scid" 10 {Información acerca de Scid}
 
 # Game info box popup menu:
 menuText S GInfoHideNext "Ocultar siguiente movimiento" 0
+# ====== TODO To be translated ======
+menuText S GInfoShow "Side to Move" 0
+# ====== TODO To be translated ======
+menuText S GInfoCoords "Toggle Coords" 0
 menuText S GInfoMaterial "Mostrar valor del material" 0
 menuText S GInfoFEN "Mostrar FEN" 8
 menuText S GInfoMarks "Mostrar casillas y flechas coloreadas" 29

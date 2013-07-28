@@ -141,6 +141,7 @@ menuText E GameAdd "Save: Add Game" 0 {Save this game as a new game in the datab
 menuText E GameInfo "Set Game Information" 9
 menuText E GameBrowse "Browse Game" 0
 menuText E GameList "List all Games" 0
+menuText E GameDelete "Delete Game" 0
 menuText E GameDeepest "Identify Opening" 0 {Goto the deepest game position listed in the ECO book}
 menuText E GameGotoMove "Goto Move Number" 5 {Go to a specified move number in the current game}
 menuText E GameNovelty "Find Novelty" 7 {Find the first move of this game that has not played before}
@@ -281,6 +282,9 @@ menuText E OptionsGInfo "Game Information" 0 {Game information options}
 menuText E OptionsFics "FICS" 0 {Free Chess Internet Server}
 menuText E OptionsFicsAuto "Autopromote Queen" 0
 menuText E OptionsFicsClock "Digital Clock" 0
+menuText E OptionsFicsColour "Text Colour" 0
+menuText E OptionsFicsNoRes "No Results" 0
+menuText E OptionsFicsNoReq "No Requests" 0
 
 menuText E OptionsLanguage "Language" 0 {Select menu language}
 menuText E OptionsMovesTranslatePieces "Translate Pieces" 0 {Translate first letter of pieces}
@@ -345,6 +349,8 @@ menuText E HelpAbout "About" 0 {Information about Scid Vs PC}
 
 # Game info box popup menu:
 menuText E GInfoHideNext "Hide Next Move" 0
+menuText E GInfoShow "Side to Move" 0
+menuText E GInfoCoords "Toggle Coords" 0
 menuText E GInfoMaterial "Toggle Material" 7
 menuText E GInfoFEN "FEN" 5
 menuText E GInfoMarks "Show Colored Squares and Arrows" 5

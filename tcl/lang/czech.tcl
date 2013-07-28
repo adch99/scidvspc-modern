@@ -114,6 +114,8 @@ menuText C GameAdd "Ulo¾it: pøidání nové partie..." 1 \
 menuText C GameInfo "Set Informace o hre" 0
 menuText C GameBrowse "Procházet hry" 0
 menuText C GameList "Seznam vsech her" 0
+# ====== TODO To be translated ======
+menuText C GameDelete "Delete Game" 0
 menuText C GameDeepest "Identifikace zahájení" 0 \
   {Pøejít na koncovou pozici z ECO knihovny, která odpovídá zvolenému zahájení}
 menuText C GameGotoMove "Pøejít na tah èíslo..." 10 \
@@ -270,6 +272,12 @@ menuText C OptionsGInfo "Informace o partii" 0 {Volby pro informace o partii}
 menuText C OptionsFics "FICS" 0
 menuText C OptionsFicsAuto "Autopromote královna" 0
 menuText C OptionsFicsClock "Digitální hodiny" 0
+# ====== TODO To be translated ======
+menuText C OptionsFicsColour "Text Colour" 0
+# ====== TODO To be translated ======
+menuText C OptionsFicsNoRes "No Results" 0
+# ====== TODO To be translated ======
+menuText C OptionsFicsNoReq "No Requests" 0
 menuText C OptionsLanguage "Jazyk" 0 {Vybrat jazyk menu}
 # ====== TODO To be translated ======
 menuText C OptionsMovesTranslatePieces "Translate pieces" 0 {Translate first letter of pieces}
@@ -346,6 +354,10 @@ menuText C HelpAbout "O aplikaci Scid" 2 {Informace o aplikaci Scid}
 
 # Game info box popup menu:
 menuText C GInfoHideNext "Skrýt následující tah" 0
+# ====== TODO To be translated ======
+menuText C GInfoShow "Side to Move" 0
+# ====== TODO To be translated ======
+menuText C GInfoCoords "Toggle Coords" 0
 menuText C GInfoMaterial "Ukázat hodnoty materiálu" 15
 menuText C GInfoFEN "Ukázat FEN" 7
 menuText C GInfoMarks "Zobrazovat barevná pole a ¹ipky" 11

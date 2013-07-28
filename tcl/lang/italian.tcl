@@ -117,6 +117,8 @@ menuText I GameAdd "Save: Aggiunge la nuova partita..." 7 \
 menuText I GameInfo "Informazioni del gioco insieme" 0
 menuText I GameBrowse "Cerca giochi" 0
 menuText I GameList "Tutti i giochi" 0
+# ====== TODO To be translated ======
+menuText I GameDelete "Delete Game" 0
 menuText I GameDeepest "Identifica apertura" 0 \
   {Va' alla posizione di partita piu' profonda listata nel libro ECO}
 menuText I GameGotoMove "Vai alla mossa numero..." 0 \
@@ -259,6 +261,12 @@ menuText I OptionsGInfo "Informazioni sulla partita" 0 {Opzioni sulle informazio
 menuText I OptionsFics "FICS" 0
 menuText I OptionsFicsAuto "Autopromozione Regina" 0
 menuText I OptionsFicsClock "Orologio Digitale" 0
+# ====== TODO To be translated ======
+menuText I OptionsFicsColour "Text Colour" 0
+# ====== TODO To be translated ======
+menuText I OptionsFicsNoRes "No Results" 0
+# ====== TODO To be translated ======
+menuText I OptionsFicsNoReq "No Requests" 0
 menuText I OptionsLanguage "Lingua" 0 {Sceglie una nuova lingua di menu}
 menuText I OptionsMovesTranslatePieces "Traduci i pezzi" 0 {Traduce la prima lettera dei pezzi}
 # ====== TODO To be translated ======
@@ -336,6 +344,10 @@ menuText I HelpAbout "Su Scid" 1 {Informazioni su Scid}
 
 # partita info box popup menu:
 menuText I GInfoHideNext "Nascondi la mossa successiva" 0
+# ====== TODO To be translated ======
+menuText I GInfoShow "Side to Move" 0
+# ====== TODO To be translated ======
+menuText I GInfoCoords "Toggle Coords" 0
 menuText I GInfoMaterial "Mostra i valori del materiale" 0
 menuText I GInfoFEN "Mostra FEN" 5
 menuText I GInfoMarks "Mostra caselle e frecce colorate" 5

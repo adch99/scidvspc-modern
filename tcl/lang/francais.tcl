@@ -113,6 +113,8 @@ menuText F GameAdd "Enregistrer: Ajouter nouvelle partie..." 13 \
 menuText F GameInfo "Informations sur les jeux Set" 0
 menuText F GameBrowse "Parcourir les jeux" 0
 menuText F GameList "Liste Tous les jeux" 0
+# ====== TODO To be translated ======
+menuText F GameDelete "Delete Game" 0
 menuText F GameDeepest "Identifier ouverture" 11 \
   {Trouver la partie la plus proche dans la nomenclature ECO}
 menuText F GameGotoMove "Coup numéro..." 6 \
@@ -259,6 +261,12 @@ menuText F OptionsGInfo "Informations de la partie" 7 {Options d'information de 
 menuText F OptionsFics "FICS" 0
 menuText F OptionsFicsAuto "Autopromote Reine" 0
 menuText F OptionsFicsClock "Horloge Numérique" 0
+# ====== TODO To be translated ======
+menuText F OptionsFicsColour "Text Colour" 0
+# ====== TODO To be translated ======
+menuText F OptionsFicsNoRes "No Results" 0
+# ====== TODO To be translated ======
+menuText F OptionsFicsNoReq "No Requests" 0
 menuText F OptionsLanguage "Langue" 0 {Sélectionner le menu de choix des langues}
 menuText F OptionsMovesTranslatePieces "Traduction des pièces" 0 {Convertit la première lettre des pièces}
 menuText F OptionsMovesHighlightLastMove "Surbrillance dernier coup" 0 {Surbrillance du dernier coup}
@@ -326,6 +334,10 @@ menuText F HelpAbout "A propos de Scid" 2 {Information au sujet de Scid}
 
 # Game info box popup menu:
 menuText F GInfoHideNext "Cacher le coup suivant" 0
+# ====== TODO To be translated ======
+menuText F GInfoShow "Side to Move" 0
+# ====== TODO To be translated ======
+menuText F GInfoCoords "Toggle Coords" 0
 menuText F GInfoMaterial "Montrer les valeurs de matériel" 0
 menuText F GInfoFEN "Montrer la notation FEN" 5
 menuText F GInfoMarks "Montrer les cases colorées et les flèches" 5

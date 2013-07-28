@@ -115,6 +115,8 @@ menuText W GameAdd "Spara: Nytt parti..." 1 \
 menuText W GameInfo "Ställ Spelinformation" 0
 menuText W GameBrowse "Bläddra bland spel" 0
 menuText W GameList "Visa alla spel" 0
+# ====== TODO To be translated ======
+menuText W GameDelete "Delete Game" 0
 menuText W GameDeepest "Identifiera öppningen" 0 \
   {Gå till den mest detaljerade ställningen i ECO boken}
 menuText W GameGotoMove "Gå till drag nummer..." 8 \
@@ -250,6 +252,12 @@ menuText W OptionsGInfo "Partiinformation" 0 {Alternativ för partiinformation}
 menuText W OptionsFics "FICS" 0
 menuText W OptionsFicsAuto "Autopronomera Drottningen" 0
 menuText W OptionsFicsClock "Digital Klocka" 0
+# ====== TODO To be translated ======
+menuText W OptionsFicsColour "Text Colour" 0
+# ====== TODO To be translated ======
+menuText W OptionsFicsNoRes "No Results" 0
+# ====== TODO To be translated ======
+menuText W OptionsFicsNoReq "No Requests" 0
 menuText W OptionsLanguage "Språk" 0 {Välj språk}
 menuText W OptionsMovesTranslatePieces "Översätt pjäser" 0 {Översätt första bokstaven för pjäser}
 menuText W OptionsMovesHighlightLastMove "Markera senaste draget" 0 {Markera senaste draget}
@@ -317,6 +325,10 @@ menuText W HelpAbout "Om Scid" 0 {Information om Scid}
 
 # Game info box popup menu:
 menuText W GInfoHideNext "Dölj nästa drag" 0
+# ====== TODO To be translated ======
+menuText W GInfoShow "Side to Move" 0
+# ====== TODO To be translated ======
+menuText W GInfoCoords "Toggle Coords" 0
 menuText W GInfoMaterial "Visa materialvärden" 0
 menuText W GInfoFEN "Visa FEN" 5
 menuText W GInfoMarks "Visa färgade fält och pilar" 22

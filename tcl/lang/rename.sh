@@ -2,7 +2,6 @@
 
 mv italian.tcl italian.tcl.bak
 mv portbr.tcl portbr.tcl.bak
-mv russian.tcl russian.tcl.bak
 mv swedish.tcl swedish.tcl.bak
 mv czech.tcl czech.tcl.bak
 mv francais.tcl francais.tcl.bak
@@ -16,7 +15,6 @@ mv spanish.tcl spanish.tcl.bak
 
 mv italian.tcl.new italian.tcl
 mv portbr.tcl.new portbr.tcl
-mv russian.tcl.new russian.tcl
 mv swedish.tcl.new swedish.tcl
 mv czech.tcl.new czech.tcl
 mv francais.tcl.new francais.tcl

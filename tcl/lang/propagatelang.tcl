@@ -1,4 +1,7 @@
-#!/usr/bin/tclsh
+#!/bin/sh
+# The next line restarts using tkscid: \
+exec tclsh "$0" "$@"
+
 ###
 ### propagatelang.tcl
 ###
@@ -23,7 +26,6 @@ array set encodings {
   norsk iso8859-1
   polish iso8859-2
   portbr iso8859-1
-  russian iso8859-5
   serbian iso8859-2
   spanish iso8859-1
   swedish iso8859-1
@@ -39,14 +41,13 @@ array set codes {
   norsk O
   polish P
   portbr B
-  russian R
   serbian Y
   spanish S
   swedish W
 }
 
 set languages {czech deutsch francais hungary italian nederlan norsk polish
-  portbr spanish swedish serbian russian
+  portbr spanish swedish serbian
 }
 
 ################################################################################
@@ -108,7 +109,7 @@ proc checkfile {code langfile enc} {
     }
   }
 
-  foreach l [lrange $langData [ expr $lastLine + 1 ] end] {
+  foreach l [lrange $langData [ expr $lastLine + 1 ] end-1] {
     puts $fnew $l
   }
   close $fnew

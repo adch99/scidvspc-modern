@@ -114,6 +114,8 @@ menuText H GameAdd "Mentés új játszmaként..." 0 \
 menuText H GameInfo "Set Game Information" 9
 menuText H GameBrowse "Böngésszen játékok" 0
 menuText H GameList "Összes Játék" 0
+# ====== TODO To be translated ======
+menuText H GameDelete "Delete Game" 0
 menuText H GameDeepest "Megnyitás azonosítása" 10 \
   {Az ECO-könyvben szereplõ legnagyobb mélységig megy bele a játszmába.}
 menuText H GameGotoMove "Ugrás megadott sorszámú lépéshez..." 1 \
@@ -275,6 +277,12 @@ menuText H OptionsGInfo "Játszmainformáció" 0 {Játszmainformáció változtatása}
 menuText H OptionsFics "FICS" 0
 menuText H OptionsFicsAuto "Autopromote Királyno" 0
 menuText H OptionsFicsClock "Digitális Óra" 0
+# ====== TODO To be translated ======
+menuText H OptionsFicsColour "Text Colour" 0
+# ====== TODO To be translated ======
+menuText H OptionsFicsNoRes "No Results" 0
+# ====== TODO To be translated ======
+menuText H OptionsFicsNoReq "No Requests" 0
 menuText H OptionsLanguage "Nyelv" 0 {A menü nyelvének kiválasztása}
 # ====== TODO To be translated ======
 menuText H OptionsMovesTranslatePieces "Translate pieces" 0 {Translate first letter of pieces}
@@ -350,6 +358,10 @@ menuText H HelpAbout "SCID-rõl" 0 {Tájékoztatás SCID-rõl}
 
 # Game info box popup menu:
 menuText H GInfoHideNext "Elrejti a következõ lépést." 0
+# ====== TODO To be translated ======
+menuText H GInfoShow "Side to Move" 0
+# ====== TODO To be translated ======
+menuText H GInfoCoords "Toggle Coords" 0
 menuText H GInfoMaterial "Mutatja az anyagi helyzetet" 11
 menuText H GInfoFEN "FEN-formátum megmutatása" 0
 menuText H GInfoMarks "Mutatja a színes mezõket és nyilakat." 10

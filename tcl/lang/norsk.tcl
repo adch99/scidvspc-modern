@@ -116,6 +116,8 @@ menuText O GameAdd "Lagre som nytt parti..." 0 \
 menuText O GameInfo "Set Spillinformasjon" 0
 menuText O GameBrowse "Bla gjennom spill" 0
 menuText O GameList "List Alle spill" 0
+# ====== TODO To be translated ======
+menuText O GameDelete "Delete Game" 0
 menuText O GameDeepest "Identifiser åpning" 0 \
   {Gå til dypeste posisjon i dette partiet listet i ECO-boken}
 menuText O GameGotoMove "Gå til trekk..." 0 \
@@ -292,6 +294,12 @@ menuText O OptionsFics "FICS" 0
 # todo
 menuText O OptionsFicsAuto "Autopromote Queen" 0
 menuText O OptionsFicsClock "Digital klokke" 0
+# ====== TODO To be translated ======
+menuText O OptionsFicsColour "Text Colour" 0
+# ====== TODO To be translated ======
+menuText O OptionsFicsNoRes "No Results" 0
+# ====== TODO To be translated ======
+menuText O OptionsFicsNoReq "No Requests" 0
 menuText O OptionsLanguage "Språk" 0 {Velg menyspråk}
 # ====== TODO To be translated ======
 menuText O OptionsMovesTranslatePieces "Translate pieces" 0 {Translate first letter of pieces}
@@ -375,6 +383,10 @@ menuText O HelpAbout "Om Scid" 0 {Informasjon om Scid}
 
 # Game info box popup menu:
 menuText O GInfoHideNext "Skjul neste trekk" 0
+# ====== TODO To be translated ======
+menuText O GInfoShow "Side to Move" 0
+# ====== TODO To be translated ======
+menuText O GInfoCoords "Toggle Coords" 0
 menuText O GInfoMaterial "Vis kvalitet" 0
 menuText O GInfoFEN "Vis FEN" 0
 menuText O GInfoMarks "Vis fargede ruter og piler" 0

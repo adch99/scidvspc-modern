@@ -116,6 +116,8 @@ menuText B GameAdd "Salvar: Adicionar Jogo..." 9 \
 menuText B GameInfo "Informações sobre o jogo definido" 0
 menuText B GameBrowse "Pesquisar Jogos" 0
 menuText B GameList "Lista de Todos os Jogos" 0
+# ====== TODO To be translated ======
+menuText B GameDelete "Delete Game" 0
 menuText B GameDeepest "Identificar Abertura" 0 \
   {Vai para a posicao mais avancada da partida, de acordo com o codigo ECO}
 menuText B GameGotoMove "Ir para o movimento numero..." 5 \
@@ -274,6 +276,12 @@ menuText B OptionsFics "FICS" 0
 # todo
 menuText B OptionsFicsAuto "Autopromote Queen" 0
 menuText B OptionsFicsClock "Digital Clock" 0
+# ====== TODO To be translated ======
+menuText B OptionsFicsColour "Text Colour" 0
+# ====== TODO To be translated ======
+menuText B OptionsFicsNoRes "No Results" 0
+# ====== TODO To be translated ======
+menuText B OptionsFicsNoReq "No Requests" 0
 menuText B OptionsLanguage "Linguagem" 0 {Menu de selecao de linguagem}
 # ====== TODO To be translated ======
 menuText B OptionsMovesTranslatePieces "Translate pieces" 0 {Translate first letter of pieces}
@@ -347,6 +355,10 @@ menuText B HelpAbout "Sobre Scid" 0 {Informacoes sobre o Scid}
 
 # Game info box popup menu:
 menuText B GInfoHideNext "Ocultar proximo movimento" 0
+# ====== TODO To be translated ======
+menuText B GInfoShow "Side to Move" 0
+# ====== TODO To be translated ======
+menuText B GInfoCoords "Toggle Coords" 0
 menuText B GInfoMaterial "Mostra valor de material" 0
 menuText B GInfoFEN "Mostra Diagrama FEN" 16
 menuText B GInfoMarks "Mostra setas e casas coloridas" 7

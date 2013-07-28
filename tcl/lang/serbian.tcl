@@ -114,6 +114,8 @@ menuText Y GameAdd "Saèuvaj: Dodaj novu partiju..." 6 \
 menuText Y GameInfo "Set Game Information" 9
 menuText Y GameBrowse "Browse Game" 0
 menuText Y GameList "List all Games" 0
+# ====== TODO To be translated ======
+menuText Y GameDelete "Delete Game" 0
 menuText Y GameDeepest "Identifikuj otvaranje" 0 \
   {Idi na poslednju poziciju partije koja odgovara knjizi otvaranja}
 menuText Y GameGotoMove "Idi na potez broj..." 5 \
@@ -291,6 +293,12 @@ menuText Y OptionsFics "FICS" 0
 # todo
 menuText Y OptionsFicsAuto "Autopromote Queen" 0
 menuText Y OptionsFicsClock "Digital Clock" 0
+# ====== TODO To be translated ======
+menuText Y OptionsFicsColour "Text Colour" 0
+# ====== TODO To be translated ======
+menuText Y OptionsFicsNoRes "No Results" 0
+# ====== TODO To be translated ======
+menuText Y OptionsFicsNoReq "No Requests" 0
 menuText Y OptionsLanguage "Jezik" 0 {Izaberi jezik}
 # ====== TODO To be translated ======
 menuText Y OptionsMovesTranslatePieces "Translate pieces" 0 {Translate first letter of pieces}
@@ -374,6 +382,10 @@ menuText Y HelpAbout "O programu Scid" 0 {Informacije o programu Scid}
 
 # Game info box popup menu:
 menuText Y GInfoHideNext "Sakrij sledeæi potez" 0
+# ====== TODO To be translated ======
+menuText Y GInfoShow "Side to Move" 0
+# ====== TODO To be translated ======
+menuText Y GInfoCoords "Toggle Coords" 0
 menuText Y GInfoMaterial "Prika¾i vrednosti materijala" 0
 menuText Y GInfoFEN "Prika¾i FEN" 8
 menuText Y GInfoMarks "Show colored squares and arrows" 5 ;# ***

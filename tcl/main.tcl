@@ -377,7 +377,7 @@ menu .main.gameInfo.menu -tearoff 0 -background gray90
 
 .main.gameInfo.menu add separator
 
-.main.gameInfo.menu add checkbutton -label {Side to Move} \
+.main.gameInfo.menu add checkbutton -label GInfoShow \
     -variable boardSTM -offvalue 0 -onvalue 1 -command {::board::togglestm .main.board}
 
 .main.gameInfo.menu add checkbutton -label {Highlight last move} \
@@ -390,7 +390,7 @@ menu .main.gameInfo.menu -tearoff 0 -background gray90
     -variable gameInfo(hideNextMove) -offvalue 0 -onvalue 1 -command updateBoard
 
 .main.gameInfo.menu add command -label GInfoMaterial -command toggleMat
-.main.gameInfo.menu add command -label {Toggle Coords} -command toggleCoords
+.main.gameInfo.menu add command -label GInfoCoords -command toggleCoords
 
 if { $::docking::USE_DOCKING } {
   foreach i {3 4 5 6 7 9 13 14} {
