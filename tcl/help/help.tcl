@@ -1594,7 +1594,7 @@ This can be done by the <b>Compact</b> button, or
 
 <h3>Buttons</h3>
 <ul>
-<li><img tb_save> - eplace current game</li>
+<li><img tb_save> - replace current game</li>
 <li><img tb_bkm> - show bookmarks</li>
 <li><img tb_gfirst> - load first filter game</li>
 <li><img tb_gprev> - load previous filter game</li>

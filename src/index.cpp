@@ -588,7 +588,7 @@ IndexEntry::PrintGameInfo (char * outStr,
                 out += strPad (out, GetEventName (nb), width, ' ');
                 break;
 
-            case 'c':   // Country
+            case 'c':   // Country (Last three chars of Site Name)
                 {
                     const char * country = GetSiteName (nb);
                     uint len = strLength (country);

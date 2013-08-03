@@ -48,23 +48,23 @@ set glistFields {
   W WElo	e 5
   B BElo	e 5
   s Site	w 10
+  D Deleted	e 3
+  V Variations	e 3
+  C Comments	e 3
+  A Annos	e 3
   o ECO		e 5
-  D Deleted	e 2
   O Opening	w 6
-  U Flags	e 2
-  V Variations	e 2
-  C Comments	e 2
-  A Annos	e 2
-  S Start	e 1
+  U Flags	e 3
+  S Start	e 3
 }
 
 set glistCodes {} 
 set glistNames {}
 
-# ???
-# lappend glistFields { c  3 left  black      0 }
-# lappend glistFields { E  7 left  darkRed    0 }
-# lappend glistFields { F  7 left  darkBlue   0 }
+## If you wish to enable these fields, please make sure a default field width is set S.A.
+# append glistFields { c Country   e  3 } ; # Country (last 3 chars of Site Name)
+# append glistFields { E EventDate e  7 } ; # Event Date
+# append glistFields { F EndMaterial e  7 } ; # Final position material
 
 
 foreach {code title anchor null} $glistFields {
@@ -148,8 +148,6 @@ proc ::windows::gamelist::Load {number} {
 }
 
 proc ::windows::gamelist::showCurrent {} {
-  global glistCodes
-
   # Ooops. [sc_game number] returns 0 after sorting, making this widget useless after sorting
 
   set index [sc_game number]
@@ -772,7 +770,7 @@ set glistFlipped([sc_info clipbase]) 0
 # handling read-only PGNs
 
 proc SortBy {tree col} {
-    global glistCodes glistSortedBy glstart glSortReversed glistSortColumn
+    global glistSortedBy glstart glSortReversed glistSortColumn
 
     set w .glistWin
 
