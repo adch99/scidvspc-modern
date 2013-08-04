@@ -42,11 +42,11 @@ set glistFields {
   b Black	w 14
   r Result	e 5
   m Length	e 5
-  e Event	w 10
-  n Round	e 5
   d Date	w 10
+  e Event	w 10
   W WElo	e 5
   B BElo	e 5
+  n Round	e 5
   s Site	w 10
   D Deleted	e 3
   V Variations	e 3
