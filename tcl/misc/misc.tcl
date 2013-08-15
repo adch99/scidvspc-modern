@@ -304,7 +304,7 @@ proc progressWindow {args} {
     set b 1
   } else { return }
   wm title $w $title
-  wm transient $w .
+  wm transient $w .main
   label $w.t -text $text
   pack $w.t -side top
   canvas $w.c -width 400 -height 20  -relief solid -border 1

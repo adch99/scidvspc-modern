@@ -341,7 +341,7 @@ proc exportOptions {exportType} {
   toplevel $w
   wm withdraw $w
   wm title $w "[tr OptionsExport]"
-  wm transient $w .
+  wm transient $w .main
   wm protocol $w WM_DELETE_WINDOW { }
   bind $w <Escape> "$w.b.cancel invoke"
   bind $w <Return> "$w.b.ok invoke"
