@@ -21,10 +21,11 @@
   6. miscellaneous
      6.1 docked windows
      6.2 how to play
-     6.3 known issues
-     6.4 bugs
-     6.5 thanks
-     6.6 scid's history
+     6.3 todo
+     6.4 known issues
+     6.5 bugs
+     6.6 thanks
+     6.7 scid's history
 
   7. changes
         7..1 Scid vs. PC 4.9.2
@@ -49,7 +50,6 @@
         7..20 Scid vs. PC 3.6.26.3
         7..21 Scid vs. PC 3.6.26.2
         7..22 Scid vs. PC 3.6.26.1
-        7..23 todo
 
   8. contact
   9. documentation
@@ -318,7 +318,58 @@
   There is more information about the Fics and Tactical Game features in
   the Scid Help menus.
 
-  6.3.  known issues
+  6.3.  todo
+
+
+  o  Openseal is an open source version of FICS Timeseal. It needs some
+     rewriting to work with Scid, though it is a small program.
+
+  o  FICS could be adapted to work with the ICC. The work involves
+     analysing the differences in the strings used by the two programs.
+     (for example, for FICS we have this line to ackowledge successful
+     log-in if {string match "*Starting FICS session*" $line]} { The two
+     servers do have many similarities i think, and examining xboard's
+     "backend.c" (or some other client) for "FICS" particularities
+
+  o  Russian translation is broken afaics, and has been removed for the
+     time being.
+
+  o  The month i've updated the translations a little. (Thanks to Peter
+     for totally overhauling the Dutch one). The checklangs.tcl script
+     is in much better shape, but of course there are still lots of
+     translation "todos"
+
+  o  The TCL sound package, Snack, needs a maintainer.
+
+  o  There was a lot of work done to implement Fischer Chess (Chess
+     960), but they never fixed all the bugs, and the web site
+     http://www.wtfai.me.uk/scid960.html is now gone. The latest code is
+     in ScidvsPC's source patches/chess960.patch
+
+  o  The Tree code works reasonably well, but i have never found the
+     time to overhaul the Slow/Fast/Slow modes. These were (for a long
+     time) negelected when Fulvio wrote the interuptible tree code. Scid
+     now has the Modes removed, so doing this in ScidvsPC probably
+     wouldnt be terribly hard to do.
+
+  o  There are two engine types - UCI and XBoard. Pascal's UCI code is
+     in some ways inferior to Shane's Xboard code.  Though this is
+     mostly mitigated by the speed of modern processors, it'd be nice to
+     make use of the UCI ponder feature in analysis mode (Comp mode
+     already does so).
+
+  o  I've never had a chance to verify/update the Novag Citrine drivers
+     and interface due to lack of hardware.
+
+  o  Our Windows port needs a little overhaul to properly use Users home
+     directory to store all the various data.  I will get around to
+     doing it one day though.
+
+  o  A lot of people use chessbase books (.ctg). Scid can only read
+     polyglot opening books, but inlining this projects work may not be
+     too hard. https://github.com/sshivaji/ctgexporter
+
+  6.4.  known issues
 
 
   o  Tcl/Tk-8.5.10 is buggy. Tcl/Tk-8.6.0 also is immature, but mostly
@@ -336,7 +387,7 @@
      themselves by configuring desktop > window behavior > advanced >
      focus stealing prevention set to "none"
 
-  6.4.  bugs
+  6.5.  bugs
 
 
   o  See the known issues about Tcl/Tk (above).
@@ -357,7 +408,7 @@
 
      o  Window focus/raise issues, another Tcl/Tk issue.
 
-  6.5.  thanks
+  6.6.  thanks
 
   Thanks to Gregor Cramer <http://scidb.sf.net> for the PGN figurines
   and Drag and Drop features, and technical support.
@@ -377,7 +428,7 @@
 
   and of course Shane Hudson, and the authors of Tcl/Tk <http://tcl.tk>
 
-  6.6.  scid's history
+  6.7.  scid's history
 
   Scid is a huge project, with an interesting history. Originally
   authored by Shane Hudson from New Zealand, it combined the power of
@@ -513,6 +564,7 @@
 
   o  FICS: 'upload' command for uploading local games to FICS examine
      mode
+
   o  Allow the Name editor to glob '*' for Site, Event and Round fields
      (but not for 'All Games', too dangerous when used by mistake)
 
@@ -527,7 +579,6 @@
 
   o  When annotating the score on blunders, show the main score first,
      var second (eg: +1.00 / +2.50)
-
   o  Add programmers reference to the help contents/online doc
 
   o  Bind space-bar to engine start/stop
@@ -578,7 +629,6 @@
 
   o  Drag and Drop file open(s) on Windows and Unix
 
-
   o  Custom background images (jpegs, gifs and pngs)
 
   o  Random sort pgn feature.
@@ -593,6 +643,7 @@
      closed.
 
   o  Save game before PGN Import
+
 
   o  Save game: enable the use of 'prev game tags' for existing games.
      This allows easy addition of the same tags to consecutive existing
@@ -643,7 +694,6 @@
      Computer Tournament
 
   o  Computer Tournament Book feature
-
 
   o  Dont' kill tournament if engine crashes.
 
@@ -711,6 +761,7 @@
 
   o  FICS: Support loading old/interupted games for analysis (using
      'smoves' command)
+
   o  FICs: Add an Abort button. Other minor fixes.
 
   o  Serious Game overhaul (though still has minor issues) Add pause,
@@ -724,6 +775,7 @@
 
   o  Analysis: View engine logs from within Scid, and can also disable
      logging.
+
 
   o  Analysis no longer word wraps, and uses fixed font.
 
@@ -775,7 +827,6 @@
 
   o  Hungarian, Swedish and Potugese Spanish were broken if Piece
      translation enabled (which was default). Fixed.
-
 
   o  Fix up Tacgame score-isn't-updated bug
 
@@ -842,7 +893,6 @@
   o  Catch a nasty wish8.5.10 bug with the gamelist (Wish-8.5.10 should
      be avoided)
 
-
   o  Remove the broken integer field validation and replace it with
      something that allows backspace to work.
 
@@ -857,6 +907,7 @@
   o  Add a help item for Maintenance 'Check Games' feature.
 
   o  Swap around the 'Next Move' and 'Event' game-information lines.
+
 
   o  New documentation about making Polyglot books.
 
@@ -908,7 +959,6 @@
 
   o  FICs console fg and bg colours are now configurable
 
-
   o  Name Editor tidy up and documentation review
 
   o  Player Info: add a 'Refine Filter' result group
@@ -923,6 +973,7 @@
   o  Crosstable shows current game in green
 
   o  Use translations for Game List column titles (if available).
+
 
   o  Add a 'Game Delete' menu
 
@@ -974,7 +1025,6 @@
 
   o  Catch unmatched braces in gamelist values
 
-
   o  Fix 'Paste FEN' castling sanity check
 
   o  Browser previously highlighted Next move instead of Current move
@@ -987,6 +1037,7 @@
      moves
 
   o  Theory table incorrectly started from start position.
+
 
   7.0.8.  Scid vs. PC 4.4.1
 
@@ -1054,7 +1105,6 @@
 
   o  A nice PGN/htext performance tweak that smooths out large game
      edits
-
   o  When using "-fast", perform fast database opens also. Otherwise,
      update the progressbar to show "Calculating name
      frequencies"(todo?)
@@ -1121,7 +1171,6 @@
 
   o  Other SCID C++ changes from Gerd and Fulvio, including "Don't
      decode games when copying games"
-
   o  Some Tree Search optimisations from SCID
 
   o  Sort by number of Variations and Comments from Gerd
@@ -1186,6 +1235,7 @@
   o  Header search widget tidy
 
   o  New icon
+
 
   7.0.12.  Scid vs. PC 4.1
 
@@ -1305,6 +1355,7 @@
 
   o  Add a background colour option that applies to many text widgets,
      including gameinfo, pgn window and help window
+
   o  Restructured the analysis widgets, putting toolbar on top, tiny
      board at bottom, tweaking toolbar icons and reparenting analysis
      died error dialog
@@ -1369,7 +1420,6 @@
   o  Turn off craftys egtb (end game tablebook) for the analysis widget
 
   o  Comment editor bugfix - unbind left/right from main board
-
 
   o  Fix for matsig.cpp overflow (unapplied? , untested)
 
@@ -1437,6 +1487,7 @@
 
   o  Changed a heap of menus (for example) PGN::File is now PGN::PGN, to
      avoid confusion with the Scid::File menu
+
   o  Player Report configuration widget reniced.
 
   o  Menu name and key-bindings changes for PGN and FEN import
@@ -1503,6 +1554,7 @@
 
      o  Some widget reparenting
 
+
   7.0.16.  Scid vs. PC 3.6.26.7
 
 
@@ -1513,6 +1565,7 @@
   o  Fix sometime-issue with material widget outline
 
   o  Small change to Tacgame about getMyPlayerName
+
 
   7.0.17.  Scid vs. PC 3.6.26.6
 
@@ -1567,7 +1620,6 @@
   o  Several configuration windows appear centered over main window
 
   o  Add Control-m binding for toggling the menubar
-
 
   7.0.18.  Scid vs. PC 3.6.26.5
 
@@ -1635,6 +1687,7 @@
 
   o  Added a Fics autoflag option (for logging in as guest), and other
      Fics tweaks.
+
   o  Don't allow null entry of "Elo" field in analysis engine
      customisation.
 
@@ -1644,6 +1697,7 @@
   o  Game info panel restructured ;>
 
   o  New Berlin, Spatial chess pieces
+
 
   o  Fics and Fischer chess changes
 
@@ -1685,14 +1739,6 @@
   o  Remember fics widget size.
 
   o  Last move displayed in bold.
-
-  7.0.23.  todo
-
-
-  o  Language updates (volunteers welcome).
-
-  o  Pin down all filter inaccuracies.
-
 
   8.  contact
 

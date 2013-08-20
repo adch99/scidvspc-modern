@@ -40,10 +40,11 @@
 <UL>
 <LI><A NAME="toc6.1">6.1</A> <A HREF="README.html#ss6.1">docked windows </A>
 <LI><A NAME="toc6.2">6.2</A> <A HREF="README.html#ss6.2">how to play </A>
-<LI><A NAME="toc6.3">6.3</A> <A HREF="README.html#ss6.3">known issues </A>
-<LI><A NAME="toc6.4">6.4</A> <A HREF="README.html#ss6.4">bugs </A>
-<LI><A NAME="toc6.5">6.5</A> <A HREF="README.html#ss6.5">thanks </A>
-<LI><A NAME="toc6.6">6.6</A> <A HREF="README.html#ss6.6">scid's history </A>
+<LI><A NAME="toc6.3">6.3</A> <A HREF="README.html#ss6.3">todo </A>
+<LI><A NAME="toc6.4">6.4</A> <A HREF="README.html#ss6.4">known issues </A>
+<LI><A NAME="toc6.5">6.5</A> <A HREF="README.html#ss6.5">bugs </A>
+<LI><A NAME="toc6.6">6.6</A> <A HREF="README.html#ss6.6">thanks </A>
+<LI><A NAME="toc6.7">6.7</A> <A HREF="README.html#ss6.7">scid's history </A>
 </UL>
 <P>
 <H2><A NAME="toc7">7.</A> <A HREF="README.html#s7">changes </A></H2>
@@ -265,7 +266,60 @@ game challenge.</P>
 about the Fics and Tactical Game features in the Scid Help menus</EM>.</P>
 
 
-<H2><A NAME="ss6.3">6.3</A> <A HREF="#toc6.3">known issues </A>
+<H2><A NAME="ss6.3">6.3</A> <A HREF="#toc6.3">todo </A>
+</H2>
+
+<P>
+<UL>
+<LI> Openseal is an open source version of FICS Timeseal. It needs some
+rewriting to work with Scid, though it is a small program.
+</LI>
+<LI> FICS could be adapted to work with the ICC. The work involves
+analysing the differences in the strings used by the two programs.
+(for example, for FICS  we have this line to ackowledge successful log-in
+if {string match "*Starting FICS session*" $line]} {
+The two servers do have many similarities i think, and examining
+xboard's "backend.c" (or some other client) for "FICS" particularities
+<LI> Russian translation is broken afaics, and has been removed for the time being.
+<LI> The month i've updated the translations a little. (Thanks to Peter
+for totally overhauling the Dutch one). The checklangs.tcl script is
+in much better shape, but of course there are still lots of
+translation "todos"
+<LI> The TCL sound package, Snack, needs a maintainer.
+<LI> There was a lot of work done to implement Fischer Chess (Chess 960),
+but they never fixed all the bugs, and the web site
+http://www.wtfai.me.uk/scid960.html is now gone. The latest code is in
+ScidvsPC's source patches/chess960.patch
+<LI> The Tree code works reasonably well, but i have never found the time
+to overhaul the Slow/Fast/Slow modes. These were (for a long
+time) negelected when Fulvio wrote the interuptible tree code. Scid
+now has the Modes removed, so doing this in ScidvsPC probably wouldnt
+be terribly hard to do.
+<LI> There are two engine types - UCI and XBoard. Pascal's UCI code is in
+some ways inferior to Shane's Xboard code.
+Though this is mostly mitigated by the speed of modern processors,
+it'd be nice to make use of the UCI ponder feature in analysis mode
+(Comp mode already does so).
+<LI> I've never had a chance to verify/update the Novag Citrine drivers
+and interface due to lack of hardware.
+<LI> Our Windows port needs a little overhaul to properly use Users home
+directory to store all the various data.
+I will get around to doing it one day though.
+<LI> A lot of people use chessbase books (.ctg). Scid can only read
+polyglot opening books, but inlining this projects
+work may not be too hard.  https://github.com/sshivaji/ctgexporter</LI>
+</LI>
+</LI>
+</LI>
+</LI>
+</LI>
+</LI>
+</LI>
+</LI>
+</LI>
+</UL>
+</P>
+<H2><A NAME="ss6.4">6.4</A> <A HREF="#toc6.4">known issues </A>
 </H2>
 
 <P>
@@ -282,7 +336,8 @@ set to "none"</LI>
 </UL>
 </P>
 
-<H2><A NAME="ss6.4">6.4</A> <A HREF="#toc6.4">bugs </A>
+
+<H2><A NAME="ss6.5">6.5</A> <A HREF="#toc6.5">bugs </A>
 </H2>
 
 
@@ -303,7 +358,7 @@ to create large databases from pgn. Typing "pgnscid somefile.pgn" creates a new 
 </UL>
 </P>
 
-<H2><A NAME="ss6.5">6.5</A> <A HREF="#toc6.5">thanks </A>
+<H2><A NAME="ss6.6">6.6</A> <A HREF="#toc6.6">thanks </A>
 </H2>
 
 
@@ -319,7 +374,7 @@ to create large databases from pgn. Typing "pgnscid somefile.pgn" creates a new 
 <P>and of course Shane Hudson, and the authors of 
 <A HREF="http://tcl.tk">Tcl/Tk</A></P>
 
-<H2><A NAME="ss6.6">6.6</A> <A HREF="#toc6.6">scid's history </A>
+<H2><A NAME="ss6.7">6.7</A> <A HREF="#toc6.7">scid's history </A>
 </H2>
 
 
@@ -1087,20 +1142,7 @@ Fics (which really gets stuffed up). Mouse wheel bindings remain.</LI>
 </UL>
 </P>
 <P>
-<H3>todo </H3>
-
-
-<P>
-<UL>
-<LI> Language updates (volunteers welcome).</LI>
-<LI> Pin down all filter inaccuracies.
-
-</LI>
-</UL>
-</P>
-<P>
 <A NAME="contact_"></A> </P>
-</P>
 </P>
 </P>
 </P>

@@ -649,6 +649,8 @@ proc ::windows::gamelist::checkAltered {} {
     }
   }
   if {[sc_game altered]} {
+    # It is impossible to signify the current game with a red foreground and blue background
+    # because internally it is part of treeviews "selection", which may span multiple childs
     $w tag configure current -foreground red
   } else {
     if {$::macOS} {
