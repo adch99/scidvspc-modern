@@ -1528,6 +1528,18 @@ Index::Sort (NameBase * nb, int reportFrequency,
     return OK;
 }
 
+// Return the sort array to sc_base_sort,
+// which allows sorting of filter and finding the current game
+
+uint *
+Index::GetEntriesHeap (void)
+{
+    if (EntriesHeap == NULL)
+      return 0;
+    else
+      return &(EntriesHeap[1]);
+}
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Index::VerifySort():
 //    Checks that every game number (from 0 to Header.numGames - 1)

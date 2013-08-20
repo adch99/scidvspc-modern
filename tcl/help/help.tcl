@@ -1571,8 +1571,7 @@ Use "+" as a logical AND with the <b>Filter</b> button. For example: "Kasparov+K
 <p>The <a Flags>Flag</a> drop-menu and button allow one to quickly set and unset database flags for selected games.</p>
 <h3>Sorting the Gamelist</h3>
 <p>The database can be <b>permanently sorted</b> by clicking column titles - but doing so is not trivial.
-<b>Sort resets the game filter</b> (meaning the current game cannot be replaced), and
-also <b>affects search and tree performance</b>. For more details see <a Sorting>Sorting Database</a>.
+<b>Sort affects search and tree performance</b>. For more details see <a Sorting>Sorting Database</a>.
 </p>
 
   <h3><name Del>Deleted and Filtered Games</name></h3>
@@ -2519,10 +2518,7 @@ set helpText(Sorting) {<h1>Sorting Databases</h1>
   <p>
   Scid has a fast and powerful <run makeSortWin><green>Sort Database</green></run>
   feature. Sorts can be performed on single fields (eg: Dates, Names and ECO codes),
-  or multiple fields, with the frist field having priority, and so-on.
-  </p>
-  <p>
-  <b>Note</b>: <i>Sorting a database resets the <a Filter>search filter</a></i>.
+  or multiple fields, with the first field having priority, and so-on.
   </p>
 
   <p>
@@ -2572,7 +2568,7 @@ set helpText(Sorting) {<h1>Sorting Databases</h1>
 compacted) can use <b>fast tree searches<b>. 
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.4 March 2011</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.10 August 2013</footer></p>
 }
 
 set helpTitle(Flags) "Game Flags"

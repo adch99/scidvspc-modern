@@ -32,7 +32,6 @@ static PBook * ecoBook = NULL;         // eco classification pbook.
 #ifndef WINCE
 static SpellChecker * spellChecker [NUM_NAME_TYPES] = {NULL};  // Name correction.
 #endif
-static PBook * repertoire = NULL;
 
 static progressBarT progBar;
 static char * preMoveCommand = NULL;  // Tcl command to execute before any
@@ -2255,15 +2254,44 @@ sc_base_sort (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         return errorResult (ti, "This database has less than two games.");
     }
 
+    int status;
     if (showProgress) {
-        db->idx->Sort (db->nb, 5000, base_progress, (void *) ti);
+        status = db->idx->Sort (db->nb, 5000, base_progress, (void *) ti);
     } else {
-        db->idx->Sort (db->nb, 0, NULL, NULL);
+        status = db->idx->Sort (db->nb, 0, NULL, NULL);
+    }
+
+    if (status == ERROR) {
+	printf ("Sort Failed.\n");
+	return ERROR;
     }
 
     if (showProgress) { updateProgressBar (ti, 1, 1); }
-    db->filter->Fill (1);
-    db->gameNumber = -1;
+
+    Filter *newfilter = db->filter->Clone();
+    int thisgame = -1;
+    uint * order = db->idx->GetEntriesHeap();
+    if (order) {
+      for (uint i=0; i < db->numGames; i++) {
+	 newfilter->Set(i, db->filter->Get(order[i]));
+	 if (order[i] == db->gameNumber)
+	   thisgame = i;
+      }
+    }
+
+    if (db->filter == db->dbFilter) {
+      delete db->filter;
+      db->filter   = newfilter;
+      db->dbFilter = newfilter;
+    } else {
+      // todo - sort out how the tree behaves.
+      delete db->filter;
+      delete db->dbFilter;
+      delete db->treeFilter;
+      db->filter   = newfilter;
+      db->dbFilter = db->filter->Clone();
+      db->treeFilter = new Filter( db->numGames);
+    }
 
     //Re-order and write the index, showing progress if applicable:
     if (argc >= 4  &&  showProgress) {
@@ -2280,6 +2308,13 @@ sc_base_sort (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     if ((! db->memoryOnly)  &&  (db->fileMode == FMODE_Both)) {
         removeFile (db->fileName, TREEFILE_SUFFIX);
     }
+
+    // sprintf (loadgame, "sc_game load %i", thisgame+1);
+    // Tcl_Eval (ti, loadgame);
+
+    // Current game state has not be changed, so just reassign db->gameNumber
+    // Any bugs/issues ??
+    db->gameNumber = thisgame;
 
     return TCL_OK;
 }

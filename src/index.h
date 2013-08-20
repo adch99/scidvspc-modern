@@ -755,6 +755,8 @@ class Index
                                          uint total),
                       void * progressData);
 
+     uint *     GetEntriesHeap (void);
+
      errorT     WriteSorted (int reportFrequency,
                              void (*progressFn)(void * data,
                                                 uint progress,
