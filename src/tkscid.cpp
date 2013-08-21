@@ -4,11 +4,10 @@
 //              Scid extensions to Tcl/Tk interpreter
 //
 //  Part of:    Scid (Shane's Chess Information Database)
-//  Version:    4.9
 //
 //  Notice:     Copyright (c) 1999-2004 Shane Hudson.  All rights reserved.
 //              Copyright (c) 2006-2007 Pascal Georges
-//              Copyright (c) 2009-2012 Stevenaaus
+//              Copyright (c) 2009-2013 Stevenaaus
 //
 //////////////////////////////////////////////////////////////////////
 
