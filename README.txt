@@ -52,7 +52,7 @@
         7..22 Scid vs. PC 3.6.26.1
 
   8. contact
-  9. documentation
+  9. links
 
 
   ______________________________________________________________________
@@ -1750,10 +1750,57 @@
   C. He lives and works in rural australia, and spends some Saturday
   mornings playing against an ancient guy from Iceland.
 
-  9.  documentation
+  9.  links
 
-  This online documentation is generated from Scid vs. PC's help files.
-  http://scidvspc.sourceforge.net/doc/Contents.htm
-  <http://scidvspc.sourceforge.net/doc/Contents.htm>
+
+  o  Scid vs. PC  <http://scidvspc.sourceforge.net/>
+
+  o  Project page  <http://sourceforge.net/projects/scidvspc>
+
+  o  Online documentation
+     <http://scidvspc.sourceforge.net/doc/Contents.htm>
+
+  o  Millbase database  <http://katar.weebly.com/index.html>
+
+  o  Player Information resources
+     <http://sourceforge.net/projects/scid/files/Player Data/>
+
+  o  FICS  <http://www.freechess.org>
+
+  o  FICS game archives  <http://ficsgames.org>
+
+  o  The PGN and EPD standards
+     <http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm>
+
+  o  Pgn of players  <http://www.pgnmentor.com/files.html#players>
+
+  o  Pgn of events  <http://www.pgnmentor.com/files.html#events>
+
+  o  Mailing list subscribe
+     <https://lists.sourceforge.net/lists/listinfo/scidvspc-users>
+
+  o  Mailing list archive
+     <http://sourceforge.net/mailarchive/forum.php?forum_name=scidvspc-
+     users>
+
+  o  Programmer's reference
+     <http://scidvspc.sourceforge.net/doc/progref.html>
+
+  o  UCI engine protocol  <http://wbec-
+     ridderkerk.nl/html/UCIProtocol.html>
+
+  o  Xboard engine protocol  <http://www.open-
+     aurec.com/wbforum/WinBoard/engine-intf.html>
+     Popular chess portals
+
+  o  <http://www.chessbase.com>
+
+  o  <http://www.theweekinchess.com/>
+
+  o  <http://www.chesschat.org>
+
+  o  Professional quality chess icons  <http://www.virtualpieces.net>
+
+  o  Tango icons  <http://tango.freedesktop.org/Tango_Desktop_Project>
 
 

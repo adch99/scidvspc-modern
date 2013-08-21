@@ -13,13 +13,10 @@ append helpText(Contents) {
   <ht><a Scid>Databases and General Use</a></ht>
   <ht><a Tourney>Computer Tournaments</a></ht>
   <ht><a TacticsTrainer>Mate in ..N.. Puzzles</a></ht>
-  <br>
-  <br>
   <ht><a Related>Links</a></ht>
   <ht><a Author>About</a></ht>
-  <ht><url http://scidvspc.sourceforge.net/doc/progref.html>Programmer's Reference</url></ht>
   <br>
-  <p><footer>Updated: Scid vs. PC 4.9, January 2013</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.10, August 2013</footer></p>
 }
 set helpTitle(Intro) "$::scidName"
 set helpText(Intro) {<h1>Introduction</h1>
@@ -134,6 +131,15 @@ back to PGN.
 set helpTitle(Scid) {General Use}
 set helpText(Scid) {<h1>Databases and General Use</h1>
 
+  <p> <i>Databases are implemented via a fast <a Formats>three file format</a>,
+  and populated by importing PGN archives or other databases using the <a
+  Clipbase>Clipbase</a> as a cut and paste tool.</i>
+  </p>
+
+  <p>
+  Millbase free database <url http://katar.weebly.com/index.html>http://katar.weebly.com/index.html</url>
+  </p>
+
   <h4>The GUI</h4>
   <ul>
   <li><a MainWindow>The <b>Main Window</b></a></li>
@@ -143,10 +149,6 @@ set helpText(Scid) {<h1>Databases and General Use</h1>
   </ul>
 
   <h4>Using Databases</h4>
-  <p> <i>Databases are implemented via a fast <a Formats>three file format</a>,
-  and populated by importing PGN archives or other databases using the <a
-  Clipbase>Clipbase</a> as a cut and paste tool.</i>
-  </p>
   <ul>
   <li><a Clipbase><b>Clipbase</b> - the default database</a></li>
   <li><a Sorting><b>Sorting</b> databases</a></li>
@@ -4206,35 +4208,40 @@ set helpText(Author) "<h1>Scid vs. PC</h1>
 "
 
 set helpTitle(Related) "Links"
-set helpText(Related) {<h1>Related Links</h1>
+set helpText(Related) {<h1>Links</h1>
   <p>
   <ul>
   <li>Scid vs. PC  <url http://scidvspc.sourceforge.net/>http://scidvspc.sourceforge.net/</url></li>
   <li>Project page  <url http://sourceforge.net/projects/scidvspc>http://sourceforge.net/projects/scidvspc</url></li>
-  <li>Mailing list archive <url http://sourceforge.net/mailarchive/forum.php?forum_name=scidvspc-users>http://sourceforge.net/mailarchive/forum.php?forum_name=scidvspc-users</url></li>
+  <li>Online documentation <url http://scidvspc.sourceforge.net/doc/Contents.htm>http://scidvspc.sourceforge.net/doc/Contents.htm</url></li>
+  <br>
+  <li>Millbase database <url http://katar.weebly.com/index.html>http://katar.weebly.com/index.html</url></li>
+  <li>Player Information resources  <url http://sourceforge.net/projects/scid/files/Player Data/>http://sourceforge.net/projects/scid/files/Player Data/</url></li>
+  <li>FICS <url http://www.freechess.org>www.freechess.org</url></li>
+  <li>FICS game archives <url http://ficsgames.org>http://ficsgames.org</url></li>
+  <li>The PGN and EPD standards <url www.saremba.de/chessgml/standards/pgn/pgn-complete.htm>www.saremba.de/chessgml/standards/pgn...</url></li>
+  <li>Pgn of players <url www.pgnmentor.com/files.html#players>www.pgnmentor.com/files.html#players</url></li>
+  <li>Pgn of events <url www.pgnmentor.com/files.html#events>www.pgnmentor.com/files.html#events</url></li>
+  </ul>
+<br>
   <li>Mailing list subscribe <url https://lists.sourceforge.net/lists/listinfo/scidvspc-users>https://lists.sourceforge.net/lists/listinfo/scidvspc-users</url></li>
+  <li>Mailing list archive <url http://sourceforge.net/mailarchive/forum.php?forum_name=scidvspc-users>http://sourceforge.net/mailarchive/forum.php?forum_name=scidvspc-users</url></li>
+  <li>Programmer's reference <url http://scidvspc.sourceforge.net/doc/progref.html>http://scidvspc.sourceforge.net/doc/progref.html</url></li>
+  <li>UCI engine protocol <url http://wbec-ridderkerk.nl/html/UCIProtocol.html>http://wbec-ridderkerk.nl/html/UCIProtocol.html</url></li>
+  <li>Xboard engine protocol <url http://www.open-aurec.com/wbforum/WinBoard/engine-intf.html>http://www.open-aurec.com/wbforum/WinBoard/engine-intf.html</url></li>
   <br>
-  <li>Scid <url http://scid.sourceforge.net/>http://scid.sourceforge.net/</url></li>
-  <li>Scid mailing list  <url http://sourceforge.net/mailarchive/forum.php?forum_name=scid-users>http://sourceforge.net/mailarchive/forum.php...</url></li>
-  <li>FICS homepage  <url http://www.freechess.org>www.freechess.org</url></li>
-  <li>FICS games <url http://ficsgames.org>http://ficsgames.org</url></li>
-  <li>Player Information resources  <url http://linweb.ris.at/~nagl/index.html>http://linweb.ris.at/~nagl</url></li>
-  <li>Professional quality chess icons  <url www.virtualpieces.net>www.virtualpieces.net</url></li>
-  <li>Tango Icons <url http://tango.freedesktop.org/Tango_Desktop_Project>http://tango.freedesktop.org/Tango_Desktop_Project</url></li>
-  <li>The PGN Standard, created by Steven J. Edwards in 1994, explains the PGN
-  and EPD formats in detail. <url www.saremba.de/chessgml/standards/pgn/pgn-complete.htm>www.saremba.de/chessgml/standards/pgn...</url></li>
-  <br>
-  <li>A few popular chess portals.</li>
-  <li>  <url www.chessvibes.com>www.chessvibes.com </url></li>
-  <li>  <url www.chessbase.com/index.asp>www.chessbase.com/index.asp </url></li>
-  <li>  <url www.chesscenter.com/twic/>www.chesscenter.com/twic/</url></li>
+  <li>Popular chess portals.</li>
+  <ul>
+  <li>  <url www.chessbase.com>www.chessbase.com </url></li>
+  <li>  <url http://www.theweekinchess.com>www.theweekinchess.com </url></li>
+  <li>  <url http://www.chesschat.org>www.chesschat.org </url></li>
 <br>
 
-  <li>Pgn of famous players  <url www.pgnmentor.com/files.html#players>www.pgnmentor.com/files.html#players</url></li>
-  <li>Pgn of events  <url www.pgnmentor.com/files.html#events>www.pgnmentor.com/files.html#events</url></li>
+  <li>Professional quality chess icons  <url www.virtualpieces.net>www.virtualpieces.net</url></li>
+  <li>Tango icons <url http://tango.freedesktop.org/Tango_Desktop_Project>http://tango.freedesktop.org/Tango_Desktop_Project</url></li>
 
   </ul>
-<p><footer>Updated: Scid vs PC 4.3, December 2010</footer></p>
+<p><footer>Updated: Scid vs PC 4.10, August 2013</footer></p>
 }
 
 # Book window help

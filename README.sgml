@@ -1029,10 +1029,34 @@ who programs as a hobby in tcl/tk, bash and C. He lives and
 works in rural australia, and spends some Saturday mornings
 playing against an ancient guy from Iceland.</p>
 
-<sect> documentation <p>
-This online documentation is generated from Scid vs. PC's help files.
-<newline>
-<url url="http://scidvspc.sourceforge.net/doc/Contents.htm" name="http://scidvspc.sourceforge.net/doc/Contents.htm">
+<sect> links <p>
+<itemize>
+<item>Scid vs. PC <url url="http://scidvspc.sourceforge.net/">
+<item>Project page <url url="http://sourceforge.net/projects/scidvspc">
+<item>Online documentation <url url="http://scidvspc.sourceforge.net/doc/Contents.htm">
+<newline><newline>
+<item>Millbase database <url url="http://katar.weebly.com/index.html">
+<item>Player Information resources <url url="http://sourceforge.net/projects/scid/files/Player Data/">
+<item>FICS <url url="http://www.freechess.org">
+<item>FICS game archives <url url="http://ficsgames.org">
+<item>The PGN and EPD standards <url url="http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm">
+<item>Pgn of players <url url="http://www.pgnmentor.com/files.html#players">
+<item>Pgn of events <url url="http://www.pgnmentor.com/files.html#events">
+<newline><newline>
+<item>Mailing list subscribe <url url="https://lists.sourceforge.net/lists/listinfo/scidvspc-users">
+<item>Mailing list archive <url url="http://sourceforge.net/mailarchive/forum.php?forum_name=scidvspc-users">
+<item>Programmer's reference <url url="http://scidvspc.sourceforge.net/doc/progref.html">
+<item>UCI engine protocol <url url="http://wbec-ridderkerk.nl/html/UCIProtocol.html">
+<item>Xboard engine protocol <url url="http://www.open-aurec.com/wbforum/WinBoard/engine-intf.html">
+<newline><newline>
+Popular chess portals
+<item>	   <url url="http://www.chessbase.com">
+<item>	   <url url="http://www.theweekinchess.com/">
+<item>	   <url url="http://www.chesschat.org">
+<newline><newline>
+<item>Professional quality chess icons <url url="http://www.virtualpieces.net">
+<item>Tango icons <url url="http://tango.freedesktop.org/Tango_Desktop_Project">
+</itemize>
 </p>
 
 </article>
