@@ -1,5 +1,5 @@
 
-#define AppVersion '4.9'
+#define AppVersion '4.10'
 #define AppName    'Scid vs PC'
 #define ActiveTclUrl 'http://www.activestate.com/activetcl/downloads'
 
@@ -13,6 +13,7 @@ AppPublisher=Steven Atkinson
 AppPublisherURL=http://http://scidvspc.sourceforge.net
 AppCopyright=Steven Atkinson (C) 2009 - 2013  Steven Atkinson
 DefaultDirName={pf}\{# AppName}-{# AppVersion}
+UsePreviousAppDir=no
 DefaultGroupName={# AppName}
 DisableStartupPrompt=yes
 WindowShowCaption=yes
