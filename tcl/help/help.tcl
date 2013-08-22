@@ -131,14 +131,15 @@ back to PGN.
 set helpTitle(Scid) {General Use}
 set helpText(Scid) {<h1>Databases and General Use</h1>
 
-  <p> <i>Databases are implemented via a fast <a Formats>three file format</a>,
+  <p><i>
+  Databases are implemented via a fast <a Formats>three file format</a>,
   and populated by importing PGN archives or other databases using the <a
-  Clipbase>Clipbase</a> as a cut and paste tool.</i>
-  </p>
+  Clipbase>Clipbase</a> as a cut and paste tool.
+  </i></p>
 
-  <p>
+  <p><i>
   Millbase free database <url http://katar.weebly.com/index.html>http://katar.weebly.com/index.html</url>
-  </p>
+  </i></p>
 
   <h4>The GUI</h4>
   <ul>
@@ -4222,7 +4223,6 @@ set helpText(Related) {<h1>Links</h1>
   <li>The PGN and EPD standards <url www.saremba.de/chessgml/standards/pgn/pgn-complete.htm>www.saremba.de/chessgml/standards/pgn...</url></li>
   <li>Pgn of players <url www.pgnmentor.com/files.html#players>www.pgnmentor.com/files.html#players</url></li>
   <li>Pgn of events <url www.pgnmentor.com/files.html#events>www.pgnmentor.com/files.html#events</url></li>
-  </ul>
 <br>
   <li>Mailing list subscribe <url https://lists.sourceforge.net/lists/listinfo/scidvspc-users>https://lists.sourceforge.net/lists/listinfo/scidvspc-users</url></li>
   <li>Mailing list archive <url http://sourceforge.net/mailarchive/forum.php?forum_name=scidvspc-users>http://sourceforge.net/mailarchive/forum.php?forum_name=scidvspc-users</url></li>
@@ -4235,8 +4235,7 @@ set helpText(Related) {<h1>Links</h1>
   <li>  <url www.chessbase.com>www.chessbase.com </url></li>
   <li>  <url http://www.theweekinchess.com>www.theweekinchess.com </url></li>
   <li>  <url http://www.chesschat.org>www.chesschat.org </url></li>
-<br>
-
+  </ul>
   <li>Professional quality chess icons  <url www.virtualpieces.net>www.virtualpieces.net</url></li>
   <li>Tango icons <url http://tango.freedesktop.org/Tango_Desktop_Project>http://tango.freedesktop.org/Tango_Desktop_Project</url></li>
 
@@ -5798,7 +5797,26 @@ set helpText(Sound) {<h1>Sound</h1>
 }
 
 set helpTitle(Changelog) "Scid vs PC Changelog"
-set helpText(Changelog) {<h1>Scid vs. PC</h1>
+set helpText(Changelog) {<h1>Changelog</h1>
+
+<h4>4.10 (August 25, 2013)</h4>
+<ul>
+<li>When sorting databases, don't reset filter and remember current game/gamestate</li>
+<li>Implement (and bugfix) SCID's more comprehensive NAG framework</li>
+<li>Change a couple of field orders in the gamelist, remember field widths, and remove the icon context menus from the switcher (middle click now toggles show/hide the database icons)</li>
+<li>FICS: Allow use of alternative URLs (used during FICS outage) and other minor tweaks</li>
+<li>Window focus improvements (mainly for MS Windows and OS X)</li>
+<li>Computer Tournament: add 'Engine Scores as comments' option, and make some minor global/:: var changes</li>
+<li>Add Book Tuning to dockable windows</li>
+<li>Automatically flip board (if applicable) in game browser and analysis miniboards. </li>
+<li>When diffing twin games, ignore newlines in the comments, which make diffing impossible</li>
+<li>Add undo points for user generated addNag events</li>
+<li>Bookmarks: add a few key bindings (delete/up/down), and shuffle the gamelist bookmark button up one row</li>
+<li>Drag and drop hardening</li>
+<li>Windows 7 bugfix: PGN export and Progress bars weren't working in undocked mode</li>
+<li>Translation framework updates. Overhaul Dutch translation, and remove (broken) Russian one</li>
+<li>Convert braces '{', '}' to '(',')' when exporting PGN comments (against PGN standard). Also tweak various PGN help topics</li>
+</ul>
 
 <h4>4.9.2 (June 19, 2013)</h4>
 <ul>
