@@ -665,7 +665,10 @@ proc compNM {n m k} {
     if {$analysis(uci$current_engine)} {
       ### UCI main loop
       if {$comp(inbook) && $comp(book) != ""} {
-	set comp(bookmove) [::book::getMove $comp(book) [sc_pos fen] $::sergame::bookSlot]
+        catch {
+          # KomodoVariety.bin has bugs
+	  set comp(bookmove) [::book::getMove $comp(book) [sc_pos fen] $::sergame::bookSlot]
+        }
         if {$comp(bookmove) == ""} {
           set comp(inbook) 0
         }
