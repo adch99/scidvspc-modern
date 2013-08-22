@@ -2250,7 +2250,7 @@ sc_base_sort (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         return errorResult (ti, errMsgNotOpen(ti));
     }
     if (db->numGames < 2) {
-        return errorResult (ti, "This database has less than two games.");
+        return TCL_OK;
     }
 
     int status;
@@ -2260,9 +2260,8 @@ sc_base_sort (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         status = db->idx->Sort (db->nb, 0, NULL, NULL);
     }
 
-    if (status == ERROR) {
-	printf ("Sort Failed.\n");
-	return ERROR;
+    if (status != OK ) {
+      return errorResult (ti, "Sort Failed.");
     }
 
     if (showProgress) { updateProgressBar (ti, 1, 1); }

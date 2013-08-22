@@ -814,6 +814,7 @@ proc SortBy {tree col} {
     busyCursor .
     update
 
+    # This catch is annoying, but if we remove it, how do we unbusyCursor when sort fails ?
     catch {sc_base sort $col {}}
 
     unbusyCursor .
