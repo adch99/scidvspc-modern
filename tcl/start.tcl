@@ -616,7 +616,7 @@ array set geometry {}
 
 # Default theme
 if {$::windowsOS} {
-  set lookTheme winnative
+  set lookTheme clam
 } else {
   set lookTheme default
 }
@@ -1129,8 +1129,8 @@ set ::book::oppMovesVisible 0
 # Engines data:
 set engines(list) {}
 set engines(sort) Time
-set engines(F2)  1
-set engines(F3)  2
+set engines(F2)  0
+set engines(F3)  1
 set engines(F4)  {}
 
 proc resetInformants {} {

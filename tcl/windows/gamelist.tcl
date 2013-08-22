@@ -450,7 +450,7 @@ proc ::windows::gamelist::OpenClose {} {
 
   set ::windows::gamelist::goto {}
 
-  button $w.b.select -textvar ::tr(SetFilter) -font font_Small -relief flat -width 5 -command {
+  button $w.b.select -textvar ::tr(SetFilter) -font font_Small -relief flat -command {
     set items [.glistWin.tree selection]
     if { "$items" == "" } {
       bell
@@ -467,7 +467,7 @@ proc ::windows::gamelist::OpenClose {} {
   }
 
   ### Filter items. (Delete items is different)
-  button $w.b.remove -textvar ::tr(GlistDeleteField) -font font_Small -relief flat -width 5 -command {
+  button $w.b.remove -textvar ::tr(GlistDeleteField) -font font_Small -relief flat -command {
     set items [.glistWin.tree selection]
     foreach i $items {
       sc_filter remove [.glistWin.tree set $i Number]
@@ -482,7 +482,13 @@ proc ::windows::gamelist::OpenClose {} {
     set ::windows::gamelist::finditems {}
     setGamelistTitle
   }
+  # Trim extra space from this crowded frame
+  if {!$::windowsOS} {
+    $w.b.remove configure -width 5
+    $w.b.select configure -width 5
+  }
   bind $w.tree <Delete> "$w.b.remove invoke"
+
 
   button $w.b.removeabove -text Rem -image arrow_up -compound right -font font_Small -relief flat -command {removeFromFilter up}
   button $w.b.removebelow -text Rem -image arrow_down -compound right -font font_Small -relief flat -command {removeFromFilter down}

@@ -243,10 +243,6 @@ if {[llength $engines(list)] == 0} {
   }
 
   if {$macApp} {
-    engine "Name Scidlet
-	    Cmd  $scidExeDir/scidlet
-	    Dir  $scidUserDir"
-
     engine "Name Toga
             Cmd  $scidShareDir/engines/toga/fruit
             Dir  $scidUserDir
@@ -254,11 +250,10 @@ if {[llength $engines(list)] == 0} {
     engine "Name Phalanx
             Cmd  $scidShareDir/engines/phalanx/phalanx
             Dir  $scidUserDir"
-  } else {
     engine "Name Scidlet
-	    Cmd  scidlet
-	    Dir  ."
-
+	    Cmd  $scidExeDir/scidlet
+	    Dir  $scidUserDir"
+  } else {
     engine "Name Toga
             Cmd  fruit
             Dir  $scidUserDir
@@ -267,6 +262,9 @@ if {[llength $engines(list)] == 0} {
     engine "Name Phalanx
             Cmd  phalanx
             Dir  $scidUserDir"
+    engine "Name Scidlet
+	    Cmd  scidlet
+	    Dir  ."
   }
 
 }

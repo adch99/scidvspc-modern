@@ -2253,13 +2253,15 @@ sc_base_sort (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         return TCL_OK;
     }
 
-    int status;
+    errorT status;
     if (showProgress) {
         status = db->idx->Sort (db->nb, 5000, base_progress, (void *) ti);
     } else {
         status = db->idx->Sort (db->nb, 0, NULL, NULL);
     }
 
+    // if (status == ERROR )
+    // ERROR define seems broken with mingwx 
     if (status != OK ) {
       return errorResult (ti, "Sort Failed.");
     }
