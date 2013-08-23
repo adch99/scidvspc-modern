@@ -128,14 +128,14 @@
 
   3.  download
 
-  source scid_vs_pc-4.9.1.tgz
-  <http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.9.1.tgz/download>
+  source scid_vs_pc-4.10.tgz
+  <http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.10.tgz/download>
 
-  windows Scid vs PC-4.9.1.exe
-  <http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.9.1.exe/download>
+  windows Scid vs PC-4.10.exe
+  <http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.10.exe/download>
 
-  mac ScidvsMac-4.9.2.dmg
-  <http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.9.2.dmg/download>
+  mac ScidvsMac-4.10.dmg
+  <http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.10.dmg/download>
 
   browse files
   <https://sourceforge.net/project/showfiles.php?group_id=263836>
@@ -149,18 +149,18 @@
 
   4.0.1.  Linux , FreeBSD
 
-  Scid vs. PC requires Tcl/Tk <http://tcl.tk> 8.5.  Tcl/Tk 8.5.10 has
-  nasty bugs and should be avoided.Most Unices should have Tcl/Tk
-  installed by default.  To verify this, look for a command named wish
-  or wish8.5.  To enable support for extra chess pieces (such as
+  Scid vs. PC requires Tcl/Tk <http://tcl.tk> 8.5 or later.  Tcl/Tk
+  8.5.10 has nasty bugs and should be avoided.Most Unices should have
+  Tcl/Tk installed by default.  To verify this, look for a command named
+  wish or wish8.5.  To enable support for extra chess pieces (such as
   Berlin), you may need to install TkImg
   <https://sourceforge.net/project/downloading.php?group_id=263836&filename=tkimg1.3.tar.bz2>.
   Then, installing from source:
 
   ______________________________________________________________________
-  tar -xzf scid_vs_pc-4.9.1.tgz
-  cd scid_vs_pc-4.9.1
-  configure
+  tar -xzf scid_vs_pc-4.10.tgz
+  cd scid_vs_pc-4.10
+  ./configure
   make install
   scid
   ______________________________________________________________________
@@ -180,16 +180,16 @@
 
   The configuration files, including the chess engine list, are stored
   in the Scid-vs-PC\bin\config directory, and may be copied over from
-  old versions to make upgrading easier. On Windows 7, these files are
-  mirrored in C:\Users\[USERNAME]\AppData\Local\VirtualStore\Program
-  Files\Scid vs PC
-
+  old versions to make upgrading easier. If the app is installed in
+  "Program Files" On Windows 7, the config files are mirrored in
+  C:\Users\[USERNAME]\AppData\Local\VirtualStore\Program Files\Scid vs
+  PC
   People with Visual Studio 11 should now be able to compile the project
   fairly easily (see Makefile.vc for more details).
 
   4.0.3.  Mac OS X
 
-  The ``ScidvsMac-4.9.2 app'' should include everything you need. Simply
+  The ``ScidvsMac-4.10 app'' should include everything you need. Simply
   drag and drop the App into /Applications (or similar).
 
   Users upgrading may have to remove (or edit)

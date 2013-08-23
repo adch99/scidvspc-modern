@@ -119,11 +119,11 @@ and bug-fix fork of Scid with some new features.  The project is authored by
 
 
 <P>source 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.9.1.tgz/download">scid_vs_pc-4.9.1.tgz</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.10.tgz/download">scid_vs_pc-4.10.tgz</A></P>
 <P>windows 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.9.1.exe/download">Scid vs PC-4.9.1.exe</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.10.exe/download">Scid vs PC-4.10.exe</A></P>
 <P>mac 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.9.2.dmg/download">ScidvsMac-4.9.2.dmg</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.10.dmg/download">ScidvsMac-4.10.dmg</A></P>
 <P>
 <A HREF="https://sourceforge.net/project/showfiles.php?group_id=263836">browse files</A></P>
 <P>The latest code is available from subversion - <B>svn checkout http://svn.code.sf.net/p/scidvspc/code/ scidvspc-code</B><BR>
@@ -139,7 +139,7 @@ or as a tarball
 
 
 <P>Scid vs. PC requires 
-<A HREF="http://tcl.tk">Tcl/Tk</A> 8.5.
+<A HREF="http://tcl.tk">Tcl/Tk</A> 8.5 or later.
 <EM>Tcl/Tk 8.5.10 has nasty bugs and should be avoided.</EM></P>
 Most Unices should have Tcl/Tk installed by default.
 To verify this, look for a command named <B>wish</B> or <B>wish8.5</B>.
@@ -148,9 +148,9 @@ To enable support for extra chess pieces (such as Berlin), you may need to insta
 Then, installing from source:
 <HR>
 <PRE>
-tar -xzf scid_vs_pc-4.9.1.tgz
-cd scid_vs_pc-4.9.1
-configure
+tar -xzf scid_vs_pc-4.10.tgz
+cd scid_vs_pc-4.10
+./configure
 make install
 scid
 </PRE>
@@ -167,14 +167,14 @@ Scid's multi-language support can cause problems. Chinese (and other) users shou
 <A HREF="#download_">executable</A>, and following the prompts.</P>
 <P>The configuration files, <B>including the chess engine list</B>, are stored
 in the <B>Scid-vs-PC\bin\config</B> directory, and may be copied over from
-old versions to make upgrading easier. On Windows 7, these files are mirrored in
+old versions to make upgrading easier. If the app is installed in "Program Files" On Windows 7, the config files are mirrored in
 C:\Users\[USERNAME]\AppData\Local\VirtualStore\Program Files\Scid vs PC</P>
 <P>People with Visual Studio 11 should now be able to compile the project fairly easily (see Makefile.vc for more details).</P>
 <H3>Mac OS X </H3>
 
 
 <P>The 
-<A HREF="#download_">ScidvsMac-4.9.2 app</A> should include everything you need. Simply drag and drop the App into /Applications (or similar).</P>
+<A HREF="#download_">ScidvsMac-4.10 app</A> should include everything you need. Simply drag and drop the App into /Applications (or similar).</P>
 <P><EM>Users upgrading may have to remove (or edit) <B>$HOME/.scidvspc/config/engines.dat</B>
 to properly configure the chess engines.</EM></P>
 <P>OS X  has a poor implementation of Tcl, and docked mode has bugs (some windows work better after being moved around, keyboard shortcuts are very hit and miss). These issues should be fixed with a point release sometime in the future.</P>
