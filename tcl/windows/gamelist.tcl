@@ -954,7 +954,7 @@ proc ::windows::gamelist::Refresh {{see {}}} {
     } else {
       if {$thisindex == "$current "} {
 	set current_item [$w.tree insert {} 0 -values $values -tag [list click2 current]]
-      } elseif {[lindex $values 12] == {D }} {
+      } elseif {[lindex $values 11] == {D }} {
 	$w.tree insert {} 0 -values $values -tag [list click2 deleted] ;#treefont
       } else {
 	$w.tree insert {} 0 -values $values -tag click2
