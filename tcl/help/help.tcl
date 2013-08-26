@@ -5809,7 +5809,7 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li>Window focus improvements (mainly for MS Windows and OS X)</li>
 <li>Computer Tournament: add 'Engine Scores as comments' option, and make some minor global/:: var changes</li>
 <li>Add Book Tuning to dockable windows</li>
-<li>Automatically flip board (if applicable) in game browser and analysis miniboards. </li>
+<li>Automatically flip board (if applicable) in game browser and analysis miniboards</li>
 <li>When diffing twin games, ignore newlines in the comments, which make diffing impossible</li>
 <li>Add undo points for user generated addNag events</li>
 <li>Bookmarks: add a few key bindings (delete/up/down), and shuffle the gamelist bookmark button up one row</li>
@@ -5821,7 +5821,7 @@ set helpText(Changelog) {<h1>Changelog</h1>
 
 <h4>4.9.2 (June 19, 2013)</h4>
 <ul>
-<li>OS X changes, including docked mode fixes.</li>
+<li>OS X changes, including docked mode fixes</li>
 </ul>
 
 <h4>4.9.1 (May 4, 2013)</h4>
@@ -5837,7 +5837,7 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <h4>4.9 (April 20, 2013)</h4>
 <b>Window Docking</b>
 <ul>
-<li>Different windows are docked/restored than Scid. Five layout slots with three custom layouts. Bug-fixes. F11 for fullscreen. Tcl 8.6.0 may have issues. Selectable Ttk themes (also for Gamelist).</li>
+<li>Different windows are docked/restored than Scid. Five layout slots with three custom layouts. Bug-fixes. F11 for fullscreen. Tcl 8.6.0 may have issues. Selectable Ttk themes (also for Gamelist)</li>
 </ul>
 <br>
 <b>General</b>
@@ -5886,7 +5886,7 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li>Crosstable: handle games with a year-only date differently for crosstable purposes (Instead of +/-3 months, match any other games in the calender year</li>
 <li>FICS: Stop clocks after a takeback request from opponent</li>
 <li>FICS: Games with move lengths greater than 1:00:00 would break parse</li>
-<li>Add missing FICSLogin translation.</li>
+<li>Add missing FICSLogin translation</li>
 <li>New windows Phalanx build. It works better under win7, but has analysis polling issues</li>
 <li>OS X: Pad out flag buttons in Header search</li>
 <li>base_open_failure was erroneously closing wrong base</li>
@@ -5898,16 +5898,16 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <ul>
 <li>Drag and Drop file open(s) on Windows and Unix</li>
 <li>Custom background images (jpegs, gifs and pngs)</li>
-<li>Random sort pgn feature.</li>
+<li>Random sort pgn feature</li>
 <li>Crosstable now have +/-/= subtotals</li>
-<li>(and Player Stats format changed from +/=/- to +/-/=).</li>
+<li>(and Player Stats format changed from +/=/- to +/-/=)</li>
 <li>General PGN search has ignore case option</li>
-<li>Board Search gets it's combobox updated when DBs are opened and closed.</li>
+<li>Board Search gets it's combobox updated when DBs are opened and closed</li>
 <li>Save game before PGN Import</li>
-<li>Save game: enable the use of 'prev game tags' for existing games. This allows easy addition of the same tags to consecutive existing games.</li>
+<li>Save game: enable the use of 'prev game tags' for existing games. This allows easy addition of the same tags to consecutive existing games</li>
 <li>Remove the 'Scid: ' prefix from several window titles</li>
 <li>Update some translations</li>
-<li>Show Linux version/distro in the startup window.</li>
+<li>Show Linux version/distro in the startup window</li>
 <li>Add a patch to make toolbar buttons raise only (instead of toggle open/shut)</li>
 <li>Add a patch for Chess960 support (from Ben Hague). Unfinished</li>
 </ul>
@@ -5915,8 +5915,8 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <br>
 <b>Analysis</b>
 <ul>
-<li>UCI: properly handle UCI buttons. Previously they were invoked at every engine restart.</li>
-<li>Right clicking 'Add Var' button adds Engine Score comment only.</li>
+<li>UCI: properly handle UCI buttons. Previously they were invoked at every engine restart</li>
+<li>Right clicking 'Add Var' button adds Engine Score comment only</li>
 <li>Replace ponder on/off with hard/easy for xboard engines</li>
 <li>Super quick engine infos can happen before Scid's PV is inited properly. So we have to default to PV = 1</li>
 <li>Allow xboard engines to use lowercase 'b' for bishop promotion (eg a7b8b)</li>
@@ -5928,7 +5928,7 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <br>
 <b>Tree</b>
 <ul>
-<li>Move ECO stats to the end of line.</li>
+<li>Move ECO stats to the end of line</li>
 <li>Several Mask refinements - notably Searches are much more readable and previously clicking on searched lines didn't work</li>
 <li>Fix up minor bugs about castling moves (OO, O-O, O-O-O)</li>
 </ul>
@@ -5937,18 +5937,18 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <b>Computer Tournament</b>
 <ul>
 <li>Computer Tournament Book feature</li>
-<li>Dont' kill tournament if engine crashes.</li>
+<li>Dont' kill tournament if engine crashes</li>
 <li>Only pack the first 10 engine combos (which allows for big tournaments)</li>
-<li>Fix up Xboard time/move command order. Xboard engines should behave much better.</li>
+<li>Fix up Xboard time/move command order. Xboard engines should behave much better</li>
 <li>Various other tweaks</li>
 </ul>
 
 <br>
 <b>Gamelist</b>
 <ul>
-<li>Show altered games in red.</li>
-<li>Control-wheelmouse scrolls up/down one page.</li>
-<li>Switcher now has text on two lines (if icons are shown).</li>
+<li>Show altered games in red</li>
+<li>Control-wheelmouse scrolls up/down one page</li>
+<li>Switcher now has text on two lines (if icons are shown)</li>
 </ul>
 
 <br>
@@ -5957,8 +5957,8 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li>Digital clocks now (optionally) on the main board</li>
 <li>Better integration of FICS "examine" and "observe" features</li>
 <li>FICS has it's own options menu</li>
-<li>bind F9 to xtell instead of tell.</li>
-<li>Change the move.wav sound from tick-tock to a short click.</li>
+<li>bind F9 to xtell instead of tell</li>
+<li>Change the move.wav sound from tick-tock to a short click</li>
 </ul>
 
 <br>
@@ -5974,43 +5974,43 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <b>General Bugs</b>
 <ul>
 <li>Work arounds for wish 8.5.12 and 8.5.8 issues</li>
-<li>Analysis logs can badly break autoscroll, so use normal frames and scrollbars.</li>
-<li>Handle PGN parsing of unspecified promotions (b8 becomes b8=Q , for eg).</li>
+<li>Analysis logs can badly break autoscroll, so use normal frames and scrollbars</li>
+<li>Handle PGN parsing of unspecified promotions (b8 becomes b8=Q , for eg)</li>
 </ul>
 
 <h4>4.7 (January 20, 2012)</h4>
 <ul>
 <li>Tree: Add coloured bar-graphs representing win/draw/loss (and remove the old tree graph)</li>
-<li>Tablebases: Make best tablebase moves clickable.</li>
-<li>Tablebases: tidy up config , main window and help items.</li>
-<li>FICs: Can now play and watch (observe) multiple games at the same time.</li>
+<li>Tablebases: Make best tablebase moves clickable</li>
+<li>Tablebases: tidy up config , main window and help items</li>
+<li>FICs: Can now play and watch (observe) multiple games at the same time</li>
 <li>FICS: Support loading old/interupted games for analysis (using 'smoves' command)</li>
-<li>FICs: Add an Abort button. Other minor fixes.</li>
-<li>Serious Game  overhaul (though still has minor issues) Add pause, resume features and mate, game drawn dialogs.</li>
-<li>Computer Tournament: Add  'first engine only' feature for testing a single engine against others.</li>
+<li>FICs: Add an Abort button. Other minor fixes</li>
+<li>Serious Game  overhaul (though still has minor issues) Add pause, resume features and mate, game drawn dialogs</li>
+<li>Computer Tournament: Add  'first engine only' feature for testing a single engine against others</li>
 <li>Enable material difference display for game browser and fics observed games</li>
-<li>Analysis: View engine logs from within Scid, and can also disable logging.</li>
-<li>Analysis no longer word wraps, and uses fixed font.</li>
-<li>Analysis: add a xboard/uci protocol column to the engine list.</li>
-<li>Include updates to SCID's spellchk.c, improving the ELO add-ratings feature.</li>
+<li>Analysis: View engine logs from within Scid, and can also disable logging</li>
+<li>Analysis no longer word wraps, and uses fixed font</li>
+<li>Analysis: add a xboard/uci protocol column to the engine list</li>
+<li>Include updates to SCID's spellchk.c, improving the ELO add-ratings feature</li>
 <li>Update spelling.ssp file to Jan 2012</li>
-<li>Player info: clicking FIDE ID opens relevant url.</li>
-<li>New feature: 'Search-<gt>Filter to Last Move'. All filter games will load at the last move (end of game).</li>
-<li>Refine the Calculation of Variation (Stoyko Exercise) feature and Help.</li>
-<li>Toolbar has a 'book window' icon.</li>
-<li>Tweak PGN context menu: reorder the Strip/Delete move items.</li>
-<li>Gamelist: replace the Negate button with a Select button.</li>
-<li>Tree: Include a patch for embedding the Best Games into the Tree window.</li>
+<li>Player info: clicking FIDE ID opens relevant url</li>
+<li>New feature: 'Search-<gt>Filter to Last Move'. All filter games will load at the last move (end of game)</li>
+<li>Refine the Calculation of Variation (Stoyko Exercise) feature and Help</li>
+<li>Toolbar has a 'book window' icon</li>
+<li>Tweak PGN context menu: reorder the Strip/Delete move items</li>
+<li>Gamelist: replace the Negate button with a Select button</li>
+<li>Tree: Include a patch for embedding the Best Games into the Tree window</li>
 <li></li>
 <li>Bugfixes</li>
-<li>Importing PGN, check that Promotion Moves are long enough (otherwise can segfault).</li>
-<li>Document CCRL pgn round name problem, and handle errors better when Name limits hit.</li>
-<li>FICS: remove non-ascii chars from commands if using timeseal.</li>
-<li>Gamelist: To display unusual characters, convert to unicode before displaying games.</li>
-<li>Sync html bitmaps with SCID.</li>
+<li>Importing PGN, check that Promotion Moves are long enough (otherwise can segfault)</li>
+<li>Document CCRL pgn round name problem, and handle errors better when Name limits hit</li>
+<li>FICS: remove non-ascii chars from commands if using timeseal</li>
+<li>Gamelist: To display unusual characters, convert to unicode before displaying games</li>
+<li>Sync html bitmaps with SCID</li>
 <li>Book: Only do the second book move lookup if we have too. (slight performance boost)</li>
-<li>EPD: Quick fix for epd analysis annotation bug..</li>
-<li>Hungarian, Swedish and Potugese Spanish were broken if Piece translation enabled (which was default). Fixed.</li>
+<li>EPD: Quick fix for epd analysis annotation bug</li>
+<li>Hungarian, Swedish and Potugese Spanish were broken if Piece translation enabled (which was default). Fixed</li>
 <li>Fix up Tacgame score-isn't-updated bug</li>
 </ul>
 
@@ -6018,39 +6018,39 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <ul>
 <li>Undo and Redo features (partly from SCID)</li>
 <li>Microsoft Windows has a proper installer</li>
-<li>Always loads games at the correct game ply when using the tree and searches.</li>
+<li>Always loads games at the correct game ply when using the tree and searches</li>
 <li>Ratings graph can show multiple players (and there's a minimum ELO feature)</li>
-<li>Computer Tournament: Improvements for both Xboard and UCI engines, and implement the 50 move draw rule.</li>
+<li>Computer Tournament: Improvements for both Xboard and UCI engines, and implement the 50 move draw rule</li>
 <li>Auto-promote feature for FICS</li>
 <li>Book tuning 'Remove move' feature</li>
 <li>Autoraise button raises all windows</li>
-<li>Annotation improvements, and it is now possible to score All moves while only annotating Blunders.</li>
+<li>Annotation improvements, and it is now possible to score All moves while only annotating Blunders</li>
 <br>
 <li>Biographical data for aliases is shown in the player information window</li>
-<li>The player info widget has buttons enabling quick player renames and look-up.</li>
-<li>'Read-Only' context menu in the Database Switcher, and Read-Only bases are greyed out.</li>
+<li>The player info widget has buttons enabling quick player renames and look-up</li>
+<li>'Read-Only' context menu in the Database Switcher, and Read-Only bases are greyed out</li>
 <li>Fix bug in the opening/theory table</li>
 <li>Remember game position when stripping comments and variations from PGN</li>
-<li>Change analysis colors for MultiPV to black/grey instead of blue/black.</li>
+<li>Change analysis colors for MultiPV to black/grey instead of blue/black</li>
 <li>New 'Search in (other) Database' feature to the board search (from SCID)</li>
-<li>Variation/Mainline arrows can have custom colours.</li>
+<li>Variation/Mainline arrows can have custom colours</li>
 <li>Crosstable can (optionally) show 3 points for a win</li>
 <li>Fix sc_remote (which allows games to be opened in an already running Scid vs PC)</li>
 <li>Phalanx tacgame bug-fixes (play brainy, and stop after the correct amount of time)</li>
 <li>Tweak the best games widget (make fields line-up)</li>
-<li>When handling Import PGN errors, show the game numbers as well as the line in file.</li>
+<li>When handling Import PGN errors, show the game numbers as well as the line in file</li>
 <li>Catch a nasty wish8.5.10 bug with the gamelist (Wish-8.5.10 should be avoided)</li>
-<li>Remove the broken integer field validation and replace it with something that allows backspace to work.</li>
+<li>Remove the broken integer field validation and replace it with something that allows backspace to work</li>
 <li>Bind Control-Tab to 'switch to next base', and Control-(quoteleft) to 'switch to clipbase'</li>
-<li>Fix a couple of corner cases concerning dates and searches.</li>
+<li>Fix a couple of corner cases concerning dates and searches</li>
 <li>Analysis widget : small speed improvements , icon changes and bug-fixes</li>
-<li>Add a help item for Maintenance 'Check Games' feature.</li>
-<li>Swap around the 'Next Move' and 'Event' game-information lines.</li>
-<li>New documentation about making Polyglot books.</li>
-<li>Make the player Report config widget a bit easier to use.</li>
+<li>Add a help item for Maintenance 'Check Games' feature</li>
+<li>Swap around the 'Next Move' and 'Event' game-information lines</li>
+<li>New documentation about making Polyglot books</li>
+<li>Make the player Report config widget a bit easier to use</li>
 <li>Catch a nasty wish8.5.10 bug with the gamelist (Wish-8.5.10 should be avoided)</li>
 <li>New OSX HowTo</li>
-<li>Crosstable bugfix: the 'show white first' feature didn't work for two match rounds.</li>
+<li>Crosstable bugfix: the 'show white first' feature didn't work for two match rounds</li>
 <li>Update 'Tips'</li>
 <li>Clarify Scid's maximum number of games</li>
 <li>Update Spanish and Polish translations</li>
@@ -6064,12 +6064,12 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li>Computer Tournament:</li>
 <ul>
 <li>Per-game time control</li>
-<li>Clock widgets for remaining time.</li>
-<li>Manual adjudication buttons, and a Restart button.</li>
+<li>Clock widgets for remaining time</li>
+<li>Manual adjudication buttons, and a Restart button</li>
 </ul>
 <li>General:</li>
 <ul>
-<li>Game List remembers it's view when switching between bases.</li>
+<li>Game List remembers it's view when switching between bases</li>
 <li>Game Browser has new buttons and functionality</li>
 <li>Tournament Finder is more readable</li>
 <li>Restore PGN scrollbar (pgn option)</li>
@@ -6079,9 +6079,9 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li>Player Info: add a 'Refine Filter' result group</li>
 <li>Typing 'OO' castles (previously only 'OK','OQ')</li>
 <li>Mask Search widget fixes</li>
-<li>Annotation: Dont add nags when annotating score. Don't repeat previous nag if annotating all moves.</li>
+<li>Annotation: Dont add nags when annotating score. Don't repeat previous nag if annotating all moves</li>
 <li>Crosstable shows current game in green</li>
-<li>Use translations for Game List column titles (if available).</li>
+<li>Use translations for Game List column titles (if available)</li>
 <li>Add a 'Game Delete' menu</li>
 <li>Improve ./configure and Makefile, and CC FLAGS are propagated to all targets</li>
 <li>Game Save autocomplete now uses mouse instead of clumsy keyboard bindings</li>
@@ -6091,7 +6091,7 @@ set helpText(Changelog) {<h1>Changelog</h1>
 </ul>
 <li>MS Windows tweaks:</li>
 <ul>
-<li>Windows Crosstable transparency glitch is fixed.</li>
+<li>Windows Crosstable transparency glitch is fixed</li>
 <li>Fix wheelmouse support in a few places</li>
 <li>Add a 'make-scidgui.bat' hack for assembling a new 'scid.gui' from subversion</li>
 <li>Computer Tournament buttons padding fixed</li>
@@ -6099,19 +6099,19 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li>OSX:</li>
 <ul>
 <li>Make an OSX app with a working ;<gt> version of Tcl (thanks Gilles)</li>
-<li>Many OSX wheelmouse and graphical fixes.</li>
+<li>Many OSX wheelmouse and graphical fixes</li>
 </ul>
 <li>Bug fixes:</li>
 <ul>
 <li>Null move fixes including - analysis engines can append variations</li>
 <li>Tree training feature fixes</li>
-<li>Show Progressbar for loading bases with a dot (.) in their name.</li>
+<li>Show Progressbar for loading bases with a dot (.) in their name</li>
 <li>If Scid crashes, Game List could be left with zero size</li>
 <li>PGN middle-click move preview feature fixed for variations</li>
 <li>PGN text tabstops are now dynamic to allow for correct column allignment in column mode</li>
-<li>Remember position of custom ecoFile if loaded.</li>
+<li>Remember position of custom ecoFile if loaded</li>
 <li>Change the second book slot to avoid conflict with Annotation feature</li>
-<li>Catch unmatched braces in gamelist values.</li>
+<li>Catch unmatched braces in gamelist values</li>
 <li>Fix 'Paste FEN' castling sanity check</li>
 <li>Browser previously highlighted Next move instead of Current move</li>
 <li>Fix scid.eco unicode bug</li>
@@ -6148,14 +6148,14 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li>For OSX (esp. single button mice) - bind <Control-Button-1> to context menu for main window and pgn window</li>
 <li>Make the 'paste variation' feature work a bit better at var/game end</li>
 <li>Make variation popup remember it's location instead of being centered</li>
-<li>Add "Read-only" button to maintenance window. </li>
+<li>Add "Read-only" button to maintenance window</li>
 <li>A nice PGN/htext performance tweak that smooths out large game edits</li>
 <li>When using "-fast", perform fast database opens also. Otherwise, update the progressbar to show "Calculating name frequencies"</li>
 <br>
 <li>Bugfixes</li>
 <ul>
 <li>Ubuntu 11 have put libX11.so somewhere stupid. Update configure script</li>
-<li>Paste FEN bug involving fen validation.</li>
+<li>Paste FEN bug involving fen validation</li>
 <li>Fix promotion bug involving busy CPU and missed grab</li>
 <li>Fix off-screen window placement on windows</li>
 <li>Fix up buggy Control+ bindings to quick switch to open databases</li>
@@ -6163,7 +6163,7 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li>Make the game save dialog center and resize properly</li>
 <li>Fix up file loading (and bookmarks) of DBs with dots (.) in their name</li>
 <li>Statusbar shows correct value after Crosstable update</li>
-<li>Don't perform logical ANDs in the "Find" widget using "+". Too slow.</li>
+<li>Don't perform logical ANDs in the "Find" widget using "+". Too slow</li>
 </ul>
 
 <h4>4.3 (March 10, 2011)</h4>
@@ -6172,8 +6172,8 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li> Paste Variation feature</li>
 <li> Database Switcher has been moved to the Gamelist Widget (and has some new icons)</li>
 <li> Gamelist can now perform logical ANDs in the search widget using "+", and include the date</li>
-<li> Gamelist now has remove-above and remove-below buttons.</li>
-<li> FICS improvements, including a ping feature to indicate network health (*nix only), and player communications are saved as PGN comments.</li>
+<li> Gamelist now has remove-above and remove-below buttons</li>
+<li> FICS improvements, including a ping feature to indicate network health (*nix only), and player communications are saved as PGN comments</li>
 <li> FICS bug-fix: don't automatically accept rematches</li>
 <li> FICS "Opponent Info" button</li>
 <li> New Toolbar buttons: "Load First Game" , "Load Last Game"</li>
@@ -6181,19 +6181,19 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li> Analysis Engine's move history doesn't get spammed by "Mate in 1" (for eg) messages</li>
 <li> An engine can now be run in the Statusbar</li>
 <li> Allow engines to be reordered</li>
-<li> Simplify the Bestgames Widget : Remove the PGN pane, nice-ify the widget, and enable graph and best widgets to remember size.</li>
+<li> Simplify the Bestgames Widget : Remove the PGN pane, nice-ify the widget, and enable graph and best widgets to remember size</li>
 <li> Several interface speed-ups from Fulvio</li>
 <li> Other SCID C++ changes from Gerd and Fulvio, including "Don't decode games when copying games"</li>
 <li> Some Tree Search optimisations from SCID</li>
 <li> Sort by number of Variations and Comments from Gerd</li>
 <li> Help Widget has a search entrybox</li>
 <li> Help Widget font size (and Pgn Window) can be easily increased by control+wheelmouse </li>
-<li> When pasting FEN directly, do a castling sanity check.</li>
+<li> When pasting FEN directly, do a castling sanity check</li>
 <li> Bugfix: When user starts scidvspc for the first time, Clipbase is left closed</li>
 <li> Browser widget has a nicer button bar, and windows wheel-mouse bindings</li>
 <li> Overhaul the Edit Menus</li>
 <li> Numerous GUI fixes</li>
-<li> Revert PlayerInfo to old format, but add a "Won Drawn Lost" header.</li>
+<li> Revert PlayerInfo to old format, but add a "Won Drawn Lost" header</li>
 <li> Tweak crosstable knock-out format</li>
 </ul>
 
@@ -6222,7 +6222,7 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <ul>
 <li> Quite a few FICS tweaks, including new help pages and D.O.S. attack fixes</li>
 <li> Numerous Gamelist improvements (see below)</li>
-<li> Tree widget improvements: next move is highlighted, main filter is now independant of Tree filter, wheel mouse bindings.</li>
+<li> Tree widget improvements: next move is highlighted, main filter is now independant of Tree filter, wheel mouse bindings</li>
 <li> Tactics feature fixed up: Renamed "Puzzle" , and Problem Solutions can now be browsed in-game</li>
 <li> Analysis window "add variation" now *appends* variations if at var end</li>
 <li> Comment Editor has undo and redo bindings</li>
@@ -6341,7 +6341,7 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li> Upgrade to toga 131 </li>
 <li> Remove pocket and help directories </li>
 <li> Changed a heap of menus (for example) PGN::File is now PGN::PGN, to avoid confusion with the Scid::File menu </li>
-<li> Player Report configuration widget reniced. </li>
+<li> Player Report configuration widget reniced</li>
 <li> Menu name and key-bindings changes for PGN and FEN import </li>
 <li> Swapped key bindings for "Goto Move Number" (now ctrl+g) and "Goto Game Number" (now ctrl+u) </li>
 <li> Include the highlight previous move feature from SCID (and add a context menu) </li>
@@ -6383,7 +6383,7 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <ul>
 <li> The Setup Board widget now shows tiles (when the main board uses
 tiles) and has improved functionality.  It also properly inits the
-     move number, enpassant + castling widgets, and side to move radiobuttons.  </li>
+     move number, enpassant + castling widgets, and side to move radiobuttons</li>
 <li> Fixed phalanx's illegal castling, and sorted out issues with it's
      opening book and the analysis window </li>
 <li> Replaced the hardly used side-to-move and coords buttons with
@@ -6415,50 +6415,50 @@ tiles) and has improved functionality.  It also properly inits the
 
 <h4>3.6.26.5 (July 17, 2009)</h4>
 <ul>
-<li> Revamped the main button bar, making it a little larger too.  </li>
+<li> Revamped the main button bar, making it a little larger too</li>
 <li> Fixed installation issues with tacgame/toga/phalanx on unix systems </li>
 <li> Restructured workings of the Analysis widget, - the F2 and F3 key
      bindings can now be set specifically </li>
-<li> More functionality added to the gamelist widget.  </li>
+<li> More functionality added to the gamelist widget</li>
 <li> Re-sampled the Alpha bitmaps (thanks to Chessdb), and added support
      for 75 pixel bitmaps </li>
 <li> Quick fixes for the repetitive nature of the "Draw" and "I Resign"
-     messages from tacgame.  </li>
+     messages from tacgame</li>
 <li> Other minor changes: Control-WheelMouse == Sizeup/Sizedown,
-     Variation buttons swap position, Spellcheck installation fix. </li>
+     Variation buttons swap position, Spellcheck installation fix</li>
 </ul>
 
 <h4>3.6.26.4 (July 5, 2009)</h4>
 <ul>
 <li> New Gamelist widget. It's much more powerful than the old one, but
-     is not quite yet feature complete.  </li>
+     is not quite yet feature complete</li>
 <li> Many changes to the Gameinfo widget, </li>
-<li> , including a new "Set Game Information" widget.  </li>
-<li> Stop game from crashing with languages other than English.  </li>
+<li> , including a new "Set Game Information" widget</li>
+<li> Stop game from crashing with languages other than English</li>
 <li> Window placement is now relative the main window, rather than
      absolute +x+y </li>
 <li> The Options::Chessboard menu now also includes the pieces menus </li>
 <li> The 3 line PGN header is now colour </li>
-<li> Home directory is now $HOME/.scidvspc (instead of $HOME/.scid).  </li>
+<li> Home directory is now $HOME/.scidvspc (instead of $HOME/.scid)</li>
 <li> Pawn promotion dialog size now corresponds to board size, and
-     overlays promoted pawn.  </li>
+     overlays promoted pawn</li>
 <li> Control-I toggles gameinfo panel. Control-b toggles
-     Options::Chessboard widget, Control-L toggles gamelist widget.  </li>
+     Options::Chessboard widget, Control-L toggles gamelist widget</li>
 <li> Other minor changes to fics, -O2, "exec tkscid" correctness, font
      and menu tweaks </li>
 </ul>
 
 <h4>3.6.26.3 (June 22, 2009)</h4>
 <ul>
-<li> Replaced most all of the old colour schemes and tiles.  </li>
-<li> New Usual and Maya pieces.  </li>
+<li> Replaced most all of the old colour schemes and tiles</li>
+<li> New Usual and Maya pieces</li>
 <li> Rewrote (again) the option::chessboard::board_style widget.
-     Changes are now made dynamically to the main board.  </li>
+     Changes are now made dynamically to the main board</li>
 <li> Tweaked the pgn save menu, included a "Save Pgn" menu item in the
-     "File" menu, and other pgn window bindings.  </li>
+     "File" menu, and other pgn window bindings</li>
 <li> Added a FICS autoflag option (for logging in as guest), and other
-     FICS tweaks.  </li>
-<li> Don't allow null entry of "Elo" field in analysis engine customisation.</li>
+     FICS tweaks</li>
+<li> Don't allow null entry of "Elo" field in analysis engine customisation</li>
 </ul>
 
 <h4>3.6.26.2 (June 2009)</h4>
@@ -6467,26 +6467,26 @@ tiles) and has improved functionality.  It also properly inits the
 <li> New Berlin, Spatial chess pieces </li>
 <li> FICS and Fischer chess changes </li>
 <li> Overhauled comment editor widget, including key bindings </li>
-<li> More tacgame bug-fixes.  </li>
+<li> More tacgame bug-fixes</li>
 <li> Removed the right_click::take_back_move... This is just too
      dangerous for FICS (which really gets stuffed up). Mouse wheel
-     bindings remain.  </li>
-<li> Fixed more bugs in the tactical game feature.  </li>
-<li> Allow the main window to use wish-8.5 native fullscreen mode.  </li>
-<li> Bug fixed the scidvspc setup board.  </li>
-<li> Little Fischer chess tweaks and bishop setup fixed.  </li>
+     bindings remain</li>
+<li> Fixed more bugs in the tactical game feature</li>
+<li> Allow the main window to use wish-8.5 native fullscreen mode</li>
+<li> Bug fixed the scidvspc setup board</li>
+<li> Little Fischer chess tweaks and bishop setup fixed</li>
 <li> Gave the show_material canvas a little more space </li>
 </ul>
 <h4>3.6.26.1 (May 2009)</h4>
 <ul>
-<li> Overhauling the tactical game feature, including a Fischer chess option.  </li>
-<li> Overhauling the tools::analysis widget.  </li>
-<li> Some re-organization of menu widgets, including tear-off menus.  </li>
-<li> Rewritten board style widget.  </li>
+<li> Overhauling the tactical game feature, including a Fischer chess option</li>
+<li> Overhauling the tools::analysis widget</li>
+<li> Some re-organization of menu widgets, including tear-off menus</li>
+<li> Rewritten board style widget</li>
 <li> Fix parenting of some pop-ups, including the splash widget </li>
-<li> Clock widgets placed side-by-side.  </li>
-<li> Remember fics widget size.  </li>
-<li> Last move displayed in bold. </li>
+<li> Clock widgets placed side-by-side</li>
+<li> Remember fics widget size</li>
+<li> Last move displayed in bold</li>
 </ul>
 }
 

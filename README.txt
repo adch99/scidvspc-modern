@@ -489,51 +489,51 @@
 
 
   o  When sorting databases, don't reset filter and remember current
-     game/gamestate.
+     game/gamestate
 
-  o  Game history menu.
+  o  Game history menu
 
-  o  Implement (and bugfix) SCID's more comprehensive NAG framework.
+  o  Implement (and bugfix) SCID's more comprehensive NAG framework
 
   o  Change a couple of field orders in the gamelist, remember field
      widths, and remove the icon context menus from the switcher (middle
-     click now toggles show/hide the database icons).
+     click now toggles show/hide the database icons)
 
   o  FICS: Allow use of alternative URLs (used during FICS outage) and
-     other minor tweaks.
+     other minor tweaks
 
-  o  Window focus improvements (mainly for MS Windows and OS X).
+  o  Window focus improvements (mainly for MS Windows and OS X)
 
   o  Computer Tournament: add 'Engine Scores as comments' option, and
-     make some minor global/:: var changes.
+     make some minor global/:: var changes
 
-  o  Add Book Tuning to dockable windows.
+  o  Add Book Tuning to dockable windows
 
   o  Automatically flip board (if applicable) in game browser and
-     analysis miniboards.
+     analysis miniboards
 
   o  When diffing twin games, ignore newlines in the comments, which
-     make diffing impossible.
-  o  Add undo points for user generated addNag events.
+     make diffing impossible
+  o  Add undo points for user generated addNag events
 
   o  Bookmarks: add a few key bindings (delete/up/down), and shuffle the
-     gamelist bookmark button up one row.
+     gamelist bookmark button up one row
 
-  o  Drag and drop hardening.
+  o  Drag and drop hardening
 
   o  Windows 7 bugfix: PGN export and Progress bars weren't working in
-     undocked mode.
+     undocked mode
 
   o  Translation framework updates. Overhaul Dutch translation, and
-     remove (broken) Russian one.
+     remove (broken) Russian one
 
   o  Convert braces '{', '}' to '(',')' when exporting PGN comments
-     (against PGN standard). Also tweak various PGN help topics.
+     (against PGN standard). Also tweak various PGN help topics
 
   7.0.2.  Scid vs. PC 4.9.2
 
 
-  o  OS X changes, including docked mode fixes.
+  o  OS X changes, including docked mode fixes
 
   7.0.3.  Scid vs. PC 4.9.1
 
@@ -545,11 +545,11 @@
   o  Clickable crosstable columns
 
   o  Make an undo point with Setup Board, and disable undo for Trial
-     mode.
+     mode
 
   o  Add Tournament lookup to Player Info window
 
-  o  PGN import window was not getting mapped.
+  o  PGN import window was not getting mapped
 
   7.0.4.  Scid vs. PC 4.9
 
@@ -557,7 +557,7 @@
   o  Window Docking feature - Different windows are docked/restored than
      Scid. Five layout slots with three custom layouts. Bug-fixes. F11
      for fullscreen. Tcl-8.6.0 may have issues. Selectable Ttk themes
-     (also for Gamelist).
+     (also for Gamelist)
 
      General
 
@@ -572,7 +572,7 @@
   o  Windows has a MSVC makefile (Makefile.vc) and includes Stockfish
      2.31 (JA legacy build)
 
-  o  Fix windows stack problem (hopefully).
+  o  Fix windows stack problem (hopefully)
 
   o  Text Find widgets in help, crosstable, engine logs
 
@@ -661,7 +661,7 @@
   o  FICS: Games with move lengths greater than 1:00:00 would break
      parse
 
-  o  Add missing FICSLogin translation.
+  o  Add missing FICSLogin translation
 
   o  New windows Phalanx build. It works better under win7, but has
      analysis polling issues
@@ -679,28 +679,28 @@
 
   o  Custom background images (jpegs, gifs and pngs)
 
-  o  Random sort pgn feature.
+  o  Random sort pgn feature
 
   o  Crosstable now have +/-/= subtotals
 
-  o  (and Player Stats format changed from +/=/- to +/-/=).
+  o  (and Player Stats format changed from +/=/- to +/-/=)
 
   o  General PGN search has ignore case option
 
   o  Board Search gets it's combobox updated when DBs are opened and
-     closed.
+     closed
 
   o  Save game before PGN Import
 
   o  Save game: enable the use of 'prev game tags' for existing games.
      This allows easy addition of the same tags to consecutive existing
-     games.
+     games
 
   o  Remove the 'Scid: ' prefix from several window titles
 
   o  Update some translations
 
-  o  Show Linux version/distro in the startup window.
+  o  Show Linux version/distro in the startup window
 
   o  Add a patch to make toolbar buttons raise only (instead of toggle
      open/shut)
@@ -710,9 +710,9 @@
      Analysis
 
   o  UCI: properly handle UCI buttons. Previously they were invoked at
-     every engine restart.
+     every engine restart
 
-  o  Right clicking 'Add Var' button adds Engine Score comment only.
+  o  Right clicking 'Add Var' button adds Engine Score comment only
 
   o  Replace ponder on/off with hard/easy for xboard engines
 
@@ -731,7 +731,7 @@
 
      Tree
 
-  o  Move ECO stats to the end of line.
+  o  Move ECO stats to the end of line
 
   o  Several Mask refinements - notably Searches are much more readable
      and previously clicking on searched lines didn't work
@@ -742,23 +742,23 @@
 
   o  Computer Tournament Book feature
 
-  o  Dont' kill tournament if engine crashes.
+  o  Dont' kill tournament if engine crashes
 
   o  Only pack the first 10 engine combos (which allows for big
      tournaments)
 
   o  Fix up Xboard time/move command order. Xboard engines should behave
-     much better.
+     much better
 
   o  Various other tweaks
 
      Gamelist
 
-  o  Show altered games in red.
+  o  Show altered games in red
 
-  o  Control-wheelmouse scrolls up/down one page.
+  o  Control-wheelmouse scrolls up/down one page
 
-  o  Switcher now has text on two lines (if icons are shown).
+  o  Switcher now has text on two lines (if icons are shown)
 
      FICS
 
@@ -768,9 +768,9 @@
 
   o  FICS has it's own options menu
 
-  o  bind F9 to xtell instead of tell.
+  o  bind F9 to xtell instead of tell
 
-  o  Change the move.wav sound from tick-tock to a short click.
+  o  Change the move.wav sound from tick-tock to a short click
 
      OS X
 
@@ -788,10 +788,10 @@
   o  Work arounds for wish 8.5.12 and 8.5.8 issues
 
   o  Analysis logs can badly break autoscroll, so use normal frames and
-     scrollbars.
+     scrollbars
 
   o  Handle PGN parsing of unspecified promotions (b8 becomes b8=Q , for
-     eg).
+     eg)
 
   7.0.6.  Scid vs. PC 4.7
 
@@ -799,80 +799,80 @@
   o  Tree: Add coloured bargraphs representing win/draw/loss (and remove
      the old tree graph)
 
-  o  Tablebases: Make best tablebase moves clickable.
+  o  Tablebases: Make best tablebase moves clickable
 
-  o  Tablebases: tidy up config , main window and help items.
+  o  Tablebases: tidy up config , main window and help items
 
   o  FICs: Can now play and watch (observe) multiple games at the same
-     time.
+     time
 
   o  FICS: Support loading old/interupted games for analysis (using
      'smoves' command)
 
-  o  FICs: Add an Abort button. Other minor fixes.
+  o  FICs: Add an Abort button. Other minor fixes
 
   o  Serious Game overhaul (though still has minor issues) Add pause,
-     resume features and mate, game drawn dialogs.
+     resume features and mate, game drawn dialogs
 
   o  Computer Tournament: Add 'first engine only' feature for testing a
-     single engine against others.
+     single engine against others
 
   o  Enable material difference display for game browser and fics
      observerd games
 
   o  Analysis: View engine logs from within Scid, and can also disable
-     logging.
+     logging
 
-  o  Analysis no longer word wraps, and uses fixed font.
+  o  Analysis no longer word wraps, and uses fixed font
 
-  o  Analysis: add a xboard/uci protocol column to the engine list.
+  o  Analysis: add a xboard/uci protocol column to the engine list
 
   o  Include updates to SCID's spellchk.c, improving the ELO add-ratings
-     feature.
+     feature
 
   o  Update spelling.ssp file to Jan 2012, and include with windows
 
-  o  Player info: clicking FIDE ID opens relevant url.
+  o  Player info: clicking FIDE ID opens relevant url
 
   o  New feature: 'Search-Filter to Last Move'. All filter games will
-     load at the last move (end of game).
+     load at the last move (end of game)
 
   o  Refine the Calculation of Variation (Stoyko Exercise) feature and
-     Help.
+     Help
 
-  o  Toolbar has a 'book window' icon.
+  o  Toolbar has a 'book window' icon
 
-  o  Tweak PGN context menu: reorder the Strip/Delete move items.
+  o  Tweak PGN context menu: reorder the Strip/Delete move items
 
-  o  Gamelist: replace the Negate button with a Select button.
+  o  Gamelist: replace the Negate button with a Select button
 
   o  Tree: Include a patch for embedding the Best Games into the Tree
-     window.
+     window
 
   o  Analysis: Revert Lock engine changes. Previously, lock engine would
      also start Trial Mode
      Bugfixes
 
   o  Importing PGN, check that Promotion Moves are long enough
-     (otherwise can segfault).
+     (otherwise can segfault)
 
   o  Document CCRL pgn round name problem, and handle errors better when
-     Name limits hit.
+     Name limits hit
 
-  o  FICS: remove non-ascii chars from commands if using timeseal.
+  o  FICS: remove non-ascii chars from commands if using timeseal
 
   o  Gamelist: To display unusual characters, convert to unicode before
-     displaying games.
+     displaying games
 
-  o  Sync html bitmaps with SCID.
+  o  Sync html bitmaps with SCID
 
   o  Book: Only do the second book move lookup if we have too. (slight
      performance boost)
 
-  o  EPD: Quick fix for epd analysis annotation bug..
+  o  EPD: Quick fix for epd analysis annotation bug
 
   o  Hungarian, Swedish and Potugese Spanish were broken if Piece
-     translation enabled (which was default). Fixed.
+     translation enabled (which was default). Fixed
 
   o  Fix up Tacgame score-isn't-updated bug
 
@@ -884,13 +884,13 @@
   o  Microsoft Windows has a proper installer
 
   o  Always loads games at the correct game ply when using the tree and
-     searches.
+     searches
 
   o  Ratings graph can show multiple players (and there's a minimum ELO
      feature)
 
   o  Computer Tournament: Improvements for both Xboard and UCI engines,
-     and implement the 50 move draw rule.
+     and implement the 50 move draw rule
 
   o  Auto-promote feature for FICs
 
@@ -899,16 +899,16 @@
   o  Autoraise button raises all windows
 
   o  Annotation improvements, and it is now possible to score All moves
-     while only annotating Blunders.
+     while only annotating Blunders
 
   o  Known aliases Biographical data is shown in the player information
      window
 
   o  The player info widget has buttons enabling quick player renames
-     and look-up.
+     and look-up
 
   o  'Read-Only' context menu to the Database Switcher, and Read-Only
-     bases are greyed out.
+     bases are greyed out
 
   o  Fix bug in the opening/theory table
 
@@ -916,12 +916,12 @@
      PGN
 
   o  Change analysis colors for MultiPV to black/grey instead of
-     blue/black.
+     blue/black
 
   o  New 'Search in (other) Database' feature to the board search (from
      SCID)
 
-  o  Variation/Mainline arrows can have custom colours.
+  o  Variation/Mainline arrows can have custom colours
 
   o  Crosstable can (optionally) show 3 points for a win
 
@@ -934,29 +934,29 @@
   o  Tweak the best games widget (make fields line-up)
 
   o  When handling Import PGN errors, show the game numbers as well as
-     the line in file.
+     the line in file
 
   o  Catch a nasty wish8.5.10 bug with the gamelist (Wish-8.5.10 should
      be avoided)
 
   o  Remove the broken integer field validation and replace it with
-     something that allows backspace to work.
+     something that allows backspace to work
 
   o  Bind Control-Tab to 'switch to next base', and Control-(quoteleft)
      to 'switch to clipbase'
 
-  o  Fix a couple of corner cases concerning dates and searches.
+  o  Fix a couple of corner cases concerning dates and searches
 
   o  Analysis widget : small speed improvements , icon changes and bug-
      fixes
 
-  o  Add a help item for Maintenance 'Check Games' feature.
+  o  Add a help item for Maintenance 'Check Games' feature
 
-  o  Swap around the 'Next Move' and 'Event' game-information lines.
+  o  Swap around the 'Next Move' and 'Event' game-information lines
 
-  o  New documentation about making Polyglot books.
+  o  New documentation about making Polyglot books
 
-  o  Make the player Report config widget a bit easier to use.
+  o  Make the player Report config widget a bit easier to use
 
   o  Catch a nasty wish8.5.10 bug with the gamelist (Wish-8.5.10 should
      be avoided)
@@ -964,7 +964,7 @@
   o  New OSX HowTo
 
   o  Crosstable bugfix: the 'show white first' feature didn't work for
-     two match rounds.
+     two match rounds
 
   o  Update 'Tips'
 
@@ -986,13 +986,13 @@
 
   o  Per-game time control
 
-  o  Clock widgets for remaining time.
+  o  Clock widgets for remaining time
 
-  o  Manual adjudication buttons, and a Restart button.
+  o  Manual adjudication buttons, and a Restart button
 
      General:
 
-  o  Game List remembers it's view when switching between bases.
+  o  Game List remembers it's view when switching between bases
 
   o  Game Browser has new buttons and functionality
 
@@ -1014,11 +1014,11 @@
   o  Mask Search widget fixes
 
   o  Annotation: Dont add nags when annotating score. Don't repeat
-     previous nag if annotating all moves.
+     previous nag if annotating all moves
 
   o  Crosstable shows current game in green
 
-  o  Use translations for Game List column titles (if available).
+  o  Use translations for Game List column titles (if available)
 
   o  Add a 'Game Delete' menu
 
@@ -1033,7 +1033,7 @@
 
      MS Windows tweaks:
 
-  o  Windows Crosstable transparency glitch is fixed.
+  o  Windows Crosstable transparency glitch is fixed
 
   o  Fix wheelmouse support in a few places
 
@@ -1047,7 +1047,7 @@
 
   o  Make an OSX app with a working ;> version of Tcl (thanks Gilles)
 
-  o  Many OSX wheelmouse and graphical fixes.
+  o  Many OSX wheelmouse and graphical fixes
 
      Bug fixes:
 
@@ -1082,7 +1082,7 @@
   o  When addAnalysisVariation fails due to bad moves, don't move back N
      moves
 
-  o  Theory table incorrectly started from start position.
+  o  Theory table incorrectly started from start position
 
   7.0.9.  Scid vs. PC 4.4.1
 
@@ -1146,7 +1146,7 @@
   o  Make variation popup remember it's location instead of being
      centered
 
-  o  Add "Read-only" button to maintenance window.
+  o  Add "Read-only" button to maintenance window
 
   o  A nice PGN/htext performance tweak that smooths out large game
      edits
@@ -1160,7 +1160,7 @@
   o  Ubuntu 11 have put libX11.so somewhere stupid. Update configure
      script
 
-  o  Paste FEN bug involving fen validation.
+  o  Paste FEN bug involving fen validation
 
   o  Fix promotion bug involving busy CPU and missed grab
 
@@ -1188,11 +1188,11 @@
   o  Gamelist can now perform logical ANDs in the search widget using
      "+", and include the date
 
-  o  Gamelist now has remove-above and remove-below buttons.
+  o  Gamelist now has remove-above and remove-below buttons
 
   o  FICs improvements, including a ping feature to indicate network
      health (*nix only), and player communications are saved as PGN
-     comments.
+     comments
 
   o  FICs bug-fix: don't automatically accept rematches
 
@@ -1210,7 +1210,7 @@
   o  Allow engines to be reordered
 
   o  Simplify the Bestgames Widget : Remove the PGN pane, nice-ify the
-     widget, and enable graph and best widgets to remember size.
+     widget, and enable graph and best widgets to remember size
 
   o  Several interface speed-ups from Fulvio
 
@@ -1226,7 +1226,7 @@
   o  Help Widget font size (and Pgn Window) can be easily increased by
      control+wheelmouse
 
-  o  When pasting FEN directly, do a castling sanity check.
+  o  When pasting FEN directly, do a castling sanity check
 
   o  Bugfix: When user starts scidvspc for the first time, clipbase is
      left closed
@@ -1239,7 +1239,7 @@
   o  Numerous GUI fixes
 
 
-  o  Revert PlayerInfo to old format, but add a "Won Drawn Lost" header.
+  o  Revert PlayerInfo to old format, but add a "Won Drawn Lost" header
 
   o  Tweak crosstable knock-out format
 
@@ -1292,7 +1292,7 @@
   o  Numerous Gamelist improvements (see below)
 
   o  Tree widget improvements: next move is highlighted, main filter is
-     now independant of Tree filter, wheel mouse bindings.
+     now independant of Tree filter, wheel mouse bindings
 
   o  Tactics feature fixed up: Renamed "Puzzle" , and Problem Solutions
      can now be browsed in-game
@@ -1398,7 +1398,7 @@
 
   o  The Gamelist widget has been rewritten to work with huge databases.
      Other new features include a case insensitive search, deleted items
-     are greyed out, and there's a "Compact" button to empty trash with.
+     are greyed out, and there's a "Compact" button to empty trash with
 
   o  Add a background colour option that applies to many text widgets,
      including gameinfo, pgn window and help window
@@ -1536,7 +1536,7 @@
   o  Changed a heap of menus (for example) PGN::File is now PGN::PGN, to
      avoid confusion with the Scid::File menu
 
-  o  Player Report configuration widget reniced.
+  o  Player Report configuration widget reniced
 
   o  Menu name and key-bindings changes for PGN and FEN import
 
@@ -1620,7 +1620,7 @@
   o  The Setup Board widget now shows tiles (when the main board uses
      tiles) and has improved functionality. It also properly inits the
      move number, enpassant + castling combos, and side to move
-     radiobuttons.
+     radiobuttons
 
   o  Fixed phalanx's illegal castling, and sorted out issues with it's
      opening book and the analysis window
@@ -1671,35 +1671,35 @@
   7.0.19.  Scid vs. PC 3.6.26.5
 
 
-  o  Revamped the main button bar, making it a little larger too.
+  o  Revamped the main button bar, making it a little larger too
 
   o  Fixed installation issues with tacgame/toga/phalanx on unix systems
 
   o  Restructured workings of the Analysis widget, - the F2 and F3 key
-     bindings can now be set explicitly.
+     bindings can now be set explicitly
 
-  o  More functionality added to the gamelist widget.
+  o  More functionality added to the gamelist widget
 
   o  Re-sampled the Alpha bitmaps (thanks to Chessdb), and added support
      for 75 pixel bitmaps
 
   o  Quick fixes for the repetitive nature of the "Draw" and "I Resign"
-     messages from tacgame.
+     messages from tacgame
 
   o  Other minor changes: Control-WheelMouse == Sizeup/Sizedown,
-     Variation buttons swap position, Spellcheck installation fix.
+     Variation buttons swap position, Spellcheck installation fix
 
   7.0.20.  Scid vs. PC 3.6.26.4
 
 
   o  New Gamelist widget. It's much more powerful than the old one, but
-     is not quite yet feature complete.
+     is not quite yet feature complete
 
   o  Many changes to the Gameinfo widget,
 
-  o  , including a new "Set Game Information" widget.
+  o  , including a new "Set Game Information" widget
 
-  o  Stop game from crashing with languages other than English.
+  o  Stop game from crashing with languages other than English
 
   o  Window placement is now relative the main window, rather than
      absolute +x+y
@@ -1708,13 +1708,13 @@
 
   o  The 3 line PGN header is now colour
 
-  o  Home directory is now $HOME/.scidvspc (instead of $HOME/.scid).
+  o  Home directory is now $HOME/.scidvspc (instead of $HOME/.scid)
 
   o  Pawn promotion dialog size now corresponds to board size, and
-     overlays promoted pawn.
+     overlays promoted pawn
 
   o  Control-I toggles gameinfo panel. Control-b toggles
-     Options->Chessboard widget, Control-L toggles gamelist widget.
+     Options->Chessboard widget, Control-L toggles gamelist widget
 
   o  Other minor changes to fics, -O2, "exec tkscid" correctness, font
      and menu tweaks
@@ -1722,21 +1722,21 @@
   7.0.21.  Scid vs. PC 3.6.26.3
 
 
-  o  Replaced most all of the old colour schemes and tiles.
+  o  Replaced most all of the old colour schemes and tiles
 
-  o  New Usual and Maya pieces.
+  o  New Usual and Maya pieces
 
   o  Rewrote (again) the option->chessboard->board_style widget. Changes
-     are now made dynamically to the main board.
+     are now made dynamically to the main board
 
   o  Tweaked the pgn save menu, included a "Save Pgn" menu item in the
-     "File" menu, and other pgn window bindings.
+     "File" menu, and other pgn window bindings
 
   o  Added a Fics autoflag option (for logging in as guest), and other
-     Fics tweaks.
+     Fics tweaks
 
   o  Don't allow null entry of "Elo" field in analysis engine
-     customisation.
+     customisation
 
   7.0.22.  Scid vs. PC 3.6.26.2
 
@@ -1749,19 +1749,19 @@
 
   o  Overhauled comment editor widget, including key bindings
 
-  o  More tacgame bug-fixes.
+  o  More tacgame bug-fixes
 
   o  Removed the right_click->take_back_move... This is just too
      dangerous for Fics (which really gets stuffed up). Mouse wheel
-     bindings remain.
+     bindings remain
 
-  o  Fixed more bugs in the tactical game feature.
+  o  Fixed more bugs in the tactical game feature
 
-  o  Allow the main window to use wish-8.5 native fullscreen mode.
+  o  Allow the main window to use wish-8.5 native fullscreen mode
 
-  o  Bug fixed the scidvspc setup board.
+  o  Bug fixed the scidvspc setup board
 
-  o  Little Fischer chess tweaks and bishop setup fixed.
+  o  Little Fischer chess tweaks and bishop setup fixed
 
   o  Gave the show_material canvas a little more space
 
@@ -1769,23 +1769,23 @@
   7.0.23.  Scid vs. PC 3.6.26.1
 
 
-  o  Overhauling the tactical game feature.
+  o  Overhauling the tactical game feature
 
-  o  including a Fischer chess option.
+  o  including a Fischer chess option
 
-  o  Overhauling the tools->analysis widget.
+  o  Overhauling the tools->analysis widget
 
-  o  Some re-organization of menu widgets, including tear-off menus.
+  o  Some re-organization of menu widgets, including tear-off menus
 
-  o  Rewritten board style widget.
+  o  Rewritten board style widget
 
-  o  Fix parenting of some pop-ups, including the splash widget.
+  o  Fix parenting of some pop-ups, including the splash widget
 
-  o  Clock widgets placed side-by-side.
+  o  Clock widgets placed side-by-side
 
-  o  Remember fics widget size.
+  o  Remember fics widget size
 
-  o  Last move displayed in bold.
+  o  Last move displayed in bold
 
   8.  contact
 
