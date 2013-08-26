@@ -6702,10 +6702,18 @@ set helpText(Board) {<h1>Board Options</h1>
    These must be placed in the directory <b>Scid vs PC/bin/textures</b> (windows) or <b>$HOME/.scidvspc/textures</b>,
    and be of the form <b>wood_l.gif</b> / <b>wood_d.gif</b>  or <b>steel_l.png</b> / <b>steel_d.png</b> , for example.
 </p>
+<h3><name Textures>Custom Pieces</name></h3>
 <p>
-   Examine <green>Help--<gt>StartUp</green> for the status of loading user textures.
+Place base 64 encoded piece sets in the directory <b>$HOME/.scidvspc/pieces</b>, and they will be added to the 
+Board Options window.</p>
+<p>
+For instructions on making Scid piece sets, download 
+<url http://sourceforge.net/projects/scidvspc/files/support%20files/scid_chess_pieces.tgz/download>this file</url>.
 </p>
+<p><i>
+   Examine <green>Help--<gt>StartUp</green> for the status of loading user textures and pieces.
+</i></p>
 
 </p>
-<p><footer>Updated:</b> - Scid vs. PC 4.8 April 2012</footer></p>
+<p><footer>Updated:</b> - Scid vs. PC 4.11 August 2013</footer></p>
 }

@@ -4,12 +4,14 @@
 #
 # convert help.tcl into html files
 
+# scp doc/* stevenaaus,scidvspc@web.sourceforge.net:/home/groups/s/sc/scidvspc/htdocs/doc/
+
 # The next line restarts using tkscid: \
 exec tclsh8.5 "$0" "$@"
 
 set ::scidName {Scid vs. PC}
-set ::scidVersion 4.8
-set ::scidVersionDate {August 12, 2012}
+set ::scidVersion 4.10
+set ::scidVersionDate {August 25, 2013}
 source help.tcl
 
 file mkdir doc

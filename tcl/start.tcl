@@ -271,6 +271,7 @@ if {$windowsOS} {
 set scidConfigDir [file nativename [file join $scidUserDir "config"]]
 set scidDataDir [file nativename [file join $scidUserDir "data"]]
 set scidTexturesDir [file nativename [file join $scidUserDir "textures"]]
+set scidPiecesDir [file nativename [file join $scidUserDir "pieces"]]
 
 # boardSizes: a list of the available board sizes.
 set boardSizes [list 25 30 35 40 45 50 55 60 65 70 75 80]
