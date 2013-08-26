@@ -5802,6 +5802,7 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <h4>4.10 (August 25, 2013)</h4>
 <ul>
 <li>When sorting databases, don't reset filter and remember current game/gamestate</li>
+<li>Game history menu</li>
 <li>Implement (and bugfix) SCID's more comprehensive NAG framework</li>
 <li>Change a couple of field orders in the gamelist, remember field widths, and remove the icon context menus from the switcher (middle click now toggles show/hide the database icons)</li>
 <li>FICS: Allow use of alternative URLs (used during FICS outage) and other minor tweaks</li>

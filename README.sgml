@@ -368,6 +368,7 @@ and lesser popularity than Scid.</p>
 <sect2> Scid vs. PC 4.10<p>
 <itemize>
 <item>When sorting databases, don't reset filter and remember current game/gamestate.
+<item>Game history menu.
 <item>Implement (and bugfix) SCID's more comprehensive NAG framework. 
 <item>Change a couple of field orders in the gamelist, remember field widths, and remove the icon context menus from the switcher (middle click now toggles show/hide the database icons). 
 <item>FICS: Allow use of alternative URLs (used during FICS outage) and other minor tweaks. 

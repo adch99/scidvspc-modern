@@ -491,6 +491,8 @@
   o  When sorting databases, don't reset filter and remember current
      game/gamestate.
 
+  o  Game history menu.
+
   o  Implement (and bugfix) SCID's more comprehensive NAG framework.
 
   o  Change a couple of field orders in the gamelist, remember field
@@ -512,8 +514,6 @@
 
   o  When diffing twin games, ignore newlines in the comments, which
      make diffing impossible.
-
-
   o  Add undo points for user generated addNag events.
 
   o  Bookmarks: add a few key bindings (delete/up/down), and shuffle the
