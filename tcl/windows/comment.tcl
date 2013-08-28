@@ -118,12 +118,12 @@ proc ::commenteditor::Open {} {
     N Novelty
     D Diagram
   } {
-    button $nagbuttons.b$i -takefocus 0 -text "$nag" -width $width -height 1 \
+    button $nagbuttons.b$i -takefocus 0 -text "$nag" -width $width -height 1 -font font_Small \
         -command "$w.nf.tf.text insert end \"$nag  \"
                   focus $w.nf.tf.text" -pady 1
     # set helpMessage(E,$nagbuttons.b$i) $description
     ::utils::tooltip::Set $nagbuttons.b$i $description
-    grid $nagbuttons.b$i -row [expr {$i % 2}] -column [expr {int($i / 2)}] -padx 2 -pady 2
+    grid $nagbuttons.b$i -row [expr {$i % 2}] -column [expr {int($i / 2)}] -padx 1 -pady 1
     incr i
   }
   ## Unused
