@@ -308,13 +308,21 @@ Ow==
 # image create photo finish_on -data ....
 ### Replaced by autoplay_
 
-# Double size the buttonbar (disabled)
+# Change the size of the button bar (disabled)
 if {0} {
   image create photo tempimage
   foreach i {tb_flip tb_gameinfo autoplay_off autoplay_on tb_trial \
-         tb_trial_on tb_start tb_prev tb_next tb_end tb_invar tb_outvar tb_addvar} {
+         tb_trial_on tb_start tb_prev tb_next tb_end tb_invar tb_outvar tb_addvar tb_windows} {
+    # puts [$i cget -height]
     tempimage blank
-    tempimage copy $i -zoom 2
+    if {1} {
+      ### half size
+      tempimage copy $i -subsample 2
+      $i configure -height 16 -width 16
+    } else {
+      ### twice size
+      tempimage copy $i -zoom 2
+    }
     $i blank
     $i copy tempimage
   }
