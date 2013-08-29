@@ -308,7 +308,8 @@ Ow==
 # image create photo finish_on -data ....
 ### Replaced by autoplay_
 
-# Change the size of the button bar (disabled)
+# Change the size of the button bar, but is disabled as it looks awful.
+# We'll have to recompose the images with the gimp if we want to change the size
 if {0} {
   image create photo tempimage
   foreach i {tb_flip tb_gameinfo autoplay_off autoplay_on tb_trial \
@@ -318,6 +319,7 @@ if {0} {
     if {1} {
       ### half size
       tempimage copy $i -subsample 2
+      # tempimage copy $i -from 10 10 26 26
       $i configure -height 16 -width 16
     } else {
       ### twice size

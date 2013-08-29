@@ -1003,7 +1003,7 @@ $m add command -label OptionsSave -command {
     gameInfo(show) gameInfo(photos) gameInfo(hideNextMove) gameInfo(wrap) gameInfo(showStatus) 
     gameInfo(fullComment) gameInfo(showMarks) gameInfo(showMenu) gameInfo(showTool) 
     gameInfo(showMaterial) gameInfo(showFEN) gameInfo(showButtons) gameInfo(showTB) 
-    analysis(mini) engines(F2) engines(F3) engines(F4) analysis(logEngines)
+    analysis(mini) engines(F2) engines(F3) engines(F4) analysis(logEngines) analysis(lowPriority)
     scidBooksDir scidBasesDir 
     ::book::lastBook1 ::book::lastBook2 ::book::lastTuning ::book::sortAlpha 
     ::book::showTwo ::book::oppMovesVisible ::gbrowser::size 

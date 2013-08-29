@@ -365,6 +365,7 @@ createFont Fixed
 set analysisCommand ""
 set analysis(mini) 0
 set analysis(logEngines) 1
+set analysis(lowPriority) $::windowsOS
 
 # Colors: dark and lite are square colors
 #   whitecolor/blackcolor are piece colors (unused)

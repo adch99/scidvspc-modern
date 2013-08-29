@@ -424,6 +424,7 @@ proc ::enginelist::choose {} {
   label $w.buttons2.sep -text "   "
 
   checkbutton $w.buttons2.logengines -variable analysis(logEngines) -text "Log $::tr(Engine)"
+  checkbutton $w.buttons2.lowpriority -variable analysis(lowPriority) -textvar ::tr(LowPriority)
   dialogbutton $w.buttons2.start -textvar ::tr(Start) -command {
     makeAnalysisWin [lindex [.enginelist.list.list curselection] 0] settime
   }
@@ -434,7 +435,7 @@ proc ::enginelist::choose {} {
 
   pack $w.buttons.up $w.buttons.down $w.buttons.log $w.buttons.uci $w.buttons.edit $w.buttons.add $w.buttons.copy $w.buttons.delete -side left -expand yes
 
-  pack $w.buttons2.logengines $w.buttons2.sep  -side left -pady 12 -padx 10 
+  pack $w.buttons2.logengines $w.buttons2.lowpriority $w.buttons2.sep  -side left -pady 12 -padx 10 
   pack $w.buttons2.close $w.buttons2.start -side right -pady 12 -padx 10 
 
   pack $w.buttons -side top -pady 12 -padx 2 -fill x
@@ -2302,7 +2303,7 @@ proc makeAnalysisWin {{n 0} {options {}}} {
   }
   # necessary on windows because the UI sometimes starves, also keep latest priority setting
   # if ($::windowsOS)
-  if {$analysis(priority$n) == {idle} || ($n==1 && $analysis(mini)) } {
+  if {$analysis(priority$n) == {idle} || $analysis(lowPriority) || ($n==1 && $analysis(mini)) } {
     set analysis(priority$n) idle
     setAnalysisPriority $n
   }
