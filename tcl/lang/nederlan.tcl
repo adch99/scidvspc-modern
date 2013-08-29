@@ -3,7 +3,7 @@
 #  Added by J.Kees Hofkamp.
 #  Changes by J. Krabbenbos.
 #  Changes by Leander Laruelle.
-#  Changes by Peter C. Tak (juni 2013 // 4.9.2 - 15 augustus 2013 // 4.9.2)
+#  Changes by Peter C. Tak (juni 2013 // 4.9.2 - 28 augustus 2013 // 4.10)
 # Untranslated messages are marked with a TODO comment.
 
 
@@ -118,7 +118,7 @@ menuText N GameAdd "Partij toevoegen..." 7 \
   {Bewaar partij en voeg toe aan de database}
 menuText N GameInfo "Partij informatie invoeren" 0
 menuText N GameBrowse "Door de partijen bladeren" 0
-menuText N GameList "Laat alle partijen zien" 0
+menuText N GameList "Toon de partijenlijst" 0
 menuText N GameDelete "Delete Game" 0
 menuText N GameDeepest "Opening bepalen" 0 \
   {Ga naar de diepste stelling uit het ECO openingboek}
@@ -148,7 +148,7 @@ menuText N Windows "Venster" 0
 menuText N WindowsGameinfo "Partij informatie" 0 {Toon de informatiedetails over de partij}
 menuText N WindowsComment "Bewerk commentaar" 0 \
  {Open/sluit commentaar bewerkingsvenster}
-menuText N WindowsGList "Toon alle partijen" 0 \
+menuText N WindowsGList "Toon de partijenlijst" 0 \
   {Open/sluit lijst met partijen}
 menuText N WindowsPGN "PGN-venster" 4 {Open/sluit het PGN-notatie venster}
 menuText N WindowsCross "Kruistabel" 0 {Toon toernooi kruistabel voor huidige partij}
@@ -263,12 +263,9 @@ menuText N OptionsGInfo "Partij informatie" 0 {Partij-informatie opties}
 menuText N OptionsFics "FICS" 0
 menuText N OptionsFicsAuto "Autopromotie koningin" 0
 menuText N OptionsFicsClock "Digitale klok" 0
-# ====== TODO To be translated ======
-menuText N OptionsFicsColour "Text Colour" 0
-# ====== TODO To be translated ======
-menuText N OptionsFicsNoRes "No Results" 0
-# ====== TODO To be translated ======
-menuText N OptionsFicsNoReq "No Requests" 0
+menuText N OptionsFicsColour "Tekst kleur" 0
+menuText N OptionsFicsNoRes "Geen uitslagen" 0
+menuText N OptionsFicsNoReq "Geen verzoeken" 0
 menuText N OptionsLanguage "Kies taal" 0 {Kies taal}
 menuText N OptionsMovesTranslatePieces "Stukken vertalen" 0 {Vertalen eerste letters van de stukken}
 menuText N OptionsMovesHighlightLastMove "Markeren laatste zet" 0 {De laatst gespeelde zet markeren}
@@ -337,10 +334,8 @@ menuText N HelpAbout "Over ScidvsPC" 0 {Informatie over ScidvsPC}
 
 # Game info box popup menu:
 menuText N GInfoHideNext "Verberg volgende zet" 0
-# ====== TODO To be translated ======
-menuText N GInfoShow "Side to Move" 0
-# ====== TODO To be translated ======
-menuText N GInfoCoords "Toggle Coords" 0
+menuText N GInfoShow "Kleur aan zet" 0
+menuText N GInfoCoords "Coördinaten aan/uit" 0
 menuText N GInfoMaterial "Materiaalverhouding" 0
 menuText N GInfoFEN "FEN" 0
 menuText N GInfoMarks "Toon gekleurde velden en pijlen. " 5
@@ -430,7 +425,7 @@ translate N SearchResults {Zoekresultaten}
 translate N OpeningTheDatabase {Database aan het openen}
 translate N Database {Database}
 translate N Filter {Filter}
-translate N IgnoreCase {Negeer zaak}
+translate N IgnoreCase {Negeer hoofdletters}
 translate N noGames {Geen partijen}
 translate N allGames {Alle partijen}
 translate N empty {leeg}
@@ -846,8 +841,8 @@ translate N GlistComments {Commentaar}
 translate N GlistAnnos {Annotaties}
 translate N GlistStart {Start}
 translate N GlistGameNumber {Partijnummer}
-translate N GlistFindText {Tekst vinden}
-translate N GlistMoveField {Zet}
+translate N GlistFindText {Tekst zoeken}
+translate N GlistMoveField {Verplaats}
 translate N GlistEditField {Configuratie}
 translate N GlistAddField {Voeg toe}
 translate N GlistDeleteField {Verwijder}
@@ -1332,7 +1327,7 @@ Wilt u de database nu bijwerken?
 
 # Recent files options:
 translate N RecentFilesMenu {Aantal recente bestanden in Bestand menu}
-translate N RecentFilesExtra {Aantal recente bestand in extra submenu}
+translate N RecentFilesExtra {Aantal recente bestanden in extra submenu}
 
 # My Player Names options:
 translate N MyPlayerNamesDescription {Voeg hieronder een lijst met voorkeur spelersnamen in, 1 speler per regel. Jokers (bvb "?" voor elke letter, "*" voor een reeks letters) zijn toegelaten.
