@@ -1145,19 +1145,19 @@ proc ::docking::layout_restore_nb { pw name tabs} {
       $nb add $d -text $::tr(Board)
       raise $d
     }
-    if { $d == ".fdockpgnWin" }        { ::pgn::OpenClose }
-    if { $d == ".fdockbaseWin" }       {  ::windows::switcher::Open }
-    if { $d == ".fdockecograph" }      {  ::windows::eco::OpenClose }
-    if { $d == ".fdocktbWin" }         { ::tb::Open }
-    if { $d == ".fdockcommentWin" }    { set ::commentWin 1 ; ::commenteditor::Open }
-    if { $d == ".fdockglistWin" }      { ::windows::gamelist::OpenClose }
-    if { $d == ".fdockccWindow" }      { ::CorrespondenceChess::CCWindow }
-    if { $d == ".fdockplayerInfoWin" } { ::playerInfo }
-    if { $d == ".fdockcrosstabWin" }   { ::crosstab::Open }
-    if { $d == ".fdockbookWin" }       { ::book::OpenClose }
-    if { $d == ".fdockbookTuningWin" } { ::book::tuning }
-    if { [ scan $d ".fdocktreeWin%d" base ] == 1 } {::tree::OpenClose $base}
-    if { [ scan $d ".fdocktreeBest%d" base ] == 1 } {::tree::best $base}
+    if {$d == ".fdockpgnWin"}        {::pgn::OpenClose ; continue ; continue}
+    if {$d == ".fdockbaseWin"}       {::windows::switcher::Open ; continue}
+    if {$d == ".fdockecograph"}      {::windows::eco::OpenClose ; continue}
+    if {$d == ".fdocktbWin"}         {::tb::OpenClose ; continue}
+    if {$d == ".fdockcommentWin"}    {set ::commentWin 1 ; ::commenteditor::Open ; continue}
+    if {$d == ".fdockglistWin"}      {::windows::gamelist::OpenClose ; continue}
+    if {$d == ".fdockccWindow"}      {::CorrespondenceChess::CCWindow ; continue}
+    if {$d == ".fdockplayerInfoWin"} {::playerInfo ; continue}
+    if {$d == ".fdockcrosstabWin"}   {::crosstab::Open ; continue}
+    if {$d == ".fdockbookWin"}       {::book::OpenClose ; continue}
+    if {$d == ".fdockbookTuningWin"} {::book::tuning ; continue}
+    if { [ scan $d ".fdocktreeWin%d" base ] == 1 } {::tree::OpenClose $base ; continue}
+    if { [ scan $d ".fdocktreeBest%d" base ] == 1 } {::tree::best $base ; continue}
     if { [ scan $d ".fdockanalysisWin%d" n ] == 1 } {
       # dont auto start engine
       if {[::makeAnalysisWin $n nostart] == -1} {

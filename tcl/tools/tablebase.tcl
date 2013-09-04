@@ -136,11 +136,12 @@ proc ::tb::OpenClose {} {
     destroy $w
     return
   }
-  toplevel $w
-  wm state $w withdrawn
+  ::createToplevel $w
+  catch {wm state $w withdrawn}
   setWinLocation $w
+  setWinSize $w
+  setTitle $w "[tr WindowsTB]"
 
-  wm title $w "[tr WindowsTB]"
   pack [frame $w.b] -side bottom -fill x ;# buttons
   pack [frame $w.info] -side left -fill y ;# summary
   pack [frame $w.pos] -side left -fill both -expand yes -padx 5 -pady 3 ;# results
@@ -196,8 +197,8 @@ proc ::tb::OpenClose {} {
     pack $f.results.online -side right -padx 6 -pady 2
   }
   
-  text $f.text -width 30 -height 20 -font font_Fixed -relief flat -wrap word -foreground black -setgrid 1
-  pack $f.text -side bottom
+  text $f.text -font font_Fixed -relief flat -wrap word -foreground black -setgrid 1
+  pack $f.text -side top -fill y -expand yes
 
   $f.text tag configure indent -lmargin2 [font measure font_Fixed  "        "]
   $f.text tag configure title -font font_Regular -justify center
@@ -238,7 +239,8 @@ proc ::tb::OpenClose {} {
   ::tb::results
 
   update
-  wm state $w normal
+  catch {wm state $w normal}
+  ::createToplevelFinalize $w
 }
 
 ###  Toggle the results board.
