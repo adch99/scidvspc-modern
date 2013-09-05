@@ -1125,6 +1125,7 @@ proc gameSave {gnum {focus {}}} {
     set extraTags [.save.g.extratext get 1.0 end-1c]
     gsave $gsaveNum;
     destroy .save
+    updateMenuStates
   }
 
   if {$gsaveNum < 0} {
