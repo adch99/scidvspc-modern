@@ -1629,23 +1629,17 @@ This can be done by the <b>Compact</b> button, or
 
   <h3><name Browsing>Browsing and Merging Games</name></h3>
   <p>
-  The <b>Browse Game</b> widget shows the moves of a selected game (without comments
-  or variations), displayed in a separate window. This is a useful way of
-  previewing another game without affecting the currently loaded game. 
-  </p>
+  The <b>Browse Game</b> window is a sort of game preview. Without altering the current game, it displays any game in a separate window, without comments or variations. </p>
   <p>
-  From here, one may use <b>Merge Game</b>, providing a
-  way to include the selected game as a variation of the
-  current game. Scid finds the deepest point where the
-  selected game differs from the current game (taking
-  transpositions into account) and adds a variation for the
-  selected game at that position. You can change the number of
-  moves of the selected game to be shown, depending on whether
-  you are interested in adding the whole game or just its
-  opening phase.
+  From here, one may <b>Merge</b> the game back into the
+  current one as a variation. The merge starts from where the games differ (taking transpositions into account),
+  and you can change the number of moves to be merged, according to whether
+  you are interested in adding the whole game or just its next few moves.
   </p>
+<p><i>The board size can be resized by Control+Wheelmouse or Control+Shift+Left/Right.</i></p>
+  
 
-  <p><footer>Updated: Scid vs. PC 4.4, May 2011</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.11, September 2013</footer></p>
 }
 
 
@@ -1999,6 +1993,10 @@ set helpText(Tree) {<h1>Tree Window</h1>
   position; in the form of statistics, and a tri-coloured graph representing
   white-wins, draws, and black-wins.
   </p>
+  <p><i>
+  Scid's Tree search is fast because of a novel idea - We
+search for games that do not reached this position!
+  </i></p>
   <h3>Opening a Tree</h3>
   <p>One can open a database and then select <b>Windows--<gt>Tree Window</b>,
   use the <b>Control-T</b> short-cut, or <b>Open Base as Tree</b> from the file menu.
@@ -2128,7 +2126,7 @@ it is best to close the Tree Window first.</i>
   adding or replacing a game, or sorting the database.
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.7, January 2012</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.11, September 2013</footer></p>
 }
 
 set helpTitle(TreeMasks) "Tree Masks"
@@ -3698,7 +3696,7 @@ set helpText(Formats) {<h1>Scid File Formats</h1>
   <p>
   Scid Databases consist of three files - an index file (file suffix .si4), a name file (.sn4) and a game file (.sg4).
 </p>
-<p><i>Scid only allocates three bytes for some data fields. This means si4's maximum number of games is 16,777,214. It may be possible to ignore this limit, but it is definitely not recommended. </i>
+<p><i>Scid only allocates three bytes for some data fields. This means si4's maximum number of games is 16,777,214.</i>
 </p>
 
   <h3>The Index File (.si4)</h3>
@@ -3729,8 +3727,13 @@ set helpText(Formats) {<h1>Scid File Formats</h1>
   <h3>The Game File (.sg4)</h3>
   <p>
   This file contains the actual moves, variations and comments of each game.
-  The move encoding format is very compact: most moves take only a single byte!
   </p>
+  <p><i>
+  The move encoding format is very compact: most moves take only a single byte (8 bits)!
+  This is done by storing the piece to move in 4 bits (2^4 = 16 pieces) and the
+  move direction in another 4 bits. Only Queen diagonal moves cannot be stored in this small space.
+  This compactness is the reason Scid does not support chess variants.
+  </i></p>
   <p>
   When a game is *replaced* a new version is - in fact - created,
   so wasted space does accumulate over time. The database may

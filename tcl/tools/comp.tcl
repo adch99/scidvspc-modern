@@ -778,6 +778,9 @@ proc compNM {n m k} {
 
     }
 
+    # Updating the board (via makeAnalysisMove) takes order of
+    # 1/40th second (23000microseconds)  on my core2quad
+
     if {[makeCompMove $current_engine]} {
       ### Store evaluation (and time)
       if {$comp(showscores)} {
