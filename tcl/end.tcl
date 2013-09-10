@@ -1311,7 +1311,12 @@ foreach i {a b c d e f g h 1 2 3 4 5 6 7 8} {
   bind .main <Key-$i> "moveEntry_Char $i"
 }
 
-bind .main <BackSpace> ::move::Back
+if {$::macOS} {
+  bind .main <BackSpace> ::game::Truncate
+} else {
+  bind .main <BackSpace> ::move::Back
+}
+
 # bind .main <space>  moveEntry_Complete
 bind .main <Escape> "moveEntry_Clear 1"
 bind .main <Tab> raiseAllWindows
