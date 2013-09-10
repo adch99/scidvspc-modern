@@ -2371,7 +2371,7 @@ namespace eval fics {
     set line [gets $::fics::sockping]
     
     if {[regexp {.* time=(.*) } $line t1 t2]} {
-      set ::fics::ping "ping: $t2 ms"
+      set ::fics::ping "ping: [expr int($t2)] ms"
     } else {
       set ::fics::ping {ping ....}
     }
