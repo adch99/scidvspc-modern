@@ -650,7 +650,7 @@ proc ::docking::move_tab {srctab dsttab} {
 
 variable ::docking::c_path {}
 
-################################################################################
+
 proc ::docking::start_motion {path} {
   variable c_path
   if {[winfo exists .ctxtMenu]} {
@@ -659,6 +659,10 @@ proc ::docking::start_motion {path} {
   if {$path!=$c_path} {
     set c_path [find_tbn $path]
   }
+  ### On OS X we have a problem with the buttons not getting -state normal
+  # until a transient gets and loses focus, switching back to the app
+  # This hack (which is called with Button-Press-1 on tab title) doesnt work
+  # if { [scan [$c_path select] ".fdock%s" tl] == 1 } {focus .$tl}
 }
 ################################################################################
 proc ::docking::motion {path} {
@@ -671,7 +675,7 @@ proc ::docking::motion {path} {
 proc ::docking::end_motion {w x y} {
   variable c_path
 
-  bind TNotebook <ButtonRelease-1> [namespace code {::docking::show_menu %W %X %Y}]
+  bind TNotebook <ButtonRelease-1> [namespace code {::docking::show_menu %W}]
 
   if {$c_path==""} { return }
   $c_path configure -cursor {}
@@ -685,7 +689,7 @@ proc ::docking::end_motion {w x y} {
   if {$t!=""} {
     if {$t==$c_path} {
       # we stayed on the same notebook, so display the menu
-      # show_menu $w $x $y
+      # show_menu $w
 
       if {[$c_path identify [expr $x-[winfo rootx $c_path]] [expr $y-[winfo rooty $c_path]]]!=""} {
         set c_path {}
@@ -699,10 +703,9 @@ proc ::docking::end_motion {w x y} {
   set c_path {}
 
   setTabStatus
-
 }
-################################################################################
-proc ::docking::show_menu { path x y} {
+
+proc ::docking::show_menu {path} {
   variable c_path
 
   if {[winfo exists .ctxtMenu]} {
@@ -771,10 +774,8 @@ proc ::docking::raiseTab {w} {
   set ::docking::changedTab($tbn) 0
 }
 
-################################################################################
-proc  ::docking::tabChanged  {path} {
-  update
 
+proc  ::docking::tabChanged  {path} {
   # HACK ! Because notebooks may also be used inside internal windows
   if { ! [ info exists ::docking::activeTab($path)] } {
     return
@@ -788,9 +789,9 @@ proc  ::docking::tabChanged  {path} {
 
 ################################################################################
 
-bind TNotebook <ButtonRelease-1> {::docking::show_menu %W %X %Y}
+bind TNotebook <ButtonRelease-1> {::docking::show_menu %W}
 
-bind TNotebook <ButtonPress-1> +[ list ::docking::start_motion %W ]
+bind TNotebook <ButtonPress-1> +[ list ::docking::start_motion %W]
 
 bind TNotebook <B1-Motion> {
   ::docking::motion %W
@@ -806,9 +807,6 @@ bind TNotebook <Escape> {
 bind TNotebook <ButtonPress-3> {::docking::ctx_menu %W %X %Y}
 bind TNotebook <<NotebookTabChanged>> {::docking::tabChanged %W}
 
-################################################################################
-#
-################################################################################
 proc ::docking::ctx_cmd {path anchor} {
   variable c_path
 
@@ -828,7 +826,7 @@ proc ::docking::ctx_cmd {path anchor} {
 
   setTabStatus
 }
-################################################################################
+
 proc ::docking::ctx_menu {w x y} {
 
   # HACK ! Because notebooks may also be used inside internal windows
@@ -1209,15 +1207,18 @@ proc ::docking::layout_restore { slot } {
   bind TNotebook <<NotebookTabChanged>> {::docking::tabChanged %W}
 
 }
-################################################################################
-# for every notebook, keeps track of the last selected tab to see if the local menu can be popped up or not
+
+### For every notebook, update the last selected tab. Used to see if the local menu can be popped up or not
+
 proc ::docking::setTabStatus { } {
   variable tbs
+
   array set ::docking::activeTab {}
   array set ::docking::changedTab {}
 
   foreach nb [array names tbs] {
-    set ::docking::activeTab($nb) [$nb select]
+    set select [$nb select]
+    set ::docking::activeTab($nb) $select
     set ::docking::changedTab($nb) 0
   }
 
