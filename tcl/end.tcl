@@ -109,10 +109,8 @@ proc updateNoveltyWin {} {
 
 set merge(ply) 40
 
-# mergeGame:
-#   Produces a dialog for the user to merge a selected game into
-#   the current game.
-#
+### Merge game config widget. Merges any game into the current game.
+
 proc mergeGame {{base 0} {gnum 0}} {
   global merge glNumber
   if {$base == 0} {
@@ -160,6 +158,7 @@ proc mergeGame {{base 0} {gnum 0}} {
       -font $small -command updateMergeGame
   pack $w.b.all -side left
   dialogbutton $w.b.ok -text "OK" -command {
+    sc_game undoPoint
     sc_game merge $merge(base) $merge(gnum) $merge(ply)
     catch {grab release .mergeDialog}
     destroy .mergeDialog
