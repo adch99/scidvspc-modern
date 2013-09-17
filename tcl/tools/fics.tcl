@@ -1145,6 +1145,8 @@ namespace eval fics {
         sc_game tags set -result $res
         catch {sc_game save [sc_game number]}
         updateBoard -pgn
+        # we need a better way to update gamelist when adding a new game
+        ::windows::gamelist::Refresh
         set ::fics::playing 0
         set ::fics::mainGame -1
         set ::pause 0

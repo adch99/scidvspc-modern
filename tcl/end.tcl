@@ -894,9 +894,9 @@ proc gameSave {gnum {focus {}}} {
   wm withdraw $w
 
   if {$gnum == 0} {
-    wm title $w "[file tail [sc_base filename]]  [tr GameAdd]"
+    wm title $w "[file tail [sc_base filename]]: [tr GameAdd]"
   } elseif {$gnum > 0} {
-    wm title $w "[file tail [sc_base filename]]  [tr GameReplace]"
+    wm title $w "[file tail [sc_base filename]]: [tr GameReplace] $gnum"
   } else {
     wm title $w {Set Game Information}
   }

@@ -136,8 +136,8 @@ menuText E GameNext "Load Next" 7 {Load the next filtered game}
 menuText E GameLast "Load Last" 8 {Load the last filtered game}
 menuText E GameRandom "Load Random Game" 8 {Load a random filtered game}
 menuText E GameNumber "Load Game Number" 5 {Load a game by entering its number}
-menuText E GameReplace "Save: Replace Game" 6 {Save this game, replacing the old version}
-menuText E GameAdd "Save: Add Game" 0 {Save this game as a new game in the database}
+menuText E GameReplace "Replace Game" 0 {Save this game, replacing the old version}
+menuText E GameAdd "Add Game" 0 {Save this game as a new game in the database}
 menuText E GameInfo "Set Game Information" 9
 menuText E GameBrowse "Browse Game" 0
 menuText E GameList "List all Games" 0
