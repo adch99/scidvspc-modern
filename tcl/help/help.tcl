@@ -1756,7 +1756,7 @@ set helpText(Export) {<h1>Exporting Games</h1>
 
   <h3><name Null>PGN Compatability Issues</name></h3>
   <p>
-  The <url www.saremba.de/chessgml/standards/pgn/pgn-complete.htm>PGN Standard</url>
+  The <url http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm>PGN Standard</url>
   has no <a Variations Null>null move</a> concept. So
   if you export games including them to PGN, other
   software may not be able to read these games correctly.
@@ -1831,7 +1831,7 @@ set helpText(PGN) {<h1>PGN Window</h1>
 
   <p>
   <i>Portable Game Notation is a common 
-  <url www.saremba.de/chessgml/standards/pgn/pgn-complete.htm>standard</url>
+  <url http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm>standard</url>
   for representing chess games.  A PGN file consists of two
   sections - a 'Header' containing tags such as
   [White "Kasparov, Gary"] and
@@ -4223,9 +4223,9 @@ set helpText(Related) {<h1>Links</h1>
   <li>Player Information resources  <url http://sourceforge.net/projects/scid/files/Player Data/>http://sourceforge.net/projects/scid/files/Player Data/</url></li>
   <li>FICS <url http://www.freechess.org>www.freechess.org</url></li>
   <li>FICS game archives <url http://ficsgames.org>http://ficsgames.org</url></li>
-  <li>The PGN and EPD standards <url www.saremba.de/chessgml/standards/pgn/pgn-complete.htm>www.saremba.de/chessgml/standards/pgn...</url></li>
-  <li>Pgn of players <url www.pgnmentor.com/files.html#players>www.pgnmentor.com/files.html#players</url></li>
-  <li>Pgn of events <url www.pgnmentor.com/files.html#events>www.pgnmentor.com/files.html#events</url></li>
+  <li>The PGN and EPD standards <url http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm>www.saremba.de/chessgml/standards/pgn...</url></li>
+  <li>Pgn of players <url http://www.pgnmentor.com/files.html#players>www.pgnmentor.com/files.html#players</url></li>
+  <li>Pgn of events <url http://www.pgnmentor.com/files.html#events>www.pgnmentor.com/files.html#events</url></li>
 <br>
   <li>Mailing list subscribe <url https://lists.sourceforge.net/lists/listinfo/scidvspc-users>https://lists.sourceforge.net/lists/listinfo/scidvspc-users</url></li>
   <li>Mailing list archive <url http://sourceforge.net/mailarchive/forum.php?forum_name=scidvspc-users>http://sourceforge.net/mailarchive/forum.php?forum_name=scidvspc-users</url></li>
@@ -4235,11 +4235,11 @@ set helpText(Related) {<h1>Links</h1>
   <br>
   <li>Popular chess portals.</li>
   <ul>
-  <li>  <url www.chessbase.com>www.chessbase.com </url></li>
+  <li>  <url http://www.chessbase.com>www.chessbase.com </url></li>
   <li>  <url http://www.theweekinchess.com>www.theweekinchess.com </url></li>
   <li>  <url http://www.chesschat.org>www.chesschat.org </url></li>
   </ul>
-  <li>Professional quality chess icons  <url www.virtualpieces.net>www.virtualpieces.net</url></li>
+  <li>Professional quality chess icons  <url http://www.virtualpieces.net>www.virtualpieces.net</url></li>
   <li>Tango icons <url http://tango.freedesktop.org/Tango_Desktop_Project>http://tango.freedesktop.org/Tango_Desktop_Project</url></li>
 
   </ul>

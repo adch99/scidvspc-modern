@@ -584,8 +584,9 @@ proc bh0 {w tag} {
 #    its URL.
 #
 proc openURL {url} {
-  global windowsOS
+  global windowsOS macOS
   busyCursor .
+
   if {$windowsOS} {
     # On Windows, use the "start" command:
     if {[string match $::tcl_platform(os) "Windows NT"]} {
@@ -597,22 +598,20 @@ proc openURL {url} {
     return
   }
 
-  # On Unix systems try Firefox or Mozilla
+  if {$macOS} {
+    if {[catch {exec /bin/sh -c "open -a Firefox $url"}]} {
+      catch {exec /bin/sh -c "open -a Safari $url" &}
+    }
+    unbusyCursor .
+    return
+  }
 
-  if {[file executable /usr/bin/firefox]  ||
-    [file executable /usr/local/bin/firefox]} {
-    # First, try -remote mode
-    if {[catch {exec /bin/sh -c "firefox -remote 'openURL($url)'"}]} {
-      # Now try a new firefox process
-      catch {exec /bin/sh -c "firefox '$url'" &}
-    }
-  } else {
-    # OK, no Firefox (poor user) so try Mozilla (yuck):
-    # First, try -remote mode to avoid starting a new mozilla process
-    if {[catch {exec /bin/sh -c "mozilla -raise -remote 'openURL($url)'"}]} {
-      # Now just try starting a new mozilla process
-      catch {exec /bin/sh -c "mozilla '$url'" &}
-    }
+  ### Linux and other OS need firefox
+
+  # First, try -remote mode
+  if {[catch {exec /bin/sh -c "firefox -remote 'openURL($url)'"}]} {
+    # Now try a new firefox process
+    catch {exec /bin/sh -c "firefox '$url'" &}
   }
   unbusyCursor .
 }
