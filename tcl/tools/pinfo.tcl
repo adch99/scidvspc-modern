@@ -103,9 +103,11 @@ proc playerInfo {{player ""} {raise 0}} {
       $w.photo configure -image photoPInfo -anchor ne
       place $w.photo -in $w.text -relx 1.0 -x -1 -rely 0.0 -y 1 -anchor ne
     } else {
-      # image now scrolls with the widget
-      $w.text insert 2.0 "\n"
-      $w.text image create 2.0 -image photoPInfo -align top -padx 3 -pady 5
+      if {![string match {The name*} $pinfo]} {
+	# image now scrolls with the widget
+	$w.text insert 2.0 "\n"
+	$w.text image create 2.0 -image photoPInfo -align top -padx 3 -pady 5
+      } ; # i cant get figging image to be below the text *&^%&!
     }
   } else {
     # place forget $w.photo
