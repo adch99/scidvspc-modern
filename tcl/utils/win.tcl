@@ -445,7 +445,7 @@ proc ::docking::ctx_menu {w x y} {
   }
 
   # Switch to tab under cursor
-  $w select @[expr $x-[winfo rootx $w]],[expr $y-[winfo rooty $w]]
+  catch {$w select @[expr $x-[winfo rootx $w]],[expr $y-[winfo rooty $w]]}
 
   if { [$w select] == ".fdockmain" } {
     ::contextmenu $x $y
