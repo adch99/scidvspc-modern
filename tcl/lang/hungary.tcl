@@ -455,6 +455,8 @@ translate H SearchResults {A keresés eredménye}
 translate H OpeningTheDatabase {Adatbázis megnyitása}
 translate H Database {Adatbázis}
 translate H Filter {Szûrõ}
+# ====== TODO To be translated ======
+translate H Reset {Reset}
 # todo
 translate H IgnoreCase {Ignore Case}
 translate H noGames {Nincs találat}
@@ -466,6 +468,8 @@ translate H Start {Start}
 translate H StartPos {Kezdõállás}
 translate H Total {Összesen}
 translate H readonly {read-only} ;# ***
+# ====== TODO To be translated ======
+translate H altered {altered}
 
 # Standard error messages:
 translate H ErrNotOpen {Ez az adatbázis nincs megnyitva.}

@@ -431,6 +431,8 @@ translate P SearchResults {Wyniki wyszukiwania}
 translate P OpeningTheDatabase "Otwieranie bazy"
 translate P Database {Bazy}
 translate P Filter {Filtr}
+# ====== TODO To be translated ======
+translate P Reset {Reset}
 # todo
 translate P IgnoreCase {Ignorowac Case}
 translate P noGames {brak partii}
@@ -442,6 +444,8 @@ translate P Start {Pozycja}
 translate P StartPos {Pozycja pocz±tkowa}
 translate P Total {Razem}
 translate P readonly {tylko do odczytu}
+# ====== TODO To be translated ======
+translate P altered {altered}
 
 # Standard error messages:
 translate P ErrNotOpen {To nie jest otwarta baza.} 

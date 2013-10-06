@@ -451,6 +451,8 @@ translate C SearchResults {Hledat vısledky}
 translate C OpeningTheDatabase {Databáze zahájení}
 translate C Database {Databáze}
 translate C Filter {Filtr}
+# ====== TODO To be translated ======
+translate C Reset {Reset}
 translate C IgnoreCase {Ignorovat Pouzdro}
 translate C noGames {¾ádné partie}
 translate C allGames {v¹echny partie}
@@ -461,6 +463,8 @@ translate C Start {Poèáteèní}
 translate C StartPos {Poèáteèní pozice}
 translate C Total {Celkem}
 translate C readonly {read-only} ;# ***
+# ====== TODO To be translated ======
+translate C altered {altered}
 
 # Standard error messages:
 translate C ErrNotOpen {To není otevøená databáze.}

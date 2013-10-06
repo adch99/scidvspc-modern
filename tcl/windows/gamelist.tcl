@@ -492,7 +492,7 @@ proc ::windows::gamelist::OpenClose {} {
 
   button $w.b.removeabove -text Rem -image arrow_up -compound right -font font_Small -relief flat -command {removeFromFilter up}
   button $w.b.removebelow -text Rem -image arrow_down -compound right -font font_Small -relief flat -command {removeFromFilter down}
-  button $w.b.reset -text Reset -font font_Small -relief flat -command ::search::filter::reset
+  button $w.b.reset -textvar ::tr(Reset) -font font_Small -relief flat -command ::search::filter::reset
 
   ### Filter items against the find entry widget
    button $w.b.filter -font font_Small -relief flat -textvar ::tr(Filter) \
@@ -836,7 +836,7 @@ proc setGamelistTitle {} {
     set fname "\[$fname\]"
   }
 
-  setTitle .glistWin "Gamelist: $fname [sc_filter count]/[sc_base numGames] $::tr(games)" 
+  setTitle .glistWin "[tr WindowsGList]: $fname [sc_filter count]/[sc_base numGames] $::tr(games)" 
 }
 
 # called by file.tcl when db is changed

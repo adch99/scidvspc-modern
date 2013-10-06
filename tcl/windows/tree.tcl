@@ -68,7 +68,7 @@ proc ::tree::OpenClose {{baseNumber 0}} {
   setWinLocation $w
   setWinSize $w
 
-  ::setTitle $w "[tr Tree] \[[file tail [sc_base filename $baseNumber]]\]"
+  ::setTitle $w "[lindex "[tr WindowsTree]" 0] \[[file tail [sc_base filename $baseNumber]]\]"
   set tree(training$baseNumber) 0
   set tree(autorefresh$baseNumber) 1
   set tree(locked$baseNumber) 0

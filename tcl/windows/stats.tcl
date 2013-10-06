@@ -13,7 +13,7 @@ proc ::windows::stats::Open {} {
     return
   }
   toplevel $w
-  wm title $w "Filter Statistics: [file tail [sc_base filename]]"
+  wm title $w "[lindex "[tr WindowsStats]" 0]: [file tail [sc_base filename]]"
   wm minsize $w 300 400
   setWinLocation $w
   setWinSize $w

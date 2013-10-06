@@ -419,6 +419,8 @@ translate W SearchResults {Sökresultat}
 translate W OpeningTheDatabase {Öppnar databas}
 translate W Database {Databas}
 translate W Filter {Filter}
+# ====== TODO To be translated ======
+translate W Reset {Reset}
 translate W IgnoreCase {Ignorera textstorlek}
 translate W noGames {inga partier}
 translate W allGames {alla partier}
@@ -429,6 +431,8 @@ translate W Start {Start}
 translate W StartPos {Utgångsställning}
 translate W Total {Totalt}
 translate W readonly {bara läsbar} ;# ***
+# ====== TODO To be translated ======
+translate W altered {altered}
 
 # Standard error messages:
 translate W ErrNotOpen {Databasen är inte öppen.}

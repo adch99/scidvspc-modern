@@ -135,7 +135,6 @@ proc tr {tag {lang ""}} {
 proc setLanguage {{lang ""}} {
   global menuLabel menuUnder oldLang hasEncoding langEncoding
 
-
   if {$lang == ""} {set lang $::language}
 
   if {![info exists langEncoding($lang)]} {
@@ -169,7 +168,9 @@ proc setLanguage {{lang ""}} {
   }
 
   # If using Tk, translate all menus:
-  if {! [catch {winfo exists .}]} { setLanguageMenus $lang }
+  if {! [catch {winfo exists .}]} {
+    setLanguageMenus $lang
+  }
 
   foreach i [array names ::tr] {
     if {[info exists ::translations($lang,$i)]} {

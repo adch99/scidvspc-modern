@@ -441,6 +441,7 @@ translate E SearchResults {Search Results}
 translate E OpeningTheDatabase {Opening database}
 translate E Database {Database}
 translate E Filter {Filter}
+translate E Reset {Reset}
 translate E IgnoreCase {Ignore case}
 translate E noGames {empty}
 translate E allGames {all}
@@ -451,6 +452,7 @@ translate E Start {Start}
 translate E StartPos {Start position}
 translate E Total {Total}
 translate E readonly {read-only}
+translate E altered {altered}
 
 # Standard error messages:
 translate E ErrNotOpen {This is not an open database.}

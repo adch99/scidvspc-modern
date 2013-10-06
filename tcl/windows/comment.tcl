@@ -62,8 +62,8 @@ proc ::commenteditor::Open {} {
   }
 
   ::createToplevel $w
-  ::setTitle $w "[tr {Comment Editor}]" ; # todo
-  wm iconname $w "[tr {Comment Editor}]"
+  ::setTitle $w "[tr WindowsComment]"
+  wm iconname $w "[tr WindowsComment]"
   # wm resizable $w 0 1
   # wm state $w withdrawn
 

@@ -452,6 +452,8 @@ translate B SearchResults {Resultados da Pesquisa}
 translate B OpeningTheDatabase {Abrindo a Base de Dados}
 translate B Database {Base de dados}
 translate B Filter {Filtro}
+# ====== TODO To be translated ======
+translate B Reset {Reset}
 # todo
 translate B IgnoreCase {Ignore Case}
 translate B noGames {nenhum jogo}
@@ -463,6 +465,8 @@ translate B Start {Posicao}
 translate B StartPos {Posicao Inicial}
 translate B Total {Total}
 translate B readonly {apenas leitura}
+# ====== TODO To be translated ======
+translate B altered {altered}
 
 # Standard error messages:
 translate B ErrNotOpen {This is not an open database.} ;# ***

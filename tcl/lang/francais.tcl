@@ -428,6 +428,8 @@ translate F SearchResults {Résultats de la recherche}
 translate F OpeningTheDatabase {Ouverture de la base}
 translate F Database {Base}
 translate F Filter {Filtre}
+# ====== TODO To be translated ======
+translate F Reset {Reset}
 translate F IgnoreCase {Ignorer la Casse}
 translate F noGames {pas de parties}
 translate F allGames {toutes les parties}
@@ -438,6 +440,8 @@ translate F Start {Position}
 translate F StartPos {Position de départ}
 translate F Total {Total}
 translate F readonly {lecture seule}
+# ====== TODO To be translated ======
+translate F altered {altered}
 
 # Standard error messages:
 translate F ErrNotOpen {Ceci n'est pas une base ouverte.}

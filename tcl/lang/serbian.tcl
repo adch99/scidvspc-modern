@@ -479,6 +479,8 @@ translate Y SearchResults {Tra¾i rezultate}
 translate Y OpeningTheDatabase {Otvaranje baze}
 translate Y Database {Baza}
 translate Y Filter {Filter}
+# ====== TODO To be translated ======
+translate Y Reset {Reset}
 # todo
 translate Y IgnoreCase {Ignore Case}
 translate Y noGames {ni jedna partija}
@@ -490,6 +492,8 @@ translate Y Start {Poèetna}
 translate Y StartPos {Poèetna pozicija}
 translate Y Total {Ukupno}
 translate Y readonly {read-only} ;# ***
+# ====== TODO To be translated ======
+translate Y altered {altered}
 
 # Standard error messages:
 translate Y ErrNotOpen {This is not an open database.} ;# ***

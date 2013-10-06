@@ -443,9 +443,11 @@ translate D SearchResults {Suchergebnisse}
 translate D OpeningTheDatabase {Datenbank öffnen}
 translate D Database {Datenbank}
 translate D Filter {Filter}
+# ====== TODO To be translated ======
+translate D Reset {Reset}
 translate D IgnoreCase {Ignoriert Groß}
-translate D noGames {keine Partien}
-translate D allGames {alle Partien}
+translate D noGames {keine partien}
+translate D allGames {alle partien}
 translate D empty {leer}
 translate D clipbase {Ablage}
 translate D score {Punkte}
@@ -453,6 +455,8 @@ translate D Start {Start}
 translate D StartPos {Stellung}
 translate D Total {Summe}
 translate D readonly {schreibgeschützt}
+# ====== TODO To be translated ======
+translate D altered {altered}
 
 # Standard error messages:
 translate D ErrNotOpen {Dies ist keine geöffnete Datenbank.}

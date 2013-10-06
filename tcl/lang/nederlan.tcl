@@ -425,16 +425,20 @@ translate N SearchResults {Zoekresultaten}
 translate N OpeningTheDatabase {Database aan het openen}
 translate N Database {Database}
 translate N Filter {Filter}
+# ====== TODO To be translated ======
+translate N Reset {Reset}
 translate N IgnoreCase {Negeer hoofdletters}
 translate N noGames {Geen partijen}
 translate N allGames {Alle partijen}
 translate N empty {leeg}
-translate N clipbase {Clipbase}
+translate N clipbase {clipbase}
 translate N score {Score}
 translate N Start {Start}
 translate N StartPos {Beginstelling}
 translate N Total {Totaal}
 translate N readonly {alleen-lezen}
+# ====== TODO To be translated ======
+translate N altered {altered}
 
 # Standard error messages:
 translate N ErrNotOpen {Deze database is niet geopend.}
@@ -1667,4 +1671,3 @@ translate N EmptyUriList {Geplakte inhoud is leeg.}
 translate N SelectionOwnerDidntRespond {Time-out tijdens plakken data: geen reactie van geselecteerde eigenaar.}
 }
 
-# End of nederlan.tcl

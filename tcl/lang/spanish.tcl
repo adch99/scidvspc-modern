@@ -444,6 +444,8 @@ translate S SearchResults {Buscar resultados}
 translate S OpeningTheDatabase {Abriendo base de datos}
 translate S Database {Base de datos}
 translate S Filter {Filtro}
+# ====== TODO To be translated ======
+translate S Reset {Reset}
 translate S IgnoreCase {Ignorar el Asunto}
 translate S noGames {no hay partidas}
 translate S allGames {todas las partidas}
@@ -454,6 +456,7 @@ translate S Start {Posición}
 translate S StartPos {Posición inicial}
 translate S Total {Total}
 translate S readonly {sólo lectura}
+translate S altered {alterado}
 
 # Standard error messages:
 translate S ErrNotOpen {Esta base de datos no está abierta.}

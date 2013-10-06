@@ -438,6 +438,8 @@ translate I SearchResults {Risultati della ricerca}
 translate I OpeningTheDatabase {Database di aperture}
 translate I Database {Database}
 translate I Filter {Filtro}
+# ====== TODO To be translated ======
+translate I Reset {Reset}
 translate I IgnoreCase {Ignora Maiuscole}
 translate I noGames {no partite}
 translate I allGames {tutte le partite}
@@ -448,6 +450,8 @@ translate I Start {Posizione}
 translate I StartPos {Posizione iniziale}
 translate I Total {Totale}
 translate I readonly {sola-lettura}
+# ====== TODO To be translated ======
+translate I altered {altered}
 
 # Standard error messages:
 translate I ErrNotOpen {Questo database non � aperto.}

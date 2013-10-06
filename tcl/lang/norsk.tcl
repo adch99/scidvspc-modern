@@ -480,6 +480,8 @@ translate O SearchResults {Søk i resultater}
 translate O OpeningTheDatabase {Åpningsdatabase}
 translate O Database {Database}
 translate O Filter {Filter}
+# ====== TODO To be translated ======
+translate O Reset {Reset}
 translate O IgnoreCase {Ignorer sak}
 translate O noGames {ingen partier}
 translate O allGames {alle partier}
@@ -490,6 +492,8 @@ translate O Start {Start}
 translate O StartPos {Utgangsstilling}
 translate O Total {Sammenlagt}
 translate O readonly {skrivebeskyttet}
+# ====== TODO To be translated ======
+translate O altered {altered}
 
 # Standard error messages:
 translate O ErrNotOpen {This is not an open database.} ;# ***
