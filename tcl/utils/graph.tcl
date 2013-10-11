@@ -200,9 +200,8 @@ proc ::utils::graph::_configure args {
   }
 }
 
-# redraw:
 #    Redraw the entire graph, axes and data.
-#
+
 proc ::utils::graph::redraw {graph} {
   if {! [::utils::graph::isgraph $graph]} { error "$graph: no such graph" }
   if {! [info exists ::utils::graph::_data($graph,canvas)]} { return }
@@ -211,9 +210,8 @@ proc ::utils::graph::redraw {graph} {
   ::utils::graph::plot_data $graph
 }
 
-# plot_axes:
 #    Replot the graph axes.
-#
+
 proc ::utils::graph::plot_axes {graph} {
   variable _data
   # Set ranges and scaling factors:

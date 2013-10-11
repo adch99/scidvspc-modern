@@ -533,12 +533,12 @@ proc ::tools::graphs::rating::Refresh {{player {}}} {
   if {[winfo exists $w]} {
     raiseWin $w
   } else {
-    toplevel $w
-    wm withdraw $w
-    wm title $w "[tr ToolsRating]"
+    ::createToplevel $w
+    ::setTitle $w "[tr ToolsRating]"
 
     menu $w.menu
-    $w configure -menu $w.menu
+    ::setMenu $w $w.menu
+
     $w.menu add cascade -label GraphFile -menu $w.menu.file
     menu $w.menu.file
     $w.menu.file add command -label GraphFileColor \
@@ -574,8 +574,8 @@ proc ::tools::graphs::rating::Refresh {{player {}}} {
     $w.menu.help add command -label $::tr(Help) -accelerator F1 -command {helpWindow Graphs Rating}
 
     canvas $w.c -width 500 -height 300
-    $w.c create text 25 10 -tag text -justify center -width 1 \
-      -font font_Regular -anchor n
+    $w.c create text 25 10 -tag text -justify center -width 1 -font font_Regular -anchor n
+    # the above height, width, x, y are reset below
     pack $w.c -side top -expand yes -fill both
     bind $w <F1> {helpWindow Graphs Rating}
     bind $w <Configure> {
@@ -595,7 +595,7 @@ proc ::tools::graphs::rating::Refresh {{player {}}} {
     ::tools::graphs::rating::ConfigMenus
     setWinLocation $w
     setWinSize $w
-    wm deiconify $w
+    ::createToplevelFinalize $w
   }
 
   set lwidth 2
