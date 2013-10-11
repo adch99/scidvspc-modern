@@ -1073,7 +1073,7 @@ proc toggleButtonBar {} {
   if {!$::gameInfo(showButtons)} {
     grid remove .main.button
   } else {
-    grid configure .main.button -row 1 -column 0 -pady 5 -padx 5
+    grid configure .main.button -row 1 -column 0 -pady 3 -padx 5
   }
 }
 

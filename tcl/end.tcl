@@ -1457,7 +1457,7 @@ if { $::docking::USE_DOCKING } {
   grid rowconfigure .main 3 -weight 1
 } 
 
-grid .main.button -row 1 -column 0 -pady 5 -padx 5
+grid .main.button -row 1 -column 0 -pady 3 -padx 5
 
 if {!$::gameInfo(showButtons)} {
   grid remove .main.button
