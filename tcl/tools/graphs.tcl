@@ -408,13 +408,15 @@ proc ::tools::graphs::score::Refresh {{init 0}} {
   set psize 2
 
   if {![winfo exists $w]} {
-    toplevel $w
-    wm withdraw $w
+    ::createToplevel $w
+    ::setTitle $w "[tr ToolsScore]"
+
     setWinLocation $w
     setWinSize $w
 
     menu $w.menu
-    $w configure -menu $w.menu
+    ::setMenu $w $w.menu
+
     $w.menu add cascade -label GraphFile -menu $w.menu.file
     menu $w.menu.file
     $w.menu.file add command -label GraphFileColor \
@@ -458,9 +460,8 @@ proc ::tools::graphs::score::Refresh {{init 0}} {
     bind $w <Escape> "destroy $w"
     bind $w <Control-Z> "destroy $w"
 
-    wm title $w "[tr ToolsScore]"
     ::tools::graphs::score::ConfigMenus
-    wm deiconify $w
+    ::createToplevelFinalize $w
   }
 
   $w.c itemconfigure text -width [expr {[winfo width $w.c] - 50}]
