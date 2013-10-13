@@ -582,8 +582,8 @@ proc ::tools::graphs::rating::Refresh {{player {}}} {
     bind $w <Configure> {
       .rgraph.c itemconfigure text -width [expr {[winfo width .rgraph.c] - 50} ]
       .rgraph.c coords text [expr {[winfo width .rgraph.c] / 2} ] 10
-      ::utils::graph::configure ratings -height [expr {[winfo height .rgraph.c] - 70} ]
-      ::utils::graph::configure ratings -width [expr {[winfo width .rgraph.c] - 100} ]
+      ::utils::graph::configure ratings -height [expr {[winfo height .rgraph.c] - 60} ]
+      ::utils::graph::configure ratings -width [expr {[winfo width .rgraph.c] - 70} ]
       ::utils::graph::configure ratings -logy 10
       ::utils::graph::redraw ratings
       update
@@ -604,9 +604,9 @@ proc ::tools::graphs::rating::Refresh {{player {}}} {
 
   $w.c itemconfigure text -width [expr {[winfo width $w.c] - 50} ]
   $w.c coords text [expr {[winfo width $w.c] / 2} ] 10
-  set height [expr {[winfo height $w.c] - 70} ]
-  set width [expr {[winfo width $w.c] - 100} ]
-  ::utils::graph::create ratings -width $width -height $height -xtop 50 -ytop 35 \
+  set height [expr {[winfo height $w.c] - 60} ]
+  set width [expr {[winfo width $w.c] - 70} ]
+  ::utils::graph::create ratings -width $width -height $height -xtop 40 -ytop 30 \
     -ytick 50 -xtick 1 -font font_Small -canvas $w.c -textcolor black \
     -hline {{gray90 1 each 25} {steelBlue 1 each 100}} \
     -vline {{gray90 1 each 1} {steelBlue 1 each 5}}
