@@ -19,18 +19,19 @@ set var(WARNINGS) -Wall
 set var(SCIDFLAGS) {}
 
 set var(LANGUAGES) [list \
+  tcl/lang/czech.tcl \
   tcl/lang/deutsch.tcl \
   tcl/lang/francais.tcl \
+  tcl/lang/greek.tcl \
+  tcl/lang/hungary.tcl \
   tcl/lang/italian.tcl \
-  tcl/lang/nederlan.tcl \
-  tcl/lang/spanish.tcl \
-  tcl/lang/portbr.tcl \
-  tcl/lang/swedish.tcl \
   tcl/lang/norsk.tcl \
   tcl/lang/polish.tcl \
-  tcl/lang/czech.tcl \
-  tcl/lang/hungary.tcl \
-  tcl/lang/serbian.tcl ]
+  tcl/lang/portbr.tcl \
+  tcl/lang/nederlan.tcl \
+  tcl/lang/spanish.tcl \
+  tcl/lang/serbian.tcl \
+  tcl/lang/swedish.tcl ]
 set var(OBJS) {$(SCIDOBJS)}
 set var(BINDIR) /usr/local/bin
 set var(SHAREDIR) /usr/local/share/scid

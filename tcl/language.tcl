@@ -11,29 +11,30 @@ if {[catch {encoding names}]} {
 }
 ################################################################################
 #  Translation of pieces
-#  Note to adopt also tkscid.cpp to allow for a new langauge as well
-#  as add transPieces to langPieces[] in game.cpp
+#  Note - also change tkscid.cpp and game.cpp
 ################################################################################
 array set transPieces {}
 
-set transPieces(F)   { P P K R Q D R T B F N C }
+set   transPieces(F) { P P K R Q D R T B F N C }
 set untransPieces(F) { P P R K D Q T R F B C N }
-set transPieces(S)   { P P K R Q D R T B A N C }
+set   transPieces(S) { P P K R Q D R T B A N C }
 set untransPieces(S) { P P R K D Q T R A B C N }
-set transPieces(D)   { P B K K Q D R T B L N S }
+set   transPieces(D) { P B K K Q D R T B L N S }
 set untransPieces(D) { B P K K D Q T R L B S N }
-set transPieces(I)   { P P K R Q D R T B A N C }
+set   transPieces(I) { P P K R Q D R T B A N C }
 set untransPieces(I) { P P R K D Q T R A B C N }
-set transPieces(N)   { P p K K Q D R T B L N P }
+set   transPieces(N) { P p K K Q D R T B L N P }
 set untransPieces(N) { p P K K D Q T R L B P N }
-set transPieces(C)   { P P K K Q D R V B S N J }
+set   transPieces(C) { P P K K Q D R V B S N J }
 set untransPieces(C) { P P K K D Q V R S B J N }
-set transPieces(H)   { P G K K Q V R B B F N H }
+set   transPieces(H) { P G K K Q V R B B F N H }
 set untransPieces(H) { G P K K V Q B R F B H N }
-set transPieces(O)   { P B K K Q D R T B L N S }
+set   transPieces(O) { P B K K Q D R T B L N S }
 set untransPieces(O) { B P K K D Q T R L B S N }
-set transPieces(W)   { P B K K Q D R T B L N S }
+set   transPieces(W) { P B K K Q D R T B L N S }
 set untransPieces(W) { B P K K D Q T R L B S N }
+set   transPieces(G) { P S K P Q B R T B A N I }
+set untransPieces(G) { S P P K B Q T R A B I N }
 
 ################################################################################
 proc trans { msg } {
@@ -154,6 +155,7 @@ proc setLanguage {{lang ""}} {
       H {sc_info language hu}
       O {sc_info language no}
       W {sc_info language sw}
+      G {sc_info language gr}
       default {sc_info language en}
     }
   } else {
@@ -196,6 +198,7 @@ proc setLanguageTemp { lang } {
     H {sc_info language hu}
     O {sc_info language no}
     W {sc_info language sw}
+    G {sc_info language gr}
     default {sc_info language en}
   }
 }

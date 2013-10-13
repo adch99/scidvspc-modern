@@ -14,6 +14,7 @@ array set codes {
   czech C
   deutsch D
   francais F
+  greek G
   hungary H
   italian I
   nederlan N
@@ -26,7 +27,7 @@ array set codes {
   swedish W
 }
 
-set languages {czech deutsch francais hungary italian nederlan norsk polish
+set languages {czech deutsch francais greek hungary italian nederlan norsk polish
   portbr spanish swedish serbian russian
 }
 

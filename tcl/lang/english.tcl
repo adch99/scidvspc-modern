@@ -464,7 +464,7 @@ translate E twin {twin}
 translate E deleted {deleted}
 translate E comment {comment}
 translate E hidden {hidden}
-translate E LastMove {Last move}
+translate E LastMove {Move}
 translate E NextMove {Next}
 translate E GameStart {Start of game}
 translate E LineStart {Start of line}

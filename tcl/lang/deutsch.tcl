@@ -470,8 +470,8 @@ translate D twin {Dublette}
 translate D deleted {gelöscht}
 translate D comment {Kommentar}
 translate D hidden {versteckt}
-translate D LastMove {letzter Zug}
-translate D NextMove {nächster Zug}
+translate D LastMove {Letzter Zug}
+translate D NextMove {Nächster Zug}
 translate D GameStart {Partieanfang}
 translate D LineStart {Beginn der Zugfolge}
 translate D GameEnd {Partieende}

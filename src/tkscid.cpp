@@ -7381,7 +7381,9 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     // Hide some of this info if unknown 
     
-    Tcl_AppendResult (ti, "<br>Event : <blue>", NULL);
+    sprintf (temp, "<br>%s : <blue>", translate (ti, "Event"));
+    Tcl_AppendResult (ti, temp, NULL);
+
     if ( *db->game->GetEventStr() == '?' && *db->game->GetSiteStr() == '?' )
       sprintf (temp, "<run gameSave -1 event>?</run>");
     else {
@@ -7398,7 +7400,7 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
       if ( *db->game->GetRoundStr() == '?' )
 	sprintf (temp, "  (%s)", dateStr);
       else
-	sprintf (temp, "  (%s, round %s)", dateStr, db->game->GetRoundStr());
+	sprintf (temp, "  (%s, %s %s)", dateStr, translate (ti, "Round"), db->game->GetRoundStr());
     }
 
     Tcl_AppendResult (ti, temp, NULL);
@@ -7477,7 +7479,7 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     if (showMaterialValue) {
         uint mWhite = db->game->GetCurrentPos()->MaterialValue (WHITE);
         uint mBlack = db->game->GetCurrentPos()->MaterialValue (BLACK);
-        sprintf (temp, "   Material: %u-%u", mWhite, mBlack);
+        sprintf (temp, "   %s: %u-%u", translate (ti, "Material"), mWhite, mBlack);
         Tcl_AppendResult (ti, temp, NULL);
         if (mWhite > mBlack) {
             sprintf (temp, ":+%u", mWhite - mBlack);
@@ -7549,10 +7551,7 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         printNags = true;
     }
 
-    // Tcl_AppendResult (ti, "<br>", translate (ti, "Move", "Move"), ":  ", NULL);
-
-    // if (san[0] != 0) 
-    Tcl_AppendResult (ti, "Move:  ", temp, "</blue>", NULL);
+    Tcl_AppendResult (ti, translate (ti, "LastMove"), ":  ", temp, "</blue>", NULL);
 
     nags = db->game->GetNags();
     if (printNags  &&  *nags != 0 ) {
@@ -9958,6 +9957,7 @@ sc_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
       if ( strcmp(argv[2], "hu") == 0) {language = 7;}
       if ( strcmp(argv[2], "no") == 0) {language = 8;}
       if ( strcmp(argv[2], "sw") == 0) {language = 9;}
+      if ( strcmp(argv[2], "gr") == 0) {language = 10;}
 
     break;
     default:

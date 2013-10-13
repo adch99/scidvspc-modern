@@ -1514,13 +1514,10 @@ proc updateMenuStates {} {
 }
 
 
-##############################
-#
-# Multiple-language menu support functions.
+### Language menu support functions.
 
-# configMenuText:
-#    Reconfigures the main window menus. Called when the language is changed.
-#
+#   Reconfigures the main window menus. Called when the language is changed.
+
 proc configMenuText {menu entry tag lang} {
   global menuLabel menuUnder
   if {[info exists menuLabel($lang,$tag)] && [info exists menuUnder($lang,$tag)]} {
