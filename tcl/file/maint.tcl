@@ -463,11 +463,8 @@ proc ::maint::Refresh {} {
 set autoloadGame 0
 trace variable autoloadGame w {::utils::validate::Integer $::MAX_GAMES 0}
 
-# ::maint::SetAutoloadGame
-#
-#   Creates a dialog for setting the autoload game number of the
-#   current database.
-#
+###  Dialog for setting the autoload game number of the current database
+
 proc ::maint::SetAutoloadGame {{parent .}} {
   global autoloadGame
   set w .autoload
@@ -481,7 +478,7 @@ proc ::maint::SetAutoloadGame {{parent .}} {
   label $w.f.label -text $::tr(AutoloadGame)
   entry $w.f.entry -textvar autoloadGame -justify right -width 10 \
       -foreground black 
-  pack $w.f.label $w.f.entry -side left
+  pack $w.f.label $w.f.entry -side left -pady 3
 
   pack [frame $w.set] -side top -fill x
   button $w.set.none -text $::tr(None) -command {set autoloadGame 0}
@@ -491,14 +488,14 @@ proc ::maint::SetAutoloadGame {{parent .}} {
   button $w.set.last -text $::tr(Last) -command {set autoloadGame $::MAX_GAMES}
   foreach i {none first current last} {$w.set.$i configure -font font_Small}
   pack $w.set.none $w.set.first $w.set.current $w.set.last \
-      -side left -padx 1 -pady 2
+      -side left -padx 2 -pady 2
 
   addHorizontalRule $w
 
-  pack [frame $w.b] -side top -fill x
-  button $w.b.ok -text OK -command "sc_base autoload \$autoloadGame; destroy $w"
-  button $w.b.cancel -text $::tr(Cancel) -command "destroy $w"
-  pack $w.b.cancel $w.b.ok -side right -padx 2
+  pack [frame $w.b] -side top -fill x -pady 3
+  dialogbutton $w.b.ok -text OK -command "sc_base autoload \$autoloadGame; destroy $w"
+  dialogbutton $w.b.cancel -text $::tr(Cancel) -command "destroy $w"
+  pack $w.b.cancel $w.b.ok -side right -padx 3
 
   bind $w.f.entry <Return> "$w.b.ok invoke"
   bind $w.f.entry <Escape> "$w.b.cancel invoke"

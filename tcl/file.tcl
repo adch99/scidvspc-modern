@@ -126,7 +126,6 @@ proc ::file::New {} {
 
 proc ::file::Open {{fName ""} {parent .} {update 1}} {
 
-  global glstart
   if {[sc_base count free] == 0} {
     tk_messageBox -type ok -icon info -title "Scid" \
         -message "Too many databases are open; close one first" -parent $parent
@@ -224,13 +223,16 @@ proc ::file::Open {{fName ""} {parent .} {update 1}} {
     }
   }
 
+  set ::glstart 1
   if {$err == 0} {
     catch {sc_game load auto}
     flipBoardForPlayerNames $::myPlayerNames
     set ::glistFlipped([sc_base current]) $::flippedForPlayer
+    if {[sc_game number] != 1} {
+      ::windows::gamelist::showCurrent
+    }
   }
   unbusyCursor .
-  set glstart 1
 
   ### Hmmm - Check if tree/bestgames exists for this base, and update tab name
   set current [sc_base current]
