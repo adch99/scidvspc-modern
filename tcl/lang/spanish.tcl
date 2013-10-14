@@ -400,6 +400,12 @@ translate S None {Ninguno}
 translate S First {Primera}
 translate S Current {Actual}
 translate S Last {Última}
+# ====== TODO To be translated ======
+translate S Font {Font}
+# ====== TODO To be translated ======
+translate S Change {Change}
+# ====== TODO To be translated ======
+translate S Random {Random}
 
 # General messages:
 translate S game {partida}
@@ -484,6 +490,10 @@ translate S PInfoMostBlack {Aperturas más comunes con Negras}
 translate S PInfoRating {Historial de clasificación}
 translate S PInfoBio {Biografía}
 translate S PInfoEditRatings {Editar elos}
+# ====== TODO To be translated ======
+translate S PinfoEditName {Edit Name}
+# ====== TODO To be translated ======
+translate S PinfoLookupName {Lookup Name}
 
 # Tablebase information:
 translate S Draw {Tablas}
@@ -572,6 +582,8 @@ translate S LockTree {Bloquear}
 translate S TreeLocked {Bloqueado}
 translate S TreeBest {Mejor}
 translate S TreeBestGames {Mejores partidas del árbol}
+# ====== TODO To be translated ======
+translate S TreeAdjust {Adjust Filter}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
 translate S TreeTitleRow \

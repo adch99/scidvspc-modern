@@ -399,6 +399,12 @@ translate D None {Keine}
 translate D First {Erste}
 translate D Current {Aktuelle}
 translate D Last {Letzte}
+# ====== TODO To be translated ======
+translate D Font {Font}
+# ====== TODO To be translated ======
+translate D Change {Change}
+# ====== TODO To be translated ======
+translate D Random {Random}
 
 # General messages:
 translate D game {Partie}
@@ -486,6 +492,10 @@ translate D PInfoMostBlack {Häufigste Eröffnungen als Schwarzer}
 translate D PInfoRating {ELO-Historie}
 translate D PInfoBio {Biographie}
 translate D PInfoEditRatings {Editiere Ratings}
+# ====== TODO To be translated ======
+translate D PinfoEditName {Edit Name}
+# ====== TODO To be translated ======
+translate D PinfoLookupName {Lookup Name}
 
 # Tablebase information:
 translate D Draw {Remis}
@@ -563,6 +573,8 @@ translate D LockTree {Anbinden}
 translate D TreeLocked {angebunden}
 translate D TreeBest {Beste}
 translate D TreeBestGames {Beste Zugbaumpartien}
+# ====== TODO To be translated ======
+translate D TreeAdjust {Adjust Filter}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
 translate D TreeTitleRow \

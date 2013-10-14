@@ -369,7 +369,7 @@ translate G Back {Πίσω}
 translate G Browse {Περιήγηση}
 translate G Cancel {Ακύρωση}
 translate G Continue {Συνέχεια}
-translate G Clear {Καθαρ.}
+translate G Clear {Καθαρ}
 translate G Close {Κλείσιμο}
 translate G Contents {Περιεχόμενα}
 translate G Defaults {Προεπιλογή}
@@ -396,6 +396,12 @@ translate G None {Κενό}
 translate G First {Πρώτη}
 translate G Current {Τρέχουσα}
 translate G Last {Τελευταία}
+# ====== TODO To be translated ======
+translate G Font {Font}
+# ====== TODO To be translated ======
+translate G Change {Change}
+# ====== TODO To be translated ======
+translate G Random {Random}
 
 # General messages:
 translate G game {Παρτίδα}
@@ -481,6 +487,10 @@ translate G PInfoMostBlack {Συνήθη ανοιγμάτα ως Μαύρος}
 translate G PInfoRating {Ιστορικό Βαθμολογίας}
 translate G PInfoBio {Βιογραφία}
 translate G PInfoEditRatings {Τροπ.Βαθμολογίας}
+# ====== TODO To be translated ======
+translate G PinfoEditName {Edit Name}
+# ====== TODO To be translated ======
+translate G PinfoLookupName {Lookup Name}
 
 # Tablebase information:
 translate G Draw {Ισοπαλία}
@@ -552,6 +562,8 @@ translate G LockTree {Κλείδωμα}
 translate G TreeLocked {κλειδωμένο}
 translate G TreeBest {Καλύτερη}
 translate G TreeBestGames {Καλύτερες Παρτίδες}
+# ====== TODO To be translated ======
+translate G TreeAdjust {Adjust Filter}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
 translate G TreeTitleRow \

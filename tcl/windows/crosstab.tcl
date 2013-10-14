@@ -303,7 +303,7 @@ proc ::crosstab::Open {} {
     ::crosstab::setFilter
   }
 
-  button $w.b.font -text { Font } -command {FontDialogFixed .crosstabWin}
+  button $w.b.font -textvar ::tr(Font) -command {FontDialogFixed .crosstabWin}
 
   pack $w.b.cancel $w.b.find $w.b.update -side right -pady 3 -padx 5
   pack $w.b.setfilter $w.b.addfilter $w.b.type $w.b.font -side left -pady 3 -padx 5

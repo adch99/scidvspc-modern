@@ -381,6 +381,12 @@ translate N None {Geen}
 translate N First {Eerste}
 translate N Current {Huidige}
 translate N Last {Laatste}
+# ====== TODO To be translated ======
+translate N Font {Font}
+# ====== TODO To be translated ======
+translate N Change {Change}
+# ====== TODO To be translated ======
+translate N Random {Random}
 
 # General messages:
 translate N game {Partij}
@@ -466,6 +472,10 @@ translate N PInfoMostBlack {Meest gespeelde opening als zwart}
 translate N PInfoRating {Geschiedenis Elo klassering}
 translate N PInfoBio {Biografie}
 translate N PInfoEditRatings {Bewerk Elo rangschikking}
+# ====== TODO To be translated ======
+translate N PinfoEditName {Edit Name}
+# ====== TODO To be translated ======
+translate N PinfoLookupName {Lookup Name}
 
 # Tablebase information:
 translate N Draw {Remise}
@@ -539,6 +549,8 @@ translate N LockTree {Boom vergrendelen}
 translate N TreeLocked {Vergrendeld}
 translate N TreeBest {Beste}
 translate N TreeBestGames {Boom beste partijen}
+# ====== TODO To be translated ======
+translate N TreeAdjust {Adjust Filter}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
 translate N TreeTitleRow \

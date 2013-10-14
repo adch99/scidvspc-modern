@@ -397,6 +397,9 @@ translate E None {None}
 translate E First {First}
 translate E Current {Current}
 translate E Last {Last}
+translate E Font {Font}
+translate E Change {Change}
+translate E Random {Random}
 
 # General messages:
 translate E game {game}
@@ -480,6 +483,8 @@ translate E PInfoMostBlack {Most common openings as Black}
 translate E PInfoRating {Rating history}
 translate E PInfoBio {Biography}
 translate E PInfoEditRatings {Edit Ratings}
+translate E PinfoEditName {Edit Name}
+translate E PinfoLookupName {Lookup Name}
 
 # Tablebase information:
 translate E Draw {Draw}
@@ -551,6 +556,7 @@ translate E LockTree {Lock}
 translate E TreeLocked {locked}
 translate E TreeBest {Best}
 translate E TreeBestGames {Best Games}
+translate E TreeAdjust {Adjust Filter}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
 translate E TreeTitleRow \

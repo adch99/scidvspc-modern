@@ -18,8 +18,7 @@ proc playerInfo {{player ""} {raise 0}} {
     setWinLocation $w
     wm minsize $w 450 300
 
-    pack [frame $w.b2] -side bottom -expand 1 -fill x -pady 2
-    pack [frame $w.b] -side bottom -expand 1 -fill x -pady 3 
+    pack [frame $w.b] -side bottom -expand 1 -fill x -pady 3 -padx 5
 
     button $w.b.graph -text [tr ToolsRating] \
       -command {::tools::graphs::rating::Refresh $playerInfoName} 
@@ -29,7 +28,7 @@ proc playerInfo {{player ""} {raise 0}} {
       set editName $playerInfoName
       set editNameSelect crosstable
     }
-    button $w.b.match -text {Lookup Name} -command {
+    button $w.b.match -text [tr PinfoLookupName] -command {
       set ::plist::name [lindex $playerInfoName 0]
       if {[winfo exists .plist]} {
 	::plist::refresh
@@ -38,7 +37,7 @@ proc playerInfo {{player ""} {raise 0}} {
 	::plist::Open
       }
     } -width 10
-    button $w.b.nedit -text {Edit Name} -command {
+    button $w.b.nedit -text [tr PinfoEditName] -command {
       makeNameEditor
       setNameEditorType player
       set editName $playerInfoName
@@ -46,25 +45,29 @@ proc playerInfo {{player ""} {raise 0}} {
       set editNameSelect all
     } -width 10
 
-    button $w.b2.report -text [tr ToolsPlayerReport] -command {::preport::preportDlg $playerInfoName}
-    button $w.b2.tourney -text Tournaments -command {::tourney::Open $playerInfoName}
-    label $w.b2.space -width 2
-    button $w.b2.update -textvar ::tr(Update) -command {playerInfo $playerInfoName} -width 10
-    # button $w.b2.help -textvar ::tr(Help) -command {helpWindow PInfo} -width 10
-    button $w.b2.close -textvar ::tr(Close) -command "destroy $w" -width 10
+    button $w.b.report -text [tr ToolsPlayerReport] -command {::preport::preportDlg $playerInfoName}
+    button $w.b.tourney -text [tr WindowsTmt] -command {::tourney::Open $playerInfoName}
+    label $w.b.space -width 2
+    button $w.b.update -textvar ::tr(Update) -command {playerInfo $playerInfoName} -width 10
+    # button $w.b.help -textvar ::tr(Help) -command {helpWindow PInfo} -width 10
+    button $w.b.close -textvar ::tr(Close) -command "destroy $w" -width 10
 
     ### The rightmost four buttons are already set width 10
     ### If English, we can set the other four buttons likewise (and allign nicely)
     if {$::language == "E"} {
-      foreach i "$w.b.graph $w.b.edit $w.b2.report $w.b2.tourney" {
+      foreach i "$w.b.graph $w.b.edit $w.b.report $w.b.tourney" {
         $i configure -width 10
       }
     }
 
-
-    pack $w.b.graph $w.b.edit $w.b.match $w.b.nedit -padx 5 -pady 2 -side left
-
-    pack $w.b2.report $w.b2.tourney $w.b2.update $w.b2.close -padx 5 -pady 2 -side left
+    grid $w.b.graph   -row 0 -column 0 -padx 3 -pady 2 -sticky ew
+    grid $w.b.edit    -row 0 -column 1 -padx 3 -pady 2 -sticky ew
+    grid $w.b.match   -row 0 -column 2 -padx 3 -pady 2 -sticky ew
+    grid $w.b.nedit   -row 0 -column 3 -padx 3 -pady 2 -sticky ew
+    grid $w.b.report  -row 1 -column 0 -padx 3 -pady 2 -sticky ew
+    grid $w.b.tourney -row 1 -column 1 -padx 3 -pady 2 -sticky ew
+    grid $w.b.update  -row 1 -column 2 -padx 3 -pady 2 -sticky ew
+    grid $w.b.close   -row 1 -column 3 -padx 3 -pady 2 -sticky ew
 
     autoscrollframe $w.frame text $w.text -font font_Regular -wrap none
 

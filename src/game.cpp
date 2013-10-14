@@ -47,7 +47,7 @@ int language = 0; // default to english
 const char * langPieces[] = { "", 
 "PPKRQDRTBFNC", "PPKRQDRTBANC", "PBKKQDRTBLNS", 
 "PPKRQDRTBANC", "PpKKQDRTBLNP", "PPKKQDRVBSNJ",
-"PGKKQVRBBFNH", "PBKKQDRTBLNS", "PBKKQDRTBLNS", "PSKPQBRTBANI" };
+"PGKKQVRBBFNH", "PBKKQDRTBLNS", "PBKKQDRTBLNS", "PSKPQBR[BANI" };
 
 // Translate pieces (moves) from english to another language
 

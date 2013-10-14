@@ -435,6 +435,12 @@ translate Y None {None} ;# ***
 translate Y First {Prvu}
 translate Y Current {Trenutna}
 translate Y Last {Poslednju}
+# ====== TODO To be translated ======
+translate Y Font {Font}
+# ====== TODO To be translated ======
+translate Y Change {Change}
+# ====== TODO To be translated ======
+translate Y Random {Random}
 
 # General messages:
 translate Y game {partija}
@@ -521,6 +527,10 @@ translate Y PInfoMostBlack {Najèe¹æe igrana otvaranja sa crnim figurama}
 translate Y PInfoRating {Istorija rejtinga}
 translate Y PInfoBio {Biography} ;# ***
 translate Y PInfoEditRatings {Edit Ratings} ;# ***
+# ====== TODO To be translated ======
+translate Y PinfoEditName {Edit Name}
+# ====== TODO To be translated ======
+translate Y PinfoLookupName {Lookup Name}
 
 # Tablebase information:
 translate Y Draw {Remi}
@@ -612,6 +622,8 @@ translate Y LockTree {Zakljuèaj}
 translate Y TreeLocked {zakljuèano}
 translate Y TreeBest {Najbolje}
 translate Y TreeBestGames {Najbolje partije stabla}
+# ====== TODO To be translated ======
+translate Y TreeAdjust {Adjust Filter}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
 # todo

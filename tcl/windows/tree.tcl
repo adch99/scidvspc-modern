@@ -243,9 +243,9 @@ proc ::tree::OpenClose {{baseNumber 0}} {
   # add a button to start/stop tree refresh &&&
   # button $w.buttons.bStartStop -image engine_on -command "::tree::toggleRefresh $baseNumber" ;# -relief flat
 
-  checkbutton $w.buttons.refresh -text Refresh \
+  checkbutton $w.buttons.refresh -text [tr FICSRefresh] \
       -variable tree(autorefresh$baseNumber) -command "::tree::toggleRefresh $baseNumber" 
-  checkbutton $w.buttons.adjust -text {Adjust Filter} -variable tree(adjustfilter$baseNumber) -command "::tree::dorefresh $baseNumber"
+  checkbutton $w.buttons.adjust -text [tr TreeAdjust] -variable tree(adjustfilter$baseNumber) -command "::tree::dorefresh $baseNumber"
 
   # bStartStop TreeOptStartStop
   foreach {b t} {

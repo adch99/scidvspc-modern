@@ -24,6 +24,8 @@
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // matsig_makeString(): Make a string representation of a matsig.
 //      Example: "12228.12228" for the starting position.
+// Currently unused
+// Altered in fulvio's gamelist to show string representation (eg QRRBBNN8:QRRBBNN8 for start position)
 void
 matsig_makeString (char * s, matSigT m)
 {

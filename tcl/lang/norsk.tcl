@@ -436,6 +436,12 @@ translate O None {Ingen}
 translate O First {Første}
 translate O Current {Gjeldende}
 translate O Last {Siste}
+# ====== TODO To be translated ======
+translate O Font {Font}
+# ====== TODO To be translated ======
+translate O Change {Change}
+# ====== TODO To be translated ======
+translate O Random {Random}
 
 # General messages:
 translate O game {parti}
@@ -521,6 +527,10 @@ translate O PInfoMostBlack {Hyppigste åpning som sort}
 translate O PInfoRating {Historisk rating}
 translate O PInfoBio {Biografi}
 translate O PInfoEditRatings {Edit Ratings} ;# ***
+# ====== TODO To be translated ======
+translate O PinfoEditName {Edit Name}
+# ====== TODO To be translated ======
+translate O PinfoLookupName {Lookup Name}
 
 # Tablebase information:
 translate O Draw {Uavgjort}
@@ -612,6 +622,8 @@ translate O LockTree {Lås}
 translate O TreeLocked {låst}
 translate O TreeBest {Beste}
 translate O TreeBestGames {Idealtrepartier}
+# ====== TODO To be translated ======
+translate O TreeAdjust {Adjust Filter}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
 # todo

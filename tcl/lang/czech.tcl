@@ -407,6 +407,12 @@ translate C None {Nic}
 translate C First {První}
 translate C Current {Aktuální}
 translate C Last {Poslední}
+# ====== TODO To be translated ======
+translate C Font {Font}
+# ====== TODO To be translated ======
+translate C Change {Change}
+# ====== TODO To be translated ======
+translate C Random {Random}
 
 # General messages:
 translate C game {partie}
@@ -492,6 +498,10 @@ translate C PInfoMostBlack {Nejèastìj¹í zahájení za èerné}
 translate C PInfoRating {Historie ratingu}
 translate C PInfoBio {Biografie}
 translate C PInfoEditRatings {Editovat ratingy}
+# ====== TODO To be translated ======
+translate C PinfoEditName {Edit Name}
+# ====== TODO To be translated ======
+translate C PinfoLookupName {Lookup Name}
 
 # Tablebase information:
 translate C Draw {Remíza}
@@ -565,6 +575,8 @@ translate C LockTree {Zamknout}
 translate C TreeLocked {Zamknuto}
 translate C TreeBest {Nejlep¹í}
 translate C TreeBestGames {Nejlep¹í partie stromu}
+# ====== TODO To be translated ======
+translate C TreeAdjust {Adjust Filter}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
 translate C TreeTitleRow \

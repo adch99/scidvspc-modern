@@ -411,6 +411,12 @@ translate H None {Nincs}
 translate H First {Elsõ}
 translate H Current {Aktuális}
 translate H Last {Utolsó}
+# ====== TODO To be translated ======
+translate H Font {Font}
+# ====== TODO To be translated ======
+translate H Change {Change}
+# ====== TODO To be translated ======
+translate H Random {Random}
 
 # General messages:
 translate H game {játszma}
@@ -497,6 +503,10 @@ translate H PInfoMostBlack {Leggyakoribb megnyitások sötétként}
 translate H PInfoRating {Értékszám alakulása}
 translate H PInfoBio {Életrajz}
 translate H PInfoEditRatings {Értékszámok átszerkesztése}
+# ====== TODO To be translated ======
+translate H PinfoEditName {Edit Name}
+# ====== TODO To be translated ======
+translate H PinfoLookupName {Lookup Name}
 
 # Tablebase information:
 translate H Draw {Döntetlen}
@@ -572,6 +582,8 @@ translate H LockTree {Rögzítés}
 translate H TreeLocked {rögzítve}
 translate H TreeBest {Legjobb}
 translate H TreeBestGames {A fa legjobb játszmái}
+# ====== TODO To be translated ======
+translate H TreeAdjust {Adjust Filter}
 translate H TreeTitleRow \
   {    Lépés     Gyakoriság  Eredm. ÁtlÉlõ Telj. Átl.év ECO}
 translate H TreeTotal {ÖSSZESEN}
