@@ -1596,6 +1596,20 @@ translate D FICSDecline {Ablehnen}
 translate D FICSColour {Seite wählen:}
 translate D FICSSend {senden}
 translate D FICSConnect {Verbinden}
+# ====== TODO To be translated ======
+translate D FICSShouts {Shouts}
+# ====== TODO To be translated ======
+translate D FICSTells {Tells}
+# ====== TODO To be translated ======
+translate D FICSOpponent {Opponent Info}
+# ====== TODO To be translated ======
+translate D FICSInfo {Info}
+# ====== TODO To be translated ======
+translate D FICSDraw {Offer Draw}
+# ====== TODO To be translated ======
+translate D FICSRematch {Rematch}
+# ====== TODO To be translated ======
+translate D FICSQuit {Quit FICS}
 
 # Correspondence Chess Dialogs:
 translate D CCDlgConfigureWindowTitle {Einstellungen für Fernschach}

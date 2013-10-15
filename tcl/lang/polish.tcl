@@ -1561,6 +1561,20 @@ translate P FICSDecline {Odrzuæ}
 translate P FICSColour {Kolor}
 translate P FICSSend {Wy¶lij}
 translate P FICSConnect {Po³±cz}
+# ====== TODO To be translated ======
+translate P FICSShouts {Shouts}
+# ====== TODO To be translated ======
+translate P FICSTells {Tells}
+# ====== TODO To be translated ======
+translate P FICSOpponent {Opponent Info}
+# ====== TODO To be translated ======
+translate P FICSInfo {Info}
+# ====== TODO To be translated ======
+translate P FICSDraw {Offer Draw}
+# ====== TODO To be translated ======
+translate P FICSRematch {Rematch}
+# ====== TODO To be translated ======
+translate P FICSQuit {Quit FICS}
 
 translate P CCDlgConfigureWindowTitle {Konfiguruj grê korespondencyjn±}
 translate P CCDlgCGeneraloptions {Ustawienia ogólne}

@@ -1826,6 +1826,20 @@ translate B FICSDecline {Decline}
 translate B FICSColour {Colour}
 translate B FICSSend {Send}
 translate B FICSConnect {Connect}
+# ====== TODO To be translated ======
+translate B FICSShouts {Shouts}
+# ====== TODO To be translated ======
+translate B FICSTells {Tells}
+# ====== TODO To be translated ======
+translate B FICSOpponent {Opponent Info}
+# ====== TODO To be translated ======
+translate B FICSInfo {Info}
+# ====== TODO To be translated ======
+translate B FICSDraw {Offer Draw}
+# ====== TODO To be translated ======
+translate B FICSRematch {Rematch}
+# ====== TODO To be translated ======
+translate B FICSQuit {Quit FICS}
 
 translate B CCDlgConfigureWindowTitle {Configurar Xadrez por correspondencia}
 translate B CCDlgCGeneraloptions {Opções Gerais}

@@ -1582,6 +1582,20 @@ translate N FICSDecline {weiger}
 translate N FICSColour {Kleur}
 translate N FICSSend {Zend}
 translate N FICSConnect {Verbind}
+# ====== TODO To be translated ======
+translate N FICSShouts {Shouts}
+# ====== TODO To be translated ======
+translate N FICSTells {Tells}
+# ====== TODO To be translated ======
+translate N FICSOpponent {Opponent Info}
+# ====== TODO To be translated ======
+translate N FICSInfo {Info}
+# ====== TODO To be translated ======
+translate N FICSDraw {Offer Draw}
+# ====== TODO To be translated ======
+translate N FICSRematch {Rematch}
+# ====== TODO To be translated ======
+translate N FICSQuit {Quit FICS}
 
 
 translate N CCDlgConfigureWindowTitle {Configureer correspondentieschaak}

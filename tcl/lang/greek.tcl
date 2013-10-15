@@ -1560,6 +1560,20 @@ translate G FICSDecline {Απόρριψη}
 translate G FICSColour {Χρώμα}
 translate G FICSSend {Αποστολή}
 translate G FICSConnect {Σύνδεση}
+# ====== TODO To be translated ======
+translate G FICSShouts {Shouts}
+# ====== TODO To be translated ======
+translate G FICSTells {Tells}
+# ====== TODO To be translated ======
+translate G FICSOpponent {Opponent Info}
+# ====== TODO To be translated ======
+translate G FICSInfo {Info}
+# ====== TODO To be translated ======
+translate G FICSDraw {Offer Draw}
+# ====== TODO To be translated ======
+translate G FICSRematch {Rematch}
+# ====== TODO To be translated ======
+translate G FICSQuit {Quit FICS}
 
 # Correspondence Chess Dialogs:
 translate G CCDlgConfigureWindowTitle {Ρυθμίσεις Σκάκι Δι Αλληλογραφίας}

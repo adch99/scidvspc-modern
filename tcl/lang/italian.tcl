@@ -1629,6 +1629,20 @@ translate I FICSDecline {Decline}
 translate I FICSColour {Colour}
 translate I FICSSend {Send}
 translate I FICSConnect {Connect}
+# ====== TODO To be translated ======
+translate I FICSShouts {Shouts}
+# ====== TODO To be translated ======
+translate I FICSTells {Tells}
+# ====== TODO To be translated ======
+translate I FICSOpponent {Opponent Info}
+# ====== TODO To be translated ======
+translate I FICSInfo {Info}
+# ====== TODO To be translated ======
+translate I FICSDraw {Offer Draw}
+# ====== TODO To be translated ======
+translate I FICSRematch {Rematch}
+# ====== TODO To be translated ======
+translate I FICSQuit {Quit FICS}
 
 
 translate I CCDlgConfigureWindowTitle {Configura Scacchi per Corrispondenza}

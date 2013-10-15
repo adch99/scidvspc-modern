@@ -1823,6 +1823,20 @@ translate C FICSColour {Barva}
 # ====== TODO To be translated ======
 translate C FICSSend {send}
 translate C FICSConnect {Pøipojit}
+# ====== TODO To be translated ======
+translate C FICSShouts {Shouts}
+# ====== TODO To be translated ======
+translate C FICSTells {Tells}
+# ====== TODO To be translated ======
+translate C FICSOpponent {Opponent Info}
+# ====== TODO To be translated ======
+translate C FICSInfo {Info}
+# ====== TODO To be translated ======
+translate C FICSDraw {Offer Draw}
+# ====== TODO To be translated ======
+translate C FICSRematch {Rematch}
+# ====== TODO To be translated ======
+translate C FICSQuit {Quit FICS}
 
 translate C CCDlgConfigureWindowTitle {Konfigurovat korespondenèní ¹ach}
 translate C CCDlgCGeneraloptions {Obecná nastavení}

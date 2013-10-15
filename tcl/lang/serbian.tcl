@@ -1901,6 +1901,20 @@ translate Y FICSDecline {Decline}
 translate Y FICSColour {Colour}
 translate Y FICSSend {Send}
 translate Y FICSConnect {Connect}
+# ====== TODO To be translated ======
+translate Y FICSShouts {Shouts}
+# ====== TODO To be translated ======
+translate Y FICSTells {Tells}
+# ====== TODO To be translated ======
+translate Y FICSOpponent {Opponent Info}
+# ====== TODO To be translated ======
+translate Y FICSInfo {Info}
+# ====== TODO To be translated ======
+translate Y FICSDraw {Offer Draw}
+# ====== TODO To be translated ======
+translate Y FICSRematch {Rematch}
+# ====== TODO To be translated ======
+translate Y FICSQuit {Quit FICS}
 
 translate Y CCDlgConfigureWindowTitle {Configure Correspondence Chess}
 # ====== TODO To be translated ======

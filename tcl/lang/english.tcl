@@ -1553,6 +1553,14 @@ translate E FICSDecline {Decline}
 translate E FICSColour {Colour}
 translate E FICSSend {Send}
 translate E FICSConnect {Connect}
+translate E FICSShouts {Shouts}
+translate E FICSTells {Tells}
+translate E FICSOpponent {Opponent Info}
+translate E FICSInfo {Info}
+translate E FICSDraw {Offer Draw}
+translate E FICSRematch {Rematch}
+translate E FICSQuit {Quit FICS}
+
 
 # Correspondence Chess Dialogs:
 translate E CCDlgConfigureWindowTitle {Configure Correspondence Chess}

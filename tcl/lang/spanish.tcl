@@ -1584,6 +1584,20 @@ translate S FICSDecline {rechazar}
 translate S FICSColour {Color}
 translate S FICSSend {enviar}
 translate S FICSConnect {Conectar}
+# ====== TODO To be translated ======
+translate S FICSShouts {Shouts}
+# ====== TODO To be translated ======
+translate S FICSTells {Tells}
+# ====== TODO To be translated ======
+translate S FICSOpponent {Opponent Info}
+# ====== TODO To be translated ======
+translate S FICSInfo {Info}
+# ====== TODO To be translated ======
+translate S FICSDraw {Offer Draw}
+# ====== TODO To be translated ======
+translate S FICSRematch {Rematch}
+# ====== TODO To be translated ======
+translate S FICSQuit {Quit FICS}
 
 # Correspondence Chess Dialogs:
 translate S CCDlgConfigureWindowTitle {Configurar Ajedrez por correo}

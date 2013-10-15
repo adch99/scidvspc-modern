@@ -1559,6 +1559,20 @@ translate F FICSDecline {refuser}
 translate F FICSColour {Couleur}
 translate F FICSSend {envoyer}
 translate F FICSConnect {Connecter}
+# ====== TODO To be translated ======
+translate F FICSShouts {Shouts}
+# ====== TODO To be translated ======
+translate F FICSTells {Tells}
+# ====== TODO To be translated ======
+translate F FICSOpponent {Opponent Info}
+# ====== TODO To be translated ======
+translate F FICSInfo {Info}
+# ====== TODO To be translated ======
+translate F FICSDraw {Offer Draw}
+# ====== TODO To be translated ======
+translate F FICSRematch {Rematch}
+# ====== TODO To be translated ======
+translate F FICSQuit {Quit FICS}
 
 translate F CCDlgConfigureWindowTitle {Configurer échecs par correspondance}
 translate F CCDlgCGeneraloptions {Options générales}

@@ -1829,6 +1829,20 @@ translate H FICSDecline {elutasít}
 translate H FICSColour {Szín}
 translate H FICSSend {küld}
 translate H FICSConnect {Csatlakozás}
+# ====== TODO To be translated ======
+translate H FICSShouts {Shouts}
+# ====== TODO To be translated ======
+translate H FICSTells {Tells}
+# ====== TODO To be translated ======
+translate H FICSOpponent {Opponent Info}
+# ====== TODO To be translated ======
+translate H FICSInfo {Info}
+# ====== TODO To be translated ======
+translate H FICSDraw {Offer Draw}
+# ====== TODO To be translated ======
+translate H FICSRematch {Rematch}
+# ====== TODO To be translated ======
+translate H FICSQuit {Quit FICS}
 
 
 translate H CCDlgConfigureWindowTitle {Levelezési sakk beállításai}
