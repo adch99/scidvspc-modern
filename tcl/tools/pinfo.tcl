@@ -60,6 +60,10 @@ proc playerInfo {{player ""} {raise 0}} {
       }
     }
 
+    grid columnconfigure $w.b 0 -weight 1
+    grid columnconfigure $w.b 1 -weight 1
+    grid columnconfigure $w.b 2 -weight 1
+    grid columnconfigure $w.b 3 -weight 1
     grid $w.b.graph   -row 0 -column 0 -padx 3 -pady 2 -sticky ew
     grid $w.b.edit    -row 0 -column 1 -padx 3 -pady 2 -sticky ew
     grid $w.b.match   -row 0 -column 2 -padx 3 -pady 2 -sticky ew
