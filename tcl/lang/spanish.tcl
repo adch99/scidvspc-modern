@@ -69,8 +69,7 @@ menuText S EditTrial "Probar variación" 1 \
 menuText S EditStrip "Eliminar" 2 \
   {Eliminar comentarios o variaciones de esta partida}
 menuText S EditUndo "Deshacer" 0 {Deshace el último cambio en la partida}
-# todo
-menuText S EditRedo "Redo" 0
+menuText S EditRedo "Rehacer" 0
 menuText S EditStripComments "Comentarios" 0 \
   {Quita todos los comentarios y variaciones de esta partida}
 menuText S EditStripVars "Variaciones" 0 {Quita todas las variaciones de esta partida}
@@ -114,8 +113,7 @@ menuText S GameAdd "Añadir Partida" 0 \
 menuText S GameInfo "Juego Set de Información" 0
 menuText S GameBrowse "Examinar Partidas" 0
 menuText S GameList "Listar Todas las Partidas" 0
-# ====== TODO To be translated ======
-menuText S GameDelete "Delete Game" 0
+menuText S GameDelete "Borrar partida" 0
 menuText S GameDeepest "Identificar apertura" 0 \
   {Va a la posición más avanzada de la partida según el libro ECO}
 menuText S GameGotoMove "Ir al Movimiento Número" 5 \
@@ -271,12 +269,9 @@ menuText S OptionsGInfo "Información de la partida" 0 {Información de la partida
 menuText S OptionsFics "FICS" 0
 menuText S OptionsFicsAuto "Autopromoción Reina" 0
 menuText S OptionsFicsClock "Reloj Digital" 0
-# ====== TODO To be translated ======
-menuText S OptionsFicsColour "Text Colour" 0
-# ====== TODO To be translated ======
-menuText S OptionsFicsNoRes "No Results" 0
-# ====== TODO To be translated ======
-menuText S OptionsFicsNoReq "No Requests" 0
+menuText S OptionsFicsColour "Color del texto" 0
+menuText S OptionsFicsNoRes "Sin resultados" 0
+menuText S OptionsFicsNoReq "Sin respuesta" 0
 menuText S OptionsLanguage "Lenguaje" 0 {Selecciona el lenguaje del menú}
 menuText S OptionsMovesTranslatePieces "Traducir piezas" 0 {Traducir la primera letra de las piezas}
 menuText S OptionsMovesHighlightLastMove "Resalta última jugada" 0 {Resalta la última jugada}
@@ -350,10 +345,8 @@ menuText S HelpAbout "Acerca de Scid" 10 {Información acerca de Scid}
 
 # Game info box popup menu:
 menuText S GInfoHideNext "Ocultar siguiente movimiento" 0
-# ====== TODO To be translated ======
-menuText S GInfoShow "Side to Move" 0
-# ====== TODO To be translated ======
-menuText S GInfoCoords "Toggle Coords" 0
+menuText S GInfoShow "Lado a Jugar" 0
+menuText S GInfoCoords "Coordenadas" 0
 menuText S GInfoMaterial "Mostrar valor del material" 0
 menuText S GInfoFEN "Mostrar FEN" 8
 menuText S GInfoMarks "Mostrar casillas y flechas coloreadas" 29
@@ -368,8 +361,7 @@ menuText S GInfoMark "(No)Marcar esta partida" 4
 menuText S GInfoInformant "Configurar Valores de Información" 0
 
 # General buttons:
-# ====== TODO To be translated ======
-translate S Apply {Apply}
+translate S Apply {Aplicar}
 translate S Back {Atrás}
 translate S Browse {Examinar}
 translate S Cancel {Cancelar}
@@ -400,12 +392,9 @@ translate S None {Ninguno}
 translate S First {Primera}
 translate S Current {Actual}
 translate S Last {Última}
-# ====== TODO To be translated ======
-translate S Font {Font}
-# ====== TODO To be translated ======
-translate S Change {Change}
-# ====== TODO To be translated ======
-translate S Random {Random}
+translate S Font {Fuente}
+translate S Change {Cambiar}
+translate S Random {Aleatorio}
 
 # General messages:
 translate S game {partida}
@@ -450,8 +439,7 @@ translate S SearchResults {Buscar resultados}
 translate S OpeningTheDatabase {Abriendo base de datos}
 translate S Database {Base de datos}
 translate S Filter {Filtro}
-# ====== TODO To be translated ======
-translate S Reset {Reset}
+translate S Reset {Reiniciar}
 translate S IgnoreCase {Ignorar el Asunto}
 translate S noGames {no hay partidas}
 translate S allGames {todas las partidas}
@@ -490,10 +478,8 @@ translate S PInfoMostBlack {Aperturas más comunes con Negras}
 translate S PInfoRating {Historial de clasificación}
 translate S PInfoBio {Biografía}
 translate S PInfoEditRatings {Editar elos}
-# ====== TODO To be translated ======
-translate S PinfoEditName {Edit Name}
-# ====== TODO To be translated ======
-translate S PinfoLookupName {Lookup Name}
+translate S PinfoEditName {Editar nombre}
+translate S PinfoLookupName {Buscar nombre}
 
 # Tablebase information:
 translate S Draw {Tablas}
@@ -582,8 +568,7 @@ translate S LockTree {Bloquear}
 translate S TreeLocked {Bloqueado}
 translate S TreeBest {Mejor}
 translate S TreeBestGames {Mejores partidas del árbol}
-# ====== TODO To be translated ======
-translate S TreeAdjust {Adjust Filter}
+translate S TreeAdjust {Ajustar filtro}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
 translate S TreeTitleRow \
@@ -594,8 +579,7 @@ translate S AddToMask {Añadir a máscara}
 translate S RemoveFromMask {Elimina desde la máscara}
 translate S AddThisMoveToMask {Añadir este movimiento a la Máscara}
 translate S SearchMask {Buscar en máscara}
-# TODO
-translate S DisplayMask {Display Mask}
+translate S DisplayMask {Mostrar máscara}
 translate S Nag {Código de regaño}
 translate S Marker {Marcador}
 translate S Include {Incluir}
@@ -797,12 +781,10 @@ menuText S CrosstabOptAll "Todos Contra Todos" 0
 menuText S CrosstabOptSwiss "Suizo" 0
 menuText S CrosstabOptKnockout "Rondas" 0
 menuText S CrosstabOptAuto "Auto" 0
-# todo
-menuText S CrosstabOptThreeWin "3 Points for Win" 1
+menuText S CrosstabOptThreeWin "3 Puntos por victoria" 1
 menuText S CrosstabOptAges "Edad en años" 1
 menuText S CrosstabOptNats "Nacionalidades" 0
-# todo
-menuText S CrosstabOptTallies "Win/Loss/Draw" 0
+menuText S CrosstabOptTallies "Ganadas/Perdidas/tablas" 0
 menuText S CrosstabOptRatings "Elo" 0
 menuText S CrosstabOptTitles "Títulos" 0
 menuText S CrosstabOptBreaks "Puntuaciones de desempate" 0
@@ -1330,8 +1312,7 @@ translate S LightSquares {Casillas claras}
 translate S DarkSquares {Casillas oscuras}
 translate S SelectedSquares {Casillas seleccionadas}
 translate S SuggestedSquares {Casillas de movimiento sugerido}
-# todo
-translate S Grid {Grid}
+translate S Grid {Cuadrícula}
 translate S Previous {Elección}
 translate S WhitePieces {Piezas blancas}
 translate S BlackPieces {Piezas negras}
@@ -1411,8 +1392,7 @@ translate S limitanalysis {Tiempo límite para análisis del motor}
 translate S seconds {segundos}
 translate S Abort {Abortar}
 translate S Resume {Reanudar}
-# TODO
-translate S Restart {Restart}
+translate S Restart {Reiniciar}
 translate S OutOfOpening {Fuera de apertura}
 translate S NotFollowedLine {Tú no sigues la linea}
 translate S DoYouWantContinue {¿Quieres continuar?}
@@ -1473,8 +1453,7 @@ translate S Nodes {Nodos}
 translate S Depth {Profundidad}
 translate S Time {Tiempo} 
 translate S SecondsPerMove {Segundos por movimiento}
-# TODO
-translate S TimeLabel {Time per move}
+translate S TimeLabel {Tiempor por movimiento}
 translate S Engine {Motor}
 translate S TimeMode {Modo de tiempo}
 translate S TimeBonus {Tiempo + bonus}
@@ -1584,20 +1563,13 @@ translate S FICSDecline {rechazar}
 translate S FICSColour {Color}
 translate S FICSSend {enviar}
 translate S FICSConnect {Conectar}
-# ====== TODO To be translated ======
-translate S FICSShouts {Shouts}
-# ====== TODO To be translated ======
-translate S FICSTells {Tells}
-# ====== TODO To be translated ======
-translate S FICSOpponent {Opponent Info}
-# ====== TODO To be translated ======
-translate S FICSInfo {Info}
-# ====== TODO To be translated ======
-translate S FICSDraw {Offer Draw}
-# ====== TODO To be translated ======
-translate S FICSRematch {Rematch}
-# ====== TODO To be translated ======
-translate S FICSQuit {Quit FICS}
+translate S FICSShouts {Gritos}
+translate S FICSTells {Decir}
+translate S FICSOpponent {Información del oponente}
+translate S FICSInfo {Información}
+translate S FICSDraw {Ofrecer tablas}
+translate S FICSRematch {Revancha}
+translate S FICSQuit {Salir}
 
 # Correspondence Chess Dialogs:
 translate S CCDlgConfigureWindowTitle {Configurar Ajedrez por correo}
