@@ -174,29 +174,20 @@ proc ::optable::makeReportWin {args} {
     foreach i {file favorites help} {
       menu $w.menu.$i -tearoff 0
     }
-    $w.menu.file add command -label OprepFileText \
-        -command {::optable::saveReport text}
-    $w.menu.file add command -label OprepFileHtml \
-        -command {::optable::saveReport html}
-    $w.menu.file add command -label OprepFileLaTeX \
-        -command {::optable::saveReport latex}
+    $w.menu.file add command -label OprepFileText -command {::optable::saveReport text}
+    $w.menu.file add command -label OprepFileHtml -command {::optable::saveReport html}
+    $w.menu.file add command -label OprepFileLaTeX -command {::optable::saveReport latex}
     $w.menu.file add separator
-    $w.menu.file add command -label OprepFileOptions \
-        -command ::optable::setOptions
+    $w.menu.file add command -label OprepFileOptions -command ::optable::setOptions
     $w.menu.file add separator
-    $w.menu.file add command -label OprepFileClose \
-        -command "$w.b.close invoke"
-    $w.menu.favorites add command -label OprepFavoritesAdd \
-        -command ::optable::addFavoriteDlg
-    $w.menu.favorites add command -label OprepFavoritesEdit \
-        -command ::optable::editFavoritesDlg
-    $w.menu.favorites add command -label OprepFavoritesGenerate \
-        -command ::optable::generateFavoriteReports
+    $w.menu.file add command -label OprepFileClose -command "$w.b.close invoke"
+    $w.menu.favorites add command -label OprepFavoritesAdd -command ::optable::addFavoriteDlg
+    $w.menu.favorites add command -label OprepFavoritesEdit -command ::optable::editFavoritesDlg
+    $w.menu.favorites add command -label OprepFavoritesGenerate -command ::optable::generateFavoriteReports
     $w.menu.favorites add separator
     $w.menu.help add command -label OprepHelpReport \
         -accelerator F1 -command {helpWindow Reports Opening}
-    $w.menu.help add command -label OprepHelpIndex \
-        -command {helpWindow Index}
+    $w.menu.help add command -label OprepHelpIndex -command {helpWindow Index}
     ::optable::updateFavoritesMenu
 
     bind $w <F1> {helpWindow Reports Opening}
@@ -435,6 +426,7 @@ proc ::optable::setOptions {} {
   packbuttons right $w.b.cancel $w.b.ok
   array set ::optable::backup [array get ::optable]
   bind $w <Escape> "$w.b.cancel invoke"
+  bind $w <F1> {helpWindow Reports Opening}
 
   update
   placeWinOverParent $w .oprepWin
@@ -1217,21 +1209,25 @@ proc ::optable::favoriteReportNames {} {
   return $reportNames
 }
 
-# addFavoriteDlg
-#   Adds the current position to the opening report favorites list.
-#
+### Add the current position to the opening report favorites list
+
 proc ::optable::addFavoriteDlg {} {
   set w .addFavoriteDlg
+
+  if {[winfo exists $w]} {
+    raiseWin $w
+    return
+  }
   toplevel $w
+  wm withdraw $w
+
   wm title $w "Add Opening Report Favorite"
-  label $w.name -text "Enter a name for the opening report of this position:"
+  label $w.name -text "Enter a name for this position"
   pack $w.name -side top
-  # label $w.name2 -text "(Use letters, digits, spaces and undercores only)"
-  # pack $w.name2 -side top
   entry $w.e -width 40
   pack $w.e -side top -fill x -padx 2
   addHorizontalRule $w
-  label $w.old -text "Existing favorite report names:"
+  label $w.old -text "Existing favorite report names"
   pack $w.old -side top
   pack [frame $w.existing] -side top -fill x -padx 2
   text $w.existing.list -width 30 -height 10 -yscrollcommand [list $w.existing.ybar set]
@@ -1245,15 +1241,21 @@ proc ::optable::addFavoriteDlg {} {
   addHorizontalRule $w
   frame $w.b
   pack $w.b -side bottom -fill x
-  button $w.b.ok -text OK -command ::optable::addFavoriteOK
-  button $w.b.cancel -text $::tr(Cancel) -command "grab release $w; destroy $w"
+  dialogbutton $w.b.ok -text OK -command ::optable::addFavoriteOK
+  dialogbutton $w.b.cancel -text $::tr(Cancel) -command "destroy $w"
   pack $w.b.cancel $w.b.ok -side right -padx 5 -pady 5
   focus $w.e
-  grab $w
+
+  bind $w <Escape> "$w.b.cancel invoke"
+  bind $w <F1> {helpWindow Reports Favorites}
+  update
+  placeWinOverParent $w .oprepWin
+  wm deiconify $w
 }
 
 proc ::optable::addFavoriteOK {} {
   global reportFavorites
+
   set w .addFavoriteDlg
   set reportName [$w.e get]
   set err ""
@@ -1274,63 +1276,62 @@ proc ::optable::addFavoriteOK {} {
 
 set reportFavoritesName ""
 
-# editFavoritesDlg
-#   Open the dialog box for editing the list of opening report
-#   favorite positions.
-#
+### Edit the list of opening report favorite positions
+
 proc ::optable::editFavoritesDlg {} {
-  global reportFavorites reportFavoritesTemp reportFavoritesName
+  global reportFavorites reportFavoritesTemp reportFavoritesName tr
   set w .editFavoritesDlg
-  if {[winfo exists $w]} { return }
+
+  if {[winfo exists $w]} {
+    raiseWin $w
+    return
+  }
+  toplevel $w
+  wm withdraw $w
+  wm title $w "[tr OprepFavoritesEdit]"
 
   set ::reportFavoritesTemp $::reportFavorites
-  toplevel $w
-  wm title $w "[tr OprepFavoritesEdit]"
   # wm transient $w .
-  bind $w <F1> {helpWindow Reports Opening}
   entry $w.e -width 60 -foreground black  \
       -textvariable reportFavoritesName -font font_Small -exportselection 0
-  bind $w.e <FocusIn>  "$w.e configure -background lightYellow"
-  bind $w.e <FocusOut> "$w.e configure -background white"
 
   trace variable reportFavoritesName w ::optable::editFavoritesRefresh
-  pack $w.e -side top -fill x
   pack [frame $w.b] -side bottom -fill x
-  autoscrollframe $w.f listbox $w.f.list -width 50 -height 10 \
-      -fg black  -exportselection 0 -font font_Small -setgrid 1
+  pack $w.e -side bottom -fill x
+  frame $w.f
   pack $w.f -side top -fill both -expand yes
+
+  listbox $w.f.list -width 50 -height 10 -fg black -exportselection 0 -font font_Small \
+    -setgrid 1 -yscrollcommand "$w.f.ybar set"
+  scrollbar $w.f.ybar -takefocus 0 -command "$w.f.list yview"
+
+  pack $w.f.list -side left -fill both -expand yes
+  pack $w.f.ybar -side right -fill y
+
   bind $w.f.list <<ListboxSelect>>  ::optable::editFavoritesSelect
   foreach entry $::reportFavoritesTemp {
     set name [lindex $entry 0]
     set moves [lindex $entry 1]
     $w.f.list insert end "$name \[$moves\]"
   }
-  button $w.b.delete -text $::tr(Delete)  -command ::optable::editFavoritesDelete
+  button $w.b.delete -textvar tr(Delete) -command ::optable::editFavoritesDelete
   button $w.b.up -image bookmark_up -command {::optable::editFavoritesMove up}
   button $w.b.down -image bookmark_down -command {::optable::editFavoritesMove down}
   foreach i [list $w.b.up $w.b.down] {
     $i configure -padx 0 -pady 0 -borderwidth 1
   }
   button $w.b.ok -text "OK" -command ::optable::editFavoritesOK
-  button $w.b.cancel -text "Cancel" -command {
-    catch {grab release .editFavoritesDlg}
-    destroy .editFavoritesDlg
-  }
+  button $w.b.cancel -textvar tr(Cancel) -command "destroy $w"
   pack $w.b.delete $w.b.up $w.b.down -side left -padx 2 -pady 2
   pack $w.b.cancel $w.b.ok -side right -padx 2 -pady 2
   set editFavoritesName ""
 
-  wm withdraw $w
-  update idletasks
-  set x [expr {[winfo screenwidth $w]/2 - [winfo reqwidth $w]/2 \
-        - [winfo vrootx .]}]
-  set y [expr {[winfo screenheight $w]/2 - [winfo reqheight $w]/2 \
-        - [winfo vrooty .]}]
-  wm geom $w +$x+$y
-  wm protocol $w WM_DELETE_WINDOW [list $w.b.cancel invoke]
-  wm deiconify $w
+  bind $w <Escape> "$w.b.cancel invoke"
+  bind $w <F1> {helpWindow Reports Favorites}
+
   update
-  catch {grab $w}
+  placeWinOverParent $w .oprepWin
+  wm deiconify $w
 }
 
 proc ::optable::editFavoritesRefresh {args} {
@@ -1367,8 +1368,8 @@ proc ::optable::editFavoritesSelect {} {
 
 proc ::optable::editFavoritesDelete {} {
   global reportFavoritesTemp
-  set w .editFavoritesDlg
-  set list $w.f.list
+
+  set list .editFavoritesDlg.f.list
   set sel [lindex [$list curselection] 0]
   if {$sel == ""} { return }
   set reportFavoritesTemp [lreplace $reportFavoritesTemp $sel $sel]
@@ -1380,8 +1381,8 @@ proc ::optable::editFavoritesDelete {} {
 
 proc ::optable::editFavoritesMove {dir} {
   global reportFavoritesTemp
-  set w .editFavoritesDlg
-  set list $w.f.list
+
+  set list .editFavoritesDlg.f.list
   set sel [lindex [$list curselection] 0]
   if {$sel == ""} { return }
   set e [lindex $reportFavoritesTemp $sel]
@@ -1406,9 +1407,7 @@ proc ::optable::editFavoritesMove {dir} {
 }
 
 proc ::optable::editFavoritesOK {} {
-  set w .editFavoritesDlg
-  catch {grab release $w}
-  destroy $w
+  destroy .editFavoritesDlg
   set ::reportFavorites $::reportFavoritesTemp
   ::optable::saveFavorites
   ::optable::updateFavoritesMenu
@@ -1451,9 +1450,14 @@ proc ::optable::generateFavoriteReports {} {
   set ::reportDir $::initialDir(report)
 
   set w .reportFavoritesDlg
-  if {[winfo exists $w]} { return }
+  if {[winfo exists $w]} {
+    raiseWin $w
+    return
+  }
   toplevel $w
+  wm withdraw $w
   wm title $w "Generate Reports..."
+
   pack [label $w.typelabel -text "Select the report type:" -font font_Bold] -side top
   pack [frame $w.type] -side top -padx 2
   radiobutton $w.type.full -text "Full" -variable reportType -value full
@@ -1463,15 +1467,15 @@ proc ::optable::generateFavoriteReports {} {
   addHorizontalRule $w
   pack [label $w.fmtlabel -text "Select the report file format:" -font font_Bold] -side top
   pack [frame $w.fmt] -side top -padx 2
-  radiobutton $w.fmt.text -text "Plain text (.txt)" -variable reportFormat -value text
+  radiobutton $w.fmt.text -text "Text" -variable reportFormat -value text
   radiobutton $w.fmt.html -text "HTML" -variable reportFormat -value html
   radiobutton $w.fmt.latex -text "LaTeX" -variable reportFormat -value latex
   pack $w.fmt.text $w.fmt.html $w.fmt.latex -side left -padx 4
   addHorizontalRule $w
   pack [frame $w.dir] -side top -padx 2 -pady 2
-  label $w.dir.label -text "Save reports in the folder: " -font font_Bold
+  label $w.dir.label -text "Save reports in the folder" -font font_Bold
   entry $w.dir.entry  -textvariable ::reportDir
-  button $w.dir.choose -text $::tr(Browse...) -command {
+  dialogbutton $w.dir.choose -text $::tr(Browse) -command {
     set tmpdir [tk_chooseDirectory -parent .reportFavoritesDlg \
         -title "Scid: Choose Report Folder"]
     if {$tmpdir != ""} {
@@ -1480,14 +1484,20 @@ proc ::optable::generateFavoriteReports {} {
   }
   pack $w.dir.label -side left
   pack $w.dir.choose -side right
-  pack $w.dir.entry -side left -fill x
+  pack $w.dir.entry -side left -fill x -padx 5
   addHorizontalRule $w
   pack [frame $w.b] -side bottom -fill x
-  button $w.b.ok -text "OK"\
+  dialogbutton $w.b.ok -text "OK" \
       -command "::optable::reportFavoritesOK; grab release $w; destroy $w; ::optable::makeReportWin"
-  button $w.b.cancel -text $::tr(Cancel) -command "grab release $w; destroy $w"
+  dialogbutton $w.b.cancel -text $::tr(Cancel) -command "grab release $w; destroy $w"
   pack $w.b.cancel $w.b.ok -side right -padx 5 -pady 5
-  grab $w
+
+  bind $w <Escape> "$w.b.cancel invoke"
+  bind $w <F1> {helpWindow Reports Favorites}
+
+  update
+  placeWinOverParent $w .oprepWin
+  wm deiconify $w
 }
 
 proc ::optable::reportFavoritesOK {} {

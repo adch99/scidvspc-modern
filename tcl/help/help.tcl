@@ -3206,14 +3206,15 @@ set helpText(Reports) {<h1>Reports</h1>
   Opening Report into the current game as variations, including the full reference.
   </p>
 
-  <h4>Favorites</h4>
+  <h4><name Favorites>Favorites</name></h4>
   <p>
-  The Favorites Menu in the Report Window allows one to maintain a
+  The <b>Favorites Menu</b> in the Report Window allows one to maintain a
   collection of favorite opening positions.
   </p>
   <p>
-  The <b>Generate Reports</b> menu will generate a report
-  for each of your favorite reports, using the current database. A dialog-box
+  <b>Add Report</b> adds the current position as a favourite, and
+  <b>Generate Reports</b> generates a report
+  for each of these favorites. A dialog-box
   will appear allowing you to specify the report type and format, and
   a directory where report files will be saved. A suitable suffix for the
   format you selected (e.g. ".html" for HTML format) will be added to each
@@ -3247,7 +3248,7 @@ set helpText(Reports) {<h1>Reports</h1>
   number of games used to generate the table, in the Report Options.
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.8, June 2012</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.11, October 2013</footer></p>
 }
 
 
