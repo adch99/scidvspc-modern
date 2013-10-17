@@ -348,10 +348,15 @@ proc exportOptions {exportType} {
 
   pack [frame $w.o] -side top -fill x -pady 5 -padx 5
   label $w.o.append -text $::tr(AddToExistingFile)
-  radiobutton $w.o.appendYes -text $::tr(Yes) \
+  radiobutton $w.o.appendOn -text $::tr(Yes) \
       -variable exportFlags(append) -value 1
-  radiobutton $w.o.appendNo -text $::tr(No) \
+  radiobutton $w.o.appendOff -text $::tr(No) \
       -variable exportFlags(append) -value 0
+  label $w.o.space -text [tr PgnOptSpace]
+  radiobutton $w.o.spaceOn -text $::tr(Yes) \
+      -variable exportFlags(space) -value 1
+  radiobutton $w.o.spaceOff -text $::tr(No) \
+      -variable exportFlags(space) -value 0
   label $w.o.comments -text $::tr(ExportComments)
   radiobutton $w.o.commentsOn -text $::tr(Yes) \
       -variable exportFlags(comments) -value 1
@@ -385,32 +390,20 @@ proc exportOptions {exportType} {
       -variable exportFlags(symbols) -value 1
   radiobutton $w.o.symbolsOff -text {$2 $14} \
       -variable exportFlags(symbols) -value 0
-  grid $w.o.append -row 0 -column 0 -sticky w
-  grid $w.o.appendYes -row 0 -column 1 -sticky w
-  grid $w.o.appendNo -row 0 -column 2 -sticky w
-  grid $w.o.comments -row 1 -column 0 -sticky w
-  grid $w.o.commentsOn -row 1 -column 1 -sticky w
-  grid $w.o.commentsOff -row 1 -column 2 -sticky w
-  grid $w.o.stripMarks -row 2 -column 0 -sticky w
-  grid $w.o.stripMarksOn -row 2 -column 1 -sticky w
-  grid $w.o.stripMarksOff -row 2 -column 2 -sticky w
-  grid $w.o.indentc -row 3 -column 0 -sticky w
-  grid $w.o.indentcOn -row 3 -column 1 -sticky w
-  grid $w.o.indentcOff -row 3 -column 2 -sticky w
-  grid $w.o.vars -row 4 -column 0 -sticky w
-  grid $w.o.varsOn -row 4 -column 1 -sticky w
-  grid $w.o.varsOff -row 4 -column 2 -sticky w
-  grid $w.o.indentv -row 5 -column 0 -sticky w
-  grid $w.o.indentvOn -row 5 -column 1 -sticky w
-  grid $w.o.indentvOff -row 5 -column 2 -sticky w
-  grid $w.o.column -row 6 -column 0 -sticky w
-  grid $w.o.columnOn -row 6 -column 1 -sticky w
-  grid $w.o.columnOff -row 6 -column 2 -sticky w
-  label $w.o.space -text ""
-  grid $w.o.space -row 7 -column 0 -sticky w
-  grid $w.o.symbols -row 8 -column 0 -sticky w
-  grid $w.o.symbolsOn -row 8 -column 1 -sticky w
-  grid $w.o.symbolsOff -row 8 -column 2 -sticky w
+  set row 0
+  foreach i {append space comments stripMarks indentc vars indentv column} {
+    grid $w.o.${i}    -row $row -column 0 -sticky w
+    grid $w.o.${i}On  -row $row -column 1 -sticky w
+    grid $w.o.${i}Off -row $row -column 2 -sticky w
+    incr row
+  }
+  label $w.o.space2 -text ""
+  grid $w.o.space2      -row $row -column 0 -sticky w
+  incr row
+  grid $w.o.symbols    -row $row -column 0 -sticky w
+  grid $w.o.symbolsOn  -row $row -column 1 -sticky w
+  grid $w.o.symbolsOff -row $row -column 2 -sticky w
+  incr row
 
   # Extra option for PGN format: handling of null moves
   if {$exportType == "PGN"} {
@@ -419,14 +412,15 @@ proc exportOptions {exportType} {
         -variable exportFlags(convertNullMoves) -value 1
     radiobutton $w.o.keepNullMoves -text $::tr(No) \
         -variable exportFlags(convertNullMoves) -value 0
-    grid $w.o.nullMoves -row 9 -column 0 -sticky w
-    grid $w.o.convertNullMoves -row 9 -column 1 -sticky w
-    grid $w.o.keepNullMoves -row 9 -column 2 -sticky w
+    grid $w.o.nullMoves        -row $row -column 0 -sticky w
+    grid $w.o.convertNullMoves -row $row -column 1 -sticky w
+    grid $w.o.keepNullMoves    -row $row -column 2 -sticky w
+    incr row
   }
 
   # Extra option for HTML format: diagram image set
   if {$exportType == "HTML"} {
-    label $w.o.space2 -text ""
+    label $w.o.space3 -text ""
     label $w.o.hdiag -text "Diagram"
     radiobutton $w.o.hb0 -text "bitmaps" \
         -variable exportFlags(htmldiag) -value 0
@@ -434,12 +428,15 @@ proc exportOptions {exportType} {
         -variable exportFlags(htmldiag) -value 1
     label $w.o.hl0 -image htmldiag0
     label $w.o.hl1 -image htmldiag1
-    grid $w.o.space2 -row 8 -column 0
-    grid $w.o.hdiag -row 9 -column 0 -sticky w
-    grid $w.o.hb0 -row 9 -column 1 -sticky w
-    grid $w.o.hb1 -row 9 -column 2 -sticky w
-    grid $w.o.hl0 -row 10 -column 1
-    grid $w.o.hl1 -row 10 -column 2
+    grid $w.o.space3 -row $row -column 0
+    incr row
+    grid $w.o.hdiag  -row $row -column 0 -sticky w
+    grid $w.o.hb0    -row $row -column 1 -sticky w
+    grid $w.o.hb1    -row $row -column 2 -sticky w
+    incr row
+    grid $w.o.hl0    -row $row -column 1
+    grid $w.o.hl1    -row $row -column 2
+    incr row
   }
 
   addHorizontalRule $w
@@ -539,7 +536,7 @@ proc exportGames {selection exportType} {
       -starttext $exportStartFile($exportType) \
       -endtext $exportEndFile($exportType) \
       -comments $exportFlags(comments) -variations $exportFlags(vars) \
-      -space $::pgn::moveNumberSpaces -symbols $exportFlags(symbols) \
+      -space $exportFlags(space) -symbols $exportFlags(symbols) \
       -indentC $exportFlags(indentc) -indentV $exportFlags(indentv) \
       -column $exportFlags(column) -noMarkCodes $exportFlags(stripMarks) \
       -convertNullMoves $exportFlags(convertNullMoves)

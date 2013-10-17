@@ -996,7 +996,7 @@ $m add command -label OptionsSave -command {
     translatePieces highlightLastMove highlightLastMoveWidth highlightLastMoveColor 
     askToReplaceMoves ::windows::switcher::icons locale(numeric) 
     spellCheckFile ::splash::keepopen autoRaise autoIconify windowsDock autoLoadLayout
-    exportFlags(comments) exportFlags(vars) exportFlags(indentc)
+    exportFlags(comments) exportFlags(space) exportFlags(vars) exportFlags(indentc)
     exportFlags(indentv) exportFlags(column) exportFlags(htmldiag) 
     email(smtp) email(smproc) email(server) 
     email(from) email(bcc) ::windows::gamelist::widths ::windows::gamelist::findcase ::windows::gamelist::showButtons

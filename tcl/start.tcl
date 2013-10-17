@@ -728,6 +728,7 @@ array set preportDefaults [array get preport]
 
 # Export file options:
 set exportFlags(comments) 1
+set exportFlags(space) 1
 set exportFlags(indentc) 0
 set exportFlags(vars) 1
 set exportFlags(indentv) 1
