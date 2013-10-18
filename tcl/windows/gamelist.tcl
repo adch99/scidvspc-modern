@@ -504,7 +504,7 @@ proc ::windows::gamelist::OpenClose {} {
   # button $w.b.findall -font font_Small -relief flat -text "Find All" \
   #   -command {::windows::gamelist::FindText}
 
-  ttk::combobox $w.b.find -width 15 -font font_Small -textvariable ::windows::gamelist::findtext
+  ttk::combobox $w.b.find -width 10 -font font_Small -textvariable ::windows::gamelist::findtext
   ::utils::history::SetCombobox ::windows::gamelist::findtext $w.b.find
 
   # didn't use to work
@@ -521,7 +521,7 @@ proc ::windows::gamelist::OpenClose {} {
 
   pack $w.b.findcase -side right
   pack $w.b.find -side right ; # -expand 1 -fill x
-  pack $w.b.findlabel $w.b.filter $w.b.reset -side right
+  pack $w.b.findlabel $w.b.filter -side right ; # $w.b.reset # too crowded
   pack $w.b.save $w.b.bkm $w.b.gfirst $w.b.gprev $w.b.gnext $w.b.glast $w.b.select $w.b.remove $w.b.removeabove $w.b.removebelow -side left
 
   ### Bottom row of buttons , etc
@@ -591,7 +591,7 @@ proc ::windows::gamelist::OpenClose {} {
   button $w.c.help  -textvar ::tr(Help) -width 5 -font font_Small -command { helpWindow GameList }
   button $w.c.close -textvar ::tr(Close) -font font_Small -command { focus .main ; destroy .glistWin }
 
-  pack $w.c.close $w.c.help -side right -padx 3
+  pack $w.c.close -side right -padx 3 ; # $w.c.help
   pack $w.c.current $w.c.goto $w.c.title $w.c.flag $w.c.browse $w.c.delete $w.c.empty $w.c.export -side left -padx 3
 
   if {$::windowsOS} {
