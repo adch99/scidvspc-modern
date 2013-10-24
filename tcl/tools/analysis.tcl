@@ -2868,6 +2868,7 @@ proc toggleEngineAnalysis {{n -1} {force 0}} {
     if {$n == -1} {
       return
     }
+    raiseWin .analysisWin$n
   }
 
   set b .analysisWin$n.b.startStop
