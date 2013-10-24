@@ -161,7 +161,7 @@
   tar -xzf scid_vs_pc-4.10.tgz
   cd scid_vs_pc-4.10
   ./configure
-  make install
+  sudo make install
   scid
   ______________________________________________________________________
 
