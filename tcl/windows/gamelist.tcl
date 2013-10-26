@@ -302,7 +302,7 @@ proc ::windows::gamelist::OpenClose {} {
     ::windows::gamelist::displayButtons
   }
   $w.tree tag bind click2 <Double-Button-1> {::windows::gamelist::Load [%W set [%W focus] Number]}
-  $w.tree tag configure deleted -foreground gray80
+  $w.tree tag configure deleted -foreground gray50
   $w.tree tag configure error -foreground red
   # bind $w.tree <ButtonRelease-1> { parray ::ttk::treeview::State}
 
@@ -667,7 +667,7 @@ proc ::windows::gamelist::checkAltered {} {
       # OSX treeview selection colour is different
       $w tag configure current -foreground steelblue3
     } else {
-      $w tag configure current -foreground skyblue2
+      $w tag configure current -foreground blue2
     }
   }
 }
