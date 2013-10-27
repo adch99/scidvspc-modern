@@ -619,10 +619,26 @@ proc ::windows::gamelist::OpenClose {} {
 }
 
 proc ::windows::gamelist::Popup {w x y X Y} {
+
+  # identify region requires at least tk 8.5.9
+  # identify row have scrollbar problems (- fulvio)
+  if {[catch {set region [$w identify region $x $y] }] != 0} {
+    if {[$w identify row $x $y] == "" } {
+      set region heading
+    } else {
+      set region cell
+    }
+  }
+
+  if { $region != "cell" } {
+    return
+  }
+
   event generate $w <ButtonPress-1> -x $x -y $y
   # set number [$w set [$w focus] Number]
   # set number [string trim $number "\n"]
 
+  # nb - redefined $w here
   set w .glistWin
   set menu .glistPopup
 
