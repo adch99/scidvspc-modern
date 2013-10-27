@@ -482,6 +482,7 @@ proc ::windows::gamelist::OpenClose {} {
   button $w.b.removeabove -text Rem -image arrow_up -compound right -font font_Small -relief flat -command {::windows::gamelist::removeFromFilter up}
   button $w.b.removebelow -text Rem -image arrow_down -compound right -font font_Small -relief flat -command {::windows::gamelist::removeFromFilter down}
   button $w.b.reset -textvar ::tr(Reset) -font font_Small -relief flat -command ::search::filter::reset
+  button $w.b.negate -text [lindex [tr SearchNegate] 0] -font font_Small -relief flat -command ::search::filter::negate
 
   ### Filter items against the find entry widget
    button $w.b.filter -font font_Small -relief flat -textvar ::tr(Filter) \
@@ -510,8 +511,8 @@ proc ::windows::gamelist::OpenClose {} {
 
   pack $w.b.findcase -side right
   pack $w.b.find -side right ; # -expand 1 -fill x
-  pack $w.b.findlabel $w.b.filter -side right ; # $w.b.reset # too crowded
-  pack $w.b.save $w.b.bkm $w.b.gfirst $w.b.gprev $w.b.gnext $w.b.glast $w.b.select $w.b.remove $w.b.reset -side left
+  pack $w.b.findlabel $w.b.filter $w.b.negate $w.b.reset -side right ; # $w.b.reset # too crowded
+  pack $w.b.save $w.b.bkm $w.b.gfirst $w.b.gprev $w.b.gnext $w.b.glast -side left
 
   ### Bottom row of buttons , etc
 
@@ -543,10 +544,10 @@ proc ::windows::gamelist::OpenClose {} {
     updateGameinfo
   }
 
-  button $w.c.empty -text {Compact} -font font_Small -command "compactGames $w ; configDeleteButtons"
+  button $w.c.compact -text {Compact} -font font_Small -command "compactGames $w ; configDeleteButtons"
 
   # Flag Menubutton
-  menubutton $w.c.title -menu $w.c.title.m -indicatoron 1 -relief flat -font font_Small
+  menubutton $w.c.title -menu $w.c.title.m -indicatoron 1 -relief raised -font font_Small
   menu $w.c.title.m -font font_Small
 
   foreach flag $maintFlaglist  {
@@ -581,8 +582,8 @@ proc ::windows::gamelist::OpenClose {} {
   button $w.c.help  -textvar ::tr(Help) -width 5 -font font_Small -command { helpWindow GameList }
   button $w.c.close -textvar ::tr(Close) -font font_Small -command { focus .main ; destroy .glistWin }
 
-  pack $w.c.close -side right -padx 3 ; # $w.c.help
-  pack $w.c.current $w.c.goto $w.c.title $w.c.flag $w.c.delete $w.c.empty $w.c.export -side left -padx 3
+  pack $w.c.close $w.c.export $w.c.compact -side right -padx 3 ; # $w.c.help
+  pack $w.c.current $w.c.goto $w.c.title $w.c.flag -side left -padx 3
 
   if {$::windowsOS} {
     # cant focus entry combo on windows as it hogs the wheelmouse
@@ -620,25 +621,25 @@ proc ::windows::gamelist::OpenClose {} {
 
 proc ::windows::gamelist::Popup {w x y X Y} {
 
-  # identify region requires at least tk 8.5.9
-  # identify row have scrollbar problems (- fulvio)
-  if {[catch {set region [$w identify region $x $y] }] != 0} {
-    if {[$w identify row $x $y] == "" } {
-      set region heading
-    } else {
-      set region cell
-    }
-  }
+  set row [$w identify row $x $y]
+  set selection [$w selection]
 
-  if { $region != "cell" } {
+  if {$row == "" } {
     return
   }
 
-  event generate $w <ButtonPress-1> -x $x -y $y
+  if {[lsearch $selection $row] == -1 || [llength $selection] == 1} {
+    set menutype full
+    event generate $w <ButtonPress-1> -x $x -y $y
+  } else {
+    set menutype short
+  }
+
   # set number [$w set [$w focus] Number]
   # set number [string trim $number "\n"]
 
-  # nb - redefined $w here
+  ### nb - redefined $w here
+
   set w .glistWin
   set menu .glistPopup
 
@@ -648,14 +649,23 @@ proc ::windows::gamelist::Popup {w x y X Y} {
 
   menu $menu -tearoff 0
 
+  if {$menutype == "short"} {
+  $menu add command -label $::tr(GlistRemoveThisGameFromFilter) -command ::windows::gamelist::Remove
+  $menu add command -label $::tr(GlistDeleteField) -command "$w.c.delete invoke"
+  $menu add command -label $::tr(SetFilter) -command "$w.b.select invoke"
+  $menu add separator
+  $menu add command -label $::tr(Reset) -command "$w.b.reset invoke"
+  } else {
   $menu add command -label $::tr(LoadGame) -command "$w.c.load invoke"
   $menu add command -label $::tr(Browse) -command "$w.c.browse invoke"
   $menu add command -label $::tr(GlistDeleteField) -command "$w.c.delete invoke"
+  $menu add command -label $::tr(SetFilter) -command "$w.b.select invoke"
   $menu add separator
   $menu add command -label $::tr(GlistRemoveThisGameFromFilter) -command ::windows::gamelist::Remove
   $menu add command -label $::tr(GlistRemoveGameAndAboveFromFilter) -command "$w.b.removeabove invoke"
   $menu add command -label $::tr(GlistRemoveGameAndBelowFromFilter) -command "$w.b.removebelow invoke"
   $menu add command -label $::tr(Reset) -command "$w.b.reset invoke"
+  }
 
   tk_popup $menu [winfo pointerx .] [winfo pointery .]
 }
@@ -729,7 +739,7 @@ proc configDeleteButtons {} {
   # debug puts [sc_base current] &&&
   if {[sc_base current] == [sc_info clipbase]} {
     ### Can't compact clipbase
-    $w.c.empty configure -state disabled
+    $w.c.compact configure -state disabled
     $w.c.flag configure -state normal
     $w.c.title configure -state normal
     $w.c.delete configure -state normal
@@ -737,7 +747,7 @@ proc configDeleteButtons {} {
     $w.c.flag configure -state disabled
     $w.c.title configure -state disabled
     $w.c.delete configure -state disabled
-    $w.c.empty configure -state disabled
+    $w.c.compact configure -state disabled
   } else {
 
     ### do we want to always check the delete and flag buttons ? &&&
@@ -747,13 +757,13 @@ proc configDeleteButtons {} {
     $w.c.flag configure -state normal
     $w.c.title configure -state normal
     $w.c.delete configure -state normal
-    $w.c.empty configure -state normal
+    $w.c.compact configure -state normal
 
     ### too slow!
     # if {[compactGamesNull]} 
-    #  $w.c.empty configure -state disabled
+    #  $w.c.compact configure -state disabled
     # else 
-    #  $w.c.empty configure -state normal
+    #  $w.c.compact configure -state normal
   }
 }
 

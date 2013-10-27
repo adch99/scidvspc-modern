@@ -1603,8 +1603,7 @@ This can be done by the <b>Compact</b> button, or
 <li><img tb_gprev> - load previous filter game</li>
 <li><img tb_gnext> - load next filter game</li>
 <li><img tb_glast> - load last filter game</li>
-<li><b>Set Filter</b> - set the filter to higlighted games</li>
-<li><b>Remove</b> - remove highlighted games from filter</li>
+<li><b>Negate</b> - negate game filter</li>
 <li><b>Reset</b> - resets game filter</li>
 <li><b>Filter</b> - performs a general filter for entered text</li>
 <li><b>Find</b> - perform a (slow) general find for entered text</li>
@@ -1612,7 +1611,6 @@ This can be done by the <b>Compact</b> button, or
 <li><b>Current</b> - highlights the current game (if it has not been filtered)</li>
 <li><b>Flag Menubutton</b> - select which User Flag to work with</li>
 <li><b>Flag</b> - toggles the selected User Flag for selected games</li>
-<li><b>Delete</b> - toggles the delete flag for selected games</li>
 <li><b>Compact</b> - perform database compaction.</li>
 <li><b>Save</b> - save the current filter as a text file.</li>
 </ul>
