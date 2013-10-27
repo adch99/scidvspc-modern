@@ -486,7 +486,7 @@ if {0} {
     menubutton $w.left.add -text $::tr(AddMove) -menu $w.left.add.otherMoves -indicatoron 1
     menu $w.left.add.otherMoves
 
-    menubutton $w.left.remove -text "$::tr(GlistDeleteField) $::tr(GlistMoveField)" -menu $w.left.remove.otherMoves -indicatoron 1
+    menubutton $w.left.remove -text "$::tr(GlistRemoveThisGameFromFilter) $::tr(GlistMoveField)" -menu $w.left.remove.otherMoves -indicatoron 1
     menu $w.left.remove.otherMoves
     
     frame $w.left.space1 -height 60

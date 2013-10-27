@@ -1000,7 +1000,7 @@ translate Y GlistFindText {Naði tekst}
 translate Y GlistMoveField {Move} ;# ***
 translate Y GlistEditField {Configure} ;# ***
 translate Y GlistAddField {Add} ;# ***
-translate Y GlistDeleteField {Remove} ;# ***
+translate Y GlistDeleteField {Delete} ;# ***
 translate Y GlistWidth {Width} ;# ***
 translate Y GlistAlign {Align} ;# ***
 translate Y GlistColor {Color} ;# ***

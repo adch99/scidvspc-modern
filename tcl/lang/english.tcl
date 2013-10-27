@@ -868,17 +868,17 @@ translate E GlistFindText {Find}
 translate E GlistMoveField {Move}
 translate E GlistEditField {Configure}
 translate E GlistAddField {Add}
-translate E GlistDeleteField {Remove}
+translate E GlistDeleteField {Delete}
 translate E GlistWidth {Width}
 translate E GlistAlign {Align}
 translate E GlistColor {Color}
 translate E GlistSep {Separator}
 
 # menu shown with right mouse button down on game list. 
-translate E GlistRemoveThisGameFromFilter  {Remove this game from Filter}
-translate E GlistRemoveGameAndAboveFromFilter  {Remove game (and all above it) from Filter}
-translate E GlistRemoveGameAndBelowFromFilter  {Remove game (and all below it) from Filter}
-translate E GlistDeleteGame {(Un)Delete this game} 
+translate E GlistRemoveThisGameFromFilter  {Remove}
+translate E GlistRemoveGameAndAboveFromFilter  {Remove all above}
+translate E GlistRemoveGameAndBelowFromFilter  {Remove all below}
+translate E GlistDeleteGame {Delete this game} 
 translate E GlistDeleteAllGames {Delete all games in filter} 
 translate E GlistUndeleteAllGames {Undelete all games in filter} 
 

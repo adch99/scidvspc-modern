@@ -1565,9 +1565,10 @@ set helpTitle(GameList) "Game List window"
 set helpText(GameList) {<h1>The Game List</h1>
 
 <p>The <run ::windows::gamelist::OpenClose><green>Game List</green></run>
-widget allows easy perusal of all filtered games in the currently open Database / PGN archive.</p>
-<p>Below the Gamelist are two rows of buttons (which can be hidden by right-clicking the Gamelist),
+widget allows easy perusal of all filtered games in the currently open Database/PGN archive.</p>
+<p>Below the Gamelist are two rows of buttons (which can be hidden by middle-clicking the Gamelist),
 and at the bottom you'll find the <a Switcher>Database Switcher</a>.</p>
+<p>Right-clicking the gamelist presents a context menu for various actions.</p>
 <p>Quick searches can be performed by entering text in the entry box and clicking the <b>Find</b> or <b>Filter</b> buttons.
 Use "+" as a logical AND with the <b>Filter</b> button. For example: "Kasparov+Karpov".</p>
 <p><i>For more info about Searches and Filters, <a Searches>see here</a> or below</i>.</p>
@@ -1602,20 +1603,18 @@ This can be done by the <b>Compact</b> button, or
 <li><img tb_gprev> - load previous filter game</li>
 <li><img tb_gnext> - load next filter game</li>
 <li><img tb_glast> - load last filter game</li>
-<li><b>Current</b> - highlights the current game (if it has not been filtered)</li>
-<li><b>Select </b> - set the filter to higlighted games</li>
+<li><b>Set Filter</b> - set the filter to higlighted games</li>
 <li><b>Remove</b> - remove highlighted games from filter</li>
-<li><b>Rem <img arrow_up></b> - remove all games above</li>
-<li><b>Rem <img arrow_down></b> - remove all games below</li>
 <li><b>Reset</b> - resets game filter</li>
 <li><b>Filter</b> - performs a general filter for entered text</li>
 <li><b>Find</b> - perform a (slow) general find for entered text</li>
 <br>
-<li><b>Flag</b> - toggles the selected User Flag for selected games</li>
+<li><b>Current</b> - highlights the current game (if it has not been filtered)</li>
 <li><b>Flag Menubutton</b> - select which User Flag to work with</li>
-<li><b>Browse</b> - shows selected game in a pop-up window (resizable using Control+Wheel or Control+Shift+Left/Right). From here it is possible to <a GameList Browsing>merge</a> games.</li>
+<li><b>Flag</b> - toggles the selected User Flag for selected games</li>
 <li><b>Delete</b> - toggles the delete flag for selected games</li>
 <li><b>Compact</b> - perform database compaction.</li>
+<li><b>Save</b> - save the current filter as a text file.</li>
 </ul>
 </p>
 <h3>Other Features</h3>
@@ -1624,7 +1623,8 @@ This can be done by the <b>Compact</b> button, or
 <li>Multiple games can be selected by using Shift or Control while single clicking. <lt>Control+A<gt> selects all visible games.</li>
 <li>Resize column widths by dragging the column edge.</li>
 <li>Drag and Drop files to the switcher (from Windows/KDE/Gnome).</li>
-<li>Right-click the gamelist to hide the button bar.</li>
+<li>Right-click for context menu.</li>
+<li>Middle-click the gamelist to hide the button bar.</li>
 </ul>
 
   <h3><name Browsing>Browsing and Merging Games</name></h3>
@@ -1639,7 +1639,7 @@ This can be done by the <b>Compact</b> button, or
 <p><i>The board size can be resized by Control+Wheelmouse or Control+Shift+Left/Right.</i></p>
   
 
-  <p><footer>Updated: Scid vs. PC 4.11, September 2013</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.11, October 2013</footer></p>
 }
 
 

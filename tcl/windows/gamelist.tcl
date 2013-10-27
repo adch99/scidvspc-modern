@@ -297,9 +297,12 @@ proc ::windows::gamelist::OpenClose {} {
 
   # this font is working, but doesn't affect how many entries fit on a screen, and isn't enabled
   $w.tree tag configure treefont -font font_Regular
-  bind $w.tree <Button-3> {
+  bind $w.tree <Button-2> {
     set ::windows::gamelist::showButtons [expr {!$::windows::gamelist::showButtons}]
     ::windows::gamelist::displayButtons
+  }
+  bind $w.tree <Button-3> {
+    ::windows::gamelist::Popup %W %x %y %X %Y
   }
   $w.tree tag bind click2 <Double-Button-1> {::windows::gamelist::Load [%W set [%W focus] Number]}
   $w.tree tag configure deleted -foreground gray50
@@ -466,32 +469,18 @@ proc ::windows::gamelist::OpenClose {} {
     }
   }
 
-  ### Filter items. (Delete items is different)
-  button $w.b.remove -textvar ::tr(GlistDeleteField) -font font_Small -relief flat -command {
-    set items [.glistWin.tree selection]
-    foreach i $items {
-      sc_filter remove [.glistWin.tree set $i Number]
-    }
-    set gl_num [.glistWin.tree set [.glistWin.tree next [lindex $items end]] Number]
-    .glistWin.tree delete $items
-
-    ::windows::stats::Refresh
-    ::windows::gamelist::Refresh
-    ::windows::gamelist::showNum $gl_num nobell
-
-    set ::windows::gamelist::finditems {}
-    setGamelistTitle
-  }
+  ### Filter items
+  button $w.b.remove -textvar ::tr(GlistRemoveThisGameFromFilter) -font font_Small -relief flat -command ::windows::gamelist::Remove
   # Trim extra space from this crowded frame
   if {!$::windowsOS} {
     $w.b.remove configure -width 5
     $w.b.select configure -width 5
   }
-  bind $w.tree <Delete> "$w.b.remove invoke"
+  bind $w.tree <Delete> "::windows::gamelist::Remove 1"
 
 
-  button $w.b.removeabove -text Rem -image arrow_up -compound right -font font_Small -relief flat -command {removeFromFilter up}
-  button $w.b.removebelow -text Rem -image arrow_down -compound right -font font_Small -relief flat -command {removeFromFilter down}
+  button $w.b.removeabove -text Rem -image arrow_up -compound right -font font_Small -relief flat -command {::windows::gamelist::removeFromFilter up}
+  button $w.b.removebelow -text Rem -image arrow_down -compound right -font font_Small -relief flat -command {::windows::gamelist::removeFromFilter down}
   button $w.b.reset -textvar ::tr(Reset) -font font_Small -relief flat -command ::search::filter::reset
 
   ### Filter items against the find entry widget
@@ -522,7 +511,7 @@ proc ::windows::gamelist::OpenClose {} {
   pack $w.b.findcase -side right
   pack $w.b.find -side right ; # -expand 1 -fill x
   pack $w.b.findlabel $w.b.filter -side right ; # $w.b.reset # too crowded
-  pack $w.b.save $w.b.bkm $w.b.gfirst $w.b.gprev $w.b.gnext $w.b.glast $w.b.select $w.b.remove $w.b.removeabove $w.b.removebelow -side left
+  pack $w.b.save $w.b.bkm $w.b.gfirst $w.b.gprev $w.b.gnext $w.b.glast $w.b.select $w.b.remove $w.b.reset -side left
 
   ### Bottom row of buttons , etc
 
@@ -549,6 +538,7 @@ proc ::windows::gamelist::OpenClose {} {
 
   button $w.c.delete -text $::tr(Delete) -font font_Small -command {
     ::windows::gamelist::ToggleFlag D
+    ::windows::gamelist::Refresh
     configDeleteButtons
     updateGameinfo
   }
@@ -592,7 +582,7 @@ proc ::windows::gamelist::OpenClose {} {
   button $w.c.close -textvar ::tr(Close) -font font_Small -command { focus .main ; destroy .glistWin }
 
   pack $w.c.close -side right -padx 3 ; # $w.c.help
-  pack $w.c.current $w.c.goto $w.c.title $w.c.flag $w.c.browse $w.c.delete $w.c.empty $w.c.export -side left -padx 3
+  pack $w.c.current $w.c.goto $w.c.title $w.c.flag $w.c.delete $w.c.empty $w.c.export -side left -padx 3
 
   if {$::windowsOS} {
     # cant focus entry combo on windows as it hogs the wheelmouse
@@ -626,6 +616,51 @@ proc ::windows::gamelist::OpenClose {} {
   ::createToplevelFinalize $w
 
   bind $w <Configure> {::windows::gamelist::Configure %W }
+}
+
+proc ::windows::gamelist::Popup {w x y X Y} {
+  event generate $w <ButtonPress-1> -x $x -y $y
+  # set number [$w set [$w focus] Number]
+  # set number [string trim $number "\n"]
+
+  set w .glistWin
+  set menu .glistPopup
+
+  if { [winfo exists $menu] } {
+    destroy $menu
+  }
+
+  menu $menu -tearoff 0
+
+  $menu add command -label $::tr(LoadGame) -command "$w.c.load invoke"
+  $menu add command -label $::tr(Browse) -command "$w.c.browse invoke"
+  $menu add command -label $::tr(GlistDeleteField) -command "$w.c.delete invoke"
+  $menu add separator
+  $menu add command -label $::tr(GlistRemoveThisGameFromFilter) -command ::windows::gamelist::Remove
+  $menu add command -label $::tr(GlistRemoveGameAndAboveFromFilter) -command "$w.b.removeabove invoke"
+  $menu add command -label $::tr(GlistRemoveGameAndBelowFromFilter) -command "$w.b.removebelow invoke"
+  $menu add command -label $::tr(Reset) -command "$w.b.reset invoke"
+
+  tk_popup $menu [winfo pointerx .] [winfo pointery .]
+}
+
+proc ::windows::gamelist::Remove {{shownext 0}} {
+  set w .glistWin.tree
+  set items [$w selection]
+  foreach i $items {
+    sc_filter remove [$w set $i Number]
+  }
+  set gl_num [$w set [$w next [lindex $items end]] Number]
+  $w delete $items
+
+  ::windows::stats::Refresh
+  ::windows::gamelist::Refresh
+  if {$shownext} {
+    ::windows::gamelist::showNum $gl_num nobell
+  }
+
+  set ::windows::gamelist::finditems {}
+  setGamelistTitle
 }
 
 proc ::windows::gamelist::displayButtons {} {
@@ -1023,18 +1058,11 @@ proc ::windows::gamelist::ToggleFlag {flag} {
   }
 }
 
-### Remove rom filter all games above or below the selected item(s)
+### Remove from filter all games above or below the selected item(s)
 
-proc removeFromFilter {dir} {
+proc ::windows::gamelist::removeFromFilter {dir} {
 
-  set items [.glistWin.tree selection]
-
-  # in case of multiple items selected
-  if {$dir == {up}} {
-    set i [lindex $items 0]
-  } else {
-    set i [lindex $items end]
-  }
+  set i [.glistWin.tree selection]
 
   set gl_num [.glistWin.tree set $i Number]
 
