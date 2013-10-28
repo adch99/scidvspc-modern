@@ -1,19 +1,15 @@
 ### Menus.tcl: part of Scid.
 ### Copyright (C) 2001-2003 Shane Hudson.
 
-############################################################
-###  Status bar help for menu items, buttons, etc:
-
 # Keep menus on right hand side (X11)
 catch {tk::classic::restore menu}
 
 array set helpMessage {}
 set showHelp 0
 
-# statusBarHelp:
 #   Called when a button or menu entry is entered to display
 #   a status bar help message if applicable.
-#
+
 proc statusBarHelp {window {item {}}} {
   global showHelp helpMessage statusBar language
 
@@ -61,9 +57,8 @@ proc statusBarHelp {window {item {}}} {
   }
 }
 
-# statusBarRestore:
 #   Updates a status bar that was displaying a help message.
-#
+
 proc statusBarRestore {window} {
   global showHelp statusBar
 
@@ -154,7 +149,7 @@ if {$::gameInfo(showMenu)} {
 foreach menuname { file edit game search windows play tools options help } {
   menu .menu.$menuname
 }
-# .menu.file configure -tearoff 1
+
 .menu.windows configure -tearoff 1
 .menu.options configure -tearoff 1
 .menu.help configure -tearoff 1
@@ -331,6 +326,8 @@ $m add command -label EditUndo -command {sc_game undo ; updateBoard -pgn}
 set helpMessage($m,[incr menuindex]) EditUndo
 $m add command -label EditRedo -command {sc_game redo ; updateBoard -pgn}
 set helpMessage($m,[incr menuindex]) EditRedo
+bind .main <Control-z> {sc_game undo ; updateBoard -pgn}
+bind .main <Control-y> {sc_game redo ; updateBoard -pgn}
 
 $m add separator
 incr menuindex
@@ -1682,11 +1679,10 @@ proc setLanguageMenus {{lang ""}} {
   ::preport::ConfigMenus
   updateGameinfo
   updateStatusBar
-  # todo &&&  Update docking tab lables (setTitle)
+  # todo &&&  Update docking tab labels (setTitle)
 
-  # Check for duplicate menu underline characters in this language:
-  # set ::verifyMenus 1
-  if {[info exists ::verifyMenus] && $::verifyMenus} {
+  # Check for duplicate menu underline characters in this language
+  if {0} {
     foreach m {file edit game search windows tools options help} {
       set list [checkMenuUnderline .menu.$m]
       if {[llength $list] > 0} {
@@ -1694,6 +1690,7 @@ proc setLanguageMenus {{lang ""}} {
       }
     }
   }
+
 }
 
 # checkMenuUnderline:
@@ -1723,8 +1720,7 @@ proc checkMenuUnderline {menu} {
 }
 
 
-# standardShortcuts:
-#    Sets up a number of standard shortcut keys for the specified window.
+### Standard keyboard shortcuts for most windows
 
 proc standardShortcuts {w} {
   if {! [winfo exists $w]} { return }
@@ -1758,10 +1754,7 @@ proc standardShortcuts {w} {
   bind $w <Control-Z> ::tools::graphs::score::Toggle
   bind $w <Control-I> importPgnGame
 
-  bind $w <Control-z> {  sc_game undo ; updateBoard -pgn }
-  bind $w <Control-y> {  sc_game redo ; updateBoard -pgn }
-
-
+  ### These should probably be moved to a different proc/place - S.A.
   # extra generic bindings added for Scid 3.6.24 : hope there is no conflict
   bind $w <Home>  ::move::Start
   bind $w <Up> {
@@ -1771,15 +1764,14 @@ proc standardShortcuts {w} {
       ::move::Back 10
     }
   }
-  bind $w <Left>  { ::move::Back }
+  bind $w <Left>  ::move::Back
   bind $w <Down>  {::move::Forward 10}
   bind $w <Right> ::move::Forward
   bind $w <End>   ::move::End
-  bind $w <F2> {::startAnalysisWin F2}
-  bind $w <F3> {::startAnalysisWin F3}
-  bind $w <F4> {::startAnalysisWin F4}
-  # bind $w <Control-c> copyGame
-  # bind $w <Control-v> pasteGame
+  bind $w <F2>    {::startAnalysisWin F2}
+  bind $w <F3>    {::startAnalysisWin F3}
+  bind $w <F4>    {::startAnalysisWin F4}
+
   bind $w <Control-S> ::setupBoard
   bind $w <Control-C> ::copyFEN
   bind $w <Control-V> ::pasteFEN
