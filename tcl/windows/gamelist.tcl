@@ -641,7 +641,7 @@ proc ::windows::gamelist::Popup {w x y X Y} {
   ### nb - redefined $w here
 
   set w .glistWin
-  set menu .glistPopup
+  set menu .glistWin.context
 
   if { [winfo exists $menu] } {
     destroy $menu
