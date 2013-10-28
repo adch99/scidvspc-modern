@@ -1612,7 +1612,7 @@ This can be done by the <b>Compact</b> button, or
 <li><b>Flag Menubutton</b> - select which User Flag to work with</li>
 <li><b>Flag</b> - toggles the selected User Flag for selected games</li>
 <li><b>Compact</b> - perform database compaction.</li>
-<li><b>Save</b> - save the current filter as a text file.</li>
+<li><b>Save</b> - save the current filter as a text file, using a 'printf' style format.</li>
 </ul>
 </p>
 <h3>Other Features</h3>

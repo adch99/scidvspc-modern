@@ -1113,40 +1113,42 @@ trace variable glexport w updateExportGList
 
 proc openExportGList {} {
   global glexport
-  set w .glexport
 
   if {[sc_filter count] < 1} {
     tk_messageBox -type ok -icon info -title "Scid" \
-      -message "This are no games in the current filter." -parent .glistWin
+      -message "There are no games in the filter." -parent .glistWin
     return
   }
+
+  set w .glexport
 
   if {[winfo exists $w]} {
     raiseWin $w
     updateExportGList
     return
   }
-  toplevel $w
-  wm title $w "Save Game List"
 
-  label $w.lfmt -text "Format" -font font_Bold
-  pack $w.lfmt -side top
-  entry $w.fmt -textvar glexport -font font_Fixed
-  pack $w.fmt -side top -fill x
+  toplevel $w
+  wm state $w withdrawn
+  wm title $w "Save Game List"
+  wm resizable $w 1 0
+
+  pack [frame $w.format] -side top -fill x -expand 1 -pady 5
+  label $w.format.lfmt -text "Format" -font font_Bold
+  pack $w.format.lfmt -side left -padx 5
+  entry $w.format.fmt -textvar glexport -font font_Fixed
+  pack $w.format.fmt -side right -fill x -expand 1 -padx 3
+
   text $w.tfmt -width 1 -height 5 -font font_Fixed -wrap none -relief flat
   pack $w.tfmt -side top -fill x
-  $w.tfmt insert end "w White            b Black            "
-  $w.tfmt insert end "W White Elo        B Black Elo        \n"
-  $w.tfmt insert end "m Moves count      r Result           "
-  $w.tfmt insert end "y Year             d Date             \n"
-  $w.tfmt insert end "e Event            s Site             "
-  $w.tfmt insert end "n Round            o ECO code         \n"
-  $w.tfmt insert end "g Game number      f Filtered number  "
-  $w.tfmt insert end "F Final material   S Non-std start pos\n"
-  $w.tfmt insert end "D Deleted flag     U User flags       "
-  $w.tfmt insert end "C Comments flag    V Variations flag  \n"
+  $w.tfmt insert end \
+"w White            b Black            W White Elo        B Black Elo
+m Moves count      r Result           y Year             d Date
+e Event            s Site             n Round            o ECO code
+g Game number      f Filtered number  F Final material   S Non-std start pos
+D Deleted flag     U User flags       C Comments flag    V Variations flag  \n"
+
   $w.tfmt configure -cursor top_left_arrow -state disabled
-  addHorizontalRule $w
   label $w.lpreview -text $::tr(Preview) -font font_Bold
   pack $w.lpreview -side top
   text $w.preview -width 80 -height 5 -font font_Fixed \
@@ -1154,17 +1156,20 @@ proc openExportGList {} {
   scrollbar $w.xbar -orient horizontal -command "$w.preview xview"
   pack $w.preview -side top -fill x
   pack $w.xbar -side top -fill x
-  addHorizontalRule $w
-  pack [frame $w.b] -side bottom -fill x
+  pack [frame $w.b] -side bottom -fill x -pady 5
   dialogbutton $w.b.default -text "Default" -command {set glexport $glexportDefault}
   dialogbutton $w.b.ok -text "OK" -command saveExportGList
-  dialogbutton $w.b.close -textvar ::tr(Cancel) -command "focus .main ; destroy $w"
-  pack $w.b.close $w.b.ok -side right -padx 5 -pady 2
-  pack $w.b.default -side left -padx 5 -pady 2
-  wm resizable $w 1 0
-  focus $w.fmt
-  $w.fmt icursor end
+  dialogbutton $w.b.close -textvar ::tr(Cancel) -command "destroy $w"
+  bind $w <Escape> "destroy $w"
+  pack $w.b.close $w.b.ok -side right -padx 10
+  pack $w.b.default -side left -padx 10
+  focus $w.format.fmt
+  $w.format.fmt icursor end
   updateExportGList
+
+  update
+  placeWinOverParent $w .glistWin
+  wm state $w normal
 }
 
 proc updateExportGList {args} {
@@ -1200,10 +1205,7 @@ proc saveExportGList {} {
     tk_messageBox -type ok -icon warning -title "Scid" -message $err
     return
   }
-  focus .main
-  grab release .glexport
   destroy .glexport
-  return
 }
 
 ### end of gamelist.tcl
