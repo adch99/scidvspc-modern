@@ -932,9 +932,9 @@ translate I GlistWidth {Larghezza}
 translate I GlistAlign {Allinea}
 translate I GlistColor {Colore}
 translate I GlistSep {Separatore}
-translate I GlistRemoveThisGameFromFilter  {Rimuovi questa partita dal filtro}
-translate I GlistRemoveGameAndAboveFromFilter  {Rimuovi la partita (e le precedenti) dal filtro}
-translate I GlistRemoveGameAndBelowFromFilter  {Rimuovi la partita (e le seguenti) dal filtro}
+translate I GlistRemoveThisGameFromFilter  {Rimuovi}
+translate I GlistRemoveGameAndAboveFromFilter  {Rimuovi la partita (e le precedenti)}
+translate I GlistRemoveGameAndBelowFromFilter  {Rimuovi la partita (e le seguenti)}
 translate I GlistDeleteGame {Elimina/Recupera questa partita}
 translate I GlistDeleteAllGames {Elimina tutte le partite nel filtro}
 translate I GlistUndeleteAllGames {Recupera tutte le partite nel filtro}

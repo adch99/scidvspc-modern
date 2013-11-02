@@ -935,11 +935,11 @@ translate H GlistAlign {Igazít}
 translate H GlistColor {Szín}
 translate H GlistSep {Elválasztó}
 # ====== TODO To be translated ======
-translate H GlistRemoveThisGameFromFilter  {Remove this game from Filter}
+translate H GlistRemoveThisGameFromFilter  {Remove}
 # ====== TODO To be translated ======
-translate H GlistRemoveGameAndAboveFromFilter  {Remove game (and all above it) from Filter}
+translate H GlistRemoveGameAndAboveFromFilter  {Remove all above}
 # ====== TODO To be translated ======
-translate H GlistRemoveGameAndBelowFromFilter  {Remove game (and all below it) from Filter}
+translate H GlistRemoveGameAndBelowFromFilter  {Remove all below}
 # ====== TODO To be translated ======
 translate H GlistDeleteGame {(Un)Delete this game} 
 # ====== TODO To be translated ======

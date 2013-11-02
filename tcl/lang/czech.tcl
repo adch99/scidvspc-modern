@@ -928,11 +928,11 @@ translate C GlistAlign {Zarovnat}
 translate C GlistColor {Barva}
 translate C GlistSep {Oddìlovaè}
 # ====== TODO To be translated ======
-translate C GlistRemoveThisGameFromFilter  {Remove this game from Filter}
+translate C GlistRemoveThisGameFromFilter  {Remove}
 # ====== TODO To be translated ======
-translate C GlistRemoveGameAndAboveFromFilter  {Remove game (and all above it) from Filter}
+translate C GlistRemoveGameAndAboveFromFilter  {Remove game (and all above it)}
 # ====== TODO To be translated ======
-translate C GlistRemoveGameAndBelowFromFilter  {Remove game (and all below it) from Filter}
+translate C GlistRemoveGameAndBelowFromFilter  {Remove game (and all below it)}
 # ====== TODO To be translated ======
 translate C GlistDeleteGame {(Un)Delete this game} 
 # ====== TODO To be translated ======

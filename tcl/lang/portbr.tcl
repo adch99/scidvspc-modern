@@ -934,11 +934,11 @@ translate B GlistAlign {Alinhar}
 translate B GlistColor {Cor}
 translate B GlistSep {Separador}
 # ====== TODO To be translated ======
-translate B GlistRemoveThisGameFromFilter  {Remove this game from Filter}
+translate B GlistRemoveThisGameFromFilter  {Remove}
 # ====== TODO To be translated ======
-translate B GlistRemoveGameAndAboveFromFilter  {Remove game (and all above it) from Filter}
+translate B GlistRemoveGameAndAboveFromFilter  {Remove game (and all above it)}
 # ====== TODO To be translated ======
-translate B GlistRemoveGameAndBelowFromFilter  {Remove game (and all below it) from Filter}
+translate B GlistRemoveGameAndBelowFromFilter  {Remove game (and all below it)}
 # ====== TODO To be translated ======
 translate B GlistDeleteGame {(Un)Delete this game} 
 # ====== TODO To be translated ======

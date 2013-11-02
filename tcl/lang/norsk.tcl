@@ -1006,11 +1006,11 @@ translate O GlistAlign {Justering}
 translate O GlistColor {Farge}
 translate O GlistSep {Skilletegn}
 # ====== TODO To be translated ======
-translate O GlistRemoveThisGameFromFilter  {Remove this game from Filter}
+translate O GlistRemoveThisGameFromFilter  {Remove}
 # ====== TODO To be translated ======
-translate O GlistRemoveGameAndAboveFromFilter  {Remove game (and all above it) from Filter}
+translate O GlistRemoveGameAndAboveFromFilter  {Remove game (and all above it)}
 # ====== TODO To be translated ======
-translate O GlistRemoveGameAndBelowFromFilter  {Remove game (and all below it) from Filter}
+translate O GlistRemoveGameAndBelowFromFilter  {Remove game (and all below it)}
 # ====== TODO To be translated ======
 translate O GlistDeleteGame {(Un)Delete this game} 
 # ====== TODO To be translated ======

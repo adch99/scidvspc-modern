@@ -894,9 +894,9 @@ translate D GlistWidth {Breite}
 translate D GlistAlign {Ausrichtung}
 translate D GlistColor {Farbe}
 translate D GlistSep {Trennlinie}
-translate D GlistRemoveThisGameFromFilter  {Partie aus Filter entfernen}
-translate D GlistRemoveGameAndAboveFromFilter  {Partie (und alle oberhalb) aus Filter entfernen}
-translate D GlistRemoveGameAndBelowFromFilter  {Partie (und alle darunter) aus Filter entfernen}
+translate D GlistRemoveThisGameFromFilter  {Partie}
+translate D GlistRemoveGameAndAboveFromFilter  {Partie (und alle oberhalb)}
+translate D GlistRemoveGameAndBelowFromFilter  {Partie (und alle darunter)}
 translate D GlistDeleteGame {(Ent)Loesche Partie}
 translate D GlistDeleteAllGames {Lösche alle Partien im Filter} 
 translate D GlistUndeleteAllGames {Entlösche alle Partien im Filter} 

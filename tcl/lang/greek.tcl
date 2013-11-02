@@ -882,9 +882,9 @@ translate G GlistColor {Χρώμα}
 translate G GlistSep {Διαχωριστής}
 
 # menu shown with right mouse button down on game list. 
-translate G GlistRemoveThisGameFromFilter  {Αφαίρεση παρτίδας από Φίλτρο}
-translate G GlistRemoveGameAndAboveFromFilter  {Αφαίρεση παρτίδας (και όλες οι παραπάνω) από Φίλτρο}
-translate G GlistRemoveGameAndBelowFromFilter  {Aφαίρεση παρτίδας (και όλες οι παρακάτω) από Φίλτρο}
+translate G GlistRemoveThisGameFromFilter  {Αφαίρεση}
+translate G GlistRemoveGameAndAboveFromFilter  {Αφαίρεση παρτίδας (και όλες οι παραπάνω)}
+translate G GlistRemoveGameAndBelowFromFilter  {Aφαίρεση παρτίδας (και όλες οι παρακάτω)}
 translate G GlistDeleteGame {Διαγραφή ή Μη Παρτίδας} 
 translate G GlistDeleteAllGames {Διαγραφή φιλτραρισμένων} 
 translate G GlistUndeleteAllGames {Μη Διαγραφή φιλτραρισμένων} 

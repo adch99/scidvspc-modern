@@ -489,16 +489,17 @@ if {0} {
     menubutton $w.left.remove -text "$::tr(GlistRemoveThisGameFromFilter) $::tr(GlistMoveField)" -menu $w.left.remove.otherMoves -indicatoron 1
     menu $w.left.remove.otherMoves
     
-    frame $w.left.space1 -height 60
+    # frame $w.left.space1 -height 60
     dialogbutton $w.left.export -text $::tr(Export) -command ::book::export
     dialogbutton $w.left.save -text $::tr(Save) -command ::book::save
     frame $w.left.space2 -height 10
     dialogbutton $w.left.help -text $::tr(Help) -command {helpWindow BookTuning}
     dialogbutton $w.left.close -text $::tr(Close) -command "destroy $w"
     
-    pack $w.left.combo $w.left.add $w.left.remove $w.left.space1 -side top -padx 5 -pady 3
+    pack $w.left.combo $w.left.add $w.left.remove -side top -padx 5 -pady 3
 
-    pack $w.left.close $w.left.help $w.left.space2 $w.left.export $w.left.save -side bottom -padx 5 -pady 3
+    pack $w.left.save $w.left.export -side top -padx 5 -pady 3
+    pack $w.left.close $w.left.help $w.left.space2 -side bottom -padx 5 -pady 3
 
     bind $w.left.combo <<ComboboxSelected>> ::book::bookTuningSelect
     bind $w <Destroy> {

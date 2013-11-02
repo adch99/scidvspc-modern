@@ -1006,11 +1006,11 @@ translate Y GlistAlign {Align} ;# ***
 translate Y GlistColor {Color} ;# ***
 translate Y GlistSep {Separator} ;# ***
 # ====== TODO To be translated ======
-translate Y GlistRemoveThisGameFromFilter  {Remove this game from Filter}
+translate Y GlistRemoveThisGameFromFilter  {Remove}
 # ====== TODO To be translated ======
-translate Y GlistRemoveGameAndAboveFromFilter  {Remove game (and all above it) from Filter}
+translate Y GlistRemoveGameAndAboveFromFilter  {Remove game (and all above it)}
 # ====== TODO To be translated ======
-translate Y GlistRemoveGameAndBelowFromFilter  {Remove game (and all below it) from Filter}
+translate Y GlistRemoveGameAndBelowFromFilter  {Remove game (and all below it)}
 # ====== TODO To be translated ======
 translate Y GlistDeleteGame {(Un)Delete this game} 
 # ====== TODO To be translated ======

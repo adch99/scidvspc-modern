@@ -866,9 +866,9 @@ translate N GlistWidth {Breedte}
 translate N GlistAlign {Uitlijnen}
 translate N GlistColor {Kleuren}
 translate N GlistSep {Separator}
-translate N GlistRemoveThisGameFromFilter  {Verwijder deze partij uit het filter}
-translate N GlistRemoveGameAndAboveFromFilter  {Verwijder partij (en alle hiervoor) uit het filter}
-translate N GlistRemoveGameAndBelowFromFilter  {Verwijder partij (en alle hierna) uit het filter}
+translate N GlistRemoveThisGameFromFilter  {Verwijder}
+translate N GlistRemoveGameAndAboveFromFilter  {Verwijder alle hiervoor}
+translate N GlistRemoveGameAndBelowFromFilter  {Verwijder alle hierna}
 translate N GlistDeleteGame {Verwijder/Herstel deze partij} 
 translate N GlistDeleteAllGames {Verwijder alle gefilterde partijen} 
 translate N GlistUndeleteAllGames {Herstellen alle partijen in het filter} 

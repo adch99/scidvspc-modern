@@ -860,9 +860,9 @@ translate W GlistWidth {Bredd}
 translate W GlistAlign {Justering}
 translate W GlistColor {Färg}
 translate W GlistSep {Separator}
-translate W GlistRemoveThisGameFromFilter  {Ta bort detta parti från Filter}
-translate W GlistRemoveGameAndAboveFromFilter  {Ta bort parti (och alla ovanför det) från Filter}
-translate W GlistRemoveGameAndBelowFromFilter  {Ta bort parti (och alla nedanför det) från Filter}
+translate W GlistRemoveThisGameFromFilter  {Ta bort}
+translate W GlistRemoveGameAndAboveFromFilter  {Ta bort parti (och alla ovanför det)}
+translate W GlistRemoveGameAndBelowFromFilter  {Ta bort parti (och alla nedanför det)}
 translate W GlistDeleteGame {Ta tillbaka detta parti}
 translate W GlistDeleteAllGames {Ta bort alla partier i filtret}
 translate W GlistUndeleteAllGames {Ta tillbaka alla partier i filtret}

@@ -873,9 +873,9 @@ translate F GlistColor {Couleur}
 translate F GlistSep {Séparateur}
 
 # menu shown with right mouse button down on game list.
-translate F GlistRemoveThisGameFromFilter  {Enlever cette partie du filtre}
-translate F GlistRemoveGameAndAboveFromFilter  {Enlever cette partie (et celles au-dessus) du filtre}
-translate F GlistRemoveGameAndBelowFromFilter  {Enlever cette partie (et celles en-dessous) du filtre}
+translate F GlistRemoveThisGameFromFilter  {Enlever}
+translate F GlistRemoveGameAndAboveFromFilter  {Enlever cette partie (et celles au-dessus)}
+translate F GlistRemoveGameAndBelowFromFilter  {Enlever cette partie (et celles en-dessous)}
 translate F GlistDeleteGame {(Dés-)effacer cette partie} 
 translate F GlistDeleteAllGames {Effacer toutes les parties du filtre} 
 translate F GlistUndeleteAllGames {Dés-effacer toutes les parties du filtre} 

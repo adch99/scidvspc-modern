@@ -876,9 +876,9 @@ translate P GlistWidth {Szeroko¶æ}
 translate P GlistAlign {Wyrównanie}
 translate P GlistColor {Kolor}
 translate P GlistSep {Separator}
-translate P GlistRemoveThisGameFromFilter  {Usuñ tê partiê z filtra}
-translate P GlistRemoveGameAndAboveFromFilter  {Usuñ tê i poprzednie partie z filtra}
-translate P GlistRemoveGameAndBelowFromFilter  {Usuñ tê i nastêpne partie z filtra}
+translate P GlistRemoveThisGameFromFilter  {Usuñ}
+translate P GlistRemoveGameAndAboveFromFilter  {Usuñ tê i poprzednie partie}
+translate P GlistRemoveGameAndBelowFromFilter  {Usuñ tê i nastêpne partie}
 translate P GlistDeleteGame {Usuñ/przywróæ tê partiê} 
 translate P GlistDeleteAllGames {Usuñ wszystkie partie z filtra} 
 translate P GlistUndeleteAllGames {Przywróæ wszystkie partie z filtra} 

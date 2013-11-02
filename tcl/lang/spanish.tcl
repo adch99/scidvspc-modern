@@ -883,9 +883,9 @@ translate S GlistWidth {Anchura}
 translate S GlistAlign {Alinear}
 translate S GlistColor {Color}
 translate S GlistSep {Separador}
-translate S GlistRemoveThisGameFromFilter  {Quita esta partida del Filtro}
-translate S GlistRemoveGameAndAboveFromFilter  {Quita esta partida y todas las de arriba del Filtro}
-translate S GlistRemoveGameAndBelowFromFilter  {Quita esta partida y todas las de abajo del Filtro}
+translate S GlistRemoveThisGameFromFilter  {Quita}
+translate S GlistRemoveGameAndAboveFromFilter  {Quita esta partida y todas las de arriba}
+translate S GlistRemoveGameAndBelowFromFilter  {Quita esta partida y todas las de abajo}
 translate S GlistDeleteGame {Elimina/Recupera esta partida de la base} 
 translate S GlistDeleteAllGames {Elimina todas las partidas de la base que aparecen en el Filtro} 
 translate S GlistUndeleteAllGames {Recupera todas las partidas borradas de la base que aparecen en el filtro} 
