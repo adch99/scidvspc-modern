@@ -995,21 +995,8 @@ button .main.button.addVar -image tb_addvar -command {
     if {[sc_pos isAt vstart]  &&  [sc_pos isAt vend]} {
       return
     }
-
-    set isAt_vend [sc_pos isAt vend]
-    set lastMove [sc_game info previousMoveUCI]
-
     sc_game undoPoint
     sc_var create
-
-    if {$isAt_vend} {
-      # We're at var end, so add previous move straight away
-      if {$lastMove == {0000} } {
-	set lastMove null
-      }
-      sc_move addSan $lastMove
-    }
-
     updateBoard -pgn
 }
 
