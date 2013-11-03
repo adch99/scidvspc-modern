@@ -751,6 +751,10 @@ translate I AnnotateWhichMoves {Che si muove}
 translate I AnnotateComment {Aggiungi annotatore di commentare}
 translate I BlundersThreshold {Limite}
 translate I LowPriority {Imposta la priorità della CPU a bassa}
+# ====== TODO To be translated ======
+translate I LogEngines {Log Engines}
+# ====== TODO To be translated ======
+translate I LogName {Add Name}
 translate I ClickHereToSeeMoves {Clicca qui per vedere le mosse}
 translate I ConfigureInformant {Configura i valori informativi}
 translate I Informant!? {Mossa interessante}

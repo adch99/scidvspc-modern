@@ -740,6 +740,10 @@ translate B AnnotateComment {Adicionar anotador a comentar}
 translate B BlundersThreshold {Threshold}
 translate B LowPriority {Low CPU priority} ;# ***
 # ====== TODO To be translated ======
+translate B LogEngines {Log Engines}
+# ====== TODO To be translated ======
+translate B LogName {Add Name}
+# ====== TODO To be translated ======
 translate B ClickHereToSeeMoves {Click here to see moves}
 # ====== TODO To be translated ======
 translate B ConfigureInformant {Configure Informant}

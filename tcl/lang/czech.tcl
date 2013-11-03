@@ -734,6 +734,10 @@ translate C AnnotateComment {Vlozit do annotator komentar}
 translate C BlundersThreshold {Threshold}
 translate C LowPriority {Nízká CPU priorita}
 # ====== TODO To be translated ======
+translate C LogEngines {Log Engines}
+# ====== TODO To be translated ======
+translate C LogName {Add Name}
+# ====== TODO To be translated ======
 translate C ClickHereToSeeMoves {Click here to see moves}
 # ====== TODO To be translated ======
 translate C ConfigureInformant {Configure Informant}

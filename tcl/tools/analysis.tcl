@@ -423,7 +423,8 @@ proc ::enginelist::choose {} {
 
   label $w.buttons2.sep -text "   "
 
-  checkbutton $w.buttons2.logengines -variable analysis(logEngines) -text "Log $::tr(Engine)"
+  checkbutton $w.buttons2.logengines  -variable analysis(logEngines)  -textvar ::tr(LogEngines)
+  checkbutton $w.buttons2.logname     -variable analysis(logName)     -textvar ::tr(LogName)
   checkbutton $w.buttons2.lowpriority -variable analysis(lowPriority) -textvar ::tr(LowPriority)
   dialogbutton $w.buttons2.start -textvar ::tr(Start) -command {
     makeAnalysisWin [lindex [.enginelist.list.list curselection] 0] settime
@@ -435,7 +436,7 @@ proc ::enginelist::choose {} {
 
   pack $w.buttons.up $w.buttons.down $w.buttons.log $w.buttons.uci $w.buttons.edit $w.buttons.add $w.buttons.copy $w.buttons.delete -side left -expand yes
 
-  pack $w.buttons2.logengines $w.buttons2.lowpriority $w.buttons2.sep  -side left -pady 12 -padx 10 
+  pack $w.buttons2.logengines $w.buttons2.logname $w.buttons2.lowpriority $w.buttons2.sep  -side left -pady 12 -padx 10 
   pack $w.buttons2.close $w.buttons2.start -side right -pady 12 -padx 10 
 
   pack $w.buttons -side top -pady 12 -padx 2 -fill x
@@ -1560,12 +1561,7 @@ proc addAnalysisVariation {n} {
   sc_info preMoveCmd {}
 
   set moves $analysis(moves$n)
-  if {$analysis(uci$n)} {
-    set tmp_moves [ lindex [ lindex $analysis(multiPV$n) 0 ] 2 ]
-    set text [format "\[%s\] %d:%s" $analysis(name$n) $analysis(depth$n) [scoreToMate $analysis(score$n) $tmp_moves $n]]
-  } else  {
-    set text [format "\[%s\] %d:%+.2f" $analysis(name$n) $analysis(depth$n) $analysis(score$n)]
-  }
+  set text [formatAnalysisScore $n]
 
   if {$isAt_vend} {
     # get the last move of the game
@@ -1670,7 +1666,11 @@ proc addAllVariations {{n 1} {rightclick 0}} {
     set moves [lindex $i 2]
 
     set tmp_moves [ lindex $j 2 ]
-    set text [format "\[%s\] %d:%s" $analysis(name$n) [lindex $i 0] [scoreToMate [lindex $i 1] $tmp_moves $n]]
+    if {$analysis(logName)} {
+      set text [format "\[%s\] %d:%s" $analysis(name$n) [lindex $i 0] [scoreToMate [lindex $i 1] $tmp_moves $n]]
+    } else {
+      set text [scoreToMate [lindex $i 1] $tmp_moves $n]
+    }
 
     if {$addAtEnd} {
       # get the last move of the game
@@ -1708,44 +1708,6 @@ proc addAllVariations {{n 1} {rightclick 0}} {
   ::tools::graphs::score::Refresh
 }
 
-################################################################################
-#
-################################################################################
-proc addAnalysisToComment {line {n 1}} {
-  global analysis
-  if {! [winfo exists .analysisWin$n]} { return }
-
-  # If comment editor window is open, add the score there, otherwise
-  # just add the comment directly:
-  if {[winfo exists .commentWin]} {
-    set tempStr [.commentWin.cf.text get 1.0 end-1c]
-  } else {
-    set tempStr [sc_pos getComment]
-  }
-  set score $analysis(score$n)
-
-  # If line is true, add the whole line, else just add the score:
-  if {$line} {
-    set scoretext [format "%+.2f: %s" $score $analysis(moves$n)]
-  } else {
-    set scoretext [format "%+.2f" $score]
-  }
-
-  # Strip out old score if it exists at the start of the comment:
-  regsub {^\".*\"} $tempStr {} tempStr
-  set newText "\"$scoretext\"$tempStr"
-  if {[winfo exists .commentWin]} {
-    .commentWin.cf.text delete 1.0 end
-    .commentWin.cf.text insert 1.0 $newText
-  } else {
-    sc_pos setComment $newText
-  }
-  ::pgn::Refresh 1
-}
-
-################################################################################
-#
-################################################################################
 proc makeAnalysisMove {n} {
   global analysis comp
 
@@ -2366,15 +2328,30 @@ proc addAnalysisMove {{n -1}} {
 proc addAnalysisScore {n} {
   global analysis
 
-  if {$analysis(uci$n)} {
-    set tmp_moves [ lindex [ lindex $analysis(multiPV$n) 0 ] 2 ]
-    set text [format "\[%s: %s\]" $analysis(name$n) [scoreToMate $analysis(score$n) $tmp_moves $n]]
-  } else  {
-    set text [format "\[%s: %+.2f\]" $analysis(name$n) $analysis(score$n)]
-  }
+  set text [formatAnalysisScore $n]
   sc_game undoPoint
   sc_pos setComment "$text [sc_pos getComment]"
   updateBoard -pgn
+}
+
+proc formatAnalysisScore {n} {
+  global analysis
+
+  if {$analysis(uci$n)} {
+    set tmp_moves [ lindex [ lindex $analysis(multiPV$n) 0 ] 2 ]
+    if {$analysis(logName)} {
+      set text [format "\[%s\] %d:%s" $analysis(name$n) $analysis(depth$n) [scoreToMate $analysis(score$n) $tmp_moves $n]]
+    } else {
+      set text [format "%d:%s" $analysis(depth$n) [scoreToMate $analysis(score$n) $tmp_moves $n]]
+    }
+  } else  {
+    if {$analysis(logName)} {
+      set text [format "\[%s\] %d:%+.2f" $analysis(name$n) $analysis(depth$n) $analysis(score$n)]
+    } else {
+      set text [format "%d:%+.2f" $analysis(depth$n) $analysis(score$n)]
+    }
+  }
+  return $text
 }
 
 ### Toggle whether Move History is shown (now also controls line wrap)

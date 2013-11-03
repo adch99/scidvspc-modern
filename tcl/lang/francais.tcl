@@ -688,6 +688,10 @@ translate F AnnotateWhichMoves {Qui se déplace}
 translate F AnnotateComment {Ajouter annotateur de commenter}
 translate F BlundersThreshold {Seuil de l'erreur}
 translate F LowPriority {Priorité processeur basse}
+# ====== TODO To be translated ======
+translate F LogEngines {Log Engines}
+# ====== TODO To be translated ======
+translate F LogName {Add Name}
 translate F ClickHereToSeeMoves {Cliquer ici pour afficher les coups}
 translate F ConfigureInformant {Configurer les valeurs des notations}
 translate F Informant!? {Coup intéressant}

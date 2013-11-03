@@ -687,6 +687,10 @@ translate N AnnotateWhichMoves {welke zetten}
 translate N AnnotateComment {Toevoegen annotator commentaar}
 translate N BlundersThreshold {Ondergrens}
 translate N LowPriority {Lage CPU prioriteit}
+# ====== TODO To be translated ======
+translate N LogEngines {Log Engines}
+# ====== TODO To be translated ======
+translate N LogName {Add Name}
 translate N ClickHereToSeeMoves {Klik hier om zetten te zien}
 translate N ConfigureInformant {Annotaties configureren}
 translate N Informant!? {Interessante zet}

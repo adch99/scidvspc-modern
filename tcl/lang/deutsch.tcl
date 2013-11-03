@@ -712,6 +712,10 @@ translate D AnnotateWhichMoves {welche Moves}
 translate D AnnotateComment {Add Kommentator Kommentar}
 translate D BlundersThreshold {Grenze}
 translate D LowPriority {Niedrige CPU-Priorität}
+# ====== TODO To be translated ======
+translate D LogEngines {Log Engines}
+# ====== TODO To be translated ======
+translate D LogName {Add Name}
 translate D ClickHereToSeeMoves {Hier klicken um Züge anzuzeigen}
 translate D ConfigureInformant {Informator konfigurieren}
 translate D Informant!? {Interessanter Zug}

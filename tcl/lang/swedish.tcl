@@ -681,6 +681,10 @@ translate W AnnotateWhichMoves {Som Flyttar}
 translate W AnnotateComment {Lägg annotator att kommentera}
 translate W BlundersThreshold {Tröskelvärde}
 translate W LowPriority {Kör som lågprioriterad process}
+# ====== TODO To be translated ======
+translate W LogEngines {Log Engines}
+# ====== TODO To be translated ======
+translate W LogName {Add Name}
 translate W ClickHereToSeeMoves {Klicka här för att se drag}
 translate W ConfigureInformant {Konfigurera Informant-parametrar}
 translate W Informant!? {Intressant drag}

@@ -700,6 +700,10 @@ translate G AnnotateWhichMoves {Ποιες Κινήσεις}
 translate G AnnotateComment {Προσθήκη Σχολιαστή στο κείμενο}
 translate G BlundersThreshold {Threshold}
 translate G LowPriority {Χαμηλή Προτεραιότητα CPU}
+# ====== TODO To be translated ======
+translate G LogEngines {Log Engines}
+# ====== TODO To be translated ======
+translate G LogName {Add Name}
 translate G ClickHereToSeeMoves {Πατήστε για εμφάνιση κινήσεων}
 translate G ConfigureInformant {Ρύθμιση Τιμών Πληροφοριών}
 translate G Informant!? {Ενδιαφέρουσα Κίνηση}

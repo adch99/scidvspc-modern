@@ -812,6 +812,10 @@ translate O AnnotateComment {Legg annotator å kommentere}
 translate O BlundersThreshold {Threshold}
 translate O LowPriority {Low CPU priority} ;# ***
 # ====== TODO To be translated ======
+translate O LogEngines {Log Engines}
+# ====== TODO To be translated ======
+translate O LogName {Add Name}
+# ====== TODO To be translated ======
 translate O ClickHereToSeeMoves {Click here to see moves}
 # ====== TODO To be translated ======
 translate O ConfigureInformant {Configure Informant}

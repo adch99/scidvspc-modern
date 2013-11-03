@@ -693,6 +693,8 @@ translate E AnnotateWhichMoves {Which Moves}
 translate E AnnotateComment {Add annotator to comment}
 translate E BlundersThreshold {Threshold}
 translate E LowPriority {Low CPU Priority}
+translate E LogEngines {Log Engines}
+translate E LogName {Add Name}
 translate E ClickHereToSeeMoves {Click here to see moves}
 translate E ConfigureInformant {Configure Informant}
 translate E Informant!? {Interesting move}

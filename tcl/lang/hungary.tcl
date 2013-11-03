@@ -741,6 +741,10 @@ translate H AnnotateComment {Add annotator a hozzászólásr}
 translate H BlundersThreshold {Threshold}
 translate H LowPriority {Alacsony CPU-prioritás}
 # ====== TODO To be translated ======
+translate H LogEngines {Log Engines}
+# ====== TODO To be translated ======
+translate H LogName {Add Name}
+# ====== TODO To be translated ======
 translate H ClickHereToSeeMoves {Click here to see moves}
 # ====== TODO To be translated ======
 translate H ConfigureInformant {Configure Informant}

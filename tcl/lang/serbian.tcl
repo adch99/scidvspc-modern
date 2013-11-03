@@ -812,6 +812,10 @@ translate Y AnnotateComment {Add annotator to comment}
 translate Y BlundersThreshold {Threshold}
 translate Y LowPriority {Low CPU priority} ;# ***
 # ====== TODO To be translated ======
+translate Y LogEngines {Log Engines}
+# ====== TODO To be translated ======
+translate Y LogName {Add Name}
+# ====== TODO To be translated ======
 translate Y ClickHereToSeeMoves {Click here to see moves}
 # ====== TODO To be translated ======
 translate Y ConfigureInformant {Configure Informant}

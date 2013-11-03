@@ -696,6 +696,10 @@ translate P AnnotateWhichMoves {Komentowane posuniêcia}
 translate P AnnotateComment {Dodaj pole komentatora}
 translate P BlundersThreshold {Granica b³êdu}
 translate P LowPriority {Niski priorytet CPU} 
+# ====== TODO To be translated ======
+translate P LogEngines {Log Engines}
+# ====== TODO To be translated ======
+translate P LogName {Add Name}
 translate P ClickHereToSeeMoves {Kliknij, by zobaczyæ posuniêcia}
 translate P ConfigureInformant {Konfiguruj oceny Informatora}
 translate P Informant!? {Ciekawe posuniêcie}

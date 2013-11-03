@@ -705,6 +705,10 @@ translate S AnnotateWhichMoves {Qué movimientos}
 translate S AnnotateComment {Añadir Anotador a Comentario}
 translate S BlundersThreshold {Umbral del error }
 translate S LowPriority {Baja prioridad del procesador}
+# ====== TODO To be translated ======
+translate S LogEngines {Log Engines}
+# ====== TODO To be translated ======
+translate S LogName {Add Name}
 translate S ClickHereToSeeMoves {Click aquí para ver movimientos}
 translate S ConfigureInformant {Configurar informaciones}
 translate S Informant!? {Movimiento interesante}
