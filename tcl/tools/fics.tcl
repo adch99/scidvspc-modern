@@ -281,20 +281,21 @@ namespace eval fics {
     frame $w.console
     frame $w.command
     frame $w.bottom 
-    pack $w.console  -fill both -expand 1 -side top
-    pack $w.command -fill x -side top
     pack $w.bottom  -side bottom
+    pack $w.command -fill x -side bottom
+    # pack console last to allow compressing
+    pack $w.console  -fill both -expand 1 -side top
 
     frame $w.bottom.buttons
     frame $w.bottom.clocks
     frame $w.bottom.graph 
-    scale $w.bottom.scale -orient vertical -from 45 -to 25 -showvalue 0 -resolution 5 -length 240 \
+    scale $w.bottom.scale -orient vertical -from 45 -to 25 -showvalue 0 -resolution 5 -length 200 \
       -variable ::fics::size -command ::fics::changeScaleSize -relief flat
 
     showClocks
-    pack $w.bottom.scale -side left -padx 5 -pady 20
+    pack $w.bottom.scale -side left -padx 5 -pady 3
 
-    pack $w.bottom.buttons -side right -padx 10 -pady 20 -anchor center
+    pack $w.bottom.buttons -side right -padx 5 -pady 5 -anchor center
     # Pack graph when "Offers graph" clicked
 
     # graph widget initialised
