@@ -2927,12 +2927,12 @@ proc stopAnalyzeMode { {n 0} } {
   }
   set analysis(startpos$n) ""
 }
-################################################################################
-# toggleLockEngine
-#   Toggle whether engine is locked to current position.
-################################################################################
+
+### Called when analysis 'lock' button is pressed (which toggles analysis(lockEngine$n))
+
 proc toggleLockEngine {n} {
   global analysis
+
   if { $analysis(lockEngine$n) } {
     set state disabled
     set analysis(lockN$n) [sc_pos moveNumber]
@@ -3169,10 +3169,9 @@ proc scoreToMate { score pv n } {
 
   return $ret
 }
-################################################################################
-# returns the pv with move numbers added
-# ::pgn::moveNumberSpaces controls space between number and move
-################################################################################
+
+### Returns the PV with move numbers added
+
 proc addMoveNumbers { e pv } {
   global analysis
 
@@ -3184,17 +3183,19 @@ proc addMoveNumbers { e pv } {
     set turn [sc_pos side]
   }
 
+  # space between number and move
   if {$::pgn::moveNumberSpaces} {
     set spc { }
   } else {
     set spc {}
   }
-  set ret {}
   set start 0
   if {$turn == {black}} {
     set ret "$n.$spc... [lindex $pv 0] "
     incr start 
     incr n
+  } else {
+    set ret {}
   }
 
   for {set i $start} {$i < [llength $pv]} {incr i} {
@@ -3357,7 +3358,7 @@ proc updateAnalysis {{n 0}} {
     return
   }
 
-  # Or if engine is locked
+  # or if engine is locked
   if { $analysis(lockEngine$n) } {
      return
   }
