@@ -485,7 +485,7 @@ proc ::windows::gamelist::OpenClose {} {
   button $w.b.negate -text [lindex [tr SearchNegate] 0] -font font_Small -relief flat -command ::search::filter::negate
 
   ### Filter items against the find entry widget
-   button $w.b.filter -font font_Small -relief flat -textvar ::tr(Filter) \
+  button $w.b.filter -font font_Small -relief flat -textvar ::tr(Filter) \
     -command {::windows::gamelist::FilterText}
 
   button $w.b.findlabel -font font_Small -relief flat -textvar ::tr(GlistFindText) \
@@ -511,7 +511,7 @@ proc ::windows::gamelist::OpenClose {} {
 
   pack $w.b.findcase -side right
   pack $w.b.find -side right ; # -expand 1 -fill x
-  pack $w.b.findlabel $w.b.filter $w.b.negate $w.b.reset -side right ; # $w.b.reset # too crowded
+  pack $w.b.findlabel $w.b.filter $w.b.reset $w.b.negate -side right 
   pack $w.b.save $w.b.bkm $w.b.gfirst $w.b.gprev $w.b.gnext $w.b.glast -side left
 
   ### Bottom row of buttons , etc
@@ -520,31 +520,31 @@ proc ::windows::gamelist::OpenClose {} {
   bind $w.c.goto <Return> {
     ::windows::gamelist::showNum $::windows::gamelist::goto
   }
-  button $w.c.browse -text $::tr(Browse) -font font_Small -command {
+  dialogbutton $w.c.browse -text $::tr(Browse) -font font_Small -command {
     set selection [.glistWin.tree selection]
     if { $selection != {} } {
       ::gbrowser::new 0 [.glistWin.tree set [lindex $selection 0] Number]
     }
   }
 
-  button $w.c.current -font font_Small -textvar ::tr(Current) -command ::windows::gamelist::showCurrent
+  dialogbutton $w.c.current -font font_Small -textvar ::tr(Current) -command ::windows::gamelist::showCurrent
 
   # no longer packed, but still used as Control-Enter binding
-  button $w.c.load -text Load -font font_Small -command {
+  dialogbutton $w.c.load -text Load -font font_Small -command {
     set selection [.glistWin.tree selection]
     if { $selection != {} } {
       ::windows::gamelist::Load [.glistWin.tree set [lindex $selection 0] Number]
     }
   }
 
-  button $w.c.delete -text $::tr(Delete) -font font_Small -command {
+  dialogbutton $w.c.delete -text $::tr(Delete) -font font_Small -command {
     ::windows::gamelist::ToggleFlag D
     ::windows::gamelist::Refresh
     configDeleteButtons
     updateGameinfo
   }
 
-  button $w.c.compact -text {Compact} -font font_Small -command "compactGames $w ; configDeleteButtons"
+  dialogbutton $w.c.compact -text {Compact} -font font_Small -command "compactGames $w ; configDeleteButtons"
 
   # Flag Menubutton
   menubutton $w.c.title -menu $w.c.title.m -indicatoron 1 -relief raised -font font_Small
@@ -571,16 +571,16 @@ proc ::windows::gamelist::OpenClose {} {
   # only need to call this now to init the menubutton "-text"
   refreshCustomFlags
 
-  button $w.c.flag -text $::tr(Flag) -font font_Small -command {
+  dialogbutton $w.c.flag -text $::tr(Flag) -font font_Small -command {
     ::windows::gamelist::ToggleFlag $glistFlag
     updateGameinfo
   }
 
   configDeleteButtons
 
-  button $w.c.export -textvar ::tr(Save) -font font_Small -command openExportGList
-  button $w.c.help  -textvar ::tr(Help) -width 5 -font font_Small -command { helpWindow GameList }
-  button $w.c.close -textvar ::tr(Close) -font font_Small -command { focus .main ; destroy .glistWin }
+  dialogbutton $w.c.export -textvar ::tr(Save) -font font_Small -command openExportGList
+  dialogbutton $w.c.help  -textvar ::tr(Help) -width 5 -font font_Small -command { helpWindow GameList }
+  dialogbutton $w.c.close -textvar ::tr(Close) -font font_Small -command { focus .main ; destroy .glistWin }
 
   pack $w.c.close $w.c.export $w.c.compact -side right -padx 3 ; # $w.c.help
   pack $w.c.current $w.c.goto $w.c.title $w.c.flag -side left -padx 3
