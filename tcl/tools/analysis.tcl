@@ -363,6 +363,9 @@ proc ::enginelist::choose {} {
   frame $w.buttons
   frame $w.buttons2
 
+  pack $w.buttons2 -side bottom -padx 5 -pady 8 -fill x
+  pack $w.buttons -side bottom -padx 5 -pady 3 -fill x
+
   text $w.title -width 50 -height 1 -font font_Fixed -relief flat \
       -cursor top_left_arrow -background gray95
 
@@ -436,11 +439,8 @@ proc ::enginelist::choose {} {
 
   pack $w.buttons.up $w.buttons.down $w.buttons.log $w.buttons.uci $w.buttons.edit $w.buttons.add $w.buttons.copy $w.buttons.delete -side left -expand yes
 
-  pack $w.buttons2.logengines $w.buttons2.logname $w.buttons2.lowpriority $w.buttons2.sep  -side left -pady 12 -padx 10 
-  pack $w.buttons2.close $w.buttons2.start -side right -pady 12 -padx 10 
-
-  pack $w.buttons -side top -pady 12 -padx 2 -fill x
-  pack $w.buttons2 -side top -padx 2 
+  pack $w.buttons2.close $w.buttons2.start -side right -padx 5 
+  pack $w.buttons2.logengines $w.buttons2.logname $w.buttons2.lowpriority -side left -padx 0 
 
   focus $w.buttons2.start
 
@@ -3865,7 +3865,7 @@ proc engineShowLog {n} {
     raiseWin $w
   } else {
     toplevel $w
-    wm minsize $w 250 150
+    wm minsize $w 300 180
     setWinLocation $w
     setWinSize $w
 
