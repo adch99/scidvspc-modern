@@ -506,8 +506,9 @@ namespace eval fics {
 
     setWinLocation $w
     setWinSize $w
-    catch {wm state $w normal}
     update
+    catch {wm state $w normal}
+    ::createToplevelFinalize $w
 
     # all widgets must be visible
     wm minsize $w $x $y
@@ -2315,6 +2316,9 @@ namespace eval fics {
   proc close {{mode {}}} {
     variable logged
 
+    if {![winfo exists .fics]} {
+      return
+    }
     bind .fics <Destroy> {}
     destroy .main.board.clock2
     destroy .main.board.clock1
