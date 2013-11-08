@@ -1181,6 +1181,14 @@ proc addMove { sq1 sq2 {animate ""}} {
       return
     }
   }
+  if {$nullmove} {
+    set char [string index [sc_game info previousMove] end]
+    if {$char == "#" || $char == "+"} {
+      # dont add null move in check or mate
+      tk_messageBox -type ok -message {Null Move while in Check is not allowed.} -parent .main.board -icon info
+      return
+    }
+  }
 
   if {[sc_pos isPromotion $sq1 $sq2] == 1} {
     # sometimes, addMove is triggered twice
