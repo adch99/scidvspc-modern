@@ -372,7 +372,7 @@ namespace eval fics {
 	# .fics.command.entry insert 0 "tell "
         set ::fics::tellindex 0
       } else {
-	.fics.command.entry insert 0 "xtell [lindex $::fics::tells $::fics::tellindex] "
+	.fics.command.entry insert 0 "tell [lindex $::fics::tells $::fics::tellindex] "
 	incr ::fics::tellindex
       }
     }
@@ -1547,19 +1547,26 @@ namespace eval fics {
                             if {[set temp [string first {(} $t2]] > -1} {
                               set t2 [string range $t2 0 $temp-1]
                             }
-                            if {[string match mamer* $t2] && ! $::fics::no_results} {
-			      tk_messageBox -title Mamer -icon info -type ok -parent .fics -message "$t2 tells you" -detail $t3
-			    } else {
-                              if {$::fics::playing != 0} {
-				::commenteditor::appendComment "\[$t2\] $t3"
-                              }
-			      # Add this person to tells
-			      set i [lsearch -exact $::fics::tells $t2]
-			      if {$i > -1} {
-				set ::fics::tells [lreplace $::fics::tells $i $i]
-			      }
-			      set ::fics::tells [linsert $::fics::tells 0 $t2]
-			      set ::fics::tellindex 0
+                            switch -glob $t2 {
+                              mamer* { 
+				      if {! $::fics::no_results} {
+					tk_messageBox -title Mamer -icon info -type ok -parent .fics -message "$t2 tells you" -detail $t3
+				      }
+				    } 
+                              ROBO* {
+				    }
+			      default {
+				      if {$::fics::playing != 0} {
+					::commenteditor::appendComment "\[$t2\] $t3"
+				      }
+				      # Add this person to tells
+				      set i [lsearch -exact $::fics::tells $t2]
+				      if {$i > -1} {
+					set ::fics::tells [lreplace $::fics::tells $i $i]
+				      }
+				      set ::fics::tells [linsert $::fics::tells 0 $t2]
+				      set ::fics::tellindex 0
+				    }
                             }
 			  }
 			}
