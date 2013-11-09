@@ -477,7 +477,7 @@ proc ::windows::gamelist::OpenClose {} {
     $w.b.select configure -width 5
   }
   bind $w.tree <Delete> "::windows::gamelist::Remove 1"
-
+  bind $w.tree <Control-Delete> "$w.c.delete invoke"
 
   button $w.b.removeabove -text Rem -image arrow_up -compound right -font font_Small -relief flat -command {::windows::gamelist::removeFromFilter up}
   button $w.b.removebelow -text Rem -image arrow_down -compound right -font font_Small -relief flat -command {::windows::gamelist::removeFromFilter down}

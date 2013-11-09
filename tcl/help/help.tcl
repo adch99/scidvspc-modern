@@ -110,7 +110,7 @@ database capabilities.</p>
 
 <p>If you have opened a multigame PGN, the <a GameList>Game List</a>
 widget allows you to browse the games and select those of interest.
-<i>The Gamelist also serves to select and delete games from Scid's
+<i>The Game List also serves to select and delete games from Scid's
 databases.</i></p>
 
 <h3>Editing Games</h3>
@@ -120,7 +120,7 @@ databases.</i></p>
 
 But If you wish to change a file with multiple games, it must first be
 converted to a <a Scid>Scid Database</a>. The easiest way to do this is by
-opening the <a GameList>Gamelist</a> and dragging the PGN file to the Clipbase.
+opening the <a GameList>Game List</a> and dragging the PGN file to the Clipbase.
 After making changes in the Clipbase, then use <a Export>Export</a> to write them
 back to PGN.
 </p>
@@ -1565,33 +1565,32 @@ set helpTitle(GameList) "Game List window"
 set helpText(GameList) {<h1>The Game List</h1>
 
 <p>The <run ::windows::gamelist::OpenClose><green>Game List</green></run>
-widget allows easy perusal of all filtered games in the currently open Database/PGN archive.</p>
-<p>Below the Gamelist are two rows of buttons (which can be hidden by middle-clicking the Gamelist),
+allows easy perusal of all filtered games in the currently open database/PGN archive.</p>
+<p>Below the Game List are two rows of buttons,
 and at the bottom you'll find the <a Switcher>Database Switcher</a>.</p>
-<p>Right-clicking the gamelist presents a context menu for various actions.</p>
+<p>Clicking a game will select it. Select multiple games using control+click and shift+click.
+Right-clicking game(s) presents a context menu for various actions. Double-clicking loads a game.</p>
 <p>Quick searches can be performed by entering text in the entry box and clicking the <b>Find</b> or <b>Filter</b> buttons.
 Use "+" as a logical AND with the <b>Filter</b> button. For example: "Kasparov+Karpov".</p>
 <p><i>For more info about Searches and Filters, <a Searches>see here</a> or below</i>.</p>
-<p>The <a Flags>Flag</a> drop-menu and button allow one to quickly set and unset database flags for selected games.</p>
-<h3>Sorting the Gamelist</h3>
-<p>The database can be <b>permanently sorted</b> by clicking column titles - but doing so is not trivial.
+<h3>Sorting the Game List</h3>
+<p>The database can be <b>permanently sorted</b> by clicking column titles, but doing so is not trivial.
 <b>Sort affects search and tree performance</b>. For more details see <a Sorting>Sorting Database</a>.
 </p>
 
-  <h3><name Del>Deleted and Filtered Games</name></h3>
-  <p>
-  Scid has two notions of removed games - which can be confusing.</p>
+  <h3><name Del>Filtered and Deleted Games</name></h3>
+  <p>Scid has two notions of removed games - which can be confusing.</p>
 
-  <p>The first is <b>Filtered Games</b>.  In the Gamelist widget,
-  selecting some games and pressing <b>Remove</b> or <b>Filter</b>
-  will filter those games. They will disappear from the gamelist
-  widget, but can easily be found again with the <b>Reset</b> button. Filtering games
+  <p>The first is <b>Filtered Games</b>.  In the Game List widget,
+  right-clicking some games and selecting <b>Remove</b>
+  will remove those games from the filter. They will disappear from the Game List,
+  but can easily be seen again by reseting the filter with <b>Reset</b>. Filtering games
   has no effect on the database.</p>
 
-  <p><b>Deleted</b> games on the other hand, are not removed from the Game List widget.
+  <p><b>Deleted</b> games on the other hand, are not removed from the Game List.
   They are simply marked as deleted, and no further action is taken until
   the database is compacted - whence they will be <b>permanently deleted</b> from the database.
-This can be done by the <b>Compact</b> button, or 
+  This can be done by the <b>Compact</b> button, or 
   from the <a Maintenance>maintenance</a> window.</p>
 <p><i>The default database (Clipbase) cannot be compacted</i>.</p>
 
@@ -1617,12 +1616,11 @@ This can be done by the <b>Compact</b> button, or
 </p>
 <h3>Other Features</h3>
 <ul>
-<li>Load games by double-clicking.</li>
-<li>Multiple games can be selected by using Shift or Control while single clicking. <lt>Control+A<gt> selects all visible games.</li>
+<li><b>Delete</b> key removes selected game(s) from filter, <b>Control+Delete</b> toggles 'Delete' flag.</li>
+<li><b>Control+A</b> selects all visible games.</li>
 <li>Resize column widths by dragging the column edge.</li>
-<li>Drag and Drop files to the switcher (from Windows/KDE/Gnome).</li>
-<li>Right-click for context menu.</li>
-<li>Middle-click the gamelist to hide the button bar.</li>
+<li>Drag and Drop files in the switcher (from Windows/KDE/Gnome).</li>
+<li>Middle-click the Game List to hide the button bar.</li>
 </ul>
 
   <h3><name Browsing>Browsing and Merging Games</name></h3>
@@ -1637,7 +1635,7 @@ This can be done by the <b>Compact</b> button, or
 <p><i>The board size can be resized by Control+Wheelmouse or Control+Shift+Left/Right.</i></p>
   
 
-  <p><footer>Updated: Scid vs. PC 4.11, October 2013</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.11, November 2013</footer></p>
 }
 
 
@@ -2606,7 +2604,7 @@ set helpText(Flags) {<h1>Game Flags</h1>
   <p>
   User and Custom flags are set in the <a Maintenance>Maintenance
   Window</a>. Scid vs. PC also allows quick flag tagging via the <a
-  GameList>Gamelist</a> window.
+  GameList>Game List</a> window.
   </p>
   <p>
   You can use a <a Searches Header>Header Search</a> to find all
