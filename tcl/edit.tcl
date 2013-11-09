@@ -83,6 +83,7 @@ proc copyGame {} {
   set ::glistFlipped([sc_info clipbase]) [::board::isFlipped .main.board] 
   # is updateBoard needed ?
   updateBoard
+  ::windows::switcher::Refresh
 }
 
 
