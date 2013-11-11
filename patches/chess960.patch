@@ -1,6 +1,6 @@
 Index: src/movelist.h
 ===================================================================
---- src/movelist.h	(revision 1088)
+--- src/movelist.h	(revision 1625)
 +++ src/movelist.h	(working copy)
 @@ -43,15 +43,21 @@
      squareT  capturedSquare; // ONLY different to "to" field if this capture
@@ -28,9 +28,9 @@ Index: src/movelist.h
  #ifdef WINCE
 Index: src/game.cpp
 ===================================================================
---- src/game.cpp	(revision 1088)
+--- src/game.cpp	(revision 1625)
 +++ src/game.cpp	(working copy)
-@@ -758,6 +758,7 @@
+@@ -893,6 +893,7 @@
      newsm->to = sm->to;
      newsm->capturedPiece = sm->capturedPiece;
      newsm->promote = sm->promote;
@@ -38,7 +38,7 @@ Index: src/game.cpp
  }
  
  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-@@ -3018,14 +3019,19 @@
+@@ -3223,14 +3224,19 @@
          1, 2, 3, 0, 0, 0, 0, 9, 4, 0, 5, 10, 0, 0, 0, 0, 6, 7, 8
      };
  
@@ -60,7 +60,7 @@ Index: src/game.cpp
      // Verify we have a valid King move:
      ASSERT(diff >= -9  &&  diff <= 9  &&  val[diff+9] != 0);
      buf->PutByte (makeMoveByte (0, val [diff + 9]));
-@@ -3042,12 +3048,33 @@
+@@ -3247,12 +3253,33 @@
      };
  
      if (val == 0) {
@@ -97,7 +97,7 @@ Index: src/game.cpp
      return OK;
  }
  
-@@ -3361,7 +3388,8 @@
+@@ -3566,7 +3593,8 @@
      sm->movingPiece = board[sm->from];
  
      sm->promote = EMPTY;
@@ -109,7 +109,7 @@ Index: src/game.cpp
      switch (pt) {
 Index: src/position.cpp
 ===================================================================
---- src/position.cpp	(revision 1088)
+--- src/position.cpp	(revision 1625)
 +++ src/position.cpp	(working copy)
 @@ -34,7 +34,7 @@
  
@@ -521,16 +521,16 @@ Index: src/position.cpp
              }
          }
      }
-@@ -1232,7 +1311,7 @@
+@@ -1238,7 +1317,7 @@
      }
  
      if (legal == 1) {
--        AddLegalMove (mlist, from, to, promote);
-+        AddLegalMove (mlist, from, to, promote, false);
+-        AddLegalMove (mlist, from, to, promote2);
++        AddLegalMove (mlist, from, to, promote2, false);
          return OK;
      }
      return ERROR_InvalidMove;
-@@ -1247,78 +1326,26 @@
+@@ -1253,78 +1332,26 @@
  errorT
  Position::MatchKingMove (MoveList * mlist, squareT target)
  {
@@ -626,7 +626,7 @@ Index: src/position.cpp
  }
  
  
-@@ -1837,18 +1864,22 @@
+@@ -1843,18 +1870,22 @@
  void
  Position::DoSimpleMove (simpleMoveT * sm)
  {
@@ -653,7 +653,7 @@ Index: src/position.cpp
      sm->capturedSquare = to;
      sm->castleFlags = Castling;
      sm->epSquare = EPTarget;
-@@ -1856,8 +1887,8 @@
+@@ -1862,8 +1893,8 @@
  
      HalfMoveClock++;
      PlyCounter++;
@@ -664,7 +664,7 @@ Index: src/position.cpp
      // Check for a null (empty) move:
      if (isNullMove(sm)) {
          ToMove = enemy;
-@@ -1891,8 +1922,8 @@
+@@ -1897,8 +1928,8 @@
          Material[sm->capturedPiece]--;
          HalfMoveClock = 0;
          RemoveFromBoard (sm->capturedPiece, sm->capturedSquare);
@@ -675,7 +675,7 @@ Index: src/position.cpp
      // handle promotion:
  
      if (sm->promote != EMPTY) {
-@@ -1903,32 +1934,54 @@
+@@ -1909,32 +1940,54 @@
          Material[p]++;
          AddToBoard (p, from);
      }
@@ -750,7 +750,7 @@ Index: src/position.cpp
      // Handle clearing of castling flags:
  
      if (Castling) {
-@@ -1938,15 +1991,15 @@
+@@ -1944,15 +1997,15 @@
          }
          // See if a rook moved or was captured:
          if (ToMove == WHITE) {
@@ -774,7 +774,7 @@ Index: src/position.cpp
          }
      }
  
-@@ -1968,17 +2021,17 @@
+@@ -1974,17 +2027,17 @@
          }
          HalfMoveClock = 0; // 50-move clock resets on pawn moves.
      }
@@ -795,7 +795,7 @@ Index: src/position.cpp
  }
  
  
-@@ -1989,7 +2042,7 @@
+@@ -1995,7 +2048,7 @@
  void
  Position::UndoSimpleMove (simpleMoveT * m)
  {
@@ -804,7 +804,7 @@ Index: src/position.cpp
      squareT from = m->from;
      squareT to = m->to;
      pieceT p = Board[to];
-@@ -1999,13 +2052,13 @@
+@@ -2005,13 +2058,13 @@
      PlyCounter--;
      ToMove = color_Flip(ToMove);
      m->pieceNum = ListPos[to];
@@ -821,7 +821,7 @@ Index: src/position.cpp
      // Handle a capture: insert piece back into piecelist.
      // This works for EP captures too, since the square of the captured
      // piece is in the "capturedSquare" field rather than assuming the
-@@ -2021,7 +2074,7 @@
+@@ -2027,7 +2080,7 @@
          Material[m->capturedPiece]++;
          Count[c]++;
      }
@@ -830,7 +830,7 @@ Index: src/position.cpp
      // handle promotion:
  
      if (m->promote != EMPTY) {
-@@ -2031,9 +2084,9 @@
+@@ -2037,9 +2090,9 @@
          Material[p]++;
          AddToBoard (p, to);
      }
@@ -842,7 +842,7 @@ Index: src/position.cpp
      List[ToMove][m->pieceNum] = from;
      ListPos[from] = m->pieceNum;
      RemoveFromBoard (p, to);
-@@ -2041,34 +2094,47 @@
+@@ -2047,34 +2100,47 @@
      if (m->capturedPiece != EMPTY) {
          AddToBoard (m->capturedPiece, m->capturedSquare);
      }
@@ -908,7 +908,7 @@ Index: src/position.cpp
  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  // Position::RelocatePiece():
  //    Given a from-square and to-square, modifies the position so
-@@ -2086,9 +2152,9 @@
+@@ -2092,9 +2158,9 @@
  
      // If squares are identical, just return success:
      if (fromSq == toSq) { return OK; }
@@ -920,7 +920,7 @@ Index: src/position.cpp
      pieceT piece = Board[fromSq];
      pieceT ptype = piece_Type(piece);
      colorT pcolor = piece_Color(piece);
-@@ -2191,11 +2257,11 @@
+@@ -2197,11 +2263,11 @@
          if (isNullMove(m)) {
              //*c++ = 'n'; *c++ = 'u'; *c++ = 'l'; *c++ = 'l';
              *c++ = '-'; *c++ = '-';
@@ -935,7 +935,7 @@ Index: src/position.cpp
              *c++ = 'O'; *c++ = '-'; *c++ = 'O'; *c++ = '-'; *c++ = 'O';
          } else {  // regular King move
              *c++ = 'K';
-@@ -2252,7 +2318,7 @@
+@@ -2258,7 +2324,7 @@
      // Now do the check or mate symbol:
      if (flag != SAN_NO_CHECKTEST) {
          // Now we make the move to test for check:
@@ -944,7 +944,7 @@ Index: src/position.cpp
          DoSimpleMove (m);
          if (CalcNumChecks (GetKingSquare()) > 0) {
              char ch = '+';
-@@ -2264,7 +2330,7 @@
+@@ -2270,7 +2336,7 @@
              *c++ = ch;
          }
          UndoSimpleMove (m);
@@ -953,7 +953,7 @@ Index: src/position.cpp
      }
      *c = 0;
  }
-@@ -2277,13 +2343,12 @@
+@@ -2283,13 +2349,12 @@
  Position::MakeUCIString (simpleMoveT * m, char * s)
  {
      ASSERT (m != NULL  &&  s != NULL);
@@ -968,7 +968,7 @@ Index: src/position.cpp
      char * c     = s;
  
      if (from == to && to != NULL_SQUARE) {
-@@ -2292,6 +2357,26 @@
+@@ -2298,6 +2363,26 @@
        return;
      }
  
@@ -995,7 +995,7 @@ Index: src/position.cpp
      *c++ = square_FyleChar(from);
      *c++ = square_RankChar(from);
      *c++ = square_FyleChar(to);
-@@ -2305,6 +2390,7 @@
+@@ -2311,6 +2396,7 @@
      *c = 0;
  }
  
@@ -1003,7 +1003,7 @@ Index: src/position.cpp
  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  // Position::ReadCoordMove():
  //      Given a non-promotion move in coordinate notation,
-@@ -2319,14 +2405,27 @@
+@@ -2325,14 +2411,27 @@
      ASSERT (m != NULL  &&  str != NULL);
      fyleT fromFyle, toFyle;
      rankT fromRank, toRank;
@@ -1035,7 +1035,7 @@ Index: src/position.cpp
      fromFyle = fyle_FromChar (str[0]);
      fromRank = rank_FromChar (str[1]);
      from = square_Make (fromFyle, fromRank);
-@@ -2336,11 +2435,36 @@
+@@ -2342,11 +2441,36 @@
      toRank = rank_FromChar (str[3]);
      to = square_Make (toFyle, toRank);
      if (to == NS) { return ERROR_InvalidMove; }
@@ -1073,7 +1073,7 @@ Index: src/position.cpp
          if (sm->promote == promo) {
              if (sm->from == from  &&  sm->to == to) {
                  *m = *sm;
-@@ -2368,11 +2492,10 @@
+@@ -2374,11 +2498,10 @@
      const char * s = str;
      char mStr [255];
      pieceT p;
@@ -1086,7 +1086,7 @@ Index: src/position.cpp
      MoveList mlist;
      mlist.Clear();
  
-@@ -2405,7 +2528,7 @@
+@@ -2411,7 +2534,7 @@
      if (token == TOKEN_Move_Pawn  ||  token == TOKEN_Move_Promote) {
  
          pieceT promo = EMPTY;
@@ -1095,7 +1095,7 @@ Index: src/position.cpp
              // Last char must be Q/R/B/N.
              // Accept the move even if it is of the form "a8Q" not "a8=Q":
              // if (s[slen-2] != '=') { return ERROR_InvalidMove; }
-@@ -2422,6 +2545,7 @@
+@@ -2428,6 +2551,7 @@
          } else {
              // Check if it is a coordinates-style move, in which case it
              // could be any piece:
@@ -1103,7 +1103,7 @@ Index: src/position.cpp
              if (slen >= 4  &&
                  islower(s[0])  &&  isdigit(s[1])  &&
                  islower(s[slen-2])  &&  isdigit(s[slen-1])) {
-@@ -2431,7 +2555,7 @@
+@@ -2437,7 +2561,7 @@
          // First char MUST be a fyle:
          if (*s < 'a'  ||  *s > 'h')  {  return ERROR_InvalidMove; }
          frFyle = fyle_FromChar (s[0]);
@@ -1112,7 +1112,7 @@ Index: src/position.cpp
          // Check for the compact form of capture with no rank,
          // e.g. "ed" or "de=Q":
          if (slen == 2  &&  (s[1] >= 'a'  &&  s[1] <= 'h')) {
-@@ -2444,15 +2568,16 @@
+@@ -2450,15 +2574,16 @@
                      return OK;
                  }
              }
@@ -1132,7 +1132,7 @@ Index: src/position.cpp
          if (MatchPawnMove (&mlist, frFyle, to, promo) != OK) {
              return ERROR_InvalidMove;
          } else {
-@@ -2460,17 +2585,28 @@
+@@ -2466,17 +2591,28 @@
              return OK;
          }
      }
@@ -1167,7 +1167,7 @@ Index: src/position.cpp
              return OK;
          }
      }
-@@ -2929,6 +3065,8 @@
+@@ -2935,6 +3071,8 @@
      ASSERT (str != NULL);
      const char * s = str;
      int count = 0;
@@ -1176,7 +1176,7 @@ Index: src/position.cpp
  
      if (firstCall) {
          firstCall = 0;
-@@ -2987,6 +3125,8 @@
+@@ -2993,6 +3131,8 @@
  
      if (! IsLegal()) { return ERROR_InvalidFEN; }
  
@@ -1185,7 +1185,7 @@ Index: src/position.cpp
      // Now the castling flags:
      while (isspace(*s)) { s++; }
      if (*s == '-') {
-@@ -3005,21 +3145,96 @@
+@@ -3011,21 +3151,96 @@
          }
      } else {
          while (!isspace(*s)  &&  *s != 0) {
@@ -1285,7 +1285,7 @@ Index: src/position.cpp
              }
              s++;
          }
-@@ -3082,39 +3297,115 @@
+@@ -3088,39 +3303,115 @@
      ASSERT (str != NULL);
      uint emptyRun, iRank, iFyle;
      pieceT * pBoard = Board;
@@ -1410,7 +1410,7 @@ Index: src/position.cpp
          // Now the EP target square:
          if (EPTarget == NULL_SQUARE) {
              *str++ = '-';
-@@ -3279,7 +3570,7 @@
+@@ -3285,7 +3576,7 @@
  void
  Position::CopyFrom (Position * src)
  {
@@ -1419,7 +1419,7 @@ Index: src/position.cpp
  }
  
  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-@@ -3316,7 +3607,7 @@
+@@ -3322,7 +3613,7 @@
      pieceT pieces [32];         // List of pieces excluding kings
      uint nPieces[2] = {0, 0};   // Number of pieces per side excluding kings.
      uint total = 0;             // Total number of pieces excluding kings.
@@ -1430,7 +1430,7 @@ Index: src/position.cpp
  
 Index: src/position.h
 ===================================================================
---- src/position.h	(revision 1088)
+--- src/position.h	(revision 1625)
 +++ src/position.h	(working copy)
 @@ -45,7 +45,8 @@
      FEN_COMPACT = 0,
@@ -1499,9 +1499,9 @@ Index: src/position.h
      // decode moves:
 Index: src/tkscid.h
 ===================================================================
---- src/tkscid.h	(revision 1088)
+--- src/tkscid.h	(revision 1625)
 +++ src/tkscid.h	(working copy)
-@@ -517,7 +517,9 @@
+@@ -522,7 +522,9 @@
  int sc_move_addSan    (TCL_ARGS);
  int sc_move_addUCI    (TCL_ARGS);
  int sc_move_back      (TCL_ARGS);
@@ -1513,7 +1513,7 @@ Index: src/tkscid.h
  int sc_name           (TCL_ARGS);
 Index: src/movelist.cpp
 ===================================================================
---- src/movelist.cpp	(revision 1088)
+--- src/movelist.cpp	(revision 1625)
 +++ src/movelist.cpp	(working copy)
 @@ -166,7 +166,7 @@
      writeOneByte (fp, sm->capturedPiece);
@@ -1535,9 +1535,9 @@ Index: src/movelist.cpp
      sm->castleFlags = readOneByte (fp);
 Index: src/tkscid.cpp
 ===================================================================
---- src/tkscid.cpp	(revision 1088)
+--- src/tkscid.cpp	(revision 1625)
 +++ src/tkscid.cpp	(working copy)
-@@ -10176,11 +10176,11 @@
+@@ -10320,11 +10320,11 @@
  {
      static const char * options [] = {
          "add", "addSan", "addUCI", "back", "end", "forward",
@@ -1551,7 +1551,7 @@ Index: src/tkscid.cpp
      };
      int index = -1;
  
-@@ -10201,6 +10201,9 @@
+@@ -10345,6 +10345,9 @@
      case MOVE_BACK:
          return sc_move_back (cd, ti, argc, argv);
  
@@ -1561,7 +1561,7 @@ Index: src/tkscid.cpp
      case MOVE_END:
          db->game->MoveToPly(0);
          {
-@@ -10214,6 +10217,9 @@
+@@ -10358,6 +10361,9 @@
      case MOVE_FORWARD:
          return sc_move_forward (cd, ti, argc, argv);
  
@@ -1571,7 +1571,7 @@ Index: src/tkscid.cpp
      case MOVE_PGN:
          return sc_move_pgn (cd, ti, argc, argv);
  
-@@ -10239,32 +10245,40 @@
+@@ -10383,32 +10389,40 @@
  }
  
  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1619,7 +1619,7 @@ Index: src/tkscid.cpp
      simpleMoveT sm;
      Position * pos = db->game->GetCurrentPos();
      errorT err = pos->ReadCoordMove (&sm, s, true);
-@@ -10336,13 +10350,22 @@
+@@ -10480,13 +10494,22 @@
          ptr += 4;        
        } else {
          s[4] = ptr[4];
@@ -1644,7 +1644,7 @@ Index: src/tkscid.cpp
          err = db->game->AddMove (&sm, NULL);
          if (err == OK) {
              db->gameAltered = true;
-@@ -10354,6 +10377,7 @@
+@@ -10498,6 +10521,7 @@
              break;
          }
        } else {
@@ -1652,7 +1652,7 @@ Index: src/tkscid.cpp
          //Tcl_AppendResult (ti, "Error reading move(s): ", ptr, NULL);
          break;
        }
-@@ -10385,6 +10409,39 @@
+@@ -10529,6 +10553,39 @@
  }
  
  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1692,7 +1692,7 @@ Index: src/tkscid.cpp
  // sc_move_forward:
  //    Moves forward a specified number of moves (default = 1 move).
  int
-@@ -10408,6 +10465,33 @@
+@@ -10552,6 +10609,33 @@
  }
  
  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1728,52 +1728,37 @@ Index: src/tkscid.cpp
  //    the specified place in the PGN output (given as a byte count
 Index: tcl/lang/swedish.tcl
 ===================================================================
---- tcl/lang/swedish.tcl	(revision 1088)
+--- tcl/lang/swedish.tcl	(revision 1630)
 +++ tcl/lang/swedish.tcl	(working copy)
-@@ -2013,6 +2013,8 @@
- # ====== TODO To be translated ======
+@@ -1642,6 +1642,8 @@
+ translate W IERotate  {Rotera}
+ translate W IEUnableToStart {Kan inte starta Inmatningsmotor:}
  translate W DoneWithPosition {Klar med position}
- # ====== TODO To be translated ======
-+translate W DidYouCastle {Did you castle?}
 +# ====== TODO To be translated ======
- }
- 
- ############################################################
++translate W DidYouCastle {Did you castle?}
+ translate W Board {Bräde}
+ translate W showGameInfo {Visa partiinformation}
+ translate W autoResizeBoard {Ändra storleken på brädet automatiskt}
 Index: tcl/lang/serbian.tcl
 ===================================================================
---- tcl/lang/serbian.tcl	(revision 1088)
+--- tcl/lang/serbian.tcl	(revision 1630)
 +++ tcl/lang/serbian.tcl	(working copy)
-@@ -2016,6 +2016,9 @@
+@@ -2079,6 +2079,8 @@
  # ====== TODO To be translated ======
  translate Y DoneWithPosition {Done with position}
  # ====== TODO To be translated ======
 +translate Y DidYouCastle {Did you castle?}
 +# ====== TODO To be translated ======
-+
- }
- # end of serbian.tcl
- 
-Index: tcl/lang/russian.tcl
-===================================================================
---- tcl/lang/russian.tcl	(revision 1088)
-+++ tcl/lang/russian.tcl	(working copy)
-@@ -2043,6 +2043,9 @@
+ translate Y Board {Board}
  # ====== TODO To be translated ======
- translate R DoneWithPosition {Done with position}
- # ====== TODO To be translated ======
-+translate R DidYouCastle {Did you castle?}
-+# ====== TODO To be translated ======
-+
- }
- # end of russian.tcl
- 
+ translate Y showGameInfo {Show game info}
 Index: tcl/lang/english.tcl
 ===================================================================
---- tcl/lang/english.tcl	(revision 1088)
+--- tcl/lang/english.tcl	(revision 1630)
 +++ tcl/lang/english.tcl	(working copy)
-@@ -1641,5 +1641,8 @@
- # Calculation of Variations
- translate E DoneWithPosition {Done with position}
+@@ -1682,5 +1682,8 @@
+ translate E EmptyUriList {Drop content is empty.}
+ translate E SelectionOwnerDidntRespond {Timeout during drop action: selection owner didn't respond.}
  
 +# Ask about ambiguous castling in chess 960
 +translate E DidYouCastle {Did you castle?}
@@ -1782,21 +1767,20 @@ Index: tcl/lang/english.tcl
  # end of english.tcl
 Index: tcl/lang/norsk.tcl
 ===================================================================
---- tcl/lang/norsk.tcl	(revision 1088)
+--- tcl/lang/norsk.tcl	(revision 1630)
 +++ tcl/lang/norsk.tcl	(working copy)
-@@ -2008,6 +2008,9 @@
+@@ -2074,6 +2074,8 @@
  # ====== TODO To be translated ======
  translate O DoneWithPosition {Done with position}
  # ====== TODO To be translated ======
 +translate O DidYouCastle {Did you castle?}
 +# ====== TODO To be translated ======
-+
- }
- 
- # norsk.tcl
+ translate O Board {Board}
+ # ====== TODO To be translated ======
+ translate O showGameInfo {Show game info}
 Index: tcl/tools/uci.tcl
 ===================================================================
---- tcl/tools/uci.tcl	(revision 1088)
+--- tcl/tools/uci.tcl	(revision 1625)
 +++ tcl/tools/uci.tcl	(working copy)
 @@ -19,8 +19,8 @@
    set infoToken {depth seldepth time nodes pv multipv score cp mate lowerbound upperbound currmove currmovenumber hashfull nps tbhits sbhits cpuload string refutation currline}
@@ -1817,7 +1801,7 @@ Index: tcl/tools/uci.tcl
      # hmmm
      # set uciInfo(score$n) ""
    }
-@@ -62,7 +63,8 @@
+@@ -63,7 +64,8 @@
    ################################################################################
  
    # todo: sort out the analyze var with computer tournament feature &&&
@@ -1825,15 +1809,15 @@ Index: tcl/tools/uci.tcl
 +set ::ccg 0
 +set ::ccc 0
    proc processAnalysisInput { { n 1 } { analyze 1 } } {
-     global analysis ::uci::uciInfo ::uci::optionToken
+     global analysis ::uci::uciInfo ::uci::optionToken comp
  
-@@ -290,8 +292,16 @@
+@@ -286,8 +288,17 @@
  
        # convert to something more readable
        if ($toBeFormatted) {
 +incr ::ccc
 +incr ::ccg [lindex [time {
-         set uciInfo(pv$n) [formatPv $uciInfo(pv$n) $analysis(fen$n)]
+         set uciInfo(pv$n) [formatPv $uciInfo(pv$n)]
          set toBeFormatted 0
 +}] 0]
 +if {$::ccc == 20} {
@@ -1841,10 +1825,11 @@ Index: tcl/tools/uci.tcl
 +puts "avg [expr $::ccg / 20]"
 +set ::ccg 0
 +}
++
        }
  
        set idx [ expr $uciInfo(multipv$n) -1 ]
-@@ -798,6 +808,24 @@
+@@ -796,6 +807,24 @@
  
    proc sendUCIoptions {n} {
      global analysis
@@ -1869,7 +1854,7 @@ Index: tcl/tools/uci.tcl
      set engineData [ lindex $::engines(list) $n ]
      set options [ lindex $engineData 8 ]
      foreach opt $options {
-@@ -949,17 +977,16 @@
+@@ -963,17 +992,16 @@
    # returns 1 if an error occured when entering a move
    ################################################################################
    proc sc_move_add { moves } {
@@ -1892,7 +1877,7 @@ Index: tcl/tools/uci.tcl
        if {[string length $m] > 4} {
          set promo [string range $m 4 end]
          # inverse transformation : const char PIECE_CHAR [] = "xKQRBNP.xkqrbnpxMm";
-@@ -975,9 +1002,12 @@
+@@ -989,9 +1017,12 @@
            n { set p 5}
            default {puts "Promo error $promo for moves $moves"}
          }
@@ -1909,9 +1894,9 @@ Index: tcl/tools/uci.tcl
      return 0
 Index: tcl/tools/analysis.tcl
 ===================================================================
---- tcl/tools/analysis.tcl	(revision 1088)
+--- tcl/tools/analysis.tcl	(revision 1631)
 +++ tcl/tools/analysis.tcl	(working copy)
-@@ -3295,6 +3295,11 @@
+@@ -3426,6 +3426,11 @@
  	if {$analysis(isCrafty$n)} {
            sendToEngine $n "mn [sc_pos moveNumber]"
          }
@@ -1923,7 +1908,7 @@ Index: tcl/tools/analysis.tcl
  	sendToEngine $n analyze
  	return
        }
-@@ -3340,6 +3345,10 @@
+@@ -3471,6 +3476,10 @@
  	}
  	
        }
@@ -1934,7 +1919,7 @@ Index: tcl/tools/analysis.tcl
        
        sendToEngine $n analyze
        
-@@ -3356,6 +3365,11 @@
+@@ -3487,6 +3496,11 @@
        if {(!$windowsOS)  &&  $analysis(send_sigint$n)} {
  	catch {exec -- kill -s INT [pid $analysis(pipe$n)]}
        }
@@ -1946,7 +1931,7 @@ Index: tcl/tools/analysis.tcl
        sendToEngine $n new
        sendToEngine $n force
        if { $nonStdStart && ! $analysis(has_setboard$n) } {
-@@ -3363,6 +3377,7 @@
+@@ -3494,6 +3508,7 @@
  	updateAnalysisText $n
  	return
        }
@@ -1956,40 +1941,41 @@ Index: tcl/tools/analysis.tcl
        } else  {
 Index: tcl/main.tcl
 ===================================================================
---- tcl/main.tcl	(revision 1088)
+--- tcl/main.tcl	(revision 1634)
 +++ tcl/main.tcl	(working copy)
-@@ -1213,7 +1213,20 @@
-     } else {
-       set ::sergame::lastPlayerMoveUci ""
-     }
+@@ -1248,7 +1248,21 @@
+     sc_move addSan null
+   } else {
+     # if {[winfo exists .commentWin]} { .commentWin.cf.text delete 0.0 end }
 -    sc_move add $sq1 $sq2 $promo
 +
 +    set castle 0
 +    if {[sc_move duplicate $sq1 $sq2] == 1} {
-+	set answer [tk_messageBox -message "Did you castle?" -type yesno -icon question]
-+	switch -- $answer {
-+	    yes {set castle 1}
-+	    no {set castle 0}
-+	}
++       set answer [tk_messageBox -message "Did you castle?" -type yesno -icon question]
++       switch -- $answer {
++           yes {set castle 1}
++           no {set castle 0}
++       }
 +    }
 +    if {[sc_move inplace $sq1] == 1} {
-+	set castle 1
++       set castle 1
 +    }
 +    sc_move add $sq1 $sq2 $promo $castle
++
 +
      set san [sc_game info previous]
      if {$action == "mainline"} {
        sc_var exit
-@@ -1382,7 +1395,7 @@
+@@ -1420,7 +1434,7 @@
  
    if { [winfo exists .calvarWin] } { return }
  
 -  global selectedSq bestSq
 +  global selectedSq bestSq currentSq
  
-   set w .board
+   set w .main.board
    ::board::setDragSquare $w -1
-@@ -1393,6 +1406,20 @@
+@@ -1431,6 +1445,20 @@
    }
  
    if {$square == $selectedSq} {
@@ -2010,19 +1996,19 @@ Index: tcl/main.tcl
      if {$::suggestMoves} {
        # User pressed and released on same square, so make the
        # suggested move if there is one:
-@@ -1405,6 +1432,7 @@
+@@ -1443,6 +1471,7 @@
        # Current square is the square user pressed the button on,
        # so we do nothing.
      }
 +   }
    } else {
-     # User has dragged to another square, so try to add this as a move:
-     addMove $square $selectedSq
+     if {$selectedSq == -1} {
+       return
 Index: tcl/edit.tcl
 ===================================================================
---- tcl/edit.tcl	(revision 1088)
+--- tcl/edit.tcl	(revision 1636)
 +++ tcl/edit.tcl	(working copy)
-@@ -356,7 +356,7 @@
+@@ -398,7 +398,7 @@
    makeSetupFen
  }
  proc check_castling {a b c} {
@@ -2033,9 +2019,9 @@ Index: tcl/edit.tcl
  trace variable moveNum w check_moveNum
 Index: tcl/board.tcl
 ===================================================================
---- tcl/board.tcl	(revision 1088)
+--- tcl/board.tcl	(revision 1626)
 +++ tcl/board.tcl	(working copy)
-@@ -2439,6 +2460,8 @@
+@@ -2509,6 +2509,8 @@
    if {$diffcount == 4} {
      # Check for making/unmaking a castling move
  
@@ -2044,7 +2030,7 @@ Index: tcl/board.tcl
      set oldlower [string tolower $oldboard]
      set newlower [string tolower $newboard]
  
-@@ -2454,6 +2477,7 @@
+@@ -2524,6 +2526,7 @@
            eval $w.bd coords p$rto [::board::midSquare $w $rfrom]
            set from $kfrom
            set to $kto
@@ -2052,7 +2038,7 @@ Index: tcl/board.tcl
          } elseif {[string index $newlower $kfrom] == {k}  &&
  	    [string index $newlower $rfrom] == {r}  &&
  	    [string index $oldlower $kto] == {k}  &&
-@@ -2461,13 +2485,50 @@
+@@ -2531,13 +2534,50 @@
            # An undo-castling animation. No need to move the rook.
            set from $kto
            set to $kfrom
@@ -2103,7 +2089,7 @@ Index: tcl/board.tcl
      foreach i {0 1 2} {
        foreach j {0 1 2} {
          foreach k {0 1 2} {
-@@ -2479,6 +2540,7 @@
+@@ -2549,6 +2589,7 @@
              ($old($i) == "P" && $old($k) == "p"))} {
              set from $sq($i)
              set to $sq($j)
@@ -2111,7 +2097,7 @@ Index: tcl/board.tcl
            }
            # Check for undoing an en-passant capture from j to i with
            # the enemy pawn on k:
-@@ -2489,10 +2551,46 @@
+@@ -2559,10 +2600,46 @@
              set to $sq($j)
              set captured $sq($k)
              set capturedPiece $new($k)
@@ -2158,7 +2144,7 @@ Index: tcl/board.tcl
    }
  
    if {$diffcount == 2} {
-@@ -2500,6 +2598,25 @@
+@@ -2570,6 +2647,25 @@
      # same (non-empty) piece as the other new square, and at least one
      # of the old or new squares should be empty.
  
@@ -2184,7 +2170,7 @@ Index: tcl/board.tcl
      if {$old(0) != "." && $old(1) != "." && $new(0) != "." && $new(1) != "."} {
        return
      }
-@@ -2536,6 +2653,7 @@
+@@ -2606,6 +2702,7 @@
        }
      }
    }
