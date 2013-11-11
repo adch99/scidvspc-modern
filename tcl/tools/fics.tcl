@@ -580,7 +580,10 @@ namespace eval fics {
       set ::fics::consoleheight $height
       if {$logged} {
 	writechan "set width  $width"  noecho
-	writechan "set height $height" noecho
+	if {$height > 4} {
+          # fics wants at least height of 5 for some reason ?
+	  writechan "set height $height" noecho
+        }
         $w.console.text yview moveto 1
       }
     }
