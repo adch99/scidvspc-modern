@@ -273,9 +273,8 @@ set scidDataDir [file nativename [file join $scidUserDir "data"]]
 set scidTexturesDir [file nativename [file join $scidUserDir "textures"]]
 set scidPiecesDir [file nativename [file join $scidUserDir "pieces"]]
 
-# boardSizes: a list of the available board sizes.
-set boardSizes [list 25 30 35 40 45 50 55 60 65 70 75 80]
-set boardSizesOLD [list 21 25 29 33 37 40 45 49 54 58 64 72]
+# boardSizes: sizes after 80 are copied rom smaller ones
+set boardSizes [list 25 30 35 40 45 50 55 60 65 70 75 80 90 100 110 120 130 140 150 160]
 
 #load textures for lite and dark squares
 set boardfile_dark "emptySquare"

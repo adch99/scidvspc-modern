@@ -57,8 +57,11 @@ proc SetBoardTextures {} {
     # create lite and dark squares
     image create photo bgl$size -width $size -height $size
     image create photo bgd$size -width $size -height $size
-    bgl$size copy $boardfile_lite ;# -from 0 0 $size $size  ; from doesn't work with mis-sized source images
-    bgd$size copy $boardfile_dark ;# -from 0 0 $size $size
+
+    ### Need to use "to" to force texture tiling for the new large board
+    # "from" doesn't work with mis-sized source images 
+    bgl$size copy $boardfile_lite -to 0 0 $size $size ;# -from 0 0 $size $size 
+    bgd$size copy $boardfile_dark -to 0 0 $size $size ;# -from 0 0 $size $size
   }
 }
 
