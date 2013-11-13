@@ -2,7 +2,7 @@
 ### fics.tcl: part of Scid.
 ###
 ### Copyright (C) 2007  Pascal Georges
-### Copyright Stevenaaus 2010-2012
+### Copyright Stevenaaus 2010-2013
 
 namespace eval fics {
   set sockchan 0
@@ -1159,6 +1159,7 @@ namespace eval fics {
             [string match -nocase $::fics::reallogin [sc_game tags get White]]} {
 	  if {! $::fics::no_results} {
 	    if {[string match "1/2*" $res]} {set res Draw}
+            ::fics::killDialogs
 	    tk_messageBox -title "Game result" -icon info -type ok -message "$res"
 	  }
 	}
@@ -1355,12 +1356,11 @@ namespace eval fics {
 
     # abort request
 
-    if {[string match "* would like to abort the game;*" $line] \
-     && ! $::fics::ignore_abort && ! [winfo exists .fics_dialog]} {
+    if {[string match "* would like to abort the game;*" $line] && ! $::fics::ignore_abort} {
       if {$::fics::no_requests} {
         writechan decline
       } else {
-        # todo: use translation for Accept
+	::fics::killDialogs
 	set ans [tk_dialog .fics_dialog Abort "$line\nDo you accept ?" question {} Yes No Ignore]
 	switch -- $ans {
 	  0 {writechan accept}
@@ -1371,8 +1371,8 @@ namespace eval fics {
     }
 
     # takeback
-    if {[string match "* would like to take back *" $line] \
-     && ! $::fics::no_requests && ! $::fics::ignore_takeback && ! [winfo exists .fics_dialog]} {
+    if {[string match "* would like to take back *" $line] && ! $::fics::no_requests && ! $::fics::ignore_takeback} {
+      ::fics::killDialogs
       set ans [tk_dialog .fics_dialog {Take Back} "$line\nDo you accept ?" question {} Yes No Ignore]
       switch -- $ans {
         0 {
@@ -1390,14 +1390,14 @@ namespace eval fics {
     }
 
     # draw
-    if {[string match "*offers you a draw*" $line]
-     && ! $::fics::ignore_draw && ! [winfo exists .fics_dialog]} {
+    if {[string match "*offers you a draw*" $line] && ! $::fics::ignore_draw} {
       if {[regexp {(.*) offers you a draw} $line t1 t2]} {
 	::commenteditor::appendComment "$t2 offers draw"
       }
       if {$::fics::no_requests} {
         writechan decline
       } else {
+        ::fics::killDialogs
 	set ans [tk_dialog .fics_dialog {Draw Offered} "$line\nDo you accept ?" question {} Yes No Ignore]
 	switch -- $ans {
 	  0 {writechan accept}
@@ -1408,11 +1408,11 @@ namespace eval fics {
     }
 
     # adjourn
-    if {[string match "*would like to adjourn the game*" $line]
-     && ! $::fics::ignore_adjourn && ! [winfo exists .fics_dialog]} {
+    if {[string match "*would like to adjourn the game*" $line] && ! $::fics::ignore_adjourn} {
       if {$::fics::no_requests} {
         writechan decline
       } else {
+        ::fics::killDialogs
 	set ans [tk_dialog .fics_dialog {Adjourn Offered} "$line\nDo you accept ?" question {} Yes No Ignore]
 	switch -- $ans {
 	  0 {writechan accept}
@@ -2335,6 +2335,7 @@ namespace eval fics {
 
     # Unused
     if {$mode == "safe"} {
+      ::fics::killDialogs
       set ans [tk_dialog .fics_dialog Abort "You are playing a game\nDo you want to exit ?" question {} Exit Cancel ]
       if {$ans == 1} {
 	bind .fics <Destroy> ::fics::close
@@ -2449,6 +2450,12 @@ namespace eval fics {
 	::gameclock::stop 1
       }
     }
+  }
+
+  proc killDialogs {} {
+      if {[winfo exists .fics_dialog]} {
+        destroy .fics_dialog
+      }
   }
 }
 
