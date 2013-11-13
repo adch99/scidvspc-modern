@@ -1491,6 +1491,30 @@ proc ::splash::make {} {
   button $w.dismiss -text Close -width 8 -command [list wm withdraw $w] \
       -font font_Small
   pack $w.f -side top -expand yes -fill both
+
+  set ::splash::console 0
+  pack [entry $w.command] -side top -fill x -padx 3 -pady 2
+  bind $w.command <Return> {
+    if {!$::splash::console} {
+      set ::splash::console 1
+      ::splash::add {}
+      ::splash::add "Scid vs. PC $scidVersion Console"
+      ::splash::add {------------------------------------}
+    }
+    set command [string trim [.splash.command get]]
+    ::splash::add "# $command"
+    if {$command != {}} {
+      if {[catch {set result [eval $command]} error]} {
+	::splash::add "> $error"
+      } else {
+	::splash::add "> $result"
+      }
+    }
+    .splash.t see end
+    .splash.command delete 0 end
+  }
+
+
   pack $w.b -side top -fill x
   pack $w.auto -side left -in .splash.b -pady 2 -ipadx 10 -padx 10
   pack $w.dismiss -side right -in .splash.b -pady 2 -ipadx 10 -padx 10
