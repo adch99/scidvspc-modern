@@ -460,7 +460,7 @@ translate E altered {altered}
 # Standard error messages:
 translate E ErrNotOpen {This is not an open database.}
 translate E ErrReadOnly {This database is read-only and can't be altered.}
-translate E ErrSearchInterrupted {Search was interrupted, results are incomplete.}
+translate E ErrSearchInterrupted {Search interrupted}
 
 # Game information:
 translate E twin {twin}

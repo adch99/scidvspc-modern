@@ -14490,7 +14490,7 @@ db->bbuf->Empty();
     				update = updateStart;
     				updateProgressBar (ti, i, base->numGames);
     				if (interruptedProgress()) {
-    					Tcl_SetResult (ti, (char*) errMsgSearchInterrupted(ti), TCL_STATIC);
+    					Tcl_SetResult (ti, "interrupted", TCL_STATIC);
     					return TCL_OK;
     				}
     				if (search_pool.count(&base) == 0) {

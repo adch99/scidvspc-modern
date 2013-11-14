@@ -567,14 +567,18 @@ proc ::tree::displayLines { baseNumber moves } {
   set nextmove [sc_game info nextMove]
 
   $w.f.tl configure -state normal
+  $w.f.tl delete 1.0 end
 
+  if {$moves == "interrupted"} {
+    $w.f.tl insert end $::tr(ErrSearchInterrupted)
+    return
+  }
   set moves [split $moves "\n"]
 
   # for the graph display
   set ::tree::treeData$baseNumber $moves
 
   set len [llength $moves]
-  $w.f.tl delete 1.0 end
 
   foreach t [$w.f.tl tag names] {
     if { [ string match "tagclick*" $t ] || [ string match "tagtooltip*" $t ] } {
