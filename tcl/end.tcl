@@ -1957,8 +1957,8 @@ bind .main <Control-Shift-F7> {
 }
 
 bind .main <Control-Shift-F8> {
-    puts "Dumping images to /tmp/ScidImages"
-    dumpImages /tmp/ScidImages
+    puts "Dumping images to ScidImages"
+    dumpImages ScidImages
 }
 
 # Opening files by drag & drop on Scid icon on Mac
