@@ -2743,7 +2743,7 @@ making for easier <a Analysis Debugging>Debugging</a>.
 
   <p>After configuring the options and pressing OK, Autoplay
   Mode is enabled and the engine starts its analysis.
-  A best line variation and/or score is
+  A variation and/or score is
   automatically added for each position as the engine processes the game.
   Only positions from the current position until the end of the game
   are annotated, so you can skip annotation of opening moves
@@ -2757,13 +2757,13 @@ making for easier <a Analysis Debugging>Debugging</a>.
 
   <p><b>Options</b>
   <ul>
-     <li><term>Seconds per move</term>
-     Number of seconds engine spends on analysing each move.</li>
-     <li><term>Annotate With</term> 
-     Choose whether to add Variations or Scores.
+     <li><term>Blunder Threshold</term> A Score which determines whether it's a bad move or not.</li>
+     <li><term>Move Control</term> Whether to process each move for a fixed time, or fixed depth (UCI only).</li>
+     <li><term>Depth per move</term> Number of half-moves engine spends on analysing each move (UCI only).</li>
+     <li><term>Seconds per move</term> Number of seconds engine spends on analysing each move.</li>
+     <li><term>Annotate With</term> Choose whether to add Variations or Scores.
      (Scores can then be utilized by the <a Graphs Score>Score Graph</a>)</li>
-     <li><term>Which Side</term> 
-     Select which side(s) should be annotated.</li>
+     <li><term>Which Side</term> Select which side(s) should be annotated.</li>
      <li><term>Which Moves</term>
      Add an annotation only if the game move is a blunder, or not the best move.
      The "Blunder Threshold" is given in units of pawns (i.e. 0.5 means 
@@ -2857,7 +2857,7 @@ engines support both formats.
 via the <button tb_annotate> button in the <run ::enginelist::choose><green>engine configuration</green></run> widget.
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.9, April 2013</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.11, November 2013</footer></p>
 }
 
 set helpTitle(Tourney) "Computer Tournament"

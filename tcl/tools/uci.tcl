@@ -149,7 +149,24 @@ namespace eval uci {
       for {set i 0} {$i < $length } {incr i} {
         set t [lindex $data $i]
         if { $t == "info" } { continue }
-        if { $t == "depth" } { incr i ; set uciInfo(depth$n) [ lindex $data $i ] ; continue }
+        if { $t == "depth" } {
+	  incr i
+	  set uciInfo(depth$n) [ lindex $data $i ]
+	  if {$::annotateEngine > -1 && $::annotateDepth} {
+	    if {$uciInfo(depth$n) < $::annotateSeenDepth} {
+	      set ::annotateSeenLower 1
+	    }
+	    # Wait till a certain depth to make a move (or no valid moves avail)
+	    if {(($uciInfo(depth$n) >= $::annotateWantedDepth || $uciInfo(scoremate$n) > 0) && $::annotateSeenLower) || [sc_pos matchMoves {}] == {}} {
+	      after cancel autoplay ; # needed ???
+	      ### annotateSeenLower makes us wait for infos from the next move
+	      set ::annotateSeenLower 0
+	      set ::annotateSeenDepth $uciInfo(depth$n)
+	      autoplay
+	    }
+	  }
+	  continue
+	}
         if { $t == "seldepth" } { incr i ; set uciInfo(seldepth$n) [ lindex $data $i ] ; set analysis(seldepth$n) $uciInfo(seldepth$n) ; continue }
         if { $t == "time" } { incr i ; set uciInfo(time$n) [ lindex $data $i ] ; continue }
         if { $t == "nodes" } { incr i ; set uciInfo(nodes$n) [ lindex $data $i ] ; continue }

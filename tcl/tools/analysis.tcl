@@ -822,9 +822,12 @@ proc  checkState {arg widget} {
 
 
 proc initAnnotation {n} {
-  global autoplayDelay tempdelay blunderThreshold annotateButton annotateEngine analysis annotateWithScore annotateWithVars tr
+  global autoplayDelay tempdelay blunderThreshold annotateButton annotateEngine analysis annotateWithScore annotateWithVars tr annotateWantedDepth annotateSeenDepth annotateSeenLower annotateLock
 
   set analysis(prevscore$n) 0
+  set annotateSeenDepth $annotateWantedDepth
+  set annotateSeenLower 1
+  set annotateLock 0
 
   set w .configAnnotation
   if { [winfo exists $w] } { destroy $w }
@@ -840,16 +843,6 @@ proc initAnnotation {n} {
   wm state $w withdrawn
   wm title $w $tr(AnnotateTitle)
 
-  ### Seconds per move
-
-  frame $w.delay
-  label $w.delay.label -textvar ::tr(SecondsPerMove)
-  spinbox $w.delay.spDelay -width 4 -textvariable tempdelay -from 1 -to 300 -increment 1
-
-  pack $w.delay -side top -pady 3 
-  pack $w.delay.label -side left -padx 5 
-  pack $w.delay.spDelay -side right -padx 5 
-
   ### Blunder Threshold
 
   frame $w.blunderbox
@@ -860,6 +853,42 @@ proc initAnnotation {n} {
   pack $w.blunderbox -side top -padx 10 
   pack $w.blunderbox.label -side left -padx 5
   pack $w.blunderbox.spBlunder -side right -padx 5
+
+  ### Depth
+
+  if  {$analysis(uci$n)} {
+    frame $w.choice
+    label $w.choice.0 -text {Move Control}
+    radiobutton $w.choice.1 -variable annotateDepth -value 1 -text Depth -command checkAnnotateControl
+    radiobutton $w.choice.2 -variable annotateDepth -value 0 -text Time  -command checkAnnotateControl
+
+    pack $w.choice -side top -pady 3 
+    pack $w.choice.0 $w.choice.1 $w.choice.2 -side left -expand 1 -fill x
+
+    frame $w.depth -padx 10
+    label $w.depth.label -text {Depth per move}
+    spinbox $w.depth.spDepth -width 4 -textvariable annotateWantedDepth -from 10 -to 30 -increment 1
+
+    pack $w.depth -side top -pady 3 
+    pack $w.depth.label -side left -padx 3 -padx 13
+    pack $w.depth.spDepth -side right -padx 3 
+  } else {
+    set annotateDepth 0
+  }
+
+  ### Seconds per move
+
+  frame $w.delay
+  label $w.delay.label -textvar ::tr(SecondsPerMove)
+  spinbox $w.delay.spDelay -width 4 -textvariable tempdelay -from 1 -to 300 -increment 1
+
+  pack $w.delay -side top -pady 3 
+  pack $w.delay.label -side left -padx 5 
+  pack $w.delay.spDelay -side right -padx 5 
+
+  if  {$analysis(uci$n)} {
+    checkAnnotateControl
+  }
 
   addHorizontalRule $w
 
@@ -1023,9 +1052,29 @@ proc initAnnotation {n} {
   update
 }
 
-################################################################################
-# Start Annotation
-################################################################################
+proc checkAnnotateControl {} {
+  set w .configAnnotation
+
+  if {$::annotateDepth} {
+    foreach i [winfo children $w.delay] {
+      $i configure -state disabled
+    }
+    foreach i [winfo children $w.depth]  {
+      $i configure -state normal
+    }
+  } else {
+    foreach i [winfo children $w.delay] {
+      $i configure -state normal
+    }
+    foreach i [winfo children $w.depth]  {
+      $i configure -state disabled
+    }
+  }
+}
+
+
+### Start Annotation
+
 proc okAnnotation {n} {
   global autoplayDelay tempdelay annotateEngine analysis autoplayMode
 
@@ -1093,6 +1142,7 @@ proc bookAnnotation { {n 1} } {
   }
   sc_book close $::analysisBookSlot
   set ::wentOutOfBook 1
+  update
 
   set bookName [file rootname $::useAnalysisBookName]
   set verboseMoveOutOfBook " $::tr(MoveOutOfBook)"

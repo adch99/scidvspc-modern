@@ -166,6 +166,8 @@ set ::addAnnotatorTag 1
 set ::annotateMoves all
 set ::annotateWithVars blunders
 set ::annotateWithScore allmoves
+set ::annotateWantedDepth 15
+set ::annotateDepth 0
 set ::useAnalysisBook 0
 set ::isAnnotateVar 0
 set ::addAnnotatorComment 0

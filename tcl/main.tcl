@@ -1538,6 +1538,7 @@ proc autoplay {} {
     } else {
       after $autoplayDelay autoplay
     }
+    update
     return
   }
 
@@ -1611,7 +1612,9 @@ proc autoplay {} {
     ::move::Forward
   }
 
-  after $autoplayDelay autoplay
+  if {!$::annotateDepth} {
+    after $autoplayDelay autoplay
+  }
 }
 
 
@@ -1637,6 +1640,7 @@ proc nextgameAutoplay {n} {
     updateStatusBar
     updateTitle
     updateBoard -pgn
+    update
     ### this seems wrong.. it adds a score/var before the book
     # addAnnotation
 
@@ -1660,6 +1664,7 @@ proc cancelAutoplay {} {
   set autoplayMode 0
   set annotateEngine -1
   set annotateButton 0
+  set annotateDepth 0
   after cancel autoplay
   .main.button.autoplay configure -image autoplay_off
 }
