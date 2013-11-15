@@ -800,14 +800,30 @@ proc ::enginelist::move {dir} {
   ::enginelist::write
 }
 
-proc  checkState {arg widget} {
+proc checkState {arg widget} {
   if {[set $arg]} {
     set state normal
   } else {
     set state disabled
   }
   $widget configure -state $state
- }
+}
+
+proc checkAnnotateControl {} {
+  set w .configAnnotation
+
+  if {$::annotate(Depth)} {
+    set s1 disabled ; set s2 normal
+  } else {
+    set s1 normal   ; set s2 disabled
+  }
+  foreach i [winfo children $w.delay] {
+    $i configure -state $s1
+  }
+  foreach i [winfo children $w.depth]  {
+    $i configure -state $s2
+  }
+}
 
 ### Annotation configuration widget
 ### most of the Annotation logic is in main.tcl::autoplay
@@ -1041,26 +1057,6 @@ proc initAnnotation {n} {
   placeWinOverParent $w .analysisWin$n
   wm state $w normal
   update
-}
-
-proc checkAnnotateControl {} {
-  set w .configAnnotation
-
-  if {$::annotate(Depth)} {
-    foreach i [winfo children $w.delay] {
-      $i configure -state disabled
-    }
-    foreach i [winfo children $w.depth]  {
-      $i configure -state normal
-    }
-  } else {
-    foreach i [winfo children $w.delay] {
-      $i configure -state normal
-    }
-    foreach i [winfo children $w.depth]  {
-      $i configure -state disabled
-    }
-  }
 }
 
 ### Start Annotation
