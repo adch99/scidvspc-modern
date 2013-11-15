@@ -428,16 +428,6 @@ $m add command -label GamePrev -accelerator "Ctrl+Up" \
     -command {::game::LoadNextPrev previous}
 set helpMessage($m,[incr menuindex]) GamePrev
 
-proc standardGameShortcuts {w} {
-  bind $w <Control-Home> {::game::LoadNextPrev first}
-  bind $w <Control-End> {::game::LoadNextPrev last}
-  bind $w <Control-Down> {::game::LoadNextPrev next}
-  bind $w <Control-Up> {::game::LoadNextPrev previous}
-  bind $w <Control-question> ::game::LoadRandom
-}
-
-standardGameShortcuts .main
-
 $m add command -label GameRandom -command ::game::LoadRandom -accelerator "Ctrl+?"
 set helpMessage($m,[incr menuindex]) GameRandom
 
@@ -1786,7 +1776,18 @@ proc standardShortcuts {w} {
       wm attributes . -fullscreen 1
     }
   }
+  standardGameShortcuts $w
 }
+
+proc standardGameShortcuts {w} {
+  bind $w <Control-Home> {::game::LoadNextPrev first}
+  bind $w <Control-End> {::game::LoadNextPrev last}
+  bind $w <Control-Down> {::game::LoadNextPrev next}
+  bind $w <Control-Up> {::game::LoadNextPrev previous}
+  bind $w <Control-question> ::game::LoadRandom
+}
+
+standardGameShortcuts .main
 
 ################################################################################
 #
