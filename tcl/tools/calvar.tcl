@@ -10,15 +10,13 @@
 # Feedbacks, suggestions and comments are welcome.
 # Pascal
 
-# Known issues - doesnt work at atsrt and end of game ? S.A.
+# Known issues - doesn't work at start and end of game ? S.A.
 
 namespace eval calvar {
   # DEBUG
   # set ::uci::uciInfo(log_stdout$n) 1
 
   array set engineListBox {}
-  ### This seems unused, and for some reason interferes with annotation S.A
-  # set blunderThreshold 0.2
   set thinkingTimePerLine 10
   set thinkingTimePosition 30
   set currentLine 1
@@ -113,9 +111,6 @@ namespace eval calvar {
     set f $w.parameters
     frame $w.parameters
     pack $f
-    # label $f.lThreshold -text "Threshold"
-    # spinbox $f.sbThreshold  -width 3 -textvariable ::calvar::blunderThreshold -from 0.1 -to 1.5 -increment 0.1
-    # pack $f.lThreshold $f.sbThreshold -side left
 
     label $f.lTime2 -text "Initial thinking time"
     spinbox $f.sbTime2  -width 3 -textvariable ::calvar::thinkingTimePosition -from 5 -to 300 -increment 5 -validate all -vcmd {string is int %P}

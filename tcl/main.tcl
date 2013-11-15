@@ -1520,7 +1520,7 @@ proc toggleAutoplay {} {
 ### Automatically move through a games moves at a certain speed.
 
 proc autoplay {} {
-  global autoplayDelay autoplayMode annotateEngine analysis
+  global autoplayDelay autoplayMode analysis annotate
 
   ### autoplay had issues when not using book and moving from one game to the next
   # Hard to fix because of the (variation) stack
@@ -1529,7 +1529,7 @@ proc autoplay {} {
     return
   }
 
-  set n $annotateEngine
+  set n $annotate(Engine)
 
   if {$n == -1} {
     ::move::Forward
@@ -1550,7 +1550,7 @@ proc autoplay {} {
 
   # stop game annotation when out of opening
 
-  if { $::isBatch && $::isOpeningOnly && \
+  if { $::annotate(isBatch) && $::isOpeningOnly && \
         ( [sc_pos moveNumber] > $::isOpeningOnlyMoves || $::wentOutOfBook)} {
       nextgameAutoplay $n
       return
@@ -1563,7 +1563,7 @@ proc autoplay {} {
 
   if { [sc_pos isAt end] } {
     set move_done [sc_game info previousMoveNT]
-    if { [string index $move_done end] != "#" && $::annotateWithVars != "no"} {
+    if { [string index $move_done end] != "#" && $::annotate(WithVars) != "no"} {
       set text [format "%d:%+.2f" $analysis(depth$n) $analysis(score$n)]
       set moves $analysis(moves$n)
       sc_move back
@@ -1576,7 +1576,7 @@ proc autoplay {} {
       sc_info preMoveCmd preMoveCommand
       updateBoard -pgn
     }
-    if {$::isBatch && [sc_game number] != 0} {
+    if {$::annotate(isBatch) && [sc_game number] != 0} {
       nextgameAutoplay $n
       return
     }
@@ -1586,7 +1586,7 @@ proc autoplay {} {
 
   ### Annotate variations
 
-  if {$::isAnnotateVar} {
+  if {$::annotate(isVar)} {
     if { [sc_pos isAt vend] } {
       sc_var exit
       set lastVar [::popAnalysisData $n]
@@ -1612,27 +1612,27 @@ proc autoplay {} {
     ::move::Forward
   }
 
-  if {!$::annotateDepth} {
+  if {!$annotate(Depth)} {
     after $autoplayDelay autoplay
   }
 }
 
 
 proc nextgameAutoplay {n} {
-  global autoplayDelay analysis
+  global autoplayDelay analysis annotate stack
 
   toggleEngineAnalysis $n 1
   sc_game save [sc_game number]
   set analysis(prevscore$n) 0
 
-  if {[sc_filter next] <= $::batchEnd  && [sc_filter next] != 0} {
-    # if [sc_game number] < $::batchEnd
+  if {[sc_filter next] <= $annotate(batchEnd)  && [sc_filter next] != 0} {
+    # if [sc_game number] < $::annotate(batchEnd)
     # sc_game load [expr [sc_game number] + 1]
 
     ### Skip games not in filter (dont autoraise main window)
     ::game::LoadNextPrev next 0
 
-    if {$::addAnnotatorTag} {
+    if {$annotate(addTag)} {
       appendTag Annotator " $analysis(name$n)"
     }
     set ::wentOutOfBook 0
@@ -1644,7 +1644,7 @@ proc nextgameAutoplay {n} {
     ### this seems wrong.. it adds a score/var before the book
     # addAnnotation
 
-    set ::stack {}
+    set stack {}
     set analysis(prevscore$n) 0
     set analysis(score$n)     0
     set analysis(prevmoves$n) {}
@@ -1659,12 +1659,11 @@ proc nextgameAutoplay {n} {
 }
 
 proc cancelAutoplay {} {
-  global autoplayMode annotateEngine annotateButton
+  global autoplayMode annotate
 
   set autoplayMode 0
-  set annotateEngine -1
-  set annotateButton 0
-  set annotateDepth 0
+  set annotate(Engine) -1
+  set annotate(Button) 0
   after cancel autoplay
   .main.button.autoplay configure -image autoplay_off
 }

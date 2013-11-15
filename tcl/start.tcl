@@ -162,17 +162,18 @@ set ::file::finder::data(Old) 1
 set ::tools::graphs::absfilter::type year
 set ::tools::graphs::filter::type year
 set ::tools::graphs::showpoints 1
-set ::addAnnotatorTag 1
-set ::annotateMoves all
-set ::annotateWithVars blunders
-set ::annotateWithScore allmoves
-set ::annotateWantedDepth 15
-set ::annotateDepth 0
-set ::useAnalysisBook 0
-set ::isAnnotateVar 0
-set ::addAnnotatorComment 0
-set ::maintFlag W
-set ::glistFlag W
+set annotate(addTag) 1
+set annotate(Moves) all
+set annotate(WithVars) blunders
+set annotate(WithScore) allmoves
+set annotate(WantedDepth) 15
+set annotate(Depth) 0
+set useAnalysisBook 0
+set annotate(isVar) 0
+set annotate(addComment) 0
+set annotate(blunder) 1.0
+set maintFlag W
+set glistFlag W
 set ::gbrowser::size 35
 set comp(timecontrol) pergame
 set comp(seconds) 180
@@ -612,8 +613,6 @@ set moveEntry(Coord) 1
 set autoplayDelay 5000
 set animateDelay 200
 
-# Blunder Threshold
-set blunderThreshold 1.0
 
 # Geometry of windows:
 array set geometry {}

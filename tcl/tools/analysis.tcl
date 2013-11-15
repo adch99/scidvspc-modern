@@ -30,12 +30,12 @@ set wentOutOfBook 0
 
 # Todo: these should be in analysis array
 
-set isBatch 0
-set batchEnd 1
+set annotate(isBatch) 0
+set annotate(batchEnd) 1
+set annotate(markExercises) 0
 set isOpeningOnly 0
 set isOpeningOnlyMoves 10
 set stack ""
-set markTacticalExercises 0
 set finishGameMode 0
 
 proc resetEngines {} {
@@ -108,8 +108,8 @@ proc resetEngine {n} {
 
 resetEngines
 
-set annotateEngine -1		; # $n of engine annotating
-set annotateButton 0	; # annotate checkbutton value
+set annotate(Engine) -1	; # $n of engine annotating
+set annotate(Button)  0 ; # annotate checkbutton value
 
 ### Divides string-represented node count by 1000
 
@@ -809,34 +809,25 @@ proc  checkState {arg widget} {
   $widget configure -state $state
  }
 
-################################################################################
-# Annotation configuration widget
-# Most of the Annotation logic is in main.tcl::autoplay
-################################################################################
-
-# These various global vars should really be made into an annotate() array
-
-# SCID has rewritten Annotation and Autoplay widgets,
-# but they are too confusing and too hard to use, for little functionality gain
-# (though they *do* have a nice mate-in-N feature for annotation).
+### Annotation configuration widget
+### most of the Annotation logic is in main.tcl::autoplay
 
 
 proc initAnnotation {n} {
-  global autoplayDelay tempdelay blunderThreshold annotateButton annotateEngine analysis annotateWithScore annotateWithVars tr annotateWantedDepth annotateSeenDepth annotateSeenLower annotateLock
+  global autoplayDelay tempdelay analysis annotate tr
 
   set analysis(prevscore$n) 0
-  set annotateSeenDepth $annotateWantedDepth
-  set annotateSeenLower 1
-  set annotateLock 0
+  set annotate(SeenDepth) $annotate(WantedDepth)
+  set annotate(SeenLower) 1
 
   set w .configAnnotation
   if { [winfo exists $w] } { destroy $w }
-  if { ! $annotateButton } { ; # end annotation
+  if { ! $annotate(Button) } { ; # end annotation
     toggleAutoplay
     return
   }
 
-  trace variable blunderThreshold w {::utils::validate::Regexp {^[0-9]*\.?[0-9]*$}}
+  trace variable annotate(blunder) w {::utils::validate::Regexp {^[0-9]*\.?[0-9]*$}}
 
   set tempdelay [expr {$autoplayDelay / 1000.0}]
   toplevel $w
@@ -847,7 +838,7 @@ proc initAnnotation {n} {
 
   frame $w.blunderbox
   label $w.blunderbox.label -text "$tr(Blunder) $tr(BlundersThreshold)"
-  spinbox $w.blunderbox.spBlunder -width 4 -textvariable blunderThreshold \
+  spinbox $w.blunderbox.spBlunder -width 4 -textvariable annotate(blunder) \
       -from 0.1 -to 3.0 -increment 0.1
 
   pack $w.blunderbox -side top -padx 10 
@@ -859,21 +850,21 @@ proc initAnnotation {n} {
   if  {$analysis(uci$n)} {
     frame $w.choice
     label $w.choice.0 -text {Move Control}
-    radiobutton $w.choice.1 -variable annotateDepth -value 1 -text Depth -command checkAnnotateControl
-    radiobutton $w.choice.2 -variable annotateDepth -value 0 -text Time  -command checkAnnotateControl
+    radiobutton $w.choice.1 -variable annotate(Depth) -value 1 -text Depth -command checkAnnotateControl
+    radiobutton $w.choice.2 -variable annotate(Depth) -value 0 -text Time  -command checkAnnotateControl
 
     pack $w.choice -side top -pady 3 
     pack $w.choice.0 $w.choice.1 $w.choice.2 -side left -expand 1 -fill x
 
     frame $w.depth -padx 10
     label $w.depth.label -text {Depth per move}
-    spinbox $w.depth.spDepth -width 4 -textvariable annotateWantedDepth -from 10 -to 30 -increment 1
+    spinbox $w.depth.spDepth -width 4 -textvariable annotate(WantedDepth) -from 10 -to 30 -increment 1
 
     pack $w.depth -side top -pady 3 
     pack $w.depth.label -side left -padx 3 -padx 13
     pack $w.depth.spDepth -side right -padx 3 
   } else {
-    set annotateDepth 0
+    set annotate(Depth) 0
   }
 
   ### Seconds per move
@@ -895,10 +886,10 @@ proc initAnnotation {n} {
   ### Annotate Scores
 
   label $w.scoreslabel -text {Add Scores}
-  radiobutton $w.scores_allmoves -textvar ::tr(AnnotateAllMoves) -variable annotateWithScore -value allmoves -anchor w
-  radiobutton $w.scores_blunders -text {Blunders/Not Best} -variable annotateWithScore -value blunders -anchor w
-  radiobutton $w.scores_var -textvar ::tr(GlistVars) -variable annotateWithScore -value var -anchor w
-  radiobutton $w.scores_none -textvar ::tr(No) -variable annotateWithScore -value no -anchor w
+  radiobutton $w.scores_allmoves -textvar ::tr(AnnotateAllMoves) -variable annotate(WithScore) -value allmoves -anchor w
+  radiobutton $w.scores_blunders -text {Blunders/Not Best} -variable annotate(WithScore) -value blunders -anchor w
+  radiobutton $w.scores_var -textvar ::tr(GlistVars) -variable annotate(WithScore) -value var -anchor w
+  radiobutton $w.scores_none -textvar ::tr(No) -variable annotate(WithScore) -value no -anchor w
   # previously  annotateType
 
   pack $w.scoreslabel -side top
@@ -909,10 +900,10 @@ proc initAnnotation {n} {
   ### Annotate Variations
 
   label $w.anlabel -text {Add Variations}
-  radiobutton $w.notbest -textvar ::tr(AnnotateNotBest) -variable annotateWithVars -value notbest -anchor w
-  radiobutton $w.blunders -textvar ::tr(AnnotateBlundersOnly) -variable annotateWithVars -value blunders -anchor w
-  radiobutton $w.allmoves -textvar ::tr(AnnotateAllMoves) -variable annotateWithVars -value allmoves -anchor w
-  radiobutton $w.none -textvar ::tr(No) -variable annotateWithVars -value no -anchor w
+  radiobutton $w.notbest -textvar ::tr(AnnotateNotBest) -variable annotate(WithVars) -value notbest -anchor w
+  radiobutton $w.blunders -textvar ::tr(AnnotateBlundersOnly) -variable annotate(WithVars) -value blunders -anchor w
+  radiobutton $w.allmoves -textvar ::tr(AnnotateAllMoves) -variable annotate(WithVars) -value allmoves -anchor w
+  radiobutton $w.none -textvar ::tr(No) -variable annotate(WithVars) -value no -anchor w
 
   pack $w.anlabel -side top
   pack $w.notbest $w.blunders -side top -fill x
@@ -923,9 +914,9 @@ proc initAnnotation {n} {
   ### Which side
 
   label $w.avlabel -textvar ::tr(AnnotateWhich)
-  radiobutton $w.all -textvar ::tr(AnnotateAll) -variable annotateMoves -value all -anchor w
-  radiobutton $w.white -textvar ::tr(AnnotateWhite) -variable annotateMoves -value white -anchor w
-  radiobutton $w.black -textvar ::tr(AnnotateBlack) -variable annotateMoves -value black -anchor w
+  radiobutton $w.all -textvar ::tr(AnnotateAll) -variable annotate(Moves) -value all -anchor w
+  radiobutton $w.white -textvar ::tr(AnnotateWhite) -variable annotate(Moves) -value white -anchor w
+  radiobutton $w.black -textvar ::tr(AnnotateBlack) -variable annotate(Moves) -value black -anchor w
 
   pack $w.avlabel -side top
   pack $w.all $w.white $w.black -side top -fill x
@@ -934,9 +925,9 @@ proc initAnnotation {n} {
 
   ### General options frame
 
-  checkbutton $w.cbAnnotateVar  -textvar ::tr(AnnotateVariations) -variable ::isAnnotateVar -anchor w
-  checkbutton $w.cbAddAnnotatorComment  -textvar ::tr(AnnotateComment) -variable ::addAnnotatorComment -anchor w
-  checkbutton $w.cbAddAnnotatorTag  -textvar ::tr(addAnnotatorTag) -variable ::addAnnotatorTag -anchor w
+  checkbutton $w.cbAnnotateVar         -textvar ::tr(AnnotateVariations) -variable annotate(isVar)      -anchor w
+  checkbutton $w.cbAddAnnotatorComment -textvar ::tr(AnnotateComment)    -variable annotate(addComment) -anchor w
+  checkbutton $w.cbAddAnnotatorTag     -textvar ::tr(addAnnotatorTag)    -variable annotate(addTag)     -anchor w
   pack $w.cbAnnotateVar $w.cbAddAnnotatorComment $w.cbAddAnnotatorTag -anchor w
 
   # Book
@@ -985,13 +976,13 @@ proc initAnnotation {n} {
   pack $w.batch -side top -fill x
   set to [sc_base numGames]
   if {$to <1} { set to 1}
-  checkbutton $w.batch.cbBatch -textvar ::tr(AnnotateSeveralGames) -variable ::isBatch \
-    -command "checkState ::isBatch $w.batch.spBatchEnd"
+  checkbutton $w.batch.cbBatch -textvar ::tr(AnnotateSeveralGames) -variable annotate(isBatch) \
+    -command "checkState ::annotate(isBatch) $w.batch.spBatchEnd"
 
-  spinbox $w.batch.spBatchEnd -width 6 -textvariable ::batchEnd \
+  spinbox $w.batch.spBatchEnd -width 6 -textvariable annotate(batchEnd) \
       -from 1 -to $to -increment 1 -validate all -vcmd {string is int %P}
 
-  checkState ::isBatch $w.batch.spBatchEnd
+  checkState ::annotate(isBatch) $w.batch.spBatchEnd
 
 
   # Opening Errors Only
@@ -1019,12 +1010,12 @@ proc initAnnotation {n} {
 
   grid $w.batch.cbBatch -column 0 -row 1 -sticky w
   grid $w.batch.spBatchEnd -column 1 -row 1 -columnspan 2 -sticky e
-  set ::batchEnd $to
+  set annotate(batchEnd) $to
 
-  checkbutton $w.batch.cbMarkTactics -textvar ::tr(MarkTacticalExercises) -variable ::markTacticalExercises
+  checkbutton $w.batch.cbMarkTactics -textvar ::tr(MarkTacticalExercises) -variable annotate(markExercises)
   grid $w.batch.cbMarkTactics -column 0 -row 2 -sticky w
-  if {! $::analysis(uci$n)} {
-    set ::markTacticalExercises 0
+  if {!$analysis(uci$n)} {
+    set annotate(markExercises) 0
     $w.batch.cbMarkTactics configure -state disabled
   }
 
@@ -1034,8 +1025,8 @@ proc initAnnotation {n} {
   dialogbutton $w.buttons.cancel -textvar ::tr(Cancel) -command {
     bind .configAnnotation <Destroy> {}
     destroy .configAnnotation
-    set annotateEngine -1
-    set annotateButton 0
+    set annotate(Engine) -1
+    set annotate(Button) 0
   }
   dialogbutton $w.buttons.help -textvar ::tr(Help) -command {helpWindow Analysis Annotating}
   dialogbutton $w.buttons.ok -text "OK" -command "okAnnotation $n"
@@ -1055,7 +1046,7 @@ proc initAnnotation {n} {
 proc checkAnnotateControl {} {
   set w .configAnnotation
 
-  if {$::annotateDepth} {
+  if {$::annotate(Depth)} {
     foreach i [winfo children $w.delay] {
       $i configure -state disabled
     }
@@ -1072,17 +1063,16 @@ proc checkAnnotateControl {} {
   }
 }
 
-
 ### Start Annotation
 
 proc okAnnotation {n} {
-  global autoplayDelay tempdelay annotateEngine analysis autoplayMode
+  global autoplayDelay tempdelay autoplayMode annotate analysis
 
-  if {$annotateEngine > -1} {
-    puts stderr "Scid: initAnnotation reports engine $annotateEngine already annotating"
+  if {$annotate(Engine) > -1} {
+    puts stderr "Scid: initAnnotation reports engine $annotate(Engine) already annotating"
     return
   }
-  if {$::isBatch && [sc_base isReadOnly]} {
+  if {$annotate(isBatch) && [sc_base isReadOnly]} {
     set answer [tk_messageBox -title Tournanment -icon question -type okcancel \
         -message "Database is read only, and batch annotations can't be saved.\n\nContinue ?" -parent .configAnnotation]
     if {$answer != "ok"} {return}
@@ -1093,9 +1083,9 @@ proc okAnnotation {n} {
   set ::prevNag {}
 
   # tactical positions is selected, must be in multipv mode
-  if {$::markTacticalExercises} {
-    if { $::analysis(multiPVCount$n) < 2} {
-      set ::analysis(multiPVCount$n) 4
+  if {$annotate(markExercises)} {
+    if { $analysis(multiPVCount$n) < 2} {
+      set analysis(multiPVCount$n) 4
       changePVSize $n
     }
   }
@@ -1104,24 +1094,23 @@ proc okAnnotation {n} {
   set autoplayDelay [expr {int($tempdelay * 1000)}]
   bind .configAnnotation <Destroy> {}
   destroy .configAnnotation
-  set annotateEngine $n
+  set annotate(Engine) $n
   if {! $analysis(analyzeMode$n)} {
     toggleEngineAnalysis $n 1
   }
-  if {$::addAnnotatorTag} {
+  if {$annotate(addTag)} {
     appendTag Annotator "$analysis(name$n)"
   }
   if {$autoplayMode == 0} { toggleAutoplay }
 }
 
-################################################################################
-# Part of annotation process : will check the moves if they are in the book,
-# and add a comment when going out of it
-################################################################################
-proc bookAnnotation { {n 1} } {
-  global analysis
+### Part of annotation process
+### Check the moves if they are in the book, and add a comment when going out of it
 
-  if {!($::annotateEngine > -1 && $::useAnalysisBook)} {
+proc bookAnnotation { {n 1} } {
+  global analysis annotate
+
+  if {!($annotate(Engine) > -1 && $::useAnalysisBook)} {
     return
   }
 
@@ -1176,9 +1165,11 @@ proc bookAnnotation { {n 1} } {
 # Move criteria is below, but basically they are non-obvious, unique, winning moves.
 
 proc markExercise { prevscore score } {
-  set n $::annotateEngine
+  global analysis annotate informant
 
-  if {! $::markTacticalExercises || ! $::analysis(uci$n)} {
+  set n $annotate(Engine)
+
+  if {! $annotate(markExercises) || ! $analysis(uci$n)} {
     return
   }
 
@@ -1187,21 +1178,21 @@ proc markExercise { prevscore score } {
 
   set deltamove [expr {$score - $prevscore}]
   # filter tactics so only those with high gains are kept
-  if { [expr abs($deltamove)] < $::informant("+/-") } {
+  if { [expr abs($deltamove)] < $informant("+/-") } {
     return
   }
   # dismiss games where the result is already clear (high score,and we continue in the same way)
   if { [expr $prevscore * $score] >= 0} {
-    if { [expr abs($prevscore) ] > $::informant("++-") } { return }
-    if { [expr abs($prevscore)] > $::informant("+-") && [expr abs($score) ] < [expr 2 * abs($prevscore)]} { return }
+    if { [expr abs($prevscore) ] > $informant("++-") } { return }
+    if { [expr abs($prevscore)] > $informant("+-") && [expr abs($score) ] < [expr 2 * abs($prevscore)]} { return }
   }
 
   # The best move is much better than others.
-  if { [llength $::analysis(multiPV$n)] < 2 } {
+  if { [llength $analysis(multiPV$n)] < 2 } {
     puts "markExercise: error, not enough PV"
     return
   }
-  set sc2 [lindex [ lindex $::analysis(multiPV$n) 1 ] 1]
+  set sc2 [lindex [ lindex $analysis(multiPV$n) 1 ] 1]
   if { [expr abs( $score - $sc2 )] < 1.5 } {
     puts "markExercise: < 1.5"
     return
@@ -1209,16 +1200,16 @@ proc markExercise { prevscore score } {
 
   # There is no other winning moves (the best move may not win, of course, but
   # I reject exercises when there are e.g. moves leading to +9, +7 and +5 scores)
-  if { [expr $score * $sc2] > 0.0 && [expr abs($score)] > $::informant("+-") && [expr abs($sc2)] > $::informant("+-") } {
+  if { [expr $score * $sc2] > 0.0 && [expr abs($score)] > $informant("+-") && [expr abs($sc2)] > $informant("+-") } {
     return
   }
 
   # The best move does not lose position.
-  if {[sc_pos side] == {white} && $score < [expr 0.0 - $::informant("+/-")] } { return }
-  if {[sc_pos side] == {black} && $score > $::informant("+/-") } { return }
+  if {[sc_pos side] == {white} && $score < [expr 0.0 - $informant("+/-")] } { return }
+  if {[sc_pos side] == {black} && $score > $informant("+/-") } { return }
 
   # Move is not obvious: check that it is not the first move guessed at low depths
-  set pv [ lindex [ lindex $::analysis(multiPV$n) 0 ] 2 ]
+  set pv [ lindex [ lindex $analysis(multiPV$n) 0 ] 2 ]
   set bm0 [lindex $pv 0]
   foreach depth {1 2 3} {
     set res [ sc_pos analyze -time 1000 -hashkb 32 -pawnkb 1 -searchdepth $depth ]
@@ -1259,11 +1250,11 @@ proc markExercise { prevscore score } {
 }
 
 proc addScore {n type {novar 0}} {
-    global annotateWithScore analysis addAnnotatorComment
+    global analysis annotate
 
-    if {$annotateWithScore == "no" || \
-        ($annotateWithScore == "var" && $novar) || \
-        ($annotateWithScore == "blunders" && $novar) || \
+    if {$annotate(WithScore) == "no" || \
+        ($annotate(WithScore) == "var" && $novar) || \
+        ($annotate(WithScore) == "blunders" && $novar) || \
         [sc_pos isAt vstart]} {
       return
     }
@@ -1281,7 +1272,7 @@ proc addScore {n type {novar 0}} {
     }
 
     # Add engine name to score if desired and not a single score
-    if {$addAnnotatorComment && $type != "single"} {
+    if {$annotate(addComment) && $type != "single"} {
       # To parse scores if the engine's name contains - or + chars (see sc_game_scores)
       set name  [string map {- { } + { }} $analysis(name$n)]
       set text "$name: $text"
@@ -1298,12 +1289,12 @@ proc addScore {n type {novar 0}} {
 
 
 proc addAnnotation {} {
-  global analysis annotateMoves annotateWithVars annotateWithScore annotateEngine blunderThreshold prevNag
+  global analysis annotate prevNag
 
-  set n $annotateEngine
+  set n $annotate(Engine)
 
   if {$n == -1} {
-    puts stderr "Scid: addAnnotation called while annotateEngine is -1"
+    puts stderr "Scid: addAnnotation called while annotate(Engine) is -1"
     return
   }
 
@@ -1317,8 +1308,8 @@ proc addAnnotation {} {
   if {[sc_pos isAt vstart]  &&  [sc_pos isAt vend]} { return }
 
   set tomove [sc_pos side]
-  if {$annotateMoves == {white}  &&  $tomove == {white} ||
-    $annotateMoves == {black}  &&  $tomove == {black} } {
+  if {$annotate(Moves) == {white}  &&  $tomove == {white} ||
+    $annotate(Moves) == {black}  &&  $tomove == {black} } {
     set analysis(prevscore$n) $analysis(score$n)
     set analysis(prevmoves$n) $analysis(moves$n)
     return
@@ -1336,7 +1327,7 @@ proc addAnnotation {} {
   set moves $analysis(moves$n)
 
   # if next move is what engine guessed, do nothing
-  if { $analysis(prevmoves$n) != {} && ![sc_pos isAt vend] && $annotateWithVars != {allmoves}} {
+  if { $analysis(prevmoves$n) != {} && ![sc_pos isAt vend] && $annotate(WithVars) != {allmoves}} {
     set move2 [sc_game info previousMoveNT]
 
     sc_info preMoveCmd {}
@@ -1351,7 +1342,7 @@ proc addAnnotation {} {
     if {$move1 == $move2} {
       set analysis(prevscore$n) $analysis(score$n)
       set analysis(prevmoves$n) $analysis(moves$n)
-      if {$annotateWithScore == "allmoves"} {
+      if {$annotate(WithScore) == "allmoves"} {
 	addScore $n single 1
       }
       updateBoard -pgn
@@ -1371,9 +1362,9 @@ proc addAnnotation {} {
   set isBlunder 0
 
   ### Calculate isBlunder
-  if {$annotateWithVars != "notbest"} {
-    if { $deltamove < [expr 0.0 - $blunderThreshold] && $tomove == {black} || \
-          $deltamove > $blunderThreshold && $tomove == {white} } {
+  if {$annotate(WithVars) != "notbest"} {
+    if { $deltamove < [expr 0.0 - $annotate(blunder)] && $tomove == {black} || \
+          $deltamove > $annotate(blunder) && $tomove == {white} } {
       set isBlunder 1
     }
     # if the game is dead, and the score continues to go down, don't add any comment
@@ -1388,22 +1379,22 @@ proc addAnnotation {} {
     }
   }
 
-  if {$annotateWithVars == "no"} {
+  if {$annotate(WithVars) == "no"} {
     ### Scores only
 
-    if {$annotateWithScore == "allmoves"} {
+    if {$annotate(WithScore) == "allmoves"} {
       addScore $n single
-    } elseif { $annotateWithScore == "blunders" && $isBlunder } {
+    } elseif { $annotate(WithScore) == "blunders" && $isBlunder } {
       addScore $n both
     }
 
-  } elseif {$annotateWithVars == "allmoves"} {
+  } elseif {$annotate(WithVars) == "allmoves"} {
 
     addScore $n single
 
     set absdeltamove [expr { abs($deltamove) } ]
-    if { $deltamove < [expr 0.0 - $blunderThreshold] && $tomove == {black} || \
-	  $deltamove > $blunderThreshold && $tomove == {white} } {
+    if { $deltamove < [expr 0.0 - $annotate(blunder)] && $tomove == {black} || \
+	  $deltamove > $annotate(blunder) && $tomove == {white} } {
       if {$absdeltamove > $::informant("?!") && $absdeltamove <= $::informant("?")} {
 	sc_pos addNag "?!"
       } elseif {$absdeltamove > $::informant("?") && $absdeltamove <= $::informant("??")} {
@@ -1462,7 +1453,7 @@ proc addAnnotation {} {
       sc_pos addNag $nag
     }
 
-    if {$::annotateWithVars != "no" } {
+    if {$annotate(WithVars) != "no" } {
       # Rewind, request a diagram
       sc_move back
       sc_pos addNag D
@@ -1562,17 +1553,17 @@ proc appendTag {tag value} {
 #
 ################################################################################
 proc pushAnalysisData {lastVar n} {
-  global analysis
-  lappend ::stack [list $analysis(prevscore$n) $analysis(score$n) \
+  global analysis stack
+  lappend stack [list $analysis(prevscore$n) $analysis(score$n) \
       $analysis(prevmoves$n) $analysis(moves$n) $lastVar ]
 }
 ################################################################################
 #
 ################################################################################
 proc popAnalysisData {n} {
-  global analysis
+  global analysis stack
   # the start of analysis is in the middle of a variation
-  if {[llength $::stack] == 0} {
+  if {[llength $stack] == 0} {
     set analysis(prevscore$n) 0
     set analysis(score$n)     0
     set analysis(prevmoves$n) {}
@@ -1580,13 +1571,13 @@ proc popAnalysisData {n} {
     set lastVar 0
     return
   }
-  set tmp [lindex $::stack end]
+  set tmp [lindex $stack end]
   set analysis(prevscore$n) [lindex $tmp 0]
   set analysis(score$n)     [lindex $tmp 1]
   set analysis(prevmoves$n) [lindex $tmp 2]
   set analysis(moves$n)     [lindex $tmp 3]
   set lastVar               [lindex $tmp 4]
-  set ::stack [lreplace $::stack end end]
+  set stack [lreplace $stack end end]
   return $lastVar
 }
 
@@ -1777,7 +1768,7 @@ proc makeAnalysisMove {n} {
   }
   if {[scan $s %s move] != 1} { set res 0 }
 
-  if {! [sc_pos isAt vend] && ! $::comp(playing)} {
+  if {! [sc_pos isAt vend] && ! $comp(playing)} {
     set action [confirmReplaceMove]
     if {$action == "cancel"} {
       return
@@ -1786,7 +1777,7 @@ proc makeAnalysisMove {n} {
     set action replace
   }
 
-  if {!$::comp(playing)} {
+  if {!$comp(playing)} {
     sc_game undoPoint
   }
 
@@ -1820,18 +1811,13 @@ proc makeAnalysisMove {n} {
   return $res
 }
 
-################################################################################
-#
-################################################################################
-
-# destroyAnalysisWin:
-#   Closes an engine, because its analysis window is being destroyed.
+### Close an engine, because its analysis window is being destroyed.
 
 proc destroyAnalysisWin {n W} {
 
   # Is this working properly. We seem to have a process left S.A.
 
-  global windowsOS analysis annotateButton annotateEngine
+  global windowsOS analysis annotate
 
   puts_ "destroyAnalysisWin $n"
   if {[string trim $W] != ".analysisWin$n"} {
@@ -1842,11 +1828,11 @@ proc destroyAnalysisWin {n W} {
 
   if {[winfo exists .configAnnotation]} {
     # Is annotation being configured ?
-    set annotateButton 0
+    set annotate(Button) 0
     destroy .configAnnotation
-  } elseif {$annotateEngine == $n} {
+  } elseif {$annotate(Engine) == $n} {
     # Is annotation going ?
-    set annotateButton 0
+    set annotate(Button) 0
     toggleAutoplay
   }
 
@@ -1946,18 +1932,18 @@ proc logEngine {n text} {
   global analysis
 
   # Print the log message to stdout if applicable:
-  if {$::analysis(log_stdout)} {
+  if {$analysis(log_stdout)} {
     puts stdout "$n $text"
   }
 
-  if { [ info exists ::analysis(log$n)] && $::analysis(log$n) != {}} {
-    puts $::analysis(log$n) $text
-    catch { flush $::analysis(log$n) }
+  if { [ info exists analysis(log$n)] && $analysis(log$n) != {}} {
+    puts $analysis(log$n) $text
+    catch { flush $analysis(log$n) }
 
     # Close the log file if the limit is reached:
     incr analysis(logCount$n)
     if {$analysis(logCount$n) >= $analysis(logMax)} {
-      puts $::analysis(log$n) \
+      puts $analysis(log$n) \
           "Note  : Log file size limit reached; closing log file."
       catch {close $analysis(log$n)}
       set analysis(log$n) {}
@@ -1985,7 +1971,7 @@ proc startAnalysisWin {FunctionKey} {
 ### toggle analysis engine n
 
 proc makeAnalysisWin {{n 0} {options {}}} {
-  global analysisWin$n font_Analysis analysisCommand analysis annotateButton annotateEngine
+  global analysisWin$n font_Analysis analysisCommand analysis annotate
 
   set w .analysisWin$n
 
@@ -2171,9 +2157,9 @@ proc makeAnalysisWin {{n 0} {options {}}} {
     -command "toggleAutomove $n" -variable analysis(automove$n) -relief $relief
   ::utils::tooltip::Set $w.b.training $::tr(Training)
 
-  if {!$annotateButton} {
+  if {!$annotate(Button)} {
     checkbutton $w.b.annotate -image tb_annotate -indicatoron false -width 32 -height 32 \
-      -variable annotateButton -command "initAnnotation $n" -relief $relief
+      -variable annotate(Button) -command "initAnnotation $n" -relief $relief
     ::utils::tooltip::Set $w.b.annotate $::tr(Annotate)
   } else {
     frame $w.b.annotate -width 0 -height 0
@@ -2851,10 +2837,10 @@ proc formatAnalysisMoves {text} {
 # will ask engine to play the game till the end
 ################################################################################
 proc toggleFinishGame {n} {
-  global analysis
+  global analysis annotate
   set b ".analysisWin$n.b.finishGame"
 
-  if { $::annotateButton || $::autoplayMode || !$analysis(analyzeMode$n) || ! [sc_pos isAt vend] } {
+  if { $annotate(Button) || $::autoplayMode || !$analysis(analyzeMode$n) || ! [sc_pos isAt vend] } {
     return
   }
 
@@ -2884,9 +2870,9 @@ proc autoplayFinishGame {n} {
 #
 ################################################################################
 proc toggleEngineAnalysis {{n -1} {force 0}} {
-  global analysis
+  global analysis annotate
 
-  if { ($::annotateButton || $::finishGameMode) && ! $force } {
+  if { ($annotate(Button) || $::finishGameMode) && ! $force } {
     return
   }
 

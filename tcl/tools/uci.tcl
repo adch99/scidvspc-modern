@@ -65,7 +65,7 @@ namespace eval uci {
   # todo: sort out the analyze var with computer tournament feature &&&
 
   proc processAnalysisInput { { n 1 } { analyze 1 } } {
-    global analysis ::uci::uciInfo ::uci::optionToken comp
+    global analysis annotate comp ::uci::uciInfo ::uci::optionToken 
 
     if {$analyze} {
       set pipe $analysis(pipe$n)
@@ -152,16 +152,16 @@ namespace eval uci {
         if { $t == "depth" } {
 	  incr i
 	  set uciInfo(depth$n) [ lindex $data $i ]
-	  if {$::annotateEngine > -1 && $::annotateDepth} {
-	    if {$uciInfo(depth$n) < $::annotateSeenDepth} {
-	      set ::annotateSeenLower 1
+	  if {$annotate(Engine) > -1 && $annotate(Depth)} {
+	    if {$uciInfo(depth$n) < $annotate(SeenDepth)} {
+	      set annotate(SeenLower) 1
 	    }
 	    # Wait till a certain depth to make a move (or no valid moves avail)
-	    if {(($uciInfo(depth$n) >= $::annotateWantedDepth || $uciInfo(scoremate$n) > 0) && $::annotateSeenLower) || [sc_pos matchMoves {}] == {}} {
+	    if {(($uciInfo(depth$n) >= $annotate(WantedDepth) || $uciInfo(scoremate$n) > 0) && $annotate(SeenLower)) || [sc_pos matchMoves {}] == {}} {
 	      after cancel autoplay ; # needed ???
-	      ### annotateSeenLower makes us wait for infos from the next move
-	      set ::annotateSeenLower 0
-	      set ::annotateSeenDepth $uciInfo(depth$n)
+	      ### annotate(SeenLower) makes us wait for infos from the next move
+	      set annotate(SeenLower) 0
+	      set annotate(SeenDepth) $uciInfo(depth$n)
 	      autoplay
 	    }
 	  }
