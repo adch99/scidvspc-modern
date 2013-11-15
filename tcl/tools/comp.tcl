@@ -819,21 +819,21 @@ proc compNM {n m k} {
 
       ### Check if game is over
 
-      set score [sc_pos analyze -time 50]
-      if { $score == {0 {}}} {
-	### stalemate
-	sc_game tags set -result =
-	sc_pos setComment Stalemate
-	puts_ Stalemate
-	break
-      } elseif { $score == {-32000 {}}} {
-	### checkmate
-	if {[sc_pos side] == {black}} {
-	  sc_game tags set -result 1
+      if {[sc_pos moves] == {}} {
+	if {[string index [sc_game info previousMove] end] != {#}} {
+	  ### stalemate
+	  sc_game tags set -result =
+	  sc_pos setComment Stalemate
+	  puts_ Stalemate
 	} else {
-	  sc_game tags set -result 0
+	  ### checkmate
+	  if {[sc_pos side] == {black}} {
+	    sc_game tags set -result 1
+	  } else {
+	    sc_game tags set -result 0
+	  }
+	  puts_ Checkmate
 	}
-	puts_ Checkmate
 	break
       } else {
 	set fen [sc_pos fen]
