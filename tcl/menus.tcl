@@ -1318,8 +1318,6 @@ $m add checkbutton -label WindowsTree -variable startup(tree)
 $m add checkbutton -label WindowsBook -variable startup(book)
 $m add checkbutton -label FICS -variable startup(fics)
 
-bind .main <Control-Shift-Left>  {::board::resize .main.board -1}
-bind .main <Control-Shift-Right> {::board::resize .main.board +1}
 
 ### Help menu:
 set menuindex 0
@@ -1776,6 +1774,8 @@ proc standardShortcuts {w} {
       wm attributes . -fullscreen 1
     }
   }
+  bind $w <Control-Shift-Left>  {::board::resize .main.board -1}
+  bind $w <Control-Shift-Right> {::board::resize .main.board +1}
   standardGameShortcuts $w
 }
 
@@ -1787,11 +1787,7 @@ proc standardGameShortcuts {w} {
   bind $w <Control-question> ::game::LoadRandom
 }
 
-standardGameShortcuts .main
 
-################################################################################
-#
-################################################################################
 proc configInformant {} {
   global informant
 

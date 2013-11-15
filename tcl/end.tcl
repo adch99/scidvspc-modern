@@ -1313,7 +1313,6 @@ if {$::macOS} {
   bind .main <BackSpace> ::move::Back
 }
 
-# bind .main <space>  moveEntry_Complete
 bind .main <Escape> "moveEntry_Clear 1"
 bind .main <Tab> raiseAllWindows
 
