@@ -286,7 +286,7 @@ proc ::docking::motion {path} {
 proc ::docking::end_motion {w x y} {
   variable c_path
 
-  bind TNotebook <ButtonRelease-1> [namespace code {::docking::show_menu %W}]
+  bind TNotebook <ButtonRelease-1> [namespace code {::docking::show_menu %W %x %y}]
 
   if {$c_path==""} { return }
   $c_path configure -cursor {}
@@ -316,7 +316,7 @@ proc ::docking::end_motion {w x y} {
   setTabStatus
 }
 
-proc ::docking::show_menu {path} {
+proc ::docking::show_menu {path x y} {
   variable c_path
 
   if {[winfo exists .ctxtMenu]} {
@@ -329,6 +329,11 @@ proc ::docking::show_menu {path} {
 
   # HACK ! Because notebooks may also be used inside internal windows
   if {! [info exists ::docking::changedTab($c_path)] } {
+    return
+  }
+
+  # Check a tab exists under cursor
+  if {[catch {$c_path tab @$x,$y}]} {
     return
   }
 
@@ -399,7 +404,7 @@ proc  ::docking::tabChanged  {path} {
 
 ################################################################################
 
-bind TNotebook <ButtonRelease-1> {::docking::show_menu %W}
+bind TNotebook <ButtonRelease-1> {::docking::show_menu %W %x %y}
 
 bind TNotebook <ButtonPress-1> +[ list ::docking::start_motion %W]
 
