@@ -1633,9 +1633,10 @@ Game::MaterialMatch (ByteBuffer * buf, byte * min, byte * max,
 
       Next_Move:
         if (buf == NULL) {
-            MoveForward();
             if (CurrentMove->marker == END_MARKER) {
                 err = ERROR_EndOfMoveList;
+            } else {
+                MoveForward();
             }
         } else {
             err = DecodeNextMove (buf, NULL);
@@ -1866,9 +1867,10 @@ Game::ExactMatch (Position * searchPos, ByteBuffer * buf, simpleMoveT * sm,
         }
 #endif
         if (buf == NULL) {
-            MoveForward ();
             if (CurrentMove->marker == END_MARKER) {
                 err = ERROR_EndOfMoveList;
+            } else {
+                MoveForward ();
             }
         } else {
             err = DecodeNextMove (buf, NULL);
@@ -1967,9 +1969,10 @@ Game::VarExactMatch (Position * searchPos, gameExactMatchT searchType)
             if (match) { return true; }
         }
         // Continue down this variation:
-        MoveForward();
         if (CurrentMove->marker == END_MARKER) {
             err = ERROR_EndOfMoveList;
+        } else {
+            MoveForward();
         }
     }
     return false;
