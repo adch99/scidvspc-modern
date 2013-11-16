@@ -2403,7 +2403,6 @@ sc_base_stats (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 int
 sc_base_ecoStats (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
-#ifndef WINCE
     if (argc != 3) {
         return errorResult (ti, "Usage: sc_base ecoStats <ECO-prefix>");
     }
@@ -2473,7 +2472,6 @@ sc_base_ecoStats (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     } else {
         Tcl_AppendElement (ti, "0.0");
     }
-#endif
     return TCL_OK;
 }
 
@@ -14345,22 +14343,10 @@ sc_tree_search (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     char tempTrans[10];
 
-// check we have enough memory on Pocket
-#ifdef WINCE
-// sc_tree_search used to cost 2 MB : now just below 1 MB
-  if (! StoredLine::isInitialized()) {
-    char * test = my_Tcl_AttemptAlloc(1500*1024);
-    if (test == NULL)
-      return errorResult (ti, "Not enough free memory.");
-    else
-      my_Tcl_Free(test);
-  }
-#endif
-
     bool hideMoves = false;
     bool showTimeStats = true;
     bool showEpdData = true;
-    bool listMode = false; // now unused, previously used by ./pocket/ui.tcl
+    bool listMode = false;
     bool adjustMode = false;
     bool fastMode = false;
     int sortMethod = SORT_FREQUENCY; // default move order: frequency
