@@ -1349,9 +1349,7 @@ namespace eval CorrespondenceChess {
 	# $filespecs: the specs of the file (currently ignored)
 	#----------------------------------------------------------------------
 	proc chooseFile {i filespecs} {
-		set idir [pwd]
-
-		set fullname [tk_getOpenFile -initialdir $idir -title "Scid Correspondence Chess: Select $i"]
+		set fullname [tk_getOpenFile -initialdir $::env(HOME) -title "Scid Correspondence Chess: Select $i"]
 		if {$fullname == ""} { return }
 	  
 		return $fullname

@@ -29,7 +29,7 @@ proc ::windows::stats::Open {} {
       { "Text files" {".txt"} }
       { "All files"  {"*"}    }
     }
-    set fname [tk_getSaveFile -initialdir [pwd] -filetypes $ftype -title "Save text file"]
+    set fname [tk_getSaveFile -initialdir $::env(HOME) -filetypes $ftype -title "Save Statistics"]
     if {$fname != ""} {
       if {[catch {set tempfile [open $fname w]}]} {
         tk_messageBox -title "Scid: Error saving file" -type ok -icon warning \

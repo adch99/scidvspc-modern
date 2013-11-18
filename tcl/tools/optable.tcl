@@ -294,11 +294,11 @@ proc ::optable::mergeGames { {game_count 50} {ply 999} } {
     if {$g == "" } {continue}
     set res [scan $g "%d:  <g_%d>" d1 game_number]
     if {$res != 2} {
+      set message "Error merging game"
       if {[info exists game_number]} {
-        tk_messageBox -title "Scid: Error writing report" -type ok -icon warning -message "Error merging game $game_number"
-      } else  {
-        tk_messageBox -title "Scid: Error writing report" -type ok -icon warning -message "Error merging game"
+        set message "$message $game_number"
       }
+      tk_messageBox -title "Error writing report" -type ok -icon warning -message $message
       break
     }
     # dont merge current game with itself
@@ -309,7 +309,7 @@ proc ::optable::mergeGames { {game_count 50} {ply 999} } {
       break
     }
   }
-  tk_messageBox -title "Scid: Merge Complete" -type ok -icon info -message "Merge Complete."
+  tk_messageBox -title "Merge Complete" -type ok -icon info -message "Merge Complete."
   updateBoard -pgn
 }
 ################################################################################
@@ -341,7 +341,7 @@ proc ::optable::setOptions {} {
   toplevel $w
   wm withdraw $w
   wm resizable $w 0 0
-  wm title $w  "[tr ToolsOpReport]: [tr OprepFileOptions]"
+  wm title $w  "[tr ToolsOpReport] [tr OprepFileOptions]"
 
   pack [frame $w.f] -side top -fill x -padx 5 -pady 5
   set row 0
@@ -491,15 +491,14 @@ proc ::optable::previewHTML {} {
   unbusyCursor .
 }
 
-# saveReport:
 #   Saves the current opening report to a file.
 #   "fmt" is the format: text, html or latex.
 #   "type" is the report type: report, table, or both.
-#
+
 proc ::optable::saveReport {fmt} {
-  set t [tk_dialog .dialog "Scid: Select report type" \
-      "Select the report type. You may save a full report (which includes the theory table), a compact report (with no theory table), or just the theory table by itself." \
-      "" 0 "Full report" "Compact report" \
+  set t [tk_dialog .dialog "Select report type" \
+      "Select Report Type\n\nFull report (includes theory table), Compact report (no theory table) or theory table by itself." \
+      question 0 "Full report" "Compact report" \
       "Theory table" "Cancel"]
   if {$t == 3} { return }
   set default ".txt"
@@ -521,8 +520,8 @@ proc ::optable::saveReport {fmt} {
     }
   }
 
-  set fname [tk_getSaveFile -initialdir [pwd] -filetypes $ftype \
-      -defaultextension $default -title "Scid: Save opening report"]
+  set fname [tk_getSaveFile -initialdir $::env(HOME) -filetypes $ftype -parent .oprepWin \
+      -defaultextension $default -title "Save Opening Report"]
   if {$fname == ""} { return }
 
   busyCursor .

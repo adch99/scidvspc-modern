@@ -412,8 +412,8 @@ proc ::preport::saveReport {fmt} {
     }
   }
 
-  set fname [tk_getSaveFile -initialdir [pwd] -filetypes $ftype \
-               -defaultextension $default -title "Save opening report"]
+  set fname [tk_getSaveFile -initialdir $::env(HOME) -filetypes $ftype -parent .preportWin \
+               -defaultextension $default -title "Save Opening Report"]
   if {$fname == ""} { return }
 
   busyCursor .

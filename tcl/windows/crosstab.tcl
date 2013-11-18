@@ -98,7 +98,7 @@ proc ::crosstab::Open {} {
       { "Text files" {".txt"} }
       { "All files"  {"*"}    }
     }
-    set fname [tk_getSaveFile -initialdir [pwd] -filetypes $ftype  -title "Save Crosstable" -parent .crosstabWin]
+    set fname [tk_getSaveFile -initialdir $::env(HOME) -filetypes $ftype  -title "Save Crosstable" -parent .crosstabWin]
     if {$fname != ""} {
       if {[catch {set tempfile [open $fname w]}]} {
         tk_messageBox -title "Scid: Error saving file" \
