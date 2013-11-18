@@ -154,7 +154,7 @@
   Tcl/Tk installed by default.  To verify this, look for a command named
   wish or wish8.5.  To enable support for extra chess pieces (such as
   Berlin), you may need to install TkImg
-  <https://sourceforge.net/project/downloading.php?group_id=263836&filename=tkimg1.3.tar.bz2>.
+  <https://sourceforge.net/project/downloading.php?group_id=263836&filename=tkimg1.3.scidvspc.tar.bz2>.
   Then, installing from source:
 
   ______________________________________________________________________
