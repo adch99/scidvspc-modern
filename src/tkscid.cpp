@@ -5119,6 +5119,8 @@ filter_reset (scidBaseT * base, byte value)
 {
     if (base->inUse) {
         base->dbFilter->Fill (value);
+	if (base->dbFilter != base->filter)
+	  base->filter->Fill (value);
     }
 }
 
@@ -5529,10 +5531,15 @@ sc_filter_negate (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
     if (db->inUse) {
         Filter * filter = db->dbFilter;
-        for (uint i=0; i < db->numGames; i++) {
-	  filter->Set (i, filter->Get(i) == 0 ? 1 : 0);
+        uint i;
+        for (i=0; i < db->numGames; i++) {
+          filter->Set (i, filter->Get(i) == 0 ? 1 : 0);
         }
-	updateMainFilter(db);
+        if (db->filter != db->dbFilter) {
+          for (i=0; i < db->numGames; i++) {
+            db->filter->Set(i,db->dbFilter->Get(i));
+          }
+        }
     }
     return TCL_OK;
 }
@@ -5607,7 +5614,13 @@ sc_filter_remove (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     for (uint gnumber = from; gnumber <= to; gnumber++) {
         db->dbFilter->Set (gnumber - 1, 0);
     }
-    updateMainFilter( db);
+    // Zero main filter games accordingly
+    if( db->dbFilter != db->filter) {
+        for (uint i=0; i < db->numGames; i++) {
+            if( db->dbFilter->Get(i) == 0 ) 
+                db->filter->Set(i,0);
+        }
+    }
     return TCL_OK;
 }
 
@@ -5630,12 +5643,7 @@ sc_filter_reset (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         basePtr = db;
     }
 
-    // Hmmm - If tree is open and 'Adjust Filter' is selected and then de-selected, 
-    // filter 'Reset' doesn't work as expected: non-standard starts are ignored until
-    // 'sc_tree clean' is called when the Tree window is cloded.
-
     filter_reset (basePtr, 1);
-    updateMainFilter(basePtr);
     return TCL_OK;
 }
 
