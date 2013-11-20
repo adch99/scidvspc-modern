@@ -304,6 +304,8 @@ menuText N OptionsWindowsRestoreLayout "Opmaak herstellen" 0 {Opmaak herstellen}
 menuText N OptionsWindowsShowGameInfo "Toon de informatie over de partij" 0 {Toon de informatie over de partij}
 menuText N OptionsWindowsAutoLoadLayout "Auto laad eerste lay-out" 0 {Automatisch laden eerste lay-out bij opstarten}
 menuText N OptionsWindowsAutoResize "Bordgrootte automatisch aanpassen" 0 {}
+# ====== TODO To be translated ======
+menuText N OptionsWindowsFullScreen "Fullscreen" 0 {Toggle fullscreen mode}
 menuText N OptionsToolbar "Gereedschappenbalk" 0 \
   {Weergeven/verbergen hoofdvenster gereedschappenbalk}
 menuText N OptionsECO "ECO data laden..." 1 \

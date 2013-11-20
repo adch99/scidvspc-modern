@@ -315,6 +315,8 @@ menuText I OptionsWindowsShowGameInfo "Show game info" 0 {Show game info}
 menuText I OptionsWindowsAutoLoadLayout "Auto load first layout" 0 {Auto load first layout at startup}
 # todo
 menuText I OptionsWindowsAutoResize "Auto resize board" 0 {}
+# ====== TODO To be translated ======
+menuText I OptionsWindowsFullScreen "Fullscreen" 0 {Toggle fullscreen mode}
 menuText I OptionsToolbar "Barra degli strumenti" 12 \
   {Mostra/nasconde la barra degli strumenti nella finestra principale}
 menuText I OptionsECO "Carica il file ECO..." 15 {Carica il file di classificazione ECO}

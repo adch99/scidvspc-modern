@@ -1215,11 +1215,11 @@ foreach numeric {".,"   ". "   "."   ",."   ", "   ","} \
 set m .menu.options.fics
 menu $m -tearoff 1
 $m add checkbutton -label OptionsWindowsRaise -variable ::fics::autoraise
-$m add checkbutton -label  OptionsFicsAuto -variable ::fics::autopromote
-$m add checkbutton -label OptionsFicsClock -variable ::fics::smallclocks -command ::fics::showClocks
-$m add checkbutton -label OptionsSounds -variable ::fics::sound
-$m add command     -label OptionsFicsColour -command ::fics::setForeGround
-$m add command     -label OptionsColour -command ::fics::setBackGround
+$m add checkbutton -label OptionsFicsAuto     -variable ::fics::autopromote
+$m add checkbutton -label OptionsFicsClock    -variable ::fics::smallclocks -command ::fics::showClocks
+$m add checkbutton -label OptionsSounds       -variable ::fics::sound
+$m add command     -label OptionsFicsColour   -command ::fics::setForeGround
+$m add command     -label OptionsColour       -command ::fics::setBackGround
 $m add separator
 $m add checkbutton -label OptionsFicsNoRes    -variable ::fics::no_results
 $m add checkbutton -label OptionsFicsNoReq    -variable ::fics::no_requests
@@ -1270,6 +1270,8 @@ $m add checkbutton -label OptionsWindowsIconify -variable autoIconify
 set helpMessage($m,0) OptionsWindowsIconify
 $m add checkbutton -label OptionsWindowsRaise -variable autoRaise
 set helpMessage($m,1) OptionsWindowsRaise
+$m add command -label OptionsWindowsFullScreen -command toggleFullScreen -accelerator F11
+set helpMessage($m,1) OptionsWindowsFullScreen
 
 set m .menu.options.theme
 menu $m -tearoff -1
@@ -1636,7 +1638,7 @@ proc setLanguageMenus {{lang ""}} {
   }
   # unhandled FICS
 
-  foreach tag {Iconify Raise Dock} {
+  foreach tag {Iconify Raise Dock FullScreen} {
     configMenuText .menu.options.windows [tr OptionsWindows$tag $oldLang] \
         OptionsWindows$tag $lang
   }
@@ -1766,14 +1768,7 @@ proc standardShortcuts {w} {
   bind $w <Control-r> ::gameReplace
   bind $w <Control-s> ::gameAdd
 
-  # doesnt like tcl 8.5.4
-  bind $w <F11> {
-    if {[wm attributes . -fullscreen]} {
-      wm attributes . -fullscreen 0
-    } else {
-      wm attributes . -fullscreen 1
-    }
-  }
+  bind $w <F11>  toggleFullScreen
   bind $w <Control-Shift-Left>  {::board::resize .main.board -1}
   bind $w <Control-Shift-Right> {::board::resize .main.board +1}
   standardGameShortcuts $w

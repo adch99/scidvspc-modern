@@ -314,6 +314,8 @@ menuText S OptionsWindowsAutoLoadLayout "Auto cargar primera disposición" 0 \
   {Autocarga la primera disposición al iniciar}
 # todo
 menuText S OptionsWindowsAutoResize "Auto resize board" 0 {}
+# ====== TODO To be translated ======
+menuText S OptionsWindowsFullScreen "Fullscreen" 0 {Toggle fullscreen mode}
 menuText S OptionsToolbar "Barra de Herramientas" 9 \
   {Muestra/oculta la barra de herramientas de la ventana principal}
 menuText S OptionsECO "Cargar Archivo ECO" 7 \

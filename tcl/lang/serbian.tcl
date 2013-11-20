@@ -351,6 +351,8 @@ menuText Y OptionsWindowsShowGameInfo "Show game info" 0 {Show game info}
 menuText Y OptionsWindowsAutoLoadLayout "Auto load first layout" 0 {Auto load first layout at startup}
 # todo
 menuText Y OptionsWindowsAutoResize "Auto resize board" 0 {}
+# ====== TODO To be translated ======
+menuText Y OptionsWindowsFullScreen "Fullscreen" 0 {Toggle fullscreen mode}
 menuText Y OptionsToolbar "Toolbar glavnog prozora" 12 \
   {Prika¾i/sakrij toolbar glavnog prozora}
 menuText Y OptionsECO "Uèitaj E©O fajl..." 7 {Uèitaj E©O klasifikacioni fajl}

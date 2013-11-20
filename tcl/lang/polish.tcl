@@ -306,6 +306,8 @@ menuText P OptionsWindowsShowGameInfo "Show game info" 0 {Show game info}
 menuText P OptionsWindowsAutoLoadLayout "Auto load first layout" 0 {Auto load first layout at startup}
 # todo
 menuText P OptionsWindowsAutoResize "Auto resize board" 0 {}
+# ====== TODO To be translated ======
+menuText P OptionsWindowsFullScreen "Fullscreen" 0 {Toggle fullscreen mode}
 menuText P OptionsToolbar "Pasek narzêdziowy" 6 \
   {Schowaj/poka¿ pasek narzêdziowy}
 menuText P OptionsECO "Wczytaj ksi±¿kê debiutow±..." 16 \

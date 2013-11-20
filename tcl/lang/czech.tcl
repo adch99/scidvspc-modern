@@ -323,6 +323,8 @@ menuText C OptionsWindowsShowGameInfo "Ukázat informace o partii" 0 {Ukázat info
 menuText C OptionsWindowsAutoLoadLayout "Automaticky natáhnout první rozlo¾ení" 0 {Automaticky na zaèátku natáhnout první rozlo¾ení}
 # todo
 menuText C OptionsWindowsAutoResize "Auto resize board" 0 {}
+# ====== TODO To be translated ======
+menuText C OptionsWindowsFullScreen "Fullscreen" 0 {Toggle fullscreen mode}
 menuText C OptionsToolbar "Nástrojová li¹ta..." 11 \
   {Konfigurovat nástrojovou li¹tu hlavního okna}
 menuText C OptionsECO "Natáhnout ECO soubor..." 10 {Natáhnout soubor s klasifikací ECO}

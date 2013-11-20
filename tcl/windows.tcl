@@ -174,6 +174,18 @@ proc placeWinCenter {w} {
   wm geom $w +$x+$y
 }
 
+# Doesnt like tcl 8.5.4
+proc toggleFullScreen {} {
+  global dot_w
+
+  if {[wm attributes $dot_w -fullscreen]} {
+    wm attributes $dot_w -fullscreen 0
+  } else {
+    wm attributes $dot_w -fullscreen 1
+  }
+}
+
+
 
 ###
 ### End of file: windows.tcl

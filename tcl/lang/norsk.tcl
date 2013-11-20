@@ -352,6 +352,8 @@ menuText O OptionsWindowsShowGameInfo "Show game info" 0 {Show game info}
 menuText O OptionsWindowsAutoLoadLayout "Auto load first layout" 0 {Auto load first layout at startup}
 # todo
 menuText O OptionsWindowsAutoResize "Auto resize board" 0 {}
+# ====== TODO To be translated ======
+menuText O OptionsWindowsFullScreen "Fullscreen" 0 {Toggle fullscreen mode}
 menuText O OptionsToolbar "Verktøylinje i hovedvindu" 0 \
   {Vis/skjul menylinjen i hovedvinduet}
 menuText O OptionsECO "Hent ECO-fil..." 0 {Henter filen med ECO-klassifiseringer}

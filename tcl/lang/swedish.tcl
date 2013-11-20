@@ -296,6 +296,8 @@ menuText W OptionsWindowsShowGameInfo "Visa partiinformation" 0 {Visar partiinfo
 menuText W OptionsWindowsAutoLoadLayout "Automatiskt öppna första layouten" 0 {Öppnar automatiskt första layouten vid uppstart}
 # todo
 menuText W OptionsWindowsAutoResize "Auto resize board" 0 {}
+# ====== TODO To be translated ======
+menuText W OptionsWindowsFullScreen "Fullscreen" 0 {Toggle fullscreen mode}
 menuText W OptionsToolbar "Verktygsfält" 0 \
   {Visa/ dölj huvudfönstrets verktygsfält}
 menuText W OptionsECO "Ladda ECO fil..." 7 {Ladda ECO-klassificeringen vid start}

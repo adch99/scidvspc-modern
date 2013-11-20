@@ -324,6 +324,8 @@ menuText B OptionsWindowsShowGameInfo "Mostrar Informações do Jogo" 0 {Mostra in
 menuText B OptionsWindowsAutoLoadLayout "Carregar primeiro layout na entrada" 0 {Carrega automaticamente o primeiro layout ao entrar na aplicação}
 # todo
 menuText B OptionsWindowsAutoResize "Auto resize board" 0 {}
+# ====== TODO To be translated ======
+menuText B OptionsWindowsFullScreen "Fullscreen" 0 {Toggle fullscreen mode}
 menuText B OptionsToolbar "Barra de Ferramentas da Janela Principal" 12 \
   {Exibe/Oculta a barra de ferramentas da janela principal}
 menuText B OptionsECO "Carregar arquivo ECO..." 7 {Carrega o arquivo com a classificacao ECO}

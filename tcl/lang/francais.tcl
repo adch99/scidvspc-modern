@@ -305,6 +305,8 @@ menuText F OptionsWindowsShowGameInfo "Montrer le panneau d'info" 0 {Montrer le 
 menuText F OptionsWindowsAutoLoadLayout "Chargement auto 1ère disposition" 0 {Chargement auto de la première disposition au démarrage}
 # todo
 menuText F OptionsWindowsAutoResize "Auto resize board" 0 {}
+# ====== TODO To be translated ======
+menuText F OptionsWindowsFullScreen "Fullscreen" 0 {Toggle fullscreen mode}
 menuText F OptionsToolbar "Barre d'outils de la fenêtre principale" 12 \
   {Montrer/Cacher dans la barre d'outils de la fenêtre principale}
 menuText F OptionsECO "Charger le fichier ECO..." 20 \

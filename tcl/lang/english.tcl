@@ -323,6 +323,7 @@ menuText E OptionsWindowsRestoreLayout "Restore layout" 0 {Restore layout}
 menuText E OptionsWindowsShowGameInfo "Show game info" 0 {Show game info}
 menuText E OptionsWindowsAutoLoadLayout "Auto load first layout" 0 {Auto load first layout at startup}
 menuText E OptionsWindowsAutoResize "Auto resize board" 0 {}
+menuText E OptionsWindowsFullScreen "Fullscreen" 0 {Toggle fullscreen mode}
 menuText E OptionsToolbar "Toolbar" 0 {Configure the main window toolbar}
 menuText E OptionsECO "Load ECO File" 7 {Load the ECO classification file}
 menuText E OptionsSpell "Load Spellcheck File" 11 \

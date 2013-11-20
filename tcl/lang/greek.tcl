@@ -322,6 +322,8 @@ menuText G OptionsWindowsRestoreLayout "Επαναφορά layout" 1 {Επανα
 menuText G OptionsWindowsShowGameInfo "Εμφάνιση Πληροφοριών" 0 {Εμφανίζει πληροφορίες σχετικά με την παρτίδα}
 menuText G OptionsWindowsAutoLoadLayout "Αυτ.Φόρτωση πρώτου layout" 1 {Αυτόματη φόρτωση του πρώτου layout κατά την εκκίνηση}
 menuText G OptionsWindowsAutoResize "Αυτ.Διαστάσεις Σκακιέρας" 4 {Αυτόματοποίηση διαστάσεων σκακιέρας}
+# ====== TODO To be translated ======
+menuText G OptionsWindowsFullScreen "Fullscreen" 0 {Toggle fullscreen mode}
 menuText G OptionsToolbar "Μπάρα Εργαλείων" 10 {Ρυθμίσεις κεντρικής μπάρας εργαλείων}
 menuText G OptionsECO "Φόρτωση αρχ.ECO" 12 {Φόρτωση αρχείου ECO}
 menuText G OptionsSpell "Φόρτωση αρχ.Συλλαβισμού" 13 \
