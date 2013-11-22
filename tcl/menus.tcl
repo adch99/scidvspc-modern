@@ -106,10 +106,7 @@ if {$windowsOS} {
 }
 
 ## Mac Application menu has to be before any call to configure.
-if { $macOS } {
-  ### This menu change removes the standard "About Tcl/Tk" widget
-  ### and fails to rename the "tkscid" menu to "Scid" , as it appears to be trying to do
-
+if {$macOS} {
   # Application menu:
   .menu add cascade -label Scid -menu .menu.apple
   menu .menu.apple
@@ -1651,6 +1648,9 @@ proc setLanguageMenus {{lang ""}} {
 
   foreach tag {Contents Index Tip Startup About} {
     configMenuText .menu.help [tr Help$tag $oldLang] Help$tag $lang
+  }
+  if {$::macOS} {
+    configMenuText .menu.apple [tr HelpAbout $oldLang] HelpAbout $lang
   }
 
   # Should sort out what the Delete , Mark menus did.
