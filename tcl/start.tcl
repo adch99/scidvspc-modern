@@ -53,7 +53,9 @@ if {![catch {tk windowingsystem} wsystem] && $wsystem == "aqua"} {
 # parsing, which options should probably be done earlier, but I'm afraid to move
 # things around that much - dr
 
-if { $::macOS && ([string first "-psn" [lindex $argv 0]] == 0)} {
+# Mavericks has discarded "-psn", so just assume started as App unless "-noapp" passed
+
+if { $::macOS && ([string first "-noapp" $argv] == -1)} {
   # Remember that we were invoked in a MacOS app bundle
   set macApp 1
 } else {
