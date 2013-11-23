@@ -27,8 +27,7 @@ proc ::recentFiles::save {{reportError 0}} {
     }
     return
   }
-  puts $f "# Scid [sc_info version] recent files list"
-  puts $f ""
+  puts $f "# $::scidName recent files list\n"
   foreach i {limit menu extra gamehistory data} {
     puts $f "set recentFiles($i) [list [set recentFiles($i)]]"
     puts $f ""

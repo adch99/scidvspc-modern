@@ -627,8 +627,9 @@ proc ::search::material::save {} {
         -message "Unable to create SearchOptions file: $fName"
     return
   }
-  puts $searchF "\# SearchOptions File created by Scid [sc_info version]"
+  puts $searchF "# $::scidName search options file"
   puts $searchF "set searchType Material"
+
   # First write the material counts:
   foreach i {wq bq wr br wb bb wn bn wp bp} {
     puts $searchF "set pMin($i) $pMin($i)"

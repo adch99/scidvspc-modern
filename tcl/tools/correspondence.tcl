@@ -911,9 +911,8 @@ namespace eval Xfcc {
 		if {[catch {open $filename w} stateF]} {
 			::CorrespondenceChess::updateConsole "info ERROR: Unable to open state file $filename";
 		} else {
-			puts $stateF "# Scid options file"
+			puts $stateF "# $::scidName options file"
 			puts $stateF "# State file for correspondence chess"
-			puts $stateF "# Version: $::scidVersion, $::scidVersionDate"
 			puts $stateF "# This file is generated automatically. Do NOT edit."
 
 			set ::Xfcc::update 1

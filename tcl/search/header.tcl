@@ -101,10 +101,9 @@ proc ::search::header::defaults {} {
 
 set sHeaderFlagFrame 0
 
-# ::search::header
-#
-#   Opens the window for searching by header information.
-#
+#   Search by header information.
+#   (General Search)
+
 proc search::header {} {
   global sWhite sBlack sEvent sSite sRound sDateMin sDateMax sIgnoreCol
   global sWhiteEloMin sWhiteEloMax sBlackEloMin sBlackEloMax
@@ -136,8 +135,12 @@ proc search::header {} {
   foreach color {White Black} {
     pack $w.c$color -side top -fill x -pady 3
     label $w.c$color.lab -textvar ::tr($color) -font $bold -width 9 -anchor w
+
+    set tmp [set s[set color]]
     ttk::combobox $w.c$color.e -textvariable "s$color" -width 40
     ::utils::history::SetCombobox HeaderSearch$color $w.c$color.e
+    set s$color $tmp
+
     bind $w.c$color.e <Return> { .sh.b.search invoke; break }
     label $w.c$color.space
     label $w.c$color.elo1 -textvar ::tr(Rating) -font $bold
@@ -197,9 +200,13 @@ proc search::header {} {
   pack $f -side top -fill x
   foreach i {Event Site} {
     label $f.l$i -textvar ::tr(${i}) -font $bold
+
+    set tmp [set s[set i]]
     ttk::combobox $f.e$i -textvariable s$i -width 25
-    bind $f.e$i <Return> { .sh.b.search invoke ; break }
     ::utils::history::SetCombobox HeaderSearch$i $f.e$i
+    set s$i $tmp
+
+    bind $f.e$i <Return> { .sh.b.search invoke ; break }
     bindFocusColors $f.e$i
   }
   pack $f.lEvent $f.eEvent -side left -padx 3
@@ -572,7 +579,7 @@ proc ::search::header::save {} {
         -message "Unable to create SearchOptions file: $fName"
     return
   }
-  puts $searchF "\# SearchOptions File created by $::scidName $::scidVersion"
+  puts $searchF "# $::scidName search options file"
   puts $searchF "set searchType Header"
 
   # First write the regular variables:

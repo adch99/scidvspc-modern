@@ -551,7 +551,7 @@ proc ::bookmarks::Save {{reportError 0}} {
     }
     return
   }
-  puts $f "# Scid [sc_info version] bookmarks file\n"
+  puts $f "# $::scidName bookmarks file\n"
   foreach i {subMenus data} {
     puts $f "set bookmarks($i) [list [set bookmarks($i)]]"
     puts $f ""

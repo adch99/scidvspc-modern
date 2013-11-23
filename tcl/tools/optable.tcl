@@ -1422,8 +1422,7 @@ proc ::optable::saveFavorites {} {
     # tk_messageBox ...
     return
   }
-  puts $f "# Scid opening report favorites file"
-  puts $f ""
+  puts $f "# $::scidName opening report favorites file\n"
   puts $f "set reportFavorites [list $::reportFavorites]"
   close $f
 }
