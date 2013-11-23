@@ -743,7 +743,7 @@ namespace eval fics {
 
     set w .ficsfindopp
     if {[winfo exists $w]} {
-      focus $w
+      raiseWin $w
       return
     }
     toplevel $w

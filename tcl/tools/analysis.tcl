@@ -2340,7 +2340,7 @@ proc findEngine {} {
   return -1
 }
 
-### Add move from first analysis n (or first analysis window, if any)
+### Add move from analysis engine n (or first analysis window, if any)
 
 proc addAnalysisMove {{n -1}} {
 
@@ -2804,36 +2804,28 @@ proc checkEngineIsAlive {n} {
   return 0
 }
 
-################################################################################
-# formatAnalysisMoves:
+### Xboard only
 #   Given the text at the end of a line of analysis data from an engine,
 #   this proc tries to strip out some extra stuff engines add to make
 #   the text more compatible for adding as a variation.
-################################################################################
+
 proc formatAnalysisMoves {text} {
-  ### Yace puts ".", "t", "t-" or "t+" at the start of its moves text,
-  ### unless directed not to in its .ini file. Get rid of it
-  # if {[strIsPrefix {. } $text]} { set text [string range $text 2 end]}
-  # if {[strIsPrefix {t } $text]} { set text [string range $text 2 end]}
-  # if {[strIsPrefix {t- } $text]} { set text [string range $text 3 end]}
-  # if {[strIsPrefix {t+ } $text]} { set text [string range $text 3 end]}
 
   # Trim any initial or final whitespace:
   set text [string trim $text]
 
-  ### Yace often adds "H" after a move, e.g. "Bc4H". Remove them
-  # regsub -all {H } $text { } text
-
   # Crafty adds "<HT>" for a hash table comment. Change it to "{HT}"
+  # Could probably remove this hack and it'd work fine, but leave it in i guess - S.A.
   regsub <HT> $text {{HT}} text
 
   return $text
 }
-################################################################################
-# will ask engine to play the game till the end
-################################################################################
+
+### Engine plays game till the end
+
 proc toggleFinishGame {n} {
   global analysis annotate
+
   set b ".analysisWin$n.b.finishGame"
 
   if { $annotate(Button) || $::autoplayMode || !$analysis(analyzeMode$n) || ! [sc_pos isAt vend] } {
@@ -2850,9 +2842,7 @@ proc toggleFinishGame {n} {
     after cancel autoplayFinishGame
   }
 }
-################################################################################
-#
-################################################################################
+
 proc autoplayFinishGame {n} {
   if {!$::finishGameMode || ![winfo exists .analysisWin$n]} {return}
   .analysisWin$n.b.move invoke
@@ -2862,9 +2852,9 @@ proc autoplayFinishGame {n} {
   }
   after $::autoplayDelay autoplayFinishGame $n
 }
-################################################################################
-#
-################################################################################
+
+### Start/stop engine analysis
+
 proc toggleEngineAnalysis {{n -1} {force 0}} {
   global analysis annotate
 
@@ -2893,10 +2883,9 @@ proc toggleEngineAnalysis {{n -1} {force 0}} {
     ::utils::tooltip::Set $b "$::tr(StopEngine)"
   }
 }
-################################################################################
-# startAnalyzeMode:
-#   Put the engine in analyze mode.
-################################################################################
+
+###   Put the engine in analyze mode.
+
 proc startAnalyzeMode {{n 0} {force 0}} {
   global analysis
 
@@ -2918,9 +2907,7 @@ proc startAnalyzeMode {{n 0} {force 0}} {
     }
   }
 }
-################################################################################
-# stopAnalyzeMode
-################################################################################
+
 proc stopAnalyzeMode { {n 0} } {
   global analysis
   if {! $analysis(analyzeMode$n)} { return }
@@ -2946,6 +2933,8 @@ proc toggleLockEngine {n} {
     set state disabled
     set analysis(lockN$n) [sc_pos moveNumber]
     set analysis(lockSide$n) [sc_pos side]
+    # Mini analysis board is now locked to current position
+    updateAnalysisBoard $n {} 1
   } else {
     set state normal
   }
@@ -3136,10 +3125,10 @@ proc updateAnalysisText {n} {
   updateAnalysisBoard $n $analysis(moves$n)
 }
 
-################################################################################
-# args = score, pv
-# returns M X if mate detected (# or ++) or original score
-################################################################################
+
+### args = score, pv
+### returns M X if mate detected (# or ++) or original score
+
 proc scoreToMate { score pv n } {
 
   # S.A. rewrote this a little, but it can be replaced by SCID's proc if desired
@@ -3260,17 +3249,24 @@ proc toggleEngineInfo {n} {
   updateAnalysisText $n
 }
 
-#   Update the small analysis board in the analysis window,
+### Update the small analysis board in the analysis window,
 
-proc updateAnalysisBoard {n moves} {
+proc updateAnalysisBoard {n moves {force 0}} {
   global analysis
 
-  if {! $analysis(showBoard$n)} {
+  if {!$analysis(showBoard$n)} {
     return
   }
 
   set bd .analysisWin$n.bd
-if {$::board::_flip($bd) != $::board::_flip(.main.board)} {::board::flip $bd}
+  if {$::board::_flip($bd) != $::board::_flip(.main.board)} {
+    ::board::flip $bd
+  }
+
+  if {$analysis(lockEngine$n) && !$force} {
+    return
+  }
+
   # Temporarily wipe the premove command:
   sc_info preMoveCmd {}
   # Push a temporary copy of the current game:
