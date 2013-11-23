@@ -885,17 +885,19 @@ int terminal(void)
 tmove m[256];
 int n, c;
 
+generate_legal_moves( m, &n, c=checktest(Color) );
+
+if(!n) {
+if(c) return 3;
+else return 2;
+}
 if( G[Counter].rule50>=100 || repetition(2) || material_draw() )
 { if(Flag.machine_color==(WHITE|BLACK)) Flag.machine_color=0;  return 1; }
 
-generate_legal_moves( m, &n, c=checktest(Color) );
-
-if( n!=0 ) return 0;
-
-if(c) return 3;
-else return 2;
+return 0;
 
 }
+
 
 void printpositionfen(void)
 {
