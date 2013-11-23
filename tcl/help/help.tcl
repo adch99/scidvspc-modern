@@ -646,23 +646,20 @@ set helpText(MainWindow) {<h1>Scid Main Window</h1>
 set helpTitle(Docking) "Docked Windows"
 set helpText(Docking) {<h1>Docked Windows</h1>
 <p>
-The Docked Windows feature allows Scid to have a single window, and all the smaller windows
-to tile within. Options for this feature are found in <b>Options-<gt>Windows</b>, and this is also where you
+The Docked Windows feature allows Scid to have a single window, with the smaller windows
+tiling within. Options for this feature are found in <b>Options-<gt>Windows</b>, and this is also where you
 can load any of the three built-in layouts, or save your own window arrangements.
 </p><p>
-Using Docked Windows is a little difficult. They are actually two Tcl widgets -
-paned windows and tabs.  One can right-click a tab (except the main
+Arranging Docked Windows is a little difficult. One can right-click any tab (except the main
 board) and select to move to the side of the current paned window, or one can
 drag the tab and group it with other tabs in another paned window.</p>
 <p>
-Window focus automatically follows the mouse around.</p>
+Window focus automatically follows the mouse around, and also impacts which keyboard bindings are active.
+Most bindings are active when the mouse is over the main board.</p>
 <p>
-Unfortunately, it also has a few issue. 
-Keyboard shortcuts get a little confusing - but work best if the mouse/focus is in the main board.
-And if Scid fails to start, you may wish to restart it in non-docked mode by using the
-<b>-nodock</b> command-line option.
+If Scid fails to start, use the <b>-nodock</b> command-line option to restart in non-docked mode.
 </p>
-<p><footer>Updated: Scid vs. PC 4.10, April 2013</footer></p> }
+<p><footer>Updated: Scid vs. PC 4.11, November 2013</footer></p> }
 
 set helpTitle(Menus) "Menus"
 set helpText(Menus) {<h1>Scid Menus</h1>
