@@ -131,6 +131,7 @@ proc ::optable::makeReportWin {args} {
     sc_progressBar $w.c1 bar 401 21 time
     busyCursor .
   }
+  sc_search board RESET Exact false 0
   set newTreeData [sc_tree search -time 0 -epd 0 -adjust 1]
   if {$showProgress} {
     if {$::optable::_interrupt} {
@@ -1174,10 +1175,9 @@ proc ::optable::table {fmt} {
 
 set reportFavorites {}
 
-# updateFavoritesMenu
 #   Update the Favorites menu in the report window, adding a
 #   command for each favorite report position.
-#
+
 proc ::optable::updateFavoritesMenu {} {
   set m .oprepWin.menu.favorites
   $m delete 3 end
