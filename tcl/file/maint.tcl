@@ -1662,7 +1662,9 @@ proc compactGames {parent} {
   }
   if {$parent == {.compactWin}} {
     destroy $parent
-    raiseWin .maintWin
+    if {[winfo exists .maintWin]} {
+      raiseWin .maintWin
+    }
   }
 }
 
