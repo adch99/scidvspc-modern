@@ -103,6 +103,8 @@ proc resetEngine {n} {
   set analysis(lastHistory$n) {}      ;# last best line
   set analysis(maxmovenumber$n) 0     ;# the number of moves in this position
   set analysis(lockEngine$n) 0        ;# the engine is locked to current position
+  set analysis(lockPos$n) {} 
+  set analysis(lockFen$n) {}
   set analysis(startpos$n) ""         ;# the startpos/fen for game. Uninit-ed
 }
 
@@ -2703,7 +2705,12 @@ proc processAnalysisInput {n} {
       temp_depth dummy temp_score \
       temp_time temp_nodes temp_moves]
   if {$res == 6} {
-    if {$analysis(invertScore$n)  && (![string compare [sc_pos side] "black"])} {
+    if {$analysis(lockEngine$n)} {
+      set side $analysis(lockSide$n) 
+    } else {
+      set side [sc_pos side]
+    }
+    if {$analysis(invertScore$n)  && $side == "black"} {
       set temp_score [expr { 0.0 - $temp_score } ]
     }
     set analysis(depth$n) $temp_depth
@@ -2890,7 +2897,9 @@ proc startAnalyzeMode {{n 0} {force 0}} {
   global analysis
 
   # Check that the engine has not already had analyze mode started:
-  if {$analysis(analyzeMode$n) && ! $force } { return }
+  if {$analysis(analyzeMode$n) && ! $force } {
+    return
+  }
   set analysis(analyzeMode$n) 1
   if { $analysis(uci$n) } {
     updateAnalysis $n
@@ -2931,12 +2940,17 @@ proc toggleLockEngine {n} {
 
   if { $analysis(lockEngine$n) } {
     set state disabled
-    set analysis(lockN$n) [sc_pos moveNumber]
+    set analysis(lockN$n)    [sc_pos moveNumber]
     set analysis(lockSide$n) [sc_pos side]
-    # Mini analysis board is now locked to current position
-    updateAnalysisBoard $n {} 1
+    set analysis(lockPos$n)  [sc_pos board]
+    set analysis(lockFen$n)  [sc_pos fen]
+    if {[winfo exists .analysisWin$n.bd]} {
+      ::board::update .analysisWin$n.bd $analysis(lockPos$n)
+    }
+    ::utils::tooltip::Set .analysisWin$n.b.lockengine "[file tail [sc_base filename]], game [sc_game number]"
   } else {
     set state normal
+    ::utils::tooltip::Set .analysisWin$n.b.lockengine $::tr(LockEngine)
   }
   set w .analysisWin$n
   $w.b.move configure -state $state
@@ -3111,7 +3125,6 @@ proc updateAnalysisText {n} {
     if {$pos == 1.0} {
       $h yview moveto 1
     }
-
   } else {
   }
 
@@ -3219,6 +3232,9 @@ proc toggleAnalysisBoard {n} {
     ::board::new $w.bd 25 0 $::board::_flip(.main.board)
     $w.bd configure -relief solid -borderwidth 1
   }
+  if {$analysis(lockEngine$n)} {
+    ::board::update $w.bd $analysis(lockPos$n)
+  }
 
   if { $analysis(showBoard$n) } {
     set analysis(showBoard$n) 0
@@ -3251,7 +3267,7 @@ proc toggleEngineInfo {n} {
 
 ### Update the small analysis board in the analysis window,
 
-proc updateAnalysisBoard {n moves {force 0}} {
+proc updateAnalysisBoard {n moves} {
   global analysis
 
   if {!$analysis(showBoard$n)} {
@@ -3263,7 +3279,7 @@ proc updateAnalysisBoard {n moves {force 0}} {
     ::board::flip $bd
   }
 
-  if {$analysis(lockEngine$n) && !$force} {
+  if {$analysis(lockEngine$n)} {
     return
   }
 

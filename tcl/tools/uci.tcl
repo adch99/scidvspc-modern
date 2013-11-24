@@ -209,8 +209,13 @@ namespace eval uci {
 	    }
           }
           # convert the score to white's perspective (not engine's one)
-	  set side [string index [sc_pos side] 0]
-          if { $side == "b"} {
+
+	  if {$analysis(lockEngine$n)} {
+	    set side $analysis(lockSide$n)
+	  } else {
+	    set side [sc_pos side]
+          }
+          if { $side == "black"} {
             set uciInfo(tmp_score$n) [ expr 0.0 - $uciInfo(tmp_score$n) ]
             if { $uciInfo(scoremate$n) != ""} {
               set uciInfo(scoremate$n) [ expr 0 - $uciInfo(scoremate$n) ]
@@ -224,7 +229,7 @@ namespace eval uci {
         if { $t == "currmove" } {
            incr i
            set uciInfo(currmove$n) [lindex $data $i]
-           set analysis(currmove$n) [formatPv $uciInfo(currmove$n)]
+           set analysis(currmove$n) [formatPv $n $uciInfo(currmove$n)]
            continue}
         if { $t == "currmovenumber" } {
            incr i
@@ -303,7 +308,7 @@ namespace eval uci {
 
       # convert to something more readable
       if ($toBeFormatted) {
-        set uciInfo(pv$n) [formatPv $uciInfo(pv$n)]
+        set uciInfo(pv$n) [formatPv $n $uciInfo(pv$n)]
         set toBeFormatted 0
       }
 
@@ -1022,11 +1027,16 @@ namespace eval uci {
 
   # uci.tcl calls this for "none". calvar.tcl cals this for "$fen" or ""
 
-  proc formatPv {moves {fen none}} {
+  proc formatPv {n moves {fen none}} {
+    global analysis
 
-    if {$fen == "none"} {
-      # costs around 5 microseconds
-      set fen [sc_pos fen]
+    if {$analysis(lockEngine$n) } {
+      set fen $analysis(lockFen$n)
+    } else {
+      if {$fen == "none"} {
+	# costs around 5 microseconds
+	set fen [sc_pos fen]
+      }
     }
     sc_info preMoveCmd {}
 

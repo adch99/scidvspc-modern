@@ -2675,6 +2675,7 @@ making for easier <a Analysis Debugging>Debugging</a>.
   Only few engines are able to reuse the
   results they have calculated till the analysis was stopped.</i> </li>
   <li> <button tb_lockengine 32> <b>Lock Analysis</b> to a certain position.
+  Hover cursor over this button to see stats for locked game.
   After a while, to add this analysis to game, return to the locked position, 
   press Pause, Unlock, and Add Variation.</li>
 
