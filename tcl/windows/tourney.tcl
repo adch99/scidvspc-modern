@@ -17,20 +17,9 @@ foreach {n v} {minPlayers 999 maxPlayers 999 minGames 9999 maxGames 9999 \
   trace variable ::tourney::$n w [list ::utils::validate::Integer $v 0]
 }
 
-set tourneyWin 0
-
-proc ::tourney::toggle {} {
-  set w .tourney
-  if {[winfo exists $w]} {
-    destroy $w
-  } else {
-    ::tourney::Open
-  }
-}
-
 proc ::tourney::Open {{player {}}} {
-  global tourneyWin
   set w .tourney
+
   if {[winfo exists $w]} {
     if {$player != {}} {
       set ::tourney::player $player
@@ -41,7 +30,6 @@ proc ::tourney::Open {{player {}}} {
     raiseWin $w
     return
   }
-  set tourneyWin 1
 
   if {! [info exists ::tourney::_defaults]} { ::tourney::defaults }
 
@@ -62,7 +50,7 @@ proc ::tourney::Open {{player {}}} {
   bind $w <F1> {helpWindow Tmt}
   bind $w <Escape> "$w.b.close invoke"
   bind $w <Return> "::tourney::check ; ::tourney::refresh"
-  bind $w <Destroy> { set tourneyWin 0 }
+  bind $w <Destroy> {}
   # standardShortcuts $w
   # bind $w <Left> break
   # bind $w <Right> break

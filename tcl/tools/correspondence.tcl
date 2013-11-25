@@ -1904,13 +1904,10 @@ namespace eval CorrespondenceChess {
 		global scidDataDir helpMessage
 
 		set w .ccWindow
-		if {[winfo exists .ccWindow]} {
-			focus .main
-			destroy .ccWindow
-			set ::CorrespondenceChess::isOpen 0
+		if {[winfo exists $w]} {
+			raiseWin $w
 			return
 		}
-		set ::CorrespondenceChess::isOpen 1
 
 		toplevel $w
 		wm title $w [::tr "CorrespondenceChess"]
@@ -2066,8 +2063,7 @@ namespace eval CorrespondenceChess {
 		bind $w "?"         { helpWindow CCIcons}
 
 		bind $w <Configure> { ::CorrespondenceChess::ConsoleResize }
-		bind $w <Destroy>   { ::CorrespondenceChess::EnableEngineAnalysis 1
-			set ::CorrespondenceChess::isOpen 0 }
+		bind $w <Destroy>   { ::CorrespondenceChess::EnableEngineAnalysis 1 }
 
 		foreach f [glob -nocomplain [file join "$CorrespondenceChess::PluginPath" *]] {
 			$w.top.plugins    configure -image tb_CC_pluginactive
@@ -2963,7 +2959,7 @@ namespace eval CorrespondenceChess {
 			if {[winfo exists .glistWin]} {
 				raise .glistWin
 			} else {
-				::windows::gamelist::OpenClose
+				::windows::gamelist::Open
 			}
 			set Title [::tr CCDlgDuplicateGame]
 			set Error [::tr CCDlgDuplicateGameError]

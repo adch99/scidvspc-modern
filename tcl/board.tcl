@@ -689,15 +689,15 @@ button .main.tb.bsearch -image tb_bsearch -command ::search::board
 button .main.tb.hsearch -image tb_hsearch -command ::search::header
 button .main.tb.msearch -image tb_msearch -command ::search::material
 frame .main.tb.space4 -width 12
-button .main.tb.glist   -image tb_glist   -command ::windows::gamelist::OpenClose
-button .main.tb.pgn     -image tb_pgn     -command ::pgn::OpenClose
+button .main.tb.glist   -image tb_glist   -command ::windows::gamelist::Open
+button .main.tb.pgn     -image tb_pgn     -command ::pgn::Open
 button .main.tb.tmt     -image tb_tmt     -command ::tourney::toggle
-button .main.tb.comment -image tb_comment -command makeCommentWin
-button .main.tb.maint   -image tb_maint   -command ::maint::OpenClose
+button .main.tb.comment -image tb_comment -command ::commenteditor::Open
+button .main.tb.maint   -image tb_maint   -command ::maint::Open
 button .main.tb.eco     -image tb_eco     -command ::windows::eco::OpenClose
-button .main.tb.tree    -image tb_tree    -command ::tree::OpenClose
-button .main.tb.book    -image tb_book    -command ::book::OpenClose
-button .main.tb.crosst  -image tb_crosst  -command ::crosstab::OpenClose
+button .main.tb.tree    -image tb_tree    -command ::tree::Open
+button .main.tb.book    -image tb_book    -command ::book::Open
+button .main.tb.crosst  -image tb_crosst  -command ::crosstab::Open
 button .main.tb.engine  -image tb_engine  -command {makeAnalysisWin -1}
 
 # Set toolbar help status messages:

@@ -51,7 +51,7 @@ proc ::tree::treeFileSave {base} {
   unbusyCursor .
 }
 
-proc ::tree::OpenClose {{baseNumber 0}} {
+proc ::tree::Open {{baseNumber 0}} {
   global tree helpMessage
 
   if {!$baseNumber} {
@@ -60,7 +60,7 @@ proc ::tree::OpenClose {{baseNumber 0}} {
   set w .treeWin$baseNumber
 
   if {[winfo exists $w]} {
-    destroy $w
+    raiseWin $w
     return
   }
 

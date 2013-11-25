@@ -4,24 +4,21 @@
 
 set ::windows::eco::code ""
 set ::windows::eco::count 0
-set ::windows::eco::isOpen 0
 
-proc ::windows::eco::OpenClose {} {
+proc ::windows::eco::Open {} {
   set w .ecograph
 
   if {[winfo exists $w]} {
-    destroy $w
+    raiseWin $w
   } else {
     ::windows::eco::Refresh
   }
 }
 
-# ::windows::eco::Refresh
-#
 #    Updates the ECO Browser window, opening it if necessary.
 #    If the ECO code "code" is "x", then the value of the
 #    variable ::windows::eco::code is used instead.
-#
+
 proc ::windows::eco::Refresh {{code "x"}} {
   set w .ecograph
 
@@ -29,15 +26,13 @@ proc ::windows::eco::Refresh {{code "x"}} {
   set text $w.pane.text
   if {$code != "x"} { set ::windows::eco::code $code }
   if {! [winfo exists $w]} {
-    set ::windows::eco::isOpen 1
     toplevel $w
     wm minsize $w 200 100
     setWinLocation $w
     setWinSize $w
     bind $w <Escape> "destroy $w"
     bind $w <F1> {helpWindow ECO Browser}
-    bind $w <Destroy> {set ::windows::eco::isOpen 0}
-    bind $w <Control-y> ::windows::eco::OpenClose
+    bind $w <Destroy> {}
     text $w.title -relief flat -height 1 -width 1 -wrap word -font font_Bold
     $w.title tag configure center -justify center
     $w.title configure -cursor top_left_arrow

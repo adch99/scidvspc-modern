@@ -48,7 +48,7 @@ proc ::file::Exit {}  {
     }
   }
 
-  if {$::windows::gamelist::isOpen} {
+  if {[winfo exists .glistWin]} {
     ::windows::gamelist::recordWidths
   }
   if {$::optionsAutoSave} {
@@ -610,7 +610,7 @@ proc ::file::openBaseAsTree { { fName "" } } {
   unbusyCursor .
 
   set current [sc_base current]
-  ::tree::OpenClose
+  ::tree::Open
   set ::tree(locked$current) 1
 
   ::file::SwitchToBase $oldbase

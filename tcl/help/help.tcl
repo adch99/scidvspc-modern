@@ -1281,7 +1281,7 @@ move</b>, then variations may be added. This note also applies to the <b>
 set helpTitle(Comment) "Comment Editor"
 set helpText(Comment) {<h1>The Comment Editor</h1>
   <p>
-  The <run makeCommentWin><green>Comment Editor</green></run> lets you annotate games
+  The <run ::commenteditor::Open><green>Comment Editor</green></run> lets you annotate games
   with comments and <a NAGs>annotations</a>.
   </p>
 
@@ -1386,7 +1386,7 @@ know these details.</i></p>
 set helpTitle(Crosstable) "Crosstable Window"
 set helpText(Crosstable) {<h1>The Crosstable Window</h1>
   <p>
-  The <run ::crosstab::OpenClose><green>Crosstable</green></run> shows the
+  The <run ::crosstab::Open><green>Crosstable</green></run> shows the
   tournament result for the current game in <b>All-Play-All, Swiss</b> or <b>Knockout</b> formats.
   </p>
   <p>
@@ -1561,7 +1561,7 @@ set helpText(Tmt) {<h1>The Tournament Finder window</h1>
 set helpTitle(GameList) "Game List window"
 set helpText(GameList) {<h1>The Game List</h1>
 
-<p>The <run ::windows::gamelist::OpenClose><green>Game List</green></run>
+<p>The <run ::windows::gamelist::Open><green>Game List</green></run>
 allows easy perusal of all filtered games in the currently open database/PGN archive.</p>
 <p>Below the Game List are two rows of buttons,
 and at the bottom you'll find the <a Switcher>Database Switcher</a>.</p>
@@ -1816,7 +1816,7 @@ set helpTitle(PGN) "PGN Window"
 set helpText(PGN) {<h1>PGN Window</h1>
 
   <p>
-  This section explains how to use Scid's <run ::pgn::OpenClose><green>PGN Window</green></run>.
+  This section explains how to use Scid's <run ::pgn::Open><green>PGN Window</green></run>.
   </p>
 
   <p> <i>Other help subjects include <a BrowsingPGN>PGN files and Scid</a>,
@@ -1981,7 +1981,7 @@ Simlilar and more powerful features are available in the <a TreeMasks>Tree Masks
 set helpTitle(Tree) "Tree Window"
 set helpText(Tree) {<h1>Tree Window</h1>
   <p>
-  The <run ::tree::OpenClose><green>Tree Window</green></run> is an powerful Scid
+  The <run ::tree::Open><green>Tree Window</green></run> is an powerful Scid
   feature. It shows the success rates of moves from the current
   position; in the form of statistics, and a tri-coloured graph representing
   white-wins, draws, and black-wins.
@@ -2330,7 +2330,7 @@ set helpTitle(Maintenance) "Database Maintenance"
 set helpText(Maintenance) {<h1>Database Maintenance</h1>
   <p>
   Most Scid Database maintenance can be done from the
-<green><run ::maint::OpenClose>Maintenance Window</b></run></green>
+<green><run ::maint::Open>Maintenance Window</b></run></green>
   (control+m).
   You can use this window to maintain <a Flags>game flags</a>,
   <a Maintenance Spellcheck>spellcheck</a> names,
@@ -3449,7 +3449,7 @@ set helpText(TB) {<h1>Tablebases</h1>
   <h3>The Tablebase Window</h3>
   <p>
   You can get more comprehensive information 
-  from the <green><run ::tb::OpenClose>Tablebase Window</run></green>
+  from the <green><run ::tb::Open>Tablebase Window</run></green>
   (Control - "="). This shows the result with perfect play
   of all legal moves from the current position.
   </p>
@@ -4248,7 +4248,7 @@ set helpText(Book) {<h1>Book Window</h1>
   <p>
   Opening Books are small databases recording moves at the start of a game
   and how often each move occurs. Scid's <run
-  ::book::OpenClose><green>Book Window</green></run> allows perusal of opening
+  ::book::Open><green>Book Window</green></run> allows perusal of opening
   books, and a few nifty features besides.
   </p><p>
   <i>Scid uses the popular <b>Polyglot</b> book format, and comes with a few
@@ -5243,13 +5243,13 @@ set helpText(TacticsTrainer) {<h1>Mate in ..N.. Puzzles</h1>
   <h3>Playing</h3>
   <p>
   If you get stuck, select <term>Show Solution</term> to add the solution as
-  <run ::pgn::OpenClose><green>PGN</green></run>
+  <run ::pgn::Open><green>PGN</green></run>
   (where it can be easily examined). Unclicking the button will reset the puzzle for another try.
   </p>
   <p>
   Clicking the <term>Next</term> button allows the user to skip any
   puzzle, and individual exercises can be opened via the
-<run ::windows::gamelist::OpenClose><green>Game List</green></run> widget.
+<run ::windows::gamelist::Open><green>Game List</green></run> widget.
   </p>
   <p>
   Some exercises do not end in a mate, with the
@@ -6533,7 +6533,6 @@ The window manager may interfere with some shortcuts.
 <li><b>control-m</b> - Maintenance window</li>
 <li><b>control-i</b> - Gameinfo window</li>
 <li><b>control-t</b> - Tree window</li>
-<li><b>control-y</b> - ECO browser</li>
 <li><b>control-X</b> - Crosstable</li>
 <li><b>control-S</b> - Setup board</li>
 <li><b>control-b</b> - Book window</li>
@@ -6639,7 +6638,6 @@ The window manager may interfere with some shortcuts.
 <li><b>control-T</b> - Tournament finder</li>
 <li><b>control-v</b> - Paste game from Clipbase</li>
 <li><b>control-V</b> - Paste FEN</li>
-<li><b>control-y</b> - ECO browser</li>
 <li><b>control-w</b> - Close database</li>
 <li><b>control-x</b> - New game</li>
 <li><b>control-X</b> - Crosstable</li>

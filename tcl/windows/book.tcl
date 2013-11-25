@@ -101,18 +101,15 @@ namespace eval book {
   #  Open a window to select book and display book moves
   # arg name : gm2600.bin for example
   ################################################################################
-  proc OpenClose {} {
-    global ::book::bookList ::book::bookPath ::book::currentBook1 ::book::currentBook2 ::book::isOpen ::book::lastBook1 ::book::lastBook2
+  proc Open {} {
+    global ::book::bookList ::book::bookPath ::book::currentBook1 ::book::currentBook2 ::book::lastBook1 ::book::lastBook2
 
     set w .bookWin
 
     if {[winfo exists $w]} {
-      destroy $w
-      set ::book::isOpen 0
+      raiseWin $w
       return
     }
-
-    set ::book::isOpen 1
 
     ::createToplevel $w
     ::setTitle $w $::tr(Book)
@@ -138,7 +135,6 @@ namespace eval book {
     if { [llength $bookList] == 0 } {
       # No book found
       destroy $w
-      set ::book::isOpen 0
       set ::book::currentBook1 {}
       set ::book::currentBook2 {}
       tk_messageBox -title "Scid" -type ok -icon error -message "No books found in books directory \"$bookPath\""
@@ -243,7 +239,6 @@ if {0} {
     # we make a redundant check here, another one is done a few line above
     if { [catch {bookSelect} ] } {
       tk_messageBox -title "Scid" -type ok -icon error -message "No books found. Check books directory"
-      set ::book::isOpen 0
       set ::book::currentBook1 ""
       set ::book::currentBook2 ""
       destroy  .bookWin
@@ -267,7 +262,6 @@ if {0} {
       sc_book close $::book::bookSlot2
       set ::book::currentBook2 ""
     }
-    set ::book::isOpen 0
   }
   ################################################################################
   #   updates book display when board changes
@@ -435,7 +429,7 @@ if {0} {
   #
   ################################################################################
   proc tuning {} {
-    global ::book::bookList ::book::bookPath ::book::currentBook ::book::isOpen
+    global ::book::bookList ::book::bookPath ::book::currentBook
 
     set w .bookTuningWin
 
@@ -462,7 +456,6 @@ if {0} {
     # No book found
     if { [llength $bookList] == 0 } {
       tk_messageBox -title "Scid" -type ok -icon error -message "No books found. Check books directory"
-      set ::book::isOpen 0
       set ::book::currentBook ""
       destroy $w
       return

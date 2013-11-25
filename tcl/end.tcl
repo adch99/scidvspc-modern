@@ -678,33 +678,22 @@ proc editNameNewProc { tw nametype maxMatches name el op } {
 trace variable editNameNew w { editNameNewProc .nedit.g.list "" 9 }
 
 
-set nameEditorWin 0
-
-proc makeNameEditor {} {
-  if {[winfo exists .nedit]} {
-    raiseWin .nedit
-  } else {
-    nameEditor
-  }
-}
-
 proc setNameEditorType {type} {
   if {! [winfo exists .nedit]} { return }
   catch {.nedit.typeButtons.$type invoke}
 }
 
 proc nameEditor {} {
-  global editName editNameType editNameNew nameEditorWin editNameSelect
+  global editName editNameType editNameNew editNameSelect
   global editNameRating editDate editDateNew
 
   set w .nedit
   if {[winfo exists $w]} {
-    destroy $w
+    raiseWin $w
     return
   }
   toplevel $w
   wm title $w "[tr FileMaintNameEditor]"
-  set nameEditorWin 1
   setWinLocation $w
   bind $w <Configure> "recordWinSize $w"
 
@@ -846,7 +835,7 @@ proc nameEditor {} {
   wm resizable $w 0 0
   bind $w <Escape> { focus .main ; destroy .nedit }
   bind $w <Return> {.nedit.buttons.replace invoke}
-  bind $w <Destroy> {set nameEditorWin 0}
+  bind $w <Destroy> {}
   bind $w <F1> {helpWindow Maintenance Editing}
   focus $w
   $w.typeButtons.$editNameType invoke
@@ -2042,20 +2031,20 @@ if { $::docking::USE_DOCKING } {
     stats      ::windows::stats::Open
     crosstable ::crosstab::Open
     finder     ::file::finder::Open
-    book       ::book::OpenClose
+    book       ::book::Open
     fics       ::fics::config
     tip		::tip::show
   }
 } else {
   set startup_windows {
     switcher   ::windows::switcher::Open
-    pgn        ::pgn::OpenClose
-    gamelist   ::windows::gamelist::OpenClose
-    tree       ::tree::OpenClose
+    pgn        ::pgn::Open
+    gamelist   ::windows::gamelist::Open
+    tree       ::tree::Open
     stats      ::windows::stats::Open
     crosstable ::crosstab::Open
     finder     ::file::finder::Open
-    book       ::book::OpenClose
+    book       ::book::Open
     tip		::tip::show
   }
 }

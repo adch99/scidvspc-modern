@@ -5,8 +5,6 @@
 
 namespace eval ::plist {}
 
-set plistWin 0
-
 set ::plist::sort Name
 
 proc ::plist::defaults {} {
@@ -25,20 +23,12 @@ trace variable ::plist::maxElo w [list ::utils::validate::Integer [sc_info limit
 trace variable ::plist::minGames w [list ::utils::validate::Integer 9999 0]
 trace variable ::plist::maxGames w [list ::utils::validate::Integer 9999 0]
 
-proc ::plist::toggle {} {
+proc ::plist::Open {} {
   set w .plist
   if {[winfo exists $w]} {
-    destroy $w
-  } else {
-    ::plist::Open
+    raiseWin $w
+    return
   }
-}
-
-proc ::plist::Open {} {
-  global plistWin
-  set w .plist
-  if {[winfo exists .plist]} { return }
-  set plistWin 1
 
   toplevel $w
   setWinLocation $w
@@ -47,7 +37,7 @@ proc ::plist::Open {} {
   bind $w <F1> {helpWindow PList}
   bind $w <Escape> "$w.b.close invoke"
   bind $w <Return> ::plist::refresh
-  bind $w <Destroy> { set plistWin 0 }
+  bind $w <Destroy> {}
   bind $w <Up> "$w.t.text yview scroll -1 units"
   bind $w <Down> "$w.t.text yview scroll 1 units"
   bind $w <Prior> "$w.t.text yview scroll -1 pages"

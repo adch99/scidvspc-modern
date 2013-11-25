@@ -147,17 +147,13 @@ proc configureFilterGraph {parent} {
 }
 
 ### Filter graph window
-
 # ::tools::graphs::filter::type  can be "decade", "year" or "elo" , "move"
-proc tools::graphs::filter::Open {} {
 
-  global filterGraph
+proc tools::graphs::filter::Open {} {
 
   set w .fgraph
   if {[winfo exists $w]} {
-    focus .main
-    destroy $w
-    set filterGraph 0
+    raiseWin $w
     return
   }
 
@@ -166,8 +162,7 @@ proc tools::graphs::filter::Open {} {
   wm minsize $w 300 300
   wm withdraw $w
 
-  set filterGraph 1
-  bind $w <Destroy> {set filterGraph 0}
+  bind $w <Destroy> {}
 
   frame $w.b
   pack $w.b -side bottom -fill x
@@ -689,12 +684,10 @@ proc ::tools::graphs::rating::ConfigMenus {{lang ""}} {
 #
 
 proc tools::graphs::absfilter::Open {} {
-  global absfilterGraph
   set w .afgraph
+
   if {[winfo exists $w]} {
-    focus .main
-    destroy $w
-    set absfilterGraph 0
+    raiseWin $w
     return
   }
   toplevel $w
@@ -702,8 +695,7 @@ proc tools::graphs::absfilter::Open {} {
   wm title $w $::tr(TitleFilterGraph)
   wm minsize $w 300 300
 
-  set absfilterGraph 1
-  bind $w <Destroy> {set absfilterGraph 0}
+  bind $w <Destroy> {}
   bind $w <Control-J> tools::graphs::absfilter::Open
 
   frame $w.b

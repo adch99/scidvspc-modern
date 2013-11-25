@@ -359,7 +359,7 @@ namespace eval fics {
       .fics.command.entry icursor [string length $t1]
       break ; # avoid doing a backspace
     }
-    bind $w <Control-p> ::pgn::OpenClose
+    bind $w <Control-p> ::pgn::Open
     bind $w <Prior> "$w.console.text yview scroll -1 page"
     bind $w <Next>  "$w.console.text yview scroll +1 page"
     # i cant think how to separate the entry and console bind for 'Home' and 'End'

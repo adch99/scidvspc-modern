@@ -44,8 +44,8 @@ namespace eval tactics {
   proc findBestMove {} {
     bind .main.board  <Double-Button-1> ::tactics::findBestMove
     set ::gameInfo(hideNextMove) 1
-    if {$::pgnWin} {
-      ::pgn::OpenClose
+    if {[winfo exists .pgnWin]} {
+      destroy .pgnWin
     }
     set old_game [sc_game number]
 
@@ -233,8 +233,8 @@ namespace eval tactics {
     destroy .configTactics
 
     set ::gameInfo(hideNextMove) 1
-    if {$::pgnWin} {
-      ::pgn::OpenClose
+    if {[winfo exists .pgnWin]} {
+      destroy .pgnWin
     }
 
     set ::tactics::lastGameLoaded 0

@@ -121,14 +121,12 @@ namespace eval pgn {
   }
 
 
-  proc OpenClose {} {
-    global pgnWin pgnHeight pgnWidth pgnColor
+  proc Open {} {
+    global pgnHeight pgnWidth pgnColor
     set w .pgnWin
 
     if {[winfo exists $w]} {
-      focus .main
-      destroy $w
-      set pgnWin 0
+      raiseWin $w
       return
     }
 
@@ -224,8 +222,7 @@ namespace eval pgn {
 
     ::pgn::packScrollbar
 
-    set pgnWin 1
-    bind $w <Destroy> { set pgnWin 0 }
+    bind $w <Destroy> {}
 
     ### Left button closes context menu
     # (The "Move tag" text binding in htext.tcl will move game to this position)

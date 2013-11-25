@@ -88,21 +88,17 @@ array set maintFlags {
   6 Customflag6
 }
 
-
-set maintWin 0
-
 ###   Database Maintenance window.
 
-proc ::maint::OpenClose {} {
-  global maintWin maintFlag maintFlags maintFlaglist
+proc ::maint::Open {} {
+  global maintFlag maintFlags maintFlaglist
+
   set w .maintWin
 
   if {[winfo exists $w]} {
-    destroy $w
-    set maintWin 0
+    raiseWin $w
     return
   }
-  set maintWin 1
   set font font_Small
   set bold font_SmallBold
 
@@ -112,7 +108,7 @@ proc ::maint::OpenClose {} {
   wm resizable $w 0 0
   bind $w <F1> {helpWindow Maintenance}
   bind $w <Escape> "destroy $w; break"
-  bind $w <Destroy> {set maintWin 0}
+  bind $w <Destroy> {}
 
   ### Init main frames and titles
 

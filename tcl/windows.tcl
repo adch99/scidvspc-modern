@@ -9,17 +9,6 @@ namespace eval ::windows {
     # TODO
 }
 
-########################################################################
-###  Optional windows: all off initially.
-
-# Where do these belong ? S.A
-
-set pgnWin 0
-set commentWin 0
-set filterGraph 0
-
-set nagValue 0
-
 # recordWinSize:
 #   Records window width and height, for saving in options file.
 #

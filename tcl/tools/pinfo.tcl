@@ -23,7 +23,7 @@ proc playerInfo {{player ""} {raise 0}} {
     button $w.b.graph -text [tr ToolsRating] \
       -command {::tools::graphs::rating::Refresh $playerInfoName} 
     button $w.b.edit -text $::tr(PInfoEditRatings) -command {
-      makeNameEditor
+      nameEditor
       setNameEditorType rating
       set editName $playerInfoName
       set editNameSelect crosstable
@@ -38,7 +38,7 @@ proc playerInfo {{player ""} {raise 0}} {
       }
     } -width 10
     button $w.b.nedit -text [tr PinfoEditName] -command {
-      makeNameEditor
+      nameEditor
       setNameEditorType player
       set editName $playerInfoName
       set editNameNew $playerInfoName

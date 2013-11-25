@@ -763,20 +763,20 @@ proc ::docking::layout_restore_nb { pw name tabs} {
       $nb add $d -text $::tr(Board)
       raise $d
     }
-    if {$d == ".fdockpgnWin"}        {::pgn::OpenClose ; continue ; continue}
+    if {$d == ".fdockpgnWin"}        {::pgn::Open ; continue}
     if {$d == ".fdockbaseWin"}       {::windows::switcher::Open ; continue}
     if {$d == ".fdockecograph"}      {::windows::eco::OpenClose ; continue}
-    if {$d == ".fdocktbWin"}         {::tb::OpenClose ; continue}
+    if {$d == ".fdocktbWin"}         {::tb::Open ; continue}
     if {$d == ".fdockcommentWin"}    {set ::commentWin 1 ; ::commenteditor::Open ; continue}
-    if {$d == ".fdockglistWin"}      {::windows::gamelist::OpenClose ; continue}
+    if {$d == ".fdockglistWin"}      {::windows::gamelist::Open ; continue}
     if {$d == ".fdockccWindow"}      {::CorrespondenceChess::CCWindow ; continue}
     if {$d == ".fdockplayerInfoWin"} {::playerInfo ; continue}
     if {$d == ".fdockcrosstabWin"}   {::crosstab::Open ; continue}
-    if {$d == ".fdockbookWin"}       {::book::OpenClose ; continue}
+    if {$d == ".fdockbookWin"}       {::book::Open ; continue}
     if {$d == ".fdockbookTuningWin"} {::book::tuning ; continue}
     if {$d == ".fdockrgraph"}        {::tools::graphs::rating::Refresh}
     if {$d == ".fdocksgraph"}        {::tools::graphs::score::Refresh 1}
-    if { [ scan $d ".fdocktreeWin%d" base ] == 1 } {::tree::OpenClose $base ; continue}
+    if { [ scan $d ".fdocktreeWin%d" base ] == 1 } {::tree::Open $base ; continue}
     if { [ scan $d ".fdocktreeBest%d" base ] == 1 } {::tree::best $base ; continue}
     if { [ scan $d ".fdockanalysisWin%d" n ] == 1 } {
       # dont auto start engine

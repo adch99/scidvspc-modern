@@ -376,12 +376,6 @@ autoscrollframe .main.gameInfoFrame text .main.gameInfo
 
 menu .main.gameInfo.menu -tearoff 0 -background gray90
 
-.main.gameInfo.menu add checkbutton -label PGN -variable pgnWin -command ::pgn::OpenClose
-.main.gameInfo.menu add checkbutton -label {Game List} \
-   -variable ::windows::gamelist::isOpen -command ::windows::gamelist::OpenClose
-
-.main.gameInfo.menu add separator
-
 .main.gameInfo.menu add checkbutton -label {Menu Bar} -variable gameInfo(showMenu) -command showMenubar
 .main.gameInfo.menu add checkbutton -label {Tool Bar} -variable gameInfo(showTool) -command toggleToolbar
 .main.gameInfo.menu add checkbutton -label {Button Bar} -variable gameInfo(showButtons) -command toggleButtonBar
@@ -406,7 +400,7 @@ menu .main.gameInfo.menu -tearoff 0 -background gray90
 .main.gameInfo.menu add command -label GInfoCoords -command toggleCoords
 
 if { $::docking::USE_DOCKING } {
-  foreach i {3 4 5 6 7 9 13 14} {
+  foreach i {0 1 2 3 4 6 10 11} {
     .main.gameInfo.menu entryconfigure $i -command "[.main.gameInfo.menu entrycget $i -command] ; resizeMainBoard"
   }
 }

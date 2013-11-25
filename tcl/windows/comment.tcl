@@ -37,20 +37,8 @@ proc ::commenteditor::addNag {nag} {
   ::pgn::Refresh 1
 }
 
-# should rename this toggleCommentWin S.A
-
-proc makeCommentWin {} {
-  if {[winfo exists .commentWin]} {
-    # ::commenteditor::close
-    focus .main
-    destroy .commentWin
-  } else {
-    ::commenteditor::Open
-  }
-}
-
 proc ::commenteditor::Open {} {
-  global nagValue helpMessage
+  global helpMessage
   variable colorList
   variable markTypeList
   variable State
@@ -67,7 +55,6 @@ proc ::commenteditor::Open {} {
   # wm resizable $w 0 1
   # wm state $w withdrawn
 
-  bind $w <Control-e> makeCommentWin
   bind $w <F1> {helpWindow Comment}
   bind $w <Escape> "destroy  $w"
   bind $w <Destroy> ""

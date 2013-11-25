@@ -207,9 +207,7 @@ menu $m.utils
 $m add cascade -label FileMaint -menu .menu.file.utils
 set helpMessage($m,[incr menuindex]) FileMaint
 
-$m.utils add checkbutton -label FileMaintWin \
-    -accelerator "Ctrl+M" -variable maintWin -command ::maint::OpenClose
-bind .main <Control-m> ::maint::OpenClose
+$m.utils add command -label FileMaintWin -accelerator "Ctrl+M" -command ::maint::Open
 set helpMessage($m.utils,0) FileMaintWin
 
 $m.utils add command -label FileMaintCompact -command makeCompactWin
@@ -235,8 +233,7 @@ menu $m.utils.name
 $m.utils add cascade -label FileMaintName -menu .menu.file.utils.name
 set helpMessage($m.utils,8) FileMaintName
 
-$m.utils.name add checkbutton -label FileMaintNameEditor \
-    -command nameEditor -variable nameEditorWin
+$m.utils.name add command -label FileMaintNameEditor -command nameEditor 
 set helpMessage($m.utils.name,0) FileMaintNameEditor
 
 $m.utils.name add command -label FileMaintNamePlayer -command {openSpellCheckWin Player}
@@ -388,7 +385,7 @@ set helpMessage($m,[incr menuindex]) GameInfo
 $m add command -label GameBrowse -command {::gbrowser::new [sc_base current] [sc_game number] [sc_pos location]}
 set helpMessage($m,[incr menuindex]) GameBrowse
 
-$m add command -label GameList -command ::windows::gamelist::OpenClose 
+$m add command -label GameList -command ::windows::gamelist::Open 
 set helpMessage($m,[incr menuindex]) GameList
 
 $m add separator
@@ -493,14 +490,10 @@ set helpMessage($m,[incr menuindex]) SearchMoves
 $m  add separator
 incr menuindex
 
-$m add checkbutton -label WindowsPList \
-    -variable plistWin -command ::plist::toggle -accelerator "Ctrl+Shift+P"
-bind .main <Control-P> ::plist::toggle
+$m add command -label WindowsPList -command ::plist::Open -accelerator "Ctrl+Shift+P"
 set helpMessage($m,[incr menuindex]) WindowsPList
 
-$m add checkbutton -label WindowsTmt \
-    -variable tourneyWin -command ::tourney::toggle -accelerator "Ctrl+Shift+T"
-bind .main <Control-T> ::tourney::toggle
+$m add command -label WindowsTmt -command ::tourney::Open -accelerator "Ctrl+Shift+T"
 set helpMessage($m,[incr menuindex]) WindowsTmt
 
 $m  add separator
@@ -594,68 +587,48 @@ $m  add checkbutton -label WindowsGameinfo \
 bind .main <Control-i> toggleGameInfo
 set helpMessage($m,[incr menuindex]) WindowsGameinfo
 
-$m  add checkbutton -label WindowsComment \
-    -var commentWin -command makeCommentWin -accelerator "Ctrl+E"
-
-bind .main <Control-e> makeCommentWin
+$m  add command -label WindowsComment -command ::commenteditor::Open -accelerator "Ctrl+E"
 set helpMessage($m,[incr menuindex]) WindowsComment
 
-$m  add checkbutton -label WindowsGList \
-    -variable ::windows::gamelist::isOpen -command ::windows::gamelist::OpenClose  -accelerator "Ctrl+L"
+$m  add command -label WindowsGList -command ::windows::gamelist::Open -accelerator "Ctrl+L"
 set helpMessage($m,[incr menuindex]) WindowsGList
 
-$m  add checkbutton -label WindowsPGN \
-    -variable pgnWin -command ::pgn::OpenClose  -accelerator "Ctrl+P"
+$m  add command -label WindowsPGN -command ::pgn::Open  -accelerator "Ctrl+P"
 set helpMessage($m,[incr menuindex]) WindowsPGN
 
-$m  add checkbutton -label WindowsCross \
-     -variable crosstabWin -command ::crosstab::OpenClose  -accelerator "Ctrl+Shift+X"
-
+$m  add command -label WindowsCross -command ::crosstab::Open  -accelerator "Ctrl+Shift+X"
 set helpMessage($m,[incr menuindex]) WindowsCross
 
-$m add checkbutton -label WindowsPList \
-    -variable plistWin -command ::plist::toggle -accelerator "Ctrl+Shift+P"
-bind .main <Control-P> ::plist::toggle
+$m add command -label WindowsPList -command ::plist::Open -accelerator "Ctrl+Shift+P"
 set helpMessage($m,[incr menuindex]) WindowsPList
 
-$m add checkbutton -label WindowsTmt \
-    -variable tourneyWin -command ::tourney::toggle -accelerator "Ctrl+Shift+T"
-bind .main <Control-T> ::tourney::toggle
+$m add command -label WindowsTmt -command ::tourney::Open -accelerator "Ctrl+Shift+T"
 set helpMessage($m,[incr menuindex]) WindowsTmt
 
-$m add checkbutton -label WindowsMaint \
-    -accelerator "Ctrl+M" -variable maintWin -command ::maint::OpenClose
-bind .main <Control-m> ::maint::OpenClose
+$m add command -label WindowsMaint -accelerator "Ctrl+M" -command ::maint::Open
 set helpMessage($m,[incr menuindex]) WindowsMaint
 
 $m add separator
 incr menuindex
 
-$m add checkbutton -label WindowsECO \
-    -variable ::windows::eco::isOpen -command {::windows::eco::OpenClose}
+$m add command -label WindowsECO -command ::windows::eco::Open
 set helpMessage($m,[incr menuindex]) WindowsECO
 
-$m add checkbutton -label WindowsStats -variable ::windows::stats::isOpen \
-    -command ::windows::stats::Open
+$m add command -label WindowsStats -command ::windows::stats::Open
 bind .main <Control-i> ::windows::stats::Open
 set helpMessage($m,[incr menuindex]) WindowsStats
 
-$m add command -label WindowsTree -command ::tree::OpenClose -accelerator "Ctrl+T"
-bind .main <Control-t> { .menu.windows invoke [tr WindowsTree] }
+$m add command -label WindowsTree -command ::tree::Open -accelerator "Ctrl+T"
 set helpMessage($m,[incr menuindex]) WindowsTree
 
-$m add checkbutton -label WindowsTB -variable ::tb::isOpen -command ::tb::OpenClose \
-    -accelerator "Ctrl+="
-bind .main <Control-equal> ::tb::OpenClose
+$m add command -label WindowsTB -command ::tb::Open -accelerator "Ctrl+="
+bind .main <Control-equal> ::tb::Open
 set helpMessage($m,[incr menuindex]) WindowsTB
 
-$m add checkbutton -label WindowsBook -variable ::book::isOpen -command ::book::OpenClose \
-    -accelerator "Ctrl+B"
+$m add command -label WindowsBook -command ::book::Open -accelerator "Ctrl+B"
 set helpMessage($m,[incr menuindex]) WindowsBook
-bind .main <Control-b>  ::book::OpenClose
 
-$m add checkbutton -label WindowsCorrChess -variable ::CorrespondenceChess::isOpen \
-    -command ::CorrespondenceChess::CCWindow 
+$m add command -label WindowsCorrChess -command ::CorrespondenceChess::CCWindow 
 
 ### Tools menu:
 
@@ -697,9 +670,7 @@ $m add command -label ToolsTracker \
 bind .main <Control-K> ::ptrack::make
 set helpMessage($m,[incr menuindex]) ToolsTracker
 
-$m add checkbutton -label ToolsEmail \
-    -accelerator "Ctrl+Shift+E" -variable emailWin -command ::tools::email
-bind .main <Control-E> ::tools::email
+$m add command -label ToolsEmail -accelerator "Ctrl+Shift+E" -command ::tools::email
 set helpMessage($m,[incr menuindex]) ToolsEmail
 
 menu $m.pinfo
@@ -729,13 +700,11 @@ incr menuindex
 $m add separator
 incr menuindex
 
-$m add checkbutton -label ToolsFilterGraph \
-    -variable filterGraph -command tools::graphs::filter::Open
+$m add command -label ToolsFilterGraph -command tools::graphs::filter::Open
 set helpMessage($m,[incr menuindex]) ToolsFilterGraph
 
-$m add checkbutton -label ToolsAbsFilterGraph \
-    -accelerator "Ctrl+Shift+J" -variable absfilterGraph -command tools::graphs::absfilter::Open
-bind .main <Control-J> tools::graphs::absfilter::Open
+$m add command -label ToolsAbsFilterGraph -accelerator "Ctrl+Shift+J" -command ::tools::graphs::absfilter::Open
+bind .main <Control-J> ::tools::graphs::absfilter::Open
 set helpMessage($m,[incr menuindex]) ToolsAbsFilterGraph
 
 $m add command -label ToolsRating -command {::tools::graphs::rating::Refresh both}
@@ -1717,7 +1686,7 @@ proc standardShortcuts {w} {
   bind $w <Control-o> ::file::Open
   bind $w <Control-w> ::file::Close
   bind $w <Control-slash> ::file::finder::Open
-  bind $w <Control-m> ::maint::OpenClose
+  bind $w <Control-m> ::maint::Open
   bind $w <Control-q> ::file::Exit
   bind $w <Control-L> ::game::Reload
   bind $w <Control-g> ::game::GotoMoveNumber
@@ -1727,17 +1696,17 @@ proc standardShortcuts {w} {
   bind $w <Control-H> ::search::header
   bind $w <Control-M> ::search::material
   bind $w <Control-KeyPress-U> ::search:::usefile
-  bind $w <Control-e> makeCommentWin
-  bind $w <Control-b> ::book::OpenClose
-  bind $w <Control-l> ::windows::gamelist::OpenClose
-  bind $w <Control-d> ::windows::gamelist::OpenClose
-  bind $w <Control-p> ::pgn::OpenClose
-  bind $w <Control-T> ::tourney::toggle
-  bind $w <Control-P> ::plist::toggle
+  bind $w <Control-e> ::commenteditor::Open
+  bind $w <Control-b> ::book::Open
+  bind $w <Control-l> ::windows::gamelist::Open
+  bind $w <Control-d> ::windows::gamelist::Open
+  bind $w <Control-p> ::pgn::Open
+  bind $w <Control-T> ::tourney::Open
+  bind $w <Control-P> ::plist::Open
   bind $w <Control-i> ::toggleGameInfo
-  bind $w <Control-t> ::tree::OpenClose
+  bind $w <Control-t> ::tree::Open
   bind $w <Control-A> ::enginelist::choose
-  bind $w <Control-X> ::crosstab::OpenClose
+  bind $w <Control-X> ::crosstab::Open
   bind $w <Control-E> ::tools::email
   bind $w <Control-O> ::optable::makeReportWin
   # bind $w <Control-R> {::tools::graphs::rating::Refresh both}

@@ -228,7 +228,7 @@ proc ::windows::gamelist::Close {window} {
   } 
 }
 
-proc ::windows::gamelist::OpenClose {} {
+proc ::windows::gamelist::Open {} {
 
   ### ttk::style theme use alt
   # default classic alt clam
@@ -239,9 +239,8 @@ proc ::windows::gamelist::OpenClose {} {
 
   set w .glistWin
 
-  if {[winfo exists .glistWin]} {
-    set ::windows::gamelist::isOpen 0
-    destroy $w
+  if {[winfo exists $w]} {
+    raiseWin $w
     return
   }
 

@@ -52,19 +52,8 @@ proc ::crosstab::ConfigMenus {{lang ""}} {
 }
 
 
-proc ::crosstab::OpenClose {} {
-  global crosstabWin
-
-  if {[winfo exists .crosstabWin]} {
-    destroy .crosstabWin
-    set crosstabWin 0
-  } else {
-    ::crosstab::Open
-  }
-}
-
 proc ::crosstab::Open {} {
-  global crosstab crosstabWin
+  global crosstab 
 
   set w .crosstabWin
   if {[winfo exists $w]} {
@@ -73,7 +62,6 @@ proc ::crosstab::Open {} {
     return
   }
 
-  set crosstabWin 1
   ::createToplevel $w
   ::setTitle $w "[tr WindowsCross]"
   wm minsize $w 10 5
@@ -159,21 +147,21 @@ proc ::crosstab::Open {} {
     -command { .crosstabWin.b.cancel invoke } -accelerator Esc
 
   $w.menu.edit add command -label CrosstabEditEvent -command {
-    makeNameEditor
+    nameEditor
     setNameEditorType event
     set editName [sc_game info event]
     set editNameNew ""
     set editNameSelect crosstable
   }
   $w.menu.edit add command -label CrosstabEditSite -command {
-    makeNameEditor
+    nameEditor
     setNameEditorType site
     set editName [sc_game info site]
     set editNameNew ""
     set editNameSelect crosstable
   }
   $w.menu.edit add command -label CrosstabEditDate -command {
-    makeNameEditor
+    nameEditor
     setNameEditorType date
     set editNameNew " "
     set editDate [sc_game info date]
@@ -332,7 +320,7 @@ proc ::crosstab::Open {} {
     bind $w <Button-5> { .crosstabWin.f.text yview scroll  1 units }
   }
 
-  bind $w <Destroy> { set crosstabWin 0 }
+  bind $w <Destroy> {}
   ::crosstab::Refresh
 
   bind $w <Configure> "recordWinSize $w"

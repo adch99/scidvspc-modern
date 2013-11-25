@@ -2,14 +2,11 @@
 ### windows/stats.tcl: Filter Statistics window for Scid
 ###
 
-set ::windows::stats::isOpen 0
-
 proc ::windows::stats::Open {} {
   set w .statsWin
+
   if {[winfo exists $w]} {
-    raiseWin .main
-    destroy $w
-    set ::windows::stats::isOpen 0
+    raiseWin $w
     return
   }
   toplevel $w
@@ -74,13 +71,10 @@ proc ::windows::stats::Open {} {
        -wrap none 
 
   pack $w.statsasb -side top -fill both -expand yes
-  set ::windows::stats::isOpen 1
   bind $w <Control-q> "destroy $w"
   bind $w <Escape> "destroy $w"
   bind $w <F1> { helpWindow Index }
-  bind $w <Destroy> {
-    set ::windows::stats::isOpen 0
-  }
+  bind $w <Destroy> {}
   standardShortcuts $w
   # wm resizable $w 0 1
   ::windows::stats::ConfigMenus

@@ -1,7 +1,6 @@
 ### tools/tablebase.tcl:
 ###   Tablebase display routines for Scid.
 
-set ::tb::isOpen 0
 set tbTraining 0
 set tbOnline 0
 set tbBoard 0
@@ -119,21 +118,16 @@ set tbInfo(42) [list \
     knppkq knppkr knppkb knppkn knppkp \
     kpppkq kpppkr kpppkb kpppkn kpppkp ]
 
-# ::tb::isopen
-#   Returns boolean value of whether the tablebase window is open.
-#
 proc ::tb::isopen {} {
   return [winfo exists .tbWin]
 }
 
-### Open the tablebase window.
-
-proc ::tb::OpenClose {} {
+proc ::tb::Open {} {
   global tbInfo
 
   set w .tbWin
   if {[winfo exists $w]} {
-    destroy $w
+    raiseWin $w
     return
   }
   ::createToplevel $w
@@ -227,11 +221,10 @@ proc ::tb::OpenClose {} {
   packbuttons right $w.b.close $w.b.help
   pack $w.b.showboard $w.b.training $w.b.random -side left -padx 8 -pady 2
   pack $w.b.status -side left -fill x -expand yes
-  bind $w <Destroy> {set ::tb::isOpen 0; set tbTraining 0}
+  bind $w <Destroy> {set tbTraining 0}
   bind $w <Escape> "destroy $w"
   bind $w <F1> {helpWindow TB}
   bind $w <Configure> "recordWinSize $w"
-  bind $w <Control-equal> ::tb::OpenClose
   wm minsize $w 15 15
   set ::tbTraining 0
   ::tb::section

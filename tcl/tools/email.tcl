@@ -3,23 +3,15 @@
 ### Copyright (C) 1999-2003  Shane Hudson.
 ###
 
-# Email manager window: closed by default
-set emailWin 0
-
-
-# ::tools::email
-#
 #   Opens the email chess manager window, for sending moves to opponents.
-#
+
 proc ::tools::email {} {
-  global emailWin emailData
+  global emailData
   set w .emailWin
   if {[winfo exists $w]} {
-    destroy .emailWin
-    set emailWin 0
+    raiseWin $w
     return
   }
-  set emailWin 1
   toplevel $w
   wm title $w "Scid: Email Manager"
   wm minsize $w 25 10
@@ -90,7 +82,7 @@ proc ::tools::email {} {
     -side top -pady 1 -padx 5 -fill x
   pack $b.close $b.help $b.config -side bottom -pady 1 -padx 5  -fill x
 
-  bind $w <Destroy> { set emailWin 0 }
+  bind $w <Destroy> {}
   set emailData [::tools::email::readOpponentFile]
   focus $w.f.list
   ::tools::email::refresh
@@ -299,8 +291,10 @@ proc ::tools::email::refreshButtons {} {
 }
 
 proc ::tools::email::refresh {{clearSelection 1}} {
-  global emailWin emailData
-  if {! [winfo exists .emailWin]} { return }
+  global emailData
+  if {! [winfo exists .emailWin]} {
+    return
+  }
   if {$clearSelection} {
     set sel ""
     .emailWin.f.list selection clear 0 end
