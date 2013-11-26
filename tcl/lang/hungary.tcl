@@ -741,6 +741,8 @@ translate H AnnotateWith {A jegyzetekkel}
 translate H AnnotateWhichMoves {Melyik mozgatja}
 translate H AnnotateComment {Add annotator a hozzászólásr}
 translate H BlundersThreshold {Threshold}
+# ====== TODO To be translated ======
+translate H CutOff {Cut Off}
 translate H LowPriority {Alacsony CPU-prioritás}
 # ====== TODO To be translated ======
 translate H LogEngines {Log Engines}

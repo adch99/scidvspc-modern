@@ -812,6 +812,8 @@ translate O AnnotateWith {Kommentere Med}
 translate O AnnotateWhichMoves {Hvilken Moves}
 translate O AnnotateComment {Legg annotator å kommentere}
 translate O BlundersThreshold {Threshold}
+# ====== TODO To be translated ======
+translate O CutOff {Cut Off}
 translate O LowPriority {Low CPU priority} ;# ***
 # ====== TODO To be translated ======
 translate O LogEngines {Log Engines}

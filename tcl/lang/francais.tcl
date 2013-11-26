@@ -689,6 +689,8 @@ translate F AnnotateWith {Annoter Avec}
 translate F AnnotateWhichMoves {Qui se déplace}
 translate F AnnotateComment {Ajouter annotateur de commenter}
 translate F BlundersThreshold {Seuil de l'erreur}
+# ====== TODO To be translated ======
+translate F CutOff {Cut Off}
 translate F LowPriority {Priorité processeur basse}
 # ====== TODO To be translated ======
 translate F LogEngines {Log Engines}

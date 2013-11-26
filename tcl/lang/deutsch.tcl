@@ -713,6 +713,8 @@ translate D AnnotateWith {Kommentieren mit}
 translate D AnnotateWhichMoves {welche Moves}
 translate D AnnotateComment {Add Kommentator Kommentar}
 translate D BlundersThreshold {Grenze}
+# ====== TODO To be translated ======
+translate D CutOff {Cut Off}
 translate D LowPriority {Niedrige CPU-Priorität}
 # ====== TODO To be translated ======
 translate D LogEngines {Log Engines}

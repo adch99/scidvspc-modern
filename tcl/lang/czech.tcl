@@ -734,6 +734,8 @@ translate C AnnotateWhichMoves {Který se pohybuje}
 translate C AnnotateComment {Vlozit do annotator komentar}
 # ====== TODO To be translated ======
 translate C BlundersThreshold {Threshold}
+# ====== TODO To be translated ======
+translate C CutOff {Cut Off}
 translate C LowPriority {Nízká CPU priorita}
 # ====== TODO To be translated ======
 translate C LogEngines {Log Engines}

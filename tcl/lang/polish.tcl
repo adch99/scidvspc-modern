@@ -697,6 +697,8 @@ translate P AnnotateWith {Format komentarza}
 translate P AnnotateWhichMoves {Komentowane posuniêcia}
 translate P AnnotateComment {Dodaj pole komentatora}
 translate P BlundersThreshold {Granica b³êdu}
+# ====== TODO To be translated ======
+translate P CutOff {Cut Off}
 translate P LowPriority {Niski priorytet CPU} 
 # ====== TODO To be translated ======
 translate P LogEngines {Log Engines}

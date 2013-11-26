@@ -812,6 +812,8 @@ translate Y AnnotateWith {Annotate With}
 translate Y AnnotateWhichMoves {Which Moves}
 translate Y AnnotateComment {Add annotator to comment}
 translate Y BlundersThreshold {Threshold}
+# ====== TODO To be translated ======
+translate Y CutOff {Cut Off}
 translate Y LowPriority {Low CPU priority} ;# ***
 # ====== TODO To be translated ======
 translate Y LogEngines {Log Engines}

@@ -688,6 +688,8 @@ translate N AnnotateWith {Annoteren met}
 translate N AnnotateWhichMoves {welke zetten}
 translate N AnnotateComment {Toevoegen annotator commentaar}
 translate N BlundersThreshold {Ondergrens}
+# ====== TODO To be translated ======
+translate N CutOff {Cut Off}
 translate N LowPriority {Lage CPU prioriteit}
 # ====== TODO To be translated ======
 translate N LogEngines {Log Engines}

@@ -701,6 +701,8 @@ translate G AnnotateWith {Σχολιασμός Με }
 translate G AnnotateWhichMoves {Ποιες Κινήσεις}
 translate G AnnotateComment {Προσθήκη Σχολιαστή στο κείμενο}
 translate G BlundersThreshold {Threshold}
+# ====== TODO To be translated ======
+translate G CutOff {Cut Off}
 translate G LowPriority {Χαμηλή Προτεραιότητα CPU}
 # ====== TODO To be translated ======
 translate G LogEngines {Log Engines}

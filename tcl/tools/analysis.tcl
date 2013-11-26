@@ -957,6 +957,15 @@ proc initAnnotation {n} {
   pack $w.notbest $w.blunders -side top -fill x
   pack $w.allmoves $w.none -side top -fill x
 
+  frame $w.cutoff
+  label $w.cutoff.label -text "$tr(CutOff) $tr(BlundersThreshold)"
+  spinbox $w.cutoff.spBlunder -width 4 -textvariable annotate(cutoff) \
+      -from 3.0 -to 10.0 -increment .5
+
+  pack $w.cutoff -side top -padx 10 
+  pack $w.cutoff.label -side left -padx 5
+  pack $w.cutoff.spBlunder -side right -padx 5
+
   addHorizontalRule $w
 
   ### Which side
@@ -1389,6 +1398,9 @@ proc addAnnotation {} {
   set deltamove [expr {$score - $prevscore}]
   set isBlunder 0
 
+  ### Don't process if score above cut-off score,
+  # excepting for the case when score goes from -5 to +7 (eg)
+if {abs($prevscore) < $annotate(cutoff) || (abs($deltamove) > abs($score) && $score*$prevscore < 0)} {
   ### Calculate isBlunder
   if {$annotate(WithVars) != "notbest"} {
     if { $deltamove < [expr 0.0 - $annotate(blunder)] && $tomove == {black} || \
@@ -1406,6 +1418,8 @@ proc addAnnotation {} {
       set isBlunder 1
     }
   }
+}
+
 
   if {$annotate(WithVars) == "no"} {
     ### Scores only
@@ -2215,7 +2229,7 @@ proc makeAnalysisWin {{n 0} {options {}}} {
 
 
   pack $w.b.startStop $w.b.move $w.b.line $w.b.alllines \
-       $w.b.multipv $w.b.lockengine $w.b.showinfo $w.b.priority $w.b.annotate $w.b.showboard \
+       $w.b.multipv $w.b.lockengine $w.b.annotate $w.b.priority $w.b.showinfo $w.b.showboard \
        $w.b.update $w.b.finishGame -side left -pady 2 -padx 1
 
   if {$n == 1 || $n == 2} {

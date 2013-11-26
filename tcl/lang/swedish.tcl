@@ -682,6 +682,8 @@ translate W AnnotateWith {Kommentera Med}
 translate W AnnotateWhichMoves {Som Flyttar}
 translate W AnnotateComment {Lägg annotator att kommentera}
 translate W BlundersThreshold {Tröskelvärde}
+# ====== TODO To be translated ======
+translate W CutOff {Cut Off}
 translate W LowPriority {Kör som lågprioriterad process}
 # ====== TODO To be translated ======
 translate W LogEngines {Log Engines}

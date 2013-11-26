@@ -706,6 +706,8 @@ translate S AnnotateWith {Anotar con}
 translate S AnnotateWhichMoves {Qué movimientos}
 translate S AnnotateComment {Añadir Anotador a Comentario}
 translate S BlundersThreshold {Umbral del error }
+# ====== TODO To be translated ======
+translate S CutOff {Cut Off}
 translate S LowPriority {Baja prioridad del procesador}
 # ====== TODO To be translated ======
 translate S LogEngines {Log Engines}

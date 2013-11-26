@@ -740,6 +740,8 @@ translate B AnnotateWith {Que se Move}
 translate B AnnotateWhichMoves {Com anotações}
 translate B AnnotateComment {Adicionar anotador a comentar}
 translate B BlundersThreshold {Threshold}
+# ====== TODO To be translated ======
+translate B CutOff {Cut Off}
 translate B LowPriority {Low CPU priority} ;# ***
 # ====== TODO To be translated ======
 translate B LogEngines {Log Engines}

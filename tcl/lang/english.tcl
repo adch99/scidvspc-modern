@@ -693,6 +693,7 @@ translate E AnnotateWith {Annotate With}
 translate E AnnotateWhichMoves {Which Moves}
 translate E AnnotateComment {Add annotator to comment}
 translate E BlundersThreshold {Threshold}
+translate E CutOff {Cut Off}
 translate E LowPriority {Low CPU Priority}
 translate E LogEngines {Log Engines}
 translate E LogName {Add Name}

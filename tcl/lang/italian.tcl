@@ -752,6 +752,8 @@ translate I AnnotateWith {Con annotare}
 translate I AnnotateWhichMoves {Che si muove}
 translate I AnnotateComment {Aggiungi annotatore di commentare}
 translate I BlundersThreshold {Limite}
+# ====== TODO To be translated ======
+translate I CutOff {Cut Off}
 translate I LowPriority {Imposta la priorità della CPU a bassa}
 # ====== TODO To be translated ======
 translate I LogEngines {Log Engines}
