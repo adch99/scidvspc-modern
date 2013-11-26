@@ -2694,6 +2694,10 @@ making for easier <a Analysis Debugging>Debugging</a>.
   <li> <button autoplay_off 32> <b>Shoot out</b>, or "demo", mode allows the engine to play out the game. </li>
   <li> <button tb_annotate 32> <b>Annotate</b> game (see below).</li>
   <li> <button tb_training 32> <b>Training</b> feature (see below).</li>
+<br>
+  <li> And for Xboard engines only:</li>
+  <li> <button tb_update 32> <b>Update</b> gets the engine to display a statistics line,
+with the format "stat01: time nodes ply mvleft mvtot mvname". The results can be found in the engine's log file.</li>
   </ul>
   </p>
 

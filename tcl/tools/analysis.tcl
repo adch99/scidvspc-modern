@@ -2167,9 +2167,9 @@ proc makeAnalysisWin {{n 0} {options {}}} {
     -onvalue idle -offvalue normal -command "setAnalysisPriority $n" -relief $relief -width 32 -height 32
   ::utils::tooltip::Set $w.b.priority $::tr(LowPriority)
 
-  # UCI does not support . command (Is this correct ? S.A)
+  # Xboard only. This button is unpacked later if UCI
   button $w.b.update -image tb_update \
-    -command "if {$analysis(uci$n)} {sendToEngine $n .}"  -relief $relief
+    -command "sendToEngine $n ."  -relief $relief
   ::utils::tooltip::Set $w.b.update $::tr(Update)
 
   if {![info exists analysis(showEngineInfo$n)]} {
