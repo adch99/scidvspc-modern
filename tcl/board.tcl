@@ -691,10 +691,10 @@ button .main.tb.msearch -image tb_msearch -command ::search::material
 frame .main.tb.space4 -width 12
 button .main.tb.glist   -image tb_glist   -command ::windows::gamelist::Open
 button .main.tb.pgn     -image tb_pgn     -command ::pgn::Open
-button .main.tb.tmt     -image tb_tmt     -command ::tourney::toggle
+button .main.tb.tmt     -image tb_tmt     -command ::tourney::Open
 button .main.tb.comment -image tb_comment -command ::commenteditor::Open
 button .main.tb.maint   -image tb_maint   -command ::maint::Open
-button .main.tb.eco     -image tb_eco     -command ::windows::eco::OpenClose
+button .main.tb.eco     -image tb_eco     -command ::windows::eco::Open
 button .main.tb.tree    -image tb_tree    -command ::tree::Open
 button .main.tb.book    -image tb_book    -command ::book::Open
 button .main.tb.crosst  -image tb_crosst  -command ::crosstab::Open

@@ -765,7 +765,6 @@ proc ::docking::layout_restore_nb { pw name tabs} {
     }
     if {$d == ".fdockpgnWin"}        {::pgn::Open ; continue}
     if {$d == ".fdockbaseWin"}       {::windows::switcher::Open ; continue}
-    if {$d == ".fdockecograph"}      {::windows::eco::OpenClose ; continue}
     if {$d == ".fdocktbWin"}         {::tb::Open ; continue}
     if {$d == ".fdockcommentWin"}    {set ::commentWin 1 ; ::commenteditor::Open ; continue}
     if {$d == ".fdockglistWin"}      {::windows::gamelist::Open ; continue}
