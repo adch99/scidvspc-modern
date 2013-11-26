@@ -88,7 +88,8 @@ and bug-fix fork of Scid with some new features.  The project is authored by
 <UL>
 <LI> <B>Computer Tournaments</B>.</LI>
 <LI> Rewritten <B>Gamelist</B> widget, with the incorporated <B>Database Switcher</B>.</LI>
-<LI> Improved <B>Computer Game</B> and <B>FICs</B> features.</LI>
+<LI> Improved <B>Computer Game</B> , <B>FICs</B> and <B>Annotation</B> features.</LI>
+<LI> Large Board sizes.</LI>
 <LI> Clickable <B>Variation Arrows</B>, and <B>Paste Variation</B> feature.</LI>
 <LI> Improved Undo and <B>Redo</B>.</LI>
 <LI> Tri-coloured <B>Tree Bar-Graphs</B> alongside statistics.</LI>
@@ -109,7 +110,7 @@ and bug-fix fork of Scid with some new features.  The project is authored by
 <H3>Missing Features</H3>
 
 <UL>
-<LI> SCID's 4.4 had a powerful filter sorting capability, but it is not stable.<BR><BR></LI>
+<LI> Mainline SCID has a powerful filter sorting capability, but it is overly complicated, and perhaps not stable.<BR><BR></LI>
 <LI>Some language translations need volunteers and updating.</LI>
 </UL>
 </P>
@@ -119,11 +120,11 @@ and bug-fix fork of Scid with some new features.  The project is authored by
 
 
 <P>source 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.10.tgz/download">scid_vs_pc-4.10.tgz</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.11.tgz/download">scid_vs_pc-4.11.tgz</A></P>
 <P>windows 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.10.exe/download">Scid vs PC-4.10.exe</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.11.exe/download">Scid vs PC-4.11.exe</A></P>
 <P>mac 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.10.dmg/download">ScidvsMac-4.10.dmg</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.11.dmg/download">ScidvsMac-4.11.dmg</A></P>
 <P>
 <A HREF="https://sourceforge.net/project/showfiles.php?group_id=263836">browse files</A></P>
 <P>The latest code is available from subversion - <B>svn checkout http://svn.code.sf.net/p/scidvspc/code/ scidvspc-code</B><BR>
@@ -148,8 +149,8 @@ To enable support for extra chess pieces (such as Berlin), you may need to insta
 Then, installing from source:
 <HR>
 <PRE>
-tar -xzf scid_vs_pc-4.10.tgz
-cd scid_vs_pc-4.10
+tar -xzf scid_vs_pc-4.11.tgz
+cd scid_vs_pc-4.11
 ./configure
 sudo make install
 scid
@@ -174,7 +175,7 @@ C:\Users\[USERNAME]\AppData\Local\VirtualStore\Program Files\Scid vs PC</P>
 
 
 <P>The 
-<A HREF="#download_">ScidvsMac-4.10 app</A> should include everything you need. Simply drag and drop the App into /Applications (or similar).</P>
+<A HREF="#download_">ScidvsMac-4.11 app</A> should include everything you need. Simply drag and drop the App into /Applications (or similar).</P>
 <P><EM>Users upgrading may have to remove (or edit) <B>$HOME/.scidvspc/config/engines.dat</B>
 to properly configure the chess engines.</EM></P>
 <P>OS X  has a poor implementation of Tcl, and docked mode has bugs (some windows work better after being moved around, keyboard shortcuts are very hit and miss). These issues should be fixed with a point release sometime in the future.</P>
@@ -185,6 +186,8 @@ to properly configure the chess engines.</EM></P>
 <H2><A NAME="s5">5.</A> <A HREF="#toc5">news </A></H2>
 
 
+<P><B> December 2013 </B></P>
+<P>4.11 is out, with large board sizes, and a fix for the annoying filter/tree issue.</P>
 <P><B> April 2013 </B></P>
 <P>Finally have a docked windows feature. It's a damn complicated thing, but i am fond of it.
 Scid vs PC 4.9 is coming :)</P>
@@ -227,14 +230,13 @@ files in the downloads section. My project is fairly modest fork of Scid
 </H2>
 
 
-<P>This powerful feature has a few issues.
+<P>This powerful feature is maturing. See the Docked Windows help item for more info.
 <UL>
-<LI> Tcl/Tk 8.6.0 may have issues.</LI>
+<LI> Window focus automatically follows the mouse around, and also impacts which keyboard bindings are active. Most bindings are active when the mouse is over the main board.</LI>
 <LI>In the event of Scid failing to start, restart the program with the <B>-nodock</B> option.</LI>
-<LI> Key bindings (especially menus) can be hit and miss.</LI>
 <LI> Windows undocked from within docking mode can have glitches.
 Mainly: drag and drop game copies in the switcher don't work.</LI>
-<LI>OS X support is not good.</LI>
+<LI>OS X support is not great.</LI>
 </UL>
 
 Make sure to check out the new Theme Options, which affect how the Docked Windows (and Gamelist) look and feel.</P>
@@ -415,6 +417,37 @@ and lesser popularity than Scid.</P>
 
 
 <P>
+<H3>Scid vs. PC 4.11</H3>
+
+<P>
+<UL>
+<LI>Maximum board size is now twice as big</LI>
+<LI>Gamelist context menu (right-click). Less button crowding</LI>
+<LI>Annotation improvements: Depth based annotation, and cut-off features</LI>
+<LI>Dock a few extra windows (graphs, tablebase)</LI>
+<LI>Computer tournament stability/speed fix</LI>
+<LI>Locked Analysis Engines now show the locked position (not the working line)
+, and bug-fix the engine lock, which didnt work properly</LI>
+<LI>Add a low CPU priority check box to Engine Configuration window
+(especially important for MS Windows - where engines can kill GUI)</LI>
+<LI>Engine configuration window now repsonds to keystrokes to quickly find any engine</LI>
+<LI>Display "(altered)" in statusbar is game has been changed</LI>
+<LI>Fullscreen menu item (Options->Windows->Fullscreen)</LI>
+<LI>FICS tweaks, including over-riding takeback/abort request dialogs when game ends</LI>
+<LI>Remove some wasted space around FICS, main button bar, and other widgets</LI>
+<LI>New Greek translation</LI>
+<LI>Read custom chess pieces from &nbsp;/.scidvspc/pieces</LI>
+<LI>Docked tabs/menu refinements</LI>
+<LI>OS X - Clicking on URLs will open the link in a browser</LI>
+<LI>Add a command console to the start-up window</LI>
+<LI>Bug-fix: When tree is open, gamelist filter operations didn't work properly</LI>
+<LI>Bug-fix: Search in variations never matched positions at end-of-line</LI>
+<LI>Bug-fix: Opening Table favourites werent working properly</LI>
+<LI>In Export PGN dialog, add an option for "Space after Move Numbers"</LI>
+<LI>Keyboard short-cuts changes. Control-L (etc) no longer open/close, but open/raise</LI>
+<LI>Tweak Comment Editor and Player Info buttons</LI>
+</UL>
+</P>
 <H3>Scid vs. PC 4.10</H3>
 
 <P>

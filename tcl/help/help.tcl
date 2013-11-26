@@ -2764,8 +2764,9 @@ with the format "stat01: time nodes ply mvleft mvtot mvname". The results can be
      <li><term>Move Control</term> Whether to process each move for a fixed time, or fixed depth (UCI only).</li>
      <li><term>Depth per move</term> Number of half-moves engine spends on analysing each move (UCI only).</li>
      <li><term>Seconds per move</term> Number of seconds engine spends on analysing each move.</li>
-     <li><term>Annotate With</term> Choose whether to add Variations or Scores.
+     <li><term>Add Scores/Variations</term> Choose when to add Scores and Variations.
      (Scores can then be utilized by the <a Graphs Score>Score Graph</a>)</li>
+     <li><term>Cut Off Threshold</term> Above this score, dont worry about adding variations, as game is won.</li>
      <li><term>Which Side</term> Select which side(s) should be annotated.</li>
      <li><term>Which Moves</term>
      Add an annotation only if the game move is a blunder, or not the best move.
@@ -5801,6 +5802,35 @@ set helpText(Sound) {<h1>Sound</h1>
 
 set helpTitle(Changelog) "Scid vs PC Changelog"
 set helpText(Changelog) {<h1>Changelog</h1>
+
+<h4>4.11 (December 1, 2013)</h4>
+<ul>
+<li> Maximum board size is now twice as big</li>
+<li> Gamelist context menu (right-click). Less button crowding</li>
+<li> Annotation improvements: Depth based annotation, and cut-off features</li>
+<li> Dock a few extra windows (graphs, tablebase)</li>
+<li> Computer tournament stability/speed fix</li>
+<li> Locked Analysis Engines now show the locked position (not the working line)</li>
+, and bug-fix the engine lock, which didnt work properly</li>
+<li> Add a low CPU priority check box to Engine Configuration window</li>
+(especially important for MS Windows - where engines can kill GUI)</li>
+<li> Engine configuration window now repsonds to keystrokes to quickly find any engine</li>
+<li> Display "(altered)" in statusbar is game has been changed</li>
+<li> Fullscreen menu item (Options-<gt>Windows-<gt>Fullscreen)</li>
+<li> FICS tweaks, including over-riding takeback/abort request dialogs when game ends</li>
+<li> Remove some wasted space around FICS, main button bar, and other widgets</li>
+<li> New Greek translation</li>
+<li> Read custom chess pieces from ~/.scidvspc/pieces</li>
+<li> Docked tabs/menu refinements</li>
+<li> OS X - Clicking on URLs will open the link in a browser</li>
+<li> Add a command console to the start-up window</li>
+<li> Bug-fix: When tree is open, gamelist filter operations didn't work properly</li>
+<li> Bug-fix: Search in variations never matched positions at end-of-line</li>
+<li> Bug-fix: Opening Table favourites werent working properly</li>
+<li> In Export PGN dialog, add an option for "Space after Move Numbers"</li>
+<li> Keyboard short-cuts changes. Control-L (etc) no longer open/close, but open/raise</li>
+<li> Tweak Comment Editor and Player Info buttons</li>
+</ul>
 
 <h4>4.10 (August 25, 2013)</h4>
 <ul>
