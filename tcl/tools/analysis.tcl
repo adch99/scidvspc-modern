@@ -336,6 +336,7 @@ proc ::enginelist::listEngines {{focus 0}} {
     $w.title tag configure $i -font font_Fixed -foreground {}
   }
   $w.title configure -state disabled
+  focus .enginelist.list.list
 }
 
 ###  Main Engine Configuration widget
@@ -398,6 +399,11 @@ proc ::enginelist::choose {} {
       -yscrollcommand "$w.list.ybar set" -font font_Fixed -exportselection 0 ; # -bg text_bg_color
 
   bind $w.list.list <Double-ButtonRelease-1> "$w.buttons2.start invoke; break"
+  bind $w.list.list <Return> {
+    .enginelist.buttons2.start invoke
+    break
+  }
+  bind $w.list.list <KeyPress> "::enginelist::findEngine %K"
   scrollbar $w.list.ybar -command "$w.list.list yview"
 
   pack $w.list.ybar -side right -fill y
@@ -445,6 +451,7 @@ proc ::enginelist::choose {} {
   pack $w.buttons2.logengines $w.buttons2.logname $w.buttons2.lowpriority -side left -padx 0 
 
   focus $w.buttons2.start
+  # Focus is now set to listbox (in ::enginelist::listEngines) for keyboard shortcuts
 
   ::enginelist::listEngines
   update
@@ -468,9 +475,8 @@ proc ::enginelist::setTime {index {time -1}} {
 
 trace variable engines(newElo) w [list ::utils::validate::Integer [sc_info limit elo] 0]
 
-# ::enginelist::delete
 #   Removes an engine from the list.
-#
+
 proc ::enginelist::delete {index} {
   global engines
   if {$index == ""  ||  $index < 0} { return }
@@ -494,10 +500,8 @@ Confirm delete\n"
   }
 }
 
-# ::enginelist::edit
 #   Opens a dialog for editing an existing engine list entry (if
 #   index >= 0), or adding a new entry (if index is -1).
-#
 
 proc ::enginelist::edit {index {copy {}}} {
   global engines
@@ -800,6 +804,32 @@ proc ::enginelist::move {dir} {
   }
   ::enginelist::listEngines [expr $current + $dir]
   ::enginelist::write
+}
+
+proc ::enginelist::findEngine {key} {
+  set w .enginelist.list.list
+
+  if {![string is alpha $key]} {
+    return
+  }
+
+  set curselection [$w curselection]
+  if {$curselection == {}} { 
+    set i -1
+  } else {
+    set i [lindex $curselection 0]
+  }
+
+  set match 0
+  $w selection clear 0 end
+  while {$i < [$w index end] && !$match} {
+    incr i
+    set match [string match -nocase $key* [$w get $i]]
+  }
+  if {$match} {
+    $w selection set $i
+    $w see $i
+  }
 }
 
 proc checkState {arg widget} {
