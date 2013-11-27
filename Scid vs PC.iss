@@ -1,5 +1,5 @@
 
-#define AppVersion '4.10'
+#define AppVersion '4.11'
 #define AppName    'Scid vs PC'
 #define ActiveTclUrl 'http://www.activestate.com/activetcl/downloads'
 
@@ -70,51 +70,11 @@ begin
   ShellExecAsOriginalUser('open', '{# ActiveTclUrl}', '', '', SW_SHOWNORMAL, ewNoWait, ErrorCode);
 end;
 
-procedure CreateTheWizardPage;
-var
-  Page: TWizardPage;
-  Line1, Line2: TNewStaticText;
-     URLLabel: TNewStaticText;
-     
-begin
-
-  Page := CreateCustomPage(wpSelectComponents, 'Active Tcl', 'Active Tcl');
-
-
-  Line1 := TNewStaticText.Create(Page);
-  Line1.Top :=  ScaleY(8);
-  Line1.Caption := 'Optionally, ActiveTcl may also be installed.';
-  
-  Line1.AutoSize := True;
-  Line1.Parent := Page.Surface;
-  
-    Line2 := TNewStaticText.Create(Page);
-  Line2.Top :=  Line1.Top + Line1.Height + ScaleY(8);
-  Line2.Caption := 'You can get it free from ';
-  Line2.AutoSize := True;
-  Line2.Parent := Page.Surface;
-
-  URLLabel := TNewStaticText.Create(Page);
-  URLLabel.Caption := '{# ActiveTclUrl}';
-  URLLabel.Cursor := crHand;
-  URLLabel.OnClick := @URLLabelOnClick;
-  URLLabel.Parent := Page.Surface;
-  
-  URLLabel.Font.Style := URLLabel.Font.Style + [fsUnderline];
-  URLLabel.Font.Color := clBlue;
-  URLLabel.Top := Line2.Top;
-  URLLabel.Left := Line2.Left + Line2.Width + ScaleX(1);
-
-end;
-
-
-
 var
   tclPage: TOutputMsgWizardPage;
 
 procedure InitializeWizard();
 begin
-CreateTheWizardPage;
 
 end;
 
