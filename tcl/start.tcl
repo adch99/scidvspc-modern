@@ -1479,7 +1479,11 @@ if {$unixOS} {
 # Start up splash screen:
 
 proc ::splash::make {} {
-  wm withdraw .
+  ### windows hack 
+  # Dont withdraw toplevel if windows and docked mode, because of rendering bugs in paned windows/tabs
+  if {!($::windowsOS && $::docking::USE_DOCKING)} {
+     wm withdraw .
+  }
   set w [toplevel .splash]
   wm withdraw $w
   wm protocol $w WM_DELETE_WINDOW [list wm withdraw $w]

@@ -791,12 +791,7 @@ proc ::docking::layout_restore_nb { pw name tabs} {
   }
 
   # force the selection of first tab
-  if {$::windowsOS} {
-    # Fixme: windows hack to stop main board getting overwrit by some second tab elsewhere (init only)
-    after 500 "$nb select [ lindex [ $nb tabs] 0 ]"
-  } else {
-    $nb select [ lindex [ $nb tabs] 0 ]
-  }
+  $nb select [ lindex [ $nb tabs] 0 ]
 
   set ::docking::layout_dest_notebook ""
 }
