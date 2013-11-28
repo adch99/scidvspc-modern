@@ -14,14 +14,14 @@ menuText S File "Archivo" 0
 menuText S FileNew "Nuevo..." 0 {Crea una nueva base de datos Scid vacía}
 menuText S FileOpen "Abrir..." 1 {Abre una base de datos Scid ya existente}
 menuText S FileClose "Cerrar" 0 {Cierra la base de datos Scid activa}
-menuText S FileFinder "Visor..." 0 {Abre la ventana del visor de Archivos}
+menuText S FileFinder "Visor..." 0 {Abre la ventana del visor de archivos}
 menuText S FileSavePgn "Grabar PGN" 0 {Graba la partida a un fichero PGN}
 menuText S FileBookmarks "Partidas favoritas" 0 {Seleccionar partidas favoritas (Ctrl+B)}
 menuText S FileBookmarksAdd "Añadir" 0 {Señala la partida y posición actual de la base de datos}
 menuText S FileBookmarksFile "Archivar" 8 {Archiva un marcador para la partida y posición actual}
 menuText S FileBookmarksEdit "Editar partidas favoritas..." 0 {Edita los menus de las partidas favoritas}
-menuText S FileBookmarksList "Mostrar partidas favoritas" 0 {Muestrar las carpetas de favoritas en una sola lista, sin submenus}
-menuText S FileBookmarksSub "Mostrar partidas marcadas con submenus" 0 {Muestrar las carpetas de favoritas como submenus, no una sola lista}
+menuText S FileBookmarksList "Mostrar partidas favoritas" 0 {Muestrar las carpetas de favoritas en una sola lista, sin submenús}
+menuText S FileBookmarksSub "Mostrar partidas marcadas con submenus" 0 {Muestrar las carpetas de favoritas como submenús, no una sola lista}
 menuText S FileMaint "Mantenimiento" 0 \
   {Herramientas de mantenimiento de la base de datos Scid}
 menuText S FileMaintWin "Mantenimiento" 0 \
@@ -38,7 +38,7 @@ menuText S FileMaintTwin "Inspección de dobles" 11 \
   {Abre/actualiza la ventana de inspección de dobles}
 menuText S FileMaintName "Ortografía de nombres" 0 {Herramientas de ortografía y edición de nombres}
 menuText S FileMaintNameEditor "Edición de nombres" 0 \
-  {Abrir/Cerrar la ventana de edición de nombres}
+  {Abre/Cierra la ventana de edición de nombres}
 menuText S FileMaintNamePlayer "Corrección de nombres de jugadores" 11 \
   {Comprobación ortográfica de jugadores usando archivo de comprobación ortográfica}
 menuText S FileMaintNameEvent "Corrección de nombres de eventos" 11 \
@@ -47,12 +47,12 @@ menuText S FileMaintNameSite "Corrección de nombres de lugares" 11 \
   {Comprobación ortográfica de lugares usando el archivo de comprobación ortográfica}
 menuText S FileMaintNameRound "Corrección de nombre de rondas" 11 \
   {Comprobación ortográfica de rondas usando el archivo de comprobación ortográfica}
-menuText S FileReadOnly "Sólo Lectura" 0 \
+menuText S FileReadOnly "Sólo lectura" 0 \
   {Trata la actual base de datos como de sólo lectura, previniendo cambios}
-menuText S FileSwitch "Cambiar de Base" 0 \
+menuText S FileSwitch "Cambiar de base" 0 \
   {Cambia a otra base de partidas abierta}
 menuText S FileExit "Salir" 0 {Salir de Scid}
-menuText S FileMaintFixBase "Fijar base corrupta" 0 {Prueba a fijar una base corrupta}
+menuText S FileMaintFixBase "Reparar base corrupta" 0 {Intenta reparar una base corrupta}
 
 # Edit menu:
 menuText S Edit "Editar" 0
@@ -95,30 +95,30 @@ menuText S EditPasteBoard "Pegar tablero inicial" 6 \
 
 # Game menu:
 menuText S Game "Partida" 0
-menuText S GameNew "Partida Nueva" 0 \
+menuText S GameNew "Partida nueva" 0 \
   {Vuelve a una partida nueva, descartando cualquier cambio}
-menuText S GameFirst "Cargar Primera" 5 {Carga la primera partida filtrada}
-menuText S GamePrev "Cargar Anterior" 5 {Carga la anterior partida filtrada}
-menuText S GameReload "Recarga Partida" 2 \
+menuText S GameFirst "Cargar primera" 5 {Carga la primera partida filtrada}
+menuText S GamePrev "Cargar anterior" 5 {Carga la anterior partida filtrada}
+menuText S GameReload "Recarga partida" 2 \
   {Recargar esta partida, descartando cualquier cambio hecho}
-menuText S GameNext "Cargar Siguiente" 7 {Carga la siguiente partida filtrada}
-menuText S GameLast "Cargar Última" 8 {Carga la última partida filtrada}
-menuText S GameRandom "Cargar Partida Aleatoria" 8 {Carga aleatoriamente una partida filtrada}
-menuText S GameNumber "Cargar Partida Número" 5 \
+menuText S GameNext "Cargar siguiente" 7 {Carga la siguiente partida filtrada}
+menuText S GameLast "Cargar última" 8 {Carga la última partida filtrada}
+menuText S GameRandom "Cargar partida aleatoria" 8 {Carga aleatoriamente una partida filtrada}
+menuText S GameNumber "Cargar partida número" 5 \
   {Carga una partida poniendo su número}
-menuText S GameReplace "Reemplazar Partida" 6 \
+menuText S GameReplace "Reemplazar partida" 6 \
   {Guarda esta partida, reemplazando la antigua versión}
-menuText S GameAdd "Añadir Partida" 0 \
+menuText S GameAdd "Añadir partida" 0 \
   {Guarda esta partida como una nueva partida en la base de datos}
-menuText S GameInfo "Juego Set de Información" 0
-menuText S GameBrowse "Examinar Partidas" 0
-menuText S GameList "Listar Todas las Partidas" 0
+menuText S GameInfo "Información de la partida" 0
+menuText S GameBrowse "Examinar partidas" 0
+menuText S GameList "Listar todas las partidas" 0
 menuText S GameDelete "Borrar partida" 0
 menuText S GameDeepest "Identificar apertura" 0 \
   {Va a la posición más avanzada de la partida según el libro ECO}
-menuText S GameGotoMove "Ir al Movimiento Número" 5 \
+menuText S GameGotoMove "Ir al movimiento número" 5 \
   {Ir al número de movimiento especificado en la partida actual}
-menuText S GameNovelty "Encontrar Novedad" 7 \
+menuText S GameNovelty "Encontrar novedad" 7 \
   {Encuentra el primer movimiento de esta partida que no se ha jugado antes}
 
 # Search Menu:
@@ -139,7 +139,7 @@ menuText S SearchUsing "Cargar archivo de búsqueda" 0 \
 
 # Windows menu:
 menuText S Windows "Ventanas" 0
-menuText S WindowsGameinfo "Mostrar informacin de la partida" 0 {Show/hide the game info panel}
+menuText S WindowsGameinfo "Mostrar información de la partida" 0 {Muestra la información de la partida}
 menuText S WindowsComment "Editor de comentarios" 0 \
   {Abre/cierra el editor de comentarios}
 menuText S WindowsGList "Listado de partidas" 0 \
@@ -158,41 +158,41 @@ menuText S WindowsStats "Estadísticas" 12 \
 menuText S WindowsTree "Árbol de Aperturas" 6 {Abre/cierra la ventana de Árbol de Aperturas (Book)}
 menuText S WindowsTB "Tablas de  Finales (TBs)" 8 \
   {Abre/cierra la ventana de TBs}
-menuText S WindowsBook "Libros de Aperturas (Book)" 0 {Abrir/Cerrar la ventana de Libros de Aperturas (Book)}
-menuText S WindowsCorrChess "Correo electrónico" 0 {Abrir/Cerrar la ventra de Correo}
+menuText S WindowsBook "Libros de aperturas (Book)" 0 {Abrir/Cerrar la ventana de libros de aperturas (Book)}
+menuText S WindowsCorrChess "Correo electrónico" 0 {Abrir/Cerrar la ventra de correo}
 
 # Tools menu:
 menuText S Tools "Herramientas" 0
 menuText S ToolsAnalysis "Motor de análisis..." 0 \
   {Inicia/para el análisis de un motor de ajedrez}
-menuText S ToolsEmail "Administrador de Email" 0 \
-  {Abre/cierra la ventana del administrador de Email}
+menuText S ToolsEmail "Administrador de email" 0 \
+  {Abre/cierra la ventana del administrador de email}
 menuText S ToolsFilterGraph "Filtro gráfico" 7 \
   {Abre/cierra la ventana del filtro gráfico}
-menuText S ToolsAbsFilterGraph "Filtro gráfico Abs." 7 {Abrir/Cerrar la ventana de filtro gráfica para valores absolutos}
+menuText S ToolsAbsFilterGraph "Filtro gráfico Abs." 7 {Abrir/Cerrar la ventana de filtro gráfico para valores absolutos}
 menuText S ToolsOpReport "Informe de la apertura" 1 \
   {Crea un informe de la apertura para la posición actual}
-menuText S ToolsOpenBaseAsTree "Abrir base como árbol" 0   {Abrir una base y usarla en la Ventana de arbol (Tree)}
-menuText S ToolsOpenRecentBaseAsTree "Abrir base reciente como árbol" 0   {Abre una base reciente y la usa en Ventana de árbol (Tree)} 
+menuText S ToolsOpenBaseAsTree "Abrir base como árbol" 0   {Abrir una base y usarla en la ventana de árbol (Tree)}
+menuText S ToolsOpenRecentBaseAsTree "Abrir base reciente como árbol" 0   {Abre una base reciente y la usa en ventana de árbol (Tree)} 
 menuText S ToolsTracker "Rastreador de piezas"  6 {Abre la ventana del rastreador de piezas}
-menuText S ToolsTraining "Entrenamiento"  0 {Entrenamiento (táctica, aperturas,...}
-menuText S ToolsComp "Torneo de motores" 0 {Chess engine tournament}
+menuText S ToolsTraining "Entrenamiento"  0 {Entrenamiento (táctica, aperturas,...)}
+menuText S ToolsComp "Torneo de motores" 0 {Torneo de motores}
 menuText S ToolsTacticalGame "Computadora - Phalanx"  0 {Jugar una partida táctica}
 menuText S ToolsSeriousGame "Computadora - Motor UCI"  0 {Jugar contra un motor UCI}
-menuText S ToolsTrainTactics "Mate en ..N.. (puzles)"  0 {Resover problemas de "Mate en"}
-menuText S ToolsTrainCalvar "Cálculo of variaciones"  0 {Calculo de variantes}
+menuText S ToolsTrainTactics "Mate en ..N.. (puzzles)"  0 {Resover problemas de "Mate en"}
+menuText S ToolsTrainCalvar "Cálculo de variaciones"  0 {Calculo de variantes}
 menuText S ToolsTrainFindBestMove "Encontrar la mejor jugada"  0 {Busca el movimiento mejor}
 menuText S ToolsTrainFics "Internet (FICS)"  0 {Jugar en freechess.org}
-menuText S ToolsBookTuning "Sintonizar Libro de aperturas" 0 {Sintonizar Libro (Book)}
-menuText S ToolsConnectHardware "Conectar Hardware" 0 {Connect external hardware}
-menuText S ToolsConnectHardwareConfigure "Configurar..." 0 {Configure external hardware and connection}
-menuText S ToolsConnectHardwareNovagCitrineConnect "Conectar Novag Citrine" 0 {Connect Novag Citrine}
-menuText S ToolsConnectHardwareInputEngineConnect "Conectar Tablero" 0 {Connect Input Engine (e.g. DGT)}
+menuText S ToolsBookTuning "Sintonizar libro de aperturas" 0 {Sintonizar libro (Book)}
+menuText S ToolsConnectHardware "Conectar hardware" 0 {Conectar  hardware externo}
+menuText S ToolsConnectHardwareConfigure "Configurar..." 0 {Configurar conexión a hardware externo}
+menuText S ToolsConnectHardwareNovagCitrineConnect "Conectar Novag Citrine" 0 {Conectar Novag Citrine}
+menuText S ToolsConnectHardwareInputEngineConnect "Conectar Tablero" 0 {Conectar tablero de entra (p.ej. DGT)}
 menuText S ToolsNovagCitrine "Novag Citrine" 0 {Novag Citrine}
 menuText S ToolsNovagCitrineConfig "Configuración" 0 {Configuración Novag Citrine}
 menuText S ToolsNovagCitrineConnect "Conectar" 0 {Conectar Novag}
-menuText S ToolsPInfo "Información del Jugador" 16 \
-  {Abrir/actualizar la ventana de Información del Jugador}
+menuText S ToolsPInfo "Información del jugador" 16 \
+  {Abrir/actualizar la ventana de información del jugador}
 menuText S ToolsPlayerReport "Informe del jugador" 3 \
   {Crea un informe sobre un jugador}
 menuText S ToolsRating "Rating del jugador" 0 \
@@ -210,20 +210,20 @@ menuText S ToolsExpCurrentLaTeX "Exportar Partida a LaTeX" 33 \
   {Escribe la partida actual en un archivo LaTeX}
 menuText S ToolsExpFilter "Exportar todas las partidas filtradas" 1 \
   {Escribe todas las partidas filtradas en un archivo de texto}
-menuText S ToolsExpFilterPGN "Exportar Filtro a PGN" 17 \
+menuText S ToolsExpFilterPGN "Exportar filtro a PGN" 17 \
   {Escribe todas las partidas filtradas en un archivo PGN}
-menuText S ToolsExpFilterHTML "Exportar Filtro a HTML" 17 \
+menuText S ToolsExpFilterHTML "Exportar filtro a HTML" 17 \
   {Escribe todas las partidas filtradas en un archivo HTML}
-menuText S ToolsExpFilterHTMLJS "Exportar Filtro a HTML y JavaScript" 17 {Escribir todas las partidas filtradas a fichero HTML y JavaScript}  
+menuText S ToolsExpFilterHTMLJS "Exportar filtro a HTML y JavaScript" 17 {Escribir todas las partidas filtradas a fichero HTML y JavaScript}  
 menuText S ToolsExpFilterLaTeX "Exportar filtro a LaTeX" 17 \
   {Escribe todas las partidas filtradas en un archivo LaTeX}
-menuText S ToolsImportOne "Importar Partida PGN" 0 \
+menuText S ToolsImportOne "Importar partida PGN" 0 \
   {Importa una partida de un texto PGN}
-menuText S ToolsImportFile "Importar Archivo de Partidas PGN" 2 \
+menuText S ToolsImportFile "Importar archivo de partidas PGN" 2 \
   {Importa partidas de un archivo PGN}
 menuText S ToolsStartEngine1 "Empezar motor 1" 0  {Empezar motor 1}
 menuText S ToolsStartEngine2 "Empezar motor 2" 0  {Empezar Motor 2}
-menuText S ToolsScreenshot "Captura de Pantalla" 0
+menuText S ToolsScreenshot "Captura de pantalla" 0
 menuText S Play "Jugar" 0
 menuText S CorrespondenceChess "Ajedrez por correo" 0 \
   {Funciones para ajedrez por correo basado en email y Xfcc}
@@ -237,12 +237,12 @@ menuText S CCRetrieve "Reparar partidas" 0 \
 menuText S CCInbox "Procesar correo entrante" 0 \
   {Procesa todos los ficheros en correo entrante de Scid (Inbox)}
 menuText S CCSend "Enviar movimiento" 0 \
-  {Envia tu movimiento via eMail o ayuda externa (Xfcc)}
+  {Envía tu movimiento via email o ayuda externa (Xfcc)}
 menuText S CCResign "Abandonar" 0 {Abandona}
 menuText S CCClaimDraw "Reclamar tablas" 0 \
-  {Envia un movimiento y reclama tablas}
+  {Envía un movimiento y reclama tablas}
 menuText S CCOfferDraw "Ofrecer tablas" 0 \
-  {Envia un movimiento y ofrecer tablas}
+  {Envía un movimiento y ofrece tablas}
 menuText S CCAcceptDraw "Aceptar tablas" 0 {Acepta un ofrecimiento de tablas}
 menuText S CCNewMailGame "Nueva partida email..." 0 \
   {Empeza una nueva partida por email}
@@ -250,14 +250,14 @@ menuText S CCMailMove "Enviar jugada via email..." 0 \
   {Envía el movimiento via email al oponente}
 menuText S CCGamePage "Página de la partida..." 0 \
   {Abre la partida desde el navegador}
-menuText S CCEditCopy "Copiar lista de partidas a Clipbase" 0 \
+menuText S CCEditCopy "Copiar lista de partidas a clipbase" 0 \
   {Copia las partidas como una lista CSV a Clipbase}
 
 
 # Options menu:
 menuText S Options "Opciones" 0
 menuText S OptionsBoard "Tablero" 0 {Opciones sobre el aspecto del tablero}
-menuText S OptionsColour "Color de fondo" 0 {Default text widget color}
+menuText S OptionsColour "Color de fondo" 0 {Color de fondo por defecto}
 menuText S OptionsNames "Mis Nombres de Jugador" 3 {Edita mis nombres de jugador}
 menuText S OptionsExport "Exportación" 0 {Cambia las opciones de exportación de texto}
 menuText S OptionsFonts "Fuentes" 0 {Cambia las fuentes}
@@ -289,9 +289,9 @@ menuText S OptionsMovesCoord "Entrada de movimientos coordinada" 0 \
   {Acepta entrada de movimientos en sistema "coordinado" ("g1f3")}
 menuText S OptionsMovesSuggest "Mostrar movimientos sugeridos" 20 \
   {Activa/desactiva la sugerencia de movimientos}
-menuText S OptionsShowVarPopup "Mostrar ventana de variaciones" 0 {Activar/Desactivar La ventana de variaciones}
-menuText S OptionsMovesSpace "Añadir espacios detrás de Número de Jugada" 0 {Añadir espacios detrás del número de jugada}  
-menuText S OptionsMovesKey "Teclado Inteligente" 0 \
+menuText S OptionsShowVarPopup "Mostrar ventana de variaciones" 0 {Activa/desactivar la ventana de variaciones}
+menuText S OptionsMovesSpace "Añadir espacios detrás de número de jugada" 0 {Añadir espacios detrás del número de jugada}  
+menuText S OptionsMovesKey "Teclado inteligente" 0 \
 {Activa/desactiva la función de autocompletado inteligente de movimientos con teclado}
 menuText S OptionsMovesShowVarArrows "Mostrar flechas para las variaciones" 0 \
   {Activa/desactiva mostrar flechas para las variaciones}
@@ -302,7 +302,7 @@ menuText S OptionsWindows "Ventanas" 0 {Opciones de ventana}
 menuText S OptionsWindowsIconify "Autominimizar" 4 \
   {Minimiza todas las ventanas cuando la ventana principal es minimizada}
 menuText S OptionsWindowsRaise "Poner a la vista automáticamente" 0 \
-  {Hace visibles ciertas ventanas (ej. barras de progreso) siempre que sean tapadas}
+  {Hace visibles ciertas ventanas (ej. barras de progreso) siempre que estén tapadas}
 menuText S OptionsSounds "Sonidos" 2 {Configura el sonido del anuncio de las jugadas}
 menuText S OptionsWindowsDock "Ventanas en dique" 0 {Ventanas en dique}
 menuText S OptionsWindowsSaveLayout "Salvar disposición" 0 {Salva la disposición}
@@ -310,24 +310,22 @@ menuText S OptionsWindowsRestoreLayout "Restaurar disposición" 0 \
   {Restaura la disposición}
 menuText S OptionsWindowsShowGameInfo "Mostrar información de la partida" 0 \
   {Muestrar información de la partida}
-menuText S OptionsWindowsAutoLoadLayout "Auto cargar primera disposición" 0 \
+menuText S OptionsWindowsAutoLoadLayout "Autocargar primera disposición" 0 \
   {Autocarga la primera disposición al iniciar}
-# todo
-menuText S OptionsWindowsAutoResize "Auto resize board" 0 {}
-# ====== TODO To be translated ======
-menuText S OptionsWindowsFullScreen "Fullscreen" 0 {Toggle fullscreen mode}
+menuText S OptionsWindowsAutoResize "Ajustar tablero automáticamente" 0 {}
+menuText S OptionsWindowsFullScreen "Pantalla completa" 0 {Activa la pantalla completa}
 menuText S OptionsToolbar "Barra de Herramientas" 9 \
   {Muestra/oculta la barra de herramientas de la ventana principal}
-menuText S OptionsECO "Cargar Archivo ECO" 7 \
+menuText S OptionsECO "Cargar archivo ECO" 7 \
   {Cargar el archivo de clasificación ECO}
-menuText S OptionsSpell "Cargar Archivo de Comprobación Ortográfica" 11 \
+menuText S OptionsSpell "Cargar archivo de comprobación ortográfica" 11 \
   {Carga el archivo de comprobación ortográfica Scid}
 menuText S OptionsTable "Directorio de Tablas de Finales" 10 \
   {Selecciona el directorio de finales; todas las TB de ese directorio serán usadas}
-menuText S OptionsRecent "Archivos Recientes" 0 \
+menuText S OptionsRecent "Archivos recientes" 0 \
   {Cambia el número de archivos recientes mostrados en el menú Archivo}
-menuText S OptionsBooksDir "Carpeta de Libros de Aperturas (Books)" 0 {Fija la carpeta de los libros de aperturas (Books)}
-menuText S OptionsTacticsBasesDir "Carpeta de Bases" 0 {Fija la carpeta de la base de entrenamiento táctico}
+menuText S OptionsBooksDir "Carpeta de libros de Aperturas (Books)" 0 {Fija la carpeta de los libros de aperturas (Books)}
+menuText S OptionsTacticsBasesDir "Carpeta de bases" 0 {Fija la carpeta de la base de entrenamiento táctico}
 menuText S OptionsSave "Guardar opciones" 0 \
   "Guarda todas las opciones en el fichero $::optionsFile"
 menuText S OptionsAutoSave "Autoguardar opciones al salir" 0 \
@@ -341,13 +339,13 @@ menuText S HelpGuide "Guía rápida" 0 {Muestra la página de la ayuda guía rápida}
 menuText S HelpHints "Sugerencias" 1 {Muestra la página de la ayuda sugerencias}
 menuText S HelpContact "Información de contacto" 15 \
   {Muestra la página de la ayuda de la información de contacto}
-menuText S HelpTip "Sugerencia del día" 0 {Muestra una útil sugerencia Scid}
+menuText S HelpTip "Sugerencia del día" 0 {Muestra una sugerencia para el uso de Scid}
 menuText S HelpStartup "Ventana de inicio" 0 {Muestra la ventana de inicio}
 menuText S HelpAbout "Acerca de Scid" 10 {Información acerca de Scid}
 
 # Game info box popup menu:
 menuText S GInfoHideNext "Ocultar siguiente movimiento" 0
-menuText S GInfoShow "Lado a Jugar" 0
+menuText S GInfoShow "Lado a jugar" 0
 menuText S GInfoCoords "Coordenadas" 0
 menuText S GInfoMaterial "Mostrar valor del material" 0
 menuText S GInfoFEN "Mostrar FEN" 8
@@ -360,7 +358,7 @@ menuText S GInfoTBResult  "TBs: sólo resultado" 10
 menuText S GInfoTBAll "TBs: resultado y mejor movimiento" 23
 menuText S GInfoDelete "(No)Borrar esta partida" 4
 menuText S GInfoMark "(No)Marcar esta partida" 4
-menuText S GInfoInformant "Configurar Valores de Información" 0
+menuText S GInfoInformant "Configurar valores de información" 0
 
 # General buttons:
 translate S Apply {Aplicar}
@@ -457,7 +455,7 @@ translate S altered {alterado}
 # Standard error messages:
 translate S ErrNotOpen {Esta base de datos no está abierta.}
 translate S ErrReadOnly {Esta base de datos es de sólo lectura; no puede ser cambiada.}
-translate S ErrSearchInterrupted {La busqueda se interrumpio; los resultados son incompletos.}
+translate S ErrSearchInterrupted {La búsqueda se interrumpió; los resultados son incompletos.}
 
 # Game information:
 translate S twin {doble}
@@ -479,7 +477,7 @@ translate S PInfoMostWhite {Aperturas más comunes con Blancas}
 translate S PInfoMostBlack {Aperturas más comunes con Negras}
 translate S PInfoRating {Historial de clasificación}
 translate S PInfoBio {Biografía}
-translate S PInfoEditRatings {Editar elos}
+translate S PInfoEditRatings {Editar ELOs}
 translate S PinfoEditName {Editar nombre}
 translate S PinfoLookupName {Buscar nombre}
 
@@ -579,7 +577,7 @@ translate S TreeTotal {TOTAL}
 translate S DoYouWantToSaveFirst {Quieres salvar primero}
 translate S AddToMask {Añadir a máscara}
 translate S RemoveFromMask {Elimina desde la máscara}
-translate S AddThisMoveToMask {Añadir este movimiento a la Máscara}
+translate S AddThisMoveToMask {Añadir este movimiento a la máscara}
 translate S SearchMask {Buscar en máscara}
 translate S DisplayMask {Mostrar máscara}
 translate S Nag {Código de regaño}
@@ -610,7 +608,7 @@ translate S Moves {Jugadas}
 # Finder window:
 menuText S FinderFile "Archivo" 0
 menuText S FinderFileSubdirs "Mirar en subdirectorios" 0
-menuText S FinderFileClose "Cierra visor de Archivos" 0
+menuText S FinderFileClose "Cierra visor de archivos" 0
 menuText S FinderSort "Ordenar" 0
 menuText S FinderSortType "Tipo" 0
 menuText S FinderSortSize "Tamaño" 0
@@ -623,7 +621,7 @@ menuText S FinderTypesOld "Bases de datos Scid en antiguo formato" 12
 menuText S FinderTypesPGN "Archivos PGN" 9
 menuText S FinderTypesEPD "Archivos EPD (libro)" 0
 menuText S FinderHelp "Ayuda" 1
-menuText S FinderHelpFinder "Ayuda del visor de Archivos" 0
+menuText S FinderHelpFinder "Ayuda del visor de archivos" 0
 menuText S FinderHelpIndex "Indice de la ayuda" 0
 translate S FileFinder {Visor de Archivos}
 translate S FinderDir {Directorio}
@@ -639,7 +637,7 @@ translate S FinderCtxDelete {Borrar}
 # Player finder:
 menuText S PListFile "Archivo" 0
 menuText S PListFileUpdate "Actualizar" 0
-menuText S PListFileClose "Cierra el Buscador de Jugadores" 0
+menuText S PListFileClose "Cierra el buscador de jugadores" 0
 menuText S PListSort "Ordenar" 0
 menuText S PListSortName "Nombre" 0
 menuText S PListSortElo "Elo" 0
@@ -650,7 +648,7 @@ menuText S PListSortNewest "Más nuevo" 4
 # Tournament finder:
 menuText S TmtFile "Archivo" 0
 menuText S TmtFileUpdate "Actualizar" 0
-menuText S TmtFileClose "Cierra el Visor de Torneos" 0
+menuText S TmtFileClose "Cierra el visor de torneos" 0
 menuText S TmtSort "Ordenar" 0
 menuText S TmtSortDate "Fecha" 0
 menuText S TmtSortPlayers "Jugadores" 0
@@ -665,19 +663,19 @@ translate S TmtNone "No se han encontrado torneos concordantes."
 
 # Graph windows:
 menuText S GraphFile "Archivo" 0
-menuText S GraphFileColor "Guardar como Postscript Color" 8
-menuText S GraphFileGrey "Guardar como Postscript Escala de Grises" 8
+menuText S GraphFileColor "Guardar como postscript (color)" 8
+menuText S GraphFileGrey "Guardar como postscript (escala de grises)" 8
 menuText S GraphFileClose "Cerrar ventana" 0
 menuText S GraphOptions "Opciones" 0
 menuText S GraphOptionsWhite "Blancas" 0
 menuText S GraphOptionsBlack "Negras" 0
 menuText S GraphOptionsBoth "Ambos" 0
-menuText S GraphOptionsPInfo "Jugador Información jugador" 0
+menuText S GraphOptionsPInfo "Información jugador" 0
 translate S GraphFilterTitle "Filtro gráfico: frecuencia por 1000 partidas"
 translate S GraphAbsFilterTitle "Filtro gráfico: frecuencia de las partidas"
 translate S ConfigureFilter {Configurar Eje-X para Año, Rating y Movimientos}
 translate S FilterEstimate "Estimar"
-translate S TitleFilterGraph "Scid: Filtro Gráfico"
+translate S TitleFilterGraph "Scid: filtro gráfico"
 
 # Analysis window:
 translate S AddVariation {Añadir variación}
@@ -692,27 +690,24 @@ translate S StartEngine {Empezar motor}
 translate S LockEngine {Bloquea motor en posición actual}
 translate S AnalysisCommand {Dirección de análisis}
 translate S PreviousChoices {Elección previa}
-translate S AnnotateTime {Segundos por Movimiento}
+translate S AnnotateTime {Segundos por movimiento}
 translate S AnnotateWhich {Qué Lado}
-translate S AnnotateAll {Movimientos por Ambos Lados}
+translate S AnnotateAll {Movimientos por ambos Lados}
 translate S AnnotateAllMoves {Todos los movimientos}
-translate S AnnotateWhite {Sólo Movimientos de Blancas}
-translate S AnnotateBlack {Sólo Movimientos de Negras}
+translate S AnnotateWhite {Sólo movimientos de blancas}
+translate S AnnotateBlack {Sólo movimientos de negras}
 translate S AnnotateNotBest {Cuando el movimiento no es el mejor}
 translate S AnnotateBlundersOnly {Cuando el movimiento es un disparate}
 translate S AnnotateBlundersOnlyScoreChange {Análisis reporta errores, con cambio de puntuación desde: }
-translate S AnnotateTitle {Configurar Anotación}
+translate S AnnotateTitle {Configurar anotación}
 translate S AnnotateWith {Anotar con}
 translate S AnnotateWhichMoves {Qué movimientos}
-translate S AnnotateComment {Añadir Anotador a Comentario}
+translate S AnnotateComment {Añadir anotador a comentario}
 translate S BlundersThreshold {Umbral del error }
-# ====== TODO To be translated ======
-translate S CutOff {Cut Off}
+translate S CutOff {Punto de corte}
 translate S LowPriority {Baja prioridad del procesador}
-# ====== TODO To be translated ======
 translate S LogEngines {Log Engines}
-# ====== TODO To be translated ======
-translate S LogName {Add Name}
+translate S LogName {Añadir nombre}
 translate S ClickHereToSeeMoves {Click aquí para ver movimientos}
 translate S ConfigureInformant {Configurar informaciones}
 translate S Informant!? {Movimiento interesante}
@@ -726,7 +721,7 @@ translate S Informant++- {La partida es considerada ganada}
 translate S Book {Libro}
 
 # Analysis Engine open dialog:
-translate S EngineList {Lista de Motores de Análisis}
+translate S EngineList {Lista de motores de análisis}
 translate S EngineName {Nombre}
 translate S EngineCmd {Orden}
 translate S EngineArgs {Parámetros}
@@ -746,7 +741,7 @@ menuText S StatsOpt "Opciones" 0
 # PGN window menus:
 menuText S PgnFile "PGN" 0
 menuText S PgnFileCopy "Copiar partida al portapapeles" 0
-menuText S PgnFilePrint "Salvar Partida como" 0
+menuText S PgnFilePrint "Salvar partida como" 0
 menuText S PgnFileClose "Cerrar" 10
 menuText S PgnOpt "Opciones" 0
 menuText S PgnOptColor "Color de la presentación" 0
@@ -756,19 +751,19 @@ menuText S PgnOptIndentC "Sangría en comentarios" 0
 menuText S PgnOptIndentV "Sangría en variaciones" 7
 menuText S PgnOptColumn "Estilo de columna (un movimiento por línea)" 1
 menuText S PgnOptSpace "Espacio después de números de movimiento" 18
-menuText S PgnOptStripMarks "Ocultar Códigos de casilla/flecha" 1
-menuText S PgnOptChess "Piezas de Ajedrez" 0
+menuText S PgnOptStripMarks "Ocultar códigos de casilla/flecha" 1
+menuText S PgnOptChess "Piezas de ajedrez" 0
 menuText S PgnOptScrollbar "Barra de desplazamiento" 0
-menuText S PgnOptBoldMainLine "Linea Principal en Negrita" 4
+menuText S PgnOptBoldMainLine "Línea principal en negrita" 4
 menuText S PgnColor "Colores" 1
 menuText S PgnColorHeader "Encabezamiento..." 0
 menuText S PgnColorAnno "Anotaciones..." 0
 menuText S PgnColorComments "Comentarios..." 0
 menuText S PgnColorVars "Variaciones..." 0
 menuText S PgnColorBackground "Fondo..." 0
-menuText S PgnColorMain "Linea principal..." 0
-menuText S PgnColorCurrent "Color de fondo del último movimiento..." 1
-menuText S PgnColorNextMove "Color de fondo Next move background..." 0
+menuText S PgnColorMain "Línea principal..." 0
+menuText S PgnColorCurrent "Color de fondo del movimiento actual..." 1
+menuText S PgnColorNextMove "Color de fondo del próximo movimiento..." 0
 menuText S PgnHelp "Ayuda" 1
 menuText S PgnHelpPgn "Ayuda de PGN" 9
 menuText S PgnHelpIndex "Indice de la ayuda" 0
@@ -776,7 +771,7 @@ translate S PgnWindowTitle {Planilla - partida %u}
 
 # Crosstable window menus:
 menuText S CrosstabFile "Archivo" 0
-menuText S CrosstabFileText "Salvar como Texto" 8
+menuText S CrosstabFileText "Salvar como texto" 8
 menuText S CrosstabFileHtml "Salvar como HTML" 8
 menuText S CrosstabFileLaTeX "Salvar como LaTeX" 8
 menuText S CrosstabFileClose "Cerrar ventana de tabla cruzada" 0
@@ -798,7 +793,7 @@ menuText S CrosstabOptTitles "Títulos" 0
 menuText S CrosstabOptBreaks "Puntuaciones de desempate" 0
 menuText S CrosstabOptDeleted "Incluir partidas borradas" 17
 menuText S CrosstabOptColors "Colores (sólo en tabla de Suizos)" 0
-menuText S CrosstabOptColumnNumbers "Columnas numeradas (Sólo en tabla todos contra todos)" 11
+menuText S CrosstabOptColumnNumbers "Columnas numeradas (sólo en tabla todos contra todos)" 11
 menuText S CrosstabOptGroup "Grupos de clasificación" 0
 menuText S CrosstabSort "Ordenar" 0
 menuText S CrosstabSortName "Por nombre" 4
@@ -818,18 +813,18 @@ translate S Category {Categoría}
 
 # Opening report window menus:
 menuText S OprepFile "Archivo" 0
-menuText S OprepFileText "Imprimir en Texto" 9
+menuText S OprepFileText "Imprimir en texto" 9
 menuText S OprepFileHtml "Imprimir en HTML..." 9
 menuText S OprepFileLaTeX "Imprimir en LaTeX..." 9
 menuText S OprepFileOptions "Opciones" 0
 menuText S OprepFileClose "Cerrar ventana del informe de la apertura" 0
 menuText S OprepFavorites "Favoritos" 1
-menuText S OprepFavoritesAdd "Añadir Informe" 0
-menuText S OprepFavoritesEdit "Editar Informe Favorito" 0
-menuText S OprepFavoritesGenerate "Generar Informe" 0
+menuText S OprepFavoritesAdd "Añadir informe" 0
+menuText S OprepFavoritesEdit "Editar informe favorito" 0
+menuText S OprepFavoritesGenerate "Generar informe" 0
 menuText S OprepHelp "Ayuda" 1
 menuText S OprepHelpReport "Ayuda del informe de la apertura" 11
-menuText S OprepHelpIndex "Indice de la ayuda" 0
+menuText S OprepHelpIndex "Índice de la ayuda" 0
 
 # Header search:
 translate S HeaderSearch {Búsqueda por encabezamiento}
@@ -849,7 +844,7 @@ translate S MiddlegameFlag {Mediojuego}
 translate S EndgameFlag {Finales}
 translate S NoveltyFlag {Novedad}
 translate S PawnFlag {Estructura de peones}
-translate S TacticsFlag {Tacticas}
+translate S TacticsFlag {Tácticas}
 translate S QsideFlag {Juego del lado de dama}
 translate S KsideFlag {Juego del lado de rey}
 translate S BrilliancyFlag {Genialidad}
@@ -891,11 +886,11 @@ translate S GlistWidth {Anchura}
 translate S GlistAlign {Alinear}
 translate S GlistColor {Color}
 translate S GlistSep {Separador}
-translate S GlistRemoveThisGameFromFilter  {Quita}
-translate S GlistRemoveGameAndAboveFromFilter  {Quita esta partida y todas las de arriba}
-translate S GlistRemoveGameAndBelowFromFilter  {Quita esta partida y todas las de abajo}
+translate S GlistRemoveThisGameFromFilter  {Elimina}
+translate S GlistRemoveGameAndAboveFromFilter  {Elimina esta partida y todas las de arriba}
+translate S GlistRemoveGameAndBelowFromFilter  {Elimina esta partida y todas las de abajo}
 translate S GlistDeleteGame {Elimina/Recupera esta partida de la base} 
-translate S GlistDeleteAllGames {Elimina todas las partidas de la base que aparecen en el Filtro} 
+translate S GlistDeleteAllGames {Elimina todas las partidas de la base que aparecen en el filtro} 
 translate S GlistUndeleteAllGames {Recupera todas las partidas borradas de la base que aparecen en el filtro} 
 
 # Maintenance window:
@@ -947,7 +942,7 @@ dobles si seleccionas esas funciones.
 translate S CleanerConfirm {
 ¡Una vez que la MultiHerramienta de mantenimiento se inicia no puede ser interrumpida!
 
-Esto puede tomar mucho tiempo en una base de datos grande, dependiendo de las funciones que hallas seleccionado y su estado actual.
+Esto puede tomar mucho tiempo en una base de datos grande, dependiendo de las funciones que hayas seleccionado y su estado actual.
 
 ¿Estás seguro de querer comenzar las funciones de mantenimiento que has seleccionado?
 }
@@ -963,15 +958,15 @@ translate S TwinCheckFound1 {Scid encontró $result partidas dobles}
 translate S TwinCheckFound2 {y pone pone sus banderas de borrado}
 translate S TwinCheckNoDelete {No hay partidas en esta base para borrar.}
 translate S TwinCriteria1 {Tus parámetros para encontrar partidas dobles potencialmente pueden causar partidas no-dobles con movimientos similares a ser marcadas como dobles.}
-translate S TwinCriteria2 {Es recomendable que si tu elijas  "No" para "algunos movimientos", tu deberías elegir "Sí"  para los parámetros colores, eventos, lugar, ronda, año y mes.\n¿Quieres continuar y borrar partidas dobles en cualquier caso?}
-translate S TwinCriteria3 {Es recomendable que tú especifiques "Sí" para al menos dos parámetros de "mismo lugar", "misma ronda" y "mismo año".\n¿Quieres continuar y borrar dobles en todo caso?}
+translate S TwinCriteria2 {Es recomendable que en caso de eligir  "No" para "algunos movimientos", se eleja "Sí"  para los parámetros colores, eventos, lugar, ronda, año y mes.\n¿Quiere continuar y borrar partidas dobles en cualquier caso?}
+translate S TwinCriteria3 {Es recomendable especificar "Sí" para al menos dos parámetros de "mismo lugar", "misma ronda" y "mismo año".\n¿Quiere continuar y borrar dobles en todo caso?}
 translate S TwinCriteriaConfirm {Scid: Confirmar parámetros para partidas dobles}
 translate S TwinChangeTag "Cambiar las siguientes etiquetas de las:\n\n partidas"
-translate S AllocRatingDescription "Este comando usará el actual fichero SpellCheck para añadir  puntuaciones ELO y partidas en esta base. Donde quiera que un jugador no tenga puntuación pero su puntuación en el listado del  fichero  spellcheck , su puntuación será añadida."
-translate S RatingOverride "¿Sobre-escribir puntuaciones existentes no nulas?"
+translate S AllocRatingDescription "Este comando usará el actual fichero SpellCheck para añadir  puntuaciones ELO y partidas en esta base. En el caso de que un jugador no tenga puntuación pero la tenga en el fichero  spellcheck, su puntuación será añadida."
+translate S RatingOverride "¿Sobreescribir puntuaciones existentes no nulas?"
 translate S AddRatings "Añadir puntuaciones a:"
-translate S AddedRatings {Scid añació $r puntuaciones Elo en $g partidas.}
-translate S NewSubmenu "Nuevo submenu"
+translate S AddedRatings {Scid añadió $r puntuaciones Elo en $g partidas.}
+translate S NewSubmenu "Nuevo submenú"
 
 # Comment editor:
 translate S AnnotationSymbols  {Símbolos de anotación:}
@@ -1014,12 +1009,12 @@ translate S SearchInRefDatabase {Búsqueda en la base de referencia}
 translate S LookInVars {Mirar en variaciones}
 
 # Material search:
-translate S MaterialSearch {Búsqueda de Material}
+translate S MaterialSearch {Búsqueda de material}
 translate S Material {Material}
 translate S Patterns {Patrones}
 translate S Zero {Cero}
 translate S Any {Cualquiera}
-translate S CurrentBoard {Tablero Actual}
+translate S CurrentBoard {Tablero actual}
 translate S CommonEndings {Finales comunes}
 translate S CommonPatterns {Patrones comunes}
 translate S MaterialDiff {Diferencia de material}
@@ -1082,7 +1077,7 @@ translate S GoBack {Volver atrás}
 # Replace move dialog:
 translate S ReplaceMove {Reemplazar movimiento}
 translate S AddNewVar {Añadir nueva variación}
-translate S NewMainLine {Nueva Linea Principal}
+translate S NewMainLine {Nueva Línea Principal}
 translate S ReplaceMoveMessage {Ya existe un movimiento.
 
 Por favor, entre elección
@@ -1096,7 +1091,7 @@ Puedes hacer fácilmente escribible la base de datos otra vez cerrándola y abrién
 ¿Realmente quieres hacer que esta base de datos sea de sólo lectura?}
 
 # Clear game dialog:
-translate S ClearGameDialog {Esta partida a sido cambiada.
+translate S ClearGameDialog {Esta partida ha sido cambiada.
 
 ¿Realmente quieres continuar y eliminar los cambios hechos en ella?
 }
@@ -1167,12 +1162,12 @@ translate S OprepMoveOrdersMany \
   {Hay %u líneas de movimiento que alcanzan esta posición. Las %u más comunes son:}
 translate S OprepMovesFrom {Movimientos desde la posición del informe}
 translate S OprepMostFrequentEcoCodes {Aperturas más frecuentes}
-translate S OprepThemes {Temas Posicionales}
+translate S OprepThemes {Temas posicionales}
 translate S OprepThemeDescription {Frecuencia de los temas en las primeras %u jugadas de cada partida}
 translate S OprepThemeSameCastling {Enroque al mismo lado}
 translate S OprepThemeOppCastling {Enroque en lados opuestos}
-translate S OprepThemeNoCastling {Ambos Reyes no enrocados}
-translate S OprepThemeKPawnStorm {Avanzada de los peones del Rey}
+translate S OprepThemeNoCastling {Ambos reyes no enrocados}
+translate S OprepThemeKPawnStorm {Avanzada de los peones del rey}
 translate S OprepThemeQueenswap {Damas intercambiadas}
 translate S OprepThemeWIQP {Peón de dama aislado de las blancas}
 translate S OprepThemeBIQP {Peón de dama aislado de las negras}
@@ -1246,8 +1241,8 @@ translate S TwinsDeleteNewer {Número de partida mayor}
 translate S TwinsDelete {Borrar partidas}
 
 # Name editor window:
-translate S NameEditType {Tipo de Nombre a Editar}
-translate S NameEditSelect {Partidas a Editar}
+translate S NameEditType {Tipo de nombre a editar}
+translate S NameEditSelect {Partidas a editar}
 translate S NameEditReplace {Reemplazar}
 translate S NameEditWith {Con}
 translate S NameEditMatches {Partidas: Presionar Ctrl+1 a Ctrl+9 para seleccionarla}
@@ -1304,7 +1299,7 @@ translate S GotoMoveNumber {Ir al movimiento número:}
 # Copy games dialog:
 translate S CopyGames {Copiar partidas}
 translate S CopyConfirm {
- Realmente deseas copiar las [::utils::thousands $nGamesToCopy] partidas fitradas
+ Realmente deseas copiar las [::utils::thousands $nGamesToCopy] partidas filtradas
  de la base de datos "$fromName"
  a la base de datos "$targetName"?
 }
@@ -1326,11 +1321,11 @@ translate S WhitePieces {Piezas blancas}
 translate S BlackPieces {Piezas negras}
 translate S WhiteBorder {Borde blancas}
 translate S BlackBorder {Borde negras}
-translate S ArrowMain   {Flecha Línea Principal}
-translate S ArrowVar    {Flechas de Variaciones}
+translate S ArrowMain   {Flecha línea principal}
+translate S ArrowVar    {Flechas de variaciones}
 
 # Novelty window:
-translate S FindNovelty {Encontrar Novedad}
+translate S FindNovelty {Encontrar novedad}
 translate S Novelty {Novedad}
 translate S NoveltyInterrupt {Busqueda de novedades interrumpida}
 translate S NoveltyNone {Ninguna novedad encontrada para esta partida}
@@ -1402,7 +1397,7 @@ translate S Abort {Abortar}
 translate S Resume {Reanudar}
 translate S Restart {Reiniciar}
 translate S OutOfOpening {Fuera de apertura}
-translate S NotFollowedLine {Tú no sigues la linea}
+translate S NotFollowedLine {Tú no sigues la línea}
 translate S DoYouWantContinue {¿Quieres continuar?}
 translate S CoachIsWatching {Entrenador}
 translate S Ponder {Pensar siempre (el motor)}
@@ -1423,7 +1418,7 @@ translate S NumberOfDubiousMovesPlayed {dudosos momientos jugados}
 translate S NumberOfTimesPositionEncountered {veces encontrada la posición}
 translate S PlayerBestMove  {Permite únicamente movimientos mejores}
 translate S OpponentBestMove {Oponente juega mejores movimientos}
-translate S OnlyFlaggedLines {Sólo lineas marcadas}
+translate S OnlyFlaggedLines {Sólo líneas marcadas}
 translate S resetStats {Reinicia estadísticas}
 translate S Movesloaded {Movimientos cargados}
 translate S PositionsNotPlayed {Posiciones no jugadas}
@@ -1448,7 +1443,7 @@ translate S ChooseTrainingBase {Elegir base de entrenamiento}
 translate S Thinking {Pensando}
 translate S AnalyzeDone {Análisis hecho}
 translate S WinWonGame {Gana la partida ganada}
-translate S Lines {Lineas}
+translate S Lines {Líneas}
 translate S ConfigureUCIengine {Configurar motor}
 translate S SpecificOpening {Apertura específica}
 translate S StartNewGame {Empezar partida nueva}
@@ -1542,7 +1537,7 @@ translate S NimzoIndianClassical {Apertura Nimzo-India Clásica}
 translate S NimzoIndianRubinstein {Variante Rubinstein de la Nimzo-India}
 translate S KingsIndian {India de Rey}
 translate S KingsIndianSamisch {Ataque Sämish de la India de Rey}
-translate S KingsIndianMainLine {Linea Principal India de Rey}
+translate S KingsIndianMainLine {Línea Principal India de Rey}
 
 #fics
 translate S ConfigureFics {Configurar FICS}
@@ -1580,13 +1575,13 @@ translate S FICSRematch {Revancha}
 translate S FICSQuit {Salir}
 
 # Correspondence Chess Dialogs:
-translate S CCDlgConfigureWindowTitle {Configurar Ajedrez por correo}
+translate S CCDlgConfigureWindowTitle {Configurar ajedrez por correo}
 translate S CCDlgCGeneraloptions {Opciones generales}
 translate S CCDlgDefaultDB {Base por defecto:}
 translate S CCDlgInbox {Entrante (Carpeta):}
 translate S CCDlgOutbox {Saliente (carpeta):}
 translate S CCDlgXfcc {Configuración Xfcc:}
-translate S CCDlgExternalProtocol {Protocolo externo (e.g. Xfcc)}
+translate S CCDlgExternalProtocol {Protocolo externo (p.ej. Xfcc)}
 translate S CCDlgFetchTool {Herramienta de traer:}
 translate S CCDlgSendTool {Herramienta de envío:}
 translate S CCDlgEmailCommunication {Comunicación email}
@@ -1613,15 +1608,15 @@ translate S CCDlgYourMail {Tu dirección email:}
 translate S CCDlgOpponentName {Nombre de oponente:}
 translate S CCDlgOpponentMail {Dirección email de oponente:}
 translate S CCDlgGameID {Partida ID (único):}
-translate S CCDlgTitNoOutbox {Scid: Salida del Correo de Ajedrez}
-translate S CCDlgTitNoInbox {Scid: Entrada del Correo de Ajedrez}
-translate S CCDlgTitNoGames {Scid: No hay partidas de Ajedrez por Correo}
-translate S CCErrInboxDir {Carpeta de entrada del Correo de Ajedrez (Entrante):}
-translate S CCErrOutboxDir {Carpeta de salida del Correo de Ajedrez (Saliente):}
+translate S CCDlgTitNoOutbox {Scid: Salida del correo de ajedrez}
+translate S CCDlgTitNoInbox {Scid: Entrada del correo de ajedrez}
+translate S CCDlgTitNoGames {Scid: No hay partidas de ajedrez por correo}
+translate S CCErrInboxDir {Carpeta de entrada del correo de ajedrez (Entrante):}
+translate S CCErrOutboxDir {Carpeta de salida del correo de ajedrez (Saliente):}
 translate S CCErrDirNotUsable {¡No existe o no está accesible!\nPor favor, compruebe y corrija los parámetros.}
 translate S CCErrNoGames {¡No contiene ninguna partida!\nPor favor, tráigala primero.}
-translate S CCDlgTitNoCCDB {Scid: No es una Base de Ajedrez por Correo}
-translate S CCErrNoCCDB {No hay una Base del tipo 'Correo' abierta. Por favor, abra una antes de usar funciones de ajedrez por correo.}
+translate S CCDlgTitNoCCDB {Scid: No es una base de ajedrez por correo}
+translate S CCErrNoCCDB {No hay una base del tipo 'Correo' abierta. Por favor, abra una antes de usar funciones de ajedrez por correo.}
 translate S CCFetchBtn {Traer partidas desde el servidor y procesar correo entrante}
 translate S CCPrevBtn {Ir a partida anterior}
 translate S CCNextBtn {Ir a partida siguiente}
@@ -1643,10 +1638,10 @@ translate S CCOrderTimePerMoveTxt {Tiempo por movimiento falta el próximo contro
 translate S CCOrderStartDate {Empezar fecha}
 translate S CCOrderOppTimeTxt {Reloj de los oponentes}
 translate S CCDlgConfigRelay {Configurar observaciones ICCF}
-translate S CCDlgConfigRelayHelp {Ir a las partidas de la página en http://www.iccf-webchess.com y mostrar la partida a ser observada. Si tu ves el tablero de ajedrez copia la URL desde tu explorador a la lista. !Una sola URL por línea!\nExample: http://www.iccf-webchess.com/MakeAMove.aspx?id=266452}
+translate S CCDlgConfigRelayHelp {Ir a las partidas de la página en http://www.iccf-webchess.com y mostrar la partida a ser observada. Si ves el tablero de ajedrez copia la URL desde tu explorador a la lista. !Una sola URL por línea!\nExample: http://www.iccf-webchess.com/MakeAMove.aspx?id=266452}
 
 # Connect Hardware dialoges
-translate S ExtHWConfigConnection {Configurar Tablero externo}
+translate S ExtHWConfigConnection {Configurar tablero externo}
 translate S ExtHWPort {Puerto}
 translate S ExtHWEngineCmd {Comando del motor}
 translate S ExtHWEngineParam {Parámetro del motor}
@@ -1657,11 +1652,11 @@ translate S ExtHWInputEngine {Tablero (Ext)}
 translate S ExtHWNoBoard {Sin tablero}
 
 # Input Engine dialogs
-translate S IEConsole {Consola Tablero (Ext)}
-translate S IESending {Movimientos enviador por}
+translate S IEConsole {Consola tablero (Ext)}
+translate S IESending {Movimientos enviados por}
 translate S IESynchronise {Sincronizar}
 translate S IERotate  {Rotar}
-translate S IEUnableToStart {Imposible empezar Tablero (Ext):}
+translate S IEUnableToStart {Imposible empezar tablero (Ext):}
 
 # Calculation of Variations
 translate S DoneWithPosition {Hecho con la posición}
@@ -1680,7 +1675,7 @@ translate S CannotOpenUri {No se puede abrir la siguiente URI:}
 translate S InvalidUri {Descartar contenido no es una lista URI válida.}
 translate S UriRejected	{Los siguientes archivos fueron rechazados:}
 translate S UriRejectedDetail {Sólo pueden manejarse los tipos de archivo listados:}
-translate S EmptyUriList {Descartar contenido está vacóo.}
+translate S EmptyUriList {Descartar. Contenido está vacío.}
 translate S SelectionOwnerDidntRespond {Tiempo excedido durante la operación: el propietario de la selección no respondió.}
 
 }
