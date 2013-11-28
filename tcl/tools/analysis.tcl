@@ -1400,7 +1400,8 @@ proc addAnnotation {} {
 
   ### Don't process if score above cut-off score,
   # excepting for the case when score goes from -5 to +7 (eg)
-if {abs($prevscore) < $annotate(cutoff) || (abs($deltamove) > abs($score) && $score*$prevscore < 0)} {
+if {abs($prevscore) < $annotate(cutoff) || abs($score) < $annotate(cutoff) || \
+   (abs($deltamove) > abs($score) && $score*$prevscore < 0)} {
   ### Calculate isBlunder
   if {$annotate(WithVars) != "notbest"} {
     if { $deltamove < [expr 0.0 - $annotate(blunder)] && $tomove == {black} || \
