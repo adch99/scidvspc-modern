@@ -390,6 +390,7 @@ and lesser popularity than Scid.</p>
 <item>Docked tabs/menu refinements
 <item>OS X - Clicking on URLs will open the link in a browser
 <item>Add a command console to the start-up window
+<item>Bug-fix: Fix main board rendering anomoly in docked mode with MS Windows
 <item>Bug-fix: When tree is open, gamelist filter operations didn't work properly
 <item>Bug-fix: Search in variations never matched positions at end-of-line
 <item>Bug-fix: Opening Table favourites werent working properly

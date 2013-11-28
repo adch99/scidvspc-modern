@@ -5824,6 +5824,7 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li> Docked tabs/menu refinements</li>
 <li> OS X - Clicking on URLs will open the link in a browser</li>
 <li> Add a command console to the start-up window</li>
+<li> Bug-fix: Fix main board rendering anomoly in docked mode with MS Windows</li>
 <li> Bug-fix: When tree is open, gamelist filter operations didn't work properly</li>
 <li> Bug-fix: Search in variations never matched positions at end-of-line</li>
 <li> Bug-fix: Opening Table favourites werent working properly</li>

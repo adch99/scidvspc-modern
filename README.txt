@@ -540,6 +540,9 @@
 
   o  Add a command console to the start-up window
 
+  o  Bug-fix: Fix main board rendering anomoly in docked mode with MS
+     Windows
+
   o  Bug-fix: When tree is open, gamelist filter operations didn't work
      properly
 
@@ -579,9 +582,9 @@
 
   o  Add Book Tuning to dockable windows
 
+
   o  Automatically flip board (if applicable) in game browser and
      analysis miniboards
-
 
   o  When diffing twin games, ignore newlines in the comments, which
      make diffing impossible
@@ -648,7 +651,6 @@
 
   o  Text Find widgets in help, crosstable, engine logs
 
-
   o  Game Save dialog remembers any custom tags you add to a game,
      making them easy to recall
 
@@ -712,8 +714,8 @@
   o  Make the database switcher icons/frames get smaller if they are
      cramped (so we can see them all)
 
-  o  Half fix UCI game (sergame.tcl) time issues
 
+  o  Half fix UCI game (sergame.tcl) time issues
 
   o  Corrospondence Chess now works
 
@@ -778,9 +780,11 @@
   o  Add a patch to make toolbar buttons raise only (instead of toggle
      open/shut)
 
+
   o  Add a patch for Chess960 support (from Ben Hague). Unfinished
 
      Analysis
+
   o  UCI: properly handle UCI buttons. Previously they were invoked at
      every engine restart
 
@@ -842,10 +846,10 @@
 
   o  bind F9 to xtell instead of tell
 
+
   o  Change the move.wav sound from tick-tock to a short click
 
      OS X
-
 
   o  Filter graph bugfix
 
@@ -909,7 +913,6 @@
 
   o  New feature: 'Search-Filter to Last Move'. All filter games will
      load at the last move (end of game)
-
   o  Refine the Calculation of Variation (Stoyko Exercise) feature and
      Help
 
@@ -976,9 +979,9 @@
 
   o  Known aliases Biographical data is shown in the player information
      window
-
   o  The player info widget has buttons enabling quick player renames
      and look-up
+
   o  'Read-Only' context menu to the Database Switcher, and Read-Only
      bases are greyed out
 
@@ -1043,7 +1046,6 @@
   o  Clarify Scid's maximum number of games
 
   o  Update Spanish and Polish translations
-
 
   o  Update FICs , PGN and Menu language translations
 
@@ -1111,6 +1113,7 @@
 
   o  Add a 'make-scidgui.bat' hack for assembling a new 'scid.gui' from
      subversion
+
   o  Computer Tournament buttons padding fixed
 
      OSX:
@@ -1174,7 +1177,6 @@
 
   o  Add widgets to the gamelist for manipulating flags and browsing
      first/last/next/previous games
-
   o  Opening Book and Book Tuning overhaul - allow two books to be
      opened with side-by-side sorting, and various interface
      improvements
@@ -1243,6 +1245,7 @@
 
   o  Fix up file loading (and bookmarks) of DBs with dots (.) in their
      name
+
   o  Statusbar shows correct value after Crosstable update
 
   7.0.12.  Scid vs. PC 4.3
@@ -1308,7 +1311,6 @@
 
   o  Numerous GUI fixes
 
-
   o  Revert PlayerInfo to old format, but add a "Won Drawn Lost" header
 
   o  Tweak crosstable knock-out format
@@ -1372,8 +1374,8 @@
 
   o  Comment Editor has undo and redo bindings
 
-  o  Main board grid colour can be changed
 
+  o  Main board grid colour can be changed
 
   o  Setup board can rotate and flip the board
 
@@ -1437,6 +1439,7 @@
         occasionally broke
 
      o  "Show Suggested Move" was broken
+
 
      o  Gamelist sometimes left off the last or first item
 
@@ -1503,9 +1506,9 @@
 
   o  Sync the tools::connect-hardware feature with SCID (untested)
 
+
   o  When using the setup board widget, do a sanity check about the
      FEN's castling field
-
 
   o  Some minor version fixes anticipating tcl8.6
 
@@ -1570,7 +1573,6 @@
 
   o  Fics: Make a new Received Offers dialog which allows for proper
      handling of multiple challenges
-
   o  Fics: Tweak the Make Offer dialog
 
   o  Fics: update help files, and add a Font button
@@ -1702,6 +1704,7 @@
   o  Fixed up the toolbar cofniguration widget, and re-did a few little
      images
 
+
   o  Variation pop-ups now center over the main window, and enable
      KeyPress-1, KeyPress-2, etc bindings
 
@@ -1766,6 +1769,7 @@
      is not quite yet feature complete
 
   o  Many changes to the Gameinfo widget,
+
 
   o  , including a new "Set Game Information" widget
 
@@ -1835,7 +1839,6 @@
 
   o  Gave the show_material canvas a little more space
 
-
   7.0.24.  Scid vs. PC 3.6.26.1
 
 
@@ -1902,6 +1905,7 @@
 
   o  Programmer's reference
      <http://scidvspc.sourceforge.net/doc/progref.html>
+
   o  UCI engine protocol  <http://wbec-
      ridderkerk.nl/html/UCIProtocol.html>
 
