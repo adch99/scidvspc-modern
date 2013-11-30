@@ -267,6 +267,8 @@ proc ::windows::eco::KeyPress {key} {
       }
       default { set key "" }
     }
+  } else {
+      set key ""
   }
 
   if {$key != ""} {

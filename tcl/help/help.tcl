@@ -4077,7 +4077,12 @@ set helpText(ECO) {<h1>ECO Codes</h1>
   right-click, press the <button bookmark_up> button, or left-arrow.
   </p>
   <p>
-  The nottom pane shows the positions for a particular ECO code according to the ECO file loaded.
+  You can also navigate with keys, writing the ECO code you are interesting in. For instance, if you want to see the ECO code B75
+  (for the Yugoslav Attack in the Sicilian Dragon), you just press the key combination 'b75' (or 'B75'). 
+  If you want to go up to a more general code, like B7, you can just press Left-Arrow. 
+  </p>
+  <p>
+  The bottom pane shows the positions for a particular ECO code according to the ECO file loaded.
   </p>
   <p>
   The <b>ECO classify games</b> button will permanently add ECO classifications to selected games in the current database.
