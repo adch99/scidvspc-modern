@@ -48,13 +48,15 @@ id="contact_">, and has been extensively tested.
 <item> PGN can be shown as <bf>chess figures</bf>/fonts.
 <item> <bf>Ratings Graph</bf> can show multiple players.
 <item> Book tuning <bf>Remove Move</bf> feature.
+<item> <bf>Move Search</bf> feature.
 <item> Separate board sections are hideable via right-click.
 <item> A redone <bf>Button Bar</bf> with improved look and feel.
+<item> Clickable Tablebase moves.
 <item> Restructured <bf>Analysis Engines</bf>. The function hotkeys can be set explicitly, Engine 1 can be docked into the Status Bar, and any number of engines may run at one time. <bf>Engine Annotation</bf> has also been rewritten, <bf>Engine Logs</bf> are viewable.
 <item> The Chessboard/Pieces options have been totally overhauled.  There are some <bf>new colour and tile themes</bf>, and <bf>great piece sets</bf> available if the optional TkImg package is installed.
 <item> The <bf>Setup Start Board</bf> has many fixes and improvements. 
 <item> The <bf>Help</bf> index is now meaningful to new users, with links to the game's main features.
-<item> Countless bug-fixes.
+<item> Many bug-fixes.
 
 </itemize>
 

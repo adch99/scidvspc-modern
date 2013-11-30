@@ -101,9 +101,13 @@
 
   o  Book tuning Remove Move feature.
 
+  o  Move Search feature.
+
   o  Separate board sections are hideable via right-click.
 
   o  A redone Button Bar with improved look and feel.
+
+  o  Clickable Tablebase moves.
 
   o  Restructured Analysis Engines. The function hotkeys can be set
      explicitly, Engine 1 can be docked into the Status Bar, and any
@@ -118,9 +122,7 @@
 
   o  The Help index is now meaningful to new users, with links to the
      game's main features.
-
-  o  Countless bug-fixes.
-
+  o  Many bug-fixes.
 
   2.0.2.  Missing Features
 
@@ -187,6 +189,7 @@
   "Program Files" On Windows 7, the config files are mirrored in
   C:\Users\[USERNAME]\AppData\Local\VirtualStore\Program Files\Scid vs
   PC
+
   People with Visual Studio 11 should now be able to compile the project
   fairly easily (see Makefile.vc for more details).
 
@@ -380,11 +383,13 @@
      polyglot opening books, but inlining this projects work may not be
      too hard. https://github.com/sshivaji/ctgexporter
 
+
   6.4.  known issues
 
 
   o  Tcl/Tk-8.5.10 is buggy. Tcl/Tk-8.6.0 also is immature, but mostly
      works.
+
   o  OS X docked mode has multiple issues due to it's poor Tcl/Tk.
 
   o  Chinese Language Support. Scid's multilanguage support is broken
@@ -450,7 +455,6 @@
   again. He was generally reported to be seriously ill, and today has
   little if no contact with the current Scid community.
 
-
   Two new versions of Scid appeared around 2006. The first was ChessDB
   authored by Dr. David Kirby. With some good documentation and the
   ability to automatically download games from several web portals, it
@@ -512,10 +516,8 @@
   o  Locked Analysis Engines now show the locked position (not the
      working line) , and bug-fix the engine lock, which didnt work
      properly
-
   o  Add a low CPU priority check box to Engine Configuration window
      (especially important for MS Windows - where engines can kill GUI)
-
 
   o  Engine configuration window now repsonds to keystrokes to quickly
      find any engine
@@ -581,7 +583,6 @@
      make some minor global/:: var changes
 
   o  Add Book Tuning to dockable windows
-
 
   o  Automatically flip board (if applicable) in game browser and
      analysis miniboards
@@ -713,8 +714,6 @@
 
   o  Make the database switcher icons/frames get smaller if they are
      cramped (so we can see them all)
-
-
   o  Half fix UCI game (sergame.tcl) time issues
 
   o  Corrospondence Chess now works
