@@ -979,39 +979,4 @@ namespace eval html {
 
 }
 
-### Takes an entrybox, a (global?) var, and a text widget
-#   Binds Entry <Return> to search the text widget for entry box contents
-
-proc configFindEntryBox {entry var text} {
-    upvar $var topvar
-
-    ### This code originally in htext.tcl::updateHelpWindow
-    $text tag configure Highlight -background orange
-
-    set topvar(findprev) {}
-    set topvar(findindex) 1.0
-    bind $entry <Return> "nextFindEntryBox $entry $var $text"
-}
-
-proc nextFindEntryBox {entry var text} {
-    upvar 1 $var topvar
-
-    if {$topvar(findprev) != $topvar(find)} {
-      set topvar(findprev) $topvar(find)
-    }
-    $text tag remove Highlight 1.0 end
-
-    set result [$text search -nocase -- $topvar(find) $topvar(findindex)]
-    if {$result == {}} {
-      set topvar(findindex) 1.0
-      bell
-    } else {
-      if {[ regexp {(.*)\.(.*)} $result t1 line char]} {
-	$text see $result
-	$text tag add Highlight $result $line.[expr $char + [string length $topvar(find)]]
-	set topvar(findindex) $line.[expr $char + 1]
-      } ;# should always succeed ?
-    }
-}
-
 # end of misc.tcl

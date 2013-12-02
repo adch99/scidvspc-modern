@@ -1476,7 +1476,42 @@ if {$unixOS} {
 
 ### Fonts now fully configure :> S.A
 
-# Start up splash screen:
+### Takes an entrybox, a (global?) var, and a text widget
+#   Binds Entry <Return> to search the text widget for entry box contents
+
+proc configFindEntryBox {entry var text} {
+    upvar $var topvar
+
+    ### This code originally in htext.tcl::updateHelpWindow
+    $text tag configure Highlight -background orange
+
+    set topvar(findprev) {}
+    set topvar(findindex) 1.0
+    bind $entry <Return> "nextFindEntryBox $entry $var $text"
+}
+
+proc nextFindEntryBox {entry var text} {
+    upvar 1 $var topvar
+
+    if {$topvar(findprev) != $topvar(find)} {
+      set topvar(findprev) $topvar(find)
+    }
+    $text tag remove Highlight 1.0 end
+
+    set result [$text search -nocase -- $topvar(find) $topvar(findindex)]
+    if {$result == {}} {
+      set topvar(findindex) 1.0
+      bell
+    } else {
+      if {[ regexp {(.*)\.(.*)} $result t1 line char]} {
+	$text see $result
+	$text tag add Highlight $result $line.[expr $char + [string length $topvar(find)]]
+	set topvar(findindex) $line.[expr $char + 1]
+      } ;# should always succeed ?
+    }
+}
+
+### Start up splash window
 
 proc ::splash::make {} {
   ### windows hack 
@@ -1489,6 +1524,8 @@ proc ::splash::make {} {
   wm protocol $w WM_DELETE_WINDOW [list wm withdraw $w]
   wm title $w "Welcome to $::scidName $::scidVersion"
   frame $w.f
+  pack $w.f -side top -expand yes -fill both
+
   frame $w.b
   text $w.t -height 15 -width 55 -cursor top_left_arrow \
        -font font_Regular -wrap word \
@@ -1498,7 +1535,9 @@ proc ::splash::make {} {
       -variable ::splash::keepopen -font font_Small -pady 5 -padx 5
   button $w.dismiss -text Close -width 8 -command [list wm withdraw $w] \
       -font font_Small
-  pack $w.f -side top -expand yes -fill both
+
+  entry $w.find -width 10 -textvariable ::splash::find(find) -highlightthickness 0
+  configFindEntryBox $w.find ::splash::find $w.t
 
   set ::splash::console 0
   pack [entry $w.command] -side top -fill x -padx 3 -pady 2
@@ -1525,7 +1564,7 @@ proc ::splash::make {} {
 
   pack $w.b -side top -fill x
   pack $w.auto -side left -in .splash.b -pady 2 -ipadx 10 -padx 10
-  pack $w.dismiss -side right -in .splash.b -pady 2 -ipadx 10 -padx 10
+  pack $w.find $w.dismiss -side right -in .splash.b -pady 2 -ipadx 10 -padx 10
   pack $w.ybar -in $w.f -side right -fill y
   pack $w.t -in $w.f -side left -fill both -expand yes
 
