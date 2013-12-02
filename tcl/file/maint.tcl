@@ -1608,7 +1608,9 @@ proc compactNames {} {
   updateBoard
   ::windows::gamelist::Refresh
   ::maint::Refresh
-  raiseWin .maintWin
+  if {[winfo exists .maintWin]} {
+    raiseWin .maintWin
+  }
 }
 
 # returns true is no deletions marked
