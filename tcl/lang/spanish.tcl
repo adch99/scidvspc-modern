@@ -3,6 +3,7 @@
 # Contributed by Jordi González Boada.
 # Updated by Enrique Lopez.
 # Updated by Benigno Hernández Bacallado
+# Updated by Igor Sosa Mayor
 # Untranslated messages are marked with a "***" comment.
 
 addLanguage S Español 1 ;#iso8859-1
@@ -83,8 +84,8 @@ menuText S EditCopy "Copiar esta partida a la base de trabajo" 1 \
   {Copia esta partida a la base de trabajo (clipbase)}
 menuText S EditPaste "Pegar la última partida de la base de trabajo" 2 \
   {Pega la partida activa en la base de trabajo (clipbase) aquí}
-menuText S EditPastePGN "Paste Clipboard text as PGN game..." 10 \
-  {Interpreta el texto  de la base de trabajo (clipbase) como una partida en notacion PGN y la pega aquí}
+menuText S EditPastePGN "Pegar el texto de la base de trabajo como partida PGN..." 10 \
+  {Interpreta el texto de la base de trabajo (clipbase) como una partida en notacion PGN y la pega aquí}
 menuText S EditSetup "Iniciar tablero de posición..." 26 \
   {Inicia el tablero de posición con la posición de la partida}
 menuText S EditCopyBoard "Copiar posición" 8 \
@@ -147,7 +148,7 @@ menuText S WindowsGList "Listado de partidas" 0 \
 menuText S WindowsPGN "Ventana PGN" 8 {Abre/cierra la ventana de PGN (notación de partida)}
 menuText S WindowsCross "Tabla cruzada" 0 {Muestra la tabla cruzada para esta partida}
 menuText S WindowsPList "Buscador de jugadores" 2 {Abre/cierra el buscador de jugadores}
-menuText S WindowsTmt "Visor de Torneos" 9 {Abre/cierra el visor de torneos}
+menuText S WindowsTmt "Visor de torneos" 9 {Abre/cierra el visor de torneos}
 menuText S WindowsSwitcher "Intercambiador de bases de datos" 0 \
   {Abre/cierra la ventana del intercambiador de bases de datos}
 menuText S WindowsMaint "Mantenimiento" 11 \
@@ -221,8 +222,8 @@ menuText S ToolsImportOne "Importar partida PGN" 0 \
   {Importa una partida de un texto PGN}
 menuText S ToolsImportFile "Importar archivo de partidas PGN" 2 \
   {Importa partidas de un archivo PGN}
-menuText S ToolsStartEngine1 "Empezar motor 1" 0  {Empezar motor 1}
-menuText S ToolsStartEngine2 "Empezar motor 2" 0  {Empezar Motor 2}
+menuText S ToolsStartEngine1 "Arrancar motor 1" 0  {Arrancar motor 1}
+menuText S ToolsStartEngine2 "Arrancar motor 2" 0  {Arrancar Motor 2}
 menuText S ToolsScreenshot "Captura de pantalla" 0
 menuText S Play "Jugar" 0
 menuText S CorrespondenceChess "Ajedrez por correo" 0 \
@@ -686,7 +687,7 @@ translate S ShowAnalysisBoard {Mostrar tablero de análisis}
 translate S ShowInfo {Muestra info del motor}
 translate S FinishGame {Finalizar partida}
 translate S StopEngine {Parar motor}
-translate S StartEngine {Empezar motor}
+translate S StartEngine {Arrancar motor}
 translate S LockEngine {Bloquea motor en posición actual}
 translate S AnalysisCommand {Dirección de análisis}
 translate S PreviousChoices {Elección previa}
@@ -1256,7 +1257,7 @@ translate S ClassifyWhich {Clasificar por códigos ECO}
 translate S ClassifyAll {Todas las partidas (sobreescribir código ECO)}
 translate S ClassifyYear {Todas las partidas jugadas en el último año}
 translate S ClassifyMonth {Todas las partidas jugadas en el último mes}
-translate S ClassifyNew {Sólo las partidas todabía sin código ECO}
+translate S ClassifyNew {Sólo las partidas todavía sin código ECO}
 translate S ClassifyCodes {Código ECO a usar}
 translate S ClassifyBasic {Sólo código básico ("B12", ...)}
 translate S ClassifyExtended {Extensiones Scid ("B12j", ...)}
