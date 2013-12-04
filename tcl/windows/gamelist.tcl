@@ -494,6 +494,7 @@ proc ::windows::gamelist::Open {} {
 
   ttk::combobox $w.b.find -width 10 -font font_Small -textvariable ::windows::gamelist::findtext
   ::utils::history::SetCombobox ::windows::gamelist::findtext $w.b.find
+  bind $w <Control-f> "focus $w.b.find"
 
   # didn't use to work
   # ::utils::history::SetLimit ::windows::gamelist::findtext 5

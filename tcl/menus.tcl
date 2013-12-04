@@ -99,6 +99,10 @@ option add *Menu*TearOff 0
 
 menu .menu
 
+### We need to find a way to focus .menu for Alt+Key menu shortcuts in docked mode
+# bind .menu <Any-Enter> {focus -force .menu ; break}
+# bind .menu <ButtonRelease-1> {focus -force .menu}
+
 if {$windowsOS} {
   # todo &&&
   # How do we disable windows broken menu short-cuts &&&
@@ -1328,6 +1332,8 @@ set helpMessage($m,[incr menuindex]) HelpAbout
 bind .main <F1> toggleHelp
 bind .main <Control-Key-quoteleft> {::file::SwitchToBase 9}
 bind .main <Control-Tab> ::file::SwitchToNextBase
+bind .main <Control-f> {if {!$tree(refresh)} {toggleRotateBoard}}
+
 catch {
   if {$windowsOS} {
     bind .main <Shift-Tab> {::file::SwitchToNextBase -1} 
@@ -1691,7 +1697,6 @@ proc standardShortcuts {w} {
   bind $w <Control-L> ::game::Reload
   bind $w <Control-g> ::game::GotoMoveNumber
   bind $w <Control-G> ::game::LoadNumber
-  bind $w <Control-f> {if {!$tree(refresh)} {toggleRotateBoard}}
   bind $w <Control-B> ::search::board
   bind $w <Control-H> ::search::header
   bind $w <Control-M> ::search::material

@@ -1488,6 +1488,7 @@ proc configFindEntryBox {entry var text} {
     set topvar(findprev) {}
     set topvar(findindex) 1.0
     bind $entry <Return> "nextFindEntryBox $entry $var $text"
+    bind [winfo toplevel $entry] <Control-f> "focus $entry"
 }
 
 proc nextFindEntryBox {entry var text} {
