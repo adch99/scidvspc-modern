@@ -1626,7 +1626,7 @@ Use "+" as a logical AND with the <b>Filter</b> button. For example: "Kasparov+K
   <p>
   From here, one may <b>Merge</b> the game back into the
   current one as a variation. The merge starts from where the games differ (taking transpositions into account),
-  and you can change the number of moves to be merged, according to whether
+  and you can change the last move number to be merged, according to whether
   you are interested in adding the whole game or just its next few moves.
   </p>
 <p><i>The board size can be resized by Control+Wheelmouse or Control+Shift+Left/Right.</i></p>

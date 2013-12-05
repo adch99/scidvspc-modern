@@ -146,10 +146,11 @@ proc mergeGame {{base 0} {gnum 0}} {
   pack $w.f.text -side left -fill both -expand yes
   pack $w.f -fill both -expand yes
   set small font_Small
+
   label $w.b.label -text "Up to move:" -font $small
-  pack $w.b.label -side left
+  pack $w.b.label -side left -padx 2
   foreach i {5 10 15 20 25 30 35 40} {
-    radiobutton $w.b.m$i -text $i -variable merge(ply) -value [expr {$i * 2}] \
+    radiobutton $w.b.m$i -text [format "%2i" $i] -variable merge(ply) -value [expr {$i * 2}] \
         -indicatoron 0 -padx 2 -pady 1 -font $small -command updateMergeGame
     pack $w.b.m$i -side left
   }
@@ -157,14 +158,15 @@ proc mergeGame {{base 0} {gnum 0}} {
       -variable merge(ply) -value 1000 -indicatoron 0 -padx 2 -pady 1 \
       -font $small -command updateMergeGame
   pack $w.b.all -side left
-  dialogbutton $w.b.ok -text "OK" -command {
+
+  dialogbutton $w.b.ok -font $small -text "OK" -command {
     sc_game undoPoint
     sc_game merge $merge(base) $merge(gnum) $merge(ply)
     catch {grab release .mergeDialog}
     destroy .mergeDialog
     updateBoard -pgn
   }
-  dialogbutton $w.b.cancel -text $::tr(Cancel) \
+  dialogbutton $w.b.cancel -font $small -text $::tr(Cancel) \
       -command "catch {grab release $w}; destroy $w"
   packbuttons right $w.b.cancel $w.b.ok
   grab $w
@@ -177,6 +179,7 @@ proc updateMergeGame {args} {
   if {! [winfo exists $w]} { return }
   sc_game push copy
   sc_game merge $merge(base) $merge(gnum) $merge(ply)
+
   set pgn [sc_game pgn -indentV 1 -short 1 -width 60]
   sc_game pop
   $w.f.text configure -state normal
@@ -1853,6 +1856,11 @@ proc raiseAllWindows {} {
     }
   }
   # raise .
+  # Treat .splash differently as it is persistant
+  if {[winfo ismapped .splash]} {
+    raise .splash
+  }
+  
 }
 
 ### Scid main windows are below, but we use [winfo children .] to gather info
@@ -1867,7 +1875,7 @@ proc raiseAllWindows {} {
 proc getTopLevel {{type {}}} {
 
   set topl {}
-  set exclude { .splash .tooltip .glistExtra .menu . .pgnPopup .ctxtMenu}
+  set exclude {.splash .tooltip .glistExtra .menu . .pgnPopup .ctxtMenu}
   foreach c [winfo children .] {
     if { $c != [winfo toplevel $c] } { continue }
     # Tk report .__tk_filedialog as toplevel window even if the window has been closed
