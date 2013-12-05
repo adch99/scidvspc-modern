@@ -3103,19 +3103,18 @@ set helpText(EPD) {<h1>EPD Files</h1>
 set helpTitle(Email) "Email window"
 set helpText(Email) {<h1>The Email Window</h1>
   <p>
-  Scids email manager window provides a way for you to manage correspondence
-  chess games played by email.
-  If you do not play email chess, this will be of no interest to you.
-  But if you play correspondence chess by email, you can send your email
-  messages directly from Scid!
+  The Email Window provides basic support for correspondence games played by email.
+  One may send messages directly from Scid, but you still need to manually add your opponents moves as
+  there is no capability to check your email folder.
   </p>
+  <p><i>Email settings are database dependant, and are stored in the same directory as the si4 file, with an .sem file extension.</i></p>
   <p>
   To use the email manager:
   <ul>
   <li><b>1)</b> Create the game(s) for your opponent in the
   database. </li>
   <li><b>2)</b> In the email manager window, select <b>Add</b> and enter
-  your opponents details: name, email address, and the game numbers in the
+  your opponents details: name, email address, and the game numbers (separated by spaces) in the
   database. </li>
   <li><b>3)</b> Select <b>Send email</b> in the email window each time you
   have added moves to the game(s) and want to send a message. </li>
@@ -3136,30 +3135,18 @@ set helpText(Email) {<h1>The Email Window</h1>
   and the game numbers for each opponent will be incorrect.
   </p>
 
-  <h3>Limitations</h3>
-  <p>
-  Scid does not have any capability to check your email folder yet, so you
-  still need to add your opponents moves to the games manually.
-  </p>
-
   <h3>Configuration</h3>
   <p>
   A copy of each email message sent by Scid is stored in the file
-  <b>~/.scid/scidmail.log</b>. If you want them to be stored
-  in a different file, you will need to edit the file <b>tcl/start.tcl</b>
-  and recompile Scid.
+  <b>~/.scid/scidmail.log</b>.
   </p>
   <p>
   Scid can send email messages using an SMTP server or sendmail.
   User the <b>Settings</b> button in the Email Manager to specify which
   you want to use.
   </p>
-  <p>
-  Scid stores the opponent details for a database in a file
-  with the same name as the database and the suffix <b>.sem</b>.
-  </p>
 
-  <p><footer>Updated: Scid 3.6.2, December 2006</footer></p>
+  <p><footer>Updated: Scid vs 4.12, December 2013</footer></p>
 }
 
 set helpTitle(Reports) "Reports"
