@@ -224,11 +224,6 @@ namespace eval pgn {
 
     bind $w <Destroy> {}
 
-    ### Left button closes context menu
-    # (The "Move tag" text binding in htext.tcl will move game to this position)
-    bind $w <ButtonPress-1> {
-      if {[winfo exists .pgnWin.text.ctxtMenu]} { destroy .pgnWin.text.ctxtMenu; focus .pgnWin }
-    }
 
     # # Middle button popups a PGN board
     bind $w <ButtonPress-2> "::pgn::ShowBoard .pgnWin.text 5 %x %y %X %Y"
@@ -397,8 +392,10 @@ namespace eval pgn {
     $mctxt add separator
     $mctxt add command -label "[tr WindowsComment]" -command ::commenteditor::Open
 
-    # Offset the menu a little so as to not obstruct move
-    $mctxt post [expr [winfo pointerx .] + 15] [expr [winfo pointery .] + 0]
+    ### Offset the menu a little so as to not obstruct move
+    # [expr [winfo pointerx .] + 15] [expr [winfo pointery .] + 0]
+    ### tk_popup is better than post. No need to explicitly handle unposts
+    tk_popup $mctxt [winfo pointerx .] [winfo pointery .]
   }
 
   proc deleteVar { var } {
