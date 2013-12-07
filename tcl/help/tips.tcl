@@ -238,10 +238,10 @@ set tips(E) {
     <a Moves>Entering Chess Moves</a> help page for details.
   }
   {
-    If you are browsing openings in a database with the <a Tree>Tree</a>,
-    you can see a useful overview of how well the current opening is
-    scoring recently and between high-rated players by opening the
-    Statistics window (<b>Control-I</b>).
+    The Tree Window shows how well a particualr opening scores, 
+    but for more detailed statistics, enable "Adjust Filter"
+    and open the Statistics Window. This will show the opening score
+    for highly rated players, and of the most recent games.
   }
   {
     You can resize the main board size with <b>Control+Wheelmouse</b>, or by

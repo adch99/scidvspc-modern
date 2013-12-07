@@ -6716,7 +6716,7 @@ set helpText(Board) {<h1>Board Options</h1>
 <p>
    Tk (and Scid) only support the GIF image format by default -
    but PNG and JPG images (and pieces) are supported by the TkImg
-   package. TkImg is included with  Windows, and can be compiled
+   package. TkImg is included with  Windows and OS X, and can be compiled
    from the
    <url https://sourceforge.net/project/downloading.php?group_id=263836&filename=tkimg1.3.tar.bz2>source tarball</url>
    on Linux (if not already installed).
@@ -6730,7 +6730,10 @@ set helpText(Board) {<h1>Board Options</h1>
 <h3><name Textures>Custom Pieces</name></h3>
 <p>
 Place base 64 encoded piece sets in the directory <b>$HOME/.scidvspc/pieces</b>, and they will be added to the 
-Board Options window.</p>
+Board Options window. There is a limit of 12 piece sets only.</p>
+<p>Though Scid now supports larger sizes, these are scaled
+from the smaller one, so sizes 25, 30, 35 ... 80 are the only ones needed
+in the custom pieces.</p>
 <p>
 For instructions on making Scid piece sets, download 
 <url http://sourceforge.net/projects/scidvspc/files/support%20files/scid_chess_pieces.tgz/download>this file</url>.
