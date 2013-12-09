@@ -20,14 +20,13 @@
 </figure>
 
 <bf>Shane's Chess Information Database</bf> is a powerful Chess Toolkit, with
-which one can create huge chess databases, run engine analysis, or play
+which one can create huge chess databases, run engine engines, or play
 casual games against the computer or online with the Free Internet Chess
 Server. It was originally written by Shane Hudson , and has received strong
 contribution from Pascal Georges and others.
 
 <url url="http://scidvspc.sourceforge.net/" name="Scid vs. PC"> is a usability
-and bug-fix fork of Scid with some new features.  The project is authored by <ref name="Stevenaaus"
-id="contact_">, and has been extensively tested.
+and bug-fix fork of Scid, with some new features.  The project has been extensively tested, and is authored by <ref name="Stevenaaus" id="contact_">.
 
 <sect> features <p>
 
@@ -39,24 +38,25 @@ id="contact_">, and has been extensively tested.
 
 <itemize>
 <item> <bf>Computer Tournaments</bf>.
-<item> Rewritten <bf>Gamelist</bf> widget, with the incorporated <bf>Database Switcher</bf>.
+<item> Rewritten <bf>Gamelist</bf>, with the <bf>Database Switcher</bf> incorporated.
 <item> Improved <bf>Computer Game</bf> , <bf>FICs</bf> and <bf>Annotation</bf> features.
 <item> Large Board sizes.
 <item> Clickable <bf>Variation Arrows</bf>, and <bf>Paste Variation</bf> feature.
 <item> Improved Undo and <bf>Redo</bf>.
-<item> Tri-coloured <bf>Tree Bar-Graphs</bf> alongside statistics.
-<item> PGN can be shown as <bf>chess figures</bf>/fonts.
+<item> Tri-coloured <bf>Tree Bar-graphs</bf> alongside statistics.
+<item> PGN Window can display small chess pieces.
+<item> <bf>Player Information window</bf> has useful new buttons.
 <item> <bf>Ratings Graph</bf> can show multiple players.
 <item> Book tuning <bf>Remove Move</bf> feature.
-<item> <bf>Move Search</bf> feature.
+<item> <bf>Move Search</bf> feature (eg h3 Bh5 g4 Bxg4).
 <item> Separate board sections are hideable via right-click.
-<item> A redone <bf>Button Bar</bf> with improved look and feel.
+<item> Redone <bf>Buttons</bf> and <bf>Toolbar</bf> icons.
 <item> Clickable Tablebase moves.
-<item> Restructured <bf>Analysis Engines</bf>. The function hotkeys can be set explicitly, Engine 1 can be docked into the Status Bar, and any number of engines may run at one time. <bf>Engine Annotation</bf> has also been rewritten, <bf>Engine Logs</bf> are viewable.
-<item> The Chessboard/Pieces options have been totally overhauled.  There are some <bf>new colour and tile themes</bf>, and <bf>great piece sets</bf> available if the optional TkImg package is installed.
-<item> The <bf>Setup Start Board</bf> has many fixes and improvements. 
+<item> Any number of <bf>Chess Engines</bf> may run at one time. Engine 1 can be docked into the Status Bar. <bf>Engine Logs</bf> are easily viewable.
+<item> The Chessboard/Pieces options have been totally overhauled, and custom Pieces/Tiles are suported.  (NB - most piece-sets require the TkImg package to work).
+<item> <bf>Setup Start Board</bf> has many fixes and improvements. 
 <item> The <bf>Help</bf> index is now meaningful to new users, with links to the game's main features.
-<item> Many bug-fixes.
+<item> Many more bug-fixes and interface refinements.
 
 </itemize>
 
@@ -64,9 +64,7 @@ id="contact_">, and has been extensively tested.
 
 <itemize>
 <item> Mainline SCID has a powerful filter sorting capability, but it is overly complicated, and perhaps not stable.
-<newline>
-<newline>
-<item>Some language translations need volunteers and updating.
+<item>Some language translations need updating.
 </itemize>
 
 <label id="download_">
@@ -95,7 +93,7 @@ Scid vs. PC requires <url name="Tcl/Tk" url="http://tcl.tk"> 8.5 or later.
 Most Unices should have Tcl/Tk installed by default.
 To verify this, look for a command named <bf>wish</bf> or <bf>wish8.5</bf>.
 To enable support for extra chess pieces (such as Berlin), you may need to install
-<url name="TkImg" url="https://sourceforge.net/project/downloading.php?group_id=263836&amp;filename=tkimg1.3.scidvspc.tar.bz2">.  
+<url name="TkImg" url="https://sourceforge.net/project/downloading.php?group_id=263836&amp;filename=tkimg1.3.scidvspc.tar.bz2">.  Sound support requires Snack, or tcl-snack.
 Then, installing from source:
 <code>
 tar -xzf scid_vs_pc-4.11.tgz
@@ -128,11 +126,11 @@ The <ref name="ScidvsMac-4.11 app" id="download_"> should include everything you
 <em>Users upgrading may have to remove (or edit) <bf>$HOME/.scidvspc/config/engines.dat</bf>
 to properly configure the chess engines.</em>
 
-OS X  has a poor implementation of Tcl, and docked mode has bugs (some windows work better after being moved around, keyboard shortcuts are very hit and miss). These issues should be fixed with a point release sometime in the future.
+OS X  has a poor implementation of Tcl, and docked mode has minor bugs (some windows work better after being moved around, keyboard shortcuts are very hit and miss).
 
 To compile from source - once you have XCode installed - please read <bf>ScidvsMac-HowTo.rtfd</bf> in the source tarball.
 
-<em>OS X's Cocoa port of Wish is broken, with little chance of repair. Scid vs PC ships with a custom Carbon build of Wish.</em>
+<em>OS X's Cocoa port of Wish is broken, with little chance of repair. Scid vs PC ships with a custom 32bit Carbon build of Wish.</em>
 
 <sect> news <p>
 

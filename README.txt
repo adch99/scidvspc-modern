@@ -64,14 +64,14 @@
 
 
   Shane's Chess Information Database is a powerful Chess Toolkit, with
-  which one can create huge chess databases, run engine analysis, or
-  play casual games against the computer or online with the Free
-  Internet Chess Server. It was originally written by Shane Hudson , and
-  has received strong contribution from Pascal Georges and others.
+  which one can create huge chess databases, run engine engines, or play
+  casual games against the computer or online with the Free Internet
+  Chess Server. It was originally written by Shane Hudson , and has
+  received strong contribution from Pascal Georges and others.
 
   Scid vs. PC <http://scidvspc.sourceforge.net/> is a usability and bug-
-  fix fork of Scid with some new features. The project is authored by
-  ``Stevenaaus'', and has been extensively tested.
+  fix fork of Scid, with some new features. The project has been
+  extensively tested, and is authored by ``Stevenaaus''.
 
   2.  features
 
@@ -83,7 +83,7 @@
 
   o  Computer Tournaments.
 
-  o  Rewritten Gamelist widget, with the incorporated Database Switcher.
+  o  Rewritten Gamelist, with the Database Switcher incorporated.
 
   o  Improved Computer Game , FICs and Annotation features.
 
@@ -93,43 +93,43 @@
 
   o  Improved Undo and Redo.
 
-  o  Tri-coloured Tree Bar-Graphs alongside statistics.
+  o  Tri-coloured Tree Bar-graphs alongside statistics.
 
-  o  PGN can be shown as chess figures/fonts.
+  o  PGN Window can display small chess pieces.
+
+  o  Player Information window has useful new buttons.
 
   o  Ratings Graph can show multiple players.
 
   o  Book tuning Remove Move feature.
 
-  o  Move Search feature.
+  o  Move Search feature (eg h3 Bh5 g4 Bxg4).
 
   o  Separate board sections are hideable via right-click.
 
-  o  A redone Button Bar with improved look and feel.
+  o  Redone Buttons and Toolbar icons.
 
   o  Clickable Tablebase moves.
 
-  o  Restructured Analysis Engines. The function hotkeys can be set
-     explicitly, Engine 1 can be docked into the Status Bar, and any
-     number of engines may run at one time. Engine Annotation has also
-     been rewritten, Engine Logs are viewable.
+  o  Any number of Chess Engines may run at one time. Engine 1 can be
+     docked into the Status Bar. Engine Logs are easily viewable.
 
-  o  The Chessboard/Pieces options have been totally overhauled. There
-     are some new colour and tile themes, and great piece sets available
-     if the optional TkImg package is installed.
+  o  The Chessboard/Pieces options have been totally overhauled, and
+     custom Pieces/Tiles are suported. (NB - most piece-sets require the
+     TkImg package to work).
 
-  o  The Setup Start Board has many fixes and improvements.
+  o  Setup Start Board has many fixes and improvements.
 
   o  The Help index is now meaningful to new users, with links to the
      game's main features.
-  o  Many bug-fixes.
+  o  Many more bug-fixes and interface refinements.
 
   2.0.2.  Missing Features
 
   o  Mainline SCID has a powerful filter sorting capability, but it is
      overly complicated, and perhaps not stable.
 
-  o  Some language translations need volunteers and updating.
+  o  Some language translations need updating.
 
   3.  download
 
@@ -160,7 +160,8 @@
   wish or wish8.5.  To enable support for extra chess pieces (such as
   Berlin), you may need to install TkImg
   <https://sourceforge.net/project/downloading.php?group_id=263836&filename=tkimg1.3.scidvspc.tar.bz2>.
-  Then, installing from source:
+  Sound support requires Snack, or tcl-snack.  Then, installing from
+  source:
 
   ______________________________________________________________________
   tar -xzf scid_vs_pc-4.11.tgz
@@ -202,16 +203,15 @@
   $HOME/.scidvspc/config/engines.dat to properly configure the chess
   engines.
 
-  OS X has a poor implementation of Tcl, and docked mode has bugs (some
-  windows work better after being moved around, keyboard shortcuts are
-  very hit and miss). These issues should be fixed with a point release
-  sometime in the future.
+  OS X has a poor implementation of Tcl, and docked mode has minor bugs
+  (some windows work better after being moved around, keyboard shortcuts
+  are very hit and miss).
 
   To compile from source - once you have XCode installed - please read
   ScidvsMac-HowTo.rtfd in the source tarball.
 
   OS X's Cocoa port of Wish is broken, with little chance of repair.
-  Scid vs PC ships with a custom Carbon build of Wish.
+  Scid vs PC ships with a custom 32bit Carbon build of Wish.
 
   5.  news
 
