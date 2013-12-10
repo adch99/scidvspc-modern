@@ -7377,6 +7377,14 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         Tcl_AppendResult (ti, temp, NULL);
     }
 
+    
+    sprintf (temp, "%s", RESULT_LONGSTR[db->game->GetResult()]);
+
+    // Result is now displayed beside payer names, if 1-0, 0-1, 1/2-1/2
+    if (! hideNextMove && temp[0] != '*')  {
+      Tcl_AppendResult (ti, "    (",temp,")", NULL);
+    }
+
     Tcl_AppendResult (ti, "</center>", NULL);
 
     /*** Event line ****/
@@ -7519,18 +7527,16 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         }
     }
 
-    /*** Result + Move line ****/
+    /*** Length + Move line ****/
 
     if (hideNextMove) {
         // sprintf (temp, "(%s: %s)", translate (ti, "Result"), translate (ti, "hidden"));
         Tcl_AppendResult (ti, "<br>", NULL);
     } else {
-        sprintf (temp, "<br>%s: <blue>%s</blue>   %s: %u   ",
-	  translate (ti, "Result"),
-	  RESULT_LONGSTR[db->game->GetResult()],
-	  translate (ti, "Length"),
-	  (db->game->GetNumHalfMoves() + 1) / 2);
-        Tcl_AppendResult (ti, temp, NULL);
+      sprintf (temp, "<br>%s: %u   ",
+      translate (ti, "Length"),
+      (db->game->GetNumHalfMoves() + 1) / 2);
+      Tcl_AppendResult (ti, temp, NULL);
     }
 
     char san [20];
