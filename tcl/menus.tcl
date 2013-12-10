@@ -1688,7 +1688,6 @@ proc checkMenuUnderline {menu} {
 ### Standard keyboard shortcuts for most windows
 
 proc standardShortcuts {w} {
-  if {! [winfo exists $w]} { return }
   bind $w <Control-o> ::file::Open
   bind $w <Control-w> ::file::Close
   bind $w <Control-slash> ::file::finder::Open
