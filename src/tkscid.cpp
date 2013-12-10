@@ -7378,11 +7378,10 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     }
 
     
-    sprintf (temp, "%s", RESULT_LONGSTR[db->game->GetResult()]);
-
     // Result is now displayed beside payer names, if 1-0, 0-1, 1/2-1/2
-    if (! hideNextMove && temp[0] != '*')  {
-      Tcl_AppendResult (ti, "    (",temp,")", NULL);
+    resultT result = db->game->GetResult();
+    if (! hideNextMove && result )  {
+      Tcl_AppendResult (ti, "    (", RESULT_LONGSTR[result] ,")", NULL);
     }
 
     Tcl_AppendResult (ti, "</center>", NULL);
