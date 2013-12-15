@@ -64,6 +64,7 @@ PgnParser::Reset (MFile * infile)
     InFile = infile;
     InBuffer = InCurrent = NULL;
     EndChar = EOF;
+    CheckUTF8BOM();
 }
 
 void
@@ -82,6 +83,35 @@ PgnParser::Reset (const char * inbuffer)
     InFile = NULL;
     InBuffer = InCurrent = inbuffer;
     EndChar = 0;
+}
+
+void
+PgnParser::CheckUTF8BOM()
+{
+    int ch = GetChar();
+    if (ch == 0xEF)
+    {
+        if ((ch = GetChar()) == 0xBB)
+        {
+            if ((ch = GetChar()) == 0xBF)
+            {
+		printf ("Discarding UTF8 BOM\n");
+                // Now use UTF8 encoding instead of Latin-1
+            }
+            else
+            {
+                UnGetChar(ch);
+            }
+        }
+        else
+        {
+            UnGetChar(ch);
+        }
+    }
+    else
+    {
+        UnGetChar(ch);
+    }
 }
 
 void

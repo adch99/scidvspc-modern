@@ -65,6 +65,7 @@ class PgnParser
 
     void   Init();
     void   Reset();
+    void   CheckUTF8BOM();
     void   LogError (const char * errMessage, const char * text);
     void   GetLine (char * buffer, uint bufSize);
     void   GetComment (char * buffer, uint bufSize);
