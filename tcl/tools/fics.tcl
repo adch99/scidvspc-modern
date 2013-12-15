@@ -1157,14 +1157,14 @@ namespace eval fics {
         set ::pause 0
 	if {[string match -nocase $::fics::reallogin [sc_game tags get Black]] ||
             [string match -nocase $::fics::reallogin [sc_game tags get White]]} {
+	  if {$::fics::sound} {
+	    ::utils::sound::PlaySound sound_end
+	  }
 	  if {! $::fics::no_results} {
 	    if {[string match "1/2*" $res]} {set res Draw}
             ::fics::killDialogs
 	    tk_messageBox -title "Game result" -icon info -type ok -message "$res"
 	  }
-	}
-	if {$::fics::sound} {
-	  ::utils::sound::PlaySound sound_end
 	}
 	# &&& do we need ::fics::remove_observedGame $num (todo check)
       } else {
