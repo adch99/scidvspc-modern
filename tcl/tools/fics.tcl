@@ -1101,7 +1101,7 @@ namespace eval fics {
       wm title $::dot_w "$::scidName: $white - $black ($::fics::timecontrol)"
 
       if {$::fics::sound} {
-	::utils::sound::PlaySound sound_move
+	::utils::sound::PlaySound sound_start
       }
 
       ### hide offers graph ; sometime ::fics::updateGraph doesn't get cancelled though !?^&$%!
@@ -1162,6 +1162,9 @@ namespace eval fics {
             ::fics::killDialogs
 	    tk_messageBox -title "Game result" -icon info -type ok -message "$res"
 	  }
+	}
+	if {$::fics::sound} {
+	  ::utils::sound::PlaySound sound_end
 	}
 	# &&& do we need ::fics::remove_observedGame $num (todo check)
       } else {

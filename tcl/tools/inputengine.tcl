@@ -898,7 +898,7 @@ namespace eval inputengine {
               set int [string range [sc_pos fen] 0 $space]
 
               if {$fen != $int} {
-                ::utils::sound::PlaySound "sound_alert"
+                ::utils::sound::PlaySound "sound_end"
                 logEngine "  info Wrong Position! $int (scid) != $fen (external)"
               } else {
                 logEngine "  info Board and internal position match."
@@ -1057,7 +1057,7 @@ namespace eval inputengine {
              # check. This however is not easy in Scid, therefore
              # compare FEN.
              #
-             # ::utils::sound::PlaySound "sound_alert"
+             # ::utils::sound::PlaySound "sound_end"
              # logEngine "< info $event"
           } \
           "DGT Projects - This DGT board" {

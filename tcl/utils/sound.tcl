@@ -13,9 +13,7 @@ namespace eval ::utils::sound {}
 set ::utils::sound::hasSnackPackage 0
 set ::utils::sound::isPlayingSound 0
 set ::utils::sound::soundQueue {}
-set ::utils::sound::soundFiles [list \
-    King Queen Rook Bishop Knight CastleQ CastleK Back Mate Promote Check \
-    a b c d e f g h x 1 2 3 4 5 6 7 8 move alert]
+set ::utils::sound::soundFiles "King Queen Rook Bishop Knight CastleQ CastleK Back Mate Promote Check a b c d e f g h x 1 2 3 4 5 6 7 8 move alert start end"
 
 # soundMap
 #
@@ -61,11 +59,9 @@ proc ::utils::sound::Setup {} {
 }
 
 
-# ::utils::sound::ReadFolder
-#
 #   Reads sound files from the specified directory.
 #   Returns the number of Scid sound files found in that directory.
-#
+
 proc ::utils::sound::ReadFolder {} {
   variable soundFiles
   variable soundFolder
@@ -75,6 +71,10 @@ proc ::utils::sound::ReadFolder {} {
     set f [file join $soundFolder $soundFile.wav]
     if {[file readable $f]} {
       sound_$soundFile configure -file $f
+
+      ### alternatively, store file in memory
+      # sound_$soundFile read $f
+
       incr count
     }
   }
@@ -144,21 +144,16 @@ proc ::utils::sound::CancelSounds {} {
   set ::utils::sound::isPlayingSound 0
 }
 
-################################################################################
-#
-################################################################################
 proc ::utils::sound::PlaySound {sound} {
   if {! $::utils::sound::hasSnackPackage} { return }
   lappend ::utils::sound::soundQueue $sound
   after idle ::utils::sound::CheckSoundQueue
 }
 
-# ::utils::sound::CheckSoundQueue
-#
 #   Starts playing the next available sound, if there is one waiting
 #   and no sound is currently playing. Called whenever a sound is
 #   added to the queue or a sound has finished playing.
-#
+
 proc ::utils::sound::CheckSoundQueue {} {
   variable soundQueue
   variable isPlayingSound
@@ -169,6 +164,7 @@ proc ::utils::sound::CheckSoundQueue {} {
   set soundQueue [lrange $soundQueue 1 end]
   set isPlayingSound 1
   catch { $next play -blocking 0 -command ::utils::sound::SoundFinished }
+  after cancel ::utils::sound::CancelSounds
   after 5000 ::utils::sound::CancelSounds
 }
 
