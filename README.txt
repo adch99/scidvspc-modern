@@ -160,7 +160,9 @@
   wish or wish8.5.  To enable support for extra chess pieces (such as
   Berlin), you may need to install TkImg
   <https://sourceforge.net/project/downloading.php?group_id=263836&filename=tkimg1.3.scidvspc.tar.bz2>.
-  Sound support requires Snack, or tcl-snack.  Then, installing from
+  Sound support requires Snack
+  <http://sourceforge.net/projects/scidvspc/files/support%20files/snack2.2.10.scidvspc.tgz/download>.
+  (Both of these downloads have fixes applied).  Then, installing from
   source:
 
   ______________________________________________________________________
@@ -183,6 +185,7 @@
 
   Windows installation simply requires downloading the ``executable'',
   and following the prompts.
+
 
   The configuration files, including the chess engine list, are stored
   in the Scid-vs-PC\bin\config directory, and may be copied over from
@@ -248,6 +251,7 @@
    December 10, 2010
 
   Sicd vs. PC 4.2 includes support for Scid's si4 db format.
+
 
    July 3, 2010
 
@@ -383,7 +387,6 @@
      polyglot opening books, but inlining this projects work may not be
      too hard. https://github.com/sshivaji/ctgexporter
 
-
   6.4.  known issues
 
 
@@ -513,9 +516,11 @@
 
   o  Computer tournament stability/speed fix
 
+
   o  Locked Analysis Engines now show the locked position (not the
      working line) , and bug-fix the engine lock, which didnt work
      properly
+
   o  Add a low CPU priority check box to Engine Configuration window
      (especially important for MS Windows - where engines can kill GUI)
 
@@ -576,6 +581,7 @@
 
   o  FICS: Allow use of alternative URLs (used during FICS outage) and
      other minor tweaks
+
 
   o  Window focus improvements (mainly for MS Windows and OS X)
 
@@ -641,6 +647,7 @@
 
   o  UCI: replace 'position fen ...' with 'position startpos moves ...'
      for general analysis
+
 
   o  Better Twin Games Checker - highlights missing comments and
      variations in duplicate games
@@ -714,6 +721,7 @@
 
   o  Make the database switcher icons/frames get smaller if they are
      cramped (so we can see them all)
+
   o  Half fix UCI game (sergame.tcl) time issues
 
   o  Corrospondence Chess now works
@@ -772,13 +780,13 @@
 
   o  Remove the 'Scid: ' prefix from several window titles
 
+
   o  Update some translations
 
   o  Show Linux version/distro in the startup window
 
   o  Add a patch to make toolbar buttons raise only (instead of toggle
      open/shut)
-
 
   o  Add a patch for Chess960 support (from Ben Hague). Unfinished
 
@@ -844,7 +852,6 @@
   o  FICS has it's own options menu
 
   o  bind F9 to xtell instead of tell
-
 
   o  Change the move.wav sound from tick-tock to a short click
 
@@ -912,6 +919,7 @@
 
   o  New feature: 'Search-Filter to Last Move'. All filter games will
      load at the last move (end of game)
+
   o  Refine the Calculation of Variation (Stoyko Exercise) feature and
      Help
 
@@ -978,6 +986,7 @@
 
   o  Known aliases Biographical data is shown in the player information
      window
+
   o  The player info widget has buttons enabling quick player renames
      and look-up
 
@@ -1034,6 +1043,7 @@
 
   o  Catch a nasty wish8.5.10 bug with the gamelist (Wish-8.5.10 should
      be avoided)
+
 
   o  New OSX HowTo
 
@@ -1165,6 +1175,7 @@
 
   o  Add Burnett chess pieces
 
+
   7.0.11.  Scid vs. PC 4.4
 
 
@@ -1176,6 +1187,7 @@
 
   o  Add widgets to the gamelist for manipulating flags and browsing
      first/last/next/previous games
+
   o  Opening Book and Book Tuning overhaul - allow two books to be
      opened with side-by-side sorting, and various interface
      improvements
@@ -1230,7 +1242,6 @@
 
   o  Ubuntu 11 have put libX11.so somewhere stupid. Update configure
      script
-
   o  Paste FEN bug involving fen validation
 
   o  Fix promotion bug involving busy CPU and missed grab
@@ -1297,7 +1308,6 @@
 
   o  Help Widget font size (and Pgn Window) can be easily increased by
      control+wheelmouse
-
   o  When pasting FEN directly, do a castling sanity check
 
   o  Bugfix: When user starts scidvspc for the first time, clipbase is
@@ -1364,7 +1374,6 @@
 
   o  Tree widget improvements: next move is highlighted, main filter is
      now independant of Tree filter, wheel mouse bindings
-
   o  Tactics feature fixed up: Renamed "Puzzle" , and Problem Solutions
      can now be browsed in-game
 
@@ -1372,7 +1381,6 @@
      end
 
   o  Comment Editor has undo and redo bindings
-
 
   o  Main board grid colour can be changed
 
@@ -1439,7 +1447,6 @@
 
      o  "Show Suggested Move" was broken
 
-
      o  Gamelist sometimes left off the last or first item
 
 
@@ -1505,7 +1512,6 @@
 
   o  Sync the tools::connect-hardware feature with SCID (untested)
 
-
   o  When using the setup board widget, do a sanity check about the
      FEN's castling field
 
@@ -1565,6 +1571,7 @@
   o  Crosstable: make options persistant, tweak menus, fix html export
      blank fields
 
+
   o  Crosstable: allow spelling.ssp to match initalized christian names,
      include a Font button, fix parenting
 
@@ -1572,6 +1579,7 @@
 
   o  Fics: Make a new Received Offers dialog which allows for proper
      handling of multiple challenges
+
   o  Fics: Tweak the Make Offer dialog
 
   o  Fics: update help files, and add a Font button
@@ -1628,6 +1636,7 @@
 
   o  Made a few friendly help menus, as well as adding a "Forward"
      button to the help interface
+
 
   o  Fixed up the "Show Material" widget. It can now be flipped and
      resized, and draws pieces either side of halfway according to
@@ -1695,14 +1704,12 @@
 
   o  Fixed phalanx's illegal castling, and sorted out issues with it's
      opening book and the analysis window
-
   o  Replaced the hardly used side-to-move and coords buttons with
      toggle-menu, toggle-gameinfo buttons (Removing the redundant
      gameinfo right-click menu)
 
   o  Fixed up the toolbar cofniguration widget, and re-did a few little
      images
-
 
   o  Variation pop-ups now center over the main window, and enable
      KeyPress-1, KeyPress-2, etc bindings
@@ -1761,6 +1768,7 @@
   o  Other minor changes: Control-WheelMouse == Sizeup/Sizedown,
      Variation buttons swap position, Spellcheck installation fix
 
+
   7.0.21.  Scid vs. PC 3.6.26.4
 
 
@@ -1768,7 +1776,6 @@
      is not quite yet feature complete
 
   o  Many changes to the Gameinfo widget,
-
 
   o  , including a new "Set Game Information" widget
 
@@ -1892,6 +1899,7 @@
      <http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm>
 
   o  Pgn of players  <http://www.pgnmentor.com/files.html#players>
+
 
   o  Pgn of events  <http://www.pgnmentor.com/files.html#events>
 

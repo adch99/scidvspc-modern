@@ -5768,7 +5768,7 @@ set helpText(Sound) {<h1>Sound</h1>
    <p>
    The feature relies on a slow and poorly maintained Tcl package, <b>Snack</b>,
    which should be installed by default on Windows and OSX. On Linux this package
-   is known as "libsnack" and "tcl-snack".
+   is known as "libsnack" and "tcl-snack". For more info, see below.
    </p>
    <p>
    To see if sound is enabled, examine the Start-up Window.
@@ -5778,18 +5778,17 @@ set helpText(Sound) {<h1>Sound</h1>
    <p>
    Sound may be disabled by selecting an invalid folder.
    </p>
-   <h2>Snack Issues</h2><p>
-   If Scid only plays every second move, you may have a buggy
-   libsnack. You may try compiling snack-2.2.10 from source.
+   <h2>Linux Snack Issues</h2><p>
+   If Scid only plays every second move, you have a buggy
+   libsnack, and should compile snack-2.2.10 from
+   <url https://sourceforge.net/projects/scidvspc/files/support files/>source</url>.
    </p>
    <ul>
    <li>* It should be installed in the same lib as tcl/tk (generally /usr/lib or /usr/local/lib).</li>
    <li>* If you get a compilation error in file generic/jkFormatMP3.c,
    move the "#include <lt>math.h<gt>" line in this file to above "#define roundf(x)".</li>
-   <li>* You may try <b>configure --enable-alsa</b> for ALSA support.</li>
-   <li>* <url http://packages.debian.org/source/sid/snack>Debian's snack repo</url> may contain useful fixes.</li>
    </ul>
-   <p><footer>Updated: Scid vs. PC 4.8 June 2012</footer></p>
+   <p><footer>Updated: Scid vs. PC 4.12 December 2013</footer></p>
 }
 
 set helpTitle(Changelog) "Scid vs PC Changelog"
