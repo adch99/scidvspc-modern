@@ -667,6 +667,12 @@ button .main.tb.save -image tb_save -command {
     gameAdd
   }
 }
+# Quick save is right click
+bind .main.tb.save <Button-3> {
+  sc_game save [sc_game number]
+  updateBoard -pgn
+}
+
 button .main.tb.close -image tb_close -command ::file::Close
 button .main.tb.finder -image tb_finder -command ::file::finder::Open
 menubutton .main.tb.bkm -image tb_bkm -menu .main.tb.bkm.menu
