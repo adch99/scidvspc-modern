@@ -2010,7 +2010,7 @@ namespace eval fics {
 	    return
 	  } 
 	  if {$::fics::sound} {
-	    ::utils::sound::AnnounceMove tock
+	    ::utils::sound::PlayMove sound_move
 	  }
           if { $::novag::connected } {
             set m $verbose_move

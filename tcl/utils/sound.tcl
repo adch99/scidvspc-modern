@@ -80,7 +80,7 @@ proc ::utils::sound::ReadFolder {} {
 }
 
 proc ::utils::sound::AnnounceNewMove {move} {
-  if {$::utils::sound::announceNew} { AnnounceMove $move }
+  if {$::utils::sound::announceNew || ($::fics::sound && ($::fics::playing == 1 || $::fics::playing == -1))} { AnnounceMove $move }
 }
 
 proc ::utils::sound::AnnounceForward {move} {
@@ -119,6 +119,7 @@ proc ::utils::sound::AnnounceMove {move} {
 # Plays a sound or list of sounds representing a move
 
 proc ::utils::sound::PlayMove {soundlist} {
+  # What is the best location for this update
   update idletasks
   ::snack::audio stop
   set ::utils::sound::isPlayingSound 0
