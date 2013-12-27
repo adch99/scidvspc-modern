@@ -44,6 +44,16 @@ proc ::utils::sound::Setup {} {
   }
 
   ::splash::add "   Snack sound package found: Move speech enabled."
+  set devices [snack::audio outputDevices]
+  ::splash::add "   Available output devices are: $devices"
+  if {[llength $devices] > 1} {
+    set device [lindex $devices end]
+    if {[catch {snack::audio selectOutput $device}]} {
+       ::splash::add "   Failure setting Snack output device to $device"
+    } else {
+       ::splash::add "   Succesfully set Snack output device to $device"
+    }
+  }
   set hasSnackPackage 1
 
   # Set up sounds. Each sound will be empty until a WAV file for it is found.
