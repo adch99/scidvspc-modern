@@ -2009,6 +2009,9 @@ namespace eval fics {
 	    set ::fics::premove {}
 	    return
 	  } 
+	  if {$::fics::sound} {
+	    ::utils::sound::AnnounceMove tock
+	  }
           if { $::novag::connected } {
             set m $verbose_move
             if { [string index $m 1] == "/" } { set m [string range $m 2 end] }

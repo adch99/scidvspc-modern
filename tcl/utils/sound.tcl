@@ -96,7 +96,7 @@ proc ::utils::sound::AnnounceMove {move} {
   variable soundMap
   variable announceTock
 
-  if {$announceTock || ($::fics::sound && ($::fics::playing == 1 || $::fics::playing == -1))} {
+  if {$announceTock || ($::fics::sound && ($move == "tock" || $::fics::playing == 1 || $::fics::playing == -1))} {
     PlayMove sound_move
     return
   }
@@ -116,7 +116,11 @@ proc ::utils::sound::AnnounceMove {move} {
   }
 }
 
+# Plays a sound or list of sounds representing a move
+
 proc ::utils::sound::PlayMove {soundlist} {
+  update idletasks
+  ::snack::audio stop
   set ::utils::sound::isPlayingSound 0
   set ::utils::sound::soundQueue $soundlist
   after cancel ::utils::sound::PlaySoundQueue
@@ -125,7 +129,6 @@ proc ::utils::sound::PlayMove {soundlist} {
 
 proc ::utils::sound::PlaySoundQueue {} {
 
-  ::snack::audio stop
   set ::utils::sound::isPlayingSound 0
 
   while {[llength $::utils::sound::soundQueue] > 0} {
@@ -133,7 +136,9 @@ proc ::utils::sound::PlaySoundQueue {} {
     set ::utils::sound::soundQueue [lrange $::utils::sound::soundQueue 1 end]
     incr ::utils::sound::isPlayingSound
     $sound play -blocking 0 -command "incr ::utils::sound::isPlayingSound -1"
-    vwait ::utils::sound::isPlayingSound
+    if {[llength $::utils::sound::soundQueue] > 0} {
+      vwait ::utils::sound::isPlayingSound
+    }
   }
 }
 
