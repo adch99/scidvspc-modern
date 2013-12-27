@@ -1101,7 +1101,7 @@ namespace eval fics {
       wm title $::dot_w "$::scidName: $white - $black ($::fics::timecontrol)"
 
       if {$::fics::sound} {
-	::utils::sound::PlaySound sound_start
+	::utils::sound::PlayMove sound_start
       }
 
       ### hide offers graph ; sometime ::fics::updateGraph doesn't get cancelled though !?^&$%!
@@ -1158,7 +1158,7 @@ namespace eval fics {
 	if {[string match -nocase $::fics::reallogin [sc_game tags get Black]] ||
             [string match -nocase $::fics::reallogin [sc_game tags get White]]} {
 	  if {$::fics::sound} {
-	    ::utils::sound::PlaySound sound_end
+	    ::utils::sound::PlayMove sound_end
 	  }
 	  if {! $::fics::no_results} {
 	    if {[string match "1/2*" $res]} {set res Draw}
@@ -1978,15 +1978,8 @@ namespace eval fics {
 
       # Why is this check necessary ?
       if { ([sc_pos side] == "white" && $color == "B") || ([sc_pos side] == "black" && $color == "W") } {
-	if {$::utils::sound::announceNew} {
-	  ::utils::sound::AnnounceMove $moveSan
-	} else {
-	  if {$::fics::sound} {
-	    ::utils::sound::CancelSounds
-	    ::utils::sound::PlaySound sound_move
-	  }
-        }
-        if {$::fics::playing == 1} {
+
+       if {$::fics::playing == 1} {
           ::fics::checkRaise
         }
 

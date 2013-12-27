@@ -28,11 +28,6 @@ array set ::utils::sound::soundMap {
   1 1 2 2 3 3 4 4 5 5 6 6 7 7 8 8
 } 
 
-
-# ::utils::sound::Setup
-#
-#   Called once at startup to load the Snack package and set up sounds.
-#
 proc ::utils::sound::Setup {} {
   variable hasSnackPackage
   variable soundFiles
@@ -42,6 +37,9 @@ proc ::utils::sound::Setup {} {
   if {[catch {package require snack 2.0}]} {
     set hasSnackPackage 0
     ::splash::add "   Snack sound package not found." 
+    ### undefine procs
+    proc ::utils::sound::AnnounceMove {move} {}
+    proc ::utils::sound::PlayMove {sound} {}
     return
   }
 
@@ -81,18 +79,25 @@ proc ::utils::sound::ReadFolder {} {
   return $count
 }
 
+proc ::utils::sound::AnnounceNewMove {move} {
+  if {$::utils::sound::announceNew} { AnnounceMove $move }
+}
 
+proc ::utils::sound::AnnounceForward {move} {
+  if {$::utils::sound::announceForward} { AnnounceMove $move }
+}
+
+
+proc ::utils::sound::AnnounceBack {} {
+  if {$::utils::sound::announceBack} { AnnounceMove U }
+}
 
 proc ::utils::sound::AnnounceMove {move} {
-  variable hasSnackPackage
   variable soundMap
   variable announceTock
 
-  if {! $hasSnackPackage} { return }
-
-  if {$announceTock} {
-    CancelSounds
-    PlaySound sound_move
+  if {$announceTock || ($::fics::sound && ($::fics::playing == 1 || $::fics::playing == -1))} {
+    PlayMove sound_move
     return
   }
 
@@ -107,65 +112,29 @@ proc ::utils::sound::AnnounceMove {move} {
     }
   }
   if {[llength $soundList] > 0} {
-    CancelSounds
-    foreach s $soundList {
-      PlaySound $s
-    }
+    PlayMove $soundList
   }
 }
 
-
-proc ::utils::sound::AnnounceNewMove {move} {
-  if {$::utils::sound::announceNew} { AnnounceMove $move }
-}
-
-proc ::utils::sound::AnnounceForward {move} {
-  if {$::utils::sound::announceForward} { AnnounceMove $move }
-}
-
-
-proc ::utils::sound::AnnounceBack {} {
-  if {$::utils::sound::announceBack} { AnnounceMove U }
-}
-
-
-proc ::utils::sound::SoundFinished {} {
-  after cancel ::utils::sound::CancelSounds
+proc ::utils::sound::PlayMove {soundlist} {
   set ::utils::sound::isPlayingSound 0
-  CheckSoundQueue
+  set ::utils::sound::soundQueue $soundlist
+  after cancel ::utils::sound::PlaySoundQueue
+  after idle ::utils::sound::PlaySoundQueue
 }
 
+proc ::utils::sound::PlaySoundQueue {} {
 
-proc ::utils::sound::CancelSounds {} {
-  if {! $::utils::sound::hasSnackPackage} { return }
-
-  snack::audio stop
-  set ::utils::sound::soundQueue {}
+  ::snack::audio stop
   set ::utils::sound::isPlayingSound 0
-}
 
-proc ::utils::sound::PlaySound {sound} {
-  if {! $::utils::sound::hasSnackPackage} { return }
-  lappend ::utils::sound::soundQueue $sound
-  after idle ::utils::sound::CheckSoundQueue
-}
-
-#   Starts playing the next available sound, if there is one waiting
-#   and no sound is currently playing. Called whenever a sound is
-#   added to the queue or a sound has finished playing.
-
-proc ::utils::sound::CheckSoundQueue {} {
-  variable soundQueue
-  variable isPlayingSound
-  if {$isPlayingSound} { return }
-  if {[llength $soundQueue] == 0} { return }
-
-  set next [lindex $soundQueue 0]
-  set soundQueue [lrange $soundQueue 1 end]
-  set isPlayingSound 1
-  catch { $next play -blocking 0 -command ::utils::sound::SoundFinished }
-  after cancel ::utils::sound::CancelSounds
-  after 5000 ::utils::sound::CancelSounds
+  while {[llength $::utils::sound::soundQueue] > 0} {
+    set sound [lindex $::utils::sound::soundQueue 0]
+    set ::utils::sound::soundQueue [lrange $::utils::sound::soundQueue 1 end]
+    incr ::utils::sound::isPlayingSound
+    $sound play -blocking 0 -command "incr ::utils::sound::isPlayingSound -1"
+    vwait ::utils::sound::isPlayingSound
+  }
 }
 
 
