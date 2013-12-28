@@ -436,6 +436,11 @@ proc ::windows::gamelist::Open {} {
       gameAdd
     }
   }
+  # Quick save is right click
+  bind $w.b.save <Button-3> {
+    sc_game save [sc_game number]
+    updateBoard -pgn
+  }
 
   button $w.b.bkm -relief flat -image tb_bkm
   bind   $w.b.bkm <ButtonPress-1> "tk_popup .main.tb.bkm.menu %X %Y ; break"
