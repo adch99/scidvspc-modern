@@ -133,6 +133,7 @@ proc playerInfo {{player ""} {raise 0}} {
 
 proc playerInfoRefresh {} {
   set ::glstart 1
+  raiseWin .glistWin
   ::windows::stats::Refresh
 }
 
