@@ -437,10 +437,7 @@ proc ::windows::gamelist::Open {} {
     }
   }
   # Quick save is right click
-  bind $w.b.save <Button-3> {
-    sc_game save [sc_game number]
-    updateBoard -pgn
-  }
+  bind $w.b.save <Button-3> gameQuickSave
 
   button $w.b.bkm -relief flat -image tb_bkm
   bind   $w.b.bkm <ButtonPress-1> "tk_popup .main.tb.bkm.menu %X %Y ; break"
@@ -491,8 +488,8 @@ proc ::windows::gamelist::Open {} {
   button $w.b.filter -font font_Small -relief flat -textvar ::tr(Filter) \
     -command {::windows::gamelist::FilterText}
 
-  button $w.b.findlabel -font font_Small -relief flat -textvar ::tr(GlistFindText) \
-    -command {::windows::gamelist::FindText}
+  # button $w.b.findlabel -font font_Small -relief flat -textvar ::tr(GlistFindText) \
+  #   -command {::windows::gamelist::FindText}
 
   # button $w.b.findall -font font_Small -relief flat -text "Find All" \
   #   -command {::windows::gamelist::FindText}
@@ -515,7 +512,7 @@ proc ::windows::gamelist::Open {} {
 
   pack $w.b.findcase -side right
   pack $w.b.find -side right ; # -expand 1 -fill x
-  pack $w.b.findlabel $w.b.filter $w.b.reset $w.b.negate -side right 
+  pack $w.b.filter $w.b.reset $w.b.negate -side right 
   pack $w.b.save $w.b.bkm $w.b.gfirst $w.b.gprev $w.b.gnext $w.b.glast -side left
 
   ### Bottom row of buttons , etc

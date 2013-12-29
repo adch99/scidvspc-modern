@@ -1172,9 +1172,7 @@ proc addGameSaveEntry {name row textname nametype} {
   bind .save.g.entry$name <FocusIn> "updateMatchList .save.g.list $nametype 9 $name {} {}"
 }
 
-# gsave:
 #    Called by gameSave when the user presses the "Save" button
-#    to save the game. Attempts to save and reports the result.
 #    (If gnum < 0 dont actually save game - just set game tags)
 
 proc gsave { gnum } {
@@ -1217,6 +1215,16 @@ proc gameAdd {} {
 
 proc gameReplace {} {
   gameSave [sc_game number]
+}
+
+proc gameQuickSave {} {
+  set gnum [sc_game number]
+  if {$gnum == 0} {
+    gameAdd
+  } else {
+    sc_game save [sc_game number]
+    updateBoard -pgn
+  } 
 }
 
 
