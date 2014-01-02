@@ -28,16 +28,18 @@ package require Tk  8.5
 set windowsOS	[expr {$tcl_platform(platform) == "windows"}]
 set unixOS	[expr {$tcl_platform(platform) == "unix"}]
 
-# debugging (eg) (can affect performance/toolbar)
+# debugging a procedure (can affect performance/toolbar)
 if {0} {
-  rename wm oldwm
-  proc wm {args} {
+  set procname focus
+
+  rename $procname oldprocname
+  proc $procname {args} {
     if {$::windowsOS} {
-      catch {::splash::add "wm $args"}
+      catch {::splash::add "$procname $args"}
     } else {
-      puts "wm $args"
+      puts "$::procname $args"
     }
-    eval oldwm $args
+    eval oldprocname $args
   }
 }
 
