@@ -1329,12 +1329,12 @@ Scid will find the first move of the current game that reaches a position not fo
 }
 
 # Sounds configuration:
-translate E SoundsFolder {Sound Files Folder}
-translate E SoundsFolderHelp {The folder should contain the files King.wav, a.wav, 1.wav, etc}
-translate E SoundsAnnounceOptions {Move Announcement Options}
-translate E SoundsAnnounceNew {Announce new moves as they are made}
-translate E SoundsAnnounceForward {Announce moves when moving forward one move}
-translate E SoundsAnnounceBack {Announce when retracting or moving back one move}
+translate E SoundsFolder {Sounds Folder}
+translate E SoundsFolderHelp {The folder should contain the files King.wav, 1.wav, etc}
+translate E SoundsAnnounceOptions {Move Announcement}
+translate E SoundsAnnounceNew {Announce new moves}
+translate E SoundsAnnounceForward {Announce when moving forward}
+translate E SoundsAnnounceBack {Announce when moving back}
 
 # Upgrading databases:
 translate E Upgrading {Upgrading}

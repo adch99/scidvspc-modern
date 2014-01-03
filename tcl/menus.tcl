@@ -967,7 +967,7 @@ $m add command -label OptionsSave -command {
     crosstab(type) crosstab(ages) crosstab(countries) crosstab(ratings) crosstab(titles) crosstab(breaks) 
     crosstab(deleted) crosstab(colors) crosstab(cnumbers) crosstab(groups) crosstab(sort) crosstab(tallies)
     ::utils::sound::soundFolder ::utils::sound::announceNew ::utils::sound::announceTock
-    ::utils::sound::announceForward ::utils::sound::announceBack 
+    ::utils::sound::announceForward ::utils::sound::announceBack ::utils::sound::device
     ::tacgame::threshold ::tacgame::blunderwarning ::tacgame::blunderwarningvalue 
     ::tacgame::levelMin  ::tacgame::levelMax  ::tacgame::levelFixed ::tacgame::randomLevel 
     ::tacgame::showblunder ::tacgame::showblundervalue 

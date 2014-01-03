@@ -1,29 +1,22 @@
 ### sound.tcl
-### Functions for playing sound files to announce moves.
-### Part of Scid. Copyright (C) Shane Hudson 2004.
-###
-### Uses the free Tcl/Tk sound package "Snack", which comes with
-### most Tcl distributions. See http://www.speech.kth.se/snack/
-
-### when an other application uses the audio device, no sound can be played. Forces a reset of pending sounds after 5 seconds
-### which limits the maximum length of a playable sound
+# Scid vs. PC sound procedures
+# Copyright (C) Shane Hudson 2004, Stevenaaus 2013
+# Requires the Tcl/Tk sound package "Snack"
 
 namespace eval ::utils::sound {}
 
 set ::utils::sound::hasSnackPackage 0
 set ::utils::sound::isPlayingSound 0
 set ::utils::sound::soundQueue {}
-set ::utils::sound::soundFiles "King Queen Rook Bishop Knight CastleQ CastleK Back Mate Promote Check a b c d e f g h x 1 2 3 4 5 6 7 8 move alert start end"
+set ::utils::sound::soundFiles "King Queen Rook Bishop Knight CastleQ CastleK Back Mate Promote Check a b c d e f g h x 1 2 3 4 5 6 7 8 move start end"
 
-# soundMap
-#
 #   Maps characters in a move to sounds.
 #   Before this map is used, "O-O-O" is converted to "q" and "O-O" to "k"
 #   Also note that "U" (undo) is used for taking back a move.
-#
+
 array set ::utils::sound::soundMap {
   K King Q Queen R Rook B Bishop N Knight k CastleK q CastleQ
-  x x U Back # Mate = Promote  + Check alert alert
+  x x U Back # Mate = Promote  + Check
   a a b b c c d d e e f f g g h h
   1 1 2 2 3 3 4 4 5 5 6 6 7 7 8 8
 } 
@@ -34,6 +27,7 @@ proc ::utils::sound::Setup {} {
   variable soundFolder
 
   ::splash::add "Initializing Sound..."
+
   if {[catch {package require snack 2.0}]} {
     set hasSnackPackage 0
     ::splash::add "   Snack sound package not found." 
@@ -46,13 +40,11 @@ proc ::utils::sound::Setup {} {
   ::splash::add "   Snack sound package found: Move speech enabled."
   set devices [snack::audio outputDevices]
   ::splash::add "   Available output devices are: $devices"
-  if {[llength $devices] > 1} {
-    set device [lindex $devices end]
-    if {[catch {snack::audio selectOutput $device}]} {
-       ::splash::add "   Failure setting Snack output device to $device"
-    } else {
-       ::splash::add "   Succesfully set Snack output device to $device"
-    }
+
+  if {[info exists ::utils::sound::device]} {
+    ::utils::sound::SetDevice
+  } else {
+    set ::utils::sound::device [lindex $devices 0]
   }
   set hasSnackPackage 1
 
@@ -67,27 +59,6 @@ proc ::utils::sound::Setup {} {
 }
 
 
-#   Reads sound files from the specified directory.
-#   Returns the number of Scid sound files found in that directory.
-
-proc ::utils::sound::ReadFolder {} {
-  variable soundFiles
-  variable soundFolder
-
-  set count 0
-  foreach soundFile $soundFiles {
-    set f [file join $soundFolder $soundFile.wav]
-    if {[file readable $f]} {
-      sound_$soundFile configure -file $f
-
-      ### alternatively, store file in memory
-      # sound_$soundFile read $f
-
-      incr count
-    }
-  }
-  return $count
-}
 
 proc ::utils::sound::AnnounceNewMove {move} {
   if {$::utils::sound::announceNew || ($::fics::sound && ($::fics::playing == 1 || $::fics::playing == -1))} { AnnounceMove $move }
@@ -154,12 +125,8 @@ proc ::utils::sound::PlaySoundQueue {} {
 }
 
 
-# ::utils::sound::OptionsDialog
-#
-#   Dialog window for configuring move sounds.
-#
 #   TODO: language translations for this dialog.
-#
+
 proc ::utils::sound::OptionsDialog {} {
   set w .soundOptions
 
@@ -168,13 +135,12 @@ proc ::utils::sound::OptionsDialog {} {
     return
   }
 
-  foreach v {soundFolder announceNew announceForward announceBack announceTock} {
-    set ::utils::sound::${v}_temp [set ::utils::sound::$v]
-  }
+  # foreach v {soundFolder announceNew announceForward announceBack announceTock}
 
   toplevel $w
   wm title $w "Scid: Sound Options"
-  # wm transient $w .
+  wm withdraw $w
+  wm resizable $w 0 0
 
   pack [frame $w.b] -side bottom -fill x -pady 2
 
@@ -193,7 +159,7 @@ proc ::utils::sound::OptionsDialog {} {
   grid $f.ftitle -row $r -column 0 -columnspan 3 -pady 4
   incr r
 
-  entry $f.folderEntry -width 40 -textvariable ::utils::sound::soundFolder_temp
+  entry $f.folderEntry -width 40 -textvariable ::utils::sound::soundFolder
   grid $f.folderEntry -row $r -column 0 -columnspan 2 -sticky we -padx 3
   button $f.folderBrowse -text " $::tr(Browse)" -command ::utils::sound::ChooseFolder
   grid $f.folderBrowse -row $r -column 2 -padx 3
@@ -210,45 +176,69 @@ proc ::utils::sound::OptionsDialog {} {
   incr r
 
   checkbutton $f.announceNew -text $::tr(SoundsAnnounceNew) \
-      -variable ::utils::sound::announceNew_temp
+      -variable ::utils::sound::announceNew
   grid $f.announceNew -row $r -column 0 -columnspan 2 -sticky w
   incr r
 
   grid [frame $f.gap$r -height 5] -row $r -column -0; incr r
 
   checkbutton $f.announceForward -text $::tr(SoundsAnnounceForward) \
-      -variable ::utils::sound::announceForward_temp
+      -variable ::utils::sound::announceForward
   grid $f.announceForward -row $r -column 0 -columnspan 2 -sticky w
   incr r
 
   grid [frame $f.gap$r -height 5] -row $r -column -0; incr r
 
   checkbutton $f.announceBack -text $::tr(SoundsAnnounceBack) \
-      -variable ::utils::sound::announceBack_temp
+      -variable ::utils::sound::announceBack
   grid $f.announceBack -row $r -column 0 -columnspan 2 -sticky w
   incr r
 
+  grid [frame $f.gap$r -height 5] -row $r -column -0; incr r
+
   checkbutton $f.announceTock -text {Play Tick-Tock sound instead of move} \
-      -variable ::utils::sound::announceTock_temp
+      -variable ::utils::sound::announceTock
   grid $f.announceTock -row $r -column 0 -columnspan 2 -sticky w
   incr r
 
-  dialogbutton $w.b.ok -text OK -command ::utils::sound::OptionsDialogOK
+  grid [frame $f.gap$r -height 5] -row $r -column -0; incr r
+
+  ### device combobox
+
+  label $f.deviceLabel -text "Sound Device" -font font_Bold
+  grid  $f.deviceLabel -row $r -column 0 -columnspan 3 -pady 4
+  incr r
+
+  set devices [::snack::audio outputDevices]
+
+  set tmp $::utils::sound::device
+  ttk::combobox $f.device -width 20 -textvariable ::utils::sound::device 
+  bind $f.device <<ComboboxSelected>> ::utils::sound::SetDevice
+
+  # set i [lsearch $devices $::utils::sound::device]
+  $f.device configure -values $devices
+  set ::utils::sound::device $tmp
+  # $f.device current $i
+
+  grid $f.device -row $r -column 0 -columnspan 3
+  incr r
+
   dialogbutton $w.b.help -text $::tr(Help) -command {helpWindow Sound}
-  dialogbutton $w.b.cancel -text $::tr(Cancel) -command [list destroy $w]
-  packbuttons right $w.b.cancel $w.b.help $w.b.ok
-  bind $w <Return> [list $w.b.ok invoke]
-  bind $w <Escape> [list $w.b.cancel invoke]
+  dialogbutton $w.b.ok -text OK -command "
+    ::utils::sound::ReadFolder
+    destroy $w"
+  packbuttons right $w.b.ok $w.b.help
+  bind $w <Escape> "destroy $w"
   bind $w <F1> {helpWindow Sound}
   placeWinCenter $w
-  wm resizable $w 0 0
-  raiseWin $w
-
+  wm state $w normal
 }
 
+
+
 proc ::utils::sound::ChooseFolder {} {
-  if {[file isdirectory $::utils::sound::soundFolder_temp]} {
-    set initialdir $::utils::sound::soundFolder_temp
+  if {[file isdirectory $::utils::sound::soundFolder]} {
+    set initialdir $::utils::sound::soundFolder
   } else {
     set initialdir $::env(HOME)
   }
@@ -256,36 +246,49 @@ proc ::utils::sound::ChooseFolder {} {
       -initialdir $initialdir \
       -parent .soundOptions \
       -title "Scid: $::tr(SoundsFolder)"]
-  if {$newFolder != ""} {
-    set ::utils::sound::soundFolder_temp [file nativename $newFolder]
-  }
+  set ::utils::sound::soundFolder [file nativename $newFolder]
+  ::utils::sound::soundFolderOK
 }
 
-proc ::utils::sound::OptionsDialogOK {} {
+proc ::utils::sound::soundFolderOK {} {
   variable soundFolder
 
-  # Destroy the Sounds options dialog
-  set w .soundOptions
-  destroy $w
-
-  set isNewSoundFolder [expr {$soundFolder != $::utils::sound::soundFolder_temp}]
-
-  # Update the user-settable sound variables:
-  foreach v {soundFolder announceNew announceForward announceBack announceTock} {
-    set ::utils::sound::$v [set ::utils::sound::${v}_temp]
-  }
-
-  # If the user selected a different folder to look in, read it
-  # and tell the user how many sound files were found there.
-
-  if {$isNewSoundFolder  &&  $soundFolder != ""} {
     set numSoundFiles [::utils::sound::ReadFolder]
     tk_messageBox -title "Scid: Sound Files" -type ok -icon info \
         -message "Found $numSoundFiles of [llength $::utils::sound::soundFiles] sound files in $::utils::sound::soundFolder"
+}
+
+### Read sound files from the specified directory.
+#   Return the number of Scid sound files found in that directory.
+
+proc ::utils::sound::ReadFolder {} {
+  variable soundFiles
+  variable soundFolder
+
+  set count 0
+  foreach soundFile $soundFiles {
+    set f [file join $soundFolder $soundFile.wav]
+    if {[file readable $f]} {
+      sound_$soundFile configure -file $f
+
+      ### alternatively, store file in memory
+      # sound_$soundFile read $f
+
+      incr count
+    }
+  }
+  return $count
+}
+
+proc ::utils::sound::SetDevice {args} {
+
+  if {[catch {snack::audio selectOutput $::utils::sound::device}]} {
+    ::splash::add "   Failure setting Snack output device to $::utils::sound::device"
+  } else {
+    ::splash::add "   Succesfully set Snack output device to $::utils::sound::device"
   }
 }
 
-
-# Read the sound files at startup:
-
 ::utils::sound::Setup
+
+# end of sound.tcl
