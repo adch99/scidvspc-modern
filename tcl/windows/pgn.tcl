@@ -342,7 +342,7 @@ namespace eval pgn {
 
   proc copyPgn {} {
     setLanguageTemp E
-    set pgnStr [sc_game pgn -width 75 -indentComments $::pgn::indentComments \
+    set pgnStr [sc_game pgn -indentComments $::pgn::indentComments \
 	-indentVariations $::pgn::indentVars -space $::pgn::moveNumberSpaces -stripbraces 1]
     setLanguageTemp $::language
     
