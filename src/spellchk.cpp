@@ -194,6 +194,7 @@ spellingT titleTable[] = {
 {"gm","Grandmaster"},
 {"im","International Master"},
 {"fm","FIDE Master"},
+{"cm", "Candidate Master"},
 {"wgm","Woman Grandmaster"},
 {"wim","Woman International Master"},
 {"wfm","Woman FIDE Master"},
@@ -939,8 +940,8 @@ const char *
 SpellChecker::GetTitle (const char * comment)
 {
     static const char * titles[] = {
-        "gm", "im", "fm",
-        "wgm", "wim", "wfm", "w",
+        "gm", "im", "fm", "cm", 
+        "wgm", "wim", "wfm", 
         "cgm", "cim", "hgm",
         NULL
     };

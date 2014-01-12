@@ -16144,12 +16144,10 @@ strIsWildcardSearch (const char * str)
 
 const uint NUM_TITLES = 8;
 enum {
-    TITLE_GM, TITLE_IM, TITLE_FM,
-    TITLE_WGM, TITLE_WIM, TITLE_WFM,
-    TITLE_W, TITLE_NONE
+    TITLE_GM, TITLE_IM, TITLE_FM, TITLE_CM, TITLE_WGM, TITLE_WIM, TITLE_WFM, TITLE_NONE
 };
 const char * titleStr [NUM_TITLES] = {
-    "gm", "im", "fm", "wgm", "wim", "wfm", "w", "none"
+    "gm", "im", "fm", "cm", "wgm", "wim", "wfm", "none"
 };
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -16502,10 +16500,10 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                     || (!wTitles[TITLE_GM]  &&  strEqual(title, "hgm"))
                     || (!wTitles[TITLE_IM]  &&  strEqual(title, "im"))
                     || (!wTitles[TITLE_FM]  &&  strEqual(title, "fm"))
+                    || (!wTitles[TITLE_CM]  &&  strEqual(title, "cm"))
                     || (!wTitles[TITLE_WGM]  &&  strEqual(title, "wgm"))
                     || (!wTitles[TITLE_WIM]  &&  strEqual(title, "wim"))
                     || (!wTitles[TITLE_WFM]  &&  strEqual(title, "wfm"))
-                    || (!wTitles[TITLE_W]  &&  strEqual(title, "w"))
                     || (!wTitles[TITLE_NONE]  &&  strEqual(title, ""))
                     || (!wTitles[TITLE_NONE]  &&  strEqual(title, "cgm"))
                     || (!wTitles[TITLE_NONE]  &&  strEqual(title, "cim"))) {
@@ -16568,10 +16566,10 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                     || (!bTitles[TITLE_GM]  &&  strEqual(title, "hgm"))
                     || (!bTitles[TITLE_IM]  &&  strEqual(title, "im"))
                     || (!bTitles[TITLE_FM]  &&  strEqual(title, "fm"))
+                    || (!bTitles[TITLE_CM]  &&  strEqual(title, "cm"))
                     || (!bTitles[TITLE_WGM]  &&  strEqual(title, "wgm"))
                     || (!bTitles[TITLE_WIM]  &&  strEqual(title, "wim"))
                     || (!bTitles[TITLE_WFM]  &&  strEqual(title, "wfm"))
-                    || (!bTitles[TITLE_W]  &&  strEqual(title, "w"))
                     || (!bTitles[TITLE_NONE]  &&  strEqual(title, ""))
                     || (!bTitles[TITLE_NONE]  &&  strEqual(title, "cgm"))
                     || (!bTitles[TITLE_NONE]  &&  strEqual(title, "cim"))) {

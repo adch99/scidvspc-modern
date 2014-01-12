@@ -8,7 +8,7 @@ set sWhite "";  set sBlack "";  set sEvent ""; set sSite "";  set sRound ""
 set sWhiteEloMin 0; set sWhiteEloMax [sc_info limit elo]
 set sBlackEloMin 0; set sBlackEloMax [sc_info limit elo]
 set sEloDiffMin "-[sc_info limit elo]"; set sEloDiffMax "+[sc_info limit elo]"
-set sTitleList [list gm im fm none wgm wim wfm w]
+set sTitleList "gm im fm cm wgm wim wfm none"
 foreach i $sTitleList {
   set sTitles(w:$i) 1
   set sTitles(b:$i) 1
