@@ -1148,8 +1148,10 @@ namespace eval fics {
         set t2 [::gameclock::getSec 2]
 	::commenteditor::appendComment "$resultcomment\nWhiteclock [expr $t1 / 60]:[format {%02i} [expr $t1 % 60]] Blackclock [expr $t2 / 60]:[format {%02i} [expr $t2 % 60]]"
         sc_game tags set -result $res
-        catch {sc_game save [sc_game number]}
-        updateBoard -pgn
+        if {![string match  {*Game aborted*} $line]} {
+	  catch {sc_game save [sc_game number]}
+	  updateBoard -pgn
+        }
         # we need a better way to update gamelist when adding a new game
         ::windows::gamelist::Refresh
         set ::fics::playing 0
