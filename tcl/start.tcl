@@ -1548,7 +1548,7 @@ proc ::splash::make {} {
     if {!$::splash::console} {
       set ::splash::console 1
       ::splash::add {}
-      ::splash::add "Scid vs. PC $scidVersion Console"
+      ::splash::add "$scidName $scidVersion Console"
       ::splash::add {------------------------------------}
     }
     set command [string trim [.splash.command get]]

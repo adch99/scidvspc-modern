@@ -1225,7 +1225,7 @@ namespace eval fics {
       writechan "iset nowrap 1"
       writechan "iset nohighlight 1"
 
-      writechan "set interface $::scidName"
+      writechan "set interface $::scidName $::scidVersion"
 
       # user init commands
       # writechan "set seek $::fics::gamerequests"
