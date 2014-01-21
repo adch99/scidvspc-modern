@@ -1043,6 +1043,8 @@ namespace eval fics {
       ::fics::demote_mainGame 
       set ::fics::mainGame -1 ; # reset to this new game with first style12 
 
+      ::fics::disableEngines
+
       sc_game new
 
       set idx1 [string first "(" $line]
@@ -1164,11 +1166,12 @@ namespace eval fics {
 	  }
 	  if {! $::fics::no_results} {
 	    if {[string match "1/2*" $res]} {set res Draw}
-            ::fics::killDialogs
+	    ::fics::killDialogs
 	    tk_messageBox -title "Game result" -icon info -type ok -message "$res"
 	  }
 	}
 	# &&& do we need ::fics::remove_observedGame $num (todo check)
+	::fics::enableEngines
       } else {
          # Add result to white label
          catch {
@@ -2354,6 +2357,9 @@ namespace eval fics {
         writechan "exit"
       }
     }
+    if {$fics::playing == 1 || $fics::playing == -1} {
+      enableEngines
+    }
     set ::fics::playing 0
     set ::fics::mainGame -1
     # Hmmm... why do we need to catch these ?
@@ -2457,6 +2463,25 @@ namespace eval fics {
       if {[winfo exists .fics_dialog]} {
         destroy .fics_dialog
       }
+  }
+
+  proc disableEngines {} {
+    for {set i 0} {$i < [llength $::engines(list)]} {incr i} {
+      if {[winfo exists .analysisWin$i]} {
+	if {$::analysis(analyzeMode$i)} {
+	  toggleEngineAnalysis $i 1
+	 }
+	.analysisWin$i.b.startStop configure -state disabled
+      }
+    }
+  }
+
+  proc enableEngines {} {
+    for {set i 0} {$i < [llength $::engines(list)]} {incr i} {
+      if {[winfo exists .analysisWin$i]} {
+	.analysisWin$i.b.startStop configure -state normal
+      }
+    }
   }
 }
 

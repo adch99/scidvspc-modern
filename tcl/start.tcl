@@ -1655,7 +1655,7 @@ foreach sz $boardSizes {
 set boardSize $newSize
 
 # Load theme
-ttk::style theme use $lookTheme
+catch {ttk::style theme use $lookTheme}
 
 # Check for old (single-directory) tablebase option:
 if {[info exists initialDir(tablebase)]} {

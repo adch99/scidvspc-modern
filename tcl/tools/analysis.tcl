@@ -2159,8 +2159,15 @@ proc makeAnalysisWin {{n 0} {options {}}} {
 
   # start/stop engine analysis
   button $w.b.startStop -command "toggleEngineAnalysis $n" -relief $relief
+  bind $w.b.startStop <Control-Button-1> "toggleEngineAnalysis $n ; break"
 
-  set analysis(autostart$n) [expr {$options != {nostart}}]
+  if {$fics::playing == 1 || $fics::playing == -1} {
+    set analysis(autostart$n) 0
+    $w.b.startStop configure -state disabled
+  } else {
+    set analysis(autostart$n) [expr {$options != {nostart}}]
+  }
+
   if {$analysis(autostart$n)} {
     $w.b.startStop configure -image tb_pause
     ::utils::tooltip::Set $w.b.startStop "$::tr(StopEngine)"
@@ -2285,7 +2292,7 @@ proc makeAnalysisWin {{n 0} {options {}}} {
   bind $w <Escape> "focus .main ; destroy $w"
   bind $w <Key-a> "$w.b.startStop invoke"
   bind $w <Return> "addAnalysisMove $n"
-  bind $w <space>  "toggleEngineAnalysis $n"
+  bind $w <space>  "$w.b.startStop invoke"
   wm minsize $w 25 0
   bindMouseWheel $w $w.hist.text
 
@@ -2915,6 +2922,9 @@ proc toggleEngineAnalysis {{n -1} {force 0}} {
   }
 
   if {$n == -1} {
+    if {$fics::playing == 1 || $fics::playing == -1} {
+      return
+    }
     set n [findEngine]
     if {$n == -1} {
       return
