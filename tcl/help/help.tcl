@@ -89,9 +89,10 @@ set helpTitle(BrowsingPGN) "PGN"
 set helpText(BrowsingPGN) {<h1>PGN Files and Scid</h1>
 
 <p>PGN is the standard format for chess games, and Scid will happily open and display large game archives.
-<i>But PGN is not the native format of Scid's Databases.</i></p>
+<i>But PGN is not the native format of Scid's Databases. It takes a little
+effort, but using <a Scid>Scid Databases</a> instead of PGN is highly recommended.</i></p>
 
-<p>To open files, use the <run ::file::Open><green>File-<gt>Open</green></run> dialog,
+<p>To open PGN files, use the <run ::file::Open><green>File-<gt>Open</green></run> dialog,
 <a Switcher draganddrop>Drag and Drop</a>, or the
 <a Pgnscid>Pgnscid</a> utility for quick imports and troubleshooting.</p>
 
