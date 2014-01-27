@@ -34,6 +34,7 @@
 #endif
 
 // Piece letters translation
+// (not all languages have piece translation)
 
 int language = 0; // default to english
 //  0 = en, 

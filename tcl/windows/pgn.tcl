@@ -292,9 +292,6 @@ namespace eval pgn {
     }
   }
 
-  ################################################################################
-  #
-  ################################################################################
   proc savePgn {parent} {
     global env
 
@@ -326,12 +323,14 @@ namespace eval pgn {
       } else {
         ### This currently only saves a single game,
         ### ... possibily/easily overwriting a multiple game pgn file S.A
+	setLanguageTemp E
 	puts $tempfile \
 	    [sc_game pgn -width 75 -symbols $::pgn::symbolicNags \
 	    -indentVar $::pgn::indentVars -indentCom $::pgn::indentComments \
 	    -space $::pgn::moveNumberSpaces -format plain -column $::pgn::columnFormat \
 	    -markCodes $::pgn::stripMarks -stripbraces 1]
 	close $tempfile
+	setLanguageTemp $::language
         ::recentFiles::add $fname
         set ::initialDir(file) [file tail $fname]
         updateMenuStates
