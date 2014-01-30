@@ -611,9 +611,9 @@ proc enterVar {{n {}}} {
     sc_var moveInto [expr $n - 1]; updateBoard -animate
   }
 
-  ### Disabled. See another focus -force above
+  ### See another focus -force above
   # need to use "-force" to keep keyboared bindings after wheelmouse
-  # focus -force .main
+  after idle {focus -force .main}
 }
 
 ################################################################################
