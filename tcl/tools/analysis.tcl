@@ -858,7 +858,6 @@ proc checkAnnotateControl {w} {
 ### Annotation configuration widget
 ### most of the Annotation logic is in main.tcl::autoplay
 
-
 proc initAnnotation {n} {
   global autoplayDelay tempdelay analysis annotate tr
 
@@ -887,34 +886,33 @@ proc initAnnotation {n} {
   setWinLocation $w
   setWinSize $w
 
-# mark a
   frame $w.buttons
   pack $w.buttons -side bottom -fill x
-    ### pack everything inside a scrolled frame, as this widget gets too tall
-    pack [frame $w.f] -side top -expand 1 -fill both
 
-    if {$::windowsOS || $::macOS} {
-      bind $w {
-	if {[expr -%D] < 0} {.configAnnotation.f.sf yview scroll -1 units}
-	if {[expr -%D] > 0} {.configAnnotation.f.sf yview scroll +1 units}
-      }
-    } else {
-	bind $w <Button-4> ".configAnnotation.f.sf yview scroll -1 units"
-	bind $w <Button-5> ".configAnnotation.f.sf yview scroll +1 units"
+  ### pack everything inside a scrolled frame, as this widget gets too tall
+  pack [frame $w.f] -side top -expand 1 -fill both
+
+  if {$::windowsOS || $::macOS} {
+    bind $w {
+      if {[expr -%D] < 0} {.configAnnotation.f.sf yview scroll -1 units}
+      if {[expr -%D] > 0} {.configAnnotation.f.sf yview scroll +1 units}
     }
+  } else {
+      bind $w <Button-4> ".configAnnotation.f.sf yview scroll -1 units"
+      bind $w <Button-5> ".configAnnotation.f.sf yview scroll +1 units"
+  }
 
-    set w $w.f
+  set w $w.f
 
-    ::scrolledframe::scrolledframe $w.sf -yscrollcommand "$w.vs set" -fill both -height 600
-    scrollbar $w.vs -command "$w.sf yview" -width 12
+  ::scrolledframe::scrolledframe $w.sf -yscrollcommand "$w.vs set" -fill both -height 600
+  scrollbar $w.vs -command "$w.sf yview" -width 12
 
-    grid $w.sf -row 0 -column 0 -sticky nsew
-    grid $w.vs -row 0 -column 1 -sticky ns
-    grid rowconfigure $w 0 -weight 1
-    grid columnconfigure $w 0 -weight 1
+  grid $w.sf -row 0 -column 0 -sticky nsew
+  grid $w.vs -row 0 -column 1 -sticky ns
+  grid rowconfigure $w 0 -weight 1
+  grid columnconfigure $w 0 -weight 1
 
-    set w $w.sf.scrolled
-# markb
+  set w $w.sf.scrolled
 
   ### Blunder Threshold
 
