@@ -862,11 +862,11 @@ proc initAnnotation {n} {
   global autoplayDelay tempdelay analysis annotate tr
 
   set analysis(prevscore$n) 0
-  set annotate(SeenDepth) $annotate(WantedDepth)
-  set annotate(SeenLower) 1
+  set annotate(LastMove) {}
 
   set w .configAnnotation
   if { [winfo exists $w] } {
+    set annotate(Button) 1
     raiseWin $w
     return
   }
@@ -1053,7 +1053,6 @@ proc initAnnotation {n} {
       incr i
   }
 
-puts "ttk::combobox $w.usebook.comboBooks -width 12 -values"
   ttk::combobox $w.usebook.comboBooks -width 12 -values $tmp
   catch { $w.usebook.comboBooks current $idx }
 

@@ -146,25 +146,13 @@ namespace eval uci {
       set data $line
 
       set length [llength $data]
+      set annoMove {}
       for {set i 0} {$i < $length } {incr i} {
         set t [lindex $data $i]
         if { $t == "info" } { continue }
         if { $t == "depth" } {
 	  incr i
 	  set uciInfo(depth$n) [ lindex $data $i ]
-	  if {$annotate(Engine) > -1 && $annotate(Depth)} {
-	    if {$uciInfo(depth$n) < $annotate(SeenDepth)} {
-	      set annotate(SeenLower) 1
-	    }
-	    # Wait till a certain depth to make a move (or no valid moves avail)
-	    if {(($uciInfo(depth$n) >= $annotate(WantedDepth) || $uciInfo(scoremate$n) > 0) && $annotate(SeenLower)) || [sc_pos matchMoves {}] == {}} {
-	      after cancel autoplay ; # needed ???
-	      ### annotate(SeenLower) makes us wait for infos from the next move
-	      set annotate(SeenLower) 0
-	      set annotate(SeenDepth) $uciInfo(depth$n)
-	      autoplay
-	    }
-	  }
 	  continue
 	}
         if { $t == "seldepth" } { incr i ; set uciInfo(seldepth$n) [ lindex $data $i ] ; set analysis(seldepth$n) $uciInfo(seldepth$n) ; continue }
@@ -178,6 +166,17 @@ namespace eval uci {
           }
           set toBeFormatted 1
           incr i -1
+
+          # Depth annotation feature
+	  if {$annotate(Engine) > -1 && $annotate(Depth)} {
+	    # Wait till a certain depth to make a move (or no valid moves avail)
+	    if {$uciInfo(depth$n) >= $annotate(WantedDepth) || $uciInfo(scoremate$n) > 0 || [sc_pos matchMoves {}] == {}} {
+	      if {[lindex $uciInfo(pv$n) 0] != $annotate(LastMove)} {
+		set annoMove [lindex $uciInfo(pv$n) 0]
+              }
+	    }
+	  }
+
           continue
 
           # Assuming "pv" infos are always last gains ~ 100usecs but is against UCI standard
@@ -327,6 +326,13 @@ namespace eval uci {
 
       if {$analyze} {
 	updateAnalysisText $n
+      }
+
+      # if Annotating, goto next move
+      if {$annoMove != ""} {
+	after cancel autoplay ; # needed ???
+	set annotate(LastMove) $annoMove
+	autoplay
       }
 
       return
