@@ -1574,6 +1574,7 @@ proc autoplay {} {
       nextgameAutoplay $n
       return
     }
+    toggleEngineAnalysis $n 1
     cancelAutoplay
     return
   }

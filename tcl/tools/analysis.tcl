@@ -1129,6 +1129,7 @@ puts "ttk::combobox $w.usebook.comboBooks -width 12 -values"
   bind $w <Return> "$w.buttons.ok invoke"
   bind $w <Destroy> "$w.buttons.cancel invoke"
   bind $w <Configure> "recordWinSize $w"
+  bind $w <F1> {helpWindow Analysis Annotating}
   placeWinOverParent $w .analysisWin$n
   wm state $w normal
   update

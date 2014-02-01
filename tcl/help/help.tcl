@@ -2752,7 +2752,7 @@ with the format "stat01: time nodes ply mvleft mvtot mvname". The results can be
   Only positions from the current position until the end of the game
   are annotated, so you can skip annotation of opening moves
   by moving to a mid-game position before starting.
-  To cancel annotation at any time, turn off Autoplay Mode
+  Pressing the Annotate Button a second time cancels annotation.
   </p>
   <p><i>
   The Annotate feature of Scid vs. PC can be used with any engine,
