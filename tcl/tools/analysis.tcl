@@ -841,9 +841,7 @@ proc checkState {arg widget} {
   $widget configure -state $state
 }
 
-proc checkAnnotateControl {} {
-  set w .configAnnotation
-
+proc checkAnnotateControl {w} {
   if {$::annotate(Depth)} {
     set s1 disabled ; set s2 normal
   } else {
@@ -869,7 +867,10 @@ proc initAnnotation {n} {
   set annotate(SeenLower) 1
 
   set w .configAnnotation
-  if { [winfo exists $w] } { destroy $w }
+  if { [winfo exists $w] } {
+    raiseWin $w
+    return
+  }
   if { ! $annotate(Button) } { ; # end annotation
     toggleAutoplay
     return
@@ -881,6 +882,39 @@ proc initAnnotation {n} {
   toplevel $w
   wm state $w withdrawn
   wm title $w $tr(AnnotateTitle)
+  wm protocol $w WM_DELETE_WINDOW "$w.buttons.cancel invoke"
+  wm resizable $w 0 1
+  setWinLocation $w
+  setWinSize $w
+
+# mark a
+  frame $w.buttons
+  pack $w.buttons -side bottom -fill x
+    ### pack everything inside a scrolled frame, as this widget gets too tall
+    pack [frame $w.f] -side top -expand 1 -fill both
+
+    if {$::windowsOS || $::macOS} {
+      bind $w {
+	if {[expr -%D] < 0} {.configAnnotation.f.sf yview scroll -1 units}
+	if {[expr -%D] > 0} {.configAnnotation.f.sf yview scroll +1 units}
+      }
+    } else {
+	bind $w <Button-4> ".configAnnotation.f.sf yview scroll -1 units"
+	bind $w <Button-5> ".configAnnotation.f.sf yview scroll +1 units"
+    }
+
+    set w $w.f
+
+    ::scrolledframe::scrolledframe $w.sf -yscrollcommand "$w.vs set" -fill both -height 600
+    scrollbar $w.vs -command "$w.sf yview" -width 12
+
+    grid $w.sf -row 0 -column 0 -sticky nsew
+    grid $w.vs -row 0 -column 1 -sticky ns
+    grid rowconfigure $w 0 -weight 1
+    grid columnconfigure $w 0 -weight 1
+
+    set w $w.sf.scrolled
+# markb
 
   ### Blunder Threshold
 
@@ -898,8 +932,8 @@ proc initAnnotation {n} {
   if  {$analysis(uci$n)} {
     frame $w.choice
     label $w.choice.0 -text {Move Control}
-    radiobutton $w.choice.1 -variable annotate(Depth) -value 1 -text Depth -command checkAnnotateControl
-    radiobutton $w.choice.2 -variable annotate(Depth) -value 0 -text Time  -command checkAnnotateControl
+    radiobutton $w.choice.1 -variable annotate(Depth) -value 1 -text Depth -command "checkAnnotateControl $w"
+    radiobutton $w.choice.2 -variable annotate(Depth) -value 0 -text Time  -command "checkAnnotateControl $w"
 
     pack $w.choice -side top -pady 3 
     pack $w.choice.0 $w.choice.1 $w.choice.2 -side left -expand 1 -fill x
@@ -926,7 +960,7 @@ proc initAnnotation {n} {
   pack $w.delay.spDelay -side right -padx 5 
 
   if  {$analysis(uci$n)} {
-    checkAnnotateControl
+    checkAnnotateControl $w
   }
 
   addHorizontalRule $w
@@ -1021,6 +1055,7 @@ proc initAnnotation {n} {
       incr i
   }
 
+puts "ttk::combobox $w.usebook.comboBooks -width 12 -values"
   ttk::combobox $w.usebook.comboBooks -width 12 -values $tmp
   catch { $w.usebook.comboBooks current $idx }
 
@@ -1076,9 +1111,9 @@ proc initAnnotation {n} {
     $w.batch.cbMarkTactics configure -state disabled
   }
 
+  set w .configAnnotation
+
   addHorizontalRule $w
-  frame $w.buttons
-  pack $w.buttons -side top -fill x
   dialogbutton $w.buttons.cancel -textvar ::tr(Cancel) -command {
     bind .configAnnotation <Destroy> {}
     destroy .configAnnotation
@@ -1092,9 +1127,10 @@ proc initAnnotation {n} {
   # focus $w.delay.spDelay
 
 
-  bind $w <Escape> { .configAnnotation.buttons.cancel invoke }
-  bind $w <Return> { .configAnnotation.buttons.ok invoke }
+  bind $w <Escape> "$w.buttons.cancel invoke"
+  bind $w <Return> "$w.buttons.ok invoke"
   bind $w <Destroy> "$w.buttons.cancel invoke"
+  bind $w <Configure> "recordWinSize $w"
   placeWinOverParent $w .analysisWin$n
   wm state $w normal
   update
@@ -1105,6 +1141,8 @@ proc initAnnotation {n} {
 proc okAnnotation {n} {
   global autoplayDelay tempdelay autoplayMode annotate analysis
 
+  set w .configAnnotation.f.sf.scrolled
+
   if {$annotate(Engine) > -1} {
     puts stderr "Scid: initAnnotation reports engine $annotate(Engine) already annotating"
     return
@@ -1114,7 +1152,7 @@ proc okAnnotation {n} {
         -message "Database is read only, and batch annotations can't be saved.\n\nContinue ?" -parent .configAnnotation]
     if {$answer != "ok"} {return}
   }
-  set ::useAnalysisBookName [.configAnnotation.usebook.comboBooks get]
+  set ::useAnalysisBookName [$w.usebook.comboBooks get]
   set ::wentOutOfBook 0
   set ::book::lastBook1 $::useAnalysisBookName
   set ::prevNag {}
