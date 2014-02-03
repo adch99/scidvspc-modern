@@ -232,6 +232,7 @@ append helpText(Index) {
   <li>Making <a Book Polyglot>Polyglot Books</a></li>
   <li><a Bookmarks>Bookmarks</a></li>
   <li><a GameList Browsing>Browsing games</a></li>
+  <li><a MainWindow>Button Bar</a></li>
   </ul>
 
   <h3><name C>C</name></h3>
@@ -572,18 +573,17 @@ set helpText(Hints) {<h1>Scid Hints</h1>
 set helpTitle(MainWindow) "Scid Main Window"
 set helpText(MainWindow) {<h1>Scid Main Window</h1>
   <p>
-  The main window displays a large board with the current game,
-  a game information box, and a few other widgets.
-  Separate help pages describe the <a Menus>menus</a> and ways to
-  <a Moves>enter chess moves</a>.
+  This section explains the main board (showing the current game), the game information area, and a few other widgets.
+  Separate help pages describe the <a Menus>menus</a> and how to <a Moves>enter chess moves</a>.
   </p>
   <p>
-  <i>Right clicking the main board shows a menu which enables hiding/unhiding of most board components.</i>
+  <i>Right clicking the main board (or 'Board' tab in <a Docking>docked mode</a>),
+  shows a menu for hiding/unhiding various board components.</i>
   </p>
 
-  <h4>Game Navigation Buttons</h4>
+  <h4>Main Button Bar</h4>
   <p>
-  The navigation buttons above the board have the following meanings [and key bindings].
+  Key bindings for each button are shown in brackets.
   <ul>
   <li> <button tb_start> Move to the start of the game  [home] </li>
   <li> <button tb_prev> Move back one move  [left] </li>
@@ -641,7 +641,7 @@ set helpText(MainWindow) {<h1>Scid Main Window</h1>
   are added to the game as a new variation just before each move is made.
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.8 June 2012 </footer></p>
+  <p><footer>Updated: Scid vs. PC 4.12 Feb 2014 </footer></p>
 }
 
 set helpTitle(Docking) "Docked Windows"

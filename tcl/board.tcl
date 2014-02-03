@@ -978,7 +978,8 @@ omgGBw70DlkDBYGRECGKNoACcIISoRhbf3glRODSgrFo06pdy7Yto0AAOw==
 
 ###### Main Button Bar ########
 
-# frame .main.button -border 0
+# (should be in main.tcl)
+
 frame .main.button -relief raised -border 1
 button .main.button.start -image tb_start -command ::move::Start
 button .main.button.back -image tb_prev -command ::move::Back

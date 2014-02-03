@@ -243,6 +243,11 @@ proc ::tree::Open {{baseNumber 0}} {
   # add a button to start/stop tree refresh &&&
   # button $w.buttons.bStartStop -image engine_on -command "::tree::toggleRefresh $baseNumber" ;# -relief flat
 
+  set helpMessage($w.buttons.best) TreeFileBest
+  set helpMessage($w.buttons.training) TreeOptTraining
+  ::utils::tooltip::Set $w.buttons.best [tr TreeFileBest]
+  ::utils::tooltip::Set $w.buttons.training [tr TreeOptTraining]
+
   checkbutton $w.buttons.refresh -text [tr FICSRefresh] \
       -variable tree(autorefresh$baseNumber) -command "::tree::toggleRefresh $baseNumber" 
   checkbutton $w.buttons.adjust -text [tr TreeAdjust] -variable tree(adjustfilter$baseNumber) -command "::tree::dorefresh $baseNumber"

@@ -518,7 +518,7 @@ menuText E TreeFileCacheInfo "Cache info" 0 {Get info on cache usage}
 menuText E TreeFileSave "Save Cache File" 0 {Save the tree cache (.stc) file}
 menuText E TreeFileFill "Fill Cache File" 0 \
   {Fill the cache file with common opening positions}
-menuText E TreeFileBest "Best Games List" 0 {Show the best tree games list}
+menuText E TreeFileBest "Best Games" 0 {Show the best matching games}
 menuText E TreeFileGraph "Graph Window" 0 {Show the graph for this tree branch}
 menuText E TreeFileCopy "Copy Tree Text to Clipboard" 1 \
   {Copy the tree statisctics to the clipboard}

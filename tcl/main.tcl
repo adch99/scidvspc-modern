@@ -832,6 +832,7 @@ proc updateBoard2 {} {
   } else {
     .main.button.exitVar configure -state normal
   }
+  wm withdraw .tooltip
 
 }
 
