@@ -1786,10 +1786,11 @@ proc addAllVariations {{n 1} {rightclick 0}} {
     set moves [lindex $i 2]
 
     set tmp_moves [ lindex $j 2 ]
+    set tmp_scoremate [scoreToMate [lindex $i 1] [lindex $i 3]]
     if {$analysis(logName)} {
-      set text [format "\[%s\] %d:%s" $analysis(name$n) [lindex $i 0] [scoreToMate [lindex $i 1] $tmp_moves $n]]
+      set text [format "\[%s\] %d:%s" $analysis(name$n) [lindex $i 0] $tmp_scoremate]
     } else {
-      set text [scoreToMate [lindex $i 1] $tmp_moves $n]
+      set text $tmp_scoremate
     }
 
     if {$addAtEnd} {
@@ -2461,10 +2462,11 @@ proc formatAnalysisScore {n} {
 
   if {$analysis(uci$n)} {
     set tmp_moves [ lindex [ lindex $analysis(multiPV$n) 0 ] 2 ]
+    set tmp_scoremate [scoreToMate $analysis(score$n) $analysis(scoremate$n)]
     if {$analysis(logName)} {
-      set text [format "\[%s\] %d:%s" $analysis(name$n) $analysis(depth$n) [scoreToMate $analysis(score$n) $tmp_moves $n]]
+      set text [format "\[%s\] %d:%s" $analysis(name$n) $analysis(depth$n) $tmp_scoremate]
     } else {
-      set text [format "%d:%s" $analysis(depth$n) [scoreToMate $analysis(score$n) $tmp_moves $n]]
+      set text [format "%d:%s" $analysis(depth$n) $tmp_scoremate]
     }
   } else  {
     if {$analysis(logName)} {
@@ -3169,7 +3171,7 @@ proc updateAnalysisText {n} {
       if {$analysis(multiPVCount$n) == 1} {
 	set newhst [format {%2d [%s]  %s} \
 		  $analysis(depth$n) \
-		  [scoreToMate $score $moves $n]  \
+		  [scoreToMate $score $analysis(scoremate$n)]  \
 		  [addMoveNumbers $n [::trans $moves]]]
 
 	append line [format "%s (%.2f)\n" $newhst $analysis(time$n)]
@@ -3179,7 +3181,7 @@ proc updateAnalysisText {n} {
 	$h delete 1.0 end
 	# First line
 	set pv [lindex $analysis(multiPV$n) 0]
-	catch { set newStr [format "%2d \[%s\]  " [lindex $pv 0] [scoreToMate $score [lindex $pv 2] $n] ] }
+	catch { set newStr [format "%2d \[%s\]  " [lindex $pv 0] [scoreToMate $score [lindex $pv 3]] ] }
 	
 	$h insert end {1. } blue
 	append newStr "[addMoveNumbers $n [::trans [lindex $pv 2]]]\n"
@@ -3189,7 +3191,7 @@ proc updateAnalysisText {n} {
 	foreach pv $analysis(multiPV$n) {
 	  if {$lineNumber == 1} { incr lineNumber ; continue }
 	  $h insert end "$lineNumber. " blue
-	  set score [scoreToMate [lindex $pv 1] [lindex $pv 2] $n]
+	  set score [scoreToMate [lindex $pv 1] [lindex $pv 3]]
 	  $h insert end [format "%2d \[%s\]  %s\n" [lindex $pv 0] $score [addMoveNumbers $n [::trans [lindex $pv 2]]] ] gray
 	  incr lineNumber
 	}
@@ -3230,46 +3232,17 @@ proc updateAnalysisText {n} {
 }
 
 
-### args = score, pv
-### returns M X if mate detected (# or ++) or original score
+### returns Mx if score-to-mate set, or (formatted) original score otherwise
+# The old scoreToMate took the pv and looked for a trailing "#",
+# but this failed when engines didn't give the full PV even when mate-in-N is known.
+# Now, the full PV to mate may not be given, but the returned Mx is correct more often, (plus major speed bump!)
 
-proc scoreToMate { score pv n } {
-
-  # S.A. rewrote this a little, but it can be replaced by SCID's proc if desired
-
-  if {$::analysis(lockEngine$n)} {
+proc scoreToMate {score scoremate} {
+  if {$scoremate > 0} {
+    return M$scoremate
+  } else {
     return [format "%+5.2f" $score]
   }
-
-  # Mate found if pv ends in # or ++
-  if { [regexp {#$|\+\+$} $pv] } {
-
-    set plies [llength $pv]
-    set side [sc_pos side]
-
-    if {!($plies % 2) && $side == {white} || $plies % 2 && $side == {black}} {
-      if {$side == {white} } {
-	set mate [expr $plies / 2 ]
-      } else  {
-	set mate [expr $plies / 2 + 1 ]
-      }
-      ### I cant think of a reason why M-2 should be shown. S.A.
-      # set ret M-$mate
-      set ret M$mate
-    } else {
-      if {$side == {white} } {
-	set mate [expr $plies / 2 + 1 ]
-      } else  {
-	set mate [expr $plies / 2 ]
-      }
-      set ret M$mate
-    }
-
-  } else  {
-    set ret [format "%+5.2f" $score]
-  }
-
-  return $ret
 }
 
 ### Returns the PV with move numbers added
