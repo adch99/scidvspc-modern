@@ -242,19 +242,24 @@ proc ::bookmarks::Go {entry} {
   set result [lindex $entry 10]
 
   set best [sc_game find $gnum $white $black $site $round $year $result]
-  if {[catch {set success [::game::Load $best 0]}]} {
-    tk_messageBox -icon warning -type ok -parent . -title "Scid" -message "Unable to load game number: $best"
-    return
-  } else {
-    if {$success == -1} {
-      return
-    }
-    sc_move pgn $ply
-    flipBoardForPlayerNames $::myPlayerNames
 
-    # show this game in gamelist
-    set ::glistStart([sc_base current]) $best
+  # don't reload current game if not necessary
+  if {[sc_game number] != $best} {
+    if {[catch {set success [::game::Load $best 0]}]} {
+      tk_messageBox -icon warning -type ok -parent . -title "Scid" -message "Unable to load game number: $best"
+      return
+    } else {
+      if {$success == -1} {
+	return
+      }
+      sc_move pgn $ply
+      flipBoardForPlayerNames $::myPlayerNames
+
+      # show this game in gamelist
+      set ::glistStart([sc_base current]) $best
+    }
   }
+
   ::windows::gamelist::Reload
   ::windows::stats::Refresh
   updateMenuStates
