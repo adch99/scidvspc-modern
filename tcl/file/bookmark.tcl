@@ -6,7 +6,6 @@
 # The Game History (RefreshMenuGame) makes heavy use of bookmarks, and for simplicity is included here
 
 set bookmarks(data) {}
-set bookmarks(gamehistory) {}
 set bookmarks(subMenus) 0
 
 # Read the bookmarks file if it exists:

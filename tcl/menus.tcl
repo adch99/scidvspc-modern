@@ -985,7 +985,7 @@ $m add command -label OptionsSave -command {
     comp(timecontrol) comp(seconds) comp(minutes) comp(incr) comp(timeout) comp(name) comp(usebook) comp(book)
     comp(rounds) comp(showclock) comp(debug) comp(animate) comp(firstonly) comp(ponder) comp(showscores)
     ::tools::graphs::filter::type  ::tools::graphs::absfilter::type ::tools::graphs::showpoints
-    ::maintFlag glistFlag ::useGraphFigurine ::photosMinimized} {
+    maintFlag glistFlag useGraphFigurine photosMinimized bookmarks(gamehistory)} {
 
       puts $optionF "set $i [list [set $i]]"
 
