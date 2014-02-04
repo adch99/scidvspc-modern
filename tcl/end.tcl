@@ -1197,8 +1197,14 @@ proc gsave { gnum } {
     sc_game setaltered 1
   } else {
     set res [sc_game save $gnum]
+
     if {$res != {}} {
       tk_messageBox -type ok -icon info -parent .save -title "Scid" -message $res
+    } else {
+      if {$gnum == 0} {
+	# add new game to history
+	::bookmarks::AddCurrentGame
+      }
     }
   }
 

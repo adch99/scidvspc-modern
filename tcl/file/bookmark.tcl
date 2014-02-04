@@ -158,12 +158,16 @@ proc ::bookmarks::AddCurrent {{folder 0}} {
   ::bookmarks::Refresh
 }
 
+### Add current game to game history
+
 proc ::bookmarks::AddCurrentGame {} {
   global bookmarks
   if {! [sc_base inUse] || [sc_base current] == 9} {
     return
   }
   set text [::bookmarks::New game]
+  # Don't remember ply for game history
+  lset text 4 1
   set i [lsearch $bookmarks(gamehistory) $text]
   if {$i > -1} {
     set bookmarks(gamehistory) [lreplace $bookmarks(gamehistory) $i $i]
@@ -236,15 +240,17 @@ proc ::bookmarks::Go {entry} {
   set result [lindex $entry 10]
 
   set best [sc_game find $gnum $white $black $site $round $year $result]
-  if {[catch {::game::Load $best 0}]} {
+  if {[catch {set success [::game::Load $best 0]}]} {
     tk_messageBox -icon warning -type ok -parent . \
       -title "Scid" -message "Unable to load game number: $best"
   } else {
-    sc_move pgn $ply
-    flipBoardForPlayerNames $::myPlayerNames
+    if {$success != -1} {
+      sc_move pgn $ply
+      flipBoardForPlayerNames $::myPlayerNames
 
-    # show this game in gamelist
-    set ::glistStart([sc_base current]) $best
+      # show this game in gamelist
+      set ::glistStart([sc_base current]) $best
+    }
   }
   ::windows::gamelist::Reload
   ::windows::stats::Refresh

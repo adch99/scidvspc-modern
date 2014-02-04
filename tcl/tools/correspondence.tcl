@@ -3737,7 +3737,7 @@ namespace eval CorrespondenceChess {
 
 			# Save the game once the move is sent
 			set num [sc_game number]
-			sc_game save $num
+			::game::Save
 
 			# Hook up with email manager: search the game in its internal
 			# list and add the send flag automatically.
@@ -3879,7 +3879,7 @@ namespace eval CorrespondenceChess {
 				}
 
 				# Save the game once the move is sent
-				sc_game save [sc_game number]
+				::game::Save
 
 				# setting "noMarkCodes" to 1 would drop the timing comments
 				# inserted e.g. by SchemingMind. Do not overwrite eMail based

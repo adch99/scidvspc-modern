@@ -74,6 +74,7 @@ proc ::game::ConfirmDiscard2 {} {
   return $::game::answer
 }
 
+### New Game
 #   Clears the active game, checking first if it is altered.
 #   Updates any affected windows.
 
@@ -81,8 +82,7 @@ proc ::game::Clear {} {
   set confirm [::game::ConfirmDiscard2]
   if {$confirm == 2} { return }
   if {$confirm == 0} {
-    sc_game save [sc_game number]
-    # ::gameReplace
+    ::game::Save
   }
 
   setTrialMode 0
@@ -177,8 +177,7 @@ proc ::game::LoadNumber {} {
   set confirm [::game::ConfirmDiscard2]
   if {$confirm == 2} { return }
   if {$confirm == 0} {
-    # ::gameReplace
-    sc_game save [sc_game number]
+    ::game::Save
   }
 
   if {[sc_base numGames] < 1} { return }
@@ -237,10 +236,9 @@ proc ::game::Load { selection {update 1} {raise 1}} {
   if {$selection < 1} { return }
   if {$selection > [sc_base numGames]} { return }
   set confirm [::game::ConfirmDiscard2]
-  if {$confirm == 2} { return }
+  if {$confirm == 2} { return -1 }
   if {$confirm == 0} {
-    sc_game save [sc_game number]
-    # ::gameReplace
+    ::game::Save
   }
 
   setTrialMode 0
@@ -266,6 +264,18 @@ proc ::game::Load { selection {update 1} {raise 1}} {
   ::windows::gamelist::Refresh
 }
 
+### Replaces numerous 'sc_game save [sc_game number]' around the place.
+# New saved games are added to Game History
+
+proc ::game::Save {} {
+    set n [sc_game number]
+    sc_game save $n
+    if {$n == 0} {
+      # add new game to history
+      ::bookmarks::AddCurrentGame
+    }
+}
+
 #   Produces a popup dialog for loading a game or other actions
 #   such as merging it into the current game.
 
@@ -286,10 +296,7 @@ proc ::game::LoadMenu {w base gnum x y} {
 }
 
 
-# ::game::moveEntryNumber
-#
 #   Entry variable for GotoMoveNumber dialog.
-
 set ::game::moveEntryNumber ""
 trace variable ::game::moveEntryNumber w {::utils::validate::Regexp {^[0-9]*$}}
 

@@ -1714,8 +1714,8 @@ proc checkRepetition {} {
     pauseGame
     sc_game tags set -result =
     tk_messageBox -type ok -message $::tr(Draw) -parent .main.board -icon info
-    puts $::lFen
-    catch {sc_game save [sc_game number]}
+    # puts $::lFen
+    catch {::game::Save}
     return 1
   }
   return 0

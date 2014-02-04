@@ -495,7 +495,7 @@ namespace eval sergame {
     after cancel ::sergame::engineGo
 
     if { [::sergame::endOfGame] } {
-      catch {sc_game save [sc_game number]}
+      catch {::game::Save}
       return
     }
 

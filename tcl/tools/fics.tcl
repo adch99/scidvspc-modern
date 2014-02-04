@@ -619,7 +619,7 @@ namespace eval fics {
           if {$::fics::playing != 2} {
 	    set confirm [::game::ConfirmDiscard2]
 	    if {$confirm == 2} {return}
-	    if {$confirm == 0} {sc_game save [sc_game number]}
+	    if {$confirm == 0} {::game::Save}
           }
 	  sc_game new
 	  set ::fics::mainGame -1
@@ -651,7 +651,7 @@ namespace eval fics {
 
 	  set confirm [::game::ConfirmDiscard2]
 	  if {$confirm == 2} {return}
-	  if {$confirm == 0} {sc_game save [sc_game number]}
+	  if {$confirm == 0} {::game::Save}
 
           sc_move end
           set moves [sc_game moves coord]
@@ -675,7 +675,7 @@ namespace eval fics {
       ex* {
 	  set confirm [::game::ConfirmDiscard2]
 	  if {$confirm == 2} {return}
-	  if {$confirm == 0} {sc_game save [sc_game number]}
+	  if {$confirm == 0} {::game::Save}
           sc_game new
       }
       default {
@@ -1151,7 +1151,7 @@ namespace eval fics {
 	::commenteditor::appendComment "$resultcomment\nWhiteclock [expr $t1 / 60]:[format {%02i} [expr $t1 % 60]] Blackclock [expr $t2 / 60]:[format {%02i} [expr $t2 % 60]]"
         sc_game tags set -result $res
         if {![string match  {*Game aborted*} $line]} {
-	  catch {sc_game save [sc_game number]}
+	  catch {::game::Save}
 	  updateBoard -pgn
         }
         # we need a better way to update gamelist when adding a new game
@@ -2058,7 +2058,7 @@ namespace eval fics {
 
       if {[string match -nocase $white $::fics::reallogin] ||
           [string match -nocase $black $::fics::reallogin]} {
-	catch {sc_game save [sc_game number]}
+	catch {::game::Save}
       }
 
       sc_game new

@@ -15,7 +15,7 @@ proc importPgnGame {} {
   set confirm [::game::ConfirmDiscard2]
   if {$confirm == 2} { return }
   if {$confirm == 0} {
-    sc_game save [sc_game number]
+    ::game::Save
   }
   setTrialMode 0
 

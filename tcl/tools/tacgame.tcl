@@ -796,7 +796,7 @@ namespace eval tacgame {
     }
 
     if { [::tacgame::checkEndOfGame] } {
-      catch {sc_game save [sc_game number]}
+      catch {::game::Save}
       return
     }
 
