@@ -204,10 +204,8 @@ proc ::bookmarks::New {type} {
   return $list
 }
 
-# ::bookmarks::Go
-#
-#   Jumps to a selected bookmark.
-#
+### Load selected bookmark
+
 proc ::bookmarks::Go {entry} {
   if {[::bookmarks::isfolder $entry]} { return }
   set fname [lindex $entry 2]
@@ -222,13 +220,17 @@ proc ::bookmarks::Go {entry} {
     busyCursor .
     ### updateBoard -pgn gets called three times, so try passing "update = 0" to the first two.
     # ::file::Open, ::game::Load, updateBoard -pgn
-    if {[catch { ::file::Open $fname . 0} result]} {
+
+    if {[catch {set success [::file::Open $fname . 0]} result]} {
       unbusyCursor .
       tk_messageBox -icon warning -type ok -parent . \
         -title "Scid" -message "Unable to load the database:\n$fname\n\n$result"
       return
     }
     unbusyCursor .
+    if {$success == -1} {
+      return
+    }
     ::recentFiles::add "[file rootname $fname].si4"
   }
   # Find and load the best database game matching the bookmark:
@@ -241,16 +243,17 @@ proc ::bookmarks::Go {entry} {
 
   set best [sc_game find $gnum $white $black $site $round $year $result]
   if {[catch {set success [::game::Load $best 0]}]} {
-    tk_messageBox -icon warning -type ok -parent . \
-      -title "Scid" -message "Unable to load game number: $best"
+    tk_messageBox -icon warning -type ok -parent . -title "Scid" -message "Unable to load game number: $best"
+    return
   } else {
-    if {$success != -1} {
-      sc_move pgn $ply
-      flipBoardForPlayerNames $::myPlayerNames
-
-      # show this game in gamelist
-      set ::glistStart([sc_base current]) $best
+    if {$success == -1} {
+      return
     }
+    sc_move pgn $ply
+    flipBoardForPlayerNames $::myPlayerNames
+
+    # show this game in gamelist
+    set ::glistStart([sc_base current]) $best
   }
   ::windows::gamelist::Reload
   ::windows::stats::Refresh

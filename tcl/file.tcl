@@ -121,7 +121,7 @@ proc ::file::New {} {
 
 ### Main file open procedure. If no filename given, shows a file-open dialog
 
-# This proc should return an error status...
+# This proc should return an error status... (so do it gradually)
 # But it is used everywhere, and will take some time to fix
 
 proc ::file::Open {{fName ""} {parent .} {update 1}} {
@@ -182,6 +182,7 @@ proc ::file::Open {{fName ""} {parent .} {update 1}} {
       tk_messageBox -icon warning -type ok -parent $parent \
           -title "Scid: Error opening file" -message "$result"
       ::recentFiles::remove "$fName.si4"
+      return -1
     } else {
       set ::initialDir(base) [file dirname $fName]
       ::recentFiles::add "$fName.si4"
