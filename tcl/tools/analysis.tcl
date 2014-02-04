@@ -3238,7 +3238,7 @@ proc updateAnalysisText {n} {
 # Now, the full PV to mate may not be given, but the returned Mx is correct more often, (plus major speed bump!)
 
 proc scoreToMate {score scoremate} {
-  if {$scoremate != 0} {
+  if {$scoremate != 0 && $scoremate != {}} {
     return M[expr {abs($scoremate)}]
   } else {
     return [format "%+5.2f" $score]
