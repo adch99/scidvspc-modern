@@ -391,8 +391,11 @@ namespace eval fics {
     # white
     ::gameclock::new $w.bottom.clocks 1 100 0 vertical
 
+    # can happen that fics is dead, but clocks still exist
+    catch {
     label .main.board.clock2 -textvar ::gameclock::data(time2)
     label .main.board.clock1 -textvar ::gameclock::data(time1)
+    }
     ::board::ficslabels
 
     set ::fics::playing 0
