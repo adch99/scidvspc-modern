@@ -5885,7 +5885,8 @@ sc_filter_textfilter (ClientData cd, Tcl_Interp * ti, int argc, const char ** ar
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // sc_filter_value:
-//    Returns the filter value of the specified base and game.
+//    Returns the filter value/ply of the specified base and game
+//    Currently used only by game/browser.tcl - so if tree is open, use this value
 int
 sc_filter_value (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
@@ -5909,7 +5910,10 @@ sc_filter_value (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     }
     gnum--;
 
-    return setUintResult (ti, base->filter->Get (gnum));
+    if(base->treeFilter)
+	return setUintResult (ti, base->treeFilter->Get (gnum));
+    else
+	return setUintResult (ti, base->filter->Get (gnum));
 }
 
 // Gerd contributed treeFilter code, but then rewrote it (differently) for Scid
