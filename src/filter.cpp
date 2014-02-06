@@ -29,16 +29,10 @@ Filter::Init (uint size) {
     CachedFilteredCount = 0;
     CachedIndex = 0;
 
-#ifndef WINCE
     isValidOldDataTree = false;
-#endif
 
-#ifdef WINCE
-    Data = (byte *)my_Tcl_Alloc(sizeof (byte [Capacity]));
-#else
     Data = new byte [Capacity];
     oldDataTree = new byte [Capacity];
-#endif
     // Set all values in filter to 1 by default:
     byte * pb = Data;
     for (uint i=0; i < size; i++) { *pb++ = 1; }
@@ -72,10 +66,11 @@ Filter::Append (byte value)
     ASSERT (FilterSize <= Capacity);
     if (FilterSize == Capacity) {
         // Data array is full, extend it in chunks of 1000:
-		SetCapacity(Capacity + 1000);
+	SetCapacity(Capacity + 1000);
     }
     Data[FilterSize] = value;
     FilterSize++;
+    // This is not really consistent. Size should be set in SetCapacity - S.A.
     if (value != 0) { FilterCount++; }
     CachedFilteredCount = 0;
     CachedIndex = 0;
@@ -86,30 +81,24 @@ Filter::SetCapacity(uint size)
 {
     if (size > Capacity) 
 	{
-        // Data array is full, extend it in chunks of 1000:
         Capacity = size;
-#ifdef WINCE
-        byte * newData = (byte *)my_Tcl_Alloc(sizeof(byte [Capacity]));
-#else
         byte * newData = new byte [Capacity];
         byte * newOldDataTree = new byte [Capacity];
-#endif
         if (Data != NULL) {
             for (uint i=0; i < FilterSize; i++) {
                 newData[i] = Data[i];
             }
-#ifdef WINCE
-            my_Tcl_Free( (char*)Data);
-#else
             delete[] Data;
             delete[] oldDataTree;
-#endif
         }
         Data = newData;
-#ifndef WINCE
         oldDataTree = newOldDataTree;
-#endif
     }
+}
+void
+Filter::SetFilterSize(uint size)
+{
+	FilterSize = size;
 }
 
 
@@ -143,7 +132,6 @@ Filter::FilteredCountToIndex (uint filteredCount)
     return index;
 }
 
-#ifndef WINCE
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Filter::saveFilterForFastMode():
 //      Reads the compressed filter from the specified open file.
@@ -154,7 +142,6 @@ void Filter::saveFilterForFastMode(uint ply) {
   oldDataTreePly = ply;
 }
 
-#endif
 //////////////////////////////////////////////////////////////////////
 //
 // CompressedFilter methods
@@ -187,37 +174,21 @@ CompressedFilter::Verify (Filter * filter)
     if (CFilterSize != filter->Size()) { return ERROR_Corrupt; }
 
     // Decompress the compressed block and compare with the original:
-#ifdef WINCE
-    byte * tempBuffer = (byte *) my_Tcl_Alloc(sizeof(byte [CFilterSize]));
-#else
     byte * tempBuffer = new byte [CFilterSize];
-#endif
     const byte * filterData = filter->GetData();
 
     if (unpackBytemap (CompressedData, tempBuffer,
                        CompressedLength, CFilterSize) != OK) {
-#ifdef WINCE
-        my_Tcl_Free((char*)tempBuffer);
-#else
         delete[] tempBuffer;
-#endif
         return ERROR_Corrupt;
     }
     for (uint i=0; i < CFilterSize; i++) {
         if (tempBuffer[i] != filterData[i]) { 
-#ifdef WINCE
-        my_Tcl_Free((char*)tempBuffer);
-#else
             delete[] tempBuffer;
-#endif
             return ERROR_Corrupt;
         }
     }
-#ifdef WINCE
-        my_Tcl_Free((char*)tempBuffer);
-#else
-            delete[] tempBuffer;
-#endif
+    delete[] tempBuffer;
     return OK;
 }
 
@@ -233,23 +204,11 @@ CompressedFilter::CompressFrom (Filter * filter)
 
     CFilterSize = filter->Size();
     CFilterCount = filter->Count();
-#ifdef WINCE
-    byte * tempBuf = (byte *) my_Tcl_Alloc(sizeof( byte [CFilterSize + OVERFLOW_BYTES]));
-#else
     byte * tempBuf = new byte [CFilterSize + OVERFLOW_BYTES];
-#endif
     CompressedLength = packBytemap (filter->GetData(), tempBuf, CFilterSize);
-#ifdef WINCE
-    CompressedData = (byte *)my_Tcl_Alloc(sizeof( byte [CompressedLength]));
-#else
     CompressedData = new byte [CompressedLength];
-#endif
     memcpy (CompressedData, tempBuf, CompressedLength);
-#ifdef WINCE
-        my_Tcl_Free((char*)tempBuf);
-#else
-            delete[] tempBuf;
-#endif
+    delete[] tempBuf;
 
     // Assert that the compressed filter decompresses identical to the
     // original, is assertions are being tested:
@@ -269,29 +228,17 @@ CompressedFilter::UncompressTo (Filter * filter)
 {
     // The filter and compressed filter MUST be of the same size:
     if (CFilterSize != filter->Size()) { return ERROR_Corrupt; }
-#ifdef WINCE
-    byte * tempBuffer = (byte *)my_Tcl_Alloc(sizeof( byte [CFilterSize]));
-#else
     byte * tempBuffer = new byte [CFilterSize];
-#endif
     if (unpackBytemap (CompressedData, tempBuffer,
                        CompressedLength, CFilterSize) != OK) {
 
-#ifdef WINCE
-        my_Tcl_Free((char*)tempBuffer);
-#else
-            delete[] tempBuffer;
-#endif
+	delete[] tempBuffer;
         return ERROR_Corrupt;
     }
     for (uint index=0; index < CFilterSize; index++) {
         filter->Set (index, tempBuffer[index]);
     }
-#ifdef WINCE
-        my_Tcl_Free((char*)tempBuffer);
-#else
-            delete[] tempBuffer;
-#endif
+    delete[] tempBuffer;
     return OK;
 }
 
@@ -301,11 +248,7 @@ CompressedFilter::UncompressTo (Filter * filter)
 //      Writes the compressed filter to the specified open file.
 //
 errorT
-#ifdef WINCE
-CompressedFilter::WriteToFile (/*FILE **/Tcl_Channel  fp)
-#else
 CompressedFilter::WriteToFile (FILE * fp)
-#endif
 {
     ASSERT (fp != NULL);
 
@@ -324,27 +267,15 @@ CompressedFilter::WriteToFile (FILE * fp)
 //      Reads the compressed filter from the specified open file.
 //
 errorT
-#ifdef WINCE
-CompressedFilter::ReadFromFile (/*FILE **/Tcl_Channel  fp)
-#else
 CompressedFilter::ReadFromFile (FILE * fp)
-#endif
 {
     ASSERT (fp != NULL);
-#ifdef WINCE
-    if (CompressedData) { my_Tcl_Free((char*) CompressedData); }
-#else
     if (CompressedData) { delete[] CompressedData; }
-#endif
 
     CFilterSize = readFourBytes (fp);
     CFilterCount = readFourBytes (fp);
     CompressedLength = readFourBytes (fp);
-#ifdef WINCE
-    CompressedData = (byte *)my_Tcl_Alloc(sizeof(byte [CompressedLength]));
-#else
     CompressedData = new byte [CompressedLength];
-#endif
     byte * pb = CompressedData;
     for (uint i=0; i < CompressedLength; i++, pb++) {
         *pb = readOneByte(fp);

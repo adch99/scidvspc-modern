@@ -5275,12 +5275,12 @@ sc_filter_copy (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     uint targetCount = sourceBase->filter->Count();
     // Check target db has enough capacity
 
-    targetBase->filter->SetCapacity( targetBase->numGames + targetCount);
-
-    if( targetBase->filter != targetBase->dbFilter )
-        targetBase->dbFilter->SetCapacity( targetBase->numGames + targetCount);
-    if( targetBase->treeFilter != NULL)
-        targetBase->treeFilter->SetCapacity( targetBase->numGames + targetCount);
+    uint newSize = targetBase->numGames + targetCount;
+    targetBase->filter->SetCapacity(newSize);
+    if( targetBase->filter != targetBase->dbFilter ) 
+        targetBase->dbFilter->SetCapacity(newSize);
+    if( targetBase->treeFilter != NULL) 
+        targetBase->treeFilter->SetCapacity(newSize);
 
     for (uint i=0; i < sourceBase->numGames; i++) {
         if (sourceBase->filter->Get(i) == 0) { continue; }
@@ -5307,6 +5307,12 @@ sc_filter_copy (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     }
 
     targetBase->gfile->FlushAll();
+
+    targetBase->filter->SetFilterSize(newSize);
+    if( targetBase->filter != targetBase->dbFilter ) 
+        targetBase->dbFilter->SetFilterSize(newSize);
+    if( targetBase->treeFilter != NULL) 
+        targetBase->treeFilter->SetFilterSize(newSize);
 
     // Now write the Index file header and the name file:
     if (targetBase->idx->WriteHeader() != OK) {
