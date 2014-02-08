@@ -5277,6 +5277,7 @@ sc_filter_copy (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     uint newSize = targetBase->numGames + targetCount;
     targetBase->filter->SetCapacity(newSize);
+    // (FilterSize, Count, is increased in sc_savegame below)
     if( targetBase->filter != targetBase->dbFilter ) 
         targetBase->dbFilter->SetCapacity(newSize);
     if( targetBase->treeFilter != NULL) 
@@ -5307,12 +5308,6 @@ sc_filter_copy (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     }
 
     targetBase->gfile->FlushAll();
-
-    targetBase->filter->SetFilterSize(newSize);
-    if( targetBase->filter != targetBase->dbFilter ) 
-        targetBase->dbFilter->SetFilterSize(newSize);
-    if( targetBase->treeFilter != NULL) 
-        targetBase->treeFilter->SetFilterSize(newSize);
 
     // Now write the Index file header and the name file:
     if (targetBase->idx->WriteHeader() != OK) {
@@ -8740,11 +8735,7 @@ sc_savegame (Tcl_Interp * ti, Game * game, gameNumberT gnum, scidBaseT * base)
            base->treeFilter->Append (1);
 
         if (base->duplicates != NULL) {
-#ifdef WINCE
-          my_Tcl_Free((char*)base->duplicates);
-#else
             delete[] base->duplicates;
-#endif
             base->duplicates = NULL;
         }
     }
@@ -8863,12 +8854,13 @@ sc_savegame (Tcl_Interp * ti, scidBaseT * sourceBase, ByteBuffer * bbuf, IndexEn
     // We need to increase the filter size if a game was added:
     if (! replaceMode) {
         base->filter->Append (1);  // Added game is in filter by default.
+        if(base->filter != base->dbFilter)
+           base->dbFilter->Append (1); 
+        if(base->treeFilter)
+           base->treeFilter->Append (1);
+
         if (base->duplicates != NULL) {
-#ifdef WINCE
-          my_Tcl_Free((char*)base->duplicates);
-#else
             delete[] base->duplicates;
-#endif
             base->duplicates = NULL;
         }
     }
