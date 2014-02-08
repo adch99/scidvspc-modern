@@ -12087,11 +12087,7 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     if (strEqual (playerName, "")) {
         if (lastPlayerName != NULL) { playerName = lastPlayerName; }
     } else {
-#ifdef WINCE
-        if (lastPlayerName != NULL) { my_Tcl_Free((char*) lastPlayerName); }
-#else
         if (lastPlayerName != NULL) { delete[] lastPlayerName; }
-#endif
         lastPlayerName = strDuplicate (playerName);
     }
 
@@ -12159,8 +12155,8 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 #endif
     for (uint month=0; month < monthMax; month++) { eloByMonth[month] = 0; }
 
-    // if (setFilter || setOpponent) { db->filter->Fill (0); }
-    if ((setFilter && ! setRefine) || setOpponent) { db->filter->Fill (0); }
+    // if (setFilter || setOpponent) { db->dbFilter->Fill (0); }
+    if ((setFilter && ! setRefine) || setOpponent) { db->dbFilter->Fill (0); }
 
     for (uint i=0; i < db->numGames; i++) {
         IndexEntry * ie = db->idx->FetchEntry (i);
@@ -12183,7 +12179,7 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
         // Remove from filter if not this person
         if (setRefine && whiteId != id && blackId != id) 
-            db->filter->Set (i, 0);
+            db->dbFilter->Set (i, 0);
 
         // Track statistics as white and black:
         if (whiteId == id) {
@@ -12197,7 +12193,7 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             bothscore[STATS_ALL][result]++;
             whitecount[STATS_ALL]++;
             totalcount[STATS_ALL]++;
-            if (db->filter->Get(i) > 0) {
+            if (db->dbFilter->Get(i) > 0) {
                 whitescore[STATS_FILTER][result]++;
                 bothscore[STATS_FILTER][result]++;
                 whitecount[STATS_FILTER]++;
@@ -12209,11 +12205,11 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                 whitecount[STATS_OPP]++;
                 totalcount[STATS_OPP]++;
                 if (setOpponent  &&  filter[WHITE][result]) {
-                    db->filter->Set (i, 1);
+                    db->dbFilter->Set (i, 1);
                 }
             }
             if (setFilter  &&  filter[WHITE][result]) {
-                db->filter->Set (i, 1);
+                db->dbFilter->Set (i, 1);
             }
         } else if (blackId == id) {
             date = ie->GetDate();
@@ -12227,7 +12223,7 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             bothscore[STATS_ALL][result]++;
             blackcount[STATS_ALL]++;
             totalcount[STATS_ALL]++;
-            if (db->filter->Get(i) > 0) {
+            if (db->dbFilter->Get(i) > 0) {
                 blackscore[STATS_FILTER][result]++;
                 bothscore[STATS_FILTER][result]++;
                 blackcount[STATS_FILTER]++;
@@ -12239,11 +12235,11 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                 blackcount[STATS_OPP]++;
                 totalcount[STATS_OPP]++;
                 if (setOpponent  &&  filter[BLACK][result]) {
-                    db->filter->Set (i, 1);
+                    db->dbFilter->Set (i, 1);
                 }
             }
             if (setFilter  &&  filter[BLACK][result]) {
-                db->filter->Set (i, 1);
+                db->dbFilter->Set (i, 1);
             }
         }
 
@@ -12269,6 +12265,8 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             seenRating = true;
         }
     }
+    if (setFilter)
+	updateMainFilter(db);
 
     char temp  [500];
     uint score, percent;
