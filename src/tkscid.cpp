@@ -5860,7 +5860,7 @@ sc_filter_textfilter (ClientData cd, Tcl_Interp * ti, int argc, const char ** ar
 
         while (start < db->numGames) {
 
-            if (db->filter->Get(start) > 0) {
+            if (db->dbFilter->Get(start) > 0) {
                 filteredCount++;
                 IndexEntry * ie = db->idx->FetchEntry (start);
 		date_DecodeToString(ie->GetDate(), datestring);
@@ -5874,13 +5874,14 @@ sc_filter_textfilter (ClientData cd, Tcl_Interp * ti, int argc, const char ** ar
 			// return setUintResult (ti, filteredCount);
                 } else {
 			// remove this game
-			db->filter->Set (start, 0);
+			db->dbFilter->Set (start, 0);
         	        number_removed++;
 		}
             }
             start++;
         }
     }
+    updateMainFilter(db);
     return setUintResult (ti, number_removed);
 }
 
@@ -16870,7 +16871,7 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     }
     int centisecs = timer.CentiSecs();
     sprintf (temp, "%d / %d  (%d%c%02d s)",
-             db->filter->Count(), startFilterCount,
+             db->dbFilter->Count(), startFilterCount,
              centisecs / 100, decimalPointChar, centisecs % 100);
     Tcl_AppendResult (ti, temp, NULL);
 #ifdef SHOW_SKIPPED_STATS
