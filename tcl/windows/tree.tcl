@@ -231,10 +231,11 @@ proc ::tree::Open {{baseNumber 0}} {
   bind $w.f.tl <Button-5> {::move::Forward ; break}
   # bindMouseWheel $w $w.f.tl
 
-  label $w.status -width 1 -anchor w -font font_Small \
-      -relief sunken -textvar tree(status$baseNumber)
-  pack $w.status -side bottom -fill x
-  pack [frame $w.buttons -relief sunken] -side bottom -fill x
+  ### Tree statusbar now unused
+  # label $w.status -width 1 -anchor w -font font_Small -relief sunken -textvar tree(status$baseNumber)
+  # pack $w.status -side bottom -fill x
+
+  pack [frame $w.buttons -relief sunken] -side bottom -fill x -pady 5
   pack $w.progress -side bottom
   pack $w.f -side top -expand 1 -fill both
 
@@ -262,10 +263,9 @@ proc ::tree::Open {{baseNumber 0}} {
   dialogbutton $w.buttons.stop -textvar ::tr(Stop) -command { sc_progressBar }
   dialogbutton $w.buttons.close -textvar ::tr(Close) -command "destroy $w"
 
-  pack $w.buttons.best $w.buttons.training $w.buttons.refresh $w.buttons.adjust \
-      -side left -padx 3 -pady 2
+  pack $w.buttons.best $w.buttons.training $w.buttons.refresh $w.buttons.adjust -side left -padx 3
 
-  packbuttons right $w.buttons.close $w.buttons.stop
+  pack $w.buttons.close $w.buttons.stop -side right -padx 3
   $w.buttons.stop configure -state disabled
 
   wm minsize $w 40 5
@@ -536,7 +536,7 @@ proc ::tree::dorefresh { baseNumber } {
 
   $w.f.tl configure -cursor {}
 
-  ::tree::status "" $baseNumber
+  # ::tree::status "" $baseNumber
   ::windows::stats::Refresh
   if {$::tree(adjustfilter$baseNumber)} {
     set glstart 1
@@ -551,7 +551,7 @@ proc ::tree::dorefresh { baseNumber } {
 
   # ========================================
   if { $tree(fastmode$baseNumber) == 2 } {
-    ::tree::status "" $baseNumber
+    # ::tree::status "" $baseNumber
     sc_progressBar $w.progress bar 251 16
     set moves [sc_tree search -hide $tree(training$baseNumber) -sort $tree(order$baseNumber) -base $baseNumber -fastmode 0]
     ### todo: should we have "-adjust $tree(adjustfilter$baseNumber)"  here ?
@@ -817,9 +817,10 @@ proc ::tree::getLineValues {l} {
   return [list $ngames $freq $success $eloavg $perf]
 }
 
+### Tree statusbar now unused.
+### Identical stats are available in other places, and tree widget gets y-crowded
 
 proc ::tree::status { msg baseNumber } {
-
   global tree
   if {$msg != ""} {
     set tree(status$baseNumber) $msg
