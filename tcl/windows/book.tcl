@@ -447,8 +447,8 @@ if {0} {
     frame $w.left
     frame $w.f
 
-    pack $w.left -side left -pady 10 -expand 1 -fill both
-    pack $w.f -side right -padx 5 -pady 10 -anchor n
+    pack $w.left -side left -pady 5 -expand 1 -fill both
+    pack $w.f -side right -pady 5 -anchor n
 
     # load book names
     set bookPath $::scidBooksDir
@@ -489,10 +489,10 @@ if {0} {
     dialogbutton $w.left.help -text $::tr(Help) -command {helpWindow BookTuning}
     dialogbutton $w.left.close -text $::tr(Close) -command "destroy $w"
     
-    pack $w.left.combo $w.left.add $w.left.remove -side top -padx 5 -pady 3
+    pack $w.left.combo $w.left.add $w.left.remove -side top -padx 3 -pady 3
 
-    pack $w.left.save $w.left.export -side top -padx 5 -pady 3
-    pack $w.left.close $w.left.help $w.left.space2 -side bottom -padx 5 -pady 3
+    pack $w.left.save $w.left.export -side top -padx 3 -pady 3
+    pack $w.left.close $w.left.help $w.left.space2 -side bottom -padx 3 -pady 3
 
     bind $w.left.combo <<ComboboxSelected>> ::book::bookTuningSelect
     bind $w <Destroy> {
@@ -588,6 +588,7 @@ if {0} {
     global ::book::bookTuningMoves
     set ::book::bookTuningMoves {}
     set moves [sc_book moves $::book::bookTuningSlot]
+    set nextmove [sc_game info nextMove]
 
     set w .bookTuningWin
     # erase previous children
@@ -601,14 +602,17 @@ if {0} {
     set row 0
     foreach {x y} $moves {
       lappend ::book::bookTuningMoves $x
-      label $w.f.m$row -text [::trans $x] -justify right -anchor e -width 5 -font font_Fixed -padx 3
+      label $w.f.m$row -text [::trans $x] -justify right -anchor e -width 5 -font font_Fixed
+      if {$x == $nextmove} {
+        $w.f.m$row configure -background lemonchiffon2
+      }
       bind $w.f.m$row <ButtonPress-1> "::book::makeBookMove $x"
       spinbox $w.f.sp$row -from 0 -to 100 -width 3 -font font_Fixed
       set pct $y
       set value [string map {% {}} $pct]
       $w.f.sp$row set $value
-      grid $w.f.m$row  -row $row -column 0 -sticky w -pady 2
-      grid $w.f.sp$row -row $row -column 1 -sticky w -pady 2
+      grid $w.f.m$row  -row $row -column 0 -sticky w -pady 1
+      grid $w.f.sp$row -row $row -column 1 -sticky w -pady 1 -padx 4
 
       $w.left.remove.otherMoves add command -label [::trans $x] -command "::book::removeBookMove $x $row"
 
