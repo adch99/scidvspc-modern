@@ -917,6 +917,12 @@ translate G UnmarkCurrent {Μη Επισήμανση Τρέχουσας}
 translate G UnmarkFilter {Μη Επισήμανση Φιλτραρισμένων}
 translate G UnmarkAll {Μη Επισήμανση Όλων}
 translate G Spellchecking {Συλλαβισμός}
+# ====== TODO To be translated ======
+translate G MakeCorrections {Make Corrections}
+# ====== TODO To be translated ======
+translate G Ambiguous {Ambiguous}
+# ====== TODO To be translated ======
+translate G Surnames {Surnames}
 translate G Players {Παικτών}
 translate G Events {Διοργανώσεων}
 translate G Sites {Τόπων}

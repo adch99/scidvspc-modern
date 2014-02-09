@@ -979,6 +979,12 @@ translate B UnmarkCurrent {Desmarcar jogo corrente}
 translate B UnmarkFilter {Desmarcar jogos filtrados}
 translate B UnmarkAll {Desmarcar todos os jogos}
 translate B Spellchecking {Verificacao Ortografica}
+# ====== TODO To be translated ======
+translate B MakeCorrections {Make Corrections}
+# ====== TODO To be translated ======
+translate B Ambiguous {Ambiguous}
+# ====== TODO To be translated ======
+translate B Surnames {Surnames}
 translate B Players {Jogadores}
 translate B Events {Eventos}
 translate B Sites {Lugares}

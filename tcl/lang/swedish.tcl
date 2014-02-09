@@ -900,6 +900,12 @@ translate W UnmarkCurrent {Avmarkera aktuellt parti}
 translate W UnmarkFilter {Avmarkera partierna i filtret}
 translate W UnmarkAll {Avmarkera alla partier}
 translate W Spellchecking {Rättstava}
+# ====== TODO To be translated ======
+translate W MakeCorrections {Make Corrections}
+# ====== TODO To be translated ======
+translate W Ambiguous {Ambiguous}
+# ====== TODO To be translated ======
+translate W Surnames {Surnames}
 translate W Players {Spelare}
 translate W Events {Evenemang}
 translate W Sites {Platser}

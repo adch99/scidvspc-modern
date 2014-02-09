@@ -1052,6 +1052,12 @@ translate O UnmarkCurrent {Fjern merking på gjeldende parti}
 translate O UnmarkFilter {Fjern merking på filtrerte partier}
 translate O UnmarkAll {Fjern merking på alle partier}
 translate O Spellchecking {Stavekontroll}
+# ====== TODO To be translated ======
+translate O MakeCorrections {Make Corrections}
+# ====== TODO To be translated ======
+translate O Ambiguous {Ambiguous}
+# ====== TODO To be translated ======
+translate O Surnames {Surnames}
 translate O Players {Spillere}
 translate O Events {Anledninger}
 translate O Sites {Steder}

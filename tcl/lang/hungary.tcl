@@ -981,6 +981,12 @@ translate H UnmarkCurrent {Eltávolítja az aktuális játszma megjelölését.}
 translate H UnmarkFilter {Eltávolítja a szûrt játszmák megjelölését.}
 translate H UnmarkAll {Minden játszma megjelölését eltávolítja.}
 translate H Spellchecking {Helyesírás-ellenõrzés}
+# ====== TODO To be translated ======
+translate H MakeCorrections {Make Corrections}
+# ====== TODO To be translated ======
+translate H Ambiguous {Ambiguous}
+# ====== TODO To be translated ======
+translate H Surnames {Surnames}
 translate H Players {Játékosok}
 translate H Events {Események}
 translate H Sites {Helyszínek}

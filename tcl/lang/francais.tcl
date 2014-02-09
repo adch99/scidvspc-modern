@@ -914,6 +914,12 @@ translate F UnmarkCurrent {Désélectionner la partie en cours}
 translate F UnmarkFilter {Désélectionner les parties filtrées}
 translate F UnmarkAll {Désélectionner toutes les parties}
 translate F Spellchecking {Vérification orthographique}
+# ====== TODO To be translated ======
+translate F MakeCorrections {Make Corrections}
+# ====== TODO To be translated ======
+translate F Ambiguous {Ambiguous}
+# ====== TODO To be translated ======
+translate F Surnames {Surnames}
 translate F Players {Joueurs}
 translate F Events {Événements}
 translate F Sites {Lieux}

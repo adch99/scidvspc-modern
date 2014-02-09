@@ -973,6 +973,12 @@ translate C UnmarkCurrent {Odznaèit aktuální partii}
 translate C UnmarkFilter {Odznaèit filtrované partie}
 translate C UnmarkAll {Odznaèit v¹echny partie}
 translate C Spellchecking {Kontrola pravopisu}
+# ====== TODO To be translated ======
+translate C MakeCorrections {Make Corrections}
+# ====== TODO To be translated ======
+translate C Ambiguous {Ambiguous}
+# ====== TODO To be translated ======
+translate C Surnames {Surnames}
 translate C Players {Hráèi}
 translate C Events {Turnaje}
 translate C Sites {Místa}

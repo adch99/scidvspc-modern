@@ -973,6 +973,12 @@ translate I UnmarkCurrent {Smarca la partita attuale}
 translate I UnmarkFilter {Smarca le partite del filtro}
 translate I UnmarkAll {Smarca tutte le partite}
 translate I Spellchecking {Controllo nome}
+# ====== TODO To be translated ======
+translate I MakeCorrections {Make Corrections}
+# ====== TODO To be translated ======
+translate I Ambiguous {Ambiguous}
+# ====== TODO To be translated ======
+translate I Surnames {Surnames}
 translate I Players {Giocatori}
 translate I Events {Eventi}
 translate I Sites {Siti}

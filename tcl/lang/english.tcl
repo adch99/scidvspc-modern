@@ -911,6 +911,9 @@ translate E UnmarkCurrent {Unmark current game}
 translate E UnmarkFilter {Unmark filter games}
 translate E UnmarkAll {Unmark all games}
 translate E Spellchecking {Spell-checking}
+translate E MakeCorrections {Make Corrections}
+translate E Ambiguous {Ambiguous}
+translate E Surnames {Surnames}
 translate E Players {Players}
 translate E Events {Events}
 translate E Sites {Sites}

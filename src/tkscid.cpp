@@ -13544,8 +13544,7 @@ sc_name_spellcheck (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
         strCopy (tempStr, ".");
     }
 
-    Tcl_AppendResult (ti, tempStr, "\n", NULL);
-    Tcl_AppendResult (ti, "Press 'F1' for help.\n", dstr->Data(), NULL);
+    Tcl_AppendResult (ti, tempStr, "\n", dstr->Data(), NULL);
 
     delete dstr;
 #endif

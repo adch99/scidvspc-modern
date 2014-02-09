@@ -1052,6 +1052,12 @@ translate Y UnmarkCurrent {Demarkiraj tekuæu partiju}
 translate Y UnmarkFilter {Demarkiraj filtrirane partije}
 translate Y UnmarkAll {Demarkiraj sve partije}
 translate Y Spellchecking {Provera pravopisa}
+# ====== TODO To be translated ======
+translate Y MakeCorrections {Make Corrections}
+# ====== TODO To be translated ======
+translate Y Ambiguous {Ambiguous}
+# ====== TODO To be translated ======
+translate Y Surnames {Surnames}
 translate Y Players {Igraèi}
 translate Y Events {Turniri}
 translate Y Sites {Mesta}

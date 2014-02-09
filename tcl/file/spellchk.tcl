@@ -7,12 +7,11 @@ set spell_maxCorrections 2000
 set spellcheckSurnames 0
 set spellcheckAmbiguous 0
 
-# readSpellCheckFile:
 #    Presents a File Open dialog box for a Scid spellcheck file,
 #    then tries to read the file. If the parameter "message" is true
 #    (which is the default), a message box indicating the results
 #    is displayed.
-#
+
 proc readSpellCheckFile {{message 1}} {
   global spellCheckFile spellCheckFileExists
 
@@ -68,6 +67,7 @@ proc openSpellCheckWin {type {parent .}} {
     }
   }
   busyCursor .
+  update idletasks
   if {[catch {sc_name spellcheck -max $spell_maxCorrections \
                 -surnames $spellcheckSurnames \
                 -ambiguous $spellcheckAmbiguous $type} result]} {
@@ -91,15 +91,15 @@ proc openSpellCheckWin {type {parent .}} {
   pack $f -side bottom -ipady 1 -fill x -pady 3
 
   checkbutton $f.ambig -variable spellcheckAmbiguous \
-    -text "Ambiguous" -command "updateSpellCheckWin $type"
+    -textvar ::tr(Ambiguous) -command "updateSpellCheckWin $type"
   pack $f.ambig -side left -padx 2 -ipady 2 -ipadx 3
   if {$type == "Player"} {
     checkbutton $f.surnames -variable spellcheckSurnames \
-      -text "Surnames" -command "updateSpellCheckWin Player"
+      -textvar ::tr(Surnames) -command "updateSpellCheckWin Player"
     pack $f.surnames -side left -padx 2 -ipady 2 -ipadx 3
   }
 
-  button $f.ok -text "Make Corrections" -underline 0 -command {
+  button $f.ok -textvar ::tr(MakeCorrections) -underline 0 -command {
     busyCursor .
     set spelltext ""
     catch {set spelltext [.spellcheckWin.text.text get 1.0 end-1c]}
@@ -112,7 +112,7 @@ proc openSpellCheckWin {type {parent .}} {
     set messageIcon info
     if {$result} { set messageIcon error }
     tk_messageBox -type ok -parent .spellcheckWin -icon $messageIcon \
-      -title "Scid: Spellcheck results" -message $spell_result
+      -title "Spellcheck results" -message $spell_result
     unbusyCursor .
     focus .main
     destroy .spellcheckWin
@@ -122,13 +122,16 @@ proc openSpellCheckWin {type {parent .}} {
   }
   bind $w <Alt-m> "$f.ok invoke; break"
 
-  button $f.cancel -text "Cancel" -underline 0 -command {
+  button $f.cancel -textvar ::tr(Cancel) -underline 0 -command {
     focus .main
     destroy .spellcheckWin
   }
+
   bind $w <Alt-c> "$f.cancel invoke; break"
 
-  pack $f.cancel $f.ok -side right -padx 5
+  button $f.help -textvar ::tr(Help) -command {helpWindow Maintenance Spellcheck}
+
+  pack $f.cancel $f.help $f.ok -side right -padx 5
 
   set f [frame $w.text]
   pack $w.text -expand yes -fill both

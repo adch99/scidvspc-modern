@@ -916,6 +916,12 @@ translate P UnmarkCurrent {Usuñ zaznaczenie aktualnej partii}
 translate P UnmarkFilter {Usuñ zaznaczenie partii z filtra}
 translate P UnmarkAll {Usuñ zaznaczenie wszystkich partii}
 translate P Spellchecking {Pisownia}
+# ====== TODO To be translated ======
+translate P MakeCorrections {Make Corrections}
+# ====== TODO To be translated ======
+translate P Ambiguous {Ambiguous}
+# ====== TODO To be translated ======
+translate P Surnames {Surnames}
 translate P Players {Zawodnicy}
 translate P Events {Turnieje}
 translate P Sites {Miejsca}

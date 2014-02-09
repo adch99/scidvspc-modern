@@ -934,6 +934,12 @@ translate D UnmarkCurrent {Entmarkiere aktuelle Partie}
 translate D UnmarkFilter {Entmarkiere Partien im Filter}
 translate D UnmarkAll {Entmarkiere alle Partien}
 translate D Spellchecking {Schreibkorrektur}
+# ====== TODO To be translated ======
+translate D MakeCorrections {Make Corrections}
+# ====== TODO To be translated ======
+translate D Ambiguous {Ambiguous}
+# ====== TODO To be translated ======
+translate D Surnames {Surnames}
 translate D Players {Spieler}
 translate D Events {Ereignis}
 translate D Sites {Ort}

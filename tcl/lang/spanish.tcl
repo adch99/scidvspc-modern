@@ -919,6 +919,12 @@ translate S UnmarkCurrent {No marcar partida actual}
 translate S UnmarkFilter {No marcar partidas filtradas}
 translate S UnmarkAll {No marcar todas las partidas}
 translate S Spellchecking {Revisión ortográfica}
+# ====== TODO To be translated ======
+translate S MakeCorrections {Make Corrections}
+# ====== TODO To be translated ======
+translate S Ambiguous {Ambiguous}
+# ====== TODO To be translated ======
+translate S Surnames {Surnames}
 translate S Players {Jugadores}
 translate S Events {Eventos}
 translate S Sites {Lugares}

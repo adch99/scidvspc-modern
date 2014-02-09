@@ -906,6 +906,12 @@ translate N UnmarkCurrent {Verwijder Markering huidige partij)}
 translate N UnmarkFilter {Verwijder Markering geselecteerde partijen)}
 translate N UnmarkAll {Verwijder Markering alle partijen)}
 translate N Spellchecking {Spellingcontrole}
+# ====== TODO To be translated ======
+translate N MakeCorrections {Make Corrections}
+# ====== TODO To be translated ======
+translate N Ambiguous {Ambiguous}
+# ====== TODO To be translated ======
+translate N Surnames {Surnames}
 translate N Players {Spelers}
 translate N Events {Evenementen}
 translate N Sites {Plaatsen}
