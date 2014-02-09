@@ -50,7 +50,7 @@ proc ::docking::handleConfigureEvent { cmd } {
 proc ::docking::find_tbn {path} {
   variable tbs
 
-  if {$path==""} { return $path }
+  if {$path=="" || ![winfo exists $path]} { return "" }
   # already a managed notebook?
   if {[info exists tbs($path)]} {
     return $path
@@ -195,42 +195,19 @@ proc ::docking::_cleanup_tabs {srctab} {
 # cleans up a window when it was closed without calling the notebook menu
 
 proc ::docking::cleanup { w { origin "" } } {
-  variable tbs
+  if {$w == $origin || $origin == ""} {
 
-  if { ! $::docking::USE_DOCKING } { return }
-
-  # if the destroy event came from a sub-widget, do nothing. Necessary because if a widget is destroyed, it sends a destroy event to
-  # its containing window
-  if { [ string last "." $origin ] > 0 } {
-    return
-  }
-
-  set dockw ".fdock[string range $w 1 end]"
-
-  catch {
-    bind $w <Destroy> {}
-    bind $dockw <Destroy> {}
-  }
-
-  # Maybe during Scid closing, some race conditions lead to exceptions ? In case, catch this by default
-  foreach nb [array names tbs] {
-    if { [lsearch  [$nb tabs] $dockw ] != -1 } {
-      $nb forget $dockw
-      # Wish 8.6 "catch destroy" dumps core - S.A.
-      if {!$::docking::buggywish} {
-       catch {destroy $dockw}
-      }
-      ::docking::_cleanup_tabs $nb
-      return
+    set dockw ".fdock[string range $w 1 end]"
+    set tab [::docking::find_tbn $dockw]
+    if {$tab != ""} {
+      $tab forget $dockw
+      ::docking::_cleanup_tabs $tab
+      catch { unset ::docking::notebook_name($dockw) }
+      ::docking::setTabStatus
     }
-  }
+    after idle "if {[winfo exists $dockw]} { destroy $dockw }"
 
-  # Make sure the frame is destroyed
-  if { [winfo exists $dockw]} {
-    destroy $dockw
   }
-
-  array unset ::docking::notebook_name $dockw
 
 }
 ################################################################################
@@ -727,16 +704,18 @@ proc ::docking::restoreGeometry {} {
     set sash [lindex $elt 1]
     set i 0
     foreach pos $sash {
-      $pw sashpos $i $pos
+      # in case - window has probably been undocked (nb1)
+      catch {$pw sashpos $i $pos}
       incr i
     }
   }
 }
-################################################################################
+
 # restores a notebook in a pre-existing panedwindow
 # panewindow -> pw
 # widget name -> name
 # data to make tabs -> data (list of names wich can be used to trigger the correct windows)
+
 proc ::docking::layout_restore_nb { pw name tabs} {
   variable tbcnt
   variable tbs
@@ -791,7 +770,13 @@ proc ::docking::layout_restore_nb { pw name tabs} {
   }
 
   # force the selection of first tab
-  $nb select [ lindex [ $nb tabs] 0 ]
+  if {[catch {$nb select [ lindex [ $nb tabs] 0 ]}]} {
+    # window has probably been undocked (nb1)
+    # so pane needs removing
+    destroy $nb
+    set pw $::docking::tbs($nb)
+    unset ::docking::tbs($nb)
+  }
 
   set ::docking::layout_dest_notebook ""
 }
