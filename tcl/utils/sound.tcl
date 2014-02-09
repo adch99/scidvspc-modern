@@ -41,7 +41,7 @@ proc ::utils::sound::Setup {} {
   set devices [snack::audio outputDevices]
   ::splash::add "   Available output devices are: $devices"
 
-  if {[info exists ::utils::sound::device]} {
+  if {$::utils::sound::device != {}} {
     ::utils::sound::SetDevice
   } else {
     set ::utils::sound::device [lindex $devices 0]

@@ -1123,6 +1123,7 @@ set ::utils::sound::announceForward 0
 set ::utils::sound::announceBack 0
 set ::utils::sound::announceTock 0
 set ::utils::sound::soundFolder {} ;# disabled by default
+set ::utils::sound::device {}
 
 set ::book::lastBook1 {} ; # book name without extension (.bin)
 set ::book::lastBook2 {}
