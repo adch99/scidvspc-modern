@@ -1197,6 +1197,8 @@ proc ::board::san {sqno} {
 #   in Scid (see the boardSizes variable in start.tcl).
 #   The showmat parameter adds a frame to display material balance
 
+set ::board::frame 5
+
 proc ::board::new {w {psize 40} {showmat 0} {flip 0}} {
   if {[winfo exists $w]} { return }
 
@@ -1212,13 +1214,19 @@ proc ::board::new {w {psize 40} {showmat 0} {flip 0}} {
   set ::board::_showmat($w) $showmat
 
   set border $::board::_border($w)
-  set bsize [expr {$psize * 8 + $border * 9} ]
+  if {$w == ".main.board"} {
+    set frame $::board::frame
+  } else {
+    set frame 0
+  }
+  set bsize [expr {$psize * 8 + $border * 9 - $frame} ]
 
   ### Main board initialised S.A
   # moved the side to move column from the right to the left
 
   frame $w -class Board
-  canvas $w.bd -width $bsize -height $bsize -background $::bgcolor -borderwidth 0 -highlightthickness 0
+  canvas $w.bd -width $bsize -height $bsize -background $::bgcolor -borderwidth $frame -highlightthickness 0 -relief flat
+
   grid anchor $w center
 
   grid $w.bd -row 1 -column 3 -rowspan 8 -columnspan 8
@@ -1365,7 +1373,12 @@ proc ::board::resize2 {w psize} {
   }
 
   set border $::board::_border($w)
-  set bsize [expr {$psize * 8 + $border * 9} ]
+  if {$w == ".main.board"} {
+    set frame $::board::frame
+  } else {
+    set frame 0
+  }
+  set bsize [expr {$psize * 8 + $border * 9 - $frame} ]
 
   $w.bd configure -width $bsize -height $bsize
   set ::board::_size($w) $psize
