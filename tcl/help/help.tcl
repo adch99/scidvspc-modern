@@ -2437,6 +2437,16 @@ perform a Namebase <a Compact>Compaction</a>.
   <p>
   Name substitution will not occur in games dated before the Player's birth, or after death - unless the birth and death dates are removed from the translation.
   </p>
+<p>
+For problematic PGN files, it may be necessary to use regexps and a word processor such as "vi".
+For example - the first two examples remove four digit ELOs from player names. The last removes trailing spaces from all tags.
+<br>
+:%s/\(White .*\) *[[:digit:]][[:digit:]][[:digit:]][[:digit:]].*"/\1"/g
+<br>
+:%s/\(Black .*\) *[[:digit:]][[:digit:]][[:digit:]][[:digit:]].*"/\1"/g
+<br>
+:%s/ *"]$/"]/
+</p>
 
   <h3><name Ratings>Adding Elo Ratings to Games</name></h3>
   <p>
