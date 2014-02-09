@@ -11586,6 +11586,7 @@ sc_name_correct (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     IndexEntry * ie;
     IndexEntry newIE;
     uint instanceCount = 0;
+    uint datefailedCount = 0;
     for (uint i=0; i < db->numGames; i++) {
         ie = db->idx->FetchEntry (i);
         newIE = *ie;
@@ -11601,11 +11602,14 @@ sc_name_correct (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                 dateT date = ie->GetDate();
                 // These startDate comparisons check each game for whether it occured before player born
                 // but perhaps it's desirable to nominate an age (say 10 years; being uint -5120)
+                // And they also stop name corrections when no GetDate is known, but this may not desired.
                 if ((startDate[oldID] == ZERO_DATE  ||   date >= startDate[oldID])
                     &&  (endDate[oldID] == ZERO_DATE  ||   date <= endDate[oldID])) {
                     newIE.SetWhite (newID);
                     corrected = true;
                     instanceCount++;
+                } else {
+                    datefailedCount++;
                 }
             }
             // Now check Black name:
@@ -11618,6 +11622,8 @@ sc_name_correct (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                     newIE.SetBlack (newID);
                     corrected = true;
                     instanceCount++;
+                } else {
+                    datefailedCount++;
                 }
             }
             break;
@@ -11691,6 +11697,10 @@ sc_name_correct (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
              strPlural (correctionCount),
              instanceCount, strPlural (instanceCount));
     Tcl_AppendResult (ti, temp, NULL);
+    if (datefailedCount > 0) {
+      sprintf (temp, "\n\n%u player name changes were ignored because of player age/game date considerations.", datefailedCount);
+      Tcl_AppendResult (ti, temp, NULL);
+    }
 
     return TCL_OK;
 }
