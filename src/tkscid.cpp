@@ -5536,11 +5536,7 @@ sc_filter_negate (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         for (i=0; i < db->numGames; i++) {
           filter->Set (i, filter->Get(i) == 0 ? 1 : 0);
         }
-        if (db->filter != db->dbFilter) {
-          for (i=0; i < db->numGames; i++) {
-            db->filter->Set(i,db->dbFilter->Get(i));
-          }
-        }
+        setMainFilter (db);
     }
     return TCL_OK;
 }
@@ -5881,7 +5877,7 @@ sc_filter_textfilter (ClientData cd, Tcl_Interp * ti, int argc, const char ** ar
             start++;
         }
     }
-    updateMainFilter(db);
+    setMainFilter(db);
     return setUintResult (ti, number_removed);
 }
 
@@ -5962,6 +5958,17 @@ updateMainFilter2( scidBaseT * dbase)
             if( dbase->dbFilter->Get(i) > 0 && dbase->treeFilter->Get(i) > 0)
                 dbase->filter->Set(i,dbase->treeFilter->Get(i));
         }
+    }
+}
+
+void
+setMainFilter( scidBaseT * dbase)
+{
+    if (dbase->filter != dbase->dbFilter)
+    {
+      for (uint i=0; i < dbase->numGames; i++) {
+	dbase->filter->Set(i,dbase->dbFilter->Get(i));
+      }
     }
 }
 
@@ -12276,7 +12283,7 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         }
     }
     if (setFilter)
-	updateMainFilter(db);
+	setMainFilter(db);
 
     char temp  [500];
     uint score, percent;
@@ -12823,11 +12830,7 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             }
         }
     }
-#ifdef WINCE
-    my_Tcl_Free((char*) eloByMonth);
-#else
     delete[] eloByMonth;
-#endif
     return TCL_OK;
 }
 
@@ -15041,7 +15044,7 @@ sc_search (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     }
 
     // Update the normal filter
-    updateMainFilter( db);
+    setMainFilter(db);
 
     return ret;
 }

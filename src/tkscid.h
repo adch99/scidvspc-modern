@@ -375,6 +375,7 @@ translate (Tcl_Interp * ti, const char * name)
 //
 void updateMainFilter( scidBaseT * dbase);
 void updateMainFilter2( scidBaseT * dbase);
+void setMainFilter( scidBaseT * dbase);
 void clearFilter( scidBaseT * dbase, uint size);
 void filter_reset (scidBaseT * base, byte value);
 
