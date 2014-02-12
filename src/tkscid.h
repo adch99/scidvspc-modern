@@ -167,7 +167,7 @@ struct scidBaseT {
     int          undoIndex;
     int          undoMax;
     int          undoCurrent;   // which undo buffer has the currently saved game
-    bool         undoFull;	// if buffer gets filled, we cant unset gameAltered
+    bool         undoCurrentNotAvail;	// if buffer gets filled, we cant unset gameAltered
     int          gameNumber;    // game number of active game.
     bool         gameAltered;   // true if game is modified
     bool         inUse;         // true if the database is open (in use).

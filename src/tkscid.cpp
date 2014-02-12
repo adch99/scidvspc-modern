@@ -516,7 +516,7 @@ scid_InitTclTk (Tcl_Interp * ti)
         db->undoMax = -1;
         db->undoIndex = -1;
         db->undoCurrent = -1;
-        db->undoFull = false;
+        db->undoCurrentNotAvail = false;
         db->gameNumber = -1;
         db->gameAltered = false;
         db->gfile = new GFile;
@@ -1491,7 +1491,7 @@ sc_base_close (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     basePtr->undoMax = -1;
     basePtr->undoIndex = -1;
     basePtr->undoCurrent = -1;
-    basePtr->undoFull = false;
+    basePtr->undoCurrentNotAvail = false;
     for (int u = 0; u < UNDO_MAX; u++) {
       if ( basePtr->undoGame[u] != NULL ) {
         delete basePtr->undoGame[u];
@@ -6174,7 +6174,7 @@ sc_game (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 	    db->undoGame[db->undoIndex] = g;
 
 	    db->undoIndex--;
-	    db->gameAltered = (db->undoIndex != db->undoCurrent) || db->undoFull ;
+	    db->gameAltered = (db->undoIndex != db->undoCurrent) || db->undoCurrentNotAvail ;
         }
         break;
 
@@ -6203,7 +6203,7 @@ sc_game (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
 	    // decrement undoCurrent and check if full
 	    if (db->undoCurrent-- < -1) {
-	      db->undoFull = true;
+	      db->undoCurrentNotAvail = true;
 	      db->undoCurrent = -1;
 	    }
 	}
@@ -6240,7 +6240,7 @@ sc_game (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 	    db->undoGame[db->undoIndex] = db->game;
 
 	    // db->gameAltered = true; //g->GetAltered();
-	    db->gameAltered = (db->undoIndex != db->undoCurrent) || db->undoFull ;
+	    db->gameAltered = (db->undoIndex != db->undoCurrent) || db->undoCurrentNotAvail ;
 	    db->game = g;
         }
         break;
@@ -8587,6 +8587,8 @@ sc_game_push (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 //    Called by sc_game_save and by clipbase functions to save
 //    a new game or replacement game to a database.
 //    Any errors are appended to the Tcl interpreter result.
+//
+//   (NB - See below for another sc_savegame, which is used in switcher game copy (and else???))
 int
 sc_savegame (Tcl_Interp * ti, Game * game, gameNumberT gnum, scidBaseT * base)
 {
@@ -8748,6 +8750,8 @@ sc_savegame (Tcl_Interp * ti, Game * game, gameNumberT gnum, scidBaseT * base)
         }
     }
     base->undoCurrent = base->undoIndex;
+    base->undoCurrentNotAvail = false;
+
     return OK;
 }
 
@@ -9824,7 +9828,7 @@ void sc_game_undo_reset() {
   db->undoMax = -1;
   db->undoIndex = -1;
   db->undoCurrent = -1;
-  db->undoFull = false;
+  db->undoCurrentNotAvail = false;
   for (int i = 0 ; i < UNDO_MAX ; i++) {
     if (db->undoGame[i] != NULL) {
       delete db->undoGame[i];
