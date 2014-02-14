@@ -560,7 +560,7 @@ proc ::docking::add_tab {path anchor args} {
         e { set rel {$x > $_x} }
       }
       # give some windows the largest (widest) pane
-      if {($path == ".fdockfics" && $tb != ".tb")|| $path == ".fdockcrosstabWin" || $path == ".fdockglistWin"} {
+      if {($path == ".fdockfics" && $tb != ".nb")|| $path == ".fdockcrosstabWin" || $path == ".fdockglistWin"} {
         set rel {$w > $_w}
       }
       if {$dsttab==""} {
@@ -568,6 +568,8 @@ proc ::docking::add_tab {path anchor args} {
         set _x $x
         set _y $y
         set _w $w
+        # hack to give fics another tab
+        # if {$tb == ".nb"} {set _w 0}
       } elseif { [expr $rel] } {
         set dsttab $tb
         set _x $x
