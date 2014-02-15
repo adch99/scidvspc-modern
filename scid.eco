@@ -1,23 +1,17 @@
-#############################
-#
 # scid.eco
 #
-# This is the ECO classification file for Scid.
+# Encyclopaedia of Chess Openings file for Scid vs. PC
 #
-# The Scid ECO code format allows for extensions: each basic code can have
-# a lower case letter (a-z) appended, and a further level (1-4) can be
-# added to each extension. So the order of ECO codes for A00 is:
+# Copyright (C) 1999- Shane Hudson and others.
+# Last updated: Febuary, 2014
+#
+# In addition to standard ECO definitions, scid.eco allows for extensions:
+# Each basic code can have a lower case letter extension (a-z), and an extra
+# level (1-4). So the order of ECO codes for A00 is:
 # A00, A00a, A00a1, A00a2, A00a3, A00a4, A00b, A00b1, ..., A00z4.
 #
-# You can convert this file to PGN format with "eco2pgn" and to EPD
-# format with "eco2epd" -- these Scid programs are not compiled by
-# default so you may need to compile them first, e.g. "make eco2pgn".
-#
-# Copyright (C) 1999-2003  Shane Hudson (sgh@users.sourceforge.net)
-# Created: June 1999.
-# Last update: October 2003.
-# Scid website: http://scid.sourceforge.net/
-
+# You can convert this file to PGN format with the "eco2pgn.py" script,
+# and to EPD with the "eco2epd" (use "make eco2pgn").
 
 A00a "Start"  *
 A00b "Barnes Opening"  1.f3 *
