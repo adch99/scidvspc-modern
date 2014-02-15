@@ -815,6 +815,10 @@ proc nameEditor {} {
       set err [catch {sc_name edit $editNameType $editNameSelect $editDate $editDateNew} result]
     } else {
       set err [catch {sc_name edit $editNameType $editNameSelect $editName $editNameNew} result]
+      # Refresh Player Info if old player name matches
+      if {$editNameType == "player" && [winfo exists .playerInfoWin] && $playerInfoName == $editName} {
+        playerInfo $editNameNew
+      }
     }
     if {$err} {
       tk_messageBox -type ok -icon info -parent .nedit -title "Scid" \
