@@ -162,6 +162,7 @@ proc ::windows::eco::Refresh {{code "x"}} {
 
   ::utils::graph::create eco -width $width -height $height -xtop 50 -ytop 20 \
     -xmin 0.5 -xtick 1 -ytick $hline -font font_Small -canvas $graph.c
+  # Tree colours are grey10 grey75 white
   ::utils::graph::data eco data -color SteelBlue4 -points 0 -lines 0 -bars 1 \
     -barwidth 0.8 -outline black -coords $data
   ::utils::graph::data eco draws -color SteelBlue3 -points 0 -lines 0 -bars 1 \

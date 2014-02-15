@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 #
 # eco2pgn
-# This file converts the Scid openings classification file (scid.eco)
-# and converts it into a PGN file. The main advantage of having it as
-# a PGN file is the ability to explore it with the Tree window in Scid.
+#
+# Converts the Scid openings classification file (scid.eco) to a PGN file.
+# This is useful to allow exploration of scid.eco in Scid's Tree Window.
 #
 # Usage: eco2pgn scid.eco > scideco.pgn
 #

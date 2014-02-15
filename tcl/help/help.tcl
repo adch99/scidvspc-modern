@@ -4038,18 +4038,16 @@ set helpText(NAGs) {<h1>NAG Values</h1>
 set helpTitle(ECO) "ECO Guide"
 set helpText(ECO) {<h1>ECO Codes</h1>
   <p>
-  An <b>Encyclopedia of Chess Openings</b> classification
-  is a code used to identify chess openings.
-  It consists of a letter from A to E, followed by two
-  digits. For example,
-  <b>C33</b> represents the <b>King's Gambit Accepted</b>.
+  <b>Encyclopedia of Chess Openings</b> classifications are codes used to identify chess openings.
+  Each code consists of a letter from A to E, followed by two digits. (For example,
+  <b>C33</b>, which represents the <b>King's Gambit Accepted</b>).
   There are five hundred distinct ECO codes.
   </p>
 
   <h3>Scid Extensions to ECO</h3>
   <p>
-  However, the ECO system is very limited and insufficient for modern games.
-  Some codes are never used, while others are very frequent.
+  The ECO system is, howvere, very limited and insufficient for modern games.
+  Some codes are never used, while others are overly frequent.
   To improve this, Scid allows an optional
   extension to the basic ECO codes. Codes may be extended with a
   letter from a to z, with a further extension - a digit from 1 to 4 - being
@@ -4062,9 +4060,8 @@ set helpText(ECO) {<h1>ECO Codes</h1>
   <h3><name Browser>The ECO Browser Window</name></h3>
   <p>
   Scid's
-  <run ::windows::eco::Refresh><green>ECO Browser Window</green></run> shows positions associated
-  with each ECO code, and their frequency and performance 
-  (<b>in ECO classified games</b>) in the current database. 
+  <run ::windows::eco::Open><green>ECO Browser</green></run> shows positions associated
+  with each ECO code, and their frequency and performance amongst <b>ECO classified games</b> in the current database. 
   </p>
   <p>
   The upper pane shows a bar graph with three sections: the lowest
@@ -4184,7 +4181,7 @@ set helpText(ECO) {<h1>ECO Codes</h1>
   <li>  <b>E9</b>  E7 + 4...d6 5.Nf3: <i>King's Indian, main lines</i> </li>
   </ul>
 
-  <p><footer>Updated: Scid vs. PC 4.4, April 2011</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.12, Feb 2014</footer></p>
 }
 
 
