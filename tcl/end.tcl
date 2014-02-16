@@ -1,4 +1,7 @@
-# end.tcl: part of Scid.
+### end.tcl: part of Scid.
+#
+# Mixup of all sorts of stuff
+#
 # Copyright (C) 2000-2003 Shane Hudson.
 
 # findNovelty:
@@ -559,6 +562,105 @@ proc exportGames {selection exportType} {
     catch { file copy -force $sourcedir [file dirname $fName] }
   }
 
+}
+
+proc openExportGList {} {
+  global glexport
+
+  if {[sc_filter count] < 1} {
+    tk_messageBox -type ok -icon info -title "Scid" \
+      -message "There are no games in the filter." -parent .glistWin
+    return
+  }
+
+  set w .glexport
+
+  if {[winfo exists $w]} {
+    raiseWin $w
+    updateExportGList
+    return
+  }
+
+  toplevel $w
+  wm state $w withdrawn
+  wm title $w "Save Game List"
+  wm resizable $w 1 0
+
+  pack [frame $w.format] -side top -fill x -expand 1 -pady 5
+  label $w.format.lfmt -text "Format" -font font_Bold
+  pack $w.format.lfmt -side left -padx 5
+  entry $w.format.fmt -textvar glexport -font font_Fixed
+  pack $w.format.fmt -side right -fill x -expand 1 -padx 3
+
+  text $w.tfmt -width 1 -height 5 -font font_Fixed -wrap none -relief flat
+  pack $w.tfmt -side top -fill x
+  $w.tfmt insert end \
+"w White            b Black            W White Elo        B Black Elo
+m Moves count      r Result           y Year             d Date
+e Event            s Site             n Round            o ECO code
+g Game number      f Filtered number  F Final material   S Non-std start pos
+D Deleted flag     U User flags       C Comments flag    V Variations flag  \n"
+
+  $w.tfmt configure -cursor top_left_arrow -state disabled
+  label $w.lpreview -text $::tr(Preview) -font font_Bold
+  pack $w.lpreview -side top
+  text $w.preview -width 80 -height 5 -font font_Fixed \
+    -wrap none -setgrid 1 -xscrollcommand "$w.xbar set"
+  scrollbar $w.xbar -orient horizontal -command "$w.preview xview"
+  pack $w.preview -side top -fill x
+  pack $w.xbar -side top -fill x
+  pack [frame $w.b] -side bottom -fill x -pady 5
+  dialogbutton $w.b.default -text "Default" -command {set glexport $glexportDefault}
+  dialogbutton $w.b.ok -text "OK" -command saveExportGList
+  dialogbutton $w.b.close -textvar ::tr(Cancel) -command "destroy $w"
+  bind $w <Escape> "destroy $w"
+  pack $w.b.close $w.b.ok -side right -padx 10
+  pack $w.b.default -side left -padx 10
+  focus $w.format.fmt
+  $w.format.fmt icursor end
+  updateExportGList
+
+  update
+  placeWinOverParent $w .glistWin
+  wm state $w normal
+}
+
+trace variable glexport w updateExportGList
+
+proc updateExportGList {} {
+  global glexport
+  set w .glexport
+  if {! [winfo exists $w]} { return }
+  set text [sc_game list 1 5 "$glexport "]
+  # remove trailing "\n"
+  set text [string range $text 0 end-1]
+
+  $w.preview configure -state normal
+  $w.preview delete 1.0 end
+  $w.preview insert end $text
+  $w.preview configure -state disabled
+}
+
+proc saveExportGList {} {
+  global glexport env
+  set ftypes {{"Text files" {.txt}} {"All files" *}}
+  set fname [tk_getSaveFile -filetypes $ftypes -parent .glexport \
+               -title "Save Game List" -initialdir $env(HOME)]
+  if {$fname == ""} { return }
+  set showProgress 0
+  if {[sc_filter count] >= 20000} { set showProgress 1 }
+  if {$showProgress} {
+    progressWindow "Scid" "Saving game list..." $::tr(Cancel) sc_progressBar
+  }
+  busyCursor .
+  set res [catch {sc_game list 1 $::MAX_GAMES "$glexport\n" $fname} err]
+  unbusyCursor .
+  if {$showProgress} { closeProgressWindow }
+  if {$res} {
+    tk_messageBox -type ok -icon warning -title "Scid" -message $err
+    return
+  }
+  destroy .glexport
 }
 
 ### Global variables used in gameSave

@@ -678,6 +678,10 @@ $m.exportfilter add command -label ToolsExpFilterLaTeX \
     -command {exportGames filter LaTeX}
 set helpMessage($m.exportfilter,3) ToolsExpFilterLaTeX
 
+$m.exportfilter add command -label ToolsExpFilterGames \
+    -command openExportGList
+set helpMessage($m.exportfilter,3) ToolsExpFilterGames
+
 $m add separator
 incr menuindex
 
@@ -1476,7 +1480,7 @@ proc setLanguageMenus {{lang ""}} {
   foreach tag {ToolsExpCurrentPGN ToolsExpCurrentHTML ToolsExpCurrentHTMLJS ToolsExpCurrentLaTeX} {
     configMenuText .menu.tools.exportcurrent [tr $tag $oldLang] $tag $lang
   }
-  foreach tag {ToolsExpFilterPGN ToolsExpFilterHTML ToolsExpFilterHTMLJS ToolsExpFilterLaTeX} {
+  foreach tag {ToolsExpFilterPGN ToolsExpFilterHTML ToolsExpFilterHTMLJS ToolsExpFilterLaTeX ToolsExpFilterGames} {
     configMenuText .menu.tools.exportfilter [tr $tag $oldLang] $tag $lang
   }
   foreach tag {Board Colour Toolbar Names Recent Fonts GInfo Fics Moves Startup Language

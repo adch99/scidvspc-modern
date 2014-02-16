@@ -233,6 +233,7 @@ menuText E ToolsExpFilterHTML "Export Filter to HTML" 17 \
 menuText E ToolsExpFilterHTMLJS "Export Filter to HTML and JavaScript" 17 {Write all filtered games to a HTML and JavaScript file}  
 menuText E ToolsExpFilterLaTeX "Export Filter to LaTeX" 17 \
   {Write all filtered games to a LaTeX file}
+menuText E ToolsExpFilterGames "Export Gamelist to Text" 19 {Print a formatted Gamelist.}
 menuText E ToolsImportOne "Import PGN Text" 0 \
   {Import a game from PGN text}
 menuText E ToolsImportFile "Import PGN File" 7 {Import games from a PGN file}

@@ -236,6 +236,8 @@ menuText D ToolsExpFilterHTML "Filter in HTML-Datei exportieren..." 10 \
 menuText D ToolsExpFilterHTMLJS "Filter in HTML/JavaScript exportieren..." 17 {Alle Partien im Filter werden in eine HTML und JavaScript Datei exportiert.}  
 menuText D ToolsExpFilterLaTeX "Filter in LaTeX-Datei exportieren..." 10 \
   {Alle Partien im Filter in eine LaTeX-Datei schreiben}
+# ====== TODO To be translated ======
+menuText D ToolsExpFilterGames "Export Gamelist to Text" 19 {Print a formatted Gamelist.}
 menuText D ToolsImportOne "Eine PGN-Partie importieren..." 16 \
   {Eine Partie im PGN-Format eingeben oder einfügen}
 menuText D ToolsImportFile "PGN-Partien importieren..." 0 \

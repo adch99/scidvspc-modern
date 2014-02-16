@@ -217,6 +217,8 @@ menuText P ToolsExpFilterHTML "Do pliku HTML..." 9 \
 menuText P ToolsExpFilterHTMLJS "Eksportuj filtr do HTML z Javascriptem..." 17 {Zapisz wszystkie partie w filtrze do pliku HTML z Javascriptem}  
 menuText P ToolsExpFilterLaTeX "Do pliku LaTeX..." 9 \
   {Zapisz wyszukane partie do pliku LaTeX}
+# ====== TODO To be translated ======
+menuText P ToolsExpFilterGames "Export Gamelist to Text" 19 {Print a formatted Gamelist.}
 menuText P ToolsImportOne "Wklej partiê w formacie PGN..." 0 \
   {Pobierz partiê z pliku PGN}
 menuText P ToolsImportFile "Importuj plik PGN..." 2 \

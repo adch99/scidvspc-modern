@@ -222,6 +222,8 @@ menuText N ToolsExpFilterHTML "Filter in HTML-formaat exporteren..." 10 \
 menuText N ToolsExpFilterHTMLJS "Exporteer filter naar HTML/Javascript bestand..." 17 {Schrijf alle via filter geselecteerde partijen naar een HTML/Javascript bestand}
 menuText N ToolsExpFilterLaTeX "Filter in LaTeX-formaat exporteren..." 10 \
   {Schrijf selectie naar LaTex-bestand}
+# ====== TODO To be translated ======
+menuText N ToolsExpFilterGames "Export Gamelist to Text" 19 {Print a formatted Gamelist.}
 menuText N ToolsImportOne "Een PGN partij importeren..." 16 \
   {Importeer PGN partij}
 menuText N ToolsImportFile "PGN database importeren..." 4 \

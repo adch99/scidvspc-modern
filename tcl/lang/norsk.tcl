@@ -235,6 +235,8 @@ menuText O ToolsExpFilterHTML "Eksporter filter til HTML-fil..." 0 \
 menuText O ToolsExpFilterHTMLJS "Export Filter to HTML and JavaScript File..." 17 {Write all filtered games to a HTML and JavaScript file}  
 menuText O ToolsExpFilterLaTeX "Eksporter filter til LaTeX-fil..." 0 \
   {Skriv alle partier i filteret til en LaTeX-fil}
+# ====== TODO To be translated ======
+menuText O ToolsExpFilterGames "Export Gamelist to Text" 19 {Print a formatted Gamelist.}
 menuText O ToolsImportOne "Importer ett PGN-parti..." 0 \
   {Importer ett parti fra en PGN-fil}
 menuText O ToolsImportFile "Importer fil med PGN-partier..." 0 \

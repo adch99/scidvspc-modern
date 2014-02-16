@@ -229,6 +229,8 @@ menuText C ToolsExpFilterHTML "Export filtrovaných partií do HTML souboru..." 30
 menuText C ToolsExpFilterHTMLJS "Export Filter to HTML and JavaScript File..." 17 {Write all filtered games to a HTML and JavaScript file}  
 menuText C ToolsExpFilterLaTeX "Export filtrovaných partií do LaTeX souboru..." 30 \
   {Zapsat v¹echny filtrované partie do LaTeX souboru}
+# ====== TODO To be translated ======
+menuText C ToolsExpFilterGames "Export Gamelist to Text" 19 {Print a formatted Gamelist.}
 menuText C ToolsImportOne "Import jedné PGN partie..." 7 \
   {Importovat partii z PGN zápisu}
 menuText C ToolsImportFile "Import souboru PGN partií..." 10 \

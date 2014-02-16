@@ -1,29 +1,25 @@
-# epd.tcl: EPD editing windows for Scid.
+### epd.tcl: EPD editing window(s) for Scid.
+
 # Copyright (C) 2000  Shane Hudson
-# Copyright (C) 2007  Pascal Georges
+# Copyright (C) 2007  Pascal Georges frigging eedjit
 
 set maxEpd [sc_info limit epd]
 set delayEpd 5
 array set epdTimer {}
 
-################################################################################
-#
-################################################################################
+
 proc storeEpdText {id} {
   sc_epd set $id [.epd$id.text get 1.0 "end-1c"]
+  updateEpdWin $id
 }
-################################################################################
-#
-################################################################################
+
 proc storeEpdTexts {} {
   global maxEpd
   for {set i 1} {$i <= $maxEpd} {incr i} {
     if {[winfo exists .epd$i]} { storeEpdText $i }
   }
 }
-################################################################################
-#
-################################################################################
+
 proc updateEpdWin {id} {
   set w .epd$id
   $w.text delete 1.0 end
@@ -47,24 +43,18 @@ proc updateEpdWin {id} {
   $w.status configure -text $str
   unset str
 }
-################################################################################
-#
-################################################################################
+
 proc updateEpdWins {} {
   global maxEpd
   for {set i 1} {$i <= $maxEpd} {incr i} {
     if {[winfo exists .epd$i]} { updateEpdWin $i }
   }
 }
-################################################################################
-#
-################################################################################
+
 proc closeEpdWin {id} {
   catch {sc_epd close $id}
 }
-################################################################################
-#
-################################################################################
+
 proc confirmCloseEpd {id} {
   if {! [winfo exists .epd$id]} { return }
   storeEpdText $id
@@ -80,9 +70,7 @@ proc confirmCloseEpd {id} {
   destroy .epd$id
   return
 }
-################################################################################
-#
-################################################################################
+
 proc saveEpdWin {id} {
   set w .epd$id
   busyCursor . 1
@@ -95,18 +83,14 @@ proc saveEpdWin {id} {
   $w.text configure -cursor $temp_oldcursor
   busyCursor . 0
 }
-################################################################################
-#
-################################################################################
+
 proc epd_MoveToDeepestMatch {id} {
   if {! [winfo exists .epd$id]} { return }
   sc_move ply [sc_epd deepest $id]
   updateBoard
   return
 }
-################################################################################
-#
-################################################################################
+
 proc newEpdWin {cmd {fname ""}} {
   global maxEpd
   set showErrors 1
@@ -325,9 +309,6 @@ proc nextEpd {id} {
 #   sc_epd next $id
 #   switchEpd $id 1
 
-################################################################################
-#
-################################################################################
 proc loadEpdLines { id } {
   set w .epd$id
   set size [sc_epd size $id ]
@@ -348,9 +329,7 @@ proc loadEpdLines { id } {
     updateBoard -pgn
   }
 }
-################################################################################
-#
-################################################################################
+
 proc epd_sortLines {textwidget} {
   if {! [winfo exists $textwidget]} { return }
   set text [$textwidget get 1.0 "end-1c"]
@@ -365,10 +344,9 @@ proc epd_sortLines {textwidget} {
   $textwidget delete 1.0 end
   $textwidget insert end "$newtext"
 }
-################################################################################
-# epd_Analyse:
-#    Pastes current chess engine analysis into this EPD file position.
-################################################################################
+
+###  Pastes current chess engine analysis into this EPD file position.
+
 proc epd_Analyse { textwidget id } {
   global analysis
 
@@ -394,18 +372,16 @@ proc epd_Analyse { textwidget id } {
   grab $y
 
 }
-################################################################################
-# strips all fields that will be pasted from analysis window
-################################################################################
+
+###  strips all fields that will be pasted from analysis window
+
 proc epd_clearEpdFields {id} {
   foreach field { "acd" "acn" "ce" "pv" } {
     set result [sc_epd strip $id $field]
     updateEpdWin $id
   }
 }
-################################################################################
-#
-################################################################################
+
 proc epd_LaunchAnalysis {id textwidget} {
   ### todo: make epd annotation work with a specified engine (instead of engine 0)
   if {! [winfo exists .analysisWin0]} {
@@ -430,10 +406,8 @@ proc epd_LaunchAnalysis {id textwidget} {
   }
 }
 
-################################################################################
-# epd_pasteAnalysis:
-#    Pastes current chess engine analysis into this EPD file position.
-################################################################################
+###  Pastes current chess engine analysis into this EPD file position.
+
 proc epd_pasteAnalysis {textwidget} {
   global analysis
   if {! [winfo exists $textwidget]} { return }
@@ -459,9 +433,7 @@ proc epd_pasteAnalysis {textwidget} {
 }
 
 set epd_stripField ""
-################################################################################
-#
-################################################################################
+
 proc epd_chooseStripField {id} {
   global epd_stripField
   if {! [winfo exists .epd$id]} { return }
@@ -485,9 +457,7 @@ proc epd_chooseStripField {id} {
   focus .epdStrip.e
   grab .epdStrip
 }
-################################################################################
-#
-################################################################################
+
 proc epd_stripEpdField {id field} {
   if {! [winfo exists .epdStrip]} { return }
   if {! [string compare $field ""]} { return }
@@ -499,6 +469,5 @@ proc epd_stripEpdField {id field} {
       -message "Scid found and stripped an EPD field named \"$field\" from\
       $result positions." -parent  .epd$id
 }
-################################################################################
-#
-################################################################################
+
+### end of f-ing epd.tcl

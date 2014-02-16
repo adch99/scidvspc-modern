@@ -233,6 +233,8 @@ menuText B ToolsExpFilterHTML "Exporta jogos filtrados - HTML..." 17 \
 menuText B ToolsExpFilterHTMLJS "Export Filter to HTML and JavaScript File..." 17 {Write all filtered games to a HTML and JavaScript file}  
 menuText B ToolsExpFilterLaTeX "Exporta jogos filtrados - LaTex..." 17 \
   {Exporta todos os jogos filtrados para um arquivo LaTex}
+# ====== TODO To be translated ======
+menuText B ToolsExpFilterGames "Export Gamelist to Text" 19 {Print a formatted Gamelist.}
 menuText B ToolsImportOne "Importa PGN texto..." 0 \
   {Importa jogo de um texto em PGN}
 menuText B ToolsImportFile "Importa arquivo de jogos PGN..." 7 \
