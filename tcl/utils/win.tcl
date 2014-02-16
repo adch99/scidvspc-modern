@@ -261,11 +261,17 @@ proc ::docking::move_tab {srctab dsttab} {
 variable ::docking::c_path {}
 
 
-proc ::docking::start_motion {path} {
+proc ::docking::start_motion {path x y} {
   variable c_path
+
   if {[winfo exists .ctxtMenu]} {
     destroy .ctxtMenu
   }
+
+  if {[catch {$path tab @$x,$y}]} {
+    return
+  }
+  # hmmm ??
   if {$path!=$c_path} {
     set c_path [find_tbn $path]
   }
@@ -298,15 +304,17 @@ proc ::docking::end_motion {w x y} {
   set t [find_tbn $path]
   if {$t!=""} {
     if {$t==$c_path} {
-      # we stayed on the same notebook, so display the menu
-      # show_menu $w
-
-      if {[$c_path identify [expr $x-[winfo rootx $c_path]] [expr $y-[winfo rooty $c_path]]]!=""} {
-        set c_path {}
-        return
+      # we stayed on the same notebook, so try moving it
+      set dest [$c_path index @[expr $x-[winfo rootx $c_path]],[expr $y-[winfo rooty $c_path]]]
+      if {$dest == {}} {
+        set dest end
       }
-    }
-    if {$t!=$c_path} {
+      $c_path insert $dest [$c_path select]
+      # wtf is this here 
+      # if {[$c_path identify [expr $x-[winfo rootx $c_path]] [expr $y-[winfo rooty $c_path]]]!=""} 
+      # set c_path {}
+      # return
+    } else {
       move_tab $c_path $t
     }
   }
@@ -405,7 +413,7 @@ proc  ::docking::tabChanged  {path} {
 
 bind TNotebook <ButtonRelease-1> {::docking::show_menu %W %x %y}
 
-bind TNotebook <ButtonPress-1> +[ list ::docking::start_motion %W]
+bind TNotebook <ButtonPress-1> +[ list ::docking::start_motion %W %x %y]
 
 bind TNotebook <B1-Motion> {
   ::docking::motion %W
