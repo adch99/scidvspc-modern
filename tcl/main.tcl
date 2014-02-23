@@ -1658,6 +1658,9 @@ proc cancelAutoplay {} {
   global autoplayMode annotate
 
   set autoplayMode 0
+  if {$annotate(Engine) > -1} {
+    .analysisWin$annotate(Engine).b.startStop configure -state normal
+  }
   set annotate(Engine) -1
   set annotate(Button) 0
   after cancel autoplay

@@ -1175,6 +1175,8 @@ proc okAnnotation {n} {
     appendTag Annotator "$analysis(name$n)"
   }
   if {$autoplayMode == 0} { toggleAutoplay }
+  # Disable pause button, as pause doesnt work in annotation mode, and this is the easiest option.
+  .analysisWin$n.b.startStop configure -state disabled
 }
 
 ### Part of annotation process
