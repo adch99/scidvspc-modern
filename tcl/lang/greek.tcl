@@ -1532,9 +1532,9 @@ translate G QGDExchange {QGD Αλλαγής}
 translate G SemiSlav {Ημι-Σλαβική}
 translate G QGDwithBg5 {QGD με Bg5}
 translate G QGDOrthodox {QGD Ορθόδοξη}
-translate G Grunfeld {Grünfeld}
-translate G GrunfeldExchange {Grünfeld Αλλαγής}
-translate G GrunfeldRussian {Grünfeld Ρωσική}
+translate G Grunfeld {Grunfeld}
+translate G GrunfeldExchange {Grunfeld Αλλαγής}
+translate G GrunfeldRussian {Grunfeld Ρωσική}
 translate G Catalan {Καταλανική}
 translate G CatalanOpen {Καταλανική Ανοικτή}
 translate G CatalanClosed {Καταλανική Κλειστή}
@@ -1543,7 +1543,7 @@ translate G NimzoIndian {Νιμζο-Ινδική}
 translate G NimzoIndianClassical {Νιμζο-Ινδική Κλασσική}
 translate G NimzoIndianRubinstein {Νιμζο-Ινδική Ρουμπισταϊν}
 translate G KingsIndian {Ινδική του Βασιλιά}
-translate G KingsIndianSamisch {Ινδική του Βασιλιά Sämisch}
+translate G KingsIndianSamisch {Ινδική του Βασιλιά Samisch}
 translate G KingsIndianMainLine {Ινδική του Βασιλιά Κύρια Γραμμή}
 
 # FICS
