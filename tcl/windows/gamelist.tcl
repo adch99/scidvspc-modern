@@ -583,7 +583,7 @@ proc ::windows::gamelist::Open {} {
   dialogbutton $w.c.close -textvar ::tr(Close) -font font_Small -command { focus .main ; destroy .glistWin }
 
   pack $w.c.close $w.c.compact -side right -padx 3 ; # $w.c.help
-  pack $w.c.current $w.c.goto $w.c.title $w.c.flag -side left -padx 3
+  pack $w.c.current $w.c.goto $w.c.title -side left -padx 3
 
   if {$::windowsOS} {
     # cant focus entry combo on windows as it hogs the wheelmouse
@@ -652,6 +652,7 @@ proc ::windows::gamelist::Popup {w x y X Y} {
   if {$menutype == "short"} {
   $menu add command -label $::tr(GlistRemoveThisGameFromFilter) -command ::windows::gamelist::Remove
   $menu add command -label $::tr(GlistDeleteField) -command "$w.c.delete invoke"
+  $menu add command -label $::tr(Flag)      -command "$w.c.flag invoke"
   $menu add command -label $::tr(SetFilter) -command "$w.b.select invoke"
   $menu add separator
   $menu add command -label $::tr(Reset) -command "$w.b.reset invoke"
@@ -659,6 +660,7 @@ proc ::windows::gamelist::Popup {w x y X Y} {
   $menu add command -label $::tr(LoadGame) -command "$w.c.load invoke"
   $menu add command -label $::tr(Browse) -command "$w.c.browse invoke"
   $menu add command -label $::tr(GlistDeleteField) -command "$w.c.delete invoke"
+  $menu add command -label $::tr(Flag)      -command "$w.c.flag invoke"
   $menu add command -label $::tr(SetFilter) -command "$w.b.select invoke"
   $menu add separator
   $menu add command -label $::tr(GlistRemoveThisGameFromFilter) -command ::windows::gamelist::Remove
