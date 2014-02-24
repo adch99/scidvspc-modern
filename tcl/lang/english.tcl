@@ -46,6 +46,8 @@ menuText E FileOpen "Open" 0 {Open an existing Scid database}
 menuText E FileClose "Close" 0 {Close the active Scid database}
 menuText E FileFinder "Finder" 0 {Open the File Finder window}
 menuText E FileSavePgn "Save PGN" 0 {Save this game to file}
+menuText E FileOpenBaseAsTree "Open Base as Tree" 13   {Open a base and use it in Tree window}
+menuText E FileOpenRecentBaseAsTree "Open Recent as Tree" 0   {Open a recent base and use it in Tree window}
 menuText E FileBookmarks "Bookmarks" 0 {Bookmarks menu}
 menuText E FileBookmarksAdd "Add Bookmark" 0 \
   {Bookmark the current database game and position}
@@ -57,36 +59,12 @@ menuText E FileBookmarksList "Display Folders as Single List" 0 \
   {Display bookmark folders as a single list, not submenus}
 menuText E FileBookmarksSub "Display Folders as Submenus" 0 \
   {Display bookmark folders as submenus, not a single list}
-menuText E FileMaint "Maintenance" 0 {Scid database maintenance tools}
-menuText E FileMaintWin "Maintenance Window" 0 \
-  {Open/close the Scid database maintenance window}
-menuText E FileMaintCompact "Compact Database" 0 \
-  {Compact database files, removing deleted games and unused names}
-menuText E FileMaintClass "ECO-Classify Games" 2 \
-  {Recompute the ECO code of all games}
-menuText E FileMaintSort "Sort Database" 0 \
-  {Sort all games in the database}
-menuText E FileMaintDelete "Delete Twin Games" 0 \
-  {Find twin games and set them to be deleted}
-menuText E FileMaintTwin "Twin Checker Window" 0 \
-  {Open/update the Twin checker window}
-menuText E FileMaintName "Name Spelling" 0 {Name editing and spelling tools}
-menuText E FileMaintNameEditor "Name Editor" 0 \
-  {Open/close the name editor window}
-menuText E FileMaintNamePlayer "Spellcheck Player Names" 11 \
-  {Spellcheck player names using the spellcheck file}
-menuText E FileMaintNameEvent "Spellcheck Event Names" 11 \
-  {Spellcheck event names using the spellcheck file}
-menuText E FileMaintNameSite "Spellcheck Site Names" 11 \
-  {Spellcheck site names using the spellcheck file}
-menuText E FileMaintNameRound "Spellcheck Round Names" 11 \
-  {Spellcheck round names using the spellcheck file}
+
 menuText E FileReadOnly "Read-Only" 0 \
   {Treat the current database as read-only, preventing changes}
 menuText E FileSwitch "Switch to Base" 1 \
   {Switch to a different opened database}
 menuText E FileExit "Exit" 1 {Exit Scid}
-menuText E FileMaintFixBase "Repair base" 0 {Try to repair a corrupted base}
 
 # Edit menu:
 menuText E Edit "Edit" 0
@@ -185,8 +163,6 @@ menuText E ToolsEmail "Email Manager" 0 {Open/close the email chess manager wind
 menuText E ToolsFilterGraph "Rel. Filter Graph" 12 {Open/close the filter graph window for relative values}
 menuText E ToolsAbsFilterGraph "Abs. Filter Graph" 7 {Open/close the filter graph window for absolute values}
 menuText E ToolsOpReport "Opening Report" 0 {Generate an opening report for the current position}
-menuText E ToolsOpenBaseAsTree "Open Base as Tree" 13   {Open a base and use it in Tree window}
-menuText E ToolsOpenRecentBaseAsTree "Open Recent as Tree" 0   {Open a recent base and use it in Tree window}
 menuText E ToolsTracker "Piece Tracker"  6 {Open the Piece Tracker window}
 menuText E ToolsTraining "Training"  7 {Training tools (tactics, openings,...) }
 menuText E ToolsComp "Tournament" 0 {Chess engine tournament}
@@ -198,6 +174,20 @@ menuText E ToolsTrainFindBestMove "Find Best Move"  0 {Find best move}
 menuText E ToolsTrainFics "Internet (FICS)"  0 {Play on freechess.org}
 menuText E ToolsBookTuning "Book tuning" 0 {Book tuning}
 
+menuText E ToolsMaint "Maintenance" 0 {Scid database maintenance tools}
+menuText E ToolsMaintWin "Maintenance Window" 0 {Open/close the Scid database maintenance window}
+menuText E ToolsMaintCompact "Compact Database" 0 {Compact database files, removing deleted games and unused names}
+menuText E ToolsMaintClass "ECO-Classify Games" 2 {Recompute the ECO code of all games}
+menuText E ToolsMaintSort "Sort Database" 0 {Sort all games in the database}
+menuText E ToolsMaintDelete "Delete Twin Games" 0 {Find twin games and set them to be deleted}
+menuText E ToolsMaintTwin "Twin Checker Window" 0 {Open/update the Twin checker window}
+menuText E ToolsMaintName "Name Spelling" 0 {Name editing and spelling tools}
+menuText E ToolsMaintNameEditor "Name Editor" 0 {Open/close the name editor window}
+menuText E ToolsMaintNamePlayer "Spellcheck Player Names" 11 {Spellcheck player names using the spellcheck file}
+menuText E ToolsMaintNameEvent "Spellcheck Event Names" 11 {Spellcheck event names using the spellcheck file}
+menuText E ToolsMaintNameSite "Spellcheck Site Names" 11 {Spellcheck site names using the spellcheck file}
+menuText E ToolsMaintNameRound "Spellcheck Round Names" 11 {Spellcheck round names using the spellcheck file}
+menuText E ToolsMaintFixBase "Repair base" 0 {Try to repair a corrupted base}
 
 menuText E ToolsConnectHardware "Connect Hardware" 0 {Connect external hardware}
 menuText E ToolsConnectHardwareConfigure "Configure..." 0 {Configure external hardware and connection}
@@ -239,10 +229,10 @@ menuText E ToolsImportOne "Import PGN Text" 0 \
 menuText E ToolsImportFile "Import PGN File" 7 {Import games from a PGN file}
 menuText E ToolsStartEngine1 "Start engine 1" 0  {Start engine 1}
 menuText E ToolsStartEngine2 "Start engine 2" 0  {Start engine 2}
-menuText E ToolsScreenshot "Board Screenshot" 0
+menuText E ToolsScreenshot "Board Screenshot" 0  {Take a screenshot}
 
 # Play menue
-menuText E Play "Play" 0
+menuText E Play "Play" 0 {Play Games}
 
 # --- Correspondence Chess
 menuText E CorrespondenceChess "Correspondence Chess" 0 {Functions for eMail and Xfcc based correspondence chess}

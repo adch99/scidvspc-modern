@@ -13,6 +13,10 @@ menuText Y FileOpen "Otvori..." 0 {Otvori postojeæu Scid bazu podataka}
 menuText Y FileClose "Zatvori" 0 {Zatvori aktivnu Scid bazu podataka}
 menuText Y FileFinder "Tragaè" 0 {Pokreni Fajl Tragaè}
 menuText Y FileSavePgn "Save Pgn..." 0 {}
+# ====== TODO To be translated ======
+menuText Y FileOpenBaseAsTree "Open Base as Tree" 13   {Open a base and use it in Tree window}
+# ====== TODO To be translated ======
+menuText Y FileOpenRecentBaseAsTree "Open Recent as Tree" 0   {Open a recent base and use it in Tree window}
 menuText Y FileBookmarks "Markeri" 0 {Meni sa markerima (preèica: Ctrl+B)}
 menuText Y FileBookmarksAdd "Dodaj u markere" 0 \
   {Dodaj u markere tekuæu partiju iz baze i poziciju}
@@ -24,37 +28,11 @@ menuText Y FileBookmarksList "Prika¾i foldere kao jedinstvenu listu" 0 \
   {Prika¾i foldere markera kao jedinstvenu listu, bez podmenija}
 menuText Y FileBookmarksSub "Prika¾i foldere kao podmenije" 0 \
   {Prika¾i foldere markera kao podmenije, ne jedinstvenu listu}
-menuText Y FileMaint "Odr¾avanje" 0 {Alati za odr¾avanje Scid baze podataka}
-menuText Y FileMaintWin "Prozor odr¾avanja" 0 \
-  {Otvori/zatvori prozor odr¾avanja Scid baze podataka}
-menuText Y FileMaintCompact "Komprimuj bazu..." 0 \
-  {Uèini fajlove baze kompaktnijim, uklanjajuæi obrisane partije i nekori¹æena imena}
-menuText Y FileMaintClass "E©O-Klasifikacija partija..." 2 \
-  {Klasifikacija svih partija po otvaranju}
-menuText Y FileMaintSort "Sortiraj bazu..." 0 \
-  {Sortiraj sve partije u bazi podataka}
-menuText Y FileMaintDelete "Izbri¹i udvojene partije..." 0 \
-  {Naði udvojene partije i oznaèi ih za brisanje}
-menuText Y FileMaintTwin "Provera udvojenih partija" 0 \
-  {Otvori/osve¾i prozor za proveru udvojenih partija}
-menuText Y FileMaintName "Imena" 0 {Promena imena i kontrola pravopisa}
-menuText Y FileMaintNameEditor "Editor imena" 0 \
-  {Otvori/zatvori editor imena}
-menuText Y FileMaintNamePlayer "Provera pravopisa imena igraèa..." 11 \
-  {Provera pravopisa imena igraèa pomoæu spellcheck fajla}
-menuText Y FileMaintNameEvent "Provera pravopisa imena turnira..." 11 \
-  {Provera pravopisa imena turnira pomoæu spellcheck fajla}
-menuText Y FileMaintNameSite "Provera pravopisa imena mesta..." 11 \
-  {Provera pravopisa imena mesta pomoæu spellcheck fajla}
-menuText Y FileMaintNameRound "Provera pravopisa kola..." 11 \
-  {Provera pravopisa kola pomoæu spellcheck fajla}
 menuText Y FileReadOnly "Read-only..." 0 \
   {Spreèi izmene u tekuæoj bazi}
 menuText Y FileSwitch "Switch to database" 0 \
   {Switch to a different opened database} ;# ***
 menuText Y FileExit "Izaði" 1 {Izlazak iz Scid-a}
-# ====== TODO To be translated ======
-menuText Y FileMaintFixBase "Fix corrupted base" 0 {Try to fix a corrupted base}
 
 # Edit menu:
 menuText Y Edit "Izmene" 0
@@ -171,10 +149,6 @@ menuText Y ToolsFilterGraph "Filter graph" 7 \
 menuText Y ToolsAbsFilterGraph "Abs. Filter Graph" 7 {Open/close the filter graph window for absolute values}
 menuText Y ToolsOpReport "Izve¹taj o otvaranjima" 0 \
   {Napravi izve¹taj o otvaranjima za trenutnu poziciju}
-# ====== TODO To be translated ======
-menuText Y ToolsOpenBaseAsTree "Open base as tree" 0   {Open a base and use it in Tree window}
-# ====== TODO To be translated ======
-menuText Y ToolsOpenRecentBaseAsTree "Open recent base as tree" 0   {Open a recent base and use it in Tree window}
 menuText Y ToolsTracker "Piece Tracker"  0 {Open the Piece Tracker window} ;# ***
 # ====== TODO To be translated ======
 menuText Y ToolsTraining "Training"  0 {Training tools (tactics, openings,...) }
@@ -193,6 +167,32 @@ menuText Y ToolsTrainFindBestMove "Find best move"  0 {Find best move}
 menuText Y ToolsTrainFics "Internet"  0 {Play on freechess.org}
 # ====== TODO To be translated ======
 menuText Y ToolsBookTuning "Book tuning" 0 {Book tuning}
+menuText Y ToolsMaint "Odr¾avanje" 0 {Alati za odr¾avanje Scid baze podataka}
+menuText Y ToolsMaintWin "Prozor odr¾avanja" 0 \
+  {Otvori/zatvori prozor odr¾avanja Scid baze podataka}
+menuText Y ToolsMaintCompact "Komprimuj bazu..." 0 \
+  {Uèini fajlove baze kompaktnijim, uklanjajuæi obrisane partije i nekori¹æena imena}
+menuText Y ToolsMaintClass "E©O-Klasifikacija partija..." 2 \
+  {Klasifikacija svih partija po otvaranju}
+menuText Y ToolsMaintSort "Sortiraj bazu..." 0 \
+  {Sortiraj sve partije u bazi podataka}
+menuText Y ToolsMaintDelete "Izbri¹i udvojene partije..." 0 \
+  {Naði udvojene partije i oznaèi ih za brisanje}
+menuText Y ToolsMaintTwin "Provera udvojenih partija" 0 \
+  {Otvori/osve¾i prozor za proveru udvojenih partija}
+menuText Y ToolsMaintName "Imena" 0 {Promena imena i kontrola pravopisa}
+menuText Y ToolsMaintNameEditor "Editor imena" 0 \
+  {Otvori/zatvori editor imena}
+menuText Y ToolsMaintNamePlayer "Provera pravopisa imena igraèa..." 11 \
+  {Provera pravopisa imena igraèa pomoæu spellcheck fajla}
+menuText Y ToolsMaintNameEvent "Provera pravopisa imena turnira..." 11 \
+  {Provera pravopisa imena turnira pomoæu spellcheck fajla}
+menuText Y ToolsMaintNameSite "Provera pravopisa imena mesta..." 11 \
+  {Provera pravopisa imena mesta pomoæu spellcheck fajla}
+menuText Y ToolsMaintNameRound "Provera pravopisa kola..." 11 \
+  {Provera pravopisa kola pomoæu spellcheck fajla}
+# ====== TODO To be translated ======
+menuText Y ToolsMaintFixBase "Repair base" 0 {Try to repair a corrupted base}
 # ====== TODO To be translated ======
 menuText Y ToolsConnectHardware "Connect Hardware" 0 {Connect external hardware}
 # ====== TODO To be translated ======

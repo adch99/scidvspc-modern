@@ -13,6 +13,10 @@ menuText C FileOpen "Otevøít..." 0 {Otevøít existující Scid databázi}
 menuText C FileClose "Zavøít" 0 {Zavøít aktivní Scid databázi}
 menuText C FileFinder "Vyhledávaè" 2 {Otevøít okno vyhledávaèe souborù}
 menuText C FileSavePgn "Save Pgn..." 0 {}
+# ====== TODO To be translated ======
+menuText C FileOpenBaseAsTree "Open Base as Tree" 13   {Open a base and use it in Tree window}
+# ====== TODO To be translated ======
+menuText C FileOpenRecentBaseAsTree "Open Recent as Tree" 0   {Open a recent base and use it in Tree window}
 menuText C FileBookmarks "Zálo¾ky" 2 {Menu zálo¾ek (klávesa: Ctrl+B)}
 menuText C FileBookmarksAdd "Pøidat zálo¾ku" 0 \
   {Zálo¾ka aktuální pozice a partie z databáze}
@@ -24,37 +28,11 @@ menuText C FileBookmarksList "Zobrazit slo¾ky jako jediný seznam" 0 \
   {Zobrazit slo¾ky se zálo¾kami jako jediný seznam, bez podnabídek}
 menuText C FileBookmarksSub "Zobrazit slo¾ky jako podnabídky" 9 \
   {Zobrazit zálo¾kové slo¾ky jako podnabídky, ne jako jediný seznam}
-menuText C FileMaint "Údr¾ba" 2 {Nástroje pro údr¾bu databáze Scidu}
-menuText C FileMaintWin "Okno údr¾by" 0 \
-  {Otevøít/zavøít okno pro údr¾bu Scid databáze}
-menuText C FileMaintCompact "Kompaktování databáze..." 13 \
-  {Kompaktování databázových souborù, odstranìní vymazaných partií a nepou¾ívaných jmen}
-menuText C FileMaintClass "ECO klasifikace partií..." 0 \
-  {Pøepoèítání ECO kódù v¹ech partií}
-menuText C FileMaintSort "Setøídit databázi..." 0 \
-  {Setøídit v¹echny partie v databázi}
-menuText C FileMaintDelete "Vymazání zdvojených partií..." 0 \
-  {Hledat zdvojené partie a oznaèit je pro vymazání}
-menuText C FileMaintTwin "Kontrola zdvojených partií" 0 \
-  {Otevøít/aktualizovat okno pro kontrolu zdvojených partií}
-menuText C FileMaintName "Jména" 0 {Editace jmen a kontrola pravopisu}
-menuText C FileMaintNameEditor "Editor jmen" 0 \
-  {Otevøít/zavøít editor jmen}
-menuText C FileMaintNamePlayer "Kontrola pravopisu hráèù..." 19 \
-  {Kontrola pravopisu jmen hráèù s vyu¾itím souboru pro kontrolu pravopisu}
-menuText C FileMaintNameEvent "Kontrola pravopisu turnajù..." 19 \
-  {Kontrola pravopisu názvù turnajù s vyu¾itím souboru pro kontrolu pravopisu}
-menuText C FileMaintNameSite "Kontrola pravopisu míst..." 19 \
-  {Kontrola pravopisu míst turnajù s vyu¾itím souboru pro kontrolu pravopisu}
-menuText C FileMaintNameRound "Kontrola pravopisu kol..." 19 \
-  {Kontrola pravopisu kol s vyu¾itím souboru pro kontrolu pravopisu}
 menuText C FileReadOnly "Pouze pro ètení..." 0 \
   {Nastavit aktuální databázi jako jen ke ètení, a zabránit tak zmìnám}
 menuText C FileSwitch "Pøepnout se do databáze" 15 \
   {Pøepnout se do jiné otevøené databáze}
 menuText C FileExit "Ukonèit" 0 {Ukonèit Scid}
-# ====== TODO To be translated ======
-menuText C FileMaintFixBase "Fix corrupted base" 0 {Try to fix a corrupted base}
 
 # Edit menu:
 menuText C Edit "Editace" 0
@@ -166,10 +144,6 @@ menuText C ToolsFilterGraph "Graf filtru" 0 \
 menuText C ToolsAbsFilterGraph "Abs. Filter Graph" 7 {Open/close the filter graph window for absolute values}
 menuText C ToolsOpReport "Profil zahájení" 7 \
   {Generovat profil zahájení pro aktuální pozicí}
-# ====== TODO To be translated ======
-menuText C ToolsOpenBaseAsTree "Open base as tree" 0   {Open a base and use it in Tree window}
-# ====== TODO To be translated ======
-menuText C ToolsOpenRecentBaseAsTree "Open recent base as tree" 0   {Open a recent base and use it in Tree window}
 menuText C ToolsTracker "Stopaø figur"  0 {Otevøít okno stopaøe figur}
 # ====== TODO To be translated ======
 menuText C ToolsTraining "Training"  0 {Training tools (tactics, openings,...) }
@@ -188,6 +162,32 @@ menuText C ToolsTrainFindBestMove "Find best move"  0 {Find best move}
 menuText C ToolsTrainFics "Internet"  0 {Play on freechess.org}
 # ====== TODO To be translated ======
 menuText C ToolsBookTuning "Book tuning" 0 {Book tuning}
+menuText C ToolsMaint "Údr¾ba" 2 {Nástroje pro údr¾bu databáze Scidu}
+menuText C ToolsMaintWin "Okno údr¾by" 0 \
+  {Otevøít/zavøít okno pro údr¾bu Scid databáze}
+menuText C ToolsMaintCompact "Kompaktování databáze..." 13 \
+  {Kompaktování databázových souborù, odstranìní vymazaných partií a nepou¾ívaných jmen}
+menuText C ToolsMaintClass "ECO klasifikace partií..." 0 \
+  {Pøepoèítání ECO kódù v¹ech partií}
+menuText C ToolsMaintSort "Setøídit databázi..." 0 \
+  {Setøídit v¹echny partie v databázi}
+menuText C ToolsMaintDelete "Vymazání zdvojených partií..." 0 \
+  {Hledat zdvojené partie a oznaèit je pro vymazání}
+menuText C ToolsMaintTwin "Kontrola zdvojených partií" 0 \
+  {Otevøít/aktualizovat okno pro kontrolu zdvojených partií}
+menuText C ToolsMaintName "Jména" 0 {Editace jmen a kontrola pravopisu}
+menuText C ToolsMaintNameEditor "Editor jmen" 0 \
+  {Otevøít/zavøít editor jmen}
+menuText C ToolsMaintNamePlayer "Kontrola pravopisu hráèù..." 19 \
+  {Kontrola pravopisu jmen hráèù s vyu¾itím souboru pro kontrolu pravopisu}
+menuText C ToolsMaintNameEvent "Kontrola pravopisu turnajù..." 19 \
+  {Kontrola pravopisu názvù turnajù s vyu¾itím souboru pro kontrolu pravopisu}
+menuText C ToolsMaintNameSite "Kontrola pravopisu míst..." 19 \
+  {Kontrola pravopisu míst turnajù s vyu¾itím souboru pro kontrolu pravopisu}
+menuText C ToolsMaintNameRound "Kontrola pravopisu kol..." 19 \
+  {Kontrola pravopisu kol s vyu¾itím souboru pro kontrolu pravopisu}
+# ====== TODO To be translated ======
+menuText C ToolsMaintFixBase "Repair base" 0 {Try to repair a corrupted base}
 # ====== TODO To be translated ======
 menuText C ToolsConnectHardware "Connect Hardware" 0 {Connect external hardware}
 # ====== TODO To be translated ======

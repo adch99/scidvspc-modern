@@ -16,6 +16,8 @@ menuText I FileOpen "Apri..." 0 {Apre un database Scid esistente}
 menuText I FileClose "Chiudi" 0 {Chiude un database Scid attivo}
 menuText I FileFinder "Finder" 0 {Apre la finestra per cercare i file}
 menuText I FileSavePgn "Save Pgn..." 0 {}
+menuText I FileOpenBaseAsTree "Apri come albero..." 0   {Apre un database nella finestra per l'albero}
+menuText I FileOpenRecentBaseAsTree "Apri recente come albero" 0   {Apre un database recente nella finestra per l'albero}
 menuText I FileBookmarks "Bookmarks" 0 {Menu' Bookmarks (chiave: Ctrl+B)}
 menuText I FileBookmarksAdd "Aggiungi bookmark" 0 \
   {Memorizza la partita e la posizione del database attivo}
@@ -27,37 +29,11 @@ menuText I FileBookmarksList "Mostra i bookmark come una lista" 0 \
   {Mostra le cartelle dei bookmarks come una lista, senza sottomenu'}
 menuText I FileBookmarksSub "Mostra i bookmark come sottomenu'" 0 \
   {Mostra le cartelle dei bookmarks con sottomenu', non a lista}
-menuText I FileMaint "Gestione" 0 {Strumenti di gestione di un database Scid}
-menuText I FileMaintWin "Finestra di Gestione" 0 \
-  {Apre/chiude la finestra di gestione di un database Scid}
-menuText I FileMaintCompact "Compatta database..." 0 \
-  {Compatta i file di database, rimuovendo le partite cancellate e i nomi non usati}
-menuText I FileMaintClass "Classificazione ECO di partite..." 2 \
-  {Ricalcola il codice ECO di tutte le partite}
-menuText I FileMaintSort "Ordina database..." 0 \
-  {Ordina tutte le partite nel database}
-menuText I FileMaintDelete "Cancella le partite doppie..." 20 \
-  {Cerca le partite duplicate e le seleziona per cancellarle}
-menuText I FileMaintTwin "Finestra di controllo delle doppie" 0 \
-  {Apre/aggiorna la finestra del controllo dei duplicati}
-menuText I FileMaintName "Controllo di nomi" 13 {Editor di nomi e controllo ortografico}
-menuText I FileMaintNameEditor "Finestra di editor dei nomi" 0 \
-  {Apre/chiude la finestra di editor dei nomi}
-menuText I FileMaintNamePlayer "Controllo di nomi dei giocatori..." 22 \
-  {Controllo di nomi dei giocatori mediante il file di verifica di nomi}
-menuText I FileMaintNameEvent "Controllo di nomi di Eventi..." 21 \
-  {Controllo di nomi dei eventi mediante il file di verifica di eventi}
-menuText I FileMaintNameSite "Controllo di nomi di siti..." 21 \
-  {Controllo di nomi di siti mediante il file di verifica}
-menuText I FileMaintNameRound "Controllo di nomi di turni..." 21 \
-  {Controllo di nomi di turni mediante il file di verifica}
 menuText I FileReadOnly "Sola-lettura..." 0 \
   {Tratta il database attuale in sola lettura, prevenendo variazioni}
 menuText I FileSwitch "Attiva un database" 0 \
   {Attiva uno fra i database aperti}
 menuText I FileExit "Esci" 0 {Esce da Scid}
-# ====== TODO To be translated ======
-menuText I FileMaintFixBase "Fix corrupted base" 0 {Try to fix a corrupted base}
 
 # Edit menu:
 menuText I Edit "Edita" 0
@@ -167,8 +143,6 @@ menuText I ToolsFilterGraph "Grafici relativi" 7 \
 menuText I ToolsAbsFilterGraph "Grafici assoluti" 7 {Apre/chiude la finestra dei grafici sul filtro con valori assoluti}
 menuText I ToolsOpReport "Rapporto di Apertura" 0 \
   {Genera un rapporto di apertura per l'attuale posizione}
-menuText I ToolsOpenBaseAsTree "Apri come albero..." 0   {Apre un database nella finestra per l'albero}
-menuText I ToolsOpenRecentBaseAsTree "Apri recente come albero" 0   {Apre un database recente nella finestra per l'albero}
 menuText I ToolsTracker "Dislocazione dei Pezzi"  0 {Apre/chiude la finestra con la traccia sulla dislocazione dei pezzi}
 menuText I ToolsTraining "Allenamento"  0 {Strumenti per l'allenamento (tattica, aperture,...) }
 menuText I ToolsComp "Tournament" 2 {Chess engine tournament}
@@ -179,6 +153,32 @@ menuText I ToolsTrainCalvar "Calcolo delle varianti"  0 {Allenati sul calcolo de
 menuText I ToolsTrainFindBestMove "Trova la mossa migliore"  0 {Trova la mossa migliore}
 menuText I ToolsTrainFics "Gioca su internet"  0 {Gioca su freechess.org}
 menuText I ToolsBookTuning "Raffina il libro delle aperture" 0 {Raffina il libro delle aperture}
+menuText I ToolsMaint "Gestione" 0 {Strumenti di gestione di un database Scid}
+menuText I ToolsMaintWin "Finestra di Gestione" 0 \
+  {Apre/chiude la finestra di gestione di un database Scid}
+menuText I ToolsMaintCompact "Compatta database..." 0 \
+  {Compatta i file di database, rimuovendo le partite cancellate e i nomi non usati}
+menuText I ToolsMaintClass "Classificazione ECO di partite..." 2 \
+  {Ricalcola il codice ECO di tutte le partite}
+menuText I ToolsMaintSort "Ordina database..." 0 \
+  {Ordina tutte le partite nel database}
+menuText I ToolsMaintDelete "Cancella le partite doppie..." 20 \
+  {Cerca le partite duplicate e le seleziona per cancellarle}
+menuText I ToolsMaintTwin "Finestra di controllo delle doppie" 0 \
+  {Apre/aggiorna la finestra del controllo dei duplicati}
+menuText I ToolsMaintName "Controllo di nomi" 13 {Editor di nomi e controllo ortografico}
+menuText I ToolsMaintNameEditor "Finestra di editor dei nomi" 0 \
+  {Apre/chiude la finestra di editor dei nomi}
+menuText I ToolsMaintNamePlayer "Controllo di nomi dei giocatori..." 22 \
+  {Controllo di nomi dei giocatori mediante il file di verifica di nomi}
+menuText I ToolsMaintNameEvent "Controllo di nomi di Eventi..." 21 \
+  {Controllo di nomi dei eventi mediante il file di verifica di eventi}
+menuText I ToolsMaintNameSite "Controllo di nomi di siti..." 21 \
+  {Controllo di nomi di siti mediante il file di verifica}
+menuText I ToolsMaintNameRound "Controllo di nomi di turni..." 21 \
+  {Controllo di nomi di turni mediante il file di verifica}
+# ====== TODO To be translated ======
+menuText I ToolsMaintFixBase "Repair base" 0 {Try to repair a corrupted base}
 # ====== TODO To be translated ======
 menuText I ToolsConnectHardware "Connect Hardware" 0 {Connect external hardware}
 # ====== TODO To be translated ======

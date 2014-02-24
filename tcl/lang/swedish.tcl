@@ -15,6 +15,8 @@ menuText W FileOpen "Öppna..." 0 {Öppna en befintlig Scid databas}
 menuText W FileClose "Stäng" 0 {Stäng den aktiva Scid databasen}
 menuText W FileFinder "Sök filer" 4 {Öppna sökdialogen}
 menuText W FileSavePgn "Spara PGN..." 0 {}
+menuText W FileOpenBaseAsTree "Öppna databas som träd" 0   {Öppna en databas och använd den i Trädfönstret}
+menuText W FileOpenRecentBaseAsTree "Öppna senaste databasen som träd" 0   {Öppna den senaste databasen och använd den i Trädfönstret}
 menuText W FileBookmarks "Bokmärken" 0 {Hantera bokmärken (kortkommando: Ctrl+B)}
 menuText W FileBookmarksAdd "Nytt bokmärke" 0 \
   {Markera den aktiva ställningen i partiet}
@@ -26,36 +28,11 @@ menuText W FileBookmarksList "Visa bokmärken som lista" 19 \
   {Visar bokmärkena som lista, inte undermenyer}
 menuText W FileBookmarksSub "Visa bokmärken i undermenyer" 17 \
   {Visar bokmärkena som undermenyer, inte lista}
-menuText W FileMaint "Databasverktyg" 0 {Scids databasverktyg}
-menuText W FileMaintWin "Verktygsfönster" 0 \
-  {Öppna/ stäng verktygsfönstret}
-menuText W FileMaintCompact "Komprimera databasen..." 0 \
-  {Komprimera databasen, avlägsna raderade partier och oanvända namn}
-menuText W FileMaintClass "Klassificera partier enligt ECO..." 2 \
-  {Klassificera om alla partier enligt ECO-systemet}
-menuText W FileMaintSort "Sortera databasen..." 0 \
-  {Sortera partierna i den aktiva databasen}
-menuText W FileMaintDelete "Radera dubbletter..." 0 \
-  {Sök dubbletter och markera dem som raderingsbara}
-menuText W FileMaintTwin "Sök dubbletter" 0 \
-  {Öppna/ stäng dubblettfönstret för att söka dubblettpartier}
-menuText W FileMaintName "Stavningskontroll" 0 {Namnredigering och stavningskontroll}
-menuText W FileMaintNameEditor "Redigera namn" 0 \
-  {Redigera spelarnamn utifrån rättstavningsfilen}
-menuText W FileMaintNamePlayer "Stavningskontrollera namn..." 22 \
-  {Stavningskontrollera namn utifrån rättstavningsfilen}
-menuText W FileMaintNameEvent "Stavningskontrollera evenemang..." 21 \
-  {Stavningskontrollera evenemang utifrån rättstavningsfilen}
-menuText W FileMaintNameSite "Stavningskontrollera platser..." 21 \
-  {Stavningskontrollera platser utifrån rättstavningsfilen}
-menuText W FileMaintNameRound "Stavningskontrollera ronder..." 21 \
-  {Stavningskontrollera ronder utifrån rättstavningsfilen}
 menuText W FileReadOnly "Enbart läsbar..." 8 \
   {Avlägsna temporärt redigeringsmöjligheterna till databasen}
 menuText W FileSwitch "Byt databas" 0 \
   {Byt till en annan öppnad databas}
 menuText W FileExit "Avsluta" 0 {Avsluta Scid}
-menuText W FileMaintFixBase "Fixa trasig databas" 0 {Försök att fixa en trasig databas}
 
 # Edit menu:
 menuText W Edit "Redigera" 0
@@ -168,8 +145,6 @@ menuText W ToolsFilterGraph "Filterdiagram" 7 \
 menuText W ToolsAbsFilterGraph "Absolut Filtergraf" 7 {Öppna/stäng filtergraffönstret för absolutvärden}
 menuText W ToolsOpReport "Öppningsrapport" 0 \
   {Skapa en öppningsrapport utifrån den aktuella ställningen}
-menuText W ToolsOpenBaseAsTree "Öppna databas som träd" 0   {Öppna en databas och använd den i Trädfönstret}
-menuText W ToolsOpenRecentBaseAsTree "Öppna senaste databasen som träd" 0   {Öppna den senaste databasen och använd den i Trädfönstret}
 menuText W ToolsTracker "Sök material"  0 {Öppnar dialog för att söka efter en viss materiell balans}
 menuText W ToolsTraining "Träning"  0 {Träningsverktyg (taktik, öppningar,...) }
 menuText W ToolsComp "Turnering" 2 {Schackmotorturnering}
@@ -180,6 +155,31 @@ menuText W ToolsTrainCalvar "Variantberäkning"  0 {Variantberäkningsträning}
 menuText W ToolsTrainFindBestMove "Hitta bäst drag"  0 {Hitta bästa draget}
 menuText W ToolsTrainFics "Spela på Internet"  0 {Spela på freechess.org}
 menuText W ToolsBookTuning "Bokfininställning" 0 {Bokfininställning}
+menuText W ToolsMaint "Databasverktyg" 0 {Scids databasverktyg}
+menuText W ToolsMaintWin "Verktygsfönster" 0 \
+  {Öppna/ stäng verktygsfönstret}
+menuText W ToolsMaintCompact "Komprimera databasen..." 0 \
+  {Komprimera databasen, avlägsna raderade partier och oanvända namn}
+menuText W ToolsMaintClass "Klassificera partier enligt ECO..." 2 \
+  {Klassificera om alla partier enligt ECO-systemet}
+menuText W ToolsMaintSort "Sortera databasen..." 0 \
+  {Sortera partierna i den aktiva databasen}
+menuText W ToolsMaintDelete "Radera dubbletter..." 0 \
+  {Sök dubbletter och markera dem som raderingsbara}
+menuText W ToolsMaintTwin "Sök dubbletter" 0 \
+  {Öppna/ stäng dubblettfönstret för att söka dubblettpartier}
+menuText W ToolsMaintName "Stavningskontroll" 0 {Namnredigering och stavningskontroll}
+menuText W ToolsMaintNameEditor "Redigera namn" 0 \
+  {Redigera spelarnamn utifrån rättstavningsfilen}
+menuText W ToolsMaintNamePlayer "Stavningskontrollera namn..." 22 \
+  {Stavningskontrollera namn utifrån rättstavningsfilen}
+menuText W ToolsMaintNameEvent "Stavningskontrollera evenemang..." 21 \
+  {Stavningskontrollera evenemang utifrån rättstavningsfilen}
+menuText W ToolsMaintNameSite "Stavningskontrollera platser..." 21 \
+  {Stavningskontrollera platser utifrån rättstavningsfilen}
+menuText W ToolsMaintNameRound "Stavningskontrollera ronder..." 21 \
+  {Stavningskontrollera ronder utifrån rättstavningsfilen}
+menuText W ToolsMaintFixBase "Fixa trasig databas" 0 {Försök att fixa en trasig databas}
 menuText W ToolsConnectHardware "Anslut hårdvara" 0 {Anslut extern hårdvara}
 menuText W ToolsConnectHardwareConfigure "Konfigurera..." 0 {Konfigurera extern hårdvara och anslutning}
 menuText W ToolsConnectHardwareNovagCitrineConnect "Anslut Novag Citrine" 0 {Anslut Novag Citrine}

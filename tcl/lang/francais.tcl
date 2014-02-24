@@ -15,6 +15,8 @@ menuText F FileOpen "Ouvrir..." 0 {Ouvrir une base de données Scid existante}
 menuText F FileClose "Fermer" 0 {Fermer la base de données Scid active}
 menuText F FileFinder "Trouver" 0 {Ouvrir la fenêtre de recherche de fichier}
 menuText F FileSavePgn "Save Pgn..." 0 {}
+menuText F FileOpenBaseAsTree "Ouvrir base dans arbre" 0   {Ouvrir une base dans la fenêtre d'arbre}
+menuText F FileOpenRecentBaseAsTree "Ouvrir base récente dans arbre" 0   {Ouvrir une base récente dans la fenêtre d'arbre}
 menuText F FileBookmarks "Signets" 0 {Menu des signets (raccourci: Ctrl+B)}
 menuText F FileBookmarksAdd "Ajouter un signet" 0 \
   {Poser un signet pour la position et partie courante}
@@ -26,34 +28,11 @@ menuText F FileBookmarksList "Afficher les dossiers comme une simple liste" 0 \
   {Afficher les dossiers comme une simple liste et non comme des sous-menus}
 menuText F FileBookmarksSub "Afficher les dossiers comme des sous-menus" 0 \
   {Afficher les dossiers comme des sous-menus et non comme une simple liste}
-menuText F FileMaint "Maintenance" 0 {Maintenance de la base}
-menuText F FileMaintWin "Fenêtre de maintenance" 0 \
-  {Ouvrir/Fermer la fenêtre de maintenance}
-menuText F FileMaintCompact "Compacter la base..." 0 \
-  {Compacter la base: supprimer les parties effacées et les noms non utilisés}
-menuText F FileMaintClass "Classer les parties suivant ECO" 2 \
-  {Recalculer le code ECO de toutes les parties}
-menuText F FileMaintSort "Trier la base..." 0 {Trier toutes les parties de la base}
-menuText F FileMaintDelete "Purger les doublons..." 0 \
-  {Trouver les parties en doublons et les marquer pour l'effacement}
-menuText F FileMaintTwin "Trouver les doublons" 0 \
-  {Ouvrir/Actualiser la fenêtre de recherche de doublons}
-menuText F FileMaintName "Orthographie des noms" 0 {Édition des noms et outils orthographiques}
-menuText F FileMaintNameEditor "Éditeur de noms" 11 {Ouvrir/Fermer l'éditeur de noms}
-menuText F FileMaintNamePlayer "Corriger les noms de joueurs..." 21 \
-  {Vérifier l'orthographe des noms de joueurs}
-menuText F FileMaintNameEvent "Corriger les événements..." 14 \
-  {Vérifier l'orthographe des noms d'événements}
-menuText F FileMaintNameSite "Corriger les noms de lieux.." 21 \
-  {Vérifier l'orthographe des noms de lieux}
-menuText F FileMaintNameRound "Corriger les noms des rondes..." 22 \
-  {Vérifier l'orthographe des noms de rondes}
 menuText F FileReadOnly "Lecture seule..." 0 \
   {Traiter la base courante en lecture seule, en empêchant les changements}
 menuText F FileSwitch "Changer de base" 0 \
   {Changer vers une base ouverte différente}
 menuText F FileExit "Quitter" 0 {Quitter Scid}
-menuText F FileMaintFixBase "Réparer base" 0 {Essaie de réparer une base corrompue}
 
 # Edit menu:
 menuText F Edit "Éditer" 0
@@ -172,8 +151,6 @@ menuText F ToolsEmail "Gestion des messages" 0 \
 menuText F ToolsFilterGraph "Graphique de filtre" 7 {Ouvrir/Fermer la fenêtre du graphique de filtre}
 menuText F ToolsAbsFilterGraph "Graphique de filtre absolu" 7 {Ouvrir/Fermer la fenêtre du graphique de filtre absolu}
 menuText F ToolsOpReport "Rapport d'ouverture" 0 {Générer un rapport d'ouvertures à partir de la position courante}
-menuText F ToolsOpenBaseAsTree "Ouvrir base dans arbre" 0   {Ouvrir une base dans la fenêtre d'arbre}
-menuText F ToolsOpenRecentBaseAsTree "Ouvrir base récente dans arbre" 0   {Ouvrir une base récente dans la fenêtre d'arbre}
 menuText F ToolsTracker "Suivi de pièce"  0 {Ouvrir la fenêtre de suivi de pièce}
 menuText F ToolsTraining "Entrainement"  0 {Entrainement (tactique, ouvertures, ...) }
 menuText F ToolsComp "Tournament" 2 {Chess engine tournament}
@@ -184,6 +161,29 @@ menuText F ToolsTrainCalvar "Calcul de variantes"  0 {Entrainement au calcul de 
 menuText F ToolsTrainFindBestMove "Trouver le meilleur coup"  0 {Trouver le meilleur coup}
 menuText F ToolsTrainFics "Jouer sur internet"  0 {Jouer sur freechess.org}
 menuText F ToolsBookTuning "Config. bibliothèque" 0 {Configuration fine d'une bibliothèque}
+menuText F ToolsMaint "Maintenance" 0 {Maintenance de la base}
+menuText F ToolsMaintWin "Fenêtre de maintenance" 0 \
+  {Ouvrir/Fermer la fenêtre de maintenance}
+menuText F ToolsMaintCompact "Compacter la base..." 0 \
+  {Compacter la base: supprimer les parties effacées et les noms non utilisés}
+menuText F ToolsMaintClass "Classer les parties suivant ECO" 2 \
+  {Recalculer le code ECO de toutes les parties}
+menuText F ToolsMaintSort "Trier la base..." 0 {Trier toutes les parties de la base}
+menuText F ToolsMaintDelete "Purger les doublons..." 0 \
+  {Trouver les parties en doublons et les marquer pour l'effacement}
+menuText F ToolsMaintTwin "Trouver les doublons" 0 \
+  {Ouvrir/Actualiser la fenêtre de recherche de doublons}
+menuText F ToolsMaintName "Orthographie des noms" 0 {Édition des noms et outils orthographiques}
+menuText F ToolsMaintNameEditor "Éditeur de noms" 11 {Ouvrir/Fermer l'éditeur de noms}
+menuText F ToolsMaintNamePlayer "Corriger les noms de joueurs..." 21 \
+  {Vérifier l'orthographe des noms de joueurs}
+menuText F ToolsMaintNameEvent "Corriger les événements..." 14 \
+  {Vérifier l'orthographe des noms d'événements}
+menuText F ToolsMaintNameSite "Corriger les noms de lieux.." 21 \
+  {Vérifier l'orthographe des noms de lieux}
+menuText F ToolsMaintNameRound "Corriger les noms des rondes..." 22 \
+  {Vérifier l'orthographe des noms de rondes}
+menuText F ToolsMaintFixBase "Réparer base" 0 {Essaie de réparer une base corrompue}
 # ====== TODO To be translated ======
 menuText F ToolsConnectHardware "Connect Hardware" 0 {Connect external hardware}
 # ====== TODO To be translated ======

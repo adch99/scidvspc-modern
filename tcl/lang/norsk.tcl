@@ -15,6 +15,10 @@ menuText O FileOpen "Åpne..." 0 {Åpne en Scid-database}
 menuText O FileClose "Lukk" 0 {Lukk aktiv Scid-database}
 menuText O FileFinder "Søk" 0 {Åpne søkevinduet}
 menuText O FileSavePgn "Save Pgn..." 0 {}
+# ====== TODO To be translated ======
+menuText O FileOpenBaseAsTree "Open Base as Tree" 13   {Open a base and use it in Tree window}
+# ====== TODO To be translated ======
+menuText O FileOpenRecentBaseAsTree "Open Recent as Tree" 0   {Open a recent base and use it in Tree window}
 menuText O FileBookmarks "Bokmerker" 0 {Bokmerkemeny (snarvei: Ctrl+B)}
 menuText O FileBookmarksAdd "Legg til bokmerke" 0 \
   {Sett bokmerke til nåværende database, parti og stilling}
@@ -26,37 +30,11 @@ menuText O FileBookmarksList "Vis kataloger som enkel liste" 24 \
   {Vis bokmerker som liste, ikke undermenyer}
 menuText O FileBookmarksSub "Vis kataloger som undermenyer" 18 \
   {Vis bokmerke-katalogene som undermenyer, ikke liste}
-menuText O FileMaint "Vedlikehold" 0 {Verktøy for å vedlikeholde Scid-databasen}
-menuText O FileMaintWin "Vedlikeholdsvindu" 0 \
-  {Åpne/lukk Scids vedlikeholdsvindu}
-menuText O FileMaintCompact "Komprimer database..." 0 \
-  {Sletter ubrukte partier og navn}
-menuText O FileMaintClass "ECO-klassifiser partier..." 0 \
-  {Regn om ECO-koden for alle partier}
-menuText O FileMaintSort "Sorter database..." 0 \
-  {Sorter alle partier i databasen}
-menuText O FileMaintDelete "Slett duplikater..." 6 \
-  {Finner like partier og merker en av dem for sletting}
-menuText O FileMaintTwin "Duplikatsjekkvindu" 1 \
-  {Åpne/oppdatere duplikatsjekkvinduet}
-menuText O FileMaintName "Navnestaving" 0 {Redigering og stavekontroll av navn}
-menuText O FileMaintNameEditor "Navneredigering" 5 \
-  {Åpne/lukk vinduet for navneredigering}
-menuText O FileMaintNamePlayer "Kontroller navn..." 0 \
-  {Sammenlign navn med stavekontroll-filen}
-menuText O FileMaintNameEvent "Kontroller anledninger..." 11 \
-  {Sammenlign anledninger med stavekontroll-filen}
-menuText O FileMaintNameSite "Kontroller stedsnavn..." 12 \
-  {Sammenlign stedsnavn med stavekontroll-filen}
-menuText O FileMaintNameRound "Kontroller runde-navn..." 11 \
-  {Sammenlign rundenavn med stavekontroll-filen}
 menuText O FileReadOnly "Skrivebeskytt..." 6 \
   {Hindrer endringer på databasen}
 menuText O FileSwitch "Switch to database" 0 \
   {Switch to a different opened database} ;# ***
 menuText O FileExit "Avslutt" 0 {Avslutt Scid}
-# ====== TODO To be translated ======
-menuText O FileMaintFixBase "Fix corrupted base" 0 {Try to fix a corrupted base}
 
 # Edit menu:
 menuText O Edit "Rediger" 0
@@ -172,10 +150,6 @@ menuText O ToolsFilterGraph "Filtergraf" 7 \
 menuText O ToolsAbsFilterGraph "Abs. Filter Graph" 7 {Open/close the filter graph window for absolute values}
 menuText O ToolsOpReport "Åpningsrapport" 0 \
   {Lager en åpningsrapport for denne stillingen}
-# ====== TODO To be translated ======
-menuText O ToolsOpenBaseAsTree "Open base as tree" 0   {Open a base and use it in Tree window}
-# ====== TODO To be translated ======
-menuText O ToolsOpenRecentBaseAsTree "Open recent base as tree" 0   {Open a recent base and use it in Tree window}
 menuText O ToolsTracker "Brikkesporing"  0 {Åpne brikkesporingsvinduet}
 # ====== TODO To be translated ======
 menuText O ToolsTraining "Training"  0 {Training tools (tactics, openings,...) }
@@ -194,6 +168,32 @@ menuText O ToolsTrainFindBestMove "Find best move"  0 {Find best move}
 menuText O ToolsTrainFics "Internet"  0 {Play on freechess.org}
 # ====== TODO To be translated ======
 menuText O ToolsBookTuning "Book tuning" 0 {Book tuning}
+menuText O ToolsMaint "Vedlikehold" 0 {Verktøy for å vedlikeholde Scid-databasen}
+menuText O ToolsMaintWin "Vedlikeholdsvindu" 0 \
+  {Åpne/lukk Scids vedlikeholdsvindu}
+menuText O ToolsMaintCompact "Komprimer database..." 0 \
+  {Sletter ubrukte partier og navn}
+menuText O ToolsMaintClass "ECO-klassifiser partier..." 0 \
+  {Regn om ECO-koden for alle partier}
+menuText O ToolsMaintSort "Sorter database..." 0 \
+  {Sorter alle partier i databasen}
+menuText O ToolsMaintDelete "Slett duplikater..." 6 \
+  {Finner like partier og merker en av dem for sletting}
+menuText O ToolsMaintTwin "Duplikatsjekkvindu" 1 \
+  {Åpne/oppdatere duplikatsjekkvinduet}
+menuText O ToolsMaintName "Navnestaving" 0 {Redigering og stavekontroll av navn}
+menuText O ToolsMaintNameEditor "Navneredigering" 5 \
+  {Åpne/lukk vinduet for navneredigering}
+menuText O ToolsMaintNamePlayer "Kontroller navn..." 0 \
+  {Sammenlign navn med stavekontroll-filen}
+menuText O ToolsMaintNameEvent "Kontroller anledninger..." 11 \
+  {Sammenlign anledninger med stavekontroll-filen}
+menuText O ToolsMaintNameSite "Kontroller stedsnavn..." 12 \
+  {Sammenlign stedsnavn med stavekontroll-filen}
+menuText O ToolsMaintNameRound "Kontroller runde-navn..." 11 \
+  {Sammenlign rundenavn med stavekontroll-filen}
+# ====== TODO To be translated ======
+menuText O ToolsMaintFixBase "Repair base" 0 {Try to repair a corrupted base}
 # ====== TODO To be translated ======
 menuText O ToolsConnectHardware "Connect Hardware" 0 {Connect external hardware}
 # ====== TODO To be translated ======

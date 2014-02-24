@@ -28,6 +28,8 @@ menuText D FileOpen "Öffnen..." 0 {Existierende Scid-Datenbank öffnen}
 menuText D FileClose "Schließen" 0 {Aktive Scid-Datenbank schließen}
 menuText D FileFinder "Finder" 0 {Dateifinderfenster öffnen}
 menuText D FileSavePgn "Save Pgn..." 0 {}
+menuText D FileOpenBaseAsTree "Öffne DB als Baum" 0   {Öffne DB und verwende sie im Zugbaum-Fenster}
+menuText D FileOpenRecentBaseAsTree "Letzte DB als Baum" 0   {Öffne zuletzt verwendete DB im Zugbaum-Fenster}
 menuText D FileBookmarks "Lesezeichen" 0 {Lesezeichenmenü (Tasten: Strg+B)}
 menuText D FileBookmarksAdd "Lesezeichen zur Liste hinzufügen" 0 \
   {Lesezeichen für die aktuelle Partie und Datenbank}
@@ -39,37 +41,11 @@ menuText D FileBookmarksList "Listenansicht" 1 \
   {Lesezeichen als Liste zeigen, ohne Unterverzeichnisse}
 menuText D FileBookmarksSub "Verzeichnisansicht" 3 \
   {Lesezeichen in Verzeichnissen zeigen, nicht als Gesamtliste}
-menuText D FileMaint "Wartung" 0 {Das Scid-Datenbankwartungsfenster}
-menuText D FileMaintWin "Wartungfenster" 0 \
-  {Datenbank-Wartungsfenster öffnen/schließen}
-menuText D FileMaintCompact "Datenbank komprimieren..." 10 \
-  {Datenbank komprimieren, gelöschte Spiele und unbenutzte Namen entfernen}
-menuText D FileMaintClass "Partien ECO-klassifizieren..." 8 \
-{Neuklassifizierung aller Partien nach dem ECO-Code}
-menuText D FileMaintSort "Sortieren..." 0 \
-  {Alle Partien in der aktuellen Datenbank sortieren}
-menuText D FileMaintDelete "Dubletten löschen..." 0 \
-  {Dubletten finden und Löschkennzeichen setzen}
-menuText D FileMaintTwin "Dubletten prüfen" 10 \
-  {Dublettenfenster öffnen/erneuern}
-menuText D FileMaintName "Namen" 0 \
-  {Namenseditor und Rechtschreibprüfung}
-menuText D FileMaintNameEditor "Namenseditor" 0 \
-  {Namenseditorfenster öffnen/schließen}
-menuText D FileMaintNamePlayer "Schreibkorrektur Spieler..." 17 \
-  {Schreibkorrektur der Spielernamen mit Hilfe der .ssp-Datei}
-menuText D FileMaintNameEvent "Schreibkorrektur Ereignis..." 17 \
-  {Schreibkorrektur der Ereignisse mit Hilfe der .ssp-Datei}
-menuText D FileMaintNameSite "Schreibkorrektur Ort..." 17 \
-  {Schreibkorrektur der Orte mit Hilfe der .ssp-Datei}
-menuText D FileMaintNameRound "Schreibkorrektur Runde..." 17 \
-  {Schreibkorrektur der Runden mit Hilfe der .ssp-Datei}
 menuText D FileReadOnly "Schreibschutz..." 3 \
   {Datenbank als schreibgeschützt behandeln, Änderungen verhindern}
 menuText D FileSwitch "Datenbank wechseln" 0 \
   {Zu einer anderen geöffneten Datenbank umschalten}
 menuText D FileExit "Ende" 0 {Scid beenden}
-menuText D FileMaintFixBase "Inkonsistenzen beseitigen" 0 {Versuche eine inkonsistente Datenbank zu reparieren}
 
 # Edit menu:
 menuText D Edit "Bearbeiten" 0
@@ -191,8 +167,6 @@ menuText D ToolsAbsFilterGraph "Abs. Filtergrafik" 11 \
   {Filtergrafik mit absoluten Werten öffnen/schließen}
 menuText D ToolsOpReport "Eröffnungsbericht" 0 \
   {Ausführliche Eröffnungsübersicht für die aktuelle Position erstellen}
-menuText D ToolsOpenBaseAsTree "Öffne DB als Baum" 0   {Öffne DB und verwende sie im Zugbaum-Fenster}
-menuText D ToolsOpenRecentBaseAsTree "Letzte DB als Baum" 0   {Öffne zuletzt verwendete DB im Zugbaum-Fenster}
 menuText D ToolsTracker "Figurenverteilung"  7 \
   {Figurenverteilungsfenster öffnen}
 menuText D ToolsTraining "Training"  0 {Trainingswerkzeuge (Taktik, Eröffnungen,...) }
@@ -204,6 +178,32 @@ menuText D ToolsTrainCalvar "Varianten berechnen"  0 {Training zum Berechnen von
 menuText D ToolsTrainFindBestMove "Besten Zug finden"  0 {Find best move}
 menuText D ToolsTrainFics "Internetpartie"  0 {Internetpartie auf freechess.org}
 menuText D ToolsBookTuning "Buch abstimmen" 0 {Buch abstimmen}
+menuText D ToolsMaint "Wartung" 0 {Das Scid-Datenbankwartungsfenster}
+menuText D ToolsMaintWin "Wartungfenster" 0 \
+  {Datenbank-Wartungsfenster öffnen/schließen}
+menuText D ToolsMaintCompact "Datenbank komprimieren..." 10 \
+  {Datenbank komprimieren, gelöschte Spiele und unbenutzte Namen entfernen}
+menuText D ToolsMaintClass "Partien ECO-klassifizieren..." 8 \
+{Neuklassifizierung aller Partien nach dem ECO-Code}
+menuText D ToolsMaintSort "Sortieren..." 0 \
+  {Alle Partien in der aktuellen Datenbank sortieren}
+menuText D ToolsMaintDelete "Dubletten löschen..." 0 \
+  {Dubletten finden und Löschkennzeichen setzen}
+menuText D ToolsMaintTwin "Dubletten prüfen" 10 \
+  {Dublettenfenster öffnen/erneuern}
+menuText D ToolsMaintName "Namen" 0 \
+  {Namenseditor und Rechtschreibprüfung}
+menuText D ToolsMaintNameEditor "Namenseditor" 0 \
+  {Namenseditorfenster öffnen/schließen}
+menuText D ToolsMaintNamePlayer "Schreibkorrektur Spieler..." 17 \
+  {Schreibkorrektur der Spielernamen mit Hilfe der .ssp-Datei}
+menuText D ToolsMaintNameEvent "Schreibkorrektur Ereignis..." 17 \
+  {Schreibkorrektur der Ereignisse mit Hilfe der .ssp-Datei}
+menuText D ToolsMaintNameSite "Schreibkorrektur Ort..." 17 \
+  {Schreibkorrektur der Orte mit Hilfe der .ssp-Datei}
+menuText D ToolsMaintNameRound "Schreibkorrektur Runde..." 17 \
+  {Schreibkorrektur der Runden mit Hilfe der .ssp-Datei}
+menuText D ToolsMaintFixBase "Inkonsistenzen beseitigen" 0 {Versuche eine inkonsistente Datenbank zu reparieren}
 menuText D ToolsConnectHardware "Hardware verbinden" 0 {Externe Hardware mit Scid verbinden}
 menuText D ToolsConnectHardwareConfigure "Konfigurieren..." 0 {Hardware und Verbindung konfigurieren}
 menuText D ToolsConnectHardwareNovagCitrineConnect "Novag Citrine verbinden" 0 {Novag Citrine mit Scid verbinden}

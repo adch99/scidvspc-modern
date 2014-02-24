@@ -798,7 +798,7 @@ proc nameEditor {} {
     return
   }
   toplevel $w
-  wm title $w "[tr FileMaintNameEditor]"
+  wm title $w "[tr ToolsMaintNameEditor]"
   setWinLocation $w
   bind $w <Configure> "recordWinSize $w"
 

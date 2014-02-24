@@ -12,6 +12,8 @@ menuText P FileOpen "Otwórz..." 0 {Otwórz istniej±c± bazê Scid}
 menuText P FileClose "Zamknij" 0 {Zamknij aktywn± bazê Scid}
 menuText P FileFinder "Poszukiwacz plików" 0 {Otwórz okno poszukiwacza plików}
 menuText P FileSavePgn "Zapisz PGN" 0 {Zapisz bazê w formacie PGN}
+menuText P FileOpenBaseAsTree "Otwórz bazê jako drzewo" 0   {Otwórz bazê i u¿yj jej jako drzewa}
+menuText P FileOpenRecentBaseAsTree "Otwórz ostatnio otwieran± bazê jako drzewo" 0   {Otwórz ostatnio otwieran± bazê i u¿yj jej jako drzewa}
 menuText P FileBookmarks "Zak³adki" 2 {Menu zak³adek (klawisz: Ctrl+B)}
 menuText P FileBookmarksAdd "Dodaj zak³adkê" 0 \
   {Dodaj zak³adkê do aktualnej bazy i pozycji}
@@ -23,37 +25,11 @@ menuText P FileBookmarksList "Wy¶wietlaj katalogi jako listê" 0 \
   {Wy¶wietlaj katalogi zak³adek jako listê, nie jako zagnie¿d¿one menu}
 menuText P FileBookmarksSub "Wy¶wietl katalogi jako menu" 0 \
   {Wy¶wietlaj katalogi zak³adek jako zagnie¿d¿one menu, nie jako listê}
-menuText P FileMaint "Obs³uga" 1 {Narzêdzia obs³ugi bazy Scid}
-menuText P FileMaintWin "Obs³uga" 0 \
-  {Otwórz/zamknij obs³ugê bazy Scid}
-menuText P FileMaintCompact "Porz±dkuj bazê..." 0 \
-  {Porz±dkuj bazê, usuwaj±c skasowane partie i nieu¿ywane nazwiska}
-menuText P FileMaintClass "Klasyfikacja debiutowa partii..." 0 \
-  {Przelicz klasyfikacjê debiutowa wszystkich partii}
-menuText P FileMaintSort "Sortuj bazê..." 0 \
-  {Sortuj wszystkie partie w bazie}
-menuText P FileMaintDelete "Usuñ podwójne partie..." 0 \
-  {Szukaj podwójnych partii i oznacz je do skasowania}
-menuText P FileMaintTwin "Wyszukiwanie podwójnych partii" 0 \
-  {Otwórz/uaktualnij wyszukiwanie podwójnych partii}
-menuText P FileMaintName "Pisownia" 0 \
-  {Edycja nazw/nazwisk i kontrola pisowni}
-menuText P FileMaintNameEditor "Edytor nazwisk" 0 \
-  {Otwórz/zamknij edytor nazwisk}
-menuText P FileMaintNamePlayer "Sprawd¼ pisowniê nazwisk..." 17 \
-  {Sprawd¼ pisowniê nazwisk przy pomocy pliku nazwisk}
-menuText P FileMaintNameEvent "Sprawd¼ pisowniê nazw zawodów..." 22 \
-  {Sprawd¼ pisowniê nazw zawodów przy pomocy pliku turniejów}
-menuText P FileMaintNameSite "Sprawd¼ pisowniê nazw miejscowo¶ci..." 22 \
-  {Sprawd¼ pisowniê nazw miejscowo¶ci przy pomocy pliku miejscowo¶ci}
-menuText P FileMaintNameRound "Sprawd¼ numery rund..." 15 \
-  {Sprawd¼ numery rund przy pomocy pliku}
 menuText P FileReadOnly "Tylko do odczytu..." 0 \
   {Zabezpiecz bazê przed zapisem}
 menuText P FileSwitch "Prze³±cz bazê" 1 \
   {Prze³±cz na inn± otwart± bazê} 
 menuText P FileExit "Koniec" 0 {Zamknij Scida}
-menuText P FileMaintFixBase "Napraw bazê" 0 {Spróbuj naprawiæ uszkodzon± bazê}
 
 menuText P Edit "Edytuj" 0
 menuText P EditAdd "Dodaj wariant" 0 {Dodaj wariant do ruchu w partii}
@@ -172,8 +148,6 @@ menuText P ToolsFilterGraph "U¶redniony wykres filtra" 7 \
 menuText P ToolsAbsFilterGraph "Wykres filtra" 7 {Otwórz/zamknij wykres filtra}
 menuText P ToolsOpReport "Raport debiutowy" 0 \
   {Utwórz raport debiutowy dla aktualnej pozycji}
-menuText P ToolsOpenBaseAsTree "Otwórz bazê jako drzewo" 0   {Otwórz bazê i u¿yj jej jako drzewa}
-menuText P ToolsOpenRecentBaseAsTree "Otwórz ostatnio otwieran± bazê jako drzewo" 0   {Otwórz ostatnio otwieran± bazê i u¿yj jej jako drzewa}
 menuText P ToolsTracker "¦ledzenie figur"  1 {Otwórz/zamknij okno ¶ledzenia figur} 
 menuText P ToolsTraining "Trening"  0 {Narzêdzia do treningu taktyki i debiutów}
 menuText P ToolsComp "Turniej komputerowy" 2 {Turniej programów komputerowych}
@@ -184,6 +158,32 @@ menuText P ToolsTrainCalvar "Liczenie wariantów"  0 {Æwicz liczenie wariantów}
 menuText P ToolsTrainFindBestMove "Znajd¼ najlepszy ruch"  0 {Znajd¼ najlepszy ruch}
 menuText P ToolsTrainFics "Internet"  0 {Graj w szachy na freechess.org}
 menuText P ToolsBookTuning "Konfiguracja ksi±¿ki debiutowej" 0 {Konfiguruj ksi±¿kê debiutow±}
+menuText P ToolsMaint "Obs³uga" 1 {Narzêdzia obs³ugi bazy Scid}
+menuText P ToolsMaintWin "Obs³uga" 0 \
+  {Otwórz/zamknij obs³ugê bazy Scid}
+menuText P ToolsMaintCompact "Porz±dkuj bazê..." 0 \
+  {Porz±dkuj bazê, usuwaj±c skasowane partie i nieu¿ywane nazwiska}
+menuText P ToolsMaintClass "Klasyfikacja debiutowa partii..." 0 \
+  {Przelicz klasyfikacjê debiutowa wszystkich partii}
+menuText P ToolsMaintSort "Sortuj bazê..." 0 \
+  {Sortuj wszystkie partie w bazie}
+menuText P ToolsMaintDelete "Usuñ podwójne partie..." 0 \
+  {Szukaj podwójnych partii i oznacz je do skasowania}
+menuText P ToolsMaintTwin "Wyszukiwanie podwójnych partii" 0 \
+  {Otwórz/uaktualnij wyszukiwanie podwójnych partii}
+menuText P ToolsMaintName "Pisownia" 0 \
+  {Edycja nazw/nazwisk i kontrola pisowni}
+menuText P ToolsMaintNameEditor "Edytor nazwisk" 0 \
+  {Otwórz/zamknij edytor nazwisk}
+menuText P ToolsMaintNamePlayer "Sprawd¼ pisowniê nazwisk..." 17 \
+  {Sprawd¼ pisowniê nazwisk przy pomocy pliku nazwisk}
+menuText P ToolsMaintNameEvent "Sprawd¼ pisowniê nazw zawodów..." 22 \
+  {Sprawd¼ pisowniê nazw zawodów przy pomocy pliku turniejów}
+menuText P ToolsMaintNameSite "Sprawd¼ pisowniê nazw miejscowo¶ci..." 22 \
+  {Sprawd¼ pisowniê nazw miejscowo¶ci przy pomocy pliku miejscowo¶ci}
+menuText P ToolsMaintNameRound "Sprawd¼ numery rund..." 15 \
+  {Sprawd¼ numery rund przy pomocy pliku}
+menuText P ToolsMaintFixBase "Napraw bazê" 0 {Spróbuj naprawiæ uszkodzon± bazê}
 
 menuText P ToolsConnectHardware "Pod³±cz urz±dzenie" 0 {Pod³±cz zewnêtrzne urz±dzenie}
 menuText P ToolsConnectHardwareConfigure "Konfiguruj..." 0 {Konfiguruj zewnêtrzne urz±dzenie i po³±czenie}

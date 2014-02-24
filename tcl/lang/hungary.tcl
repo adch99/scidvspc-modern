@@ -13,6 +13,10 @@ menuText H FileOpen "Megnyit..." 3 {Meglévõ SCID-adatbázis megnyitása}
 menuText H FileClose "Bezár" 2 {Az aktív SCID-adatbázis bezárása}
 menuText H FileFinder "Fájlkeresõ" 0 {Kinyitja a Fájlkeresõ ablakot.}
 menuText H FileSavePgn "Save Pgn..." 0 {}
+# ====== TODO To be translated ======
+menuText H FileOpenBaseAsTree "Open Base as Tree" 13   {Open a base and use it in Tree window}
+# ====== TODO To be translated ======
+menuText H FileOpenRecentBaseAsTree "Open Recent as Tree" 0   {Open a recent base and use it in Tree window}
 menuText H FileBookmarks "Könyvjelzõk" 0 {Könyvjelzõmenü (gyorsbillentyû: Ctrl+B)}
 menuText H FileBookmarksAdd "Új könyvjelzõ" 0 \
   {Megjelöli az aktuális játszmát és állást.}
@@ -24,37 +28,11 @@ menuText H FileBookmarksList "Megjelenítés listaként" 13 \
   {A könyvjelzõk könyvtárai nem almenüként, hanem listaként jelennek meg.}
 menuText H FileBookmarksSub "Megjelenítés almenüként" 13 \
   {A könyvjelzõk könyvtárai nem listaként, hanem almenüként jelennek meg.}
-menuText H FileMaint "Gondozás" 0 {SCID adatbázisgondozó eszközök}
-menuText H FileMaintWin "Adatbázisgondozó ablak" 0 \
-  {Kinyitja/becsukja az SCID adatbázisgondozó ablakot.}
-menuText H FileMaintCompact "Adatbázis tömörítése..." 10 \
-  {Eltávolítja az adatbázisból a törölt játszmákat és a használaton kívül álló neveket.}
-menuText H FileMaintClass "Osztályba sorolás..." 0 \
-  {Újra kiszámítja az összes játszma ECO-kódját.}
-menuText H FileMaintSort "Rendezés..." 0 \
-  {Rendezi az adatbázis összes játszmáját.}
-menuText H FileMaintDelete "Ikerjátszmák törlése..." 0 \
-  {Megkeresi az ikerjátszmákat, és megjelöli õket törlésre.}
-menuText H FileMaintTwin "Ikerkeresõ ablak" 4 \
-  {Kinyitja/becsukja az ikerkeresõ ablakot.}
-menuText H FileMaintName "Nevek helyesírása" 0 {Névszerkesztõ és helyesírási eszközök}
-menuText H FileMaintNameEditor "Névszerkesztõ" 0 \
-  {Kinyitja/becsukja a névszerkesztõ ablakot.}
-menuText H FileMaintNamePlayer "Játékosnevek ellenõrzése..." 0 \
-  {A helyesírás-ellenõrzõ fájl segítségével ellenõrzi a játékosok nevét.}
-menuText H FileMaintNameEvent "Eseménynevek ellenõrzése..." 0 \
-  {A helyesírás-ellenõrzõ fájl segítségével ellenõrzi események nevét.}
-menuText H FileMaintNameSite "Helynevek ellenõrzése..." 0 \
-  {A helyesírás-ellenõrzõ fájl segítségével ellenõrzi a helyszínek nevét.}
-menuText H FileMaintNameRound "Fordulónevek ellenõrzése..." 0 \
-  {A helyesírás-ellenõrzõ fájl segítségével ellenõrzi a fordulók nevét.}
 menuText H FileReadOnly "Írásvédelem..." 0 \
   {Az aktuális adatbázist csak olvashatóvá teszi, nehogy meg lehessen változtatni.}
 menuText H FileSwitch "Adatbázisváltás" 0 \
   {Átvált egy másik megnyitott adatbázisra.}
 menuText H FileExit "Kilép" 2 {Kilép SCID-bõl.}
-# ====== TODO To be translated ======
-menuText H FileMaintFixBase "Fix corrupted base" 0 {Try to fix a corrupted base}
 
 # Edit menu:
 menuText H Edit "Szerkesztés" 1
@@ -170,10 +148,6 @@ menuText H ToolsFilterGraph "Szûrõgrafikon" 0 \
 menuText H ToolsAbsFilterGraph "Abs. Filter Graph" 7 {Open/close the filter graph window for absolute values}
 menuText H ToolsOpReport "Megnyitási összefoglaló" 0 \
   {Ismertetõt készít az aktuális álláshoz tartozó megnyitásról.}
-# ====== TODO To be translated ======
-menuText H ToolsOpenBaseAsTree "Open base as tree" 0   {Open a base and use it in Tree window}
-# ====== TODO To be translated ======
-menuText H ToolsOpenRecentBaseAsTree "Open recent base as tree" 0   {Open a recent base and use it in Tree window}
 menuText H ToolsTracker "Figurakövetõ"  0 {Kinyitja/becsukja a figurakövetõ ablakot.}
 # ====== TODO To be translated ======
 menuText H ToolsTraining "Training"  0 {Training tools (tactics, openings,...) }
@@ -192,6 +166,32 @@ menuText H ToolsTrainFindBestMove "Find best move"  0 {Find best move}
 menuText H ToolsTrainFics "Internet"  0 {Play on freechess.org}
 # ====== TODO To be translated ======
 menuText H ToolsBookTuning "Book tuning" 0 {Book tuning}
+menuText H ToolsMaint "Gondozás" 0 {SCID adatbázisgondozó eszközök}
+menuText H ToolsMaintWin "Adatbázisgondozó ablak" 0 \
+  {Kinyitja/becsukja az SCID adatbázisgondozó ablakot.}
+menuText H ToolsMaintCompact "Adatbázis tömörítése..." 10 \
+  {Eltávolítja az adatbázisból a törölt játszmákat és a használaton kívül álló neveket.}
+menuText H ToolsMaintClass "Osztályba sorolás..." 0 \
+  {Újra kiszámítja az összes játszma ECO-kódját.}
+menuText H ToolsMaintSort "Rendezés..." 0 \
+  {Rendezi az adatbázis összes játszmáját.}
+menuText H ToolsMaintDelete "Ikerjátszmák törlése..." 0 \
+  {Megkeresi az ikerjátszmákat, és megjelöli õket törlésre.}
+menuText H ToolsMaintTwin "Ikerkeresõ ablak" 4 \
+  {Kinyitja/becsukja az ikerkeresõ ablakot.}
+menuText H ToolsMaintName "Nevek helyesírása" 0 {Névszerkesztõ és helyesírási eszközök}
+menuText H ToolsMaintNameEditor "Névszerkesztõ" 0 \
+  {Kinyitja/becsukja a névszerkesztõ ablakot.}
+menuText H ToolsMaintNamePlayer "Játékosnevek ellenõrzése..." 0 \
+  {A helyesírás-ellenõrzõ fájl segítségével ellenõrzi a játékosok nevét.}
+menuText H ToolsMaintNameEvent "Eseménynevek ellenõrzése..." 0 \
+  {A helyesírás-ellenõrzõ fájl segítségével ellenõrzi események nevét.}
+menuText H ToolsMaintNameSite "Helynevek ellenõrzése..." 0 \
+  {A helyesírás-ellenõrzõ fájl segítségével ellenõrzi a helyszínek nevét.}
+menuText H ToolsMaintNameRound "Fordulónevek ellenõrzése..." 0 \
+  {A helyesírás-ellenõrzõ fájl segítségével ellenõrzi a fordulók nevét.}
+# ====== TODO To be translated ======
+menuText H ToolsMaintFixBase "Repair base" 0 {Try to repair a corrupted base}
 # ====== TODO To be translated ======
 menuText H ToolsConnectHardware "Connect Hardware" 0 {Connect external hardware}
 # ====== TODO To be translated ======

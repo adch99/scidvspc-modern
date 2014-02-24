@@ -18,6 +18,8 @@ menuText N FileOpen "Openen..." 0 {Open een bestaande ScidvsPC database}
 menuText N FileClose "Sluiten" 0 {Sluit de actieve ScidvsPC database}
 menuText N FileFinder "Bestandzoeker" 0 {Open het bestandszoekvenster}
 menuText N FileSavePgn "PGN opslaan..." 0 {Deze partij als PGN-bestand opslaan}
+menuText N FileOpenBaseAsTree "Open database als boom" 5  {Open een database en toon deze als een boomweergave}
+menuText N FileOpenRecentBaseAsTree "Open recente database als boom" 5  {Open een recent gebruikte database als boomweergave}
 menuText N FileBookmarks "Bladwijzers" 2 {Bladwijzer menu (sneltoets: Ctrl+B)}
 menuText N FileBookmarksAdd "Toevoegen bladwijzer" 0 \
   {Bladwijzer naar huidige databasepartij en stelling}
@@ -29,37 +31,11 @@ menuText N FileBookmarksList "Weergeven bladwijzers als lijst" 0 \
   {Weergeven bladwijzers als lijst, niet als submenu's}
 menuText N FileBookmarksSub "Weergeven bladwijzers als submenu's" 0 \
   {Weergeven bladwijzers als submenu's, niet als lijst}
-menuText N FileMaint "Onderhoud" 3 {Onderhoud ScidvsPC database}
-menuText N FileMaintWin "Onderhoudsvenster" 2 \
-  {Open/sluit het ScidvsPC onderhoudsvenster}
-menuText N FileMaintCompact "Reorganiseer database..." 0 \
-  {Reorganiseer database bestanden}
-menuText N FileMaintClass "Partijen ECO-classificeren..." 10 \
-  {Herbereken de ECO code van alle partijen}
-menuText N FileMaintSort "Sorteren..." 0 \
-  {Sorteer alle partijen in de database}
-menuText N FileMaintDelete "Dubbele partijen verwijderen..." 0 \
-  {Vind dubbele partijen om ze te verwijderen}
-menuText N FileMaintTwin "Dubbele partijenvenster" 1 \
-  {Open/bijwerken het dubbele partijen controlevenster}
-menuText N FileMaintName "Namen" 0 \
-  {Corrigeer namen/spelling}
-menuText N FileMaintNameEditor "Namen-bewerker" 6 \
-  {Open/sluit het namen correctievenster}
-menuText N FileMaintNamePlayer "Corrigeer naam speler..." 15 \
-  {Controleer spelling namen via het spelling-bestand}
-menuText N FileMaintNameEvent "Corrigeer naam evenement..." 15 \
-  {Controleer spelling evenementen via spelling-bestand}
-menuText N FileMaintNameSite "Corrigeer naam plaats..." 15 \
-  {Controleer plaatsnamen via spelling-bestand}
-menuText N FileMaintNameRound "Corrigeer ronde..." 10 \
-  {Controleer rondenamen via spelling-bestand}
 menuText N FileReadOnly "Alleen lezen..." 7 \
   {Zet huidige database op alleen-lezen en voorkom wijzigingen}
 menuText N FileSwitch "Schakel naar andere database" 1 \
   {Schakel naar een andere geopende database} 
 menuText N FileExit "Programma afsluiten" 3 {Einde ScidvsPC programma}
-menuText N FileMaintFixBase "Herstel beschadigde database" 0 {Proberen een beschadigde database te herstellen}
 
 # Edit menu:
 menuText N Edit "Bewerken" 2
@@ -177,8 +153,6 @@ menuText N ToolsFilterGraph "Grafisch filter" 0 \
 menuText N ToolsAbsFilterGraph "Abs. grafisch filter" 0 {Open/sluit het grafische filtervenster voor absolute waarden}
 menuText N ToolsOpReport "Openingen rapportering" 3 \
   {Genereer een openingenrapport voor de huidige stelling}
-menuText N ToolsOpenBaseAsTree "Open database als boom" 5  {Open een database en toon deze als een boomweergave}
-menuText N ToolsOpenRecentBaseAsTree "Open recente database als boom" 5  {Open een recent gebruikte database als boomweergave}
 menuText N ToolsTracker "Stuk spoorvolger" 1 {Open het stuk spoorvolger venster}
 menuText N ToolsTraining "Training" 1 {Training gereedschappen (tactiek, openingen,...) }
 menuText N ToolsComp "Toernooi" 1 {Schaak-engine toernooi}
@@ -189,6 +163,32 @@ menuText N ToolsTrainCalvar "Bereken varianten"  0 {Training in het berekenen va
 menuText N ToolsTrainFindBestMove "Vind de beste zet"  0 {Vind de beste zet}
 menuText N ToolsTrainFics "Internet"  0 {Spelen op FICS - freechess.org}
 menuText N ToolsBookTuning "Openingenboek afstemmen" 0 {Openingenboek afstemmen}
+menuText N ToolsMaint "Onderhoud" 3 {Onderhoud ScidvsPC database}
+menuText N ToolsMaintWin "Onderhoudsvenster" 2 \
+  {Open/sluit het ScidvsPC onderhoudsvenster}
+menuText N ToolsMaintCompact "Reorganiseer database..." 0 \
+  {Reorganiseer database bestanden}
+menuText N ToolsMaintClass "Partijen ECO-classificeren..." 10 \
+  {Herbereken de ECO code van alle partijen}
+menuText N ToolsMaintSort "Sorteren..." 0 \
+  {Sorteer alle partijen in de database}
+menuText N ToolsMaintDelete "Dubbele partijen verwijderen..." 0 \
+  {Vind dubbele partijen om ze te verwijderen}
+menuText N ToolsMaintTwin "Dubbele partijenvenster" 1 \
+  {Open/bijwerken het dubbele partijen controlevenster}
+menuText N ToolsMaintName "Namen" 0 \
+  {Corrigeer namen/spelling}
+menuText N ToolsMaintNameEditor "Namen-bewerker" 6 \
+  {Open/sluit het namen correctievenster}
+menuText N ToolsMaintNamePlayer "Corrigeer naam speler..." 15 \
+  {Controleer spelling namen via het spelling-bestand}
+menuText N ToolsMaintNameEvent "Corrigeer naam evenement..." 15 \
+  {Controleer spelling evenementen via spelling-bestand}
+menuText N ToolsMaintNameSite "Corrigeer naam plaats..." 15 \
+  {Controleer plaatsnamen via spelling-bestand}
+menuText N ToolsMaintNameRound "Corrigeer ronde..." 10 \
+  {Controleer rondenamen via spelling-bestand}
+menuText N ToolsMaintFixBase "Herstel beschadigde database" 0 {Proberen een beschadigde database te herstellen}
 menuText N ToolsConnectHardware "Verbind hardware" 0 {Externe hardware verbinden cq aansluiten}
 menuText N ToolsConnectHardwareConfigure "Configureer..." 0 {Configureer externe hardware en verbinding}
 menuText N ToolsConnectHardwareNovagCitrineConnect "Verbind Novag Citrine" 0 {Verbind Novag Citrine met ScidvsPC}

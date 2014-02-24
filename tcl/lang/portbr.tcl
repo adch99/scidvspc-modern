@@ -13,6 +13,10 @@ menuText B FileOpen "Abrir..." 0 {Abre uma base de dados Scid existente}
 menuText B FileClose "Fechar" 0 {Fecha a base de dados Scid ativa}
 menuText B FileFinder "Buscador" 0 {Abre a janela do Buscador de Arquivos}
 menuText B FileSavePgn "Save Pgn..." 0 {}
+# ====== TODO To be translated ======
+menuText B FileOpenBaseAsTree "Open Base as Tree" 13   {Open a base and use it in Tree window}
+# ====== TODO To be translated ======
+menuText B FileOpenRecentBaseAsTree "Open Recent as Tree" 0   {Open a recent base and use it in Tree window}
 menuText B FileBookmarks "Favoritos" 0 {Menu de Favoritos (atalho: Ctrl+B)}
 menuText B FileBookmarksAdd "Adicionar a Favoritos" 0 \
   {Adiciona o posicao do jogo do banco de dados atual}
@@ -24,37 +28,11 @@ menuText B FileBookmarksList "Mostrar pastas como lista" 0 \
   {Mostra as pastas de favoritos em lista unica}
 menuText B FileBookmarksSub "Mostrar pastas como submenus" 0 \
   {Mostra as pastas de favoritos como submenus}
-menuText B FileMaint "Manutencao" 0 {Ferramentas de manutencao de bases de dados Scid}
-menuText B FileMaintWin "Janela de Manutencao" 0 \
-  {Abre/Fecha a janela de manutencao de bases de dados Scid}
-menuText B FileMaintCompact "Compactar base de dados..." 0 \
-  {Compacta arquivos de bases de dados, removendo jogos deletados e nomes nao utilizados}
-menuText B FileMaintClass "Classificar jogos por ECO..." 2 \
-  {Recalcula o codigo ECO de todos os jogos}
-menuText B FileMaintSort "Ordenar base de dados..." 0 \
-  {Ordena todos os jogos da base de dados}
-menuText B FileMaintDelete "Apagar jogos duplicados..." 13 \
-  {Encontra jogos duplicados e os marca para exclusao}
-menuText B FileMaintTwin "Janela de verificacao de duplicatas" 10 \
-  {Abre/atualiza a janela de verificacao de duplicatas}
-menuText B FileMaintName "Ortografia de nomes" 14 {Ferramentas de edicao e correcao ortografica de nomes}
-menuText B FileMaintNameEditor "Editor de Nomes" 0 \
-  {Abre/fecha a janela do editor de nomes}
-menuText B FileMaintNamePlayer "Verificacao Ortografica de Nomes de Jogadores..." 11 \
-  {Verifica a correcao dos nomes dos jogadores de acordo com o arquivo de correcao ortografica}
-menuText B FileMaintNameEvent "Verificacao Ortografica de Nomes de Eventos..." 11 \
-  {Verifica a correcao dos nomes de eventos de acordo com o arquivo de verificacao ortografica}
-menuText B FileMaintNameSite "Verificacao Ortografica de Lugares..." 11 \
-  {Verifica a correcao dos nomes de lugares usando o arquivo de correcao ortografica}
-menuText B FileMaintNameRound "Verificacao Ortografica de Rodadas..." 11 \
-  {Verificacao dos nomes de rodadas usando o arquivo de correcao ortografica}
 menuText B FileReadOnly "Apenas Leitura..." 7 \
   {Trata a base de dados corrente como arquivo de leitura, impedindo mudancas}
 menuText B FileSwitch "Switch to database" 0 \
   {Switch to a different opened database} ;# ***
 menuText B FileExit "Sair" 0 {Encerrar o Scid}
-# ====== TODO To be translated ======
-menuText B FileMaintFixBase "Fix corrupted base" 0 {Try to fix a corrupted base}
 
 # Edit menu:
 menuText B Edit "Editar" 0
@@ -172,10 +150,6 @@ menuText B ToolsFilterGraph "Filter graph" 7 \
 menuText B ToolsAbsFilterGraph "Abs. Filter Graph" 7 {Open/close the filter graph window for absolute values}
 menuText B ToolsOpReport "Relatorio de abertura" 0 \
   {Gera um relatorio de abertura para a posicao corrente}
-# ====== TODO To be translated ======
-menuText B ToolsOpenBaseAsTree "Open base as tree" 0   {Open a base and use it in Tree window}
-# ====== TODO To be translated ======
-menuText B ToolsOpenRecentBaseAsTree "Open recent base as tree" 0   {Open a recent base and use it in Tree window}
 menuText B ToolsTracker "Piece Tracker"  0 {Open the Piece Tracker window} ;# ***
 # ====== TODO To be translated ======
 menuText B ToolsTraining "Training"  0 {Training tools (tactics, openings,...) }
@@ -194,6 +168,32 @@ menuText B ToolsTrainFindBestMove "Find best move"  0 {Find best move}
 menuText B ToolsTrainFics "Internet"  0 {Play on freechess.org}
 # ====== TODO To be translated ======
 menuText B ToolsBookTuning "Book tuning" 0 {Book tuning}
+menuText B ToolsMaint "Manutencao" 0 {Ferramentas de manutencao de bases de dados Scid}
+menuText B ToolsMaintWin "Janela de Manutencao" 0 \
+  {Abre/Fecha a janela de manutencao de bases de dados Scid}
+menuText B ToolsMaintCompact "Compactar base de dados..." 0 \
+  {Compacta arquivos de bases de dados, removendo jogos deletados e nomes nao utilizados}
+menuText B ToolsMaintClass "Classificar jogos por ECO..." 2 \
+  {Recalcula o codigo ECO de todos os jogos}
+menuText B ToolsMaintSort "Ordenar base de dados..." 0 \
+  {Ordena todos os jogos da base de dados}
+menuText B ToolsMaintDelete "Apagar jogos duplicados..." 13 \
+  {Encontra jogos duplicados e os marca para exclusao}
+menuText B ToolsMaintTwin "Janela de verificacao de duplicatas" 10 \
+  {Abre/atualiza a janela de verificacao de duplicatas}
+menuText B ToolsMaintName "Ortografia de nomes" 14 {Ferramentas de edicao e correcao ortografica de nomes}
+menuText B ToolsMaintNameEditor "Editor de Nomes" 0 \
+  {Abre/fecha a janela do editor de nomes}
+menuText B ToolsMaintNamePlayer "Verificacao Ortografica de Nomes de Jogadores..." 11 \
+  {Verifica a correcao dos nomes dos jogadores de acordo com o arquivo de correcao ortografica}
+menuText B ToolsMaintNameEvent "Verificacao Ortografica de Nomes de Eventos..." 11 \
+  {Verifica a correcao dos nomes de eventos de acordo com o arquivo de verificacao ortografica}
+menuText B ToolsMaintNameSite "Verificacao Ortografica de Lugares..." 11 \
+  {Verifica a correcao dos nomes de lugares usando o arquivo de correcao ortografica}
+menuText B ToolsMaintNameRound "Verificacao Ortografica de Rodadas..." 11 \
+  {Verificacao dos nomes de rodadas usando o arquivo de correcao ortografica}
+# ====== TODO To be translated ======
+menuText B ToolsMaintFixBase "Repair base" 0 {Try to repair a corrupted base}
 
 menuText B ToolsConnectHardware "Connect Hardware" 0 {Connect external hardware}
 menuText B ToolsConnectHardwareConfigure "Configure..." 0 {Configure external hardware and connection}

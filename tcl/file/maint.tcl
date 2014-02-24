@@ -103,7 +103,7 @@ proc ::maint::Open {} {
   set bold font_SmallBold
 
   toplevel $w
-  wm title $w "[tr FileMaint]"
+  wm title $w "[tr ToolsMaint]"
   setWinLocation $w
   wm resizable $w 0 0
   bind $w <F1> {helpWindow Maintenance}
@@ -842,7 +842,7 @@ proc makeClassifyWin {{parent .}} {
   }
   toplevel $w
   wm withdraw $w
-  wm title $w "[tr FileMaintClass]"
+  wm title $w "[tr ToolsMaintClass]"
   label $w.label -font font_Bold -textvar ::tr(ClassifyWhich)
   frame $w.g
   radiobutton $w.g.all -textvar ::tr(ClassifyAll) \
@@ -1698,7 +1698,7 @@ proc makeSortWin {{parent .}} {
   }
   toplevel $w
   wm withdraw $w
-  wm title $w "[tr FileMaintSort]"
+  wm title $w "[tr ToolsMaintSort]"
   wm resizable $w 0 0
 
   label $w.torder -textvar ::tr(SortCriteria) -font font_Bold

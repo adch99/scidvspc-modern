@@ -17,43 +17,19 @@ menuText S FileOpen "Abrir..." 1 {Abre una base de datos Scid ya existente}
 menuText S FileClose "Cerrar" 0 {Cierra la base de datos Scid activa}
 menuText S FileFinder "Visor..." 0 {Abre la ventana del visor de archivos}
 menuText S FileSavePgn "Grabar PGN" 0 {Graba la partida a un fichero PGN}
+menuText S FileOpenBaseAsTree "Abrir base como árbol" 0   {Abrir una base y usarla en la ventana de árbol (Tree)}
+menuText S FileOpenRecentBaseAsTree "Abrir base reciente como árbol" 0   {Abre una base reciente y la usa en ventana de árbol (Tree)} 
 menuText S FileBookmarks "Partidas favoritas" 0 {Seleccionar partidas favoritas (Ctrl+B)}
 menuText S FileBookmarksAdd "Añadir" 0 {Señala la partida y posición actual de la base de datos}
 menuText S FileBookmarksFile "Archivar" 8 {Archiva un marcador para la partida y posición actual}
 menuText S FileBookmarksEdit "Editar partidas favoritas..." 0 {Edita los menus de las partidas favoritas}
 menuText S FileBookmarksList "Mostrar partidas favoritas" 0 {Muestrar las carpetas de favoritas en una sola lista, sin submenús}
 menuText S FileBookmarksSub "Mostrar partidas marcadas con submenus" 0 {Muestrar las carpetas de favoritas como submenús, no una sola lista}
-menuText S FileMaint "Mantenimiento" 0 \
-  {Herramientas de mantenimiento de la base de datos Scid}
-menuText S FileMaintWin "Mantenimiento" 0 \
-  {Abre/cierra la ventana de mantenimiento de la base de datos Scid}
-menuText S FileMaintCompact "Compactar base de datos..." 0 \
-  {Compacta los archivos de la base de datos, quitando partidas borradas y nombres no usados}
-menuText S FileMaintClass "Clasificar partidas por ECO..." 24 \
-  {Recalcula el código ECO de todas las partidas}
-menuText S FileMaintSort "Ordenar base de datos..." 0 \
-  {Ordena todas las partidas de la base de datos}
-menuText S FileMaintDelete "Borrar partidas dobles..." 0 \
-  {Encuentra partidas dobles y las coloca para ser borradas}
-menuText S FileMaintTwin "Inspección de dobles" 11 \
-  {Abre/actualiza la ventana de inspección de dobles}
-menuText S FileMaintName "Ortografía de nombres" 0 {Herramientas de ortografía y edición de nombres}
-menuText S FileMaintNameEditor "Edición de nombres" 0 \
-  {Abre/Cierra la ventana de edición de nombres}
-menuText S FileMaintNamePlayer "Corrección de nombres de jugadores" 11 \
-  {Comprobación ortográfica de jugadores usando archivo de comprobación ortográfica}
-menuText S FileMaintNameEvent "Corrección de nombres de eventos" 11 \
-  {Comprobación ortográfica de eventos usando el archivo de comprobación ortográfica}
-menuText S FileMaintNameSite "Corrección de nombres de lugares" 11 \
-  {Comprobación ortográfica de lugares usando el archivo de comprobación ortográfica}
-menuText S FileMaintNameRound "Corrección de nombre de rondas" 11 \
-  {Comprobación ortográfica de rondas usando el archivo de comprobación ortográfica}
 menuText S FileReadOnly "Sólo lectura" 0 \
   {Trata la actual base de datos como de sólo lectura, previniendo cambios}
 menuText S FileSwitch "Cambiar de base" 0 \
   {Cambia a otra base de partidas abierta}
 menuText S FileExit "Salir" 0 {Salir de Scid}
-menuText S FileMaintFixBase "Reparar base corrupta" 0 {Intenta reparar una base corrupta}
 
 # Edit menu:
 menuText S Edit "Editar" 0
@@ -173,8 +149,6 @@ menuText S ToolsFilterGraph "Filtro gráfico" 7 \
 menuText S ToolsAbsFilterGraph "Filtro gráfico Abs." 7 {Abrir/Cerrar la ventana de filtro gráfico para valores absolutos}
 menuText S ToolsOpReport "Informe de la apertura" 1 \
   {Crea un informe de la apertura para la posición actual}
-menuText S ToolsOpenBaseAsTree "Abrir base como árbol" 0   {Abrir una base y usarla en la ventana de árbol (Tree)}
-menuText S ToolsOpenRecentBaseAsTree "Abrir base reciente como árbol" 0   {Abre una base reciente y la usa en ventana de árbol (Tree)} 
 menuText S ToolsTracker "Rastreador de piezas"  6 {Abre la ventana del rastreador de piezas}
 menuText S ToolsTraining "Entrenamiento"  0 {Entrenamiento (táctica, aperturas,...)}
 menuText S ToolsComp "Torneo de motores" 0 {Torneo de motores}
@@ -185,6 +159,32 @@ menuText S ToolsTrainCalvar "Cálculo de variaciones"  0 {Calculo de variantes}
 menuText S ToolsTrainFindBestMove "Encontrar la mejor jugada"  0 {Busca el movimiento mejor}
 menuText S ToolsTrainFics "Internet (FICS)"  0 {Jugar en freechess.org}
 menuText S ToolsBookTuning "Sintonizar libro de aperturas" 0 {Sintonizar libro (Book)}
+menuText S ToolsMaint "Mantenimiento" 0 \
+  {Herramientas de mantenimiento de la base de datos Scid}
+menuText S ToolsMaintWin "Mantenimiento" 0 \
+  {Abre/cierra la ventana de mantenimiento de la base de datos Scid}
+menuText S ToolsMaintCompact "Compactar base de datos..." 0 \
+  {Compacta los archivos de la base de datos, quitando partidas borradas y nombres no usados}
+menuText S ToolsMaintClass "Clasificar partidas por ECO..." 24 \
+  {Recalcula el código ECO de todas las partidas}
+menuText S ToolsMaintSort "Ordenar base de datos..." 0 \
+  {Ordena todas las partidas de la base de datos}
+menuText S ToolsMaintDelete "Borrar partidas dobles..." 0 \
+  {Encuentra partidas dobles y las coloca para ser borradas}
+menuText S ToolsMaintTwin "Inspección de dobles" 11 \
+  {Abre/actualiza la ventana de inspección de dobles}
+menuText S ToolsMaintName "Ortografía de nombres" 0 {Herramientas de ortografía y edición de nombres}
+menuText S ToolsMaintNameEditor "Edición de nombres" 0 \
+  {Abre/Cierra la ventana de edición de nombres}
+menuText S ToolsMaintNamePlayer "Corrección de nombres de jugadores" 11 \
+  {Comprobación ortográfica de jugadores usando archivo de comprobación ortográfica}
+menuText S ToolsMaintNameEvent "Corrección de nombres de eventos" 11 \
+  {Comprobación ortográfica de eventos usando el archivo de comprobación ortográfica}
+menuText S ToolsMaintNameSite "Corrección de nombres de lugares" 11 \
+  {Comprobación ortográfica de lugares usando el archivo de comprobación ortográfica}
+menuText S ToolsMaintNameRound "Corrección de nombre de rondas" 11 \
+  {Comprobación ortográfica de rondas usando el archivo de comprobación ortográfica}
+menuText S ToolsMaintFixBase "Reparar base corrupta" 0 {Intenta reparar una base corrupta}
 menuText S ToolsConnectHardware "Conectar hardware" 0 {Conectar  hardware externo}
 menuText S ToolsConnectHardwareConfigure "Configurar..." 0 {Configurar conexión a hardware externo}
 menuText S ToolsConnectHardwareNovagCitrineConnect "Conectar Novag Citrine" 0 {Conectar Novag Citrine}

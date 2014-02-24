@@ -90,6 +90,9 @@ $m add command -label FileClose -acc "Ctrl+W" -command ::file::Close
 bind .main <Control-w> ::file::Close
 set helpMessage($m,[incr menuindex]) FileClose
 
+$m add command -label FileReadOnly -command makeBaseReadOnly
+set helpMessage($m,[incr menuindex]) FileReadOnly
+
 $m add command -label FileFinder -acc "Ctrl+/" -command ::file::finder::Open
 bind .main <Control-slash> ::file::finder::Open
 set helpMessage($m,[incr menuindex]) FileFinder
@@ -110,68 +113,14 @@ menu $m.switch -tearoff 1
 
 # naming is weird because the menus are moved from Tools to File menus
 
-$m add command -label ToolsOpenBaseAsTree -command ::file::openBaseAsTree
-set helpMessage($m,[incr menuindex]) ToolsOpenBaseAsTree
-
+$m add command -label FileOpenBaseAsTree -command ::file::openBaseAsTree
+set helpMessage($m,[incr menuindex]) FileOpenBaseAsTree
 menu $m.recenttrees
-$m add cascade -label ToolsOpenRecentBaseAsTree -menu $m.recenttrees
-set helpMessage($m,[incr menuindex]) ToolsOpenRecentBaseAsTree
+$m add cascade -label FileOpenRecentBaseAsTree -menu $m.recenttrees
+set helpMessage($m,[incr menuindex]) FileOpenRecentBaseAsTree
 
 $m add separator
 incr menuindex
-
-menu $m.utils
-$m add cascade -label FileMaint -menu .menu.file.utils
-set helpMessage($m,[incr menuindex]) FileMaint
-
-$m.utils add command -label FileMaintWin -accelerator "Ctrl+M" -command ::maint::Open
-set helpMessage($m.utils,0) FileMaintWin
-
-$m.utils add command -label FileMaintCompact -command makeCompactWin
-set helpMessage($m.utils,1) FileMaintCompact
-
-$m.utils add command -label FileMaintClass -command classifyAllGames
-set helpMessage($m.utils,2) FileMaintClass
-
-$m.utils add command -label FileMaintSort -command makeSortWin
-set helpMessage($m.utils,3) FileMaintSort
-
-$m.utils add separator
-
-$m.utils add command -label FileMaintDelete -state disabled -command markTwins
-set helpMessage($m.utils,5) FileMaintDelete
-
-$m.utils add command -label FileMaintTwin -command updateTwinChecker
-set helpMessage($m.utils,6) FileMaintTwin
-
-$m.utils add separator
-
-menu $m.utils.name
-$m.utils add cascade -label FileMaintName -menu .menu.file.utils.name
-set helpMessage($m.utils,8) FileMaintName
-
-$m.utils.name add command -label FileMaintNameEditor -command nameEditor 
-set helpMessage($m.utils.name,0) FileMaintNameEditor
-
-$m.utils.name add command -label FileMaintNamePlayer -command {openSpellCheckWin Player}
-set helpMessage($m.utils.name,1) FileMaintNamePlayer
-
-$m.utils.name add command -label FileMaintNameEvent -command {openSpellCheckWin Event}
-set helpMessage($m.utils.name,2) FileMaintNameEvent
-
-$m.utils.name add command -label FileMaintNameSite -command {openSpellCheckWin Site}
-set helpMessage($m.utils.name.3) FileMaintNameSite
-
-$m.utils.name add command -label FileMaintNameRound -command {openSpellCheckWin Round}
-set helpMessage($m.utils.name,4) FileMaintNameRound
-
-$m.utils add separator
-
-$m.utils add command -label FileMaintFixBase -command ::maint::fixCorruptedBase
-set helpMessage($m.utils,10) FileMaintFixBase
-
-$m add command -label FileReadOnly -command makeBaseReadOnly
-set helpMessage($m,[incr menuindex]) FileReadOnly
 
 set totalBaseSlots [sc_base count total]
 set clipbaseSlot [sc_info clipbase]
@@ -421,7 +370,7 @@ $m add command -label SearchUsing -accel "Ctrl+Shift+U" \
 bind .main <Control-KeyPress-U> ::search::usefile
 set helpMessage($m,[incr menuindex]) SearchUsing
 
-### Play menu:
+### Play menu
 set menuindex -1
 set m .menu.play
 
@@ -570,6 +519,60 @@ set helpMessage($m,[incr menuindex]) ToolsStartEngine2
 $m add separator
 incr menuindex
 
+# **********
+
+menu $m.utils
+$m add cascade -label ToolsMaint -menu .menu.tools.utils
+set helpMessage($m,[incr menuindex]) ToolsMaint
+
+$m.utils add command -label ToolsMaintWin -accelerator "Ctrl+M" -command ::maint::Open
+set helpMessage($m.utils,0) ToolsMaintWin
+
+$m.utils add command -label ToolsMaintCompact -command makeCompactWin
+set helpMessage($m.utils,1) ToolsMaintCompact
+
+$m.utils add command -label ToolsMaintClass -command classifyAllGames
+set helpMessage($m.utils,2) ToolsMaintClass
+
+$m.utils add command -label ToolsMaintSort -command makeSortWin
+set helpMessage($m.utils,3) ToolsMaintSort
+
+$m.utils add separator
+
+$m.utils add command -label ToolsMaintDelete -state disabled -command markTwins
+set helpMessage($m.utils,5) ToolsMaintDelete
+
+$m.utils add command -label ToolsMaintTwin -command updateTwinChecker
+set helpMessage($m.utils,6) ToolsMaintTwin
+
+$m.utils add separator
+
+menu $m.utils.name
+$m.utils add cascade -label ToolsMaintName -menu .menu.tools.utils.name
+set helpMessage($m.utils,8) ToolsMaintName
+
+$m.utils.name add command -label ToolsMaintNameEditor -command nameEditor 
+set helpMessage($m.utils.name,0) ToolsMaintNameEditor
+
+$m.utils.name add command -label ToolsMaintNamePlayer -command {openSpellCheckWin Player}
+set helpMessage($m.utils.name,1) ToolsMaintNamePlayer
+
+$m.utils.name add command -label ToolsMaintNameEvent -command {openSpellCheckWin Event}
+set helpMessage($m.utils.name,2) ToolsMaintNameEvent
+
+$m.utils.name add command -label ToolsMaintNameSite -command {openSpellCheckWin Site}
+set helpMessage($m.utils.name.3) ToolsMaintNameSite
+
+$m.utils.name add command -label ToolsMaintNameRound -command {openSpellCheckWin Round}
+set helpMessage($m.utils.name,4) ToolsMaintNameRound
+
+$m.utils add separator
+
+$m.utils add command -label ToolsMaintFixBase -command ::maint::fixCorruptedBase
+set helpMessage($m.utils,10) ToolsMaintFixBase
+
+# **********
+
 # book tuning
 $m add command -label ToolsBookTuning -command ::book::tuning
 set helpMessage($m,[incr menuindex]) ToolsBookTuning
@@ -589,16 +592,6 @@ set helpMessage($m,[incr menuindex]) ToolsTracker
 
 $m add command -label ToolsEmail -accelerator "Ctrl+Shift+E" -command ::tools::email
 set helpMessage($m,[incr menuindex]) ToolsEmail
-
-menu $m.pinfo
-$m add cascade -label ToolsPInfo -menu $m.pinfo
-set helpMessage($m,[incr menuindex]) ToolsPInfo
-$m.pinfo add command -label White -underline 0 -command {
-  playerInfo [sc_game info white] 1
-}
-$m.pinfo add command -label Black -underline 0 -command {
-  playerInfo [sc_game info black] 1
-}
 
 # Connect Hardware
 menu $m.hardware
@@ -1292,10 +1285,10 @@ proc updateMenuStates {} {
   }
 
   foreach i {Compact Delete} {
-    $m.file.utils entryconfig [tr FileMaint$i] -state disabled
+    $m.tools.utils entryconfig [tr ToolsMaint$i] -state disabled
   }
   foreach i {Player Event Site Round} {
-    $m.file.utils.name entryconfig [tr FileMaintName$i] -state disabled
+    $m.tools.utils.name entryconfig [tr ToolsMaintName$i] -state disabled
   }
 
   $m.file entryconfig [tr FileReadOnly] -state disabled
@@ -1305,7 +1298,7 @@ proc updateMenuStates {} {
 
   # Remove and reinsert the Recent files list and Exit command:
   $m.file add separator
-  set idx 14
+  set idx 12
   $m.file delete $idx end
   if {[::recentFiles::show $m.file] > 0} {
     $m.file add separator
@@ -1321,10 +1314,10 @@ proc updateMenuStates {} {
     set isReadOnly [sc_base isReadOnly]
     $m.file entryconfig [tr FileClose] -state normal
     if {! $isReadOnly} {
-      $m.file.utils entryconfig [tr FileMaintDelete] -state normal
-      $m.file.utils entryconfig [tr FileMaintName] -state normal
+      $m.tools.utils entryconfig [tr ToolsMaintDelete] -state normal
+      $m.tools.utils entryconfig [tr ToolsMaintName] -state normal
       foreach i {Player Event Site Round} {
-        $m.file.utils.name entryconfig [tr FileMaintName$i] -state normal
+        $m.tools.utils.name entryconfig [tr ToolsMaintName$i] -state normal
       }
       $m.file entryconfig [tr FileReadOnly] -state normal
     }
@@ -1382,7 +1375,7 @@ proc updateMenuStates {} {
 
   set state disabled
   if {[baseIsCompactable]} { set state normal }
-  $m.file.utils entryconfig [tr FileMaintCompact] -state $state
+  $m.tools.utils entryconfig [tr ToolsMaintCompact] -state $state
 
   ::search::Config
   ::maint::Refresh
@@ -1428,23 +1421,10 @@ proc setLanguageMenus {{lang ""}} {
     configMenuText .menu [tr $tag $oldLang] $tag $lang
   }
 
-  foreach tag {New Open SavePgn Close Finder Bookmarks Maint ReadOnly Switch Exit} {
+  foreach tag {New Open SavePgn OpenBaseAsTree OpenRecentBaseAsTree Close Finder Bookmarks ReadOnly Switch Exit} {
     configMenuText .menu.file [tr File$tag $oldLang] File$tag $lang
   }
 
-  # open base as tree was moved from tools to file menus
-  foreach tag { ToolsOpenBaseAsTree ToolsOpenRecentBaseAsTree } {
-    configMenuText .menu.file [tr $tag $oldLang] $tag $lang
-  }
-
-  foreach tag {Win Compact Delete Twin Class Sort Name FixBase} {
-    configMenuText .menu.file.utils [tr FileMaint$tag $oldLang] \
-        FileMaint$tag $lang
-  }
-  foreach tag {Editor Player Event Site Round} {
-    configMenuText .menu.file.utils.name [tr FileMaintName$tag $oldLang] \
-        FileMaintName$tag $lang
-  }
   foreach tag {PastePGN Setup CopyBoard CopyPGN PasteBoard Reset Copy Paste Add Delete First Main Trial Strip PasteVar Undo Redo} {
     configMenuText .menu.edit [tr Edit$tag $oldLang] Edit$tag $lang
   }
@@ -1469,14 +1449,22 @@ proc setLanguageMenus {{lang ""}} {
     configMenuText .menu.windows [tr Windows$tag $oldLang] Windows$tag $lang
   }
 
-  foreach tag {Analysis Email FilterGraph AbsFilterGraph OpReport Tracker
+  foreach tag {Analysis Maint Email FilterGraph AbsFilterGraph OpReport Tracker
     Rating Score ExpCurrent ExpFilter ImportOne ImportFile StartEngine1 StartEngine2 BookTuning
-    PInfo PlayerReport ConnectHardware Screenshot} {
+    PlayerReport ConnectHardware Screenshot} {
     configMenuText .menu.tools [tr Tools$tag $oldLang] Tools$tag $lang
   }
 
-  .menu.tools.pinfo entryconfigure 0 -label $::tr(White)
-  .menu.tools.pinfo entryconfigure 1 -label $::tr(Black)
+  foreach tag {Win Compact Delete Twin Class Sort Name FixBase} {
+    # Maintenance used to be in .menu.file but is now in .menu.tools
+    configMenuText .menu.tools.utils [tr ToolsMaint$tag $oldLang] \
+        ToolsMaint$tag $lang
+  }
+  foreach tag {Editor Player Event Site Round} {
+    configMenuText .menu.tools.utils.name [tr ToolsMaintName$tag $oldLang] \
+        ToolsMaintName$tag $lang
+  }
+
   foreach tag {ToolsExpCurrentPGN ToolsExpCurrentHTML ToolsExpCurrentHTMLJS ToolsExpCurrentLaTeX} {
     configMenuText .menu.tools.exportcurrent [tr $tag $oldLang] $tag $lang
   }
