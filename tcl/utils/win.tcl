@@ -604,6 +604,8 @@ proc ::docking::setMenuMark { nb tab} {
   if { $tab == ".fdockpgnWin" || \
        $tab == ".fdockccWindow" || \
        $tab == ".fdockcrosstabWin" || \
+       $tab == ".fdocksgraph" || \
+       $tab == ".fdockrgraph" || \
        [string match "\.fdocktreeWin*" $tab] } {
     $nb tab $tab -image bluetriangle -compound left
   }
