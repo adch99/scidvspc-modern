@@ -475,30 +475,31 @@
   Under Pascal, and with the help of numerous contributors, Scid again
   strode forward. Pascal wrote a Tree Mask feature, and in 2009 he
   upgraded the database format to si4, all the time making speed and
-  technical improvements to the neglect of the interface. Very recently,
-  Pascal has contributed less to the project, but it still thrives as a
-  feature rich database application, with a strong community headed by a
-  core group of programmers.
+  technical improvements to the neglect of the interface. In 2010,
+  Pascal ceased contributing at all, and shortly after the last stable
+  version of Scid (4.3) was released.  Since then, Scid has had
+  widespread, and unstable technical changes; mostly by Fulvio Benini,
+  who is a long-standing contributor.
 
-  But along the way, there exist other Scid projects. Chessx, by Michal
-  Rudolf from Germany, is a rewrite of Scid using the powerful libQT
-  API, popularized by KDE-4.  Originally called Newscid, Chessx still
-  grows, but with a much smaller feature set, and lesser popularity than
+  Currently there exist several other Scid related projects. Chessx,
+  originally by Michal Rudolf from Germany, and named Newscid, began as
+  a rewrite of Scid using libQT.  It is now a mature chess interface
+  with several active contributors, but a much smaller feature set than
   Scid.
 
-  Scid vs. PC (by Steven Atkinson from Australia) began around mid 2009.
+  Scid vs. PC, by Steven Atkinson from Australia, started in 2009.
   Forked from Scid-3.6.26, it began as an effort to tidy Shane's
-  frenetic code base, improve the user interface , and add polish to
-  Scid's rich feature set; but it is now probably the most mature fork.
-  Unfortunately, the state of mainline SCID's git repository is not
-  good. It has new features with many bugs, receives little or no
-  updates, and a new release is not eminent.
+  frenetic code base, improve the user interface and add polish to
+  Scid's rich feature set. It has since accumulated many new features,
+  and matured into a capable Scid successor.
 
-  Another project is reaching its initial public release. Scidb, by
-  Gregor Cramer from Germany, is a total rewrite of Scid. It thoroughly
-  utilizes C++ and a heavily customized Tk interface, and includes
-  Chessbase database support and Chess960/other variants among it's
-  features.
+  The Android program, Scid on the Go, supports the si4 database format,
+  and is the only mobile Scid related project.
+
+  Another project nearing a 1.0 release is Scidb by Gregor Cramer from
+  Germany. It is a full rewrite of Scid, with heavy utilization of C++
+  classes, and customized Tk widgets. It also supports Chessbase
+  databases and many chess variants.
 
   7.  changes
 
@@ -515,7 +516,6 @@
   o  Dock a few extra windows (graphs, tablebase)
 
   o  Computer tournament stability/speed fix
-
 
   o  Locked Analysis Engines now show the locked position (not the
      working line) , and bug-fix the engine lock, which didnt work
