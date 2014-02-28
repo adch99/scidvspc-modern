@@ -454,9 +454,8 @@
   application with Opening Reports, Tree Analysis, and Tablebase
   support.  It gained quite some attention, as it was arguably the first
   project of it's kind; but after writing over a hundred thousand lines
-  of code, in 2004 development stopped. Shane never contributed to Scid
-  again. He was generally reported to be seriously ill, and today has
-  little if no contact with the current Scid community.
+  of code, in 2004 development stopped and Shane never contributed to
+  Scid again.
 
   Two new versions of Scid appeared around 2006. The first was ChessDB
   authored by Dr. David Kirby. With some good documentation and the
@@ -481,7 +480,7 @@
   widespread, and unstable technical changes; mostly by Fulvio Benini,
   who is a long-standing contributor.
 
-  Currently there exist several other Scid related projects.
+  Currently there exist several Scid related projects.
 
   Chessx was originally by Michal Rudolf (a longtime Scid contributor
   from Germany) and named Newscid. Now led by Jens Nissen, with a 1.0
@@ -516,6 +515,7 @@
   o  Dock a few extra windows (graphs, tablebase)
 
   o  Computer tournament stability/speed fix
+
 
   o  Locked Analysis Engines now show the locked position (not the
      working line) , and bug-fix the engine lock, which didnt work

@@ -342,8 +342,7 @@ the speed of C, to produce a free Chess Database application with
 Opening Reports, Tree Analysis, and Tablebase support.
 It gained quite some attention, as it was arguably the first project of it's
 kind; but after writing over a hundred thousand lines of code, in 2004 development
-stopped. Shane never contributed to Scid again. He was generally reported
-to be seriously ill, and today has little if no contact with the current Scid community.</p>
+stopped and Shane never contributed to Scid again.</p>
 <p> Two new versions of Scid appeared around 2006. The first was ChessDB
 authored by Dr. David Kirby. With some good documentation and 
 the ability to automatically download games from
@@ -361,7 +360,7 @@ to the neglect of the interface. In 2010, Pascal ceased contributing at all, and
 the last stable version of Scid (4.3) was released.
 Since then, Scid has had widespread, and unstable technical changes; mostly by Fulvio Benini,
 who is a long-standing contributor.
-<p>Currently there exist several other Scid related projects.</p>
+<p>Currently there exist several Scid related projects.</p>
 <p>Chessx was originally by Michal Rudolf (a longtime Scid contributor from Germany) and named Newscid.  Now led by Jens Nissen, with a 1.0 release, it
 is an attractive Chess GUI but with a small feature set, and hampered by using the slow PGN format.
 </p>
