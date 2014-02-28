@@ -481,24 +481,24 @@
   widespread, and unstable technical changes; mostly by Fulvio Benini,
   who is a long-standing contributor.
 
-  Currently there exist several other Scid related projects. Chessx,
-  originally by Michal Rudolf from Germany, and named Newscid, began as
-  a rewrite of Scid using libQT.  It is now a mature chess interface
-  with several active contributors, but a much smaller feature set than
-  Scid.
+  Currently there exist several other Scid related projects.
 
-  Scid vs. PC, by Steven Atkinson from Australia, started in 2009.
+  Chessx was originally by Michal Rudolf (a longtime Scid contributor
+  from Germany) and named Newscid. Now led by Jens Nissen, with a 1.0
+  release, it is an attractive Chess GUI but with a small feature set,
+  and hampered by using the slow PGN format.
+
+  Scid vs. PC was started in 2009 by Steven Atkinson from Australia.
   Forked from Scid-3.6.26, it began as an effort to tidy Shane's
-  frenetic code base, improve the user interface and add polish to
-  Scid's rich feature set. It has since accumulated many new features,
-  and matured into a capable Scid successor.
+  frenetic code base and improve the user interface, and has since
+  matured into a capable Scid successor.
 
   The Android program, Scid on the Go, supports the si4 database format,
   and is the only mobile Scid related project.
 
   Another project nearing a 1.0 release is Scidb by Gregor Cramer from
   Germany. It is a full rewrite of Scid, with heavy utilization of C++
-  classes, and customized Tk widgets. It also supports Chessbase
+  classes and customized Tk widgets. It also supports Chessbase
   databases and many chess variants.
 
   7.  changes
