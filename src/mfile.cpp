@@ -46,11 +46,13 @@ MFile::Extend ()
     if (Capacity < 8192) { Capacity = 8192; }
     byte * oldData = Data;
     Data = new byte [Capacity];
-
-    // Copy data to new array:
-    for (uint i=0; i < oldCapacity; i++) { Data[i] = oldData[i]; }
-
-    if (oldCapacity > 0) { delete[] oldData; }
+    if (oldData != NULL) {
+      // Copy data to new array:
+      for (uint i=0; i < oldCapacity; i++) {
+	Data[i] = oldData[i];
+      }
+      delete[] oldData;
+    }
     CurrentPtr = &(Data[Location]);
 }
 
