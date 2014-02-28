@@ -165,7 +165,11 @@ MFile::ReadOneByte ()
         GzBuffer_Current++;
         return retval;
     }
-    return  getc(Handle);
+    #ifdef __GNUC__
+    return getc_unlocked(Handle);
+    #else
+    return getc(Handle);
+    #endif
 }
 
 #endif  // SCID_MFILE_H
