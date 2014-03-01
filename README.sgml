@@ -362,7 +362,7 @@ Since then, Scid has had widespread, and unstable technical changes; mostly by F
 who is a long-standing contributor.
 <p>Currently there exist several Scid related projects.</p>
 <p>Chessx was originally by Michal Rudolf (a longtime Scid contributor from Germany) and named Newscid.  Now led by Jens Nissen, with a 1.0 release, it
-is an attractive Chess GUI but with a small feature set, and hampered by using the slow PGN format.
+is an attractive Chess GUI but with a small feature set and without si4 support.
 </p>
 <p>Scid vs. PC was started in 2009 by Steven Atkinson from Australia. Forked from Scid-3.6.26, it began as an effort to tidy Shane's frenetic code base and improve the user interface, and has since matured into a capable Scid successor.
 </p>

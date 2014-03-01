@@ -484,8 +484,8 @@
 
   Chessx was originally by Michal Rudolf (a longtime Scid contributor
   from Germany) and named Newscid. Now led by Jens Nissen, with a 1.0
-  release, it is an attractive Chess GUI but with a small feature set,
-  and hampered by using the slow PGN format.
+  release, it is an attractive Chess GUI but with a small feature set
+  and without si4 support.
 
   Scid vs. PC was started in 2009 by Steven Atkinson from Australia.
   Forked from Scid-3.6.26, it began as an effort to tidy Shane's
