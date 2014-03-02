@@ -1148,8 +1148,11 @@ proc okAnnotation {n} {
   if {$annotate(isBatch) && [sc_base isReadOnly]} {
     set answer [tk_messageBox -title Tournanment -icon question -type okcancel \
         -message "Database is read only, and batch annotations can't be saved.\n\nContinue ?" -parent .configAnnotation]
-    if {$answer != "ok"} {return}
+    if {$answer != "ok"} {
+      return
+    }
   }
+
   set ::useAnalysisBookName [$w.usebook.comboBooks get]
   set ::wentOutOfBook 0
   set ::book::lastBook1 $::useAnalysisBookName
@@ -1167,6 +1170,18 @@ proc okAnnotation {n} {
   set autoplayDelay [expr {int($tempdelay * 1000)}]
   bind .configAnnotation <Destroy> {}
   destroy .configAnnotation
+
+  if {[sc_pos isAt end]} {
+    if {[sc_pos isAt start]} {
+      # No moves in game
+      cancelAutoplay
+      return
+    }
+    # Starting analysis from game end - probably want to be at start
+    sc_move start
+    updateBoard  -pgn
+  }
+
   set annotate(Engine) $n
   if {! $analysis(analyzeMode$n)} {
     toggleEngineAnalysis $n 1
