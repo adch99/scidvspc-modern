@@ -738,17 +738,16 @@ namespace eval html {
       }
       set prevdepth $elt(depth)
       set prevvarnumber $elt(var)
-      if {$dots} {
-	puts $f "<a href=\"javascript:gotoMove($elt(idx))\" ID=\"$elt(idx)\" class=\"$class\">[sc_pos moveNumber]. ... $elt(move)</a>$elt(nag) $elt(comment)"
+      if {$dots > 0} {
+	puts $f "<a href=\"javascript:gotoMove($elt(idx))\" ID=\"$elt(idx)\" class=\"$class\">$dots. ... $elt(move)</a>$elt(nag) $elt(comment)"
         set dots 0
       } else {
 	puts $f "<a href=\"javascript:gotoMove($elt(idx))\" ID=\"$elt(idx)\" class=\"$class\">$elt(move)</a>$elt(nag) $elt(comment)"
       }
       if {$elt(diag)} {
         insertMiniDiag $elt(fen) $f
-        # if white to move (exactly one . in elt(move)), show dots (. ...) with next move
-        set first [string first . $elt(move)]
-        set dots [expr {$first > 0 && $first == [string last . $elt(move)]}]
+	set dots 0
+	scan $elt(move) %i. dots
       }
     }
     if {$prevdepth != 0} {puts $f "\]"}
