@@ -720,6 +720,7 @@ namespace eval html {
     # link moves
     set prevdepth 0
     set prevvarnumber 0
+    set dots 0
     for {set i 1} {$i<[llength $dt]} {incr i} {
       array set elt [lindex $dt $i]
       if {$elt(depth) == 0} {
@@ -737,9 +738,17 @@ namespace eval html {
       }
       set prevdepth $elt(depth)
       set prevvarnumber $elt(var)
-      puts $f "<a href=\"javascript:gotoMove($elt(idx))\" ID=\"$elt(idx)\" class=\"$class\">$elt(move)</a>$elt(nag) $elt(comment)"
+      if {$dots} {
+	puts $f "<a href=\"javascript:gotoMove($elt(idx))\" ID=\"$elt(idx)\" class=\"$class\">[sc_pos moveNumber]. ... $elt(move)</a>$elt(nag) $elt(comment)"
+        set dots 0
+      } else {
+	puts $f "<a href=\"javascript:gotoMove($elt(idx))\" ID=\"$elt(idx)\" class=\"$class\">$elt(move)</a>$elt(nag) $elt(comment)"
+      }
       if {$elt(diag)} {
         insertMiniDiag $elt(fen) $f
+        # if white to move (exactly one . in elt(move)), show dots (. ...) with next move
+        set first [string first . $elt(move)]
+        set dots [expr {$first > 0 && $first == [string last . $elt(move)]}]
       }
     }
     if {$prevdepth != 0} {puts $f "\]"}
