@@ -1664,6 +1664,8 @@ namespace eval fics {
   proc addOffer {line} {
     # Challenge: GuestYGTD (----) stevenaaus (1670) unrated standard 15 1
     if {![winfo exists .ficsOffers]} {
+        # ::fics::killDialogs
+        # hmm - the result is a tk_messageBox -title "Game result"
 	::fics::initOffers 1
     }
 
