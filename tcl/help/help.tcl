@@ -3453,7 +3453,7 @@ set helpText(TB) {<h1>Tablebases</h1>
   <p>
   You can get more comprehensive information 
   from the <green><run ::tb::Open>Tablebase Window</run></green>
-  (Control - "="). This shows the result with perfect play
+  (Control =). This shows the result with perfect play
   of all legal moves from the current position.
   </p>
   <p>
@@ -3487,14 +3487,10 @@ set helpText(TB) {<h1>Tablebases</h1>
   list for every tablebase is not feasible since some tablebases have
   thousands of mutual zugzwangs.
   </p>
-  <p>
-  You can set up a random position from the selected tablebase by pressing
-  the <b>Random</b> button.
-  </p>
 
   <h4>The Results Frame</h4>
   <p>
-  Results may be shown from local nalimov bases (if installed) , or generated from an online lookup to Lokasoft.org.
+  Results may be shown from local Nalimov bases (if installed) , or generated from an online lookup to Lokasoft.org.
   The results frame is updated whenever the main chessboard changes.
   </p>
   <p>
@@ -3504,34 +3500,30 @@ set helpText(TB) {<h1>Tablebases</h1>
   then longest to shortest losses. All distances are to checkmate.
   </p>
 
-  <h4>The Results Board</h4>
+  <h4>The Results Board <button tb_coords 32></h4>
   <p>
-  In a tablebase position, it is often useful what the tablebase results
-  would be if all the pieces in the current position were on their
-  current squares but one particular piece was moved somewhere else.
-  For example, you may want to determine how close a king has to be to
-  a passed pawn to win or draw a particular position. In endgame books
-  this information is often called the <i>winning zone</i> or
-  <i>drawing zone</i> of a piece in a position.
+  In any tablebase position, it is often useful to know what the results
+  would be if one piece was moved somewhere else.
+  For example, you may want to determine how close a King has to be to
+  a passed Pawn to win or draw. In endgame books
+  this is often called the <b>winning zone</b>, or <b>drawing zone</b>, of a piece.
   </p>
   <p>
-  You can find this information in Scid by pressing the button with an
-  image of a chessboard, to show the <term>results board</term> in the
-  tablebase window.
-  When you press the left mouse button on any piece in this board, a
-  symbol is drawn in each empty square showing what the tablebase result
-  would be (with the same side to move as the current main window position)
+  From the Results Board, this information is available by pressing the piece in question.
+  This displays symbols representing what the result would be (with the side to move of the current position)
   if the selected piece was on that square.
   </p>
   <p>
   There are five different symbols a square can have:
-  a white <b>#</b> means White wins;
-  a black <b>#</b> means Black wins;
-  a blue <b>=</b> means the position is drawn;
-  a red <b>X</b> means the position is illegal (because the kings are
-  adjacent or the side to move is giving check); and
-  a red <b>?</b> means the result is unknown because the necessary
-  tablebase file is not available.
+<ul>
+  <li>white # : White wins</li>
+  <li>black # : Black wins</li>
+  <li>blue = : Drawn position</li>
+  <li>red X : Illegal position (because the kings are adjacent or the side to move is giving check)</li>
+  <li>red ? : Result unknown - the necessary tablebase file is not available.</li>
+  </ul>
+  <p>
+<i>The Result Board cannot make use of online tablebases.</i>
   </p>
 
   <h3>Obtaining Tablebase Files</h3>
@@ -3545,7 +3537,7 @@ and
 <url http://www.playwitharena.de/download/4-pieces-tbs.zip>single file</url>
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.7, January 2012</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.12, March 2014</footer></p>
 }
 
 set helpTitle(Bookmarks) "Bookmarks"

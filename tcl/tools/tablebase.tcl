@@ -191,22 +191,22 @@ proc ::tb::Open {} {
     pack $f.results.online -side right -padx 6 -pady 2
   }
   
-  text $f.text -font font_Fixed -relief flat -wrap word -foreground black -setgrid 1
-  pack $f.text -side top -fill y -expand yes
+  text $f.text -font font_Fixed -relief flat -wrap word -foreground black
+  pack $f.text -side top -fill both -expand yes
 
   $f.text tag configure indent -lmargin2 [font measure font_Fixed  "        "]
   $f.text tag configure title -font font_Regular -justify center
 
   ### Board
 
-  ::board::new $w.board 25
-  $w.board configure -relief solid -borderwidth 1
+  ::board::new $f.board 25
+  $f.board configure -relief solid -borderwidth 1
   if {$::tbBoard} {
-    pack $w.board -side right
+    pack $f.board -side bottom -before $f.text -pady 3
   }
 
   for {set i 0} {$i < 64} {incr i} {
-    ::board::bind $w.board $i <Button-1> [list ::tb::resultsBoard $i]
+    ::board::bind $f.board $i <Button-1> [list ::tb::resultsBoard $i]
   }
 
   ### Buttons
@@ -214,12 +214,12 @@ proc ::tb::Open {} {
   checkbutton $w.b.training -text $::tr(Training) -variable tbTraining -command ::tb::training -relief raised -padx 4 -pady 5
   button $w.b.random -text "Random" -command ::tb::random
   button $w.b.showboard -image tb_coords -command ::tb::showBoard
-  dialogbutton $w.b.help -text $::tr(Help) -command { helpWindow TB }
-  dialogbutton $w.b.close -text $::tr(Close) -command "destroy $w"
+  button $w.b.help -text $::tr(Help) -command { helpWindow TB }
+  button $w.b.close -text $::tr(Close) -command "destroy $w"
   label $w.b.status -width 1 -textvar tbStatus -font font_Small \
       -relief flat -anchor w -height 0
-  packbuttons right $w.b.close $w.b.help
-  pack $w.b.showboard $w.b.training $w.b.random -side left -padx 8 -pady 2
+  packbuttons right $w.b.close $w.b.help $w.b.showboard 
+  pack $w.b.training $w.b.random -side left -padx 8 -pady 2
   pack $w.b.status -side left -fill x -expand yes
   bind $w <Destroy> {set tbTraining 0}
   bind $w <Escape> "destroy $w"
@@ -240,20 +240,20 @@ proc ::tb::Open {} {
 
 proc ::tb::showBoard {} {
   global tbBoard
-  set f .tbWin
+  set f .tbWin.pos
   if {$tbBoard} {
     set tbBoard 0
     pack forget $f.board
   } else {
     set tbBoard 1
-    pack $f.board -side right
+    pack $f.board -side bottom -before $f.text -pady 3
   }
 }
 
 ### Updates the resultsBoard board for a particular square.
 
 proc ::tb::resultsBoard {sq} {
-  set f .tbWin
+  set f .tbWin.pos
   set board [sc_pos board]
   # If selected square is empty, take no action:
   if {[string index $board $sq] == "."} { return }
@@ -264,9 +264,9 @@ proc ::tb::resultsBoard {sq} {
   # Retrieve tablebase scores:
   busyCursor .
   set scores [sc_pos probe board $sq]
-  set text(X) X; set color(X) red; set shadow(X) white
-  set text(=) =; set color(=) blue; set shadow(=) white
-  set text(?) "?"; set color(?) red; set shadow(?) white
+  set text(X) X; set color(X) red4; set shadow(X) grey
+  set text(=) =; set color(=) blue; set shadow(=) grey
+  set text(?) "?"; set color(?) red4; set shadow(?) grey
   set text(+) "#"; set text(-) "#"
   if {[sc_pos side] == "white"} {
     set color(+) white; set color(-) black
@@ -495,14 +495,14 @@ proc ::tb::summary {{material ""}} {
 
 proc ::tb::results {} {
   global tbTraining tbOnline
-  set w .tbWin
-  if {! [winfo exists $w]} { return }
+  set f .tbWin.pos
+  if {! [winfo exists $f]} { return }
 
   # Reset results board:
-  ::board::clearText $w.board
-  ::board::update $w.board [sc_pos board]
+  ::board::clearText $f.board
+  ::board::update $f.board [sc_pos board]
 
-  set t $w.pos.text
+  set t $f.text
 
   # Update results panel:
   if {$tbTraining} {
