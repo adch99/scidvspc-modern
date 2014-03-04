@@ -2266,9 +2266,9 @@ Game::WriteMoveList (TextBuffer *tb, uint plyCount,
     bool printDiagrams = false;
 
     if (IsHtmlFormat()) {
-        preCommentStr = "";
-        postCommentStr = "";
-        startTable = "<table width=\"50%\">\n";
+        preCommentStr = "{";
+        postCommentStr = "}";
+        startTable = "<table width=\"50%\" cellpadding=5>\n";
         startColumn = "<tr align=left>\n  <td width=\"15%\"><b>";
         nextColumn = "</b></td>\n  <td width=\"45%\" align=left><b>";
         endColumn = "</b></td>\n</tr>\n";
@@ -2578,7 +2578,7 @@ Game::WriteMoveList (TextBuffer *tb, uint plyCount,
                 }
 */
                 if (IsHtmlFormat()  &&  VarDepth == 0) {
-                    tb->PrintString ("</b><dl><dd>");
+                    tb->PrintString ("</b>");
                 }
                 if ((PgnStyle & PGN_STYLE_INDENT_COMMENTS) && VarDepth == 0) {
                     if (IsColorFormat()) {
@@ -2619,7 +2619,7 @@ Game::WriteMoveList (TextBuffer *tb, uint plyCount,
                     delete dstr;
                 }
                 if (IsHtmlFormat() && VarDepth == 0) {
-                    tb->PrintString ("</dl><b>");
+                    tb->PrintString ("<b>");
                 }
                 printMoveNum = true;
             }
@@ -2670,7 +2670,7 @@ Game::WriteMoveList (TextBuffer *tb, uint plyCount,
                     }
                 }
                 if (IsHtmlFormat()) {
-                    if (VarDepth == 0) { tb->PrintString ("</b><dl><dd>"); }
+                    if (VarDepth == 0) { tb->PrintString ("</b>"); }
                 }
                 if (IsLatexFormat()  &&  VarDepth == 0) {
                     if (PgnStyle & PGN_STYLE_INDENT_VARS) {
@@ -2702,7 +2702,7 @@ Game::WriteMoveList (TextBuffer *tb, uint plyCount,
                 if (IsColorFormat()) 
                   tb->PrintString ("<blue>");
                 if (IsHtmlFormat()) {
-                    if (VarDepth == 0) { tb->PrintString ("</dl><b>"); }
+                    if (VarDepth == 0) { tb->PrintString ("<b>"); }
                 }
                 if (IsLatexFormat()  &&  VarDepth == 0) {
                     if (PgnStyle & PGN_STYLE_INDENT_VARS) {
