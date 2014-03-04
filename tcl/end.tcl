@@ -1370,6 +1370,7 @@ proc drawArrow {sq color} {
     set oldComment [sc_pos getComment]
     set to [::board::san $sq]
     if {$::fics::playing} {
+      # todo - add 'Q' to premove if ::fics::autopromote
       set ::fics::premove ${startArrowSquare}${to}
     }
     if {$startArrowSquare != $to } {

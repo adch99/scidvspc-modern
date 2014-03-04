@@ -81,7 +81,7 @@ proc moveEntry_Complete {} {
       sc_move forward 1
     }
 
-    # Now send the move done to FICS and NOVAG Citrine
+    # Send the move to FICS and NOVAG Citrine
     ::fics::checkAdd
 
     if {$::novag::connected} {
