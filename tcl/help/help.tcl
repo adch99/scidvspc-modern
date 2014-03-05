@@ -216,6 +216,7 @@ append helpText(Index) {
   <li><a Analysis Annotating>Annotating games</a> automatically</li>
   <li><a NAGs>Annotation symbols</a> (NAGs)</li>
   <li>Configuring <a Moves Informant>annotation symbols</a></li>
+  <li><a Comment Diagrams>Arrows</a></li>
   <li><a Author>Author, contacting</a></li>
   <li><a Maintenance Autoload>Autoloading</a> a game</li>
   <li><a MainWindow Autoplay>Autoplay mode</a></li>
@@ -1324,25 +1325,28 @@ set helpText(Comment) {<h1>The Comment Editor</h1>
 
   <h3><name Diagrams>Diagrams</name></h3>
   <p>
-  In addition to text comments, Scid supports an array of colour symbols and arrows.
-  Press then <img bookmark_down> button to see a small board and diagrams.
-  Arrows can be drawn (and erased) by dragging between two squares on this board.
+  In addition to text comments, Scid can also draw colour symbols and arrows on the board.
+  In the Comment Editor, press <img bookmark_down> to see a small board and diagrams.
+  </p>
+
+  <h4>Drawing Arrows</h4>
+  <p>
+  Arrows can be done in two ways. In the main board, Hold control and click on the start square, then end square.
+  Alternatively, in the Comment Editor, arrows can be drawn (and erased) by dragging between two squares.
+  </p>
+  <p>
+  The technical format of arrows is:
+  <b>[%arrow fromSquare toSquare color]</b>
+  where <b>fromSquare</b> and <b>toSquare</b> are square names like d4.
   </p>
   <p> Normally, the comments associated with these diagrams are hidden in the PGN
 window, but can be viewed by deselecting "Hide Square/Arrow Codes" in the PGN window
 options.</p>
-  <p><i>Specific information about these diagrams are below, but it is not necessary to 
-know these details.</i></p>
-  </p>
   <h4>Colouring Squares</h4>
   <p>
-  You can color any square using a special embedded command
-  which can appear anywhere in a comment. The command format is:
-  </p>
-  <p>
+  Click on any square in the Comment Editor board to add the selected colour/mark.
+  The technical format is:
   <b>[%mark square color]</b>
-  </p>
-  <p>
   where <b>square</b> is a square name like d4 and <b>color</b> is any
   recognized color name (such as red, blue4, darkGreen, lightSteelBlue)
   or RGB code (six hexadecimal digits such as #a0b0c8).
@@ -1351,37 +1355,13 @@ know these details.</i></p>
   <p>
   A comment may contain any number of color commands, but each must have
   in its own <b>[%mark ...]</b> tag.
-  For example, the comment text</p>
-  <p>
-  <i>Now d6 [%mark d6] is weak and the knight can attack it
-  from b5. [%mark b5 #000070]</i>
-  </p>
-  <p>
+  For example, the comment text
+  <b>Now d6 [%mark d6] is weak and the knight can attack it
+  from b5. [%mark b5 #000070]</b>
   will color d6 red and b5 with the dark-blue color #000070.
   </p>
 
-  <h4>Drawing Arrows</h4>
-  <p>
-  You can draw an arrow from one square to another using a special
-  comment command similar to the for coloring squares described above.
-  The format is:
-  </p>
-  <p>
-  <b>[%arrow fromSquare toSquare color]</b>
-  </p>
-  <p>
-  where <b>fromSquare</b> and <b>toSquare</b> are square names like d4.
-  </p>
-  <p>
-  For example, the comment text:
-  <p>
-  <i>The c3-knight and c4-bishop control the weak d5 square.
-  [%arrow c3 d5 red] [%arrow c4 d5 blue]</i>
-  <p>
-  will draw a red arrow from c3 to d5 and a blue one from c4 to d5.
-  </p>
-
-  <p><footer>Updated: Scid vs. PC 4.4, March 2010</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.12, March 2014</footer></p>
 }
 
 set helpTitle(Crosstable) "Crosstable Window"
