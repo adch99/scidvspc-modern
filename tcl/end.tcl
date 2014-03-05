@@ -1380,6 +1380,7 @@ proc drawArrow {sq color} {
       if {!$erase} {
         append newComment " \[%draw arrow,$startArrowSquare,$to,$color\]"
       }
+      sc_game undoPoint
       sc_pos setComment $newComment
       ::pgn::Refresh 1
       updateBoard
