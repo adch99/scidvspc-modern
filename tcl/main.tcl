@@ -214,25 +214,34 @@ proc updateStatusBar {} {
   }
 
   # Check if translations have not been set up yet
-  # - Necessary ???
   if {! [info exists ::tr(Database)]} { return }
-  # append statusBar "  $::tr(Database): "
 
-  set fname [sc_base filename]
-  set fname [file tail $fname]
-  if {$fname == ""} { set fname "<none>" }
-  append statusBar "$fname:  [filterText]"
+  if {$::gameInfo(show)} {
+    set fname [sc_base filename]
+    set fname [file tail $fname]
+    if {$fname == ""} { set fname "<none>" }
+    append statusBar "$fname:  [filterText]"
 
-  # append statusBar "   $::tr(Filter)"
+    # append statusBar "   $::tr(Filter)"
 
-  if {[sc_base isReadOnly]} {
-    append statusBar " ($::tr(readonly))"
-  }  else {
-    if {[sc_game altered] && [sc_game number] != 0} {
-     append statusBar " ($::tr(altered))"
+    if {[sc_base isReadOnly]} {
+      append statusBar " ($::tr(readonly))"
+    }  else {
+      if {[sc_game altered] && [sc_game number] != 0} {
+       append statusBar " ($::tr(altered))"
+      }
+    }
+  } else {
+    append statusBar "[sc_game tags get White]  --  [sc_game tags get Black]"
+    set result [sc_game tags get Result]
+    if {$result == "1"} {
+      append statusBar "  (1-0)"
+    } elseif {$result == "0"} {
+      append statusBar "  (0-1)"
+    } elseif {$result == "="} {
+      append statusBar "  (1/2-1/2)"
     }
   }
-
 }
 
 
@@ -416,13 +425,13 @@ proc contextmenu {x y} {
 if { !$::docking::USE_DOCKING } {
   bind .main <ButtonPress-3> {contextmenu %X %Y}
 }
+bind .main <ButtonPress-2> toggleGameInfo
 
 # bind . <F9> {contextmenu %X %Y}
 
 if { $macOS } {
-  # Macs with one button need (shooting)
-  # todo: find a way to seemlessly swap button-2 with button-3 as macs have them reversed
-  bind . <Control-Button-1> {event generate . <Button-3> -x %x -y %y -button 3}
+  ### Macs with one button need (shooting)
+  # bind . <Control-Button-1> {event generate . <Button-3> -x %x -y %y -button 3}
 }
 
 # updateVarMenus:

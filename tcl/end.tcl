@@ -1520,6 +1520,7 @@ if { 0 && $::docking::USE_DOCKING} {
 ### Status Bar
 
 label .main.statusbar -textvariable statusBar -relief sunken -anchor w -width 1 -font font_Small
+label .main.statusbarpady -text {} -relief flat
 
 # double-left-click starts/stops engine 1
 bind .main.statusbar <Double-Button-1> {

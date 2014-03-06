@@ -1101,9 +1101,16 @@ proc toggleGameInfo {} {
 proc showGameInfo {} {
   if {$::gameInfo(show)} {
     grid .main.gameInfoFrame -row 3 -column 0 -sticky nsew -padx 2
+    .main.statusbar configure -anchor w -font font_Small -relief sunken
+    grid configure .main.statusbar -pady 0
+    grid forget .main.statusbarpady
   } else  {
     grid forget .main.gameInfoFrame
+    .main.statusbar configure -anchor center -font font_Regular -relief flat
+    grid configure .main.statusbar -pady 5
+    grid configure .main.statusbarpady -row 5 -column 0 -columnspan 3
   }
+  updateStatusBar
   update idletasks
 }
 
