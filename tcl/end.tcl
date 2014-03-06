@@ -1537,7 +1537,7 @@ bind .main.statusbar <Double-Button-1> {
 }
 
 # todo mac button patch
-bind .main.statusbar <Button-2> ::file::SwitchToNextBase
+bind .main.statusbar <Button-2> {::file::SwitchToNextBase ; break}
 
 # Right-click toggles window size
 bind .main.statusbar <Button-3>  {
@@ -1581,7 +1581,6 @@ if {!$::gameInfo(showButtons)} {
 
 grid .main.board -row 2 -column 0 -sticky we -padx 5 -pady 5
 
-# grid .main.gameInfoFrame -row 3 -column 0 -sticky news -padx 2
 showGameInfo
 
 #set p .panels

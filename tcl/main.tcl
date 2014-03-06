@@ -216,30 +216,18 @@ proc updateStatusBar {} {
   # Check if translations have not been set up yet
   if {! [info exists ::tr(Database)]} { return }
 
-  if {$::gameInfo(show)} {
-    set fname [sc_base filename]
-    set fname [file tail $fname]
-    if {$fname == ""} { set fname "<none>" }
-    append statusBar "$fname:  [filterText]"
+  set fname [sc_base filename]
+  set fname [file tail $fname]
+  if {$fname == ""} { set fname "<none>" }
+  append statusBar "$fname:  [filterText]"
 
-    # append statusBar "   $::tr(Filter)"
+  # append statusBar "   $::tr(Filter)"
 
-    if {[sc_base isReadOnly]} {
-      append statusBar " ($::tr(readonly))"
-    }  else {
-      if {[sc_game altered] && [sc_game number] != 0} {
-       append statusBar " ($::tr(altered))"
-      }
-    }
-  } else {
-    append statusBar "[sc_game tags get White]  --  [sc_game tags get Black]"
-    set result [sc_game tags get Result]
-    if {$result == "1"} {
-      append statusBar "  (1-0)"
-    } elseif {$result == "0"} {
-      append statusBar "  (0-1)"
-    } elseif {$result == "="} {
-      append statusBar "  (1/2-1/2)"
+  if {[sc_base isReadOnly]} {
+    append statusBar " ($::tr(readonly))"
+  }  else {
+    if {[sc_game altered] && [sc_game number] != 0} {
+     append statusBar " ($::tr(altered))"
     }
   }
 }
@@ -379,6 +367,8 @@ autoscrollframe .main.gameInfoFrame text .main.gameInfo
 .main.gameInfo configure -width 20 -wrap none -state disabled -cursor top_left_arrow -setgrid 1
 
 ::htext::init .main.gameInfo
+
+label .main.gameInfoMini -height 2 -font font_Regular
 
 ### Context menu for main board
 ### allows customisation of board, gameinfo and a couple of windows
@@ -910,6 +900,17 @@ proc updateGameinfo {} {
     .main.gameInfo configure -wrap none
   }
   .main.gameInfo configure -state disabled
+
+  set tmp "[sc_game tags get White]  --  [sc_game tags get Black]"
+  set result [sc_game tags get Result]
+  if {$result == "1"} {
+    set tmp "$tmp  (1-0)"
+  } elseif {$result == "0"} {
+    set tmp "$tmp  (0-1)"
+  } elseif {$result == "="} {
+    set tmp "$tmp  (1/2-1/2)"
+  }
+  .main.gameInfoMini configure -text $tmp
 }
 
 proc checkGameInfoHeight {{init 0}} {

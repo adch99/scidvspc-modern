@@ -995,6 +995,8 @@ proc resizeMainBoard {} {
       set game_info_line_height [expr [font configure font_Regular -size] * 1.5]
     }
     set min_game_info_height [expr int($min_game_info_lines * $game_info_line_height + 5)]
+  } else {
+    set min_game_info_height [expr int([font configure font_Regular -size] * 1.5 * 2)]
   }
   incr height_used $min_game_info_height
   
@@ -1100,17 +1102,12 @@ proc toggleGameInfo {} {
 
 proc showGameInfo {} {
   if {$::gameInfo(show)} {
+    grid forget .main.gameInfoMini
     grid .main.gameInfoFrame -row 3 -column 0 -sticky nsew -padx 2
-    .main.statusbar configure -anchor w -font font_Small -relief sunken
-    grid configure .main.statusbar -pady 0
-    grid forget .main.statusbarpady
   } else  {
     grid forget .main.gameInfoFrame
-    .main.statusbar configure -anchor center -font font_Regular -relief flat
-    grid configure .main.statusbar -pady 5
-    grid configure .main.statusbarpady -row 5 -column 0 -columnspan 3
+    grid .main.gameInfoMini -row 3 -column 0 -sticky nsew -padx 2
   }
-  updateStatusBar
   update idletasks
 }
 
