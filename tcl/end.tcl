@@ -985,6 +985,11 @@ proc gameSave {gnum {focus {}}} {
 
   set w .save
 
+  if {[winfo exists $w]} {
+    raiseWin $w
+    return
+  }
+
   toplevel $w
   wm withdraw $w
 
