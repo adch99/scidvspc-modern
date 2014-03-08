@@ -524,9 +524,13 @@ if {0} {
     scBookOpen $::book::lastTuning $::book::bookTuningSlot
 
     if { $::book::isReadonly > 0 } {
-      $w.left.save configure -state disabled
+      $w.left.save   configure -state disabled
+      $w.left.add    configure -state disabled
+      $w.left.remove configure -state disabled
     } else {
-      $w.left.save configure -state normal
+      $w.left.save   configure -state normal
+      $w.left.add    configure -state normal
+      $w.left.remove configure -state normal
     }
     refreshTuning
   }
@@ -581,7 +585,6 @@ if {0} {
   ### Update book display when board changes
 
   proc refreshTuning {} {
-    if { $::book::isReadonly > 0 } { return }
     
     #unfortunately we need this as the moves on the widgets are translated
     #and widgets have no clientdata in tcl/tk
@@ -608,6 +611,9 @@ if {0} {
       }
       bind $w.f.m$row <ButtonPress-1> "::book::makeBookMove $x"
       spinbox $w.f.sp$row -from 0 -to 100 -width 3 -font font_Fixed
+      if { $::book::isReadonly > 0 } {
+	$w.f.sp$row configure -state disabled
+      }
       set pct $y
       set value [string map {% {}} $pct]
       $w.f.sp$row set $value
