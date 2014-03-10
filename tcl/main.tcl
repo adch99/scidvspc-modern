@@ -641,15 +641,15 @@ proc editMyPlayerNames {} {
   frame $w.f -borderwidth 0
   text $w.f.text -width 50 -height 10 -wrap none
   foreach name $myPlayerNames {
-    $w.f.text insert end "\"$name\"\n"
+    $w.f.text insert end "$name\n"
   }
   pack $w.f -side top -fill both -expand yes
   pack $w.f.text -fill both -expand yes
   button $w.b.white -text $::tr(White) -command {
-    .editMyPlayerNames.f.text insert end "\"[sc_game info white]\"\n"
+    .editMyPlayerNames.f.text insert end "[sc_game info white]\n"
   }
   button $w.b.black -text $::tr(Black) -command {
-    .editMyPlayerNames.f.text insert end "\"[sc_game info black]\"\n"
+    .editMyPlayerNames.f.text insert end "[sc_game info black]\n"
   }
   button $w.b.help -text $::tr(Help) \
       -command {helpWindow Options MyPlayerNames}
