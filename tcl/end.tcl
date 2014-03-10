@@ -2168,6 +2168,7 @@ wm protocol $dot_w WM_DELETE_WINDOW { ::file::Exit }
 proc initDragDrop {} {
   after idle { RegisterDropEvents .main.gameInfoFrame }
   after idle { RegisterDropEvents .main.gameInfo }
+  after idle { RegisterDropEvents .main.board.bd}
 }
 
 if { $::docking::USE_DOCKING } {
