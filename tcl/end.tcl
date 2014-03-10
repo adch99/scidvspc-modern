@@ -1922,7 +1922,7 @@ while {$argc > 0} {
       # this sets initialDir(file) for all files, not just pgn... 
       # but initialDir(file) is only (currently) used when saving pgn S.A.
       catch {sc_game load auto}
-      flipBoardForPlayerNames $::myPlayerNames
+      flipBoardForPlayerNames
     }
   }
   unbusyCursor .

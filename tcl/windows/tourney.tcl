@@ -429,7 +429,7 @@ proc ::tourney::select {gnum event {openCrosstable 0}} {
   # sc_game crosstable filter
   # ::windows::gamelist::Refresh
 
-  flipBoardForPlayerNames $::myPlayerNames
+  flipBoardForPlayerNames
   updateBoard -pgn
   updateTitle
   if {$openCrosstable} {

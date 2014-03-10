@@ -689,22 +689,24 @@ proc editMyPlayerNamesOK {} {
   destroy $w
 }
 
-proc getMyPlayerName {{n 0}} {
+proc getMyPlayerName {} {
   global myPlayerNames
-  return [string trim [lindex $myPlayerNames $n] {*?}]
+  return [string trim [lindex $myPlayerNames 0] {*?}]
 }
 
-# flipBoardForPlayerNames
 #   Check if either player in the current game has a name that matches
 #   a pattern in the specified list and if so, flip the board if
 #   necessary to show from that players perspective.
 
 set ::flippedForPlayer 0
 
-proc flipBoardForPlayerNames {namelist {board .main.board}} {
+proc flipBoardForPlayerNames {} {
+  global myPlayerNames
+
+  set board .main.board
   set white [sc_game info white]
   set black [sc_game info black]
-  foreach pattern $namelist {
+  foreach pattern $myPlayerNames {
     if {[string match $pattern $white]} {
       ::board::flip $board 0
       set ::flippedForPlayer 0

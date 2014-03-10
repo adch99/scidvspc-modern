@@ -204,7 +204,7 @@ proc ::game::LoadNumber {} {
     }
     focus .main
     destroy .glnumDialog
-    flipBoardForPlayerNames $::myPlayerNames
+    flipBoardForPlayerNames
     updateBoard -pgn
     ::windows::gamelist::Refresh
     ::bookmarks::AddCurrentGame 
@@ -243,7 +243,7 @@ proc ::game::Load { selection {update 1} {raise 1}} {
 
   setTrialMode 0
   sc_game load $selection
-  flipBoardForPlayerNames $::myPlayerNames
+  flipBoardForPlayerNames
   if {$update} {
     updateBoard -pgn
   }

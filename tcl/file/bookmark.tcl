@@ -253,7 +253,7 @@ proc ::bookmarks::Go {entry} {
 	return
       }
       sc_move pgn $ply
-      flipBoardForPlayerNames $::myPlayerNames
+      flipBoardForPlayerNames
 
       # show this game in gamelist
       set ::glistStart([sc_base current]) $best

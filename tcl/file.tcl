@@ -227,7 +227,7 @@ proc ::file::Open {{fName ""} {parent .} {update 1}} {
   set ::glstart 1
   if {$err == 0} {
     catch {sc_game load auto}
-    flipBoardForPlayerNames $::myPlayerNames
+    flipBoardForPlayerNames
     set ::glistFlipped([sc_base current]) $::flippedForPlayer
     if {[sc_game number] != 1 && [winfo exists .glistWin]} {
       ::windows::gamelist::showCurrent
