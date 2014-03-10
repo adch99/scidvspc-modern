@@ -629,6 +629,12 @@ if {$::windowsOS} {
   set lookTheme default
 }
 
+# set board piece style
+foreach i {tilegtk tileq keramik keramik_alt plastik} {
+  catch {package require ttk::theme::$i}
+}
+catch {ttk::style theme use $lookTheme}
+
 #   Which windows should be opened on startup
 set startup(pgn) 0
 set startup(switcher) 0
@@ -996,7 +1002,7 @@ proc resizeMainBoard {} {
     }
     set min_game_info_height [expr int($min_game_info_lines * $game_info_line_height + 5)]
   } else {
-    set min_game_info_height [expr int([font configure font_Regular -size] * 1.5 * 2)]
+    set min_game_info_height [expr int([font configure font_Regular -size] * 1.5 * 2.5)]
   }
   incr height_used $min_game_info_height
   
@@ -1415,8 +1421,6 @@ set optionsFile [scidConfigFile options]
 
 ::splash::add "Command line is \"$::argv0 $::argv\""
 ::splash::add "User directory is \"$scidUserDir\""
-
-# set board piece style
 
 if { [catch { package require img::png } ] } {
   ::splash::add "TkImg not found. Most piece sets are disabled."
