@@ -335,8 +335,7 @@ image create photo htmldiag1 -data {
   LDbXxfnVsYQD+Dn2PMK8M1GvihXcYyP/2MUIHjJF40veGy8hyjKecCYyKSUYhAAAOw==
 }
 
-# exportOptions:
-#   Prompts the user to select exporting options.
+### Prompts the user to select exporting options.
 
 proc exportOptions {exportType} {
   global exportFlags
@@ -942,7 +941,7 @@ proc nameEditor {} {
   label $w.status -text "" -width 1 -font font_Small -relief sunken -anchor w
 
   wm resizable $w 0 0
-  bind $w <Escape> { focus .main ; destroy .nedit }
+  bind $w <Escape> {focus .main ; destroy .nedit}
   bind $w <Return> {.nedit.buttons.replace invoke}
   bind $w <Destroy> {}
   bind $w <F1> {helpWindow Maintenance Editing}
@@ -1345,10 +1344,8 @@ proc gameQuickSave {} {
 }
 
 
-############################################################
-#### Square Bindings &&&
-
 # Pascal Georges : allow the drawing of markers directly on the board (not through comment editor)
+
 set startArrowSquare ""
 
 proc addMarker {sq color} {
@@ -1394,7 +1391,9 @@ proc drawArrow {sq color} {
   }
 }
 
-##### Bindings for main board. Moves/Drags/etc ######
+###
+### Keyboard and Mouse Bindings
+###
 
 for {set i 0} { $i < 64 } { incr i } {
   ::board::bind .main.board $i <Enter> "enterSquare $i"
@@ -1435,9 +1434,123 @@ if {$::macOS} {
 bind .main <Escape> "moveEntry_Clear 1"
 bind .main <Tab> raiseAllWindows
 
-###  Other Key bindings:
+bind .main <Home> ::move::Start
+bind .main <Left> ::move::Back
+bind .main <Up> {
+  if {[sc_pos isAt vstart]} {
+    .main.button.exitVar invoke
+  } else  {
+    ::move::Back 10
+  }
+}
+bind .main <Down> {::move::Forward 10}
+bind .main <Right> ::move::Forward
+bind .main <End> ::move::End
 
-# Bindings for quick move annotation entry in the main window:
+
+bind .main <Return> addAnalysisMove
+bind .main <space>  toggleEngineAnalysis
+
+bind .main <v> showVars
+bind .main <z> {.main.button.exitVar invoke}
+bind .main <Control-a> {.main.button.addVar invoke}
+bind .main <Control-f> {
+  if {!$tree(refresh)} {toggleRotateBoard}
+}
+bind .main <minus><minus> "addMove null null"
+
+# MouseWheel in main window:
+if {$windowsOS || $macOS} {
+  bind .main <MouseWheel> {
+    if {[expr -%D] < 0} { ::move::Back }
+    if {[expr -%D] > 0} { ::move::Forward }
+  }
+  bind .main <Shift-MouseWheel> {
+    if {[expr -%D] < 0} { ::move::Back 10 }
+    if {[expr -%D] > 0} { ::move::Forward 10}
+  }
+  bind .main <Control-MouseWheel> {
+    if {[expr -%D] < 0} {::board::resize .main.board +1}
+    if {[expr -%D] > 0} {::board::resize .main.board -1}
+  }
+} else {
+  bind .main <Button-4> ::move::Back
+  bind .main <Button-5> ::move::Forward
+  bind .main <Shift-Button-4> {::move::Back 10}
+  bind .main <Shift-Button-5> {::move::Forward 10}
+  bind .main <Control-Button-4> {::board::resize .main.board +1}
+  bind .main <Control-Button-5> {::board::resize .main.board -1}
+}
+
+proc standardShortcuts {w} {
+  bind $w <Control-o> ::file::Open
+  bind $w <Control-w> ::file::Close
+  bind $w <Control-slash> ::file::finder::Open
+  bind $w <Control-m> ::maint::Open
+  bind $w <Control-q> ::file::Exit
+  bind $w <Control-L> ::game::Reload
+  bind $w <Control-g> ::game::GotoMoveNumber
+  bind $w <Control-G> ::game::LoadNumber
+  bind $w <Control-B> ::search::board
+  bind $w <Control-H> ::search::header
+  bind $w <Control-M> ::search::material
+  bind $w <Control-KeyPress-U> ::search:::usefile
+  bind $w <Control-e> ::commenteditor::Open
+  bind $w <Control-b> ::book::Open
+  bind $w <Control-l> ::windows::gamelist::Open
+  bind $w <Control-d> ::windows::gamelist::Open
+  bind $w <Control-p> ::pgn::Open
+  bind $w <Control-T> ::tourney::Open
+  bind $w <Control-P> ::plist::Open
+  bind $w <Control-i> ::toggleGameInfo
+  bind $w <Control-t> ::tree::Open
+  bind $w <Control-A> ::enginelist::choose
+  bind $w <Control-X> ::crosstab::Open
+  bind $w <Control-E> ::tools::email
+  bind $w <Control-O> ::optable::makeReportWin
+  # bind $w <Control-R> {::tools::graphs::rating::Refresh both}
+  bind $w <Control-Z> ::tools::graphs::score::Toggle
+  bind $w <Control-I> importPgnGame
+
+  ### These should probably be moved to a different proc/place - S.A.
+  # extra generic bindings added for Scid 3.6.24 : hope there is no conflict
+  bind $w <Home>  ::move::Start
+  bind $w <Up> {
+    if {[sc_pos isAt vstart]} {
+      .main.button.exitVar invoke
+    } else  {
+      ::move::Back 10
+    }
+  }
+  bind $w <Left>  ::move::Back
+  bind $w <Down>  {::move::Forward 10}
+  bind $w <Right> ::move::Forward
+  bind $w <End>   ::move::End
+  bind $w <F2>    {::startAnalysisWin F2}
+  bind $w <F3>    {::startAnalysisWin F3}
+  bind $w <F4>    {::startAnalysisWin F4}
+
+  bind $w <Control-S> ::setupBoard
+  bind $w <Control-C> ::copyFEN
+  bind $w <Control-V> ::pasteFEN
+  bind $w <Control-r> ::gameReplace
+  bind $w <Control-s> ::gameAdd
+
+  bind $w <F11>  toggleFullScreen
+  bind $w <Control-Shift-Left>  {::board::resize .main.board -1}
+  bind $w <Control-Shift-Right> {::board::resize .main.board +1}
+  standardGameShortcuts $w
+}
+
+proc standardGameShortcuts {w} {
+  bind $w <Control-Home> {::game::LoadNextPrev first}
+  bind $w <Control-End> {::game::LoadNextPrev last}
+  bind $w <Control-Down> {::game::LoadNextPrev next}
+  bind $w <Control-Up> {::game::LoadNextPrev previous}
+  bind $w <Control-question> ::game::LoadRandom
+}
+
+standardShortcuts .main
 
 proc shortcutAddNag {nag} {
   sc_game undoPoint
@@ -1464,57 +1577,6 @@ foreach {i j} {
 } {
   bind .main $i "shortcutAddNag $j"
 }
-
-# Null move entry:
-bind .main <minus><minus> "addMove null null"
-
-# Arrow keys, Home and End:
-bind .main <Home> ::move::Start
-bind .main <Left> ::move::Back
-bind .main <Up> {
-  if {[sc_pos isAt vstart]} {
-    .main.button.exitVar invoke
-  } else  {
-    ::move::Back 10
-  }
-}
-bind .main <Down> {::move::Forward 10}
-bind .main <Right> ::move::Forward
-bind .main <End> ::move::End
-
-bind .main <Control-f> {if {!$tree(refresh)} {toggleRotateBoard}}
-
-bind .main <Return> addAnalysisMove
-bind .main <space>  toggleEngineAnalysis
-
-# MouseWheel in main window:
-if {$windowsOS || $macOS} {
-  bind .main <MouseWheel> {
-    if {[expr -%D] < 0} { ::move::Back }
-    if {[expr -%D] > 0} { ::move::Forward }
-  }
-  bind .main <Shift-MouseWheel> {
-    if {[expr -%D] < 0} { ::move::Back 10 }
-    if {[expr -%D] > 0} { ::move::Forward 10}
-  }
-  bind .main <Control-MouseWheel> {
-    if {[expr -%D] < 0} {::board::resize .main.board +1}
-    if {[expr -%D] > 0} {::board::resize .main.board -1}
-  }
-} else {
-  bind .main <Button-4> ::move::Back
-  bind .main <Button-5> ::move::Forward
-  bind .main <Shift-Button-4> {::move::Back 10}
-  bind .main <Shift-Button-5> {::move::Forward 10}
-  bind .main <Control-Button-4> {::board::resize .main.board +1}
-  bind .main <Control-Button-5> {::board::resize .main.board -1}
-}
-
-# Very annoying for blitz Fics , so is unused
-# Bind double-click in main Scid window to raise all Scid windows:
-# bind $dot_w <Double-Button-1> raiseAllWindows
-
-standardShortcuts .main
 
 if { 0 && $::docking::USE_DOCKING} {
   ttk::frame .main.space

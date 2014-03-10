@@ -615,15 +615,6 @@ proc enterVar {{n {}}} {
   after idle {focus -force .main}
 }
 
-################################################################################
-#
-################################################################################
-# V and Z key bindings: move into/out of a variation.
-#
-bind .main <KeyPress-v> showVars
-bind .main <KeyPress-z> {.main.button.exitVar invoke}
-bind .main <Control-a> {.main.button.addVar invoke}
-
 ### Dialog box for editing "My Player Names"
 ### to know when to flip the board
 
