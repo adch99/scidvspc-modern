@@ -281,6 +281,8 @@ menuText G OptionsFics "FICS" 0 {Free Chess Internet Server}
 menuText G OptionsFicsAuto "Αυτομ.Προαγωγή σε Βασίλισσα" 0
 menuText G OptionsFicsClock "Ψηφιακό Ρολόι" 0
 menuText G OptionsFicsColour "Χρώμα Κειμένου" 10
+# ====== TODO To be translated ======
+menuText G OptionsFicsSize "Board Size" 0
 menuText G OptionsFicsNoRes "Χωρίς Αποτελέσματα" 3
 menuText G OptionsFicsNoReq "Χωρίς Αιτήματα" 9
 

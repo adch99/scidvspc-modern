@@ -1100,9 +1100,15 @@ $m add checkbutton -label OptionsFicsClock    -variable ::fics::smallclocks -com
 $m add checkbutton -label OptionsSounds       -variable ::fics::sound
 $m add command     -label OptionsFicsColour   -command ::fics::setForeGround
 $m add command     -label OptionsColour       -command ::fics::setBackGround
+$m add cascade     -label OptionsFicsSize     -menu $m.size
 $m add separator
 $m add checkbutton -label OptionsFicsNoRes    -variable ::fics::no_results
 $m add checkbutton -label OptionsFicsNoReq    -variable ::fics::no_requests
+
+menu $m.size -tearoff 1
+foreach i {1 2 3 4 5} {
+  $m.size add command -label $i -command "::fics::changeScaleSize $i"
+}
 
 set m .menu.options.export
 menu $m -tearoff -1
@@ -1503,6 +1509,7 @@ proc setLanguageMenus {{lang ""}} {
   configMenuText .menu.options.fics [tr OptionsSounds $oldLang] OptionsSounds $lang
   configMenuText .menu.options.fics [tr OptionsFicsColour $oldLang] OptionsFicsColour $lang
   configMenuText .menu.options.fics [tr OptionsColour $oldLang] OptionsColour $lang
+  configMenuText .menu.options.fics [tr OptionsFicsSize $oldLang] OptionsFicsSize $lang
   configMenuText .menu.options.fics [tr OptionsFicsNoRes $oldLang] OptionsFicsNoRes $lang
   configMenuText .menu.options.fics [tr OptionsFicsNoReq $oldLang] OptionsFicsNoReq $lang
 

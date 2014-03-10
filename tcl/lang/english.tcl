@@ -274,6 +274,7 @@ menuText E OptionsFics "FICS" 0 {Free Chess Internet Server}
 menuText E OptionsFicsAuto "Autopromote Queen" 0
 menuText E OptionsFicsClock "Digital Clock" 0
 menuText E OptionsFicsColour "Text Colour" 0
+menuText E OptionsFicsSize "Board Size" 0
 menuText E OptionsFicsNoRes "No Results" 0
 menuText E OptionsFicsNoReq "No Requests" 0
 

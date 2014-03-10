@@ -289,11 +289,8 @@ namespace eval fics {
     frame $w.bottom.buttons
     frame $w.bottom.clocks
     frame $w.bottom.graph 
-    scale $w.bottom.scale -orient vertical -from 45 -to 25 -showvalue 0 -resolution 5 -length 200 \
-      -variable ::fics::size -command ::fics::changeScaleSize -relief flat
 
     showClocks
-    pack $w.bottom.scale -side left -padx 5 -pady 3
 
     pack $w.bottom.buttons -side right -padx 5 -pady 5 -anchor center
     # Pack graph when "Offers graph" clicked
@@ -560,9 +557,10 @@ namespace eval fics {
   }
 
   proc changeScaleSize {size} {
+      set ::fics::size [expr {$size * 5 + 20}]
       foreach w [winfo children .fics.bottom] {
         if {[string match .fics.bottom.game* $w]} {
-	  ::board::resize $w.bd $size
+	  ::board::resize $w.bd $::fics::size
         }
       }
   }
@@ -1503,7 +1501,7 @@ namespace eval fics {
 
       # button $w.bottom.game$game.w.flip -text flip -font font_Small -relief flat -command ""
 
-      pack $w.bottom.game$game -side left -before $w.bottom.scale -padx 3 -pady 3
+      pack $w.bottom.game$game -side left -before $w.bottom.buttons -padx 3 -pady 3
 
       pack $w.bottom.game$game.b  -side top -anchor w -expand 1 -fill x
       pack $w.bottom.game$game.b.black -side left 
@@ -2265,18 +2263,15 @@ namespace eval fics {
     }
 
   }
-  ################################################################################
-  # Play the selected game
-  ################################################################################
+
+  ### Play the selected game
+
   proc acceptGraphGame { idx } {
     array set ga [lindex $::fics::soughtlist $idx]
     catch {
       writechan "play $ga(game)" echo
     }
   }
-  ################################################################################
-  #
-  ################################################################################
 
   proc delGraphText { idx } {
     set w .fics.bottom.graph

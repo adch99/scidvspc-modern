@@ -299,6 +299,8 @@ menuText O OptionsFicsClock "Digital klokke" 0
 # ====== TODO To be translated ======
 menuText O OptionsFicsColour "Text Colour" 0
 # ====== TODO To be translated ======
+menuText O OptionsFicsSize "Board Size" 0
+# ====== TODO To be translated ======
 menuText O OptionsFicsNoRes "No Results" 0
 # ====== TODO To be translated ======
 menuText O OptionsFicsNoReq "No Requests" 0

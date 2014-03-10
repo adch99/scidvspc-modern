@@ -281,6 +281,8 @@ menuText B OptionsFicsClock "Digital Clock" 0
 # ====== TODO To be translated ======
 menuText B OptionsFicsColour "Text Colour" 0
 # ====== TODO To be translated ======
+menuText B OptionsFicsSize "Board Size" 0
+# ====== TODO To be translated ======
 menuText B OptionsFicsNoRes "No Results" 0
 # ====== TODO To be translated ======
 menuText B OptionsFicsNoReq "No Requests" 0

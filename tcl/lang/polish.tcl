@@ -261,6 +261,8 @@ menuText P OptionsFicsClock "Zegar Cyfrowy" 0
 # ====== TODO To be translated ======
 menuText P OptionsFicsColour "Text Colour" 0
 # ====== TODO To be translated ======
+menuText P OptionsFicsSize "Board Size" 0
+# ====== TODO To be translated ======
 menuText P OptionsFicsNoRes "No Results" 0
 # ====== TODO To be translated ======
 menuText P OptionsFicsNoReq "No Requests" 0

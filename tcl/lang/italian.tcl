@@ -266,6 +266,8 @@ menuText I OptionsFicsClock "Orologio Digitale" 0
 # ====== TODO To be translated ======
 menuText I OptionsFicsColour "Text Colour" 0
 # ====== TODO To be translated ======
+menuText I OptionsFicsSize "Board Size" 0
+# ====== TODO To be translated ======
 menuText I OptionsFicsNoRes "No Results" 0
 # ====== TODO To be translated ======
 menuText I OptionsFicsNoReq "No Requests" 0

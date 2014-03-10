@@ -273,6 +273,8 @@ menuText S OptionsFics "FICS" 0
 menuText S OptionsFicsAuto "Autopromoción Reina" 0
 menuText S OptionsFicsClock "Reloj Digital" 0
 menuText S OptionsFicsColour "Color del texto" 0
+# ====== TODO To be translated ======
+menuText S OptionsFicsSize "Board Size" 0
 menuText S OptionsFicsNoRes "Sin resultados" 0
 menuText S OptionsFicsNoReq "Sin respuesta" 0
 menuText S OptionsLanguage "Lenguaje" 0 {Selecciona el lenguaje del menú}

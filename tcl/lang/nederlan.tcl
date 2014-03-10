@@ -266,6 +266,8 @@ menuText N OptionsFics "FICS" 0
 menuText N OptionsFicsAuto "Autopromotie koningin" 0
 menuText N OptionsFicsClock "Digitale klok" 0
 menuText N OptionsFicsColour "Tekst kleur" 0
+# ====== TODO To be translated ======
+menuText N OptionsFicsSize "Board Size" 0
 menuText N OptionsFicsNoRes "Geen uitslagen" 0
 menuText N OptionsFicsNoReq "Geen verzoeken" 0
 menuText N OptionsLanguage "Kies taal" 0 {Kies taal}
