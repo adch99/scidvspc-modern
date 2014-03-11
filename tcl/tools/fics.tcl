@@ -379,8 +379,12 @@ namespace eval fics {
     if {!$::macOS && !$::windowsOS} {
            bind $w.console.text <FocusIn> "focus $w.command.entry"
     }
+
+    entry $w.command.find -width 10 -textvariable ::fics::helpWin(find)
+    configFindEntryBox $w.command.find ::fics::helpWin $w.console.text
+
     pack $w.command.entry -side left -fill x -expand 1 -padx 3 -pady 2
-    pack $w.command.next $w.command.clearall $w.command.clear $w.command.send -side right -padx 3 -pady 2
+    pack $w.command.next $w.command.clearall $w.command.clear $w.command.send $w.command.find -side right -padx 3 -pady 2
     focus $w.command.entry
 
     # black
