@@ -276,7 +276,7 @@ menuText S OptionsFicsColour "Color del texto" 0
 # ====== TODO To be translated ======
 menuText S OptionsFicsSize "Board Size" 0
 # ====== TODO To be translated ======
-menuText S OptionsFicsCommands "Edit Init Commands" 0
+menuText S OptionsFicsCommands "Init Commands" 0
 menuText S OptionsFicsNoRes "Sin resultados" 0
 menuText S OptionsFicsNoReq "Sin respuesta" 0
 menuText S OptionsLanguage "Lenguaje" 0 {Selecciona el lenguaje del menú}

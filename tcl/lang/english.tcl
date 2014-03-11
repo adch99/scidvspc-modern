@@ -275,7 +275,7 @@ menuText E OptionsFicsAuto "Autopromote Queen" 0
 menuText E OptionsFicsClock "Digital Clock" 0
 menuText E OptionsFicsColour "Text Colour" 0
 menuText E OptionsFicsSize "Board Size" 0
-menuText E OptionsFicsCommands "Edit Init Commands" 0
+menuText E OptionsFicsCommands "Init Commands" 0
 menuText E OptionsFicsNoRes "No Results" 0
 menuText E OptionsFicsNoReq "No Requests" 0
 

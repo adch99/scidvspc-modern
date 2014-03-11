@@ -263,7 +263,7 @@ menuText P OptionsFicsColour "Text Colour" 0
 # ====== TODO To be translated ======
 menuText P OptionsFicsSize "Board Size" 0
 # ====== TODO To be translated ======
-menuText P OptionsFicsCommands "Edit Init Commands" 0
+menuText P OptionsFicsCommands "Init Commands" 0
 # ====== TODO To be translated ======
 menuText P OptionsFicsNoRes "No Results" 0
 # ====== TODO To be translated ======

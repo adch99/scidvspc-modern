@@ -2495,7 +2495,7 @@ namespace eval fics {
     }
     toplevel $w
     wm state $w withdrawn
-    wm title $w "[tr OptionsFicsCommands]"
+    wm title $w "FICS: [tr OptionsFicsCommands]"
 
     text $w.text -width 50 -height 10 -wrap none
     foreach name $::fics::init_commands {
