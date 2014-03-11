@@ -5506,7 +5506,7 @@ set helpTitle(FICSwidget) "FICS: Play on the Internet"
 set helpText(FICSwidget) {<h1>Using FICS</h1>
   <p>
 Once you have <a FICSlogin>logged in</a>, the main FICS widget shows a
-console window, entry widget, and some command buttons.</p>
+console window, command and find entry boxes, and some command buttons.</p>
 
 <h3>FICS Console</h3>
 <p>
@@ -5533,7 +5533,7 @@ By default they are LimeGreen and grey35.
 <p>
 There are a few options in a right-click menu. 'No Requests'
 denies Takebacks, Adjournment, Abort and Draw requests. 'No Results' prevents game results
-dialogs.
+dialogs. 'Board Size' refers to the small Observed Game boards.
 </p>
 
   <h3>Buttons</h3>
