@@ -1232,21 +1232,19 @@ namespace eval fics {
 
       writechan "set interface $::scidName $::scidVersion"
 
-      # user init commands
-      # writechan "set seek $::fics::gamerequests"
-      # writechan "set gin  $::fics::gamerequests"
-      writechan "set gin  0"
-      # writechan "set silence 1"
-      writechan "set echo 1"
-      writechan "set seek 0"
       # pychess sets this bloody thing
       writechan "set availinfo off"
       writechan "set chanoff [expr !$::fics::chanoff]"
       # writechan "set cshout $::fics::shouts"
       writechan "set shout $::fics::shouts"
-
       # What is this ? S.A. writechan "iset nowrap 1"
       writechan "iset nohighlight 1"
+
+      # User init commands
+      foreach i $::fics::init_commands {
+        writechan $i
+      }
+
       .fics.bottom.buttons.offers  configure -state normal
       .fics.bottom.buttons.tells   configure -state normal
       .fics.bottom.buttons.shouts  configure -state normal
@@ -2487,6 +2485,56 @@ namespace eval fics {
       }
     }
   }
+
+  proc editInitCommands {} {
+    set w .editInitCommands
+
+    if {[winfo exists $w]} {
+      raiseWin $w
+      return
+    }
+    toplevel $w
+    wm state $w withdrawn
+    wm title $w "[tr OptionsFicsCommands]"
+
+    text $w.text -width 50 -height 10 -wrap none
+    foreach name $::fics::init_commands {
+      $w.text insert end "$name\n"
+    }
+    pack $w.text -side top -fill both -expand yes
+
+    frame $w.b
+    pack $w.b -side bottom 
+
+    dialogbutton $w.b.ok -text OK -command {
+      set ::fics::init_commands {}
+      foreach i [split [string trim [.editInitCommands.text get 1.0 end]] "\n"] {
+        if {$i != ""} {
+          lappend ::fics::init_commands $i
+        }
+      }
+      destroy .editInitCommands
+    }
+    dialogbutton $w.b.defaults -text $::tr(Defaults) -command {
+      .editInitCommands.text delete 0.0 end
+      .editInitCommands.text insert end "set gin 0
+set echo 1
+set seek 0"
+    }
+    dialogbutton $w.b.cancel -text $::tr(Cancel) -command "destroy $w"
+    pack $w.b.cancel $w.b.defaults $w.b.ok -side right -padx 10 -pady 5
+
+    bind $w <Escape> "destroy $w"
+    update
+    if {[winfo exists .fics]} {
+      placeWinOverParent $w .fics
+    } else {
+      placeWinOverParent $w .
+    }
+    wm state $w normal
+    update
+  }
+
 }
 
 ###

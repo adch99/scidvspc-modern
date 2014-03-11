@@ -954,7 +954,7 @@ $m add command -label OptionsSave -command {
     puts $optionF ""
 
     # save FICS config
-    foreach i { use_timeseal timeseal_exec port_fics port_timeseal login password consolebg consolefg chanoff shouts server_ip consolebg consolefg autopromote autoraise smallclocks size sound no_results no_requests server} {
+    foreach i { use_timeseal timeseal_exec port_fics port_timeseal login password consolebg consolefg chanoff shouts server_ip consolebg consolefg autopromote autoraise smallclocks size sound no_results no_requests server init_commands} {
       puts $optionF "set ::fics::$i [list [set ::fics::$i]]"
     }
     foreach i [lsort [array names ::fics::findopponent]] {
@@ -1100,6 +1100,7 @@ $m add checkbutton -label OptionsFicsClock    -variable ::fics::smallclocks -com
 $m add checkbutton -label OptionsSounds       -variable ::fics::sound
 $m add command     -label OptionsFicsColour   -command ::fics::setForeGround
 $m add command     -label OptionsColour       -command ::fics::setBackGround
+$m add command     -label OptionsFicsCommands -command ::fics::editInitCommands
 $m add cascade     -label OptionsFicsSize     -menu $m.size
 $m add separator
 $m add checkbutton -label OptionsFicsNoRes    -variable ::fics::no_results
@@ -1503,15 +1504,9 @@ proc setLanguageMenus {{lang ""}} {
         OptionsMoves$tag $lang
   }
 
-  configMenuText .menu.options.fics [tr OptionsWindowsRaise $oldLang] OptionsWindowsRaise $lang
-  configMenuText .menu.options.fics [tr OptionsFicsAuto $oldLang] OptionsFicsAuto $lang
-  configMenuText .menu.options.fics [tr OptionsFicsClock $oldLang] OptionsFicsClock $lang
-  configMenuText .menu.options.fics [tr OptionsSounds $oldLang] OptionsSounds $lang
-  configMenuText .menu.options.fics [tr OptionsFicsColour $oldLang] OptionsFicsColour $lang
-  configMenuText .menu.options.fics [tr OptionsColour $oldLang] OptionsColour $lang
-  configMenuText .menu.options.fics [tr OptionsFicsSize $oldLang] OptionsFicsSize $lang
-  configMenuText .menu.options.fics [tr OptionsFicsNoRes $oldLang] OptionsFicsNoRes $lang
-  configMenuText .menu.options.fics [tr OptionsFicsNoReq $oldLang] OptionsFicsNoReq $lang
+  foreach tag {OptionsWindowsRaise OptionsFicsAuto OptionsFicsClock OptionsSounds OptionsFicsColour OptionsColour OptionsFicsCommands OptionsFicsSize OptionsFicsNoRes OptionsFicsNoReq} {
+    configMenuText .menu.options.fics [tr $tag $oldLang] $tag $lang
+  }
 
   foreach tag { Color Width Display } {
     configMenuText .menu.options.entry.highlightlastmove [tr OptionsMovesHighlightLastMove$tag $oldLang] OptionsMovesHighlightLastMove$tag $lang

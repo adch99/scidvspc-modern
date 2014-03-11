@@ -279,6 +279,8 @@ menuText C OptionsFicsColour "Text Colour" 0
 # ====== TODO To be translated ======
 menuText C OptionsFicsSize "Board Size" 0
 # ====== TODO To be translated ======
+menuText C OptionsFicsCommands "Edit Init Commands" 0
+# ====== TODO To be translated ======
 menuText C OptionsFicsNoRes "No Results" 0
 # ====== TODO To be translated ======
 menuText C OptionsFicsNoReq "No Requests" 0

@@ -457,6 +457,12 @@ proc initFICSDefaults {} {
   set ::fics::sound	0
   set ::fics::no_results	0
   set ::fics::no_requests	0
+  # these are duplicated in fics::editInitCommands
+  set ::fics::init_commands [list \
+    {set gin  0} \
+    {set echo 1} \
+    {set seek 0} \
+  ]
 }
 
 initFICSDefaults
