@@ -7897,7 +7897,7 @@ sc_game_load (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     }
 
     if (db->filter->Get(gnum) > 0) {
-        db->game->MoveToPly(db->filter->Get(gnum) - 1);
+        db->game->MoveToPly(db->dbFilter->Get(gnum) - 1);
     } else {
         db->game->MoveToPly(0);
     }
