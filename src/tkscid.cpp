@@ -15048,7 +15048,10 @@ sc_search (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     }
 
     // Update the normal filter
-    setMainFilter(db);
+    // (Board search does so inline because it may be searching other dbs)
+
+    if (index != OPT_BOARD)
+      setMainFilter(db);
 
     return ret;
 }
@@ -15313,6 +15316,7 @@ sc_search_board (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     Tcl_AppendResult (ti, temp, NULL);
 #endif
 
+    setMainFilter(db);
     if (searchInRefBase ) {
       currentBase = oldCurrentBase;
       db = &(dbList[currentBase]);
