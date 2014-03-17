@@ -3049,7 +3049,9 @@ sc_base_tag (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     }
 
     // If setting filter, clear it now:
-    if (cmd == TAG_FIND) { db->filter->Fill (0); }
+    if (cmd == TAG_FIND) {
+      db->dbFilter->Fill (0);
+    }
 
     // Process each game in the database:
     uint updateStart = 1000;  // Update progress bar every 1000 filter games.
@@ -3081,7 +3083,7 @@ sc_base_tag (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         if (cmd == TAG_FIND) {
             if (g->FindExtraTag (tag) != NULL) {
                 // Found the tag, so add this game to the filter:
-                db->filter->Set (gnum, 1);
+                db->dbFilter->Set (gnum, 1);
             }
         } else if (cmd == TAG_STRIP) {
             if (g->RemoveExtraTag (tag)) {
@@ -3106,6 +3108,7 @@ sc_base_tag (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             }
         }
     }
+    setMainFilter (db);
 
     // Done searching through all games.
 
