@@ -101,13 +101,15 @@ Crosstable::OpponentElo (eloT player, eloT opponent)
 // comparePlayerData():
 //      Compares two playerDataT structs based on their tournament score.
 int
-comparePlayerData (playerDataT * p1, playerDataT * p2, crosstableSortT option)
+comparePlayerData (playerDataT * p1, playerDataT * p2, crosstableSortT option, bool tiewin)
 {
     int result = 0;
     switch (option) {
-    case CROSSTABLE_SortScore:  // Sort by highest score, then fewest games:
+    case CROSSTABLE_SortScore:  // Sort by highest score, (optionally - most wins), then fewest games:
         result = p2->score - p1->score;
         if (result == 0) { result = p1->gameCount - p2->gameCount; }
+        if (result == 0 && tiewin)
+                         { result = p2->won - p1->won; }
         if (result == 0) { result = p2->tiebreak - p1->tiebreak; }
         break;
 
@@ -209,6 +211,9 @@ Crosstable::AddPlayer (idNumberT id, const char * name, eloT elo)
     pdata->score = 0;
     pdata->gameCount = 0;
     pdata->tiebreak = 0;
+    pdata->won = 0;
+    pdata->loss = 0;
+    pdata->draw = 0;
     pdata->oppEloCount = 0;
     pdata->oppEloTotal = 0;
     pdata->oppEloScore = 0;
@@ -379,6 +384,9 @@ Crosstable::Tiebreaks (crosstableModeT mode)
     for (player = 0; player < PlayerCount; player++) {
         playerDataT * pd = PlayerData[player];
         pd->tiebreak = 0;
+        pd->won = 0;
+        pd->loss = 0;
+        pd->draw = 0;
         uint tb = 0;
         // Tiebreaks are meaningless for Knockout tables:
         if (mode == CROSSTABLE_Knockout) { continue; }
@@ -399,6 +407,14 @@ Crosstable::Tiebreaks (crosstableModeT mode)
                         tb += oppScore;
                     }
                 }
+		switch (clash->result) {
+		  case RESULT_White:
+		      pd->won++; break;
+		  case RESULT_Black:
+		      pd->loss++; break;
+		  case RESULT_Draw:
+		      pd->draw++; break;
+		}
                 clash = clash->next;
             }
         }
@@ -472,7 +488,8 @@ Crosstable::PrintTable (DString * dstr, crosstableModeT mode, uint playerLimit, 
         for (uint second = first+1; second < PlayerCount; second++) {
             if (comparePlayerData (PlayerData[SortedIndex[first]],
                                    PlayerData[SortedIndex[second]],
-                                   SortOption) > 0) {
+                                   SortOption,
+                                   TieWin) > 0) {
                 uint temp = SortedIndex[first];
                 SortedIndex[first] = SortedIndex[second];
                 SortedIndex[second] = temp;
@@ -865,7 +882,6 @@ Crosstable::PrintAllPlayAll (DString * dstr, uint playerLimit)
             dstr->Append (StartRightCol, stemp, EndRightCol);
         }
 
-        uint r_won = 0, r_loss = 0, r_draw = 0;
         for (uint oppCount = 0; oppCount < playerLimit; oppCount++) {
             if (playerLimit == 2  &&  oppCount == player) { continue; }
             uint opp = SortedIndex[oppCount];
@@ -888,14 +904,6 @@ Crosstable::PrintAllPlayAll (DString * dstr, uint playerLimit)
                     } else {
                         dstr->AddChar (RESULT_CHAR[clash->result]);
                     }
-		    switch (clash->result) {
-		      case 1:
-			  r_won++; break;
-		      case 2:
-			  r_loss++; break;
-		      case 3:
-			  r_draw++; break;
-		    }
                     clash = clash->next;
                 } else {
                     dstr->AddChar (index == opp ? 'X' : '.');
@@ -908,7 +916,7 @@ Crosstable::PrintAllPlayAll (DString * dstr, uint playerLimit)
 
         if (PrintTallies) {
 	  dstr->Append (StartCol);
-	  sprintf (stemp, "  (+%u -%u =%u)", r_won, r_loss, r_draw);
+	  sprintf (stemp, "  (+%u -%u =%u)", pdata->won, pdata->loss, pdata->draw);
 	  dstr->Append (stemp);
 	  dstr->Append (EndCol);
         }
@@ -1051,7 +1059,6 @@ Crosstable::PrintSwiss (DString * dstr, uint playerLimit)
             dstr->Append (StartRightCol, stemp, EndRightCol);
         }
 
-        uint r_won = 0, r_loss = 0, r_draw = 0;
         for (uint round = 1; round <= MaxRound; round++) {
             clashT * clash = pdata->roundClash[round];
             dstr->AddChar (' ');
@@ -1085,14 +1092,6 @@ Crosstable::PrintSwiss (DString * dstr, uint playerLimit)
                     else
                       dstr->Append ("</g></blue>");
                 }
-                switch (clash->result) {
-		  case 1:
-		      r_won++; break;
-		  case 2:
-		      r_loss++; break;
-		  case 3:
-		      r_draw++; break;
-                }
             }
             dstr->Append (EndCol);
         }
@@ -1100,7 +1099,7 @@ Crosstable::PrintSwiss (DString * dstr, uint playerLimit)
 
         if (PrintTallies) {
 	  dstr->Append (StartCol);
-	  sprintf (stemp, "  (+%u -%u =%u)", r_won, r_loss, r_draw);
+	  sprintf (stemp, "  (+%u -%u =%u)", pdata->won, pdata->loss, pdata->draw);
 	  dstr->Append (stemp);
 	  dstr->Append (EndCol);
         }

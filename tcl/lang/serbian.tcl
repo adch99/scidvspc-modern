@@ -917,6 +917,8 @@ menuText Y CrosstabOptKnockout "Nokaut" 0
 menuText Y CrosstabOptAuto "Auto" 0 ;# ***
 # todo
 menuText Y CrosstabOptThreeWin "3 Points for Win" 1
+# ====== TODO To be translated ======
+menuText Y CrosstabOptTieWin "Tie-Break by wins" 1
 menuText Y CrosstabOptAges "Starost u godinama" 10
 menuText Y CrosstabOptNats "Narodnost" 0
 # todo

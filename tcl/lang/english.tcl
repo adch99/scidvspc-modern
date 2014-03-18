@@ -769,12 +769,13 @@ menuText E CrosstabOptSwiss "Swiss" 0
 menuText E CrosstabOptKnockout "Rounds" 0
 menuText E CrosstabOptAuto "Auto" 1
 menuText E CrosstabOptThreeWin "3 Points for Win" 1
+menuText E CrosstabOptTieWin "Tie-Break by wins" 1
 menuText E CrosstabOptAges "Ages in Years" 8
 menuText E CrosstabOptNats "Nationalities" 0
 menuText E CrosstabOptTallies "Win/Loss/Draw" 0
 menuText E CrosstabOptRatings "Ratings" 0
 menuText E CrosstabOptTitles "Titles" 0
-menuText E CrosstabOptBreaks "Tie-Break Scores" 4
+menuText E CrosstabOptBreaks "Show Tie-Break Scores" 4
 menuText E CrosstabOptDeleted "Include Deleted Games" 8
 menuText E CrosstabOptColors "Colors (Swiss table only)" 0
 menuText E CrosstabOptColumnNumbers "Numbered Columns (All-play-all table only)" 2

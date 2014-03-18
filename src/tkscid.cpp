@@ -6308,6 +6308,7 @@ sc_game_crosstable (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
         "-numcolumns", "+numcolumns",   // All-play-all numbered columns
         "-gameNumber",
         "-threewin", "+threewin",       // Give 3 points for win, 1 for draw
+        "-tiewin", "+tiewin",		// Number of wins is 1st tie-break
         "-round",
         NULL
     };
@@ -6326,6 +6327,7 @@ sc_game_crosstable (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
         EOPT_NUMCOLUMNS_OFF, EOPT_NUMCOLUMNS_ON,
         EOPT_GNUMBER,
         EOPT_THREEWIN_OFF, EOPT_THREEWIN_ON,
+        EOPT_TIEWIN_OFF, EOPT_TIEWIN_ON,
         EOPT_ROUND
     };
 
@@ -6344,6 +6346,7 @@ sc_game_crosstable (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
     uint numTableGames = 0;
     uint gameNumber = 0;
     bool threewin = false;
+    bool tiewin = false;
     uint roundNumber = 0;
 
     if (argc >= 3) { option = strUniqueMatch (argv[2], options); }
@@ -6390,6 +6393,8 @@ sc_game_crosstable (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
                 break;
             case EOPT_THREEWIN_OFF:  threewin = false ; break;
             case EOPT_THREEWIN_ON:   threewin = true  ; break;
+            case EOPT_TIEWIN_OFF:  tiewin = false ; break;
+            case EOPT_TIEWIN_ON:   tiewin = true  ; break;
             case EOPT_ROUND: 
                 if (arg+1 >= argc) { return errorResult (ti, usageMsg); }
                 roundNumber = strGetUnsigned (argv[arg+1]);
@@ -6469,6 +6474,7 @@ sc_game_crosstable (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
     if (sort == EOPT_SORT_COUNTRY) { ctable->SortByCountry(); }
 
     ctable->SetThreeWin(threewin);
+    ctable->SetTieWin(tiewin);
     ctable->SetSwissColors (showColors);
     ctable->SetAges (showAges);
     ctable->SetCountries (showCountries);

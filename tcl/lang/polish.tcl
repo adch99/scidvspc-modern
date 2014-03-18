@@ -757,6 +757,8 @@ menuText P CrosstabOptSwiss "Szwajcar" 0
 menuText P CrosstabOptKnockout "Knockout" 0
 menuText P CrosstabOptAuto "Automatycznie" 0
 menuText P CrosstabOptThreeWin "3 punkty za wygraną" 1
+# ====== TODO To be translated ======
+menuText P CrosstabOptTieWin "Tie-Break by wins" 1
 menuText P CrosstabOptAges "Wiek" 0
 menuText P CrosstabOptNats "Narodowość" 0
 menuText P CrosstabOptTallies "Zwycięstwo/Przegrana/Remis" 0

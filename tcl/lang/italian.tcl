@@ -843,6 +843,8 @@ menuText I CrosstabOptKnockout "Knockout" 0
 menuText I CrosstabOptAuto "Auto" 0
 # todo
 menuText I CrosstabOptThreeWin "3 Points for Win" 1
+# ====== TODO To be translated ======
+menuText I CrosstabOptTieWin "Tie-Break by wins" 1
 menuText I CrosstabOptAges "Eta' in anni" 8
 menuText I CrosstabOptNats "Nazionalita'" 0
 # todo

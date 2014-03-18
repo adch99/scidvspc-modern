@@ -846,6 +846,8 @@ menuText H CrosstabOptKnockout "Kieséses" 1
 menuText H CrosstabOptAuto "Találd ki!" 0
 # todo
 menuText H CrosstabOptThreeWin "3 Points for Win" 1
+# ====== TODO To be translated ======
+menuText H CrosstabOptTieWin "Tie-Break by wins" 1
 menuText H CrosstabOptAges "Életkor évben" 0
 menuText H CrosstabOptNats "Nemzetiség" 0
 # todo

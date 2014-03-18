@@ -779,6 +779,8 @@ menuText N CrosstabOptSwiss "Zwitsers" 0
 menuText N CrosstabOptKnockout "Knock-out" 0
 menuText N CrosstabOptAuto "Auto" 0
 menuText N CrosstabOptThreeWin "3 punten voor een overwinning" 1
+# ====== TODO To be translated ======
+menuText N CrosstabOptTieWin "Tie-Break by wins" 1
 menuText N CrosstabOptAges "Leeftijd in jaren" 8
 menuText N CrosstabOptNats "Nationaliteiten" 1
 menuText N CrosstabOptTallies "Winst/Verlies/Remise" 0

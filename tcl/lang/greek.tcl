@@ -790,6 +790,8 @@ menuText G CrosstabOptSwiss "Σουηδικό" 0
 menuText G CrosstabOptKnockout "Γύροι" 0
 menuText G CrosstabOptAuto "Αυτόματα" 1
 menuText G CrosstabOptThreeWin "3 Πόντοι για Νίκη" 0
+# ====== TODO To be translated ======
+menuText G CrosstabOptTieWin "Tie-Break by wins" 1
 menuText G CrosstabOptAges "Ηλικία σε έτη" 0
 menuText G CrosstabOptNats "Εθνικότητα" 1
 menuText G CrosstabOptTallies "Νίκη/Χαμ/Ισοπ" 0
