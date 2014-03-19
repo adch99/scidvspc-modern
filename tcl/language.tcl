@@ -68,12 +68,18 @@ proc addLanguage {letter name underline {encodingSystem ""}} {
   set ::langEncoding($letter) $encodingSystem
   lappend languages $letter
 }
-################################################################################
-# menuText:
-#    Assigns the menu name and help message for a menu entry and language.
-################################################################################
-proc menuText {lang tag label underline {helpMsg ""}} {
+
+### Assigns the menu name and help message for a menu entry and language.
+
+proc menuText {args} {
   global hasEncoding langEncoding
+
+  lassign $args lang tag label underline helpMsg
+  if {![string is integer -strict $underline]} {
+    tk_messageBox -icon error -type ok -title "$::scidName Menu Error" \
+      -message "menuText $args\n\nNot enough args, or fourth arg is not an integer."
+    exit
+  }
 
   set ::menuLabel($lang,$tag) $label
   set ::menuUnder($lang,$tag) $underline
