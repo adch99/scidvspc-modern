@@ -5374,7 +5374,7 @@ Options:
     <p>The <b>Offers Graph</b> button shows all current game offers. Hovering
 your mouse over a node will show it's details, and clicking a node will
 request a new game. Sometimes you'll have to be quick though, as
-FICS can be quite busy.</p>
+FICS can be quite busy. 'Escape' key dismisses the graph.</p>
 
 <p> On the graph itself, The y-axis shows the ELO rating of the opponent -
 higher number means stronger player , while x-axis of the graph plots the time
@@ -5538,8 +5538,7 @@ dialogs. 'Board Size' refers to the small Observed Game boards.
 
   <h3>Buttons</h3>
   <p>
-  On the right hand side of the clocks appear the command buttons. They are
-fairly self explanatory, the most notable being the <a FICSfindopp>Find
+  The FICS buttons are fairly self explanatory, the most notable being the <a FICSfindopp>Find
 Opponent and Offers Graph</a> buttons. Other buttons include:
   <br>
   <ul>

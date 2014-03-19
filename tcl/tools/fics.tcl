@@ -17,7 +17,7 @@ namespace eval fics {
   set soughtlist {}
   set graphwidth 300
   # Fine tuned to be the same height as clocks , but needs re-tuning after making the observed games windgets
-  set graphheight 200 
+  # set graphheight 200  ; now overlaps the buttons frame, and calculated below
   set graphoff 15 ;# axis offset
   set graphon 0
   set timeseal_pid 0
@@ -290,11 +290,11 @@ namespace eval fics {
     frame $w.bottom.clocks
     frame $w.bottom.graph 
 
-    pack $w.bottom.buttons -side right -padx 5 -pady 5 -anchor center
+    pack $w.bottom.buttons -side right -padx 2 -pady 5 -anchor center
     # Pack graph when "Offers graph" clicked
 
     # graph widget initialised
-    canvas $w.bottom.graph.c -background grey90 -width $::fics::graphwidth -height $::fics::graphheight
+    canvas $w.bottom.graph.c -background grey90 -width $::fics::graphwidth
     pack $w.bottom.graph.c
 
     scrollbar $w.console.scroll -command "$w.console.text yview"
@@ -515,6 +515,10 @@ namespace eval fics {
 
     # all widgets must be visible
     wm minsize $w $x $y
+
+    # set graph height now buttons height is known
+    set ::fics::graphheight [expr [winfo reqheight $w.bottom.buttons] - 2]
+    $w.bottom.graph.c configure -height $::fics::graphheight
 
     updateConsole "Connecting $::fics::reallogin"
 
@@ -1499,7 +1503,7 @@ namespace eval fics {
 
       # button $w.bottom.game$game.w.flip -text flip -font font_Small -relief flat -command ""
 
-      pack $w.bottom.game$game -side left -before $w.bottom.buttons -padx 3 -pady 3
+      pack $w.bottom.game$game -side left -padx 3 -pady 3
 
       pack $w.bottom.game$game.b  -side top -anchor w -expand 1 -fill x
       pack $w.bottom.game$game.b.black -side left 
@@ -2134,14 +2138,18 @@ namespace eval fics {
   proc showGraph {} {
     set w .fics.bottom
 
-    ### Either the clock or offers graph are shown at any one time
+    ### Either the buttons or offers graph are shown at any one time
 
     if { $::fics::graphon } {
-      pack $w.graph -side left
+      pack forget $w.buttons
+      pack $w.graph -side right -padx 2 -pady 5 -anchor center
+      bind .fics <Escape> {set ::fics::graphon 0 ; ::fics::showGraph}
       updateGraph
     } else {
       after cancel ::fics::updateGraph
+      bind .fics <Escape> ".fics.command.entry delete 0 end"
       pack forget $w.graph
+      pack $w.buttons -side right -padx 2 -pady 5 -anchor center
     }
 
     ### Repacking can make the console suspend, so seek to console end 
