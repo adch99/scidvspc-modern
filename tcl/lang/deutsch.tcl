@@ -278,7 +278,6 @@ menuText D OptionsFontsFixed "Fest" 0 {Schriftart mit fester Breite (nicht-propo
 menuText D OptionsGInfo "Partieinformation" 0 {Optionen für Informationsbereich}
 menuText D OptionsFics "FICS" 0
 menuText D OptionsFicsAuto "Autopromote Königin" 0
-menuText D OptionsFicsClock "Digitale Uhr" 0
 # ====== TODO To be translated ======
 menuText D OptionsFicsColour "Text Colour" 0
 # ====== TODO To be translated ======

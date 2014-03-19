@@ -262,7 +262,6 @@ menuText I OptionsFontsFixed "Fisso" 0 {Cambia il font di larghezza fissa}
 menuText I OptionsGInfo "Informazioni sulla partita" 0 {Opzioni sulle informazioni della partita}
 menuText I OptionsFics "FICS" 0
 menuText I OptionsFicsAuto "Autopromozione Regina" 0
-menuText I OptionsFicsClock "Orologio Digitale" 0
 # ====== TODO To be translated ======
 menuText I OptionsFicsColour "Text Colour" 0
 # ====== TODO To be translated ======

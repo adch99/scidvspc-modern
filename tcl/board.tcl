@@ -2280,17 +2280,12 @@ proc ::board::ficslabels {{w .main.board}} {
   if {$w != ".main.board" || ![winfo exists .fics]} {
     return
   }
-  if {$::fics::smallclocks} {
-    if {$::board::_flip(.main.board)} {
-      grid configure .main.board.clock1 -row 1 -column 0 -sticky ne
-      grid configure .main.board.clock2 -row 8 -column 0 -sticky se
-    } else {
-      grid configure .main.board.clock2 -row 1 -column 0 -sticky ne
-      grid configure .main.board.clock1 -row 8 -column 0 -sticky se
-    }
+  if {$::board::_flip(.main.board)} {
+    grid configure .main.board.clock1 -row 1 -column 0 -sticky ne
+    grid configure .main.board.clock2 -row 8 -column 0 -sticky se
   } else {
-    grid remove .main.board.clock2
-    grid remove .main.board.clock1
+    grid configure .main.board.clock2 -row 1 -column 0 -sticky ne
+    grid configure .main.board.clock1 -row 8 -column 0 -sticky se
   }
 }
 

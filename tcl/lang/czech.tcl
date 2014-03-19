@@ -273,7 +273,6 @@ menuText C OptionsFontsFixed "Fixní" 0 {Zmìnit font fixní ¹íøky}
 menuText C OptionsGInfo "Informace o partii" 0 {Volby pro informace o partii}
 menuText C OptionsFics "FICS" 0
 menuText C OptionsFicsAuto "Autopromote královna" 0
-menuText C OptionsFicsClock "Digitální hodiny" 0
 # ====== TODO To be translated ======
 menuText C OptionsFicsColour "Text Colour" 0
 # ====== TODO To be translated ======

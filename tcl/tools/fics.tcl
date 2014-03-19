@@ -290,8 +290,6 @@ namespace eval fics {
     frame $w.bottom.clocks
     frame $w.bottom.graph 
 
-    showClocks
-
     pack $w.bottom.buttons -side right -padx 5 -pady 5 -anchor center
     # Pack graph when "Offers graph" clicked
 
@@ -387,6 +385,7 @@ namespace eval fics {
     pack $w.command.next $w.command.clearall $w.command.clear $w.command.send $w.command.find -side right -padx 3 -pady 2
     focus $w.command.entry
 
+    # Gameclocks are used, but never packed in fics now
     # black
     ::gameclock::new $w.bottom.clocks 2 100 0 vertical
     # white
@@ -516,9 +515,6 @@ namespace eval fics {
 
     # all widgets must be visible
     wm minsize $w $x $y
-
-    ::gameclock::setColor 1 white
-    ::gameclock::setColor 2 black
 
     updateConsole "Connecting $::fics::reallogin"
 
@@ -2141,34 +2137,17 @@ namespace eval fics {
     ### Either the clock or offers graph are shown at any one time
 
     if { $::fics::graphon } {
-      showClocks
       pack $w.graph -side left
       updateGraph
     } else {
       after cancel ::fics::updateGraph
       pack forget $w.graph
-      showClocks
     }
 
     ### Repacking can make the console suspend, so seek to console end 
     update
     .fics.console.text yview moveto 1
   }
-
-  proc showClocks {} {
-    set w .fics.bottom
-
-    if {![winfo exists .fics]} {
-      return
-    }
-    if {$::fics::graphon || $::fics::smallclocks} {
-      pack forget $w.clocks
-    } else {
-      pack $w.clocks -side left -padx 10 -pady 5
-    }
-    catch ::board::ficslabels
-  }
-
 
   proc updateGraph { } {
     set ::fics::sought 1

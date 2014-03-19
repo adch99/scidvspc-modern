@@ -278,7 +278,6 @@ menuText H OptionsFontsFixed "Rögzített" 0 {A rögzített szélességû karakterkészl
 menuText H OptionsGInfo "Játszmainformáció" 0 {Játszmainformáció változtatása}
 menuText H OptionsFics "FICS" 0
 menuText H OptionsFicsAuto "Autopromote Királyno" 0
-menuText H OptionsFicsClock "Digitális Óra" 0
 # ====== TODO To be translated ======
 menuText H OptionsFicsColour "Text Colour" 0
 # ====== TODO To be translated ======

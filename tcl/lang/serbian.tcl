@@ -294,7 +294,6 @@ menuText Y OptionsGInfo "Informacije o Partiji" 0 {Opcije informacija o partiji}
 menuText Y OptionsFics "FICS" 0
 # todo
 menuText Y OptionsFicsAuto "Autopromote Queen" 0
-menuText Y OptionsFicsClock "Digital Clock" 0
 # ====== TODO To be translated ======
 menuText Y OptionsFicsColour "Text Colour" 0
 # ====== TODO To be translated ======

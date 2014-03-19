@@ -253,7 +253,6 @@ menuText W OptionsFontsFixed "Fixerad" 0 {Ändra det fixerade typsnittet}
 menuText W OptionsGInfo "Partiinformation" 0 {Alternativ för partiinformation}
 menuText W OptionsFics "FICS" 0
 menuText W OptionsFicsAuto "Autopronomera Drottningen" 0
-menuText W OptionsFicsClock "Digital Klocka" 0
 # ====== TODO To be translated ======
 menuText W OptionsFicsColour "Text Colour" 0
 # ====== TODO To be translated ======

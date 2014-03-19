@@ -277,7 +277,6 @@ menuText B OptionsGInfo "Informacoes do Jogo" 0 {Opcoes de informacao do jogo}
 menuText B OptionsFics "FICS" 0
 # todo
 menuText B OptionsFicsAuto "Autopromote Queen" 0
-menuText B OptionsFicsClock "Digital Clock" 0
 # ====== TODO To be translated ======
 menuText B OptionsFicsColour "Text Colour" 0
 # ====== TODO To be translated ======

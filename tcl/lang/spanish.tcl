@@ -271,7 +271,6 @@ menuText S OptionsFontsFixed "Fijada" 0 {Cambia la anchura fijada de la fuente}
 menuText S OptionsGInfo "Información de la partida" 0 {Información de la partida}
 menuText S OptionsFics "FICS" 0
 menuText S OptionsFicsAuto "Autopromoción Reina" 0
-menuText S OptionsFicsClock "Reloj Digital" 0
 menuText S OptionsFicsColour "Color del texto" 0
 # ====== TODO To be translated ======
 menuText S OptionsFicsSize "Board Size" 0

@@ -295,7 +295,6 @@ menuText O OptionsGInfo "Partiinformasjon" 0 {Informasjonsinnstillinger}
 menuText O OptionsFics "FICS" 0
 # todo
 menuText O OptionsFicsAuto "Autopromote Queen" 0
-menuText O OptionsFicsClock "Digital klokke" 0
 # ====== TODO To be translated ======
 menuText O OptionsFicsColour "Text Colour" 0
 # ====== TODO To be translated ======
