@@ -769,6 +769,7 @@ menuText E CrosstabOptKnockout "Rounds" 0
 menuText E CrosstabOptAuto "Auto" 1
 menuText E CrosstabOptThreeWin "3 Points for Win" 1
 menuText E CrosstabOptTieWin "Tie-Break by wins" 1
+menuText E CrosstabOptTieHead "Tie-Break by head-head" 1
 menuText E CrosstabOptAges "Ages in Years" 8
 menuText E CrosstabOptNats "Nationalities" 0
 menuText E CrosstabOptTallies "Win/Loss/Draw" 0

@@ -875,7 +875,7 @@ $m add command -label OptionsSave -command {
     ::book::lastBook1 ::book::lastBook2 ::book::lastTuning ::book::sortAlpha 
     ::book::showTwo ::book::oppMovesVisible ::gbrowser::size 
     crosstab(type) crosstab(ages) crosstab(countries) crosstab(ratings) crosstab(titles) crosstab(breaks) 
-    crosstab(deleted) crosstab(colors) crosstab(cnumbers) crosstab(groups) crosstab(sort) crosstab(tallies) crosstab(tiewin)
+    crosstab(deleted) crosstab(colors) crosstab(cnumbers) crosstab(groups) crosstab(sort) crosstab(tallies) crosstab(tiewin) crosstab(tiehead)
     ::utils::sound::soundFolder ::utils::sound::announceNew ::utils::sound::announceTock
     ::utils::sound::announceForward ::utils::sound::announceBack ::utils::sound::device
     ::tacgame::threshold ::tacgame::blunderwarning ::tacgame::blunderwarningvalue 

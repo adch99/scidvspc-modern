@@ -918,6 +918,8 @@ menuText O CrosstabOptAuto "Auto" 0
 menuText O CrosstabOptThreeWin "3 Points for Win" 1
 # ====== TODO To be translated ======
 menuText O CrosstabOptTieWin "Tie-Break by wins" 1
+# ====== TODO To be translated ======
+menuText O CrosstabOptTieHead "Tie-Break by head-head" 1
 menuText O CrosstabOptAges "Aldre i år" 0
 menuText O CrosstabOptNats "Nasjonaliteter" 0
 # todo

@@ -773,6 +773,8 @@ menuText W CrosstabOptAuto "Auto" 1
 menuText W CrosstabOptThreeWin "3 poäng för vinst" 1
 # ====== TODO To be translated ======
 menuText W CrosstabOptTieWin "Tie-Break by wins" 1
+# ====== TODO To be translated ======
+menuText W CrosstabOptTieHead "Tie-Break by head-head" 1
 menuText W CrosstabOptAges "Ålder i år" 8
 menuText W CrosstabOptNats "Nationalitet" 0
 # todo

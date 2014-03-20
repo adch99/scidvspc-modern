@@ -62,7 +62,7 @@ struct playerDataT
     uint        gameCount;
     uint        tiebreak; // Sonneborn-Berger tiebreak for all-play-all,
                           // or Bucholz tiebreak for Swiss.
-    uint        won, loss, draw;
+    uint        won, loss, draw, tb_head;
     uint        oppEloCount;
     uint        oppEloTotal;
     uint        oppEloScore;  // score against Elo opponents
@@ -106,6 +106,7 @@ class Crosstable
     crosstableSortT SortOption;
     bool         ThreeWin;
     bool         TieWin;
+    bool         TieHead;
 
     playerDataT * PlayerData [CROSSTABLE_MaxPlayers];
 
@@ -179,6 +180,7 @@ class Crosstable
     void   SetSortOption (crosstableSortT option) { SortOption = option; }
     void   SetThreeWin   (bool threewin) { ThreeWin = threewin; }
     void   SetTieWin     (bool tiewin) { TieWin = tiewin; }
+    void   SetTieHead    (bool tiehead) { TieHead = tiehead; }
 
     void   SortByName()  { SortOption = CROSSTABLE_SortName; }
     void   SortByElo()   { SortOption = CROSSTABLE_SortElo; }

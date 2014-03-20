@@ -108,6 +108,7 @@ Crosstable::comparePlayerData (playerDataT * p1, playerDataT * p2)
     case CROSSTABLE_SortScore:  // Sort by highest score, (optionally - most wins), then fewest games:
         result = p2->score - p1->score;
         if (result == 0) { result = p1->gameCount - p2->gameCount; }
+        if (result == 0 && TieHead) { result = p2->tb_head - p1->tb_head; }
         if (result == 0 && TieWin) { result = p2->won - p1->won; }
         if (result == 0) { result = p2->tiebreak - p1->tiebreak; }
         break;
@@ -213,6 +214,7 @@ Crosstable::AddPlayer (idNumberT id, const char * name, eloT elo)
     pdata->won = 0;
     pdata->loss = 0;
     pdata->draw = 0;
+    pdata->tb_head = 0;
     pdata->oppEloCount = 0;
     pdata->oppEloTotal = 0;
     pdata->oppEloScore = 0;
@@ -386,6 +388,7 @@ Crosstable::Tiebreaks (crosstableModeT mode)
         pd->won = 0;
         pd->loss = 0;
         pd->draw = 0;
+        pd->tb_head = 0;
         uint tb = 0;
         // Tiebreaks are meaningless for Knockout tables:
         if (mode == CROSSTABLE_Knockout) { continue; }
@@ -413,6 +416,14 @@ Crosstable::Tiebreaks (crosstableModeT mode)
 		      pd->loss++; break;
 		  case RESULT_Draw:
 		      pd->draw++; break;
+		}
+		// head to head tiebreak score
+		if (pd->score == oppScore) {
+		   if (clash->result == RESULT_White) {
+		       pd->tb_head += 2;
+		   } else if (clash->result == RESULT_Draw) {
+		       pd->tb_head += 1;
+		   }
 		}
                 clash = clash->next;
             }

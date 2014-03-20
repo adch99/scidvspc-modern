@@ -840,6 +840,8 @@ menuText C CrosstabOptAuto "Auto" 0
 menuText C CrosstabOptThreeWin "3 Points for Win" 1
 # ====== TODO To be translated ======
 menuText C CrosstabOptTieWin "Tie-Break by wins" 1
+# ====== TODO To be translated ======
+menuText C CrosstabOptTieHead "Tie-Break by head-head" 1
 menuText C CrosstabOptAges "Vìk" 0
 menuText C CrosstabOptNats "Národnost" 0
 # todo

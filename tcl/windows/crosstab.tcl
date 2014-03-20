@@ -4,8 +4,8 @@
 namespace eval ::crosstab {}
 
 ### some vars are now stored on exit (in menus.tcl) S.A.
-foreach var   {sort type ages colors ratings countries tallies titles groups breaks deleted cnumbers text threewin tiewin} \
-        value {score auto +ages +colors +ratings +countries +tallies +titles -groups -breaks -deleted -numcolumns hypertext -threewin -tiewin} {
+foreach var   {sort type ages colors ratings countries tallies titles groups breaks deleted cnumbers text threewin tiewin tiehead} \
+        value {score auto +ages +colors +ratings +countries +tallies +titles -groups -breaks -deleted -numcolumns hypertext -threewin -tiewin -tiehead} {
   if {![info exists crosstab($var)]} {
     set crosstab($var) $value
   }
@@ -28,7 +28,7 @@ proc ::crosstab::ConfigMenus {{lang ""}} {
   }
   # foreach idx {0 1 2 3 5 6 7 8 9 10 12 13 15} must change because of tearoff
   # Scid menus are the biggest steaming pile of shit S.A
-  foreach idx   {1 2 3 4 6 7 9 10 11 12 13 14 15 17 18 20} tag {All Swiss Knockout Auto ThreeWin TieWin Ages Nats Tallies Ratings Titles Breaks Deleted Colors ColumnNumbers Group} {
+  foreach idx   {1 2 3 4 6 7 8 10 11 12 13 14 15 16 18 19 21} tag {All Swiss Knockout Auto ThreeWin TieHead TieWin Ages Nats Tallies Ratings Titles Breaks Deleted Colors ColumnNumbers Group} {
     configMenuText $m.opt $idx CrosstabOpt$tag $lang
   }
 
@@ -113,7 +113,7 @@ proc ::crosstab::Open {} {
         catch {sc_game crosstable html $crosstab(sort) $crosstab(type) \
                  $crosstab(ratings) $crosstab(countries) $crosstab(tallies) $crosstab(titles) \
                  $crosstab(colors) $crosstab(groups) $crosstab(ages) \
-                 $crosstab(breaks) $crosstab(cnumbers) $crosstab(deleted) $crosstab(threewin) $crosstab(tiewin)} \
+                 $crosstab(breaks) $crosstab(cnumbers) $crosstab(deleted) $crosstab(threewin) $crosstab(tiewin) $crosstab(tiehead)} \
           result
         puts $tempfile $result
         close $tempfile
@@ -135,7 +135,7 @@ proc ::crosstab::Open {} {
         catch {sc_game crosstable latex $crosstab(sort) $crosstab(type) \
                  $crosstab(ratings) $crosstab(countries) $$crosstab(tallies) $crosstab(titles) \
                  $crosstab(colors) $crosstab(groups) $crosstab(ages) \
-                 $crosstab(breaks) $crosstab(cnumbers) $crosstab(deleted) $crosstab(threewin) $crosstab(tiewin)} \
+                 $crosstab(breaks) $crosstab(cnumbers) $crosstab(deleted) $crosstab(threewin) $crosstab(tiewin) $crosstab(tiehead)} \
           result
         puts $tempfile $result
         close $tempfile
@@ -183,6 +183,10 @@ proc ::crosstab::Open {} {
   $w.menu.opt add checkbutton -label CrosstabOptThreeWin \
     -variable crosstab(threewin) -command ::crosstab::Refresh  \
     -onvalue "+threewin" -offvalue "-threewin"
+
+  $w.menu.opt add checkbutton -label CrosstabOptTieHead \
+    -variable crosstab(tiehead) -command ::crosstab::Refresh  \
+    -onvalue "+tiehead" -offvalue "-tiehead"
 
   $w.menu.opt add checkbutton -label CrosstabOptTieWin \
     -variable crosstab(tiewin) -command ::crosstab::Refresh  \
@@ -370,7 +374,7 @@ proc ::crosstab::Refresh {} {
   catch {sc_game crosstable $crosstab(text) $crosstab(sort) $crosstab(type) \
          $crosstab(ratings) $crosstab(countries) $crosstab(tallies) $crosstab(titles) \
          $crosstab(colors) $crosstab(groups) $crosstab(ages) \
-         $crosstab(breaks) $crosstab(cnumbers) $crosstab(deleted) $crosstab(threewin) $crosstab(tiewin)} result
+         $crosstab(breaks) $crosstab(cnumbers) $crosstab(deleted) $crosstab(threewin) $crosstab(tiewin) $crosstab(tiehead)} result
   $w.f.text configure -state normal
   if {$crosstab(text) == "plain"} {
     $w.f.text insert end $result

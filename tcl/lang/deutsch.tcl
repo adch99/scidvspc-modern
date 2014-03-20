@@ -806,6 +806,8 @@ menuText D CrosstabOptAuto "Automatisch" 1
 menuText D CrosstabOptThreeWin "3 Points for Win" 1
 # ====== TODO To be translated ======
 menuText D CrosstabOptTieWin "Tie-Break by wins" 1
+# ====== TODO To be translated ======
+menuText D CrosstabOptTieHead "Tie-Break by head-head" 1
 menuText D CrosstabOptAges "Alter in Jahren" 0
 menuText D CrosstabOptNats "Nationalität" 0
 # todo

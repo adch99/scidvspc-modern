@@ -758,6 +758,8 @@ menuText P CrosstabOptAuto "Automatycznie" 0
 menuText P CrosstabOptThreeWin "3 punkty za wygraną" 1
 # ====== TODO To be translated ======
 menuText P CrosstabOptTieWin "Tie-Break by wins" 1
+# ====== TODO To be translated ======
+menuText P CrosstabOptTieHead "Tie-Break by head-head" 1
 menuText P CrosstabOptAges "Wiek" 0
 menuText P CrosstabOptNats "Narodowość" 0
 menuText P CrosstabOptTallies "Zwycięstwo/Przegrana/Remis" 0

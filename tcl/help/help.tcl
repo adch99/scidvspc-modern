@@ -435,6 +435,7 @@ append helpText(Index) {
   <li><a TB>Tablebases</a></li>
   <li>Finding extra PGN <a Maintenance Tags>Tags</a>
   <li>Custom board <a Board Textures>textures</a></li>
+  <li><a Crosstable tiebreak>Tie-Breaks</a></li>
   <li><a Menus Tools>Tools menu</a></li>
   <li><a Tourney>Tournament</a> of Chess Engines</li>
   <li><a Tmt>Tournament finder</a></li>
@@ -1366,36 +1367,23 @@ options.</p>
 
 set helpTitle(Crosstable) "Crosstable Window"
 set helpText(Crosstable) {<h1>The Crosstable Window</h1>
-  <p>
-  The <run ::crosstab::Open><green>Crosstable</green></run> shows the
+  <p>The <run ::crosstab::Open><green>Crosstable</green></run> shows the
   tournament result for the current game in <b>All-Play-All, Swiss</b> or <b>Knockout</b> formats.
   </p>
-  <p>
-  Any game played up to <b>twelve months before or after</b> the current game,
+  <p>Any game played up to <b>twelve months before or after</b> the current game,
   with <b>identical Event and Site</b> tags, is considered to be in the tournament.
   </p>
 
   <h4>Features</h4>
-  <p>
-  Clicking on a Game Result shows a menu from which one may Browse, Load or Merge a game.
+  <p>Clicking on a Game Result shows a menu from which one may Browse, Load or Merge a game.
   </p>
-  <p>
-From the menubar you'll be able to access the Display Options, edit the
+  <p>From the menubar you'll be able to access the Display Options, edit the
 <b>Event,  Site</b> or <b>Date</b> fields, export the table as <b>Text, LaTex
 </b>or <b>HTML</b>, or choose the <b>Sort Criteria</b> for the crosstable.
   </p>
-  <p>
-When sorting by score, the <b>Group Scores</b> option shows a blank line
-between players with the same score.
-  </p>
-  <p>
-  Scid vs. PC has a couple of extra features over mainline SCID: The ability to
-  sort the table by <b>Nationality</b>, the <b>current game is shown in
-green</b>, and an option for <b>3 Points for a Win</b>.  </p>
 
-<h4>Table Format</h4>
-  <p>
-  One may view the tournament in All-Play-all, Swiss or Knockout formats.
+  <h4>Table Format</h4>
+  <p>One may view the tournament in All-Play-All, Swiss or Knockout formats.
   </p>
   <ul>
   <li>The <b>All-Play-All</b> format - for round-robin-type events - has a limit of 30
@@ -1412,9 +1400,16 @@ green</b>, and an option for <b>3 Points for a Win</b>.  </p>
   <li><b>Auto</b> will choose the best format automatically.</li>
   </ul>
 
+  <h4><name tiebreak>Tie-Breaks</name></h4>
+  <p>When sorting by score, players with equal scores are ordered by their tie-break.
+These are <b>Sonneborn-Berger</b> tie-break for All-Play-All, and <b>Bucholz</b> tie-break for Swiss.
+Optionally, <b>Head-to-Head</b> and <b>Total-Wins</b> tie-breaks (in that order) can also be used.
+</p>
+<p>The <b>Group Scores</b> option shows a blank line between players with the same score.
+  </p>
+
   <h4>Notes</h4>
-  <p>
-  For a good Crosstable, <b>duplicate games</b> should be marked for deletion, and
+  <p>For a good Crosstable, <b>duplicate games</b> should be marked for deletion, and
   Player, Site and Event names should be spelt consistently.  See
   <a Maintenance>Database Maintenance</a> for more information.
   </p>
