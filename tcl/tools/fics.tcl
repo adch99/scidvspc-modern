@@ -325,8 +325,6 @@ namespace eval fics {
     }
     button $w.command.send -textvar tr(FICSSend) 
     button $w.command.clear -textvar tr(Clear) -command "
-      $w.command.entry delete 0 end"
-    button $w.command.clearall -text "$tr(Clear) All" -command "
       $w.console.text delete 0.0 end
       $w.console.text insert 0.0 \"FICS ($::scidName $::scidVersion)\n\"
     "
@@ -382,7 +380,7 @@ namespace eval fics {
     configFindEntryBox $w.command.find ::fics::helpWin $w.console.text
 
     pack $w.command.entry -side left -fill x -expand 1 -padx 3 -pady 2
-    pack $w.command.next $w.command.clearall $w.command.clear $w.command.send $w.command.find -side right -padx 3 -pady 2
+    pack $w.command.next $w.command.clear $w.command.send $w.command.find -side right -padx 3 -pady 2
     focus $w.command.entry
 
     # Gameclocks are used, but never packed in fics now
@@ -417,6 +415,7 @@ namespace eval fics {
 
     checkbutton $w.bottom.buttons.offers -text "$tr(FICSOffers) $tr(Graph)" -variable ::fics::graphon -command ::fics::showGraph -width 10 -state disabled
     # -state disabled ; enable for testing S.A. &&&
+    bind $w <Button-2> "$w.bottom.buttons.offers invoke"
 
     grid $w.bottom.buttons.tells      -column 0 -row $row -sticky w
     grid $w.bottom.buttons.shouts	-column 1 -row $row -sticky w

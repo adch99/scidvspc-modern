@@ -5369,7 +5369,8 @@ Options:
     <p>The <b>Offers Graph</b> button shows all current game offers. Hovering
 your mouse over a node will show it's details, and clicking a node will
 request a new game. Sometimes you'll have to be quick though, as
-FICS can be quite busy. 'Escape' key dismisses the graph.</p>
+FICS can be quite busy. Middle clicking FICS will hide/display the Offers, 
+and 'Escape' dismisses thm.</p>
 
 <p> On the graph itself, The y-axis shows the ELO rating of the opponent -
 higher number means stronger player , while x-axis of the graph plots the time
