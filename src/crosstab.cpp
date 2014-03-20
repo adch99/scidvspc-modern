@@ -641,19 +641,19 @@ Crosstable::PrintTable (DString * dstr, crosstableModeT mode, uint playerLimit, 
 		   GameCount, strPlural (GameCount),
 		   OutputFormat == CROSSTABLE_LaTeX ? "{\\tt +}" : "+",
 		   ResultCount[RESULT_White],
-		   OutputFormat == CROSSTABLE_LaTeX ? "{\\tt =}" : "=",
-		   ResultCount[RESULT_Draw],
 		   OutputFormat == CROSSTABLE_LaTeX ? "{\\tt -}" : "-",
-		   ResultCount[RESULT_Black]);
+		   ResultCount[RESULT_Black],
+		   OutputFormat == CROSSTABLE_LaTeX ? "{\\tt =}" : "=",
+		   ResultCount[RESULT_Draw]);
         } else {
 	  sprintf (stemp, "%u game%s: %s%u %s%u %s%u",
 		   GameCount, strPlural (GameCount),
 		   OutputFormat == CROSSTABLE_LaTeX ? "{\\tt +}" : "+",
 		   ResultCount[RESULT_White],
-		   OutputFormat == CROSSTABLE_LaTeX ? "{\\tt =}" : "=",
-		   ResultCount[RESULT_Draw],
 		   OutputFormat == CROSSTABLE_LaTeX ? "{\\tt -}" : "-",
-		   ResultCount[RESULT_Black]);
+		   ResultCount[RESULT_Black],
+		   OutputFormat == CROSSTABLE_LaTeX ? "{\\tt =}" : "=",
+		   ResultCount[RESULT_Draw]);
         }
         dstr->Append (stemp);
         if (ResultCount[RESULT_None] > 0) {
