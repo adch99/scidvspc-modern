@@ -210,6 +210,7 @@ class Crosstable
     static uint Performance (uint oppAvg, uint percentage);
     static uint FideCategory (eloT rating);
     static eloT OpponentElo (eloT player, eloT opponent);
+           int comparePlayerData (playerDataT * p1, playerDataT * p2);
     static int RatingChange (eloT player, uint oppAvg, uint percentage, 
                              uint count);
 };

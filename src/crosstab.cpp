@@ -101,15 +101,14 @@ Crosstable::OpponentElo (eloT player, eloT opponent)
 // comparePlayerData():
 //      Compares two playerDataT structs based on their tournament score.
 int
-comparePlayerData (playerDataT * p1, playerDataT * p2, crosstableSortT option, bool tiewin)
+Crosstable::comparePlayerData (playerDataT * p1, playerDataT * p2)
 {
     int result = 0;
-    switch (option) {
+    switch (SortOption) {
     case CROSSTABLE_SortScore:  // Sort by highest score, (optionally - most wins), then fewest games:
         result = p2->score - p1->score;
         if (result == 0) { result = p1->gameCount - p2->gameCount; }
-        if (result == 0 && tiewin)
-                         { result = p2->won - p1->won; }
+        if (result == 0 && TieWin) { result = p2->won - p1->won; }
         if (result == 0) { result = p2->tiebreak - p1->tiebreak; }
         break;
 
@@ -487,9 +486,7 @@ Crosstable::PrintTable (DString * dstr, crosstableModeT mode, uint playerLimit, 
     for (uint first=0; first < PlayerCount-1; first++) {
         for (uint second = first+1; second < PlayerCount; second++) {
             if (comparePlayerData (PlayerData[SortedIndex[first]],
-                                   PlayerData[SortedIndex[second]],
-                                   SortOption,
-                                   TieWin) > 0) {
+                                   PlayerData[SortedIndex[second]]) > 0) {
                 uint temp = SortedIndex[first];
                 SortedIndex[first] = SortedIndex[second];
                 SortedIndex[second] = temp;
