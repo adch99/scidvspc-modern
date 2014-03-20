@@ -786,13 +786,11 @@ menuText G CrosstabEditDate "Ημερομηνία" 0
 menuText G CrosstabOpt "Ρυθμίσεις" 0
 menuText G CrosstabOptAll "Όλοι-εναντίον-Όλων" 0
 menuText G CrosstabOptSwiss "Σουηδικό" 0
+menuText G CrosstabOptColorPlain "Απλό Κείμενο" 0
+menuText G CrosstabOptColorHyper "Hypertext" 0
 menuText G CrosstabOptKnockout "Γύροι" 0
 menuText G CrosstabOptAuto "Αυτόματα" 1
 menuText G CrosstabOptThreeWin "3 Πόντοι για Νίκη" 0
-# ====== TODO To be translated ======
-menuText G CrosstabOptTieWin "Tie-Break by wins" 1
-# ====== TODO To be translated ======
-menuText G CrosstabOptTieHead "Tie-Break by head-head" 1
 menuText G CrosstabOptAges "Ηλικία σε έτη" 0
 menuText G CrosstabOptNats "Εθνικότητα" 1
 menuText G CrosstabOptTallies "Νίκη/Χαμ/Ισοπ" 0
@@ -808,9 +806,10 @@ menuText G CrosstabSortName "Όνομα" 0
 menuText G CrosstabSortRating "Elo" 0
 menuText G CrosstabSortScore "Σκορ" 0
 menuText G CrosstabSortCountry "Χώρα" 0
-menuText G CrosstabColor "Κείμενο/HTML" 0
-menuText G CrosstabColorPlain "Απλό Κείμενο" 0
-menuText G CrosstabColorHyper "Hypertext" 0
+# ====== TODO To be translated ======
+menuText G CrosstabSortTieWin "Tie-Break by wins" 1
+# ====== TODO To be translated ======
+menuText G CrosstabSortTieHead "Tie-Break by head-head" 1
 menuText G CrosstabHelp "Βοήθεια" 0
 menuText G CrosstabHelpCross "Βοήθεια Crosstable" 0
 menuText G CrosstabHelpIndex "Ευρετήριο Βοήθειας" 0

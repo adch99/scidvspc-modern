@@ -788,13 +788,11 @@ menuText S CrosstabEditDate "Fecha" 0
 menuText S CrosstabOpt "Opciones" 0
 menuText S CrosstabOptAll "Todos Contra Todos" 0
 menuText S CrosstabOptSwiss "Suizo" 0
+menuText S CrosstabOptColorPlain "Texto simple" 0
+menuText S CrosstabOptColorHyper "Hipertexto" 0
 menuText S CrosstabOptKnockout "Rondas" 0
 menuText S CrosstabOptAuto "Auto" 0
 menuText S CrosstabOptThreeWin "3 Puntos por victoria" 1
-# ====== TODO To be translated ======
-menuText S CrosstabOptTieWin "Tie-Break by wins" 1
-# ====== TODO To be translated ======
-menuText S CrosstabOptTieHead "Tie-Break by head-head" 1
 menuText S CrosstabOptAges "Edad en años" 1
 menuText S CrosstabOptNats "Nacionalidades" 0
 menuText S CrosstabOptTallies "Ganadas/Perdidas/tablas" 0
@@ -810,9 +808,10 @@ menuText S CrosstabSortName "Por nombre" 4
 menuText S CrosstabSortRating "Por Elo" 4
 menuText S CrosstabSortScore "Por puntuación" 4
 menuText S CrosstabSortCountry "País" 4
-menuText S CrosstabColor "Color" 2
-menuText S CrosstabColorPlain "Texto simple" 0
-menuText S CrosstabColorHyper "Hipertexto" 0
+# ====== TODO To be translated ======
+menuText S CrosstabSortTieWin "Tie-Break by wins" 1
+# ====== TODO To be translated ======
+menuText S CrosstabSortTieHead "Tie-Break by head-head" 1
 menuText S CrosstabHelp "Ayuda" 1
 menuText S CrosstabHelpCross "Ayuda de tabla cruzada" 9
 menuText S CrosstabHelpIndex "Indice de la ayuda" 0

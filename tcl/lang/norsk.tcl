@@ -912,14 +912,12 @@ menuText O CrosstabEditDate "Dato" 0
 menuText O CrosstabOpt "Vis" 0
 menuText O CrosstabOptAll "Alle-mot-alle" 0
 menuText O CrosstabOptSwiss "Sveitsisk" 0
+menuText O CrosstabOptColorPlain "Ren tekst" 0
+menuText O CrosstabOptColorHyper "Hypertekst" 0
 menuText O CrosstabOptKnockout "Kun vinnere" 0
 menuText O CrosstabOptAuto "Auto" 0
 # todo
 menuText O CrosstabOptThreeWin "3 Points for Win" 1
-# ====== TODO To be translated ======
-menuText O CrosstabOptTieWin "Tie-Break by wins" 1
-# ====== TODO To be translated ======
-menuText O CrosstabOptTieHead "Tie-Break by head-head" 1
 menuText O CrosstabOptAges "Aldre i år" 0
 menuText O CrosstabOptNats "Nasjonaliteter" 0
 # todo
@@ -936,9 +934,10 @@ menuText O CrosstabSortName "Navn" 0
 menuText O CrosstabSortRating "Rating" 0
 menuText O CrosstabSortScore "Poeng" 0
 menuText O CrosstabSortCountry "Land" 0
-menuText O CrosstabColor "Farge" 0
-menuText O CrosstabColorPlain "Ren tekst" 0
-menuText O CrosstabColorHyper "Hypertekst" 0
+# ====== TODO To be translated ======
+menuText O CrosstabSortTieWin "Tie-Break by wins" 1
+# ====== TODO To be translated ======
+menuText O CrosstabSortTieHead "Tie-Break by head-head" 1
 menuText O CrosstabHelp "Hjelp" 0
 menuText O CrosstabHelpCross "Krysstabell hjelp" 0
 menuText O CrosstabHelpIndex "Innholdsfortegnelse" 0

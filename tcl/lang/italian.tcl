@@ -838,14 +838,12 @@ menuText I CrosstabEditDate "Data" 0
 menuText I CrosstabOpt "Visualizza" 0
 menuText I CrosstabOptAll "Girone all'italiana" 0
 menuText I CrosstabOptSwiss "Girone Svizzero" 0
+menuText I CrosstabOptColorPlain "Testo normale" 0
+menuText I CrosstabOptColorHyper "Ipertesto" 0
 menuText I CrosstabOptKnockout "Knockout" 0
 menuText I CrosstabOptAuto "Auto" 0
 # todo
 menuText I CrosstabOptThreeWin "3 Points for Win" 1
-# ====== TODO To be translated ======
-menuText I CrosstabOptTieWin "Tie-Break by wins" 1
-# ====== TODO To be translated ======
-menuText I CrosstabOptTieHead "Tie-Break by head-head" 1
 menuText I CrosstabOptAges "Eta' in anni" 8
 menuText I CrosstabOptNats "Nazionalita'" 0
 # todo
@@ -862,9 +860,10 @@ menuText I CrosstabSortName "Nome" 0
 menuText I CrosstabSortRating "Punteggio" 0
 menuText I CrosstabSortScore "Punti" 0
 menuText I CrosstabSortCountry "Paese" 0
-menuText I CrosstabColor "Colore" 0
-menuText I CrosstabColorPlain "Testo normale" 0
-menuText I CrosstabColorHyper "Ipertesto" 0
+# ====== TODO To be translated ======
+menuText I CrosstabSortTieWin "Tie-Break by wins" 1
+# ====== TODO To be translated ======
+menuText I CrosstabSortTieHead "Tie-Break by head-head" 1
 menuText I CrosstabHelp "Aiuto" 0
 menuText I CrosstabHelpCross "Aiuto tabella" 0
 menuText I CrosstabHelpIndex "Indice di aiuto" 0

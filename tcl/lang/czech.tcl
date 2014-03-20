@@ -834,14 +834,12 @@ menuText C CrosstabEditDate "Datum" 0
 menuText C CrosstabOpt "Zobrazit" 0
 menuText C CrosstabOptAll "Ka¾dý s ka¾dým" 0
 menuText C CrosstabOptSwiss "©výcarský systém" 3
+menuText C CrosstabOptColorPlain "Prostý text" 0
+menuText C CrosstabOptColorHyper "Hypertext" 0
 menuText C CrosstabOptKnockout "Vyøazovací" 4
 menuText C CrosstabOptAuto "Auto" 0
 # todo
 menuText C CrosstabOptThreeWin "3 Points for Win" 1
-# ====== TODO To be translated ======
-menuText C CrosstabOptTieWin "Tie-Break by wins" 1
-# ====== TODO To be translated ======
-menuText C CrosstabOptTieHead "Tie-Break by head-head" 1
 menuText C CrosstabOptAges "Vìk" 0
 menuText C CrosstabOptNats "Národnost" 0
 # todo
@@ -858,9 +856,10 @@ menuText C CrosstabSortName "Jméno" 0
 menuText C CrosstabSortRating "Rating" 0
 menuText C CrosstabSortScore "Skóre" 0
 menuText C CrosstabSortCountry "Zemì" 0
-menuText C CrosstabColor "Barvy" 0
-menuText C CrosstabColorPlain "Prostý text" 0
-menuText C CrosstabColorHyper "Hypertext" 0
+# ====== TODO To be translated ======
+menuText C CrosstabSortTieWin "Tie-Break by wins" 1
+# ====== TODO To be translated ======
+menuText C CrosstabSortTieHead "Tie-Break by head-head" 1
 menuText C CrosstabHelp "Nápovìda" 0
 menuText C CrosstabHelpCross "Nápovìda - Turnajovou tabulku" 11
 menuText C CrosstabHelpIndex "Index nápovìdy" 0

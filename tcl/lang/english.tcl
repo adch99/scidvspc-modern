@@ -765,17 +765,17 @@ menuText E CrosstabEditDate "Date" 0
 menuText E CrosstabOpt "Options" 0
 menuText E CrosstabOptAll "All-Play-All" 0
 menuText E CrosstabOptSwiss "Swiss" 0
+menuText E CrosstabOptColorPlain "Plain Text" 0
+menuText E CrosstabOptColorHyper "Hypertext" 0
 menuText E CrosstabOptKnockout "Rounds" 0
 menuText E CrosstabOptAuto "Auto" 1
 menuText E CrosstabOptThreeWin "3 Points for Win" 1
-menuText E CrosstabOptTieWin "Tie-Break by wins" 1
-menuText E CrosstabOptTieHead "Tie-Break by head-head" 1
 menuText E CrosstabOptAges "Ages in Years" 8
 menuText E CrosstabOptNats "Nationalities" 0
 menuText E CrosstabOptTallies "Win/Loss/Draw" 0
 menuText E CrosstabOptRatings "Ratings" 0
 menuText E CrosstabOptTitles "Titles" 0
-menuText E CrosstabOptBreaks "Show Tie-Break Scores" 4
+menuText E CrosstabOptBreaks "Tie-Break Scores" 4
 menuText E CrosstabOptDeleted "Include Deleted Games" 8
 menuText E CrosstabOptColors "Colors (Swiss table only)" 0
 menuText E CrosstabOptColumnNumbers "Numbered Columns (All-play-all table only)" 2
@@ -785,9 +785,8 @@ menuText E CrosstabSortName "Name" 0
 menuText E CrosstabSortRating "Rating" 0
 menuText E CrosstabSortScore "Score" 0
 menuText E CrosstabSortCountry "Country" 0
-menuText E CrosstabColor "Text/Html" 0
-menuText E CrosstabColorPlain "Plain Text" 0
-menuText E CrosstabColorHyper "Hypertext" 0
+menuText E CrosstabSortTieWin "Tie-Break by wins" 1
+menuText E CrosstabSortTieHead "Tie-Break by head-head" 1
 menuText E CrosstabHelp "Help" 0
 menuText E CrosstabHelpCross "Crosstable Help" 0
 menuText E CrosstabHelpIndex "Help Index" 0

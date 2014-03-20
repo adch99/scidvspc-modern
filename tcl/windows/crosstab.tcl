@@ -3,7 +3,6 @@
 
 namespace eval ::crosstab {}
 
-### some vars are now stored on exit (in menus.tcl) S.A.
 foreach var   {sort type ages colors ratings countries tallies titles groups breaks deleted cnumbers text threewin tiewin tiehead} \
         value {score auto +ages +colors +ratings +countries +tallies +titles -groups -breaks -deleted -numcolumns hypertext -threewin -tiewin -tiehead} {
   if {![info exists crosstab($var)]} {
@@ -17,7 +16,7 @@ proc ::crosstab::ConfigMenus {{lang ""}} {
   if {! [winfo exists .crosstabWin]} { return }
   if {$lang == ""} { set lang $::language }
   set m .crosstabWin.menu
-  foreach idx {0 1 2 3 4 5} tag {File Edit Opt Sort Color Help} {
+  foreach idx {0 1 2 3 4} tag {File Edit Sort Opt Help} {
     configMenuText $m $idx Crosstab$tag $lang
   }
   foreach idx {0 1 2 4} tag {Text Html LaTeX Close} {
@@ -26,25 +25,21 @@ proc ::crosstab::ConfigMenus {{lang ""}} {
   foreach idx {0 1 2} tag {Event Site Date} {
     configMenuText $m.edit $idx CrosstabEdit$tag $lang
   }
-  # foreach idx {0 1 2 3 5 6 7 8 9 10 12 13 15} must change because of tearoff
-  # Scid menus are the biggest steaming pile of shit S.A
-  foreach idx   {1 2 3 4 6 7 8 10 11 12 13 14 15 16 18 19 21} tag {All Swiss Knockout Auto ThreeWin TieHead TieWin Ages Nats Tallies Ratings Titles Breaks Deleted Colors ColumnNumbers Group} {
+  ### Scid menus are the biggest steaming pile of shit S.A
+  ### We have to skip over numbers for "separators"
+  foreach idx   {1 2 3 4 6 7 9 10 11 12 13 14 15 16 17 19 20} tag {All Swiss Knockout Auto ColorPlain ColorHyper Ages Nats Tallies Ratings Titles Breaks Deleted Colors ColumnNumbers ThreeWin Group} {
     configMenuText $m.opt $idx CrosstabOpt$tag $lang
   }
 
   # Disable the Ages, Nats, Titles items if spellcheck not enabled. S.A
   if {!$::spellCheckFileExists} {
-    $m.opt entryconfig 8 -state disabled -variable {}
     $m.opt entryconfig 9 -state disabled -variable {}
-    $m.opt entryconfig 11 -state disabled -variable {}
+    $m.opt entryconfig 10 -state disabled -variable {}
+    $m.opt entryconfig 13 -state disabled -variable {}
   }
 
-  foreach idx {0 1 2 3} tag {Name Rating Score Country} {
+  foreach idx {0 1 2 3 5 6} tag {Name Rating Score Country TieHead TieWin} {
     configMenuText $m.sort $idx CrosstabSort$tag $lang
-  }
-  # todo : put this menu item into the Display menu
-  foreach idx {0 1} tag {Plain Hyper} {
-    configMenuText $m.color $idx CrosstabColor$tag $lang
   }
   foreach idx {0 1} tag {Cross Index} {
     configMenuText $m.help $idx CrosstabHelp$tag $lang
@@ -72,11 +67,10 @@ proc ::crosstab::Open {} {
   ::setMenu $w $w.menu
   $w.menu add cascade -label CrosstabFile -menu $w.menu.file
   $w.menu add cascade -label CrosstabEdit -menu $w.menu.edit
-  $w.menu add cascade -label CrosstabOpt -menu $w.menu.opt
   $w.menu add cascade -label CrosstabSort -menu $w.menu.sort
-  $w.menu add cascade -label CrosstabText -menu $w.menu.color
+  $w.menu add cascade -label CrosstabOpt -menu $w.menu.opt
   $w.menu add cascade -label CrosstabHelp -menu $w.menu.help
-  foreach i {file edit opt sort color help} {
+  foreach i {file edit sort opt help} {
     menu $w.menu.$i
   }
   $w.menu.opt configure -tearoff 1
@@ -180,17 +174,11 @@ proc ::crosstab::Open {} {
 
   $w.menu.opt add separator
 
-  $w.menu.opt add checkbutton -label CrosstabOptThreeWin \
-    -variable crosstab(threewin) -command ::crosstab::Refresh  \
-    -onvalue "+threewin" -offvalue "-threewin"
-
-  $w.menu.opt add checkbutton -label CrosstabOptTieHead \
-    -variable crosstab(tiehead) -command ::crosstab::Refresh  \
-    -onvalue "+tiehead" -offvalue "-tiehead"
-
-  $w.menu.opt add checkbutton -label CrosstabOptTieWin \
-    -variable crosstab(tiewin) -command ::crosstab::Refresh  \
-    -onvalue "+tiewin" -offvalue "-tiewin"
+  # todo : put this menu item into the Display menu
+  $w.menu.opt add radiobutton -label CrosstabOptColorPlain \
+    -variable crosstab(text) -value plain -command ::crosstab::Refresh
+  $w.menu.opt add radiobutton -label CrosstabOptColorHyper \
+    -variable crosstab(text) -value hypertext -command ::crosstab::Refresh
 
   $w.menu.opt add separator
   $w.menu.opt add checkbutton -label CrosstabOptAges \
@@ -214,7 +202,7 @@ proc ::crosstab::Open {} {
   $w.menu.opt add checkbutton -label CrosstabOptDeleted \
     -variable crosstab(deleted) -onvalue "+deleted" \
     -offvalue "-deleted" -command ::crosstab::Refresh
-  $w.menu.opt add separator
+
   $w.menu.opt add checkbutton -label CrosstabOptColors \
     -underline 0 -variable crosstab(colors) \
     -onvalue "+colors" -offvalue "-colors" -command ::crosstab::Refresh
@@ -222,6 +210,9 @@ proc ::crosstab::Open {} {
     -underline 0 -variable crosstab(cnumbers) \
     -onvalue "+numcolumns" -offvalue "-numcolumns" -command ::crosstab::Refresh
   $w.menu.opt add separator
+  $w.menu.opt add checkbutton -label CrosstabOptThreeWin \
+    -variable crosstab(threewin) -command ::crosstab::Refresh  \
+    -onvalue "+threewin" -offvalue "-threewin"
   $w.menu.opt add checkbutton -label CrosstabOptGroup \
     -underline 0 -variable crosstab(groups) \
     -onvalue "+groups" -offvalue "-groups" -command ::crosstab::Refresh
@@ -235,11 +226,12 @@ proc ::crosstab::Open {} {
   $w.menu.sort add radiobutton -label CrosstabSortCountry \
     -variable crosstab(sort) -value country -command ::crosstab::Refresh
 
-  # todo : put this menu item into the Display menu
-  $w.menu.color add radiobutton -label CrosstabColorPlain \
-    -variable crosstab(text) -value plain -command ::crosstab::Refresh
-  $w.menu.color add radiobutton -label CrosstabColorHyper \
-    -variable crosstab(text) -value hypertext -command ::crosstab::Refresh
+  $w.menu.sort add separator
+
+  $w.menu.sort add checkbutton -label CrosstabSortTieHead \
+    -variable crosstab(tiehead) -command ::crosstab::Refresh -onvalue "+tiehead" -offvalue "-tiehead"
+  $w.menu.sort add checkbutton -label CrosstabSortTieWin \
+    -variable crosstab(tiewin) -command ::crosstab::Refresh -onvalue "+tiewin" -offvalue "-tiewin"
 
   $w.menu.help add command -label CrosstabHelpCross \
     -accelerator F1 -command {helpWindow Crosstable}

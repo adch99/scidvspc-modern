@@ -777,14 +777,12 @@ menuText F CrosstabEditDate "Date" 0
 menuText F CrosstabOpt "Affichage" 0
 menuText F CrosstabOptAll "Toutes rondes" 0
 menuText F CrosstabOptSwiss "Suisse" 0
+menuText F CrosstabOptColorPlain "Texte normal" 0
+menuText F CrosstabOptColorHyper "Hypertexte" 0
 menuText F CrosstabOptKnockout "KO" 0
 menuText F CrosstabOptAuto "Auto" 0
 # todo
 menuText F CrosstabOptThreeWin "3 Points for Win" 1
-# ====== TODO To be translated ======
-menuText F CrosstabOptTieWin "Tie-Break by wins" 1
-# ====== TODO To be translated ======
-menuText F CrosstabOptTieHead "Tie-Break by head-head" 1
 menuText F CrosstabOptAges "Ages en années" 8
 menuText F CrosstabOptNats "Nationalités" 0
 # todo
@@ -801,9 +799,10 @@ menuText F CrosstabSortName "Nom" 0
 menuText F CrosstabSortRating "Elo" 0
 menuText F CrosstabSortScore "Score" 0
 menuText F CrosstabSortCountry "Pays" 0
-menuText F CrosstabColor "Couleur" 0
-menuText F CrosstabColorPlain "Texte normal" 0
-menuText F CrosstabColorHyper "Hypertexte" 0
+# ====== TODO To be translated ======
+menuText F CrosstabSortTieWin "Tie-Break by wins" 1
+# ====== TODO To be translated ======
+menuText F CrosstabSortTieHead "Tie-Break by head-head" 1
 menuText F CrosstabHelp "Aide" 0
 menuText F CrosstabHelpCross "Aide tableau" 0
 menuText F CrosstabHelpIndex "Index" 0

@@ -840,14 +840,12 @@ menuText B CrosstabEditDate "Data" 0
 menuText B CrosstabOpt "Monitor" 0
 menuText B CrosstabOptAll "Todos contra todos" 0
 menuText B CrosstabOptSwiss "Swiss" 0
+menuText B CrosstabOptColorPlain "Texto puro" 0
+menuText B CrosstabOptColorHyper "Hipertexto" 0
 menuText B CrosstabOptKnockout "Knockout" 0
 menuText B CrosstabOptAuto "Automatico" 0
 # todo
 menuText B CrosstabOptThreeWin "3 Points for Win" 1
-# ====== TODO To be translated ======
-menuText B CrosstabOptTieWin "Tie-Break by wins" 1
-# ====== TODO To be translated ======
-menuText B CrosstabOptTieHead "Tie-Break by head-head" 1
 menuText B CrosstabOptAges "Idade em anos" 0
 menuText B CrosstabOptNats "Nacionalidades" 0
 # todo
@@ -864,9 +862,10 @@ menuText B CrosstabSortName "Nome" 0
 menuText B CrosstabSortRating "Rating" 0
 menuText B CrosstabSortScore "Pontuacao" 0
 menuText B CrosstabSortCountry "Pais" 0
-menuText B CrosstabColor "Cor" 0
-menuText B CrosstabColorPlain "Texto puro" 0
-menuText B CrosstabColorHyper "Hipertexto" 0
+# ====== TODO To be translated ======
+menuText B CrosstabSortTieWin "Tie-Break by wins" 1
+# ====== TODO To be translated ======
+menuText B CrosstabSortTieHead "Tie-Break by head-head" 1
 menuText B CrosstabHelp "Ajuda" 0
 menuText B CrosstabHelpCross "Ajuda para tabela de cruzamentos" 0
 menuText B CrosstabHelpIndex "Indice da Ajuda" 0

@@ -841,14 +841,12 @@ menuText H CrosstabEditDate "Dátum" 0
 menuText H CrosstabOpt "Megjelenítés" 0
 menuText H CrosstabOptAll "Körmérkõzés" 0
 menuText H CrosstabOptSwiss "Svájci" 0
+menuText H CrosstabOptColorPlain "Közönséges szöveg" 0
+menuText H CrosstabOptColorHyper "Hypertext" 0
 menuText H CrosstabOptKnockout "Kieséses" 1
 menuText H CrosstabOptAuto "Találd ki!" 0
 # todo
 menuText H CrosstabOptThreeWin "3 Points for Win" 1
-# ====== TODO To be translated ======
-menuText H CrosstabOptTieWin "Tie-Break by wins" 1
-# ====== TODO To be translated ======
-menuText H CrosstabOptTieHead "Tie-Break by head-head" 1
 menuText H CrosstabOptAges "Életkor évben" 0
 menuText H CrosstabOptNats "Nemzetiség" 0
 # todo
@@ -865,9 +863,10 @@ menuText H CrosstabSortName "Név" 0
 menuText H CrosstabSortRating "Értékszám" 0
 menuText H CrosstabSortScore "Pontszám" 0
 menuText H CrosstabSortCountry "Ország" 0
-menuText H CrosstabColor "Szín" 2
-menuText H CrosstabColorPlain "Közönséges szöveg" 0
-menuText H CrosstabColorHyper "Hypertext" 0
+# ====== TODO To be translated ======
+menuText H CrosstabSortTieWin "Tie-Break by wins" 1
+# ====== TODO To be translated ======
+menuText H CrosstabSortTieHead "Tie-Break by head-head" 1
 menuText H CrosstabHelp "Segítség" 0
 menuText H CrosstabHelpCross "Segítség versenytáblázathoz" 0
 menuText H CrosstabHelpIndex "Tartalom" 0

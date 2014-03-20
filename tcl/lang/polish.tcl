@@ -753,13 +753,11 @@ menuText P CrosstabEditDate "Data" 0
 menuText P CrosstabOpt "Wyświetlanie" 0
 menuText P CrosstabOptAll "Turniej kołowy" 0
 menuText P CrosstabOptSwiss "Szwajcar" 0
+menuText P CrosstabOptColorPlain "Zwykły tekst" 0
+menuText P CrosstabOptColorHyper "Hipertekst" 0
 menuText P CrosstabOptKnockout "Knockout" 0
 menuText P CrosstabOptAuto "Automatycznie" 0
 menuText P CrosstabOptThreeWin "3 punkty za wygraną" 1
-# ====== TODO To be translated ======
-menuText P CrosstabOptTieWin "Tie-Break by wins" 1
-# ====== TODO To be translated ======
-menuText P CrosstabOptTieHead "Tie-Break by head-head" 1
 menuText P CrosstabOptAges "Wiek" 0
 menuText P CrosstabOptNats "Narodowość" 0
 menuText P CrosstabOptTallies "Zwycięstwo/Przegrana/Remis" 0
@@ -775,9 +773,10 @@ menuText P CrosstabSortName "Nazwisko" 0
 menuText P CrosstabSortRating "Ranking" 0
 menuText P CrosstabSortScore "Punkty" 0
 menuText P CrosstabSortCountry "Kraj" 0
-menuText P CrosstabColor "Kolor" 0
-menuText P CrosstabColorPlain "Zwykły tekst" 0
-menuText P CrosstabColorHyper "Hipertekst" 0
+# ====== TODO To be translated ======
+menuText P CrosstabSortTieWin "Tie-Break by wins" 1
+# ====== TODO To be translated ======
+menuText P CrosstabSortTieHead "Tie-Break by head-head" 1
 menuText P CrosstabHelp "Pomoc" 2
 menuText P CrosstabHelpCross "Tabela turniejowa" 0
 menuText P CrosstabHelpIndex "Spis treści" 0
