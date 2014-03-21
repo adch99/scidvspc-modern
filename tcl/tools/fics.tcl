@@ -414,9 +414,11 @@ namespace eval fics {
     }
 
     checkbutton $w.bottom.buttons.offers -text "$tr(FICSOffers) $tr(Graph)" -variable ::fics::graphon -command ::fics::showGraph -width 10 -state disabled
-    # -state disabled ; enable for testing S.A. &&&
-    bind $w <Button-2> "$w.bottom.buttons.offers invoke"
-
+    bind $w <Button-2> {
+      if {[string match .fics.bottom* %W]} {
+        .fics.bottom.buttons.offers invoke
+      }
+    }
     grid $w.bottom.buttons.tells      -column 0 -row $row -sticky w
     grid $w.bottom.buttons.shouts	-column 1 -row $row -sticky w
     grid $w.bottom.buttons.offers       -column 2 -row $row -sticky w -padx 2 -pady 2
