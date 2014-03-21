@@ -1504,7 +1504,9 @@ namespace eval fics {
 
       # button $w.bottom.game$game.w.flip -text flip -font font_Small -relief flat -command ""
 
-      pack $w.bottom.game$game -side left -padx 3 -pady 3
+      if {[catch {pack $w.bottom.game$game -side left -padx 3 -pady 3 -before $w.bottom.buttons}]} {
+                pack $w.bottom.game$game -side left -padx 3 -pady 3 -before $w.bottom.graph
+      }
 
       pack $w.bottom.game$game.b  -side top -anchor w -expand 1 -fill x
       pack $w.bottom.game$game.b.black -side left 
