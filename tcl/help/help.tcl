@@ -1,23 +1,22 @@
 ### help.tcl: Help pages for Scid.
 
 set helpTitle(Contents) "$::scidName"
-set helpText(Contents) "<h1>$::scidName</h1>"
-append helpText(Contents) {
+set helpText(Contents) "<h1>$::scidName</h1>
 
   <ht><img icon></ht>
   <ht><a Intro>Introduction</a></ht>
-  <ht><a ComputerGame>Playing against the Computer</a></ht>
-  <ht><a FICS>Playing on the Internet (FICS)</a></ht>
   <ht><a BrowsingPGN>PGN files and Scid</a></ht>
   <ht><a Analysis>Running Chess Engines</a></ht>
   <ht><a Scid>Databases and General Use</a></ht>
+  <ht><a ComputerGame>Playing against the Computer</a></ht>
+  <ht><a FICS>Playing on the Internet (FICS)</a></ht>
   <ht><a Tourney>Computer Tournaments</a></ht>
   <ht><a TacticsTrainer>Mate in ..N.. Puzzles</a></ht>
   <ht><a Related>Links</a></ht>
   <ht><a Author>About</a></ht>
   <br>
-  <p><footer>Updated: Scid vs. PC 4.10, August 2013</footer></p>
-}
+  <p><footer>$::scidName  version $::scidVersion</footer></p>
+"
 set helpTitle(Intro) "$::scidName"
 set helpText(Intro) {<h1>Introduction</h1>
 
