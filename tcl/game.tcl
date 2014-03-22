@@ -233,12 +233,23 @@ proc ::game::LoadNumber {} {
 
 proc ::game::Load { selection {update 1} {raise 1}} {
   # If an invalid game number, just return:
-  if {$selection < 1} { return }
-  if {$selection > [sc_base numGames]} { return }
-  set confirm [::game::ConfirmDiscard2]
-  if {$confirm == 2} { return -1 }
-  if {$confirm == 0} {
-    ::game::Save
+  if {$selection < 1 || $selection > [sc_base numGames]} {
+    return
+  }
+  if {[winfo exists .fics] && $::fics::mainGame > -1} {
+    ### Handle cases where fics playing and observing
+    if {($::fics::playing==1 || $::fics::playing==-1)} {
+      ::fics::updateConsole "Scid: game loads disabled while playing a game"
+      return 
+    }
+    ::fics::demote_mainGame
+    set ::fics::mainGame -1
+  } else {
+    set confirm [::game::ConfirmDiscard2]
+    if {$confirm == 2} { return -1 }
+    if {$confirm == 0} {
+      ::game::Save
+    }
   }
 
   setTrialMode 0
