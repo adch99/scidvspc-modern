@@ -360,7 +360,7 @@ namespace eval fics {
     bind $w <End>   "$w.console.text yview moveto 1"
     bind $w <F9> {
       ### F9 recalls a "tell" history 
-      # .fics.command.entry delete 0 end
+      .fics.command.entry delete 0 end
       if {$::fics::tellindex >= [llength $::fics::tells]} {
 	# .fics.command.entry insert 0 "tell "
         set ::fics::tellindex 0
