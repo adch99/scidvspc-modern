@@ -496,9 +496,9 @@
   is the only mobile Scid related project.
 
   Another project nearing a 1.0 release is Scidb by Gregor Cramer from
-  Germany. It is ambitious chess database program inspired by Scid, with
-  heavy utilization of C++ classes and customized Tk widgets. It also
-  supports Chessbase databases and many chess variants.
+  Germany. It is an ambitious chess database program inspired by Scid,
+  with heavy utilization of C++ classes and customized Tk widgets. It
+  also supports Chessbase databases and many chess variants.
 
   7.  changes
 
