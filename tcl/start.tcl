@@ -1427,7 +1427,11 @@ set optionsFile [scidConfigFile options]
 ::splash::add "Command line is \"$::argv0 $::argv\""
 ::splash::add "User directory is \"$scidUserDir\""
 
-if { [catch { package require img::png } ] } {
+if {[info tclversion] >= "8.6"} { 
+  ::splash::add "png image support is available."
+  set png_image_support 1
+  set boardStyle Merida1
+} elseif { [catch { package require img::png } ] } {
   ::splash::add "TkImg not found. Most piece sets are disabled."
   set png_image_support 0
   set boardStyle Alpha
