@@ -56,18 +56,16 @@ namespace eval uci {
     set uciInfo(bestmove$n) ""
   }
 
-  ################################################################################
-  # if analyze = 0 -> engine mode,   pipe used is $uciInfo(pipe$n)
-  # if analyze = 1 -> analysis mode, pipe used is $analysis(pipe$n)
-  # This distinction in pipes seems to be a way of allowing TacGame and F2 to run at the same time
-  ################################################################################
+  ### if gui = 0 -> engine mode,   pipe used is $uciInfo(pipe$n)
+  ### if gui = 1 -> normal mode, pipe used is $analysis(pipe$n)
+  # This distinction allows tacGame::Toga and F2 to run at the same time
 
   # todo: sort out the analyze var with computer tournament feature &&&
 
-  proc processAnalysisInput { { n 1 } { analyze 1 } } {
+  proc processAnalysisInput { {n 1} {gui 1} } {
     global analysis annotate comp ::uci::uciInfo ::uci::optionToken 
 
-    if {$analyze} {
+    if {$gui} {
       set pipe $analysis(pipe$n)
       if { ! [ ::checkEngineIsAlive $n ] } { return }
     } else  {
@@ -76,7 +74,7 @@ namespace eval uci {
       if { ! [ ::uci::checkEngineIsAlive $n ] } { return }
     }
 
-    if {$analyze} {
+    if {$gui} {
       if {! $analysis(seen$n)} {
         set analysis(seen$n) 1
         logEngineNote $n {First line from engine seen; sending it initial commands now.}
@@ -86,7 +84,7 @@ namespace eval uci {
     } else  {
       if {! $uciInfo(seen$n)} {
         set uciInfo(seen$n) 1
-        logEngineNote $n {First line from engine seen; sending it initial commands now.}
+        # logEngineNote $n {First line from engine seen; sending it initial commands now.}
         ::uci::sendToEngine $n "uci"
       }
     }
@@ -275,7 +273,7 @@ namespace eval uci {
       
       # return if no interesting info
       if { $uciInfo(tmp_score$n) == "" || $uciInfo(pv$n) == "" } {
-        if {$analyze} {
+        if {$gui} {
           updateAnalysisText $n
         }
         return
@@ -288,7 +286,7 @@ namespace eval uci {
         set uciInfo(score$n) $uciInfo(tmp_score$n)
       }
       
-      if { $uciInfo(multipv$n) == 1 && $analyze} {
+      if { $uciInfo(multipv$n) == 1 && $gui} {
         # this is the best line
         set analysis(prevdepth$n) $analysis(depth$n)
         set analysis(depth$n) $uciInfo(depth$n)
@@ -313,7 +311,6 @@ namespace eval uci {
 
       set idx [ expr $uciInfo(multipv$n) -1 ]
       
-      # was if $analyze etc..
       if { $idx < $analysis(multiPVCount$n) } {
         if {$idx < [llength $analysis(multiPV$n)]} {
           lset analysis(multiPV$n) $idx "$uciInfo(depth$n) $uciInfo(tmp_score$n) [list $uciInfo(pv$n)] $uciInfo(scoremate$n)"
@@ -324,7 +321,7 @@ namespace eval uci {
         }
       }
 
-      if {$analyze} {
+      if {$gui} {
 	updateAnalysisText $n
       }
 
@@ -346,7 +343,7 @@ namespace eval uci {
       resetUciInfo $n
       resetUciInfo2 $n
       sendUCIoptions $n
-      if {$analyze} {
+      if {$gui} {
         set analysis(uciok$n) 1
         # sendUCIoptions $n
         # configure initial multipv value
@@ -371,7 +368,7 @@ namespace eval uci {
     }
 
     # get options and save only part of data
-    if { [string match "option name*" $line] && $analyze } {
+    if { [string match "option name*" $line] && $gui } {
       set min "" ; set max ""
       set data [split $line]
       set length [llength $data]
@@ -400,7 +397,7 @@ namespace eval uci {
     # So if tourney, don't rename engine
     if {!$comp(playing) && [string match "id name *" $line]} {
       set name [ regsub {id[ ]?name[ ]?} $line "" ]
-      if {$analyze} {
+      if {$gui} {
         set analysis(name$n) $name
       } else  {
         set uciInfo(name$n) $name
@@ -838,6 +835,7 @@ namespace eval uci {
 
   ### Start an engine silently (for playing, not analysis)
   ### Called by calvar.tcl sergame.tcl tactics.tcl and tacgame.tcl
+  ### Logging not currently used.
 
   proc startEngine {n} {
 
@@ -894,10 +892,13 @@ namespace eval uci {
   }
 
   ### ::uci::sendToEngine
+  ### Called by calvar.tcl sergame.tcl tactics.tcl and tacgame.tcl
+  ### ::sendToEngine is used by all windowed engines.
 
   proc sendToEngine {n text} {
 
-    logEngine $n "Scid  : $text"
+    ### No log file initialised here, so no point going to logEngine
+    # logEngine $n "Scid  : $text"
     catch {puts $::uci::uciInfo(pipe$n) $text}
   }
 
@@ -969,7 +970,7 @@ namespace eval uci {
                     -message "File not executable,\nor not an UCI engine." -parent $parent
     }
 
-    # Some engines in analyze mode may not react as expected to "quit"
+    # Some engines in analyze(gui?) mode may not react as expected to "quit"
     # so ensure the engine exits analyze mode first:
     catch { puts $pipe "stop" ; puts $pipe "quit" }
     #in case an xboard engine
