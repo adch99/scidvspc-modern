@@ -902,11 +902,12 @@ namespace eval uci {
     catch {puts $::uci::uciInfo(pipe$n) $text}
   }
 
-  ### returns 0 if engine died abruptly or 1 otherwise
+  ### Returns 0 if engine died abruptly or 1 otherwise
+  # only used for non-gui (uci) engines
 
-  proc checkEngineIsAlive { n } {
+  proc checkEngineIsAlive {n} {
 
-    global ::uci::uciInfo errorCode comp
+    global ::uci::uciInfo errorCode
 
     if {![eof $uciInfo(pipe$n)]} {
       return 1
@@ -922,27 +923,15 @@ namespace eval uci {
     }
 
     set uciInfo(pipe$n) ""
-    logEngineNote $n {Engine terminated without warning.}
 
-    if {$comp(playing)} {
-      puts "Engine $n terminated without warning. Game over"
-      compGameEnd [expr {!($n == $comp(white))}] {Engine crashed}
+    if { $exit_status != 0 } {
+	# logEngineNote $n {Engine terminated with exit code $exit_status: "\"$standard_error\""}
+	tk_messageBox -type ok -icon info -parent . -title "Scid" \
+		      -message "The uci engine terminated with exit code $exit_status: \"$standard_error\""
     } else {
-      catch {destroy .analysisWin$n}
-      if {[winfo exists .enginelist]} {
-	set parent .enginelist
-      } else {
-	set parent .
-      }
-      if { $exit_status != 0 } {
-	  logEngineNote $n {Engine terminated with exit code $exit_status: "\"$standard_error\""}
-	  tk_messageBox -type ok -icon info -parent $parent -title "Scid" \
-			-message "The uci engine terminated with exit code $exit_status: \"$standard_error\""
-      } else {
-	  logEngineNote $n {Engine terminated without exit code: "\"$standard_error\""}
-	  tk_messageBox -type ok -icon info -parent $parent -title "Scid" \
-			-message "The uci engine terminated without exit code: \"$standard_error\""
-      }
+	# logEngineNote $n {Engine terminated without exit code: "\"$standard_error\""}
+	tk_messageBox -type ok -icon info -parent . -title "Scid" \
+		      -message "The uci engine terminated without exit code: \"$standard_error\""
     }
     return 0
   }
