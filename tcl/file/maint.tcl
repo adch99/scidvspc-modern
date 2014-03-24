@@ -1968,7 +1968,7 @@ proc stripTags {{parent .}} {
   pack $w.buttons -side bottom -fill x -before $w.tags
 
   listbox $w.tags.list -yscrollcommand "$w.tags.scroll set" \
-      -exportselection 1 -font font_Fixed
+      -exportselection 1 -font font_Fixed -width 32
   scrollbar $w.tags.scroll -command "$w.tags.list yview"
   pack $w.tags.list -side left -fill both -expand yes
   pack $w.tags.scroll -side right -fill y
@@ -1991,13 +1991,17 @@ proc stripTags {{parent .}} {
       return
     }
     set removed [doStripTags $tag]
-    ::game::Reload 
-    .striptags.tags.list delete 0 end
-    set pgnTags($tag) [expr {$pgnTags($tag) - $removed}]
-    populateStripTags
+    if {$removed > 0} {
+      ::game::Reload 
+      .striptags.tags.list delete 0 end
+      set pgnTags($tag) [expr {$pgnTags($tag) - $removed}]
+      populateStripTags
+    }
   }
+
   button $w.buttons.cancel -text $::tr(Close) -command "destroy $w"
-  pack $w.buttons.cancel $w.buttons.strip $w.buttons.find -side right -padx 5 -pady 3
+  pack $w.buttons.find $w.buttons.strip -side left -padx 5 -pady 3
+  pack $w.buttons.cancel -side right -padx 5 -pady 3
   bind $w <Escape> "$w.buttons.cancel invoke"
 
   raise $parent 
@@ -2011,8 +2015,8 @@ proc populateStripTags {} {
 
   set tags [lsort [array names pgnTags]]
   foreach tag $tags {
-    # set text [format "%-18s" [string range $name 0 17]]
-    .striptags.tags.list insert end "$tag ($pgnTags($tag))"
+    set text [format "%-18s %12s" $tag $pgnTags($tag)]
+    .striptags.tags.list insert end $text
   }
 }
 
@@ -2044,7 +2048,11 @@ proc findStripTags {tag} {
   set err [catch {sc_base tag find $tag} result]
   unbusyCursor .
   # closeProgressWindow
-  ::game::LoadNextPrev first 0
+  if {$::pgnTags($tag) > 0} {
+    ::game::LoadNextPrev first 0
+  } else {
+    ::windows::gamelist::Refresh
+  }
 }
 
 
