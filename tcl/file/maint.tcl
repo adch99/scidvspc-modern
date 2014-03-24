@@ -1978,23 +1978,23 @@ proc stripTags {{parent .}} {
   bind $w.tags.list <Double-ButtonRelease-1> "$w.buttons.find invoke; break"
 
   button $w.buttons.find -text $::tr(SetFilter) -command {
-    set tag [lindex [.striptags.tags.list get [.striptags.tags.list cursel]] 0]
-    if {$tag != {}} {
-      findStripTags $tag
+    if {[catch {set tag [lindex [.striptags.tags.list get [.striptags.tags.list cursel]] 0]}] || \
+         $tag == {}} {
+      return
     }
+    findStripTags $tag
   }
 
   button $w.buttons.strip -text $::tr(StripTag) -command {
-    set tag [lindex [.striptags.tags.list get [.striptags.tags.list cursel]] 0]
-    if {$tag != {}} {
-      set removed [doStripTags $tag]
-
-      ::game::Reload 
-
-      .striptags.tags.list delete 0 end
-      set pgnTags($tag) [expr {$pgnTags($tag) - $removed}]
-      populateStripTags
+    if {[catch {set tag [lindex [.striptags.tags.list get [.striptags.tags.list cursel]] 0]}] || \
+         $tag == {}} {
+      return
     }
+    set removed [doStripTags $tag]
+    ::game::Reload 
+    .striptags.tags.list delete 0 end
+    set pgnTags($tag) [expr {$pgnTags($tag) - $removed}]
+    populateStripTags
   }
   button $w.buttons.cancel -text $::tr(Close) -command "destroy $w"
   pack $w.buttons.cancel $w.buttons.strip $w.buttons.find -side right -padx 5 -pady 3
@@ -2017,7 +2017,7 @@ proc populateStripTags {} {
 }
 
 proc doStripTags {tag} {
-  set msg "Do you really want to remove all occurences of the PGN tag \"$tag\" from this database?"
+  set msg "Do you want to remove all occurences of \"$tag\" from this database?"
   set result [tk_messageBox -title "Scid" -parent .striptags \
       -icon question -type yesno -message $msg]
   if {$result == "no"} { return 0 }
