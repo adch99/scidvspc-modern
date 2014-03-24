@@ -1923,79 +1923,82 @@ proc doAllocateRatings {} {
 }
 
 
-# stripTags:
-#   Strip unwanted PGN tags from the current database.
+### Strip and filter extra PGN tags (todo: WhiteElo, BlackElo)
 
-array set stripTagCount {}
+array set pgnTags {}
 
 proc stripTags {{parent .}} {
-  global stripTagChoice stripTagCount
+  global pgnTags
   set w .striptags
-  if {[winfo exists $w]} {
-    raiseWin $w
-    return
-  }
-  set stripTagList {}
 
-  # Find extra PGN tags:
+  if {[winfo exists $w]} {
+    destroy $w
+  }
+
   set ::interrupt 0
-  progressWindow "Scid" "Searching for extra PGN tags..." \
+  progressWindow "Scid" "Searching for extra PGN tags." \
       $::tr(Cancel) "set ::interrupt 1; sc_progressBar"
   busyCursor .
   set err [catch {sc_base tag list} result]
   unbusyCursor .
   closeProgressWindow
-  if {$::interrupt} { return }
+  if {$::interrupt} { 
+    tk_messageBox -title "Scid" -icon warning -type ok -message "Searching cancelled.\n\nTag list and counts are not correct." -parent $parent
+  }
   if {$err} {
     tk_messageBox -title "Scid" -icon warning -type ok -message $result -parent $parent
     return
   }
 
-  # Make list of extra tags and their frequency:
-  array unset stripTagCount
-  set nTags 0
-  foreach {tag count} $result {
-    set stripTagCount($tag) $count
-    incr nTags
-  }
-
-  if {$nTags == 0} {
-    tk_messageBox -title "Scid" -icon info -type ok \
-        -message "No extra tags were found." -parent $parent
-    return
-  }
+  ### pgnTags(tag) stores count of each tag
+  array unset pgnTags
+  array set pgnTags $result
 
   toplevel $w
   wm title $w "$::tr(StripTags)"
   wm withdraw $w
   bind $w <F1> {helpWindow Maintenance Tags}
 
-  label $w.title -text "Extra PGN tags" -font font_Bold
+  label $w.title -text "PGN tags ([file tail [sc_base filename]])" -font font_Bold
   pack $w.title -side top
-  pack [frame $w.f] -side top -fill x
+  frame $w.tags
+  pack $w.tags -side top -fill both -expand yes
   addHorizontalRule $w
-  pack [frame $w.b] -side bottom -fill x
+  frame $w.buttons
+  pack $w.buttons -side bottom -fill x -before $w.tags
 
-  set row 0
-  foreach tag [lsort [array names stripTagCount]] {
-    set count $stripTagCount($tag)
-    radiobutton $w.f.t$tag -text "$tag  " -variable stripTagChoice -value $tag
-    label $w.f.c$tag -text [::utils::thousands $count]
-    if {$row == 0} { set stripTagChoice $tag }
-    grid $w.f.t$tag -row $row -column 0 -sticky w
-    grid $w.f.c$tag -row $row -column 1 -sticky e
-    incr row
+  listbox $w.tags.list -yscrollcommand "$w.tags.scroll set" \
+      -exportselection 1 -font font_Fixed
+  scrollbar $w.tags.scroll -command "$w.tags.list yview"
+  pack $w.tags.list -side left -fill both -expand yes
+  pack $w.tags.scroll -side right -fill y
+
+  populateStripTags
+
+  bind $w.tags.list <Double-ButtonRelease-1> "$w.buttons.find invoke; break"
+
+  button $w.buttons.find -text $::tr(SetFilter) -command {
+    set tag [lindex [.striptags.tags.list get [.striptags.tags.list cursel]] 0]
+    if {$tag != {}} {
+      findStripTags $tag
+    }
   }
-  button $w.b.find -text $::tr(SetFilter) -command findStripTags
-  button $w.b.strip -text $::tr(StripTag) -command {
-    set removed [doStripTags .striptags]
-    set stripTagCount($stripTagChoice) \
-        [expr {$stripTagCount($stripTagChoice) - $removed} ]
-    .striptags.f.c$stripTagChoice configure -text \
-        [::utils::thousands $stripTagCount($stripTagChoice)]
+
+  button $w.buttons.strip -text $::tr(StripTag) -command {
+    set tag [lindex [.striptags.tags.list get [.striptags.tags.list cursel]] 0]
+    if {$tag != {}} {
+      set removed [doStripTags $tag]
+
+      ::game::Reload 
+
+      .striptags.tags.list delete 0 end
+      set pgnTags($tag) [expr {$pgnTags($tag) - $removed}]
+      populateStripTags
+    }
   }
-  button $w.b.cancel -text $::tr(Cancel) -command "destroy $w"
-  pack $w.b.cancel $w.b.strip $w.b.find -side right -padx 2 -pady 2
+  button $w.buttons.cancel -text $::tr(Close) -command "destroy $w"
+  pack $w.buttons.cancel $w.buttons.strip $w.buttons.find -side right -padx 5 -pady 3
+  bind $w <Escape> "$w.buttons.cancel invoke"
 
   raise $parent 
   placeWinOverParent $w $parent
@@ -2003,42 +2006,45 @@ proc stripTags {{parent .}} {
   update
 }
 
-proc doStripTags {{parent .}} {
-  global stripTagChoice
-  set msg "Do you really want to remove all occurences of the PGN tag"
-  append msg " \"$stripTagChoice\" from this database?"
-  set result [tk_messageBox -title "Scid" -parent $parent \
+proc populateStripTags {} {
+  global pgnTags
+
+  set tags [lsort [array names pgnTags]]
+  foreach tag $tags {
+    # set text [format "%-18s" [string range $name 0 17]]
+    .striptags.tags.list insert end "$tag ($pgnTags($tag))"
+  }
+}
+
+proc doStripTags {tag} {
+  set msg "Do you really want to remove all occurences of the PGN tag \"$tag\" from this database?"
+  set result [tk_messageBox -title "Scid" -parent .striptags \
       -icon question -type yesno -message $msg]
   if {$result == "no"} { return 0 }
-  progressWindow "Scid" "Removing the PGN tag $stripTagChoice..." \
+  progressWindow "Scid" "Removing the PGN tag $tag." \
       $::tr(Cancel) "sc_progressBar"
   busyCursor .
-  set err [catch {sc_base tag strip $stripTagChoice} result]
+  set err [catch {sc_base tag strip $tag} result]
   unbusyCursor .
   closeProgressWindow
-  set count 0
-  if {! $err} {
+  if {$err} {
+    set count 0
+    tk_messageBox -title "Scid" -parent .striptags -type ok -icon info -message $result
+  } else {
     set count $result
-    set result "Removed $result instances of \"$stripTagChoice\"."
-    append result "\n\n"
-    append result "To save space and maintain database efficiency, it is a "
-    append result "good idea to compact the game file after removing tags."
   }
-  tk_messageBox -title "Scid" -parent $parent -type ok -icon info \
-      -message $result
   return $count
 }
 
-proc findStripTags {} {
-  global stripTagChoice
-  progressWindow "Scid" "Finding games with the PGN tag $stripTagChoice..." \
+proc findStripTags {tag} {
+  # progressWindow "Scid" "Finding games with the PGN tag $tag" \
       $::tr(Cancel) "sc_progressBar"
   busyCursor .
-  set err [catch {sc_base tag find $stripTagChoice} result]
+  update
+  set err [catch {sc_base tag find $tag} result]
   unbusyCursor .
-  closeProgressWindow
-  ::windows::gamelist::Refresh
-  ::windows::stats::Refresh
+  # closeProgressWindow
+  ::game::LoadNextPrev first 0
 }
 
 
