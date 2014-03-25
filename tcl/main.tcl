@@ -415,7 +415,9 @@ proc contextmenu {x y} {
 if { !$::docking::USE_DOCKING } {
   bind .main <ButtonPress-3> {contextmenu %X %Y}
 }
-bind .main <ButtonPress-2> toggleGameInfo
+bind .main <ButtonPress-2> {
+  if {"%W" != ".main.board.bd"} {toggleGameInfo}
+}
 
 # bind . <F9> {contextmenu %X %Y}
 
