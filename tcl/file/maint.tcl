@@ -1955,8 +1955,12 @@ proc stripTags {{parent .}} {
   array set pgnTags $result
 
   toplevel $w
-  wm title $w "$::tr(StripTags)"
   wm withdraw $w
+  wm title $w "$::tr(StripTags)"
+
+  setWinLocation $w
+  # setWinSize $w
+
   bind $w <F1> {helpWindow Maintenance Tags}
 
   label $w.title -text "PGN tags ([file tail [sc_base filename]])" -font font_Bold
@@ -2004,10 +2008,11 @@ proc stripTags {{parent .}} {
   pack $w.buttons.cancel -side right -padx 5 -pady 3
   bind $w <Escape> "$w.buttons.cancel invoke"
 
-  raise $parent 
-  placeWinOverParent $w $parent
-  wm state $w normal
+  # raise $parent 
+
   update
+  wm state $w normal
+  bind $w <Configure> "recordWinSize $w"
 }
 
 proc populateStripTags {} {
