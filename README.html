@@ -147,15 +147,15 @@ or as a tarball
 <EM>Tcl/Tk 8.5.10 has nasty bugs and should be avoided.</EM></P>
 Most Unices should have Tcl/Tk installed by default.
 To verify this, look for a command named <B>wish</B> or <B>wish8.5</B>.
-To enable support for extra chess pieces (such as Berlin), you may need to install
+Extra chess pieces (such as Berlin) are now enabled by default for Wish 8.6, but 8.5 requires installing
 <A HREF="https://sourceforge.net/project/downloading.php?group_id=263836&amp;filename=tkimg1.3.scidvspc.tar.bz2">TkImg</A>.  Sound support requires 
 <A HREF="http://sourceforge.net/projects/scidvspc/files/support%20files/snack2.2.10.scidvspc.tgz/download">Snack</A>.
 (Both of these downloads have fixes applied).
 Then, installing from source:
 <HR>
 <PRE>
-tar -xzf scid_vs_pc-4.11.tgz
-cd scid_vs_pc-4.11
+tar -xzf scid_vs_pc-4.12.tgz
+cd scid_vs_pc-4.12
 ./configure
 sudo make install
 scid
@@ -180,7 +180,7 @@ C:\Users\[USERNAME]\AppData\Local\VirtualStore\Program Files\Scid vs PC</P>
 
 
 <P>The 
-<A HREF="#download_">ScidvsMac-4.11 app</A> should include everything you need. Simply drag and drop the App into /Applications (or similar).</P>
+<A HREF="#download_">ScidvsMac-4.12 app</A> should include everything you need. Simply drag and drop the App into /Applications (or similar).</P>
 <P><EM>Users upgrading may have to remove (or edit) <B>$HOME/.scidvspc/config/engines.dat</B>
 to properly configure the chess engines.</EM></P>
 <P>OS X  has a poor implementation of Tcl, and docked mode has minor bugs (some windows work better after being moved around, keyboard shortcuts are very hit and miss).</P>
@@ -425,6 +425,68 @@ Chessbase databases and many chess variants.</P>
 
 
 <P>
+<H3>Scid vs. PC 4.12</H3>
+
+<P>
+<UL>
+<LI>Gamelist/Filter fixes. Filter works better with Tree.</LI>
+<LI>New Crosstable tie-break options and reorder Crosstable menus.</LI>
+<LI>Game-result is now shown alongside Player names, at top of GameInfo window.</LI>
+<LI>Middle button in main board toggles game info.</LI>
+<LI>Databases open faster ("avoid the time consuming file locking").</LI>
+<LI>Allow dragging Docked Window tabs to alter their order.<BR><BR>
+
+Gamelist button/menu changes:</LI>
+<LI>Flag button is now context menu, Gamelist Save is moved to tools->export, Find button removed (use enter in Find entrybox)<BR><BR>
+
+Spelling changes:</LI>
+<LI>Update spelling file to a custom version of Franz's Jan-5-2014 spellling.ssp.</LI>
+<LI>Spell-checking can now remove GM, IM, FM, CM, WGM prefixes from player names.</LI>
+<LI>Doing player-name replacements, show how many fail due to age/date considerations.<BR><BR>
+
+FICS changes:</LI>
+<LI>Add user-configurable init commands. </LI>
+<LI>Board size slider is now a menu.  </LI>
+<LI>Game Offers pack over buttons (making it less crowded, use escape/button-2 to cancel). </LI>
+<LI>New find entrybox to search the console. </LI>
+<LI>Remove Clear button (as getting crowded).  </LI>
+<LI>Remove the never used big clocks.  </LI>
+<LI>Add start, end sounds (and minor sound fixes - though still buggy). </LI>
+<LI>Dont save FICS aborted games.  </LI>
+<LI>Disable engines when playing a FICS game. <BR><BR>
+
+Analysis and Annotation changes:</LI>
+<LI>Make 'scoreToMate' work better and faster, which stops occasional incorrect Mate-in-N lines showing up, and works better at near-mate positions.  </LI>
+<LI>Make the Annotation config window fit on small displays.</LI>
+<LI>Stop engine at end of annotating a single game.</LI>
+<LI>Try a new approach to Depth-based annotation, which works better, but still needs fine-tuning.<BR><BR>
+</LI>
+<LI>Spanish translation update from Igor Sosa Mayor.</LI>
+<LI>Polish translation update from Adam Umiastowski.</LI>
+<LI>Add a find entrybox to the splash window </LI>
+<LI>Strip PGN Tags improvements </LI>
+<LI>Right-clicking toolbar Game-Save icon quick saves game.</LI>
+<LI>Sound devices can now be selected; mainly useful for Linux systems</LI>
+<LI>Dont insert newlines into PGN copied to text buffer... Some web PGN browsers don't work with newlines following movenum. eg "10.<BR>Nxc3"</LI>
+<LI>Save game history when Scid quits</LI>
+<LI>Remove tree status bar. Same info avail in switcher and tree text widget. </LI>
+<LI>Booktuning nextmove is now highlighted (same as Book), and padding has been tweaked a bit.</LI>
+<LI>Move Maintenance menu from File to Tools menu</LI>
+<LI>Remove the annoying " from myPlayerNames.<BR><BR>
+
+Bugfixes:</LI>
+<LI>When saving PGN to file, disable translating pieces. (Export to PGN was already this way).</LI>
+<LI>FICS Digital clocks didnt appear under some circumstances</LI>
+<LI>Undo/redo refinement/fix for when buffer has been full</LI>
+<LI>Fix import issue - Sometimes first tag is lost (If UTF byte order mark is present)</LI>
+<LI>MSWindows - Board keyboard bindings are were getting lost after Variation window popup is dismissed.</LI>
+<LI>Some tooltip refinements, including removing tooltips with board update (mask tooltips were erroneously persistent).</LI>
+<LI>Tablebase window: Results Board was not getting packed (is now below Results Frame). Change the damn awful red, update help, give tbWin the widest paned window.</LI>
+<LI>With wish8.6, we cant close undocked windows with a Close button. Fix</LI>
+<LI>Some fixes for javascript and html game exports</LI>
+<LI>Correctly handle plain text crosstables.</LI>
+</UL>
+</P>
 <H3>Scid vs. PC 4.11</H3>
 
 <P>
@@ -991,203 +1053,6 @@ Bug-fixes
 </UL>
 </P>
 <P>
-<H3>Scid vs. PC 3.6.26.9 </H3>
-
-<P>
-<UL>
-<LI> Added a random pawns feature to tacgame</LI>
-<LI> Added magnetic chess pieces</LI>
-<LI> _Some_ tcl speed optimisations to the main board and material board (and htext.tcl)</LI>
-<LI> Move the crosstable menu item from "tools" to "windows"</LI>
-<LI> Centralise procedures called when switching between DBs</LI>
-<LI> Crosstable: make options persistant, tweak menus, fix html export blank fields</LI>
-<LI> Crosstable: allow spelling.ssp to match initalized christian names, include a Font button, fix parenting</LI>
-<LI> Change the toplevel "wm title" to show "White v. Black database]"
-<LI> Fics: Make a new Received Offers dialog which allows for proper handling of multiple challenges
-<LI> Fics: Tweak the Make Offer dialog
-<LI> Fics: update help files, and add a Font button
-<LI> Fics: some fixes from SCID
-<LI> Move the side-to-move  indicator to left of main board
-<LI> Make font dialogs resizable, add a "default" feature, a new "fixed" default, and small overhaul (hard work!)  
-<LI> (Add a "Font" button to the help and crosstable widgets)  
-<LI> Fix focus issues with the Set Game Info widget  
-<LI> Reorganise Scid start-up (includes reading font info &thinsp;before&thinsp; drawing splash widget, removing unused old logo and start-up checks)  
-<LI> Remove quite a few "-background white" statements from all over (to allow for custom coloured backgrounds in future)  
-<LI> Fix up padding issues with the analysis widget's small text widget  
-<LI> Player Info got a fair bit of tweaking - nicer info display (spellchk.cpp, tkscid.cpp) with full country names, and tcl widget tweaked too  
-<LI> Upgrade to toga 131  
-<LI> Remove pocket and help directories  
-<LI> Changed a heap of menus (for example) PGN::File is now PGN::PGN, to avoid confusion with the Scid::File menu  
-<LI> Player Report configuration widget reniced
-<LI> Menu name and key-bindings changes for PGN and FEN import  
-<LI> Swapped key bindings for "Goto Move Number" (now ctrl+g) and "Goto Game Number" (now ctrl+u)  
-<LI> Include the highlight previous move feature from SCID (and add a context menu)  
-<LI> (Promise to) fix the Gamelist widget , and add a Comp vs. Comp feature for next release</LI>
-</LI>
-</LI>
-</LI>
-</LI>
-</LI>
-</LI>
-</LI>
-</LI>
-</LI>
-</LI>
-</LI>
-</LI>
-</LI>
-</LI>
-</LI>
-</LI>
-</LI>
-</LI>
-</LI>
-</LI>
-</UL>
-</P>
-<P>
-<H3>Scid vs. PC 3.6.26.8 </H3>
-
-<P>
-<UL>
-<LI> The Fics widgets have been redone, including buttons, the graph and labels, config windows, and console tweaks</LI>
-<LI>Made a few friendly help menus, as well as adding a "Forward" button to the help interface</LI>
-<LI> Fixed up the "Show Material" widget. It can now be flipped and resized, and draws pieces either side of halfway according to colour</LI>
-<LI> The main board area has a modest new right click menu for configuring a few Game Info items</LI>
-<LI> Configure Informant Values widget reniced</LI>
-<LI> Tacgame now has a stalemate dialog</LI>
-<LI> Fics now show a warning when game board is out of sync </LI>
-<LI> A few fixes from Scid; not duplicating variations unnecessarily; Fics socket fixes; Uci responsiveness at game end                                                                 </LI>
-<LI> The analysis engines now support RobboLito, and an unlimited number of engines       </LI>
-<LI> The File::Open menus have had quite a bit of debugging  </LI>
-<LI> Some ne tile themes</LI>
-<LI> The pause mechanism for tacgame has be restructured to allow for use with Fics too   </LI>
-<LI> Some optimisations to the oft used tcl in htext.tcl                                  </LI>
-<LI> The piece and size menus in the Options widget have been replaced by text buttons    </LI>
-<LI>Bugfixes:                                                                            
-<UL>
-<LI> A hack to fix wayward comments (Scid)                                                </LI>
-<LI> Don't let fischer chess (try to) castle                                              </LI>
-<LI> Don't raise all windows with double click... (Very bad for Fics blitz)               </LI>
-<LI> Minor PGN window/comment strip fix                                                   </LI>
-<LI> Some widget reparenting  </LI>
-</UL>
-
-</LI>
-</UL>
-</P>
-<P>
-<H3>Scid vs. PC 3.6.26.7 </H3>
-
-<P>
-<UL>
-<LI> Include a mac configuration patch  </LI>
-<LI> Back out broken Fics autoflag code  </LI>
-<LI> Fix sometime-issue with material widget outline  </LI>
-<LI> Small change to Tacgame about getMyPlayerName </LI>
-</UL>
-</P>
-<P>
-<H3>Scid vs. PC 3.6.26.6 </H3>
-
-<P>
-<UL>
-<LI> The Setup Board widget now shows tiles (when the main board uses tiles) and has improved functionality.  It also properly inits the move number, enpassant + castling combos, and side to move radiobuttons</LI>
-<LI> Fixed phalanx's illegal castling, and sorted out issues with it's opening book and the analysis window</LI>
-<LI> Replaced the hardly used side-to-move and coords buttons with toggle-menu, toggle-gameinfo buttons (Removing the redundant gameinfo right-click menu)</LI>
-<LI> Fixed up the toolbar cofniguration widget, and re-did a few little images</LI>
-<LI> Variation pop-ups now center over the main window, and enable KeyPress-1, KeyPress-2, etc bindings </LI>
-<LI> Added a changelog (help) widget</LI>
-<LI> Allow up to five analysis engines to run simultaneously</LI>
-<LI> Fix the MyPlayerNames widget. (No autoscrollframe, no grab (interfered with Help))</LI>
-<LI> Add MyPlayerName info to Tacgame</LI>
-<LI> Tacgame show a modest checkmate widget when game is over (for the first time)</LI>
-<LI> A few menu/hint fixes in menu.tcl, and a new tile theme</LI>
-<LI> Help window maintenance, including proper positioning, and removing the awful yellow highlighting</LI>
-<LI> Speed optimisations for updating main board</LI>
-<LI> Bug fix for &nbsp;sometime&nbsp; issue with gamelist widget initialisation (thanks Alex)</LI>
-<LI> De-stupidify Save Game dialog (::game::ConfirmDiscard2)</LI>
-<LI> Fix up Paste Clipboard widget a little</LI>
-<LI> Reorder the Options->Chessboard menus a little, giving MyPlayerNames its own entry</LI>
-<LI> Several configuration windows appear centered over main window</LI>
-<LI> Add Control-m binding for toggling the menubar
-</LI>
-</UL>
-</P>
-<P>
-<H3>Scid vs. PC 3.6.26.5 </H3>
-
-
-<P>
-<UL>
-<LI> Revamped the main button bar, making it a little larger too</LI>
-<LI> Fixed installation issues with tacgame/toga/phalanx on unix systems</LI>
-<LI> Restructured workings of the Analysis widget, - the F2 and F3 key bindings can now be set explicitly</LI>
-<LI> More functionality added to the gamelist widget</LI>
-<LI> Re-sampled the Alpha bitmaps (thanks to Chessdb), and added support for 75 pixel bitmaps</LI>
-<LI> Quick fixes for the repetitive nature of the "Draw" and "I Resign" messages from tacgame</LI>
-<LI> Other minor changes: Control-WheelMouse == Sizeup/Sizedown, Variation buttons swap position, Spellcheck installation fix
-</LI>
-</UL>
-</P>
-<P>
-<H3>Scid vs. PC 3.6.26.4 </H3>
-
-
-<P>
-<UL>
-<LI> New Gamelist widget. It's much more powerful than the old one, but is not quite yet feature complete</LI>
-<LI> Many changes to the Gameinfo widget,</LI>
-<LI> , including a new "Set Game Information" widget</LI>
-<LI> Stop game from crashing with languages other than English</LI>
-<LI> Window placement is now relative the main window, rather than absolute +x+y</LI>
-<LI> The Options->Chessboard menu now also includes the pieces menus</LI>
-<LI> The 3 line PGN header is now colour</LI>
-<LI> Home directory is now $HOME/.scidvspc (instead of $HOME/.scid)</LI>
-<LI> Pawn promotion dialog size now corresponds to board size, and overlays promoted pawn</LI>
-<LI> Control-I toggles gameinfo panel. Control-b toggles Options->Chessboard widget, Control-L toggles gamelist widget</LI>
-<LI> Other minor changes to fics, -O2, "exec tkscid" correctness, font and
-menu tweaks
-</LI>
-</UL>
-</P>
-<P>
-<H3>Scid vs. PC 3.6.26.3 </H3>
-
-
-<P>
-<UL>
-<LI> Replaced most all of the old colour schemes and tiles</LI>
-<LI> New Usual and Maya pieces</LI>
-<LI> Rewrote (again) the option->chessboard->board_style widget.  Changes are now made dynamically to the main board</LI>
-<LI> Tweaked the pgn save menu, included a "Save Pgn" menu item in the "File" menu, and other pgn window bindings</LI>
-<LI> Added a Fics autoflag option (for logging in as guest), and other Fics tweaks</LI>
-<LI> Don't allow null entry of "Elo" field in analysis engine customisation
-</LI>
-</UL>
-</P>
-<P>
-<H3>Scid vs. PC 3.6.26.2 </H3>
-
-
-<P>
-<UL>
-<LI> Game info panel restructured ;></LI>
-<LI> New Berlin, Spatial chess pieces</LI>
-<LI> Fics and Fischer chess changes</LI>
-<LI> Overhauled comment editor widget, including key bindings</LI>
-<LI> More tacgame bug-fixes</LI>
-<LI> Removed the right_click->take_back_move... This is just too dangerous for
-Fics (which really gets stuffed up). Mouse wheel bindings remain</LI>
-<LI> Fixed more bugs in the tactical game feature</LI>
-<LI> Allow the main window to use wish-8.5 native fullscreen mode</LI>
-<LI> Bug fixed the scidvspc setup board</LI>
-<LI> Little Fischer chess tweaks and bishop setup fixed</LI>
-<LI> Gave the show_material canvas a little more space
-</LI>
-</UL>
-</P>
-<P>
 <H3>Scid vs. PC 3.6.26.1 </H3>
 
 
@@ -1207,14 +1072,6 @@ Fics (which really gets stuffed up). Mouse wheel bindings remain</LI>
 </P>
 <P>
 <A NAME="contact_"></A> </P>
-</P>
-</P>
-</P>
-</P>
-</P>
-</P>
-</P>
-</P>
 </P>
 </P>
 </P>
