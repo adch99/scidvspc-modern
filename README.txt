@@ -126,14 +126,14 @@
 
   3.  download
 
-  source scid_vs_pc-4.11.tgz
-  <http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.11.tgz/download>
+  source scid_vs_pc-4.12.tgz
+  <http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.12.tgz/download>
 
-  windows Scid vs PC-4.11.exe
-  <http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.11.exe/download>
+  windows Scid vs PC-4.12.exe
+  <http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.12.exe/download>
 
-  mac ScidvsMac-4.11.dmg
-  <http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.11.dmg/download>
+  mac ScidvsMac-4.12.dmg
+  <http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.12.dmg/download>
 
   browse files
   <https://sourceforge.net/project/showfiles.php?group_id=263836>
@@ -506,7 +506,8 @@
 
   o  Middle button in main board toggles game info.
 
-  o  Databases open faster ("avoid the time consuming file locking").
+  o  Databases open faster (Linux/OS X only - "avoid the time consuming
+     file locking". Windows is in testing).
 
   o  Allow dragging Docked Window tabs to alter their order.
 
@@ -516,7 +517,6 @@
      tools->export, Find button removed (use enter in Find entrybox)
 
      Spelling changes:
-
   o  Update spelling file to a custom version of Franz's Jan-5-2014
      spellling.ssp.
 

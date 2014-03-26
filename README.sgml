@@ -70,11 +70,11 @@ and bug-fix fork of Scid, with some new features.  The project has been extensiv
 <label id="download_">
 <sect> download <p>
 
-source <url url="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.11.tgz/download" name="scid_vs_pc-4.11.tgz">
+source <url url="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.12.tgz/download" name="scid_vs_pc-4.12.tgz">
 
-windows <url url="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.11.exe/download" name="Scid vs PC-4.11.exe">
+windows <url url="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.12.exe/download" name="Scid vs PC-4.12.exe">
 
-mac <url url="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.11.dmg/download" name="ScidvsMac-4.11.dmg">
+mac <url url="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.12.dmg/download" name="ScidvsMac-4.12.dmg">
 
 <url url="https://sourceforge.net/project/showfiles.php?group_id=263836" name="browse files">
 
@@ -381,7 +381,7 @@ Chessbase databases and many chess variants.</p>
 <item>New Crosstable tie-break options and reorder Crosstable menus.
 <item>Game-result is now shown alongside Player names, at top of GameInfo window.
 <item>Middle button in main board toggles game info.
-<item>Databases open faster ("avoid the time consuming file locking").
+<item>Databases open faster (Linux/OS X only - "avoid the time consuming file locking". Windows is in testing).
 <item>Allow dragging Docked Window tabs to alter their order.
 <newline><newline>
 

@@ -5774,7 +5774,7 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li>New Crosstable tie-break options and reorder Crosstable menus</li>
 <li>Game-result is now shown alongside Player names, at top of GameInfo window</li>
 <li>Middle button in main board toggles game info</li>
-<li>Databases open faster ("avoid the time consuming file locking")</li>
+<li>Databases open faster (Linux/OS X only - "avoid the time consuming file locking". Windows is in testing).</li>
 <li>Allow dragging Docked Window tabs to alter their order</li>
 </ul>
 <br>
