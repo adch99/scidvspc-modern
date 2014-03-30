@@ -55,9 +55,12 @@ proc playerInfo {{player ""} {raise 0}} {
     ### The rightmost four buttons are already set width 10
     ### If English, we can set the other four buttons likewise (and allign nicely)
     if {$::language == "E"} {
-      foreach i "$w.b.graph $w.b.edit $w.b.report $w.b.tourney" {
-        $i configure -width 10
+      foreach i {graph edit report tourney} {
+        $w.b.$i configure -width 10
       }
+    }
+    foreach i {graph edit report tourney match nedit update close} {
+      $w.b.$i configure -font font_Small
     }
 
     grid columnconfigure $w.b 0 -weight 1
