@@ -6519,11 +6519,11 @@ sc_game_crosstable (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
 
         if (option == OPT_FILTER) {
             if (roundNumber == 0) {
-              db->filter->Set (i, 1);
+              db->dbFilter->Set (i, 1);
             } else {
               uint thisRound = strGetUnsigned (db->nb->GetName (NAME_ROUND, ie->GetRound()));
               if (thisRound == roundNumber)
-                db->filter->Set (i, 1);
+                db->dbFilter->Set (i, 1);
             }
             continue;
         }
@@ -6560,6 +6560,7 @@ sc_game_crosstable (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
     }
     if (option == OPT_FILTER) {
         delete ctable;
+        setMainFilter(db);
         return TCL_OK;
     }
     if (ctable->NumPlayers() < 2) {
