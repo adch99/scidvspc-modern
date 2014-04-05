@@ -441,6 +441,11 @@ proc ::enginelist::choose {} {
     makeAnalysisWin [lindex [.enginelist.list.list curselection] 0] settime
   }
 
+  # Right-click inits engine but doesn't start
+  bind $w.buttons2.start <Button-3> {
+    makeAnalysisWin [lindex [.enginelist.list.list curselection] 0] nostart
+  }
+
   dialogbutton $w.buttons2.close -textvar ::tr(Close) -command {
     destroy .enginelist
   }

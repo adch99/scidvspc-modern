@@ -386,6 +386,10 @@ proc epd_LaunchAnalysis {id textwidget} {
   ### todo: make epd annotation work with a specified engine (instead of engine 0)
   if {! [winfo exists .analysisWin0]} {
     makeAnalysisWin 0
+  } else {
+    if {!$::analysis(analyzeMode0)} {
+      toggleEngineAnalysis 0
+    }
   }
   epd_clearEpdFields $id
   set w .epd$id
@@ -404,6 +408,7 @@ proc epd_LaunchAnalysis {id textwidget} {
       break
     }
   }
+  toggleEngineAnalysis 0
 }
 
 ###  Pastes current chess engine analysis into this EPD file position.

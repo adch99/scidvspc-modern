@@ -335,6 +335,8 @@ frame .main.button.space3 -width 4
 button .main.button.flip     -image tb_flip      -command {::board::flip .main.board}
 button .main.button.windows  -image tb_windows   -command raiseAllWindows
 button .main.button.autoplay -image autoplay_off -command toggleAutoplay
+# Right-click Autoplays all games in filter
+bind .main.button.autoplay <Button-3> {toggleAutoplay 2}
 button .main.button.trial    -image tb_trial     -command {setTrialMode toggle}
 
 foreach i {start back forward end intoVar exitVar addVar autoplay flip windows trial} {
@@ -1506,10 +1508,10 @@ proc setAutoplayDelay {} {
   focus $w.spDelay
 }
 
-proc toggleAutoplay {} {
+proc toggleAutoplay {{mode 1}} {
   global autoplayMode
   if {$autoplayMode == 0} {
-    set autoplayMode 1
+    set autoplayMode $mode
     .main.button.autoplay configure -image autoplay_on ; # -relief sunken S.A.
     autoplay
   } else {
@@ -1534,7 +1536,17 @@ proc autoplay {} {
   if {$n == -1} {
     ::move::Forward
     if {[sc_pos isAt vend]} {
-      cancelAutoplay
+      if {$autoplayMode < 2} {
+        cancelAutoplay
+      } else {
+        # If autoplayMode is 2 load next game (if any) and continue
+        if {[sc_filter next] == 0} {
+          cancelAutoplay
+        } else {
+          ::game::LoadNextPrev next 0
+          after $autoplayDelay autoplay
+        }
+      }
     } else {
       after $autoplayDelay autoplay
     }
