@@ -934,7 +934,7 @@ proc readPhotoFile {fname} {
   catch {source $fname}
   set newcount [expr {[array size ::photo] - $oldcount}]
   if {$newcount > 0} {
-    ::splash::add "Found $newcount player photos in [file tail $fname]"
+    ::splash::add "  Found $newcount photos in [file tail $fname]"
   }
 }
 
@@ -950,6 +950,7 @@ proc photo {player data} {
 
 array set photo {}
 
+::splash::add "Searching for player photos."
 # Read all Scid photo (*.spf) files in the Scid data/user/config directories:
 foreach photofile [glob -nocomplain -directory $scidDataDir "*.spf"] {
   readPhotoFile $photofile
@@ -963,10 +964,6 @@ foreach photofile [glob -nocomplain -directory $scidConfigDir "*.spf"] {
 foreach photofile [glob -nocomplain -directory [file join $scidShareDir "photos"] "*.spf"] {
   readPhotoFile $photofile
 }
-
-# Read players.img for compatibility with older versions:
-readPhotoFile [file join $scidUserDir players.img]
-
 
 # Try to change the engine name: ignore version number, try to ignore blanks
 proc trimEngineName { engine } {

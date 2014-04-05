@@ -3289,7 +3289,7 @@ players.
 <p>To enable player photos, download "FIDE.spf" from the 
 <url http://scid.sourceforge.net/download.html>Scid download page</url>,
 and install it into Scid vs. PC's user directory.
-On Linux and Macs this is "$HOME/.scidvspc", or the application directory on Windows.
+On Linux and Macs this is "$HOME/.scidvspc", or "Scid vs PC/bin" on Windows.
 The <green>Help--<gt>Startup Window</green> will help you find it's location, and
 will also indicate if the photo file has been loaded correctly.
 </p>
