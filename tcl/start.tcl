@@ -663,7 +663,7 @@ set myPlayerNames {}
 # to do with gameInfo, but are here anyway S.A
 
 set gameInfo(show) 1
-set gameInfo(photos) 1
+set gameInfo(photos) 0
 set gameInfo(hideNextMove) 0
 set gameInfo(showMaterial) 1
 set gameInfo(showFEN) 0
