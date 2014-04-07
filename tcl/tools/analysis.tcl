@@ -2732,7 +2732,7 @@ proc processAnalysisInput {n} {
       set analysis(wbEngineDetected$n) 1 
 
       if { [regexp "myname=\"(\[^\"\]*)\"" $line dummy name]} {
-        catch {wm title .analysisWin$n "$name"}
+        catch {::setTitle .analysisWin$n "$name"}
       }
     }
     return
