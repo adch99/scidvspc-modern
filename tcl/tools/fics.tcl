@@ -15,11 +15,10 @@ namespace eval fics {
   set waitForMoves ""
   set sought 0
   set soughtlist {}
-  set graphwidth 300
-  # Fine tuned to be the same height as clocks , but needs re-tuning after making the observed games windgets
-  # set graphheight 200  ; now overlaps the buttons frame, and calculated below
-  set graphoff 15 ;# axis offset
-  set graphon 0
+  set graph(init) 0
+  set graph(width) 300
+  # graph(height) overlaps the buttons frame, and is calculated below
+  set graph(on) 0
   set timeseal_pid 0
   font create font_offers -family courier -size 12 -weight bold
   set history {}
@@ -254,7 +253,7 @@ namespace eval fics {
   }
 
   proc connect {{guest no}} {
-    global ::fics::sockchan ::fics::seeklist ::fics::graphwidth ::fics::graphheight fontOptions tr
+    global ::fics::sockchan ::fics::seeklist ::fics::graph fontOptions tr
 
     if { $guest=="no" && $::fics::reallogin == ""} {
       tk_messageBox -title "Error" -icon error -type ok -parent .ficsConfig \
@@ -294,7 +293,8 @@ namespace eval fics {
     # Pack graph when "Offers graph" clicked
 
     # graph widget initialised
-    canvas $w.bottom.graph.c -background grey90 -width $::fics::graphwidth
+    set ::fics::graph(init) 0
+    canvas $w.bottom.graph.c -background grey90 -width $::fics::graph(width)
     pack $w.bottom.graph.c
 
     scrollbar $w.console.scroll -command "$w.console.text yview"
@@ -413,7 +413,7 @@ namespace eval fics {
       # ::fics::writechan "set gin $::fics::gamerequests" echo
     }
 
-    checkbutton $w.bottom.buttons.offers -text "$tr(FICSOffers) $tr(Graph)" -variable ::fics::graphon -command ::fics::showGraph -width 10 -state disabled
+    checkbutton $w.bottom.buttons.offers -text "$tr(FICSOffers) $tr(Graph)" -variable ::fics::graph(on) -command ::fics::showGraph -width 10 -state disabled
     bind $w <Button-2> {
       if {[string match .fics.bottom* %W]} {
         .fics.bottom.buttons.offers invoke
@@ -442,7 +442,7 @@ namespace eval fics {
       set fontOptions(temp) [FontDialog Fixed .fics]
       if {$fontOptions(temp) != ""} { set fontOptions(Fixed) $fontOptions(temp) }
     }
-    set ::fics::graphon 0
+    set ::fics::graph(on) 0
 
     grid $w.bottom.buttons.info  -column 0 -row $row -sticky ew -padx 3 -pady 2
     grid $w.bottom.buttons.info2 -column 1 -row $row -sticky ew -padx 3 -pady 2
@@ -518,8 +518,8 @@ namespace eval fics {
     wm minsize $w $x $y
 
     # set graph height now buttons height is known
-    set ::fics::graphheight [expr [winfo reqheight $w.bottom.buttons] - 2]
-    $w.bottom.graph.c configure -height $::fics::graphheight
+    set ::fics::graph(height) [expr [winfo reqheight $w.bottom.buttons] - 2]
+    $w.bottom.graph.c configure -height $::fics::graph(height)
 
     updateConsole "Connecting $::fics::reallogin"
 
@@ -940,7 +940,7 @@ namespace eval fics {
     if { $::fics::sought } {
       if {[string match "* ad* displayed." $line]} {
 	set ::fics::sought 0
-	catch { displayGraph }
+	displayGraph
 	return
       }
       if { [ parseSoughtLine $line ] } {
@@ -1113,7 +1113,7 @@ namespace eval fics {
       }
 
       ### hide offers graph ; sometime ::fics::updateGraph doesn't get cancelled though !?^&$%!
-      set ::fics::graphon 0
+      set ::fics::graph(on) 0
       showGraph
 
       # display the win / draw / loss score
@@ -1778,7 +1778,7 @@ namespace eval fics {
       }
       
       # remove seek from graph
-      if { $::fics::graphon } {
+      if { $::fics::graph(on) } {
         for {set idx 0} { $idx < [llength $::fics::soughtlist]} { incr idx } {
           array set g [lindex $::fics::soughtlist $idx]
           set num $g(game)
@@ -2143,15 +2143,17 @@ namespace eval fics {
 
     ### Either the buttons or offers graph are shown at any one time
 
-    if { $::fics::graphon } {
+    if { $::fics::graph(on) } {
       pack forget $w.buttons
       pack $w.graph -side right -padx 2 -pady 5 -anchor center
-      bind .fics <Escape> {set ::fics::graphon 0 ; ::fics::showGraph}
+      bind .fics <Escape> {set ::fics::graph(on) 0 ; ::fics::showGraph}
       updateGraph
     } else {
       after cancel ::fics::updateGraph
       bind .fics <Escape> ".fics.command.entry delete 0 end"
       pack forget $w.graph
+      $w.graph.c delete game
+      $w.graph.c delete status
       pack $w.buttons -side right -padx 2 -pady 5 -anchor center
     }
 
@@ -2167,15 +2169,14 @@ namespace eval fics {
     ### This vwait cause f-ing headaches.
     # ... so don't update graph if playing
     vwaitTimed ::fics::sought 5000 "nowarn"
-    if {$::fics::playing != 1 && $::fics::playing != -1 && $::fics::graphon && [winfo exists .fics]} {
+    if {$::fics::playing != 1 && $::fics::playing != -1 && $::fics::graph(on) && [winfo exists .fics]} {
       after 3000 ::fics::updateGraph
     }
   }
 
 
-  proc displayGraph { } {
-    global ::fics::graphwidth ::fics::graphheight ::fics::graphoff \
-        ::fics::offers_minelo ::fics::offers_maxelo ::fics::offers_mintime ::fics::offers_maxtime
+  proc displayGraph {} {
+    global ::fics::graph ::fics::offers_minelo ::fics::offers_maxelo ::fics::offers_mintime ::fics::offers_maxtime
 
     after cancel ::fics::updateGraph
 
@@ -2183,43 +2184,42 @@ namespace eval fics {
     set size 7
     set idx 0
 
-    #first erase the canvas
-    foreach id [ $w.c find all] { $w.c delete $id }
+    # delete games
+    $w.c delete game
 
-    set xoff $graphoff
-    set yoff [expr $graphoff - 2]
-    set width  $::fics::graphwidth
-    set height $::fics::graphheight
-    set gx [expr $width - $xoff]
-    set gy [expr $height - $yoff]
+    if {!$graph(init)} {
+      set graph(init) 1
+      set graph(xoff) 15 ;# axis offset
+      set graph(yoff) [expr $graph(xoff) - 2]
+      set gy [expr $graph(height) - $graph(yoff)]
 
-    # Draw Axis
-    # E (xoff,0)
-    # L |
-    # O |
-    #   |
-    #   |
-    #   (xoff,gy)-------------------(width,gy) Time
+      # Draw Axis
+      # E (xoff,0)
+      # L |
+      # O |
+      #   |
+      #   |
+      #   (xoff,gy)-------------------(width,gy) Time
 
-    # X axis, Y Axis
-    $w.c create line $xoff $gy $width $gy -fill blue
-    # Y axis
-    $w.c create line $xoff $gy $xoff 0 -fill blue
+      # X axis, Y Axis
+      $w.c create line $graph(xoff) $gy $graph(width) $gy -fill blue
+      # Y axis
+      $w.c create line $graph(xoff) $gy $graph(xoff) 0 -fill blue
 
-    # Labels
-    $w.c create text [expr $xoff - 10] 0 -fill black -anchor nw -text "E\nL\nO"
-    $w.c create text $width [expr $height + 2] -fill black -anchor se -text [tr Time]
+      # Labels
+      $w.c create text [expr $graph(xoff) - 10] 0 -fill black -anchor nw -text "E\nL\nO"
+      $w.c create text $graph(width) [expr $graph(height) + 2] -fill black -anchor se -text [tr Time]
 
-    # Time marker at 5'
-    set x [ expr $xoff + 5 * ($width - $xoff) / ($offers_maxtime - $offers_mintime)]
-    $w.c create line $x 0 $x $gy -fill grey
-    $w.c create text [expr $x - 5] [expr $height + 2]  -fill black -anchor sw -text "5min"
+      # Time marker at 5'
+      set x [ expr $graph(xoff) + 5 * ($graph(width) - $graph(xoff)) / ($offers_maxtime - $offers_mintime)]
+      $w.c create line $x 0 $x $gy -fill grey
+      $w.c create text [expr $x - 5] [expr $graph(height) + 2]  -fill black -anchor sw -text "5min"
 
-    # Time marker at 15'
-    set x [ expr $xoff + 15 * ($width - $xoff) / ($offers_maxtime - $offers_mintime)]
-    $w.c create line $x 0 $x $gy -fill grey
-    $w.c create text [expr $x - 5] [expr $height + 2] -fill black -anchor sw -text "15min"
-
+      # Time marker at 15'
+      set x [ expr $graph(xoff) + 15 * ($graph(width) - $graph(xoff)) / ($offers_maxtime - $offers_mintime)]
+      $w.c create line $x 0 $x $gy -fill grey
+      $w.c create text [expr $x - 5] [expr $graph(height) + 2] -fill black -anchor sw -text "15min"
+    }
     foreach g $::fics::soughtlist {
       array set l $g
       set fillcolor skyblue ; set outline blue
@@ -2239,14 +2239,15 @@ namespace eval fics {
         set fillcolor gray ; set outline darkgray
       }
       
-      set x [ expr $xoff + $tt * ($width - $xoff) / ($offers_maxtime - $offers_mintime)]
-      set y [ expr $height - $yoff - ( $l(elo) - $offers_minelo ) * ($height - $yoff) / ($offers_maxelo - $offers_minelo)]
+      set x [ expr $graph(xoff) + $tt * ($graph(width) - $graph(xoff)) / ($offers_maxtime - $offers_mintime)]
+      set y [ expr $graph(height) - $graph(yoff) - ( $l(elo) - $offers_minelo ) * ($graph(height) - $graph(yoff)) / ($offers_maxelo - $offers_minelo)]
       if { $l(rated) == "rated" } {
         set object "oval"
       } else {
         set object "rectangle"
       }
-      $w.c create $object [expr $x - $size ] [expr $y - $size ] [expr $x + $size ] [expr $y + $size ] -tag game_$idx -fill $fillcolor -outline $outline
+      $w.c create $object [expr $x - $size ] [expr $y - $size ] [expr $x + $size ] [expr $y + $size ] \
+           -tags "game game_$idx" -fill $fillcolor -outline $outline
       
       $w.c bind game_$idx <Enter> "::fics::showGraphText $idx %x %y"
       $w.c bind game_$idx <Leave> "::fics::delGraphText $idx"
