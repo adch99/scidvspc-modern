@@ -454,7 +454,7 @@ namespace eval tactics {
   ################################################################################
   proc sideToMoveAtBottom {} {
     if { [sc_pos side] == "white" && [::board::isFlipped .main.board] || [sc_pos side] == "black" &&  ![::board::isFlipped .main.board] } {
-      ::board::flip .main.board
+      toggleRotateBoard
     }
   }
 
@@ -499,11 +499,11 @@ namespace eval tactics {
     updateMenuStates
     updateTitle
     updateStatusBar
-    updateBoard -pgn
     if { [sc_pos side] == "white" && [::board::isFlipped .main.board] \
       || [sc_pos side] == "black" &&  ![::board::isFlipped .main.board] } {
       ::board::flip .main.board
     }
+    updateBoard -pgn
     set ::tactics::prevFen [sc_pos fen]
     ::tactics::startAnalyze
     ::tactics::mainLoop

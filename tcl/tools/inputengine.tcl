@@ -735,7 +735,7 @@ namespace eval inputengine {
     set pipe $::inputengine::InputEngine(pipe)
 
     # rotate the graphical boards
-    ::board::flip .main.board
+    toggleRotateBoard
     ::board::flip .inputengineconsole.bd
 
     ::inputengine::newgame

@@ -914,7 +914,7 @@ proc ::windows::gamelist::Reload {} {
   }
   if {[info exists ::glistFlipped($b)]} {
     if {$::glistFlipped($b) != [::board::isFlipped .main.board]} {
-      ::board::flip .main.board
+      toggleRotateBoard
     }
   } else {
     # should not happen
