@@ -235,6 +235,9 @@ proc updateStatusBar {} {
 
 proc toggleRotateBoard {} {
   ::board::flip .main.board
+  if {$::gameInfo(photos)} {
+    mapPhotos
+  }
 }
 
 proc toggleCoords {} {
@@ -1041,7 +1044,6 @@ proc togglePhotosSize {} {
 }
 
 proc mapPhotos {} {
-
   if {!$::photosMinimized} {
     set distance [expr {[image width photoB]}]
     if { $distance < 10 } { set distance 80 }
@@ -1050,9 +1052,14 @@ proc mapPhotos {} {
     .main.photoW configure -image photoW -anchor ne
     place .main.photoW -in .main.gameInfo -x -$distance -y 0 -rely 0.0 -relx 1.0 -relheight 1 -anchor ne
   } else  {
-    .main.photoB configure -image photoB2 -anchor ne
+    if {[::board::isFlipped .main.board]} {
+      .main.photoB configure -image photoW2 -anchor ne
+      .main.photoW configure -image photoB2 -anchor ne
+    } else {
+      .main.photoB configure -image photoB2 -anchor ne
+      .main.photoW configure -image photoW2 -anchor ne
+    }
     place .main.photoB -in .main.gameInfo -x -0 -y 0 -relx 1.0 -relheight .5 -anchor ne
-    .main.photoW configure -image photoW2 -anchor ne
     place .main.photoW -in .main.gameInfo -x -0 -rely 0.51 -relx 1.0 -relheight .5 -anchor ne
   }
 
