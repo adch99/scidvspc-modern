@@ -6462,9 +6462,8 @@ sc_game_crosstable (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
     dateT eventDate = g->GetEventDate();
 
     // If game date is a year only, then allow any game in this year to match
-    dateT monthDay = date_GetMonthDay (g->GetDate());
 
-    if (monthDay == 0) {
+    if (date_GetMonthDay (g->GetDate()) == 0) {
       firstDate = g->GetDate();
       lastDate = date_AddMonths (g->GetDate(), 12) - 1;
     } else {
@@ -11848,8 +11847,14 @@ sc_name_edit (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             return errorResult (ti, "There are no crosstable games.");
         }
 
-        firstDate = date_AddMonths (g->GetDate(), -3);
-        lastDate = date_AddMonths (g->GetDate(), 3);
+        if (date_GetMonthDay (g->GetDate()) == 0) {
+          // no month/day, so match games in calender year
+	  firstDate = g->GetDate();
+	  lastDate = date_AddMonths (g->GetDate(), 12) - 1;
+        } else {
+	  firstDate = date_AddMonths (g->GetDate(), -3);
+	  lastDate = date_AddMonths (g->GetDate(), 3);
+        }
         eventDate = g->GetEventDate();
     }
 
