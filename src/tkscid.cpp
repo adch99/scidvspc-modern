@@ -6266,13 +6266,20 @@ isCrosstableGame (IndexEntry * ie, idNumberT siteID, idNumberT eventID,
                   dateT startDate, dateT endDate, dateT eventDate)
 {
     if (ie->GetSite() != siteID  ||  ie->GetEvent() != eventID) {
-        return false;
+      return false;
     }
-    if (eventDate != 0  &&  ie->GetEventDate() == eventDate) { return true; }
-    if (ie->GetDate() < startDate  ||  ie->GetDate() > endDate) {
-        return false;
+    if (eventDate != 0  &&  ie->GetEventDate() == eventDate) {
+      return true;
     }
-    return true;
+
+    dateT date = ie->GetDate();
+
+    if (date_GetMonthDay (date) == 0) {
+      // Probably of no relevance, but should we use eventDate (if available) instead of startDate for year comparison
+      return (date_GetYear(date) == date_GetYear(startDate));
+    }
+
+    return (date >= startDate && date <= endDate);
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
