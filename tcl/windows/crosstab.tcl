@@ -144,14 +144,14 @@ proc ::crosstab::Open {} {
     nameEditor
     setNameEditorType event
     set editName [sc_game info event]
-    set editNameNew ""
+    set editNameNew $editName
     set editNameSelect crosstable
   }
   $w.menu.edit add command -label CrosstabEditSite -command {
     nameEditor
     setNameEditorType site
     set editName [sc_game info site]
-    set editNameNew ""
+    set editNameNew $editName
     set editNameSelect crosstable
   }
   $w.menu.edit add command -label CrosstabEditDate -command {
