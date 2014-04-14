@@ -6275,8 +6275,7 @@ isCrosstableGame (IndexEntry * ie, idNumberT siteID, idNumberT eventID,
     dateT date = ie->GetDate();
 
     if (date_GetMonthDay (date) == 0) {
-      // Probably of no relevance, but should we use eventDate (if available) instead of startDate for year comparison
-      return (date_GetYear(date) == date_GetYear(startDate));
+      return (date_GetYear(date) == date_GetYear((startDate+endDate)/2));
     }
 
     return (date >= startDate && date <= endDate);
