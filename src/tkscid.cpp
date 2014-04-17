@@ -1588,13 +1588,13 @@ sc_base_description (ClientData cd, Tcl_Interp * ti, int argc, const char ** arg
 int
 sc_base_check (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
-	bool showProgress = startProgressBar();
+    bool showProgress = startProgressBar();
     uint update = 5000;  
     uint updateStart = 5000;
-	IndexEntry *ie = NULL;
-	Game *g = new Game();
-	char gameNumber[16];
-	bool limitToFilter = false;
+    IndexEntry *ie = NULL;
+    Game *g = new Game();
+    char gameNumber[16];
+    bool limitToFilter = false;
 
     if (argc != 3) {
         return errorResult (ti, "Usage: sc_base check <bool:all_games>");
@@ -1623,29 +1623,28 @@ sc_base_check (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
         ie = db->idx->FetchEntry (gameNum);
         if (ie->GetLength() == 0) {
-			sprintf( gameNumber, "%d", gameNum + 1);
+            sprintf( gameNumber, "%d", gameNum + 1);
             ErrorBuffer->Append ("Game ", gameNumber, ": Unable to fetch index entry.\n");
             continue;
         }
 
-        if (db->gfile->ReadGame (db->bbuf, ie->GetOffset(),
-                                 ie->GetLength()) != OK) {
-			sprintf( gameNumber, "%d", gameNum + 1);
+        if (db->gfile->ReadGame (db->bbuf, ie->GetOffset(), ie->GetLength()) != OK) {
+            sprintf( gameNumber, "%d", gameNum + 1);
             ErrorBuffer->Append ("Game ", gameNumber, ": Unable to read game buffer.\n");
             continue;
         }
 
-		errorT ret = g->Decode (db->bbuf, GAME_DECODE_ALL);
-		if( ret != OK){
-			sprintf( gameNumber, "%d", gameNum + 1);
+        errorT ret = g->Decode (db->bbuf, GAME_DECODE_ALL);
+        if( ret != OK){
+            sprintf( gameNumber, "%d", gameNum + 1);
             ErrorBuffer->Append ("Game ", gameNumber, ": Unable to decode game.\n");
             continue;
         }
-	}
+    }
 
     if (showProgress) { updateProgressBar (ti, 1, 1); }
 
-	if (ErrorBuffer->Length() > 0) {
+    if (ErrorBuffer->Length() > 0) {
         Tcl_AppendElement (ti, ErrorBuffer->Data());
     } 
     return (ErrorBuffer->Length() == 0) ? TCL_OK : TCL_ERROR;
