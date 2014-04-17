@@ -97,8 +97,8 @@ if {$graphFigurineAvailable} {
 }
 
 if {$graphFigurineAvailable} {
-  font create font_Figurine(normal) -family $graphFigurineFamily(normal) -weight $graphFigurineWeight(normal) -size $fontsize
-  font create font_Figurine(bold) -family $graphFigurineFamily(bold) -weight $graphFigurineWeight(bold) -size $fontsize
+  font create font_Figurine(normal) -family $graphFigurineFamily(normal) -weight $graphFigurineWeight(normal) -size [lindex $fontOptions(Regular) 1]
+  font create font_Figurine(bold) -family $graphFigurineFamily(bold) -weight $graphFigurineWeight(bold) -size [lindex $fontOptions(Regular) 1]
 }
 
 ### end of config.tcl
