@@ -1484,6 +1484,9 @@ namespace eval fics {
           }
 	  ### If we're already observing a game, move it back to a small board
 	  ::fics::demote_mainGame 
+          # unflip when loading new game ??
+	  if {\[::board::isFlipped .main.board\]} {::board::flip .main.board}
+
 	  ### Restarting observe ensures we get a parseStyle12 line straight away
 	  ::fics::unobserveGame $game
 	  set ::fics::mainGame $game

@@ -278,7 +278,11 @@ proc ::maint::Open {} {
   button $w.db.autoload -textvar ::tr(AutoloadGame)   -command "::maint::SetAutoloadGame $w"
   button $w.db.strip -textvar ::tr(StripTags)         -command "stripTags $w"
 
-  foreach i {check eco compact sort elo dups cleaner autoload strip} {
+  button $w.db.stripcom -text "[tr EditStrip] [tr Comments]" -command "stripCommentsVars comments $w"
+  button $w.db.stripvar -text "[tr EditStrip] [tr Variations]"   -command "stripCommentsVars variations $w"
+  button $w.db.zero -textvar ::tr(StripTag)   -command "zeroTags $w"
+
+  foreach i {check eco compact sort elo dups cleaner autoload strip stripcom stripvar zero} {
     $w.db.$i configure -font $font
   }
   bind $w <Alt-d> "$w.db.dups invoke"
@@ -290,9 +294,11 @@ proc ::maint::Open {} {
   grid $w.db.dups -row 2 -column 1 -sticky we -padx 1 -pady 1
   grid $w.db.cleaner -row 2 -column 2 -sticky we -padx 1 -pady 1
   grid $w.db.autoload -row 3 -column 0 -sticky we -padx 1 -pady 1
-  grid $w.db.strip -row 3 -column 1 -sticky we -padx 1 -pady 1
-  grid $w.db.check -row 3 -column 2 -sticky we -padx 1 -pady 1
-
+  grid $w.db.zero  -row 3 -column 1 -sticky we -padx 1 -pady 1
+  grid $w.db.strip -row 3 -column 2 -sticky we -padx 1 -pady 1
+  grid $w.db.check -row 4 -column 0 -sticky we -padx 1 -pady 1
+  grid $w.db.stripcom -row 4 -column 1 -sticky we -padx 1 -pady 1
+  grid $w.db.stripvar -row 4 -column 2 -sticky we -padx 1 -pady 1
 
   ### Buttons
 
@@ -817,8 +823,91 @@ proc checkAllGames {} {
   placeWinOverParent $w .maintWin
   wm state $w normal
   updateClassifyWin
+} 
+
+proc stripCommentsVars {arg {parent .}} {
+  if {$arg != "comments" && $arg != "variations"} { 
+    tk_messageBox -type ok -icon info -title "Scid" -message "stripCommentsVars: must be 'comments' or 'variations'"
+    return
+  }
+  set w .stripCommentsVars
+  if {[winfo exists $w]} {
+    destroy $w
+  }
+  toplevel $w
+  wm withdraw $w
+
+  set ::checkOption(arg) $arg
+  set arg [string toupper $arg 0 0]
+  wm title $w "[tr EditStrip] $arg"
+  
+  pack [frame $w.f] -expand 1
+  
+  label $w.f.label -text "Stripping $arg cannot be undone."
+  frame $w.f.g
+  radiobutton $w.f.g.all -textvar ::tr(CheckAll) -variable checkOption(AllGames) -value all
+  radiobutton $w.f.g.filter -textvar ::tr(CheckSelectFilterGames) -variable checkOption(AllGames) -value filter
+  set ::checkOption(AllGames) filter
+  set row 0
+  foreach f {all filter} {
+    grid $w.f.g.$f -row $row -column 0 -sticky w
+    incr row
+  }
+  
+  frame $w.f.b
+  dialogbutton $w.f.b.go -text "[tr EditStrip] $arg" -command {
+    destroy .stripCommentsVars
+    set ::maint::cancelStrip 0
+    progressWindow "Scid" "Stripping $checkOption(arg)" $::tr(Cancel) ::maint::sc_progressBar
+    busyCursor .
+    if {$checkOption(AllGames) == "all"} {
+      set next 1
+      set numGames [sc_base numGames]
+      while {$next <= $numGames && !$::maint::cancelStrip} {
+	updateProgressWindow $next $numGames
+	sc_game load $next
+        sc_game strip $checkOption(arg)
+        sc_game save $next
+        incr next
+      }
+    } else {
+      set next [sc_filter first]
+      set numGames [sc_filter count]
+      set i 0
+      while {$next && !$::maint::cancelStrip} {
+	incr i
+	updateProgressWindow $i $numGames
+	sc_game load $next
+        sc_game strip $checkOption(arg)
+        sc_game save $next
+        set next [sc_filter next]
+      }
+    }
+    unbusyCursor .
+    closeProgressWindow
+    # wtf is the gamelist refresh making it go blank !?
+    # ::windows::gamelist::Refresh
+    updateBoard -pgn
+  }
+  dialogbutton $w.f.b.cancel -textvar ::tr(Cancel) -command "focus .main ; destroy $w"
+  
+  pack $w.f.label $w.f.g -side top -pady 5
+  pack $w.f.b -side top -pady 5 -fill x
+  pack $w.f.b.go -side left -pady 5 -padx 5
+  pack $w.f.b.cancel -side right -pady 5 -padx 5
+
+  wm resizable $w 0 0
+  bind $w <F1> {helpWindow Maintenance}
+  bind $w <Escape> "$w.f.b.cancel invoke"
+  placeWinOverParent $w $parent
+  wm state $w normal
 }
 
+set ::maint::cancelStrip 0
+
+proc ::maint::sc_progressBar {} {
+  set ::maint::cancelStrip 1
+}
 
 set classifyOption(AllGames) all
 set classifyOption(ExtendedCodes) 1
@@ -921,7 +1010,9 @@ proc makeClassifyWin {{parent .}} {
 
 proc updateClassifyWin {} {
   set w .classify
-  if {! [winfo exists $w]} { return }
+  if {! [winfo exists $w]} {
+    return
+  }
   set state disabled
   if {[sc_base inUse]} { set state normal }
   $w.b.go configure -state $state
@@ -1923,7 +2014,7 @@ proc doAllocateRatings {} {
 }
 
 
-### Strip and filter extra PGN tags (todo: WhiteElo, BlackElo)
+### Strip and filter extra PGN tags
 
 array set pgnTags {}
 
@@ -2015,6 +2106,76 @@ proc stripTags {{parent .}} {
   bind $w <Configure> "recordWinSize $w"
 }
 
+proc zeroTags {{parent .}} {
+  # todo
+
+  set w .striptags
+
+  if {[winfo exists $w]} {
+    destroy $w
+  }
+
+  set ::interrupt 0
+
+  set Tags {Event Site Date Round WhiteElo BlackElo EventDate}
+
+  toplevel $w
+  wm withdraw $w
+  wm title $w $::tr(StripTag)
+
+  setWinLocation $w
+  # setWinSize $w
+
+  bind $w <F1> {helpWindow Maintenance Tags}
+
+  label $w.title -text "$::tr(StripTag) ([file tail [sc_base filename]])" -font font_Bold
+  pack $w.title -side top
+  frame $w.tags
+  pack $w.tags -side top -fill both -expand yes
+  addHorizontalRule $w
+  frame $w.buttons
+  pack $w.buttons -side bottom -fill x -before $w.tags
+
+  listbox $w.tags.list -yscrollcommand "$w.tags.scroll set" \
+      -exportselection 1 -font font_Fixed -width 32
+  scrollbar $w.tags.scroll -command "$w.tags.list yview"
+  pack $w.tags.list -side left -fill both -expand yes
+  pack $w.tags.scroll -side right -fill y
+
+  foreach i $Tags {
+    .striptags.tags.list insert end $i
+  }
+
+  bind $w.tags.list <Double-ButtonRelease-1> "$w.buttons.find invoke; break"
+
+  button $w.buttons.find -text $::tr(SetFilter) -command {
+    if {[catch {set tag [lindex [.striptags.tags.list get [.striptags.tags.list cursel]] 0]}] || \
+         $tag == {}} {
+      return
+    }
+    puts $tag
+  }
+
+  button $w.buttons.strip -text $::tr(StripTag) -command {
+    if {[catch {set tag [lindex [.striptags.tags.list get [.striptags.tags.list cursel]] 0]}] || \
+         $tag == {}} {
+      return
+    }
+    puts $tag
+  }
+
+  button $w.buttons.cancel -text $::tr(Close) -command "destroy $w"
+  pack $w.buttons.find $w.buttons.strip -side left -padx 5 -pady 3
+  pack $w.buttons.cancel -side right -padx 5 -pady 3
+  bind $w <Escape> "$w.buttons.cancel invoke"
+
+  # raise $parent 
+
+  update
+  wm state $w normal
+  bind $w <Configure> "recordWinSize $w"
+}
+
 proc populateStripTags {} {
   global pgnTags
 
@@ -2030,8 +2191,7 @@ proc doStripTags {tag} {
   set result [tk_messageBox -title "Scid" -parent .striptags \
       -icon question -type yesno -message $msg]
   if {$result == "no"} { return 0 }
-  progressWindow "Scid" "Removing the PGN tag $tag." \
-      $::tr(Cancel) "sc_progressBar"
+  progressWindow "Scid" "Removing the PGN tag $tag." $::tr(Cancel) "sc_progressBar"
   busyCursor .
   set err [catch {sc_base tag strip $tag} result]
   unbusyCursor .

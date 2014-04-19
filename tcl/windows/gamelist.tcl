@@ -1043,8 +1043,6 @@ proc ::windows::gamelist::Refresh {{see {}}} {
 
   configDeleteButtons
   ::windows::switcher::Refresh
-
-  return $current_item
 }
 
 proc ::windows::gamelist::SetStart {unit} {

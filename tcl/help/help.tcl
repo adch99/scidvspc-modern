@@ -2456,7 +2456,12 @@ For example - the first two examples remove four digit ELOs from player names. T
   <i>Note: Because of design of si4 header, this number's upper limit is 16,777,214 (Approximately 2^(8*3)).</i>
   </p>
 
-  <h3><name Tags>Strip PGN Tags</name></h3>
+  <h3><name Tags>Strip Tags</name></h3>
+  <p>
+  This feature zeros some of the less important PGN tags such as WhiteELO, EventDate, etc.
+  </p>
+
+  <h3><name Tags>Strip Extra Tags</name></h3>
   <p>
   This feature scans the database for extra PGN tags (such as "Annotator").
   Then, one may strip these tags from the base, or set the filter to
