@@ -137,9 +137,9 @@ proc ::search::usefile {} {
   }
 }
 
-# will go to the first game found, except if the Tree of current base is opened (of there will be filter collision)
 proc ::search::loadFirstGame {} {
-    set w ".treeWin[sc_base current]"    
-    if {[winfo exists $w]} { return }    
+    ## Used to not load if the Tree of current base is opened "(of there will be filter collision)"
+    ## but probably not necessary now tree is unlocked.
+    # set w ".treeWin[sc_base current]" ; if {[winfo exists $w]} { return }    
     ::game::Load [sc_filter first]
 }
