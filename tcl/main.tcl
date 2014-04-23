@@ -1564,17 +1564,14 @@ proc autoplay {} {
     addAnnotation
   }
 
-  # stop game annotation when out of opening
-
-  if { $::annotate(isBatch) && $::isOpeningOnly && \
-        ( [sc_pos moveNumber] > $::isOpeningOnlyMoves || $::wentOutOfBook)} {
-      nextgameAutoplay $n
+  if { $::isOpeningOnly && [sc_pos moveNumber] > $::isOpeningOnlyMoves} {
+      if {$::annotate(isBatch)} {
+	nextgameAutoplay $n
+      } else {
+	toggleEngineAnalysis $n 1
+	cancelAutoplay
+      }
       return
-  }
-
-  if {$::isOpeningOnly && $::wentOutOfBook} {
-    cancelAutoplay
-    return
   }
 
   if { [sc_pos isAt end] } {
