@@ -50,7 +50,6 @@ return NULL;
  * 1) empty (not used) or cell with the same board
  * 2) cell stored at previous search
  * 3) cell that stores results computed at a low depth
- * 4) beta_cut (fail high) cell
  *********************************************************/
 void writeHT( int value, int Alpha, int Beta )
 {
@@ -80,14 +79,11 @@ if( best == NULL )
 for( i=0; i!=REHASH; i++ )
 {
 	t = HT + ( G[Counter].hashboard + i ) % SizeHT;
-	if( best==NULL || best->depth > t->depth
-	 || ( best->depth==t->depth
-	   && best->result!=beta_cut && t->result==beta_cut ) ) best = t;
+	if( best==NULL || best->depth > t->depth ) best = t;
 }
 
-if( best->hashboard == G[Counter].hashboard
- && best->depth > Depth && best->result!=beta_cut ) return;
-
+/* Checkmate score must be adjusted moves to be counted from
+ * here rather than from the root position */
 if( value > CHECKMATE-100 ) best->value = value+Ply;
 else if( value < -CHECKMATE+100 ) best->value = value-Ply;
 else best->value = value;

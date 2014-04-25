@@ -645,7 +645,7 @@ for(i=0;i!=8;i++)
 		int ataks = (P[d]>>5) & 0x7;
 		if(ataks)
 		{
-			int defs = (P[d]>>5) & 0x7;
+			int defs = (P[d]>>13) & 0x7;
 			Bknow.khung += ataks;
 			if( defs == 0 )
 			{

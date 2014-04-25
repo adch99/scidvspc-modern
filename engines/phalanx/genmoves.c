@@ -10,6 +10,49 @@ unsigned char tar[120];
 
 
 
+/* enemy attacks given square */
+int attacktest( int square, int ocolor )
+{
+
+/* pawn */
+if(ocolor!=1)
+{ if( B[square+11]==BP || B[square+9]==BP ) return 2; }
+else
+{ if( B[square-11]==WP || B[square-9]==WP ) return 2; }
+
+/* knight */
+{	int i, enemy = KNIGHT+ocolor;
+	for( i=0; i!=8; i++ )
+	if( B[square+N_moves[i]] == enemy ) return 2;
+}
+
+/* rook or queen */
+{	int d, enemy1 = ROOK+ocolor, enemy2 = QUEEN+ocolor;
+	for( d=0; d!=4; d++ )
+	{	int i=square; int step=RB_dirs[d];
+		do i += step; while( B[i] == 0 );
+		if( B[i]==enemy1 || B[i]==enemy2 ) return 2;
+	}
+}
+
+/* bishop or  queen */
+{	int d, enemy1 = BISHOP+ocolor, enemy2 = QUEEN+ocolor;
+	for( d=4; d!=8; d++ )
+	{	int i=square; int step=RB_dirs[d];
+		do i += step; while( B[i] == 0 );
+		if( B[i]==enemy1 || B[i]==enemy2 ) return 2;
+	}
+}
+
+/* king */
+if( dist[ 120*square + L[ocolor].next ].max == 1 ) return 1;
+
+return 0;
+
+}
+
+
+
 #undef debugsee
 /* Static Exchange Evaluator */
 int see( tsquare * b, int from, int square )

@@ -144,7 +144,7 @@ typedef struct
 	analyze,
 	polling;       /* polling input */
   tlevel level;
-  unsigned char easy;
+  int easy;
   FILE	* log;
 } tflag;
 
@@ -235,6 +235,7 @@ tdist;
 
 #define SHORT_CASTLING 1
 #define LONG_CASTLING 2
+#define NULL_MOVE 20
 
 #define WSHORT 1 /* if set, white short castling is impossible */
 #define WLONG  2
@@ -415,6 +416,7 @@ extern int Totmat;                  /* total mtrl sum on the board */
 extern int Abort, NoAbort;          /* abort the search when SIG_INT */
 extern long AllDepth;                 /* Statistics for average Depth */
 extern int64 AllNPS;
+extern long T1, T2;                 /* time started & planned on a move */
 
 extern int DrawScore;
 #define DRAW ( Ply%2 ? -DrawScore : DrawScore )
@@ -495,7 +497,6 @@ extern void generate_legal_checks(tmove*,int*);
 extern int see( tsquare *, int, int );
 
 extern int search(tmove*,int,int,int);
-extern int csearch(tmove*,int,int,int,int);
 extern tmove root_search(void);
 
 extern int repetition(int);

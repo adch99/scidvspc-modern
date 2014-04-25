@@ -140,6 +140,7 @@ void compress(void)
 		 * joined to the first one and reopen */
 
 		fclose(tb1); fclose(tb2);
+		remove("rbook.phalanx");
 		rename("rbook.phalanx.tmp","rbook.phalanx");
 		printf("done\n");
 	}
@@ -225,7 +226,7 @@ void parsegame(void)
 { register int c='*';
   /*unsigned*/ char m[128];
   int i;
-  setfen("rnbqkbnr/pppppppp/////PPPPPPPP/RNBQKBNR/w");
+  setfen("rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1");
   while( c!='[' && c!=EOF && Counter < MaxBookPly )
   { while( (c=getchar()) != '.' && c!=EOF )
     if(c=='{')
@@ -369,7 +370,7 @@ int bcreate( int argc, char ** argv )
 
   stat("rbook.phalanx",&fs); fsize = fs.st_size/sizeof(tb);
 
-  printf("writing book ");
+  printf("rbook records = %i, writing book ", fsize);
 
   while(!feof(tb1))
   {

@@ -28,117 +28,6 @@ int sortkey( const void *a, const void *b )
 
 
 
-/* enemy attacks given square */
-int attacktest( int square, int ocolor )
-{
-
-/* pawn */
-if(ocolor!=1)
-{ if( B[square+11]==BP || B[square+9]==BP ) return 2; }
-else
-{ if( B[square-11]==WP || B[square-9]==WP ) return 2; }
-
-/* knight */
-{	int i, enemy = KNIGHT+ocolor;
-	for( i=0; i!=8; i++ )
-	if( B[square+N_moves[i]] == enemy ) return 2;
-}
-
-/* rook or queen */
-{	int d, enemy1 = ROOK+ocolor, enemy2 = QUEEN+ocolor;
-	for( d=0; d!=4; d++ )
-	{	int i=square; int step=RB_dirs[d];
-		do i += step; while( B[i] == 0 );
-		if( B[i]==enemy1 || B[i]==enemy2 ) return 2;
-	}
-}
-
-/* bishop or  queen */
-{	int d, enemy1 = BISHOP+ocolor, enemy2 = QUEEN+ocolor;
-	for( d=4; d!=8; d++ )
-	{	int i=square; int step=RB_dirs[d];
-		do i += step; while( B[i] == 0 );
-		if( B[i]==enemy1 || B[i]==enemy2 ) return 2;
-	}
-}
-
-/* king */
-if( dist[ 120*square + L[ocolor].next ].max == 1 ) return 1;
-
-return 0;
-
-}
-
-
-/*
- * search carefuly. we expect fail-low at this node.
- * This is only used when null move fails low by a high amount ->
- * that means we are probably under a major threat and we should
- * extend anything that removes or delays the threat.
- * So, this is a normal PVS search that extends moves
- * that fail high in the zero width search - their re-search
- * is extended.
- */
-int csearch(
-	tmove *m, /* move list */
-	int n,    /* number of moves */
-	int Alpha, int Beta,
-	int extend
-)
-{
-
-int i;
-int result;
-
-for( i=0; i!=n; i++ )
-{
-	int max;
-
-	{
-		int j;
-		max = i;
-		for( j=i+1; j!=n; j++ ) if( m[j].value > m[max].value ) max=j;
-	}
-
-	do_move(m+max);
-
-	result = - evaluate( -Alpha-1, -Alpha );
-
-	if( result > Alpha )   /* let's look better at this move */
-	{
-		Depth+=extend;
-		result = - evaluate( -Beta, -Alpha );
-/*
-undo_move(m+max);
-printboard(NULL); printm( m[max], NULL ); printf("ext=%i",extend);
-if( result <= Alpha ) printf("[+]"); else printf("[-]");
-do_move(m+max);
-getchar();
-*/
-		Depth-=extend;
-	}
-
-	undo_move(m+max);
-
-	FollowPV = 0;
-
-	if( result > Alpha ) /* still better? ok, we can trust it. */
-	{
-		update_PV( m[max], Ply );
-		Alpha = result;
-		if(Alpha>=Beta) return Alpha;
-		extend=0;
-	}
-
-	m[max] = m[i];
-}
-
-return Alpha;
-
-}
-
-
-
 int search(
 	tmove *m, /* move list */
 	int n,    /* number of moves */
@@ -155,7 +44,7 @@ if( Abort && ! NoAbort ) return 0;
 /*** internal iterative deepening ***/
 #define IID
 #ifdef IID
-if( Depth > 200 )
+if( Depth > 200 && Beta-Alpha>1 )
 {
 	int max=0;
 	for( i=1; i!=n; i++ ) if( m[i].value > m[max].value ) max=i;
@@ -215,6 +104,10 @@ for( i=0; i!=n; i++ )
 		{ m[max].value = (CHECKMATE-5000)+Depth; return Alpha; }
 		maxi = i;
 	}
+	else if( i==0 && Depth>0 ) update_PV( m[max], Ply );
+	/* The line above helps to maintain a nice long PV in those rare
+	 * cases, where negascout is not able to confirm the fail-high
+	 * and then truncates the PV. */
 
 	{ tmove mo=m[max]; m[max] = m[i]; m[i] = mo; }
 }
@@ -337,16 +230,18 @@ if( Flag.log != NULL )
 if( Flag.book )
 if( Counter < 20 || Bookout < 4 || Flag.analyze )
 {
-	int b = 0;
+	int b;
 
-	if( Flag.easy && Counter > 4 )
-	{ if( rand()%128 < Flag.easy+Counter*4 ) b = -1; }
-
-	if( b==0 ) b = bookmove( m, n );
+	if( Flag.easy && Flag.easy<100 && Counter>4
+	&& rand()%5000 < Counter*(150-Flag.easy) )
+		b = -1;
+	else
+		b = bookmove( m, n );
 
 	if( b != -1 )
 	{
-		/* PV[0][0] = m[b]; */
+		if( Flag.easy && Flag.easy<100 )
+			usleep( (rand()%10000) * (150-Flag.easy) );
 		Bookout = 0;
 		PV[0][1].from = 0;   /* dont start pondering */
 		m[b].value = 0;
@@ -374,15 +269,34 @@ else
 
 	Ply = 0;
 
-	LastIter = Alpha = sort_root_moves( m, n );
+	if(!Flag.easy)
+		LastIter = Alpha = sort_root_moves( m, n );
+	else
+	{
+		/* Easy levels: Let's shuffle the moves to add randomness.
+		 * Just not for the first move so that we can repeat
+		 * test runs on positions with the same results */
+		int i;
+		if( Counter>1 )
+		for( i=1; i<n; i++ )
+		{
+			tmove mm;
+			int ii = rand()%(i+1);
+			mm=m[i]; m[i]=m[ii]; m[ii]=mm;
+		}
+
+		LastIter = Alpha = -CHECKMATE;
+	}
+
 	LastTurn = ptime();
 
 	if( EasyMove == 3 && ! Flag.analyze ) { do_move(m); return m[0]; }
 
 	FollowPV = 1;
 	NoAbort = 0;
-	Depth = 290; Ply = 0;
-	A_d = 2;
+	if(Flag.easy) Depth=90; else Depth = 290;
+	Ply = 0;
+	A_d = Depth/100;
 
 	memset( Nod, 0, 256*sizeof(int) );
 
@@ -510,7 +424,7 @@ else
 				ipom = Nod[i] = Nodes-lastnodes;
 				/* bubble up */
 				pom = m[i];
-				for( j=i; j>bgs+1 && Nod[i]>Nod[j-1]; j-- )
+				for( j=i; j>bgs+1 && ipom>Nod[j-1]; j-- )
 				{ m[j] = m[j-1]; Nod[j] = Nod[j-1]; }
 				m[j] = pom; Nod[j] = ipom;
 			}

@@ -24,11 +24,12 @@ printf("\n"
        "          -x <+/->  xboard mode on/off        default: on\n"
        "          -p <+/->  permanent brain on/off    default: off\n"
        "          -s <+/->  show thinking on/off      default: off\n"
-       "           -c <+/->  cpu time                  default: off\n"
+       "          -c <+/->  cpu time                  default: off\n"
        "          -o <+/->  polling input             default: on\n"
        "          -b <+/->  opening book              default: on\n"
        "          -r <resign value in centipawns>     default: 0 (no resigning)\n"
-       "          -e <easy level 0...100>             default: 0 (best play)\n"
+       "          -e <easy level 0...99>              default: 0 (best play)\n"
+       "          -e <NPS limit, min limit is 100>    default: 0 (no limit)\n"
        "          -l <+/->  learning on/off           default: on\n"
        "          -v        print version and exit\n"
        "          -P <primary book directory>\n"
@@ -191,7 +192,7 @@ switch(c)
 		{
 		static int e;
 		if( sscanf( optarg, "%i", &e ) == 0 ) badoptions();
-		if( e > 100 ) badoptions();
+		if( e < 0 ) badoptions();
 		Flag.easy = e;
 		} break;
 	case 'p': switch(*optarg)
@@ -282,8 +283,8 @@ default: badoptions();
 }
 
 if( Flag.easy )
-{ SizeHT = 0; Flag.ponder = 0; Flag.learn = 0; }
-else
+{ Flag.learn = 0; Flag.ponder = 0; if( Flag.easy<100 ) SizeHT = 0; }
+
 if( SizeHT != 0 )
 {
 	HT = calloc( SizeHT, sizeof(thashentry) );
@@ -420,7 +421,12 @@ if( Learn.f == NULL && Flag.learn )
 
 printf("tellics set 1 Phalanx "); printf(VERSION);
 if( Flag.easy )
+{
+	if( Flag.easy < 100 )
 	printf(", easy level %i\n", Flag.easy );
+	else
+	printf(", nodes per second limit = %i\n", Flag.easy );
+}
 else
 	printf(", %i kB hashtable, %i/%i kB P/S opening book", (int)(((1+SizeHT)*sizeof(thashentry)-1)/1024),(int)(Pbook.filesize/1024), (int) (Sbook.filesize/1024));
 printf("\n");

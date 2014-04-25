@@ -260,8 +260,8 @@ void gnuprintm(tmove m)
 
 switch( m.special )
 {
-  case LONG_CASTLING:  printf("o-o-o"); return;
-  case SHORT_CASTLING: printf("o-o"); return;
+  case LONG_CASTLING:  printf("O-O-O"); return;
+  case SHORT_CASTLING: printf("O-O"); return;
 }
 
 printf( "%c%c%c%c%c",
@@ -487,7 +487,7 @@ void printPV( int mpl, int lid, char *s )
 #else
 	for(j=0;PV[0][j].from;j++)
 	{
-		if( j%mpl == 0 && j != 0 && Flag.xboard!=2 )
+		if( j%mpl == 0 && j != 0 && Flag.xboard<2 )
 		{
 			int i;
 			sprintf( ss+strlen(ss), "\n" );
@@ -532,7 +532,7 @@ if( Flag.log && s==NULL )
 	fprintf(Flag.log,"%s", ss);
 }
 
-if( Flag.xboard == 2 )
+if( Flag.xboard > 1 )
 switch( typ )
 {	case 0: /* ICS whispering */
 		if( Flag.ponder<2 && Flag.xboard>1 && typ==0 )
@@ -699,7 +699,7 @@ tgamenode p, q;
    {
      fprintf(Flag.log,"\n\nsetting position\n%s\n\n",f);
    }
-   if (Flag.xboard != 0)
+   if (Flag.xboard > 0)
       errmsg = errstring;
    else  /* interactive mode */
       errmsg = strchr(errstring, ' ') + 1; /* skip "tellusererror" */
@@ -1106,18 +1106,27 @@ int command(void)
 	}
 
 /* COMMAND: protover */
-/* added by Bernhard Pruemmer */
+/* added by Bernhard Pruemmer, amended by DD */
 	if( strncmp( Inp, "protover", 8 ) == 0 )
 	{
-		puts("feature "
-           "myname=\"" ENGNAME " " VERSION "\" "
-           "analyze=1 "
+	   printf("feature myname=\"" ENGNAME " " );
+	   if(Flag.easy)
+	   { if(Flag.easy>=100) printf("NPS ");
+	     else printf("Easy ");
+	     printf("%i\"\n",Flag.easy);
+	   }
+	   else printf(VERSION"\"\n");
+
+           printf("feature analyze=1 "
            "setboard=1 "
            "sigint=1 "
            "time=1 "
            "draw=0 "
+           "ping=1 \n"
            );
-		Inp[0]='\0'; return 1;
+	   puts("feature done=1");
+	   Flag.xboard=20; /* version 2 */
+	   Inp[0]='\0'; return 1;
 	}
 
          
@@ -1235,6 +1244,15 @@ int command(void)
 		Inp[0]='\0'; return 1;
 	}
 
+/* COMMAND: ping */
+	if( strncmp( Inp, "ping", 4 ) == 0 )
+	{
+		Inp[1]='o'; /* ping -> pong */
+		printf(Inp);
+		Inp[0]='\0'; return 1;
+	}
+
+
 /* COMMAND: time */
 	if( strncmp( Inp, "time ", 5 ) == 0 )
 	{
@@ -1294,7 +1312,11 @@ int command(void)
 	 || strncmp( Inp, "name ", 5 ) == 0
 	 || strncmp( Inp, "random\n", 7 ) == 0
 	 || strncmp( Inp, "noise ", 6 ) == 0
+	 || strncmp( Inp, "result ", 7 ) == 0
+	 || strncmp( Inp, "accepted", 8 ) == 0
+	 || strncmp( Inp, "rejected", 8 ) == 0
 	 || strncmp( Inp, ".\n", 2 ) == 0
+	 || strncmp( Inp, "?\n", 2 ) == 0
 	)
 	{ /* ignore */ Inp[0]='\0'; return 1; }
 
@@ -1596,7 +1618,7 @@ while( command() )
 /*				 && m.value > -CHECKMATE+100	*/
 				)
 				{
-					if( Flag.xboard )
+					if( Flag.xboard>0 )
 						puts("tellics resign");
 					if( Color == WHITE )
 						puts("1-0 {Black resigns}");
@@ -1604,10 +1626,16 @@ while( command() )
 				}
 			}
 
-			printf("my move is "); printm( m, NULL );
-			if( Flag.xboard )
-			{ printf("\n%i. ... ",(Counter+1)/2); gnuprintm(m); }
-			puts("");
+			if( Flag.xboard >= 20 )
+			{ printf("move "); gnuprintm(m); printf("\n"); }
+			else
+			  {
+			  printf("my move is "); printm( m, NULL );
+
+			  if( Flag.xboard>0 )
+			  { printf("\n%i. ... ",(Counter+1)/2); gnuprintm(m); }
+			  puts("");
+			}
 
 			switch( ( ter = terminal() ) )
 			{

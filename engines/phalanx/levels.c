@@ -9,8 +9,6 @@ long Otim = 600*100;
 /* return time in centiseconds */
 long ptime(void)
 {
-	if( Flag.easy ) return Nodes;
-	else
 	if( Flag.cpu ) return ((double)clock())*100/CLOCKS_PER_SEC;
 	else
 	{
@@ -37,7 +35,6 @@ void l_level( char * l )
 	while( *l == ' ' ) l++;
 
 	if( *l == '\n' || *l == '\0' )
-	if( ! Flag.easy )
 	{
 		printf("fixed time %i seconds\n", moves );
 		Flag.level = fixedtime; Flag.centiseconds = moves*100;
@@ -68,24 +65,11 @@ void l_level( char * l )
 		 "level: %i moves in %i:%02i, increment %i seconds\n",
 		 moves, minutes, seconds, increment );
 
-	if( Flag.easy )
-	{
-		if( moves == 0 ) moves = 80;
-		Flag.level = fixedtime;
-		Flag.centiseconds =
-			(increment+minutes*60/moves)
-			* (150-Flag.easy);
-		if( Flag.post )
-		printf( "setting avg time to %i cs\n", Flag.centiseconds );
-	}
-	else
-	{
-		Flag.level = timecontrol;
-		Flag.moves = moves;
-		Flag.centiseconds = minutes*6000+seconds*100;
-		Flag.increment = increment;
-		Time = Flag.centiseconds;
-	}
+	Flag.level = timecontrol;
+	Flag.moves = moves;
+	Flag.centiseconds = minutes*6000+seconds*100;
+	Flag.increment = increment;
+	Time = Flag.centiseconds;
 }
 
 
@@ -94,6 +78,20 @@ void l_startsearch(void)
 {
 	int moves;
 	T1 = ptime();
+
+	/* Adjust the DrawScore to avoid long boring drawish endgames.
+	 * The default DrawScore is -20; Phalanx tries to avoid draws.
+	 * That's good, but I have observed too many games that ended
+	 * with the 50 moves rule draw, where the engine played
+	 * an KR vs KR endgame. The code below fixes that behaviour. */
+	if(
+		Counter>=80  /* Counter==80 is move #40 */
+		&&
+		(
+			   ( DrawScore <  0 && G[Counter].mtrl <= 3*R_VALUE )
+			|| ( DrawScore < 10 && G[Counter].mtrl <= R_VALUE )
+		)
+	  ) DrawScore++;
 
 	switch( Flag.level )
 	{
@@ -184,8 +182,24 @@ int l_iterate(void)
 			case 1:  return ( t <= T1 + T2/3 );
 			case 2:  return ( t <= T1 + T2/6 );
 			default:
-				if( Turns==0 ) return ( t <= T1 + T2 );
-				else return ( t <= T1 + T2*(8+Turns)/8 );
+				/* fix to avoid being flagged too often
+				 * at very low NPS */
+				if( Flag.easy && Flag.easy<100 ) 
+				{
+				  if( Depth <= 100 )
+				  return ( t <= T1 + T2/4 );
+				  if( Depth<=200 )
+				  return ( t <= T1 + T2/3 );
+				  else
+				  return ( t <= T1 + T2/2 );
+				}
+				else
+				{
+				  if( Turns==0 )
+					return ( t <= T1 + T2 );
+				  else
+					return ( t <= T1 + T2*(8+Turns)/8 );
+				}
 		}
 	}
 	else

@@ -10,13 +10,11 @@
 #define EXTENSION_BASE 60
 
 #define NULL_MOVE_PRUNING 300
-#define FORWARD_PRUNING
 
 #define RECAPTURE_EXTENSIONS
 #define PEE_EXTENSIONS     /* entering kings+pawns endgame extends */
 #define CHECK_EXTENSIONS
 #define PAWNPUSH_EXTENSIONS
-#undef PAWNSTRIKE_EXTENSIONS
 
 #define minmv (P_VALUE)
 
@@ -27,7 +25,7 @@
 ***   Phalanx uses very simple implementation of static-eval cache.
 ***   It eats 512 kB and makes it about 10% faster on a 486.
 **/
-#define CACHE
+#undef CACHE
 #ifdef CACHE
 unsigned * C; /* 64k entries of 4 bytes: 256kB */
 #endif
@@ -37,60 +35,68 @@ unsigned * C; /* 64k entries of 4 bytes: 256kB */
 void blunder( tmove *m, int *n )
 {
 int i;
-int initp = Flag.easy;
+int initp = 100-Flag.easy;
 
 /* quick look (small Depth) makes blunders */
 initp -= Depth/10;
 
 /* deep nodes are difficult to compute */
-initp += Ply*2;
+initp += Ply*10;
 
 /* full board means more blunders */
 initp += (G[Counter].mtrl+G[Counter].xmtrl) / 200;
 
-if(Counter>1)
-for( i=(*n)-1; i>=0 && (*n)>4; i-- )
+if(Counter>2)
+for( i=(*n)-1; i>=1 && (*n)>4; i-- )
 {
 	/* compute the probability this move is not seen */
 	int p = initp;
 
-	/* being blind to recaptures is too stupid, see them */
 	if( m[i].to == G[Counter-1].m.to )
-	p -= 30;
+	{
+		/* being blind to recaptures is too stupid, see them */
+		if( G[Counter-1].m.in2 ) p -= 100;
+		else p += 20;
+		/* previous move was not a capture - we believe it was safe */
+	}
 
-	/* same for pawn captures */
+	/* We focus on the piece that moved 2 plies ago and see the
+	 * moves of the same piece */
+	if( m[i].from == G[Counter-2].m.to ) p -= 100;
+
+	/* not blind to pawn captures */
 	if( m[i].in2 != 0 && piece(m[i].from)==PAWN )
-	p -= 40;  /* another bonus for this is in the next section */
+	p -= 20;  /* another bonus for this is in the next section */
 
 	/* same for very short captures */
 	switch( dist[120*m[i].from+m[i].to].max )
-	{ case 0: case 1: p -= 80; break;
-	  case 2: p -= 50; break;
-	  case 3: p -= 10; break;
+	{ case 0: case 1: p -= 100; break;
+	  case 2: p -= 80; break;
+	  case 3: p -= 30; break;
 	}
 
 	/* underpromotions? too precise! */
 	if( m[i].in1 != m[i].in2a  &&  piece(m[i].in2a) != QUEEN )
-	p += 10;
+	p += 5;
 	else
-	p -= 10;
+	p -= 5;
 
 	/* dont see long moves, especially diagonal ones */
-	p += dist[120*m[i].from+m[i].to].taxi * 2;
+	p += dist[120*m[i].from+m[i].to].taxi * 5;
 
-	/* dont see some knight moves */
+	/* dont see some knight moves - remove the short distance bonus */
 	if( piece(m[i].in1) == KNIGHT )
-	p += 10;
+	p += 80;
 
 	/* going backward?  (white)Bf6xc3 is much more difficult
 	 * to see than (white)Bc3xf6 ***/
 	if( Color==WHITE )
-		p += 3 * ( m[i].to/10 - m[i].from/10 );
+		p += 10 * ( m[i].to/10 - m[i].from/10 );
 	else
-		p += 3 * ( m[i].from/10 - m[i].to/10 );
+		p += 10 * ( m[i].from/10 - m[i].to/10 );
 
-	if( rand()%128 < p )
-	{ m[i] = m[(*n)-1]; (*n)--; }
+	if( rand()%300 < p )
+	{ m[i] = m[(*n)-1]; (*n)--; /* printf("[%i]",p); */ }
 }
 }
 
@@ -231,12 +237,12 @@ int evaluate( int Alpha, int Beta )
 {
 
 static int timeslice = 2000;
+static int polslice = 4000;
 int result;
 tmove m[256]; int n;  /* moves and number of moves */
 thashentry *t;
 int check;
 int lastiter;
-int depthplus = 0;
 int totmat = Totmat = G[Counter].mtrl+G[Counter].xmtrl;
 
 if(Ply%2) lastiter = -LastIter; else lastiter = LastIter;
@@ -256,21 +262,20 @@ if( ( Nodes % timeslice ) == 0 && !Flag.analyze )
 	  Nodes * t / ( Flag.centiseconds - t ) * 2 / 3;
 
 	if( timeslice > 5*Flag.centiseconds ) timeslice = 5*Flag.centiseconds;
-	if( timeslice < 50 ) timeslice = 50;
+	if( timeslice < 50 ) timeslice=50;
 }
 
 {
-	static int slice = 4000;
 	static int64 lnodes = 0;
-	if( lnodes + slice < Nodes || Nodes == 1 )
+	if( lnodes + polslice < Nodes || Nodes == 1 )
 	{
 		static long lptime = 0;
 		long nptime = ptime();
 
 		if( nptime == lptime ) nptime++;
 
-		if( nptime - lptime < 100 ) slice = slice*11/10;
-		else slice = slice*10/11;
+		if( nptime - lptime < 100 ) polslice = polslice*11/10;
+		else { polslice = polslice*10/11; }
 
 		lptime = nptime;
 
@@ -305,7 +310,7 @@ if(Flag.polling)
 
   /* If we're running under XBoard then we can't use _kbhit() as the input commands
    * are sent to us directly over the internal pipe */
-  if (Flag.xboard) {
+  if (Flag.xboard>0) {
 #if defined(FILE_CNT)
     if (stdin->_cnt > 0) return stdin->_cnt;
 #endif
@@ -353,15 +358,6 @@ if( G[Counter].mtrl<400 && G[Counter].mtrl<400 )
 if( material_draw() )
 { PV[Ply][Ply].from=0; return DRAW; }
 
-/*
-if( Depth <= -200 && G[Counter].rule50 >= 3 )
-{ printboard();
-  printf("[depth=%i]",Depth);
-  printm(G[Counter-1].m,NULL);
-  getchar();
-}
-*/
-
 if( G[Counter].rule50 >= 3 )
 if( repetition(1) ) /* third rep. draw */
 {
@@ -389,7 +385,7 @@ if( repetition(1) ) /* third rep. draw */
 /********************************************************************
  *     Now it is time to look into the hashtable.
  ********************************************************************/
-if( SizeHT == 0 ) t = NULL;
+if( SizeHT == 0 || Depth<0 ) t = NULL;
 else
 if( (t=seekHT()) != NULL )
 if( t->depth >= Depth || ( Depth<300 && abs(t->value)>CHECKMATE-1000 ) )
@@ -433,42 +429,19 @@ G[Counter].check = check = checktest(Color);
 
 if( Depth>0 || check )
 {
-	result = approx_eval();
 
-#ifdef FORWARD_PRUNING
-	if(  Depth < 100 && ! check && Totmat > 2000 && ( Color==WHITE ? Wknow.prune : Bknow.prune ))
-	{
-		if( result-devi[Ply] >= Beta )
-			return Beta;
-		else
-		if( result-devi[Ply] > Alpha )
-			Alpha = result-devi[Ply];
-	}
-#endif
+	if(Depth<=0) result = approx_eval();
+	else         result = static_eval();
 
-	if(Depth>0)
-	{ result = static_eval(); }
-
-#ifdef FORWARD_PRUNING
-	if(  Depth < 100 && ! check && Totmat > 2000 && ( Color==WHITE ? Wknow.prune : Bknow.prune ))
-	{
-		if( result >= Beta )
-			return Beta;
-		else
-		if( result > Alpha )
-			Alpha = result;
-	}
-#endif
 
 #ifdef NULL_MOVE_PRUNING
 	if(
-		   Depth >= 100
-		&& result+100 >= Beta
+		result+100 >= Beta
 		&& ( result >= Beta || Depth > NULL_MOVE_PRUNING )
 		&& ! FollowPV
 		&& ! check
 		&& G[Counter].mtrl > Q_VALUE+B_VALUE        /* zugzwang fix */
-/*		&& G[Counter-1].m.special != 20 */  /* prev. node not nullm */
+/*		&& G[Counter-1].m.special != NULL_MOVE */  /* prev. node not nullm */
 		&& ( t==NULL || t->depth <= Depth-NULL_MOVE_PRUNING
 		  || t->result==beta_cut || t->value >= Beta )
 	)
@@ -480,7 +453,7 @@ if( Depth>0 || check )
 		tmove m[256]; int n;  /* moves and number of moves */
 
 		G[Counter].m.in1 = 0; /* disable en passant */
-		G[Counter].m.special = 20;
+		G[Counter].m.special = NULL_MOVE;
 		G[Counter].m.to = 2;
 		Counter ++; Ply ++;
 		G[Counter].castling = G[Counter-1].castling;
@@ -507,7 +480,10 @@ if( Depth>0 || check )
 		}
 
 		if( n!=0 )
-		value = -search( m, n, alpha, CHECKMATE );
+		{
+			add_killer( m, n, NULL );
+			value = -search( m, n, alpha, alpha+1 );
+		}
 		else
 		{ if(Depth!=0) value=Alpha; else value=result; }
 
@@ -517,11 +493,6 @@ if( Depth>0 || check )
 		Totmat = totmat;
 
 		if( value >= Beta ) { result = value; goto end; }
-
-		if( value > Alpha ) Alpha = value;
-		else
-		if( value < -CHECKMATE+P_VALUE && Alpha > -CHECKMATE+Q_VALUE )
-			if( Depth <= 300 ) depthplus = (160-EXTENSION_BASE);
 	}
 #endif
 
@@ -536,7 +507,7 @@ if( Depth>0 || check )
 	}
 
 #ifdef CHECK_EXTENSIONS
-	if( check )                 /* extend the lines */
+	if( check && Depth>0 )       /* extend the lines */
 	{
 		if( result>lastiter-50 && result>-250 )
 		{
@@ -565,77 +536,6 @@ if( Depth>0 || check )
 		}
 		else  /* losing anyway */
 		{ int i; for( i=0; i!=n; i++ ) m[i].dch = 60; }
-	}
-#endif
-
-#ifdef PAWNSTRIKE_EXTENSIONS
-	if( piece(G[Counter-1].m.in1) == PAWN )
-	if(result>lastiter-50 && result>-250) /* winning anyway: dont extend */
-	{
-		/* Look at the targets of previous enemy move.
-		 * If it seems to be dangerous, extend all safe
-		 * captures of enemy's last moved pawn. */
-		int i;
-		int nex = 0;
-		int squ = G[Counter-1].m.to;
-		int t1=0, t2=0;
-		int newdch = EXTENSION_BASE-49;
-
-		if(Ply==1) newdch = (newdch+100) >> 1;
-
-		if( Color == WHITE ) /* targets of black p. */
-		{
-			if( color(B[squ-11]) == WHITE )
-			if( B[squ-11] >= KNIGHT )
-				t1 = squ-11;
-			if( color(B[squ-9]) == WHITE )
-			if( B[squ-9] >= KNIGHT )
-				t2 = squ-9;
-		}
-		else
-		{
-			if( color(B[squ+11]) == BLACK )
-			if( B[squ+11] >= KNIGHT )
-				t1 = squ+11;
-			if( color(B[squ+9]) == BLACK )
-			if( B[squ+9] >= KNIGHT )
-				t2 = squ+9;
-		}
-
-		if( t1 || t2 )
-		{
-			/* find all safe captures of the agressor */
-			for( i=0; i!=n; i++ ) if( m[i].to == squ )
-			if( piece(m[i].in1) == PAWN
-			 || ! attacktest( squ, enemy(Color) ) )
-			{ m[i].dch = newdch; nex ++; }
-
-			if( nex == 0 ) /* find all safe escapes */
-			for( i=0; i!=n; i++ ) if( m[i].dch == 100 )
-			if( ( t1 && m[i].from == t1 )
-			 || ( t2 && m[i].from == t2 ) )
-			if( ! attacktest( m[i].to, enemy(Color) )
-			 || Values[m[i].in2>>4] >= Values[m[i].in1>>4] )
-			if( newdch < m[i].dch )
-			{ m[i].dch = newdch; nex++; }
-
-			if( nex > 1 ) for(i=0;i!=n;i++)
-			if(m[i].dch==newdch) m[i].dch=100;
-# undef debug
-# ifdef debug
-			if( nex == 1 )
-			{
-			printboard(); printm( G[Counter-1].m, NULL );
-			puts("");
-			for( i=0; i!=n; i++ ) if( m[i].dch != 100 )
-			{
-				printm( m[i], NULL );
-				printf("/ %i  ", m[i].dch );
-			}
-			getchar();
-			}
-# endif
-		}
 	}
 #endif
 
@@ -745,12 +645,6 @@ else
 
 	result = approx_eval();
 
-	if( Depth < -400 )
-	{
-		PV[Ply][Ply].from=0;
-		goto end;
-	}
-
 	if( ( result < Beta+devi[Ply] && result > Alpha-devi[Ply] )
 	 || Totmat<=(B_VALUE+P_VALUE) )
 	result = static_eval();
@@ -775,7 +669,7 @@ else
 }
 
 #ifdef RECAPTURE_EXTENSIONS
-	if( G[Counter-1].m.in2 )
+	if( Depth>0 && G[Counter-1].m.in2 )
 	if( result<lastiter+50 && result<250 )   /* winning anyway: dont */
 	{
 		int i, t=G[Counter-1].m.to;
@@ -839,14 +733,47 @@ add_killer( m, n, t );
 
 PV[Ply][Ply].from = 0;
 
-/* easy levels: be blind: forget about some long and knight captures */
-if( Flag.easy && n>10 ) blunder(m,&n);
+if( Flag.easy )
+{
+	/* easy levels below 100
+	 * be blind: forget about some long and knight captures */
+	if( n>10 && Flag.easy<100 ) blunder(m,&n);
+
+	/* timecontrol fix */
+	if( polslice > Flag.easy+200 ) polslice=Flag.easy+200;
+
+	/* Now limit the NPS, lowest value is 100.
+	 * For higher values of easy levels like 50000 nps, there's no need
+	 * to check for the limit and call ptime() at every node,
+	 * hence the condition below */
+	if( Nodes%(1+Flag.easy/500)==0 )
+	{
+		int nps_actual = Nodes*100/max(ptime()-T1,1);
+		int nps_target = Flag.easy;
+
+		if( nps_target < 100 ) nps_target += 100;
+
+		/* Blundering easy levels:
+		 * below 10 seconds stoptime for move we raise NPS somewhat
+		 * to avoid being flagged often at fast timecontrols.
+		 * The blunders are still being added to the search.
+		 * This is to be able to play at faster time controls.
+		 * We don't care about non-blundering low NPS levels,
+		 * these cannot be used at very fast blitz. */
+		if( Flag.easy<100 && T2<1000 )
+		{
+			nps_target += (1000-T2)/4;
+			/* printf("[%li]\n",T2); */
+		}
+
+		if( nps_actual > nps_target ) usleep(100000);
+	}
+}
 
 /*** Full-width search ***/
 if( Depth>0 || check )
 {
-	if( depthplus ) result = csearch(m,n,Alpha,Beta,depthplus);
-	else result = search(m,n,Alpha,Beta);
+	result = search(m,n,Alpha,Beta);
 }
 else /*** Quiescence ***/
 {
@@ -861,7 +788,7 @@ end:
 if( result>=Beta && Depth>0 )
 	write_killer( G[Counter].m.from, G[Counter].m.to );
 
-if( SizeHT != 0 && Abort == 0 ) writeHT( result, Alpha, Beta );
+if( SizeHT != 0 && Depth >= 0 && Abort == 0 ) writeHT( result, Alpha, Beta );
 
 /**
 ***    Check learning file.
