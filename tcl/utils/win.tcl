@@ -549,36 +549,39 @@ proc ::docking::__dock {wnd} {
   $dsttab select $wnd
 }
 
-################################################################################
-proc ::docking::add_tab {path anchor args} {
+
+proc ::docking::add_tab {path args} {
+  # (args currently unused)
   variable tbs
   if { $::docking::layout_dest_notebook == ""} {
-    # scan all tabs to find the most suitable
+    ### Scan all tabs to find the most suitable
     set dsttab {}
 
     foreach tb [array names tbs] {
+      # Note - $x, $y, $h are currently never used as criteria
       set x [winfo rootx $tb]
       set y [winfo rooty $tb]
       set w [winfo width $tb]
       set h [winfo height $tb]
-      switch $anchor {
-        n { set rel {$y < $_y} }
-        w { set rel {$x < $_x} }
-        s { set rel {$y > $_y} }
-        e { set rel {$x > $_x} }
-      }
-      # give some windows the largest (widest) pane
+      set tabcount [llength [$tb tabs]]
+
+      ### Some windows the largest (widest) pane
       if {($path == ".fdockfics" && $tb != ".nb")||
            $path == ".fdocktbWin" ||
            $path == ".fdockcrosstabWin" ||
            $path == ".fdockglistWin"} {
         set rel {$w > $_w}
+      } else {
+        ### Others get the least crowded
+        # todo: make some get a small/medium sized paned window
+        set rel {$tabcount < $_tabcount && $tb != ".nb"}
       }
       if {$dsttab==""} {
         set dsttab $tb
         set _x $x
         set _y $y
         set _w $w
+	set _tabcount $tabcount
         # hack to give fics another tab
         # if {$tb == ".nb"} {set _w 0}
       } elseif { [expr $rel] } {
@@ -586,6 +589,7 @@ proc ::docking::add_tab {path anchor args} {
         set _x $x
         set _y $y
         set _w $w
+	set _tabcount $tabcount
       }
     }
   } else  {
@@ -601,8 +605,9 @@ proc ::docking::add_tab {path anchor args} {
   set ::docking::changedTab($dsttab) 0
   update
 }
-################################################################################
-# display a blue triangle showing the tab has a menu associated
+
+### Display a blue triangle showing the tab has a menu associated
+
 proc ::docking::setMenuMark { nb tab} {
   if { $tab == ".fdockpgnWin" || \
        $tab == ".fdockccWindow" || \
