@@ -34,10 +34,6 @@ namespace eval tacgame {
 
   set lastblundervalue 0.0
   set prev_lastblundervalue 0.0
-  set blundermissed false
-  set blunderwarning false
-  set blunderwarningvalue 0.0
-  set blundermissedvalue 0.0
 
   set blunderWarningLabel $::tr(Noblunder)
   set scoreLabel 0.0
@@ -52,7 +48,6 @@ namespace eval tacgame {
   # (See also tcl/start.tcl)
 
   proc resetValues {} {
-    set ::tacgame::blundermissed false
     set ::tacgame::lastblundervalue 0.0
     set ::tacgame::prev_lastblundervalue 0.0
     set ::tacgame::prev_blunderpending 0
@@ -492,7 +487,7 @@ namespace eval tacgame {
     button $w.fbuttons.close -textvar ::tr(Abort) -command ::tacgame::abortGame
     pack $w.fbuttons.close -expand yes -fill both -padx 10 -pady 2
 
-    ::tacgame::launchengine $phalanx
+    ::tacgame::launchPhalanx $phalanx
     ::uci::startEngine $toga 
     set ::uci::uciInfo(multipv$toga) 1
     changePVSize $toga
@@ -543,16 +538,7 @@ namespace eval tacgame {
     ::tacgame::closeEngine $::tacgame::toga
   }
 
-  # ======================================================================
-  #   ::tacgame::launchengine
-  #  - launches both engines
-  #  - updates values for :
-  #       blundermissed (boolean), blunderwarning (boolean)
-  #       blunderwarningvalue (real), blundermissedvalue (real)
-  #       totalblundersmissed (real), totalblunders (real)
-  # ======================================================================
-
-  proc launchengine {n} {
+  proc launchPhalanx {n} {
     global ::tacgame::analysisCoach ::tacgame::level
 
     ::tacgame::resetEngine $n

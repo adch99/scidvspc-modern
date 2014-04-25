@@ -124,8 +124,6 @@ set ::MAX_GAMES [sc_info limit games]
 set ::pause 0
 set ::defaultBackground white
 set ::tacgame::threshold 0.9
-set ::tacgame::blunderwarning false
-set ::tacgame::blunderwarningvalue 0.0
 set ::tacgame::levelMin 1200
 set ::tacgame::levelMax 2200
 set ::tacgame::levelFixed 1500
