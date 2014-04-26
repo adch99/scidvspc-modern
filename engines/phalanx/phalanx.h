@@ -144,6 +144,7 @@ typedef struct
 	analyze,
 	polling;       /* polling input */
   tlevel level;
+  int nps;
   int easy;
   FILE	* log;
 } tflag;

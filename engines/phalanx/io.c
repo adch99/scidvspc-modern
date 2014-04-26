@@ -1032,6 +1032,11 @@ if( Flag.easy )
 printf(" Easy level ............ %i\n",Flag.easy);
 }
 
+if( Flag.nps )
+{
+printf(" Nodes/second limit .... %i\n",Flag.nps);
+}
+
 printf(" Resigning ............. ");
 if( Flag.resign ) printf("%i.%02i\n",Flag.resign/100,Flag.resign%100);
 else printf("off\n");
@@ -1111,10 +1116,9 @@ int command(void)
 	{
 	   printf("feature myname=\"" ENGNAME " " );
 	   if(Flag.easy)
-	   { if(Flag.easy>=100) printf("NPS ");
-	     else printf("Easy ");
-	     printf("%i\"\n",Flag.easy);
-	   }
+	   { printf("Easy %i\"\n",Flag.easy); }
+	   else if(Flag.nps)
+	   { printf("%i NPS\"\n",Flag.nps); }
 	   else printf(VERSION"\"\n");
 
            printf("feature analyze=1 "

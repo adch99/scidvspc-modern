@@ -28,8 +28,8 @@ printf("\n"
        "          -o <+/->  polling input             default: on\n"
        "          -b <+/->  opening book              default: on\n"
        "          -r <resign value in centipawns>     default: 0 (no resigning)\n"
-       "          -e <easy level 0...99>              default: 0 (best play)\n"
-       "          -e <NPS limit, min limit is 100>    default: 0 (no limit)\n"
+       "          -e <easy level 0...100>             default: 0 (best play)\n"
+       "          -n <NPS limit, min limit is 100>    default: no limit\n"
        "          -l <+/->  learning on/off           default: on\n"
        "          -v        print version and exit\n"
        "          -P <primary book directory>\n"
@@ -148,6 +148,7 @@ Flag.cpu = 0;
 Flag.increment = 0;
 Flag.polling = 1;
 Flag.resign = 0;
+Flag.nps = 0;
 Flag.easy = 0;
 Flag.noise = 50;         /* 0.5 s */
 Flag.learn = 1;
@@ -163,10 +164,10 @@ LbookDir = NULL;
 opterr = 0;
 
 #ifdef GNUFUN
-while( ( c = getopt_long( argc, argv, "vf:T:t:p:s:x:c:o:r:b:e:l:S:P:L:g:",
+while( ( c = getopt_long( argc, argv, "vf:T:t:p:s:x:c:o:r:b:n:e:l:S:P:L:g:",
 			  longopts, &indexptr) ) != -1 )
 #else
-while( ( c = getopt(argc,argv,"vf:T:t:p:s:x:c:o:r:b:e:l:S:P:L:g:") ) != -1 )
+while( ( c = getopt(argc,argv,"vf:T:t:p:s:x:c:o:r:b:n:e:l:S:P:L:g:") ) != -1 )
 #endif
 switch(c)
 {
@@ -194,6 +195,13 @@ switch(c)
 		if( sscanf( optarg, "%i", &e ) == 0 ) badoptions();
 		if( e < 0 ) badoptions();
 		Flag.easy = e;
+		} break;
+	case 'n':
+		{
+		int n;
+		if( sscanf( optarg, "%i", &n ) == 0 ) badoptions();
+		if( n < 100 ) badoptions();
+		Flag.nps = n;
 		} break;
 	case 'p': switch(*optarg)
 	{	case '+': Flag.ponder = 1; break;
@@ -283,7 +291,10 @@ default: badoptions();
 }
 
 if( Flag.easy )
-{ Flag.learn = 0; Flag.ponder = 0; if( Flag.easy<100 ) SizeHT = 0; }
+{
+	Flag.learn = 0; Flag.ponder = 0; SizeHT = 0;
+	if( Flag.nps==0 ) Flag.nps=500;
+}
 
 if( SizeHT != 0 )
 {
@@ -420,12 +431,13 @@ if( Learn.f == NULL && Flag.learn )
 { Flag.learn=0; puts("telluser Phalanx: cannot open learn file"); }
 
 printf("tellics set 1 Phalanx "); printf(VERSION);
-if( Flag.easy )
+if( Flag.easy || Flag.nps )
 {
-	if( Flag.easy < 100 )
-	printf(", easy level %i\n", Flag.easy );
-	else
-	printf(", nodes per second limit = %i\n", Flag.easy );
+	if( Flag.easy )
+	printf(", easy level %i", Flag.easy );
+	if( Flag.nps )
+	printf(", nodes per second limit = %i", Flag.nps );
+	printf("\n");
 }
 else
 	printf(", %i kB hashtable, %i/%i kB P/S opening book", (int)(((1+SizeHT)*sizeof(thashentry)-1)/1024),(int)(Pbook.filesize/1024), (int) (Sbook.filesize/1024));

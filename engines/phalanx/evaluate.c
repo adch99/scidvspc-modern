@@ -35,7 +35,7 @@ unsigned * C; /* 64k entries of 4 bytes: 256kB */
 void blunder( tmove *m, int *n )
 {
 int i;
-int initp = 100-Flag.easy;
+int initp = Flag.easy;
 
 /* quick look (small Depth) makes blunders */
 initp -= Depth/10;
@@ -733,40 +733,22 @@ add_killer( m, n, t );
 
 PV[Ply][Ply].from = 0;
 
-if( Flag.easy )
+if( Flag.nps )
 {
-	/* easy levels below 100
-	 * be blind: forget about some long and knight captures */
-	if( n>10 && Flag.easy<100 ) blunder(m,&n);
+	if( Flag.easy )
+	{ if( n>10 && Flag.easy<100 ) blunder(m,&n); }
 
 	/* timecontrol fix */
 	if( polslice > Flag.easy+200 ) polslice=Flag.easy+200;
 
 	/* Now limit the NPS, lowest value is 100.
-	 * For higher values of easy levels like 50000 nps, there's no need
+	 * For higher values of nps levels like 50000 nps, there's no need
 	 * to check for the limit and call ptime() at every node,
 	 * hence the condition below */
-	if( Nodes%(1+Flag.easy/500)==0 )
+	if( Nodes%(1+Flag.nps/500)==0 )
 	{
 		int nps_actual = Nodes*100/max(ptime()-T1,1);
-		int nps_target = Flag.easy;
-
-		if( nps_target < 100 ) nps_target += 100;
-
-		/* Blundering easy levels:
-		 * below 10 seconds stoptime for move we raise NPS somewhat
-		 * to avoid being flagged often at fast timecontrols.
-		 * The blunders are still being added to the search.
-		 * This is to be able to play at faster time controls.
-		 * We don't care about non-blundering low NPS levels,
-		 * these cannot be used at very fast blitz. */
-		if( Flag.easy<100 && T2<1000 )
-		{
-			nps_target += (1000-T2)/4;
-			/* printf("[%li]\n",T2); */
-		}
-
-		if( nps_actual > nps_target ) usleep(100000);
+		if( nps_actual > Flag.nps ) usleep(100000);
 	}
 }
 

@@ -232,16 +232,16 @@ if( Counter < 20 || Bookout < 4 || Flag.analyze )
 {
 	int b;
 
-	if( Flag.easy && Flag.easy<100 && Counter>4
-	&& rand()%5000 < Counter*(150-Flag.easy) )
+	if( Flag.easy && Counter>4
+	&& rand()%5000 < Counter*(10+Flag.easy) )
 		b = -1;
 	else
 		b = bookmove( m, n );
 
 	if( b != -1 )
 	{
-		if( Flag.easy && Flag.easy<100 )
-			usleep( (rand()%10000) * (150-Flag.easy) );
+		if( Flag.easy )
+			usleep( (rand()%10000) * (50+2*Flag.easy) );
 		Bookout = 0;
 		PV[0][1].from = 0;   /* dont start pondering */
 		m[b].value = 0;
@@ -273,11 +273,8 @@ else
 		LastIter = Alpha = sort_root_moves( m, n );
 	else
 	{
-		/* Easy levels: Let's shuffle the moves to add randomness.
-		 * Just not for the first move so that we can repeat
-		 * test runs on positions with the same results */
+		/* Easy levels: Let's shuffle the moves to add randomness. */
 		int i;
-		if( Counter>1 )
 		for( i=1; i<n; i++ )
 		{
 			tmove mm;
@@ -294,7 +291,7 @@ else
 
 	FollowPV = 1;
 	NoAbort = 0;
-	if(Flag.easy) Depth=90; else Depth = 290;
+	if(Flag.nps<=500) Depth=90; else Depth = 290;
 	Ply = 0;
 	A_d = Depth/100;
 
