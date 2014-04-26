@@ -323,6 +323,10 @@ namespace eval fics {
       set ::fics::entrytime [clock milli]
       return 1
     }
+
+    entry $w.command.find -width 10 -textvariable ::fics::helpWin(find)
+    configFindEntryBox $w.command.find ::fics::helpWin $w.console.text
+
     button $w.command.send -textvar tr(FICSSend) 
     button $w.command.clear -textvar tr(Clear) -command "
       $w.console.text delete 0.0 end
@@ -376,11 +380,9 @@ namespace eval fics {
            bind $w.console.text <FocusIn> "focus $w.command.entry"
     }
 
-    entry $w.command.find -width 10 -textvariable ::fics::helpWin(find)
-    configFindEntryBox $w.command.find ::fics::helpWin $w.console.text
-
     pack $w.command.entry -side left -fill x -expand 1 -padx 3 -pady 2
-    pack $w.command.next $w.command.clear $w.command.send $w.command.find -side right -padx 3 -pady 2
+    pack $w.command.find  -side left                   -padx 3 -pady 2
+    pack $w.command.next $w.command.clear $w.command.send -side right -padx 3 -pady 2
     focus $w.command.entry
 
     # Gameclocks are used, but never packed in fics now
@@ -424,6 +426,11 @@ namespace eval fics {
     grid $w.bottom.buttons.offers       -column 2 -row $row -sticky w -padx 2 -pady 2
 
     incr row
+    button $w.bottom.buttons.info  -textvar tr(FICSInfo) -command {
+      ::fics::writechan finger
+      ::fics::writechan "inchannel $::fics::reallogin"
+      # ::fics::writechan history
+    }
     button $w.bottom.buttons.info2 -textvar tr(FICSOpponent) -command {
       set t1 [sc_game tags get Black]
       if {[string match -nocase $::fics::reallogin $t1]} {
@@ -432,11 +439,6 @@ namespace eval fics {
       if {$t1 != {} && $t1 != {?}} {
 	::fics::writechan "finger $t1"
       }
-    }
-    button $w.bottom.buttons.info  -textvar tr(FICSInfo) -command {
-      ::fics::writechan finger
-      ::fics::writechan "inchannel $::fics::reallogin"
-      # ::fics::writechan history
     }
     button $w.bottom.buttons.font -textvar tr(Font) -command {
       set fontOptions(temp) [FontDialog Fixed .fics]
@@ -477,8 +479,8 @@ namespace eval fics {
 
     incr row
     button $w.bottom.buttons.findopp -textvar tr(FICSFindOpponent) -command {::fics::findOpponent}
-    button $w.bottom.buttons.quit    -textvar tr(FICSQuit) -command {::fics::close}
     button $w.bottom.buttons.help    -textvar tr(Help) -command {helpWindow FICS}
+    button $w.bottom.buttons.quit    -textvar tr(FICSQuit) -command {::fics::close}
     grid $w.bottom.buttons.findopp -column 0 -row $row -sticky ew -padx 3 -pady 2
     grid $w.bottom.buttons.help    -column 1 -row $row -sticky ew -padx 3 -pady 2
     grid $w.bottom.buttons.quit    -column 2 -row $row -sticky ew -padx 3 -pady 2
