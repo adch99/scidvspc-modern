@@ -195,13 +195,17 @@ namespace eval tacgame {
     radiobutton $w.fopening.cbPawn -text {Random Pawns} -variable ::tacgame::openingType -value pawn
 
     # or choose a specific opening
-    radiobutton $w.fopening.cbSpecific -text $::tr(SpecificOpening) -variable ::tacgame::openingType -value specific
+    radiobutton $w.fopening.cbSpecific -text $::tr(SpecificOpening) -variable ::tacgame::openingType -value specific \
+       -command {
+        catch {
+	  .configWin.fopening.fOpeningList.lbOpening selection set $::tacgame::chosenOpening
+	  .configWin.fopening.fOpeningList.lbOpening see $::tacgame::chosenOpening
+	}
+      }
 
     # Tweak opening type according to game pos
     if {[sc_pos isAt start]} {
       if {$::tacgame::openingType == {current}} { set ::tacgame::openingType new }
-    } else {
-      set ::tacgame::openingType current
     }
 
     pack $w.fopening.cbNew -anchor w -padx 100
@@ -213,15 +217,19 @@ namespace eval tacgame {
     frame $w.fopening.fOpeningList
     listbox $w.fopening.fOpeningList.lbOpening -yscrollcommand "$w.fopening.fOpeningList.ybar set" \
         -height 5 -width 40 -list ::tacgame::openingList -font font_Small
-    $w.fopening.fOpeningList.lbOpening selection set 0
+    bind $w.fopening.fOpeningList.lbOpening <<ListboxSelect>> {set ::tacgame::openingType specific}
+    bind $w.fopening.fOpeningList.lbOpening <Double-Button-1> "$w.fbuttons.play invoke"
+    # $w.fopening.fOpeningList.lbOpening selection set 0
     scrollbar $w.fopening.fOpeningList.ybar -command "$w.fopening.fOpeningList.lbOpening yview"
     pack $w.fopening.fOpeningList.lbOpening -side right -fill both -expand 1
     pack $w.fopening.fOpeningList.ybar  -side right -fill y
     pack $w.fopening.fOpeningList -expand yes -fill both -side top -expand 1
 
-    catch {
-      $w.fopening.fOpeningList.lbOpening selection set $::tacgame::chosenOpening
-      $w.fopening.fOpeningList.lbOpening see $::tacgame::chosenOpening
+    if {$::tacgame::openingType == "specific"} {
+      catch {
+	$w.fopening.fOpeningList.lbOpening selection set $::tacgame::chosenOpening
+	$w.fopening.fOpeningList.lbOpening see $::tacgame::chosenOpening
+      }
     }
 
     # Time limit per move
@@ -231,10 +239,12 @@ namespace eval tacgame {
     pack $w.flimit.blimit $w.flimit.analysisTime -side left -expand yes -pady 5
 
     dialogbutton $w.fbuttons.play -text $::tr(Play) -command {
-      focus .main
       set ::tacgame::chosenOpening [.configWin.fopening.fOpeningList.lbOpening curselection]
+      # dont know why we get a list here ???
+      set ::tacgame::chosenOpening [lindex $::tacgame::chosenOpening end]
       destroy .configWin
       ::tacgame::play
+      focus .main
     }
 
     dialogbutton $w.fbuttons.help   -textvar ::tr(Help) -command { helpWindow ComputerGame PhalanxGame}
