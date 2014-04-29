@@ -3687,6 +3687,12 @@ sc_base_upgrade (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     return TCL_OK;
 }
 
+inline static uint max(uint a, uint b) { return a > b ? a : b; }
+inline static uint min(uint a, uint b) { return a < b ? a : b; }
+
+inline static idNumberT
+safeNameId(idNumberT id, idNumberT numEntries) { return id < numEntries ? id : 0; }
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // sc_base_fix_corrupted:
 //    Tries to fix a corrupted base by rewriting its index and name
@@ -3719,16 +3725,23 @@ sc_base_fix_corrupted (ClientData cd, Tcl_Interp * ti, int argc, const char ** a
         return errorResult (ti, "Error opening index file.");
     }
     recalcNameFrequencies (nb, idxTemp);
+    uint numGames = idxTemp->GetNumGames();
     idxTemp->CloseIndexFile();
 
     // Now, add only the names with nonzero frequencies to a new namebase:
 
     NameBase * nbNew = new NameBase;
 
-    idNumberT * idMapping [NUM_NAME_TYPES];
+    idNumberT * idMapping[NUM_NAME_TYPES];
+
     for (nameT nt = NAME_FIRST; nt <= NAME_LAST; nt++) {
-        idMapping [nt] = new idNumberT [nb->GetNumNames(nt)];
+        uint unused;
+        nbNew->AddName (nt, "?", &unused); // must be zero
         idNumberT numNames = nb->GetNumNames (nt);
+        idNumberT numEntries = NAME_MAX_ID[nt];
+        idMapping[nt] = new idNumberT[numEntries];
+        memset(idMapping[nt], 0, numEntries*sizeof(idNumberT));
+
         for (idNumberT oldID = 0; oldID < numNames; oldID++) {
             const char * name = nb->GetName (nt, oldID);
             uint frequency = nb->GetFrequency (nt, oldID);
@@ -3738,6 +3751,8 @@ sc_base_fix_corrupted (ClientData cd, Tcl_Interp * ti, int argc, const char ** a
                     errorResult (ti, "Error compacting namebase.");
                     break;
                 }
+                if (newID >= numEntries)
+                    newID = 0;
                 nbNew->IncFrequency (nt, newID, frequency);
                 idMapping[nt][oldID] = newID;
             } else {
@@ -3745,6 +3760,7 @@ sc_base_fix_corrupted (ClientData cd, Tcl_Interp * ti, int argc, const char ** a
             }
         }
     }
+
     printf ("New: %u players, %u events, %u sites, %u rounds\n",
             nbNew->GetNumNames(NAME_PLAYER), nbNew->GetNumNames(NAME_EVENT),
             nbNew->GetNumNames(NAME_SITE), nbNew->GetNumNames(NAME_ROUND));
@@ -3789,20 +3805,25 @@ sc_base_fix_corrupted (ClientData cd, Tcl_Interp * ti, int argc, const char ** a
         IndexEntry ieOld, ieNew;
         idxOld->ReadEntries (&ieOld, i, 1);
         if (ieOld.Verify (nb) != OK) {
-            fprintf (stderr, "Warning: game %u: ", i+1);
-            fprintf (stderr, "names were corrupt, they may be incorrect.\n");
+//            fprintf (stderr, "Warning: game %u: ", i+1);
+//            fprintf (stderr, "names were corrupt, they may be incorrect.\n");
         }
         err = idxNew->AddGame (&newNumGames, &ieNew);
         if (err != OK)  { break; }
         ieNew = ieOld;
-        ieNew.SetWhite (idMapping [NAME_PLAYER] [ieOld.GetWhite()]);
-        ieNew.SetBlack (idMapping [NAME_PLAYER] [ieOld.GetBlack()]);
-        ieNew.SetEvent (idMapping [NAME_EVENT] [ieOld.GetEvent()]);
-        ieNew.SetSite  (idMapping [NAME_SITE] [ieOld.GetSite()]);
-        ieNew.SetRound (idMapping [NAME_ROUND] [ieOld.GetRound()]);
+#define MAP_ID(id, nt) idMapping[nt] [safeNameId(id, NAME_MAX_ID[nt])]
+        ieNew.SetWhite (MAP_ID(ieOld.GetWhite(), NAME_PLAYER));
+        ieNew.SetBlack (MAP_ID(ieOld.GetBlack(), NAME_PLAYER));
+        ieNew.SetEvent (MAP_ID(ieOld.GetEvent(), NAME_EVENT));
+        ieNew.SetSite  (MAP_ID(ieOld.GetSite(), NAME_SITE));
+        ieNew.SetRound (MAP_ID(ieOld.GetRound(), NAME_ROUND));
+#undef MAP_ID
         err = idxNew->WriteEntries (&ieNew, newNumGames, 1);
         if (err != OK)  { break; }
     }
+
+    for (nameT nt = NAME_FIRST; nt <= NAME_LAST; nt++)
+        delete idMapping[nt];
 
     idxOld->CloseIndexFile();
     idxNew->CloseIndexFile();
