@@ -1892,6 +1892,8 @@ proc sortDatabase {} {
   }
   progressWindow "Scid" "Sorting the database..."
   busyCursor .
+  # can be messed up by gamelist sort
+  sc_base sortup
   set err [catch {sc_base sort $sortCriteria(real) {changeProgressWindow "Storing results..."} } result]
   unbusyCursor .
   closeProgressWindow
