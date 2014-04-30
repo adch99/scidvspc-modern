@@ -851,7 +851,8 @@ proc SortBy {tree col} {
 
     # hmmm. a few fields are not valid sorting.
 
-    if {[sc_base numGames] > 200000} {
+    # if {[sc_base numGames] > 200000} 
+    if {![sc_base isReadOnly] && [sc_base current] != [sc_info clipbase]} {
       set answer [tk_messageBox -parent $w -title "Scid" -type yesno -default yes -icon question \
           -message "Do you wish to sort database \"[file tail [sc_base filename]]\" containing [sc_base numGames] games by \"$col\""]
       if {$answer != "yes"} { return }
