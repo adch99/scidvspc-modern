@@ -3753,7 +3753,6 @@ sc_base_fix_corrupted (ClientData cd, Tcl_Interp * ti, int argc, const char ** a
                 }
                 if (newID >= numEntries)
                     newID = 0;
-                nbNew->IncFrequency (nt, newID, frequency);
                 idMapping[nt][oldID] = newID;
             } else {
                 idMapping[nt][oldID] = 0;
@@ -3805,8 +3804,8 @@ sc_base_fix_corrupted (ClientData cd, Tcl_Interp * ti, int argc, const char ** a
         IndexEntry ieOld, ieNew;
         idxOld->ReadEntries (&ieOld, i, 1);
         if (ieOld.Verify (nb) != OK) {
-//            fprintf (stderr, "Warning: game %u: ", i+1);
-//            fprintf (stderr, "names were corrupt, they may be incorrect.\n");
+              fprintf (stderr, "Warning: game %u: ", i+1);
+              fprintf (stderr, "names were corrupt, they may be incorrect.\n");
         }
         err = idxNew->AddGame (&newNumGames, &ieNew);
         if (err != OK)  { break; }
@@ -3818,12 +3817,17 @@ sc_base_fix_corrupted (ClientData cd, Tcl_Interp * ti, int argc, const char ** a
         ieNew.SetSite  (MAP_ID(ieOld.GetSite(), NAME_SITE));
         ieNew.SetRound (MAP_ID(ieOld.GetRound(), NAME_ROUND));
 #undef MAP_ID
+        nbNew->IncFrequency (NAME_PLAYER, ieNew.GetWhite(), 1);
+        nbNew->IncFrequency (NAME_PLAYER, ieNew.GetBlack(), 1);
+        nbNew->IncFrequency (NAME_EVENT, ieNew.GetEvent(), 1);
+        nbNew->IncFrequency (NAME_SITE, ieNew.GetSite(), 1);
+        nbNew->IncFrequency (NAME_ROUND, ieNew.GetRound(), 1);
         err = idxNew->WriteEntries (&ieNew, newNumGames, 1);
         if (err != OK)  { break; }
     }
 
     for (nameT nt = NAME_FIRST; nt <= NAME_LAST; nt++)
-        delete idMapping[nt];
+        delete [] idMapping[nt];
 
     idxOld->CloseIndexFile();
     idxNew->CloseIndexFile();
@@ -3845,8 +3849,11 @@ sc_base_fix_corrupted (ClientData cd, Tcl_Interp * ti, int argc, const char ** a
     removeFile (tempName, NAMEBASE_SUFFIX);
 
     delete nb;
+    delete nbNew;
     delete idx;
     delete idxTemp;
+    delete idxOld;
+    delete idxNew;
     return TCL_OK;
 }
 //////////////////////////////////////////////////////////////////////
