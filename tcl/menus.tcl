@@ -885,7 +885,7 @@ $m add command -label OptionsSave -command {
     ::tacgame::isLimitedAnalysisTime ::tacgame::analysisTime ::tacgame::openingType ::tacgame::chosenOpening
     ::sergame::bookToUse ::sergame::useBook ::sergame::startFromCurrent 
     ::sergame::winc ::sergame::wtime ::sergame::binc ::sergame::btime
-    ::sergame::timeMode ::sergame::movetime ::sergame::current ::sergame::chosenOpening
+    ::sergame::timeMode ::sergame::movetime ::sergame::current ::sergame::chosenOpening ::sergame::isOpening
     ::commenteditor::showBoard ::commenteditor::State(markColor) ::commenteditor::State(markType) boardfile_lite boardfile_dark 
     ::file::finder::data(dir) ::file::finder::data(sort) ::file::finder::data(recurse) 
     ::file::finder::data(Scid) ::file::finder::data(PGN) 

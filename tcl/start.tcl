@@ -144,6 +144,7 @@ set ::sergame::timeMode movetime
 set ::sergame::movetime 6
 set ::sergame::current 0
 set ::sergame::chosenOpening 0
+set ::sergame::isOpening 0
 set ::sergame::btime 300000
 set ::sergame::wtime 5
 set ::sergame::btime 5

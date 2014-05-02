@@ -8,7 +8,6 @@ namespace eval sergame {
 
 
   # if true, follow a specific opening
-  set isOpening 0
   set openingMovesList {}
   set openingMovesHash {}
   set openingMoves ""
@@ -25,9 +24,9 @@ namespace eval sergame {
   set ::lFen {}
   set lastPlayerMoveUci ""
 
-  ################################################################################
-  #
-  ################################################################################
+  # ===============================
+  #   ::sergame::config
+  # ================================
   proc config {} {
     global ::sergame::configWin ::sergame::chosenOpening
 
@@ -179,7 +178,8 @@ namespace eval sergame {
     grid $w.ftime.movetimevalue -row 3 -column 1 -sticky w
 
     # New game or use current position ?
-    checkbutton $w.fconfig.cbPosition -text $::tr(StartFromCurrentPosition) -variable ::sergame::startFromCurrent
+    checkbutton $w.fconfig.cbPosition -text $::tr(StartFromCurrentPosition) \
+      -variable ::sergame::startFromCurrent -command {set ::sergame::isOpening 0}
     pack $w.fconfig.cbPosition  -side top -anchor w
 
     # Permanent thinking
@@ -219,15 +219,18 @@ namespace eval sergame {
 
     # Choose a specific opening
 
-    checkbutton $w.fopening.cbOpening -text $::tr(SpecificOpening) -variable ::sergame::isOpening
+    checkbutton $w.fopening.cbOpening -text $::tr(SpecificOpening) -variable ::sergame::isOpening -command {
+      if {$::sergame::isOpening} {
+	catch {
+	  .configSerGameWin.fopening.fOpeningList.lbOpening selection set $::sergame::chosenOpening
+	  .configSerGameWin.fopening.fOpeningList.lbOpening see $::sergame::chosenOpening
+	  set ::sergame::startFromCurrent 0
+	}
+      }
+    }
     frame $w.fopening.fOpeningList -relief raised -borderwidth 1
     listbox $w.fopening.fOpeningList.lbOpening -yscrollcommand "$w.fopening.fOpeningList.ybar set" \
-        -height 5 -width 50 -list ::tacgame::openingList -exportselection 0 -font font_Small
-
-    catch {
-      $w.fopening.fOpeningList.lbOpening selection set $::sergame::chosenOpening
-      $w.fopening.fOpeningList.lbOpening see $::sergame::chosenOpening
-    }
+        -height 5 -width 50 -list ::tacgame::openingList -exportselection 0 -font font_Small -selectmode single
 
     scrollbar $w.fopening.fOpeningList.ybar -command "$w.fopening.fOpeningList.lbOpening yview"
     pack $w.fopening.fOpeningList.lbOpening -side right -fill both -expand 1
@@ -235,10 +238,21 @@ namespace eval sergame {
     pack $w.fopening.cbOpening -fill x -side top
     pack $w.fopening.fOpeningList -expand yes -fill both -side top -expand 1 -padx 3
 
-    bind $w.fopening.fOpeningList.lbOpening <Button-1> {set ::sergame::isOpening 1}
+    if {$::sergame::isOpening} {
+      catch {
+        .configSerGameWin.fopening.fOpeningList.lbOpening selection set $::sergame::chosenOpening
+        .configSerGameWin.fopening.fOpeningList.lbOpening see $::sergame::chosenOpening
+      }
+    }
+
+    bind $w.fopening.fOpeningList.lbOpening <<ListboxSelect>> {
+      set ::sergame::isOpening 1
+      set ::sergame::chosenOpening [.configSerGameWin.fopening.fOpeningList.lbOpening curselection]
+      set ::sergame::startFromCurrent 0
+    }
+    bind $w.fopening.fOpeningList.lbOpening <Double-Button-1> "$w.fbuttons.play invoke"
 
     dialogbutton $w.fbuttons.play -text $::tr(Play) -command {
-      focus .main
       set sel [.configSerGameWin.fengines.fEnginesList.lbEngines curselection]
       set ::sergame::current $sel
       set ::sergame::engineName [.configSerGameWin.fengines.fEnginesList.lbEngines get $sel]
@@ -262,6 +276,7 @@ namespace eval sergame {
       
       destroy .configSerGameWin
       ::sergame::play $n
+      focus .main
     }
     bind $w.fengines.fEnginesList.lbEngines <Double-Button-1> "$w.fbuttons.play invoke"
 
