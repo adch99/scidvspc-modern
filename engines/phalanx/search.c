@@ -233,7 +233,7 @@ if( Counter < 20 || Bookout < 4 || Flag.analyze )
 	int b;
 
 	if( Flag.easy && Counter>4
-	&& rand()%5000 < Counter*(10+Flag.easy) )
+	&& rand()%5000 < Counter*(50+Flag.easy) )
 		b = -1;
 	else
 		b = bookmove( m, n );
