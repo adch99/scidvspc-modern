@@ -39,11 +39,8 @@ RC=$(MINGW_TARGET)-windres
 TB = -DSCID_USE_TB -DT41_INCLUDE
 
 ### SCIDFLAGS: Scid customization flags.
-#      Use -DZLIB if your system does not have zlib and you need
-#      to include the code in the src/zlib directory.
-#      The default is to use the system zlib library.
 
-SCIDFLAGS = -DZLIB
+SCIDFLAGS =
 
 WARNINGS = -Wall
 
@@ -71,17 +68,9 @@ SCIDOBJS= src/misc.o src/index.o src/date.o src/namebase.o src/position.o \
       src/polyglot/parse.o src/polyglot/pgn.o src/polyglot/piece.o src/polyglot/random.o \
       src/polyglot/san.o src/polyglot/search.o src/polyglot/square.o src/polyglot/util.o
 
-### ZLIBOBJS: object files in the zlib compression library.
-
-ZLIBOBJS= src/zlib/adler32.o src/zlib/compress.o src/zlib/crc32.o \
-      src/zlib/gzio.o src/zlib/uncompr.o src/zlib/deflate.o src/zlib/trees.o \
-      src/zlib/zutil.o src/zlib/inflate.o src/zlib/infblock.o \
-      src/zlib/inftrees.o src/zlib/infcodes.o src/zlib/infutil.o \
-      src/zlib/inffast.o
-
 ### OBJS: all standard object files for scid.
 
-OBJS= $(SCIDOBJS) $(ZLIBOBJS)
+OBJS= $(SCIDOBJS)
 
 LANGUAGES = tcl/lang/czech.tcl tcl/lang/deutsch.tcl tcl/lang/francais.tcl tcl/lang/greek.tcl tcl/lang/hungary.tcl tcl/lang/italian.tcl tcl/lang/norsk.tcl tcl/lang/polish.tcl tcl/lang/portbr.tcl tcl/lang/nederlan.tcl tcl/lang/spanish.tcl tcl/lang/serbian.tcl tcl/lang/swedish.tcl
 
@@ -172,7 +161,7 @@ scid.coff: scid.rc
 	$(RC) -O coff scid.rc scid.coff
 
 clean:
-	rm -f src/*.o src/zlib/*.o src/polyglot/*.o $(EXECS) scid.gui scid.coff
+	rm -f src/*.o src/polyglot/*.o $(EXECS) scid.gui scid.coff
 	$(MAKE) -C src/tkdnd/ -f Makefile.mingwx clean
 
 strip:

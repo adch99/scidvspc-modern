@@ -302,79 +302,9 @@ proc findTclTkPaths {} {
     return $success
 }
 
-
-# testzlib_sh:
-#    Script used to test if the system has zlib installed.
-#
-set testzlib {#!/bin/sh
-CC=gcc
-cat <<EOF > testzlib.c
-#include <zlib.h>
-int main()
-{
-    z_streamp z;
-    deflateInit(z, 0);
-    return 0;
-}
-EOF
-
-$CC -o testzlib testzlib.c -lz
-if [ -f testzlib ]; then
-    exit 0
-else
-    exit 1
-fi
-}
-
-# systemHasZlib:
-#    Determines if the system has zlib installed. If not, the Zlib
-#    version that comes with Scid will be used.
-#
-proc systemHasZlib {} {
-    set systemHasZlib 0
-    flush stdout
-    if {[catch {open testzlib.sh w} f]} { return 0 }
-    puts $f $::testzlib
-    close $f
-    set result 0
-    if {! [catch {exec sh testzlib.sh} err]} { set result 1 }
-    catch {file delete -force testzlib.sh}
-    catch {file delete -force testzlib.c}
-    catch {file delete -force testzlib}
-    return $result
-}
-
-
-# checkZlib:
-#    Checks whether the system has the zlib compression library installed,
-#    if necessary. 
-#
-proc checkZlib {} {
-    global var
-    if {[string first "DZLIB" $var(SCIDFLAGS)] >= 0} {
-        set var(ZLIB) {}
-        set var(OBJS) {$(SCIDOBJS) $(ZLIBOBJS)}
-        return
-    }
-    puts -nonewline "    Checking if your system already has zlib installed: "
-    flush stdout
-    if {[systemHasZlib]} {
-        puts "yes."
-        set var(ZLIB) {-lz}
-        set var(OBJS) {$(SCIDOBJS)}
-    } else {
-        puts "no."
-        append var(SCIDFLAGS) " -DZLIB"
-        set var(ZLIB) {}
-        set var(OBJS) {$(SCIDOBJS) $(ZLIBOBJS)}
-    }
-}
-
-# writeMakefile:
-#    Creates the Makefile using Makefile.conf and the configured
-#    settings.
+#    Creates the Makefile using Makefile.conf and the configured settings.
 #    Also creates tcl/config.tcl
-#
+
 proc writeMakefile {{type ""}} {
     global var defaultVar
   
@@ -403,8 +333,6 @@ proc writeMakefile {{type ""}} {
           set var($name) $defaultVar($name)
         }
     }
-
-    checkZlib
 
     if {[catch {set from [open "$Makefile_conf" r]}]} {
        puts "Error opening file for reading: $Makefile_conf"

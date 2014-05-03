@@ -1857,12 +1857,6 @@ set tips(I) {
     <a Switcher>database switcher</a>.
   }
   {
-    SCID puo' aprire file PGN, anche se sono compressi con Gzip (con il
-    suffisso .gz). I file PGN aperti sono a sola lettura cosi' puoi
-    modificare un file PGN in SCID, creando un nuovo database SCID e copiando
-    il file PGN in esso utilizzando il <a Switcher>database switcher</a>.
-  }
-  {
     Se hai un grosso database e usi spesso la finestra <a Tree>albero</a>,
     e' il caso di utilizzare <b>riempi il file cache</b> dalla Finestra
     Albero (menu file). Cio' memorizza le statistiche dell'albero delle

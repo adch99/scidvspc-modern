@@ -34,18 +34,6 @@
 #define snprintf _snprintf
 #endif
 
-#ifndef POCKETENGINE
-// Include the zlib header file if it is being compiled with Scid:
-#ifndef NO_ZLIB
-#  ifdef ZLIB
-#    include "zlib/zlib.h"
-#   else
-#    include <zlib.h>
-#  endif
-#endif
-#else
-#define ASSERT(f)
-#endif
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // CONSTANTS:
 
@@ -74,22 +62,6 @@ const char TREEFILE_SUFFIX[] = ".stc";
 const char GZIP_SUFFIX[] = ".gz";
 const char ZIP_SUFFIX[] = ".zip";
 const char PGN_SUFFIX[] = ".pgn";
-
-
-// If the zlib compression library is NOT used, create dummy inline
-// functions to replace those used in zlib, which saves wrapping every
-// zlib function call with #ifndef conditions.
-
-#ifdef NO_ZLIB
-typedef void * gzFile;
-inline gzFile gzopen (const char * name, const char * mode) { return NULL; }
-inline int gzputc (gzFile fp, int c) { return c; }
-inline int gzgetc (gzFile fp) { return -1; }
-inline int gzread (gzFile fp, char * buffer, int length) { return 0; }
-inline int gzeof (gzFile fp) { return 1; }
-inline int gzseek (gzFile fp, int offset, int where) { return 0; }
-inline int gzclose (gzFile fp) { return 0; }
-#endif
 
 
 // Bit Manipulations

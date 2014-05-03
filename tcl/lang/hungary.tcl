@@ -2041,13 +2041,6 @@ set tips(H) {
     másolhatsz játszmákat az <a Switcher>adatbázisváltó</a> ablakban.
   }
   {
-    Scid meg tud nyitni PGN-fájlokat, még akkor is, ha Gzip útján
-    tömörítve vannak (.gz fájlnév-kiterjesztéssel). A megnyitott PGN-fájlok
-    csak olvashatóak, ezért ha egy PGN-fájlt Scidben akarsz átszerkeszteni,
-    hozz létre új Scid-adatbázist, és az <a Switcher>adatbázisváltó</a>
-    segítségével másold bele a PGN-fájl játszmáit.
-  }
-  {
     Ha egy nagy adatbázist gyakran használsz a <a Tree>faszerkezet</a>-ablakkal,
     érdemes a <b>Cache-fájl feltöltése</b> pontot választani a faszerkezet-ablak
     Fájl menüjébõl. Ez megjegyzi sok gyakori megnyitás faszerkezet-adatait,

@@ -282,9 +282,6 @@ proc ::windows::eco::LoadFile {} {
   global ecoFile
 
   set ftype { { "Scid ECO files" {".eco"} } }
-  if {[sc_info gzip]} {
-    set ftype { { "Scid ECO files" {".eco" ".eco.gz"} } }
-  }
   set fullname [tk_getOpenFile -initialdir [pwd] -filetypes $ftype -title "Load ECO file"]
   if {[string compare $fullname ""]} {
     if {[catch {sc_eco read $fullname} result]} {

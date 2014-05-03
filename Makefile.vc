@@ -140,11 +140,8 @@ DND_LIBS_DIR	= "%WindowsSdkDir%\Lib\win8\um\%PROCESSOR_ARCHITECTURE%"
 DND_LIBS	= $(DND_LIBS_DIR)\user32.lib $(DND_LIBS_DIR)\shell32.lib $(DND_LIBS_DIR)\ole32.lib 
 
 ##	SCID_FLAGS: Scid customization flags.
-#	Use -DZLIB if your system does not have zlib and you need
-#	to include the code in the src/zlib directory.
-#	The default is to use the system zlib library.
 
-SCID_FLAGS	= -DZLIB
+SCID_FLAGS	=
 
 ##	SCID_TB: Tablebase support.
 #	for no tablebase reading capability.
@@ -172,24 +169,6 @@ SCID_EXECS = \
 	scmerge.exe \
 	tcscid.exe
 #	tkscid.exe (unused)
-
-##	ZLIB_OBJS: obj. files in the zlib compression library.
-
-ZLIB_OBJS = \
-	$(TMP_DIR)\adler32.obj \
-	$(TMP_DIR)\compress.obj \
-	$(TMP_DIR)\crc32.obj \
-	$(TMP_DIR)\gzio.obj \
-	$(TMP_DIR)\uncompr.obj \
-	$(TMP_DIR)\deflate.obj \
-	$(TMP_DIR)\trees.obj \
-	$(TMP_DIR)\zutil.obj \
-	$(TMP_DIR)\inflate.obj \
-	$(TMP_DIR)\infblock.obj \
-	$(TMP_DIR)\inftrees.obj \
-	$(TMP_DIR)\infcodes.obj \
-	$(TMP_DIR)\infutil.obj \
-	$(TMP_DIR)\inffast.obj
 
 POL_OBJS = \
       $(TMP_DIR)\pol\attack.obj \
@@ -223,7 +202,6 @@ POL_OBJS = \
 #	files that most of the Scid programs use.
 
 SCID_OBJS= \
-      $(ZLIB_OBJS) \
       $(POL_OBJS) \
       $(TMP_DIR)\misc.obj \
       $(TMP_DIR)\index.obj \
@@ -448,9 +426,6 @@ $(TMP_DIR)\probe.obj: src\probe.cpp src\egtb\tbindex.cpp src\egtb\tbdecode.c
 {src\egtb}.c{$(TMP_DIR)}.obj:
 	$(CC) $(CFLAGS) -Fo$(TMP_DIR)\ $<
 
-{src\zlib}.c{$(TMP_DIR)}.obj:
-	$(CC) $(CFLAGS) -Fo$(TMP_DIR)\ $<
-	
 .rc{$(TMP_DIR)}.res:
 	$(RC) -r -Fo$(TMP_DIR)\$(@B).res $<
 

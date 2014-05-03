@@ -132,20 +132,11 @@ proc ::file::Open {{fName ""} {parent .} {update 1}} {
     return
   }
 
-  if {[sc_info gzip]} {
-    set ftype {
-      { {All Scid files} {.si4 .si3 .pgn .PGN .pgn.gz .epd .epd.gz} }
-      { {Scid databases} {.si4 .si3} }
-      { {PGN files} {.pgn .PGN .pgn.gz} }
-      { {EPD files} {.epd .EPD .epd.gz} }
-    }
-  } else {
-    set ftype {
-      { {All Scid files} {.si4 .si3 .pgn .PGN .epd} }
-      { {Scid databases} {.si4 .si3} }
-      { {PGN files} {.pgn .PGN} }
-      { {EPD files} {.epd .EPD} }
-    }
+  set ftype {
+    { {All Scid files} {.si4 .si3 .pgn .PGN .epd} }
+    { {Scid databases} {.si4 .si3} }
+    { {PGN files} {.pgn .PGN} }
+    { {EPD files} {.epd .EPD} }
   }
   if {$fName == ""} {
     if {! [file isdirectory $::file::finder::data(dir)] } {
@@ -205,8 +196,6 @@ proc ::file::Open {{fName ""} {parent .} {update 1}} {
       if {[file extension $fName] != ".pgn" && [file extension $fName] != ".PGN"} {
 	puts {Unknown file type, assuming PGN.}
       }
-      ## note : .zip isn't supported by zlib. Only .pgn.gz is supported.
-
       set result "File $fName is not readable."
       if {(![file readable $fName])  || \
 	    [catch {sc_base create $fName true} result]} {
@@ -546,18 +535,10 @@ proc ::file::openBaseAsTree { { fName "" } } {
   }
 
   if {$fName == ""} {
-    if {[sc_info gzip]} {
-      set ftype {
-        { "Scid databases, PGN files" {".si4" ".si3" ".pgn" ".PGN" ".pgn.gz"} }
-        { "Scid databases" {".si4" ".si3"} }
-        { "PGN files" {".pgn" ".PGN" ".pgn.gz"} }
-      }
-    } else {
-      set ftype {
-        { "Scid databases, PGN files" {".si4" ".si3" ".pgn" ".PGN"} }
-        { "Scid databases" {".si4" ".si3"} }
-        { "PGN files" {".pgn" ".PGN"} }
-      }
+    set ftype {
+      { "Scid databases, PGN files" {".si4" ".si3" ".pgn" ".PGN"} }
+      { "Scid databases" {".si4" ".si3"} }
+      { "PGN files" {".pgn" ".PGN"} }
     }
     if {! [file isdirectory $::initialDir(base)] } {
       set ::initialDir(base) $::env(HOME)
@@ -730,7 +711,7 @@ proc OpenUri {window uriFiles} {
       append message \n\n [join $rejectList \n]
     }
     set detail [tr UriRejectedDetail]
-    append detail " .sci, .si4, .si3, .cbh, .pgn, .pgn.gz, .zip"
+    append detail " .sci, .si4, .si3, .cbh, .pgn, .zip"
     tk_messageBox -icon info -type ok -parent . -message $message -detail $detail
   }
 

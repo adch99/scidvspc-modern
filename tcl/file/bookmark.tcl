@@ -129,7 +129,7 @@ proc ::bookmarks::CanAdd {} {
   if {[sc_game number] == 0} { return 0 }
   if {[sc_base current] == [sc_info clipbase]} { return 0 }
   if {[file pathtype [sc_base filename]] != "absolute"} { return 0 }
-  foreach suffix {.pgn .PGN .pgn.gz} {
+  foreach suffix {.pgn .PGN} {
     if {[string match "*$suffix" [sc_base filename]]} { return 0 }
   }
   return 1

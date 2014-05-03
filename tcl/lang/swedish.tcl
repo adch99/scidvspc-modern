@@ -1921,11 +1921,6 @@ set tips(W) {
     att dra-och-släppa dem mellan respektive databas.
   }
   {
-    Scid kan öppna PGN filer, även de som är komprimerade med Gzip (dvs har en .gz filändelse).
-    PGN filer öppnas med enbart läsrättigheter, så om du vill redigera en PGN-fil i Scid
-    måste du kopiera filen till en Scid-databas med hjälp av <a Switcher>Databasväljaren</a>.
-  }
-  {
     Om du ofta använder <a Tree>Trädfönstret</a> med stora databaser, är det värt att välja
     <b>Fyll cachefil</b> från Arkivmenyn i Trädfönstret. Detta innebär att trädstatistik för
     många av de vanligare ställningarna sparas, vilket ger en snabbare trädåtkomst för databasen
