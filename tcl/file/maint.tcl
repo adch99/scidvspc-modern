@@ -2051,9 +2051,6 @@ proc stripTags {{parent .}} {
   wm withdraw $w
   wm title $w "$::tr(StripTags)"
 
-  setWinLocation $w
-  # setWinSize $w
-
   bind $w <F1> {helpWindow Maintenance Tags}
 
   label $w.title -text "PGN tags ([file tail [sc_base filename]])" -font font_Bold
@@ -2103,9 +2100,8 @@ proc stripTags {{parent .}} {
 
   # raise $parent 
 
-  update
+  placeWinOverParent $w $parent
   wm state $w normal
-  bind $w <Configure> "recordWinSize $w"
 }
 
 proc zeroTags {{parent .}} {
@@ -2124,9 +2120,6 @@ proc zeroTags {{parent .}} {
   toplevel $w
   wm withdraw $w
   wm title $w $::tr(StripTag)
-
-  setWinLocation $w
-  # setWinSize $w
 
   bind $w <F1> {helpWindow Maintenance Tags}
 
@@ -2173,9 +2166,8 @@ proc zeroTags {{parent .}} {
 
   # raise $parent 
 
-  update
+  placeWinOverParent $w $parent
   wm state $w normal
-  bind $w <Configure> "recordWinSize $w"
 }
 
 proc populateStripTags {} {
@@ -2224,8 +2216,7 @@ proc findStripTags {tag} {
 
 
 # cleanerWin:
-#   Open a dialog so the user can choose several maintenance tasks
-#   in one action.
+#   Run a selection of several maintenance tasks in one action.
 
 set cleaner(players) 1
 set cleaner(events) 1
@@ -2240,21 +2231,25 @@ set cleaner(tree) 0
 
 proc cleanerWin {} {
   set w .mtoolWin
-  if {[winfo exists $w]} { return }
+
+  if {[winfo exists $w]} {
+    raiseWin $w
+    return
+  }
 
   toplevel $w
   wm title $w "$::tr(Cleaner)"
+  wm withdraw $w
   bind $w <F1> {helpWindow Maintenance Cleaner}
 
-  pack [frame $w.help] -side top -fill x
-  text $w.help.text -width 1 -height 8 -wrap word \
-      -relief ridge -cursor top_left_arrow -yscrollcommand "$w.help.ybar set"
-  scrollbar $w.help.ybar -orient vertical -command "$w.help.text yview" \
-      -takefocus 0
-  pack $w.help.ybar -side right -fill y
-  pack $w.help.text -side left -fill x -expand yes
-  $w.help.text insert end [string trim $::tr(CleanerHelp)]
-  $w.help.text configure -state disabled
+  text $w.text -width 1 -height 6 -relief flat -wrap word
+  $w.text insert end [string trim $::tr(CleanerHelp)]
+  pack $w.text -side top -fill both -padx 3 -pady 3 -expand 1
+  $w.text configure -state disabled
+  ### Can't get it to auto size ...
+  # puts [$w.text count -displaylines  0.0 end]
+
+  addHorizontalRule $w
 
   pack [frame $w.f] -side top -padx 20
   foreach i {players events sites rounds} j {Players Events Sites Rounds} {
@@ -2280,18 +2275,16 @@ proc cleanerWin {} {
   }
 
   addHorizontalRule $w
-  pack [frame $w.b] -side bottom -fill x
-  button $w.b.ok -text OK -command "catch {grab release $w}; destroy $w; doCleaner"
-  button $w.b.cancel -text $::tr(Cancel) -command "catch {grab release $w}; destroy $w"
+  pack [frame $w.b] -side bottom -fill x -pady 3
+  dialogbutton $w.b.ok -text OK -command "
+    destroy $w
+    doCleaner"
+  dialogbutton $w.b.cancel -text $::tr(Cancel) -command "destroy $w"
   pack $w.b.cancel $w.b.ok -side right -padx 2 -pady 2
-  wm resizable $w 0 0
-  # Remove the scrollbar if it is not needed:
+  # wm resizable $w 0 0
   update
-  set yview [$w.help.text yview]
-  if {[lindex $yview 0] <= 0.01  &&  [lindex $yview 1] >= 0.99} {
-    pack forget $w.help.ybar
-  }
-  catch {grab $w}
+  placeWinOverParent $w .maintWin
+  wm state $w normal
 }
 
 proc doCleaner {} {

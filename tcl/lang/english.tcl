@@ -922,16 +922,16 @@ translate E StripTag {Strip tag}
 translate E CheckGames {Check games}
 translate E Cleaner {Cleaner}
 translate E CleanerHelp {
-The Scid Cleaner will perform all the maintenance actions you select from the list below, on the current database.
+The Cleaner will perform all actions selected below on the current database.
 
-Current settings in the ECO classification and twin deletion dialogs will apply if you select those functions.
+Current settings in ECO Classification and Twin Deletion will apply if selected.
 }
 translate E CleanerConfirm {
-Once Cleaner maintenance is started, it cannot be interrupted!
+Once Cleaner maintenance is started it cannot be interrupted.
 
-This may take a long time on a large database, depending on the functions you have selected and their current settings.
+This may take a long time.
 
-Are you sure you want to commence the maintenance functions you selected?
+Are you sure you want to run the selected maintenance functions ?
 }
 # Twinchecker
 translate E TwinCheckUndelete {to toggle)}

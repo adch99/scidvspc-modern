@@ -913,8 +913,7 @@ translate P StripTag {Usuń znacznik}
 translate P CheckGames {Sprawdź partie}
 translate P Cleaner {Zestaw zadań}
 translate P CleanerHelp {
-Zestaw zadań pozwala wykonać od razu kilka operacji porządkowania bazy. Operacje wybrane z listy
-zostaną wykonane na aktualnej bazie.
+Zestaw zadań pozwala wykonać od razu kilka operacji porządkowania bazy. Operacje wybrane z listy zostaną wykonane na aktualnej bazie.
 Do klasyfikacji debiutowej i usuwania powtórzonych partii użyte zostaną aktualne ustawienia.
 }
 translate P CleanerConfirm {

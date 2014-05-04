@@ -948,11 +948,9 @@ translate S StripTag {Quitar etiquetas}
 translate S CheckGames {Revisar partidas}
 translate S Cleaner {MultiHerramienta}
 translate S CleanerHelp {
-Scid ejecutará, en la actual base de datos, todas las acciones de mantenimiento
-que selecciones de la siguiente lista.
+Scid ejecutará, en la actual base de datos, todas las acciones de mantenimiento que selecciones de la siguiente lista.
 
-Se aplicará el estado actual en la clasificación ECO y el diálogo de borrado de
-dobles si seleccionas esas funciones.
+Se aplicará el estado actual en la clasificación ECO y el diálogo de borrado de dobles si seleccionas esas funciones.
 }
 translate S CleanerConfirm {
 ¡Una vez que la MultiHerramienta de mantenimiento se inicia no puede ser interrumpida!

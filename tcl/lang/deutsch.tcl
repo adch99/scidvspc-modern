@@ -963,12 +963,9 @@ translate D StripTag {Markierung entfernen}
 translate D CheckGames {Konsistenzprüfung}
 translate D Cleaner {Bereiniger}
 translate D CleanerHelp {
-Der Scid-Bereiniger wird für die aktuelle Datenbank alle
-Wartungsarbeiten ausführen, welche aus der unten stehenden
-Liste ausgewählt werden.
+Der Scid-Bereiniger wird für die aktuelle Datenbank alle Wartungsarbeiten ausführen, welche aus der unten stehenden Liste ausgewählt werden.
 
-Aktuelle Einstellungen in den Menüs "ECO-Klassifikation" und "Dubletten löschen"
-werden angewendet, falls diese Funktionen ausgewählt sind.}
+Aktuelle Einstellungen in den Menüs "ECO-Klassifikation" und "Dubletten löschen" werden angewendet, falls diese Funktionen ausgewählt sind.}
 translate D CleanerConfirm {
 Ist der Bereiniger einmal gestartet, kann er nicht mehr unterbrochen werden!
 
