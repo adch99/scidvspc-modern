@@ -55,13 +55,13 @@ PROFILE=
 LFLAGS = $(PROFILE)
 
 ### CPPFLAGS: C++ compiler flags
-CPPFLAGS = -DWIN32 $(OPT) $(CPPOPT) $(PROFILE) $(WARNINGS)
+CPPFLAGS = -DZLIB -DWIN32 $(OPT) $(CPPOPT) $(PROFILE) $(WARNINGS)
 
 ### CPPFLAGSNOWARN: C++ compiler flags without warnings
-CPPFLAGSNOWARN = -DWIN32 $(OPT) $(CPPOPT) $(PROFILE)
+CPPFLAGSNOWARN = -DZLIB -DWIN32 $(OPT) $(CPPOPT) $(PROFILE)
 
 ### CFLAGS: C (not C++) compiler flags
-CFLAGS = -DWIN32 $(OPT) $(PROFILE)
+CFLAGS = -DZLIB -DWIN32 $(OPT) $(PROFILE)
 
 
 ### EXECS: all the evecutable programs compiled from C++ files.
@@ -84,7 +84,17 @@ SCIDOBJS= src\misc.obj src\index.obj src\date.obj src\namebase.obj \
       src\polyglot\san.o src\polyglot\search.o src\polyglot\square.o src\polyglot\util.o
 
 
-OBJS= $(SCIDOBJS)
+### ZLIBOBJS: object files in the zlib compression library.
+###
+ZLIBOBJS= src\zlib\adler32.obj src\zlib\compress.obj src\zlib\crc32.obj \
+      src\zlib\gzio.obj src\zlib\uncompr.obj src\zlib\deflate.obj \
+      src\zlib\trees.obj src\zlib\zutil.obj src\zlib\inflate.obj \
+      src\zlib\infblock.obj src\zlib\inftrees.obj src\zlib\infcodes.obj \
+      src\zlib\infutil.obj src\zlib\inffast.obj
+
+### OBJS: all standard object files for scid.
+###
+OBJS= $(SCIDOBJS) $(ZLIBOBJS)
 
 ### LANGUAGES: all the extra language files for scid.
 LANGUAGES = tcl\lang\deutsch.tcl tcl\lang\francais.tcl tcl\lang\italian.tcl
@@ -189,7 +199,7 @@ scid.coff: scid.rc
 
 ### To remove object and executable files: type "make clean"
 clean:
-	-del src\*.obj $(EXECS) scid.gui
+	-del src\*.obj src\zlib\*.obj $(EXECS) scid.gui
 
 
 src\tcscid.obj: src\tkscid.cpp

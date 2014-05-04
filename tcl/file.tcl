@@ -132,11 +132,20 @@ proc ::file::Open {{fName ""} {parent .} {update 1}} {
     return
   }
 
-  set ftype {
-    { {All Scid files} {.si4 .si3 .pgn .PGN .epd} }
-    { {Scid databases} {.si4 .si3} }
-    { {PGN files} {.pgn .PGN} }
-    { {EPD files} {.epd .EPD} }
+  if {[sc_info gzip]} {
+    set ftype {
+      { {All Scid files} {.si4 .si3 .pgn .PGN .pgn.gz .epd .epd.gz} }
+      { {Scid databases} {.si4 .si3} }
+      { {PGN files} {.pgn .PGN .pgn.gz} }
+      { {EPD files} {.epd .EPD .epd.gz} }
+    }
+  } else {
+    set ftype {
+      { {All Scid files} {.si4 .si3 .pgn .PGN .epd} }
+      { {Scid databases} {.si4 .si3} }
+      { {PGN files} {.pgn .PGN} }
+      { {EPD files} {.epd .EPD} }
+    }
   }
   if {$fName == ""} {
     if {! [file isdirectory $::file::finder::data(dir)] } {
@@ -535,10 +544,18 @@ proc ::file::openBaseAsTree { { fName "" } } {
   }
 
   if {$fName == ""} {
-    set ftype {
-      { "Scid databases, PGN files" {".si4" ".si3" ".pgn" ".PGN"} }
-      { "Scid databases" {".si4" ".si3"} }
-      { "PGN files" {".pgn" ".PGN"} }
+    if {[sc_info gzip]} {
+      set ftype {
+        { "Scid databases, PGN files" {".si4" ".si3" ".pgn" ".PGN" ".pgn.gz"} }
+        { "Scid databases" {".si4" ".si3"} }
+        { "PGN files" {".pgn" ".PGN" ".pgn.gz"} }
+      }
+    } else {
+      set ftype {
+        { "Scid databases, PGN files" {".si4" ".si3" ".pgn" ".PGN"} }
+        { "Scid databases" {".si4" ".si3"} }
+        { "PGN files" {".pgn" ".PGN"} }
+      }
     }
     if {! [file isdirectory $::initialDir(base)] } {
       set ::initialDir(base) $::env(HOME)

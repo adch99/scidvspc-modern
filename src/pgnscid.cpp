@@ -54,6 +54,9 @@ usage (char * pname)
     fprintf (stderr, "      -x: Ignore comments before games.\n");
     fprintf (stderr, "      Database name defaults to the PGN filename ");
     fprintf (stderr, "without the \".pgn\" suffix.\n");
+#ifndef NO_ZLIB
+    fprintf (stderr, "  Note: A Gzip compressed file (e.g. filename.pgn.gz) can be used.\n");
+#endif
     exit(1);
 }
 
@@ -100,6 +103,11 @@ main (int argc, char * argv[])
     // Make baseName from pgnName if baseName is not provided:
     if (argsleft == 1) {
         strCopy (baseName, pgnName);
+        // If a gzip file, remove two suffixes, the first being ".gz":
+        const char * lastSuffix = strFileSuffix (baseName);
+        if (lastSuffix != NULL  &&  strEqual (lastSuffix, GZIP_SUFFIX)) {
+            strTrimFileSuffix (baseName);
+        }
         // Trim the ".pgn" suffix:
         strTrimFileSuffix (baseName);
     } else {

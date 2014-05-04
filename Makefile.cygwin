@@ -49,8 +49,11 @@ TK_LIBRARY  = $(TCL_LIBRARY) $(TCL_TOP)/lib/tk83.lib
 TB = -DSCID_USE_TB
 
 ### SCIDFLAGS: Scid customization flags.
-
-SCIDFLAGS =
+#      Use -DZLIB if your system does not have zlib and you need
+#      to include the code in the src/zlib directory.
+#      The default is to use the system zlib library.
+#
+SCIDFLAGS =  -DZLIB
 
 ### OPTIMIZE: Optimization options for C++ compiler.
 #      -O4 is the most optimization for g++. I have found -O2 to do
@@ -79,6 +82,10 @@ PROFILE =
 ### CPP_FLAGS: Flags for C++ compilation.
 #
 CPP_FLAGS = $(PROFILE) $(OPTIMIZE) $(WARNINGS) $(DEBUG) $(SCIDFLAGS)
+
+### CFLAGS: Flags for C compilation (only used for compiling zlib).
+#
+CFLAGS = -O2 -Wall $(PROFILE)
 
 ### LANGUAGES: List of additional Tcl files to include in Scid for
 #       multi-language menu support.
@@ -111,10 +118,21 @@ SCIDOBJS= src/misc.o src/index.o src/date.o src/namebase.o src/position.o \
       src/myassert.o src/stralloc.o src/mfile.o src/dstring.o src/pgnparse.o \
       src/stored.o src/movelist.o
 
+### ZLIBOBJS: object files in the zlib compression library.
+#
+ZLIBOBJS= src/zlib/adler32.o src/zlib/compress.o src/zlib/crc32.o \
+      src/zlib/gzio.o src/zlib/uncompr.o src/zlib/deflate.o src/zlib/trees.o \
+      src/zlib/zutil.o src/zlib/inflate.o src/zlib/infblock.o \
+      src/zlib/inftrees.o src/zlib/infcodes.o src/zlib/infutil.o \
+      src/zlib/inffast.o
 
-### OBJS: Will be "$(SCIDOBJS)"
+### ZLIB: Should be "-lz" if your system has zlib, "" otherwise.
+#
+ZLIB = 
 
-OBJS= $(SCIDOBJS)
+### OBJS: Will be "$(SCIDOBJS)", and also "$(ZLIBOBJS)" if they are
+#      needed on your system.
+OBJS= $(SCIDOBJS) $(ZLIBOBJS)
 
 ### TCLS: all the .tcl files that make up "scid".
 #
@@ -194,7 +212,7 @@ distclean:
 ### To remove object and executable files: type "make clean".
 #
 clean:
-	rm -f src/*.o $(EXECS) scid $(SCRIPTS)
+	rm -f src/*.o src/zlib/*.o $(EXECS) scid $(SCRIPTS)
 
 ### To make the executable files smaller: type "make strip".
 #
@@ -266,10 +284,10 @@ eco2pgn: scripts/eco2pgn.py
 scmerge.exe: src/scmerge.o src/misc.o src/index.o src/date.o src/namebase.o \
 	  src/gfile.o src/bytebuf.o src/textbuf.o src/myassert.o \
 	  src/stralloc.o
-	$(LINK) -o $@ src/scmerge.o $(OBJS)
+	$(LINK) -o $@ src/scmerge.o $(OBJS) $(ZLIB)
 
 pgnscid.exe: src/pgnscid.o $(OBJS)
-	$(LINK) $(PROFILE) -o $@ src/pgnscid.o $(OBJS)
+	$(LINK) $(PROFILE) -o $@ src/pgnscid.o $(OBJS) $(ZLIB)
 
 scidlet.exe: src/scidlet.o src/engine.o src/recog.o src/misc.o src/position.o \
           src/dstring.o src/movelist.o src/myassert.o
@@ -277,20 +295,20 @@ scidlet.exe: src/scidlet.o src/engine.o src/recog.o src/misc.o src/position.o \
 
 
 scidt.exe: src/scidt.o $(OBJS)
-	$(LINK) -o $@ src/scidt.o $(OBJS)
+	$(LINK) -o $@ src/scidt.o $(OBJS) $(ZLIB)
 
 tkscid.exe: src/tkscid.o $(OBJS) src/tree.o src/filter.o \
 	 src/pbook.o src/crosstab.o src/spellchk.o src/probe.o src/optable.o
-	$(LINK) -o $@ src/tkscid.o $(OBJS) src/tree.o src/filter.o src/pbook.o src/crosstab.o src/spellchk.o src/probe.o src/optable.o src/engine.o src/recog.o $(TK_LIBRARY)
+	$(LINK) -o $@ src/tkscid.o $(OBJS) src/tree.o src/filter.o src/pbook.o src/crosstab.o src/spellchk.o src/probe.o src/optable.o src/engine.o src/recog.o $(ZLIB) $(TK_LIBRARY)
 
 tcscid.exe: src/tcscid.o $(OBJS) src/tree.o src/filter.o \
 	  src/pbook.o src/crosstab.o src/spellchk.o src/probe.o src/optable.o
-	$(LINK) -o tcscid src/tcscid.o $(OBJS) src/tree.o src/filter.o src/pbook.o src/crosstab.o src/spellchk.o src/probe.o src/optable.o src/engine.o src/recog.o $(TCL_LIBRARY)
+	$(LINK) -o tcscid src/tcscid.o $(OBJS) src/tree.o src/filter.o src/pbook.o src/crosstab.o src/spellchk.o src/probe.o src/optable.o src/engine.o src/recog.o $(ZLIB) $(TCL_LIBRARY)
 
 # eco2epd is now optional extra program NOT compiled by default, since
 # scid now reads the .eco file format directly.
 eco2epd: src/eco2epd.o $(OBJS) src/pbook.o
-	$(LINK) -o eco2epd src/eco2epd.o $(OBJS) src/pbook.o
+	$(LINK) -o eco2epd src/eco2epd.o $(OBJS) src/pbook.o $(ZLIB)
 
 ### Rules to create .o files from .cpp files:
 #
@@ -310,5 +328,10 @@ src/probe.o: src/probe.cpp src/egtb/tbindex.cpp src/egtb/tbdecode.c
 #
 %.o: %.cpp
 	$(COMPILE) $(CPP_FLAGS) -o $@ -c $<
+
+### Rule for compiling zlib source files:
+#
+src/zlib/%.o: src/zlib/%.c
+	$(CC) $(CFLAGS) -o $@ -c $<
 
 ### End of Makefile

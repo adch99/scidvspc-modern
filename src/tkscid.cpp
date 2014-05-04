@@ -1140,6 +1140,7 @@ sc_base_slot (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     if (suffix == NULL  ||
         (!strEqual (suffix, INDEX_SUFFIX)
+         &&  !strEqual (suffix, GZIP_SUFFIX)
          &&  !strEqual (suffix, PGN_SUFFIX))) {
         // Need to add Index file suffix:
         strAppend (fname, INDEX_SUFFIX);
@@ -1327,7 +1328,7 @@ sc_base_open (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     if (db->idx->VerifyFile (db->nb) != OK) {
         db->idx->CloseIndexFile();
-        return errorResult (ti, "Error: name corruption in index file.\nTry repairing base with Tools->Maintenance->Repair Base.");
+        return errorResult (ti, "Error: name corruption in index file.\nRun \"scidt -N\" on this database to fix it.");
     }
 
     db->numGames = db->idx->GetNumGames();
@@ -9893,12 +9894,12 @@ int
 sc_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
     static const char * options [] = {
-        "asserts", "clipbase", "decimal", "fsize",
+        "asserts", "clipbase", "decimal", "fsize", "gzip",
         "html", "limit", "preMoveCmd", "priority", "ratings",
         "suffix", "tb", "validDate", "version", "pocket", "pocket_priority", "logmem", "language", NULL
     };
     enum {
-        INFO_ASSERTS, INFO_CLIPBASE, INFO_DECIMAL, INFO_FSIZE,
+        INFO_ASSERTS, INFO_CLIPBASE, INFO_DECIMAL, INFO_FSIZE, INFO_GZIP,
         INFO_HTML, INFO_LIMIT, INFO_PREMOVECMD, INFO_PRIORITY, INFO_RATINGS,
         INFO_SUFFIX, INFO_TB, INFO_VALIDDATE, INFO_VERSION, INFO_POCKET,
         INFO_POCKET_PRIORITY, INFO_LOGMEM, INFO_LANGUAGE
@@ -9924,6 +9925,15 @@ sc_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     case INFO_FSIZE:
         return sc_info_fsize (cd, ti, argc, argv);
+
+    case INFO_GZIP:
+        // Return true if gzip files can be decoded by Scid.
+#ifdef NO_ZLIB
+        return setBoolResult (ti, false);
+#else
+        return setBoolResult (ti, true);
+#endif
+        break;
 
     case INFO_HTML:
         if (argc >= 3) {
@@ -10031,7 +10041,7 @@ sc_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // sc_info_fsize:
-//    Given the name of a .si3, .si, .pgn file, this command
+//    Given the name of a .si3, .si, .pgn or .pgn.gz file, this command
 //    returns the number of games in that file. For large PGN files,
 //    the value returned is only an estimate.
 //    To distinguish estimates from correct sizes, an estimate is
@@ -10045,11 +10055,15 @@ sc_info_fsize (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     const char * fname = argv[2];
     const char * lastSuffix = strFileSuffix (fname);
     uint fsize = 0;
+    bool isGzipFile = false;
     bool isEpdFile = false;
     bool isRepFile = false;
 
     if (strAlphaContains (fname, ".epd")) { isEpdFile =  true; }
     if (strAlphaContains (fname, ".sor")) { isRepFile =  true; }
+    if (lastSuffix != NULL  &&  strEqual (lastSuffix, GZIP_SUFFIX)) {
+        isGzipFile = true;
+    }
 
     if (lastSuffix != NULL  &&  strEqual (lastSuffix, OLD_INDEX_SUFFIX)) {
         fsize = rawFileSize (fname);
@@ -10067,7 +10081,11 @@ sc_info_fsize (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     // Estimate size for PGN files, by reading the first 64 kb
     // of the file and counting the number of games seen:
 
-    fsize = rawFileSize (fname);
+    if (isGzipFile) {
+        fsize = gzipFileSize (fname);
+    } else {
+        fsize = rawFileSize (fname);
+    }
 
     MFile pgnFile;
     if (pgnFile.Open (fname, FMODE_ReadOnly) != OK) {

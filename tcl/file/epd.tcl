@@ -108,6 +108,9 @@ proc newEpdWin {cmd {fname ""}} {
   }
   set new_types { {"EPD files" {".epd"} } }
   set open_types $new_types
+  if {[sc_info gzip]} {
+    set open_types { {"EPD files" {".epd" ".epd.gz"} } }
+  }
   if {$fname == ""} {
     if {$cmd == "create"} {
       set fname [tk_getSaveFile -initialdir $::initialDir(epd) -filetypes $new_types -title "Create an EPD file"]
