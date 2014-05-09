@@ -263,7 +263,11 @@ $m  add command -label GameDelete -command {
   ::windows::gamelist::Refresh
 }  -underline 0
 set helpMessage($m,[incr menuindex]) GameDelete
-bind .main <Control-Delete> "$m invoke \[tr GameDelete\]"
+if {$::macOS} {
+  bind .main <Control-BackSpace> "$m invoke \[tr GameDelete\]"
+} else {
+  bind .main <Control-Delete> "$m invoke \[tr GameDelete\]"
+}
 
 $m add command -label GameReload -command ::game::Reload -accelerator "Ctrl+Shift+L"
 bind .main <Control-L> ::game::Reload
