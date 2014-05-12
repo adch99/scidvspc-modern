@@ -3387,12 +3387,11 @@ proc updateAnalysisBoard {n moves} {
 # Fulvio's analysis rewrite
 
 ################################################################################
-# sendFENtoEngineUCI
 #   Wait for the engine to be ready then send position and go infinite
-#   delay: delay the commands - INTERNAL - DON'T USE OUTSIDE sendFENtoEngineUCI
+#   delay: delay the commands - INTERNAL - DON'T USE OUTSIDE sendPosToEngineUCI
 ################################################################################
 
-proc sendFENtoEngineUCI {n  {delay 0}} {
+proc sendPosToEngineUCI {n  {delay 0}} {
 
     global analysis
 
@@ -3406,7 +3405,7 @@ proc sendFENtoEngineUCI {n  {delay 0}} {
         # Engine is not ready: process events, idle tasks and then call me back
         incr delay
         set cmd "set ::analysis(after$n) "
-        append cmd { [ } " after $delay sendFENtoEngineUCI $n $delay " { ] }
+        append cmd { [ } " after $delay sendPosToEngineUCI $n $delay " { ] }
         set analysis(after$n) [eval [list after idle $cmd]]
     } else {
 	# sendToEngine $n "position fen $analysis(fen$n)"
@@ -3498,7 +3497,7 @@ proc updateAnalysis {{n 0}} {
        }
        set analysis(waitForReadyOk$n) 1
        sendToEngine $n "isready"
-	set analysis(after$n) [after idle "sendFENtoEngineUCI $n"]
+       set analysis(after$n) [after idle "sendPosToEngineUCI $n"]
     }
     # todo fix non-standard starts S.A
 

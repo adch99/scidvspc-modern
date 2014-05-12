@@ -151,6 +151,7 @@ namespace eval uci {
         if { $t == "depth" } {
 	  incr i
 	  set uciInfo(depth$n) [ lindex $data $i ]
+          set uciInfo(pv$n) "" ; # some infos only contain depth, no pv
 	  continue
 	}
         if { $t == "seldepth" } { incr i ; set uciInfo(seldepth$n) [ lindex $data $i ] ; set analysis(seldepth$n) $uciInfo(seldepth$n) ; continue }
@@ -158,12 +159,9 @@ namespace eval uci {
         if { $t == "nodes" } { incr i ; set uciInfo(nodes$n) [ lindex $data $i ] ; continue }
         if { $t == "pv" } {
           incr i
-          while { [ lsearch -exact $::uci::infoToken [ lindex $data $i ] ] == -1 && $i < $length } {
-            lappend uciInfo(pv$n) [lindex $data $i]
-            incr i
-          }
-          set toBeFormatted 1
-          incr i -1
+
+          # Assuming "pv" infos are always last gains ~ 100usecs but is against UCI standard
+          set uciInfo(pv$n) [lrange $data $i end]
 
           # Depth annotation feature
 	  if {$annotate(Engine) > -1 && $annotate(Depth)} {
@@ -174,13 +172,8 @@ namespace eval uci {
               }
 	    }
 	  }
-
-          continue
-
-          # Assuming "pv" infos are always last gains ~ 100usecs but is against UCI standard
-          # set uciInfo(pv$n) [lrange $data $i end]
-          # set toBeFormatted 1
-          # break
+          set toBeFormatted 1
+          break
         }
         if { $t == "multipv" } { incr i ; set uciInfo(multipv$n) [ lindex $data $i ] ; continue }
         if { $t == "score" } {
