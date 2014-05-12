@@ -1389,7 +1389,7 @@ proc addScore {n type {novar 0}} {
 }
 
 
-proc addAnnotation {} {
+proc addAnnotation {tomove} {
   global analysis annotate prevNag
 
   set n $annotate(Engine)
@@ -1408,7 +1408,6 @@ proc addAnnotation {} {
   # Cannot add a variation to an empty variation:
   if {[sc_pos isAt vstart]  &&  [sc_pos isAt vend]} { return }
 
-  set tomove [sc_pos side]
   if {$annotate(Moves) == {white}  &&  $tomove == {white} ||
     $annotate(Moves) == {black}  &&  $tomove == {black} } {
     set analysis(prevscore$n) $analysis(score$n)
@@ -2997,6 +2996,9 @@ proc toggleEngineAnalysis {{n -1} {force 0}} {
 
   set b .analysisWin$n.b.startStop
   set analysis(lastHistory$n) hmmm
+  if {$n == $annotate(Engine)} {
+    set analysis(boardUpdated) 2 ; # abort annotation vwaits
+  }
 
   if {$analysis(analyzeMode$n)} {
     stopAnalyzeMode $n
@@ -3415,6 +3417,9 @@ proc sendPosToEngineUCI {n  {delay 0}} {
           set analysis(boardLock) 1
 	  vwait analysis(boardUpdated)
           set analysis(boardLock) 0
+          if {$analysis(boardUpdated) == 2} {
+            return
+          }
         }
 	if {$analysis(movelist$n) == {}} {
 	  sendToEngine $n "position $analysis(startpos$n)"

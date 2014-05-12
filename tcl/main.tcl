@@ -1562,7 +1562,7 @@ proc autoplay {} {
   ### Engine Annotation feature
 
   if { ![sc_pos isAt start] } {
-    addAnnotation
+    addAnnotation [sc_pos side]
   }
 
   if { $::isOpeningOnly && [sc_pos moveNumber] > $::isOpeningOnlyMoves} {
