@@ -200,12 +200,7 @@ namespace eval uci {
           }
           # convert the score to white's perspective (not engine's one)
 
-	  if {$analysis(lockEngine$n)} {
-	    set side $analysis(lockSide$n)
-	  } else {
-	    set side [sc_pos side]
-          }
-          if { $side == "black"} {
+          if { $analysis(side$n) == "black"} {
             set uciInfo(tmp_score$n) [ expr 0.0 - $uciInfo(tmp_score$n) ]
             if { $uciInfo(scoremate$n) != ""} {
               set uciInfo(scoremate$n) [ expr 0 - $uciInfo(scoremate$n) ]

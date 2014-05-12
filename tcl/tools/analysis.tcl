@@ -103,6 +103,7 @@ proc resetEngine {n} {
   set analysis(lastHistory$n) {}      ;# last best line
   set analysis(maxmovenumber$n) 0     ;# the number of moves in this position
   set analysis(lockEngine$n) 0        ;# the engine is locked to current position
+  set analysis(side) {}
   set analysis(lockPos$n) {} 
   set analysis(lockFen$n) {}
   set analysis(startpos$n) ""         ;# the startpos/fen for game. Uninit-ed
@@ -1300,8 +1301,8 @@ proc markExercise { prevscore score } {
   }
 
   # The best move does not lose position.
-  if {[sc_pos side] == {white} && $score < [expr 0.0 - $informant("+/-")] } { return }
-  if {[sc_pos side] == {black} && $score > $informant("+/-") } { return }
+  if {$analysis(side$n) == {white} && $score < [expr 0.0 - $informant("+/-")] } { return }
+  if {$analysis(side$n) == {black} && $score > $informant("+/-") } { return }
 
   # Move is not obvious: check that it is not the first move guessed at low depths
   set pv [ lindex [ lindex $analysis(multiPV$n) 0 ] 2 ]
@@ -2404,6 +2405,7 @@ proc makeAnalysisWin {{n 0} {options {}}} {
   # We hope the engine is correctly started at that point, so we can send the first analyze command
   # this problem only happens with winboard engine, as we don't know when they are ready
   if { !$analysis(uci$n) } {
+    set analysis(side$n) [sc_pos side]
     if {$analysis(autostart$n)} {
       initialAnalysisStart $n
     }
@@ -2645,6 +2647,7 @@ proc checkAnalysisStarted {n} {
     # Prevent some engines from making an immediate "book"
     # reply move as black when position is sent later:
     sendToEngine $n force
+    set analysis(side$n) [sc_pos side]
   }
 }
 
@@ -2817,12 +2820,7 @@ proc processAnalysisInput {n} {
       temp_depth dummy temp_score \
       temp_time temp_nodes temp_moves]
   if {$res == 6} {
-    if {$analysis(lockEngine$n)} {
-      set side $analysis(lockSide$n) 
-    } else {
-      set side [sc_pos side]
-    }
-    if {$analysis(invertScore$n)  && $side == "black"} {
+    if {$analysis(invertScore$n) && $analysis(side$n) == "black"} {
       set temp_score [expr { 0.0 - $temp_score } ]
     }
     set analysis(depth$n) $temp_depth
@@ -3056,7 +3054,7 @@ proc toggleLockEngine {n} {
   if { $analysis(lockEngine$n) } {
     set state disabled
     set analysis(lockN$n)    [sc_pos moveNumber]
-    set analysis(lockSide$n) [sc_pos side]
+    set analysis(side$n)     [sc_pos side] ; # do we need this here. It is set in updateAnalysis
     set analysis(lockPos$n)  [sc_pos board]
     set analysis(lockFen$n)  [sc_pos fen]
     if {[winfo exists .analysisWin$n.bd]} {
@@ -3274,11 +3272,10 @@ proc addMoveNumbers { e pv } {
 
   if { $analysis(lockEngine$e) } {
     set n $analysis(lockN$e)
-    set turn $analysis(lockSide$e)
   } else {
     set n [sc_pos moveNumber]
-    set turn [sc_pos side]
   }
+    set turn $analysis(side$e)
 
   # space between number and move
   if {$::pgn::moveNumberSpaces} {
@@ -3416,6 +3413,7 @@ proc sendPosToEngineUCI {n  {delay 0}} {
 	  sendToEngine $n "position $analysis(startpos$n) moves $analysis(movelist$n)"
 	}
 
+	set analysis(side$n) [sc_pos side]
         sendToEngine $n "go infinite"
 
 	# Should we issue "ucinewgame" when we move between games/bases ? S.A.
@@ -3515,6 +3513,7 @@ proc updateAnalysis {{n 0}} {
     if {[catch {set clicks [clock clicks -milliseconds]}]} {
       set clicks [clock clicks]
     }
+    set analysis(side$n) [sc_pos side]
     set diff [expr {$clicks - $analysis(lastClicks$n)} ]
     if {$diff < 300  &&  $diff >= 0} {
       if {$analysis(after$n) == {}} {
@@ -3631,7 +3630,7 @@ proc updateAnalysis {{n 0}} {
 	}
       }
       # Set engine to be white or black:
-      sendToEngine $n [sc_pos side]
+      sendToEngine $n $analysis(side$n)
       # Set search time and depth to something very large and start search:
       sendToEngine $n {st 120000}
       sendToEngine $n {sd 50}
