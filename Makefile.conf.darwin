@@ -309,7 +309,7 @@ mac_rename:
 mac_buttons:
 	patch -p0 scid <patches/swap_buttons-2-3.patch
 
-mac_install_gui: scid
+mac_install_gui: scid mac_buttons
 	install -m 755 scid /Applications/ScidvsMac.app/Contents/MacOS/
 	/Applications/ScidvsMac.app/Contents/MacOS/scid
 
