@@ -852,6 +852,7 @@ proc updateBoard3 {pgnNeedsUpdate} {
   updatePlayerPhotos
   updateEpdWins
   updateAnalysisWindows
+  set ::analysis(boardUpdated) 1
 
   ::commenteditor::Refresh
   if {[::tb::isopen]} {

@@ -37,6 +37,7 @@ set isOpeningOnly 0
 set isOpeningOnlyMoves 10
 set stack ""
 set finishGameMode 0
+set analysis(boardUpdated) 1        ;# control for depth based analysis
 
 proc resetEngines {} {
   for {set i 0} {$i < [llength $::engines(list)]} {incr i} {
@@ -1137,6 +1138,10 @@ proc initAnnotation {n} {
   bind $w <F1> {helpWindow Analysis Annotating}
   placeWinOverParent $w .analysisWin$n
   wm state $w normal
+  # have to start engine here for depth based anno niggles
+  if {! $analysis(analyzeMode$n)} {
+    toggleEngineAnalysis $n 1
+  }
   update
 }
 
@@ -1189,9 +1194,8 @@ proc okAnnotation {n} {
   }
 
   set annotate(Engine) $n
-  if {! $analysis(analyzeMode$n)} {
-    toggleEngineAnalysis $n 1
-  }
+  set analysis(boardUpdated) 1
+
   if {$annotate(addTag)} {
     appendTag Annotator "$analysis(name$n)"
   }
@@ -3405,8 +3409,10 @@ proc sendPosToEngineUCI {n  {delay 0}} {
         append cmd { [ } " after $delay sendPosToEngineUCI $n $delay " { ] }
         set analysis(after$n) [eval [list after idle $cmd]]
     } else {
-	# sendToEngine $n "position fen $analysis(fen$n)"
-
+        # If annotation in process, wait for board update
+        if {$n == $::annotate(Engine) && !$analysis(boardUpdated)} {
+	  vwait analysis(boardUpdated)
+        }
 	if {$analysis(movelist$n) == {}} {
 	  sendToEngine $n "position $analysis(startpos$n)"
 	} else {

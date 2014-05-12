@@ -20,10 +20,10 @@ proc ::move::drawVarArrows {} {
       set sq_end [ ::board::sq [ string range $move 2 3 ] ]
         foreach mark $::board::_mark(.main.board) {
           if { [lindex $mark 0] == "arrow" ||[string match {var*} [lindex $mark 0]] } {
-	    if {[lindex $mark 1] == $sq_start && [lindex $mark 2] == $sq_end} { 
-	      set bDrawn 1
-	      break
-	    }
+            if {[lindex $mark 1] == $sq_start && [lindex $mark 2] == $sq_end} { 
+              set bDrawn 1
+              break
+            }
         }
       }
       if {! $bDrawn } { set bDrawArrow 1; break }
@@ -131,7 +131,12 @@ proc ::move::Forward {{count 1}} {
       showVars
       set bArrows $::showVarArrows
     } else  {
-      if {! $bArrows} { sc_move forward }
+      if {! $bArrows} {
+        if {$::annotate(Engine) > -1} {
+          set ::analysis(boardUpdated) 0
+        }
+        sc_move forward
+      }
     }
 
     # Animate and speak this move:
