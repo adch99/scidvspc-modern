@@ -37,7 +37,8 @@ set isOpeningOnly 0
 set isOpeningOnlyMoves 10
 set stack ""
 set finishGameMode 0
-set analysis(boardUpdated) 1        ;# control for depth based analysis
+set analysis(boardUpdated) 1        ;# slow control for depth based analysis
+set analysis(boardLock) 0           ;# fast control for depth based analysis
 
 proc resetEngines {} {
   for {set i 0} {$i < [llength $::engines(list)]} {incr i} {
@@ -3410,8 +3411,10 @@ proc sendPosToEngineUCI {n  {delay 0}} {
         set analysis(after$n) [eval [list after idle $cmd]]
     } else {
         # If annotation in process, wait for board update
-        if {$n == $::annotate(Engine) && !$analysis(boardUpdated)} {
+        if {$n == $::annotate(Engine) && !$analysis(boardUpdated) && !$analysis(boardLock)} {
+          set analysis(boardLock) 1
 	  vwait analysis(boardUpdated)
+          set analysis(boardLock) 0
         }
 	if {$analysis(movelist$n) == {}} {
 	  sendToEngine $n "position $analysis(startpos$n)"
