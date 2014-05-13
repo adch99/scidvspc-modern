@@ -1681,7 +1681,6 @@ proc cancelAutoplay {} {
   }
   set annotate(Engine) -1
   set annotate(Button) 0
-  set annotate(boardUpdated) 2
   after cancel autoplay
   .main.button.autoplay configure -image autoplay_off
 }

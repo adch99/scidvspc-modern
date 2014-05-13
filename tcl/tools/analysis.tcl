@@ -37,8 +37,6 @@ set isOpeningOnly 0
 set isOpeningOnlyMoves 10
 set stack ""
 set finishGameMode 0
-set analysis(boardUpdated) 1        ;# slow control for depth based analysis
-set analysis(boardLock) 0           ;# fast control for depth based analysis
 
 proc resetEngines {} {
   for {set i 0} {$i < [llength $::engines(list)]} {incr i} {
@@ -1196,7 +1194,6 @@ proc okAnnotation {n} {
   }
 
   set annotate(Engine) $n
-  set analysis(boardUpdated) 1
 
   if {$annotate(addTag)} {
     appendTag Annotator "$analysis(name$n)"
@@ -1450,7 +1447,7 @@ proc addAnnotation {tomove} {
 	addScore $n single 1
       }
       updateBoard -pgn
-      catch {::tools::graphs::score::Refresh}
+      ::tools::graphs::score::Refresh
       return
     }
   }
@@ -1592,7 +1589,7 @@ if {abs($prevscore) < $annotate(cutoff) || abs($score) < $annotate(cutoff) || \
   # Restore the pre-move command:
   sc_info preMoveCmd preMoveCommand
   updateBoard -pgn
-  catch {::tools::graphs::score::Refresh}
+  ::tools::graphs::score::Refresh
 }
 
 proc scoreToNag {score} {
@@ -1772,7 +1769,7 @@ proc addAnalysisVariation {n} {
   sc_info preMoveCmd preMoveCommand
 
   ::pgn::Refresh 1
-  catch {::tools::graphs::score::Refresh}
+  ::tools::graphs::score::Refresh
   if {$isAt_vend && ![sc_pos isAt vend]} {
     # sucessfully extended variation
     .main.button.forward configure -state normal
@@ -1857,7 +1854,7 @@ proc addAllVariations {{n 1} {rightclick 0}} {
   sc_info preMoveCmd preMoveCommand
 
   ::pgn::Refresh 1 
-  catch {::tools::graphs::score::Refresh}
+  ::tools::graphs::score::Refresh
 }
 
 proc makeAnalysisMove {n} {
@@ -2999,9 +2996,6 @@ proc toggleEngineAnalysis {{n -1} {force 0}} {
 
   set b .analysisWin$n.b.startStop
   set analysis(lastHistory$n) hmmm
-  if {$n == $annotate(Engine)} {
-    set analysis(boardUpdated) 2 ; # abort annotation vwaits
-  }
 
   if {$analysis(analyzeMode$n)} {
     stopAnalyzeMode $n
@@ -3416,16 +3410,6 @@ proc sendPosToEngineUCI {n  {delay 0}} {
         append cmd { [ } " after $delay sendPosToEngineUCI $n $delay " { ] }
         set analysis(after$n) [eval [list after idle $cmd]]
     } else {
-        # If annotation in process, wait for board update
-        if {$n == $::annotate(Engine) && !$analysis(boardLock)} {
-          set analysis(boardLock) 1
-	  while {!$analysis(boardUpdated)} { vwait analysis(boardUpdated) }
-          set analysis(boardLock) 0
-          if {$analysis(boardUpdated) == 2} {
-	    cancelAutoplay
-            return
-          }
-        }
 	if {$analysis(movelist$n) == {}} {
 	  sendToEngine $n "position $analysis(startpos$n)"
 	} else {
@@ -3514,7 +3498,7 @@ proc updateAnalysis {{n 0}} {
 
   if {$n == $::annotate(Engine)} {
     # update engine annotation
-    set analysis(boardUpdated) 1
+    # todo - test if we need this
     update idletasks
   }
 

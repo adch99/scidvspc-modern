@@ -160,13 +160,13 @@ namespace eval uci {
         if { $t == "pv" } {
           incr i
 
-          # Assuming "pv" infos are always last gains ~ 100usecs but is against UCI standard
+          ### Assuming "pv" infos are always last gains ~ 100usecs but is against UCI standard
           set uciInfo(pv$n) [lrange $data $i end]
 
-          # Depth annotation feature
+          ### Depth annotation feature
 	  if {$annotate(Engine) > -1 && $annotate(Depth)} {
-	    # Wait till a certain depth to make a move (or no valid moves avail)
-	    if {$uciInfo(depth$n) >= $annotate(WantedDepth) || $uciInfo(scoremate$n) > 0 || [sc_pos matchMoves {}] == {}} {
+	    # Wait a sec, and till a certain depth to make a move (or no valid moves avail)
+	    if {!$::pause && $uciInfo(depth$n) >= $annotate(WantedDepth) || $uciInfo(scoremate$n) > 0 || [sc_pos matchMoves {}] == {}} {
 	      if {[lindex $uciInfo(pv$n) 0] != $annotate(LastMove)} {
 		set annoMove [lindex $uciInfo(pv$n) 0]
               }

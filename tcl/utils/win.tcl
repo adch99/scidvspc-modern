@@ -793,7 +793,7 @@ proc ::docking::layout_restore_nb { pw name tabs} {
     if {$d == ".fdockbookWin"}       {::book::Open ; continue}
     if {$d == ".fdockbookTuningWin"} {::book::tuning ; continue}
     if {$d == ".fdockrgraph"}        {::tools::graphs::rating::Refresh}
-    if {$d == ".fdocksgraph"}        {::tools::graphs::score::Refresh 1}
+    if {$d == ".fdocksgraph"}        {::tools::graphs::score::Init}
     if { [ scan $d ".fdocktreeWin%d" base ] == 1 } {::tree::Open $base ; continue}
     if { [ scan $d ".fdocktreeBest%d" base ] == 1 } {::tree::best $base ; continue}
     if { [ scan $d ".fdockanalysisWin%d" n ] == 1 } {

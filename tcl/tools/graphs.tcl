@@ -387,14 +387,23 @@ proc ::tools::graphs::score::Toggle {} {
   if {[winfo exists $w]} {
     destroy $w
   } else {
-    ::tools::graphs::score::Refresh 1
+    ::tools::graphs::score::Init
   }
 }
 
-proc ::tools::graphs::score::Refresh {{init 0}} {
+proc ::tools::graphs::score::Init {} {
+  ::tools::graphs::score::Refresh2 1
+}
+
+proc ::tools::graphs::score::Refresh {} {
+  after cancel ::tools::graphs::score::Refresh2
+  after idle ::tools::graphs::score::Refresh2
+}
+
+proc ::tools::graphs::score::Refresh2 {{init 0}} {
   set w .sgraph
 
-  if {![winfo exists $w] && ! $init} {
+  if {![winfo exists $w.c] && ! $init} {
     return
   }
 

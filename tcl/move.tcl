@@ -132,10 +132,12 @@ proc ::move::Forward {{count 1}} {
       set bArrows $::showVarArrows
     } else  {
       if {! $bArrows} {
-        if {$::annotate(Engine) > -1} {
-          set ::analysis(boardUpdated) 0
-        }
         sc_move forward
+        if {$::annotate(Engine) > -1} {
+          # Pausing a second gives the gui a chance to catch to the engine,
+          # which can reply super-fast on depth-based annotation
+          after 1000 {set ::pause 0}
+        }
       }
     }
 
