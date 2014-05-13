@@ -66,7 +66,7 @@ proc resetEngine {n} {
   set analysis(currmove$n) {}         ;# current move output from engine
   set analysis(currmovenumber$n) 0    ;# current move number output from engine
   set analysis(nps$n) 0               ;# nodes per second
-  set analysis(movelist$n) {}         ;# Moves to reach current position
+  set analysis(movelist$n) {start}    ;# Moves to reach current position
   set analysis(nonStdStart$n) 0       ;# Game has non-standard start
   set analysis(has_analyze$n) 0       ;# Engine has analyze command
   set analysis(has_setboard$n) 0      ;# Engine has setboard command
@@ -109,6 +109,7 @@ proc resetEngine {n} {
   set analysis(lockPos$n) {} 
   set analysis(lockFen$n) {}
   set analysis(startpos$n) ""         ;# the startpos/fen for game. Uninit-ed
+  set analysis(go$n) 0
 }
 
 resetEngines
@@ -1199,6 +1200,9 @@ proc okAnnotation {n} {
 
   if {$annotate(addTag)} {
     appendTag Annotator "$analysis(name$n)"
+    if  {$annotate(Depth)} {
+      appendTag Depth "$annotate(WantedDepth)"
+    }
   }
   if {$autoplayMode == 0} { toggleAutoplay }
   # Disable pause button, as pause doesnt work in annotation mode, and this is the easiest option.
@@ -1446,7 +1450,7 @@ proc addAnnotation {tomove} {
 	addScore $n single 1
       }
       updateBoard -pgn
-      ::tools::graphs::score::Refresh
+      catch {::tools::graphs::score::Refresh}
       return
     }
   }
@@ -1588,7 +1592,7 @@ if {abs($prevscore) < $annotate(cutoff) || abs($score) < $annotate(cutoff) || \
   # Restore the pre-move command:
   sc_info preMoveCmd preMoveCommand
   updateBoard -pgn
-  ::tools::graphs::score::Refresh
+  catch {::tools::graphs::score::Refresh}
 }
 
 proc scoreToNag {score} {
@@ -1768,7 +1772,7 @@ proc addAnalysisVariation {n} {
   sc_info preMoveCmd preMoveCommand
 
   ::pgn::Refresh 1
-  ::tools::graphs::score::Refresh
+  catch {::tools::graphs::score::Refresh}
   if {$isAt_vend && ![sc_pos isAt vend]} {
     # sucessfully extended variation
     .main.button.forward configure -state normal
@@ -1853,7 +1857,7 @@ proc addAllVariations {{n 1} {rightclick 0}} {
   sc_info preMoveCmd preMoveCommand
 
   ::pgn::Refresh 1 
-  ::tools::graphs::score::Refresh
+  catch {::tools::graphs::score::Refresh}
 }
 
 proc makeAnalysisMove {n} {
@@ -1931,7 +1935,6 @@ proc destroyAnalysisWin {n W} {
     # ignore individual widget destroys
     return
   }
-
 
   if {[winfo exists .configAnnotation]} {
     # Is annotation being configured ?
@@ -3047,6 +3050,7 @@ proc stopAnalyzeMode { {n 0} } {
       set analysis(after$n) ""
     }
     sendToEngine $n stop
+    set analysis(go$n) 0
   } else  {
     sendToEngine $n exit
   }
@@ -3413,11 +3417,12 @@ proc sendPosToEngineUCI {n  {delay 0}} {
         set analysis(after$n) [eval [list after idle $cmd]]
     } else {
         # If annotation in process, wait for board update
-        if {$n == $::annotate(Engine) && !$analysis(boardUpdated) && !$analysis(boardLock)} {
+        if {$n == $::annotate(Engine) && !$analysis(boardLock)} {
           set analysis(boardLock) 1
-	  vwait analysis(boardUpdated)
+	  while {!$analysis(boardUpdated)} { vwait analysis(boardUpdated) }
           set analysis(boardLock) 0
           if {$analysis(boardUpdated) == 2} {
+	    cancelAutoplay
             return
           }
         }
@@ -3429,6 +3434,7 @@ proc sendPosToEngineUCI {n  {delay 0}} {
 
 	set analysis(side$n) [sc_pos side]
         sendToEngine $n "go infinite"
+        set analysis(go$n) 1
 
 	# Should we issue "ucinewgame" when we move between games/bases ? S.A.
 	#
@@ -3478,17 +3484,23 @@ proc updateAnalysis {{n 0}} {
 
   # or if engine is locked
   if { $analysis(lockEngine$n) } {
-     return
+    return
   }
 
   set old_movelist $analysis(movelist$n)
   set movelist [sc_game moves coord]
+
+  ### seems erroneous... what about vars/backtracking ??
+  # if {$movelist == $old_movelist} { return }
+
   if {$movelist == "0000"} {
     # null move in this line, so just go by fen
     set movelist ""
     set nonStdStart 1
     set analysis(startpos$n) "fen [sc_pos fen]"
   } else {
+    # these should probably be set somewhere else, but this
+    # proc is called for any change in board position (including new games, and simple moves)
     set nonStdStart [sc_game startBoard]
     if {$nonStdStart} {
       set analysis(startpos$n) "fen [sc_game startPos]"
@@ -3496,16 +3508,24 @@ proc updateAnalysis {{n 0}} {
       set analysis(startpos$n) startpos
     }
   }
+  # puts $movelist
   set analysis(movelist$n) $movelist
   set analysis(nonStdStart$n) $nonStdStart
+
+  if {$n == $::annotate(Engine)} {
+    # update engine annotation
+    set analysis(boardUpdated) 1
+    update idletasks
+  }
 
   if { $analysis(uci$n) } {
 
     ### UCI
 
     if {$analysis(after$n) == "" } {
-       if { $analysis(startpos$n) != "" } {
+       if { $analysis(startpos$n) != "" && $analysis(go$n)} {
          sendToEngine $n "stop"
+	 set analysis(go$n) 0
        }
        set analysis(waitForReadyOk$n) 1
        sendToEngine $n "isready"

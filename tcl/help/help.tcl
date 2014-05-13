@@ -2746,6 +2746,7 @@ with the format "stat01: time nodes ply mvleft mvtot mvname". The results can be
   <p><i>
   The Annotate feature of Scid vs. PC can be used with any engine,
   but be sure not to open other Analysis Windows while annotation is in progress.
+  Depth Based Annotation is a nice feature, but still may have bugs.
   </i></p>
 
   <p><b>Options</b>
