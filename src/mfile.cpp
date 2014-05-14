@@ -33,6 +33,9 @@ MFile::Init ()
     CurrentPtr = NULL;
     FileBuffer = NULL;
     FileName = NULL;
+#ifdef WIN32
+    MappedFile = NULL;
+#endif
 }
 
 void
@@ -49,7 +52,7 @@ MFile::Extend ()
     if (oldData != NULL) {
       // Copy data to new array:
       for (uint i=0; i < oldCapacity; i++) {
-	Data[i] = oldData[i];
+        Data[i] = oldData[i];
       }
       delete[] oldData;
     }
@@ -84,6 +87,10 @@ MFile::Seek (uint position)
     if (Type == MFILE_GZIP) {
         result = gzseek (GzHandle, position, 0);
         GzBuffer_Avail = 0;
+#ifdef WIN32
+    } else if (Type == MFILE_MMAP) {
+        result = 0; // always succeeding
+#endif
     } else {
         result = fseek (Handle, position, 0);
     }
@@ -137,6 +144,23 @@ MFile::Open (const char * name, fileModeT fmode)
     return OK;
 }
 
+#ifdef WIN32
+errorT
+MFile::OpenMappedFile (const char * name, fileModeT fmode)
+{
+    ASSERT(Handle == NULL && GzHandle == NULL);
+    ASSERT(fmode == FMODE_ReadOnly);
+
+    Type = MFILE_MMAP;
+    FileName = strDuplicate(name);
+    MappedFile = new WinMMap(name);
+    FileMode = fmode;
+    Location = 0;
+
+    return MappedFile->isOpen() ? OK : ERROR_FileOpen;
+}
+#endif
+
 errorT
 MFile::Create (const char * name, fileModeT fmode)
 {
@@ -172,6 +196,11 @@ MFile::Close ()
             GzBuffer_Avail = 0;
         }
         result = gzclose (GzHandle);
+#ifdef WIN32
+    } else if (Type == MFILE_MMAP) {
+        delete MappedFile;
+        MappedFile = NULL;
+#endif
     } else {
         result = fclose (Handle);
     }

@@ -639,7 +639,6 @@ class Index
     uint         IndexEntrySize;
 
     // Used for sorting:
-    uint *        EntriesHeap;
     int           SortCriteria [INDEX_MaxSortCriteria];
 
     void         FreeEntries();
@@ -651,6 +650,7 @@ class Index
     //  Index:  Public Functions
     //----------------------------------
  public:
+    uint *        EntriesHeap;
 #ifdef WINCE
   void* operator new(size_t sz) {
     void* m = my_Tcl_AttemptAlloc(sz);
@@ -765,6 +765,11 @@ class Index
      errorT     WriteSorted () { return WriteSorted (0, NULL, NULL); }
 
      errorT     ParseSortCriteria (const char * inputStr);
+
+#ifdef WIN32 // Fast file read
+    class WinFileMapping;
+    friend class WinFileMapping;
+#endif
 };
 
 

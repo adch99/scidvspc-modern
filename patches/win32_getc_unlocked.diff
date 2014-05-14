@@ -1,10 +1,10 @@
 Index: src/mfile.h
 ===================================================================
---- src/mfile.h	(revision 1870)
+--- src/mfile.h	(revision 1823)
 +++ src/mfile.h	(working copy)
-@@ -16,16 +16,32 @@
- // An MFile is a file that can be a regular file, or memory-only with
- // no actual file on any device.
+@@ -19,7 +19,16 @@
+ // and will hopefully in future also be able to extract the contents of
+ // all files in a Zip file, as if they were in one large plain file.
  
 +// -------------------------------------------------------------------
 +// Extension by Gregor Cramer, 25 March 2014:
@@ -19,24 +19,24 @@ Index: src/mfile.h
  #ifndef SCID_MFILE_H
  #define SCID_MFILE_H
  
- #include "common.h"
+@@ -27,8 +36,15 @@
  #include "dstring.h"
  #include "error.h"
-+ 
+ 
 +#ifdef WIN32
 +# include "win_mmap.h"
 +#endif
- 
++
  enum mfileT {
--    MFILE_REGULAR = 0, MFILE_MEMORY, MFILE_ZIP
-+    MFILE_REGULAR = 0, MFILE_MEMORY, MFILE_ZIP,
+-    MFILE_REGULAR = 0, MFILE_MEMORY, MFILE_GZIP, MFILE_ZIP
++    MFILE_REGULAR = 0, MFILE_MEMORY, MFILE_GZIP, MFILE_ZIP,
 +#ifdef WIN32
 +    MFILE_MMAP,
 +#endif
  };
  
  class MFile
-@@ -44,6 +60,10 @@
+@@ -55,6 +71,10 @@
  
      char *      FileBuffer;  // Only for files with unusual buffer size.
  
@@ -45,9 +45,9 @@ Index: src/mfile.h
 +#endif
 +
      void  Extend();
+     int   FillGzBuffer();
  
-   public:
-@@ -53,6 +73,9 @@
+@@ -65,6 +85,9 @@
          if (Data != NULL) { delete[] Data; }
          if (FileBuffer != NULL) { delete[] FileBuffer; }
          if (FileName != NULL) { delete[] FileName; }
@@ -57,7 +57,7 @@ Index: src/mfile.h
      }
  
      void Init();
-@@ -61,6 +84,9 @@
+@@ -73,6 +96,9 @@
  
      errorT Create (const char * name, fileModeT fmode);
      errorT Open  (const char * name, fileModeT fmode);
@@ -67,10 +67,10 @@ Index: src/mfile.h
      void   CreateMemory () { Close(); Init(); }
      errorT Close ();
  
-@@ -107,6 +133,10 @@
-         return (Location >= Capacity);
-     case MFILE_REGULAR:
-         return feof(Handle);
+@@ -122,6 +148,10 @@
+     case MFILE_GZIP:
+         if (GzBuffer_Avail > 0) { return 0; }
+         return gzeof(GzHandle);
 +#ifdef WIN32
 +    case MFILE_MMAP:
 +        return Location >= MappedFile->size();
@@ -78,10 +78,21 @@ Index: src/mfile.h
      default:
          return false;
      }
-@@ -137,12 +167,22 @@
+@@ -155,8 +185,8 @@
          CurrentPtr++;
          return (int) value;
      }
+-    Location++;
+     if (Type == MFILE_GZIP) {
++        Location++;
+         if (GzBuffer_Avail <= 0) {
+             return FillGzBuffer();
+         }
+@@ -165,11 +195,22 @@
+         GzBuffer_Current++;
+         return retval;
+     }
+-    #ifdef __GNUC__
 +#ifdef WIN32
 +    if (Type == MFILE_MMAP) {
 +        if (Location >= MappedFile->size()) { return EOF; }
@@ -91,8 +102,7 @@ Index: src/mfile.h
 +        return getc(Handle);
 +    }
 +#else
-     Location++;
--    #ifdef __GNUC__
++    Location++;
 +# ifdef __GNUC__
      return getc_unlocked(Handle);
 -    #else
@@ -106,7 +116,7 @@ Index: src/mfile.h
  #endif  // SCID_MFILE_H
 Index: src/index.h
 ===================================================================
---- src/index.h	(revision 1867)
+--- src/index.h	(revision 1823)
 +++ src/index.h	(working copy)
 @@ -639,7 +639,6 @@
      uint         IndexEntrySize;
@@ -138,7 +148,7 @@ Index: src/index.h
  
 Index: src/index.cpp
 ===================================================================
---- src/index.cpp	(revision 1867)
+--- src/index.cpp	(revision 1823)
 +++ src/index.cpp	(working copy)
 @@ -53,7 +53,36 @@
      SORT_deleted, SORT_eventdate, SORT_variations, SORT_comments, SORT_random, SORT_sentinel
@@ -197,9 +207,9 @@ Index: src/index.cpp
                  delete[] Entries[i];
 Index: src/mfile.cpp
 ===================================================================
---- src/mfile.cpp	(revision 1870)
+--- src/mfile.cpp	(revision 1823)
 +++ src/mfile.cpp	(working copy)
-@@ -28,6 +28,9 @@
+@@ -33,6 +33,9 @@
      CurrentPtr = NULL;
      FileBuffer = NULL;
      FileName = NULL;
@@ -209,7 +219,7 @@ Index: src/mfile.cpp
  }
  
  void
-@@ -44,7 +47,7 @@
+@@ -49,7 +52,7 @@
      if (oldData != NULL) {
        // Copy data to new array:
        for (uint i=0; i < oldCapacity; i++) {
@@ -218,23 +228,18 @@ Index: src/mfile.cpp
        }
        delete[] oldData;
      }
-@@ -76,7 +79,15 @@
-     if (FileMode != FMODE_Both  &&  Location == position) { return OK; }
- 
-     int result;
+@@ -84,6 +87,10 @@
+     if (Type == MFILE_GZIP) {
+         result = gzseek (GzHandle, position, 0);
+         GzBuffer_Avail = 0;
 +#ifdef WIN32
-+    if (Type == MFILE_MMAP) {
++    } else if (Type == MFILE_MMAP) {
 +        result = 0; // always succeeding
-+     } else {
 +#endif
-     result = fseek (Handle, position, 0);
-+#ifdef WIN32
-+    }
-+#endif
-     if (result != 0) { return ERROR_FileSeek; }
-     Location = position;
-     return OK;
-@@ -112,7 +123,24 @@
+     } else {
+         result = fseek (Handle, position, 0);
+     }
+@@ -137,7 +144,24 @@
      return OK;
  }
  
@@ -258,21 +263,126 @@ Index: src/mfile.cpp
 +errorT
  MFile::Create (const char * name, fileModeT fmode)
  {
-     ASSERT (Handle == NULL);
-@@ -140,7 +168,16 @@
-         return OK;
-     }
-     int result;
+     ASSERT (Handle == NULL  &&  GzHandle == NULL);
+@@ -172,6 +196,11 @@
+             GzBuffer_Avail = 0;
+         }
+         result = gzclose (GzHandle);
 +#ifdef WIN32
-+    if (Type == MFILE_MMAP) {
++    } else if (Type == MFILE_MMAP) {
 +        delete MappedFile;
 +        MappedFile = NULL;
-+     } else {
 +#endif
-     result = fclose (Handle);
-+#ifdef WIN32
+     } else {
+         result = fclose (Handle);
+     }
+--- /dev/null	2014-03-02 18:27:46.141000001 +1000
++++ src/win_mmap.h	2014-03-26 07:23:35.000000000 +1000
+@@ -0,0 +1,107 @@
++//////////////////////////////////////////////////////////////////////
++//
++//  FILE:       win_mmap.h
++//              Fast file read access for Windows.
++//
++//  Part of:    Scid (Shane's Chess Information Database)
++//  Version:    2.0
++//
++//  Notice:     Copyright (c) 2014  Gregor Cramer.
++//
++//  Author:     Gregor Cramer
++//
++//////////////////////////////////////////////////////////////////////
++
++//////////////////////////////////////////////////////////////////////
++//
++// Only useful for fast sequential read of a whole file.
++//
++// This class is for Windows only.
++//
++//////////////////////////////////////////////////////////////////////
++
++#ifndef SCID_WIN_MMAP_H
++#define SCID_WIN_MMAP_H
++
++#include <windows.h>
++
++class WinMMap
++{
++public:
++
++    WinMMap(char const* filename);
++    ~WinMMap();
++
++    bool isOpen() const { return m_address != NULL; }
++
++    unsigned size() const { return m_size; }
++
++    unsigned char const* address() const { return static_cast<unsigned char const*>(m_address); }
++
++private:
++
++    void*     m_address;
++    unsigned  m_size;
++    HANDLE    m_file;
++    HANDLE    m_mapping;
++};
++
++
++inline
++WinMMap::WinMMap(char const* filename)
++    :m_address(0)
++    ,m_size(0)
++    ,m_file(INVALID_HANDLE_VALUE)
++    ,m_mapping(INVALID_HANDLE_VALUE)
++{
++    ASSERT (filename != NULL);
++
++    m_file = CreateFileA(
++					filename,
++					GENERIC_READ,
++					0,
++					0,
++					OPEN_EXISTING,
++					FILE_FLAG_SEQUENTIAL_SCAN | FILE_ATTRIBUTE_READONLY | FILE_ATTRIBUTE_TEMPORARY,
++					0);
++
++    if (m_file == INVALID_HANDLE_VALUE)
++        return;
++
++    m_mapping = CreateFileMappingA(
++						 m_file,
++						 0,
++						 PAGE_READONLY,
++						 0,
++						 0,
++						 filename);
++
++    if (m_mapping == INVALID_HANDLE_VALUE)
++    {
++        CloseHandle(m_file);
++        return;
 +    }
-+#endif
- 
-     if (FileBuffer != NULL) {
-         delete[] FileBuffer;
++
++    m_address = MapViewOfFile(m_mapping, FILE_MAP_READ, 0, 0, 0);
++    m_size = GetFileSize(m_file, 0);
++}
++
++
++inline
++WinMMap::~WinMMap()
++{
++    if (m_address)
++        UnmapViewOfFile(m_address);
++
++    if (m_mapping != INVALID_HANDLE_VALUE)
++        CloseHandle(m_mapping);
++
++    if (m_file != INVALID_HANDLE_VALUE)
++        CloseHandle(m_file);
++}
++
++#endif  // SCID_WIN_MMAP_H
++
++//////////////////////////////////////////////////////////////////////
++//  End of file: win_mmap.h
++//////////////////////////////////////////////////////////////////////

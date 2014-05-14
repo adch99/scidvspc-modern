@@ -53,6 +53,35 @@ enum {
     SORT_deleted, SORT_eventdate, SORT_variations, SORT_comments, SORT_random, SORT_sentinel
 };
 
+#ifdef WIN32 // Fast file read
+
+struct Index::WinFileMapping {
+    Index& index;
+    MFile* fp;
+	 uint pos;
+
+    WinFileMapping(Index& i, char const* fname) :index(i), fp(i.FilePtr), pos(i.FilePos) {
+        index.FilePtr = new MFile;
+
+        if (index.FilePtr->OpenMappedFile(fname, FMODE_ReadOnly) != OK) {
+            delete index.FilePtr;
+            index.FilePtr = fp; // use original handle in case of an error
+        } else {
+            index.FilePos = 0;
+        }
+    }
+
+    ~WinFileMapping()
+    {
+        if (index.FilePtr != fp) {
+            delete index.FilePtr;
+            index.FilePtr = fp;
+            index.FilePos = pos;
+        }
+    }
+};
+
+#endif
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // IndexEntry::Init():
@@ -1131,7 +1160,17 @@ Index::ReadEntireFile (int reportFrequency,
         if (gamesToRead > INDEX_ENTRY_CHUNKSIZE) {
             gamesToRead = INDEX_ENTRY_CHUNKSIZE;
         }
+
+#ifdef WIN32 // Fast file read
+        { Index::WinFileMapping fileMapping(*this, FilePtr->GetFileName());
+#endif
+
         err = ReadEntries (Entries[chunkCount], readCount, gamesToRead);
+
+#ifdef WIN32 // Fast file read
+        }
+#endif
+
         if (err != OK) {
             for (uint i = 0; i <= chunkCount; i++) {
                 delete[] Entries[i];
