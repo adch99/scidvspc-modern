@@ -484,6 +484,10 @@ proc ::docking::ctx_menu {w x y} {
   $mctxt add separator
   $mctxt add command -label [ ::tr Undock ] -command "::docking::undock $w"
   $mctxt add command -label [ ::tr Close ] -command " ::docking::close $w"
+  if {$::macOS} {
+    # undocking not implemented in OS X Tk
+    $mctxt entryconfigure 5 -state disabled
+  }
   tk_popup $mctxt [winfo pointerx .] [winfo pointery .]
 }
 ################################################################################

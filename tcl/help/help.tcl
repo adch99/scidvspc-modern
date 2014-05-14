@@ -460,6 +460,7 @@ append helpText(Index) {
   <h3><name W>W</name></h3>
   <ul>
   <li><a Menus Windows>Windows menu</a></li>
+  <li><a Docking>Window docking</a></li>
   </ul>
 
   <h3><name X>X</name></h3>
@@ -649,19 +650,21 @@ set helpTitle(Docking) "Docked Windows"
 set helpText(Docking) {<h1>Docked Windows</h1>
 <p>
 The Docked Windows feature allows Scid to have a single window, with the smaller windows
-tiling within. Options for this feature are found in <b>Options-<gt>Windows</b>, and this is also where you
-can load any of the three built-in layouts, or save your own window arrangements.
+tiling inside. Options for this feature are found in <b>Options-<gt>Windows</b>, where you
+can load any of the three built-in layouts, or save your own Window arrangements.
 </p><p>
 Arranging Docked Windows is a little difficult. One can right-click any tab (except the main
-board) and select to move to the side of the current paned window, or one can
-drag the tab and group it with other tabs in another paned window.</p>
+board) and select to move to the side of the current pane, or one can
+drag the tab and group it with other tabs in another paned window.
+Windows can also be undocked by right-clicking the tab.</p>
+<p><i>Mac OS X does not support undocking windows.</i></p>
 <p>
 Window focus automatically follows the mouse around, and also impacts which keyboard bindings are active.
-Most bindings are active when the mouse is over the main board.</p>
-<p>
-If Scid fails to start, use the <b>-nodock</b> command-line option to restart in non-docked mode.
-</p>
-<p><footer>Updated: Scid vs. PC 4.11, November 2013</footer></p> }
+Most bindings are active when the mouse is over the Main Board.</p>
+<p><i>
+If Scid fails to start, use the </i><b>-nodock</b><i> command-line option to restart in undocked mode.
+</i></p>
+<p><footer>Updated: Scid vs. PC 4.13, May 2014</footer></p> }
 
 set helpTitle(Menus) "Menus"
 set helpText(Menus) {<h1>Scid Menus</h1>
