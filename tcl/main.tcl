@@ -1626,6 +1626,16 @@ proc autoplay {} {
     ::move::Forward
   }
 
+  if {[sc_pos matchMoves {}] == ""} {
+    if {$::annotate(isBatch) && [sc_game number] != 0} {
+      nextgameAutoplay $n
+      return
+    }
+    toggleEngineAnalysis $n 1
+    cancelAutoplay
+    return
+  }
+
   if {!$annotate(Depth)} {
     after $autoplayDelay autoplay
   }
