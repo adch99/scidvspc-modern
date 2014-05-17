@@ -166,7 +166,10 @@ namespace eval uci {
           ### Depth annotation feature
 	  if {$annotate(Engine) > -1 && $annotate(Depth)} {
 	    # Wait a sec, and till a certain depth to make a move (or no valid moves avail)
-	    if {!$::pause && $uciInfo(depth$n) >= $annotate(WantedDepth) || $uciInfo(scoremate$n) > 0 || [sc_pos matchMoves {}] == {}} {
+	    if {$uciInfo(depth$n) >= $annotate(WantedDepth) || $uciInfo(scoremate$n) > 0 || [sc_pos matchMoves {}] == {}} {
+	      if {$::pause} {
+		vwait ::pause
+	      }
 	      if {[lindex $uciInfo(pv$n) 0] != $annotate(LastMove)} {
 		set annoMove [lindex $uciInfo(pv$n) 0]
               }
