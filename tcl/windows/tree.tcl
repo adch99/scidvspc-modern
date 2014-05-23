@@ -225,11 +225,6 @@ proc ::tree::Open {{baseNumber 0}} {
   }
 
   bind $w <Configure> "recordWinSize $w"
-  bind $w <Button-4> ::move::Back
-  bind $w <Button-5> ::move::Forward
-  bind $w.f.tl <Button-4> {::move::Back ; break}
-  bind $w.f.tl <Button-5> {::move::Forward ; break}
-  # bindMouseWheel $w $w.f.tl
 
   ### Tree statusbar now unused
   # label $w.status -width 1 -anchor w -font font_Small -relief sunken -textvar tree(status$baseNumber)
