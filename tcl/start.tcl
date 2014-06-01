@@ -10,7 +10,7 @@
 # or "copying.txt" that came with this program.
 
 # The next line restarts using tkscid: \
-exec `dirname $0`/tkscid "$0" "$@"
+exec `dirname "$0"`/tkscid "$0" "$@"
 
 # Alter the version if any patches have been made to the Tcl code only:
 set scidVersion 4.12
