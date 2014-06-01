@@ -262,7 +262,7 @@ scid: $(TCLS)
 
 ### Mac OSX App
 
-mac_app: all_scid engines
+mac_app: all_scid engines mac_rename mac_buttons
 	install -m 755 -d dist/ScidvsMac.app/Contents/MacOS
 	install -m 755 -d dist/ScidvsMac.app/Contents/Resources/data
 	install -m 755 -d dist/ScidvsMac.app/Contents/Resources/books
