@@ -103,9 +103,11 @@ proc ::gbrowser::new {base gnum {ply -1} {w {}}} {
 
     dialogbutton $w.b.load -textvar ::tr(LoadGame) -command "
       sc_base switch $base
-      ::game::Load $gnum 0
-      sc_move ply \$::gbrowser::ply($n)
-      updateBoard -pgn"
+      if {\[::game::Load $gnum 0\] != -1} {
+	destroy $w
+	sc_move ply \$::gbrowser::ply($n)
+	updateBoard -pgn
+      }"
 
     dialogbutton $w.b.merge -textvar ::tr(MergeGame) -command "mergeGame $base $gnum"
 
