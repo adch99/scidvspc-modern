@@ -2949,8 +2949,11 @@ proc toggleFinishGame {n} {
 
   set b ".analysisWin$n.b.finishGame"
 
-  if { $annotate(Button) || $::autoplayMode || !$analysis(analyzeMode$n) || ! [sc_pos isAt vend] } {
+  if { $annotate(Button) || $::autoplayMode || !$analysis(analyzeMode$n) } {
     return
+  }
+  if {! [sc_pos isAt vend]} {
+      sc_var create
   }
 
   set ::finishGameMode [expr ! $::finishGameMode]
@@ -2958,7 +2961,6 @@ proc toggleFinishGame {n} {
     $b configure -image autoplay_on
     after $::autoplayDelay autoplayFinishGame $n
   } else  {
-    set ::finishGameMode 0
     $b configure -image autoplay_off
     after cancel autoplayFinishGame
   }

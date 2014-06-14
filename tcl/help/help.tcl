@@ -2684,7 +2684,7 @@ making for easier <a Analysis Debugging>Debugging</a>.
   On Unix systems the engines priority can not be set back to normal.  </li>
   <li> <button tb_coords 32> <b>Show Board</b> displays a small working board.
   If engine is locked, the board displays the locked position.</li>
-  <li> <button autoplay_off 32> <b>Shoot out</b>, or "demo", mode allows the engine to play out the game. </li>
+  <li> <button autoplay_off 32> <b>Shoot out</b>, or "demo", mode allows the engine to play out the game. (Engine must be running first).</li>
   <li> <button tb_annotate 32> <b>Annotate</b> game (see below).</li>
   <li> <button tb_training 32> <b>Training</b> feature (see below).</li>
 <br>
