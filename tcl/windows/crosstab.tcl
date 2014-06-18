@@ -313,8 +313,10 @@ proc ::crosstab::Open {} {
   }
 
   # MouseWheel Bindings:
-  bind $w <MouseWheel> { .crosstabWin.f.text yview scroll [expr {- (%D / 120)}] units}
-  if {! $::windowsOS} {
+  if {$::windowsOS || $::macOS} {
+    bind $w <Shift-MouseWheel> {break}
+    bind $w <MouseWheel> { .crosstabWin.f.text yview scroll [expr {- (%D / 120)}] units}
+  } else {
     bind $w <Button-4> { .crosstabWin.f.text yview scroll -1 units }
     bind $w <Button-5> { .crosstabWin.f.text yview scroll  1 units }
   }

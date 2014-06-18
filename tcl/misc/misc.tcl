@@ -47,9 +47,10 @@ proc bindFocusColors {w {inColor lightYellow} {outColor white}} {
 #   the mouse wheel to scroll the text frame vertically.
 #
 proc bindMouseWheel {win text} {
-  bind $win <MouseWheel> \
-      "$text yview scroll \[expr -(%D / 120)\] units"
-  if {! $::windowsOS} {
+  if {$::windowsOS || $::macOS} {
+    bind $win <Shift-MouseWheel> {break}
+    bind $win <MouseWheel> "$text yview scroll \[expr -(%D / 120)\] units"
+  } else {
     bind $win <Button-4> [list $text yview scroll -1 units]
     bind $win <Button-5> [list $text yview scroll  1 units]
   }

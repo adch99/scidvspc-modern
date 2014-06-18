@@ -402,6 +402,7 @@ proc ::windows::gamelist::Open {} {
   if {$::windowsOS || $::macOS} {
     # Does this work fine on OSX ?
     # http://sourceforge.net/tracker/?func=detail&aid=2931538&group_id=12997&atid=112997
+    bind $w <Shift-MouseWheel> {break}
     bind $w <MouseWheel> {
       if {[expr -%D] < 0} { ::windows::gamelist::Scroll -1}
       if {[expr -%D] > 0} { ::windows::gamelist::Scroll 1}
