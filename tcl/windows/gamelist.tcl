@@ -412,6 +412,8 @@ proc ::windows::gamelist::Open {} {
       if {[expr -%D] > 0} { ::windows::gamelist::Scroll $glistSize}
     }
   } else {
+    bind $w <Shift-Button-4> "$w.tree xview scroll -40 units"
+    bind $w <Shift-Button-5> "$w.tree xview scroll 40 units"
     bind $w <Button-4> {::windows::gamelist::Scroll -1}
     bind $w <Button-5> {::windows::gamelist::Scroll 1}
     bind $w <Control-Button-4> {::windows::gamelist::Scroll -$glistSize}

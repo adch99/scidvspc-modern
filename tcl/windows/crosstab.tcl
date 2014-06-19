@@ -248,14 +248,15 @@ proc ::crosstab::Open {} {
   pack $w.f -side top -fill both -expand true
   # Causes flicker when updated
   # -width $::winWidth($w) -height $::winHeight($w) &&&
-  text $w.f.text -wrap none -font font_Fixed -setgrid 1 -cursor top_left_arrow \
+  set text $w.f.text
+  text $text -wrap none -font font_Fixed -setgrid 1 -cursor top_left_arrow \
      -yscroll "$w.f.ybar set" -xscroll "$w.f.xbar set"
-  ::htext::init $w.f.text
-  $w.f.text tag configure bgGray -background {}
+  ::htext::init $text
+  $text tag configure bgGray -background {}
   # Crosstable will have striped appearance if {} is replaced by another colour
-  scrollbar $w.f.ybar -command "$w.f.text yview"
-  scrollbar $w.f.xbar -orient horizontal -command "$w.f.text xview"
-  grid $w.f.text -row 0 -column 0 -sticky nesw
+  scrollbar $w.f.ybar -command "$text yview"
+  scrollbar $w.f.xbar -orient horizontal -command "$text xview"
+  grid $text -row 0 -column 0 -sticky nesw
   grid $w.f.ybar -row 0 -column 1 -sticky nesw
   grid $w.f.xbar -row 1 -column 0 -sticky nesw
   grid rowconfig $w.f 0 -weight 1 -minsize 0
@@ -297,28 +298,26 @@ proc ::crosstab::Open {} {
 
   standardShortcuts $w
 
-  bind $w <F1> { helpWindow Crosstable }
-  bind $w <Escape> { .crosstabWin.b.cancel invoke }
-  bind $w <Up> { .crosstabWin.f.text yview scroll -1 units }
-  bind $w <Down> { .crosstabWin.f.text yview scroll 1 units }
-  bind $w <Prior> { .crosstabWin.f.text yview scroll -1 pages }
-  bind $w <Next> { .crosstabWin.f.text yview scroll 1 pages }
-  bind $w <Left> { .crosstabWin.f.text xview scroll -1 units }
-  bind $w <Right> { .crosstabWin.f.text xview scroll 1 units }
-  bind $w <Key-Home> {
-    .crosstabWin.f.text yview moveto 0
-  }
-  bind $w <Key-End> {
-    .crosstabWin.f.text yview moveto 0.99
-  }
+  bind $w <F1>       "helpWindow Crosstable"
+  bind $w <Escape>   ".crosstabWin.b.cancel invoke"
+  bind $w <Up>       "$text yview scroll -1 units"
+  bind $w <Down>     "$text yview scroll 1 units"
+  bind $w <Prior>    "$text yview scroll -1 pages"
+  bind $w <Next>     "$text yview scroll 1 pages"
+  bind $w <Left>     "$text xview scroll -1 units"
+  bind $w <Right>    "$text xview scroll 1 units"
+  bind $w <Key-Home> "$text yview moveto 0"
+  bind $w <Key-End>  "$text yview moveto 0.99"
 
   # MouseWheel Bindings:
   if {$::windowsOS || $::macOS} {
     bind $w <Shift-MouseWheel> {break}
     bind $w <MouseWheel> { .crosstabWin.f.text yview scroll [expr {- (%D / 120)}] units}
   } else {
-    bind $w <Button-4> { .crosstabWin.f.text yview scroll -1 units }
-    bind $w <Button-5> { .crosstabWin.f.text yview scroll  1 units }
+    bind $text <Shift-Button-4> "$text xview scroll -5 units ; break"
+    bind $text <Shift-Button-5> "$text xview scroll 5 units ; break"
+    bind $text <Button-4> "$text yview scroll -1 units"
+    bind $text <Button-5> "$text yview scroll  1 units"
   }
 
   bind $w <Destroy> {}
