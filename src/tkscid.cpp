@@ -3007,7 +3007,7 @@ sc_base_duplicates (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
 int
 sc_base_tag (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
-    const char * usage = "Usage: sc_base tag [filter <tagname> | list | strip <tagname>]";
+    const char * usage = "Usage: sc_base tag [find <tagname> | list | strip <tagname> [filter|all]]";
     const char * options[] = {
         "find", "list", "strip", NULL
     };
@@ -3027,16 +3027,22 @@ sc_base_tag (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     int cmd = -1;
     if (argc >= 3) { cmd = strUniqueMatch (argv[2], options); }
+    bool limitToFilter = false;
 
     switch (cmd) {
     case TAG_LIST:
         if (argc != 3) { return errorResult (ti, usage); }
         tagnb = new NameBase;
         break;
-    case TAG_FIND:  // Same extra parameter as TAG_STRIP
-    case TAG_STRIP:
+    case TAG_FIND:
+        // It'd be nice to find the tags inside filter also, but this means restructuring the front end
         if (argc != 4) { return errorResult (ti,usage); }
         tag = argv[3];
+        break;
+    case TAG_STRIP:
+        if (argc != 5) { return errorResult (ti,usage); }
+        tag = argv[3];
+        limitToFilter = (argv[4][0] == 'f');
         break;
     default:
         return errorResult (ti, usage);
@@ -3068,6 +3074,8 @@ sc_base_tag (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                 updateProgressBar (ti, gnum, db->numGames);
             }
         }
+
+        if (limitToFilter  &&  db->filter->Get(gnum) == 0) { continue; }
 
         IndexEntry * ie = db->idx->FetchEntry (gnum);
         if (ie->GetLength() == 0) { continue; }

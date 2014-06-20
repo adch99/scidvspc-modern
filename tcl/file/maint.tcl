@@ -776,12 +776,10 @@ proc checkAllGames {} {
   frame $w.f.g
   radiobutton $w.f.g.all -textvar ::tr(CheckAll) -variable checkOption(AllGames) -value all
   radiobutton $w.f.g.filter -textvar ::tr(CheckSelectFilterGames) -variable checkOption(AllGames) -value filter
-  set row 0
-  foreach f {all filter} {
-    grid $w.f.g.$f -row $row -column 0 -sticky w
-    incr row
-  }
-  
+
+  pack $w.filter.all $w.filter.filter -side left  -padx 5
+  pack $w.filter -side top -expand 1
+
   frame $w.f.b
   dialogbutton $w.f.b.go -textvar ::tr(CheckGames) -command {
     busyCursor .
@@ -848,11 +846,7 @@ proc stripCommentsVars {arg {parent .}} {
   radiobutton $w.f.g.all -textvar ::tr(CheckAll) -variable checkOption(AllGames) -value all
   radiobutton $w.f.g.filter -textvar ::tr(CheckSelectFilterGames) -variable checkOption(AllGames) -value filter
   set ::checkOption(AllGames) filter
-  set row 0
-  foreach f {all filter} {
-    grid $w.f.g.$f -row $row -column 0 -sticky w
-    incr row
-  }
+  pack $w.f.g.all $w.f.g.filter -side left  -padx 5
   
   frame $w.f.b
   dialogbutton $w.f.b.go -text "[tr EditStrip] $arg" -command {
@@ -2058,6 +2052,16 @@ proc stripTags {{parent .}} {
   frame $w.tags
   pack $w.tags -side top -fill both -expand yes
   addHorizontalRule $w
+
+  set ::checkOption(AllGames) filter
+  frame $w.filter
+  radiobutton $w.filter.all -textvar ::tr(CheckAll) -variable checkOption(AllGames) -value all
+  radiobutton $w.filter.filter -textvar ::tr(CheckSelectFilterGames) -variable checkOption(AllGames) -value filter
+
+  pack $w.filter.all $w.filter.filter -side left  -padx 5
+  pack $w.filter -side top -expand 1
+  addHorizontalRule $w
+
   frame $w.buttons
   pack $w.buttons -side bottom -fill x -before $w.tags
 
@@ -2128,6 +2132,16 @@ proc zeroTags {{parent .}} {
   frame $w.tags
   pack $w.tags -side top -fill both -expand yes
   addHorizontalRule $w
+
+  set ::checkOption(AllGames) filter
+  frame $w.filter
+  radiobutton $w.filter.all -textvar ::tr(CheckAll) -variable checkOption(AllGames) -value all
+  radiobutton $w.filter.filter -textvar ::tr(CheckSelectFilterGames) -variable checkOption(AllGames) -value filter
+
+  pack $w.filter.all $w.filter.filter -side left  -padx 5
+  pack $w.filter -side top -expand 1
+  addHorizontalRule $w
+
   frame $w.buttons
   pack $w.buttons -side bottom -fill x -before $w.tags
 
@@ -2148,7 +2162,7 @@ proc zeroTags {{parent .}} {
          $tag == {}} {
       return
     }
-    puts $tag
+    puts todo:$tag
   }
 
   button $w.buttons.strip -text $::tr(StripTag) -command {
@@ -2156,7 +2170,7 @@ proc zeroTags {{parent .}} {
          $tag == {}} {
       return
     }
-    puts $tag
+    puts todo:$tag
   }
 
   button $w.buttons.cancel -text $::tr(Close) -command "destroy $w"
@@ -2181,13 +2195,15 @@ proc populateStripTags {} {
 }
 
 proc doStripTags {tag} {
-  set msg "Do you want to remove all occurences of \"$tag\" from this database?"
+  global checkOption
+
+  set msg "Do you want to remove all occurences of \"$tag\" from $checkOption(AllGames) games ?"
   set result [tk_messageBox -title "Scid" -parent .striptags \
       -icon question -type yesno -message $msg]
   if {$result == "no"} { return 0 }
   progressWindow "Scid" "Removing the PGN tag $tag." $::tr(Cancel) "sc_progressBar"
   busyCursor .
-  set err [catch {sc_base tag strip $tag} result]
+  set err [catch {sc_base tag strip $tag $checkOption(AllGames)} result]
   unbusyCursor .
   closeProgressWindow
   if {$err} {
@@ -2204,7 +2220,7 @@ proc findStripTags {tag} {
       $::tr(Cancel) "sc_progressBar"
   busyCursor .
   update
-  set err [catch {sc_base tag find $tag} result]
+  sc_base tag find $tag
   unbusyCursor .
   # closeProgressWindow
   if {$::pgnTags($tag) > 0} {
