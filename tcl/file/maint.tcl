@@ -2053,7 +2053,6 @@ proc stripTags {{parent .}} {
   pack $w.tags -side top -fill both -expand yes
   addHorizontalRule $w
 
-  set ::checkOption(AllGames) filter
   frame $w.filter
   radiobutton $w.filter.all -textvar ::tr(CheckAll) -variable checkOption(AllGames) -value all
   radiobutton $w.filter.filter -textvar ::tr(CheckSelectFilterGames) -variable checkOption(AllGames) -value filter
@@ -2075,7 +2074,7 @@ proc stripTags {{parent .}} {
 
   bind $w.tags.list <Double-ButtonRelease-1> "$w.buttons.find invoke; break"
 
-  button $w.buttons.find -text $::tr(SetFilter) -command {
+  dialogbutton $w.buttons.find -text $::tr(Filter) -command {
     if {[catch {set tag [lindex [.striptags.tags.list get [.striptags.tags.list cursel]] 0]}] || \
          $tag == {}} {
       return
@@ -2083,7 +2082,7 @@ proc stripTags {{parent .}} {
     findStripTags $tag
   }
 
-  button $w.buttons.strip -text $::tr(StripTag) -command {
+  dialogbutton $w.buttons.strip -text $::tr(StripTag) -command {
     if {[catch {set tag [lindex [.striptags.tags.list get [.striptags.tags.list cursel]] 0]}] || \
          $tag == {}} {
       return
@@ -2097,7 +2096,7 @@ proc stripTags {{parent .}} {
     }
   }
 
-  button $w.buttons.cancel -text $::tr(Close) -command "destroy $w"
+  dialogbutton $w.buttons.cancel -text $::tr(Close) -command "destroy $w"
   pack $w.buttons.find $w.buttons.strip -side left -padx 5 -pady 3
   pack $w.buttons.cancel -side right -padx 5 -pady 3
   bind $w <Escape> "$w.buttons.cancel invoke"
@@ -2133,7 +2132,6 @@ proc zeroTags {{parent .}} {
   pack $w.tags -side top -fill both -expand yes
   addHorizontalRule $w
 
-  set ::checkOption(AllGames) filter
   frame $w.filter
   radiobutton $w.filter.all -textvar ::tr(CheckAll) -variable checkOption(AllGames) -value all
   radiobutton $w.filter.filter -textvar ::tr(CheckSelectFilterGames) -variable checkOption(AllGames) -value filter
