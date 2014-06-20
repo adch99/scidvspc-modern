@@ -2467,7 +2467,7 @@ For example - the first two examples remove four digit ELOs from player names. T
   <h3><name Tags>Strip Extra Tags</name></h3>
   <p>
   This feature scans the database for extra PGN tags (such as "Annotator").
-  Then, one may strip these tags from the base, or set the filter to
+  Then, one may strip these tags, or adjust the filter to
   show the matching games.
   </p>
 

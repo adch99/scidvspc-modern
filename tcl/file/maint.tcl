@@ -2216,16 +2216,20 @@ proc doStripTags {tag} {
 }
 
 proc findStripTags {tag} {
+  global checkOption
+
   # progressWindow "Scid" "Finding games with the PGN tag $tag" \
       $::tr(Cancel) "sc_progressBar"
   busyCursor .
   update
-  sc_base tag find $tag
+  sc_base tag find $tag $checkOption(AllGames)
   unbusyCursor .
   # closeProgressWindow
-  if {$::pgnTags($tag) > 0} {
+puts "::pgnTags($tag) $::pgnTags($tag)"
+  if {$::pgnTags($tag) > 0 && [sc_filter count] > 0} {
     ::game::LoadNextPrev first 0
   } else {
+puts refresh
     ::windows::gamelist::Refresh
   }
 }

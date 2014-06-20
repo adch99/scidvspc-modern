@@ -3035,10 +3035,6 @@ sc_base_tag (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         tagnb = new NameBase;
         break;
     case TAG_FIND:
-        // It'd be nice to find the tags inside filter also, but this means restructuring the front end
-        if (argc != 4) { return errorResult (ti,usage); }
-        tag = argv[3];
-        break;
     case TAG_STRIP:
         if (argc != 5) { return errorResult (ti,usage); }
         tag = argv[3];
@@ -3051,11 +3047,6 @@ sc_base_tag (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     // If stripping a tag, make sure we have a writable database:
     if (cmd == TAG_STRIP  &&  db->fileMode == FMODE_ReadOnly) {
         return errorResult (ti, errMsgReadOnly(ti));
-    }
-
-    // If setting filter, clear it now:
-    if (cmd == TAG_FIND) {
-      db->dbFilter->Fill (0);
     }
 
     // Process each game in the database:
@@ -3091,6 +3082,8 @@ sc_base_tag (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             if (g->FindExtraTag (tag) != NULL) {
                 // Found the tag, so add this game to the filter:
                 db->dbFilter->Set (gnum, 1);
+            } else {
+                db->dbFilter->Set (gnum, 0);
             }
         } else if (cmd == TAG_STRIP) {
             if (g->RemoveExtraTag (tag)) {
