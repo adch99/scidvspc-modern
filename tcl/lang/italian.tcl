@@ -166,7 +166,6 @@ menuText I ToolsMaintDelete "Cancella le partite doppie..." 20 \
   {Cerca le partite duplicate e le seleziona per cancellarle}
 menuText I ToolsMaintTwin "Finestra di controllo delle doppie" 0 \
   {Apre/aggiorna la finestra del controllo dei duplicati}
-menuText I ToolsMaintName "Controllo di nomi" 13 {Editor di nomi e controllo ortografico}
 menuText I ToolsMaintNameEditor "Finestra di editor dei nomi" 0 \
   {Apre/chiude la finestra di editor dei nomi}
 menuText I ToolsMaintNamePlayer "Controllo di nomi dei giocatori..." 22 \

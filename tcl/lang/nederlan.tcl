@@ -176,8 +176,6 @@ menuText N ToolsMaintDelete "Dubbele partijen verwijderen..." 0 \
   {Vind dubbele partijen om ze te verwijderen}
 menuText N ToolsMaintTwin "Dubbele partijenvenster" 1 \
   {Open/bijwerken het dubbele partijen controlevenster}
-menuText N ToolsMaintName "Namen" 0 \
-  {Corrigeer namen/spelling}
 menuText N ToolsMaintNameEditor "Namen-bewerker" 6 \
   {Open/sluit het namen correctievenster}
 menuText N ToolsMaintNamePlayer "Corrigeer naam speler..." 15 \

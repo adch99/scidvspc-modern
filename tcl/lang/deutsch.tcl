@@ -191,8 +191,6 @@ menuText D ToolsMaintDelete "Dubletten löschen..." 0 \
   {Dubletten finden und Löschkennzeichen setzen}
 menuText D ToolsMaintTwin "Dubletten prüfen" 10 \
   {Dublettenfenster öffnen/erneuern}
-menuText D ToolsMaintName "Namen" 0 \
-  {Namenseditor und Rechtschreibprüfung}
 menuText D ToolsMaintNameEditor "Namenseditor" 0 \
   {Namenseditorfenster öffnen/schließen}
 menuText D ToolsMaintNamePlayer "Schreibkorrektur Spieler..." 17 \

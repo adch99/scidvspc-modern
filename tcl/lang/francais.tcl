@@ -173,7 +173,6 @@ menuText F ToolsMaintDelete "Purger les doublons..." 0 \
   {Trouver les parties en doublons et les marquer pour l'effacement}
 menuText F ToolsMaintTwin "Trouver les doublons" 0 \
   {Ouvrir/Actualiser la fenêtre de recherche de doublons}
-menuText F ToolsMaintName "Orthographie des noms" 0 {Édition des noms et outils orthographiques}
 menuText F ToolsMaintNameEditor "Éditeur de noms" 11 {Ouvrir/Fermer l'éditeur de noms}
 menuText F ToolsMaintNamePlayer "Corriger les noms de joueurs..." 21 \
   {Vérifier l'orthographe des noms de joueurs}

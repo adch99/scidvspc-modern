@@ -181,7 +181,6 @@ menuText O ToolsMaintDelete "Slett duplikater..." 6 \
   {Finner like partier og merker en av dem for sletting}
 menuText O ToolsMaintTwin "Duplikatsjekkvindu" 1 \
   {Åpne/oppdatere duplikatsjekkvinduet}
-menuText O ToolsMaintName "Navnestaving" 0 {Redigering og stavekontroll av navn}
 menuText O ToolsMaintNameEditor "Navneredigering" 5 \
   {Åpne/lukk vinduet for navneredigering}
 menuText O ToolsMaintNamePlayer "Kontroller navn..." 0 \

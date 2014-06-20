@@ -179,7 +179,6 @@ menuText H ToolsMaintDelete "Ikerjátszmák törlése..." 0 \
   {Megkeresi az ikerjátszmákat, és megjelöli õket törlésre.}
 menuText H ToolsMaintTwin "Ikerkeresõ ablak" 4 \
   {Kinyitja/becsukja az ikerkeresõ ablakot.}
-menuText H ToolsMaintName "Nevek helyesírása" 0 {Névszerkesztõ és helyesírási eszközök}
 menuText H ToolsMaintNameEditor "Névszerkesztõ" 0 \
   {Kinyitja/becsukja a névszerkesztõ ablakot.}
 menuText H ToolsMaintNamePlayer "Játékosnevek ellenõrzése..." 0 \

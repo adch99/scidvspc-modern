@@ -168,7 +168,6 @@ menuText W ToolsMaintDelete "Radera dubbletter..." 0 \
   {Sök dubbletter och markera dem som raderingsbara}
 menuText W ToolsMaintTwin "Sök dubbletter" 0 \
   {Öppna/ stäng dubblettfönstret för att söka dubblettpartier}
-menuText W ToolsMaintName "Stavningskontroll" 0 {Namnredigering och stavningskontroll}
 menuText W ToolsMaintNameEditor "Redigera namn" 0 \
   {Redigera spelarnamn utifrån rättstavningsfilen}
 menuText W ToolsMaintNamePlayer "Stavningskontrollera namn..." 22 \

@@ -173,7 +173,6 @@ menuText S ToolsMaintDelete "Borrar partidas dobles..." 0 \
   {Encuentra partidas dobles y las coloca para ser borradas}
 menuText S ToolsMaintTwin "Inspección de dobles" 11 \
   {Abre/actualiza la ventana de inspección de dobles}
-menuText S ToolsMaintName "Ortografía de nombres" 0 {Herramientas de ortografía y edición de nombres}
 menuText S ToolsMaintNameEditor "Edición de nombres" 0 \
   {Abre/Cierra la ventana de edición de nombres}
 menuText S ToolsMaintNamePlayer "Corrección de nombres de jugadores" 11 \

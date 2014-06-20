@@ -535,11 +535,25 @@ set helpMessage($m.utils,0) ToolsMaintWin
 $m.utils add command -label ToolsMaintCompact -command makeCompactWin
 set helpMessage($m.utils,1) ToolsMaintCompact
 
-$m.utils add command -label ToolsMaintClass -command classifyAllGames
-set helpMessage($m.utils,2) ToolsMaintClass
-
 $m.utils add command -label ToolsMaintSort -command makeSortWin
 set helpMessage($m.utils,3) ToolsMaintSort
+
+$m.utils add separator
+
+$m.utils add command -label ToolsMaintNameEditor -command nameEditor 
+set helpMessage($m.utils,0) ToolsMaintNameEditor
+
+$m.utils add command -label ToolsMaintNamePlayer -command {openSpellCheckWin Player}
+set helpMessage($m.utils,1) ToolsMaintNamePlayer
+
+$m.utils add command -label ToolsMaintNameEvent -command {openSpellCheckWin Event}
+set helpMessage($m.utils,2) ToolsMaintNameEvent
+
+$m.utils add command -label ToolsMaintNameSite -command {openSpellCheckWin Site}
+set helpMessage($m.utils.3) ToolsMaintNameSite
+
+$m.utils add command -label ToolsMaintNameRound -command {openSpellCheckWin Round}
+set helpMessage($m.utils,4) ToolsMaintNameRound
 
 $m.utils add separator
 
@@ -551,26 +565,8 @@ set helpMessage($m.utils,6) ToolsMaintTwin
 
 $m.utils add separator
 
-menu $m.utils.name
-$m.utils add cascade -label ToolsMaintName -menu .menu.tools.utils.name
-set helpMessage($m.utils,8) ToolsMaintName
-
-$m.utils.name add command -label ToolsMaintNameEditor -command nameEditor 
-set helpMessage($m.utils.name,0) ToolsMaintNameEditor
-
-$m.utils.name add command -label ToolsMaintNamePlayer -command {openSpellCheckWin Player}
-set helpMessage($m.utils.name,1) ToolsMaintNamePlayer
-
-$m.utils.name add command -label ToolsMaintNameEvent -command {openSpellCheckWin Event}
-set helpMessage($m.utils.name,2) ToolsMaintNameEvent
-
-$m.utils.name add command -label ToolsMaintNameSite -command {openSpellCheckWin Site}
-set helpMessage($m.utils.name.3) ToolsMaintNameSite
-
-$m.utils.name add command -label ToolsMaintNameRound -command {openSpellCheckWin Round}
-set helpMessage($m.utils.name,4) ToolsMaintNameRound
-
-$m.utils add separator
+$m.utils add command -label ToolsMaintClass -command classifyAllGames
+set helpMessage($m.utils,2) ToolsMaintClass
 
 $m.utils add command -label ToolsMaintFixBase -command ::maint::fixCorruptedBase
 set helpMessage($m.utils,10) ToolsMaintFixBase
@@ -1296,8 +1292,8 @@ proc updateMenuStates {} {
   foreach i {Compact Delete} {
     $m.tools.utils entryconfig [tr ToolsMaint$i] -state disabled
   }
-  foreach i {Player Event Site Round} {
-    $m.tools.utils.name entryconfig [tr ToolsMaintName$i] -state disabled
+  foreach i {Editor Player Event Site Round} {
+    $m.tools.utils entryconfig [tr ToolsMaintName$i] -state disabled
   }
 
   $m.file entryconfig [tr FileReadOnly] -state disabled
@@ -1324,9 +1320,8 @@ proc updateMenuStates {} {
     $m.file entryconfig [tr FileClose] -state normal
     if {! $isReadOnly} {
       $m.tools.utils entryconfig [tr ToolsMaintDelete] -state normal
-      $m.tools.utils entryconfig [tr ToolsMaintName] -state normal
-      foreach i {Player Event Site Round} {
-        $m.tools.utils.name entryconfig [tr ToolsMaintName$i] -state normal
+      foreach i {Editor Player Event Site Round} {
+        $m.tools.utils entryconfig [tr ToolsMaintName$i] -state normal
       }
       $m.file entryconfig [tr FileReadOnly] -state normal
     }
@@ -1464,13 +1459,13 @@ proc setLanguageMenus {{lang ""}} {
     configMenuText .menu.tools [tr Tools$tag $oldLang] Tools$tag $lang
   }
 
-  foreach tag {Win Compact Delete Twin Class Sort Name FixBase} {
+  foreach tag {Win Compact Delete Twin Class Sort FixBase} {
     # Maintenance used to be in .menu.file but is now in .menu.tools
     configMenuText .menu.tools.utils [tr ToolsMaint$tag $oldLang] \
         ToolsMaint$tag $lang
   }
   foreach tag {Editor Player Event Site Round} {
-    configMenuText .menu.tools.utils.name [tr ToolsMaintName$tag $oldLang] \
+    configMenuText .menu.tools.utils [tr ToolsMaintName$tag $oldLang] \
         ToolsMaintName$tag $lang
   }
 

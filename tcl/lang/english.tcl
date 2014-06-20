@@ -181,7 +181,6 @@ menuText E ToolsMaintClass "ECO-Classify Games" 2 {Recompute the ECO code of all
 menuText E ToolsMaintSort "Sort Database" 0 {Sort all games in the database}
 menuText E ToolsMaintDelete "Delete Twin Games" 0 {Find twin games and set them to be deleted}
 menuText E ToolsMaintTwin "Twin Checker Window" 0 {Open/update the Twin checker window}
-menuText E ToolsMaintName "Name Spelling" 0 {Name editing and spelling tools}
 menuText E ToolsMaintNameEditor "Name Editor" 0 {Open/close the name editor window}
 menuText E ToolsMaintNamePlayer "Spellcheck Player Names" 11 {Spellcheck player names using the spellcheck file}
 menuText E ToolsMaintNameEvent "Spellcheck Event Names" 11 {Spellcheck event names using the spellcheck file}

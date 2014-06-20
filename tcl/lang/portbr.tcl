@@ -181,7 +181,6 @@ menuText B ToolsMaintDelete "Apagar jogos duplicados..." 13 \
   {Encontra jogos duplicados e os marca para exclusao}
 menuText B ToolsMaintTwin "Janela de verificacao de duplicatas" 10 \
   {Abre/atualiza a janela de verificacao de duplicatas}
-menuText B ToolsMaintName "Ortografia de nomes" 14 {Ferramentas de edicao e correcao ortografica de nomes}
 menuText B ToolsMaintNameEditor "Editor de Nomes" 0 \
   {Abre/fecha a janela do editor de nomes}
 menuText B ToolsMaintNamePlayer "Verificacao Ortografica de Nomes de Jogadores..." 11 \

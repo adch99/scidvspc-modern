@@ -170,8 +170,6 @@ menuText P ToolsMaintDelete "Usuń podwójne partie..." 0 \
   {Szukaj podwójnych partii i oznacz je do skasowania}
 menuText P ToolsMaintTwin "Wyszukiwanie podwójnych partii" 0 \
   {Otwórz/uaktualnij wyszukiwanie podwójnych partii}
-menuText P ToolsMaintName "Pisownia" 0 \
-  {Edycja nazw/nazwisk i kontrola pisowni}
 menuText P ToolsMaintNameEditor "Edytor nazwisk" 0 \
   {Otwórz/zamknij edytor nazwisk}
 menuText P ToolsMaintNamePlayer "Sprawdź pisownię nazwisk..." 17 \

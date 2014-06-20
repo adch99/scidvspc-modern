@@ -175,7 +175,6 @@ menuText C ToolsMaintDelete "Vymazání zdvojených partií..." 0 \
   {Hledat zdvojené partie a oznaèit je pro vymazání}
 menuText C ToolsMaintTwin "Kontrola zdvojených partií" 0 \
   {Otevøít/aktualizovat okno pro kontrolu zdvojených partií}
-menuText C ToolsMaintName "Jména" 0 {Editace jmen a kontrola pravopisu}
 menuText C ToolsMaintNameEditor "Editor jmen" 0 \
   {Otevøít/zavøít editor jmen}
 menuText C ToolsMaintNamePlayer "Kontrola pravopisu hráèù..." 19 \

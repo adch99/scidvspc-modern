@@ -180,7 +180,6 @@ menuText Y ToolsMaintDelete "Izbri¹i udvojene partije..." 0 \
   {Naði udvojene partije i oznaèi ih za brisanje}
 menuText Y ToolsMaintTwin "Provera udvojenih partija" 0 \
   {Otvori/osve¾i prozor za proveru udvojenih partija}
-menuText Y ToolsMaintName "Imena" 0 {Promena imena i kontrola pravopisa}
 menuText Y ToolsMaintNameEditor "Editor imena" 0 \
   {Otvori/zatvori editor imena}
 menuText Y ToolsMaintNamePlayer "Provera pravopisa imena igraèa..." 11 \
