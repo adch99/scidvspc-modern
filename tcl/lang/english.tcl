@@ -1195,8 +1195,8 @@ translate E TrackerMovesStart {Enter the move number where tracking should begin
 translate E TrackerMovesStop {Enter the move number where tracking should stop.}
 
 # Game selection dialogs:
-translate E SelectAllGames {All games in the database}
-translate E SelectFilterGames {Only games in the filter}
+translate E SelectAllGames {All games}
+translate E SelectFilterGames {Filter games}
 translate E SelectTournamentGames {Only games in the current tournament}
 translate E SelectOlderGames {Only older games}
 
@@ -1319,9 +1319,7 @@ translate E FindNovelty {Find Novelty}
 translate E Novelty {Novelty}
 translate E NoveltyInterrupt {Novelty search interrupted}
 translate E NoveltyNone {No novelty was found for this game}
-translate E NoveltyHelp {
-Scid will find the first move of the current game that reaches a position not found in the selected database or in the ECO openings book.
-}
+translate E NoveltyHelp {Find the first unique move in the selected base}
 
 # Sounds configuration:
 translate E SoundsFolder {Sounds Folder}

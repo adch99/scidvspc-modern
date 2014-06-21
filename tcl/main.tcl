@@ -877,7 +877,6 @@ proc updateBoard3 {pgnNeedsUpdate} {
   ::pgn::Refresh $pgnNeedsUpdate
   if {[winfo exists .bookWin]} { ::book::refresh }
   if {[winfo exists .bookTuningWin]} { ::book::refreshTuning }
-  if {[winfo exists .noveltyWin]} { updateNoveltyWin }
 
   # Refresh tree last because it is slowest. Side effects ?
   ::tree::refresh

@@ -11,42 +11,44 @@
 set noveltyOlder 0
 
 proc findNovelty {} {
-  global noveltyBase noveltyOlder
-  set noveltyBase [sc_base current]
+  global refDatabase noveltyOlder
+# set refDatabase [sc_base current]
   set w .noveltyWin
   if {[winfo exists $w]} {
-    updateNoveltyWin
-    return
+    destroy $w
   }
 
   toplevel $w
   wm withdraw $w
   wm title $w "$::tr(FindNovelty)"
 
-  pack [frame $w.help] -side top -fill x
-  text $w.help.text -width 1 -height 5 -wrap word \
-      -relief ridge -cursor top_left_arrow -yscrollcommand "$w.help.ybar set"
-  scrollbar $w.help.ybar -orient vertical -command "$w.help.text yview" \
-      -takefocus 0 -width 10
-  pack $w.help.ybar -side right -fill y
-  pack $w.help.text -side left -fill x -expand yes
-  $w.help.text insert end [string trim $::tr(NoveltyHelp)]
-  $w.help.text configure -state disabled
+  label $w.help -text [string trim $::tr(NoveltyHelp)]
+  pack $w.help -side top
 
-  label $w.title -text $::tr(Database:) -font font_Bold
+  label $w.title -text $::tr(Database)
   pack $w.title -side top
-  set numBases [sc_base count total]
-  for {set i 1} {$i <= $numBases} {incr i} {
-    radiobutton $w.b$i -text "" -variable noveltyBase -value $i -underline 5
-    pack $w.b$i -side top -anchor w -padx 10
+
+  set ::listbases {}
+  for {set i 1} {$i <= [sc_base count total]} {incr i} {
+    if {[sc_base inUse $i]} {
+      set basename [file tail [sc_base filename $i]]
+      if {[sc_base current] == $i} {
+	set current $basename
+      }
+      lappend ::listbases $basename
+    }
   }
+  ttk::combobox $w.refdb -textvariable refDatabase -values $::listbases
+  $w.refdb set $current
+  pack $w.refdb -side top -pady 2
+
   addHorizontalRule $w
 
-  label $w.which -text $::tr(TwinsWhich:) -font font_Bold
+  label $w.which -text $::tr(TwinsWhich)
   pack $w.which -side top
   radiobutton $w.all -text $::tr(SelectAllGames) \
       -variable noveltyOlder -value 0
-  radiobutton $w.older -text $::tr(SelectOlderGames) \
+  radiobutton $w.older -text "$::tr(SelectOlderGames) (< [sc_game info date])" \
       -variable noveltyOlder -value 1
   pack $w.all $w.older -side top -anchor w -padx 10
 
@@ -65,12 +67,20 @@ proc findNovelty {} {
     .noveltyWin.status configure -text " ... "
     update
     grab .noveltyWin.b.stop
+
+    if {$refDatabase == {[clipbase]}} {
+      set noveltyBase 9
+    } else {
+      set noveltyBase [expr {[.noveltyWin.refdb current] + 1}]
+    }
+
     if {$noveltyOlder} {
       set err [catch {sc_game novelty -older -updatelabel .noveltyWin.status $noveltyBase} result]
     } else {
       set err [catch {sc_game novelty -updatelabel .noveltyWin.status $noveltyBase} result]
     }
     grab release .noveltyWin.b.stop
+
     if {! $err} { set result "$::tr(Novelty): $result" }
     unbusyCursor .
     .noveltyWin.b.stop configure -state disabled
@@ -85,30 +95,12 @@ proc findNovelty {} {
   packbuttons right $w.b.close $w.b.go $w.b.stop
   wm resizable $w 0 0
   focus $w.b.go
-  bind $w <KeyPress-1> "$w.b1 invoke"
-  bind $w <KeyPress-2> "$w.b2 invoke"
-  bind $w <KeyPress-3> "$w.b3 invoke"
-  bind $w <KeyPress-4> "$w.b4 invoke"
-  updateNoveltyWin
 
   update
   placeWinOverParent $w .
   wm deiconify $w
 }
 
-proc updateNoveltyWin {} {
-  set w .noveltyWin
-  if {! [winfo exists $w]} { return }
-  set numBases [sc_base count total]
-  $w.older configure -text "$::tr(SelectOlderGames) (< [sc_game info date])"
-  for {set i 1} {$i <= $numBases} {incr i} {
-    set name [file tail [sc_base filename $i]]
-    set ng [::utils::thousands [sc_base numGames $i]]
-    set text "Base $i: $name ($ng $::tr(games))"
-    $w.b$i configure -state normal -text $text
-    if {$ng == 0} { $w.b$i configure -state disabled }
-  }
-}
 
 set merge(ply) 40
 
