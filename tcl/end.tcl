@@ -1488,17 +1488,14 @@ proc standardShortcuts {w} {
   bind $w <Control-slash> ::file::finder::Open
   bind $w <Control-m> ::maint::Open
   bind $w <Control-q> ::file::Exit
-  bind $w <Control-L> ::game::Reload
   bind $w <Control-g> ::game::GotoMoveNumber
-  bind $w <Control-G> ::game::LoadNumber
+  bind $w <Control-u> ::game::LoadNumber
   bind $w <Control-B> ::search::board
   bind $w <Control-H> ::search::header
   bind $w <Control-M> ::search::material
-  bind $w <Control-KeyPress-U> ::search:::usefile
   bind $w <Control-e> ::commenteditor::Open
   bind $w <Control-b> ::book::Open
   bind $w <Control-l> ::windows::gamelist::Open
-  bind $w <Control-d> ::windows::gamelist::Open
   bind $w <Control-p> ::pgn::Open
   bind $w <Control-T> ::tourney::Open
   bind $w <Control-P> ::plist::Open
@@ -1506,9 +1503,6 @@ proc standardShortcuts {w} {
   bind $w <Control-t> ::tree::Open
   bind $w <Control-A> ::enginelist::choose
   bind $w <Control-X> ::crosstab::Open
-  bind $w <Control-E> ::tools::email
-  bind $w <Control-O> ::optable::makeReportWin
-  # bind $w <Control-R> {::tools::graphs::rating::Refresh both}
   bind $w <Control-Z> ::tools::graphs::score::Toggle
   bind $w <Control-I> importPgnGame
 

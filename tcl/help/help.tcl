@@ -5869,7 +5869,7 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li> Bug-fix: Search in variations never matched positions at end-of-line</li>
 <li> Bug-fix: Opening Table favourites werent working properly</li>
 <li> In Export PGN dialog, add an option for "Space after Move Numbers"</li>
-<li> Keyboard short-cuts changes. Control-L (etc) no longer open/close, but open/raise</li>
+<li> Keyboard short-cuts changes. Control-p (etc) no longer open/close, but open/raise</li>
 <li> Tweak Comment Editor and Player Info buttons</li>
 </ul>
 
@@ -6451,6 +6451,7 @@ The window manager may interfere with some shortcuts.
 <li><b>F4</b> - Toggle engine 3</li>
 <li><b>enter</b> - Add move from chess engine</li>
 <li><b>space</b> - Start/stop chess engine</li>
+<li><b>control-space</b> - Toggle trial mode</li>
 </ul>
 
 <h4>Copy / Paste</h4>
@@ -6475,9 +6476,9 @@ The window manager may interfere with some shortcuts.
 <li><b>control-G</b> - Load game number</li>
 <li><b>control-?</b> - Load random game</li>
 <li></li>
-<li><b>control-n</b> - New database</li>
 <li><b>control-o</b> - Open database</li>
 <li><b>control-w</b> - Close database</li>
+<li><b>control-N</b> - New database</li>
 <li><b>control-/</b> - Finder</li>
 <li></li>
 <li><b>control-1</b> - Switch to first open base</li>
@@ -6493,11 +6494,10 @@ The window manager may interfere with some shortcuts.
 <li><b>control-M</b> - Material search</li>
 <li></li>
 <li><b>control-F</b> - Reset filter</li>
-<li><b>control-N</b> - Negate Filter</li>
+<li><b>control-n</b> - Negate Filter</li>
 <li></li>
 <li><b>control-P</b> - Player finder</li>
 <li><b>control-T</b> - Tournament finder</li>
-<li><b>control-Y</b> - Find novelty</li>
 <li><b>control-Z</b> - Score graph</li>
 </ul>
 
@@ -6529,8 +6529,8 @@ The window manager may interfere with some shortcuts.
 <li><b>control-l</b> - Gamelist window</li>
 <li><b>control-m</b> - Maintenance window</li>
 <li><b>control-M</b> - Material search</li>
-<li><b>control-n</b> - New database</li>
-<li><b>control-N</b> - Negate Filter</li>
+<li><b>control-n</b> - Negate Filter</li>
+<li><b>control-N</b> - New database</li>
 <li><b>control-o</b> - Open database</li>
 <li><b>control-p</b> - PGN window</li>
 <li><b>control-P</b> - Player finder</li>
@@ -6544,11 +6544,11 @@ The window manager may interfere with some shortcuts.
 <li><b>control-w</b> - Close database</li>
 <li><b>control-x</b> - New game</li>
 <li><b>control-X</b> - Crosstable</li>
-<li><b>control-Y</b> - Find novelty</li>
 <li></li>
 
 <li><b>control-/</b> - Finder</li>
 <li><b>control-?</b> - Load random game</li>
+<li><b>control-space</b> - Toggle trial mode</li>
 <li><b>control-delete</b> - Delete current game</li>
 <li><b>control-up</b> - Load previous game</li>
 <li><b>control-down</b> - Load next game</li>

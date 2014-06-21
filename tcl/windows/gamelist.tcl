@@ -421,7 +421,7 @@ proc ::windows::gamelist::Open {} {
   }
 
   bind $w <Control-F> ::search::filter::reset
-  bind $w <Control-N> ::search::filter::negate
+  bind $w <Control-n> ::search::filter::negate
 
   foreach i { <Control-Home> <Control-End> <Control-Down> <Control-Up> <Control-question>} {
     bind .glistWin $i +::windows::gamelist::showCurrent
