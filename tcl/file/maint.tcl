@@ -1738,6 +1738,7 @@ proc compactGames {parent} {
   } else {
     updateBoard
     ::windows::gamelist::Refresh
+    ::crosstab::Refresh
     ::maint::Refresh
     tk_messageBox -type ok -icon info -parent $parent \
         -title [concat "Scid: " $::tr(CompactGames)] \
@@ -1894,6 +1895,7 @@ proc sortDatabase {} {
 
   updateBoard
   ::windows::gamelist::Refresh
+  ::crosstab::Refresh
   ::maint::Refresh
   if {$err} {
     tk_messageBox -type ok -icon warning -parent $w \
@@ -2462,6 +2464,7 @@ proc doCleaner {} {
   mtoolAdd $t "Done."
   updateBoard
   ::windows::gamelist::Refresh
+  ::crosstab::Refresh
   ::maint::Refresh
   $w.b.close configure -state normal
   catch {grab release $w}
