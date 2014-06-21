@@ -952,9 +952,9 @@ translate E TwinCriteria3 {You should specify "Yes" for at least two of the "Sam
 Continue anyway?}
 translate E TwinCriteriaConfirm {Scid: Confirm twin settings}
 translate E TwinChangeTag "Change the following game tags:\n\n"
-translate E AllocRatingDescription "This command will use the current spellcheck file to add Elo ratings to games in this database. Wherever a player has no current rating but his/her rating at the time of the game is listed in the spellcheck file, that rating will be added."
-translate E RatingOverride "Overwrite existing non-zero ratings?"
-translate E AddRatings "Add ratings to:"
+translate E AllocRatingDescription "Add Player Elo Ratings to relevant games, using info from the Spelling (Ratings) file."
+translate E RatingOverride "Overwrite existing ratings?"
+translate E AddRatings "Add ratings to"
 translate E AddedRatings {Scid added $r Elo ratings in $g games.}
 
 #Bookmark editor

@@ -13221,11 +13221,9 @@ sc_name_ratings (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         return TCL_ERROR;
     }
     if (! sp->HasEloData()) {
-        Tcl_AppendResult (ti, "The current spellcheck file does not have ",
-                          "Elo rating information.\n\n",
-                          "To use this function, you should load ",
-                          "\"ratings.ssp\" (available from the Scid website) ",
-                          "as your spellcheck file first.", NULL);
+        Tcl_AppendResult (ti, "The current spelling file does not have Elo ratings.\n\n",
+                          "Please load \"ratings.ssp\" (available from the Scid website) ",
+                          "as your spellcheck file.", NULL);
 
         return TCL_ERROR;
     }

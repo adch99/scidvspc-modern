@@ -1946,20 +1946,24 @@ proc allocateRatings {{parent .}} {
   }
   set w .ardialog
   toplevel $w
-  wm title $w "Scid"
+  wm title $w "Allocate Ratings"
   wm withdraw $w
 
   label $w.lab -wraplength 3i -justify left -text $::tr(AllocRatingDescription)
   pack $w.lab -side top
   addHorizontalRule $w
+
+  label $w.overwrite -text $::tr(RatingOverride)
+  pack $w.overwrite -side top
+
   pack [frame $w.r] -side top
-  label $w.r.lab -text $::tr(RatingOverride)
   radiobutton $w.r.yes -variable addRatings(overwrite) \
       -value 1 -text $::tr(Yes)
   radiobutton $w.r.no -variable addRatings(overwrite) \
       -value 0 -text $::tr(No)
-  pack $w.r.lab $w.r.yes $w.r.no -side left
+  pack $w.r.yes $w.r.no -side left
   addHorizontalRule $w
+
   pack [frame $w.g] -side top
   label $w.g.lab -text $::tr(AddRatings)
   radiobutton $w.g.all -variable addRatings(filter) \
