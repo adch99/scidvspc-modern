@@ -2002,7 +2002,7 @@ proc ::board::mark::GetArrowCoords {board from to {shrink 0.6}} {
 #	short		Boolean
 # Results:
 #
-# if  {$short)
+# if  {$short}
 #      return upper left and lower right corners (4 element list)
 # else
 #      return upper left and lower right corners, length and midpoint (x,y) of the box. (7 elements)

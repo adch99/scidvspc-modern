@@ -1719,7 +1719,7 @@ translate F SelectionOwnerDidntRespond {Timeout during drop action: selection ow
 #
 # ECO Opening name translations:
 
-# translateECO F {
+# translateECO F 
   # Accelerated {, Accéléré}
   # {: Accelerated} Accéléré
   # Accepted {, accepté}
@@ -1915,25 +1915,8 @@ translate F SelectionOwnerDidntRespond {Timeout during drop action: selection ow
   # {Two Pawns Attack} {Attaque des Deux Pions}
   # {Wing Gambit} {Gambit de l'aile}
   # {Yugoslav Attack} {Attaque Yougoslave}
-# }
 
 
 }
 
 # end of francais.tcl
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

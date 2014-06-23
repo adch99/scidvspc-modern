@@ -1011,11 +1011,6 @@ $m.entry.highlightlastmove add cascade -label OptionsMovesHighlightLastMoveWidth
 foreach i {1 2 3 4 5} {
   $m.entry.highlightlastmove.width add radiobutton -label $i -value $i -variable ::highlightLastMoveWidth -command updateBoard
 }
-# menu $m.entry.highlightlastmove.pattern
-# $m.entry.highlightlastmove add cascade -label OptionsMovesHighlightLastMovePattern -menu $m.entry.highlightlastmove.pattern
-# foreach i {"plain" "." "-" "-." "-.." ". " "," ".  "} j { "" "." "-" "-." "-.." ". " "," ".  "} {
-  # $m.entry.highlightlastmove.pattern add radiobutton -label $i -value $j -variable ::highlightLastMovePattern -command updateBoard
-# }
 $m.entry.highlightlastmove add command -label OptionsMovesHighlightLastMoveColor -command {
   set col [ tk_chooseColor -initialcolor $::highlightLastMoveColor -title "Scid"]
   if { $col != "" } {
