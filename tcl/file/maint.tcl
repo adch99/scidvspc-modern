@@ -770,15 +770,14 @@ proc checkAllGames {} {
   wm withdraw $w
   wm title $w "[tr CheckGamesWhich]"
   
-  pack [frame $w.f] -expand 1
+  pack [frame $w.f] -side top -expand 1
   
   label $w.f.label -font font_Bold -textvar ::tr(CheckGamesWhich)
   frame $w.f.g
   radiobutton $w.f.g.all -textvar ::tr(CheckAll) -variable checkOption(AllGames) -value all
   radiobutton $w.f.g.filter -textvar ::tr(CheckSelectFilterGames) -variable checkOption(AllGames) -value filter
 
-  pack $w.filter.all $w.filter.filter -side left  -padx 5
-  pack $w.filter -side top -expand 1
+  pack $w.f.g.all $w.f.g.filter -side left  -padx 5
 
   frame $w.f.b
   dialogbutton $w.f.b.go -textvar ::tr(CheckGames) -command {
