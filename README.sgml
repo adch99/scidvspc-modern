@@ -293,7 +293,7 @@ work may not be too hard.  https://github.com/sshivaji/ctgexporter
 <item> <bf>Chinese Language Support</bf>. Scid's multilanguage support is broken
 for some countries. The work around involves compiling from source, using:
 <em>./configure LANGUAGES=""</em>
-<newline>Alternatively, remove all lines between "### deutsch.tcl" and "# end of serbian.tcl" in the scid.gui file.
+<newline>Alternatively, remove all lines between "# end of english.tcl" and "# tkdnd.tcl --" in the scid.gui file.
 <item> <bf>Focus Issues</bf>. Kde users can allow Tcl apps to properly raise themselves by
 configuring <i>desktop > window behavior > advanced > focus stealing prevention</i>
 set to "none"

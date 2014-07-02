@@ -390,8 +390,8 @@
   o  Chinese Language Support. Scid's multilanguage support is broken
      for some countries. The work around involves compiling from source,
      using: ./configure LANGUAGES=""
-     Alternatively, remove all lines between "### deutsch.tcl" and "#
-     end of serbian.tcl" in the scid.gui file.
+     Alternatively, remove all lines between "# end of english.tcl" and
+     "# tkdnd.tcl --" in the scid.gui file.
 
   o  Focus Issues. Kde users can allow Tcl apps to properly raise
      themselves by configuring desktop > window behavior > advanced >
