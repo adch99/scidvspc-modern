@@ -427,7 +427,7 @@ proc ::utils::graph::plot_data {graph} {
     }
 
     # Plot points:
-    if {$_data($graph,$dataset,points)} {
+    if {$_data($graph,$dataset,points) || ($_data($graph,$dataset,lines) && $ncoords == 1)} {
       for {set i 0} {$i < $ncoords} {incr i 2} {
         set x [lindex $coords $i]
         set y [lindex $coords [expr {$i + 1}]]
