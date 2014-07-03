@@ -300,6 +300,7 @@ proc ::tree::selectCallback { baseNumber move } {
 proc ::tree::closeTree {baseNumber} {
   global tree
   wm protocol .treeWin$baseNumber WM_DELETE_WINDOW {}
+  sc_tree search -cancel all
   ::tree::mask::close .treeWin$baseNumber
   # needs closing explicitly if based open as tree and bestgames is open
   if {[winfo exists .treeBest$baseNumber]} {
@@ -501,7 +502,7 @@ proc ::tree::dorefresh { baseNumber } {
 
   # busyCursor .
   sc_progressBar $w.progress bar 251 16
-  foreach button {best training close} {
+  foreach button {best training} {
     $w.buttons.$button configure -state disabled
   }
   $w.buttons.stop configure -state normal
@@ -519,9 +520,12 @@ proc ::tree::dorefresh { baseNumber } {
                             -fastmode $fastmode -adjust $tree(adjustfilter$baseNumber) ]
   # CVS: set moves [sc_tree search -hide $tree(training$baseNumber) -sort $tree(order$baseNumber) -base $base -fastmode $fastmode]
 
+  # Tree can be closed in the middle of a search now
+  if {![winfo exists $w]} { return }
+
   catch {$w.f.tl itemconfigure 0 -foreground darkBlue}
 
-  foreach button {best training close} {
+  foreach button {best training} {
     $w.buttons.$button configure -state normal
   }
   $w.buttons.stop configure -state disabled -relief raised
