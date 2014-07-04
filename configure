@@ -17,6 +17,7 @@ set var(CXXFLAGS) {-fno-rtti}
 set var(LDFLAGS) {}
 set var(WARNINGS) -Wall
 set var(SCIDFLAGS) {}
+set var(BASH_ENV) {}
 
 set var(LANGUAGES) [list \
   tcl/lang/czech.tcl \
@@ -223,6 +224,9 @@ proc findTclTkPaths {} {
             set success 0
         } else {
             puts $opt(tk_h)
+	    if {$opt(tk_h) == "/usr/include"} {
+	      set var(BASH_ENV) CPLUS_INCLUDE_PATH=/usr/include:/usr/local/include
+            }
         }
     }
 

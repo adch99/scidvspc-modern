@@ -14,6 +14,7 @@
 CXX = @CXX@
 CC = @CC@
 LINK = @LINK@
+BASH_ENV = @BASH_ENV@
 
 # BINDIR: where the Scid programs are copied for "make install".
 
@@ -407,10 +408,10 @@ eco2epd: src/eco2epd.o $(OBJS) src/pbook.o
 ### Rules to create .o files from .cpp files:
 
 src/tcscid.o: src/tkscid.cpp
-	$(CXX) $(CXXFLAGS) $(TCL_INCLUDE) -DTCL_ONLY -o src/tcscid.o -c src/tkscid.cpp
+	$(BASH_ENV) $(CXX) $(CXXFLAGS) $(TCL_INCLUDE) -DTCL_ONLY -o src/tcscid.o -c src/tkscid.cpp
 
 src/tkscid.o: src/tkscid.cpp
-	$(CXX) $(CXXFLAGS) $(TCL_INCLUDE) -o src/tkscid.o -c src/tkscid.cpp
+	$(BASH_ENV) $(CXX) $(CXXFLAGS) $(TCL_INCLUDE) -o src/tkscid.o -c src/tkscid.cpp
 
 ### The endgame tablebase code in the egtb/ subdirectory (not written by me)
 
@@ -420,7 +421,7 @@ src/probe.o: src/probe.cpp src/egtb/tbindex.cpp src/egtb/tbdecode.c
 ### Generic rule for all other .cpp files:
 
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) $(TCL_INCLUDE) -o $@ -c $<
+	$(BASH_ENV) $(CXX) $(CXXFLAGS) $(TCL_INCLUDE) -o $@ -c $<
 
 ### Rule for compiling zlib source files:
 
