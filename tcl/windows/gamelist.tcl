@@ -548,7 +548,7 @@ proc ::windows::gamelist::Open {} {
     updateGameinfo
   }
 
-  dialogbutton $w.c.compact -text {Compact} -font font_Small -command "compactGames $w ; configDeleteButtons"
+  dialogbutton $w.c.compact -text [lindex $::tr(CompactDatabase) 0] -font font_Small -command "compactGames $w ; configDeleteButtons"
 
   # Flag Menubutton
   menubutton $w.c.title -menu $w.c.title.m -indicatoron 1 -relief raised -font font_Small
