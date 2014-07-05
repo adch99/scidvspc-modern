@@ -1026,7 +1026,6 @@ namespace eval uci {
 	set fen [sc_pos fen]
       }
     }
-    sc_info preMoveCmd {}
 
     # Push a temporary copy of the current game:
     if {$fen == ""} {
@@ -1046,8 +1045,6 @@ namespace eval uci {
 
     # Pop the temporary game:
     sc_game pop
-    # Restore pre-move command:
-    sc_info preMoveCmd preMoveCommand
 
     return $tmp
   }
@@ -1056,7 +1053,6 @@ namespace eval uci {
   ### only used by calvar.tcl
 
   proc formatPvAfterMoves { played_moves moves } {
-      sc_info preMoveCmd {}
       sc_game push copyfast
       sc_move addSan $played_moves
       
@@ -1072,8 +1068,6 @@ namespace eval uci {
       
       # Pop the temporary game:
       sc_game pop
-      # Restore pre-move command:
-      sc_info preMoveCmd preMoveCommand
       
       return $tmp
   }

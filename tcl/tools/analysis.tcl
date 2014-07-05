@@ -1431,14 +1431,12 @@ proc addAnnotation {tomove} {
   if { $analysis(prevmoves$n) != {} && ![sc_pos isAt vend] && $annotate(WithVars) != {allmoves}} {
     set move2 [sc_game info previousMoveNT]
 
-    sc_info preMoveCmd {}
     sc_game push copyfast
     set move1 [lindex $analysis(prevmoves$n) 0]
     sc_move back 1
     sc_move_add $move1 $n
     set move1 [sc_game info previousMoveNT]
     sc_game pop
-    sc_info preMoveCmd preMoveCommand
 
     if {$move1 == $move2} {
       set analysis(prevscore$n) $analysis(score$n)
@@ -1451,10 +1449,6 @@ proc addAnnotation {tomove} {
       return
     }
   }
-
-  # Temporarily clear the pre-move command since we want to add a
-  # whole line without Scid updating stuff:
-  sc_info preMoveCmd {}
 
   set score $analysis(score$n)
   set prevscore $analysis(prevscore$n)
@@ -1586,8 +1580,6 @@ if {abs($prevscore) < $annotate(cutoff) || abs($score) < $annotate(cutoff) || \
   set analysis(prevscore$n) $analysis(score$n)
   set analysis(prevmoves$n) $analysis(moves$n)
 
-  # Restore the pre-move command:
-  sc_info preMoveCmd preMoveCommand
   updateBoard -pgn
   ::tools::graphs::score::Refresh
 }
@@ -1704,10 +1696,6 @@ proc addAnalysisVariation {n} {
   set isAt_end [sc_pos isAt end]
   set isAt_vend [sc_pos isAt vend]
 
-  # Temporarily clear the pre-move command since we want to add a
-  # whole line without Scid updating stuff
-  sc_info preMoveCmd {}
-
   set moves $analysis(moves$n)
   set text [formatAnalysisScore $n]
 
@@ -1765,9 +1753,6 @@ proc addAnalysisVariation {n} {
     }
   }
 
-  # Restore the pre-move command:
-  sc_info preMoveCmd preMoveCommand
-
   ::pgn::Refresh 1
   ::tools::graphs::score::Refresh
   if {$isAt_vend && ![sc_pos isAt vend]} {
@@ -1790,10 +1775,6 @@ proc addAllVariations {{n 1} {rightclick 0}} {
   # if we are at the end of the game, we cannot add variation
   # so we add the analysis one move before and append the last game move at the beginning of the analysis
   set addAtEnd [sc_pos isAt vend]
-
-  # Temporarily clear the pre-move command since we want to add a
-  # whole line without Scid updating stuff:
-  sc_info preMoveCmd {}
 
   if {$rightclick} {
     # Only process second variation
@@ -1849,9 +1830,6 @@ proc addAllVariations {{n 1} {rightclick 0}} {
     }
 
   }
-
-  # Restore the pre-move command:
-  sc_info preMoveCmd preMoveCommand
 
   ::pgn::Refresh 1 
   ::tools::graphs::score::Refresh
@@ -3373,8 +3351,6 @@ proc updateAnalysisBoard {n moves} {
     return
   }
 
-  # Temporarily wipe the premove command:
-  sc_info preMoveCmd {}
   # Push a temporary copy of the current game:
   sc_game push copyfast
 
@@ -3384,8 +3360,6 @@ proc updateAnalysisBoard {n moves} {
 
   # Pop the temporary game:
   sc_game pop
-  # Restore pre-move command:
-  sc_info preMoveCmd preMoveCommand
 }
 
 # Fulvio's analysis rewrite

@@ -158,10 +158,6 @@ proc importVar {} {
   set isAt_end [sc_pos isAt end]
   set isAt_vend [sc_pos isAt vend]
 
-  # Temporarily clear the pre-move command since we want to add a
-  # whole line without Scid updating stuff
-  sc_info preMoveCmd {}
-
   if { $isAt_vend} {
     # get the last move of the game
     set lastMove [sc_game info previousMoveUCI]
@@ -210,9 +206,6 @@ proc importVar {} {
   }
     updateBoard -pgn
   }
-  # Restore the pre-move command:
-  # todo: wtf does this (from analysis.tcl) do
-  sc_info preMoveCmd preMoveCommand
 }
 
 ################################################################################

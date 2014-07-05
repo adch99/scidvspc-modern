@@ -2080,7 +2080,6 @@ proc ::tree::mask::updateDisplayMask {} {
   # use clipbase to enter a dummy game
   set currentbase [sc_base current]
   sc_base switch clipbase
-  sc_info preMoveCmd {}
   sc_game push copyfast
   
   if {[catch {sc_game startBoard $fen} err]} {
@@ -2091,7 +2090,6 @@ proc ::tree::mask::updateDisplayMask {} {
     ::tree::mask::populateDisplayMask $moves {} $fen {} [lindex $mask($fen) 1]
   }
   sc_game pop
-  sc_info preMoveCmd preMoveCommand
   
   sc_base switch $currentbase
 }
@@ -2431,7 +2429,6 @@ proc  ::tree::mask::searchClick {x y win baseNumber} {
   
   # load the position in a temporary game (in clipbase), update the Trees then switch to Tree's base
   sc_base switch clipbase
-  sc_info preMoveCmd {}
   sc_game push copyfast
   
   if {[catch {sc_game startBoard $fen} err]} {
@@ -2448,7 +2445,6 @@ proc  ::tree::mask::searchClick {x y win baseNumber} {
   }
   
   sc_game pop
-  sc_info preMoveCmd preMoveCommand
   sc_base switch $baseNumber
 
   # load the first best game 

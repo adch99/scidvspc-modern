@@ -363,7 +363,6 @@ namespace eval calvar {
   ################################################################################
   proc addVar {usermoves engmoves nag comment engscore} {
     puts "addVar usermoves $usermoves engmoves $engmoves nag $nag comment $comment"
-    sc_info preMoveCmd {}
 
     # Cannot add a variation to an empty variation:
     if {[sc_pos isAt vstart]  &&  [sc_pos isAt vend]} {
@@ -399,7 +398,6 @@ namespace eval calvar {
 
     if {$repeat_move != ""} {sc_move forward}
 
-    sc_info preMoveCmd preMoveCommand
     updateBoard -pgn
   }
   ################################################################################
@@ -408,7 +406,6 @@ namespace eval calvar {
   ################################################################################
   proc addMissedLine {moves score depth} {
     puts "addMissedLine moves $moves score $score depth $depth"
-    sc_info preMoveCmd {}
 
     # Cannot add a variation to an empty variation:
     if {[sc_pos isAt vstart]  &&  [sc_pos isAt vend]} {
@@ -431,7 +428,6 @@ namespace eval calvar {
     sc_var exit
     if {$repeat_move != ""} { sc_move forward }
 
-    sc_info preMoveCmd preMoveCommand
     updateBoard -pgn
   }
   ################################################################################

@@ -13,6 +13,7 @@ proc storeEpdText {id} {
   updateEpdWin $id
 }
 
+### Previously use extensively by preMoveCommand, but never called
 proc storeEpdTexts {} {
   global maxEpd
   for {set i 1} {$i <= $maxEpd} {incr i} {
@@ -153,6 +154,9 @@ proc newEpdWin {cmd {fname ""}} {
   text $w.text  -font font_Regular -width 60 -height 7 \
       -wrap none -setgrid 1 -yscrollcommand "$w.ybar set" \
       -xscrollcommand "$w.xbar set" -undo 1
+  ### todo
+  # Is this what we want (after removing preMoveCommand and storeEpdTexts)
+  # bind $w.text <KeyRelease> "storeEpdText $id"
 
   bind $w.text <Control-a> "$w.text tag add sel 0.0 end-1c ; break"
   bind $w.text <Control-z> "catch \"$w.text edit undo\" ; break"

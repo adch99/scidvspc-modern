@@ -139,18 +139,6 @@ proc moveEntry_Char {ch} {
   updateStatusBar
 }
 
-# preMoveCommand: called before making a move to store text in the comment
-#   editor window and EPD windows.
-proc preMoveCommand {} {
-  #resetAnalysis 1
-  #resetAnalysis 2
-  # ::commenteditor::storeComment
-  storeEpdTexts
-}
-
-sc_info preMoveCmd preMoveCommand
-
-
 ###   Update the main Scid window title with player names or basename
 
 proc updateTitle {} {
@@ -505,8 +493,6 @@ proc showVars {} {
     return
   }
 
-  sc_info preMoveCmd {}
-
   set w .variations
   if {[winfo exists $w]} {
     raiseWin $w
@@ -586,9 +572,6 @@ proc showVars {} {
       # bind .variations <Destroy> {focus -force .main }
   }
 
-
-  sc_info preMoveCmd preMoveCommand
-
   bind $w <Configure> "recordWinSize $w"
   setWinLocation $w
   wm state $w normal
@@ -606,7 +589,6 @@ proc showVars {} {
 }
 
 proc enterVar {{n {}}} {
-  sc_info preMoveCmd preMoveCommand
   if {$n == {}} {
     set n [.variations.lbVar curselection]
   }
@@ -1579,13 +1561,11 @@ proc autoplay {} {
       set text [format "%d:%+.2f" $analysis(depth$n) $analysis(score$n)]
       set moves $analysis(moves$n)
       sc_move back
-      sc_info preMoveCmd {}
       sc_var create
       sc_move addSan $move_done
       sc_pos setComment "[sc_pos getComment] $text"
       sc_move_add $moves $n
       sc_var exit
-      sc_info preMoveCmd preMoveCommand
       updateBoard -pgn
     }
     if {$::annotate(isBatch) && [sc_game number] != 0} {
