@@ -25,10 +25,6 @@
 // #include <string.h>
 // #include <ctype.h>    // for isalpha().
 
-#ifdef POCKET
-#include <windows.h>
-#endif
-
 //////////////////////////////////////////////////////////////////////
 //
 //   IndexEntry Class Methods
@@ -1125,14 +1121,6 @@ Index::ReadEntireFile (int reportFrequency,
 
     uint numChunks = NumChunksRequired();
 
-#ifdef POCKET
-// Check if there is enough memory left with a good margin
-  #define MARGIN 1000000
-  int neededMemory = MARGIN + numChunks * sizeof (IndexEntry [INDEX_ENTRY_CHUNKSIZE]);
-  if ( getPocketAvailPhys() < neededMemory || getPocketAvailVirtual() < neededMemory ) {
-    return !OK;
-  }
-#endif
 #ifdef WINCE
     Entries = (IndexEntry**)my_Tcl_AttemptAlloc(sizeof( IndexEntryPtr [numChunks]));
     if ( Entries == NULL ) return !OK;

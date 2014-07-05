@@ -358,7 +358,6 @@ errMsgSearchInterrupted (Tcl_Interp * ti)
                       "[Interrupted search; results are incomplete]");
 }
 
-#ifndef POCKET
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Main procedure
 //
@@ -406,7 +405,6 @@ main (int argc, char * argv[])
     exit(0);
     return 0;
 }
-#endif // ifndef POCKET
 
 #ifdef WINCE
 int
@@ -456,9 +454,6 @@ scid_InitTclTk (Tcl_Interp * ti)
 
     CREATE_CMD (ti, "strIsPrefix", str_is_prefix);
     CREATE_CMD (ti, "strPrefixLen", str_prefix_len);
-#ifdef POCKET
-    CREATE_CMD (ti, "sc_msg", sc_msg);
-#endif
     CREATE_CMD (ti, "sc_base", sc_base);
     // CREATE_CMD (ti, "sc_book", sc_epd);  // sc_epd used to be sc_book : Pascal Georges : not used any longer, so reused
     CREATE_CMD (ti, "sc_book", sc_book);
@@ -680,174 +675,6 @@ base_opened (const char * filename)
     return -1;
 }
 
-#ifdef POCKET
-
-typedef long DWORD;
-typedef int BOOL;
-typedef int HANDLE;
-typedef short WORD;
-// typedef unsigned short wchar_t;
-typedef unsigned short WCHAR;
-# define WINAPI
-typedef const WCHAR* LPCWSTR;
-typedef WCHAR* LPWSTR;
-typedef void * LPVOID;
-typedef void * PVOID;
-typedef int * LPDWORD;
-typedef unsigned long ULONG;
-#include "msgqueue.h"
-extern "C" DWORD WINAPI GetLastError(void);
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// sc_msg: msg queue for IPC with engines on PPC.
-static HANDLE hw[2], hr[2];
-// those go here to avoid struct alignment problems (see option -mstructure-size-boundary=n which
-// seems to be a workaround but in fact should not be one)
-int bt = 0;
-int sc_msg (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv) {
-    static const char * options [] = {
-        "init",     "close",        "send",        "recv",
-        "info",      NULL
-    };
-    enum {
-        MSG_INIT,    MSG_CLOSE,       MSG_SEND,       MSG_RECV,   MSG_INFO,
-        BT_INIT,     BT_SEND,         BT_RECV
-    };
-    int index = -1;
-
-    if (argc > 1) { index = strUniqueMatch (argv[1], options); }
-
-    switch (index) {
-      case MSG_INIT:
-        return sc_msg_init(cd, ti, argc, argv);
-      case MSG_CLOSE:
-        return sc_msg_close(cd, ti, argc, argv);
-      case MSG_SEND:
-        return sc_msg_send(cd, ti, argc, argv);
-      case MSG_RECV:
-        return sc_msg_recv(cd, ti, argc, argv);
-      case MSG_INFO:
-        return sc_msg_info(cd, ti, argc, argv);
-      default:
-        return InvalidCommand (ti, "sc_msg", options);
-    }
-    return TCL_OK;
-}
-
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// sc_msg_init:
-// sc_msg_init <1|2> <engine_name> 
-int sc_msg_init (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv) {
-
-  if (argc != 4) {
-    return errorResult (ti, "Usage: sc_msg init <1|2> <engine>");
-  }
-  uint slot = strGetUnsigned(argv[2]) - 1;
-
-  hw[slot] = my_sc_msg_init((char*)argv[3], 0);
-  if (hw[slot] == 0) return errorResult (ti, "CreateMsgQueue w failed");
-  hr[slot] = my_sc_msg_init((char*)argv[3], 1);
-  if (hr[slot] == 0) return errorResult (ti, "CreateMsgQueue r failed");
-  
-  return TCL_OK;
-}
-
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// sc_msg_close:
-// 
-int sc_msg_close (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv) {
-  if (argc != 3) {
-    return errorResult (ti, "Usage: sc_msg close <1|2>");
-  }
-  uint slot = strGetUnsigned(argv[2]) - 1;
-
-  if (!CloseMsgQueue(hw[slot]) || !CloseMsgQueue(hr[slot])) {
-    return errorResult (ti, "CloseMsgQueue error");
-  }
-  return TCL_OK;
-}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// sc_msg_send:
-// 
-int sc_msg_send (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv) {
-
-  if (argc != 4) {
-    return errorResult (ti, "Usage: sc_msg send <1|2> <msg>");
-  }
-  uint slot = strGetUnsigned(argv[2]) - 1;
-
-  if ( ! WriteMsgQueue( hw[slot], (void *) argv[3], strlen(argv[3]), 0, 0) ) {
-    int err = GetLastError();
-    char string[100];
-    sprintf(string , "msg send error %d", err);
-    return errorResult (ti, string);
-  }
-
-  return TCL_OK;
-}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// sc_msg_recv:
-// returns the message read
-int sc_msg_recv (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv) {
-  if (argc != 3) {
-    return errorResult (ti, "Usage: sc_msg recv <1|2>");
-  }
-  uint slot = strGetUnsigned(argv[2]) - 1;
-  char buf[1024];
-  int read;
-  int dwFlags = 0;
-  if ( ! ReadMsgQueue( hr[slot], (LPVOID) buf, 1024, (LPDWORD) &read, 0, (DWORD *) &dwFlags ) )
-    read = 0;
-  buf[read] = '\0';
-  Tcl_AppendResult (ti, buf, NULL);
-  return TCL_OK;
-}
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// sc_msg_info <1|2> <read|write> :
-// 
-int sc_msg_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv) {
-  MSGQUEUEINFO qinfo;
-  char buf[1024];
-
-  if (argc != 4) {
-    return errorResult (ti, "Usage: sc_msg info <1|2> <read|write>");
-  }
-  uint slot = strGetUnsigned(argv[2]) - 1;
-
-  HANDLE h = hr[slot];
-
-  static const char * options [] = { "read", "write" };
-  enum { OPT_READ, OPT_WRITE };
-  int optionMode = OPT_READ;
-
-  optionMode = strUniqueMatch (argv[3], options);
-  if (optionMode < OPT_READ) {
-    return errorResult (ti, "Usage: sc_msg info <1|2> [read|write]");
-  }
-
-  if (optionMode == OPT_READ) {
-      h = hr[slot];
-  }
-
-  if (optionMode == OPT_WRITE) {
-      h = hw[slot];
-  }
-
-  qinfo.dwSize = sizeof(MSGQUEUEINFO);
-
-  if (! GetMsgQueueInfo( h,  (LPMSGQUEUEINFO) &qinfo) ) {
-    int err = GetLastError();
-    char string[100];
-    sprintf(string , "-1 -1 -1 -1 %d", err);
-    Tcl_AppendResult (ti, string, NULL);
-    return TCL_OK;
-  }
-
-  sprintf(buf, "%d %d %d %d", (int)qinfo.dwCurrentMessages, (int)qinfo.dwMaxQueueMessages, (int)qinfo.wNumReaders, (int)qinfo.wNumWriters);
-  Tcl_AppendResult (ti, buf, NULL);
-  return TCL_OK;  
-}
-
-#endif
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // sc_base: database commands.
@@ -1188,13 +1015,6 @@ sc_base_open (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         return errorResult (ti, "The database you selected is already opened.");
     }
 
-#ifdef POCKET
-// Check if there is enough memory left with a good margin
-  if ( getPocketAvailPhys() < 1000*1024 || getPocketAvailVirtual() < 1000*1024 ) {
-    return errorResult (ti, "Not enough free memory.");
-  }
-#endif
-
     // Find an empty database slot to use:
     int oldBaseNum = currentBase;
     if (db->inUse) {
@@ -1234,15 +1054,6 @@ sc_base_open (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         return TCL_ERROR;
     }
 
-#ifdef POCKET
-// check enough memory to open name file
-  int memoryNeeded = db->nb->GetNumNames(NAME_PLAYER) * 100 + 1024*1000;
-  if ( memoryNeeded > getPocketAvailPhys() || memoryNeeded > getPocketAvailVirtual() ) {
-    base_open_failure(oldBaseNum);
-    return errorResult (ti, "Not enough free memory for names.");
-  }
-#endif
-
     if (db->nb->ReadNameFile() != OK) {
         base_open_failure(oldBaseNum);
         return errorResult (ti, "Error opening name file.");
@@ -1259,16 +1070,6 @@ sc_base_open (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         base_open_failure(oldBaseNum);
         return errorResult (ti, "Error opening game file.");
     }
-
-#ifdef POCKET
-// check enough memory to open index file. Each IndexEntry is 48 bytes, but allocation overhead
-// is at least 8 bytes (see Tcl sources). So take a small margin with 64 bytes per entry.
-  memoryNeeded = db->idx->GetNumGames() * 64 + 1024*1000;
-  if ( memoryNeeded > getPocketAvailPhys() || memoryNeeded > getPocketAvailVirtual() ) {
-        base_open_failure(oldBaseNum);
-        return errorResult (ti, "Not enough free memory for index.");
-  }
-#endif
 
     // Read entire index, showing progress every 20,000 games if applicable:
 #ifdef WINCE
@@ -9877,13 +9678,12 @@ sc_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     static const char * options [] = {
         "asserts", "clipbase", "decimal", "fsize", "gzip",
         "html", "limit", "priority", "ratings",
-        "suffix", "tb", "validDate", "version", "pocket", "pocket_priority", "logmem", "language", NULL
+        "suffix", "tb", "validDate", "version", "language", NULL
     };
     enum {
         INFO_ASSERTS, INFO_CLIPBASE, INFO_DECIMAL, INFO_FSIZE, INFO_GZIP,
         INFO_HTML, INFO_LIMIT, INFO_PRIORITY, INFO_RATINGS,
-        INFO_SUFFIX, INFO_TB, INFO_VALIDDATE, INFO_VERSION, INFO_POCKET,
-        INFO_POCKET_PRIORITY, INFO_LOGMEM, INFO_LANGUAGE
+        INFO_SUFFIX, INFO_TB, INFO_VALIDDATE, INFO_VERSION, INFO_LANGUAGE
     };
     int index = -1;
 
@@ -9959,31 +9759,6 @@ sc_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         } else {
             setResult (ti, SCID_VERSION_STRING);
         }
-        break;
-    case INFO_POCKET:
-#ifdef POCKET
-        char buf[1024];
-        getPocketMem(buf);
-        setResult (ti, buf);
-#else
-        setResult (ti, "Not a Pocket");
-#endif
-      break;
-    case INFO_POCKET_PRIORITY:
-#ifdef POCKET
-    unsigned int newprio;
-    newprio = 250;
-    if (argc == 3)
-      newprio = strGetUnsigned(argv[2]);
-    setPriority(newprio);
-#else
-    setResult (ti, "Not a Pocket");
-#endif
-      break;
-    case INFO_LOGMEM:
-#ifdef WINCE
-       logMemory = strGetUnsigned(argv[2]);
-#endif
         break;
     case INFO_LANGUAGE:
       if (argc != 3) {

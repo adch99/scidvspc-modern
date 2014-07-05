@@ -24,17 +24,14 @@
 #ifdef WINCE
 #include <tcl.h>
 #endif
-#ifndef POCKETENGINE
 #include "tclmy.h"
 #include "myassert.h"
-#endif
 #include "error.h"
 
 #ifdef _MSC_VER
 #define snprintf _snprintf
 #endif
 
-#ifndef POCKETENGINE
 // Include the zlib header file if it is being compiled with Scid:
 #ifndef NO_ZLIB
 #  ifdef ZLIB
@@ -42,9 +39,6 @@
 #   else
 #    include <zlib.h>
 #  endif
-#endif
-#else
-#define ASSERT(f)
 #endif
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // CONSTANTS:

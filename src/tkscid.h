@@ -396,14 +396,6 @@ void sc_game_undo_reset();
 
 int str_is_prefix  (TCL_ARGS);
 int str_prefix_len (TCL_ARGS);
-#ifdef POCKET
-int sc_msg            (TCL_ARGS);
-int sc_msg_init       (TCL_ARGS);
-int sc_msg_close      (TCL_ARGS);
-int sc_msg_send       (TCL_ARGS);
-int sc_msg_recv       (TCL_ARGS);
-int sc_msg_info       (TCL_ARGS);
-#endif
 int sc_base           (TCL_ARGS);
 int sc_base_autoload  (TCL_ARGS);
 int sc_base_filename  (TCL_ARGS);
