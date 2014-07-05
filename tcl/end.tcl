@@ -2165,9 +2165,12 @@ if { $::docking::USE_DOCKING } {
   # when main board pane is resized, auto-size it
   bind .main <Configure> { ::docking::handleConfigureEvent ::resizeMainBoard }
 
-  # restore default layout (number 1)
   if { $::autoLoadLayout } {
     ::docking::layout_restore 1
+  } else {
+    # Hack to use default layout without altering anything
+    set ::docking::layout_list(0) {{MainWindowGeometry 834x640+80+50} {{.pw vertical {}} {TPanedwindow {{.pw.pw0 horizontal 564} {TNotebook .nb .fdockmain} {TNotebook .tb1 .fdockpgnWin}}}}}
+    ::docking::layout_restore 0
   }
 
   standardShortcuts TNotebook
