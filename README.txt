@@ -467,10 +467,9 @@
   strode forward. Pascal wrote a Tree Mask feature, and in 2009 he
   upgraded the database format to si4, all the time making speed and
   technical improvements to the neglect of the interface. In 2010,
-  Pascal ceased contributing at all, and shortly after the last stable
-  version of Scid (4.3) was released.  Since then, Scid has had
-  widespread, and unstable technical changes; mostly by Fulvio Benini,
-  who is a long-standing contributor.
+  Pascal ceased contributing at all, and shortly after Scid 4.3 was
+  released.  Since then, Scid has had widespread technical changes by
+  Fulvio Benini, who is a long-standing contributor.
 
   Currently there exist several Scid related projects.
 
@@ -517,6 +516,7 @@
      tools->export, Find button removed (use enter in Find entrybox)
 
      Spelling changes:
+
   o  Update spelling file to a custom version of Franz's Jan-5-2014
      spellling.ssp.
 
