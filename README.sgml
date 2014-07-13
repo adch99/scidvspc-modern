@@ -20,7 +20,7 @@
 </figure>
 
 <bf>Shane's Chess Information Database</bf> is a powerful Chess Toolkit, with
-which one can create huge chess databases, run engine engines, or play
+which one can create huge chess databases, run chess engines, or play
 casual games against the computer or online with the Free Internet Chess
 Server. It was originally written by Shane Hudson , and has received strong
 contribution from Pascal Georges and others.
@@ -86,16 +86,24 @@ or as a tarball <url url="https://sourceforge.net/p/scidvspc/code/HEAD/tarball" 
 <sect> installation <p>
 
 <sect2> Linux , FreeBSD<p>
+  <p>
+  Scid vs. PC requires Wish (Tcl/Tk) 8.5 or later (<bf>though 8.5.10 has nasty bugs and should be avoided</bf>), and a C++ compiler .
+  <newline>
+  Example packages required include "tcl, tk, tcl-devel, tk-devel" and
+  "gcc-c++ , libstdc++"; but of course will vary with your distribution.
+  </p>
 
-Scid vs. PC requires <url name="Tcl/Tk" url="http://tcl.tk"> 8.5 or later.
-<em>Tcl/Tk 8.5.10 has nasty bugs and should be avoided.</em></p>
+  <p>
+  Extra chess pieces (such as Berlin) are now enabled by default for Wish 8.6, but 8.5 requires installing TkImg. Sound support requires Snack.
+<newline>
+  If your distro does not provide these packages ("tkimg", "tcl-snack"), you can install from source using these links (both of which have fixes applied).
+<newline>
+<url name="TkImg" url="https://sourceforge.net/project/downloading.php?group_id=263836&amp;filename=tkimg1.3.scidvspc.tar.bz2">, 
+<url name="Snack" url="http://sourceforge.net/projects/scidvspc/files/support%20files/snack2.2.10.scidvspc.tgz/download">.
+</p>
 
-Most Unices should have Tcl/Tk installed by default.
-To verify this, look for a command named <bf>wish</bf> or <bf>wish8.5</bf>.
-Extra chess pieces (such as Berlin) are now enabled by default for Wish 8.6, but 8.5 requires installing
-<url name="TkImg" url="https://sourceforge.net/project/downloading.php?group_id=263836&amp;filename=tkimg1.3.scidvspc.tar.bz2">.  Sound support requires <url name="Snack" url="http://sourceforge.net/projects/scidvspc/files/support%20files/snack2.2.10.scidvspc.tgz/download">.
-(Both of these downloads have fixes applied).
-Then, installing from source:
+  <p>Then, installing from source:</p>
+
 <code>
 tar -xzf scid_vs_pc-4.12.tgz
 cd scid_vs_pc-4.12

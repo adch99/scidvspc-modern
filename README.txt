@@ -57,7 +57,7 @@
 
 
   Shane's Chess Information Database is a powerful Chess Toolkit, with
-  which one can create huge chess databases, run engine engines, or play
+  which one can create huge chess databases, run chess engines, or play
   casual games against the computer or online with the Free Internet
   Chess Server. It was originally written by Shane Hudson , and has
   received strong contribution from Pascal Georges and others.
@@ -147,16 +147,23 @@
 
   4.0.1.  Linux , FreeBSD
 
-  Scid vs. PC requires Tcl/Tk <http://tcl.tk> 8.5 or later.  Tcl/Tk
-  8.5.10 has nasty bugs and should be avoided.Most Unices should have
-  Tcl/Tk installed by default.  To verify this, look for a command named
-  wish or wish8.5.  Extra chess pieces (such as Berlin) are now enabled
-  by default for Wish 8.6, but 8.5 requires installing TkImg
-  <https://sourceforge.net/project/downloading.php?group_id=263836&filename=tkimg1.3.scidvspc.tar.bz2>.
-  Sound support requires Snack
+  Scid vs. PC requires Wish (Tcl/Tk) 8.5 or later (though 8.5.10 has
+  nasty bugs and should be avoided), and a C++ compiler .
+  Example packages required include "tcl, tk, tcl-devel, tk-devel" and
+  "gcc-c++ , libstdc++"; but of course will vary with your distribution.
+
+  Extra chess pieces (such as Berlin) are now enabled by default for
+  Wish 8.6, but 8.5 requires installing TkImg. Sound support requires
+  Snack.
+  If your distro does not provide these packages ("tkimg", "tcl-snack"),
+  you can install from source using these links (both of which have
+  fixes applied).
+  TkImg
+  <https://sourceforge.net/project/downloading.php?group_id=263836&filename=tkimg1.3.scidvspc.tar.bz2>,
+  Snack
   <http://sourceforge.net/projects/scidvspc/files/support%20files/snack2.2.10.scidvspc.tgz/download>.
-  (Both of these downloads have fixes applied).  Then, installing from
-  source:
+
+  Then, installing from source:
 
   ______________________________________________________________________
   tar -xzf scid_vs_pc-4.12.tgz
@@ -179,13 +186,13 @@
   Windows installation simply requires downloading the ``executable'',
   and following the prompts.
 
+
   The configuration files, including the chess engine list, are stored
   in the Scid-vs-PC\bin\config directory, and may be copied over from
   old versions to make upgrading easier. If the app is installed in
   "Program Files" On Windows 7, the config files are mirrored in
   C:\Users\[USERNAME]\AppData\Local\VirtualStore\Program Files\Scid vs
   PC
-
 
   People with Visual Studio 11 should now be able to compile the project
   fairly easily (see Makefile.vc for more details).
@@ -245,13 +252,13 @@
 
   Sicd vs. PC 4.2 includes support for Scid's si4 db format.
 
+
    July 3, 2010
 
   For the tenth release I've adopted verison number 4.0 . It includes a
   new Computer Tournament feature (thanks to some UCI snippets from
   Fulvio) and the Gamelist Widget is finally up-to-speed for large
   databases.
-
 
    April 19, 2010
 
@@ -385,6 +392,7 @@
 
   o  Tcl/Tk-8.5.10 is buggy. Tcl/Tk-8.6.0 also is immature, but mostly
      works.
+
   o  OS X docked mode has multiple issues due to it's poor Tcl/Tk.
 
   o  Chinese Language Support. Scid's multilanguage support is broken
@@ -508,6 +516,7 @@
   o  Databases open faster (Linux/OS X only - "avoid the time consuming
      file locking". Windows is in testing).
 
+
   o  Allow dragging Docked Window tabs to alter their order.
 
      Gamelist button/menu changes:
@@ -574,7 +583,6 @@
 
   o  Dont insert newlines into PGN copied to text buffer... Some web PGN
      browsers don't work with newlines following movenum. eg "10.
-
   o  Save game history when Scid quits
 
   o  Remove tree status bar. Same info avail in switcher and tree text
@@ -640,6 +648,7 @@
   o  Engine configuration window now repsonds to keystrokes to quickly
      find any engine
 
+
   o  Display "(altered)" in statusbar is game has been changed
 
   o  Fullscreen menu item (Options->Windows->Fullscreen)
@@ -649,6 +658,7 @@
 
   o  Remove some wasted space around FICS, main button bar, and other
      widgets
+
   o  New Greek translation
 
   o  Read custom chess pieces from  /.scidvspc/pieces
@@ -704,6 +714,7 @@
   o  Automatically flip board (if applicable) in game browser and
      analysis miniboards
 
+
   o  When diffing twin games, ignore newlines in the comments, which
      make diffing impossible
 
@@ -713,7 +724,6 @@
      gamelist bookmark button up one row
 
   o  Drag and drop hardening
-
 
   o  Windows 7 bugfix: PGN export and Progress bars weren't working in
      undocked mode
@@ -769,6 +779,7 @@
   o  Fix windows stack problem (hopefully)
 
   o  Text Find widgets in help, crosstable, engine logs
+
 
   o  Game Save dialog remembers any custom tags you add to a game,
      making them easy to recall
@@ -834,6 +845,7 @@
      cramped (so we can see them all)
 
   o  Half fix UCI game (sergame.tcl) time issues
+
 
   o  Corrospondence Chess now works
 
@@ -901,7 +913,6 @@
   o  Add a patch for Chess960 support (from Ben Hague). Unfinished
 
      Analysis
-
   o  UCI: properly handle UCI buttons. Previously they were invoked at
      every engine restart
 
@@ -911,7 +922,6 @@
 
   o  Super quick engine infos can happen before Scid's PV is inited
      properly. So we have to default to PV = 1
-
 
   o  Allow xboard engines to use lowercase 'b' for bishop promotion (eg
      a7b8b)
@@ -967,6 +977,7 @@
   o  Change the move.wav sound from tick-tock to a short click
 
      OS X
+
 
   o  Filter graph bugfix
 
@@ -1100,7 +1111,6 @@
 
   o  The player info widget has buttons enabling quick player renames
      and look-up
-
   o  'Read-Only' context menu to the Database Switcher, and Read-Only
      bases are greyed out
 
@@ -1111,6 +1121,7 @@
 
   o  Change analysis colors for MultiPV to black/grey instead of
      blue/black
+
   o  New 'Search in (other) Database' feature to the board search (from
      SCID)
 
@@ -1165,6 +1176,7 @@
 
   o  Update Spanish and Polish translations
 
+
   o  Update FICs , PGN and Menu language translations
 
   7.0.10.  Scid vs. PC 4.5
@@ -1175,7 +1187,6 @@
      great)
 
      Computer Tournament:
-
 
   o  Per-game time control
 
@@ -1232,7 +1243,6 @@
 
   o  Add a 'make-scidgui.bat' hack for assembling a new 'scid.gui' from
      subversion
-
   o  Computer Tournament buttons padding fixed
 
      OSX:
@@ -1365,7 +1375,6 @@
 
   o  Fix up file loading (and bookmarks) of DBs with dots (.) in their
      name
-
   o  Statusbar shows correct value after Crosstable update
 
   7.0.13.  Scid vs. PC 4.3
@@ -1431,6 +1440,7 @@
 
   o  Numerous GUI fixes
 
+
   o  Revert PlayerInfo to old format, but add a "Won Drawn Lost" header
 
   o  Tweak crosstable knock-out format
@@ -1439,7 +1449,6 @@
 
 
   o  New si4 database support
-
 
   o  Include tree and mask improvements from Scid (excepting Fulvio's
      delayed tree code, which has issues)
@@ -1496,6 +1505,7 @@
   o  Comment Editor has undo and redo bindings
 
   o  Main board grid colour can be changed
+
 
   o  Setup board can rotate and flip the board
 
@@ -1628,6 +1638,7 @@
   o  When using the setup board widget, do a sanity check about the
      FEN's castling field
 
+
   o  Some minor version fixes anticipating tcl8.6
 
   o  Small bugfix: variation pop-up could previously throw errors if
@@ -1637,7 +1648,6 @@
 
   o  Remove space-only lines from project - they mess up vim's paragraph
      traversal feature
-
 
   o  Fics "withdraws offer" fix
 
@@ -1694,6 +1704,7 @@
   Scid vs. PC mailing list
   <https://lists.sourceforge.net/lists/listinfo/scidvspc-users>
 
+
   Stevenaaus <email://stevenaaus at yahoo dot com> is a uni graduate in
   math and computer science, who programs as a hobby in tcl/tk, bash and
   C. He lives and works in rural australia, and spends some Saturday
@@ -1703,7 +1714,6 @@
 
 
   o  Scid vs. PC  <http://scidvspc.sourceforge.net/>
-
 
   o  Project page  <http://sourceforge.net/projects/scidvspc>
 

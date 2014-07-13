@@ -67,7 +67,7 @@
 </FIGURE>
 </P>
 <P><B>Shane's Chess Information Database</B> is a powerful Chess Toolkit, with
-which one can create huge chess databases, run engine engines, or play
+which one can create huge chess databases, run chess engines, or play
 casual games against the computer or online with the Free Internet Chess
 Server. It was originally written by Shane Hudson , and has received strong
 contribution from Pascal Georges and others.</P>
@@ -142,16 +142,14 @@ or as a tarball
 <H3>Linux , FreeBSD</H3>
 
 
-<P>Scid vs. PC requires 
-<A HREF="http://tcl.tk">Tcl/Tk</A> 8.5 or later.
-<EM>Tcl/Tk 8.5.10 has nasty bugs and should be avoided.</EM></P>
-Most Unices should have Tcl/Tk installed by default.
-To verify this, look for a command named <B>wish</B> or <B>wish8.5</B>.
-Extra chess pieces (such as Berlin) are now enabled by default for Wish 8.6, but 8.5 requires installing
-<A HREF="https://sourceforge.net/project/downloading.php?group_id=263836&amp;filename=tkimg1.3.scidvspc.tar.bz2">TkImg</A>.  Sound support requires 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/support%20files/snack2.2.10.scidvspc.tgz/download">Snack</A>.
-(Both of these downloads have fixes applied).
-Then, installing from source:
+<P>Scid vs. PC requires Wish (Tcl/Tk) 8.5 or later (<B>though 8.5.10 has nasty bugs and should be avoided</B>), and a C++ compiler .<BR>
+Example packages required include "tcl, tk, tcl-devel, tk-devel" and
+"gcc-c++ , libstdc++"; but of course will vary with your distribution.</P>
+<P>Extra chess pieces (such as Berlin) are now enabled by default for Wish 8.6, but 8.5 requires installing TkImg. Sound support requires Snack.<BR>
+If your distro does not provide these packages ("tkimg", "tcl-snack"), you can install from source using these links (both of which have fixes applied).<BR>
+<A HREF="https://sourceforge.net/project/downloading.php?group_id=263836&amp;filename=tkimg1.3.scidvspc.tar.bz2">TkImg</A>, 
+<A HREF="http://sourceforge.net/projects/scidvspc/files/support%20files/snack2.2.10.scidvspc.tgz/download">Snack</A>.</P>
+<P>Then, installing from source:</P>
 <HR>
 <PRE>
 tar -xzf scid_vs_pc-4.12.tgz

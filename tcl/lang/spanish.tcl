@@ -217,8 +217,7 @@ menuText S ToolsExpFilterHTML "Exportar filtro a HTML" 17 \
 menuText S ToolsExpFilterHTMLJS "Exportar filtro a HTML y JavaScript" 17 {Escribir todas las partidas filtradas a fichero HTML y JavaScript}  
 menuText S ToolsExpFilterLaTeX "Exportar filtro a LaTeX" 17 \
   {Escribe todas las partidas filtradas en un archivo LaTeX}
-# ====== TODO To be translated ======
-menuText S ToolsExpFilterGames "Export Gamelist to Text" 19 {Print a formatted Gamelist.}
+menuText S ToolsExpFilterGames "Exportar Listado a Texto" 19 {Print a formatted Gamelist.}
 menuText S ToolsImportOne "Importar partida PGN" 0 \
   {Importa una partida de un texto PGN}
 menuText S ToolsImportFile "Importar archivo de partidas PGN" 2 \
@@ -271,8 +270,7 @@ menuText S OptionsGInfo "Información de la partida" 0 {Información de la partida
 menuText S OptionsFics "FICS" 0
 menuText S OptionsFicsAuto "Autopromoción Reina" 0
 menuText S OptionsFicsColour "Color del texto" 0
-# ====== TODO To be translated ======
-menuText S OptionsFicsSize "Board Size" 0
+menuText S OptionsFicsSize "Tamaño del Tablero" 0
 # ====== TODO To be translated ======
 menuText S OptionsFicsCommands "Init Commands" 0
 menuText S OptionsFicsNoRes "Sin resultados" 0
@@ -807,10 +805,8 @@ menuText S CrosstabSortName "Por nombre" 4
 menuText S CrosstabSortRating "Por Elo" 4
 menuText S CrosstabSortScore "Por puntuación" 4
 menuText S CrosstabSortCountry "País" 4
-# ====== TODO To be translated ======
-menuText S CrosstabSortTieWin "Tie-Break by wins" 1
-# ====== TODO To be translated ======
-menuText S CrosstabSortTieHead "Tie-Break by head-head" 1
+menuText S CrosstabSortTieWin "Desempate por victorias" 1
+menuText S CrosstabSortTieHead "Desempate por head-head" 1
 menuText S CrosstabHelp "Ayuda" 1
 menuText S CrosstabHelpCross "Ayuda de tabla cruzada" 9
 menuText S CrosstabHelpIndex "Indice de la ayuda" 0
@@ -889,14 +885,14 @@ translate S GlistFindText {Encontrar texto}
 translate S GlistMoveField {Movimiento}
 translate S GlistEditField {Configurar}
 translate S GlistAddField {Añadir}
-translate S GlistDeleteField {Quitar}
+translate S GlistDeleteField {Borrar}
 translate S GlistWidth {Anchura}
 translate S GlistAlign {Alinear}
 translate S GlistColor {Color}
 translate S GlistSep {Separador}
-translate S GlistRemoveThisGameFromFilter  {Elimina}
-translate S GlistRemoveGameAndAboveFromFilter  {Elimina esta partida y todas las de arriba}
-translate S GlistRemoveGameAndBelowFromFilter  {Elimina esta partida y todas las de abajo}
+translate S GlistRemoveThisGameFromFilter  {Oculta esta partida}
+translate S GlistRemoveGameAndAboveFromFilter  {Oculta esta partida y las de arriba}
+translate S GlistRemoveGameAndBelowFromFilter  {Oculta esta partida y las de abajo}
 translate S GlistDeleteGame {Elimina/Recupera esta partida de la base} 
 translate S GlistDeleteAllGames {Elimina todas las partidas de la base que aparecen en el filtro} 
 translate S GlistUndeleteAllGames {Recupera todas las partidas borradas de la base que aparecen en el filtro} 
@@ -926,12 +922,9 @@ translate S UnmarkCurrent {No marcar partida actual}
 translate S UnmarkFilter {No marcar partidas filtradas}
 translate S UnmarkAll {No marcar todas las partidas}
 translate S Spellchecking {Revisión ortográfica}
-# ====== TODO To be translated ======
-translate S MakeCorrections {Make Corrections}
-# ====== TODO To be translated ======
-translate S Ambiguous {Ambiguous}
-# ====== TODO To be translated ======
-translate S Surnames {Surnames}
+translate S MakeCorrections {Hacer Correcciones}
+translate S Ambiguous {Ambiguo}
+translate S Surnames {Apellidos}
 translate S Players {Jugadores}
 translate S Events {Eventos}
 translate S Sites {Lugares}

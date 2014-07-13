@@ -722,7 +722,9 @@ proc updateMatchList { tw nametype maxMatches name el op } {
     # Control-N key binding
     bind $entrywidget <Control-Key-$i> "
       set $name \"$string\"
-      $entrywidget icursor end"
+      if {\[catch {$entrywidget icursor end}\]} {
+        puts \"Oops: $entrywidget is not an entry widget\"
+      }"
 
     incr i
   }
