@@ -32,11 +32,11 @@ public:
     WinMMap(char const* filename);
     ~WinMMap();
 
-    bool isOpen() const;
+    bool isOpen() const { return m_address != NULL; }
 
-    unsigned size() const;
+    unsigned size() const { return m_size; }
 
-    unsigned char const* address() const;
+    unsigned char const* address() const { return static_cast<unsigned char const*>(m_address); }
 
 private:
 
@@ -47,6 +47,7 @@ private:
 };
 
 
+inline
 WinMMap::WinMMap(char const* filename)
     :m_address(0)
     ,m_size(0)
@@ -86,6 +87,7 @@ WinMMap::WinMMap(char const* filename)
 }
 
 
+inline
 WinMMap::~WinMMap()
 {
     if (m_address)
