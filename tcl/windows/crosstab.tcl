@@ -355,15 +355,16 @@ proc ::crosstab::Refresh {} {
   $w.f.text delete 1.0 end
   busyCursor .
   $w.f.text configure -state disabled
-  update idle
-  $w.b.stop configure -state normal
+  ### Stop button is broken currently - S.A.
+  ### And any purpose for these two updates ??
+  # update idle
+  # $w.b.stop configure -state normal
   foreach button {update cancel font setfilter addfilter type} {
     $w.b.$button configure -state disabled
   }
-  ### Stop button is broken currently - S.A.
   # pack $w.b.stop -side right -padx 5 -pady 3
-  catch {grab $w.b.stop}
-  update
+  # catch {grab $w.b.stop}
+  # update
   catch {sc_game crosstable $crosstab(text) $crosstab(sort) $crosstab(type) \
          $crosstab(ratings) $crosstab(countries) $crosstab(tallies) $crosstab(titles) \
          $crosstab(colors) $crosstab(groups) $crosstab(ages) \
@@ -380,8 +381,8 @@ proc ::crosstab::Refresh {} {
     $w.f.text tag add bgGray $i.0 "$i.0 lineend +1c"
   }
   unbusyCursor .
-  catch {grab release $w.b.stop}
-  $w.b.stop configure -state disabled
+  # catch {grab release $w.b.stop}
+  # $w.b.stop configure -state disabled
   ### We cant use forget on this because of a bug in the windows packer
   # pack forget $w.b.stop
   foreach button {update cancel font setfilter addfilter type} {
