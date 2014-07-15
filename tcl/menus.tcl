@@ -444,9 +444,7 @@ set helpMessage($m.correspondence,16) CCMailMove
 set menuindex 0
 set m .menu.windows
 
-$m  add checkbutton -label WindowsGameinfo \
-    -var gameInfo(show) -command showGameInfo -accelerator "control-i"
-
+$m  add command -label WindowsGameinfo -accelerator "control-i" -command toggleGameInfo 
 bind .main <Control-i> toggleGameInfo
 set helpMessage($m,[incr menuindex]) WindowsGameinfo
 
