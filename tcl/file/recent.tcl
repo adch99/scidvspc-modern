@@ -235,6 +235,7 @@ proc ::recentFiles::configure {} {
     destroy .recentFilesDlg
     ::recentFiles::save
     updateMenuStates
+    ::bookmarks::RefreshMenuGame .menu.game
   }
 
   dialogbutton $w.b.cancel -text $::tr(Cancel) -command "destroy $w"

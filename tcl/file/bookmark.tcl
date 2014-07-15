@@ -99,6 +99,8 @@ proc ::bookmarks::RefreshMenuGame {menu} {
   # Remove the old game history
   $menu delete 21 end
 
+  # Trim menus in case the limit has been reduced.
+  set bookmarks(gamehistory) [lrange $bookmarks(gamehistory) 0 [expr {$::recentFiles(gamehistory) - 1}]]
   set numBookmarkEntries [llength $bookmarks(gamehistory)]
 
   if {$numBookmarkEntries == 0} { return }
