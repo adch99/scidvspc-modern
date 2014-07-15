@@ -1540,13 +1540,14 @@ set helpTitle(GameList) "Game List window"
 set helpText(GameList) {<h1>The Game List</h1>
 
 <p>The <run ::windows::gamelist::Open><green>Game List</green></run>
-allows easy perusal of all filtered games in the currently open database/PGN archive.</p>
+allows easy perusal of all filtered games in the currently open database/PGN file.</p>
 <p>Below the Game List are two rows of buttons,
 and at the bottom you'll find the <a Switcher>Database Switcher</a>.</p>
-<p>Clicking a game will select it. Select multiple games using control+click and shift+click.
+<p>Clicking a game will select it. Select multiple games using Control+Click and Shift+Click.
 Right-clicking game(s) presents a context menu for various actions. Double-clicking loads a game.</p>
-<p>Quick searches can be performed by entering text in the entry box and clicking the <b>Find</b> or <b>Filter</b> buttons.
-Use "+" as a logical AND with the <b>Filter</b> button. For example: "Kasparov+Karpov".</p>
+<p>Quick searches can be performed by entering text in the combo-box and pressing Enter, or clicking the <b>Filter</b> button.
+Use "+" as a logical AND with the <b>Filter</b> button. For example: "Kasparov+Karpov".
+Similarly, the entry-box allows finding a particular game by number. Both these widgets will load the current game by pressing Control+Enter.</p>
 <p><i>For more info about Searches and Filters, <a Searches>see here</a> or below</i>.</p>
 <h3>Sorting the Game List</h3>
 <p>The database can be <b>permanently sorted</b> by clicking column titles, but doing so is not trivial.
@@ -1584,15 +1585,13 @@ Use "+" as a logical AND with the <b>Filter</b> button. For example: "Kasparov+K
 <br>
 <li><b>Current</b> - highlights the current game (if it has not been filtered)</li>
 <li><b>Flag Menubutton</b> - select which User Flag to work with</li>
-<li><b>Flag</b> - toggles the selected User Flag for selected games</li>
 <li><b>Compact</b> - perform database compaction.</li>
-<li><b>Save</b> - save the current filter as a text file, using a 'printf' style format.</li>
 </ul>
 </p>
 <h3>Other Features</h3>
 <ul>
-<li><b>Delete</b> key removes selected game(s) from filter, <b>Control+Delete</b> toggles 'Delete' flag.</li>
-<li><b>Control+A</b> selects all visible games.</li>
+<li>Pressing Delete removes selected game(s) from filter, Control+Delete toggles 'Delete' flag.</li>
+<li>Control+A selects all visible games. Control+N negates the filter.</li>
 <li>Resize column widths by dragging the column edge.</li>
 <li>Drag and Drop files in the switcher (from Windows/KDE/Gnome).</li>
 <li>Middle-click the Game List to hide the button bar.</li>
@@ -1600,9 +1599,11 @@ Use "+" as a logical AND with the <b>Filter</b> button. For example: "Kasparov+K
 
   <h3><name Browsing>Browsing and Merging Games</name></h3>
   <p>
-  The <b>Browse Game</b> window is a sort of game preview. Without altering the current game, it displays any game in a separate window, without comments or variations. </p>
+  From the Gamelist context menu, one may <b>Browse</b> a game. This is a game
+  preview which displays in a separate window, without comments or variations.
+  </p>
   <p>
-  From here, one may <b>Merge</b> the game back into the
+  From this preview, one may <b>Merge</b> the game back into the
   current one as a variation. The merge starts from where the games differ (taking transpositions into account),
   and you can change the last move number to be merged, according to whether
   you are interested in adding the whole game or just its next few moves.
@@ -1610,7 +1611,7 @@ Use "+" as a logical AND with the <b>Filter</b> button. For example: "Kasparov+K
 <p><i>The board size can be resized by Control+Wheelmouse or Control+Shift+Left/Right.</i></p>
   
 
-  <p><footer>Updated: Scid vs. PC 4.11, November 2013</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.13, July 2014</footer></p>
 }
 
 

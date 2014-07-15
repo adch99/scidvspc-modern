@@ -524,6 +524,10 @@ proc ::windows::gamelist::Open {} {
   bind $w.c.goto <Return> {
     ::windows::gamelist::showNum $::windows::gamelist::goto
   }
+  bind $w.c.goto <Control-Return> {
+    ::windows::gamelist::showNum $::windows::gamelist::goto
+    .glistWin.c.load invoke
+  }
   dialogbutton $w.c.browse -text $::tr(Browse) -font font_Small -command {
     set selection [.glistWin.tree selection]
     if { $selection != {} } {
