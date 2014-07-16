@@ -268,6 +268,8 @@ menuText G CCEditCopy "Αντιγραφή Ευρετηρίου Παρτίδων 
 menuText G Options "Ρυθμίσεις" 2
 menuText G OptionsBoard "Σκακιέρα/Κομμάτια" 0 {Ρύθμιση Εμφάνισης Σκακιέρας}
 menuText G OptionsColour "Χρώμα Φόντου" 7 {Προπιλεγμένο Χρώμα Φόντου Κειμένου}
+# ====== TODO To be translated ======
+menuText G OptionsEnableColour "Enable" 0 {}
 menuText G OptionsNames "Τα Ονόματά μου" 3 {Επεξεργασία των Ονομάτων μου}
 menuText G OptionsExport "Εξαγωγές" 1 {Ρύθμιση Επιλογών Εξαγωγής}
 menuText G OptionsFonts "Γραμματοσειρές" 0 {Ρύθμιση Γραμματοσειρών}

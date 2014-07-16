@@ -283,6 +283,8 @@ menuText O CCEditCopy "Copy Gamelist to Clipbase" 0 {Copy the games as CSV list 
 menuText O Options "Innstillinger" 0
 menuText O OptionsBoard "Chessboard" 0 {Chess board appearance options} ;# ***
 menuText O OptionsColour "Background Colour" 0 {Default text widget color}
+# ====== TODO To be translated ======
+menuText O OptionsEnableColour "Enable" 0 {}
 menuText O OptionsNames "My Player Names..." 0 {Edit my player names} ;# ***
 menuText O OptionsExport "Eksport" 0 {Endre innstillinger for eksport av tekst}
 menuText O OptionsFonts "Skrifttyper" 0 {Endre skrifttyper}

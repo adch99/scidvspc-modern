@@ -1050,6 +1050,9 @@ proc ::tree::best { baseNumber } {
     pack $w.blist -side top -expand true -fill both
     scrollbar $w.blist.ybar -command "$w.blist.list yview" -takefocus 0
     listbox $w.blist.list  -yscrollcommand "$w.blist.ybar set" -font font_Fixed
+    if {$::enableBackground} {
+      $w.blist.list configure -background $::defaultBackground
+    }
     pack $w.blist.ybar -side right -fill y
     pack $w.blist.list -side left -fill both -expand yes
     bind $w.blist.list <Double-Button-1> "::tree::bestBrowse $baseNumber"

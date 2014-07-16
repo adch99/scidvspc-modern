@@ -266,6 +266,8 @@ menuText D CCEditCopy "Partieliste in Ablage" 0 {Kopiert die Parieliste als CSV 
 menuText D Options "Optionen" 0
 menuText D OptionsBoard "Schachbrett" 6 {Schachbrettoptionen}
 menuText D OptionsColour "Background Colour" 0 {Default text widget color}
+# ====== TODO To be translated ======
+menuText D OptionsEnableColour "Enable" 0 {}
 menuText D OptionsNames "Meine Spielernamen..." 0 {Editiere meine Spielernamen}
 menuText D OptionsExport "Export" 1 {Textausgabeoptionen ändern}
 menuText D OptionsFonts "Schriftarten" 3 {Schriftart wechseln}

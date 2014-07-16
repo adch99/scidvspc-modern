@@ -244,6 +244,8 @@ menuText P CCEditCopy "Kopiuj listę partii do schowka" 0 {Skopiuj listę partii
 menuText P Options "Opcje" 0
 menuText P OptionsBoard "Szachownica" 0 {Konfiguracja wyglądu szachownicy}
 menuText P OptionsColour "Kolor tła" 0 {Domyślny kolor tła}
+# ====== TODO To be translated ======
+menuText P OptionsEnableColour "Enable" 0 {}
 menuText P OptionsNames "Moje nazwiska" 0 {Modyfikuj listę moich graczy}
 menuText P OptionsExport "Eksport" 0 {Zmień opcje eksportu tekstu}
 menuText P OptionsFonts "Czcionka" 0 {Zmień czcionkę}

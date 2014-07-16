@@ -911,6 +911,10 @@ image create photo photoW
 image create photo photoB
 label .main.photoW  -image photoW -anchor ne
 label .main.photoB  -image photoB -anchor ne
+if {$enableBackground} {
+  .main.photoW configure -background $defaultBackground
+  .main.photoB configure -background $defaultBackground
+}
 
 proc readPhotoFile {fname} {
   set oldcount [array size ::photo]

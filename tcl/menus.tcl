@@ -683,15 +683,12 @@ set helpMessage($m,[incr menuindex]) {Board Screenshot}
 ### Options menu:
 
 set m .menu.options
-set optMenus {windows theme entry fonts ginfo fics startup language numbers export}
-set optLabels {Windows Theme Moves Fonts GInfo Fics Startup Language Numbers Export}
+set optMenus {windows theme colour entry fonts ginfo fics startup language numbers export}
+set optLabels {Windows Theme Colour Moves Fonts GInfo Fics Startup Language Numbers Export}
 set menuindex 0
 
 $m add command -label OptionsBoard -command chooseBoardColors
 set helpMessage($m,[incr menuindex]) OptionsBoard
-
-$m add command -label OptionsColour -command SetBackgroundColour
-set helpMessage($m,[incr menuindex]) OptionsColour
 
 $m add command -label OptionsToolbar -command configToolbar
 set helpMessage($m,[incr menuindex]) OptionsToolbar
@@ -838,7 +835,7 @@ $m add command -label OptionsSave -command {
     puts $optionF ""
 
   foreach i {boardSize boardStyle language ::pgn::showColor 
-    ::pgn::indentVars ::pgn::indentComments ::defaultBackground 
+    ::pgn::indentVars ::pgn::indentComments ::defaultBackground ::enableBackground
     ::pgn::shortHeader ::pgn::boldMainLine ::pgn::stripMarks 
     ::pgn::symbolicNags ::pgn::moveNumberSpaces ::pgn::columnFormat ::pgn::showScrollbar
     myPlayerNames tree(order) tree(autoSave) optionsAutoSave ::tree::mask::recentMask 
@@ -1144,6 +1141,18 @@ menu $m -tearoff -1
 foreach i [ttk::style theme names] {
   $m add radiobutton -label "$i" -value $i -variable ::lookTheme -command {ttk::style theme use $::lookTheme}
 }
+
+set m .menu.options.colour
+menu $m -tearoff -1
+$m add checkbutton -label OptionsEnableColour -variable enableBackground -command {
+  if {$::enableBackground} {
+    initBackgroundColour $defaultBackground
+  } else {
+    initBackgroundColour grey95
+  }
+}
+$m add command -label OptionsColour -command SetBackgroundColour
+set helpMessage($m,1) OptionsColour
 
 ###############################
 
@@ -1459,6 +1468,10 @@ proc setLanguageMenus {{lang ""}} {
   foreach tag {Board Colour Toolbar Names Recent Fonts GInfo Fics Moves Startup Language
     Numbers Windows Theme Export ECO Spell Table BooksDir TacticsBasesDir Sounds Save AutoSave} {
     configMenuText .menu.options [tr Options$tag $oldLang] Options$tag $lang
+  }
+
+  foreach tag {Colour EnableColour} {
+    configMenuText .menu.options.colour [tr Options$tag $oldLang] Options$tag $lang
   }
 
   foreach tag { Configure NovagCitrineConnect InputEngineConnect  } {

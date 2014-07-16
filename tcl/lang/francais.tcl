@@ -251,6 +251,8 @@ menuText F CCEditCopy "Copier parties dans Clipbase" 0 {Copy the games as CSV li
 menuText F Options "Options" 0
 menuText F OptionsBoard "Echiquier" 0 {Options d'aspect de l'échiquier}
 menuText F OptionsColour "Background Colour" 0 {Default text widget color}
+# ====== TODO To be translated ======
+menuText F OptionsEnableColour "Enable" 0 {}
 menuText F OptionsNames "Mes noms de joueurs..." 0 {Editer mes noms de joueurs}
 menuText F OptionsExport "Exportation" 0 {Changer les options d'exportation}
 menuText F OptionsFonts "Polices" 0 {Changer les polices}

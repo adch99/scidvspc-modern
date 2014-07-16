@@ -26,16 +26,35 @@ set colorSchemes2 {
 array set newColors {}
 
 proc SetBackgroundColour {} {
-  global defaultBackground
+  global defaultBackground enableBackground
+
   set temp [tk_chooseColor -initialcolor $defaultBackground -title Scid]
   if {$temp != {}} {
     set defaultBackground $temp
-    option add *Text*background $temp widgetDefault
+    set enableBackground 1
+    option add *Text*background $temp
     .main.gameInfo configure -bg $temp
-    if {[winfo exists .pgnWin.text]} { .pgnWin.text configure -bg $temp }
-    if {[winfo exists .helpWin.text]} { .helpWin.text configure -bg $temp }
-    # if {[winfo exists .baseWin.c]} { .baseWin.c configure -bg $temp }
+    initBackgroundColour $defaultBackground
   }
+}
+
+proc initBackgroundColour {colour} {
+    # border around gameinfo photos
+    .main.photoW configure -background $colour
+    .main.photoB configure -background $colour
+    # Updating padding in tree would be nice, but now they have to close and re-open tree
+    # if {[winfo exists .baseWin.c]} { .baseWin.c configure -bg $temp }
+    recurseBackgroundColour . $colour
+}
+
+proc recurseBackgroundColour {w colour} {
+     if {[winfo class $w] == "Text" || [winfo class $w] == "Listbox"} {
+         $w configure -background $colour
+     } else {
+       foreach c [winfo children $w] {
+	   recurseBackgroundColour $c $colour
+       }
+     }
 }
 
 proc SetBoardTextures {} {

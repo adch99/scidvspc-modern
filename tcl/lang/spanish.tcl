@@ -259,6 +259,8 @@ menuText S CCEditCopy "Copiar lista de partidas a clipbase" 0 \
 menuText S Options "Opciones" 0
 menuText S OptionsBoard "Tablero" 0 {Opciones sobre el aspecto del tablero}
 menuText S OptionsColour "Color de fondo" 0 {Color de fondo por defecto}
+# ====== TODO To be translated ======
+menuText S OptionsEnableColour "Enable" 0 {}
 menuText S OptionsNames "Mis Nombres de Jugador" 3 {Edita mis nombres de jugador}
 menuText S OptionsExport "Exportación" 0 {Cambia las opciones de exportación de texto}
 menuText S OptionsFonts "Fuentes" 0 {Cambia las fuentes}

@@ -242,6 +242,8 @@ menuText W CCEditCopy "Kopiera partilista till Clipbase" 0 {Kopiera partierna so
 menuText W Options "Alternativ" 2
 menuText W OptionsBoard "Brädet" 0 {Ändra brädets utseende}
 menuText W OptionsColour "Bakgrundsfärg" 0 {Standardtextfärg}
+# ====== TODO To be translated ======
+menuText W OptionsEnableColour "Enable" 0 {}
 menuText W OptionsNames "Spelarnamn..." 0 {Redigera spelares namn}
 menuText W OptionsExport "Export" 0 {Ändra exportalternativ}
 menuText W OptionsFonts "Typsnitt" 0 {Ändra typsnitt}

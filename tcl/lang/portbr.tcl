@@ -265,6 +265,8 @@ menuText B CCEditCopy "Copiar Lista de Jogos para a base de cópia" 0 {Copia os j
 menuText B Options "Opcoes" 0
 menuText B OptionsBoard "Chessboard" 0 {Chess board appearance options} ;# ***
 menuText B OptionsColour "Background Colour" 0 {Default text widget color}
+# ====== TODO To be translated ======
+menuText B OptionsEnableColour "Enable" 0 {}
 menuText B OptionsNames "My Player Names..." 0 {Edit my player names} ;# ***
 menuText B OptionsExport "Exportacao" 0 {Muda as opcoes de exportacao de texto}
 menuText B OptionsFonts "Fontes" 0 {Muda os fontes}

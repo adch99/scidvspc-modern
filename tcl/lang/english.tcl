@@ -261,6 +261,7 @@ menuText E CCEditCopy "Copy Gamelist to Clipbase" 0 {Copy the games as CSV list 
 menuText E Options "Options" 0
 menuText E OptionsBoard "Chessboard/Pieces" 0 {Chess board appearance}
 menuText E OptionsColour "Background Colour" 0 {Default text widget color}
+menuText E OptionsEnableColour "Enable" 0 {}
 menuText E OptionsNames "My Player Names" 3 {Edit my player names}
 menuText E OptionsExport "Exporting" 0 {Change text export options}
 menuText E OptionsFonts "Fonts" 0 {Change fonts}

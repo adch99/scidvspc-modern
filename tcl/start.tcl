@@ -123,6 +123,7 @@ foreach ns {
 set ::MAX_GAMES [sc_info limit games]
 set ::pause 0
 set ::defaultBackground white
+set ::enableBackground 0
 set ::tacgame::threshold 0.9
 set ::tacgame::levelMin 1200
 set ::tacgame::levelMax 2200
@@ -397,6 +398,14 @@ set buttoncolor {#b0c0d0}
 set borderwidth 1
 set maincolor black
 set varcolor grey80
+
+# Set the radiobutton and checkbutton background color if desired.
+# I find the maroon color on Unix ugly!
+if {$unixOS} {
+  option add *Radiobutton*selectColor $buttoncolor
+  option add *Checkbutton*selectColor $buttoncolor
+  # option add *Menu*selectColor $buttoncolor
+}
 
 set ::tactics::analysisTime 3
 
@@ -1466,6 +1475,10 @@ if {$::docking::USE_DOCKING} {
   set dot_w .main
 }
 
+if {$enableBackground} {
+  option add *Text*background $defaultBackground
+}
+
 # Reconfigure fonts if necessary
 
 foreach i {Regular Menu Small Tiny Fixed} {
@@ -1486,7 +1499,6 @@ foreach i {Regular Menu Small Tiny Fixed} {
 
 set fd_size [font actual font_Regular -size]
 option add *Font font_Regular
-option add *Text*background $defaultBackground widgetDefault
 option add *Menu*Font font_Menu
 # option add *Menubutton*Font font_Menu
 if {$unixOS} {
@@ -1673,20 +1685,9 @@ foreach sz $boardSizes {
 }
 set boardSize $newSize
 
-# Load theme
-catch {ttk::style theme use $lookTheme}
-
 # Check for old (single-directory) tablebase option:
 if {[info exists initialDir(tablebase)]} {
   set initialDir(tablebase1) $initialDir(tablebase)
-}
-
-# Set the radiobutton and checkbutton background color if desired.
-# I find the maroon color on Unix ugly!
-if {$unixOS} {
-  option add *Radiobutton*selectColor $buttoncolor
-  option add *Checkbutton*selectColor $buttoncolor
-  option add *Menu*selectColor $buttoncolor
 }
 
 set fontsize [font configure font_Regular -size]

@@ -282,6 +282,8 @@ menuText Y CCEditCopy "Copy Gamelist to Clipbase" 0 {Copy the games as CSV list 
 menuText Y Options "Opcije" 0
 menuText Y OptionsBoard "Chessboard" 0 {Chess board appearance options} ;# ***
 menuText Y OptionsColour "Background Colour" 0 {Default text widget color}
+# ====== TODO To be translated ======
+menuText Y OptionsEnableColour "Enable" 0 {}
 menuText Y OptionsNames "My Player Names..." 0 {Edit my player names} ;# ***
 menuText Y OptionsExport "Izvoz" 0 {Promeni opcije tekstualnog izvoza}
 menuText Y OptionsFonts "Fontovi" 0 {Promeni fontove}
