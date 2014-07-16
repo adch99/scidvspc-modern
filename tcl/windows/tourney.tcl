@@ -4,7 +4,7 @@
 
 namespace eval ::tourney {}
 
-foreach {n v} {start 0000.00.00 end 2047.12.31 minPlayers 2 maxPlayers 999 \
+foreach {n v} {start 0000.00.00 end 2047.12.31 minPlayers 2 maxPlayers 1999 \
                  minGames 1 maxGames 9999 minElo 0 maxElo 4000 sort Date \
                  country "" site "" event "" player "" size 50} {
   set ::tourney::$n $v
@@ -12,7 +12,7 @@ foreach {n v} {start 0000.00.00 end 2047.12.31 minPlayers 2 maxPlayers 999 \
 
 trace variable ::tourney::start w ::utils::validate::Date
 trace variable ::tourney::end w ::utils::validate::Date
-foreach {n v} {minPlayers 999 maxPlayers 999 minGames 9999 maxGames 9999 \
+foreach {n v} {minPlayers 1999 maxPlayers 1999 minGames 9999 maxGames 9999 \
                  minElo [sc_info limit elo] maxElo [sc_info limit elo]} {
   trace variable ::tourney::$n w [list ::utils::validate::Integer $v 0]
 }
@@ -91,7 +91,6 @@ proc ::tourney::Open {{player {}}} {
   set fbold font_SmallBold
 
   # todo - The o1 o2 o3 frames should be gridded. S.A
-  # Should these 999 limits be increased ?
 
   set f $w.o1
 
@@ -229,7 +228,7 @@ proc ::tourney::defaults {} {
   set ::tourney::end "$year.12.31"
   set ::tourney::size 200
   set ::tourney::minPlayers 2
-  set ::tourney::maxPlayers 999
+  set ::tourney::maxPlayers 1999
   set ::tourney::minGames 1
   set ::tourney::maxGames 9999
   set ::tourney::minElo 0
