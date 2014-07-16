@@ -1477,6 +1477,7 @@ if {$::docking::USE_DOCKING} {
 
 if {$enableBackground} {
   option add *Text*background $defaultBackground
+  option add *Listbox*background $defaultBackground
 }
 
 # Reconfigure fonts if necessary

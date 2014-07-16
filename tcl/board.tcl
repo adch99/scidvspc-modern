@@ -33,6 +33,7 @@ proc SetBackgroundColour {} {
     set defaultBackground $temp
     set enableBackground 1
     option add *Text*background $temp
+    option add *Listbox*background $temp
     .main.gameInfo configure -bg $temp
     initBackgroundColour $defaultBackground
   }
