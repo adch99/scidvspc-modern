@@ -720,7 +720,7 @@ Crosstable::PrintPlayer (DString * dstr, playerDataT * pdata)
         dstr->Append (StartCol, stemp, EndCol);
     }
     if (PrintAges) {
-        if (pdata->ageInYears == 0) {
+        if (pdata->ageInYears <= 0) {
 	    if (OutputFormat == CROSSTABLE_Html) {
 	      sprintf (stemp, " -  ");
 	    } else {
