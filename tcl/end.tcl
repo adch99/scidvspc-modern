@@ -1463,17 +1463,25 @@ if {$windowsOS || $macOS} {
     if {[expr -%D] < 0} { ::move::Back 10 }
     if {[expr -%D] > 0} { ::move::Forward 10}
   }
-  bind .main <Control-MouseWheel> {
-    if {[expr -%D] < 0} {::board::resize .main.board +1}
-    if {[expr -%D] > 0} {::board::resize .main.board -1}
+  if { $::docking::USE_DOCKING } {
+    bindWheeltoFont .main
+  } else {
+    bind .main <Control-MouseWheel> {
+      if {[expr -%D] < 0} {::board::resize .main.board +1}
+      if {[expr -%D] > 0} {::board::resize .main.board -1}
+    }
   }
 } else {
   bind .main <Button-4> ::move::Back
   bind .main <Button-5> ::move::Forward
   bind .main <Shift-Button-4> {::move::Back 10}
   bind .main <Shift-Button-5> {::move::Forward 10}
-  bind .main <Control-Button-4> {::board::resize .main.board +1}
-  bind .main <Control-Button-5> {::board::resize .main.board -1}
+  if { $::docking::USE_DOCKING } {
+    bindWheeltoFont .main
+  } else {
+    bind .main <Control-Button-4> {::board::resize .main.board +1}
+    bind .main <Control-Button-5> {::board::resize .main.board -1}
+  }
 }
 
 proc standardShortcuts {w} {
