@@ -1214,10 +1214,15 @@ proc gameSave {gnum {focus {}}} {
     }
   }
   dialogbutton $w.buttons.save -textvar ::tr(Save) -underline 0 -command {
-    set extraTags [.save.g.extratext get 1.0 end-1c]
-    gsave $gsaveNum;
-    destroy .save
-    updateMenuStates
+    if {[string is integer -strict $eyear] && ![string is integer -strict $year]} {
+      tk_messageBox -type ok -icon error -title "Scid: Oops" \
+	-message "Event date can't exist without Game date."
+    } else {
+      set extraTags [.save.g.extratext get 1.0 end-1c]
+      gsave $gsaveNum;
+      destroy .save
+      updateMenuStates
+    }
   }
 
   if {$gsaveNum < 0} {

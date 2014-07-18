@@ -61,9 +61,10 @@ set glistFields {
 set glistCodes {} 
 set glistNames {}
 
-## If you wish to enable these fields, please make sure a default field width is set S.A.
+### If you wish to enable these fields, please make sure a default field width is set
+###    and also alter/remove "::windows::gamelist::widths" in your config file.
 # append glistFields { c Country   e  3 } ; # Country (last 3 chars of Site Name)
-# append glistFields { E EventDate e  7 } ; # Event Date
+# append glistFields { E EventDate w  7 } ; # Event Date
 # append glistFields { F EndMaterial e  7 } ; # Final position material
 
 

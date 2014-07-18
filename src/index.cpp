@@ -152,7 +152,7 @@ IndexEntry::GetEventDate (void)
     dateT edate = u32_high_12 (Dates);
     uint month = date_GetMonth (edate);
     uint day = date_GetDay (edate);
-    // event year seems stored as a 3 bit offset (0 to 7) to game year representing (-4 to +3)
+    // Event year is stored as a 3 bit offset (0 to 7) to game year representing (-4 to +3)
     uint year = date_GetYear(edate) & 7;
     if (year == 0) { return ZERO_DATE; }
     year = dyear + year - 4;
