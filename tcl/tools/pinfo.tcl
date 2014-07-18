@@ -18,7 +18,7 @@ proc playerInfo {{player ""} {raise 0}} {
     setWinLocation $w
     wm minsize $w 450 300
 
-    pack [frame $w.b] -side bottom -expand 1 -fill x -pady 3 -padx 5
+    pack [frame $w.b] -side bottom -expand 1 -fill x -pady 0 -padx 5
 
     button $w.b.graph -text [tr ToolsRating] \
       -command {::tools::graphs::rating::Refresh $playerInfoName} 
@@ -67,14 +67,14 @@ proc playerInfo {{player ""} {raise 0}} {
     grid columnconfigure $w.b 1 -weight 1
     grid columnconfigure $w.b 2 -weight 1
     grid columnconfigure $w.b 3 -weight 1
-    grid $w.b.graph   -row 0 -column 0 -padx 3 -pady 2 -sticky ew
-    grid $w.b.edit    -row 0 -column 1 -padx 3 -pady 2 -sticky ew
-    grid $w.b.match   -row 0 -column 2 -padx 3 -pady 2 -sticky ew
-    grid $w.b.nedit   -row 0 -column 3 -padx 3 -pady 2 -sticky ew
-    grid $w.b.report  -row 1 -column 0 -padx 3 -pady 2 -sticky ew
-    grid $w.b.tourney -row 1 -column 1 -padx 3 -pady 2 -sticky ew
-    grid $w.b.update  -row 1 -column 2 -padx 3 -pady 2 -sticky ew
-    grid $w.b.close   -row 1 -column 3 -padx 3 -pady 2 -sticky ew
+    grid $w.b.graph   -row 0 -column 0 -padx 3 -pady 1 -sticky ew
+    grid $w.b.edit    -row 0 -column 1 -padx 3 -pady 1 -sticky ew
+    grid $w.b.match   -row 0 -column 2 -padx 3 -pady 1 -sticky ew
+    grid $w.b.nedit   -row 0 -column 3 -padx 3 -pady 1 -sticky ew
+    grid $w.b.report  -row 1 -column 0 -padx 3 -pady 1 -sticky ew
+    grid $w.b.tourney -row 1 -column 1 -padx 3 -pady 1 -sticky ew
+    grid $w.b.update  -row 1 -column 2 -padx 3 -pady 1 -sticky ew
+    grid $w.b.close   -row 1 -column 3 -padx 3 -pady 1 -sticky ew
 
     autoscrollframe $w.frame text $w.text -font font_Regular -wrap none
 
