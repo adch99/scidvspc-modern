@@ -43,6 +43,8 @@ proc initBackgroundColour {colour} {
     # border around gameinfo photos
     .main.photoW configure -background $colour
     .main.photoB configure -background $colour
+    ::ttk::style configure Treeview -background $colour
+    ::ttk::style configure Treeview -fieldbackground $colour
     # Updating padding in tree would be nice, but now they have to close and re-open tree
     # if {[winfo exists .baseWin.c]} { .baseWin.c configure -bg $temp }
     recurseBackgroundColour . $colour

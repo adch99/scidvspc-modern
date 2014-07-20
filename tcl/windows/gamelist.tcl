@@ -314,6 +314,11 @@ proc ::windows::gamelist::Open {} {
 
   ::windows::gamelist::checkAltered
 
+  if {$::enableBackground} {
+    ::ttk::style configure Treeview -background $::defaultBackground
+    ::ttk::style configure Treeview -fieldbackground $::defaultBackground
+  }
+
   # $w.tree tag configure colour -background $::defaultBackground
   # $w.tree tag bind click1 <Button-1> {}
 
