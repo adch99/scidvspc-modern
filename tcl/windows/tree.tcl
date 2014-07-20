@@ -244,9 +244,9 @@ proc ::tree::Open {{baseNumber 0}} {
   ::utils::tooltip::Set $w.buttons.best [tr TreeFileBest]
   ::utils::tooltip::Set $w.buttons.training [tr TreeOptTraining]
 
-  checkbutton $w.buttons.refresh -text [tr FICSRefresh] \
+  checkbutton $w.buttons.refresh -text [tr FICSRefresh] -font font_Small \
       -variable tree(autorefresh$baseNumber) -command "::tree::toggleRefresh $baseNumber" 
-  checkbutton $w.buttons.adjust -text [tr TreeAdjust] -variable tree(adjustfilter$baseNumber) -command "::tree::dorefresh $baseNumber"
+  checkbutton $w.buttons.adjust -text [tr TreeAdjust] -font font_Small -variable tree(adjustfilter$baseNumber) -command "::tree::dorefresh $baseNumber"
 
   # bStartStop TreeOptStartStop
   foreach {b t} {
@@ -255,8 +255,8 @@ proc ::tree::Open {{baseNumber 0}} {
     set helpMessage($w.buttons.$b) $t
   }
 
-  dialogbutton $w.buttons.stop -textvar ::tr(Stop) -command { sc_progressBar }
-  dialogbutton $w.buttons.close -textvar ::tr(Close) -command "destroy $w"
+  button $w.buttons.stop -textvar ::tr(Stop) -font font_Small -command { sc_progressBar }
+  button $w.buttons.close -textvar ::tr(Close) -font font_Small -command "destroy $w"
 
   pack $w.buttons.best $w.buttons.training $w.buttons.refresh $w.buttons.adjust -side left -padx 3
 

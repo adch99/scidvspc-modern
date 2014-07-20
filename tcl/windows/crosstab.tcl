@@ -262,9 +262,9 @@ proc ::crosstab::Open {} {
   grid rowconfig $w.f 0 -weight 1 -minsize 0
   grid columnconfig $w.f 0 -weight 1 -minsize 0
 
-  button $w.b.stop -textvar ::tr(Stop) -state disabled \
+  button $w.b.stop -textvar ::tr(Stop) -state disabled -font font_Small \
     -command { set ::htext::interrupt 1 }
-  menubutton $w.b.type -text "" -menu $w.b.type.menu \
+  menubutton $w.b.type -text "" -font font_Small -menu $w.b.type.menu \
     -relief raised -bd 1 -indicatoron 1
   menu $w.b.type.menu
   $w.b.type.menu add radiobutton -label [tr CrosstabOptAll] \
@@ -273,25 +273,21 @@ proc ::crosstab::Open {} {
     -variable crosstab(type) -value swiss -command ::crosstab::Refresh
   $w.b.type.menu add radiobutton -label [tr CrosstabOptKnockout] \
     -variable crosstab(type) -value knockout -command ::crosstab::Refresh
-  $w.b.type.menu add radiobutton -label [tr CrosstabOptAuto] \
+  $w.b.type.menu add radiobutton -label [tr CrosstabOptAuto] -font font_Small \
     -variable crosstab(type) -value auto -command ::crosstab::Refresh
-  button $w.b.update -textvar ::tr(Update) -command ::crosstab::Refresh
+  button $w.b.update -textvar ::tr(Update) -font font_Small -command ::crosstab::Refresh
 
-  entry $w.b.find -width 10 -textvariable crosstab(find) -highlightthickness 0
+  entry $w.b.find -width 10 -textvariable crosstab(find) -font font_Small -highlightthickness 0
   configFindEntryBox $w.b.find crosstab .crosstabWin.f.text
 
-  button $w.b.cancel -textvar ::tr(Close) -command {
+  button $w.b.cancel -textvar ::tr(Close) -font font_Small -command {
     focus .main
     destroy .crosstabWin
   }
-  button $w.b.setfilter -textvar ::tr(SetFilter) -command {
-    ::crosstab::setFilter 0
-  }
-  button $w.b.addfilter -textvar ::tr(AddToFilter) -command {
-    ::crosstab::setFilter
-  }
+  button $w.b.setfilter -textvar ::tr(SetFilter) -font font_Small -command {::crosstab::setFilter 0}
+  button $w.b.addfilter -textvar ::tr(AddToFilter) -font font_Small -command {::crosstab::setFilter}
 
-  button $w.b.font -textvar ::tr(Font) -command {FontDialogFixed .crosstabWin}
+  button $w.b.font -textvar ::tr(Font) -font font_Small -command {FontDialogFixed .crosstabWin}
 
   pack $w.b.cancel $w.b.find $w.b.update -side right -pady 3 -padx 5
   pack $w.b.setfilter $w.b.addfilter $w.b.type $w.b.font -side left -pady 3 -padx 5

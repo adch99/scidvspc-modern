@@ -2230,8 +2230,8 @@ proc makeAnalysisWin {{n 0} {options {}}} {
   button $w.b.alllines -image tb_addallvars -command "addAllVariations $n" -relief $relief
   ::utils::tooltip::Set $w.b.alllines $::tr(AddAllVariations)
 
-  spinbox $w.b.multipv -from 1 -to 8 -increment 1 -textvariable analysis(multiPVCount$n) -width 2 \
-      -command "changePVSize $n" 
+  spinbox $w.b.multipv -from 1 -to 8 -increment 1 -textvariable analysis(multiPVCount$n) \
+    -width 2 -font font_Small -command "changePVSize $n" 
   ::utils::tooltip::Set $w.b.multipv $::tr(Lines)
 
   checkbutton $w.b.lockengine -image tb_lockengine -indicatoron false -width 32 -height 32 \
