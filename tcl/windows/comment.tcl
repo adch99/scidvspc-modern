@@ -121,7 +121,7 @@ proc ::commenteditor::Open {} {
   pack $w.nf -side top -pady 2 -padx 5 -fill x 
   #addHorizontalRule $w
 
-  button $w.nf.tf.clear -textvar ::tr(Clear) -pady 1 -command "
+  button $w.nf.tf.clear -textvar ::tr(Clear) -font font_Small -pady 1 -command "
     $w.nf.tf.text delete 0 end
     focus $w.nf.tf.text"
   set helpMessage(E,$w.nf.tf.clear) {Clear all symbols for this move}
@@ -174,22 +174,22 @@ proc ::commenteditor::Open {} {
     $w.b.hide configure -image bookmark_down
   }
 
-  dialogbutton $w.b.ok -text Ok \
+  dialogbutton $w.b.ok -text Ok -font font_Small \
       -command "::commenteditor::storeComment
                 focus .main
                 destroy .commentWin"
   set helpMessage(E,$w.b.ok) {Apply changes and exit}
 
-  dialogbutton $w.b.apply -textvar ::tr(Apply) -command ::commenteditor::storeComment
+  dialogbutton $w.b.apply -textvar ::tr(Apply) -font font_Small -command ::commenteditor::storeComment
   set helpMessage(E,$w.b.apply) {Apply changes}
 
-  dialogbutton $w.b.clear -textvar ::tr(Clear) -pady 1 -command "
+  dialogbutton $w.b.clear -textvar ::tr(Clear) -font font_Small -pady 1 -command "
       $w.cf.text delete 0.0 end
       focus $w.cf.text"
   set helpMessage(E,$w.b.apply) {Apply Changes}
 
   frame $w.b.space -width 20
-  dialogbutton $w.b.cancel -textvar ::tr(Cancel) \
+  dialogbutton $w.b.cancel -textvar ::tr(Cancel) -font font_Small \
       -command "focus .main
                 destroy .commentWin"
   set helpMessage(E,$w.b.cancel) {Close comment editor window}
