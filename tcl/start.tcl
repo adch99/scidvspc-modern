@@ -646,7 +646,7 @@ if {$::windowsOS} {
 foreach i {tilegtk tileq keramik keramik_alt plastik} {
   catch {package require ttk::theme::$i}
 }
-catch {ttk::style theme use $lookTheme}
+# catch {ttk::style theme use $lookTheme}
 
 #   Which windows should be opened on startup
 set startup(pgn) 0
@@ -1685,6 +1685,9 @@ foreach sz $boardSizes {
   if {$boardSize >= $sz} { set newSize $sz }
 }
 set boardSize $newSize
+
+# Load theme
+catch {ttk::style theme use $lookTheme}
 
 # Check for old (single-directory) tablebase option:
 if {[info exists initialDir(tablebase)]} {

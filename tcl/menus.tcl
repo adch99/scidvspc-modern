@@ -1139,7 +1139,15 @@ set helpMessage($m,1) OptionsWindowsFullScreen
 set m .menu.options.theme
 menu $m -tearoff -1
 foreach i [ttk::style theme names] {
-  $m add radiobutton -label "$i" -value $i -variable ::lookTheme -command {ttk::style theme use $::lookTheme}
+  $m add radiobutton -label "$i" -value $i -variable ::lookTheme -command changeTheme
+}
+
+proc changeTheme {} {
+    ttk::style theme use $::lookTheme
+    if {$::enableBackground} {
+      ::ttk::style configure Treeview -background $::defaultBackground
+      ::ttk::style configure Treeview -fieldbackground $::defaultBackground
+    }
 }
 
 set m .menu.options.colour
