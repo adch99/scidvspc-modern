@@ -1373,13 +1373,15 @@ sc_base_check (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     uint update = 5000;  
     uint updateStart = 5000;
     IndexEntry *ie = NULL;
-    Game *g = new Game();
     char gameNumber[16];
     bool limitToFilter = false;
 
     if (argc != 3) {
         return errorResult (ti, "Usage: sc_base check <bool:all_games>");
     }
+
+    Game *g = new Game();
+
     if (argv[2][0] == 'f')
         limitToFilter = true;
 
@@ -2607,6 +2609,7 @@ sc_base_duplicates (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
                 }
                 break;
             default:
+                delete[] gNumList;
                 return InvalidCommand (ti, "sc_base duplicates", options);
         }
     }
@@ -4296,14 +4299,17 @@ sc_compact_games (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     db->idx->ReadEntireFile ();
     db->gfile->Open (db->fileName, db->fileMode);
 
-    clearFilter (db, db->idx->GetNumGames());
-    // clearFilter (db, 0); ???
-    // in SCID this went from
-    //     delete db->filter;
-    //     db->filter = newFilter;
-    // to
-    //     clearFilter (db, db->idx->GetNumGames());
-    // but it got Gerds ok
+    if(db->dbFilter && db->dbFilter != db->filter)
+        delete db->dbFilter;
+    if(db->filter)
+        delete db->filter;
+    if(db->treeFilter)
+        delete db->treeFilter;
+    db->filter = newFilter;
+    db->dbFilter = db->filter;
+    db->treeFilter = NULL;
+
+    // clearFilter (db, db->idx->GetNumGames());
 
     db->gameNumber = -1;
     db->numGames = db->idx->GetNumGames();
@@ -5787,7 +5793,7 @@ setMainFilter( scidBaseT * dbase)
 void 
 clearFilter( scidBaseT * dbase, uint size)
 {
-    if(db->dbFilter && dbase->dbFilter != dbase->filter)
+    if(dbase->dbFilter && dbase->dbFilter != dbase->filter)
         delete dbase->dbFilter;
     if(dbase->filter)
         delete dbase->filter;
@@ -7650,6 +7656,7 @@ sc_game_list (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             }
             linenum++;
             if (returnLineNum  &&  (int)index == db->gameNumber) {
+                if (fp != NULL) { fclose (fp); }
                 return setUintResult (ti, linenum);
             }
             ie = db->idx->FetchEntry (index);
