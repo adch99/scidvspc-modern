@@ -4166,13 +4166,14 @@ sc_compact_games (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     Index * newIdx = new Index;
     GFile * newGfile = new GFile;
-    Filter * newFilter = new Filter (0);
+    // Filter * newFilter = new Filter (0);
     newIdx->SetFileName (newName);
 
 #define CLEANUP \
-    delete newIdx; delete newGfile; delete newFilter; \
+    delete newIdx; delete newGfile; \
     removeFile (newName, INDEX_SUFFIX); \
     removeFile (newName, GFILE_SUFFIX)
+    // ; delete newFilter; 
 
     if (newIdx->CreateIndexFile (FMODE_WriteOnly) != OK) {
         CLEANUP;
@@ -4257,7 +4258,7 @@ sc_compact_games (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             interrupted = true;
             break;
         }
-        newFilter->Append (db->filter->Get (i));
+        // newFilter->Append (db->filter->Get (i));
     }
 
     if (interrupted) {
@@ -4299,6 +4300,9 @@ sc_compact_games (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     db->idx->ReadEntireFile ();
     db->gfile->Open (db->fileName, db->fileMode);
 
+/*
+    Probably too resource hungry to keep the old filter when compacting big bases
+
     if(db->dbFilter && db->dbFilter != db->filter)
         delete db->dbFilter;
     if(db->filter)
@@ -4308,8 +4312,9 @@ sc_compact_games (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     db->filter = newFilter;
     db->dbFilter = db->filter;
     db->treeFilter = NULL;
+*/
 
-    // clearFilter (db, db->idx->GetNumGames());
+    clearFilter (db, db->idx->GetNumGames());
 
     db->gameNumber = -1;
     db->numGames = db->idx->GetNumGames();
