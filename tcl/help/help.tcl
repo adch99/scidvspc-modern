@@ -1371,10 +1371,13 @@ set helpTitle(Crosstable) "Crosstable Window"
 set helpText(Crosstable) {<h1>The Crosstable Window</h1>
   <p>The <run ::crosstab::Open><green>Crosstable</green></run> shows the
   tournament result for the current game in <b>All-Play-All, Swiss</b> or <b>Knockout</b> formats.
-  </p>
-  <p>Any game played up to <b>twelve months before or after</b> the current game,
+  Any game played up to <b>twelve months before or after</b> the current game,
   with <b>identical Event and Site</b> tags, is considered to be in the tournament.
   </p>
+  <p><i>For a good Crosstable, <b>duplicate games</b> should be marked for deletion, and
+  Player, Site and Event names should be spelt consistently.  See
+  <a Maintenance>Database Maintenance</a> for more information.
+  </i></p>
 
   <h4>Features</h4>
   <p>Clicking on a Game Result shows a menu from which one may Browse, Load or Merge a game.
@@ -1410,13 +1413,16 @@ Optionally, <b>Head-to-Head</b> and <b>Total-Wins</b> tie-breaks (in that order)
 <p>The <b>Group Scores</b> option shows a blank line between players with the same score.
   </p>
 
-  <h4>Notes</h4>
-  <p>For a good Crosstable, <b>duplicate games</b> should be marked for deletion, and
-  Player, Site and Event names should be spelt consistently.  See
-  <a Maintenance>Database Maintenance</a> for more information.
+  <h4>ELO Performance Ratings Calculation</h4>
+  <p>To calculate ELO Performance ratings and ratings changes, Scid uses algorithms from the
+  <url http://www.fide.com/component/handbook/?view=article&id=161>FIDE handbook articles 161</url> and 
+  <url http://www.fide.com/fide/handbook.html?id=172&view=article>172</url>
+  , or older versions of these articles.
+  Another article of interest is <url http://www.fide.com/fide/handbook.html?id=163&view=article>FIDE Title Regulations</url>.
   </p>
+ <p><i>Compared to some sources, Scid's Ratings Changes have small discrepencies. Persons interested in authoritatively updating Scid's statistics will find the relevant code in Crosstable::RatingChange in Scid's source file crosstab.cpp.</i></p>
 
-  <p><footer>Updated: Scid vs. PC 4.5 June 2011</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.13 July 2013</footer></p>
 }
 
 
