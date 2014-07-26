@@ -262,12 +262,10 @@ proc ::bookmarks::Go {entry} {
     }
   }
 
-  ::windows::gamelist::Reload
-  ::windows::stats::Refresh
-  updateMenuStates
+  refreshWindows
+  refreshSearchDBs
+  ::bookmarks::AddCurrentGame
   updateBoard -pgn
-  updateTitle
-  updateStatusBar
 }
 
 ### Deletes all submenus of a bookmark menu.

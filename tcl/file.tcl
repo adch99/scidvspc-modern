@@ -242,13 +242,13 @@ proc ::file::Open {{fName ""} {parent .} {update 1}} {
     ::setTitle .treeBest$current "$::tr(TreeBestGames) \[[file tail [sc_base filename $current]]\]"
   }
 
-  refreshWindows
-  refreshSearchDBs
-
   if {$update} {
+    refreshWindows
+    refreshSearchDBs
     ::bookmarks::AddCurrentGame
     updateBoard -pgn
   }
+  # else bookmarks will call refreshWindows after correct game loaded
 }
 
 proc refreshWindows {} {
