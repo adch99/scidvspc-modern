@@ -773,12 +773,12 @@ menuText N CrosstabEditEvent "Evenement" 0
 menuText N CrosstabEditSite "Plaats" 0
 menuText N CrosstabEditDate "Datum" 0
 menuText N CrosstabOpt "Opties" 0
-menuText N CrosstabOptAll "Gesloten" 0
-menuText N CrosstabOptSwiss "Zwitsers" 0
 menuText N CrosstabOptColorPlain "Tekst" 0
 menuText N CrosstabOptColorHyper "Hypertekst" 1
-menuText N CrosstabOptKnockout "Knock-out" 0
-menuText N CrosstabOptAuto "Auto" 0
+# ====== TODO To be translated ======
+menuText N CrosstabOptTieWin "Tie-Break by wins" 1
+# ====== TODO To be translated ======
+menuText N CrosstabOptTieHead "Tie-Break by head-head" 1
 menuText N CrosstabOptThreeWin "3 punten voor een overwinning" 1
 menuText N CrosstabOptAges "Leeftijd in jaren" 8
 menuText N CrosstabOptNats "Nationaliteiten" 1
@@ -795,10 +795,12 @@ menuText N CrosstabSortName "Naam" 0
 menuText N CrosstabSortRating "Elo" 0
 menuText N CrosstabSortScore "Score" 0
 menuText N CrosstabSortCountry "Land" 0
-# ====== TODO To be translated ======
-menuText N CrosstabSortTieWin "Tie-Break by wins" 1
-# ====== TODO To be translated ======
-menuText N CrosstabSortTieHead "Tie-Break by head-head" 1
+# todo
+menuText N CrosstabType "Type" 0
+menuText N CrosstabTypeAll "Gesloten" 0
+menuText N CrosstabTypeSwiss "Zwitsers" 0
+menuText N CrosstabTypeKnockout "Knock-out" 0
+menuText N CrosstabTypeAuto "Auto" 0
 menuText N CrosstabHelp "Help" 0
 menuText N CrosstabHelpCross "Help (kruistabel)" 0
 menuText N CrosstabHelpIndex "Inhoud" 0

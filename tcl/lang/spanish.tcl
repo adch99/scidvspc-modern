@@ -785,12 +785,10 @@ menuText S CrosstabEditEvent "Evento" 0
 menuText S CrosstabEditSite "Lugar" 0
 menuText S CrosstabEditDate "Fecha" 0
 menuText S CrosstabOpt "Opciones" 0
-menuText S CrosstabOptAll "Todos Contra Todos" 0
-menuText S CrosstabOptSwiss "Suizo" 0
 menuText S CrosstabOptColorPlain "Texto simple" 0
 menuText S CrosstabOptColorHyper "Hipertexto" 0
-menuText S CrosstabOptKnockout "Rondas" 0
-menuText S CrosstabOptAuto "Auto" 0
+menuText S CrosstabOptTieWin "Desempate por victorias" 1
+menuText S CrosstabOptTieHead "Desempate por head-head" 1
 menuText S CrosstabOptThreeWin "3 Puntos por victoria" 1
 menuText S CrosstabOptAges "Edad en años" 1
 menuText S CrosstabOptNats "Nacionalidades" 0
@@ -807,8 +805,12 @@ menuText S CrosstabSortName "Por nombre" 4
 menuText S CrosstabSortRating "Por Elo" 4
 menuText S CrosstabSortScore "Por puntuación" 4
 menuText S CrosstabSortCountry "País" 4
-menuText S CrosstabSortTieWin "Desempate por victorias" 1
-menuText S CrosstabSortTieHead "Desempate por head-head" 1
+# todo
+menuText S CrosstabType "Type" 0
+menuText S CrosstabTypeAll "Todos Contra Todos" 0
+menuText S CrosstabTypeSwiss "Suizo" 0
+menuText S CrosstabTypeKnockout "Rondas" 0
+menuText S CrosstabTypeAuto "Auto" 0
 menuText S CrosstabHelp "Ayuda" 1
 menuText S CrosstabHelpCross "Ayuda de tabla cruzada" 9
 menuText S CrosstabHelpIndex "Indice de la ayuda" 0

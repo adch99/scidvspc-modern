@@ -16,30 +16,35 @@ proc ::crosstab::ConfigMenus {{lang ""}} {
   if {! [winfo exists .crosstabWin]} { return }
   if {$lang == ""} { set lang $::language }
   set m .crosstabWin.menu
-  foreach idx {0 1 2 3 4} tag {File Edit Sort Opt Help} {
+  foreach idx {0 1 2 3 4 5} tag {File Sort Type Opt Edit Help} {
     configMenuText $m $idx Crosstab$tag $lang
   }
   foreach idx {0 1 2 4} tag {Text Html LaTeX Close} {
     configMenuText $m.file $idx CrosstabFile$tag $lang
   }
-  foreach idx {0 1 2} tag {Event Site Date} {
+  foreach idx {1 2 3} tag {Event Site Date} {
     configMenuText $m.edit $idx CrosstabEdit$tag $lang
   }
+
   ### Scid menus are the biggest steaming pile of shit S.A
   ### We have to skip over numbers for "separators"
-  foreach idx   {1 2 3 4 6 7 9 10 11 12 13 14 15 16 17 19 20} tag {All Swiss Knockout Auto ColorPlain ColorHyper Ages Nats Tallies Ratings Titles Breaks Deleted Colors ColumnNumbers ThreeWin Group} {
+
+  foreach idx   {1 2 3 4 5 6 7 8 9 11 12 13 14 16 17} tag {Ages Nats Tallies Ratings Titles Breaks Deleted Colors ColumnNumbers TieHead TieWin ThreeWin Group ColorPlain ColorHyper} {
     configMenuText $m.opt $idx CrosstabOpt$tag $lang
   }
 
   # Disable the Ages, Nats, Titles items if spellcheck not enabled. S.A
   if {!$::spellCheckFileExists} {
-    $m.opt entryconfig 9 -state disabled -variable {}
-    $m.opt entryconfig 10 -state disabled -variable {}
-    $m.opt entryconfig 13 -state disabled -variable {}
+    $m.opt entryconfig 1 -state disabled -variable {}
+    $m.opt entryconfig 2 -state disabled -variable {}
+    $m.opt entryconfig 5 -state disabled -variable {}
   }
 
-  foreach idx {0 1 2 3 5 6} tag {Name Rating Score Country TieHead TieWin} {
+  foreach idx {1 2 3 4} tag {Score Name Country Rating} {
     configMenuText $m.sort $idx CrosstabSort$tag $lang
+  }
+  foreach idx {1 2 3 4} tag {All Swiss Knockout Auto} {
+    configMenuText $m.type $idx CrosstabType$tag $lang
   }
   foreach idx {0 1} tag {Cross Index} {
     configMenuText $m.help $idx CrosstabHelp$tag $lang
@@ -66,14 +71,18 @@ proc ::crosstab::Open {} {
   menu $w.menu
   ::setMenu $w $w.menu
   $w.menu add cascade -label CrosstabFile -menu $w.menu.file
-  $w.menu add cascade -label CrosstabEdit -menu $w.menu.edit
   $w.menu add cascade -label CrosstabSort -menu $w.menu.sort
+  $w.menu add cascade -label CrosstabType -menu $w.menu.type
   $w.menu add cascade -label CrosstabOpt -menu $w.menu.opt
+  $w.menu add cascade -label CrosstabEdit -menu $w.menu.edit
   $w.menu add cascade -label CrosstabHelp -menu $w.menu.help
-  foreach i {file edit sort opt help} {
-    menu $w.menu.$i
-  }
-  $w.menu.opt configure -tearoff 1
+
+  menu $w.menu.file
+  menu $w.menu.sort -tearoff 1
+  menu $w.menu.type -tearoff 1
+  menu $w.menu.opt  -tearoff 1
+  menu $w.menu.edit -tearoff 1
+  menu $w.menu.help
 
   $w.menu.file add command -label CrosstabFileText -command {
     set ftype {
@@ -163,24 +172,6 @@ proc ::crosstab::Open {} {
     set editNameSelect crosstable
   }
 
-  $w.menu.opt add radiobutton -label CrosstabOptAll \
-    -variable crosstab(type) -value allplay -command ::crosstab::Refresh
-  $w.menu.opt add radiobutton -label CrosstabOptSwiss \
-    -variable crosstab(type) -value swiss -command ::crosstab::Refresh
-  $w.menu.opt add radiobutton -label CrosstabOptKnockout \
-    -variable crosstab(type) -value knockout -command ::crosstab::Refresh
-  $w.menu.opt add radiobutton -label CrosstabOptAuto \
-    -variable crosstab(type) -value auto -command ::crosstab::Refresh
-
-  $w.menu.opt add separator
-
-  # todo : put this menu item into the Display menu
-  $w.menu.opt add radiobutton -label CrosstabOptColorPlain \
-    -variable crosstab(text) -value plain -command ::crosstab::Refresh
-  $w.menu.opt add radiobutton -label CrosstabOptColorHyper \
-    -variable crosstab(text) -value hypertext -command ::crosstab::Refresh
-
-  $w.menu.opt add separator
   $w.menu.opt add checkbutton -label CrosstabOptAges \
     -variable crosstab(ages) -onvalue "+ages" \
     -offvalue "-ages" -command ::crosstab::Refresh
@@ -209,7 +200,14 @@ proc ::crosstab::Open {} {
   $w.menu.opt add checkbutton -label CrosstabOptColumnNumbers \
     -underline 0 -variable crosstab(cnumbers) \
     -onvalue "+numcolumns" -offvalue "-numcolumns" -command ::crosstab::Refresh
+
   $w.menu.opt add separator
+
+  $w.menu.opt add checkbutton -label CrosstabOptTieHead \
+    -variable crosstab(tiehead) -command ::crosstab::Refresh -onvalue "+tiehead" -offvalue "-tiehead"
+  $w.menu.opt add checkbutton -label CrosstabOptTieWin \
+    -variable crosstab(tiewin) -command ::crosstab::Refresh -onvalue "+tiewin" -offvalue "-tiewin"
+
   $w.menu.opt add checkbutton -label CrosstabOptThreeWin \
     -variable crosstab(threewin) -command ::crosstab::Refresh  \
     -onvalue "+threewin" -offvalue "-threewin"
@@ -217,21 +215,30 @@ proc ::crosstab::Open {} {
     -underline 0 -variable crosstab(groups) \
     -onvalue "+groups" -offvalue "-groups" -command ::crosstab::Refresh
 
-  $w.menu.sort add radiobutton -label CrosstabSortName \
-    -variable crosstab(sort) -value name -command ::crosstab::Refresh
-  $w.menu.sort add radiobutton -label CrosstabSortRating \
-    -variable crosstab(sort) -value rating -command ::crosstab::Refresh
+  $w.menu.opt add separator
+
+  $w.menu.opt add radiobutton -label CrosstabOptColorPlain \
+    -variable crosstab(text) -value plain -command ::crosstab::Refresh
+  $w.menu.opt add radiobutton -label CrosstabOptColorHyper \
+    -variable crosstab(text) -value hypertext -command ::crosstab::Refresh
+
   $w.menu.sort add radiobutton -label CrosstabSortScore \
     -variable crosstab(sort) -value score -command ::crosstab::Refresh
+  $w.menu.sort add radiobutton -label CrosstabSortName \
+    -variable crosstab(sort) -value name -command ::crosstab::Refresh
   $w.menu.sort add radiobutton -label CrosstabSortCountry \
     -variable crosstab(sort) -value country -command ::crosstab::Refresh
+  $w.menu.sort add radiobutton -label CrosstabSortRating \
+    -variable crosstab(sort) -value rating -command ::crosstab::Refresh
 
-  $w.menu.sort add separator
-
-  $w.menu.sort add checkbutton -label CrosstabSortTieHead \
-    -variable crosstab(tiehead) -command ::crosstab::Refresh -onvalue "+tiehead" -offvalue "-tiehead"
-  $w.menu.sort add checkbutton -label CrosstabSortTieWin \
-    -variable crosstab(tiewin) -command ::crosstab::Refresh -onvalue "+tiewin" -offvalue "-tiewin"
+  $w.menu.type add radiobutton -label CrosstabTypeAll \
+    -variable crosstab(type) -value allplay -command ::crosstab::Refresh
+  $w.menu.type add radiobutton -label CrosstabTypeSwiss \
+    -variable crosstab(type) -value swiss -command ::crosstab::Refresh
+  $w.menu.type add radiobutton -label CrosstabTypeKnockout \
+    -variable crosstab(type) -value knockout -command ::crosstab::Refresh
+  $w.menu.type add radiobutton -label CrosstabTypeAuto -font font_Small \
+    -variable crosstab(type) -value auto -command ::crosstab::Refresh
 
   $w.menu.help add command -label CrosstabHelpCross \
     -accelerator F1 -command {helpWindow Crosstable}
@@ -264,17 +271,7 @@ proc ::crosstab::Open {} {
 
   button $w.b.stop -textvar ::tr(Stop) -state disabled -font font_Small \
     -command { set ::htext::interrupt 1 }
-  menubutton $w.b.type -text "" -font font_Small -menu $w.b.type.menu \
-    -relief raised -bd 1 -indicatoron 1
-  menu $w.b.type.menu
-  $w.b.type.menu add radiobutton -label [tr CrosstabOptAll] \
-    -variable crosstab(type) -value allplay -command ::crosstab::Refresh
-  $w.b.type.menu add radiobutton -label [tr CrosstabOptSwiss] \
-    -variable crosstab(type) -value swiss -command ::crosstab::Refresh
-  $w.b.type.menu add radiobutton -label [tr CrosstabOptKnockout] \
-    -variable crosstab(type) -value knockout -command ::crosstab::Refresh
-  $w.b.type.menu add radiobutton -label [tr CrosstabOptAuto] -font font_Small \
-    -variable crosstab(type) -value auto -command ::crosstab::Refresh
+
   button $w.b.update -textvar ::tr(Update) -font font_Small -command ::crosstab::Refresh
 
   entry $w.b.find -width 10 -textvariable crosstab(find) -font font_Small -highlightthickness 0
@@ -290,7 +287,7 @@ proc ::crosstab::Open {} {
   button $w.b.font -textvar ::tr(Font) -font font_Small -command {FontDialogFixed .crosstabWin}
 
   pack $w.b.cancel $w.b.find $w.b.update -side right -pady 3 -padx 5
-  pack $w.b.setfilter $w.b.addfilter $w.b.type $w.b.font -side left -pady 3 -padx 5
+  pack $w.b.setfilter $w.b.addfilter -side left -pady 3 -padx 5
 
   standardShortcuts $w
 
@@ -341,12 +338,6 @@ proc ::crosstab::Refresh {} {
   set w .crosstabWin
   if {! [winfo exists $w]} { return }
 
-  switch $crosstab(type) {
-    allplay  { $w.b.type configure -text [tr CrosstabOptAll] }
-    swiss    { $w.b.type configure -text [tr CrosstabOptSwiss] }
-    knockout { $w.b.type configure -text [tr CrosstabOptKnockout] }
-    auto     { $w.b.type configure -text [tr CrosstabOptAuto] }
-  }
   $w.f.text configure -state normal
   $w.f.text delete 1.0 end
   busyCursor .
@@ -355,16 +346,20 @@ proc ::crosstab::Refresh {} {
   ### And any purpose for these two updates ??
   # update idle
   # $w.b.stop configure -state normal
-  foreach button {update cancel font setfilter addfilter type} {
+  foreach button {update cancel setfilter addfilter} {
     $w.b.$button configure -state disabled
   }
   # pack $w.b.stop -side right -padx 5 -pady 3
   # catch {grab $w.b.stop}
   # update
+  if {[
   catch {sc_game crosstable $crosstab(text) $crosstab(sort) $crosstab(type) \
          $crosstab(ratings) $crosstab(countries) $crosstab(tallies) $crosstab(titles) \
          $crosstab(colors) $crosstab(groups) $crosstab(ages) \
          $crosstab(breaks) $crosstab(cnumbers) $crosstab(deleted) $crosstab(threewin) $crosstab(tiewin) $crosstab(tiehead)} result
+  ]} {
+    puts "sc_game crosstable failed"
+  }
   $w.f.text configure -state normal
   if {$crosstab(text) == "plain"} {
     $w.f.text insert end $result
@@ -381,7 +376,7 @@ proc ::crosstab::Refresh {} {
   # $w.b.stop configure -state disabled
   ### We cant use forget on this because of a bug in the windows packer
   # pack forget $w.b.stop
-  foreach button {update cancel font setfilter addfilter type} {
+  foreach button {update cancel setfilter addfilter} {
     $w.b.$button configure -state normal
   }
   $w.f.text configure -state disabled

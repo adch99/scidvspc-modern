@@ -911,12 +911,12 @@ menuText Y CrosstabEditEvent "Turnir" 0
 menuText Y CrosstabEditSite "Mesto" 0
 menuText Y CrosstabEditDate "Datum" 0
 menuText Y CrosstabOpt "Prikaz" 0
-menuText Y CrosstabOptAll "Svako sa svakim" 0
-menuText Y CrosstabOptSwiss "©vajcarski sistem" 0
 menuText Y CrosstabOptColorPlain "Obièan tekst" 0
 menuText Y CrosstabOptColorHyper "Hipertekst" 0
-menuText Y CrosstabOptKnockout "Nokaut" 0
-menuText Y CrosstabOptAuto "Auto" 0 ;# ***
+# ====== TODO To be translated ======
+menuText Y CrosstabOptTieWin "Tie-Break by wins" 1
+# ====== TODO To be translated ======
+menuText Y CrosstabOptTieHead "Tie-Break by head-head" 1
 # todo
 menuText Y CrosstabOptThreeWin "3 Points for Win" 1
 menuText Y CrosstabOptAges "Starost u godinama" 10
@@ -935,10 +935,12 @@ menuText Y CrosstabSortName "Ime" 0
 menuText Y CrosstabSortRating "Rejting" 0
 menuText Y CrosstabSortScore "Rezultat" 0
 menuText Y CrosstabSortCountry "Zemlja" 0
-# ====== TODO To be translated ======
-menuText Y CrosstabSortTieWin "Tie-Break by wins" 1
-# ====== TODO To be translated ======
-menuText Y CrosstabSortTieHead "Tie-Break by head-head" 1
+# todo
+menuText Y CrosstabType "Type" 0
+menuText Y CrosstabTypeAll "Svako sa svakim" 0
+menuText Y CrosstabTypeSwiss "©vajcarski sistem" 0
+menuText Y CrosstabTypeKnockout "Nokaut" 0
+menuText Y CrosstabTypeAuto "Auto" 0 ;# todo
 menuText Y CrosstabHelp "Pomoæ" 0
 menuText Y CrosstabHelpCross "Pomoæ - Tabela turnira" 0
 menuText Y CrosstabHelpIndex "Sadr¾aj pomoæi" 0
