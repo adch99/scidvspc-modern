@@ -291,7 +291,7 @@ proc ::crosstab::Open {} {
 
   standardShortcuts $w
 
-  bind $w <Button-3> {tk_popup .crosstabWin.menu.sort %X %Y}
+  bind $w <Button-3> {tk_popup .crosstabWin.menu %X %Y}
 
   bind $w <F1>       "helpWindow Crosstable"
   bind $w <Escape>   ".crosstabWin.b.cancel invoke"

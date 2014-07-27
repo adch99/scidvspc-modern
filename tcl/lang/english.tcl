@@ -775,8 +775,8 @@ menuText E CrosstabOptRatings "Ratings" 0
 menuText E CrosstabOptTitles "Titles" 0
 menuText E CrosstabOptBreaks "Tie-Break Scores" 4
 menuText E CrosstabOptDeleted "Include Deleted Games" 8
-menuText E CrosstabOptColors "Colors (Swiss table only)" 0
-menuText E CrosstabOptColumnNumbers "Numbered Columns (All-play-all table only)" 2
+menuText E CrosstabOptColors "Colors (Swiss only)" 0
+menuText E CrosstabOptColumnNumbers "Numbered Columns (All-Play-All only)" 2
 menuText E CrosstabOptGroup "Group Scores" 0
 menuText E CrosstabSort "Sort by" 0
 menuText E CrosstabSortName "Name" 0

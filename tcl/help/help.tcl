@@ -1370,11 +1370,11 @@ options.</p>
 set helpTitle(Crosstable) "Crosstable Window"
 set helpText(Crosstable) {<h1>The Crosstable Window</h1>
   <p>The <run ::crosstab::Open><green>Crosstable</green></run> shows the
-  Tournament Table (for the current game) in All-Play-All, Swiss or Knockout formats.
+  tournament table (for the current game) in All-Play-All, Swiss or Knockout formats.
   Any game played up to <b>twelve months before or after</b> the current game,
   with <b>identical Event and Site</b> tags, is considered to be in the tournament.
   </p>
-  <p><i>For a good Crosstable, <b>duplicate games</b> should be marked for deletion, and
+  <p><i>For a good crosstable, <b>duplicate games</b> should be marked for deletion, and
   Player, Site and Event names should be spelt consistently.  See
   <a Maintenance>Database Maintenance</a> for more information.
   </i></p>
@@ -1382,32 +1382,32 @@ set helpText(Crosstable) {<h1>The Crosstable Window</h1>
   <h4>Features</h4>
   <p>Clicking on a Game Result shows a menu from which one may Browse, Load or Merge a game.
   </p>
-  <p>From the menubar you'll be able to edit the tournament details,
+  <p>From the menu you'll be able to edit the tournament details,
   export the table as Text, LaTex or HTML, choose the Sort Criteria, and select various other options.
-  Right-clicking the Crosstable displays the Sort menu.
+  Right-clicking the crosstable displays the menu.
   </p>
 
   <h4>Table Formats</h4>
   <ul>
-  <li><b>All-Play-All</b> - for round-robin-type events, has a limit of 30 players</li>
+  <li><b>All-Play-All</b> - For round-robin events. Has a limit of 30 players</li>
   <br>
-  <li><b>Swiss</b> - for tournaments with a large number of players, can
-  display up to 200 players and up to 20 rounds.
-  Scid uses the "Round" tag of each game to produce a Swiss
-  crosstable, so you will not see any games if they don't have numeric "Round" values (1, 2, 3, etc).
+  <li><b>Swiss</b> - For tournaments with a large number of players.
+  Can display up to 200 players and 20 rounds.
+  Scid uses the "Round" tag of each game to produce a Swiss Crosstable,
+  so you will not see games if they don't have numeric round values.
   </li>
   <br>
-  <li><b>Knockout</b> shows game results on a round-by-round nature.</li>
+  <li><b>Knockout</b> - Shows game results round-by-round.</li>
   </ul>
 
   <h4><name tiebreak>Tie-Breaks</name></h4>
   <p>When sorting by score, players with equal scores are ordered by their tie-break.
-These are <b>Sonneborn-Berger</b> tie-break for All-Play-All, and <b>Bucholz</b> tie-break for Swiss.
-Optionally, <b>Head-to-Head</b> and <b>Total-Wins</b> tie-breaks (in that order) can also be used.
+These are <b>Sonneborn-Berger</b> for All-Play-All, and <b>Bucholz</b> for Swiss.
+Optionally, Head-to-Head and Total-Wins tie-breaks (in that order), can also be used.
 </p>
 
   <h4>Other Options</h4>
-  <p>The <b>Group Scores</b> option shows a blank line between players with the same score.  </p>
+  <p><b>Group Scores</b> draws a blank line between players with the same score.  </p>
 
   <h4>ELO Performance Ratings Calculation</h4>
   <p>To calculate ELO Performance ratings and ratings changes, Scid uses algorithms from the
