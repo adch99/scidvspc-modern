@@ -808,7 +808,7 @@ menuText G CrosstabSortRating "Elo" 0
 menuText G CrosstabSortScore "Σκορ" 0
 menuText G CrosstabSortCountry "Χώρα" 0
 # todo
-menuText G CrosstabType "Type" 0
+menuText G CrosstabType "Format" 0
 menuText G CrosstabTypeAll "Όλοι-εναντίον-Όλων" 0
 menuText G CrosstabTypeSwiss "Σουηδικό" 0
 menuText G CrosstabTypeKnockout "Γύροι" 0

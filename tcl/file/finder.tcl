@@ -260,7 +260,7 @@ proc ::file::finder::Refresh {{newdir ""}} {
 
     $t tag bind f$pathtag <Double-Button-1> "::file::Open [list $fullpath] $w"
     # Bind right button to popup a contextual menu:
-    $t tag bind f$pathtag <ButtonPress-3> "::file::finder::contextMenu .finder.t.text [list $fullpath] %x %y %X %Y"
+    $t tag bind f$pathtag <ButtonPress-3> "::file::finder::contextMenu .finder.t.text [list $fullpath] %X %Y"
 
     $t tag bind f$pathtag <Any-Enter> "$t tag configure [list f$pathtag] -background $hc"
     $t tag bind f$pathtag <Any-Leave> "$t tag configure [list f$pathtag] -background {}"
@@ -288,7 +288,7 @@ proc ::file::finder::Refresh {{newdir ""}} {
 ################################################################################
 #
 ################################################################################
-proc ::file::finder::contextMenu {win fullPath x y xc yc} {
+proc ::file::finder::contextMenu {win fullPath x y} {
 
   update idletasks
 
@@ -306,7 +306,7 @@ proc ::file::finder::contextMenu {win fullPath x y xc yc} {
   $mctxt add separator
   $mctxt add command -label [tr FinderCtxDelete ] -command "::file::finder::delete [list $fullPath]"
 
-  $mctxt post [winfo pointerx .] [winfo pointery .]
+  tk_popup $mctxt $x $y
 
 }
 ################################################################################

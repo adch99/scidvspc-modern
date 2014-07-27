@@ -865,7 +865,7 @@ menuText H CrosstabSortRating "Értékszám" 0
 menuText H CrosstabSortScore "Pontszám" 0
 menuText H CrosstabSortCountry "Ország" 0
 # todo
-menuText H CrosstabType "Type" 0
+menuText H CrosstabType "Format" 0
 menuText H CrosstabTypeAll "Körmérkõzés" 0
 menuText H CrosstabTypeSwiss "Svájci" 0
 menuText H CrosstabTypeKnockout "Kieséses" 1

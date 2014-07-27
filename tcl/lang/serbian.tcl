@@ -936,7 +936,7 @@ menuText Y CrosstabSortRating "Rejting" 0
 menuText Y CrosstabSortScore "Rezultat" 0
 menuText Y CrosstabSortCountry "Zemlja" 0
 # todo
-menuText Y CrosstabType "Type" 0
+menuText Y CrosstabType "Format" 0
 menuText Y CrosstabTypeAll "Svako sa svakim" 0
 menuText Y CrosstabTypeSwiss "©vajcarski sistem" 0
 menuText Y CrosstabTypeKnockout "Nokaut" 0

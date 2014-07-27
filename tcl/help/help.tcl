@@ -1370,7 +1370,7 @@ options.</p>
 set helpTitle(Crosstable) "Crosstable Window"
 set helpText(Crosstable) {<h1>The Crosstable Window</h1>
   <p>The <run ::crosstab::Open><green>Crosstable</green></run> shows the
-  tournament result for the current game in <b>All-Play-All, Swiss</b> or <b>Knockout</b> formats.
+  Tournament Table (for the current game) in All-Play-All, Swiss or Knockout formats.
   Any game played up to <b>twelve months before or after</b> the current game,
   with <b>identical Event and Site</b> tags, is considered to be in the tournament.
   </p>
@@ -1382,27 +1382,22 @@ set helpText(Crosstable) {<h1>The Crosstable Window</h1>
   <h4>Features</h4>
   <p>Clicking on a Game Result shows a menu from which one may Browse, Load or Merge a game.
   </p>
-  <p>From the menubar you'll be able to access the Display Options, edit the
-<b>Event,  Site</b> or <b>Date</b> fields, export the table as <b>Text, LaTex
-</b>or <b>HTML</b>, or choose the <b>Sort Criteria</b> for the crosstable.
+  <p>From the menubar you'll be able to edit the tournament details,
+  export the table as Text, LaTex or HTML, choose the Sort Criteria, and select various other options.
+  Right-clicking the Crosstable displays the Sort menu.
   </p>
 
-  <h4>Table Format</h4>
-  <p>One may view the tournament in All-Play-All, Swiss or Knockout formats.
-  </p>
+  <h4>Table Formats</h4>
   <ul>
-  <li>The <b>All-Play-All</b> format - for round-robin-type events - has a limit of 30
-  players</li>
+  <li><b>All-Play-All</b> - for round-robin-type events, has a limit of 30 players</li>
   <br>
-  <li>The <b>Swiss</b> format - for tournaments with a large number of players - can
+  <li><b>Swiss</b> - for tournaments with a large number of players, can
   display up to 200 players and up to 20 rounds.
   Scid uses the "Round" tag of each game to produce a Swiss
   crosstable, so you will not see any games if they don't have numeric "Round" values (1, 2, 3, etc).
   </li>
   <br>
   <li><b>Knockout</b> shows game results on a round-by-round nature.</li>
-  <br>
-  <li><b>Auto</b> will choose the best format automatically.</li>
   </ul>
 
   <h4><name tiebreak>Tie-Breaks</name></h4>
@@ -1410,8 +1405,9 @@ set helpText(Crosstable) {<h1>The Crosstable Window</h1>
 These are <b>Sonneborn-Berger</b> tie-break for All-Play-All, and <b>Bucholz</b> tie-break for Swiss.
 Optionally, <b>Head-to-Head</b> and <b>Total-Wins</b> tie-breaks (in that order) can also be used.
 </p>
-<p>The <b>Group Scores</b> option shows a blank line between players with the same score.
-  </p>
+
+  <h4>Other Options</h4>
+  <p>The <b>Group Scores</b> option shows a blank line between players with the same score.  </p>
 
   <h4>ELO Performance Ratings Calculation</h4>
   <p>To calculate ELO Performance ratings and ratings changes, Scid uses algorithms from the

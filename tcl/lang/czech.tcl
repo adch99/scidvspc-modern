@@ -858,7 +858,7 @@ menuText C CrosstabSortRating "Rating" 0
 menuText C CrosstabSortScore "Skóre" 0
 menuText C CrosstabSortCountry "Zemì" 0
 # todo
-menuText C CrosstabType "Type" 0
+menuText C CrosstabType "Format" 0
 menuText C CrosstabTypeAll "Ka¾dý s ka¾dým" 0
 menuText C CrosstabTypeSwiss "©výcarský systém" 3
 menuText C CrosstabTypeKnockout "Vyøazovací" 4

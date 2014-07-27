@@ -801,7 +801,7 @@ menuText F CrosstabSortRating "Elo" 0
 menuText F CrosstabSortScore "Score" 0
 menuText F CrosstabSortCountry "Pays" 0
 # todo
-menuText F CrosstabType "Type" 0
+menuText F CrosstabType "Format" 0
 menuText F CrosstabTypeAll "Toutes rondes" 0
 menuText F CrosstabTypeSwiss "Suisse" 0
 menuText F CrosstabTypeKnockout "KO" 0

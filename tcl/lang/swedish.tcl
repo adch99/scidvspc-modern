@@ -791,7 +791,7 @@ menuText W CrosstabSortRating "Rating" 0
 menuText W CrosstabSortScore "Resultat" 0
 menuText W CrosstabSortCountry "Land" 0
 # todo
-menuText W CrosstabType "Type" 0
+menuText W CrosstabType "Format" 0
 menuText W CrosstabTypeAll "Alla-möter-alla" 0
 menuText W CrosstabTypeSwiss "Schweizer" 0
 menuText W CrosstabTypeKnockout "Knock Out" 0

@@ -774,7 +774,7 @@ menuText P CrosstabSortRating "Ranking" 0
 menuText P CrosstabSortScore "Punkty" 0
 menuText P CrosstabSortCountry "Kraj" 0
 # todo
-menuText P CrosstabType "Type" 0
+menuText P CrosstabType "Format" 0
 menuText P CrosstabTypeAll "Turniej kołowy" 0
 menuText P CrosstabTypeSwiss "Szwajcar" 0
 menuText P CrosstabTypeKnockout "Knockout" 0

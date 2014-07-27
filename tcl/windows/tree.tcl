@@ -1562,7 +1562,7 @@ proc ::tree::mask::contextMenu {win move x y xc yc} {
     }
   }
   
-  $mctxt post [winfo pointerx .] [winfo pointery .]
+  tk_popup $mctxt [winfo pointerx .] [winfo pointery .]
 
 }
 ################################################################################

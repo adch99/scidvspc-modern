@@ -783,7 +783,7 @@ menuText E CrosstabSortName "Name" 0
 menuText E CrosstabSortRating "Rating" 0
 menuText E CrosstabSortScore "Score" 0
 menuText E CrosstabSortCountry "Country" 0
-menuText E CrosstabType Type 0
+menuText E CrosstabType "Format" 0
 menuText E CrosstabTypeAll "All-Play-All" 0
 menuText E CrosstabTypeSwiss "Swiss" 0
 menuText E CrosstabTypeKnockout "Rounds" 0

@@ -936,7 +936,7 @@ menuText O CrosstabSortRating "Rating" 0
 menuText O CrosstabSortScore "Poeng" 0
 menuText O CrosstabSortCountry "Land" 0
 # todo
-menuText O CrosstabType "Type" 0
+menuText O CrosstabType "Format" 0
 menuText O CrosstabTypeAll "Alle-mot-alle" 0
 menuText O CrosstabTypeSwiss "Sveitsisk" 0
 menuText O CrosstabTypeKnockout "Kun vinnere" 0

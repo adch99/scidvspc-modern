@@ -862,7 +862,7 @@ menuText I CrosstabSortRating "Punteggio" 0
 menuText I CrosstabSortScore "Punti" 0
 menuText I CrosstabSortCountry "Paese" 0
 # todo
-menuText I CrosstabType "Type" 0
+menuText I CrosstabType "Format" 0
 menuText I CrosstabTypeAll "Girone all'italiana" 0
 menuText I CrosstabTypeSwiss "Girone Svizzero" 0
 menuText I CrosstabTypeKnockout "Knockout" 0

@@ -806,7 +806,7 @@ menuText S CrosstabSortRating "Por Elo" 4
 menuText S CrosstabSortScore "Por puntuación" 4
 menuText S CrosstabSortCountry "País" 4
 # todo
-menuText S CrosstabType "Type" 0
+menuText S CrosstabType "Format" 0
 menuText S CrosstabTypeAll "Todos Contra Todos" 0
 menuText S CrosstabTypeSwiss "Suizo" 0
 menuText S CrosstabTypeKnockout "Rondas" 0

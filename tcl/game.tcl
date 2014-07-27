@@ -301,6 +301,7 @@ proc ::game::LoadMenu {w base gnum x y} {
   $m entryconfigure 0 -command "::gbrowser::new $base $gnum"
   $m entryconfigure 1 -command "sc_base switch $base; ::game::Load $gnum"
   $m entryconfigure 2 -command "mergeGame $base $gnum"
+  # could also use tk_popup here, but this seems ok
   event generate $w <ButtonRelease-1>
   $m post $x $y
   event generate $m <ButtonPress-1>

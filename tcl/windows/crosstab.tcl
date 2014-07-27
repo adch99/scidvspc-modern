@@ -43,7 +43,7 @@ proc ::crosstab::ConfigMenus {{lang ""}} {
   foreach idx {1 2 3 4} tag {Score Name Country Rating} {
     configMenuText $m.sort $idx CrosstabSort$tag $lang
   }
-  foreach idx {1 2 3 4} tag {All Swiss Knockout Auto} {
+  foreach idx {1 2 3 4} tag {Auto All Swiss Knockout} {
     configMenuText $m.type $idx CrosstabType$tag $lang
   }
   foreach idx {0 1} tag {Cross Index} {
@@ -231,14 +231,14 @@ proc ::crosstab::Open {} {
   $w.menu.sort add radiobutton -label CrosstabSortRating \
     -variable crosstab(sort) -value rating -command ::crosstab::Refresh
 
+  $w.menu.type add radiobutton -label CrosstabTypeAuto -font font_Small \
+    -variable crosstab(type) -value auto -command ::crosstab::Refresh
   $w.menu.type add radiobutton -label CrosstabTypeAll \
     -variable crosstab(type) -value allplay -command ::crosstab::Refresh
   $w.menu.type add radiobutton -label CrosstabTypeSwiss \
     -variable crosstab(type) -value swiss -command ::crosstab::Refresh
   $w.menu.type add radiobutton -label CrosstabTypeKnockout \
     -variable crosstab(type) -value knockout -command ::crosstab::Refresh
-  $w.menu.type add radiobutton -label CrosstabTypeAuto -font font_Small \
-    -variable crosstab(type) -value auto -command ::crosstab::Refresh
 
   $w.menu.help add command -label CrosstabHelpCross \
     -accelerator F1 -command {helpWindow Crosstable}
@@ -290,6 +290,8 @@ proc ::crosstab::Open {} {
   pack $w.b.setfilter $w.b.addfilter -side left -pady 3 -padx 5
 
   standardShortcuts $w
+
+  bind $w <Button-3> {tk_popup .crosstabWin.menu.sort %X %Y}
 
   bind $w <F1>       "helpWindow Crosstable"
   bind $w <Escape>   ".crosstabWin.b.cancel invoke"

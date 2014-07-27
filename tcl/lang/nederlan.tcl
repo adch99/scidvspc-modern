@@ -796,7 +796,7 @@ menuText N CrosstabSortRating "Elo" 0
 menuText N CrosstabSortScore "Score" 0
 menuText N CrosstabSortCountry "Land" 0
 # todo
-menuText N CrosstabType "Type" 0
+menuText N CrosstabType "Format" 0
 menuText N CrosstabTypeAll "Gesloten" 0
 menuText N CrosstabTypeSwiss "Zwitsers" 0
 menuText N CrosstabTypeKnockout "Knock-out" 0

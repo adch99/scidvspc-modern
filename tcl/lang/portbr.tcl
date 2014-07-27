@@ -864,7 +864,7 @@ menuText B CrosstabSortRating "Rating" 0
 menuText B CrosstabSortScore "Pontuacao" 0
 menuText B CrosstabSortCountry "Pais" 0
 # todo
-menuText B CrosstabType "Type" 0
+menuText B CrosstabType "Format" 0
 menuText B CrosstabTypeAll "Todos contra todos" 0
 menuText B CrosstabTypeSwiss "Swiss" 0
 menuText B CrosstabTypeKnockout "Knockout" 0

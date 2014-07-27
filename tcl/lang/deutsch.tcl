@@ -823,7 +823,7 @@ menuText D CrosstabSortRating "Elo" 0
 menuText D CrosstabSortScore "Punkte" 0
 menuText D CrosstabSortCountry "Land" 0
 # todo
-menuText D CrosstabType "Type" 0
+menuText D CrosstabType "Format" 0
 menuText D CrosstabTypeAll "Jeder gegen jeden" 0
 menuText D CrosstabTypeSwiss "Schweizer System" 0
 menuText D CrosstabTypeKnockout "K.o.-System" 0

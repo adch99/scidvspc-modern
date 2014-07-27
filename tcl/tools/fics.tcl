@@ -494,14 +494,7 @@ namespace eval fics {
     bind $w <Configure> "::fics::recordFicsSize $w"
     bind $w <F1> {helpWindow FICS}
     bind $w <Button-3> {
-      .menu.options.fics post [winfo pointerx .] [winfo pointery .]
-      # is there an easier way to unpost this thing !?
-      if {!($::windowsOS || $::macOS)} {
-	bind .fics <Button-1> {
-	  .menu.options.fics unpost
-	  bind .fics <Button-1> {}
-	}
-      }
+      tk_popup .menu.options.fics %X %Y
     }
 
     # needs a little voodoo to get minsize working properly with setWinSize

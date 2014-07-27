@@ -411,8 +411,8 @@ proc ::htext::display {w helptext {section {}} {fixed 1}} {
         set gnum [string range $gameTag 2 end]
         set glCommand "::game::LoadMenu $w [sc_base current] $gnum %X %Y"
         $w tag bind $gameTag <ButtonPress-1> $glCommand
-        $w tag bind $gameTag <ButtonPress-3> \
-            "::gbrowser::new [sc_base current] $gnum"
+        # right-click browses game, but too annoying in crosstable
+        # $w tag bind $gameTag <ButtonPress-3>  "::gbrowser::new [sc_base current] $gnum"
         $w tag bind $gameTag <Any-Enter> \
             "$w tag configure $gameTag
              $w tag configure $gameTag -back gray85

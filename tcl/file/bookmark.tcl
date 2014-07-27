@@ -19,7 +19,7 @@ namespace eval ::bookmarks {}
 # without an easy way to cancel them
 
 proc ::bookmarks::PostMenu {} {
-  .main.tb.bkm.menu post [winfo pointerx .] [winfo pointery .]
+  tk_popup .main.tb.bkm.menu [winfo pointerx .] [winfo pointery .]
   if {[::bookmarks::CanAdd]} {
     .main.tb.bkm.menu activate 0
   }
