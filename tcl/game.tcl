@@ -127,6 +127,12 @@ proc ::game::Truncate {} {
   updateTitle
 }
 
+proc ::game::Delete {} {
+  sc_game flag delete [sc_game number] invert
+  updateBoard
+  ::windows::gamelist::Refresh
+}
+
 #   Loads the next or previous filtered game in the database.
 #   The parameter <action> should be "previous" , "next", "first" or "last"
 

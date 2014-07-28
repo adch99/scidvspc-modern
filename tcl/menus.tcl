@@ -257,16 +257,12 @@ set helpMessage($m,[incr menuindex]) GameList
 $m add separator
 incr menuindex
 
-$m  add command -label GameDelete -accel "control-delete" -command { 
-  sc_game flag delete [sc_game number] invert
-  updateBoard
-  ::windows::gamelist::Refresh
-}  -underline 0
+$m  add command -label GameDelete -accel "control-delete" -command ::game::Delete -underline 0
 set helpMessage($m,[incr menuindex]) GameDelete
 if {$::macOS} {
-  bind .main <Control-BackSpace> "$m invoke \[tr GameDelete\]"
+  bind .main <Control-BackSpace> ::game::Delete
 } else {
-  bind .main <Control-Delete> "$m invoke \[tr GameDelete\]"
+  bind .main <Control-Delete> ::game::Delete
 }
 
 $m add command -label GameReload -command ::game::Reload 

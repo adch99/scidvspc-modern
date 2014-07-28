@@ -250,6 +250,7 @@ namespace eval pgn {
     bind $w <Control-z> {sc_game undo ; updateBoard -pgn}
     bind $w <Control-y> {sc_game redo ; updateBoard -pgn}
     bind $w <Delete> ::game::Truncate
+    bind $w <Control-Delete> ::game::Delete
     bindMouseWheel $w $w.text
     bind $w <Control-s> "::pgn::savePgn $w"
 
