@@ -1294,6 +1294,10 @@ proc gsave { gnum } {
   set edate [format "%s.%s.%s" $eyear $emonth $eday]
   set extraTagsList [split $extraTags "\n"]
 
+  foreach i {white black event site round} {
+    set $i [string trim [set $i]]
+  }
+
   sc_game undoPoint
   sc_game tags set -event $event -site $site -date $date -round $round \
       -white $white -black $black -result $resultVal \
