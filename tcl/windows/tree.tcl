@@ -1052,20 +1052,13 @@ proc ::tree::best { baseNumber } {
     listbox $w.blist.list  -yscrollcommand "$w.blist.ybar set" -font font_Fixed
     pack $w.blist.ybar -side right -fill y
     pack $w.blist.list -side left -fill both -expand yes
-    bind $w.blist.list <Double-Button-1> "::tree::bestBrowse $baseNumber"
-
+    bind $w.blist.list <<ListboxSelect>>  "::tree::bestMenu $baseNumber"
     label $w.b.result -text " $::tr(Result:)" -font font_Small
     tk_optionMenu $w.b.res tree(bestRes$baseNumber) All 1-0 0-1 {1-0 0-1} {1/2-1/2}
     $w.b.res configure -font font_Small -relief ridge -borderwidth 0 -direction right
 
-    button $w.b.browse -text $::tr(BrowseGame) -command "::tree::bestBrowse $baseNumber"
-    button $w.b.load -text $::tr(LoadGame) -command "::tree::bestLoad $baseNumber"
-    button $w.b.merge -text $::tr(MergeGame) -command "::tree::bestMerge $baseNumber"
-    button $w.b.close -text $::tr(Close) -command "destroy $w" -width 9
-    foreach i {browse load merge close} { $w.b.$i configure -font font_Small }
-    pack $w.b.browse $w.b.load $w.b.merge -side left -padx 5 -pady 5
-    pack $w.b.close -side right -padx 5 -pady 5
-    pack $w.b.result $w.b.res -side left -padx 5 -pady 5
+    button $w.b.close -text $::tr(Close) -command "destroy $w" -width 9 -font font_Small
+    pack $w.b.close $w.b.res $w.b.result -side right -padx 5 -pady 5
     bind $w <Configure> "recordWinSize $w"
     focus $w.blist.list
     ::createToplevelFinalize $w
@@ -1087,59 +1080,12 @@ catch {
 }
 
 
-proc ::tree::bestLoad { baseNumber } {
-  global tree
-
-  set gnum [::tree::bestGetCurrent $baseNumber]
-  if {$gnum < 0} {
-    return
-  }
-
-  # if {$tree(locked$baseNumber)} { sc_base switch $tree(base$baseNumber) }
-  sc_base switch $tree(base$baseNumber)
-  ::game::Load $gnum
-}
-
-
-proc ::tree::bestMerge { baseNumber } {
-  global tree
-
-  set gnum [::tree::bestGetCurrent $baseNumber]
-  if {$gnum < 0} {
-    return
-  }
-
-  if {$tree(locked$baseNumber)} {
-    set base $tree(base$baseNumber)
-  } else {
-    set base $baseNumber
-  }
-  mergeGame $base $gnum
-}
-
-
-proc ::tree::bestBrowse { baseNumber } {
-  global tree
-
-  set gnum [::tree::bestGetCurrent $baseNumber]
-  if {$gnum < 0} {
-    return
-  }
-
-  if {$tree(locked$baseNumber)} {
-    set base $tree(base$baseNumber)
-  } else {
-    set base $baseNumber
-  }
-  ::gbrowser::new $base $gnum
-}
-
-proc ::tree::bestGetCurrent {baseNumber} {
-  # If the listbox doesn't have a highlighted game, use game 0
-  if {[catch {set sel [.treeBest$baseNumber.blist.list curselection]}]} {return -1}
-  if {$sel == {}} { set sel 0 }
-  if {[catch {set gnum [lindex $::tree(bestList$baseNumber) $sel]}]} {return -1}
-  return $gnum
+proc ::tree::bestMenu { baseNumber } {
+      set w .treeBest$baseNumber
+      if {![catch {set sel [$w.blist.list curselection]}] && $sel != {}} {
+	set gnum [lindex $::tree(bestList$baseNumber) $sel]
+	::game::LoadMenu $w.blist.list $baseNumber $gnum [winfo pointerx .] [winfo pointery .]
+      }
 }
 
 ### todo - fix the multiple tree windows, esp. when switching between bases S.A.
