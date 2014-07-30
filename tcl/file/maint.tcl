@@ -740,11 +740,13 @@ proc doMarkDups {{parent .}} {
           -variations $twinSettings(variations) \
           -delete $twinSettings(delete)} result]} {
     unbusyCursor .
+    ::windows::gamelist::Refresh
     tk_messageBox -type ok -parent $parent -icon info \
         -title "Scid" -message $result
     set result 0
   } else {
     unbusyCursor .
+    ::windows::gamelist::Refresh
     set message [subst $::tr(TwinCheckFound1)]
     if {$result > 0} {append message $::tr(TwinCheckFound2)}
     append message "."

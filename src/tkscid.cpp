@@ -2654,7 +2654,7 @@ sc_base_duplicates (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
         }
     }
 
-    if (setFilterToDups) { db->filter->Fill (0); }
+    if (setFilterToDups) { db->dbFilter->Fill (0); }
     if (showProgress) { restartProgressBar (ti); }
 
     // Now check each list of same-hash games for duplicates:
@@ -2748,7 +2748,7 @@ sc_base_duplicates (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
                             db->idx->WriteEntries (ieKeep, gnumKeep, 1);
                         }
                         if (setFilterToDups) {
-                            db->filter->Set (gnumDelete, 1);
+                            db->dbFilter->Set (gnumDelete, 1);
                         }
                     }
                 }
@@ -2756,6 +2756,9 @@ sc_base_duplicates (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
             }
             head = head->next;
         }
+    }
+    if (setFilterToDups) {
+      setMainFilter(db);
     }
 
     db->idx->WriteHeader();
