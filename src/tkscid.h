@@ -549,6 +549,7 @@ int sc_pos_probe      (TCL_ARGS);
 int sc_pos_probe_board (TCL_ARGS);
 int sc_pos_setComment (TCL_ARGS);
 int sc_pos_moves      (TCL_ARGS);
+int sc_pos_moves_uci  (TCL_ARGS);
 
 int sc_progressBar    (TCL_ARGS);
 

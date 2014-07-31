@@ -108,6 +108,7 @@ proc resetEngine {n} {
   set analysis(lockFen$n) {}
   set analysis(startpos$n) ""         ;# the startpos/fen for game. Uninit-ed
   set analysis(go$n) 0
+  set analysis(exclude$n) ""
 }
 
 resetEngines
@@ -1926,6 +1927,8 @@ proc destroyAnalysisWin {n W} {
       after cancel $analysis(after$n)
   }
 
+  trace remove variable analysis(exclude$n) write "excludeToolTip $n"
+
   # Check the pipe is not already closed:
   if {$analysis(pipe$n) == {}} {
     set ::analysisWin$n 0
@@ -2234,6 +2237,10 @@ proc makeAnalysisWin {{n 0} {options {}}} {
     -width 2 -font font_Small -command "changePVSize $n" 
   ::utils::tooltip::Set $w.b.multipv $::tr(Lines)
 
+  button $w.b.exclude -image tb_exclude -command "excludeMovePopup $n" -relief $relief
+  ::utils::tooltip::Set $w.b.exclude $::tr(ExcludeMove)
+  trace variable analysis(exclude$n) w "excludeToolTip $n"
+
   checkbutton $w.b.lockengine -image tb_lockengine -indicatoron false -width 32 -height 32 \
     -variable analysis(lockEngine$n) -command "toggleLockEngine $n" -relief $relief
   ::utils::tooltip::Set $w.b.lockengine $::tr(LockEngine)
@@ -2279,7 +2286,7 @@ proc makeAnalysisWin {{n 0} {options {}}} {
 
 
   pack $w.b.startStop $w.b.move $w.b.line $w.b.alllines \
-       $w.b.multipv $w.b.lockengine $w.b.annotate $w.b.priority $w.b.showinfo $w.b.showboard \
+       $w.b.multipv $w.b.lockengine $w.b.annotate $w.b.exclude $w.b.priority $w.b.showinfo $w.b.showboard \
        $w.b.update $w.b.finishGame -side left -pady 2 -padx 1
 
   if {$n == 1 || $n == 2} {
@@ -2550,6 +2557,91 @@ proc changePVSize { n } {
     }
   }
 }
+
+
+proc excludeMovePopup {n} {
+
+  if {!$::analysis(analyzeMode$n)} {
+    return
+  }
+
+  global excludeMove analysis
+
+  set w [toplevel .excludeMove]
+  wm title $w "Scid"
+  wm state $w withdrawn
+
+  label $w.label -textvar ::tr(ExcludeMove)
+  pack $w.label -side top -pady 5 -padx 5
+
+  entry $w.entry  -width 10 -textvariable excludeMove
+  bind $w.entry <Escape> { .excludeMove.buttons.cancel invoke }
+  bind $w.entry <Return> { .excludeMove.buttons.load invoke }
+  pack $w.entry -side top -pady 5
+
+  if {$analysis(exclude$n) != ""} {
+    set excludeMove $analysis(exclude$n)
+  }
+  $w.entry icursor end
+
+  set b [frame $w.buttons]
+  pack $b -side top -fill x
+  dialogbutton $b.load -text "OK" -command "
+    excludeMove $n
+    focus .main
+    destroy .excludeMove
+    return
+  "
+  dialogbutton $b.cancel -text $::tr(Cancel) -command {
+    destroy .excludeMove
+    focus .main
+    return
+  }
+  packbuttons right $b.cancel $b.load
+
+  wm geometry $w +[expr {[winfo pointerx .] - 60}]+[expr {[winfo pointery .] - 40}]
+  wm state $w normal
+  update
+  focus $w.entry
+}
+
+proc excludeMove {n} {
+  global analysis ::uci::uciInfo excludeMove
+
+  set exclude $excludeMove
+  if {$exclude == ""} {
+    set allmoves ""
+    set exclude ""
+  } else {
+    set allmoves [sc_pos movesUci]
+    # remove each move from movelist
+    foreach move $exclude {
+      sc_game push copyfast
+      if {[catch {
+	sc_move addSan $move
+      }]} {
+	 sc_game pop
+	 return
+      }
+      set moveUCI [lindex [sc_game moves coord] end]
+      sc_game pop
+      set i [lsearch -exact $allmoves $moveUCI]
+      set allmoves [lreplace $allmoves $i $i]
+    }
+  }
+  set analysis(exclude$n) $exclude
+  set uciInfo(searchmoves$n) $allmoves
+  updateAnalysis $n 0
+}
+
+proc excludeToolTip {n args} {
+    if {$::analysis(exclude$n) == ""} {
+      ::utils::tooltip::Set .analysisWin$n.b.exclude $::tr(ExcludeMove)
+    } else {
+      ::utils::tooltip::Set .analysisWin$n.b.exclude $::analysis(exclude$n)
+    }
+}
+    
 
 ################################################################################
 # setAnalysisPriority
@@ -3051,15 +3143,12 @@ proc toggleLockEngine {n} {
     ::utils::tooltip::Set .analysisWin$n.b.lockengine $::tr(LockEngine)
   }
   set w .analysisWin$n
-  $w.b.move configure -state $state
-  $w.b.line configure -state $state
+  foreach b {move line exclude alllines training annotate finishGame} {
+    $w.b.$b configure -state $state
+  }
   if {$analysis(uci$n)} {
     $w.b.multipv configure -state $state
   }
-  $w.b.alllines configure -state $state
-  $w.b.training configure -state $state
-  $w.b.annotate configure -state $state
-  $w.b.finishGame configure -state $state
   updateAnalysis $n
 }
 
@@ -3371,7 +3460,7 @@ proc updateAnalysisBoard {n moves} {
 
 proc sendPosToEngineUCI {n  {delay 0}} {
 
-    global analysis
+    global analysis ::uci::uciInfo
 
     set analysis(after$n) ""
 
@@ -3393,7 +3482,11 @@ proc sendPosToEngineUCI {n  {delay 0}} {
 	}
 
 	set analysis(side$n) [sc_pos side]
-        sendToEngine $n "go infinite"
+        if {$uciInfo(searchmoves$n) == ""} {
+	  sendToEngine $n "go infinite"
+        } else {
+	  sendToEngine $n "go infinite searchmoves $uciInfo(searchmoves$n)"
+        }
         set analysis(go$n) 1
 
 	# Should we issue "ucinewgame" when we move between games/bases ? S.A.
@@ -3420,7 +3513,7 @@ proc updateAnalysisWindows {} {
 
 ###   Update an analysis window by sending the current board
 
-proc updateAnalysis {{n 0}} {
+proc updateAnalysis {{n 0} {reset 1}} {
 
   global analysis analysisWin windowsOS
 
@@ -3482,6 +3575,11 @@ proc updateAnalysis {{n 0}} {
 
     ### UCI
 
+    if {$reset} {
+      set analysis(exclude$n) ""
+      set ::uci::uciInfo(searchmoves$n) {}
+
+    }
     if {$analysis(after$n) == "" } {
        if { $analysis(startpos$n) != "" && $analysis(go$n)} {
          sendToEngine $n "stop"
@@ -3968,6 +4066,21 @@ image creat photo tb_info -data {
 R0lGODlhHgAeAKECACUhIVNTU////////yH5BAEKAAIALAAAAAAeAB4AAAIy
 lI+py+0Po5y02osn2Flt0IXimH3cGHxkeoosiKpxG76r7OK13tkznKOVTECS
 8Yi0FAAAOw==
+}
+
+image creat photo tb_exclude -data {
+R0lGODlhHgAeAMZGANnZ2WBgYAAAAKenp4mJiaOjo0RERBEREdjCxxYWFhgY
+GAcHB1JSUtN9jc8WOlxcXKmpqZOTk5eXl9RxhM0AI6SkpGFhYU5OTgkJCdR0
+hs0AJxQUFBkZGQ0NDUZGRtr38tV8jc0CKVlZWaqqqp2dnYuLi9FCXc4HLqCg
+oGJiYldXVwQEBM4NMhsbGzo6OlVVVaurq6ampn9/f2NjY8LCwg8PDxwcHC4u
+LoODg3Nzc5qamgwMDLi4uM8WOSIiItjCxk9PT2dnZ5aWlqysrAsLCxcXF///
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////yH+EUNyZWF0
+ZWQgd2l0aCBHSU1QACH5BAEAAH8ALAAAAAAeAB4AAAdPgH+Cg4SFhoeIiYqL
+jI2Oj5CRkpOUlZaXmJmakg0TGSCfGRMNog2SDhQaIScsLCchGhQOp6mrra+x
+s5Gdn6CjvqabwsPExcbHyMnKy8zMgQA7
 }
 
 ### Make a little toplevel text widget to display an engine log

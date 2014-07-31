@@ -2665,6 +2665,19 @@ Position::CalcSANStrings (sanListT *sanList, sanFlagT flag)
     sanList->current = true;
 }
 
+void
+Position::CalcUCIStrings (sanListT *sanList)
+{
+	if( LegalMoves.Size() == 0) {
+        GenerateMoves();
+	}
+    for (ushort i=0; i < LegalMoves.Size(); i++) {
+        MakeUCIString (LegalMoves.Get(i), sanList->list[i]);
+    }
+    sanList->num = LegalMoves.Size();
+    sanList->current = true;
+}
+
 errorT
 Position::ReadFromLongStr (const char * str)
 {

@@ -797,6 +797,8 @@ translate Y StopEngine {Stop engine}
 # ====== TODO To be translated ======
 translate Y StartEngine {Start engine}
 # ====== TODO To be translated ======
+translate Y ExcludeMove {Exclude Move}
+# ====== TODO To be translated ======
 translate Y LockEngine {Lock engine to current position}
 translate Y AnalysisCommand {Komanda analize}
 translate Y PreviousChoices {Prethodni izbori}

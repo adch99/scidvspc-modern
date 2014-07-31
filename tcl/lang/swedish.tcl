@@ -671,6 +671,8 @@ translate W ShowInfo {Visa schackmotorinformation}
 translate W FinishGame {Avsluta parti}
 translate W StopEngine {Stoppa schackmotor}
 translate W StartEngine {Starta schackmotor}
+# ====== TODO To be translated ======
+translate W ExcludeMove {Exclude Move}
 translate W LockEngine {Lås schackmotor vid nuvarande position}
 translate W AnalysisCommand {Analysera}
 translate W PreviousChoices {Föregående val}

@@ -676,6 +676,8 @@ translate N ShowInfo {Toon engine informatie}
 translate N FinishGame {Beëindig partij}
 translate N StopEngine {Stop de engine}
 translate N StartEngine {Start de engine}
+# ====== TODO To be translated ======
+translate N ExcludeMove {Exclude Move}
 translate N LockEngine {Engine op huidige stelling vastzetten}
 translate N AnalysisCommand {Analyse commando}
 translate N PreviousChoices {Voorgaande keuzes}

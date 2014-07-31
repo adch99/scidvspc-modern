@@ -1235,7 +1235,6 @@ proc addMove { sq1 sq2 {animate ""}} {
   }
 
   if {$nullmove} {
-    # todo: catch entering a null move while in check, which currently causes an error and wrecks the game
     sc_move addSan null
   } else {
     # if {[winfo exists .commentWin]} { .commentWin.cf.text delete 0.0 end }

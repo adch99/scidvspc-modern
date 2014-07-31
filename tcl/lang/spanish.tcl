@@ -692,6 +692,8 @@ translate S ShowInfo {Muestra info del motor}
 translate S FinishGame {Finalizar partida}
 translate S StopEngine {Parar motor}
 translate S StartEngine {Arrancar motor}
+# ====== TODO To be translated ======
+translate S ExcludeMove {Exclude Move}
 translate S LockEngine {Bloquea motor en posición actual}
 translate S AnalysisCommand {Dirección de análisis}
 translate S PreviousChoices {Elección previa}

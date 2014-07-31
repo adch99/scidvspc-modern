@@ -797,6 +797,8 @@ translate O StopEngine {Stop engine}
 # ====== TODO To be translated ======
 translate O StartEngine {Start engine}
 # ====== TODO To be translated ======
+translate O ExcludeMove {Exclude Move}
+# ====== TODO To be translated ======
 translate O LockEngine {Lock engine to current position}
 translate O AnalysisCommand {Analysekommando}
 translate O PreviousChoices {Tidligere valg}

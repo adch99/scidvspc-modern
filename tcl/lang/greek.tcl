@@ -687,6 +687,8 @@ translate G ShowInfo {Εμφάνιση Πληροφοριών Μηχανής}
 translate G FinishGame {Συνέχιση Παρτίδας}
 translate G StopEngine {Διακοπή Μηχανής}
 translate G StartEngine {Έναρξη Μηχανής}
+# ====== TODO To be translated ======
+translate G ExcludeMove {Exclude Move}
 translate G LockEngine {Κλείδωμα Μηχανής στην παρούσα θέση}
 translate G AnalysisCommand {Εντολή Ανάλυσης}
 translate G PreviousChoices {Προηγούμενες Επιλογές}

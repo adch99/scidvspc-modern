@@ -701,6 +701,8 @@ translate D ShowInfo {Engine-Information anzeigen}
 translate D FinishGame {Partie beenden}
 translate D StopEngine {Engine anhalten}
 translate D StartEngine {Engine starten}
+# ====== TODO To be translated ======
+translate D ExcludeMove {Exclude Move}
 translate D LockEngine {Anbinden an aktuelle Position}
 translate D AnalysisCommand {Analysebefehl}
 translate D PreviousChoices {Vorherige Wahl}

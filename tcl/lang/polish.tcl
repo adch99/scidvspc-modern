@@ -658,6 +658,8 @@ translate P ShowInfo {Pokaż informacje o programie}
 translate P FinishGame {Zakończ partię}
 translate P StopEngine {Zatrzymaj program}
 translate P StartEngine {Uruchom program}
+# ====== TODO To be translated ======
+translate P ExcludeMove {Exclude Move}
 translate P LockEngine {Zablokuj program na analizie aktualnej pozycji}
 translate P AnalysisCommand {Program do analizy}
 translate P PreviousChoices {Poprzednie programy}

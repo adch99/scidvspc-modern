@@ -668,6 +668,7 @@ translate E ShowInfo {Show engine info}
 translate E FinishGame {Finish game}
 translate E StopEngine {Stop engine}
 translate E StartEngine {Start engine}
+translate E ExcludeMove {Exclude Move}
 translate E LockEngine {Lock engine to current position}
 translate E AnalysisCommand {Analysis Command}
 translate E PreviousChoices {Previous Choices}

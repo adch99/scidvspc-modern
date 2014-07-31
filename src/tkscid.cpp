@@ -10413,14 +10413,14 @@ sc_pos (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         "fen", "getComment", "getNags", "hash", "html",
         "isAt", "isLegal", "isPromotion",
         "matchMoves", "moveNumber", "pgnBoard", "pgnOffset", "pieceCount",
-        "probe", "setComment", "side", "tex", "moves", "location", NULL
+        "probe", "setComment", "side", "tex", "moves", "movesUci", "location", NULL
     };
     enum {
         POS_ADDNAG, POS_ANALYZE, POS_BESTSQ, POS_BOARD, POS_CLEARNAGS,
         POS_FEN, POS_GETCOMMENT, POS_GETNAGS, POS_HASH, POS_HTML,
         POS_ISAT, POS_ISLEGAL, POS_ISPROMO, POS_MATCHMOVES, POS_MOVENUM,
         POS_PGNBOARD, POS_PGNOFFSET, POS_PIECECOUNT, POS_PROBE,
-        POS_SETCOMMENT, POS_SIDE, POS_TEX, POS_MOVES, LOCATION
+        POS_SETCOMMENT, POS_SIDE, POS_TEX, POS_MOVES, POS_MOVES_UCI, LOCATION
     };
 
     char boardStr[200];
@@ -10484,6 +10484,9 @@ sc_pos (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     case POS_MOVES:
         return sc_pos_moves (cd, ti, argc, argv);
+
+    case POS_MOVES_UCI:
+        return sc_pos_moves_uci (cd, ti, argc, argv);
 
     case POS_MOVENUM:
         // This used to return:
@@ -11013,6 +11016,23 @@ sc_pos_moves (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     }
     return TCL_OK;
 }
+
+int
+sc_pos_moves_uci (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
+{
+    if (argc != 2) {
+        return errorResult (ti, "Usage: sc_pos moves");
+    }
+    Position * p = db->game->GetCurrentPos();
+    sanListT sanList;
+    p->CalcUCIStrings (&sanList);
+
+    for (uint i=0; i < sanList.num; i++) {
+        Tcl_AppendElement (ti, sanList.list[i]);
+    }
+    return TCL_OK;
+}
+
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // sc_pos_pgnBoard:

@@ -719,6 +719,8 @@ translate C StopEngine {Stop engine}
 # ====== TODO To be translated ======
 translate C StartEngine {Start engine}
 # ====== TODO To be translated ======
+translate C ExcludeMove {Exclude Move}
+# ====== TODO To be translated ======
 translate C LockEngine {Lock engine to current position}
 translate C AnalysisCommand {Program pro analýzu}
 translate C PreviousChoices {Pøedchozí vybrané programy}

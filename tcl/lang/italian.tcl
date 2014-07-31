@@ -741,6 +741,8 @@ translate I FinishGame {Termina la partita}
 translate I StopEngine {Ferma il motore}
 translate I StartEngine {Avvia il motore}
 # ====== TODO To be translated ======
+translate I ExcludeMove {Exclude Move}
+# ====== TODO To be translated ======
 translate I LockEngine {Lock engine to current position}
 translate I AnalysisCommand {Comando di analisi}
 translate I PreviousChoices {Scelta precedente}

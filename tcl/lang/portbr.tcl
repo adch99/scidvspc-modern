@@ -725,6 +725,8 @@ translate B StopEngine {Stop engine}
 # ====== TODO To be translated ======
 translate B StartEngine {Start engine}
 # ====== TODO To be translated ======
+translate B ExcludeMove {Exclude Move}
+# ====== TODO To be translated ======
 translate B LockEngine {Lock engine to current position}
 translate B AnalysisCommand {Comando de Analise}
 translate B PreviousChoices {Escolhas Anteriores}

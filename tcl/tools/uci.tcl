@@ -54,6 +54,7 @@ namespace eval uci {
     # set uciInfo(refutation$n) ""
     # set uciInfo(currline$n) ""
     set uciInfo(bestmove$n) ""
+    set uciInfo(searchmoves$n) ""
   }
 
   ### if gui = 0 -> engine mode,   pipe used is $uciInfo(pipe$n)

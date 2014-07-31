@@ -678,6 +678,8 @@ translate F ShowInfo {Montrer infos moteur}
 translate F FinishGame {Continuer la partie}
 translate F StopEngine {Arrêter le moteur}
 translate F StartEngine {Démarrer le moteur}
+# ====== TODO To be translated ======
+translate F ExcludeMove {Exclude Move}
 translate F LockEngine {Verrouiller moteur à la position actuelle}
 translate F AnalysisCommand {Commande d'analyse}
 translate F PreviousChoices {Choix précédents}

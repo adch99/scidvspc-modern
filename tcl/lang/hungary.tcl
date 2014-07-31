@@ -726,6 +726,8 @@ translate H StopEngine {Stop engine}
 # ====== TODO To be translated ======
 translate H StartEngine {Start engine}
 # ====== TODO To be translated ======
+translate H ExcludeMove {Exclude Move}
+# ====== TODO To be translated ======
 translate H LockEngine {Lock engine to current position}
 translate H AnalysisCommand {Elemzésparancs}
 translate H PreviousChoices {Korábbi választások}
