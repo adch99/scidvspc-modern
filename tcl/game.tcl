@@ -203,7 +203,6 @@ proc ::game::LoadNumber {} {
   set b [frame $w.buttons]
   pack $b -side top -fill x
   dialogbutton $b.load -text "OK" -command {
-    grab release .glnumDialog
     # todo: Can we integrate this into ::file::Open
     if {[catch {sc_game load $::game::entryLoadNumber} result]} {
       tk_messageBox -type ok -icon info -title "Scid" -message $result
@@ -217,21 +216,14 @@ proc ::game::LoadNumber {} {
     updateTitle
   }
   dialogbutton $b.cancel -text $::tr(Cancel) -command {
-    focus .main
-    grab release .glnumDialog
     destroy .glnumDialog
     focus .main
   }
   packbuttons right $b.cancel $b.load
 
-  set x [ expr {[winfo width .] / 4 + [winfo rootx .] }]
-  set y [ expr {[winfo height .] / 4 + [winfo rooty .] }]
-  wm geometry $w "+$x+$y"
-  update
   placeWinOverParent $w .
+  update
   wm state $w normal
-  grab $w
-
   focus $w.entry
 }
 
@@ -324,7 +316,6 @@ proc ::game::GotoMoveNumber {} {
   set ::game::moveEntryNumber ""
   set w [toplevel .mnumDialog]
   wm title $w "Scid: [tr GameGotoMove]"
-  grab $w
 
   label $w.label -text $::tr(GotoMoveNumber)
   pack $w.label -side top -pady 5 -padx 5
@@ -337,7 +328,6 @@ proc ::game::GotoMoveNumber {} {
   set b [frame $w.buttons]
   pack $b -side top -fill x
   dialogbutton $b.load -text "OK" -command {
-    grab release .mnumDialog
     if {$::game::moveEntryNumber > 0} {
       catch {sc_move ply [expr {($::game::moveEntryNumber - 1) * 2}] ; sc_move forward}
     }
@@ -348,7 +338,6 @@ proc ::game::GotoMoveNumber {} {
   }
   dialogbutton $b.cancel -text $::tr(Cancel) -command {
     focus .main
-    grab release .mnumDialog
     destroy .mnumDialog
     focus .main
   }
