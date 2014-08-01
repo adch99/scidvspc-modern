@@ -620,8 +620,11 @@ if {0} {
       grid $w.f.m$row  -row $row -column 0 -sticky w -pady 1
       grid $w.f.sp$row -row $row -column 1 -sticky w -pady 1 -padx 4
 
-      $w.left.remove.otherMoves add command -label [::trans $x] -command "::book::removeBookMove $x $row"
-
+      if {$row % 10 == 0} {
+	$w.left.remove.otherMoves add command -label [::trans $x] -command "::book::removeBookMove $x $row" -columnbreak 1
+      } else {
+	$w.left.remove.otherMoves add command -label [::trans $x] -command "::book::removeBookMove $x $row"
+      }
       incr row
     }
 
@@ -630,9 +633,15 @@ if {0} {
     # $w.left.add.otherMoves add command -label $::tr(None)
 
     set moveList [ sc_pos moves ]
+    set row 0
     foreach move $moveList {
       if { [ lsearch  $moves $move ] == -1 } {
-        $w.left.add.otherMoves add command -label [::trans $move] -command "::book::addBookMove $move"
+	if {$row % 10 == 0} {
+	  $w.left.add.otherMoves add command -label [::trans $move] -command "::book::addBookMove $move" -columnbreak 1
+	} else {
+	  $w.left.add.otherMoves add command -label [::trans $move] -command "::book::addBookMove $move"
+	}
+	incr row
       }
     }
   }
