@@ -32,9 +32,8 @@ proc ::tip::show {{n -1}} {
     bind $w <Key-End> "$w.text yview moveto 0.99"
     bind $w <Escape> "$w.b.close invoke"
     placeWinCenter $w
-    raiseWin $w
-    focus $w
   }
+  raiseWin $w
   $w.text configure -state normal
   $w.text delete 1.0 end
   if {[info exists tips($language)]} {
@@ -59,30 +58,40 @@ proc ::tip::show {{n -1}} {
 
 set tips(E) {
   {
-    Scid has over seventy <a Index>help pages</a>. They are accessible
+    Scid has over seventy <a Index>Help Pages</a>. They are accessible
     by pressing <b>F1</b> in most windows.
   }
   {
-    The main board has a handy right-click menu that allows
-    one to show or hide various widgets.
+    You can hide (or show) various board components by right-clickng the 'Board' tab (or the whole Main Board in undocked mode).
   }
   {
-    Scid offers you several ways to enter chess moves.
-    You can use the mouse
-    (with or without move suggestion), or keyboard
-    (with or without move completion). Read the
-    <a Moves>Move Entry</a> help item for details.
+    Mastering Scid's <a Docking>Docked Windows</a> feature is tricky, but allows for a very configurable desktop.
   }
   {
-    For quick access to oft used databases, add
-    <a Bookmarks>bookmarks</a> for each of them, and make sure the bookmark icon is
-    visible in the toolbar (Options--<gt>Toolbar).
+    Using <b>Control+Wheelmouse</b> in the Main/Pgn/Help windows will adjust the text size.
+  }
+  {
+    Entering moves can be done with the mouse or keyboard
+    <br><br>
+    See <a Moves>Move Entry</a> help for details.
+  }
+  {
+    Scid has many handy <a ShortCuts>Keyboard shortcuts</a>, though some will only work when the mouse is over the Main Board.
+    <br><br>
+    Use Undo (Control+Z) and Redo (Control+Y) to edit recent game/move changes.
+  }
+  {
+    Middle clicking the surrounds of the Main Board, and the Gamelist, will hide/show extra information.
+  }
+  {
+    Recently opened games are accessible from the bottom of the <b>Game Menu</b>.
+    <br><br>
+    Adjust <b>Options--<gt>RecentEntries</b> to configure this menu's size.
   }
   {
     You can see the moves, comments and variations of the current game
     in the <a PGN>PGN Window</a>.
-    Using the middle mouse button on a move, shows
-    a preview of that position.
+    Prssing middle-mouse on a move will show a preview of that position.
   }
   {
     Copy games from one database to another using drag and drop
@@ -93,40 +102,22 @@ set tips(E) {
   {
     Single-game PGN files can be saved via <b>File--<gt>Save PGN</b>
     But larger PGN files are always opened read-only.
-    If you want to edit a PGN file in Scid, create a new database
-    and copy the PGN games to it using the <a Switcher>database switcher</a>.
+    <br><br>
+    For more information, see <a BrowsingPGN>PGN and Scid</a>
   }
   {
-    The cut-off menu (dotted line) in the <green>File-<gt>Switch to Database</green> menu makes it a great little database switcher.
-  }
-  {
-    The <a Tree>Tree Window</a> shows all moves played from the
-    current position. To see the move orders
-    that reached this position, generate an <a OpReport>Opening Report</a>.
-  }
-  {
-   If you have a large database you often use with the <a Tree>Tree</a>,
-   selecting <b>Fill Cache File</b> (from the Tree Menu) will greatly speed
-   things up.
-  }
-  {
-    In the main window, double-clicking on the Status Bar starts the (first)
+    In the Main Window, double-clicking the Status Bar starts the (first)
     chess engine. Right-clicking docks/undocks the engine.
   }
   {
     Clicking on a player's name shows the <a PInfo>Player Information Window</a>.
-    From here , one can easily select all games by the player 
-    by clicking on the win/lose/filter values (in green).
+    From here, one can easily select all games by the player 
+    by clicking on the Win/Lose/Filter values (in green).
   }
   {
-    When studying an Opening, it can be useful to peform a
-    <a Searches Board>Board Search</a> with the Pawns or
-    Files option on an important position, as this may
-    reveal other openings reaching the same pawn structure.
-  }
-  {
-   The <a Maintenance Cleaner>Maintenance Cleaner</a> allows
-   one to do several <a Maintenance>maintenance</a> jobs at the one time.
+    Important databases can be made <b>Read-Only</b> temporarily
+    by right-clicking in the <a Switcher>Database Switcher</a>, or (permanently) by changing
+    the database's file permissions through Windows/Linux/OSX.
   }
   {
    The <a Maintenance Editing>Name Editor</a> allows one to substitute individual 
@@ -155,7 +146,7 @@ set tips(E) {
     You can search for flagged or deleted games with the
     <a Searches Header>General Search</a> window.
     After saving Search Criteria with the <b>Save</b> button, these saves can then
-     be reloaded later from Scid's main <b>Search Menu</b>.
+    be reloaded later from Scid's main <b>Search Menu</b>.
   }
   {
     If you are playing through a game and want to quickly try out some moves
@@ -167,12 +158,7 @@ set tips(E) {
     To find the most important games (with high-rated opponents)
     reaching a certain position, open the <a Tree>Tree Window</a>
     and then the Best Games widget. You can even restrict
-    theese games to show only a particular result.
-  }
-  {
-    A great way to study an opening using a large database of games is
-    to turn on training mode in the <a Tree>Tree Window</a>. Then play
-    against the database to see which lines most often occur.
+    these games to show only a particular result.
   }
   {
     The <a Tmt>Tournament Finder</a> not only finds
@@ -190,11 +176,6 @@ set tips(E) {
     <a Searches Material>Material/Pattern</a> search window, pay attention
     to the "Half moves" entry, to eliminate games where the difference
     only occurs briefly.
-  }
-  {
-    Important databases can be made <b>Read-Only</b>
-    from the <b>File</b> menu (after opening it), or by changing
-    the bases file permissions through Windows/Linux/OSX.
   }
   {
     If you use XBoard , the quickest way to copy a  chess position to Scid
@@ -257,5 +238,32 @@ set tips(E) {
     To select extra opponents, change the "Number of Engines", then press "Update".
     Short games can be played by entering (for example) .5 minutes , for 30 second games.
   }
+  {
+    The cut-off menu (dotted line) in the <green>File-<gt>Switch to Database</green> menu makes it a great little database switcher.
+  }
+  {
+    The <a Tree>Tree Window</a> shows all moves played from the
+    current position. To see the move orders
+    that reached this position, generate an <a OpReport>Opening Report</a>.
+  }
+  {
+   If you have a large database you often use with the <a Tree>Tree</a>,
+   selecting <b>Fill Cache File</b> (from the Tree Menu) will greatly speed
+   things up.
+  }
+  {
+    When studying an Opening, it can be useful to peform a
+    <a Searches Board>Board Search</a> with the Pawns or
+    Files option on an important position, as this may
+    reveal other openings reaching the same pawn structure.
+  }
+  {
+   The <a Maintenance Cleaner>Maintenance Cleaner</a> allows
+   one to do several <a Maintenance>maintenance</a> jobs at the one time.
+  }
+  {
+    A great way to study an opening using a large database of games is
+    to turn on training mode in the <a Tree>Tree Window</a>. Then play
+    against the database to see which lines most often occur.
+  }
 }
-

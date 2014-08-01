@@ -1556,10 +1556,20 @@ proc ::splash::make {} {
   wm withdraw $w
   wm protocol $w WM_DELETE_WINDOW [list wm withdraw $w]
   wm title $w "Welcome to $::scidName $::scidVersion"
+
+  ### Pack in this order to resize nicely
+  # buttons
+  frame $w.b
+  pack $w.b -side bottom -fill x
+
+  # command entry
+  entry $w.command
+  pack $w.command -side bottom -fill x -padx 3 -pady 2
+
+  # text
   frame $w.f
   pack $w.f -side top -expand yes -fill both
 
-  frame $w.b
   text $w.t -height 15 -width 55 -cursor top_left_arrow \
        -font font_Regular -wrap word \
       -yscrollcommand [list $w.ybar set] -setgrid 1
@@ -1573,7 +1583,6 @@ proc ::splash::make {} {
   configFindEntryBox $w.find ::splash::find $w.t
 
   set ::splash::console 0
-  pack [entry $w.command] -side top -fill x -padx 3 -pady 2
   bind $w.command <Return> {
     if {!$::splash::console} {
       set ::splash::console 1
@@ -1595,7 +1604,6 @@ proc ::splash::make {} {
   }
 
 
-  pack $w.b -side top -fill x
   pack $w.auto -side left -in .splash.b -pady 2 -ipadx 10 -padx 10
   pack $w.find $w.dismiss -side right -in .splash.b -pady 2 -ipadx 10 -padx 10
   pack $w.ybar -in $w.f -side right -fill y

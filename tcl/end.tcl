@@ -1492,6 +1492,7 @@ if {$windowsOS || $macOS} {
     bind .main <Control-Button-5> {::board::resize .main.board -1}
   }
 }
+bindWheeltoFont .splash
 
 proc standardShortcuts {w} {
   bind $w <Control-o> ::file::Open

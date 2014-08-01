@@ -26,6 +26,10 @@ is a usability and bug-fix fork of <b>Shane's Chess Information Database</b>. Wi
 it you can play chess online or against the computer, browse tournaments
 downloaded in pgn format, create huge chess databases, and generate opening and player reports.
 </p>
+<p><i>
+See <run ::tip::show 0><green>Tip of the Day</green></run> for some helpful hints.
+</i></p>
+</p>
 
 <h3>Features</h3>
 <ul>
@@ -579,8 +583,7 @@ set helpText(MainWindow) {<h1>Scid Main Window</h1>
   Separate help pages describe the <a Menus>menus</a> and how to <a Moves>enter chess moves</a>.
   </p>
   <p>
-  <i>Right clicking the main board (or 'Board' tab in <a Docking>docked mode</a>),
-  shows a menu for hiding/unhiding various board components.</i>
+  <i>See Scid's <run ::tip::show><green>Tip of the Day</green></run> for many helplful hints.</i>
   </p>
 
   <h4>Main Button Bar</h4>
@@ -2664,31 +2667,26 @@ making for easier <a Analysis Debugging>Debugging</a>.
   At the top you'll find many cryptic buttons...
   <p>
   <ul>
-  <li> <button tb_pause 32> <b>Pause</b>  temporarily interrupt engine analysis.</li>
-  <li> <button tb_play 32> <b>Play</b>  restarts the engine.
-  <i>Note: This will cause most engines 
-  to restart their analysis, forgetting previous lines.
-  Only few engines are able to reuse the
-  results they have calculated till the analysis was stopped.</i> </li>
-  <li> <button tb_lockengine 32> <b>Lock Analysis</b> to a certain position.
-  Hover cursor over this button to see stats for locked game.
-  After a while, to add this analysis to game, return to the locked position, 
-  press Pause, Unlock, and Add Variation.</li>
-
+  <li> <button tb_play 32> <b>Play</b> / <button tb_pause 32> <b>Pause</b>. Start and stop engine analysis.
   <li> <button tb_addmove 32> <b>Add Move</b> 
   adds the engine's best move to the current game.  (Right clicking adds the Engine Score).</li>
   <li> <button tb_addvar 32> <b>Add Variation</b>  adds the whole main line.  (Right clicking adds the second variation if multi-pv enabled)</li>
   <li> <button tb_addallvars 32> <b>Multi-PV</b>  if the engine supports multi-pv, add all principal variations.</li>
 
-  <li> <button tb_info 32> <b>Show Info</b> show additional information.</li>
+  <li> <button tb_lockengine 32> <b>Lock Analysis</b> to a certain position.
+  Hover cursor over this button to see stats for locked game.
+  After a while, to add this analysis to game, return to the locked position, 
+  press Pause, Unlock, and Add Variation.</li>
+  <li> <button tb_annotate 32> <b>Annotate</b> game (see below).</li>
+  <li> <button tb_exclude 32> <b>Exclude Move(s)</b> helps refine the engine's search list (mainly UCI engines only). Hovering mouse shows the current excluded moves.</li>
   <li> <button tb_cpu 32> <b>Low CPU priority</b> 
   give the engine a low priority for CPU
   scheduling. On Windows, engines are run on low priority by default.
   On Unix systems the engines priority can not be set back to normal.  </li>
+  <li> <button tb_info 32> <b>Show Info</b> show additional information.</li>
   <li> <button tb_coords 32> <b>Show Board</b> displays a small working board.
   If engine is locked, the board displays the locked position.</li>
   <li> <button autoplay_off 32> <b>Shoot out</b>, or "demo", mode allows the engine to play out the game. (Engine must be running first).</li>
-  <li> <button tb_annotate 32> <b>Annotate</b> game (see below).</li>
   <li> <button tb_training 32> <b>Training</b> feature (see below).</li>
 <br>
   <li> And for Xboard engines only:</li>
@@ -2858,7 +2856,7 @@ engines support both formats.
 via the <button tb_annotate> button in the <run ::enginelist::choose><green>engine configuration</green></run> widget.
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.11, November 2013</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.13, August 2014</footer></p>
 }
 
 set helpTitle(Tourney) "Computer Tournament"

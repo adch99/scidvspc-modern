@@ -188,10 +188,9 @@ proc ::recentFiles::menuname {fname} {
   return $mname
 }
 
-# ::recentFiles::configure
 #   Produces a dialog box for configuring the number of recent files
 #   to display in the File menu and in a submenu.
-#
+
 proc ::recentFiles::configure {} {
   global recentFiles
   set w .recentFilesDlg
@@ -244,6 +243,5 @@ proc ::recentFiles::configure {} {
 
   placeWinOverParent $w .
   wm state $w normal
-  update
 }
 
