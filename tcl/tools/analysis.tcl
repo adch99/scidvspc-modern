@@ -2240,6 +2240,9 @@ proc makeAnalysisWin {{n 0} {options {}}} {
   button $w.b.exclude -image tb_exclude -command "excludeMovePopup $n" -relief $relief
   ::utils::tooltip::Set $w.b.exclude $::tr(ExcludeMove)
   trace variable analysis(exclude$n) w "excludeToolTip $n"
+  if {!$analysis(autostart$n)} {
+    $w.b.exclude configure -state disabled
+  }
 
   checkbutton $w.b.lockengine -image tb_lockengine -indicatoron false -width 32 -height 32 \
     -variable analysis(lockEngine$n) -command "toggleLockEngine $n" -relief $relief
@@ -2567,6 +2570,8 @@ proc excludeMovePopup {n} {
 
   global excludeMove analysis
 
+  # OS X doesnt manage the transient properly
+  catch {wm withdraw .tooltip}
   set w [toplevel .excludeMove]
   wm title $w "Scid"
   wm state $w withdrawn
@@ -3073,10 +3078,13 @@ proc toggleEngineAnalysis {{n -1} {force 0}} {
     stopAnalyzeMode $n
     $b configure -image tb_play
     ::utils::tooltip::Set $b "$::tr(StartEngine)"
+    .analysisWin$n.b.exclude configure -state disabled
+    set analysis(exclude$n) ""
   } else  {
     startAnalyzeMode $n
     $b configure -image tb_pause
     ::utils::tooltip::Set $b "$::tr(StopEngine)"
+    .analysisWin$n.b.exclude configure -state normal
   }
 }
 
