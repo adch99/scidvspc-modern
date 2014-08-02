@@ -3,7 +3,7 @@
 ### analysis.tcl: part of Scid.
 ### Copyright (C) 1999-2003  Shane Hudson.
 ### Copyright (C) 2007  Pascal Georges
-### Copyright (C) 2009 - 2011 Steven Atkinson
+### Copyright (C) 2009 - 2014 Steven Atkinson
 
 ### Changes by S.A
 # Overhauled procedural flow, removed the "two engine" limit and other limits.
@@ -2153,7 +2153,7 @@ proc makeAnalysisWin {{n 0} {options {}}} {
   if {$analysis(logMax) > 0 && $analysis(logEngines) } {
     if {! [catch {open [file join $::scidLogDir "engine$n.log"] w} log]} {
       set analysis(log$n) $log
-      logEngine $n "$::scidName <--> Engine communication log file"
+      logEngine $n "$::scidName <--> Engine communication log file (engine $n)"
       logEngine $n "Engine: $analysisName"
       logEngine $n "Command: $analysisCommand"
       logEngine $n "Arguments:  $analysisArgs"
@@ -2237,6 +2237,18 @@ proc makeAnalysisWin {{n 0} {options {}}} {
     -width 2 -font font_Small -command "changePVSize $n" 
   ::utils::tooltip::Set $w.b.multipv $::tr(Lines)
 
+  checkbutton $w.b.lockengine -image tb_lockengine -indicatoron false -width 32 -height 32 \
+    -variable analysis(lockEngine$n) -command "toggleLockEngine $n" -relief $relief
+  ::utils::tooltip::Set $w.b.lockengine $::tr(LockEngine)
+
+  if {!$annotate(Button)} {
+    checkbutton $w.b.annotatebut -image tb_annotate -indicatoron false -width 32 -height 32 \
+      -variable annotate(Button) -command "initAnnotation $n" -relief $relief
+    ::utils::tooltip::Set $w.b.annotatebut $::tr(Annotate)
+  } else {
+    frame $w.b.annotatebut -width 0 -height 0
+  }
+
   button $w.b.exclude -image tb_exclude -command "excludeMovePopup $n" -relief $relief
   ::utils::tooltip::Set $w.b.exclude $::tr(ExcludeMove)
   trace variable analysis(exclude$n) w "excludeToolTip $n"
@@ -2244,37 +2256,9 @@ proc makeAnalysisWin {{n 0} {options {}}} {
     $w.b.exclude configure -state disabled
   }
 
-  checkbutton $w.b.lockengine -image tb_lockengine -indicatoron false -width 32 -height 32 \
-    -variable analysis(lockEngine$n) -command "toggleLockEngine $n" -relief $relief
-  ::utils::tooltip::Set $w.b.lockengine $::tr(LockEngine)
-
-  set ::finishGameMode 0
-  button $w.b.finishGame -image autoplay_off -command "toggleFinishGame $n"  -relief $relief
-  ::utils::tooltip::Set $w.b.finishGame $::tr(FinishGame)
-
-  button $w.b.showboard -image tb_coords -command "toggleAnalysisBoard $n" -relief $relief
-  ::utils::tooltip::Set $w.b.showboard $::tr(ShowAnalysisBoard)
-
-  checkbutton $w.b.training -image tb_training  -indicatoron false -width 32 -height 32 \
-    -command "toggleAutomove $n" -variable analysis(automove$n) -relief $relief
-  ::utils::tooltip::Set $w.b.training $::tr(Training)
-
-  if {!$annotate(Button)} {
-    checkbutton $w.b.annotate -image tb_annotate -indicatoron false -width 32 -height 32 \
-      -variable annotate(Button) -command "initAnnotation $n" -relief $relief
-    ::utils::tooltip::Set $w.b.annotate $::tr(Annotate)
-  } else {
-    frame $w.b.annotate -width 0 -height 0
-  }
-
   checkbutton $w.b.priority -image tb_cpu -indicatoron false -variable analysis(priority$n) \
     -onvalue idle -offvalue normal -command "setAnalysisPriority $n" -relief $relief -width 32 -height 32
   ::utils::tooltip::Set $w.b.priority $::tr(LowPriority)
-
-  # Xboard only. This button is unpacked later if UCI
-  button $w.b.update -image tb_update \
-    -command "sendToEngine $n ."  -relief $relief
-  ::utils::tooltip::Set $w.b.update $::tr(Update)
 
   if {![info exists analysis(showEngineInfo$n)]} {
     set analysis(showEngineInfo$n) 0
@@ -2284,20 +2268,39 @@ proc makeAnalysisWin {{n 0} {options {}}} {
     -variable analysis(showEngineInfo$n) -command "toggleEngineInfo $n" -relief $relief
   ::utils::tooltip::Set $w.b.showinfo $::tr(ShowInfo)
 
+  button $w.b.showboard -image tb_coords -command "toggleAnalysisBoard $n" -relief $relief
+  ::utils::tooltip::Set $w.b.showboard $::tr(ShowAnalysisBoard)
+
+  # Xboard only. This button is unpacked later if UCI
+  button $w.b.update -image tb_update \
+    -command "sendToEngine $n ."  -relief $relief
+  ::utils::tooltip::Set $w.b.update $::tr(Update)
+
+  set ::finishGameMode 0
+  button $w.b.finishGame -image autoplay_off -command "toggleFinishGame $n"  -relief $relief
+  ::utils::tooltip::Set $w.b.finishGame $::tr(FinishGame)
+
+  checkbutton $w.b.training -image tb_training  -indicatoron false -width 32 -height 32 \
+    -command "toggleAutomove $n" -variable analysis(automove$n) -relief $relief
+  ::utils::tooltip::Set $w.b.training $::tr(Training)
+
   button $w.b.help -image tb_help  -command {helpWindow Analysis} -relief $relief -width 32 -height 32
   ::utils::tooltip::Set $w.b.help $::tr(Help)
 
-
   pack $w.b.startStop $w.b.move $w.b.line $w.b.alllines \
-       $w.b.multipv $w.b.lockengine $w.b.annotate $w.b.exclude $w.b.priority $w.b.showinfo $w.b.showboard \
-       $w.b.update $w.b.finishGame -side left -pady 2 -padx 1
+       $w.b.multipv $w.b.lockengine $w.b.annotatebut $w.b.exclude $w.b.priority $w.b.showinfo $w.b.showboard \
+       $w.b.update $w.b.finishGame -side left
 
   if {$n == 1 || $n == 2} {
     # training only works with engines 1 and 2
     pack $w.b.training -side left -pady 2 -padx 1
   }
 
-  pack $w.b.help -side right -pady 2 -padx 1
+  pack $w.b.help -side left
+
+  button $w.popup -image tb_popup -height 32 -width 16 -command "popupButtonBar $n" -relief flat
+  placePopupButton $n
+  
 
   # pack  $w.b.showinfo 
   if {$analysis(uci$n)} {
@@ -2408,7 +2411,8 @@ proc makeAnalysisWin {{n 0} {options {}}} {
     set analysis(priority$n) idle
     setAnalysisPriority $n
   }
-  bind $w <Configure> "recordWinSize $w"
+  bind $w <Configure> "recordWinSize $w ; placePopupButton $n"
+  placePopupButton $n
 }
 
 ### Dock/undock Engine1 in statusbar
@@ -3151,7 +3155,7 @@ proc toggleLockEngine {n} {
     ::utils::tooltip::Set .analysisWin$n.b.lockengine $::tr(LockEngine)
   }
   set w .analysisWin$n
-  foreach b {move line exclude alllines training annotate finishGame} {
+  foreach b {move line exclude alllines training annotatebut finishGame} {
     $w.b.$b configure -state $state
   }
   if {$analysis(uci$n)} {
@@ -4091,6 +4095,11 @@ jI2Oj5CRkpOUlZaXmJmakg0TGSCfGRMNog2SDhQaIScsLCchGhQOp6mrra+x
 s5Gdn6CjvqabwsPExcbHyMnKy8zMgQA7
 }
 
+image create photo tb_popup -data {
+R0lGODlhDAAgAIABAAAAAP///yH5BAEKAAEALAAAAAAMACAAAAIdjI+py+0P
+o5y0VgAMXjv01H1a5pFHaFrqyrbu6xQAOw==
+}
+
 ### Make a little toplevel text widget to display an engine log
 
 proc engineShowLog {n} {
@@ -4182,3 +4191,62 @@ proc engineAutoLog {} {
     after cancel engineAutoLog
   }
 }
+
+### Make a transient toplevel button bar
+
+proc popupButtonBar {n} {
+
+  if {[winfo exists .t]} {
+    return
+  }
+
+  toplevel .t
+  wm withdraw .t
+  set w .analysisWin$n.b
+
+  pack [frame .t.f -relief solid -borderwidth 1]
+  set t .t.f
+  catch {wm transient .t [winfo toplevel .main]}
+  wm overrideredirect .t 1
+
+  set offset [expr {16 + ($n >= 10)}]
+  foreach b [winfo children $w] {
+    if {![catch {pack info $b}]} {
+      eval "pack \[[string tolower [winfo class $b]] $t.[string range $b $offset end]\] -side left"
+    }
+  }
+  foreach button [winfo children $w] {
+    set b [string range $button $offset end]
+    foreach opt [$w.$b configure] {
+      set o [lindex $opt 0]
+      catch {
+        $t.$b  configure $o [$w.$b cget $o]
+      }
+    }
+  }
+
+  bind .t <ButtonRelease-1> {destroy .t}
+  bind .t <Leave> {if {"%W" == ".t"} {destroy .t}}
+
+  # handle case when up against right side of screen
+  update
+  set X [expr [winfo rootx $w] - 1]
+  set space [expr {[winfo screenwidth .main] - ($X + [winfo reqwidth .t])}]
+  if {$space < 0} {
+    incr X $space
+  }
+  wm geometry .t +$X+[expr [winfo rooty $w] - 1]
+  wm state .t normal
+}
+
+proc placePopupButton {n} {
+  set w .analysisWin$n
+  catch {
+    place forget $w.popup
+    if {[winfo reqwidth $w.b] > [winfo width $w.b]} {
+      place $w.popup -in $w -anchor ne -x [winfo width $w]
+    }
+  }
+}
+
+### end of analysis.tcl
