@@ -2411,7 +2411,8 @@ proc makeAnalysisWin {{n 0} {options {}}} {
     set analysis(priority$n) idle
     setAnalysisPriority $n
   }
-  bind $w <Configure> "recordWinSize $w ; placePopupButton $n"
+  # Use an arbitary window to bind to <Configure>, but some work better than others
+  bind $w <Configure> " if {\"%W\" == \"$w.b\"} {recordWinSize $w ; placePopupButton $n}"
   placePopupButton $n
 }
 
@@ -3409,12 +3410,11 @@ proc toggleAnalysisBoard {n} {
     set analysis(showBoard$n) 0
     pack forget $w.bd
     # setWinSize .analysisWin$n
-    bind $w <Configure> "recordWinSize $w"
+    # bind $w <Configure> "recordWinSize $w"
   } else {
-    bind $w <Configure> {}
+    # bind $w <Configure> {}
     set analysis(showBoard$n) 1
     pack $w.bd -side bottom -before $w.hist 
-
     update
     $w.hist.text configure -setgrid 1
     $w.text configure -setgrid 1
