@@ -1048,7 +1048,7 @@ proc ::tree::best { baseNumber } {
     pack [frame $w.b] -side bottom -fill x
     frame $w.blist
     pack $w.blist -side top -expand true -fill both
-    listbox $w.blist.list  -yscrollcommand "$w.blist.ybar set" -font font_Fixed
+    listbox $w.blist.list  -yscrollcommand "$w.blist.ybar set" -font font_Fixed -selectmode single
     scrollbar $w.blist.ybar -command "$w.blist.list yview" -takefocus 0
     pack $w.blist.ybar -side right -fill y
     pack $w.blist.list -side left -fill both -expand yes
