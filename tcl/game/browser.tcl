@@ -34,7 +34,7 @@ proc ::gbrowser::new {base gnum {ply -1} {w {}}} {
     while {[winfo exists .gb$n]} { incr n }
     set w .gb$n
     toplevel $w
-    # setWinLocation $w
+    wm withdraw $w
     wm resizable $w 1 0
 
     pack [frame $w.b] -side bottom -fill x
@@ -133,6 +133,7 @@ proc ::gbrowser::new {base gnum {ply -1} {w {}}} {
     pack $w.b.merge $w.b.load -side right -padx 1 -pady 1
 
     # bind $w <Configure> "recordWinSize $w"
+    wm state $w normal
 
   } else {
     # Already have a browser window topleve
@@ -151,6 +152,7 @@ proc ::gbrowser::new {base gnum {ply -1} {w {}}} {
     $w.b.load configure -command "
       sc_base switch $base
       ::game::Load $gnum 0
+      destroy $w
       sc_move ply \$::gbrowser::ply($n)
       updateBoard -pgn"
     $w.b.merge configure -command "mergeGame $base $gnum"
