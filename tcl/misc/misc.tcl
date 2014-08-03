@@ -211,7 +211,8 @@ proc _autoscroll {bar args} {
     }
     # update idletasks
   }
-  eval $bar set $args
+  # Sometimes lingering _autoscrolls persist after scrollbars are destroyed
+  catch {eval $bar set $args}
 }
 
 proc _autoscrollMap {frame} {
