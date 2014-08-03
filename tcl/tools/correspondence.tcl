@@ -466,6 +466,22 @@ namespace eval Xfcc {
 			append xmlmessage "</GetMyGames>"
 		append xmlmessage $::Xfcc::SOAPend
 
+		#-----------------------------------------------------------
+		# https check
+		# using default port of 443, but should be configurable
+		#
+		if {[regexp -nocase ^(https://)(.*) $uri]} {
+			if {[catch {package require tls}]} {
+				tk_messageBox -title "Xfcc Oops" -type ok -icon warning \
+					-message "tls package not found. Secure https unreachable."
+				return "tls package not found. Secure https unreachable."
+			} else {
+				http::register https 443 ::tls::socket
+			}
+		}
+		#-----------------------------------------------------------
+
+
 		# send it to the web service note the space before the charset
 		set token [::http::geturl $uri \
 						-type "text/xml; charset=\"utf-8\"" \
@@ -1451,6 +1467,7 @@ namespace eval CorrespondenceChess {
 		### This gets called at start-up.... bad.
 
 		if {![file exists $CorrBase]} {
+			set currbase [sc_base current]
 			set fName [file rootname $CorrBase]
 			if {[catch {sc_base create $fName} result]} {
 					tk_messageBox -icon warning -type ok -parent . \
@@ -1460,9 +1477,7 @@ namespace eval CorrespondenceChess {
 			sc_base type [sc_base current] 6
 
 			sc_base close
-
-			### Seems to be some init bug - Hack to keep clipbase open
-			sc_base switch clipbase
+			sc_base switch $currbase
 		}
 	}
 
@@ -1799,7 +1814,7 @@ namespace eval CorrespondenceChess {
 					set pgn [encoding convertfrom iso8859-1 [::CorrespondenceChess::getPage $pgnurl ]]
 
 					# split by line endings for insertion of necessary header tags
-					set gamelist [split $pgn {}]
+					set gamelist [split $pgn "\n"]
 
 					set filename [file nativename [file join $::CorrespondenceChess::Inbox "$cmailgamename.pgn"]]
 
@@ -3736,7 +3751,6 @@ namespace eval CorrespondenceChess {
 			CallExternal $callstring
 
 			# Save the game once the move is sent
-			set num [sc_game number]
 			::game::Save
 
 			# Hook up with email manager: search the game in its internal
