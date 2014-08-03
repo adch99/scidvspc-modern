@@ -207,29 +207,14 @@ proc ::docking::cleanup { w { origin "" } } {
 
   set dockw ".fdock[string range $w 1 end]"
 
-  catch {
-    bind $w <Destroy> {}
-    bind $dockw <Destroy> {}
+  set tab [::docking::find_tbn $dockw]
+  if {$tab != ""} {
+    $tab forget $dockw
+    ::docking::_cleanup_tabs $tab
+    catch { unset ::docking::notebook_name($dockw) }
+    ::docking::setTabStatus
   }
-
-  # Maybe during Scid closing, some race conditions lead to exceptions ? In case, catch this by default
-  foreach nb [array names tbs] {
-    if { [lsearch  [$nb tabs] $dockw ] != -1 } {
-      $nb forget $dockw
-      # Wish 8.6 "catch destroy" dumps core - S.A.
-      if {!$::docking::buggywish} {
-       catch {destroy $dockw}
-      }
-      ::docking::_cleanup_tabs $nb
-      return
-    }
-  }
-
-  ### Make sure the frame is destroyed
-  # Hell - this crashes wish8.6
-  # if { [winfo exists $dockw]} { destroy $dockw }
-
-  array unset ::docking::notebook_name $dockw
+  after idle "if {[winfo exists $dockw]} { destroy $dockw }"
 
 }
 ################################################################################
@@ -902,8 +887,6 @@ createToplevel .main
 if {!$::docking::USE_DOCKING} {
   ::splash::add "Docking mode disabled."
   wm withdraw .main ; # gets remapped later
-} else {
-  set ::docking::buggywish [expr [info tclversion] == "8.6"]
 }
 
 ### Scrolledframe.tcl
