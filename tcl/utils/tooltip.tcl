@@ -113,6 +113,7 @@ proc ::utils::tooltip::Check {button} {
 
   # Automatically erase tooltip after a short delay
   after 15000 [ list ::utils::tooltip::Leave $button ]
+  bind [winfo toplevel $button] <Destroy> +[ list ::utils::tooltip::Leave $button ]
 }
 
 

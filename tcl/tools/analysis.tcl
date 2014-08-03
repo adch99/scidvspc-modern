@@ -4227,6 +4227,7 @@ proc popupButtonBar {n} {
 
   bind .t <ButtonRelease-1> {destroy .t}
   bind .t <Leave> {if {"%W" == ".t"} {destroy .t}}
+  bind $w <Destroy> +[list destroy .t]
 
   # handle case when up against right side of screen
   update
