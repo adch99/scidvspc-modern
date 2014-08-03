@@ -4236,8 +4236,14 @@ proc popupButtonBar {n} {
   if {$space < 0} {
     incr X $space
   }
-  wm geometry .t +$X+[expr [winfo rooty $w] - 1]
-  wm state .t normal
+  if {$::windowsOS} {
+    wm state .t normal
+    raise .t
+    wm geometry .t +$X+[expr [winfo rooty $w] - 1]
+  } else {
+    wm geometry .t +$X+[expr [winfo rooty $w] - 1]
+    wm state .t normal
+  }
 }
 
 proc placePopupButton {n} {
