@@ -436,13 +436,13 @@ proc ::maint::Refresh {} {
     $w.delete.$button configure -state $state
     $w.mark.$button configure -state $state
   }
-  $w.db.dups configure -state $state
+  foreach button {dups elo autoload stripcom stripvar zero strip} {
+    $w.db.$button configure -state $state
+  }
   # Looks nicer enabled
   # $w.title.vicon configure -state $state
   $w.title.desc.edit configure -state $state
   $w.title.status.edit configure -state $state
-  $w.db.elo configure -state $state
-  $w.db.autoload configure -state $state
 
   if {[sc_base inUse]} {
     set state normal
@@ -451,7 +451,6 @@ proc ::maint::Refresh {} {
   }
   $w.db.eco configure -state $state
   $w.db.sort configure -state $state
-  $w.db.strip configure -state $state
 
   if {[baseIsCompactable]} {
     set state normal
