@@ -164,8 +164,13 @@ namespace eval pgn {
         -variable ::pgn::indentComments -command {updateBoard -pgn}
     $w.menu.opt add checkbutton -label PgnOptIndentV \
         -variable ::pgn::indentVars -command {updateBoard -pgn}
-    $w.menu.opt add checkbutton -label PgnOptBoldMainLine \
-        -variable ::pgn::boldMainLine -command {updateBoard -pgn}
+    $w.menu.opt add checkbutton -label PgnOptBoldMainLine -variable ::pgn::boldMainLine -command {
+      if { $::pgn::boldMainLine } {
+        .pgnWin.text configure -font font_Bold
+      } else {
+        .pgnWin.text configure -font font_Regular
+      }
+    }
     $w.menu.opt add checkbutton -label PgnOptSpace \
         -variable ::pgn::moveNumberSpaces -command {updateBoard -pgn}
     $w.menu.opt add checkbutton -label PgnOptSymbols \
@@ -562,11 +567,6 @@ namespace eval pgn {
     }
 
     if {$::pgn::showColor} {
-      if { $::pgn::boldMainLine } {
-        .pgnWin.text configure -font font_Bold
-      } else {
-        .pgnWin.text configure -font font_Regular
-      }
       ### set Current tag and adjust text window view if necessary
 
       .pgnWin.text tag remove Current 1.0 end
@@ -582,7 +582,10 @@ namespace eval pgn {
        # many marks and tags within them. </q>
 
        .pgnWin.text see [lindex $moveRange 0]
-       .pgnWin.text see [lindex $moveRange 1]
+       ### Hmmm
+       # .pgnWin.text see [lindex $moveRange 1]
+      } else {
+       .pgnWin.text yview moveto 0
       }
     } else {
       # Highlight current move in text only widget
