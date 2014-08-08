@@ -1595,8 +1595,15 @@ Similarly, the entry-box allows finding a particular game by number. Both these 
 </p>
 <h3>Other Features</h3>
 <ul>
-<li>Pressing Delete removes selected game(s) from filter, Control+Delete toggles 'Delete' flag.</li>
-<li>Control+A selects all visible games. Control+N negates the filter.</li>
+<li>Pressing Delete removes selected game(s) from filter</li>
+<li>Control+Delete - Toggles 'Delete' flag.</li>
+<li>Control+a - Selects all visible games</li>
+<li>Control+n - Negates the filter</li>
+<li>Control+F - Resets the filter</li>
+<li>Control+c - Copies game to clipbase</li>
+<li>Control+v - Pastes game from clipbase to current base</li>
+<li>Control+Enter loads selected game</li>
+<br>
 <li>Resize column widths by dragging the column edge.</li>
 <li>Drag and Drop files in the switcher (from Windows/KDE/Gnome).</li>
 <li>Middle-click the Game List to hide the button bar.</li>

@@ -263,6 +263,8 @@ proc ::windows::gamelist::Open {} {
   bind $w <F1> { helpWindow GameList }
   bind $w <Destroy> { ::windows::gamelist::Close %W}
   bind $w <Control-Tab> {::file::SwitchToNextBase ; break}
+  bind $w <Control-c> copyGame
+  bind $w <Control-v> pasteGame
   catch {
     if {$::windowsOS} {
       bind $w <Shift-Tab> {::file::SwitchToNextBase -1 ; break}
