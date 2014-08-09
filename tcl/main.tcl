@@ -397,6 +397,11 @@ if { $::docking::USE_DOCKING } {
   }
 }
 
+if {$::macOS} {
+  set gameInfo(showMenu) 1
+  .main.gameInfo.menu entryconfigure 0 -state disabled
+}
+
 proc contextmenu {x y} {
   if {$::board::_drag(.main.board) < 0} {
     tk_popup .main.gameInfo.menu $x $y
