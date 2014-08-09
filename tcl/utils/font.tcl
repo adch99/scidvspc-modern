@@ -392,11 +392,13 @@ proc FontBiggerSmaller {incr} {
   set fd_size [font configure font_Regular -size]
   incr fd_size $incr
   if {$fd_size < 5} { set fd_size 5 }
+  set small_size [expr {$fd_size - 2}]
 
   font configure font_Bold -size $fd_size
   font configure font_Regular -size $fd_size
   font configure font_Italic -size $fd_size
   font configure font_BoldItalic -size $fd_size
+  font configure font_Small -size $small_size
   font configure font_H1 -size [expr $fd_size + 8]
   font configure font_H2 -size [expr $fd_size + 6]
   font configure font_H3 -size [expr $fd_size + 4]
@@ -408,6 +410,7 @@ proc FontBiggerSmaller {incr} {
   ::pgn::configTabs
 
   set fontOptions(Regular) [lreplace $fontOptions(Regular) 1 1 $fd_size]
+  set fontOptions(Small) [lreplace $fontOptions(Small) 1 1 $small_size]
 }
 
 proc bindWheeltoFont {w} {
