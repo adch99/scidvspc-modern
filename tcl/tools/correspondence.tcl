@@ -466,22 +466,9 @@ namespace eval Xfcc {
 			append xmlmessage "</GetMyGames>"
 		append xmlmessage $::Xfcc::SOAPend
 
-		#-----------------------------------------------------------
-		# https check
-		# using default port of 443, but should be configurable
-		#
-		if {[regexp -nocase ^(https://)(.*) $uri]} {
-			if {[catch {package require tls}]} {
-				tk_messageBox -title "Xfcc Oops" -type ok -icon warning \
-					-message "tls package not found. Secure https unreachable."
-				return "tls package not found. Secure https unreachable."
-			} else {
-				http::register https 443 ::tls::socket
-			}
+		if {![CheckHTTPS $uri]} {
+			return $NoHTTPS
 		}
-		#-----------------------------------------------------------
-
-
 		# send it to the web service note the space before the charset
 		set token [::http::geturl $uri \
 						-type "text/xml; charset=\"utf-8\"" \
@@ -534,6 +521,9 @@ namespace eval Xfcc {
 			append xmlmessage "</MakeAMove>"
 		append xmlmessage $::Xfcc::SOAPend
 
+		if {![CheckHTTPS $uri]} {
+			return $NoHTTPS
+		}
 		# send it to the web service note the space before the charset
 		set token [::http::geturl $uri \
 						-type "text/xml; charset=\"utf-8\"" \
@@ -1352,6 +1342,9 @@ namespace eval CorrespondenceChess {
 	# Fetch a file via http
 	#----------------------------------------------------------------------
 	proc getPage { url } {
+		if {![CheckHTTPS $url]} {
+			return $NoHTTPS
+		}
 		set token [::http::geturl $url]
 		set data [::http::data $token]
 		::http::cleanup $token
@@ -3913,6 +3906,34 @@ namespace eval CorrespondenceChess {
 		}
 		unbusyCursor .
 	}
+
+	set NoHTTPS {tls package not found. Secure https unreachable.}
+	set SeenHTTPS 0
+
+	proc CheckHTTPS {uri} {
+
+		if {$SeenHTTPS} {
+			return 1
+		}
+
+		### If URI is https, register on default port 443 
+		### todo : make port configurable
+
+		if {[regexp -nocase ^(https://)(.*) $uri]} {
+			if {[catch {package require tls}]} {
+				# Should we announce Failure in the GUI, as the error dialog will be shown elsewhere
+				# tk_messageBox -title "Xfcc Oops" -type ok -icon warning -message $NoHTTPS
+				return 0
+			} else {
+				http::register https 443 ::tls::socket
+				set SeenHTTPS 1
+				return 1
+			}
+		} else {
+			return 1
+		}
+	}
+
 
 	#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	# source the options file to overwrite the above setup
