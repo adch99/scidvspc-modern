@@ -27,8 +27,8 @@ const uint OPTABLE_MAX_ROWS = 20;
 const uint OPTABLE_DEFAULT_ROWS = 10;
 const uint OPTABLE_MAX_EXTRA_MOVES = 10;
 const uint OPLINE_MOVES = (OPTABLE_COLUMNS + OPTABLE_MAX_EXTRA_MOVES) * 2;
-const uint OPTABLE_MAX_LINES = 2000;
-const uint OPTABLE_MAX_TABLE_LINES = 5000;//500;
+const uint OPTABLE_MAX_LINES = 10000;       //2000
+const uint OPTABLE_MAX_TABLE_LINES = 25000; //5000
 const uint OPTABLE_MAX_STARTLINE = 100;
 
 const uint OPTABLE_Text  = 0;
@@ -146,6 +146,7 @@ class OpLine
 class OpTable
 {
   private:
+    uint        Base;
     uint        NumRows;
     uint        TargetRows;
     uint        NumLines;
@@ -211,21 +212,22 @@ class OpTable
   }
 
 #endif 
-    OpTable (const char * type, Game * g, PBook * ecoBook) {
-        Init (type, g, ecoBook);
+    OpTable (uint base, const char * type, Game * g, PBook * ecoBook) {
+        Init (base, type, g, ecoBook);
     }
-    OpTable (const char * type, Game * g) { Init (type, g, NULL); }
+    OpTable (uint base, const char * type, Game * g) { Init (base, type, g, NULL); }
 #ifdef WINCE
     ~OpTable() { Clear();  my_Tcl_Free((char*) Type); }
 #else
     ~OpTable() { Clear();  delete[] Type; }
 #endif
-    void Init (const char * type, Game * g, PBook * ecoBook);
+    void Init (uint base, const char * type, Game * g, PBook * ecoBook);
     void Clear ();
     void ClearNotes ();
     void SetFormat (const char * str);
     void SetDecimalChar (char c) { DecimalChar = c; }
 
+    uint GetBase () { return Base;}
     uint GetTotalCount() { return FilterCount; }
     uint GetTheoryCount() { return TheoryCount; }
 

@@ -437,15 +437,14 @@ proc ::preport::_reset {} {
   set ::preport::_data(subsec) 0
 }
 
-proc ::preport::_title {} {
+proc ::preport::_title {title} {
   set fmt $::preport::_data(fmt)
-  set title $::tr(PReportTitle)
   if {$fmt == "latex"} {
     return "\\begin{center}{\\LARGE \\bf $title}\\end{center}\n\n"
   } elseif {$fmt == "html"} {
-    return "<h1><center>$title</center></h1>\n\n"
+    return "<h2><center>$title</center></h2>\n\n"
   } elseif {$fmt == "ctext"} {
-    return "<h1><center>$title</center></h1>\n\n"
+    return "<h2><center>$title</center></h2>\n\n"
   }
   set r    "--------------------------------------------------------------"
   append r "\n                        [string toupper $title]\n"
@@ -521,10 +520,11 @@ proc ::preport::report {fmt {withTable 1}} {
   set rgames [lindex $counts 0]
   set tgames [lindex $counts 1]
 
-  set r {}
-  append r $::optable::_docStart($fmt)
-  set r [string map [list "\[OprepTitle\]" $tr(PReportTitle)] $r]
-  append r [::preport::_title]
+  set r $::optable::_docStart($fmt)
+  # set r [string map [list "\[OprepTitle\]" $tr(PReportTitle)] $r]
+
+  append r [::preport::_title $::preport::_player]
+
   append r "$tr(Player): \"$::preport::_player\""
   if {$::preport::_color == "white"} {
     append r " $tr(PReportColorWhite)"

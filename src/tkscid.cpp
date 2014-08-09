@@ -13455,6 +13455,12 @@ sc_report (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         return errorResult (ti, "No report has been created yet.");
     }
 
+    if (index != OPT_CREATE && report->GetBase() != currentBase) {
+      return errorResult (ti, "sc_report: please select report base.");
+      // Automatically switching requires updating gui
+      // db = &(dbList[report->GetBase()]);
+    }
+
     switch (index) {
     case OPT_AVGLENGTH:
         if (argc != 4) {
@@ -13685,7 +13691,7 @@ sc_report_create (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     if (reports[reportType] != NULL) {
         delete reports[reportType];
     }
-    OpTable * report = new OpTable (reportTypeName[reportType], db->game, ecoBook);
+    OpTable * report = new OpTable (currentBase, reportTypeName[reportType], db->game, ecoBook);
     reports[reportType] = report;
     report->SetMaxTableLines (maxLines);
     report->SetExcludeMove (excludeMove);

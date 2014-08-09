@@ -463,8 +463,9 @@ OpLine::PrintSummary (DString * dstr, uint format, bool fullDate, bool nmoves)
 
 
 void
-OpTable::Init (const char * type, Game * g, PBook * ebook)
+OpTable::Init (uint base, const char * type, Game * g, PBook * ebook)
 {
+    Base = base;
     Type = strDuplicate (type);
     TargetRows = OPTABLE_DEFAULT_ROWS;
     MaxTableLines = OPTABLE_MAX_TABLE_LINES;
@@ -2086,10 +2087,10 @@ OpTable::PopularMoveOrders (DString * dstr, uint count)
             dstr->Append (MoveOrder[i].id, "; ::windows::stats::Refresh>");
         }
         OpLine::PrintMove (dstr, MoveOrder[i].moves, Format);
-        dstr->Append (preCount, MoveOrder[i].count, postCount);
         if (Format == OPTABLE_CText) {
             dstr->Append ("</run></darkblue></tab>");
         }
+        dstr->Append (preCount, MoveOrder[i].count, postCount);
         dstr->Append (endLine);
     }
     dstr->Append (postList);

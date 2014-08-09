@@ -207,23 +207,23 @@ proc ::optable::makeReportWin {args} {
     ::htext::init $w.text
     scrollbar $w.ybar -command "$w.text yview"
     frame $w.b
-    button $w.b.previewLaTeX -textvar ::tr(OprepViewLaTeX) \
+    button $w.b.previewLaTeX -textvar ::tr(OprepViewLaTeX) -font font_Small \
         -command ::optable::previewLaTeX
-    button $w.b.previewHTML -textvar ::tr(OprepViewHTML) \
+    button $w.b.previewHTML -textvar ::tr(OprepViewHTML) -font font_Small \
         -command ::optable::previewHTML
-    button $w.b.opts -text [tr OprepFileOptions] -command ::optable::setOptions
-    label $w.b.lexclude -text "Exclude:"
-    menubutton $w.b.exclude -textvar ::optable::_data(exclude) \
+    button $w.b.opts -text [tr OprepFileOptions] -command ::optable::setOptions -font font_Small
+    label $w.b.lexclude -text "Exclude:" -font font_Small
+    menubutton $w.b.exclude -textvar ::optable::_data(exclude) -font font_Small \
         -indicatoron 1 -relief raised -bd 2 -menu $w.b.exclude.m -padx 1
     menu $w.b.exclude.m -tearoff 0
-    button $w.b.update -textvar ::tr(Update) -command {
+    button $w.b.update -textvar ::tr(Update) -font font_Small -command {
       set ::optable::_data(yview) [lindex [.oprepWin.text yview] 0]
       ::optable::makeReportWin
       .oprepWin.text yview moveto $::optable::_data(yview)
     }
-    button $w.b.mergeGames -textvar ::tr(MergeGames) -command ::optable::mergeGames
-    button $w.b.help -textvar ::tr(Help) -command {helpWindow Reports Opening}
-    button $w.b.close -textvar ::tr(Close) -command "
+    button $w.b.mergeGames -textvar ::tr(MergeGames) -command ::optable::mergeGames -font font_Small
+    button $w.b.help -textvar ::tr(Help) -command {helpWindow Reports Opening} -font font_Small
+    button $w.b.close -textvar ::tr(Close) -font font_Small -command "
       destroy $w"
     bind $w <Destroy> {
       if {"%W" == ".oprepWin"} {
@@ -234,7 +234,7 @@ proc ::optable::makeReportWin {args} {
 
     bindWheeltoFont $w
 
-    entry $w.b.find -width 10 -textvariable ::oreport(find) -highlightthickness 0
+    entry $w.b.find -width 10 -textvariable ::oreport(find) -highlightthickness 0 -font font_Small
     configFindEntryBox $w.b.find ::oreport .oprepWin.text
 
     pack $w.b -side bottom -fill x
@@ -827,15 +827,14 @@ proc ::optable::_reset {} {
   set ::optable::_data(subsec) 0
 }
 
-proc ::optable::_title {} {
+proc ::optable::_title {title} {
   set fmt $::optable::_data(fmt)
-  set title $::tr(OprepTitle)
   if {$fmt == "latex"} {
     return "\\begin{center}{\\LARGE \\bf $title}\\end{center}\n\n"
   } elseif {$fmt == "html"} {
-    return "<h1><center>$title</center></h1>\n\n"
+    return "<h2><center>$title</center></h2>\n\n"
   } elseif {$fmt == "ctext"} {
-    return "<h1><center>$title</center></h1>\n\n"
+    return "<h2><center>$title</center></h2>\n\n"
   }
   set r    "--------------------------------------------------------------"
   append r "\n                        [string toupper $title]\n"
@@ -916,12 +915,15 @@ proc ::optable::report {fmt withTable {flipPos 0}} {
 
   set r {}
   append r $::optable::_docStart($fmt)
-  set title $::tr(OprepTitle)
-  set r [string map [list "\[OprepTitle\]" $title] $r]
-  append r [::optable::_title]
+  set line [::trans [sc_report opening line]]
+  if {$line == ""} {
+    set line $::tr(OprepTitle)
+    # set r [string map [list "\[OprepTitle\]" $title] $r]
+  }
+  append r [::optable::_title $line]
   append r "$tr(Database): [file tail [sc_base filename]] "
   append r "([::utils::thousands [sc_base numGames]] $games)$n"
-  append r "$tr(OprepReport): [::trans [sc_report opening line]] ("
+  append r "$tr(OprepReport): $line ("
   if {$fmt == "ctext"} {
     append r "<darkblue><run sc_report opening select all 0; ::windows::stats::Refresh>"
   }
@@ -1127,13 +1129,18 @@ proc ::optable::report {fmt withTable {flipPos 0}} {
 
   if {$::optable(Themes) > 0} {
     append r [::optable::_subsec $tr(OprepThemes)]
-    append r [sc_report opening themes $tr(OprepThemeDescription:) \
-        $tr(OprepThemeSameCastling:) $tr(OprepThemeOppCastling:) \
-        $tr(OprepThemeKPawnStorm:) $tr(OprepThemeQueenswap:) \
-        $tr(OprepTheme1BishopPair:) \
-        $tr(OprepThemeWIQP:) $tr(OprepThemeBIQP:) \
-        $tr(OprepThemeWP567:) $tr(OprepThemeBP234:) \
-        $tr(OprepThemeOpenCDE:) ]
+    append r [sc_report opening themes \
+	$tr(OprepThemeDescription) \
+        $tr(OprepThemeSameCastling) \
+	$tr(OprepThemeOppCastling) \
+	$tr(OprepThemeQueenswap) \
+        $tr(OprepTheme1BishopPair) \
+        $tr(OprepThemeKPawnStorm) \
+        $tr(OprepThemeWIQP) \
+	$tr(OprepThemeBIQP) \
+        $tr(OprepThemeWP567) \
+	$tr(OprepThemeBP234) \
+        $tr(OprepThemeOpenCDE) ]
   }
 
   if {$::optable(Endgames) > 0} {
