@@ -232,6 +232,8 @@ proc ::optable::makeReportWin {args} {
       }
     }
 
+    bindWheeltoFont $w
+
     entry $w.b.find -width 10 -textvariable ::oreport(find) -highlightthickness 0
     configFindEntryBox $w.b.find ::oreport .oprepWin.text
 

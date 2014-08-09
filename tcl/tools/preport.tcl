@@ -251,6 +251,7 @@ proc ::preport::makeReportWin {args} {
     bind $w <Key-Home> "$w.text yview moveto 0"
     bind $w <Key-End> "$w.text yview moveto 0.99"
     bindMouseWheel $w $w.text
+    bindWheeltoFont $w
 
     autoscrollframe -bars y $w.scroll text $w.text \
       -height 30 -width 85 -font font_Small -setgrid 1 -wrap word \

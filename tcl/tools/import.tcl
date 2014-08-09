@@ -225,6 +225,8 @@ proc importMoveListTrans {line} {
     set doImport 1
   }
   if {$doImport} {
+    sc_game undoPoint
+
     set line [untrans $line]
     sc_move start
     sc_move addSan $line

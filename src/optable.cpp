@@ -2308,8 +2308,8 @@ OpTable::EndMaterialReport (DString * dstr, const char * repGames,
 //    number, returns an array with two integer elements
 //    for every game in the opening report that matches the
 //    specified theme or note. The type is specified by
-//    the character 'e' for endgame theme, 'o' for opening
-//    theme, or 'n' for note number.
+//    the character 'e' for endgame theme, 't' for opening
+//    theme, 'n' for note number, 'm' for move order, 'a' for all
 //    Each pair of elements contains the game number, and
 //    its start ply. The caller is responsible for deleting
 //    the allocated array, which ends with a (0,0) pair.

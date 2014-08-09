@@ -13744,7 +13744,7 @@ int
 sc_report_select (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
     static const char * usage =
-        "Usage: sc_report opening|player select <op|eg|note> <number>";
+        "Usage: sc_report opening|player select <eg|note|mo|theme|all> <number>";
     if (argc != 5) {
         return errorResult (ti, usage);
     }
@@ -13761,14 +13761,16 @@ sc_report_select (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     uint * matches = report->SelectGames (type, number);
     uint * match = matches;
-    db->filter->Fill (0);
+    db->dbFilter->Fill (0);
     while (*match != 0) {
         uint gnum = *match - 1;
         match++;
         uint ply = *match + 1;
         match++;
-        db->filter->Set (gnum, ply);
+        db->dbFilter->Set (gnum, ply);
     }
+    setMainFilter(db);
+
 #ifdef WINCE
     my_Tcl_Free((char*) matches);
 #else
