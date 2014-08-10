@@ -276,7 +276,7 @@ proc ::maint::Open {} {
   button $w.db.dups    -textvar ::tr(DeleteTwins)     -command "markTwins $w"
   button $w.db.cleaner -textvar ::tr(Cleaner)         -command cleanerWin
   button $w.db.autoload -textvar ::tr(AutoloadGame)   -command "::maint::SetAutoloadGame $w"
-  button $w.db.strip -textvar ::tr(StripTags)         -command "stripTags $w"
+  button $w.db.strip -textvar ::tr(StripTags)         -command "stripExtraTags $w"
 
   button $w.db.stripcom -text "[tr EditStrip] [tr Comments]" -command "stripCommentsVars comments $w"
   button $w.db.stripvar -text "[tr EditStrip] [tr Variations]"   -command "stripCommentsVars variations $w"
@@ -1100,6 +1100,8 @@ proc updateTwinChecker {} {
     }
     # wm resizable $w 0 1
     bind $w <Configure> "recordWinSize $w"
+  } else {
+    raiseWin $w
   }
 
   set gn [sc_game number]
@@ -1594,6 +1596,10 @@ proc baseIsCompactable {} {
 proc makeCompactWin {{parent .}} {
   if {! [baseIsCompactable]} { return }
   set w .compactWin
+  if {[winfo exists $w]} {
+    raiseWin $w
+    return
+  }
   toplevel $w
   wm withdraw $w
   wm title $w "$::tr(CompactDatabase): [file tail [sc_base filename]]"
@@ -1630,6 +1636,8 @@ proc makeCompactWin {{parent .}} {
     grid $w.names.u$n -row $row -column 2 -sticky e
     incr row
   }
+  button $w.names.n -text $::tr(CompactNames) -command compactNames
+  grid $w.names.n -row $row -column 0 -columnspan 3 -pady 5
 
   label $w.games.title -text $::tr(GameFile) -font font_Bold
   grid $w.games.title -columnspan 3 -row 0 -column 0 -sticky n
@@ -1654,14 +1662,19 @@ proc makeCompactWin {{parent .}} {
     grid $w.games.s$g -row $row -column 2 -sticky e
     incr row
   }
+  grid [label $w.games.l1] -row $row -column 1
+    incr row
+  grid [label $w.games.l2] -row $row -column 1
+    incr row
 
-  button $w.buttons.n -text $::tr(CompactNames) -command compactNames
-  button $w.buttons.g -text $::tr(CompactGames) -command "compactGames $w"
+  button $w.games.g -text $::tr(CompactGames) -command "compactGames $w"
+  grid   $w.games.g -row $row -column 0 -columnspan 3 -sticky s -rowspan 4 -pady 5
+
   button $w.buttons.help -text $::tr(Help) -command {helpWindow Compact}
   button $w.buttons.cancel -text $::tr(Close) -command "focus .main ; destroy $w"
-  pack $w.buttons.cancel $w.buttons.help -side right -padx 5 -pady 2
-  pack $w.buttons.n $w.buttons.g -side left -padx 5 -pady 2
+  pack $w.buttons.cancel $w.buttons.help -side right -padx 5 -pady 5
 
+  bind $w <F1> {helpWindow Compact}
   placeWinOverParent $w $parent
   wm state $w normal
 }
@@ -2020,7 +2033,7 @@ proc doAllocateRatings {} {
 
 array set pgnTags {}
 
-proc stripTags {{parent .}} {
+proc stripExtraTags {{parent .}} {
   global pgnTags
   set w .striptags
 
@@ -2132,7 +2145,8 @@ proc zeroTags {{parent .}} {
 
   bind $w <F1> {helpWindow Maintenance Tags}
 
-  label $w.title -text "$::tr(StripTag) ([file tail [sc_base filename]])" -font font_Bold
+  label $w.title -text "$::tr(StripTag) (Unimplemented)" -font font_Bold
+  # label $w.title -text "$::tr(StripTag) ([file tail [sc_base filename]])" -font font_Bold
   pack $w.title -side top
   frame $w.tags
   pack $w.tags -side top -fill both -expand yes

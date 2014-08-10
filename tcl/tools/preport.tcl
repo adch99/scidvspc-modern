@@ -33,6 +33,7 @@ proc ::preport::preportDlg {{player {}}} {
 
   set w .preportDlg
   if {[winfo exists $w]} {
+    raiseWin $w
     return
   }
   toplevel $w
@@ -278,6 +279,8 @@ proc ::preport::makeReportWin {args} {
     placeWinCenter $w
     update
     wm deiconify $w
+  } else {
+    raiseWin $w
   }
 
   busyCursor .

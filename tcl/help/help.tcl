@@ -2283,17 +2283,19 @@ set helpText(TreeMasks) {<h1>Tree Masks</h1>
 set helpTitle(Compact) "Database compaction"
 set helpText(Compact) {<h1>Database Compaction</h1>
   <p>
-  Database <term>compaction</term> is a specific type of
+  Database Compaction is a specific type of
   <a Maintenance>maintenance</a> that keeps a database as small and
   efficient as possible.
   It involves removing any unused space in its files.
-  There are two types: Name File and Game File compaction.
   </p>
+  <p><i>
+  File Compaction is irreversible. After compaction, deleted Names/Games are gone forever.
+  </i></p>
 
   <h3>Name File Compaction</h3>
   <p>
-  Over time, you may find a database starts to contain a number of player,
-  event, site or round names that are no longer used in any game. This will
+  Over time, you may find a database starts to contain a number of Player,
+  Event, Site or Round names that are no longer used in any game. This will
   often happen after you spellcheck names. The unused names waste space in
   the name file, and can slow down name searches.
   Name File compaction removes all names that are not used in any games.
@@ -2303,17 +2305,14 @@ set helpText(Compact) {<h1>Database Compaction</h1>
   <p>
   Whenever a game is replaced or deleted, wasted space is left in the game
   file (the largest of the three files in a Scid Database). Game File
-  compaction removes all wasted space, leaving no deleted games in the
-  database. Note that this operation is irreversible: after compaction,
-  the deleted games are gone forever!
+  compaction removes these deleted games.
   </p>
   <p>
-  Game File compaction is also recommended after <a Sorting>sorting</a> a
-  database, to keep the order of the game file consistent with the sorted
-  Index File.
+  Game File compaction is recommended after a database <a Sorting>sort</a>
+  , to keep the order of the Game File consistent with the sorted Index File.
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.3, December 2010</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.13, August 2014</footer></p>
 }
 
 
@@ -2321,90 +2320,79 @@ set helpTitle(Maintenance) "Database Maintenance"
 set helpText(Maintenance) {<h1>Database Maintenance</h1>
   <p>
   Most Scid Database maintenance can be done from the
-<green><run ::maint::Open>Maintenance Window</b></run></green>
-  (control+m).
-  You can use this window to maintain <a Flags>game flags</a>,
-  <a Maintenance Spellcheck>spellcheck</a> names,
-  compact, and sort databases.
-  </p><p>
-  <i>Note - operations that are not available
-  for the current database (for eg, because it may be read-only,
-  or a PGN file) will be grayed out</i>.
+<green><run ::maint::Open>Maintenance Window</b></run></green> (Control+m).
   </p>
-
-  <h3>Compaction and Sorting</h3>
   <p>
-<a Compact>Compaction</a> and <a Sorting>Sorting</a> features are documented separately.
+  Operations include - <a Flags>Edit Game Flags</a>, <a Maintenance Spellcheck>Spellcheck Names</a>,
+  <a Compact>Compact</a> and <a Sorting>Sort</a> databases, and delete PGN Tags, Comments and Variations.
   </p>
+  <p><i>
+  <a Flags>Flags</a>, <a Compact>Compaction</a> and <a Sorting>Sorting</a> features are documented separately.
+  </i></p>
+
   <h3><name Twins>Deleting Twin Games</name></h3>
   <p>
-  The <run markTwins><green>Delete Twin Games</green></run>
-  feature facilitates removal of duplicate
-  games from the database.  It identifies twins
-  and flags one as deleted.
-  <i>To actually delete the games, you must compact the database.</i>
-  </p>
-  <p>
+  <run markTwins><green>Delete Twin Games</green></run> facilitates removal of duplicate
+  games.  It identifies game twins, and flags one as deleted.
   Two games are considered twins if their Players, and
   any other tags that you specify, exactly match.
-  If you specify the "Same moves" option (strongly recommended)
-  each pair must have the
-  same moves; up to the length of the shorter game , or
-  60 moves maximum.
+  If you specify the "Same moves" option (strongly recommended) each pair must have the
+  same moves; up to the length of the shorter game , or 60 moves maximum.
   </p>
   <p>
   When you have identified twins, it is good practise
-  to confirm they have been correctly marked.
-  Selecting "Set filter to twins to be deleted" 
-  ensures the filter contains the deleted games,
-  and you can browse through them  with the <b>Twin Game Checker</b> window,
+  to confirm they have been correctly marked. Selecting "Set filter to twins to be deleted" 
+  allows easy perusal through the <b>Twin Game Checker</b> window
   (which automatically appears). Here, tag differences are highlighted, and
-  Scid vs. PC also shows a inline comparison of game variations and comments.
+  Scid vs. PC shows a inline comparison of game variations and comments.
   </p>
   <p>
   Use the Arrow Keys to progress through the games, "1", "2" and "t" keys to
   toggle the Delete Fields, and "u" to Undelete both games.
+  </p>
+  <p>
+  <i>To actually delete the games, you must <a Compact>compact</a> the database.</i>
   </p>
 
   <h3><name Editing>Editing Names</name></h3>
   <p>
   The 
   <run nameEditor><green>Name Editor</green></run>
-  is a tool to selectively edit entity names.
+  is a tool to selectively edit entity names (eg Player names).
   </p>
   <p>
   Each unique name is only stored once in the <a Formats>name file</a>, so changing a name
   actually changes all occurrences of it. Similarly, some names in the name file may not actually be used. To remove such names, 
-perform a Namebase <a Compact>Compaction</a>.
+perform a <a Compact>namebase compaction</a>.
   </p>
   <p>
   An single asterisk '*' may be used to match <b>any</b> name. This global substitution is only available for 
-  the EVENT, SITE and ROUND names - not the PLAYER, ELO or DATE names.
+  the Event, Site and Round names - not the Player, Elo or Date names.
   </p>
   <p>
-  DATE and EVENTDATE fields must be of the form YYYY.MM.DD (year, month, day)
+  Date and Eventdate fields must be of the form YYYY.MM.DD (year, month, day)
   </p>
   <p>
-  <i>Please take care when using the Name Editor. Changes are not properly undoable if the "With" name already exists. There is also a safety mechanism - Using '*' or '?' is not allowed with 'All games in database'.</i>
+  <i>Please take care when using the Name Editor. Changes are not properly undoable if the new name already exists. There is also a safety mechanism - Using '*' or '?' is not allowed with 'All games in database'.</i>
   </p>
 
-  <h3><name Spellfile>Spell Check File</name></h3>
+  <h3><name Spellfile>Spellcheck File</name></h3>
   <p>
   The spellcheck file <b>spelling.ssp</b> contains information about Player Names, Titles, Birth & Death dates, and Country(s) of origin.
   <b>Please use with caution</b>. The names it contains may not be
   unique, and player initials may be incorrectly identified.
-  It is also possible to substitute the larger <b>ratings.ssp</b>, which additionally includes Elo ratings and FIDE Biographical data.
+  It is also possible to substitute the larger <b>ratings.ssp</b>, which includes Elo ratings and FIDE Biographical data.
   </p>
   <p>
   The file should be loaded on startup, or can be <run
   readSpellCheckFile><green>loaded manually</green></run>.<i>
-  Updated versions are available at
-  <url http://linweb.ris.at/~nagl/index.html>http://linweb.ris.at/~nagl/index.html</url>.
+  Updated versions are available at the
+  <url http://sourceforge.net/projects/scid/files/Player%20Data/>Scid Website</url>.
   </i></p>
   
   <h3><name Spellcheck>Spell Checking</name></h3>
   <p>
-  Scid's Spell Checking feature is used to standardize <b>Player</b>, <b>Event</b>, <b>Site</b> and <b>Round</b> names throughout a database.
+  Scid's Spell Checking feature is used to standardize Player, Event, Site and Round names throughout a database.
   To do so, the <a Maintenance Spellfile>spelling.ssp</a> file must be loaded.
   </p>
   <p>
@@ -2471,10 +2459,11 @@ For example - the first two examples remove four digit ELOs from player names. T
   using the Maintenance <b>Autoload game</b> feature. 
   <i>Note: Because of design of si4 header, this number's upper limit is 16,777,214 (Approximately 2^(8*3)).</i>
   </p>
+  </p>
 
-  <h3><name Tags>Strip Tags</name></h3>
+  <h3><name Tags>Strip Comments/Variations</name></h3>
   <p>
-  This feature zeros some of the less important PGN tags such as WhiteELO, EventDate, etc.
+  <b>Use with caution</b>. Bulk stripping Comments and Variations cannot be undone.
   </p>
 
   <h3><name Tags>Strip Extra Tags</name></h3>
@@ -2503,14 +2492,14 @@ For example - the first two examples remove four digit ELOs from player names. T
 
   <h3>Repair a Base</h3>
   <p>
-  In the rare cases that a Scid Database is corrupted one might try to
-  repair it using File--<gt>Maintanance--<gt>Repair base. For this to work,
+  In the rare case that a Scid Database is corrupted, one might try to
+  repair it using Tools--<gt>Maintanance--<gt>Repair base. For this to work,
   the base in question must not be opened (which is not possible in
   most cases anyway). Scid will then try its best to get the database
   back in a consistent and usable state.
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.9, December 2012</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.13, August 2014</footer></p>
 }
 
 set helpTitle(Sorting) "Sorting a database"

@@ -519,6 +519,9 @@ set helpMessage($m,[incr menuindex]) ToolsMaint
 $m.utils add command -label ToolsMaintWin -accelerator "control-m" -command ::maint::Open
 set helpMessage($m.utils,0) ToolsMaintWin
 
+$m.utils add command -label ToolsMaintNameEditor -command nameEditor 
+set helpMessage($m.utils,0) ToolsMaintNameEditor
+
 $m.utils add command -label ToolsMaintCompact -command makeCompactWin
 set helpMessage($m.utils,1) ToolsMaintCompact
 
@@ -526,9 +529,6 @@ $m.utils add command -label ToolsMaintSort -command makeSortWin
 set helpMessage($m.utils,3) ToolsMaintSort
 
 $m.utils add separator
-
-$m.utils add command -label ToolsMaintNameEditor -command nameEditor 
-set helpMessage($m.utils,0) ToolsMaintNameEditor
 
 $m.utils add command -label ToolsMaintNamePlayer -command {openSpellCheckWin Player}
 set helpMessage($m.utils,1) ToolsMaintNamePlayer
@@ -551,9 +551,6 @@ $m.utils add command -label ToolsMaintTwin -command updateTwinChecker
 set helpMessage($m.utils,6) ToolsMaintTwin
 
 $m.utils add separator
-
-$m.utils add command -label ToolsMaintClass -command classifyAllGames
-set helpMessage($m.utils,2) ToolsMaintClass
 
 $m.utils add command -label ToolsMaintFixBase -command ::maint::fixCorruptedBase
 set helpMessage($m.utils,10) ToolsMaintFixBase
@@ -1453,7 +1450,7 @@ proc setLanguageMenus {{lang ""}} {
     configMenuText .menu.tools [tr Tools$tag $oldLang] Tools$tag $lang
   }
 
-  foreach tag {Win Compact Delete Twin Class Sort FixBase} {
+  foreach tag {Win Compact Delete Twin Sort FixBase} {
     # Maintenance used to be in .menu.file but is now in .menu.tools
     configMenuText .menu.tools.utils [tr ToolsMaint$tag $oldLang] \
         ToolsMaint$tag $lang

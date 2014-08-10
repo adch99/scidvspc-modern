@@ -1261,7 +1261,7 @@ translate E GameFile {Game file}
 translate E Names {Names}
 translate E Unused {Unused}
 translate E SizeKb {Size (kb)}
-translate E CurrentState {Current State}
+translate E CurrentState {Current state}
 translate E AfterCompaction {After compaction}
 translate E CompactNames {Compact Name file}
 translate E CompactGames {Compact Game file}
