@@ -746,7 +746,16 @@ void
 Crosstable::PrintPerformance (DString * dstr, playerDataT * pdata)
 {
     if (!PrintRatings) { return; }
-    if (!pdata->oppEloCount) { return; }
+    if (!pdata->oppEloCount) {
+      if (PrintTallies) {
+	if (OutputFormat == CROSSTABLE_Html) {
+	  dstr->Append (StartRightCol, "     -     ", EndRightCol);
+	} else {
+	  dstr->Append (StartRightCol, "           ", EndRightCol);
+	}
+      }
+      return;
+    }
 
     int oppAvgRating = pdata->oppEloTotal / pdata->oppEloCount;
     int percentage = pdata->oppEloScore * 50 + pdata->oppEloCount/2;
