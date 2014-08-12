@@ -254,6 +254,8 @@ proc ::docking::start_motion {path x y} {
   }
 
   if {[catch {$path tab @$x,$y}]} {
+    # stop errant dragging
+    set c_path {}
     return
   }
   # hmmm ??
