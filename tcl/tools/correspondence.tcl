@@ -466,8 +466,8 @@ namespace eval Xfcc {
 			append xmlmessage "</GetMyGames>"
 		append xmlmessage $::Xfcc::SOAPend
 
-		if {![CheckHTTPS $uri]} {
-			return $NoHTTPS
+		if {![::CorrespondenceChess::CheckHTTPS $uri]} {
+			return $::CorrespondenceChess::NoHTTPS
 		}
 		# send it to the web service note the space before the charset
 		set token [::http::geturl $uri \
@@ -521,8 +521,8 @@ namespace eval Xfcc {
 			append xmlmessage "</MakeAMove>"
 		append xmlmessage $::Xfcc::SOAPend
 
-		if {![CheckHTTPS $uri]} {
-			return $NoHTTPS
+		if {![::CorrespondenceChess::CheckHTTPS $uri]} {
+			return $::CorrespondenceChess::NoHTTPS
 		}
 		# send it to the web service note the space before the charset
 		set token [::http::geturl $uri \
@@ -1342,8 +1342,8 @@ namespace eval CorrespondenceChess {
 	# Fetch a file via http
 	#----------------------------------------------------------------------
 	proc getPage { url } {
-		if {![CheckHTTPS $url]} {
-			return $NoHTTPS
+		if {![::CorrespondenceChess::CheckHTTPS $url]} {
+			return $::CorrespondenceChess::NoHTTPS
 		}
 		set token [::http::geturl $url]
 		set data [::http::data $token]
@@ -3912,7 +3912,7 @@ namespace eval CorrespondenceChess {
 
 	proc CheckHTTPS {uri} {
 
-		if {$SeenHTTPS} {
+		if {$::CorrespondenceChess::SeenHTTPS} {
 			return 1
 		}
 
@@ -3926,7 +3926,7 @@ namespace eval CorrespondenceChess {
 				return 0
 			} else {
 				http::register https 443 ::tls::socket
-				set SeenHTTPS 1
+				set ::CorrespondenceChess::SeenHTTPS 1
 				return 1
 			}
 		} else {
