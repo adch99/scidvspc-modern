@@ -598,7 +598,7 @@ namespace eval pgn {
        ### Hmmm
        # .pgnWin.text see [lindex $moveRange 1]
       } else {
-       .pgnWin.text yview moveto 0
+       # .pgnWin.text yview moveto 0
       }
     } else {
       # Highlight current move in text only widget
