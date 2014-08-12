@@ -167,8 +167,14 @@ namespace eval pgn {
     $w.menu.opt add checkbutton -label PgnOptBoldMainLine -variable ::pgn::boldMainLine -command {
       if { $::pgn::boldMainLine } {
         .pgnWin.text configure -font font_Bold
+        # unhandled
+        # .pgnWin.text tag configure c -fore $::pgnColor(Comment) -font font_Regular
+        .pgnWin.text tag configure nag -fore $::pgnColor(Nag) -font font_Regular
+        .pgnWin.text tag configure var -fore $::pgnColor(Var) -font font_Regular
       } else {
         .pgnWin.text configure -font font_Regular
+        .pgnWin.text tag configure nag -fore $::pgnColor(Nag)
+        .pgnWin.text tag configure var -fore $::pgnColor(Var)
       }
     }
     $w.menu.opt add checkbutton -label PgnOptSpace \
@@ -465,6 +471,10 @@ namespace eval pgn {
     set bd [sc_pos board]
     sc_game pop
 
+    if {[::board::isFlipped .main.board]} {
+      set bd [string reverse [lindex $bd 0]]
+    }
+
     set w .pgnPopup
     set psize 30
     if {$psize > $::boardSize} { set psize $::boardSize }
@@ -503,7 +513,10 @@ namespace eval pgn {
   #
   ################################################################################
   proc HideBoard {} {
-    wm withdraw .pgnPopup
+    if {[winfo exists .pgnPopup]} {
+      wm withdraw .pgnPopup
+      focus .pgnWin
+    }
   }
 
   ################################################################################
