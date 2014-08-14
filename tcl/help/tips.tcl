@@ -7,6 +7,7 @@ proc ::tip::show {{n -1}} {
 
   if {! [winfo exists .tipsWin]} {
     toplevel $w
+    wm withdraw $w
     wm title $w "[tr HelpTip]"
     pack [frame $w.b] -side bottom -fill x
     text $w.text -cursor top_left_arrow -width 40 -height 8 -setgrid 1 \
@@ -32,8 +33,10 @@ proc ::tip::show {{n -1}} {
     bind $w <Key-End> "$w.text yview moveto 0.99"
     bind $w <Escape> "$w.b.close invoke"
     placeWinCenter $w
+    wm deiconify $w
+  } else {
+    raiseWin $w
   }
-  raiseWin $w
   $w.text configure -state normal
   $w.text delete 1.0 end
   if {[info exists tips($language)]} {
