@@ -485,7 +485,6 @@ namespace eval pgn {
       wm overrideredirect $w 1
       ::board::new $w.bd $psize
       pack $w.bd -side top -padx 2 -pady 2
-      wm withdraw $w
     }
     ::board::update $w.bd $bd
 

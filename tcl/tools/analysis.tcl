@@ -2203,7 +2203,7 @@ proc makeAnalysisWin {{n 0} {options {}}} {
   set relief flat	; # -width 32 -height 32
 
   # start/stop engine analysis
-  button $w.b.startStop -command "toggleEngineAnalysis $n" -relief $relief
+  button $w.b.startStop -command "toggleEngineAnalysis $n" -relief $relief -width 30 -height 30
   bind $w.b.startStop <Control-Button-1> "toggleEngineAnalysis $n ; break"
 
   if {$fics::playing == 1 || $fics::playing == -1} {
@@ -2221,7 +2221,7 @@ proc makeAnalysisWin {{n 0} {options {}}} {
     ::utils::tooltip::Set $w.b.startStop "$::tr(StartEngine)"
   }
 
-  button $w.b.move -image tb_addmove -command "makeAnalysisMove $n" -relief $relief
+  button $w.b.move -image tb_addmove -command "makeAnalysisMove $n" -relief $relief -width 30 -height 30
   ::utils::tooltip::Set $w.b.move $::tr(AddMove)
   bind $w.b.move <Button-3> "addAnalysisScore $n"
 
