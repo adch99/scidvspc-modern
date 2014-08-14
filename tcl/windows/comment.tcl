@@ -566,7 +566,6 @@ proc ::commenteditor::Refresh {} {
   }
   $text insert insert [string range $comment $offset end]
   $text mark set insert 1.0 ; # Set cursor to the top
-  ::board::update $board [sc_pos board]
 
   .commentWin.cf.text configure -undo 1
 }
