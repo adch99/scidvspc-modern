@@ -344,9 +344,9 @@ proc ::crosstab::Refresh {} {
   $w.f.text delete 1.0 end
   busyCursor .
   $w.f.text configure -state disabled
-  ### Stop button is broken currently - S.A.
-  ### And any purpose for these two updates ??
-  # update idle
+  ### Stop button is broken currently 
+  ### We need to implement it via sc_progressBar
+  update idle
   # $w.b.stop configure -state normal
   foreach button {update cancel setfilter addfilter} {
     $w.b.$button configure -state disabled

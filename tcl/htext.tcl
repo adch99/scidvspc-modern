@@ -529,18 +529,16 @@ proc ::htext::display {w helptext {section {}} {fixed 1}} {
     # set str [string replace $str 0 $endPos]
     incr count
 
-    ### What purpose this ? It (was) always set to 60 in pgn.tcl
+    ### This is meant to allow interrupts, but doesnt work
     ### but is very bad for performance with big pgn files
     # if {$count == $::htext::updates($w)} {
     #   update idletasks
     #   set count 1
     # }
-
-    if {$::htext::interrupt} {
-      # wtf... Only used by the crosstable ?
-      $w configure -state disabled
-      return
-    }
+    # if {$::htext::interrupt} {
+    #   $w configure -state disabled
+    #   return
+    # }
   }
 
   # Add any remaining text

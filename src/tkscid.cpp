@@ -6118,6 +6118,7 @@ sc_game_crosstable (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
         OPT_PLAIN, OPT_HTML, OPT_HYPERTEXT, OPT_LATEX, OPT_FILTER, OPT_COUNT
     };
     int option = -1;
+    char stemp[1000];
 
     const char * usageMsg =
         "Usage: sc_game crosstable plain|html|hypertext|filter|count [name|rating|score|country] [allplay|swiss] [(+|-)(colors|countries|tallies|ratings|titles|groups|breaks|numcolumns)] [-gameNumber GAME|-round ROUND]";
@@ -6368,7 +6369,8 @@ sc_game_crosstable (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
         {
             if (! tableFullMessage) {
                 tableFullMessage = true;
-                Tcl_AppendResult (ti, "Warning: Player limit reached; table is incomplete\n\n", NULL);
+		sprintf (stemp, "<red>Player limit of %u reached. Table is incomplete</red>\n\n", CROSSTABLE_MaxPlayers);
+                Tcl_AppendResult (ti, stemp, NULL);
             }
             continue;
         }
@@ -6415,7 +6417,6 @@ sc_game_crosstable (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
         Tcl_AppendResult (ti, "Warning: Too many players for all-play-all; try displaying as a swiss tournament.\n\n", NULL);
     }
 
-    char stemp[1000];
     sprintf (stemp, "%s%s%s, ", g->GetEventStr(), newlineStr, g->GetSiteStr());
     Tcl_AppendResult (ti, stemp, NULL);
     date_DecodeToString (firstSeenDate, stemp);

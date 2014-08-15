@@ -256,7 +256,8 @@ proc refreshWindows {} {
   # done in updateBoard
   # ::tree::refresh
   ::windows::stats::Refresh
-  ::crosstab::Refresh
+  # too slow to refresh all the time
+  # ::crosstab::Refresh
   ::plist::refresh
   ::tourney::refresh
   updateMenuStates

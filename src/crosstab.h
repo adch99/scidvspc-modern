@@ -24,8 +24,8 @@
 #include "namebase.h"
 #include "spellchk.h"
 
-const uint CROSSTABLE_MaxPlayers = 500;  // Max. number of players.
-const uint CROSSTABLE_MaxRounds =   60;  // Max. number of Swiss event rounds.
+const uint CROSSTABLE_MaxPlayers = 1000;  // Max. number of players.
+const uint CROSSTABLE_MaxRounds =    60;  // Max. number of Swiss event rounds.
 
 struct clashT
 {
