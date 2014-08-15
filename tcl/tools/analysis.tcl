@@ -103,7 +103,7 @@ proc resetEngine {n} {
   set analysis(lastHistory$n) {}      ;# last best line
   set analysis(maxmovenumber$n) 0     ;# the number of moves in this position
   set analysis(lockEngine$n) 0        ;# the engine is locked to current position
-  set analysis(side) {}
+  set analysis(side$n) {}
   set analysis(lockPos$n) {} 
   set analysis(lockFen$n) {}
   set analysis(startpos$n) ""         ;# the startpos/fen for game. Uninit-ed
@@ -1868,7 +1868,7 @@ proc makeAnalysisMove {n} {
     sc_game undoPoint
   }
 
-  if {$action == "var"} {
+  if {$action == "mainline" || $action == "var"} {
     sc_var create
   }
 
@@ -1881,6 +1881,11 @@ proc makeAnalysisMove {n} {
   } else {
     ::fics::checkAdd
     puts_ "ENGINE $n moves $move"
+    if {$action == "mainline"} {
+      sc_var exit
+      sc_var promote [expr {[sc_var count] - 1}]
+      sc_move forward 1
+    }
   }
     
   update idletasks ; # fixes tournament issues ?

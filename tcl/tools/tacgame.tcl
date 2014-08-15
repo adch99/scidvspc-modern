@@ -851,16 +851,19 @@ namespace eval tacgame {
           set action "replace"
           if {![sc_pos isAt vend]} { set action [confirmReplaceMove] }
           if {$action == "replace"} {
-            if {[catch {sc_move addSan $move}]} {}
+            catch {sc_move addSan $move}
           } elseif {$action == "var"} {
             sc_var create
-            if {[catch {sc_move addSan $move}]} {}
+            catch {sc_move addSan $move}
           } elseif {$action == "mainline"} {
             sc_var create
-            if {[catch {sc_move addSan $move}]} {}
-            sc_var exit
-            sc_var promote [expr {[sc_var count] - 1}]
-            sc_move forward 1
+	    if {[catch {sc_move addSan $move}]} {
+               puts "tacgame.tcl oops - sc_move addSan $move failed."
+            } else {
+	      sc_var exit
+	      sc_var promote [expr {[sc_var count] - 1}]
+	      sc_move forward 1
+            }
           }
           
           ::utils::sound::AnnounceNewMove $move
