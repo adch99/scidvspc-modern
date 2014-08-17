@@ -1851,7 +1851,7 @@ proc fullname {fname} {
 }
 
 # Loading a database if specified on the command line:
-# Need to check file type: .epd, .pgn, etc
+# Need to check file type: .epd, .pgn, .pgn.gz, etc
 
 while {$argc > 0} {
   set arg [lindex $argv 0]
@@ -1962,7 +1962,9 @@ while {$argc > 0} {
     ::splash::add "Opening database: $startbase ..."
     set err 0
     set errMessage ""
-    if {[string match "*.pgn" $startbase] || [string match "*.PGN" $startbase] } {
+    if {[string match "*.pgn" $startbase] || \
+          [string match "*.PGN" $startbase] || \
+          [string match "*.pgn.gz" $startbase]} {
       set err [catch {sc_base create $startbase true} errMessage]
       if {$err == 0} {
         set err [catch {

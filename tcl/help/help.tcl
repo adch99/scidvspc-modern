@@ -493,9 +493,9 @@ set helpText(Hints) {<h1>Scid Hints</h1>
   Only by adding databases, PGN files or <a EPD>EPD files</a>
   to the command line. For example:
   <ul>
-  <li> <b>scid  mybase  games.pgn</b> </li>
+  <li> <b>scid  mybase  games.pgn.gz</b> </li>
   </ul>
-  will load the database <b>mybase</b> and the PGN file <b>games.pgn</b>.
+  will load the database <b>mybase</b> and the gziped PGN file <b>games.pgn.gz</b>.
   </p>
 
   <h4>How can i change the board size?</h4>
@@ -3625,6 +3625,11 @@ set helpText(Pgnscid) {<h1>Pgnscid</h1>
   </ul>
   creates a database consisting of the files "mybase.si4",
   "mybase.sg4" and "mybase.sn4".
+  </p>
+  <p>
+  Scid and Pgnscid can also read <b>gzipped</b> PGN files directly.
+  So large files compressed with gzip (such as "mybase.pgn.gz"),
+  do not have to be gunzipped first.
   </p>
 
   <h3>Options</h3>
