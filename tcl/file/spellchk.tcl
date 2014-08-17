@@ -54,7 +54,7 @@ proc updateSpellCheckWin {type} {
 
 proc openSpellCheckWin {type {parent .}} {
   global spellcheckType spell_maxCorrections spellcheckSurnames
-  global spellcheckAmbiguous
+  global spellcheckAmbiguous spellcheckFind
   set w .spellcheckWin
   if {[winfo exists $w]} {
     raiseWin $w
@@ -131,7 +131,10 @@ proc openSpellCheckWin {type {parent .}} {
 
   button $f.help -textvar ::tr(Help) -command {helpWindow Maintenance Spellcheck}
 
-  pack $f.cancel $f.help $f.ok -side right -padx 5
+  entry $f.find -width 10 -textvariable spellcheckFind(find) -font font_Small -highlightthickness 0
+  # configured below
+
+  pack $f.cancel $f.find $f.help $f.ok -side right -padx 2
 
   set f [frame $w.text]
   pack $w.text -expand yes -fill both
@@ -140,6 +143,8 @@ proc openSpellCheckWin {type {parent .}} {
   text $f.text -yscrollcommand "$f.ybar set" -xscrollcommand "$f.xbar set" \
     -setgrid 1 -width $::winWidth($w) -height $::winHeight($w) \
      -wrap none -undo 1
+
+  configFindEntryBox $w.buttons.find spellcheckFind $f.text
 
   # Undo and redo bindings
   bind $f.text <Control-z> {catch {.spellcheckWin.text.text edit undo} ; break}
