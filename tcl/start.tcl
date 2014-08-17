@@ -1531,17 +1531,37 @@ proc nextFindEntryBox {entry var text} {
     }
     $text tag remove Highlight 1.0 end
 
-    set result [$text search -nocase -- $topvar(find) $topvar(findindex)]
+    if {[catch {
+          set result [$text search -regexp -nocase -- $topvar(find) $topvar(findindex)]
+        }]} {
+      flashEntryBox $entry
+      return
+    }
     if {$result == {}} {
       set topvar(findindex) 1.0
       bell
     } else {
       if {[ regexp {(.*)\.(.*)} $result t1 line char]} {
-	$text see $result
-	$text tag add Highlight $result $line.[expr $char + [string length $topvar(find)]]
-	set topvar(findindex) $line.[expr $char + 1]
+        $text see $result
+        # find the length of matching text
+        regexp -nocase -- $topvar(find) [$text get $line.0 $line.end] matchVar
+        set length [string length $matchVar]
+        if {$length < 1} {
+          set length 1
+        }
+        $text tag add Highlight $result $line.[expr $char + $length]
+        set topvar(findindex) $line.[expr $char + 1]
       } ;# should always succeed ?
     }
+}
+
+### [bell] doesnt work on all platforms (esp. Linux), so make our own
+
+proc flashEntryBox {w} {
+      set bg [$w cget -background]
+      set fg [$w cget -foreground]
+      $w configure -background $fg -foreground $bg
+      after 200 "$w configure -background $bg -foreground $fg"
 }
 
 ### Start up splash window

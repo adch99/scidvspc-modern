@@ -165,11 +165,7 @@ proc ::windows::gamelist::showNum {index {bell 1}} {
      || $result < 1 \
      || $result > [sc_filter count]} {
     if {$bell==1} {
-      # I dont think [bell] works, so make our own
-      set bg [.glistWin.c.goto cget -background]
-      set fg [.glistWin.c.goto cget -foreground]
-      .glistWin.c.goto configure -background $fg -foreground $bg
-      after 200 ".glistWin.c.goto configure -background $bg -foreground $fg"
+      flashEntryBox .glistWin.c.goto
     }
     .glistWin.tree selection set {}
   } else {
