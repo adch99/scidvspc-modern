@@ -136,7 +136,7 @@ proc ::crosstab::Open {} {
           -message "Unable to save the file: $fname\n\n"
       } else {
         catch {sc_game crosstable latex $crosstab(sort) $crosstab(type) \
-                 $crosstab(ratings) $crosstab(countries) $$crosstab(tallies) $crosstab(titles) \
+                 $crosstab(ratings) $crosstab(countries) $crosstab(tallies) $crosstab(titles) \
                  $crosstab(colors) $crosstab(groups) $crosstab(ages) \
                  $crosstab(breaks) $crosstab(cnumbers) $crosstab(deleted) $crosstab(threewin) $crosstab(tiewin) $crosstab(tiehead)} \
           result
