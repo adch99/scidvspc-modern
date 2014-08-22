@@ -2233,6 +2233,7 @@ proc makeAnalysisWin {{n 0} {options {}}} {
   if {$::macOS} {
     $w.b.startStop configure -width 30 -height 30
     $w.b.move      configure -width 30 -height 30
+    $w.b.help      configure -width 30 -height 30
   }
 
   button $w.b.line -image tb_addvar -command "addAnalysisVariation $n" -relief $relief
@@ -2294,7 +2295,7 @@ proc makeAnalysisWin {{n 0} {options {}}} {
     -command "toggleAutomove $n" -variable analysis(automove$n) -relief $relief
   ::utils::tooltip::Set $w.b.training $::tr(Training)
 
-  button $w.b.help -image tb_help  -command {helpWindow Analysis} -relief $relief -width 32 -height 32
+  button $w.b.help -image tb_help  -command {helpWindow Analysis} -relief $relief
   ::utils::tooltip::Set $w.b.help $::tr(Help)
 
   pack $w.b.startStop $w.b.move $w.b.line $w.b.alllines \
@@ -4039,7 +4040,7 @@ kDVQECgR2gAKwAmxg2KU/YF2EIFLDAvayp1Lt67du4UCAQA7
 }
 
 image create photo tb_lockengine -data {
-R0lGODlhHgAeAOdEAAAAAHxrR4BuSH9vToFyUYJyUoN1VYR3WYN4XYN4XoJ6
+R0lGODlhHgAeAOeZAAAAAHxrR4BuSH9vToFyUYJyUoN1VYR3WYN4XYN4XoJ6
 ZIJ7Z4F9dI9+XZiEXF+NzmqMu4yIdI6IcJuHXZiHZpuHXpyIX4+Jf4eLkJuJ
 aJ6KY52ManiTtqKNZKKOZZCQjKCObaSPZ3yVtX6VtIGWsaOTcqOTc5KWlZSX
 mqWWd4OdwKeZfKiZfJ+akKKbiHGj5amcgoqhv5OgsY+huZ2fo5ahsJSitaug
@@ -4049,21 +4050,23 @@ lbi4uMi3lc23jcu4lM64jbq6ure8wry8vL29vdK8kr2/wdW+ksHBwdfBl9vE
 mMfHx8bIysXIzd3In8rKyuDJnd/KosvNz83Nzc7Ozs7Oz+HOqePOpubQptLS
 0tTU1OjSqeXUs9bW1ufVs+rXsevXsevXstnZ2tra2tvb2+navdzc3N3d3e3c
 vd7e3u/evPHfu+3hx+Li4vDhxOPj4+/iyPTkx/Tlx/TmzPHn0fbq0/js0u3t
-7frt0/ju2fju2u/v7/nw3fLy8vzz3aKnraKnraKnraKnraKnraKnraKnraKn
-raKnraKnraKnraKnraKnraKnraKnraKnraKnraKnraKnraKnraKnraKnraKn
-raKnraKnraKnraKnraKnraKnraKnraKnraKnraKnraKnraKnraKnraKnraKn
-raKnraKnraKnraKnraKnraKnraKnraKnraKnraKnraKnraKnraKnraKnraKn
-raKnraKnraKnraKnraKnraKnraKnraKnraKnraKnraKnraKnraKnraKnraKn
-raKnraKnraKnraKnraKnraKnraKnraKnraKnraKnraKnraKnraKnraKnraKn
-raKnraKnraKnraKnraKnraKnraKnraKnraKnraKnraKnraKnraKnraKnraKn
-raKnraKnraKnraKnraKnrSH5BAEKAP8ALAAAAAAeAB4AAAj+AP8JHEiwoMGD
-CBMqXMiwocOHDc+YmQgRIRdAlSpFupRISkWCRAbxIUKSCJtDRD4KLPNmREEw
-dJZ8JOImiUEic2RWFHKnhkESbbZ8FALIxs00Xj7SCMTDoIoyVj5icCPjZhcg
-Hxn4+GDwRIsLEC0gmVKFyhMnUKA4eRLlSpYmIRY0rGAkDJk4ghpNskTpEaI9
-crR4UDC3Lhk1dQpJwgSJESE9gT0kKGwXsWLGjvNERkD5cOLFjQlpFsyZId3K
-nzGLjnygs2XQi1YLbm3a8GvGsUd7MOA6dWjdBHpf/h24Q3CGE2z7zl1cQEMH
-PbB8GbMGjyJHhv7YgYOGiYYADQcZNMiwAYQJFjh+3ICxIkUJCgU0qJxPv77D
-gAA7
+7frt0/ju2fju2u/v7/nw3fLy8vzz3f//////////////////////////////
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+/////////////////////yH5BAEKAP8ALAAAAAAeAB4AAAj+AP8JHEiwoMGD
+CBMqXMiw4UIuEKVAdIiwhpQzgy5dSnQmSQ2KBGUkiaSxpEYuRPqA5CKjJEcu
+dxJVunSECEgMhy5FOoMBBYaebDRiEOPwyBGNbDAQKcMUBQo3l4igCNQQw5lL
+h2SgKANI4B0UNCrRYeCmKp1LgzAsKTvQaZ9LDMqYjTQHwxaDKOZEiluVTaI3
+dvG2ScSX4dA+ZRh4MYihTB8GRBlaQDKlCpUnTqBAcfIkypUsTUJAaVjBSBgy
+cQQ1mmSJ0iNEe+Ro8YCEtGkyauoUkoQJEiNCemR7gHGHYenTuXf3/p1HOHHj
+t5Pz9k2o+WwXxRcex617OnPhF/hyQEfevfei6sI/0BnPXTmk89Y9fBCvPXp5
+6vEvqKxP3v13LR3Mx9AE9rkHn2wBrreQAz1g8cUYa+ChiCOG/GEHHGgwoYGA
+Cw3QQAYbgGACCzj8cAMMK6RQAgUF3MWQGGKUIQYbMcIoxhY2xqggSDz22FBA
+ADs=
 }
 
 image create photo uci -data {
@@ -4085,9 +4088,12 @@ ObRQqkIAHoRAccFmPXsPHkC8uvAe16+NAgEAOw==
 }
 
 image creat photo tb_info -data {
-R0lGODlhHgAeAKECACUhIVNTU////////yH5BAEKAAIALAAAAAAeAB4AAAIy
-lI+py+0Po5y02osn2Flt0IXimH3cGHxkeoosiKpxG76r7OK13tkznKOVTECS
-8Yi0FAAAOw==
+R0lGODlhHgAeAIQXAERq5ERu5FR25FR65Fx+5GSG5HSS7HyW7Iyi7Iym7JSq
+7JSu7Jyu7KS69Ky69Ky+9LTC9LzK9MTS9NTi/Ozy/PT2/Pz+/P//////////
+/////////////////////////yH5BAEKAB8ALAAAAAAeAB4AAAVi4CeOZGme
+aKqubOu+7EMISAWjEKADx30WOx3FVwIGh8RRI1hIkiyMAMCAdI4sFqt2NYl4
+I5KtIkgQk7eJ4MC8W2vTbbbObR3H32o5gO6Ez/V8SX57WxIKCwkLDluMjY6P
+IyEAOw==
 }
 
 image creat photo tb_exclude -data {
