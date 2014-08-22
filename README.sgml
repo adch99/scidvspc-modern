@@ -70,11 +70,11 @@ and bug-fix fork of Scid, with some new features.  The project has been extensiv
 <label id="download_">
 <sect> download <p>
 
-source <url url="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.12.tgz/download" name="scid_vs_pc-4.12.tgz">
+source <url url="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.13.tgz/download" name="scid_vs_pc-4.13.tgz">
 
-windows <url url="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.12.exe/download" name="Scid vs PC-4.12.exe">
+windows <url url="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.13.exe/download" name="Scid vs PC-4.13.exe">
 
-mac <url url="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.12.dmg/download" name="ScidvsMac-4.12.dmg">
+mac <url url="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.13.dmg/download" name="ScidvsMac-4.13.dmg">
 
 <url url="https://sourceforge.net/project/showfiles.php?group_id=263836" name="browse files">
 
@@ -105,8 +105,8 @@ or as a tarball <url url="https://sourceforge.net/p/scidvspc/code/HEAD/tarball" 
   <p>Then, installing from source:</p>
 
 <code>
-tar -xzf scid_vs_pc-4.12.tgz
-cd scid_vs_pc-4.12
+tar -xzf scid_vs_pc-4.13.tgz
+cd scid_vs_pc-4.13
 ./configure
 sudo make install
 scid
@@ -130,7 +130,7 @@ C:\Users\[USERNAME]\AppData\Local\VirtualStore\Program Files\Scid vs PC
 
 <sect2> Mac OS X <p>
 
-The <ref name="ScidvsMac-4.12 app" id="download_"> should include everything you need. Simply drag and drop the App into /Applications (or similar).
+The <ref name="ScidvsMac-4.13 app" id="download_"> should include everything you need. Simply drag and drop the App into /Applications (or similar).
 
 <em>Users upgrading may have to remove (or edit) <bf>$HOME/.scidvspc/config/engines.dat</bf>
 to properly configure the chess engines.</em>
@@ -381,6 +381,11 @@ Chessbase databases and many chess variants.</p>
 
 <label id="changes_">
 <sect> changes <p>
+
+<sect2> Scid vs. PC 4.13<p>
+<itemize>
+<item>
+</itemize></p>
 
 <sect2> Scid vs. PC 4.12<p>
 <itemize>
