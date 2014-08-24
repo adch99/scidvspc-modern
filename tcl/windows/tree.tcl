@@ -536,8 +536,8 @@ proc ::tree::dorefresh { baseNumber } {
   $w.f.tl configure -cursor {}
 
   # ::tree::status "" $baseNumber
-  ::windows::stats::Refresh
   if {$::tree(adjustfilter$baseNumber)} {
+    ::windows::stats::Refresh
     set glstart 1
     ::windows::gamelist::Refresh
   }
