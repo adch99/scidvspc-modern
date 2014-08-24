@@ -5775,13 +5775,43 @@ set helpText(Sound) {<h1>Sound</h1>
 set helpTitle(Changelog) "Scid vs PC Changelog"
 set helpText(Changelog) {<h1>Changelog</h1>
 
+<h4>4.13 (September 14, 2014)</h4>
+<ul>
+<li>Analysis Engine: exclude move(s) feature. Mouse-hover shows excluded moves (UCI only)</li>
+<li>Analysis Engine: button to pop-up unrevealed buttons, and redo a few icons</li>
+<li>Maintenance: Bulk strip Comments/Variations</li>
+<li>Improved Background Colour feature</li>
+<li>Add 'Find' entry boxes to more windows (including spelling corrections) , and widget can now use regular expressions</li>
+<li>Better Repair Base feature (from Gregor)</li>
+<li>Include Gregors fast file opening with the windows 32-bit binary</li>
+<li>Crosstable: bump max-player limit, tweak menus and bind right-click to menu, fix occasional allignment bug, and dont' automatically update (fixing busy cursor bug)</li>
+<li>Bump Opening Table limits, and minor bug-fixes</li>
+<li>New (Skak) Latex export-games feature (author Mark Dennehy)</li>
+<li>Update Xfcc to handle secure connections (thanks to Andrew Hunt)</li>
+<li>Fix minor memory leaks, and dont slow game file compaction (we now reset filter)</li>
+<li>Bestgames has a game load menu instead of 3 buttons</li>
+<li>Many minor OS X tweaks</li>
+<li>Trim whitespace from name fields in game save dialog</li>
+<li>Add whitespace corrections to spelling.ssp, and also tweak Event spelling corrections</li>
+<li>Tooltips for the obscure buttons in main buttonbar</li>
+<li>Analysis add move as 'New Mainline' was broke</li>
+<li>Always get confirmation for sorting via gamelist</li>
+<li>Enforce illegalilty of saving Event Date without Game Date</li>
+<li>Phalanx updates and minor tacgame, sergame fixes</li>
+<li>More minor depth based analysis fixes (todo)</li>
+<li>Make a few windows have small font buttons</li>
+<li>Shift+Wheel scrolls a few widgets horizontally</li>
+<li>Break up the long Book Tuning button menus</li>
+<li>Many minor bugfixes and further tree-only filter fixes</li>
+</ul>
+
 <h4>4.12 (March 25, 2014)</h4>
 <ul>
 <li>Gamelist/Filter fixes. Filter works better with Tree</li>
 <li>New Crosstable tie-break options and reorder Crosstable menus</li>
 <li>Game-result is now shown alongside Player names, at top of GameInfo window</li>
 <li>Middle button in main board toggles game info</li>
-<li>Databases open faster (Linux/OS X only - "avoid the time consuming file locking". Windows is in testing).</li>
+<li>Databases open faster (Linux/OS X only - "avoid the time consuming file locking". Windows is in testing)</li>
 <li>Allow dragging Docked Window tabs to alter their order</li>
 </ul>
 <br>
@@ -6408,7 +6438,7 @@ The window manager may interfere with some shortcuts.
 
 <h4>General</h4>
 <ul>
-<li><i>Use standard notation to input moves with the keyboard (eg <b>e4</b>).</i></li>
+<li><i>Use standard notation to input moves with the keyboard (eg <b>e4</b>)</i></li>
 <li></li>
 <li><b>left</b> - Back one move</li>
 <li><b>right</b> - Forward one move</li>

@@ -326,19 +326,17 @@ to create large databases from pgn. Typing "pgnscid somefile.pgn" creates a new 
 
 <sect1> thanks <p>
 
-Thanks to <url url="http://scidb.sf.net" name="Gregor Cramer"> for the PGN figurines and Drag and Drop features, and technical support.
+Thanks to <url url="http://scidb.sf.net" name="Gregor Cramer"> for his numerous features and technical support.
 
-For Gilles and Dorothy for OSX packages, Jiri Pavlovsky for the windows installer, and all Scid vs. PC testers.
+To Gilles, Steve and Dorothy for OS X support, and 'Inno Setup' and Jiri Pavlovsky for the windows installer.
 
 <url url="http://sourceforge.net" name="Sourceforge.net"> for their great hosting,
 
-Pascal Georges for his many technical contributions.
-
-Fulvio and Gerd for their much appreciated contributions to  mainline Scid.
+Pascal Georges for his many technical contributions to mainline Scid, and also Fulvio and Gerd.
 
 <url url="http://chessx.sf.net" name="Michal Rudolf"> and Alex Wagner for initial feedback and bug-reports,
 
-and of course Shane Hudson, and the authors of <url url="http://tcl.tk" name="Tcl/Tk">
+and of course Shane Hudson and the authors of <url url="http://tcl.tk" name="Tcl/Tk">
 
 </p>
 
@@ -384,7 +382,32 @@ Chessbase databases and many chess variants.</p>
 
 <sect2> Scid vs. PC 4.13<p>
 <itemize>
-<item>
+<item> Analysis Engine: exclude move(s) feature. Mouse-hover shows excluded moves (UCI only).
+<item> Analysis Engine: button to pop-up unrevealed buttons, and redo a few icons
+<item> Maintenance: Bulk strip Comments/Variations.
+<item> Improved Background Colour feature
+<item> Add 'Find' entry boxes to more windows (including spelling corrections) , and widget can now use regular expressions
+<item> Better Repair Base feature (from Gregor)
+<item> Include Gregors fast file opening with the windows 32-bit binary
+<item> Crosstable: bump max-player limit, tweak menus and bind right-click to menu, fix occasional allignment bug, and dont' automatically update (fixing busy cursor bug).
+<item> Bump Opening Table limits, and minor bug-fixes
+<item> New (Skak) Latex export-games feature (author Mark Dennehy)
+<item> Update Xfcc to handle secure connections (thanks to Andrew Hunt)
+<item> Fix minor memory leaks, and dont slow game file compaction (we now reset filter).
+<item> Bestgames has a game load menu instead of 3 buttons.
+<item> Many minor OS X tweaks
+<item> Trim whitespace from name fields in game save dialog
+<item> Add whitespace corrections to spelling.ssp, and also tweak Event spelling corrections.
+<item> Tooltips for the obscure buttons in main buttonbar
+<item> Analysis add move as 'New Mainline' was broke.
+<item> Always get confirmation for sorting via gamelist
+<item> Enforce illegalilty of saving Event Date without Game Date
+<item> Phalanx updates and minor tacgame, sergame fixes.
+<item> More minor depth based analysis fixes (todo)
+<item> Make a few windows have small font buttons
+<item> Shift+Wheel scrolls a few widgets horizontally
+<item> Break up the long Book Tuning button menus
+<item> Many minor bugfixes and further tree-only filter fixes
 </itemize></p>
 
 <sect2> Scid vs. PC 4.12<p>

@@ -123,11 +123,11 @@ and bug-fix fork of Scid, with some new features.  The project has been extensiv
 
 
 <P>source 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.12.tgz/download">scid_vs_pc-4.12.tgz</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.13.tgz/download">scid_vs_pc-4.13.tgz</A></P>
 <P>windows 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.12.exe/download">Scid vs PC-4.12.exe</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.13.exe/download">Scid vs PC-4.13.exe</A></P>
 <P>mac 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.12.dmg/download">ScidvsMac-4.12.dmg</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.13.dmg/download">ScidvsMac-4.13.dmg</A></P>
 <P>
 <A HREF="https://sourceforge.net/project/showfiles.php?group_id=263836">browse files</A></P>
 <P>The latest code is available from subversion - <B>svn checkout http://svn.code.sf.net/p/scidvspc/code/ scidvspc-code</B><BR>
@@ -152,8 +152,8 @@ If your distro does not provide these packages ("tkimg", "tcl-snack"), you can i
 <P>Then, installing from source:</P>
 <HR>
 <PRE>
-tar -xzf scid_vs_pc-4.12.tgz
-cd scid_vs_pc-4.12
+tar -xzf scid_vs_pc-4.13.tgz
+cd scid_vs_pc-4.13
 ./configure
 sudo make install
 scid
@@ -178,7 +178,7 @@ C:\Users\[USERNAME]\AppData\Local\VirtualStore\Program Files\Scid vs PC</P>
 
 
 <P>The 
-<A HREF="#download_">ScidvsMac-4.12 app</A> should include everything you need. Simply drag and drop the App into /Applications (or similar).</P>
+<A HREF="#download_">ScidvsMac-4.13 app</A> should include everything you need. Simply drag and drop the App into /Applications (or similar).</P>
 <P><EM>Users upgrading may have to remove (or edit) <B>$HOME/.scidvspc/config/engines.dat</B>
 to properly configure the chess engines.</EM></P>
 <P>OS X  has a poor implementation of Tcl, and docked mode has minor bugs (some windows work better after being moved around, keyboard shortcuts are very hit and miss).</P>
@@ -368,15 +368,14 @@ to create large databases from pgn. Typing "pgnscid somefile.pgn" creates a new 
 
 
 <P>Thanks to 
-<A HREF="http://scidb.sf.net">Gregor Cramer</A> for the PGN figurines and Drag and Drop features, and technical support.</P>
-<P>For Gilles and Dorothy for OSX packages, Jiri Pavlovsky for the windows installer, and all Scid vs. PC testers.</P>
+<A HREF="http://scidb.sf.net">Gregor Cramer</A> for his numerous features and technical support.</P>
+<P>To Gilles, Steve and Dorothy for OS X support, and 'Inno Setup' and Jiri Pavlovsky for the windows installer.</P>
 <P>
 <A HREF="http://sourceforge.net">Sourceforge.net</A> for their great hosting,</P>
-<P>Pascal Georges for his many technical contributions.</P>
-<P>Fulvio and Gerd for their much appreciated contributions to  mainline Scid.</P>
+<P>Pascal Georges for his many technical contributions to mainline Scid, and also Fulvio and Gerd.</P>
 <P>
 <A HREF="http://chessx.sf.net">Michal Rudolf</A> and Alex Wagner for initial feedback and bug-reports,</P>
-<P>and of course Shane Hudson, and the authors of 
+<P>and of course Shane Hudson and the authors of 
 <A HREF="http://tcl.tk">Tcl/Tk</A></P>
 
 <H2><A NAME="ss6.7">6.7</A> <A HREF="#toc6.7">scid's history </A>
@@ -422,6 +421,38 @@ Chessbase databases and many chess variants.</P>
 
 
 <P>
+<H3>Scid vs. PC 4.13</H3>
+
+<P>
+<UL>
+<LI> Analysis Engine: exclude move(s) feature. Mouse-hover shows excluded moves (UCI only).</LI>
+<LI> Analysis Engine: button to pop-up unrevealed buttons, and redo a few icons</LI>
+<LI> Maintenance: Bulk strip Comments/Variations.</LI>
+<LI> Improved Background Colour feature</LI>
+<LI> Add 'Find' entry boxes to more windows (including spelling corrections) , and widget can now use regular expressions</LI>
+<LI> Better Repair Base feature (from Gregor)</LI>
+<LI> Include Gregors fast file opening with the windows 32-bit binary</LI>
+<LI> Crosstable: bump max-player limit, tweak menus and bind right-click to menu, fix occasional allignment bug, and dont' automatically update (fixing busy cursor bug).</LI>
+<LI> Bump Opening Table limits, and minor bug-fixes</LI>
+<LI> New (Skak) Latex export-games feature (author Mark Dennehy)</LI>
+<LI> Update Xfcc to handle secure connections (thanks to Andrew Hunt)</LI>
+<LI> Fix minor memory leaks, and dont slow game file compaction (we now reset filter).</LI>
+<LI> Bestgames has a game load menu instead of 3 buttons.</LI>
+<LI> Many minor OS X tweaks</LI>
+<LI> Trim whitespace from name fields in game save dialog</LI>
+<LI> Add whitespace corrections to spelling.ssp, and also tweak Event spelling corrections.</LI>
+<LI> Tooltips for the obscure buttons in main buttonbar</LI>
+<LI> Analysis add move as 'New Mainline' was broke.</LI>
+<LI> Always get confirmation for sorting via gamelist</LI>
+<LI> Enforce illegalilty of saving Event Date without Game Date</LI>
+<LI> Phalanx updates and minor tacgame, sergame fixes.</LI>
+<LI> More minor depth based analysis fixes (todo)</LI>
+<LI> Make a few windows have small font buttons</LI>
+<LI> Shift+Wheel scrolls a few widgets horizontally</LI>
+<LI> Break up the long Book Tuning button menus</LI>
+<LI> Many minor bugfixes and further tree-only filter fixes</LI>
+</UL>
+</P>
 <H3>Scid vs. PC 4.12</H3>
 
 <P>
