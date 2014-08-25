@@ -310,8 +310,8 @@ menuText E OptionsWindowsRaise "Auto-Raise" 5 \
   {Raise certain windows (e.g. progress bars) whenever they are obscured}
 menuText E OptionsSounds "Sounds" 2 {Configure move announcement sounds}
 menuText E OptionsWindowsDock "Dock windows" 0 {Dock windows (needs restart)}
-menuText E OptionsWindowsSaveLayout "Save layout" 0 {Save layout}
-menuText E OptionsWindowsRestoreLayout "Restore layout" 0 {Restore layout}
+menuText E OptionsWindowsSaveLayout "Save Layout" 0 {Save layout}
+menuText E OptionsWindowsRestoreLayout "Restore Layout" 0 {Restore layout}
 menuText E OptionsWindowsShowGameInfo "Show game info" 0 {Show game info}
 menuText E OptionsWindowsAutoLoadLayout "Auto load first layout" 0 {Auto load first layout at startup}
 menuText E OptionsWindowsAutoResize "Auto resize board" 0 {}

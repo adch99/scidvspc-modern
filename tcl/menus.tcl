@@ -815,6 +815,10 @@ proc setTacticsBasesDir {} {
 $m add separator
 incr menuindex
 
+if {$::docking::USE_DOCKING} {
+  $m add command -label OptionsWindowsSaveLayout -command {::docking::layout_save 1}
+}
+
 $m add command -label OptionsSave -command {
   set optionF ""
   if {[catch {open [scidConfigFile options] w} optionF]} {
@@ -1518,6 +1522,10 @@ proc setLanguageMenus {{lang ""}} {
       configMenuText .menu.options.windows [tr OptionsWindows$tag $oldLang] \
           OptionsWindows$tag $lang
     }
+    # and the single save layout menu at the bottom
+    configMenuText .menu.options [tr OptionsWindowsSaveLayout $oldLang] \
+	OptionsWindowsSaveLayout $lang
+
   }
 
   foreach tag {Contents Index Tip Startup About} {
