@@ -816,7 +816,10 @@ $m add separator
 incr menuindex
 
 if {$::docking::USE_DOCKING} {
-  $m add command -label OptionsWindowsSaveLayout -command {::docking::layout_save 1}
+  $m add command -label OptionsWindowsSaveLayout -command {
+    ::docking::layout_save 1
+    set autoLoadLayout 1
+  }
 }
 
 $m add command -label OptionsSave -command {
