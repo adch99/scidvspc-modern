@@ -21,8 +21,8 @@ int64 AllNPS = 0;
 int64 Nodes;
 
 /* params that cannot be pushed via SIGALM handler */
-int A_n, A_i, A_d;
-tmove * A_m;
+volatile int A_n, A_i, A_d;
+volatile tmove * A_m;
 
 int N_moves[8] = { -21, -19, -12, -8, 21, 19, 12, 8 };
 int RB_dirs[8] = { 1, -1, 10, -10, 11, -11, 9, -9 };

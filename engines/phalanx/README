@@ -1,5 +1,5 @@
 Phalanx is a chess playing program
-Copyright (c) 1997, 1998, 1999, 2000 Dusan Dobes
+Copyright (c) 1997, 1998, 1999, 2000, 2014 Dusan Dobes
 
 
 LICENSE AND WARRANTY
@@ -20,15 +20,8 @@ LICENSE AND WARRANTY
 
 WHERE TO GET PHALANX
 
-- http://www.crosswinds.net/~dobes/phalanx/
+- http://sourceforge.net/projects/phalanx/
 - ftp://sunsite.unc.edu/pub/Linux/games/strategy/   (Only sources)
-  Sunsite is well maintained archive with lots of mirrors, but it's dedicated
-  to Linux.  If you want to try Win32 binary or bigger secondary opening book
-  try following site, it has both sources and Win32 binaries plus opening books
-  largebook.zip and hugebook.zip:
-- ftp://ftp.math.muni.cz/pub/math/people/Dobes/
-- http://www.gambitsoft.com/sharee.htm              (Only Win32 binaries)
-- http://www.cent.co.yu/chess/free.htm              (Only Win32 binaries)
 
   Please let me know if there are others, i will update this list.
   Feel free to put Phalanx on your ftp site.
@@ -62,7 +55,6 @@ MORE ABOUT INTERFACE
 
   I'm trying to write an interface that fits following three requirements:
   - Xboard compatibility.  For best results, get the latest version of Xboard.
-    (http://www.research.digital.com/SRC/personal/Tim_Mann/chess)
   - shell-like interface that allows running commands in a batch. It's very
     useful for testing. Example: look into the file test.fin. It's a set
     of chess problems and solutions. You can simply send this file to
@@ -112,15 +104,16 @@ COMMAND LINE OPTIONS
     -b <+/->  opening book                        default: on
     -l <+/->  learning on/off                     default: on
     -r <resign value in centipawns>               default: 0 (no resigning)
-    -e <easy level 0...100>                       default: 0 (best play)
-       1 is the hardest and 100 is the easiest easy level. Phalanx tries to
-       emulate human-like blunders, the higher the number the more blunders it
+    -e <easy level 0...99>                       default: 0 (best play)
+       1 is the easiest and 99 is the hardest easy level. Phalanx tries to
+       emulate human-like blunders, the lower the number the more blunders it
        plays. It also adds more randomness with the easy levels, repeating
        games should be impossible. Easy levels set hashtable size to zero,
-       pondering and learning to off. Phalanx responds almost immediatelly to
-       opponent's move. Node count is used instead of the time, so appropriate
-       levels should give the same strength even on different machines
-       (e.g. 486 == Pentium-III).
+       pondering and learning to off. Since version XXIII, Phalanx uses
+       the time normally, it does not respond immediatelly. NPS is lowered
+       to 100-300, the speed of the machine does not matter here, it uses
+       usleep() during the search, so it does not raise the machine load.
+    -n <nodes per second>                         default: 0 (no limit)
     -v
        Print version and exit.
     -P <primary book directory>
@@ -260,5 +253,5 @@ INSIDE THE MACHINE
 
 AUTHOR
 
-  Dusan Dobes, dobes@math.muni.cz
+  Dusan Dobes
 

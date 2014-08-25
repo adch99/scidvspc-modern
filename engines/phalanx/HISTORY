@@ -274,3 +274,9 @@ XXII      Better ICS whispering, it sends only one info per move.  Bugfix in
           the first finger line on ICS, it shows version, size of hashtable,
           and sizes of the opening books.  Bugfix in benchmark, the resulting
           number was incorrect on machines that can do over 70kNps.
+
+XXIII     New -n commandline option to limit nodes per second. Easy levels now
+          don't play instantly, but use time. Simplified rootsearch. Search
+          stability fixes. XBoard protocol version 2. DrawScore adjusted in
+          endgames to avoid playing dead draws like KR-KR. Bugfixes.
+

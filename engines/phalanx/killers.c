@@ -28,7 +28,7 @@ if( B[to] == 0 )
 	if( HK[from][to] > Maxhist )
 	{
 		Maxhist = HK[from][to];
-		if( Maxhist > 16000 )
+		if( Maxhist > 4000 )
 		{
 			int f,t;
 			Maxhist /= 2;
@@ -39,6 +39,33 @@ if( B[to] == 0 )
 	}
 }
 
+}
+
+
+
+/*
+ * We are in a cut node, but the 1st killer was not successful.
+ * Let's lower the history killer values of the unsuccessful ones
+ * to magnify the importance of the successful one.
+ */
+void slash_killers( tmove *m, int n )
+{
+	int i;
+	int findnewmax=0;
+
+	for( i=0; i!=n; i++ )
+	{
+		if( HK[m[i].from][m[i].to] == Maxhist ) findnewmax = 1;
+		HK[m[i].from][m[i].to] /= 2;
+	}
+
+	if( findnewmax )
+	{
+		int f,t;
+		Maxhist /= 2;
+		for( f=A1; f!=H9; f++ ) for( t=A1; t!=H9; t++ )
+			if( HK[f][t] > Maxhist ) Maxhist = HK[f][t];
+	}
 }
 
 
