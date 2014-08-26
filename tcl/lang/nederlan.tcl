@@ -211,6 +211,8 @@ menuText N ToolsExpCurrentHTML "Partij in HTML-formaat exporteren..." 11 \
 menuText N ToolsExpCurrentHTMLJS "Exporteer partij als HTML/JavaScript bestand..." 15 {De huidige partij opslaan als een HTML/JavaScript bestand}  
 menuText N ToolsExpCurrentLaTeX "Partij in LaTeX-formaat exporteren..." 11 \
   {Schrijf huidige partij naar LaTex-bestand}
+# ====== TODO To be translated ======
+menuText N ToolsExpCurrentLaTeXSkak "Export Game to LaTeX (Skak)" 15 {Write current game to a LaTeX file}
 menuText N ToolsExpFilter "Alle partijen in filter exporteren" 17 \
   {Exporteer alle geslecteerde partijen naar een bestand}
 menuText N ToolsExpFilterPGN "Filter in PGN-formaat exporteren..." 10 \
@@ -220,6 +222,8 @@ menuText N ToolsExpFilterHTML "Filter in HTML-formaat exporteren..." 10 \
 menuText N ToolsExpFilterHTMLJS "Exporteer filter naar HTML/Javascript bestand..." 17 {Schrijf alle via filter geselecteerde partijen naar een HTML/Javascript bestand}
 menuText N ToolsExpFilterLaTeX "Filter in LaTeX-formaat exporteren..." 10 \
   {Schrijf selectie naar LaTex-bestand}
+# ====== TODO To be translated ======
+menuText N ToolsExpFilterLaTeXSkak "Export Filter to LaTeX (Skak)" 17  {Write all filtered games to a LaTeX file}
 # ====== TODO To be translated ======
 menuText N ToolsExpFilterGames "Export Gamelist to Text" 19 {Print a formatted Gamelist.}
 menuText N ToolsImportOne "Een PGN partij importeren..." 16 \

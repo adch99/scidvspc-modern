@@ -222,6 +222,8 @@ menuText H ToolsExpCurrentHTML "Exportálás HTML-fájlba..." 11 \
 menuText H ToolsExpCurrentHTMLJS "Export Game to HTML and JavaScript File..." 15 {Write current game to a HTML and JavaScript file}  
 menuText H ToolsExpCurrentLaTeX "Exportálás LaTeX-fájlba..." 11 \
   {LaTeX-fájlba írja az aktuális játszmát.}
+# ====== TODO To be translated ======
+menuText H ToolsExpCurrentLaTeXSkak "Export Game to LaTeX (Skak)" 15 {Write current game to a LaTeX file}
 menuText H ToolsExpFilter "Az összes szûrt játszma exportálása" 10 \
   {Szövegfájlba írja az összes szûrt játszmát.}
 menuText H ToolsExpFilterPGN "Szûrõ exportálása PGN-fájlba..." 18 \
@@ -232,6 +234,8 @@ menuText H ToolsExpFilterHTML "Szûrõ exportálása HTML-fájlba..." 18 \
 menuText H ToolsExpFilterHTMLJS "Export Filter to HTML and JavaScript File..." 17 {Write all filtered games to a HTML and JavaScript file}  
 menuText H ToolsExpFilterLaTeX "Szûrõ exportálása LaTeX-fájlba..." 18 \
   {LaTeX-fájlba írja az összes szûrt játszmát.}
+# ====== TODO To be translated ======
+menuText H ToolsExpFilterLaTeXSkak "Export Filter to LaTeX (Skak)" 17  {Write all filtered games to a LaTeX file}
 # ====== TODO To be translated ======
 menuText H ToolsExpFilterGames "Export Gamelist to Text" 19 {Print a formatted Gamelist.}
 menuText H ToolsImportOne "PGN-játszma importálása..." 0 \

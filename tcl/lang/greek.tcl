@@ -219,6 +219,8 @@ menuText G ToolsExpCurrentHTML "Εξαγωγή σε HTML" 1 \
 menuText G ToolsExpCurrentHTMLJS "Εξαγωγή σε HTML με JavaScript" 2 {Εγγραφή παρτίδας σε αρχείο HTML με υποστήριξη JavaScript}  
 menuText G ToolsExpCurrentLaTeX "Εξαγωγή σε LaTeX" 3 \
   {Εγγραφή παρτίδας σε αρχείο LaTeX}
+# ====== TODO To be translated ======
+menuText G ToolsExpCurrentLaTeXSkak "Export Game to LaTeX (Skak)" 15 {Write current game to a LaTeX file}
 menuText G ToolsExpFilter "Εξαγωγή Φιλτρ.Παρτίδων" 4 \
   {Εγγραφή Όλων των φιλτραρισμένων παρτίδων σε αρχείο κειμένου}
 menuText G ToolsExpFilterPGN "Εξαγωγή σε PGN" 0 \
@@ -228,6 +230,8 @@ menuText G ToolsExpFilterHTML "Εξαγωγή σε HTML" 1 \
 menuText G ToolsExpFilterHTMLJS "Εξαγωγή σε HTML με JavaScript" 2 {Εγγραφή Όλων των φιλτραρισμένων παρτίδων σε αρχείο HTML με υποστήριξη JavaScript}  
 menuText G ToolsExpFilterLaTeX "Εξαγωγή σε LaTeX" 3 \
   {Εγγραφή Όλων των φιλτραρισμένων παρτίδων σε αρχείο LaTeX}
+# ====== TODO To be translated ======
+menuText G ToolsExpFilterLaTeXSkak "Export Filter to LaTeX (Skak)" 17  {Write all filtered games to a LaTeX file}
 # ====== TODO To be translated ======
 menuText G ToolsExpFilterGames "Export Gamelist to Text" 19 {Print a formatted Gamelist.}
 menuText G ToolsImportOne "Εισαγωγή Κειμένου PGN" 9 \

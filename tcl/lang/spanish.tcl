@@ -208,6 +208,8 @@ menuText S ToolsExpCurrentHTML "Exportar Partida a HTML" 15 \
 menuText S ToolsExpCurrentHTMLJS "Exportar Partida a HTML y JavaScript" 15 {Escribir partida actual a un fichero HTML y JavaScript} 
 menuText S ToolsExpCurrentLaTeX "Exportar Partida a LaTeX" 33 \
   {Escribe la partida actual en un archivo LaTeX}
+# ====== TODO To be translated ======
+menuText S ToolsExpCurrentLaTeXSkak "Export Game to LaTeX (Skak)" 15 {Write current game to a LaTeX file}
 menuText S ToolsExpFilter "Exportar todas las partidas filtradas" 1 \
   {Escribe todas las partidas filtradas en un archivo de texto}
 menuText S ToolsExpFilterPGN "Exportar filtro a PGN" 17 \
@@ -217,6 +219,8 @@ menuText S ToolsExpFilterHTML "Exportar filtro a HTML" 17 \
 menuText S ToolsExpFilterHTMLJS "Exportar filtro a HTML y JavaScript" 17 {Escribir todas las partidas filtradas a fichero HTML y JavaScript}  
 menuText S ToolsExpFilterLaTeX "Exportar filtro a LaTeX" 17 \
   {Escribe todas las partidas filtradas en un archivo LaTeX}
+# ====== TODO To be translated ======
+menuText S ToolsExpFilterLaTeXSkak "Export Filter to LaTeX (Skak)" 17  {Write all filtered games to a LaTeX file}
 menuText S ToolsExpFilterGames "Exportar Listado a Texto" 19 {Print a formatted Gamelist.}
 menuText S ToolsImportOne "Importar partida PGN" 0 \
   {Importa una partida de un texto PGN}

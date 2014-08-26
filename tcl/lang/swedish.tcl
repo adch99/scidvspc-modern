@@ -202,6 +202,8 @@ menuText W ToolsExpCurrentHTML "Exportera till HTML..." 15 \
 menuText W ToolsExpCurrentHTMLJS "Exportera till HTML och JavaScript-fil..." 15 {Spara aktuellt parti till en HTML och JavaScript-fil} 
 menuText W ToolsExpCurrentLaTeX "Exportera till LaTeX..." 15 \
   {Spara aktuellt parti till en LaTeX-fil}
+# ====== TODO To be translated ======
+menuText W ToolsExpCurrentLaTeXSkak "Export Game to LaTeX (Skak)" 15 {Write current game to a LaTeX file}
 menuText W ToolsExpFilter "Exportera alla filtrerade partier" 15 \
   {Spara alla filterade partier till en textfil}
 menuText W ToolsExpFilterPGN "Exportera till PGN..." 15 \
@@ -211,6 +213,8 @@ menuText W ToolsExpFilterHTML "Exportera till HTML..." 15 \
 menuText W ToolsExpFilterHTMLJS "Exportera filtrerade till HTML och JavaScript-fil..." 17 {Spara alla filtrerade partier till en HTML och JavaScript-fil} 
 menuText W ToolsExpFilterLaTeX "Exportera till LaTeX..." 15 \
   {Spara alla filterade partier till en LaTeX-fil}
+# ====== TODO To be translated ======
+menuText W ToolsExpFilterLaTeXSkak "Export Filter to LaTeX (Skak)" 17  {Write all filtered games to a LaTeX file}
 # ====== TODO To be translated ======
 menuText W ToolsExpFilterGames "Export Gamelist to Text" 19 {Print a formatted Gamelist.}
 menuText W ToolsImportOne "Importera ett parti i PGN-format..." 0 \

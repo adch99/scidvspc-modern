@@ -209,7 +209,10 @@ proc setExportText {exportType} {
       set title "Set HTML file export text"
     }
     "LaTeX" {
-      set title "Set LaTeX file export text"
+      set title "Set LaTeX chess12 file export text"
+    } 
+    "LaTeX_Skak" {
+      set title "Set LaTeX skak file export text"
     }
     default {
       return
@@ -500,6 +503,15 @@ proc exportGames {selection exportType} {
       set default ".html"
     }
     "LaTeX" {
+      set ftype {
+        { "LaTeX files" {".tex" ".ltx"} }
+        { "All files" {"*"} }
+      }
+      set title "a LaTeX file"
+      set idir $::initialDir(tex)
+      set default ".tex"
+    }
+    "LaTeX_Skak" {
       set ftype {
         { "LaTeX files" {".tex" ".ltx"} }
         { "All files" {"*"} }

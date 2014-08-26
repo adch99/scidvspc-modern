@@ -205,10 +205,11 @@ enum gameExactMatchT {
 };
 
 enum gameFormatT {
-    PGN_FORMAT_Plain = 0,   // Plain regular PGN output
-    PGN_FORMAT_HTML = 1,    // HTML format
-    PGN_FORMAT_LaTeX = 2,   // LaTeX (with chess12 package) format
-    PGN_FORMAT_Color = 3    // PGN, with color tags <red> etc
+    PGN_FORMAT_Plain = 0,        // Plain regular PGN output
+    PGN_FORMAT_HTML = 1,         // HTML format
+    PGN_FORMAT_LaTeX = 2,        // LaTeX (with chess12 package) format
+    PGN_FORMAT_Color = 3,        // PGN, with color tags <red> etc
+    PGN_FORMAT_LaTeX_Skak = 4    // LaTeX (with skak package) format
 };
 
 #define PGN_STYLE_TAGS             1
@@ -517,6 +518,7 @@ public:
                              moveT * oldCurrentMove,
                              bool printMoveNum, bool inComment);
     errorT    WritePGN (TextBuffer * tb, uint stopLocation);
+    errorT    WritePGNtoLaTeX(TextBuffer * tb, uint stopLocation);
     errorT    WriteToPGN (TextBuffer * tb);
     errorT    MoveToLocationInPGN (TextBuffer * tb, uint stopLocation);
 #ifdef WINCE
@@ -544,6 +546,7 @@ public:
     bool      IsPlainFormat () { return (PgnFormat == PGN_FORMAT_Plain); }
     bool      IsHtmlFormat  () { return (PgnFormat == PGN_FORMAT_HTML); }
     bool      IsLatexFormat () { return (PgnFormat == PGN_FORMAT_LaTeX); }
+    bool      IsLatexSkakFormat () { return (PgnFormat == PGN_FORMAT_LaTeX_Skak); }
     bool      IsColorFormat () { return (PgnFormat == PGN_FORMAT_Color); }
 
     void      SetHtmlStyle (uint style) { HtmlStyle = style; }

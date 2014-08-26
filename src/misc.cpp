@@ -821,6 +821,36 @@ strIsUnknownName (const char * str)
 }
 
 
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// strIsScore():
+//    Returns true if the string is a solitary score (a floating-point positive
+//    or negative number, which may or may not be encased in brackets)
+bool
+strIsScore(const char *str)
+{
+	const char *trimStr = strTrimLeft(str, " \t\r\n(");
+
+	strTrimRight((char*)trimStr, " \t\r\n)");
+	char *test = NULL;
+	strtod(trimStr, &test);
+	return (test != NULL) && (!strContains(trimStr, " "));
+}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// strGetScore():
+//    Returns the score if the string starts with a score (a floating-point positive
+//    or negative number, which may or may not be encased in brackets)
+//    Returns zero if there's no score in the string, so be sure to
+//    check with strIsScore() first...
+double
+strGetScore(const char *str)
+{
+	const char *trimStr = strTrimLeft(str, " \t\r\n(");
+	char *test = NULL;
+
+	return strtod(trimStr, &test);
+}
+
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // strIsPrefix():

@@ -223,6 +223,8 @@ menuText Y ToolsExpCurrentHTML "Izvezi partiju u HTML fajl..." 17 \
 menuText Y ToolsExpCurrentHTMLJS "Export Game to HTML and JavaScript File..." 15 {Write current game to a HTML and JavaScript file}  
 menuText Y ToolsExpCurrentLaTeX "Izvezi partiju u LaTeX fajl..." 17 \
   {Snimi tekuæu partiju u LaTeX fajl}
+# ====== TODO To be translated ======
+menuText Y ToolsExpCurrentLaTeXSkak "Export Game to LaTeX (Skak)" 15 {Write current game to a LaTeX file}
 menuText Y ToolsExpFilter "Izvezi sve filtrirane partije" 1 \
   {Snimi sve filtrirane partije u tekstualni fajl}
 menuText Y ToolsExpFilterPGN "Izvezi filtrirane partije u PGN fajl..." 28 \
@@ -233,6 +235,8 @@ menuText Y ToolsExpFilterHTML "Izvezi filtrirane partije u HTML fajl..." 28 \
 menuText Y ToolsExpFilterHTMLJS "Export Filter to HTML and JavaScript File..." 17 {Write all filtered games to a HTML and JavaScript file}  
 menuText Y ToolsExpFilterLaTeX "Izvezi filtrirane partije u LaTeX fajl..." 28 \
   {Snimi sve filtrirane partije u LaTeX fajl}
+# ====== TODO To be translated ======
+menuText Y ToolsExpFilterLaTeXSkak "Export Filter to LaTeX (Skak)" 17  {Write all filtered games to a LaTeX file}
 # ====== TODO To be translated ======
 menuText Y ToolsExpFilterGames "Export Gamelist to Text" 19 {Print a formatted Gamelist.}
 menuText Y ToolsImportOne "Uvezi jednu PGN partiju..." 0 \

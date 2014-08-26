@@ -120,6 +120,9 @@ uint   strSingleSpace (char * str);
 bool   strIsAllWhitespace (const char * str);
 bool   strIsUnknownName (const char * str);
 
+bool   strIsScore(const char *str);
+double strGetScore(const char *str);
+
 // strIsPrefix: returns true if prefix is a prefix of longStr.
 bool   strIsPrefix (const char * prefix, const char * longStr);
 
