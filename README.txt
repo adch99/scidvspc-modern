@@ -179,14 +179,11 @@
   normal /usr/local.  This allows for parallel installation with
   mainline Scid, and is done by: ./configure BINDIR=/usr/bin/
   SHAREDIR=/usr/share/scid/
-  Scid's multi-language support can cause problems. Chinese (and other)
-  users should use: ./configure LANGUAGES=""
 
   4.0.2.  Windows
 
   Windows installation simply requires downloading the ``executable'',
   and following the prompts.
-
 
   The configuration files, including the chess engine list, are stored
   in the Scid-vs-PC\bin\config directory, and may be copied over from
@@ -252,7 +249,6 @@
    December 10, 2010
 
   Sicd vs. PC 4.2 includes support for Scid's si4 db format.
-
 
    July 3, 2010
 
@@ -385,20 +381,15 @@
      polyglot opening books, but inlining this projects work may not be
      too hard. https://github.com/sshivaji/ctgexporter
 
-
   6.4.  known issues
 
 
-  o  Tcl/Tk-8.5.10 is buggy. Tcl/Tk-8.6.0 also is immature, but mostly
-     works.
+  o  Tcl/Tk-8.5.10 is buggy.
 
-  o  OS X docked mode has multiple issues due to it's poor Tcl/Tk.
+  o  Scid's installer is poor. Currently installation only really works
+     into /usr and /usr/local.
 
-  o  Chinese Language Support. Scid's multilanguage support is broken
-     for some countries. The work around involves compiling from source,
-     using: ./configure LANGUAGES=""
-     Alternatively, remove all lines between "# end of english.tcl" and
-     "# tkdnd.tcl --" in the scid.gui file.
+  o  OS X docked mode has some issues due to it's poor Tcl/Tk.
 
   o  Focus Issues. Kde users can allow Tcl apps to properly raise
      themselves by configuring desktop > window behavior > advanced >
@@ -592,6 +583,7 @@
   o  Update spelling file to a custom version of Franz's Jan-5-2014
      spellling.ssp.
 
+
   o  Spell-checking can now remove GM, IM, FM, CM, WGM prefixes from
      player names.
 
@@ -649,7 +641,6 @@
 
   o  Save game history when Scid quits
 
-
   o  Remove tree status bar. Same info avail in switcher and tree text
      widget.
 
@@ -657,6 +648,7 @@
      has been tweaked a bit.
 
   o  Move Maintenance menu from File to Tools menu
+
 
   o  Remove the annoying " from myPlayerNames.
 
@@ -715,7 +707,6 @@
 
   o  Display "(altered)" in statusbar is game has been changed
 
-
   o  Fullscreen menu item (Options->Windows->Fullscreen)
 
   o  FICS tweaks, including over-riding takeback/abort request dialogs
@@ -723,6 +714,7 @@
 
   o  Remove some wasted space around FICS, main button bar, and other
      widgets
+
 
   o  New Greek translation
 
@@ -789,6 +781,7 @@
 
   o  Drag and drop hardening
 
+
   o  Windows 7 bugfix: PGN export and Progress bars weren't working in
      undocked mode
 
@@ -846,7 +839,6 @@
 
   o  Game Save dialog remembers any custom tags you add to a game,
      making them easy to recall
-
 
   o  Restore drawing arrows and marks from the main board (also used by
      FICS premove)
@@ -986,6 +978,7 @@
 
   o  Super quick engine infos can happen before Scid's PV is inited
      properly. So we have to default to PV = 1
+
 
   o  Allow xboard engines to use lowercase 'b' for bishop promotion (eg
      a7b8b)
@@ -1185,7 +1178,6 @@
 
   o  Change analysis colors for MultiPV to black/grey instead of
      blue/black
-
   o  New 'Search in (other) Database' feature to the board search (from
      SCID)
 
@@ -1242,7 +1234,6 @@
 
   o  Update FICs , PGN and Menu language translations
 
-
   7.0.11.  Scid vs. PC 4.5
 
   PGN Window:
@@ -1251,6 +1242,7 @@
      great)
 
      Computer Tournament:
+
 
   o  Per-game time control
 
@@ -1307,7 +1299,6 @@
 
   o  Add a 'make-scidgui.bat' hack for assembling a new 'scid.gui' from
      subversion
-
 
   o  Computer Tournament buttons padding fixed
 
@@ -1441,6 +1432,7 @@
 
   o  Fix up file loading (and bookmarks) of DBs with dots (.) in their
      name
+
   o  Statusbar shows correct value after Crosstable update
 
   7.0.14.  Scid vs. PC 4.3
@@ -1506,7 +1498,6 @@
 
   o  Numerous GUI fixes
 
-
   o  Revert PlayerInfo to old format, but add a "Won Drawn Lost" header
 
   o  Tweak crosstable knock-out format
@@ -1515,6 +1506,7 @@
 
 
   o  New si4 database support
+
 
   o  Include tree and mask improvements from Scid (excepting Fulvio's
      delayed tree code, which has issues)
@@ -1571,7 +1563,6 @@
   o  Comment Editor has undo and redo bindings
 
   o  Main board grid colour can be changed
-
 
   o  Setup board can rotate and flip the board
 
@@ -1704,7 +1695,6 @@
   o  When using the setup board widget, do a sanity check about the
      FEN's castling field
 
-
   o  Some minor version fixes anticipating tcl8.6
 
   o  Small bugfix: variation pop-up could previously throw errors if
@@ -1714,6 +1704,7 @@
 
   o  Remove space-only lines from project - they mess up vim's paragraph
      traversal feature
+
 
   o  Fics "withdraws offer" fix
 
@@ -1770,7 +1761,6 @@
   Scid vs. PC mailing list
   <https://lists.sourceforge.net/lists/listinfo/scidvspc-users>
 
-
   Stevenaaus <email://stevenaaus at yahoo dot com> is a uni graduate in
   math and computer science, who programs as a hobby in tcl/tk, bash and
   C. He lives and works in rural australia, and spends some Saturday
@@ -1780,6 +1770,7 @@
 
 
   o  Scid vs. PC  <http://scidvspc.sourceforge.net/>
+
 
   o  Project page  <http://sourceforge.net/projects/scidvspc>
 

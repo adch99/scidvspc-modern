@@ -161,8 +161,7 @@ scid
 <HR>
 </P>
 <P><EM>It is also possible to install Scid vs. PC into <B>/usr</B>, instead of the normal <B>/usr/local</B>.
-This allows for parallel installation with mainline Scid, and is done by: <B>./configure BINDIR=/usr/bin/ SHAREDIR=/usr/share/scid/</B><BR><BR>
-Scid's multi-language support can cause problems. Chinese (and other) users should use: <B>./configure LANGUAGES=""</B></EM></P>
+This allows for parallel installation with mainline Scid, and is done by: <B>./configure BINDIR=/usr/bin/ SHAREDIR=/usr/share/scid/</B></EM></P>
 
 <P>
 <H3>Windows </H3>
@@ -327,12 +326,9 @@ work may not be too hard.  https://github.com/sshivaji/ctgexporter</LI>
 
 <P>
 <UL>
-<LI> Tcl/Tk-8.5.10 is buggy. Tcl/Tk-8.6.0 also is immature, but mostly works.</LI>
-<LI> OS X docked mode has multiple issues due to it's poor Tcl/Tk.</LI>
-<LI> <B>Chinese Language Support</B>. Scid's multilanguage support is broken
-for some countries. The work around involves compiling from source, using:
-<EM>./configure LANGUAGES=""</EM><BR>
-Alternatively, remove all lines between "# end of english.tcl" and "# tkdnd.tcl --" in the scid.gui file.</LI>
+<LI> Tcl/Tk-8.5.10 is buggy.</LI>
+<LI> Scid's installer is poor. Currently installation only really works into /usr and /usr/local.</LI>
+<LI> OS X docked mode has some issues due to it's poor Tcl/Tk.</LI>
 <LI> <B>Focus Issues</B>. Kde users can allow Tcl apps to properly raise themselves by
 configuring desktop > window behavior > advanced > focus stealing prevention
 set to "none"</LI>
