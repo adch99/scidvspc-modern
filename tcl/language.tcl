@@ -80,6 +80,7 @@ array set langTable {
   O {norsk    Norsk      1 iso8859-1 no}
   P {polish   Polish     0 utf-8     {}}
   B {portbr   {Brazil Portuguese} 0 iso8859-1 {}}
+  R {russian  Russian    0 utf-8     {}}
   Y {serbian  Serbian    2 iso8859-2 {}}
   S {spanish  Español    1 iso8859-1 es}
   W {swedish  Swedish    1 iso8859-1 sw}
@@ -95,7 +96,12 @@ proc initLanguageMenus {} {
 
   set dir [file nativename [file join $::scidShareDir lang]]
 
-  foreach i [array names langTable] {
+  set l {}
+  foreach {m n} [array get langTable] {
+    lappend l [list $m [lindex $n 1] $m]
+  }
+  foreach j [lsort -index 1 $l] {
+    set i [lindex $j 0]
     if {[file exists [file nativename [file join $::scidShareDir "lang/[lindex $langTable($i) 0].tcl"]]]} {
       .menu.options.language add radiobutton -label [lindex $langTable($i) 1] \
 	-underline [lindex $langTable($i) 2] -variable language -value $i -command setLanguage

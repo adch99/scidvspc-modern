@@ -255,8 +255,6 @@ analysing the differences in the strings used by the two programs.
 The two servers do have many similarities i think, and examining
 xboard's "backend.c" (or some other client) for "FICS" particularities
 
-<item> Russian translation is broken afaics, and has been removed for the time being.
-
 <item> The month i've updated the translations a little. (Thanks to Peter
 for totally overhauling the Dutch one). The checklangs.tcl script is
 in much better shape, but of course there are still lots of
@@ -389,6 +387,8 @@ Chessbase databases and many chess variants.</p>
 <item> Add 'Find' entry boxes to more windows (including spelling corrections) , and widget can now use regular expressions
 <item> Better Repair Base feature (from Gregor)
 <item> Include Gregors fast file opening with the windows 32-bit binary
+<item> Reinstate a new Russian translation (from Sergey Nikolaevich Koyankin)
+<item> Better handle language translations/encoding
 <item> Crosstable: bump max-player limit, tweak menus and bind right-click to menu, fix occasional allignment bug, and dont' automatically update (fixing busy cursor bug).
 <item> Bump Opening Table limits, and minor bug-fixes
 <item> New (Skak) Latex export-games feature (author Mark Dennehy)

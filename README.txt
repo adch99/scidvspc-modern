@@ -350,9 +350,6 @@
      servers do have many similarities i think, and examining xboard's
      "backend.c" (or some other client) for "FICS" particularities
 
-  o  Russian translation is broken afaics, and has been removed for the
-     time being.
-
   o  The month i've updated the translations a little. (Thanks to Peter
      for totally overhauling the Dutch one). The checklangs.tcl script
      is in much better shape, but of course there are still lots of
@@ -387,6 +384,7 @@
   o  A lot of people use chessbase books (.ctg). Scid can only read
      polyglot opening books, but inlining this projects work may not be
      too hard. https://github.com/sshivaji/ctgexporter
+
 
   6.4.  known issues
 
@@ -520,6 +518,11 @@
 
   o  Include Gregors fast file opening with the windows 32-bit binary
 
+  o  Reinstate a new Russian translation (from Sergey Nikolaevich
+     Koyankin)
+
+  o  Better handle language translations/encoding
+
   o  Crosstable: bump max-player limit, tweak menus and bind right-click
      to menu, fix occasional allignment bug, and dont' automatically
      update (fixing busy cursor bug).
@@ -646,9 +649,9 @@
 
   o  Save game history when Scid quits
 
+
   o  Remove tree status bar. Same info avail in switcher and tree text
      widget.
-
 
   o  Booktuning nextmove is now highlighted (same as Book), and padding
      has been tweaked a bit.
@@ -712,10 +715,12 @@
 
   o  Display "(altered)" in statusbar is game has been changed
 
+
   o  Fullscreen menu item (Options->Windows->Fullscreen)
 
   o  FICS tweaks, including over-riding takeback/abort request dialogs
      when game ends
+
   o  Remove some wasted space around FICS, main button bar, and other
      widgets
 
@@ -842,11 +847,11 @@
   o  Game Save dialog remembers any custom tags you add to a game,
      making them easy to recall
 
+
   o  Restore drawing arrows and marks from the main board (also used by
      FICS premove)
 
   o  Arrow length/widths configurable via comment editor
-
 
   o  PGN Figurines now display in bold, and a different font, if
      applicable (from Gregor)
@@ -912,7 +917,6 @@
   o  Fix Tree 'Fill cache with game/base' feature
 
   o  Try to handle shortened FENs with Paste FEN
-
 
   o  Crosstable: 'Set Filter' now includes deleted games if +deleted
 
@@ -1045,7 +1049,6 @@
   o  Copy and Paste text from disabled OSX text widgets (engines, help,
      gameinfo)
 
-
   o  Buttons 2 and 3 are swapped around
 
      General Bugs
@@ -1110,7 +1113,6 @@
   o  Tweak PGN context menu: reorder the Strip/Delete move items
 
   o  Gamelist: replace the Negate button with a Select button
-
 
   o  Tree: Include a patch for embedding the Best Games into the Tree
      window
@@ -1240,6 +1242,7 @@
 
   o  Update FICs , PGN and Menu language translations
 
+
   7.0.11.  Scid vs. PC 4.5
 
   PGN Window:
@@ -1305,10 +1308,10 @@
   o  Add a 'make-scidgui.bat' hack for assembling a new 'scid.gui' from
      subversion
 
+
   o  Computer Tournament buttons padding fixed
 
      OSX:
-
 
   o  Make an OSX app with a working ;> version of Tcl (thanks Gilles)
 
@@ -1376,6 +1379,7 @@
 
   o  Overhaul Annotate widget - allow choice of scores/variation/both
      and remember annotation options
+
   o  Crosstable sort by Country feature
 
   o  Update Fics to allow for different Port/IP Address (using SCID
@@ -1437,9 +1441,7 @@
 
   o  Fix up file loading (and bookmarks) of DBs with dots (.) in their
      name
-
   o  Statusbar shows correct value after Crosstable update
-
 
   7.0.14.  Scid vs. PC 4.3
 
@@ -1504,8 +1506,8 @@
 
   o  Numerous GUI fixes
 
-  o  Revert PlayerInfo to old format, but add a "Won Drawn Lost" header
 
+  o  Revert PlayerInfo to old format, but add a "Won Drawn Lost" header
 
   o  Tweak crosstable knock-out format
 
@@ -1570,8 +1572,8 @@
 
   o  Main board grid colour can be changed
 
-  o  Setup board can rotate and flip the board
 
+  o  Setup board can rotate and flip the board
 
   o  Clicking on moves in the gameinfo area shows Comment Editor
 
@@ -1702,8 +1704,8 @@
   o  When using the setup board widget, do a sanity check about the
      FEN's castling field
 
-  o  Some minor version fixes anticipating tcl8.6
 
+  o  Some minor version fixes anticipating tcl8.6
 
   o  Small bugfix: variation pop-up could previously throw errors if
      moving through movs fast
@@ -1767,6 +1769,7 @@
 
   Scid vs. PC mailing list
   <https://lists.sourceforge.net/lists/listinfo/scidvspc-users>
+
 
   Stevenaaus <email://stevenaaus at yahoo dot com> is a uni graduate in
   math and computer science, who programs as a hobby in tcl/tk, bash and

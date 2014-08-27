@@ -29,6 +29,7 @@ set var(LANGUAGES) [list \
   tcl/lang/norsk.tcl \
   tcl/lang/polish.tcl \
   tcl/lang/portbr.tcl \
+  tcl/lang/russian.tcl \
   tcl/lang/nederlan.tcl \
   tcl/lang/spanish.tcl \
   tcl/lang/serbian.tcl \

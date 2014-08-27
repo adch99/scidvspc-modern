@@ -285,7 +285,6 @@ analysing the differences in the strings used by the two programs.
 if {string match "*Starting FICS session*" $line]} {
 The two servers do have many similarities i think, and examining
 xboard's "backend.c" (or some other client) for "FICS" particularities
-<LI> Russian translation is broken afaics, and has been removed for the time being.
 <LI> The month i've updated the translations a little. (Thanks to Peter
 for totally overhauling the Dutch one). The checklangs.tcl script is
 in much better shape, but of course there are still lots of
@@ -313,7 +312,6 @@ I will get around to doing it one day though.
 <LI> A lot of people use chessbase books (.ctg). Scid can only read
 polyglot opening books, but inlining this projects
 work may not be too hard.  https://github.com/sshivaji/ctgexporter</LI>
-</LI>
 </LI>
 </LI>
 </LI>
@@ -432,6 +430,8 @@ Chessbase databases and many chess variants.</P>
 <LI> Add 'Find' entry boxes to more windows (including spelling corrections) , and widget can now use regular expressions</LI>
 <LI> Better Repair Base feature (from Gregor)</LI>
 <LI> Include Gregors fast file opening with the windows 32-bit binary</LI>
+<LI> Reinstate a new Russian translation (from Sergey Nikolaevich Koyankin)</LI>
+<LI> Better handle language translations/encoding</LI>
 <LI> Crosstable: bump max-player limit, tweak menus and bind right-click to menu, fix occasional allignment bug, and dont' automatically update (fixing busy cursor bug).</LI>
 <LI> Bump Opening Table limits, and minor bug-fixes</LI>
 <LI> New (Skak) Latex export-games feature (author Mark Dennehy)</LI>
