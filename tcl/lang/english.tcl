@@ -35,6 +35,8 @@
 #     set helpText(D,Contents) {<h1>Inhaltsverzeichnis Scid-Hilfe</h1>...}
 #     ..... see deutsch.tcl for an example.
 
+addLanguage E English 0
+
 proc setLanguage_E {} {
 
 # File menu:
