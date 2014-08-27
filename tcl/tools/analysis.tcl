@@ -2229,12 +2229,6 @@ proc makeAnalysisWin {{n 0} {options {}}} {
   button $w.b.move -image tb_addmove -command "makeAnalysisMove $n" -relief $relief
   ::utils::tooltip::Set $w.b.move $::tr(AddMove)
   bind $w.b.move <Button-3> "addAnalysisScore $n"
- 
-  if {$::macOS} {
-    $w.b.startStop configure -width 30 -height 30
-    $w.b.move      configure -width 30 -height 30
-    $w.b.help      configure -width 30 -height 30
-  }
 
   button $w.b.line -image tb_addvar -command "addAnalysisVariation $n" -relief $relief
   ::utils::tooltip::Set $w.b.line $::tr(AddVariation)
@@ -2297,6 +2291,12 @@ proc makeAnalysisWin {{n 0} {options {}}} {
 
   button $w.b.help -image tb_help  -command {helpWindow Analysis} -relief $relief
   ::utils::tooltip::Set $w.b.help $::tr(Help)
+ 
+  if {$::macOS} {
+    $w.b.startStop configure -width 30 -height 30
+    $w.b.move      configure -width 30 -height 30
+    $w.b.help      configure -width 30 -height 30
+  }
 
   pack $w.b.startStop $w.b.move $w.b.line $w.b.alllines \
        $w.b.multipv $w.b.lockengine $w.b.annotatebut $w.b.exclude $w.b.priority $w.b.showinfo $w.b.showboard \
