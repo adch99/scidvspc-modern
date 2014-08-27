@@ -1789,7 +1789,11 @@ Http://scidvspc.sourceforge.net
 
 getCommandLineOptions
 
-setLanguage $language
+if {[catch {
+  setLanguage $language
+}]} {
+  setLanguage E
+}
 
 updateTitle
 updateBoard
