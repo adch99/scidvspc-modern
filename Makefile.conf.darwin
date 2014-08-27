@@ -157,7 +157,7 @@ TCLS= \
     tcl/tools/reper.tcl tcl/tools/graphs.tcl tcl/tools/tablebase.tcl tcl/tools/ptracker.tcl \
   tcl/help/help.tcl tcl/help/tips.tcl \
   tcl/menus.tcl tcl/board.tcl tcl/move.tcl tcl/main.tcl tcl/tools/correspondence.tcl \
-    tcl/lang/english.tcl $(LANGUAGES) \
+    tcl/lang/english.tcl \
   tcl/tools/fics.tcl tcl/tools/uci.tcl tcl/end.tcl tcl/tools/tacgame.tcl tcl/tools/sergame.tcl tcl/tools/calvar.tcl tcl/tools/tactics.tcl tcl/tools/novag.tcl tcl/misc/flags.tcl tcl/tools/inputengine.tcl
 
 
@@ -201,6 +201,10 @@ install_scid: all_scid
 	install -m 666 ./bases/* $(SHAREDIR)/bases/
 	install -m 755 -d $(SHAREDIR)/html
 	cp -r ./html/* $(SHAREDIR)/html/
+	install -m 755 -d $(SHAREDIR)/lang/
+        @if [ "$(LANGUAGES)" != "" ]; then \
+          cp $(LANGUAGES) $(SHAREDIR)/lang/ ; \
+        fi
 	install -m 755 -d $(SHAREDIR)/bitmaps
 	cp -r ./bitmaps/* $(SHAREDIR)/bitmaps/
 	@if [ "`id -u`" -eq 0 ]; then \
@@ -231,6 +235,7 @@ uninstall:
 	rm -f $(BINDIR)/scmerge $(BINDIR)/scidlet
 	rm -f $(BINDIR)/phalanx $(BINDIR)/fruit
 	rm -rf $(SHAREDIR)/html
+	rm -rf $(SHAREDIR)/lang
 	rm -rf $(SHAREDIR)/bitmaps
 	# Not going to uninstall OSX fonts....
 	# They all exist in the one directory, and don't want to trash it by accident
@@ -272,6 +277,7 @@ mac_app: all_scid engines mac_rename mac_buttons
 	install -m 755 -d dist/ScidvsMac.app/Contents/Resources/engines/phalanx
 	install -m 755 -d dist/ScidvsMac.app/Contents/Resources/engines/toga
 	install -m 755 -d dist/ScidvsMac.app/Contents/Resources/html
+	install -m 755 -d dist/ScidvsMac.app/Contents/Resources/lang
 	install -m 755 -d dist/ScidvsMac.app/Contents/Resources/bitmaps
 	install -m 755 $(SCRIPTS) $(EXECS) dist/ScidvsMac.app/Contents/MacOS
 	install -m 755 scid dist/ScidvsMac.app/Contents/MacOS
@@ -285,6 +291,9 @@ mac_app: all_scid engines mac_rename mac_buttons
 	install -m 644 icons/scid.icns dist/ScidvsMac.app/Contents/Resources/
 	install -m 644 Info.plist dist/ScidvsMac.app/Contents/
 	cp -r ./html/* dist/ScidvsMac.app/Contents/Resources/html/
+        @if [ "$(LANGUAGES)" != "" ]; then \
+          cp $(LANGUAGES) dist/ScidvsMac.app/Contents/Resources/lang/ ; \
+        fi
 	cp -r ./bitmaps/* dist/ScidvsMac.app/Contents/Resources/bitmaps/
 	cp -r README.html images dist/
 

@@ -60,13 +60,47 @@ proc untrans { msg } {
 ################################################################################
 #
 ################################################################################
+
+### Now unused
+### Languages are now sourced from menus.tcl -> initLanguageMenus
+
 proc addLanguage {letter name underline {encodingSystem ""}} {
-  global langEncoding languages
-  .menu.options.language add radiobutton -label $name \
-      -underline $underline -variable language -value $letter \
-      -command setLanguage
-  set ::langEncoding($letter) $encodingSystem
-  lappend languages $letter
+  return
+}
+
+# lang filename menuname underline encoding sc_info_lang
+array set langTable {
+  C {czech    Czech      0 iso8859-2 cz}
+  D {deutsch  Deutsch    0 iso8859-1 de}
+  F {francais Francais   0 iso8859-1 fr}
+  G {greek    Greek      0 utf-8     gr}
+  H {hungary  Hungarian  0 iso8859-2 hu}
+  I {italian  Italian    0 utf-8     it}
+  N {nederlan Nederlands 0 iso8859-1 ne}
+  O {norsk    Norsk      1 iso8859-1 no}
+  P {polish   Polish     0 utf-8     {}}
+  B {portbr   {Brazil Portuguese} 0 iso8859-1 {}}
+  Y {serbian  Serbian    2 iso8859-2 {}}
+  S {spanish  Español    1 iso8859-1 es}
+  W {swedish  Swedish    1 iso8859-1 sw}
+}
+
+proc initLanguageMenus {} {
+  global langEncoding languages langTable
+
+  # English 
+  .menu.options.language add radiobutton -label English \
+    -underline 0 -variable language -value E -command setLanguage
+  set langEncoding(E) utf-8
+
+  set dir [file nativename [file join $::scidShareDir lang]]
+
+  foreach i [array names langTable] {
+    if {[file exists [file nativename [file join $::scidShareDir "lang/[lindex $langTable($i) 0].tcl"]]]} {
+      .menu.options.language add radiobutton -label [lindex $langTable($i) 1] \
+	-underline [lindex $langTable($i) 2] -variable language -value $i -command setLanguage
+    }
+  }
 }
 
 ### Assigns the menu name and help message for a menu entry and language.
@@ -141,37 +175,45 @@ proc tr {tag {lang ""}} {
 #
 ################################################################################
 proc setLanguage {{lang ""}} {
-  global menuLabel menuUnder oldLang hasEncoding langEncoding
+  global menuLabel menuUnder oldLang hasEncoding langEncoding langTable
 
-  if {$lang == ""} {set lang $::language}
-
-  if {![info exists langEncoding($lang)]} {
-    # Need this check incase Scid is built with nolang but previously used *with* languages
-    set ::language E
-    set lang E
-  }
-
-  if { $::translatePieces } {
-    switch $lang {
-      F {sc_info language fr}
-      S {sc_info language es}
-      D {sc_info language de}
-      I {sc_info language it}
-      N {sc_info language ne}
-      C {sc_info language cz}
-      H {sc_info language hu}
-      O {sc_info language no}
-      W {sc_info language sw}
-      G {sc_info language gr}
-      default {sc_info language en}
-    }
+  if {$lang == ""} {
+    set lang $::language
   } else {
-    sc_info language en
+    set ::language $lang
   }
 
-  if {[catch {setLanguage_$lang} err]} { puts "Error: $err" }
+  if {$lang == "E"} {
+      sc_info language en
+  } else {
+    ### Source language if necessary
+    ### (langEncoding doubles as a way to know if we have inited language yet)
+    if {![info exists langEncoding($lang)]} {
+      set langEncoding($lang) [lindex $langTable($lang) 3]
+      set filename [file nativename [file join $::scidShareDir "lang/[lindex $langTable($lang) 0].tcl"]]
+      if {$langEncoding($lang) == "utf-8"} {
+	source -encoding utf-8 $filename
+      } else {
+	source $filename
+        ### Hmmm. This is probably better, but is untested
+	# source -encoding $langEncoding($lang) $filename
+      }
+    }
 
-  # TODO: Check this:
+    if { $::translatePieces } {
+      set info [lindex $langTable($lang) 4]
+      if {$info == {}} {
+	sc_info language en
+      } else {
+	sc_info language $info
+      }
+    }
+  }
+  if {[catch {setLanguage_$lang} err]} {
+    puts "setLanguage_$lang error: $err"
+  }
+
+  # TODO: Check this !
   if {$hasEncoding  && $langEncoding($lang) != ""} {
     # encoding system $langEncoding($lang)
   }
@@ -190,23 +232,18 @@ proc setLanguage {{lang ""}} {
   }
   set oldLang $lang
 }
+
 ################################################################################
 # Will switch language only for Scid backoffice, no UI
 # Used to make callbacks use english by default
 ################################################################################
 proc setLanguageTemp { lang } {
-  switch $lang {
-    F {sc_info language fr}
-    S {sc_info language es}
-    D {sc_info language de}
-    I {sc_info language it}
-    N {sc_info language ne}
-    C {sc_info language cz}
-    H {sc_info language hu}
-    O {sc_info language no}
-    W {sc_info language sw}
-    G {sc_info language gr}
-    default {sc_info language en}
+
+  set info [lindex $::langTable($lang) 4]
+  if {$info == {}} {
+    sc_info language en
+  } else {
+    sc_info language $info
   }
 }
 

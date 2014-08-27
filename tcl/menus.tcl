@@ -1173,6 +1173,7 @@ set helpMessage($m,1) OptionsColour
 ###############################
 
 menu .menu.options.language -tearoff -1
+initLanguageMenus
 
 set m .menu.options.fonts
 menu $m -tearoff -1
