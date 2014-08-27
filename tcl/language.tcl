@@ -239,11 +239,15 @@ proc setLanguage {{lang ""}} {
 ################################################################################
 proc setLanguageTemp { lang } {
 
-  set info [lindex $::langTable($lang) 4]
-  if {$info == {}} {
-    sc_info language en
+  if {$lang == "E"} {
+      sc_info language en
   } else {
-    sc_info language $info
+    set info [lindex $::langTable($lang) 4]
+    if {$info == {}} {
+      sc_info language en
+    } else {
+      sc_info language $info
+    }
   }
 }
 
