@@ -3369,7 +3369,6 @@ Game::WritePGNtoLaTeX(TextBuffer * tb, uint stopLocation)
 
 
 		for (uint i = 0; i < (uint)m->nagCount; i++) {
-			char temp[20];
 			if (printDiagrams && m->nags[i] == NAG_Diagram) {
 				tb->PrintString("}\n");
 				inMainline = false;
@@ -3515,7 +3514,6 @@ Game::WritePGNtoLaTeX(TextBuffer * tb, uint stopLocation)
 					tb->PrintWord(temp);
 
 					for (uint i = 0; i < (uint)v->nagCount; i++) {
-						char temp[20];
 						game_printNag(v->nags[i], temp, true, PGN_FORMAT_LaTeX);
 						tb->PrintString(temp);
 					}
