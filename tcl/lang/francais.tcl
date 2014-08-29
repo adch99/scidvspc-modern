@@ -362,6 +362,14 @@ menuText F GInfoTBAll "Tables de finales: résultat et meilleurs coups" 19
 menuText F GInfoDelete "(Récupérer)Effacer cette partie" 4
 menuText F GInfoMark "(Dé)Marquer cette partie" 4
 menuText F GInfoInformant "Configurer les valeurs de notation" 0
+# ====== TODO To be translated ======
+translate F FlipBoard {Flip board}
+# ====== TODO To be translated ======
+translate F RaiseWindows {Raise windows}
+# ====== TODO To be translated ======
+translate F AutoPlay {Autoplay}
+# ====== TODO To be translated ======
+translate F TrialMode {Trial mode}
 
 # General buttons:
 # todo

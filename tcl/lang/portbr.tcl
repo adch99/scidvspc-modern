@@ -384,6 +384,14 @@ menuText B GInfoDelete "Recuperar este jogo" 0
 menuText B GInfoMark "Desmarcar este jogo" 0
 # ====== TODO To be translated ======
 menuText B GInfoInformant "Configure informant values" 0
+# ====== TODO To be translated ======
+translate B FlipBoard {Flip board}
+# ====== TODO To be translated ======
+translate B RaiseWindows {Raise windows}
+# ====== TODO To be translated ======
+translate B AutoPlay {Autoplay}
+# ====== TODO To be translated ======
+translate B TrialMode {Trial mode}
 
 # General buttons:
 # ====== TODO To be translated ======

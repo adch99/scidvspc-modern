@@ -353,6 +353,14 @@ menuText W GInfoTBAll "Slutspelsdatabaser: resultat och bästa drag" 33
 menuText W GInfoDelete "Återta/Radera detta parti" 0
 menuText W GInfoMark "(Av-)Markera detta parti" 5
 menuText W GInfoInformant "Konfigurera Informant-parametrar" 0
+# ====== TODO To be translated ======
+translate W FlipBoard {Flip board}
+# ====== TODO To be translated ======
+translate W RaiseWindows {Raise windows}
+# ====== TODO To be translated ======
+translate W AutoPlay {Autoplay}
+# ====== TODO To be translated ======
+translate W TrialMode {Trial mode}
 
 # General buttons:
 # ====== TODO To be translated ======

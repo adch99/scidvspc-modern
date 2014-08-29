@@ -372,6 +372,14 @@ menuText I GInfoTBAll "Tablebases: risultato e mosse migliori" 19
 menuText I GInfoDelete "Recupera/Cancella questa partita" 9
 menuText I GInfoMark "Smarca/Marca questa partita" 7
 menuText I GInfoInformant "Configura i valori informativi" 0
+# ====== TODO To be translated ======
+translate I FlipBoard {Flip board}
+# ====== TODO To be translated ======
+translate I RaiseWindows {Raise windows}
+# ====== TODO To be translated ======
+translate I AutoPlay {Autoplay}
+# ====== TODO To be translated ======
+translate I TrialMode {Trial mode}
 
 # General buttons:
 # ====== TODO To be translated ======

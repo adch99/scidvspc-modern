@@ -359,6 +359,14 @@ menuText N GInfoTBAll "Eindspel tablebases: resultaat en beste zetten" 19
 menuText N GInfoDelete "Partij wissen/terughalen" 9
 menuText N GInfoMark "Partij markeren/niet markeren" 7
 menuText N GInfoInformant "Configureer informant waarden" 0
+# ====== TODO To be translated ======
+translate N FlipBoard {Flip board}
+# ====== TODO To be translated ======
+translate N RaiseWindows {Raise windows}
+# ====== TODO To be translated ======
+translate N AutoPlay {Autoplay}
+# ====== TODO To be translated ======
+translate N TrialMode {Trial mode}
 
 # General buttons:
 translate N Apply {Toepassen}

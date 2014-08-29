@@ -411,6 +411,14 @@ menuText Y GInfoDelete "Obri¹i/vrati ovu partiju" 0
 menuText Y GInfoMark "Mark/Unmark this game" 0 ;# ***
 # ====== TODO To be translated ======
 menuText Y GInfoInformant "Configure informant values" 0
+# ====== TODO To be translated ======
+translate Y FlipBoard {Flip board}
+# ====== TODO To be translated ======
+translate Y RaiseWindows {Raise windows}
+# ====== TODO To be translated ======
+translate Y AutoPlay {Autoplay}
+# ====== TODO To be translated ======
+translate Y TrialMode {Trial mode}
 
 # General buttons:
 # ====== TODO To be translated ======

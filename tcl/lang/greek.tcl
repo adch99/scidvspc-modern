@@ -371,6 +371,14 @@ menuText G GInfoTBAll "Φινάλε: Αποτελέσματα & Καλύτερη
 menuText G GInfoDelete "Διαγραφή (ή μη) Παρτίδας" 1
 menuText G GInfoMark "Επισήμανση (ή μη) Παρτίδας" 1
 menuText G GInfoInformant "Ρύθμιση Αξιών Χαρακτηρισμών" 1
+# ====== TODO To be translated ======
+translate G FlipBoard {Flip board}
+# ====== TODO To be translated ======
+translate G RaiseWindows {Raise windows}
+# ====== TODO To be translated ======
+translate G AutoPlay {Autoplay}
+# ====== TODO To be translated ======
+translate G TrialMode {Trial mode}
 
 # General buttons:
 translate G Apply {Εφαρμογή}

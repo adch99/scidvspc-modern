@@ -383,6 +383,14 @@ menuText C GInfoDelete "Vymazat/Nemazat tuto partii" 0
 menuText C GInfoMark "Oznaèit/Odznaèit tuto partii" 0
 # ====== TODO To be translated ======
 menuText C GInfoInformant "Configure informant values" 0
+# ====== TODO To be translated ======
+translate C FlipBoard {Flip board}
+# ====== TODO To be translated ======
+translate C RaiseWindows {Raise windows}
+# ====== TODO To be translated ======
+translate C AutoPlay {Autoplay}
+# ====== TODO To be translated ======
+translate C TrialMode {Trial mode}
 
 # General buttons:
 # ====== TODO To be translated ======

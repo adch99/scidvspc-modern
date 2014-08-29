@@ -342,9 +342,14 @@ menuText R GInfoTBAll "Табличные базы: результат и луч
 menuText R GInfoDelete "(Восстановить) удалить эту партию" 1
 menuText R GInfoMark "(Снять отметку) отметить эту партию" 1
 menuText R GInfoInformant "Настройка значений подсказчика" 0
-translate R Apply {Принять}
+
+translate R FlipBoard {Перевернуть доску}
+translate R RaiseWindows {Выдвигать окна}
+translate R AutoPlay {Автоигра}
+translate R TrialMode {Пробный режим}
 
 # General buttons:
+translate R Apply {Принять}
 translate R Back {Назад}
 translate R Browse {Просмотр}
 translate R Cancel {Отмена}

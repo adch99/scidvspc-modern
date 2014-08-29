@@ -387,6 +387,14 @@ menuText H GInfoDelete "Törli/helyreállítja ezt a játszmát." 0
 menuText H GInfoMark "Megjelöli ezt a játszmát/megszünteti a jelölést." 0
 # ====== TODO To be translated ======
 menuText H GInfoInformant "Configure informant values" 0
+# ====== TODO To be translated ======
+translate H FlipBoard {Flip board}
+# ====== TODO To be translated ======
+translate H RaiseWindows {Raise windows}
+# ====== TODO To be translated ======
+translate H AutoPlay {Autoplay}
+# ====== TODO To be translated ======
+translate H TrialMode {Trial mode}
 
 # General buttons:
 # ====== TODO To be translated ======

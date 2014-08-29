@@ -412,6 +412,14 @@ menuText O GInfoDelete "Slett/gjenopprett dette partiet" 0
 menuText O GInfoMark "(Av)Merk dette partiet" 0
 # ====== TODO To be translated ======
 menuText O GInfoInformant "Configure informant values" 0
+# ====== TODO To be translated ======
+translate O FlipBoard {Flip board}
+# ====== TODO To be translated ======
+translate O RaiseWindows {Raise windows}
+# ====== TODO To be translated ======
+translate O AutoPlay {Autoplay}
+# ====== TODO To be translated ======
+translate O TrialMode {Trial mode}
 
 # General buttons:
 # ====== TODO To be translated ======

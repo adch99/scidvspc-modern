@@ -357,6 +357,11 @@ menuText E GInfoDelete "(Un)Delete This Game" 4
 menuText E GInfoMark "(Un)Mark This Game" 4
 menuText E GInfoInformant "Configure Informant Values" 0
 
+translate E FlipBoard {Flip board}
+translate E RaiseWindows {Raise windows}
+translate E AutoPlay {Autoplay}
+translate E TrialMode {Trial mode}
+
 # General buttons:
 translate E Apply {Apply}
 translate E Back {Back}

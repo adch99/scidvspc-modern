@@ -329,10 +329,11 @@ button .main.button.autoplay -image autoplay_off -command toggleAutoplay
 # Right-click Autoplays all games in filter
 bind .main.button.autoplay <Button-3> {toggleAutoplay 2}
 button .main.button.trial    -image tb_trial     -command {setTrialMode toggle}
-::utils::tooltip::Set .main.button.flip "Flip Board"
-::utils::tooltip::Set .main.button.windows "Raise Windows"
-::utils::tooltip::Set .main.button.autoplay "Autoplay"
-::utils::tooltip::Set .main.button.trial "Trial Mode"
+
+::utils::tooltip::Set .main.button.flip [tr FlipBoard]
+::utils::tooltip::Set .main.button.windows [tr RaiseWindows]
+::utils::tooltip::Set .main.button.autoplay [tr AutoPlay]
+::utils::tooltip::Set .main.button.trial [tr TrialMode]
 
 foreach i {start back forward end intoVar exitVar addVar autoplay flip windows trial} {
   .main.button.$i configure -relief flat -border 1 -highlightthickness 0 -takefocus 0

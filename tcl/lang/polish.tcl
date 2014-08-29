@@ -350,6 +350,14 @@ menuText P GInfoTBAll "Tablica końcówek: wszystko" 18
 menuText P GInfoDelete "Usuń/przywróć tę partię" 0
 menuText P GInfoMark "Włącz/wyłącz zaznaczenie tej partii" 0
 menuText P GInfoInformant "Konfiguruj oceny Informatora" 0
+# ====== TODO To be translated ======
+translate P FlipBoard {Flip board}
+# ====== TODO To be translated ======
+translate P RaiseWindows {Raise windows}
+# ====== TODO To be translated ======
+translate P AutoPlay {Autoplay}
+# ====== TODO To be translated ======
+translate P TrialMode {Trial mode}
 
 # General buttons:
 translate P Apply {Zastosuj}

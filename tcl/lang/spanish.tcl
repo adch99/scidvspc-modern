@@ -368,6 +368,14 @@ menuText S GInfoTBAll "TBs: resultado y mejor movimiento" 23
 menuText S GInfoDelete "(No)Borrar esta partida" 4
 menuText S GInfoMark "(No)Marcar esta partida" 4
 menuText S GInfoInformant "Configurar valores de información" 0
+# ====== TODO To be translated ======
+translate S FlipBoard {Flip board}
+# ====== TODO To be translated ======
+translate S RaiseWindows {Raise windows}
+# ====== TODO To be translated ======
+translate S AutoPlay {Autoplay}
+# ====== TODO To be translated ======
+translate S TrialMode {Trial mode}
 
 # General buttons:
 translate S Apply {Aplicar}
