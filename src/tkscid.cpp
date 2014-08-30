@@ -8822,16 +8822,13 @@ addScoreToList (Tcl_Interp * ti, int moveCounter, const char * comment,
 //    A score is a number with the format
 //        "+digits.digits" or
 //        "-digits.digits"
-//    found somewhere in the comment of the move, OR the comment of the
-//    first variation of the move.
+//    found somewhere in the comment of the move
 //
-//    In this way, both Scid annotations which have the form
+//    Remove compatability with Crafty annotations
+//    because uncommented moves with a commented variations give wrong graphs - S.A.
+//
+//    Scid annotations which have the form
 //        1.e4 {"+0.13: ...."} e5 ...
-//    and those produced by crafty's annotate command which have the form
-//        1.e4 ({7:+0.12} ...) e5 ...
-//    are recognised. The latter form (comments in variations) had the score
-//    from the perspective of the side to move in Crafty versions 17 and
-//    older, but now have the score always from White's perspective, since
 //    version 18.
 //
 //    The list returned should be read in pairs of values: the first is the
@@ -8861,28 +8858,14 @@ sc_game_scores (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     }
 
     Game * g = db->game;
+    const char * comment;
     g->SaveState ();
     g->MoveToPly (0);
     while (g->MoveForward() == OK) {
         moveCounter++;
-        const char * comment = g->GetMoveComment();
+        comment = g->GetMoveComment();
         // Klimmek: use invertflags
-        if (addScoreToList (ti, moveCounter, comment, moveCounter % 2 ? inv_b : inv_w, min, max)) {
-            continue;
-        }
-        // Now try finding a score in the comment at the start of the
-        // first variation:
-        if (g->GetNumVariations() > 0) {
-            g->MoveIntoVariation (0);
-            comment = g->GetMoveComment();
-            addScoreToList (ti, moveCounter, comment,
-                            //false,
-                            // For the annotate format of crafty before v18,
-                            // replace "false" above with:
-                                 moveCounter % 2 ? inv_b : inv_w,
-                            min, max);
-            g->MoveExitVariation();
-        }
+        addScoreToList (ti, moveCounter, comment, moveCounter % 2 ? inv_b : inv_w, min, max);
     }
     db->game->RestoreState ();
     return TCL_OK;
