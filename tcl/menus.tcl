@@ -1,8 +1,13 @@
 ### Menus.tcl: part of Scid.
 ### Copyright (C) 2001-2003 Shane Hudson.
 
-# Keep menus on right hand side (X11)
-catch {tk::classic::restore menu}
+### Keep menus on right hand side (X11)
+# This also disables automatic menu posting
+# catch {tk::classic::restore menu}
+
+if {[tk windowingsystem] eq "x11"} {
+  option add *Menu.useMotifHelp true widgetDefault
+}
 
 array set helpMessage {}
 
