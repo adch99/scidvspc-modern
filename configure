@@ -378,8 +378,8 @@ proc checkZlib {} {
 # writeMakefile:
 #    Creates the Makefile using Makefile.conf and the configured
 #    settings.
-#    Also creates tcl/config.tcl
-#
+#    Also creates tcl/sharedir.tcl
+
 proc writeMakefile {{type ""}} {
     global var defaultVar
   
@@ -453,6 +453,18 @@ proc writeMakefile {{type ""}} {
     }
 
     close $from
+    close $to
+
+    # sharedir.tcl
+
+    if {[catch {set to [open "tcl/sharedir.tcl" w]}]} {
+       puts "Error opening file for writing: tcl/sharedir.tcl"
+       exit 1
+    }
+
+    puts $to "### sharedir.tcl"
+    puts $to "\nset scidShareDir \"$var(SHAREDIR)\"\n"
+
     close $to
 
     # Summary info

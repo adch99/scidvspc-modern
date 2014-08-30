@@ -5785,6 +5785,7 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li>Better Repair Base feature (from Gregor)</li>
 <li>Include Gregors fast file opening with the windows 32-bit binary</li>
 <li>Reinstate a new Russian translation (from Sergey Nikolaevich Koyankin)</li>
+<li>weak Scid's installer is to properly allow custom SHAREDIR</li>
 <li>Better handle language translations/encoding</li>
 <li>Crosstable: bump max-player limit, tweak menus and bind right-click to menu, fix occasional allignment bug, and dont' automatically update (fixing busy cursor bug)</li>
 <li>Bump Opening Table limits, and minor bug-fixes</li>

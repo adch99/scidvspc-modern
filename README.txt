@@ -386,9 +386,6 @@
 
   o  Tcl/Tk-8.5.10 is buggy.
 
-  o  Scid's installer is poor. Currently installation only really works
-     into /usr and /usr/local.
-
   o  OS X docked mode has some issues due to it's poor Tcl/Tk.
 
   o  Focus Issues. Kde users can allow Tcl apps to properly raise
@@ -454,6 +451,7 @@
   released his own tree, Scid-pg, which included UCI support and
   numerous Player versus Computer features.
 
+
   But subtley, and with some controversy, he began to adopt the name
   Scid as his own. Some people objected, especially Dr. Kirby, with whom
   a flame war began, but Pascal's efforts to gain ownership of the
@@ -511,6 +509,8 @@
 
   o  Reinstate a new Russian translation (from Sergey Nikolaevich
      Koyankin)
+
+  o  Tweak Scid's installer is to properly allow custom SHAREDIR
 
   o  Better handle language translations/encoding
 

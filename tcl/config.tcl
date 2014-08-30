@@ -8,7 +8,9 @@ if {$windowsOS} {
 } elseif {$macApp} {
   set scidShareDir [file normalize [file join $scidExeDir "../Resources"]]
 } else {
-  set scidShareDir [file normalize [file join $scidExeDir "../share/scid"]]
+  if {![info exists scidShareDir]} {
+    set scidShareDir [file normalize [file join $scidExeDir "../share/scid"]]
+  }
 }
 
 # also reset BooksDir if the variable is set, but doesn't exist S.A.

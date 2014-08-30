@@ -294,7 +294,6 @@ work may not be too hard.  https://github.com/sshivaji/ctgexporter
 <sect1> known issues <p>
 <itemize>
 <item> Tcl/Tk-8.5.10 is buggy.
-<item> Scid's installer is poor. Currently installation only really works into /usr and /usr/local.
 <item> OS X docked mode has some issues due to it's poor Tcl/Tk.
 <item> <bf>Focus Issues</bf>. Kde users can allow Tcl apps to properly raise themselves by
 configuring <i>desktop > window behavior > advanced > focus stealing prevention</i>
@@ -384,6 +383,7 @@ Chessbase databases and many chess variants.</p>
 <item> Better Repair Base feature (from Gregor)
 <item> Include Gregors fast file opening with the windows 32-bit binary
 <item> Reinstate a new Russian translation (from Sergey Nikolaevich Koyankin)
+<item> Tweak Scid's installer is to properly allow custom SHAREDIR
 <item> Better handle language translations/encoding
 <item> Crosstable: bump max-player limit, tweak menus and bind right-click to menu, fix occasional allignment bug, and dont' automatically update (fixing busy cursor bug).
 <item> Bump Opening Table limits, and minor bug-fixes
