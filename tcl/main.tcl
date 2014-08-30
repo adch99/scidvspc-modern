@@ -638,7 +638,7 @@ proc editMyPlayerNames {} {
   pack $w.desc.text -fill both -expand yes
 
   frame $w.f -borderwidth 0
-  text $w.f.text -width 50 -height 10 -wrap none
+  text $w.f.text -width 50 -height 10 -wrap none -highlightthickness 0
   foreach name $myPlayerNames {
     $w.f.text insert end "$name\n"
   }

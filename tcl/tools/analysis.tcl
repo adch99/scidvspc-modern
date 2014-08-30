@@ -398,7 +398,7 @@ proc ::enginelist::choose {} {
   pack [frame $w.list -relief flat -borderwidth 0] \
     -side top -expand yes -fill both -padx 4 -pady 3
 
-  listbox $w.list.list -height 10 -selectmode browse -setgrid 1 \
+  listbox $w.list.list -height 10 -selectmode browse -setgrid 1 -highlightthickness 0 \
       -yscrollcommand "$w.list.ybar set" -font font_Fixed -exportselection 0 ; # -bg text_bg_color
 
   bind $w.list.list <Double-ButtonRelease-1> "$w.buttons2.start invoke; break"

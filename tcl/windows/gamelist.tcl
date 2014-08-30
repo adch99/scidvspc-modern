@@ -524,7 +524,7 @@ proc ::windows::gamelist::Open {} {
 
   ### Bottom row of buttons , etc
 
-  entry $w.c.goto -width 8 -justify right -textvariable ::windows::gamelist::goto -font font_Small
+  entry $w.c.goto -width 8 -justify right -textvariable ::windows::gamelist::goto -font font_Small -highlightthickness 0
   bind $w.c.goto <Return> {
     ::windows::gamelist::showNum $::windows::gamelist::goto
   }
