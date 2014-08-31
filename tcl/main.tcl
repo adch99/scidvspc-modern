@@ -1212,9 +1212,19 @@ proc addMove { sq1 sq2 {animate ""}} {
 
   set move [sc_game info nextMoveUCI]
   if { [ string compare -nocase $moveUCI $move] == 0 && ! $nullmove } {
-       sc_move forward
-       updateBoard
-       return
+    sc_move forward
+    # hack to allow easy adding of var at end of line
+    if {[sc_pos isAt end]} {
+      sc_move back
+      sc_game undoPoint
+      sc_var create
+      sc_move add $sq1 $sq2 $promo
+      moveEntry_Clear
+      updateBoard -pgn $animate
+    } else {
+      updateBoard
+    }
+    return
   }
 
   set varList [sc_var list UCI]

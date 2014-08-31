@@ -853,8 +853,7 @@ set helpTitle(Moves) "Entering Moves"
 set helpText(Moves) {<h1>Move Entry and Options</h1>
   <p>
   Scid allows moves to be made using the mouse or keyboard.
-  Use the mouse to click on a piece, and then click on the
-destination square. Alternatively one may drag the piece.
+  Use the mouse to click on a piece, then the destination square. Alternatively one may drag the piece.
   </p>
   
   <p>
@@ -865,7 +864,7 @@ destination square. Alternatively one may drag the piece.
 
   <h4>Retracting Moves</h4>
   <p>
-  To take back a move, press the Left-Arrow.
+  To take back a move, use Left-Arrow, Backspace or Mousewheel-Up.
   </p>
 
   <h4>Replacing Moves</h4>
@@ -876,6 +875,11 @@ destination square. Alternatively one may drag the piece.
   add the new move as a variation. If one finds this annoying, 
   it is possible to skip this dialog by unchecking the
   <green>Options--<gt>Moves--<gt>Ask Before Replacing Moves</green> menu option
+  </p>
+  <p>
+  If the same move already exists, Scid will merely move into this move.
+  <i>This behaviour is different when it is end-of-game. Now, Scid will automatically
+  create a new variation. This allows one to easily add end-of-game variations.</i>
   </p>
 
   <h4><name Undo>Undo</name></h4>
@@ -991,7 +995,7 @@ destination square. Alternatively one may drag the piece.
   <li> =+	[=][+]</li>
   </ul>
 
-  <p><footer>Updated: Scid vs. PC 4.6 September 2011 </footer></p>
+  <p><footer>Updated: Scid vs. PC 4.13 August 2014 </footer></p>
 }
 
 set helpTitle(Searches) "Searches"
