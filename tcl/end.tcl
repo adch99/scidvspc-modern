@@ -211,7 +211,7 @@ proc setExportText {exportType} {
     "LaTeX" {
       set title "Set LaTeX chess12 file export text"
     } 
-    "LaTeX_Skak" {
+    "Skak" {
       set title "Set LaTeX skak file export text"
     }
     default {
@@ -511,7 +511,7 @@ proc exportGames {selection exportType} {
       set idir $::initialDir(tex)
       set default ".tex"
     }
-    "LaTeX_Skak" {
+    "Skak" {
       set ftype {
         { "LaTeX files" {".tex" ".ltx"} }
         { "All files" {"*"} }

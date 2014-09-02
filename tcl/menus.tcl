@@ -635,7 +635,7 @@ $m.exportcurrent add command -label ToolsExpCurrentLaTeX \
 set helpMessage($m.exportcurrent,3) ToolsExpCurrentLaTeX
 
 $m.exportcurrent add command -label ToolsExpCurrentLaTeXSkak \
-    -command {exportGames current LaTeX_Skak}
+    -command {exportGames current Skak}
 set helpMessage($m.exportcurrent,3) ToolsExpCurrentLaTeXSkak
 
 menu $m.exportfilter
@@ -660,7 +660,7 @@ $m.exportfilter add command -label ToolsExpFilterLaTeX \
 set helpMessage($m.exportfilter,3) ToolsExpFilterLaTeX
 
 $m.exportfilter add command -label ToolsExpFilterLaTeXSkak \
-    -command {exportGames filter LaTeX_Skak}
+    -command {exportGames filter Skak}
 set helpMessage($m.exportfilter,3) ToolsExpFilterLaTeXSkak
 
 $m.exportfilter add command -label ToolsExpFilterGames \
@@ -938,7 +938,7 @@ $m add command -label OptionsSave -command {
       puts $optionF "set initialDir($type) [list $initialDir($type)]"
     }
     puts $optionF ""
-    foreach type {PGN HTML LaTeX LaTeX_Skak} {
+    foreach type {PGN HTML LaTeX Skak} {
       puts $optionF "set exportStartFile($type) [list $exportStartFile($type)]"
       puts $optionF "set exportEndFile($type) [list $exportEndFile($type)]"
     }
@@ -1102,7 +1102,7 @@ foreach i {1 2 3 4 5} {
 
 set m .menu.options.export
 menu $m -tearoff -1
-foreach format {PGN HTML LaTeX LaTeX_Skak} {
+foreach format {PGN HTML LaTeX Skak} {
   $m add command -label $format -underline 0 \
       -command "setExportText $format"
 }

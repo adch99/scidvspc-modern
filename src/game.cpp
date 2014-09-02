@@ -727,7 +727,7 @@ Game::Clear()
 //      Converts a string to a gameFormatT, returning true on success
 //      or false on error.
 //      The string should be a case-insensitive unique prefix of
-//      "plain" (or "pgn"), "HTML", "LaTeX", "LaTeX_Skak" or "Color".
+//      "plain" (or "pgn"), "HTML", "LaTeX", "Skak" or "Color".
 bool
 Game::PgnFormatFromString (const char * str, gameFormatT * fmt)
 {
@@ -739,8 +739,8 @@ Game::PgnFormatFromString (const char * str, gameFormatT * fmt)
         *fmt = PGN_FORMAT_HTML;
     } else if (strIsCasePrefix (str, "LaTeX")) {
         *fmt = PGN_FORMAT_LaTeX;
-    } else if (strIsCasePrefix (str, "LaTeX_Skak")) {
-        *fmt = PGN_FORMAT_LaTeX_Skak;
+    } else if (strIsCasePrefix (str, "Skak")) {
+        *fmt = PGN_FORMAT_Skak;
     } else if (strIsCasePrefix (str, "Color")) {
         *fmt = PGN_FORMAT_Color;
     } else {
@@ -2786,7 +2786,7 @@ Game::WritePGN (TextBuffer * tb, uint stopLocation)
         // tb->AddTranslation ('[', "$[$");
         // tb->AddTranslation (']', "$]$");
     }
-    if (IsLatexSkakFormat()) {
+    if (IsSkakFormat()) {
 		  return WritePGNtoLaTeX(tb, stopLocation);
     }
     if (IsColorFormat()) {
