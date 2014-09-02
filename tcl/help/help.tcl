@@ -1418,14 +1418,14 @@ Optionally, Head-to-Head and Total-Wins tie-breaks (in that order), can also be 
 
   <h4>ELO Performance Ratings Calculation</h4>
   <p>To calculate ELO Performance ratings and ratings changes, Scid uses algorithms from the
-  <url http://www.fide.com/component/handbook/?view=article&id=161>FIDE handbook articles 161</url> and 
-  <url http://www.fide.com/fide/handbook.html?id=172&view=article>172</url>
-  , or older versions of these articles.
-  Another article of interest is <url http://www.fide.com/fide/handbook.html?id=163&view=article>FIDE Title Regulations</url>.
+  <url http://www.fide.com/component/handbook/?view=article&id=172>FIDE handbook article 172</url>
+  , or older versions of this article. Some related discussion can be found <url 
+http://www.chesschat.org/showthread.php?12161-Performance-ratings-models-for-100-and-0-scores>here</url>.
   </p>
- <p><i>Compared to some sources, Scid's Ratings Changes have small discrepencies. Persons interested in authoritatively updating Scid's statistics will find the relevant code in Crosstable::RatingChange in Scid's source file crosstab.cpp.</i></p>
+ <p><i>Compared to some sources, Scid's Ratings Changes have small discrepencies, due to taking average opponent scores.
+ Persons interested in authoritatively updating Scid's statistics will find the relevant code in Crosstable::RatingChange.</i></p>
 
-  <p><footer>Updated: Scid vs. PC 4.13 July 2013</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.13 September 2013</footer></p>
 }
 
 
