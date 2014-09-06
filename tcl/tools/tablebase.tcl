@@ -615,7 +615,7 @@ if { $::tb::online_available } {
       "    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" \
       "    xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"" \
       "    xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\"" \
-      "    xmlns:mes=\"http://lokasoft.org/message/\">\n" \
+      "    xmlns:mes=\"http://lokasoft.nl/message/\">\n" \
       "  <soapenv:Header/>\n" \
       "  <soapenv:Body>\n" \
       "    <mes:GetBestMoves soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">\n" \
@@ -627,7 +627,7 @@ if { $::tb::online_available } {
 
     lappend headers \
       Content-Length [string length $envelope] \
-      SOAPAction http://lokasoft.org/action/TB2ComObj.GetBestMoves \
+      SOAPAction http://lokasoft.nl/action/TB2ComObj.GetBestMoves \
       ;
 
     # Delay the contacting message a bit, this avoids flickering in most cases.
