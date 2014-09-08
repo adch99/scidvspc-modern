@@ -105,7 +105,6 @@ main (int argc, char * argv[])
 
     progname = argv[0];
     
-    scid_Init();
     book = new PBook;
     pos = new Position;
     if (argc < 2) { usage(); }

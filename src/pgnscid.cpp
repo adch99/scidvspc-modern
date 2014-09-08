@@ -143,8 +143,6 @@ main (int argc, char * argv[])
     printf ("Converting file %s to Scid database %s:\n", pgnName, baseName);
     printf ("Errors/warnings will be written to %s.\n\n", fname);
 
-    scid_Init();
-
     GFile * gameFile = new GFile;
     if ((gameFile->Create (baseName, FMODE_WriteOnly)) != OK) {
         fprintf (stderr, "%s: could not create the file %s%s\n",

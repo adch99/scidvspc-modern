@@ -364,8 +364,6 @@ errMsgSearchInterrupted (Tcl_Interp * ti)
 int
 main (int argc, char * argv[])
 {
-    scid_Init();
-
     int newArgc = argc;
     char ** newArgv = argv;
 

@@ -21,11 +21,6 @@
 #include <ctype.h>   // For isspace(), etc
 
 
-// Scid initialisation routine: this MUST be called before such things as
-// computing chess moves are done, since it sets up piece movement tables.
-//
-void   scid_Init ();
-
 // ECO string routines
 //
 void eco_ToString (ecoT ecoCode, char * ecoStr, bool extensions = true);

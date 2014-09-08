@@ -570,8 +570,6 @@ main (int argc, char *argv[])
     errorT err;
     progname = argv[0];
 
-    scid_Init();
-    
     if (argc != 3) { usage(); }
     
     char *option = argv[1];

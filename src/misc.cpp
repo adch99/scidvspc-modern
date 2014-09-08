@@ -26,29 +26,14 @@
 extern "C" int my_stat(const char *path, struct stat *buf);
 #endif
 
-// Table of direction between any two chessboard squares, initialised
-// in scid_Init():
+// Table of direction between any two chessboard squares
 directionT sqDir[66][66];
-
-
-//////////////////////////////////////////////////////////////////////
-//   Scid Initialisation Routine
-
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// scid_Init():
-//      Must be called before move generation etc is done. Sets up
-//      any uninitialised piece/square/move tables.
-//
-void
-scid_Init ()
+struct sqDir_Init
 {
-    // Check that we only call this once:
-    static int numCalls = 0;
-    if (numCalls > 0) { return; }
-    numCalls++;
-
+  sqDir_Init () {
     // Initialise the sqDir[][] array of directions between every pair
     // of squares.
+
     squareT i, j;
     directionT dirArray[] = { UP, DOWN, LEFT, RIGHT, UP_LEFT, UP_RIGHT,
                               DOWN_LEFT, DOWN_RIGHT, NULL_DIR };
@@ -70,7 +55,8 @@ scid_Init ()
             dirptr++;
         }
     }
-}
+  }
+} sqDir_Init_singleton;
 
 //////////////////////////////////////////////////////////////////////
 //   ECO Code Routines

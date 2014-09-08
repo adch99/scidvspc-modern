@@ -646,7 +646,7 @@ direction_Delta (directionT dir)
 
 // sqDir[][]: Array listing the direction between any two squares.
 //    For example, sqDir[A1][B2] == UP_RIGHT, and sqDir[A1][C2] == NULL_DIR.
-//    It is initialised with the function scid_Init() in misc.cpp
+//    It is initialised with the function sqDir_Init() in misc.cpp
 extern directionT  sqDir[66][66];
 
 // sqMove[66][11]: a table of the square resulting from a move in a
