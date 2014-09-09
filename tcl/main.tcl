@@ -831,8 +831,14 @@ proc updateBoard3 {pgnNeedsUpdate} {
 
   if {![sc_base inUse]  ||  $::trialMode  ||  [sc_base isReadOnly]} {
     .main.tb.save configure -state disabled
+    if {[winfo exists .glistWin]} {
+      .glistWin.b.save configure -state disabled
+    }
   } else {
     .main.tb.save configure -state normal
+    if {[winfo exists .glistWin]} {
+      .glistWin.b.save configure -state normal
+    }
   }
 
   updateGameinfo

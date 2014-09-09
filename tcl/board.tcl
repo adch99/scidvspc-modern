@@ -696,7 +696,10 @@ button .main.tb.save -image tb_save -command {
   }
 }
 # Quick save is right click
-bind .main.tb.save <Button-3> {gameQuickSave ; break}
+bind .main.tb.save <Button-3> {
+  if {[%W cget -state] == "normal"} {gameQuickSave}
+  break
+}
 
 button .main.tb.close -image tb_close -command ::file::Close
 button .main.tb.finder -image tb_finder -command ::file::finder::Open

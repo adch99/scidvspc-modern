@@ -444,7 +444,10 @@ proc ::windows::gamelist::Open {} {
     }
   }
   # Quick save is right click
-  bind $w.b.save <Button-3> gameQuickSave
+  bind $w.b.save <Button-3> {
+    if {[%W cget -state] == "normal"} {gameQuickSave}
+  }
+
 
   button $w.b.bkm -relief flat -image tb_bkm
   bind   $w.b.bkm <ButtonPress-1> "tk_popup .main.tb.bkm.menu %X %Y ; break"
