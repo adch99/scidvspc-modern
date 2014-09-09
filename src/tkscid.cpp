@@ -13692,7 +13692,7 @@ sc_report_create (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                 if (interruptedProgress()) { break; }
             }
         }
-        byte ply = db->filter->Get(gnum);
+        byte ply = db->dbFilter->Get(gnum);
         IndexEntry * ie = db->idx->FetchEntry (gnum);
         if (ply != 0) {
             if (db->gfile->ReadGame (db->bbuf, ie->GetOffset(),
@@ -13706,7 +13706,7 @@ sc_report_create (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             scratchGame->MoveToPly (ply - 1);
             if (scratchGame->AtEnd()) {
                 ply = 0;
-                db->filter->Set (gnum, 0);
+                db->dbFilter->Set (gnum, 0);
             }
             if (ply != 0) {
                 uint moveOrderID = report->AddMoveOrder (scratchGame);

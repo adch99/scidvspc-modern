@@ -3175,13 +3175,12 @@ set helpText(Reports) {<h1>Reports</h1>
   <p>
   The final and largest part of the report is the <b>Theory Table</b>.
   When saving the report to a file, you can choose to save just the table, a compact
-  report without the table, or the whole report.
+  report without the table, or the whole report. The hyper-links (in red) reference diverging games.
   </p>
   <p><i>
-  There is also a game limit for the Theory Table; 500 by default. If the report
-  position occurs more often, only games with the highest
-  average Elo are used to generate the Theory Table. You can adjust this
-  limit in the Report Options.
+  The Theory Table has a game limit of 500 by default (but configurable in Report Options).
+  If the report position occurs more often, only games with the highest
+  average Elo are used to generate the Theory Table.
   </i></p>
 
   <h4>Features</h4>
@@ -3221,8 +3220,8 @@ set helpText(Reports) {<h1>Reports</h1>
   <h2><name Player>Player Reports</name></h2>
   <p>
   Player Reports are similar to <a Reports Opening>Opening Reports</a>, but 
-  contain information about the games of a single player - with the white or
-  black pieces. One can generate a Player Report from
+  contain information about the games of a single player with the White or
+  Black pieces. One can generate a Player Report from
   <run ::preport::preportDlg><green>Tools-<gt>Player Report</green></run>
   or from the <a PInfo>Player Info</a> window.
   </p>

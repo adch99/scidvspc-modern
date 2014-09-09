@@ -383,7 +383,7 @@ proc ::optable::setOptions {} {
       # Pascal Georges : changed combobox to spinbox to widen choices
       if {$i == "MaxGames"} {
         spinbox $w.f.s$i -textvariable ::optable($i) -from 0 -to 5000 -increment 50 \
-            -state readonly -width 5 -justify right -font font_Small
+            -width 5 -justify right -font font_Small
       } else  {
         set tmpcombo {}
 

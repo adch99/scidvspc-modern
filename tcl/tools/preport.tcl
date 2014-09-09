@@ -317,7 +317,7 @@ proc ::preport::setOptions {} {
                MaxGames ExtraMoves} {
     set from 0; set to 10; set tick 1; set res 1
     if {$i == "MaxGames"} {
-      set from 0; set to 500; set tick 100; set res 50
+      set from 0; set to 1000; set tick 100; set res 100
     }
     if {$i == "sep"} {
       frame $w.f.fsep$row -height 2 -borderwidth 2 -relief sunken 
@@ -613,13 +613,18 @@ proc ::preport::report {fmt {withTable 1}} {
   }
   if {$preport(Themes)} {
     append r [::preport::_subsec $tr(OprepThemes)]
-    append r [sc_report player themes $tr(OprepThemeDescription:) \
-                $tr(OprepThemeSameCastling:) $tr(OprepThemeOppCastling:) \
-                $tr(OprepThemeKPawnStorm:) $tr(OprepThemeQueenswap:) \
-                $tr(OprepTheme1BishopPair:) \
-                $tr(OprepThemeWIQP:) $tr(OprepThemeBIQP:) \
-                $tr(OprepThemeWP567:) $tr(OprepThemeBP234:) \
-                $tr(OprepThemeOpenCDE:) ]
+    append r [sc_report player themes \
+        $tr(OprepThemeDescription) \
+        $tr(OprepThemeSameCastling) \
+        $tr(OprepThemeOppCastling) \
+        $tr(OprepThemeQueenswap) \
+        $tr(OprepTheme1BishopPair) \
+        $tr(OprepThemeKPawnStorm) \
+        $tr(OprepThemeWIQP) \
+        $tr(OprepThemeBIQP) \
+        $tr(OprepThemeWP567) \
+        $tr(OprepThemeBP234) \
+        $tr(OprepThemeOpenCDE) ]
   }
   if {$preport(Endgames)} {
     append r [::preport::_subsec $tr(OprepEndgames)]
