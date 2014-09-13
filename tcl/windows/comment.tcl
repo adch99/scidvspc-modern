@@ -69,7 +69,7 @@ proc ::commenteditor::Open {} {
 
   set mark [frame $w.markFrame]
   if { $::commenteditor::showBoard } {
-    pack $mark -side bottom -fill x -padx 10
+    pack $mark -side right -fill both -padx 5 -anchor n
   }
 
   ### NAG frame
@@ -308,8 +308,9 @@ proc ::commenteditor::toggleBoard {w} {
   set ::commenteditor::showBoard [ expr ! $::commenteditor::showBoard ]
 
   if { $::commenteditor::showBoard } {
+    ::board::update $w.insertBoard.board [sc_pos board]
     .commentWin.b.hide configure -image bookmark_up
-    pack $w -side bottom
+    pack $w -side right -fill both -padx 5 -anchor n -before .commentWin.nf
   } else {
     .commentWin.b.hide configure -image bookmark_down
     pack forget $w
@@ -568,6 +569,9 @@ proc ::commenteditor::Refresh {} {
   $text mark set insert 1.0 ; # Set cursor to the top
 
   .commentWin.cf.text configure -undo 1
+  if { $::commenteditor::showBoard } {
+    ::board::update $board [sc_pos board]
+  }
 }
 
 ### End of namespace ::commenteditor
