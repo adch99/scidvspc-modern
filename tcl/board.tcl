@@ -2289,6 +2289,7 @@ proc ::board::flip {w {newstate -1}} {
     ::board::togglematerial $w
   }
   ::board::ficslabels $w
+  ::commenteditor::Refresh
   return $w
 }
 

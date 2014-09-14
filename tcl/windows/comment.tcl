@@ -570,7 +570,12 @@ proc ::commenteditor::Refresh {} {
 
   .commentWin.cf.text configure -undo 1
   if { $::commenteditor::showBoard } {
-    ::board::update $board [sc_pos board]
+    set bd [sc_pos board]
+    if {[::board::isFlipped .main.board]} {
+      set bd [string reverse [lindex $bd 0]]
+    }
+
+    ::board::update $board $bd
   }
 }
 
