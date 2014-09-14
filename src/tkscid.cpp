@@ -1455,6 +1455,7 @@ exportGame (Game * g, FILE * exportFile, gameFormatT format, uint pgnStyle)
     case PGN_FORMAT_LaTeX:
         db->tbuf->NewlinesToSpaces (false);
         g->AddPgnStyle (PGN_STYLE_SHORT_HEADER);
+        language = 0;
         break;
     default:
         g->AddPgnStyle (PGN_STYLE_STRIP_BRACES);
