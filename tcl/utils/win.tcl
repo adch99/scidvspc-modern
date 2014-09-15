@@ -228,13 +228,28 @@ proc ::docking::isWindow { w } {
   return [expr {[winfo exists $w] && ![winfo exists $f]}]
 }
 ################################################################################
-proc ::docking::move_tab {srctab dsttab} {
+proc ::docking::move_tab {srctab dsttab {x {}} {y {}}} {
+
   variable tbs
+
+  if {$x != {}} {
+    set dest [$dsttab index @[expr $x-[winfo rootx $dsttab]],[expr $y-[winfo rooty $dsttab]]]
+  }
+
   # move tab
   set f [$srctab select]
   set o [$srctab tab $f]
   $srctab forget $f
   eval $dsttab add $f $o
+
+  # now place after destination tab if possible
+  if {$x != {}} {
+    if {[catch {incr dest}]} {
+      set dest end
+    }
+    $dsttab insert $dest $f
+  }
+
   raise $f
   if { [ scan $f ".fdockanalysisWin%d" n ] == 1 } {
     after 100 "catch {.analysisWin$n.hist.text yview moveto 1}"
@@ -302,7 +317,7 @@ proc ::docking::end_motion {w x y} {
       # set c_path {}
       # return
     } else {
-      move_tab $c_path $t
+      move_tab $c_path $t $x $y
     }
   }
   set c_path {}
