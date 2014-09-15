@@ -463,7 +463,7 @@ proc exportOptions {exportType} {
 ### Export current game or all filtered games to a new PGN, LaTeX or Html file.
 
 proc exportGames {selection exportType} {
-  global ::pgn::moveNumberSpaces exportStartFile exportEndFile exportFlags
+  global ::pgn::moveNumberSpaces exportStartFile exportEndFile exportFlags initialDir
   set exportFilter 0
   if {$selection == "filter"} { set exportFilter 1 }
   if {$exportFilter} {
@@ -490,7 +490,7 @@ proc exportGames {selection exportType} {
         { "All files" {"*"} }
       }
       set title "a PGN file"
-      set idir $::initialDir(base)
+      set idir $initialDir(pgn)
       set default ".pgn"
     }
     "HTML" {
@@ -499,7 +499,7 @@ proc exportGames {selection exportType} {
         { "All files" {"*"} }
       }
       set title "an HTML file"
-      set idir $::initialDir(html)
+      set idir $initialDir(html)
       set default ".html"
     }
     "LaTeX" {
@@ -508,7 +508,7 @@ proc exportGames {selection exportType} {
         { "All files" {"*"} }
       }
       set title "a LaTeX file"
-      set idir $::initialDir(tex)
+      set idir $initialDir(tex)
       set default ".tex"
     }
     "Skak" {
@@ -517,7 +517,7 @@ proc exportGames {selection exportType} {
         { "All files" {"*"} }
       }
       set title "a LaTeX file"
-      set idir $::initialDir(tex)
+      set idir $initialDir(tex)
       set default ".tex"
     }
     default { return }
@@ -535,6 +535,12 @@ proc exportGames {selection exportType} {
   if {$fName == ""} {
     return
   }
+  if {$::macOS} {
+    if {![string match *$default $fName] && ![string match *.* $fName]} {
+      append fName $default
+    }
+  }
+  set initialDir(pgn) [file dirname $fName]
 
   if {$exportFilter} {
     progressWindow "Scid" "Exporting games..." $::tr(Cancel) "sc_progressBar"
