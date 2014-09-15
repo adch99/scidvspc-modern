@@ -2267,6 +2267,9 @@ Game::WriteMoveList (TextBuffer *tb, uint plyCount,
     const char * newline = "\n";
     bool printDiagrams = false;
 
+    // Needed for the odd case concerning comments/nullmoves/variations
+    static uint inNullMove = 0;
+
     if (IsHtmlFormat()) {
         preCommentStr = "{";
         postCommentStr = "}";
@@ -2309,6 +2312,7 @@ Game::WriteMoveList (TextBuffer *tb, uint plyCount,
     // Print null moves:
     if ((isNullMove(m) && PgnStyle & PGN_STYLE_NO_NULL_MOVES) && !inComment &&
             IsPlainFormat()) {
+        if (!inNullMove) inNullMove = VarDepth;
         inComment = true;
         tb->PrintString(preCommentStr);
         preCommentStr = "";
@@ -2367,6 +2371,7 @@ Game::WriteMoveList (TextBuffer *tb, uint plyCount,
                     // Enter inComment mode to convert rest of line
                     // to a comment:
                     inComment = true;
+		    if (!inNullMove) inNullMove = VarDepth;
                     tb->PrintString(preCommentStr);
                     preCommentStr = "";
                     postCommentStr = "";
@@ -2559,6 +2564,7 @@ Game::WriteMoveList (TextBuffer *tb, uint plyCount,
                           ((!(PgnStyle & PGN_STYLE_VARS))  ||
                             (CurrentMove->next->numVariations == 0))) {
                         inComment = true;
+			if (!inNullMove) inNullMove = VarDepth;
                         tb->PrintString(preCommentStr);
                         preCommentStr = "";
                         postCommentStr = "";
@@ -2750,7 +2756,12 @@ Game::WriteMoveList (TextBuffer *tb, uint plyCount,
             PgnNextMovePos = NumMovesPrinted;
         }
     }
-    if (inComment) { tb->PrintString ("}"); }
+    if (inComment) {
+      if (!inNullMove || inNullMove >= VarDepth || !PGN_STYLE_NO_NULL_MOVES)
+        tb->PrintString ("}");
+    }
+    if (inNullMove == VarDepth)
+      inNullMove = 0;
     if (IsHtmlFormat()  &&  VarDepth == 0) { tb->PrintString ("</b>"); }
     if ((PgnStyle & PGN_STYLE_COLUMN)  &&  VarDepth == 0) {
         tb->PrintString(endTable);
