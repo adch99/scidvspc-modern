@@ -722,7 +722,7 @@ translate G BlundersThreshold {Threshold}
 translate G CutOff {Cut Off}
 translate G LowPriority {Χαμηλή Προτεραιότητα CPU}
 # ====== TODO To be translated ======
-translate G LogEngines {Log Engines}
+translate G LogEngines {Log Size}
 # ====== TODO To be translated ======
 translate G LogName {Add Name}
 translate G ClickHereToSeeMoves {Πατήστε για εμφάνιση κινήσεων}

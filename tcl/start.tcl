@@ -370,7 +370,10 @@ createFont Fixed
 # Analysis command: to start chess analysis engine.
 set analysisCommand ""
 set analysis(mini) 0
-set analysis(logEngines) 1
+
+# Maximum number of lines to be saved in a log file
+# (setting it to 0 also stops log file being created)
+set analysis(logMax) 5000
 set analysis(logName) 1
 set analysis(lowPriority) $::windowsOS
 

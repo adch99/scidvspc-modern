@@ -758,7 +758,7 @@ translate C BlundersThreshold {Threshold}
 translate C CutOff {Cut Off}
 translate C LowPriority {Nízká CPU priorita}
 # ====== TODO To be translated ======
-translate C LogEngines {Log Engines}
+translate C LogEngines {Log Size}
 # ====== TODO To be translated ======
 translate C LogName {Add Name}
 # ====== TODO To be translated ======

@@ -725,7 +725,8 @@ translate S AnnotateComment {Añadir anotador a comentario}
 translate S BlundersThreshold {Umbral del error }
 translate S CutOff {Punto de corte}
 translate S LowPriority {Baja prioridad del procesador}
-translate S LogEngines {Log Engines}
+# todo
+translate S LogEngines {Log Size}
 translate S LogName {Añadir nombre}
 translate S ClickHereToSeeMoves {Click aquí para ver movimientos}
 translate S ConfigureInformant {Configurar informaciones}

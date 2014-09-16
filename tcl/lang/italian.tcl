@@ -776,7 +776,7 @@ translate I BlundersThreshold {Limite}
 translate I CutOff {Cut Off}
 translate I LowPriority {Imposta la priorità della CPU a bassa}
 # ====== TODO To be translated ======
-translate I LogEngines {Log Engines}
+translate I LogEngines {Log Size}
 # ====== TODO To be translated ======
 translate I LogName {Add Name}
 translate I ClickHereToSeeMoves {Clicca qui per vedere le mosse}

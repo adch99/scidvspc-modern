@@ -765,7 +765,7 @@ translate H BlundersThreshold {Threshold}
 translate H CutOff {Cut Off}
 translate H LowPriority {Alacsony CPU-prioritás}
 # ====== TODO To be translated ======
-translate H LogEngines {Log Engines}
+translate H LogEngines {Log Size}
 # ====== TODO To be translated ======
 translate H LogName {Add Name}
 # ====== TODO To be translated ======

@@ -713,7 +713,7 @@ translate F BlundersThreshold {Seuil de l'erreur}
 translate F CutOff {Cut Off}
 translate F LowPriority {Priorité processeur basse}
 # ====== TODO To be translated ======
-translate F LogEngines {Log Engines}
+translate F LogEngines {Log Size}
 # ====== TODO To be translated ======
 translate F LogName {Add Name}
 translate F ClickHereToSeeMoves {Cliquer ici pour afficher les coups}

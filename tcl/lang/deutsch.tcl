@@ -736,7 +736,7 @@ translate D BlundersThreshold {Grenze}
 translate D CutOff {Cut Off}
 translate D LowPriority {Niedrige CPU-Priorität}
 # ====== TODO To be translated ======
-translate D LogEngines {Log Engines}
+translate D LogEngines {Log Size}
 # ====== TODO To be translated ======
 translate D LogName {Add Name}
 translate D ClickHereToSeeMoves {Hier klicken um Züge anzuzeigen}

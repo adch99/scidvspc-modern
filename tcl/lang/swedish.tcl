@@ -706,7 +706,7 @@ translate W BlundersThreshold {Tröskelvärde}
 translate W CutOff {Cut Off}
 translate W LowPriority {Kör som lågprioriterad process}
 # ====== TODO To be translated ======
-translate W LogEngines {Log Engines}
+translate W LogEngines {Log Size}
 # ====== TODO To be translated ======
 translate W LogName {Add Name}
 translate W ClickHereToSeeMoves {Klicka här för att se drag}

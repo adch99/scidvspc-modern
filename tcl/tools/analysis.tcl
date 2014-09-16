@@ -16,10 +16,6 @@
 # Removed sorting functionality
 # Other performance tweaks.
 
-# Maximum number of lines to be saved in a log file
-# (setting it to 0 also stops log file being created)
-set analysis(logMax) 5000
-
 # Should Scid <-> Engine communication log messages be echoed to stdout
 set analysis(log_stdout) 0
 set analysis(log_auto) 0
@@ -346,7 +342,7 @@ proc ::enginelist::listEngines {{focus 0}} {
 ###  rewritten by S.A. July 7 2009  (and beyond :>)
 
 proc ::enginelist::choose {} {
-  global engines
+  global engines analysis
   set w .enginelist
 
   if { [winfo exists $w] } { destroy $w }
@@ -372,7 +368,7 @@ proc ::enginelist::choose {} {
   pack $w.buttons2 -side bottom -padx 5 -pady 8 -fill x
   pack $w.buttons -side bottom -padx 5 -pady 3 -fill x
 
-  text $w.title -width 50 -height 1 -font font_Fixed -relief flat \
+  text $w.title -width 93 -height 1 -font font_Fixed -relief flat \
       -cursor top_left_arrow -background gray95
 
   $w.title insert end $::tr(EngineName) Name
@@ -437,7 +433,8 @@ proc ::enginelist::choose {} {
 
   label $w.buttons2.sep -text "   "
 
-  checkbutton $w.buttons2.logengines  -variable analysis(logEngines)  -textvar ::tr(LogEngines)
+  label $w.buttons2.logengines        -textvar ::tr(LogEngines)
+  entry $w.buttons2.logmax            -textvariable analysis(logMax) -width 6
   checkbutton $w.buttons2.logname     -variable analysis(logName)     -textvar ::tr(LogName)
   checkbutton $w.buttons2.lowpriority -variable analysis(lowPriority) -textvar ::tr(LowPriority)
   dialogbutton $w.buttons2.start -textvar ::tr(Start) -command {
@@ -456,7 +453,7 @@ proc ::enginelist::choose {} {
   pack $w.buttons.up $w.buttons.down $w.buttons.log $w.buttons.uci $w.buttons.edit $w.buttons.add $w.buttons.copy $w.buttons.delete -side left -expand yes
 
   pack $w.buttons2.close $w.buttons2.start -side right -padx 5 
-  pack $w.buttons2.logengines $w.buttons2.logname $w.buttons2.lowpriority -side left -padx 0 
+  pack $w.buttons2.logengines $w.buttons2.logmax $w.buttons2.logname $w.buttons2.lowpriority -side left -padx 0 
 
   focus $w.buttons2.start
   # Focus is now set to listbox (in ::enginelist::listEngines) for keyboard shortcuts
@@ -2037,7 +2034,7 @@ proc logEngine {n text} {
     incr analysis(logCount$n)
     if {$analysis(logCount$n) >= $analysis(logMax)} {
       puts $analysis(log$n) \
-          "Note  : Log file size limit reached; closing log file."
+          "Note  : Log file size limit ($analysis(logMax) lines) reached."
       catch {close $analysis(log$n)}
       set analysis(log$n) {}
     }
@@ -2155,7 +2152,7 @@ proc makeAnalysisWin {{n 0} {options {}}} {
 
   # Open log file if applicable:
   set analysis(log$n) {}
-  if {$analysis(logMax) > 0 && $analysis(logEngines) } {
+  if {$analysis(logMax) > 0} {
     if {! [catch {open [file join $::scidLogDir "engine$n.log"] w} log]} {
       set analysis(log$n) $log
       logEngine $n "$::scidName <--> Engine communication log file (engine $n)"

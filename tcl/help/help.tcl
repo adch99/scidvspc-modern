@@ -2809,6 +2809,9 @@ with the format "stat01: time nodes ply mvleft mvtot mvname". The results can be
   Sticking points are likely to be the choice of
   which directory to use, and whether it's UCI or not.</p>
 
+<p><i>
+Setting </i><b>Log Size</b><i> to zero, disables engine logging altogether.</i></p>
+
   <h3>Details</h3>
 <p> Many engines require an
   initialization or opening book file in their start directory to run

@@ -764,7 +764,7 @@ translate B BlundersThreshold {Threshold}
 translate B CutOff {Cut Off}
 translate B LowPriority {Low CPU priority} ;# ***
 # ====== TODO To be translated ======
-translate B LogEngines {Log Engines}
+translate B LogEngines {Log Size}
 # ====== TODO To be translated ======
 translate B LogName {Add Name}
 # ====== TODO To be translated ======
