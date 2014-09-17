@@ -1603,8 +1603,11 @@ proc  configHistory {namespace entrybox} {
   bind $entrybox <Up> "::${namespace}::cmdHistory up"
   bind $entrybox <Down> "::${namespace}::cmdHistory down"
   bind $entrybox <Control-c> "::${namespace}::cmdClear"
-  # How to get it to work on macOS ?
-  bind $entrybox <Alt-BackSpace> "::${namespace}::cmdBackWord"
+  if {$::macOS} {
+    bind $entrybox <Option-BackSpace> "::${namespace}::cmdBackWord ; break"
+  } else {
+    bind $entrybox <Alt-BackSpace> "::${namespace}::cmdBackWord ; break"
+  }
 
   namespace eval $namespace {
     variable history
@@ -1660,7 +1663,7 @@ proc  configHistory {namespace entrybox} {
       }
     }
 
-    proc cmdBackWord {} { 
+    proc cmdBackWord {} {
       variable entrybox
 
       # bash like delete last word on command line
@@ -1677,10 +1680,11 @@ proc  configHistory {namespace entrybox} {
 	}
       } else {
 	set j [string last { } $t1]
-	set t1 [string range $t1 0 $j]
+	set t1 [string range $t1 0 $j-1]
       }
       $entrybox delete 0 end
       $entrybox insert end $t1$t2
+
       $entrybox icursor [string length $t1]
     }
 
