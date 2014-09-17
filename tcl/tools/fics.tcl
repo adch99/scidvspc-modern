@@ -324,6 +324,8 @@ namespace eval fics {
       return 1
     }
 
+    configHistory fics $w.command.entry
+
     entry $w.command.find -width 10 -textvariable ::fics::helpWin(find)
     configFindEntryBox $w.command.find ::fics::helpWin $w.console.text
 
@@ -333,29 +335,7 @@ namespace eval fics {
       $w.console.text insert 0.0 \"FICS ($::scidName $::scidVersion)\n\"
     "
     button $w.command.next -textvar tr(Next) -command {::fics::writechan next echo}
-    bind $w.command.entry <Up> { ::fics::cmdHistory up }
-    bind $w.command.entry <Down> { ::fics::cmdHistory down }
-    bind $w.command.entry <Control-c> {.fics.command.entry delete 0 end}
-    bind $w.command.entry <Alt-BackSpace> { 
-      # bash like delete last word on command line
-      set entry [.fics.command.entry get]
-      # break line into two parts (before/after cursor)
-      set i [.fics.command.entry index insert]
-      set t1 [string range $entry 0 $i-1]
-      set t2 [string range $entry $i end]
-      if {[string is space [string index $t1 end]]} {
-        while {[string is space [string index $t1 end]]} {
-          set t1 [string range $t1 0 end-1]
-        }
-      } else {
-	set j [string last { } $t1]
-	set t1 [string range $t1 0 $j]
-      }
-      .fics.command.entry delete 0 end
-      .fics.command.entry insert end $t1$t2
-      .fics.command.entry icursor [string length $t1]
-      break ; # avoid doing a backspace
-    }
+
     bind $w <Control-p> ::pgn::Open
     bind $w <Prior> "$w.console.text yview scroll -1 page"
     bind $w <Next>  "$w.console.text yview scroll +1 page"
@@ -373,7 +353,7 @@ namespace eval fics {
 	incr ::fics::tellindex
       }
     }
-    bind $w <Escape> "$w.command.entry delete 0 end"
+
 
     # steer focus into the command entry, as typing into the text widget is pointless
     if {!$::macOS && !$::windowsOS} {
@@ -705,38 +685,6 @@ namespace eval fics {
 
     writechan $l echo
     $w.console.text yview moveto 1
-  }
-
-  proc addHistory { l } {
-    if {[lindex $::fics::history end] != $l} {
-      lappend ::fics::history $l
-    }
-    set ::fics::history_pos [llength $::fics::history]
-  }
-
-  proc cmdHistory { action } {
-    set t .fics.command.entry
-
-    if {$action == "up" && $::fics::history_pos > 0} {
-      if {$::fics::history_pos == [llength $::fics::history]} {
-        set ::fics::history_current [$t get]
-      }
-      $t delete 0 end
-      incr ::fics::history_pos -1
-      $t insert end [lindex $::fics::history $::fics::history_pos]
-    }
-    if {$action == "down"} {
-      if {$::fics::history_pos < [llength $::fics::history]} {
-        $t delete 0 end
-        incr ::fics::history_pos
-        if {$::fics::history_pos == [llength $::fics::history]} {
-          set  entry $::fics::history_current 
-        } else {
-          set entry [lindex $::fics::history $::fics::history_pos]
-        }
-        $t insert end $entry
-      }
-    }
   }
 
   proc findOpponent {} {

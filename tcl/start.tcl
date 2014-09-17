@@ -1593,6 +1593,109 @@ proc flashEntryBox {w} {
       after 200 "$w configure -background $bg -foreground $fg"
 }
 
+### Add basic Bash-style history to entry boxes
+#   (History up/down with arrows, Control-c to cancel, and alt-backspace to delete a word)
+
+proc  configHistory {namespace entrybox} {
+
+  set ::${namespace}::entrybox $entrybox
+
+  bind $entrybox <Up> "::${namespace}::cmdHistory up"
+  bind $entrybox <Down> "::${namespace}::cmdHistory down"
+  bind $entrybox <Control-c> "::${namespace}::cmdClear"
+  # How to get it to work on macOS ?
+  bind $entrybox <Alt-BackSpace> "::${namespace}::cmdBackWord"
+
+  namespace eval $namespace {
+    variable history
+    variable history_pos
+    variable history_current
+    variable entrybox
+
+    set history {}
+    set history_pos 0
+    set history_current 0
+
+    namespace export addHistory cmdHistory cmdClear cmdBackWord
+
+    proc addHistory {text} {
+      variable history
+      variable history_pos
+      variable history_current
+      variable entrybox
+      
+      if {[lindex $history end] != $text} {
+	lappend history $text
+      }
+      set history_pos [llength $history]
+    }
+
+    proc cmdHistory {action} {
+      variable history
+      variable history_pos
+      variable history_current
+      variable entrybox
+      
+      set t $entrybox
+
+      if {$action == "up" && $history_pos > 0} {
+	if {$history_pos == [llength $history]} {
+	  set history_current [$t get]
+	}
+	$t delete 0 end
+	incr history_pos -1
+	$t insert end [lindex $history $history_pos]
+      }
+      if {$action == "down"} {
+	if {$history_pos < [llength $history]} {
+	  $t delete 0 end
+	  incr history_pos
+	  if {$history_pos == [llength $history]} {
+	    set  entry $history_current 
+	  } else {
+	    set entry [lindex $history $history_pos]
+	  }
+	  $t insert end $entry
+	}
+      }
+    }
+
+    proc cmdBackWord {} { 
+      variable entrybox
+
+      # bash like delete last word on command line
+      set entry [$entrybox get]
+      # break line into two parts (before/after cursor)
+      set i [$entrybox index insert]
+      set t1 [string range $entry 0 $i-1]
+      set t2 [string range $entry $i end]
+      if {[string is space [string index $t1 end]]} {
+	while {[string is space [string index $t1 end]]} {
+	  set t1 [string range $t1 0 end-1]
+          # Oops. "" is space !
+	  if {$t1 == ""} { return }
+	}
+      } else {
+	set j [string last { } $t1]
+	set t1 [string range $t1 0 $j]
+      }
+      $entrybox delete 0 end
+      $entrybox insert end $t1$t2
+      $entrybox icursor [string length $t1]
+    }
+
+    proc cmdClear {} {
+      variable history
+      variable history_pos
+      variable entrybox
+
+      $entrybox delete 0 end
+      set history_pos [llength $history]
+    }
+
+  }
+}
+
 ### Start up splash window
 
 proc ::splash::make {} {
@@ -1614,6 +1717,8 @@ proc ::splash::make {} {
   # command entry
   entry $w.command
   pack $w.command -side bottom -fill x -padx 3 -pady 2
+
+  configHistory splash $w.command
 
   # text
   frame $w.f
@@ -1641,6 +1746,7 @@ proc ::splash::make {} {
     }
     set command [string trim [.splash.command get]]
     ::splash::add "# $command"
+    ::splash::addHistory $command
     if {$command != {}} {
       if {[catch {set result [eval $command]} error]} {
 	::splash::add "> $error"
