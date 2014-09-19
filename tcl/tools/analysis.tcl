@@ -1383,7 +1383,7 @@ proc addScore {n type {novar 0}} {
     if {$prev_comment == ""} {
       sc_pos setComment "$text"
     } else {
-      sc_pos setComment "$prev_comment $text"
+      sc_pos setComment "$text $prev_comment"
     }
 }
 
@@ -1716,7 +1716,12 @@ proc addAnalysisVariation {n} {
   # Add comment identifying analysis engine if at vstart
   # (perhaps this code belongs just above)
   if {[sc_pos isAt vstart]} {
-    sc_pos setComment "[sc_pos getComment] $text"
+    set prev_comment [sc_pos getComment]
+    if {$prev_comment == ""} {
+      sc_pos setComment "$text"
+    } else {
+      sc_pos setComment "$text $prev_comment"
+    }
   }
 
   if {$isAt_vend} {
