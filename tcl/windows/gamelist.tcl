@@ -445,7 +445,7 @@ proc ::windows::gamelist::Open {} {
   }
   # Quick save is right click
   bind $w.b.save <Button-3> {
-    if {[%W cget -state] == "normal"} {gameQuickSave}
+    if {[%W cget -state] != "disabled"} {gameQuickSave}
   }
 
 

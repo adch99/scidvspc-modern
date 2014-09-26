@@ -697,7 +697,7 @@ button .main.tb.save -image tb_save -command {
 }
 # Quick save is right click
 bind .main.tb.save <Button-3> {
-  if {[%W cget -state] == "normal"} {gameQuickSave}
+  if {[%W cget -state] != "disabled"} {gameQuickSave}
   break
 }
 
