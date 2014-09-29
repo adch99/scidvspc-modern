@@ -25,8 +25,10 @@ casual games against the computer or online with the Free Internet Chess
 Server. It was originally written by Shane Hudson , and has received strong
 contribution from Pascal Georges and others.
 
-<url url="http://scidvspc.sourceforge.net/" name="Scid vs. PC"> is a usability
-and bug-fix fork of Scid, with some new features.  The project has been extensively tested, and is authored by <ref name="Stevenaaus" id="contact_">.
+<url url="http://scidvspc.sourceforge.net/" name="Scid vs. PC"> began with fixes
+for Scid's Computer vs. Player features (hence the name), but has evolved into
+a solid stand-alone program, with numerous new interfaces and features. The project
+is authored by <ref name="Stevenaaus" id="contact_"> and various <ref name="contributors" id="thanks_">.
 
 <sect> features <p>
 
@@ -317,19 +319,17 @@ to create large databases from pgn. Typing "pgnscid somefile.pgn" creates a new 
 </itemize>
 </itemize>
 
+<label id="thanks_">
 <sect1> thanks <p>
 
-Thanks to <url url="http://scidb.sf.net" name="Gregor Cramer"> for his numerous features and technical support.
-
-To Gilles, Steve and Dorothy for OS X support, and 'Inno Setup' and Jiri Pavlovsky for the windows installer.
-
+Thanks to Shane Hudson and the authors of <url url="http://tcl.tk" name="Tcl/Tk">.
+To <url url="http://scidb.sf.net" name="Gregor Cramer"> for new features and technical support.
 <url url="http://sourceforge.net" name="Sourceforge.net"> for their great hosting,
+Jiri Pavlovsky for the <url url="http://www.jrsoftware.org/isinfo.php" name="windows installer">.
+Thanks to Pascal Georges for his many technical contributions to mainline Scid, and also Fulvio, Gerd and the language translators.
+To Gilles, Dorothy and Steve for OS X support, to Michal Rudolf for early encouragement, and
+<url url="http://home.hccnet.nl/h.g.muller/chess.html" name="H.G.Muller"> for technical feedback.
 
-Pascal Georges for his many technical contributions to mainline Scid, and also Fulvio and Gerd.
-
-<url url="http://chessx.sf.net" name="Michal Rudolf"> and Alex Wagner for initial feedback and bug-reports,
-
-and of course Shane Hudson and the authors of <url url="http://tcl.tk" name="Tcl/Tk">
 
 </p>
 

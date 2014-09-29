@@ -63,9 +63,11 @@
   Chess Server. It was originally written by Shane Hudson , and has
   received strong contribution from Pascal Georges and others.
 
-  Scid vs. PC <http://scidvspc.sourceforge.net/> is a usability and bug-
-  fix fork of Scid, with some new features. The project has been
-  extensively tested, and is authored by ``Stevenaaus''.
+  Scid vs. PC <http://scidvspc.sourceforge.net/> began with fixes for
+  Scid's Computer vs. Player features (hence the name), but has evolved
+  into a solid stand-alone program, with numerous new interfaces and
+  features. The project is authored by ``Stevenaaus'' and various
+  ``contributors''.
 
   2.  features
 
@@ -119,10 +121,12 @@
 
   o  Many more bug-fixes and interface refinements.
 
+
   2.0.2.  Missing Features
 
   o  Mainline SCID has a powerful filter sorting capability, but it is
      overly complicated, and perhaps not stable.
+
   o  Some language translations need updating.
 
   3.  download
@@ -179,6 +183,7 @@
   normal /usr/local.  This allows for parallel installation with
   mainline Scid, and is done by: ./configure BINDIR=/usr/bin/
   SHAREDIR=/usr/share/scid/
+
 
   4.0.2.  Windows
 
@@ -311,6 +316,7 @@
      Make sure to check out the new Theme Options, which affect how the
      Docked Windows (and Gamelist) look and feel.
 
+
   6.2.  how to play
 
 
@@ -415,21 +421,15 @@
 
   6.6.  thanks
 
-  Thanks to Gregor Cramer <http://scidb.sf.net> for his numerous
-  features and technical support.
-
-  To Gilles, Steve and Dorothy for OS X support, and 'Inno Setup' and
-  Jiri Pavlovsky for the windows installer.
-
-  Sourceforge.net <http://sourceforge.net> for their great hosting,
-
-  Pascal Georges for his many technical contributions to mainline Scid,
-  and also Fulvio and Gerd.
-
-  Michal Rudolf <http://chessx.sf.net> and Alex Wagner for initial
-  feedback and bug-reports,
-
-  and of course Shane Hudson and the authors of Tcl/Tk <http://tcl.tk>
+  Thanks to Shane Hudson and the authors of Tcl/Tk <http://tcl.tk>.  To
+  Gregor Cramer <http://scidb.sf.net> for new features and technical
+  support.  Sourceforge.net <http://sourceforge.net> for their great
+  hosting, Jiri Pavlovsky for the windows installer
+  <http://www.jrsoftware.org/isinfo.php>.  Thanks to Pascal Georges for
+  his many technical contributions to mainline Scid, and also Fulvio,
+  Gerd and the language translators.  To Gilles, Dorothy and Steve for
+  OS X support, to Michal Rudolf for early encouragement, and H.G.Muller
+  <http://home.hccnet.nl/h.g.muller/chess.html> for technical feedback.
 
   6.7.  scid's history
 
@@ -450,7 +450,6 @@
   dormancy, and because of disagreements with ChessDB's author, Pascal
   released his own tree, Scid-pg, which included UCI support and
   numerous Player versus Computer features.
-
 
   But subtley, and with some controversy, he began to adopt the name
   Scid as his own. Some people objected, especially Dr. Kirby, with whom
@@ -582,8 +581,6 @@
 
   o  Update spelling file to a custom version of Franz's Jan-5-2014
      spellling.ssp.
-
-
   o  Spell-checking can now remove GM, IM, FM, CM, WGM prefixes from
      player names.
 
