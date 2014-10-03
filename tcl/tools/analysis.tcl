@@ -1978,6 +1978,7 @@ proc destroyAnalysisWin {n W} {
   set analysis(pipe$n) {}
   set ::analysisWin$n 0
 
+  # Erroneous if playing tournament, but ::comp(playing) is not always exact, so handled in cleanup
   ::docking::cleanup ".analysisWin$n"
 
 

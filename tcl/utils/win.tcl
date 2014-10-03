@@ -206,6 +206,7 @@ proc ::docking::cleanup { w { origin "" } } {
   }
 
   set dockw ".fdock[string range $w 1 end]"
+  if {![winfo exists $dockw]} { return }
 
   set tab [::docking::find_tbn $dockw]
   if {$tab != ""} {
