@@ -45,6 +45,8 @@ proc initBackgroundColour {colour} {
     .main.photoB configure -background $colour
     ::ttk::style configure Treeview -background $colour
     ::ttk::style configure Treeview -fieldbackground $colour
+    option add *Text*background $colour
+    option add *Listbox*background $colour
     # Updating padding in tree would be nice, but now they have to close and re-open tree
     # if {[winfo exists .baseWin.c]} { .baseWin.c configure -bg $temp }
     recurseBackgroundColour . $colour
