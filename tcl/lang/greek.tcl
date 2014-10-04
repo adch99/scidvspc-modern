@@ -496,8 +496,8 @@ translate G GameEnd {Τέλος παρτίδας}
 translate G LineEnd {Τέλος βαριάντας}
 
 # Player information:
-translate G PInfoAll {Αποτελέσματα για <b>Όλες τις παρτίδες</b>}
-translate G PInfoFilter {Αποτελέσματα για <b>Φιλτραρισμένες παρτίδες</b>}
+translate G PInfoAll {<b>Όλες τις παρτίδες</b>}
+translate G PInfoFilter {<b>Φιλτραρισμένες παρτίδες</b>}
 translate G PInfoAgainst {Εναντίον}
 translate G PInfoMostWhite {Συνήθη ανοίγματα ως Λευκός}
 translate G PInfoMostBlack {Συνήθη ανοιγμάτα ως Μαύρος}

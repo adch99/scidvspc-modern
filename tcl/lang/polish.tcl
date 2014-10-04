@@ -470,8 +470,8 @@ translate P GameEnd {Koniec partii}
 translate P LineEnd {Koniec wariantu}
 
 # Player information:
-translate P PInfoAll {Wyniki - <b>wszystkie</b> partie}
-translate P PInfoFilter {Wyniki - partie z <b>filtra</b>}
+translate P PInfoAll {<b>wszystkie</b> partie}
+translate P PInfoFilter {partie z <b>filtra</b>}
 translate P PInfoAgainst {Wyniki - }
 translate P PInfoMostWhite {Najczęstsze debiuty białymi}
 translate P PInfoMostBlack {Najczęstsze debiuty czarnymi}

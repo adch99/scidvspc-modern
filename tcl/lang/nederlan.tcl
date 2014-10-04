@@ -483,8 +483,8 @@ translate N GameEnd {Einde partij}
 translate N LineEnd {Einde variant}
 
 # Player information:
-translate N PInfoAll {Resultaten voor <b>alle</b> partijen}
-translate N PInfoFilter {Resultaten voor <b>filter</b> partijen}
+translate N PInfoAll {<b>alle</b> partijen}
+translate N PInfoFilter {<b>filter</b> partijen}
 translate N PInfoAgainst {Resultaten tegen}
 translate N PInfoMostWhite {Meest gespeelde opening als wit}
 translate N PInfoMostBlack {Meest gespeelde opening als zwart}

@@ -503,8 +503,8 @@ translate D GameEnd {Partieende}
 translate D LineEnd {Ende der Zugfolge}
 
 # Player information:
-translate D PInfoAll {Ergebnisse für <b>alle</b> Spiele}
-translate D PInfoFilter {Ergebnisse für <b>Filter</b>-Spiele}
+translate D PInfoAll {<b>alle</b> Spiele}
+translate D PInfoFilter {<b>Filter</b>-Spiele}
 translate D PInfoAgainst {Ergebnisse gegen}
 translate D PInfoMostWhite {Häufigste Eröffnungen als Weißer}
 translate D PInfoMostBlack {Häufigste Eröffnungen als Schwarzer}
