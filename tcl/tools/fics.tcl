@@ -659,6 +659,9 @@ namespace eval fics {
 	  if {$confirm == 0} {::game::Save}
           sc_game new
       }
+      moretime {
+	  ::commenteditor::appendComment "$::fics::reallogin gives $l"
+      }
       default {
 	  if {[string match uno* $c]} {
 	      set ::fics::catchRemoving 1
