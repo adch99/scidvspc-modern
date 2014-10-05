@@ -636,7 +636,7 @@ D Deleted flag     U User flags       C Comments flag    V Variations flag  \n"
 
 trace variable glexport w updateExportGList
 
-proc updateExportGList {} {
+proc updateExportGList {args} {
   global glexport
   set w .glexport
   if {! [winfo exists $w]} { return }
