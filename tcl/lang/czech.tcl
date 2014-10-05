@@ -1528,7 +1528,6 @@ translate C blunder {blunder}
 # ====== TODO To be translated ======
 translate C Noinfo {-- No info --}
 # ====== TODO To be translated ======
-translate C PhalanxOrTogaMissing {Phalanx or Toga not found}
 # ====== TODO To be translated ======
 # ====== TODO To be translated ======
 # ====== TODO To be translated ======
@@ -2003,3 +2002,4 @@ translate C SelectionOwnerDidntRespond {Timeout during drop action: selection ow
 ### Czech help pages: removed because they are too old :( S.A.
 
 # end of czech.tcl
+

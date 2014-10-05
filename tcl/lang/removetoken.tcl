@@ -9,6 +9,7 @@ exec tclsh "$0" "$@"
 # (C) Pascal Georges 2007
 #
 # Will remove a line containing the token in argument
+# NB - must be manually removed from english.tcl first.
 
 array set encodings {
   czech iso8859-2
@@ -23,8 +24,8 @@ array set encodings {
   russian utf-8
   serbian iso8859-2
   spanish iso8859-1
-  greek   utf-8
   swedish iso8859-1
+  greek   utf-8
 }
 
 set languages {czech deutsch francais hungary italian nederlan norsk polish

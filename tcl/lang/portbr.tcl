@@ -1534,7 +1534,6 @@ translate B blunder {blunder}
 # ====== TODO To be translated ======
 translate B Noinfo {-- No info --}
 # ====== TODO To be translated ======
-translate B PhalanxOrTogaMissing {Phalanx or Toga not found}
 # ====== TODO To be translated ======
 # ====== TODO To be translated ======
 # ====== TODO To be translated ======
@@ -1997,4 +1996,5 @@ translate B SelectionOwnerDidntRespond {Timeout during drop action: selection ow
 }
 
 # end of portbr.tcl
+
 

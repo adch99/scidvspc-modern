@@ -1404,7 +1404,6 @@ translate W Play {Spela}
 translate W Noblunder {Ingen blunder}
 translate W blunder {blunder}
 translate W Noinfo {-- Ingen information --}
-translate W PhalanxOrTogaMissing {Phalanx eller Toga hittades inte}
 translate W moveblunderthreshold {drag är en blunder om förlust är större än}
 translate W limitanalysis {begränsa schackmotors analystid}
 translate W seconds {sekunder}
@@ -2082,3 +2081,4 @@ set tips(W) {
   Du kan relativt enkelt rita pilar och färga rutor till dina kommentarer. Öppna <b>Kommentarseditorn</b>, klicka på <b>Infoga symbol</b> och välj önskad färg. Om du nu klickar på en första ruta, och därefter klickar på en andra så dras en pil i önskad färg från den första till den andra rutan. Klickar du bara på en ruta, blir den färgad.
   }
 }
+

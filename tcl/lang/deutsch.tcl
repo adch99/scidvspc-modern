@@ -1455,7 +1455,6 @@ translate D Play {Spielen}
 translate D Noblunder {Kein Fehler}
 translate D blunder {Fehler}
 translate D Noinfo {-- Keine Info --}
-translate D PhalanxOrTogaMissing {Phalanx oder Toga nicht gefunden!}
 translate D moveblunderthreshold {fehlerhafter Zug, wenn Verlust größer als}
 translate D limitanalysis {Analysezeit der Engine begrenzen}
 translate D seconds {Sekunden}
@@ -2208,3 +2207,4 @@ set tips(D) {
 }
 
 ### End of file: deutsch.tcl
+

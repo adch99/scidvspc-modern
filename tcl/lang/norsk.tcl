@@ -1604,7 +1604,6 @@ translate O blunder {blunder}
 # ====== TODO To be translated ======
 translate O Noinfo {-- No info --}
 # ====== TODO To be translated ======
-translate O PhalanxOrTogaMissing {Phalanx or Toga not found}
 # ====== TODO To be translated ======
 # ====== TODO To be translated ======
 # ====== TODO To be translated ======
@@ -2148,6 +2147,7 @@ translate O SelectionOwnerDidntRespond {Timeout during drop action: selection ow
 
 # Sjekkliste:
 # - Snarveier
+
 
 
 

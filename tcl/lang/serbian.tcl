@@ -1610,7 +1610,6 @@ translate Y blunder {blunder}
 # ====== TODO To be translated ======
 translate Y Noinfo {-- No info --}
 # ====== TODO To be translated ======
-translate Y PhalanxOrTogaMissing {Phalanx or Toga not found}
 # ====== TODO To be translated ======
 # ====== TODO To be translated ======
 # ====== TODO To be translated ======
@@ -2148,6 +2147,7 @@ translate Y SelectionOwnerDidntRespond {Timeout during drop action: selection ow
 
 }
 # end of serbian.tcl
+
 
 
 

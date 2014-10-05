@@ -1421,7 +1421,6 @@ translate F Play {Jouer}
 translate F Noblunder {Pas d'erreur}
 translate F blunder {erreur}
 translate F Noinfo {-- Pas d'info --}
-translate F PhalanxOrTogaMissing {Phalanx ou Toga non trouvé}
 translate F moveblunderthreshold {le coup est une erreur si les pertes sont supérieures à }
 translate F limitanalysis {limiter le temps d'analyse}
 translate F seconds {secondes}
@@ -1938,3 +1937,4 @@ translate F SelectionOwnerDidntRespond {Timeout during drop action: selection ow
 }
 
 # end of francais.tcl
+

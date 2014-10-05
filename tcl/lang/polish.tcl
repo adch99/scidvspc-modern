@@ -1383,7 +1383,6 @@ translate P Play {Gra}
 translate P Noblunder {Bez błędów}
 translate P blunder {błąd}
 translate P Noinfo {-- Brak informacji --}
-translate P PhalanxOrTogaMissing {Brak programu Phalanx lub Toga}
 translate P moveblunderthreshold {posunięcie jest błędem, jeśli strata jest większa niż}
 translate P limitanalysis {ogranicz czas analizy}
 translate P seconds {sekund}
@@ -1887,3 +1886,4 @@ set tips(P) {
 }
 
 # end of polish.tcl
+

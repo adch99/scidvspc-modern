@@ -1377,7 +1377,6 @@ translate R Play {Играть}
 translate R Noblunder {Без ошибок}
 translate R blunder {ошибка}
 translate R Noinfo {-- Нет информации --}
-translate R PhalanxOrTogaMissing {Phalanx или Toga не найдены}
 translate R moveblunderthreshold {ход ошибочен, если потеряно более чем}
 translate R limitanalysis {предельное время анализа движка}
 translate R seconds {секунд}
@@ -1682,3 +1681,4 @@ translate R SelectionOwnerDidntRespond {Таймаут принятия инфо
 
 }
 # end of russian.tcl
+

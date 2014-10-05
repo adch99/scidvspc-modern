@@ -113,25 +113,38 @@ namespace eval tacgame {
 
     # find Phalanx and Toga in engines(list)
     set i 0
-    set phalanx -1 ; set toga -1
+    set phalanx -1
+
 
     foreach e $::engines(list) {
-      if { $phalanx != -1 && $toga != -1 } { break }
       set name [lindex $e 0]
       if { [ string match -nocase "*phalanx*" $name ]  } {
         set phalanx $i
         set analysisCoach(automove$phalanx) 0
-      }
-      
-      if { [ string match -nocase "*toga*" $name ] } {
-        set toga $i
+        break
       }
       incr i
     }
 
-    # could not find Toga or Phalanx
-    if { $phalanx == -1 || $toga == -1 } {
-      tk_messageBox -title "Scid" -icon warning -type ok -message $::tr(PhalanxOrTogaMissing)
+    if { $phalanx == -1 } {
+      tk_messageBox -title "Scid" -icon warning -type ok -message "Could not find Phalanx in Engine List"
+      return
+    }
+      
+    set i 0
+    set toga -1
+
+    foreach e $::engines(list) {
+      set name [lindex $e 0]
+      if { [ string match -nocase "*toga*" $name ] } {
+        set toga $i
+        break
+      }
+      incr i
+    }
+
+    if { $toga == -1 } {
+      tk_messageBox -title "Scid" -icon warning -type ok -message "Could not find Toga in Engline List"
       return
     }
 

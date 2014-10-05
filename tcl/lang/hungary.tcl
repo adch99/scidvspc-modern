@@ -1537,7 +1537,6 @@ translate H blunder {blunder}
 # ====== TODO To be translated ======
 translate H Noinfo {-- No info --}
 # ====== TODO To be translated ======
-translate H PhalanxOrTogaMissing {Phalanx or Toga not found}
 # ====== TODO To be translated ======
 # ====== TODO To be translated ======
 # ====== TODO To be translated ======
@@ -2236,6 +2235,7 @@ set tips(H) {
 }
 
 # end of hungary.tcl
+
 
 
 

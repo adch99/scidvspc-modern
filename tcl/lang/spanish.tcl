@@ -1413,7 +1413,6 @@ translate S Play {Jugar}
 translate S Noblunder {Sin errores}
 translate S blunder {Meteduras de pata}
 translate S Noinfo {-- Sin información --}
-translate S PhalanxOrTogaMissing {Phalanx o Toga no encontrado}
 translate S moveblunderthreshold {El movimiento es una metedura de pata si la pérdida de puntuación es mayor que }
 translate S limitanalysis {Tiempo límite para análisis del motor}
 translate S seconds {segundos}
@@ -1704,6 +1703,7 @@ translate S SelectionOwnerDidntRespond {Tiempo excedido durante la operación: el
 
 }
 # end of spanish.tcl
+
 
 
 

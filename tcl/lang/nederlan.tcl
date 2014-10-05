@@ -1409,7 +1409,6 @@ translate N Noblunder {Geen blunder}
 translate N blunder {Blunder}
 
 translate N Noinfo {-- Geen info --}
-translate N PhalanxOrTogaMissing {Phalanx of Toga niet gevonden}
 
 
 
@@ -1734,4 +1733,5 @@ translate N UriRejectedDetail {Alleen de vermelde bestandstypes kunnen worden ve
 translate N EmptyUriList {Geplakte inhoud is leeg.}
 translate N SelectionOwnerDidntRespond {Time-out tijdens plakken data: geen reactie van geselecteerde eigenaar.}
 }
+
 
