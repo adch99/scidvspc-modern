@@ -814,12 +814,26 @@ strIsUnknownName (const char * str)
 bool
 strIsScore(const char *str)
 {
+   char *test = (char*)str;
+   while (*test != '\0'){
+      if ((*test >='0') && (*test<='9')){ //If we've found a number...
+         test--;
+         if ((*test=='+')||(*test=='-')){ //And it looks like a score...
+               printf("Possible number: %s\n",test);
+               return true; //It might be a score
+         }
+         test++;
+      }
+      test++;
+   }
+   return false;
+   /*
 	const char *trimStr = strTrimLeft(str, " \t\r\n(");
-
 	strTrimRight((char*)trimStr, " \t\r\n)");
 	char *test = NULL;
 	strtod(trimStr, &test);
 	return (test != NULL) && (!strContains(trimStr, " "));
+   */
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -831,10 +845,23 @@ strIsScore(const char *str)
 double
 strGetScore(const char *str)
 {
-	const char *trimStr = strTrimLeft(str, " \t\r\n(");
-	char *test = NULL;
-
-	return strtod(trimStr, &test);
+   char *test = (char*)str;
+   while (*test != '\0'){
+      if ((*test >='0') && (*test<='9')){
+         test--;
+         if ((*test=='+')||(*test=='-')){ 
+               break;
+         }
+         test++;
+      }
+      test++;
+   }
+   printf("%s\n%s\n",str,test);
+	strTrimRight(test, " \t\r\n)");
+   printf("Possible Score String: %s\n\n",test);
+   fflush(stdout);
+	char *tmp = NULL;
+	return strtod(test, &tmp);
 }
 
 

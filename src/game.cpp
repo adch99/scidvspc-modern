@@ -3203,14 +3203,12 @@ Game::WritePGNtoLaTeX(TextBuffer * tb, uint stopLocation)
 	int x = 0;
 	while (m->marker != END_MARKER) {
 		if (m->comment != NULL) {
-			const char *trimStr = strTrimLeft(m->comment, " \t\r\n(");
-			char *test = NULL;
-			scores[x] = strtod(trimStr, &test);
-			if (test != NULL) {
+         if (strIsScore(m->comment)) {
 				scoresFound = true;
-			}
-			maxScore = (scores[x] > maxScore) ? scores[x] : maxScore;
-			minScore = (scores[x] < minScore) ? scores[x] : minScore;
+            scores[x] = strGetScore(m->comment);
+            maxScore = (scores[x] > maxScore) ? scores[x] : maxScore;
+            minScore = (scores[x] < minScore) ? scores[x] : minScore;
+         }
 			if (strstr(m->comment, "BLUNDER") != NULL) {
 				events[x] = 'B';
 			}
