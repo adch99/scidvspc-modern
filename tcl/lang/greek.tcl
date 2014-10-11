@@ -906,10 +906,9 @@ translate G GlistMoveField {Κίνηση}
 translate G GlistEditField {Ρύθμιση}
 translate G GlistAddField {Προσθήκη}
 translate G GlistDeleteField {Αφαίρεση}
-translate G GlistWidth {Πλάτος}
-translate G GlistAlign {Στοίχιση}
 translate G GlistColor {Χρώμα}
-translate G GlistSep {Διαχωριστής}
+# ====== TODO To be translated ======
+translate G GlistSort {Sort database}
 
 # menu shown with right mouse button down on game list. 
 translate G GlistRemoveThisGameFromFilter  {Αφαίρεση}
@@ -1419,7 +1418,6 @@ translate G Play {Έναρξη}
 translate G Noblunder {Χωρίς Σοβαρό Σφάλμα}
 translate G blunder {Σοβαρό Σφάλμα}
 translate G Noinfo {-- χωρίς πληροφορίες --}
-translate G PhalanxOrTogaMissing {Για να παίξετε Παρτίδες Τακτικής, οι μήχανές Phalanx και Toga πρέπει να είναι ρυθμισμένες στο μενού Εργαλεία->Μηχανές Ανάλυσης}
 translate G moveblunderthreshold {η κίνηση είναι Σοβαρό Σφάλμα αν η απώλεια είναι μεγαλύτερη από}
 translate G limitanalysis {Χρόνος σκέψης Προπονητή}
 translate G seconds {δευτερόλεπτα}

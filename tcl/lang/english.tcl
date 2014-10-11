@@ -873,10 +873,8 @@ translate E GlistMoveField {Move}
 translate E GlistEditField {Configure}
 translate E GlistAddField {Add}
 translate E GlistDeleteField {Delete}
-translate E GlistWidth {Width}
-translate E GlistAlign {Align}
 translate E GlistColor {Color}
-translate E GlistSep {Separator}
+translate E GlistSort {Sort database}
 
 # menu shown with right mouse button down on game list. 
 translate E GlistRemoveThisGameFromFilter  {Remove}

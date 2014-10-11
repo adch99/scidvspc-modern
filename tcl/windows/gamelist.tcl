@@ -869,7 +869,7 @@ proc SortBy {tree col} {
     # if {[sc_base numGames] > 200000} 
     if {![sc_base isReadOnly] && [sc_base current] != [sc_info clipbase]} {
       set answer [tk_messageBox -parent $w -title "Scid" -type yesno -default yes -icon question \
-          -message "Confirm sort database \"[file tail [sc_base filename]]\" by $col"]
+          -message "[tr GlistSort] \"[file tail [sc_base filename]]\" by $col ?"]
       if {$answer != "yes"} { return }
     }
 

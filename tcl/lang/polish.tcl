@@ -872,10 +872,9 @@ translate P GlistMoveField {Przesuń}
 translate P GlistEditField {Konfiguruj}
 translate P GlistAddField {Dodaj}
 translate P GlistDeleteField {Usuń}
-translate P GlistWidth {Szerokość}
-translate P GlistAlign {Wyrównanie}
 translate P GlistColor {Kolor}
-translate P GlistSep {Separator}
+# ====== TODO To be translated ======
+translate P GlistSort {Sort database}
 translate P GlistRemoveThisGameFromFilter  {Usuń}
 translate P GlistRemoveGameAndAboveFromFilter  {Usuń tę i poprzednie partie}
 translate P GlistRemoveGameAndBelowFromFilter  {Usuń tę i następne partie}
@@ -1886,4 +1885,3 @@ set tips(P) {
 }
 
 # end of polish.tcl
-

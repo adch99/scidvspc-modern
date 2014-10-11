@@ -29,7 +29,7 @@ array set encodings {
 }
 
 set languages {czech deutsch francais hungary italian nederlan norsk polish
-  portbr russian spanish swedish serbian russian
+  portbr russian spanish swedish greek serbian
 }
 
 ################################################################################

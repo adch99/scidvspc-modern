@@ -963,10 +963,9 @@ translate H GlistMoveField {Lépés}
 translate H GlistEditField {Konfigurálás}
 translate H GlistAddField {Hozzáad}
 translate H GlistDeleteField {Eltávolít}
-translate H GlistWidth {Szélesség}
-translate H GlistAlign {Igazít}
 translate H GlistColor {Szín}
-translate H GlistSep {Elválasztó}
+# ====== TODO To be translated ======
+translate H GlistSort {Sort database}
 # ====== TODO To be translated ======
 translate H GlistRemoveThisGameFromFilter  {Remove}
 # ====== TODO To be translated ======
@@ -2235,20 +2234,3 @@ set tips(H) {
 }
 
 # end of hungary.tcl
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

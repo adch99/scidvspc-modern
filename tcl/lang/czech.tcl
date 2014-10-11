@@ -956,10 +956,9 @@ translate C GlistMoveField {Pøesunout}
 translate C GlistEditField {Konfigurovat}
 translate C GlistAddField {Pøidat}
 translate C GlistDeleteField {Odebrat}
-translate C GlistWidth {©íøka}
-translate C GlistAlign {Zarovnat}
 translate C GlistColor {Barva}
-translate C GlistSep {Oddìlovaè}
+# ====== TODO To be translated ======
+translate C GlistSort {Sort database}
 # ====== TODO To be translated ======
 translate C GlistRemoveThisGameFromFilter  {Remove}
 # ====== TODO To be translated ======
@@ -2002,4 +2001,3 @@ translate C SelectionOwnerDidntRespond {Timeout during drop action: selection ow
 ### Czech help pages: removed because they are too old :( S.A.
 
 # end of czech.tcl
-

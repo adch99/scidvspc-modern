@@ -894,10 +894,9 @@ translate N GlistMoveField {Verplaats}
 translate N GlistEditField {Configuratie}
 translate N GlistAddField {Voeg toe}
 translate N GlistDeleteField {Verwijder}
-translate N GlistWidth {Breedte}
-translate N GlistAlign {Uitlijnen}
 translate N GlistColor {Kleuren}
-translate N GlistSep {Separator}
+# ====== TODO To be translated ======
+translate N GlistSort {Sort database}
 translate N GlistRemoveThisGameFromFilter  {Verwijder}
 translate N GlistRemoveGameAndAboveFromFilter  {Verwijder alle hiervoor}
 translate N GlistRemoveGameAndBelowFromFilter  {Verwijder alle hierna}
@@ -1734,4 +1733,4 @@ translate N EmptyUriList {Geplakte inhoud is leeg.}
 translate N SelectionOwnerDidntRespond {Time-out tijdens plakken data: geen reactie van geselecteerde eigenaar.}
 }
 
-
+# end of nederlan.tcl

@@ -922,10 +922,9 @@ translate D GlistMoveField {Verschieben}
 translate D GlistEditField {Konfigurieren}
 translate D GlistAddField {Hinzufügen}
 translate D GlistDeleteField {Löschen}
-translate D GlistWidth {Breite}
-translate D GlistAlign {Ausrichtung}
 translate D GlistColor {Farbe}
-translate D GlistSep {Trennlinie}
+# ====== TODO To be translated ======
+translate D GlistSort {Sort database}
 translate D GlistRemoveThisGameFromFilter  {Partie}
 translate D GlistRemoveGameAndAboveFromFilter  {Partie (und alle oberhalb)}
 translate D GlistRemoveGameAndBelowFromFilter  {Partie (und alle darunter)}
@@ -2207,4 +2206,3 @@ set tips(D) {
 }
 
 ### End of file: deutsch.tcl
-

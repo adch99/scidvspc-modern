@@ -905,10 +905,9 @@ translate S GlistMoveField {Movimiento}
 translate S GlistEditField {Configurar}
 translate S GlistAddField {Añadir}
 translate S GlistDeleteField {Borrar}
-translate S GlistWidth {Anchura}
-translate S GlistAlign {Alinear}
 translate S GlistColor {Color}
-translate S GlistSep {Separador}
+# ====== TODO To be translated ======
+translate S GlistSort {Sort database}
 translate S GlistRemoveThisGameFromFilter  {Oculta esta partida}
 translate S GlistRemoveGameAndAboveFromFilter  {Oculta esta partida y las de arriba}
 translate S GlistRemoveGameAndBelowFromFilter  {Oculta esta partida y las de abajo}
@@ -1703,7 +1702,3 @@ translate S SelectionOwnerDidntRespond {Tiempo excedido durante la operación: el
 
 }
 # end of spanish.tcl
-
-
-
-

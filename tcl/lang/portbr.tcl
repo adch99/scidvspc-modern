@@ -962,10 +962,9 @@ translate B GlistMoveField {Mover}
 translate B GlistEditField {Configurar}
 translate B GlistAddField {Adicionar}
 translate B GlistDeleteField {Remover}
-translate B GlistWidth {Largura}
-translate B GlistAlign {Alinhar}
 translate B GlistColor {Cor}
-translate B GlistSep {Separador}
+# ====== TODO To be translated ======
+translate B GlistSort {Sort database}
 # ====== TODO To be translated ======
 translate B GlistRemoveThisGameFromFilter  {Remove}
 # ====== TODO To be translated ======
@@ -1996,5 +1995,3 @@ translate B SelectionOwnerDidntRespond {Timeout during drop action: selection ow
 }
 
 # end of portbr.tcl
-
-

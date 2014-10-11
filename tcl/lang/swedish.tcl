@@ -889,10 +889,9 @@ translate W GlistMoveField {Drag}
 translate W GlistEditField {Konfiguration}
 translate W GlistAddField {Lägg till}
 translate W GlistDeleteField {Ta bort}
-translate W GlistWidth {Bredd}
-translate W GlistAlign {Justering}
 translate W GlistColor {Färg}
-translate W GlistSep {Separator}
+# ====== TODO To be translated ======
+translate W GlistSort {Sort database}
 translate W GlistRemoveThisGameFromFilter  {Ta bort}
 translate W GlistRemoveGameAndAboveFromFilter  {Ta bort parti (och alla ovanför det)}
 translate W GlistRemoveGameAndBelowFromFilter  {Ta bort parti (och alla nedanför det)}
@@ -2082,3 +2081,4 @@ set tips(W) {
   }
 }
 
+# end of swedish.tcl

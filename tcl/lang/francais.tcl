@@ -900,10 +900,9 @@ translate F GlistMoveField {Coup}
 translate F GlistEditField {Configurer}
 translate F GlistAddField {Ajouter}
 translate F GlistDeleteField {Enlever}
-translate F GlistWidth {Largeur}
-translate F GlistAlign {Aligner}
 translate F GlistColor {Couleur}
-translate F GlistSep {Séparateur}
+# ====== TODO To be translated ======
+translate F GlistSort {Sort database}
 
 # menu shown with right mouse button down on game list.
 translate F GlistRemoveThisGameFromFilter  {Enlever}
@@ -1937,4 +1936,3 @@ translate F SelectionOwnerDidntRespond {Timeout during drop action: selection ow
 }
 
 # end of francais.tcl
-

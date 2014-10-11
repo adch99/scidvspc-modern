@@ -1034,10 +1034,9 @@ translate Y GlistMoveField {Move} ;# ***
 translate Y GlistEditField {Configure} ;# ***
 translate Y GlistAddField {Add} ;# ***
 translate Y GlistDeleteField {Delete} ;# ***
-translate Y GlistWidth {Width} ;# ***
-translate Y GlistAlign {Align} ;# ***
 translate Y GlistColor {Color} ;# ***
-translate Y GlistSep {Separator} ;# ***
+# ====== TODO To be translated ======
+translate Y GlistSort {Sort database}
 # ====== TODO To be translated ======
 translate Y GlistRemoveThisGameFromFilter  {Remove}
 # ====== TODO To be translated ======
@@ -2147,8 +2146,3 @@ translate Y SelectionOwnerDidntRespond {Timeout during drop action: selection ow
 
 }
 # end of serbian.tcl
-
-
-
-
-

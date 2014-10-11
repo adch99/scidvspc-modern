@@ -859,10 +859,9 @@ translate R GlistMoveField {Ходы}
 translate R GlistEditField {Конфигурация}
 translate R GlistAddField {Добавить}
 translate R GlistDeleteField {Удалить}
-translate R GlistWidth {Ширина}
-translate R GlistAlign {Выравнивание}
 translate R GlistColor {Цвет}
-translate R GlistSep {Разделитель}
+# ====== TODO To be translated ======
+translate R GlistSort {Sort database}
 
 # menu shown with right mouse button down on game list.
 translate R GlistRemoveThisGameFromFilter  {Удалить эту партию из фильтра}
@@ -1681,4 +1680,3 @@ translate R SelectionOwnerDidntRespond {Таймаут принятия инфо
 
 }
 # end of russian.tcl
-

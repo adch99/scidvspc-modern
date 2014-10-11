@@ -961,10 +961,9 @@ translate I GlistMoveField {Mossa}
 translate I GlistEditField {Configura}
 translate I GlistAddField {Aggiungi}
 translate I GlistDeleteField {Elimina}
-translate I GlistWidth {Larghezza}
-translate I GlistAlign {Allinea}
 translate I GlistColor {Colore}
-translate I GlistSep {Separatore}
+# ====== TODO To be translated ======
+translate I GlistSort {Sort database}
 translate I GlistRemoveThisGameFromFilter  {Rimuovi}
 translate I GlistRemoveGameAndAboveFromFilter  {Rimuovi la partita (e le precedenti)}
 translate I GlistRemoveGameAndBelowFromFilter  {Rimuovi la partita (e le seguenti)}
@@ -2054,8 +2053,3 @@ set tips(I) {
 
 
 # end of italian.tcl
-
-
-
-
-

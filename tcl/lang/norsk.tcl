@@ -1034,10 +1034,9 @@ translate O GlistMoveField {Trekk}
 translate O GlistEditField {Still inn}
 translate O GlistAddField {Legg til}
 translate O GlistDeleteField {Fjern}
-translate O GlistWidth {Bredde}
-translate O GlistAlign {Justering}
 translate O GlistColor {Farge}
-translate O GlistSep {Skilletegn}
+# ====== TODO To be translated ======
+translate O GlistSort {Sort database}
 # ====== TODO To be translated ======
 translate O GlistRemoveThisGameFromFilter  {Remove}
 # ====== TODO To be translated ======
@@ -2143,12 +2142,7 @@ translate O SelectionOwnerDidntRespond {Timeout during drop action: selection ow
 
 }
 
-# norsk.tcl
-
 # Sjekkliste:
 # - Snarveier
 
-
-
-
-
+# end of norsk.tcl
