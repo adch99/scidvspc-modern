@@ -1453,7 +1453,7 @@ if {$::macOS} {
 }
 
 bind .main <Escape> "moveEntry_Clear 1"
-bind .main <Tab> raiseAllWindows
+bind .main <Tab> {raiseAllWindows 1}
 
 bind .main <Home> ::move::Start
 bind .main <Left> ::move::Back
@@ -2061,8 +2061,8 @@ proc showHideAllWindows {type} {
   }
 }
 
-proc raiseAllWindows {} {
-  if {! $::autoRaise} { return }
+proc raiseAllWindows {{force 0}} {
+  if {! $::autoRaise && !$force} { return }
 
   foreach w [getTopLevel deiconify] {
     if {[winfo exists $w]} {

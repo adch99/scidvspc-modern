@@ -324,7 +324,7 @@ if {0} {
 frame .main.button.space3 -width 4
 
 button .main.button.flip     -image tb_flip      -command toggleRotateBoard
-button .main.button.windows  -image tb_windows   -command raiseAllWindows
+button .main.button.windows  -image tb_windows   -command {raiseAllWindows 1}
 button .main.button.autoplay -image autoplay_off -command toggleAutoplay
 # Right-click Autoplays all games in filter
 bind .main.button.autoplay <Button-3> {toggleAutoplay 2}
