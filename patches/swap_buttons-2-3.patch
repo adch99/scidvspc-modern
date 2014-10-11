@@ -1,6 +1,6 @@
---- scid.orig	2014-09-16 13:40:44.000000000 +1000
-+++ scid	2014-09-16 13:41:26.000000000 +1000
-@@ -74074,7 +74074,7 @@
+--- scid.orig	2014-10-12 09:09:14.000000000 +1000
++++ scid	2014-10-12 09:12:09.000000000 +1000
+@@ -74196,7 +74196,7 @@
    }
  }
  
@@ -9,7 +9,7 @@
  bind TNotebook <<NotebookTabChanged>> {::docking::tabChanged %W}
  
  proc ::docking::ctx_cmd {path anchor} {
-@@ -76271,7 +76271,7 @@
+@@ -76393,7 +76393,7 @@
          set tagName m
          # Too many bindings! 
          $w tag bind $moveTag <ButtonPress-1> [list ::pgn::move $moveTag]
@@ -18,7 +18,7 @@
          $w tag bind $moveTag <Any-Enter> [list u1 $w $moveTag]
          $w tag bind $moveTag <Any-Leave> [list u0 $w $moveTag]
        } elseif {[strIsPrefix {a } $tagName]} {
-@@ -76339,7 +76339,7 @@
+@@ -76461,7 +76461,7 @@
          set glCommand "::game::LoadMenu $w [sc_base current] $gnum %X %Y"
          $w tag bind $gameTag <ButtonPress-1> $glCommand
          # right-click browses game, but too annoying in crosstable
@@ -27,7 +27,7 @@
          $w tag bind $gameTag <Any-Enter> \
              "$w tag configure $gameTag
               $w tag configure $gameTag -back gray85
-@@ -77565,7 +77565,7 @@
+@@ -77687,7 +77687,7 @@
  
      $t tag bind f$pathtag <Double-Button-1> "::file::Open [list $fullpath] $w"
      # Bind right button to popup a contextual menu:
@@ -36,7 +36,7 @@
  
      $t tag bind f$pathtag <Any-Enter> "$t tag configure [list f$pathtag] -background $hc"
      $t tag bind f$pathtag <Any-Leave> "$t tag configure [list f$pathtag] -background {}"
-@@ -79002,7 +79002,7 @@
+@@ -79124,7 +79124,7 @@
    $w.text.edit add command -label "Cut"  -command "tk_textCut $w.text"
    $w.text.edit add command -label "Copy" -command "tk_textCopy $w.text"
    $w.text.edit add command -label "Paste" -command "tk_textPaste $w.text"
@@ -45,7 +45,7 @@
  
    updateEpdWin $id
  
-@@ -82394,8 +82394,8 @@
+@@ -82516,8 +82516,8 @@
      $sbd.bd create image $xc $yc -image $boc -tag br$i
  
      $sbd.bd bind p$i <ButtonPress-1> "setupBoardPiece $i"
@@ -56,7 +56,7 @@
  
  
      # ::board::bind .main.board $i <ButtonPress-1> "set ::addVariationWithoutAsking 0 ; pressSquare $i"
-@@ -83805,11 +83805,11 @@
+@@ -83932,11 +83932,11 @@
  
    # this font is working, but doesn't affect how many entries fit on a screen, and isn't enabled
    $w.tree tag configure treefont -font font_Regular
@@ -70,16 +70,16 @@
      ::windows::gamelist::Popup %W %x %y %X %Y
    }
    $w.tree tag bind click2 <Double-Button-1> {::windows::gamelist::Load [%W set [%W focus] Number]}
-@@ -83954,7 +83954,7 @@
+@@ -84082,7 +84082,7 @@
      }
    }
    # Quick save is right click
 -  bind $w.b.save <Button-3> {
 +  bind $w.b.save <Button-2> {
-     if {[%W cget -state] == "normal"} {gameQuickSave}
+     if {[%W cget -state] != "disabled"} {gameQuickSave}
    }
  
-@@ -84874,11 +84874,11 @@
+@@ -85006,11 +85006,11 @@
  
  
      # # Middle button popups a PGN board
@@ -94,7 +94,7 @@
  
      if {$::macOS} {
        bind .pgnWin <Control-Button-1> {event generate .pgnWin <Button-3> -x %x -y %y -button 3}
-@@ -86258,9 +86258,9 @@
+@@ -86390,9 +86390,9 @@
          [list InsertMark $board $square]]
      ::board::bind $board $square <ButtonRelease-1> [namespace code \
          [list ButtonReleased $board %b %X %Y]]
@@ -106,7 +106,7 @@
          [list InsertMark $board [expr {$square + 64}]]]
    }
  
-@@ -86684,7 +86684,7 @@
+@@ -86816,7 +86816,7 @@
      bindMouseWheel $w $w.pane.text.text
  
      bind $graph.c <1> { ::windows::eco::Select %x }
@@ -115,7 +115,7 @@
  
      bind $graph <Configure> {
        ::utils::graph::configure eco -height [expr {[winfo height .ecograph.pane.graph.c] - 50} ]
-@@ -87721,7 +87721,7 @@
+@@ -87853,7 +87853,7 @@
        $w.f.tl image create end -image ::tree::mask::emptyImage -align center
      }
      $w.f.tl insert end "    "
@@ -124,7 +124,7 @@
    }
    if {[string match This* [lindex $moves 0]]} {
      $w.f.tl insert 0.0 "[lindex $moves 0]"
-@@ -87804,7 +87804,7 @@
+@@ -87936,7 +87936,7 @@
        if { $maskFile != {}} {
          ### Bind right button to popup a contextual menu
          # todo: Only display full menu if move is in mask
@@ -133,7 +133,7 @@
        }
      }
  
-@@ -87820,7 +87820,7 @@
+@@ -87952,7 +87952,7 @@
      }
      if { $maskFile != {} && $move != {[end]} } {
        # Bind right button to popup a contextual menu:
@@ -142,7 +142,7 @@
      }
      $w.f.tl tag add tagclick$i [expr $i +1 + $hasPositionComment].0 [expr $i + 1 + $hasPositionComment].end
      
-@@ -87855,7 +87855,7 @@
+@@ -87987,7 +87987,7 @@
        
        $w.f.tl tag bind tagclick$idx <Button-1> "[list ::tree::selectCallback $baseNumber [lindex $m 0] ] ; break"
        # Bind right button to popup a contextual menu:
@@ -151,7 +151,7 @@
        # images
        foreach j {4 5} {
          if {[lindex $m $j] == ""} {
-@@ -90554,8 +90554,8 @@
+@@ -90686,8 +90686,8 @@
      set best "$one $winner\t$two $runnerup, ..."
      if {$np == 2} { set best "$one $winner\t$two $runnerup" }
  
@@ -161,7 +161,7 @@
      $t tag bind g$count <ButtonPress-1> [list ::tourney::select $g $event]
      $t tag bind g$count <Any-Enter> "$t tag configure g$count -background $hc"
      $t tag bind g$count <Any-Leave> "$t tag configure g$count -background {}"
-@@ -91555,7 +91555,7 @@
+@@ -91687,7 +91687,7 @@
      foreach win {"" .img .name} {
        bind $f$win <ButtonPress-1> [list ::windows::switcher::pressMouseEvent $i]
        bind $f$win <ButtonRelease-1> [list ::windows::switcher::releaseMouseEvent $i %X %Y %W %R %S]
@@ -170,7 +170,7 @@
      }
  
      menu $f.menu -tearoff 0
-@@ -91569,7 +91569,7 @@
+@@ -91701,7 +91701,7 @@
      $f.menu add command -label $closeLabel -command [list ::file::Close $i]
  
      foreach win {"" .img .name} {
@@ -179,7 +179,7 @@
      }
    }
  
-@@ -95051,7 +95051,7 @@
+@@ -95183,7 +95183,7 @@
    $f.text.edit add command -label "Cut" -command "tk_textCut $f.text"
    $f.text.edit add command -label "Copy" -command "tk_textCopy $f.text"
    $f.text.edit add command -label "Paste" -command "tk_textPaste $f.text"
@@ -188,7 +188,7 @@
  
    set text $w.message.text
    # $text insert end "Hi $name,\n\n"
-@@ -95314,7 +95314,7 @@
+@@ -95446,7 +95446,7 @@
    $edit.text.rmenu add command -label "Copy" -command "tk_textCopy $edit.text"
    $edit.text.rmenu add command -label "Paste" -command "tk_textPaste $edit.text"
    $edit.text.rmenu add command -label "Select all" -command "$edit.text tag add sel 0.0 end-1c"
@@ -197,7 +197,7 @@
  
    text $pane.err.text -height 6 -width 75 -wrap word \
        -yscroll "$pane.err.scroll set"
-@@ -100220,12 +100220,12 @@
+@@ -100355,12 +100355,12 @@
  
    button $w.b.move -image tb_addmove -command "makeAnalysisMove $n" -relief $relief
    ::utils::tooltip::Set $w.b.move $::tr(AddMove)
@@ -212,7 +212,7 @@
  
    button $w.b.alllines -image tb_addallvars -command "addAllVariations $n" -relief $relief
    ::utils::tooltip::Set $w.b.alllines $::tr(AddAllVariations)
-@@ -100337,7 +100337,7 @@
+@@ -100472,7 +100472,7 @@
    pack $w.hist.ybar -side right -fill y
    pack $w.hist.xbar -side bottom -expand 0 -fill x
    pack $w.hist.text -side left -expand 1 -fill both
@@ -221,7 +221,7 @@
    $w.text tag configure blue -foreground blue ; # this only seems used in toggleAutomove ???
    $w.hist.text tag configure gray -foreground grey50 -lmargin2 [font measure font_Small xxxxxxxxxxxxxxxxxx]
    $w.hist.text tag configure blue -foreground darkblue
-@@ -103914,7 +103914,7 @@
+@@ -104049,7 +104049,7 @@
  
    bind $w <F1> {helpWindow Graphs Filter}
    # bind $w.c <1> tools::graphs::filter::Switch
@@ -230,7 +230,7 @@
    bind $w <Escape> "destroy $w"
  
    foreach {name text} {decade Decade year Year elo Rating move moves} {
-@@ -104193,7 +104193,7 @@
+@@ -104328,7 +104328,7 @@
        ::utils::graph::redraw score
        recordWinSize .sgraph
      }
@@ -239,7 +239,7 @@
      bind $w.c <1> {::tools::graphs::score::Move %x}
      bind $w <Escape> "destroy $w"
      bind $w <Control-Z> "destroy $w"
-@@ -104327,7 +104327,7 @@
+@@ -104462,7 +104462,7 @@
        update
        recordWinSize .rgraph
      }
@@ -248,7 +248,7 @@
      bind $w <Escape> "destroy $w"
      bind $w <Destroy> {set ::tools::graphs::rating::players {}}
  
-@@ -104457,7 +104457,7 @@
+@@ -104592,7 +104592,7 @@
  
    bind $w <F1> {helpWindow Graphs Filter}
    # bind $w.c <1> tools::graphs::absfilter::Switch
@@ -257,7 +257,7 @@
    bind $w <Escape> "destroy $w"
    foreach {name text} {decade Decade year Year elo Rating move moves} {
      radiobutton $w.b.$name -padx 4 -pady 3 -text [string totitle $::tr($text)] \
-@@ -106640,7 +106640,7 @@
+@@ -106775,7 +106775,7 @@
      label $b -image b$p$::ptrack::psize -border 1 -relief raised
      grid $b -row 11 -column $c
      bind $b <1> "::ptrack::select $sq"
@@ -266,7 +266,7 @@
    }
    grid [frame $w.bd.gap2 -height 5] -row 12 -column 0
    foreach file {a b c d e f g h} c {1 2 3 4 5 6 7 8} p {p p p p p p p p} {
-@@ -106649,7 +106649,7 @@
+@@ -106784,7 +106784,7 @@
      label $b -image w$p$::ptrack::psize -border 1 -relief raised
      grid $b -row 13 -column $c
      bind $b <ButtonPress-1> "::ptrack::select $sq"
@@ -275,7 +275,7 @@
    }
    foreach file {a b c d e f g h} c {1 2 3 4 5 6 7 8} p {r n b q k b n r} {
      set sq ${file}1
-@@ -106661,15 +106661,15 @@
+@@ -106796,15 +106796,15 @@
  
    # Both-piece bindings:
    foreach sq {d1 e1 d8 e8} {
@@ -296,16 +296,16 @@
    }
  
    # Status-bar help:
-@@ -116135,7 +116135,7 @@
+@@ -116277,7 +116277,7 @@
    }
  }
  # Quick save is right click
 -bind .main.tb.save <Button-3> {
 +bind .main.tb.save <Button-2> {
-   if {[%W cget -state] == "normal"} {gameQuickSave}
+   if {[%W cget -state] != "disabled"} {gameQuickSave}
    break
  }
-@@ -118787,9 +118787,9 @@
+@@ -118929,9 +118929,9 @@
  # Pop-up this menu with a right click on a few empty real estates (if not dragging)
  
  if { !$::docking::USE_DOCKING } {
@@ -317,7 +317,7 @@
    if {"%W" != ".main.board.bd"} {toggleGameInfo}
  }
  
-@@ -126208,7 +126208,7 @@
+@@ -126329,7 +126329,7 @@
      }
  
      checkbutton $w.bottom.buttons.offers -text "$tr(FICSOffers) $tr(Graph)" -variable ::fics::graph(on) -command ::fics::showGraph -width 10 -state disabled
@@ -326,7 +326,7 @@
        if {[string match .fics.bottom* %W]} {
          .fics.bottom.buttons.offers invoke
        }
-@@ -126285,7 +126285,7 @@
+@@ -126406,7 +126406,7 @@
      bind $w <Destroy>   ::fics::close
      bind $w <Configure> "::fics::recordFicsSize $w"
      bind $w <F1> {helpWindow FICS}
@@ -335,7 +335,7 @@
        tk_popup .menu.options.fics %X %Y
      }
  
-@@ -130822,7 +130822,7 @@
+@@ -130912,7 +130912,7 @@
    ::board::bind .main.board $i <Enter> "enterSquare $i"
    ::board::bind .main.board $i <Leave> "leaveSquare $i"
    ::board::bind .main.board $i <ButtonPress-1> "pressSquare $i 0"
@@ -344,7 +344,7 @@
    ::board::bind .main.board $i <Control-ButtonPress-1> "drawArrow $i \$::::commenteditor::State(markColor)"
    # ::board::bind .main.board $i <Control-ButtonPress-2> "drawArrow $i yellow"
    # ::board::bind .main.board $i <Control-ButtonPress-3> "drawArrow $i red"
-@@ -130839,7 +130839,7 @@
+@@ -130929,7 +130929,7 @@
  # if we want to use the above "addMarker" bindings
  bind .main.board.bd <B1-Motion> {::board::dragPiece %X %Y}
  bind .main.board.bd <ButtonRelease-1> {releaseSquare %X %Y}
@@ -353,7 +353,7 @@
  
  foreach i {o q r n k O Q R B N K} {
    bind .main <$i> "moveEntry_Char [string toupper $i]"
-@@ -131025,10 +131025,10 @@
+@@ -131115,10 +131115,10 @@
  }
  
  # todo mac button patch
