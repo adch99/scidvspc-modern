@@ -153,6 +153,7 @@ proc ::windows::gamelist::showCurrent {} {
 
   set index [sc_game number]
   set ::windows::gamelist::goto $index
+  .glistWin.tree selection set {}
   ::windows::gamelist::showNum $index
 }
 
@@ -178,7 +179,9 @@ proc ::windows::gamelist::showNum {index {bell 1}} {
       }
     }
     if {$found} {
-      .glistWin.tree selection set $item
+      if {[sc_game number] != $index} {
+	.glistWin.tree selection set $item
+      }
     } else {
       set glstart $result
 
@@ -199,7 +202,9 @@ proc ::windows::gamelist::showNum {index {bell 1}} {
 	# Nasty, nasty recursive call... "found" above will now trigger and highlight this game
 	::windows::gamelist::showNum $result $bell
       } else {
-	.glistWin.tree selection set $current_item
+        if {[sc_game number] != $index} {
+	  .glistWin.tree selection set $current_item
+        }
       }
     }
   }
@@ -453,14 +458,14 @@ proc ::windows::gamelist::Open {} {
   button $w.b.bkm -relief flat -image tb_bkm
   bind   $w.b.bkm <ButtonPress-1> "tk_popup .main.tb.bkm.menu %X %Y ; break"
 
-  button $w.b.gfirst -image tb_gfirst -command "
+  button $w.b.gfirst -image tb_gfirst -relief flat -command "
     event generate $w.tree <Home>
-    ::game::LoadNextPrev first 0" -relief flat
-  button $w.b.gprev -image tb_gprev -command {::game::LoadNextPrev previous 0} -relief flat
-  button $w.b.gnext -image tb_gnext -command {::game::LoadNextPrev next 0} -relief flat
-  button $w.b.glast -image tb_glast -command "
+    ::game::LoadNextPrev first 0"
+  button $w.b.gprev -image tb_gprev -relief flat -command {::game::LoadNextPrev previous 0 ; ::windows::gamelist::showCurrent}
+  button $w.b.gnext -image tb_gnext -relief flat -command {::game::LoadNextPrev next 0 ; ::windows::gamelist::showCurrent}
+  button $w.b.glast -image tb_glast -relief flat -command "
     event generate $w.tree <End>
-   ::game::LoadNextPrev last 0" -relief flat
+   ::game::LoadNextPrev last 0"
 
   set ::windows::gamelist::goto {}
 
@@ -745,7 +750,7 @@ proc ::windows::gamelist::checkAltered {} {
       # OSX treeview selection colour is different
       $w tag configure current -foreground steelblue3
     } else {
-      $w tag configure current -foreground blue2
+      $w tag configure current -foreground darkblue
     }
   }
 }
