@@ -745,13 +745,14 @@ proc ::windows::gamelist::checkAltered {} {
     # It is impossible to signify the current game with a red foreground and blue background
     # because internally it is part of treeviews "selection", which may span multiple childs
     $w tag configure current -foreground red
+    $w tag configure current_deleted -foreground indianred3
   } else {
     if {$::macOS} {
+      # Hmmm - now we arent highlighting current games with selection, use blue2 to work with deleted tag
       # OSX treeview selection colour is different
-      $w tag configure current -foreground steelblue3
-    } else {
-      $w tag configure current -foreground darkblue
     }
+    $w tag configure current -foreground blue2
+    $w tag configure current_deleted -foreground SteelBlue
   }
 }
 
