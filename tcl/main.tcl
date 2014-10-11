@@ -1599,10 +1599,10 @@ proc autoplay {} {
     }
     if {$::annotate(isBatch) && [sc_game number] != 0} {
       nextgameAutoplay $n
-      return
+    } else {
+      toggleEngineAnalysis $n 1
+      cancelAutoplay
     }
-    toggleEngineAnalysis $n 1
-    cancelAutoplay
     return
   }
 
