@@ -71,25 +71,19 @@ typedef struct
 
 typedef struct
 {
-  int psnl;		/* positional evaluation */
-  int devi;		/* deviation to be used in lazy eval, 0 = true eval */
-  int check;		/* side to move is in check */
-} tsearchnode;
-
-typedef struct
-{
   tmove
 	m;
   unsigned
 	hashboard;
-  unsigned
+  unsigned short
 	rule50,		/* number of half-moves since last irreversible */
-	castling;	/* 4 castling flags: */
+	castling:8,	/* 4 castling flags: */
 			/*   white short, w. long, b. s., b. l. */
-  int
+	check:8;
+  short
 	mtrl,		/* material count of side on move */
 	xmtrl;		/* material count of opposite side */
-} tgamenode;      /* 12+16 bytes */
+} tgamenode;      /* 12+12 bytes */
 
 typedef struct
 {
@@ -442,7 +436,7 @@ extern int N_moves[8], RB_dirs[8];
 #define K_moves RB_dirs
 
 extern int Values[7];            /* piece values */
-extern unsigned P[120];
+extern unsigned short P[120];      /* power table */
 
 extern tmove PV[MAXPLY][MAXPLY];   /* principal variantion */
 extern tmove Pondermove;
@@ -464,8 +458,8 @@ extern int Bookout;
 
 /* params that cannot be pushed thru SIGALM handler, */
 /* must be pushed thru global variables */
-extern volatile int A_n, A_i, A_d;
-extern volatile tmove * A_m;
+extern int A_n, A_i, A_d;
+extern tmove * A_m;
 
 
 
@@ -485,7 +479,7 @@ extern void printm(tmove,char*);
 extern void printmSAN( tmove*, int, int, char* );
 extern void printPV(int,int,char*);
 extern void infoline(int,char*);
-extern void verboseline(void);
+extern void verboseline(tmove*,int,int);
 extern void printboard(char*);
 extern int setfen(const char*);
 extern void shell(void);
@@ -545,7 +539,6 @@ extern void wlearn(int,int);
 extern void init_killers(void);
 extern void write_killer( int, int );
 extern void add_killer( tmove *, int, thashentry * );
-extern void slash_killers( tmove *, int );
 
 #endif
 

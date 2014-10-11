@@ -203,7 +203,7 @@ int R_mobi[16] =
  { -9, -5, -2, 0, 2, 4, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6 };
 
 /* power table */
-unsigned P[120];
+unsigned short P[120];
 
 int *pf, *xpf, wpf[10], bpf[10]; /* # of w&b pawns on a file */
 
@@ -328,7 +328,7 @@ for(i=0;i!=10;i++) wpf[i]=bpf[i]=0;
 
 memset( &Wknow, 0, sizeof(tknow) );
 memset( &Bknow, 0, sizeof(tknow) );
-memset( P+20, 0, 80*sizeof(unsigned) );
+memset( P, 0, 120*sizeof(short) );
 
 Wknow.kp = WKP; Wknow.worsebm = 100;
 Wknow.lpf = 9;
@@ -736,10 +736,8 @@ for(;;)
 		er += bb*2;
 #ifdef SCORING
 		if( Scoring )
-		{
-		  if(l==wl) printf(" (whi) bishop pair bonus = %i\n",bb);
-		  else      printf(" (bla) bishop pair bonus = %i\n",bb);
-		}
+		if(l==wl) printf(" (whi) bishop pair bonus = %i\n",bb);
+		else      printf(" (bla) bishop pair bonus = %i\n",bb);
 #endif
 	}
 
@@ -797,12 +795,10 @@ for(;;)
 
 #ifdef SCORING
 			if( Scoring )
-			{
 				if(l==wl)
 				printf( " (whi) pawn center = %i\n", d );
 				else
 				printf( " (bla) pawn center = %i\n", d );
-			}
 #endif
 		}
 
@@ -862,13 +858,12 @@ for(;;)
 		}
 
 #ifdef SCORING
-		if( Scoring && d!=0 )
-		{
+		if( Scoring )
+			if(d!=0)
 			if(l==wl)
 			printf( " (whi) castling = %i\n", d );
 			else
 			printf( " (bla) castling = %i\n", d );
-		}
 #endif
 	}
 
@@ -902,12 +897,10 @@ for(;;)
 			mr += pen; er += pen;
 #ifdef SCORING
 			if( Scoring )
-			{
 				if(l==wl)
 				printf( " (whi) isolated pawn = %i\n", pen );
 				else
 				printf( " (bla) isolated pawn = %i\n", pen );
-			}
 #endif
 		}
 	}
@@ -1240,17 +1233,31 @@ printboard(); printf("%02i",sq); getchar();
 		  }
 		}
 
+		{
+			static int bon[8] =
+			{ 5, 3, 1, -2, -2, -2, -2, -2 };
+			int b = bon[ xkdist[sq].min ];
+			if(b>0)
+			{
+				b += r;
+				if( know->qstorm || know->kstorm ) mrr += b;
+				if( b > 5 )
+				{
+					if( b > 8 ) xknow->khung += 2;
+					else         xknow->khung ++;
+				}
+			}
+		}
+
 		mrr += rmpb[sq];
 
 		mr += mrr; er += err;
 #ifdef SCORING
 		if( Scoring )
-		{
 			if(l==wl)
 			printf( " (whi) rook = %i,%i\n", mrr, err );
 			else
 			printf( " (bla) rook = %i,%i\n", mrr, err );
-		}
 #endif
 	}
 	break;
@@ -1278,12 +1285,10 @@ printboard(); printf("%02i",sq); getchar();
 
 #ifdef SCORING
 			if( Scoring )
-			{
 				if(l==wl)
 				printf( " (whi) strong bishop = %i\n", bonus );
 				else
 				printf( " (bla) strong bishop = %i\n", bonus );
-			}
 #endif
 
 			no_bishop_outpost:;
@@ -1345,12 +1350,10 @@ printboard(); printf("%02i",sq); getchar();
 
 #ifdef SCORING
 			if( Scoring )
-			{
 				if(l==wl)
 				printf( " (whi) strong knight = %i\n", bonus );
 				else
 				printf( " (bla) strong knight = %i\n", bonus );
-			}
 #endif
 
 			no_knight_outpost:;
@@ -1508,23 +1511,21 @@ midresult += (Bknow.khung-Wknow.khung) * 2;
 /*********** King danger */
 Wknow.khung -= Wknow.kshield/3;
 Bknow.khung -= Bknow.kshield/3;
-
-#define KSAFETY 1
 if( Wknow.khung > 1 )
 {
-	midresult -= Wknow.khung * Wknow.khung * KSAFETY;
+	midresult -= Wknow.khung * Wknow.khung;
 #ifdef SCORING
 	if( Scoring )
-	printf( " (whi) king safety = %i\n", Wknow.khung * Wknow.khung * -KSAFETY );
+	printf( " (whi) king safety = %i\n", Wknow.khung * Wknow.khung * -4 );
 #endif
 }
 
 if( Bknow.khung > 1 )
 {
-	midresult += Bknow.khung * Bknow.khung * KSAFETY;
+	midresult += Bknow.khung * Bknow.khung;
 #ifdef SCORING
 	if( Scoring )
-	printf( " (bla) king safety = %i\n", Bknow.khung * Bknow.khung * -KSAFETY );
+	printf( " (bla) king safety = %i\n", Bknow.khung * Bknow.khung * -4 );
 #endif
 }
 
@@ -1532,7 +1533,7 @@ Wknow.prune = ( Wknow.hung < 10 && Wknow.khung < 2 );
 Bknow.prune = ( Bknow.hung < 10 && Bknow.khung < 2 );
 
 /**
-***   Trade down bonus - when ahead in material, trade pieces, keep pawns
+***   Trade down bonus
 **/
 {
 	int tbonus = ( G[Counter].mtrl - G[Counter].xmtrl );
@@ -1544,24 +1545,25 @@ Bknow.prune = ( Bknow.hung < 10 && Bknow.khung < 2 );
 
 		if( tbonus > 0 ) /* white stronger */
 		{
-			tbonus = min(tbonus,N_VALUE) + 200;
-			if( Wknow.p || tbonus>=(N_VALUE+200) )
-			r = ( Wknow.p - 2*Bknow.q-Bknow.b-Bknow.r-Bknow.n )
-			    * tbonus / 50;
+			if( Wknow.p || tbonus>=(N_VALUE+P_VALUE) )
+			r = (   tbonus * Wknow.p
+			      - tbonus * (2*Bknow.q+Bknow.b+Bknow.r+Bknow.n)
+			    ) / 30;
 			else /* white has no pawns! */
-			r = - tbonus / 4;
+			r = - tbonus / 2;
 		}
 		else             /* black stronger */
 		{
-			tbonus = max(tbonus,-N_VALUE) - 200;
-			if( Bknow.p || tbonus<=-(N_VALUE+200) )
-			r = ( Bknow.p - 2*Wknow.q-Wknow.b-Wknow.r-Wknow.n )
-			    * tbonus / 50;
+			if( Bknow.p || tbonus<=(N_VALUE+P_VALUE) )
+			r = (   tbonus * Bknow.p
+			      - tbonus * (2*Wknow.q+Wknow.b+Wknow.r+Wknow.n)
+			    ) / 30;
 			else
-			r = - tbonus / 4;
+			r = - tbonus / 2;
 		}
 
-		result += r;
+		endresult += r;
+		midresult += r/2;
 
 #ifdef SCORING
 		if( Scoring )

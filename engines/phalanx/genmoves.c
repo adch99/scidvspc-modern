@@ -513,11 +513,14 @@ if( ! check )
 void lc( tmove *m, int *i )
 {
 
-if( Depth < -100 )
+if( Depth < -200 )
 {
 if( Values[ B[From]>>4 ] > Values[ B[To]>>4 ] )
 {
-  if( attacktest(To,enemy(Color)) ) return;
+  if( Color == BLACK )
+  { if( (P[To]&0x00FF) ) return; }
+  else
+  { if( (P[To]&0xFF00) ) return; }
 }
 }
 else
@@ -561,7 +564,7 @@ for( square=L[Color].next; square!=0; square=L[square].next )
 	case PAWN:
 	 if(Color==WHITE)
 	 {	destination = square+10;
-		if( B[destination] == 0 && destination>=A8 && Depth>-300 )
+		if( B[destination] == 0 && destination>=A8 )
 		{ link_move(WQ,0); }
 		for( destination = square+9;
 		     destination != square+13;
@@ -581,7 +584,7 @@ for( square=L[Color].next; square!=0; square=L[square].next )
 	 }
 	 else /* This is a black pawn */
 	 {	destination = square-10;
-		if( B[destination] == 0 && destination<=H1 && Depth>-300 )
+		if( B[destination] == 0 && destination<=H1 )
 		{ link_move(BQ,0); }
 		for( destination = square-9;
 		     destination != square-13;

@@ -179,11 +179,10 @@ int l_iterate(void)
 		long t = ptime();
 		switch( EasyMove )
 		{
-			case 1:  return ( t <= T1 + T2/2 );
-			case 2:  return ( t <= T1 + T2/4 );
+			case 1:  return ( t <= T1 + T2/3 );
+			case 2:  return ( t <= T1 + T2/6 );
 			default:
-				 if( Depth<400 ) /* stabilize low nps levels */ 
-					return ( t <= T1 + T2*2/3 );
+				 if( Flag.easy ) return ( t <= T1 + T2*2/3 );
 				 if( Turns==0 )
 					return ( t <= T1 + T2 );
 				 else

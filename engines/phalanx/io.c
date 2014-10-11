@@ -5,11 +5,11 @@ extern long Time;
 
 
 char Inp[256] = "\0";
-char piece[7] =
+const char piece[7] =
  { ' ', 'P', 'N', 'B', 'R', 'Q', 'K' };
-char file[10] =
+const char file[10] =
  { '<', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', '>' };
-char row[12] =
+const char row[12] =
  { '<', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '>' };
 
 tmove Pm[256];
@@ -61,6 +61,8 @@ L[L[1].next].next = L[L[2].next].next = 0;
 	{ L[blast].next = s; L[s].prev = blast; L[s].next = 0; blast = s; }
 	}
 }
+
+Flag.machine_color = enemy(Color);
 
 }
 
@@ -262,10 +264,10 @@ switch( m.special )
   case SHORT_CASTLING: printf("O-O"); return;
 }
 
-printf( "%c%c%c%c",
+printf( "%c%c%c%c%c",
 	file[m.from%10], row[m.from/10],
-	file[m.to%10], row[m.to/10] );
-if ( m.in2a != m.in1 ) printf( "%c", tolower(piece[m.in2a>>4]) );
+	file[m.to%10], row[m.to/10],
+	m.in2a == m.in1 ? ' ' : tolower(piece[m.in2a>>4]) );
 
 }
 
@@ -626,38 +628,23 @@ else
 
 
 
-void verboseline( void )
+void verboseline( tmove* m, int i, int n )
 {
 	char s[256];
 	int j;
 	extern long T1;
-	long t = (long) (ptime()-T1);
+	long t = (long) (ptime()-T1) / 100;
 
-	if( Flag.xboard==0 )
-	{
-		t /= 100; /* seconds elapsed */
-		sprintf( s, "(%2i)", A_d );
-		sprintf( s+strlen(s), "   ");
-		sprintf( s+strlen(s), "%3li:%02li   ", t/60, t%60 );
-		sprintf( s+strlen(s), "%9lli  ", Nodes );
-		sprintf( s+strlen(s), "(%2i/%2i) ", A_i+1, A_n );
-		printm( A_m[A_i], s+strlen(s) );
-		sprintf( s+strlen(s), "     " );
-		for( j=0; j!=79; j++ ) sprintf( s+strlen(s), "" );
-		printf("%s",s);
-	}
-	else
-	{
-		sprintf( s, "stat01: %li %li %i %i %i ",
-		                 t, /* time elapsed in centiseconds */
-		                     (long) Nodes,
-		                         A_d, /* A_d breaks Arena */
-		                            A_n - A_i - 1,
-		                               A_n
-		);
-		printf("%s",s);
-		gnuprintm(A_m[A_i]); puts("");
-	}
+	sprintf( s, "(%2i)", A_d );
+	sprintf( s+strlen(s), "   ");
+	sprintf( s+strlen(s), "%3li:%02li   ", t/60, t%60 );
+	sprintf( s+strlen(s), "%9lli  ", Nodes );
+	sprintf( s+strlen(s), "(%2i/%2i) ", i+1, n );
+	printm( m[i], s+strlen(s) );
+	sprintf( s+strlen(s), "     " );
+	for( j=0; j!=79; j++ ) sprintf( s+strlen(s), "" );
+
+	printf("%s",s);
 }
 
 
@@ -1068,14 +1055,9 @@ void interrupt(int x)
 
 	if( Flag.polling )
 	{
-		/* ignore lines that begin with '.' */
-		c=getc(stdin); ungetc(c,stdin);
-		if( c=='.' )
-		{
-			fgets(Inp,255,stdin);
-			verboseline();
-			goto go_on;
-		}
+	/* ignore lines that begin with '.' */
+	c=getc(stdin); ungetc(c,stdin);
+	if( c=='.' ) { fgets(Inp,255,stdin); goto go_on; }
 	}
 
 	if( Flag.ponder < 2 )
@@ -1394,7 +1376,7 @@ puts("# (comment)");
 	}
 
 /* COMMAND: score */
-	if( strncmp(Inp,"score\n",6) == 0 || strncmp(Inp,"s\n",2) == 0 )
+	if( strncmp( Inp, "score\n", 6 ) == 0 )
 	{
 		Scoring = 1; Depth = 100;
 		printf("\n (stm) material = %i\n",
@@ -1475,7 +1457,6 @@ puts("# (comment)");
 	{
 		if (setfen(Inp+9))
                    setfen(initialpos);
-		if(Flag.analyze) Flag.machine_color=3;
 		Inp[0] = '\0';
 		return 1;
 	}
@@ -1573,11 +1554,8 @@ puts("# (comment)");
 		{ tmove *sd = sandex(Inp,m,n); if(sd!=NULL) i=sd-m; else i=n; }
 		if( i != n )
 		{
-			if( Flag.xboard < 2 )
-			{
-				printf("\nyour move is ");
-				printm( m[i], NULL ); puts("");
-			}
+			printf("\nyour move is ");
+			printm( m[i], NULL ); puts("");
 			do_move( m+i );
 			switch( terminal() )
 			{
@@ -1652,13 +1630,15 @@ while( command() )
 				}
 			}
 
-			if( Flag.xboard < 2 )
-			{
-				printf("my move is "); printm( m, NULL ); puts("");
-			}
-			if( Flag.xboard > 0 )
-			{
-				printf("move "); gnuprintm(m); puts("");
+			if( Flag.xboard >= 20 )
+			{ printf("move "); gnuprintm(m); printf("\n"); }
+			else
+			  {
+			  printf("my move is "); printm( m, NULL );
+
+			  if( Flag.xboard>0 )
+			  { printf("\n%i. ... ",(Counter+1)/2); gnuprintm(m); }
+			  puts("");
 			}
 
 			switch( ( ter = terminal() ) )
