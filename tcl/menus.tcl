@@ -1125,7 +1125,9 @@ if {$::docking::USE_DOCKING} {
   $m add checkbutton -label OptionsWindowsAutoLoadLayout -variable autoLoadLayout 
   set helpMessage($m,4) OptionsWindowsAutoLoadLayout
 
-  $m add checkbutton -label OptionsWindowsAutoResize -variable ::autoResizeBoard -command ::docking::toggleAutoResizeBoard
+  $m add checkbutton -label OptionsWindowsAutoResize -variable ::autoResizeBoard -command {
+     if {$::autoResizeBoard} {resizeMainBoard}
+  }
   set helpMessage($m,4) OptionsWindowsAutoLoadLayout
 
   menu $m.savelayout
