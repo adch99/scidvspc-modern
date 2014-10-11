@@ -96,7 +96,7 @@ menuText D GameNew "Neue Partie" 5 \
 menuText D GameFirst "Erste Partie laden" 0 {Erste Partie im Filter laden}
 menuText D GamePrev "Vorherige Partie laden" 0 \
   {Vorherige Partie im Filter laden}
-menuText D GameReload "Partie wiederladen" 7 \
+menuText D GameReload "Partie neu laden" 7 \
   {Diese Partie erneut laden, dabei alle Änderungen verwerfen}
 menuText D GameNext "Nächste Partie laden" 0 {Nächste Partie im Filter laden}
 menuText D GameLast "Letzte Partie laden" 0 {Letzte Partie im Filter laden}
@@ -111,8 +111,7 @@ menuText D GameAdd "Partie speichern..." 7 \
 menuText D GameInfo "Set Game Information" 9
 menuText D GameBrowse "Spiele durchsuchen" 0
 menuText D GameList "Alle Spiele" 0
-# ====== TODO To be translated ======
-menuText D GameDelete "Delete Game" 0
+menuText D GameDelete "Spiel löschen" 0
 menuText D GameDeepest "Eröffnung identifizieren" 10 \
   {Zur Position der längstmöglichen Zugfolge nach ECO-Klassifikation gehen}
 menuText D GameGotoMove "Zugnummer..." 0 \
@@ -249,19 +248,19 @@ menuText D ToolsStartEngine2 "Starte Engine2" 0  {Starte Analyse von Analyse-Eng
 menuText D ToolsScreenshot "Foren-Screenshot" 0
 #-----AW------
 menuText D Play "Spielen" 0 {Partien spielen}
-menuText D CorrespondenceChess "Fernschach" 0 {Funktionen für eMail und Xfcc basiertes Fernschach}
+menuText D CorrespondenceChess "Fernschach" 0 {Funktionen für E-Mail und Xfcc basiertes Fernschach}
 menuText D CCConfigure "Einstellungen..." 0 {Generelle Einstellungen und externe Werkzeuge}
 menuText D CCConfigRelay "Beobachtete Partien..." 10 {Configure games to be observed}
 menuText D CCOpenDB "Datenbank öffnen..." 0 {Öffnet die Standarddatenbank für Fernschachpartien}
 menuText D CCRetrieve "Partien synchronisieren" 0 {Synchronisiert Partien mit dem Posteingang und mittels (Xfcc-)Hilfsprogramm}
 menuText D CCInbox "Posteingang synchronisieren" 12 {Synchronisiert alle Partien im Posteingang}
-menuText D CCSend "Zug senden" 0 {Verschickt den letzten Zug via eMail oder exterem (Xfcc-)Hilfsprogramm}
-menuText D CCResign "Aufgeben" 0 {Partie aufgeben (funktioniert nicht via eMail)}
-menuText D CCClaimDraw "Remis erklären" 1 {Zug senden und Partie Remis erklären (funktioniert nicht via eMail)}
-menuText D CCOfferDraw "Remis anbieten" 0 {Zug senden und Remis anbieten (funktioniert nicht via eMail)}
-menuText D CCAcceptDraw "Remis annehmen" 10 {Remis annehmen (funktioniert nicht via eMail)}
-menuText D CCNewMailGame "Neue eMail Partie..." 0 {Beginnt eine neue Partie via eMail}
-menuText D CCMailMove "Zug per eMail senden..." 9 {Verschickt den letzten Zug per eMail}
+menuText D CCSend "Zug senden" 0 {Verschickt den letzten Zug via E-Mail oder exterem (Xfcc-)Hilfsprogramm}
+menuText D CCResign "Aufgeben" 0 {Partie aufgeben (funktioniert nicht via E-Mail)}
+menuText D CCClaimDraw "Remis erklären" 1 {Zug senden und Partie Remis erklären (funktioniert nicht via E-Mail)}
+menuText D CCOfferDraw "Remis anbieten" 0 {Zug senden und Remis anbieten (funktioniert nicht via E-Mail)}
+menuText D CCAcceptDraw "Remis annehmen" 10 {Remis annehmen (funktioniert nicht via E-Mail)}
+menuText D CCNewMailGame "Neue E-Mail Partie..." 0 {Beginnt eine neue Partie via E-Mail}
+menuText D CCMailMove "Zug per E-Mail senden..." 9 {Verschickt den letzten Zug per E-Mail}
 menuText D CCGamePage "Partieseite (WWW)..." 13 {Ruft die Webseite der Partie auf}
 menuText D CCEditCopy "Partieliste in Ablage" 0 {Kopiert die Parieliste als CSV in die Zwischenablage}
 #-----AW------
@@ -269,9 +268,8 @@ menuText D CCEditCopy "Partieliste in Ablage" 0 {Kopiert die Parieliste als CSV 
 # Options menu:
 menuText D Options "Optionen" 0
 menuText D OptionsBoard "Schachbrett" 6 {Schachbrettoptionen}
-menuText D OptionsColour "Background Colour" 0 {Default text widget color}
-# ====== TODO To be translated ======
-menuText D OptionsEnableColour "Enable" 0 {}
+menuText D OptionsColour "Hintergrundfarbe" 0 {Default text widget color}
+menuText D OptionsEnableColour "Einschalten" 0 {}
 menuText D OptionsNames "Meine Spielernamen..." 0 {Editiere meine Spielernamen}
 menuText D OptionsExport "Export" 1 {Textausgabeoptionen ändern}
 menuText D OptionsFonts "Schriftarten" 3 {Schriftart wechseln}
@@ -281,17 +279,13 @@ menuText D OptionsFontsSmall "Klein" 0 {Kleine Zeichen}
 menuText D OptionsFontsFixed "Fest" 0 {Schriftart mit fester Breite (nicht-proportional)}
 menuText D OptionsGInfo "Partieinformation" 0 {Optionen für Informationsbereich}
 menuText D OptionsFics "FICS" 0
+# ====== TODO To be translated ======
 menuText D OptionsFicsAuto "Autopromote Königin" 0
-# ====== TODO To be translated ======
-menuText D OptionsFicsColour "Text Colour" 0
-# ====== TODO To be translated ======
-menuText D OptionsFicsSize "Board Size" 0
-# ====== TODO To be translated ======
-menuText D OptionsFicsCommands "Init Commands" 0
-# ====== TODO To be translated ======
-menuText D OptionsFicsNoRes "No Results" 0
-# ====== TODO To be translated ======
-menuText D OptionsFicsNoReq "No Requests" 0
+menuText D OptionsFicsColour "Textfarbe" 0
+menuText D OptionsFicsSize "Brettgröße" 0
+menuText D OptionsFicsCommands "Startbefehle" 0
+menuText D OptionsFicsNoRes "Keine Ergebnisse" 0
+menuText D OptionsFicsNoReq "Keine Anfragen" 0
 menuText D OptionsLanguage "Sprache" 0 {Sprache wählen}
 menuText D OptionsMovesTranslatePieces "Figurennamen übersetzen" 0 {Übersetze den ersten Buchstaben der Figurenbezeichnung}
 menuText D OptionsMovesHighlightLastMove "Letzen Zug hervorheben" 0 {Rahmt Start- und Zielfeld des letzten Zuges farbig ein}
@@ -324,14 +318,13 @@ menuText D OptionsWindowsRaise "Autom. Verwaltung" 7 \
   {Bestimmte Fenster (z.B. Zustandsleiste) bei Bedarf öffnen}
 menuText D OptionsSounds "Töne..." 0 {Töne für Zugankündigung einstellen} ;# *** Hmm, :-|
 menuText D OptionsWindowsDock "Fenster docken" 0 {Fenster docken}
-menuText D OptionsWindowsSaveLayout "Save layout" 0 {Save layout}
-menuText D OptionsWindowsRestoreLayout "Restore layout" 0 {Restore layout}
+menuText D OptionsWindowsSaveLayout "Layout speichern" 0 {Das Fensterlayout abspeichern}
+menuText D OptionsWindowsRestoreLayout "Layout wiederherstellen" 0 {Das gespeicherte Fensterlayout wiederherstellen}
 menuText D OptionsWindowsShowGameInfo "Partieinformationen" 0 {Partieinformation anzeigen}
 menuText D OptionsWindowsAutoLoadLayout "Automatisch laden: 1. Layout" 0 {Lädt das erste definierte Layout automatisch beim Programmstart}
-# todo
-menuText D OptionsWindowsAutoResize "Auto resize board" 0 {}
+menuText D OptionsWindowsAutoResize "Brettgröße autom. anpassen" 0 {}
 # ====== TODO To be translated ======
-menuText D OptionsWindowsFullScreen "Fullscreen" 0 {Toggle fullscreen mode}
+menuText D OptionsWindowsFullScreen "Vollbild" 0 {Vollbild Modus umschalten}
 menuText D OptionsToolbar "Werkzeugleiste" 0 {Werkzeug- bzw. Symbolleiste Ein/Aus}
 menuText D OptionsECO "ECO-Datei laden..." 0 {ECO-Klassifikationsdatei laden}
 menuText D OptionsSpell "Schreibkorrekturdatei laden..." 7 \
@@ -360,10 +353,8 @@ menuText D HelpAbout "Über Scid" 0 {Informationen zu Scid}
 
 # Game info box popup menu:
 menuText D GInfoHideNext "Nächsten Zug verstecken" 13
-# ====== TODO To be translated ======
-menuText D GInfoShow "Side to Move" 0
-# ====== TODO To be translated ======
-menuText D GInfoCoords "Toggle Coords" 0
+menuText D GInfoShow "Zugrecht anzeigen" 0
+menuText D GInfoCoords "Koordinaten anzeigen" 0
 menuText D GInfoMaterial "Materialwerte zeigen" 0
 menuText D GInfoFEN "FEN zeigen" 0
 menuText D GInfoMarks "Gefärbte Felder und Pfeile zeigen" 0
@@ -376,20 +367,17 @@ menuText D GInfoTBAll "Endspieltabellen: Ergebnis und bester Zug" 31
 menuText D GInfoDelete "(Ent)Lösche diese Partie" 5
 menuText D GInfoMark "(Un)Markiere diese Partie" 4
 menuText D GInfoInformant "Informatorwerte konfigurieren" 0
-# ====== TODO To be translated ======
-translate D FlipBoard {Flip board}
+translate D FlipBoard {Brett drehen}
 # ====== TODO To be translated ======
 translate D RaiseWindows {Raise windows}
-# ====== TODO To be translated ======
-translate D AutoPlay {Autoplay}
-# ====== TODO To be translated ======
-translate D TrialMode {Trial mode}
+translate D AutoPlay {Abspielen}
+translate D TrialMode {Züge ausprobieren}
 
 # General buttons:
 # todo
-translate D Apply {Apply}
+translate D Apply {Übernehmen}
 translate D Back {Zurück}
-translate D Browse {Blättern}
+translate D Browse {Durchstöbern}
 translate D Cancel {Abbrechen}
 translate D Continue {Weiter}
 translate D Clear {Leeren}
@@ -413,7 +401,7 @@ translate D Stop {Halt}
 translate D Store {Speichern}
 translate D Update {Aktualisieren}
 translate D ChangeOrient {Fensterausrichtung ändern}
-translate D ShowIcons {Show Icons} ;# ***
+translate D ShowIcons {Icons anzeigen} ;# ***
 translate D None {Keine}
 translate D First {Erste}
 translate D Current {Aktuelle}
@@ -468,11 +456,10 @@ translate D SearchResults {Suchergebnisse}
 translate D OpeningTheDatabase {Datenbank öffnen}
 translate D Database {Datenbank}
 translate D Filter {Filter}
-# ====== TODO To be translated ======
-translate D Reset {Reset}
+translate D Reset {Zurücksetzen}
 translate D IgnoreCase {Ignoriert Groß}
-translate D noGames {keine partien}
-translate D allGames {alle partien}
+translate D noGames {keine Partien}
+translate D allGames {alle Partien}
 translate D empty {leer}
 translate D clipbase {Ablage}
 translate D score {Punkte}
@@ -480,8 +467,7 @@ translate D Start {Start}
 translate D StartPos {Stellung}
 translate D Total {Summe}
 translate D readonly {schreibgeschützt}
-# ====== TODO To be translated ======
-translate D altered {altered}
+translate D altered {geändert}
 
 # Standard error messages:
 translate D ErrNotOpen {Dies ist keine geöffnete Datenbank.}
@@ -510,11 +496,9 @@ translate D PInfoMostWhite {Häufigste Eröffnungen als Weißer}
 translate D PInfoMostBlack {Häufigste Eröffnungen als Schwarzer}
 translate D PInfoRating {ELO-Historie}
 translate D PInfoBio {Biographie}
-translate D PInfoEditRatings {Editiere Ratings}
-# ====== TODO To be translated ======
-translate D PinfoEditName {Edit Name}
-# ====== TODO To be translated ======
-translate D PinfoLookupName {Lookup Name}
+translate D PInfoEditRatings {Bewertung bearb.}
+translate D PinfoEditName {Name ändern}
+translate D PinfoLookupName {Name suchen}
 
 # Tablebase information:
 translate D Draw {Remis}
@@ -535,15 +519,15 @@ translate D LosingMoves {Verlustzüge}
 translate D UnknownMoves {Züge mit unbekanntem Resultat}
 
 # Tip of the day:
-translate D Tip {Tip}
-translate D TipAtStartup {Tip beim Starten}
+translate D Tip {Tipp}
+translate D TipAtStartup {Tipp beim Starten}
 
 # Tree window menus:
 menuText D TreeFile "Datei" 0
 menuText D TreeFileFillWithBase "Cache mit Datenbank füllen" 0 {Die Cache-Datei wird mit allen Partien der aktuellen Datenbank befüllt.}
 menuText D TreeFileFillWithGame "Cache mit Partie füllen" 0 {Die Cache-Datei wird mit der aktuellen Partien befüllt.}
-menuText D TreeFileSetCacheSize "Cache Größe" 0 {Cachegröße auswählen.}
-menuText D TreeFileCacheInfo "Cache info" 0 {Info über Cachenutzung anzeigen.}
+menuText D TreeFileSetCacheSize "Cachegröße" 0 {Cachegröße auswählen.}
+menuText D TreeFileCacheInfo "Cache Informationen" 0 {Info über Cachenutzung anzeigen.}
 menuText D TreeFileSave "Cache-Datei sichern" 12 \
   {Speichere die Zugbaum-Cache-Datei (.stc)}
 menuText D TreeFileFill "Cache-Datei füllen" 12 \
@@ -592,8 +576,7 @@ translate D LockTree {Anbinden}
 translate D TreeLocked {angebunden}
 translate D TreeBest {Beste}
 translate D TreeBestGames {Beste Zugbaumpartien}
-# ====== TODO To be translated ======
-translate D TreeAdjust {Adjust Filter}
+translate D TreeAdjust {Filter anpassen}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
 translate D TreeTitleRow \
@@ -713,8 +696,7 @@ translate D ShowInfo {Engine-Information anzeigen}
 translate D FinishGame {Partie beenden}
 translate D StopEngine {Engine anhalten}
 translate D StartEngine {Engine starten}
-# ====== TODO To be translated ======
-translate D ExcludeMove {Exclude Move}
+translate D ExcludeMove {Zug ausschließen}
 translate D LockEngine {Anbinden an aktuelle Position}
 translate D AnalysisCommand {Analysebefehl}
 translate D PreviousChoices {Vorherige Wahl}
@@ -729,16 +711,15 @@ translate D AnnotateBlundersOnly {Wenn der Partiezug ein offensichtlicher Fehler
 translate D AnnotateBlundersOnlyScoreChange {Analyse berichtet Fehler, Bewertungsänderung von/nach: }
 translate D AnnotateTitle {konfigurieren Annotation}
 translate D AnnotateWith {Kommentieren mit}
-translate D AnnotateWhichMoves {welche Moves}
-translate D AnnotateComment {Add Kommentator Kommentar}
+translate D AnnotateWhichMoves {welche Züge}
+translate D AnnotateComment {Kommentator speichern}
 translate D BlundersThreshold {Grenze}
 # ====== TODO To be translated ======
 translate D CutOff {Cut Off}
 translate D LowPriority {Niedrige CPU-Priorität}
+translate D LogEngines {Log Größe}
 # ====== TODO To be translated ======
-translate D LogEngines {Log Size}
-# ====== TODO To be translated ======
-translate D LogName {Add Name}
+translate D LogName {Namen hinzufügen}
 translate D ClickHereToSeeMoves {Hier klicken um Züge anzuzeigen}
 translate D ConfigureInformant {Informator konfigurieren}
 translate D Informant!? {Interessanter Zug}
@@ -761,7 +742,7 @@ translate D EngineElo {Elo}
 translate D EngineTime {Datum}
 translate D EngineNew {Neu}
 translate D EngineEdit {Bearbeiten}
-translate D EngineRequired {Fettgedruckte Parameter obligatorisch, andere optional}
+translate D EngineRequired {Fettgedruckte Parameter erforderlich, andere optional}
 
 
 # Stats window menus:
@@ -784,7 +765,7 @@ menuText D PgnOptIndentV "Varianten einrücken" 0
 menuText D PgnOptColumn "Tabellarisch (ein Zug pro Zeile)" 0
 menuText D PgnOptSpace "Leerzeichen nach Zugnummer" 0
 menuText D PgnOptStripMarks "Farbfelder-/Pfeile-Zeichen entfernen" 27
-menuText D PgnOptChess "Schach Pieces" 6
+menuText D PgnOptChess "Schachfiguren als Symbole" 6
 menuText D PgnOptScrollbar "Bildlaufleiste" 0
 menuText D PgnOptBoldMainLine "Partiezüge in Fettdruck" 0
 menuText D PgnColor "Farben" 0
@@ -819,11 +800,11 @@ menuText D CrosstabOptTieWin "Tie-Break by wins" 1
 # ====== TODO To be translated ======
 menuText D CrosstabOptTieHead "Tie-Break by head-head" 1
 # todo
-menuText D CrosstabOptThreeWin "3 Points for Win" 1
+menuText D CrosstabOptThreeWin "3 Punkte für Sieg" 1
 menuText D CrosstabOptAges "Alter in Jahren" 0
 menuText D CrosstabOptNats "Nationalität" 0
 # todo
-menuText D CrosstabOptTallies "Win/Loss/Draw" 0
+menuText D CrosstabOptTallies "Sieg/Niederlage/Unentschieden" 0
 menuText D CrosstabOptRatings "Elo" 0
 menuText D CrosstabOptTitles "Titel" 0
 menuText D CrosstabOptBreaks "Stichkampfpunkte" 10
@@ -873,7 +854,7 @@ translate D GamesWithNoECO {Partien ohne ECO?}
 translate D GameLength {Partielänge}
 translate D FindGamesWith {Finde Partien mit den Markierungen (Flags)}
 translate D StdStart {Standardausgangsposition}
-translate D Promotions {Umwandlung}
+translate D Promotions {Umwandlungen}
 translate D Comments {Kommentare}
 translate D Variations {Varianten}
 translate D Annotations {Anmerkungen}
@@ -928,7 +909,7 @@ translate D GlistSort {Sort database}
 translate D GlistRemoveThisGameFromFilter  {Partie}
 translate D GlistRemoveGameAndAboveFromFilter  {Partie (und alle oberhalb)}
 translate D GlistRemoveGameAndBelowFromFilter  {Partie (und alle darunter)}
-translate D GlistDeleteGame {(Ent)Loesche Partie}
+translate D GlistDeleteGame {(Ent)Lösche Partie}
 translate D GlistDeleteAllGames {Lösche alle Partien im Filter} 
 translate D GlistUndeleteAllGames {Entlösche alle Partien im Filter} 
 
@@ -957,10 +938,8 @@ translate D UnmarkCurrent {Entmarkiere aktuelle Partie}
 translate D UnmarkFilter {Entmarkiere Partien im Filter}
 translate D UnmarkAll {Entmarkiere alle Partien}
 translate D Spellchecking {Schreibkorrektur}
-# ====== TODO To be translated ======
-translate D MakeCorrections {Make Corrections}
-# ====== TODO To be translated ======
-translate D Ambiguous {Ambiguous}
+translate D MakeCorrections {Korrekturen machen}
+translate D Ambiguous {Mehrdeutig}
 # ====== TODO To be translated ======
 translate D Surnames {Surnames}
 translate D Players {Spieler}
@@ -1123,7 +1102,7 @@ translate D Castling {Rochade}
 translate D EnPassantFile {EnPassant-Linie}
 translate D ClearFen {FEN löschen}
 translate D PasteFen {FEN einfügen}
-translate D SaveAndContinue {Speichern und Weiter}
+translate D SaveAndContinue {Speichern und weiter}
 translate D DiscardChangesAndContinue {Verwerfen und weiter}
 translate D GoBack {Zurück}
 
@@ -1459,9 +1438,9 @@ translate D limitanalysis {Analysezeit der Engine begrenzen}
 translate D seconds {Sekunden}
 translate D Abort {Abbrechen}
 translate D Resume {Fortfahren}
-# TODO
-translate D Restart {Restart}
+translate D Restart {Neustart}
 translate D OutOfOpening {Ende der Eröffnung}
+# TODO
 translate D NotFollowedLine {You did not follow the line}
 translate D DoYouWantContinue {Möchten sie fortfahren?}
 translate D CoachIsWatching {Coach schaut zu}
@@ -1521,7 +1500,7 @@ translate D Nodes {Knoten}
 translate D Depth {Tiefe}
 translate D Time {Zeit} 
 translate D SecondsPerMove {Sekunden pro Zug}
-translate D TimeLabel {Time per move}
+translate D TimeLabel {Zeit pro Zug}
 translate D Engine {Engine}
 translate D TimeMode {Zeitmodus}
 translate D TimeBonus {Zeit + Bonus}
@@ -1605,7 +1584,7 @@ translate D KingsIndianMainLine {Königsinsisch, Hauptvariante}
 
 translate D ConfigureFics {FICS Konfigurieren}
 translate D FICSLogin {Login}
-translate D FICSGuest {Gastlogin}
+translate D FICSGuest {Gast Login}
 translate D FICSServerPort {Serverport}
 translate D FICSServerAddress {IP Adresse}
 translate D FICSRefresh {Aktualisieren}
@@ -1633,16 +1612,11 @@ translate D FICSConnect {Verbinden}
 translate D FICSShouts {Shouts}
 # ====== TODO To be translated ======
 translate D FICSTells {Tells}
-# ====== TODO To be translated ======
-translate D FICSOpponent {Opponent Info}
-# ====== TODO To be translated ======
+translate D FICSOpponent {Gegner Info}
 translate D FICSInfo {Info}
-# ====== TODO To be translated ======
-translate D FICSDraw {Offer Draw}
-# ====== TODO To be translated ======
-translate D FICSRematch {Rematch}
-# ====== TODO To be translated ======
-translate D FICSQuit {Quit FICS}
+translate D FICSDraw {Remis anbieten}
+translate D FICSRematch {Revanche}
+translate D FICSQuit {FICS beenden}
 
 # Correspondence Chess Dialogs:
 translate D CCDlgConfigureWindowTitle {Einstellungen für Fernschach}
@@ -1654,14 +1628,14 @@ translate D CCDlgXfcc {Xfcc Einstellungen:}
 translate D CCDlgExternalProtocol {Externe Protokolle (Xfcc)}
 translate D CCDlgFetchTool {Hilfsprogramm zum Abholen:}
 translate D CCDlgSendTool {Hilfsprogramm zum Senden:}
-translate D CCDlgEmailCommunication {eMail Kommunikation}
-translate D CCDlgMailPrg {eMail Programm:}
+translate D CCDlgEmailCommunication {E-Mail Kommunikation}
+translate D CCDlgMailPrg {E-Mail Programm:}
 translate D CCDlgBCCAddr {Adresse für Ausgangskopie:}
 translate D CCDlgMailerMode {Modus:}
-translate D CCDlgThunderbirdEg {z. B. Thunderbird, Mozilla Mail, Icedove...}
-translate D CCDlgMailUrlEg {z. B. Evolution}
-translate D CCDlgClawsEg {z. B. Sylpheed Claws}
-translate D CCDlgmailxEg {z. B. mailx, mutt, nail...}
+translate D CCDlgThunderbirdEg {z.B. Thunderbird, Mozilla Mail, Icedove...}
+translate D CCDlgMailUrlEg {z.B. Evolution}
+translate D CCDlgClawsEg {z.B. Sylpheed Claws}
+translate D CCDlgmailxEg {z.B. mailx, mutt, nail...}
 translate D CCDlgAttachementPar {Parameter für Anhang:}
 translate D CCDlgInternalXfcc {Interne Xfcc-Unterstützung verwenden}
 translate D CCDlgConfirmXfcc {Züge bestätigen}
@@ -1672,11 +1646,11 @@ translate D CCDlgConfirmMove {Zug bestätigen}
 translate D CCDlgConfirmMoveText {Durch bestätigen wird folgender Zug und Kommentar an den Server übertragen:}
 translate D CCDlgDBGameToLong {Inkonsistente Hauptvariante}
 translate D CCDlgDBGameToLongError {Die Hauptvariante dieser Partie in der Datenbank enthält mehr Züge als in der Partie tatsächlich gespielt. Sofern die Partie im Posteingang vollständig und aktuell ist (z. B. direkt nach einer Synchronisation) muß die Hauptvariante in der Datenbank ensprechend gekürzt werden. Der letzte Zug in der Partie ist Nr. \n}
-translate D CCDlgStartEmail {Neue eMail Partie}
+translate D CCDlgStartEmail {Neue E-Mail Partie}
 translate D CCDlgYourName {Ihr Name:}
-translate D CCDlgYourMail {Ihre eMail Adresse:}
+translate D CCDlgYourMail {Ihre E-Mail Adresse:}
 translate D CCDlgOpponentName {Name des Gegners:}
-translate D CCDlgOpponentMail {eMail Adresse des Gegners:}
+translate D CCDlgOpponentMail {E-Mail Adresse des Gegners:}
 translate D CCDlgGameID {Partiekennung (eineindeutig):}
 translate D CCDlgTitNoOutbox {Scid: Fernschach Postausgang}
 translate D CCDlgTitNoInbox {Scid: Fernschach Posteingang}
@@ -1695,7 +1669,7 @@ translate D CCEmptyBtn {Postein- und ausgang leeren}
 translate D CCHelpBtn {Hilfe zu den Icons und Statusindikatoren\nFür allgemeine Hilfe bitte F1!}
 translate D CCDlgServerName {Server Name:}
 translate D CCDlgLoginName  {Login Name:}
-translate D CCDlgPassword   {Paßwort:}
+translate D CCDlgPassword   {Passwort:}
 translate D CCDlgURL        {Xfcc-URL:}
 translate D CCDlgRatingType {Wertungszahl:}
 translate D CCDlgDuplicateGame {Nichteindeutige Partie}
@@ -2206,3 +2180,4 @@ set tips(D) {
 }
 
 ### End of file: deutsch.tcl
+
