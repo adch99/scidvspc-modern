@@ -304,6 +304,7 @@ proc ::windows::gamelist::Open {} {
   }
   $w.tree tag bind click2 <Double-Button-1> {::windows::gamelist::Load [%W set [%W focus] Number]}
   $w.tree tag configure deleted -foreground gray50
+  $w.tree tag configure current_deleted -foreground SteelBlue
   $w.tree tag configure error -foreground red
   # bind $w.tree <ButtonRelease-1> { parray ::ttk::treeview::State}
 
@@ -1031,7 +1032,11 @@ proc ::windows::gamelist::Refresh {{see {}}} {
       $w.tree insert {} 0 -values [list $thisindex {Unmatched brace} {in game}] -tag [list click2 error]
     } else {
       if {$thisindex == "$current "} {
-	set current_item [$w.tree insert {} 0 -values $values -tag [list click2 current]]
+	if {[lindex $values 11] == {D }} {
+	  set current_item [$w.tree insert {} 0 -values $values -tag [list click2 current_deleted]]
+        } else {
+	  set current_item [$w.tree insert {} 0 -values $values -tag [list click2 current]]
+        }
       } elseif {[lindex $values 11] == {D }} {
 	$w.tree insert {} 0 -values $values -tag [list click2 deleted] ;#treefont
       } else {
