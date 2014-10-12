@@ -6515,13 +6515,12 @@ The window manager may interfere with some shortcuts.
 <li><b>control-down</b> - Next game</li>
 <li><b>control-home</b> - First game</li>
 <li><b>control-end</b> - Last game</li>
-<li><b>control-x</b> - New game</li>
+<li><b>control-N</b> - New game</li>
 <li><b>control-G</b> - Load game number</li>
 <li><b>control-?</b> - Load random game</li>
 <li></li>
 <li><b>control-o</b> - Open database</li>
 <li><b>control-w</b> - Close database</li>
-<li><b>control-N</b> - New database</li>
 <li><b>control-/</b> - Finder</li>
 <li></li>
 <li><b>control-1</b> - Switch to first open base</li>
@@ -6573,7 +6572,7 @@ The window manager may interfere with some shortcuts.
 <li><b>control-m</b> - Maintenance window</li>
 <li><b>control-M</b> - Material search</li>
 <li><b>control-n</b> - Negate Filter</li>
-<li><b>control-N</b> - New database</li>
+<li><b>control-N</b> - New game</li>
 <li><b>control-o</b> - Open database</li>
 <li><b>control-p</b> - PGN window</li>
 <li><b>control-P</b> - Player finder</li>
@@ -6585,7 +6584,6 @@ The window manager may interfere with some shortcuts.
 <li><b>control-v</b> - Paste game from Clipbase</li>
 <li><b>control-V</b> - Paste FEN</li>
 <li><b>control-w</b> - Close database</li>
-<li><b>control-x</b> - New game</li>
 <li><b>control-X</b> - Crosstable</li>
 <li></li>
 

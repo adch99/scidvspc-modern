@@ -80,8 +80,7 @@ set menuindex -1
 set m .menu.file
 # If altering .menu.file, must change the 'set idx ...' value below
 
-$m add command -label FileNew -acc "control-N" -command ::file::New
-bind .main <Control-N> ::file::New
+$m add command -label FileNew -command ::file::New
 set helpMessage($m,[incr menuindex]) FileNew
 
 $m add command -label FileOpen -acc "control-o" -command ::file::Open
@@ -235,8 +234,8 @@ set helpMessage($m.strip,1) EditStripVars
 ### Game menu:
 set menuindex -1
 set m .menu.game
-$m add command -label GameNew -accelerator "control-x" -command ::game::Clear
-bind .main <Control-x> ::game::Clear
+$m add command -label GameNew -accelerator "control-N" -command ::game::Clear
+bind .main <Control-N> ::game::Clear
 set helpMessage($m,[incr menuindex]) GameNew
 
 $m add command -label GameReplace -command gameReplace -accelerator "control-r"
