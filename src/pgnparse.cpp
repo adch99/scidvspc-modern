@@ -290,9 +290,10 @@ standardPlayerName (char * source)
 errorT
 PgnParser::ExtractPgnTag (const char * buffer, Game * game)
 {
-    const uint maxTagLength = 255;
-    char tag [255];
-    char value [255];
+    const uint maxTagLength = 258;
+    // 255 chars + two '"' plus trailing ']'
+    char tag [258];
+    char value [258];
 
     // Skip any initial whitespace:
     while (charIsSpace(*buffer)  &&  *buffer != 0) { buffer++; }

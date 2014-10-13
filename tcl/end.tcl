@@ -1254,13 +1254,11 @@ proc gameSave {gnum {focus {}}} {
   }
   pack $w.buttons.cancel $w.buttons.save -side right -padx 20
 
-  bind $w <Alt-s> {
-    set extraTags [.save.g.extratext get 1.0 end-1c]
-    gsave $gsaveNum;
-    focus .main
-    destroy .save
+  bind $w <Alt-s> "
+    $w.buttons.save invoke
     break
-  }
+  "
+
   bind $w <Escape> {
     focus .main
     destroy .save

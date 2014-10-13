@@ -9399,6 +9399,7 @@ sc_game_tags_set (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                         //	sscanf (largv[i+1], "%s", valueStr) == 1) {
                         // Usage :: sc_game tags set -extra [ list "Annotator \"boob [sc_pos moveNumber]\"\n" ]
                         if (sscanf (largv[i], "%s \"%[^\"]\"\n", tagStr, valueStr) == 2) {
+                            valueStr[255] = 0;
                             db->game->AddPgnTag (tagStr, valueStr);
                         } else {
                             // Invalid line in the list; just ignore it.

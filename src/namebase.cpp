@@ -429,7 +429,14 @@ NameBase::AddName (nameT nt, const char * str, idNumberT * idPtr)
     }
 
     nameNodeT * node = NULL;
-    err = Tree[nt]->Insert (str, &node);
+    if (strlen(str) < 256) {
+	err = Tree[nt]->Insert (str, &node);
+    } else {
+	// Unlikely, but truncate Name if too big
+	char truncated[256];
+	strncpy (truncated, str, 255);
+	err = Tree[nt]->Insert (truncated, &node);
+    }
     if (err != ERROR_Exists) {
         // Set data for the new node:
         node->data.id = Header.numNames[nt];
