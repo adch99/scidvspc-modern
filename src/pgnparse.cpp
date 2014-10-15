@@ -95,7 +95,7 @@ PgnParser::CheckUTF8BOM()
         {
             if ((ch = GetChar()) == 0xBF)
             {
-		printf ("Discarding UTF8 BOM\n");
+                printf ("Discarding UTF8 BOM\n");
                 // Now use UTF8 encoding instead of Latin-1
             }
             else
@@ -290,10 +290,9 @@ standardPlayerName (char * source)
 errorT
 PgnParser::ExtractPgnTag (const char * buffer, Game * game)
 {
-    const uint maxTagLength = 258;
-    // 255 chars + two '"' plus trailing ']'
-    char tag [258];
-    char value [258];
+    static const uint maxTagLength = 255;
+    char tag [maxTagLength + 1]; // need more space for nul byte
+    char value [maxTagLength + 1];
 
     // Skip any initial whitespace:
     while (charIsSpace(*buffer)  &&  *buffer != 0) { buffer++; }
@@ -305,9 +304,9 @@ PgnParser::ExtractPgnTag (const char * buffer, Game * game)
     // Now at the start of the tag name:
     uint length = 0;
     while (!charIsSpace(*buffer)  &&  *buffer != 0) {
+        if (length == maxTagLength) { return ERROR_PGNTag; }
         tag[length] = *buffer++;
         length++;
-        if (length == maxTagLength) { return ERROR_PGNTag; }
     }
     if (*buffer == 0) { return ERROR_PGNTag; }
     tag[length] = 0;
@@ -321,15 +320,17 @@ PgnParser::ExtractPgnTag (const char * buffer, Game * game)
     length = 0;
     uint lastQuoteIndex = 0;
     bool seenEndQuote = false;
-    while (*buffer != 0) {
+    while (*buffer != 0 && !seenEndQuote) {
         if (*buffer == '"') {
             lastQuoteIndex = length;
             seenEndQuote = true;
+        } else {
+            if (length == maxTagLength)
+                return ERROR_PGNTag;
+            value[length] = *buffer;
+            length++;
         }
-        value[length] = *buffer;
         buffer++;
-        length++;
-        if (length == maxTagLength) { return ERROR_PGNTag; }
     }
     if (! seenEndQuote) { return ERROR_PGNTag; }
     value[lastQuoteIndex] = 0;
