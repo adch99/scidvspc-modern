@@ -2781,7 +2781,7 @@ Game::WriteMoveList (TextBuffer *tb, uint plyCount,
 errorT
 Game::WritePGN (TextBuffer * tb, uint stopLocation)
 {
-    char temp [255];
+    char temp [1024];
     char dateStr [20];
     const char * newline = "\n";
     tb->NewlinesToSpaces (false);
