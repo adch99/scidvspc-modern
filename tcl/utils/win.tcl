@@ -245,10 +245,12 @@ proc ::docking::move_tab {srctab dsttab {x {}} {y {}}} {
 
   # now place after destination tab if possible
   if {$x != {}} {
-    if {[catch {incr dest}]} {
-      set dest end
+    # if {[catch {incr dest}]} { set dest end }
+    if {$dest == ""} {
+      $dsttab insert end $f
+    } else {
+      $dsttab insert $dest $f
     }
-    $dsttab insert $dest $f
   }
 
   raise $f
