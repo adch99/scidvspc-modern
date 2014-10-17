@@ -4171,8 +4171,6 @@ set helpText(Author) "<h1>Scid vs. PC</h1>
   <ul> <ul> <ul> <ul> <ul> <ul> <ul>
   <li>$::scidName  version $::scidVersion</li>
   <br>
-  <li>(C) Steven Atkinson</li>
-  <br>
   <li><url http://scidvspc.sourceforge.net/>http://scidvspc.sourceforge.net/</url></li>
   <li>Mailing list: <url http://sourceforge.net/mailarchive/forum.php?forum_name=scidvspc-users>archive</url>,
   <url https://lists.sourceforge.net/lists/listinfo/scidvspc-users>subscribe</url></li>
@@ -4180,8 +4178,8 @@ set helpText(Author) "<h1>Scid vs. PC</h1>
   <li>Based on:</li>
   <li>Shane's Chess Information Database 3.6.26</li>
   <li>(with many updates from mainline Scid).</li>
-  <li>Authors: Shane Hudson and Pascal Georges.</li>
-  <li>(C) Shane Hudson, Pascal Georges and others.</li>
+  <li>(C) Steven Atkinson (stevenaaus@yahoo.com), Shane Hudson,</li>
+  <li>Pascal Georges and others.</li>
   <br>
   <li>Licenced under the GNU General Public License.</li>
   <br>
