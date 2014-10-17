@@ -493,67 +493,71 @@
      excluded moves (UCI only).
 
   o  Analysis Engine: button to pop-up unrevealed buttons, and redo a
-     few icons
+     few icons.
 
   o  Maintenance: Bulk strip Comments/Variations.
 
-  o  Improved Background Colour feature
+  o  Depth-based Engine Annotation improvements.
+
+  o  Improved Background Colour feature.
 
   o  Add 'Find' entry boxes to more windows (including spelling
-     corrections) , and widget can now use regular expressions
+     corrections) , and widget can now use regular expressions.
 
-  o  Better Repair Base feature (from Gregor)
+  o  Better Repair Base feature (from Gregor).
 
-  o  Include Gregors fast file opening with the windows 32-bit binary
+  o  Include Gregors fast file opening with the windows 32-bit binary.
 
-  o  Reinstate a new Russian translation (from Sergey Nikolaevich
-     Koyankin)
+  o  New Russian translation (from Sergey Nikolaevich Koyankin) and
+     updated German one (from surrim).
 
-  o  Tweak Scid's installer is to properly allow custom SHAREDIR
+  o  Enforce all tags (eg Event names, etc) to be less than 256 chars.
 
-  o  Better handle language translations/encoding
+  o  Tweak Scid's installer is to properly allow custom SHAREDIR.
+
+  o  Better handle language translations/encoding.
 
   o  Crosstable: bump max-player limit, tweak menus and bind right-click
      to menu, fix occasional allignment bug, and dont' automatically
      update (fixing busy cursor bug).
 
-  o  Bump Opening Table limits, and minor bug-fixes
+  o  Bump Opening Table limits, and minor bug-fixes.
 
-  o  New (Skak) Latex export-games feature (author Mark Dennehy)
+  o  New (Skak) Latex export-games feature (author Mark Dennehy).
 
-  o  Update Xfcc to handle secure connections (thanks to Andrew Hunt)
+  o  Update Xfcc to handle secure connections (thanks to Andrew Hunt).
 
   o  Fix minor memory leaks, and dont slow game file compaction (we now
      reset filter).
 
   o  Bestgames has a game load menu instead of 3 buttons.
 
-  o  Many minor OS X tweaks
+  o  Refine docked window drag and drop.
 
-  o  Trim whitespace from name fields in game save dialog
+  o  Many minor OS X tweaks.
+
+  o  Trim whitespace from name fields in game save dialog.
 
   o  Add whitespace corrections to spelling.ssp, and also tweak Event
      spelling corrections.
 
-  o  Tooltips for the obscure buttons in main buttonbar
+  o  Tooltips for the obscure buttons in main buttonbar.
 
   o  Analysis add move as 'New Mainline' was broke.
 
-  o  Always get confirmation for sorting via gamelist
+  o  Always get confirmation for sorting via gamelist.
 
-  o  Enforce illegalilty of saving Event Date without Game Date
+  o  Enforce illegalilty of saving Event Date without Game Date.
 
   o  Phalanx updates and minor tacgame, sergame fixes.
 
-  o  More minor depth based analysis fixes (todo)
+  o  Make a few windows have small font buttons.
 
-  o  Make a few windows have small font buttons
+  o  Shift+Wheel scrolls a few widgets horizontally.
 
-  o  Shift+Wheel scrolls a few widgets horizontally
+  o  Break up the long Book Tuning button menus.
 
-  o  Break up the long Book Tuning button menus
-
-  o  Many minor bugfixes and further tree-only filter fixes
+  o  Many minor bugfixes and further tree-only filter fixes.
 
   7.0.2.  Scid vs. PC 4.12
 
@@ -581,6 +585,7 @@
 
   o  Update spelling file to a custom version of Franz's Jan-5-2014
      spellling.ssp.
+
   o  Spell-checking can now remove GM, IM, FM, CM, WGM prefixes from
      player names.
 
@@ -641,11 +646,11 @@
   o  Remove tree status bar. Same info avail in switcher and tree text
      widget.
 
+
   o  Booktuning nextmove is now highlighted (same as Book), and padding
      has been tweaked a bit.
 
   o  Move Maintenance menu from File to Tools menu
-
 
   o  Remove the annoying " from myPlayerNames.
 
@@ -708,10 +713,8 @@
 
   o  FICS tweaks, including over-riding takeback/abort request dialogs
      when game ends
-
   o  Remove some wasted space around FICS, main button bar, and other
      widgets
-
 
   o  New Greek translation
 
@@ -778,7 +781,6 @@
 
   o  Drag and drop hardening
 
-
   o  Windows 7 bugfix: PGN export and Progress bars weren't working in
      undocked mode
 
@@ -841,6 +843,7 @@
      FICS premove)
 
   o  Arrow length/widths configurable via comment editor
+
 
   o  PGN Figurines now display in bold, and a different font, if
      applicable (from Gregor)
@@ -906,6 +909,7 @@
   o  Fix Tree 'Fill cache with game/base' feature
 
   o  Try to handle shortened FENs with Paste FEN
+
 
   o  Crosstable: 'Set Filter' now includes deleted games if +deleted
 
@@ -976,7 +980,6 @@
   o  Super quick engine infos can happen before Scid's PV is inited
      properly. So we have to default to PV = 1
 
-
   o  Allow xboard engines to use lowercase 'b' for bishop promotion (eg
      a7b8b)
 
@@ -1038,6 +1041,7 @@
 
   o  Copy and Paste text from disabled OSX text widgets (engines, help,
      gameinfo)
+
 
   o  Buttons 2 and 3 are swapped around
 
@@ -1103,6 +1107,7 @@
   o  Tweak PGN context menu: reorder the Strip/Delete move items
 
   o  Gamelist: replace the Negate button with a Select button
+
 
   o  Tree: Include a patch for embedding the Best Games into the Tree
      window
@@ -1175,6 +1180,7 @@
 
   o  Change analysis colors for MultiPV to black/grey instead of
      blue/black
+
   o  New 'Search in (other) Database' feature to the board search (from
      SCID)
 
@@ -1240,7 +1246,6 @@
 
      Computer Tournament:
 
-
   o  Per-game time control
 
   o  Clock widgets for remaining time
@@ -1300,6 +1305,7 @@
   o  Computer Tournament buttons padding fixed
 
      OSX:
+
 
   o  Make an OSX app with a working ;> version of Tcl (thanks Gilles)
 
@@ -1367,7 +1373,6 @@
 
   o  Overhaul Annotate widget - allow choice of scores/variation/both
      and remember annotation options
-
   o  Crosstable sort by Country feature
 
   o  Update Fics to allow for different Port/IP Address (using SCID
@@ -1431,6 +1436,7 @@
      name
 
   o  Statusbar shows correct value after Crosstable update
+
 
   7.0.14.  Scid vs. PC 4.3
 
@@ -1497,13 +1503,13 @@
 
   o  Revert PlayerInfo to old format, but add a "Won Drawn Lost" header
 
+
   o  Tweak crosstable knock-out format
 
   7.0.15.  Scid vs. PC 4.2
 
 
   o  New si4 database support
-
 
   o  Include tree and mask improvements from Scid (excepting Fulvio's
      delayed tree code, which has issues)
@@ -1562,6 +1568,7 @@
   o  Main board grid colour can be changed
 
   o  Setup board can rotate and flip the board
+
 
   o  Clicking on moves in the gameinfo area shows Comment Editor
 
@@ -1694,6 +1701,7 @@
 
   o  Some minor version fixes anticipating tcl8.6
 
+
   o  Small bugfix: variation pop-up could previously throw errors if
      moving through movs fast
 
@@ -1701,7 +1709,6 @@
 
   o  Remove space-only lines from project - they mess up vim's paragraph
      traversal feature
-
 
   o  Fics "withdraws offer" fix
 
@@ -1767,7 +1774,6 @@
 
 
   o  Scid vs. PC  <http://scidvspc.sourceforge.net/>
-
 
   o  Project page  <http://sourceforge.net/projects/scidvspc>
 

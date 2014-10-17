@@ -5787,12 +5787,14 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li>Analysis Engine: exclude move(s) feature. Mouse-hover shows excluded moves (UCI only)</li>
 <li>Analysis Engine: button to pop-up unrevealed buttons, and redo a few icons</li>
 <li>Maintenance: Bulk strip Comments/Variations</li>
+<li>Depth-based Engine Annotation improvements</li>
 <li>Improved Background Colour feature</li>
 <li>Add 'Find' entry boxes to more windows (including spelling corrections) , and widget can now use regular expressions</li>
 <li>Better Repair Base feature (from Gregor)</li>
 <li>Include Gregors fast file opening with the windows 32-bit binary</li>
-<li>Reinstate a new Russian translation (from Sergey Nikolaevich Koyankin)</li>
-<li>weak Scid's installer is to properly allow custom SHAREDIR</li>
+<li>New Russian translation (from Sergey Nikolaevich Koyankin) and updated German one (from surrim)</li>
+<li>Enforce all tags (eg Event names, etc) to be less than 256 chars</li>
+<li>Tweak Scid's installer is to properly allow custom SHAREDIR</li>
 <li>Better handle language translations/encoding</li>
 <li>Crosstable: bump max-player limit, tweak menus and bind right-click to menu, fix occasional allignment bug, and dont' automatically update (fixing busy cursor bug)</li>
 <li>Bump Opening Table limits, and minor bug-fixes</li>
@@ -5800,6 +5802,7 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li>Update Xfcc to handle secure connections (thanks to Andrew Hunt)</li>
 <li>Fix minor memory leaks, and dont slow game file compaction (we now reset filter)</li>
 <li>Bestgames has a game load menu instead of 3 buttons</li>
+<li>Refine docked window drag and drop</li>
 <li>Many minor OS X tweaks</li>
 <li>Trim whitespace from name fields in game save dialog</li>
 <li>Add whitespace corrections to spelling.ssp, and also tweak Event spelling corrections</li>
