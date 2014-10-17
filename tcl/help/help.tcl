@@ -6481,7 +6481,6 @@ The window manager may interfere with some shortcuts.
 <li><b>control-i</b> - Gameinfo window</li>
 <li><b>control-t</b> - Tree window</li>
 <li><b>control-X</b> - Crosstable</li>
-<li><b>control-S</b> - Setup board</li>
 <li><b>control-b</b> - Book window</li>
 <li><b>control-Z</b> - Score graph</li>
 <li><b>escape</b> - Close window</li>
@@ -6509,8 +6508,8 @@ The window manager may interfere with some shortcuts.
 
 <h4>Games and Databases</h4>
 <ul>
-<li><b>control-r</b> - Replace game</li>
-<li><b>control-s</b> - Save (new) game</li>
+<li><b>control-s</b> - Save game</li>
+<li><b>control-S</b> - Add game</li>
 <li></li>
 <li><b>control-up</b> - Previous game</li>
 <li><b>control-down</b> - Next game</li>
@@ -6536,7 +6535,7 @@ The window manager may interfere with some shortcuts.
 <li><b>control-B</b> - Board search</li>
 <li><b>control-M</b> - Material search</li>
 <li></li>
-<li><b>control-F</b> - Reset filter</li>
+<li><b>control-r</b> - Reset filter</li>
 <li><b>control-n</b> - Negate Filter</li>
 <li></li>
 <li><b>control-P</b> - Player finder</li>
@@ -6563,7 +6562,6 @@ The window manager may interfere with some shortcuts.
 <li><b>control-C</b> - Copy FEN</li>
 <li><b>control-e</b> - Comment editor</li>
 <li><b>control-f</b> - Flip Board</li>
-<li><b>control-F</b> - Reset filter</li>
 <li><b>control-g</b> - Goto move number</li>
 <li><b>control-G</b> - Load game number</li>
 <li><b>control-H</b> - General (header) search</li>
@@ -6577,9 +6575,9 @@ The window manager may interfere with some shortcuts.
 <li><b>control-o</b> - Open database</li>
 <li><b>control-p</b> - PGN window</li>
 <li><b>control-P</b> - Player finder</li>
-<li><b>control-r</b> - Replace game</li>
-<li><b>control-s</b> - Save (new) game</li>
-<li><b>control-S</b> - Setup board</li>
+<li><b>control-r</b> - Reset Filter</li>
+<li><b>control-s</b> - Save game</li>
+<li><b>control-S</b> - Add game</li>
 <li><b>control-t</b> - Tree window</li>
 <li><b>control-T</b> - Tournament finder</li>
 <li><b>control-v</b> - Paste game from Clipbase</li>

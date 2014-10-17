@@ -1555,8 +1555,8 @@ proc standardShortcuts {w} {
   bind $w <Control-S> ::setupBoard
   bind $w <Control-C> ::copyFEN
   bind $w <Control-V> ::pasteFEN
-  bind $w <Control-r> ::gameReplace
-  bind $w <Control-s> ::gameAdd
+  bind $w <Control-s> ::gameReplace
+  bind $w <Control-S> ::gameAdd
 
   bind $w <F11>  toggleFullScreen
   bind $w <Control-Shift-Left>  {::board::resize .main.board -1}

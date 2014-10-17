@@ -430,7 +430,7 @@ proc ::windows::gamelist::Open {} {
     bind $w <Control-Button-5> {::windows::gamelist::Scroll $glistSize}
   }
 
-  bind $w <Control-F> ::search::filter::reset
+  bind $w <Control-r> ::search::filter::reset
   bind $w <Control-n> ::search::filter::negate
 
   foreach i { <Control-Home> <Control-End> <Control-Down> <Control-Up> <Control-question>} {

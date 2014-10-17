@@ -143,8 +143,7 @@ set helpMessage($m,[incr menuindex]) FileExit
 set menuindex -1
 set m .menu.edit
 
-$m add command -label EditSetup -accelerator "control-S" -command setupBoard
-bind .main <Control-S> setupBoard
+$m add command -label EditSetup -command setupBoard
 set helpMessage($m,[incr menuindex]) EditSetup
 
 $m add command -label EditCopyBoard -accelerator "control-C" -command copyFEN
@@ -238,12 +237,12 @@ $m add command -label GameNew -accelerator "control-N" -command ::game::Clear
 bind .main <Control-N> ::game::Clear
 set helpMessage($m,[incr menuindex]) GameNew
 
-$m add command -label GameReplace -command gameReplace -accelerator "control-r"
-bind .main <Control-r> { .menu.game invoke [tr GameReplace] }
+$m add command -label GameReplace -command gameReplace -accelerator "control-s"
+bind .main <Control-s> { .menu.game invoke [tr GameReplace] }
 set helpMessage($m,[incr menuindex]) GameReplace
 
-$m  add command -label GameAdd -command gameAdd  -accelerator "control-s"
-bind .main <Control-s> gameAdd
+$m  add command -label GameAdd -command gameAdd  -accelerator "control-S"
+bind .main <Control-S> gameAdd
 set helpMessage($m,[incr menuindex]) GameAdd
 
 $m add separator
@@ -318,9 +317,9 @@ set helpMessage($m,[incr menuindex]) GameNovelty
 ### Search menu:
 set menuindex -1
 set m .menu.search
-$m  add command -label SearchReset -acc "control-F" \
+$m  add command -label SearchReset -acc "control-r" \
     -command ::search::filter::reset
-bind .main <Control-F> ::search::filter::reset
+bind .main <Control-r> ::search::filter::reset
 set helpMessage($m,[incr menuindex]) SearchReset
 
 $m  add command -label SearchNegate -acc "control-n" \
