@@ -1663,6 +1663,9 @@ proc nextgameAutoplay {n} {
 
     ### Skip games not in filter (dont autoraise main window)
     ::game::LoadNextPrev next 0
+    # avoid loading at ply
+    sc_move start
+    updateBoard
 
     if {$annotate(addTag)} {
       appendTag Annotator " $analysis(name$n)"
@@ -1730,7 +1733,7 @@ proc setTrialMode {mode} {
 ### Pause UCI and Phalanx games when an out of order move is made
 
 proc pauseGame {args} {
-  set ::paused 1
+  set ::pause 1
   if {[winfo exists .coachWin]} {
     .coachWin.fbuttons.resume configure -state normal
     after cancel ::tacgame::phalanxGo

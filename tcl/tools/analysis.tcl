@@ -1247,15 +1247,30 @@ proc bookAnnotation { {n 1} } {
     sc_pos setComment "[sc_pos getComment]$verboseLastBookMove ($bookName)"
   }
 
-  # last move was out of book or the last move in book : it needs to be analyzed, so take back
-  if { ![catch { sc_move back 1 } ] } {
+    # last move was out of book or the last move in book : it needs to be analyzed, so take back
+    ::move::Back
+    set annotate(LastMove) {}
     resetAnalysis $n
+
+    # Pausing a second gives the gui a chance to catch to the engine,
+    # which can reply super-fast on depth-based annotation
+    set ::last_annoMove {}
+    after 1000 {
+      set ::pause 0
+      if {$::last_annoMove != ""} {
+	after cancel autoplay
+	set ::annoMove $::last_annoMove ; # needed ?
+	set ::annotate(LastMove) $::last_annoMove
+       autoplay
+      }
+    }
+
     updateBoard -pgn
-    for {set i 0} {$i<100} {incr i} { update ; after [expr $::autoplayDelay / 100] }
+    ### Animation ??
+    # for {set i 0} {$i<100} {incr i} { update ; after [expr $::autoplayDelay / 100] }
     set analysis(prevscore$n) $analysis(score$n)
     set analysis(prevmoves$n) $analysis(moves$n)
-    updateBoard -pgn
-  }
+    # updateBoard -pgn
 }
 
 ### Only available for UCI engines

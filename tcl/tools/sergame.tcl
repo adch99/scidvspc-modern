@@ -399,10 +399,10 @@ namespace eval sergame {
     ::gameclock::reset 1
     ::gameclock::start 1
 
-    set ::paused 0
+    set ::pause 0
 
     button $w.fbuttons.resume -state disabled -textvar ::tr(Resume) -command {
-      set ::paused 0
+      set ::pause 0
       .serGameWin.fbuttons.resume configure -state disabled
       ::uci::sendToEngine $::sergame::engine {setoption name Clear Hash}
       ::sergame::engineGo

@@ -30,7 +30,7 @@ namespace eval tacgame {
 
   # list of fen positions played to detect 3 fold repetition
   set ::lFen {}
-  set ::paused 0
+  set ::pause 0
 
   set lastblundervalue 0.0
   set prev_lastblundervalue 0.0
@@ -478,16 +478,16 @@ namespace eval tacgame {
 
     ### "Resume" restarts paused computer (while player moves forward/back in history) S.A
 
-    set ::paused 0
+    set ::pause 0
     button $w.fbuttons.resume -state disabled -textvar ::tr(Resume) -command {
-      set ::paused 0
+      set ::pause 0
       .coachWin.fbuttons.resume configure -state disabled
       ::tacgame::phalanxGo
     }
     pack $w.fbuttons.resume -expand yes -fill both -padx 10 -pady 2
 
     button $w.fbuttons.restart -text Restart -command {
-      set ::paused 0
+      set ::pause 0
       .coachWin.fbuttons.resume configure -state disabled
       set ::lFen {}
       ::tacgame::initTacgame
@@ -799,7 +799,7 @@ namespace eval tacgame {
 
     after cancel ::tacgame::phalanxGo
 
-    if {$::paused} {
+    if {$::pause} {
       .coachWin.fbuttons.resume configure -state normal
       return
     }

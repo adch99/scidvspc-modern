@@ -171,7 +171,9 @@ namespace eval uci {
                 [sc_pos matchMoves {}] == {} || (!$::wentOutOfBook && $::useAnalysisBook)} {
 	      if {[lindex $uciInfo(pv$n) 0] != $annotate(LastMove)} {
                 if {$::pause} {
-                   set ::last_annoMove [lindex $uciInfo(pv$n) 0]
+                   if {[lindex $uciInfo(pv$n) 0] != ""} {
+		     set ::last_annoMove [lindex $uciInfo(pv$n) 0]
+                   }
                 } else {
 		  set annoMove [lindex $uciInfo(pv$n) 0]
                 }
