@@ -90,7 +90,7 @@ namespace eval Xfcc {
 		global ::Xfcc::xfccrc ::Xfcc::xfccrcfile
 		# file delete $xfccrcfile
 		if {[catch {open $xfccrcfile w} optionF]} {
-			puts stderr "$xfccrcfile can not be created"
+			::splash::add "$xfccrcfile can not be created" error
 		} else {
 			# devide by 4 as the size function returns all subarray entries
 			set size [expr [ array size ::Xfcc::xfccsrv ] / 4]
@@ -1713,7 +1713,7 @@ namespace eval CorrespondenceChess {
 	proc ConfigureRelay { } {
 		global ::CorrespondenceChess::RelayGames
 
-		puts stderr $::CorrespondenceChess::Connector
+		::splash::add $::CorrespondenceChess::Connector error
 		if {![file exists $::CorrespondenceChess::Connector]} {
 				if {[catch {open $::CorrespondenceChess::Connector w} connectF]} {
 
@@ -2222,7 +2222,7 @@ namespace eval CorrespondenceChess {
 				$w.bottom.white   image create end -align center -image $wc
 				$w.bottom.white   insert end " "
 			} else {
-				puts stderr "$wc does not exist"
+				puts "$wc does not exist"
 			}
 		}
 		$w.bottom.white   insert end "$white\n"
@@ -2232,7 +2232,7 @@ namespace eval CorrespondenceChess {
 				$w.bottom.black   image create end -align center -image $bc
 				$w.bottom.black   insert end " "
 			} else {
-				puts stderr "$bc does not exist"
+				puts "$bc does not exist"
 			}
 		}
 		$w.bottom.black   insert end "$black\n"
@@ -3940,9 +3940,9 @@ namespace eval CorrespondenceChess {
 
 	set scidConfigFiles(correspondence) "correspondence.dat"
 	if {[catch {source [scidConfigFile correspondence]} ]} {
-	  #::splash::add "Unable to find the options file: [file tail $optionsFile]"
+	  ::splash::add "Unable to load Correspondence options file correspondence.dat"
 	} else {
-	  ::splash::add "Correspondence Chess configuration was found and loaded."
+	  ::splash::add "Correspondence Chess: correspondence.dat loaded."
 	}
 
 	if {[catch {set version [package require http]}]} {

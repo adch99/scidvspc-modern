@@ -1151,7 +1151,7 @@ proc okAnnotation {n} {
   set w .configAnnotation.f.sf.scrolled
 
   if {$annotate(Engine) > -1} {
-    puts stderr "Scid: initAnnotation reports engine $annotate(Engine) already annotating"
+    puts "okAnnotation: engine $annotate(Engine) already annotating"
     return
   }
   if {$annotate(isBatch) && [sc_base isReadOnly]} {
@@ -1409,7 +1409,7 @@ proc addAnnotation {tomove} {
   set n $annotate(Engine)
 
   if {$n == -1} {
-    puts stderr "Scid: addAnnotation called while annotate(Engine) is -1"
+    puts "addAnnotation: annotate(Engine) unset"
     return
   }
 

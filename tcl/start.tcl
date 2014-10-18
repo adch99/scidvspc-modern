@@ -1801,7 +1801,11 @@ proc ::splash::add {text {tag {indent}}} {
   if {[winfo exists .splash]} {
     .splash.t insert end "\n$text" $tag
     if {$tag == {error}} {
-      puts stderr $text
+      if {$::windowsOS} {
+	puts $text
+      } else {
+	puts stderr $text
+      }
     }
     update
   }

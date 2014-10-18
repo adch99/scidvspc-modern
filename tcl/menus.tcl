@@ -1575,7 +1575,7 @@ proc setLanguageMenus {{lang ""}} {
     foreach m {file edit game search windows tools options help} {
       set list [checkMenuUnderline .menu.$m]
       if {[llength $list] > 0} {
-        puts stderr "Menu $m has duplicate underline letters: $list"
+        ::splash::add "Menu $m has duplicate underline letters: $list" error
       }
     }
   }
