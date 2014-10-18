@@ -5785,9 +5785,11 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li>Analysis Engine: exclude move(s) feature. Mouse-hover shows excluded moves (UCI only)</li>
 <li>Analysis Engine: button to pop-up unrevealed buttons, and redo a few icons</li>
 <li>Maintenance: Bulk strip Comments/Variations</li>
-<li>Depth-based Engine Annotation improvements</li>
+<li>Depth-based Engine Annotation improvements (though still work-in-progress)</li>
+<li>Tweaked Key Bindings (including FilterReset Control-r and GameSave Control-s)</li>
 <li>Improved Background Colour feature</li>
-<li>Add 'Find' entry boxes to more windows (including spelling corrections) , and widget can now use regular expressions</li>
+<li>Add 'Find' entry boxes to more windows (including spelling corrections).widget can now use regular expressions</li>
+<li>Splash widget console now has a simple command history (up-arrow)</li>
 <li>Better Repair Base feature (from Gregor)</li>
 <li>Include Gregors fast file opening with the windows 32-bit binary</li>
 <li>New Russian translation (from Sergey Nikolaevich Koyankin) and updated German one (from surrim)</li>

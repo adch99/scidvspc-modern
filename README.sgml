@@ -378,9 +378,11 @@ Chessbase databases and many chess variants.</p>
 <item> Analysis Engine: exclude move(s) feature. Mouse-hover shows excluded moves (UCI only).
 <item> Analysis Engine: button to pop-up unrevealed buttons, and redo a few icons.
 <item> Maintenance: Bulk strip Comments/Variations.
-<item> Depth-based Engine Annotation improvements.
+<item> Depth-based Engine Annotation improvements (though still work-in-progress).
+<item> Tweaked key bindings (including FilterReset Control-r and GameSave Control-s).
 <item> Improved Background Colour feature.
 <item> Add 'Find' entry boxes to more windows (including spelling corrections) , and widget can now use regular expressions.
+<item> Splash widget console now has a simple command history (up-arrow).
 <item> Better Repair Base feature (from Gregor).
 <item> Include Gregors fast file opening with the windows 32-bit binary.
 <item> New Russian translation (from Sergey Nikolaevich Koyankin) and updated German one (from surrim).
@@ -1028,8 +1030,7 @@ Bug-fixes
 <url url="email://stevenaaus at yahoo dot com" name="Stevenaaus">
 is a uni graduate in math and computer science,
 who programs as a hobby in tcl/tk, bash and C. He lives and
-works in rural australia, and spends some Saturday mornings
-playing against an ancient guy from Iceland.</p>
+works in rural australia.</p>
 
 <sect> links <p>
 <itemize>
