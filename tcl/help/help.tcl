@@ -5780,7 +5780,7 @@ set helpText(Sound) {<h1>Sound</h1>
 set helpTitle(Changelog) "Scid vs PC Changelog"
 set helpText(Changelog) {<h1>Changelog</h1>
 
-<h4>4.13 (September 14, 2014)</h4>
+<h4>4.13 (October 25, 2014)</h4>
 <ul>
 <li>Analysis Engine: exclude move(s) feature. Mouse-hover shows excluded moves (UCI only)</li>
 <li>Analysis Engine: button to pop-up unrevealed buttons, and redo a few icons</li>

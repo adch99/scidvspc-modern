@@ -887,7 +887,6 @@ proc initAnnotation {n} {
   wm state $w withdrawn
   wm title $w $tr(AnnotateTitle)
   wm protocol $w WM_DELETE_WINDOW "$w.buttons.cancel invoke"
-  wm resizable $w 0 1
   setWinLocation $w
   setWinSize $w
 
@@ -1136,6 +1135,7 @@ proc initAnnotation {n} {
   bind $w <F1> {helpWindow Analysis Annotating}
   placeWinOverParent $w .analysisWin$n
   wm state $w normal
+  focus -force $w ; # windows bug - deosnt get focus and <Escape> fails
   # have to start engine here for depth based anno niggles
   if {! $analysis(analyzeMode$n)} {
     toggleEngineAnalysis $n 1
