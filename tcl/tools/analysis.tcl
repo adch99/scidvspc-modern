@@ -880,6 +880,11 @@ proc initAnnotation {n} {
     return
   }
 
+  if { $analysis(multiPVCount$n) > 1} {
+    set analysis(multiPVCount$n) 1
+    changePVSize $n
+  }
+
   trace variable annotate(blunder) w {::utils::validate::Regexp {^[0-9]*\.?[0-9]*$}}
 
   set tempdelay [expr {$autoplayDelay / 1000.0}]
