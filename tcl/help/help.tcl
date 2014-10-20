@@ -1967,7 +1967,7 @@ set helpTitle(Repertoire) "Repertoire editor"
 set helpText(Repertoire) {<h1>The Repertoire Editor</h1>
 <p>The Repertoire Editor has been removed since Scid vs. PC 4.2.
 <br>
-Simlilar and more powerful features are available in the <a TreeMasks>Tree Masks</a> window.
+Simililar and more powerful features are available in the <a TreeMasks>Tree Masks</a> window.
 </p>
 
   <p><footer>Updated: Scid vs. PC 4.2, November 2010</footer></p>
@@ -2539,7 +2539,7 @@ set helpText(Sorting) {<h1>Sorting Databases</h1>
   When you sort a database (which is not read-only) the
   results are saved immediately and the <b>order of games is
   permanently changed</b>.  If this is not desired,
-  one may first make the database <b>read-only<b> from the
+  one may first make the database <b>read-only</b> from the
   <a Maintenance>maintenance</a> window.
   </p>
   <p>
@@ -2630,9 +2630,9 @@ set helpText(Flags) {<h1>Game Flags</h1>
 set helpTitle(Analysis) "Analysis Window"
 set helpText(Analysis) {<h1>Analysis Windows</h1>
 
-  <p> Scid vs. PC has powerful chess analysis features. Multiple engines can be
-run at any one time; they can be matched against each other in <a
-Tourney>Computer Tournaments</a>, and log files can be browsed from within the app -
+  <p> Scid vs. PC has powerful chess analysis features. Multiple engines can
+run simultaneously; they can be matched against each other in a <a
+Tourney>Computer Tournament</a>, and log files can be browsed from within the app -
 making for easier <a Analysis Debugging>Debugging</a>.
 </p>
 
@@ -2809,8 +2809,6 @@ with the format "stat01: time nodes ply mvleft mvtot mvname". The results can be
   Sticking points are likely to be the choice of
   which directory to use, and whether it's UCI or not.</p>
 
-<p><i>
-Setting </i><b>Log Size</b><i> to zero, disables engine logging altogether.</i></p>
 
   <h3>Details</h3>
 <p> Many engines require an
@@ -2857,7 +2855,7 @@ engines support both formats.
   If an engine fails to start, or crashes, one may examine it's log file.
   These are kept in the Scidvspc's log directory and can be viewed
 via the <button tb_annotate> button in the <run ::enginelist::choose><green>engine configuration</green></run> widget.
-  </p>
+The <b>Log Size</b> is the max number of lines in the log. Setting it to zero disables logging altogether.</p>
 
   <p><footer>Updated: Scid vs. PC 4.13, August 2014</footer></p>
 }
