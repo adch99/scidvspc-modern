@@ -867,7 +867,6 @@ proc initAnnotation {n} {
   global autoplayDelay tempdelay analysis annotate tr
 
   set analysis(prevscore$n) 0
-  set annotate(LastMove) {}
 
   set w .configAnnotation
   if { [winfo exists $w] } {
@@ -1254,21 +1253,7 @@ proc bookAnnotation { {n 1} } {
 
     # last move was out of book or the last move in book : it needs to be analyzed, so take back
     ::move::Back
-    set annotate(LastMove) {}
     resetAnalysis $n
-
-    # Pausing a second gives the gui a chance to catch to the engine,
-    # which can reply super-fast on depth-based annotation
-    set ::last_annoMove {}
-    after 1000 {
-      set ::pause 0
-      if {$::last_annoMove != ""} {
-	after cancel autoplay
-	set ::annoMove $::last_annoMove ; # needed ?
-	set ::annotate(LastMove) $::last_annoMove
-       autoplay
-      }
-    }
 
     updateBoard -pgn
     ### Animation ??
@@ -1533,8 +1518,8 @@ if {abs($prevscore) < $annotate(cutoff) || abs($score) < $annotate(cutoff) || \
     }
     set prevNag $nag
 
-    sc_move back
     if { $analysis(prevmoves$n) != {}} {
+      sc_move back
       sc_var create
       set moves $analysis(prevmoves$n)
       sc_move_add $moves $n
@@ -1588,8 +1573,8 @@ if {abs($prevscore) < $annotate(cutoff) || abs($score) < $annotate(cutoff) || \
 	  sc_pos addNag $nag
 	}
 	sc_var exit
-	sc_move forward
       }
+      sc_move forward
     }
   } else {
     addScore $n single 1
@@ -3508,7 +3493,11 @@ proc sendPosToEngineUCI {n  {delay 0}} {
 
     global analysis ::uci::uciInfo
 
-    set analysis(after$n) ""
+    if {$analysis(after$n) != ""} {
+	after cancel $analysis(after$n)
+	set analysis(after$n) ""
+    }
+
 
     if {$analysis(waitForReadyOk$n) } {
         # If too slow something is wrong: give up
@@ -3521,13 +3510,15 @@ proc sendPosToEngineUCI {n  {delay 0}} {
         append cmd { [ } " after $delay sendPosToEngineUCI $n $delay " { ] }
         set analysis(after$n) [eval [list after idle $cmd]]
     } else {
+        ### Can't do this atm as it is necessary for in-book move progression.
+	# if { $::annotate(Engine) == $n && ! $::wentOutOfBook && $::useAnalysisBook} { return }
+
 	if {$analysis(movelist$n) == {}} {
 	  sendToEngine $n "position $analysis(startpos$n)"
 	} else {
 	  sendToEngine $n "position $analysis(startpos$n) moves $analysis(movelist$n)"
 	}
 
-	set analysis(side$n) [sc_pos side]
         if {$uciInfo(searchmoves$n) == ""} {
 	  sendToEngine $n "go infinite"
         } else {
@@ -3546,6 +3537,9 @@ proc sendPosToEngineUCI {n  {delay 0}} {
 	#  As the engine's reaction to "ucinewgame" can take some time the GUI should always send "isready"
 	#  after "ucinewgame" to wait for the engine to finish its operation.
 
+	if {$n == $::annotate(Engine) && $::pause} {
+	  set ::pause 0
+	}
     }
 }
 
@@ -3609,12 +3603,13 @@ proc updateAnalysis {{n 0} {reset 1}} {
   }
   # puts $movelist
   set analysis(movelist$n) $movelist
+  set analysis(side$n) [sc_pos side]
   set analysis(nonStdStart$n) $nonStdStart
 
   if {$n == $::annotate(Engine)} {
     # update engine annotation
     # todo - test if we need this
-    update idletasks
+    # update idletasks
   }
 
   if { $analysis(uci$n) } {

@@ -133,20 +133,6 @@ proc ::move::Forward {{count 1}} {
     } else  {
       if {! $bArrows} {
         sc_move forward
-        if {$::annotate(Engine) > -1} {
-          # Pausing a second gives the gui a chance to catch to the engine,
-          # which can reply super-fast on depth-based annotation
-          set ::last_annoMove {}
-          after 1000 {
-            set ::pause 0
-            if {$::last_annoMove != ""} {
-	      after cancel autoplay
-              set ::annoMove $::last_annoMove ; # needed ?
-	      set ::annotate(LastMove) $::last_annoMove
-	      autoplay
-            }
-          }
-        }
       }
     }
 

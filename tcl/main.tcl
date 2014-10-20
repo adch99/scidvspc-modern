@@ -1666,6 +1666,7 @@ proc nextgameAutoplay {n} {
     # avoid loading at ply
     sc_move start
     updateBoard
+    set ::pause 1
 
     if {$annotate(addTag)} {
       appendTag Annotator " $analysis(name$n)"
