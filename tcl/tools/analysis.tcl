@@ -1235,7 +1235,7 @@ proc bookAnnotation { {n 1} } {
   }
   sc_book close $::analysisBookSlot
   set ::wentOutOfBook 1
-  update
+  # update
 
   set bookName [file rootname $::useAnalysisBookName]
   set verboseMoveOutOfBook " $::tr(MoveOutOfBook)"
