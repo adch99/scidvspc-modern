@@ -100,6 +100,10 @@ namespace eval uci {
     logEngine $n "Engine: $line"
 
     if {[string match "bestmove*" $line]} {
+      if {$annotate(Engine) == $n} {
+        set ::pause 0
+        return
+      }
       if {$uciInfo(bestmove$n) == "stop"} {
         # Ponder miss as set by comp.tcl. Discard this bestmove
         set uciInfo(bestmove$n) {}
@@ -352,9 +356,6 @@ namespace eval uci {
     if { $line == "readyok"} {
       if {$analysis(waitForReadyOk$n)} {
         set analysis(waitForReadyOk$n) 0
-      }
-      if {$annotate(Engine) == $n} {
-        set ::pause 0
       }
       return
     }
