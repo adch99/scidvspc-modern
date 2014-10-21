@@ -170,8 +170,7 @@ namespace eval uci {
           set uciInfo(pv$n) [lrange $data $i end]
           ### Depth annotation feature
 	  if {$annotate(Engine) == $n && $annotate(Depth)} {
-	    if {($uciInfo(depth$n) >= $annotate(WantedDepth) || $uciInfo(scoremate$n) > 0) || \
-                [sc_pos matchMoves {}] == {} || (!$::wentOutOfBook && $::useAnalysisBook)} {
+	    if {($uciInfo(depth$n) >= $annotate(WantedDepth) || $uciInfo(scoremate$n) > 0) || [sc_pos matchMoves {}] == {} } {
 		set annoMove [lindex $uciInfo(pv$n) 0]
 		set ::pause 1
 	    }

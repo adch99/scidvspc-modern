@@ -1241,7 +1241,10 @@ proc bookAnnotation { {n 1} } {
   set verboseMoveOutOfBook " $::tr(MoveOutOfBook)"
   set verboseLastBookMove " $::tr(LastBookMove)"
 
-  if { [ string match -nocase "*[sc_game info previousMoveNT]*" $prevbookmoves ] != 1 } {
+  ### Wrong. Compares c4 Bc4
+  # if { [ string match -nocase "*[sc_game info previousMoveNT]*" $prevbookmoves ] != 1 }
+
+  if {[lsearch -exact $prevbookmoves [sc_game info previousMoveNT]] == -1} {
     if {$prevbookmoves != {}} {
       sc_pos setComment "[sc_pos getComment]$verboseMoveOutOfBook ($bookName: $prevbookmoves)"
     } else  {
@@ -1251,16 +1254,16 @@ proc bookAnnotation { {n 1} } {
     sc_pos setComment "[sc_pos getComment]$verboseLastBookMove ($bookName)"
   }
 
-    # last move was out of book or the last move in book : it needs to be analyzed, so take back
-    ::move::Back
-    resetAnalysis $n
+  # last move was out of book or the last move in book : it needs to be analyzed, so take back
+  ::move::Back
+  resetAnalysis $n
 
-    updateBoard -pgn
-    ### Animation ??
-    # for {set i 0} {$i<100} {incr i} { update ; after [expr $::autoplayDelay / 100] }
-    set analysis(prevscore$n) $analysis(score$n)
-    set analysis(prevmoves$n) $analysis(moves$n)
-    # updateBoard -pgn
+  updateBoard -pgn
+  ### Animation ??
+  # for {set i 0} {$i<100} {incr i} { update ; after [expr $::autoplayDelay / 100] }
+  set analysis(prevscore$n) $analysis(score$n)
+  set analysis(prevmoves$n) $analysis(moves$n)
+  # updateBoard -pgn
 }
 
 ### Only available for UCI engines
@@ -1363,6 +1366,11 @@ proc addScore {n type {novar 0}} {
         [sc_pos isAt vstart]} {
       return
     }
+    # hack to not score last book move
+    if {$::wentOutOfBook == 1} {
+      incr ::wentOutOfBook
+      return
+    }
 
     if { [sc_pos moves] == {} && [sc_pos isAt end]} {
       # Where is there getting called from ?. Hack to not display errant last mated score
@@ -1403,11 +1411,8 @@ proc addAnnotation {tomove} {
     return
   }
 
-  # First look in the book selected
-  if { ! $::wentOutOfBook && $::useAnalysisBook} {
-    bookAnnotation
-    return
-  }
+  ### Now handled in sendPosToEngineUCI
+  # if { ! $::wentOutOfBook && $::useAnalysisBook}
 
   # Cannot add a variation to an empty variation:
   if {[sc_pos isAt vstart]  &&  [sc_pos isAt vend]} { return }
@@ -3510,8 +3515,11 @@ proc sendPosToEngineUCI {n  {delay 0}} {
         append cmd { [ } " after $delay sendPosToEngineUCI $n $delay " { ] }
         set analysis(after$n) [eval [list after idle $cmd]]
     } else {
-        ### Can't do this atm as it is necessary for in-book move progression.
-	# if { $::annotate(Engine) == $n && ! $::wentOutOfBook && $::useAnalysisBook} { return }
+        ### Dont send position if annotating and in book
+	if { $::annotate(Engine) == $n && ! $::wentOutOfBook && $::useAnalysisBook} {
+	  bookAnnotation
+	  return
+        }
 
 	if {$analysis(movelist$n) == {}} {
 	  sendToEngine $n "position $analysis(startpos$n)"
