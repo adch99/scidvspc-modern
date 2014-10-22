@@ -170,8 +170,8 @@ set annotate(addTag) 1
 set annotate(Moves) all
 set annotate(WithVars) blunders
 set annotate(WithScore) allmoves
-set annotate(WantedDepth) 15
-set annotate(Depth) 0
+set annotate(WantedDepth) 13
+set annotate(Depth) 1
 set useAnalysisBook 0
 set annotate(isVar) 0
 set annotate(addComment) 0

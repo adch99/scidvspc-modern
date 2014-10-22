@@ -1167,7 +1167,11 @@ proc okAnnotation {n} {
   }
 
   set ::useAnalysisBookName [$w.usebook.comboBooks get]
-  set ::wentOutOfBook 0
+  if {[sc_pos isAt start]} {
+    set ::wentOutOfBook 0
+  } else { 
+    set ::wentOutOfBook 1
+  }
   set ::book::lastBook1 $::useAnalysisBookName
   set ::prevNag {}
 
@@ -1204,7 +1208,7 @@ proc okAnnotation {n} {
     }
   }
   if {$autoplayMode == 0} { toggleAutoplay }
-  # Disable pause button, as pause doesnt work in annotation mode, and this is the easiest option.
+  # Disable pause button, (But perhaps we can enable this. Seems to work in annotate mode now)
   .analysisWin$n.b.startStop configure -state disabled
 }
 
@@ -2259,12 +2263,19 @@ proc makeAnalysisWin {{n 0} {options {}}} {
     -variable analysis(lockEngine$n) -command "toggleLockEngine $n" -relief $relief
   ::utils::tooltip::Set $w.b.lockengine $::tr(LockEngine)
 
-  if {!$annotate(Button)} {
+  set showAnnoButton 1
+  for {set i 0} {$i < [llength $::engines(list)]} {incr i} {
+    if {[winfo exists .analysisWin$i.b.annotatebut]} {
+      set showAnnoButton 0
+    }
+  }
+
+  if {$showAnnoButton} {
     checkbutton $w.b.annotatebut -image tb_annotate -indicatoron false -width 32 -height 32 \
       -variable annotate(Button) -command "initAnnotation $n" -relief $relief
     ::utils::tooltip::Set $w.b.annotatebut $::tr(Annotate)
   } else {
-    frame $w.b.annotatebut -width 0 -height 0
+    button $w.b.annotatebut 
   }
 
   button $w.b.exclude -image tb_exclude -command "excludeMovePopup $n" -relief $relief
@@ -2314,6 +2325,9 @@ proc makeAnalysisWin {{n 0} {options {}}} {
   pack $w.b.startStop $w.b.move $w.b.line $w.b.alllines \
        $w.b.multipv $w.b.lockengine $w.b.annotatebut $w.b.exclude $w.b.priority $w.b.showinfo $w.b.showboard \
        $w.b.update $w.b.finishGame -side left
+  if {!$showAnnoButton} {
+    pack forget $w.b.annotatebut
+  }
 
   if {$n == 1 || $n == 2} {
     # training only works with engines 1 and 2
@@ -3084,10 +3098,6 @@ proc autoplayFinishGame {n} {
 
 proc toggleEngineAnalysis {{n -1} {force 0}} {
   global analysis annotate
-
-  if { ($annotate(Button) || $::finishGameMode) && ! $force } {
-    return
-  }
 
   if {$n == -1} {
     if {$fics::playing == 1 || $fics::playing == -1} {
