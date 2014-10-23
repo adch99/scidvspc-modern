@@ -7198,7 +7198,7 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     // <bold> markup seems broken, so using <gbold> 
     // A few fields are alligned with TABS
 
-    if ( *db->game->GetWhiteStr() == '?' )
+    if ( db->game->GetWhiteStr()[0] == '?' && db->game->GetWhiteStr()[1] == 0 )
       sprintf (temp, "<center><gbold><run gameSave -1 white>?</run></gbold>");
     else
       sprintf (temp, "<center><gbold><pi %s>%s</pi></gbold>", db->game->GetWhiteStr(), db->game->GetWhiteStr());
@@ -7216,7 +7216,7 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         Tcl_AppendResult (ti, temp, NULL);
     }
 
-    if ( *db->game->GetBlackStr() == '?' )
+    if ( db->game->GetBlackStr()[0] == '?' && db->game->GetBlackStr()[1] == 0 )
       sprintf (temp, "    --    <gbold><run gameSave -1 black>?</run></gbold>");
     else
       sprintf (temp, "    --    <gbold><pi %s>%s</pi></gbold>", db->game->GetBlackStr(), db->game->GetBlackStr());

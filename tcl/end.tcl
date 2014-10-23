@@ -1237,9 +1237,10 @@ proc gameSave {gnum {focus {}}} {
 	-message "Event date can't exist without Game date." -parent .save
     } else {
       set extraTags [.save.g.extratext get 1.0 end-1c]
-      gsave $gsaveNum;
-      destroy .save
-      updateMenuStates
+      if {[gsave $gsaveNum]} {
+        destroy .save
+        updateMenuStates
+      }
     }
   }
 
@@ -1312,6 +1313,13 @@ proc gsave { gnum } {
 
   foreach i {white black event site round} {
     set $i [string trim [set $i]]
+    if {[set $i] == ""} {
+      set $i "?"
+    }
+    if {[string bytelength [set $i]] > 255} {
+      tk_messageBox -type ok -icon info -parent .save -title "Oops" -message "\"[string totitle $i]\" is larger than 255 bytes."
+      return 0
+    }
   }
 
   sc_game undoPoint
@@ -1340,6 +1348,7 @@ proc gsave { gnum } {
   updateBoard -pgn
   ::windows::gamelist::Refresh
   updateTitle
+  return 1
 }
 
 proc gameAdd {} {
