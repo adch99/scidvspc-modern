@@ -501,7 +501,7 @@ set helpText(Hints) {<h1>Scid Hints</h1>
   <h4>How can i change the board size?</h4>
   <p>
   Use the shortcut keys <b>Control+Shift+LeftArrow</b> and
-  <b>Control+Shift+RightArrow</b>, or <b>Control+Wheelmouse</b>.
+  <b>Control+Shift+RightArrow</b>, or <b>Control+Wheelmouse</b> (in undocked mode).
   </p>
 
   <h4>Can I hide the next move?</h4>
@@ -2720,12 +2720,12 @@ with the format "stat01: time nodes ply mvleft mvtot mvname". The results can be
   <br>
   <b>Depth</b>: the search depth already reached by
   the engines calculations (in half moves).
-  <br><b>Nodes</b>: the number of positions analysed for the current
+  <br><b>Nodes</b>: the number of positions analyzed for the current
   result (and the number of positions per second).
   <br><b>Time</b>: the amount of time spent for the current analysis.
   </p><p>
   Additional information includes the number of tablebase hits, a
-  more exact number of nodes analysed per second, the watermark of the
+  more exact number of nodes analyzed per second, the watermark of the
   engines hash and the current CPU load.
   </p>
 
@@ -2733,25 +2733,24 @@ with the format "stat01: time nodes ply mvleft mvtot mvname". The results can be
 
   <h3><name Annotating>Annotating Games</name></h3>
   <p>
-  Games can be automatically analysed using
+  Games can be automatically analyzed using
   the Annotate Button <button tb_annotate> (in the <a Analysis>Analysis Engine</a> toolbar).
   This feature adds Scores, <a Comment>Comments</a>, <a Moves Informant>Informants</a>,
   and Bestlines to games.</p>
+
+  <p><i>
+  The Annotate button is only shown in the </i><b>first</b><i> engine window.
+  </i></p>
 
   <p>After configuring the options and pressing OK, Autoplay
   Mode is enabled and the engine starts its analysis.
   A variation and/or score is
   automatically added for each position as the engine processes the game.
-  Only positions from the current position until the end of the game
+  Only positions from the current one until the end of the game
   are annotated, so you can skip annotation of opening moves
   by moving to a mid-game position before starting.
   Pressing the Annotate Button a second time cancels annotation.
   </p>
-  <p><i>
-  The Annotate feature of Scid vs. PC can be used with any engine,
-  but be sure not to open other Analysis Windows while annotation is in progress.
-  Depth Based Annotation is a nice feature, but still may have bugs.
-  </i></p>
 
   <p><b>Options</b>
   <ul>
@@ -3791,8 +3790,10 @@ set helpText(Options) {<h1>Options and Preferences</h1>
 
   <h3><name Fonts>Fonts</name></h3>
   <p>
-  Scid has four basic fonts; <b>Regular</b>, <b>Menu</b>, <b>Small</b> and <b>Fixed</b>.
-  They are customized via the <green>Options-<gt>Fonts</green>, or by <b>Control+WheelMouse</b> in the PGN and Help windows.
+  Scid has four basic fonts; <b>Regular</b>, <b>Menu</b>, <b>Small</b> and <b>Fixed</b>,
+  which can be customized via the <green>Options-<gt>Fonts</green> menus.
+  </p>
+  <p><i>Many windows can quickly resize fonts by using Control+WheelMouse</i>
   </p>
   <p>
   The <b>Fixed</b> font is used by the <a Tree>Tree</a> and <a Crosstable>Crosstable</a> windows, and requires a fixed-width font to make text allign nicely.
@@ -5783,13 +5784,14 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li>Analysis Engine: exclude move(s) feature. Mouse-hover shows excluded moves (UCI only)</li>
 <li>Analysis Engine: button to pop-up unrevealed buttons, and redo a few icons</li>
 <li>Maintenance: Bulk strip Comments/Variations</li>
-<li>Depth-based Engine Annotation improvements (though still work-in-progress)</li>
+<li>Depth-based Engine Annotation improvements</li>
 <li>Tweaked Key Bindings (including FilterReset Control-r and GameSave Control-s)</li>
 <li>Improved Background Colour feature</li>
 <li>Add 'Find' entry boxes to more windows (including spelling corrections).widget can now use regular expressions</li>
 <li>Splash widget console now has a simple command history (up-arrow)</li>
 <li>Better Repair Base feature (from Gregor)</li>
 <li>Include Gregors fast file opening with the windows 32-bit binary</li>
+<li>Bind Control-Wheel to alter fixed font size (in some windows)</li>
 <li>New Russian translation (from Sergey Nikolaevich Koyankin) and updated German one (from surrim)</li>
 <li>Enforce all tags (eg Event names, etc) to be less than 256 chars</li>
 <li>Tweak Scid's installer is to properly allow custom SHAREDIR</li>

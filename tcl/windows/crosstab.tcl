@@ -315,6 +315,8 @@ proc ::crosstab::Open {} {
     bind $text <Button-5> "$text yview scroll  1 units"
   }
 
+  bindWheeltoFixed $w
+
   bind $w <Destroy> {}
   ::crosstab::Refresh
 

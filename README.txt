@@ -497,8 +497,7 @@
 
   o  Maintenance: Bulk strip Comments/Variations.
 
-  o  Depth-based Engine Annotation improvements (though still work-in-
-     progress).
+  o  Depth-based Engine Annotation improvements.
 
   o  Tweaked key bindings (including FilterReset Control-r and GameSave
      Control-s).
@@ -514,6 +513,7 @@
 
   o  Include Gregors fast file opening with the windows 32-bit binary.
 
+  o  Bind Control-Wheel to alter fixed font size (in some windows).
 
   o  New Russian translation (from Sergey Nikolaevich Koyankin) and
      updated German one (from surrim).

@@ -2388,6 +2388,7 @@ proc makeAnalysisWin {{n 0} {options {}}} {
   bind $w <space>  "$w.b.startStop invoke"
   wm minsize $w 25 0
   bindMouseWheel $w $w.hist.text
+  bindWheeltoFixed $w
 
   if {$analysis(uci$n)} {
     fileevent $analysis(pipe$n) readable "::uci::processAnalysisInput $n"

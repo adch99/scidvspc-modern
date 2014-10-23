@@ -93,6 +93,7 @@ proc ::tree::Open {{baseNumber 0}} {
 
   # Bind left button to close ctxt menu:
   bind $w <ButtonPress-1> "::tree::hideCtxtMenu $baseNumber"
+  bindWheeltoFixed $w
 
   standardShortcuts $w
 
@@ -1045,6 +1046,7 @@ proc ::tree::best { baseNumber } {
     setWinSize $w
     bind $w <Escape> "destroy $w"
     bind $w <F1> {helpWindow Tree Best}
+    bindWheeltoFixed $w
     pack [frame $w.b] -side bottom -fill x
     frame $w.blist
     pack $w.blist -side top -expand true -fill both

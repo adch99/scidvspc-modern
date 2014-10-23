@@ -413,6 +413,17 @@ proc FontBiggerSmaller {incr} {
   set fontOptions(Small) [lreplace $fontOptions(Small) 1 1 $small_size]
 }
 
+proc FixedBiggerSmaller {incr} {
+  global fontOptions 
+
+  set size [font configure font_Fixed -size]
+  incr size $incr
+  if {$size < 5} { set size 5 }
+
+  font configure font_Fixed -size $size
+  set fontOptions(Fixed) [lreplace $fontOptions(Fixed) 1 1 $size]
+}
+
 proc bindWheeltoFont {w} {
   if {$::windowsOS || $::macOS} {
     # Control-MouseWheel binding is (generally) grabbed on OSX and doesn't work
@@ -423,6 +434,19 @@ proc bindWheeltoFont {w} {
   } else {
     bind $w <Control-Button-4> {FontBiggerSmaller 1 ; break}
     bind $w <Control-Button-5> {FontBiggerSmaller -1 ; break}
+  }
+}
+
+proc bindWheeltoFixed {w} {
+  if {$::windowsOS || $::macOS} {
+    # Control-MouseWheel binding is (generally) grabbed on OSX and doesn't work
+    bind $w <Control-MouseWheel> {
+      if {[expr -%D] < 0} {FixedBiggerSmaller 1 ; break}
+      if {[expr -%D] > 0} {FixedBiggerSmaller -1 ; break}
+    }
+  } else {
+    bind $w <Control-Button-4> {FixedBiggerSmaller 1 ; break}
+    bind $w <Control-Button-5> {FixedBiggerSmaller -1 ; break}
   }
 }
 
