@@ -1,5 +1,6 @@
 # utils/graph.tcl: Graph plotting package for Scid.
 #
+# Utilized by tcl/tools/graphs.tcl
 
 namespace eval ::utils::graph {}
 

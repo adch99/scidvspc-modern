@@ -485,7 +485,20 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
   set blackelo [sc_game tag get BlackElo]  
   if {$whiteelo == 0} {set whiteelo ""} else {set whiteelo "($whiteelo)"}
   if {$blackelo == 0} {set blackelo ""} else {set blackelo "($blackelo)"}  
-  $w.c itemconfigure text -text "[sc_game info white]$whiteelo - [sc_game info black]$blackelo\n[sc_game info site]  [sc_game info date]"
+  switch [sc_game tag get Result] {
+    1 {
+  $w.c itemconfigure text -text "[sc_game info white] $whiteelo - [sc_game info black] $blackelo (1-0)\n[sc_game info site]  [sc_game info date]"
+    }
+    0 {
+  $w.c itemconfigure text -text "[sc_game info white] $whiteelo - [sc_game info black] $blackelo (0-1)\n[sc_game info site]  [sc_game info date]"
+    }
+    = {
+  $w.c itemconfigure text -text "[sc_game info white] $whiteelo - [sc_game info black] $blackelo (1/2-1/2)\n[sc_game info site]  [sc_game info date]"
+    }
+    default {
+  $w.c itemconfigure text -text "[sc_game info white] $whiteelo - [sc_game info black] $blackelo\n[sc_game info site]  [sc_game info date]"
+    }
+  }
   busyCursor $w
   update
   #Klimmek: Invert white/black Score in Score graph
