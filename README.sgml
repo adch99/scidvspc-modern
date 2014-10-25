@@ -388,7 +388,8 @@ Chessbase databases and many chess variants.</p>
 <item> Bind Control-Wheel to alter fixed font size (in some windows).
 <item> New Russian translation (from Sergey Nikolaevich Koyankin) and updated German one (from surrim).
 <item> Enforce all tags (eg Event names, etc) to be less than 256 chars.
-<item> Tweak Scid's installer is to properly allow custom SHAREDIR.
+<item> Tweak Scid's Linux installer is to properly allow custom SHAREDIR.
+<item> Windows drag and drop file open wasn't being init properly.
 <item> Better handle language translations/encoding.
 <item> Crosstable: bump max-player limit, tweak menus and bind right-click to menu, fix occasional allignment bug, and dont' automatically update (fixing busy cursor bug).
 <item> Bump Opening Table limits, and minor bug-fixes.
@@ -406,7 +407,7 @@ Chessbase databases and many chess variants.</p>
 <item> Enforce illegalilty of saving Event Date without Game Date.
 <item> Phalanx updates and minor tacgame, sergame fixes.
 <item> Make a few windows have small font buttons.
-<item> Shift+Wheel scrolls a few widgets horizontally.
+<item> Shift+Wheel(/ left-right wheel) scrolls a few widgets horizontally.
 <item> Break up the long Book Tuning button menus.
 <item> Many minor bugfixes and further tree-only filter fixes.
 </itemize></p>

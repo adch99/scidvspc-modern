@@ -5794,7 +5794,8 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li>Bind Control-Wheel to alter fixed font size (in some windows)</li>
 <li>New Russian translation (from Sergey Nikolaevich Koyankin) and updated German one (from surrim)</li>
 <li>Enforce all tags (eg Event names, etc) to be less than 256 chars</li>
-<li>Tweak Scid's installer is to properly allow custom SHAREDIR</li>
+<li>Tweak Scid's Linux installer is to properly allow custom SHAREDIR</li>
+<li>Windows drag and drop file open wasn't being init properly</li>
 <li>Better handle language translations/encoding</li>
 <li>Crosstable: bump max-player limit, tweak menus and bind right-click to menu, fix occasional allignment bug, and dont' automatically update (fixing busy cursor bug)</li>
 <li>Bump Opening Table limits, and minor bug-fixes</li>
@@ -5811,9 +5812,8 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li>Always get confirmation for sorting via gamelist</li>
 <li>Enforce illegalilty of saving Event Date without Game Date</li>
 <li>Phalanx updates and minor tacgame, sergame fixes</li>
-<li>More minor depth based analysis fixes (todo)</li>
 <li>Make a few windows have small font buttons</li>
-<li>Shift+Wheel scrolls a few widgets horizontally</li>
+<li>Shift+Wheel(/ left-right wheel) scrolls a few widgets horizontally</li>
 <li>Break up the long Book Tuning button menus</li>
 <li>Many minor bugfixes and further tree-only filter fixes</li>
 </ul>
