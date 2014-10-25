@@ -2228,7 +2228,8 @@ if { $::docking::USE_DOCKING } {
 
   if {!$macOS} {
     ### Must be done after the toplevel window has been mapped.
-    bind . <Map> {
+    #  bind . <Map> ..... doesn't work on MS Windows
+    after idle {
       initDragDrop
       if {[tk windowingsystem] eq "x11"} {
 	### This wrapper is required for GNOME support. It supplies
@@ -2236,7 +2237,6 @@ if { $::docking::USE_DOCKING } {
 	### handling will be confused by embedded top level windows.
 	after idle { ::tkdnd::xdnd::registerWrapper . }
       }
-      bind . <Map> {#}
     }
   }
 } else {
