@@ -316,6 +316,8 @@ mac_rename:
 	@executable_path/../Frameworks/Tcl.framework/Versions/@TCL_VERSION@/Tcl tkscid
 	install_name_tool -change /Library/Frameworks/Tk.framework/Versions/@TCL_VERSION@/Tk \
 	@executable_path/../Frameworks/Tk.framework/Versions/@TCL_VERSION@/Tk tkscid
+	install_name_tool -change /Library/Frameworks/Tcl.framework/Versions/@TCL_VERSION@/Tcl \
+	@executable_path/../Frameworks/Tcl.framework/Versions/@TCL_VERSION@/Tcl tcscid
 mac_buttons:
 	patch -p0 scid <patches/swap_buttons-2-3.patch
 
