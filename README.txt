@@ -58,16 +58,16 @@
 
 
   Shane's Chess Information Database is a powerful Chess Toolkit, with
-  which one can create huge chess databases, run chess engines, or play
+  which one can create huge databases, run chess engines, and play
   casual games against the computer or online with the Free Internet
   Chess Server. It was originally written by Shane Hudson , and has
   received strong contribution from Pascal Georges and others.
 
-  Scid vs. PC <http://scidvspc.sourceforge.net/> began with fixes for
-  Scid's Computer vs. Player features (hence the name), but has evolved
-  into a solid stand-alone program, with numerous new interfaces and
-  features. The project is authored by ``Stevenaaus'' and various
-  ``contributors''.
+  Scid vs. PC <http://scidvspc.sourceforge.net/> began with bug-fixes
+  for the computer-versus-player features of Scid (hence the name), but
+  has evolved into a solid alternative with many new features and
+  interfaces. The project is authored by ``Stevenaaus'' and numerous
+  contributors ``(thanks)''.
 
   2.  features
 
