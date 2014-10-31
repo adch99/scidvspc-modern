@@ -754,6 +754,8 @@ translate H AnnotateNotBest {Ha a játszmában nem a legjobbat lépték}
 # ====== TODO To be translated ======
 translate H AnnotateBlundersOnly {When game move is an obvious blunder}
 # ====== TODO To be translated ======
+translate H BlundersNotBest {Blunders/Not Best}
+# ====== TODO To be translated ======
 translate H AnnotateBlundersOnlyScoreChange {Analysis reports blunder, with score change from/to: }
 # ====== TODO To be translated ======
 translate H AnnotateTitle {Állítsa Jegyzet}
@@ -1671,7 +1673,15 @@ translate H Time {Time}
 # ====== TODO To be translated ======
 translate H SecondsPerMove {Seconds per move}
 # ====== TODO To be translated ======
+translate H DepthPerMove {Depth per move}
+# ====== TODO To be translated ======
+translate H MoveControl {Move Control}
+# ====== TODO To be translated ======
 translate H TimeLabel {Time per move}
+# ====== TODO To be translated ======
+translate H AddVars {Add Variations}
+# ====== TODO To be translated ======
+translate H AddScores {Add Score}
 # ====== TODO To be translated ======
 translate H Engine {Engine}
 # ====== TODO To be translated ======

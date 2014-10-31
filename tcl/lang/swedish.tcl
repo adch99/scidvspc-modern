@@ -696,6 +696,8 @@ translate W AnnotateWhite {Endast vits drag}
 translate W AnnotateBlack {Endast svarts drag}
 translate W AnnotateNotBest {När partidraget inte är det bästa}
 translate W AnnotateBlundersOnly {När partidraget är en uppenbar blunder}
+# ====== TODO To be translated ======
+translate W BlundersNotBest {Blunders/Not Best}
 translate W AnnotateBlundersOnlyScoreChange {Analysen rapporterar blunder, med värderingsförändringar från/till}
 translate W AnnotateTitle {Konfigurera Anteckningar}
 translate W AnnotateWith {Kommentera Med}
@@ -1470,8 +1472,16 @@ translate W Nodes {Noder}
 translate W Depth {Sökdjup}
 translate W Time {Tid}
 translate W SecondsPerMove {Sekunder per drag}
+# ====== TODO To be translated ======
+translate W DepthPerMove {Depth per move}
+# ====== TODO To be translated ======
+translate W MoveControl {Move Control}
 # TODO
 translate W TimeLabel {Time per move}
+# ====== TODO To be translated ======
+translate W AddVars {Add Variations}
+# ====== TODO To be translated ======
+translate W AddScores {Add Score}
 translate W Engine {Schackmotor}
 translate W TimeMode {Tidsmod}
 translate W TimeBonus {Tid + bonus}

@@ -683,6 +683,8 @@ translate P AnnotateWhite {Dla białych}
 translate P AnnotateBlack {Dla czarnych}
 translate P AnnotateNotBest {Tylko posunięcia lepsze niż w partii}
 translate P AnnotateBlundersOnly {Tylko oczywiste błędy}
+# ====== TODO To be translated ======
+translate P BlundersNotBest {Blunders/Not Best}
 translate P AnnotateBlundersOnlyScoreChange {Tylko błędy ze zmianą oceny z/na: }
 translate P AnnotateTitle {Konfiguracja komentarza}
 translate P AnnotateWith {Format komentarza}
@@ -1449,8 +1451,16 @@ translate P Nodes {Pozycje}
 translate P Depth {Głębokość}
 translate P Time {Czas} 
 translate P SecondsPerMove {Sekundy na posunięcie}
+# ====== TODO To be translated ======
+translate P DepthPerMove {Depth per move}
+# ====== TODO To be translated ======
+translate P MoveControl {Move Control}
 # TODO
 translate P TimeLabel {Czas na posunięcie}
+# ====== TODO To be translated ======
+translate P AddVars {Add Variations}
+# ====== TODO To be translated ======
+translate P AddScores {Add Score}
 translate P Engine {Program}
 translate P TimeMode {Tempo gry}
 translate P TimeBonus {Czas + dodatek}

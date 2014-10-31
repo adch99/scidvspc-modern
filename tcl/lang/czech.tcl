@@ -747,6 +747,8 @@ translate C AnnotateNotBest {Pokud tah v partii není nejlep¹ím tahem}
 # ====== TODO To be translated ======
 translate C AnnotateBlundersOnly {When game move is an obvious blunder}
 # ====== TODO To be translated ======
+translate C BlundersNotBest {Blunders/Not Best}
+# ====== TODO To be translated ======
 translate C AnnotateBlundersOnlyScoreChange {Analysis reports blunder, with score change from/to: }
 translate C AnnotateTitle {Konfigurace Anotace}
 translate C AnnotateWith {S komentovat}
@@ -1662,7 +1664,15 @@ translate C Time {Time}
 # ====== TODO To be translated ======
 translate C SecondsPerMove {Seconds per move}
 # ====== TODO To be translated ======
+translate C DepthPerMove {Depth per move}
+# ====== TODO To be translated ======
+translate C MoveControl {Move Control}
+# ====== TODO To be translated ======
 translate C TimeLabel {Time per move}
+# ====== TODO To be translated ======
+translate C AddVars {Add Variations}
+# ====== TODO To be translated ======
+translate C AddScores {Add Score}
 # ====== TODO To be translated ======
 translate C Engine {Engine}
 # ====== TODO To be translated ======

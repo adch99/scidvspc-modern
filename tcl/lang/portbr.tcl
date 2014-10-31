@@ -753,6 +753,8 @@ translate B AnnotateNotBest {Quando o movimento do jogo nao for o melhor movimen
 # ====== TODO To be translated ======
 translate B AnnotateBlundersOnly {When game move is an obvious blunder}
 # ====== TODO To be translated ======
+translate B BlundersNotBest {Blunders/Not Best}
+# ====== TODO To be translated ======
 translate B AnnotateBlundersOnlyScoreChange {Analysis reports blunder, with score change from/to: }
 # ====== TODO To be translated ======
 translate B AnnotateTitle {Configure Annotation}
@@ -1668,7 +1670,15 @@ translate B Time {Time}
 # ====== TODO To be translated ======
 translate B SecondsPerMove {Seconds per move}
 # ====== TODO To be translated ======
+translate B DepthPerMove {Depth per move}
+# ====== TODO To be translated ======
+translate B MoveControl {Move Control}
+# ====== TODO To be translated ======
 translate B TimeLabel {Time per move}
+# ====== TODO To be translated ======
+translate B AddVars {Add Variations}
+# ====== TODO To be translated ======
+translate B AddScores {Add Score}
 # ====== TODO To be translated ======
 translate B Engine {Engine}
 # ====== TODO To be translated ======

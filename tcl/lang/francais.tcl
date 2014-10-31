@@ -703,6 +703,8 @@ translate F AnnotateWhite {Pour les coups des blancs seulement}
 translate F AnnotateBlack {Pour les coups des noirs seulement}
 translate F AnnotateNotBest {Quand le coup de la partie n'est pas le meilleur}
 translate F AnnotateBlundersOnly {Quand le coup est une erreur}
+# ====== TODO To be translated ======
+translate F BlundersNotBest {Blunders/Not Best}
 translate F AnnotateBlundersOnlyScoreChange {Coup faible, le score varie de/à: }
 translate F AnnotateTitle {Configurer Annotation}
 translate F AnnotateWith {Annoter Avec}
@@ -1487,7 +1489,15 @@ translate F Nodes {Noeuds}
 translate F Depth {Profondeur}
 translate F Time {Temps} 
 translate F SecondsPerMove {Secondes par coup}
+# ====== TODO To be translated ======
+translate F DepthPerMove {Depth per move}
+# ====== TODO To be translated ======
+translate F MoveControl {Move Control}
 translate F TimeLabel {Time per move}
+# ====== TODO To be translated ======
+translate F AddVars {Add Variations}
+# ====== TODO To be translated ======
+translate F AddScores {Add Score}
 translate F Engine {Moteur}
 translate F TimeMode {Mode de réflexion}
 translate F TimeBonus {Temps + bonus}

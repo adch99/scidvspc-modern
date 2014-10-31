@@ -670,6 +670,8 @@ translate R AnnotateWhite {Только для ходов белых}
 translate R AnnotateBlack {Только для ходов чёрных}
 translate R AnnotateNotBest {Если ход не лучший}
 translate R AnnotateBlundersOnly {Когда ход в партии является очевидной ошибкой}
+# ====== TODO To be translated ======
+translate R BlundersNotBest {Blunders/Not Best}
 translate R AnnotateBlundersOnlyScoreChange {Анализ отчёта ошибок, которые изменяли счёт от/до:}
 translate R AnnotateTitle {Настроить аннотацию}
 translate R AnnotateWith {Аннотировать с}
@@ -1442,7 +1444,15 @@ translate R Nodes {Узлы}
 translate R Depth {Глубина}
 translate R Time {Время}
 translate R SecondsPerMove {Секунд на ход}
+# ====== TODO To be translated ======
+translate R DepthPerMove {Depth per move}
+# ====== TODO To be translated ======
+translate R MoveControl {Move Control}
 translate R TimeLabel {Время на ход}
+# ====== TODO To be translated ======
+translate R AddVars {Add Variations}
+# ====== TODO To be translated ======
+translate R AddScores {Add Score}
 translate R Engine {Движок}
 translate R TimeMode {Режим времени}
 translate R TimeBonus {Время + премия}

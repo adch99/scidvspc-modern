@@ -685,6 +685,7 @@ translate E AnnotateWhite {White moves only}
 translate E AnnotateBlack {Black moves only}
 translate E AnnotateNotBest {When move is not the best}
 translate E AnnotateBlundersOnly {When move is a blunder}
+translate E BlundersNotBest {Blunders/Not Best}
 translate E AnnotateBlundersOnlyScoreChange {Analysis reports blunder, with score change from/to: }
 translate E AnnotateTitle {Configure Annotation}
 translate E AnnotateWith {Annotate With}
@@ -1445,7 +1446,11 @@ translate E Nodes {Nodes}
 translate E Depth {Depth}
 translate E Time {Time} 
 translate E SecondsPerMove {Seconds per move}
+translate E DepthPerMove {Depth per move}
+translate E MoveControl {Move Control}
 translate E TimeLabel {Time per move}
+translate E AddVars {Add Variations}
+translate E AddScores {Add Score}
 translate E Engine {Engine}
 translate E TimeMode {Time mode}
 translate E TimeBonus {Time + bonus}

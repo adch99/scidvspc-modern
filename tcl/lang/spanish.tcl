@@ -717,6 +717,8 @@ translate S AnnotateWhite {Sólo movimientos de blancas}
 translate S AnnotateBlack {Sólo movimientos de negras}
 translate S AnnotateNotBest {Cuando el movimiento no es el mejor}
 translate S AnnotateBlundersOnly {Cuando el movimiento es un disparate}
+# ====== TODO To be translated ======
+translate S BlundersNotBest {Blunders/Not Best}
 translate S AnnotateBlundersOnlyScoreChange {Análisis reporta errores, con cambio de puntuación desde: }
 translate S AnnotateTitle {Configurar anotación}
 translate S AnnotateWith {Anotar con}
@@ -1478,7 +1480,15 @@ translate S Nodes {Nodos}
 translate S Depth {Profundidad}
 translate S Time {Tiempo} 
 translate S SecondsPerMove {Segundos por movimiento}
+# ====== TODO To be translated ======
+translate S DepthPerMove {Depth per move}
+# ====== TODO To be translated ======
+translate S MoveControl {Move Control}
 translate S TimeLabel {Tiempor por movimiento}
+# ====== TODO To be translated ======
+translate S AddVars {Add Variations}
+# ====== TODO To be translated ======
+translate S AddScores {Add Score}
 translate S Engine {Motor}
 translate S TimeMode {Modo de tiempo}
 translate S TimeBonus {Tiempo + bonus}

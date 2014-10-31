@@ -708,6 +708,8 @@ translate D AnnotateWhite {Nur für Züge von Weiß}
 translate D AnnotateBlack {Nur für Züge von Schwarz}
 translate D AnnotateNotBest {Wenn der Partiezug nicht der beste Zug ist}
 translate D AnnotateBlundersOnly {Wenn der Partiezug ein offensichtlicher Fehler ist}
+# ====== TODO To be translated ======
+translate D BlundersNotBest {Blunders/Not Best}
 translate D AnnotateBlundersOnlyScoreChange {Analyse berichtet Fehler, Bewertungsänderung von/nach: }
 translate D AnnotateTitle {konfigurieren Annotation}
 translate D AnnotateWith {Kommentieren mit}
@@ -1500,7 +1502,15 @@ translate D Nodes {Knoten}
 translate D Depth {Tiefe}
 translate D Time {Zeit} 
 translate D SecondsPerMove {Sekunden pro Zug}
+# ====== TODO To be translated ======
+translate D DepthPerMove {Depth per move}
+# ====== TODO To be translated ======
+translate D MoveControl {Move Control}
 translate D TimeLabel {Zeit pro Zug}
+# ====== TODO To be translated ======
+translate D AddVars {Add Variations}
+# ====== TODO To be translated ======
+translate D AddScores {Add Score}
 translate D Engine {Engine}
 translate D TimeMode {Zeitmodus}
 translate D TimeBonus {Zeit + Bonus}

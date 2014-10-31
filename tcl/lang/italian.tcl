@@ -766,6 +766,8 @@ translate I AnnotateWhite {Per solo le mosse del Bianco}
 translate I AnnotateBlack {Per solo le mosse del Nero}
 translate I AnnotateNotBest {Quando la mossa della partita non e' la migliore}
 translate I AnnotateBlundersOnly {Quando la mossa è chiaramente un errore}
+# ====== TODO To be translated ======
+translate I BlundersNotBest {Blunders/Not Best}
 translate I AnnotateBlundersOnlyScoreChange {L'analisi riporta come errori, con variazione del punteggio da/a:}
 translate I AnnotateTitle {Configurare Annotazione}
 translate I AnnotateWith {Con annotare}
@@ -1551,7 +1553,15 @@ translate I Depth {Profondità}
 translate I Time {Tempo}
 translate I SecondsPerMove {Secondi per mossa}
 # ====== TODO To be translated ======
+translate I DepthPerMove {Depth per move}
+# ====== TODO To be translated ======
+translate I MoveControl {Move Control}
+# ====== TODO To be translated ======
 translate I TimeLabel {Time per move}
+# ====== TODO To be translated ======
+translate I AddVars {Add Variations}
+# ====== TODO To be translated ======
+translate I AddScores {Add Score}
 # ====== TODO To be translated ======
 translate I Engine {Engine}
 # ====== TODO To be translated ======

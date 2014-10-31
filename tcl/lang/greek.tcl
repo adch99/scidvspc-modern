@@ -712,6 +712,8 @@ translate G AnnotateWhite {Μόνο κινήσεις Λευκού}
 translate G AnnotateBlack {Μόνο κινήσεις Μαύρου}
 translate G AnnotateNotBest {Όταν η κίνηση δεν είναι η Καλύτερη}
 translate G AnnotateBlundersOnly {Όταν η κίνηση είναι Σοβαρό Σφάλμα}
+# ====== TODO To be translated ======
+translate G BlundersNotBest {Blunders/Not Best}
 translate G AnnotateBlundersOnlyScoreChange {Η Ανάλυση σχολιάζει ως Σοβαρό Σφάλμα, με διαφορά υλικού από/σε: }
 translate G AnnotateTitle {Ρυθμίσεις Σχολιαστή}
 translate G AnnotateWith {Σχολιασμός Με }
@@ -1484,7 +1486,15 @@ translate G Nodes {Nodes}
 translate G Depth {Βάθος}
 translate G Time {Χρόνος} 
 translate G SecondsPerMove {Δευτερόλεπτα Κίνησης}
+# ====== TODO To be translated ======
+translate G DepthPerMove {Depth per move}
+# ====== TODO To be translated ======
+translate G MoveControl {Move Control}
 translate G TimeLabel {Χρόνος Κίνησης}
+# ====== TODO To be translated ======
+translate G AddVars {Add Variations}
+# ====== TODO To be translated ======
+translate G AddScores {Add Score}
 translate G Engine {Μηχανή}
 translate G TimeMode {Τύπος χρόνου}
 translate G TimeBonus {Χρόνος + bonus}

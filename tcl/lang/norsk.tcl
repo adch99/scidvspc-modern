@@ -825,6 +825,8 @@ translate O AnnotateNotBest {Når trekket avviker fra beste linje}
 # ====== TODO To be translated ======
 translate O AnnotateBlundersOnly {When game move is an obvious blunder}
 # ====== TODO To be translated ======
+translate O BlundersNotBest {Blunders/Not Best}
+# ====== TODO To be translated ======
 translate O AnnotateBlundersOnlyScoreChange {Analysis reports blunder, with score change from/to: }
 # ====== TODO To be translated ======
 translate O AnnotateTitle {Konfigurer Annotation}
@@ -1739,7 +1741,15 @@ translate O Time {Time}
 # ====== TODO To be translated ======
 translate O SecondsPerMove {Seconds per move}
 # ====== TODO To be translated ======
+translate O DepthPerMove {Depth per move}
+# ====== TODO To be translated ======
+translate O MoveControl {Move Control}
+# ====== TODO To be translated ======
 translate O TimeLabel {Time per move}
+# ====== TODO To be translated ======
+translate O AddVars {Add Variations}
+# ====== TODO To be translated ======
+translate O AddScores {Add Score}
 # ====== TODO To be translated ======
 translate O Engine {Engine}
 # ====== TODO To be translated ======

@@ -825,6 +825,8 @@ translate Y AnnotateNotBest {When game move is not best move} ;# ***
 # ====== TODO To be translated ======
 translate Y AnnotateBlundersOnly {When game move is an obvious blunder}
 # ====== TODO To be translated ======
+translate Y BlundersNotBest {Blunders/Not Best}
+# ====== TODO To be translated ======
 translate Y AnnotateBlundersOnlyScoreChange {Analysis reports blunder, with score change from/to: }
 # ====== TODO To be translated ======
 translate Y AnnotateTitle {Configure Annotation}
@@ -1744,7 +1746,15 @@ translate Y Time {Time}
 # ====== TODO To be translated ======
 translate Y SecondsPerMove {Seconds per move}
 # ====== TODO To be translated ======
+translate Y DepthPerMove {Depth per move}
+# ====== TODO To be translated ======
+translate Y MoveControl {Move Control}
+# ====== TODO To be translated ======
 translate Y TimeLabel {Time per move}
+# ====== TODO To be translated ======
+translate Y AddVars {Add Variations}
+# ====== TODO To be translated ======
+translate Y AddScores {Add Score}
 # ====== TODO To be translated ======
 translate Y Engine {Engine}
 # ====== TODO To be translated ======

@@ -701,6 +701,8 @@ translate N AnnotateWhite {Alleen voor zetten van Wit}
 translate N AnnotateBlack {Alleen voor zetten van Zwart}
 translate N AnnotateNotBest {Als de partijzet niet de beste is.}
 translate N AnnotateBlundersOnly {Als de partijzet een blunder is}
+# ====== TODO To be translated ======
+translate N BlundersNotBest {Blunders/Not Best}
 translate N AnnotateBlundersOnlyScoreChange {Blunder analyse rapport, met scorewijziging van/naar: }
 translate N AnnotateTitle {Configureren annotatie}
 translate N AnnotateWith {Annoteren met}
@@ -1505,7 +1507,15 @@ translate N Nodes {Knooppunten}
 translate N Depth {Diepte}
 translate N Time {Tijd} 
 translate N SecondsPerMove {Seconden per zet}
+# ====== TODO To be translated ======
+translate N DepthPerMove {Depth per move}
+# ====== TODO To be translated ======
+translate N MoveControl {Move Control}
 translate N TimeLabel {Tijd per zet}
+# ====== TODO To be translated ======
+translate N AddVars {Add Variations}
+# ====== TODO To be translated ======
+translate N AddScores {Add Score}
 translate N Engine {Engine}
 translate N TimeMode {Tijd modus}
 translate N TimeBonus {Tijd + bonus}

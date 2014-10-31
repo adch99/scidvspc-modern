@@ -937,15 +937,15 @@ proc initAnnotation {n} {
 
   if  {$analysis(uci$n)} {
     frame $w.choice
-    label $w.choice.0 -text {Move Control}
-    radiobutton $w.choice.1 -variable annotate(Depth) -value 1 -text Depth -command "checkAnnotateControl $w"
-    radiobutton $w.choice.2 -variable annotate(Depth) -value 0 -text Time  -command "checkAnnotateControl $w"
+    label $w.choice.0 -textvar tr(MoveControl)
+    radiobutton $w.choice.1 -variable annotate(Depth) -value 1 -textvar tr(Depth) -command "checkAnnotateControl $w"
+    radiobutton $w.choice.2 -variable annotate(Depth) -value 0 -textvar tr(Time)  -command "checkAnnotateControl $w"
 
     pack $w.choice -side top -pady 3 
     pack $w.choice.0 $w.choice.1 $w.choice.2 -side left -expand 1 -fill x
 
     frame $w.depth -padx 10
-    label $w.depth.label -text {Depth per move}
+    label $w.depth.label -textvar tr(DepthPerMove)
     spinbox $w.depth.spDepth -width 4 -textvariable annotate(WantedDepth) -from 10 -to 30 -increment 1
 
     pack $w.depth -side top -pady 3 
@@ -973,9 +973,9 @@ proc initAnnotation {n} {
 
   ### Annotate Scores
 
-  label $w.scoreslabel -text {Add Scores}
+  label $w.scoreslabel -textvar tr(AddScores)
   radiobutton $w.scores_allmoves -textvar ::tr(AnnotateAllMoves) -variable annotate(WithScore) -value allmoves -anchor w
-  radiobutton $w.scores_blunders -text {Blunders/Not Best} -variable annotate(WithScore) -value blunders -anchor w
+  radiobutton $w.scores_blunders -textvar tr(BlundersNotBest) -variable annotate(WithScore) -value blunders -anchor w
   radiobutton $w.scores_var -textvar ::tr(GlistVars) -variable annotate(WithScore) -value var -anchor w
   radiobutton $w.scores_none -textvar ::tr(No) -variable annotate(WithScore) -value no -anchor w
   # previously  annotateType
@@ -987,7 +987,7 @@ proc initAnnotation {n} {
 
   ### Annotate Variations
 
-  label $w.anlabel -text {Add Variations}
+  label $w.anlabel -textvar tr(AddVars)
   radiobutton $w.notbest -textvar ::tr(AnnotateNotBest) -variable annotate(WithVars) -value notbest -anchor w
   radiobutton $w.blunders -textvar ::tr(AnnotateBlundersOnly) -variable annotate(WithVars) -value blunders -anchor w
   radiobutton $w.allmoves -textvar ::tr(AnnotateAllMoves) -variable annotate(WithVars) -value allmoves -anchor w
@@ -3805,7 +3805,7 @@ proc setAutomoveTime {{n 0}} {
   wm state $w withdrawn
   wm title $w "Engine thinking time"
   wm resizable $w 0 0
-  label $w.label -text "Time per move (seconds)"
+  label $w.label -textvar ::tr(AnnotateTime)
   pack $w.label -side top -pady 5 -padx 5
   entry $w.entry -width 10 -textvariable temptime -justify center -relief flat
   pack $w.entry -side top -pady 5
