@@ -297,11 +297,15 @@ proc ::tree::selectCallback { baseNumber move } {
 }
 
 ################################################################################
-# close the corresponding base if it is flagged as locked
 proc ::tree::closeTree {baseNumber} {
   global tree
   wm protocol .treeWin$baseNumber WM_DELETE_WINDOW {}
   sc_tree search -cancel all
+
+  # Hack to stop rare coredump (closing tree2 when base2 is not open and base1 is)
+  if {![sc_base inUse $baseNumber]} {
+    sc_base switch clipbase
+  }
   ::tree::mask::close .treeWin$baseNumber
   # needs closing explicitly if based open as tree and bestgames is open
   if {[winfo exists .treeBest$baseNumber]} {
