@@ -3925,6 +3925,7 @@ namespace eval CorrespondenceChess {
 				# tk_messageBox -title "Xfcc Oops" -type ok -icon warning -message $NoHTTPS
 				return 0
 			} else {
+				::tls::init -ssl3 false -ssl2 false -tls1 true
 				http::register https 443 ::tls::socket
 				set ::CorrespondenceChess::SeenHTTPS 1
 				return 1
