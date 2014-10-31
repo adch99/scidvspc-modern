@@ -93,6 +93,7 @@ proc configureFilterGraph {parent} {
   wm withdraw $w
 
   bind $w <F1> {helpWindow Graphs Filter}
+  standardShortcuts $w
   frame $w.filter
   set col 0
   set row 0
@@ -179,6 +180,7 @@ proc tools::graphs::filter::Open {} {
   ::utils::graph::create filter
 
   bind $w <F1> {helpWindow Graphs Filter}
+  standardShortcuts $w
   # bind $w.c <1> tools::graphs::filter::Switch
   bind $w.c <3> ::tools::graphs::filter::Refresh
   bind $w <Escape> "destroy $w"
@@ -450,6 +452,7 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
     # $w.c create text 25 340 -tag text2 -text {Move Number} -justify center -font font_Regular
     pack $w.c -side top -expand yes -fill both
     bind $w <F1> {helpWindow Graphs Score}
+    standardShortcuts $w
     bind $w <Configure> {
       .sgraph.c itemconfigure text -width [expr {[winfo width .sgraph.c] - 50}]
       # .sgraph.c itemconfigure text2 -width [expr {[winfo width .sgraph.c] - 50}]
@@ -596,6 +599,7 @@ proc ::tools::graphs::rating::Refresh {{player {}}} {
     # the above height, width, x, y are reset below
     pack $w.c -side top -expand yes -fill both
     bind $w <F1> {helpWindow Graphs Rating}
+    standardShortcuts $w
     bind $w <Configure> {
       .rgraph.c itemconfigure text -width [expr {[winfo width .rgraph.c] - 50} ]
       .rgraph.c coords text [expr {[winfo width .rgraph.c] / 2} ] 10
@@ -735,6 +739,7 @@ proc tools::graphs::absfilter::Open {} {
   ::utils::graph::create absfilter
 
   bind $w <F1> {helpWindow Graphs Filter}
+  standardShortcuts $w
   # bind $w.c <1> tools::graphs::absfilter::Switch
   bind $w.c <3> ::tools::graphs::absfilter::Refresh
   bind $w <Escape> "destroy $w"
