@@ -1188,7 +1188,7 @@ proc okAnnotation {n} {
   bind .configAnnotation <Destroy> {}
   destroy .configAnnotation
 
-  if {[sc_pos isAt end]} {
+  if {[sc_pos isAt vend]} {
     if {[sc_pos isAt start]} {
       # No moves in game
       cancelAutoplay

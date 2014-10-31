@@ -256,9 +256,6 @@ proc ::game::Load { selection {update 1} {raise 1}} {
   if {$update} {
     updateBoard -pgn
   }
-  updateTitle
-  updateMenuStates
-
   if {$raise && \
       ![winfo exists .tourney] && \
       ![winfo exists .twinchecker] && \
@@ -268,9 +265,8 @@ proc ::game::Load { selection {update 1} {raise 1}} {
       ![winfo exists .sm] } {
     raiseWin .
   }
-  ::tools::graphs::score::Refresh
+  refreshWindows
   ::bookmarks::AddCurrentGame
-  ::windows::gamelist::Refresh
 }
 
 ### Replaces numerous 'sc_game save [sc_game number]' around the place.

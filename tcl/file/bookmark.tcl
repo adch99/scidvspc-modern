@@ -260,9 +260,12 @@ proc ::bookmarks::Go {entry} {
       # show this game in gamelist
       set ::glistStart([sc_base current]) $best
     }
-  }
+  } else {
+    sc_move pgn $ply
+    set ::glistStart([sc_base current]) $best
 
-  refreshWindows
+    refreshWindows
+  }
   refreshSearchDBs
   ::bookmarks::AddCurrentGame
   updateBoard -pgn
