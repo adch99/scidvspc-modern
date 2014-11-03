@@ -211,9 +211,8 @@ proc ::game::LoadNumber {} {
     destroy .glnumDialog
     flipBoardForPlayerNames
     updateBoard -pgn
-    ::windows::gamelist::Refresh
+    refreshWindows
     ::bookmarks::AddCurrentGame 
-    updateTitle
   }
   dialogbutton $b.cancel -text $::tr(Cancel) -command {
     destroy .glnumDialog
