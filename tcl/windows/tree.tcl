@@ -206,6 +206,7 @@ proc ::tree::Open {{baseNumber 0}} {
   $w.f.tl tag configure greybg -background #fa1cfa1cfa1c
   $w.f.tl tag configure whitebg 
   $w.f.tl tag configure bluefg -foreground blue
+  $w.f.tl tag configure movefg -foreground purple2
   $w.f.tl tag configure nextmove -background lemonchiffon2
   #   $w.f.tl tag configure nextmove -foreground seagreen3
 
@@ -641,7 +642,7 @@ proc ::tree::displayLines { baseNumber moves } {
 
     if { $maskFile != "" && $i > 0 && $i < [expr $len - 3] } {
       if { [::tree::mask::moveExists $move] } {
-        set tagfg "bluefg"
+        set tagfg movefg
       }
     }
     if { $maskFile != "" } {
@@ -765,7 +766,7 @@ proc ::tree::displayLines { baseNumber moves } {
       # NAG tag
       $w.f.tl insert end [::tree::mask::getNag [lindex $m 0]] tagclick$idx
       # move
-      $w.f.tl insert end "[::trans [lindex $m 0] ] " [ list bluefg tagclick$idx ]
+      $w.f.tl insert end "[::trans [lindex $m 0] ] " [ list movefg tagclick$idx ]
       # comment
       set comment [lindex $m 3]
       set firstLine [ lindex [split $comment "\n"] 0 ]
@@ -1313,14 +1314,14 @@ namespace eval ::tree::mask {
   
   array set marker2image { Include ::rep::_tb_include Exclude ::rep::_tb_exclude MainLine ::tree::mask::imageMainLine Bookmark tb_bkm \
         White ::tree::mask::imageWhite Black ::tree::mask::imageBlack \
-        NewLine tb_new ToBeVerified tb_rfilter ToTrain tb_msearch Dubious tb_help ToRemove tb_cut }
+        NewLine tb_new ToBeVerified tb_rfilter ToTrain tb_msearch Dubious tb_help_small ToRemove tb_cut }
   set maxRecent 10
 }
 ################################################################################
 #
 ################################################################################
 proc ::tree::mask::open { {filename ""} {parent .}} {
-  global ::tree::mask::maskSerialized ::tree::mask::mask ::tree::mask::recentMask
+  global ::tree::mask::maskSerialized ::tree::mask::mask
 
   if {$filename == ""} {
     set types {
@@ -1340,27 +1341,33 @@ proc ::tree::mask::open { {filename ""} {parent .}} {
     set ::tree::mask::maskFile $filename
     set ::tree::mask::dirty 0
     ::tree::refresh
-
-    if { [lsearch $recentMask $filename ] == -1 } {
-      set recentMask [ linsert $recentMask 0 $filename]
-      if {[llength $recentMask] > $::tree::mask::maxRecent } {
-        set recentMask [ lreplace $recentMask  [ expr $::tree::mask::maxRecent -1 ] end ]
-      }
-      
-      # update recent masks menu entry
-      for {set i 1} {$i <= [sc_base count total]} {incr i} {
-        set w .treeWin$i
-        if { [winfo exists $w] } {
-          $w.menu.mask.recent delete 0 end
-          foreach f $::tree::mask::recentMask {
-            $w.menu.mask.recent add command -label $f -command [list ::tree::mask::open $f $w]
-          }
-        }
-      }
-    }
+::tree::mask::addRecent $filename
 ::tree::mask::updateDisplayMask
   }
 }
+
+proc ::tree::mask::addRecent {filename} {
+  global ::tree::mask::recentMask
+
+  if { [lsearch $recentMask $filename ] == -1 } {
+    set recentMask [ linsert $recentMask 0 $filename]
+    if {[llength $recentMask] > $::tree::mask::maxRecent } {
+      set recentMask [ lreplace $recentMask  [ expr $::tree::mask::maxRecent -1 ] end ]
+    }
+    
+    # update recent masks menu entry
+    for {set i 1} {$i <= [sc_base count total]} {incr i} {
+      set w .treeWin$i
+      if { [winfo exists $w] } {
+	$w.menu.mask.recent delete 0 end
+	foreach f $::tree::mask::recentMask {
+	  $w.menu.mask.recent add command -label $f -command [list ::tree::mask::open $f $w]
+	}
+      }
+    }
+  }
+}
+
 ################################################################################
 #
 ################################################################################
@@ -1392,15 +1399,19 @@ proc ::tree::mask::new {{parent .}} {
   set filename [tk_getSaveFile -filetypes $types -defaultextension ".stm" -parent $parent]
 
   if {$filename != ""} {
-    if {[file extension $filename] != ".stm" } {
-      append filename ".stm"
+    if {[file writable [file dirname $filename]]} {
+      if {[file extension $filename] != ".stm" } {
+	append filename ".stm"
+      }
+      ::tree::mask::askForSave $parent
+      set ::tree::mask::dirty 0
+      set ::tree::mask::maskFile $filename
+      array unset ::tree::mask::mask
+      array set ::tree::mask::mask {}
+      ::tree::refresh
+    } else {
+      tk_messageBox -title "Oops" -type ok -icon warning -message "File '$filename' not writeable."
     }
-    ::tree::mask::askForSave $parent
-    set ::tree::mask::dirty 0
-    set ::tree::mask::maskFile $filename
-    array unset ::tree::mask::mask
-    array set ::tree::mask::mask {}
-    ::tree::refresh
   }
 }
 ################################################################################
@@ -1431,6 +1442,8 @@ proc ::tree::mask::save {} {
   puts $f "set ::tree::mask::maskSerialized [list [array get ::tree::mask::mask]]"
   ::close $f
   set ::tree::mask::dirty 0
+  # In case it's a new mask
+  ::tree::mask::addRecent $::tree::mask::maskFile
 }
 
 

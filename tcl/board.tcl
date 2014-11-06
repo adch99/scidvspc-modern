@@ -668,6 +668,18 @@ B51OJBahl6RFpwAeeKpDXAAPo7BFVB2vtipnAG+7QiWQwEITVBfEKiAHB2rJ
 z2YYGMjEsgjJGlTXxCUCAolwQQA7
 }
 
+# for tree mask
+image create photo tb_help_small -data {
+R0lGODlhEAAQAKUqAERq5KS69HSS7Nzm/Fx+5LzO9Iym7PT2/ISe7GyK5Ex2
+5LTG9Ozu/KzC9ISa7GSG5Mza9Pz+/Exy5Ky69HyS7OTm/GSC5MTO9Jyy7Pz6
+/Iyi7HSO7FR25ERu5FyC5JSq7PT6/ISi7GyO7LzK9Ozy/Ky+9HyW7OTq/MTS
+9FR65P//////////////////////////////////////////////////////
+/////////////////////////////////yH5BAEAAD8ALAAAAAAQABAAAAZK
+wJ9QeFiYTAvGcCk0AAAmxDORYf4uz5Lw0gEYrE8Q8wkGlK3oAxm9BG2g7CHp
+eYoTLQCPXfgk7flmfz9rfwcHgj8YGIiEewICaEEAOw==
+}
+
+
 image create photo b_bargraph -data {
 R0lGODlhGAAYAKEAAAAAAP/6zf///wAAACH5BAEKAAMALAAAAAAYABgAAAJf
 nI+pCO0PIzBA2ItznqPqr3EeSAoiKWEnCASuO5oU+sLqzNZBvH5tzZulfq9g
