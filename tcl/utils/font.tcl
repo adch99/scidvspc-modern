@@ -390,9 +390,10 @@ proc FontBiggerSmaller {incr} {
   global fd_size fontOptions graphFigurineAvailable
 
   set fd_size [font configure font_Regular -size]
+  set small_delta [expr {$fd_size - [font configure font_Small -size]}]
   incr fd_size $incr
   if {$fd_size < 5} { set fd_size 5 }
-  set small_size [expr {$fd_size - 2}]
+  set small_size [expr {$fd_size - $small_delta}]
 
   font configure font_Bold -size $fd_size
   font configure font_Regular -size $fd_size

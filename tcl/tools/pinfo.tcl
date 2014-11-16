@@ -83,6 +83,7 @@ proc playerInfo {{player ""} {raise 0}} {
     bind $w <Escape> "focus .main ; destroy $w"
     bind $w <F1> {helpWindow PInfo}
     standardShortcuts $w
+    bindWheeltoFont $w
 
     setWinSize $w
     update
