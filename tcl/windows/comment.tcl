@@ -114,22 +114,22 @@ proc ::commenteditor::Open {} {
   # +-- WhiteCrushing
   # --+ BlackCrushing
 
-  label $w.nf.label -font font_Regular -textvar ::tr(AnnotationSymbols)
-  pack $w.nf -side top -pady 2 -padx 5 -fill x 
+  # label $w.nf.label -font font_Regular -textvar ::tr(AnnotationSymbols)
+  # pack $w.nf -side top -pady 2 -padx 5 -fill x 
   #addHorizontalRule $w
 
   button $w.nf.tf.clear -textvar ::tr(Clear) -font font_Small -pady 1 -command "
     $w.nf.tf.text delete 0 end
     focus $w.nf.tf.text"
   set helpMessage(E,$w.nf.tf.clear) {Clear all symbols for this move}
-  pack $w.nf.label -side top -expand 0
+  # pack $w.nf.label -side top -expand 0
   pack $w.nf.tf -side top -fill x -expand 1
   pack $w.nf.tf.text -side left -fill x -expand 1 -padx 8
   pack $w.nf.tf.clear -side right
   pack $w.nf.b -side top
 
-  label $w.cflabel -font font_Regular -textvar ::tr(Comment)
-  pack $w.cflabel -side top -pady 2
+  # label $w.cflabel -font font_Regular -textvar ::tr(Comment)
+  # pack $w.cflabel -side top -pady 2
 
   ### Comment frame
 
@@ -308,7 +308,7 @@ proc ::commenteditor::toggleBoard {} {
   if { $::commenteditor::showBoard == 0} {
     # show everything
     catch {::board::update $w.insertBoard.board [sc_pos board]}
-    pack $w.nf -side top -pady 2 -padx 5 -fill x -before $w.cflabel
+    pack $w.nf -side top -pady 2 -padx 5 -fill x -before $w.cf
     pack $w.markFrame -side right -fill both -padx 5 -anchor n -before .commentWin.nf
   } else {
     if { $::commenteditor::showBoard == 1} {

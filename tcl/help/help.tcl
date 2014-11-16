@@ -1293,8 +1293,8 @@ move</b>, then variations may be added. This note also applies to the <b>
 set helpTitle(Comment) "Comment Editor"
 set helpText(Comment) {<h1>The Comment Editor</h1>
   <p>
-  The <run ::commenteditor::Open><green>Comment Editor</green></run> lets you annotate games
-  with comments and <a NAGs>annotations</a>. It also has a small board for drawing arrows (etc). <i>These three sections can be shown/hidden by pressing the <img bookmark_down> button.</i>
+  The <run ::commenteditor::Open><green>Comment Editor</green></run> lets you add
+  comments and <a NAGs>annotations</a>, and also includes a small board for drawing arrows (etc). <i>These three sections can be shown/hidden by pressing the <img bookmark_down> button.</i>
   </p>
 
   <h3>Comments</h3>
@@ -1303,18 +1303,18 @@ set helpText(Comment) {<h1>The Comment Editor</h1>
   You can add comments by typing them in the entry box (where
   the Control-A, Control-Z and Control-Y shortcuts can be used to
   manipulate text and undo changes).
-  Comments are <b>automatically stored</b> whenever you move to another position in the game.
-  Control-Enter saves the comment and closes the window.
+  Comments are <b>automatically stored</b> whenever you move to another position in the game,
+  or move the mouse away from the Comment Editor.
   </p>
 
   <p>
   Comments may also exist at the start of a game or variation.
-  To add a comment <b>prefixing a variation</b>,
-  go to the first var move and hit the left arrow key before adding 
-  the comment.
+  To add a comment <b>prefixing a variation</b>
+  go to the variation's first move; then move back one move before entering the comment.
   </p>
 
-  <p><i>You can move the game forward and back by using the wheel mouse, or control+left/right keys.</i></p>
+  <p><i>With the focus in the Comment Editor, one can move the game forward and back by pressing the control+left/right keys. Control-Enter saves the comment and closes the window.</i></p>
+  
 
   <h3>Annotation Symbols</h3>
   <p>
@@ -1371,7 +1371,7 @@ options.</p>
   will color d6 red and b5 with the dark-blue color #000070.
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.12, March 2014</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.14, Nov 2014</footer></p>
 }
 
 set helpTitle(Crosstable) "Crosstable Window"
