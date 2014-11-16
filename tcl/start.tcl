@@ -151,7 +151,7 @@ set ::sergame::wtime 5
 set ::sergame::btime 5
 set ::sergame::winc 10
 set ::sergame::binc 10
-set ::commenteditor::showBoard 0
+set ::commenteditor::showBoard 1
 set ::windows::gamelist::widths {}
 set ::windows::gamelist::findcase 1
 set ::windows::gamelist::showButtons 1

@@ -1294,7 +1294,7 @@ set helpTitle(Comment) "Comment Editor"
 set helpText(Comment) {<h1>The Comment Editor</h1>
   <p>
   The <run ::commenteditor::Open><green>Comment Editor</green></run> lets you annotate games
-  with comments and <a NAGs>annotations</a>.
+  with comments and <a NAGs>annotations</a>. It also has a small board for drawing arrows (etc). <i>These three sections can be shown/hidden by pressing the <img bookmark_down> button.</i>
   </p>
 
   <h3>Comments</h3>

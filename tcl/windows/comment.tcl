@@ -68,9 +68,6 @@ proc ::commenteditor::Open {} {
   # bind $w <Control-s> {}
 
   set mark [frame $w.markFrame]
-  if { $::commenteditor::showBoard } {
-    pack $mark -side right -fill both -padx 5 -anchor n
-  }
 
   ### NAG frame
 
@@ -160,18 +157,18 @@ proc ::commenteditor::Open {} {
   pack $w.cf.scroll -side right -fill y
   pack $w.cf.text -side left -expand 1 -fill both
 
+  # pack nf and makFrame if necessary
+  ::commenteditor::toggleBoard
+
   ### Main buttons
 
   frame $w.b
   # todo: make this frame more persistant than others
   pack $w.b -side top -ipady 4 -padx 2 -pady 4 -fill x
 
-  button $w.b.hide  \
-      -command "::commenteditor::toggleBoard $mark"
-  if { $::commenteditor::showBoard } {
-    $w.b.hide configure -image bookmark_up
-  } else {
-    $w.b.hide configure -image bookmark_down
+  button $w.b.hide -image bookmark_down -command {
+    set ::commenteditor::showBoard [expr {($::commenteditor::showBoard + 1) % 3}]
+    ::commenteditor::toggleBoard
   }
 
   dialogbutton $w.b.ok -text Ok -font font_Small \
@@ -303,19 +300,24 @@ proc ::commenteditor::Open {} {
   ::createToplevelFinalize $w
 }
 
-proc ::commenteditor::toggleBoard {w} {
+proc ::commenteditor::toggleBoard {} {
 
-  set ::commenteditor::showBoard [ expr ! $::commenteditor::showBoard ]
+  set w .commentWin
 
-  if { $::commenteditor::showBoard } {
-    ::board::update $w.insertBoard.board [sc_pos board]
-    .commentWin.b.hide configure -image bookmark_up
-    pack $w -side right -fill both -padx 5 -anchor n -before .commentWin.nf
+  if { $::commenteditor::showBoard == 0} {
+    # show everything
+    catch {::board::update $w.insertBoard.board [sc_pos board]}
+    pack $w.nf -side top -pady 2 -padx 5 -fill x -before $w.cflabel
+    pack $w.markFrame -side right -fill both -padx 5 -anchor n -before .commentWin.nf
   } else {
-    .commentWin.b.hide configure -image bookmark_down
-    pack forget $w
+    if { $::commenteditor::showBoard == 1} {
+      # hide board
+      catch {pack forget $w.markFrame}
+    } else {
+      # hide notation frame
+      catch {pack forget $w.nf}
+    }
   }
-
 }
 
 # ::commenteditor::SetMarkColor --
