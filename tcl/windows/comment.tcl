@@ -147,6 +147,8 @@ proc ::commenteditor::Open {} {
   bind $w.cf.text <Control-a> {.commentWin.cf.text tag add sel 0.0 end-1c ; break}
   bind $w <Control-Left>  {::commenteditor::storeComment; ::move::Back}
   bind $w <Control-Right> {::commenteditor::storeComment; ::move::Forward}
+  bind $w <Control-Home> {::commenteditor::storeComment; ::move::Start}
+  bind $w <Control-End>  {::commenteditor::storeComment; ::move::End}
   bindWheeltoFont $w
 
   bind $w.cf.text <Control-z> {catch {.commentWin.cf.text edit undo} ; break}; # seems automatic anyway

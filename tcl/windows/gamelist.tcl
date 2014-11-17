@@ -528,7 +528,7 @@ proc ::windows::gamelist::Open {} {
 
   pack $w.b.findcase -side right
   pack $w.b.find -side right ; # -expand 1 -fill x
-  pack $w.b.filter $w.b.reset $w.b.negate -side right 
+  pack $w.b.filter $w.b.negate $w.b.reset -side right 
   pack $w.b.save $w.b.bkm $w.b.gfirst $w.b.gprev $w.b.gnext $w.b.glast -side left
 
   ### Bottom row of buttons , etc
