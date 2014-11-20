@@ -10,7 +10,7 @@ namespace eval ::utils::graph {}
 #  -height:    height of graph in canvas units.
 #  -xtop:      x-coord of top-left graph corner in canvas.
 #  -ytop:      y-coord of top-left graph corner in canvas.
-#  -background: background color in graph.
+#  -background: (UNUSED) background color in graph.
 #  -font:      font of axis text.
 #  -textcolor: color of axis text.
 #  -ticksize:  length of ticks on axes, in canvas units.
@@ -242,8 +242,9 @@ proc ::utils::graph::plot_axes {graph} {
     set $attr $_data($graph,$attr)
   }
 
-  $canvas create rectangle $xminc $yminc $xmaxc $ymaxc -outline $tickcolor \
-    -fill $_data($graph,background) -tag $tag
+  ### Raising graph outline wont work if "-fill" is used for background colour
+  $canvas create rectangle $xminc $yminc $xmaxc $ymaxc -outline $tickcolor -tag "$tag outline"
+  # -fill $_data($graph,background)
 
   set brect $_data($graph,brect)
   for {set i 0} {$i < [llength $brect]} {incr i} {
@@ -462,6 +463,8 @@ proc ::utils::graph::plot_data {graph} {
       }
     }
   }
+  ### Raising graph outline wont work if "-fill" is used for background colour
+  $_data($graph,canvas) raise outline
 }
 
 
@@ -597,7 +600,10 @@ proc ::utils::graph::set_range {graph} {
   set _data($graph,axmin) [expr {floor($xmin/$xtick) * $xtick}]
   set _data($graph,axmax) [expr {floor($xmax/$xtick) * $xtick + $xtick}]
   set _data($graph,aymin) [expr {floor($ymin/$ytick) * $ytick}]
-  set _data($graph,aymax) [expr {floor($ymax/$ytick) * $ytick + $ytick}]
+  set _data($graph,aymax) [expr {floor($ymax/$ytick) * $ytick}]
+  if {[expr {floor($ymax/$ytick)*$ytick}] != $ymax} {
+    set _data($graph,aymax) [expr $_data($graph,aymax) + $ytick]
+  }
 
   # Explicitly set boundaries override the detected ranges:
   foreach coord {xmin xmax ymin ymax} {
