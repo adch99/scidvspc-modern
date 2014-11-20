@@ -514,7 +514,7 @@ proc ::tree::dorefresh { baseNumber } {
   $w.buttons.stop configure -state normal
   set tree(refresh) 1
 
-  update
+  update idletasks
 
   if { $tree(fastmode$baseNumber) == 0 } {
     set fastmode 0

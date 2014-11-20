@@ -502,15 +502,11 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
   $w.c itemconfigure text -text "[sc_game info white] $whiteelo - [sc_game info black] $blackelo\n[sc_game info site]  [sc_game info date]"
     }
   }
-  busyCursor $w
-  update
   #Klimmek: Invert white/black Score in Score graph
   catch {::utils::graph::data score data -color $linecolor -points 0 -lines 0 -bars 1 \
              -barwidth .7 -outline grey \
              -coords [sc_game scores $::tools::graphs::score::White $::tools::graphs::score::Black]}
   ::utils::graph::redraw score
-  unbusyCursor $w
-  update
 }
 
 proc ::tools::graphs::score::ConfigMenus {{lang ""}} {

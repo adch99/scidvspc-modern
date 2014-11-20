@@ -14325,6 +14325,7 @@ db->bbuf->Empty();
     			update--;
     			if (update == 0) {
     				update = updateStart;
+				// updateProgressBar does a full update here to keep UI responsive
     				updateProgressBar (ti, i, base->numGames);
     				if (interruptedProgress()) {
     					Tcl_SetResult (ti, "interrupted", TCL_STATIC);
@@ -14337,13 +14338,11 @@ db->bbuf->Empty();
     			}
     		}
 
-#ifndef WINCE
             const byte * oldFilterData = base->treeFilter->GetOldDataTree();
 
             // if the game is not already in the filter, continue
             if (fastMode && base->treeFilter->isValidOldDataTree )
                if ( oldFilterData[i] == 0) { continue; }
-#endif
 
     		IndexEntry* ie = base->idx->FetchEntry (i);
     		if (ie->GetLength() == 0) { skipcount++; continue; }

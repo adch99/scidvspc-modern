@@ -258,8 +258,7 @@ proc refreshWindows {} {
   # done in updateBoard
   # ::tree::refresh
   ::windows::stats::Refresh
-puts refreshWindows
-::tools::graphs::score::Refresh
+  ::tools::graphs::score::Refresh
   # too slow to refresh all the time
   # ::crosstab::Refresh
   ::plist::refresh

@@ -30,14 +30,14 @@ set unixOS	[expr {$tcl_platform(platform) == "unix"}]
 
 # debugging a procedure (can affect performance/toolbar)
 if {0} {
-  set procname focus
+  set procname update
 
   rename $procname oldprocname
   proc $procname {args} {
     if {$::windowsOS} {
       catch {::splash::add "$procname $args"}
     } else {
-      puts "$::procname $args"
+      puts "$::procname $args ([info  level [expr [info level] -1]])"
     }
     eval oldprocname $args
   }
@@ -1807,7 +1807,6 @@ proc ::splash::add {text {tag {indent}}} {
 	puts stderr $text
       }
     }
-    update
   }
 }
 

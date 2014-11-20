@@ -324,7 +324,6 @@ proc progressWindow {args} {
 
   sc_progressBar $w.c bar 401 21 time
 
-  update
   placeWinOverParent $w .
   update idletasks
   wm deiconify $w
@@ -386,7 +385,7 @@ proc updateProgressWindow {done total} {
       [expr {$elapsed / 60}] [expr {$elapsed % 60}] \
       [expr {$estimated / 60}] [expr {$estimated % 60}]]
   $w.c itemconfigure time -text $t
-  update
+  update idletasks
 }
 
 proc closeProgressWindow {} {

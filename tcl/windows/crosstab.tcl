@@ -322,7 +322,6 @@ proc ::crosstab::Open {} {
 
   bind $w <Configure> "recordWinSize $w"
   ::createToplevelFinalize $w
-  update
 }
 
 proc ::crosstab::setFilter {{round {}}} {

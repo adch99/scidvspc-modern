@@ -86,7 +86,6 @@ proc playerInfo {{player ""} {raise 0}} {
     bindWheeltoFont $w
 
     setWinSize $w
-    update
     catch {wm state $w normal}
     bind $w <Configure> "recordWinSize $w"
     ::createToplevelFinalize $w

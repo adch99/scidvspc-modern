@@ -629,8 +629,6 @@ proc ::windows::gamelist::Open {} {
 
   set ::windows::gamelist::goto 1
 
-  update
-
   ::windows::gamelist::Refresh
   ::windows::switcher::Open
   catch {wm state $w normal}
