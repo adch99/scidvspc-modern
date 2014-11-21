@@ -10,7 +10,7 @@ namespace eval ::utils::graph {}
 #  -height:    height of graph in canvas units.
 #  -xtop:      x-coord of top-left graph corner in canvas.
 #  -ytop:      y-coord of top-left graph corner in canvas.
-#  -background: (UNUSED) background color in graph.
+#  -background: background color in graph.
 #  -font:      font of axis text.
 #  -textcolor: color of axis text.
 #  -ticksize:  length of ticks on axes, in canvas units.
@@ -37,7 +37,7 @@ set ::utils::graph::_options(graph) {
 }
 set ::utils::graph::_defaults(graph) \
   { -width 400 -height 300 -xtop 50 -ytop 30 -ticksize 5 -textgap 2 \
-    -xtick 5 -ytick 5 -tickcolor black -font fixed -background white \
+    -xtick 5 -ytick 5 -tickcolor black -font fixed -background $::defaultGraphBackgroud \
       -canvas {} -hline {} -vline {} -textcolor black \
       -xlabels {} -ylabels {} -brect {} -highx {}}
 
@@ -242,9 +242,10 @@ proc ::utils::graph::plot_axes {graph} {
     set $attr $_data($graph,$attr)
   }
 
-  ### Raising graph outline wont work if "-fill" is used for background colour
+  # Two border rectangles
+  # One for outline (which gets raised after graph is drawn), one for fill
   $canvas create rectangle $xminc $yminc $xmaxc $ymaxc -outline $tickcolor -tag "$tag outline"
-  # -fill $_data($graph,background)
+  $canvas create rectangle $xminc $yminc $xmaxc $ymaxc -fill $_data($graph,background) -tag "$tag fill"
 
   set brect $_data($graph,brect)
   for {set i 0} {$i < [llength $brect]} {incr i} {
@@ -463,7 +464,6 @@ proc ::utils::graph::plot_data {graph} {
       }
     }
   }
-  ### Raising graph outline wont work if "-fill" is used for background colour
   $_data($graph,canvas) raise outline
 }
 
@@ -600,9 +600,12 @@ proc ::utils::graph::set_range {graph} {
   set _data($graph,axmin) [expr {floor($xmin/$xtick) * $xtick}]
   set _data($graph,axmax) [expr {floor($xmax/$xtick) * $xtick + $xtick}]
   set _data($graph,aymin) [expr {floor($ymin/$ytick) * $ytick}]
-  set _data($graph,aymax) [expr {floor($ymax/$ytick) * $ytick}]
-  if {[expr {floor($ymax/$ytick)*$ytick}] != $ymax} {
-    set _data($graph,aymax) [expr $_data($graph,aymax) + $ytick]
+  set _data($graph,aymax) [expr {floor($ymax/$ytick) * $ytick +$ytick}]
+
+  # Using ceil() above to score graph breaks ratings graph, so add a
+  # hack to make handle score grph
+  if {$graph == "score" && $_data($graph,aymax) == "11.0"} {
+    set _data($graph,aymax) 10.0
   }
 
   # Explicitly set boundaries override the detected ranges:

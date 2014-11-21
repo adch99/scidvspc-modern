@@ -50,6 +50,12 @@ proc initBackgroundColour {colour} {
     # Updating padding in tree would be nice, but now they have to close and re-open tree
     # if {[winfo exists .baseWin.c]} { .baseWin.c configure -bg $temp }
     recurseBackgroundColour . $colour
+    set ::defaultGraphBackgroud $colour
+    foreach i {.sgraph .rgraph .fgraph .afgraph} {
+      if {[winfo exists $i.c]} {
+        $i.c itemconfigure fill -fill $colour
+      }
+    }
 }
 
 proc recurseBackgroundColour {w colour} {

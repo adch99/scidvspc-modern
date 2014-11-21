@@ -123,6 +123,7 @@ foreach ns {
 set ::MAX_GAMES [sc_info limit games]
 set ::pause 0
 set ::defaultBackground white
+set ::defaultGraphBackgroud white
 set ::enableBackground 0
 set ::tacgame::threshold 0.9
 set ::tacgame::levelMin 1200
