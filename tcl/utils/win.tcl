@@ -562,10 +562,16 @@ proc ::docking::__dock {wnd} {
 proc ::docking::add_tab {path args} {
   # (args currently unused)
   variable tbs
+  set chummy ""
   if { $::docking::layout_dest_notebook == ""} {
     ### Scan all tabs to find the most suitable
     set dsttab {}
 
+  if { [scan $path ".fdocktreeBest%d" base ] == 1 && \
+       [set dsttab [::docking::find_tbn .fdocktreeWin$base]] != ""} {
+    set chummy .fdocktreeWin$base
+    # dsttab is set to .fdocktreeWin$base
+  } else {
     foreach tb [array names tbs] {
       # Note - $x, $y, $h are currently never used as criteria
       set x [winfo rootx $tb]
@@ -590,7 +596,7 @@ proc ::docking::add_tab {path args} {
         set _x $x
         set _y $y
         set _w $w
-	set _tabcount $tabcount
+        set _tabcount $tabcount
         # hack to give fics another tab
         # if {$tb == ".nb"} {set _w 0}
       } elseif { [expr $rel] } {
@@ -598,15 +604,22 @@ proc ::docking::add_tab {path args} {
         set _x $x
         set _y $y
         set _w $w
-	set _tabcount $tabcount
+        set _tabcount $tabcount
       }
     }
+  }
   } else  {
     set dsttab $::docking::layout_dest_notebook
   }
 
   set title $path
   eval [list $dsttab add $path] $args -text "$title"
+  if {$chummy != ""} {
+    # Insert path next to it's friend
+    # But sometimes it doesnt insert immediately after ???
+    $dsttab insert $path [expr [$dsttab index $chummy] + 1]
+  }
+
   setMenuMark $dsttab $path
   $dsttab select $path
   # Make new tab active
