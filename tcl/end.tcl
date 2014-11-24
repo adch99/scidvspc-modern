@@ -1859,7 +1859,7 @@ if {$loadAtStart(eco)} {
 set spellCheckFileExists 0
 if {$loadAtStart(spell)} {
   if {[catch {sc_name read $spellCheckFile} result]} {
-    ::splash::add "Unable to load the default spellcheck file: $spellCheckFile"
+    ::splash::add "Unable to load the default spellcheck file: $spellCheckFile" error
   } else {
     ::splash::add "Spellcheck file \"$spellCheckFile\" loaded:"
     ::splash::add "    [lindex $result 0] players, [lindex $result 1] events, [lindex $result 2] sites, [lindex $result 3] rounds."

@@ -11927,18 +11927,179 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         lastPlayerName = strDuplicate (playerName);
     }
 
-    // Try to find player name in this database:
-    idNumberT id = 0;
-    if (db->nb->FindExactName (NAME_PLAYER, playerName, &id) != OK) {
-        if (!ratingsOnly && playerName[0]) {
-            Tcl_AppendResult (ti, "The name \"", playerName,
-                              "\" does not exist in this database.", NULL);
-        }
-        return TCL_OK;
-    }
-
     if (!playerName[0]) 
         return TCL_OK;
+
+    // Try to find player name in this database:
+    idNumberT id = 0;
+
+    errorT found = db->nb->FindExactName (NAME_PLAYER, playerName, &id);
+
+    if (found != OK && ratingsOnly) 
+       return TCL_OK;
+
+    char temp  [500];
+    const char * newline = (htextOutput ? "<br>" : "\n");
+    const char * startHeading = (htextOutput ? "<darkblue>" : "");
+    const char * endHeading = (htextOutput ? "</darkblue>" : "");
+    const char * startBold = (htextOutput ? "<b>" : "");
+    const char * endBold = (htextOutput ? "</b>" : "");
+
+    if (!ratingsOnly) {
+      Tcl_AppendResult (ti, startBold, playerName, endBold, newline, newline, NULL);
+
+      // Show title, country, etc if listed in player spellcheck file:
+      SpellChecker * spChecker = spellChecker[NAME_PLAYER];
+      if (spChecker != NULL) {
+	  const char *text;
+	  int i;
+
+	  if ((text = spChecker->GetComment (playerName))) {
+
+	    char t_title   [500] = "";
+	    char t_country [500] = "";
+	    char t_year    [500] = "";
+	    char t_elo     [500] = "";
+	    char *mark,*mark2;
+	    int count;
+
+	    // Comment format is " TITLE, COUNTRY{/COUNTRY}, [ELO], YEAR-BORN"
+
+	    // For debugging
+	    // Tcl_AppendResult (ti, "  ", text, newline, NULL);
+
+	    i = sscanf (text, " %s %s %s %s", t_title , t_country, t_elo, t_year);
+
+	    // title
+
+
+	    mark = t_title ;
+	    count = 0;
+
+	    while (mark) {
+	      // extra titles are '+' together, so keep processing till there's no more '+'
+	      if ((mark = (char*) strFirstChar (t_title, '+'))) {
+		mark[0] = 0;
+	      }
+
+	      // lookup in titleTable
+	      i = 0;
+	      while (titleTable[i].id[0] != 0) {
+		if (strCaseCompare( titleTable[i].id , t_title) == 0)
+		      break;
+		i++;
+	      };
+	      if (titleTable[i].id[0] != 0) {
+		// this is a little confusing, just to get the multiple "titles" on one line
+		if (count==0 && mark) 
+		  Tcl_AppendResult (ti, startHeading, translate (ti,"Title"), ":	", endHeading, titleTable[i].data, NULL);
+		else {
+		  if (count==0)
+		    Tcl_AppendResult (ti, startHeading, translate (ti,"Title"), ":	", endHeading, titleTable[i].data, "  ", t_elo, newline,  NULL);
+		  else {
+		    if (mark)
+		      Tcl_AppendResult (ti, ",  ", titleTable[i].data, NULL);
+		    else
+		      Tcl_AppendResult (ti, ",  ", titleTable[i].data, "  ", t_elo, newline,  NULL);
+		  }
+		}
+		count++;
+	      } else {
+		if (t_title[0] == '-') {
+		  if ((mark2 = (char*)strFirstChar (t_elo, ']'))) {
+		    mark2[0] = 0;
+		  }
+		  mark2 = t_elo;
+		  if (mark2[0] == '[')
+		    mark2++;
+		  Tcl_AppendResult (ti, startHeading, translate (ti,"Elo"), ":	", endHeading, mark2, newline, NULL);
+		} else {
+		  Tcl_AppendResult (ti, startHeading, translate (ti,"Title"), ":	", endHeading, t_title, "  ", t_elo, newline, NULL);
+		}
+	      }
+
+	      if (mark) {
+		// Copy from after the '+' back into t_title, and repeat
+		// - mark is an index into t_title, so 'strcpy (t_title, mark+1)' isnt very safe
+		strcpy (temp, mark+1);
+		strcpy (t_title,temp);
+	      }
+	    }
+
+	    // lookup in countryTable
+	    mark = t_country ;
+	    count = 0;
+
+	    while (mark) {
+	      // extra countries are '/' together, so keep processing till there's no more '/'
+	      if ((mark = (char*) strFirstChar (t_country, '/'))) {
+		mark[0] = 0;
+	      }
+
+	      // lookup in countryTable
+	      i = 0;
+	      while (countryTable[i].id[0] != 0) {
+		if (strCaseCompare( countryTable[i].id , t_country) == 0)
+		      break;
+		i++;
+	      };
+
+	      if (countryTable[i].id[0] != 0) {
+		// use proper country name
+		strcpy (temp, countryTable[i].data);
+	      } else {
+		// use three letter code
+		strcpy (temp, t_country);
+	      }
+
+	      if (t_country[0] != '-') {
+		if (count==0 && !mark) 
+		  Tcl_AppendResult (ti, startHeading, translate (ti,"Country"), ":	", endHeading, temp , newline, NULL);
+		else {
+		  if (count==0)
+		    Tcl_AppendResult (ti, startHeading, translate (ti,"Country"), ":	", endHeading, temp , NULL);
+		  else {
+		    if (mark)
+		      Tcl_AppendResult (ti, ",  ", temp , NULL);
+		    else
+		      Tcl_AppendResult (ti, ",  ", temp , newline , NULL);
+		  }
+		}
+	      }
+	      count++;
+
+	      if (mark) {
+		strcpy (temp, mark+1);
+		strcpy (t_country,temp);
+	      }
+	    }
+
+	    // Birthyear
+	    if (*t_year) {
+	      Tcl_AppendResult (ti, startHeading, "Born:	", endHeading, t_year, newline, NULL);
+	    }
+
+	}
+
+	// biography
+	const bioNoteT * note = spChecker->GetBioData (playerName);
+	if (note != NULL) {
+	    Tcl_AppendResult (ti, startHeading, translate (ti, "Biography"), ":", endHeading, newline, NULL);
+	    while (note != NULL) {
+		Tcl_AppendResult (ti, "	", note->text, newline, NULL);
+		note = note->next;
+	    }
+	} 
+
+	if (text && *text) Tcl_AppendResult (ti, newline, NULL);
+      }
+
+    }
+
+    if (found != OK) {
+      // Tcl_AppendResult (ti, "The name \"", playerName, "\" does not exist in this database.", NULL);
+      return TCL_OK;
+    }
 
     // Try to find opponent in this database:
     idNumberT opponentId = 0;
@@ -12104,17 +12265,8 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     if (setFilter)
 	setMainFilter(db);
 
-    char temp  [500];
     uint score, percent;
     colorT color;
-    const char * newline = (htextOutput ? "<br>" : "\n");
-    const char * startHeading = (htextOutput ? "<darkblue>" : "");
-    const char * endHeading = (htextOutput ? "</darkblue>" : "");
-    const char * startBold = (htextOutput ? "<b>" : "");
-    const char * endBold = (htextOutput ? "</b>" : "");
-#ifndef WINCE
-    SpellChecker * spChecker = spellChecker[NAME_PLAYER];
-#endif
 
     char trWhite[128];
     char trBlack[128];
@@ -12142,154 +12294,6 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     const char * fmt = "%s  %-*s %3u%c%02u%%   +%s%4u%s  -%s%4u%s  =%s%4u%s  %4u%c%c /%s%4u%s";
 
     if (ratingsOnly) { goto doRatings; }
-    Tcl_AppendResult (ti, startBold, playerName, endBold, newline, newline, NULL);
-
-    // Show title, country, etc if listed in player spellcheck file:
-#ifndef WINCE
-    if (spChecker != NULL) {
-        const char *text;
-	int i;
-
-        if ((text = spChecker->GetComment (playerName))) {
-
-	  char t_title   [500] = "";
-	  char t_country [500] = "";
-	  char t_year    [500] = "";
-	  char t_elo     [500] = "";
-	  char *mark,*mark2;
-	  int count;
-
-	  // Comment format is " TITLE, COUNTRY{/COUNTRY}, [ELO], YEAR-BORN"
-
-	  // For debugging
-	  // Tcl_AppendResult (ti, "  ", text, newline, NULL);
-
-	  i = sscanf (text, " %s %s %s %s", t_title , t_country, t_elo, t_year);
-
-	  // title
-
-
-          mark = t_title ;
-          count = 0;
-
-          while (mark) {
-	    // extra titles are '+' together, so keep processing till there's no more '+'
-	    if ((mark = (char*) strFirstChar (t_title, '+'))) {
-	      mark[0] = 0;
-	    }
-
-	    // lookup in titleTable
-	    i = 0;
-	    while (titleTable[i].id[0] != 0) {
-	      if (strCaseCompare( titleTable[i].id , t_title) == 0)
-		    break;
-	      i++;
-	    };
-	    if (titleTable[i].id[0] != 0) {
-	      // this is a little confusing, just to get the multiple "titles" on one line
-	      if (count==0 && mark) 
-		Tcl_AppendResult (ti, startHeading, translate (ti,"Title"), ":	", endHeading, titleTable[i].data, NULL);
-	      else {
-                if (count==0)
-		  Tcl_AppendResult (ti, startHeading, translate (ti,"Title"), ":	", endHeading, titleTable[i].data, "  ", t_elo, newline,  NULL);
-		else {
-		  if (mark)
-		    Tcl_AppendResult (ti, ",  ", titleTable[i].data, NULL);
-		  else
-		    Tcl_AppendResult (ti, ",  ", titleTable[i].data, "  ", t_elo, newline,  NULL);
-                }
-              }
-              count++;
-	    } else {
-	      if (t_title[0] == '-') {
-		if ((mark2 = (char*)strFirstChar (t_elo, ']'))) {
-		  mark2[0] = 0;
-		}
-		mark2 = t_elo;
-		if (mark2[0] == '[')
-		  mark2++;
-		Tcl_AppendResult (ti, startHeading, translate (ti,"Elo"), ":	", endHeading, mark2, newline, NULL);
-	      } else {
-		Tcl_AppendResult (ti, startHeading, translate (ti,"Title"), ":	", endHeading, t_title, "  ", t_elo, newline, NULL);
-	      }
-	    }
-
-            if (mark) {
-	      // Copy from after the '+' back into t_title, and repeat
-	      // - mark is an index into t_title, so 'strcpy (t_title, mark+1)' isnt very safe
-	      strcpy (temp, mark+1);
-	      strcpy (t_title,temp);
-            }
-	  }
-
-	  // lookup in countryTable
-          mark = t_country ;
-          count = 0;
-
-          while (mark) {
-	    // extra countries are '/' together, so keep processing till there's no more '/'
-	    if ((mark = (char*) strFirstChar (t_country, '/'))) {
-	      mark[0] = 0;
-	    }
-
-	    // lookup in countryTable
-	    i = 0;
-	    while (countryTable[i].id[0] != 0) {
-	      if (strCaseCompare( countryTable[i].id , t_country) == 0)
-		    break;
-	      i++;
-	    };
-
-	    if (countryTable[i].id[0] != 0) {
-	      // use proper country name
-	      strcpy (temp, countryTable[i].data);
-	    } else {
-	      // use three letter code
-	      strcpy (temp, t_country);
-	    }
-
-	    if (t_country[0] != '-') {
-	      if (count==0 && !mark) 
-		Tcl_AppendResult (ti, startHeading, translate (ti,"Country"), ":	", endHeading, temp , newline, NULL);
-	      else {
-		if (count==0)
-		  Tcl_AppendResult (ti, startHeading, translate (ti,"Country"), ":	", endHeading, temp , NULL);
-		else {
-		  if (mark)
-		    Tcl_AppendResult (ti, ",  ", temp , NULL);
-		  else
-		    Tcl_AppendResult (ti, ",  ", temp , newline , NULL);
-		}
-	      }
-            }
-            count++;
-
-            if (mark) {
-	      strcpy (temp, mark+1);
-	      strcpy (t_country,temp);
-            }
-	  }
-
-	  // Birthyear
-          if (*t_year) {
-	    Tcl_AppendResult (ti, startHeading, "Born:	", endHeading, t_year, newline, NULL);
-	  }
-
-      }
-
-      // biography
-      const bioNoteT * note = spChecker->GetBioData (playerName);
-      if (note != NULL) {
-	  Tcl_AppendResult (ti, startHeading, translate (ti, "Biography"), ":", endHeading, newline, NULL);
-	  while (note != NULL) {
-	      Tcl_AppendResult (ti, "	", note->text, newline, NULL);
-	      note = note->next;
-	  }
-      } 
-
-      if (text && *text) Tcl_AppendResult (ti, newline, NULL);
-    }
-#endif
 
     sprintf (temp, "%s%u %s%s",
              htextOutput ? "<green><run sc_name info -faA {}; ::playerInfoRefresh>" : "",
