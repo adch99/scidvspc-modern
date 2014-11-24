@@ -307,6 +307,7 @@ namespace eval fics {
     text $w.console.text -bg $::fics::consolebg -fg $::fics::consolefg -wrap word -yscrollcommand "$w.console.scroll set" -width 40 -height 10 -font font_Fixed
     ### is font_Regular working here ? &&&
     bindMouseWheel $w $w.console.text 
+    bindWheeltoFixed $w
 
     pack $w.console.scroll -side right -fill y 
     pack $w.console.text -side left -fill both -expand 1
@@ -1102,7 +1103,8 @@ namespace eval fics {
         set t2 [::gameclock::getSec 2]
 	::commenteditor::appendComment "$resultcomment\nWhiteclock [expr $t1 / 60]:[format {%02i} [expr $t1 % 60]] Blackclock [expr $t2 / 60]:[format {%02i} [expr $t2 % 60]]"
         sc_game tags set -result $res
-        if {![string match  {*Game aborted*} $line]} {
+        # if {![string match  {*Game aborted*} $line]} 
+        if {[sc_pos moveNumber] > 2} {
 	  catch {::game::Save}
 	  updateBoard -pgn
         }
