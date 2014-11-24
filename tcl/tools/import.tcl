@@ -213,25 +213,19 @@ proc importVar {} {
 ################################################################################
 proc importMoveListTrans {line} {
 
-  set doImport 0
-
-  if { $::askToReplaceMoves } {
-    if {[llength [sc_game firstMoves 0 1]] == 0 || $::trialMode } {
-      set doImport 1
-    } elseif {[tk_messageBox -message [::tr "OverwriteExistingMoves"] -type yesno -icon question ] == yes} {
-      set doImport 1
+  if {[sc_game number] > 0} {
+    if {![::game::ConfirmDiscard]} {
+      return
     }
-  } else  {
-    set doImport 1
+    sc_game new
   }
-  if {$doImport} {
-    sc_game undoPoint
 
-    set line [untrans $line]
-    sc_move start
-    sc_move addSan $line
-    updateBoard -pgn
-  }
+  sc_game undoPoint
+
+  set line [untrans $line]
+  sc_move start
+  sc_move addSan $line
+  updateBoard -pgn
 
 }
 
