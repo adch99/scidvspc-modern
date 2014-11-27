@@ -156,11 +156,18 @@ proc ::file::Open {{fName ""} {parent .} {update 1}} {
     if {$fName == ""} { return }
   }
 
-  if {[file extension $fName] == "" || [file readable "$fName.si4"]} {
+  set ext [file extension $fName]
+  if {$ext == "" || [file readable "$fName.si4"]} {
     set fName "$fName.si4"
+    set ext .si4
   }
 
-  if {[file extension $fName] == ".si3" && [file exists $fName]} {
+  if {$ext == ".sg4" || $ext == ".sn4"} {
+    set fName "[file rootname $fName].si4"
+    set ext .si4
+  }
+
+  if {$ext == ".si3" && [file exists $fName]} {
     ::file::Upgrade [file rootname $fName]
     return
   }
@@ -171,7 +178,7 @@ proc ::file::Open {{fName ""} {parent .} {update 1}} {
   set err 0
   busyCursor .
 
-  if {[file extension $fName] == ".si4"} {
+  if {$ext == ".si4"} {
     set fName [file rootname $fName]
     if {[catch {openBase $fName} result]} {
       set err 1
@@ -202,7 +209,7 @@ proc ::file::Open {{fName ""} {parent .} {update 1}} {
       tk_messageBox -icon warning -type ok -parent $parent \
           -title "Scid: Error opening file" -message "File $fName doesn't exist."
     } else {
-      if {[file extension $fName] != ".pgn" && [file extension $fName] != ".PGN"} {
+      if {$ext != ".pgn" && $ext != ".PGN"} {
 	puts {Unknown file type, assuming PGN.}
       }
       ## note : .zip isn't supported by zlib. Only .pgn.gz is supported.

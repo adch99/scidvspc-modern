@@ -1333,13 +1333,14 @@ if { $macOS } {
         #::splash::add "No slot available."
         return
       }
+      set ext [file extension $file]
       # Email File:
-      if {[file extension $file] == ".sem"} {
+      if {$ext == ".sem"} {
         #::tools::email
         continue
       }
       # SearchOptions file:
-      if {[file extension $file] == ".sso"} {
+      if {$ext == ".sso"} {
         set ::fName $file
         if {[catch {uplevel "#0" {source $::fName}} errmsg]} {
           tk_messageBox -title "Scid: Error reading file" -type ok -icon warning \
@@ -1353,27 +1354,22 @@ if { $macOS } {
         }
         continue
       }
-      # Scid doesn't handle well .sg4 and .sn4 files.
-      if {([file extension $file] == ".sg4") || \
-            ([file extension $file] == ".sn4")} {
-        set eName ".si4"
-        set fName [file rootname $file]
-        set file "$fName$eName"
+      if {$ext == ".sg4" || $ext == ".sn4"} {
+        set file "[file rootname $file].si4"
       }
-      # Scid doesn't handle well .sg3 and .sn3 files.
-      if {([file extension $file] == ".sg3") || \
-            ([file extension $file] == ".sn3")} {
-        set eName ".si3"
-        set fName [file rootname $file]
-        set file "$fName$eName"
+      if {$ext == ".sg3" || $ext == ".sn3"} {
+        set file "[file rootname $file].si3"
       }
+
       # Check if base is already opened
       if {[sc_base slot $file] != 0} {
         tk_messageBox -type ok -icon info -title "Scid" -message \
             "$file is already opened."
       } else  {
         # All seems good, let's open those files:
-        catch {::file::Open $file} errmsg
+        wm deiconify $::dot_w
+        ::file::Open $file
+        focus .main
       }
     }
     set dndisbusy 0
