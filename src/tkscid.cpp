@@ -12295,6 +12295,11 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     if (ratingsOnly) { goto doRatings; }
 
+    if (totalcount[STATS_ALL] == 0) {
+      Tcl_AppendResult (ti, "0 ", translate (ti, "games"), NULL);
+      return TCL_OK;
+    }
+
     sprintf (temp, "%s%u %s%s",
              htextOutput ? "<green><run sc_name info -faA {}; ::playerInfoRefresh>" : "",
              totalcount[STATS_ALL],
