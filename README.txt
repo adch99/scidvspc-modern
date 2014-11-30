@@ -398,6 +398,11 @@
      themselves by configuring desktop > window behavior > advanced >
      focus stealing prevention set to "none"
 
+  o  Sometimes Scid vs. PC may have very loud/wrong colours.  This can
+     be caused by the Window Manager exporting their color schemes, and
+     can normally be switched off somewhere in the window manager's
+     colour settings.
+
   6.5.  bugs
 
 
@@ -509,6 +514,7 @@
 
   o  Splash widget console now has a simple command history (up-arrow).
 
+
   o  Better Repair Base feature (from Gregor).
 
   o  Include Gregors fast file opening with the windows 32-bit binary.
@@ -580,7 +586,6 @@
 
   o  Middle button in main board toggles game info.
 
-
   o  Databases open faster (Linux/OS X only - "avoid the time consuming
      file locking". Windows is in testing).
 
@@ -645,7 +650,6 @@
   o  Strip PGN Tags improvements
 
   o  Right-clicking toolbar Game-Save icon quick saves game.
-
 
   o  Sound devices can now be selected; mainly useful for Linux systems
 
@@ -713,6 +717,7 @@
 
   o  Add a low CPU priority check box to Engine Configuration window
      (especially important for MS Windows - where engines can kill GUI)
+
   o  Engine configuration window now repsonds to keystrokes to quickly
      find any engine
 
@@ -773,11 +778,11 @@
 
   o  Window focus improvements (mainly for MS Windows and OS X)
 
+
   o  Computer Tournament: add 'Engine Scores as comments' option, and
      make some minor global/:: var changes
 
   o  Add Book Tuning to dockable windows
-
 
   o  Automatically flip board (if applicable) in game browser and
      analysis miniboards
@@ -906,10 +911,8 @@
   o  Remember if .board is flipped for each open base
 
      Bugfixes
-
   o  Make the database switcher icons/frames get smaller if they are
      cramped (so we can see them all)
-
 
   o  Half fix UCI game (sergame.tcl) time issues
 
@@ -973,9 +976,9 @@
 
   o  Show Linux version/distro in the startup window
 
+
   o  Add a patch to make toolbar buttons raise only (instead of toggle
      open/shut)
-
 
   o  Add a patch for Chess960 support (from Ben Hague). Unfinished
 
@@ -1041,7 +1044,6 @@
   o  FICS has it's own options menu
 
   o  bind F9 to xtell instead of tell
-
 
   o  Change the move.wav sound from tick-tock to a short click
 
@@ -1109,6 +1111,7 @@
 
   o  New feature: 'Search-Filter to Last Move'. All filter games will
      load at the last move (end of game)
+
   o  Refine the Calculation of Variation (Stoyko Exercise) feature and
      Help
 
@@ -1172,9 +1175,9 @@
 
   o  Annotation improvements, and it is now possible to score All moves
      while only annotating Blunders
-
   o  Known aliases Biographical data is shown in the player information
      window
+
   o  The player info widget has buttons enabling quick player renames
      and look-up
 
@@ -1236,6 +1239,7 @@
 
   o  Crosstable bugfix: the 'show white first' feature didn't work for
      two match rounds
+
 
   o  Update 'Tips'
 
@@ -1373,6 +1377,7 @@
 
   o  Add widgets to the gamelist for manipulating flags and browsing
      first/last/next/previous games
+
   o  Opening Book and Book Tuning overhaul - allow two books to be
      opened with side-by-side sorting, and various interface
      improvements
@@ -1565,11 +1570,11 @@
   o  Tactics feature fixed up: Renamed "Puzzle" , and Problem Solutions
      can now be browsed in-game
 
+
   o  Analysis window "add variation" now *appends* variations if at var
      end
 
   o  Comment Editor has undo and redo bindings
-
 
   o  Main board grid colour can be changed
 
@@ -1631,11 +1636,11 @@
 
      o  No context menu if dragging a piece
 
+
      o  RobboLito (and others ?) had uppercase piece promotion which
         occasionally broke
 
      o  "Show Suggested Move" was broken
-
 
      o  Gamelist sometimes left off the last or first item
 
@@ -1702,7 +1707,6 @@
 
   o  Sync the tools::connect-hardware feature with SCID (untested)
 
-
   o  When using the setup board widget, do a sanity check about the
      FEN's castling field
 
@@ -1764,8 +1768,8 @@
 
   o  Remember fics widget size
 
-  o  Last move displayed in bold
 
+  o  Last move displayed in bold
 
   8.  contact
 
