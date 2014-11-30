@@ -114,9 +114,10 @@ sudo make install
 scid
 </code>
 
-<em>It is also possible to install Scid vs. PC into <bf>/usr</bf>, instead of the normal <bf>/usr/local</bf>.
-This allows for parallel installation with mainline Scid, and is done by: <bf>./configure BINDIR=/usr/bin/ SHAREDIR=/usr/share/scid/</bf></em>
+<p><em>It is also possible to install Scid vs. PC into <bf>/usr</bf>, instead of the normal <bf>/usr/local</bf>.
+This allows for parallel installation with mainline Scid, and is done by: <bf>./configure BINDIR=/usr/bin/ SHAREDIR=/usr/share/scid/</bf></em></p>
 
+<p>Debian / Mint / Ubuntu users may be interested in this <url name="link" url="http://www.linuxx.eu/2012/11/scid-vs-pc-installation-guide-ubuntu.html">.</p>
 
 <sect2> Windows <p>
 Windows installation simply requires downloading the <ref name="executable" id="download_">, and following the prompts.

@@ -184,7 +184,9 @@
   mainline Scid, and is done by: ./configure BINDIR=/usr/bin/
   SHAREDIR=/usr/share/scid/
 
-
+  Debian / Mint / Ubuntu users may be interested in this link
+  <http://www.linuxx.eu/2012/11/scid-vs-pc-installation-guide-
+  ubuntu.html>.
   4.0.2.  Windows
 
   Windows installation simply requires downloading the ``executable'',
