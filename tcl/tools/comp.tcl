@@ -982,7 +982,7 @@ proc drawCombos {} {
   global analysis comp engines
 
   # Check number of engines is sane
-  if {![string is integer -strict $comp(count)]} {
+  if {![string is integer -strict $comp(count)] || $comp(count) < 2} {
     set comp(count) 2
     update
   }
@@ -1008,7 +1008,7 @@ proc drawCombos {} {
 
     frame $l.$i
     # Only pack so many
-    if {$i < 10} {
+    if {$i < 12} {
       pack $l.$i -side top
     }
 
