@@ -140,13 +140,6 @@ proc compInit {} {
   grid $w.config.verbosevalue -row $row -column 1 -padx 5 
 
   incr row
-  label $w.config.loglabel -text {Log Engines}
-  checkbutton $w.config.logvalue -variable analysis(logEngines)
-
-  grid $w.config.loglabel -row $row -column 0 -sticky w -padx 5 
-  grid $w.config.logvalue -row $row -column 1 -padx 5 
-
-  incr row
   label $w.config.scorelabel -text {Engine Scores as Comments}
   checkbutton $w.config.scorevalue -variable comp(showscores)
 
@@ -160,23 +153,7 @@ proc compInit {} {
   grid $w.config.firstonlylabel -row $row -column 0 -sticky w -padx 5 
   grid $w.config.firstonlyvalue -row $row -column 1 -padx 5 
 
-  incr row
-  label $w.config.start1label -text {All games from start position}
-  radiobutton $w.config.start1button -variable comp(start) -value 0
-  grid $w.config.start1label -row $row -column 0 -sticky w -padx 5 
-  grid $w.config.start1button -row $row -column 1 -padx 5 
-
-  incr row
-  label $w.config.start2label -text {First game from current position}
-  radiobutton $w.config.start2button -variable comp(start) -value 1
-  grid $w.config.start2label -row $row -column 0 -sticky w -padx 5 
-  grid $w.config.start2button -row $row -column 1 -padx 5 
-
-  incr row
-  label $w.config.start3label -text {All games from current position}
-  radiobutton $w.config.start3button -variable comp(start) -value 2
-  grid $w.config.start3label -row $row -column 0 -sticky w -padx 5 
-  grid $w.config.start3button -row $row -column 1 -padx 5 
+  ### Opening Book
 
   incr row
   frame $w.config.book
@@ -205,6 +182,28 @@ proc compInit {} {
   grid $w.config.book -row $row -column 0 -columnspan 2 -sticky ew
   pack $w.config.book.label -side left -padx 10
   pack $w.config.book.combo $w.config.book.value -side right -padx 10
+
+  ### Start Position
+
+  incr row
+  label $w.config.startlabel -textvar ::tr(StartPos)
+  set comp(startlabel) {All games from start}
+  set comp(start) 0
+  menubutton $w.config.start -textvar comp(startlabel) -indicatoron 1 -relief raised \
+    -menu $w.config.start.m -width 18
+  menu $w.config.start.m -tearoff 0
+
+  $w.config.start.m delete 0 end
+  set i 0
+  foreach label {{All games from start} {First game from current} {All games from current}} {
+    $w.config.start.m add radiobutton -label $label -variable comp(start) -value $i \
+      -command "set ::comp(startlabel) \"$label\""
+    incr i
+  }
+
+
+  grid $w.config.startlabel -row $row -column 0 -sticky w -padx 5
+  grid $w.config.start -row $row -column 1 -sticky w -padx 5  -columnspan 2
 
   ### OK, Cancel Buttons
 

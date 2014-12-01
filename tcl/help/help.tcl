@@ -2892,6 +2892,7 @@ set helpText(Tourney) {<h1>Computer Tournament</h1>
 <p>
   <b>Permanent Thinking</b> allows engines to play at their strongest.
   For UCI engines, it enables pondering, and sets Xboard engines to hard mode.
+<i>Permanent Thinking does not work with non-standadrd start positions.</i>
 </p>
 <p>
   <b>Use book</b> gives UCI engines access to polyglot opening books, enabling a greater variety
@@ -2900,11 +2901,9 @@ set helpText(Tourney) {<h1>Computer Tournament</h1>
 <p>
   Scid's GUI does use more resources than other tournament managers, so, for short time controlled games,
   it is good practice to disable engine logs, move animations, and to hide the clocks, gameinfo and pgn windows.
-</p>
-<p>
-  The Tournament currently doesn't support opening books - though many
-  engines enable private opening books (unless disabled via the UCI config widget).
-  </p>
+<i>
+  Engine logging is enabled/disabled in <a Analysis List>Analysis Engines</a>. A zero log size disables logging.
+</i></p>
   <p>
   Games are <b>saved after each is completed</b>, so open an appropriate base, or just
   use the Clipbase. When the tournament is over, press "Close".
@@ -2973,7 +2972,7 @@ Faile seems not to work well with time-per-move.
 Arasanx UCI <lt>= 14.1 does not work with Permanent Thinking.
 </p>
 
-<p><footer>Updated: Scid vs. PC 4.10, July 2013</footer></p>
+<p><footer>Updated: Scid vs. PC 4.14, Dec 2014</footer></p>
 
 }
 
