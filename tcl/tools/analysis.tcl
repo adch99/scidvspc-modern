@@ -1896,7 +1896,6 @@ proc makeAnalysisMove {n} {
     set analysis(waitForBestMove$n) 1
   } else {
     ::fics::checkAdd
-    puts_ "ENGINE $n moves $move"
     if {$action == "mainline"} {
       sc_var exit
       sc_var promote [expr {[sc_var count] - 1}]
@@ -1927,7 +1926,6 @@ proc destroyAnalysisWin {n W} {
 
   global windowsOS analysis annotate
 
-  puts_ "destroyAnalysisWin $n"
   if {[string trim $W] != ".analysisWin$n"} {
     # ignore individual widget destroys
     return
@@ -1960,7 +1958,6 @@ proc destroyAnalysisWin {n W} {
 
   # Send interrupt signal if the engine wants it:
   if {(!$windowsOS)  &&  $analysis(send_sigint$n)} {
-    puts_ "killing $analysis(pipe$n), $pid"
     catch {exec -- kill -s INT $pid}
   }
 
@@ -2010,7 +2007,6 @@ proc destroyAnalysisWin {n W} {
 proc sendToEngine {n text} {
 
   logEngine $n "Scid  : $text"
-  puts_ "$n $text"
   catch {puts $::analysis(pipe$n) $text}
 }
 
@@ -2823,7 +2819,6 @@ proc processAnalysisInput {n} {
   set analysis(processInput$n) [clock clicks -milliseconds]
 
   if {$line == {}} { return }
-  puts_ "ENGINE $n says: $line"
 
   logEngine $n "Engine: $line"
 
@@ -2889,7 +2884,6 @@ proc processAnalysisInput {n} {
 		 # Ooops!
                }
       {1-0*} - {0-1*} - {resign*} {
-		puts_ "RESIGNS (engine $n)"
 		if {$n == $comp(white)} {
 		  sc_game tags set -result 0
 		  sc_pos setComment "White resigns"
@@ -2911,7 +2905,6 @@ proc processAnalysisInput {n} {
 	      }
 
       {1/2-1/2*} {
-                puts_ "DRAW (engine $n)"
 		sc_game tags set -result =
 		if {$n == $comp(white)} {
 		  sc_pos setComment "White declares draw"

@@ -133,13 +133,6 @@ proc compInit {} {
   grid $w.config.animatevalue -row $row -column 1 -padx 5 
 
   incr row
-  label $w.config.verboselabel -text {Print info to Console}
-  checkbutton $w.config.verbosevalue -variable comp(debug) 
-
-  grid $w.config.verboselabel -row $row -column 0 -sticky w -padx 5 
-  grid $w.config.verbosevalue -row $row -column 1 -padx 5 
-
-  incr row
   label $w.config.scorelabel -text {Engine Scores as Comments}
   checkbutton $w.config.scorevalue -variable comp(showscores)
 
@@ -395,7 +388,6 @@ proc compOk {} {
   set thisgame [lindex $comp(games) $comp(current)]
 
   while {$thisgame != {} } {
-    puts_ "thisgame is \"$thisgame\", games are \"$comp(games)\""
     set n     [lindex $thisgame 0]
     set m     [lindex $thisgame 1]
     set name1 [lindex $thisgame 2]
@@ -488,7 +480,6 @@ proc compNM {n m k} {
   makeAnalysisWin $n
 
   if {![winfo exists .analysisWin$n]} {
-    puts_ ".analysisWin$n dead, exitting Tournament"
     set comp(games) {}
     return
   }
@@ -496,7 +487,6 @@ proc compNM {n m k} {
 
   makeAnalysisWin $m
   if {![winfo exists .analysisWin$m]} {
-    puts_ ".analysisWin$m dead, exitting Tournament"
     set comp(games) {}
     return
   }
@@ -507,7 +497,6 @@ proc compNM {n m k} {
   if {$analysis(analyzeMode$n)} { toggleEngineAnalysis $n 1 }
   if {$analysis(analyzeMode$m)} { toggleEngineAnalysis $m 1 }
   
-  puts_ "compNM : setting white $analysis(name$n) , black $analysis(name$m), round $k"
   sc_game tags set -white $analysis(name$n)
   sc_game tags set -black $analysis(name$m)
   sc_game tags set -event $comp(name)
@@ -526,7 +515,6 @@ proc compNM {n m k} {
 
   ### Initialisation
 
-  puts_ "COMP Engine initialisation"
   foreach current_engine "$n $m" {
     ### don't display engine output
     set analysis(movesDisplay$current_engine) 2
@@ -572,16 +560,13 @@ proc compNM {n m k} {
 	if {0} {
 	  # Sjeng or Chen run too fast unless "hard" is issued
 	  if {[regexp -nocase arasan $analysis(name$current_engine)]} {
-	    puts_ {Hack: Arasan detected. Issuing "hard"}
 	    sendToEngine $current_engine hard
 	  }
 	  if {[regexp -nocase sjeng $analysis(name$current_engine)]} {
-	    puts_ {Hack: Sjeng detected. Issuing "hard"}
 	    sendToEngine $current_engine hard
 	  }
 	  if {[regexp -nocase xchen $analysis(name$current_engine)] || \
 	      [regexp -nocase chenard $analysis(name$current_engine)] } {
-	    puts_ {Hack: Chenard detected. Issuing "hard"}
 	    sendToEngine $current_engine hard
 	  }
 	}
@@ -757,7 +742,6 @@ proc compNM {n m k} {
     }
 
     set expired [expr [clock clicks -milli] - $comp(lasttime)]
-    puts_ "Time expired $expired"
 
     if {$analysis(uci$other_engine) && $comp(ponder) && ($uciInfo(ponder$other_engine) != "")} {
       ### UCI other engine
@@ -811,9 +795,7 @@ proc compNM {n m k} {
       # Note - No time slice enforcement for permove time control
 
       while {$comp(paused)} {
-	puts_ "  PAUSED at [clock format [clock seconds]]"
 	vwait comp(paused)
-	puts_ "UNPAUSED at [clock format [clock seconds]]"
       }
 
       ### Check if game is over
@@ -823,7 +805,6 @@ proc compNM {n m k} {
 	  ### stalemate
 	  sc_game tags set -result =
 	  sc_pos setComment Stalemate
-	  puts_ Stalemate
 	} else {
 	  ### checkmate
 	  if {[sc_pos side] == {black}} {
@@ -831,7 +812,6 @@ proc compNM {n m k} {
 	  } else {
 	    sc_game tags set -result 0
 	  }
-	  puts_ Checkmate
 	}
 	break
       } else {
@@ -846,7 +826,6 @@ proc compNM {n m k} {
           }
 	  sc_game tags set -result =
 	  ### draw
-	  puts_ Draw
 	  break
 	} 
       }
@@ -858,7 +837,6 @@ proc compNM {n m k} {
 	  set comp(btime) [expr $comp(btime) - $expired]
           if {$comp(btime) < 0} {
             sc_game tags set -result 1
-            puts_ {Black loses on time}
 	    sc_pos setComment {Black loses on time}
             break
           }
@@ -872,7 +850,6 @@ proc compNM {n m k} {
         } else {
           if {$expired > $comp(permoveleeway)*$comp(time)} {
             sc_game tags set -result 1
-            puts_ "Black move takes $expired secs"
 	    sc_pos setComment "Blacks move takes $expired secs"
             break
           }
@@ -887,7 +864,6 @@ proc compNM {n m k} {
 	  set comp(wtime) [expr $comp(wtime) - $expired]
           if {$comp(wtime) < 0} {
             sc_game tags set -result 0
-            puts_ {White loses on time}
 	    sc_pos setComment {White loses on time}
             break
           }
@@ -901,7 +877,6 @@ proc compNM {n m k} {
         } else {
           if {$expired > $comp(permoveleeway)*$comp(time)} {
             sc_game tags set -result 0
-            puts_ "Whites move takes $expired secs"
 	    sc_pos setComment "Whites move takes $expired secs"
             break
           }
@@ -915,15 +890,12 @@ proc compNM {n m k} {
 
     } else {
       ### Move failed... don't swap players
-      puts_ {Move FAIL}
 
       ### Unlikely, but could happen
       while {$comp(paused)} {
 	after cancel compTimeout
 
-	puts_ "  PAUSED at [clock format [clock seconds]]"
 	vwait comp(paused)
-	puts_ "UNPAUSED at [clock format [clock seconds]]"
 
 	# todo - handle wtime/btime
 	if {$comp(timecontrol) == "pergame"} {
@@ -1004,12 +976,6 @@ proc compResume {} {
 
   $w.buttons.ok configure -text Pause -command compPause
   set comp(paused) 0
-}
-
-proc puts_ {message} {
-  if {$::comp(debug) && $::comp(playing)} {
-    puts "$message"
-  }
 }
 
 proc drawCombos {} {
@@ -1108,8 +1074,6 @@ proc compTimeout {} {
 proc compGameEnd {result {comment {Manual adjudication}}} {
     global analysis comp
  
-    puts_ compGameEnd
-
     if {$comp(paused)} {
       compResume
     }
@@ -1124,8 +1088,6 @@ proc compGameEnd {result {comment {Manual adjudication}}} {
 proc compAbort {} {
     # Close all games, called when game is active
     global analysis comp
-
-    puts_ compAbort
 
     if {$comp(paused)} {
       compResume
