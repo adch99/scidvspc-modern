@@ -1711,12 +1711,6 @@ proc compactNames {} {
   }
 }
 
-# returns true is no deletions marked
-proc compactGamesNull {} {
-  set stats [sc_compact stats games]
-  return [expr {[lindex $stats 0] == [lindex $stats 2]}]
-}
-
 # returns true is no deletions marked or space wasted
 proc compactGamesEmpty {} {
   set stats [sc_compact stats games]
@@ -1731,7 +1725,10 @@ proc compactGames {parent} {
     return
   }
 
-  set stats [sc_compact stats games]
+  set stats [sc_compact stats games_setfilter]
+  ::windows::stats::Refresh
+  ::windows::gamelist::Refresh
+
   set numberDeleted [expr {[lindex $stats 0] - [lindex $stats 2]}]
   if {[tk_messageBox -title "$::tr(CompactDatabase): [file tail [sc_base filename]]" -parent $parent \
       -icon question -type yesno -message \

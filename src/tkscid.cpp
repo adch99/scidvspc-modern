@@ -4480,6 +4480,15 @@ sc_compact_stats (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             appendUintElement (ti, numUnused);
         }
     } else {
+        if (argv[2][0] != 'g') {
+          Tcl_AppendResult (ti, "Usage: sc_compact stats [games|names]", NULL);
+          return TCL_ERROR;
+        }
+        
+        bool setFilter = 0;
+        if (strcmp( argv[2], "games_setfilter") == 0)
+          setFilter = 1;
+      
         // Game file compaction:
 
         uint nFullBlocks = 0;
@@ -4489,6 +4498,8 @@ sc_compact_stats (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         for (uint i=0; i < db->numGames; i++) {
             IndexEntry * ie = db->idx->FetchEntry (i);
             if (! ie->GetDeleteFlag()) {
+                if (setFilter) 
+                  db->dbFilter->Set (i, 0);
                 gameCount++;
                 // Can this game fit in the current block?
                 uint length = ie->GetLength();
@@ -4498,8 +4509,13 @@ sc_compact_stats (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                     nFullBlocks++;
                     lastBlockBytes = length;
                 }
+            } else {
+                if (setFilter) 
+                  db->dbFilter->Set (i, 1);
             }
         }
+        if (setFilter)
+            setMainFilter(db);
 
         uint oldBytes = db->gfile->GetFileSize();
         uint newBytes = nFullBlocks * GF_BLOCKSIZE + lastBlockBytes;
