@@ -701,7 +701,6 @@ proc ::windows::gamelist::Remove {{shownext 0}} {
   if {$shownext} {
     ::windows::gamelist::showNum $gl_num nobell
   }
-  setGamelistTitle
 }
 
 proc ::windows::gamelist::displayButtons {} {
@@ -1113,8 +1112,6 @@ proc ::windows::gamelist::removeFromFilter {dir} {
   ::windows::stats::Refresh
   ::windows::gamelist::Refresh
   ::windows::gamelist::showNum $gl_num nobell
-
-  setGamelistTitle
 }
 
 
