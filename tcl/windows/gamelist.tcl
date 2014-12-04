@@ -437,9 +437,6 @@ proc ::windows::gamelist::Open {} {
     bind .glistWin $i +::windows::gamelist::showCurrent
   }
 
-  set ::windows::gamelist::findtextprev {}
-  set ::windows::gamelist::finditems {}
-
   ### Top row of buttons, etc
 
   button $w.b.save -image tb_save -relief flat -command {
@@ -704,8 +701,6 @@ proc ::windows::gamelist::Remove {{shownext 0}} {
   if {$shownext} {
     ::windows::gamelist::showNum $gl_num nobell
   }
-
-  set ::windows::gamelist::finditems {}
   setGamelistTitle
 }
 
@@ -779,12 +774,6 @@ proc configDeleteButtons {} {
     $w.c.title configure -state normal
     $w.c.delete configure -state normal
     $w.c.compact configure -state normal
-
-    ### too slow!
-    # if {[compactGamesNull]} 
-    #  $w.c.compact configure -state disabled
-    # else 
-    #  $w.c.compact configure -state normal
   }
 }
 
@@ -877,8 +866,6 @@ proc SortBy {tree col} {
       if {$answer != "yes"} { return }
     }
 
-    set ::windows::gamelist::finditems {}
-  
     if {$col == $glistSortedBy} {
       set glSortReversed [expr !$glSortReversed]
     } else {
@@ -981,7 +968,6 @@ proc ::windows::gamelist::Refresh {{see {}}} {
 
   ::windows::gamelist::SetSize
 
-  set ::windows::gamelist::finditems {}
   updateStatusBar
   $w.tree delete [$w.tree children {}]
 
@@ -1128,7 +1114,6 @@ proc ::windows::gamelist::removeFromFilter {dir} {
   ::windows::gamelist::Refresh
   ::windows::gamelist::showNum $gl_num nobell
 
-  set ::windows::gamelist::finditems {}
   setGamelistTitle
 }
 
