@@ -1711,7 +1711,7 @@ proc cancelAutoplay {} {
 
 set trialMode 0
 
-proc setTrialMode {mode} {
+proc setTrialMode {mode {update 1}} {
   global trialMode
   if {$mode == "toggle"} {
     set mode [expr {1 - $trialMode}]
@@ -1728,7 +1728,9 @@ proc setTrialMode {mode} {
     sc_game pop
     .main.button.trial configure -image tb_trial
   }
-  updateBoard -pgn
+  if {$update} {
+    updateBoard -pgn
+  }
 }
 
 ### Pause UCI and Phalanx games when an out of order move is made

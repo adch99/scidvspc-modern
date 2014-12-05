@@ -155,6 +155,7 @@ proc ::file::Open {{fName ""} {parent .} {update 1}} {
                  -title "Open a Scid file" -parent $parent]
     if {$fName == ""} { return }
   }
+  setTrialMode 0 0
 
   set ext [file extension $fName]
   if {$ext == "" || [file readable "$fName.si4"]} {
@@ -490,7 +491,7 @@ proc ::file::Close {{base -1}} {
 
     # If closing current base - reset current game and switch to clipbase
     if { $current == $base } {
-      setTrialMode 0
+      setTrialMode 0 0
       sc_game new
       ::file::SwitchToBase clipbase
     } else {
@@ -514,6 +515,7 @@ proc ::file::Close {{base -1}} {
 
 
 proc ::file::SwitchToBase {b} {
+  setTrialMode 0 0
   sc_base switch $b
 
   # Close Email windows whenever a base is closed/switched:
@@ -546,6 +548,7 @@ proc ::file::SwitchToNextBase {{dir 1}} {
 
 
 proc ::file::openBaseAsTree { { fName "" } } {
+  setTrialMode 0 0
   set oldbase [sc_base current]
 
   if {[sc_base count free] == 0} {
