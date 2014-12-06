@@ -1423,6 +1423,7 @@ proc drawArrow {sq color} {
 ### Keyboard and Mouse Bindings
 ###
 
+# Todo: change pressSquare to "pressSquare $w" and make it usable by other boards.
 for {set i 0} { $i < 64 } { incr i } {
   ::board::bind .main.board $i <Enter> "enterSquare $i"
   ::board::bind .main.board $i <Leave> "leaveSquare $i"
@@ -1442,9 +1443,9 @@ for {set i 0} { $i < 64 } { incr i } {
 
 # These binds must be moved back into for loop
 # if we want to use the above "addMarker" bindings
-bind .main.board.bd <B1-Motion> {::board::dragPiece %X %Y}
-bind .main.board.bd <ButtonRelease-1> {releaseSquare %X %Y}
-bind .main.board.bd <ButtonRelease-2> {releaseSquare %X %Y}
+bind .main.board.bd <B1-Motion> {::board::dragPiece .main.board %X %Y}
+bind .main.board.bd <ButtonRelease-1> {releaseSquare .main.board %X %Y}
+bind .main.board.bd <ButtonRelease-2> {releaseSquare .main.board %X %Y}
 
 foreach i {o q r n k O Q R B N K} {
   bind .main <$i> "moveEntry_Char [string toupper $i]"

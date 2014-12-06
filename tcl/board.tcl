@@ -182,6 +182,9 @@ proc applyBoardColors {} {
   set ::board::_mark(.main.board) $tmp
 
   ::board::resize .main.board redraw
+  if {[winfo exists .setup.l.bd]} {
+    ::board::resize .setup.l.bd redraw
+  }
 }
 
 proc applyBorderWidth {new} {
@@ -2105,8 +2108,7 @@ proc ::board::setDragSquare {w sq} {
 #   Drags the piece of the drag-square (as set above) to
 #   the specified global (root-window) screen cooordinates.
 #
-proc ::board::dragPiece {x y} {
-  set w .main.board
+proc ::board::dragPiece {w x y} {
   set sq $::board::_drag($w)
   if {$sq < 0} { return }
   set x [expr {$x - [winfo rootx $w.bd]} ]

@@ -96,8 +96,7 @@ proc pasteGame {} {
 }
 
 proc setSetupBoardToFen {} {
-  global setupFen
-  global setupboardSize setupBd
+  global setupFen setupboardSize setupBd
 
   # Called from ".setup.fencombo" FEN combo S.A
 
@@ -210,7 +209,7 @@ proc validateSetup {} {
   return ""
 }
 
-proc useBoardPiece { square } {
+proc setupBoardRightClick {square} {
   global setupBd pastePiece 
 
   set temp [string index $setupBd $square]
@@ -225,14 +224,12 @@ proc useBoardPiece { square } {
   }
 }
 
-# setupBoardPiece:
 #    Called by setupBoard to set or clear a square when it is clicked on.
 #    Sets that square to containing the active piece (stored in pastePiece)
 #    unless it already contains that piece, in which case the square is
 #    cleared to be empty.
-# S.A. It's a little better now. but should implement dragging pieces
 
-proc setupBoardPiece { square {clear 0}} {
+proc setupBoardPiece {square {clear 0}} {
   global setupBd pastePiece setupboardSize setupFen
   set oldState $setupBd
   set setupBd {}
@@ -282,9 +279,10 @@ proc exitSetupBoard {} {
 
   # called when "OK" button hit
 
-  global setupFen
+  global setupFen selectedSq
 
   bind .setup <Destroy> {}
+  set selectedSq -1
 
   sc_game undoPoint
 
@@ -365,7 +363,7 @@ proc cancelSetupBoard {} {
   # restored in the event of user hitting "cancel", game history has been lost
   # This behaviour is necessary to enable FEN previewing.
 
-  global origFen
+  global origFen selectedSq
 
   bind .setup <Destroy> {}
 
@@ -375,6 +373,7 @@ proc cancelSetupBoard {} {
     catch {sc_game startBoard $origFen}
     updateBoard -pgn
   }
+  set selectedSq -1
   destroy .setup
 }
 
@@ -417,7 +416,7 @@ trace variable castling w check_castling
 proc setupBoard {} {
 
   global boardSizes boardSize setupboardSize setupBd pastePiece \
-         toMove epFile moveNum pawnNum castling setupFen highcolor origFen borderwidth
+         toMove epFile moveNum pawnNum castling setupFen highcolor origFen borderwidth selectedSq 
 
   if {[winfo exists .setup]} { return }
 
@@ -426,6 +425,7 @@ proc setupBoard {} {
   setWinLocation .setup
 
   set origFen [sc_pos fen]
+  set selectedSq -1
 
   # Fenframe is a gridded frame at bottom of screen
   frame .setup.fenframe
@@ -444,8 +444,9 @@ proc setupBoard {} {
   set setupboardSize [boardSize_plus_n -3]
   set psize $setupboardSize
 
-  # S.A: It seems too hard to implement the setup board like this:
-  # ::board::new $sbd $setupboardSize nomat
+  # We now use ::board for the Setup board 
+  # We probably change selectedSq (etc) from a global to something board specific
+  ::board::new $sbd $setupboardSize 0
 
   # border not implemented yet
   set border $borderwidth
@@ -453,55 +454,23 @@ proc setupBoard {} {
 
   ### Main setup board/canvas
 
-  # It's fairly hacked together from lots of other places, so i hope it's solid.
-  # Trying to make drag and drop... not too easy. - S.A.
-
   if {!$::macOS} {
   frame $sl.hints
   label $sl.hints.label2 -text {Left button - Paste} -font font_SmallItalic
-  label $sl.hints.label3 -text {Middle button - Cut} -font font_SmallItalic
-  label $sl.hints.label4 -text {Right button - Copy} -font font_SmallItalic
+  label $sl.hints.label4 -text {Right button - Clear} -font font_SmallItalic
   pack $sl.hints -side top -fill x
-  pack $sl.hints.label2 $sl.hints.label3 $sl.hints.label4 -side left -expand yes -fill x
+  pack $sl.hints.label2 $sl.hints.label4 -side left -expand yes -fill x
   }
-
-  frame $sbd
-  canvas $sbd.bd -width $bsize -height $bsize -background $::bgcolor \
-                 -borderwidth 0 -highlightthickness 0
 
   pack $sbd -padx 10 -pady 10
   pack $sbd.bd
 
-  # Create empty board:
   for {set i 0} {$i < 64} {incr i} {
-    set xi [expr {$i % 8} ]
-    set yi [expr {int($i/8)} ]
-    set x1 [expr {$xi * ($psize + $border) + $border +1 } ]
-    set y1 [expr {(7 - $yi) * ($psize + $border) + $border +1 } ]
-    set x2 [expr {$x1 + $psize }]
-    set y2 [expr {$y1 + $psize }]
-
-    $sbd.bd create rectangle $x1 $y1 $x2 $y2 -tag sq$i -outline {} \
-      -fill [expr {$::sqcol($i) ? "$::lite" : "$::dark"} ]
-
-    # ::board::colorSquare $sbd $i
-    #this inserts a textures on a square and restore piece
-    set xc [expr ($x1 + $x2) /2]
-    set yc [expr ($y1 + $y2) /2]
-    set boc bgd$psize
-    if { ($i + ($i / 8)) % 2 } { set boc bgl$psize }
-    $sbd.bd delete br$i
-    $sbd.bd create image $xc $yc -image $boc -tag br$i
-
-    $sbd.bd bind p$i <ButtonPress-1> "setupBoardPiece $i"
-    $sbd.bd bind p$i <ButtonPress-2> "setupBoardPiece $i 1"
-    $sbd.bd bind p$i <ButtonPress-3> "useBoardPiece $i"
-
-
-    # ::board::bind .main.board $i <ButtonPress-1> "set ::addVariationWithoutAsking 0 ; pressSquare $i"
-    # bind $sbd.$i <ButtonPress-1> "setupBoardPiece $i"
+    $sbd.bd bind p$i <ButtonPress-1> "set ::selectedSq $i ; ::board::setDragSquare $sbd $i"
+    $sbd.bd bind p$i <ButtonPress-3> "setupBoardPiece $i 1"
   }
-
+  bind $sbd.bd <B1-Motion> "::board::dragPiece $sbd %X %Y"
+  bind $sbd.bd <ButtonRelease-1> "releaseSetupSquare $sbd %X %Y"
   bind .setup <ButtonPress-4> "switchPastePiece next"
   bind .setup <ButtonPress-5> "switchPastePiece prev"
 
@@ -733,7 +702,42 @@ proc setupBoard {} {
   bind .setup <Configure> "recordWinSize .setup"
 }
 
-# setBoard (previously in main.tcl):
+proc releaseSetupSquare {w x y} {
+
+  global selectedSq bestSq setupBd pastePiece setupboardSize
+
+  ::board::setDragSquare $w -1
+  set square [::board::getSquare $w $x $y]
+  if {$square < 0} {
+    set selectedSq -1
+    setBoard .setup.l.bd $setupBd $setupboardSize
+    return
+  }
+
+  set prev [string index $setupBd $selectedSq]
+  set this [string index $setupBd $square]
+
+  if {$square == $selectedSq} {
+    setupBoardPiece $square
+  } else {
+    if {$selectedSq == -1} {
+      setBoard .setup.l.bd $setupBd $setupboardSize
+      return
+    }
+
+    # only process drag and drop if drag square wasn't empty ("."), and pawn placement is legal
+
+    if {($prev == "P"  ||  $prev == "p") && ($square < 8  ||  $square >= 56)} {
+      setBoard .setup.l.bd $setupBd $setupboardSize
+      return
+    }
+    setupBoardPiece $selectedSq 1 ; # ???
+    if {$prev != "."} {
+      setupBoardPiece $square
+    }
+  }
+}
+
 #   Resets the squares of the board according to the board string
 #   "boardStr" and the piece bitmap size "psize".
 

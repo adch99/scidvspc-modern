@@ -726,10 +726,11 @@ proc flipBoardForPlayerNames {} {
 #    It is now broken into a few parts, with the later two delayed till we're idle
 
 proc updateBoard {args} {
-  global boardSize
+  global boardSize selectedSq
+
   set pgnNeedsUpdate 0
   set animate 0
-  set ::selectedSq -1 ; # necessary for bugfix ?
+  set selectedSq -1 ; # necessary for bugfix ?
   foreach arg $args {
     if {! [string compare $arg "-pgn"]} { set pgnNeedsUpdate 1 }
     if {! [string compare $arg "-animate"]} { set animate 1 }
@@ -1070,6 +1071,7 @@ proc mapPhotos {} {
 
 # Globals for mouse-based move input:
 
+# These three should be ::board::_selectedSq($w) etc instead of globals
 set selectedSq -1
 set currentSq -1
 set bestSq -1
@@ -1370,10 +1372,9 @@ proc enterSquare { square } {
   }
 }
 
-# leaveSquare:
 #    Called when the mouse pointer leaves a board square.
 #    Recolors squares to normal (lite/dark) color.
-#
+
 proc leaveSquare { square } {
   global currentSq selectedSq bestSq
   #Klimmek: not needed anymore
@@ -1387,10 +1388,9 @@ proc leaveSquare { square } {
   }
 }
 
-# pressSquare:
-#    Called when the left mouse button is pressed on a square. Sets
-#    that square to be the selected square.
-#
+#    Called when the left mouse button is pressed on a square.
+#    Sets that square to be the selected square.
+
 proc pressSquare {square confirm} {
 
   global selectedSq highcolor
@@ -1426,19 +1426,17 @@ proc pressSquare {square confirm} {
   }
 }
 
-# releaseSquare:
 #   Called when the left mouse button is released over a square.
 #   If the square is different to that the button was pressed on, it
 #   is a dragged move; otherwise it is just selecting this square as
 #   part of a move.
 
-proc releaseSquare { x y } {
+proc releaseSquare {w x y} {
 
   if { [winfo exists .calvarWin] } { return }
 
   global selectedSq bestSq
 
-  set w .main.board
   ::board::setDragSquare $w -1
   set square [::board::getSquare $w $x $y]
   if {$square < 0} {
