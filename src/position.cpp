@@ -2669,7 +2669,7 @@ Position::ReadFromLongStr (const char * str)
 //      with white pieces in upper case, black pieces in lower case,
 //      and empty squares as dots) then a space, and finally "w" or "b"
 //      indicating the side to move. Example for the starting position:
-//      "RNBQKBNRPPPPPPPP................................pppppppprbnqkbnr w"
+//      "RNBQKBNRPPPPPPPP................................pppppppprnbqkbnr w"
 //
 void
 Position::MakeLongStr (char * str)

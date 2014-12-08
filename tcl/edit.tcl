@@ -447,6 +447,9 @@ proc setupBoard {} {
   # We now use ::board for the Setup board 
   # We probably change selectedSq (etc) from a global to something board specific
   ::board::new $sbd $setupboardSize 0
+  if { [::board::isFlipped .main.board] } {
+     ::board::flip $sbd
+  }
 
   # border not implemented yet
   set border $borderwidth
