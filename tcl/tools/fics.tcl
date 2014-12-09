@@ -29,7 +29,7 @@ namespace eval fics {
   set offers_minelo 1000
   set offers_maxelo 2500
   set offers_mintime 0
-  set offers_maxtime 60
+  set offers_maxtime 20
   variable logged 0
   set consolewidth 40
   set consoleheight 10
