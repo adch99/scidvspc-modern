@@ -1320,6 +1320,13 @@ proc gsave { gnum } {
       tk_messageBox -type ok -icon info -parent .save -title "Oops" -message "\"[string totitle $i]\" is larger than 255 bytes."
       return 0
     }
+    foreach j $extraTagsList {
+      if {[string trim $j] != {} && ![regexp {^[^ ]*  *".*"$} [string trim $j]]} {
+	tk_messageBox -type ok -icon info -parent .save -title "Oops" -message \
+        "Tag\n  $j\nis not in format\n  TagName \"TagData\""
+	return 0
+      }
+    }
   }
 
   sc_game undoPoint
