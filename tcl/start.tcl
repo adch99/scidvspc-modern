@@ -1489,6 +1489,10 @@ if {[catch {source $optionsFile} ]} {
   ::splash::add "Loaded options from \"$optionsFile\"."
 }
 
+if { [string first "-dock" [lindex $argv 0]] > -1} {
+  set windowsDock 1
+}
+
 if { [string first "-nodock" [lindex $argv 0]] > -1} {
   # reset in case of error recovery
   set windowsDock 0

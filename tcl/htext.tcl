@@ -489,8 +489,9 @@ proc ::htext::display {w helptext {section {}} {fixed 1}} {
         gt {$w insert end >}
         h2 - h3 - h4 - ht - p - br  {$w insert end \n}
       }
-      #Set the start index for this type of tag
+      # Set the start index for this type of tag
       set startIndex($tagName) [$w index insert]
+      # menu is now unused i think - S.A.
       if {$tagName == {menu}} {$w insert end \[}
     }
 

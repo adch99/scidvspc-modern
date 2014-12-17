@@ -5,7 +5,8 @@ set helpText(Contents) "<h1>$::scidName</h1>
 
   <ht><img icon></ht>
   <ht><a Intro>Introduction</a></ht>
-  <ht><a BrowsingPGN>PGN files and Scid</a></ht>
+  <ht><a GUI>Using the GUI</a></ht>
+  <ht><a BrowsingPGN>PGN Files and Scid</a></ht>
   <ht><a Analysis>Running Chess Engines</a></ht>
   <ht><a Scid>Databases and General Use</a></ht>
   <ht><a ComputerGame>Playing against the Computer</a></ht>
@@ -51,6 +52,18 @@ See <run ::tip::show 0><green>Tip of the Day</green></run> for some helpful hint
 <li>A user friendly Annotation feature. </li>
 </ul>
   <p><footer>Updated: Scid vs. PC 4.10 May 2013</footer></p>
+}
+
+set helpTitle(GUI) {Scid's GUI}
+set helpText(GUI) {<h1>Scid's Graphical User Interface</h1>
+
+  <br>
+  <ht><a Docking><b>Docked Windows</b></a></ht>
+  <ht><a MainWindow>The <b>Main Window</b></a></ht>
+  <ht><a Menus><b>Main Menus</b></a></ht>
+  <ht><a Moves>Entering <b>Moves</b></a></ht>
+  <br>
+  <p><footer>Updated: Scid vs. PC 4.14 Dec 2014</footer></p>
 }
 
 set helpTitle(FICS) "FICS"
@@ -144,14 +157,6 @@ set helpText(Scid) {<h1>Databases and General Use</h1>
   <p><i>
   Millbase free database <url http://katar.weebly.com/index.html>http://katar.weebly.com/index.html</url>
   </i></p>
-
-  <h4>The GUI</h4>
-  <ul>
-  <li><a MainWindow>The <b>Main Window</b></a></li>
-  <li><a Docking><b>Docked Windows</b></a></li>
-  <li><a Menus><b>Main Menus</b></a></li>
-  <li><a Moves>Entering <b>Moves</b></a></li>
-  </ul>
 
   <h4>Using Databases</h4>
   <ul>
@@ -317,6 +322,7 @@ append helpText(Index) {
   <li><a Searches Header>General searches</a></li>
   <li><a Maintenance Editing>Global substitutions</a></li>
   <li><a Graphs>Graph windows</a></li>
+  <li>Using the <a GUI>GUI</a></li>
   </ul>
 
   <h3><name H>H</name></h3>
@@ -439,6 +445,7 @@ append helpText(Index) {
   <li>Finding extra PGN <a Maintenance Tags>Tags</a>
   <li>Custom board <a Board Textures>textures</a></li>
   <li><a Crosstable tiebreak>Tie-Breaks</a></li>
+  <li>The <a MainWindow Toolbar>Toolbar</a></li>
   <li><a Menus Tools>Tools menu</a></li>
   <li><a Tourney>Tournament</a> of Chess Engines</li>
   <li><a Tmt>Tournament finder</a></li>
@@ -532,7 +539,7 @@ set helpText(Hints) {<h1>Scid Hints</h1>
   <h4>Every time I enter a move to replace another, I get a
   "Replace Move?" dialog. Can I avoid this?</h4>
   <p>
-  De-select the <b>Ask before replacing moves</b> option in the <menu>Options: Moves</menu> menu.
+  De-select the <b>Ask before replacing moves</b> option in the <green>Options: Moves</green> menu.
   </p>
 
   <h4>How can I use the tree window on a selection of games, not my whole database?</h4>
@@ -558,7 +565,7 @@ set helpText(Hints) {<h1>Scid Hints</h1>
   correct them?</h4>
   <p>
   You can edit individual names or spellcheck all the names in a database
-  with the commands in the <menu>File: Maintenance</menu> menu.
+  with the commands in the <green>File: Maintenance</green> menu.
   See the <a Maintenance Editing>maintenance</a> page.
   </p>
 
@@ -603,6 +610,13 @@ set helpText(MainWindow) {<h1>Scid Main Window</h1>
   <li> <button tb_windows> Raise open windows [tab]</li>
   </ul>
 
+  <h4><name Toolbar>Toolbar</name></h4>
+  <p>
+  At the top of the main window is a row of small icons called the Toolbar.
+  Hovering the mouse over each will show their name, and selecting which icons are
+  shown is done in <green>Options-<gt>Toolbar</green>.
+  </p>
+
   <h4><name GameInfo>Game Information Area</name></h4>
   <p>
   Below the chessboard is general information about the current game. 
@@ -646,206 +660,203 @@ set helpText(MainWindow) {<h1>Scid Main Window</h1>
   are added to the game as a new variation just before each move is made.
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.12 Feb 2014 </footer></p>
+  <p><footer>Updated: Scid vs. PC 4.14 Dec 2014 </footer></p>
 }
 
 set helpTitle(Docking) "Docked Windows"
 set helpText(Docking) {<h1>Docked Windows</h1>
 <p>
-The Docked Windows feature allows Scid to have a single window, with the smaller windows
-tiling inside. Options for this feature are found in <b>Options-<gt>Windows</b>, where you
-can load any of the three built-in layouts, or save your own Window arrangements.
+Scid can work in two modes. In Docked Windows mode (the default), most windows
+are tiled - or docked - into a single large window. 
+Docking is enabled or disabled in <b>Options-<gt>Windows</b>,
+where you can also load any of the three built-in layouts, or save your own Window
+arrangements.  The current window arrangement can also be saved via <b>Options-<gt>Save Layout</b>.
 </p><p>
 Arranging Docked Windows is a little difficult. One can right-click any tab (except the main
 board) and select to move to the side of the current pane, or one can
 drag the tab and group it with other tabs in another paned window.
-Windows can also be undocked by right-clicking the tab.</p>
-<p><i>Mac OS X does not support undocking windows.</i></p>
+Windows can also be undocked by right-clicking the tab, though Mac OS X does not support undocking windows.</p>
 <p>
 Window focus automatically follows the mouse around, and also impacts which keyboard bindings are active.
 Most bindings are active when the mouse is over the Main Board.</p>
+<p>
+With the focus on a window tab, one can press the Tab key to move between window panes. Control+Tab switches between active tabs.
+</p>
 <p><i>
-If Scid fails to start, use the </i><b>-nodock</b><i> command-line option to restart in undocked mode.
+If Scid fails to start, use the </i><b>-nodock</b><i> command-line option to start in undocked mode.
 </i></p>
-<p><footer>Updated: Scid vs. PC 4.13, May 2014</footer></p> }
+<p><footer>Updated: Scid vs. PC 4.14, Dec 2014</footer></p> }
 
 set helpTitle(Menus) "Menus"
 set helpText(Menus) {<h1>Scid Menus</h1>
 
   <h3><name File>File</name></h3>
   <ul>
-  <li><menu>New</menu>: Creates a new empty Scid Database.</li>
-  <li><menu>Open</menu>: Opens an existing Scid Database.</li>
-  <li><menu>Save Pgn</menu>: Save this game as a PGN file.</li>
-  <li><menu>Close</menu>: Closes the current Scid Database.</li>
-  <li><menu>Finder</menu>: Opens the <a Finder>File Finder</a>.</li>
-  <li><menu>Bookmarks</menu>: <a Bookmarks>Bookmarks</a> and bookmark
+  <li><green>New</green>  Creates a new empty Scid Database.</li>
+  <li><green>Open</green>  Opens an existing Scid Database.</li>
+  <li><green>Save Pgn</green>  Save this game as a PGN file.</li>
+  <li><green>Close</green>  Closes the current Scid Database.</li>
+  <li><green>Read-Only</green>  Makes the current database read-only.</li>
+  <li><green>Finder</green>  Opens the <a Finder>File Finder</a>.</li>
+  <li><green>Bookmarks</green>  Show and edit <a Bookmarks>Bookmarks</a>.</li>
   <br>
-  <li><menu>Open Base as Tree</menu></li>
-  <li><menu>Open Base as Tree</menu>: Open database in a <a Tree>tree window</a> only.</li>
+  <li><green>Switch to Base</green>  Switch between the nine available databases (including the <a Clipbase>Clipbase</a>).</li>
+  <li><green>Open Base as Tree</green></li>
+  <li><green>Open Recent as Tree</green>  Open database in a <a Tree>tree window</a>. The databases will be closed when the tree is closed.</li>
   <br>
-  <li><menu>Maintenance</menu>: Database <a Maintenance>maintenance</a> functions.</li>
-  <ul>
-  <li><menu>Maintenance window</menu>: Opens/closes the database maintenance window.</li>
-  <li><menu>Compact Database</menu>: Perform database compaction.</li>
-  <li><menu>ECO-Classify games</menu>: Recomputes the <a ECO>ECO code</a> for all games in the database. </li>
-  <li><menu>Sort</menu>: Sort base by name, rating, etc.</li>
-  <li><menu>Delete twin games</menu>: Finds <a Maintenance Twins>twin</a> games in the database.</li>
-  <li><menu>Name editor</menu>: Replaces all occurrences of a player,
-  event site or round name.</li>
-  <li><menu>Repair Base</menu>: Repair broken database.</li>
-  </ul>
-  <li><menu>Read-Only</menu>: Makes the current database read-only.</li>
-  <li><menu>Switch to Database</menu>: Switch between the nine available database slots and the <a Clipbase>Clipbase</a> database.</li>
-  <li><menu>Exit</menu>: Exit Scid. </li>
+  <li><green>Exit</green>  Exit Scid. </li>
   </ul>
 
   <h3><name Edit>Edit</name></h3>
   <ul>
-  <li><menu>Setup Board</menu>: Set a (non-standard) start position for the current game.</li>
-  <li><menu>Copy FEN</menu>: Set the clipboard to the FEN representing current position.</li>
-  <li><menu>Copy PGN</menu>: Set the clipboard to the game PGN.</li>
-  <li><menu>Paste FEN</menu>: Set-up board according to FEN in clipboard.</li>
-  <li><menu>Paste PGN</menu>: Import a game from PGN in clipboard.</li>
+  <li><green>Setup Board</green>  Set a (non-standard) start position for the current game.</li>
+  <li><green>Copy FEN</green>  Set the clipboard to the FEN representing current position.</li>
+  <li><green>Copy PGN</green>  Set the clipboard to the game PGN.</li>
+  <li><green>Paste FEN</green>  Set-up board according to FEN in clipboard.</li>
+  <li><green>Paste PGN</green>  Import a game from PGN in clipboard.</li>
   <br>
-  <li><menu>Empty Clipbase</menu>: Clear the temporary database (<a Clipbase>Clipbase</a>).</li>
-  <li><menu>Copy to Clipbase</menu>: Copies the current game to the <a Clipbase>Clipbase</a> database.</li>
-  <li><menu>Paste from Clipbase</menu>: Pastes the active game of the <a Clipbase>Clipbase</a> to be the active game of the current database.</li>
+  <li><green>Empty Clipbase</green>  Clear the temporary database (<a Clipbase>Clipbase</a>).</li>
+  <li><green>Copy to Clipbase</green>  Copies the current game to the <a Clipbase>Clipbase</a> database.</li>
+  <li><green>Paste from Clipbase</green>  Pastes the active game of the <a Clipbase>Clipbase</a> to be the active game of the current database.</li>
   <br>
-  <li><menu>Add Variation</menu>: Adds a new empty variation for the
+  <li><green>Strip</green>  Strips all comments or variations from the current game.</li>
+  <li><green>Undo</green>  Undo changes to this game. The undo buffer holds nine changes.</li>
+  <li><green>Redo</green>  Redo changes.</li>
+  <br>
+  <li><green>Add Variation</green>  Adds a new empty variation for the
   next move, or for the previous move if there is no next move yet.</li>
-  <li><menu>Paste Variation</menu>: Pastes the current text selection as a variation.</li>
-  <li><menu>Delete Variation</menu>: Provides a submenu of variations for
+  <li><green>Paste Variation</green>  Pastes the current text selection as a variation.</li>
+  <li><green>Delete Variation</green>  Provides a submenu of variations for
   the current move, so one can be deleted.</li>
-  <li><menu>Make First Variation</menu>: Promotes a variation to be the
+  <li><green>Make First Variation</green>  Promotes a variation to be the
   first variation of the current move.</li>
-  <li><menu>Promote Variation to Main line</menu>: Promotes a variation
+  <li><green>Promote Variation to Main line</green>  Promotes a variation
   to be the main line, swapping it with its parent.</li>
-  <li><menu>Try Variation</menu>: Enters <a Moves Trial>trial mode</a> for
+  <li><green>Try Variation</green>  Enters <a Moves Trial>trial mode</a> for
   testing a temporary variation without altering the current game.</li>
-  <li><menu>Strip</menu>: Strips all comments or variations from the current
-  game.</li>
   </ul>
 
   <h3><name Game>Game</name></h3>
   <ul>
-  <li><menu>New Game</menu>: Resets the active game to an empty state,
-  discarding any unsaved changes.</li>
-  <li><menu>Load First/Previous/Next/Last Game</menu>: These load the first,
-  previous, next or last game in the <a Filter>filter</a>.</li>
-  <li><menu>Reload this game</menu>: Reloads the current game, discarding
-  any changes made.</li>
-  <li><menu>Load Game Number</menu>: Loads the game given its game number
+  <li><green>New Game</green>  Resets the active game to an empty state, discarding any unsaved changes.</li>
+  <li><green>Replace Game</green>  Saves the current game, replacing it in the database.</li>
+  <li><green>Add Game</green>  Save this game, adding one to the database.</li>
+  <br>
+  <li><green>Set Game Info</green>  Set various detials about the current game.</li>
+  <li><green>Browse Games</green>  Show a list of games in this database.</li>
+  <br>
+  <li><green>Delete Game</green>  Mark as deleted (for removal during compaction).</li>
+  <li><green>Reload this game</green>  Reloads the current game, discarding any changes made.</li>
+  <br>
+  <li><green>Load First/Previous/Next/Last Game</green>  These load the first, previous, next or last game in the <a Filter>filter</a>.</li>
+  <li><green>Load Game Number</green>  Loads the game given its game number
   in the current database.</li>
   <br>
-  <li><menu>Set Game Info</menu>: Set various detials about the current game.</li>
-  <li><menu>Browse Games</menu>: Show a list of games in this database.</li>
-  <br>
-  <li><menu>Save: Replace game</menu>: Saves the current game, replacing
-  its original version in the database.</li>
-  <li><menu>Save: Add new game</menu>: Saves the current game as a new
-  game, appending to the end of the database.</li>
-  <br>
-  <li><menu>Identify opening</menu>: Finds the deepest
+  <li><green>Identify opening</green>  Finds the deepest
   position in the current game that is in the ECO file.</li>
-  <li><menu>Goto move number</menu>: Goes to the specified move number in
+  <li><green>Goto move number</green>  Goes to the specified move number in
   the current game.</li>
-  <li><menu>Find novelty</menu>: Finds the first move of the current game
+  <li><green>Find novelty</green>  Finds the first move of the current game
   that has not been played before.</li>
   </ul>
 
   <h3><name Search>Search</name></h3>
   <ul>
-  <li><menu>Reset Filter</menu>: Resets the <a Filter>filter</a>
-  so all games are included.</li>
-  <li><menu>Negate filter</menu>: Inverts the filter to only include
-  games that were excluded.</li>
+  <li><green>Reset Filter</green>  Resets the <a Filter>filter</a> so all games are included.</li>
+  <li><green>Negate filter</green>  Inverts the filter to only include games that were excluded.</li>
+  <li><green>Filter to Last Move</green>  Make all games show the last move when loaded.</li>
   <br>
-  <li><menu>General</menu>: Searches by <a Searches Header>header</a>
-  information such as player names.</li>
-  <li><menu>Current board</menu>: Searches for the
-  <a Searches Board>current board</a> position.</li>
-  <li><menu>Material/Pattern</menu>: Searches by
-  <a Searches Material>material</a> or chessboard patterns</a>.</li>
+  <li><green>General</green>  Searches by <a Searches Header>header</a> information such as player names.</li>
+  <li><green>Current board</green>  Searches for the <a Searches Board>current board</a> position.</li>
+  <li><green>Material/Pattern</green>  Searches by <a Searches Material>material</a> or chessboard patterns</a>.</li>
+  <li><green>Move</green>:
   <br>
-  <li><menu>Player Finder</menu>: Search for a player name.</li>
-  <li><menu>Tournament Finder</menu>: Search for a tournament by date or name.</li>
+  <li><green>Player Finder</green>  Search for a player name.</li>
+  <li><green>Tournament Finder</green>  Search for a tournament by date or name.</li>
   <br>
-  <li><menu>Using search file</menu>: Searches using
+  <li><green>Using search file</green>  Searches using
   <a Searches Settings>settings</a> from a SearchOptions file.</li>
   </ul>
 
   <h3><name Windows>Windows</name></h3>
   <ul>
-  <li><menu>Game Info</menu>: Show/Hide the Game information window.</li>
-  <li><menu>Comment Editor</menu>: Opens/closes the <a Comment>Comment Editor</a>.</li>
-  <li><menu>Game List window</menu>: Opens/closes the <a GameList>Game List</a>.</li>
-  <li><menu>PGN window</menu>: Opens/closes the <a PGN>PGN window</a>.</li>
-  <li><menu>Crosstable</menu>: Constructs a tournament <a Crosstable>crosstable</a> for the current game. </li>
-  <li><menu>Player Finder</menu>: Opens/closes the <a PList>Player Finder</a> window.</li>
-  <li><menu>Tournament Finder</menu>: Opens/closes the <a Tmt>Tournament Finder</a> window.</li>
+  <li><green>Game Info</green>  Show/Hide the Game information window.</li>
+  <li><green>Comment Editor</green>  Opens/closes the <a Comment>Comment Editor</a>.</li>
+  <li><green>Game List window</green>  Opens/closes the <a GameList>Game List</a>.</li>
+  <li><green>PGN window</green>  Opens/closes the <a PGN>PGN window</a>.</li>
+  <li><green>Crosstable</green>  Constructs a tournament <a Crosstable>crosstable</a> for the current game. </li>
+  <li><green>Player Finder</green>  Opens/closes the <a PList>Player Finder</a> window.</li>
+  <li><green>Tournament Finder</green>  Opens/closes the <a Tmt>Tournament Finder</a> window.</li>
   <br>
-  <li><menu>Maintenance window</menu>: Opens/closes the <a Maintenance>Maintenance</a> Window.</li>
+  <li><green>Maintenance window</green>  Opens/closes the <a Maintenance>Maintenance</a> Window.</li>
   <br>
-  <li><menu>ECO Browser</menu>: Opens/closes the <a ECO browser>ECO Browser</a> window.</li>
-  <li><menu>Statistics window</menu>: Opens/closes the
+  <li><green>ECO Browser</green>  Opens/closes the <a ECO browser>ECO Browser</a> window.</li>
+  <li><green>Statistics window</green>  Opens/closes the
   <term>Filter statistics window</term> which gives a win/loss summary
   of the games in the <a Filter>filter.</a></li>
-  <li><menu>Tree window</menu>: Opens/closes the <a Tree>tree window</a>.</li>
-  <li><menu>Endgame Tablebase window</menu>: Opens/closes the window that
-  displays <a TB>tablebase</a> information.</li>
-  <li><menu>Book Window</menu>: Opens/closes the Book window.</li>
-  <li><menu>Correspondence Window</menu>: Opens/closes the Correspondence window.</li>
+  <li><green>Tree window</green>  Opens/closes the <a Tree>tree window</a>.</li>
+  <li><green>Tablebase window</green>  Opens/closes the endgame <a TB>tablebase</a> information.</li>
+  <li><green>Book Window</green>  Opens/closes the Book window.</li>
+  <li><green>Correspondence Window</green>  Opens/closes the Correspondence window.</li>
   </ul>
 
   <h3><name Tools>Tools</name></h3>
   <ul>
-  <li><menu>Analysis Engines</menu>: Configure Analysis Engines.</li>
-  <li><menu>Analysis engine #1</menu>
-  <li><menu>Analysis engine #2</menu>: Start/stops <a Analysis>analysis engines</a>,
+  <li><green>Analysis Engines</green>  Configure Analysis Engines.</li>
+  <li><green>Analysis engine #1</green>
+  <li><green>Analysis engine #2</green>  Start/stops <a Analysis>analysis engines</a>,
  displaying the evaluation of the current position.</li>
   <br>
-  <li><menu>Email manager</menu>: Opens/closes the <a Email>email manager</a>
-  window, for managing email correspondence games.</li>
+  <li><green>Maintenance</green>  Database <a Maintenance>maintenance</a> functions.</li>
+  <ul>
+  <li><green>Maintenance window</green>  Opens/closes the database maintenance window.</li>
+  <li><green>Name editor</green>  Replaces all occurrences of a player,
+  <li><green>Compact Database</green>  Perform database compaction.</li>
+  <li><green>Sort</green>  Sort base by name, rating, etc.</li>
+  <li><green>Spellcheck</green>  Search the spelling file for possible Name corrections.</li>
+  <li><green>Delete twin games</green>  Finds <a Maintenance Twins>twin</a> games in the database.</li>
+  event site or round name.</li>
+  <li><green>Repair Base</green>  Repair broken database.</li>
+  </ul>
+
+  <li><green>Book Tuning</green>  For editing Polyglot books.</li>
+  <li><green>Player report</green>  Generates an <a Reports Player>opening report</a>.</li>
+  <li><green>Opening report</green>  Generates an <a Reports Opening>opening report</a> for the current position.</li>
+  <li><green>Piece Tracker</green>  Opens the <a PTracker>piece tracker</a> window.</li>
+  <li><green>Email manager</green>  Opens/closes the <a Email>email manager</a> window, for managing email correspondence games.</li>
+  <li><green>Connect Hardware</green>  ... Configure external hardware devices.</li>
   <br>
-  <li><menu>Opening report</menu>: Generates an
-  <a Reports Opening>opening report</a> for the current position.</li>
-  <li><menu>Piece Tracker</menu>: Opens the <a PTracker>piece tracker</a>
-  window.</li>
+  <li><green>Rel Filter Graph Ratings</green></li>
+  <li><green>Abd Filter Graph Ratings</green>  Displays the <a Graphs Filter>filter graphs</a>.</li>
+  <li><green>Player Ratings</green>  Displays the <a Graphs Rating>rating graph</a>.</li>
+  <li><green>Score Graph</green>  Displays the <a Graphs Score>score graph</a>.</li>
   <br>
-  <li><menu>Player information</menu>: Displays <a PInfo>player information</a>
-  for one of the two players of the current game.</li>
-  <li><menu>Rating graph</menu>: Displays the
-  <a Graphs Rating>rating graph</a>.</li>
-  <li><menu>Score graph</menu>: Displays the
-  <a Graphs Score>score graph</a>.</li>
-  <br>
-  <li><menu>Export current game</menu>: Saves the current game to a text
+  <li><green>Export current game</green>  Saves the current game to a text
   file in PGN, HTML or LaTeX format. See the <a Export>export</a> help
   page.</li>
-  <li><menu>Export all filter games</menu>: Saves all games in the
+  <li><green>Export all filter games</green>  Saves all games in the
   search <a Filter>filter</a> to a text file in PGN, HTML or
   LaTeX format. See the <a Export>export</a> help page.</li>
   <br>
-  <li><menu>Import PGN text</menu>: Opens the <a Import>Import window</a>
+  <li><green>Import PGN text</green>  Opens the <a Import>Import window</a>
   for entering a game by typing or pasting its text in
   <a PGN>PGN format</a>.</li>
-  <li><menu>Import PGN file</menu>: Imports a whole file containing
+  <li><green>Import PGN file</green>  Imports a whole file containing
   games in PGN format to the current database. Note, that several PGN
   files can be selected in this dialogue at once.</li>
   <br>
-  <li><menu>Board Screenshot</menu>: Save a screenshot of the board to a file.</li>
+  <li><green>Board Screenshot</green>  Save a screenshot of the board to a file.</li>
   </ul>
 
   <h3><name Options>Options</name></h3>
   <p>
   This menu provides entries for setting most of Scid's configurable options.
-  The <menu>Save Options</menu> entry saves the current options to the
+  The <green>Save Options</green> entry saves the current options to the
   file "<b>~/.scidvspc/config/options.dat</b>" ;
   this file is loaded each time you start up Scid.
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.3, December 2010</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.14, December 2014</footer></p>
 }
 
 
@@ -4446,8 +4457,8 @@ up once, and are stored afterwards for future use.
 </p>
 
 <p>
-To access the configuration dialog choose <menu>Play</menu>
-<menu>Correspondence Chess</menu><menu>Configure</menu> from the
+To access the configuration dialog choose <green>Play</green>
+<green>Correspondence Chess</green><green>Configure</green> from the
 menu. The details are described in <a CCSetupDialog>Correspondence
 Chess Setup</a>. Quitting this dialog by the <b>[Ok]</b> button will
 automatically store your options.
@@ -4462,7 +4473,7 @@ directory. This offers also the possibility of automatic retrieval via
 external software.
 </p>
 <p>
-Once the games are in Scids Inbox invoking <menu>Process Inbox</menu>
+Once the games are in Scids Inbox invoking <green>Process Inbox</green>
 from the menu will work though the Inbox and add new moves to the
 games already in the database. Additionally it will add games not
 found in the current correspondence chess database as new games.
@@ -4481,7 +4492,7 @@ and new moves are added and stored in the correspondence chess
 database opened. The most convenient way to step through the games is
 by the two buttons <button tb_CC_Prev> and <button tb_CC_Next> which
 go to the previous and the next game, respectively. The difference to
-the functions from the <menu>Games</menu> menu is, that these two
+the functions from the <green>Games</green> menu is, that these two
 buttons scroll only between the games in Scids Inbox which are
 supposed to be your actually ongoing games. Of course the
 Correspondence Chess database might contain much more games, but
@@ -4498,13 +4509,13 @@ finished games to an archive database, or by just createing a new
 database for the ongoing games. Scid will treat all games not existing
 in the correspondence chess database already as new games and add them
 automatically. Hence, it is sufficient to open an empty database of
-type "Correspondence chess" and call <menu>Process Inbox</menu> to
+type "Correspondence chess" and call <green>Process Inbox</green> to
 import all currently ongoing games.
 </p>
 <p>
-Equivalent to the two buttons mentinoned are the items <menu>Previous
-Game</menu> and <menu>Next Game</menu> from the <menu>Correpondence
-Chess</menu> menu.
+Equivalent to the two buttons mentinoned are the items <green>Previous
+Game</green> and <green>Next Game</green> from the <green>Correpondence
+Chess</green> menu.
 </p>
 <p>
 An alternate way to jump to a specific game is by double clicking on
@@ -4512,7 +4523,7 @@ it within the game list.
 </p>
 <p>
 Note that if you set up your player names correctly (by means of
-<menu>My Player Names</menu>) Scid will rotate the board for you to
+<green>My Player Names</green>) Scid will rotate the board for you to
 play always upwards. You can have multiple player names. See also <a
 Options MyPlayerNames>My Player Names</a> for details.
 </p>
@@ -4534,10 +4545,10 @@ commments are stripped off.
 Pressing the Send button <button tb_CC_Send> will have Scid to
 determine the type of the correspondence chess game displayed (eMail or
 a server game) and call either your eMail program or the external send
-tool to submit your move. Calling <menu>Send move</menu> is equivalent
-to this button. Alternatively, <menu>Mail move</menu> can be used to
+tool to submit your move. Calling <green>Send move</green> is equivalent
+to this button. Alternatively, <green>Mail move</green> can be used to
 send the current game via eMail. In case of an eMail game this
-function is equivalent to <menu>Send move</menu>. In case of a server
+function is equivalent to <green>Send move</green>. In case of a server
 based game an eMail message is generated. Note however, that it will
 not necessarily contain a proper recipient as eMail addresses are not
 exchanged in server based correspondence chess.
@@ -4673,8 +4684,8 @@ Notes:
 <p>
 Xfcc always retrieves all games hosted on a specified server for your
 user ID at once. To retrieve the games just press the
-<button tb_CC_Retrieve> icon or select <menu>Retrieve Games</menu> from the
-<menu>Correspondence Chess</menu> menu. As a server connection is
+<button tb_CC_Retrieve> icon or select <green>Retrieve Games</green> from the
+<green>Correspondence Chess</green> menu. As a server connection is
 required to fetch new games be sure that the system has network
 access. Scid will call the fetch tool configured in the <a
 CCSetupDialog>Configuration</a> dialog which will place the games in
@@ -4850,9 +4861,9 @@ considering the wide range of possible mail setups these days, involve
 a huge amount of code. For this reason Scid relies on your normal
 eMail program which is far more suitable for this purpose than Scid
 can ever be. To get a game into Scid just save the attached PGN file
-to Scid's inbox and process the inbox by either <menu>Retrieve
-Games</menu> or the <button tb_CC_Retrieve> button or
-<menu>Process Inbox</menu>. The difference between the two is that
+to Scid's inbox and process the inbox by either <green>Retrieve
+Games</green> or the <button tb_CC_Retrieve> button or
+<green>Process Inbox</green>. The difference between the two is that
 the first one will also fetch and populate the Inbox additionally with
 games from another source (say Xfcc) by either the internal Xfcc
 support or an external fetch tool called. Hence
@@ -4860,7 +4871,7 @@ support or an external fetch tool called. Hence
 correspondence chess games.
 </p>
 <p>
-<b>Note</b> The <menu>Retrieve Games</menu> menu or the
+<b>Note</b> The <green>Retrieve Games</green> menu or the
 <button tb_CC_Retrieve> button do <b>not</b> fetch your eMail messages! You
 have to save your PGN files to Scids Inbox by hand. Probably this can
 be automatised by your eMail program (on Un*x systems setting up a
@@ -4874,8 +4885,8 @@ In- and Outbox directories.
 <h3>Send the response</h3>
 
 <p>
-After making your move send it by either the <menu>Mail Move</menu>
-item from the menu via <menu>Send move</menu> which is equivalent to
+After making your move send it by either the <green>Mail Move</green>
+item from the menu via <green>Send move</green> which is equivalent to
 <button tb_CC_Send>. The latter will Scid have to recognise the game
 as eMail correspondence and send it by mail while the former method
 will force Scid to generate an eMail message.
@@ -4934,7 +4945,7 @@ In/Outboxes are created.
 <b>Default Database</b>:
 This defines the default database for
 correspondence chess games. It can be accessed easily via
-<menu>Open Database</menu> in the <menu>Correspondence Chess</menu>
+<green>Open Database</green> in the <green>Correspondence Chess</green>
 menu. The advantage of this method is, that this database does not
 show up in the <i>recent databases</i> lists and that you can have a
 specific file for this. This database <b>has to be</b> of type
@@ -5049,22 +5060,22 @@ The meaning of the parameters is as follows:
       </li>
       <li><term>resign</term>: 0 or 1, specifying wether the user
       wants to resign. Set to 1 if the user invokes
-      <menu>Resign</menu> from the <menu>Correspondence Chess</menu>
+      <green>Resign</green> from the <green>Correspondence Chess</green>
       menu.
       </li>
       <li><term>claimDraw</term>: 0 or 1, specifying wether the user
       wants to claim a draw. Set to 1 if the user invokes
-      <menu>Claim Draw</menu> from the <menu>Correspondence Chess</menu>
+      <green>Claim Draw</green> from the <green>Correspondence Chess</green>
       menu.
       </li>
       <li><term>offerDraw</term>: 0 or 1, specifying wether the user
-      wants to offer a draw. Set to 1 if the user invokes <menu>Offer
-      Draw</menu> from the <menu>Correspondence Chess</menu> menu.
+      wants to offer a draw. Set to 1 if the user invokes <green>Offer
+      Draw</green> from the <green>Correspondence Chess</green> menu.
       </li>
       <li><term>acceptDraw</term>: 0 or 1, specifying wether the user
       wants to accept a draw offered by the opponent. Set to 1 if the
-      user invokes <menu>Accept Draw</menu> from the
-      <menu>Correspondence Chess</menu>
+      user invokes <green>Accept Draw</green> from the
+      <green>Correspondence Chess</green>
       menu.
       </li>
    </ul>
