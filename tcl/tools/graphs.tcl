@@ -591,14 +591,14 @@ proc ::tools::graphs::rating::Refresh {{player {}}} {
     $w.menu.help add command -label $::tr(Help) -accelerator F1 -command {helpWindow Graphs Rating}
 
     canvas $w.c -width 500 -height 300
-    $w.c create text 25 10 -tag text -justify center -width 1 -font font_Regular -anchor n
+    $w.c create text 25 5 -tag text -justify left -width 1 -font font_Regular -anchor n
     # the above height, width, x, y are reset below
     pack $w.c -side top -expand yes -fill both
     bind $w <F1> {helpWindow Graphs Rating}
     standardShortcuts $w
     bind $w <Configure> {
       .rgraph.c itemconfigure text -width [expr {[winfo width .rgraph.c] - 50} ]
-      .rgraph.c coords text [expr {[winfo width .rgraph.c] / 2} ] 10
+      .rgraph.c coords text [expr {[winfo width .rgraph.c] / 2} ] 5
       ::utils::graph::configure ratings -height [expr {[winfo height .rgraph.c] - 60} ]
       ::utils::graph::configure ratings -width [expr {[winfo width .rgraph.c] - 70} ]
       ::utils::graph::configure ratings -logy 10
@@ -620,7 +620,7 @@ proc ::tools::graphs::rating::Refresh {{player {}}} {
   set psize 2
 
   $w.c itemconfigure text -width [expr {[winfo width $w.c] - 50} ]
-  $w.c coords text [expr {[winfo width $w.c] / 2} ] 10
+  $w.c coords text [expr {[winfo width $w.c] / 2} ] 5
   set height [expr {[winfo height $w.c] - 60} ]
   set width [expr {[winfo width $w.c] - 70} ]
   ::utils::graph::create ratings -width $width -height $height -xtop 40 -ytop 30 \
@@ -631,8 +631,7 @@ proc ::tools::graphs::rating::Refresh {{player {}}} {
   busyCursor $w
   update
 
-  set title "[tr ToolsRating]"
-  # append title player-names ?
+  set title "[tr ToolsRating] \[[file tail [sc_base filename]]\]"
 
   set year $::tools::graphs::rating::year
   set elo $::tools::graphs::rating::elo
