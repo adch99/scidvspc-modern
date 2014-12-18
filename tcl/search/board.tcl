@@ -51,16 +51,17 @@ proc ::search::board {} {
   checkbutton $w.refdb.cb -textvar ::tr(SearchInRefDatabase) -variable ::searchRefBase \
                -command "checkState ::searchRefBase $w.refdb.lb"
 
-  set ::listbases {}
+  # Add clipbase to possible bases
+  set ::listbases [file tail [sc_base filename [sc_base count total]]]
 
-  # populate the combobox
-  for {set i 1} {$i <= [sc_base count total]} {incr i} {
+  # and then the rest
+  for {set i 1} {$i < [sc_base count total]} {incr i} {
     if {[sc_base inUse $i]} {
       lappend ::listbases [file tail [sc_base filename $i]]
     }
   }
   ttk::combobox $w.refdb.lb -textvariable refDatabase -values $::listbases
-  $w.refdb.lb current 0
+  $w.refdb.lb current [expr {[llength $::listbases] - 1}]
 
   checkState ::searchRefBase $w.refdb.lb
   
