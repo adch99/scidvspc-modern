@@ -12,7 +12,7 @@ set sMoves {}
 #   Opens the search window for the current board position.
 #
 proc ::search::board {} {
-  global glstart searchInVars sBoardType sBoardIgnoreCols
+  global glstart searchInVars sBoardType sBoardIgnoreCols refDatabase
 
   set w .sb
   if {[winfo exists $w]} {
@@ -51,17 +51,32 @@ proc ::search::board {} {
   checkbutton $w.refdb.cb -textvar ::tr(SearchInRefDatabase) -variable ::searchRefBase \
                -command "checkState ::searchRefBase $w.refdb.lb"
 
+  set found -1
+  ttk::combobox $w.refdb.lb -textvariable refDatabase
+  if {![info exists refDatabase]} {
+    set refDatabase 0
+  }
+
   # Add clipbase to possible bases
-  set ::listbases [file tail [sc_base filename [sc_base count total]]]
+  set baseName [file tail [sc_base filename [sc_base count total]]]
+  set ::listbases $baseName
+  if {$baseName == $refDatabase} {set found 0}
 
   # and then the rest
   for {set i 1} {$i < [sc_base count total]} {incr i} {
     if {[sc_base inUse $i]} {
-      lappend ::listbases [file tail [sc_base filename $i]]
+      set baseName [file tail [sc_base filename $i]]
+      lappend ::listbases $baseName
+      if {$baseName == $refDatabase} {set found $i}
     }
   }
-  ttk::combobox $w.refdb.lb -textvariable refDatabase -values $::listbases
-  $w.refdb.lb current [expr {[llength $::listbases] - 1}]
+  $w.refdb.lb configure -values $::listbases
+
+  if {$found > -1} {
+    $w.refdb.lb current $found
+  } else {
+    $w.refdb.lb current [expr {[llength $::listbases] - 1}]
+  }
 
   checkState ::searchRefBase $w.refdb.lb
   
@@ -104,7 +119,7 @@ proc ::search::board {} {
       set base  9 ; # this line not really needed
       for {set i 1} {$i <= [sc_base count total]} {incr i} {
 	if {[sc_base inUse $i]} {
-	  if {[file tail [sc_base filename $i]] == $refDatabase} {
+	  if {[file tail [sc_base filename $i]] == $::refDatabase} {
 	    set base $i
 	    set found 1
 	    break
