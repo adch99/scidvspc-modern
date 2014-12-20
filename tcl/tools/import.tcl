@@ -107,7 +107,13 @@ proc importPgnGame {} {
 
   # The usual Control-c Control-x Control-p bindings work automatically
   # wm minsize $w 50 5
-  focus $w.pane.edit.text
+
+  # Focus import button if text has been inserted
+  if {[string trim [$w.pane.edit.text get 0.0 end]] != {}} {
+    focus $w.b.import
+  } else {
+    focus $w.pane.edit.text
+  }
   update
   placeWinOverParent $w .
   wm state $w normal
