@@ -6659,13 +6659,16 @@ set helpText(Board) {<h1>Board Options</h1>
 <h3><name Textures>Custom Pieces</name></h3>
 <p>
 Place base 64 encoded piece sets in the directory <b>$HOME/.scidvspc/pieces</b>, and they will be added to the 
-Board Options window. There is a limit of 12 piece sets only.</p>
+Board Options window. There is a limit of 12 piece sets only.
+Some extra sets (including blindfold) can be got 
+<url http://sourceforge.net/projects/scidvspc/files/extra_pieces.tgz/download>here</url>.
+</p>
 <p>Though Scid now supports larger sizes, these are scaled
 from the smaller one, so sizes 25, 30, 35 ... 80 are the only ones needed
 in the custom pieces.</p>
 <p>
 For instructions on making Scid piece sets, download 
-<url http://sourceforge.net/projects/scidvspc/files/support%20files/scid_chess_pieces.tgz/download>this file</url>.
+<url http://sourceforge.net/projects/scidvspc/files/scid_chess_pieces.tgz/download>this file</url>.
 </p>
 <p><i>
    Examine <green>Help--<gt>StartUp</green> for the status of loading user textures and pieces.
