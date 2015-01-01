@@ -901,7 +901,7 @@ proc initAnnotation {n} {
   pack [frame $w.f] -side top -expand 1 -fill both
 
   if {$::windowsOS || $::macOS} {
-    bind $w {
+    bind $w <MouseWheel> {
       if {[expr -%D] < 0} {.configAnnotation.f.sf yview scroll -1 units}
       if {[expr -%D] > 0} {.configAnnotation.f.sf yview scroll +1 units}
     }

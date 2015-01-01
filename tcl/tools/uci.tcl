@@ -533,7 +533,11 @@ namespace eval uci {
 
     if {$::windowsOS || $::macOS} {
       # needs testing
-      bind $w {
+      bind $w <Shift-MouseWheel> {
+	if {[expr -%D] < 0} {.uciConfigWin.wtf.sf xview scroll -1 units}
+	if {[expr -%D] > 0} {.uciConfigWin.wtf.sf xview scroll +1 units}
+      }
+      bind $w <MouseWheel> {
 	if {[expr -%D] < 0} {.uciConfigWin.wtf.sf yview scroll -1 units}
 	if {[expr -%D] > 0} {.uciConfigWin.wtf.sf yview scroll +1 units}
       }
