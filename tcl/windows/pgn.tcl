@@ -476,7 +476,7 @@ namespace eval pgn {
     }
 
     set w .pgnPopup
-    set psize 30
+    set psize 35
     if {$psize > $::boardSize} { set psize $::boardSize }
 
     if {! [winfo exists $w]} {
@@ -505,12 +505,6 @@ namespace eval pgn {
     raiseWin $w
   }
 
-  ################################################################################
-  # ::pgn::HideBoard
-  #
-  #    Hides the window produced by ::pgn::ShowBoard.
-  #
-  ################################################################################
   proc HideBoard {} {
     if {[winfo exists .pgnPopup]} {
       wm withdraw .pgnPopup

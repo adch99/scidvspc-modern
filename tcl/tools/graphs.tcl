@@ -462,8 +462,10 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
       ::utils::graph::redraw score
       recordWinSize .sgraph
     }
-    bind $w.c <3> ::tools::graphs::score::Refresh
-    bind $w.c <1> {::tools::graphs::score::Move %x}
+    bind $w.c <ButtonPress-3> ::tools::graphs::score::Refresh
+    bind $w.c <ButtonPress-1> {::tools::graphs::score::Move %x}
+    bind $w.c <ButtonPress-2> {::tools::graphs::score::ShowBoard %x %X %Y}
+    bind $w.c <ButtonRelease-2> ::pgn::HideBoard
     bind $w <Escape> "destroy $w"
     bind $w <Control-Z> "destroy $w"
 
@@ -526,13 +528,60 @@ proc ::tools::graphs::score::ConfigMenus {{lang ""}} {
   }
 }
 
-proc ::tools::graphs::score::Move {xc} {
-  set x [expr {round([::utils::graph::xunmap score $xc] * 2)-1} ]
+proc ::tools::graphs::score::Move {x} {
+  set movenum [expr {round([::utils::graph::xunmap score $x] * 2)-1} ]
   sc_move start
-  sc_move forward $x
+  sc_move forward $movenum
   updateBoard
 }
 
+# Derived from pgn::ShowBoard
+
+proc ::tools::graphs::score::ShowBoard {x xc yc} {
+    set win .sgraph
+
+    # get movenumber 
+    set movenum [expr {round([::utils::graph::xunmap score $x] * 2)-1} ]
+
+    # Do these pushes/pops break anything elsewhere ?
+    sc_game push copyfast
+    sc_move ply $movenum
+    set bd [sc_pos board]
+    sc_game pop
+
+    if {[::board::isFlipped .main.board]} {
+      set bd [string reverse [lindex $bd 0]]
+    }
+
+    set w .pgnPopup
+    set psize 35
+    if {$psize > $::boardSize} { set psize $::boardSize }
+
+    if {! [winfo exists $w]} {
+      toplevel $w -relief solid -borderwidth 2
+      wm withdraw $w
+      wm overrideredirect $w 1
+      ::board::new $w.bd $psize
+      pack $w.bd -side top -padx 2 -pady 2
+    }
+    ::board::update $w.bd $bd
+
+    # Make sure the popup window can fit on the screen:
+    incr xc 5
+    incr yc 5
+    update idletasks
+    set dx [winfo width $w]
+    set dy [winfo height $w]
+    if {($xc+$dx) > [winfo screenwidth $w]} {
+      set xc [expr {[winfo screenwidth $w] - $dx}]
+    }
+    if {($yc+$dy) > [winfo screenheight $w]} {
+      set yc [expr {[winfo screenheight $w] - $dy}]
+    }
+    wm geometry $w "+$xc+$yc"
+    wm deiconify $w
+    raiseWin $w
+  }
 
 
 set ::tools::graphs::rating::year 1900
