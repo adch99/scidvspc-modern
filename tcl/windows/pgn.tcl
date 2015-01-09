@@ -237,11 +237,11 @@ namespace eval pgn {
 
 
     # # Middle button popups a PGN board
-    bind $w <ButtonPress-2> "::pgn::ShowBoard .pgnWin.text 5 %x %y %X %Y"
+    bind $w <ButtonPress-2> "::pgn::ShowBoard .pgnWin.text %x %y %X %Y"
     bind $w <ButtonRelease-2> ::pgn::HideBoard
 
     # Right button draws context menu
-    bind $w <ButtonPress-3> "::pgn::contextMenu .pgnWin.text 5 %x %y %X %Y"
+    bind $w <ButtonPress-3> "::pgn::contextMenu .pgnWin.text %x %y %X %Y"
 
     if {$::macOS} {
       bind .pgnWin <Control-Button-1> {event generate .pgnWin <Button-3> -x %x -y %y -button 3}
@@ -377,8 +377,8 @@ namespace eval pgn {
     ::commenteditor::Open
   }
 
-  proc contextMenu {win startLine x y xc yc} {
-    # startLine x y xc yc -  unused
+  proc contextMenu {win x y xc yc} {
+    # x y xc yc -  unused
 
     update idletasks
 
@@ -433,7 +433,7 @@ namespace eval pgn {
     updateBoard -pgn
   }
 
-  proc getMoveNumber { win startline lastpos } {
+  proc getMoveNumber {win lastpos} {
     if {[scan $lastpos "%d.%d" lastline lastcol] != 2} {
       return 0
     }
@@ -453,7 +453,7 @@ namespace eval pgn {
   ### Produces a popup window showing the board position in the
   ### game at the current mouse location in the PGN window.
 
-  proc ShowBoard {win startLine x y xc yc} {
+  proc ShowBoard {win x y xc yc} {
     global lite dark
 
     # unpost context menu
@@ -462,7 +462,7 @@ namespace eval pgn {
 
     # extract movenumber from pgn widget tag 
 
-    set moveTag m_[getMoveNumber $win $startLine [ $win index @$x,$y]]
+    set moveTag m_[getMoveNumber $win [ $win index @$x,$y]]
     set movenum [string trim [lindex [split [$win tag bind $moveTag <1>] _] end]]
    
     # Do these pushes/pops break anything elsewhere ?
