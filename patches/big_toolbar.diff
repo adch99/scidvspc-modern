@@ -1,0 +1,13 @@
+Index: tcl/board.tcl
+===================================================================
+--- tcl/board.tcl	(revision 2123)
++++ tcl/board.tcl	(working copy)
+@@ -1180,7 +1180,7 @@
+ MRIkyiwsUKaIHk16ChQsaHsFAgA7}
+ 
+ # Double size the toolbar buttons (disabled)
+-if {0} {
++if {1} {
+   image create photo tempimage
+   foreach i {glist pgn comment maint eco tree book crosst tmt engine
+     hsearch bsearch msearch rfilter newgame copy paste
