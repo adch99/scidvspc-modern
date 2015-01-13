@@ -1161,6 +1161,7 @@ proc changeTheme {} {
       ::ttk::style configure Treeview -background $::defaultBackground
       ::ttk::style configure Treeview -fieldbackground $::defaultBackground
     }
+    ::ttk::style configure TNotebook.Tab -font font_Small
 }
 
 set m .menu.options.colour
