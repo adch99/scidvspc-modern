@@ -1865,7 +1865,7 @@ set boardSize $newSize
 
 # Load theme
 catch {ttk::style theme use $lookTheme}
-::ttk::style configure TNotebook.Tab -font font_Small
+::ttk::style configure TNotebook.Tab -font font_Menu
 
 # Check for old (single-directory) tablebase option:
 if {[info exists initialDir(tablebase)]} {
