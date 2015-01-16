@@ -93,6 +93,10 @@ proc pasteGame {} {
     ::board::flip .main.board
   } 
   updateBoard -pgn
+
+  ## Seems best
+  # refreshWindows
+  ::tools::graphs::score::Refresh
 }
 
 proc setSetupBoardToFen {} {
