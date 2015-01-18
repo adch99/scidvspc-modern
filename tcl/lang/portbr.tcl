@@ -794,6 +794,10 @@ translate B Book {Book}
 
 # Analysis Engine open dialog:
 translate B EngineList {Lista de Programas de Analise}
+# ====== TODO To be translated ======
+translate B EngineKey {Key}
+# ====== TODO To be translated ======
+translate B EngineType {Type}
 translate B EngineName {Nome}
 translate B EngineCmd {Comando}
 translate B EngineArgs {Parametros}

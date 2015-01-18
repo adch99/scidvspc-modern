@@ -730,6 +730,10 @@ translate N Book {Openingenboek}
 
 # Analysis Engine open dialog:
 translate N EngineList {Analyse enginelijst}
+# ====== TODO To be translated ======
+translate N EngineKey {Key}
+# ====== TODO To be translated ======
+translate N EngineType {Type}
 translate N EngineName {Naam}
 translate N EngineCmd {Commando}
 translate N EngineArgs {Parameters}

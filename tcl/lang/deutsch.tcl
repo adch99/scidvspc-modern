@@ -736,6 +736,10 @@ translate D Book {Buch}
 
 # Analysis Engine open dialog:
 translate D EngineList {Analyse-Engines}
+# ====== TODO To be translated ======
+translate D EngineKey {Key}
+# ====== TODO To be translated ======
+translate D EngineType {Type}
 translate D EngineName {Name}
 translate D EngineCmd {Befehl}
 translate D EngineArgs {Parameter}

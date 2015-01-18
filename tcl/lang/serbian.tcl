@@ -866,6 +866,10 @@ translate Y Book {Book}
 
 # Analysis Engine open dialog:
 translate Y EngineList {Analysis Engine List} ;# ***
+# ====== TODO To be translated ======
+translate Y EngineKey {Key}
+# ====== TODO To be translated ======
+translate Y EngineType {Type}
 translate Y EngineName {Name} ;# ***
 translate Y EngineCmd {Command} ;# ***
 translate Y EngineArgs {Parameters} ;# ***

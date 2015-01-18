@@ -795,6 +795,10 @@ translate H Book {Book}
 
 # Analysis Engine open dialog:
 translate H EngineList {Elemzõ motorok listája}
+# ====== TODO To be translated ======
+translate H EngineKey {Key}
+# ====== TODO To be translated ======
+translate H EngineType {Type}
 translate H EngineName {Név}
 translate H EngineCmd {Parancssor}
 translate H EngineArgs {Paraméterek}

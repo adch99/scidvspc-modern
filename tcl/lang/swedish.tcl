@@ -725,6 +725,10 @@ translate W Book {Bok}
 
 # Analysis Engine open dialog:
 translate W EngineList {Lista över schackprogram}
+# ====== TODO To be translated ======
+translate W EngineKey {Key}
+# ====== TODO To be translated ======
+translate W EngineType {Type}
 translate W EngineName {Namn}
 translate W EngineCmd {Startkommando}
 translate W EngineArgs {Parametrar}

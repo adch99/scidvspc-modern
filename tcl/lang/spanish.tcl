@@ -744,6 +744,10 @@ translate S Book {Libro}
 
 # Analysis Engine open dialog:
 translate S EngineList {Lista de motores de análisis}
+# ====== TODO To be translated ======
+translate S EngineKey {Key}
+# ====== TODO To be translated ======
+translate S EngineType {Type}
 translate S EngineName {Nombre}
 translate S EngineCmd {Orden}
 translate S EngineArgs {Parámetros}

@@ -866,6 +866,10 @@ translate O Book {Book}
 
 # Analysis Engine open dialog:
 translate O EngineList {Liste over analysemotorer}
+# ====== TODO To be translated ======
+translate O EngineKey {Key}
+# ====== TODO To be translated ======
+translate O EngineType {Type}
 translate O EngineName {Navn}
 translate O EngineCmd {Kommandolinje}
 translate O EngineArgs {Parametre}

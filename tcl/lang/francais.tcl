@@ -734,6 +734,10 @@ translate F Book {Bibliothèque}
 
 # Analysis Engine open dialog:
 translate F EngineList {Liste des moteurs d'analyse}
+# ====== TODO To be translated ======
+translate F EngineKey {Key}
+# ====== TODO To be translated ======
+translate F EngineType {Type}
 translate F EngineName {Nom}
 translate F EngineCmd {Commande}
 translate F EngineArgs {Paramètres}

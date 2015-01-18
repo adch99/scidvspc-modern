@@ -712,6 +712,8 @@ translate E Book {Book}
 
 # Analysis Engine open dialog:
 translate E EngineList {Analysis Engines}
+translate E EngineKey {Key}
+translate E EngineType {Type}
 translate E EngineName {Name}
 translate E EngineCmd {Command}
 translate E EngineArgs {Parameters}

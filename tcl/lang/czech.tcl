@@ -788,6 +788,10 @@ translate C Book {Book}
 
 # Analysis Engine open dialog:
 translate C EngineList {Seznam programù pro analýzu}
+# ====== TODO To be translated ======
+translate C EngineKey {Key}
+# ====== TODO To be translated ======
+translate C EngineType {Type}
 translate C EngineName {Jméno}
 translate C EngineCmd {Pøíkaz}
 translate C EngineArgs {Parametry}

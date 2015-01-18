@@ -709,6 +709,10 @@ translate P Book {Książka debiutowa}
 
 # Analysis Engine open dialog:
 translate P EngineList {Programy szachowe}
+# ====== TODO To be translated ======
+translate P EngineKey {Key}
+# ====== TODO To be translated ======
+translate P EngineType {Type}
 translate P EngineName {Nazwa}
 translate P EngineCmd {Polecenie}
 translate P EngineArgs {Parametry} 

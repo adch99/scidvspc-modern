@@ -698,6 +698,10 @@ translate R Book {Книга}
 
 # Analysis Engine open dialog:
 translate R EngineList {Список анализирующих движков}
+# ====== TODO To be translated ======
+translate R EngineKey {Key}
+# ====== TODO To be translated ======
+translate R EngineType {Type}
 translate R EngineName {Название}
 translate R EngineCmd {Команда}
 translate R EngineArgs {Параметры}

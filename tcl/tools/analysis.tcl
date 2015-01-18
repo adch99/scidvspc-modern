@@ -273,7 +273,7 @@ if {[llength $engines(list)] == 0} {
 ### Given a time in seconds since 1970, returns a formatted date string.
 
 proc ::enginelist::date {time} {
-  return [clock format $time -format "%d-%b-%Y %H:%M"]
+  return [clock format $time -format "%d %b %Y"]
 }
 
 proc ::enginelist::listEngines {{focus 0}} {
@@ -290,29 +290,29 @@ proc ::enginelist::listEngines {{focus 0}} {
     set time [lindex $engine 5]
     set uci  [lindex $engine 7]
     set date [::enginelist::date $time]
-    set text [format "%-18s" [string range $name 0 17]]
+    set text [format "%-24s" [string range $name 0 23]]
 
     # display any hot key bindings
     if {$engines(F2) == $count} {
-      append text " F2  "
+      append text "  F2  "
     } elseif {$engines(F3) == $count} {
-      append text " F3  "
+      append text "  F3  "
     } elseif {$engines(F4) == $count} {
-      append text " F4  "
+      append text "  F4   "
     } else {
-      append text "     "
+      append text "      "
     }
 
     if {$uci} {
-      append text "uci    "
+      append text " uci    "
     } else {
-      append text "xboard "
+      append text " xboard "
     }
 
     if {$elo > 0} {
-      append text [format "%4u" $elo]
+      append text [format "%6u" $elo]
     } else {
-      append text "    "
+      append text "      "
     }
 
     if {$time > 0} {
@@ -371,20 +371,12 @@ proc ::enginelist::choose {} {
   text $w.title -width 93 -height 1 -font font_Fixed -relief flat \
       -cursor top_left_arrow -background gray95
 
-  $w.title insert end $::tr(EngineName) Name
-  for {set i [string length $::tr(EngineName)]} {$i < 18} { incr i } {
-    $w.title insert end " "
-  }
+  $w.title insert end [format "%-24s %4s %5s %8s %8s" \
+    $::tr(EngineName) $::tr(EngineKey) $::tr(EngineType) $::tr(EngineElo) $::tr(EngineTime)]
 
-
-  $w.title insert end " Key Type    "
-
-  $w.title insert end $::tr(EngineElo) Elo
-  for {set i [string length $::tr(EngineElo)]} {$i < 4} { incr i } {
-    $w.title insert end " "
-  }
-
-  $w.title insert end "      $::tr(EngineTime)" Time
+  ### Are these tags (Elo Time) used anywhere ??
+  # $w.title insert end "  $::tr(EngineElo)" Elo
+  # $w.title insert end "   $::tr(EngineTime)" Time
 
   $w.title configure -state disabled
   pack $w.title -side top -fill x
@@ -2176,7 +2168,7 @@ proc makeAnalysisWin {{n 0} {options {}}} {
       logEngine $n "Command: $analysisCommand"
       logEngine $n "Arguments:  $analysisArgs"
       logEngine $n "Directory: $analysisDir"
-      logEngine $n "Date: [clock format [clock seconds]]"
+      logEngine $n "Date: [clock format [clock seconds] -format {%d %b %Y}]"
       logEngine $n ""
     }
   }

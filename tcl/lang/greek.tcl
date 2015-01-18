@@ -743,6 +743,10 @@ translate G Book {Ανοίγματα}
 
 # Analysis Engine open dialog:
 translate G EngineList {Μηχανές Ανάλυσης}
+# ====== TODO To be translated ======
+translate G EngineKey {Key}
+# ====== TODO To be translated ======
+translate G EngineType {Type}
 translate G EngineName {Όνομα}
 translate G EngineCmd {Εντολή}
 translate G EngineArgs {Παράμετροι}
