@@ -273,7 +273,7 @@ if {[llength $engines(list)] == 0} {
 ### Given a time in seconds since 1970, returns a formatted date string.
 
 proc ::enginelist::date {time} {
-  return [clock format $time -format "%d %b %Y"]
+  return [clock format $time -format "%d/%m/%Y"]
 }
 
 proc ::enginelist::listEngines {{focus 0}} {
@@ -298,7 +298,7 @@ proc ::enginelist::listEngines {{focus 0}} {
     } elseif {$engines(F3) == $count} {
       append text "  F3  "
     } elseif {$engines(F4) == $count} {
-      append text "  F4   "
+      append text "  F4  "
     } else {
       append text "      "
     }
