@@ -5434,44 +5434,47 @@ Use <b>tell relay notify</b> if you want to be told what tournaments are being r
 
 <h3>Observing Games</h3>
   <p>
-  The format for observing other games is
-<b>observe player | game | /l | /b | /s | /S | /w | /z | /B | /L | /x</b>
-<br>
-where the options are:
+The format for observing games is "<b>observe</b> game", where game may be
 <ul>
-<li>game:   Observe the given game number</li>
-<li>player: Observe the given players game</li>
-<li>/l:     Observe the highest rated lightning game</li>
-<li>/b:     Observe the highest rated blitz game</li>
-<li>/s:     Observe the highest rated standard game</li>
-<li>/S:     Observe the highest rated suicide game</li>
-<li>/w:     Observe the highest rated wild game</li>
-<li>/z:     Observe the highest rated crazyhouse game</li>
-<li>/B:     Observe the highest rated bughouse game</li>
-<li>/L:     Observe the highest rated losers game</li>
-<li>/x:     Observe the highest rated atomic game </li>
+<li>a specific game number</li>
+<li>a specific player's current game</li>
 </ul>
-  One can also browse all current games using the <b>games</b> command, and type <b>unobserve</b> to stop following all games.
+or, highest rated games, such as
+<ul>
+<li>/l - lightning</li>
+<li>/b - blitz</li>
+<li>/s - standard</li>
+<li>/S - suicide</li>
+<li>/w - wild</li>
+<li>/z - crazyhouse</li>
+<li>/B - bughouse</li>
+<li>/L - losers</li>
+<li>/x - atomic</li>
+</ul>
+</p>
+  One may browse all current games using the <b>games</b> command, or <b>unobserve</b> to stop following games.
   </p>
   <br>
-  Observed games are shown as small boards in Scid's FICS widget. The boards' size is controlled by a slider,
-  and they have two small buttons:
+  Observed games are shown as small boards (the size is configurable in Options--<gt>FICS)
+  and they have two buttons:
   <ul>
-  <li><img arrow_up> will load the game into Scid's main board, allowing analysis and saving of the game.
+  <li><img arrow_up>  :  Load the game into Scid's main board, allowing analysis and saving of the game.
   <i>Note: Doing this with blitz games on slow internet connections can be
-  troublesome, and it is disabled for </i><b>variants</b>.</li>
-  <li><img arrow_close> Closes the game.</li>
+  troublesome, and it is disabled altogether for unsupported variants.</li>
+  <li><img arrow_close>  :  Close the game.</li>
   </ul>
 
   <p>
-  For discussing games with other observers,
-  <b>whisper</b> and <b>kibitz</b> can be used. All these conversations can be read in the console.
+  Discussing games with others is supported by the <b>whisper</b> and <b>kibitz</b> commands.
+  </p><p>
+  FICS also has a concept of <b>primary</b> game. When observing multiple games, double click any board to make it your primary game,
+  and the game number will be shown in bold.
   </p>
 
   <h3><name exam>Examining and Loading Games</name></h3>
 
   <p>
-  FICS and Scid vs. PC offer two ways to analyze games. Smoves and Examine.
+  FICS and Scid vs. PC offer two ways to analyze games - "smoves" and "examine".
   </p>
   <p>
   The <b>smoves</b> command loads a previously played or suspended game into the main board.
@@ -5516,7 +5519,7 @@ and trying to run engines against such positions is not recommended.</i></p>
   also other bots available.
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.8 April 2012</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.14 January 2015</footer></p>
 }
 
 set helpTitle(FICSwidget) "FICS: Play on the Internet"

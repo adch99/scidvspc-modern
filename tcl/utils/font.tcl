@@ -400,6 +400,8 @@ proc FontBiggerSmaller {incr} {
   font configure font_Italic -size $fd_size
   font configure font_BoldItalic -size $fd_size
   font configure font_Small -size $small_size
+  font configure font_SmallBold -size $small_size
+  font configure font_SmallItalic -size $small_size
   font configure font_H1 -size [expr $fd_size + 8]
   font configure font_H2 -size [expr $fd_size + 6]
   font configure font_H3 -size [expr $fd_size + 4]

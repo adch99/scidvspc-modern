@@ -9,6 +9,7 @@ namespace eval fics {
   set seeklist {}
   set mainGame -1
   set observedGames {}
+  set primary 0
   set playing 0
   set opponent {}
   set mutex 0
@@ -330,12 +331,12 @@ namespace eval fics {
     entry $w.command.find -width 10 -textvariable ::fics::helpWin(find)
     configFindEntryBox $w.command.find ::fics::helpWin $w.console.text
 
-    button $w.command.send -textvar tr(FICSSend) 
-    button $w.command.clear -textvar tr(Clear) -command "
+    button $w.command.send -textvar tr(FICSSend) -state disabled
+    button $w.command.clear -textvar tr(Clear) -state disabled -command "
       $w.console.text delete 0.0 end
       $w.console.text insert 0.0 \"FICS ($::scidName $::scidVersion)\n\"
     "
-    button $w.command.next -textvar tr(Next) -command {::fics::writechan next echo}
+    button $w.command.next -textvar tr(Next) -state disabled -command {::fics::writechan next echo}
 
     bind $w <Control-p> ::pgn::Open
     bind $w <Prior> "$w.console.text yview scroll -1 page"
@@ -1127,13 +1128,14 @@ namespace eval fics {
 	# &&& do we need ::fics::remove_observedGame $num (todo check)
 	::fics::enableEngines
       } else {
-         # Add result to white label
-         catch {
-	  .fics.bottom.game$num.w.result configure -text \
-	    "[.fics.bottom.game$num.w.result cget -text] ($res)"
+        # Add result to white label
+        catch {
+	  .fics.bottom.game$num.bd.bd bind current <Double-Button-1> {}
+	  .fics.bottom.game$num.w.result configure -font font_Small -text \
+	      "[.fics.bottom.game$num.w.result cget -text] ($res)"
           pack forget .fics.bottom.game$num.b.load
-         }
-         ::fics::remove_observedGame $num
+        }
+        ::fics::remove_observedGame $num
       } 
       return
     }
@@ -1197,6 +1199,10 @@ namespace eval fics {
       .fics.bottom.buttons.offers  configure -state normal
       .fics.bottom.buttons.tells   configure -state normal
       .fics.bottom.buttons.shouts  configure -state normal
+      .fics.command.send           configure -state normal
+      .fics.command.clear          configure -state normal
+      .fics.command.next           configure -state normal
+
       bind .fics.command.entry <Return> ::fics::cmd
       .fics.command.send configure -command ::fics::cmd
       return
@@ -1398,6 +1404,9 @@ namespace eval fics {
 
   proc addObservedGame {game} {
       set w .fics
+      if {$::fics::observedGames == {}} {
+        set ::fics::primary $game
+      }
       if {[lsearch -exact $::fics::observedGames $game] == -1} {
 	lappend ::fics::observedGames $game
       }
@@ -1409,12 +1418,23 @@ namespace eval fics {
       }
       frame $w.bottom.game$game
       ::board::new $w.bottom.game$game.bd $::fics::size 1
-      # At bottom we have White and Buttons
+      # At bottom we have White and game number
       # (note whiteElo, blackElo labels are not packed, only used for data should we load game
       # data for these labels is read next line from fics
       frame $w.bottom.game$game.w
       label $w.bottom.game$game.w.white  -font font_Small
       label $w.bottom.game$game.w.result -font font_Small
+
+      $w.bottom.game$game.bd.bd bind current <Double-Button-1> "
+        catch {$w.bottom.game\${::fics::primary}.w.result configure -font font_Small}
+        ::fics::writechan \"primary $game\"
+        set ::fics::primary $game
+        $w.bottom.game$game.w.result configure -font font_SmallBold
+      "
+
+      if {$::fics::primary == $game} {
+        $w.bottom.game$game.w.result configure -font font_SmallBold
+      }
       # At top we have Black and Buttons
       frame $w.bottom.game$game.b 
       label $w.bottom.game$game.b.black -font font_Small
@@ -1477,6 +1497,10 @@ namespace eval fics {
   }
 
   proc remove_observedGame {game} {
+    if {$game == $::fics::primary} {
+      # actually, we may still have a primary game, but scid does not track their order
+      set ::fics::primary 0
+    }
     set i [lsearch -exact $::fics::observedGames $game]
     if {$i > -1} {
       set ::fics::observedGames [lreplace $::fics::observedGames $i $i]
@@ -2053,7 +2077,9 @@ namespace eval fics {
       wm title $::dot_w "$::scidName: $white - $black (game $game: $::fics::timecontrol)"
 
       if {$::fics::playing != 1 && $::fics::playing != -1 && $::fics::observedGames != {}} {
+	catch {.fics.bottom.game${::fics::primary}.w.result configure -font font_Small}
         writechan "primary $game"
+        set ::fics::primary $game
       }
     }
   }
