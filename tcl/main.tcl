@@ -408,6 +408,7 @@ if {$::macOS} {
 }
 
 proc contextmenu {x y} {
+  # hmmm - _drag(.main.board) has been noted to be left set > 0, and this menu wont post
   if {$::board::_drag(.main.board) < 0} {
     tk_popup .main.gameInfo.menu $x $y
   }

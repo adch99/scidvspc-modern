@@ -296,7 +296,12 @@ namespace eval fics {
     # graph widget initialised
     set ::fics::graph(init) 0
     canvas $w.bottom.graph.c -background grey90 -width $::fics::graph(width)
+    button $w.bottom.graph.close -image arrow_close -relief flat -command {
+      set ::fics::graph(on) 0
+      ::fics::showGraph
+    }
     pack $w.bottom.graph.c
+    place $w.bottom.graph.close -in $w.bottom.graph.c -relx 1 -rely 0 -anchor ne
 
     scrollbar $w.console.scroll -command "$w.console.text yview"
 
@@ -2123,7 +2128,10 @@ namespace eval fics {
     if { $::fics::graph(on) } {
       pack forget $w.buttons
       pack $w.graph -side right -padx 2 -pady 5 -anchor center
-      bind .fics <Escape> {set ::fics::graph(on) 0 ; ::fics::showGraph}
+      bind .fics <Escape> {
+        set ::fics::graph(on) 0
+        ::fics::showGraph
+      }
       updateGraph
     } else {
       after cancel ::fics::updateGraph
