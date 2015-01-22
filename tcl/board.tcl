@@ -1056,8 +1056,20 @@ button .main.button.addVar -image tb_addvar -command {
     if {[sc_pos isAt vstart]  &&  [sc_pos isAt vend]} {
       return
     }
+
+    set endmove {}
+    if {[sc_pos isAt vend]} {
+      # Create new var with last move, and enter into it
+      set endmove [sc_game info previousMoveUCI]
+    }
+
     sc_game undoPoint
     sc_var create
+
+    if {$endmove != {}} {
+      sc_move addSan $endmove
+    }
+
     updateBoard -pgn
 }
 
