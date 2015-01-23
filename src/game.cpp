@@ -2585,14 +2585,17 @@ Game::WriteMoveList (TextBuffer *tb, uint plyCount,
                        }
                 }
 */
-                if (IsHtmlFormat()  &&  VarDepth == 0) {
-                    tb->PrintString ("</b>");
-                }
+		if (IsHtmlFormat()  &&  VarDepth == 0) {
+		    if (PgnStyle & PGN_STYLE_INDENT_COMMENTS) 
+			tb->PrintString ("</b><dl><dd>");
+		    else
+			tb->PrintString ("</b>");
+		}
                 if ((PgnStyle & PGN_STYLE_INDENT_COMMENTS) && VarDepth == 0) {
                     if (IsColorFormat()) {
                         tb->PrintString ("<br><ip1>");
                     } else {
-                        tb->SetIndent (tb->GetIndent() + 4); tb->Indent();
+		      tb->SetIndent (tb->GetIndent() + 4); tb->Indent();
                     }
                 }
 
@@ -2627,7 +2630,10 @@ Game::WriteMoveList (TextBuffer *tb, uint plyCount,
                     delete dstr;
                 }
                 if (IsHtmlFormat() && VarDepth == 0) {
-                    tb->PrintString ("<b>");
+		    if (PgnStyle & PGN_STYLE_INDENT_COMMENTS) 
+			tb->PrintString ("</dl></b>");
+		    else
+			tb->PrintString ("<b>");
                 }
                 printMoveNum = true;
             }
@@ -2659,9 +2665,12 @@ Game::WriteMoveList (TextBuffer *tb, uint plyCount,
             // Doesn't indent first var in column mode properly 
             // if including !(PgnStyle & PGN_STYLE_COLUMN) here.
             // But as-is, depth 3 vars don't indent in COLUMN mode (bug)
-            if ((PgnStyle & PGN_STYLE_INDENT_VARS) && IsColorFormat()) {
+            if (PgnStyle & PGN_STYLE_INDENT_VARS) {
                 if ( !commentLine ) {
-		  tb->PrintString ("<br>");
+		    if (IsColorFormat())
+			  tb->PrintString ("<br>");
+		    if (IsHtmlFormat())
+			  tb->PrintString (newline);
                 }
             }
             for (uint i=0; i < m->numVariations; i++) {
@@ -2674,6 +2683,8 @@ Game::WriteMoveList (TextBuffer *tb, uint plyCount,
                             case 3: tb->PrintString ("<ip4>"); break;
                         }
                     } else {
+			if (IsHtmlFormat()) 
+			    tb->PrintString ("<dl><dd>");
                         tb->SetIndent (tb->GetIndent() + 4); tb->Indent();
                     }
                 }
@@ -2728,7 +2739,9 @@ Game::WriteMoveList (TextBuffer *tb, uint plyCount,
                             case 3: tb->PrintString ("</ip4><br>"); break;
                         }
                     } else {
-                        tb->SetIndent (tb->GetIndent() - 4); tb->Indent();
+			if (IsHtmlFormat()) 
+			    tb->PrintString ("</dl>");
+			tb->SetIndent (tb->GetIndent() - 4); tb->Indent();
                     }
                 } else { tb->PrintSpace(); }
                 printMoveNum = true;
