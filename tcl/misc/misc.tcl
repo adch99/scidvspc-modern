@@ -713,10 +713,9 @@ namespace eval html {
     puts $f "<NOSCRIPT>You need to have Javascript enabled in your browser to see this page.</NOSCRIPT>"
     # game header
     puts $f "<span class=\"hPlayers\">$players</span>"
-    puts $f "<span class=\"hEvent\"><br>$event</span>"
-    puts $f "<span class=\"hAnnot\"><br>\[$eco\]</span>"
-    puts $f "<span class=\"hEvent\"><br>\[$date\]</span>"
     puts $f "<br>"
+    puts $f "<span class=\"hEvent\"><br>$event \($date\)</span>"
+    puts $f "<br><br>"
 
     # link moves
     set prevdepth 0
@@ -740,10 +739,10 @@ namespace eval html {
       set prevdepth $elt(depth)
       set prevvarnumber $elt(var)
       if {$dots > 0} {
-	puts $f "<a href=\"javascript:gotoMove($elt(idx))\" ID=\"$elt(idx)\" class=\"$class\">$dots. ... $elt(move)</a>$elt(nag) $elt(comment)"
+	puts $f "<a href=\"javascript:gotoMove($elt(idx))\" ID=\"$elt(idx)\" class=\"$class\">$dots. ... $elt(move)</a>$elt(nag) <span class=\"VC\">$elt(comment)</span>"
         set dots 0
       } else {
-	puts $f "<a href=\"javascript:gotoMove($elt(idx))\" ID=\"$elt(idx)\" class=\"$class\">$elt(move)</a>$elt(nag) $elt(comment)"
+	puts $f "<a href=\"javascript:gotoMove($elt(idx))\" ID=\"$elt(idx)\" class=\"$class\">$elt(move)</a>$elt(nag) <span class=\"VC\">$elt(comment)</span>"
       }
       if {$elt(diag)} {
         insertMiniDiag $elt(fen) $f

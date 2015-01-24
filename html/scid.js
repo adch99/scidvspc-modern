@@ -7,7 +7,7 @@
 // Globals
 var oldColor = "#ececec"; // should be the same as background color
 var bgcolor = "#d7d7d7"
-var highlightMove = "#e9aa5d";
+var highlightMove = "#b0c4de";
 var black_square = "#7389b6";
 var white_square = "#f3f3f3";
 var	bgcolor_coordinates = "#edeca4";
@@ -202,7 +202,7 @@ function gotoprevgame() {
 /* ------  gotonextgame --------- */
 function gotonextgame() {
 	var i = parent.nav.document.getElementById("gameselect").selectedIndex;
-	if ( i < parent.nav.document.getElementById("gameselect").length) {
+	if ( i < parent.nav.document.getElementById("gameselect").length - 1) {
 		parent.nav.document.getElementById("gameselect").selectedIndex = i+1;
 		gotogame();
 	}
