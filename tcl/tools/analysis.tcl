@@ -3642,11 +3642,16 @@ proc updateAnalysis {{n 0} {reset 1}} {
 
     ### Xboard
 
+    if { $::annotate(Engine) == $n && ! $::wentOutOfBook && $::useAnalysisBook} {
+      bookAnnotation
+      return
+    }
+
     #TODO: remove 0.3s delay even for other engines
 
     # If too close to the previous update, and no other future update is
     # pending, reschedule this update to occur in another 0.3 seconds:
-    #
+
     if {[catch {set clicks [clock clicks -milliseconds]}]} {
       set clicks [clock clicks]
     }
