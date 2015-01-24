@@ -715,12 +715,30 @@ namespace eval html {
     puts $f "<span class=\"hPlayers\">$players</span>"
     puts $f "<br>"
     puts $f "<span class=\"hEvent\"><br>$event \($date\)</span>"
+    if {[sc_game startBoard]} {
+      puts $f "<br>"
+      puts $f "[sc_game startPos]"
+    }
     puts $f "<br><br>"
 
     # link moves
     set prevdepth 0
     set prevvarnumber 0
+
+    # These 'dots' are purely for use with diagrams
     set dots 0
+
+    ### Godawful hack to show the initial comment
+    # we havent fixed the comments at the start of individual variations
+    # We probably have to debug this whole thing properly to do so.
+
+    array set elt [lindex $dt 0]
+    if {$elt(comment) == {}} {
+      set precomment {}
+    } else {
+      set precomment "<span class=\"VC\">$elt(comment)</span>  "
+    }
+    
     for {set i 1} {$i<[llength $dt]} {incr i} {
       array set elt [lindex $dt $i]
       if {$elt(depth) == 0} {
@@ -742,13 +760,14 @@ namespace eval html {
 	puts $f "<a href=\"javascript:gotoMove($elt(idx))\" ID=\"$elt(idx)\" class=\"$class\">$dots. ... $elt(move)</a>$elt(nag) <span class=\"VC\">$elt(comment)</span>"
         set dots 0
       } else {
-	puts $f "<a href=\"javascript:gotoMove($elt(idx))\" ID=\"$elt(idx)\" class=\"$class\">$elt(move)</a>$elt(nag) <span class=\"VC\">$elt(comment)</span>"
+	puts $f "$precomment<a href=\"javascript:gotoMove($elt(idx))\" ID=\"$elt(idx)\" class=\"$class\">$elt(move)</a>$elt(nag) <span class=\"VC\">$elt(comment)</span>"
       }
       if {$elt(diag)} {
         insertMiniDiag $elt(fen) $f
 	set dots 0
 	scan $elt(move) %i. dots
       }
+      set precomment {}
     }
     if {$prevdepth != 0} {puts $f "\]"}
 
@@ -861,13 +880,21 @@ namespace eval html {
   }
 
   ################################################################################
-  proc parseGame { {prev -2} {dots 0} } {
+  proc parseGame { {prev -2} {dots unknown} } {
     global ::html::data ::html::idx
 
+
     while {1} {
+
+    if {$dots == "unknown"} {
+      recordElt $prev 0
+      set prev -2
+      set dots [expr {[sc_pos side] == "black"}]
+    } else {
       recordElt $prev $dots
       set prev -2
       set dots 0
+    }
       
       # handle variants
       if {[sc_var count]>0} {
