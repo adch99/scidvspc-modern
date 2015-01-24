@@ -2885,7 +2885,8 @@ Game::WritePGN (TextBuffer * tb, uint stopLocation)
             sprintf (temp, "  (%u)", BlackElo);
             tb->PrintString (temp);
         }
-        //if (IsHtmlFormat()) { tb->PrintString ("</font>"); }
+        if (IsHtmlFormat()) 
+           tb->PrintString ("<br>");
         tb->PrintString (newline);
 
         tb->PrintString (EventStr);
@@ -2923,19 +2924,21 @@ Game::WritePGN (TextBuffer * tb, uint stopLocation)
         // Print FEN if non-standard start:
 
         if (NonStandardStart) {
+	    DString dstr;
+	    char fenStr [256];
+	    StartPos->PrintFEN (fenStr, FEN_ALL_FIELDS);
+
             if (IsLatexFormat()) {
                 tb->PrintString ("\n\\begin{diagram}\n");
-                DString dstr;
                 StartPos->DumpLatexBoard (&dstr);
                 tb->PrintString (dstr.Data());
                 tb->PrintString ("\n\\end{diagram}\n");
             } else if (IsHtmlFormat()) {
-                DString dstr;
+		dstr.Append ("<br>");
+		dstr.Append (fenStr);
                 StartPos->DumpHtmlBoard (&dstr, HtmlStyle, NULL);
                 tb->PrintString (dstr.Data());
             } else {
-                char fenStr [256];
-                StartPos->PrintFEN (fenStr, FEN_ALL_FIELDS);
                 sprintf (temp, "Position: %s%s", fenStr, newline);
                 tb->PrintString (temp);
             }

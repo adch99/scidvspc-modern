@@ -247,7 +247,7 @@ private:
 
     gameNumberT GameNumber;     // first game in file is game 0
     bool        NonStandardStart;      // 1 if non-standard start.
-    char *      FenString;      // fen string if non-standard start.
+    char *      FenString;      // fen string if non-standard start. (UNUSED)
     colorT      ToMove;         // side to move in starting position
     ushort      NumHalfMoves;
     ushort      CurrentPlyCount;
