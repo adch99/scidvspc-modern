@@ -16,8 +16,8 @@
 # Removed sorting functionality
 # Other performance tweaks.
 
-# Should Scid <-> Engine communication log messages be echoed to stdout
-set analysis(log_stdout) 0
+# We aren't using stdout. Windows does not support it.
+# set analysis(log_stdout) 0
 set analysis(log_auto) 0
 
 set analysisBookSlot 1
@@ -2030,9 +2030,7 @@ proc logEngine {n text} {
   global analysis
 
   # Print the log message to stdout if applicable:
-  if {$analysis(log_stdout)} {
-    puts stdout "$n $text"
-  }
+  # if {$analysis(log_stdout)} { puts stdout "$n $text" }
 
   if { [ info exists analysis(log$n)] && $analysis(log$n) != {}} {
     puts $analysis(log$n) $text
