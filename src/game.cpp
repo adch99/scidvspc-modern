@@ -2860,7 +2860,8 @@ Game::WritePGN (TextBuffer * tb, uint stopLocation)
     if (PgnStyle & PGN_STYLE_SHORT_HEADER) {
         // Print tags in short, 3-line format:
 
-        //if (IsHtmlFormat()) { tb->PrintString ("<font size=+1>"); }
+        if (IsHtmlFormat()) 
+           tb->PrintString ("<center>");
         if (IsLatexFormat()) { tb->PrintString ("$\\circ$ "); }
         if (PgnFormat==PGN_FORMAT_Color) {tb->PrintString ("<tag>"); }
         tb->PrintString (WhiteStr);
@@ -2891,7 +2892,7 @@ Game::WritePGN (TextBuffer * tb, uint stopLocation)
 
         tb->PrintString (EventStr);
         if (!strEqual (RoundStr, "")  &&  !strEqual (RoundStr, "?")) {
-            tb->PrintString (IsHtmlFormat() ? " &nbsp;(" : " (");
+            tb->PrintString (IsHtmlFormat() ? "&nbsp;&nbsp;(Round&nbsp;" : "  (Round ");
             tb->PrintString (RoundStr);
             tb->PrintString (")");
         }
@@ -2899,7 +2900,7 @@ Game::WritePGN (TextBuffer * tb, uint stopLocation)
         if (IsLatexFormat()) { tb->PrintString (newline); }
         if (!strEqual (SiteStr, "")  &&  !strEqual (SiteStr, "?")) {
             tb->PrintString (SiteStr);
-            tb->PrintString (newline);
+            tb->PrintString (IsHtmlFormat() ? " &nbsp; &nbsp; " : "  ");
         }
 
         // Remove ".??" or ".??.??" from end of dateStr, then print it:
@@ -2943,6 +2944,8 @@ Game::WritePGN (TextBuffer * tb, uint stopLocation)
                 tb->PrintString (temp);
             }
         }
+        if (IsHtmlFormat())
+	    tb->PrintString ("</center>");
     } else {
         // Print tags in standard PGN format, one per line:
         // Note: we want no line-wrapping when printing PGN tags
