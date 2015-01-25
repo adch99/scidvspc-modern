@@ -728,18 +728,7 @@ namespace eval html {
     # These 'dots' are purely for use with diagrams
     set dots 0
 
-    ### Godawful hack to show the initial comment
-    # we havent fixed the comments at the start of individual variations
-    # We probably have to debug this whole thing properly to do so.
-
-    array set elt [lindex $dt 0]
-    if {$elt(comment) == {}} {
-      set precomment {}
-    } else {
-      set precomment "<span class=\"VC\">$elt(comment)</span>  "
-    }
-    
-    for {set i 1} {$i<[llength $dt]} {incr i} {
+    for {set i 0} {$i<[llength $dt]} {incr i} {
       array set elt [lindex $dt $i]
       if {$elt(depth) == 0} {
         set class "V0"
@@ -760,14 +749,13 @@ namespace eval html {
 	puts $f "<a href=\"javascript:gotoMove($elt(idx))\" ID=\"$elt(idx)\" class=\"$class\">$dots. ... $elt(move)</a>$elt(nag) <span class=\"VC\">$elt(comment)</span>"
         set dots 0
       } else {
-	puts $f "$precomment<a href=\"javascript:gotoMove($elt(idx))\" ID=\"$elt(idx)\" class=\"$class\">$elt(move)</a>$elt(nag) <span class=\"VC\">$elt(comment)</span>"
+	puts $f "<a href=\"javascript:gotoMove($elt(idx))\" ID=\"$elt(idx)\" class=\"$class\">$elt(move)</a>$elt(nag) <span class=\"VC\">$elt(comment)</span>"
       }
       if {$elt(diag)} {
         insertMiniDiag $elt(fen) $f
 	set dots 0
 	scan $elt(move) %i. dots
       }
-      set precomment {}
     }
     if {$prevdepth != 0} {puts $f "\]"}
 
@@ -907,7 +895,8 @@ namespace eval html {
         set dots 1
         for {set v 0} {$v<[sc_var count]} {incr v} {
           sc_var enter $v
-          parseGame $idx $dots
+          sc_move back
+          parseGame $idx unknown
           sc_var exit
         }
         if { ![sc_pos isAt vend] } { sc_move forward }
@@ -962,10 +951,10 @@ namespace eval html {
     set m [sc_game info previousMove]
     set mn [sc_pos moveNumber]
 
-    if {[sc_pos side] == "black"} {
+    if {[sc_pos side] == "black" && $m != {}} {
       set elt(move) "$mn.$m"
     } else {
-      if {$dots} {
+      if {$dots && $m != {}} {
         set elt(move) "[expr $mn -1]. ... $m"
       } else  {
         set elt(move) $m
