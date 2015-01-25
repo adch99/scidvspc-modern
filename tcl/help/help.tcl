@@ -4211,7 +4211,9 @@ set helpText(Related) {<h1>Links</h1>
   <li>Player Information resources  <url http://sourceforge.net/projects/scid/files/Player Data/>http://sourceforge.net/projects/scid/files/Player Data/</url></li>
   <li>FICS <url http://www.freechess.org>www.freechess.org</url></li>
   <li>FICS game archives <url http://ficsgames.org>http://ficsgames.org</url></li>
-  <li>Debian/Mint/Ubuntu installation howto <url http://www.linuxx.eu/2012/11/scid-vs-pc-installation-guide-ubuntu.html>http://www.linuxx.eu/2012/11/scid-vs-pc-installation-guide-ubuntu.html</url></li>
+  <li>Debian/Mint/Ubuntu installation how-to <url http://www.linuxx.eu/2012/11/scid-vs-pc-installation-guide-ubuntu.html>http://www.linuxx.eu/2012/11/scid-vs-pc-installation-guide-ubuntu.html</url></li>
+  <li>Ed Collin's Scid vs. PC page <url http://edcollins.com/chess/scidvspc/index.html>http://edcollins.com/chess/scidvspc/index.html</url></li>
+  <li>Gorgonian's custom pieces <url http://gorgonian.weebly.com/scid-vs-pc.html>http://gorgonian.weebly.com/scid-vs-pc.html</url></i>
   <li>The PGN and EPD standards <url http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm>www.saremba.de/chessgml/standards/pgn...</url></li>
   <li>Pgn of players <url http://www.pgnmentor.com/files.html#players>www.pgnmentor.com/files.html#players</url></li>
   <li>Pgn of events <url http://www.pgnmentor.com/files.html#events>www.pgnmentor.com/files.html#events</url></li>
@@ -6666,9 +6668,11 @@ Board Options window. There is a limit of 12 piece sets only.
 Some extra sets (including blindfold) can be got 
 <url http://sourceforge.net/projects/scidvspc/files/extra_pieces.tgz/download>here</url>.
 </p>
-<p>Though Scid now supports larger sizes, these are scaled
+<p>Though Scid now supports larger sizes, these are generally scaled
 from the smaller one, so sizes 25, 30, 35 ... 80 are the only ones needed
-in the custom pieces.</p>
+in the custom pieces. Some user made pieces may include some larger sizes properly (i.e. unscaled),
+notably the FritzSWS pieces at <url http://gorgonian.weebly.com/scid-vs-pc.html>Gorgonian's Chess Site</url></i>
+</p>
 <p>
 For instructions on making Scid piece sets, download 
 <url http://sourceforge.net/projects/scidvspc/files/scid_chess_pieces.tgz/download>this file</url>.
