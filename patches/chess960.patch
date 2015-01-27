@@ -1,3 +1,39 @@
+This patch is not working properly, and is kind-of abandoned.
+Previously , it was authored by Ben Hague, and website was http://www.wtfai.me.uk/scid960.html
+Up front is a catalog of bugs i had previously found - Stevenaaus
+
+----------------------------
+I see there is an issue in uci.tcl where neither of these solutions work perfectly.
+      if { [catch { sc_move addUCI $m } ] } { return 1 }
+      if { [catch { sc_move add $s1 $s2 $p } ] } { return 1 }
+(
+This position, the best move is pawn queens, but it is not being parsed properly for uci engines (xboard is ok), and is not shown.
+rn1q1k2/pp2p2P/3p1n2/2pp4/8/2P5/P1P2PP1/R1BK1B1R w - - 1 17
+)
+----------------------------
+I just played a fics game, and it wouldnt let me castle!  FICS tried to send e8h8 as the uci castling move.
+----------------------------
+I *think* sc_move_add is the only proc that calls "sc_move addUCI"
+(though i don't know where it was used beforehand?)
+
+So it'd be very handy (and a nice speed improvement)
+to replace the whole uci::sc_move_add with
+
+  proc sc_move_add {moves} {
+    return [sc_move addUCI $moves]
+  }
+
+Two things need to be done.
+1. add promotion to Position::ReadCoordMove
+(Is there any reason we can't do this ? It is only used twice in tkscid.cpp)
+2. hack sc_move_addUCI to return success/failure.
+
+Also - your "tk_messageBox -message "Did you castle?""
+dialog is not very useable or good. I got a suprise when i saw that,
+but haven't looked at the necessity or reason for the dialog.
+----------------------------
+
+
 Index: src/movelist.h
 ===================================================================
 --- src/movelist.h	(revision 2145)
