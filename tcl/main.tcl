@@ -1216,11 +1216,15 @@ proc addMove { sq1 sq2 {animate ""}} {
     default {set promoLetter ""}
   }
 
-  set moveUCI [::board::san $sq2][::board::san $sq1]$promoLetter
+  set san2 [::board::san $sq2] ; # from square
+  set san1 [::board::san $sq1] ; # to square
+  set moveUCI     $san2$san1$promoLetter
+  set moveUCI_rev $san1$san2$promoLetter
   ### moveUCI seems to be used by serGame, novag *and* fics below, so standardise them a little S.A.
 
   set move [sc_game info nextMoveUCI]
-  if { [ string compare -nocase $moveUCI $move] == 0 && ! $nullmove } {
+  if { ([string compare -nocase $moveUCI $move] == 0 || \
+        [string compare -nocase $moveUCI_rev $move] == 0) && ! $nullmove } {
     sc_move forward
     updateBoard
     return
