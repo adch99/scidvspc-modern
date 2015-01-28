@@ -396,7 +396,14 @@ proc ::docking::setMenuVisibility  { f show } {
 proc ::docking::raiseTab {w} {
   set f ".fdock[string range $w 1 end]"
   set tbn [::docking::find_tbn $f]
-  $tbn select $f
+  if {$w == ".main"} {
+    # We dont want to autoraise undocked windows
+    bind .fdockmain <Map> {}
+    $tbn select $f
+    bind .fdockmain <Map> {raiseAllWindows}
+  } else {
+    $tbn select $f
+  }
   set ::docking::activeTab($tbn) $f
   set ::docking::changedTab($tbn) 0
 }

@@ -849,7 +849,6 @@ set autoRaise 1
 
 proc raiseWin {w} {
   global autoRaise
-  if {$autoRaise} {
     if {$w == "." } {
      set w .main
     }
@@ -861,12 +860,12 @@ proc raiseWin {w} {
 	focus $w
       } 
     } else {
-      catch {wm deiconify $w}
-      raise $w
-      focus $w
+      if {$autoRaise} {
+	catch {wm deiconify $w}
+	raise $w
+	focus $w
+      }
     }
-  }
-  return
 }
 
 # autoIconify:
