@@ -461,6 +461,9 @@ namespace eval fics {
       }
       if {$t1 != {} && $t1 != {?}} {
         ::fics::writechan "+censor $t1" echo
+      } else {
+        .fics.command.entry delete 0 end
+        .fics.command.entry insert 0 "+censor "
       }
     }
     grid $w.bottom.buttons.takeback  -column 0 -row $row -sticky ew -padx 3 -pady 2
