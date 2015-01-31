@@ -1608,6 +1608,8 @@ translate W FICSDraw {Offer Draw}
 translate W FICSRematch {Rematch}
 # ====== TODO To be translated ======
 translate W FICSQuit {Quit FICS}
+# ====== TODO To be translated ======
+translate W FICSCensor {Censor}
 
 translate W CCDlgConfigureWindowTitle {Konfigurera Korrespondensschack}
 translate W CCDlgCGeneraloptions {Generella inställningar}

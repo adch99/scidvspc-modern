@@ -1631,6 +1631,8 @@ translate D FICSInfo {Info}
 translate D FICSDraw {Remis anbieten}
 translate D FICSRematch {Revanche}
 translate D FICSQuit {FICS beenden}
+# ====== TODO To be translated ======
+translate D FICSCensor {Censor}
 
 # Correspondence Chess Dialogs:
 translate D CCDlgConfigureWindowTitle {Einstellungen für Fernschach}

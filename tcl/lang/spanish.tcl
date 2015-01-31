@@ -1609,6 +1609,8 @@ translate S FICSInfo {Información}
 translate S FICSDraw {Ofrecer tablas}
 translate S FICSRematch {Revancha}
 translate S FICSQuit {Salir}
+# ====== TODO To be translated ======
+translate S FICSCensor {Censor}
 
 # Correspondence Chess Dialogs:
 translate S CCDlgConfigureWindowTitle {Configurar ajedrez por correo}

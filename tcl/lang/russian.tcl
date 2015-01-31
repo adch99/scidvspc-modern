@@ -1573,6 +1573,8 @@ translate R FICSInfo {Информация}
 translate R FICSDraw {Запросить ничью}
 translate R FICSRematch {Переигровка}
 translate R FICSQuit {Покинуть FICS}
+# ====== TODO To be translated ======
+translate R FICSCensor {Censor}
 
 # Correspondence Chess Dialogs:
 translate R CCDlgConfigureWindowTitle {Настройка шахмат по переписке}

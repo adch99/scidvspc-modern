@@ -1888,6 +1888,8 @@ translate C FICSDraw {Offer Draw}
 translate C FICSRematch {Rematch}
 # ====== TODO To be translated ======
 translate C FICSQuit {Quit FICS}
+# ====== TODO To be translated ======
+translate C FICSCensor {Censor}
 
 translate C CCDlgConfigureWindowTitle {Konfigurovat korespondenèní ¹ach}
 translate C CCDlgCGeneraloptions {Obecná nastavení}

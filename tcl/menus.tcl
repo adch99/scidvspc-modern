@@ -1087,6 +1087,10 @@ $m add checkbutton -label OptionsFicsAuto     -variable ::fics::autopromote
 $m add checkbutton -label OptionsSounds       -variable ::fics::sound
 $m add command     -label OptionsFicsColour   -command ::fics::setForeGround
 $m add command     -label OptionsColour       -command ::fics::setBackGround
+$m add command     -label OptionsFonts        -command {
+  set fontOptions(temp) [FontDialog Fixed]
+  if {$fontOptions(temp) != ""} { set fontOptions(Fixed) $fontOptions(temp) }
+}
 $m add command     -label OptionsFicsCommands -command ::fics::editInitCommands
 $m add cascade     -label OptionsFicsSize     -menu $m.size
 $m add separator
@@ -1518,7 +1522,7 @@ proc setLanguageMenus {{lang ""}} {
         OptionsMoves$tag $lang
   }
 
-  foreach tag {OptionsWindowsRaise OptionsFicsAuto OptionsSounds OptionsFicsColour OptionsColour OptionsFicsCommands OptionsFicsSize OptionsFicsNoRes OptionsFicsNoReq} {
+  foreach tag {OptionsWindowsRaise OptionsFicsAuto OptionsSounds OptionsFicsColour OptionsColour OptionsFonts OptionsFicsCommands OptionsFicsSize OptionsFicsNoRes OptionsFicsNoReq} {
     configMenuText .menu.options.fics [tr $tag $oldLang] $tag $lang
   }
 

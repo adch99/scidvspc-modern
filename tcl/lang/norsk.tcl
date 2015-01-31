@@ -1961,6 +1961,8 @@ translate O FICSDraw {Offer Draw}
 translate O FICSRematch {Rematch}
 # ====== TODO To be translated ======
 translate O FICSQuit {Quit FICS}
+# ====== TODO To be translated ======
+translate O FICSCensor {Censor}
 
 translate O CCDlgConfigureWindowTitle {Configure Correspondence Chess}
 # ====== TODO To be translated ======

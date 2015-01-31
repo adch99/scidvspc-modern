@@ -1624,6 +1624,8 @@ translate F FICSDraw {Offer Draw}
 translate F FICSRematch {Rematch}
 # ====== TODO To be translated ======
 translate F FICSQuit {Quit FICS}
+# ====== TODO To be translated ======
+translate F FICSCensor {Censor}
 
 translate F CCDlgConfigureWindowTitle {Configurer échecs par correspondance}
 translate F CCDlgCGeneraloptions {Options générales}

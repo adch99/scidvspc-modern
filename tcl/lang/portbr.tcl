@@ -1891,6 +1891,8 @@ translate B FICSDraw {Offer Draw}
 translate B FICSRematch {Rematch}
 # ====== TODO To be translated ======
 translate B FICSQuit {Quit FICS}
+# ====== TODO To be translated ======
+translate B FICSCensor {Censor}
 
 translate B CCDlgConfigureWindowTitle {Configurar Xadrez por correspondencia}
 translate B CCDlgCGeneraloptions {Opções Gerais}

@@ -1582,6 +1582,8 @@ translate P FICSInfo {Informacja}
 translate P FICSDraw {Proponuj remis}
 translate P FICSRematch {Rewanż}
 translate P FICSQuit {Wyłącz FICS}
+# ====== TODO To be translated ======
+translate P FICSCensor {Censor}
 
 translate P CCDlgConfigureWindowTitle {Konfiguruj grę korespondencyjną}
 translate P CCDlgCGeneraloptions {Ustawienia ogólne}

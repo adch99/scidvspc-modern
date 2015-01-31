@@ -1966,6 +1966,8 @@ translate Y FICSDraw {Offer Draw}
 translate Y FICSRematch {Rematch}
 # ====== TODO To be translated ======
 translate Y FICSQuit {Quit FICS}
+# ====== TODO To be translated ======
+translate Y FICSCensor {Censor}
 
 translate Y CCDlgConfigureWindowTitle {Configure Correspondence Chess}
 # ====== TODO To be translated ======

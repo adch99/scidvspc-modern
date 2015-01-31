@@ -427,15 +427,14 @@ namespace eval fics {
 	::fics::writechan "finger $t1"
       }
     }
-    button $w.bottom.buttons.font -textvar tr(Font) -command {
-      set fontOptions(temp) [FontDialog Fixed .fics]
-      if {$fontOptions(temp) != ""} { set fontOptions(Fixed) $fontOptions(temp) }
-    }
+
+    button $w.bottom.buttons.abort  -textvar tr(Abort) -command {::fics::writechan abort}
+
     set ::fics::graph(on) 0
 
     grid $w.bottom.buttons.info  -column 0 -row $row -sticky ew -padx 3 -pady 2
     grid $w.bottom.buttons.info2 -column 1 -row $row -sticky ew -padx 3 -pady 2
-    grid $w.bottom.buttons.font  -column 2 -row $row -sticky ew -padx 3 -pady 2
+    grid $w.bottom.buttons.abort -column 2 -row $row -sticky ew -padx 3 -pady 2
 
     incr row
     button $w.bottom.buttons.draw    -textvar tr(FICSDraw) -command {::fics::writechan draw}
@@ -455,10 +454,18 @@ namespace eval fics {
       ::fics::writechan {takeback 2}
       catch { ::commenteditor::appendComment "$::fics::reallogin requests takeback $::fics::playerslastmove" }
     }
-    button $w.bottom.buttons.abort  -textvar tr(Abort) -command {::fics::writechan abort}
+    button $w.bottom.buttons.censor -textvar tr(FICSCensor) -command {
+      set t1 [sc_game tags get Black]
+      if {[string match -nocase $::fics::reallogin $t1]} {
+        set t1 [sc_game tags get White]
+      }
+      if {$t1 != {} && $t1 != {?}} {
+        ::fics::writechan "+censor $t1" echo
+      }
+    }
     grid $w.bottom.buttons.takeback  -column 0 -row $row -sticky ew -padx 3 -pady 2
     grid $w.bottom.buttons.takeback2 -column 1 -row $row -sticky ew -padx 3 -pady 2
-    grid $w.bottom.buttons.abort     -column 2 -row $row -sticky ew -padx 3 -pady 2
+    grid $w.bottom.buttons.censor    -column 2 -row $row -sticky ew -padx 3 -pady 2
 
     incr row
     frame $w.bottom.buttons.space -height 2 -borderwidth 0

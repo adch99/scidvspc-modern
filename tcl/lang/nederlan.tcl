@@ -1646,6 +1646,8 @@ translate N FICSDraw {Offer Draw}
 translate N FICSRematch {Rematch}
 # ====== TODO To be translated ======
 translate N FICSQuit {Quit FICS}
+# ====== TODO To be translated ======
+translate N FICSCensor {Censor}
 
 
 translate N CCDlgConfigureWindowTitle {Configureer correspondentieschaak}

@@ -1894,6 +1894,8 @@ translate H FICSDraw {Offer Draw}
 translate H FICSRematch {Rematch}
 # ====== TODO To be translated ======
 translate H FICSQuit {Quit FICS}
+# ====== TODO To be translated ======
+translate H FICSCensor {Censor}
 
 
 translate H CCDlgConfigureWindowTitle {Levelezési sakk beállításai}

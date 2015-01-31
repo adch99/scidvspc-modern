@@ -1622,6 +1622,8 @@ translate G FICSDraw {Offer Draw}
 translate G FICSRematch {Rematch}
 # ====== TODO To be translated ======
 translate G FICSQuit {Quit FICS}
+# ====== TODO To be translated ======
+translate G FICSCensor {Censor}
 
 # Correspondence Chess Dialogs:
 translate G CCDlgConfigureWindowTitle {Ρυθμίσεις Σκάκι Δι Αλληλογραφίας}

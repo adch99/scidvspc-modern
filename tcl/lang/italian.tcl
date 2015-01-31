@@ -1694,6 +1694,8 @@ translate I FICSDraw {Offer Draw}
 translate I FICSRematch {Rematch}
 # ====== TODO To be translated ======
 translate I FICSQuit {Quit FICS}
+# ====== TODO To be translated ======
+translate I FICSCensor {Censor}
 
 
 translate I CCDlgConfigureWindowTitle {Configura Scacchi per Corrispondenza}

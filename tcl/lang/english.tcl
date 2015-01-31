@@ -1569,6 +1569,7 @@ translate E FICSInfo {Info}
 translate E FICSDraw {Offer Draw}
 translate E FICSRematch {Rematch}
 translate E FICSQuit {Quit FICS}
+translate E FICSCensor {Censor}
 
 
 # Correspondence Chess Dialogs:
