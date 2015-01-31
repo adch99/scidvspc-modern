@@ -337,7 +337,11 @@ namespace eval fics {
     configFindEntryBox $w.command.find ::fics::helpWin $w.console.text
 
     button $w.command.send -textvar tr(FICSSend) -state disabled
+
     button $w.command.clear -textvar tr(Clear) -state disabled -command "
+      $w.command.entry delete 0 end
+    "
+    bind $w.command.clear <Control-Button-1> "
       $w.console.text delete 0.0 end
       $w.console.text insert 0.0 \"FICS ($::scidName $::scidVersion)\n\"
     "
@@ -419,12 +423,8 @@ namespace eval fics {
       # ::fics::writechan history
     }
     button $w.bottom.buttons.info2 -textvar tr(FICSOpponent) -command {
-      set t1 [sc_game tags get Black]
-      if {[string match -nocase $::fics::reallogin $t1]} {
-	set t1 [sc_game tags get White]
-      }
-      if {$t1 != {} && $t1 != {?}} {
-	::fics::writechan "finger $t1"
+      if {$::fics::opponent != {}} {
+	::fics::writechan "finger $::fics::opponent"
       }
     }
 
@@ -455,17 +455,17 @@ namespace eval fics {
       catch { ::commenteditor::appendComment "$::fics::reallogin requests takeback $::fics::playerslastmove" }
     }
     button $w.bottom.buttons.censor -textvar tr(FICSCensor) -command {
-      set t1 [sc_game tags get Black]
-      if {[string match -nocase $::fics::reallogin $t1]} {
-        set t1 [sc_game tags get White]
-      }
-      if {$t1 != {} && $t1 != {?}} {
-        ::fics::writechan "+censor $t1" echo
+      if {$::fics::playing == 1 || $::fics::playing == -1 && $::fics::opponent != {}} {
+        ::fics::writechan "+censor $::fics::opponent" echo
       } else {
         .fics.command.entry delete 0 end
         .fics.command.entry insert 0 "+censor "
       }
     }
+   bind $w.bottom.buttons.censor <Control-Button-1> {
+        .fics.command.entry delete 0 end
+        .fics.command.entry insert 0 "+censor "
+   }
     grid $w.bottom.buttons.takeback  -column 0 -row $row -sticky ew -padx 3 -pady 2
     grid $w.bottom.buttons.takeback2 -column 1 -row $row -sticky ew -padx 3 -pady 2
     grid $w.bottom.buttons.censor    -column 2 -row $row -sticky ew -padx 3 -pady 2

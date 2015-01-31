@@ -5566,9 +5566,10 @@ Opponent and Offers Graph</a> buttons. Other buttons include:
   <ul>
     <li><term>Tells</term> Show messages from channel tells</li>
     <li><term>Shouts</term> Show messages from shouts and cshouts</li>
-    <li><term>Clear All</term> Clear console of previous messages</li>
+    <li><term>Clear</term> Clear command entry box. <term>Control+Clear</term> clears all of previous messages</li>
     <li><term>Next</term> Send "next" for next page of help info</li>
     <li><term>Rematch</term> Request a rematch with previous opponent</li>
+    <li><term>Censor</term> Add Opponent to your censor list, or if not playing, display '+censor'</li>
   </ul>
 
 <h3><name premove>Premove</name></h3>
@@ -5583,7 +5584,7 @@ To cancel premove, press the <b>Escape</b> key.
 </p>
 
 <br>
-  <p><footer>Updated: Scid vs. PC 4.10 May 2013</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.14 Jan 2015</footer></p>
 }
 
 set helpTitle(FICScommands) {FICS Commands and Variables}
