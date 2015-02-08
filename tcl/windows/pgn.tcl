@@ -588,8 +588,11 @@ namespace eval pgn {
        # many marks and tags within them. </q>
 
        .pgnWin.text see [lindex $moveRange 0]
-       ### Hmmm
-       # .pgnWin.text see [lindex $moveRange 1]
+       # Better is -
+       # see "[lindex $moveRange 0] + 1 lines"
+       # but the damn thing doesnt work on actual lines, only text lines
+       ### Necessary for (eg 23. (\n) Qa5
+       .pgnWin.text see [lindex $moveRange 1]
       } else {
        # .pgnWin.text yview moveto 0
       }
