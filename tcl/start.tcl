@@ -1608,7 +1608,6 @@ proc  configHistory {namespace entrybox} {
 
   bind $entrybox <Up> "::${namespace}::cmdHistory up"
   bind $entrybox <Down> "::${namespace}::cmdHistory down"
-  bind $entrybox <Control-c> "::${namespace}::cmdClear"
   if {$::macOS} {
     bind $entrybox <Option-BackSpace> "::${namespace}::cmdBackWord ; break"
   } else {
