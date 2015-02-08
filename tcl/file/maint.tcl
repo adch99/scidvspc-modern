@@ -1727,6 +1727,7 @@ proc compactGames {parent} {
 
   set stats [sc_compact stats games_setfilter]
   ::windows::stats::Refresh
+  set ::glstart 1
   ::windows::gamelist::Refresh
 
   set numberDeleted [expr {[lindex $stats 0] - [lindex $stats 2]}]
