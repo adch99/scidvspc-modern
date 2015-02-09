@@ -312,7 +312,9 @@ proc ::commenteditor::toggleBoard {} {
 
   if { $::commenteditor::showBoard == 0} {
     # show everything
-    catch {::board::update $w.insertBoard.board [sc_pos board]}
+    if {[winfo exists $w.markFrame.insertBoard.board]} {
+      ::board::update $w.markFrame.insertBoard.board [sc_pos board]
+    }
     pack $w.nf -side top -pady 2 -padx 5 -fill x -before $w.cf
     pack $w.markFrame -side right -fill both -padx 5 -anchor n -before .commentWin.nf
   } else {
