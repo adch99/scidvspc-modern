@@ -234,6 +234,9 @@ proc ::commenteditor::Open {} {
   ### A small board
 
   set board [::board::new $insertBoard.board 25]
+  if {[::board::isFlipped .main.board]} {
+    ::board::flip  $insertBoard.board
+  }
   ::board::showMarks $board 1
   set ::board::_mark($board) $::board::_mark(.main.board)
   ::board::update $board
@@ -574,12 +577,8 @@ proc ::commenteditor::Refresh {} {
   $text mark set insert 1.0 ; # Set cursor to the top
 
   .commentWin.cf.text configure -undo 1
-  if { $::commenteditor::showBoard } {
+  if { $::commenteditor::showBoard == 0} {
     set bd [sc_pos board]
-    if {[::board::isFlipped .main.board]} {
-      set bd [string reverse [lindex $bd 0]]
-    }
-
     ::board::update $board $bd
   }
 }

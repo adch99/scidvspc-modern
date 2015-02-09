@@ -2323,8 +2323,10 @@ proc ::board::flip {w {newstate -1}} {
     ::board::togglematerial $w
   }
   ::board::ficslabels $w
-  ::commenteditor::Refresh
-  return $w
+
+  if {$w == ".main.board" && [winfo exists .commentWin.markFrame.insertBoard.board]} {
+    ::board::flip .commentWin.markFrame.insertBoard.board
+  }
 }
 
 proc ::board::togglematerial {{w .main.board}} {
