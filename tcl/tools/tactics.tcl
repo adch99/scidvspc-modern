@@ -47,7 +47,6 @@ namespace eval tactics {
     if {[winfo exists .pgnWin]} {
       destroy .pgnWin
     }
-    set old_game [sc_game number]
 
     set found 0
 
@@ -79,8 +78,8 @@ namespace eval tactics {
     }
 
     if { ! $found } {
-      sc_game load $old_game
       tk_messageBox -type ok -icon info -title {Find Best Move} -message "No (more) relevant games found."      
+      sc_game load 1
     } else  {
       sideToMoveAtBottom
     }
@@ -97,13 +96,14 @@ namespace eval tactics {
     while {![sc_pos isAt end]} {
       sc_move forward
       set cmt [sc_pos getComment]
-      # TODO old format to be removed
-      set res [scan $cmt "\*\*\*\*d%dfrom%fto%f" dif prevscore score ]
-      if {$res != 3} { ; # try new format if the old format failed
-      set res [scan $cmt "\*\*\*\*D%d %f->%f" dif prevscore score ]
-      }
-      if {$res == 3} {
-        return [list $dif $score $prevscore]
+
+      ### Only matches ****D at start of line, but annotation feature now puts scores at start of line
+      # set res [scan $cmt "\*\*\*\*D%d %f->%f" dif prevscore score ]
+      # if {$res == 3} { return [list $dif $score $prevscore] }
+
+      if {[string match {*\*\*\*\*D*->*} $cmt]} {
+        # anything non-null
+        return $cmt
       }
     }
     return {}
