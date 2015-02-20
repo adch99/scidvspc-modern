@@ -1501,32 +1501,20 @@ proc ::tree::mask::contextMenu {win move x y xc yc} {
     set lMatchMoves [lreplace $lMatchMoves $extracastling $extracastling]
   }
 
-  if {[llength $lMatchMoves ] > 16} {
-    # split the moves in several menus
-    for {set idxMenu 0} { $idxMenu <= [expr int([llength $lMatchMoves ] / 16) ]} {incr idxMenu} {
-      menu $mctxt.matchmoves$idxMenu
-      $mctxt add cascade -label [ tr AddThisMoveToMask ] -menu $mctxt.matchmoves$idxMenu
-      # -label [ tr AddThisMoveToMask ]
-      for {set i 0} {$i < 16} {incr i} {
-        if {[expr $i + $idxMenu * 16 +1] > [llength $lMatchMoves ] } {
-          break
-        }
-        set m [lindex $lMatchMoves [expr $i + $idxMenu * 16]]
-        if {$m == "OK"} { set m "O-O" }
-        if {$m == "OQ"} { set m "O-O-O" }
-        $mctxt.matchmoves$idxMenu add command -label [::trans $m] -command "::tree::mask::addToMask $m"
-      }
-    }
-  } else  {
-    menu $mctxt.matchmoves
-    $mctxt add cascade -label [ tr AddThisMoveToMask ] -menu $mctxt.matchmoves
-    foreach m [sc_pos matchMoves ""] {
-      if {$m == "OK"} { set m "O-O" }
-      if {$m == "OQ"} { set m "O-O-O" }
+  menu $mctxt.matchmoves
+  $mctxt add cascade -label [ tr AddThisMoveToMask ] -menu $mctxt.matchmoves
+  set row 0
+  foreach m [sc_pos matchMoves ""] {
+    if {$m == "OK"} { set m "O-O" }
+    if {$m == "OQ"} { set m "O-O-O" }
+    if {$row % 10 == 0} {
+      $mctxt.matchmoves add command -label [::trans $m] -command "::tree::mask::addToMask $m" -columnbreak 1
+    } else {
       $mctxt.matchmoves add command -label [::trans $m] -command "::tree::mask::addToMask $m"
     }
+    incr row
   }
-  
+
   tk_popup $mctxt [winfo pointerx .] [winfo pointery .]
 
 }
