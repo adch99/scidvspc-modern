@@ -613,8 +613,11 @@ if {0} {
       label $w.f.m$row -text [::trans $x] -justify right -anchor e -width 5 -font font_Fixed
       if {$x == $nextmove} {
         $w.f.m$row configure -background lemonchiffon2
+	bind $w.f.m$row <ButtonPress-1> ::move::Forward
+      } else {
+	bind $w.f.m$row <ButtonPress-1> "::book::makeBookMove $x"
       }
-      bind $w.f.m$row <ButtonPress-1> "::book::makeBookMove $x"
+
       spinbox $w.f.sp$row -from 0 -to 100 -width 3 -font font_Fixed
       if { $::book::isReadonly > 0 } {
 	$w.f.sp$row configure -state disabled
