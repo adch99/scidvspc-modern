@@ -5711,17 +5711,22 @@ set helpText(BookTuning) {<h1>Book Tuning</h1>
    stay the same, Scid will recalculate once <b>Save</b> is
    pressed.
    </p>
+<h3>Adding Lines</h3>
    <p>
    Scid vs. PC includes <b>Add Line</b> and <b>Remove Line</b> features. The first will add
    all moves <b>to</b> the current position, the latter removes all moves <b>from</b> then current move (till out of book).
    </p>
-<h2>Note</h2>
+   
+  <p>
+  <i>Due to implementation, these routines are not terribly optimal, and can be slow with large books/move sequences</i>.
+   </p>
+<h3>Note</h3>
 <p>
    Only integer values are shown; a zero may signify that this move has a probability of less
    than 1%, and most likely happens with books automatically generated
    from game collections. One should also note that all values should add up to 100%.
    </p>
-<h2>Exporting Books</h2>
+<h3>Exporting Books</h3>
    <p><i>For information about exporting multiple games to Polyglot Books, see
    the <a Book Polyglot>Polyglot</a> section.
    </i></p>
