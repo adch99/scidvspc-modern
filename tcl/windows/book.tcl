@@ -481,6 +481,8 @@ if {0} {
 
     menubutton $w.left.remove -text "$::tr(GlistRemoveThisGameFromFilter) $::tr(GlistMoveField)" -menu $w.left.remove.otherMoves -indicatoron 1
     menu $w.left.remove.otherMoves
+
+    button $w.left.addline -text $::tr(AddLine) -relief flat -command ::book::addLine
     
     # frame $w.left.space1 -height 60
     dialogbutton $w.left.export -text $::tr(Export) -command ::book::export
@@ -489,7 +491,7 @@ if {0} {
     dialogbutton $w.left.help -text $::tr(Help) -command {helpWindow BookTuning}
     dialogbutton $w.left.close -text $::tr(Close) -command "destroy $w"
     
-    pack $w.left.combo $w.left.add $w.left.remove -side top -padx 3 -pady 3
+    pack $w.left.combo $w.left.add $w.left.addline $w.left.remove -side top -padx 3 -pady 3
 
     pack $w.left.save $w.left.export -side top -padx 3 -pady 3
     pack $w.left.close $w.left.help $w.left.space2 -side bottom -padx 3 -pady 3
@@ -524,13 +526,15 @@ if {0} {
     scBookOpen $::book::lastTuning $::book::bookTuningSlot
 
     if { $::book::isReadonly > 0 } {
-      $w.left.save   configure -state disabled
-      $w.left.add    configure -state disabled
-      $w.left.remove configure -state disabled
+      $w.left.save    configure -state disabled
+      $w.left.add     configure -state disabled
+      $w.left.addline configure -state disabled
+      $w.left.remove  configure -state disabled
     } else {
-      $w.left.save   configure -state normal
-      $w.left.add    configure -state normal
-      $w.left.remove configure -state normal
+      $w.left.save    configure -state normal
+      $w.left.add     configure -state normal
+      $w.left.addline configure -state normal
+      $w.left.remove  configure -state normal
     }
     refreshTuning
   }
@@ -672,6 +676,48 @@ if {0} {
     if {  [ winfo exists .bookWin ] } {
       ::book::refresh
     }
+  }
+
+  proc addLine {} {
+    ### Move back to start, adding each move to book if necessary.
+    # 'sc_book movesupdate' writes a new book each call, so not very optimal, but polyglot books are monsters.
+    # Also relies on tempfile being zeroed by f=fopen(tempfile,"wb+") in book.cpp
+
+    global ::book::bookTuningMoves
+    if { $::book::isReadonly > 0 } { return }
+
+    set reply [ tk_messageBox -title $::tr(AddLine) -type yesno -icon info -parent .bookTuningWin -message \
+     {Add all moves (to current position) to book ?} ]
+    if {$reply != {yes}} {return}
+
+    busyCursor .
+    update idletasks
+    set tempfile [file join $::scidUserDir tempfile.[pid]]
+
+    while {![sc_pos isAt vstart]} {
+      set move [sc_game info previousMove]
+      sc_move back
+    
+      set moves [string map {% {}} [sc_book moves $::book::bookTuningSlot]]
+      set bookMoves {}
+      set prob {}
+      # e4 46% d4 36% Nf3 10% c4 7% g3 1% b3 0% f4 0% Nc3 0% b4 0% e3 0% a3 0% c3 0% d3 0%
+      foreach {x y} $moves {
+	lappend bookMoves $x
+	lappend prob $y
+      }
+
+      set count [lsearch $bookMoves $move]
+      if {$count == -1} {
+        lappend bookMoves $move
+        lappend prob 0
+	sc_book movesupdate $bookMoves $prob $::book::bookTuningSlot $tempfile
+      }
+    }
+
+    file delete $tempfile
+    unbusyCursor .
+    updateBoard
   }
 
   ### Export all book moves from current position into the current game

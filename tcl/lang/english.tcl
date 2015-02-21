@@ -1475,6 +1475,7 @@ translate E addAnnotatorTag {Add annotator tag}
 translate E AddScoreToShortAnnotations {Add score to annotations}
 translate E Export {Export}
 translate E BookPartiallyLoaded {Book partially loaded}
+translate E AddLine {Add Line}
 translate E Calvar {Calculation of variations}
 translate E ConfigureCalvar {Configuration}
 # Opening names used in tacgame.tcl

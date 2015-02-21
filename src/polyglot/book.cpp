@@ -163,10 +163,11 @@ int scid_book_movesupdate(char * moves, char * probs, const int BookNumber, char
         return -1; //fail
     }
     if(prob_count==0){
-	// Don't return. If we're deleteing the last move, we have to write the file
+	// Don't return. If we're deleting the last move, we have to write the file
 	// return 0; // nothing to do
     }
 
+    // 'b' mean binary and is ignored on all Posix systems. Windows ??
     if(!(f=fopen(tempfile,"wb+"))){
         return -1;  //fail
     }

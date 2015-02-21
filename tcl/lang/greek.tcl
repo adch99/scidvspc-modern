@@ -1521,6 +1521,8 @@ translate G addAnnotatorTag {Προσθήκη Ετικέτας Σχολιαστ�
 translate G AddScoreToShortAnnotations {Προσθήκη σκορ στο σχολιασμό}
 translate G Export {Εξαγωγή}
 translate G BookPartiallyLoaded {Φόρτωση Βιβλίου μερικώς}
+# ====== TODO To be translated ======
+translate G AddLine {Add Line}
 translate G Calvar {Υπολογισμός Βαριάντων}
 translate G ConfigureCalvar {Ρύθμιση}
 # Opening names used in tacgame.tcl

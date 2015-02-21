@@ -1546,6 +1546,8 @@ translate N AddScoreToShortAnnotations {Voeg de score toe aan de korte annotatie
 translate N Export {Export}
 
 translate N BookPartiallyLoaded {Boek gedeeltelijk geladen}
+# ====== TODO To be translated ======
+translate N AddLine {Add Line}
 translate N Calvar {Berekenen van variaties}
 translate N ConfigureCalvar {Configuratie}
 

@@ -1807,6 +1807,8 @@ translate Y Export {Export}
 # ====== TODO To be translated ======
 translate Y BookPartiallyLoaded {Book partially loaded}
 # ====== TODO To be translated ======
+translate Y AddLine {Add Line}
+# ====== TODO To be translated ======
 translate Y Calvar {Calculation of variations}
 # ====== TODO To be translated ======
 translate Y ConfigureCalvar {Configuration}

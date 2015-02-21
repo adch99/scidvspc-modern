@@ -1479,6 +1479,8 @@ translate R addAnnotatorTag {Добавить тег аннотирующего}
 translate R AddScoreToShortAnnotations {Добавить счёт в короткие аннотации}
 translate R Export {Экспорт}
 translate R BookPartiallyLoaded {Книга частично загружена}
+# ====== TODO To be translated ======
+translate R AddLine {Add Line}
 translate R Calvar {Расчёт вариантов}
 translate R ConfigureCalvar {Настройки}
 # Opening names used in tacgame.tcl

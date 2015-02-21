@@ -1524,6 +1524,8 @@ translate F addAnnotatorTag {Ajouter Annotateur}
 translate F AddScoreToShortAnnotations {Ajouter score aux annotations courtes}
 translate F Export {Exporter}
 translate F BookPartiallyLoaded {Bibliothèque chargée en partie}
+# ====== TODO To be translated ======
+translate F AddLine {Add Line}
 translate F Calvar {Calcul de variantes}
 translate F ConfigureCalvar {Configuration}
 # Opening names used in tacgame.tcl

@@ -1508,6 +1508,8 @@ translate W addAnnotatorTag {Lägg till kommentator-tagg}
 translate W AddScoreToShortAnnotations {Lägg till värdering till korta kommentarer}
 translate W Export {Exportera}
 translate W BookPartiallyLoaded {Bok delvis öppnad}
+# ====== TODO To be translated ======
+translate W AddLine {Add Line}
 translate W Calvar {Beräkning av variationer}
 translate W ConfigureCalvar {Konfiguration}
 translate W Reti {Reti}

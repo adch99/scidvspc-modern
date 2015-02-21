@@ -17067,6 +17067,7 @@ sc_book_positions (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     return TCL_OK;
 }
 
+// *** Seems unused - S.A. ***
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // sc_book_update:
 //    updates the opened book with probability values

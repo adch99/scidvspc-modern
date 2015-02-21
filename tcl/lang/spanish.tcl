@@ -1515,6 +1515,8 @@ translate S addAnnotatorTag {Añadir etiqueta de anotador}
 translate S AddScoreToShortAnnotations {Añadir puntuación para anotaciones cortas}
 translate S Export {Exportar}
 translate S BookPartiallyLoaded {Libro parcialmente cargado}
+# ====== TODO To be translated ======
+translate S AddLine {Add Line}
 translate S Calvar {Cálculo de variantes}
 translate S ConfigureCalvar {Configuración}
 # Opening names used in tacgame.tcl
