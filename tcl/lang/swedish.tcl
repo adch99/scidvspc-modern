@@ -1510,6 +1510,8 @@ translate W Export {Exportera}
 translate W BookPartiallyLoaded {Bok delvis öppnad}
 # ====== TODO To be translated ======
 translate W AddLine {Add Line}
+# ====== TODO To be translated ======
+translate W RemLine {Remove Line}
 translate W Calvar {Beräkning av variationer}
 translate W ConfigureCalvar {Konfiguration}
 translate W Reti {Reti}

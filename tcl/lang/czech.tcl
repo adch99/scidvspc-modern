@@ -1727,6 +1727,8 @@ translate C BookPartiallyLoaded {Book partially loaded}
 # ====== TODO To be translated ======
 translate C AddLine {Add Line}
 # ====== TODO To be translated ======
+translate C RemLine {Remove Line}
+# ====== TODO To be translated ======
 translate C Calvar {Calculation of variations}
 # ====== TODO To be translated ======
 translate C ConfigureCalvar {Configuration}

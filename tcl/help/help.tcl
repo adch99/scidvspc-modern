@@ -5711,6 +5711,10 @@ set helpText(BookTuning) {<h1>Book Tuning</h1>
    stay the same, Scid will recalculate once <b>Save</b> is
    pressed.
    </p>
+   <p>
+   Scid vs. PC includes <b>Add Line</b> and <b>Remove Line</b> features. The first will add
+   all moves <b>to</b> the current position, the latter removes all moves <b>from</b> then current move (till out of book).
+   </p>
 <h2>Note</h2>
 <p>
    Only integer values are shown; a zero may signify that this move has a probability of less

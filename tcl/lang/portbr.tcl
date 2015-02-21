@@ -1733,6 +1733,8 @@ translate B BookPartiallyLoaded {Book partially loaded}
 # ====== TODO To be translated ======
 translate B AddLine {Add Line}
 # ====== TODO To be translated ======
+translate B RemLine {Remove Line}
+# ====== TODO To be translated ======
 translate B Calvar {Calculation of variations}
 # ====== TODO To be translated ======
 translate B ConfigureCalvar {Configuration}

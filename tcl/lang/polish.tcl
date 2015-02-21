@@ -1489,6 +1489,8 @@ translate P Export {Eksportuj}
 translate P BookPartiallyLoaded {Książka częściowo wczytana}
 # ====== TODO To be translated ======
 translate P AddLine {Add Line}
+# ====== TODO To be translated ======
+translate P RemLine {Remove Line}
 translate P Calvar {Liczenie wariantów}
 translate P ConfigureCalvar {Konfiguracja}
 translate P Reti {Debiut Reti}

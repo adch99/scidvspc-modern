@@ -1596,6 +1596,8 @@ translate I Export {Esporta}
 translate I BookPartiallyLoaded {Libro caricato parzialmente}
 # ====== TODO To be translated ======
 translate I AddLine {Add Line}
+# ====== TODO To be translated ======
+translate I RemLine {Remove Line}
 translate I Calvar {Calcolo delle varianti}
 translate I ConfigureCalvar {Configurazione}
 translate I Reti {Reti}

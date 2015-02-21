@@ -1736,6 +1736,8 @@ translate H BookPartiallyLoaded {Book partially loaded}
 # ====== TODO To be translated ======
 translate H AddLine {Add Line}
 # ====== TODO To be translated ======
+translate H RemLine {Remove Line}
+# ====== TODO To be translated ======
 translate H Calvar {Calculation of variations}
 # ====== TODO To be translated ======
 translate H ConfigureCalvar {Configuration}

@@ -1804,6 +1804,8 @@ translate O BookPartiallyLoaded {Book partially loaded}
 # ====== TODO To be translated ======
 translate O AddLine {Add Line}
 # ====== TODO To be translated ======
+translate O RemLine {Remove Line}
+# ====== TODO To be translated ======
 translate O Calvar {Calculation of variations}
 # ====== TODO To be translated ======
 translate O ConfigureCalvar {Configuration}

@@ -1548,6 +1548,8 @@ translate N Export {Export}
 translate N BookPartiallyLoaded {Boek gedeeltelijk geladen}
 # ====== TODO To be translated ======
 translate N AddLine {Add Line}
+# ====== TODO To be translated ======
+translate N RemLine {Remove Line}
 translate N Calvar {Berekenen van variaties}
 translate N ConfigureCalvar {Configuratie}
 

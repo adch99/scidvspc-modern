@@ -1517,6 +1517,8 @@ translate S Export {Exportar}
 translate S BookPartiallyLoaded {Libro parcialmente cargado}
 # ====== TODO To be translated ======
 translate S AddLine {Add Line}
+# ====== TODO To be translated ======
+translate S RemLine {Remove Line}
 translate S Calvar {Cálculo de variantes}
 translate S ConfigureCalvar {Configuración}
 # Opening names used in tacgame.tcl

@@ -483,6 +483,7 @@ if {0} {
     menu $w.left.remove.otherMoves
 
     button $w.left.addline -text $::tr(AddLine) -relief flat -command ::book::addLine
+    button $w.left.remline -text $::tr(RemLine) -relief flat -command ::book::remLine
     
     # frame $w.left.space1 -height 60
     dialogbutton $w.left.export -text $::tr(Export) -command ::book::export
@@ -491,7 +492,7 @@ if {0} {
     dialogbutton $w.left.help -text $::tr(Help) -command {helpWindow BookTuning}
     dialogbutton $w.left.close -text $::tr(Close) -command "destroy $w"
     
-    pack $w.left.combo $w.left.add $w.left.addline $w.left.remove -side top -padx 3 -pady 3
+    pack $w.left.combo $w.left.add $w.left.remove $w.left.addline $w.left.remline -side top -padx 3 -pady 1
 
     pack $w.left.save $w.left.export -side top -padx 3 -pady 3
     pack $w.left.close $w.left.help $w.left.space2 -side bottom -padx 3 -pady 3
@@ -692,6 +693,8 @@ if {0} {
 
     busyCursor .
     update idletasks
+
+    sc_game push copyfast
     set tempfile [file join $::scidUserDir tempfile.[pid]]
 
     while {![sc_pos isAt vstart]} {
@@ -712,10 +715,59 @@ if {0} {
         lappend bookMoves $move
         lappend prob 0
 	sc_book movesupdate $bookMoves $prob $::book::bookTuningSlot $tempfile
+	# sc_book movesupdate d5 c5 Ba3 92 8 0 2 /home/steven/.scidvspc/tempfile.9403
       }
     }
 
     file delete $tempfile
+    sc_game pop
+    unbusyCursor .
+    updateBoard
+  }
+
+  proc remLine {} {
+    ### Remove book moves from next move till move out of book
+
+    global ::book::bookTuningMoves
+    if { $::book::isReadonly > 0 } { return }
+
+    set reply [ tk_messageBox -title $::tr(AddLine) -type yesno -icon info -parent .bookTuningWin -message \
+     {Remove all book moves from this position till out of book ?} ]
+    if {$reply != {yes}} {return}
+
+    busyCursor .
+    update idletasks
+    sc_game push copyfast
+    set tempfile [file join $::scidUserDir tempfile.[pid]]
+    set inBook 1
+
+    while {$inBook} {
+      set moves [string map {% {}} [sc_book moves $::book::bookTuningSlot]]
+      # e4 46% d4 36% Nf3 10% c4 7% g3 1% b3 0% f4 0% Nc3 0% b4 0% e3 0% a3 0% c3 0% d3 0%
+      set move [sc_game info nextMove]
+      set bookMoves {}
+      set prob {}
+      set inBook 0
+      foreach {x y} $moves {
+        if {$x == $move} {
+	  set inBook 1
+        } else {
+	  lappend bookMoves $x
+	  lappend prob $y
+        }
+      }
+      if {$inBook} {
+	sc_book movesupdate $bookMoves $prob $::book::bookTuningSlot $tempfile
+	# sc_book movesupdate d5 c5 Ba3 92 8 0 2 /home/steven/.scidvspc/tempfile.9403
+      }
+
+      if {![sc_move forward]} {
+	set inBook 0
+      }
+    }
+
+    file delete $tempfile
+    sc_game pop
     unbusyCursor .
     updateBoard
   }

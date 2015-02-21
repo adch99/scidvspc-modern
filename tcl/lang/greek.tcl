@@ -1523,6 +1523,8 @@ translate G Export {Εξαγωγή}
 translate G BookPartiallyLoaded {Φόρτωση Βιβλίου μερικώς}
 # ====== TODO To be translated ======
 translate G AddLine {Add Line}
+# ====== TODO To be translated ======
+translate G RemLine {Remove Line}
 translate G Calvar {Υπολογισμός Βαριάντων}
 translate G ConfigureCalvar {Ρύθμιση}
 # Opening names used in tacgame.tcl

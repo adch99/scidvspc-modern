@@ -1539,6 +1539,8 @@ translate D Export {Export}
 translate D BookPartiallyLoaded {Buch teilweise geladen}
 # ====== TODO To be translated ======
 translate D AddLine {Add Line}
+# ====== TODO To be translated ======
+translate D RemLine {Remove Line}
 translate D Calvar {Training: Variantenberechnung}
 translate D ConfigureCalvar {Konfiguration}
 translate D Reti {Reti}
