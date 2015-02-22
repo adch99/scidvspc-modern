@@ -17,6 +17,9 @@
 #include "san.h"
 #include "util.h"
 #include "list.h"
+#ifndef _MSC_VER
+#include <unistd.h>
+#endif
 
 // types
 
@@ -228,8 +231,37 @@ int scid_book_movesupdate(char * moves, char * probs, const int BookNumber, char
         write_entry_file(BookFile[BookNumber],entry);
     }
     fclose(f);
+
+    bool isTruncated = (BookSize[BookNumber] > write_count);
     BookSize[BookNumber]=write_count;
     book_flush(BookNumber); // commit changes to disk
+
+    if (isTruncated) {
+      /* We are truncating an open file
+       * http://stackoverflow.com/questions/13755516/is-there-a-guaranteed-and-safe-way-to-truncate-a-file-from-ansi-c-file-pointer
+       * says -
+       *
+       * So, to use ftruncate() safely with STDIO it may be necessary to first
+       * flush any STDIO buffers (with fflush()) if your program may have
+       * already written to the stream in question. This will avoid STDIO
+       * trying to flush the otherwise unwritten buffer to the file after the
+       * truncation has been done.
+       *
+       * You can then use fileno() on the STDIO stream's FILE handle to find the
+       * underlying file descriptor for the open STDIO stream, and you would then use
+       * that file descriptor with ftruncate(). You might consider putting the call
+       * to fileno() right in the parameter list for the ftruncate() call so that you
+       * don't keep the file descriptor around and accidentally use it yet other ways
+       * which might further confuse the internal state of STDIO. Perhaps like this
+       * (say to truncate a file to the current STDIO stream offset):
+       */
+
+#ifdef _WIN32
+	_chsize(fileno(BookFile[BookNumber]),  ftell(BookFile[BookNumber]));
+#else
+	ftruncate (fileno(BookFile[BookNumber]), (off_t) ftell(BookFile[BookNumber]));
+#endif
+    }
     return 0; // success
 }
 

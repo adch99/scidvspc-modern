@@ -4268,7 +4268,7 @@ First, remove games with non-standard starts.
 These can be found by <a Searches Header>searching</a> for games with the "non-standard start" flag.
 Then, negate the filter, <a Export>export</a> the games to PGN, and from the command line:
 <br>
-<b>polyglot make-book -pgn GAMES.PGN -bin BOOK.BIN -max-ply 30</b>
+<b>polyglot make-book -pgn GAMES.PGN -bin BOOK.BIN -min-game 1 -max-ply 30</b>
 <br>
 See the polyglot documentation for more options.
 </p>
