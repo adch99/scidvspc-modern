@@ -492,9 +492,10 @@ if {0} {
     dialogbutton $w.left.help -text $::tr(Help) -command {helpWindow BookTuning}
     dialogbutton $w.left.close -text $::tr(Close) -command "destroy $w"
     
-    pack $w.left.combo $w.left.add $w.left.remove $w.left.addline $w.left.remline -side top -padx 3 -pady 1
-
-    pack $w.left.save $w.left.export -side top -padx 3 -pady 3
+    pack $w.left.combo $w.left.add $w.left.remove -side top -padx 3 -pady 1
+    pack $w.left.save -side top -padx 3 -pady 3
+    pack $w.left.addline $w.left.remline -side top -padx 3 -pady 1
+    pack $w.left.export -side top -padx 3 -pady 3
     pack $w.left.close $w.left.help $w.left.space2 -side bottom -padx 3 -pady 3
 
     bind $w.left.combo <<ComboboxSelected>> ::book::bookTuningSelect
