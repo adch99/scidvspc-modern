@@ -1160,7 +1160,7 @@ proc showGameInfo {} {
     grid .main.gameInfoFrame -row 3 -column 0 -sticky nsew -padx 2
   } else  {
     grid forget .main.gameInfoFrame
-    grid .main.gameInfoMini -row 3 -column 0 -sticky nsew -padx 2
+    grid .main.gameInfoMini -row 3 -column 0 -padx 2
   }
   update idletasks
 }

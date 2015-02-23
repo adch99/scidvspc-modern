@@ -366,7 +366,9 @@ autoscrollframe .main.gameInfoFrame text .main.gameInfo
 
 ::htext::init .main.gameInfo
 
-label .main.gameInfoMini -height 2 -font font_Regular
+frame .main.gameInfoMini -height 2
+pack [label .main.gameInfoMini.white -font font_Regular -cursor hand1] -side left
+pack [label .main.gameInfoMini.black -font font_Regular -cursor hand1] -side right
 
 ### Context menu for main board
 ### allows customisation of board, gameinfo and a couple of windows
@@ -885,6 +887,9 @@ proc updateBoard3 {pgnNeedsUpdate} {
 proc updateGameinfo {} {
   global gameInfo
 
+  ### Only one of .main.gameInfo and .main.gameInfoMini are ever gridded at the one time, but we update them both
+  # The two gameInfoMini player labels are padded with "  --  " and "(result)" to save widget complexity
+
   .main.gameInfo configure -state normal
   .main.gameInfo delete 0.0 end
   ::htext::display .main.gameInfo [sc_game info -hide $gameInfo(hideNextMove) \
@@ -900,16 +905,33 @@ proc updateGameinfo {} {
   }
   .main.gameInfo configure -state disabled
 
-  set tmp "[sc_game tags get White]  --  [sc_game tags get Black]"
+  set white [sc_game tags get White]
+  .main.gameInfoMini.white configure -text "$white  --  "
+
+  if {$white == "?"} {
+    bind .main.gameInfoMini.white <ButtonRelease-1> "gameSave -1 white"
+  } else {
+    bind .main.gameInfoMini.white <ButtonRelease-1> [list playerInfo $white raise]
+  }
+
+  set black "[sc_game tags get Black]"
+
+  if {$black == "?"} {
+    bind .main.gameInfoMini.black <ButtonRelease-1> "gameSave -1 black"
+  } else {
+    bind .main.gameInfoMini.black <ButtonRelease-1> [list playerInfo $black raise]
+  }
+
   set result [sc_game tags get Result]
   if {$result == "1"} {
-    set tmp "$tmp  (1-0)"
+    set black "$black  (1-0)"
   } elseif {$result == "0"} {
-    set tmp "$tmp  (0-1)"
+    set black "$black  (0-1)"
   } elseif {$result == "="} {
-    set tmp "$tmp  (1/2-1/2)"
+    set black "$black  (1/2-1/2)"
   }
-  .main.gameInfoMini configure -text $tmp
+  .main.gameInfoMini.black configure -text $black
+
 }
 
 proc checkGameInfoHeight {{init 0}} {
