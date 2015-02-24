@@ -596,7 +596,7 @@ proc setupBoard {} {
 
   button $sr.b.clear -textvar ::tr(EmptyBoard) -command {
     set setupBd \
-      "................................................................"
+      "..............K..................................k.............."
     setBoard .setup.l.bd $setupBd $setupboardSize
     set castling {}
     makeSetupFen
