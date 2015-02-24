@@ -5714,7 +5714,7 @@ set helpText(BookTuning) {<h1>Book Tuning</h1>
 <h3>Adding Lines</h3>
    <p>
    Scid vs. PC includes <b>Add Line</b> and <b>Remove Line</b> features. The first will add
-   all moves <b>to</b> the current position, the latter removes all moves <b>from</b> then current move (till out of book).
+   all moves (or all White or Black moves) <b>to</b> the current position, the latter removes all moves <b>from</b> then current move till the game/var end.
    </p>
    
   <p>

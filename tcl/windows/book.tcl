@@ -691,9 +691,14 @@ if {0} {
     global ::book::bookTuningMoves
     if { $::book::isReadonly > 0 } { return }
 
-    set reply [ tk_messageBox -title $::tr(AddLine) -type yesno -icon info -parent .bookTuningWin -message \
-     {Add all moves (to current position) to book ?} ]
-    if {$reply != {yes}} {return}
+    set reply [tk_dialog .booktune $::tr(AddLine) \
+      {Add all/white/black moves (to current position) to book ?} \
+      question 0 \
+      {  All  } $::tr(White) $::tr(Black) $::tr(Cancel) ]
+
+    if {$reply == 3} {return}
+    if {$reply == 1} {set reply white}
+    if {$reply == 2} {set reply black}
 
     busyCursor .
     update idletasks
@@ -703,23 +708,31 @@ if {0} {
 
     while {![sc_pos isAt vstart]} {
       set move [sc_game info previousMove]
-      sc_move back
-    
-      set moves [string map {% {}} [sc_book moves $::book::bookTuningSlot]]
-      set bookMoves {}
-      set prob {}
-      # e4 46% d4 36% Nf3 10% c4 7% g3 1% b3 0% f4 0% Nc3 0% b4 0% e3 0% a3 0% c3 0% d3 0%
-      foreach {x y} $moves {
-	lappend bookMoves $x
-	lappend prob $y
+      
+      # Skip black or white moves
+      if {$reply == [sc_pos side]} {
+        sc_move back
+        set move [sc_game info previousMove]
       }
 
-      set count [lsearch $bookMoves $move]
-      if {$count == -1} {
-        lappend bookMoves $move
-        lappend prob 0
-	sc_book movesupdate $bookMoves $prob $::book::bookTuningSlot $tempfile
-	# sc_book movesupdate d5 c5 Ba3 92 8 0 2 /home/steven/.scidvspc/tempfile.9403
+      if {[sc_move back]} {
+      
+        set moves [string map {% {}} [sc_book moves $::book::bookTuningSlot]]
+        set bookMoves {}
+        set prob {}
+        # e4 46% d4 36% Nf3 10% c4 7% g3 1% b3 0% f4 0% Nc3 0% b4 0% e3 0% a3 0% c3 0% d3 0%
+        foreach {x y} $moves {
+          lappend bookMoves $x
+          lappend prob $y
+        }
+
+        set count [lsearch $bookMoves $move]
+        if {$count == -1} {
+          lappend bookMoves $move
+          lappend prob 0
+          sc_book movesupdate $bookMoves $prob $::book::bookTuningSlot $tempfile
+          # sc_book movesupdate d5 c5 Ba3 92 8 0 2 /home/steven/.scidvspc/tempfile.9403
+        }
       }
     }
 
@@ -730,22 +743,21 @@ if {0} {
   }
 
   proc remLine {} {
-    ### Remove book moves from next move till move out of book
+    ### Remove all book moves from next move
 
     global ::book::bookTuningMoves
     if { $::book::isReadonly > 0 } { return }
 
     set reply [ tk_messageBox -title $::tr(AddLine) -type yesno -icon info -parent .bookTuningWin -message \
-     {Remove all book moves from this position till out of book ?} ]
+     {Remove all book moves from this position till game end ?} ]
     if {$reply != {yes}} {return}
 
     busyCursor .
     update idletasks
     sc_game push copyfast
     set tempfile [file join $::scidUserDir tempfile.[pid]]
-    set inBook 1
 
-    while {$inBook} {
+    while {![sc_pos isAt vend]} {
       set moves [string map {% {}} [sc_book moves $::book::bookTuningSlot]]
       # e4 46% d4 36% Nf3 10% c4 7% g3 1% b3 0% f4 0% Nc3 0% b4 0% e3 0% a3 0% c3 0% d3 0%
       set move [sc_game info nextMove]
@@ -754,20 +766,18 @@ if {0} {
       set inBook 0
       foreach {x y} $moves {
         if {$x == $move} {
-	  set inBook 1
+          set inBook 1
         } else {
-	  lappend bookMoves $x
-	  lappend prob $y
+          lappend bookMoves $x
+          lappend prob $y
         }
       }
       if {$inBook} {
-	sc_book movesupdate $bookMoves $prob $::book::bookTuningSlot $tempfile
-	# sc_book movesupdate d5 c5 Ba3 92 8 0 2 /home/steven/.scidvspc/tempfile.9403
+        sc_book movesupdate $bookMoves $prob $::book::bookTuningSlot $tempfile
+        # sc_book movesupdate d5 c5 Ba3 92 8 0 2 /home/steven/.scidvspc/tempfile.9403
       }
 
-      if {![sc_move forward]} {
-	set inBook 0
-      }
+      sc_move forward
     }
 
     file delete $tempfile
