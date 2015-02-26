@@ -367,8 +367,8 @@ autoscrollframe .main.gameInfoFrame text .main.gameInfo
 ::htext::init .main.gameInfo
 
 frame .main.gameInfoMini -height 2
-pack [label .main.gameInfoMini.white -font font_Regular -cursor hand1] -side left
-pack [label .main.gameInfoMini.black -font font_Regular -cursor hand1] -side right
+pack [label .main.gameInfoMini.white -font font_Regular -cursor hand2] -side left
+pack [label .main.gameInfoMini.black -font font_Regular -cursor hand2] -side right
 
 ### Context menu for main board
 ### allows customisation of board, gameinfo and a couple of windows
