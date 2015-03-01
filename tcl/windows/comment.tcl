@@ -75,7 +75,6 @@ proc ::commenteditor::Open {} {
   frame $w.nf.tf
   entry $w.nf.tf.text -width 20 -highlightthickness 0
   bindFocusColors $w.nf.tf.text
-  bind $w.nf.tf.text <Alt-KeyRelease-c> { .commentWin.b.cancel invoke }
 
   set nagbox $w.nf.tf.text
   set nagbuttons $w.nf.b
@@ -138,8 +137,6 @@ proc ::commenteditor::Open {} {
     -yscrollcommand {.commentWin.cf.scroll set} -setgrid 1 -borderwidth 2 -relief groove -highlightthickness 0
   scrollbar $w.cf.scroll -command ".commentWin.cf.text yview"
   # bindFocusColors $w.cf.text
-  bind $w.cf.text <Alt-KeyRelease-c> { .commentWin.b.cancel invoke }
-  bind $w.cf.text <Alt-KeyRelease-s> { .commentWin.b.apply invoke }
   # "break" stops subsequent built-in bindings from executing
   bind $w.cf.text <FocusOut> ::commenteditor::storeComment
   bind $w.cf.text <Control-Return> "$w.b.ok invoke ; break"
