@@ -1808,7 +1808,7 @@
 
   o  Pgn of events  <http://www.pgnmentor.com/files.html#events>
 
-  o  Mailing list subscribe
+  o  Mailing list subscribe (must be a member to post to list)
      <https://lists.sourceforge.net/lists/listinfo/scidvspc-users>
 
   o  Mailing list archive
