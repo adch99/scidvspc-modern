@@ -591,7 +591,8 @@ proc ::windows::gamelist::Open {} {
 
   dialogbutton $w.c.flag -text $::tr(Flag) -font font_Small -command {
     ::windows::gamelist::ToggleFlag $glistFlag
-    updateGameinfo
+    # updateGameinfo
+    updateStatusBar
   }
 
   configDeleteButtons

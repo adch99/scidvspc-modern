@@ -178,7 +178,11 @@ proc warnStatusBar {warning} {
    # Will be restored by updateStatusBar in main.tcl
 }
 
-### Update the main status bar
+### Update the main status bar, which is alternatively used to
+# 1. Display game info
+# 2. Show move keyboard completion info
+# 3. Show a warning for fics (not at correct position)
+# 4. Show mini game engine
 
 proc updateStatusBar {} {
   global statusBar moveEntry
@@ -191,6 +195,7 @@ proc updateStatusBar {} {
   # Why are these things refreshed here ???
   # ::windows::switcher::Refresh
   ::maint::Refresh
+
   set statusBar "  "
 
   if {$moveEntry(Text) != ""} {
@@ -207,14 +212,24 @@ proc updateStatusBar {} {
   set fname [sc_base filename]
   set fname [file tail $fname]
   if {$fname == ""} { set fname "<none>" }
-  append statusBar "$fname:  [filterText]"
+  
+  set base [sc_base current]
+  set gameNum [sc_game number]
+  set gameCount [sc_base numGames $base]
 
-  # append statusBar "   $::tr(Filter)"
+  if {$gameCount == 0} {
+    append statusBar "$fname:  $::tr(noGames)"
+    return
+  }
+
+  append statusBar "$fname:  $gameNum / [::utils::thousands $gameCount 0]"
+
+  append statusBar "  [sc_flags $gameNum verbose]"
 
   if {[sc_base isReadOnly]} {
     append statusBar " ($::tr(readonly))"
-  }  else {
-    if {[sc_game altered] && [sc_game number] != 0} {
+  } else {
+    if {[sc_game altered] && $gameNum != 0} {
      append statusBar " ($::tr(altered))"
     }
   }

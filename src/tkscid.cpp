@@ -5841,14 +5841,15 @@ sc_flags (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     char userFlags[32]="";
     gameNumberT gnum;
 
-    if (argc != 2 ) {
-      return errorResult (ti, "Usage: sc_flags <gamenumber>");
+    if (argc < 2 || argc > 3) {
+      return errorResult (ti, "Usage: sc_flags <gamenumber> [verbose]");
     }
 
     gnum = strGetUnsigned (argv[1]);
 
     if (gnum == 0) {
-      return setUintResult (ti, 0);
+      Tcl_AppendResult (ti, "", NULL);
+      return TCL_OK;
     }
     gnum--;
 
@@ -5859,7 +5860,67 @@ sc_flags (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     ie->GetFlagStr (userFlags, NULL);
 
-    Tcl_AppendResult (ti, userFlags, NULL);
+    if (argc == 2) {
+      Tcl_AppendResult (ti, userFlags, NULL);
+    } else {
+      // verbose mode
+      // Is this game deleted or have other user-settable flags 
+
+      // max is 19 flags (previously ???)
+      char userFlags[32];
+      int flagCount = 0;
+      int deleted = 0;
+
+      if (ie->GetFlagStr (userFlags, NULL) != 0) {
+	  // Print other flags set for this game (except "D" for Deleted, which is shown above)
+	  const char * flagStr = userFlags;
+	  if (*flagStr == 'D') {
+              deleted = 1;
+	      if (flagStr[1]) {
+		  Tcl_AppendResult (ti, translate (ti, "deleted"), ", ",  NULL);
+              } else {
+		  Tcl_AppendResult (ti, translate (ti, "deleted"), NULL);
+              }
+              flagStr++;
+          }
+
+	  if (*flagStr != 0) {
+              Tcl_AppendResult (ti, translate (ti, "flags", "flags"), ": ", flagStr, NULL);
+	      while (*flagStr != 0) {
+		  char * flagName = NULL;
+		  switch (*flagStr) {
+		      case 'W': flagName = "WhiteOpFlag"; break;
+		      case 'B': flagName = "BlackOpFlag"; break;
+		      case 'M': flagName = "MiddlegameFlag"; break;
+		      case 'E': flagName = "EndgameFlag"; break;
+		      case 'N': flagName = "NoveltyFlag"; break;
+		      case 'P': flagName = "PawnFlag"; break;
+		      case 'T': flagName = "TacticsFlag"; break;
+		      case 'Q': flagName = "QsideFlag"; break;
+		      case 'K': flagName = "KsideFlag"; break;
+		      case '!': flagName = "BrilliancyFlag"; break;
+		      case '?': flagName = "BlunderFlag"; break;
+		      case 'U': flagName = "UserFlag"; break;
+		      /*** todo : print Custom Flag labels ***/
+		  }
+		  if (flagName != NULL) {
+		      Tcl_AppendResult (ti, (flagCount > 0 ? ", " : " - "), translate (ti, flagName), NULL);
+		  }
+		  flagCount++;
+		  flagStr++;
+	      }
+	  }
+      }
+
+      /*** Twins (duplicates) ***/
+      if (db->duplicates != NULL  &&  db->duplicates[gnum] != 0) {
+          if (deleted > 0 || flagCount > 0) 
+	    Tcl_AppendResult (ti, "  (", translate (ti, "twin"), ")", NULL);
+          else
+	    Tcl_AppendResult (ti, "(", translate (ti, "twin"), ")", NULL);
+      }
+
+    }
     return TCL_OK;
 }
 
@@ -7091,7 +7152,8 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     bool hideNextMove = false;
     bool showMaterialValue = false;
     bool showFEN = false;
-    uint commentWidth = 30;
+    uint commentWidth = 90;
+    // Making it too large means the x xscrollbar is shown, sometimes obscuring the comment line altogether
     uint commentHeight = 1;
     bool fullComment = false;
     uint showTB = 2;  // 0 = no TB output, 1 = score only, 2 = best moves.
@@ -7127,6 +7189,7 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                 arg++;
                 fullComment = strGetBoolean(argv[arg]);
                 if (fullComment) {
+                    // unused
                     commentWidth = 99999;
                     commentHeight = 99999;
                 }
@@ -7207,12 +7270,12 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         arg++;
     }
 
-    /*** Game line ****/
-
     // <br> is used for newlines S.A. &&&
     // Other markups (eg <red>, <gbold>) are text tags defined in htext.tcl
     // <bold> markup seems broken, so using <gbold> 
     // A few fields are alligned with TABS
+
+    /*** Player names, result line ****/
 
     if ( db->game->GetWhiteStr()[0] == '?' && db->game->GetWhiteStr()[1] == 0 )
       sprintf (temp, "<center><gbold><run gameSave -1 white>?</run></gbold>");
@@ -7249,8 +7312,6 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         Tcl_AppendResult (ti, temp, NULL);
     }
 
-    
-    // Result is now displayed beside payer names, if 1-0, 0-1, 1/2-1/2
     resultT result = db->game->GetResult();
     if (! hideNextMove && result )  {
       Tcl_AppendResult (ti, "    (", RESULT_LONGSTR[result] ,")", NULL);
@@ -7299,82 +7360,6 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         Tcl_AppendResult (ti, "   <blue><run ::windows::eco::Refresh ", basicEcoStr, ">", fullEcoStr, "</run></blue>", NULL);
     }
 
-    /*** Game number + flags + Eco line ***/
-
-    const char * gameStr = translate (ti, "game");
-
-    sprintf (temp, "<br>%c%s: %u", toupper(gameStr[0]), gameStr + 1, db->gameNumber + 1);
-    Tcl_AppendResult (ti, temp, NULL);
-
-    /*** Flags ***/
-
-    if (db->gameNumber >= 0) {
-        // Is this game deleted or have other user-settable flags 
-
-        IndexEntry * ie = db->idx->FetchEntry(db->gameNumber);
-        if (ie->GetDeleteFlag())
-            Tcl_AppendResult (ti, "   <gray>(", translate (ti, "deleted"), ")</gray>", NULL);
-
-        // max is 19 flags
-        char userFlags[32];
-        if (ie->GetFlagStr (userFlags, NULL) != 0) {
-            // Print other flags set for this game (except "D" for Deleted, which is shown above)
-            const char * flagStr = userFlags;
-            if (*flagStr == 'D') { flagStr++; }
-            if (*flagStr != 0) {
-                Tcl_AppendResult (ti, "   <gray>(", translate (ti, "flags", "flags"), ": ", flagStr, NULL);
-                int flagCount = 0;
-                while (*flagStr != 0) {
-                    char * flagName = NULL;
-                    switch (*flagStr) {
-                        case 'W': flagName = "WhiteOpFlag"; break;
-                        case 'B': flagName = "BlackOpFlag"; break;
-                        case 'M': flagName = "MiddlegameFlag"; break;
-                        case 'E': flagName = "EndgameFlag"; break;
-                        case 'N': flagName = "NoveltyFlag"; break;
-                        case 'P': flagName = "PawnFlag"; break;
-                        case 'T': flagName = "TacticsFlag"; break;
-                        case 'Q': flagName = "QsideFlag"; break;
-                        case 'K': flagName = "KsideFlag"; break;
-                        case '!': flagName = "BrilliancyFlag"; break;
-                        case '?': flagName = "BlunderFlag"; break;
-                        case 'U': flagName = "UserFlag"; break;
-                        // todo : insert Custom Flag labels into gameinfo widget
-                    }
-                    if (flagName != NULL) {
-                        Tcl_AppendResult (ti, (flagCount > 0 ? ", " : " - "),
-                                          translate (ti, flagName), NULL);
-                    }
-                    flagCount++;
-                    flagStr++;
-                }
-                Tcl_AppendResult (ti, ")</gray>", NULL);
-            }
-        }
-
-        /*** Twins (duplicates) ***/
-
-        // Does this have to be blue and/or run ??
-
-        if (db->duplicates != NULL  &&  db->duplicates[db->gameNumber] != 0) {
-            Tcl_AppendResult (ti, "   <blue><run updateTwinChecker>(", translate (ti, "twin"), ")</run></blue>", NULL);
-        }
-    }
-
-    if (showMaterialValue) {
-        uint mWhite = db->game->GetCurrentPos()->MaterialValue (WHITE);
-        uint mBlack = db->game->GetCurrentPos()->MaterialValue (BLACK);
-        sprintf (temp, "   %s: %u-%u", translate (ti, "Material"), mWhite, mBlack);
-        Tcl_AppendResult (ti, temp, NULL);
-        if (mWhite > mBlack) {
-            sprintf (temp, ":+%u", mWhite - mBlack);
-            Tcl_AppendResult (ti, temp, NULL);
-        } else if (mBlack > mWhite) {
-            sprintf (temp, ":-%u", mBlack - mWhite);
-            Tcl_AppendResult (ti, temp, NULL);
-        }
-    }
-
     /*** Check ECO book for the current position ***/
 
     if (ecoBook) {
@@ -7392,23 +7377,15 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             if (len >= 4) { estr[3] = 0; }
             DString * tempDStr = new DString;
             translateECO (ti, ecoComment.Data(), tempDStr);
-            Tcl_AppendResult (ti, "\t\tEco:  <blue><run ::windows::eco::Refresh ", estr, ">",
-                               tempDStr->Data(), "</run></blue>", NULL);
+	    if (db->game->GetEco() == 0)
+	      Tcl_AppendResult (ti, "  <blue><run ::windows::eco::Refresh ", estr, ">", tempDStr->Data(), "</run></blue>", NULL);
+            else
+	      Tcl_AppendResult (ti, "  (<blue><run ::windows::eco::Refresh ", estr, ">", tempDStr->Data(), "</run></blue>)", NULL);
             delete tempDStr;
         }
     }
 
     /*** Length + Move line ****/
-
-    if (hideNextMove) {
-        // sprintf (temp, "(%s: %s)", translate (ti, "Result"), translate (ti, "hidden"));
-        Tcl_AppendResult (ti, "<br>", NULL);
-    } else {
-      sprintf (temp, "<br>%s: %u   ",
-      translate (ti, "Length"),
-      (db->game->GetNumHalfMoves() + 1) / 2);
-      Tcl_AppendResult (ti, temp, NULL);
-    }
 
     char san [20];
     byte *nags;
@@ -7434,7 +7411,7 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         printNags = true;
     }
 
-    Tcl_AppendResult (ti, translate (ti, "LastMove"), ":  ", temp, "</blue>", NULL);
+    Tcl_AppendResult (ti, "<br>", translate (ti, "LastMove"), ":  ", temp, "</blue>", NULL);
 
     nags = db->game->GetNags();
     if (printNags  &&  *nags != 0 ) {
@@ -7452,12 +7429,81 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     Tcl_AppendResult (ti, "</run>",  NULL);
 
+    /*** Variation ***/
+    Tcl_AppendResult (ti, "\t\t", NULL);
+    if (db->game->GetVarLevel() > 0) {
+        Tcl_AppendResult (ti, "<gray><run sc_var exit; updateBoard -animate>  (Var)</run></gray>", NULL);
+    }
 
+    /*** Next Move ***/
+
+    db->game->GetSAN (san);
+    strcpy(tempTrans, san);
+    transPieces(tempTrans);
+    if (san[0] == 0) {
+        strCopy (temp, "");
+        strAppend (temp, db->game->GetVarLevel() == 0 ?
+		   translate (ti, "GameEnd", "End of game") :
+		   translate (ti, "LineEnd", "End of line"));
+        strAppend (temp, "");
+        printNags = false;
+    } else {
+      if (hideNextMove) {
+	  sprintf (temp, "%u.   %s(", moveCount, toMove==WHITE ? "" : "...  ");
+	  strAppend (temp, translate (ti, "hidden"));
+	  strAppend (temp, ")");
+	  printNags = false;
+      } else {
+	  sprintf (temp, "<run ::move::Forward>%u.<blue>%s%s",
+		moveCount, toMove==WHITE ? "" : "..", tempTrans);//san);
+	  printNags = true;
+      }
+    }
+
+    if (!hideNextMove) {
+      Tcl_AppendResult (ti, "\t", translate (ti, "NextMove", "Next"), NULL);
+      Tcl_AppendResult (ti, ":  ", temp, NULL);
+
+      nags = db->game->GetNextNags();
+      if (printNags  &&  *nags != 0) {
+	  for (uint nagCount = 0 ; nags[nagCount] != 0; nagCount++) {
+	      char nagstr[20];
+
+	      game_printNag (nags[nagCount], nagstr, true, PGN_FORMAT_Plain);
+	      Tcl_AppendResult (ti, nagstr, NULL);
+	  }
+      }
+      Tcl_AppendResult (ti, "</run></blue>", NULL);
+    }
+    Tcl_AppendResult (ti, "\t\t", NULL);
+
+    if (showMaterialValue) {
+        uint mWhite = db->game->GetCurrentPos()->MaterialValue (WHITE);
+        uint mBlack = db->game->GetCurrentPos()->MaterialValue (BLACK);
+        sprintf (temp, "   %s: %u-%u", translate (ti, "Material"), mWhite, mBlack);
+        Tcl_AppendResult (ti, temp, NULL);
+        if (mWhite > mBlack) {
+            sprintf (temp, ":+%u", mWhite - mBlack);
+            Tcl_AppendResult (ti, temp, NULL);
+        } else if (mBlack > mWhite) {
+            sprintf (temp, ":-%u", mBlack - mWhite);
+            Tcl_AppendResult (ti, temp, NULL);
+        }
+	Tcl_AppendResult (ti, "\t\t", NULL);
+    }
+
+    /*** Length ***/
+    if (hideNextMove) {
+        // sprintf (temp, "(%s: %s)", translate (ti, "Result"), translate (ti, "hidden"));
+    } else {
+      sprintf (temp, "  %s: %u   ", translate (ti, "Length"), (db->game->GetNumHalfMoves() + 1) / 2);
+      Tcl_AppendResult (ti, temp, NULL);
+    }
 
     /*** Comment ***/
 
     if (db->game->GetMoveComment() != NULL) {
-        Tcl_AppendResult (ti, "   <green><run ::commenteditor::Open>", NULL);
+        Tcl_AppendResult (ti, "<br><green><run ::commenteditor::Open>", NULL);
         char * str = strDuplicate(db->game->GetMoveComment());
         strTrimMarkCodes (str);
         const char * s = str;
@@ -7501,54 +7547,6 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 #else
         delete[] str;
 #endif
-    }
-
-    /*** Variation ***/
-
-    Tcl_AppendResult (ti, "\t", NULL);
-
-    if (db->game->GetVarLevel() > 0) {
-        Tcl_AppendResult (ti, "<gray><run sc_var exit; updateBoard -animate>\t(Var)</run></gray>", NULL);
-    }
-
-    /*** Next Move ***/
-
-    db->game->GetSAN (san);
-    strcpy(tempTrans, san);
-    transPieces(tempTrans);
-    if (san[0] == 0) {
-        strCopy (temp, "");
-        strAppend (temp, db->game->GetVarLevel() == 0 ?
-		   translate (ti, "GameEnd", "End of game") :
-		   translate (ti, "LineEnd", "End of line"));
-        strAppend (temp, "");
-        printNags = false;
-    } else {
-      if (hideNextMove) {
-	  sprintf (temp, "%u.   %s(", moveCount, toMove==WHITE ? "" : "...  ");
-	  strAppend (temp, translate (ti, "hidden"));
-	  strAppend (temp, ")");
-	  printNags = false;
-      } else {
-	  sprintf (temp, "<run ::move::Forward>%u.<blue>%s%s",
-		moveCount, toMove==WHITE ? "" : "..", tempTrans);//san);
-	  printNags = true;
-      }
-    }
-    if (!hideNextMove) {
-      Tcl_AppendResult (ti, "\t", translate (ti, "NextMove", "Next"), NULL);
-      Tcl_AppendResult (ti, ":  ", temp, NULL);
-
-      nags = db->game->GetNextNags();
-      if (printNags  &&  *nags != 0) {
-	  for (uint nagCount = 0 ; nags[nagCount] != 0; nagCount++) {
-	      char nagstr[20];
-
-	      game_printNag (nags[nagCount], nagstr, true, PGN_FORMAT_Plain);
-	      Tcl_AppendResult (ti, nagstr, NULL);
-	  }
-      }
-      Tcl_AppendResult (ti, "</run></blue>", NULL);
     }
 
 
