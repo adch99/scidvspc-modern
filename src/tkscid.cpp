@@ -7152,7 +7152,7 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     bool hideNextMove = false;
     bool showMaterialValue = false;
     bool showFEN = false;
-    uint commentWidth = 90;
+    uint commentWidth = 70;
     // Making it too large means the x xscrollbar is shown, sometimes obscuring the comment line altogether
     uint commentHeight = 1;
     bool fullComment = false;
@@ -7406,7 +7406,7 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         strAppend (temp, "");
         printNags = false;
     } else {
-        sprintf (temp, "<run ::commenteditor::Open>%u.   <blue>%s%s",
+        sprintf (temp, "%u.   <blue>%s%s",
                  prevMoveCount, toMove==WHITE ? "...  " : "", tempTrans);
         printNags = true;
     }
@@ -7415,7 +7415,7 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     nags = db->game->GetNags();
     if (printNags  &&  *nags != 0 ) {
-	Tcl_AppendResult (ti, " <gray>",  NULL);
+	Tcl_AppendResult (ti, "<gray>",  NULL);
         for (uint nagCount = 0 ; nags[nagCount] != 0; nagCount++) {
 	  char nagstr[20];
 	  game_printNag (nags[nagCount], nagstr, true, PGN_FORMAT_Plain);
@@ -7427,9 +7427,7 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 	Tcl_AppendResult (ti, "</gray>",  NULL);
     }  
 
-    Tcl_AppendResult (ti, "</run>",  NULL);
-
-    /*** Variation ***/
+    /*** (Var) ***/
     Tcl_AppendResult (ti, "\t", NULL);
     if (db->game->GetVarLevel() > 0) {
         Tcl_AppendResult (ti, "<gray><run sc_var exit; updateBoard -animate>  (Var)</run></gray>", NULL);
@@ -7462,18 +7460,19 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     if (!hideNextMove) {
       Tcl_AppendResult (ti, "\t", translate (ti, "NextMove", "Next"), NULL);
-      Tcl_AppendResult (ti, ":  ", temp, NULL);
+      Tcl_AppendResult (ti, ":  ", temp, "</blue>", NULL);
 
       nags = db->game->GetNextNags();
       if (printNags  &&  *nags != 0) {
+	  Tcl_AppendResult (ti, "<gray>", NULL);
 	  for (uint nagCount = 0 ; nags[nagCount] != 0; nagCount++) {
 	      char nagstr[20];
-
 	      game_printNag (nags[nagCount], nagstr, true, PGN_FORMAT_Plain);
 	      Tcl_AppendResult (ti, nagstr, NULL);
 	  }
+ 	  Tcl_AppendResult (ti, "</gray>", NULL);
       }
-      Tcl_AppendResult (ti, "</run></blue>", NULL);
+      Tcl_AppendResult (ti, "</run>", NULL);
     }
     Tcl_AppendResult (ti, "\t", NULL);
 
@@ -7511,15 +7510,15 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         uint lines = 0;
 	char ch;
 
-        // Add the first commentWidth characters of the comment, up to
-        // the first commentHeight lines:
+        // Add the first commentWidth characters of the comment. Newlines are converted to space.
         for (len = 0; len < commentWidth; len++, s++) {
             ch = *s;
             if (ch == 0) { break; }
             if (ch == '\n') {
                 lines++;
-                if (lines >= commentHeight) { break; }
-                Tcl_AppendResult (ti, "\t", NULL);
+                // if (lines >= commentHeight) { break; }
+                appendCharResult (ti, ' ');
+                // Tcl_AppendResult (ti, "\t", NULL);
                 // Tcl_AppendResult (ti, "<br>", NULL);
             } else if (ch == '<') {
                 Tcl_AppendResult (ti, "<lt>", NULL);
@@ -7576,7 +7575,7 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             byte * firstNag = db->game->GetNextNags();
             if (*firstNag >= NAG_GoodMove  &&  *firstNag <= NAG_DubiousMove) {
                 game_printNag (*firstNag, s, true, PGN_FORMAT_Plain);
-                Tcl_AppendResult (ti, "<red>", s, "</red>", NULL);
+                Tcl_AppendResult (ti, "<gray>", s, "</gray>", NULL);
             }
             Tcl_AppendResult (ti, "</run>", NULL);
             db->game->MoveExitVariation ();
