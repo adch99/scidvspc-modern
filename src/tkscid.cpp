@@ -7411,7 +7411,7 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         printNags = true;
     }
 
-    Tcl_AppendResult (ti, "<br>", translate (ti, "LastMove"), ":  ", temp, "</blue>", NULL);
+    Tcl_AppendResult (ti, "<br>", temp, "</blue>", NULL);
 
     nags = db->game->GetNags();
     if (printNags  &&  *nags != 0 ) {
@@ -7430,7 +7430,7 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     Tcl_AppendResult (ti, "</run>",  NULL);
 
     /*** Variation ***/
-    Tcl_AppendResult (ti, "\t\t", NULL);
+    Tcl_AppendResult (ti, "\t", NULL);
     if (db->game->GetVarLevel() > 0) {
         Tcl_AppendResult (ti, "<gray><run sc_var exit; updateBoard -animate>  (Var)</run></gray>", NULL);
     }
@@ -7475,7 +7475,7 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
       }
       Tcl_AppendResult (ti, "</run></blue>", NULL);
     }
-    Tcl_AppendResult (ti, "\t\t", NULL);
+    Tcl_AppendResult (ti, "\t", NULL);
 
     if (showMaterialValue) {
         uint mWhite = db->game->GetCurrentPos()->MaterialValue (WHITE);
@@ -7489,7 +7489,7 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             sprintf (temp, ":-%u", mBlack - mWhite);
             Tcl_AppendResult (ti, temp, NULL);
         }
-	Tcl_AppendResult (ti, "\t\t", NULL);
+	Tcl_AppendResult (ti, "\t", NULL);
     }
 
     /*** Length ***/
