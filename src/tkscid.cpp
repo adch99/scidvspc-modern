@@ -7150,7 +7150,7 @@ int
 sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
     bool hideNextMove = false;
-    bool showMaterialValue = false;
+    uint showMaterialValue = 1; // 0 shows material in gameinfo
     bool showFEN = false;
     uint commentWidth = 70;
     // Making it too large means the x xscrollbar is shown, sometimes obscuring the comment line altogether
@@ -7170,7 +7170,7 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         } else if  (strIsPrefix (argv[arg], "-materialValue")) {
             if (arg+1 < argc) {
                 arg++;
-                showMaterialValue = strGetBoolean(argv[arg]);
+                showMaterialValue = strGetInteger(argv[arg]);
             }
         } else if  (strIsPrefix (argv[arg], "-tb")) {
             if (arg+1 < argc) {
@@ -7183,7 +7183,7 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                 showFEN = strGetBoolean(argv[arg]);
             }
         } else if  (strIsPrefix (argv[arg], "-cfull")) {
-            // -cfull , -cwidth , -cheight seem unused. S.A
+            // -cwidth , -cheight seem unused. S.A
             // Show full comment:
             if (arg+1 < argc) {
                 arg++;
@@ -7385,7 +7385,7 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         }
     }
 
-    /*** Length + Move line ****/
+    /*** Move  , Material, Length line ****/
 
     char san [20];
     byte *nags;
@@ -7476,7 +7476,7 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     }
     Tcl_AppendResult (ti, "\t", NULL);
 
-    if (showMaterialValue) {
+    if (showMaterialValue == 0) {
         uint mWhite = db->game->GetCurrentPos()->MaterialValue (WHITE);
         uint mBlack = db->game->GetCurrentPos()->MaterialValue (BLACK);
         sprintf (temp, "   %s: %u-%u", translate (ti, "Material"), mWhite, mBlack);
@@ -7495,7 +7495,7 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     if (hideNextMove) {
         // sprintf (temp, "(%s: %s)", translate (ti, "Result"), translate (ti, "hidden"));
     } else {
-      sprintf (temp, "  %s: %u   ", translate (ti, "Length"), (db->game->GetNumHalfMoves() + 1) / 2);
+      sprintf (temp, "\t\t%s: %u   ", translate (ti, "Length"), (db->game->GetNumHalfMoves() + 1) / 2);
       Tcl_AppendResult (ti, temp, NULL);
     }
 
@@ -7516,10 +7516,10 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             if (ch == 0) { break; }
             if (ch == '\n') {
                 lines++;
-                // if (lines >= commentHeight) { break; }
-                appendCharResult (ti, ' ');
-                // Tcl_AppendResult (ti, "\t", NULL);
-                // Tcl_AppendResult (ti, "<br>", NULL);
+                if (commentHeight > 1) 
+		  Tcl_AppendResult (ti, "<br>", NULL);
+                else
+		  appendCharResult (ti, ' ');
             } else if (ch == '<') {
                 Tcl_AppendResult (ti, "<lt>", NULL);
             } else if (ch == '>') {
