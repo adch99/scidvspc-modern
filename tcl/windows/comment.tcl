@@ -114,7 +114,7 @@ proc ::commenteditor::Open {} {
   # --+ BlackCrushing
 
   # label $w.nf.label -font font_Regular -textvar ::tr(AnnotationSymbols)
-  # pack $w.nf -side top -pady 2 -padx 5 -fill x 
+  pack $w.nf -side top -pady 2 -padx 5 -fill x 
   #addHorizontalRule $w
 
   button $w.nf.tf.clear -textvar ::tr(Clear) -font font_Small -pady 1 -command "
