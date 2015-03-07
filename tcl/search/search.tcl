@@ -120,6 +120,9 @@ proc ::search::Config {{state ""}} {
 
 proc ::search::usefile {} {
   set ftype { { "Scid SearchOption files" {".sso"} } }
+  if {! [file isdirectory $::initialDir(sso)] } {
+    set ::initialDir(sso) $::env(HOME)
+  } 
   set ::fName [tk_getOpenFile -initialdir $::initialDir(sso) \
                  -filetypes $ftype -title "Select a SearchOptions file"]
   if {$::fName == ""} { return }

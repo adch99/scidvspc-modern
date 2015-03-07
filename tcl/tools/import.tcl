@@ -259,6 +259,9 @@ proc importPgnFile {} {
       { "All files" {"*"} }
     }
   }
+  if {! [file isdirectory $::initialDir(pgn)] } {
+    set ::initialDir(pgn) $::env(HOME)
+  }
   set fnames [tk_getOpenFile -multiple 1 -initialdir $::initialDir(pgn) -filetypes $ftypes -title "Import from PGN files" ]
   if {$fnames == ""} { return }
 

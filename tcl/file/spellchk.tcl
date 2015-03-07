@@ -17,10 +17,13 @@ proc readSpellCheckFile {{message 1}} {
 
   set spellCheckFileExists 0
   set ftype { { "Scid Spellcheck files" {".ssp" ".ssp.gz"} } }
-  set fullname [tk_getOpenFile -initialdir [file dirname $spellCheckFile] -filetypes $ftype -title "Open Spellcheck file"]
-  if {![string compare $fullname ""]} { return 0 }
-
-  if {[catch {sc_name read $fullname} result]} {
+  set dirname [file dirname $spellCheckFile]
+  if {! [file isdirectory $dirname] } {
+    set dirname $::env(HOME)
+  }
+  set result {}
+  set fullname [tk_getOpenFile -initialdir $dirname -filetypes $ftype -title "Open Spellcheck file"]
+  if {![file isfile $fullname] || [catch {sc_name read $fullname} result]} {
       if {$message} {
         tk_messageBox -title "ERROR: Unable to read file" -type ok \
           -icon error -message "Scid could not correctly read the spellcheck file you selected:\n\n$result"
