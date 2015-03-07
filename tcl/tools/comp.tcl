@@ -800,8 +800,13 @@ proc compNM {n m k} {
 
       ### Check if game is over
 
+      if {[sc_pos isInsufficient]} {
+	  sc_game tags set -result =
+	  sc_pos setComment {Scid: Insufficient Material}
+	  break
+      }
       if {[sc_pos moves] == {}} {
-	if {[string index [sc_game info previousMove] end] != {#}} {
+	if {![sc_pos isCheck]} {
 	  ### stalemate
 	  sc_game tags set -result =
 	  sc_pos setComment Stalemate
@@ -822,6 +827,7 @@ proc compNM {n m k} {
           if {[lindex $fen 4] > 99} {
 	    sc_pos setComment "50 move rule"
           } else {
+	    # Could we use "sc_pos analyse" for 3 fold detection ?
 	    sc_pos setComment "3 fold repetition"
           }
 	  sc_game tags set -result =

@@ -542,6 +542,7 @@ int sc_pos_hash       (TCL_ARGS);
 int sc_pos_html       (TCL_ARGS);
 int sc_pos_isAt       (TCL_ARGS);
 int sc_pos_isLegal    (TCL_ARGS);
+int sc_pos_isInsufficient (TCL_ARGS);
 int sc_pos_isPromo    (TCL_ARGS);
 int sc_pos_matchMoves (TCL_ARGS);
 int sc_pos_pgnBoard   (TCL_ARGS);

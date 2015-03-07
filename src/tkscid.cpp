@@ -10408,14 +10408,14 @@ sc_pos (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     static const char * options [] = {
         "addNag", "analyze", "bestSquare", "board", "clearNags",
         "fen", "getComment", "getNags", "hash", "html",
-        "isAt", "isLegal", "isPromotion",
+        "isAt", "isCheck", "isInsufficient", "isLegal", "isPromotion",
         "matchMoves", "moveNumber", "pgnBoard", "pgnOffset", "pieceCount",
         "probe", "setComment", "side", "tex", "moves", "movesUci", "location", NULL
     };
     enum {
         POS_ADDNAG, POS_ANALYZE, POS_BESTSQ, POS_BOARD, POS_CLEARNAGS,
         POS_FEN, POS_GETCOMMENT, POS_GETNAGS, POS_HASH, POS_HTML,
-        POS_ISAT, POS_ISLEGAL, POS_ISPROMO, POS_MATCHMOVES, POS_MOVENUM,
+        POS_ISAT, POS_ISCHECK, POS_ISINSUFFICENT, POS_ISLEGAL, POS_ISPROMO, POS_MATCHMOVES, POS_MOVENUM,
         POS_PGNBOARD, POS_PGNOFFSET, POS_PIECECOUNT, POS_PROBE,
         POS_SETCOMMENT, POS_SIDE, POS_TEX, POS_MOVES, POS_MOVES_UCI, LOCATION
     };
@@ -10469,6 +10469,12 @@ sc_pos (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     case POS_ISAT:
         return sc_pos_isAt (cd, ti, argc, argv);
+
+    case POS_ISCHECK:
+        return setBoolResult (ti, db->game->GetCurrentPos()->IsKingInCheck());
+
+    case POS_ISINSUFFICENT:
+        return sc_pos_isInsufficient (cd, ti, argc, argv);
 
     case POS_ISLEGAL:
         return sc_pos_isLegal (cd, ti, argc, argv);
@@ -10867,6 +10873,26 @@ sc_pos_isPromo (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     setBoolResult (ti, pos->IsPromoMove ((squareT) fromSq, (squareT) toSq));
     return TCL_OK;
+}
+
+// Simple insufficient mating material query
+int
+sc_pos_isInsufficient (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
+{
+    if (argc != 2) 
+        return errorResult (ti, "Usage: sc_pos isInsufficient");
+
+    Position * pos = db->game->GetCurrentPos();
+    uint numPieces = pos->TotalMaterial();
+
+    // We are ignoring very unlikely mate with odd coloured bishops "8/8/8/8/4b3/7k/8/6BK w - - 1 2"
+
+    if (numPieces < 3 || \
+       (numPieces == 3 && ((pos->MaterialValue(WHITE)) == 3 || pos->MaterialValue(BLACK) == 3)) || \
+       (numPieces == 4 &&  pos->MaterialValue(WHITE)  == 3 && pos->MaterialValue(BLACK) == 3)) 
+      return setBoolResult (ti, true);
+    else 
+      return setBoolResult (ti, false);
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
