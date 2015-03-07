@@ -631,7 +631,7 @@ proc ::search::material::save {} {
   puts $searchF "set searchType Material"
 
   # First write the material counts:
-  foreach i {wq bq wr br wb bb wn bn wp bp} {
+  foreach i {wq bq wr br wb bb wn bn wm bm wp bp} {
     puts $searchF "set pMin($i) $pMin($i)"
     puts $searchF "set pMax($i) $pMax($i)"
   }
