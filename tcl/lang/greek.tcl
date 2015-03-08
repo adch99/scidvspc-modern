@@ -445,6 +445,8 @@ translate G Event {Διοργάνωση}
 translate G Site {Τόπος}
 translate G Country {Χώρα}
 translate G IgnoreColors {Aγνόηση χρώματος}
+# ====== TODO To be translated ======
+translate G MatchEnd {End pos only}
 translate G Date {Ημερομηνία}
 translate G EventDate {Ημέρα Διοργάνωσης}
 translate G Decade {Δεκαετία}

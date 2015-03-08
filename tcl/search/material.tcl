@@ -10,6 +10,7 @@ image create photo button_oneplus -data {
 }
 
 set ignoreColors 0
+set matchEnd 0
 set minMoveNum 1
 set maxMoveNum 999
 set minHalfMoves 1
@@ -162,7 +163,7 @@ set smDisplayed(Patterns) 0
 #   Opens the window for searching by material or patterns.
 #
 proc ::search::material {} {
-  global glstart dark pMin pMax ignoreColors minMoveNum maxMoveNum
+  global glstart dark pMin pMax ignoreColors matchEnd minMoveNum maxMoveNum
   global pattPiece pattFyle pattRank pattBool oppBishops nPatterns
   global minHalfMoves smDisplayed
 
@@ -540,8 +541,9 @@ proc ::search::material {} {
 
   set f $w.b3
   frame $f
-  checkbutton $f.ignorecol -textvar ::tr(IgnoreColors) \
-      -variable ignoreColors -padx 4
+
+  checkbutton $f.ignorecol -textvar ::tr(IgnoreColors) -variable ignoreColors -padx 4
+  checkbutton $f.matchend  -textvar ::tr(MatchEnd)     -variable matchEnd     -padx 4
 
   dialogbutton $f.save -textvar ::tr(Save) -padx 10 -command ::search::material::save
 
@@ -561,7 +563,7 @@ proc ::search::material {} {
         -wm [list $pMin(wm) $pMax(wm)] -bm [list $pMin(bm) $pMax(bm)] \
         -wp [list $pMin(wp) $pMax(wp)] -bp [list $pMin(bp) $pMax(bp)] \
         -flip $ignoreColors -filter $::search::filter::operation \
-        -range [list $minMoveNum $maxMoveNum] \
+        -matchendonly $matchEnd -range [list $minMoveNum $maxMoveNum] \
         -length $minHalfMoves -bishops $oppBishops \
         -diff [list $minMatDiff $maxMatDiff] \
         -patt "$pattBool(1) $pattPiece(1) $pattFyle(1) $pattRank(1)" \
@@ -588,7 +590,7 @@ proc ::search::material {} {
   dialogbutton $f.cancel -textvar ::tr(Close) \
       -command { focus .main ; destroy .sm }
 
-  pack $f.ignorecol $w.b3.save -side left -pady 5 -padx 5
+  pack $w.b3.save $f.ignorecol $f.matchend -side left -pady 5 -padx 5
   pack $w.b3.cancel $w.b3.stop $w.b3.search -side right -pady 5 -padx 5
 
   label $w.status -text "" -width 1 -font font_Small -relief sunken -anchor w
@@ -609,7 +611,7 @@ proc ::search::material {} {
 }
 
 proc ::search::material::save {} {
-  global pMin pMax ignoreColors minMoveNum maxMoveNum minHalfMoves
+  global pMin pMax ignoreColors matchEnd minMoveNum maxMoveNum minHalfMoves
   global pattPiece pattFyle pattRank pattBool oppBishops nPatterns
 
   set ftype { { "Scid SearchOptions files" {".sso"} } }
@@ -637,7 +639,7 @@ proc ::search::material::save {} {
   }
   # Now write other numeric values:
   foreach i {
-    ignoreColors minMoveNum maxMoveNum minHalfMoves oppBishops
+    ignoreColors matchEnd minMoveNum maxMoveNum minHalfMoves oppBishops
     ::search::filter::operation
   } {
     puts $searchF "set $i [set $i]"

@@ -488,6 +488,8 @@ translate O Event {Anledning}
 translate O Site {Sted}
 translate O Country {Land}
 translate O IgnoreColors {Overse farger}
+# ====== TODO To be translated ======
+translate O MatchEnd {End pos only}
 translate O Date {Dato}
 translate O EventDate {Anledningsdato}
 translate O Decade {Decade} ;# ***

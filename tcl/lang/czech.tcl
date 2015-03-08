@@ -459,6 +459,8 @@ translate C Event {Turnaj}
 translate C Site {Místo}
 translate C Country {Zemì}
 translate C IgnoreColors {Ignorovat barvy}
+# ====== TODO To be translated ======
+translate C MatchEnd {End pos only}
 translate C Date {Datum}
 translate C EventDate {Datum turnaje}
 translate C Decade {Dekáda}

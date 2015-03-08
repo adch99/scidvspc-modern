@@ -460,6 +460,8 @@ translate B Event {Evento}
 translate B Site {Lugar}
 translate B Country {Pais}
 translate B IgnoreColors {Ignorar cores}
+# ====== TODO To be translated ======
+translate B MatchEnd {End pos only}
 translate B Date {Data}
 translate B EventDate {Evento data}
 translate B Decade {Decade} ;# ***

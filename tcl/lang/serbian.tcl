@@ -487,6 +487,8 @@ translate Y Event {Turnir}
 translate Y Site {Mesto}
 translate Y Country {Zemlja}
 translate Y IgnoreColors {Ignori¹i boje}
+# ====== TODO To be translated ======
+translate Y MatchEnd {End pos only}
 translate Y Date {Datum}
 translate Y EventDate {Datum turnira}
 translate Y Decade {Decade} ;# ***

@@ -463,6 +463,8 @@ translate H Event {Esemény}
 translate H Site {Helyszín}
 translate H Country {Ország}
 translate H IgnoreColors {A szín közömbös}
+# ====== TODO To be translated ======
+translate H MatchEnd {End pos only}
 translate H Date {Dátum}
 translate H EventDate {Az esemény dátuma}
 translate H Decade {Évtized}

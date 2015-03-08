@@ -421,6 +421,8 @@ translate P Event {Turniej}
 translate P Site {Miejsce}
 translate P Country {Kraj}
 translate P IgnoreColors {Ignoruj kolory}
+# ====== TODO To be translated ======
+translate P MatchEnd {End pos only}
 translate P Date {Data}
 translate P EventDate {Turniej data}
 translate P Decade {Dekada} 

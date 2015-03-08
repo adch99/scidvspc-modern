@@ -432,6 +432,8 @@ translate N Event {Evenement}
 translate N Site {Plaats}
 translate N Country {Land}
 translate N IgnoreColors {Kleuren negeren}
+# ====== TODO To be translated ======
+translate N MatchEnd {End pos only}
 translate N Date {Datum}
 translate N EventDate {Datum evenement}
 translate N Decade {Decennium}

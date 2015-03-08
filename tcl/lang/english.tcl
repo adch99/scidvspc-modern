@@ -424,6 +424,7 @@ translate E Event {Event}
 translate E Site {Site}
 translate E Country {Country}
 translate E IgnoreColors {Ignore colors}
+translate E MatchEnd {End pos only}
 translate E Date {Date}
 translate E EventDate {Event date}
 translate E Decade {Decade}

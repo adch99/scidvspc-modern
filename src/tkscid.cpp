@@ -15481,6 +15481,7 @@ sc_search_material (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
     matDiff[1] = 40;
     filterOpT filterOp = FILTEROP_RESET;
     bool flip = false;
+    bool matchEndOnly = false;
     bool oppBishops = true;
     bool sameBishops = true;
     uint hpExcludeMask = HPSIG_Empty;
@@ -15492,12 +15493,12 @@ sc_search_material (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
     const char * options[] = {
         "wq", "bq", "wr", "br", "wb", "bb", "wn", "bn",
         "wp", "bp", "wm", "bm", "flip", "filter", "range",
-        "length", "bishops", "diff", "pattern", NULL
+        "length", "bishops", "diff", "pattern", "matchendonly", NULL
     };
     enum {
         OPT_WQ, OPT_BQ, OPT_WR, OPT_BR, OPT_WB, OPT_BB, OPT_WN, OPT_BN,
         OPT_WP, OPT_BP, OPT_WM, OPT_BM, OPT_FLIP, OPT_FILTER, OPT_RANGE,
-        OPT_LENGTH, OPT_BISHOPS, OPT_DIFF, OPT_PATTERN
+        OPT_LENGTH, OPT_BISHOPS, OPT_DIFF, OPT_PATTERN, OPT_MATCHENDONLY
     };
 
     int arg = 2;
@@ -15581,6 +15582,10 @@ sc_search_material (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
             patt = addPattern (patt, &tempPatt);
             flipPattern (&tempPatt);
             flippedPatt = addPattern (flippedPatt, &tempPatt);
+            break;
+
+        case OPT_MATCHENDONLY:
+            matchEndOnly = strGetBoolean (value);
             break;
 
         default:
@@ -15757,18 +15762,45 @@ sc_search_material (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
         }
 
         bool result = false;
-        if (possibleMatch) {
-            result = g->MaterialMatch (db->bbuf, min, max, patt,
-                                       minPly, maxPly, matchLength,
-                                       oppBishops, sameBishops,
-                                       matDiff[0], matDiff[1]);
-        }
-        if (result == 0  &&  possibleFlippedMatch) {
-            db->bbuf->BackToStart();
-            result = g->MaterialMatch (db->bbuf, minFlipped, maxFlipped,
-                                       flippedPatt, minPly, maxPly,
-                                       matchLength, oppBishops, sameBishops,
-                                       matDiff[0], matDiff[1]);
+
+        if (!matchEndOnly) {
+	    if (possibleMatch) {
+		result = g->MaterialMatch (db->bbuf, min, max, patt,
+					   minPly, maxPly, matchLength,
+					   oppBishops, sameBishops,
+					   matDiff[0], matDiff[1]);
+	    }
+	    if (result == 0  &&  possibleFlippedMatch) {
+		db->bbuf->BackToStart();
+		result = g->MaterialMatch (db->bbuf, minFlipped, maxFlipped,
+					   flippedPatt, minPly, maxPly,
+					   matchLength, oppBishops, sameBishops,
+					   matDiff[0], matDiff[1]);
+	    }
+        } else {
+            // Check the end position only - S.A
+	    //
+	    // Can we use DecodeVariation ? ... but it is private
+	    // Or is there a better way to do this
+
+	    g->Decode (db->bbuf, GAME_DECODE_ALL);
+	    while (g->MoveForward() == OK) {} ;
+	    g->MoveBackup();
+
+	    if (possibleMatch) {
+		result = g->MaterialMatch (NULL, min, max, patt,
+					   minPly, maxPly, matchLength,
+					   oppBishops, sameBishops,
+					   matDiff[0], matDiff[1]);
+	    }
+	    if (result == 0  &&  possibleFlippedMatch) {
+		while (g->MoveForward() == OK) {} ;
+		g->MoveBackup();
+		result = g->MaterialMatch (NULL, minFlipped, maxFlipped,
+					   flippedPatt, minPly, maxPly,
+					   matchLength, oppBishops, sameBishops,
+					   matDiff[0], matDiff[1]);
+	    }
         }
 
         if (result) {

@@ -427,6 +427,8 @@ translate W Event {Evenemang}
 translate W Site {Plats}
 translate W Country {Land}
 translate W IgnoreColors {Ignorera färger}
+# ====== TODO To be translated ======
+translate W MatchEnd {End pos only}
 translate W Date {Datum}
 translate W EventDate {Evenemangsdatum}
 translate W Decade {Decennium}

@@ -409,6 +409,8 @@ translate R Event {Событие}
 translate R Site {Место}
 translate R Country {Страна}
 translate R IgnoreColors {Игнорировать цвета}
+# ====== TODO To be translated ======
+translate R MatchEnd {End pos only}
 translate R Date {Дата}
 translate R EventDate {Дата турнира}
 translate R Decade {Декада}

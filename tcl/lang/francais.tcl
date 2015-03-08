@@ -436,6 +436,8 @@ translate F Event {Événement}
 translate F Site {Lieux}
 translate F Country {Pays}
 translate F IgnoreColors {Ignorer les couleurs}
+# ====== TODO To be translated ======
+translate F MatchEnd {End pos only}
 translate F Date {Date}
 translate F EventDate {Événement date}
 translate F Decade {Décennie}

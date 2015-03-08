@@ -1529,7 +1529,8 @@ Game::MaterialMatch (ByteBuffer * buf, byte * min, byte * max,
     errorT err = OK;
 
     if (buf == NULL) {
-        MoveToPly(0);
+        // This was previously unused, but now used to search the end position
+        // MoveToPly(0);
     } else {
         Clear();
         err = DecodeStart (buf);

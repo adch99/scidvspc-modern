@@ -438,6 +438,8 @@ translate D Event {Turnier}
 translate D Site {Ort}
 translate D Country {Land}
 translate D IgnoreColors {Farben ignorieren}
+# ====== TODO To be translated ======
+translate D MatchEnd {End pos only}
 translate D Date {Datum}
 translate D EventDate {Turnierdatum}
 translate D Decade {Dekade}
