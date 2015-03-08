@@ -222,9 +222,7 @@ proc updateStatusBar {} {
     return
   }
 
-  append statusBar "$fname:  $gameNum / [::utils::thousands $gameCount 0]"
-
-  append statusBar "  [sc_flags $gameNum verbose]"
+  append statusBar "$fname:  [::utils::thousands $gameNum 0] / [::utils::thousands $gameCount 0]  [sc_flags $gameNum verbose]"
 
   if {[sc_base isReadOnly]} {
     append statusBar " ($::tr(readonly))"
