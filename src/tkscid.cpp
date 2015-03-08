@@ -5877,9 +5877,9 @@ sc_flags (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 	  if (*flagStr == 'D') {
               deleted = 1;
 	      if (flagStr[1]) {
-		  Tcl_AppendResult (ti, translate (ti, "deleted"), ", ",  NULL);
+		  Tcl_AppendResult (ti, "(", translate (ti, "deleted"), "), ",  NULL);
               } else {
-		  Tcl_AppendResult (ti, translate (ti, "deleted"), NULL);
+		  Tcl_AppendResult (ti, "(", translate (ti, "deleted"), ")", NULL);
               }
               flagStr++;
           }

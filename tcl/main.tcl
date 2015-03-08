@@ -187,12 +187,13 @@ proc warnStatusBar {warning} {
 proc updateStatusBar {} {
   global statusBar moveEntry
 
+  # Why are these things refreshed here ???
+
   ::windows::gamelist::checkAltered
 
   # Exit if engine 1 is running in status bar
   if {$::analysis(mini) && [winfo exists .analysisWin1]} {return}
 
-  # Why are these things refreshed here ???
   # ::windows::switcher::Refresh
   ::maint::Refresh
 
@@ -209,20 +210,17 @@ proc updateStatusBar {} {
   # Check if translations have not been set up yet
   if {! [info exists ::tr(Database)]} { return }
 
-  set fname [sc_base filename]
-  set fname [file tail $fname]
+  set fname [file tail [sc_base filename]]
   if {$fname == ""} { set fname "<none>" }
   
-  set base [sc_base current]
-  set gameNum [sc_game number]
-  set gameCount [sc_base numGames $base]
-
-  if {$gameCount == 0} {
+  if {[sc_base numGames] == 0} {
     append statusBar "$fname:  $::tr(noGames)"
     return
   }
 
-  append statusBar "$fname:  [::utils::thousands $gameNum 0] [sc_flags $gameNum verbose]"
+  set gameNum [sc_game number]
+
+  append statusBar "$fname: $::tr(game) $gameNum [sc_flags $gameNum verbose]"
 
   if {[sc_base isReadOnly]} {
     append statusBar " ($::tr(readonly))"
