@@ -40,9 +40,9 @@ proc checkPieceCounts {name el op} {
   set bmMin [expr {$pMin(bn) + $pMin(bb)} ]
   set bmMax [expr {$pMax(bn) + $pMax(bb)} ]
   if {$pMin(wm) < $wmMin} { set pMin(wm) $wmMin }
-  if {$pMax(wm) > $wmMax} { set pMax(wm) $wmMax }
+  if {$pMax(wm) < $wmMax} { set pMax(wm) $wmMax }
   if {$pMin(bm) < $bmMin} { set pMin(bm) $bmMin }
-  if {$pMax(bm) > $bmMax} { set pMax(bm) $bmMax }
+  if {$pMax(bm) < $bmMax} { set pMax(bm) $bmMax }
   foreach p {wq wr wb wn wm wp bq br bb bn bm bp} {
     if {$pMax($p) != ""  &&  $pMax($p) < $pMin($p)} { set pMax($p) $pMin($p) }
   }
