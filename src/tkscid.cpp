@@ -15633,10 +15633,21 @@ sc_search_material (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
         minFlipped[BM] = min[WM];  maxFlipped[BM] = max[WM];
     }
 
-    // Convert move numbers to halfmoves (ply counts):
-    minMoves = minPly;
-    minPly = minPly * 2 - 1;
-    maxPly = maxPly * 2;
+    if (matchEndOnly) {
+      // Ignore the given ranges and min/max ply
+      matchLength = 1;
+      minMoves = 1;
+      minPly = 1;
+      /* Setting these three 1s to 0 enables matching zero length games
+         But the issue is, it can also mismatch games at gameEnd-1 ply.
+         Could maybe be fixed by extensive hacking around */
+      maxPly = 999 * 2;
+    } else {
+      // Convert move numbers to halfmoves (ply counts):
+      minMoves = minPly;
+      minPly = minPly * 2 - 1;
+      maxPly = maxPly * 2;
+    }
 
     // Set up the material Sig: it is the signature of the MAXIMUMs.
     matSigT msig, msigFlipped;

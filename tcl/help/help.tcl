@@ -1130,6 +1130,10 @@ set helpText(Searches) {<h1>Searches in Scid</h1>
   as Rook vs. Pawn endings, or isolated Queens pawns.
   </p>
   <p>
+  Scid vs. PC allows one to perform material searches that match the end position only;
+  though these searches do not match games with non-standard starts and <i>zero length</i>.
+  </p>
+  <p>
   <i>Hint -
   The speed of pattern searches can vary widely, and be reduced 
   by setting restrictions intelligently. For example,

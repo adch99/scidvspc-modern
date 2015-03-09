@@ -158,10 +158,8 @@ set smDisplayed(Material) 1
 set smDisplayed(Patterns) 0
 
 
-# ::search::material
-#
-#   Opens the window for searching by material or patterns.
-#
+### Search games (or end position only) by material or patterns.
+
 proc ::search::material {} {
   global glstart dark pMin pMax ignoreColors matchEnd minMoveNum maxMoveNum
   global pattPiece pattFyle pattRank pattBool oppBishops nPatterns
@@ -497,29 +495,36 @@ proc ::search::material {} {
 
   set f $w.bishops
   pack [frame $f] -side top
-  label $f.t1 -text "1" -font font_Small
+  label $f.t1 -text "1" 
   label $f.t2 -image wb20
-  label $f.t3 -text "- 1" -font font_Small
+  label $f.t3 -text "- 1" 
   label $f.t4 -image bb20
-  label $f.t5 -textvar ::tr(squares:) -font font_Small
+  label $f.t5 -textvar ::tr(squares:) 
   radiobutton $f.same -textvar ::tr(SameColor) -variable oppBishops \
-      -value "Same" -padx 5 -pady 4 -font font_Small
+      -value "Same" -padx 5 -pady 4 
   radiobutton $f.opp -textvar ::tr(OppColor) -variable oppBishops \
-      -value "Opposite" -padx 5 -pady 4 -font font_Small
+      -value "Opposite" -padx 5 -pady 4 
   radiobutton $f.either -textvar ::tr(Either) -variable oppBishops \
-      -value "Either" -padx 5 -pady 4 -font font_Small
-  foreach i {t1 t2 t3 t4 t5 same opp either} { pack $f.$i -side left }
+      -value "Either" -padx 5 -pady 4 
+
+  foreach i {t1 t2 t3 t4 t5 same opp either} {
+    $f.$i configure -font font_Small
+    pack $f.$i -side left
+  }
 
   set f $w.move
   pack [frame $f] -side top -ipady 5
   label $f.fromlab -textvar ::tr(MoveNumberRange:)
   entry $f.from -width 4 -relief sunken -textvar minMoveNum -justify right
-  label $f.tolab -text "-"
+  label $f.tolab -text " - "
   entry $f.to -width 4 -relief sunken -textvar maxMoveNum -justify right
   label $f.space -text "  "
   label $f.label1 -textvar ::tr(MatchForAtLeast)
   entry $f.hmoves -width 3 -relief sunken -textvar minHalfMoves -justify right
   label $f.label2 -textvar ::tr(HalfMoves)
+  foreach i [winfo children $f] {
+    $i configure -font font_Small
+  }
   bindFocusColors $f.from
   bindFocusColors $f.to
   bindFocusColors $f.hmoves
@@ -543,7 +548,8 @@ proc ::search::material {} {
   frame $f
 
   checkbutton $f.ignorecol -textvar ::tr(IgnoreColors) -variable ignoreColors -padx 4
-  checkbutton $f.matchend  -textvar ::tr(MatchEnd)     -variable matchEnd     -padx 4
+  checkbutton $f.matchend  -textvar ::tr(MatchEnd) -variable matchEnd -padx 4 -command ::search::material::checkState
+  ::search::material::checkState
 
   dialogbutton $f.save -textvar ::tr(Save) -padx 10 -command ::search::material::save
 
@@ -608,6 +614,17 @@ proc ::search::material {} {
   update
   wm state $w normal
   focus $f.search
+}
+
+proc ::search::material::checkState {} {
+  if {$::matchEnd} {
+    set state disabled
+  } else {
+    set state normal
+  }
+  foreach i [winfo children .sm.move] {
+    $i configure -state $state
+  }
 }
 
 proc ::search::material::save {} {
