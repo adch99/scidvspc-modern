@@ -59,7 +59,7 @@ set helpText(GUI) {<h1>Scid's Graphical User Interface</h1>
 
   <br>
   <ht><a Docking><b>Docked Windows</b></a></ht>
-  <ht><a MainWindow>The <b>Main Window</b></a></ht>
+  <ht><a MainWindow>The <b>Main Board</b></a></ht>
   <ht><a Menus><b>Main Menus</b></a></ht>
   <ht><a Moves>Entering <b>Moves</b></a></ht>
   <br>
@@ -587,7 +587,8 @@ set helpTitle(MainWindow) "Scid Main Window"
 set helpText(MainWindow) {<h1>Scid Main Window</h1>
   <p>
   This section explains the main board (showing the current game), the game information area, and a few other widgets.
-  Separate help pages describe the <a Menus>menus</a> and how to <a Moves>enter chess moves</a>.
+  Separate help pages describe the <a Menus>menus</a>, how-to <a Moves>enter chess moves</a>, and <a ShortCuts General>keyboard shortcuts</a>
+  for navigating games.
   </p>
   <p>
   <i>See Scid's <run ::tip::show><green>Tip of the Day</green></run> for many helplful hints.</i>
@@ -1276,7 +1277,7 @@ from a paused engine.
   this window when a variation is found.</p>
   <p>In the variation window one can select a variation with the up/down
   keys and then hitting enter. This allows for game navigation with keyboard only.
-  To leave a variation, use "z", or if at the beginning of the variation, the up arrow.
+  To leave a variation, use "z" or up-arrow.
   </p>
 
   <h3><name Null>Null Moves</name></h3>
@@ -6485,7 +6486,7 @@ The window manager may interfere with some shortcuts.
 <li></li>
 <li><b>left</b> - Back one move</li>
 <li><b>right</b> - Forward one move</li>
-<li><b>up</b> - Back five moves</li>
+<li><b>up</b> - Back five moves/exit variation</li>
 <li><b>down</b> - Forward five moves</li>
 <li><b>home</b> - Goto start</li>
 <li><b>end</b> - Goto end</li>
@@ -6641,7 +6642,7 @@ The window manager may interfere with some shortcuts.
 <li><b>z</b> - Exit variation</li>
 <li><b>left</b> - Back one move</li>
 <li><b>right</b> - Forward one move</li>
-<li><b>up</b> - Back five moves</li>
+<li><b>up</b> - Back five moves/exit variation</li>
 <li><b>down</b> - Forward five moves</li>
 <li><b>home</b> - Goto start</li>
 <li><b>end</b> - Goto end</li>

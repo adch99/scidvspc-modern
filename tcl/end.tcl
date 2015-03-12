@@ -1470,20 +1470,6 @@ if {$::macOS} {
 bind .main <Escape> "moveEntry_Clear 1"
 bind .main <Tab> {raiseAllWindows 1}
 
-bind .main <Home> ::move::Start
-bind .main <Left> ::move::Back
-bind .main <Up> {
-  if {[sc_pos isAt vstart]} {
-    .main.button.exitVar invoke
-  } else  {
-    ::move::Back 10
-  }
-}
-bind .main <Down> {::move::Forward 10}
-bind .main <Right> ::move::Forward
-bind .main <End> ::move::End
-
-
 bind .main <Return> addAnalysisMove
 bind .main <space>  toggleEngineAnalysis
 
@@ -1552,10 +1538,10 @@ proc standardShortcuts {w} {
   bind $w <Control-I> importPgnGame
 
   ### These should probably be moved to a different proc/place - S.A.
-  # extra generic bindings added for Scid 3.6.24 : hope there is no conflict
+  # as we are often resolving conflicts *after* calling standardShortcuts
   bind $w <Home>  ::move::Start
   bind $w <Up> {
-    if {[sc_pos isAt vstart]} {
+    if {[sc_var level] > 0} {
       .main.button.exitVar invoke
     } else  {
       ::move::Back 10
