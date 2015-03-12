@@ -59,7 +59,7 @@ set helpText(GUI) {<h1>Scid's Graphical User Interface</h1>
 
   <br>
   <ht><a Docking><b>Docked Windows</b></a></ht>
-  <ht><a MainWindow>The <b>Main Board</b></a></ht>
+  <ht><a MainWindow>The <b>Main Window</b></a></ht>
   <ht><a Menus><b>Main Menus</b></a></ht>
   <ht><a Moves>Entering <b>Moves</b></a></ht>
   <br>
@@ -587,8 +587,7 @@ set helpTitle(MainWindow) "Scid Main Window"
 set helpText(MainWindow) {<h1>Scid Main Window</h1>
   <p>
   This section explains the main board (showing the current game), the game information area, and a few other widgets.
-  Separate help pages describe the <a Menus>menus</a>, how-to <a Moves>enter chess moves</a>, and <a ShortCuts General>keyboard shortcuts</a>
-  for navigating games.
+  Separate help pages describe the <a Menus>menus</a> and how to <a Moves>enter chess moves</a>.
   </p>
   <p>
   <i>See Scid's <run ::tip::show><green>Tip of the Day</green></run> for many helplful hints.</i>
@@ -1271,13 +1270,13 @@ from a paused engine.
   <h4>Keyboard Shortcuts</h4>
   <p>
   When a move has variations they are shown in the game information
-  area. You can click on a variation to enter it, or press "v" (or down-arrow), whence
+  area. You can click on a variation to enter it, or press "v", whence
   the <b>Variation Window</b> will pop up.
   Setting Options-<gt>Moves-<gt>ShowVariationWindow will automatically show
   this window when a variation is found.</p>
   <p>In the variation window one can select a variation with the up/down
   keys and then hitting enter. This allows for game navigation with keyboard only.
-  To leave a variation, use "z" or up-arrow.
+  To leave a variation, use "z", or if at the beginning of the variation, the up arrow.
   </p>
 
   <h3><name Null>Null Moves</name></h3>
@@ -6480,16 +6479,14 @@ The window manager may interfere with some shortcuts.
 <a ShortCuts alpha>Sorted Alphabetically</a>
 </p>
 
-<h4><name General>General</name></h4>
+<h4>General</h4>
 <ul>
 <li><i>Use standard notation to input moves with the keyboard (eg <b>e4</b>)</i></li>
 <li></li>
 <li><b>left</b> - Back one move</li>
 <li><b>right</b> - Forward one move</li>
-<li><b>up</b> - Exit variation</li>
-<li><b>down</b> - Enter variation</li>
-<li><b>page up</b> - Back five moves</li>
-<li><b>page down</b> - Forward five moves</li>
+<li><b>up</b> - Back five moves</li>
+<li><b>down</b> - Forward five moves</li>
 <li><b>home</b> - Goto start</li>
 <li><b>end</b> - Goto end</li>
 <li><b>control-g</b> - Goto move number</li>
@@ -6644,10 +6641,8 @@ The window manager may interfere with some shortcuts.
 <li><b>z</b> - Exit variation</li>
 <li><b>left</b> - Back one move</li>
 <li><b>right</b> - Forward one move</li>
-<li><b>up</b> - Exit variation</li>
-<li><b>down</b> - Enter variation</li>
-<li><b>page up</b> - Back five moves</li>
-<li><b>page down</b> - Forward five moves</li>
+<li><b>up</b> - Back five moves</li>
+<li><b>down</b> - Forward five moves</li>
 <li><b>home</b> - Goto start</li>
 <li><b>end</b> - Goto end</li>
 <li></li>
