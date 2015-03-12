@@ -116,8 +116,6 @@ proc ::tourney::Open {{player {}}} {
   bindFocusColors $f.event
   pack $f.event $f.eventlab -side right
 
-  focus $f.event
-
   # Country
 
   label $f.cn -text "  $::tr(Country)" -font $fbold

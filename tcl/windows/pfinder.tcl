@@ -97,8 +97,6 @@ proc ::plist::Open {} {
   bindFocusColors $f.name
   pack $f.name $f.nlabel -side right
 
-  focus $f.name
-
   set f $w.o2
 
   # Elo
