@@ -1470,20 +1470,6 @@ if {$::macOS} {
 bind .main <Escape> "moveEntry_Clear 1"
 bind .main <Tab> {raiseAllWindows 1}
 
-bind .main <Home> ::move::Start
-bind .main <Left> ::move::Back
-bind .main <Up> {
-  if {[sc_pos isAt vstart]} {
-    .main.button.exitVar invoke
-  } else  {
-    ::move::Back 10
-  }
-}
-bind .main <Down> {::move::Forward 10}
-bind .main <Right> ::move::Forward
-bind .main <End> ::move::End
-
-
 bind .main <Return> addAnalysisMove
 bind .main <space>  toggleEngineAnalysis
 
@@ -1552,24 +1538,20 @@ proc standardShortcuts {w} {
   bind $w <Control-I> importPgnGame
 
   ### These should probably be moved to a different proc/place - S.A.
-  # extra generic bindings added for Scid 3.6.24 : hope there is no conflict
+  # as we are often resolving conflicts *after* calling standardShortcuts
   bind $w <Home>  ::move::Start
-  bind $w <Up> {
-    if {[sc_pos isAt vstart]} {
-      .main.button.exitVar invoke
-    } else  {
-      ::move::Back 10
-    }
-  }
+  bind $w <Up>    {.main.button.exitVar invoke}
+  bind $w <Down>  showVars
   bind $w <Left>  ::move::Back
-  bind $w <Down>  {::move::Forward 10}
   bind $w <Right> ::move::Forward
+  # Page-up/down move 10 ply (5 moves)
+  bind $w <Prior>  {::move::Back 10}
+  bind $w <Next>  {::move::Forward 10}
   bind $w <End>   ::move::End
   bind $w <F2>    {::startAnalysisWin F2}
   bind $w <F3>    {::startAnalysisWin F3}
   bind $w <F4>    {::startAnalysisWin F4}
 
-  bind $w <Control-S> ::setupBoard
   bind $w <Control-C> ::copyFEN
   bind $w <Control-V> ::pasteFEN
   bind $w <Control-s> ::gameReplace
