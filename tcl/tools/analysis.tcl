@@ -1713,6 +1713,7 @@ proc addAnalysisVariation {n} {
   if {!$isAt_vend || $isAt_end} {
     # Add a variation if not already at end of a variation
     # (in which case we append moves to this var)
+    set var_count [sc_var count]
     sc_var create
     set create_var 1
   } else {
@@ -1758,7 +1759,7 @@ proc addAnalysisVariation {n} {
     } elseif {$isAt_vend && $create_var} {
       ### Automatically goto variation S.A.
       # todo : sould only do this if only a single var exists
-      sc_var enter 0
+      sc_var enter $var_count
     }
   }
 
