@@ -443,12 +443,10 @@ if { $macOS } {
   # bind . <Control-Button-1> {event generate . <Button-3> -x %x -y %y -button 3}
 }
 
-# updateVarMenus:
 #   Updates the menus for moving into or deleting an existing variation.
 #   Calls sc_var list and sc_var count to get the list of variations.
-#
+
 proc updateVarMenus {} {
-  set varList [sc_var list]
   set numVars [sc_var count]
   .main.button.intoVar.menu delete 0 end
   .menu.edit.del delete 0 end
@@ -456,32 +454,33 @@ proc updateVarMenus {} {
   .menu.edit.main delete 0 end
   # PG: add the move of main line
   if {$numVars > 0} {
+    set varList [sc_var list]
     set move [sc_game info nextMove]
     if {$move == ""} { set move "($::tr(empty))" }
     .main.button.intoVar.menu add command -label "0: $move" -command "sc_move forward; updateBoard" -underline 0
-  }
-  for {set i 0} {$i < $numVars} {incr i} {
-    set move [lindex $varList $i]
-    set state normal
-    if {$move == ""} {
-      set move "($::tr(empty))"
-      set state disabled
+    for {set i 0} {$i < $numVars} {incr i} {
+      set move [lindex $varList $i]
+      set state normal
+      if {$move == ""} {
+	set move "($::tr(empty))"
+	set state disabled
+      }
+      set str "[expr {$i + 1}]: $move"
+      set commandStr "sc_var moveInto $i; updateBoard"
+      if {$i < 9} {
+	.main.button.intoVar.menu add command -label $str -command $commandStr \
+	    -underline 0
+      } else {
+	.main.button.intoVar.menu add command -label $str -command $commandStr
+      }
+      set commandStr "sc_var delete $i; updateBoard -pgn"
+      .menu.edit.del add command -label $str -command $commandStr
+      set commandStr "sc_var first $i; updateBoard -pgn"
+      .menu.edit.first add command -label $str -command $commandStr
+      set commandStr "sc_var promote $i; updateBoard -pgn"
+      .menu.edit.main add command -label $str -command $commandStr \
+	  -state $state
     }
-    set str "[expr {$i + 1}]: $move"
-    set commandStr "sc_var moveInto $i; updateBoard"
-    if {$i < 9} {
-      .main.button.intoVar.menu add command -label $str -command $commandStr \
-          -underline 0
-    } else {
-      .main.button.intoVar.menu add command -label $str -command $commandStr
-    }
-    set commandStr "sc_var delete $i; updateBoard -pgn"
-    .menu.edit.del add command -label $str -command $commandStr
-    set commandStr "sc_var first $i; updateBoard -pgn"
-    .menu.edit.first add command -label $str -command $commandStr
-    set commandStr "sc_var promote $i; updateBoard -pgn"
-    .menu.edit.main add command -label $str -command $commandStr \
-        -state $state
   }
 }
 ################################################################################

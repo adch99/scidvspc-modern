@@ -1764,6 +1764,7 @@ proc addAnalysisVariation {n} {
   }
 
   ::pgn::Refresh 1
+  updateGameinfo
   ::tools::graphs::score::Refresh
   if {$isAt_vend && ![sc_pos isAt vend]} {
     # sucessfully extended variation

@@ -1041,9 +1041,10 @@ button .main.button.forward -image tb_next -command ::move::Forward
 button .main.button.end -image tb_end -command ::move::End
 frame .main.button.space -width 15
 
-# The go-into-variation button is a menubutton:
-menubutton .main.button.intoVar -image tb_invar -menu .main.button.intoVar.menu \
-    -relief raised
+# The go-into-variation button is a menubutton. 
+# It has a bug - Press button so vars are displayed, then use wheelmouse to change board position.
+# -> Button remains in pressed state (and draws all vars) until focus is lost from .main
+menubutton .main.button.intoVar -image tb_invar -menu .main.button.intoVar.menu -relief raised
 menu .main.button.intoVar.menu -tearoff 0 -font font_Regular
 
 button .main.button.exitVar -image tb_outvar -command {
