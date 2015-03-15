@@ -594,6 +594,8 @@ menuText H TreeOptLock "Rögzítés" 0 {A fát az aktuális adatbázishoz köti ill. a 
 menuText H TreeOptTraining "Edzés" 0 {Edzésüzemmód be- vagy kikapcsolása}
 menuText H TreeOptAutosave "Cache-fájl automatikus mentése" 11 \
   {A faablak bezárásakor automatikusan elmenti a cache-fájlt.}
+# ====== TODO To be translated ======
+menuText H TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
 menuText H TreeHelp "Segítség" 0
 menuText H TreeHelpTree "Segítség a fához" 0
 menuText H TreeHelpIndex "Tartalom" 0

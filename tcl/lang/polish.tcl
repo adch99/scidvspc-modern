@@ -543,6 +543,8 @@ menuText P TreeOptLock "Blokada" 0 {Zablokuj/odblokuj drzewo na aktualnej bazie}
 menuText P TreeOptTraining "Trening" 0 {Włącz/wyłącz tryb treningowy}
 menuText P TreeOptAutosave "Automatyczny zapis bufora" 0 \
   {Automatycznie zapisz plik bufora przy wyjściu}
+# ====== TODO To be translated ======
+menuText P TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
 menuText P TreeHelp "Pomoc" 2
 menuText P TreeHelpTree "Drzewo" 0
 menuText P TreeHelpIndex "Spis treści" 0

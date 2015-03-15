@@ -544,8 +544,8 @@ menuText E TreeOptFastAndSlowmode "Fast and slow mode" 0 {Fast mode then slow mo
 menuText E TreeOptStartStop "Auto refreshing" 0 {Toggles automatic refreshing of the tree window}
 menuText E TreeOptLock "Lock" 0 {Lock/unlock the tree to the current database}
 menuText E TreeOptTraining "Training" 0 {Turn on/off tree training mode}
-menuText E TreeOptAutosave "Auto-Save Cache File" 0 \
-  {Auto-save the cache file when closing the tree window}
+menuText E TreeOptAutosave "Auto-Save Cache" 0 {Auto-save the cache file when closing the tree window}
+menuText E TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
 menuText E TreeHelp "Help" 0
 menuText E TreeHelpTree "Tree Help" 0
 menuText E TreeHelpIndex "Help Index" 0

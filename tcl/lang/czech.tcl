@@ -587,6 +587,8 @@ menuText C TreeOptLock "Zamknout" 0 {Zamknout/Odemknout strom k aktuální databáz
 menuText C TreeOptTraining "Trénink" 0 {Zapnout/Vypnout stromový tréninkový mód}
 menuText C TreeOptAutosave "Automatické ukládání cache souboru" 0 \
   {Automatické ukládání cache souboru pøi uzavøení stromového okna}
+# ====== TODO To be translated ======
+menuText C TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
 menuText C TreeHelp "Nápovìda" 0
 menuText C TreeHelpTree "Nápovìda - Strom" 11
 menuText C TreeHelpIndex "Index nápovìdy" 0

@@ -572,6 +572,8 @@ menuText G TreeOptLock "Κλείδωμα" 0 {Διακόπτης Κλειδώμα
 menuText G TreeOptTraining "Εκπαίδευση" 0 {Διακόπτης Εκπαίδευσης Κινήσεων Δένδρου}
 menuText G TreeOptAutosave "Αυτομ.Αποθήκευση Cache" 0 \
   {Αυτόματη αποθήκευση της προσωρινής μνήμης με το κλείσιμο του παραθύρου}
+# ====== TODO To be translated ======
+menuText G TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
 menuText G TreeHelp "Βοήθεια" 0
 menuText G TreeHelpTree "Βοήθεια Δένδρου" 0
 menuText G TreeHelpIndex "Ευρετήριο" 0

@@ -560,6 +560,8 @@ menuText F TreeOptStartStop "Rafraîchissement auto" 0 {Rafraîchissement automati
 menuText F TreeOptLock "Verrouille" 0 {Dé/verrouiller l'arbre à la base en cours}
 menuText F TreeOptTraining "Entraînement" 0 {Démarrer/Arrêter l'arbre du mode d'entraînement}
 menuText F TreeOptAutosave "Sauver le cache automatiquement" 0
+# ====== TODO To be translated ======
+menuText F TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
 menuText F TreeHelp "Aide" 0
 menuText F TreeHelpTree "Aide Arbre" 0
 menuText F TreeHelpIndex "Index" 0

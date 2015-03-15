@@ -17,13 +17,13 @@ proc ::tree::doConfigMenus { baseNumber  { lang "" } } {
   foreach idx {0 1 2 3 4 5 7 9 11} tag {Save Fill FillWithBase FillWithGame SetCacheSize CacheInfo Best Copy Close} {
     configMenuText $m.file $idx TreeFile$tag $lang
   }
-  foreach idx {0 1 2 3 4 5 6 7 8 9} tag {New Open OpenRecent Save Close FillWithGame FillWithBase Search Info Display} {
+  foreach idx {0 1 2 3 4 6 7 8 9 10} tag {New Open OpenRecent Save Close FillWithGame FillWithBase Search Info Display} {
     configMenuText $m.mask $idx TreeMask$tag $lang
   }
   foreach idx {0 1 2 3} tag {Alpha ECO Freq Score } {
     configMenuText $m.sort $idx TreeSort$tag $lang
   }
-  foreach idx {0 1 3 5 6 7} tag {Lock Training Autosave Slowmode Fastmode FastAndSlowmode} {
+  foreach idx {0 1 3 4 6 7 8} tag {Lock Training Autosave Automask Slowmode Fastmode FastAndSlowmode} {
     configMenuText $m.opt $idx TreeOpt$tag $lang
   }
   foreach idx {0 1} tag {Tree Index} {
@@ -109,13 +109,9 @@ proc ::tree::Open {{baseNumber 0}} {
   }
 
   $w.menu.file add command -label TreeFileSave -command "::tree::treeFileSave $baseNumber"
-  set helpMessage($w.menu.file,0) TreeFileSave
   $w.menu.file add command -label TreeFileFill -command "::tree::prime $baseNumber"
-  set helpMessage($w.menu.file,1) TreeFileFill
   $w.menu.file add command -label TreeFileFillWithBase -command "::tree::primeWithBase $baseNumber"
-  set helpMessage($w.menu.file,2) TreeFileFillWithBase
   $w.menu.file add command -label TreeFileFillWithGame -command "::tree::primeWithGame"
-  set helpMessage($w.menu.file,3) TreeFileFillWithGame
 
   menu $w.menu.file.size
   foreach i { 250 500 1000 2000 5000 10000 } {
@@ -123,48 +119,35 @@ proc ::tree::Open {{baseNumber 0}} {
   }
 
   $w.menu.file add cascade -menu $w.menu.file.size -label TreeFileSetCacheSize
-  set helpMessage($w.menu.file,4) TreeFileSetCacheSize
-
   $w.menu.file add command -label TreeFileCacheInfo -command "::tree::getCacheInfo $baseNumber"
-  set helpMessage($w.menu.file,5) TreeFileCacheInfo
 
   $w.menu.file add separator
+
   $w.menu.file add command -label TreeFileBest -command "::tree::best $baseNumber"
-  set helpMessage($w.menu.file,7) TreeFileBest
+
   $w.menu.file add separator
 
   $w.menu.file add command -label TreeFileCopy -command "::tree::menuCopyToSelection $baseNumber"
-  set helpMessage($w.menu.file,10) TreeFileCopy
-  $w.menu.file add separator
-  $w.menu.file add command -label TreeFileClose -command ".treeWin$baseNumber.buttons.close invoke"
-  set helpMessage($w.menu.file,12) TreeFileClose
 
+  $w.menu.file add separator
+
+  $w.menu.file add command -label TreeFileClose -command ".treeWin$baseNumber.buttons.close invoke"
   $w.menu.mask add command -label TreeMaskNew -command "::tree::mask::new $w"
-  set helpMessage($w.menu.mask,0) TreeMaskNew
   $w.menu.mask add command -label TreeMaskOpen -command "::tree::mask::open {} $w"
-  set helpMessage($w.menu.mask,1) TreeMaskOpen
 
   menu $w.menu.mask.recent
   foreach f $::tree::mask::recentMask {
     $w.menu.mask.recent add command -label $f -command [list ::tree::mask::open $f $w]
   }
   $w.menu.mask add cascade -label TreeMaskOpenRecent -menu $w.menu.mask.recent
-  set helpMessage($w.menu.mask,2) TreeMaskOpenRecent
-  
   $w.menu.mask add command -label TreeMaskSave -command "::tree::mask::save"
-  set helpMessage($w.menu.mask,3) TreeMaskSave
   $w.menu.mask add command -label TreeMaskClose -command "::tree::mask::close $w"
-  set helpMessage($w.menu.mask,4) TreeMaskClose
+  $w.menu.mask add separator
   $w.menu.mask add command -label TreeMaskFillWithGame -command "::tree::mask::fillWithGame"
-  set helpMessage($w.menu.mask,5) TreeMaskFillWithGame
   $w.menu.mask add command -label TreeMaskFillWithBase -command "::tree::mask::fillWithBase $baseNumber"
-  set helpMessage($w.menu.mask,6) TreeMaskFillWithBase
   $w.menu.mask add command -label TreeMaskSearch -command "::tree::mask::searchMask $baseNumber"
-  set helpMessage($w.menu.mask,7) TreeMaskSearch
   $w.menu.mask add command -label TreeMaskInfo -command "::tree::mask::infoMask $w"
-  set helpMessage($w.menu.mask,8) TreeMaskInfo
   $w.menu.mask add command -label TreeMaskDisplay -command "::tree::mask::displayMask"
-  set helpMessage($w.menu.mask,9) TreeMaskDisplay
   $w.menu.mask add command -label Help -command {helpWindow TreeMasks}
 
   foreach label {Alpha ECO Freq Score} value {alpha eco frequency score} {
@@ -174,26 +157,17 @@ proc ::tree::Open {{baseNumber 0}} {
 
   $w.menu.opt add checkbutton -label TreeOptLock -variable tree(locked$baseNumber) \
       -command "::tree::toggleLock $baseNumber"
-  set helpMessage($w.menu.opt,0) TreeOptLock
-
   $w.menu.opt add checkbutton -label TreeOptTraining -variable tree(training$baseNumber) -command "::tree::refreshTraining $baseNumber"
-  set helpMessage($w.menu.opt,1) TreeOptTraining
-
   $w.menu.opt add separator
   $w.menu.opt add checkbutton -label TreeOptAutosave -variable tree(autoSave$baseNumber)
-  set helpMessage($w.menu.opt,3) TreeOptAutosave
+  $w.menu.opt add checkbutton -label TreeOptAutomask -variable ::tree::mask::autoLoadMask
 
   $w.menu.opt add separator
+
   $w.menu.opt add radiobutton -label TreeOptSlowmode -value 0 -variable tree(fastmode$baseNumber)
-  set helpMessage($w.menu.opt,5) TreeOptSlowmode
-
   $w.menu.opt add radiobutton -label TreeOptFastmode -value 1 -variable tree(fastmode$baseNumber)
-  set helpMessage($w.menu.opt,6) TreeOptFastmode
-
   $w.menu.opt add radiobutton -label TreeOptFastAndSlowmode -value 2 -variable tree(fastmode$baseNumber)
-  set helpMessage($w.menu.opt,7) TreeOptFastAndSlowmode
   set tree(fastmode$baseNumber) 0
-
   $w.menu.help add command -label TreeHelpTree -accelerator F1 -command {helpWindow Tree}
   $w.menu.help add command -label TreeHelpIndex -command {helpWindow Index}
 
@@ -270,7 +244,13 @@ proc ::tree::Open {{baseNumber 0}} {
   ### Now caught by <Destroy> above
   # wm protocol $w WM_DELETE_WINDOW ".treeWin$baseNumber.buttons.close invoke"
 
-  ::tree::refresh $baseNumber
+  ### Autoload Mask if desired
+  set mask [lindex $::tree::mask::recentMask 0]
+  if {$::tree::mask::autoLoadMask && $::tree::mask::maskFile == {} && $mask != {}} {
+    ::tree::mask::open $mask
+  } else {
+    ::tree::refresh $baseNumber
+  }
   set ::tree::cachesize($baseNumber) [lindex [sc_tree cacheinfo $baseNumber] 1]
 }
 
@@ -1352,20 +1332,24 @@ proc ::tree::mask::open { {filename ""} {parent .}} {
 proc ::tree::mask::addRecent {filename} {
   global ::tree::mask::recentMask
 
-  if { [lsearch $recentMask $filename ] == -1 } {
-    set recentMask [ linsert $recentMask 0 $filename]
-    if {[llength $recentMask] > $::tree::mask::maxRecent } {
-      set recentMask [ lreplace $recentMask  [ expr $::tree::mask::maxRecent -1 ] end ]
-    }
-    
-    # update recent masks menu entry
-    for {set i 1} {$i <= [sc_base count total]} {incr i} {
-      set w .treeWin$i
-      if { [winfo exists $w] } {
-	$w.menu.mask.recent delete 0 end
-	foreach f $::tree::mask::recentMask {
-	  $w.menu.mask.recent add command -label $f -command [list ::tree::mask::open $f $w]
-	}
+  set i [lsearch -exact $recentMask $filename]
+  while {$i > -1} {
+    set recentMask [lreplace $recentMask $i $i]
+    set i [lsearch -exact $recentMask $filename]
+  }
+
+  set recentMask [ linsert $recentMask 0 $filename]
+  if {[llength $recentMask] > $::tree::mask::maxRecent } {
+    set recentMask [ lreplace $recentMask  [ expr $::tree::mask::maxRecent -1 ] end ]
+  }
+  
+  # update recent masks menu entry
+  for {set i 1} {$i <= [sc_base count total]} {incr i} {
+    set w .treeWin$i
+    if { [winfo exists $w] } {
+      $w.menu.mask.recent delete 0 end
+      foreach f $::tree::mask::recentMask {
+	$w.menu.mask.recent add command -label $f -command [list ::tree::mask::open $f $w]
       }
     }
   }

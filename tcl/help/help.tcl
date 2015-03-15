@@ -2144,17 +2144,14 @@ set helpText(TreeMasks) {<h1>Tree Masks</h1>
   </p>
   <p>
   They are stored in a Mask file (<b>.stm</b> - Scid Tree Mask) and are independent of the
-  databases to be used with. That is, one can create a
-  Mask once and use it with any database by just
+  databases to be used with. That is, one can create a Mask once and use it with any database by just
   loading it from the Tree Mask menu.
   </p>
   <p>
-  When a Mask is opened, the display of
-  the Tree window changes. First of all, all moves 
-  present in the mask are highlighted in blue.
-  Additionally, nags and markers are shown in front of a move, and
-  Comments concerning the move are shown after the move.
-  Finally, the current postition may also hold a comment.
+  When a Mask is opened, the display of the Tree window changes. First of all,
+  all moves present in the mask are highlighted in blue.  Additionally, nags and
+  markers are shown in front of a move, and Comments concerning the move are
+  shown after the move.  Finally, the current postition may also hold a comment.
   </p>
   <p>
   These items are all configurable by right-clicking the Tree.
@@ -2168,6 +2165,9 @@ set helpText(TreeMasks) {<h1>Tree Masks</h1>
   leading to it.</i>
   </p>
   <h3>Using Masks</h3>
+  <p>
+  <i>The most recent Mask file may be automatically opened via Tree-<gt>Options-<gt>Auto Load Mask.</i>
+  </p>
   <p>
   The Mask menu of the Tree widget is where Masks are opened or created.
   Once a Mask file is opened, commentary can be added 

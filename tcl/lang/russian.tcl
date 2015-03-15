@@ -532,6 +532,8 @@ menuText R TreeOptLock "Блокировать" 0 {(Раз)блокироват�
 menuText R TreeOptTraining "Тренировка" 0 {Включить/выключить режим тренировки}
 menuText R TreeOptAutosave "Автосохранение файла кеша" 0 \
   {Автосохранение файла кеша, когда закрывается окно дерева}
+# ====== TODO To be translated ======
+menuText R TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
 menuText R TreeHelp "Помощь" 0
 menuText R TreeHelpTree "Помощь по дереву" 0
 menuText R TreeHelpIndex "Индекс помощи" 0

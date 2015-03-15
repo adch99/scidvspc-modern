@@ -221,6 +221,7 @@ proc ::docking::init_layout_list {{recover 0}} {
 
 ### Tree/mask options:
 set ::tree::mask::recentMask {}
+set ::tree::mask::autoLoadMask 0
 
 #############################################################
 # Customisable variables:

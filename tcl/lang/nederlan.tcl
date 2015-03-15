@@ -560,6 +560,8 @@ menuText N TreeOptLock "Vergrendelen" 0 {Vergrendelen/Ontgrendelen van de boom b
 menuText N TreeOptTraining "Training" 0 {Aan/Uit zetten training modus}
 menuText N TreeOptAutosave "Autom.cache-data Bewaren" 4 \
   {Automatisch bewaren van het cache bestand bij sluiten boomvenster}
+# ====== TODO To be translated ======
+menuText N TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
 menuText N TreeHelp "Help" 0
 menuText N TreeHelpTree "Hulp bij zoekboom" 0
 menuText N TreeHelpIndex "Index" 0

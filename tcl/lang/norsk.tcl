@@ -634,6 +634,8 @@ menuText O TreeOptLock "Lås" 0 {Låser treet til nåværende database}
 menuText O TreeOptTraining "Trening" 0 {Slår av/på treningsmodus}
 menuText O TreeOptAutosave "Autolagre hurtigbuffer" 0 \
   {Autolagrer hurtigbufferet når vinduet lukkes}
+# ====== TODO To be translated ======
+menuText O TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
 menuText O TreeHelp "Hjelp" 0
 menuText O TreeHelpTree "Tre hjelp" 0
 menuText O TreeHelpIndex "Innholdsfortegnelse" 0

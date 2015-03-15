@@ -588,6 +588,8 @@ menuText I TreeOptLock "Blocca" 0 {Blocca/sblocca l'albero al database corrente}
 menuText I TreeOptTraining "Training" 0 {Attiva/disattiva la modalita' di esercizio dell'albero}
 menuText I TreeOptAutosave "File di cache per Auto-salvare" 0 \
   {Salva automaticamente il file di cache quando si chiude la finestra dell'albero}
+# ====== TODO To be translated ======
+menuText I TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
 menuText I TreeHelp "Aiuto" 0
 menuText I TreeHelpTree "Aiuto per l'albero" 0
 menuText I TreeHelpIndex "Indice di aiuto" 0

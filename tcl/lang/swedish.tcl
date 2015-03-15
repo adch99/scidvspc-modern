@@ -554,6 +554,8 @@ menuText W TreeOptLock "Lås" 0 {Lås/ lås upp trädet för den aktuella databasen}
 menuText W TreeOptTraining "Träna" 0 {Starta/ stäng av träningsläge}
 menuText W TreeOptAutosave "Spara cache filen automatiskt" 0 \
   {Spara cachefilen automatiskt när trädfönstret stängs}
+# ====== TODO To be translated ======
+menuText W TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
 menuText W TreeHelp "Hjälp" 0
 menuText W TreeHelpTree "Trädhjälp" 0
 menuText W TreeHelpIndex "Hjälpindex" 0
