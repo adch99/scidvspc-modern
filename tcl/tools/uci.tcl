@@ -982,7 +982,7 @@ namespace eval uci {
     foreach m $moves {
       # get rid of leading piece
       set c [string index $m 0]
-      if {$c == "K" || $c == "Q" || $c == "R" || $c == "B" || $c == "N"} {
+      if {$c in {K Q R B N}} {
         set m [string range $m 1 end]
       }
       set s1 [string range $m 0 1]

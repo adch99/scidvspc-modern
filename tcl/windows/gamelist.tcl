@@ -570,7 +570,7 @@ proc ::windows::gamelist::Open {} {
 
   foreach flag $maintFlaglist  {
     # dont translate CustomFlag (todo)
-    if { [lsearch -exact { 1 2 3 4 5 6 } $flag ] == -1 } {
+    if {$flag ni {1 2 3 4 5 6}} {
       set tmp $::tr($maintFlags($flag))
     } else {
       set tmp [sc_game flag $flag description]

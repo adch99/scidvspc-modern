@@ -310,7 +310,7 @@ proc refreshCustomFlags {} {
       ### Update the CustomFlag menubutton title
       # [Dont translate CustomFlag1 (etc)]
 
-      if { [lsearch -exact { 1 2 3 4 5 6 } $maintFlag ] == -1 } {
+      if {$maintFlag ni {1 2 3 4 5 6}} {
 	set tmp $::tr($maintFlags($maintFlag))
       } else  {
 	set tmp [sc_game flag $maintFlag description]
@@ -348,7 +348,7 @@ proc refreshCustomFlags {} {
       ### Update the gamelist CustomFlag menubutton title
       # [Dont translate CustomFlag1 (etc)]
 
-      if { [lsearch -exact { 1 2 3 4 5 6 } $glistFlag ] == -1 } {
+      if {$glistFlag ni {1 2 3 4 5 6}} {
 	set tmp $::tr($maintFlags($glistFlag))
       } else  {
 	set tmp [sc_game flag $glistFlag description]

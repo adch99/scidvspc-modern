@@ -196,9 +196,9 @@ proc validateSetup {} {
     if {$p == "."} {
     } elseif {$p == "P"} { incr wCount; incr wpCount
     } elseif {$p == "p"} { incr bCount; incr bpCount
-    } elseif {$p == "N" || $p == "B" || $p == "R" || $p == "Q"} {
+    } elseif {$p in {N B R Q}} {
       incr wCount
-    } elseif {$p == "n" || $p == "b" || $p == "r" || $p == "q"} {
+    } elseif {$p in {n b r q}} {
       incr bCount
     } elseif {$p == "K"} { incr wCount; incr wkCount
     } elseif {$p == "k"} { incr bCount; incr bkCount
