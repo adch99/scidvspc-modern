@@ -635,7 +635,7 @@ proc ::tree::displayLines { baseNumber moves } {
         }
         # color tag
         set color [::tree::mask::getColor $move]
-        if {$color != "white"} {
+        if {$color != "white" && $color != "White"} {
           $w.f.tl tag configure color$i -background [::tree::mask::getColor $move]
           $w.f.tl insert end "  " color$i
         } else {
@@ -742,8 +742,15 @@ proc ::tree::displayLines { baseNumber moves } {
       }
       
       # color tag
-      $w.f.tl tag configure color$idx -background [lindex $m 2]
-      $w.f.tl insert end "  " [ list color$idx tagclick$idx ]
+      set color [lindex $m 2]
+      if {$color != "white" && $color != "White"} {
+	$w.f.tl tag configure color$idx -background $color
+	$w.f.tl insert end "  " [ list color$idx tagclick$idx ]
+      } else {
+	$w.f.tl insert end "  " tagclick$idx
+      }
+
+
       # NAG tag
       $w.f.tl insert end [::tree::mask::getNag [lindex $m 0]] tagclick$idx
       # move
@@ -1315,9 +1322,9 @@ proc ::tree::mask::open { {filename ""} {parent .}} {
   }
 
   if {$filename != ""} {
-    if {![file isfile $filename]} {
+    if {![file readable $filename]} {
       if {$parent == "autoLoad"} {
-	::splash::add "No such tree mask $filename" error
+	::splash::add "Can't read mask file $filename" error
       } else {
 	tk_messageBox -title Oops -type ok -icon info -message "Mask: no such file \"$filename\""
       }
@@ -1460,14 +1467,7 @@ proc ::tree::mask::contextMenu {win move x y xc yc} {
   $mctxt add command -label [tr AddToMask] -command "::tree::mask::addToMask $move" -state $state
   $mctxt add command -label [tr RemoveFromMask] -command "::tree::mask::removeFromMask $move" -state $state
   $mctxt add separator
-  
-  menu $mctxt.nag
-  $mctxt add cascade -label [tr Nag] -menu $mctxt.nag -state $state
-  
-  foreach nag [ list "!!" " !" "!?" "?!" " ?" "??" " ~" [::tr "None"]  ] {
-    $mctxt.nag add command -label $nag -command "::tree::mask::setNag [list $move $nag]" -state $state
-  }
-  
+
   foreach j { 0 1 } {
     menu $mctxt.image$j
     $mctxt add cascade -label "[tr Marker] [expr $j +1]" -menu $mctxt.image$j -state $state
@@ -1482,6 +1482,13 @@ proc ::tree::mask::contextMenu {win move x y xc yc} {
   $mctxt add cascade -label [tr ColorMarker] -menu $mctxt.color  -state $state
   foreach c { "White" "Green" "Yellow" "Blue" "Red"} {
     $mctxt.color add command -label [ tr "${c}Mark" ] -background $c -command "::tree::mask::setColor $move $c"
+  }
+  
+  menu $mctxt.nag
+  $mctxt add cascade -label [tr Nag] -menu $mctxt.nag -state $state
+
+  foreach nag [ list "!!" " !" "!?" "?!" " ?" "??" " ~" [::tr "None"]  ] {
+    $mctxt.nag add command -label $nag -command "::tree::mask::setNag [list $move $nag]" -state $state
   }
   
   $mctxt add separator
@@ -1519,6 +1526,8 @@ proc ::tree::mask::contextMenu {win move x y xc yc} {
 ################################################################################
 proc ::tree::mask::addToMask { move {fen ""} } {
   global ::tree::mask::mask
+
+  if {[::tree::mask::moveExists $move]} {return}
 
   if {$fen == ""} { set fen $::tree::mask::cacheFenIndex }
 
