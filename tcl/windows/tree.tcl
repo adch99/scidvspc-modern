@@ -631,7 +631,11 @@ proc ::tree::displayLines { baseNumber moves } {
         # images
         foreach j { 0 1 } {
           set img [::tree::mask::getImage $move $j]
-          $w.f.tl image create end -image $img -align center
+          if {[catch {
+	    $w.f.tl image create end -image $img -align center
+          }]} {
+            $w.f.tl image create end -image ::tree::mask::emptyImage -align center
+          }
         }
         # color tag
         set color [::tree::mask::getColor $move]
@@ -737,7 +741,11 @@ proc ::tree::displayLines { baseNumber moves } {
         if {[lindex $m $j] == ""} {
           $w.f.tl image create end -image ::tree::mask::emptyImage -align center
         } else  {
-          $w.f.tl image create end -image [lindex $m $j] -align center
+          if {[catch {
+	    $w.f.tl image create end -image [lindex $m $j] -align center
+          }]} {
+	    $w.f.tl image create end -image ::tree::mask::emptyImage -align center
+          }
         }
       }
       
@@ -1300,10 +1308,24 @@ namespace eval ::tree::mask {
   set displayMask_showNag 1
   set displayMask_showComment 1
   
-  array set marker2image { Include ::rep::_tb_include Exclude ::rep::_tb_exclude MainLine ::tree::mask::imageMainLine Bookmark tb_bkm \
-        White ::tree::mask::imageWhite Black ::tree::mask::imageBlack \
-        NewLine tb_new ToBeVerified tb_rfilter ToTrain tb_msearch Dubious tb_help_small ToRemove tb_cut }
+  ### These image names are stored in mask files (stm), so we must handle image creation (elsewhere)
+  # incase of SCID generated masks, and tb_help_small was previously tb_help (which image we still have somewhere)
+  array set marker2image {
+    Include	::rep::_tb_include
+    Exclude	::rep::_tb_exclude
+    MainLine	::tree::mask::imageMainLine
+    Bookmark	tb_bkm
+    White	::tree::mask::imageWhite
+    Black	::tree::mask::imageBlack
+    NewLine	tb_new
+    ToBeVerified tb_rfilter
+    ToTrain	tb_msearch
+    Dubious	tb_help_small
+    ToRemove	tb_cut }
   set maxRecent 10
+# Include tb_tick Exclude tb_cross MainLine tb_mainline Bookmark tb_bkm \
+        White tb_white Black tb_black \
+        NewLine tb_new ToBeVerified tb_rfilter ToTrain tb_msearch Dubious tb_help ToRemove tb_cut
 }
 ################################################################################
 #
