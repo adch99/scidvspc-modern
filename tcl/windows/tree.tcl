@@ -247,7 +247,8 @@ proc ::tree::Open {{baseNumber 0}} {
   ### Autoload Mask if desired
   set mask [lindex $::tree::mask::recentMask 0]
   if {$::tree::mask::autoLoadMask && $::tree::mask::maskFile == {} && $mask != {}} {
-    ::tree::mask::open $mask
+    # Using 'autoLoad' for parent, skips interactive error dialog
+    ::tree::mask::open $mask autoLoad
   } else {
     ::tree::refresh $baseNumber
   }
@@ -1314,18 +1315,26 @@ proc ::tree::mask::open { {filename ""} {parent .}} {
   }
 
   if {$filename != ""} {
-    set ::initialDir(stm) [file dirname $filename]
-    ::tree::mask::askForSave $parent
-    array unset ::tree::mask::mask
-    array set ::tree::mask::mask {}
-    source $filename
-    array set mask $maskSerialized
-    set maskSerialized {}
-    set ::tree::mask::maskFile $filename
-    set ::tree::mask::dirty 0
-    ::tree::refresh
-::tree::mask::addRecent $filename
-::tree::mask::updateDisplayMask
+    if {![file isfile $filename]} {
+      if {$parent == "autoLoad"} {
+	::splash::add "No such tree mask $filename" error
+      } else {
+	tk_messageBox -title Oops -type ok -icon info -message "Mask: no such file \"$filename\""
+      }
+    } else {
+      set ::initialDir(stm) [file dirname $filename]
+      ::tree::mask::askForSave $parent
+      array unset ::tree::mask::mask
+      array set ::tree::mask::mask {}
+      source $filename
+      array set mask $maskSerialized
+      set maskSerialized {}
+      set ::tree::mask::maskFile $filename
+      set ::tree::mask::dirty 0
+      ::tree::refresh
+      ::tree::mask::addRecent $filename
+      ::tree::mask::updateDisplayMask
+    }
   }
 }
 
