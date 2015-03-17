@@ -679,13 +679,9 @@ z2YYGMjEsgjJGlTXxCUCAolwQQA7
 
 # for tree mask
 image create photo tb_help_small -data {
-R0lGODlhEAAQAKUqAERq5KS69HSS7Nzm/Fx+5LzO9Iym7PT2/ISe7GyK5Ex2
-5LTG9Ozu/KzC9ISa7GSG5Mza9Pz+/Exy5Ky69HyS7OTm/GSC5MTO9Jyy7Pz6
-/Iyi7HSO7FR25ERu5FyC5JSq7PT6/ISi7GyO7LzK9Ozy/Ky+9HyW7OTq/MTS
-9FR65P//////////////////////////////////////////////////////
-/////////////////////////////////yH5BAEAAD8ALAAAAAAQABAAAAZK
-wJ9QeFiYTAvGcCk0AAAmxDORYf4uz5Lw0gEYrE8Q8wkGlK3oAxm9BG2g7CHp
-eYoTLQCPXfgk7flmfz9rfwcHgj8YGIiEewICaEEAOw==
+R0lGODdhEQARAMIEAAAAAFFR+6ysz9nZ2f///////////////ywAAAAAEQAR
+AAADPzi63AswSvmIvdiCeoMP2KYAHUh4lziQViBYgkmobIZqXCnPefuGvdMv
+FXRlaJkkb2Qb4phK4GhChTiu2KwjAQA7
 }
 
 
