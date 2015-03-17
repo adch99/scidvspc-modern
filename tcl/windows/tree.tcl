@@ -551,8 +551,8 @@ proc ::tree::dorefresh { baseNumber } {
 
 proc ::tree::displayLines { baseNumber moves } {
   global ::tree::mask::maskFile
-  ::tree::mask::setCacheFenIndex
 
+  set ::tree::mask::cacheFenIndex [::tree::mask::toShortFen [sc_pos fen]]
   set lMoves {}
   set w .treeWin$baseNumber
   set nextmove [sc_game info nextMove]
@@ -597,12 +597,11 @@ proc ::tree::displayLines { baseNumber moves } {
       $w.f.tl image create end -image ::tree::mask::emptyImage -align center
     }
     $w.f.tl insert end "    "
-    $w.f.tl tag bind tagclick0 <Button-2> "::tree::mask::contextMenu $w.f.tl dummy %x %y %X %Y ; break"
   }
   if {[string match This* [lindex $moves 0]]} {
     $w.f.tl insert 0.0 "[lindex $moves 0]"
   } else {
-    $w.f.tl insert end "[lindex $moves 0]\n" tagclick0
+    $w.f.tl insert end "[lindex $moves 0]\n"
   }
 
   ### Hmmm - some of the markers (images) might be 17 or 18 width, and they make the
@@ -695,7 +694,8 @@ proc ::tree::displayLines { baseNumber moves } {
         set firstLine [ lindex [split $comment "\n"] 0 ]
         $w.f.tl insert end " $firstLine" tagtooltip$i
         ::utils::tooltip::SetTag $w.f.tl $comment tagtooltip$i
-        $w.f.tl tag bind tagtooltip$i <Double-Button-1> "::tree::mask::addComment $move $w"
+        # Actually its impossible to double click tooltips now, so this is unused
+        $w.f.tl tag bind tagtooltip$i <Double-Button-1> "::tree::mask::op addComment $move $w"
       }
     }
     if { $maskFile != {} && $move != {[end]} } {
@@ -773,8 +773,8 @@ proc ::tree::displayLines { baseNumber moves } {
   }
 
   $w.f.tl configure -state disabled
-
 }
+
 proc createCanvas {w wonx lossx baseNumber move} {
   canvas $w -width 60 -height 12 -bg grey75
 
@@ -1472,6 +1472,13 @@ proc ::tree::mask::save {} {
 }
 
 
+proc ::tree::mask::op {op move args} {
+  if {![::tree::mask::moveExists $move]} {
+    ::tree::mask::addToMask $move
+  }
+  eval $op $move $args
+}
+
 proc ::tree::mask::contextMenu {win move x y xc yc} {
   update idletasks
   
@@ -1480,44 +1487,40 @@ proc ::tree::mask::contextMenu {win move x y xc yc} {
     destroy $mctxt
   }
   
-  if {$move == "dummy"} {
-    set state "disabled"
-  } else  {
-    set state "normal"
-  }
   menu $mctxt
-  $mctxt add command -label [tr AddToMask] -command "::tree::mask::addToMask $move" -state $state
-  $mctxt add command -label [tr RemoveFromMask] -command "::tree::mask::removeFromMask $move" -state $state
+  $mctxt add command -label [tr AddToMask] -command [list ::tree::mask::addToMask $move]
+  $mctxt add command -label [tr RemoveFromMask] -command [list ::tree::mask::removeFromMask $move]
   $mctxt add separator
 
   foreach j { 0 1 } {
     menu $mctxt.image$j
-    $mctxt add cascade -label "[tr Marker] [expr $j +1]" -menu $mctxt.image$j -state $state
+    $mctxt add cascade -label "[tr Marker] [expr $j +1]" -menu $mctxt.image$j
     foreach e { Include Exclude MainLine Bookmark White Black NewLine ToBeVerified ToTrain Dubious ToRemove } {
       set i  $::tree::mask::marker2image($e)
 
-      $mctxt.image$j add command -label [ tr $e ] -image $i -compound left -command "::tree::mask::setImage $move $i $j"
+      $mctxt.image$j add command -label [ tr $e ] -image $i -compound left -command [list ::tree::mask::op setImage $move $i $j]
     }
-    $mctxt.image$j add command -label [tr NoMarker] -command "::tree::mask::setImage $move {} $j"
+    $mctxt.image$j add command -label [tr NoMarker] -command [list ::tree::mask::op setImage $move {} $j]
   }
   menu $mctxt.color
-  $mctxt add cascade -label [tr ColorMarker] -menu $mctxt.color  -state $state
+  $mctxt add cascade -label [tr ColorMarker] -menu $mctxt.color
   foreach c { "White" "Green" "Yellow" "Blue" "Red"} {
-    $mctxt.color add command -label [ tr "${c}Mark" ] -background $c -command "::tree::mask::setColor $move $c"
+    $mctxt.color add command -label [ tr "${c}Mark" ] -background $c -command [list ::tree::mask::op setColor $move $c]
   }
   
   menu $mctxt.nag
-  $mctxt add cascade -label [tr Nag] -menu $mctxt.nag -state $state
+  $mctxt add cascade -label [tr Nag] -menu $mctxt.nag
 
   foreach nag [ list "!!" " !" "!?" "?!" " ?" "??" " ~" [::tr "None"]  ] {
-    $mctxt.nag add command -label $nag -command "::tree::mask::setNag [list $move $nag]" -state $state
+    $mctxt.nag add command -label $nag -command [list ::tree::mask::op setNag $move $nag]
   }
   
+  $mctxt add command -label [ tr CommentMove] -command [list ::tree::mask::op addComment $move $win]
+
   $mctxt add separator
-  $mctxt add command -label [ tr CommentMove] -command "::tree::mask::addComment $move $win" -state $state
-  $mctxt add command -label [ tr CommentPosition] -command "::tree::mask::addComment {} $win"
+
+  $mctxt add command -label [ tr CommentPosition] -command [list ::tree::mask::addComment {} $win]
   
-  $mctxt add separator
   set lMatchMoves [sc_pos matchMoves ""]
 
   # remove "OO" from move list
@@ -1648,17 +1651,9 @@ proc ::tree::mask::setColor { move color {fen ""}} {
 
   if {$fen == ""} { set fen $::tree::mask::cacheFenIndex }
 
-  if {![info exists mask($fen)]} {
-    tk_messageBox -title "Scid" -type ok -icon warning -message [ tr AddMoveToMaskFirst ]
-    return
-  }
   set ::tree::mask::dirty 1
   set moves [ lindex $mask($fen) 0 ]
   set idxm [lsearch -regexp $moves "^$move\\+* "]
-  if { $idxm == -1} {
-    tk_messageBox -title "Scid" -type ok -icon warning -message [ tr AddMoveToMaskFirst ]
-    return
-  }
   set newmove [lreplace [lindex $moves $idxm] 2 2 $color ]
   set moves [lreplace $moves $idxm $idxm $newmove ]
   set mask($fen) [ lreplace $mask($fen) 0 0 $moves ]
@@ -1699,17 +1694,9 @@ proc ::tree::mask::setNag { move nag {fen ""} } {
 
   if {$fen == ""} { set fen $::tree::mask::cacheFenIndex }
 
-  if {![info exists mask($fen)]} {
-    tk_messageBox -title "Scid" -type ok -icon warning -message [ tr AddMoveToMaskFirst ]
-    return
-  }
   set ::tree::mask::dirty 1
   set moves [ lindex $mask($fen) 0 ]
   set idxm [lsearch -regexp $moves "^$move\\+* "]
-  if { $idxm == -1} {
-    tk_messageBox -title "Scid" -type ok -icon warning -message [ tr AddMoveToMaskFirst ]
-    return
-  }
   set newmove [lreplace [lindex $moves $idxm] 1 1 $nag ]
   set moves [lreplace $moves $idxm $idxm $newmove ]
   set mask($fen) [ lreplace $mask($fen) 0 0 $moves ]
@@ -1748,17 +1735,9 @@ proc ::tree::mask::setComment { move comment { fen "" } } {
 
   set comment [string trim $comment]
 
-  if {![info exists mask($fen)]} {
-    tk_messageBox -title "Scid" -type ok -icon warning -message [ tr AddMoveToMaskFirst ]
-    return
-  }
   set ::tree::mask::dirty 1
   set moves [ lindex $mask($fen) 0 ]
   set idxm [lsearch -regexp $moves "^$move\\+* "]
-  if { $idxm == -1} {
-    tk_messageBox -title "Scid" -type ok -icon warning -message [ tr AddMoveToMaskFirst ]
-    return
-  }
   set newmove [lreplace [lindex $moves $idxm] 3 3 $comment ]
   set moves [lreplace $moves $idxm $idxm $newmove ]
   set mask($fen) [ lreplace $mask($fen) 0 0 $moves ]
@@ -1805,17 +1784,9 @@ proc ::tree::mask::setPositionComment { comment {fen ""} } {
 proc ::tree::mask::setImage { move img nmr } {
   global ::tree::mask::mask
   set fen $::tree::mask::cacheFenIndex
-  if {![info exists mask($fen)]} {
-    tk_messageBox -title "Scid" -type ok -icon warning -message [ tr AddMoveToMaskFirst ]
-    return
-  }
   set ::tree::mask::dirty 1
   set moves [ lindex $mask($fen) 0 ]
   set idxm [lsearch -regexp $moves "^$move\\+* "]
-  if { $idxm == -1} {
-    tk_messageBox -title "Scid" -type ok -icon warning -message [ tr AddMoveToMaskFirst ]
-    return
-  }
   set loc [expr 4 + $nmr]
   set newmove [lreplace [lindex $moves $idxm] $loc $loc $img ]
   set moves [lreplace $moves $idxm $idxm $newmove ]
@@ -1854,13 +1825,6 @@ proc ::tree::mask::addComment { { move "" } {parent .} } {
     set parent [string range $parent 0 end-5]
   }
 
-  # first check the move is present in Mask
-  if { $move != "" } {
-    if { ![::tree::mask::moveExists $move] } {
-      tk_messageBox -title "Scid" -type ok -icon warning -message [ tr AddMoveToMaskFirst ] -parent $parent
-      return
-    }
-  }
   set w .treeMaskAddComment
   toplevel $w
   placeWinOverParent $w $parent
@@ -1971,12 +1935,6 @@ proc ::tree::mask::feedMask { fen } {
 proc ::tree::mask::toShortFen {fen} {
   set ret [lreplace $fen end-1 end]
   return $ret
-}
-################################################################################
-#
-################################################################################
-proc ::tree::mask::setCacheFenIndex {} {
-  set ::tree::mask::cacheFenIndex [ toShortFen [sc_pos fen] ]
 }
 ################################################################################
 #
