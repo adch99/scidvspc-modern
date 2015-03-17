@@ -3,8 +3,7 @@
 ### Copyright (C) 2001-2002 Shane Hudson.
 
 ### Repertoire  editor has been replaced by the Tree Mask feature
-
-# but these images are still used by other widgets
+### but these images are still used by other widgets - S.A.
 
 image create photo ::rep::_tick -data {
   R0lGODdhEAAQAKEAAP///wAAAFFR+wAAACwAAAAAEAAQAAACMISPacHtvpQKUSIKsBQiV8V1

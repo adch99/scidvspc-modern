@@ -2,7 +2,8 @@
 
 ### (C) 2007 Pascal Georges : multiple Tree windows support
 ### Originally authored by Shane Hudson. All Mask features by Pascal Georges [S.A.]
-### Three coloured bar graphs and other code by Stevenaaus
+
+### Three coloured bar graphs , mask fixes and other code by Stevenaaus
 
 set ::tree::trainingBase 0
 array set ::tree::cachesize {}
@@ -31,7 +32,7 @@ proc ::tree::doConfigMenus { baseNumber  { lang "" } } {
   }
 }
 
-# ################################################################################
+################################################################################
 proc ::tree::ConfigMenus { { lang "" } } {
   for {set i 1 } {$i <= [sc_base count total]} {incr i} {
     ::tree::doConfigMenus $i $lang
@@ -1119,7 +1120,7 @@ proc ::tree::isCacheFull { base } {
 
 ################################################################################
 # will go through all moves of all games of current base
-################################################################################
+
 set ::tree::cancelPrime 0
 
 proc ::tree::primeWithBase {base {fillMask 0}} {
@@ -1168,7 +1169,7 @@ proc ::tree::mutex_refresh {} {
 
 ################################################################################
 # parse one game and fill the list
-################################################################################
+
 proc ::tree::parseGame {{ fillMask 0 }} {
 
   if {$::tree::cancelPrime } { return  }
@@ -1237,11 +1238,10 @@ proc ::tree::parseVar {{ fillMask 0 }} {
 }
 ################################################################################
 # count moves that will fill the cache
-################################################################################
+
 proc ::tree::countBaseMoves { {args ""} } {
   set ::tree::total 0
 
-  ################################################################################
   proc countParseGame {} {
     sc_move start
 
@@ -1254,7 +1254,7 @@ proc ::tree::countBaseMoves { {args ""} } {
       incr ::tree::total
     }
   }
-  ################################################################################
+
   proc countParseVar {} {
     while {![sc_pos isAt vend]} {
       for {set v 0} {$v<[sc_var count]} {incr v} {
@@ -1285,7 +1285,7 @@ proc ::tree::countBaseMoves { {args ""} } {
 #
 #  All function calls with move in english
 #  Images are 17x17
-################################################################################
+
 namespace eval ::tree::mask {
 
   # mask(fen) contains data for a position <fen> : ( moves, comment )
@@ -1321,15 +1321,13 @@ namespace eval ::tree::mask {
     ToBeVerified tb_rfilter
     ToTrain	tb_msearch
     Dubious	tb_help_small
-    ToRemove	tb_cut }
+    ToRemove	tb_cut
+  }
   set maxRecent 10
-# Include tb_tick Exclude tb_cross MainLine tb_mainline Bookmark tb_bkm \
-        White tb_white Black tb_black \
-        NewLine tb_new ToBeVerified tb_rfilter ToTrain tb_msearch Dubious tb_help ToRemove tb_cut
 }
+
 ################################################################################
-#
-################################################################################
+
 proc ::tree::mask::open { {filename ""} {parent .}} {
   global ::tree::mask::maskSerialized ::tree::mask::mask
 
@@ -1394,8 +1392,7 @@ proc ::tree::mask::addRecent {filename} {
 }
 
 ################################################################################
-#
-################################################################################
+
 proc ::tree::mask::askForSave {{parent .}} {
   if {$::tree::mask::dirty} {
 
@@ -1413,9 +1410,9 @@ proc ::tree::mask::askForSave {{parent .}} {
     }
   }
 }
+
 ################################################################################
-#
-################################################################################
+
 proc ::tree::mask::new {{parent .}} {
 
   set types {
@@ -1439,9 +1436,9 @@ proc ::tree::mask::new {{parent .}} {
     }
   }
 }
+
 ################################################################################
-#
-################################################################################
+
 proc ::tree::mask::close {{parent .}} {
   if { $::tree::mask::maskFile == "" } {
     return
@@ -1471,6 +1468,7 @@ proc ::tree::mask::save {} {
   ::tree::mask::addRecent $::tree::mask::maskFile
 }
 
+### If move is not in mask already, add it before performing operation S.A
 
 proc ::tree::mask::op {op move args} {
   if {![::tree::mask::moveExists $move]} {
@@ -1546,9 +1544,9 @@ proc ::tree::mask::contextMenu {win move x y xc yc} {
   tk_popup $mctxt [winfo pointerx .] [winfo pointery .]
 
 }
+
 ################################################################################
-#
-################################################################################
+
 proc ::tree::mask::addToMask { move {fen ""} } {
   global ::tree::mask::mask
 
@@ -1568,9 +1566,9 @@ proc ::tree::mask::addToMask { move {fen ""} } {
     ::tree::refresh
   }
 }
+
 ################################################################################
-#
-################################################################################
+
 proc ::tree::mask::removeFromMask { move {fen ""} } {
   global ::tree::mask::mask
 
@@ -1594,9 +1592,10 @@ proc ::tree::mask::removeFromMask { move {fen ""} } {
     array unset mask $fen
   }
 }
+
 ################################################################################
 # returns 1 if the move is already in mask
-################################################################################
+
 proc ::tree::mask::moveExists { move {fen ""} } {
   global ::tree::mask::mask
 
@@ -1611,9 +1610,10 @@ proc ::tree::mask::moveExists { move {fen ""} } {
   }
   return 1
 }
+
 ################################################################################
 # return the list of moves with their data
-################################################################################
+
 proc ::tree::mask::getAllMoves {} {
   global ::tree::mask::mask
   if {![info exists mask($::tree::mask::cacheFenIndex)]} {
@@ -1622,9 +1622,9 @@ proc ::tree::mask::getAllMoves {} {
   set moves [ lindex $mask($::tree::mask::cacheFenIndex) 0 ]
   return $moves
 }
+
 ################################################################################
-#
-################################################################################
+
 proc ::tree::mask::getColor { move {fen ""}} {
   global ::tree::mask::mask
 
@@ -1643,9 +1643,9 @@ proc ::tree::mask::getColor { move {fen ""}} {
 
   return $col
 }
+
 ################################################################################
-#
-################################################################################
+
 proc ::tree::mask::setColor { move color {fen ""}} {
   global ::tree::mask::mask
 
@@ -1659,9 +1659,10 @@ proc ::tree::mask::setColor { move color {fen ""}} {
   set mask($fen) [ lreplace $mask($fen) 0 0 $moves ]
   ::tree::refresh
 }
+
 ################################################################################
 # defaults to "  " (2 spaces)
-################################################################################
+
 proc ::tree::mask::getNag { move { fen "" }} {
   global ::tree::mask::mask ::tree::mask::emptyNag
 
@@ -1682,9 +1683,9 @@ proc ::tree::mask::getNag { move { fen "" }} {
   if { [string length $nag] == 1} { set nag " $nag" }
   return $nag
 }
+
 ################################################################################
-#
-################################################################################
+
 proc ::tree::mask::setNag { move nag {fen ""} } {
   global ::tree::mask::mask
 
@@ -1702,9 +1703,9 @@ proc ::tree::mask::setNag { move nag {fen ""} } {
   set mask($fen) [ lreplace $mask($fen) 0 0 $moves ]
   ::tree::refresh
 }
+
 ################################################################################
-#
-################################################################################
+
 proc ::tree::mask::getComment { move { fen "" } } {
   global ::tree::mask::mask
 
@@ -1725,9 +1726,9 @@ proc ::tree::mask::getComment { move { fen "" } } {
   }
   return $comment
 }
+
 ################################################################################
-#
-################################################################################
+
 proc ::tree::mask::setComment { move comment { fen "" } } {
   global ::tree::mask::mask
 
@@ -1743,9 +1744,9 @@ proc ::tree::mask::setComment { move comment { fen "" } } {
   set mask($fen) [ lreplace $mask($fen) 0 0 $moves ]
   ::tree::refresh
 }
+
 ################################################################################
-#
-################################################################################
+
 proc ::tree::mask::getPositionComment {{fen ""}} {
   global ::tree::mask::mask
 
@@ -1760,9 +1761,9 @@ proc ::tree::mask::getPositionComment {{fen ""}} {
 
   return $comment
 }
+
 ################################################################################
-#
-################################################################################
+
 proc ::tree::mask::setPositionComment { comment {fen ""} } {
   global ::tree::mask::mask
 
@@ -1778,9 +1779,9 @@ proc ::tree::mask::setPositionComment { comment {fen ""} } {
   set mask($fen) $newpos
   ::tree::refresh
 }
+
 ################################################################################
-#
-################################################################################
+
 proc ::tree::mask::setImage { move img nmr } {
   global ::tree::mask::mask
   set fen $::tree::mask::cacheFenIndex
@@ -1794,9 +1795,10 @@ proc ::tree::mask::setImage { move img nmr } {
 
   ::tree::refresh
 }
+
 ################################################################################
 # nmr = 0 or 1 (two images per line)
-################################################################################
+
 proc ::tree::mask::getImage { move nmr } {
   global ::tree::mask::mask
 
@@ -1816,8 +1818,7 @@ proc ::tree::mask::getImage { move nmr } {
 }
 
 ################################################################################
-# if move is null, this is a position comment
-################################################################################
+
 proc ::tree::mask::addComment { { move "" } {parent .} } {
   
   if {[string match *.f.tl $parent]} {
@@ -1828,6 +1829,8 @@ proc ::tree::mask::addComment { { move "" } {parent .} } {
   set w .treeMaskAddComment
   toplevel $w
   placeWinOverParent $w $parent
+
+  ### If move is null, addComment to the position
 
   if {$move == ""} {
     set oldComment [::tree::mask::getPositionComment]
@@ -1858,9 +1861,9 @@ proc ::tree::mask::updateComment { { move "" } } {
   }
 }
 
+
 ################################################################################
-#
-################################################################################
+
 proc ::tree::mask::fillWithGame {} {
   if {$::tree::mask::maskFile == ""} {
     tk_messageBox -title "Scid" -type ok -icon warning -message [ tr OpenAMaskFileFirst]
@@ -1869,9 +1872,9 @@ proc ::tree::mask::fillWithGame {} {
   ::tree::primeWithGame 1
   set ::tree::mask::dirty 1
 }
+
 ################################################################################
-#
-################################################################################
+
 proc ::tree::mask::fillWithBase {base} {
   if {$::tree::mask::maskFile == ""} {
     tk_messageBox -title "Scid" -type ok -icon warning -message [ tr OpenAMaskFileFirst]
@@ -1880,9 +1883,10 @@ proc ::tree::mask::fillWithBase {base} {
   ::tree::primeWithBase $base 1
   set ::tree::mask::dirty 1
 }
+
 ################################################################################
 # Take current position information and fill the mask (move, nag, comments, etc)
-################################################################################
+
 proc ::tree::mask::feedMask { fen } {
   set stdNags { "!!" "!" "!?" "?!" "??" "~"}
   set fen [toShortFen $fen]
@@ -1929,16 +1933,17 @@ proc ::tree::mask::feedMask { fen } {
   setComment $move $comment $fen
   
 }
+
 ################################################################################
 #  trim the fen to keep position data only
-################################################################################
+
 proc ::tree::mask::toShortFen {fen} {
   set ret [lreplace $fen end-1 end]
   return $ret
 }
+
 ################################################################################
-#
-################################################################################
+
 proc ::tree::mask::infoMask {{parent .}} {
   global ::tree::mask::mask
   
@@ -1950,10 +1955,11 @@ proc ::tree::mask::infoMask {{parent .}} {
   # }
   tk_messageBox -title "Mask info" -type ok -icon info -message "Mask : $::tree::mask::maskFile\n[tr Positions] : $npos\n[tr Moves] : $nmoves" -parent $parent
 }
+
 ################################################################################
 # Dumps mask content in a tree view widget
 # The current position is the reference base
-################################################################################
+
 proc ::tree::mask::displayMask {} {
   global ::tree::mask::mask
   
@@ -2001,9 +2007,10 @@ proc ::tree::mask::displayMask {} {
   
   $w.f.tree tag bind dblClickTree <Double-Button-1> {::tree::mask::maskTreeUnfold }
 }
+
 ################################################################################
-#
-################################################################################
+### Update the extra "mask map" window if open
+
 proc ::tree::mask::updateDisplayMask {} {
   global ::tree::mask::mask
   
@@ -2031,10 +2038,11 @@ proc ::tree::mask::updateDisplayMask {} {
   
   sc_base switch $currentbase
 }
+
 ################################################################################
 # creates a new image whose name is name1_name2, and concatenates two images.
 # parameters are the markers, not the images names
-################################################################################
+
 proc ::tree::mask::createImage {marker1 marker2} {
   
   if {[lsearch [image names] "$marker1$marker2" ] != -1} {
@@ -2051,9 +2059,9 @@ proc ::tree::mask::createImage {marker1 marker2} {
   $marker1$marker2 copy $img1 -from 0 0 -to 0 0
   $marker1$marker2 copy $img2 -from 0 0 -to [expr $w1 +$margin] 0
 }
+
 ################################################################################
-#
-################################################################################
+
 proc  ::tree::mask::maskTreeUnfold {} {
   set t .displaymask.f.tree
   
@@ -2068,9 +2076,10 @@ proc  ::tree::mask::maskTreeUnfold {} {
   set id [$t selection]
   unfold $id
 }
+
 ################################################################################
 # returns the first line of multi-line string (separated with \n)
-################################################################################
+
 proc ::tree::mask::trimToFirstLine {s} {
   set s [ lindex [ split $s "\n" ] 0 ]
   return $s
@@ -2189,7 +2198,7 @@ proc ::tree::mask::searchMask { baseNumber } {
   pack $w.f1 -side top -fill both -expand 0 -padx 5 -pady 3
   pack $w.f2 -side top -fill both -expand 1 -padx 2 -pady 3
   
-  ttk::button $w.f1.search -text [tr Search] -command "::tree::mask::perfomSearch $baseNumber"
+  ttk::button $w.f1.search -text [tr Search] -command "::tree::mask::performSearch $baseNumber"
   grid $w.f1.search -column 0 -row 0 -rowspan 2 -padx 5
   
   # NAG selection
@@ -2265,7 +2274,7 @@ proc ::tree::mask::searchMask { baseNumber } {
   bind $w <F1> {helpWindow TreeMasks}
 }
 
-proc  ::tree::mask::perfomSearch  { baseNumber } {
+proc ::tree::mask::performSearch  { baseNumber } {
   global ::tree::mask::mask
   set t .searchmask.f2.text
   $t configure -state normal
@@ -2457,5 +2466,7 @@ if {!$png_image_support} {
     AAAAAElFTkSuQmCC
   }
 }
+
+### Extra images in tcl/tools/reper.tcl
 
 ### end of tree.tcl
