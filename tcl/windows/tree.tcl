@@ -691,6 +691,7 @@ proc ::tree::displayLines { baseNumber moves } {
     if { $maskFile != "" } {
       # Move comment
       set comment [::tree::mask::getComment $move]
+      set commentLength [string length $comment]
       if {$comment != ""} {
         set firstLine [ lindex [split $comment "\n"] 0 ]
         $w.f.tl insert end " $firstLine" tagtooltip$i
@@ -699,11 +700,9 @@ proc ::tree::displayLines { baseNumber moves } {
         $w.f.tl tag bind tagtooltip$i <Double-Button-1> "::tree::mask::op addComment $move $w"
       }
     }
-    if { $maskFile != {} && $move != {[end]} } {
-      # Bind right button to popup a contextual menu:
-      $w.f.tl tag bind tagclick$i <Button-3> "::tree::mask::contextMenu $w.f.tl $move %x %y %X %Y ; break"
-    }
-    $w.f.tl tag add tagclick$i [expr $i +1 + $hasPositionComment].0 [expr $i + 1 + $hasPositionComment].end
+    # This line extends tags to marker1,2
+    # But dont extend line bindings to comment, as it overrides double-click sets comment
+    $w.f.tl tag add tagclick$i [expr $i +1 + $hasPositionComment].0 "[expr $i + 1 + $hasPositionComment].end - $commentLength chars"
     
     $w.f.tl insert end "\n"
   } ;# end for loop
@@ -721,7 +720,8 @@ proc ::tree::displayLines { baseNumber moves } {
   # blank bargraph in total
   $w.f.tl window create end-32c -create "canvas %W.h -width 60 -height 12 -highlightthickness 0"
 
-  # Add moves present in Mask and not in Tree
+  ### Add moves present in Mask and not in Tree
+
   set idx $len
   if { $maskFile != "" } {
     set movesMask [::tree::mask::getAllMoves]
@@ -729,15 +729,19 @@ proc ::tree::displayLines { baseNumber moves } {
       if {  [ scan [$w.f.tl index end] "%d.%d" currentLine dummy] != 2 } {
         puts "ERROR scan index end [$w.f.tl index end]"
       }
-      # move nag color move_anno
-      if {[lsearch $lMoves [lindex $m 0]] != -1 || [lindex $m 0] == "null"} {
+      #  move nag color  comment        marker1_image      marker2_image
+      #  d4    {} white {Some comment.} ::rep::_tb_exclude ::tree::mask::imageMainLine
+
+      set maskmove [lindex $m 0]
+
+      if {$maskmove in $lMoves || $maskmove == "null"} {
         continue
       }
       
-      $w.f.tl tag bind tagclick$idx <Button-1> "[list ::tree::selectCallback $baseNumber [lindex $m 0] ] ; break"
-      # Bind right button to popup a contextual menu:
-      $w.f.tl tag bind tagclick$idx <ButtonPress-3> "::tree::mask::contextMenu $w.f.tl [lindex $m 0] %x %y %X %Y"
-      # images
+      $w.f.tl tag bind tagclick$idx <Button-1> "[list ::tree::selectCallback $baseNumber $maskmove] ; break"
+      $w.f.tl tag bind tagclick$idx <ButtonPress-3> "::tree::mask::contextMenu $w.f.tl $maskmove %x %y %X %Y"
+
+      # Markers
       foreach j {4 5} {
         if {[lindex $m $j] == ""} {
           $w.f.tl image create end -image ::tree::mask::emptyImage -align center
@@ -761,14 +765,22 @@ proc ::tree::displayLines { baseNumber moves } {
 
 
       # NAG tag
-      $w.f.tl insert end [::tree::mask::getNag [lindex $m 0]] tagclick$idx
-      # move
-      $w.f.tl insert end "[::trans [lindex $m 0] ] " [ list movefg tagclick$idx ]
-      # comment
+      $w.f.tl insert end [::tree::mask::getNag $maskmove] tagclick$idx
+
+      # Move
+      $w.f.tl insert end "[::trans $maskmove] " [ list movefg tagclick$idx ]
+
+      # Comment
       set comment [lindex $m 3]
+      set commentLength [string length $comment]
       set firstLine [ lindex [split $comment "\n"] 0 ]
       $w.f.tl insert end "$firstLine\n" tagtooltip$idx
+      $w.f.tl tag bind tagtooltip$idx <Double-Button-1> "::tree::mask::op addComment $maskmove $w"
       ::utils::tooltip::SetTag $w.f.tl $comment tagtooltip$idx
+
+      # Trying to exntend bindings to the markers, doesnt work ???
+      # $w.f.tl tag add tagclick$idx [expr $idx +1 + $hasPositionComment].0 "[expr $idx + 1 + $hasPositionComment].end - $commentLength chars"
+
       incr idx
     }
   }
@@ -1827,6 +1839,11 @@ proc ::tree::mask::addComment { { move "" } {parent .} } {
   }
 
   set w .treeMaskAddComment
+  if {[winfo exists $w]} {
+    raiseWin $w
+    return
+  }
+
   toplevel $w
   placeWinOverParent $w $parent
 
