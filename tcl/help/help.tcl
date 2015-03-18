@@ -381,6 +381,7 @@ append helpText(Index) {
   <h3><name O>O</name></h3>
   <ul>
   <li><a Book>Opening Books</a></li>
+  <li><a Repertoire>Opening Repertoires</a></li>
   <li><a ECO>Opening classification</a> (ECO)</li>
   <li><a Reports Opening>Opening Reports</a></li>
   <li><a Options>Options</a></li>
@@ -1981,7 +1982,8 @@ set helpText(PTracker) {<h1>The Piece Tracker Window</h1>
 
 set helpTitle(Repertoire) "Repertoire editor"
 set helpText(Repertoire) {<h1>The Repertoire Editor</h1>
-<p>The Repertoire Editor has been removed since Scid vs. PC 4.2.
+<p>
+The Repertoire Editor has been removed since Scid vs. PC 4.2.
 <br>
 Simililar and more powerful features are available in the <a TreeMasks>Tree Masks</a> window.
 </p>
@@ -2140,21 +2142,21 @@ set helpText(TreeMasks) {<h1>Tree Masks</h1>
   database made from the current position.  <b>Masks</b> add additional
   information, and can be imagined as a transparent layer above the Tree that
   holds data such as commentaries for moves or positions, own
-  evaluations, and ones opening repertoir.
+  evaluations, and ones Opening Repertoir.
   </p>
   <p>
-  They are stored in a Mask file (<b>.stm</b> - Scid Tree Mask) and are independent of the
-  databases to be used with. That is, one can create a Mask once and use it with any database by just
+  They are stored in a Mask file (<b>.stm</b> - Scid Tree Mask) and are independent of any
+  database. That is - once created, a Mask can be used with any database by
   loading it from the Tree Mask menu.
   </p>
   <p>
   When a Mask is opened, the display of the Tree window changes. First of all,
-  all moves present in the mask are highlighted in blue.  Additionally, nags and
+  all moves present in the mask are highlighted in purple.  Additionally, nags and
   markers are shown in front of a move, and Comments concerning the move are
-  shown after the move.  Finally, the current postition may also hold a comment.
+  shown afterwards.  Finally, the current postition may also hold a comment.
   </p>
   <p>
-  These items are all configurable by right-clicking the Tree.
+  Most Mask operations are accessed by right-clicking the Tree.
   </p>
   <p>
   <i>The indepencence of Masks from a database
@@ -2166,35 +2168,29 @@ set helpText(TreeMasks) {<h1>Tree Masks</h1>
   </p>
   <h3>Using Masks</h3>
   <p>
-  <i>The most recent Mask file may be automatically opened via Tree-<gt>Options-<gt>Auto Load Mask.</i>
-  </p>
-  <p>
-  The Mask menu of the Tree widget is where Masks are opened or created.
+  The Mask menu of the Tree is where Masks are opened or created.
   Once a Mask file is opened, commentary can be added 
-  by right-clicking on the Tree, adding a move to the mask, and then 
-  adding comments or nags. Moves existing in the Mask are displayed in blue.
+  by right-clicking the Tree and adding comments/nags/markers (etc, see below).
   </p>
   <p>
-  For an opening repertoir it might thus make sense to
-  generate two masks, one for the White and one for the Black
-  openings.
+  Whole lines (all moves up to the current move) can be added using the Tree-<gt>Mask-<gt>Fill-With-Line menu.
+  Similarly, whole lines may be marked by holding the <b>Control</b> key down when selecting the nag/marker/color.
   </p>
   <p>
-  <i>Moves not displayed in the Tree may be added to the Mask by means of 
-  the lastmost context menus - "Add Move to Mask".</i>
+  Moves not displayed in the Tree may be added to the Mask via
+  the "Add Move to Mask" context menu.
   </p>
   <p>
   Don't forget to save the Mask! You will be prompted to do it
-  if you close a Mask that has been modified or if a Tree Window is closed.
+  if you close a Mask that has been modified, or if a Tree Window is closed.
+  The most recent Mask file may be automatically opened via Tree-<gt>Options-<gt>Auto-Load-Mask.
   </p>
+  <p><i>
+  For an opening repertoir , one might consider having
+  two masks, one for White, and one for Black openings.
+  </i></p>
   <h3>Configuring Masks</h3>
   <ul>
-  <li><term>NAG</term> symbols are the simplest annotation symbol. The
-  menu displays only those nags sensible for a move (not a position)
-  which results in the following symbols possible <term>!!, !, !?, ?!,
-  ?, ??, ~</term>
-  </li>
-<br>
   <li><term>Markers</term> (1 and 2) allow two graphical markers to be attached to a move. They
   are mainly meant to handle opening repertoirs. The available options
   are:
@@ -2208,18 +2204,24 @@ set helpText(TreeMasks) {<h1>Tree Masks</h1>
      <li> <img tb_new> New line</li>
      <li> <img tb_rfilter> To be verified by further analysis</li>
      <li> <img tb_msearch> To train</li>
-     <li> <img tb_help> Dubious line</li>
+     <li> <img tb_help_small> Dubious line</li>
      <li> <img tb_cut> To remove</li>
+     <li> No Marker</li>
      </ul>
-	  To remove a marker just select the item <b>No marker</b>.
   </li>
   <br>
   <li><term>Color</term> Allows to add a little coloured square in
   front of the move for ones own highlighting. To remove it again
   select <b>White</b></li>
   <br>
-  <li><term>Comment Move</term> allows to add a textual comment for
-  the line. This comment is shown  right to the line it is
+  <li><term>NAG</term> symbols are the simplest annotation symbol. The
+  menu displays only those nags sensible for a move (not a position)
+  which results in the following symbols possible <term>!!, !, !?, ?!,
+  ?, ??, ~</term>
+  </li>
+<br>
+  <li><term>Comment Move</term> adds a text comment for
+  the move/line. Double-clicking comments allows easy editing.
   associated. Note that only a part of the first line shows up there
   to give some visual feedback that commentary exists. The whole
   comment shows up in a tooltip once the mouse is moved over the line
@@ -2228,10 +2230,7 @@ set helpText(TreeMasks) {<h1>Tree Masks</h1>
   <br>
   <li><term>Comment Position</term> can be used to add a comment for the
   current position. This comment is shown on top of Tree
-  window once the commented position is reached. Note that Scid
-  displays only the first line of the comment to save space in the
-  Tree window. However, if the mouse is moved over that
-  line the whole commentary shows up in a tooltip.
+  window once the commented position is reached.
   </li>
   </ul>
   <h3>Mask Searches</h3>
@@ -2296,7 +2295,7 @@ set helpText(TreeMasks) {<h1>Tree Masks</h1>
   games as soon as the middle game is reached.
   </p>
 
-  <p><footer>(Updated: Scid vs. PC 4.5, June 2011)</footer></p>
+  <p><footer>(Updated: Scid vs. PC 4.14, March 2015)</footer></p>
 }
 
 

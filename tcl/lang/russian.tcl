@@ -513,6 +513,8 @@ menuText R TreeMaskOpen "Открыть" 0 {Открыть маску}
 menuText R TreeMaskOpenRecent "Открыть последнюю" 0 {Открыть последнюю маску}
 menuText R TreeMaskSave "Сохранить" 0 {Сохранить маску}
 menuText R TreeMaskClose "Закрыть" 0 {Закрыть маску}
+# ====== TODO To be translated ======
+menuText R TreeMaskFillWithLine "Fill with line" 0 {Fill mask with all previous moves}
 menuText R TreeMaskFillWithGame "Наполнить партией" 0 {Наполняет маску партией}
 menuText R TreeMaskFillWithBase "Наполнить базой" 0 {Наполняет маску всеми партиями из базы}
 menuText R TreeMaskInfo "Информация" 0 {Показать статистику текущей маски}

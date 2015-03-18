@@ -524,6 +524,8 @@ menuText P TreeMaskOpen "Otwórz" 0 {Otwórz maskę}
 menuText P TreeMaskOpenRecent "Otwórz ostatnią maskę" 0 {Otwórz ostatnią maskę}
 menuText P TreeMaskSave "Zapisz" 0 {Zapisz maskę}
 menuText P TreeMaskClose "Zamknij" 0 {Zamknij maskę}
+# ====== TODO To be translated ======
+menuText P TreeMaskFillWithLine "Fill with line" 0 {Fill mask with all previous moves}
 menuText P TreeMaskFillWithGame "Wypełnij maskę partią" 0 {Wypełnij maskę partią}
 menuText P TreeMaskFillWithBase "Wypełnij maskę bazą" 0 {Wypełnij maskę wszystkimi partiami w bazie}
 menuText P TreeMaskInfo "Informacje" 0 {Pokaż statystykę aktualnej maski}

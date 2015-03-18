@@ -541,6 +541,8 @@ menuText N TreeMaskOpen "Open" 0 {Open masker}
 menuText N TreeMaskOpenRecent "Open recent" 0 {Open recent masker}
 menuText N TreeMaskSave "Bewaar" 0 {Bewaar het masker}
 menuText N TreeMaskClose "Sluiten" 0 {Sluit het masker}
+# ====== TODO To be translated ======
+menuText N TreeMaskFillWithLine "Fill with line" 0 {Fill mask with all previous moves}
 menuText N TreeMaskFillWithGame "Vullen met partij" 0 {Vul het masker met de partij}
 menuText N TreeMaskFillWithBase "Vullen met database" 0 {Vul het masker met alle partijen in het database}
 menuText N TreeMaskInfo "Info" 0 {Toon de statistieken voor het huidige masker}

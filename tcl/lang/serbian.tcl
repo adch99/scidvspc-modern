@@ -607,6 +607,8 @@ menuText Y TreeMaskSave "Save" 0 {Save mask}
 # ====== TODO To be translated ======
 menuText Y TreeMaskClose "Close" 0 {Close mask}
 # ====== TODO To be translated ======
+menuText Y TreeMaskFillWithLine "Fill with line" 0 {Fill mask with all previous moves}
+# ====== TODO To be translated ======
 menuText Y TreeMaskFillWithGame "Fill with game" 0 {Fill mask with game}
 # ====== TODO To be translated ======
 menuText Y TreeMaskFillWithBase "Fill with base" 0 {Fill mask with all games in base}

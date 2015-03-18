@@ -572,6 +572,8 @@ menuText B TreeMaskOpen "Abrir" 0 {Abrir máscara}
 menuText B TreeMaskOpenRecent "Abrir recente" 0 {Abre máscara recente}
 menuText B TreeMaskSave "Salvar" 0 {Salva máscara}
 menuText B TreeMaskClose "Fechar" 0 {Fecha máscara}
+# ====== TODO To be translated ======
+menuText B TreeMaskFillWithLine "Fill with line" 0 {Fill mask with all previous moves}
 menuText B TreeMaskFillWithGame "Preencher com jogo" 0 {Preenche máscara com jogo}
 menuText B TreeMaskFillWithBase "Preencher com base" 0 {Preenche a máscara com todos os jogos da base}
 menuText B TreeMaskInfo "Info" 0 {Mostrar estatisticas para a máscara corrente}

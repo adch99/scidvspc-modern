@@ -547,6 +547,8 @@ menuText D TreeMaskOpen "Öffnen" 0 {Maske öffnen}
 menuText D TreeMaskOpenRecent "Aktuelle Masken" 0 {Zuletzt geöffnete Masken erneut laden}
 menuText D TreeMaskSave "Speichern" 0 {Maske speichern}
 menuText D TreeMaskClose "Schließen" 0 {Maske schließen}
+# ====== TODO To be translated ======
+menuText D TreeMaskFillWithLine "Fill with line" 0 {Fill mask with all previous moves}
 menuText D TreeMaskFillWithGame "Mit aktueller Partie füllen" 0 {Maske mit der aktuellen Partie füllen}
 menuText D TreeMaskFillWithBase "Mit Datenbank füllen" 0 {Maske mit Datenbankpartien füllen}
 menuText D TreeMaskInfo "Info" 0 {Statistik für die aktuelle Maske anzeigen}

@@ -527,6 +527,7 @@ menuText E TreeMaskOpen "Open" 0 {Open mask}
 menuText E TreeMaskOpenRecent "Open recent" 0 {Open recent mask}
 menuText E TreeMaskSave "Save" 0 {Save mask}
 menuText E TreeMaskClose "Close" 0 {Close mask}
+menuText E TreeMaskFillWithLine "Fill with line" 0 {Fill mask with all previous moves}
 menuText E TreeMaskFillWithGame "Fill with game" 0 {Fill mask with game}
 menuText E TreeMaskFillWithBase "Fill with base" 0 {Fill mask with all games in base}
 menuText E TreeMaskInfo "Info" 0 {Show statistics for current mask}

@@ -553,6 +553,8 @@ menuText G TreeMaskOpen "Άνοιγμα" 5 {Άνοιγμα μάσκας}
 menuText G TreeMaskOpenRecent "Άνοιγμα πρόσφατης" 12 {Άνοιγμα πρόσφατης μάσκας}
 menuText G TreeMaskSave "Αποθήκευση" 3 {Αποθήκευση μάσκας}
 menuText G TreeMaskClose "Κλείσιμο" 0 {Κλείσιμο μάσκας}
+# ====== TODO To be translated ======
+menuText G TreeMaskFillWithLine "Fill with line" 0 {Fill mask with all previous moves}
 menuText G TreeMaskFillWithGame "Γέμισμα με Παρτίδα" 11 {Γέμισμα μάσκας με την παρτίδα}
 menuText G TreeMaskFillWithBase "Γέμισμα με Βάση" 11 {Γέμισμα μάσκας με όλες τις παρτίδες της Βάσης}
 menuText G TreeMaskInfo "Στατιστικά" 0 {Εμφάνιση στατιστικών για την συγκεκριμένη μάσκα}

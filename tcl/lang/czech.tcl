@@ -568,6 +568,8 @@ menuText C TreeMaskOpen "Open" 0 {Otevøít masku}
 menuText C TreeMaskOpenRecent "Open recent" 0 {Otevøít nedávnou masku}
 menuText C TreeMaskSave "Save" 0 {Ulo¾it masku}
 menuText C TreeMaskClose "Close" 0 {Uzavøit masku}
+# ====== TODO To be translated ======
+menuText C TreeMaskFillWithLine "Fill with line" 0 {Fill mask with all previous moves}
 menuText C TreeMaskFillWithGame "Naplnit partií" 0 {Naplnit masku partií}
 menuText C TreeMaskFillWithBase "Naplnit databází" 0 {Naplnit masku v¹emi partiemi z databáze}
 menuText C TreeMaskInfo "Info" 0 {Ukázat statistiku aktuální masky}

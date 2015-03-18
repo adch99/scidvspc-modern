@@ -549,6 +549,8 @@ menuText S TreeMaskOpen "Abrir" 0 {Abre máscara}
 menuText S TreeMaskOpenRecent "Abrir reciente" 0 {Abre máscara reciente}
 menuText S TreeMaskSave "Salvar" 0 {Salva máscara}
 menuText S TreeMaskClose "Cerrar" 0 {Cierra máscara}
+# ====== TODO To be translated ======
+menuText S TreeMaskFillWithLine "Fill with line" 0 {Fill mask with all previous moves}
 menuText S TreeMaskFillWithGame "Llenar con partida" 0 \
   {Llena máscara con partida}
 menuText S TreeMaskFillWithBase "Llenar con base" 0 \

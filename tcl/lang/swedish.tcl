@@ -535,6 +535,8 @@ menuText W TreeMaskOpen "Öppna" 0 {Öppna sökmask}
 menuText W TreeMaskOpenRecent "Öppna senaste" 0 {Öppna senaste sökmasken}
 menuText W TreeMaskSave "Spara" 0 {Spara sökmask}
 menuText W TreeMaskClose "Stäng" 0 {Stäng sökmask}
+# ====== TODO To be translated ======
+menuText W TreeMaskFillWithLine "Fill with line" 0 {Fill mask with all previous moves}
 menuText W TreeMaskFillWithGame "Fyll med parti" 0 {Fyll sökmask med parti}
 menuText W TreeMaskFillWithBase "Fyll med databas" 0 {Fyll sökmask med alla partier i databasen}
 menuText W TreeMaskInfo "Info om sökmask" 0 {Visa statistik för aktuell sökmask}

@@ -573,6 +573,8 @@ menuText H TreeMaskOpen "Megnyitás" 0 {Maszk megnyitása}
 menuText H TreeMaskOpenRecent "Open recent" 0 {Open recent mask}
 menuText H TreeMaskSave "Mentés" 5 {Maszk mentése}
 menuText H TreeMaskClose "Bezárás" 0 {Maszk bezárása}
+# ====== TODO To be translated ======
+menuText H TreeMaskFillWithLine "Fill with line" 0 {Fill mask with all previous moves}
 menuText H TreeMaskFillWithGame "Feltöltés játszmával" 1 {Maszk feltöltése játszmával}
 menuText H TreeMaskFillWithBase "Feltöltés adatbázissal" 2 {Maszk feltöltése az adatbázis összes játszmájával}
 menuText H TreeMaskInfo "Információ" 0 {Az aktuális maszk fõbb adatai}

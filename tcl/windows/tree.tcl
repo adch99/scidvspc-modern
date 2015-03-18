@@ -18,7 +18,7 @@ proc ::tree::doConfigMenus { baseNumber  { lang "" } } {
   foreach idx {0 1 2 3 4 5 7 9 11} tag {Save Fill FillWithBase FillWithGame SetCacheSize CacheInfo Best Copy Close} {
     configMenuText $m.file $idx TreeFile$tag $lang
   }
-  foreach idx {0 1 2 3 4 6 7 8 9 10} tag {New Open OpenRecent Save Close FillWithGame FillWithBase Search Info Display} {
+  foreach idx {0 1 2 3 4 6 7 8 9 10 11} tag {New Open OpenRecent Save Close FillWithLine FillWithGame FillWithBase Search Info Display} {
     configMenuText $m.mask $idx TreeMask$tag $lang
   }
   foreach idx {0 1 2 3} tag {Alpha ECO Freq Score } {
@@ -144,6 +144,7 @@ proc ::tree::Open {{baseNumber 0}} {
   $w.menu.mask add command -label TreeMaskSave -command "::tree::mask::save"
   $w.menu.mask add command -label TreeMaskClose -command "::tree::mask::close $w"
   $w.menu.mask add separator
+  $w.menu.mask add command -label TreeMaskFillWithLine -command "::tree::mask::fillWithLine"
   $w.menu.mask add command -label TreeMaskFillWithGame -command "::tree::mask::fillWithGame"
   $w.menu.mask add command -label TreeMaskFillWithBase -command "::tree::mask::fillWithBase $baseNumber"
   $w.menu.mask add command -label TreeMaskSearch -command "::tree::mask::searchMask $baseNumber"
@@ -688,11 +689,12 @@ proc ::tree::displayLines { baseNumber moves } {
       }
     }
 
+    set commentLength 0
     if { $maskFile != "" } {
       # Move comment
       set comment [::tree::mask::getComment $move]
-      set commentLength [string length $comment]
       if {$comment != ""} {
+	set commentLength [string length $comment]
         set firstLine [ lindex [split $comment "\n"] 0 ]
         $w.f.tl insert end " $firstLine" tagtooltip$i
         ::utils::tooltip::SetTag $w.f.tl $comment tagtooltip$i
@@ -1482,11 +1484,18 @@ proc ::tree::mask::save {} {
 
 ### If move is not in mask already, add it before performing operation S.A
 
+set ::tree::mask::opLine 0
+
 proc ::tree::mask::op {op move args} {
-  if {![::tree::mask::moveExists $move]} {
-    ::tree::mask::addToMask $move
+  if {$::tree::mask::controlButton} {
+    eval ::tree::mask::fillWithLine $op $move $args   
+  } else {
+    if {![::tree::mask::moveExists $move]} {
+      ::tree::mask::addToMask $move
+    }
+    eval $op $move $args
   }
-  eval $op $move $args
+  set ::tree::mask::controlButton 0
 }
 
 proc ::tree::mask::contextMenu {win move x y xc yc} {
@@ -1509,6 +1518,7 @@ proc ::tree::mask::contextMenu {win move x y xc yc} {
       set i  $::tree::mask::marker2image($e)
 
       $mctxt.image$j add command -label [ tr $e ] -image $i -compound left -command [list ::tree::mask::op setImage $move $i $j]
+      bind $mctxt.image$j <Control-Button-1> {set ::tree::mask::controlButton 1}
     }
     $mctxt.image$j add command -label [tr NoMarker] -command [list ::tree::mask::op setImage $move {} $j]
   }
@@ -1516,6 +1526,7 @@ proc ::tree::mask::contextMenu {win move x y xc yc} {
   $mctxt add cascade -label [tr ColorMarker] -menu $mctxt.color
   foreach c { "White" "Green" "Yellow" "Blue" "Red"} {
     $mctxt.color add command -label [ tr "${c}Mark" ] -background $c -command [list ::tree::mask::op setColor $move $c]
+    bind $mctxt.color <Control-Button-1> {set ::tree::mask::controlButton 1}
   }
   
   menu $mctxt.nag
@@ -1523,6 +1534,7 @@ proc ::tree::mask::contextMenu {win move x y xc yc} {
 
   foreach nag [ list "!!" " !" "!?" "?!" " ?" "??" " ~" [::tr "None"]  ] {
     $mctxt.nag add command -label $nag -command [list ::tree::mask::op setNag $move $nag]
+    bind $mctxt.nag <Control-Button-1> {set ::tree::mask::controlButton 1}
   }
   
   $mctxt add command -label [ tr CommentMove] -command [list ::tree::mask::op addComment $move $win]
@@ -1880,6 +1892,45 @@ proc ::tree::mask::updateComment { { move "" } } {
 
 
 ################################################################################
+
+proc ::tree::mask::fillWithLine {{op {}} {move {}} {args {}}} {
+
+  set ::tree::mask::controlButton 0
+
+  if {$::tree::mask::maskFile == ""} {
+    tk_messageBox -title "Scid" -type ok -icon warning -message [ tr OpenAMaskFileFirst]
+    return
+  }
+
+  if {[sc_var level] > 0} {
+    tk_messageBox -title "Scid" -type ok -icon warning -message "Can't add lne from inside a variation."
+    return
+  }
+
+  sc_game push copy
+
+  while {1} {
+      if {$op == ""} {
+	if {![sc_move back]} {
+          break
+        }
+	set fen [sc_pos fen]
+	sc_move forward
+	::tree::mask::feedMask $fen
+	sc_move back
+      } else {
+	set ::tree::mask::cacheFenIndex [::tree::mask::toShortFen [sc_pos fen]]
+        eval ::tree::mask::op $op $move $args
+        if {![sc_move back]} {
+          break
+        }
+        set move [sc_game info nextMove]
+      }
+  }
+  set ::tree::mask::dirty 1
+  sc_game pop
+  ::tree::refresh
+}
 
 proc ::tree::mask::fillWithGame {} {
   if {$::tree::mask::maskFile == ""} {
