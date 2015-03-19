@@ -1485,7 +1485,7 @@ proc ::tree::mask::save {} {
 set ::tree::mask::controlButton 0
 
 ### Check that the position is in the mask , before calling other mask operations
-#   (Marker 1 Marker 2, Color, Nag, Comment Move).
+#   (AddMove, RemoveMove, Marker 1 Marker 2, Color, Nag, Comment Move).
 #   If the control button has been pressed, apply the operation to all previous positions leading to this one.
 #   This is done in backwards order for simplicity (just like the new book tuning add line feature).
 #   Since we are sometimes doing multiple operations, we have to track when to refresh the tree
@@ -1497,10 +1497,12 @@ proc ::tree::mask::op {op refresh move args} {
     eval ::tree::mask::fillWithLine $op $move $args   
     ::tree::refresh
   } else {
-    if {![::tree::mask::moveExists $move]} {
+    if {$op != "removeFromMask" && ![::tree::mask::moveExists $move]} {
       ::tree::mask::addToMask $move
     }
-    eval $op $move $args
+    if {$op != "addToMask"} {
+      eval $op $move $args
+    }
     if {$refresh} {
       ::tree::refresh
     }
@@ -1517,8 +1519,9 @@ proc ::tree::mask::contextMenu {win move x y xc yc} {
   }
   
   menu $mctxt
-  $mctxt add command -label [tr AddToMask] -command [list ::tree::mask::addToMask $move ; ::tree::refresh]
-  $mctxt add command -label [tr RemoveFromMask] -command [list ::tree::mask::removeFromMask $move]
+  $mctxt add command -label [tr AddToMask] -command [list ::tree::mask::op addToMask 1 $move]
+  $mctxt add command -label [tr RemoveFromMask] -command [list ::tree::mask::op removeFromMask 1 $move]
+  bind $mctxt <Control-Button-1> {set ::tree::mask::controlButton 1}
   $mctxt add separator
 
   foreach j { 0 1 } {
@@ -1528,16 +1531,16 @@ proc ::tree::mask::contextMenu {win move x y xc yc} {
       set i  $::tree::mask::marker2image($e)
 
       $mctxt.image$j add command -label [ tr $e ] -image $i -compound left -command [list ::tree::mask::op setImage 1 $move $i $j]
-      bind $mctxt.image$j <Control-Button-1> {set ::tree::mask::controlButton 1}
     }
+    bind $mctxt.image$j <Control-Button-1> {set ::tree::mask::controlButton 1}
     $mctxt.image$j add command -label [tr NoMarker] -command [list ::tree::mask::op setImage 1 $move {} $j]
   }
   menu $mctxt.color
   $mctxt add cascade -label [tr ColorMarker] -menu $mctxt.color
   foreach c { "White" "Green" "Yellow" "Blue" "Red"} {
     $mctxt.color add command -label [ tr "${c}Mark" ] -background $c -command [list ::tree::mask::op setColor 1 $move $c]
-    bind $mctxt.color <Control-Button-1> {set ::tree::mask::controlButton 1}
   }
+  bind $mctxt.color <Control-Button-1> {set ::tree::mask::controlButton 1}
   
   menu $mctxt.nag
   $mctxt add cascade -label [tr Nag] -menu $mctxt.nag
