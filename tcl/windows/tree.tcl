@@ -699,7 +699,7 @@ proc ::tree::displayLines { baseNumber moves } {
         $w.f.tl insert end " $firstLine" tagtooltip$i
         ::utils::tooltip::SetTag $w.f.tl $comment tagtooltip$i
         # Actually its impossible to double click tooltips now, so this is unused
-        $w.f.tl tag bind tagtooltip$i <Double-Button-1> "::tree::mask::op addComment $move $w"
+        $w.f.tl tag bind tagtooltip$i <Double-Button-1> "::tree::mask::op addComment 0 $move $w"
       }
     }
     # This line extends tags to marker1,2
@@ -777,7 +777,7 @@ proc ::tree::displayLines { baseNumber moves } {
       set commentLength [string length $comment]
       set firstLine [ lindex [split $comment "\n"] 0 ]
       $w.f.tl insert end "$firstLine\n" tagtooltip$idx
-      $w.f.tl tag bind tagtooltip$idx <Double-Button-1> "::tree::mask::op addComment $maskmove $w"
+      $w.f.tl tag bind tagtooltip$idx <Double-Button-1> "::tree::mask::op addComment 0 $maskmove $w"
       ::utils::tooltip::SetTag $w.f.tl $comment tagtooltip$idx
 
       # Trying to exntend bindings to the markers, doesnt work ???
@@ -1482,18 +1482,28 @@ proc ::tree::mask::save {} {
   ::tree::mask::addRecent $::tree::mask::maskFile
 }
 
-### If move is not in mask already, add it before performing operation S.A
+set ::tree::mask::controlButton 0
 
-set ::tree::mask::opLine 0
+### Check that the position is in the mask , before calling other mask operations
+#   (Marker 1 Marker 2, Color, Nag, Comment Move).
+#   If the control button has been pressed, apply the operation to all previous positions leading to this one.
+#   This is done in backwards order for simplicity (just like the new book tuning add line feature).
+#   Since we are sometimes doing multiple operations, we have to track when to refresh the tree
+#   Most operations no longer refresh the tree themselves, but rely on ::tree::mask::op to do it for them.
+#   The exception is 'addComment', which is never given refresh==1, because addComment sitll refreshes the tree itself.
 
-proc ::tree::mask::op {op move args} {
+proc ::tree::mask::op {op refresh move args} {
   if {$::tree::mask::controlButton} {
     eval ::tree::mask::fillWithLine $op $move $args   
+    ::tree::refresh
   } else {
     if {![::tree::mask::moveExists $move]} {
       ::tree::mask::addToMask $move
     }
     eval $op $move $args
+    if {$refresh} {
+      ::tree::refresh
+    }
   }
   set ::tree::mask::controlButton 0
 }
@@ -1507,7 +1517,7 @@ proc ::tree::mask::contextMenu {win move x y xc yc} {
   }
   
   menu $mctxt
-  $mctxt add command -label [tr AddToMask] -command [list ::tree::mask::addToMask $move]
+  $mctxt add command -label [tr AddToMask] -command [list ::tree::mask::addToMask $move ; ::tree::refresh]
   $mctxt add command -label [tr RemoveFromMask] -command [list ::tree::mask::removeFromMask $move]
   $mctxt add separator
 
@@ -1517,15 +1527,15 @@ proc ::tree::mask::contextMenu {win move x y xc yc} {
     foreach e { Include Exclude MainLine Bookmark White Black NewLine ToBeVerified ToTrain Dubious ToRemove } {
       set i  $::tree::mask::marker2image($e)
 
-      $mctxt.image$j add command -label [ tr $e ] -image $i -compound left -command [list ::tree::mask::op setImage $move $i $j]
+      $mctxt.image$j add command -label [ tr $e ] -image $i -compound left -command [list ::tree::mask::op setImage 1 $move $i $j]
       bind $mctxt.image$j <Control-Button-1> {set ::tree::mask::controlButton 1}
     }
-    $mctxt.image$j add command -label [tr NoMarker] -command [list ::tree::mask::op setImage $move {} $j]
+    $mctxt.image$j add command -label [tr NoMarker] -command [list ::tree::mask::op setImage 1 $move {} $j]
   }
   menu $mctxt.color
   $mctxt add cascade -label [tr ColorMarker] -menu $mctxt.color
   foreach c { "White" "Green" "Yellow" "Blue" "Red"} {
-    $mctxt.color add command -label [ tr "${c}Mark" ] -background $c -command [list ::tree::mask::op setColor $move $c]
+    $mctxt.color add command -label [ tr "${c}Mark" ] -background $c -command [list ::tree::mask::op setColor 1 $move $c]
     bind $mctxt.color <Control-Button-1> {set ::tree::mask::controlButton 1}
   }
   
@@ -1533,11 +1543,11 @@ proc ::tree::mask::contextMenu {win move x y xc yc} {
   $mctxt add cascade -label [tr Nag] -menu $mctxt.nag
 
   foreach nag [ list "!!" " !" "!?" "?!" " ?" "??" " ~" [::tr "None"]  ] {
-    $mctxt.nag add command -label $nag -command [list ::tree::mask::op setNag $move $nag]
+    $mctxt.nag add command -label $nag -command [list ::tree::mask::op setNag 1 $move $nag]
     bind $mctxt.nag <Control-Button-1> {set ::tree::mask::controlButton 1}
   }
   
-  $mctxt add command -label [ tr CommentMove] -command [list ::tree::mask::op addComment $move $win]
+  $mctxt add command -label [ tr CommentMove] -command [list ::tree::mask::op addComment 0 $move $win]
 
   $mctxt add separator
 
@@ -1558,9 +1568,9 @@ proc ::tree::mask::contextMenu {win move x y xc yc} {
     if {$m == "OK"} { set m "O-O" }
     if {$m == "OQ"} { set m "O-O-O" }
     if {$row % 10 == 0} {
-      $mctxt.matchmoves add command -label [::trans $m] -command "::tree::mask::addToMask $m" -columnbreak 1
+      $mctxt.matchmoves add command -label [::trans $m] -command "::tree::mask::addToMask $m ; ::tree::refresh" -columnbreak 1
     } else {
-      $mctxt.matchmoves add command -label [::trans $m] -command "::tree::mask::addToMask $m"
+      $mctxt.matchmoves add command -label [::trans $m] -command "::tree::mask::addToMask $m ; ::tree::refresh"
     }
     incr row
   }
@@ -1587,7 +1597,6 @@ proc ::tree::mask::addToMask { move {fen ""} } {
     lappend moves [list $move {} $::tree::mask::defaultColor {} {} {}]
     set newpos [lreplace $mask($fen) 0 0 $moves]
     set mask($fen) $newpos
-    ::tree::refresh
   }
 }
 
@@ -1681,7 +1690,6 @@ proc ::tree::mask::setColor { move color {fen ""}} {
   set newmove [lreplace [lindex $moves $idxm] 2 2 $color ]
   set moves [lreplace $moves $idxm $idxm $newmove ]
   set mask($fen) [ lreplace $mask($fen) 0 0 $moves ]
-  ::tree::refresh
 }
 
 ################################################################################
@@ -1725,7 +1733,6 @@ proc ::tree::mask::setNag { move nag {fen ""} } {
   set newmove [lreplace [lindex $moves $idxm] 1 1 $nag ]
   set moves [lreplace $moves $idxm $idxm $newmove ]
   set mask($fen) [ lreplace $mask($fen) 0 0 $moves ]
-  ::tree::refresh
 }
 
 ################################################################################
@@ -1816,8 +1823,6 @@ proc ::tree::mask::setImage { move img nmr } {
   set newmove [lreplace [lindex $moves $idxm] $loc $loc $img ]
   set moves [lreplace $moves $idxm $idxm $newmove ]
   set mask($fen) [ lreplace $mask($fen) 0 0 $moves ]
-
-  ::tree::refresh
 }
 
 ################################################################################
@@ -1920,7 +1925,7 @@ proc ::tree::mask::fillWithLine {{op {}} {move {}} {args {}}} {
 	sc_move back
       } else {
 	set ::tree::mask::cacheFenIndex [::tree::mask::toShortFen [sc_pos fen]]
-        eval ::tree::mask::op $op $move $args
+        eval ::tree::mask::op $op 0 $move $args
         if {![sc_move back]} {
           break
         }
@@ -1937,6 +1942,8 @@ proc ::tree::mask::fillWithGame {} {
     tk_messageBox -title "Scid" -type ok -icon warning -message [ tr OpenAMaskFileFirst]
     return
   }
+  # primeWithGame is actually filling the tree cache also, slowing this proc down
+  # though it would be possible to avoid if desired
   ::tree::primeWithGame 1
   set ::tree::mask::dirty 1
 }
