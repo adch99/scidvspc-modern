@@ -930,8 +930,6 @@ $m add command -label OptionsSave -command {
     foreach i {Regular Menu Small Tiny Fixed} {
       puts $optionF "set fontOptions($i) [list $fontOptions($i)]"
     }
-    puts $optionF ""
-    puts $optionF "set glistFields [list $glistFields]"
     foreach type {base book html tex epd stm sso pgn report tablebase1 tablebase2 tablebase3 tablebase4} {
       puts $optionF "set initialDir($type) [list $initialDir($type)]"
     }

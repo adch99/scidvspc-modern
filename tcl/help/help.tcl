@@ -1566,7 +1566,7 @@ set helpTitle(GameList) "Game List window"
 set helpText(GameList) {<h1>The Game List</h1>
 
 <p>The <run ::windows::gamelist::Open><green>Game List</green></run>
-allows easy perusal of all filtered games in the currently open database/PGN file.</p>
+shows all filter games in the currently open database/PGN file.</p>
 <p>Below the Game List are two rows of buttons,
 and at the bottom you'll find the <a Switcher>Database Switcher</a>.</p>
 <p>Clicking a game will select it. Select multiple games using Control+Click and Shift+Click.
@@ -1574,10 +1574,12 @@ Right-clicking game(s) presents a context menu for various actions. Double-click
 <p>Quick searches can be performed by entering text in the combo-box and pressing Enter, or clicking the <b>Filter</b> button.
 Use "+" as a logical AND with the <b>Filter</b> button. For example: "Kasparov+Karpov".
 Similarly, the entry-box allows finding a particular game by number. Both these widgets will load the current game by pressing Control+Enter.</p>
-<p><i>For more info about Searches and Filters, <a Searches>see here</a> or below</i>.</p>
+<p><i>For more info about Searches and Filters, <a Searches>see here</a> or below.
+<br>The order of the Game List fields is only configurable by editing Scid vs. PC's Gui (scid.gui).
+</i></p>
 <h3>Sorting the Game List</h3>
-<p>The database can be <b>permanently sorted</b> by clicking column titles, but doing so is not trivial.
-<b>Sort affects search and tree performance</b>. For more details see <a Sorting>Sorting Database</a>.
+<p>The database can be <b>permanently sorted</b> by clicking column titles.
+Sorting is not undoable, and may affect search and tree performance. For more details see <a Sorting>Sorting Database</a>.
 </p>
 
   <h3><name Del>Filtered and Deleted Games</name></h3>
@@ -1604,26 +1606,26 @@ Similarly, the entry-box allows finding a particular game by number. Both these 
 <li><img tb_gprev> - load previous filter game</li>
 <li><img tb_gnext> - load next filter game</li>
 <li><img tb_glast> - load last filter game</li>
-<li><b>Negate</b> - negate game filter</li>
 <li><b>Reset</b> - resets game filter</li>
+<li><b>Negate</b> - negate game filter</li>
 <li><b>Filter</b> - performs a general filter for entered text</li>
-<li><b>Find</b> - perform a (slow) general find for entered text</li>
+<li><b>Find</b> - (Press 'Enter' in the entrybox) perform a (slow) general find for entered text</li>
 <br>
 <li><b>Current</b> - highlights the current game (if it has not been filtered)</li>
 <li><b>Flag Menubutton</b> - select which User Flag to work with</li>
-<li><b>Compact</b> - perform database compaction.</li>
+<li><b>Compact</b> -  database (game) compaction.</li>
 </ul>
 </p>
 <h3>Other Features</h3>
 <ul>
 <li>Pressing Delete removes selected game(s) from filter</li>
-<li>Control+Delete - Toggles 'Delete' flag.</li>
-<li>Control+a - Selects all visible games</li>
-<li>Control+n - Negates the filter</li>
-<li>Control+F - Resets the filter</li>
-<li>Control+c - Copies game to clipbase</li>
-<li>Control+v - Pastes game from clipbase to current base</li>
-<li>Control+Enter loads selected game</li>
+<li>Control+Delete - Toggle 'Delete' flag.</li>
+<li>Control+a - Select all visible games</li>
+<li>Control+n - Negate the filter</li>
+<li>Control+r - Reset the filter</li>
+<li>Control+c - Copy game to clipbase</li>
+<li>Control+v - Paste game from clipbase to current base</li>
+<li>Control+Enter load selected game</li>
 <br>
 <li>Resize column widths by dragging the column edge.</li>
 <li>Drag and Drop files in the switcher (from Windows/KDE/Gnome).</li>
@@ -1644,7 +1646,7 @@ Similarly, the entry-box allows finding a particular game by number. Both these 
 <p><i>The board size can be resized by Control+Wheelmouse or Control+Shift+Left/Right.</i></p>
   
 
-  <p><footer>Updated: Scid vs. PC 4.13, July 2014</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.14, March 2015</footer></p>
 }
 
 

@@ -500,12 +500,6 @@ set glistSize 15
 set glexportDefault "g6: w13 W4  b13 B4  r3:m2 y4 s11 o4"
 set glexport $glexportDefault
 
-# glistSelectPly: The number of moves to display in a game list entry
-# when that entry is selected with button-2 to shoe the first moves
-# of a game. E.g., a value of 4 might give: "1.e4 e5 2.Nf3 Nc6".
-set glistSelectPly 80
-
-
 # Default window locations:
 foreach i {. .main .pgnWin .helpWin .crosstabWin .treeWin .commentWin .glist \
       .playerInfoWin .baseWin .treeBest .tourney .finder \

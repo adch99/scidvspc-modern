@@ -1,40 +1,15 @@
 ### gamelist.tcl
-
+#
 # 27/06/2009
 # Rewritten to use the ttk::treeview widget (man ttk_treeview) by Steven Atkinson
 
-set ::windows::gamelist::isOpen 0
-set glstart 1
-set ::windows::gamelist::findtext {}
-set ::windows::gamelist::goto {}
+### glistFields: code  name  anchor default-width
 
-### This trace messes up some other widgets i think S.A.
-# trace variable ::windows::gamelist::goto w {::utils::validate::Regexp {^[0-9]*$}}
-
-# glistFields: Layout of the GameList window fields.
-
-# b:  Black player name.
-# B:  Black Elo. Prints in width of 4, ignoring specified width.
-# e:  Event name.
-# f:  Game number, filtered (e.g. 1 = first game in filter).
-# g:  Game number, actual (ignoring filter).
-# m:  Number of moves. Prints "##" if width < 3 and numMoves > 99.
-# M:  Final position material, e.g. "r1:r" for Rook+Pawn vs Rook.
-# n:  Round name.
-# o:  ECO code.
-# r:  Result. Prints as 1 byte (1/0/=*) or as 3 bytes (1-0, etc).
-# s:  Site name.
-# S:  Start position flag. Prints "S" or " " (1 byte) ignoring width.
-# w:  White player name.
-# W:  White Elo. Prints in width of 4, ignoring specified width.
-# y:  Year. Prints in width of 4, ignoring specified width.
-
-#    Note that the "g" (game number) field MUST appear somewhere. (Mebbee ?)
-#    The field order is how they are appear in the widget.
-#    See the comments at the start of the function "PrintGameInfo" in
-#    src/index.cpp for a list of available field codes.
-
-# code  name  anchor  width
+#  The game list fields are not user configurable except by altering it here.
+#  Field order may be changed by moving their line up or down; and/or deleting/adding lines.
+#  The "g" (game number) field MUST appear somewhere. 
+#  The four optional fields (at bottom), may be enabled by removing the leading '#'
+#  These fields are also handled in PrintGameInfo (src/index.cpp)
 
 set glistFields {
   g Number	e 7
@@ -55,18 +30,49 @@ set glistFields {
   o ECO		e 5
   O Opening	w 6
   U Flags	e 3
-  S Start	e 3
 }
+
+### Optional fields
+
+# append glistFields {S Start       e  3}
+# append glistFields {c Country     e  3}
+# append glistFields {E EventDate   w  7}
+# append glistFields {F EndMaterial e  7}
+
+### Index
+# b:  Black player name
+# B:  Black Elo. Prints in width of 4, ignoring specified width
+# d:  Game date
+# e:  Event name
+# f:  Game number, filtered (e.g. 1 = first game in filter)
+# g:  Game number, actual (ignoring filter)
+# m:  Number of moves. Prints "##" if width < 3 and numMoves > 99
+# M:  Final position material, e.g. "r1:r" for Rook+Pawn vs Rook
+# n:  Round name
+# o:  ECO code
+# r:  Result. Prints as 1 byte (1/0/=*) or as 3 bytes (1-0, etc)
+# s:  Site name
+# w:  White player name
+# W:  White Elo. Prints in width of 4, ignoring specified width
+# y:  Year. Prints in width of 4, ignoring specified width
+# ----------------------
+# S:  Start position flag. Prints "S" or " " (1 byte) ignoring width
+# c:  Country (last 3 chars of Site Name)
+# E:  Date of Event (stored relative to)
+# F:  Difference of material at game end
+
+### end glistFields configuration
+
+set ::windows::gamelist::isOpen 0
+set glstart 1
+set ::windows::gamelist::findtext {}
+set ::windows::gamelist::goto {}
+
+### This trace messes up some other widgets i think S.A.
+# trace variable ::windows::gamelist::goto w {::utils::validate::Regexp {^[0-9]*$}}
 
 set glistCodes {} 
 set glistNames {}
-
-### If you wish to enable these fields, please make sure a default field width is set
-###    and also alter/remove "::windows::gamelist::widths" in your config file.
-# append glistFields { c Country   e  3 } ; # Country (last 3 chars of Site Name)
-# append glistFields { E EventDate w  7 } ; # Event Date
-# append glistFields { F EndMaterial e  7 } ; # Final position material
-
 
 foreach {code title anchor null} $glistFields {
   # Unusual glistCodes format is needed for [sc_game list ...]
@@ -286,9 +292,10 @@ proc ::windows::gamelist::Open {} {
   ttk::treeview $w.tree -columns $glistNames -show headings -xscroll "$w.hsb set"
     # -yscroll "$w.vsb set" -xscroll "$w.hsb set"
 
+  ### If glistField and ::windows::gamelist::widths mismatch, then reinitialise field widths
 
-  if { $::windows::gamelist::widths == {} } {
-    # initialise field widths
+  if { [expr {[llength $glistFields] / 4}] != [llength $::windows::gamelist::widths] } {
+    set ::windows::gamelist::widths {}
     set fontwidth [font measure [ttk::style lookup [$w.tree cget -style] -font] "X"]
     foreach {nulla nullb nullc i} $glistFields {
 	lappend ::windows::gamelist::widths [expr $fontwidth * $i]
