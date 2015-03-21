@@ -1620,7 +1620,6 @@ proc ::tree::mask::removeFromMask { move {fen ""} } {
   if { $idxm != -1} {
     set moves [lreplace $moves $idxm $idxm]
     lset mask($fen) 0 $moves
-    ::tree::refresh
   }
 
   # if the position has no move left and no comment, unset it
