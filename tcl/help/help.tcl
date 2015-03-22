@@ -1575,7 +1575,7 @@ Right-clicking game(s) presents a context menu for various actions. Double-click
 Use "+" as a logical AND with the <b>Filter</b> button. For example: "Kasparov+Karpov".
 Similarly, the entry-box allows finding a particular game by number. Both these widgets will load the current game by pressing Control+Enter.</p>
 <p><i>For more info about Searches and Filters, <a Searches>see here</a> or below.
-<br>The order of the Game List fields is only configurable by editing Scid vs. PC's Gui (scid.gui).
+<br>The order of the Game List fields is only configurable by editing Scid vs. PC's Gui (scid.gui/glistFields)
 </i></p>
 <h3>Sorting the Game List</h3>
 <p>The database can be <b>permanently sorted</b> by clicking column titles.

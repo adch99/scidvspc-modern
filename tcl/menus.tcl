@@ -1096,8 +1096,9 @@ $m add checkbutton -label OptionsFicsNoRes    -variable ::fics::no_results
 $m add checkbutton -label OptionsFicsNoReq    -variable ::fics::no_requests
 
 menu $m.size -tearoff 1
+if {$::fics::size > 5} {set ::fics::size 3} ; # ::fics::size used to be 25 to 50, but now is a radiobutton
 foreach i {1 2 3 4 5} {
-  $m.size add command -label $i -command "::fics::changeScaleSize $i"
+  $m.size add radiobutton -label $i -value $i -variable ::fics::size -command ::fics::changeScaleSize
 }
 
 set m .menu.options.export

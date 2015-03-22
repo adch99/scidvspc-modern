@@ -553,11 +553,11 @@ namespace eval fics {
     }
   }
 
-  proc changeScaleSize {size} {
-      set ::fics::size [expr {$size * 5 + 20}]
+  proc changeScaleSize {} {
+      set size [expr {$::fics::size * 5 + 20}]
       foreach w [winfo children .fics.bottom] {
         if {[string match .fics.bottom.game* $w]} {
-	  ::board::resize $w.bd $::fics::size
+	  ::board::resize $w.bd $size
         }
       }
   }
@@ -1432,7 +1432,7 @@ namespace eval fics {
         bind .fics <Destroy> ::fics::close
       }
       frame $w.bottom.game$game
-      ::board::new $w.bottom.game$game.bd $::fics::size 1
+      ::board::new $w.bottom.game$game.bd [expr {$::fics::size * 5 + 20}] 1
       # At bottom we have White and game number
       # (note whiteElo, blackElo labels are not packed, only used for data should we load game
       # data for these labels is read next line from fics
@@ -1749,9 +1749,6 @@ namespace eval fics {
     }
   }
 
-  ################################################################################
-  #
-  ################################################################################
   proc removeSeek {line} {
     global ::fics::seeklist
     foreach l $line {
@@ -1781,9 +1778,7 @@ namespace eval fics {
       
     }
   }
-  ################################################################################
-  #
-  ################################################################################
+
   proc parseStyle12 {line} {
 
     # <12> r-----k- p----ppp ---rq--- --R-p--- -------- ------PP --R--P-- ------K-
@@ -2098,7 +2093,6 @@ namespace eval fics {
       }
     }
   }
-
 
   proc parseSeek {line} {
     array set seekelt {}

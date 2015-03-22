@@ -396,7 +396,7 @@ set whiteborder {#000000}
 set blackborder {#ffffff}
 set highcolor   {#b0d0e0}
 set bestcolor   {#bebebe}
-set bgcolor	grey20
+set bgcolor     grey20
 set progcolor   rosybrown
 set buttoncolor {#b0c0d0}
 set borderwidth 1
@@ -457,17 +457,17 @@ proc initFICSDefaults {} {
   set ::fics::findopponent(rating2)  1500
   set ::fics::findopponent(manual)   manual
   set ::fics::findopponent(formula)  ""
-  set ::fics::consolebg	grey35
-  set ::fics::consolefg	LimeGreen
-  set ::fics::chanoff	1
-  set ::fics::shouts	1
+  set ::fics::consolebg grey35
+  set ::fics::consolefg LimeGreen
+  set ::fics::chanoff 1
+  set ::fics::shouts 1
   set ::fics::server_ip   0.0.0.0
   set ::fics::autopromote 0
   set ::fics::autoraise 1
-  set ::fics::size        30
-  set ::fics::sound	0
-  set ::fics::no_results	0
-  set ::fics::no_requests	0
+  set ::fics::size 2
+  set ::fics::sound 0
+  set ::fics::no_results 0
+  set ::fics::no_requests 0
   # these are duplicated in fics::editInitCommands
   set ::fics::init_commands [list \
     {set gin  0} \
