@@ -281,7 +281,9 @@ namespace eval fics {
     frame $w.console
     frame $w.command
     frame $w.bottom 
-    pack $w.bottom  -side bottom
+    if {$::fics::show_buttons} {
+      pack $w.bottom  -side bottom
+    }
     pack $w.command -fill x -side bottom
     # pack console last to allow compressing
     pack $w.console  -fill both -expand 1 -side top
@@ -346,6 +348,7 @@ namespace eval fics {
       $w.console.text insert 0.0 \"FICS ($::scidName $::scidVersion)\n\"
     "
     button $w.command.next -textvar tr(Next) -state disabled -command {::fics::writechan next echo}
+    button $w.command.hide -image bookmark_down -command ::fics::togglebuttons
 
     bind $w <Control-p> ::pgn::Open
     bind $w <Prior> "$w.console.text yview scroll -1 page"
@@ -373,7 +376,7 @@ namespace eval fics {
 
     pack $w.command.entry -side left -fill x -expand 1 -padx 3 -pady 2
     pack $w.command.find  -side left                   -padx 3 -pady 2
-    pack $w.command.next $w.command.clear $w.command.send -side right -padx 3 -pady 2
+    pack $w.command.hide $w.command.next $w.command.clear $w.command.send -side right -padx 3 -pady 2
     focus $w.command.entry
 
     # Gameclocks are used, but never packed in fics now
@@ -2513,6 +2516,18 @@ set seek 0"
     }
     wm state $w normal
     update
+  }
+
+  proc togglebuttons {} {
+    set w .fics
+    set ::fics::show_buttons [expr {1 - $::fics::show_buttons}]
+    if {$::fics::show_buttons} {
+      pack $w.bottom  -side bottom -before $w.command
+      $w.command.hide configure -image bookmark_down
+    } else {
+      pack forget $w.bottom
+      $w.command.hide configure -image bookmark_up
+    }
   }
 
 }

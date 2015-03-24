@@ -474,6 +474,7 @@ proc initFICSDefaults {} {
     {set echo 1} \
     {set seek 0} \
   ]
+  set ::fics::show_buttons 1
 }
 
 initFICSDefaults
@@ -1732,6 +1733,7 @@ proc ::splash::make {} {
        -font font_Regular -wrap word \
       -yscrollcommand [list $w.ybar set] -setgrid 1
   scrollbar $w.ybar -command [list $w.t yview]
+  # Hmm - translations aren't set up yet
   checkbutton $w.auto -text "Keep open after startup" \
       -variable ::splash::keepopen -font font_Small -pady 5 -padx 5
   button $w.dismiss -text Close -width 8 -command [list wm withdraw $w] \
