@@ -4,7 +4,7 @@
 # Instructions for adding a new language:
 #
 # (1) Choose a letter code for the language. Currently assigned codes are:
-#      E=English, D=Deutsch, F=Francais, S=Spanish, B=Brasil Portuguese,
+#      E=English, D=Deutsch, F=Francais, S=Spanish, B=Brasil Portuguese, U=Portuguese
 #      P=Polish, N=Nederlands, W=Swedish, O=Norsk, C=Czech, H=Hungarian,
 #      Y=Serbian.
 #

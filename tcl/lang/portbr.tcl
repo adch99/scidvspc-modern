@@ -973,7 +973,7 @@ translate B GlistFindText {Encontrar texto}
 translate B GlistMoveField {Mover}
 translate B GlistEditField {Configurar}
 translate B GlistAddField {Adicionar}
-translate B GlistDeleteField {Remover}
+translate B GlistDeleteField {Excluir}
 translate B GlistColor {Cor}
 # ====== TODO To be translated ======
 translate B GlistSort {Sort database}

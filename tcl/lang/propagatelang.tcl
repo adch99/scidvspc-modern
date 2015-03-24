@@ -26,6 +26,7 @@ array set encodings {
   norsk iso8859-1
   polish utf-8
   portbr iso8859-1
+  port iso8859-1
   russian utf-8
   serbian iso8859-2
   spanish iso8859-1
@@ -43,6 +44,7 @@ array set codes {
   norsk O
   polish P
   portbr B
+  port U
   russian R
   serbian Y
   spanish S
@@ -51,7 +53,7 @@ array set codes {
 }
 
 set languages {czech deutsch francais hungary italian nederlan norsk polish
-  portbr russian spanish swedish greek serbian
+  portbr port russian spanish swedish greek serbian
 }
 
 ################################################################################

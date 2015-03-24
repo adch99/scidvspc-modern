@@ -62,6 +62,7 @@
 #			   and one other language
 #			<language>
 #				portbr		-- Brazilian Portuguese
+#				port		-- Portuguese
 #				czech		-- Czech
 #				deutsch		-- German
 #				english		-- English only
@@ -270,7 +271,7 @@ SCID_TK_OBJS = \
 #       can reduce the size of the Scid program by only specifying
 #       the languages you want supported.
 
-LANGUAGES = tcl\lang\deutsch.tcl tcl\lang\francais.tcl tcl\lang\italian.tcl tcl\lang\nederlan.tcl tcl\lang\spanish.tcl tcl\lang\portbr.tcl tcl\lang\swedish.tcl tcl\lang\norsk.tcl tcl\lang\polish.tcl tcl\lang\czech.tcl tcl\lang\hungary.tcl tcl\lang\serbian.tcl
+LANGUAGES = tcl\lang\deutsch.tcl tcl\lang\francais.tcl tcl\lang\italian.tcl tcl\lang\nederlan.tcl tcl\lang\spanish.tcl tcl\lang\portbr.tcl tcl\lang\port.tcl tcl\lang\swedish.tcl tcl\lang\norsk.tcl tcl\lang\polish.tcl tcl\lang\czech.tcl tcl\lang\hungary.tcl tcl\lang\serbian.tcl
 	
 ##	SCID_TCLS: Setup the .tcl files for scid
 
