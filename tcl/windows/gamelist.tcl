@@ -362,20 +362,14 @@ proc ::windows::gamelist::Open {} {
 
   set font [ttk::style lookup [$w.tree cget -style] -font]
   foreach {code col anchor null} $glistFields width $::windows::gamelist::widths {
-      if {[info exists ::tr(Glist$col)]} {
-        set name $::tr(Glist$col)
-      } else {
-        set name $col
-      }
-
       # No sort implemented for these columns
       if {[lsearch {Number Opening Flags Annos Start} $col] == -1} {
-	$w.tree heading $col -text  $name  -command [list SortBy $w.tree $col]
-      } else {
-	$w.tree heading $col -text  $name
-      }
+	$w.tree heading $col -command [list SortBy $w.tree $col]
+      } 
       $w.tree column  $col -width $width -anchor $anchor -stretch 0
   }
+
+  ::windows::gamelist::setColumnTitles
 
   set glistSortedBy {}
   set glSortReversed 0
@@ -640,6 +634,17 @@ proc ::windows::gamelist::Open {} {
   ::createToplevelFinalize $w
 
   bind $w <Configure> {::windows::gamelist::Configure %W }
+}
+
+proc ::windows::gamelist::setColumnTitles {} {
+  foreach {code col anchor null} $::glistFields {
+    if {[info exists ::tr(Glist$col)]} {
+      set name $::tr(Glist$col)
+    } else {
+      set name $col
+    }
+    .glistWin.tree heading $col -text $name
+  }
 }
 
 proc ::windows::gamelist::Popup {w x y X Y} {

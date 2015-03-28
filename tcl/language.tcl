@@ -228,6 +228,9 @@ proc setLanguage {{lang ""}} {
   # If using Tk, translate all menus:
   if {! [catch {winfo exists .}]} {
     setLanguageMenus $lang
+    if {[winfo exists .glistWin]} {
+      ::windows::gamelist::setColumnTitles
+    }
   }
 
   foreach i [array names ::tr] {
