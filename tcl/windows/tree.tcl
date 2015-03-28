@@ -1914,6 +1914,17 @@ proc ::tree::mask::fillWithLine {{op {}} {move {}} {args {}}} {
     return
   }
 
+  if {$op == ""} {
+    set reply [tk_dialog .booktune $::tr(AddLine) \
+      {Add all/white/black moves (to current position) to mask ?} \
+      question 0 \
+      {  All  } $::tr(White) $::tr(Black) $::tr(Cancel) ]
+
+    if {$reply == 3} {return}
+    if {$reply == 1} {set reply white}
+    if {$reply == 2} {set reply black}
+  }
+
   sc_game push copy
 
   while {1} {
@@ -1923,7 +1934,9 @@ proc ::tree::mask::fillWithLine {{op {}} {move {}} {args {}}} {
         }
 	set fen [sc_pos fen]
 	sc_move forward
-	::tree::mask::feedMask $fen
+	if {$reply != [sc_pos side]} {
+	    ::tree::mask::feedMask $fen
+	}
 	sc_move back
       } else {
 	set ::tree::mask::cacheFenIndex [::tree::mask::toShortFen [sc_pos fen]]
