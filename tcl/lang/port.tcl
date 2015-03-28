@@ -1,7 +1,7 @@
 # port.tcl:
 # Scid in Portuguese.
 # Translated by R. Silva (martinus at FICS)
-# Last edited 2015-03-23
+# Last edited 2015-03-27
 
 addLanguage U {Portuguese} 0 ;#iso8859-1
 
@@ -303,12 +303,12 @@ menuText U OptionsToolbar "Barra de Ferramentas da Janela Principal" 12 \
 menuText U OptionsECO "Abrir ficheiro ECO..." 7 {Carrega o arquivo com a classificacao ECO}
 menuText U OptionsSpell "Abrir ficheiro de verificação ortográfica..." 6 \
   {Carrega o arquivo de verificação ortografica do Scid}
-menuText U OptionsTable "Diretório de tabelas de base..." 0 \
+menuText U OptionsTable "Pasta das Tabelas de Finais..." 0 \
   {Selecione um arquivo de tabela de base; todas as tabelas nesse diretorio serao usadas}
 menuText U OptionsRecent "Arquivos recentes..." 0 \
   {Change the number of recent files displayed in the File menu} ;# ***
 menuText U OptionsBooksDir "Pasta dos Livros..." 0 {Sets the opening books directory}
-menuText U OptionsTacticsBasesDir "Pasta dos arquivos..." 0 {Sets the tactics (training) bases directory}
+menuText U OptionsTacticsBasesDir "Pasta dos Arquivos..." 0 {Sets the tactics (training) bases directory}
 menuText U OptionsSave "Guardar Configuração" 0 \
   "Guarda a configuração no arquivo $::optionsFile"
 menuText U OptionsAutoSave "Guardar Opções ao sair" 0 \
@@ -335,9 +335,9 @@ menuText U GInfoMarks "Mostra setas e casas coloridas" 7
 menuText U GInfoWrap "Quebra de linhas longas" 0
 menuText U GInfoFullComment "Mostrar comentário completo" 8
 menuText U GInfoPhotos "Mostrar Fotos" 5 ;# ***
-menuText U GInfoTBNothing "Tabelas de Base: nada" 12
+menuText U GInfoTBNothing "Tabelas de Finais: nada" 12
 menuText U GInfoTBResult "Tabelas de Base: apenas resultado" 12
-menuText U GInfoTBAll "Tabelas de Base: resultado e melhores movimentos" 19
+menuText U GInfoTBAll "Tabelas de Finais: resultado e melhores movimentos" 19
 menuText U GInfoDelete "Recuperar este jogo" 0
 menuText U GInfoMark "Desmarcar este jogo" 0
 menuText U GInfoInformant "Configurar valores de Avaliação" 0
@@ -349,7 +349,7 @@ translate U TrialMode {Modo de Teste}
 # General buttons:
 translate U Apply {Aplicar}
 translate U Back {Voltar}
-translate U Browse {Examinar} ;# ***
+translate U Browse {Conectar} ;# ***
 translate U Cancel {Cancelar}
 translate U Continue {Continuar}
 translate U Clear {Limpar}
@@ -367,7 +367,7 @@ translate U MergeGame {Juntar jogo}
 translate U MergeGames {Juntar jogos}
 translate U Preview {Visualização}
 translate U Revert {Reverter}
-translate U Save {Salvar}
+translate U Save {Guardar}
 translate U Search {Pesquisar}
 translate U Stop {Parar}
 translate U Store {Guardar}
@@ -407,8 +407,7 @@ translate U Event {Evento}
 translate U Site {Lugar}
 translate U Country {País}
 translate U IgnoreColors {Ignorar cores}
-# ====== TODO To be translated ======
-translate U MatchEnd {End pos only}
+translate U MatchEnd {Só posição final}
 translate U Date {Data}
 translate U EventDate {Evento data}
 translate U Decade {Década} ;# ***
@@ -434,7 +433,7 @@ translate U allGames {todos os jogos}
 translate U empty {vazio}
 translate U clipbase {base de trabalho}
 translate U score {Pontuação}
-translate U Start {Posição}
+translate U Start {Ativar}
 translate U StartPos {Posição Inicial}
 translate U Total {Total}
 translate U readonly {apenas leitura}
@@ -514,11 +513,10 @@ menuText U TreeMaskOpen "Abrir" 0 {Abrir máscara}
 menuText U TreeMaskOpenRecent "Abrir recente" 0 {Abre máscara recente}
 menuText U TreeMaskSave "Salvar" 0 {Salva máscara}
 menuText U TreeMaskClose "Fechar" 0 {Fecha máscara}
-# ====== TODO To be translated ======
-menuText U TreeMaskFillWithLine "Fill with line" 0 {Fill mask with all previous moves}
+menuText U TreeMaskFillWithLine "Preencher com variante" 0 {Fill mask with all previous moves}
 menuText U TreeMaskFillWithGame "Preencher com jogo" 0 {Preenche máscara com jogo}
 menuText U TreeMaskFillWithBase "Preencher com base" 0 {Preenche a máscara com todos os jogos da base}
-menuText U TreeMaskInfo "Info" 0 {Mostrar estatisticas para a máscara corrente}
+menuText U TreeMaskInfo "Informação da máscara" 0 {Mostrar estatisticas para a máscara corrente}
 menuText U TreeMaskDisplay "Mostrar mapa da máscara" 0 {Mostra os dados da máscara em forma de árvore}
 menuText U TreeMaskSearch "Pesquisar" 0 {Pesquisa na máscara corrente}
 menuText U TreeSort "Ordenar" 0
@@ -536,8 +534,7 @@ menuText U TreeOptTraining "Treinamento" 0 \
   {Liga/Desliga o modo treinamento na arvore}
 menuText U TreeOptAutosave "Salvar automaticamente arquivo de cache" 0 \
   {Salvar automaticamente o arquivo de cache quando fechar a janela de arvore}
-# ====== TODO To be translated ======
-menuText U TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
+menuText U TreeOptAutomask "Abrir máscara automaticamente" 0 "Auto-Load most recent mask with a tree open."
 menuText U TreeHelp "Ajuda" 0
 menuText U TreeHelpTree "Ajuda para árvore" 0
 menuText U TreeHelpIndex "Índice da Ajuda" 0
@@ -555,7 +552,7 @@ translate U TreeAdjust {Ajustar Filtro}
 translate U TreeTitleRow \
   {    Move      Frequency    Score  AvElo Perf AvYear Draws ECO}
 translate U TreeTotal {TOTAL}
-translate U DoYouWantToSaveFirst {Quer salvar primeiro?}
+translate U DoYouWantToSaveFirst {Quer guardar primeiro?}
 translate U AddToMask {Adicionar à máscara}
 translate U RemoveFromMask {Remover da máscara}
 translate U AddThisMoveToMask {Adicionar este movimento à máscara}
@@ -680,15 +677,14 @@ translate U AnnotateWhite {Apenas para movimentos das Brancas}
 translate U AnnotateBlack {Apenas para movimentos das Pretas}
 translate U AnnotateNotBest {Quando o movimento jogado não for o melhor}
 translate U AnnotateBlundersOnly {Quando a jogada é um erro evidente}
-# ====== TODO To be translated ======
-translate U BlundersNotBest {Blunders/Not Best}
+translate U BlundersNotBest {Erros/Lances inferiores}
 translate U AnnotateBlundersOnlyScoreChange {Nos erros anotar a desvalorização da posição em pontos: }
 translate U AnnotateTitle {Configurar Anotação}
 translate U AnnotateWith {Que se Move}
 translate U AnnotateWhichMoves {Com anotações}
 translate U AnnotateComment {Adicionar anotador aos comentários}
 translate U BlundersThreshold {Limiar}
-translate U CutOff {Não anotar}
+translate U CutOff {Não anotar:}
 translate U LowPriority {Baixa prioridade no CPU} ;# ***
 translate U LogEngines {Tamanho do Registo}
 translate U LogName {Adicionar Nome}
@@ -706,10 +702,8 @@ translate U Book {Livro}
 
 # Analysis Engine open dialog:
 translate U EngineList {Lista de Programas de Análise}
-# ====== TODO To be translated ======
-translate U EngineKey {Key}
-# ====== TODO To be translated ======
-translate U EngineType {Type}
+translate U EngineKey {Chave}
+translate U EngineType {Tipo}
 translate U EngineName {Nome}
 translate U EngineCmd {Comando}
 translate U EngineArgs {Parametros}
@@ -739,7 +733,7 @@ menuText U PgnOptIndentC "Alinhar comentários" 0
 menuText U PgnOptIndentV "Alinhar variantes" 7
 menuText U PgnOptColumn "Estilo Coluna (um movimento por linha)" 0
 menuText U PgnOptSpace "Espaço após o número do movimento" 0
-menuText U PgnOptStripMarks "Strip out colored square/arrow codes" 1 ;# ***
+menuText U PgnOptStripMarks "Apagar casas coloridas/setas de movimento" 1 ;# ***
 menuText U PgnOptChess "Xadrez peças" 0
 menuText U PgnOptScrollbar "Barra de deslizamento" 0
 menuText U PgnOptBoldMainLine "Usar texto a cheio para a linha principal de jogo" 4 ;# ***
@@ -818,7 +812,7 @@ menuText U OprepHelpIndex "Índice da Ajuda" 0
 
 # Header search:
 translate U HeaderSearch {Busca por cabecalho}
-translate U EndSideToMove {Lado a mover no fim da partida} ;# ***
+translate U EndSideToMove {Quem move na posição final} ;# ***
 translate U GamesWithNoECO {Jogos sem ECO?}
 translate U GameLength {Tamanho do jogo}
 translate U FindGamesWith {Encontrar jogos com}
@@ -827,7 +821,7 @@ translate U Promotions {Promoções}
 translate U Comments {Comentários}
 translate U Variations {Variantes}
 translate U Annotations {Anotações}
-translate U DeleteFlag {Apagar/Recuperar Partidas}
+translate U DeleteFlag {Apagar/Recuperar Jogos}
 translate U WhiteOpFlag {Abertura Brancas}
 translate U BlackOpFlag {Abertura Pretas}
 translate U MiddlegameFlag {Meio-jogo}
@@ -871,7 +865,7 @@ translate U GlistFindText {Encontrar texto}
 translate U GlistMoveField {Mover}
 translate U GlistEditField {Configurar}
 translate U GlistAddField {Adicionar}
-translate U GlistDeleteField {Excluir}
+translate U GlistDeleteField {Apagar}
 translate U GlistColor {Cor}
 translate U GlistSort {Ordenar base}
 translate U GlistRemoveThisGameFromFilter  {Remover}
@@ -914,10 +908,10 @@ translate U Events {Eventos}
 translate U Sites {Lugares}
 translate U Rounds {Rodadas}
 translate U DatabaseOps {Operações na Base de Dados}
-translate U ReclassifyGames {Jogos classificados por ECO}
+translate U ReclassifyGames {Classificar jogos por ECO}
 translate U CompactDatabase {Compactar Base}
 translate U SortDatabase {Ordenar Base}
-translate U AddEloRatings {Adicionar ratings}
+translate U AddEloRatings {Adicionar Elo}
 translate U AutoloadGame {Carregar autom. o jogo n.º}
 translate U StripTags {Apagar etiquetas PGN} ;# ***
 translate U StripTag {Apagar etiqueta} ;# ***
@@ -970,7 +964,7 @@ Insert/remove arrow: Right-click two squares.
 translate U GoodMove {Bom lance} ;# ***
 translate U PoorMove {Mau lance} ;# ***
 translate U ExcellentMove {Lance excelente} ;# ***
-translate U Blunder {Grande erro} ;# ***
+translate U Blunder {Grande erro:} ;# ***
 translate U InterestingMove {Lance interessante} ;# ***
 translate U DubiousMove {Lance duvidoso} ;# ***
 translate U WhiteDecisiveAdvantage {Vantagem decisiva das brancas} ;# ***
@@ -1003,7 +997,7 @@ translate U Material {Material}
 translate U Patterns {Padrões}
 translate U Zero {Zero}
 translate U Any {Qualquer}
-translate U CurrentBoard {Tabuleiro corrente}
+translate U CurrentBoard {Tabuleiro atual}
 translate U CommonEndings {Finais comuns}
 translate U CommonPatterns {Padrões comuns}
 translate U MaterialDiff {Diferença de Material}
@@ -1221,7 +1215,7 @@ translate U TwinsPlayersPrefix {Primeiras 4 letras apenas}
 translate U TwinsWhen {Quando apagar duplicados}
 translate U TwinsSkipShort {Ignorar todos os jogos com menos de 5 movimentos?}
 translate U TwinsUndelete {Recuperar todos os jogos antes?}
-translate U TwinsSetFilter {Definir filtro para todas as duplicadas apagadas?}
+translate U TwinsSetFilter {Definir filtro para todos os duplicados apagados?}
 translate U TwinsComments {Manter sempre os jogos com comentários?}
 translate U TwinsVars {Manter sempre os jogos com variantes?}
 translate U TwinsDeleteWhich {Que jogo apagar:} ;# ***
@@ -1244,8 +1238,8 @@ translate U CheckSelectFilterGames {Apenas jogos no filtro}
 translate U Classify {Classificar}
 translate U ClassifyWhich {Que jogos devem ser classificados por ECO}
 translate U ClassifyAll {Todos os Jogos (substituir códigos ECO antigos)}
-translate U ClassifyYear {Todos os jogos do ultimo ano}
-translate U ClassifyMonth {Todos os jogos do ultimo mês}
+translate U ClassifyYear {Todos os jogos do último ano}
+translate U ClassifyMonth {Todos os jogos do último mês}
 translate U ClassifyNew {Somente jogos ainda sem código ECO}
 translate U ClassifyCodes {Códigos ECO a serem usados}
 translate U ClassifyBasic {Códigos Basicos apenas ("B12", ...)}
@@ -1387,8 +1381,8 @@ translate U Restart {Recomeçar}
 translate U OutOfOpening {Fora da abertura}
 translate U NotFollowedLine {Não seguiu a linha}
 translate U DoYouWantContinue {Deseja continuar?}
-translate U CoachIsWatching {O Treinador Observa}
-translate U Ponder {Análise Contínua}
+translate U CoachIsWatching {O Treinador observa}
+translate U Ponder {Análise contínua}
 translate U LimitELO {Reduzir a força ELO}
 translate U DubiousMovePlayedTakeBack {O seu lance é duvidoso, quer voltar atrás?}
 translate U WeakMovePlayedTakeBack {O seu lance é fraco, quer voltar atrás?}
@@ -1443,16 +1437,12 @@ translate U FixedDepth {Fixar profundidade de análise}
 translate U Nodes {Posições} 
 translate U Depth {Profundidade}
 translate U Time {Tempo} 
-translate U SecondsPerMove {Segundos para cada movimento}
-# ====== TODO To be translated ======
-translate U DepthPerMove {Depth per move}
-# ====== TODO To be translated ======
-translate U MoveControl {Move Control}
+translate U SecondsPerMove {Segundos por movimento}
+translate U DepthPerMove {Profundidade por movimento}
+translate U MoveControl {Analisar por}
 translate U TimeLabel {Tempo por movimento}
-# ====== TODO To be translated ======
-translate U AddVars {Add Variations}
-# ====== TODO To be translated ======
-translate U AddScores {Add Score}
+translate U AddVars {Escrever Variantes}
+translate U AddScores {Escrever pontos}
 translate U Engine {Programa}
 translate U TimeMode {Gestão do tempo}
 translate U TimeBonus {Tempo + bónus}
@@ -1483,7 +1473,7 @@ translate U Calvar {Cálculo de variantes}
 translate U ConfigureCalvar {Configuração}
 translate U Reti {Reti}
 translate U English {Inglesa}
-translate U d4Nf6Miscellaneous {1.d4 Nf6 Diversas}
+translate U d4Nf6Miscellaneous {Diversas}
 translate U Trompowsky {Trompowsky}
 translate U Budapest {Budapeste}
 translate U OldIndian {Índia Velha}
@@ -1567,13 +1557,12 @@ translate U FICSSend {Enviar}
 translate U FICSConnect {Ligar}
 translate U FICSShouts {Gritos}
 translate U FICSTells {Falas}
-translate U FICSOpponent {Info Adversário}
-translate U FICSInfo {Informação}
+translate U FICSOpponent {Info. Adversário}
+translate U FICSInfo {Info. Jogador}
 translate U FICSDraw {Oferecer Empate}
 translate U FICSRematch {Desforra}
 translate U FICSQuit {Sair do FICS}
-# ====== TODO To be translated ======
-translate U FICSCensor {Censor}
+translate U FICSCensor {Censurar}
 
 translate U CCDlgConfigureWindowTitle {Configurar Xadrez por correspondencia}
 translate U CCDlgCGeneraloptions {Opções Gerais}
@@ -1624,7 +1613,7 @@ translate U CCSendBtn {Enviar movimento}
 translate U CCEmptyBtn {Esvaziar caixas de entrada e saída}
 translate U CCHelpBtn {Ajuda sobre icones e indicadores de estado.\nPara ajuda geral, use a tecla F1!}
 translate U CCDlgServerName {Nome do Servidor:}
-translate U CCDlgLoginName  {Login Name:}
+translate U CCDlgLoginName  {Nome de Utilizador:}
 translate U CCDlgPassword   {Senha:}
 translate U CCDlgURL        {Xfcc-URL:}
 translate U CCDlgRatingType {Tipo de Rating:}
@@ -1636,14 +1625,14 @@ translate U CCOrderClassicTxt {Local, Evento, Rodada, Resultado, Branca, Preta}
 translate U CCOrderMyTimeTxt {Meu Relógio}
 translate U CCOrderTimePerMoveTxt {Tempo por movimento até o próximo controle de tempo}
 translate U CCOrderStartDate {Data de Ínicio}
-translate U CCOrderOppTimeTxt {Relógio do Oponente}
+translate U CCOrderOppTimeTxt {Relógio do Adversário}
 
 translate U CCDlgConfigRelay {Observar jogos}
 translate U CCDlgConfigRelayHelp {Go to the games page on http://www.iccf-webchess.com and display the game to be observed.  If you see the chessboard copy the URL from your browser to the list below. One URL per line only!\nExample: http://www.iccf-webchess.com/MakeAMove.aspx?id=266452}
 
 # Connect Hardware dialoges
 # TODO....
-translate U ExtHWConfigConnection {Configure external hardware}
+translate U ExtHWConfigConnection {Configurar hardware externo}
 translate U ExtHWPort {Port}
 translate U ExtHWEngineCmd {Engine command}
 translate U ExtHWEngineParam {Engine parameter}
