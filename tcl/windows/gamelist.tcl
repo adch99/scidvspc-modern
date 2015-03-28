@@ -868,8 +868,13 @@ proc SortBy {tree col} {
 
     # if {[sc_base numGames] > 200000} 
     if {![sc_base isReadOnly] && [sc_base current] != [sc_info clipbase]} {
+      if {[info exists ::tr(Glist$col)]} {
+        set name $::tr(Glist$col)
+      } else {
+        set name $col
+      }
       set answer [tk_messageBox -parent $w -title "Scid" -type yesno -default yes -icon question \
-          -message "[tr GlistSort] \"[file tail [sc_base filename]]\" by $col ?"]
+          -message "[tr GlistSort] \"[file tail [sc_base filename]]\" by $name ?"]
       if {$answer != "yes"} { return }
     }
 
