@@ -1302,7 +1302,13 @@ namespace eval fics {
       default {
 	  if {[string match "Rated*" $line] || [string match Unrated* $line]} {
 	    # Unrated blitz match, initial time: 3 minutes, increment: 0 seconds.
+	    # Rated wild/fr match, initial time: 5 minutes, increment: 0 seconds
 	    # Rated lightning match, initial time: 1 minutes, increment: 0 seconds.
+
+	    ### If we try to filter illegal game types, by the time we get here, we have already created a new game :(
+	    # foreach i {wild suicide crazy bug losers atomic} {if {[string match ${i}* $type]} {...}}
+	    #   updateConsole "Oops - game type $type not supported. Try examining game instead."
+
 	    sc_game tags set -event "FICS [string tolower [lrange $line 0 1]]"
             set ::fics::timecontrol [lindex $line end-4]/[lindex $line end-1]
 	    sc_game tags set -extra "{TimeControl \"$::fics::timecontrol\"}"
