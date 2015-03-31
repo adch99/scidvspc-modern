@@ -914,17 +914,6 @@ proc initAnnotation {n} {
 
   set w $w.sf.scrolled
 
-  ### Blunder Threshold
-
-  frame $w.blunderbox
-  label $w.blunderbox.label -text "$tr(Blunder) $tr(BlundersThreshold)"
-  spinbox $w.blunderbox.spBlunder -width 4 -textvariable annotate(blunder) \
-      -from 0.1 -to 3.0 -increment 0.1
-
-  pack $w.blunderbox -side top -padx 10 
-  pack $w.blunderbox.label -side left -padx 5
-  pack $w.blunderbox.spBlunder -side right -padx 5
-
   ### Depth
 
   if  {$analysis(uci$n)} {
@@ -936,13 +925,13 @@ proc initAnnotation {n} {
     pack $w.choice -side top -pady 3 
     pack $w.choice.0 $w.choice.1 $w.choice.2 -side left -expand 1 -fill x
 
-    frame $w.depth -padx 10
-    label $w.depth.label -textvar tr(DepthPerMove)
+    frame $w.depth 
+    label $w.depth.label -textvar tr(DepthPerMove) -width 22
     spinbox $w.depth.spDepth -width 4 -textvariable annotate(WantedDepth) -from 10 -to 30 -increment 1
 
     pack $w.depth -side top -pady 3 
-    pack $w.depth.label -side left -padx 3 -padx 13
-    pack $w.depth.spDepth -side right -padx 3 
+    pack $w.depth.label -side left
+    pack $w.depth.spDepth -side right -padx 5
   } else {
     set annotate(Depth) 0
   }
@@ -950,16 +939,38 @@ proc initAnnotation {n} {
   ### Seconds per move
 
   frame $w.delay
-  label $w.delay.label -textvar ::tr(SecondsPerMove)
+  label $w.delay.label -textvar ::tr(SecondsPerMove) -width 22
   spinbox $w.delay.spDelay -width 4 -textvariable tempdelay -from 1 -to 300 -increment 1
 
-  pack $w.delay -side top -pady 3 
-  pack $w.delay.label -side left -padx 5 
+  pack $w.delay -side top
+  pack $w.delay.label -side left
   pack $w.delay.spDelay -side right -padx 5 
 
   if  {$analysis(uci$n)} {
     checkAnnotateControl $w
   }
+
+  pack [frame $w.spacey] -side top -pady 5
+
+  ### Blunder Threshold
+
+  frame $w.blunderbox
+  label $w.blunderbox.label -text "$tr(Blunder) $tr(BlundersThreshold)" -width 22
+  spinbox $w.blunderbox.spBlunder -width 4 -textvariable annotate(blunder) \
+      -from 0.1 -to 3.0 -increment 0.1
+
+  pack $w.blunderbox -side top -padx 5 
+  pack $w.blunderbox.label -side left 
+  pack $w.blunderbox.spBlunder -side right -padx 5
+
+  frame $w.cutoff
+  label $w.cutoff.label -text "$tr(CutOff) $tr(BlundersThreshold)" -width 22
+  spinbox $w.cutoff.spBlunder -width 4 -textvariable annotate(cutoff) \
+      -from 3.0 -to 10.0 -increment .5
+
+  pack $w.cutoff -side top -padx 5 
+  pack $w.cutoff.label -side left
+  pack $w.cutoff.spBlunder -side right -padx 5
 
   addHorizontalRule $w
 
@@ -988,15 +999,6 @@ proc initAnnotation {n} {
   pack $w.anlabel -side top
   pack $w.notbest $w.blunders -side top -fill x
   pack $w.allmoves $w.none -side top -fill x
-
-  frame $w.cutoff
-  label $w.cutoff.label -text "$tr(CutOff) $tr(BlundersThreshold)"
-  spinbox $w.cutoff.spBlunder -width 4 -textvariable annotate(cutoff) \
-      -from 3.0 -to 10.0 -increment .5
-
-  pack $w.cutoff -side top -padx 10 
-  pack $w.cutoff.label -side left -padx 5
-  pack $w.cutoff.spBlunder -side right -padx 5
 
   addHorizontalRule $w
 
