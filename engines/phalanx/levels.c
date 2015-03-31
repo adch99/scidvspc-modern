@@ -31,37 +31,37 @@ void l_level( char * l )
 	while( *l == ' ' ) l++;
 	moves = atoi(l);
 
-	while( isdigit(*l) ) l++;
+	while( isdigit((int)*l) ) l++;
 	while( *l == ' ' ) l++;
 
 	if( *l == '\n' || *l == '\0' )
 	{
-		printf("fixed time %i seconds\n", moves );
+		printfl("fixed time %i seconds\n", moves );
 		Flag.level = fixedtime; Flag.centiseconds = moves*100;
 		return;
 	}
 
 	minutes = atoi(l);
 
-	while( isdigit(*l) ) l++;
+	while( isdigit((int)*l) ) l++;
 	if( *l == ':' )
 	{
 		l++;
 		seconds = atoi(l);
-		while( isdigit(*l) ) l++;
+		while( isdigit((int)*l) ) l++;
 	}
 	else seconds = 0;
 
-	while( isdigit(*l) ) l++;
+	while( isdigit((int)*l) ) l++;
 	while( *l == ' ' ) l++;
 	increment = atoi(l);
 
 	if( moves==0 )
-		printf(
+		printfl(
 		 "level: all moves in %i:%02i, increment %i seconds\n",
 		 minutes, seconds, increment );
 	else
-		printf(
+		printfl(
 		 "level: %i moves in %i:%02i, increment %i seconds\n",
 		 moves, minutes, seconds, increment );
 
@@ -80,7 +80,7 @@ void l_startsearch(void)
 	T1 = ptime();
 
 	/* Adjust the DrawScore to avoid long boring drawish endgames.
-	 * The default DrawScore is -20; Phalanx tries to avoid draws.
+	 * The default DrawScore is -10; Phalanx tries to avoid draws.
 	 * That's good, but I have observed too many games that ended
 	 * with the 50 moves rule draw, where the engine played
 	 * an KR vs KR endgame. The code below fixes that behaviour. */
@@ -117,7 +117,7 @@ void l_startsearch(void)
 			T2 = Flag.increment * (Time/Flag.increment/8-20)/3;
 
 		if( Flag.post && T2 && Flag.xboard<2 )
-		printf( "    -> increment adds %g s to soft time limit\n",
+		printfl( "    -> increment adds %g s to soft time limit\n",
 			((float)T2) / (float)100 );
 
 		T2 += Time / ( moves - Counter%moves + 4 );
@@ -131,7 +131,7 @@ void l_startsearch(void)
 		}
 
 		if( Flag.post && Flag.xboard<2 )
-		printf( "    -> soft time limit %g s\n",
+		printfl( "    -> soft time limit %g s\n",
 		   ((float)T2) / (float)100 );
 
 		/*** Now, set up the hard limit ***/
@@ -152,7 +152,7 @@ void l_startsearch(void)
 		if( Flag.centiseconds < 25 ) Flag.centiseconds = 25;
 
 		if( Flag.post && Flag.xboard<2 )
-		printf( "    -> hard time limit %g s\n",
+		printfl( "    -> hard time limit %g s\n",
 			((float)Flag.centiseconds) / (float)100 );
 
 	break;
@@ -179,10 +179,11 @@ int l_iterate(void)
 		long t = ptime();
 		switch( EasyMove )
 		{
-			case 1:  return ( t <= T1 + T2/3 );
-			case 2:  return ( t <= T1 + T2/6 );
+			case 1:  return ( t <= T1 + T2/2 );
+			case 2:  return ( t <= T1 + T2/4 );
 			default:
-				 if( Flag.easy ) return ( t <= T1 + T2*2/3 );
+				 if( Depth<400 ) /* stabilize low nps levels */ 
+					return ( t <= T1 + T2*2/3 );
 				 if( Turns==0 )
 					return ( t <= T1 + T2 );
 				 else

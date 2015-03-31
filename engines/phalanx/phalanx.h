@@ -2,7 +2,7 @@
 #define PHALANX_INCLUDED
 
 #define ENGNAME "Phalanx"
-#define VERSION "XXIII"
+#define VERSION "XXIV"
 
 #ifdef GNUFUN
 # include <getopt.h>
@@ -52,6 +52,11 @@ typedef unsigned char tsquare;
 /*** Moves are generated into and executed from struct tmove ***/
 typedef struct
 {
+  short
+	value;		/* heuristic value - the order key - before search */
+			/* value returned - after search */
+  short
+	dch;		/* depth change -100...100 */
   unsigned char
 	from,		/* square */
 	to,		/* destination square */
@@ -60,14 +65,14 @@ typedef struct
 	in1,		/* moving piece */
 	in2,		/* captured piece or 0 */
 	in2a;		/* moving piece or promoted piece */
-  signed short
-	value;		/* heuristic value - the order key - before search */
-			/* value returned - after search */
-  short
-	dch;		/* depth change -100...100 */
-  short
-	shift;		/* alphabeta window shift at root search */
 } tmove;          /* 12 bytes */
+
+typedef struct
+{
+  int psnl;		/* positional evaluation */
+  int devi;		/* deviation to be used in lazy eval, 0 = true eval */
+  int check;		/* side to move is in check */
+} tsearchnode;
 
 typedef struct
 {
@@ -75,15 +80,14 @@ typedef struct
 	m;
   unsigned
 	hashboard;
-  unsigned short
+  unsigned
 	rule50,		/* number of half-moves since last irreversible */
-	castling:8,	/* 4 castling flags: */
+	castling;	/* 4 castling flags: */
 			/*   white short, w. long, b. s., b. l. */
-	check:8;
-  short
+  int
 	mtrl,		/* material count of side on move */
 	xmtrl;		/* material count of opposite side */
-} tgamenode;      /* 12+12 bytes */
+} tgamenode;      /* 12+16 bytes */
 
 typedef struct
 {
@@ -146,6 +150,7 @@ typedef struct
   tlevel level;
   int nps;
   int easy;
+  int random;
   FILE	* log;
 } tflag;
 
@@ -224,7 +229,7 @@ tdist;
 
 #define NOVALUE 32123
 #define CHECKMATE 30000
-#define MAXPLY 40
+#define MAXPLY 64
 #define MAXCOUNTER 1024 /* 512 moves */
 
 #define HASH_COLOR ((unsigned)0xFDB97531)
@@ -422,6 +427,7 @@ extern long T1, T2;                 /* time started & planned on a move */
 extern int DrawScore;
 #define DRAW ( Ply%2 ? -DrawScore : DrawScore )
 
+extern tsearchnode S[MAXPLY];       /* the current node is S[Ply] */
 extern tgamenode G[MAXCOUNTER];
 extern int Counter;                 /* game counter, points to G[] */
 
@@ -436,7 +442,7 @@ extern int N_moves[8], RB_dirs[8];
 #define K_moves RB_dirs
 
 extern int Values[7];            /* piece values */
-extern unsigned short P[120];      /* power table */
+extern unsigned P[120];
 
 extern tmove PV[MAXPLY][MAXPLY];   /* principal variantion */
 extern tmove Pondermove;
@@ -458,8 +464,8 @@ extern int Bookout;
 
 /* params that cannot be pushed thru SIGALM handler, */
 /* must be pushed thru global variables */
-extern int A_n, A_i, A_d;
-extern tmove * A_m;
+extern volatile int A_n, A_i, A_d;
+extern volatile tmove * A_m;
 
 
 
@@ -475,11 +481,12 @@ extern int bcreate(int,char**);
 extern void new_game(void);
 
 /* input/output */
+extern int printfl(const char *, ...);
 extern void printm(tmove,char*);
 extern void printmSAN( tmove*, int, int, char* );
 extern void printPV(int,int,char*);
 extern void infoline(int,char*);
-extern void verboseline(tmove*,int,int);
+extern void verboseline(void);
 extern void printboard(char*);
 extern int setfen(const char*);
 extern void shell(void);
@@ -503,6 +510,7 @@ extern tmove root_search(void);
 extern int repetition(int);
 extern int material_draw(void);
 extern int evaluate(int,int);
+extern void blunder(tmove*,int*);
 
 extern int score_position(void);
 
@@ -539,6 +547,7 @@ extern void wlearn(int,int);
 extern void init_killers(void);
 extern void write_killer( int, int );
 extern void add_killer( tmove *, int, thashentry * );
+extern void slash_killers( tmove *, int );
 
 #endif
 

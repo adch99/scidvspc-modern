@@ -29,6 +29,7 @@ printf("\n"
        "          -b <+/->  opening book              default: on\n"
        "          -r <resign value in centipawns>     default: 0 (no resigning)\n"
        "          -e <easy level 0...100>             default: 0 (best play)\n"
+       "          -z <randomize moves by centipawns>  default: 0 (best play)\n"
        "          -n <NPS limit, min limit is 100>    default: no limit\n"
        "          -l <+/->  learning on/off           default: on\n"
        "          -v        print version and exit\n"
@@ -150,8 +151,9 @@ Flag.polling = 1;
 Flag.resign = 0;
 Flag.nps = 0;
 Flag.easy = 0;
+Flag.random = 0;
 Flag.noise = 50;         /* 0.5 s */
-Flag.learn = 1;
+Flag.learn = 0;
 Flag.bench = 0;
 Flag.log = NULL;
 Scoring = 0;
@@ -164,10 +166,10 @@ LbookDir = NULL;
 opterr = 0;
 
 #ifdef GNUFUN
-while( ( c = getopt_long( argc, argv, "vf:T:t:p:s:x:c:o:r:b:n:e:l:S:P:L:g:",
+while( ( c = getopt_long( argc, argv, "vf:T:t:p:s:x:c:o:r:b:n:e:z:l:S:P:L:g:",
 			  longopts, &indexptr) ) != -1 )
 #else
-while( ( c = getopt(argc,argv,"vf:T:t:p:s:x:c:o:r:b:n:e:l:S:P:L:g:") ) != -1 )
+while( ( c = getopt(argc,argv,"vf:T:t:p:s:x:c:o:r:b:n:e:z:l:S:P:L:g:") ) != -1 )
 #endif
 switch(c)
 {
@@ -195,6 +197,13 @@ switch(c)
 		if( sscanf( optarg, "%i", &e ) == 0 ) badoptions();
 		if( e < 0 ) badoptions();
 		Flag.easy = e;
+		} break;
+	case 'z':
+		{
+		int r;
+		if( sscanf( optarg, "%i", &r ) == 0 ) badoptions();
+		if( r < 0 ) badoptions();
+		Flag.random = r;
 		} break;
 	case 'n':
 		{
@@ -294,7 +303,10 @@ if( Flag.easy )
 {
 	Flag.learn = 0; Flag.ponder = 0; SizeHT = 0;
 	if( Flag.nps==0 ) Flag.nps = 500 - 3*Flag.easy;
+	if( Flag.random==0 ) Flag.random = 10 + Flag.easy/2;
 }
+
+if( Flag.random ) Flag.learn=0;
 
 if( Flag.nps && Flag.cpu )
 {

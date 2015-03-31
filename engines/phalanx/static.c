@@ -94,6 +94,19 @@ int nmpb_[80] =
   0,-16,-10, -8, -8, -8, -8,-10,-16,  0
 }; const int * nmpb = nmpb_-20;
 
+/*** knight in endgame ***/
+int nepb_[80] =
+{
+  0,-16,-10, -6, -2, -2, -6,-10,-16,  0,
+  0, -9, -3,  1,  4,  4,  1, -3, -9,  0,
+  0, -4,  1,  5,  8,  8,  5,  1, -4,  0,
+  0,  0,  4,  8, 12, 12,  8,  4,  0,  0,
+  0,  1,  5,  9, 13, 13,  9,  5,  1,  0,
+  0, -2,  2,  6,  9,  9,  6,  2, -2,  0,
+  0, -6, -1,  2,  5,  5,  2, -1, -6,  0,
+  0, -9, -6, -3,  0,  0, -3, -6, -9,  0
+}; int *nepb = nepb_-20;
+
 /*** bishop in middlegame ***/
 int bmpb_[80] =
 {
@@ -172,19 +185,6 @@ int kepb_[80] =
   0,  3, 10, 17, 24, 24, 17, 10,  3,  0,
 }; const int * kepb = kepb_-20;
 
-/*** knight in endgame ***/
-int c_bonus_[80] =
-{
-  0,-16,-10, -6, -2, -2, -6,-10,-16,  0,
-  0, -9, -3,  1,  4,  4,  1, -3, -9,  0,
-  0, -4,  1,  5,  8,  8,  5,  1, -4,  0,
-  0,  0,  4,  8, 12, 12,  8,  4,  0,  0,
-  0,  1,  5,  9, 13, 13,  9,  5,  1,  0,
-  0, -2,  2,  6,  9,  9,  6,  2, -2,  0,
-  0, -6, -1,  2,  5,  5,  2, -1, -6,  0,
-  0, -9, -6, -3,  0,  0, -3, -6, -9,  0
-}; int *c_bonus = c_bonus_-20;
-
 int outpost_[80] =
 {
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -197,13 +197,18 @@ int outpost_[80] =
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 }; const int *outpost = outpost_-20;
 
+/* Mobility bonuses are extremely non-linear, a piece that has a very small
+ * number of moves gets a large penalty. The rook mobility bonus/penalty is
+ * tripled in endgame. */
 int B_mobi[20] =
  { -36, -28, -20, -14, -6, -2, 1, 2, 3, 4, 5, 6, 7, 8, 8, 8, 8, 8, 8, 8 };
+int N_mobi[10] =
+ { -50, -25, -15, -10, -5, 0, 5, 10, 15, 20 };
 int R_mobi[16] =
- { -9, -5, -2, 0, 2, 4, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6 };
+ { -20, -15, -10, -7, -4, -2, 0, 2, 4, 6, 8, 9, 10, 10, 10, 10 };
 
 /* power table */
-unsigned short P[120];
+unsigned P[120];
 
 int *pf, *xpf, wpf[10], bpf[10]; /* # of w&b pawns on a file */
 
@@ -328,7 +333,7 @@ for(i=0;i!=10;i++) wpf[i]=bpf[i]=0;
 
 memset( &Wknow, 0, sizeof(tknow) );
 memset( &Bknow, 0, sizeof(tknow) );
-memset( P, 0, 120*sizeof(short) );
+memset( P+20, 0, 80*sizeof(unsigned) );
 
 Wknow.kp = WKP; Wknow.worsebm = 100;
 Wknow.lpf = 9;
@@ -356,8 +361,19 @@ for( i=L[i].next; i!=0; i=L[i].next )
 	break;
 	case WN: mB[ Th[i] ] = BN; wl[wn] = i; wn++;
 		Wknow.n++;
+		mobi = 0;
 		for( j=0; j!=8; j++ )
-		{ int d = i+N_moves[j]; P[d] |= WNM; P[d] += WWW; }
+		{
+			int d = i+N_moves[j]; P[d] |= WNM; P[d] += WWW;
+			/* knight mobility below, note that this is not just
+			 * the number of pseudo-legal moves. We don't count
+			 * squares with friendly pawns and squares attacked
+			 * by enemy pawns. We do count moves targeting other
+			 * friendly and enemy pieces - search should handle. */
+			if( B[d]!=3 && B[d]!=WP && B[d+9]!=BP && B[d+11]!=BP)
+				mobi++;
+		}
+		result += N_mobi[mobi];
 	break;
 	case WB: mB[ Th[i] ] = BB; wl[wn] = i; wn++;
 		Wknow.b++;
@@ -400,6 +416,7 @@ for( i=L[i].next; i!=0; i=L[i].next )
 		  }
 		}
 		result += R_mobi[mobi];
+		endresult += 2 * R_mobi[mobi];
 	break;
 	case WQ: mB[ Th[i] ] = BQ; wl[wn] = i; wn++;
 		if( i>=A1 && i<=H3 ) Wknow.r7r++;
@@ -439,8 +456,14 @@ for( i=L[i].next; i!=0; i=L[i].next )
 	break;
 	case BN: mB[ Th[i] ] = WN; bl[bn] = Th[i]; bn++;
 		Bknow.n++;
+		mobi = 0;
 		for( j=0; j!=8; j++ )
-		{ int d = i+N_moves[j]; P[d] |= BNM; P[d] += BBB; }
+		{
+			int d = i+N_moves[j]; P[d] |= BNM; P[d] += BBB;
+			if( B[d]!=3 && B[d]!=BP && B[d-9]!=WP && B[d-11]!=WP)
+				mobi++;
+		}
+		result -= N_mobi[mobi];
 	break;
 	case BB: mB[ Th[i] ] = WB; bl[bn] = Th[i]; bn++;
 		Bknow.b++;
@@ -483,6 +506,7 @@ for( i=L[i].next; i!=0; i=L[i].next )
 		  }
 		}
 		result -= R_mobi[mobi];
+		endresult -= 2 * R_mobi[mobi];
 	break;
 	case BQ: mB[ Th[i] ] = WQ; bl[bn] = Th[i]; bn++;
 		if( i>=A1 && i<=H3 ) Bknow.r7r++;
@@ -736,8 +760,10 @@ for(;;)
 		er += bb*2;
 #ifdef SCORING
 		if( Scoring )
-		if(l==wl) printf(" (whi) bishop pair bonus = %i\n",bb);
-		else      printf(" (bla) bishop pair bonus = %i\n",bb);
+		{
+		  if(l==wl) printf(" (whi) bishop pair bonus = %i\n",bb);
+		  else      printf(" (bla) bishop pair bonus = %i\n",bb);
+		}
 #endif
 	}
 
@@ -795,10 +821,12 @@ for(;;)
 
 #ifdef SCORING
 			if( Scoring )
+			{
 				if(l==wl)
 				printf( " (whi) pawn center = %i\n", d );
 				else
 				printf( " (bla) pawn center = %i\n", d );
+			}
 #endif
 		}
 
@@ -858,12 +886,13 @@ for(;;)
 		}
 
 #ifdef SCORING
-		if( Scoring )
-			if(d!=0)
+		if( Scoring && d!=0 )
+		{
 			if(l==wl)
 			printf( " (whi) castling = %i\n", d );
 			else
 			printf( " (bla) castling = %i\n", d );
+		}
 #endif
 	}
 
@@ -897,10 +926,12 @@ for(;;)
 			mr += pen; er += pen;
 #ifdef SCORING
 			if( Scoring )
+			{
 				if(l==wl)
 				printf( " (whi) isolated pawn = %i\n", pen );
 				else
 				printf( " (bla) isolated pawn = %i\n", pen );
+			}
 #endif
 		}
 	}
@@ -930,22 +961,29 @@ for(;;)
 			if( b[sq+10]==0 )
 			{
 				if( row==8 )
-				{ if(see(b,sq,sq+10)>=0) ppeval+=80; }
+				{
+					if(see(b,sq,sq+10)>=0)
+					{ ppeval+=80; abonus /= 2; }
+				}
 				else
 				if( row==7 && b[sq+20]==0 )
-				if( see(b,sq,sq+10)>=0 && see(b,sq,sq+20)>=0 )
-				ppeval+=50;
+				{
+					if( see(b,sq,sq+10)>=0
+					 && see(b,sq,sq+20)>=0 )
+					{ ppeval+=50; abonus /= 2; }
+				}
 			}
 			else /* blocked */
-			if( color(b[sq+10]) == BLACK ) ppeval-=abonus/2;
-
-			/* blocked - reserve blocking square */
-			if( color(b[sq+20]) == BLACK ) ppeval-=abonus/4;
+			if( color(b[sq+10]) == BLACK )
+			{ ppeval /= 2; }
+			else /* blocked - reserve blocking square */
+			if( color(b[sq+20]) == BLACK )
+			{ ppeval -= ppeval/4; }
 
 			/* covered or a member of a phalanx */
 			if( b[sq-9]==WP || b[sq-11]==WP
 			 || b[sq-1]==WP || b[sq+1]==WP )
-			{ ppeval += 2*abonus; }
+			{ ppeval += abonus; }
 
 			/* rook behind - support or brake */
 			for( j=sq-10;
@@ -1233,31 +1271,17 @@ printboard(); printf("%02i",sq); getchar();
 		  }
 		}
 
-		{
-			static int bon[8] =
-			{ 5, 3, 1, -2, -2, -2, -2, -2 };
-			int b = bon[ xkdist[sq].min ];
-			if(b>0)
-			{
-				b += r;
-				if( know->qstorm || know->kstorm ) mrr += b;
-				if( b > 5 )
-				{
-					if( b > 8 ) xknow->khung += 2;
-					else         xknow->khung ++;
-				}
-			}
-		}
-
 		mrr += rmpb[sq];
 
 		mr += mrr; er += err;
 #ifdef SCORING
 		if( Scoring )
+		{
 			if(l==wl)
 			printf( " (whi) rook = %i,%i\n", mrr, err );
 			else
 			printf( " (bla) rook = %i,%i\n", mrr, err );
+		}
 #endif
 	}
 	break;
@@ -1285,10 +1309,12 @@ printboard(); printf("%02i",sq); getchar();
 
 #ifdef SCORING
 			if( Scoring )
+			{
 				if(l==wl)
 				printf( " (whi) strong bishop = %i\n", bonus );
 				else
 				printf( " (bla) strong bishop = %i\n", bonus );
+			}
 #endif
 
 			no_bishop_outpost:;
@@ -1350,10 +1376,12 @@ printboard(); printf("%02i",sq); getchar();
 
 #ifdef SCORING
 			if( Scoring )
+			{
 				if(l==wl)
 				printf( " (whi) strong knight = %i\n", bonus );
 				else
 				printf( " (bla) strong knight = %i\n", bonus );
+			}
 #endif
 
 			no_knight_outpost:;
@@ -1407,7 +1435,7 @@ printboard(); printf("%02i",sq); getchar();
 			}
 		}
 
-		er += c_bonus[sq];
+		er += nepb[sq];
 	break;
 	case WQ:
 		/* penalize early queen activity, */
@@ -1511,21 +1539,23 @@ midresult += (Bknow.khung-Wknow.khung) * 2;
 /*********** King danger */
 Wknow.khung -= Wknow.kshield/3;
 Bknow.khung -= Bknow.kshield/3;
+
+#define KSAFETY 1
 if( Wknow.khung > 1 )
 {
-	midresult -= Wknow.khung * Wknow.khung;
+	midresult -= Wknow.khung * Wknow.khung * KSAFETY;
 #ifdef SCORING
 	if( Scoring )
-	printf( " (whi) king safety = %i\n", Wknow.khung * Wknow.khung * -4 );
+	printf( " (whi) king safety = %i\n", Wknow.khung * Wknow.khung * -KSAFETY );
 #endif
 }
 
 if( Bknow.khung > 1 )
 {
-	midresult += Bknow.khung * Bknow.khung;
+	midresult += Bknow.khung * Bknow.khung * KSAFETY;
 #ifdef SCORING
 	if( Scoring )
-	printf( " (bla) king safety = %i\n", Bknow.khung * Bknow.khung * -4 );
+	printf( " (bla) king safety = %i\n", Bknow.khung * Bknow.khung * -KSAFETY );
 #endif
 }
 
@@ -1533,7 +1563,7 @@ Wknow.prune = ( Wknow.hung < 10 && Wknow.khung < 2 );
 Bknow.prune = ( Bknow.hung < 10 && Bknow.khung < 2 );
 
 /**
-***   Trade down bonus
+***   Trade down bonus - when ahead in material, trade pieces, keep pawns
 **/
 {
 	int tbonus = ( G[Counter].mtrl - G[Counter].xmtrl );
@@ -1545,25 +1575,24 @@ Bknow.prune = ( Bknow.hung < 10 && Bknow.khung < 2 );
 
 		if( tbonus > 0 ) /* white stronger */
 		{
-			if( Wknow.p || tbonus>=(N_VALUE+P_VALUE) )
-			r = (   tbonus * Wknow.p
-			      - tbonus * (2*Bknow.q+Bknow.b+Bknow.r+Bknow.n)
-			    ) / 30;
+			tbonus = min(tbonus,N_VALUE) + 200;
+			if( Wknow.p || tbonus>=(N_VALUE+200) )
+			r = ( Wknow.p - 2*Bknow.q-Bknow.b-Bknow.r-Bknow.n )
+			    * tbonus / 50;
 			else /* white has no pawns! */
-			r = - tbonus / 2;
+			r = - tbonus / 4;
 		}
 		else             /* black stronger */
 		{
-			if( Bknow.p || tbonus<=(N_VALUE+P_VALUE) )
-			r = (   tbonus * Bknow.p
-			      - tbonus * (2*Wknow.q+Wknow.b+Wknow.r+Wknow.n)
-			    ) / 30;
+			tbonus = max(tbonus,-N_VALUE) - 200;
+			if( Bknow.p || tbonus<=-(N_VALUE+200) )
+			r = ( Bknow.p - 2*Wknow.q-Wknow.b-Wknow.r-Wknow.n )
+			    * tbonus / 50;
 			else
-			r = - tbonus / 2;
+			r = - tbonus / 4;
 		}
 
-		endresult += r;
-		midresult += r/2;
+		result += r;
 
 #ifdef SCORING
 		if( Scoring )

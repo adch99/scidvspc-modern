@@ -6,19 +6,13 @@
 
 #include "phalanx.h"
 
-
-#define SCOUT
-
-#define WINDOW 60
-
-
 #define update_PV(move, ply)				\
 {							\
-    register int __j;					\
+    register int jj;					\
     PV[ply][ply] = move;				\
-    for (__j = ply + 1; PV[ply + 1][__j].from; __j++)	\
-	PV[ply][__j] = PV[ply + 1][__j];		\
-    PV[ply][__j].from = 0; /* end of copied line */	\
+    for (jj = ply + 1; PV[ply + 1][jj].from; jj++)	\
+	PV[ply][jj] = PV[ply + 1][jj];		\
+    PV[ply][jj].from = 0; /* end of copied line */	\
 }
 
 
@@ -79,13 +73,49 @@ for( i=0; i!=n; i++ )
 
 	do_move(m+max);
 
+	S[Ply].check = checktest(Color);
+
 	if( i == 0 || Depth <= 0 )
 	result = - evaluate( -Beta, -Alpha );
 	else
 	{
+#define	LMRLMP /* late move reductions and pruning */
+#ifdef	LMRLMP
+		if(    Depth > 0
+		    && !S[Ply-1].check && !S[Ply].check /* checks */
+		    && i > 2
+		    && m[max].in2 == 0 /* no captures reduced */
+		    && m[max].in1 == m[max].in2a /* no promotions */
+		    && m[max].dch >= 100 /* no extended moves */
+		  )
+		{
+			int olddepth=Depth;
+			Depth -= Depth/max(6,(33-i))+i+100;
+
+			if( m[max].value <= 0 ) Depth -= 100;
+
+			if( Depth>0 ) /* reduced search */
+			{
+				result = -evaluate( -Alpha-1, -Alpha );
+				Depth = olddepth;
+				if( result <= Alpha ) goto skipsearch;
+			}
+			else /* prune */
+			{
+				PV[Ply][Ply].from=0;
+				Depth=olddepth;
+				result=Alpha;
+				goto skipsearch;
+			}
+			Depth = olddepth;
+		}
+#endif	/* LMRLMP */
+
 		result = - evaluate( -Alpha-1, -Alpha );
 		if( result>Alpha && result<Beta )
 		result = - evaluate( -Beta, -Alpha-1 );
+
+		skipsearch:;
 	}
 
 	undo_move(m+max);
@@ -101,7 +131,11 @@ for( i=0; i!=n; i++ )
 		update_PV( m[max], Ply );
 		Alpha = result;
 		if(Alpha>=Beta)
-		{ m[max].value = (CHECKMATE-5000)+Depth; return Alpha; }
+		{
+			if( i>0 ) slash_killers( m, i );
+			m[max].value = (CHECKMATE-5000)+Depth;
+			return Alpha;
+		}
 		maxi = i;
 	}
 	else if( i==0 && Depth>0 ) update_PV( m[max], Ply );
@@ -172,8 +206,6 @@ int sort_root_moves( tmove *m, int n )
 	else
 	if( abs(best) > CHECKMATE - 100 ) EasyMove = 2;
 	else
-	if( best - secondbest > 250 ) EasyMove = 2;
-	else
 	if( best - secondbest > 70 ) EasyMove = 1;
 
 	if( Flag.post && EasyMove!=0 && Flag.xboard<2 )
@@ -181,8 +213,6 @@ int sort_root_moves( tmove *m, int n )
 		printf( "    -> easy move      (%i)  ", EasyMove );
 		printm(m[0],NULL); puts("               ");
 	}
-
-/*	for( i=0; i!=n; i++ ) printm( m[i], NULL ); puts(""); */
 
 	return best;
 }
@@ -195,6 +225,7 @@ tmove root_search( void )
 {
 
 tmove m[256];
+int rr[256];
 int n, i;
 int Alpha, Beta;
 int r;
@@ -204,9 +235,6 @@ int Nod[256];
 Abort = 0; NoAbort = 1;
 
 generate_legal_moves( m, &n, checktest(Color) );
-
-/***delete this!!!!***/
-/* for(i=0;i!=n;i++) if( m[i].from==E5 && m[i].to==F7 ) {m[i]=m[n-1]; n--;} */
 
 if( Flag.log != NULL )
 {
@@ -289,9 +317,21 @@ else
 
 	if( EasyMove == 3 && ! Flag.analyze ) { do_move(m); return m[0]; }
 
+	/* randomize root moves */
+	if( Flag.random )
+	for( i=0; i!=n; i++ )
+	{
+		rr[i] = rand()%(Flag.random+1) - Flag.random/2;
+/*
+		printf("%4i:",rr[i]); printm(m[i],NULL);
+		if(i%5==4) printf("\n");
+*/
+	}
+	else for( i=0; i!=n; i++ ) rr[i]=0;
+
 	FollowPV = 1;
 	NoAbort = 0;
-	if(Flag.nps<=500) Depth=90; else Depth = 290;
+	if(Flag.nps<=1000) Depth=190; else Depth = 290;
 	Ply = 0;
 	A_d = Depth/100;
 
@@ -307,41 +347,39 @@ else
 		A_d++;
 		Turns=0;
 
-		Beta = Alpha + WINDOW;
-		Alpha = Alpha - WINDOW;
+		Beta = CHECKMATE;
+		Alpha = -CHECKMATE;
 
-		if( Flag.post && ! Flag.xboard ) verboseline( m, 0, n );
+		if( Flag.analyze && Flag.xboard!=1 ) { A_i=0; verboseline(); }
 
 		for( i=0; i!=n; i++ )
 		{
 			int64 lastnodes = Nodes;
 			A_i = i;
 
-			do_move(m+i);
-
-#ifdef SCOUT
 			if( i == 0 )
 			{
-				r = - evaluate( -Beta, -Alpha );
-				if(!Abort) m[i].value = r;
-				if( m[i].value <= Alpha && !Abort )
+				do_move(m+i);
+				r = - evaluate( -Beta+rr[i], -Alpha+rr[i] )
+				    + rr[i];
+				undo_move(m+i);
+
+				if(!Abort)
 				{
-					if( Flag.post ) infoline(4,NULL);
-					r = - evaluate( -Alpha, CHECKMATE );
-					if(!Abort) m[i].value = Alpha = r;
-					update_PV( m[0], 0 );
-					if( Flag.post ) infoline(1,NULL);
+					m[i].value = Alpha = r;
+					update_PV( m[i], 0 );
+		if( Flag.post ) infoline(1,NULL);
 				}
 			}
 			else
 			{
-#define SWINDOW 5
-				r = - evaluate( -Alpha-SWINDOW, -Alpha );
+				do_move(m+i);
+				r = - evaluate( -Alpha-1+rr[i], -Alpha+rr[i] )+rr[i];
+				undo_move(m+i);
+
 				if(!Abort) m[i].value = r;
-				if( m[i].value > Alpha ) /* TURN */
+				if( m[i].value > Alpha && !Abort ) /* TURN */
 				{
-				  if( ! Abort )
-				  {
 				      Turns++;
 				      if(i>bgs) bgs++;
 				      update_PV( m[i], 0 );
@@ -353,42 +391,41 @@ else
 				        printf(
 "    -> easy move off                                    \n" );
 				      }
-				  }
-				if( m[i].value >= Alpha+SWINDOW )
+				      if( Flag.post ) infoline(2,NULL);
+				      do_move(m+i);
+				      r = - evaluate( -Beta+rr[i], -Alpha+rr[i] )+rr[i];
+				      undo_move(m+i);
+				      if(!Abort)
+				      {
+					m[i].value = Alpha = r;
+				      update_PV( m[i], 0 );
+				      if( Flag.post ) infoline(1,NULL);
+				      }
+
+					{
+					int j, ipom = Nod[i] = Nodes-lastnodes;
+					tmove pom = m[i];
+					int rrr=rr[i];
+					for( j=i; j>0; j-- )
+					{ m[j] = m[j-1]; Nod[j] = Nod[j-1];
+					  rr[j] = rr[j-1]; }
+					m[j] = pom; Nod[j] = ipom; rr[j]=rrr;
+					}
+
+				}
+				else /* no turn, bubble up by nodes searched */
 				{
-				  if( Flag.post ) infoline(2,NULL);
-				  r = - evaluate( -Beta, -Alpha );
-				  if(!Abort) m[i].value = r;
+				  int j; int64 ipom; tmove pom;
+				  int rrr=rr[i];
+				  ipom = Nod[i] = Nodes-lastnodes;
+				  /* bubble up */
+				  pom = m[i];
+				  for( j=i; j>bgs+1 && ipom>Nod[j-1]; j-- )
+				  { m[j] = m[j-1]; Nod[j] = Nod[j-1];
+				    rr[j]=rr[j-1]; }
+				  m[j] = pom; Nod[j] = ipom; rr[j]=rrr;
 				}
-				}
 			}
-#else
-			r = - evaluate( -Beta, -Alpha );
-			if(!Abort) m[i].value = r;
-			if( i==0 && m[i].value <= Alpha && !Abort )
-			{
-				if( Flag.post ) infoline(4,NULL);
-
-				Beta = Alpha;
-				Alpha = -CHECKMATE;
-				r = - evaluate( -Beta, -Alpha );
-				if(!Abort) m[i].value = r;
-			}
-#endif
-
-			if( m[i].value >= Beta )
-			{
-#ifndef SCOUT
-				LastTurn = ptime();
-				update_PV( m[i], 0 );
-#endif
-				PV[0][0].value = Beta;
-				if( Flag.post ) infoline(5,NULL);
-				r = - evaluate( -CHECKMATE, -Beta );
-				if(!Abort) m[i].value = r;
-			}
-
-			undo_move(m+i);
 
 			if( Abort )
 			{
@@ -397,34 +434,6 @@ else
 				break;
 			}
 
-			if( m[i].value > Alpha )
-			{
-				int j; tmove pom;
-#ifndef SCOUT
-				LastTurn = ptime();
-#endif
-
-				update_PV( m[i], 0 );
-				Alpha = m[i].value;
-				if( Flag.post ) infoline(1,NULL);
-
-				/* bubble the move up */
-				pom = m[i];
-				for( j=i; j!=0; j-- ) m[j] = m[j-1];
-				m[0] = pom;
-
-				Beta = Alpha + WINDOW;
-			}
-			else
-			{
-				int j; int64 ipom; tmove pom;
-				ipom = Nod[i] = Nodes-lastnodes;
-				/* bubble up */
-				pom = m[i];
-				for( j=i; j>bgs+1 && ipom>Nod[j-1]; j-- )
-				{ m[j] = m[j-1]; Nod[j] = Nod[j-1]; }
-				m[j] = pom; Nod[j] = ipom;
-			}
 		}
 
 		if( !Abort && Depth>300 )
@@ -433,6 +442,13 @@ else
 		if( Flag.post ) infoline(3,NULL);
 		Depth += 100;
 		FollowPV = 1;
+
+		/* Fix some misbehaviour of root moves randomness when
+		 * close to game end. */
+		if( Flag.random && G[Counter].mtrl <= Q_VALUE+R_VALUE )
+			for( i=0; i!=n; i++ )
+				if( abs(Alpha)>29990 ) rr[i]=0;
+				else rr[i]/=2;
 
 		if( abs(Alpha) > 29000 )
 		{

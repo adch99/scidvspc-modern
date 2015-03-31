@@ -7,9 +7,9 @@
 
 #include "phalanx.h"
 
-#define EXTENSION_BASE 60
+#define EXTENSION_BASE 80
 
-#define NULL_MOVE_PRUNING 300
+#define NULL_MOVE_PRUNING 350
 
 #define RECAPTURE_EXTENSIONS
 #define PEE_EXTENSIONS     /* entering kings+pawns endgame extends */
@@ -32,115 +32,6 @@ unsigned * C; /* 64k entries of 4 bytes: 256kB */
 
 
 
-void blunder( tmove *m, int *n )
-{
-int i;
-int initp = Flag.easy;
-
-/* quick look (small Depth) makes blunders */
-initp -= Depth/10;
-
-/* full board means more blunders */
-initp += (G[Counter].mtrl+G[Counter].xmtrl) / 200;
-
-if(Counter>2)
-for( i=(*n)-1; i>=1 && (*n)>4; i-- )
-{
-	/* compute the probability this move is not seen */
-	int p = initp;
-
-	/* missing PV moves is unlikely */
-	if( m[i].from==PV[0][Ply].from && m[i].to==PV[0][Ply].to )
-	p -= 100;
-
-	if( m[i].from==PV[Ply-1][Ply].from && m[i].to==PV[Ply-1][Ply].to )
-	p -= 100;
-
-	if( m[i].in2 ) /* captures - we tend to see this */
-	{
-		/* the more valuable the captured piece,
-		 * the more likely we see the move. */
-		p -= 10 + Values[ m[i].in2 >> 4 ] / 50;
-
-		/* capture of last moved piece is spotted
-		 * + extra bonus for recapture */
-		if( m[i].to == G[Counter-1].m.to )
-		{
-			p -= 20 + Values[ m[i].in2 >> 4 ] / 50;
-			if( G[Counter-1].m.in2 ) p -= 20; /* recapture */
-		}
-
-		/* very short captures */
-		switch( dist[120*m[i].from+m[i].to].max )
-		{
-			case 0: case 1: p -= 30; break;
-	  		case 2: p -= 20; break;
-	  		case 3: p -= 10; break;
-		}
-	}
-	else /* noncaptures - prune or reduce with power table info */
-	{
-		int pp=0;
-		unsigned short pf = P[m[i].from], pt = P[m[i].to];
-		unsigned short xpm, xbnm, xrm, xqm; /* enemy power masks */
-		int mpv = Values[m[i].in1 >> 4]; /* moving piece value */
-
-		if( Color == WHITE )
-		{ xpm=BPM; xbnm=(BNM|BBM); xrm=BRM; xqm=BQM; }
-		else
-		{ xpm=WPM; xbnm=(WNM|WBM); xrm=WRM; xqm=WQM; }
-
-		/* leaving an attacked square - reduce probability of
-		 * the move being skipped */
-		if( pf&xpm ) pp -= (5 + mpv - P_VALUE)/10;
-		if( pf&xbnm && mpv >= N_VALUE ) pp -= (5 + mpv - N_VALUE)/10;
-		if( pf&xrm && mpv >= R_VALUE ) pp -= (5 + mpv - R_VALUE)/10;
-		if( pf&(xqm|xrm|xbnm|xpm) ) pp -= mpv/100;
-
-		/* going to an attacked square - raise probability
-		 * the move is skipped */
-		if( pt&xpm ) pp += (10 + mpv - P_VALUE)/10;
-		if( pt&xbnm && mpv >= N_VALUE ) pp += (10 + mpv - N_VALUE)/10;
-		if( pt&xrm && mpv >= R_VALUE ) pp += (10 + mpv - R_VALUE)/10;
-		if( pt&(xqm|xrm|xbnm|xpm) ) pp += mpv/50;
-
-		p += pp;
-
-		/* careless reductions to achieve depth at these low nps */
-		if( pp>=0 ) m[i].dch += 50 + min( 2*pp, 90 );
-	}
-
-	/* We focus on the piece that moved 2 plies ago and see the
-	 * moves of the same piece */
-	if( m[i].from == G[Counter-2].m.to ) p -= 25;
-
-	/* underpromotions? too precise! */
-	if( m[i].in1 != m[i].in2a  &&  piece(m[i].in2a) != QUEEN )
-	p += 15;
-	else
-	p -= 5;
-
-	/* dont see long moves, especially diagonal ones */
-	p += dist[120*m[i].from+m[i].to].taxi * 3;
-
-	/* dont see some knight moves */
-	if( piece(m[i].in1) == KNIGHT )
-	p += 10;
-
-	/* going backward?  (white)Bf6xc3 is much more difficult
-	 * to see than (white)Bc3xf6 ***/
-	if( Color==WHITE )
-		p += 4 * ( m[i].to/10 - m[i].from/10 );
-	else
-		p += 4 * ( m[i].from/10 - m[i].to/10 );
-
-	if( rand()%1000 < p )
-	{ m[i] = m[(*n)-1]; (*n)--; }
-}
-}
-
-
-
 void initcache(void)
 {
 #ifdef CACHE
@@ -150,17 +41,26 @@ if( C==NULL ) { puts("cannot alloc static eval cache!"); exit(0); }
 }
 
 
-int psnl[MAXPLY];
-int devi[MAXPLY];
+tsearchnode S[MAXPLY];
 
 static inline int approx_eval(void)
 {
-psnl[Ply] = - psnl[Ply-1];
+S[Ply].psnl = - S[Ply-1].psnl;
 
-devi[Ply] = devi[Ply-1]*2/3 + abs(psnl[Ply])/8;
-if( G[Counter-1].m.in2 ) devi[Ply] += 60; else devi[Ply] += 40;
+S[Ply].devi = S[Ply-1].devi*2/3 + abs(S[Ply].psnl)/8;
+if( G[Counter-1].m.in2 ) S[Ply].devi += 60; else S[Ply].devi += 40;
 
-return G[Counter].mtrl - G[Counter].xmtrl + psnl[Ply];
+/* pawn promotions should mostly trigger full static eval in the child node,
+ * and avoid the lazy one, otherwise the engine delays promotions due to
+ * the high bonus for the pawn on the 7th row. */
+if(
+	( G[Counter-1].m.in1 == WP && G[Counter-1].m.to >= A7 )
+	||
+	( G[Counter-1].m.in1 == BP && G[Counter-1].m.to <= H2 )
+  )
+	S[Ply].devi += 3*P_VALUE;
+
+return G[Counter].mtrl - G[Counter].xmtrl + S[Ply].psnl;
 }
 
 
@@ -216,8 +116,8 @@ if( Bknow.prune ) *cc |= 0x00008000; else *cc &= (0xFFFFFFFF-0x00008000);
 }
 #endif
 
-psnl[Ply] = positional;
-devi[Ply] = 0;
+S[Ply].psnl = positional;
+S[Ply].devi = 0;
 
 #undef debug
 #ifdef debug
@@ -318,7 +218,7 @@ if( ( Nodes % timeslice ) == 0 && !Flag.analyze )
 
 		lptime = nptime;
 
-		if( Flag.post && !Flag.xboard ) verboseline( A_m, A_i, A_n );
+		if( Flag.post && !Flag.xboard ) verboseline();
 
 if(Flag.polling)
 {
@@ -334,7 +234,11 @@ if(Flag.polling)
   tv.tv_usec=0;
   select(16, &readfds, 0, 0, &tv);
   data=FD_ISSET(fileno(stdin), &readfds);
-  if(data) interrupt(0);
+  if(data)
+  {
+	if(polslice<8000 || Flag.analyze) polslice=4000; else polslice/=2;
+	interrupt(0);
+  }
 
 #else
 
@@ -418,7 +322,20 @@ if( repetition(1) ) /* third rep. draw */
 		ext -= Ply*20;
 	}
 
-	return ext/10+DRAW;
+	/* Speculative drawscore
+	 * Human players sometimes play a wild sacrifice leading to unclear
+	 * lines, making sure they could achieve a repetition draw at least.
+	 * This is the same speculative heuristics:
+	 * Repetition draw is scored as a slight advantage to the side that
+	 * forced the repetition, ie. that had less extensions in the path,
+	 * that's why we count the cumulative extension above. The deeper
+	 * in the tree this happens, the higher speculative bonus we give,
+	 * that is the Ply*20 above. However, if the remaining Depth is large,
+	 * we pull the score back closer to the DRAW score, because with
+	 * the larger Depth we should be able to find something better
+	 * than draw.
+	 */
+	return DRAW + ext/(15+max(-5,Depth/10));
 }
 
 /********************************************************************
@@ -427,6 +344,7 @@ if( repetition(1) ) /* third rep. draw */
 if( SizeHT == 0 || Depth<0 ) t = NULL;
 else
 if( (t=seekHT()) != NULL )
+if( Age == t->age || Beta-Alpha == 1 )
 if( t->depth >= Depth || ( Depth<300 && abs(t->value)>CHECKMATE-1000 ) )
 {
 	int val = t->value;
@@ -436,18 +354,13 @@ if( t->depth >= Depth || ( Depth<300 && abs(t->value)>CHECKMATE-1000 ) )
 	switch( t->result )
 	{
 	case no_cut:                    /* `true value', good_score */
-		PV[Ply][Ply].from=0;
-		return val;
+		PV[Ply][Ply].from=0; return val;
 	break;
 	case alpha_cut:                 /* `this or less', failed_low */
-		if( val <= Alpha )
-		{ PV[Ply][Ply].from=0; return val; }
-		if( val < Beta ) Beta = val;
+		if( val <= Alpha ) { PV[Ply][Ply].from=0; return Alpha; }
 	break;
 	case beta_cut:                  /* `this or more', failed_high */
-		if( val >= Beta )
-		{ PV[Ply][Ply].from=0; return val; }
-		if( val > Alpha ) Alpha = val;
+		if( val >= Beta ) { PV[Ply][Ply].from=0; return Beta; }
 	break;
 	}
 }
@@ -464,7 +377,10 @@ printf("hit percentage = %lld.%02lld%%\n",good*100/all,good*10000/all%100);
 }
 #endif
 
-G[Counter].check = check = checktest(Color);
+if( Ply<2 )	/* called from rootsearch() */
+	S[Ply].check = check = checktest(Color);
+else		/* called from search() and the checktest() has been run */
+	check = S[Ply].check;
 
 if( Depth>0 || check )
 {
@@ -472,24 +388,50 @@ if( Depth>0 || check )
 	if(Depth<=0) result = approx_eval();
 	else         result = static_eval();
 
+#define FORWARD_PRUNING
+#ifdef  FORWARD_PRUNING
+/*
+ * A simple forward pruning:
+ * The Depth is low and the static evaluation is over [Alpha plus margin]
+ * Our king is safe (khung<limit) and we don't have much hung material.
+ * Let's lift Alpha and prune if it gets >= Beta.
+ * This works quite fine for larger Depths than 200 (2 plies) as well, 
+ * tested with limit 600 on a set of positions and it's still finding
+ * everything and in a shorter time, but I'm keeping the depth limit
+ * conservative for now.
+ * This is similar to what the old Phalanx XXII had, except now
+ * we use the margin.
+ */
+	if(	!check
+		&& Depth < 200
+		&& (	Color==WHITE
+			?
+			( Wknow.hung<14 && Wknow.khung<6 )
+			:
+			( Bknow.hung<14 && Bknow.khung<6 )
+		   )
+	  )
+	{
+		int r = result - (P_VALUE+Depth)/10;
+		if( r>=Beta ) { PV[Ply][Ply].from=0; return Beta; }
+		if( r>Alpha ) Alpha=r;
+	}
+#endif /* FORWARD_PRUNING */
 
 #ifdef NULL_MOVE_PRUNING
 	if(
-		result+100 >= Beta
+		Depth > 100
 		&& ( result >= Beta || Depth > NULL_MOVE_PRUNING )
 		&& ! FollowPV
 		&& ! check
-		&& G[Counter].mtrl > Q_VALUE+B_VALUE        /* zugzwang fix */
-/*		&& G[Counter-1].m.special != NULL_MOVE */  /* prev. node not nullm */
+		&& G[Counter].mtrl > 8*P_VALUE        /* zugzwang fix */
+		&& G[Counter-1].m.special != NULL_MOVE   /* prev. node not nullm */
 		&& ( t==NULL || t->depth <= Depth-NULL_MOVE_PRUNING
 		  || t->result==beta_cut || t->value >= Beta )
 	)
 	{
 		int value;
 		int olddepth = Depth;
-		int alpha = -Beta;
-
-		tmove m[256]; int n;  /* moves and number of moves */
 
 		G[Counter].m.in1 = 0; /* disable en passant */
 		G[Counter].m.special = NULL_MOVE;
@@ -502,39 +444,33 @@ if( Depth>0 || check )
 		G[Counter].mtrl = G[Counter-1].xmtrl;
 		G[Counter].xmtrl = G[Counter-1].mtrl;
 		Color = enemy(Color);
+		S[Ply].check=0;
 
 		Depth -= NULL_MOVE_PRUNING;
-		if( Depth <= 0 )
-		{
-			Depth = 0;
-#ifdef QCAPSONLY
-			generate_legal_captures(m,&n,0);
-#else
-			generate_legal_checks(m,&n);
-#endif
-		}
-		else
-		{
-			generate_legal_moves( m, &n, 0 );
-		}
 
-		if( n!=0 )
-		{
-			add_killer( m, n, NULL );
-			value = -search( m, n, alpha, alpha+1 );
-		}
-		else
-		{ if(Depth!=0) value=Alpha; else value=result; }
+		if(Depth<0) Depth=0; else Depth -= Depth/4;
+		value = -evaluate(-Beta, -Beta+1);
 
 		Color = enemy(Color);
 		Counter --; Ply --;
 		Depth = olddepth;
 		Totmat = totmat;
 
-		if( value >= Beta ) { result = value; goto end; }
+		if( value >= Beta ) { result = Beta; goto end; }
 	}
 #endif
 
+
+/*
+if(    Depth<1500 && Depth>0
+    && Beta-Alpha==1 && !check
+    && result < Beta-P_VALUE-Depth )
+{
+	generate_legal_checks(m,&n);
+	if( n==0 ) { result=Alpha; goto end; }
+}
+else
+*/
 	generate_legal_moves(m,&n,check);
 
 	/** Return, if there is no legal move - checkmate or stalemate **/
@@ -556,7 +492,7 @@ if( Depth>0 || check )
 			else
 			if( Depth <= 200 ) newdch -= 20;
 
-			for( i=Counter-2; i>0 && G[i].check; i-=2 ) inrow++;
+			for( i=Ply-2; i>0 && S[i].check; i-=2 ) inrow++;
 			switch( inrow ) /* number of checks in row */
 			{
 				case 0: break;
@@ -574,7 +510,7 @@ if( Depth>0 || check )
 				m[i].dch = newdch;
 		}
 		else  /* losing anyway */
-		{ int i; for( i=0; i!=n; i++ ) m[i].dch = 60; }
+		{ int i; for( i=0; i!=n; i++ ) m[i].dch = EXTENSION_BASE; }
 	}
 #endif
 
@@ -641,72 +577,6 @@ if( Depth>0 || check )
 	}
 #endif
 
-#ifdef ETTC
-if( Depth > 200 && SizeHT != 0 )
-{
-	extern void do_hash(tmove *), undo_hash(tmove *);
-
-	int i;
-	for( i=0; i!=n; i++ )
-	{
-		thashentry *t;
-		do_hash(m+i);
-
-		if( (t=seekHT()) != NULL )
-		if( t->depth >= Depth )
-		if( t->result != beta_cut )
-		{
-			int val = -t->value;
-			if( val > CHECKMATE-100 ) val -= Ply;
-			else if( val < -CHECKMATE+100 ) val += Ply;
-
-			if( val > Alpha )
-			{
-				if( val >= Beta )
-				{
-					undo_hash(m+i);
-					G[Counter].m = m[i];
-					PV[Ply][Ply] = m[i];
-					PV[Ply][Ply+1].from = 0;
-					result = Beta; goto end;
-				}
-				Alpha=val;
-			}
-		}
-		undo_hash(m+i);
-	}
-}
-#endif
-
-}
-else
-{	/*** Quiescence search ***/
-
-	result = approx_eval();
-
-	if( ( result < Beta+devi[Ply] && result > Alpha-devi[Ply] )
-	 || Totmat<=(B_VALUE+P_VALUE) )
-	result = static_eval();
-
-	if( result >= Beta ) return result;
-
-	if( result <= Alpha-(Q_VALUE+minmv) && Depth <= -100 )
-	{ return Alpha; }
-
-#ifdef QCAPSONLY
-	generate_legal_captures(m,&n,Alpha-result-minmv);
-#else
-	/* What to generate? Only captures or also safe checks? */
-	if(    G[Counter].mtrl-G[Counter].xmtrl < 400
-	    && Depth > -100
-	    && ( Color==WHITE ? ( Bknow.khung > 1 ) : ( Wknow.khung > 1 ) )
-	)
-		generate_legal_checks(m,&n);
-	else
-		generate_legal_captures(m,&n,Alpha-result-minmv);
-#endif
-}
-
 #ifdef RECAPTURE_EXTENSIONS
 	if( Depth>0 && G[Counter-1].m.in2 )
 	if( result<lastiter+50 && result<250 )   /* winning anyway: dont */
@@ -766,6 +636,71 @@ else
 		nopee:;
 	}
 #endif
+
+#ifdef ETTC
+if( Depth > 200 && SizeHT != 0 )
+{
+	extern void do_hash(tmove *), undo_hash(tmove *);
+
+	int i;
+	for( i=0; i!=n; i++ )
+	{
+		thashentry *t;
+		do_hash(m+i);
+
+		if( (t=seekHT()) != NULL )
+		if( t->depth >= Depth )
+		if( t->result != beta_cut )
+		{
+			int val = -t->value;
+			if( val > CHECKMATE-100 ) val -= Ply;
+			else if( val < -CHECKMATE+100 ) val += Ply;
+
+			if( val > Alpha )
+			{
+				if( val >= Beta )
+				{
+					undo_hash(m+i);
+					G[Counter].m = m[i];
+					PV[Ply][Ply] = m[i];
+					PV[Ply][Ply+1].from = 0;
+					result = Beta; goto end;
+				}
+				Alpha=val;
+			}
+		}
+		undo_hash(m+i);
+	}
+}
+#endif
+
+}
+else
+{	/*** Quiescence search ***/
+
+	result = approx_eval();
+
+	if( ( result < Beta+S[Ply].devi && result > Alpha-S[Ply].devi )
+	 || Totmat<=(B_VALUE+P_VALUE) || Ply<2 )
+	result = static_eval();
+
+	if( result >= Beta ) return result;
+
+	if( result <= Alpha-(Q_VALUE+minmv) && Depth <= -100 )
+	{ return Alpha; }
+
+#ifdef QCAPSONLY
+	generate_legal_captures(m,&n,Alpha-result-minmv);
+#else
+	/* What to generate? Only captures or also safe checks? */
+	if(    G[Counter].mtrl-G[Counter].xmtrl < 400
+	    && Depth > -100
+	)
+		generate_legal_checks(m,&n);
+	else
+		generate_legal_captures(m,&n,Alpha-result-minmv);
+#endif
+}
 
 /*** Compute heuristic values of moves ***/
 add_killer( m, n, t );

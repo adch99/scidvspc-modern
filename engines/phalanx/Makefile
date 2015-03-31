@@ -17,7 +17,7 @@ DEFINES = #-DGNUFUN
 
 OBJ = .o/phalanx.o .o/bcreate.o .o/search.o .o/io.o .o/data.o \
       .o/evaluate.o .o/genmoves.o .o/moving.o .o/hash.o .o/static.o \
-      .o/levels.o .o/book.o .o/killers.o .o/endgame.o .o/learn.o
+      .o/levels.o .o/book.o .o/killers.o .o/endgame.o .o/learn.o .o/easy.o
 
 phalanx: .o $(OBJ)
 	$(LINK) $(CFLAGS) $(DEFINES) $(LDFLAGS) $(OBJ) -o phalanx

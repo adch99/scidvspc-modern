@@ -692,11 +692,11 @@ namespace eval tacgame {
     if {$line == ""} {return}
 
     # Check Phalanx is correct version 
-    if { ! $analysisCoach(seen$phalanx) && $line != {Phalanx XXII-pg} && $line != {Phalanx XXIII} } {
+    if { ! $analysisCoach(seen$phalanx) && $line != {Phalanx XXIV} } {
       # Is there a bug here... Control flow somehow continues, giving an error
       ::tacgame::abortGame
       tk_messageBox -type ok -icon warning -parent . -title "Scid" -message \
-        "Phalanx reports version \"$line\", but should be \"Phalanx XXIII\"."
+        "Phalanx reports version \"$line\", but should be \"Phalanx XXIV\"."
       focus .main
       return
     }
@@ -894,7 +894,8 @@ namespace eval tacgame {
     # Pascal Georges : original Phalanx does not have 'setboard'
     set analysisCoach(automoveThinking$phalanx) 1
     sendToEngine $phalanx "setboard [sc_pos fen]"
-    sendToEngine $phalanx "go"
+    # This go breaks Phalanx XXIV 
+    # sendToEngine $phalanx "go"
     after 1000 ::tacgame::phalanxGo
   }
 
@@ -903,8 +904,9 @@ namespace eval tacgame {
 
     global ::tacgame::lscore ::tacgame::analysisCoach ::tacgame::currentPosHash ::tacgame::resignCount ::tacgame::phalanx
 
-    # The input move is of the form "my move is MOVE"
-    if {[scan $input "my move is %s" move] != 1} {
+    # Phalanx XXIII move format changed for XXIV
+    # if {[scan $input "my move is %s" move] != 1} 
+    if {[scan $input "move %s" move] != 1} {
       return 0
     }
 

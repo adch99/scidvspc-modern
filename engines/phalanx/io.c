@@ -1,19 +1,46 @@
-
 #include "phalanx.h"
+#include "stdarg.h"
 
 extern long Time;
 
 
 char Inp[256] = "\0";
-const char piece[7] =
+char piece[7] =
  { ' ', 'P', 'N', 'B', 'R', 'Q', 'K' };
-const char file[10] =
+char file[10] =
  { '<', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', '>' };
-const char row[12] =
+char row[12] =
  { '<', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '>' };
 
 tmove Pm[256];
 int Pn;
+
+
+
+/*
+ * printf() wrapper that also records the messages to the logfile
+ * Phalanx logs the messages only if started with the -g <logfile> parameter
+ */
+int printfl( const char * format, ... )
+{
+va_list arg;
+int done;
+
+va_start(arg,format);
+done = vprintf( format, arg );
+va_end(arg);
+
+if( Flag.log != NULL )
+{
+	fputc( '>', Flag.log );
+	va_start(arg,format);
+	vfprintf( Flag.log, format, arg );
+	va_end(arg);
+}
+
+return done;
+}
+
 
 
 /**
@@ -62,8 +89,6 @@ L[L[1].next].next = L[L[2].next].next = 0;
 	}
 }
 
-Flag.machine_color = enemy(Color);
-
 }
 
 
@@ -81,7 +106,7 @@ s[0] = '@';
 
 for(;;)
 {
-	for( i=0; i!=3; i++ ) s[i] = toupper(s[i]);
+	for( i=0; i!=3; i++ ) s[i] = toupper((int)s[i]);
 
 	switch(*s)
 	{
@@ -143,9 +168,13 @@ switch( m.special )
 {
   case LONG_CASTLING:  sprintf( ss, "O-O-O  " ); goto endprint;
   case SHORT_CASTLING: sprintf( ss, "O-O  " ); goto endprint;
+  case NULL_MOVE: sprintf( ss, "NULLMOV "); goto endprint;
 }
 
-sprintf( ss, "%c%c%c%c%c%c", piece[m.in1>>4],
+if( m.in1 != WP && m.in1 != BP ) sprintf( ss, "%c", piece[m.in1>>4] );
+else ss[0]='\0';
+
+sprintf( ss+strlen(ss), "%c%c%c%c%c",
 	file[m.from%10], row[m.from/10],
 	( m.in2 || m.special ) ? 'x' : '-',
 	file[m.to%10], row[m.to/10] );
@@ -178,6 +207,7 @@ switch( mi->special )
 {
   case LONG_CASTLING:  sprintf( ss, "O-O-O" ); goto endprint;
   case SHORT_CASTLING: sprintf( ss, "O-O" ); goto endprint;
+  case NULL_MOVE: sprintf( ss, "NULLM"); goto endprint;
 }
 
 if( piece(mi->in1) == PAWN )
@@ -264,10 +294,10 @@ switch( m.special )
   case SHORT_CASTLING: printf("O-O"); return;
 }
 
-printf( "%c%c%c%c%c",
+printf( "%c%c%c%c",
 	file[m.from%10], row[m.from/10],
-	file[m.to%10], row[m.to/10],
-	m.in2a == m.in1 ? ' ' : tolower(piece[m.in2a>>4]) );
+	file[m.to%10], row[m.to/10] );
+if ( m.in2a != m.in1 ) printf( "%c", tolower((int)piece[m.in2a>>4]) );
 
 }
 
@@ -319,7 +349,7 @@ tmove * sandex( char *inp, tmove *m, int n )
 		static char up[] = "pnrqk";
 		for( i=0; ok[i]!=*s; i++ ) if( ok[i] == '\0' ) return(NULL);
 		for( i=0; up[i]!='\0'; i++ )
-			if( up[i] == *s ) { *s = toupper(*s); break; }
+			if( up[i] == *s ) { *s = toupper((int)*s); break; }
 	}
 
 	/*** step 2: find the destination square ***/
@@ -390,7 +420,7 @@ tmove * sandex( char *inp, tmove *m, int n )
 	/*** step 4: is it a pawn promotion? determine piece ***/
 	in2a = p;
 	sto += 2; if( *sto == '=' ) sto++;
-	*sto = toupper(*sto);
+	*sto = toupper((int)*sto);
 	for(i=2;i!=7;i++) if( piece[i]==*sto ) in2a=(i<<4)+color;
 
 	/*** step 5: scan move list ***/
@@ -437,13 +467,13 @@ int checkmove( char *s, tmove *m )
 		else return 0;
 	}
 
-	for( i=0; s[i]!='\0' && ! islower(s[i]); i++ );
+	for( i=0; s[i]!='\0' && ! islower((int)s[i]); i++ );
 	if( s[i]=='\0' || s[i]!=file[m->from%10] ) return 0;
 
 	i++;
 	if( s[i]=='\0' || s[i]!=row[m->from/10] ) return 0;
 
-	for(    ; s[i]!='\0' && ( s[i]=='x' || ! islower(s[i]) ); i++ );
+	for(    ; s[i]!='\0' && ( s[i]=='x' || ! islower((int)s[i]) ); i++ );
 	if( s[i]=='\0' || s[i]!=file[m->to%10] ) return 0;
 
 	i++;
@@ -453,7 +483,7 @@ int checkmove( char *s, tmove *m )
 	if( m->in2a != m->in1 )
 	{
 		if( s[i] == '=' || s[i] == ':' ) i++;
-		if( toupper(s[i]) != piece[m->in2a>>4] ) return 0;
+		if( toupper((int)s[i]) != piece[m->in2a>>4] ) return 0;
 	}
 
 	return 1;
@@ -628,23 +658,38 @@ else
 
 
 
-void verboseline( tmove* m, int i, int n )
+void verboseline( void )
 {
 	char s[256];
 	int j;
 	extern long T1;
-	long t = (long) (ptime()-T1) / 100;
+	long t = (long) (ptime()-T1);
 
-	sprintf( s, "(%2i)", A_d );
-	sprintf( s+strlen(s), "   ");
-	sprintf( s+strlen(s), "%3li:%02li   ", t/60, t%60 );
-	sprintf( s+strlen(s), "%9lli  ", Nodes );
-	sprintf( s+strlen(s), "(%2i/%2i) ", i+1, n );
-	printm( m[i], s+strlen(s) );
-	sprintf( s+strlen(s), "     " );
-	for( j=0; j!=79; j++ ) sprintf( s+strlen(s), "" );
-
-	printf("%s",s);
+	if( Flag.xboard==0 )
+	{
+		t /= 100; /* seconds elapsed */
+		sprintf( s, "(%2i)", A_d );
+		sprintf( s+strlen(s), "   ");
+		sprintf( s+strlen(s), "%3li:%02li   ", t/60, t%60 );
+		sprintf( s+strlen(s), "%9lli  ", Nodes );
+		sprintf( s+strlen(s), "(%2i/%2i) ", A_i+1, A_n );
+		printm( A_m[A_i], s+strlen(s) );
+		sprintf( s+strlen(s), "     " );
+		for( j=0; j!=79; j++ ) sprintf( s+strlen(s), "" );
+		printf("%s",s);
+	}
+	else
+	{
+		sprintf( s, "stat01: %li %li %i %i %i ",
+		                 t, /* time elapsed in centiseconds */
+		                     (long) Nodes,
+		                         A_d, /* A_d breaks Arena */
+		                            A_n - A_i - 1,
+		                               A_n
+		);
+		printf("%s",s);
+		gnuprintm(A_m[A_i]); puts("");
+	}
 }
 
 
@@ -715,7 +760,7 @@ tgamenode p, q;
       if(*f == '\0' || *f == ' ') /* we shall find info for each squares */
       { puts(errmsg); return 1; }
 
-      if (isdigit(*f)) /* skip a number of squares */
+      if (isdigit((int)*f)) /* skip a number of squares */
       {
          if (*f == '0' || *f == '9') /* these are not allowed */
          { puts(errmsg); return 1; }
@@ -730,7 +775,7 @@ tgamenode p, q;
       }
       else
       { 
-         switch( tolower(*f) )
+         switch( tolower((int)*f) )
          {
          case 'k': B[j] = KING;   break;
          case 'q': B[j] = QUEEN;  break;
@@ -740,7 +785,7 @@ tgamenode p, q;
          case 'p': B[j] = PAWN;   break;
          default: puts(errmsg); return 1;  /* illegal piece char */
          }
-         if (tolower(*f) == *f) /* black */
+         if (tolower((int)*f) == (int)*f) /* black */
             B[j] |= BLACK;
          else
             B[j] |= WHITE;
@@ -816,7 +861,7 @@ tgamenode p, q;
 
    /* Now we should have the fifty-move info */
    i = 0;
-   while (isdigit(*f) && f != '\0') /* find the end of the fifty-move info */
+   while (isdigit((int)*f) && f != '\0') /* find the end of the fifty-move info */
       i = 10*i + (*f - '0'), f++;
    q.rule50 = i < 50 ? i : 50;
    if (i > 0 && p.m.special != 0) /* we have a "previous" move because of e.p. */
@@ -827,6 +872,9 @@ tgamenode p, q;
 
    /* Finally, check the fullmove number */
    Counter = 0;
+
+#undef nodef /* this block breaks moves/time timecontrols, Counter must be 0 */
+#ifdef nodef
    if (p.m.special != 0)
    {
       Counter++;
@@ -835,7 +883,7 @@ tgamenode p, q;
    }
 
    i = 0;
-   while (isdigit(*f) && *f != '\0') /* find the end of the fullmove number */
+   while (isdigit((int)*f) && *f != '\0') /* find the end of the fullmove number */
       i = 10*i + (*f - '0'), f++;
    i = 2*i;
    if (i != 0)
@@ -845,6 +893,7 @@ tgamenode p, q;
          i++;
       Counter = i;
    }
+#endif
 
    /* put results in place */ 
    G[Counter] = q;
@@ -1055,9 +1104,14 @@ void interrupt(int x)
 
 	if( Flag.polling )
 	{
-	/* ignore lines that begin with '.' */
-	c=getc(stdin); ungetc(c,stdin);
-	if( c=='.' ) { fgets(Inp,255,stdin); goto go_on; }
+		/* ignore lines that begin with '.' */
+		c=getc(stdin); ungetc(c,stdin);
+		if( c=='.' )
+		{
+			fgets(Inp,255,stdin);
+			verboseline();
+			goto go_on;
+		}
 	}
 
 	if( Flag.ponder < 2 )
@@ -1096,7 +1150,11 @@ int command(void)
 	}
 
 	if( Inp[0] == '\0' )
-	if( fgets(Inp,255,stdin) == NULL ) strcpy(Inp,"quit\n");
+	{
+		if( fgets(Inp,255,stdin) == NULL ) strcpy(Inp,"quit\n");
+		else if( Flag.log != NULL )
+			fprintf(Flag.log, "<%s", Inp);
+	}
 
 	if( strncmp(Inp,"exit",4) == 0 && Flag.analyze )
 	{ Flag.machine_color = Flag.analyze = 0; Inp[0]='\0'; return 1; }
@@ -1114,21 +1172,23 @@ int command(void)
 /* added by Bernhard Pruemmer, amended by DD */
 	if( strncmp( Inp, "protover", 8 ) == 0 )
 	{
-	   printf("feature myname=\"" ENGNAME " " );
+	   printfl("feature myname=\"" ENGNAME " " );
 	   if(Flag.easy)
-	   { printf("Easy %i\"\n",Flag.easy); }
+	   { printfl("Easy %i\"\n",Flag.easy); }
 	   else if(Flag.nps)
-	   { printf("%i NPS\"\n",Flag.nps); }
-	   else printf(VERSION"\"\n");
+	   { printfl("%i NPS\"\n",Flag.nps); }
+	   else printfl(VERSION"\"\n");
 
-           printf("feature analyze=1 "
+           printfl("feature analyze=1 "
            "setboard=1 "
            "sigint=1 "
            "time=1 "
+           "memory=1 "
            "draw=0 "
+	   "option=\"Randomizer (0-50) -slider 0 0 50\" "
            "ping=1 \n"
            );
-	   puts("feature done=1");
+	   printfl("feature done=1\n");
 	   Flag.xboard=20; /* version 2 */
 	   Inp[0]='\0'; return 1;
 	}
@@ -1149,7 +1209,7 @@ int command(void)
 	if( strncmp( Inp, "analyze", 7 ) == 0 )
 	{
 		if( Flag.ponder >= 2 ) { Abort = 1; return 0; }
-		puts("analyze mode, type 'exit' to terminate");
+		printfl("analyze mode, type 'exit' to terminate\n");
 		Flag.analyze = 1;
 		Flag.machine_color = 3;
 		Inp[0]='\0'; return 1;
@@ -1170,7 +1230,7 @@ int command(void)
 	  || strncmp( Inp, "black", 5 ) == 0 )
 	{
 		if( Flag.ponder >= 2 ) { Abort = 1; return 0; }
-		puts("you do not play both");
+		printfl("you do not play both\n");
 		if( Flag.machine_color == 0 )
 			Flag.machine_color = enemy(Color);
 		Inp[0]='\0'; return 1;
@@ -1180,7 +1240,7 @@ int command(void)
 	if( strncmp( Inp, "both", 4 ) == 0 )
 	{
 		if( Flag.ponder >= 2 ) { Abort = 1; return 0; }
-		puts("machine plays both");
+		printfl("machine plays both\n");
 		Flag.machine_color = 3;
 		Inp[0]='\0'; return 1;
 	}
@@ -1191,7 +1251,7 @@ int command(void)
 		if( Flag.ponder >= 2 ) { Abort = 1; return 0; }
 		// setfen("rnbqkbnr/pppppppp/////PPPPPPPP/RNBQKBNR/w");
 		setfen(initialpos);
-		DrawScore = -20;
+		DrawScore = -10;
 		if( Flag.analyze ) Flag.machine_color = WHITE;
 		else
 		{
@@ -1229,7 +1289,7 @@ int command(void)
 	if( strncmp( Inp, "post", 4 ) == 0 )
 	{
 		Flag.post = 1;
-		puts("post on");
+		printfl("post on\n");
 		Inp[0]='\0'; return 1;
 	}
 
@@ -1237,7 +1297,7 @@ int command(void)
 	if( strncmp( Inp, "nopost", 6 ) == 0 )
 	{
 		Flag.post = 0;
-		puts("post off");
+		printfl("post off\n");
 		Inp[0]='\0'; return 1;
 	}
 
@@ -1252,7 +1312,7 @@ int command(void)
 	if( strncmp( Inp, "ping", 4 ) == 0 )
 	{
 		Inp[1]='o'; /* ping -> pong */
-		printf(Inp);
+		printfl(Inp);
 		Inp[0]='\0'; return 1;
 	}
 
@@ -1281,7 +1341,7 @@ int command(void)
 			if( diff > 300 ) DrawScore = 20;
 			else if( diff < -300 ) DrawScore = -20;
 			else DrawScore = diff/15;
-			printf("setting draw score to %i\n",DrawScore);
+			printfl("setting draw score to %i\n",DrawScore);
 			Inp[0]='\0'; return 1;
 		}
 	}
@@ -1292,7 +1352,7 @@ int command(void)
 	{
 		if( Flag.ponder==0 && Flag.easy==0 )
 		Flag.ponder = 1;
-		if(Flag.ponder) puts("pondering on");
+		if(Flag.ponder) printfl("pondering on\n");
 		Inp[0]='\0'; return 1;
 	}
 
@@ -1304,7 +1364,7 @@ int command(void)
 			if( Flag.ponder >= 2 ) { Abort = 1; return 0; }
 			Flag.ponder = 0;
 		}
-		puts("pondering off");
+		printfl("pondering off\n");
 		Inp[0]='\0'; return 1;
 	}
 
@@ -1337,7 +1397,62 @@ int command(void)
 		else if( Flag.depth > MAXPLY*100 ) Flag.depth = MAXPLY*100;
 		Flag.level = fixeddepth;
 
-		printf("search depth %i\n", Flag.depth/100 );
+		printfl("search depth %i\n", Flag.depth/100 );
+		Inp[0]='\0'; return 1;
+	}
+
+/* COMMAND: randomizer option N */
+	if( strncmp( Inp, "option Randomizer (0-50)=", 18 ) == 0 )
+	{
+		sscanf( &Inp[25],"%i",&Flag.random);
+		if( Flag.random )
+			printfl("telluser randomizer set to %i centipawns\n",
+			Flag.random);
+		else
+			printfl("telluser randomizer off\n");
+	}
+
+/* COMMAND: memory N */
+	if( strncmp( Inp, "memory", 6 ) == 0 )
+	{
+		int newsize;
+		thashentry * newHT;
+
+		if( Inp[6] == '\n' )
+		{ printf("memory in MB> "); scanf( "%i", &newsize ); }
+		else
+		{ sscanf( &Inp[7],"%i",&newsize); }
+/*
+printf("telluser Phalanx hashtable %i MB, ", newsize );
+*/
+		if( newsize == 1 )
+			/* 1 MB requested, we use small HT */
+			newsize = 70000;
+		else
+		{
+			if( newsize <= 0 ) newsize = 0;
+			else /* newsize >= 2MB */
+			/* memory is in megabytes. we substract one megabyte
+			 * for other data structures */
+			newsize = ((newsize-1)*(1024*1024))/sizeof(thashentry);
+		}
+/*
+printf("%i entries\n",newsize);
+*/
+		if( newsize == 0 )
+		{
+			free(HT);
+			SizeHT=0; HT=NULL;
+		}
+		else
+		{
+			newHT = realloc( HT, newsize*sizeof(thashentry) );
+			if( newHT != NULL )
+			{
+				HT = newHT; SizeHT = newsize;
+				memset( HT, 0, SizeHT*sizeof(thashentry) );
+			}
+		}
 		Inp[0]='\0'; return 1;
 	}
 
@@ -1345,8 +1460,8 @@ int command(void)
 	if( strncmp( Inp, "book", 4 ) == 0 )
 	{
 		Flag.book = ! Flag.book;
-		if( Flag.book ) puts("book on");
-		else puts("book off");
+		if( Flag.book ) printfl("book on\n");
+		else printfl("book off\n");
 		Inp[0]='\0'; return 1;
 	}
 
@@ -1376,8 +1491,9 @@ puts("# (comment)");
 	}
 
 /* COMMAND: score */
-	if( strncmp( Inp, "score\n", 6 ) == 0 )
+	if( strncmp(Inp,"score\n",6) == 0 || strncmp(Inp,"s\n",2) == 0 )
 	{
+		Totmat = G[Counter].mtrl+G[Counter].xmtrl;
 		Scoring = 1; Depth = 100;
 		printf("\n (stm) material = %i\n",
 			G[Counter].mtrl-G[Counter].xmtrl);
@@ -1457,6 +1573,7 @@ puts("# (comment)");
 	{
 		if (setfen(Inp+9))
                    setfen(initialpos);
+		if(Flag.analyze) Flag.machine_color=3;
 		Inp[0] = '\0';
 		return 1;
 	}
@@ -1468,10 +1585,10 @@ puts("# (comment)");
 	  float seconds;
 	  if( sscanf(Inp+3,"%f",&seconds) == 0 ) {
 	    // expected a time in seconds
-	    printf ("Error: \"st:\" expected float , but got %s\n", Inp+3);
+	    printfl ("Error: \"st:\" expected float , but got %s\n", Inp+3);
 	  }
 	  // time argv S.A.
-	  printf ("Setting average time to %f seconds\n",seconds);
+	  printfl ("Setting average time to %f seconds\n",seconds);
 	  Flag.centiseconds = (int)(100*seconds);
 	  Flag.level = averagetime;
 	  Inp[0] = '\0';
@@ -1490,6 +1607,7 @@ puts("# (comment)");
 			tmove m;
 			int i;
 
+			memset( HT, 0, SizeHT*sizeof(thashentry) );
 			printf("\n%s",Inp);
 			m = root_search();
 			Flag.machine_color = 0;
@@ -1554,18 +1672,21 @@ puts("# (comment)");
 		{ tmove *sd = sandex(Inp,m,n); if(sd!=NULL) i=sd-m; else i=n; }
 		if( i != n )
 		{
-			printf("\nyour move is ");
-			printm( m[i], NULL ); puts("");
+			if( Flag.xboard < 2 )
+			{
+				printf("\nyour move is ");
+				printm( m[i], NULL ); puts("");
+			}
 			do_move( m+i );
 			switch( terminal() )
 			{
-				case 1: puts("1/2-1/2 {Drawn game}"); break;
-				case 2: puts("1/2-1/2 {Stalemate}"); break;
+				case 1: printfl("1/2-1/2 {Drawn game}\n"); break;
+				case 2: printfl("1/2-1/2 {Stalemate}\n"); break;
 				case 3:
 					if( Color == WHITE )
-					puts("0-1 {Black mates}");
+					printfl("0-1 {Black mates}\n");
 					else
-					puts("1-0 {White mates}");
+					printfl("1-0 {White mates}\n");
 			}
 			Inp[0]='\0'; return 1;
 		}
@@ -1574,7 +1695,7 @@ puts("# (comment)");
 	/*** UNKNOWN COMMAND / ILLEGAL MOVE ***/
 
 	{ char *c=strchr(Inp,'\n'); if(c!=NULL) *c='\0'; else *Inp='\0'; }
-	printf("Illegal move: %s\n",Inp);
+	printfl("Illegal move: %s\n",Inp);
 	Inp[0] = '\0';
 
 	return 1;
@@ -1630,15 +1751,13 @@ while( command() )
 				}
 			}
 
-			if( Flag.xboard >= 20 )
-			{ printf("move "); gnuprintm(m); printf("\n"); }
-			else
-			  {
-			  printf("my move is "); printm( m, NULL );
-
-			  if( Flag.xboard>0 )
-			  { printf("\n%i. ... ",(Counter+1)/2); gnuprintm(m); }
-			  puts("");
+			if( Flag.xboard < 2 )
+			{
+				printf("my move is "); printm( m, NULL ); puts("");
+			}
+			if( Flag.xboard > 0 )
+			{
+				printf("move "); gnuprintm(m); puts("");
 			}
 
 			switch( ( ter = terminal() ) )

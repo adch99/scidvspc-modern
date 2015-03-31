@@ -320,7 +320,6 @@ if( G[Counter].mtrl && G[Counter].xmtrl )
 }
 else
 {	/*** check for bad bishop ***/
-	int ss;  /* stronger side */
 	int wb, wp, wk, bk;
 	extern signed char * sqcolor;
 
@@ -336,14 +335,14 @@ else
 			)    return   G[Counter].xmtrl - G[Counter].mtrl;
 			else return   0;
 		}
-		bk=BKP; ss=WHITE;
+		bk=BKP;
 	}
 	else
 	{
 		wk=BKP;
 		if( B[L[wk].next]==BP ) { wp=L[wk].next; wb=L[wp].next; }
 		else                    { wb=L[wk].next; wp=L[wb].next; }
-		bk=WKP; ss=BLACK;
+		bk=WKP;
 		if( B[wb] == BN )
 		{
 			if(   ( B[A2]==BP && ( B[A1]==WK || B[B2]==WK ) )

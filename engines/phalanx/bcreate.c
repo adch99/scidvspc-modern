@@ -73,7 +73,7 @@ void compress(void)
 	printit(0);
 	#if defined(__GNUC__) && !defined(__MINGW32__)
 	alarm(0);
-	#endif
+    #endif
 	printf("\nsorting buffer ............ ");
 
 	qsort( A, I, sizeof(tb), bsortkey );
@@ -190,13 +190,6 @@ int addmove(char *move)
 { static tmove m[256];
   tmove * mf;
   static int n;
-  int i;
-  int p=PAWN+Color;
-  for(i=2;i!=7;i++) if(piece[i]==move[0]) p=16*i+Color;
-  if( move[0]=='O' )
-  { p=KING+Color;
-    if(move[3]=='-') { if(Color==WHITE){} }
-  }
 
   generate_legal_moves( m, &n, checktest(Color) );
   if( (mf=sandex(move,m,n)) != NULL )
