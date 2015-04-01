@@ -685,7 +685,8 @@ proc ::tree::displayLines { baseNumber moves } {
       if { $maskFile != {}} {
         ### Bind right button to popup a contextual menu
         # todo: Only display full menu if move is in mask
-        $w.f.tl tag bind tagclick$i <ButtonPress-3> "::tree::mask::contextMenu $w.f.tl $move %x %y %X %Y"
+        $w.f.tl tag bind tagclick$i <ButtonPress-3> "::tree::mask::contextMenu 0 $w.f.tl $move %x %y %X %Y"
+        $w.f.tl tag bind tagclick$i <Control-ButtonPress-3> "::tree::mask::contextMenu 1 $w.f.tl $move %x %y %X %Y"
       }
     }
 
@@ -741,7 +742,8 @@ proc ::tree::displayLines { baseNumber moves } {
       }
       
       $w.f.tl tag bind tagclick$idx <Button-1> "[list ::tree::selectCallback $baseNumber $maskmove] ; break"
-      $w.f.tl tag bind tagclick$idx <ButtonPress-3> "::tree::mask::contextMenu $w.f.tl $maskmove %x %y %X %Y"
+      $w.f.tl tag bind tagclick$idx <ButtonPress-3> "::tree::mask::contextMenu 0 $w.f.tl $maskmove %x %y %X %Y"
+      $w.f.tl tag bind tagclick$idx <Control-ButtonPress-3> "::tree::mask::contextMenu 1 $w.f.tl $maskmove %x %y %X %Y"
 
       # Markers
       foreach j {4 5} {
@@ -1510,9 +1512,11 @@ proc ::tree::mask::op {op refresh move args} {
   set ::tree::mask::controlButton 0
 }
 
-proc ::tree::mask::contextMenu {win move x y xc yc} {
+proc ::tree::mask::contextMenu {control win move x y xc yc} {
   update idletasks
   
+  set ::tree::mask::controlButton $control
+
   set mctxt $win.ctxtMenu
   if { [winfo exists $mctxt] } {
     destroy $mctxt
@@ -1521,7 +1525,6 @@ proc ::tree::mask::contextMenu {win move x y xc yc} {
   menu $mctxt
   $mctxt add command -label [tr AddToMask] -command [list ::tree::mask::op addToMask 1 $move]
   $mctxt add command -label [tr RemoveFromMask] -command [list ::tree::mask::op removeFromMask 1 $move]
-  bind $mctxt <Control-Button-1> {set ::tree::mask::controlButton 1}
   $mctxt add separator
 
   foreach j { 0 1 } {
@@ -1532,7 +1535,6 @@ proc ::tree::mask::contextMenu {win move x y xc yc} {
 
       $mctxt.image$j add command -label [ tr $e ] -image $i -compound left -command [list ::tree::mask::op setImage 1 $move $i $j]
     }
-    bind $mctxt.image$j <Control-Button-1> {set ::tree::mask::controlButton 1}
     $mctxt.image$j add command -label [tr NoMarker] -command [list ::tree::mask::op setImage 1 $move {} $j]
   }
   menu $mctxt.color
@@ -1540,14 +1542,12 @@ proc ::tree::mask::contextMenu {win move x y xc yc} {
   foreach c { "White" "Green" "Yellow" "Blue" "Red"} {
     $mctxt.color add command -label [ tr "${c}Mark" ] -background $c -command [list ::tree::mask::op setColor 1 $move $c]
   }
-  bind $mctxt.color <Control-Button-1> {set ::tree::mask::controlButton 1}
   
   menu $mctxt.nag
   $mctxt add cascade -label [tr Nag] -menu $mctxt.nag
 
   foreach nag [ list "!!" " !" "!?" "?!" " ?" "??" " ~" [::tr "None"]  ] {
     $mctxt.nag add command -label $nag -command [list ::tree::mask::op setNag 1 $move $nag]
-    bind $mctxt.nag <Control-Button-1> {set ::tree::mask::controlButton 1}
   }
   
   $mctxt add command -label [ tr CommentMove] -command [list ::tree::mask::op addComment 0 $move $win]
