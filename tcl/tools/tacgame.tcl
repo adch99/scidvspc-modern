@@ -479,6 +479,7 @@ namespace eval tacgame {
     ### "Resume" restarts paused computer (while player moves forward/back in history) S.A
 
     set ::pause 0
+    set ::tacgame::blackHack 1
     button $w.fbuttons.resume -state disabled -textvar ::tr(Resume) -command {
       set ::pause 0
       .coachWin.fbuttons.resume configure -state disabled
@@ -894,8 +895,11 @@ namespace eval tacgame {
     # Pascal Georges : original Phalanx does not have 'setboard'
     set analysisCoach(automoveThinking$phalanx) 1
     sendToEngine $phalanx "setboard [sc_pos fen]"
-    # This go breaks Phalanx XXIV 
-    # sendToEngine $phalanx "go"
+    # Phalanx XXIV doesnt handle setboard/go consistently if playing black
+    if {[getPhalanxColor] == "white" && $::tacgame::blackHack} {
+      sendToEngine $phalanx "go"
+      set ::tacgame::blackHack 0
+    }
     after 1000 ::tacgame::phalanxGo
   }
 
