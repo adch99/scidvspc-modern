@@ -181,13 +181,13 @@ namespace eval tacgame {
     pack $w.fbuttons -side top -fill x -pady 3
 
     radiobutton $w.flevel.diff_random.cb -text $::tr(RandomLevel) -variable ::tacgame::randomLevel -value 1 -width 15  -anchor w
-    scale $w.flevel.diff_random.lMin -orient horizontal -from 1200 -to 2200 -length 100 -variable ::tacgame::levelMin -tickinterval 0 -resolution 50
-    scale $w.flevel.diff_random.lMax -orient horizontal -from 1200 -to 2200 -length 100 -variable ::tacgame::levelMax -tickinterval 0 -resolution 50
+    scale $w.flevel.diff_random.lMin -orient horizontal -from 1400 -to 2400 -length 100 -variable ::tacgame::levelMin -tickinterval 0 -resolution 50
+    scale $w.flevel.diff_random.lMax -orient horizontal -from 1400 -to 2400 -length 100 -variable ::tacgame::levelMax -tickinterval 0 -resolution 50
     pack $w.flevel.diff_random.cb -side left
     pack $w.flevel.diff_random.lMin $w.flevel.diff_random.lMax -side left -expand 1
 
     radiobutton $w.flevel.diff_fixed.cb -text "$::tr(FixedLevel)\n($::tr(easy) - $::tr(hard))" -variable ::tacgame::randomLevel -value 0 -width 15  -anchor w
-    scale $w.flevel.diff_fixed.scale -orient horizontal -from 1200 -to 2200 -length 200 \
+    scale $w.flevel.diff_fixed.scale -orient horizontal -from 1400 -to 2400 -length 200 \
         -variable ::tacgame::levelFixed -tickinterval 0 -resolution 50
     pack $w.flevel.diff_fixed.cb -side left
     pack $w.flevel.diff_fixed.scale
@@ -579,8 +579,9 @@ namespace eval tacgame {
     }
 
     # turn phalanx book, ponder and learning off, easy on
-    # convert Elo = 1200 to level 100 up to Elo=2200 to level 0
-    set easylevel [expr int(100-(100*($level-1200)/(2200-1200)))]
+    # convert Elo = 1400 to level 100 up to Elo=2400 to level 0
+    set easylevel [expr int(100-(100*($level-1400)/(2400-1400)))]
+puts easylevel-$easylevel
     append analysisArgs " -b+ -p- -l- -e $easylevel "
 
     # If the analysis directory is not current dir, cd to it:

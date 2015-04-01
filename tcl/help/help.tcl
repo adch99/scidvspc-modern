@@ -4303,8 +4303,8 @@ training features of <a Analysis>Engine Analysis</a>, <a TB>Tablebases</a> and <
 With it one may play a game of Normal, Fischer (castling not supported), or Random Pawns Chess.
 </p><p>
 It is not a strong chess engine by modern standards, and - even more - it is programmed to make "human" like errors.
-It's level can be adjusted roughly between 1200 (a bright teenager with some experience), to 2200 (a National
-Master).  There is also a computer coach (Toga II) watching, which will indicate when Phalanx has made a blunder.
+It's level can be adjusted roughly between 1400 (a young club member), to 2400.
+There is also a computer coach (Toga II) watching, which will indicate when Phalanx has made a blunder.
 </p>
 <p><b>Coach's analysis time</b> <i>is the allowable time for the
 coach to check the players moves for errors. If this time is not
