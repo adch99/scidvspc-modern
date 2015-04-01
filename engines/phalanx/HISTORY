@@ -274,3 +274,28 @@ XXII      Better ICS whispering, it sends only one info per move.  Bugfix in
           the first finger line on ICS, it shows version, size of hashtable,
           and sizes of the opening books.  Bugfix in benchmark, the resulting
           number was incorrect on machines that can do over 70kNps.
+
+XXIII     Xboard protocol version 2 compatibility, including the periodic
+20141020  updates feature.  New -n commandline option to limit nodes per
+          second.  New -z commandline option to randomize root moves.  Easy
+          levels now don't play instantly, but use time.  DrawScore (contempt
+          factor) adjusted in endgames towards positive values to avoid playing
+          dead draws like KRKR.  Minor engine fixes: Simplified rootsearch,
+          the aspiration window implementation was not good, for now replaced
+          with standard PVS.  Temporarily disabled static eval cache as the
+          implementation was not correct.  Other minor bugfixes.
+          Known issues: Warnings in io.c.  Command 'setboard' moves the Counter
+          variable, which then cripples the 'history' command output.  Command
+          'setboard' chokes on unexpected input.  These issues are only
+          apparent in commandline and should never occur via a GUI - leaving
+          the fix to a future release.
+
+XXIV      Xboard protocol - 'memory' command support.  New file phalanx.eng to
+20141224  support the new Xboard automatic engine load.  More log messages.
+          Late move reductions with move count based pruning.  Small but
+          important changes in the static evaluation that improve endgame play:
+          Passed pawn, rook mobility, knight mobility.  Default contempt factor
+          changed from -20 to -10.  Fixed tournament timecontrols.  Positional
+          learning is now off by default.  Tweaked polling input timeslice to
+          better handle rapid changes in analyze mode.  Fixed GCC warnings.
+
