@@ -2158,9 +2158,6 @@ set helpText(TreeMasks) {<h1>Tree Masks</h1>
   shown afterwards.  Finally, the current postition may also hold a comment.
   </p>
   <p>
-  Most Mask operations are accessed by right-clicking the Tree.
-  </p>
-  <p>
   <i>The indepencence of Masks from a database
   make them a very powerful tool for handling opening repertoirs.
   Contrary to the traditional way of opening lines, Masks
@@ -2170,13 +2167,13 @@ set helpText(TreeMasks) {<h1>Tree Masks</h1>
   </p>
   <h3>Using Masks</h3>
   <p>
-  The Mask menu of the Tree is where Masks are opened or created.
-  Once a Mask file is opened, commentary can be added 
-  by right-clicking the Tree and adding comments/nags/markers (etc, see below).
+  The Tree window has a Mask sub-menu, where Masks are opened or created (as well as other features).
+  </p><p>
+  Once a Mask is opened, commentary can be added 
+  by <b>right-clicking moves</b> and adding comments/nags/markers (etc, see below).
   </p>
   <p>
-  Whole lines (all moves up to the current move) can be added using the Tree-<gt>Mask-<gt>Fill-With-Line menu.
-  Similarly, whole lines may be marked by holding the <b>Control</b> key down when selecting the nag/marker/color.
+  Whole lines may be marked by <b>holding the Control key</b> down while right-clicking.
   </p>
   <p>
   Moves not displayed in the Tree may be added to the Mask via

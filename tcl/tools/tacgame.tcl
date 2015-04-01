@@ -581,7 +581,6 @@ namespace eval tacgame {
     # turn phalanx book, ponder and learning off, easy on
     # convert Elo = 1400 to level 100 up to Elo=2400 to level 0
     set easylevel [expr int(100-(100*($level-1400)/(2400-1400)))]
-puts easylevel-$easylevel
     append analysisArgs " -b+ -p- -l- -e $easylevel "
 
     # If the analysis directory is not current dir, cd to it:
