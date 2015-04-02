@@ -1927,6 +1927,12 @@ proc ::tree::mask::fillWithLine {{op {}} {move {}} {args {}}} {
 
   sc_game push copy
 
+  if {$op == "removeFromMask"} {
+    set direction forward
+  } else {
+    set direction back
+  }
+
   while {1} {
       if {$op == ""} {
 	if {![sc_move back]} {
@@ -1941,10 +1947,13 @@ proc ::tree::mask::fillWithLine {{op {}} {move {}} {args {}}} {
       } else {
 	set ::tree::mask::cacheFenIndex [::tree::mask::toShortFen [sc_pos fen]]
         eval ::tree::mask::op $op 0 $move $args
-        if {![sc_move back]} {
+        if {![sc_move $direction]} {
           break
         }
         set move [sc_game info nextMove]
+        if {$move == ""} {
+          break
+        }
       }
   }
   set ::tree::mask::dirty 1

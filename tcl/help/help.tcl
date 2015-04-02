@@ -2174,6 +2174,8 @@ set helpText(TreeMasks) {<h1>Tree Masks</h1>
   </p>
   <p>
   Whole lines may be marked by <b>holding the Control key</b> down while right-clicking.
+  I.E. - for most operations, all *preceding* moves will be marked this way. The exception is
+  RemoveFromMask, which will remove all *following* moves.
   </p>
   <p>
   Moves not displayed in the Tree may be added to the Mask via
