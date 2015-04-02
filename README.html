@@ -126,11 +126,11 @@ project is authored by
 
 
 <P>source 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.13.tgz/download">scid_vs_pc-4.13.tgz</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.14.tgz/download">scid_vs_pc-4.14.tgz</A></P>
 <P>windows 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.13.exe/download">Scid vs PC-4.13.exe</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.14.exe/download">Scid vs PC-4.14.exe</A></P>
 <P>mac 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.13.dmg/download">ScidvsMac-4.13.dmg</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.14.dmg/download">ScidvsMac-4.14.dmg</A></P>
 <P>
 <A HREF="https://sourceforge.net/project/showfiles.php?group_id=263836">browse files</A></P>
 <P>The latest code is available from subversion - <B>svn checkout http://svn.code.sf.net/p/scidvspc/code/ scidvspc-code</B><BR>
@@ -155,8 +155,8 @@ If your distro does not provide these packages ("tkimg", "tcl-snack"), you can i
 <P>Then, installing from source:</P>
 <HR>
 <PRE>
-tar -xzf scid_vs_pc-4.13.tgz
-cd scid_vs_pc-4.13
+tar -xzf scid_vs_pc-4.14.tgz
+cd scid_vs_pc-4.14
 ./configure
 sudo make install
 scid
@@ -181,7 +181,7 @@ C:\Users\[USERNAME]\AppData\Local\VirtualStore\Program Files\Scid vs PC</P>
 
 
 <P>The 
-<A HREF="#download_">ScidvsMac-4.13 app</A> should include everything you need. Simply drag and drop the App into /Applications (or similar).</P>
+<A HREF="#download_">ScidvsMac-4.14 app</A> should include everything you need. Simply drag and drop the App into /Applications (or similar).</P>
 <P><EM>Users upgrading may have to remove (or edit) <B>$HOME/.scidvspc/config/engines.dat</B>
 to properly configure the chess engines.</EM></P>
 <P>OS X  has a poor implementation of Tcl, and docked mode has minor bugs (some windows work better after being moved around, keyboard shortcuts are very hit and miss).</P>
@@ -191,6 +191,8 @@ to properly configure the chess engines.</EM></P>
 <H2><A NAME="s5">5.</A> <A HREF="#toc5">news </A></H2>
 
 
+<P><B> April 2015 </B></P>
+<P>Exciting to have some usability fixes for the Tree Mask. Hopefully this feature will start to get some real use.</P>
 <P><B> December 2013 </B></P>
 <P>4.11 is out, with large board sizes, and a fix for the annoying filter/tree issue.</P>
 <P><B> April 2013 </B></P>
@@ -423,6 +425,82 @@ Chessbase databases and many chess variants.</P>
 
 
 <P>
+<H3>Scid vs. PC 4.14</H3>
+
+
+<P>
+<UL>
+<LI>Tree Mask</LI>
+<LI>Mask auto-load option</LI>
+<LI>Automatically add move to mask instead of showing silly error message.</LI>
+<LI>Holding Control while opening the Mask context menu (marker/nags/color) adds a marker to the whole line (etc).</LI>
+<LI>Make Mask moves easier to see, and tweak menus.<BR><BR>
+
+Board Setup</LI>
+<LI>Enable piece dragging </LI>
+<LI>Flip the setup board if main is flipped.</LI>
+<LI>Make 'Clear Setup board' have Kings.<BR><BR>
+
+Searches</LI>
+<LI>Add End-Position-Only option to Material Search.</LI>
+<LI>Knight+Bishop sanity check was wrong, and we werent saving Knight+Bishop joint totals in saved searches.</LI>
+<LI>Tweak the other-base combobox in Board Search.<BR><BR>
+
+Fics</LI>
+<LI>Double clicking an observed game makes it your primary game (number is shown as bold)</LI>
+<LI>Refine Offer Graph layout (most games are short), and add a close button (previously was only escape key)</LI>
+<LI>New 'Censor' button (+censor opponent)</LI>
+<LI>Add a show/hide buttons feature</LI>
+<LI>Control+Wheelmouse alters Fics console font size.</LI>
+<LI>Only save games a few moves long.<BR><BR>
+
+Computer Tournament</LI>
+<LI>Automatically adjudicate in simple cases of insufficient material.</LI>
+<LI>Make the window more ergonomic</LI>
+<LI>Fix ponder not working with non-standard starts.<BR><BR>
+
+Game Information</LI>
+<LI>Comments now have their own line, and move some infos to the Statusbar</LI>
+<LI>When Gameinfo is hidden, make the mini Player Names clickable.<BR><BR>
+
+Book Tuning</LI>
+<LI>Add/Remove Line features</LI>
+<LI>Clicking on Book Tuning next move (in yellow) moves forward.</LI>
+<LI>Bugfix - truncate the polyglot books when using Remove Move.<BR><BR>
+
+Score Graph</LI>
+<LI>Remove the errant rounding up of +10 to +11 in y-axis, and raise border over graph bars</LI>
+<LI>Add backGround colour to graphs</LI>
+<LI>Middle button pops up the game position for any move.<BR><BR>
+
+Other</LI>
+<LI>New Portuguese translation from R. Silva (martinus at FICS)</LI>
+<LI>Update to Phalanx XXIV. The Tactical Game feature is a proper challenge now.</LI>
+<LI>Place Best Games window beside Tree window (in docking mode).</LI>
+<LI>Playerinfo: still show Bio info (if available) when there are no games in database.</LI>
+<LI>Automatically add the final move if adding a var at game end with the AddVar button</LI>
+<LI>Minor improvements for html/html+javascript Game Exports</LI>
+<LI>Set filter to deleted games prior to compacting game file.<BR><BR>
+
+Documentation</LI>
+<LI>Document how to alter the Game List fields</LI>
+<LI>Update OS X build notes.</LI>
+<LI>Update chess960 patch (no code changes), and document known issues.<BR><BR>
+
+General Bug-fixes</LI>
+<LI>Xboard engine annotation was ignoring 'Use Book'.</LI>
+<LI>Correspondence chess tls/encryption bugfix (Alexander)</LI>
+<LI>Properly flip comment editor board (if applicable) and other tweaks</LI>
+<LI>'Find Best Move' feature was broke</LI>
+<LI>When saving game, throw error for badly formed extra tags (instead of silently discarding).</LI>
+<LI>When adding a var to end of game, make sure to auto enter *this* variation, in case of vars already existing</LI>
+<LI>Exit trial mode when changing bases.</LI>
+<LI>Gamelist sort confirmation column-name was not translated.</LI>
+<LI>Change move overwrite behaviour of eco browser and Opening Table moves.</LI>
+<LI>Remove superfluous padding from OS X aqua theme
+</LI>
+</UL>
+</P>
 <H3>Scid vs. PC 4.13</H3>
 
 <P>

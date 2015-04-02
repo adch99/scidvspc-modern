@@ -5810,6 +5810,109 @@ set helpText(Sound) {<h1>Sound</h1>
 set helpTitle(Changelog) "Scid vs PC Changelog"
 set helpText(Changelog) {<h1>Changelog</h1>
 
+<h4>4.14 (April 7, 2015)</h4>
+<br>
+<b>Tree Mask</b>
+<ul>
+<li>Mask auto-load option</li>
+<li>Automatically add move to mask instead of showing silly error message</li>
+<li>Holding Control while opening the Mask context menu (marker/nags/color) adds a marker to the whole line (etc)</li>
+<li>Make Mask moves easier to see, and tweak menus</li>
+</ul>
+<br>
+
+<b>Board Setup</b>
+<ul>
+<li>Enable piece dragging</li>
+<li>Flip the setup board if main is flipped</li>
+<li>Make 'Clear Setup board' have Kings</li>
+</ul>
+<br>
+
+<b>Searches</b>
+<ul>
+<li>Add End-Position-Only option to Material Search</li>
+<li>Knight+Bishop sanity check was wrong, and we werent saving Knight+Bishop joint totals in saved searches</li>
+<li>Tweak the other-base combobox in Board Search</li>
+</ul>
+<br>
+
+<b>Fics</b>
+<ul>
+<li>Double clicking an observed game makes it your primary game (number is shown as bold)</li>
+<li>Refine Offer Graph layout (most games are short), and add a close button (previously was only escape key)</li>
+<li>New 'Censor' button (+censor opponent)</li>
+<li>Add a show/hide buttons feature</li>
+<li>Control+Wheelmouse alters Fics console font size</li>
+<li>Only save games a few moves long</li>
+</ul>
+<br>
+
+<b>Computer Tournament</b>
+<ul>
+<li>Automatically adjudicate in simple cases of insufficient material</li>
+<li>Make the window more ergonomic</li>
+<li>Fix ponder not working with non-standard starts</li>
+</ul>
+<br>
+
+<b>Game Information</b>
+<ul>
+<li>Comments now have their own line, and move some infos to the Statusbar</li>
+<li>When Gameinfo is hidden, make the mini Player Names clickable</li>
+</ul>
+<br>
+
+<b>Book Tuning</b>
+<ul>
+<li>Add/Remove Line features</li>
+<li>Clicking on Book Tuning next move (in yellow) moves forward</li>
+<li>Bugfix - truncate the polyglot books when using Remove Move</li>
+</ul>
+<br>
+
+<b>Score Graph</b>
+<ul>
+<li>Remove the errant rounding up of +10 to +11 in y-axis, and raise border over graph bars</li>
+<li>Add backGround colour to graphs</li>
+<li>Middle button pops up the game position for any move</li>
+</ul>
+<br>
+
+<b>Other</b>
+<ul>
+<li>New Portuguese translation from R. Silva (martinus at FICS)</li>
+<li>Update to Phalanx XXIV. The Tactical Game feature is a proper challenge now</li>
+<li>Place Best Games window beside Tree window (in docking mode)</li>
+<li>Playerinfo: still show Bio info (if available) when there are no games in database</li>
+<li>Automatically add the final move if adding a var at game end with the AddVar button</li>
+<li>Minor improvements for html/html+javascript Game Exports</li>
+<li>Set filter to deleted games prior to compacting game file</li>
+</ul>
+<br>
+
+<b>Documentation</b>
+<ul>
+<li>Document how to alter the Game List fields</li>
+<li>Update OS X build notes</li>
+<li>Update chess960 patch (no code changes), and document known issues</li>
+</ul>
+<br>
+
+<b>General Bug-fixes</b>
+<ul>
+<li>Xboard engine annotation was ignoring 'Use Book'</li>
+<li>Correspondence chess tls/encryption bugfix (Alexander)</li>
+<li>Properly flip comment editor board (if applicable) and other tweaks</li>
+<li>'Find Best Move' feature was broke</li>
+<li>When saving game, throw error for badly formed extra tags (instead of silently discarding)</li>
+<li>When adding a var to end of game, make sure to auto enter *this* variation, in case of vars already existing</li>
+<li>Exit trial mode when changing bases</li>
+<li>Gamelist sort confirmation column-name was not translated</li>
+<li>Change move overwrite behaviour of eco browser and Opening Table moves</li>
+<li>Remove superfluous padding from OS X aqua theme</li>
+</ul>
+
 <h4>4.13 (October 25, 2014)</h4>
 <ul>
 <li>Analysis Engine: exclude move(s) feature. Mouse-hover shows excluded moves (UCI only)</li>

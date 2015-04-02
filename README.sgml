@@ -72,11 +72,11 @@ project is authored by <ref name="Stevenaaus" id="contact_"> and numerous contri
 <label id="download_">
 <sect> download <p>
 
-source <url url="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.13.tgz/download" name="scid_vs_pc-4.13.tgz">
+source <url url="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.14.tgz/download" name="scid_vs_pc-4.14.tgz">
 
-windows <url url="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.13.exe/download" name="Scid vs PC-4.13.exe">
+windows <url url="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.14.exe/download" name="Scid vs PC-4.14.exe">
 
-mac <url url="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.13.dmg/download" name="ScidvsMac-4.13.dmg">
+mac <url url="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.14.dmg/download" name="ScidvsMac-4.14.dmg">
 
 <url url="https://sourceforge.net/project/showfiles.php?group_id=263836" name="browse files">
 
@@ -107,8 +107,8 @@ or as a tarball <url url="https://sourceforge.net/p/scidvspc/code/HEAD/tarball" 
   <p>Then, installing from source:</p>
 
 <code>
-tar -xzf scid_vs_pc-4.13.tgz
-cd scid_vs_pc-4.13
+tar -xzf scid_vs_pc-4.14.tgz
+cd scid_vs_pc-4.14
 ./configure
 sudo make install
 scid
@@ -132,7 +132,7 @@ C:\Users\[USERNAME]\AppData\Local\VirtualStore\Program Files\Scid vs PC
 
 <sect2> Mac OS X <p>
 
-The <ref name="ScidvsMac-4.13 app" id="download_"> should include everything you need. Simply drag and drop the App into /Applications (or similar).
+The <ref name="ScidvsMac-4.14 app" id="download_"> should include everything you need. Simply drag and drop the App into /Applications (or similar).
 
 <em>Users upgrading may have to remove (or edit) <bf>$HOME/.scidvspc/config/engines.dat</bf>
 to properly configure the chess engines.</em>
@@ -144,6 +144,10 @@ To compile from source - once you have XCode installed - please read <bf>ScidvsM
 <em>OS X's Cocoa port of Wish is broken, with little chance of repair. Scid vs PC ships with a custom 32bit Carbon build of Wish.</em>
 
 <sect> news <p>
+
+<bf> April 2015 </bf>
+
+Exciting to have some usability fixes for the Tree Mask. Hopefully this feature will start to get some real use.
 
 <bf> December 2013 </bf>
 
@@ -377,6 +381,90 @@ Chessbase databases and many chess variants.</p>
 
 <label id="changes_">
 <sect> changes <p>
+
+<sect2> Scid vs. PC 4.14<p>
+
+<itemize>
+Tree Mask
+<item>Mask auto-load option
+<item>Automatically add move to mask instead of showing silly error message.
+<item>Holding Control while opening the Mask context menu (marker/nags/color) adds a marker to the whole line (etc).
+<item>Make Mask moves easier to see, and tweak menus.
+<newline><newline>
+
+Board Setup
+<item>Enable piece dragging 
+<item>Flip the setup board if main is flipped.
+<item>Make 'Clear Setup board' have Kings.
+<newline><newline>
+
+Searches
+<item>Add End-Position-Only option to Material Search.
+<item>Knight+Bishop sanity check was wrong, and we werent saving Knight+Bishop joint totals in saved searches.
+<item>Tweak the other-base combobox in Board Search.
+<newline><newline>
+
+Fics
+<item>Double clicking an observed game makes it your primary game (number is shown as bold)
+<item>Refine Offer Graph layout (most games are short), and add a close button (previously was only escape key)
+<item>New 'Censor' button (+censor opponent)
+<item>Add a show/hide buttons feature
+<item>Control+Wheelmouse alters Fics console font size.
+<item>Only save games a few moves long.
+<newline><newline>
+
+Computer Tournament
+<item>Automatically adjudicate in simple cases of insufficient material.
+<item>Make the window more ergonomic
+<item>Fix ponder not working with non-standard starts.
+<newline><newline>
+
+Game Information
+<item>Comments now have their own line, and move some infos to the Statusbar
+<item>When Gameinfo is hidden, make the mini Player Names clickable.
+<newline><newline>
+
+Book Tuning
+<item>Add/Remove Line features
+<item>Clicking on Book Tuning next move (in yellow) moves forward.
+<item>Bugfix - truncate the polyglot books when using Remove Move.
+<newline><newline>
+
+Score Graph
+<item>Remove the errant rounding up of +10 to +11 in y-axis, and raise border over graph bars
+<item>Add backGround colour to graphs
+<item>Middle button pops up the game position for any move.
+<newline><newline>
+
+Other
+<item>New Portuguese translation from R. Silva (martinus at FICS)
+<item>Update to Phalanx XXIV. The Tactical Game feature is a proper challenge now.
+<item>Place Best Games window beside Tree window (in docking mode).
+<item>Playerinfo: still show Bio info (if available) when there are no games in database.
+<item>Automatically add the final move if adding a var at game end with the AddVar button
+<item>Minor improvements for html/html+javascript Game Exports
+<item>Set filter to deleted games prior to compacting game file.
+<newline><newline>
+
+Documentation
+<item>Document how to alter the Game List fields
+<item>Update OS X build notes.
+<item>Update chess960 patch (no code changes), and document known issues.
+<newline><newline>
+
+General Bug-fixes
+<item>Xboard engine annotation was ignoring 'Use Book'.
+<item>Correspondence chess tls/encryption bugfix (Alexander)
+<item>Properly flip comment editor board (if applicable) and other tweaks
+<item>'Find Best Move' feature was broke
+<item>When saving game, throw error for badly formed extra tags (instead of silently discarding).
+<item>When adding a var to end of game, make sure to auto enter *this* variation, in case of vars already existing
+<item>Exit trial mode when changing bases.
+<item>Gamelist sort confirmation column-name was not translated.
+<item>Change move overwrite behaviour of eco browser and Opening Table moves.
+<item>Remove superfluous padding from OS X aqua theme
+
+</itemize></p>
 
 <sect2> Scid vs. PC 4.13<p>
 <itemize>
