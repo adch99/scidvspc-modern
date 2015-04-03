@@ -859,7 +859,7 @@ proc configToolbar {} {
   pack $w.ok -side right -padx 5 -pady 5
   pack $w.on $w.off -side left -padx 5 -pady 5
 
-  pack [label $w.bar -text label] -side bottom -pady 5
+  pack [label $w.bar -width 20] -side bottom -pady 5
 
   update
   placeWinOverParent $w .
