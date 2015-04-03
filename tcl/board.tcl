@@ -783,14 +783,14 @@ proc changeToolbar {{zero 1}} {
 }
 
 proc bindToolbarRadio {frame i} {
-  bind .main.tbconfig.$frame.$i <Any-Enter> \
-    ".main.tbconfig.bar configure -text \"[tr $::helpMessage(.main.tb.$i)]\""
-  bind .main.tbconfig.$frame.$i <Any-Leave> \
-    ".main.tbconfig.bar configure -text {}"
+  bind .tbconfig.$frame.$i <Any-Enter> \
+    ".tbconfig.bar configure -text \"[tr $::helpMessage(.main.tb.$i)]\""
+  bind .tbconfig.$frame.$i <Any-Leave> \
+    ".tbconfig.bar configure -text {}"
 }
 
 proc configToolbar {} {
-  set w .main.tbconfig
+  set w .tbconfig
   if {[winfo exists $w]} {
     raiseWin $w
     return
@@ -852,8 +852,8 @@ proc configToolbar {} {
   }
   dialogbutton $w.ok -text OK -command {
     array set toolbar [array get toolbar_temp]
-    catch {grab release .main.tbconfig}
-    destroy .main.tbconfig
+    catch {grab release .tbconfig}
+    destroy .tbconfig
     redrawToolbar
   }
   pack $w.ok -side right -padx 5 -pady 5
