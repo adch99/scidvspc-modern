@@ -200,13 +200,17 @@ install_scid: all_scid
 	install -m 755 -d $(SHAREDIR)/bases
 	install -m 666 ./bases/* $(SHAREDIR)/bases/
 	install -m 755 -d $(SHAREDIR)/html
-	cp -r ./html/* $(SHAREDIR)/html/
+	install -m 755 -d $(SHAREDIR)/html/bitmaps/
+	install -m 755 -d $(SHAREDIR)/html/bitmaps/mini/
+	install -m 666 ./html/bitmaps/mini/* $(SHAREDIR)/html/bitmaps/mini/
+	install -m 666 ./html/bitmaps/* $(SHAREDIR)/html/bitmaps/
+	install -m 666 ./html/scid.* $(SHAREDIR)/html/
 	install -m 755 -d $(SHAREDIR)/lang/
 	@if [ "$(LANGUAGES)" != "" ]; then \
 		cp $(LANGUAGES) $(SHAREDIR)/lang/ ; \
 	fi
 	install -m 755 -d $(SHAREDIR)/bitmaps
-	cp -r ./bitmaps/* $(SHAREDIR)/bitmaps/
+	install -m 666 ./bitmaps/* $(SHAREDIR)/bitmaps/
 	@if [ "`id -u`" -eq 0 ]; then \
 		install -m 644 -p fonts/*.ttf $(FONTDIR); \
 	else \
@@ -277,8 +281,11 @@ mac_app: all_scid engines mac_rename mac_buttons
 	install -m 755 -d dist/ScidvsMac.app/Contents/Resources/engines/phalanx
 	install -m 755 -d dist/ScidvsMac.app/Contents/Resources/engines/toga
 	install -m 755 -d dist/ScidvsMac.app/Contents/Resources/html
+	install -m 755 -d dist/ScidvsMac.app/Contents/Resources/html/bitmaps
+	install -m 755 -d dist/ScidvsMac.app/Contents/Resources/html/bitmaps/mini
 	install -m 755 -d dist/ScidvsMac.app/Contents/Resources/lang
 	install -m 755 -d dist/ScidvsMac.app/Contents/Resources/bitmaps
+	install -m 755 -d dist/images
 	install -m 755 $(SCRIPTS) $(EXECS) dist/ScidvsMac.app/Contents/MacOS
 	install -m 755 scid dist/ScidvsMac.app/Contents/MacOS
 	install -m 644 -p scid.eco dist/ScidvsMac.app/Contents/Resources/data/
@@ -290,12 +297,15 @@ mac_app: all_scid engines mac_rename mac_buttons
 	install -m 755 ./engines/toga/src/fruit dist/ScidvsMac.app/Contents/Resources/engines/toga/ 
 	install -m 644 icons/scid.icns dist/ScidvsMac.app/Contents/Resources/
 	install -m 644 Info.plist dist/ScidvsMac.app/Contents/
-	cp -r ./html/* dist/ScidvsMac.app/Contents/Resources/html/
+	install -m 644 ./html/scid.* dist/ScidvsMac.app/Contents/Resources/html/
+	install -m 644 ./html/bitmaps/*.* dist/ScidvsMac.app/Contents/Resources/html/bitmaps/
+	install -m 644 ./html/bitmaps/mini/* dist/ScidvsMac.app/Contents/Resources/html/bitmaps/mini/
+	install -m 644 ./bitmaps/* dist/ScidvsMac.app/Contents/Resources/bitmaps/
+	install -m 644 ./README.html dist/
+	install -m 644 ./images/* dist/images/
 	@if [ "$(LANGUAGES)" != "" ]; then \
 		cp $(LANGUAGES) dist/ScidvsMac.app/Contents/Resources/lang/ ; \
 	fi
-	cp -r ./bitmaps/* dist/ScidvsMac.app/Contents/Resources/bitmaps/
-	cp -r README.html images dist/
 
 mac_install: mac_app
 	install -m 755 -d /Applications/ScidvsMac.app
