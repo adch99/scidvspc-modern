@@ -138,6 +138,9 @@
   windows Scid vs PC-4.14.exe
   <http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.14.exe/download>
 
+  windows 64 bit Scid vs PC-4.14.x64.exe
+  <http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.14.x64.exe/download>
+
   mac ScidvsMac-4.14.dmg
   <http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.14.dmg/download>
 
@@ -188,6 +191,7 @@
   Debian / Mint / Ubuntu users may be interested in this link
   <http://www.linuxx.eu/2012/11/scid-vs-pc-installation-guide-
   ubuntu.html>.
+
   4.0.2.  Windows
 
   Windows installation simply requires downloading the ``executable'',
@@ -248,6 +252,7 @@
 
   Jiri Pavlovsky has made a windows installer. It's a nice piece of
   software :) Big thank-you. And we now have undo and redo features.
+
 
    July 8, 2011
 
@@ -315,10 +320,8 @@
 
   o  In the event of Scid failing to start, restart the program with the
      -nodock option.
-
   o  Windows undocked from within docking mode can have glitches.
      Mainly: drag and drop game copies in the switcher don't work.
-
 
   o  OS X support is not great.
 
@@ -383,9 +386,9 @@
      mostly mitigated by the speed of modern processors, it'd be nice to
      make use of the UCI ponder feature in analysis mode (Comp mode
      already does so).
-
   o  I've never had a chance to verify/update the Novag Citrine drivers
      and interface due to lack of hardware.
+
   o  Our Windows port needs a little overhaul to properly use Users home
      directory to store all the various data.  I will get around to
      doing it one day though.
@@ -517,7 +520,6 @@
 
   o  Enable piece dragging
 
-
   o  Flip the setup board if main is flipped.
 
   o  Make 'Clear Setup board' have Kings.
@@ -581,8 +583,8 @@
 
      Other
 
-  o  New Portuguese translation from R. Silva (martinus at FICS)
 
+  o  New Portuguese translation from R. Silva (martinus at FICS)
 
   o  Update to Phalanx XXIV. The Tactical Game feature is a proper
      challenge now.
@@ -713,7 +715,6 @@
   o  Break up the long Book Tuning button menus.
 
   o  Many minor bugfixes and further tree-only filter fixes.
-
 
   7.0.3.  Scid vs. PC 4.12
 

@@ -76,6 +76,8 @@ source <url url="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_p
 
 windows <url url="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.14.exe/download" name="Scid vs PC-4.14.exe">
 
+windows 64 bit <url url="http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.14.x64.exe/download" name="Scid vs PC-4.14.x64.exe">
+
 mac <url url="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.14.dmg/download" name="ScidvsMac-4.14.dmg">
 
 <url url="https://sourceforge.net/project/showfiles.php?group_id=263836" name="browse files">
