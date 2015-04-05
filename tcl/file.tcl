@@ -117,6 +117,7 @@ proc ::file::New {} {
   ::recentFiles::add $fName
   refreshWindows
   refreshSearchDBs
+  updateBoard -pgn
 }
 
 ### Main file open procedure. If no filename given, shows a file-open dialog
