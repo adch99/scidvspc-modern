@@ -1668,6 +1668,7 @@ namespace eval fics {
     if {![winfo exists .ficsOffers]} {
         # ::fics::killDialogs
         # hmm - the result is a tk_messageBox -title "Game result"
+        catch {destroy .__tk__messagebox}
 	::fics::initOffers 1
     }
 
