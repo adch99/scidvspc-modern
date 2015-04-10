@@ -1174,8 +1174,9 @@ namespace eval fics {
           set ::fics::elo($white) [string range $whiteElo 0 end-1]
           set ::fics::elo($black) [string range $blackElo 0 end-1]
           if {[winfo exists .fics.bottom.game$g]} {
-	    .fics.bottom.game$g.w.white configure -text $white
-	    .fics.bottom.game$g.b.black configure -text $black
+	    # These two lines give info straight away, but erase the ordinary time details when "time" is issued
+	    # .fics.bottom.game$g.w.white configure -text $white
+	    # .fics.bottom.game$g.b.black configure -text $black
             set type $gametype
             catch {set type $::fics::shorttype($gametype)}
 	    .fics.bottom.game$g.w.result configure -text "$g $type"
