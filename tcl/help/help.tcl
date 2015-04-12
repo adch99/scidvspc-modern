@@ -5178,7 +5178,7 @@ Some examples for common servers are:
 	</li>
 	<li>ICCF: 
 	<url https://www.iccf.com/XfccBasic.asmx>
-	https://www.webchess.com/XfccBasic.asmx</url>
+	https://www.iccf.com/XfccBasic.asmx</url>
 	</li>
 	<li>MeinSchach.de / MyChess.de:
 	<url http://www.myChess.de/xfcc/xfccbasic.php4>
