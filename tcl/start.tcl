@@ -1104,7 +1104,7 @@ proc resizeMainBoard {} {
   .main.gameInfo configure -height $new_game_info_lines
   
   update idletasks
-  bind .main <Configure> {if { "%W" == ".main" } {::docking::handleConfigureEvent ::resizeMainBoard}}
+  bind .main <Configure> {::docking::handleConfigureEvent %W}
 }
 
 proc toggleToolbar {} {

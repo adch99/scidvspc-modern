@@ -2208,7 +2208,7 @@ if { $::docking::USE_DOCKING } {
   setWinSize $dot_w
 
   # when main board pane is resized, auto-size it
-  bind .main <Configure> { ::docking::handleConfigureEvent ::resizeMainBoard }
+  bind .main <Configure> { ::docking::handleConfigureEvent %W }
 
   if { $::autoLoadLayout } {
     ::docking::layout_restore 1

@@ -29,9 +29,13 @@ namespace eval docking {
 }
 
 ################################################################################
-proc ::docking::handleConfigureEvent { cmd } {
+proc ::docking::handleConfigureEvent {w} {
   variable lastConfigureEvent
   variable deltaConfigureEvent
+
+  if {!$::docking::USE_DOCKING || $w != ".main" || ![winfo ismapped .]} {return}
+
+  set cmd ::resizeMainBoard
 
   after cancel "eval $cmd"
   set t [clock clicks -milliseconds]
