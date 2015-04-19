@@ -1,7 +1,7 @@
 # port.tcl:
 # Scid in Portuguese.
 # Translated by R. Silva (martinus at FICS)
-# Last edited 2015-03-27
+# Last edited 2015-04-19
 
 addLanguage U {Portuguese} 0 ;#iso8859-1
 
@@ -472,11 +472,11 @@ translate U PinfoLookupName {Ver Nome}
 translate U Draw {Empate}
 translate U stalemate {rei afogado}
 translate U withAllMoves {com todos os movimentos}
-translate U withAllButOneMove {com um movimento a menos}
+translate U withAllButOneMove {exceto com um movimento}
 translate U with {com}
 translate U only {apenas}
 translate U lose {derrota}
-translate U loses {derrotas}
+translate U loses {perde}
 translate U allOthersLose {qualquer outro perde}
 translate U matesIn {mate em}
 translate U hasCheckmated {recebeu xeque-mate}
@@ -676,8 +676,8 @@ translate U AnnotateAllMoves {Anotar todos os movimentos}
 translate U AnnotateWhite {Apenas para movimentos das Brancas}
 translate U AnnotateBlack {Apenas para movimentos das Pretas}
 translate U AnnotateNotBest {Quando o movimento jogado não for o melhor}
-translate U AnnotateBlundersOnly {Quando a jogada é um erro evidente}
-translate U BlundersNotBest {Erros/Lances inferiores}
+translate U AnnotateBlundersOnly {Quando a jogada é um grande erro}
+translate U BlundersNotBest {Apenas grandes erros}
 translate U AnnotateBlundersOnlyScoreChange {Nos erros anotar a desvalorização da posição em pontos: }
 translate U AnnotateTitle {Configurar Anotação}
 translate U AnnotateWith {Que se Move}
@@ -1196,7 +1196,7 @@ translate U SelectTournamentGames {Somente jogos no torneio atual}
 translate U SelectOlderGames {Somente jogos antigos}
 
 # Delete Twins window:
-translate U TwinsNote {Para serem duplicados, dois jogos devem ter pelo menos os mesmos dois jogadores, além dos critérios que você pode definir abaixo. Quando um par de duplicados é encontrado, o jogo menor é apagado. Dica: é melhor fazer a verificação ortográfica da base de dados antes de remover duplicados, pois isso melhora o processo de detecção de duplicados. }
+translate U TwinsNote {Para serem duplicados, dois jogos devem ter pelo menos os mesmos dois jogadores, além dos critérios que você pode definir abaixo. Quando um par de duplicados é encontrado, o jogo menor é apagado. Dica: é melhor fazer a verificação ortográfica da base de dados antes de remover duplicados, pois isso melhora o processo de deteção de duplicados. }
 translate U TwinsCriteria {Critério: Duplicados devem ter...}
 translate U TwinsWhich {Jogos a examinar}
 translate U TwinsColors {Jogadores com a mesma cor?}
@@ -1322,7 +1322,7 @@ Scid buscará o primeiro movimento do jogo atual que alcança uma posição nao enco
 translate U SoundsFolder {Pasta de Ficheiros de Som} ;# ***
 translate U SoundsFolderHelp {A pasta deve conter os ficheiros King.wav, a.wav, 1.wav, etc} ;# ***
 translate U SoundsAnnounceOptions {Opções para Anunciar Movimento} ;# ***
-translate U SoundsAnnounceNew {Anunciar novos moviemntos quando são feitos} ;# ***
+translate U SoundsAnnounceNew {Anunciar novos movimentos quando são feitos} ;# ***
 translate U SoundsAnnounceForward {Anunciar movimentos quando avançar um movimento} ;# ***
 translate U SoundsAnnounceBack {Anunciar quando recuar um movimento ou voltar atrás} ;# ***
 
