@@ -600,17 +600,18 @@ proc ::tree::displayLines { baseNumber moves } {
     }
     $w.f.tl insert end "    "
   }
-  if {[string match This* [lindex $moves 0]]} {
-    $w.f.tl insert 0.0 "[lindex $moves 0]"
+
+  set notOpen [string match This* [lindex $moves 0]]
+  if {$notOpen} {
+    $w.f.tl insert 0.0 "[lindex $moves 0]\n"
   } else {
     $w.f.tl insert end "[lindex $moves 0]\n"
+    # blank bargraph in title
+    $w.f.tl window create end-36c -create "canvas %W.g -width 60 -height 12 -highlightthickness 0"
   }
 
   ### Hmmm - some of the markers (images) might be 17 or 18 width, and they make the
   ### bargraph stick out a little. todo - resize all markers to 16
-
-  # blank bargraph in title
-  $w.f.tl window create end-36c -create "canvas %W.g -width 60 -height 12 -highlightthickness 0"
   
   ### Main Display the lines of the tree
 
@@ -720,8 +721,10 @@ proc ::tree::displayLines { baseNumber moves } {
     $w.f.tl insert end "[lindex $moves $i]\n"
   }
 
-  # blank bargraph in total
-  $w.f.tl window create end-32c -create "canvas %W.h -width 60 -height 12 -highlightthickness 0"
+  if {!$notOpen} {
+    # blank bargraph in total
+    $w.f.tl window create end-32c -create "canvas %W.h -width 60 -height 12 -highlightthickness 0"
+  }
 
   ### Add moves present in Mask and not in Tree
 
