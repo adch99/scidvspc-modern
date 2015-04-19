@@ -33,7 +33,7 @@ proc ::docking::handleConfigureEvent {w} {
   variable lastConfigureEvent
   variable deltaConfigureEvent
 
-  if {!$::docking::USE_DOCKING || $w != ".main" || ![winfo ismapped .]} {return}
+  if {!$::docking::USE_DOCKING || $w != ".main"} {return}
 
   set cmd ::resizeMainBoard
 
@@ -222,17 +222,17 @@ proc ::docking::cleanup { w { origin "" } } {
   after idle "if {[winfo exists $dockw]} { destroy $dockw }"
 
 }
-################################################################################
+
 proc ::docking::isUndocked { w } {
   set f ".fdock[string range $w 1 end]"
   return [info exists ::docking::notebook_name($f)]
 }
-################################################################################
+
 proc ::docking::isWindow { w } {
   set f ".fdock[string range $w 1 end]"
   return [expr {[winfo exists $w] && ![winfo exists $f]}]
 }
-################################################################################
+
 proc ::docking::move_tab {srctab dsttab {x {}} {y {}}} {
 
   variable tbs

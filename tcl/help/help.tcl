@@ -4186,7 +4186,7 @@ set helpText(Author) "<h1>Scid vs. PC</h1>
   <li>$::scidName  version $::scidVersion</li>
   <br>
   <li><url http://scidvspc.sourceforge.net/>http://scidvspc.sourceforge.net/</url></li>
-  <li>Mailing list: <url http://sourceforge.net/mailarchive/forum.php?forum_name=scidvspc-users>archive</url>,
+  <li>Mailing list: <url http://www.mail-archive.com/scidvspc-users@lists.sourceforge.net/>archive</url>,
   <url https://lists.sourceforge.net/lists/listinfo/scidvspc-users>subscribe</url></li>
   <br>
   <li>Based on:</li>
@@ -4224,7 +4224,7 @@ set helpText(Related) {<h1>Links</h1>
   <li>Pgn of events <url http://www.pgnmentor.com/files.html#events>www.pgnmentor.com/files.html#events</url></li>
 <br>
   <li>Mailing list subscribe (must be a member to post to list) <url https://lists.sourceforge.net/lists/listinfo/scidvspc-users>https://lists.sourceforge.net/lists/listinfo/scidvspc-users</url></li>
-  <li>Mailing list archive <url http://sourceforge.net/mailarchive/forum.php?forum_name=scidvspc-users>http://sourceforge.net/mailarchive/forum.php?forum_name=scidvspc-users</url></li>
+  <li>Mailing list archive <url http://www.mail-archive.com/scidvspc-users@lists.sourceforge.net/>http://www.mail-archive.com/scidvspc-users@lists.sourceforge.net/</url></li>
   <li>Programmer's reference <url http://scidvspc.sourceforge.net/doc/progref.html>http://scidvspc.sourceforge.net/doc/progref.html</url></li>
   <li>UCI engine protocol <url http://wbec-ridderkerk.nl/html/UCIProtocol.html>http://wbec-ridderkerk.nl/html/UCIProtocol.html</url></li>
   <li>Xboard engine protocol <url http://www.open-aurec.com/wbforum/WinBoard/engine-intf.html>http://www.open-aurec.com/wbforum/WinBoard/engine-intf.html</url></li>
