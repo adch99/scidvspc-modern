@@ -1612,6 +1612,7 @@ proc autoplay {} {
   if { [sc_pos isAt end] } {
     set move_done [sc_game info previousMoveNT]
     if { [string index $move_done end] != "#" && $::annotate(WithVars) != "no"} {
+      # Add a variation for the last move of the game
       set text [format "%d:%+.2f" $analysis(depth$n) $analysis(score$n)]
       set moves $analysis(moves$n)
       sc_move back
@@ -1619,7 +1620,8 @@ proc autoplay {} {
       sc_move addSan $move_done
       sc_pos setComment "[sc_pos getComment] $text"
       sc_move_add $moves $n
-      sc_var exit
+      # exit var and move to end
+      sc_move end
       updateBoard -pgn
     }
     if {$::annotate(isBatch) && [sc_game number] != 0} {
