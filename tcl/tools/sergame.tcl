@@ -460,23 +460,16 @@ namespace eval sergame {
   ################################################################################
 
   proc endOfGame {} {
-    # Use score to check for stalemate, checkmate.
-    # sc_pos analyze -time 50 (50 milliseconds) returns two args, a score and the best move.
-    # Score 32000 represents Inifity , {} represents "no move"
-
-    # Hmmmm... can cause core dumps! &&&
-    set score [sc_pos analyze -time 50]
-
-    if { $score == {0 {}}} {
+    if {[sc_pos moves] != {}} {
+      return 0
+    }
+    if {![sc_pos isCheck]} {
       ::gameclock::stop 1
       ::gameclock::stop 2
       sc_game tags set -result =
+      updateBoard -pgn
       tk_messageBox -type ok -message {Stalemate} -parent .main.board -icon info -title {Game Over}
-      return 1
-    }
-
-    # if { [string index [sc_game info previousMove] end ] == "#"}
-    if { $score == {-32000 {}}} {
+    } else {
       ::gameclock::stop 1
       ::gameclock::stop 2
       # if {!$::tacgame::mateShown} 
@@ -493,12 +486,10 @@ namespace eval sergame {
           sc_game tags set -result 0
         }
         updateBoard -pgn
-
         tk_messageBox -type ok -message "$side Wins" -parent .main.board -icon info -title Checkmate
       }
-      return 1
     }
-    return 0
+    return 1
   }
 
   proc engineGo {} {
