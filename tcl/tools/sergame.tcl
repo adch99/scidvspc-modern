@@ -455,27 +455,22 @@ namespace eval sergame {
     catch {puts $::uci::uciInfo(pipe$n) $text}
   }
 
-  ################################################################################
-  # returns true if last move is a mate and stops clocks
-  ################################################################################
+  ### Returns true if last move is mate/stalemate and stops clocks
 
-  proc endOfGame {} {
+  proc checkEndOfGame {} {
+
     if {[sc_pos moves] != {}} {
       return 0
     }
+    ::gameclock::stop 1
+    ::gameclock::stop 2
     if {![sc_pos isCheck]} {
-      ::gameclock::stop 1
-      ::gameclock::stop 2
       sc_game tags set -result =
-      updateBoard -pgn
-      tk_messageBox -type ok -message {Stalemate} -parent .main.board -icon info -title {Game Over}
+      set message Stalemate
     } else {
-      ::gameclock::stop 1
-      ::gameclock::stop 2
-      # if {!$::tacgame::mateShown} 
       if {1} {
         # mate dialog
-        if { [::sergame::getEngineColor] == [sc_pos side] } {
+        if { [::board::opponentColor] == [sc_pos side] } {
           set side Player
         } else {
           set side $::sergame::engineName
@@ -485,10 +480,11 @@ namespace eval sergame {
         } else {
           sc_game tags set -result 0
         }
-        updateBoard -pgn
-        tk_messageBox -type ok -message "$side Wins" -parent .main.board -icon info -title Checkmate
+        set message "$side wins"
       }
     }
+    updateBoard -pgn
+    tk_messageBox -type ok -message $message -parent .main.board -icon info -title $message
     return 1
   }
 
@@ -500,13 +496,13 @@ namespace eval sergame {
 
     after cancel ::sergame::engineGo
 
-    if { [::sergame::endOfGame] } {
+    if { [::sergame::checkEndOfGame] } {
       catch {::game::Save}
       return
     }
 
 
-    if { [sc_pos side] != [::sergame::getEngineColor] } {
+    if { [sc_pos side] != [::board::opponentColor] } {
       # Not computers turn, come back in 1  second
       after 1000 ::sergame::engineGo
       return
@@ -514,7 +510,7 @@ namespace eval sergame {
 
     # The player moved : add clock time
 
-    if { [::sergame::getEngineColor] == "black" } {
+    if { [::board::opponentColor] == "black" } {
       if {$timeMode == "timebonus" } {
         ::gameclock::add 1 $::sergame::winc
       }
@@ -547,7 +543,7 @@ namespace eval sergame {
           if {$answer == no} {
             sc_move back 1
             updateBoard -pgn
-	    if { [::sergame::getEngineColor] == "black" } {
+	    if { [::board::opponentColor] == "black" } {
 	      ::gameclock::stop 2
 	      ::gameclock::start 1
             } else {
@@ -591,7 +587,7 @@ namespace eval sergame {
           
           updateBoard -pgn -animate
           # Computer moved
-	  if { [::sergame::getEngineColor] == "black" } {
+	  if { [::board::opponentColor] == "black" } {
 	    ::gameclock::stop 2
 	    if {$timeMode == "timebonus"} {
 	      # have to use gameclock::add for some syncing reason
@@ -626,7 +622,7 @@ namespace eval sergame {
         # we made a book move so assume a score = 0
         set ::uci::uciInfo(prevscore$n) 0.0
         updateBoard -pgn -animate
-	if { [::sergame::getEngineColor] == "black" } {
+	if { [::board::opponentColor] == "black" } {
 	  ::gameclock::stop 2
 	  if {$timeMode == "timebonus"} {
             ::gameclock::add 2 $::sergame::binc
@@ -681,18 +677,18 @@ namespace eval sergame {
     if { $::sergame::coachIsWatching && $::uci::uciInfo(prevscore$n) != "" } {
       set blunder 0
       set delta [expr $::uci::uciInfo(score$n) - $::uci::uciInfo(prevscore$n)]
-      if {$delta > $::informant("?!") && [getEngineColor] == "white" ||
-        $delta < [expr 0.0 - $::informant("?!")] && [getEngineColor] == "black" } {
+      if {$delta > $::informant("?!") && [::board::opponentColor] == "white" ||
+        $delta < [expr 0.0 - $::informant("?!")] && [::board::opponentColor] == "black" } {
         set blunder 1
       }
       
-      if {$delta > $::informant("?") && [getEngineColor] == "white" ||
-        $delta < [expr 0.0 - $::informant("?")] && [getEngineColor] == "black" } {
+      if {$delta > $::informant("?") && [::board::opponentColor] == "white" ||
+        $delta < [expr 0.0 - $::informant("?")] && [::board::opponentColor] == "black" } {
         set blunder 2
       }
       
-      if {$delta > $::informant("??") && [getEngineColor] == "white" ||
-        $delta < [expr 0.0 - $::informant("??")] && [getEngineColor] == "black" } {
+      if {$delta > $::informant("??") && [::board::opponentColor] == "white" ||
+        $delta < [expr 0.0 - $::informant("??")] && [::board::opponentColor] == "black" } {
         set blunder 3
       }
       
@@ -709,7 +705,7 @@ namespace eval sergame {
         if {$answer == yes} {
           sc_move back 1
           updateBoard -pgn
-	  if { [::sergame::getEngineColor] == "black" } {
+	  if { [::board::opponentColor] == "black" } {
 	    ::gameclock::stop 2
 	    ::gameclock::start 1
 	  } else {
@@ -735,7 +731,7 @@ namespace eval sergame {
       return
     }
 
-    if { [::sergame::getEngineColor] == "black" } {
+    if { [::board::opponentColor] == "black" } {
       if {$timeMode == "timebonus"} {
 	# have to use gameclock::add even though it redraws clock too much
 	# incr ::gameclock::data(counter2) -[expr $::sergame::binc]
@@ -770,17 +766,8 @@ namespace eval sergame {
 
     after 1000 ::sergame::engineGo
   }
-
-  proc getEngineColor {} {
-    # Engine always plays for the upper side
-    if {[::board::isFlipped .main.board]} {
-      return white
-    } else  {
-      return black
-    }
-  }
-
 }
+
 ###
 ### End of file: sergame.tcl
 ###

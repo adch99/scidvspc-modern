@@ -2273,6 +2273,17 @@ proc ::board::isFlipped {w} {
   return $::board::_flip($w)
 }
 
+# Used by tacgame and sergame
+
+proc ::board::opponentColor {} {
+  # Engine always plays for the upper side
+  if {[::board::isFlipped .main.board]} {
+    return white
+  } else  {
+    return black
+  }
+}
+
 ###  Rotate the board 180 degrees.
 
 proc ::board::flip {w {newstate -1}} {

@@ -747,31 +747,25 @@ namespace eval tacgame {
     ::uci::sendToEngine $::tacgame::toga stop
   }
 
+  ### Returns true if last move is mate/stalemate and stops clocks
+  # (todo: merge with ::sergame::checkEndOfGame, and other tacgame/sergame merges)
+
   proc checkEndOfGame {} {
-    # Use score to check for stalemate, checkmate.
-    # sc_pos analyze -time 50 (50 milliseconds) returns two args, a score and the best move.
-    # Score 32000 represents Inifity , {} represents "no move"
 
-    # Hmmmm... can cause core dumps! &&&
-    set score [sc_pos analyze -time 50]
-
-    if { $score == {0 {}}} {
-      ::gameclock::stop 1
-      ::gameclock::stop 2
-      sc_game tags set -result =
-      tk_messageBox -type ok -message {Stalemate} -parent .main.board -icon info -title {Game Over}
-      return 1
+    if {[sc_pos moves] != {}} {
+      return 0
     }
-
-    # if { [string index [sc_game info previousMove] end ] == "#"}
-    if { $score == {-32000 {}}} {
-      ::gameclock::stop 1
-      ::gameclock::stop 2
+    ::gameclock::stop 1
+    ::gameclock::stop 2
+    if {![sc_pos isCheck]} {
+      sc_game tags set -result =
+      set message Stalemate
+    } else {
       # if {!$::tacgame::mateShown} 
       if {1} {
         # mate dialog
         # set ::tacgame::mateShown 1
-        if { [getPhalanxColor] == [sc_pos side] } {
+        if { [::board::opponentColor] == [sc_pos side] } {
           set side Player
         } else {
           set side Phalanx
@@ -781,13 +775,12 @@ namespace eval tacgame {
         } else {
           sc_game tags set -result 0
         }
-        updateBoard -pgn
-
-        tk_messageBox -type ok -message "$side Wins" -parent .main.board -icon info -title Checkmate
+        set message "$side wins"
       }
-      return 1
     }
-    return 0
+    updateBoard -pgn
+    tk_messageBox -type ok -message $message -parent .main.board -icon info -title $message
+    return 1
   }
 
   #######################
@@ -818,7 +811,7 @@ namespace eval tacgame {
 
     updateAnalysisText
 
-    if { [sc_pos side] != [::tacgame::getPhalanxColor] } {
+    if { [sc_pos side] != [::board::opponentColor] } {
       after 1000 ::tacgame::phalanxGo
       return
     }
@@ -896,7 +889,7 @@ namespace eval tacgame {
     set analysisCoach(automoveThinking$phalanx) 1
     sendToEngine $phalanx "setboard [sc_pos fen]"
     # Phalanx XXIV doesnt handle setboard/go consistently if playing black
-    if {[getPhalanxColor] == "white" && $::tacgame::blackHack} {
+    if {[::board::opponentColor] == "white" && $::tacgame::blackHack} {
       sendToEngine $phalanx "go"
       set ::tacgame::blackHack 0
     }
@@ -922,8 +915,8 @@ namespace eval tacgame {
     }
 
     # if the resign value has been reached more than 3 times in a raw, resign
-    if { ( [getPhalanxColor] == "black" && [lindex $lscore end] >  $::informant("++-") ) || \
-         ( [getPhalanxColor] == "white" && [lindex $lscore end] < [expr 0.0 - $::informant("++-")] ) } {
+    if { ( [::board::opponentColor] == "black" && [lindex $lscore end] >  $::informant("++-") ) || \
+         ( [::board::opponentColor] == "white" && [lindex $lscore end] < [expr 0.0 - $::informant("++-")] ) } {
       incr resignCount
     } else  {
       set resignCount 0
@@ -1019,7 +1012,7 @@ namespace eval tacgame {
     # only update when it is human turn
     # (todo: update the label every move)
 
-    if { [getPhalanxColor] == [sc_pos side] } { return }
+    if { [::board::opponentColor] == [sc_pos side] } { return }
     catch {
       set sc1 $::uci::uciInfo(score$toga)
       set sc2 [lindex $lscore end]
@@ -1044,10 +1037,10 @@ namespace eval tacgame {
 
     # Check if a blunder was made by Phalanx at last move.
     # The check is done during player's turn
-    if { $showblunder && [::tacgame::getPhalanxColor] != [sc_pos side] } {
+    if { $showblunder && [::board::opponentColor] != [sc_pos side] } {
       if {[llength $lscore] >=2} {
-        if { ($sc1 - $sc2 > $threshold && [::tacgame::getPhalanxColor] == "black") || \
-              ($sc1 - $sc2 < [expr 0.0 - $threshold] && [::tacgame::getPhalanxColor] == "white") } {
+        if { ($sc1 - $sc2 > $threshold && [::board::opponentColor] == "black") || \
+             ($sc1 - $sc2 < [expr 0.0 - $threshold] && [::board::opponentColor] == "white") } {
           set lastblundervalue [expr $sc1-$sc2]
           # append a ?!, ? or ?? to the move if there is none yet and if the game was not dead yet
           # (that is if the score was -6, if it goes down to -10, this is a normal evolution
@@ -1094,16 +1087,6 @@ namespace eval tacgame {
       set scoreLabel ""
     }
   }
-
-  proc getPhalanxColor {} {
-    # Phalanx always plays for the upper side
-    if { [::board::isFlipped .main.board] == 0 } {
-      return "black"
-    } else  {
-      return "white"
-    }
-  }
-
 
   set openingList [ list \
       "$::tr(Reti): 1.Nf3" \
@@ -1168,6 +1151,7 @@ namespace eval tacgame {
       "$::tr(KingsIndianMainLine): 1.d4 Nf6 2.c4 g6 4.e4 d6 5.Nf3" \
       ]
 }
+
 ###
 ### End of file: tacgame.tcl
 ###
