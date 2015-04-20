@@ -1271,7 +1271,6 @@ proc bookAnnotation { {n 1} } {
 # Move criteria is below, but basically they are non-obvious, unique, winning moves.
 
 proc markExercise { prevscore score } {
-puts markExercise!
   global analysis annotate informant
 
   set n $annotate(Engine)
