@@ -1428,11 +1428,11 @@ Position::CalcAttacks (colorT side, squareT target, SquareList * fromSquares)
     squareT sq;
 
     // Bishop/Queen/Rook attacks: look at each of the 8 directions
-    pieceT king, queen, rook, bishop, knight;
+    pieceT queen, rook, bishop, knight;
     if (side == WHITE) {
-        king = WK; queen = WQ; rook = WR; bishop = WB; knight = WN;
+        queen = WQ; rook = WR; bishop = WB; knight = WN;
     } else {
-        king = BK; queen = BQ; rook = BR; bishop = BB; knight = BN;
+        queen = BQ; rook = BR; bishop = BB; knight = BN;
     }
 
     uint numQueensRooks = Material[queen] + Material[rook];
@@ -1547,12 +1547,6 @@ Position::CalcAttacks (colorT side, squareT target, SquareList * fromSquares)
             }
         }
     }
-
-    // King attacks:
-    const squareT *destPtr = kingAttacks[target];
-    do
-	if (Board[*destPtr] == king) fromSquares->Add(*destPtr);
-    while (*++destPtr != NULL_SQUARE);
 
     return fromSquares->Size();
 }
