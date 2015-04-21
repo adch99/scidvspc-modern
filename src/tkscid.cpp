@@ -12435,6 +12435,11 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
              htextOutput ? "</run></green></tt>" : "");
     Tcl_AppendResult (ti, temp, newline, NULL);
 
+    if (htextOutput) {
+      snprintf (temp, wbtWidth + 45, "------------------------------------------------------------------------------");
+      Tcl_AppendResult (ti, "<tt>  " , temp , "</tt>", newline, NULL);
+    }
+
     score = percent = 0;
     if (totalcount[STATS_ALL] > 0) {
         score = bothscore[STATS_ALL][RESULT_White] * 2
@@ -12507,6 +12512,11 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
              "", blackcount[STATS_FILTER],
              htextOutput ? "</tt>" : "");
     Tcl_AppendResult (ti, temp, newline, NULL);
+
+    if (htextOutput) {
+      snprintf (temp, wbtWidth + 45, "------------------------------------------------------------------------------");
+      Tcl_AppendResult (ti, "<tt>  " , temp , "</tt>", newline, NULL);
+    }
 
     score = percent = 0;
     if (totalcount[STATS_FILTER] > 0) {
@@ -12590,6 +12600,11 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                  blackcount[STATS_OPP],
                  htextOutput ? "</run></green></tt>" : "");
         Tcl_AppendResult (ti, temp, newline, NULL);
+
+	if (htextOutput) {
+	  snprintf (temp, wbtWidth + 45, "------------------------------------------------------------------------------");
+	  Tcl_AppendResult (ti, "<tt>  " , temp , "</tt>", newline, NULL);
+        }
 
         score = percent = 0;
         if (totalcount[STATS_OPP] > 0) {
