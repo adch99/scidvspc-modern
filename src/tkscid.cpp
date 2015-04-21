@@ -12301,7 +12301,7 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             seenRating = true;
         }
     }
-    if (setFilter)
+    if (setFilter || setOpponent)
 	setMainFilter(db);
 
     uint score, percent;
