@@ -191,15 +191,14 @@ proc ::tree::Open {{baseNumber 0}} {
   selection handle $w.f.tl "::tree::copyToSelection $baseNumber"
 
   bind $w.f.tl <Destroy> {
-    set win "%W"
-    # bind $win <Destroy> {}
-    set bn ""
-    scan $win ".treeWin%%d.f.tl" bn
-    ::tree::closeTree $tree(base$bn)
-    set mctxt $win.ctxtMenu
-    if { [winfo exists $mctxt] } {
-      destroy $mctxt
+    set basenum ""
+    set win [winfo toplevel %W]
+    scan $win .treeWin%%d basenum
+    if {[string is integer -strict $basenum]} {
+      ::tree::closeTree $tree(base$basenum)
     }
+    if {[winfo exists $win.ctxtMenu]} {destroy $win.ctxtMenu}
+    if {[winfo exists .tooltip]} {wm withdraw .tooltip}
   }
 
   bind $w <Configure> "recordWinSize $w"
@@ -297,7 +296,9 @@ proc ::tree::closeTree {baseNumber} {
   }
 
   ::tree::hideCtxtMenu $baseNumber
-  .treeWin$baseNumber.buttons.stop invoke
+  if {[winfo exists .treeWin$baseNumber.buttons.stop]} {
+    .treeWin$baseNumber.buttons.stop invoke
+  }
 
   trace remove variable tree(bestMax$baseNumber) write "::tree::doTrace bestMax"
   trace remove variable tree(bestRes$baseNumber) write "::tree::doTrace bestRes"
@@ -1415,14 +1416,15 @@ proc ::tree::mask::addRecent {filename} {
 proc ::tree::mask::askForSave {{parent .}} {
   if {$::tree::mask::dirty} {
 
-    # Issue here - Closing the database breaks the "-parent $parent" for some reason
+    ### Issue here - closing app on linux - execution flows here, but the tk_messageBox fails to show up
+    # (?) Issue here - Closing the database breaks the "-parent $parent" for some reason
     # Once we remove the parent option, the tree window stays open (albeit the menu widget gets destroyed!)
     if {![winfo exists $parent]} {
       set parent .
     }
 
     set answer [tk_messageBox -title Scid -icon warning -type yesno \
-      -message "[ tr DoYouWantToSaveFirst ]\n$::tree::mask::maskFile ?" -parent $parent]
+      -message "[tr DoYouWantToSaveFirst] [tr TreeMask] $::tree::mask::maskFile ?" -parent $parent]
 
     if {$answer == "yes"} {
       ::tree::mask::save
