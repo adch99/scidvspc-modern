@@ -617,6 +617,7 @@ set helpText(MainWindow) {<h1>Scid Main Window</h1>
   At the top of the main window is a row of small icons called the Toolbar.
   Hovering the mouse over each will show their name, and selecting which icons are
   shown is done in <green>Options-<gt>Toolbar</green>.
+  Right-clicking the Replace Game icon does a quick save.
   </p>
 
   <h4><name GameInfo>Game Information Area</name></h4>
