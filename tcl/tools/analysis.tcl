@@ -2207,11 +2207,6 @@ proc makeAnalysisWin {{n 0} {options {}}} {
   setWinLocation $w
   setWinSize $w
   standardShortcuts $w
-  # Hack to fix our minimising app when annotating resize bug
-  if {[winfo width $w] > 400} {
-    wm geom $w 400x[winfo height $w]
-  }
-
 
   set analysis(showBoard$n) 0
 
