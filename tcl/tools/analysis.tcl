@@ -1867,6 +1867,11 @@ proc makeAnalysisMove {n} {
   }
   if {[scan $s %s move] != 1} { set res 0 }
 
+  if {$move == [sc_game info nextMoveUCI]} {
+    ::move::Forward
+    return
+  }
+
   if {! [sc_pos isAt vend] && ! $comp(playing)} {
     set action [confirmReplaceMove]
     if {$action == "cancel"} {
