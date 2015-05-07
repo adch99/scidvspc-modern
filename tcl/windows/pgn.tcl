@@ -492,8 +492,8 @@ namespace eval pgn {
     incr xc 5
     incr yc 5
     update idletasks
-    set dx [winfo width $w]
-    set dy [winfo height $w]
+    set dx [winfo reqwidth $w]
+    set dy [winfo reqheight $w]
     if {($xc+$dx) > [winfo screenwidth $w]} {
       set xc [expr {[winfo screenwidth $w] - $dx}]
     }
