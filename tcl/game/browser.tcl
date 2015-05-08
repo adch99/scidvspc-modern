@@ -314,6 +314,7 @@ proc ::gbrowser::update {n ply} {
 proc ::gbrowser::autoplay {n} {
   if {$::gbrowser::autoplay($n)} {
     set ::gbrowser::autoplay($n) 0
+    after cancel "::gbrowser::update $n +1"
     .gb$n.b.autoplay configure -image autoplay_off
     return
   } else {
