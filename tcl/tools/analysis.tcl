@@ -752,25 +752,9 @@ proc ::enginelist::move {dir} {
   global engines
 
   set current [lindex [.enginelist.list.list curselection] 0]
-  set max [llength $engines(list)]
 
-  set flag {}
-  for {set i 0} {$i < $max} {incr i} {
-    if {[winfo exists .analysisWin$i]} {
-       set flag "all Engines"
-    }
-  }
-  foreach win {.comp .uciConfigWin .engineEdit} title {"Computer Tournament" "UCI Config window" "Configure Engine window"} {
-    if {[winfo exists $win]} {
-      set flag $title
-      break
-    }
-  }
-  if {$flag != {}} {
-      tk_messageBox -title Scid \
-	  -icon warning -type ok -parent .enginelist \
-	  -message "Please close $flag first"
-      return
+  if {![::enginelist::checkAllClosed .enginelist]} {
+    return
   }
 
   if {($dir == -1 && $current == 0) || ($dir == 1 && $current == $max-1)} {
@@ -801,6 +785,36 @@ proc ::enginelist::move {dir} {
   }
   ::enginelist::listEngines [expr $current + $dir]
   ::enginelist::write
+}
+
+proc ::enginelist::checkAllClosed {parent} {
+  global engines
+
+  set max [llength $engines(list)]
+
+  set flag {}
+  for {set i 0} {$i < $max} {incr i} {
+    if {[winfo exists .analysisWin$i]} {
+       set flag "all Engines"
+    }
+  }
+  foreach win {.comp .uciConfigWin .engineEdit} title {"Computer Tournament" "UCI Config window" "Configure Engine window"} {
+    if {[winfo exists $win]} {
+      set flag $title
+      break
+    }
+  }
+  if {$flag != {}} {
+    if {$parent != ".enginelist"} {
+      set message "Due to possible file locking, please close $flag first"
+    } else {
+      set message "Please close $flag first"
+    }
+    tk_messageBox -title Scid -icon warning -type ok -parent $parent -message $message
+    return 0
+  } else {
+    return 1
+  }
 }
 
 proc ::enginelist::findEngine {key} {

@@ -4291,6 +4291,8 @@ sc_compact_games (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     db->idx->CloseIndexFile();
     db->gfile->Close();
+    // These four will fail on windows if a chess engine has been opened after the database
+    // due to file descriptor inheritance.  It's a bit hard to handle accurately :(
     removeFile (db->fileName, INDEX_SUFFIX);
     removeFile (db->fileName, GFILE_SUFFIX);
     renameFile (newName, db->fileName, INDEX_SUFFIX);

@@ -1681,6 +1681,9 @@ proc makeCompactWin {{parent .}} {
 
 proc compactNames {} {
   set w .compactWin
+  if {$::windowsOS && ![::enginelist::checkAllClosed $w]} {
+    return
+  }
   set stats [sc_compact stats names]
   if {[lindex $stats 1] == 0  &&  [lindex $stats 3] == 0  && \
         [lindex $stats 5] == 0  &&  [lindex $stats 7] == 0} {
@@ -1722,6 +1725,12 @@ proc compactGames {parent} {
   if {[compactGamesEmpty]} {
     tk_messageBox -type ok -icon info -parent $parent -title [concat "Scid: " $::tr(CompactGames)] \
         -message $::tr(NoUnusedGames)
+    return
+  }
+
+  # On windows, compaction will fail if a chess engine has been opened after the database
+  # because of the engine locking the file due to file descriptor inheritance
+  if {$::windowsOS && ![::enginelist::checkAllClosed $parent]} {
     return
   }
 
@@ -2312,9 +2321,13 @@ proc cleanerWin {} {
 
   addHorizontalRule $w
   pack [frame $w.b] -side bottom -fill x -pady 3
-  dialogbutton $w.b.ok -text OK -command "
-    destroy $w
-    doCleaner"
+  dialogbutton $w.b.ok -text OK -command {
+    if {$::windowsOS && ![::enginelist::checkAllClosed .mtoolWin]} {
+      return
+    }
+    destroy .mtoolWin
+    doCleaner
+  }
   dialogbutton $w.b.cancel -text $::tr(Cancel) -command "destroy $w"
   pack $w.b.cancel $w.b.ok -side right -padx 2 -pady 2
   # wm resizable $w 0 0
