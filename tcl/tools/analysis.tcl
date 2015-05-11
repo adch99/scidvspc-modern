@@ -757,6 +757,7 @@ proc ::enginelist::move {dir} {
     return
   }
 
+  set max [llength $engines(list)]
   if {($dir == -1 && $current == 0) || ($dir == 1 && $current == $max-1)} {
     return
   }
@@ -790,10 +791,8 @@ proc ::enginelist::move {dir} {
 proc ::enginelist::checkAllClosed {parent} {
   global engines
 
-  set max [llength $engines(list)]
-
   set flag {}
-  for {set i 0} {$i < $max} {incr i} {
+  for {set i 0} {$i < [llength $engines(list)]} {incr i} {
     if {[winfo exists .analysisWin$i]} {
        set flag "all Engines"
     }
