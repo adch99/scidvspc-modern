@@ -1681,7 +1681,7 @@ proc makeCompactWin {{parent .}} {
 
 proc compactNames {} {
   set w .compactWin
-  if {$::windowsOS && ![::enginelist::checkAllClosed $w]} {
+  if {$::windowsOS && ![checkAllEnginesClosed $w]} {
     return
   }
   set stats [sc_compact stats names]
@@ -1730,7 +1730,7 @@ proc compactGames {parent} {
 
   # On windows, compaction will fail if a chess engine has been opened after the database
   # because of the engine locking the file due to file descriptor inheritance
-  if {$::windowsOS && ![::enginelist::checkAllClosed $parent]} {
+  if {$::windowsOS && ![checkAllEnginesClosed $parent]} {
     return
   }
 
@@ -2322,7 +2322,7 @@ proc cleanerWin {} {
   addHorizontalRule $w
   pack [frame $w.b] -side bottom -fill x -pady 3
   dialogbutton $w.b.ok -text OK -command {
-    if {$::windowsOS && ![::enginelist::checkAllClosed .mtoolWin]} {
+    if {$::windowsOS && ![checkAllEnginesClosed .mtoolWin]} {
       return
     }
     destroy .mtoolWin

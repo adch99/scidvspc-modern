@@ -399,6 +399,17 @@ proc closeProgressWindow {} {
   focus .main
 }
 
+proc checkState {arg args} {
+  if {[set $arg]} {
+    set state normal
+  } else {
+    set state disabled
+  }
+  foreach widget $args {
+    $widget configure -state $state
+  }
+}
+
 proc setClipboard {string} {
 
   if {$string == {}} {return}

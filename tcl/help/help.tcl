@@ -2838,7 +2838,7 @@ with the format "stat01: time nodes ply mvleft mvtot mvname". The results can be
   <p>
   If an engine fails to start, try
   changing its directory setting. To avoid engines creating log files
-  in many different directories, I recommend trying the <b>~/.scdivspc</b>
+  in many different directories, I recommend trying the <b>~/.scidvspc</b>
   button. Engines necessitating opening books and/or .ini files, will need
   a directory of their own however.
   </p>

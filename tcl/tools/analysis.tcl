@@ -604,7 +604,7 @@ proc ::enginelist::edit {index {copy {}}} {
 
     if {$i == "URL"} {
       $f.l$i configure -text Webpage
-      button $f.bURL -textvar ::tr(FileOpen) -command {
+      button $f.bURL -text [tr FileOpen] -command {
         if {$engines(newURL) != ""} { openURL $engines(newURL) }
       }
       grid $f.bURL -row $row -column 2 -sticky we -pady 1 -padx 3
@@ -753,7 +753,7 @@ proc ::enginelist::move {dir} {
 
   set current [lindex [.enginelist.list.list curselection] 0]
 
-  if {![::enginelist::checkAllClosed .enginelist]} {
+  if {![checkAllEnginesClosed .enginelist]} {
     return
   }
 
@@ -788,7 +788,7 @@ proc ::enginelist::move {dir} {
   ::enginelist::write
 }
 
-proc ::enginelist::checkAllClosed {parent} {
+proc checkAllEnginesClosed {parent} {
   global engines
 
   set flag {}
@@ -797,7 +797,12 @@ proc ::enginelist::checkAllClosed {parent} {
        set flag "all Engines"
     }
   }
-  foreach win {.comp .uciConfigWin .engineEdit} title {"Computer Tournament" "UCI Config window" "Configure Engine window"} {
+  foreach {win title} {
+    .comp         "Computer Tournament" 
+    .uciConfigWin "UCI Config window"
+    .engineEdit   "Configure Engine window"
+    .serGameWin   "UCI Game"
+    .coachWin "Phalanx Game"} {
     if {[winfo exists $win]} {
       set flag $title
       break
@@ -805,7 +810,7 @@ proc ::enginelist::checkAllClosed {parent} {
   }
   if {$flag != {}} {
     if {$parent != ".enginelist"} {
-      set message "Due to possible file locking, please close $flag first"
+      set message "Due to possible file locking, please close $flag first."
     } else {
       set message "Please close $flag first"
     }
@@ -840,15 +845,6 @@ proc ::enginelist::findEngine {key} {
     $w selection set $i
     $w see $i
   }
-}
-
-proc checkState {arg widget} {
-  if {[set $arg]} {
-    set state normal
-  } else {
-    set state disabled
-  }
-  $widget configure -state $state
 }
 
 proc checkAnnotateControl {w} {
@@ -1099,11 +1095,7 @@ proc initAnnotation {n} {
 
   label $w.batch.lOpeningOnly -textvar ::tr(moves)
 
-  checkState ::useAnalysisBook $w.usebook.comboBooks
-  checkState ::useAnalysisBook $w.batch.cbOpeningOnly
-  checkState ::useAnalysisBook $w.batch.spOpeningOnly
-  checkState ::useAnalysisBook $w.batch.lOpeningOnly
-
+  checkState ::useAnalysisBook $w.usebook.comboBooks $w.batch.cbOpeningOnly $w.batch.spOpeningOnly $w.batch.lOpeningOnly
   checkState ::isOpeningOnly $w.batch.spOpeningOnly
 
   # Pack

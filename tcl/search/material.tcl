@@ -548,8 +548,8 @@ proc ::search::material {} {
   frame $f
 
   checkbutton $f.ignorecol -textvar ::tr(IgnoreColors) -variable ignoreColors -padx 4
-  checkbutton $f.matchend  -textvar ::tr(MatchEnd) -variable matchEnd -padx 4 -command ::search::material::checkState
-  ::search::material::checkState
+  checkbutton $f.matchend  -textvar ::tr(MatchEnd) -variable matchEnd -padx 4 -command ::search::material::checkMatchEnd
+  ::search::material::checkMatchEnd
 
   dialogbutton $f.save -textvar ::tr(Save) -padx 10 -command ::search::material::save
 
@@ -616,7 +616,7 @@ proc ::search::material {} {
   focus $f.search
 }
 
-proc ::search::material::checkState {} {
+proc ::search::material::checkMatchEnd {} {
   if {$::matchEnd} {
     set state disabled
   } else {
