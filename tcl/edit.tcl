@@ -264,6 +264,15 @@ proc setupBoardPiece {square {clear 0}} {
   makeSetupFen
 }
 
+proc copyBoardPiece {square} {
+  global setupBd pastePiece
+
+  set temp [string index $setupBd $square]
+  if {$temp != "."} {
+    set pastePiece $temp
+  }
+}
+
 # switchPastePiece:
 #   Changes the active piece selection in the board setup dialog to the
 #   next or previous piece in order.
@@ -464,9 +473,10 @@ proc setupBoard {} {
   if {!$::macOS} {
   frame $sl.hints
   label $sl.hints.label2 -text {Left button - Paste} -font font_SmallItalic
+  label $sl.hints.label3 -text {Middle - Select} -font font_SmallItalic
   label $sl.hints.label4 -text {Right button - Clear} -font font_SmallItalic
   pack $sl.hints -side top -fill x
-  pack $sl.hints.label2 $sl.hints.label4 -side left -expand yes -fill x
+  pack $sl.hints.label2 $sl.hints.label3 $sl.hints.label4 -side left -expand yes -fill x
   }
 
   pack $sbd -padx 10 -pady 10
@@ -474,6 +484,7 @@ proc setupBoard {} {
 
   for {set i 0} {$i < 64} {incr i} {
     $sbd.bd bind p$i <ButtonPress-1> "set ::selectedSq $i ; ::board::setDragSquare $sbd $i"
+    $sbd.bd bind p$i <ButtonPress-2> "copyBoardPiece $i"
     $sbd.bd bind p$i <ButtonPress-3> "setupBoardPiece $i 1"
   }
   bind $sbd.bd <B1-Motion> "::board::dragPiece $sbd %X %Y"
