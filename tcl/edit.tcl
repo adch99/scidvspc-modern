@@ -431,21 +431,25 @@ proc setupBoard {} {
   global boardSizes boardSize setupboardSize setupBd pastePiece \
          toMove epFile moveNum pawnNum castling setupFen highcolor origFen borderwidth selectedSq 
 
-  if {[winfo exists .setup]} { return }
+  set w .setup
+  if {[winfo exists $w]} {
+    raiseWin $w
+    return
+  }
 
-  toplevel .setup
-  wm title .setup "Setup Board"
-  setWinLocation .setup
+  toplevel $w
+  wm title $w "Setup Board"
+  setWinLocation $w
 
   set origFen [sc_pos fen]
   set selectedSq -1
 
   # Fenframe is a gridded frame at bottom of screen
-  frame .setup.fenframe
-  pack .setup.fenframe -side bottom -fill x -padx 5 -pady 5
+  frame $w.fenframe
+  pack $w.fenframe -side bottom -fill x -padx 5 -pady 5
 
-  set sl .setup.l
-  set sr .setup.r
+  set sl $w.l
+  set sr $w.r
   set sbd $sl.bd
 
   frame $sl
@@ -489,8 +493,8 @@ proc setupBoard {} {
   }
   bind $sbd.bd <B1-Motion> "::board::dragPiece $sbd %X %Y"
   bind $sbd.bd <ButtonRelease-1> "releaseSetupSquare $sbd %X %Y"
-  bind .setup <ButtonPress-4> "switchPastePiece next"
-  bind .setup <ButtonPress-5> "switchPastePiece prev"
+  bind $w <ButtonPress-4> "switchPastePiece next"
+  bind $w <ButtonPress-5> "switchPastePiece prev"
 
   pack [frame $sl.w] -side bottom -padx 8 -pady 8
   pack [frame $sl.b] -side bottom -padx 8 -pady 8
