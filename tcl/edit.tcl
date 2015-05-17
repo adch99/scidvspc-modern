@@ -437,6 +437,15 @@ proc setupBoard {} {
     return
   }
 
+  set confirm [::game::ConfirmDiscard2]
+  if {$confirm == 2} { return }
+  if {$confirm == 0} {
+    sc_game save [sc_game number]
+  }
+  setTrialMode 0
+  sc_game new
+  updateBoard -pgn
+
   toplevel $w
   wm title $w "Setup Board"
   setWinLocation $w
