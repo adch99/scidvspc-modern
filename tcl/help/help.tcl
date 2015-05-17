@@ -222,8 +222,9 @@ append helpText(Index) {
   <li><a Analysis>Analysis</a> window</li>
   <li><a Comment>Annotating games</a></li>
   <li><a Analysis Annotating>Annotating games</a> automatically</li>
+  <li><a Comment Annotation>Annotation symbols</a></li>
   <li><a NAGs>Annotation symbols</a> (NAGs)</li>
-  <li>Configuring <a Moves Informant>annotation symbols</a></li>
+  <li>Entering <a Moves Informant>annotation symbols</a></li>
   <li><a Comment Diagrams>Arrows</a></li>
   <li><a Author>Author, contacting</a></li>
   <li><a Maintenance Autoload>Autoloading</a> a game</li>
@@ -1334,7 +1335,7 @@ set helpText(Comment) {<h1>The Comment Editor</h1>
   <p><i>With the focus in the Comment Editor, one can move the game forward and back by pressing the control+left/right keys. Control-Enter saves the comment and closes the window.</i></p>
   
 
-  <h3>Annotation Symbols</h3>
+  <h3><name Annotation>Annotation Symbols</name></h3>
   <p>
   Scid uses the <a PGN>PGN Standard</a>
   and <a NAGs>NAGs</a> for annotation symbols.
@@ -3839,7 +3840,7 @@ set helpText(NAGs) {<h1>NAG Values</h1>
   <li>  5     Interesting move                                               : !?      </li>
   <li>  6     Dubious move                                                   : ?!      </li>
   <li>  7     Forced move                                                    : forced  </li>
-  <li>  8     Singular move; no reasonable alternatives                      : □       </li>
+  <li>  8     The only move. No reasonable alternatives                      : □       </li>
   <li>  9     Worst move                                                     : worst   </li>
   <li> 10     Drawish position                                               : =       </li>
   <li> 11     Equal chances, quiet position                                  : =, quiet</li>
