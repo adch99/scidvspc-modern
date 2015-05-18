@@ -7926,14 +7926,11 @@ sc_game_moves (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     bool sanFormat = true;
     bool printMoves = true;
     bool listFormat = false;
-    const uint MAXMOVES = 500;
-#ifdef WINCE
-    sanStringT * moveStrings = (sanStringT * ) my_Tcl_Alloc(sizeof( sanStringT [MAXMOVES]));
-#else
-    sanStringT * moveStrings = new sanStringT [MAXMOVES];
-#endif
     uint plyCount = 0;
     Game * g = db->game;
+    uint MAXMOVES = g->GetCurrentPly() + 10; // overhead
+    sanStringT * moveStrings = new sanStringT [MAXMOVES];
+
     for (int arg = 2; arg < argc; arg++) {
         if (argv[arg][0] == 'c') { sanFormat = false; }
         if (argv[arg][0] == 'n') { printMoves = false; }
@@ -7963,11 +7960,7 @@ sc_game_moves (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
               // instead of appending a nullmove, simpler to exit and return only '0000'
 	      g->RestoreState();
-  #ifdef WINCE
-	      my_Tcl_Free((char*) moveStrings);
-  #else
 	      delete[] moveStrings;
-  #endif
 	      Tcl_AppendResult (ti, "0000", NULL);
 	      return TCL_OK;
             } else {
@@ -7982,15 +7975,11 @@ sc_game_moves (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             *s = 0;
         }
         plyCount++;
-        if (plyCount == MAXMOVES) {
+        if (plyCount > MAXMOVES) {
+            // Oops  - shouldnt happen.
             // Too many moves, just give up:
             g->RestoreState();
-#ifdef WINCE
-            my_Tcl_Free((char*) moveStrings);
-#else
             delete[] moveStrings;
-#endif
-
             return TCL_OK;
         }
     }
@@ -8013,11 +8002,7 @@ sc_game_moves (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             Tcl_AppendResult (ti, (count == 0 ? "" : " "), move, NULL);
         }
     }
-#ifdef WINCE
-    my_Tcl_Free((char*) moveStrings);
-#else
     delete[] moveStrings;
-#endif
     return TCL_OK;
 }
 
