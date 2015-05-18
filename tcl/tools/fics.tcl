@@ -1470,6 +1470,14 @@ namespace eval fics {
         bind .fics <Destroy> ::fics::close
         ::fics::unobserveGame $game"
 
+      button $w.bottom.game$game.b.flip -image arrow_updown -font font_Small -relief flat -command "
+        set temp1 \[.fics.bottom.game$game.b.black cget -text\]
+        set temp2 \[.fics.bottom.game$game.w.white cget -text\]
+	::board::flip $w.bottom.game$game.bd
+        .fics.bottom.game$game.b.black configure -text \$temp2
+        .fics.bottom.game$game.w.white configure -text \$temp1
+      "
+
       button $w.bottom.game$game.b.load -image arrow_up -font font_Small -relief flat -command "
 	if {\[lsearch -exact \$::fics::observedGames $game\] > -1} {
           if {\$::fics::playing == -1 || \$::fics::playing == 1} {
@@ -1478,7 +1486,7 @@ namespace eval fics {
 	  ### If we're already observing a game, move it back to a small board
 	  ::fics::demote_mainGame 
           # unflip when loading new game ??
-	  if {\[::board::isFlipped .main.board\]} {::board::flip .main.board}
+	  if {\[::board::isFlipped .main.board\] ^ \[::board::isFlipped $w.bottom.game$game.bd\]} {::board::flip .main.board}
 
 	  ### Restarting observe ensures we get a parseStyle12 line straight away
 	  ::fics::unobserveGame $game
@@ -1507,7 +1515,7 @@ namespace eval fics {
       pack $w.bottom.game$game.b  -side top -anchor w -expand 1 -fill x
       pack $w.bottom.game$game.b.black -side left 
       pack [frame $w.bottom.game$game.b.space -width 24] \
-           $w.bottom.game$game.b.close $w.bottom.game$game.b.load -side right
+           $w.bottom.game$game.b.close $w.bottom.game$game.b.load $w.bottom.game$game.b.flip -side right
       pack $w.bottom.game$game.bd -side top
       pack $w.bottom.game$game.w -side top -expand 1 -fill x
       pack $w.bottom.game$game.w.white -side left 
@@ -1838,13 +1846,24 @@ namespace eval fics {
 
     ### Observed games are a row of small boards down the bottom left 
     if {[lsearch -exact $::fics::observedGames $game] > -1} {
-      if {$color == "W"} {
-	.fics.bottom.game$game.w.white configure -text "[lindex $line 17] ([lindex $line 24] secs) X"
-	.fics.bottom.game$game.b.black configure -text "[lindex $line 18] ([lindex $line 25] secs)"
+      if { [::board::isFlipped .fics.bottom.game$game.bd] } {
+	if {$color == "W"} {
+	  .fics.bottom.game$game.b.black configure -text "[lindex $line 17] ([lindex $line 24] secs) X"
+	  .fics.bottom.game$game.w.white configure -text "[lindex $line 18] ([lindex $line 25] secs)"
+	} else {
+	  .fics.bottom.game$game.b.black configure -text "[lindex $line 17] ([lindex $line 24] secs)"
+	  .fics.bottom.game$game.w.white configure -text "[lindex $line 18] ([lindex $line 25] secs) X"
+	}
       } else {
-	.fics.bottom.game$game.w.white configure -text "[lindex $line 17] ([lindex $line 24] secs)"
-	.fics.bottom.game$game.b.black configure -text "[lindex $line 18] ([lindex $line 25] secs) X"
+	if {$color == "W"} {
+	  .fics.bottom.game$game.w.white configure -text "[lindex $line 17] ([lindex $line 24] secs) X"
+	  .fics.bottom.game$game.b.black configure -text "[lindex $line 18] ([lindex $line 25] secs)"
+	} else {
+	  .fics.bottom.game$game.w.white configure -text "[lindex $line 17] ([lindex $line 24] secs)"
+	  .fics.bottom.game$game.b.black configure -text "[lindex $line 18] ([lindex $line 25] secs) X"
+	}
       }
+
       set moves [lreverse [lrange $line 1 8]]
       set boardmoves [string map { "-" "." " " "" } $moves]
       ::board::update .fics.bottom.game$game.bd $boardmoves 1

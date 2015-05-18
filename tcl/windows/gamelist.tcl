@@ -846,6 +846,11 @@ R0lGODlhCgAKAIABAAAAAP///yH5BAEKAAEALAAAAAAKAAoAAAIPjI+pa+D/
 GnRoqrgA26wAADs=
 }
 
+image create photo arrow_updown -format gif -data {
+R0lGODlhCgAKAKECAAAAAIKCgv///////yH5BAEKAAIALAAAAAAKAAoAAAIU
+lAVxC63c3DJpnmrRsxjGTUkcWAAAOw==
+}
+
 image create photo arrow_close -format gif -data {
 R0lGODlhDAAMAIABAAAAAP///yH5BAEKAAEALAAAAAAMAAwAAAIVjI+pCQjt
 4FtvrmBp1SYf2IHXSI4FADs=
