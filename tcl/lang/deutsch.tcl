@@ -728,6 +728,8 @@ translate D LowPriority {Niedrige CPU-Priorität}
 translate D LogEngines {Log Größe}
 # ====== TODO To be translated ======
 translate D LogName {Namen hinzufügen}
+# ====== TODO To be translated ======
+translate D MaxPly {Max Ply}
 translate D ClickHereToSeeMoves {Hier klicken um Züge anzuzeigen}
 translate D ConfigureInformant {Informator konfigurieren}
 translate D Informant!? {Interessanter Zug}

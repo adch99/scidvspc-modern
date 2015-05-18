@@ -848,6 +848,8 @@ translate O LogEngines {Log Size}
 # ====== TODO To be translated ======
 translate O LogName {Add Name}
 # ====== TODO To be translated ======
+translate O MaxPly {Max Ply}
+# ====== TODO To be translated ======
 translate O ClickHereToSeeMoves {Click here to see moves}
 # ====== TODO To be translated ======
 translate O ConfigureInformant {Configure Informant}

@@ -701,6 +701,8 @@ translate P CutOff {Odcięcie}
 translate P LowPriority {Niski priorytet CPU} 
 translate P LogEngines {Loguj enginy}
 translate P LogName {Dodaj Nazwisko}
+# ====== TODO To be translated ======
+translate P MaxPly {Max Ply}
 translate P ClickHereToSeeMoves {Kliknij, by zobaczyć posunięcia}
 translate P ConfigureInformant {Konfiguruj oceny Informatora}
 translate P Informant!? {Ciekawe posunięcie}

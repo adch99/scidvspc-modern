@@ -722,6 +722,8 @@ translate N LowPriority {Lage CPU prioriteit}
 translate N LogEngines {Log Size}
 # ====== TODO To be translated ======
 translate N LogName {Add Name}
+# ====== TODO To be translated ======
+translate N MaxPly {Max Ply}
 translate N ClickHereToSeeMoves {Klik hier om zetten te zien}
 translate N ConfigureInformant {Annotaties configureren}
 translate N Informant!? {Interessante zet}

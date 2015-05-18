@@ -787,6 +787,8 @@ translate I LowPriority {Imposta la priorità della CPU a bassa}
 translate I LogEngines {Log Size}
 # ====== TODO To be translated ======
 translate I LogName {Add Name}
+# ====== TODO To be translated ======
+translate I MaxPly {Max Ply}
 translate I ClickHereToSeeMoves {Clicca qui per vedere le mosse}
 translate I ConfigureInformant {Configura i valori informativi}
 translate I Informant!? {Mossa interessante}

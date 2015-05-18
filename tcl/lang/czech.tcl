@@ -770,6 +770,8 @@ translate C LogEngines {Log Size}
 # ====== TODO To be translated ======
 translate C LogName {Add Name}
 # ====== TODO To be translated ======
+translate C MaxPly {Max Ply}
+# ====== TODO To be translated ======
 translate C ClickHereToSeeMoves {Click here to see moves}
 # ====== TODO To be translated ======
 translate C ConfigureInformant {Configure Informant}

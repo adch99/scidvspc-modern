@@ -172,6 +172,9 @@ namespace eval uci {
 
           ### Assuming "pv" infos are always last gains ~ 100usecs but is against UCI standard
           set uciInfo(pv$n) [lrange $data $i end]
+          if {$analysis(maxPly) > 0} {
+	    set uciInfo(pv$n) [lrange $uciInfo(pv$n) 0 [expr {$analysis(maxPly) - 1}]]
+          }
           ### Depth annotation feature
 	  if {$annotate(Engine) == $n && $annotate(Depth)} {
 	    if {($uciInfo(depth$n) >= $annotate(WantedDepth) || $uciInfo(scoremate$n) > 0) || [sc_pos matchMoves {}] == {} } {

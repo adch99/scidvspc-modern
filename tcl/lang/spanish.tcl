@@ -736,6 +736,8 @@ translate S LowPriority {Baja prioridad del procesador}
 # todo
 translate S LogEngines {Log Size}
 translate S LogName {Añadir nombre}
+# ====== TODO To be translated ======
+translate S MaxPly {Max Ply}
 translate S ClickHereToSeeMoves {Click aquí para ver movimientos}
 translate S ConfigureInformant {Configurar informaciones}
 translate S Informant!? {Movimiento interesante}

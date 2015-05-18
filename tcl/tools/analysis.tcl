@@ -427,6 +427,8 @@ proc ::enginelist::choose {} {
 
   label $w.buttons2.logengines        -textvar ::tr(LogEngines)
   entry $w.buttons2.logmax            -textvariable analysis(logMax) -width 6
+  label $w.buttons2.ply               -textvar ::tr(MaxPly)
+  spinbox $w.buttons2.maxply -width 4 -textvariable analysis(maxPly) -from 0 -to 20 -increment 1
   checkbutton $w.buttons2.logname     -variable analysis(logName)     -textvar ::tr(LogName)
   checkbutton $w.buttons2.lowpriority -variable analysis(lowPriority) -textvar ::tr(LowPriority)
   dialogbutton $w.buttons2.start -textvar ::tr(Start) -command {
@@ -445,7 +447,7 @@ proc ::enginelist::choose {} {
   pack $w.buttons.up $w.buttons.down $w.buttons.log $w.buttons.uci $w.buttons.edit $w.buttons.add $w.buttons.copy $w.buttons.delete -side left -expand yes
 
   pack $w.buttons2.close $w.buttons2.start -side right -padx 5 
-  pack $w.buttons2.logengines $w.buttons2.logmax $w.buttons2.logname $w.buttons2.lowpriority -side left -padx 0 
+  pack $w.buttons2.logengines $w.buttons2.logmax $w.buttons2.ply $w.buttons2.maxply $w.buttons2.logname $w.buttons2.lowpriority -side left -padx 0 
 
   focus $w.buttons2.start
   # Focus is now set to listbox (in ::enginelist::listEngines) for keyboard shortcuts
@@ -2943,6 +2945,9 @@ proc processAnalysisInput {n} {
     if {$analysis(invertScore$n) && $analysis(side$n) == "black"} {
       set temp_score [expr { 0.0 - $temp_score } ]
     }
+    if {$analysis(maxPly) > 0} {
+      set temp_moves [lrange $temp_moves 0 [expr {$analysis(maxPly) - 1}]]
+    }
     set analysis(depth$n) $temp_depth
     set analysis(score$n) $temp_score
     # Convert score to pawns from centipawns:
@@ -3318,14 +3323,14 @@ proc updateAnalysisText {n} {
 	# MultiPV
 
 	$h delete 1.0 end
-	# First line
+	# First line is in bold. Other diffs ??
 	set pv [lindex $analysis(multiPV$n) 0]
 	catch { set newStr [format "%2d \[%s\]  " [lindex $pv 0] [scoreToMate $score [lindex $pv 3]] ] }
-	
+
 	$h insert end {1. } blue
 	append newStr "[addMoveNumbers $n [::trans [lindex $pv 2]]]\n"
 	$h insert end $newStr indent
-	
+
 	set lineNumber 1
 	foreach pv $analysis(multiPV$n) {
 	  if {$lineNumber == 1} { incr lineNumber ; continue }

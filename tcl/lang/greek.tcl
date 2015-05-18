@@ -733,6 +733,8 @@ translate G LowPriority {Χαμηλή Προτεραιότητα CPU}
 translate G LogEngines {Log Size}
 # ====== TODO To be translated ======
 translate G LogName {Add Name}
+# ====== TODO To be translated ======
+translate G MaxPly {Max Ply}
 translate G ClickHereToSeeMoves {Πατήστε για εμφάνιση κινήσεων}
 translate G ConfigureInformant {Ρύθμιση Τιμών Πληροφοριών}
 translate G Informant!? {Ενδιαφέρουσα Κίνηση}

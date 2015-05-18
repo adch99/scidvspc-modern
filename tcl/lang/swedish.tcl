@@ -717,6 +717,8 @@ translate W LowPriority {Kör som lågprioriterad process}
 translate W LogEngines {Log Size}
 # ====== TODO To be translated ======
 translate W LogName {Add Name}
+# ====== TODO To be translated ======
+translate W MaxPly {Max Ply}
 translate W ClickHereToSeeMoves {Klicka här för att se drag}
 translate W ConfigureInformant {Konfigurera Informant-parametrar}
 translate W Informant!? {Intressant drag}

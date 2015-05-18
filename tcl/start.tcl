@@ -377,6 +377,7 @@ set analysis(mini) 0
 # (setting it to 0 also stops log file being created)
 set analysis(logMax) 5000
 set analysis(logName) 1
+set analysis(maxPly) 0
 set analysis(lowPriority) $::windowsOS
 
 # Colors: dark and lite are square colors

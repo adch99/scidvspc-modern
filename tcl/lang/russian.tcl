@@ -688,6 +688,8 @@ translate R CutOff {Отключить}
 translate R LowPriority {Низкий приоритет CPU}
 translate R LogEngines {Журнал движка}
 translate R LogName {Добавить имя}
+# ====== TODO To be translated ======
+translate R MaxPly {Max Ply}
 translate R ClickHereToSeeMoves {Кликнуть сюда, чтобы увидеть ходы}
 translate R ConfigureInformant {Настройка подсказчика}
 translate R Informant!? {Ход подсказчика}

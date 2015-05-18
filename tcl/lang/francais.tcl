@@ -724,6 +724,8 @@ translate F LowPriority {Priorité processeur basse}
 translate F LogEngines {Log Size}
 # ====== TODO To be translated ======
 translate F LogName {Add Name}
+# ====== TODO To be translated ======
+translate F MaxPly {Max Ply}
 translate F ClickHereToSeeMoves {Cliquer ici pour afficher les coups}
 translate F ConfigureInformant {Configurer les valeurs des notations}
 translate F Informant!? {Coup intéressant}

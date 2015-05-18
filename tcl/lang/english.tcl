@@ -698,6 +698,7 @@ translate E CutOff {Cut Off}
 translate E LowPriority {Low CPU Priority}
 translate E LogEngines {Log Size}
 translate E LogName {Add Name}
+translate E MaxPly {Max Ply}
 translate E ClickHereToSeeMoves {Click here to see moves}
 translate E ConfigureInformant {Configure Informant}
 translate E Informant!? {Interesting move}

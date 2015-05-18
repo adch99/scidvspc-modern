@@ -777,6 +777,8 @@ translate H LogEngines {Log Size}
 # ====== TODO To be translated ======
 translate H LogName {Add Name}
 # ====== TODO To be translated ======
+translate H MaxPly {Max Ply}
+# ====== TODO To be translated ======
 translate H ClickHereToSeeMoves {Click here to see moves}
 # ====== TODO To be translated ======
 translate H ConfigureInformant {Configure Informant}

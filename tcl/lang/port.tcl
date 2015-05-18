@@ -688,6 +688,8 @@ translate U CutOff {Não anotar:}
 translate U LowPriority {Baixa prioridade no CPU} ;# ***
 translate U LogEngines {Tamanho do Registo}
 translate U LogName {Adicionar Nome}
+# ====== TODO To be translated ======
+translate U MaxPly {Max Ply}
 translate U ClickHereToSeeMoves {Clicar aqui para ver os lances}
 translate U ConfigureInformant {Configurar Informant}
 translate U Informant!? {Movimento Interessante}
