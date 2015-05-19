@@ -458,8 +458,13 @@ namespace eval fics {
       catch { ::commenteditor::appendComment "$::fics::reallogin requests takeback $::fics::playerslastmove" }
     }
     button $w.bottom.buttons.censor -textvar tr(FICSCensor) -command {
-      if {$::fics::playing == 1 || $::fics::playing == -1 && $::fics::opponent != {}} {
-        ::fics::writechan "+censor $::fics::opponent" echo
+      if {$::fics::opponent != {}} {
+        if {$::fics::playing == 1 || $::fics::playing == -1} {
+	  ::fics::writechan "+censor $::fics::opponent" echo
+        } else  {
+	  .fics.command.entry delete 0 end
+	  .fics.command.entry insert 0 "+censor $::fics::opponent"
+        }
       } else {
         .fics.command.entry delete 0 end
         .fics.command.entry insert 0 "+censor "
