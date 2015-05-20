@@ -327,42 +327,6 @@ proc refreshCustomFlags {} {
       $w.title.mark configure -text "$flagname"
       $w.title.desc.text configure -text [sc_base description]
   }
-
-  ### gamelist menubutton
-
-  set w .glistWin
-  if {[winfo exists $w]} {
-
-      ### Update the gamelist CustomFlag menubutton menus
-
-      for {set idx 12} {$idx < 18} {incr idx} {
-	set flag [ lindex $maintFlaglist $idx]
-	set tmp [sc_game flag $flag description]
-        if {$tmp == "" } {
-          set tmp "Custom $flag"
-        } else {
-          set tmp "$tmp ($flag)"
-        }
-	$w.c.title.m entryconfigure $idx -label "$tmp"
-      }
-
-      ### Update the gamelist CustomFlag menubutton title
-      # [Dont translate CustomFlag1 (etc)]
-
-      if {$glistFlag ni {1 2 3 4 5 6}} {
-	set tmp $::tr($maintFlags($glistFlag))
-      } else  {
-	set tmp [sc_game flag $glistFlag description]
-	if {$tmp == "" } {
-	  set tmp "Custom $glistFlag"
-	} else {
-	  set tmp "$tmp ($glistFlag)"
-	}
-      }
-      set flagname $tmp
-
-      $w.c.title configure -text "$flagname"
-  }
 }
 
 proc refreshSearchDBs {} {

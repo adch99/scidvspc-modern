@@ -243,7 +243,6 @@ proc ::windows::gamelist::Open {} {
 
   global highcolor helpMessage
   global glistNames glistFields glistSortedBy glSortReversed glistSize
-  global maintFlags maintFlaglist
 
   set w .glistWin
 
@@ -560,49 +559,16 @@ proc ::windows::gamelist::Open {} {
     ::windows::gamelist::ToggleFlag D
     ::windows::gamelist::Refresh
     configDeleteButtons
-    updateGameinfo
   }
 
   dialogbutton $w.c.compact -text [lindex $::tr(CompactDatabase) 0] -font font_Small -command "compactGames $w ; configDeleteButtons"
-
-  # Flag Menubutton
-  menubutton $w.c.title -menu $w.c.title.m -indicatoron 1 -relief raised -font font_Small
-  menu $w.c.title.m -font font_Small
-
-  foreach flag $maintFlaglist  {
-    # dont translate CustomFlag (todo)
-    if {$flag ni {1 2 3 4 5 6}} {
-      set tmp $::tr($maintFlags($flag))
-    } else {
-      set tmp [sc_game flag $flag description]
-      if {$tmp == "" } {
-        set tmp "Custom $flag"
-      } else {
-        set tmp "$tmp ($flag)"
-      }
-    }
-    $w.c.title.m add command -label "$tmp" -command "
-      set glistFlag $flag
-      $w.c.title configure -text \"$tmp\"
-      refreshCustomFlags
-      "
-  }
-  # only need to call this now to init the menubutton "-text"
-  refreshCustomFlags
-
-  dialogbutton $w.c.flag -text $::tr(Flag) -font font_Small -command {
-    ::windows::gamelist::ToggleFlag $glistFlag
-    # updateGameinfo
-    updateStatusBar
-  }
-
   configDeleteButtons
 
   dialogbutton $w.c.help  -textvar ::tr(Help) -width 5 -font font_Small -command { helpWindow GameList }
   dialogbutton $w.c.close -textvar ::tr(Close) -font font_Small -command { focus .main ; destroy .glistWin }
 
   pack $w.c.close $w.c.compact -side right -padx 3 ; # $w.c.help
-  pack $w.c.current $w.c.goto $w.c.title -side left -padx 3
+  pack $w.c.current $w.c.goto -side left -padx 3
 
   if {$::windowsOS} {
     # cant focus entry combo on windows as it hogs the wheelmouse
@@ -649,6 +615,8 @@ proc ::windows::gamelist::setColumnTitles {} {
 
 proc ::windows::gamelist::Popup {w x y X Y} {
 
+  global maintFlags maintFlaglist
+
   set row [$w identify row $x $y]
   set selection [$w selection]
 
@@ -680,7 +648,7 @@ proc ::windows::gamelist::Popup {w x y X Y} {
   if {$menutype == "short"} {
   $menu add command -label $::tr(GlistRemoveThisGameFromFilter) -command ::windows::gamelist::Remove
   $menu add command -label $::tr(GlistDeleteField) -command "$w.c.delete invoke"
-  $menu add command -label $::tr(Flag)      -command "$w.c.flag invoke"
+  $menu add cascade -label $::tr(Flag)      -menu $menu.flags
   $menu add command -label $::tr(SetFilter) -command "$w.b.select invoke"
   $menu add separator
   $menu add command -label $::tr(Reset) -command "$w.b.reset invoke"
@@ -688,13 +656,28 @@ proc ::windows::gamelist::Popup {w x y X Y} {
   $menu add command -label $::tr(LoadGame) -command "$w.c.load invoke"
   $menu add command -label $::tr(Browse) -command "$w.c.browse invoke"
   $menu add command -label $::tr(GlistDeleteField) -command "$w.c.delete invoke"
-  $menu add command -label $::tr(Flag)      -command "$w.c.flag invoke"
+  $menu add cascade -label $::tr(Flag)      -menu $menu.flags
   $menu add command -label $::tr(SetFilter) -command "$w.b.select invoke"
   $menu add separator
   $menu add command -label $::tr(GlistRemoveThisGameFromFilter) -command ::windows::gamelist::Remove
   $menu add command -label $::tr(GlistRemoveGameAndAboveFromFilter) -command "$w.b.removeabove invoke"
   $menu add command -label $::tr(GlistRemoveGameAndBelowFromFilter) -command "$w.b.removebelow invoke"
   $menu add command -label $::tr(Reset) -command "$w.b.reset invoke"
+  }
+  menu $menu.flags
+  foreach flag $maintFlaglist  {
+    # dont translate CustomFlag (todo)
+    if {$flag ni {1 2 3 4 5 6}} {
+      set tmp $::tr($maintFlags($flag))
+    } else {
+      set tmp [sc_game flag $flag description]
+      if {$tmp == "" } {
+        set tmp "Custom $flag"
+      } else {
+        set tmp "$tmp ($flag)"
+      }
+    }
+    $menu.flags add command -label "$tmp" -command "::windows::gamelist::ToggleFlag $flag"
   }
 
   tk_popup $menu [winfo pointerx .] [winfo pointery .]
@@ -768,12 +751,8 @@ proc configDeleteButtons {} {
   if {[sc_base current] == [sc_info clipbase]} {
     ### Can't compact clipbase
     $w.c.compact configure -state disabled
-    $w.c.flag configure -state normal
-    $w.c.title configure -state normal
     $w.c.delete configure -state normal
   } elseif {[sc_base isReadOnly]} {
-    $w.c.flag configure -state disabled
-    $w.c.title configure -state disabled
     $w.c.delete configure -state disabled
     $w.c.compact configure -state disabled
   } else {
@@ -782,8 +761,6 @@ proc configDeleteButtons {} {
     #  if {[.glistWin.tree selection] == ""} disable delete, flag
     # $w.tree tag bind click <Button-1> {configDeleteButtons}
 
-    $w.c.flag configure -state normal
-    $w.c.title configure -state normal
     $w.c.delete configure -state normal
     $w.c.compact configure -state normal
   }
@@ -1087,6 +1064,8 @@ proc ::windows::gamelist::SetStart {unit} {
 }
 
 proc ::windows::gamelist::ToggleFlag {flag} {
+  set current [sc_game number]
+  set current_changed 0
 
   set sel [.glistWin.tree selection]
   if { "$sel" == "" } {
@@ -1097,6 +1076,9 @@ proc ::windows::gamelist::ToggleFlag {flag} {
       # (very slow doing them one at a time)
       # (todo: change sc_game_flag to allow multiple games (?))
       set number [.glistWin.tree set $item Number]
+      if {"$number" == "$current"} {
+        set current_changed 1
+      }
       catch {sc_game flag $flag $number invert}
 
       if {$flag == {D}} {
@@ -1113,6 +1095,9 @@ proc ::windows::gamelist::ToggleFlag {flag} {
       }
     }
     # ::windows::gamelist::Refresh
+    if {$current_changed} {
+      updateStatusBar
+    }
   }
 }
 

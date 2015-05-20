@@ -1614,7 +1614,6 @@ Sorting is not undoable, and may affect search and tree performance. For more de
 <li><b>Find</b> - (Press 'Enter' in the entrybox) perform a (slow) general find for entered text</li>
 <br>
 <li><b>Current</b> - highlights the current game (if it has not been filtered)</li>
-<li><b>Flag Menubutton</b> - select which User Flag to work with</li>
 <li><b>Compact</b> -  database (game) compaction.</li>
 </ul>
 </p>
