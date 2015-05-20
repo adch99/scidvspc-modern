@@ -101,7 +101,7 @@ proc compInit {} {
   set temp $comp(incr)
   label $w.config.timegame.label2 -text base
   spinbox $w.config.timegame.incr -textvariable comp(incr) -from 0 -to 60 -width 4
-  label $w.config.timegame.label3 -text incr
+  label $w.config.timegame.label3 -text {incr }
   set comp(incr) $temp
 
   pack $w.config.timegame.label -side left
