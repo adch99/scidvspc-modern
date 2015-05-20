@@ -95,7 +95,7 @@ proc compInit {} {
   frame $w.config.timegame 
   set temp $comp(base)
   label $w.config.timegame.label -text {Time per game (seconds)}
-  spinbox $w.config.timegame.mins -textvariable comp(base) -from 0 -to 40 -width 4
+  spinbox $w.config.timegame.base -textvariable comp(base) -from 0 -to 7200 -incr 5 -width 4
   set comp(base) $temp
 
   set temp $comp(incr)
@@ -105,7 +105,7 @@ proc compInit {} {
   set comp(incr) $temp
 
   pack $w.config.timegame.label -side left
-  pack $w.config.timegame.label3 $w.config.timegame.incr $w.config.timegame.label2 $w.config.timegame.mins -side right
+  pack $w.config.timegame.label3 $w.config.timegame.incr $w.config.timegame.label2 $w.config.timegame.base -side right
   grid $w.config.timegame -row $row -column 0 -columnspan 2 -sticky ew -pady 2 -padx 5
 
   incr row
@@ -845,7 +845,9 @@ proc compNM {n m k} {
             break
           }
           # add time increment
-          incr comp(btime) $incr
+          if {$comp(bookmove) == ""} {
+	    incr comp(btime) $incr
+          }
 	  if {$comp(showclock) && $comp(timecontrol) == "pergame"} {
 	    ::gameclock::setSec 2 [ expr -int($comp(btime)/1000) ]
 	  }
@@ -872,7 +874,9 @@ proc compNM {n m k} {
             break
           }
           # add time increment
-          incr comp(wtime) $incr
+          if {$comp(bookmove) == ""} {
+	    incr comp(wtime) $incr
+          }
 	  if {$comp(showclock) && $comp(timecontrol) == "pergame"} {
 	    ::gameclock::setSec 1 [ expr -int($comp(wtime)/1000) ]
 	  }
