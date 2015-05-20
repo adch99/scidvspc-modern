@@ -2899,9 +2899,8 @@ set helpText(Tourney) {<h1>Computer Tournament</h1>
 </p>
 <p>
   <b>Time per Game</b> is the best time control method.
-  The minutes spinbox is the base time for the game, while the seconds spinbox
-  is the increment. For example, to play a 10 second game with .1 sec increment, the values are
-  .17 minutes and .1 seconds.
+  The first spinbox is the base time for the game, the second spinbox is the per-move increment.
+Both times are in seconds. 
 </p>
 <p>
   <b>Time per Move</b> games allow a generous time slice, and only forfeits an engine if it takes over 175%

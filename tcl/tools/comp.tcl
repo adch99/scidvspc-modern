@@ -93,16 +93,15 @@ proc compInit {} {
 
   incr row
   frame $w.config.timegame 
-    # hack to stop the spinbox from zeroing floating point values for minutes time
-  set temp $comp(minutes)
-  label $w.config.timegame.label -text {Time per game (base/incr)}
-  spinbox $w.config.timegame.mins -textvariable comp(minutes) -from 0 -to 40 -width 4
-  set comp(minutes) $temp
+  set temp $comp(base)
+  label $w.config.timegame.label -text {Time per game (seconds)}
+  spinbox $w.config.timegame.mins -textvariable comp(base) -from 0 -to 40 -width 4
+  set comp(base) $temp
 
   set temp $comp(incr)
-  label $w.config.timegame.label2 -text mins
+  label $w.config.timegame.label2 -text base
   spinbox $w.config.timegame.incr -textvariable comp(incr) -from 0 -to 60 -width 4
-  label $w.config.timegame.label3 -text secs
+  label $w.config.timegame.label3 -text incr
   set comp(incr) $temp
 
   pack $w.config.timegame.label -side left
@@ -253,7 +252,7 @@ proc compOk {} {
   # make sure decimals have a leading 0
   catch {
     set comp(incr) [expr $comp(incr)]
-    set comp(minutes) [expr $comp(minutes)]
+    set comp(base) [expr $comp(base)]
     set comp(seconds) [expr $comp(seconds)]
   }
 
@@ -433,10 +432,9 @@ proc compNM {n m k} {
   set comp(result) {}
 
   if {$comp(timecontrol) == "pergame"} {
-    # minutes does not have to be an integer
-    set comp(wtime) [expr int($comp(minutes)*60*1000)]
-    set comp(btime) [expr int($comp(minutes)*60*1000)]
-    set total [expr int($comp(minutes) * 60)]
+    set comp(wtime) [expr int($comp(base)*1000)]
+    set comp(btime) [expr int($comp(base)*1000)]
+    set total [expr int($comp(base))]
     set mins [expr $total/60]
     set secs [expr $total%60]
     if {$secs == 0} {
@@ -449,8 +447,8 @@ proc compNM {n m k} {
     }
 
     if {$comp(showclock) && $comp(timecontrol) == "pergame"} {
-      ::gameclock::setSec 1 [ expr -int($comp(minutes)*60) ]
-      ::gameclock::setSec 2 [ expr -int($comp(minutes)*60) ]
+      ::gameclock::setSec 1 [ expr -int($comp(base)) ]
+      ::gameclock::setSec 2 [ expr -int($comp(base)) ]
     }
   }
 
