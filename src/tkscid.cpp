@@ -16378,7 +16378,7 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             break;
 
         default:
-            return InvalidCommand (ti, "sc_search material", options);
+            return InvalidCommand (ti, "sc_search header", options);
         }
     }
     if (arg != argc) { return errorResult (ti, "Odd number of parameters."); }

@@ -402,7 +402,7 @@ since it was last opened, created or saved.
 <p>
 Returns a boolean value indicating if another book file can
 currently be opened or created.
-Use <a href="http://scid.sourceforge.net/doc/info_limit">sc_info limit books</a> to find the
+Use <a href="#info_limit">sc_info limit books</a> to find the
 maximum number of books Scid can have open at any time.
 </p>
 
@@ -1546,7 +1546,7 @@ Commands:
 </p>
 <p>
 This group contains commands for database searches, except for tree
-searches which are in the <a href="http://scid.sourceforge.net/doc/tree">sc_tree</a> group.
+searches which are in the <a href="#tree">sc_tree</a> group.
 </p>
 <p>
 All the search commands update the <a href="#progressBar">progress bar</a>
@@ -1572,34 +1572,35 @@ If <i>inVars</i> is true, variations are also searched -- but this can
 take much longer..
 </p>
 
-<h4><a name="search_header">sc_search header <i>parameters...</i></a></h4>
+<h4><a name="search_header">sc_search header <i>{-option VALUE}</i></a></h4>
 <p>
-Searches for header information: names, dates, results, etc.
-Including the <i>filterOp</i>, there must be 36 parameters.
-This is very inconvenient, and a rewrite so one can use much simpler
-commands like
- <b>sc_search header -white "Kramnik" -ignoreColors true</b>
-is likely to be done sometime.
+Searches for header information: names, dates, results, etc. including the given criteria.
 </p>
 <p>
-The parameters in order are: 1:White, 2:Black, 3:Event, 4:Site, 5:Round,
-6:MinDate, 7:MaxDate, 8:WhiteWins, 9:BlackWins, 10:Draws, 11:NoResults,
-12:MinWhiteElo, 13:MaxWhiteElo, 14:MinBlackElo, 15:MaxBlackElo,
-16:MinEloDifference, 17:MaxEloDifference, 18:MinECO, 19:MaxECO,
-20:GamesWithNoECO, 21:IgnoreColors, 22:filterOp,
-23:Deleted, 24:NotDeleted, 25:StandardStart, 26:NonStandardStart,
-27:Promotions, 28:NoPromotions, 29:Comments, 30:NoComments,
-31:Variations, 32:NoVariations, 33:Marked, 34:NotMarked,
-35:MinHalfMoves, 36:MaxHalfMoves.
+The options can be:
+</p><p>
+        white, black, event, site, round,
+        date, results, welo, belo, delo,
+        wtitles, btitles, toMove,
+        eco, length, gameNumber, flip, filter,
+        fStdStart, fPromotions, fComments, fVariations,
+        fAnnotations, fDelete, fWhiteOpening, fBlackOpening,
+        fMiddlegame, fEndgame, fNovelty, fPawnStructure,
+        fTactics, fKingside, fQueenside, fBrilliancy, fBlunder,
+        fUser, fCustom1 , fCustom2 , fCustom3 ,
+        fCustom4 , fCustom5 , fCustom6 , pgn, ignoreCase
+</p>
+<p>
+Where (for eg) "-fDelete 1" signifies the Delete Flag, and "-delo {Low High}" signifies the Elo difference range.
+Elo args take a 2 item list (-welo {2400 2500}), Eco a 3 item list and date a 4 item list.
 </p>
 
-<h4><a name="search_material">sc_search material <i>parameters...</i></a></h4>
+<h4><a name="search_material">sc_search material <i>{-option VALUE}</i></a></h4>
 <p>
 Searches for material and piece patterns.
-Like <a href="http://scid.sourceforge.net/doc/search_header">sc_search header</a>, it requires a
-large number of parameters and could use a rewrite of its parameter
-processing. It takes 30 parematers, plus more if there are any
-patterns.
+Like <a href="#search_header">sc_search header</a>, it requires a
+large number of parameters to be ueful, and could use a rewrite of its parameter processing.
+Simple searches like "sc_search material -wq {2 2}" will find positions where two white queens are the only material present.
 </p>
 <p>
 Valid parameters are:
@@ -1634,27 +1635,6 @@ Valid parameters are:
      <i>file</i> is a chessboard file or <i>?</i>, and <i>rank</i>
      is a chessboard rank or <i>?</i>.
 </li></ul>
-<p>
-Example: ...
-</p>
-<p>
-The paremeters in order are: <b>(to be completed)</b>.
-</p>
-<p>
-Each pattern is specified with four extra parameters:
-Yes|No, then a piece (wk, bq, etc), then the rank (a-h or ?)
-and finally the rank (1-8 or ?).
-</p>
-
-<h4><a name="search_repertoire">sc_search repertoire add <i>include</i>:boolean<br>
-    sc_search repertoire clear<br>
-    sc_search repertoire go <i>filterOp</i></a></h4>
-<p>
-Searches for positions in an opening repertoire.
-The sc_search repertoire add command adds the current position to the
-repertoire, as an include or exclude line depending on the value
-of <i>include</i>.
-The sc_search repertoire go function does the repertoire search.
 </p>
 
 
@@ -1777,7 +1757,7 @@ empty string in the list.
 
 <h4><a name="var_moveInto">sc_var moveInto <i>varNumber</i></a></h4>
 <p>
-The old name for <a href="http://scid.sourceforge.net/doc/var_enter">sc_var enter</a>.
+The old name for <a href="#var_enter">sc_var enter</a>.
 It is deprecated and will be removed in a future version.
 </p>
 
