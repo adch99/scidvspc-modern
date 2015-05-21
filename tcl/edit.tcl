@@ -297,7 +297,8 @@ proc exitSetupBoard {} {
   bind .setup <Destroy> {}
   set selectedSq -1
 
-  sc_game undoPoint
+  # We always always creating a new game before entering setup board, so no point making undoPoint
+  # sc_game undoPoint
 
   set setupFen [validateFEN $setupFen]
 
@@ -443,14 +444,18 @@ proc setupBoard {} {
     sc_game save [sc_game number]
   }
   setTrialMode 0
+  set origFen [sc_pos fen]
+  set setupBd [sc_pos board]
+
   sc_game new
+  sc_game startBoard $origFen
+
   updateBoard -pgn
 
   toplevel $w
   wm title $w "Setup Board"
   setWinLocation $w
 
-  set origFen [sc_pos fen]
   set selectedSq -1
 
   # Fenframe is a gridded frame at bottom of screen
@@ -508,7 +513,6 @@ proc setupBoard {} {
   pack [frame $sl.w] -side bottom -padx 8 -pady 8
   pack [frame $sl.b] -side bottom -padx 8 -pady 8
 
-  set setupBd [sc_pos board]
   setBoard $sbd $setupBd $setupboardSize
 
   ### Piece Buttons
