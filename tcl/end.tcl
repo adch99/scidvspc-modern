@@ -1861,16 +1861,11 @@ if {$loadAtStart(spell)} {
   }
 }
 
-# fullname:
-#   Given a file name, returns its absolute name.
-#
+#   Returns a file's canonical name.
+
 proc fullname {fname} {
-  if {[file pathtype $fname] == "absolute"} { return $fname }
-  set old [pwd]
-  if {[catch {cd [file dirname $fname]}]} { return $fname }
-  set fname [file join [pwd] [file tail $fname]]
-  catch {cd $old}
-  return $fname
+  # http://wiki.tcl.tk/10078
+  return [file dirname [file normalize $fname/__]]
 }
 
 # Loading a database if specified on the command line:

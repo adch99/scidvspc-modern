@@ -156,6 +156,8 @@ proc ::file::Open {{fName ""} {parent .} {update 1}} {
                  -title "Open a Scid file" -parent $parent]
     if {$fName == ""} { return }
   }
+
+  set fName [fullname $fName]
   setTrialMode 0 0
 
   set ext [file extension $fName]
@@ -541,6 +543,8 @@ proc ::file::openBaseAsTree { { fName "" } } {
     }
     set fName [tk_getOpenFile -initialdir $::initialDir(base) -filetypes $ftype -title "Open a Scid file"]
     if {$fName == ""} { return }
+
+    set fName [fullname $fName]
     set ::initialDir(base) [file dirname $fName]
     set ::initialDir(file) [file tail $fName]
   }
