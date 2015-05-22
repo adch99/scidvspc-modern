@@ -1096,11 +1096,7 @@ proc copyFilter {frombaseNum tobaseNum} {
     set err "$::tr(CopyErrSource) == $::tr(CopyErrTarget)."
   }
 
-  if {$::docking::USE_DOCKING} {
-    set parent .
-  } else {
-    set parent .glistWin
-  }
+  set parent .glistWin
 
   if {$err != ""} {
     tk_messageBox -type ok -icon info -title "Scid" \
