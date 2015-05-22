@@ -1,12 +1,17 @@
 #!/bin/sh
+#
+# sc_remote: Load a scid databases in an existing Scid instances
+#
+# usage: sc_remote [-nostatus] [ [ [DB ... ] DB ] DB ]
+#
 # Emacs please open me in -*-Tcl-*- mode
 # the next line restarts using wish if it is in the path \
 exec `dirname $0`/tkscid "$0" "$@"
 
 ###############################################################################
 #
-#
 # Copyright (C) 2002 Mark Norman Oakden.
+# Copyright (C) Shane Hudson, stevenaaus
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -21,16 +26,6 @@ exec `dirname $0`/tkscid "$0" "$@"
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-#
-###############################################################################
-#
-# sc_remote: Load a scid databases in an existing Scid instances
-#
-# usage: sc_remote [-nostatus] [ [ [DB ... ] DB ] DB ]
-#
-# Scid is a free chess database app. For more information,
-# visit the Scid website: http://scid.sourceforge.net/
-#
 #
 ###############################################################################
 #
@@ -317,35 +312,22 @@ proc ldelete { li el } {
     }
     return
 }
-# 
-# The fullname function is stolen from Scid source (end.tcl)
-# and is Copyright (C) Shane Hudson
-#
-# fullname:
-#   Given a file name, returns its absolute name.
-#
-proc fullname {fname} {
-    # modified MNO - don't immediately return on absolute pathname
-    # - try to add suffix in that case too.
-    if { [file pathtype $fname] != "absolute"} {
-	set old [pwd]
-	if {[catch {cd [file dirname $fname]}]} { return $fname }
-	set fname [file join [pwd] [file tail $fname]]
-	catch {cd $old}
+
+#   Returns a file's canonical name.
+
+proc fullname {fName} {
+    set fName [file dirname [file normalize $fName/__]]
+
+    set ext [file extension $fName]
+    if {$ext == "" || [file readable "$fName.si4"]} {
+      set fName "$fName.si4"
     }
-    # Try adding a suffix like ".si3" or ".pgn" to the filename if
-    # it has no extension, by checking if a file by that name with
-    # a known Scid-readable extension exists:
-    if {[file extension $fname] == ""} {
-        foreach suffix [list si3 si pgn PGN pgn.gz epd EPD epd.gz sor] {
-            if {[file exists "$fname.$suffix"]} {
-                dputs "Assuming suffix \".$suffix\" for \"$fname\""
-                append fname ".$suffix"
-                break
-            }
-        }
+
+    if {$ext == ".sg4" || $ext == ".sn4"} {
+      set fName "[file rootname $fName].si4"
     }
-    return $fname
+
+    return $fName
 }
 #
 ###############################################################################
