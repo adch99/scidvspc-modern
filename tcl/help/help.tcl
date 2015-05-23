@@ -659,9 +659,8 @@ set helpText(MainWindow) {<h1>Scid Main Window</h1>
   be set from the <green>Options--<gt>Moves</green> menu
   </p>
   <p>
-  If you start autoplay mode when the <a Analysis>analysis window</a> is open,
-  the game is <a Analysis Annotate>annotated</a>: the score and analysis for each position
-  are added to the game as a new variation just before each move is made.
+  Autoplay is also started when the
+  game is being <a Analysis Annotating>annotated</a>, and pressing the autoplay button will stop annotation.
   </p>
 
   <p><footer>Updated: Scid vs. PC 4.14 Dec 2014 </footer></p>
@@ -2585,11 +2584,13 @@ set helpTitle(Flags) "Game Flags"
 set helpText(Flags) {<h1>Game Flags</h1>
 
   <p>
-  Game Flags are indicators of some characteristic, such as <b>Brilliant Play</b> or <b>White Opening</b>.
+  Game Flags are indicators of some characteristic, such as <b>Brilliant Play</b> or <b>White Opening</b>,
+  and are used for classifying games and enabling fast database searches.
+  </p><p>
   There are <b>12 user flags</b> and <b>6 custom flags</b>
-  , and they're especially useful for enabling fast database searches.</p>
-
-<p>Additionally, files may be marked with the special-case <b>Delete Flag</b>. This
+  </p>
+  <p>
+  Additionally, games may be marked with the special-case <b>Delete Flag</b> which
   indicates they will be removed when the database it is next <a Compact>compacted</a>.
   </p>
   <p>
@@ -2611,13 +2612,12 @@ set helpText(Flags) {<h1>Game Flags</h1>
   <li>U - User-defined</li>
   </ul>
   <p>
-  The 6 custom flags (1 to 6) can be given any lable up to eight characters long.
+  The 6 custom flags (1 to 6) are user changeable, and can have labels up to eight characters long.
   </p>
 
   <p>
-  User and Custom flags are set in the <a Maintenance>Maintenance
-  Window</a>. Scid vs. PC also allows quick flag tagging via the <a
-  GameList>Game List</a> window.
+  Flags are set in the <a Maintenance>Maintenance Window</a>. Scid vs. PC also allows quick flag tagging via the <a
+  GameList>Game List</a> context menu.
   </p>
   <p>
   You can use a <a Searches Header>Header Search</a> to find all
@@ -2637,8 +2637,8 @@ set helpText(Flags) {<h1>Game Flags</h1>
   <p>
   The following functions of Scid set or require flags:
   <ul>
-     <li><a Analysis Annotate>Find best move</a>: evaluates the (T) flag
-     <li><a Analysis Annotate>Find tactical exercise</a>: sets the (T) flag
+     <li><a Analysis Annotating>Mark tactical exercise</a>: sets the (T) flag
+     <li><a FindBestMove>Training-<gt>Find best move</a>: evaluates the (T) flag
   </ul>
 
   <p><footer>Updated: Scid vs. PC 4.4, May 2011</footer></p>

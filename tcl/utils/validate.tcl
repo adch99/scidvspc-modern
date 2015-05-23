@@ -122,3 +122,13 @@ proc ::utils::validate::Regexp {expression name el op} {
   set $old [set $name]
 }
 
+### Limit var to a certain string length
+
+proc ::utils::validate::Length {length name el op} {
+  global $name
+
+  set text [set $name]
+  if {[string length $text] > $length} {
+    set $name [string range $text 0 [expr {$length - 1}]]
+  }
+}

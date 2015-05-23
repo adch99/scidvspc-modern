@@ -359,14 +359,15 @@ proc ::maint::ChangeCustomDescription {} {
   
   wm title $w "$::tr(CustomFlags): [file tail [sc_base filename]]"
   frame $w.a
-  label $w.a.lb -text $::tr(CustomFlags)
+
+  label $w.a.lb -textvar ::tr(CustomFlags)
   grid $w.a.lb -column 0 -row 0 -columnspan 12 -pady 2
   set col 0
   for {set i 1} {$i <7} {incr i} {
     label $w.a.lab$i -text "$i"
-    entry $w.a.e$i -width 8
-    set desc [sc_game flag $i description]
-    $w.a.e$i insert end $desc
+    entry $w.a.e$i -width 8 -textvariable ::customEntry$i
+    trace variable ::customEntry$i w {::utils::validate::Length 8}
+    set ::customEntry$i [sc_game flag $i description]
     grid $w.a.lab$i -column $col -row 1 -padx 3 -pady 2
     incr col
     grid $w.a.e$i -column $col -row 1
@@ -375,22 +376,26 @@ proc ::maint::ChangeCustomDescription {} {
   frame $w.b
   dialogbutton $w.b.ok -text OK -command {
     for {set i 1} {$i <7} {incr i} {
-      set desc [.bcustom.a.e$i get]
-      sc_game flag $i setdescription $desc
+      sc_game flag $i setdescription [set ::customEntry$i]
     }
     grab release .bcustom
     destroy .bcustom
     refreshCustomFlags
   }
 
+  dialogbutton $w.b.help -textvar ::tr(Help) -command {helpWindow Flags}
+
   dialogbutton $w.b.cancel -text $::tr(Cancel) -command "grab release $w; destroy $w"
+
   pack $w.a -side top -fill x
   pack $w.b -side bottom -fill x -pady 10
-  pack $w.b.cancel $w.b.ok -side right -padx 2 -pady 2
+  pack $w.b.cancel $w.b.help $w.b.ok -side right -padx 5 -pady 2
+
   wm resizable $w 0 0
   update
   placeWinOverParent $w .maintWin
   wm state $w normal
+  bind $w <F1> {helpWindow Flags}
 
   ### doesn't work anyway, as it doesnt catch maintWin destroy
   # catch {grab $w}
