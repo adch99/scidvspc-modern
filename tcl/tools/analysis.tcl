@@ -2261,10 +2261,6 @@ proc makeAnalysisWin {{n 0} {options {}}} {
     -width 2 -font font_Small -command "changePVSize $n" 
   ::utils::tooltip::Set $w.b.multipv $::tr(Lines)
 
-  checkbutton $w.b.lockengine -image tb_lockengine -indicatoron false -width 32 -height 32 \
-    -variable analysis(lockEngine$n) -command "toggleLockEngine $n" -relief $relief
-  ::utils::tooltip::Set $w.b.lockengine $::tr(LockEngine)
-
   set showAnnoButton 1
   for {set i 0} {$i < [llength $::engines(list)]} {incr i} {
     if {[winfo exists .analysisWin$i.b.annotatebut]} {
@@ -2279,6 +2275,10 @@ proc makeAnalysisWin {{n 0} {options {}}} {
   } else {
     button $w.b.annotatebut 
   }
+
+  checkbutton $w.b.lockengine -image tb_lockengine -indicatoron false -width 32 -height 32 \
+    -variable analysis(lockEngine$n) -command "toggleLockEngine $n" -relief $relief
+  ::utils::tooltip::Set $w.b.lockengine $::tr(LockEngine)
 
   button $w.b.exclude -image tb_exclude -command "excludeMovePopup $n" -relief $relief
   ::utils::tooltip::Set $w.b.exclude $::tr(ExcludeMove)
@@ -2325,7 +2325,7 @@ proc makeAnalysisWin {{n 0} {options {}}} {
   }
 
   pack $w.b.startStop $w.b.move $w.b.line $w.b.alllines \
-       $w.b.multipv $w.b.lockengine $w.b.annotatebut $w.b.exclude $w.b.priority $w.b.showinfo $w.b.showboard \
+       $w.b.multipv $w.b.annotatebut $w.b.lockengine $w.b.exclude $w.b.priority $w.b.showinfo $w.b.showboard \
        $w.b.update $w.b.finishGame -side left
   if {!$showAnnoButton} {
     pack forget $w.b.annotatebut
