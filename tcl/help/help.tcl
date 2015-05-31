@@ -771,13 +771,13 @@ set helpText(Menus) {<h1>Scid Menus</h1>
   <br>
   <li><green>General</green>  Searches by <a Searches Header>header</a> information such as player names.</li>
   <li><green>Current board</green>  Searches for the <a Searches Board>current board</a> position.</li>
-  <li><green>Material/Pattern</green>  Searches by <a Searches Material>material</a> or chessboard patterns</a>.</li>
-  <li><green>Move</green>:
+  <li><green>Material/Pattern</green>  Searches by <a Searches Material>material</a> or chessboard patterns.</li>
+  <li><green>Move</green> Find a certain move or <a Searches Move>move combination</a>.</li>
   <br>
   <li><green>Player Finder</green>  Search for a player name.</li>
   <li><green>Tournament Finder</green>  Search for a tournament by date or name.</li>
   <br>
-  <li><green>Using search file</green>  Searches using
+  <li><green>Load search file</green>  Searches using
   <a Searches Settings>settings</a> from a SearchOptions file.</li>
   </ul>
 
@@ -853,13 +853,20 @@ set helpText(Menus) {<h1>Scid Menus</h1>
 
   <h3><name Options>Options</name></h3>
   <p>
-  This menu provides entries for setting most of Scid's configurable options.
-  The <green>Save Options</green> entry saves the current options to the
-  file "<b>~/.scidvspc/config/options.dat</b>" ;
-  this file is loaded each time you start up Scid.
+  Here is where most options can be set.
+  The option file is <b>$HOME/.scidvspc/config/options.dat</b>
+  (and a few other files in the same directory).</p>
+  <p><i>
+  On Windows the options directory is (unfortunately) in the program installation directory</i>, <b>bin/config</b>.
   </p>
+  <p>
+  They are saved automatically at program exit,
+  or when the <green>Save Options</green> menu is selected.</p>
+  <p>
+  N.B. The Docked Windows layout is not saved automatically, but may be done manually using <green>Save Layout</green>.
+</p>
 
-  <p><footer>Updated: Scid vs. PC 4.14, December 2014</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.15, May 2015</footer></p>
 }
 
 

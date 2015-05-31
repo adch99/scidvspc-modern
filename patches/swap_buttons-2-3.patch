@@ -83,9 +83,9 @@
  
  
      # # Middle button popups a PGN board
--    bind $w <ButtonPress-2> "::pgn::ShowBoard .pgnWin.text %x %y %X %Y"
+-    bind $w.text <ButtonPress-2> "::pgn::ShowBoard .pgnWin.text %x %y %X %Y"
 -    bind $w <ButtonRelease-2> ::pgn::HideBoard
-+    bind $w <ButtonPress-3> "::pgn::ShowBoard .pgnWin.text %x %y %X %Y"
++    bind $w.text <ButtonPress-3> "::pgn::ShowBoard .pgnWin.text %x %y %X %Y"
 +    bind $w <ButtonRelease-3> ::pgn::HideBoard
  
      # Right button draws context menu

@@ -237,7 +237,7 @@ namespace eval pgn {
 
 
     # # Middle button popups a PGN board
-    bind $w <ButtonPress-2> "::pgn::ShowBoard .pgnWin.text %x %y %X %Y"
+    bind $w.text <ButtonPress-2> "::pgn::ShowBoard .pgnWin.text %x %y %X %Y"
     bind $w <ButtonRelease-2> ::pgn::HideBoard
 
     # Right button draws context menu
@@ -463,6 +463,9 @@ namespace eval pgn {
     # extract movenumber from pgn widget tag 
 
     set moveTag m_[getMoveNumber $win [ $win index @$x,$y]]
+    if {$moveTag == "m_0"} {
+      return
+    }
     set movenum [string trim [lindex [split [$win tag bind $moveTag <1>] _] end]]
    
     # Do these pushes/pops break anything elsewhere ?
