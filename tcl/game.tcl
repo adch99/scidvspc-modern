@@ -147,6 +147,10 @@ proc ::game::LoadNextPrev {action {raise 1}} {
     set statusBar "  There is no $action game in the current filter."
     return
   }
+  if {$number == [sc_game number]} {
+    set statusBar "  Game $number already loaded."
+    return
+  }
   ::game::Load $number 1 $raise
 }
 
