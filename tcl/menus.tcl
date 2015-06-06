@@ -1315,7 +1315,7 @@ proc updateMenuStates {} {
   $m.file entryconfig [tr FileReadOnly] -state disabled
 
   # update recent Tree list (open base as Tree)
-  set ntreerecent [::recentFiles::treeshow .menu.file.recenttrees]
+  ::recentFiles::treeshow .menu.file.recenttrees
 
   # Remove and reinsert the Recent files list and Exit command:
   $m.file add separator

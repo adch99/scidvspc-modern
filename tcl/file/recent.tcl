@@ -12,12 +12,11 @@ catch {source [scidConfigFile recentfiles]}
 
 namespace eval ::recentFiles {}
 
-# ::recentFiles::save
-#   Saves the recent-file-list file, reporting any error in a message box
-#   if reportError is true.
+### Saves the recent-file-list file, reporting any error in a message box if reportError is true.
 
 proc ::recentFiles::save {{reportError 0}} {
   global recentFiles
+
   set f {}
   set filename [scidConfigFile recentfiles]
   if  {[catch {open $filename w} f]} {
@@ -39,42 +38,39 @@ proc ::recentFiles::remove {fname} {
   ::recentFiles::add $fname 1
 }
 
-# ::recentFiles::add
-#   Adds a file to the recent files list, or moves it to the front
-#   if that file is already in the list.
+### Add a file to the recent files list, or move it to the front if file is already in the list.
 
 proc ::recentFiles::add {fname {delete 0}} {
   global recentFiles
-  set rlist $recentFiles(data)
+  set list $recentFiles(data) 
 
   # Remove file to be added from its current place in the list (if any)
   while {1} {
-    set idx [lsearch -exact $rlist $fname]
+    set idx [lsearch -exact $list $fname]
     if {$idx < 0} { break }
-    set rlist [lreplace $rlist $idx $idx]
+    set list [lreplace $list $idx $idx]
   }
 
   if {!$delete} {
     # Insert the current file at the start of the list:
-    set rlist [linsert $rlist 0 $fname]
+    set list [linsert $list 0 $fname]
 
-    # Trim the list if necessary:
-    if {[llength $rlist] < $recentFiles(limit)} {
-      set rlist [lrange $rlist 0 [expr {$recentFiles(limit) - 1} ]]
+    # Trim the list to twice the limit (arbitary)
+    set limit [expr {2 * $recentFiles(limit)}]
+    if {[llength $list] > $limit} {
+      set list [lrange $list 0 [expr {$limit - 1}]]
     }
   }
 
-  set recentFiles(data) $rlist
+  set recentFiles(data) $list
   # ::recentFiles::save
 
-  ### Start the finder and ::file::Open from here
+  # The finder and ::file::Open will now use this dir as their initial one
   set ::file::finder::data(dir) [file dirname $fname]
 }
 
-# ::recentFiles::load
-#   Loads the selected recent file, or swtches to its database slot
-#   if it is already open.
-#
+###  Load the selected recent file, or switch to its database slot if already open.
+
 proc ::recentFiles::load {fname} {
   set rname $fname
   if {[file extension $rname] == ".si4"} {
@@ -90,109 +86,77 @@ proc ::recentFiles::load {fname} {
   ::file::Open $fname
 }
 
-#################################################################################
 proc ::recentFiles::treeshow {menu} {
   global recentFiles
-  set rlist $recentFiles(data)
-  $menu delete 0 end
-  set nfiles [llength $rlist]
-  if {$nfiles > $recentFiles(limit)} { set nfiles $recentFiles(limit) }
 
-  for {set i 0} {$i<$nfiles} {incr i} {
-    set name [lindex $rlist $i]
-    $menu add command -label "$name" -command [list ::file::openBaseAsTree $name]
+  set list $recentFiles(data)
+  $menu delete 0 end
+  set menuLength [llength $list]
+  if {$menuLength > $recentFiles(limit)} {
+    set menuLength $recentFiles(limit)
+  }
+
+  for {set i 0} {$i<$menuLength} {incr i} {
+    set name [lindex $list $i]
+    $menu add command -label "[file tail $name]" -command [list ::file::openBaseAsTree $name]
   }
 }
 
-#################################################################################
-# ::recentFiles::show
-#   Adds the recent files to the end of the specified menu.
-#   Returns the number of menu entries added.
-#
+### Add the recent files to the end of the specified menu.
+# Returns the number of menu entries added (for the purpose of deciding if we need a separator)
+
 proc ::recentFiles::show {menu} {
   global recentFiles
+
   set idx [$menu index end]
   incr idx
-  set rlist $recentFiles(data)
-  set nfiles [llength $rlist]
-  set nExtraFiles [expr {$nfiles - $recentFiles(menu)} ]
-  if {$nfiles > $recentFiles(menu)} { set nfiles $recentFiles(menu) }
-  if {$nExtraFiles > $recentFiles(extra)} {
-    set nExtraFiles $recentFiles(extra)
+  set list $recentFiles(data)
+  set menuLength [llength $list]
+  set secondMenuLength [expr {$menuLength - $recentFiles(menu)} ]
+  if {$menuLength > $recentFiles(menu)} {
+    set menuLength $recentFiles(menu)
   }
-  if {$nExtraFiles < 0} { set nExtraFiles 0 }
 
   # Add menu commands for the most recent files:
 
-  for {set i 0} {$i < $nfiles} {incr i} {
-    set fname [lindex $rlist $i]
-    set mname [::recentFiles::menuname $fname]
-    set text [file tail $fname]
+  for {set i 0} {$i < $menuLength} {incr i} {
+    set fname [lindex $list $i]
     set num [expr {$i + 1} ]
     set underline -1
     if {$num <= 9} { set underline 0 }
     if {$num == 10} { set underline 1 }
-    $menu add command -label "$num: [file tail $mname]" -underline $underline \
+    $menu add command -label "$num: [file tail $fname]" -underline $underline \
         -command [list ::recentFiles::load $fname]
     set ::helpMessage($menu,$idx) "  [file nativename $fname]"
     incr idx
   }
 
-  # If no extra submenu of recent files is needed, return now:
-  if {$nExtraFiles <= 0} { return $nfiles }
+  # If no extra submenu of recent files is needed, return
+  if {$secondMenuLength <= 0} {
+    return $menuLength
+  }
+  if {$secondMenuLength > $recentFiles(extra)} {
+    set secondMenuLength $recentFiles(extra)
+  }
 
-  # Now add the extra submenu of files:
   catch {destroy $menu.recentFiles}
   menu $menu.recentFiles
   $menu add cascade -label ". . ." -menu $menu.recentFiles
-  set i $nfiles
-  for {set extra 0} {$extra < $nExtraFiles} {incr extra} {
-    set fname [lindex $rlist $i]
+  set i $menuLength
+  for {set extra 0} {$extra < $secondMenuLength} {incr extra} {
+    set fname [lindex $list $i]
     incr i
-    set mname [::recentFiles::menuname $fname]
-    set text [file tail $fname]
-    set num [expr {$extra + 1} ]
-    set underline -1
-    if {$num <= 9} { set underline 0 }
-    if {$num == 10} { set underline 1 }
-    $menu.recentFiles add command -label "$num: [file tail $mname]" -underline $underline \
-        -command [list ::recentFiles::load $fname]
+    $menu.recentFiles add command -label "[file tail $fname]" -command [list ::recentFiles::load $fname]
     set ::helpMessage($menu.recentFiles,$extra) "  $fname"
   }
-  return [expr {$nfiles + 1} ]
+  return [expr {$menuLength + 1} ]
 }
 
-# ::recentFiles::menuname
-#   Given a full-path filename, returns a possibly shortened
-#   version suitable for displaying in a menu, such as
-#   "..../my/files/abc.pgn" instead of "/long/path/to/my/files/abc.pgn"
-#
-proc ::recentFiles::menuname {fname} {
-  set mname $fname
-  set mname [file nativename $mname]
-  if {[file extension $mname] == [sc_info suffix index]} {
-    set mname [file rootname $mname]
-  }
-  if {[string length $mname] < 25} { return $mname }
-
-  # Generate a menu name " ..../path/filename" for the file:
-  set dir [file dirname $fname]
-  while {1} {
-    set tail [file join [file tail $dir] $mname]
-    set dir [file dirname $dir]
-    if {[string length $tail] > 20} { break }
-    set mname $tail
-  }
-  set mname [file join .... $mname]
-  set mname [file nativename $mname]
-  return $mname
-}
-
-#   Produces a dialog box for configuring the number of recent files
-#   to display in the File menu and in a submenu.
+### Configure the number of recent files to display in a few history menus
 
 proc ::recentFiles::configure {} {
   global recentFiles
+
   set w .recentFilesDlg
   if {[winfo exists $w]} {
     raiseWin $w
