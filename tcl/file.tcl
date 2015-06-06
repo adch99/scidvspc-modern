@@ -176,6 +176,14 @@ proc ::file::Open {{fName ""} {parent .} {update 1}} {
     return
   }
 
+  set slot [sc_base slot $fName]
+  if {$slot != 0} {
+    sc_base switch $slot
+    refreshWindows
+    updateBoard -pgn
+    return
+  }
+
   # The ::recentFiles::remove and ::recentFiles::add should probably be 
   # handled when "if {err == 0}"
 

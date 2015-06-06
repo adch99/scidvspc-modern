@@ -1359,9 +1359,11 @@ if { $macOS } {
       }
 
       # Check if base is already opened
-      if {[sc_base slot $file] != 0} {
-        tk_messageBox -type ok -icon info -title "Scid" -message \
-            "$file is already opened."
+      set slot [sc_base slot $file]
+      if {$slot != 0} {
+        sc_base switch $slot
+        refreshWindows
+        updateBoard -pgn
       } else  {
         # All seems good, let's open those files:
         wm deiconify $::dot_w
