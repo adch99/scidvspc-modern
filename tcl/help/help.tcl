@@ -1039,30 +1039,29 @@ set helpText(Searches) {<h1>Searches in Scid</h1>
   - in the unlikely event - that the position occurred after move 255 which causes a byte overflow).
   </p>
   <p>
-  <i>Most searches only apply to the Main Line of a game, and not to Variations</i>.
+  <i>Most searches only apply to the mainline of a game, and not to variations</i>.
   <br>
   <br>
   <i>Positional Searches can also be performed by the <a Tree>Tree Window</a>.</i>
   </p>
 
-  <h3><name Header>General (Header) Searches</name></h3>
+  <h3><name Header>General (Header) Search</name></h3>
   <p>
-  This search is for game information stored
-  in the game header (Player Names, Date etc) or PGN text of a game.
+  This search is for information stored in the game header (such as Player Names, Date etc) or PGN text of a game.
+  <br>
   For a successful match, <b>all fields must match</b>.
   </p>
   <p>
-  The name fields (White, Black, Event, Site and Round) match on any text
-  inside the name, case-insensitive and ignoring spaces.
-  </p>
-  <p>
-  You can do more precise searches for the White, Black, Event,
-  Site and Round fields by using the <b>?</b> (one character) and
-  <b>*</b> (zero or more characters) wild-cards, and enclosing the search in
-  double quotes. For example a search for the site <b>USA</b>
-  will find American cities and also <b>Lausanne SUI</b>, which is probably
-  not what you wanted! <b>"*USA"</b> (remember the
-  double-quotes) is probably what you wanted.
+  The name fields (White, Black, Event, Site and Round) match on any text.
+  They are case-insensitive and ignoring spaces. Eg - <b>Michael</b> will match a host of christian and surnames.
+  But more precise matches can be got using wild-cards (<b>?</b> for 1 character, <b> * </b> for
+  zero or more characters) - and enclosing the search in double quotes.
+  For example - a search for the site <b>USA</b>
+  will find American cities but also <b>Lausanne SUI</b>, which is probably
+  not what you wanted! <b>"*USA"</b> (note the double-quotes)
+  is how to find sites ending with USA.
+  Another example - to find only games played in Round 1, use <b>"1"</b>. 
+  Without the double-quotes, the Round field will also match 10, 21 etc.
   </p>
   <p>
   If you are searching for a particular player (or pair of opponents) as White
@@ -1180,7 +1179,7 @@ use of <b>Side to Move</b> can speed up the search.</p>
   <a Formats>file formats</a> for more information.
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.9 September 2012</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.15 June 2015</footer></p>
 }
 
 set helpTitle(Filter) "The Filter"

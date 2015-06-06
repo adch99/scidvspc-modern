@@ -177,11 +177,11 @@ proc search::header {} {
   if {[lindex [sc_name read] 0] == 0} { set spellstate disabled }
   foreach c {w b} name {White Black} {
     pack $w.t$c -side top -fill x
-    label $w.t$c.label -text "$::tr($name) FIDE" -font $bold -width 12 -anchor w
+    label $w.t$c.label -text "$::tr($name) FIDE title" -font $bold -width 18 -anchor w
     pack $w.t$c.label -side left
     foreach i $sTitleList {
       set name [string toupper $i]
-      if {$i == "none"} { set name "-" }
+      if {$i == "none"} { set name [tr None] }
       checkbutton $w.t$c.b$i -text $name -width 5 -font $regular \
           -variable sTitles($c:$i) -offvalue 0 -onvalue 1 -indicatoron 0 \
           -state $spellstate -pady 0
@@ -450,6 +450,8 @@ proc search::header {} {
       -command ::search::header::defaults
   button $w.b.save -textvar ::tr(Save) -padx 20 -command ::search::header::save
   button $w.b.stop -textvar ::tr(Stop) -command sc_progressBar
+  button $w.b.help -textvar ::tr(Help) -command {helpWindow Searches Header}
+
   button $w.b.search -textvar ::tr(Search) -padx 20 -command {
     checkDates
     ::utils::history::AddEntry HeaderSearchWhite $sWhite
@@ -534,11 +536,11 @@ proc search::header {} {
   button $w.b.cancel -textvar ::tr(Close) -padx 20 \
       -command {focus .main ; destroy .sh}
 
-  foreach i {defaults save cancel search stop} {
+  foreach i {defaults save help cancel search stop} {
     $w.b.$i configure -font $regular
   }
 
-  pack $w.b.defaults $w.b.save -side left -padx 5
+  pack $w.b.defaults $w.b.save $w.b.help -side left -padx 5
   pack $w.b.cancel $w.b.search -side right -padx 5
 
   canvas $w.progress -height 20 -width 300  -relief solid -border 1
