@@ -23,6 +23,9 @@ proc readSpellCheckFile {{message 1}} {
   }
   set result {}
   set fullname [tk_getOpenFile -initialdir $dirname -filetypes $ftype -title "Open Spellcheck file"]
+  if {$fullname == ""} {
+    return 0
+  }
   if {![file isfile $fullname] || [catch {sc_name read $fullname} result]} {
       if {$message} {
         tk_messageBox -title "ERROR: Unable to read file" -type ok \

@@ -644,12 +644,12 @@ SpellChecker::GetBioData (const char * name)
 }
 
 
-static const uint ELO_YEAR_LAST  = 2015; // end of current ELO scheme, could be increased in case the rating period does not change
+static const uint ELO_YEAR_LAST  = 2018; // end of current ELO scheme, could be increased in case the rating period does not change
 static const uint ELO_YEAR_FIRST = 1970;
 
 static const uint ELO_YEAR_RANGE = ELO_YEAR_LAST + 1 - ELO_YEAR_FIRST;
 
-static const uint ELO_RATINGS_PER_YEAR = 6;
+static const uint ELO_RATINGS_PER_YEAR = 12;
 
 static const uint ELO_ARRAY_SIZE = ELO_YEAR_RANGE * ELO_RATINGS_PER_YEAR;
 
@@ -702,6 +702,18 @@ static const uint ELO_MONTH_TO_BIMONTHLY[13] = {
     5, 5       // Nov, Dec
 };
 
+// 2012 had 9 periods per year. FIDE are freaking useless
+
+static const uint ELO_FIRST_NINEMONTHS = 2012;
+
+static const uint ELO_MONTH_TO_NINEMONTHS[13] = {
+    0,          // Unknown month
+    1, 1, 2, 3, // Jan, Feb // Mar, Apr
+    4, 4, 5, 6, // May, Jun // Jul, Aug
+    7, 7, 8, 9  // Sep, Oct // Nov, Dec
+};
+
+static const uint ELO_FIRST_MONTHLY_YEAR = 2013;
 
 // Retrieve the list of Rating figures for given player (aka node) from the given (ssp) string
 // The string is formatted as:
@@ -774,7 +786,7 @@ SpellChecker::SetElo (spellCheckNodeT * node,
                       uint year, uint yIndex, eloT elo)
 {
     // Monitor array bounds
-    //
+
     if ( year < ELO_YEAR_FIRST  ||  year > ELO_YEAR_LAST ) { return; }
     if ( yIndex >= ELO_RATINGS_PER_YEAR ) { return; }
     uint index = (year - ELO_YEAR_FIRST) * ELO_RATINGS_PER_YEAR;
@@ -808,7 +820,13 @@ SpellChecker::GetElo (const char * name, dateT date, bool exact)
     // It depends on the year itself
     
     uint yIndex;
-    if ( year >= ELO_FIRST_BIMONTHLY_YEAR ) {
+    if ( year >= ELO_FIRST_MONTHLY_YEAR ) {
+        yIndex = month;
+    }
+    else if ( year >= ELO_FIRST_NINEMONTHS ) {
+        yIndex = ELO_MONTH_TO_NINEMONTHS[month];
+    }
+    else if ( year >= ELO_FIRST_BIMONTHLY_YEAR ) {
         yIndex = ELO_MONTH_TO_BIMONTHLY[month];
     }
     else if ( year >= ELO_TRANSITIONAL_YEAR ) {
@@ -824,6 +842,8 @@ SpellChecker::GetElo (const char * name, dateT date, bool exact)
     uint index = (year - ELO_YEAR_FIRST) * ELO_RATINGS_PER_YEAR;
     uint indexStartOfYear = index;
     index += yIndex;
+    if (yIndex > 0)
+      index--;
     ASSERT (index < ELO_ARRAY_SIZE);
 
     char searchName [512];

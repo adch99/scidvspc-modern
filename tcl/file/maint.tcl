@@ -2033,6 +2033,7 @@ proc doAllocateRatings {} {
       sc_game load [sc_game number]
       updateBoard -pgn
     }
+    ::windows::gamelist::Refresh
 
     tk_messageBox -type ok -icon info -parent . \
         -title "Scid" -message [subst $::tr(AddedRatings)]
