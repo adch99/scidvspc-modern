@@ -55,8 +55,8 @@ proc ::recentFiles::add {fname {delete 0}} {
     # Insert the current file at the start of the list:
     set list [linsert $list 0 $fname]
 
-    # Trim the list to twice the limit (arbitary)
-    set limit [expr {2 * $recentFiles(limit)}]
+    # Trim the list to thrice the limit (arbitary)
+    set limit [expr {3 * $recentFiles(limit)}]
     if {[llength $list] > $limit} {
       set list [lrange $list 0 [expr {$limit - 1}]]
     }
