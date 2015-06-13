@@ -11448,9 +11448,9 @@ sc_name_correct (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                 dateT date = ie->GetDate();
                 // These startDate comparisons check each game for whether it occured before player born
                 // but perhaps it's desirable to nominate an age (say 10 years; being uint -5120)
-                // And they also stop name corrections when no GetDate is known, but this may not desired.
-                if ((startDate[oldID] == ZERO_DATE  ||   date >= startDate[oldID])
-                    &&  (endDate[oldID] == ZERO_DATE  ||   date <= endDate[oldID])) {
+                if (date == ZERO_DATE ||
+                    ((startDate[oldID] == ZERO_DATE  ||   date >= startDate[oldID])
+                    &&  (endDate[oldID] == ZERO_DATE  ||   date <= endDate[oldID]))) {
                     newIE.SetWhite (newID);
                     corrected = true;
                     instanceCount++;
@@ -11463,8 +11463,9 @@ sc_name_correct (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             newID = newIDs [oldID];
             if (oldID != newID) {
                 dateT date = ie->GetDate();
-                if ((startDate[oldID] == ZERO_DATE  ||   date >= startDate[oldID])
-                    &&  (endDate[oldID] == ZERO_DATE  ||   date <= endDate[oldID])) {
+                if (date == ZERO_DATE ||
+                    ((startDate[oldID] == ZERO_DATE  ||   date >= startDate[oldID])
+                    &&  (endDate[oldID] == ZERO_DATE  ||   date <= endDate[oldID]))) {
                     newIE.SetBlack (newID);
                     corrected = true;
                     instanceCount++;

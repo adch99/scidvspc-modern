@@ -2419,7 +2419,7 @@ perform a <a Compact>namebase compaction</a>.
   <h3><name Spellcheck>Spell Checking</name></h3>
   <p>
   Scid's Spell Checking feature is used to standardize Player, Event, Site and Round names throughout a database.
-  To do so, the <a Maintenance Spellfile>spelling.ssp</a> file must be loaded.
+  To do so, a <a Maintenance Spellfile>spelling</a> file must be loaded.
   </p>
   <p>
   When Spell Check is run, a list of proposed corrections is produced. These
