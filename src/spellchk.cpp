@@ -708,9 +708,9 @@ static const uint ELO_FIRST_NINEMONTHS = 2012;
 
 static const uint ELO_MONTH_TO_NINEMONTHS[13] = {
     0,          // Unknown month
-    1, 1, 2, 3, // Jan, Feb // Mar, Apr
-    4, 4, 5, 6, // May, Jun // Jul, Aug
-    7, 7, 8, 9  // Sep, Oct // Nov, Dec
+    0, 0, 1, 2, // Jan, Feb // Mar, Apr
+    3, 3, 4, 5, // May, Jun // Jul, Aug
+    6, 6, 7, 8  // Sep, Oct // Nov, Dec
 };
 
 static const uint ELO_FIRST_MONTHLY_YEAR = 2013;
@@ -822,6 +822,8 @@ SpellChecker::GetElo (const char * name, dateT date, bool exact)
     uint yIndex;
     if ( year >= ELO_FIRST_MONTHLY_YEAR ) {
         yIndex = month;
+        if (yIndex > 0)
+          yIndex--;
     }
     else if ( year >= ELO_FIRST_NINEMONTHS ) {
         yIndex = ELO_MONTH_TO_NINEMONTHS[month];
@@ -842,8 +844,6 @@ SpellChecker::GetElo (const char * name, dateT date, bool exact)
     uint index = (year - ELO_YEAR_FIRST) * ELO_RATINGS_PER_YEAR;
     uint indexStartOfYear = index;
     index += yIndex;
-    if (yIndex > 0)
-      index--;
     ASSERT (index < ELO_ARRAY_SIZE);
 
     char searchName [512];
