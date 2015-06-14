@@ -560,8 +560,7 @@ namespace eval pgn {
     # debug puts $pgnStr
 
     if {$pgnNeedsUpdate} {
-      set windowTitle [format $::tr(PgnWindowTitle) [sc_game number]]
-      ::setTitle .pgnWin "$windowTitle"
+      ::setTitle .pgnWin PGN
       .pgnWin.text configure -state normal
       .pgnWin.text delete 0.0 end
       if {$::pgn::showColor} {
