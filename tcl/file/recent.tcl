@@ -6,6 +6,7 @@ set recentFiles(limit) 10   ;# Maximum number of recent files to remember.
 set recentFiles(menu)   5   ;# Maximum number of files to show in File menu.
 set recentFiles(extra)  5   ;# Maximum number of files to show in extra menu.
 set recentFiles(gamehistory) 5 ;# Maximum number of files to show in Game History
+set recentFiles(playernames) 10
 set recentFiles(data)  {}   ;# List of recently used files.
 
 catch {source [scidConfigFile recentfiles]}
@@ -27,7 +28,7 @@ proc ::recentFiles::save {{reportError 0}} {
     return
   }
   puts $f "# $::scidName recent files list\n"
-  foreach i {limit menu extra gamehistory data} {
+  foreach i {limit menu extra gamehistory playernames data} {
     puts $f "set recentFiles($i) [list [set recentFiles($i)]]"
     puts $f ""
   }
@@ -170,6 +171,7 @@ proc ::recentFiles::configure {} {
   set recentFiles(temp_menu) $recentFiles(menu)
   set recentFiles(temp_extra) $recentFiles(extra)
   set recentFiles(temp_gamehistory) $recentFiles(gamehistory)
+  set recentFiles(temp_playernames) $recentFiles(playernames)
 
   label $w.lmenu -text $::tr(RecentFilesMenu)
   scale $w.menu -variable recentFiles(temp_menu) -from 0 -to 20 -length 250 \
@@ -187,7 +189,13 @@ proc ::recentFiles::configure {} {
   scale $w.games -variable recentFiles(temp_gamehistory) -from 0 -to 20 -length 250 \
       -orient horizontal -showvalue 0 -tickinterval 2 -font font_Small
 
-  pack $w.lmenu $w.menu $w.sep $w.lextra $w.extra $w.sep2 $w.lgames $w.games -side top -padx 10
+  frame $w.sep3 -height 4
+
+  label $w.lplayers -text {Number of players in History}
+  scale $w.players -variable recentFiles(temp_playernames) -from 0 -to 20 -length 250 \
+      -orient horizontal -showvalue 0 -tickinterval 2 -font font_Small
+
+  pack $w.lmenu $w.menu $w.sep $w.lextra $w.extra $w.sep2 $w.lgames $w.games $w.sep3 $w.lplayers $w.players -side top -padx 10
   addHorizontalRule $w
   pack [frame $w.b] -side bottom
 
@@ -195,6 +203,7 @@ proc ::recentFiles::configure {} {
     set recentFiles(menu) $recentFiles(temp_menu)
     set recentFiles(extra) $recentFiles(temp_extra)
     set recentFiles(gamehistory) $recentFiles(temp_gamehistory)
+    set recentFiles(playernames) $recentFiles(temp_playernames)
     destroy .recentFilesDlg
     ::recentFiles::save
     updateMenuStates

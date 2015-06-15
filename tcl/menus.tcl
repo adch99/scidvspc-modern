@@ -888,7 +888,7 @@ $m add command -label OptionsSave -command {
     comp(timecontrol) comp(seconds) comp(base) comp(incr) comp(timeout) comp(name) comp(usebook) comp(book)
     comp(rounds) comp(showclock) comp(debug) comp(animate) comp(firstonly) comp(ponder) comp(showscores)
     ::tools::graphs::filter::type  ::tools::graphs::absfilter::type ::tools::graphs::showpoints
-    maintFlag glistFlag useGraphFigurine photosMinimized bookmarks(gamehistory)} {
+    maintFlag glistFlag useGraphFigurine photosMinimized bookmarks(gamehistory) playerInfoHistory} {
 
       puts $optionF "set $i [list [set $i]]"
 
@@ -1570,6 +1570,8 @@ proc setLanguageMenus {{lang ""}} {
   ::crosstab::ConfigMenus
   ::optable::ConfigMenus
   ::preport::ConfigMenus
+  playerInfoConfigMenus
+
   updateGameinfo
   updateStatusBar
   # todo &&&  Update docking tab labels (setTitle)

@@ -38,9 +38,9 @@ namespace eval pgn {
   ################################################################################
   #
   ################################################################################
-  proc ConfigMenus {{lang ""}} {
+  proc ConfigMenus {} {
     if {! [winfo exists .pgnWin]} { return }
-    if {$lang == ""} { set lang $::language }
+    set lang $::language
     set m .pgnWin.menu
     foreach idx {0 1 2 3} tag {PgnFile PgnOpt PgnColor PgnHelp} {
       configMenuText $m $idx $tag $lang

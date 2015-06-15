@@ -647,6 +647,7 @@ proc ::docking::setMenuMark { nb tab} {
        $tab == ".fdockcrosstabWin" || \
        $tab == ".fdocksgraph" || \
        $tab == ".fdockrgraph" || \
+       $tab == ".fdockplayerInfoWin" || \
        [string match "\.fdocktreeWin*" $tab] } {
     $nb tab $tab -image bluetriangle -compound left
   }

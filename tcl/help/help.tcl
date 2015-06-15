@@ -3315,6 +3315,9 @@ players.
   perform <a Maintenance Editing>name substitutions</b> in the whole (or part) database, or run the 
   <a Reports Player>Player Report</a> feature.
   </p>
+  <p>
+  Right-clicking shows a menu of recently viewed players.
+  </p>
 
 <h3><name Photos>Player Photos</name></h3>
 <p>To enable player photos, download "FIDE.spf" from the 
@@ -3329,7 +3332,7 @@ Clicking on the photos makes them smaller. To disable them, deselect <green>Opti
 
 </p>
 
-  <p><footer>Updated: Scid vs. PC 4.8 June 2012</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.15 June 2015</footer></p>
 }
 
 set helpTitle(Graphs) "Graph windows"

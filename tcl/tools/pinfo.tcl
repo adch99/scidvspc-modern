@@ -5,10 +5,11 @@
 set playerInfoName ""
 
 proc playerInfo {{player ""} {raise 0}} {
-  global playerInfoName
+  global playerInfoName playerInfoHistory
   if {$player == ""} { set player $playerInfoName }
   if {[catch {sc_name info -htext $player} pinfo]} { return }
   set playerInfoName $player
+
   set ::rgraph(player) $player
   set w .playerInfoWin
   if {! [winfo exists $w]} {
@@ -17,6 +18,15 @@ proc playerInfo {{player ""} {raise 0}} {
     catch {wm state $w withdrawn}
     setWinLocation $w
     wm minsize $w 450 300
+
+    menu $w.menu 
+    ::setMenu $w $w.menu
+    $w.menu add cascade -label TmtSortPlayers -menu $w.menu.players
+    $w.menu add command -label Help -command "helpWindow PInfo"
+    $w.menu add command -label FileExit -command "destroy $w"
+    menu $w.menu.players -tearoff 1
+    playerInfoConfigMenus
+    bind $w <Button-3> "tk_popup $w.menu.players %X %Y"
 
     pack [frame $w.b] -side bottom -expand 1 -fill x -pady 0 -padx 5
 
@@ -27,6 +37,7 @@ proc playerInfo {{player ""} {raise 0}} {
       setNameEditorType rating
       set editName $playerInfoName
       set editNameSelect crosstable
+      set editNameRating {}
     }
     button $w.b.match -text [tr PinfoLookupName] -command {
       set ::plist::name [lindex $playerInfoName 0]
@@ -97,6 +108,23 @@ proc playerInfo {{player ""} {raise 0}} {
     }
   }
 
+  ### Add player to history
+  if {$player != ""} {
+    # Remove player from playerInfoHistory (if any)
+    while {1} {
+      set idx [lsearch -exact $playerInfoHistory $player]
+      if {$idx < 0} { break }
+      set playerInfoHistory [lreplace $playerInfoHistory $idx $idx]
+    }
+    set playerInfoHistory [linsert $playerInfoHistory 0 $player]
+  }
+  set playerInfoHistory [lrange $playerInfoHistory 0 [expr {$::recentFiles(playernames) - 1}]]
+
+  $w.menu.players delete 0 end
+  foreach i $playerInfoHistory {
+    $w.menu.players add command -label $i -command [list playerInfo $i]
+  }
+
   ### Make FIDEID open relevant url
   regsub {FIDEID ([0-9]+)} $pinfo {<run openURL http://ratings.fide.com/card.phtml?event=%\1 ; ::windows::stats::Refresh>FIDEID \1</run>} pinfo
 
@@ -138,6 +166,15 @@ proc playerInfoRefresh {} {
   set ::glstart 1
   raiseWin .glistWin
   ::windows::stats::Refresh
+}
+
+proc playerInfoConfigMenus {} {
+  if {![winfo exists .playerInfoWin]} {
+    return
+  }
+  foreach idx {0 1 2} tag {TmtSortPlayers Help FileExit} {
+    configMenuText .playerInfoWin.menu $idx $tag $::language
+  }
 }
 
 ###
