@@ -16,6 +16,7 @@
 #include <fcntl.h>
 
 #include <errno.h>
+#include <stdlib.h>
 #include <set>
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -12778,44 +12779,85 @@ enum playerCompareT {
     PLAYER_SORT_ELO, PLAYER_SORT_GAMES, PLAYER_SORT_NAME,
     PLAYER_SORT_OLDEST, PLAYER_SORT_NEWEST, PLAYER_SORT_PHOTO
 };
+
 int
-comparePlayers (NameBase * nb, idNumberT p1, idNumberT p2, playerCompareT pc)
+compareNames (void const * lhs, void const * rhs, void * arg)
 {
+    NameBase * nb = (NameBase *)arg;
+
+    idNumberT p1 = *(idNumberT const *)lhs;
+    idNumberT p2 = *(idNumberT const *)rhs;
+
     const char * name1 = nb->GetName (NAME_PLAYER, p1);
     const char * name2 = nb->GetName (NAME_PLAYER, p2);
-    int compare = 0;
-    switch (pc) {
-    case PLAYER_SORT_ELO:
-        compare = nb->GetElo(p2) - nb->GetElo(p1);
-        break;
-    case PLAYER_SORT_GAMES:
-        compare = nb->GetFrequency(NAME_PLAYER, p2)
-            - nb->GetFrequency(NAME_PLAYER, p1);
-        break;
-    case PLAYER_SORT_OLDEST:
-         // Sort by oldest game year in ascending order:
-        compare = date_GetYear(nb->GetFirstDate(p1))
-            - date_GetYear(nb->GetFirstDate(p2));
-        break;
-    case PLAYER_SORT_NEWEST:
-         // Sort by newest game date in descending order:
-        compare = date_GetYear(nb->GetLastDate(p2))
-            - date_GetYear(nb->GetLastDate(p1));
-        break;
-    case PLAYER_SORT_PHOTO:
-        compare = (int)nb->HasPhoto(p2) - (int)nb->HasPhoto(p1);
-        break;
-    default:
-        break;
-    }
 
     // If equal, resolve by comparing names, first case-insensitive and
     // then case-sensitively if still tied:
-    if (compare == 0) {
-        compare = strCaseCompare (name1, name2);
-        if (compare == 0) { compare = strCompare (name1, name2); }
-    }
+    int compare = strCaseCompare (name1, name2);
+    if (compare == 0) { compare = strCompare (name1, name2); }
     return compare;
+}
+
+int
+compareElo (void const * lhs, void const * rhs, void * arg)
+{
+    NameBase * nb = (NameBase *)arg;
+
+    idNumberT p1 = *(idNumberT const *)lhs;
+    idNumberT p2 = *(idNumberT const *)rhs;
+
+    int compare = nb->GetElo(p2) - nb->GetElo(p1);
+    return compare ? compare : compareNames(lhs, rhs, arg);
+}
+
+int
+compareGames (void const * lhs, void const * rhs, void * arg)
+{
+    NameBase * nb = (NameBase *)arg;
+
+    idNumberT p1 = *(idNumberT const *)lhs;
+    idNumberT p2 = *(idNumberT const *)rhs;
+
+    int compare = nb->GetFrequency(NAME_PLAYER, p2) - nb->GetFrequency(NAME_PLAYER, p1);
+    return compare ? compare : compareNames(lhs, rhs, arg);
+}
+
+int
+compareOldest (void const * lhs, void const * rhs, void * arg)
+{
+    NameBase * nb = (NameBase *)arg;
+
+    idNumberT p1 = *(idNumberT const *)lhs;
+    idNumberT p2 = *(idNumberT const *)rhs;
+
+    // Sort by oldest game year in ascending order:
+    int compare = date_GetYear(nb->GetFirstDate(p1)) - date_GetYear(nb->GetFirstDate(p2));
+    return compare ? compare : compareNames(lhs, rhs, arg);
+}
+
+int
+compareNewest (void const * lhs, void const * rhs, void * arg)
+{
+    NameBase * nb = (NameBase *)arg;
+
+    idNumberT p1 = *(idNumberT const *)lhs;
+    idNumberT p2 = *(idNumberT const *)rhs;
+
+    // Sort by newest game date in descending order:
+    int compare = date_GetYear(nb->GetLastDate(p2)) - date_GetYear(nb->GetLastDate(p1));
+    return compare ? compare : compareNames(lhs, rhs, arg);
+}
+
+int
+comparePhoto (void const * lhs, void const * rhs, void * arg)
+{
+    NameBase * nb = (NameBase *)arg;
+
+    idNumberT p1 = *(idNumberT const *)lhs;
+    idNumberT p2 = *(idNumberT const *)rhs;
+
+    int compare = (int)nb->HasPhoto(p2) - (int)nb->HasPhoto(p1);
+    return compare ? compare : compareNames(lhs, rhs, arg);
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -12879,14 +12921,15 @@ sc_name_plist (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     }
 
     if (arg != argc) { return errorResult (ti, usage); }
-    playerCompareT pc = PLAYER_SORT_NAME;
+    typedef int (*compareT)(const void *, const void *, void *);
+    compareT comp;
     switch (sortMode) {
-        case SORT_ELO:    pc = PLAYER_SORT_ELO;    break;
-        case SORT_GAMES:  pc = PLAYER_SORT_GAMES;  break;
-        case SORT_OLDEST: pc = PLAYER_SORT_OLDEST; break;
-        case SORT_NEWEST: pc = PLAYER_SORT_NEWEST; break;
-        case SORT_NAME:   pc = PLAYER_SORT_NAME;   break;
-        case SORT_PHOTO:  pc = PLAYER_SORT_PHOTO;  break;
+        case SORT_ELO:    comp = compareElo;    break;
+        case SORT_GAMES:  comp = compareGames;  break;
+        case SORT_OLDEST: comp = compareOldest; break;
+        case SORT_NEWEST: comp = compareNewest; break;
+        case SORT_NAME:   comp = compareNames;  break;
+        case SORT_PHOTO:  comp = comparePhoto;  break;
         default:
             return InvalidCommand (ti, "sc_name plist -sort", sortModes);
     }
@@ -12913,18 +12956,13 @@ sc_name_plist (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
         // Insert this player into the ordered array if necessary:
 
-        uint insert = listSize;
-        for (; insert > 0; insert--) {
-            if (comparePlayers (nb, plist[insert-1], id, pc) < 0) { break; }
-        }
-        if (insert >= maxListSize) { continue; }
-        // Move all later IDs in list along one place:
-        for (uint j = listSize; j > insert; j--) {
-            plist[j] = plist[j-1];
-        }
-        plist[insert] = id;
-        if (listSize < maxListSize) { listSize++; }
+        plist[listSize++] = id;
+
+	if (listSize > maxListSize)
+	    break;
     }
+
+    qsort_r(plist, listSize, sizeof(plist[0]), comp, nb);
 
     // Generate the list of player data:
 #ifdef WINCE
