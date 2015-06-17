@@ -13244,18 +13244,16 @@ strPromoteSurname (char * target, const char * source)
 int
 sc_name_spellcheck (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
-#ifndef WINCE
     nameT nt = NAME_INVALID;
-    uint maxCorrections = 20000;
     bool doSurnames = false;
     bool ambiguous = true;
-    const char * usage = "Usage: sc_name spellcheck [-max <integer>] [-surnames <boolean>] [-ambiguous <boolean>] players|events|sites|rounds";
+    const char * usage = "Usage: sc_name spellcheck [-surnames <boolean>] [-ambiguous <boolean>] players|events|sites|rounds";
 
     const char * options[] = {
-        "-max", "-surnames", "-ambiguous", NULL
+        "-surnames", "-ambiguous", NULL
     };
     enum {
-        OPT_MAX, OPT_SURNAMES, OPT_AMBIGUOUS
+        OPT_SURNAMES, OPT_AMBIGUOUS
     };
 
     int arg = 2;
@@ -13267,9 +13265,6 @@ sc_name_spellcheck (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
         if (option[0] == '-') { index = strUniqueMatch (option, options); }
 
         switch (index) {
-        case OPT_MAX:
-            maxCorrections = strGetUnsigned (value);
-            break;
         case OPT_SURNAMES:
             doSurnames = strGetBoolean (value);
             break;
@@ -13311,7 +13306,24 @@ sc_name_spellcheck (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
 
     nb->IterateStart (nt);
 
+    // progressbar
+    bool showProgress = startProgressBar();
+    uint updateStart, update;
+    updateStart = update = 1000;  // Update progress bar every 1000 games
+    idNumberT namesCount = 0;
+    idNumberT namesTotal = nb->GetNumNames(nt);
+
     while (nb->Iterate (nt, &id) == OK) {
+        namesCount++;
+        if (showProgress) {  // Update the percentage done bar:
+            update--;
+            if (update == 0) {
+                update = updateStart;
+                updateProgressBar (ti, namesCount, namesTotal);
+                if (interruptedProgress()) break;
+            }
+        }
+
         uint frequency = nb->GetFrequency (nt, id);
         // Do not bother trying to correct unused names:
         if (frequency == 0) { continue; }
@@ -13329,7 +13341,6 @@ sc_name_spellcheck (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
 
         replace = spellChecker[nt]->CorrectPrefix (name, &offset);
         if (replace != NULL) {
-            if (correctionCount < maxCorrections) {
                 strCopy (tempName, replace);
                 strAppend (tempName, &(name[offset]));
                 sprintf (tempStr, "%s\"%s\"\t>> \"%s\" (%u)\n",
@@ -13337,14 +13348,12 @@ sc_name_spellcheck (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
                          origName, tempName, frequency);
                 dstr->Append (tempStr);
                 prevCorrection = origName;
-            }
             correctionCount++;
             continue;
         }
 
         replace = spellChecker[nt]->CorrectSuffix (name, &offset);
         if (replace != NULL) {
-            if (correctionCount < maxCorrections) {
                 strCopy (tempName, name);
                 strCopy (tempName + offset, replace);
                 sprintf (tempStr, "%s\"%s\"\t>> \"%s\" (%u)\n",
@@ -13352,7 +13361,6 @@ sc_name_spellcheck (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
                          origName, tempName, frequency);
                 dstr->Append (tempStr);
                 prevCorrection = origName;
-            }
             correctionCount++;
             continue;
         }
@@ -13360,7 +13368,6 @@ sc_name_spellcheck (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
         int replacedLength = 0;
         replace = spellChecker[nt]->CorrectInfix (name, &offset, &replacedLength);
         if (replace != NULL) {
-            if (correctionCount < maxCorrections) {
                 strCopy (tempName, name);
                 strCopy (tempName + offset, replace);
                 strAppend (tempName, &(name[offset + replacedLength]));
@@ -13369,7 +13376,6 @@ sc_name_spellcheck (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
                          origName, tempName, frequency);
                 dstr->Append (tempStr);
                 prevCorrection = origName;
-            }
             correctionCount++;
             continue;
         }
@@ -13416,7 +13422,6 @@ sc_name_spellcheck (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
         for (uint i=0; i < count; i++) {
             if (strEqual (origName, corrections[i])) { continue; }
             correctionCount++;
-            if (correctionCount >= maxCorrections) { continue; }
 
             // Add correction to output, with a blank line first if the
             // correction starts with a different character to the
@@ -13451,22 +13456,17 @@ sc_name_spellcheck (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
         }
     }
 
+    if (showProgress) { updateProgressBar (ti, 1, 1); }
+
     // Generate message
 
-    sprintf (tempStr, "Scid found %u %s name correction%s",
+    sprintf (tempStr, "Scid found %u %s name correction%s.",
              correctionCount, NAME_TYPE_STRING[nt],
              strPlural (correctionCount));
     Tcl_AppendResult (ti, tempStr, NULL);
-    if (correctionCount > maxCorrections) {
-        sprintf (tempStr, ", the first %u are listed below.", maxCorrections);
-    } else {
-        strCopy (tempStr, ".");
-    }
-
-    Tcl_AppendResult (ti, tempStr, "\n", dstr->Data(), NULL);
+    Tcl_AppendResult (ti, "\n", dstr->Data(), NULL);
 
     delete dstr;
-#endif
     return TCL_OK;
 }
 

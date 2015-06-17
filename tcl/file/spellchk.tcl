@@ -3,7 +3,6 @@
 ### Copyright (C) 2000-2003 Shane Hudson.
 
 set spellcheckType Player
-set spell_maxCorrections 2000
 set spellcheckSurnames 0
 set spellcheckAmbiguous 0
 
@@ -43,23 +42,44 @@ proc readSpellCheckFile {{message 1}} {
 }
 
 proc updateSpellCheckWin {type} {
-  wm title .spellcheckWin "Scid: Spellcheck [file tail [sc_base filename [sc_base current]]]"
-  global spellcheckType spell_maxCorrections spellcheckSurnames
+
+  global spellcheckType spellcheckSurnames
   global spellcheckAmbiguous
   busyCursor .
-  .spellcheckWin.text.text delete 1.0 end
-  #.spellcheckWin.text.text insert end "Finding player corrections..."
-  update idletasks
-  catch {sc_name spellcheck -max $spell_maxCorrections \
-           -surnames $spellcheckSurnames \
-           -ambiguous $spellcheckAmbiguous $type} result
-  .spellcheckWin.text.text delete 1.0 end
-  .spellcheckWin.text.text insert end $result
-  unbusyCursor .
+
+  set w .spellcheckWin
+  set b $w.buttons
+
+  foreach i [winfo children $b] {
+    $i configure -state disabled
+  }
+  $w.text.text delete 1.0 end
+
+  $b.cancel configure -textvar ::tr(Stop) -state normal -command sc_progressBar
+  update
+
+  sc_progressBar $w.progress bar 301 21 time
+  grab $b.cancel
+  if {[catch {sc_name spellcheck -surnames $spellcheckSurnames -ambiguous $spellcheckAmbiguous $type} result]} {
+    grab release $b.cancel
+    unbusyCursor .
+    tk_messageBox -parent $w -type ok -icon info -title "Scid" -message $result
+  } else {
+    grab release $b.cancel
+    unbusyCursor .
+  }
+  $b.cancel configure -textvar ::tr(Cancel) -command "destroy $w"
+
+  $w.text.text delete 1.0 end
+  $w.text.text insert end $result
+
+  foreach i [winfo children $b] {
+    $i configure -state normal
+  }
 }
 
 proc openSpellCheckWin {type {parent .}} {
-  global spellcheckType spell_maxCorrections spellcheckSurnames
+  global spellcheckType spellcheckSurnames
   global spellcheckAmbiguous spellcheckFind
   set w .spellcheckWin
   if {[winfo exists $w]} {
@@ -72,17 +92,8 @@ proc openSpellCheckWin {type {parent .}} {
       return
     }
   }
-  busyCursor .
-  update idletasks
-  if {[catch {sc_name spellcheck -max $spell_maxCorrections \
-                -surnames $spellcheckSurnames \
-                -ambiguous $spellcheckAmbiguous $type} result]} {
-    unbusyCursor .
-    tk_messageBox -type ok -icon info -title "Scid: Spellcheck results" \
-      -parent $parent -message $result
-    return
-  }
-  unbusyCursor .
+
+  set result ""
   set spellcheckType $type
 
   toplevel $w
@@ -92,6 +103,7 @@ proc openSpellCheckWin {type {parent .}} {
 
   bind $w <F1> { helpWindow Maintenance Spellcheck}
   bind $w <Configure> "recordWinSize $w"
+  bind $w <Escape> "destroy $w"
 
   set f [frame $w.buttons]
   pack $f -side bottom -ipady 1 -fill x -pady 3
@@ -106,6 +118,10 @@ proc openSpellCheckWin {type {parent .}} {
   }
 
   button $f.ok -textvar ::tr(MakeCorrections) -underline 0 -command {
+    set result [tk_messageBox -title "Scid" -parent .spellcheckWin -icon question \
+      -type yesno -message "Please confirm to make Name corrections. This cannot be undone."]
+    if {$result == "no"} {return 0}
+
     busyCursor .
     set spelltext ""
     catch {set spelltext [.spellcheckWin.text.text get 1.0 end-1c]}
@@ -126,21 +142,26 @@ proc openSpellCheckWin {type {parent .}} {
     updateBoard -pgn
     ::windows::gamelist::Refresh
   }
-  bind $w <Alt-m> "$f.ok invoke; break"
 
-  button $f.cancel -textvar ::tr(Cancel) -underline 0 -command {
-    focus .main
-    destroy .spellcheckWin
-  }
-
-  bind $w <Alt-c> "$f.cancel invoke; break"
+  button $f.cancel -textvar ::tr(Cancel) -underline 0 -width 8 -command "destroy $w"
 
   button $f.help -textvar ::tr(Help) -command {helpWindow Maintenance Spellcheck}
 
   entry $f.find -width 10 -textvariable spellcheckFind(find) -font font_Small -highlightthickness 0
   # configured below
 
-  pack $f.cancel $f.find $f.help $f.ok -side right -padx 2
+  pack $f.cancel $f.ok $f.help $f.find -side right -padx 2
+
+  # Progress bar
+
+  canvas $w.progress -width 300 -height 20  -relief solid -border 1
+  $w.progress create rectangle 0 0 0 0 -fill $::progcolor -outline $::progcolor -tags bar
+  $w.progress create text 295 10 -anchor e -font font_Regular -tags time \
+      -fill black -text "0:00 / 0:00"
+
+  pack $w.progress -side bottom -padx 2 -pady 2
+
+  # Text widget
 
   set f [frame $w.text]
   pack $w.text -expand yes -fill both
@@ -172,6 +193,10 @@ proc openSpellCheckWin {type {parent .}} {
   focus $f.text
   placeWinOverParent $w $parent
   wm state $w normal
+  update
+
+  updateSpellCheckWin $type
 }
 
+### end of spellchk.tcl
 

@@ -2387,7 +2387,7 @@ proc doCleaner {} {
       mtoolAdd $t "$count: $::tr(Spellchecking): $::tr($names)..."
       incr count
       set result "0 $nameType names were corrected."
-      if {! [catch {sc_name spellcheck -max 100000 $nameType} corrections]} {
+      if {! [catch {sc_name spellcheck $nameType} corrections]} {
         update
         catch {sc_name correct $nameType $corrections} result
       }
