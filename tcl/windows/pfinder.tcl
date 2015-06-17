@@ -13,7 +13,7 @@ proc ::plist::defaults {} {
   set ::plist::maxGames 9999
   set ::plist::minElo 0
   set ::plist::maxElo [sc_info limit elo]
-  set ::plist::size 200
+  set ::plist::size 1000
 }
 
 ::plist::defaults
@@ -116,8 +116,8 @@ proc ::plist::Open {} {
   # List Size
 
   label $f.size -text $::tr(TmtLimit) -font $fbold
-  ttk::combobox $f.esize -width 5 -justify right -textvar ::plist::size -values {50 100 200 500 1000 10000}
-  trace variable ::plist::size w {::utils::validate::Integer 10000 0}
+  ttk::combobox $f.esize -width 7 -justify right -textvar ::plist::size -values {50 100 200 500 1000 10000 100000}
+  trace variable ::plist::size w {::utils::validate::Integer 100000 0}
   bindFocusColors $f.esize
 
   pack $f.esize $f.size -side right

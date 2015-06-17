@@ -186,8 +186,8 @@ proc ::tourney::Open {{player {}}} {
   # Button bar
 
   label $w.b.size -text $::tr(TmtLimit) -font $fbold
-  ttk::combobox $w.b.esize -width 5 -justify right -textvar ::tourney::size -values {10 20 50 100 200 500 1000 10000}
-  trace variable ::tourney::size w {::utils::validate::Integer 10000 0}
+  ttk::combobox $w.b.esize -width 7 -justify right -textvar ::tourney::size -values {50 100 200 500 1000 10000 100000}
+  trace variable ::tourney::size w {::utils::validate::Integer 100000 0}
   bindFocusColors $w.b.esize
 
   dialogbutton $w.b.defaults -textvar ::tr(Defaults) -command ::tourney::defaults
@@ -224,7 +224,7 @@ proc ::tourney::defaults {} {
   #set ::tourney::start "$year.??.??"
   set ::tourney::start "1960.??.??"
   set ::tourney::end "$year.12.31"
-  set ::tourney::size 200
+  set ::tourney::size 1000
   set ::tourney::minPlayers 2
   set ::tourney::maxPlayers 1999
   set ::tourney::minGames 1
