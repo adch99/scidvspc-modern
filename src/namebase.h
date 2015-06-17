@@ -167,18 +167,20 @@ class NameBase
     static bool IsValidNameType (nameT nt) { return (nt < NUM_NAME_TYPES); }
     static nameT NameTypeFromString (const char * str);
     bool   SortOrder;
-    
+
     void      SetFileName (const char *s) { strcpy (Fname,s); }
     char  *   GetFileName ()          { return Fname; }
-    
+
     idNumberT GetNumNames (nameT n)  { return Header.numNames[n]; }
     uint      GetNumBytes (nameT n)  { return Header.numBytes[n]; }
-    
+
     void      SetTimeStamp (uint ts)    { Header.timeStamp = ts; }
     uint      GetTimeStamp ()           { return Header.timeStamp; }
 
     errorT    FindExactName      (nameT nt, const char * str, idNumberT * idPtr);
     errorT    AddName            (nameT nt, const char * str, idNumberT * idPtr);
+
+    const nameNodeT * GetNode    (nameT nt, idNumberT id);
 
     const char * GetName         (nameT nt, idNumberT id);
     uint      GetFrequency       (nameT nt, idNumberT id);
@@ -231,6 +233,18 @@ class NameBase
 //////////////////////////////////////////////////////////////////////
 //  NameBase:  Public Inline Functions
 
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Namebase::GetNode():
+//      Get a namebase entry given the ID number.
+//
+inline const nameNodeT *
+NameBase::GetNode (nameT nt, idNumberT id)
+{
+    ASSERT (IsValidNameType(nt));
+    if (id >= GetNumNames(nt)) { return NULL; }
+    return NameByID[nt][id];
+}
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Namebase::GetName():

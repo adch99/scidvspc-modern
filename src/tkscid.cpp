@@ -12780,16 +12780,14 @@ enum playerCompareT {
     PLAYER_SORT_OLDEST, PLAYER_SORT_NEWEST, PLAYER_SORT_PHOTO
 };
 
+typedef const nameNodeT * namebaseNodeT;
+inline static namebaseNodeT node(void const* n) { return *((namebaseNodeT *)n); }
+
 int
-compareNames (void const * lhs, void const * rhs, void * arg)
+compareNames(const void * lhs, const void * rhs)
 {
-    NameBase * nb = (NameBase *)arg;
-
-    idNumberT p1 = *(idNumberT const *)lhs;
-    idNumberT p2 = *(idNumberT const *)rhs;
-
-    const char * name1 = nb->GetName (NAME_PLAYER, p1);
-    const char * name2 = nb->GetName (NAME_PLAYER, p2);
+    const char * name1 = node(lhs)->name;
+    const char * name2 = node(rhs)->name;
 
     // If equal, resolve by comparing names, first case-insensitive and
     // then case-sensitively if still tied:
@@ -12799,65 +12797,40 @@ compareNames (void const * lhs, void const * rhs, void * arg)
 }
 
 int
-compareElo (void const * lhs, void const * rhs, void * arg)
+compareElo(const void * lhs, const void * rhs)
 {
-    NameBase * nb = (NameBase *)arg;
-
-    idNumberT p1 = *(idNumberT const *)lhs;
-    idNumberT p2 = *(idNumberT const *)rhs;
-
-    int compare = nb->GetElo(p2) - nb->GetElo(p1);
-    return compare ? compare : compareNames(lhs, rhs, arg);
+    int compare = node(rhs)->data.maxElo - node(lhs)->data.maxElo;
+    return compare ? compare : compareNames(lhs, rhs);
 }
 
 int
-compareGames (void const * lhs, void const * rhs, void * arg)
+compareGames(const void * lhs, const void * rhs)
 {
-    NameBase * nb = (NameBase *)arg;
-
-    idNumberT p1 = *(idNumberT const *)lhs;
-    idNumberT p2 = *(idNumberT const *)rhs;
-
-    int compare = nb->GetFrequency(NAME_PLAYER, p2) - nb->GetFrequency(NAME_PLAYER, p1);
-    return compare ? compare : compareNames(lhs, rhs, arg);
+    int compare = node(rhs)->data.frequency - node(lhs)->data.frequency;
+    return compare ? compare : compareNames(lhs, rhs);
 }
 
 int
-compareOldest (void const * lhs, void const * rhs, void * arg)
+compareOldest(const void * lhs, const void * rhs)
 {
-    NameBase * nb = (NameBase *)arg;
-
-    idNumberT p1 = *(idNumberT const *)lhs;
-    idNumberT p2 = *(idNumberT const *)rhs;
-
     // Sort by oldest game year in ascending order:
-    int compare = date_GetYear(nb->GetFirstDate(p1)) - date_GetYear(nb->GetFirstDate(p2));
-    return compare ? compare : compareNames(lhs, rhs, arg);
+    int compare = node(lhs)->data.firstDate - node(rhs)->data.firstDate;
+    return compare ? compare : compareNames(lhs, rhs);
 }
 
 int
-compareNewest (void const * lhs, void const * rhs, void * arg)
+compareNewest(const void * lhs, const void * rhs)
 {
-    NameBase * nb = (NameBase *)arg;
-
-    idNumberT p1 = *(idNumberT const *)lhs;
-    idNumberT p2 = *(idNumberT const *)rhs;
-
     // Sort by newest game date in descending order:
-    int compare = date_GetYear(nb->GetLastDate(p2)) - date_GetYear(nb->GetLastDate(p1));
-    return compare ? compare : compareNames(lhs, rhs, arg);
+    int compare = date_GetYear(node(rhs)->data.firstDate) - date_GetYear(node(lhs)->data.firstDate);
+    return compare ? compare : compareNames(lhs, rhs);
 }
 
 int
-comparePhoto (void const * lhs, void const * rhs, void * arg)
+comparePhoto(const void * lhs, const void * rhs)
 {
-    NameBase * nb = (NameBase *)arg;
-
-    idNumberT p1 = *(idNumberT const *)lhs;
-    idNumberT p2 = *(idNumberT const *)rhs;
-
-    int compare = (int)nb->HasPhoto(p2) - (int)nb->HasPhoto(p1);
-    return compare ? compare : compareNames(lhs, rhs, arg);
+    int compare = (int)node(rhs)->data.hasPhoto - (int)node(lhs)->data.hasPhoto;
+    return compare ? compare : compareNames(lhs, rhs);
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -12921,8 +12894,8 @@ sc_name_plist (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     }
 
     if (arg != argc) { return errorResult (ti, usage); }
-    typedef int (*compareT)(const void *, const void *, void *);
-    compareT comp;
+    typedef int (*comparT)(const void *, const void *);
+    comparT comp;
     switch (sortMode) {
         case SORT_ELO:    comp = compareElo;    break;
         case SORT_GAMES:  comp = compareGames;  break;
@@ -12934,17 +12907,21 @@ sc_name_plist (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             return InvalidCommand (ti, "sc_name plist -sort", sortModes);
     }
 #ifdef WINCE
-    idNumberT * plist = (idNumberT *)my_Tcl_Alloc(sizeof( idNumberT [maxListSize + 1]));
+    namebaseNodeT * plist = (idNumberT *)my_Tcl_Alloc(sizeof( namebaseNodeT [maxListSize + 1]));
 #else
-    idNumberT * plist = new idNumberT [maxListSize + 1];
+    namebaseNodeT * plist = new namebaseNodeT [maxListSize + 1];
 #endif
 
     NameBase * nb = db->nb;
     uint nPlayers = nb->GetNumNames(NAME_PLAYER);
     for (uint id = 0; id < nPlayers; id++) {
-        const char * name = nb->GetName (NAME_PLAYER, id);
-        uint nGames = nb->GetFrequency (NAME_PLAYER, id);
-        eloT elo = nb->GetElo (id);
+	namebaseNodeT node = nb->GetNode(NAME_PLAYER, id);
+
+	ASSERT(node);
+
+        const char * name = node->name;
+        uint nGames = node->data.frequency;
+        eloT elo = node->data.maxElo;
         if (nGames < minGames  ||  nGames > maxGames) { continue; }
         if (elo < minElo  ||  elo > maxElo) { continue; }
         if (! strIsCasePrefix (namePrefix, name)) { continue; }
@@ -12956,13 +12933,13 @@ sc_name_plist (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
         // Insert this player into the ordered array if necessary:
 
-        plist[listSize++] = id;
+        plist[listSize++] = node;
 
 	if (listSize > maxListSize)
 	    break;
     }
 
-    qsort_r(plist, listSize, sizeof(plist[0]), comp, nb);
+    qsort(plist, listSize, sizeof(plist[0]), comp);
 
     // Generate the list of player data:
 #ifdef WINCE
@@ -12975,17 +12952,17 @@ sc_name_plist (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     for (uint p=0; p < listSize; p++) {
         Tcl_DStringStartSublist (ds);
         char tmp[16];
-        sprintf (tmp, "%u", nb->GetFrequency (NAME_PLAYER,plist[p]));
+	sprintf (tmp, "%u", plist[p]->data.frequency);
         Tcl_DStringAppendElement(ds, tmp);
-        sprintf (tmp, "%u", date_GetYear(nb->GetFirstDate (plist[p])));
+	sprintf (tmp, "%u", date_GetYear(plist[p]->data.firstDate));
         Tcl_DStringAppendElement(ds, tmp);
-        sprintf (tmp, "%u", date_GetYear(nb->GetLastDate (plist[p])));
+	sprintf (tmp, "%u", date_GetYear(plist[p]->data.lastDate));
         Tcl_DStringAppendElement(ds, tmp);
-        sprintf (tmp, "%u", nb->GetElo (plist[p]));
+	sprintf (tmp, "%u", plist[p]->data.maxElo);
         Tcl_DStringAppendElement(ds, tmp);
         //strCopy (tmp, nb->HasPhoto(plist[p]) ? "1" : "0");
         //Tcl_DStringAppendElement(ds, tmp);
-        Tcl_DStringAppendElement(ds, nb->GetName (NAME_PLAYER,plist[p]));
+	Tcl_DStringAppendElement(ds, plist[p]->name);
         Tcl_DStringEndSublist (ds);
     }
     Tcl_DStringResult (ti, ds);
