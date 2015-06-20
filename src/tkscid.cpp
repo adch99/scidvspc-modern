@@ -2952,6 +2952,7 @@ class Tourney
     dateT     EndDate;
     dateT     MinDate;
     dateT     MaxDate;
+    dateT     EventDate;
     uint      NumGames;
     uint      NumPlayers;
     tourneyPlayerT * PlayerList;
@@ -2962,24 +2963,7 @@ class Tourney
 
     Tourney(IndexEntry * ie, NameBase * nb);
     ~Tourney();
-#ifdef WINCE
-  void* operator new(size_t sz) {
-    void* m = my_Tcl_Alloc(sz);
-    return m;
-  }
-  void operator delete(void* m) {
-    my_Tcl_Free((char*)m);
-  }
-  void* operator new [] (size_t sz) {
-    void* m = my_Tcl_AttemptAlloc(sz);
-    return m;
-  }
 
-  void operator delete [] (void* m) {
-    my_Tcl_Free((char*)m);
-  }
-
-#endif
     void AddGame (IndexEntry * ie, gameNumberT g);
     void Dump (Tcl_DString * ds);
     uint MeanElo() {
@@ -2995,6 +2979,7 @@ Tourney::Tourney (IndexEntry * ie, NameBase * nb)
     EventID = ie->GetEvent();
     NB = nb;
     StartDate = EndDate = ie->GetDate();
+    EventDate = ie->GetEventDate();
     MinDate = date_AddMonths (StartDate, -3);
     MaxDate = date_AddMonths (StartDate,  3);
     NumGames = NumPlayers = 0;
@@ -3009,11 +2994,7 @@ Tourney::~Tourney()
     p = PlayerList;
     while (p != NULL) {
         next = p->next;
-#ifdef WINCE
-        my_Tcl_Free((char*)p);
-#else
         free(p);
-#endif
         p = next;
     }
 }
@@ -3043,11 +3024,7 @@ Tourney::AddGame (IndexEntry * ie, gameNumberT g)
         p = p->next;
     }
     if (! playerFound) {
-#ifdef WINCE
-        p = (tourneyPlayerT*)my_Tcl_Alloc(sizeof( tourneyPlayerT));
-#else
         p = new tourneyPlayerT;
-#endif
         p->id = whiteID;
         p->elo = wElo;
         p->score = wScore;
@@ -3067,11 +3044,7 @@ Tourney::AddGame (IndexEntry * ie, gameNumberT g)
         p = p->next;
     }
     if (! playerFound) {
-#ifdef WINCE
-        p = (tourneyPlayerT*)my_Tcl_Alloc(sizeof( tourneyPlayerT));
-#else
         p = new tourneyPlayerT;
-#endif
         p->id = blackID;
         p->elo = bElo;
         p->score = bScore;
@@ -3232,19 +3205,12 @@ sc_base_tournaments (ClientData cd, Tcl_Interp * ti, int argc, const char ** arg
 
     uint numSites = db->nb->GetNumNames (NAME_SITE);
 
-#ifdef WINCE
-    bool * useSite = (bool *)my_Tcl_Alloc(sizeof( bool [numSites]));
-    for (i=0; i < numSites; i++) { useSite[i] = true; }
-
-    const uint TOURNEY_HASH_SIZE = 32768;
-    tourneyPtrT * hashTable = (tourneyPtrT * ) my_Tcl_Alloc(sizeof( tourneyPtrT [TOURNEY_HASH_SIZE]));
-#else
     bool * useSite = new bool [numSites];
     for (i=0; i < numSites; i++) { useSite[i] = true; }
 
     const uint TOURNEY_HASH_SIZE = 32768;
     tourneyPtrT * hashTable = new tourneyPtrT [TOURNEY_HASH_SIZE];
-#endif
+
     for (i=0; i < TOURNEY_HASH_SIZE; i++) { hashTable[i] = NULL; }
 
     // If the country is "---", ignore it:
@@ -3276,11 +3242,7 @@ sc_base_tournaments (ClientData cd, Tcl_Interp * ti, int argc, const char ** arg
     bool * useEvent = NULL;
     if (eventStr != NULL  &&  eventStr[0] != 0) {
         uint numEvents = db->nb->GetNumNames (NAME_EVENT);
-#ifdef WINCE
-        useEvent = (bool*) my_Tcl_Alloc(sizeof(bool [numEvents]));
-#else
         useEvent = new bool [numEvents];
-#endif
         for (i=0; i < numEvents; i++) {
             useEvent[i] = true;
             const char * event = db->nb->GetName (NAME_EVENT, i);
@@ -3294,6 +3256,7 @@ sc_base_tournaments (ClientData cd, Tcl_Interp * ti, int argc, const char ** arg
     for (i=0; i < db->numGames; i++) {
         IndexEntry * ie = db->idx->FetchEntry (i);
         dateT date = ie->GetDate();
+        dateT eventDate = ie->GetEventDate();
         if (date < minDate) { continue; }
         if (date > maxDate) { continue; }
         idNumberT siteID = ie->GetSite();
@@ -3306,7 +3269,7 @@ sc_base_tournaments (ClientData cd, Tcl_Interp * ti, int argc, const char ** arg
         // Search this hash bucket for the right tourney:
         while (tp != NULL) {
             if (tp->SiteID == siteID  &&  tp->EventID == eventID
-                &&  date >= tp->MinDate  &&  date <= tp->MaxDate) {
+                && (eventDate == tp->EventDate || (date >= tp->MinDate  &&  date <= tp->MaxDate))) {
                 tp->AddGame (ie, i);
                 found = true;
                 break;
@@ -3346,15 +3309,9 @@ sc_base_tournaments (ClientData cd, Tcl_Interp * ti, int argc, const char ** arg
             tp = next;
         }
     }
-#ifdef WINCE
-    my_Tcl_Free((char*) useSite);
-    if (useEvent != NULL) { my_Tcl_Free((char*) useEvent); }
-    my_Tcl_Free((char*) hashTable);
-#else
     delete[] useSite;
     if (useEvent != NULL) { delete[] useEvent; }
     delete[] hashTable;
-#endif
 
     Tcl_DStringResult (ti, &ds);
     Tcl_DStringFree (&ds);

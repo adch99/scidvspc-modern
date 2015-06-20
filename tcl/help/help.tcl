@@ -1539,7 +1539,7 @@ set helpText(Tmt) {<h1>The Tournament Finder window</h1>
   </p>
   <p><i>
   Two games are considered to be in the same tournament if they have the same Event and Site
-  tags, and were played within three months of each other.
+  tags, and the same EventDate or were played within three months of each other.
   </i></p>
   <p>
   Tournament selection criteria includes the Number of Players/Games, Date, Mean ELO and Country.
