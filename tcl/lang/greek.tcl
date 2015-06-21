@@ -901,7 +901,7 @@ translate G GlistSite {Τόπος}
 translate G GlistRound {Γύρος}
 translate G GlistDate {Ημέρα}
 translate G GlistYear {Έτος}
-translate G GlistEDate {ΗμέραΔιοργ}
+translate G GlistEventDate {ΗμέραΔιοργ}
 translate G GlistResult {Αποτέλεσμα}
 translate G GlistLength {Μήκος}
 translate G GlistCountry {Χώρα}

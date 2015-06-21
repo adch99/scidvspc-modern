@@ -1,6 +1,5 @@
 ### gamelist.tcl
-#
-# 27/06/2009
+
 # Rewritten to use the ttk::treeview widget (man ttk_treeview) by Steven Atkinson
 
 ### glistFields: code  name  anchor default-width
@@ -30,14 +29,11 @@ set glistFields {
   o ECO		e 5
   O Opening	w 6
   U Flags	e 3
+  S Start       e  3
+  c Country     e  3
+  E EventDate   w  7
+  F EndMaterial e  7
 }
-
-### Optional fields
-
-# append glistFields {S Start       e  3}
-# append glistFields {c Country     e  3}
-# append glistFields {E EventDate   w  7}
-# append glistFields {F EndMaterial e  7}
 
 ### Index
 # b:  Black player name
@@ -61,8 +57,6 @@ set glistFields {
 # E:  Date of Event (stored relative to)
 # F:  Difference of material at game end
 
-### end glistFields configuration
-
 set ::windows::gamelist::isOpen 0
 set glstart 1
 set ::windows::gamelist::findtext {}
@@ -71,21 +65,37 @@ set ::windows::gamelist::goto {}
 ### This trace messes up some other widgets i think S.A.
 # trace variable ::windows::gamelist::goto w {::utils::validate::Regexp {^[0-9]*$}}
 
+set glistHeaders {}
+set glistSortShortcuts {}
+set temp_order {}
+set temp_widths {}
+set temp_anchors {}
 set glistCodes {} 
-set glistNames {}
-
-foreach {code title anchor null} $glistFields {
-  # Unusual glistCodes format is needed for [sc_game list ...]
-  # SCID uses - append cformat "*\n" - but appending a space works too
-
-  lappend glistCodes "$code* "
-  lappend glistNames $title
-}
-
 ### glistCodes is a printf format style string. A \n is used to split the main "sc_game list"
 # string into a proper list for processing. It is now appended in sc_game_list
 
-# glistNames is set from glistFields (above)
+set i 0
+foreach {code col anchor width} $glistFields {
+  lappend glistHeaders $col
+  lappend glistSortShortcuts $code
+  lappend temp_order $i
+  lappend temp_widths [expr {$width * 8}] ; # [font measure [ttk::style lookup [$w.tree cget -style] -font] "X"]
+  lappend temp_anchors $anchor
+  lappend glistCodes "$code* "
+  incr i
+}
+
+if {! [info exists glistColOrder]} {
+  set glistColOrder $temp_order
+}
+if {! [info exists glistColWidth]} {
+  set glistColWidth $temp_widths
+}
+if {! [info exists glistColAnchor]} {
+  set glistColAnchor $temp_anchors
+}
+
+# glistNames is set from glistFields
 # Number White Black Result Length Event Round Date WElo BElo Site ECO Deleted Opening Flags Variations Comments Annos Start
 
 # These fields are used by "sc_base sort $col {}" in proc SortBy
@@ -217,13 +227,16 @@ proc ::windows::gamelist::showNum {index {bell 1}} {
 }
 
 proc ::windows::gamelist::recordWidths {} {
-  global glistNames
-  catch {
+  global glistFields glistColWidth
+
+  set widths {}
+  if {![catch {
     # Save column widths
-    set ::windows::gamelist::widths {}
-    foreach column $glistNames {
-      lappend ::windows::gamelist::widths [.glistWin.tree column $column -width]
+    foreach {code col anchor width} $glistFields {
+      lappend widths [.glistWin.tree column $col -width]
     }
+  }]} {
+    set glistColWidth $widths
   }
 }
 
@@ -242,7 +255,7 @@ proc ::windows::gamelist::Open {} {
   # default classic alt clam
 
   global highcolor helpMessage
-  global glistNames glistFields glistSortedBy glSortReversed glistSize
+  global glistSortedBy glSortReversed glistSize
 
   set w .glistWin
 
@@ -288,18 +301,8 @@ proc ::windows::gamelist::Open {} {
   frame $w.c
   frame $w.b
   frame $w.f
-  ttk::treeview $w.tree -columns $glistNames -show headings -xscroll "$w.hsb set"
+  ttk::treeview $w.tree -columns $::glistHeaders -displaycolumns $::glistColOrder -show headings -xscroll "$w.hsb set"
     # -yscroll "$w.vsb set" -xscroll "$w.hsb set"
-
-  ### If glistField and ::windows::gamelist::widths mismatch, then reinitialise field widths
-
-  if { [expr {[llength $glistFields] / 4}] != [llength $::windows::gamelist::widths] } {
-    set ::windows::gamelist::widths {}
-    set fontwidth [font measure [ttk::style lookup [$w.tree cget -style] -font] "X"]
-    foreach {nulla nullb nullc i} $glistFields {
-	lappend ::windows::gamelist::widths [expr $fontwidth * $i]
-    }
-  }
 
   # title font isn't working &&& I don't think it's configurable !
   $w.tree tag configure treetitle -font font_H1
@@ -345,10 +348,6 @@ proc ::windows::gamelist::Open {} {
   # -borderwidth 0
   ttk::scrollbar $w.hsb -orient horizontal -command "$w.tree xview"
 
-  # SCID:
-  #  scale $w.scale -from 1 -length 250 -orient horiz -variable glstart -showvalue 0 -command ::windows::gamelist::SetStart \ -bigincrement $glistSize -takefocus 0 -width 10 -troughcolor $buttoncolor
-
-
   pack $w.f -fill both -expand 1
   ::windows::gamelist::displayButtons 
 
@@ -360,12 +359,13 @@ proc ::windows::gamelist::Open {} {
   ### Init the ttk_treeview column titles
 
   set font [ttk::style lookup [$w.tree cget -style] -font]
-  foreach {code col anchor null} $glistFields width $::windows::gamelist::widths {
+
+  foreach col $::glistHeaders width $::glistColWidth anchor $::glistColAnchor {
       # No sort implemented for these columns
-      if {[lsearch {Number Opening Flags Annos Start} $col] == -1} {
+      if {[lsearch {Number Opening Flags Annos Start EndMaterial} $col] == -1} {
 	$w.tree heading $col -command [list SortBy $w.tree $col]
       } 
-      $w.tree column  $col -width $width -anchor $anchor -stretch 0
+      $w.tree column $col -width $width -anchor $anchor -stretch 0
   }
 
   ::windows::gamelist::setColumnTitles
@@ -710,9 +710,8 @@ proc ::windows::gamelist::displayButtons {} {
 }
 
 proc ::windows::gamelist::Configure {window} {
-  recordWidths
-  recordWinSize .glistWin
   if {$window == {.glistWin.tree}} {
+    recordWidths
     recordWinSize .glistWin
     ::windows::gamelist::Refresh
   }
@@ -878,7 +877,7 @@ proc SortBy {tree col} {
       set glistSortedBy $col
     }
 
-    set glistSortColumn([sc_base current]) [list $col $glSortReversed ]
+    set glistSortColumn([sc_base current]) [list $col $glSortReversed]
 
     if {$glSortReversed} {
       sc_base sortdown

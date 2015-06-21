@@ -951,7 +951,7 @@ translate C GlistSite {Místo}
 translate C GlistRound {Kolo}
 translate C GlistDate {Datum}
 translate C GlistYear {Rok}
-translate C GlistEDate {Datum turnaje}
+translate C GlistEventDate {Datum turnaje}
 translate C GlistResult {Vısledek}
 translate C GlistLength {Délka}
 translate C GlistCountry {Zemì}

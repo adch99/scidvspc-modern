@@ -900,7 +900,7 @@ translate S GlistSite {Lugar}
 translate S GlistRound {Ronda}
 translate S GlistDate {Fecha}
 translate S GlistYear {Año}
-translate S GlistEDate {Evento-Fecha}
+translate S GlistEventDate {Evento-Fecha}
 translate S GlistResult {Resultado}
 translate S GlistLength {Longitud}
 translate S GlistCountry {País}

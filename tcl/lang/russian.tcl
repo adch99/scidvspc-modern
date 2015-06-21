@@ -854,7 +854,7 @@ translate R GlistSite {Место}
 translate R GlistRound {Раунд}
 translate R GlistDate {Дата}
 translate R GlistYear {Год}
-translate R GlistEDate {Дата турнира}
+translate R GlistEventDate {Дата турнира}
 translate R GlistResult {Результат}
 translate R GlistLength {Длина}
 translate R GlistCountry {Страна}

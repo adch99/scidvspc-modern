@@ -849,7 +849,7 @@ translate U GlistSite {Lugar}
 translate U GlistRound {Rodada}
 translate U GlistDate {Data}
 translate U GlistYear {Ano}
-translate U GlistEDate {Evento-Data}
+translate U GlistEventDate {Evento-Data}
 translate U GlistResult {Resultado}
 translate U GlistLength {Tamanho}
 translate U GlistCountry {Pais}

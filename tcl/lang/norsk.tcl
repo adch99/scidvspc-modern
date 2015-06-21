@@ -1029,7 +1029,7 @@ translate O GlistSite {Sted}
 translate O GlistRound {Runde}
 translate O GlistDate {Dato}
 translate O GlistYear {År}
-translate O GlistEDate {AnledningDato}
+translate O GlistEventDate {AnledningDato}
 translate O GlistResult {Resultat}
 translate O GlistLength {Lengde}
 translate O GlistCountry {Land}

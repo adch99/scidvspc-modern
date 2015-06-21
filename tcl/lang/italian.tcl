@@ -956,7 +956,7 @@ translate I GlistSite {Sito}
 translate I GlistRound {Turno}
 translate I GlistDate {Data}
 translate I GlistYear {Anno}
-translate I GlistEDate {Evento-Data}
+translate I GlistEventDate {Evento-Data}
 translate I GlistResult {Risultato}
 translate I GlistLength {Lunghezza}
 translate I GlistCountry {Paese}

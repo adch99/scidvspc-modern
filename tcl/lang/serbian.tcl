@@ -1029,7 +1029,7 @@ translate Y GlistSite {Mesto}
 translate Y GlistRound {Kolo}
 translate Y GlistDate {Datum}
 translate Y GlistYear {Year}
-translate Y GlistEDate {Datum turnira}
+translate Y GlistEventDate {Datum turnira}
 translate Y GlistResult {Rezultat}
 translate Y GlistLength {Du¾ina}
 translate Y GlistCountry {Zemlja}

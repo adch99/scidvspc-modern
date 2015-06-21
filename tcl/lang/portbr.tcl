@@ -957,7 +957,7 @@ translate B GlistSite {Lugar}
 translate B GlistRound {Rodada}
 translate B GlistDate {Data}
 translate B GlistYear {Ano}
-translate B GlistEDate {Evento-Data}
+translate B GlistEventDate {Evento-Data}
 translate B GlistResult {Resultado}
 translate B GlistLength {Tamanho}
 translate B GlistCountry {Pais}

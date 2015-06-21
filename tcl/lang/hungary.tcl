@@ -958,7 +958,7 @@ translate H GlistSite {Helyszín}
 translate H GlistRound {Forduló}
 translate H GlistDate {Dátum}
 translate H GlistYear {Év}
-translate H GlistEDate {Az esemény dátuma}
+translate H GlistEventDate {Az esemény dátuma}
 translate H GlistResult {Eredmény}
 translate H GlistLength {Hossz}
 translate H GlistCountry {Ország}

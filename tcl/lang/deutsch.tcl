@@ -898,7 +898,7 @@ translate D GlistSite {Ort}
 translate D GlistRound {Runde}
 translate D GlistDate {Datum}
 translate D GlistYear {Jahr}
-translate D GlistEDate {Turnierdatum}
+translate D GlistEventDate {Turnierdatum}
 translate D GlistResult {Ergebnis}
 translate D GlistLength {Länge}
 translate D GlistCountry {Land}

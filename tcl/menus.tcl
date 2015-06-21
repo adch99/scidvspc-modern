@@ -850,7 +850,7 @@ $m add command -label OptionsSave -command {
     ::pgn::shortHeader ::pgn::boldMainLine ::pgn::stripMarks 
     ::pgn::symbolicNags ::pgn::moveNumberSpaces ::pgn::columnFormat ::pgn::showScrollbar
     myPlayerNames tree(order) tree(autoSave) optionsAutoSave ::tree::mask::recentMask ::tree::mask::autoLoadMask
-    ecoFile suggestMoves showVarPopup showVarArrows glistSize glexport 
+    ecoFile suggestMoves showVarPopup showVarArrows 
     annotate(blunder) annotate(addTag) annotate(Moves) annotate(WithVars) annotate(WithScore) useAnalysisBook annotate(isVar) annotate(addComment) annotate(cutoff)
     annotate(WantedDepth) annotate(Depth) autoplayDelay animateDelay boardCoords boardSTM 
     moveEntry(AutoExpand) moveEntry(Coord)
@@ -860,7 +860,7 @@ $m add command -label OptionsSave -command {
     exportFlags(comments) exportFlags(space) exportFlags(vars) exportFlags(indentc)
     exportFlags(indentv) exportFlags(column) exportFlags(htmldiag) 
     email(smtp) email(smproc) email(server) 
-    email(from) email(bcc) ::windows::gamelist::widths ::windows::gamelist::findcase ::windows::gamelist::showButtons
+    email(from) email(bcc) ::windows::gamelist::findcase ::windows::gamelist::showButtons
     gameInfo(show) gameInfo(photos) gameInfo(hideNextMove) gameInfo(wrap) gameInfo(showStatus) 
     gameInfo(fullComment) gameInfo(showMarks) gameInfo(showMenu) gameInfo(showTool) 
     gameInfo(showMaterial) gameInfo(showFEN) gameInfo(showButtons) gameInfo(showTB) 
@@ -888,7 +888,8 @@ $m add command -label OptionsSave -command {
     comp(timecontrol) comp(seconds) comp(base) comp(incr) comp(timeout) comp(name) comp(usebook) comp(book)
     comp(rounds) comp(showclock) comp(debug) comp(animate) comp(firstonly) comp(ponder) comp(showscores)
     ::tools::graphs::filter::type  ::tools::graphs::absfilter::type ::tools::graphs::showpoints
-    maintFlag glistFlag useGraphFigurine photosMinimized bookmarks(gamehistory) playerInfoHistory} {
+    maintFlag useGraphFigurine photosMinimized bookmarks(gamehistory) playerInfoHistory
+    glistSize glexport glistColOrder glistColWidth glistColAnchor} {
 
       puts $optionF "set $i [list [set $i]]"
 

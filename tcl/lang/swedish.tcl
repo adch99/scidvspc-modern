@@ -884,7 +884,7 @@ translate W GlistSite {Plats}
 translate W GlistRound {Rond}
 translate W GlistDate {Datum}
 translate W GlistYear {År}
-translate W GlistEDate {Startdatum}
+translate W GlistEventDate {Startdatum}
 translate W GlistResult {Resultat}
 translate W GlistLength {Längd}
 translate W GlistCountry {Land}

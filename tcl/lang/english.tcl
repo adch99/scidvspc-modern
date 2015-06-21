@@ -860,13 +860,13 @@ translate E GlistSite {Site}
 translate E GlistRound {Round}
 translate E GlistDate {Date}
 translate E GlistYear {Year}
-translate E GlistEDate {EventDate}
+translate E GlistEventDate {Event Date}
 translate E GlistResult {Result}
 translate E GlistLength {Length}
 translate E GlistCountry {Country}
 translate E GlistECO {ECO}
 translate E GlistOpening {Opening}
-translate E GlistEndMaterial {End-Material}
+translate E GlistEndMaterial {End Material}
 translate E GlistDeleted {Deleted}
 translate E GlistFlags {Flags}
 translate E GlistVars {Variations}

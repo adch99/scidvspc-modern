@@ -889,7 +889,7 @@ translate N GlistSite {Plaats}
 translate N GlistRound {Ronde}
 translate N GlistDate {Datum}
 translate N GlistYear {Jaar}
-translate N GlistEDate {Datum evenement}
+translate N GlistEventDate {Datum evenement}
 translate N GlistResult {Uitslag}
 translate N GlistLength {Lengte}
 translate N GlistCountry {Land}

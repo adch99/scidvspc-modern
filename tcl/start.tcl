@@ -179,7 +179,6 @@ set annotate(addComment) 0
 set annotate(blunder) 1.0
 set annotate(cutoff) 5.0
 set maintFlag W
-set glistFlag W
 set ::gbrowser::size 35
 set comp(timecontrol) pergame
 set comp(seconds) 180
