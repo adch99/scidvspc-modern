@@ -118,9 +118,11 @@ proc openSpellCheckWin {type {parent .}} {
   }
 
   button $f.ok -textvar ::tr(MakeCorrections) -underline 0 -command {
-    set result [tk_messageBox -title "Scid" -parent .spellcheckWin -icon question \
-      -type yesno -message "Please confirm to make Name corrections. This cannot be undone."]
-    if {$result == "no"} {return 0}
+    if {[sc_base current] != 9} {
+      set result [tk_messageBox -title "Scid" -parent .spellcheckWin -icon question \
+	-type yesno -message "Please confirm making Name corrections.\nThis cannot be undone."]
+      if {$result == "no"} {return 0}
+    }
 
     busyCursor .
     set spelltext ""
