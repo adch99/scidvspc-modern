@@ -157,7 +157,6 @@ proc ::file::Open {{fName ""} {parent .} {update 1}} {
     if {$fName == ""} { return }
   }
 
-  set fName [fullname $fName]
   setTrialMode 0 0
 
   set ext [file extension $fName]
@@ -175,6 +174,8 @@ proc ::file::Open {{fName ""} {parent .} {update 1}} {
     ::file::Upgrade [file rootname $fName]
     return
   }
+
+  set fName [fullname $fName]
 
   set slot [sc_base slot $fName]
   if {$slot != 0} {
