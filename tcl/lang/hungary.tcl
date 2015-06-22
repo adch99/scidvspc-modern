@@ -967,7 +967,7 @@ translate H GlistOpening {Megnyitás}
 translate H GlistEndMaterial {Végsõ anyagi helyzet}
 translate H GlistDeleted {Törölt}
 translate H GlistFlags {Megjelölések}
-translate H GlistVars {Variations}
+translate H GlistVariations {Variations}
 translate H GlistComments {Megjegyzések}
 translate H GlistAnnos {Értékelõ jelek}
 translate H GlistStart {Kezdet}
@@ -992,6 +992,12 @@ translate H GlistDeleteGame {(Un)Delete this game}
 translate H GlistDeleteAllGames {Delete all games in filter} 
 # ====== TODO To be translated ======
 translate H GlistUndeleteAllGames {Undelete all games in filter} 
+# ====== TODO To be translated ======
+translate H GlistAlignL {Align left}
+# ====== TODO To be translated ======
+translate H GlistAlignR {Align right}
+# ====== TODO To be translated ======
+translate H GlistAlignC {Align center}
 
 # Maintenance window:
 translate H DatabaseName {Az adatbázis neve:}

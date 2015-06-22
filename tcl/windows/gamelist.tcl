@@ -615,7 +615,59 @@ proc ::windows::gamelist::setColumnTitles {} {
 
 proc ::windows::gamelist::Popup {w x y X Y} {
 
-  global maintFlags maintFlaglist
+  global maintFlags maintFlaglist glistHeaders
+
+  # Identify region requires at least tk 8.5.9 (?)
+
+  if { [catch {set region [$w identify region $x $y] }] } {
+    if {[$w identify row $x $y] == "" } {
+      set region "heading"
+    } else {
+      set region ""
+    }
+  }
+
+  if { $region == "heading" } {
+
+    ### Titles context menu
+
+    set w .glistWin.tree
+    set col [$w identify column $x $y]
+    set col_idx [lsearch -exact $::glistHeaders [$w column $col -id] ]
+
+    set menu .glistWin.context
+    if { [winfo exists $menu] } {destroy $menu}
+    if { [winfo exists $menu.addcol] } {destroy $menu.addcol}
+    menu $menu -tearoff 0
+    menu $menu.addcol -tearoff 0
+
+    # Alignment menus
+    $menu add command -label $::tr(GlistAlignL) \
+		   -command "$w column $col -anchor w; lset ::glistColAnchor $col_idx w"
+    $menu add command -label $::tr(GlistAlignR) \
+		   -command "$w column $col -anchor e; lset ::glistColAnchor $col_idx e"
+    $menu add command -label $::tr(GlistAlignC) \
+		   -command "$w column $col -anchor c; lset ::glistColAnchor $col_idx c"
+
+    $menu add separator
+
+    # Column menus
+    $menu.addcol delete 0 end
+    set i 0
+    foreach h $::glistHeaders {
+        $menu.addcol add command -label $::tr(Glist$h) -command "::windows::gamelist::insertCol $w $i $col"
+      incr i
+    }
+    $menu add cascade -label $::tr(GlistAddField) -menu $menu.addcol
+    $menu add command -label $::tr(GlistRemoveThisGameFromFilter) -command "::windows::gamelist::removeCol $w $col"
+    $menu add separator
+    $menu add command -label $::tr(Reset) -command "::windows::gamelist::resetCols $w"
+
+    tk_popup $menu $X $Y
+
+  } else {
+
+  ### Gamelist context menus
 
   set row [$w identify row $x $y]
   set selection [$w selection]
@@ -681,7 +733,44 @@ proc ::windows::gamelist::Popup {w x y X Y} {
   }
 
   tk_popup $menu [winfo pointerx .] [winfo pointery .]
+  }
 }
+
+proc ::windows::gamelist::insertCol {w col after} {
+  set b [expr [string trimleft $after {#}]]
+  set d [lsearch -exact $::glistColOrder $col]
+  set ::glistColOrder [linsert $::glistColOrder $b $col]
+  if {$d > -1} {
+    if {$d > $b} {
+      incr d
+    }
+    set ::glistColOrder [lreplace $::glistColOrder $d $d]
+  }
+  $w configure -displaycolumns $::glistColOrder
+}
+
+proc ::windows::gamelist::removeCol {w col} {
+  set d [expr [string trimleft $col {#}] -1]
+  set ::glistColOrder [lreplace $::glistColOrder $d $d]
+  $w configure -displaycolumns $::glistColOrder
+}
+
+proc ::windows::gamelist::resetCols {w} {
+  global glistColOrder glistColWidth glistColAnchor
+
+  set i 0
+  set glistColOrder {}
+  set glistColWidth {}
+  set glistColAnchor {}
+  foreach {code col anchor width} $::glistFields {
+    lappend glistColOrder $i
+    lappend glistColWidth [expr {$width * 8}]
+    lappend glistColAnchor $anchor
+    incr i
+  }
+  $w configure -displaycolumns $glistColOrder
+}
+
 
 proc ::windows::gamelist::Remove {{shownext 0}} {
   set w .glistWin.tree

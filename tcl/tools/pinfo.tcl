@@ -23,7 +23,7 @@ proc playerInfo {{player ""} {raise 0}} {
     ::setMenu $w $w.menu
     $w.menu add cascade -label TmtSortPlayers -menu $w.menu.players
     $w.menu add command -label Help -command "helpWindow PInfo"
-    $w.menu add command -label FileExit -command "destroy $w"
+    $w.menu add command -label FileClose -command "destroy $w"
     menu $w.menu.players -tearoff 1
     playerInfoConfigMenus
     bind $w <Button-3> "tk_popup $w.menu.players %X %Y"
@@ -172,7 +172,7 @@ proc playerInfoConfigMenus {} {
   if {![winfo exists .playerInfoWin]} {
     return
   }
-  foreach idx {0 1 2} tag {TmtSortPlayers Help FileExit} {
+  foreach idx {0 1 2} tag {TmtSortPlayers Help FileClose} {
     configMenuText .playerInfoWin.menu $idx $tag $::language
   }
 }

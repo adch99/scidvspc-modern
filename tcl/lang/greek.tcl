@@ -910,7 +910,7 @@ translate G GlistOpening {Άνοιγμα}
 translate G GlistEndMaterial {Τελικό_Υλικό}
 translate G GlistDeleted {Διαγραμμένη}
 translate G GlistFlags {Σημαίες}
-translate G GlistVars {Βαριάντες}
+translate G GlistVariations {Βαριάντες}
 translate G GlistComments {Σχόλια}
 translate G GlistAnnos {Σχολιασμοί}
 translate G GlistStart {Έναρξη}
@@ -931,6 +931,12 @@ translate G GlistRemoveGameAndBelowFromFilter  {Aφαίρεση παρτίδας
 translate G GlistDeleteGame {Διαγραφή ή Μη Παρτίδας} 
 translate G GlistDeleteAllGames {Διαγραφή φιλτραρισμένων} 
 translate G GlistUndeleteAllGames {Μη Διαγραφή φιλτραρισμένων} 
+# ====== TODO To be translated ======
+translate G GlistAlignL {Align left}
+# ====== TODO To be translated ======
+translate G GlistAlignR {Align right}
+# ====== TODO To be translated ======
+translate G GlistAlignC {Align center}
 
 # Maintenance window:
 translate G DatabaseName {Όνομα Βάσης:}

@@ -869,7 +869,7 @@ translate E GlistOpening {Opening}
 translate E GlistEndMaterial {End Material}
 translate E GlistDeleted {Deleted}
 translate E GlistFlags {Flags}
-translate E GlistVars {Variations}
+translate E GlistVariations {Variations}
 translate E GlistComments {Comments}
 translate E GlistAnnos {Annotations}
 translate E GlistStart {Start}
@@ -889,6 +889,10 @@ translate E GlistRemoveGameAndBelowFromFilter  {Remove all below}
 translate E GlistDeleteGame {Delete this game} 
 translate E GlistDeleteAllGames {Delete all games in filter} 
 translate E GlistUndeleteAllGames {Undelete all games in filter} 
+
+translate E GlistAlignL {Align left}
+translate E GlistAlignR {Align right}
+translate E GlistAlignC {Align center}
 
 # Maintenance window:
 translate E DatabaseName {Database Name:}

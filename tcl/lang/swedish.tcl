@@ -893,7 +893,7 @@ translate W GlistOpening {Öppning}
 translate W GlistEndMaterial {Slutmaterial}
 translate W GlistDeleted {Raderad}
 translate W GlistFlags {Flaggor}
-translate W GlistVars {Variationer}
+translate W GlistVariations {Variationer}
 translate W GlistComments {Kommentarer}
 translate W GlistAnnos {Noteringar}
 translate W GlistStart {Start}
@@ -912,6 +912,12 @@ translate W GlistRemoveGameAndBelowFromFilter  {Ta bort parti (och alla nedanför
 translate W GlistDeleteGame {Ta tillbaka detta parti}
 translate W GlistDeleteAllGames {Ta bort alla partier i filtret}
 translate W GlistUndeleteAllGames {Ta tillbaka alla partier i filtret}
+# ====== TODO To be translated ======
+translate W GlistAlignL {Align left}
+# ====== TODO To be translated ======
+translate W GlistAlignR {Align right}
+# ====== TODO To be translated ======
+translate W GlistAlignC {Align center}
 
 # Maintenance window:
 translate W DatabaseName {Databasnamn:}

@@ -898,7 +898,7 @@ translate N GlistOpening {Opening}
 translate N GlistEndMaterial {Eind-Materiaal}
 translate N GlistDeleted {Verwijderd}
 translate N GlistFlags {Markeringen}
-translate N GlistVars {Varianten}
+translate N GlistVariations {Varianten}
 translate N GlistComments {Commentaar}
 translate N GlistAnnos {Annotaties}
 translate N GlistStart {Start}
@@ -917,6 +917,12 @@ translate N GlistRemoveGameAndBelowFromFilter  {Verwijder alle hierna}
 translate N GlistDeleteGame {Verwijder/Herstel deze partij} 
 translate N GlistDeleteAllGames {Verwijder alle gefilterde partijen} 
 translate N GlistUndeleteAllGames {Herstellen alle partijen in het filter} 
+# ====== TODO To be translated ======
+translate N GlistAlignL {Align left}
+# ====== TODO To be translated ======
+translate N GlistAlignR {Align right}
+# ====== TODO To be translated ======
+translate N GlistAlignC {Align center}
 
 # Maintenance windows
 translate N DatabaseName {Naam database:}

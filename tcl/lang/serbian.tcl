@@ -1038,7 +1038,7 @@ translate Y GlistOpening {Otvaranje}
 translate Y GlistEndMaterial {End-Material} ;# ***
 translate Y GlistDeleted {Izbrisano}
 translate Y GlistFlags {Oznaka}
-translate Y GlistVars {Varijante}
+translate Y GlistVariations {Varijante}
 translate Y GlistComments {Komentari}
 translate Y GlistAnnos {Napomene}
 translate Y GlistStart {Start} ;# ***
@@ -1063,6 +1063,12 @@ translate Y GlistDeleteGame {(Un)Delete this game}
 translate Y GlistDeleteAllGames {Delete all games in filter} 
 # ====== TODO To be translated ======
 translate Y GlistUndeleteAllGames {Undelete all games in filter} 
+# ====== TODO To be translated ======
+translate Y GlistAlignL {Align left}
+# ====== TODO To be translated ======
+translate Y GlistAlignR {Align right}
+# ====== TODO To be translated ======
+translate Y GlistAlignC {Align center}
 
 # Maintenance window:
 translate Y DatabaseName {Ime baze:}

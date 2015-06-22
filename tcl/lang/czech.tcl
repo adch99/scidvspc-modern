@@ -960,7 +960,7 @@ translate C GlistOpening {Zahájení}
 translate C GlistEndMaterial {Materiál na konci}
 translate C GlistDeleted {Vymazán(a)}
 translate C GlistFlags {Pøíznak}
-translate C GlistVars {Varianty}
+translate C GlistVariations {Varianty}
 translate C GlistComments {Komentáøe}
 translate C GlistAnnos {Anotace}
 translate C GlistStart {Poèáteèní pozice}
@@ -985,6 +985,12 @@ translate C GlistDeleteGame {(Un)Delete this game}
 translate C GlistDeleteAllGames {Delete all games in filter} 
 # ====== TODO To be translated ======
 translate C GlistUndeleteAllGames {Undelete all games in filter} 
+# ====== TODO To be translated ======
+translate C GlistAlignL {Align left}
+# ====== TODO To be translated ======
+translate C GlistAlignR {Align right}
+# ====== TODO To be translated ======
+translate C GlistAlignC {Align center}
 
 # Maintenance window:
 translate C DatabaseName {Jméno databáze:}

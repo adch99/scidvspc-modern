@@ -1038,7 +1038,7 @@ translate O GlistOpening {Åpning}
 translate O GlistEndMaterial {Slutt-kvalitet}
 translate O GlistDeleted {Slettet}
 translate O GlistFlags {Flagg}
-translate O GlistVars {Variasjoner}
+translate O GlistVariations {Variasjoner}
 translate O GlistComments {Kommentarer}
 translate O GlistAnnos {Annotasjoner}
 translate O GlistStart {Start}
@@ -1063,6 +1063,12 @@ translate O GlistDeleteGame {(Un)Delete this game}
 translate O GlistDeleteAllGames {Delete all games in filter} 
 # ====== TODO To be translated ======
 translate O GlistUndeleteAllGames {Undelete all games in filter} 
+# ====== TODO To be translated ======
+translate O GlistAlignL {Align left}
+# ====== TODO To be translated ======
+translate O GlistAlignR {Align right}
+# ====== TODO To be translated ======
+translate O GlistAlignC {Align center}
 
 # Maintenance window:
 translate O DatabaseName {Databasenavn:}

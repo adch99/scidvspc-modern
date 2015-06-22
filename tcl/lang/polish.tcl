@@ -876,7 +876,7 @@ translate P GlistOpening {Debiut}
 translate P GlistEndMaterial {Materiał}
 translate P GlistDeleted {Usunięta}
 translate P GlistFlags {Oznaczenie}
-translate P GlistVars {Warianty}
+translate P GlistVariations {Warianty}
 translate P GlistComments {Komentarze}
 translate P GlistAnnos {Uwagi}
 translate P GlistStart {Pozycja początkowa}
@@ -895,6 +895,12 @@ translate P GlistRemoveGameAndBelowFromFilter  {Usuń tę i następne partie}
 translate P GlistDeleteGame {Usuń/przywróć tę partię} 
 translate P GlistDeleteAllGames {Usuń wszystkie partie z filtra} 
 translate P GlistUndeleteAllGames {Przywróć wszystkie partie z filtra} 
+# ====== TODO To be translated ======
+translate P GlistAlignL {Align left}
+# ====== TODO To be translated ======
+translate P GlistAlignR {Align right}
+# ====== TODO To be translated ======
+translate P GlistAlignC {Align center}
 
 # Maintenance window:
 translate P DatabaseName {Nazwa bazy:}

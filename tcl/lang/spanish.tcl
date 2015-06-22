@@ -909,7 +909,7 @@ translate S GlistOpening {Apertura}
 translate S GlistEndMaterial {Material final}
 translate S GlistDeleted {Borrado}
 translate S GlistFlags {Señal}
-translate S GlistVars {Variaciones}
+translate S GlistVariations {Variaciones}
 translate S GlistComments {Comentarios}
 translate S GlistAnnos {Anotaciones}
 translate S GlistStart {Inicio}
@@ -928,6 +928,12 @@ translate S GlistRemoveGameAndBelowFromFilter  {Oculta esta partida y las de aba
 translate S GlistDeleteGame {Elimina/Recupera esta partida de la base} 
 translate S GlistDeleteAllGames {Elimina todas las partidas de la base que aparecen en el filtro} 
 translate S GlistUndeleteAllGames {Recupera todas las partidas borradas de la base que aparecen en el filtro} 
+# ====== TODO To be translated ======
+translate S GlistAlignL {Align left}
+# ====== TODO To be translated ======
+translate S GlistAlignR {Align right}
+# ====== TODO To be translated ======
+translate S GlistAlignC {Align center}
 
 # Maintenance window:
 translate S DatabaseName {Nombre de la base:}

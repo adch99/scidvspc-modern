@@ -863,7 +863,7 @@ translate R GlistOpening {Дебют}
 translate R GlistEndMaterial {Конечный материал}
 translate R GlistDeleted {Удалённые}
 translate R GlistFlags {Флаги}
-translate R GlistVars {Варианты}
+translate R GlistVariations {Варианты}
 translate R GlistComments {Комментарии}
 translate R GlistAnnos {Аннотации}
 translate R GlistStart {Старт}
@@ -884,6 +884,12 @@ translate R GlistRemoveGameAndBelowFromFilter  {Удалить партию (и 
 translate R GlistDeleteGame {(Восстановить) удалить эту партию}
 translate R GlistDeleteAllGames {Удалить все партии из фильтра}
 translate R GlistUndeleteAllGames {Восстановить все партии в фильтре}
+# ====== TODO To be translated ======
+translate R GlistAlignL {Align left}
+# ====== TODO To be translated ======
+translate R GlistAlignR {Align right}
+# ====== TODO To be translated ======
+translate R GlistAlignC {Align center}
 
 # Maintenance window:
 translate R DatabaseName {Название базы данных:}

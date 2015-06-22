@@ -990,7 +990,7 @@ proc initAnnotation {n} {
   label $w.scoreslabel -textvar tr(AddScores)
   radiobutton $w.scores_allmoves -textvar ::tr(AnnotateAllMoves) -variable annotate(WithScore) -value allmoves -anchor w
   radiobutton $w.scores_blunders -textvar tr(BlundersNotBest) -variable annotate(WithScore) -value blunders -anchor w
-  radiobutton $w.scores_var -textvar ::tr(GlistVars) -variable annotate(WithScore) -value var -anchor w
+  radiobutton $w.scores_var -textvar ::tr(GlistVariations) -variable annotate(WithScore) -value var -anchor w
   radiobutton $w.scores_none -textvar ::tr(No) -variable annotate(WithScore) -value no -anchor w
   # previously  annotateType
 
