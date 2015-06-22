@@ -641,16 +641,6 @@ proc ::windows::gamelist::Popup {w x y X Y} {
     menu $menu -tearoff 0
     menu $menu.addcol -tearoff 0
 
-    # Alignment menus
-    $menu add command -label $::tr(GlistAlignL) \
-		   -command "$w column $col -anchor w; lset ::glistColAnchor $col_idx w"
-    $menu add command -label $::tr(GlistAlignR) \
-		   -command "$w column $col -anchor e; lset ::glistColAnchor $col_idx e"
-    $menu add command -label $::tr(GlistAlignC) \
-		   -command "$w column $col -anchor c; lset ::glistColAnchor $col_idx c"
-
-    $menu add separator
-
     # Column menus
     $menu.addcol delete 0 end
     set i 0
@@ -660,6 +650,16 @@ proc ::windows::gamelist::Popup {w x y X Y} {
     }
     $menu add cascade -label $::tr(GlistAddField) -menu $menu.addcol
     $menu add command -label $::tr(GlistRemoveThisGameFromFilter) -command "::windows::gamelist::removeCol $w $col"
+
+    $menu add separator
+
+    $menu add command -label $::tr(GlistAlignL) \
+		   -command "$w column $col -anchor w; lset ::glistColAnchor $col_idx w"
+    $menu add command -label $::tr(GlistAlignR) \
+		   -command "$w column $col -anchor e; lset ::glistColAnchor $col_idx e"
+    $menu add command -label $::tr(GlistAlignC) \
+		   -command "$w column $col -anchor c; lset ::glistColAnchor $col_idx c"
+
     $menu add separator
     $menu add command -label $::tr(Reset) -command "::windows::gamelist::resetCols $w"
 
@@ -766,6 +766,7 @@ proc ::windows::gamelist::resetCols {w} {
     lappend glistColOrder $i
     lappend glistColWidth [expr {$width * 8}]
     lappend glistColAnchor $anchor
+    $w column $col -anchor $anchor
     incr i
   }
   $w configure -displaycolumns $glistColOrder
