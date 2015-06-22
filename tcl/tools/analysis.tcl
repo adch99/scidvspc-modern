@@ -1168,11 +1168,6 @@ proc okAnnotation {n} {
   }
 
   set ::useAnalysisBookName [$w.usebook.comboBooks get]
-  if {[sc_pos isAt start]} {
-    set ::wentOutOfBook 0
-  } else { 
-    set ::wentOutOfBook 1
-  }
   set ::book::lastBook1 $::useAnalysisBookName
   set ::prevNag {}
 
@@ -1198,6 +1193,11 @@ proc okAnnotation {n} {
     # Starting analysis from game end - probably want to be at start
     sc_move start
     updateBoard  -pgn
+  }
+  if {[sc_pos isAt start]} {
+    set ::wentOutOfBook 0
+  } else { 
+    set ::wentOutOfBook 1
   }
 
   set annotate(Engine) $n
