@@ -667,74 +667,76 @@ proc ::windows::gamelist::Popup {w x y X Y} {
 
   } else {
 
-  ### Gamelist context menus
+    ### Gamelist context menus
 
-  set row [$w identify row $x $y]
-  set selection [$w selection]
+    set row [$w identify row $x $y]
+    set selection [$w selection]
 
-  if {$row == "" } {
-    return
-  }
-
-  if {[lsearch $selection $row] == -1 || [llength $selection] == 1} {
-    set menutype full
-    event generate $w <ButtonPress-1> -x $x -y $y
-  } else {
-    set menutype short
-  }
-
-  # set number [$w set [$w focus] Number]
-  # set number [string trim $number "\n"]
-
-  ### nb - redefined $w here
-
-  set w .glistWin
-  set menu .glistWin.context
-
-  if { [winfo exists $menu] } {
-    destroy $menu
-  }
-
-  menu $menu -tearoff 0
-
-  if {$menutype == "short"} {
-  $menu add command -label $::tr(GlistRemoveThisGameFromFilter) -command ::windows::gamelist::Remove
-  $menu add command -label $::tr(GlistDeleteField) -command "$w.c.delete invoke"
-  $menu add cascade -label $::tr(Flag)      -menu $menu.flags
-  $menu add command -label $::tr(SetFilter) -command "$w.b.select invoke"
-  $menu add separator
-  $menu add command -label $::tr(Reset) -command "$w.b.reset invoke"
-  } else {
-  $menu add command -label $::tr(LoadGame) -command "$w.c.load invoke"
-  $menu add command -label $::tr(Browse) -command "$w.c.browse invoke"
-  $menu add command -label $::tr(GlistDeleteField) -command "$w.c.delete invoke"
-  $menu add cascade -label $::tr(Flag)      -menu $menu.flags
-  $menu add command -label $::tr(SetFilter) -command "$w.b.select invoke"
-  $menu add separator
-  $menu add command -label $::tr(GlistRemoveThisGameFromFilter) -command ::windows::gamelist::Remove
-  $menu add command -label $::tr(GlistRemoveGameAndAboveFromFilter) -command "$w.b.removeabove invoke"
-  $menu add command -label $::tr(GlistRemoveGameAndBelowFromFilter) -command "$w.b.removebelow invoke"
-  $menu add command -label $::tr(Reset) -command "$w.b.reset invoke"
-  }
-  menu $menu.flags
-  foreach flag $maintFlaglist  {
-    # dont translate CustomFlag (todo)
-    if {$flag ni {1 2 3 4 5 6}} {
-      set tmp $::tr($maintFlags($flag))
-    } else {
-      set tmp [sc_game flag $flag description]
-      if {$tmp == "" } {
-        set tmp "Custom $flag"
-      } else {
-        set tmp "$tmp ($flag)"
-      }
+    if {$row == "" } {
+      return
     }
-    $menu.flags add command -label "$tmp" -command "::windows::gamelist::ToggleFlag $flag"
-  }
 
-  tk_popup $menu [winfo pointerx .] [winfo pointery .]
+    if {[lsearch $selection $row] == -1 || [llength $selection] == 1} {
+      set menutype full
+      event generate $w <ButtonPress-1> -x $x -y $y
+    } else {
+      set menutype short
+    }
+
+    # set number [$w set [$w focus] Number]
+    # set number [string trim $number "\n"]
+
+    ### nb - redefined $w here
+
+    set w .glistWin
+    set menu .glistWin.context
+
+    if { [winfo exists $menu] } {
+      destroy $menu
+    }
+
+    menu $menu -tearoff 0
+
+    if {$menutype == "short"} {
+    $menu add command -label $::tr(GlistRemoveThisGameFromFilter) -command ::windows::gamelist::Remove
+    $menu add command -label $::tr(GlistDeleteField) -command "$w.c.delete invoke"
+    $menu add cascade -label $::tr(Flag)      -menu $menu.flags
+    $menu add command -label $::tr(SetFilter) -command "$w.b.select invoke"
+    $menu add separator
+    $menu add command -label $::tr(Reset) -command "$w.b.reset invoke"
+    } else {
+    $menu add command -label $::tr(LoadGame) -command "$w.c.load invoke"
+    $menu add command -label $::tr(Browse) -command "$w.c.browse invoke"
+    $menu add command -label $::tr(GlistDeleteField) -command "$w.c.delete invoke"
+    $menu add cascade -label $::tr(Flag)      -menu $menu.flags
+    $menu add command -label $::tr(SetFilter) -command "$w.b.select invoke"
+    $menu add separator
+    $menu add command -label $::tr(GlistRemoveThisGameFromFilter) -command ::windows::gamelist::Remove
+    $menu add command -label $::tr(GlistRemoveGameAndAboveFromFilter) -command "$w.b.removeabove invoke"
+    $menu add command -label $::tr(GlistRemoveGameAndBelowFromFilter) -command "$w.b.removebelow invoke"
+    $menu add command -label $::tr(Reset) -command "$w.b.reset invoke"
+    }
+    menu $menu.flags
+    foreach flag $maintFlaglist  {
+      # dont translate CustomFlag (todo)
+      if {$flag ni {1 2 3 4 5 6}} {
+	set tmp $::tr($maintFlags($flag))
+      } else {
+	set tmp [sc_game flag $flag description]
+	if {$tmp == "" } {
+	  set tmp "Custom $flag"
+	} else {
+	  set tmp "$tmp ($flag)"
+	}
+      }
+      $menu.flags add command -label "$tmp" -command "::windows::gamelist::ToggleFlag $flag"
+    }
+
+    tk_popup $menu [winfo pointerx .] [winfo pointery .]
   }
 }
+
+# These two procs and related snippets derived from SCID, copyright (C) Fulvio Benini
 
 proc ::windows::gamelist::insertCol {w col after} {
   set b [expr [string trimleft $after {#}]]
