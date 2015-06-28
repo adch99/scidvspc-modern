@@ -19,6 +19,12 @@
 #include <stdlib.h>
 #include <set>
 
+#ifdef TCL_ONLY
+class CharsetConverter;
+#else
+# include "charsetconverter.h"
+#endif
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Global variables:
 
@@ -1436,11 +1442,11 @@ sc_base_check (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //  exportGame:
 //    Called by sc_base_export() to export a single game.
-void
+static void
 #ifdef WINCE
-exportGame (Game * g, /* FILE * */Tcl_Channel exportFile, gameFormatT format, uint pgnStyle)
+exportGame (Game * g, /* FILE * */Tcl_Channel exportFile, gameFormatT format, uint pgnStyle, CharsetConverter* converter)
 #else
-exportGame (Game * g, FILE * exportFile, gameFormatT format, uint pgnStyle)
+exportGame (Game * g, FILE * exportFile, gameFormatT format, uint pgnStyle, CharsetConverter* converter)
 #endif
 {
     char old_language = language;
@@ -1467,6 +1473,13 @@ exportGame (Game * g, FILE * exportFile, gameFormatT format, uint pgnStyle)
     g->SetHtmlStyle (htmlDiagStyle);
     g->WriteToPGN (db->tbuf);
     db->tbuf->NewLine();
+
+#ifndef TCL_ONLY
+    if (converter) {
+        converter->doConversion(*db->tbuf);
+    }
+#endif
+
     db->tbuf->DumpToFile (exportFile);
     language = old_language;
 }
@@ -1495,12 +1508,12 @@ sc_base_export (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     const char * options[] = {
         "-append", "-starttext", "-endtext", "-comments", "-variations",
         "-spaces", "-symbols", "-indentComments", "-indentVariations",
-        "-column", "-noMarkCodes", "-convertNullMoves", NULL
+        "-column", "-noMarkCodes", "-convertNullMoves", "-utf8", NULL
     };
     enum {
         OPT_APPEND, OPT_STARTTEXT, OPT_ENDTEXT, OPT_COMMENTS, OPT_VARIATIONS,
         OPT_SPACES, OPT_SYMBOLS, OPT_INDENTC, OPT_INDENTV,
-        OPT_COLUMN, OPT_NOMARKS, OPT_CONVERTNULL
+        OPT_COLUMN, OPT_NOMARKS, OPT_CONVERTNULL, OPT_UTF8
     };
 
     if (argc < 5) { return errorResult (ti, usage); }
@@ -1522,6 +1535,7 @@ sc_base_export (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     }
 
     const char * exportFileName = argv[4];
+    bool useUTF8 = false;
 
     // Check for an even number of optional parameters:
     if ((argc % 2) != 1) { return errorResult (ti, usage); }
@@ -1581,6 +1595,10 @@ sc_base_export (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             if (flag) { pgnStyle |= PGN_STYLE_NO_NULL_MOVES; }
             break;
 
+        case OPT_UTF8:
+            if (flag) { useUTF8 = true; }
+            break;
+
         default:
             return InvalidCommand (ti, "sc_base export", options);
         }
@@ -1597,16 +1615,26 @@ sc_base_export (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
  my_Tcl_SetChannelOption(NULL, exportFile, "-encoding", "binary");
  my_Tcl_SetChannelOption(NULL, exportFile, "-translation", "binary");
 #endif
+
+    CharsetConverter* charsetConverter = NULL;
+
     // Write start text or find the place in the file to append games:
     if (appendToFile) {
         if (outputFormat == PGN_FORMAT_Plain) {
-#ifdef WINCE
-            my_Tcl_Seek(exportFile, 0, SEEK_END);
-        } else {
-            /*fseek*/my_Tcl_Seek(exportFile, 0, SEEK_SET);
-#else
+#ifndef WINCE
+            // Look whether this file is UTF-8 or Latin-1.
+            unsigned char buf[3] = { 0, 0, 0 };
+            fseek (exportFile, 0, SEEK_SET);
+            fread (reinterpret_cast<char*>(buf), 1, 3, exportFile);
+            useUTF8 = (buf[0] == 0xEF && buf[1] == 0xBB && buf[2] == 0xBF);
             fseek (exportFile, 0, SEEK_END);
+#else // if WINCE
+            my_Tcl_Seek(exportFile, 0, SEEK_END);
+#endif
         } else {
+#ifdef WINCE
+            my_Tcl_Seek(exportFile, 0, SEEK_SET);
+#else
             fseek (exportFile, 0, SEEK_SET);
 #endif
             const char * endMarker = "";
@@ -1635,9 +1663,6 @@ sc_base_export (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                     break;
                 }
                 pos = /*ftell */my_Tcl_Tell(exportFile);
-            }
-            /*fseek */my_Tcl_Seek(exportFile, pos, SEEK_SET);
-
 #else
                 fgets (line, 1024, exportFile);
                 if (feof (exportFile)) { break; }
@@ -1647,7 +1672,11 @@ sc_base_export (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                     break;
                 }
                 pos = ftell (exportFile);
+#endif
             }
+#ifdef WINCE
+            /*fseek */my_Tcl_Seek(exportFile, pos, SEEK_SET);
+#else
             fseek (exportFile, pos, SEEK_SET);
 #endif
         }
@@ -1655,13 +1684,23 @@ sc_base_export (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 #ifdef WINCE
         my_Tcl_Write(exportFile, startText, strlen(startText));
 #else
+        if (outputFormat == PGN_FORMAT_Plain && useUTF8) {
+            // Write UTF-8 BOM like ChessBase is doing
+            fputs ("\xef\xbb\xbf", exportFile);
+         }
         fputs (startText, exportFile);
 #endif
     }
 
+#ifndef TCL_ONLY // cannot be used in tcscid
+    if (outputFormat == PGN_FORMAT_Plain || useUTF8) {
+        charsetConverter = new CharsetConverter(useUTF8 ? "utf-8" : "iso8859-1");
+    }
+#endif
+
     if (!exportFilter) {
         // Only export the current game:
-        exportGame (db->game, exportFile, outputFormat, pgnStyle);
+        exportGame (db->game, exportFile, outputFormat, pgnStyle, charsetConverter);
 #ifdef WINCE
         my_Tcl_Write(exportFile, endText, strlen(endText));
         //fclose (exportFile);
@@ -1671,6 +1710,7 @@ sc_base_export (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         fclose (exportFile);
 #endif
         if (showProgress) { updateProgressBar (ti, 1, 1); }
+        delete charsetConverter;
         return TCL_OK;
     }
 
@@ -1706,7 +1746,7 @@ sc_base_export (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                 continue;
             }
             g->LoadStandardTags (ie, db->nb);
-            exportGame (g, exportFile, outputFormat, pgnStyle);
+            exportGame (g, exportFile, outputFormat, pgnStyle, charsetConverter);
         }
     }
 #ifdef WINCE
@@ -1719,6 +1759,7 @@ sc_base_export (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     fclose (exportFile);
 #endif
     if (showProgress) { updateProgressBar (ti, 1, 1); }
+    delete charsetConverter;
     return TCL_OK;
 }
 

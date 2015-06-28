@@ -17,6 +17,7 @@
 #include "misc.h"
 
 #include <stdio.h>
+#include <string.h>
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //### TextBuffer::Init(): Initialise the textbuffer.
@@ -249,19 +250,25 @@ TextBuffer::PrintInt (uint i, const char * str)
     return PrintWord(temp);
 }
 
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//### TextBuffer::ReplaceContent(): Setup new buffer content, the size must include
+//      the nul byte.
+errorT
+TextBuffer::ReplaceContent(const char * newContent, uint size)
+{
+    if (size >= BufferSize)  { return ERROR_BufferFull; }
+
+    ByteCount = size;
+    ::memcpy(Buffer, newContent, size + 1);
+	 return OK;
+}
+
 #ifdef WINCE
 errorT
 TextBuffer::DumpToFile (/*FILE * */Tcl_Channel fp)
 {
     ASSERT (fp != NULL);
-    //uint count = 0;
-    char * b = Buffer;
-/*
-    while (count < ByteCount) {
-        putc (*b, (FILE *)fp);
-        count++; b++;
-    }*/
-    my_Tcl_Write(fp, b, ByteCount);
+    my_Tcl_Write(fp, Buffer, ByteCount);
     return OK;
 }
 
@@ -273,14 +280,10 @@ errorT
 TextBuffer::DumpToFile (FILE * fp)
 {
     ASSERT (fp != NULL);
-    uint count = 0;
-    char * b = Buffer;
-    while (count < ByteCount) {
-        putc (*b, fp);
-        count++; b++;
-    }
+	 fwrite(Buffer, 1, ByteCount, fp);
     return OK;
 }
+
 #endif
 ///////////////////////////////////////////////////////////////////////////
 //  EOF: textbuf.cpp

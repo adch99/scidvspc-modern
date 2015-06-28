@@ -71,6 +71,22 @@ SCIDOBJS= src/misc.o src/index.o src/date.o src/namebase.o src/position.o \
       src/polyglot/parse.o src/polyglot/pgn.o src/polyglot/piece.o src/polyglot/random.o \
       src/polyglot/san.o src/polyglot/search.o src/polyglot/square.o src/polyglot/util.o
 
+CHARSETCONVOBJS= src/charsetdetector.o src/charsetconverter.o \
+      src/universalchardet/CharDistribution.o src/universalchardet/JpCntx.o \
+      src/universalchardet/LangBulgarianModel.o src/universalchardet/LangCyrillicModel.o \
+      src/universalchardet/LangGreekModel.o src/universalchardet/LangHebrewModel.o \
+      src/universalchardet/LangHungarianModel.o src/universalchardet/LangThaiModel.o \
+      src/universalchardet/nsBig5Prober.o src/universalchardet/nsCharSetProber.o \
+      src/universalchardet/nsEscCharsetProber.o src/universalchardet/nsEscSM.o \
+      src/universalchardet/nsEUCJPProber.o src/universalchardet/nsEUCKRProber.o \
+      src/universalchardet/nsEUCTWProber.o src/universalchardet/nsGB2312Prober.o \
+      src/universalchardet/nsHebrewProber.o src/universalchardet/nsLatin1Prober.o \
+      src/universalchardet/nsMBCSGroupProber.o src/universalchardet/nsMBCSSM.o \
+      src/universalchardet/nsSBCharSetProber.o src/universalchardet/nsSBCSGroupProber.o \
+      src/universalchardet/nsSJISProber.o src/universalchardet/nsUniversalDetector.o \
+      src/universalchardet/nsUTF8Prober.o
+
+
 ### ZLIBOBJS: object files in the zlib compression library.
 
 ZLIBOBJS= src/zlib/adler32.o src/zlib/compress.o src/zlib/crc32.o \
@@ -147,10 +163,10 @@ scidlet.exe: src/scidlet.o src/engine.o src/recog.o $(OBJS)
 	$(LINK) $(LDFLAGS) -o scidlet.exe src/scidlet.o src/engine.o src/recog.o \
           src/misc.o src/position.o src/movelist.o src/dstring.o src/myassert.o
 
-scid.exe: src/scid.o $(OBJS) src/tree.o src/filter.o \
+scid.exe: src/scid.o $(OBJS) $(CHARSETCONVOBJS) src/tree.o src/filter.o \
             src/pbook.o src/crosstab.o src/spellchk.o src/probe.o \
             src/optable.o src/engine.o src/recog.o scid.coff src/tkdnd/TkDND_OleDND.o src/tk_selection.o
-	$(LINK) -o scid.exe src/scid.o $(OBJS) \
+	$(LINK) $(LDFLAGS) -o scid.exe src/scid.o $(OBJS) $(CHARSETCONVOBJS) \
             src/tree.o src/filter.o src/pbook.o \
             src/crosstab.o src/spellchk.o src/probe.o \
             src/optable.o src/engine.o src/recog.o scid.coff src/tkdnd/TkDND_OleDND.o src/tk_selection.o \
@@ -172,7 +188,7 @@ scid.coff: scid.rc
 	$(RC) -O coff scid.rc scid.coff
 
 clean:
-	rm -f src/*.o src/zlib/*.o src/polyglot/*.o $(EXECS) scid.gui scid.coff
+	rm -f src/*.o src/zlib/*.o src/polyglot/*.o src/universalchardet/*.o $(EXECS) scid.gui scid.coff
 	$(MAKE) -C src/tkdnd/ -f Makefile.mingwx clean
 
 strip:

@@ -1788,7 +1788,13 @@ set helpText(Export) {<h1>Exporting Games</h1>
   The use of '{' and '}' inside comments is also against the standard, and Scid vs. PC replaces these with parenthesis when exporting PGN.
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.10 July 2013</footer></p>
+  <h3><name Null>PGN Encoding</name></h3>
+  <p>
+  Scid vs. PC can export PGN to Utf-8 or Latin-1 (ISO 8859/1) character sets.
+  Latin-1 is the default of the PGN standard, but Utf-8 is the modern character set, very widely adopted.
+  </p>
+
+  <p><footer>Updated: Scid vs. PC 4.15 June 2015</footer></p>
 }
 
 set helpTitle(LaTeX) "Scid and LaTeX"

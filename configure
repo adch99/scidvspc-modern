@@ -146,7 +146,7 @@ proc findTclTkPaths {} {
 
     # headerPath: List of possible locations for tcl.h and tk.h
     set headerPath {
-     	/usr/include
+        /usr/include
         /usr/local/tcl/include
         /usr/local/include
         /usr/X11/include
@@ -226,8 +226,8 @@ proc findTclTkPaths {} {
             set success 0
         } else {
             puts $opt(tk_h)
-	    if {$opt(tk_h) == "/usr/include"} {
-	      set var(BASH_ENV) CPLUS_INCLUDE_PATH=/usr/include:/usr/local/include
+            if {$opt(tk_h) == "/usr/include"} {
+                set var(BASH_ENV) CPLUS_INCLUDE_PATH=/usr/include:/usr/local/include
             }
         }
     }
@@ -376,6 +376,53 @@ proc checkZlib {} {
     }
 }
 
+
+# TestCpp11Flag.sh:
+#    Script used to test whether the compiler supports C++11 (g++ only).
+#
+set TestCpp11Flag {#!/bin/sh
+cat <<EOF > testcompilerflag.cpp
+int main() { return 0; }
+EOF
+
+__CC__ -std=c++11 -o testcompilerflag testcompilerflag.cpp
+if [ -f testcompilerflag ]; then
+    exit 0
+else
+    exit 1
+fi
+}
+
+
+proc Probe {file script} {
+    if {[catch {open $file.sh w} f]} {
+        puts "Severe error: Unable to write file '$file.sh' in current directory."
+        puts "Aborted."
+        exit 1
+    }
+    puts $f $script
+    close $f
+    set err ""
+    catch [list exec sh $file.sh] err
+    catch [list file delete -force $file.sh]
+    catch [list file delete -force $file.cpp]
+    catch [list file delete -force $file]
+    if {[llength $err]} { return 0 }
+    return 1
+}
+
+
+# probeCompiler:
+#    Checks whether C++11 is supported (g++ only).
+proc probeCompiler {} {
+    global TestCpp11Flag var
+    set probe [regsub -all __CC__ $TestCpp11Flag $var(CXX)]
+    if {[Probe testcompilerflag $probe]} {
+        append var(CXXFLAGS) " -std=c++11"
+    }
+}
+
+
 # writeMakefile:
 #    Creates the Makefile using Makefile.conf and the configured
 #    settings.
@@ -411,6 +458,7 @@ proc writeMakefile {{type ""}} {
     }
 
     checkZlib
+    probeCompiler
 
     if {[catch {set from [open "$Makefile_conf" r]}]} {
        puts "Error opening file for reading: $Makefile_conf"
@@ -425,12 +473,12 @@ proc writeMakefile {{type ""}} {
         set var(FONTDIR) /Library/Fonts/
     } else {
         # Just install fonts in to /usr irrespective of system prefix. /usr/local may not be active
-	set prefix /usr
-	if {![file isdirectory $prefix/share/fonts]} {
-		set var(FONTDIR) "~/.fonts"
-	} else {
-		set var(FONTDIR) $prefix/share/fonts/truetype/Scid
-	}
+        set prefix /usr
+        if {![file isdirectory $prefix/share/fonts]} {
+            set var(FONTDIR) "~/.fonts"
+        } else {
+            set var(FONTDIR) $prefix/share/fonts/truetype/Scid
+        }
     }
 
     set line [gets $from]

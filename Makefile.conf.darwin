@@ -107,6 +107,21 @@ SCIDOBJS= src/misc.o src/index.o src/date.o src/namebase.o src/position.o \
       src/polyglot/parse.o src/polyglot/pgn.o src/polyglot/piece.o src/polyglot/random.o \
       src/polyglot/san.o src/polyglot/search.o src/polyglot/square.o src/polyglot/util.o
 
+CHARSETCONVOBJS= src/charsetdetector.o src/charsetconverter.o \
+      src/universalchardet/CharDistribution.o src/universalchardet/JpCntx.o \
+      src/universalchardet/LangBulgarianModel.o src/universalchardet/LangCyrillicModel.o \
+      src/universalchardet/LangGreekModel.o src/universalchardet/LangHebrewModel.o \
+      src/universalchardet/LangHungarianModel.o src/universalchardet/LangThaiModel.o \
+      src/universalchardet/nsBig5Prober.o src/universalchardet/nsCharSetProber.o \
+      src/universalchardet/nsEscCharsetProber.o src/universalchardet/nsEscSM.o \
+      src/universalchardet/nsEUCJPProber.o src/universalchardet/nsEUCKRProber.o \
+      src/universalchardet/nsEUCTWProber.o src/universalchardet/nsGB2312Prober.o \
+      src/universalchardet/nsHebrewProber.o src/universalchardet/nsLatin1Prober.o \
+      src/universalchardet/nsMBCSGroupProber.o src/universalchardet/nsMBCSSM.o \
+      src/universalchardet/nsSBCharSetProber.o src/universalchardet/nsSBCSGroupProber.o \
+      src/universalchardet/nsSJISProber.o src/universalchardet/nsUniversalDetector.o \
+      src/universalchardet/nsUTF8Prober.o
+
 ### ZLIBOBJS: object files in the zlib compression library.
 
 ZLIBOBJS= src/zlib/adler32.o src/zlib/compress.o src/zlib/crc32.o \
@@ -252,7 +267,7 @@ distclean: clean
 	rm -rf ./dist
 
 clean:
-	rm -f game.* tkscid.so position.* src/*.o src/zlib/*.o src/zlib/*.a src/polyglot/*.o $(EXECS) scid $(SCRIPTS)
+	rm -f game.* tkscid.so position.* src/*.o src/universalchardet/*.o src/zlib/*.o src/zlib/*.a src/polyglot/*.o $(EXECS) scid $(SCRIPTS)
 	cd engines/phalanx/ && make clean && cd ../../
 	cd engines/toga/src/ && make clean && cd ../../../
 
@@ -413,9 +428,9 @@ scidlet: src/scidlet.o src/engine.o src/recog.o src/misc.o src/position.o \
 scidt: src/scidt.o $(OBJS)
 	$(LINK) $(LDFLAGS) -o scidt src/scidt.o $(OBJS) $(ZLIB) $(TCL_LIBRARY)
 
-tkscid: src/tkscid.o $(OBJS) src/tree.o src/filter.o src/pbook.o src/crosstab.o \
+tkscid: src/tkscid.o $(OBJS) $(CHARSETCONVOBJS) src/tree.o src/filter.o src/pbook.o src/crosstab.o \
           src/spellchk.o src/probe.o src/optable.o src/engine.o src/recog.o
-	$(LINK) $(LDFLAGS) -o tkscid src/tkscid.o $(OBJS) src/tree.o src/filter.o src/pbook.o src/crosstab.o src/spellchk.o src/probe.o src/optable.o src/engine.o src/recog.o $(ZLIB) $(TK_LIBRARY)
+	$(LINK) $(LDFLAGS) -o tkscid src/tkscid.o $(OBJS) $(CHARSETCONVOBJS) src/tree.o src/filter.o src/pbook.o src/crosstab.o src/spellchk.o src/probe.o src/optable.o src/engine.o src/recog.o $(ZLIB) $(TK_LIBRARY)
 
 tcscid: src/tcscid.o $(OBJS) src/tree.o src/filter.o src/pbook.o src/crosstab.o \
           src/spellchk.o src/probe.o src/optable.o src/engine.o src/recog.o

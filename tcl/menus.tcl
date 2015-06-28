@@ -858,7 +858,7 @@ $m add command -label OptionsSave -command {
     askToReplaceMoves ::windows::switcher::icons locale(numeric) 
     spellCheckFile ::splash::keepopen autoRaise autoIconify windowsDock autoLoadLayout
     exportFlags(comments) exportFlags(space) exportFlags(vars) exportFlags(indentc)
-    exportFlags(indentv) exportFlags(column) exportFlags(htmldiag) 
+    exportFlags(indentv) exportFlags(column) exportFlags(htmldiag) exportFlags(utf8)
     email(smtp) email(smproc) email(server) 
     email(from) email(bcc) ::windows::gamelist::findcase ::windows::gamelist::showButtons
     gameInfo(show) gameInfo(photos) gameInfo(hideNextMove) gameInfo(wrap) gameInfo(showStatus) 

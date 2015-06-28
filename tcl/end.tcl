@@ -416,6 +416,14 @@ proc exportOptions {exportType} {
     grid $w.o.convertNullMoves -row $row -column 1 -sticky w
     grid $w.o.keepNullMoves    -row $row -column 2 -sticky w
     incr row
+
+    label $w.o.utf8 -text "Character encoding"
+    radiobutton $w.o.utf8True -text Utf-8 -variable exportFlags(utf8) -value 1
+    radiobutton $w.o.utf8False -text Latin-1 -variable exportFlags(utf8) -value 0
+    grid $w.o.utf8       -row $row -column 0 -sticky w
+    grid $w.o.utf8True   -row $row -column 1 -sticky w
+    grid $w.o.utf8False  -row $row -column 2 -sticky w
+    incr row
   }
 
   # Extra option for HTML format: diagram image set
@@ -554,7 +562,7 @@ proc exportGames {selection exportType} {
       -space $exportFlags(space) -symbols $exportFlags(symbols) \
       -indentC $exportFlags(indentc) -indentV $exportFlags(indentv) \
       -column $exportFlags(column) -noMarkCodes $exportFlags(stripMarks) \
-      -convertNullMoves $exportFlags(convertNullMoves)
+      -convertNullMoves $exportFlags(convertNullMoves) -utf8 $exportFlags(utf8)
   }]
 
   if {$exportFilter} {
