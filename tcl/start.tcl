@@ -763,7 +763,7 @@ set exportFlags(symbols) 0
 set exportFlags(htmldiag) 0
 set exportFlags(stripMarks) 0
 set exportFlags(convertNullMoves) 1
-set exportFlags(utf8) 1
+set exportFlags(utf8) 0
 set default_exportStartFile(PGN) {}
 set default_exportEndFile(PGN) {}
 

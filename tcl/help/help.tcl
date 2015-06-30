@@ -290,6 +290,7 @@ append helpText(Index) {
   <li>Adding <a Maintenance Ratings>Elo Ratings</a></li>
   <li><a Email>Email manager</a> window</li>
   <li><a CCeMailChess>Email Chess</a></li>
+  <li>Character <a Encoding>Encoding</a></li>
   <li><a Analysis>Engines, Chess</a></li>
   <li><a Analysis List>Engines</a> - configuring</li>
   <li><a Analysis Debugging>Engines</a> - debugging</li>
@@ -462,6 +463,7 @@ append helpText(Index) {
   <ul>
   <li><a Analysis UCI>UCI Engine</a> Options</li>
   <li><a Moves Undo>Undo</a></li>
+  <li><a Encoding>UTF-8</a> character encoding</li>
   </ul>
 
   <h3><name V>V</name></h3>
@@ -1722,12 +1724,37 @@ set helpText(Export) {<h1>Exporting Games</h1>
   Four file formats are supported:
   <ul>
   <li><a PGN>PGN</a> The default chess game format</li>
-  <li><term>HTML</term> for web pages</li>
-  <li><term>HTML and JavaScript</term> for interactive web pages</li>
-  <li><term>LaTeX</term> a popular typesetting system</li>
+  <li><b>HTML</b> for web pages</li>
+  <li><b>HTML and JavaScript</b> for interactive web pages</li>
+  <li><b>LaTeX</b> a popular typesetting system</li>
   </ul>
   Additionally, on Unix systems, LaTeX can be converted to <a Export PDF>PDF</a>.
   </p>
+
+  <h3><name Null>PGN Compatability Issues</name></h3>
+  <p>
+  Scid's si4 database format does not enforce any particular character encoding. Scid vs. PC now exports PGN 
+  to either Latin-1 or Utf-8 format. For more information, see the <a Encoding>Encoding</a> section.
+  </p>
+  <p>
+  The <url http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm>PGN Standard</url>
+  has no <a Variations Null>null move</a> concept. So
+  if you export games including them to PGN, other
+  software may not be able to read these games correctly.
+  </p>
+  <p>
+  To solve this problem, one should enable the <b>Convert null moves to comments</b> option.
+  Of course, if you wish to later reimport the PGN file
+  , with null moves preserved, disable this option.
+  </p>
+  <p>
+  Scid's use of Ascii strings (such as <b>+=</b> to represent annotations is also against the PGN standard.
+  For compatability, <b>Symbolic annotation style</b> should be set to <b>$2 $14</b>.
+  </p>
+  <p>
+  The use of '{' and '}' inside comments is also against the standard, and Scid vs. PC replaces these with parenthesis when exporting PGN.
+  </p>
+
 
 <p>
   Diagrams are drawn (in HTML or LaTeX formats),
@@ -1768,31 +1795,48 @@ set helpText(Export) {<h1>Exporting Games</h1>
 <ul><li>pdflatex -interaction batchmode mytexfile.tex</li></ul>
 </p>
 
-  <h3><name Null>PGN Compatability Issues</name></h3>
-  <p>
-  The <url http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm>PGN Standard</url>
-  has no <a Variations Null>null move</a> concept. So
-  if you export games including them to PGN, other
-  software may not be able to read these games correctly.
-  </p>
-  <p>
-  To solve this problem, one should enable the <b>Convert null moves to comments</b> option.
-  Of course, if you wish to later reimport the PGN file
-  , with null moves preserved, disable this option.
-  </p>
-  <p>
-  Scid's use of Ascii strings (such as <b>+=</b> to represent annotations is also against the PGN standard.
-  For compatability, <b>Symbolic annotation style</b> should be set to <b>$2 $14</b>.
-  </p>
-  <p>
-  The use of '{' and '}' inside comments is also against the standard, and Scid vs. PC replaces these with parenthesis when exporting PGN.
-  </p>
+  <p><footer>Updated: Scid vs. PC 4.15 June 2015</footer></p>
+}
 
-  <h3><name Null>PGN Encoding</name></h3>
+set helpTitle(Encoding) "PGN Encoding"
+set helpText(Encoding) {<h1>PGN Encoding</h1>
+  <h3>PGN Encoding and UTF-8</h3>
   <p>
-  Scid vs. PC can export PGN to Utf-8 or Latin-1 (ISO 8859/1) character sets.
-  Latin-1 is the default of the PGN standard, but Utf-8 is the modern character set, very widely adopted.
-  </p>
+  Scid vs. PC can export PGN to UTF-8 or Latin-1 (ISO 8859/1) character sets.
+English speakers will generally prefer Latin-1 
+(the <url http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm>PGN</url> standard)
+, but other locales may find UTF-8 a better choice.
+</p>
+<p>
+Enforcing selection of one of these is necessary because <a Formats>si4</a> has weaknesses concerning the
+internationalization of game data. Player, Site, Event names, etc, and PGN comments,
+can be stored with <b>any</b> character-set encoding. 
+</p>
+
+<h3>Technical Details</h3>
+<p>These factors affect the encoding of Scid databases.</p>
+<ul>
+<li>Older Linux/Unix distributions are installed with Latin-1 encoding as
+default, while UTF-8 is now the Linux norm.</li>
+<br>
+<li>MS Windows is normally storing data with the CP1252 character-set.</li>
+<br>
+<li>Many applications produce PGN files with unsuitable character
+encodings. It is not uncommon that a PGN file has extended ASCII (CP850 for
+example), or is UTF-8 encoded but without a leading UTF-8 BOM.
+When importing these PGN, Scid is interpreting the content as system encoded,
+which may result in the games not being displayed properly.</li>
+</ul>
+
+<p>
+The PGN export will be done with the use of a character-set detector. This
+detector examines the content of the text, and
+converts it to either Latin-1 or UTF-8 (depending on the user's choice).
+In many cases it is even able to convert defective encodings into a proper character-set.</p>
+<p>
+Implementing this feature in Scid vs. PC is also an important step towards the support of the <b>C/CIF archive</b> format,
+which only allows valid UTF-8, and the character-set detector will be used for a proper conversion.
+</p>
 
   <p><footer>Updated: Scid vs. PC 4.15 June 2015</footer></p>
 }

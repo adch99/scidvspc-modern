@@ -31,13 +31,13 @@ namespace {
 // Valid octet sequences:
 // 00-7f
 //  c2-df  80-bf
-//  e0    a0-bf 80-bf
+//  e0     a0-bf 80-bf
 //  e1-ec  80-bf 80-bf
-//  ed    80-9f 80-bf
+//  ed     80-9f 80-bf
 //  ee-ef  80-bf 80-bf
-//  f0    90-bf 80-bf 80-bf
+//  f0     90-bf 80-bf 80-bf
 //  f1-f3  80-bf 80-bf 80-bf
-//  f4    80-8f 80-bf 80-bf
+//  f4     80-8f 80-bf 80-bf
 
 enum State { Start, A, B, C, D, E, F, G, Error };
 
@@ -93,7 +93,7 @@ nextState(State current, unsigned char c)
 
 
 #define _ -1
-static char const ASCIIWeight[128] =
+static char const CP850Weight[128] =
 {
   1, 5, 3, 1, 5, 1, 1, 1, // 80 ... 87
   1, 1, 2, 1, 1, 1, 5, 1, // 88 ... 8f
@@ -134,6 +134,8 @@ static char const CP1252Weight[128] =
 };
 #undef _
 
+
+inline static unsigned max(unsigned a, unsigned b) { return a < b ? b : a; }
 
 inline static bool isFirst(char const* s) { return (static_cast<unsigned char>(*s) & 0xc0) != 0x80; }
 inline static bool isTail(char const* s)  { return (static_cast<unsigned char>(*s) & 0xc0) == 0x80; }
@@ -828,14 +830,13 @@ CharsetConverter::convertFromUTF8(std::string const& in, std::string& out)
 {
   Tcl_EncodingState state;
 
-  std::string buf(in.size()*4, ' ');
+  std::string buf(::max(in.size(), 255), ' ');
 
   char const*  src = in.c_str();
   char*        dst = const_cast<char*>(buf.data()); // it's only a buffer
 
   int flags   = TCL_ENCODING_START | TCL_ENCODING_END | TCL_ENCODING_STOPONERROR;
   int srcLen  = in.size();
-  int dstLen  = buf.size();
 
   while (true)
   {
@@ -846,7 +847,7 @@ CharsetConverter::convertFromUTF8(std::string const& in, std::string& out)
                                 src, srcLen,
                                 flags,
                                 &state,
-                                dst, dstLen,
+                                dst,  buf.size(),
                                 &bytesIn,
                                 &bytesOut,
                                 &dstChars);
@@ -858,8 +859,6 @@ CharsetConverter::convertFromUTF8(std::string const& in, std::string& out)
 
     src += bytesIn;
     srcLen -= bytesIn;
-    dst = const_cast<char*>(buf.data());
-    dstLen = buf.size();
 
     switch (rc)
     {
@@ -908,6 +907,7 @@ CharsetConverter::convertFromUTF8(std::string const& in, std::string& out)
         break;
 
       case TCL_CONVERT_MULTIBYTE:
+        out.append("?", 1);
         m_error = true;
         return false;
     }
@@ -929,7 +929,6 @@ CharsetConverter::convertToUTF8(std::string const& in, std::string& out, char co
 
   int flags   = TCL_ENCODING_START | TCL_ENCODING_END | TCL_ENCODING_STOPONERROR;
   int srcLen  = in.size();
-  int dstLen  = buf.size();
 
   while (true)
   {
@@ -940,7 +939,7 @@ CharsetConverter::convertToUTF8(std::string const& in, std::string& out, char co
                                 src, srcLen,
                                 flags,
                                 &state,
-                                dst, dstLen,
+                                dst, buf.size(),
                                 &bytesIn,
                                 &bytesOut,
                                 &dstChars);
@@ -949,15 +948,20 @@ CharsetConverter::convertToUTF8(std::string const& in, std::string& out, char co
 
     if (rc == TCL_OK)
     {
-      // NOTE: sometimes Tcl_ExternalToUtf() is producing overlong UTF-8 sequences!
-      if (!validateUTF8(buf, soFar))
+      buf.resize(soFar);
+
+      if (!validateUTF8(buf))
       {
-        if (removeInvalidSequences(buf, soFar, replacement) > 0)
+        // NOTE: sometimes Tcl_ExternalToUtf() is producing overlong UTF-8
+        // sequences, this is a violation of the UTF-8 standard. The have
+        // to fix this, hopefully without any loss.
+
+        if (removeInvalidSequences(buf, replacement) > 0)
           m_failed = true;
 
-        if (validateUTF8(buf, soFar))
+        if (validateUTF8(buf))
         {
-          out.append(buf.c_str(), soFar);
+          out.append(buf);
         }
         else
         {
@@ -973,7 +977,7 @@ CharsetConverter::convertToUTF8(std::string const& in, std::string& out, char co
         return false;
       }
 
-      out.append(buf.c_str(), soFar);
+      out.append(buf);
       return true;
     }
 
@@ -981,8 +985,6 @@ CharsetConverter::convertToUTF8(std::string const& in, std::string& out, char co
 
     src += bytesIn;
     srcLen -= bytesIn;
-    dst = const_cast<char*>(buf.data());
-    dstLen = buf.size();
 
     switch (rc)
     {
@@ -1006,6 +1008,7 @@ CharsetConverter::convertToUTF8(std::string const& in, std::string& out, char co
         break;
 
       case TCL_CONVERT_MULTIBYTE:
+        out.append(replacement);
         m_error = true;
         return false;
     }
@@ -1029,15 +1032,15 @@ CharsetConverter::doConversion(TextBuffer& text)
   m_detector.reset();
   m_detector.detect(text);
 
-  if (m_detector.isASCII())
+  if (m_detector.isASCII()) // the detector couldn't detect the character set
   {
-    // This may happen if the character set is either extended ASCII or CP1252,
-    // encoded with single bytes.
+    // This may happen if the character set is CP850 or CP1252 encoded with
+    // single bytes.
 
-    int ascii  = detect(text.GetBuffer(), text.GetByteCount(), ::ASCIIWeight);
+    int ascii  = detect(text.GetBuffer(), text.GetByteCount(), ::CP850Weight);
     int cp1252 = detect(text.GetBuffer(), text.GetByteCount(), ::CP1252Weight);
 
-    if (cp1252 > ascii)
+    if (cp1252 > ascii) // most probably it's CP1252 (Windoze)
     {
       std::string src(text.GetBuffer(), text.GetByteCount());
       std::string dst;
@@ -1045,7 +1048,7 @@ CharsetConverter::doConversion(TextBuffer& text)
       text.ReplaceContent(dst.c_str(), dst.size());
       m_detector.setup("utf-8");
     }
-    else if (ascii > 0)
+    else if (ascii >= 0) // probably it's CP850 (MSDOS)
     {
       std::string src(text.GetBuffer(), text.GetByteCount());
       std::string dst;
@@ -1055,11 +1058,11 @@ CharsetConverter::doConversion(TextBuffer& text)
     }
     else
     {
-      // the character set is unrecognizable
+      // The character set is unrecognizable, so convertToUTF8() will do
+      // the required conversions.
     }
   }
-
-  if (m_detector.isLatin1()) // does not happen under Windoze
+  else if (m_detector.isLatin1()) // does not happen under Windoze
   {
     // ----------------------------------------------------------------------
     // This part is a bit experimental, and should be removed if
@@ -1071,8 +1074,9 @@ CharsetConverter::doConversion(TextBuffer& text)
     if (fixLatin1(src, dst))
     {
       // This was originally a Latin-1 string with invalid UTF-8 conversion,
-      // but we could restore the content. This happens often with older
-      // Scid databases.
+      // but we could restore the content. This happens often with Scid
+      // databases. (For example an import of a PGN file with UTF-8 encoded
+      // Latin-1 character set.)
       text.ReplaceContent(dst.c_str(), dst.size());
       m_detector.setup("utf-8");
     }
