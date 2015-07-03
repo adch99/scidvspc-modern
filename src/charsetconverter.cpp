@@ -43,7 +43,7 @@ enum State { Start, A, B, C, D, E, F, G, Error };
 
 static unsigned char const Byte_Class_Lookup_Tbl[256] =
 {
-//  00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F
+//00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, // 00
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, // 10
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, // 20
@@ -65,7 +65,7 @@ static unsigned char const Byte_Class_Lookup_Tbl[256] =
 #define _ Error
 static enum State const State_Transition_Tbl[12][8] =
 {
-//    Start  A      B      C      D      E      F      G
+//  Start  A      B      C      D      E      F      G
   { Start, _    , _    , _    , _    , _    , _    , _    }, //  0: 00-7f
   { _    , Start, A    , _    , A    , B    , _    , B    }, //  1: 80-8f
   { _    , Start, A    , _    , A    , B    , B    , _    }, //  2: 90-9f
@@ -148,7 +148,7 @@ charLength(char const* str)
 
   if (c < 0x80) return 1;
 
-  switch ((c & 0xf0))
+  switch (c & 0xf0)
   {
     case 0xc0: return 2;
     case 0xe0: return 3;
@@ -289,7 +289,7 @@ findConversion(unsigned code)
     case 0x270e: return "**";   // LOWER RIGHT PENCIl
     case 0xfffd: return "?";    // REPLACEMENT CHARACTER
 
-    // some additional characters in extended ASCII / CP1252
+    // some additional characters in CP850 / CP1252
     case 0x0152: return "OE";   // LATIN CAPITAL LIGATURE OE
     case 0x0153: return "oe";   // LATIN SMALL LIGATURE OE
     case 0x0160: return "S";    // LATIN CAPITAL LETTER S WITH CARON
@@ -305,7 +305,7 @@ findConversion(unsigned code)
     case 0x2039: return "<";    // SINGLE LEFT-POINTING ANGLE QUOTATION MARK
     case 0x203a: return ">";    // SINGLE RIGHT-POINTING ANGLE QUOTATION MARK
     case 0x02c6: return "^";    // MODIFIER LETTER CIRCUMFLEX ACCENT
-    case 0x2030: return "0/00"; // PER MILLE SIGN
+    case 0x2030: return "o/oo"; // PER MILLE SIGN
     case 0x2261: return "=";    // IDENTICAL TO
   }
 
@@ -364,7 +364,6 @@ inline std::string const& CharsetConverter::Codec::encoding() const { return m_i
 
 inline bool CharsetConverter::Codec::isUTF8() const     { return m_info.m_isUTF8; }
 inline bool CharsetConverter::Codec::isLatin1() const   { return m_info.m_isLatin1; }
-inline bool CharsetConverter::Codec::isWindoze() const  { return m_info.m_isWindoze; }
 
 
 CharsetConverter::Codec::Codec()
@@ -816,6 +815,8 @@ CharsetConverter::removeInvalidSequences(std::string& str, unsigned len, char co
         s += 5;
         while (s < e && ::isTail(s))
           ++s;
+        result.append(replacement);
+        replaced += 1;
         break;
     }
   }
@@ -888,7 +889,7 @@ CharsetConverter::convertFromUTF8(std::string const& in, std::string& out)
           src += charLen;
           srcLen -= charLen;
         }
-        else // this should never happen
+        else // should never happen
         {
           out.append(src, 1); // this is ASCII
         }
@@ -953,7 +954,7 @@ CharsetConverter::convertToUTF8(std::string const& in, std::string& out, char co
       if (!validateUTF8(buf))
       {
         // NOTE: sometimes Tcl_ExternalToUtf() is producing overlong UTF-8
-        // sequences, this is a violation of the UTF-8 standard. The have
+        // sequences, this is a violation of the UTF-8 standard. We have
         // to fix this, hopefully without any loss.
 
         if (removeInvalidSequences(buf, replacement) > 0)

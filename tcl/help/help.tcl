@@ -1802,7 +1802,7 @@ set helpTitle(Encoding) "PGN Encoding"
 set helpText(Encoding) {<h1>PGN Encoding</h1>
   <h3>PGN Encoding and UTF-8</h3>
   <p>
-  Scid vs. PC can export PGN to UTF-8 or Latin-1 (ISO 8859/1) character sets.
+Scid vs. PC can <a Export>export PGN</a> to UTF-8 or Latin-1 (ISO 8859/1) character sets.
 English speakers will generally prefer Latin-1 
 (the <url http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm>PGN</url> standard)
 , but other locales may find UTF-8 a better choice.
@@ -1816,10 +1816,9 @@ can be stored with <b>any</b> character-set encoding.
 <h3>Technical Details</h3>
 <p>These factors affect the encoding of Scid databases.</p>
 <ul>
-<li>Older Linux/Unix distributions are installed with Latin-1 encoding as
-default, while UTF-8 is now the Linux norm.</li>
-<br>
-<li>MS Windows is normally storing data with the CP1252 character-set.</li>
+<li>Older Linux/Unix distributions were installed with Latin-1 encoding as
+default, and older MS Windows used CP1252. But UTF-8 is now the <i>default</i> system encoding for both Linux and Windows.
+Currently Scid interprets PGN files as system encoded, without actually checking if this is correct.</li>
 <br>
 <li>Many applications produce PGN files with unsuitable character
 encodings. It is not uncommon that a PGN file has extended ASCII (CP850 for

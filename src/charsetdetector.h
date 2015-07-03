@@ -41,6 +41,7 @@ public:
 
   // Test whether the encoding is CP1252 (default in Windoze).
   bool isWindows() const;
+  bool isDOS() const;
 
   // Test whether the encoding is pure ASCII.
   bool isASCII() const;
@@ -80,6 +81,7 @@ private:
     bool m_isASCII;
     bool m_isLatin1;
     bool m_isWindoze;
+    bool m_isDOS;
     bool m_isUTF8;
   };
 
@@ -94,6 +96,7 @@ inline bool CharsetDetector::isUTF8() const                 { return m_info.m_is
 inline bool CharsetDetector::isASCII() const                { return m_info.m_isASCII; }
 inline bool CharsetDetector::isLatin1() const               { return m_info.m_isLatin1; }
 inline bool CharsetDetector::isWindows() const              { return m_info.m_isWindoze; }
+inline bool CharsetDetector::isDOS() const                  { return m_info.m_isDOS; }
 inline std::string const& CharsetDetector::encoding() const { return m_info.m_encoding; }
 inline void CharsetDetector::setup(char const* encoding)    { m_info.setup(encoding); }
 

@@ -23,6 +23,7 @@ CharsetDetector::Info::Info()
   ,m_isASCII(true)
   ,m_isLatin1(false)
   ,m_isWindoze(false)
+  ,m_isDOS(false)
   ,m_isUTF8(false)
 {
 }
@@ -32,6 +33,7 @@ CharsetDetector::Info::Info(char const* encoding)
   :m_isASCII(false)
   ,m_isLatin1(false)
   ,m_isWindoze(false)
+  ,m_isDOS(false)
   ,m_isUTF8(false)
 {
   setup(encoding);
@@ -46,6 +48,7 @@ CharsetDetector::Info::setup(char const* encoding)
   m_isASCII = (m_encoding == "ascii");
   m_isLatin1 = (m_encoding == "iso8859-1");
   m_isWindoze = (m_encoding == "cp1252");
+  m_isDOS = (m_encoding == "cp850");
   m_isUTF8 = (m_encoding == "utf-8");
 }
 

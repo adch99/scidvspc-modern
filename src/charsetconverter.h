@@ -133,9 +133,9 @@ private:
     Codec& operator=(Codec const&);
 
     std::string const& encoding() const;
+
     bool isUTF8() const;
     bool isLatin1() const;
-    bool isWindoze() const;
 
     void setup(char const* encoding);
     void setup(Info const& info);
