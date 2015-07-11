@@ -19,11 +19,7 @@
 #include <stdlib.h>
 #include <set>
 
-#ifdef TCL_ONLY
-class CharsetConverter;
-#else
 # include "charsetconverter.h"
-#endif
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Global variables:
@@ -1692,11 +1688,9 @@ sc_base_export (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 #endif
     }
 
-#ifndef TCL_ONLY // cannot be used in tcscid
     if (outputFormat == PGN_FORMAT_Plain || useUTF8) {
         charsetConverter = new CharsetConverter(useUTF8 ? "utf-8" : "iso8859-1");
     }
-#endif
 
     if (!exportFilter) {
         // Only export the current game:

@@ -13,9 +13,22 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "charsetdetector.h"
-#include "namebase.h"
+#include "charsetconverter.h"
 #include "textbuf.h"
 #include "myassert.h"
+
+
+static bool
+isAscii(char const* str, unsigned len)
+{
+  for ( ; *str; ++str)
+  {
+    if (*str & 0x80)
+      return false;
+  }
+
+  return true;
+}
 
 
 CharsetDetector::Info::Info()
@@ -29,7 +42,7 @@ CharsetDetector::Info::Info()
 }
 
 
-CharsetDetector::Info::Info(char const* encoding)
+CharsetDetector::Info::Info(std::string const& encoding)
   :m_isASCII(false)
   ,m_isLatin1(false)
   ,m_isWindoze(false)
@@ -41,9 +54,8 @@ CharsetDetector::Info::Info(char const* encoding)
 
 
 void
-CharsetDetector::Info::setup(char const* encoding)
+CharsetDetector::Info::setup(std::string const& encoding)
 {
-  ASSERT(encoding);
   m_encoding = encoding;
   m_isASCII = (m_encoding == "ascii");
   m_isLatin1 = (m_encoding == "iso8859-1");
@@ -53,31 +65,91 @@ CharsetDetector::Info::setup(char const* encoding)
 }
 
 
+CharsetDetector::CharsetDetector()
+  :m_ascii(0)
+  ,m_latin1(0)
+  ,m_cp850(0)
+  ,m_cp1252(0)
+{
+}
+
+
 void CharsetDetector::reset()
 {
   Reset();
+  m_ascii = 0;
+  m_latin1 = 0;
+  m_cp850 = 0;
+  m_cp1252 = 0;
   m_info.setup("ascii");
 }
 
 
-void CharsetDetector::detect(NameBase const& nb_)
+void CharsetDetector::detect(char const* value, unsigned len)
 {
-  // NOTE: NameBase does not provide constness.
-  NameBase& nb = const_cast<NameBase&>(nb_);
+  ASSERT(value);
 
-  for (unsigned type = 0; type <= NAME_LAST; ++type)
+  if (!::isAscii(value, len))
   {
-    idNumberT id;
-    nb.IterateStart(type);
+    HandleData(value, len);
+    m_ascii = -1;
 
-    while (nb.Iterate(type, &id) == OK)
+    if (m_latin1 >= 0)
     {
-      char const* s = nb.GetName(type, id);
-      HandleData(s, ::strlen(s));
+      int weight = CharsetConverter::detectLatin1(value, len);
+
+      if (weight == -1)
+        m_latin1 = -1;
+      else
+        m_latin1 += weight;
+    }
+
+    if (m_cp850 >= 0)
+    {
+      int weight = CharsetConverter::detectCP850(value, len);
+
+      if (weight == -1)
+        m_cp850 = -1;
+      else
+        m_cp850 += weight;
+    }
+
+    if (m_cp1252 >= 0)
+    {
+      int weight = CharsetConverter::detectCP1252(value, len);
+
+      if (weight == -1)
+        m_cp1252 = -1;
+      else
+        m_cp1252 += weight;
     }
   }
+  else if (m_latin1 >= 0)
+  {
+    int weight = CharsetConverter::detectLatin1(value, len);
 
+    if (weight == -1)
+      m_latin1 = -1;
+    else
+      m_latin1 += weight;
+  }
+}
+
+
+void
+CharsetDetector::finish()
+{
   DataEnd();
+
+  if ((isASCII() && m_ascii == -1) || (isLatin1() && m_latin1 == -1))
+  {
+    if (m_latin1 >= m_cp850 && m_latin1 >= m_cp1252)
+      setup("iso8859-1");
+    else if (m_cp850 >= m_cp1252)
+      setup("cp850");
+    else if (m_cp1252 >= 0)
+      setup("cp1252");
+  }
 }
 
 
@@ -85,7 +157,6 @@ void CharsetDetector::detect(TextBuffer const& text_)
 {
   // NOTE: TextBuffer does not provide constness.
   TextBuffer& text = const_cast<TextBuffer&>(text_);
-
   HandleData(text.GetBuffer(), text.GetByteCount());
   DataEnd();
 }

@@ -93,8 +93,25 @@ nextState(State current, unsigned char c)
 
 
 #define _ -1
-static char const CP850Weight[128] =
+static char const CP850Weight[256] =
 {
+  0, 0, 0, 0, 0, 0, 0, 0, // 00 ... 07
+  0, 0, 0, 0, 0, 0, 0, 0, // 08 ... 0f
+  0, 0, 0, 0, 0, 0, 0, 0, // 10 ... 17
+  0, 0, 0, 0, 0, 0, 0, 0, // 18 ... 1f
+  0, 0, 0, 0, 0, 0, 0, 0, // 20 ... 27
+  0, 0, 0, 0, 0, 0, 0, 0, // 28 ... 2f
+  0, 0, 0, 0, 0, 0, 0, 0, // 20 ... 27
+  0, 0, 0, 0, 0, 0, 0, 0, // 28 ... 2f
+  0, 0, 0, 0, 0, 0, 0, 0, // 40 ... 47
+  0, 0, 0, 0, 0, 0, 0, 0, // 48 ... 4f
+  0, 0, 0, 0, 0, 0, 0, 0, // 50 ... 57
+  0, 0, 0, 0, 0, 0, 0, 0, // 58 ... 5f
+  0, 0, 0, 0, 0, 0, 0, 0, // 60 ... 67
+  0, 0, 0, 0, 0, 0, 0, 0, // 68 ... 6f
+  0, 0, 0, 0, 0, 0, 0, 0, // 70 ... 77
+  0, 0, 0, 0, 0, 0, 0, 0, // 78 ... 7f
+
   1, 5, 3, 1, 5, 1, 1, 1, // 80 ... 87
   1, 1, 2, 1, 1, 1, 5, 1, // 88 ... 8f
   1, 2, 2, 1, 5, 1, 1, 1, // 90 ... 97
@@ -113,8 +130,25 @@ static char const CP850Weight[128] =
   0, 0, 0, 0, 0, 0, 0, 0, // f8 ... ff
 };
 
-static char const CP1252Weight[128] =
+static char const CP1252Weight[256] =
 {
+  0, 0, 0, 0, 0, 0, 0, 0, // 00 ... 07
+  0, 0, 0, 0, 0, 0, 0, 0, // 08 ... 0f
+  0, 0, 0, 0, 0, 0, 0, 0, // 10 ... 17
+  0, 0, 0, 0, 0, 0, 0, 0, // 18 ... 1f
+  0, 0, 0, 0, 0, 0, 0, 0, // 20 ... 27
+  0, 0, 0, 0, 0, 0, 0, 0, // 28 ... 2f
+  0, 0, 0, 0, 0, 0, 0, 0, // 20 ... 27
+  0, 0, 0, 0, 0, 0, 0, 0, // 28 ... 2f
+  0, 0, 0, 0, 0, 0, 0, 0, // 40 ... 47
+  0, 0, 0, 0, 0, 0, 0, 0, // 48 ... 4f
+  0, 0, 0, 0, 0, 0, 0, 0, // 50 ... 57
+  0, 0, 0, 0, 0, 0, 0, 0, // 58 ... 5f
+  0, 0, 0, 0, 0, 0, 0, 0, // 60 ... 67
+  0, 0, 0, 0, 0, 0, 0, 0, // 68 ... 6f
+  0, 0, 0, 0, 0, 0, 0, 0, // 70 ... 77
+  0, 0, 0, 0, 0, 0, 0, 0, // 78 ... 7f
+
   1, _, 0, 0, 0, 0, 0, 0, // 80 ... 87
   0, 0, 1, 0, 1, _, 0, _, // 88 ... 8f
   _, 0, 0, 0, 0, 0, 0, 0, // 90 ... 97
@@ -131,6 +165,43 @@ static char const CP1252Weight[128] =
   2, 3, 1, 1, 1, 1, 1, 1, // e8 ... ef
   0, 0, 1, 3, 1, 1, 1, 0, // f0 ... f7
   3, 1, 3, 1, 1, 1, 0, 0, // f8 ... ff
+};
+
+static char const Latin1Weight[256] =
+{
+  _, _, _, _, _, _, _, _, // 00 ... 07
+  _, _, _, _, _, _, _, _, // 08 ... 0f
+  _, _, _, _, _, _, _, _, // 10 ... 17
+  _, _, _, _, _, _, _, _, // 18 ... 1f
+  0, 0, 0, 0, 0, 0, 0, 0, // 20 ... 27
+  0, 0, 0, 0, 0, 0, 0, 0, // 28 ... 2f
+  0, 0, 0, 0, 0, 0, 0, 0, // 20 ... 27
+  0, 0, 0, 0, 0, 0, 0, 0, // 28 ... 2f
+  0, 0, 0, 0, 0, 0, 0, 0, // 40 ... 47
+  0, 0, 0, 0, 0, 0, 0, 0, // 48 ... 4f
+  0, 0, 0, 0, 0, 0, 0, 0, // 50 ... 57
+  0, 0, 0, 0, 0, 0, 0, 0, // 58 ... 5f
+  0, 0, 0, 0, 0, 0, 0, 0, // 60 ... 67
+  0, 0, 0, 0, 0, 0, 0, 0, // 68 ... 6f
+  0, 0, 0, 0, 0, 0, 0, 0, // 70 ... 77
+  0, 0, 0, 0, 0, 0, 0, _, // 78 ... 7f
+
+  _, _, _, _, _, _, _, _, // 80 ... 87
+  _, _, _, _, _, _, _, _, // 88 ... 8f
+  _, _, _, _, _, _, _, _, // 90 ... 97
+  _, _, _, _, _, _, _, _, // 98 ... 9f
+  0, 2, 0, 0, 0, 0, 0, 0, // a0 ... a7
+  0, 1, 0, 1, 0, 0, 0, 0, // a8 ... af
+  0, 2, 0, 0, 0, 0, 0, 0, // b0 ... b7
+  0, 0, 0, 1, 0, 0, 0, 2, // b8 ... bf
+  1, 1, 1, 2, 5, 1, 0, 0, // c0 ... c7
+  1, 1, 1, 1, 0, 0, 0, 0, // c8 ... cf
+  0, 2, 1, 1, 1, 5, 0, 0, // d0 ... d7
+  3, 1, 1, 1, 5, 0, 0, 5, // d8 ... df
+  1, 2, 1, 1, 5, 3, 2, 0, // e0 ... e7
+  1, 2, 1, 1, 0, 0, 0, 0, // e8 ... ef
+  0, 2, 1, 2, 1, 1, 5, 0, // f0 ... f7
+  0, 1, 2, 1, 5, 0, 0, 0, // f8 ... ff
 };
 #undef _
 
@@ -316,35 +387,35 @@ findConversion(unsigned code)
 static void
 appendTwoOctets(std::string& result, unsigned code)
 {
-	char buf[2] = { char((code >> 6) | 0xc0), char((code & 0x3f) | 0x80) };
-	result.append(buf, 2);
+  char buf[2] = { char((code >> 6) | 0xc0), char((code & 0x3f) | 0x80) };
+  result.append(buf, 2);
 }
 
 
 static void
 appendThreeOctets(std::string& result, unsigned code)
 {
-	char buf[3] =
-	{
-		char((code >> 12) | 0xe0),
-		char(((code >> 6) & 0x3f) | 0x80),
-		char((code & 0x3f) | 0x80),
-	};
-	result.append(buf, 3);
+  char buf[3] =
+  {
+    char((code >> 12) | 0xe0),
+    char(((code >> 6) & 0x3f) | 0x80),
+    char((code & 0x3f) | 0x80),
+  };
+  result.append(buf, 3);
 }
 
 
 static void
 appendFourOctets(std::string& result, unsigned code)
 {
-	char buf[4] =
-	{
-		char((code >> 18) + 0xf0),
-		char(((code >> 12) & 0x3f) | 0x80),
-		char(((code >> 6) & 0x3f) | 0x80),
-		char((code & 0x3f) | 0x80),
-	};
-	result.append(buf, 4);
+  char buf[4] =
+  {
+    char((code >> 18) + 0xf0),
+    char(((code >> 12) & 0x3f) | 0x80),
+    char(((code >> 6) & 0x3f) | 0x80),
+    char((code & 0x3f) | 0x80),
+  };
+  result.append(buf, 4);
 }
 
 
@@ -364,6 +435,8 @@ inline std::string const& CharsetConverter::Codec::encoding() const { return m_i
 
 inline bool CharsetConverter::Codec::isUTF8() const     { return m_info.m_isUTF8; }
 inline bool CharsetConverter::Codec::isLatin1() const   { return m_info.m_isLatin1; }
+inline bool CharsetConverter::Codec::isWindoze() const  { return m_info.m_isWindoze; }
+inline bool CharsetConverter::Codec::isDOS() const      { return m_info.m_isDOS; }
 
 
 CharsetConverter::Codec::Codec()
@@ -373,7 +446,7 @@ CharsetConverter::Codec::Codec()
 }
 
 
-CharsetConverter::Codec::Codec(char const* encoding)
+CharsetConverter::Codec::Codec(std::string const& encoding)
   :m_impl(nullptr)
 {
   ASSERT(encoding);
@@ -399,16 +472,14 @@ CharsetConverter::Codec::detectSystemEncoding()
 
 
 void
-CharsetConverter::Codec::setup(char const* encoding)
+CharsetConverter::Codec::setup(std::string const& encoding)
 {
-  ASSERT(encoding);
-
   m_info.setup(encoding);
 
   if (m_impl)
     Tcl_FreeEncoding(m_impl);
 
-  m_impl = Tcl_GetEncoding(nullptr, encoding);
+  m_impl = Tcl_GetEncoding(nullptr, encoding.c_str());
 }
 
 
@@ -434,7 +505,7 @@ CharsetConverter::CharsetConverter()
 }
 
 
-CharsetConverter::CharsetConverter(char const* encoding)
+CharsetConverter::CharsetConverter(std::string const& encoding)
   :m_wanted(encoding)
   ,m_error(false)
   ,m_failed(false)
@@ -444,10 +515,16 @@ CharsetConverter::CharsetConverter(char const* encoding)
 
 
 void
-CharsetConverter::setupEncoding(char const* encoding)
+CharsetConverter::setupEncoding(std::string const& encoding)
 {
-  ASSERT(encoding);
   m_wanted.setup(encoding);
+}
+
+
+void
+CharsetConverter::setupDetected()
+{
+  m_text.setup(m_detector.encoding());
 }
 
 
@@ -522,6 +599,23 @@ CharsetConverter::validateUTF8(char const* str, unsigned len)
 }
 
 
+bool
+CharsetConverter::validateLatin1(char const* str, unsigned len)
+{
+  ASSERT(str);
+
+  for (char const* e = str + len; str < e; ++str)
+  {
+    unsigned char c = *str;
+
+    if (0x7f <= c && c <= 0x9f)
+      return false;
+  }
+
+  return true;
+}
+
+
 unsigned
 CharsetConverter::makeValid(std::string& str, char const* replacement)
 {
@@ -579,23 +673,41 @@ CharsetConverter::detect(char const* s, unsigned len, char const* table)
   {
     unsigned char c = *s;
 
-    if (c >= 0x80)
-    {
-      char weight = table[c - 0x80];
+    char weight = table[c];
 
-      if (weight < 0)
-        return -1;
+    if (weight < 0)
+      return -1;
 
-      sum += weight;
-    }
+    sum += weight;
   }
 
   return sum;
 }
 
 
+int
+CharsetConverter::detectCP850(char const* str, unsigned len)
+{
+  return detect(str, len, ::CP850Weight);
+}
+
+
+int
+CharsetConverter::detectCP1252(char const* str, unsigned len)
+{
+  return detect(str, len, ::CP1252Weight);
+}
+
+
+int
+CharsetConverter::detectLatin1(char const* str, unsigned len)
+{
+  return detect(str, len, ::Latin1Weight);
+}
+
+
 void
-CharsetConverter::asciiToUTF8(std::string const& in, std::string& out)
+CharsetConverter::cp850ToUTF8(std::string const& in, std::string& out)
 {
   for (char const* str = in.c_str(); *str; ++str)
   {
@@ -921,6 +1033,18 @@ CharsetConverter::convertFromUTF8(std::string const& in, std::string& out)
 bool
 CharsetConverter::convertToUTF8(std::string const& in, std::string& out, char const* replacement)
 {
+  if (m_text.isWindoze())
+  {
+    cp1252ToUTF8(in, out);
+    return true;
+  }
+
+  if (m_text.isDOS())
+  {
+    cp850ToUTF8(in, out);
+    return true;
+  }
+
   Tcl_EncodingState state;
 
   std::string buf(in.size()*4, ' ');
@@ -1033,15 +1157,23 @@ CharsetConverter::doConversion(TextBuffer& text)
   m_detector.reset();
   m_detector.detect(text);
 
-  if (m_detector.isASCII()) // the detector couldn't detect the character set
+  if (   m_detector.isASCII() // the detector couldn't detect the character set
+      || (   m_detector.isLatin1()
+          && !validateLatin1(text.GetBuffer(), text.GetByteCount()))) // detection is wrong
   {
-    // This may happen if the character set is CP850 or CP1252 encoded with
-    // single bytes.
+    // This may happen if:
+    // 1. The character set is CP850 or CP1252 encoded with single bytes.
+    // 2. The character set detection failed, sometimes with happens with Latin-1.
 
-    int ascii  = detect(text.GetBuffer(), text.GetByteCount(), ::CP850Weight);
-    int cp1252 = detect(text.GetBuffer(), text.GetByteCount(), ::CP1252Weight);
+    int cp850  = detectCP850(text.GetBuffer(), text.GetByteCount());
+    int cp1252 = detectCP1252(text.GetBuffer(), text.GetByteCount());
+    int latin1 = detectLatin1(text.GetBuffer(), text.GetByteCount());
 
-    if (cp1252 > ascii) // most probably it's CP1252 (Windoze)
+    if (latin1 >= cp1252 && latin1 >= cp850) // detection of Latin-1 failed
+    {
+      m_detector.setup("iso8859-1");
+    }
+    else if (cp1252 > cp850) // most probably it's CP1252 (Windoze)
     {
       std::string src(text.GetBuffer(), text.GetByteCount());
       std::string dst;
@@ -1049,11 +1181,11 @@ CharsetConverter::doConversion(TextBuffer& text)
       text.ReplaceContent(dst.c_str(), dst.size());
       m_detector.setup("utf-8");
     }
-    else if (ascii >= 0) // probably it's CP850 (MSDOS)
+    else if (cp850 >= 0) // probably it's CP850 (MSDOS)
     {
       std::string src(text.GetBuffer(), text.GetByteCount());
       std::string dst;
-      asciiToUTF8(src, dst);
+      cp850ToUTF8(src, dst);
       text.ReplaceContent(dst.c_str(), dst.size());
       m_detector.setup("utf-8");
     }
@@ -1063,7 +1195,8 @@ CharsetConverter::doConversion(TextBuffer& text)
       // the required conversions.
     }
   }
-  else if (m_detector.isLatin1()) // does not happen under Windoze
+
+  if (m_detector.isLatin1()) // does not happen under Windoze
   {
     // ----------------------------------------------------------------------
     // This part is a bit experimental, and should be removed if

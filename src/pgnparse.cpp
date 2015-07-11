@@ -14,6 +14,8 @@
 
 
 #include "pgnparse.h"
+#include "charsetdetector.h"
+#include "charsetconverter.h"
 
 const uint MAX_COMMENT_SIZE = 16000;
 
@@ -21,6 +23,14 @@ const uint MAX_COMMENT_SIZE = 16000;
 //     buffer pointer.
 //
 #define ADDCHAR(buf,ch)  *(buf) = (ch); (buf)++; *(buf) = 0
+
+
+PgnParser::~PgnParser()
+{
+    delete ErrorBuffer;
+    delete CharConverter;
+    ClearIgnoredTags();
+}
 
 
 void
@@ -46,6 +56,8 @@ PgnParser::Reset()
     ResultWarnings = true;
     NewlinesToSpaces = true;
     NumIgnoredTags = 0;
+    CharConverter = NULL;
+    CharDetector = NULL;
 }
 
 void
@@ -55,6 +67,7 @@ PgnParser::Init (MFile * infile)
     InFile = infile;
     InBuffer = InCurrent = NULL;
     EndChar = EOF;
+    CreateCharsetDetector();
 }
 
 void
@@ -64,7 +77,32 @@ PgnParser::Reset (MFile * infile)
     InFile = infile;
     InBuffer = InCurrent = NULL;
     EndChar = EOF;
-    CheckUTF8BOM();
+
+    if (CheckUTF8BOM())
+    {
+        delete CharConverter;
+        CharConverter = NULL;
+        CharDetector = NULL;
+    }
+    else
+    {
+        CreateCharsetDetector();
+    }
+}
+
+void
+PgnParser::CreateCharsetDetector ()
+{
+    if (CharConverter)
+    {
+        CharConverter->reset();
+        CharDetector->reset();
+    }
+    else
+    {
+        CharConverter = new CharsetConverter;
+        CharDetector = &CharConverter->detector();
+    }
 }
 
 void
@@ -74,6 +112,7 @@ PgnParser::Init (const char * inbuffer)
     InFile = NULL;
     InBuffer = InCurrent = inbuffer;
     EndChar = 0;
+    CreateCharsetDetector();
 }
 
 void
@@ -83,25 +122,22 @@ PgnParser::Reset (const char * inbuffer)
     InFile = NULL;
     InBuffer = InCurrent = inbuffer;
     EndChar = 0;
+    CreateCharsetDetector();
 }
 
-void
+bool
 PgnParser::CheckUTF8BOM()
 {
     int ch = GetChar();
+
     if (ch == 0xEF)
     {
         if ((ch = GetChar()) == 0xBB)
         {
             if ((ch = GetChar()) == 0xBF)
-            {
-                printf ("Discarding UTF8 BOM\n");
-                // Now use UTF8 encoding instead of Latin-1
-            }
-            else
-            {
-                UnGetChar(ch);
-            }
+                return true;
+
+            UnGetChar(ch);
         }
         else
         {
@@ -112,6 +148,8 @@ PgnParser::CheckUTF8BOM()
     {
         UnGetChar(ch);
     }
+
+    return false;
 }
 
 void
@@ -335,6 +373,9 @@ PgnParser::ExtractPgnTag (const char * buffer, Game * game)
     if (! seenEndQuote) { return ERROR_PGNTag; }
     value[lastQuoteIndex] = 0;
 
+    if (CharDetector)
+        CharDetector->detect(value, length);
+
     // Now decide what to add to the game based on this tag:
     if (strEqual (tag, "White")) {
 #ifdef STANDARD_PLAYER_NAMES
@@ -342,13 +383,12 @@ PgnParser::ExtractPgnTag (const char * buffer, Game * game)
 #endif
         // Check for a rating in parentheses at the end of the player name:
         uint elo = 0;
-        uint len = strLength (value);
-        if (len > 7  &&  value[len-1] == ')'
-            &&  isdigit(value[len-2])  &&  isdigit(value[len-3])
-            &&  isdigit(value[len-4])  &&  isdigit(value[len-5])
-            &&  value[len-6] == '('  &&  value[len-7] == ' ') {
-            value[len-7] = 0;
-            elo = strGetUnsigned (&(value[len-5]));
+        if (length > 7  &&  value[length-1] == ')'
+            &&  isdigit(value[length-2])  &&  isdigit(value[length-3])
+            &&  isdigit(value[length-4])  &&  isdigit(value[length-5])
+            &&  value[length-6] == '('  &&  value[length-7] == ' ') {
+            value[length-7] = 0;
+            elo = strGetUnsigned (&(value[length-5]));
             if (elo > MAX_ELO) {
                 LogError ("Warning: rating too large: ", value);
                 elo = MAX_ELO;
@@ -364,13 +404,12 @@ PgnParser::ExtractPgnTag (const char * buffer, Game * game)
 #endif
         // Check for a rating in parentheses at the end of the player name:
         uint elo = 0;
-        uint len = strLength (value);
-        if (len > 7  &&  value[len-1] == ')'
-            &&  isdigit(value[len-2])  &&  isdigit(value[len-3])
-            &&  isdigit(value[len-4])  &&  isdigit(value[len-5])
-            &&  value[len-6] == '('  &&  value[len-7] == ' ') {
-            value[len-7] = 0;
-            elo = strGetUnsigned (&(value[len-5]));
+        if (length > 7  &&  value[length-1] == ')'
+            &&  isdigit(value[length-2])  &&  isdigit(value[length-3])
+            &&  isdigit(value[length-4])  &&  isdigit(value[length-5])
+            &&  value[length-6] == '('  &&  value[length-7] == ' ') {
+            value[length-7] = 0;
+            elo = strGetUnsigned (&(value[length-5]));
             if (elo > MAX_ELO) {
                 LogError ("Warning: rating too large: ", value);
                 elo = MAX_ELO;
@@ -497,6 +536,8 @@ PgnParser::GetComment (char * buffer, uint bufSize)
         sprintf (tempStr, "started on line %u\n", startLine);
         LogError ("Error: Open Comment at end of input", tempStr);
     }
+    if (CharDetector)
+        CharDetector->detect(buffer, outPtr - buffer);
 }
 
 void
@@ -1261,6 +1302,18 @@ PgnParser::ParseGame (Game * game)
     delete[] buffer;
     delete[] preGameTextBuffer;
 #endif
+
+    if (CharDetector)
+    {
+        CharDetector->finish();
+
+        if (CharDetector->encoding() != "utf-8")
+            DoCharsetConversion(game);
+
+        CharDetector->reset();
+        CharConverter->reset();
+    }
+
     if (ParseMode == PARSE_Header) {
         if (EndOfInputWarnings) {
             LogError ("Warning: End of input in PGN header tags section", "");
@@ -1270,6 +1323,114 @@ PgnParser::ParseGame (Game * game)
         }
     }
     return err;
+}
+
+
+std::string
+PgnParser::ConvertToUTF8(char * str)
+{
+    std::string tmp(str);
+
+    if (tmp.empty())
+        return tmp;
+
+    std::string res;
+
+    if (CharDetector->isASCII() && !CharConverter->fixLatin1(tmp, res))
+        res.clear();
+
+    if (res.empty())
+        CharConverter->convertToUTF8(tmp, res);
+
+    return res;
+}
+
+
+void
+PgnParser::DoCharsetConversion(Game * game)
+{
+    typedef char* (Game::*GetTag)();
+    typedef void (Game::*SetTag)(const char *);
+
+    struct Pair
+    {
+        GetTag getter;
+        SetTag setter;
+        Pair(GetTag g, SetTag s) :getter(g), setter(s) {}
+    };
+
+    static Pair GetSetTbl[5] =
+    {
+        Pair(&Game::GetEventStr, &Game::SetEventStr ),
+        Pair(&Game::GetSiteStr,  &Game::SetSiteStr  ),
+        Pair(&Game::GetWhiteStr, &Game::SetWhiteStr ),
+        Pair(&Game::GetBlackStr, &Game::SetBlackStr ),
+        Pair(&Game::GetRoundStr, &Game::SetRoundStr ),
+    };
+
+    CharConverter->setupDetected();
+
+    std::string str;
+    std::string tmp;
+
+    // Convert standard tags.
+
+    for (unsigned i = 0; i < sizeof(GetSetTbl)/sizeof(GetSetTbl[0]); ++i)
+    {
+        Pair const& p = GetSetTbl[i];
+
+        char * str((game->*p.getter)());
+
+        if (!CharsetConverter::isAscii(str))
+            (game->*p.setter)(ConvertToUTF8(str).c_str());
+    }
+
+    // Convert extra tags.
+
+    tagT * tag = game->GetExtraTags();
+    tagT * end = tag + game->GetNumExtraTags();
+
+    for ( ; tag < end; ++tag)
+    {
+        if (!CharsetConverter::isAscii(tag->value))
+        {
+            std::string res(ConvertToUTF8(tag->value));
+            delete [] tag->value;
+            tag->value = strDuplicate(res.c_str());
+        }
+    }
+
+    // Convert comments.
+    game->MoveToPly(0);
+    ConvertComments(game);
+}
+
+
+void
+PgnParser::ConvertComments(Game * game)
+{
+    while (game->GetCurrentMove())
+    {
+        if (game->GetMoveComment())
+        {
+            char * str(game->GetMoveComment());
+
+            if (!CharsetConverter::isAscii(str))
+                game->SetMoveComment(ConvertToUTF8(str).c_str());
+        }
+
+        if (uint n = game->GetNumVariations())
+        {
+            for (uint i = 0; i < n; ++i)
+            {
+                game->MoveIntoVariation(i);
+                ConvertComments(game);
+                game->MoveExitVariation();
+            }
+        }
+
+        game->MoveForward();
+    }
 }
 
 

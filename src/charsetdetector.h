@@ -24,7 +24,6 @@
 # define override
 #endif
 
-class NameBase;
 class TextBuffer;
 class CharsetConverter;
 
@@ -32,6 +31,8 @@ class CharsetConverter;
 class CharsetDetector : public nsUniversalDetector
 {
 public:
+
+  CharsetDetector();
 
   // Test whether the encoding is UTF-8.
   bool isUTF8() const;
@@ -53,18 +54,21 @@ public:
   // the system encoding as default.
   void reset();
 
-  // Detect the general encoding from namebase. This may fail, possibly
-  // the namebase contains a mix of characater sets, and in this case
-  // the result will be an empty string.
+  // Use given string for the character set detection. The detection
+  // will not be complete before finish() is invoked.
   // Note that this function does not call reset() automatically.
-  void detect(NameBase const& nb);
+  void detect(char const* value, unsigned len);
+
+  // Finish the detection of the character set.
+  void finish();
 
   // Detect the character set of a single string.
+  // Finish() will be invoked automatically.
   // Note that this function does not call reset() automatically.
   void detect(TextBuffer const& text);
 
   // Setup the encoding.
-  void setup(char const* encoding);
+  void setup(std::string const& encoding);
 
 private:
 
@@ -73,11 +77,12 @@ private:
   struct Info
   {
     Info();
-    Info(char const* encoding);
+    Info(std::string const& encoding);
 
-    void setup(char const* encoding);
+    void setup(std::string const& encoding);
 
     std::string m_encoding;
+
     bool m_isASCII;
     bool m_isLatin1;
     bool m_isWindoze;
@@ -88,17 +93,21 @@ private:
   // We have to override the reporting function.
   void Report(char const* charset) override;
 
-  Info m_info;
+  Info  m_info;
+  int   m_ascii;
+  int   m_latin1;
+  int   m_cp850;
+  int   m_cp1252;
 };
 
 
-inline bool CharsetDetector::isUTF8() const                 { return m_info.m_isUTF8; }
-inline bool CharsetDetector::isASCII() const                { return m_info.m_isASCII; }
-inline bool CharsetDetector::isLatin1() const               { return m_info.m_isLatin1; }
-inline bool CharsetDetector::isWindows() const              { return m_info.m_isWindoze; }
-inline bool CharsetDetector::isDOS() const                  { return m_info.m_isDOS; }
-inline std::string const& CharsetDetector::encoding() const { return m_info.m_encoding; }
-inline void CharsetDetector::setup(char const* encoding)    { m_info.setup(encoding); }
+inline bool CharsetDetector::isUTF8() const                     { return m_info.m_isUTF8; }
+inline bool CharsetDetector::isASCII() const                    { return m_info.m_isASCII; }
+inline bool CharsetDetector::isLatin1() const                   { return m_info.m_isLatin1; }
+inline bool CharsetDetector::isWindows() const                  { return m_info.m_isWindoze; }
+inline bool CharsetDetector::isDOS() const                      { return m_info.m_isDOS; }
+inline std::string const& CharsetDetector::encoding() const     { return m_info.m_encoding; }
+inline void CharsetDetector::setup(std::string const& encoding) { m_info.setup(encoding); }
 
 
 #if __cplusplus <= 201103

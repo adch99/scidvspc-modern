@@ -15,10 +15,6 @@
 #ifndef SCID_CHARSETCONVERTER_H
 #define SCID_CHARSETCONVERTER_H
 
-#ifdef TCL_ONLY
-# error "cannt be used in tcscid"
-#endif
-
 #include "charsetdetector.h"
 #include <string>
 
@@ -33,7 +29,10 @@ public:
   CharsetConverter();
 
   // Construct a character set convert with given encoding.
-  CharsetConverter(char const* encoding);
+  CharsetConverter(std::string const& encoding);
+
+  /// Return character set detector.
+  CharsetDetector& detector();
 
   // Test the conversion status. This occurs in case of characters which are not
   // known in the destination character set; this means that some characters
@@ -56,13 +55,13 @@ public:
   // Return the system encoding.
   std::string const& systemEncoding() const;
 
-  // Return the wanted encoding.
+  // Return the destination encoding.
   std::string const& wantedEncoding() const;
 
   // Return the detected encoding.
   std::string const& detectedEncoding() const;
 
-  // Convert a string from UTF-8 encoding to the wanted encoding.
+  // Convert a string from UTF-8 encoding to the destination encoding.
   // This function returns whether the conversion was successful, it may fail if
   // the encoding cannot map all characters, nethertheless the character set of
   // the result is valid. In case of invalid input characters the error status
@@ -76,15 +75,18 @@ public:
   // will be set.
   bool convertToUTF8(std::string const& in, std::string& out, char const* replacement = "\xef\xbf\xbd");
 
-  // Convert buffer content from detected encoding to wanted encoding.
+  // Convert buffer content from detected encoding to destination encoding.
   // This function returns whether the conversion was successful, it may fail if
   // the encoding cannot map all characters, nethertheless the character set of
   // the result is valid. In case of invalid input characters the error status
   // will be set.
   bool doConversion(TextBuffer& text);
 
-  /// Setup a wanted character set. This will not reset the error status.
-  void setupEncoding(char const* encoding);
+  /// Setup destination character set. This will not reset the error status.
+  void setupEncoding(std::string const& encoding);
+
+  /// Setup detected encoding.
+  void setupDetected();
 
   /// Reset error status.
   void reset();
@@ -113,11 +115,32 @@ public:
   static bool validateUTF8(std::string const& str);
   static bool validateUTF8(std::string const& str, unsigned len);
 
-  // String content is ASCII?
-  static bool isAscii(char const* str);
+  // String content can be Latin-1?
+  bool validateLatin1(char const* str, unsigned len);
 
   // UTF-8 string content is convertible to Latin-1?
   static bool isConvertibleToLatin1(char const* str);
+
+  // Convert CP850 to UTF-8.
+  static void cp850ToUTF8(std::string const& in, std::string& out);
+
+  // Convert CP1252 to UTF-8.
+  static void cp1252ToUTF8(std::string const& in, std::string& out);
+
+  // String content is ASCII?
+  static bool isAscii(char const* str);
+
+  // String content is CP850? Returns a probablity weight, -1 is NO.
+  static int detectCP850(char const* str, unsigned len);
+
+  // String content is CP1252? Returns a probablity weight, -1 is NO.
+  static int detectCP1252(char const* str, unsigned len);
+
+  // String content is Latin-1? Returns a probablity weight, -1 is NO.
+  static int detectLatin1(char const* str, unsigned len);
+
+  // Try to fix a corruped Latin-1 string.
+  static bool fixLatin1(std::string const& in, std::string& out);
 
 private:
 
@@ -126,7 +149,7 @@ private:
   struct Codec
   {
     Codec();
-    Codec(char const* encoding);
+    Codec(std::string const& encoding);
     ~Codec();
 
     Codec(Codec const&);
@@ -136,19 +159,16 @@ private:
 
     bool isUTF8() const;
     bool isLatin1() const;
+    bool isWindoze() const;
+    bool isDOS() const;
 
-    void setup(char const* encoding);
+    void setup(std::string const& encoding);
     void setup(Info const& info);
     void detectSystemEncoding();
 
     Info m_info;
     struct Tcl_Encoding_* m_impl;
   };
-
-  static bool fixLatin1(std::string const& in, std::string& out);
-
-  static void asciiToUTF8(std::string const& in, std::string& out);
-  static void cp1252ToUTF8(std::string const& in, std::string& out);
 
   static int detect(char const* s, unsigned len, char const* table);
 
@@ -162,6 +182,8 @@ private:
   CharsetDetector m_detector;
 };
 
+
+inline CharsetDetector& CharsetConverter::detector() { return m_detector; }
 
 inline bool CharsetConverter::error() const     { return m_error; }
 inline bool CharsetConverter::failed() const    { return m_failed; }

@@ -27,6 +27,11 @@
 #include "game.h"
 #include "dstring.h"
 
+#include <string>
+
+class CharsetConverter;
+class CharsetDetector;
+
 #define MAX_UNGETCHARS 16
 static const uint MAX_IGNORED_TAGS = 16;
 
@@ -47,6 +52,9 @@ class PgnParser
     DString * ErrorBuffer;
     uint   NumErrors;
 
+    CharsetConverter * CharConverter;
+    CharsetDetector  * CharDetector;
+
     enum { PARSE_Searching, PARSE_Header, PARSE_Game } ParseMode;
 
     bool   StorePreGameText;
@@ -64,8 +72,9 @@ class PgnParser
     inline void   UnGetChar (int ch);
 
     void   Init();
+    void   CreateCharsetDetector();
     void   Reset();
-    void   CheckUTF8BOM();
+    bool   CheckUTF8BOM();
     void   LogError (const char * errMessage, const char * text);
     void   GetLine (char * buffer, uint bufSize);
     void   GetComment (char * buffer, uint bufSize);
@@ -80,6 +89,10 @@ class PgnParser
     tokenT GetRestOfMove (char * buffer);
     tokenT GetRestOfPawnMove (char * buffer);
     tokenT GetGameToken (char * buffer, uint bufSize);
+
+    void DoCharsetConversion(Game * game);
+    void ConvertComments(Game * game);
+    std::string ConvertToUTF8(char * str);
 
   public:
 #ifdef WINCE
@@ -105,7 +118,8 @@ class PgnParser
     PgnParser (void) { Init ((const char *) ""); }
     PgnParser (MFile * infile) { Init (infile); }
     PgnParser (const char * inbuffer) { Init (inbuffer); }
-    ~PgnParser() { delete ErrorBuffer; ClearIgnoredTags(); }
+    ~PgnParser();
+
     void   Init (MFile * infile);
     void   Init (const char * inbuffer);
 
