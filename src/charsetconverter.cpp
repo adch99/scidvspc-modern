@@ -1163,15 +1163,15 @@ CharsetConverter::doConversion(TextBuffer& text)
   {
     // This may happen if:
     // 1. The character set is CP850 or CP1252 encoded with single bytes.
-    // 2. The character set detection failed, sometimes with happens with Latin-1.
+    // 2. The character set detection failed, sometimes this happens with Latin-1.
 
     int cp850  = detectCP850(text.GetBuffer(), text.GetByteCount());
     int cp1252 = detectCP1252(text.GetBuffer(), text.GetByteCount());
     int latin1 = detectLatin1(text.GetBuffer(), text.GetByteCount());
 
-    if (latin1 >= cp1252 && latin1 >= cp850) // detection of Latin-1 failed
+    if (latin1 >= 0 && latin1 >= cp1252 && latin1 >= cp850) // detection of Latin-1 failed
     {
-      m_detector.setup("iso8859-1");
+      m_detector.setup("iso8859-1"); // but this seems to be Latin-1
     }
     else if (cp1252 > cp850) // most probably it's CP1252 (Windoze)
     {

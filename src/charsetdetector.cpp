@@ -143,12 +143,12 @@ CharsetDetector::finish()
 
   if ((isASCII() && m_ascii == -1) || (isLatin1() && m_latin1 == -1))
   {
-    if (m_latin1 >= m_cp850 && m_latin1 >= m_cp1252)
+    if (m_latin1 >= 0 && m_latin1 >= m_cp850 && m_latin1 >= m_cp1252)
       setup("iso8859-1");
-    else if (m_cp850 >= m_cp1252)
-      setup("cp850");
-    else if (m_cp1252 >= 0)
+    else if (m_cp1252 > m_cp850)
       setup("cp1252");
+    else if (m_cp850 >= 0)
+      setup("cp850");
   }
 }
 
