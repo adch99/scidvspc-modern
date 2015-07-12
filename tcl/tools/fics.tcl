@@ -1067,7 +1067,7 @@ namespace eval fics {
       if {[regexp {.*\) ([^\)]*$)} $line t1 t2]} {
         sc_game tags set -event "FICS [lrange $line end-3 end-2]"
         set ::fics::timecontrol [lindex $line end-1]/[lindex $line end]
-        sc_game tags set -extra "{TimeControl \"$::fics::timecontrol\"}"
+        sc_game tags set -extra [list "Time \"[::utils::date::time]\"" "TimeControl  \"$::fics::timecontrol\""]
       } else {
         set ::fics::timecontrol {}
       }
@@ -1317,7 +1317,7 @@ namespace eval fics {
 
 	    sc_game tags set -event "FICS [string tolower [lrange $line 0 1]]"
             set ::fics::timecontrol [lindex $line end-4]/[lindex $line end-1]
-	    sc_game tags set -extra "{TimeControl \"$::fics::timecontrol\"}"
+	    sc_game tags set -extra [list "Time \"[::utils::date::time]\"" "TimeControl  \"$::fics::timecontrol\""]
 	    # This is the download date - not the correct played date, which can be assembled from
 	    # Kaitlin (1463) vs. PLAYERFOREVER (1808) --- Wed Jun 27, 02:54 PDT 2012
 	    sc_game tags set -date [::utils::date::today]
@@ -2100,7 +2100,7 @@ namespace eval fics {
       }
       sc_game tags set -date [::utils::date::today]
       set ::fics::timecontrol $initialTime/$increment
-      sc_game tags set -extra "{TimeControl \"$::fics::timecontrol\"}"
+      sc_game tags set -extra [list "Time \"[::utils::date::time]\"" "TimeControl  \"$::fics::timecontrol\""]
 
       ### Try to get first moves of game
 

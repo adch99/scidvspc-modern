@@ -20,6 +20,10 @@ proc ::utils::date::today {{type all}} {
   }
 }
 
+proc ::utils::date::time {} {
+  return [clock format [clock seconds] -format {%H:%M:%S}]
+}
+
 image create photo ::utils::date::calendar -data {
 R0lGODdhFgAUAMIAANnZ2VFR+wAAAP////oTQP//AAAAAAAAACwAAAAAFgAUAAADTwi63A4h
 yklrVAFruDO0lCCO5NMIw4CqqWAya9ySdG3LbI7He+vrsxthSLiJfitCoUBAzpwDJRNqFBCL
