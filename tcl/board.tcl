@@ -1787,6 +1787,7 @@ proc ::board::mark::add {win args} {
 
   set board $win.bd
   set type  [lindex $args 0]
+  set origtype $type
 
   # Remove existing marks:
   if {$type == "arrow" || [string match {var*} $type]} {
@@ -1800,7 +1801,12 @@ proc ::board::mark::add {win args} {
 
   switch -glob -- $type {
     full    { ::board::colorSquare $win $square $color }
-    DEL     { set new 1 }
+    DEL     { if {$origtype == "DEL"} {
+		# tough bug-fix for erasing the FULL marker in the little board - S.A.
+		after idle "::board::colorSquare $win $square"
+	      }
+	      set new 1
+            }
     var*    {
 	      scan $type var%s varnum
 	      if {[catch {DrawVar $board $square $dest $color $varnum}]} {
