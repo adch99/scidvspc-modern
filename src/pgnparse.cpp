@@ -1303,7 +1303,7 @@ PgnParser::ParseGame (Game * game)
     delete[] preGameTextBuffer;
 #endif
 
-    if (CharDetector)
+    if (err != ERROR_NotFound && CharDetector)
     {
         CharDetector->finish();
 
@@ -1409,16 +1409,16 @@ PgnParser::DoCharsetConversion(Game * game)
 void
 PgnParser::ConvertComments(Game * game)
 {
+    if (game->GetMoveComment())
+    {
+        char * str(game->GetMoveComment());
+
+        if (!CharsetConverter::isAscii(str))
+            game->SetMoveComment(ConvertToUTF8(str).c_str());
+    }
+
     while (game->GetCurrentMove())
     {
-        if (game->GetMoveComment())
-        {
-            char * str(game->GetMoveComment());
-
-            if (!CharsetConverter::isAscii(str))
-                game->SetMoveComment(ConvertToUTF8(str).c_str());
-        }
-
         if (uint n = game->GetNumVariations())
         {
             for (uint i = 0; i < n; ++i)
@@ -1430,6 +1430,14 @@ PgnParser::ConvertComments(Game * game)
         }
 
         game->MoveForward();
+
+        if (game->GetMoveComment())
+        {
+            char * str(game->GetMoveComment());
+
+            if (!CharsetConverter::isAscii(str))
+                game->SetMoveComment(ConvertToUTF8(str).c_str());
+        }
     }
 }
 
