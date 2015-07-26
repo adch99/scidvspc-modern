@@ -1582,8 +1582,10 @@ proc autoplay {} {
         if {[sc_filter next] == 0} {
           cancelAutoplay
         } else {
-          ::game::LoadNextPrev next 0
-          after $autoplayDelay autoplay
+          after [expr {$autoplayDelay * 2}] {
+	    ::game::LoadNextPrev next 0
+	    after $autoplayDelay autoplay
+          }
         }
       }
     } else {
