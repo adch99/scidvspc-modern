@@ -324,8 +324,12 @@ proc ::tree::closeTree {baseNumber} {
   ### Implicit
   # destroy .treeWin$baseNumber
 
-  ::windows::gamelist::Refresh
-  ::windows::stats::Refresh
+  # Hack to stop another unusual coredump.
+  # (Save game in clipbase with tree1 open but base1 not in use. Close tree)
+  after idle {
+    ::windows::gamelist::Refresh
+    ::windows::stats::Refresh
+  }
 }
 
 ################################################################################
