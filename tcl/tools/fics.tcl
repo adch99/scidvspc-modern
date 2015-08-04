@@ -1526,6 +1526,9 @@ namespace eval fics {
       pack $w.bottom.game$game.w.white -side left 
       pack [frame $w.bottom.game$game.w.space -width 20] \
            $w.bottom.game$game.w.result -side right
+      if {!$::fics::show_buttons} {
+	::fics::togglebuttons
+      }
   }
 
   proc unobserveGame {game} {
