@@ -298,7 +298,7 @@ proc FontDialogSmall {parent} {
   set fontsize [font configure font_Small -size]
   font configure font_SmallBold -family $font -size $fontsize
   font configure font_SmallItalic -family $font -size $fontsize
-  font configure font_Tiny -family $font -size [expr $fontsize - 2]
+  font configure font_Tiny -family $font -size [expr $fontsize - 1]
 }
 
 proc FontDialogFamily { listname font_name entrywidget } {
@@ -403,7 +403,7 @@ proc FontBiggerSmaller {incr} {
   font configure font_Small -size $small_size
   font configure font_SmallBold -size $small_size
   font configure font_SmallItalic -size $small_size
-  font configure font_Tiny -size [expr $small_size - 2]
+  font configure font_Tiny -size [expr $small_size - 1]
   font configure font_H1 -size [expr $fd_size + 8]
   font configure font_H2 -size [expr $fd_size + 6]
   font configure font_H3 -size [expr $fd_size + 4]
@@ -416,7 +416,7 @@ proc FontBiggerSmaller {incr} {
 
   set fontOptions(Regular) [lreplace $fontOptions(Regular) 1 1 $fd_size]
   set fontOptions(Small) [lreplace $fontOptions(Small) 1 1 $small_size]
-  set fontOptions(Tiny) [lreplace $fontOptions(Tiny) 1 1 [expr $small_size - 2]]
+  set fontOptions(Tiny) [lreplace $fontOptions(Tiny) 1 1 [expr $small_size - 1]]
 }
 
 proc FixedBiggerSmaller {incr} {

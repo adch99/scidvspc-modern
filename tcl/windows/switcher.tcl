@@ -916,7 +916,7 @@ proc ::windows::switcher::Open {} {
 
     set f $w.c.f$i
     label $f.img -image dbt0 ;# -relief solid  -borderwidth 0
-    label $f.name -width 20 -anchor w -font font_Tiny
+    label $f.name -width 20 -anchor w -font font_Small
     grid $f.img -row 0 -column 0 ; # grid item refreshed below
     grid $f.name -row 0 -column 1 -sticky we
 
@@ -963,7 +963,7 @@ proc ::windows::switcher::Refresh {} {
   # scroll region.
 
   # todo: Should only do this when toggling "Show Icons"
-  set fontsize [font configure font_Tiny -size]
+  set fontsize [font configure font_Small -size]
   if {$icons} {
       set fontsize [expr {$fontsize * 3 + 7}]
   } else {
