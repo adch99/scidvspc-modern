@@ -339,19 +339,19 @@ if {$windowsOS} {
   set fontOptions(Regular) { Arial           10 normal roman}
   set fontOptions(Menu)    { {MS Sans Serif}  9 normal roman}
   set fontOptions(Small)   { Arial            9 normal roman}
-  set fontOptions(Tiny)    { Arial            8 normal roman}
+  set fontOptions(Tiny)    { Arial            7 normal roman}
   set fontOptions(Fixed)   { Courier          9 normal roman}
 } elseif {$macOS} {
   set fontOptions(Regular) { {Lucida Grande} 12 normal roman}
   set fontOptions(Menu)    { {Lucida Grande} 14 normal roman}
   set fontOptions(Small)   { {Lucida Grande} 11 normal roman}
-  set fontOptions(Tiny)    { {Lucida Grande} 10 normal roman}
+  set fontOptions(Tiny)    { {Lucida Grande}  9 normal roman}
   set fontOptions(Fixed)   { Monaco 10 normal roman}
 } else {
   set fontOptions(Regular) { helvetica 11 normal roman}
   set fontOptions(Menu)    { helvetica 10 normal roman}
   set fontOptions(Small)   { helvetica 10 normal roman}
-  set fontOptions(Tiny)    { helvetica  9 normal roman}
+  set fontOptions(Tiny)    { helvetica  8 normal roman}
 
   # try a couple of fonts, and default to "fixed" if no luck
   if {[lsearch [font families] {Liberation Mono}] > 0} {

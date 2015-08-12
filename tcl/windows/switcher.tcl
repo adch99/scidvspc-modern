@@ -963,13 +963,27 @@ proc ::windows::switcher::Refresh {} {
   # scroll region.
 
   # todo: Should only do this when toggling "Show Icons"
+  set fontsize [font configure font_Tiny -size]
+  if {$icons} {
+      set fontsize [expr {$fontsize * 3 + 7}]
+  } else {
+      set fontsize [expr {$fontsize * 2 + 7}]
+  }
   foreach i {9 1 2 3 4 5 6 7 8} {
     if {$icons} {
       grid $w.c.f$i.img -row 0 -column 0 -rowspan 2
-      $w.c configure -height 36
+      if {$fontsize < 36} {
+	$w.c configure -height 36
+      } else {
+	$w.c configure -height $fontsize
+      }
     } else {
       grid forget $w.c.f$i.img
-      $w.c configure -height 24
+      if {$fontsize < 24} {
+	$w.c configure -height 24
+      } else {
+	$w.c configure -height $fontsize
+      }
     }
   }
 
