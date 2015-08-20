@@ -60,7 +60,6 @@ proc ::tourney::Open {{player {}}} {
   bind $w <Next> "$w.t.text yview scroll 1 pages"
   bind $w <Key-Home> "$w.t.text yview moveto 0"
   bind $w <Key-End> "$w.t.text yview moveto 0.99"
-  bindMouseWheel $w $w.t.text
 
   foreach i {t o1 o2 o3 b} {frame $w.$i}
   text $w.t.text -width 75 -height 22 -font font_Small -wrap none \
@@ -71,6 +70,9 @@ proc ::tourney::Open {{player {}}} {
     -takefocus 0
   set xwidth [font measure [$w.t.text cget -font] "0"]
   set tablist {}
+
+  bindMouseWheel $w $w.t.text
+  bindWheeltoFont $w.t.text
 
   ### tabulation formatting
 

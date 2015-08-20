@@ -68,6 +68,7 @@ proc ::plist::Open {} {
 
   set font font_Small
   set fbold font_SmallBold
+  bindWheeltoFont $w.t.text
 
   set f $w.o1
 
