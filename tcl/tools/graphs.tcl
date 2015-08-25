@@ -463,8 +463,8 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
       recordWinSize .sgraph
     }
     bind $w.c <ButtonPress-3> ::tools::graphs::score::Refresh
-    bind $w.c <ButtonPress-1> {::tools::graphs::score::Move %x}
-    bind $w.c <ButtonPress-2> {::tools::graphs::score::ShowBoard %x %X %Y}
+    bind $w.c <ButtonPress-1> {::tools::graphs::score::Move %x %y}
+    bind $w.c <ButtonPress-2> {::tools::graphs::score::ShowBoard %x %y %X %Y}
     bind $w.c <ButtonRelease-2> ::pgn::HideBoard
     bind $w <Escape> "destroy $w"
     bind $w <Control-Z> "destroy $w"
@@ -528,7 +528,8 @@ proc ::tools::graphs::score::ConfigMenus {{lang ""}} {
   }
 }
 
-proc ::tools::graphs::score::Move {x} {
+proc ::tools::graphs::score::Move {x y} {
+  if {$y < 50} {return} ; # clicked on header
   set movenum [expr {round([::utils::graph::xunmap score $x] * 2)-1} ]
   sc_move start
   sc_move forward $movenum
@@ -537,7 +538,8 @@ proc ::tools::graphs::score::Move {x} {
 
 # Derived from pgn::ShowBoard
 
-proc ::tools::graphs::score::ShowBoard {x xc yc} {
+proc ::tools::graphs::score::ShowBoard {x y xc yc} {
+    if {$y < 50} {return} ; # clicked on header
     set win .sgraph
 
     # get movenumber 
