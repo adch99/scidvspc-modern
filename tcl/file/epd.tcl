@@ -10,7 +10,7 @@ array set epdTimer {}
 
 proc storeEpdText {id} {
   sc_epd set $id [.epd$id.text get 1.0 "end-1c"]
-  updateEpdWin $id
+  # updateEpdWin $id
 }
 
 ### Previously use extensively by preMoveCommand, but never called
@@ -27,13 +27,10 @@ proc updateEpdWin {id} {
   $w.text insert end [sc_epd get $id]
 
   # Update the EPD window status bar:
-  set str "  --  "
+  set str "[file tail [sc_epd name $id]]  [sc_epd size $id] positions"
   if {[sc_epd readonly $id]} {
-    set str "  %%  "
-  } elseif {[sc_epd altered $id]} {
-    set str "  XX  "
+    append str " ($::tr(readonly)) "
   }
-  append str "[file tail [sc_epd name $id]]  [sc_epd size $id] positions"
   set moves [lsort -ascii [sc_epd moves $id]]
   set len [llength $moves]
   if {$len} {
@@ -57,14 +54,12 @@ proc closeEpdWin {id} {
 }
 
 proc confirmCloseEpd {id} {
+  # We no longer get confirmation.
+  # Easiest to autosave after every change of <<ListboxSelect>>
   if {! [winfo exists .epd$id]} { return }
   storeEpdText $id
   if {[sc_epd altered $id]  &&  ! [sc_epd readonly $id]} {
-    set result [tk_dialog .dialog "Save changes?" \
-        "This file has been altered" \
-        "" 0 "Save Changes" Exit $::tr(Cancel)]
-    if {$result == 2} { return }
-    if {$result == 0} { sc_epd write $id }
+    sc_epd write $id
   }
   sc_epd close $id
   focus .main
@@ -157,9 +152,9 @@ proc newEpdWin {cmd {fname ""}} {
   text $w.text  -font font_Regular -width 60 -height 7 \
       -wrap none -setgrid 1 -yscrollcommand "$w.ybar set" \
       -xscrollcommand "$w.xbar set" -undo 1
-  ### todo
-  # Is this what we want (after removing preMoveCommand and storeEpdTexts)
-  # bind $w.text <KeyRelease> "storeEpdText $id"
+  # (Previously handled by preMoveCommand and storeEpdTexts)
+  # we need to storeEpdText to set whether [sc_epd altered]
+  bind $w.text <KeyRelease> "storeEpdText $id"
 
   bind $w.text <Control-a> "$w.text tag add sel 0.0 end-1c ; break"
   bind $w.text <Control-z> "catch \"$w.text edit undo\" ; break"
@@ -194,13 +189,6 @@ proc newEpdWin {cmd {fname ""}} {
   $m add command -label "Open" -acc "Ctrl+O" -underline 0 \
       -command {newEpdWin open}
   bind $w <Control-o> {newEpdWin open}
-  $m add command -label "Save" -acc "Ctrl+S" -underline 0 \
-      -command "saveEpdWin $id"
-  if {[sc_epd readonly $id]} {
-    $m entryconfig "Save" -state disabled
-  } else {
-    bind $w <Control-s> "saveEpdWin $id; break"
-  }
   $m add command -label "Close" -acc "Ctrl+Q" -underline 0 \
       -command "confirmCloseEpd $id"
   bind $w <Control-q> "confirmCloseEpd $id"
@@ -208,32 +196,34 @@ proc newEpdWin {cmd {fname ""}} {
 
   set m $w.menu.edit.m
   $m add command -label "Cut" -acc "Ctrl+X" -underline 2 -command "tk_textCut $w.text"
-  bind $w <Control-x> "tk_textCut $w.text; break"
   $m add command -label "Copy" -acc "Ctrl+C" -underline 0 -command "tk_textCopy $w.text"
-  bind $w <Control-c> "tk_textCopy $w.text; break"
   $m add command -label "Paste" -acc "Ctrl+V" -underline 0 -command "tk_textPaste $w.text"
-  bind $w <Control-v> "tk_textPaste $w.text; break"
+
+  ### Now already the default bindings
+  # bind $w <Control-x> "tk_textCut $w.text; break"
+  # bind $w <Control-c> "tk_textCopy $w.text; break"
+  # bind $w <Control-v> "tk_textPaste $w.text; break"
+  # bind $w <Control-a> "$w.text tag add sel 1.0 end; break"
+
   $m add command -label "Select All" -acc "Ctrl+A" -underline 7 \
       -command "$w.text tag add sel 1.0 end"
-  bind $w <Control-a> "$w.text tag add sel 1.0 end; break"
   $m add separator
+  # todo - Make some sort of undo. This is borked
   $m add command -label "Revert" -acc "Ctrl+R" -underline 0 \
       -command "updateEpdWin $id"
   bind $w <Control-r> "updateEpdWin $id; break"
   $m add command -label "Sort lines" -accel "Ctrl+Shift+S" \
-      -underline 0 -command "epd_sortLines $w.text"
-  bind $w <Control-S> "epd_sortLines $w.text; break"
-
+      -underline 0 -command "epd_sortLines $w.text $id"
   bind $w <Control-Down> "nextEpd $id ; break"
   bind $w <Control-Up> "prevEpd $id; break"
 
   set m $w.menu.tools.m
 
   $m add command -label "Paste Analysis" -accelerator "Ctrl+Shift+A" \
-      -underline 6 -command "epd_pasteAnalysis $w.text"
-  bind $w <Control-A> "epd_pasteAnalysis $w.text; break"
+      -underline 6 -command "epd_pasteAnalysis $w.text ; storeEpdText $id"
+  bind $w <Control-A> "epd_pasteAnalysis $w.text ; storeEpdText $id ; break"
   $m add command -label "Annotate Positions" -command "epd_Analyse $w.text $id"
-  $m add command -label "Strip EPD field" -underline 0 -command "epd_chooseStripField $id"
+  $m add command -label "Strip field" -underline 0 -command "epd_chooseStripField $id"
   $m add command -label "Find Deepest Game Position" -underline 5 -command "epd_MoveToDeepestMatch $id"
 
   $w.menu.help.m add command -label "EPD Help" -underline 0 -acc "F1" -command "helpWindow EPD"
@@ -272,6 +262,10 @@ proc newEpdWin {cmd {fname ""}} {
 }
 
 proc refreshEpd { id } {
+  if {[sc_epd altered $id]  &&  ! [sc_epd readonly $id]} {
+    sc_epd write $id 
+  }
+
   set w .epd$id
   set idx [ expr [$w.lb curselection] +1 ]
   # This fails if it's a new epd file without entries, so catch it
@@ -337,19 +331,21 @@ proc loadEpdLines { id } {
   }
 }
 
-proc epd_sortLines {textwidget} {
+proc epd_sortLines {textwidget id} {
   if {! [winfo exists $textwidget]} { return }
   set text [$textwidget get 1.0 "end-1c"]
   set fieldlist [split $text "\n"]
   set sortedlist [lsort $fieldlist]
-  while {[lindex $sortedlist 0] == ""} {
-    set sortedlist [lrange $sortedlist 1 end]
+  set newtext {}
+  foreach i $sortedlist {
+    if {$i != ""} {
+      append newtext "$i\n"
+    }
   }
-  set newtext [join $sortedlist "\n"]
-  append newtext "\n"
   if {! [string compare $text $newtext]} { return }
   $textwidget delete 1.0 end
   $textwidget insert end "$newtext"
+  storeEpdText $id
 }
 
 ###  Pastes current chess engine analysis into this EPD file position.
@@ -370,10 +366,11 @@ proc epd_Analyse { textwidget id } {
   pack $y.label -side top -pady 5 -padx 5
   spinbox $y.spDelay  -width 8 -textvariable ::delayEpd -from 1 -to 300 -increment 1 -validate all -vcmd {string is int %P}
   pack $y.spDelay -side top -pady 5
-  dialogbutton $y.ok -text "OK" -command "
+  dialogbutton $y.ok -text OK -command "
     destroy $y
     epd_LaunchAnalysis $id $textwidget"
-  pack $y.ok -side right -padx 5 -pady 5
+  dialogbutton $y.cancel -text $::tr(Cancel) -command "destroy $y"
+  pack $y.ok $y.cancel -side left -padx 3 -pady 5
   focus $y.spDelay
   update ; # or grab will fail
   grab $y
@@ -411,8 +408,8 @@ proc epd_LaunchAnalysis {id textwidget} {
     vwait ::epdTimer($id)
     epd_pasteAnalysis $textwidget
     saveEpdWin $id
-    if {! [winfo exists .analysisWin0]} {
-      break
+    if {! [winfo exists .analysisWin0] || !$::analysis(analyzeMode0)} {
+      return
     }
   }
   toggleEngineAnalysis 0
@@ -462,7 +459,7 @@ proc epd_chooseStripField {id} {
   pack $b -side bottom -pady 5
   button $b.ok -text "Strip EPD field" \
       -command "epd_stripEpdField $id \$epd_stripField"
-  button $b.cancel -text "Cancel" -command "focus .epd$id; destroy $w"
+  button $b.cancel -text $::tr(Cancel) -command "focus .epd$id; destroy $w"
   pack $b.ok $b.cancel -side left -padx 5
   bind $w <Return> "$b.ok invoke"
   bind $w <Escape> "$b.cancel invoke"

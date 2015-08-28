@@ -3104,6 +3104,10 @@ set helpText(EPD) {<h1>EPD Files</h1>
   <p>
   At most four EPD files can be open at any time.
   </p>
+  <p><i>
+  Scid vs PC will automatically save changes to all EPD positions on the fly. 
+  To avoid dataloss, please backup EPD files before using them.
+  </i></p>
 
   <h3>Navigating EPD files</h3>
   <p>
@@ -3163,7 +3167,7 @@ set helpText(EPD) {<h1>EPD Files</h1>
   <li> <b>pv</b> Predicted variation: the line of best play.</li>
   </ul>
 
-  <p><footer>Updated: Scid vs. PC 4.6, August 2011</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.15, August 2015</footer></p>
 }
 
 set helpTitle(Email) "Email window"
