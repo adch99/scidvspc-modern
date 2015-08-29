@@ -43,6 +43,7 @@ namespace eval fics {
   set ignore_adjourn 0
   set ignore_draw 0
   set ignore_takeback 0
+  set takebackMoves 0
 
   set ping {}
   set timecontrol {}
@@ -450,11 +451,13 @@ namespace eval fics {
     incr row
     button $w.bottom.buttons.takeback  -textvar tr(FICSTakeback) -command {
       ::fics::writechan takeback
+      set ::fics::takebackMoves 1
       # these two comments gets zero-ed. See "Game out of sync"
       catch { ::commenteditor::appendComment "$::fics::reallogin requests takeback $::fics::playerslastmove" }
     }
     button $w.bottom.buttons.takeback2 -textvar tr(FICSTakeback2) -command {
       ::fics::writechan {takeback 2}
+      set ::fics::takebackMoves 2
       catch { ::commenteditor::appendComment "$::fics::reallogin requests takeback $::fics::playerslastmove" }
     }
     button $w.bottom.buttons.censor -textvar tr(FICSCensor) -command {
@@ -1640,6 +1643,21 @@ namespace eval fics {
 	{Width set *}	{}
 	{Height set *}	{}
 	{Game * relay has set *} {}
+        {* accepts the takeback request.} - {You accept the takeback request *} {
+			if {$::fics::takebackMoves > 0} {
+			  if {$::fics::takebackMoves % 2 == 1} {
+			    set ::fics::playing [expr {- $::fics::playing}]
+			  }
+			  ::move::Back $::fics::takebackMoves
+			  ::game::Truncate
+			}
+			set ::fics::takebackMoves 0  
+        }
+	{* would like to take back * half move*} {
+      			if {[scan $line {%s would like to take back %d half %s} dummy1 tmp dummy2] == 3} {
+			  set ::fics::takebackMoves $tmp
+			}
+	}
 	default		{ $t insert end "$line\n" }
       }
 
