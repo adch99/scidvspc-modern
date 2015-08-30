@@ -126,46 +126,46 @@ proc mergeGame {{base 0} {gnum 0}} {
   set merge(gnum) $gnum
   set w .mergeDialog
   toplevel $w
+  wm withdraw $w
   wm title $w "$::tr(MergeGame)"
   bind $w <Escape> "$w.b.cancel invoke"
   bind $w <F1> {helpWindow GameList Browsing}
-  label $w.title -text $::tr(Preview:) -font font_Bold
+  label $w.title -text "$::tr(MergeGame) $::tr(Preview)" -font font_Regular
   pack $w.title -side top
-  pack [frame $w.b] -side bottom -fill x
+  pack [frame $w.b] -side bottom -fill x -pady 3
   frame $w.f
   text $w.f.text  -wrap word -width 60 -height 20 \
-      -font font_Small -yscrollcommand "$w.f.ybar set"
+      -font font_Regular -yscrollcommand "$w.f.ybar set"
   scrollbar $w.f.ybar -takefocus 0 -command "$w.f.text yview"
   event generate $w.f.text <ButtonRelease-1>
   pack $w.f.ybar -side right -fill y
   pack $w.f.text -side left -fill both -expand yes
   pack $w.f -fill both -expand yes
-  set small font_Small
 
-  label $w.b.label -text "Up to move:" -font $small
+  label $w.b.label -text "Up to move  " -font font_Regular
   pack $w.b.label -side left -padx 2
   foreach i {5 10 15 20 25 30 35 40} {
     radiobutton $w.b.m$i -text [format "%2i" $i] -variable merge(ply) -value [expr {$i * 2}] \
-        -indicatoron 0 -padx 2 -pady 1 -font $small -command updateMergeGame
-    pack $w.b.m$i -side left
+        -indicatoron 0 -padx 4 -pady 2 -font font_Regular -command updateMergeGame
+    pack $w.b.m$i -side left -padx 2
   }
   radiobutton $w.b.all -text [::utils::string::Capital $::tr(all)] \
-      -variable merge(ply) -value 1000 -indicatoron 0 -padx 2 -pady 1 \
-      -font $small -command updateMergeGame
-  pack $w.b.all -side left
+      -variable merge(ply) -value 1000 -indicatoron 0 -padx 4 -pady 2 \
+      -font font_Regular -command updateMergeGame
+  pack $w.b.all -side left -padx 2
 
-  dialogbutton $w.b.ok -font $small -text "OK" -command {
+  dialogbutton $w.b.ok -text "OK" -command {
     sc_game undoPoint
     sc_game merge $merge(base) $merge(gnum) $merge(ply)
-    catch {grab release .mergeDialog}
     destroy .mergeDialog
     updateBoard -pgn
   }
-  dialogbutton $w.b.cancel -font $small -text $::tr(Cancel) \
-      -command "catch {grab release $w}; destroy $w"
+  dialogbutton $w.b.cancel -text $::tr(Cancel) \
+      -command "destroy $w"
   packbuttons right $w.b.cancel $w.b.ok
-  grab $w
   updateMergeGame
+  placeWinCenter $w 
+  wm deiconify $w
 }
 
 proc updateMergeGame {args} {
