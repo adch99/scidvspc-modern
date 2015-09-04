@@ -7872,8 +7872,32 @@ sc_game_merge (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         // We need to replicate the last move of the current game.
         db->game->AddMove (sm, NULL);
     }
+
+    // Add a comment describing the merge-game details
+    DString * dstr = new DString;
+    dstr->Append (ie->GetWhiteName (base->nb));
+    eloT elo = ie->GetWhiteElo();
+    if (elo > 0) { dstr->Append (" (", elo, ")"); }
+    dstr->Append (" -- ");
+    dstr->Append (ie->GetBlackName (base->nb));
+    elo = ie->GetBlackElo();
+    if (elo > 0) { dstr->Append (" (", elo, ")"); }
+    dstr->Append (" ", RESULT_LONGSTR[ie->GetResult()]);
+    if (endPly < merge->GetNumHalfMoves()) {
+        dstr->Append (" (", (merge->GetNumHalfMoves()+1) / 2, " ");
+        dstr->Append (translate (ti, "moves"), ")");
+    }
+    dstr->Append ("\n", ie->GetEventName (base->nb));
+    dstr->Append (" (", ie->GetRoundName (base->nb), ")");
+    dstr->Append (", ", ie->GetSiteName (base->nb));
+    dstr->Append (" ", ie->GetYear());
+    db->game->SetMoveComment ((char *) dstr->Data());
+    delete dstr;
+
     merge->MoveToPly (mergePly);
     ply = mergePly;
+    // Show at least one move
+    if (ply >= endPly) endPly = ply + 1;
     while (ply < endPly) {
         simpleMoveT * mergeMove = merge->GetCurrentMove();
         if (merge->MoveForward() != OK) { break; }
@@ -7881,26 +7905,6 @@ sc_game_merge (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         if (db->game->AddMove (mergeMove, NULL) != OK) { break; }
         ply++;
     }
-
-    // Finally, add a comment describing the merge-game details:
-    DString * dstr = new DString;
-    dstr->Append (RESULT_LONGSTR[ie->GetResult()]);
-    if (ply < merge->GetNumHalfMoves()) {
-        dstr->Append ("(", (merge->GetNumHalfMoves()+1) / 2, ")");
-    }
-    dstr->Append (" ", ie->GetWhiteName (base->nb));
-    eloT elo = ie->GetWhiteElo();
-    if (elo > 0) { dstr->Append (" (", elo, ")"); }
-    dstr->Append (" - ");
-    dstr->Append (ie->GetBlackName (base->nb));
-    elo = ie->GetBlackElo();
-    if (elo > 0) { dstr->Append (" (", elo, ")"); }
-    dstr->Append (" / ", ie->GetEventName (base->nb));
-    dstr->Append (" (", ie->GetRoundName (base->nb), ")");
-    dstr->Append (", ", ie->GetSiteName (base->nb));
-    dstr->Append (" ", ie->GetYear());
-    db->game->SetMoveComment ((char *) dstr->Data());
-    delete dstr;
 
     // And exit the new variation:
     db->game->MoveExitVariation();
