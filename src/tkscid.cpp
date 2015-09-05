@@ -5764,9 +5764,6 @@ sc_filter_value (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 void
 updateMainFilter( scidBaseT * dbase)
 {
-    // if (!adjustMode)
-    //   return;
-
     if( dbase->dbFilter != dbase->filter)
     {
         for (uint i=0; i < dbase->numGames; i++)
@@ -5777,10 +5774,6 @@ updateMainFilter( scidBaseT * dbase)
                 dbase->filter->Set(i,0);
         }
     }
-    // &&& Should this be
-    // int updateMainFilter( scidBaseT * dbase)
-    // ....
-    // return TCL_OK;
 }
 
 // Same as above, but only update non-zero values for their ply 
@@ -14051,8 +14044,8 @@ sc_tree_best (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 int
 sc_tree_clean (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
-    if (argc != 3) {
-        return errorResult (ti, "Usage: sc_tree clean <baseNum>");
+    if (argc < 3 || argc > 4) {
+        return errorResult (ti, "Usage: sc_tree clean <baseNum> [updateFilter]");
     }
 
     scidBaseT * base = db;
@@ -14062,6 +14055,19 @@ sc_tree_clean (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     }
     if (!base->inUse) {
         return setResult (ti, errMsgNotOpen(ti));
+    }
+
+    if (argc == 4) {
+      // This should really be in it's own proc, but easier to overload sc_tree_clean
+      // Copy treeFilter back to dbFilter only
+
+      if(base->treeFilter && base->dbFilter != base->filter) {
+	for (uint i=0; i < base->numGames; i++) {
+	  base->dbFilter->Set(i,base->treeFilter->Get(i));
+	}
+	return TCL_OK;
+      } 
+      return setResult (ti, errMsgNotOpen(ti));
     }
 
     if(base->treeFilter) {

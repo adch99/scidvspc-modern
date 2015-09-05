@@ -2074,11 +2074,13 @@ search for games that do not reached this position!
   Move (alphabetically), ECO code, Frequency, or Score.
   </p>
   <p>
-  The "Adjust Filter" check-box will alter the gamelist so that only games matching the current position are displayed therein.
+  The Adjust-Filter checkbox alters the gamelist/filter so that only games matching the current position are displayed therein.
+  Its behaviour is a little complicated. Deselecting Adjust-Filter will set the regular filter to the <i>current</i>
+  (adjusted) filter. But closing the Tree, will restore the regular filter to how it was when Adjust-Filter was selected.
 </p>
   <p><i>
   The Tree is updated whenever the main board changes. This can stress the CPU
-  and be slow for large databases, but dynamic updates can be disabled by deselecting the "Refresh" check-box.
+  and be slow for large databases, but dynamic updates can be disabled by deselecting the "Refresh" checkbox.
   </i></p>
   <p><i>Be wary of doing filter operations while the Tree Window is open,
   as the tree may override the filter. To perform searches, and open new bases,
@@ -2190,7 +2192,7 @@ it is best to close the Tree Window first.</i>
   adding or replacing a game, or sorting the database.
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.11, September 2013</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.15, September 2015</footer></p>
 }
 
 set helpTitle(TreeMasks) "Tree Masks"
@@ -2292,7 +2294,7 @@ set helpText(TreeMasks) {<h1>Tree Masks</h1>
   </ul>
   <h3>Mask Searches</h3>
   <p>
-  <i>When using Mask Searches, enabling the Tree </i><b>Adjust Filter</b><i> check-box is recommended.</i>
+  <i>When using Mask Searches, enabling the Tree </i><b>Adjust Filter</b><i> checkbox is recommended.</i>
   </p>
   <p>
   The Mask Search feature enables searches for commentary, symbols etc.

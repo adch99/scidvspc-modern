@@ -223,7 +223,8 @@ proc ::tree::Open {{baseNumber 0}} {
 
   checkbutton $w.buttons.refresh -text [tr FICSRefresh] -font font_Small \
       -variable tree(autorefresh$baseNumber) -command "::tree::toggleRefresh $baseNumber" 
-  checkbutton $w.buttons.adjust -text [tr TreeAdjust] -font font_Small -variable tree(adjustfilter$baseNumber) -command "::tree::dorefresh $baseNumber"
+  checkbutton $w.buttons.adjust -text [tr TreeAdjust] -font font_Small \
+      -variable tree(adjustfilter$baseNumber) -command "::tree::toggleAdjust $baseNumber"
 
   # bStartStop TreeOptStartStop
   foreach {b t} {
@@ -279,7 +280,7 @@ proc ::tree::selectCallback { baseNumber move } {
   }
 }
 
-################################################################################
+
 proc ::tree::closeTree {baseNumber} {
   global tree
   wm protocol .treeWin$baseNumber WM_DELETE_WINDOW {}
@@ -305,8 +306,6 @@ proc ::tree::closeTree {baseNumber} {
 
   set ::geometry(treeWin$baseNumber) [wm geometry .treeWin$baseNumber]
   focus .main
-
-  # sc_tree clean $tree(base$baseNumber)
 
   if {$tree(autoSave$baseNumber)} {
     busyCursor .
@@ -480,7 +479,6 @@ proc ::tree::refresh {{ baseNumber {} }} {
     sc_tree search -cancel all
     for {set i 1} {$i <= [sc_base count total]} {incr i} {
       if {[winfo exists .treeWin$i]} {
-        # ::tree::dorefresh $i
         if { [::tree::dorefresh $i] == "canceled" } { break }
       }
     }
@@ -1125,6 +1123,19 @@ proc ::tree::toggleRefresh { baseNumber } {
     ::tree::refresh $baseNumber
   }
 }
+
+proc ::tree::toggleAdjust {baseNumber} {
+  global tree
+
+  if {$tree(adjustfilter$baseNumber)} {
+    ::tree::dorefresh $baseNumber
+  } else {
+    # User has deselected AdjustFilter, so they probably want the current filter to stay
+    # So set dbFilter to the current treeFilter via overloaded sc_tree_clean
+    sc_tree clean $baseNumber updateFilter
+  }
+}
+
 
 proc ::tree::setCacheSize { base size } {
   sc_tree cachesize $base $size
