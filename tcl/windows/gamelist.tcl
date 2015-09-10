@@ -73,6 +73,7 @@ set temp_anchors {}
 set glistCodes {} 
 ### glistCodes is a printf format style string. A \n is used to split the main "sc_game list"
 # string into a proper list for processing. It is now appended in sc_game_list
+set glPieceMapping { "\u2654" "K" "\u2655" "Q" "\u2656" "R" "\u2657" "B" "\u2658" "N" "\u2659" "P" }
 
 set i 0
 foreach {code col anchor width} $glistFields {
@@ -1033,7 +1034,7 @@ proc ::windows::gamelist::Reload {} {
 # Returns the treeview item for current game (if it is shown in widget)
 
 proc ::windows::gamelist::Refresh {{see {}}} {
-  global glistCodes glstart glistSize glistSortColumn glistSortedBy glistStart
+  global glistCodes glstart glistSize glistSortColumn glistSortedBy glistStart glPieceMapping
 
   set w .glistWin
   if {![winfo exists $w]} {return}
@@ -1103,7 +1104,12 @@ proc ::windows::gamelist::Refresh {{see {}}} {
 
   for {set line $glistEnd} {$line >= $glstart} {incr line -1} {
     incr i -1
-    set values [encoding convertfrom [lindex $VALUES $i]]
+    set values [lindex $VALUES $i]
+    # Substitute figurine letters, because
+    # - convertFrom will destroy the content
+    # - standard figurine pieces are looking ugly
+    set values [string map $glPieceMapping $values]
+    set values [encoding convertfrom $values]
 
     if {[catch {set thisindex [lindex $values 0]}]} {
       ### Mismatched brace in game values. Bad!

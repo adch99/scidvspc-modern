@@ -153,7 +153,7 @@ static char const CP1252Weight[256] =
   0, 0, 1, 0, 1, _, 0, _, // 88 ... 8f
   _, 0, 0, 0, 0, 0, 0, 0, // 90 ... 97
   0, 0, 1, 0, 1, _, 1, 0, // 98 ... 9f
-  0, 1, 0, 0, 0, 0, 0, 0, // a0 ... a7
+  0, 1, 5, 5, 5, 5, 5, 5, // a0 ... a7
   0, 0, 0, 0, 0, 0, 0, 0, // a8 ... af
   0, 1, 0, 0, 0, 0, 0, 0, // b0 ... b7
   0, 0, 0, 1, 0, 1, 0, 2, // b8 ... bf
@@ -378,6 +378,14 @@ findConversion(unsigned code)
     case 0x02c6: return "^";    // MODIFIER LETTER CIRCUMFLEX ACCENT
     case 0x2030: return "o/oo"; // PER MILLE SIGN
     case 0x2261: return "=";    // IDENTICAL TO
+
+    // ChessBase
+    case 0x00a2: return "K";
+    case 0x00a3: return "Q";
+    case 0x00a4: return "N";
+    case 0x00a5: return "B";
+    case 0x00a6: return "R";
+    case 0x00a7: return "P";
   }
 
   return nullptr;
@@ -437,6 +445,32 @@ inline bool CharsetConverter::Codec::isUTF8() const     { return m_info.m_isUTF8
 inline bool CharsetConverter::Codec::isLatin1() const   { return m_info.m_isLatin1; }
 inline bool CharsetConverter::Codec::isWindoze() const  { return m_info.m_isWindoze; }
 inline bool CharsetConverter::Codec::isDOS() const      { return m_info.m_isDOS; }
+
+
+struct CharsetConverter::Buffer
+{
+  TextBuffer*   m_txt;
+  std::string*  m_std;
+  char const*   m_str;
+  unsigned      m_size;
+
+  Buffer(TextBuffer& buf) 
+    :m_txt(&buf), m_std(nullptr), m_str(buf.GetBuffer()), m_size(buf.GetByteCount()) {}
+
+  Buffer(std::string& buf)
+    :m_txt(nullptr), m_std(&buf), m_str(buf.c_str()), m_size(buf.size()) {}
+
+  char const* str() const { return m_str; }
+  unsigned size() const   { return m_size; }
+
+  void replace(std::string& str)
+  {
+    if (m_std)
+      m_std->swap(str);
+    else
+      m_txt->ReplaceContent(str.c_str(), str.size());
+  }
+};
 
 
 CharsetConverter::Codec::Codec()
@@ -577,6 +611,50 @@ CharsetConverter::isConvertibleToLatin1(char const* str)
   }
 
   return true;
+}
+
+
+std::string
+CharsetConverter::mapChessBaseFigurineToUTF8(const char * s)
+{
+  std::string str;
+
+  while (*s)
+  {
+    unsigned char c = *s;
+
+    if (c & 0x80)
+    {
+      unsigned charLen = ::charLength(s);
+      unsigned char d = s[1];
+
+      if (charLen == 2 && (0xc2 <= c && c <= 0xc3) && (0xa2 <= d && d <= 0xa7))
+      {
+        switch (d)
+        {
+          case 0xa2: ::appendThreeOctets(str, 0x2654); break; // King
+          case 0xa3: ::appendThreeOctets(str, 0x2655); break; // Queen
+          case 0xa4: ::appendThreeOctets(str, 0x2658); break; // Knight
+          case 0xa5: ::appendThreeOctets(str, 0x2657); break; // Bishop
+          case 0xa6: ::appendThreeOctets(str, 0x2656); break; // Rook
+          case 0xa7: ::appendThreeOctets(str, 0x2659); break; // Pawn
+        }
+      }
+      else
+      {
+        str.append(s, charLen);
+      }
+
+      s += charLen;
+    }
+    else
+    {
+      str += c;
+      s += 1;
+    }
+  }
+
+  return str;
 }
 
 
@@ -754,7 +832,7 @@ CharsetConverter::cp1252ToUTF8(std::string const& in, std::string& out)
 
     if (c & 0x80)
     {
-      if (c < 0xa0)
+      if (c < 0xa8)
       {
         static unsigned const CodeTable[128] =
         {
@@ -762,6 +840,7 @@ CharsetConverter::cp1252ToUTF8(std::string const& in, std::string& out)
           0x02c6, 0x2030, 0x0160, 0x2039, 0x0152, 0xfffd, 0x017d, 0xfffd, // 88 ... 8f
           0xfffd, 0x2018, 0x2019, 0x201c, 0x201d, 0x2022, 0x2013, 0x2014, // 90 ... 97
           0x02dc, 0x2122, 0x0161, 0x203a, 0x0153, 0xfffd, 0x017e, 0x0178, // 98 ... 9f
+          0x02a0, 0x00a1, 0x2654, 0x2655, 0x2658, 0x2657, 0x2656, 0x2659, // a0 ... a7
         };
 
         ::appendCodePointToUTF8String(out, CodeTable[c - 0x80]);
@@ -1144,30 +1223,30 @@ CharsetConverter::convertToUTF8(std::string const& in, std::string& out, char co
 
 
 bool
-CharsetConverter::doConversion(TextBuffer& text)
+CharsetConverter::doConversion(Buffer& text)
 {
-  if (isAscii(text.GetBuffer()))
+  if (isAscii(text.str()))
     return true;
 
-  bool isUTF8 = validateUTF8(text.GetBuffer(), text.GetByteCount());
+  bool isUTF8 = validateUTF8(text.str(), text.size());
 
   if (isUTF8 && m_wanted.isUTF8())
     return true;
 
   m_detector.reset();
-  m_detector.detect(text);
+  m_detector.detect(text.str(), text.size());
 
   if (   m_detector.isASCII() // the detector couldn't detect the character set
       || (   m_detector.isLatin1()
-          && !validateLatin1(text.GetBuffer(), text.GetByteCount()))) // detection is wrong
+          && !validateLatin1(text.str(), text.size()))) // detection is wrong
   {
     // This may happen if:
     // 1. The character set is CP850 or CP1252 encoded with single bytes.
     // 2. The character set detection failed, sometimes this happens with Latin-1.
 
-    int cp850  = detectCP850(text.GetBuffer(), text.GetByteCount());
-    int cp1252 = detectCP1252(text.GetBuffer(), text.GetByteCount());
-    int latin1 = detectLatin1(text.GetBuffer(), text.GetByteCount());
+    int cp850  = detectCP850(text.str(), text.size());
+    int cp1252 = detectCP1252(text.str(), text.size());
+    int latin1 = detectLatin1(text.str(), text.size());
 
     if (latin1 >= 0 && latin1 >= cp1252 && latin1 >= cp850) // detection of Latin-1 failed
     {
@@ -1175,18 +1254,18 @@ CharsetConverter::doConversion(TextBuffer& text)
     }
     else if (cp1252 > cp850) // most probably it's CP1252 (Windoze)
     {
-      std::string src(text.GetBuffer(), text.GetByteCount());
+      std::string src(text.str(), text.size());
       std::string dst;
       cp1252ToUTF8(src, dst);
-      text.ReplaceContent(dst.c_str(), dst.size());
+      text.replace(dst);
       m_detector.setup("utf-8");
     }
     else if (cp850 >= 0) // probably it's CP850 (MSDOS)
     {
-      std::string src(text.GetBuffer(), text.GetByteCount());
+      std::string src(text.str(), text.size());
       std::string dst;
       cp850ToUTF8(src, dst);
-      text.ReplaceContent(dst.c_str(), dst.size());
+      text.replace(dst);
       m_detector.setup("utf-8");
     }
     else
@@ -1202,7 +1281,7 @@ CharsetConverter::doConversion(TextBuffer& text)
     // This part is a bit experimental, and should be removed if
     // not successful in practice.
     // ----------------------------------------------------------------------
-    std::string src(text.GetBuffer(), text.GetByteCount());
+    std::string src(text.str(), text.size());
     std::string dst;
 
     if (fixLatin1(src, dst))
@@ -1211,7 +1290,7 @@ CharsetConverter::doConversion(TextBuffer& text)
       // but we could restore the content. This happens often with Scid
       // databases. (For example an import of a PGN file with UTF-8 encoded
       // Latin-1 character set.)
-      text.ReplaceContent(dst.c_str(), dst.size());
+      text.replace(dst);
       m_detector.setup("utf-8");
     }
   }
@@ -1221,14 +1300,14 @@ CharsetConverter::doConversion(TextBuffer& text)
     if (!m_wanted.isUTF8() || isUTF8)
       return true;
 
-    std::string src(text.GetBuffer(), text.GetByteCount());
+    std::string src(text.str(), text.size());
     return makeValid(src, m_wanted.isUTF8() ? "\xef\xbf\xbd" : "?") == 0;
   }
 
   if (m_detector.encoding() != m_text.encoding())
     m_text.setup(m_detector.m_info);
 
-  std::string src(text.GetBuffer(), text.GetByteCount());
+  std::string src(text.str(), text.size());
   std::string dst;
 
   bool rc(true);
@@ -1254,8 +1333,24 @@ CharsetConverter::doConversion(TextBuffer& text)
       rc = false;
   }
 
-  text.ReplaceContent(dst.c_str(), dst.size());
+  text.replace(dst);
   return rc;
+}
+
+
+bool
+CharsetConverter::doConversion(TextBuffer& text)
+{
+  Buffer buf(text);
+  return doConversion(buf);
+}
+
+
+bool
+CharsetConverter::doConversion(std::string& text)
+{
+  Buffer buf(text);
+  return doConversion(buf);
 }
 
 //////////////////////////////////////////////////////////////////////

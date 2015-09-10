@@ -150,6 +150,15 @@ CharsetDetector::finish()
     else if (m_cp850 >= 0)
       setup("cp850");
   }
+  else if (isLatin1())
+  {
+    if (m_latin1 >= m_cp850 && m_latin1 >= m_cp1252)
+      setup("iso8859-1");
+    else if (m_cp1252 > m_cp850)
+      setup("cp1252");
+    else if (m_cp850 >= 0)
+      setup("cp850");
+  }
 }
 
 

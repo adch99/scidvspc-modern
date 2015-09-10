@@ -81,6 +81,7 @@ public:
   // the result is valid. In case of invalid input characters the error status
   // will be set.
   bool doConversion(TextBuffer& text);
+  bool doConversion(std::string& text);
 
   /// Setup destination character set. This will not reset the error status.
   void setupEncoding(std::string const& encoding);
@@ -129,6 +130,7 @@ public:
 
   // String content is ASCII?
   static bool isAscii(char const* str);
+  static bool isAscii(std::string const& str);
 
   // String content is CP850? Returns a probablity weight, -1 is NO.
   static int detectCP850(char const* str, unsigned len);
@@ -141,6 +143,9 @@ public:
 
   // Try to fix a corruped Latin-1 string.
   static bool fixLatin1(std::string const& in, std::string& out);
+
+  // Map ChessBase figurine (inside UTF-8 string) to UTF-8.
+  static std::string mapChessBaseFigurineToUTF8(const char * s);
 
 private:
 
@@ -170,6 +175,10 @@ private:
     struct Tcl_Encoding_* m_impl;
   };
 
+  class Buffer;
+
+  bool doConversion(Buffer& text);
+
   static int detect(char const* s, unsigned len, char const* table);
 
   Codec     m_system;
@@ -188,6 +197,8 @@ inline CharsetDetector& CharsetConverter::detector() { return m_detector; }
 inline bool CharsetConverter::error() const     { return m_error; }
 inline bool CharsetConverter::failed() const    { return m_failed; }
 inline bool CharsetConverter::succeeded() const { return !m_error && !m_failed; }
+
+inline bool CharsetConverter::isAscii(std::string const& str) { return isAscii(str.c_str()); }
 
 inline std::string const& CharsetConverter::systemEncoding() const   { return m_system.m_info.m_encoding; }
 inline std::string const& CharsetConverter::wantedEncoding() const   { return m_wanted.m_info.m_encoding; }

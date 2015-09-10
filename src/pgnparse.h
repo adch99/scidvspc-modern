@@ -90,6 +90,7 @@ class PgnParser
     tokenT GetRestOfPawnMove (char * buffer);
     tokenT GetGameToken (char * buffer, uint bufSize);
 
+    void MapChessBaseFigurine(Game * game);
     void DoCharsetConversion(Game * game);
     void ConvertComments(Game * game);
     std::string ConvertToUTF8(char * str);

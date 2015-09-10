@@ -1309,6 +1309,8 @@ PgnParser::ParseGame (Game * game)
 
         if (CharDetector->encoding() != "utf-8")
             DoCharsetConversion(game);
+        else
+            MapChessBaseFigurine(game);
 
         CharDetector->reset();
         CharConverter->reset();
@@ -1346,28 +1348,46 @@ PgnParser::ConvertToUTF8(char * str)
 }
 
 
+typedef char* (Game::*GetTag)();
+typedef void (Game::*SetTag)(const char *);
+
+struct Pair
+{
+  GetTag getter;
+  SetTag setter;
+  Pair(GetTag g, SetTag s) :getter(g), setter(s) {}
+};
+
+static Pair GetSetTbl[5] =
+{
+  Pair(&Game::GetEventStr, &Game::SetEventStr ),
+  Pair(&Game::GetSiteStr,  &Game::SetSiteStr  ),
+  Pair(&Game::GetWhiteStr, &Game::SetWhiteStr ),
+  Pair(&Game::GetBlackStr, &Game::SetBlackStr ),
+  Pair(&Game::GetRoundStr, &Game::SetRoundStr ),
+};
+
+
+void
+PgnParser::MapChessBaseFigurine(Game * game)
+{
+    // Convert standard tags.
+
+    for (unsigned i = 0; i < sizeof(::GetSetTbl)/sizeof(::GetSetTbl[0]); ++i)
+    {
+        Pair const& p = ::GetSetTbl[i];
+
+        char * str((game->*p.getter)());
+
+        if (!CharsetConverter::isAscii(str))
+            (game->*p.setter)(CharsetConverter::mapChessBaseFigurineToUTF8(str).c_str());
+    }
+}
+
+
 void
 PgnParser::DoCharsetConversion(Game * game)
 {
-    typedef char* (Game::*GetTag)();
-    typedef void (Game::*SetTag)(const char *);
-
-    struct Pair
-    {
-        GetTag getter;
-        SetTag setter;
-        Pair(GetTag g, SetTag s) :getter(g), setter(s) {}
-    };
-
-    static Pair GetSetTbl[5] =
-    {
-        Pair(&Game::GetEventStr, &Game::SetEventStr ),
-        Pair(&Game::GetSiteStr,  &Game::SetSiteStr  ),
-        Pair(&Game::GetWhiteStr, &Game::SetWhiteStr ),
-        Pair(&Game::GetBlackStr, &Game::SetBlackStr ),
-        Pair(&Game::GetRoundStr, &Game::SetRoundStr ),
-    };
-
     CharConverter->setupDetected();
 
     std::string str;
@@ -1375,9 +1395,9 @@ PgnParser::DoCharsetConversion(Game * game)
 
     // Convert standard tags.
 
-    for (unsigned i = 0; i < sizeof(GetSetTbl)/sizeof(GetSetTbl[0]); ++i)
+    for (unsigned i = 0; i < sizeof(::GetSetTbl)/sizeof(::GetSetTbl[0]); ++i)
     {
-        Pair const& p = GetSetTbl[i];
+        Pair const& p = ::GetSetTbl[i];
 
         char * str((game->*p.getter)());
 
