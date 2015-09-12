@@ -274,6 +274,8 @@ append helpText(Index) {
   <li><a Maintenance>Database maintenance</a></li>
   <li><a Sorting>Database sorting</a></li>
   <li><a Switcher>Database switcher</a> window</li>
+  <li><a GameList Del>Deleted and Filtered games.</a>
+  <li><a Flags>Delete flag</a></li>
   <li><a Maintenance Twins>Deleting twin games</a></li>
   <li><a Comment Diagrams>Diagrams</a></li>
   <li><a Comment Diagrams>Drawing arrows</a></li>
@@ -2724,7 +2726,7 @@ making for easier <a Analysis Debugging>Debugging</a>.
   which, when running docked, will run at low CPU priority.<p>
 
   <p>
-  <b>Space Bar</b> is bound to engine start/stop, and pressing <b>Enter</b> will add the engine's current best move.
+  <b>Space Bar</b> is bound to engine start/stop. Pressing <b>Enter</b> will add the engine's current best move, and <b>Control+Enter</b>, the whole line.
   </p>
   <p>
   At the top of the window are some useful Buttons.
@@ -6664,6 +6666,7 @@ The window manager may interfere with some shortcuts.
 <li><b>enter</b> - Add move from chess engine</li>
 <li><b>space</b> - Start/stop chess engine</li>
 <li><b>delete</b> - Delete trailing moves from game or variation</li>
+<li><b>control-enter</b> - Add line from chess engine</li>
 <li><b>control-delete</b> - Delete current game</li>
 <li></li>
 <li><b>F1</b> - Help</li>
@@ -6695,6 +6698,7 @@ The window manager may interfere with some shortcuts.
 <li><b>F4</b> - Toggle engine 3</li>
 <li><b>enter</b> - Add move from chess engine</li>
 <li><b>space</b> - Start/stop chess engine</li>
+<li><b>control-enter</b> - Add line from chess engine</li>
 <li><b>control-space</b> - Toggle trial mode</li>
 </ul>
 

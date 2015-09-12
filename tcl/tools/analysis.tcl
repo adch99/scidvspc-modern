@@ -1694,8 +1694,15 @@ proc popAnalysisData {n} {
 }
 
 
-proc addAnalysisVariation {n} {
+proc addAnalysisVariation {{n -1}} {
   global analysis
+
+  if {$n == -1} {
+    set n [findEngine]
+    if {$n == -1} {
+      return
+    }
+  }
 
   if {! [winfo exists .analysisWin$n]} { return }
 
@@ -2387,6 +2394,7 @@ proc makeAnalysisWin {{n 0} {options {}}} {
   bind $w <Escape> "focus .main ; destroy $w"
   bind $w <Key-a> "$w.b.startStop invoke"
   bind $w <Return> "addAnalysisMove $n"
+  bind $w <Control-Return> "addAnalysisVariation $n"
   bind $w <space>  "$w.b.startStop invoke"
   wm minsize $w 25 0
   bindMouseWheel $w $w.hist.text

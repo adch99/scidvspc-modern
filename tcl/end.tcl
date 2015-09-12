@@ -1479,6 +1479,7 @@ bind .main <Escape> "moveEntry_Clear 1"
 bind .main <Tab> {raiseAllWindows 1}
 
 bind .main <Return> addAnalysisMove
+bind .main <Control-Return> addAnalysisVariation
 bind .main <space>  toggleEngineAnalysis
 
 bind .main <v> showVars
