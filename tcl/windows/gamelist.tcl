@@ -376,8 +376,12 @@ proc ::windows::gamelist::Open {} {
 
   bind $w <Left>  {}
   bind $w <Right> {}
-  bind $w <Up>    {::windows::gamelist::Scroll -1}
-  bind $w <Down>  {::windows::gamelist::Scroll  1}
+  bind $w <Up>  {}
+  bind $w <Down> {}
+  bind $w.tree <Left>  "$w.tree xview scroll -40 units ; break"
+  bind $w.tree <Right> "$w.tree xview scroll 40 units ; break"
+  bind $w.tree <Up>    {::windows::gamelist::Scroll -1 ; break}
+  bind $w.tree <Down>  {::windows::gamelist::Scroll  1 ; break}
   bind $w <Prior> {::windows::gamelist::Scroll -$glistSize}
   bind $w <Control-a> {.glistWin.tree selection set [.glistWin.tree children {}]}
   bind $w <Home> {
