@@ -547,6 +547,8 @@ menuText P TreeOptAutosave "Automatyczny zapis bufora" 0 \
   {Automatycznie zapisz plik bufora przy wyjściu}
 # ====== TODO To be translated ======
 menuText P TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
+# ====== TODO To be translated ======
+menuText P TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 menuText P TreeHelp "Pomoc" 2
 menuText P TreeHelpTree "Drzewo" 0
 menuText P TreeHelpIndex "Spis treści" 0

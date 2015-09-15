@@ -596,6 +596,8 @@ menuText B TreeOptAutosave "Salvar automaticamente arquivo de cache" 0 \
   {Salvar automaticamente o arquivo de cache quando fechar a janela de arvore}
 # ====== TODO To be translated ======
 menuText B TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
+# ====== TODO To be translated ======
+menuText B TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 menuText B TreeHelp "Ajuda" 0
 menuText B TreeHelpTree "Ajuda para arvore" 0
 menuText B TreeHelpIndex "Indice da Ajuda" 0

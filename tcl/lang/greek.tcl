@@ -576,6 +576,8 @@ menuText G TreeOptAutosave "Αυτομ.Αποθήκευση Cache" 0 \
   {Αυτόματη αποθήκευση της προσωρινής μνήμης με το κλείσιμο του παραθύρου}
 # ====== TODO To be translated ======
 menuText G TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
+# ====== TODO To be translated ======
+menuText G TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 menuText G TreeHelp "Βοήθεια" 0
 menuText G TreeHelpTree "Βοήθεια Δένδρου" 0
 menuText G TreeHelpIndex "Ευρετήριο" 0

@@ -638,6 +638,8 @@ menuText Y TreeOptAutosave "Automatski saèuvaj cache fajl" 0 \
   {Automatski saèuvaj cache fajl pri zatvaranju prozora stabla}
 # ====== TODO To be translated ======
 menuText Y TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
+# ====== TODO To be translated ======
+menuText Y TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 menuText Y TreeHelp "Pomoæ" 0
 menuText Y TreeHelpTree "Pomoæ za stablo" 0
 menuText Y TreeHelpIndex "Sadr¾aj pomoæi" 0

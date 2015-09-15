@@ -24,7 +24,7 @@ proc ::tree::doConfigMenus { baseNumber  { lang "" } } {
   foreach idx {0 1 2 3} tag {Alpha ECO Freq Score } {
     configMenuText $m.sort $idx TreeSort$tag $lang
   }
-  foreach idx {0 1 3 4 6 7 8} tag {Lock Training Autosave Automask Slowmode Fastmode FastAndSlowmode} {
+  foreach idx {0 1 3 4 5 7 8 9} tag {Lock Training Autosave Automask ShowBar Slowmode Fastmode FastAndSlowmode} {
     configMenuText $m.opt $idx TreeOpt$tag $lang
   }
   foreach idx {0 1} tag {Tree Index} {
@@ -163,6 +163,14 @@ proc ::tree::Open {{baseNumber 0}} {
   $w.menu.opt add separator
   $w.menu.opt add checkbutton -label TreeOptAutosave -variable tree(autoSave$baseNumber)
   $w.menu.opt add checkbutton -label TreeOptAutomask -variable ::tree::mask::autoLoadMask
+  $w.menu.opt add checkbutton -label TreeOptShowBar -variable ::tree::showBar -command "
+    set w .treeWin$baseNumber
+    if {\$::tree::showBar} {
+      pack $w.progress -side bottom -before $w.f
+    } else {
+      pack forget $w.progress
+    }
+  "
 
   $w.menu.opt add separator
 
@@ -208,7 +216,9 @@ proc ::tree::Open {{baseNumber 0}} {
   # pack $w.status -side bottom -fill x
 
   pack [frame $w.buttons -relief sunken] -side bottom -fill x -pady 5
-  pack $w.progress -side bottom
+  if {$::tree::showBar} {
+    pack $w.progress -side bottom
+  }
   pack $w.f -side top -expand 1 -fill both
 
   button $w.buttons.best -image b_list -command "::tree::toggleBest $baseNumber"

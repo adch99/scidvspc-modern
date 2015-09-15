@@ -591,6 +591,8 @@ menuText C TreeOptAutosave "Automatické ukládání cache souboru" 0 \
   {Automatické ukládání cache souboru pøi uzavøení stromového okna}
 # ====== TODO To be translated ======
 menuText C TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
+# ====== TODO To be translated ======
+menuText C TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 menuText C TreeHelp "Nápovìda" 0
 menuText C TreeHelpTree "Nápovìda - Strom" 11
 menuText C TreeHelpIndex "Index nápovìdy" 0

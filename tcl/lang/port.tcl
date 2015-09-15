@@ -535,6 +535,8 @@ menuText U TreeOptTraining "Treinamento" 0 \
 menuText U TreeOptAutosave "Salvar automaticamente arquivo de cache" 0 \
   {Salvar automaticamente o arquivo de cache quando fechar a janela de arvore}
 menuText U TreeOptAutomask "Abrir máscara automaticamente" 0 "Auto-Load most recent mask with a tree open."
+# ====== TODO To be translated ======
+menuText U TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 menuText U TreeHelp "Ajuda" 0
 menuText U TreeHelpTree "Ajuda para árvore" 0
 menuText U TreeHelpIndex "Índice da Ajuda" 0

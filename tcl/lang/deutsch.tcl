@@ -571,6 +571,8 @@ menuText D TreeOptAutosave "Autom. Cache-Datei sichern" 4 \
   {Beim Schlieﬂen des Zugbaums automatisch Cache-Datei sichern}
 # ====== TODO To be translated ======
 menuText D TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
+# ====== TODO To be translated ======
+menuText D TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 menuText D TreeHelp "Hilfe" 0
 menuText D TreeHelpTree "Zugbaumhilfe" 0
 menuText D TreeHelpIndex "Index" 0

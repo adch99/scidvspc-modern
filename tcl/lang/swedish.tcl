@@ -558,6 +558,8 @@ menuText W TreeOptAutosave "Spara cache filen automatiskt" 0 \
   {Spara cachefilen automatiskt när trädfönstret stängs}
 # ====== TODO To be translated ======
 menuText W TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
+# ====== TODO To be translated ======
+menuText W TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 menuText W TreeHelp "Hjälp" 0
 menuText W TreeHelpTree "Trädhjälp" 0
 menuText W TreeHelpIndex "Hjälpindex" 0

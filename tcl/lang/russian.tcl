@@ -536,6 +536,8 @@ menuText R TreeOptAutosave "Автосохранение файла кеша" 0 
   {Автосохранение файла кеша, когда закрывается окно дерева}
 # ====== TODO To be translated ======
 menuText R TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
+# ====== TODO To be translated ======
+menuText R TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 menuText R TreeHelp "Помощь" 0
 menuText R TreeHelpTree "Помощь по дереву" 0
 menuText R TreeHelpIndex "Индекс помощи" 0

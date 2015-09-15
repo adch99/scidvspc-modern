@@ -220,6 +220,7 @@ proc ::docking::init_layout_list {{recover 0}} {
 ::docking::init_layout_list
 
 ### Tree/mask options:
+set ::tree::showBar [expr {! $::macOS}]
 set ::tree::mask::recentMask {}
 set ::tree::mask::autoLoadMask 0
 

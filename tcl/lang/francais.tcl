@@ -535,6 +535,8 @@ menuText F TreeOptTraining "Entraînement" 0 {Démarrer/Arrêter l'arbre du mode d'
 menuText F TreeOptAutosave "Sauver le cache automatiquement" 0
 # ====== TODO To be translated ======
 menuText F TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
+# ====== TODO To be translated ======
+menuText F TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 menuText F TreeHelp "Aide" 0
 menuText F TreeHelpTree "Aide Arbre" 0
 menuText F TreeHelpIndex "Index" 0
