@@ -163,14 +163,18 @@ proc ::tree::Open {{baseNumber 0}} {
   $w.menu.opt add separator
   $w.menu.opt add checkbutton -label TreeOptAutosave -variable tree(autoSave$baseNumber)
   $w.menu.opt add checkbutton -label TreeOptAutomask -variable ::tree::mask::autoLoadMask
-  $w.menu.opt add checkbutton -label TreeOptShowBar -variable ::tree::showBar -command "
-    set w .treeWin$baseNumber
-    if {\$::tree::showBar} {
-      pack $w.progress -side bottom -before $w.f
-    } else {
-      pack forget $w.progress
+  $w.menu.opt add checkbutton -label TreeOptShowBar -variable ::tree::showBar -command {
+    for {set i 1} {$i <= [sc_base count total]} {incr i} {
+      if {[winfo exists .treeWin$i]} {
+	set w .treeWin$i
+	if {$::tree::showBar} {
+	  pack $w.progress -side bottom -before $w.f
+	} else {
+	  pack forget $w.progress
+	}
+      }
     }
-  "
+  }
 
   $w.menu.opt add separator
 
