@@ -1,10 +1,14 @@
 # spanish.tcl:
 # Spanish translations for Scid.
-# Contributed by Jordi González Boada.
-# Updated by Enrique Lopez.
-# Updated by Benigno Hernández Bacallado
-# Updated by Igor Sosa Mayor
-# Untranslated messages are marked with a "***" comment.
+
+# Contributors:
+# Jordi González Boada
+# Enrique Lopez
+# Benigno Hernández Bacallado
+# Igor Sosa Mayor
+# Dale J.H Cannon
+
+# Untranslated messages are marked with a "TODO To be translated" comment.
 
 addLanguage S Español 1 ;#iso8859-1
 
@@ -208,8 +212,7 @@ menuText S ToolsExpCurrentHTML "Exportar Partida a HTML" 15 \
 menuText S ToolsExpCurrentHTMLJS "Exportar Partida a HTML y JavaScript" 15 {Escribir partida actual a un fichero HTML y JavaScript} 
 menuText S ToolsExpCurrentLaTeX "Exportar Partida a LaTeX" 33 \
   {Escribe la partida actual en un archivo LaTeX}
-# ====== TODO To be translated ======
-menuText S ToolsExpCurrentLaTeXSkak "Export Game to LaTeX (Skak)" 15 {Write current game to a LaTeX file}
+menuText S ToolsExpCurrentLaTeXSkak "Exportar Partida a LaTeX (Skak)" 15 {Escribe la partida actual en un archivo LaTeX (Skak)}
 menuText S ToolsExpFilter "Exportar todas las partidas filtradas" 1 \
   {Escribe todas las partidas filtradas en un archivo de texto}
 menuText S ToolsExpFilterPGN "Exportar filtro a PGN" 17 \
@@ -219,8 +222,7 @@ menuText S ToolsExpFilterHTML "Exportar filtro a HTML" 17 \
 menuText S ToolsExpFilterHTMLJS "Exportar filtro a HTML y JavaScript" 17 {Escribir todas las partidas filtradas a fichero HTML y JavaScript}  
 menuText S ToolsExpFilterLaTeX "Exportar filtro a LaTeX" 17 \
   {Escribe todas las partidas filtradas en un archivo LaTeX}
-# ====== TODO To be translated ======
-menuText S ToolsExpFilterLaTeXSkak "Export Filter to LaTeX (Skak)" 17  {Write all filtered games to a LaTeX file}
+menuText S ToolsExpFilterLaTeXSkak "Exportar filtro a LaTeX (Skak)" 17  {Escribe todas las partidas filtradas en un archivo LaTeX (Skak)}
 menuText S ToolsExpFilterGames "Exportar Listado a Texto" 19 {Print a formatted Gamelist.}
 menuText S ToolsImportOne "Importar partida PGN" 0 \
   {Importa una partida de un texto PGN}
@@ -263,8 +265,7 @@ menuText S CCEditCopy "Copiar lista de partidas a clipbase" 0 \
 menuText S Options "Opciones" 0
 menuText S OptionsBoard "Tablero" 0 {Opciones sobre el aspecto del tablero}
 menuText S OptionsColour "Color de fondo" 0 {Color de fondo por defecto}
-# ====== TODO To be translated ======
-menuText S OptionsEnableColour "Enable" 0 {}
+menuText S OptionsEnableColour "Activar" 0 {}
 menuText S OptionsNames "Mis Nombres de Jugador" 3 {Edita mis nombres de jugador}
 menuText S OptionsExport "Exportación" 0 {Cambia las opciones de exportación de texto}
 menuText S OptionsFonts "Fuentes" 0 {Cambia las fuentes}
@@ -368,14 +369,12 @@ menuText S GInfoTBAll "TBs: resultado y mejor movimiento" 23
 menuText S GInfoDelete "(No)Borrar esta partida" 4
 menuText S GInfoMark "(No)Marcar esta partida" 4
 menuText S GInfoInformant "Configurar valores de información" 0
-# ====== TODO To be translated ======
-translate S FlipBoard {Flip board}
+
+translate S FlipBoard {Girar el tablero}
 # ====== TODO To be translated ======
 translate S RaiseWindows {Raise windows}
-# ====== TODO To be translated ======
-translate S AutoPlay {Autoplay}
-# ====== TODO To be translated ======
-translate S TrialMode {Trial mode}
+translate S AutoPlay {Reproducción automática}
+translate S TrialMode {Modo de prueba}
 
 # General buttons:
 translate S Apply {Aplicar}
@@ -549,8 +548,7 @@ menuText S TreeMaskOpen "Abrir" 0 {Abre máscara}
 menuText S TreeMaskOpenRecent "Abrir reciente" 0 {Abre máscara reciente}
 menuText S TreeMaskSave "Salvar" 0 {Salva máscara}
 menuText S TreeMaskClose "Cerrar" 0 {Cierra máscara}
-# ====== TODO To be translated ======
-menuText S TreeMaskFillWithLine "Fill with line" 0 {Fill mask with all previous moves}
+menuText S TreeMaskFillWithLine "Llenar con línea" 0 {Llena máscara con con todos los movimientos previos}
 menuText S TreeMaskFillWithGame "Llenar con partida" 0 \
   {Llena máscara con partida}
 menuText S TreeMaskFillWithBase "Llenar con base" 0 \
@@ -581,6 +579,8 @@ menuText S TreeOptAutosave "Autoguardar archivo caché" 0 \
   {Guarda automáticamente el archivo caché cuando se cierra la ventana de árbol}
 # ====== TODO To be translated ======
 menuText S TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
+# ====== TODO To be translated ======
+menuText S TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 menuText S TreeHelp "Ayuda" 1
 menuText S TreeHelpTree "Ayuda del árbol" 4
 menuText S TreeHelpIndex "Índice de la ayuda" 0
@@ -710,8 +710,7 @@ translate S ShowInfo {Muestra info del motor}
 translate S FinishGame {Finalizar partida}
 translate S StopEngine {Parar motor}
 translate S StartEngine {Arrancar motor}
-# ====== TODO To be translated ======
-translate S ExcludeMove {Exclude Move}
+translate S ExcludeMove {Excluir movimiento}
 translate S LockEngine {Bloquea motor en posición actual}
 translate S AnalysisCommand {Dirección de análisis}
 translate S PreviousChoices {Elección previa}
@@ -733,11 +732,9 @@ translate S AnnotateComment {Añadir anotador a comentario}
 translate S BlundersThreshold {Umbral del error }
 translate S CutOff {Punto de corte}
 translate S LowPriority {Baja prioridad del procesador}
-# todo
-translate S LogEngines {Log Size}
+translate S LogEngines {Tamaño del registro}
 translate S LogName {Añadir nombre}
-# ====== TODO To be translated ======
-translate S MaxPly {Max Ply}
+translate S MaxPly {Plies máximos}
 translate S ClickHereToSeeMoves {Click aquí para ver movimientos}
 translate S ConfigureInformant {Configurar informaciones}
 translate S Informant!? {Movimiento interesante}
@@ -752,10 +749,8 @@ translate S Book {Libro}
 
 # Analysis Engine open dialog:
 translate S EngineList {Lista de motores de análisis}
-# ====== TODO To be translated ======
-translate S EngineKey {Key}
-# ====== TODO To be translated ======
-translate S EngineType {Type}
+translate S EngineKey {Tecla}
+translate S EngineType {Protocolo}
 translate S EngineName {Nombre}
 translate S EngineCmd {Orden}
 translate S EngineArgs {Parámetros}
@@ -834,8 +829,7 @@ menuText S CrosstabSortName "Por nombre" 4
 menuText S CrosstabSortRating "Por Elo" 4
 menuText S CrosstabSortScore "Por puntuación" 4
 menuText S CrosstabSortCountry "País" 4
-# todo
-menuText S CrosstabType "Format" 0
+menuText S CrosstabType "Sistema" 0
 menuText S CrosstabTypeAll "Todos Contra Todos" 0
 menuText S CrosstabTypeSwiss "Suizo" 0
 menuText S CrosstabTypeKnockout "Rondas" 0
@@ -920,20 +914,16 @@ translate S GlistEditField {Configurar}
 translate S GlistAddField {Añadir}
 translate S GlistDeleteField {Borrar}
 translate S GlistColor {Color}
-# ====== TODO To be translated ======
-translate S GlistSort {Sort database}
+translate S GlistSort {Ordenar base de datos}
 translate S GlistRemoveThisGameFromFilter  {Oculta esta partida}
 translate S GlistRemoveGameAndAboveFromFilter  {Oculta esta partida y las de arriba}
 translate S GlistRemoveGameAndBelowFromFilter  {Oculta esta partida y las de abajo}
 translate S GlistDeleteGame {Elimina/Recupera esta partida de la base} 
 translate S GlistDeleteAllGames {Elimina todas las partidas de la base que aparecen en el filtro} 
 translate S GlistUndeleteAllGames {Recupera todas las partidas borradas de la base que aparecen en el filtro} 
-# ====== TODO To be translated ======
-translate S GlistAlignL {Align left}
-# ====== TODO To be translated ======
-translate S GlistAlignR {Align right}
-# ====== TODO To be translated ======
-translate S GlistAlignC {Align center}
+translate S GlistAlignL {Alinear a la izquierda}
+translate S GlistAlignR {Alinear a la derecha}
+translate S GlistAlignC {Alinear al centro}
 
 # Maintenance window:
 translate S DatabaseName {Nombre de la base:}
@@ -1498,15 +1488,12 @@ translate S Nodes {Nodos}
 translate S Depth {Profundidad}
 translate S Time {Tiempo} 
 translate S SecondsPerMove {Segundos por movimiento}
-# ====== TODO To be translated ======
-translate S DepthPerMove {Depth per move}
+translate S DepthPerMove {Profundidad por movimiento}
 # ====== TODO To be translated ======
 translate S MoveControl {Move Control}
-translate S TimeLabel {Tiempor por movimiento}
-# ====== TODO To be translated ======
-translate S AddVars {Add Variations}
-# ====== TODO To be translated ======
-translate S AddScores {Add Score}
+translate S TimeLabel {Tiempo por movimiento}
+translate S AddVars {Añadir las variaciones}
+translate S AddScores {Añadir marcados}
 translate S Engine {Motor}
 translate S TimeMode {Modo de tiempo}
 translate S TimeBonus {Tiempo + bonus}
@@ -1529,10 +1516,8 @@ translate S addAnnotatorTag {Añadir etiqueta de anotador}
 translate S AddScoreToShortAnnotations {Añadir puntuación para anotaciones cortas}
 translate S Export {Exportar}
 translate S BookPartiallyLoaded {Libro parcialmente cargado}
-# ====== TODO To be translated ======
-translate S AddLine {Add Line}
-# ====== TODO To be translated ======
-translate S RemLine {Remove Line}
+translate S AddLine {Añadir línea}
+translate S RemLine {Eliminar línea}
 translate S Calvar {Cálculo de variantes}
 translate S ConfigureCalvar {Configuración}
 # Opening names used in tacgame.tcl
@@ -1627,8 +1612,7 @@ translate S FICSInfo {Información}
 translate S FICSDraw {Ofrecer tablas}
 translate S FICSRematch {Revancha}
 translate S FICSQuit {Salir}
-# ====== TODO To be translated ======
-translate S FICSCensor {Censor}
+translate S FICSCensor {Censurar}
 
 # Correspondence Chess Dialogs:
 translate S CCDlgConfigureWindowTitle {Configurar ajedrez por correo}
