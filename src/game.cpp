@@ -1298,22 +1298,41 @@ Game::Truncate (void)
 {
     ASSERT (CurrentMove != NULL);
     CurrentMove->marker = END_MARKER;
+    CurrentMove->varChild = NULL;
+    CurrentMove->next = NULL;
+    CurrentMove->numVariations = 0;
     return;
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Game::TruncateAndFree():
 //      Truncate game at the current move and free moves
-//      (unused)
+//
+// These two procs currently UNUSED - S.A.
+// I added TruncateAndFreeMove to allow for recursive removal of variatinos, which were previously unhandled.
 
 void
 Game::TruncateAndFree (void)
 {
-    ASSERT (CurrentMove != NULL);
+    TruncateAndFreeMove (CurrentMove);
+}
 
-    moveT * move = CurrentMove->next;
+void
+Game::TruncateAndFreeMove (moveT * thisMove)
+{
+    ASSERT (thisMove != NULL);
+
+    moveT * move = thisMove->next;
     moveT * tmp = NULL;
     while (move->marker != END_MARKER && move != NULL) {
+
+      // free variations
+      moveT * var = move->varChild;
+      while (var) {
+	var = (move->varChild)->varChild;
+	TruncateAndFreeMove (move->varChild);
+      }
+
       tmp = move->next;
       FreeMove(move);
       move = tmp;
@@ -1322,7 +1341,10 @@ Game::TruncateAndFree (void)
     if (move != NULL)
       FreeMove(move);
 
-    CurrentMove->marker = END_MARKER;
+    thisMove->marker = END_MARKER;
+    thisMove->varChild = NULL;
+    thisMove->next = NULL;
+    thisMove->numVariations = 0;
     return;
 }
 

@@ -453,6 +453,7 @@ public:
 
     void     Truncate ();
     void     TruncateAndFree ();
+    void     TruncateAndFreeMove (moveT *);
 
     void     TruncateStart ();
 

@@ -6050,6 +6050,7 @@ sc_game (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
            // Truncate from the current position to the end of the game
            // and free moves memory (to FreeList
             db->game->TruncateAndFree();
+            db->gameAltered = true;
             language = old_language;
         break;
 
