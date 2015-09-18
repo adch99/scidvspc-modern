@@ -583,6 +583,7 @@ proc ::tree::displayLines { baseNumber moves } {
     $w.f.tl insert end $::tr(ErrSearchInterrupted)
     return
   }
+  set notOpen [expr {$moves == $::tr(ErrNotOpen)}]
   set moves [split $moves "\n"]
 
   # for the graph display
@@ -618,13 +619,13 @@ proc ::tree::displayLines { baseNumber moves } {
     $w.f.tl insert end "    "
   }
 
-  set notOpen [string match This* [lindex $moves 0]]
   if {$notOpen} {
     $w.f.tl insert 0.0 "[lindex $moves 0]\n"
   } else {
     $w.f.tl insert end "[lindex $moves 0]\n"
     # blank bargraph in title
-    $w.f.tl window create end-36c -create "canvas %W.g -width 60 -height 12 -highlightthickness 0"
+    set padding [expr [string length [lrange $::tr(TreeTitleRow) 2 end]] + 5]
+    $w.f.tl window create end-${padding}c -create "canvas %W.g -width 60 -height 12 -highlightthickness 0"
   }
 
   ### Hmmm - some of the markers (images) might be 17 or 18 width, and they make the

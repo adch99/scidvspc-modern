@@ -563,7 +563,7 @@ translate P TreeAdjust {Ustaw filtr}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
 translate P TreeTitleRow \
-  {    Pos.      Częstość     Wynik  Rav   Rperf Rok   Remis ECO}
+  {    Pos.        Częstość     Wynik  Rav Rperf Rok   Remis ECO}
 translate P TreeTotal {RAZEM}
 translate P DoYouWantToSaveFirst {Zapisać najpierw}
 translate P AddToMask {Dodaj do maski}

@@ -581,7 +581,7 @@ translate N TreeAdjust {Adjust Filter}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
 translate N TreeTitleRow \
-  {    Zet      Frequentie    Score  GemElo Prest GemJaar Remises ECO}
+  {    Zet      Frequentie    Score GemElo Prest GemJaar Remises ECO}
 translate N TreeTotal {TOTAAL}
 translate N DoYouWantToSaveFirst {Wil u eerst de verandering bewaren?}
 translate N AddToMask {Toevoegen aan het masker}

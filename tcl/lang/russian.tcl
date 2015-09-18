@@ -551,7 +551,7 @@ translate R TreeAdjust {Установить фильтр}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
 translate R TreeTitleRow \
-  {    Ход    ECO       Частота     Счёт   СрЭло Прзв СрГод  %ничьих}
+  {    Ход         ECO        Частота Счёт СрЭло Прзв СрГод %ничьих}
 translate R TreeTotal {ИТОГ}
 translate R DoYouWantToSaveFirst {Вы хотите сохранить первым}
 translate R AddToMask {Добавить в маску}
