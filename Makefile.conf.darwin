@@ -344,10 +344,14 @@ mac_rename:
 	install_name_tool -change /Library/Frameworks/Tcl.framework/Versions/@TCL_VERSION@/Tcl \
 	@executable_path/../Frameworks/Tcl.framework/Versions/@TCL_VERSION@/Tcl tcscid
 mac_buttons:
-	patch -p0 scid <patches/swap_buttons-2-3.patch
+	# mac_buttons is called by mac_install_gui, so dont fail if patch fails
+	if ! patch -f -p0 scid <patches/swap_buttons-2-3.patch ; then echo 0 ; fi ;
 
 mac_install_gui: scid mac_buttons
 	install -m 755 scid /Applications/ScidvsMac.app/Contents/MacOS/
+	@if [ "$(LANGUAGES)" != "" ]; then \
+		cp $(LANGUAGES) /Applications/ScidvsMac.app/Contents/Resources/lang/ ; \
+	fi
 	/Applications/ScidvsMac.app/Contents/MacOS/scid
 
 mac:
