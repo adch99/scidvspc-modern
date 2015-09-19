@@ -483,7 +483,6 @@ CharsetConverter::Codec::Codec()
 CharsetConverter::Codec::Codec(std::string const& encoding)
   :m_impl(nullptr)
 {
-  ASSERT(encoding);
   setup(encoding);
 }
 
@@ -520,8 +519,6 @@ CharsetConverter::Codec::setup(std::string const& encoding)
 void
 CharsetConverter::Codec::setup(Info const& info)
 {
-  ASSERT(encoding);
-
   m_info = info;
 
   if (m_impl)

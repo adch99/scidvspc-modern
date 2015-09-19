@@ -28,7 +28,7 @@ extern int numAsserts;
 
 #ifdef ASSERTIONS
 
-    void _MyAssert(char *, unsigned);
+    void _MyAssert(const char *, unsigned);
 
     #define ASSERT(f)               \
         numAsserts++;               \
