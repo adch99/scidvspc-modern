@@ -19,7 +19,7 @@
 
 int numAsserts = 0;
 
-void _MyAssert(char *filename, unsigned linenum)
+void _MyAssert(const char *filename, unsigned linenum)
 {
     fflush (NULL);  // Flush all buffers first.
     fprintf (stderr, "\nASSERT FAILED!!: %s, line %u\n", filename, linenum);
