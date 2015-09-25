@@ -50,8 +50,9 @@ See <run ::tip::show 0><green>Tip of the Day</green></run> for some helpful hint
 <li>The Help index is meaningful to new users, with links to the game's main features.</li>
 <li>Clickable Variation Arrows, and Paste Variation feature.</li>
 <li>A user friendly Annotation feature. </li>
+<li>Most chess variants (such as Chess960 / Fischer Chess) are wholly unsupported.<li>
 </ul>
-  <p><footer>Updated: Scid vs. PC 4.10 May 2013</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.15 September 2015</footer></p>
 }
 
 set helpTitle(GUI) {Scid's GUI}
@@ -2923,8 +2924,10 @@ engines support both formats.
 
   <p>
   UCI Engines can be configured by pressing <button uci> or <b>Configure</b> in the Edit Window, whence
-  a dialog with the engines parameters will be shown. Gilles will write a big help section here ;<gt>
-  </p>
+  a dialog with the engines parameters will be shown. (Gilles - where is the help section :|).
+  Scid generally ignores options of the format UCI_* , according to the
+<url http://wbec-ridderkerk.nl/html/UCIProtocol.html>UCI standard</url>. Additionally, Chess960 support is not enabled
+because implementation is very problematic.</p>
 
   <h2><name Debugging>Debugging Engine Crashes</name></h2>
   <p>
@@ -2933,7 +2936,7 @@ engines support both formats.
 via the <button tb_annotate> button in the <run ::enginelist::choose><green>engine configuration</green></run> widget.
 The <b>Log Size</b> is the max number of lines in the log. Setting it to zero disables logging altogether.</p>
 
-  <p><footer>Updated: Scid vs. PC 4.13, August 2014</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.15, September 2015</footer></p>
 }
 
 set helpTitle(Tourney) "Computer Tournament"

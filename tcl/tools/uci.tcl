@@ -591,7 +591,7 @@ namespace eval uci {
       # skip options starting with UCI_ and Ponder
       # some engines like shredder use UCI_* options that should not be ignored
       
-      if { ![tokeep $opt] && ( [ lsearch -glob $data "UCI_*" ] != -1 || [ lsearch $data "Ponder" ] != -1 ) } {
+      if { ![tokeep $opt] && ( [ lsearch -glob $data "UCI_*" ] != -1 ) } {
         continue
       }
       
