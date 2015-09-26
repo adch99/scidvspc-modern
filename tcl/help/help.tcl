@@ -1209,14 +1209,14 @@ set helpTitle(Clipbase) "The Clipbase"
 set helpText(Clipbase) {<h1>The Default Database</h1>
   <p>
   In addition to physical databases existing on disk, Scid provides
-  a transient one known as the <b>Clipbase</b>. It is opened by default, and
-  used to cut and paste games between other bases via the <a
+  a temporary one known as the <b>Clipbase</b>. It is always open, and
+  can be used to cut and paste games between other bases via the <a
   Switcher>Database Switcher</a>. Additionally, each base has a game numbered 0
   which also acts as a scratch game.
   </p>
 <h3>Use</h3>
   <p>
-  The Clipbase is useful as a temporary database; for merging
+  The Clipbase is useful for merging
   the results of searches on more than one database or for treating the
   results of a search as a separate database.
   </p>
@@ -1224,9 +1224,9 @@ set helpText(Clipbase) {<h1>The Default Database</h1>
   For example, assume you want to prepare for an opponent and have searched
   a database so the <a Filter>filter</a> contains only games where
   the opponent played white.
-  You can copy these games to the Clipbase by opening the <a Switcher>Switcher</a> and
+  You can copy these games to the Clipbase by opening the Gamelist / <a Switcher>Switcher</a> and
   dragging from the database to the Clipbase.
-  Then, switch to the Clipbase, and open
+  Then, click on the Clipbase, and open
   the <a Tree>Tree Window</a> to examine that players repertoire.
   </p>
 <h3>Notes</h3>
@@ -1242,7 +1242,7 @@ set helpText(Clipbase) {<h1>The Default Database</h1>
   Games in the Clipbase consume your computers memory. So please consider this when copying a large number of games.
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.5 July 2010</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.15 September 2015</footer></p>
 }
 
 set helpTitle(Variations) "Variations"
@@ -2609,15 +2609,16 @@ set helpText(Sorting) {<h1>Sorting Databases</h1>
   <li> ECO (<a ECO>Encyclopedia of Chess Openings code</a>)
   <li> Variations (number of variations in game)
   <li> Comments (number of comments in game)
+  <li> Random
   </ul>
 
   <h3>Sorting is Permanent</h3>
   <p>
-  When you sort a database (which is not read-only) the
+  When you sort a database which is not read-only, the
   results are saved immediately and the <b>order of games is
   permanently changed</b>.  If this is not desired,
   one may first make the database <b>read-only</b> from the
-  <a Maintenance>maintenance</a> window.
+  <a Maintenance>maintenance</a> window, or sort the games in the clipbase.
   </p>
   <p>
   When sorting a read-only database (or PGN archive)
