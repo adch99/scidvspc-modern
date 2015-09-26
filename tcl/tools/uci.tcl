@@ -19,7 +19,7 @@ namespace eval uci {
   set infoToken {depth seldepth time nodes pv multipv score cp mate lowerbound upperbound currmove currmovenumber hashfull nps tbhits sbhits cpuload string refutation currline}
 
   set optionToken {name type default min max var }
-  set optionImportant { MultiPV Hash OwnBook BookFile UCI_LimitStrength UCI_Elo }
+  set optionImportant {MultiPV Hash OwnBook BookFile UCI_LimitStrength UCI_Elo Ponder Threads {Skill Level}}
   set optionToKeep { UCI_LimitStrength UCI_Elo UCI_ShredderbasesPath }
   array set uciInfo {}
   ################################################################################
@@ -570,15 +570,6 @@ namespace eval uci {
 
     set w $w.sf.scrolled
 
-    proc tokeep {opt} {
-      foreach tokeep $::uci::optionToKeep {
-        if { [lsearch $opt $tokeep] != -1 } {
-          return 1
-        }
-      }
-      return 0
-    }
-
     set optList ""
     array set elt {}
     foreach opt $uciOptions {
@@ -588,14 +579,16 @@ namespace eval uci {
       set data [split $opt]
 
       ### todo - check these skipped options on some modern engines S.A.
-      # skip options starting with UCI_ and Ponder
+      # skip options starting with UCI_ (except options in $::optionToKeep)
       # some engines like shredder use UCI_* options that should not be ignored
-      
-      if { ![tokeep $opt] && ( [ lsearch -glob $data "UCI_*" ] != -1 ) } {
+
+      set t [lindex $data 2]
+      if { [lsearch $::uci::optionToKeep $t] == -1  && [string match UCI_* $t] } {
         continue
       }
       
       set length [llength $data]
+
       # parse one option
       for {set i 0} {$i < $length} {incr i} {
         set t [lindex $data $i]
