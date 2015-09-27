@@ -1695,6 +1695,13 @@ proc compactNames {} {
     tk_messageBox -type ok -icon info -parent $w -title  "$::tr(CompactNames)" -message $::tr(NoUnusedNames)
     return
   }
+
+  set confirm [::game::ConfirmDiscard2]
+  if {$confirm == 2} { return }
+  if {$confirm == 0} {
+    ::game::Save
+  }
+
   progressWindow "Scid" [concat $::tr(CompactNames) "..."]
   busyCursor .
   set err [catch {sc_compact names} result]
@@ -1705,13 +1712,14 @@ proc compactNames {} {
     tk_messageBox -type ok -icon warning -parent $w \
         -title "Scid: Error compacting file" -message $result
   } else {
+    sc_game new
+    updateBoard
     tk_messageBox -type ok -icon info -parent $w \
         -title [concat "Scid: " $::tr(CompactNames)] \
         -message [subst $::tr(NameFileCompacted)]
   }
   grab release $w
   destroy $w
-  updateBoard
   ::windows::gamelist::Refresh
   ::maint::Refresh
   if {[winfo exists .maintWin]} {
@@ -1739,6 +1747,12 @@ proc compactGames {parent} {
     return
   }
 
+  set confirm [::game::ConfirmDiscard2]
+  if {$confirm == 2} { return }
+  if {$confirm == 0} {
+    ::game::Save
+  }
+
   set stats [sc_compact stats games_setfilter]
   ::windows::stats::Refresh
   set ::glstart 1
@@ -1761,14 +1775,15 @@ proc compactGames {parent} {
     tk_messageBox -type ok -icon warning -parent $parent \
         -title "Scid: Error compacting file" -message $result
   } else {
+    sc_game new
     updateBoard
-    ::windows::gamelist::Refresh
-    ::crosstab::Refresh
-    ::maint::Refresh
     tk_messageBox -type ok -icon info -parent $parent \
         -title [concat "Scid: " $::tr(CompactGames)] \
         -message [subst $::tr(GameFileCompacted)]
   }
+  ::windows::gamelist::Refresh
+  ::crosstab::Refresh
+  ::maint::Refresh
   if {$parent == {.compactWin}} {
     destroy $parent
     if {[winfo exists .maintWin]} {
