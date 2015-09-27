@@ -1,7 +1,20 @@
-This patch is not working properly, and is kind-of abandoned.
+Stevenaaus - This patch is not working properly, and is kind-of abandoned.
 Previously , it was authored by Ben Hague, and website was http://www.wtfai.me.uk/scid960.html
-Up front is a catalog of bugs i had previously found - Stevenaaus
-
+Up front is a catalog of bugs i had previously found 
+----------------------------
+Gregor - "The problem with this patch is that it's only a
+hack, not a real implementation. A proper implementation requires more work.
+The first thing is the preparation of the move board and the move structure
+(files position.h, position.cpp, movelist.h),many functions are involved and
+have to be changed. Castling should be stored as KxR (e.g. Kf1xg1; currently
+it's stored like Ke1-h1), and this change implies also changes on the Tcl
+side. After this step the move parser (in position.cpp) needs changes, and the
+position of the castling rooks should be stored in class Position. Then the
+validation of Chess960 castling can be implemented, this is not trivial and
+requires much testing (e.g. hidden attackers have to be considered - this is
+not possible in standard chess castling, but in Chess960 castling). After this
+the move generator needs work....  I estimate that the realization of Chess960 in
+Scid needs some months" 
 ----------------------------
 We have a new 'StandardPosition' in position.[h,cpp] which is not reconciled with [sc_game startBoard]
 ----------------------------
