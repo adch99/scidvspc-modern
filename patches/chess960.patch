@@ -5,6 +5,10 @@ Up front is a catalog of bugs i had previously found - Stevenaaus
 ----------------------------
 We have a new 'StandardPosition' in position.[h,cpp] which is not reconciled with [sc_game startBoard]
 ----------------------------
+Nastily - Compiling with -DASSERT, bombs out with - ASSERT FAILED!!: src/position.cpp, line 348
+> Position::Gen960Castling (MoveList * mlist)
+>    ASSERT (! IsKingInCheck());
+----------------------------
 I see there is an issue in uci.tcl where neither of these solutions work perfectly.
       if { [catch { sc_move addUCI $m } ] } { return 1 }
       if { [catch { sc_move add $s1 $s2 $p } ] } { return 1 }
