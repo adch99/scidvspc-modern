@@ -1713,7 +1713,9 @@ proc compactNames {} {
         -title "Scid: Error compacting file" -message $result
   } else {
     sc_game new
-    updateBoard
+    updateBoard -pgn
+    updateTitle
+    updateMenuStates
     tk_messageBox -type ok -icon info -parent $w \
         -title [concat "Scid: " $::tr(CompactNames)] \
         -message [subst $::tr(NameFileCompacted)]
@@ -1776,7 +1778,9 @@ proc compactGames {parent} {
         -title "Scid: Error compacting file" -message $result
   } else {
     sc_game new
-    updateBoard
+    updateBoard -pgn
+    updateTitle
+    updateMenuStates
     tk_messageBox -type ok -icon info -parent $parent \
         -title [concat "Scid: " $::tr(CompactGames)] \
         -message [subst $::tr(GameFileCompacted)]
