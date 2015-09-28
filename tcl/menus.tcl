@@ -1134,7 +1134,7 @@ if {$::docking::USE_DOCKING} {
 
   menu $m.savelayout
   menu $m.restorelayout
-  foreach i {"1 (default)" "2 (custom)" "3 (analysis)" 4 5} slot {1 2 3 4 5} {
+  foreach i {"1 (default)" "2 (custom)" "3 (analysis)" "4 (sa)" 5} slot {1 2 3 4 5} {
     $m.savelayout add command -label $i -command "::docking::layout_save $slot"
     $m.restorelayout add command -label $i -command "::docking::layout_restore $slot"
   }
