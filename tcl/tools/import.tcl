@@ -89,10 +89,13 @@ proc importPgnGame {} {
   frame $w.b.space -width 20
   pack $w.b.paste $w.b.space -side left -padx 10 -pady 2
   pack $w.b.cancel $w.b.import $w.b.clear -side right -padx 10 -pady 2
+
   # Paste the current selected text automatically:
-  if {![catch {set texttopaste [selection get]}]} {
-    $w.pane.edit.text insert end $texttopaste
-  } 
+  if {[catch {set texttopaste [selection get -selection PRIMARY]} ]} {
+    catch {set texttopaste [selection get -selection CLIPBOARD]}
+  }
+  $w.pane.edit.text insert end $texttopaste
+
   # if {![info exists texttopaste] || $texttopaste == {}} 
     $w.pane.err.text insert end $::tr(ImportHelp1)
     # $w.pane.err.text insert end "\n"
@@ -122,19 +125,6 @@ proc importPgnGame {} {
 }
 
 
-proc importClipboardGame {} {
-
-  importPgnGame
-
-  ### X paste selection is done in importPgnGame
-  if {$::windowsOS} {
-     catch {event generate .importWin.pane.edit.text <<Paste>>}
-  }
-}
-
-################################################################################
-#
-################################################################################
 proc importMoveList {line} {
   sc_move start
   sc_move addSan $line

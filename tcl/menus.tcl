@@ -157,7 +157,7 @@ $m add command -label EditPasteBoard -accelerator "control-V" -command pasteFEN
 bind .main <Control-V> pasteFEN
 set helpMessage($m,[incr menuindex]) EditPasteBoard
 
-$m add command -label EditPastePGN -command importClipboardGame -accelerator "control-I"
+$m add command -label EditPastePGN -command importPgnGame -accelerator "control-I"
 set helpMessage($m,[incr menuindex]) EditPastePGN
 
 $m add separator
