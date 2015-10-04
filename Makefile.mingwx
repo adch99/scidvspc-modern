@@ -151,13 +151,13 @@ escid.gui: $(TCLS)
 	cat $(TCLS_ENGLISH_ONLY) > ./escid.gui
 
 scmerge.exe: src/scmerge.o $(OBJS)
-	$(LINK) -o scmerge.exe src/scmerge.o $(OBJS)
+	$(LINK) -o scmerge.exe src/scmerge.o $(OBJS) $(CHARSETCONVOBJS) -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION)
 
-pgnscid.exe: src/pgnscid.o $(OBJS)
-	$(LINK) -o pgnscid.exe src/pgnscid.o $(OBJS)
+pgnscid.exe: src/pgnscid.o $(OBJS) $(CHARSETCONVOBJS)
+	$(LINK) -o pgnscid.exe src/pgnscid.o $(OBJS) $(CHARSETCONVOBJS) -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION)
 
-scidt.exe: src/scidt.o $(OBJS)
-	$(LINK) -o scidt.exe src/scidt.o $(OBJS)
+scidt.exe: src/scidt.o $(OBJS) $(CHARSETCONVOBJS)
+	$(LINK) -o scidt.exe src/scidt.o $(OBJS) $(CHARSETCONVOBJS) -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION)
 
 scidlet.exe: src/scidlet.o src/engine.o src/recog.o $(OBJS)
 	$(LINK) $(LDFLAGS) -o scidlet.exe src/scidlet.o src/engine.o src/recog.o \
@@ -174,15 +174,15 @@ scid.exe: src/scid.o $(OBJS) $(CHARSETCONVOBJS) src/tree.o src/filter.o \
 
 tcscid.exe: src/tcscid.o $(OBJS) src/tree.o src/filter.o \
             src/pbook.o src/crosstab.o src/spellchk.o src/probe.o \
-            src/optable.o src/engine.o src/recog.o
-	$(LINK) $(LDFLAGS) -o tcscid.exe src/tcscid.o $(OBJS) \
+            src/optable.o src/engine.o src/recog.o $(CHARSETCONVOBJS)
+	$(LINK) $(LDFLAGS) -o tcscid.exe src/tcscid.o $(OBJS) $(CHARSETCONVOBJS) -ltcl$(TCL_VERSION) \
             src/tree.o src/filter.o src/pbook.o \
             src/crosstab.o src/spellchk.o src/probe.o \
             src/optable.o src/engine.o src/recog.o \
             -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION)
 
-eco2epd.exe: src/eco2epd.o src/pbook.o $(OBJS)
-	$(LINK) -o eco2epd.exe src/eco2epd.o src/pbook.o $(OBJS)
+eco2epd.exe: src/eco2epd.o src/pbook.o $(OBJS) $(CHARSETCONVOBJS)
+	$(LINK) -o eco2epd.exe src/eco2epd.o src/pbook.o $(OBJS) $(CHARSETCONVOBJS) -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION)
 
 scid.coff: scid.rc
 	$(RC) -O coff scid.rc scid.coff

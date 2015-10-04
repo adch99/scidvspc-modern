@@ -442,8 +442,8 @@ tcscid: src/tcscid.o $(OBJS) $(CHARSETCONVOBJS) src/tree.o src/filter.o src/pboo
 
 # eco2epd is now optional extra program NOT compiled by default, since
 # scid now reads the .eco file format directly.
-eco2epd: src/eco2epd.o $(OBJS) src/pbook.o
-	$(LINK) $(LDFLAGS) -o eco2epd src/eco2epd.o $(OBJS) src/pbook.o $(ZLIB)
+eco2epd: src/eco2epd.o $(OBJS) src/pbook.o $(CHARSETCONVOBJS)
+	$(LINK) $(LDFLAGS) -o eco2epd src/eco2epd.o $(OBJS) src/pbook.o $(ZLIB) $(CHARSETCONVOBJS) $(TCL_LIBRARY)
 
 ### Rules to create .o files from .cpp files:
 
