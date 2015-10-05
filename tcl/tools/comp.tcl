@@ -277,12 +277,6 @@ proc compOk {} {
   set names {}
   set comp(games) {}
   set comp(current) 0
-    
-  set players {}
-  set comp(players) {} ;# to remember which engines are selected between widget restarts
-  set names {}
-  set comp(games) {}
-  set comp(current) 0
   set comp(book) [.comp.config.book.combo get]
 
   if {$comp(timecontrol) == "permove"} {
@@ -1002,7 +996,17 @@ proc drawCombos {} {
   set w .comp
   set l $w.engines.list
 
-  if {[winfo exists $l]} {destroy $l}
+  if {[winfo exists $l]} {
+    # Remember current players
+    # ... before destroying widget (which is easiest)
+    set comp(players) {}
+    for {set i 0} {$i < $comp(count)} {incr i} {
+      catch {
+        lappend comp(players) [$l.$i.combo current]
+      }
+    }
+    destroy $l
+  }
 
   pack [frame $l] -side top -padx 5 -pady 2
 
