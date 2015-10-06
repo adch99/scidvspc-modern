@@ -27,6 +27,11 @@
 #include <stdio.h>
 #include <time.h>
 #include <string.h>
+#include <tcl.h>
+
+
+static int argc;
+static char **argv;
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -62,8 +67,16 @@ usage (char * pname)
 
 
 int
-main (int argc, char * argv[])
+myMain(Tcl_Interp *interp)
 {
+    // We have to initialize the Tcl library, because the
+    // character set detector is using some Tcl functions.
+    if (Tcl_Init(interp) != TCL_OK)
+    {
+	fprintf(stderr, "Fatal error: couldn't initialize Tcl library\n");
+	exit(1);
+    }
+
     setbuf(stdout, NULL);   // Make stdout unbuffered.
 
     gameNumberT gNumber;
@@ -268,6 +281,16 @@ main (int argc, char * argv[])
     printf("%d asserts were tested\n", numAsserts);
 #endif
     pgnFile->Close();
+
+    exit(0);
+    return TCL_OK;
+}
+
+
+int
+main (int myArgc, char * myArgv[])
+{
+    Tcl_Main(argc = myArgc, argv = myArgv, myMain);
     return 0;
 }
 
