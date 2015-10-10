@@ -1249,6 +1249,7 @@ proc bookAnnotation { {n 1} } {
   ### Wrong. Compares c4 Bc4
   # if { [ string match -nocase "*[sc_game info previousMoveNT]*" $prevbookmoves ] != 1 }
 
+  if {![sc_game startBoard]} {
   if {[lsearch -exact $prevbookmoves [sc_game info previousMoveNT]] == -1} {
     if {$prevbookmoves != {}} {
       sc_pos setComment "[sc_pos getComment]$verboseMoveOutOfBook ($bookName: $prevbookmoves)"
@@ -1257,6 +1258,7 @@ proc bookAnnotation { {n 1} } {
     }
   } else  {
     sc_pos setComment "[sc_pos getComment]$verboseLastBookMove ($bookName)"
+  }
   }
 
   # last move was out of book or the last move in book : it needs to be analyzed, so take back
