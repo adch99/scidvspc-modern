@@ -708,10 +708,9 @@ translate W AnnotateBlundersOnly {När partidraget är en uppenbar blunder}
 translate W BlundersNotBest {Blunders/Not Best}
 translate W AnnotateBlundersOnlyScoreChange {Analysen rapporterar blunder, med värderingsförändringar från/till}
 translate W AnnotateTitle {Konfigurera Anteckningar}
-translate W AnnotateWith {Kommentera Med}
-translate W AnnotateWhichMoves {Som Flyttar}
-translate W AnnotateComment {Lägg annotator att kommentera}
 translate W BlundersThreshold {Tröskelvärde}
+# ====== TODO To be translated ======
+translate W ScoreFormat {Score format}
 # ====== TODO To be translated ======
 translate W CutOff {Cut Off}
 translate W LowPriority {Kör som lågprioriterad process}

@@ -682,10 +682,9 @@ translate U AnnotateBlundersOnly {Quando a jogada é um grande erro}
 translate U BlundersNotBest {Apenas grandes erros}
 translate U AnnotateBlundersOnlyScoreChange {Nos erros anotar a desvalorização da posição em pontos: }
 translate U AnnotateTitle {Configurar Anotação}
-translate U AnnotateWith {Que se Move}
-translate U AnnotateWhichMoves {Com anotações}
-translate U AnnotateComment {Adicionar anotador aos comentários}
 translate U BlundersThreshold {Limiar}
+# ====== TODO To be translated ======
+translate U ScoreFormat {Score format}
 translate U CutOff {Não anotar:}
 translate U LowPriority {Baixa prioridade no CPU} ;# ***
 translate U LogEngines {Tamanho do Registo}

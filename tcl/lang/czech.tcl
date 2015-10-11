@@ -759,11 +759,10 @@ translate C BlundersNotBest {Blunders/Not Best}
 # ====== TODO To be translated ======
 translate C AnnotateBlundersOnlyScoreChange {Analysis reports blunder, with score change from/to: }
 translate C AnnotateTitle {Konfigurace Anotace}
-translate C AnnotateWith {S komentovat}
-translate C AnnotateWhichMoves {Který se pohybuje}
-translate C AnnotateComment {Vlozit do annotator komentar}
 # ====== TODO To be translated ======
 translate C BlundersThreshold {Threshold}
+# ====== TODO To be translated ======
+translate C ScoreFormat {Score format}
 # ====== TODO To be translated ======
 translate C CutOff {Cut Off}
 translate C LowPriority {Nízká CPU priorita}

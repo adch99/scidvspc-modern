@@ -695,10 +695,9 @@ translate P AnnotateBlundersOnly {Tylko oczywiste błędy}
 translate P BlundersNotBest {Blunders/Not Best}
 translate P AnnotateBlundersOnlyScoreChange {Tylko błędy ze zmianą oceny z/na: }
 translate P AnnotateTitle {Konfiguracja komentarza}
-translate P AnnotateWith {Format komentarza}
-translate P AnnotateWhichMoves {Komentowane posunięcia}
-translate P AnnotateComment {Dodaj pole komentatora}
 translate P BlundersThreshold {Granica błędu}
+# ====== TODO To be translated ======
+translate P ScoreFormat {Score format}
 translate P CutOff {Odcięcie}
 translate P LowPriority {Niski priorytet CPU} 
 translate P LogEngines {Loguj enginy}

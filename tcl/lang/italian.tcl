@@ -778,10 +778,9 @@ translate I AnnotateBlundersOnly {Quando la mossa è chiaramente un errore}
 translate I BlundersNotBest {Blunders/Not Best}
 translate I AnnotateBlundersOnlyScoreChange {L'analisi riporta come errori, con variazione del punteggio da/a:}
 translate I AnnotateTitle {Configurare Annotazione}
-translate I AnnotateWith {Con annotare}
-translate I AnnotateWhichMoves {Che si muove}
-translate I AnnotateComment {Aggiungi annotatore di commentare}
 translate I BlundersThreshold {Limite}
+# ====== TODO To be translated ======
+translate I ScoreFormat {Score format}
 # ====== TODO To be translated ======
 translate I CutOff {Cut Off}
 translate I LowPriority {Imposta la priorità della CPU a bassa}

@@ -175,7 +175,7 @@ set annotate(WantedDepth) 13
 set annotate(Depth) 1
 set useAnalysisBook 0
 set annotate(isVar) 0
-set annotate(addComment) 0
+set annotate(scoreType) {+ 1.5}
 set annotate(blunder) 1.0
 set annotate(cutoff) 5.0
 set maintFlag W

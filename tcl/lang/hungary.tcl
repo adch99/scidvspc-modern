@@ -767,10 +767,9 @@ translate H BlundersNotBest {Blunders/Not Best}
 translate H AnnotateBlundersOnlyScoreChange {Analysis reports blunder, with score change from/to: }
 # ====== TODO To be translated ======
 translate H AnnotateTitle {Állítsa Jegyzet}
-translate H AnnotateWith {A jegyzetekkel}
-translate H AnnotateWhichMoves {Melyik mozgatja}
-translate H AnnotateComment {Add annotator a hozzászólásr}
 translate H BlundersThreshold {Threshold}
+# ====== TODO To be translated ======
+translate H ScoreFormat {Score format}
 # ====== TODO To be translated ======
 translate H CutOff {Cut Off}
 translate H LowPriority {Alacsony CPU-prioritás}

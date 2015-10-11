@@ -682,10 +682,9 @@ translate R AnnotateBlundersOnly {Когда ход в партии являет
 translate R BlundersNotBest {Blunders/Not Best}
 translate R AnnotateBlundersOnlyScoreChange {Анализ отчёта ошибок, которые изменяли счёт от/до:}
 translate R AnnotateTitle {Настроить аннотацию}
-translate R AnnotateWith {Аннотировать с}
-translate R AnnotateWhichMoves {Какие ходы}
-translate R AnnotateComment {Добавить аннотатора в комментарий}
 translate R BlundersThreshold {Порог}
+# ====== TODO To be translated ======
+translate R ScoreFormat {Score format}
 translate R CutOff {Отключить}
 translate R LowPriority {Низкий приоритет CPU}
 translate R LogEngines {Журнал движка}

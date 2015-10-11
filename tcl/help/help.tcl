@@ -2833,35 +2833,30 @@ with the format "stat01: time nodes ply mvleft mvtot mvname". The results can be
 
   <p><b>Options</b>
   <ul>
-     <li><term>Blunder Threshold</term> A Score which determines whether it's a bad move or not.</li>
-     <li><term>Move Control</term> Whether to process each move for a fixed time, or fixed depth (UCI only).</li>
-     <li><term>Depth per move</term> Number of half-moves engine spends on analysing each move (UCI only).</li>
-     <li><term>Seconds per move</term> Number of seconds engine spends on analysing each move.</li>
-     <li><term>Add Scores/Variations</term> Choose when to add Scores and Variations.
+     <li><b>Move Control</b> Whether to process each move for a fixed time, or fixed depth (UCI only).</li>
+     <li><b>Depth per move</b> Number of half-moves engine spends on analysing each move (UCI only).</li>
+     <li><b>Seconds per move</b> Number of seconds engine spends on analysing each move.</li>
+     <li><b>Blunder Threshold</b> A Score which determines whether it's a bad move or not,
+     representing pawns (i.e. 0.5 means an evaluation drop of half a pawn).  </li>
+     <li><b>Cut Off Threshold</b> Above this score, dont worry about adding variations, as game is won.</li>
+<br>
+     <li><b>Add Scores/Variations</b> Choose when to add Scores and Variations.
      (Scores can then be utilized by the <a Graphs Score>Score Graph</a>)</li>
-     <li><term>Cut Off Threshold</term> Above this score, dont worry about adding variations, as game is won.</li>
-     <li><term>Which Side</term> Select which side(s) should be annotated.</li>
-     <li><term>Which Moves</term>
-     Add an annotation only if the game move is a blunder, or not the best move.
-     The "Blunder Threshold" is given in units of pawns (i.e. 0.5 means 
-     an evaluation drop of half a pawn).  </li>
-
-     <li><term>Process variations</term> Recursively process variations.</li>
-     <li><term>Add annotator to comment</term>
-     Store engine name with each annotation.</li>
-     <li><term>Add annotator tag</term>
+     <li><b>Score format</b> Select how single scores will be formatted. The square bracket options will hide comments in the PGN window if PGN-<gt>Hide Codes is selected.</li>
+     <li><b>Which Side</b> Select which side(s) should be annotated.</li>
+<br>
+     <li><b>Add annotator tag</b>
      Store engine name as an "Annotator" tag in the PGN header.</li>
-     <li><term>Use book</term> Moves that are contained in this opening book are skipped
-     in the annotation process, and annotation starts after the book moves.</li>
-     <li><term>Batch annotation</term> 
-     Automatically process multiple games, saving annotations as we go.</li>
-     <li><term>Opening errors only</term> Only check for opening errors.
+     <li><b>Process variations</b> Recursively process variations.</li>
+     <li><b>Use book</b> Moves that are contained in this opening book are skipped
+     , and annotation starts after the book moves.</li>
+     <li><b>Batch annotation</b> 
+     Automatically process multiple games, saving them as we go.</li>
+     <li><b>Opening errors only</b> Only check for opening errors.
      (up to the move specified).</li>
-     <li><term>Mark tactical exercises</term> This can be used to
+     <li><b>Mark tactical exercises</b> This can be used to
      generate exercises for the training function <a FindBestMove>Find
-     Best Move</a>. This option is only available for <term>UCI</term>
-     engines.
-     </li>
+     Best Move</a>. (UCI only).</li>
   </ul>
 
   <h3>Training</h3>
@@ -3457,17 +3452,10 @@ from the Tools menu. Right-clicking the graph will refresh it.
   The <green><run ::tools::graphs::score::Toggle>Score Graph</run></green> (Control-Shift-Z)
   shows the move evaluations (stored as comments in the current game) as a graph. </p>
   <p>
-  The first step in using the Score Graph is to add scores to a game with Scid's <a Analysis Annotating>annotation feature</a>
-  These scores have the format:
-  <ul>
-  <li><b>1.e4 {"+0.25 ...."}</b></li>
-  </ul>
-  Alternatively scores created by Crafty's annotate command are also recognised. These have the format:
-  <ul>
-  <li><b>1.e4 ({9:+0.25} ....)</b></li>
-  </ul>
-  Both formats are represented from White's perspective.
-  In cases when the scores are not from whites perspective, one can select an option
+  The first step in using the Score Graph is to add scores to a game with Scid's <a Analysis Annotating>annotation feature</a>.
+  These scores have one of the formats +0.25, [% +0.25] , or [%eval +0.25]. The later two formats allow these scores to be hidden in  the PGN window by enabling PGN-<gt>Hide Codes.
+  The values are represented from White's perspective (so a negative value means black is ahead).
+  In cases when the scores are not from White's perspective, one can select an option
   (in the Options Menu) for a correct perspective.
   </p>
   <h4>Features</h4>
@@ -3477,7 +3465,7 @@ from the Tools menu. Right-clicking the graph will refresh it.
   Right Clicking anywhere in the score graph will perform a refresh.</p>
   
 
-  <p><footer>Updated: Scid vs. PC 4.8 April 2012</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.15 Sept 2015</footer></p>
 }
 
 set helpTitle(TB) "Tablebases"

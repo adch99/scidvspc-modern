@@ -724,10 +724,9 @@ translate G AnnotateBlundersOnly {Όταν η κίνηση είναι Σοβαρ
 translate G BlundersNotBest {Blunders/Not Best}
 translate G AnnotateBlundersOnlyScoreChange {Η Ανάλυση σχολιάζει ως Σοβαρό Σφάλμα, με διαφορά υλικού από/σε: }
 translate G AnnotateTitle {Ρυθμίσεις Σχολιαστή}
-translate G AnnotateWith {Σχολιασμός Με }
-translate G AnnotateWhichMoves {Ποιες Κινήσεις}
-translate G AnnotateComment {Προσθήκη Σχολιαστή στο κείμενο}
 translate G BlundersThreshold {Threshold}
+# ====== TODO To be translated ======
+translate G ScoreFormat {Score format}
 # ====== TODO To be translated ======
 translate G CutOff {Cut Off}
 translate G LowPriority {Χαμηλή Προτεραιότητα CPU}

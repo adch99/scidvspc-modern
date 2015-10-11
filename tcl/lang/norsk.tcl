@@ -838,10 +838,9 @@ translate O BlundersNotBest {Blunders/Not Best}
 translate O AnnotateBlundersOnlyScoreChange {Analysis reports blunder, with score change from/to: }
 # ====== TODO To be translated ======
 translate O AnnotateTitle {Konfigurer Annotation}
-translate O AnnotateWith {Kommentere Med}
-translate O AnnotateWhichMoves {Hvilken Moves}
-translate O AnnotateComment {Legg annotator å kommentere}
 translate O BlundersThreshold {Threshold}
+# ====== TODO To be translated ======
+translate O ScoreFormat {Score format}
 # ====== TODO To be translated ======
 translate O CutOff {Cut Off}
 translate O LowPriority {Low CPU priority} ;# ***

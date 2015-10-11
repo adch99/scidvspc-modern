@@ -720,10 +720,9 @@ translate D AnnotateBlundersOnly {Wenn der Partiezug ein offensichtlicher Fehler
 translate D BlundersNotBest {Blunders/Not Best}
 translate D AnnotateBlundersOnlyScoreChange {Analyse berichtet Fehler, Bewertungsänderung von/nach: }
 translate D AnnotateTitle {konfigurieren Annotation}
-translate D AnnotateWith {Kommentieren mit}
-translate D AnnotateWhichMoves {welche Züge}
-translate D AnnotateComment {Kommentator speichern}
 translate D BlundersThreshold {Grenze}
+# ====== TODO To be translated ======
+translate D ScoreFormat {Score format}
 # ====== TODO To be translated ======
 translate D CutOff {Cut Off}
 translate D LowPriority {Niedrige CPU-Priorität}

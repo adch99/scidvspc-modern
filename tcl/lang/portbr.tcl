@@ -766,10 +766,9 @@ translate B BlundersNotBest {Blunders/Not Best}
 translate B AnnotateBlundersOnlyScoreChange {Analysis reports blunder, with score change from/to: }
 # ====== TODO To be translated ======
 translate B AnnotateTitle {Configure Annotation}
-translate B AnnotateWith {Que se Move}
-translate B AnnotateWhichMoves {Com anotações}
-translate B AnnotateComment {Adicionar anotador a comentar}
 translate B BlundersThreshold {Threshold}
+# ====== TODO To be translated ======
+translate B ScoreFormat {Score format}
 # ====== TODO To be translated ======
 translate B CutOff {Cut Off}
 translate B LowPriority {Low CPU priority} ;# ***

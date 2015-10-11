@@ -691,10 +691,8 @@ translate E AnnotateBlundersOnly {When move is a blunder}
 translate E BlundersNotBest {Blunders/Not Best}
 translate E AnnotateBlundersOnlyScoreChange {Analysis reports blunder, with score change from/to: }
 translate E AnnotateTitle {Configure Annotation}
-translate E AnnotateWith {Annotate With}
-translate E AnnotateWhichMoves {Which Moves}
-translate E AnnotateComment {Add annotator to comment}
 translate E BlundersThreshold {Threshold}
+translate E ScoreFormat {Score format}
 translate E CutOff {Cut Off}
 translate E LowPriority {Low CPU Priority}
 translate E LogEngines {Log Size}
@@ -1477,7 +1475,7 @@ translate E MultiPV {Multiple variations}
 translate E Hash {Hash memory}
 translate E OwnBook {Use engine book}
 translate E BookFile {Opening book}
-translate E AnnotateVariations {Process sub-variations}
+translate E AnnotateVariations {Process variations}
 translate E ShortAnnotations {Short annotations}
 translate E addAnnotatorTag {Add annotator tag}
 translate E AddScoreToShortAnnotations {Add score to annotations}

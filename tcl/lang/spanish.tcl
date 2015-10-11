@@ -726,10 +726,9 @@ translate S AnnotateBlundersOnly {Cuando el movimiento es un disparate}
 translate S BlundersNotBest {Blunders/Not Best}
 translate S AnnotateBlundersOnlyScoreChange {Análisis reporta errores, con cambio de puntuación desde: }
 translate S AnnotateTitle {Configurar anotación}
-translate S AnnotateWith {Anotar con}
-translate S AnnotateWhichMoves {Qué movimientos}
-translate S AnnotateComment {Añadir anotador a comentario}
 translate S BlundersThreshold {Umbral del error }
+# ====== TODO To be translated ======
+translate S ScoreFormat {Score format}
 translate S CutOff {Punto de corte}
 translate S LowPriority {Baja prioridad del procesador}
 translate S LogEngines {Tamaño del registro}

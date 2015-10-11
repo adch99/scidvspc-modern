@@ -683,10 +683,9 @@ translate F AnnotateBlundersOnly {Quand le coup est une erreur}
 translate F BlundersNotBest {Blunders/Not Best}
 translate F AnnotateBlundersOnlyScoreChange {Coup faible, le score varie de/à: }
 translate F AnnotateTitle {Configurer Annotation}
-translate F AnnotateWith {Annoter Avec}
-translate F AnnotateWhichMoves {Qui se déplace}
-translate F AnnotateComment {Ajouter annotateur de commenter}
 translate F BlundersThreshold {Seuil de l'erreur}
+# ====== TODO To be translated ======
+translate F ScoreFormat {Score format}
 # ====== TODO To be translated ======
 translate F CutOff {Cut Off}
 translate F LowPriority {Priorité processeur basse}

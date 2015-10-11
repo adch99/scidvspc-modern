@@ -997,6 +997,14 @@ proc initAnnotation {n} {
   pack $w.scoreslabel -side top
   pack $w.scores_allmoves $w.scores_blunders $w.scores_var $w.scores_none -side top -fill x
 
+  frame $w.scoreType
+  label $w.scoreType.label -textvar ::tr(ScoreFormat)
+  ttk::combobox $w.scoreType.values -width 12 -textvariable annotate(scoreType) -values {{+1.5} {[% +1.5]} {[%eval +1.5]}}
+
+  pack $w.scoreType -expand 1 -fill x
+  pack $w.scoreType.label -side left -padx 30
+  pack $w.scoreType.values -side right
+
   addHorizontalRule $w
 
   ### Annotate Variations
@@ -1027,10 +1035,9 @@ proc initAnnotation {n} {
 
   ### General options frame
 
-  checkbutton $w.cbAnnotateVar         -textvar ::tr(AnnotateVariations) -variable annotate(isVar)      -anchor w
-  checkbutton $w.cbAddAnnotatorComment -textvar ::tr(AnnotateComment)    -variable annotate(addComment) -anchor w
   checkbutton $w.cbAddAnnotatorTag     -textvar ::tr(addAnnotatorTag)    -variable annotate(addTag)     -anchor w
-  pack $w.cbAnnotateVar $w.cbAddAnnotatorComment $w.cbAddAnnotatorTag -anchor w
+  checkbutton $w.cbAnnotateVar         -textvar ::tr(AnnotateVariations) -variable annotate(isVar)      -anchor w
+  pack $w.cbAddAnnotatorTag $w.cbAnnotateVar -anchor w
 
   # Book
 
@@ -1140,7 +1147,7 @@ proc initAnnotation {n} {
   bind $w <F1> {helpWindow Analysis Annotating}
   placeWinOverParent $w .analysisWin$n
   wm state $w normal
-  focus -force $w ; # windows bug - deosnt get focus and <Escape> fails
+  focus -force $w ; # windows bug - doesn't get focus and <Escape> fails
   # have to start engine here for depth based anno niggles
   if {! $analysis(analyzeMode$n)} {
     toggleEngineAnalysis $n 1
@@ -1391,12 +1398,13 @@ proc addScore {n type {novar 0}} {
       both - end  { set text [format "%+.2f / %+.2f" $analysis(score$n) $analysis(prevscore$n)] }
     }
 
-    # Add engine name to score if desired and not a single score
-    if {$annotate(addComment) && $type != "single"} {
-      # To parse scores if the engine's name contains - or + chars (see sc_game_scores)
-      set name  [string map {- { } + { }} $analysis(name$n)]
-      set text "$name: $text"
-    } 
+    if {$annotate(Engine) > -1 && $type == "single"} {
+      switch $annotate(scoreType) {
+        {[% +1.5]} { set text "\[% $text\]" }
+        {[%eval +1.5]} { set text "\[%eval $text\]" }
+      }
+
+    }
 
     set prev_comment [sc_pos getComment]
 

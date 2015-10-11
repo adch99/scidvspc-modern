@@ -713,10 +713,9 @@ translate N AnnotateBlundersOnly {Als de partijzet een blunder is}
 translate N BlundersNotBest {Blunders/Not Best}
 translate N AnnotateBlundersOnlyScoreChange {Blunder analyse rapport, met scorewijziging van/naar: }
 translate N AnnotateTitle {Configureren annotatie}
-translate N AnnotateWith {Annoteren met}
-translate N AnnotateWhichMoves {welke zetten}
-translate N AnnotateComment {Toevoegen annotator commentaar}
 translate N BlundersThreshold {Ondergrens}
+# ====== TODO To be translated ======
+translate N ScoreFormat {Score format}
 # ====== TODO To be translated ======
 translate N CutOff {Cut Off}
 translate N LowPriority {Lage CPU prioriteit}
