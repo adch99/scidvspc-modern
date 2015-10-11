@@ -2842,9 +2842,9 @@ with the format "stat01: time nodes ply mvleft mvtot mvname". The results can be
 <br>
      <li><b>Add Scores/Variations</b> Choose when to add Scores and Variations.
      (Scores can then be utilized by the <a Graphs Score>Score Graph</a>)</li>
-     <li><b>Score format</b> Select how single scores will be formatted. The square bracket options will hide comments in the PGN window if PGN-<gt>Hide Codes is selected.</li>
      <li><b>Which Side</b> Select which side(s) should be annotated.</li>
 <br>
+     <li><b>Score format</b> Select how single scores will be formatted. The square bracket options will hide comments in the PGN window if PGN-<gt>Hide Codes is selected.</li>
      <li><b>Add annotator tag</b>
      Store engine name as an "Annotator" tag in the PGN header.</li>
      <li><b>Process variations</b> Recursively process variations.</li>

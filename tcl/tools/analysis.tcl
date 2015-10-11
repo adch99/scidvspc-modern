@@ -997,14 +997,6 @@ proc initAnnotation {n} {
   pack $w.scoreslabel -side top
   pack $w.scores_allmoves $w.scores_blunders $w.scores_var $w.scores_none -side top -fill x
 
-  frame $w.scoreType
-  label $w.scoreType.label -textvar ::tr(ScoreFormat)
-  ttk::combobox $w.scoreType.values -width 12 -textvariable annotate(scoreType) -values {{+1.5} {[% +1.5]} {[%eval +1.5]}}
-
-  pack $w.scoreType -expand 1 -fill x
-  pack $w.scoreType.label -side left -padx 30
-  pack $w.scoreType.values -side right
-
   addHorizontalRule $w
 
   ### Annotate Variations
@@ -1037,6 +1029,15 @@ proc initAnnotation {n} {
 
   checkbutton $w.cbAddAnnotatorTag     -textvar ::tr(addAnnotatorTag)    -variable annotate(addTag)     -anchor w
   checkbutton $w.cbAnnotateVar         -textvar ::tr(AnnotateVariations) -variable annotate(isVar)      -anchor w
+
+  frame $w.scoreType
+  label $w.scoreType.label -textvar ::tr(ScoreFormat)
+  ttk::combobox $w.scoreType.values -width 12 -textvariable annotate(scoreType) -values {{+1.5} {[% +1.5]} {[%eval +1.5]}}
+
+  pack $w.scoreType -fill x
+  pack $w.scoreType.label -side left -padx 10
+  pack $w.scoreType.values -side right
+
   pack $w.cbAddAnnotatorTag $w.cbAnnotateVar -anchor w
 
   # Book
@@ -1084,7 +1085,7 @@ proc initAnnotation {n} {
   frame $w.batch
   pack $w.batch -side top -fill x
   set to [sc_base numGames]
-  if {$to <1} { set to 1}
+  if {$to < 1} {set to 1}
   checkbutton $w.batch.cbBatch -textvar ::tr(AnnotateSeveralGames) -variable annotate(isBatch) \
     -command "checkState ::annotate(isBatch) $w.batch.spBatchEnd"
 
@@ -1109,13 +1110,13 @@ proc initAnnotation {n} {
 
   # Pack
 
-  grid $w.batch.cbOpeningOnly -column 0 -row 0 -sticky w
-  grid $w.batch.spOpeningOnly -column 1 -row 0 -padx 5
-  grid $w.batch.lOpeningOnly -column 2 -row 0 -sticky e
-
-  grid $w.batch.cbBatch -column 0 -row 1 -sticky w
-  grid $w.batch.spBatchEnd -column 1 -row 1 -columnspan 2 -sticky e
+  grid $w.batch.cbBatch    -column 0 -row 0 -sticky w
+  grid $w.batch.spBatchEnd -column 1 -row 0 -columnspan 2 -sticky e
   set annotate(batchEnd) $to
+
+  grid $w.batch.cbOpeningOnly -column 0 -row 1 -sticky w
+  grid $w.batch.spOpeningOnly -column 1 -row 1 -padx 5
+  grid $w.batch.lOpeningOnly  -column 2 -row 1 -sticky e
 
   checkbutton $w.batch.cbMarkTactics -textvar ::tr(MarkTacticalExercises) -variable annotate(markExercises)
   grid $w.batch.cbMarkTactics -column 0 -row 2 -sticky w
