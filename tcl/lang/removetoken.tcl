@@ -43,6 +43,10 @@ proc remove {langfile enc token} {
   close $f
   set langData [split $data "\n"]
 
+  if {[lindex $langData end] == ""} {
+    set langData [lrange $langData 0 end-1]
+  }
+
   set fnew [open $langfile.tcl.new w]
   fconfigure $fnew -encoding $enc
 
@@ -60,9 +64,12 @@ proc remove {langfile enc token} {
 ################################################################################
 
 set token $argv
-
-foreach language $languages {
-  remove $language $encodings($language) $token
+if {$token == "" || [llength $token] > 1} {
+  puts "usage: removetoken.tcl ARG"
+} else {
+  foreach language $languages {
+    remove $language $encodings($language) $token
+  }
 }
 
 # end of file
