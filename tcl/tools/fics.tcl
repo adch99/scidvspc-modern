@@ -2255,15 +2255,12 @@ namespace eval fics {
       $w.c create text [expr $graph(xoff) - 10] 0 -fill black -anchor nw -text "E\nL\nO"
       $w.c create text $graph(width) [expr $graph(height) + 2] -fill black -anchor se -text [tr Time]
 
-      # Time marker at 5'
-      set x [ expr $graph(xoff) + 5 * ($graph(width) - $graph(xoff)) / ($offers_maxtime - $offers_mintime)]
-      $w.c create line $x 0 $x $gy -fill grey
-      $w.c create text [expr $x - 5] [expr $graph(height) + 2]  -fill black -anchor sw -text "5min"
-
-      # Time marker at 15'
-      set x [ expr $graph(xoff) + 15 * ($graph(width) - $graph(xoff)) / ($offers_maxtime - $offers_mintime)]
-      $w.c create line $x 0 $x $gy -fill grey
-      $w.c create text [expr $x - 5] [expr $graph(height) + 2] -fill black -anchor sw -text "15min"
+      # Time markers at 5 (rapid/blitz), 10, 15 (blitz/standard) minutes
+      foreach mins {5 10 15} {
+	set x [ expr $graph(xoff) + $mins * ($graph(width) - $graph(xoff)) / ($offers_maxtime - $offers_mintime)]
+	$w.c create line $x 0 $x $gy -fill grey
+	$w.c create text [expr $x - 5] [expr $graph(height) + 2]  -fill black -anchor sw -text "${mins}min"
+      }
     }
     foreach g $::fics::soughtlist {
       array set l $g
