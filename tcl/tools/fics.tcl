@@ -2253,7 +2253,7 @@ namespace eval fics {
 
       # Labels
       $w.c create text [expr $graph(xoff) - 10] 0 -fill black -anchor nw -text "E\nL\nO"
-      $w.c create text $graph(width) [expr $graph(height) + 2] -fill black -anchor se -text [tr Time]
+      # $w.c create text $graph(width) [expr $graph(height) + 2] -fill black -anchor se -text [tr Time]
 
       # Time markers at 5 (rapid/blitz), 10, 15 (blitz/standard) minutes
       foreach mins {5 10 15} {
