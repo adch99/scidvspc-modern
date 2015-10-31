@@ -235,9 +235,9 @@ menuText E Play "Play" 0 {Play Games}
 
 # --- Correspondence Chess
 menuText E CorrespondenceChess "Correspondence Chess" 0 {Functions for eMail and Xfcc based correspondence chess}
-menuText E CCConfigure "Configure..." 0 {Configure external tools and general setup}
-menuText E CCConfigRelay "Observe games..." 10 {Configure games to be observed}
-menuText E CCOpenDB "Open Database..." 0 {Open the default Correspondence database}
+menuText E CCConfigure "Configure" 0 {Configure external tools and general setup}
+menuText E CCConfigRelay "Observe games" 10 {Configure games to be observed}
+menuText E CCOpenDB "Open Database" 0 {Open the default Correspondence database}
 menuText E CCRetrieve "Retrieve Games" 0 {Retrieve games via external (Xfcc-)helper}
 menuText E CCInbox "Process Inbox" 8 {Process all files in scids Inbox}
 menuText E CCSend "Send Move" 0 {Send your move via eMail or external (Xfcc-)helper}
@@ -247,9 +247,9 @@ menuText E CCClaimDraw "Claim Draw" 6 {Send move and claim a draw (not via eMail
 menuText E CCOfferDraw "Offer Draw" 1 {Send move and offer a draw (not via eMail)}
 menuText E CCAcceptDraw "Accept Draw" 0 {Accept a draw offer (not via eMail)}
 
-menuText E CCNewMailGame "New eMail Game..." 2 {Start a new eMail game}
-menuText E CCMailMove "Mail Move..." 0 {Send the move via eMail to the opponent}
-menuText E CCGamePage "Game Page..." 0 {Call up the game via the web browser}
+menuText E CCNewMailGame "New eMail Game" 2 {Start a new eMail game}
+menuText E CCMailMove "Mail Move" 0 {Send the move via eMail to the opponent}
+menuText E CCGamePage "Game Page" 0 {Call up the game via the web browser}
 
 # menu in cc window:
 menuText E CCEditCopy "Copy Gamelist to Clipbase" 0 {Copy the games as CSV list to clipbase}

@@ -291,8 +291,8 @@ append helpText(Index) {
   <li><a ECO Codes>ECO codes specification</a></li>
   <li><a Menus Edit>Edit menu</a></li>
   <li>Adding <a Maintenance Ratings>Elo Ratings</a></li>
-  <li><a Email>Email manager</a> window</li>
-  <li><a CCeMailChess>Email Chess</a></li>
+  <li><a Email>Email window</a> (deprecated)</li>
+  <li>Correspondence Chess via <a CCeMailChess>eMail</a></li>
   <li>Character <a Encoding>Encoding</a></li>
   <li><a Analysis>Engines, Chess</a></li>
   <li><a Analysis List>Engines</a> - configuring</li>
@@ -615,7 +615,7 @@ set helpText(MainWindow) {<h1>Scid Main Window</h1>
   <li> <button autoplay_off> Start/stop <a MainWindow Autoplay>Autoplay mode</a> [control+z] </li>
   <li> <button tb_trial> Start/stop <a Moves Trial>Trial mode</a> [control+space] </li>
   <li> <button tb_flip> Flip the board [control+f]</li>
-  <li> <button tb_windows> Raise open windows [tab]</li>
+  <li> <button tb_windows> Raise open windows [tab]. This feature may only work if you disable your window-manager's focus stealing policy.</li>
   </ul>
 
   <h4><name Toolbar>Toolbar</name></h4>
@@ -3175,8 +3175,9 @@ set helpText(EPD) {<h1>EPD Files</h1>
 
 set helpTitle(Email) "Email window"
 set helpText(Email) {<h1>The Email Window</h1>
+  <p><i>This feature is not often used or tested. Also, it should not be confused with Scid's <a Correspondence>Correspondence Chess</a> email support.</i></p>
   <p>
-  The Email Window provides basic support for correspondence games played by email.
+  The <run ::tools::email>Email Window</green> provides basic support for correspondence games played by email.
   One may send messages directly from Scid, but you still need to manually add your opponents moves as
   there is no capability to check your email folder.
   </p>
@@ -3381,7 +3382,7 @@ players.
 <url http://scid.sourceforge.net/download.html>Scid download page</url>,
 and install it into Scid vs. PC's user directory.
 On Linux and Macs this is "$HOME/.scidvspc", or "Scid vs PC/bin" on Windows.
-The <green>Help--<gt>Startup Window</green> will help you find it's location, and
+The <green><run raiseSplashWindow>Help--<gt>Startup Window</run></green> will help you find it's location, and
 will also indicate if the photo file has been loaded correctly.
 </p>
 <p>Once installed, available player photos are shown in the <a MainWindow GameInfo>game information</a> widget.
@@ -3828,8 +3829,6 @@ set helpText(Formats) {<h1>Scid File Formats</h1>
 
   <p><footer>Updated: Scid vs. PC 4.2 November 2010 </footer></p>
 }
-
-# See the <green><run wm deiconify .splash ; raiseWin .splash>Splash Window</run></green> 
 
 set helpTitle(Options) "Options"
 set helpText(Options) {<h1>Options and Preferences</h1>
@@ -4416,54 +4415,38 @@ set helpTitle(Correspondence) "Correspondence Chess"
 set helpText(Correspondence) {<h1>Correspondence Chess</h1>
 
 <p>
-Scid offers currently two main functionalities for correspondence
-chess.
+Correspondence Chess can be played in two ways.
 </p>
 <ul>
-   <li><b>eMail Chess</b> proceeds by sending the current game via eMail
+   <li><a CCeMailChess>via eMail</a> proceeds by sending the current game via eMail
    to your opponet once you made your move. To this end an eMail message
    is created in your prefered email program with the current game
-   attached to it in PGN format. Of course all comments and
-   variations are stripped off before.
+   attached in PGN format (stripped of all comments and variations).
    </li>
-   <li><b>Correspondence Chess Servers</b> are supported by means of the
-   Xfcc protocol. Here external tools are used to fetch the games from
-   your account(s) and deliver them to Scid for synchronisation. After
-   you made your move this move is sent to your opponent also by means of
-   Xfcc. The fetch and send tool are implemented as external tools for
+   <li><a CCXfcc>Using Chess Servers</a> supporting the
+   <b>Xfcc</b> protocol. Here, external tools are used to fetch the games from
+   your account(s), and deliver them to Scid for synchronisation. After
+   making your move, it is also sent to your opponent using
+   Xfcc. The fetch and send tool are implemented as external tools, for
    easy extension if other protocols arise.
    </li>
 </ul>
 <p>
-If any of the correspondence chess functions are accessed from the
-menu a new window opens up. It can be opened manually from the window
-menu or one can use the keyboard shortcut F12. There are two
-additional shortcuts:
-<ul>
-   <li><b>Ctrl-F12</b>
-      This will open the correspondence chess window and the default
-      database. It will also process your current Inbox.
-   </li>
-   <li><b>Alt-F12</b>
-      This will open the correspondence chess window, the default
-      database and also initiate the fetch of Xfcc games in one go.
-   </li
-</ul>
-Please see below for further details.
+Features can be accessed via the <b>Play-<gt>Correspondence Chess</b>
+menus, or by simply using
+  <run ::CorrespondenceChess::CCWindow><green>Windows-</gt>Correspondence</green></run>.
 
-This window contains the neccessary buttons to navigate through
+This window contains buttons to navigate through
 ongoing games, shortcut keys to fetch games by means of the Xfcc
 protocol and sync in eMail based games as well as a console stating
-which messages where sent or retrieved. Additionally this window
-conatins a list of ongoing games retrieved from your Inbox directory.
+which messages where sent or retrieved. Additionally, it
+contains a list of ongoing games retrieved from your Inbox directory.
 </p>
 
 <p>
-To use the correspondence chess features a database of the type
-"Correspondence chess" has to be opened before calling any
-correspondence chess functions. If you do not have such a database
-yet, just create a new database an set its type to "Correspondence
-chess" by means of the <a Maintenance>Maintenance</a> function.
+To use these features, a database of the type "Correspondence chess" has to be opened.
+If you do not have such a database, or Scid has not created one for you, just create a new database and set its type to "Correspondence
+chess" via the <a Maintenance>Maintenance</a>.
 Setting the type is important as Scid will recognise the database for
 synchronisation by this type. As this database is empty after the
 creation Scid will treat all correspondence chess games it receives at
@@ -4472,31 +4455,31 @@ first synchronisation as new games and append them to this database.
 
 <p>
 If no database of the type "Correspondence chess" is currently opened
-Scid will remid you of doing so. However, do not open more than one
-database of this type as Scid then can not recognise the one to use.
+Scid will prompt you to do so, but do not open more than one
+database of this type as Scid will not know which one to use.
 </p>
 
 <h3>Basic functionality</h3>
 
 <p>
-If everything is set up correctly the usage of the correspondence
-chess functions can easily accessed by the follwoing buttons:
+Once everything is set up correctly, Correspondence Chess functions
+can be accessed using the following buttons
 <ul>
-   <li><button tb_CC_Retrieve> Retrieve the correspondence chess games.
-   To this end the external fetch tool is called and all games retrieved
-   via that way as well as all other games that are stored in Scids Inbox
+   <li><button tb_CC_Retrieve> Retrieve correspondence chess games.
+   The external fetch tool is called and games are retrieved.
+   Additionally, other games that are stored in Scid's Inbox
    (see below) are synchronised into the current correspondence chess
    database.
    </li>
-   <li><button tb_CC_Prev> Goes to the previous game in Scids Inbox
+   <li><button tb_CC_Prev> Go to the previous game in Scid's Inbox
    </li>
-   <li><button tb_CC_Next> Goes to the next game in Scids Inbox
+   <li><button tb_CC_Next> Go to the next game in Scid's Inbox
    </li>
    <li><button tb_CC_Send> Sends your move to the opponent by either
    creating a new eMail message in your prefered mail program or by
    sending the move to a chess server in case of Xfcc.
    </li>
-   <li><button tb_CC_delete> empties your In- and Outbox directories.
+   <li><button tb_CC_delete> empties your Inbox/Outbox directories.
    </li>
    <li><button tb_CC_online> is shown if the game list was refreshed
    from the server within the current Scid session. The tool tip for
@@ -4510,7 +4493,7 @@ chess functions can easily accessed by the follwoing buttons:
 </ul>
 </p>
 <p>
-See also the list of <a CCIcons>Icons and Status Indicators</a>.
+See also <a CCIcons>Correspondence Icons and Status Indicators</a>.
 </p>
 
 <h3>Configuration</h3>
@@ -4523,11 +4506,9 @@ up once, and are stored afterwards for future use.
 </p>
 
 <p>
-To access the configuration dialog choose <green>Play</green>
-<green>Correspondence Chess</green><green>Configure</green> from the
-menu. The details are described in <a CCSetupDialog>Correspondence
-Chess Setup</a>. Quitting this dialog by the <b>[Ok]</b> button will
-automatically store your options.
+The configuration dialog is found in
+  <run ::CorrespondenceChess::config><green>Play-</gt>CorrespondenceChess-<gt>Configure</green></run>.
+and details are described in <a CCSetupDialog>Correspondence Chess Setup</a>. Press <b>Ok</b> to automatically store your options.
 </p>
 
 <h3>Retrieving the games</h3>
@@ -4626,7 +4607,7 @@ exchanged in server based correspondence chess.
 
 set helpTitle(CCIcons) "Correspondence Chess Icons and Status Indicators"
 set helpText(CCIcons) {
-<h1>Icons and Status Indicators</h1>
+<h1>Correspondence Icons and Status Indicators</h1>
 <p>
 To shorten the display, a set of icons is used in the game list. Some
 of them are only present in certain circumstances, some are only valid
@@ -4714,6 +4695,11 @@ interface to specialised chess software via a protocoll called Xfcc.
 The integration of Xfcc is done in Scid via external helper tools set
 in the <a CCSetupDialog>Configuration</a> dialog for correspondence
 chess.
+</p>
+<p><i>Scid's Xfcc support is dependant on the TCL <b>http</b> and <b>tDOM</b> packages.
+See the <green><run raiseSplashWindow>Startup Window</run></green> to inspect
+if these packages are found.</i>
+
 </p>
 
 <h3>Start a new game</h3>
@@ -4836,31 +4822,26 @@ set helpTitle(CCeMailChess) "Correspondence Chess via eMail"
 set helpText(CCeMailChess) {<h1>Correspondence Chess via eMail</h1>
 
 <p>
-eMail offers a very convenient way ot play correspondence chess. The
-standard application in the Un*x world for this till today is xboard
-together with its cmail helper. As it allows for almost automatic
-handling of correspondence chess eMails and additonally does not add
-anything not conforming to PGN it is also the model for Scid to handle
-eMail chess. By just preserving the whole PGN header such games can be
+eMail offers a convenient way to play <a Correspondence>Correspondence Chess</a>. The
+standard Unix application is xboard and its cmail helper
+- as it has fast email processing, and still maintains PGN compliability.
+This is also the model which Scid uses.
+By preserving the whole PGN header, such games can be
 played with any opponent who has a tool to handle PGN.
 </p>
-
-<h3>eMail Chess</h3>
 <p>
-Scid can handle eMail correspondence chess games almost automatically.
-The way how this is done is kept compatible to the cmail utility that
-comes with xboard on Un*x systems. (Having said this implies that you
-can play against an opponent using cmail/xboard.) It works by sending
-the games as whole PGN files too and fro as mail attachements, while
-the header contains certain tags that allows them to be recognised and
+Scid too can handle eMail correspondence games almost automatically;
+maintaining compatiblity with cmail and xboard.  It works by sending
+the games as PGN attachments, including in
+the header certain tags that allows them to be recognised and
 sorted together. For this reason the user has to be careful with
-editing of the header fields.  Note that fields with explicit values have
-to be set to exactly this value for eMail chess. Starting a game with
+editing the header. Fields/tags with explicit values have
+to be set to exactly to this value. Starting a game with
 Scid will do this automatically, but you <b>must not</b> overwrite
-or delete them!
+or delete them.
 </p>
 <p>
-Essential header fields are:
+Essential header fields are
 </p>
 <ul>
    <li><term>Event</term>: by default "Email correspondence game"
@@ -4990,32 +4971,24 @@ set helpTitle(CCSetupDialog) "Correspondence Chess Setup"
 set helpText(CCSetupDialog) {<h1>Correspondence Chess Setup</h1>
 
 <p>
-The entries in the configuration dialog are preset to some default
-parameters but those must not match the reality on your system, so
-adoption will surely be necessary. All parameters are stored in the
-configuration file automatically once the dialog is closed via the
-<b>[Ok]</b> button. The parameters are effective immediately.
+The <run ::CorrespondenceChess::config><green>Correspondence Chess Setup</green></run>
+window comes complete with system defaults ... but these may not match your system, so
+please configure as necessary.
+Scid will use the defaults until this setup dialog
+is closed by pressing <b>OK</b>.
+</p>
+<p>
+Configuration data is stored in "config/correspondence.dat" , and the default database
+(and Inbox/Outbox) in the "data" directory ($HOME/.scidvspc/data/ on Unix systems).
 </p>
 
-<p><b>Note</b> that Scid will use the defaults until this setup dialog
-is called and quit by selecting the <term>OK</term> button. The
-default values are never stored in Scids internal config file until
-then. Additionally, if Scid can not find a valid config, it will try
-to set up the correspondence chess functions automatically. By default
-it will store all data in the <term>data</term> subdir of Scids
-configuration. Here also a valid DB as well as the necessary
-In/Outboxes are created.
-</p>
+<h3>Settings</h3>
 
 <p>
 <b>Default Database</b>:
-This defines the default database for
-correspondence chess games. It can be accessed easily via
-<green>Open Database</green> in the <green>Correspondence Chess</green>
-menu. The advantage of this method is, that this database does not
-show up in the <i>recent databases</i> lists and that you can have a
-specific file for this. This database <b>has to be</b> of type
-"Correspondence chess". Opening a database of this type by any other
+The default database for Correspondence Chess games
+, which has to be of type "Correspondence chess".
+Opening a database of this type by any other
 means is also ok, so probably you may want to ignore this setting
 (e.g. if you call Scid with your correspondence chess database on
 startup.)
@@ -5023,7 +4996,7 @@ startup.)
 
 <p>
 <b>Inbox (path)</b>:
-In this directory Scid will look for correspondence chess games stored
+The directory Scid will look for correspondence chess games stored
 in PGN format. These games are used for the synchronisation of the
 correspondence chess database. Generally, Scid does not care how the
 games come to this directory. It will just work through all PGN files
@@ -5063,6 +5036,7 @@ If checked Scid will not use the external tools specified as external
 protocol handlers but use its internal Xfcc support to fetch games and
 send moves. This will be the most convenient way to access an Xfcc
 server and should be used as default.
+<i>This item will be disabled if Xfcc support is not enabled.</i>
 </p>
 <p>
 This feature requires http and tDOM support for TCL to be installed.
@@ -5846,7 +5820,7 @@ set helpText(Sound) {<h1>Sound</h1>
    is known as "libsnack" and "tcl-snack". For more info, see below.
    </p>
    <p>
-   To see if sound is enabled, examine the Start-up Window.
+   To see if sound is enabled, examine the <green><run raiseSplashWindow>Startup Window</run></green>.
    The sound options are configured from the 
    <run ::utils::sound::OptionsDialog><green>Options--<gt>Sounds</green></run> menu.
    </p>
@@ -6857,7 +6831,7 @@ For instructions on making Scid piece sets, download
 <url http://sourceforge.net/projects/scidvspc/files/scid_chess_pieces.tgz/download>this file</url>.
 </p>
 <p><i>
-   Examine <green>Help--<gt>StartUp</green> for the status of loading user textures and pieces.
+   Examine <green><run raiseSplashWindow>Startup Window</run></green> for the status of loading user textures and pieces.
 </i></p>
 
 </p>

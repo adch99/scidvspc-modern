@@ -2521,7 +2521,7 @@ namespace eval CorrespondenceChess {
                 grid $w.buttons -column 0 -row 20 -pady 5 -columnspan 4
 		pack $w.buttons.ok $w.buttons.help $w.buttons.cancel -side left -padx 10
 
-		bind $w <Escape> "$w.bCancel invoke"
+		bind $w <Escape> "$w.buttons.cancel invoke"
 
 		bind $w <F1> { helpWindow CCSetupDialog}
 		update
