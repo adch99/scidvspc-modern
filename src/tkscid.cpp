@@ -16858,14 +16858,16 @@ sc_var (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         return setUintResult (ti, db->game->GetVarNumber());
 
     case VAR_CREATE:
-        if (! (db->game->AtVarStart()  &&  db->game->AtVarEnd())) {
-            // If we at a var marker, "sc_var exit" to allign the new var alongside this one - S.A
-            if (db->game->AtVarStart()) 
-              db->game->MoveExitVariation();
-            db->game->MoveForward();
-            db->game->AddVariation();
-            db->gameAltered = true;
+	if (db->game->AtVarStart()) {
+          if (db->game->AtVarEnd()) 
+            break;
+          else
+	    // We at a var marker, "sc_var exit" to allign the new var alongside this one - S.A
+	    db->game->MoveExitVariation();
         }
+	db->game->MoveForward();
+	db->game->AddVariation();
+	db->gameAltered = true;
         break;
 
     case VAR_DELETE:
