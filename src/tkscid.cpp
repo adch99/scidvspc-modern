@@ -16859,6 +16859,9 @@ sc_var (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     case VAR_CREATE:
         if (! (db->game->AtVarStart()  &&  db->game->AtVarEnd())) {
+            // If we at a var marker, "sc_var exit" to allign the new var alongside this one - S.A
+            if (db->game->AtVarStart()) 
+              db->game->MoveExitVariation();
             db->game->MoveForward();
             db->game->AddVariation();
             db->gameAltered = true;
