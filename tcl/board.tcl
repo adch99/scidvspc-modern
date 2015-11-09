@@ -267,9 +267,9 @@ proc initBoardColors {} {
   label  $w.sizes.frame.label -text Size -font font_Regular
   pack   $w.sizes.frame.label -side left -anchor center
 
-  button $w.sizes.frame.smaller -text - -font font_Small -relief flat \
+  button $w.sizes.frame.smaller -text - -font font_Small -borderwidth 1 \
     -command {::board::resize .main.board -1}
-  button $w.sizes.frame.larger -text + -font font_Small -relief flat \
+  button $w.sizes.frame.larger -text + -font font_Small -borderwidth 1 \
     -command {::board::resize .main.board +1}
   pack $w.sizes.frame.larger $w.sizes.frame.smaller -side right
 
@@ -277,7 +277,7 @@ proc initBoardColors {} {
     set l 0
     foreach i $boardStyles {
       set j [string tolower $i]
-      button $w.pieces$l.$j -text $i -font font_Small -relief flat -command "
+      button $w.pieces$l.$j -text $i -font font_Small -borderwidth 1 -command "
 	set boardStyle $i
 	setPieceFont $i"
       pack $w.pieces$l.$j -side left
@@ -287,7 +287,7 @@ proc initBoardColors {} {
   } else {
     foreach i $boardStyles {
       set j [string tolower $i]
-      button $w.pieces1.$j -text $i -font font_Small -relief flat -command "
+      button $w.pieces1.$j -text $i -font font_Small -borderwidth 1 -command "
 	set boardStyle $i
 	setPieceFont $i"
       pack $w.pieces1.$j -side left
@@ -344,10 +344,11 @@ proc initBoardColors {} {
   } n {
     LightSquares DarkSquares SelectedSquares SuggestedSquares Grid Previous ArrowMain ArrowVar
   } {
-    button $f.b$c -image e20 -background [set $c] -command "chooseAColor $w $c"
+    label $f.b$c -width 2 -background [set $c] 
+    bind  $f.b$c <Button-1> "chooseAColor $w $c"
 
-    button $f.l$c -text "$::tr($n)  " -command "chooseAColor $w $c" -relief flat -font font_Small
-    grid $f.b$c -row $row -column $column
+    button $f.l$c -text "$::tr($n)  " -command "chooseAColor $w $c" -borderwidth 1 -relief raised -font font_Small
+    grid $f.b$c -row $row -column $column -padx 3
     grid $f.l$c -row $row -column [expr {$column + 1} ] -sticky w
   }
 
