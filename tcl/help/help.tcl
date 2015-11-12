@@ -5843,6 +5843,120 @@ set helpText(Sound) {<h1>Sound</h1>
 set helpTitle(Changelog) "Scid vs PC Changelog"
 set helpText(Changelog) {<h1>Changelog</h1>
 
+<h4>4.15 (November 20, 2015)</h4>
+<br>
+<b>Engines</b>
+<ul>
+<li>Limit engine ply option</li>
+<li>Bind Control+Enter to add whole line</li>
+<li>Tweak variation creation to avoid occasional var staggering</li>
+<li>Show 'Ponder' as a UCI configuration option (now that engines may play with Ponder on)</li>
+<li>For the addmove button '+'. If move exists, just move::Forward</li>
+</ul><br>
+
+<b>Annotation</b>
+<ul>
+<li>Options for the score format (which allows them to be hidden in the PGN window)</li>
+<li>When finished annotating game, move to last move (instead of sometime staying at second last move)</li>
+<li>Dont show out-of-book messages for non-standard starts</li>
+<li>Use-book feature didn't work under certain condition</li>
+</ul><br>
+
+<b>Gamelist Window</b>
+<ul>
+<li>Columns can now be reordered, hidden, or right/left alligned (right-click column titles)</li>
+<li>Replace the Flag button with context menus</li>
+<li>Left/right keys scroll the gamelist view</li>
+<li>'Merge Game' menu item (patch only)</li>
+</ul><br>
+
+<b>Tree</b>
+<ul>
+<li>When deselecting 'Adjust Filter', make the current adjusted filter remain</li>
+<li>Fix up a few tree translations/text formatting issues</li>
+<li>Option to show/hide the progress bar. (On OS X, the progressbar makes searches much slower)</li>
+<li>Fix unusual coredump closing unused tree</li>
+</ul><br>
+
+<b>Spelling</b>
+<ul>
+<li>Make Spellcheck interuptible, and remove limit of 2000</li>
+<li>Update spelling file against Franz' June 2015 release</li>
+<li>Skip spelling date check if game has no date</li>
+<li>Tweak AddEloRatings feature to work properly with FIDE rating data newer than 2012</li>
+<li>Don't ask confirmation of spellchecking clipbase</li>
+</ul><br>
+
+<b>UTF-8 support</b> (from Gregor)
+<ul>
+<li>Databases can now be exported to PGN using either UTF-8 or Latin-1 character sets</li>
+<li>Detect correct charset of imported pgn and convert all to utf 'Avoiding a mix of character sets inside a database.'</li>
+<li>Support for ChessBase proprietary character set in PGN header</li>
+</ul><br>
+
+<b>FICS</b>
+<ul>
+<li>Add flip-board buttons to the mini observed games</li>
+<li>Add a 10 minute line to offers graph</li>
+<li>Hack to destroy the results messageBox if we are being 'rematched' or challenged</li>
+<li>Unhide fics boards when a new observed game is announced</li>
+<li>New takeback code (better, but needs more work)</li>
+<li>Add a 'Time' tag</li>
+</ul><br>
+
+<b>Computer Tournament</b>
+<ul>
+<li>Remember selected engines when changing number of engines</li>
+<li>Use new is-check routine for stalemate detection (sc_pos analyze could cause core dumps)</li>
+<li>Change the tournament per-game time controls from min/secs to secs/secs (base/incr)</li>
+<li>Don't add time increment for in-book moves</li>
+</ul><br>
+
+<b>Translations</b>
+<ul>
+<li>Update for French from Dale Cannon</li>
+<li>Minor Portugese update from martinus</li>
+</ul><br>
+
+<b>Player Info</b>
+<ul>
+<li>Player Info history feature (right click window)</li>
+<li>Add 'Total' separators to the playerinfo stats</li>
+<li>Filtering opponent games wasn't working if tree open</li>
+</ul><br>
+
+<b>Bug Fixes</b>
+<ul>
+<li>MS Windows - preempt/fix possible db compaction failure due to inherited engine file descriptors remaining open</li>
+<li>OS X Board Options colour buttons were not coloured</li>
+<li>OS X and maybe win32 - game import wasn't automatically pasting the text copy buffer</li>
+<li>The pgn middle-button board popup could rarely be placed off-screen</li>
+<li>Fix occasional (but annoying) bug regarding game truncation and variations</li>
+<li>Creating a new database - board wasn't getting refreshed</li>
+<li>Browsing a game - autoplay didn't stop straight away when requested</li>
+<li>Some EPD fixes. Notably - auto save position</li>
+</ul><br>
+
+<b>Also</b>
+<ul>
+<li>Minor Compact database fixes; create a new game when compacting db (instead of leaving the current game as game 0, which is confusing), and ask for SaveGameChanges before compacting</li>
+<li>Autoplaying multiple games - pause at each game end</li>
+<li>Database switcher uses font_Tiny, so handle/resize this font a little better</li>
+<li>Usual Help updates, including add a help button for the NAG window and Correspondence Chess / Xfcc / email help update</li>
+<li>OS X hack to activate shortcuts keys when wm gives app focus</li>
+<li>Setup board should always start with the current position</li>
+<li>Try to make all base filenames absolute, hoping to fix duplicate file history entries and db opens</li>
+<li>Add a string length validation procedure, and use it to limit Custom Flag entry boxes to 8 chars</li>
+<li>Dont reload last/first game if already active</li>
+<li>Gregor's qsort implementation for player finder sorting (sc_name plist)</li>
+<li>Bump player/tourney finder defaults</li>
+<li>Make tournament finder respect EventDate tag</li>
+<li>Patch to always load last game (ignoring base autoload)</li>
+<li>Bind Control+Wheel to font resize in the player and tournament finders</li>
+<li>Merge game: move the merge game comment to the start of variation, and simplify comment</li>
+</ul><br>
+
+
 <h4>4.14 (April 7, 2015)</h4>
 <br>
 <b>Tree Mask</b>
@@ -5997,7 +6111,8 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <br>
 <b>Gamelist button/menu</b>
 <ul>
-<li>Flag button is now context menu, Gamelist Save is moved to tools->export, Find button removed (use enter in Find entrybox)</li>
+<li>Flag button is now context menu, Gamelist Save is moved to tools-<gt>export</li>
+<li>Find button removed (use enter in Find entrybox)</li>
 </ul>
 <br>
 <b>Spelling</b>
