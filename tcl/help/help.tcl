@@ -1702,7 +1702,7 @@ set helpText(Import) {<h1>The Import Window</h1>
   (without any header tags) is generally ok.
   </p>
 
-  <h3><name CCRL>CCRL Imports</name></h3>
+  <h3><name CCRL>CCRL Imports / Round Name issues</name></h3>
   <p>
   The Computer Chess Rating Lists distributes PGN archives which can cause Scid problems.
   They use the Round field to represent unique game numbers, and Scid only supports 262,143 Round Names.
@@ -1710,7 +1710,7 @@ set helpText(Import) {<h1>The Import Window</h1>
   </p>
   <p>
   This can be achieved using the <b>sed</b> utility and the command
-  <ul><li>sed -e "s/\[Round/\[Rd/" <gt> CCRL.pgn <lt> new.pgn</li></ul>
+  <ul><li>sed -e "s/\[Round /[Rd /" <lt> CCRL.pgn <gt> new.pgn</li></ul>
   Sed comes with Linux and OSX, but Windows users may wish to try this version.
   <url http://sed.sourceforge.net/grabbag/ssed/sed-3.59.zip>http://sed.sourceforge.net/grabbag/ssed/sed-3.59.zip</url>.
 </p>
@@ -4293,6 +4293,7 @@ set helpText(Related) {<h1>Links</h1>
   <li>  <url http://www.theweekinchess.com>www.theweekinchess.com </url></li>
   <li>  <url http://www.chesschat.org>www.chesschat.org </url></li>
   </ul>
+  <li><url http://www.jrsoftware.org/isinfo.php>Inno setup</url> (used to make windows installer)</li>
   <li>Professional quality chess icons  <url http://www.virtualpieces.net>www.virtualpieces.net</url></li>
   <li>Tango icons <url http://tango.freedesktop.org/Tango_Desktop_Project>http://tango.freedesktop.org/Tango_Desktop_Project</url></li>
 
