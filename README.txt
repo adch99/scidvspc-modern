@@ -9,7 +9,6 @@
   1. introduction
   2. features
         2..1 New and Improved features
-        2..2 Missing Features
 
   3. download
   4. installation
@@ -28,25 +27,26 @@
      6.7 scid's history
 
   7. changes
-        7..1 Scid vs. PC 4.14
-        7..2 Scid vs. PC 4.13
-        7..3 Scid vs. PC 4.12
-        7..4 Scid vs. PC 4.11
-        7..5 Scid vs. PC 4.10
-        7..6 Scid vs. PC 4.9.2
-        7..7 Scid vs. PC 4.9.1
-        7..8 Scid vs. PC 4.9
-        7..9 Scid vs. PC 4.8
-        7..10 Scid vs. PC 4.7
-        7..11 Scid vs. PC 4.6
-        7..12 Scid vs. PC 4.5
-        7..13 Scid vs. PC 4.4.1
-        7..14 Scid vs. PC 4.4
-        7..15 Scid vs. PC 4.3
-        7..16 Scid vs. PC 4.2
-        7..17 Scid vs. PC 4.1
-        7..18 Scid vs. PC 4.0
-        7..19 Scid vs. PC 3.6.26.1
+        7..1 Scid vs. PC 4.15
+        7..2 Scid vs. PC 4.14
+        7..3 Scid vs. PC 4.13
+        7..4 Scid vs. PC 4.12
+        7..5 Scid vs. PC 4.11
+        7..6 Scid vs. PC 4.10
+        7..7 Scid vs. PC 4.9.2
+        7..8 Scid vs. PC 4.9.1
+        7..9 Scid vs. PC 4.9
+        7..10 Scid vs. PC 4.8
+        7..11 Scid vs. PC 4.7
+        7..12 Scid vs. PC 4.6
+        7..13 Scid vs. PC 4.5
+        7..14 Scid vs. PC 4.4.1
+        7..15 Scid vs. PC 4.4
+        7..16 Scid vs. PC 4.3
+        7..17 Scid vs. PC 4.2
+        7..18 Scid vs. PC 4.1
+        7..19 Scid vs. PC 4.0
+        7..20 Scid vs. PC 3.6.26.1
 
   8. contact
   9. links
@@ -122,27 +122,19 @@
 
   o  Many more bug-fixes and interface refinements.
 
-
-  2.0.2.  Missing Features
-
-  o  Mainline SCID has a powerful filter sorting capability, but it is
-     overly complicated, and perhaps not stable.
-
-  o  Some language translations need updating.
-
   3.  download
 
-  source scid_vs_pc-4.14.tgz
-  <http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.14.tgz/download>
+  source scid_vs_pc-4.15.tgz
+  <http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.15.tgz/download>
 
-  windows Scid vs PC-4.14.exe
-  <http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.14.exe/download>
+  windows Scid vs PC-4.15.exe
+  <http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.15.exe/download>
 
-  windows 64 bit Scid vs PC-4.14.x64.exe
-  <http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.14.x64.exe/download>
+  windows 64 bit Scid vs PC-4.15.x64.exe
+  <http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.15.x64.exe/download>
 
-  mac ScidvsMac-4.14.dmg
-  <http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.14.dmg/download>
+  mac ScidvsMac-4.15.dmg
+  <http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.15.dmg/download>
 
   browse files
   <https://sourceforge.net/project/showfiles.php?group_id=263836>
@@ -175,8 +167,8 @@
   Then, installing from source:
 
   ______________________________________________________________________
-  tar -xzf scid_vs_pc-4.14.tgz
-  cd scid_vs_pc-4.14
+  tar -xzf scid_vs_pc-4.15.tgz
+  cd scid_vs_pc-4.15
   ./configure
   sudo make install
   scid
@@ -209,7 +201,7 @@
 
   4.0.3.  Mac OS X
 
-  The ``ScidvsMac-4.14 app'' should include everything you need. Simply
+  The ``ScidvsMac-4.15 app'' should include everything you need. Simply
   drag and drop the App into /Applications (or similar).
 
   Users upgrading may have to remove (or edit)
@@ -252,7 +244,6 @@
 
   Jiri Pavlovsky has made a windows installer. It's a nice piece of
   software :) Big thank-you. And we now have undo and redo features.
-
 
    July 8, 2011
 
@@ -320,6 +311,7 @@
 
   o  In the event of Scid failing to start, restart the program with the
      -nodock option.
+
   o  Windows undocked from within docking mode can have glitches.
      Mainly: drag and drop game copies in the switcher don't work.
 
@@ -363,17 +355,14 @@
      servers do have many similarities i think, and examining xboard's
      "backend.c" (or some other client) for "FICS" particularities
 
-  o  The month i've updated the translations a little. (Thanks to Peter
-     for totally overhauling the Dutch one). The checklangs.tcl script
-     is in much better shape, but of course there are still lots of
-     translation "todos"
+  o  Translation updates are always welcome
 
   o  The TCL sound package, Snack, needs a maintainer.
 
-  o  There was a lot of work done to implement Fischer Chess (Chess
-     960), but they never fixed all the bugs, and the web site
-     http://www.wtfai.me.uk/scid960.html is now gone. The latest code is
-     in ScidvsPC's source patches/chess960.patch
+  o  Fischer Chess (Chess 960) is not really implemented.  The latest
+     code is in ScidvsPC's source patches/chess960.patch , with code
+     from the (now-defunct) http://www.wtfai.me.uk/scid960.html , but it
+     is only a hack.
 
   o  The Tree code works reasonably well, but i have never found the
      time to overhaul the Slow/Fast/Slow modes. These were (for a long
@@ -386,6 +375,7 @@
      mostly mitigated by the speed of modern processors, it'd be nice to
      make use of the UCI ponder feature in analysis mode (Comp mode
      already does so).
+
   o  I've never had a chance to verify/update the Novag Citrine drivers
      and interface due to lack of hardware.
 
@@ -394,7 +384,7 @@
      doing it one day though.
 
   o  A lot of people use chessbase books (.ctg). Scid can only read
-     polyglot opening books, but inlining this projects work may not be
+     polyglot opening books, but inlining this project's work may not be
      too hard. https://github.com/sshivaji/ctgexporter
 
   6.4.  known issues
@@ -501,7 +491,186 @@
 
   7.  changes
 
-  7.0.1.  Scid vs. PC 4.14
+  7.0.1.  Scid vs. PC 4.15
+
+
+  o  Engines
+
+  o  Limit engine ply option.
+
+  o  Bind Control+Enter to add whole line.
+
+  o  Tweak variation creation to avoid occasional var staggering.
+
+  o  Show 'Ponder' as a UCI configuration option (now that engines may
+     play with Ponder on).
+
+  o  For the addmove button '+'. If move exists, just move::Forward.
+
+     Annotation
+
+  o  Options for the score format (which allows them to be hidden in the
+     PGN window).
+
+  o  When finished annotating game, move to last move (instead of
+     sometime staying at second last move).
+
+  o  Dont show out-of-book messages for non-standard starts.
+
+  o  Use-book feature didn't work under certain condition.
+
+     Gamelist Window
+
+  o  Columns can now be reordered, hidden, or right/left alligned
+     (right-click column titles).
+
+  o  Replace the Flag button with context menus.
+
+  o  Left/right keys scroll the gamelist view.
+
+  o  'Merge Game' menu item (patch only).
+
+     Tree
+
+  o  When deselecting 'Adjust Filter', make the current adjusted filter
+     remain.
+
+  o  Fix up a few tree translations/text formatting issues.
+
+  o  Option to show/hide the progress bar. (On OS X, the progressbar
+     makes searches much slower).
+
+  o  Fix unusual coredump closing unused tree.
+
+     Spelling
+
+  o  Make Spellcheck interuptible, and remove limit of 2000.
+
+  o  Update spelling file against Franz' June 2015 release.
+
+  o  Skip spelling date check if game has no date.
+
+  o  Tweak AddEloRatings feature to work properly with FIDE rating data
+     newer than 2012.
+
+  o  Don't ask confirmation of spellchecking clipbase.
+
+     UTF-8 support (from Gregor)
+
+  o  Databases can now be exported to PGN using either UTF-8 or Latin-1
+     character sets.
+
+  o  Detect correct charset of imported pgn and convert all to utf
+     'Avoiding a mix of character sets inside a database.'.
+
+  o  Support for ChessBase proprietary character set in PGN header.
+
+     FICS
+
+  o  Add flip-board buttons to the mini observed games.
+
+  o  Add a 10 minute line to offers graph.
+
+  o  Hack to destroy the results messageBox if we are being 'rematched'
+     or challenged.
+
+  o  Unhide fics boards when a new observed game is announced.
+
+  o  New takeback code (better, but needs more work).
+
+  o  Add a 'Time' tag.
+
+     Computer Tournament
+
+  o  Remember selected engines when changing number of engines.
+
+  o  Use new is-check routine for stalemate detection (sc_pos analyze
+     could cause core dumps).
+
+  o  Change the tournament per-game time controls from min/secs to
+     secs/secs (base/incr).
+
+  o  Don't add time increment for in-book moves.
+
+     Translations
+
+  o  Update for French from Dale Cannon.
+
+  o  Minor Portugese update from martinus.
+
+     Player Info
+
+  o  Player Info history feature (right click window).
+
+  o  Add 'Total' separators to the playerinfo stats.
+
+  o  Filtering opponent games wasn't working if tree open.
+
+     Bug Fixes
+
+  o  MS Windows - preempt/fix possible db compaction failure due to
+     inherited engine file descriptors remaining open.
+
+  o  OS X Board Options colour buttons were not coloured.
+
+  o  OS X and maybe win32 - game import wasn't automatically pasting the
+     text copy buffer.
+
+  o  The pgn middle-button board popup could rarely be placed off-
+     screen.
+
+  o  Fix occasional (but annoying) bug regarding game truncation and
+     variations.
+
+  o  Creating a new database - board wasn't getting refreshed.
+
+  o  Browsing a game - autoplay didn't stop straight away when
+     requested.
+
+  o  Some EPD fixes. Notably - auto save position.
+
+     Also
+
+  o  Minor Compact database fixes; create a new game when compacting db
+     (instead of leaving the current game as game 0, which is
+     confusing), and ask for SaveGameChanges before compacting.
+
+  o  Autoplaying multiple games - pause at each game end.
+
+  o  Database switcher uses font_Tiny, so handle/resize this font a
+     little better.
+
+  o  Usual Help updates, including add a help button for the NAG window
+     and Correspondence Chess / Xfcc / email help update.
+
+  o  OS X hack to activate shortcuts keys when wm gives app focus.
+
+  o  Setup board should always start with the current position.
+
+  o  Try to make all base filenames absolute, hoping to fix duplicate
+     file history entries and db opens.
+
+  o  Add a string length validation procedure, and use it to limit
+     Custom Flag entry boxes to 8 chars.
+
+  o  Dont reload last/first game if already active.
+
+  o  Gregor's qsort implementation for player finder sorting (sc_name
+     plist).
+
+  o  Bump player/tourney finder defaults.
+
+  o  Make tournament finder respect EventDate tag.
+
+  o  Patch to always load last game (ignoring base autoload).
+
+  o  Bind Control+Wheel to font resize in the player and tournament
+     finders.
+
+  o  Merge game: move the merge game comment to the start of variation,
+     and simplify comment.
+
+  7.0.2.  Scid vs. PC 4.14
 
 
   o  Tree Mask
@@ -583,7 +752,6 @@
 
      Other
 
-
   o  New Portuguese translation from R. Silva (martinus at FICS)
 
   o  Update to Phalanx XXIV. The Tactical Game feature is a proper
@@ -634,7 +802,7 @@
 
   o  Remove superfluous padding from OS X aqua theme
 
-  7.0.2.  Scid vs. PC 4.13
+  7.0.3.  Scid vs. PC 4.13
 
 
   o  Analysis Engine: exclude move(s) feature. Mouse-hover shows
@@ -716,7 +884,7 @@
 
   o  Many minor bugfixes and further tree-only filter fixes.
 
-  7.0.3.  Scid vs. PC 4.12
+  7.0.4.  Scid vs. PC 4.12
 
 
   o  Gamelist/Filter fixes. Filter works better with Tree.
@@ -782,6 +950,7 @@
 
   o  Try a new approach to Depth-based annotation, which works better,
      but still needs fine-tuning.
+
   o  Spanish translation update from Igor Sosa Mayor.
 
   o  Polish translation update from Adam Umiastowski.
@@ -838,7 +1007,7 @@
 
   o  Correctly handle plain text crosstables.
 
-  7.0.4.  Scid vs. PC 4.11
+  7.0.5.  Scid vs. PC 4.11
 
 
   o  Maximum board size is now twice as big
@@ -900,7 +1069,7 @@
 
   o  Tweak Comment Editor and Player Info buttons
 
-  7.0.5.  Scid vs. PC 4.10
+  7.0.6.  Scid vs. PC 4.10
 
 
   o  When sorting databases, don't reset filter and remember current
@@ -946,12 +1115,12 @@
   o  Convert braces '{', '}' to '(',')' when exporting PGN comments
      (against PGN standard). Also tweak various PGN help topics
 
-  7.0.6.  Scid vs. PC 4.9.2
+  7.0.7.  Scid vs. PC 4.9.2
 
 
   o  OS X changes, including docked mode fixes
 
-  7.0.7.  Scid vs. PC 4.9.1
+  7.0.8.  Scid vs. PC 4.9.1
 
 
   o  Fix promotion bug in non-docked mode
@@ -967,7 +1136,7 @@
 
   o  PGN import window was not getting mapped
 
-  7.0.8.  Scid vs. PC 4.9
+  7.0.9.  Scid vs. PC 4.9
 
 
   o  Window Docking feature - Different windows are docked/restored than
@@ -978,7 +1147,6 @@
      General
 
   o  Move search feature (eg 'h6 Bxh6')
-
 
   o  UCI: replace 'position fen ...' with 'position startpos moves ...'
      for general analysis
@@ -1045,7 +1213,6 @@
 
   o  Add programmers reference to the help contents/online doc
 
-
   o  Bind space-bar to engine start/stop
 
   o  Update twic2scid.py script
@@ -1089,7 +1256,7 @@
 
   o  Windows Preview HTML for Reports is fixed
 
-  7.0.9.  Scid vs. PC 4.8
+  7.0.10.  Scid vs. PC 4.8
 
 
   o  Drag and Drop file open(s) on Windows and Unix
@@ -1112,6 +1279,7 @@
   o  Save game: enable the use of 'prev game tags' for existing games.
      This allows easy addition of the same tags to consecutive existing
      games
+
   o  Remove the 'Scid: ' prefix from several window titles
 
   o  Update some translations
@@ -1209,7 +1377,7 @@
   o  Handle PGN parsing of unspecified promotions (b8 becomes b8=Q , for
      eg)
 
-  7.0.10.  Scid vs. PC 4.7
+  7.0.11.  Scid vs. PC 4.7
 
 
   o  Tree: Add coloured bargraphs representing win/draw/loss (and remove
@@ -1243,7 +1411,6 @@
 
   o  Analysis: add a xboard/uci protocol column to the engine list
 
-
   o  Include updates to SCID's spellchk.c, improving the ELO add-ratings
      feature
 
@@ -1251,7 +1418,7 @@
 
   o  Player info: clicking FIDE ID opens relevant url
 
-  o  New feature: 'Search-Filter to Last Move'. All filter games will
+  o  New feature: 'Search->Filter to Last Move'. All filter games will
      load at the last move (end of game)
 
   o  Refine the Calculation of Variation (Stoyko Exercise) feature and
@@ -1293,7 +1460,7 @@
 
   o  Fix up Tacgame score-isn't-updated bug
 
-  7.0.11.  Scid vs. PC 4.6
+  7.0.12.  Scid vs. PC 4.6
 
 
   o  Undo and Redo features (partly from SCID)
@@ -1308,7 +1475,6 @@
 
   o  Computer Tournament: Improvements for both Xboard and UCI engines,
      and implement the 50 move draw rule
-
 
   o  Auto-promote feature for FICs
 
@@ -1392,7 +1558,7 @@
 
   o  Update FICs , PGN and Menu language translations
 
-  7.0.12.  Scid vs. PC 4.5
+  7.0.13.  Scid vs. PC 4.5
 
   PGN Window:
 
@@ -1500,17 +1666,16 @@
 
   o  Theory table incorrectly started from start position
 
-  7.0.13.  Scid vs. PC 4.4.1
+  7.0.14.  Scid vs. PC 4.4.1
 
 
   o  Fix nasty flicker bug when board is flipped
 
   o  Fix fics bug that graph sometimes doesn't stop when new game starts
 
-
   o  Add Burnett chess pieces
 
-  7.0.14.  Scid vs. PC 4.4
+  7.0.15.  Scid vs. PC 4.4
 
 
   o  Implement SCID's interruptable tree processing
@@ -1593,7 +1758,7 @@
 
   o  Statusbar shows correct value after Crosstable update
 
-  7.0.15.  Scid vs. PC 4.3
+  7.0.16.  Scid vs. PC 4.3
 
 
   o  Clickable Variation arrows
@@ -1639,7 +1804,6 @@
 
   o  Sort by number of Variations and Comments from Gerd
 
-
   o  Help Widget has a search entrybox
 
   o  Help Widget font size (and Pgn Window) can be easily increased by
@@ -1661,7 +1825,7 @@
 
   o  Tweak crosstable knock-out format
 
-  7.0.16.  Scid vs. PC 4.2
+  7.0.17.  Scid vs. PC 4.2
 
 
   o  New si4 database support
@@ -1701,11 +1865,12 @@
 
   o  New icon
 
-  7.0.17.  Scid vs. PC 4.1
+  7.0.18.  Scid vs. PC 4.1
 
 
   o  Quite a few FICs tweaks, including new help pages and D.O.S. attack
      fixes
+
   o  Numerous Gamelist improvements (see below)
 
   o  Tree widget improvements: next move is highlighted, main filter is
@@ -1807,7 +1972,7 @@
 
      o  Statistics window restructured
 
-  7.0.18.  Scid vs. PC 4.0
+  7.0.19.  Scid vs. PC 4.0
 
 
   o  Computer Chess tournament feature
@@ -1836,7 +2001,6 @@
 
   o  Allow xboard lowercase promotion moves (eg while g7g8Q always
      worked, g7g8q previously failed)
-
 
   o  Enable hovering over toolbar help pop-ups
 
@@ -1892,7 +2056,7 @@
 
   o  Perform a db refresh after importing PGN file(s)
 
-  7.0.19.  Scid vs. PC 3.6.26.1
+  7.0.20.  Scid vs. PC 3.6.26.1
 
 
   o  Overhauling the tactical game feature
@@ -1902,7 +2066,6 @@
   o  Overhauling the tools->analysis widget
 
   o  Some re-organization of menu widgets, including tear-off menus
-
 
   o  Rewritten board style widget
 

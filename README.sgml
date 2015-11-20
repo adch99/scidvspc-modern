@@ -62,23 +62,17 @@ project is authored by <ref name="Stevenaaus" id="contact_"> and numerous contri
 
 </itemize>
 
-<sect2>Missing Features
-
-<itemize>
-<item> Mainline SCID has a powerful filter sorting capability, but it is overly complicated, and perhaps not stable.
-<item>Some language translations need updating.
-</itemize>
 
 <label id="download_">
 <sect> download <p>
 
-source <url url="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.14.tgz/download" name="scid_vs_pc-4.14.tgz">
+source <url url="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.15.tgz/download" name="scid_vs_pc-4.15.tgz">
 
-windows <url url="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.14.exe/download" name="Scid vs PC-4.14.exe">
+windows <url url="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.15.exe/download" name="Scid vs PC-4.15.exe">
 
-windows 64 bit <url url="http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.14.x64.exe/download" name="Scid vs PC-4.14.x64.exe">
+windows 64 bit <url url="http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.15.x64.exe/download" name="Scid vs PC-4.15.x64.exe">
 
-mac <url url="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.14.dmg/download" name="ScidvsMac-4.14.dmg">
+mac <url url="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.15.dmg/download" name="ScidvsMac-4.15.dmg">
 
 <url url="https://sourceforge.net/project/showfiles.php?group_id=263836" name="browse files">
 
@@ -109,8 +103,8 @@ or as a tarball <url url="https://sourceforge.net/p/scidvspc/code/HEAD/tarball" 
   <p>Then, installing from source:</p>
 
 <code>
-tar -xzf scid_vs_pc-4.14.tgz
-cd scid_vs_pc-4.14
+tar -xzf scid_vs_pc-4.15.tgz
+cd scid_vs_pc-4.15
 ./configure
 sudo make install
 scid
@@ -134,7 +128,7 @@ C:\Users\[USERNAME]\AppData\Local\VirtualStore\Program Files\Scid vs PC
 
 <sect2> Mac OS X <p>
 
-The <ref name="ScidvsMac-4.14 app" id="download_"> should include everything you need. Simply drag and drop the App into /Applications (or similar).
+The <ref name="ScidvsMac-4.15 app" id="download_"> should include everything you need. Simply drag and drop the App into /Applications (or similar).
 
 <em>Users upgrading may have to remove (or edit) <bf>$HOME/.scidvspc/config/engines.dat</bf>
 to properly configure the chess engines.</em>
@@ -263,17 +257,13 @@ analysing the differences in the strings used by the two programs.
 The two servers do have many similarities i think, and examining
 xboard's "backend.c" (or some other client) for "FICS" particularities
 
-<item> The month i've updated the translations a little. (Thanks to Peter
-for totally overhauling the Dutch one). The checklangs.tcl script is
-in much better shape, but of course there are still lots of
-translation "todos"
+<item> Translation updates are always welcome
 
 <item> The TCL sound package, Snack, needs a maintainer.
 
-<item> There was a lot of work done to implement Fischer Chess (Chess 960),
-but they never fixed all the bugs, and the web site
-http://www.wtfai.me.uk/scid960.html is now gone. The latest code is in
-ScidvsPC's source patches/chess960.patch
+<item> Fischer Chess (Chess 960) is not really implemented.
+The latest code is in ScidvsPC's source patches/chess960.patch , with code from
+the (now-defunct) http://www.wtfai.me.uk/scid960.html , but it is only a hack.
 
 <item> The Tree code works reasonably well, but i have never found the time
 to overhaul the Slow/Fast/Slow&Fast modes. These were (for a long
@@ -295,7 +285,7 @@ directory to store all the various data.
 I will get around to doing it one day though.
 
 <item> A lot of people use chessbase books (.ctg). Scid can only read
-polyglot opening books, but inlining this projects
+polyglot opening books, but inlining this project's
 work may not be too hard.  https://github.com/sshivaji/ctgexporter
 
 </itemize></p>
@@ -383,6 +373,110 @@ Chessbase databases and many chess variants.</p>
 
 <label id="changes_">
 <sect> changes <p>
+
+<sect2> Scid vs. PC 4.15<p>
+
+<itemize>
+
+Engines
+<item>Limit engine ply option.
+<item>Bind Control+Enter to add whole line.
+<item>Tweak variation creation to avoid occasional var staggering.
+<item>Show 'Ponder' as a UCI configuration option (now that engines may play with Ponder on).
+<item>For the addmove button '+'. If move exists, just move::Forward.
+<newline><newline>
+
+Annotation
+<item>Options for the score format (which allows them to be hidden in the PGN window).
+<item>When finished annotating game, move to last move (instead of sometime staying at second last move).
+<item>Dont show out-of-book messages for non-standard starts.
+<item>Use-book feature didn't work under certain condition.
+<newline><newline>
+
+Gamelist Window
+<item>Columns can now be reordered, hidden, or right/left alligned (right-click column titles).
+<item>Replace the Flag button with context menus.
+<item>Left/right keys scroll the gamelist view.
+<item>'Merge Game' menu item (patch only).
+<newline><newline>
+
+Tree
+<item>When deselecting 'Adjust Filter', make the current adjusted filter remain.
+<item>Fix up a few tree translations/text formatting issues.
+<item>Option to show/hide the progress bar. (On OS X, the progressbar makes searches much slower).
+<item>Fix unusual coredump closing unused tree.
+<newline><newline>
+
+Spelling
+<item>Make Spellcheck interuptible, and remove limit of 2000.
+<item>Update spelling file against Franz' June 2015 release.
+<item>Skip spelling date check if game has no date.
+<item>Tweak AddEloRatings feature to work properly with FIDE rating data newer than 2012.
+<item>Don't ask confirmation of spellchecking clipbase.
+<newline><newline>
+
+UTF-8 support (from Gregor)
+<item>Databases can now be exported to PGN using either UTF-8 or Latin-1 character sets.
+<item>Detect correct charset of imported pgn and convert all to utf 'Avoiding a mix of character sets inside a database.'.
+<item>Support for ChessBase proprietary character set in PGN header.
+<newline><newline>
+
+FICS
+<item>Add flip-board buttons to the mini observed games.
+<item>Add a 10 minute line to offers graph.
+<item>Hack to destroy the results messageBox if we are being 'rematched' or challenged.
+<item>Unhide fics boards when a new observed game is announced.
+<item>New takeback code (better, but needs more work).
+<item>Add a 'Time' tag.
+<newline><newline>
+
+Computer Tournament
+<item>Remember selected engines when changing number of engines.
+<item>Use new is-check routine for stalemate detection (sc_pos analyze could cause core dumps).
+<item>Change the tournament per-game time controls from min/secs to secs/secs (base/incr).
+<item>Don't add time increment for in-book moves.
+<newline><newline>
+
+Translations
+<item>Update for French from Dale Cannon.
+<item>Minor Portugese update from martinus.
+<newline><newline>
+
+Player Info
+<item>Player Info history feature (right click window).
+<item>Add 'Total' separators to the playerinfo stats.
+<item>Filtering opponent games wasn't working if tree open.
+<newline><newline>
+
+Bug Fixes
+<item>MS Windows - preempt/fix possible db compaction failure due to inherited engine file descriptors remaining open.
+<item>OS X Board Options colour buttons were not coloured.
+<item>OS X and maybe win32 - game import wasn't automatically pasting the text copy buffer.
+<item>The pgn middle-button board popup could rarely be placed off-screen.
+<item>Fix occasional (but annoying) bug regarding game truncation and variations.
+<item>Creating a new database - board wasn't getting refreshed.
+<item>Browsing a game - autoplay didn't stop straight away when requested.
+<item>Some EPD fixes. Notably - auto save position.
+<newline><newline>
+
+Also
+<item>Minor Compact database fixes; create a new game when compacting db (instead of leaving the current game as game 0, which is confusing), and ask for SaveGameChanges before compacting.
+<item>Autoplaying multiple games - pause at each game end.
+<item>Database switcher uses font_Tiny, so handle/resize this font a little better.
+<item>Usual Help updates, including add a help button for the NAG window and Correspondence Chess / Xfcc / email help update.
+<item>OS X hack to activate shortcuts keys when wm gives app focus.
+<item>Setup board should always start with the current position.
+<item>Try to make all base filenames absolute, hoping to fix duplicate file history entries and db opens.
+<item>Add a string length validation procedure, and use it to limit Custom Flag entry boxes to 8 chars.
+<item>Dont reload last/first game if already active.
+<item>Gregor's qsort implementation for player finder sorting (sc_name plist).
+<item>Bump player/tourney finder defaults.
+<item>Make tournament finder respect EventDate tag.
+<item>Patch to always load last game (ignoring base autoload).
+<item>Bind Control+Wheel to font resize in the player and tournament finders.
+<item>Merge game: move the merge game comment to the start of variation, and simplify comment.
+
+</itemize></p>
 
 <sect2> Scid vs. PC 4.14<p>
 
@@ -782,7 +876,7 @@ Bugfixes:
 <item>Include updates to SCID's spellchk.c, improving the ELO add-ratings feature
 <item>Update spelling.ssp file to Jan 2012, and include with windows
 <item>Player info: clicking FIDE ID opens relevant url
-<item>New feature: 'Search-<gt>Filter to Last Move'. All filter games will load at the last move (end of game)
+<item>New feature: 'Search->Filter to Last Move'. All filter games will load at the last move (end of game)
 <item>Refine the Calculation of Variation (Stoyko Exercise) feature and Help
 <item>Toolbar has a 'book window' icon
 <item>Tweak PGN context menu: reorder the Strip/Delete move items
