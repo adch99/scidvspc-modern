@@ -965,9 +965,11 @@ proc ::windows::switcher::Refresh {} {
   # todo: Should only do this when toggling "Show Icons"
   set fontsize [font configure font_Small -size]
   if {$icons} {
-      set fontsize [expr {$fontsize * 3 + 7}]
-  } else {
-      set fontsize [expr {$fontsize * 2 + 7}]
+        set fontsize [expr {$fontsize * 3 + 7}]
+        if {$::windowsOS} {set fontsize [expr {$fontsize * 4 + 4}]}
+    } else {
+        set fontsize [expr {$fontsize * 2 + 7}]
+        if {$::windowsOS} {set fontsize [expr {$fontsize * 3 + 4}]}
   }
   foreach i {9 1 2 3 4 5 6 7 8} {
     if {$icons} {
