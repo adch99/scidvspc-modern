@@ -257,7 +257,7 @@
 
    December 10, 2010
 
-  Sicd vs. PC 4.2 includes support for Scid's si4 db format.
+  Scid vs. PC 4.2 includes support for Scid's si4 db format.
 
    July 3, 2010
 
@@ -428,8 +428,9 @@
 
   Thanks to Shane Hudson and the authors of Tcl/Tk <http://tcl.tk>.  To
   Gregor Cramer <http://scidb.sf.net> for new features and technical
-  support.  Sourceforge.net <http://sourceforge.net> for their great
-  hosting, Jiri Pavlovsky for the windows installer
+  support.  Ozkan for his Win64 builds and knowledgable help.
+  Sourceforge.net <http://sourceforge.net> for their great hosting, Jiri
+  Pavlovsky for the windows installer
   <http://www.jrsoftware.org/isinfo.php>.  Thanks to Pascal Georges for
   his many technical contributions to mainline Scid, and also Fulvio,
   Gerd and the language translators.  To Gilles, Dorothy and Steve for
@@ -2134,6 +2135,9 @@
   o  <http://www.theweekinchess.com/>
 
   o  <http://www.chesschat.org>
+
+  o  Inno setup  <http://www.jrsoftware.org/isinfo.php> (used to make
+     windows installer)
 
   o  Professional quality chess icons  <http://www.virtualpieces.net>
 

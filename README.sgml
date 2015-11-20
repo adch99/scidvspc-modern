@@ -175,7 +175,7 @@ A belated thanks to Lee from Sourceforge for
 
 <bf> December 10, 2010 </bf>
 
-Sicd vs. PC 4.2 includes support for Scid's si4 db format.
+Scid vs. PC 4.2 includes support for Scid's si4 db format.
 
 <bf> July 3, 2010 </bf>
 
@@ -325,6 +325,7 @@ to create large databases from pgn. Typing "pgnscid somefile.pgn" creates a new 
 
 Thanks to Shane Hudson and the authors of <url url="http://tcl.tk" name="Tcl/Tk">.
 To <url url="http://scidb.sf.net" name="Gregor Cramer"> for new features and technical support.
+Ozkan for  his Win64 builds and knowledgable help.
 <url url="http://sourceforge.net" name="Sourceforge.net"> for their great hosting,
 Jiri Pavlovsky for the <url url="http://www.jrsoftware.org/isinfo.php" name="windows installer">.
 Thanks to Pascal Georges for his many technical contributions to mainline Scid, and also Fulvio, Gerd and the language translators.
@@ -1248,6 +1249,7 @@ Popular chess portals
 <item>	   <url url="http://www.theweekinchess.com/">
 <item>	   <url url="http://www.chesschat.org">
 <newline><newline>
+<item>Inno setup <url url="http://www.jrsoftware.org/isinfo.php"> (used to make windows installer)
 <item>Professional quality chess icons <url url="http://www.virtualpieces.net">
 <item>Tango icons <url url="http://tango.freedesktop.org/Tango_Desktop_Project">
 </itemize>
