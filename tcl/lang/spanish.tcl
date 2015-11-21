@@ -278,8 +278,7 @@ menuText S OptionsFics "FICS" 0
 menuText S OptionsFicsAuto "Autopromoción Reina" 0
 menuText S OptionsFicsColour "Color del texto" 0
 menuText S OptionsFicsSize "Tamaño del Tablero" 0
-# ====== TODO To be translated ======
-menuText S OptionsFicsCommands "Init Commands" 0
+menuText S OptionsFicsCommands "Comandos iniciales" 0
 menuText S OptionsFicsNoRes "Sin resultados" 0
 menuText S OptionsFicsNoReq "Sin respuesta" 0
 menuText S OptionsLanguage "Lenguaje" 0 {Selecciona el lenguaje del menú}
@@ -371,8 +370,7 @@ menuText S GInfoMark "(No)Marcar esta partida" 4
 menuText S GInfoInformant "Configurar valores de información" 0
 
 translate S FlipBoard {Girar el tablero}
-# ====== TODO To be translated ======
-translate S RaiseWindows {Raise windows}
+translate S RaiseWindows {Aumentar ventanas}
 translate S AutoPlay {Reproducción automática}
 translate S TrialMode {Modo de prueba}
 
@@ -437,8 +435,7 @@ translate S Event {Evento}
 translate S Site {Lugar}
 translate S Country {País}
 translate S IgnoreColors {Ignorar colores}
-# ====== TODO To be translated ======
-translate S MatchEnd {End pos only}
+translate S MatchEnd {Posición final}
 translate S Date {Fecha}
 translate S EventDate {Evento fecha}
 translate S Decade {Década}
@@ -577,10 +574,8 @@ menuText S TreeOptTraining "Entrenamiento" 2 \
   {Activa/desactiva el modo de entrenamiento de árbol}
 menuText S TreeOptAutosave "Autoguardar archivo caché" 0 \
   {Guarda automáticamente el archivo caché cuando se cierra la ventana de árbol}
-# ====== TODO To be translated ======
-menuText S TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
-# ====== TODO To be translated ======
-menuText S TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
+menuText S TreeOptAutomask "Carga automática de máscara" 0 "Carga automática de máscara con un arbol abierto."
+menuText S TreeOptShowBar "Mostrar barra de progreso" 0 "Mostrar barra de progreso del árbol"
 menuText S TreeHelp "Ayuda" 1
 menuText S TreeHelpTree "Ayuda del árbol" 4
 menuText S TreeHelpIndex "Índice de la ayuda" 0
@@ -722,13 +717,11 @@ translate S AnnotateWhite {Sólo movimientos de blancas}
 translate S AnnotateBlack {Sólo movimientos de negras}
 translate S AnnotateNotBest {Cuando el movimiento no es el mejor}
 translate S AnnotateBlundersOnly {Cuando el movimiento es un disparate}
-# ====== TODO To be translated ======
-translate S BlundersNotBest {Blunders/Not Best}
+translate S BlundersNotBest {Errores/No Mejor}
 translate S AnnotateBlundersOnlyScoreChange {Análisis reporta errores, con cambio de puntuación desde: }
 translate S AnnotateTitle {Configurar anotación}
 translate S BlundersThreshold {Umbral del error }
-# ====== TODO To be translated ======
-translate S ScoreFormat {Score format}
+translate S ScoreFormat {Formato de puntuación}
 translate S CutOff {Punto de corte}
 translate S LowPriority {Baja prioridad del procesador}
 translate S LogEngines {Tamaño del registro}
@@ -915,8 +908,8 @@ translate S GlistDeleteField {Borrar}
 translate S GlistColor {Color}
 translate S GlistSort {Ordenar base de datos}
 translate S GlistRemoveThisGameFromFilter  {Oculta esta partida}
-translate S GlistRemoveGameAndAboveFromFilter  {Oculta esta partida y las de arriba}
-translate S GlistRemoveGameAndBelowFromFilter  {Oculta esta partida y las de abajo}
+translate S GlistRemoveGameAndAboveFromFilter  {Oculta partidas por encima}
+translate S GlistRemoveGameAndBelowFromFilter  {Oculta partidas por debajo}
 translate S GlistDeleteGame {Elimina/Recupera esta partida de la base} 
 translate S GlistDeleteAllGames {Elimina todas las partidas de la base que aparecen en el filtro} 
 translate S GlistUndeleteAllGames {Recupera todas las partidas borradas de la base que aparecen en el filtro} 
@@ -1488,8 +1481,7 @@ translate S Depth {Profundidad}
 translate S Time {Tiempo} 
 translate S SecondsPerMove {Segundos por movimiento}
 translate S DepthPerMove {Profundidad por movimiento}
-# ====== TODO To be translated ======
-translate S MoveControl {Move Control}
+translate S MoveControl {Movimiento del control}
 translate S TimeLabel {Tiempo por movimiento}
 translate S AddVars {Añadir las variaciones}
 translate S AddScores {Añadir marcados}
