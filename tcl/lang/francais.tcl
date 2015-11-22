@@ -891,7 +891,7 @@ translate F GlistAlignC {Centrer}
 
 # Maintenance window:
 translate F DatabaseName {Nom de base:}
-translate F TypeIcon {Type icône:}
+translate F TypeIcon {Type icône}
 translate F NumOfGames {Parties:}
 translate F NumDeletedGames {Parties supprimées:}
 translate F NumFilterGames {Parties dans le filtre:}

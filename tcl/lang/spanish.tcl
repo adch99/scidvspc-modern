@@ -919,7 +919,7 @@ translate S GlistAlignC {Alinear al centro}
 
 # Maintenance window:
 translate S DatabaseName {Nombre de la base:}
-translate S TypeIcon {Tipo de icono:}
+translate S TypeIcon {Tipo de icono}
 translate S NumOfGames {Partidas:}
 translate S NumDeletedGames {Partidas borradas:}
 translate S NumFilterGames {Partidas en el filtro:}

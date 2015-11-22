@@ -894,7 +894,7 @@ translate R GlistAlignC {Align center}
 
 # Maintenance window:
 translate R DatabaseName {Название базы данных:}
-translate R TypeIcon {Тип иконки:}
+translate R TypeIcon {Тип иконки}
 translate R NumOfGames {Партии:}
 translate R NumDeletedGames {Удаленные партии:}
 translate R NumFilterGames {Партии в фильтре:}

@@ -1001,7 +1001,7 @@ translate B GlistAlignC {Align center}
 
 # Maintenance window:
 translate B DatabaseName {Nome da base de dados:}
-translate B TypeIcon {Icone de Tipo:}
+translate B TypeIcon {Icone de Tipo}
 translate B NumOfGames {Jogos:}
 translate B NumDeletedGames {Jogos deletados:}
 translate B NumFilterGames {Jogos no filtro:}

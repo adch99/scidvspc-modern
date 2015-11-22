@@ -995,7 +995,7 @@ translate C GlistAlignC {Align center}
 
 # Maintenance window:
 translate C DatabaseName {Jméno databáze:}
-translate C TypeIcon {Symbol:}
+translate C TypeIcon {Symbol}
 translate C NumOfGames {Partie:}
 translate C NumDeletedGames {Vymazané partie:}
 translate C NumFilterGames {Partie ve filtru:}

@@ -1073,7 +1073,7 @@ translate O GlistAlignC {Align center}
 
 # Maintenance window:
 translate O DatabaseName {Databasenavn:}
-translate O TypeIcon {Ikon:}
+translate O TypeIcon {Ikon}
 translate O NumOfGames {Partier:}
 translate O NumDeletedGames {Slettede partier:}
 translate O NumFilterGames {Partier i filter:}

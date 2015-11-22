@@ -1073,7 +1073,7 @@ translate Y GlistAlignC {Align center}
 
 # Maintenance window:
 translate Y DatabaseName {Ime baze:}
-translate Y TypeIcon {Ikona:}
+translate Y TypeIcon {Ikona}
 translate Y NumOfGames {Partija:}
 translate Y NumDeletedGames {Obrisanih partija:}
 translate Y NumFilterGames {Partija u filteru:}

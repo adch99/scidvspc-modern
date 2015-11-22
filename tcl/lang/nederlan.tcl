@@ -927,7 +927,7 @@ translate N GlistAlignC {Align center}
 
 # Maintenance windows
 translate N DatabaseName {Naam database:}
-translate N TypeIcon {Type icon:}
+translate N TypeIcon {Type icon}
 translate N NumOfGames {Partijen:}
 translate N NumDeletedGames {Gewiste partijen:}
 translate N NumFilterGames {Partijen in selectie:}

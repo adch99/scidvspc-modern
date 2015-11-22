@@ -941,7 +941,7 @@ translate G GlistAlignC {Align center}
 
 # Maintenance window:
 translate G DatabaseName {Όνομα Βάσης:}
-translate G TypeIcon {Τύπος Εικονιδίου:}
+translate G TypeIcon {Τύπος Εικονιδίου}
 translate G NumOfGames {Παρτίδες:}
 translate G NumDeletedGames {Διαγραμμένες παρτίδες:}
 translate G NumFilterGames {Φιλτραρισμένες παρτίδες:}

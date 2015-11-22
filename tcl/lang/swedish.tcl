@@ -922,7 +922,7 @@ translate W GlistAlignC {Align center}
 
 # Maintenance window:
 translate W DatabaseName {Databasnamn:}
-translate W TypeIcon {Ikontyp:}
+translate W TypeIcon {Ikontyp}
 translate W NumOfGames {Partier:}
 translate W NumDeletedGames {Raderade partier:}
 translate W NumFilterGames {Partier i filter:}

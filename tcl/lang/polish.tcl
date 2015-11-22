@@ -905,7 +905,7 @@ translate P GlistAlignC {Align center}
 
 # Maintenance window:
 translate P DatabaseName {Nazwa bazy:}
-translate P TypeIcon {Ikona:}
+translate P TypeIcon {Ikona}
 translate P NumOfGames {Liczba partii:}
 translate P NumDeletedGames {Liczba usuniętych partii:}
 translate P NumFilterGames {Liczba partii w filtrze:}

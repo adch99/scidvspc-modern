@@ -126,6 +126,7 @@ proc ::maint::Open {} {
   label $w.title.dates -textvar ::tr(YearRange) -font $font
   label $w.title.ratings -textvar ::tr(RatingRange) -font $font
   button $w.title.vicon -command {changeBaseType [sc_base current] .maintWin}
+  ::utils::tooltip::Set $w.title.vicon [tr TypeIcon]
 
   # Status
   

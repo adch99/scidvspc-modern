@@ -936,7 +936,7 @@ translate D GlistAlignC {Align center}
 
 # Maintenance window:
 translate D DatabaseName {Datenbankname:}
-translate D TypeIcon {Symbol:}
+translate D TypeIcon {Symbol}
 translate D NumOfGames {Partien:}
 translate D NumDeletedGames {Gelöschte Partien:}
 translate D NumFilterGames {Partien im Filter:}

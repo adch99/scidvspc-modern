@@ -1002,7 +1002,7 @@ translate H GlistAlignC {Align center}
 
 # Maintenance window:
 translate H DatabaseName {Az adatbázis neve:}
-translate H TypeIcon {Típusikon:}
+translate H TypeIcon {Típusikon}
 translate H NumOfGames {Játszmák:}
 translate H NumDeletedGames {Törölt játszmák:}
 translate H NumFilterGames {Szûrt játszmák:}
