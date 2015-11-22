@@ -7,7 +7,7 @@
 # scp doc/* stevenaaus,scidvspc@web.sourceforge.net:/home/groups/s/sc/scidvspc/htdocs/doc/
 
 # The next line restarts using tkscid: \
-exec tclsh8.5 "$0" "$@"
+exec tclsh "$0" "$@"
 
 set ::scidName {Scid vs. PC}
 set ::scidVersion 4.14
