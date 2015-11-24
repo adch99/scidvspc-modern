@@ -721,7 +721,7 @@ proc ::windows::gamelist::Popup {w x y X Y} {
     $menu add command -label $::tr(GlistRemoveGameAndBelowFromFilter) -command "$w.b.removebelow invoke"
     $menu add command -label $::tr(Reset) -command "$w.b.reset invoke"
     }
-    menu $menu.flags
+    menu $menu.flags -tearoff -1
     foreach flag $maintFlaglist  {
       # dont translate CustomFlag (todo)
       if {$flag ni {1 2 3 4 5 6}} {
