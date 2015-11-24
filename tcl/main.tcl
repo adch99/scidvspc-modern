@@ -1776,24 +1776,42 @@ proc pauseGame {args} {
   }
 }
 
-### Add current position, and check for 3 fold repetition
+### Add current position, and check for 3 fold repetition or 50 move rule
 
 proc checkRepetition {} {
-  set elt [lrange [split [sc_pos fen]] 0 2]
+
+  # Only show draw dialog once
+  if {$::drawShown} {
+    return 0
+  }
+
+  set fen [sc_pos fen]
+  if {[lindex $fen 4] > 99} {
+    set ::drawShown 1
+    pauseGame
+    sc_game tags set -result =
+    sc_pos setComment "50 move rule"
+    tk_messageBox -type ok -message $::tr(Draw) -parent .main.board -icon info
+    catch {::game::Save}
+    return 1
+  }
+
+  set elt [lrange [split $fen] 0 2]
   if {$elt == [lindex $::lFen end]} {
     return 0
   }
 
   lappend ::lFen $elt
-  if { [llength [lsearch -all $::lFen $elt] ] >=3 && ! $::drawShown } {
+  if { [llength [lsearch -all $::lFen $elt] ] >=3 } {
     set ::drawShown 1
     pauseGame
     sc_game tags set -result =
+    sc_pos setComment "3 fold repetition"
     tk_messageBox -type ok -message $::tr(Draw) -parent .main.board -icon info
-    # puts $::lFen
     catch {::game::Save}
     return 1
   }
+
   return 0
 }
 
