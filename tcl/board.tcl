@@ -2753,21 +2753,9 @@ proc ::board::_animate {w} {
 # Based on code from David Easton:
 # http://wiki.tcl.tk/9127
 
-set window_image_support 1
-if { [catch {package require img::window}] } {
-  set window_image_support 0
-}
-
-if {!$png_image_support || !$window_image_support} {
-  .menu.tools entryconfig ToolsScreenshot -state disabled
-  if {!$png_image_support} {
-    ::splash::add "Board screenshot disabled - no png support"
-  } else {
-    ::splash::add "Board screenshot disabled - no image window support"
-  }
-}
-
 proc boardToFile { format filepath } {
+
+  package require img::window
 
   set w .main.board
   set board $w.bd
