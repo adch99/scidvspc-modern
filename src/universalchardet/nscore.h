@@ -60,7 +60,7 @@
 /**
  * Macros defining the target platform...
  */
-#ifdef __WIN32__
+#ifdef _WIN32
 #define NS_WIN32 1
 
 #elif defined(__unix__)
@@ -231,81 +231,16 @@
 
 #include "nsError.h"
 
-/* ------------------------------------------------------------------------ */
-/* Casting macros for hiding C++ features from older compilers */
-
-  /*
-    All our compiler support template specialization, but not all support the
-    |template <>| notation.  The compiler that don't understand this notation
-    just omit it for specialization.
-
-    Need to add an autoconf test for this.
-  */
-
-  /* under Metrowerks (Mac), we don't have autoconf yet */
-#ifdef __MWERKS__
-  #define HAVE_CPP_PARTIAL_SPECIALIZATION
-  #define HAVE_CPP_MODERN_SPECIALIZE_TEMPLATE_SYNTAX
-
-  #define HAVE_CPP_ACCESS_CHANGING_USING
-  #define HAVE_CPP_AMBIGUITY_RESOLVING_USING
-  #define HAVE_CPP_EXPLICIT
-  #define HAVE_CPP_TYPENAME
-  #define HAVE_CPP_BOOL
-  #define HAVE_CPP_NAMESPACE_STD
-  #define HAVE_CPP_UNAMBIGUOUS_STD_NOTEQUAL
-  #define HAVE_CPP_2BYTE_WCHAR_T
-#endif
-
-  /* under VC++ (Windows), we don't have autoconf yet */
-#if defined(_MSC_VER) && (_MSC_VER>=1100)
-  /* VC++ 5.0 and greater implement template specialization, 4.2 is unknown */
-  #define HAVE_CPP_MODERN_SPECIALIZE_TEMPLATE_SYNTAX
-
-  #define HAVE_CPP_EXPLICIT
-  #define HAVE_CPP_TYPENAME
-  #define HAVE_CPP_ACCESS_CHANGING_USING
-
-  #if (_MSC_VER==1100)
-      /* VC++5.0 has an internal compiler error (sometimes) without this */
-    #undef HAVE_CPP_ACCESS_CHANGING_USING
-  #endif
-
-  #define HAVE_CPP_NAMESPACE_STD
-  #define HAVE_CPP_UNAMBIGUOUS_STD_NOTEQUAL
-  #define HAVE_CPP_2BYTE_WCHAR_T
-#endif
-
 #ifndef __PRUNICHAR__
 #define __PRUNICHAR__
-  /* For now, don't use wchar_t on Unix because it breaks the Netscape
-   * commercial build.  When this is fixed there will be no need for the
-   * |NS_REINTERPRET_CAST| in nsLiteralString.h either.
-   */
-  #if defined(HAVE_CPP_2BYTE_WCHAR_T) && (defined(NS_WIN32) || defined(XP_MAC))
+  #if defined(NS_WIN32)
     typedef wchar_t PRUnichar;
   #else
     typedef PRUint16 PRUnichar;
   #endif
 #endif
 
-  /*
-    If the compiler doesn't support |explicit|, we'll just make it go away, trusting
-    that the builds under compilers that do have it will keep us on the straight and narrow.
-  */
-#ifndef HAVE_CPP_EXPLICIT
-  #define explicit
-#endif
-
-#ifndef HAVE_CPP_TYPENAME
-  #define typename
-#endif
-
-#ifdef HAVE_CPP_MODERN_SPECIALIZE_TEMPLATE_SYNTAX
-  #define NS_SPECIALIZE_TEMPLATE  template <>
-#else
-  #define NS_SPECIALIZE_TEMPLATE
-#endif
+#define NS_SPECIALIZE_TEMPLATE  template <>
 
 /* unix and beos now determine this automatically */
 #if ! defined XP_UNIX && ! defined XP_BEOS && !defined(XP_OS2)
