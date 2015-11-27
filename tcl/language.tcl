@@ -103,7 +103,7 @@ proc initLanguageMenus {} {
   }
   foreach j [lsort -index 1 $l] {
     set i [lindex $j 0]
-    if {[file exists [file nativename [file join $::scidShareDir "lang/[lindex $langTable($i) 0].tcl"]]]} {
+    if {[file exists [file nativename [file join $dir [lindex $langTable($i) 0].tcl]]]} {
       .menu.options.language add radiobutton -label [lindex $langTable($i) 1] \
 	-underline [lindex $langTable($i) 2] -variable language -value $i -command setLanguage
     }
