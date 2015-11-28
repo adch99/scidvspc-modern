@@ -4278,6 +4278,7 @@ set helpText(Related) {<h1>Links</h1>
   <li>Ed Collins' Scid vs. PC page <url http://edcollins.com/chess/scidvspc/index.html>http://edcollins.com/chess/scidvspc/index.html</url></li>
   <li>Gorgonian's custom pieces <url http://gorgonian.weebly.com/scid-vs-pc.html>http://gorgonian.weebly.com/scid-vs-pc.html</url></i>
   <li>The PGN and EPD standards <url http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm>www.saremba.de/chessgml/standards/pgn...</url></li>
+  <li>Common PGN extensions <url http://www.enpassant.dk/chess/palview/enhancedpgn.htm>http://www.enpassant.dk/chess/palview/enhancedpgn.htm</url></li>
   <li>Pgn of players <url http://www.pgnmentor.com/files.html#players>www.pgnmentor.com/files.html#players</url></li>
   <li>Pgn of events <url http://www.pgnmentor.com/files.html#events>www.pgnmentor.com/files.html#events</url></li>
 <br>
@@ -5520,7 +5521,8 @@ or, highest rated games, such as
   <p>
   The <b>smoves</b> command loads a previously played or suspended game into the main board.
   Using "smoves GMShort -1" (for eg) is better in that the whole game is loaded to Scid, and 
-  it can thus have variations added, and the game saved.
+  it can thus have variations added, and the game saved. <b>smoves+</b> can be used to store
+the elapsed-move-times.
   </p>
   <p>
   The FICS <b>examine</b> command is now well supported, and is a convenient way

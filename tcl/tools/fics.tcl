@@ -617,7 +617,7 @@ namespace eval fics {
 	  return
 	  }
 
-      smoves - smove {
+      smove* {
 	  # smoves recreates a game without any further announcment
 	  if {$::fics::playing == 1 || $::fics::playing == -1} {
 	    updateConsole "Scid: smoves disabled while playing a game"
@@ -630,6 +630,13 @@ namespace eval fics {
 	    if {$confirm == 2} {return}
 	    if {$confirm == 0} {::game::Save}
           }
+
+	  set ::fics::waitForMoves no_meaning
+	  if {$c == "smoves+"} {
+	    set ::fics::waitForMoves emt
+	    set l [string map {smoves+ smoves} $l]
+          }
+
 	  sc_game new
 	  set ::fics::mainGame -1
 	  set ::fics::playing 0
@@ -638,7 +645,6 @@ namespace eval fics {
 
 	  writechan $l echo
 
-	  set ::fics::waitForMoves no_meaning
 	  vwaitTimed ::fics::waitForMoves 5000 nowarn
 	  updateBoard -pgn
 	  updateTitle
@@ -1274,8 +1280,14 @@ namespace eval fics {
 	    # 2.  c4      (0:25)     Bf5     (0:01)
 
 	    catch { sc_move addSan $m1 }
+	    if { $::fics::waitForMoves == "emt" } {
+              sc_pos setComment "\[%emt [string trim $t2 {)}]\]"
+            }
 	    if {$m2 != ""} {
 	      catch { sc_move addSan $m2 }
+	      if { $::fics::waitForMoves == "emt" } {
+		sc_pos setComment "\[%emt [string trim $t3 {)}]\]"
+	      }
 	    }
 	    if {[sc_pos fen] == $::fics::waitForMoves } {
               ### Game reconstructed successfully
@@ -1477,6 +1489,9 @@ namespace eval fics {
         destroy .fics.bottom.game$game
         bind .fics <Destroy> ::fics::close
         ::fics::unobserveGame $game"
+
+      ### Doesnt work as focus in fics goes to the command entry
+      # $w.bottom.game$game.bd.bd bind current <Escape> "$w.bottom.game$game.b.close invoke"
 
       button $w.bottom.game$game.b.flip -image arrow_updown -font font_Small -relief flat -command "
         set temp1 \[.fics.bottom.game$game.b.black cget -text\]
