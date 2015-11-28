@@ -830,6 +830,7 @@ if {$::docking::USE_DOCKING} {
   $m add command -label OptionsWindowsSaveLayout -command {
     ::docking::layout_save 1
     set autoLoadLayout 1
+    .menu.options invoke [tr OptionsSave]
   }
 }
 
