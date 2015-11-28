@@ -347,7 +347,7 @@ proc initBoardColors {} {
     label $f.b$c -width 2 -background [set $c] 
     bind  $f.b$c <Button-1> "chooseAColor $w $c"
 
-    button $f.l$c -text "$::tr($n)  " -command "chooseAColor $w $c" -borderwidth 1 -relief raised -font font_Small
+    button $f.l$c -text "$::tr($n)  " -command "chooseAColor $w $c" -relief flat -font font_Small
     grid $f.b$c -row $row -column $column -padx 3
     grid $f.l$c -row $row -column [expr {$column + 1} ] -sticky w
   }
