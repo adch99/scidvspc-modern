@@ -446,6 +446,8 @@ translate O MergeGames {Merge Games}
 translate O Preview {Forhåndsvis}
 translate O Revert {Gjør om}
 translate O Save {Lagre}
+# ====== TODO To be translated ======
+translate O DontSave {Don't Save}
 translate O Search {Søk}
 translate O Stop {Stopp}
 translate O Store {Lagre}
@@ -1301,14 +1303,10 @@ Du kan enkelt slå av skrivebeskyttelsen på databasen ved å lukke og gjenåpne den
 
 Vil du virkelig skrivebeskytte denne databasen?}
 
-# Clear game dialog:
-translate O ClearGameDialog {Dette partiet har blitt endret.
-
-Vil du virkelig forkaste endringene som er gjort?
-}
-
 # Exit dialog:
 translate O ExitDialog {Vil du virkelig avslutte Scid?}
+# ====== TODO To be translated ======
+translate O ClearGameDialog {This game has been altered.\nDo you wish to save it?}
 translate O ExitUnsaved {Følgende baser har ulagrede endringer i partier. Hvis du avslutter nå vil disse endringene gå tapt.}
 
 # Import window:

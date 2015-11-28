@@ -368,6 +368,8 @@ translate U MergeGames {Juntar jogos}
 translate U Preview {Visualização}
 translate U Revert {Reverter}
 translate U Save {Guardar}
+# ====== TODO To be translated ======
+translate U DontSave {Don't Save}
 translate U Search {Pesquisar}
 translate U Stop {Parar}
 translate U Store {Guardar}
@@ -1085,14 +1087,10 @@ Para poder tornar a base de dados noavmente atualizável, feche-a e abra-a novame
 
 Você realmente quer que esta base de dados seja apenas de leitura?}
 
-# Clear game dialog:
-translate U ClearGameDialog {Este jogo foi alterado.
-
-Você realmente quer continuar e descartar as mudanças feitas?
-}
-
 # Exit dialog:
 translate U ExitDialog {Você quer realmente sair do Scid?}
+# ====== TODO To be translated ======
+translate U ClearGameDialog {This game has been altered.\nDo you wish to save it?}
 translate U ExitUnsaved {As seguintes bases têm alterações não gravadas. Se sair agora, essas alterações serão perdidas.} ;# ***
 
 # Import window:

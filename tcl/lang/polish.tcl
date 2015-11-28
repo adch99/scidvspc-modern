@@ -381,6 +381,8 @@ translate P MergeGames {Połącz wszytkie partie}
 translate P Preview {Podgląd}
 translate P Revert {Odwróć}
 translate P Save {Zapisz}
+# ====== TODO To be translated ======
+translate P DontSave {Don't Save}
 translate P Search {Szukaj}
 translate P Stop {Stop}
 translate P Store {Zapamiętaj}
@@ -1106,14 +1108,10 @@ Sortowanie i klasyfikacja debiutowa będą tylko tymczasowe.
 
 Na pewno zabezpieczyć bazę przed zapisem?}
 
-# Clear game dialog:
-translate P ClearGameDialog {Partia została zmieniona.
-
-Na pewno kontynuować, rezygnując z wszelkich zmian?
-}
-
 # Exit dialog:
 translate P ExitDialog {Na pewno zakończyć pracę z programem?}
+# ====== TODO To be translated ======
+translate P ClearGameDialog {This game has been altered.\nDo you wish to save it?}
 translate P ExitUnsaved {Następujące bazy zawierają niezapisane zmiany. Jeśli zamkniesz program teraz, zmiany zostaną utracone.} 
 
 # Import window:

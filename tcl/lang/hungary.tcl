@@ -421,6 +421,8 @@ translate H MergeGames {Merge Games}
 translate H Preview {Elõnézet}
 translate H Revert {Elvet}
 translate H Save {Ment}
+# ====== TODO To be translated ======
+translate H DontSave {Don't Save}
 translate H Search {Keres}
 translate H Stop {Állj}
 translate H Store {Tárol}
@@ -1231,14 +1233,10 @@ Könnyen újra írhatóvá teheted az adatbázist, ha bezárod, majd újból megnyitod.
 
 Tényleg kizárólag olvashatóvá akarod tenni ezt az adatbázist?}
 
-# Clear game dialog:
-translate H ClearGameDialog {Ez a játszma megváltozott.
-
-Tényleg folytatni akarod, és elvetni a létrehozott változtatásokat?
-}
-
 # Exit dialog:
 translate H ExitDialog {Tényleg ki akarsz lépni SCID-bõl?}
+# ====== TODO To be translated ======
+translate H ClearGameDialog {This game has been altered.\nDo you wish to save it?}
 translate H ExitUnsaved {A következõ adatbázisokban elmentetlen játszmaváltoztatások vannak. Ha most kilépsz, ezek a változtatások elvesznek.}
 
 # Import window:

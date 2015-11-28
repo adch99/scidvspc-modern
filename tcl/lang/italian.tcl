@@ -404,6 +404,8 @@ translate I MergeGames {Unisci partite}
 translate I Preview {Anteprima}
 translate I Revert {Rovescia}
 translate I Save {Salva}
+# ====== TODO To be translated ======
+translate I DontSave {Don't Save}
 translate I Search {Cerca}
 translate I Stop {Stop}
 translate I Store {Memorizza}
@@ -1196,13 +1198,10 @@ Puoi facilmente rendere ancora scrivibile il database, chiudendolo e riaprendolo
 
 Desideri veramente rendere questo database di sola lettura?}
 
-# Clear game dialog:
-translate I ClearGameDialog {Questa partita e' stata modificata.
-
-Sei sicuro di voler continuare ed eliminare le modifiche effettuate?}
-
 # Exit dialog:
 translate I ExitDialog {Vuoi veramente uscire da Scid?}
+# ====== TODO To be translated ======
+translate I ClearGameDialog {This game has been altered.\nDo you wish to save it?}
 translate I ExitUnsaved {Il database ha partite modificate e non salvate. Se esci adesso queste modifiche saranno perse.}
 
 # Import window:

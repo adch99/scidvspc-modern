@@ -373,6 +373,8 @@ translate F MergeGames {Fusionner les parties}
 translate F Preview {Prévisualiser}
 translate F Revert {Revenir}
 translate F Save {Enregistrer}
+# ====== TODO To be translated ======
+translate F DontSave {Don't Save}
 translate F Search {Rechercher}
 translate F Stop {Arrêter}
 translate F Store {Enregistrer}
@@ -1092,14 +1094,10 @@ Vous pouvez facilement rendre la base à nouveau accessible en écriture, en la fe
 
 Voulez vous vraiment passer cette base en lecture seule?}
 
-# Clear game dialog:
-translate F ClearGameDialog {Cette partie a été modifiée.
-
-Voulez vous vraiment continuer et ignorer les changements effectués?
-}
-
 # Exit dialog:
 translate F ExitDialog {Voulez vous réellement quitter Scid?}
+# ====== TODO To be translated ======
+translate F ClearGameDialog {This game has been altered.\nDo you wish to save it?}
 translate F ExitUnsaved {Les bases de données suivantes ont des parties modifiées non sauvegardées. Si vous quittez maintenant, ces modifications seront perdues.}
 
 # Import window:

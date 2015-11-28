@@ -403,6 +403,8 @@ translate G MergeGames {Συγχών.Παρτίδων}
 translate G Preview {Προεπισκ.}
 translate G Revert {Επαναφ.}
 translate G Save {Αποθήκευση}
+# ====== TODO To be translated ======
+translate G DontSave {Don't Save}
 translate G Search {Αναζήτηση}
 translate G Stop {Διακοπή}
 translate G Store {Αποθήκευση}
@@ -1145,14 +1147,10 @@ translate G ReadOnlyDialog {Επιθυμείτε να ενεργοποιήσετ
 
 (Για να την απενεργοποιήσετε, απλά κλείστε την και ανοίξτε την ξανά.)}
 
-# Clear game dialog:
-translate G ClearGameDialog {Αυτή η παρτίδα άλλαξε.
-
-Επιθυμείτε να συνεχίσετε και να αναιρέσετε όλες τις αλλαγές που έγιναν;
-}
-
 # Exit dialog:
 translate G ExitDialog {Επιθυμείτε να κλείσετε το ScidvsPC;}
+# ====== TODO To be translated ======
+translate G ClearGameDialog {This game has been altered.\nDo you wish to save it?}
 translate G ExitUnsaved {Οι ακόλουθες Βάσεις περιέχουν μη αποθηκευμένες παρτίδες. Αν κλείσετε την εφαρμογή τώρα, οι αλλαγές θα χαθούν.}
 
 # Import window:

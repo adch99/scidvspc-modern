@@ -385,6 +385,8 @@ translate W MergeGames {Slå samman partier}
 translate W Preview {Förhandsgranska}
 translate W Revert {Ångra inmatning}
 translate W Save {Spara}
+# ====== TODO To be translated ======
+translate W DontSave {Don't Save}
 translate W Search {Sök}
 translate W Stop {Stoppa}
 translate W Store {Spara}
@@ -1124,14 +1126,10 @@ Du kan göra den skrivbar igen genom att helt enkelt stänga och öppna den igen.
 
 Vill du verkligen ange att databasen endast ska vara läsbar?}
 
-# Clear game dialog:
-translate W ClearGameDialog {Detta parti har ändrats.
-
-Vill du verkligen fortsätta och förlora ändringarna?
-}
-
 # Exit dialog:
 translate W ExitDialog {Vill du verkligen avsluta Scid?}
+# ====== TODO To be translated ======
+translate W ClearGameDialog {This game has been altered.\nDo you wish to save it?}
 translate W ExitUnsaved {De följande databaserna har osparade förändringar. Om du avslutar nu, kommer dessa förändringar att gå förlorade.}
 
 # Import window:

@@ -390,6 +390,8 @@ translate N MergeGames {Partijen samenvoegen}
 translate N Preview {Voorbeeld}
 translate N Revert {Terugkeren}
 translate N Save {Bewaren}
+# ====== TODO To be translated ======
+translate N DontSave {Don't Save}
 translate N Search {Zoeken}
 translate N Stop {Stop}
 translate N Store {Opbergen}
@@ -1128,14 +1130,10 @@ U kunt de database weer schrijf-toegankelijk maken door hem te sluiten en weer t
 
 Wilt u echt deze database alleen-lezen maken?}
 
-# Clear game dialog:
-translate N ClearGameDialog {Deze partij is gewijzigd.
-
-Wilt u deze wijzigingen negeren en sluiten zonder opslaan?
-}
-
 # Exit dialog:
 translate N ExitDialog {Wilt u ScidvsPC werkelijk afsluiten?}
+# ====== TODO To be translated ======
+translate N ClearGameDialog {This game has been altered.\nDo you wish to save it?}
 translate N ExitUnsaved {In de volgende databases zijn partijen gewijzigd en niet opgeslagen. Als u nu afsluit zullen deze wijzigingen verloren gaan.}
 
 # Import window:

@@ -445,6 +445,8 @@ translate Y MergeGames {Merge Games}
 translate Y Preview {Preview} ;# ***
 translate Y Revert {Vrati se}
 translate Y Save {Saèuvaj}
+# ====== TODO To be translated ======
+translate Y DontSave {Don't Save}
 translate Y Search {Tra¾i}
 translate Y Stop {Stop}
 translate Y Store {Saèuvaj}
@@ -1303,14 +1305,10 @@ Mo¾ete lako ponovo omoguæiti pisanje po bazi, ako je zatvorite i ponovo otvorite
 
 Da li zaista ¾elite da ova baza bude samo za èitanje?}
 
-# Clear game dialog:
-translate Y ClearGameDialog {Ova partija je izmenjena.
-
-Da li zaista ¾elite da nastavite i odbacite sve uèinjene promene?
-}
-
 # Exit dialog:
 translate Y ExitDialog {Da li zaista ¾elite da napustite Scid?}
+# ====== TODO To be translated ======
+translate Y ClearGameDialog {This game has been altered.\nDo you wish to save it?}
 translate Y ExitUnsaved {The following databases have unsaved game changes. If you exit now, these changes will be lost.} ;# ***
 
 # Import window:

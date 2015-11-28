@@ -396,6 +396,8 @@ translate S MergeGames {Mezclar o fusionar partidas}
 translate S Preview {Vista previa}
 translate S Revert {Retroceder}
 translate S Save {Guardar}
+# ====== TODO To be translated ======
+translate S DontSave {Don't Save}
 translate S Search {Buscar}
 translate S Stop {Parar}
 translate S Store {Almacenar}
@@ -1115,14 +1117,10 @@ Puedes hacer fácilmente escribible la base de datos otra vez cerrándola y abrién
 
 ¿Realmente quieres hacer que esta base de datos sea de sólo lectura?}
 
-# Clear game dialog:
-translate S ClearGameDialog {Esta partida ha sido cambiada.
-
-¿Realmente quieres continuar y eliminar los cambios hechos en ella?
-}
-
 # Exit dialog:
 translate S ExitDialog {¿Realmente quieres salir de Scid?}
+# ====== TODO To be translated ======
+translate S ClearGameDialog {This game has been altered.\nDo you wish to save it?}
 translate S ExitUnsaved {La siguiente base de datos tiene cambios en partidas no guardados. Si sales ahora se perderán estos cambios.}
 
 # Import window:

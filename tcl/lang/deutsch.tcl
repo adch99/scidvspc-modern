@@ -396,6 +396,8 @@ translate D MergeGames {Partien kombinieren}
 translate D Preview {Vorschau} ;# Voransicht!? (KDE)
 translate D Revert {Umkehren}
 translate D Save {Speichern}
+# ====== TODO To be translated ======
+translate D DontSave {Don't Save}
 translate D Search {Suchen}
 translate D Stop {Halt}
 translate D Store {Speichern}
@@ -1147,14 +1149,10 @@ Sie können den Schreibschutz einfach entfernen, indem Sie die Datenbank
 schließen und wieder öffnen.
 Wollen Sie diese Datenbank wirklich schreibschützen?}
 
-# Clear game dialog:
-translate D ClearGameDialog {Diese Partie wurde geändert.
-
-Wollen Sie wirklich fortsetzen und die Änderungen verwerfen?
-}
-
 # Exit dialog:
 translate D ExitDialog {Möchten Sie Scid beenden?}
+# ====== TODO To be translated ======
+translate D ClearGameDialog {This game has been altered.\nDo you wish to save it?}
 translate D ExitUnsaved {Die folgenden Datenbanken haben ungesicherte Partieänderungen. Wenn Sie jetzt beenden, gehen diese Änderungen verloren.}
 
 # Import window:

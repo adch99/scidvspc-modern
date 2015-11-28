@@ -370,6 +370,8 @@ translate R MergeGames {Объединение партий}
 translate R Preview {Предварительный просмотр}
 translate R Revert {Возвратиться}
 translate R Save {Сохранить}
+# ====== TODO To be translated ======
+translate R DontSave {Don't Save}
 translate R Search {Поиск}
 translate R Stop {Стоп}
 translate R Store {Сохранить}
@@ -1097,14 +1099,10 @@ translate R ReadOnlyDialog {Если вы сделаете эту базу да�
 
 Вы действительно желаете сделать эту базу данных только для чтения?}
 
-# Clear game dialog:
-translate R ClearGameDialog {Эта партия была изменена.
-
-Вы действительно желаете продолжить, отменив все сделанные изменения?
-}
-
 # Exit dialog:
 translate R ExitDialog {Вы действительно хотите выйти из Scid?}
+# ====== TODO To be translated ======
+translate R ClearGameDialog {This game has been altered.\nDo you wish to save it?}
 translate R ExitUnsaved {Следующая база данных имеет не сохраненные изменённые партии. Если вы выйдите сейчас, изменения будут утеряны.}
 
 # Import window:

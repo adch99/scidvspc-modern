@@ -385,6 +385,7 @@ translate E MergeGames {Merge Games}
 translate E Preview {Preview}
 translate E Revert {Revert}
 translate E Save {Save}
+translate E DontSave {Don't Save}
 translate E Search {Search}
 translate E Stop {Stop}
 translate E Store {Store}
@@ -1096,14 +1097,8 @@ translate E ReadOnlyDialog {Do you want to make this database read-only?
 
 (You can make the database writable again by closing and reopening it.)}
 
-# Clear game dialog:
-translate E ClearGameDialog {This game has been altered.
-
-Do you really want to continue and discard the changes made to it?
-}
-
-# Exit dialog:
 translate E ExitDialog {Do you really want to exit Scid?}
+translate E ClearGameDialog {This game has been altered.\nDo you wish to save it?}
 translate E ExitUnsaved {The following databases have unsaved games. If you exit now, these changes will be lost.}
 
 # Import window:

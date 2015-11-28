@@ -51,12 +51,12 @@ proc ::game::ConfirmDiscard2 {} {
   # label $w.top.icon -bitmap question
   # pack $w.top.icon -side left -padx 20 -pady 5
 
-  label $w.top.txt -text "This game has been altered.\nDo you wish to save it?"
+  label $w.top.txt -text $::tr(ClearGameDialog)
   pack $w.top.txt -padx 5 -pady 5 -side right
 
-  button $w.bottom.b1 -width 10 -text {Save} -command        {destroy .confirmDiscard ; set ::game::answer 0}
-  button $w.bottom.b2 -width 10 -text {Don't Save} -command  {destroy .confirmDiscard ; set ::game::answer 1}
-  button $w.bottom.b3 -width 10 -text $::tr(Cancel) -command {destroy .confirmDiscard ; set ::game::answer 2}
+  button $w.bottom.b1 -width 10 -text $::tr(Save)     -command {destroy .confirmDiscard ; set ::game::answer 0}
+  button $w.bottom.b2 -width 10 -text $::tr(DontSave) -command {destroy .confirmDiscard ; set ::game::answer 1}
+  button $w.bottom.b3 -width 10 -text $::tr(Cancel)   -command {destroy .confirmDiscard ; set ::game::answer 2}
   pack $w.bottom.b1 $w.bottom.b2 $w.bottom.b3 -side left -padx 10 -pady 5
 
   bind $w <Destroy> {set ::game::answer 2}

@@ -417,6 +417,8 @@ translate C MergeGames {Merge Games}
 translate C Preview {Náhled}
 translate C Revert {Vrátit se}
 translate C Save {Ulo¾it}
+# ====== TODO To be translated ======
+translate C DontSave {Don't Save}
 translate C Search {Hledat}
 translate C Stop {Stop}
 translate C Store {Uschovat}
@@ -1223,14 +1225,10 @@ Databázi mù¾ete uèinit opìt zapisovatelnou pomocí jejího zavøení a opìtovného ot
 
 Pøejete si skuteènì nastavit tuto databázi jako jen ke ètení?}
 
-# Clear game dialog:
-translate C ClearGameDialog {Tato partie byla zmìnìna.
-
-Skuteènì chcete pokraèovat a zru¹it zmìny, které jste v ní uèinili?
-}
-
 # Exit dialog:
 translate C ExitDialog {Opravdu si pøejete ukonèit Scid?}
+# ====== TODO To be translated ======
+translate C ClearGameDialog {This game has been altered.\nDo you wish to save it?}
 translate C ExitUnsaved {Následující databáze obsahují partie s neulo¾enými zmìnami. Pokud nyní skonèíte, budou tyto zmìny ztraceny.}
 
 # Import window:
