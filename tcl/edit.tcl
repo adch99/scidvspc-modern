@@ -20,7 +20,7 @@ proc copyFEN {} {
 
 proc pasteFEN {} {
 
-  set confirm [::game::ConfirmDiscard2]
+  set confirm [::game::ConfirmDiscard]
   if {$confirm == 2} { return }
   if {$confirm == 0} {
     sc_game save [sc_game number]
@@ -438,7 +438,7 @@ proc setupBoard {} {
     return
   }
 
-  set confirm [::game::ConfirmDiscard2]
+  set confirm [::game::ConfirmDiscard]
   if {$confirm == 2} { return }
   if {$confirm == 0} {
     sc_game save [sc_game number]

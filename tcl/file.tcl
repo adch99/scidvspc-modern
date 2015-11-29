@@ -457,10 +457,12 @@ proc ::file::Close {{base -1}} {
   # Switch to the base which will be closed, and check for changes:
   sc_base switch $base
   if {[sc_base inUse]} {
-    if {![::game::ConfirmDiscard]} {
-      sc_base switch $current
-      return
+    set confirm [::game::ConfirmDiscard]
+    if {$confirm == 2} { return }
+    if {$confirm == 0} {
+      ::game::Save
     }
+    setTrialMode 0
     sc_base close
 
     bind . <Control-Key-$base> {}

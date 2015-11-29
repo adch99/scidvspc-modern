@@ -12,7 +12,7 @@ proc importPgnGame {} {
     raiseWin $w
     return
   }
-  set confirm [::game::ConfirmDiscard2]
+  set confirm [::game::ConfirmDiscard]
   if {$confirm == 2} { return }
   if {$confirm == 0} {
     ::game::Save
@@ -124,14 +124,6 @@ proc importPgnGame {} {
   bind $w.pane.err.text <Control-z> "catch {$w.pane.edit.text edit undo}"
 }
 
-
-proc importMoveList {line} {
-  sc_move start
-  sc_move addSan $line
-  updateBoard -pgn
-}
-
-
 proc importVar {} {
   # Move formatting doesn't seem to cause any problems
   # (eg 6.Qg4+ Qg6 7.Qd4+ Kg8 8.Qd8+ Kh7+)
@@ -204,15 +196,26 @@ proc importVar {} {
   }
 }
 
-################################################################################
-#
-################################################################################
+### Only used by optable ??
+
+proc importMoveList {line} {
+  sc_move start
+  sc_move addSan $line
+  updateBoard -pgn
+}
+
+### Unused
+
 proc importMoveListTrans {line} {
 
   if {[sc_game number] > 0} {
-    if {![::game::ConfirmDiscard]} {
-      return
+    set confirm [::game::ConfirmDiscard]
+    if {$confirm == 2} { return }
+    if {$confirm == 0} {
+      ::game::Save
     }
+    setTrialMode 0
+
     sc_game new
   }
 

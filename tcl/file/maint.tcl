@@ -1697,7 +1697,7 @@ proc compactNames {} {
     return
   }
 
-  set confirm [::game::ConfirmDiscard2]
+  set confirm [::game::ConfirmDiscard]
   if {$confirm == 2} { return }
   if {$confirm == 0} {
     ::game::Save
@@ -1750,7 +1750,7 @@ proc compactGames {parent} {
     return
   }
 
-  set confirm [::game::ConfirmDiscard2]
+  set confirm [::game::ConfirmDiscard]
   if {$confirm == 2} { return }
   if {$confirm == 0} {
     ::game::Save

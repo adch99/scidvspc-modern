@@ -626,7 +626,7 @@ namespace eval fics {
 
 	  ::fics::demote_mainGame 
           if {$::fics::playing != 2} {
-	    set confirm [::game::ConfirmDiscard2]
+	    set confirm [::game::ConfirmDiscard]
 	    if {$confirm == 2} {return}
 	    if {$confirm == 0} {::game::Save}
           }
@@ -664,7 +664,7 @@ namespace eval fics {
 	  set black [string trim [lindex [sc_game tags get Black] 0] {,}]
 	  set ::fics::examresult [sc_game tags get Result]
 
-	  set confirm [::game::ConfirmDiscard2]
+	  set confirm [::game::ConfirmDiscard]
 	  if {$confirm == 2} {return}
 	  if {$confirm == 0} {::game::Save}
 
@@ -688,7 +688,7 @@ namespace eval fics {
           return
       } 
       ex* {
-	  set confirm [::game::ConfirmDiscard2]
+	  set confirm [::game::ConfirmDiscard]
 	  if {$confirm == 2} {return}
 	  if {$confirm == 0} {::game::Save}
           sc_game new

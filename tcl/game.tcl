@@ -1,40 +1,17 @@
 # game.tcl: part of Scid
 
-# ConfirmDiscard can sometimes be drawn underneath the comment editor 
-# It should be replaced by ConfirmDiscard2 anyway, which has a game save option. S.A.
-
-# Prompts the user if they want to discard the changes to the current game.
-# Returns 1 if they selected yes, 0 otherwise.
-
-proc ::game::ConfirmDiscard {} {
-
-  # sanity check in case of errant multiple call
-  if {[winfo exists .cgDialog]} {
-    return 0
-  }
-
-  if {$::trialMode || [sc_base isReadOnly] || ![sc_game altered]} {
-    return 1
-  }
-
-  set answer [ tk_dialog .cgDialog "Scid: [tr GameNew]" $::tr(ClearGameDialog) {} {} \
-    $::tr(DiscardChangesAndContinue) $::tr(Cancel) ]
-
-  return [expr $answer == 0]
-}
-
-# ::game::ConfirmDiscard2
-# Clearer buttons than ConfirmDiscard
 #   Prompts the user if they want to discard the changes to the
 #   current game. Returns :
 # 0 -> saves then continue
 # 1 -> discard changes and continue
 # 2 -> cancel action
 
-proc ::game::ConfirmDiscard2 {} {
+proc ::game::ConfirmDiscard {} {
   # This should be rewritten with tk_dialog and "return answer"
   # rather than "::game::answer" S.A.
 
+  # This is not correct. We can have an altered game , then start Trial mode.
+  # Instead, we should [setTrialMode 0], then check [sc_game altered], but needs lots of testing
   if {$::trialMode || [sc_base isReadOnly] || ![sc_game altered]} {
     return 1
   }
@@ -42,7 +19,7 @@ proc ::game::ConfirmDiscard2 {} {
   set w .confirmDiscard
   toplevel $w
   wm state $w withdrawn
-  wm title $w "Scid: [tr GameNew]"
+  wm title $w Scid
   set ::game::answer 2
   pack [frame $w.top] -side top
   addHorizontalRule $w
@@ -79,7 +56,7 @@ proc ::game::ConfirmDiscard2 {} {
 #   Updates any affected windows.
 
 proc ::game::Clear {} {
-  set confirm [::game::ConfirmDiscard2]
+  set confirm [::game::ConfirmDiscard]
   if {$confirm == 2} { return }
   if {$confirm == 0} {
     ::game::Save
@@ -184,7 +161,7 @@ proc ::game::LoadNumber {} {
   set ::game::entryLoadNumber ""
   if {![sc_base inUse]} { return }
 
-  set confirm [::game::ConfirmDiscard2]
+  set confirm [::game::ConfirmDiscard]
   if {$confirm == 2} { return }
   if {$confirm == 0} {
     ::game::Save
@@ -246,7 +223,7 @@ proc ::game::Load { selection {update 1} {raise 1}} {
     ::fics::demote_mainGame
     set ::fics::mainGame -1
   } else {
-    set confirm [::game::ConfirmDiscard2]
+    set confirm [::game::ConfirmDiscard]
     if {$confirm == 2} { return -1 }
     if {$confirm == 0} {
       ::game::Save
