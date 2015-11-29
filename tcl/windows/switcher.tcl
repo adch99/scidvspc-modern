@@ -929,7 +929,7 @@ proc ::windows::switcher::Open {} {
     menu $f.menu -tearoff 0
     $f.menu add command -label [tr SearchReset] -command "::search::filter::reset $i"
 
-    ### $f.menu add command -label [tr SearchNegate] -command "::search::filter::negate $i"
+    $f.menu add command -label [tr SearchNegate] -command "::search::filter::negate $i"
     # needs some work in search.tcl and tkscid.cpp 
 
     $f.menu add command -label [tr FileReadOnly] -command "makeBaseReadOnly .glistWin.baseWin $i"

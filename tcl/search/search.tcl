@@ -46,9 +46,18 @@ proc ::search::filter::reset {{base {}}} {
 
 ### Negate filter
 
-proc ::search::filter::negate {} {
-  sc_filter negate
-  set glstart 1
+proc ::search::filter::negate {{base {}}} {
+  set currentBaseNum [sc_base current]
+  if {$base == {} || $base == $currentBaseNum} {
+    sc_filter negate
+    set glstart 1
+  } else {
+    sc_base switch $base
+    sc_filter negate
+    set ::glistStart($base) 1
+    sc_base switch $currentBaseNum
+  }
+
   ::windows::gamelist::Refresh
   ::windows::stats::Refresh
   updateMenuStates
