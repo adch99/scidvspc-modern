@@ -743,6 +743,8 @@ proc ::tree::displayLines { baseNumber moves } {
     $w.f.tl insert end "\n"
   } ;# end for loop
  
+  if {$lMoves != {}} {
+
   # Display the last two lines  - hypens and total
   for { set i [expr $len - 3 ] } { $i < [expr $len - 1 ] } { incr i } {
     if { $maskFile != "" } {
@@ -758,6 +760,8 @@ proc ::tree::displayLines { baseNumber moves } {
     $w.f.tl window create end-13c -create "canvas %W.h -width 60 -height 12 -highlightthickness 0"
   } else {
     $w.f.tl window create end-32c -create "canvas %W.h -width 60 -height 12 -highlightthickness 0"
+  }
+
   }
 
   ### Add moves present in Mask and not in Tree
