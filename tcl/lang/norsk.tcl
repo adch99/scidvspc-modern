@@ -636,6 +636,8 @@ menuText O TreeOptFastAndSlowmode "Fast and slow mode" 0 {Fast mode then slow mo
 menuText O TreeOptStartStop "Auto refreshing" 0 {Toggles automatic refreshing of the tree window}
 menuText O TreeOptLock "Lås" 0 {Låser treet til nåværende database}
 menuText O TreeOptTraining "Trening" 0 {Slår av/på treningsmodus}
+# ====== TODO To be translated ======
+menuText O TreeOptShort "Short Display" 0 {Don't show ELO information}
 menuText O TreeOptAutosave "Autolagre hurtigbuffer" 0 \
   {Autolagrer hurtigbufferet når vinduet lukkes}
 # ====== TODO To be translated ======
@@ -657,8 +659,8 @@ translate O TreeAdjust {Adjust Filter}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
 # todo
-translate O TreeTitleRow \
-  {    Move      Frequency    Score  AvElo Perf AvYear Draws ECO}
+translate O TreeTitleRow {    Move      Frequency    Score Draws AvElo Perf AvYear ECO}
+translate O TreeTitleRowShort {    Move      Frequency    Score Draws}
 translate O TreeTotal {SAMMENLAGT}
 # ====== TODO To be translated ======
 translate O DoYouWantToSaveFirst {Do you want to save}

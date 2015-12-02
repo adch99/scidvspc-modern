@@ -534,6 +534,8 @@ menuText R TreeOptFastAndSlowmode "Быстрый и медленный режи
 menuText R TreeOptStartStop "Автообновление" 0 {Переключает автообновление в окне дерева}
 menuText R TreeOptLock "Блокировать" 0 {(Раз)блокировать дерево для текущей базы}
 menuText R TreeOptTraining "Тренировка" 0 {Включить/выключить режим тренировки}
+# ====== TODO To be translated ======
+menuText R TreeOptShort "Short Display" 0 {Don't show ELO information}
 menuText R TreeOptAutosave "Автосохранение файла кеша" 0 \
   {Автосохранение файла кеша, когда закрывается окно дерева}
 # ====== TODO To be translated ======
@@ -552,8 +554,8 @@ translate R TreeBestGames {Дерево лучших партий}
 translate R TreeAdjust {Установить фильтр}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
-translate R TreeTitleRow \
-  {    Ход         ECO        Частота Счёт СрЭло Прзв СрГод %ничьих}
+translate R TreeTitleRow { Перемеще    частоты       Счет Нари. AvElo Perf AvYear ECO}
+translate R TreeTitleRowShort { Перемеще    частоты       Счет Нари.}
 translate R TreeTotal {ИТОГ}
 translate R DoYouWantToSaveFirst {Вы хотите сохранить первым}
 translate R AddToMask {Добавить в маску}

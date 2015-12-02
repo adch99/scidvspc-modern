@@ -24,7 +24,7 @@ proc ::tree::doConfigMenus { baseNumber  { lang "" } } {
   foreach idx {0 1 2 3} tag {Alpha ECO Freq Score } {
     configMenuText $m.sort $idx TreeSort$tag $lang
   }
-  foreach idx {0 1 3 4 5 7 8 9} tag {Lock Training Autosave Automask ShowBar Slowmode Fastmode FastAndSlowmode} {
+  foreach idx {0 1 3 4 5 6 8 9 10} tag {Lock Training Short ShowBar Automask Autosave Slowmode Fastmode FastAndSlowmode} {
     configMenuText $m.opt $idx TreeOpt$tag $lang
   }
   foreach idx {0 1} tag {Tree Index} {
@@ -70,16 +70,22 @@ proc ::tree::Open {{baseNumber 0}} {
   setWinSize $w
 
   ::setTitle $w "[lindex "[tr WindowsTree]" 0] \[[file tail [sc_base filename $baseNumber]]\]"
-  set tree(training$baseNumber) 0
-  set tree(autorefresh$baseNumber) 1
-  set tree(locked$baseNumber) 0
+
   set tree(base$baseNumber) $baseNumber
-  set tree(status$baseNumber) ""
   ### The number of bestgames to display is not configurable anymore (except here) S.A.
-  set tree(bestMax$baseNumber) 100 
-  set tree(order$baseNumber) "frequency"
+  foreach {i j} {
+    training	0
+    autorefresh	1
+    locked	0
+    status	""
+    adjustfilter 0
+    bestMax	100 
+    order	frequency
+    bestRes	All
+  } {
+   set tree($i$baseNumber) $j
+  }
   trace variable tree(bestMax$baseNumber) w "::tree::doTrace bestMax"
-  set tree(bestRes$baseNumber) All
   trace variable tree(bestRes$baseNumber) w "::tree::doTrace bestRes"
 
   ### todo: fix this properly
@@ -152,7 +158,12 @@ proc ::tree::Open {{baseNumber 0}} {
   $w.menu.mask add command -label TreeMaskDisplay -command "::tree::mask::displayMask"
   $w.menu.mask add command -label Help -command {helpWindow TreeMasks}
 
-  foreach label {Alpha ECO Freq Score} value {alpha eco frequency score} {
+  foreach {label value} {
+    Alpha alpha
+    ECO   eco
+    Freq  frequency
+    Score score
+  } {
     $w.menu.sort add radiobutton -label TreeSort$label \
         -variable tree(order$baseNumber) -value $value -command " ::tree::refresh $baseNumber "
   }
@@ -161,8 +172,7 @@ proc ::tree::Open {{baseNumber 0}} {
       -command "::tree::toggleLock $baseNumber"
   $w.menu.opt add checkbutton -label TreeOptTraining -variable tree(training$baseNumber) -command "::tree::refreshTraining $baseNumber"
   $w.menu.opt add separator
-  $w.menu.opt add checkbutton -label TreeOptAutosave -variable tree(autoSave$baseNumber)
-  $w.menu.opt add checkbutton -label TreeOptAutomask -variable ::tree::mask::autoLoadMask
+  $w.menu.opt add checkbutton -label TreeOptShort   -variable ::tree::short   -command ::tree::refresh
   $w.menu.opt add checkbutton -label TreeOptShowBar -variable ::tree::showBar -command {
     for {set i 1} {$i <= [sc_base count total]} {incr i} {
       if {[winfo exists .treeWin$i]} {
@@ -175,6 +185,8 @@ proc ::tree::Open {{baseNumber 0}} {
       }
     }
   }
+  $w.menu.opt add checkbutton -label TreeOptAutomask -variable ::tree::mask::autoLoadMask
+  $w.menu.opt add checkbutton -label TreeOptAutosave -variable tree(autoSave$baseNumber)
 
   $w.menu.opt add separator
 
@@ -242,7 +254,8 @@ proc ::tree::Open {{baseNumber 0}} {
 
   # bStartStop TreeOptStartStop
   foreach {b t} {
-    best TreeFileBest training TreeOptTraining
+    best     TreeFileBest
+    training TreeOptTraining
   } {
     set helpMessage($w.buttons.$b) $t
   }
@@ -366,6 +379,7 @@ proc ::tree::toggleTraining { baseNumber } {
 proc ::tree::refreshTraining { baseNumber } {
   global tree
 
+  # Only one tree training used at a time
   for {set i 1 } {$i <= [sc_base count total]} {incr i} {
     if {! [winfo exists .treeWin$baseNumber] || $i == $baseNumber } { continue }
     set tree(training$i) 0
@@ -523,8 +537,7 @@ proc ::tree::dorefresh { baseNumber } {
   }
 
   set moves [sc_tree search -hide $tree(training$baseNumber) -sort $tree(order$baseNumber) -base $baseNumber \
-                            -fastmode $fastmode -adjust $tree(adjustfilter$baseNumber) ]
-  # CVS: set moves [sc_tree search -hide $tree(training$baseNumber) -sort $tree(order$baseNumber) -base $base -fastmode $fastmode]
+                            -fastmode $fastmode -adjust $tree(adjustfilter$baseNumber) -short $::tree::short]
 
   # Tree can be closed in the middle of a search now
   if {![winfo exists $w]} { return }
@@ -585,10 +598,6 @@ proc ::tree::displayLines { baseNumber moves } {
   }
   set notOpen [expr {$moves == $::tr(ErrNotOpen)}]
   set moves [split $moves "\n"]
-
-  # for the graph display
-  set ::tree::treeData$baseNumber $moves
-
   set len [llength $moves]
 
   foreach t [$w.f.tl tag names] {
@@ -598,6 +607,7 @@ proc ::tree::displayLines { baseNumber moves } {
   }
 
   # (Single) Mask position comment at top of move list
+  # Making this line word wrap is too hard because it's tough to get the text widget's true width
   set hasPositionComment 0
   if { $maskFile != "" } {
     set posComment [::tree::mask::getPositionComment]
@@ -607,6 +617,8 @@ proc ::tree::displayLines { baseNumber moves } {
       $w.f.tl insert end "$firstLine\n" [ list bluefg tagtooltip_poscomment ]
       ::utils::tooltip::SetTag $w.f.tl $posComment tagtooltip_poscomment
       $w.f.tl tag bind tagtooltip_poscomment <Double-Button-1> "::tree::mask::addComment {} $w"
+      # Background colour ??
+      # $w.f.tl tag configure tagtooltip_poscomment -background lightskyblue
     }
   }
 
@@ -624,7 +636,11 @@ proc ::tree::displayLines { baseNumber moves } {
   } else {
     $w.f.tl insert end "[lindex $moves 0]\n"
     # blank bargraph in title
-    set padding [expr [string length [lrange $::tr(TreeTitleRow) 2 end]] + 5]
+    if {$::tree::short} {
+      set padding [expr [string length [lrange $::tr(TreeTitleRowShort) 2 end]] + 5]
+    } else {
+      set padding [expr [string length [lrange $::tr(TreeTitleRow) 2 end]] + 5]
+    }
     $w.f.tl window create end-${padding}c -create "canvas %W.g -width 60 -height 12 -highlightthickness 0"
   }
 
@@ -691,11 +707,15 @@ proc ::tree::displayLines { baseNumber moves } {
     ### In each line create a canvas for a little tri-coloured bargraph
 
     scan [string range $line 26 30] "%f%%" success
-    scan [string range $line 51 end-5] "%f%%" draw
+    scan [string range $line 32 35] "%f%%" draw
     set wonx  [expr {($success - $draw/2)*0.6 + 1}] ; # win = success - drawn/2
     set lossx [expr {($success + $draw/2)*0.6 + 1}] ; # loss = 100 - win - drawn
     
-    $w.f.tl window create end-37c -create [list createCanvas %W.g$i $wonx $lossx $baseNumber $move]
+    if {$::tree::short} {
+      $w.f.tl window create end-13c -create [list createCanvas %W.g$i $wonx $lossx $baseNumber $move]
+    } else {
+      $w.f.tl window create end-37c -create [list createCanvas %W.g$i $wonx $lossx $baseNumber $move]
+    }
 
     ### Mouse bindings
 

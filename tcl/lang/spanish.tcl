@@ -574,6 +574,8 @@ menuText S TreeOptLock "Bloquear" 1 \
   {Bloquea/desbloquea el árbol de la base de datos actual}
 menuText S TreeOptTraining "Entrenamiento" 2 \
   {Activa/desactiva el modo de entrenamiento de árbol}
+# ====== TODO To be translated ======
+menuText S TreeOptShort "Short Display" 0 {Don't show ELO information}
 menuText S TreeOptAutosave "Autoguardar archivo caché" 0 \
   {Guarda automáticamente el archivo caché cuando se cierra la ventana de árbol}
 menuText S TreeOptAutomask "Carga automática de máscara" 0 "Carga automática de máscara con un arbol abierto."
@@ -591,8 +593,8 @@ translate S TreeBestGames {Mejores partidas del árbol}
 translate S TreeAdjust {Ajustar filtro}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
-translate S TreeTitleRow \
-  {    Movim.    Frecuencia   Puntu. AvElo Perf AvAño Tablas ECO}
+translate S TreeTitleRow {    Movim.    Frecuencia   Puntu. Tablas AvElo Perf AvAño ECO}
+translate S TreeTitleRowShort {    Movim.    Frecuencia   Puntu. Tablas}
 translate S TreeTotal {TOTAL}
 translate S DoYouWantToSaveFirst {Quieres salvar primero}
 translate S AddToMask {Añadir a máscara}

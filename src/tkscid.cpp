@@ -14248,7 +14248,7 @@ int
 sc_tree_search (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
     static const char * usageStr =
-      "Usage: sc_tree search [-hideMoves <0|1>] [-sort alpha|eco|frequency|score] [-time <0|1>] [-epd <0|1>] [-list <0|1>] [-fastmode <0|1>] [-adjust <0|1>]";
+      "Usage: sc_tree search [-hideMoves <0|1>] [-sort alpha|eco|frequency|score] [-time <0|1>] [-epd <0|1>] [-list <0|1>] [-fastmode <0|1>] [-adjust <0|1>] [-short <0|1>]";
 
     // Sort options: these should match the moveSortE enumerated type.
     static const char * sortOptions[] = {
@@ -14258,6 +14258,7 @@ sc_tree_search (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     char tempTrans[10];
 
     bool hideMoves = false;
+    bool shortDisplay = false;
     bool showTimeStats = true;
     bool showEpdData = true;
     bool listMode = false;
@@ -14280,6 +14281,8 @@ db->bbuf->Empty();
             sortMethod = strUniqueMatch (argv[arg+1], sortOptions);
         } else if (strIsPrefix (argv[arg], "-hideMoves")) {
             hideMoves = strGetBoolean (argv[arg+1]);
+        } else if (strIsPrefix (argv[arg], "-shortDisplay")) {
+            shortDisplay = strGetBoolean (argv[arg+1]);
         } else if (strIsPrefix (argv[arg], "-base")) {
             int baseNum = strGetInteger (argv[arg+1]);
             if (baseNum >= 1  &&  baseNum <= MAX_BASES) {
@@ -14582,10 +14585,13 @@ db->bbuf->Empty();
     DString * output = new DString;
     char temp [200];
     if (! listMode) {
-        const char * titleRow =
-            "      Move        Xrequency    Score  AvElo Perf AvYear %Draws ECO ";
-        // Above row sets line length only.
-        titleRow = translate (ti, "TreeTitleRow", titleRow);
+	// This row sets line length only.
+	const char *titleRow = "      Move        Frequency    Score  %Draws AvElo Perf AvYear ECO ";
+        if (shortDisplay) {
+	  titleRow = translate (ti, "TreeTitleRowShort", titleRow);
+        } else {
+	  titleRow = translate (ti, "TreeTitleRow", titleRow);
+        }
         output->Append (titleRow);
         if (showEpdData) {
             for (int epdID = 0; epdID < MAX_EPD; epdID++) {
@@ -14618,9 +14624,7 @@ db->bbuf->Empty();
             perf = node->perfSum / node->perfCount;
             uint score = (node->score + 5) / 10;
             if (db->game->GetCurrentPos()->GetToMove() == BLACK) { score = 100 - score; }
-#ifndef WINCE
             perf = Crosstable::Performance (perf, score);
-#endif
         }
         unsigned long long avgYear = 0;
         if (node->yearCount > 0) {
@@ -14657,7 +14661,11 @@ db->bbuf->Empty();
                      node->score % 10);
             output->Append (temp);
         }
+        uint pctDraws = node->freq[RESULT_Draw] * 1000 / node->total;
+        sprintf (temp, " %3d%%", (pctDraws + 5) / 10);
+        output->Append (temp);
 
+      if (!shortDisplay) {
         if (avgElo == 0) {
             strCopy (temp, listMode ? " {}" : "      ");
         } else {
@@ -14680,9 +14688,6 @@ db->bbuf->Empty();
 	    sprintf (temp, "  %4llu", avgYear);
 #endif
         }
-        output->Append (temp);
-        uint pctDraws = node->freq[RESULT_Draw] * 1000 / node->total;
-        sprintf (temp, " %3d%%", (pctDraws + 5) / 10);
         output->Append (temp);
 
         if (showEpdData && !listMode) {
@@ -14707,7 +14712,7 @@ db->bbuf->Empty();
 
 	sprintf (temp, " %-5s", hideMoves ? "{}" : ecoStr);
         output->Append (temp);
-
+      }
         if (listMode) {
             Tcl_AppendElement (ti, (char *) output->Data());
             output->Clear();
@@ -14767,12 +14772,20 @@ db->bbuf->Empty();
             */
         } else {
             const char * totalString = translate (ti, "TreeTotal:", "TOTAL:");
-            output->Append ("\n__________________________________________________________________\n");
+            if (shortDisplay)
+              output->Append ("\n___________________________________________\n");
+            else
+              output->Append ("\n__________________________________________________________________\n");
             sprintf (temp, "%-10s%7u:100%c0%%  %3d%c%1d%%",
                      totalString, tree->totalCount, decimalPointChar,
                      totalScore / 10, decimalPointChar, totalScore % 10);
             output->Append (temp);
         }
+        uint pctDraws = nDraws * 1000 / tree->totalCount;
+        sprintf (temp, " %3d%%", (pctDraws + 5) / 10);
+        output->Append (temp);
+
+      if (!shortDisplay) {
         if (avgElo == 0) {
             output->Append (listMode ? " {}" : "      ");
         } else {
@@ -14799,9 +14812,7 @@ db->bbuf->Empty();
 #endif
             output->Append (temp);
         }
-        uint pctDraws = nDraws * 1000 / tree->totalCount;
-        sprintf (temp, " %3d%%", (pctDraws + 5) / 10);
-        output->Append (temp);
+      }
         if (listMode) {
             Tcl_AppendElement (ti, (char *) output->Data());
             output->Clear();

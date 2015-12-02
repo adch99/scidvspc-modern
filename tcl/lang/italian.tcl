@@ -590,6 +590,8 @@ menuText I TreeOptFastAndSlowmode "Modalità lenta e veloce" 0 {Modalità lenta 
 menuText I TreeOptStartStop "Auto refreshing" 0 {Toggles automatic refreshing of the tree window}
 menuText I TreeOptLock "Blocca" 0 {Blocca/sblocca l'albero al database corrente}
 menuText I TreeOptTraining "Training" 0 {Attiva/disattiva la modalita' di esercizio dell'albero}
+# ====== TODO To be translated ======
+menuText I TreeOptShort "Short Display" 0 {Don't show ELO information}
 menuText I TreeOptAutosave "File di cache per Auto-salvare" 0 \
   {Salva automaticamente il file di cache quando si chiude la finestra dell'albero}
 # ====== TODO To be translated ======
@@ -611,8 +613,8 @@ translate I TreeBestGames {Migliori partite}
 translate I TreeAdjust {Adjust Filter}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
-translate I TreeTitleRow \
-  {    Mossa     Frequenza    Punt.  AvElo Perf AvAnno Patta ECO}
+translate I TreeTitleRow {    Mossa     Frequenza    Punt. Patta AvElo Perf AvAnno ECO}
+translate I TreeTitleRowShort {    Mossa     Frequenza    Punt. Patta}
 translate I TreeTotal {TOTALE}
 # ====== TODO To be translated ======
 translate I DoYouWantToSaveFirst {Do you want to save}

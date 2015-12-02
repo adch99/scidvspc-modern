@@ -534,6 +534,8 @@ menuText U TreeOptStartStop "Atualização automática" 0 {Liga/Desliga a atualizaç
 menuText U TreeOptLock "Lock" 0 {Trava/Destrava a arvore para o banco corrente}
 menuText U TreeOptTraining "Treinamento" 0 \
   {Liga/Desliga o modo treinamento na arvore}
+# ====== TODO To be translated ======
+menuText U TreeOptShort "Short Display" 0 {Don't show ELO information}
 menuText U TreeOptAutosave "Salvar automaticamente arquivo de cache" 0 \
   {Salvar automaticamente o arquivo de cache quando fechar a janela de arvore}
 menuText U TreeOptAutomask "Abrir máscara automaticamente" 0 "Auto-Load most recent mask with a tree open."
@@ -553,8 +555,8 @@ translate U TreeAdjust {Ajustar Filtro}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
 # todo
-translate U TreeTitleRow \
-  {    Move      Frequency    Score  AvElo Perf AvYear Draws ECO}
+translate U TreeTitleRow {    Move      Frequency    Score Draws AvElo Perf AvYear ECO}
+translate U TreeTitleRowShort {    Move      Frequency    Score Draws}
 translate U TreeTotal {TOTAL}
 translate U DoYouWantToSaveFirst {Quer guardar primeiro?}
 translate U AddToMask {Adicionar à máscara}

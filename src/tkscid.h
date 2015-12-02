@@ -351,9 +351,6 @@ void transPieces(char *s);
 inline const char *
 translate (Tcl_Interp * ti, const char * name, const char * defaultText)
 {
-#ifdef WINCE
-    return name;
-#else
     const char * str = Tcl_GetVar2 (ti, "tr", (char *) name, TCL_GLOBAL_ONLY);
     if (str == NULL) { str = defaultText; }
     return str;
@@ -363,11 +360,7 @@ translate (Tcl_Interp * ti, const char * name, const char * defaultText)
 inline const char *
 translate (Tcl_Interp * ti, const char * name)
 {
-#ifdef WINCE
-    return name;
-#else
     return translate (ti, name, name);
-#endif
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~

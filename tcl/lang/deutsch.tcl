@@ -569,6 +569,8 @@ menuText D TreeOptStartStop "Automatisch aktualisieren" 0 {Schaltet das automati
 menuText D TreeOptLock "Anbinden" 0 \
   {Zugbaum an aktive Datenbank anbinden(/lösen)}
 menuText D TreeOptTraining "Training" 0 {Trainingsmodus ein-/ausschalten}
+# ====== TODO To be translated ======
+menuText D TreeOptShort "Short Display" 0 {Don't show ELO information}
 menuText D TreeOptAutosave "Autom. Cache-Datei sichern" 4 \
   {Beim Schließen des Zugbaums automatisch Cache-Datei sichern}
 # ====== TODO To be translated ======
@@ -589,8 +591,8 @@ translate D TreeBestGames {Beste Zugbaumpartien}
 translate D TreeAdjust {Filter anpassen}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
-translate D TreeTitleRow \
-  {    Zug       Häufigkeit    Pkte   Elo  Erflg Jahr Remis ECO}
+translate D TreeTitleRow {    Zug       Häufigkeit    Pkte Remis  Elo  Erflg Jahr ECO}
+translate D TreeTitleRowShort {    Zug       Häufigkeit    Pkte Remis}
 translate D TreeTotal {SUMME}
 translate D DoYouWantToSaveFirst {Soll zuerst gespeichert werden}
 translate D AddToMask {Addiere zu Maske}

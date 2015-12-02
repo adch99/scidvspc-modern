@@ -562,6 +562,8 @@ menuText N TreeOptFastAndSlowmode "Snelle en trage modus" 0 {Eerst snelle modus 
 menuText N TreeOptStartStop "Automatisch verversen" 0 {Zet automatisch verversen van het boomvenster aan/uit}
 menuText N TreeOptLock "Vergrendelen" 0 {Vergrendelen/Ontgrendelen van de boom bij de huidige database}
 menuText N TreeOptTraining "Training" 0 {Aan/Uit zetten training modus}
+# ====== TODO To be translated ======
+menuText N TreeOptShort "Short Display" 0 {Don't show ELO information}
 menuText N TreeOptAutosave "Autom.cache-data Bewaren" 4 \
   {Automatisch bewaren van het cache bestand bij sluiten boomvenster}
 # ====== TODO To be translated ======
@@ -582,8 +584,8 @@ translate N TreeBestGames {Boom beste partijen}
 translate N TreeAdjust {Adjust Filter}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
-translate N TreeTitleRow \
-  {    Zet      Frequentie    Score GemElo Prest GemJaar Remises ECO}
+translate N TreeTitleRow {    Zet      Frequentie    Score Rem. GemElo Prest GemJaar ECO}
+translate N TreeTitleRowShort {    Zet      Frequentie    Score Rem.}
 translate N TreeTotal {TOTAAL}
 translate N DoYouWantToSaveFirst {Wil u eerst de verandering bewaren?}
 translate N AddToMask {Toevoegen aan het masker}

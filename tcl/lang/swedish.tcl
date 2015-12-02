@@ -556,6 +556,8 @@ menuText W TreeOptFastAndSlowmode "Snabb och långsam mod" 0 {Snabb mod sedan lån
 menuText W TreeOptStartStop "Automatisk uppdatering" 0 {Växlar automatisk uppdatering av trädfönstret}
 menuText W TreeOptLock "Lås" 0 {Lås/ lås upp trädet för den aktuella databasen}
 menuText W TreeOptTraining "Träna" 0 {Starta/ stäng av träningsläge}
+# ====== TODO To be translated ======
+menuText W TreeOptShort "Short Display" 0 {Don't show ELO information}
 menuText W TreeOptAutosave "Spara cache filen automatiskt" 0 \
   {Spara cachefilen automatiskt när trädfönstret stängs}
 # ====== TODO To be translated ======
@@ -576,8 +578,8 @@ translate W TreeBestGames {Bästa partier i trädet}
 translate W TreeAdjust {Adjust Filter}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
-translate W TreeTitleRow \
-  { Drag       Frekvens        Res.   Elo~  Nivå År~ Remi ECO}
+translate W TreeTitleRow { Drag       Frekvens        Res.  Remi   Elo~  Nivå År~ ECO}
+translate W TreeTitleRowShort { Drag       Frekvens        Res. Remi}
 translate W TreeTotal {TOTALT}
 translate W DoYouWantToSaveFirst {Vill du spara först}
 translate W AddToMask {Lägg till i Sökmask}

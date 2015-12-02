@@ -589,6 +589,8 @@ menuText C TreeOptFastAndSlowmode "Rychlý a pomalý re¾im" 0 {Rychlý re¾im a poto
 menuText C TreeOptStartStop "Automatické aktualizace" 0 {Pøepnout automatické aktualizace stromového okna}
 menuText C TreeOptLock "Zamknout" 0 {Zamknout/Odemknout strom k aktuální databázi}
 menuText C TreeOptTraining "Trénink" 0 {Zapnout/Vypnout stromový tréninkový mód}
+# ====== TODO To be translated ======
+menuText C TreeOptShort "Short Display" 0 {Don't show ELO information}
 menuText C TreeOptAutosave "Automatické ukládání cache souboru" 0 \
   {Automatické ukládání cache souboru pøi uzavøení stromového okna}
 # ====== TODO To be translated ======
@@ -609,8 +611,8 @@ translate C TreeBestGames {Nejlep¹í partie stromu}
 translate C TreeAdjust {Adjust Filter}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
-translate C TreeTitleRow \
-  {    Tah       Frekvence    Skóre  PrElo Perf PrRok Remíz ECO}
+translate C TreeTitleRow {    Tah       Frekvence    Skóre Remíz PrElo Perf PrRok ECO}
+translate C TreeTitleRowShort {    Tah       Frekvence    Skóre Remíz}
 translate C TreeTotal {CELKEM}
 translate C DoYouWantToSaveFirst {Chcete nejprve ulo¾it}
 translate C AddToMask {Pøidat do masky}

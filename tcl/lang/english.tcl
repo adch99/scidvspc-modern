@@ -546,6 +546,7 @@ menuText E TreeOptFastAndSlowmode "Fast and slow mode" 0 {Fast mode then slow mo
 menuText E TreeOptStartStop "Auto refreshing" 0 {Toggles automatic refreshing of the tree window}
 menuText E TreeOptLock "Lock" 0 {Lock/unlock the tree to the current database}
 menuText E TreeOptTraining "Training" 0 {Turn on/off tree training mode}
+menuText E TreeOptShort "Short Display" 0 {Don't show ELO information}
 menuText E TreeOptAutosave "Auto-Save Cache" 0 {Auto-save the cache file when closing the tree window}
 menuText E TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
 menuText E TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
@@ -561,8 +562,8 @@ translate E TreeBestGames {Best Games}
 translate E TreeAdjust {Adjust Filter}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
-translate E TreeTitleRow \
-  {    Move      Frequency    Score  AvElo Perf AvYear Draw ECO}
+translate E TreeTitleRow      {    Move      Frequency    Score  Draw AvElo Perf AvYear ECO}
+translate E TreeTitleRowShort {    Move      Frequency    Score  Draw}
 translate E TreeTotal {TOTAL}
 translate E DoYouWantToSaveFirst {Do you want to save}
 translate E AddToMask {Add to Mask}

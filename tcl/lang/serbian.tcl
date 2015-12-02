@@ -636,6 +636,8 @@ menuText Y TreeOptFastAndSlowmode "Fast and slow mode" 0 {Fast mode then slow mo
 menuText Y TreeOptStartStop "Auto refreshing" 0 {Toggles automatic refreshing of the tree window}
 menuText Y TreeOptLock "Zakljuèaj" 0 {Zakljuèaj/otkljuèaj stablo za tekuæu bazu}
 menuText Y TreeOptTraining "Trening" 0 {Ukljuèi/iskljuèi trening mod stabla}
+# ====== TODO To be translated ======
+menuText Y TreeOptShort "Short Display" 0 {Don't show ELO information}
 menuText Y TreeOptAutosave "Automatski saèuvaj cache fajl" 0 \
   {Automatski saèuvaj cache fajl pri zatvaranju prozora stabla}
 # ====== TODO To be translated ======
@@ -657,8 +659,8 @@ translate Y TreeAdjust {Adjust Filter}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
 # todo
-translate Y TreeTitleRow \
-  {    Move      Frequency    Score  AvElo Perf AvYear Draws ECO}
+translate Y TreeTitleRow {    Move      Frequency    Score Draws AvElo Perf AvYear ECO}
+translate Y TreeTitleRowShort {    Move      Frequency    Score Draws}
 translate Y TreeTotal {UKUPNO}
 # ====== TODO To be translated ======
 translate Y DoYouWantToSaveFirst {Do you want to save}

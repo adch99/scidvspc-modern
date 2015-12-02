@@ -545,6 +545,8 @@ menuText P TreeOptFastAndSlowmode "Tryb mieszany" 0 {Tryb szybki, a potem dokła
 menuText P TreeOptStartStop "Automatyczne odświeżanie" 0 {Włącz/wyłącz automatyczne odświeżanie drzewa}
 menuText P TreeOptLock "Blokada" 0 {Zablokuj/odblokuj drzewo na aktualnej bazie}
 menuText P TreeOptTraining "Trening" 0 {Włącz/wyłącz tryb treningowy}
+# ====== TODO To be translated ======
+menuText P TreeOptShort "Short Display" 0 {Don't show ELO information}
 menuText P TreeOptAutosave "Automatyczny zapis bufora" 0 \
   {Automatycznie zapisz plik bufora przy wyjściu}
 # ====== TODO To be translated ======
@@ -564,8 +566,8 @@ translate P TreeBestGames {Najlepsze partie}
 translate P TreeAdjust {Ustaw filtr}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
-translate P TreeTitleRow \
-  {    Pos.        Częstość     Wynik  Rav Rperf Rok   Remis ECO}
+translate P TreeTitleRow {    Pos.        Częstość   Wynik Remis  Rav Rperf Rok   ECO}
+translate P TreeTitleRowShort {    Pos.        Częstość   Wynik Remis}
 translate P TreeTotal {RAZEM}
 translate P DoYouWantToSaveFirst {Zapisać najpierw}
 translate P AddToMask {Dodaj do maski}

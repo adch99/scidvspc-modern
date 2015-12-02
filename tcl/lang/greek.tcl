@@ -574,6 +574,8 @@ menuText G TreeOptFastAndSlowmode "Συνδυαστικός ρυθμός" 0 {Π�
 menuText G TreeOptStartStop "Αυτόματη ανανέωση" 0 {Διακόπτης Αυτόματης Ανανέωσης του Δένδρου Κινήσεων}
 menuText G TreeOptLock "Κλείδωμα" 0 {Διακόπτης Κλειδώματος του Δένδρου Κινήσεων στη τρέχουσα Βάση}
 menuText G TreeOptTraining "Εκπαίδευση" 0 {Διακόπτης Εκπαίδευσης Κινήσεων Δένδρου}
+# ====== TODO To be translated ======
+menuText G TreeOptShort "Short Display" 0 {Don't show ELO information}
 menuText G TreeOptAutosave "Αυτομ.Αποθήκευση Cache" 0 \
   {Αυτόματη αποθήκευση της προσωρινής μνήμης με το κλείσιμο του παραθύρου}
 # ====== TODO To be translated ======
@@ -593,8 +595,8 @@ translate G TreeBestGames {Καλύτερες Παρτίδες}
 translate G TreeAdjust {Adjust Filter}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
-translate G TreeTitleRow \
-  {    Κίνηση     Συχνότητα    Σκορ Μ-ELO  Αποδ Μ-Έτη Ισοπ ECO}
+translate G TreeTitleRow {    Κίνηση     Συχνότητα  Σκορ Ισοπ Μ-ELO  Αποδ Μ-Έτη ECO}
+translate G TreeTitleRowShort {    Κίνηση     Συχνότητα  Σκορ Ισοπ}
 translate G TreeTotal {ΣΥΝΟΛΟ   }
 translate G DoYouWantToSaveFirst {Να αποθηκευτεί}
 translate G AddToMask {Προσθήκη σε Μάσκα}

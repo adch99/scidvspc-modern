@@ -534,6 +534,8 @@ menuText F TreeOptFastAndSlowmode "Mode rapide puis lent" 0 {Mode rapide puis le
 menuText F TreeOptStartStop "Rafraîchissement auto" 0 {Rafraîchissement automatique de la fenêtre}
 menuText F TreeOptLock "Verrouille" 0 {Dé/verrouiller l'arbre à la base en cours}
 menuText F TreeOptTraining "Entraînement" 0 {Démarrer/Arrêter l'arbre du mode d'entraînement}
+# ====== TODO To be translated ======
+menuText F TreeOptShort "Short Display" 0 {Don't show ELO information}
 menuText F TreeOptAutosave "Sauver le cache automatiquement" 0
 # ====== TODO To be translated ======
 menuText F TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
@@ -553,8 +555,8 @@ translate F TreeBestGames {Arbre des meilleures parties}
 translate F TreeAdjust {Ajuster filtre}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
-translate F TreeTitleRow \
-  {    Coup       Fréquence   Score EloMoy Perf AnnéeMoy Nulle ECO}
+translate F TreeTitleRow {    Coup       Fréquence   Score Nulle EloMoy Perf AnnéeMoy ECO}
+translate F TreeTitleRowShort {    Coup       Fréquence   Score Nulle}
 translate F TreeTotal {TOTAL}
 translate F DoYouWantToSaveFirst {voulez-vous d'abord sauvegarder}
 translate F AddToMask {Ajouter au masque}

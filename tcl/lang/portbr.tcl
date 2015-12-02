@@ -594,6 +594,8 @@ menuText B TreeOptStartStop "Atualização automática" 0 {Liga/Desliga a atualizaç
 menuText B TreeOptLock "Lock" 0 {Trava/Destrava a arvore para o banco corrente}
 menuText B TreeOptTraining "Treinamento" 0 \
   {Liga/Desliga o modo treinamento na arvore}
+# ====== TODO To be translated ======
+menuText B TreeOptShort "Short Display" 0 {Don't show ELO information}
 menuText B TreeOptAutosave "Salvar automaticamente arquivo de cache" 0 \
   {Salvar automaticamente o arquivo de cache quando fechar a janela de arvore}
 # ====== TODO To be translated ======
@@ -615,8 +617,8 @@ translate B TreeAdjust {Adjust Filter}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
 # todo
-translate B TreeTitleRow \
-  {    Move      Frequency    Score  AvElo Perf AvYear Draws ECO}
+translate B TreeTitleRow {    Move      Frequency    Score Draws AvElo Perf AvYear ECO}
+translate B TreeTitleRowShort {    Move      Frequency    Score Draws}
 translate B TreeTotal {TOTAL}
 translate B DoYouWantToSaveFirst {Quer salvar primeiro?}
 translate B AddToMask {Adicionar à máscara}

@@ -596,6 +596,8 @@ menuText H TreeOptFastAndSlowmode "Gyors és lassú üzemmód" 1 {Gyors majd lassú f
 menuText H TreeOptStartStop "Automatikus frissítés" 0 {Átváltja a faszerkezet-ablak automatikus frissítését.}
 menuText H TreeOptLock "Rögzítés" 0 {A fát az aktuális adatbázishoz köti ill. a kötést feloldja.}
 menuText H TreeOptTraining "Edzés" 0 {Edzésüzemmód be- vagy kikapcsolása}
+# ====== TODO To be translated ======
+menuText H TreeOptShort "Short Display" 0 {Don't show ELO information}
 menuText H TreeOptAutosave "Cache-fájl automatikus mentése" 11 \
   {A faablak bezárásakor automatikusan elmenti a cache-fájlt.}
 # ====== TODO To be translated ======
@@ -614,8 +616,8 @@ translate H TreeBest {Legjobb}
 translate H TreeBestGames {A fa legjobb játszmái}
 # ====== TODO To be translated ======
 translate H TreeAdjust {Adjust Filter}
-translate H TreeTitleRow \
-  {    Lépés    Gyakoriság    Eredm  ÁtlÉlõ Telj. Átl.  év ECO}
+translate H TreeTitleRow {    Lépés    Gyakoriság    Eredm   év ÁtlÉlõ Telj. Átl.  ECO}
+translate H TreeTitleRowShort {    Lépés    Gyakoriság    Eredm   év}
 translate H TreeTotal {ÖSSZESEN}
 translate H DoYouWantToSaveFirst {Akarod elõbb menteni?}
 translate H AddToMask {Add hozzá a maszkhoz}
