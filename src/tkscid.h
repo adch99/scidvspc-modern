@@ -354,7 +354,6 @@ translate (Tcl_Interp * ti, const char * name, const char * defaultText)
     const char * str = Tcl_GetVar2 (ti, "tr", (char *) name, TCL_GLOBAL_ONLY);
     if (str == NULL) { str = defaultText; }
     return str;
-#endif
 }
 
 inline const char *
