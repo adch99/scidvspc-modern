@@ -238,32 +238,30 @@ proc ::tree::Open {{baseNumber 0}} {
   pack $w.f -side top -expand 1 -fill both
 
   button $w.buttons.best -image b_list -command "::tree::toggleBest $baseNumber"
+  ::utils::tooltip::Set $w.buttons.best [tr TreeFileBest]
+
   button $w.buttons.training -image tb_training -command "::tree::toggleTraining $baseNumber"
+  ::utils::tooltip::Set $w.buttons.training [tr TreeOptTraining]
+
+  button $w.buttons.short -image tb_info -command "$w.menu.opt invoke 3" ; # TreeOptShort
+  ::utils::tooltip::Set $w.buttons.short [tr TreeOptShort]
+
   # add a button to start/stop tree refresh &&&
   # button $w.buttons.bStartStop -image engine_on -command "::tree::toggleRefresh $baseNumber" ;# -relief flat
 
   set helpMessage($w.buttons.best) TreeFileBest
   set helpMessage($w.buttons.training) TreeOptTraining
-  ::utils::tooltip::Set $w.buttons.best [tr TreeFileBest]
-  ::utils::tooltip::Set $w.buttons.training [tr TreeOptTraining]
+  set helpMessage($w.buttons.short) TreeOptTraining
 
   checkbutton $w.buttons.refresh -text [tr FICSRefresh] -font font_Small \
       -variable tree(autorefresh$baseNumber) -command "::tree::toggleRefresh $baseNumber" 
   checkbutton $w.buttons.adjust -text [tr TreeAdjust] -font font_Small \
       -variable tree(adjustfilter$baseNumber) -command "::tree::toggleAdjust $baseNumber"
 
-  # bStartStop TreeOptStartStop
-  foreach {b t} {
-    best     TreeFileBest
-    training TreeOptTraining
-  } {
-    set helpMessage($w.buttons.$b) $t
-  }
-
   button $w.buttons.stop -textvar ::tr(Stop) -font font_Small -command { sc_progressBar }
   button $w.buttons.close -textvar ::tr(Close) -font font_Small -command "destroy $w"
 
-  pack $w.buttons.best $w.buttons.training $w.buttons.refresh $w.buttons.adjust -side left -padx 3
+  pack $w.buttons.best $w.buttons.training $w.buttons.short $w.buttons.refresh $w.buttons.adjust -side left -padx 3
 
   pack $w.buttons.close $w.buttons.stop -side right -padx 3
   $w.buttons.stop configure -state disabled
@@ -522,9 +520,6 @@ proc ::tree::dorefresh { baseNumber } {
 
   # busyCursor .
   sc_progressBar $w.progress bar 251 16
-  foreach button {best training} {
-    $w.buttons.$button configure -state disabled
-  }
   $w.buttons.stop configure -state normal
   set tree(refresh) 1
 
@@ -544,9 +539,6 @@ proc ::tree::dorefresh { baseNumber } {
 
   catch {$w.f.tl itemconfigure 0 -foreground darkBlue}
 
-  foreach button {best training} {
-    $w.buttons.$button configure -state normal
-  }
   $w.buttons.stop configure -state disabled -relief raised
 
   # unbusyCursor .
@@ -761,7 +753,11 @@ proc ::tree::displayLines { baseNumber moves } {
 
   if {!$notOpen} {
     # blank bargraph in total
-    $w.f.tl window create end-32c -create "canvas %W.h -width 60 -height 12 -highlightthickness 0"
+    if {$::tree::short} {
+      $w.f.tl window create end-13c -create "canvas %W.h -width 60 -height 12 -highlightthickness 0"
+    } else {
+      $w.f.tl window create end-32c -create "canvas %W.h -width 60 -height 12 -highlightthickness 0"
+    }
   }
 
   ### Add moves present in Mask and not in Tree

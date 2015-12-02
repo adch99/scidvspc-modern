@@ -2061,14 +2061,22 @@ set helpText(Tree) {<h1>Tree Window</h1>
   white-wins, draws, and black-wins.
   </p>
   <p><i>
-  Scid's Tree search is fast because of a novel idea - We
+  Scid's Tree search is fast because of a novel idea - we
 search for games that do not reached this position!
   </i></p>
   <h3>Opening a Tree</h3>
   <p>One can open a database and then select <b>Windows--<gt>Tree Window</b>,
   use the <b>Control-T</b> short-cut, or <b>Open Base as Tree</b> from the file menu.
   This last method means games in one database can be examined via the tree from a different database.</p>
+
   <h3>General Use</h3>
+  <p>
+  The Tree Window shows statistics about the next move, as calulated from all games in the current base.
+  One may choose to show extended info by pressing <button tb_info>
+  <br>
+  The Score is always computed from white's perspective, so 100% means all White wins and 0% means all black
+  wins. Games with no result do not contribute to the percentage drawn, but as half-won/half-loss.
+  </p>
   <p>
   Clicking on a move adds that move to the game.
   </p>
@@ -2077,39 +2085,10 @@ search for games that do not reached this position!
   Move (alphabetically), ECO code, Frequency, or Score.
   </p>
   <p>
-  The Adjust-Filter checkbox alters the gamelist/filter so that only games matching the current position are displayed therein.
+  The Adjust-Filter checkbox alters the gamelist/filter so that only games matching the current position are displayed.
   Its behaviour is a little complicated. Deselecting Adjust-Filter will set the regular filter to the <i>current</i>
   (adjusted) filter. But closing the Tree, will restore the regular filter to how it was when Adjust-Filter was selected.
 </p>
-  <p><i>
-  The Tree is updated whenever the main board changes. This can stress the CPU
-  and be slow for large databases, but dynamic updates can be disabled by deselecting the "Refresh" checkbox.
-  </i></p>
-  <p><i>Be wary of doing filter operations while the Tree Window is open,
-  as the tree may override the filter. To perform searches, and open new bases,
-it is best to close the Tree Window first.</i>
-  </p>
-
-  <h3>Statistics</h3>
-  <p>
-  The Tree Window shows statistics about the next move, as calulated from all games in the current base.
-  The columns are:
-  <br>
-  <b>Move ECO Frequency Score AvElo Perf AvYear Draws</b>
-  <br>
-  The Score is always computed from white's perspective, so 100% means all White wins and 0% means all black
-  wins.
-  </p>
-  <p>
-  <i>Games with no result do not contribute to the percentage drawn, but as half-won/half-loss.</i>
-  </p>
-  <h3>Tree Masks</h3>
-  <p> Tree Masks
-  provide additional information beyond pure statistical data, and can be
-  imagined as a transparent layer above the current tree that holds additional
-  data. For more info see <a TreeMasks>here</a>.
-  </p>
-  </h3>
   <h3><name Best>Best Games Window</name></h3>
   <p>
   This button <button b_list> will show a list of
@@ -2117,6 +2096,13 @@ it is best to close the Tree Window first.</i>
   </p>
   <p>
   You can restrict the list to show games with a particular result.
+  </p>
+
+  <h3>Tree Masks</h3>
+  <p> Tree Masks
+  provide additional information beyond pure statistical data, and can be
+  imagined as a transparent layer above the current tree that holds additional
+  data. For more info see <a TreeMasks>here</a>.
   </p>
 
   <h3><name Lock>Locking the Tree Window</name></h3>
@@ -2195,7 +2181,7 @@ it is best to close the Tree Window first.</i>
   adding or replacing a game, or sorting the database.
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.15, September 2015</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.16, December 2015</footer></p>
 }
 
 set helpTitle(TreeMasks) "Tree Masks"
