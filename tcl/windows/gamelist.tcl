@@ -183,7 +183,7 @@ proc ::windows::gamelist::showNum {index {bell 1}} {
      || $result < 1 \
      || $result > [sc_filter count]} {
     if {$bell==1} {
-      flashEntryBox .glistWin.c.goto
+      flashEntryBox .glistWin.b.goto
     }
     .glistWin.tree selection set {}
   } else {
@@ -299,7 +299,6 @@ proc ::windows::gamelist::Open {} {
 
   ### Frames
 
-  frame $w.c
   frame $w.b
   frame $w.f
   ttk::treeview $w.tree -columns $::glistHeaders -displaycolumns $::glistColOrder -show headings -xscroll "$w.hsb set"
@@ -442,7 +441,7 @@ proc ::windows::gamelist::Open {} {
     bind .glistWin $i +::windows::gamelist::showCurrent
   }
 
-  ### Top row of buttons, etc
+  ### One row of buttons, etc
 
   button $w.b.save -image tb_save -relief flat -command {
     if {[sc_game number] != 0} {
@@ -495,7 +494,7 @@ proc ::windows::gamelist::Open {} {
     $w.b.select configure -width 5
   }
   bind $w.tree <Delete> "::windows::gamelist::Remove 1"
-  bind $w.tree <Control-Delete> "$w.c.delete invoke"
+  bind $w.tree <Control-Delete> "$w.b.delete invoke"
 
   button $w.b.removeabove -text Rem -image arrow_up -compound right -font font_Small -relief flat -command {::windows::gamelist::removeFromFilter up}
   button $w.b.removebelow -text Rem -image arrow_down -compound right -font font_Small -relief flat -command {::windows::gamelist::removeFromFilter down}
@@ -520,7 +519,7 @@ proc ::windows::gamelist::Open {} {
   # ::utils::history::SetLimit ::windows::gamelist::findtext 5
   # ::utils::history::PruneList ::windows::gamelist::findtext
 
-  bind $w.b.find <Control-Return> "$w.c.load invoke"
+  bind $w.b.find <Control-Return> "$w.b.load invoke"
   bind $w.b.find <Return> {::windows::gamelist::FindText}
   bind $w.b.find <Home> "$w.b.find icursor 0; break"
   bind $w.b.find <End> "$w.b.find icursor end; break"
@@ -528,52 +527,48 @@ proc ::windows::gamelist::Open {} {
   checkbutton $w.b.findcase -textvar ::tr(IgnoreCase) -font font_Small \
     -variable ::windows::gamelist::findcase -onvalue 1 -offvalue 0
 
-  pack $w.b.findcase -side right
-  pack $w.b.find -side right ; # -expand 1 -fill x
-  pack $w.b.filter $w.b.negate $w.b.reset -side right 
-  pack $w.b.save $w.b.bkm $w.b.gfirst $w.b.gprev $w.b.gnext $w.b.glast -side left
-
-  ### Bottom row of buttons , etc
-
-  entry $w.c.goto -width 8 -justify right -textvariable ::windows::gamelist::goto -font font_Small -highlightthickness 0
-  bind $w.c.goto <Return> {
+  entry $w.b.goto -width 8 -justify right -textvariable ::windows::gamelist::goto -font font_Small -highlightthickness 0
+  bind $w.b.goto <Return> {
     ::windows::gamelist::showNum $::windows::gamelist::goto
   }
-  bind $w.c.goto <Control-Return> {
+  bind $w.b.goto <Control-Return> {
     ::windows::gamelist::showNum $::windows::gamelist::goto
-    .glistWin.c.load invoke
+    .glistWin.b.load invoke
   }
-  dialogbutton $w.c.browse -text $::tr(Browse) -font font_Small -command {
+  dialogbutton $w.b.browse -text $::tr(Browse) -font font_Small -command {
     set selection [.glistWin.tree selection]
     if { $selection != {} } {
       ::gbrowser::new 0 [.glistWin.tree set [lindex $selection 0] Number]
     }
   }
 
-  dialogbutton $w.c.current -font font_Small -textvar ::tr(Current) -command ::windows::gamelist::showCurrent
+  dialogbutton $w.b.current -font font_Small -textvar ::tr(Current) -command ::windows::gamelist::showCurrent
 
   # no longer packed, but still used as Control-Enter binding
-  dialogbutton $w.c.load -text Load -font font_Small -command {
+  dialogbutton $w.b.load -text Load -font font_Small -command {
     set selection [.glistWin.tree selection]
     if { $selection != {} } {
       ::windows::gamelist::Load [.glistWin.tree set [lindex $selection 0] Number]
     }
   }
 
-  dialogbutton $w.c.delete -text $::tr(Delete) -font font_Small -command {
+  dialogbutton $w.b.delete -text $::tr(Delete) -font font_Small -command {
     ::windows::gamelist::ToggleFlag D
     ::windows::gamelist::Refresh
     configDeleteButtons
   }
 
-  dialogbutton $w.c.compact -text [lindex $::tr(CompactDatabase) 0] -font font_Small -command "compactGames $w ; configDeleteButtons"
+  dialogbutton $w.b.compact -text [lindex $::tr(CompactDatabase) 0] -font font_Small -command "compactGames $w ; configDeleteButtons"
   configDeleteButtons
 
-  dialogbutton $w.c.help  -textvar ::tr(Help) -width 5 -font font_Small -command { helpWindow GameList }
-  dialogbutton $w.c.close -textvar ::tr(Close) -font font_Small -command { focus .main ; destroy .glistWin }
+  dialogbutton $w.b.help  -textvar ::tr(Help) -width 5 -font font_Small -command { helpWindow GameList }
+  dialogbutton $w.b.close -textvar ::tr(Close) -font font_Small -command { focus .main ; destroy .glistWin }
 
-  pack $w.c.close $w.c.compact -side right -padx 3 ; # $w.c.help
-  pack $w.c.current $w.c.goto -side left -padx 3
+  pack $w.b.close $w.b.findcase $w.b.find $w.b.filter $w.b.negate $w.b.reset -side right
+  pack $w.b.save $w.b.bkm $w.b.gfirst $w.b.gprev $w.b.gnext $w.b.glast -side left
+
+  pack $w.b.compact -side right -padx 3
+  pack $w.b.current $w.b.goto -side left -padx 3
 
   if {$::windowsOS} {
     # cant focus entry combo on windows as it hogs the wheelmouse
@@ -710,9 +705,9 @@ proc ::windows::gamelist::Popup {w x y X Y} {
     $menu add separator
     $menu add command -label $::tr(Reset) -command "$w.b.reset invoke"
     } else {
-    $menu add command -label $::tr(LoadGame) -command "$w.c.load invoke"
-    $menu add command -label $::tr(Browse) -command "$w.c.browse invoke"
-    $menu add command -label $::tr(GlistDeleteField) -command "$w.c.delete invoke"
+    $menu add command -label $::tr(LoadGame) -command "$w.b.load invoke"
+    $menu add command -label $::tr(Browse) -command "$w.b.browse invoke"
+    $menu add command -label $::tr(GlistDeleteField) -command "$w.b.delete invoke"
     $menu add cascade -label $::tr(Flag)      -menu $menu.flags
     $menu add command -label $::tr(SetFilter) -command "$w.b.select invoke"
     $menu add separator
@@ -799,10 +794,9 @@ proc ::windows::gamelist::Remove {{shownext 0}} {
 proc ::windows::gamelist::displayButtons {} {
   set w .glistWin
   if {$::windows::gamelist::showButtons} {
-    pack $w.b -side bottom -fill x -padx 5 -before $w.f
-    pack $w.c -side bottom -fill x -padx 5 -before $w.b
+    pack $w.b -side bottom -fill x -padx 5
   } else {
-    pack forget $w.b $w.c
+    pack forget $w.b
   }
 }
 
@@ -846,19 +840,19 @@ proc configDeleteButtons {} {
   # debug puts [sc_base current] &&&
   if {[sc_base current] == [sc_info clipbase]} {
     ### Can't compact clipbase
-    $w.c.compact configure -state disabled
-    $w.c.delete configure -state normal
+    $w.b.compact configure -state disabled
+    $w.b.delete configure -state normal
   } elseif {[sc_base isReadOnly]} {
-    $w.c.delete configure -state disabled
-    $w.c.compact configure -state disabled
+    $w.b.delete configure -state disabled
+    $w.b.compact configure -state disabled
   } else {
 
     ### do we want to always check the delete and flag buttons ? &&&
     #  if {[.glistWin.tree selection] == ""} disable delete, flag
     # $w.tree tag bind click <Button-1> {configDeleteButtons}
 
-    $w.c.delete configure -state normal
-    $w.c.compact configure -state normal
+    $w.b.delete configure -state normal
+    $w.b.compact configure -state normal
   }
 }
 

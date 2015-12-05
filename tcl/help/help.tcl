@@ -1579,7 +1579,7 @@ set helpText(GameList) {<h1>The Game List</h1>
 
 <p>The <run ::windows::gamelist::Open><green>Game List</green></run>
 shows all filter games in the currently open database/PGN file.</p>
-<p>Below the Game List are two rows of buttons,
+<p>Below the Game List are various buttons and entries,
 and at the bottom you'll find the <a Switcher>Database Switcher</a>.</p>
 <p>Clicking a game will select it. Select multiple games using Control+Click and Shift+Click.
 Right-clicking game(s) presents a context menu for various actions. Double-clicking loads a game.</p>
