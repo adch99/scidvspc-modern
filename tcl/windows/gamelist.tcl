@@ -794,7 +794,7 @@ proc ::windows::gamelist::Remove {{shownext 0}} {
 proc ::windows::gamelist::displayButtons {} {
   set w .glistWin
   if {$::windows::gamelist::showButtons} {
-    pack $w.b -side bottom -fill x -padx 5
+    pack $w.b -side bottom -fill x -padx 5 -before $w.f
   } else {
     pack forget $w.b
   }

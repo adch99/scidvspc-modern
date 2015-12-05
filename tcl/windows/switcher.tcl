@@ -890,13 +890,13 @@ proc ::windows::switcher::Open {} {
 
   frame $w
 
-  if {[catch {pack $w -side bottom -before .glistWin.c -fill x}]} {
-    # two rows of buttons are not packed
+  if {[catch {pack $w -side bottom -before .glistWin.b -fill x}]} {
+    # Row of buttons is not packed
     pack $w -side bottom -before .glistWin.f -fill x
     pack [frame .glistWin.spacer -height 3] -before .glistWin.f -side bottom
   } else {
-    # spacer between lowest button bar and switcher
-    pack [frame .glistWin.spacer -height 3] -before .glistWin.c -side bottom
+    # Spacer frame between buttons and switcher. Do we need it ??
+    pack [frame .glistWin.spacer -height 3] -before .glistWin.b -side bottom
   }
 
 
