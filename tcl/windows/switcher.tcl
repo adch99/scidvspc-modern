@@ -1044,7 +1044,7 @@ proc ::windows::switcher::Refresh {} {
 
       # Highlight current database
       if {$i == $current} {
-        set color khaki ; #lightgoldenrodyellow
+        set color lightsteelblue3 ; # khaki , lightgoldenrodyellow
       } else {
 	set color gainsboro
       }
