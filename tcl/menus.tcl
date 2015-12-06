@@ -629,12 +629,8 @@ $m.exportcurrent add command -label ToolsExpCurrentHTMLJS \
 set helpMessage($m.exportcurrent,2) ToolsExpCurrentHTMLJS
 
 $m.exportcurrent add command -label ToolsExpCurrentLaTeX \
-    -command {exportGames current LaTeX}
+    -command {exportGames current Latex}
 set helpMessage($m.exportcurrent,3) ToolsExpCurrentLaTeX
-
-$m.exportcurrent add command -label ToolsExpCurrentLaTeXSkak \
-    -command {exportGames current Skak}
-set helpMessage($m.exportcurrent,3) ToolsExpCurrentLaTeXSkak
 
 menu $m.exportfilter
 
@@ -654,12 +650,8 @@ $m.exportfilter add command -label ToolsExpFilterHTMLJS \
 set helpMessage($m.exportfilter,2) ToolsExpFilterHTMLJS
 
 $m.exportfilter add command -label ToolsExpFilterLaTeX \
-    -command {exportGames filter LaTeX}
+    -command {exportGames filter Latex}
 set helpMessage($m.exportfilter,3) ToolsExpFilterLaTeX
-
-$m.exportfilter add command -label ToolsExpFilterLaTeXSkak \
-    -command {exportGames filter Skak}
-set helpMessage($m.exportfilter,3) ToolsExpFilterLaTeXSkak
 
 $m.exportfilter add command -label ToolsExpFilterGames \
     -command openExportGList
@@ -936,7 +928,7 @@ $m add command -label OptionsSave -command {
       puts $optionF "set initialDir($type) [list $initialDir($type)]"
     }
     puts $optionF ""
-    foreach type {PGN HTML LaTeX Skak} {
+    foreach type {PGN HTML Latex} {
       puts $optionF "set exportStartFile($type) [list $exportStartFile($type)]"
       puts $optionF "set exportEndFile($type) [list $exportEndFile($type)]"
     }
@@ -1105,7 +1097,7 @@ foreach i {1 2 3 4 5} {
 
 set m .menu.options.export
 menu $m -tearoff -1
-foreach format {PGN HTML LaTeX Skak} {
+foreach format {PGN HTML Latex} {
   $m add command -label $format -underline 0 \
       -command "setExportText $format"
 }
@@ -1489,10 +1481,10 @@ proc setLanguageMenus {{lang ""}} {
         ToolsMaintName$tag $lang
   }
 
-  foreach tag {ToolsExpCurrentPGN ToolsExpCurrentHTML ToolsExpCurrentHTMLJS ToolsExpCurrentLaTeX ToolsExpCurrentLaTeXSkak} {
+  foreach tag {ToolsExpCurrentPGN ToolsExpCurrentHTML ToolsExpCurrentHTMLJS ToolsExpCurrentLaTeX} {
     configMenuText .menu.tools.exportcurrent [tr $tag $oldLang] $tag $lang
   }
-  foreach tag {ToolsExpFilterPGN ToolsExpFilterHTML ToolsExpFilterHTMLJS ToolsExpFilterLaTeX ToolsExpFilterLaTeXSkak ToolsExpFilterGames} {
+  foreach tag {ToolsExpFilterPGN ToolsExpFilterHTML ToolsExpFilterHTMLJS ToolsExpFilterLaTeX ToolsExpFilterGames} {
     configMenuText .menu.tools.exportfilter [tr $tag $oldLang] $tag $lang
   }
   foreach tag {Board Colour Toolbar Names Recent Fonts GInfo Fics Moves Startup Language

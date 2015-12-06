@@ -202,7 +202,6 @@ menuText U ToolsExpCurrentHTML "Exporta como HTML..." 15 \
 menuText U ToolsExpCurrentHTMLJS "Export como HTML e JavaScript..." 15 {Write current game to a HTML and JavaScript file}  
 menuText U ToolsExpCurrentLaTeX "Exporta como LaTex..." 15 \
   {Grava o jogo corrente em um arquivo LaTex}
-menuText U ToolsExpCurrentLaTeXSkak "Exporta como LaTeX (Skak)" 15 {Write current game to a LaTeX file}
 menuText U ToolsExpFilter "Exporta jogos filtrados" 1 \
   {Exporta todos os jogos filtrados para um arquivo texto}
 menuText U ToolsExpFilterPGN "Exporta jogos filtrados - PGN..." 17 \
@@ -212,7 +211,6 @@ menuText U ToolsExpFilterHTML "Exporta jogos filtrados - HTML..." 17 \
 menuText U ToolsExpFilterHTMLJS "Exporta filtrados como HTML e JavaScript..." 17 {Write all filtered games to a HTML and JavaScript file}  
 menuText U ToolsExpFilterLaTeX "Exporta jogos filtrados - LaTex..." 17 \
   {Exporta todos os jogos filtrados para um arquivo LaTex}
-menuText U ToolsExpFilterLaTeXSkak "Exporta filtrados como LaTeX (Skak)" 17  {Write all filtered games to a LaTeX file}
 menuText U ToolsExpFilterGames "Export a Lista de Jogos como Texto" 19 {Print a formatted Gamelist.}
 menuText U ToolsImportOne "Importa PGN texto..." 0 \
   {Importa jogo de um texto em PGN}
@@ -1183,6 +1181,8 @@ translate U OprepViewLaTeX {Ver LaTeX} ;# ***
 translate U PReportTitle {Relatório de Jogador} ;# ***
 translate U PReportColorWhite {com as peças Brancas} ;# ***
 translate U PReportColorBlack {com as peças Pretas} ;# ***
+# ====== TODO To be translated ======
+translate U PReportBeginning {Beginning with}
 translate U PReportMoves {após %s} ;# ***
 translate U PReportOpenings {Aberturas} ;# ***
 translate U PReportClipbase {Limpar base de trabalho e preencher com cópia do jogos filtrados} ;# ***

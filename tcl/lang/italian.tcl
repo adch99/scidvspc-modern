@@ -206,7 +206,6 @@ menuText I ToolsExpCurrentHTMLJS "Esporta partita in un file HTML con Javascript
 menuText I ToolsExpCurrentLaTeX "Esporta partita in un file LaTeX..." 15 \
   {Scrive la partita attuale in un file LaTeX}
 # ====== TODO To be translated ======
-menuText I ToolsExpCurrentLaTeXSkak "Export Game to LaTeX (Skak)" 15 {Write current game to a LaTeX file}
 menuText I ToolsExpFilter "Esporta tutte le partite del filtro" 1 \
   {Scrive tutte le partite filtrate in un file di testo}
 menuText I ToolsExpFilterPGN "Esporta filtro in file PGN..." 17 \
@@ -217,7 +216,6 @@ menuText I ToolsExpFilterHTMLJS "Esporta filtro in file HTML con Javascript..." 
 menuText I ToolsExpFilterLaTeX "Esporta filtro in un file LaTeX..." 17 \
   {Scrive tutte le partite filtrate in un file LaTeX}
 # ====== TODO To be translated ======
-menuText I ToolsExpFilterLaTeXSkak "Export Filter to LaTeX (Skak)" 17  {Write all filtered games to a LaTeX file}
 # ====== TODO To be translated ======
 menuText I ToolsExpFilterGames "Export Gamelist to Text" 19 {Print a formatted Gamelist.}
 menuText I ToolsImportOne "Importa una partita in formato PGN..." 0 \
@@ -1294,6 +1292,8 @@ translate I OprepViewLaTeX {Vedi LaTeX}
 translate I PReportTitle {Report sul giocatore}
 translate I PReportColorWhite {con i pezzi Bianchi}
 translate I PReportColorBlack {con i pezzi Neri}
+# ====== TODO To be translated ======
+translate I PReportBeginning {Beginning with}
 translate I PReportMoves {dopo %s}
 translate I PReportOpenings {Aperture}
 translate I PReportClipbase {Svuota la Clipbase e copia le partite risultanti in essa}

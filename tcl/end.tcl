@@ -209,7 +209,7 @@ proc setExportText {exportType} {
       set title "Set HTML file export text"
     }
     "LaTeX" {
-      set title "Set LaTeX chess12 file export text"
+      set title "Set LaTeX file export text"
     } 
     "Skak" {
       set title "Set LaTeX skak file export text"
@@ -510,16 +510,7 @@ proc exportGames {selection exportType} {
       set idir $initialDir(html)
       set default ".html"
     }
-    "LaTeX" {
-      set ftype {
-        { "LaTeX files" {".tex" ".ltx"} }
-        { "All files" {"*"} }
-      }
-      set title "a LaTeX file"
-      set idir $initialDir(tex)
-      set default ".tex"
-    }
-    "Skak" {
+    "Latex" {
       set ftype {
         { "LaTeX files" {".tex" ".ltx"} }
         { "All files" {"*"} }
@@ -553,6 +544,7 @@ proc exportGames {selection exportType} {
   if {$exportFilter} {
     progressWindow "Scid" "Exporting games..." $::tr(Cancel) "sc_progressBar"
   }
+ # tk_messageBox -title "Debug" -type ok -icon error -message "Export Type $exportType" 
   busyCursor .
   set error [catch {
   sc_base export $selection $exportType $fName -append $exportFlags(append) \

@@ -206,7 +206,6 @@ menuText F ToolsExpCurrentHTML "Dans un fichier HTML..." 16 \
 menuText F ToolsExpCurrentHTMLJS "Dans un fichier HTML et JavaScript..." 16 {Écrire la partie en cours dans un fichier HTML et JavaScript}  
 menuText F ToolsExpCurrentLaTeX "Dans un fichier LaTeX..." 16 \
   {Écrire la partie en cours dans un fichier LaTeX}
-menuText F ToolsExpCurrentLaTeXSkak "Dans un fichier LaTeX (Skak)..." 15 {Écrire la partie en cours dans un fichier LaTeX (Skak)}
 menuText F ToolsExpFilter "Écrire le filtre " 2 \
   {Écrire le filtre dans un fichier texte}
 menuText F ToolsExpFilterPGN "Dans un fichier PGN..." 16 \
@@ -216,7 +215,6 @@ menuText F ToolsExpFilterHTML "Dans un fichier HTML..." 16 \
 menuText F ToolsExpFilterHTMLJS "Dans un fichier HTML et JavaScript..." 16 {Écrire le filtre dans un fichier HTML et JavaScript}  
 menuText F ToolsExpFilterLaTeX "Dans un fichier LaTeX..." 16 \
   {Écrire le filtre dans un fichier LaTeX}
-menuText F ToolsExpFilterLaTeXSkak "Dans un fichier LaTeX (Skak)..." 17  {Écrire le filtre dans un fichier LaTeX (Skak)}
 menuText F ToolsExpFilterGames "Exporter une liste de parties vers un fichier texte" 19 {Écrire une liste de parties vers un fichier texte formaté}
 menuText F ToolsImportOne "Importer une partie en PGN..." 0 \
   {Importer une partie à partir d'un texte PGN}
@@ -1190,6 +1188,8 @@ translate F OprepViewLaTeX {Voir en LaTeX}
 translate F PReportTitle {Rapport du joueur}
 translate F PReportColorWhite {avec les Blancs pièces}
 translate F PReportColorBlack {avec les Noirs pièces}
+# ====== TODO To be translated ======
+translate F PReportBeginning {Beginning with}
 translate F PReportMoves {après %s}
 translate F PReportOpenings {Ouvertures}
 translate F PReportClipbase {Vider le presse-papier et copier dedans toutes les parties qui correspondent}

@@ -219,7 +219,6 @@ menuText C ToolsExpCurrentHTMLJS "Export Game to HTML and JavaScript File..." 15
 menuText C ToolsExpCurrentLaTeX "Export partie do LaTeX souboru..." 17 \
   {Zapsat aktuální partii do LaTeX souboru}
 # ====== TODO To be translated ======
-menuText C ToolsExpCurrentLaTeXSkak "Export Game to LaTeX (Skak)" 15 {Write current game to a LaTeX file}
 menuText C ToolsExpFilter "Export filtrovaných partií" 7 \
   {Zapsat v¹echny filtrované partie do textového souboru}
 menuText C ToolsExpFilterPGN "Export filtrovaných partií do PGN souboru..." 30 \
@@ -231,7 +230,6 @@ menuText C ToolsExpFilterHTMLJS "Export Filter to HTML and JavaScript File..." 1
 menuText C ToolsExpFilterLaTeX "Export filtrovaných partií do LaTeX souboru..." 30 \
   {Zapsat v¹echny filtrované partie do LaTeX souboru}
 # ====== TODO To be translated ======
-menuText C ToolsExpFilterLaTeXSkak "Export Filter to LaTeX (Skak)" 17  {Write all filtered games to a LaTeX file}
 # ====== TODO To be translated ======
 menuText C ToolsExpFilterGames "Export Gamelist to Text" 19 {Print a formatted Gamelist.}
 menuText C ToolsImportOne "Import jedné PGN partie..." 7 \
@@ -1322,6 +1320,8 @@ translate C OprepViewLaTeX {Zobrazit LaTeX}
 translate C PReportTitle {Profil hráèe}
 translate C PReportColorWhite {bílými figurami}
 translate C PReportColorBlack {èernými figurami}
+# ====== TODO To be translated ======
+translate C PReportBeginning {Beginning with}
 translate C PReportMoves {po %s}
 translate C PReportOpenings {Zahájení}
 translate C PReportClipbase {Vyprázdnit schránku a zkopírovat do ní odpovídající partie}

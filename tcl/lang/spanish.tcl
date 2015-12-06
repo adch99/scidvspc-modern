@@ -212,7 +212,6 @@ menuText S ToolsExpCurrentHTML "Exportar Partida a HTML" 15 \
 menuText S ToolsExpCurrentHTMLJS "Exportar Partida a HTML y JavaScript" 15 {Escribir partida actual a un fichero HTML y JavaScript} 
 menuText S ToolsExpCurrentLaTeX "Exportar Partida a LaTeX" 33 \
   {Escribe la partida actual en un archivo LaTeX}
-menuText S ToolsExpCurrentLaTeXSkak "Exportar Partida a LaTeX (Skak)" 15 {Escribe la partida actual en un archivo LaTeX (Skak)}
 menuText S ToolsExpFilter "Exportar todas las partidas filtradas" 1 \
   {Escribe todas las partidas filtradas en un archivo de texto}
 menuText S ToolsExpFilterPGN "Exportar filtro a PGN" 17 \
@@ -222,7 +221,6 @@ menuText S ToolsExpFilterHTML "Exportar filtro a HTML" 17 \
 menuText S ToolsExpFilterHTMLJS "Exportar filtro a HTML y JavaScript" 17 {Escribir todas las partidas filtradas a fichero HTML y JavaScript}  
 menuText S ToolsExpFilterLaTeX "Exportar filtro a LaTeX" 17 \
   {Escribe todas las partidas filtradas en un archivo LaTeX}
-menuText S ToolsExpFilterLaTeXSkak "Exportar filtro a LaTeX (Skak)" 17  {Escribe todas las partidas filtradas en un archivo LaTeX (Skak)}
 menuText S ToolsExpFilterGames "Exportar Listado a Texto" 19 {Print a formatted Gamelist.}
 menuText S ToolsImportOne "Importar partida PGN" 0 \
   {Importa una partida de un texto PGN}
@@ -1215,6 +1213,8 @@ translate S OprepViewLaTeX {Ver LaTeX}
 translate S PReportTitle {Informe del jugador}
 translate S PReportColorWhite {con las piezas blancas}
 translate S PReportColorBlack {con las piezas negras}
+# ====== TODO To be translated ======
+translate S PReportBeginning {Beginning with}
 translate S PReportMoves {%s después}
 translate S PReportOpenings {Aperturas}
 translate S PReportClipbase {Vaciar portapapeles y copiar las partidas}

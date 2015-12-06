@@ -199,7 +199,6 @@ menuText R ToolsExpCurrentHTML "Экспорт партии в файл HTML..."
 menuText R ToolsExpCurrentHTMLJS "Экспорт партии в HTML и JavaScript файл..." 0 {Записать текущую партию HTML и JavaScript файл}
 menuText R ToolsExpCurrentLaTeX "Экспорт партии в файл LaTeX..." 0 \
   {Записать текущую партию в файл LaTeX}
-menuText R ToolsExpCurrentLaTeXSkak "Экспортировать партию в LaTeX (skak)" 15 {Записать текущую партию в файл LaTeX используя skak}
 menuText R ToolsExpFilter "Экспорт всех фильтрованных партий" 11 \
   {Записать все фильтрованные партии в текстовый файл}
 menuText R ToolsExpFilterPGN "Экспорт фильтрованных партий в файл PGN..." 0 \
@@ -209,7 +208,6 @@ menuText R ToolsExpFilterHTML "Экспорт фильтрованных пар�
 menuText R ToolsExpFilterHTMLJS "Экспорт фильтрованных партий в HTML и JavaScript файл..." 17 {Записывает все фильтрованные партии в HTML и JavaScript файл}
 menuText R ToolsExpFilterLaTeX "Экспорт фильтрованных партий в файл LaTeX..." 3 \
   {Записать все фильтрованные партии в файл LaTeX}
-menuText R ToolsExpFilterLaTeXSkak "Экспортировать фильтр в LaTeX (Skak)" 17  {Записать все фильтрованные партии в LaTeX файл}
 menuText R ToolsExpFilterGames "Экспортировать список партий" 19 {Печатать форматированный список партий.}
 menuText R ToolsImportOne "Импорт одной партии PGN..." 0 \
   {Импорт партии из текстового файла PGN}
@@ -1195,6 +1193,8 @@ translate R OprepViewLaTeX {Просмотр LaTeX}
 translate R PReportTitle {Отчёт по игроку}
 translate R PReportColorWhite {с Белыми фигурами}
 translate R PReportColorBlack {с Чёрными фигурами}
+# ====== TODO To be translated ======
+translate R PReportBeginning {Beginning with}
 translate R PReportMoves {после %s}
 translate R PReportOpenings {Дебюты}
 translate R PReportClipbase {Отчистить буферную базу и скопировать в неё игры матча}

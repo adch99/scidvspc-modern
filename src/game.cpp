@@ -2304,17 +2304,7 @@ Game::WriteMoveList (TextBuffer *tb, uint plyCount,
         newline = "<br>\n";
         printDiagrams = true;
     }
-    if (IsLatexFormat()) {
-        preCommentStr = "\\begin{nochess}{\\rm ";
-        postCommentStr = "}\\end{nochess}";
-        startTable = "\n\\begin{tabular}{p{1cm}p{2cm}p{2cm}}\n";
-        startColumn = "";
-        nextColumn = "&";
-        endColumn = "\\\\\n";
-        endTable = "\\end{tabular}\n\n";
-        newline = "\n";
-        printDiagrams = true;
-    }
+    
     if (IsColorFormat()) {
         startTable = "<br>";
         newline = "<br>";
@@ -2823,17 +2813,6 @@ Game::WritePGN (TextBuffer * tb, uint stopLocation)
     tb->NewlinesToSpaces (false);
     if (IsHtmlFormat()) { newline = "<br>\n"; }
     if (IsLatexFormat()) {
-        newline = "\\\\\n";
-        tb->AddTranslation ('#', "\\#");
-        tb->AddTranslation ('%', "\\%");
-        tb->AddTranslation ('&', "\\&");
-        tb->AddTranslation ('<', "$<$");
-        tb->AddTranslation ('>', "$>$");
-        tb->AddTranslation ('_', "\\_");
-        // tb->AddTranslation ('[', "$[$");
-        // tb->AddTranslation (']', "$]$");
-    }
-    if (IsSkakFormat()) {
 		  return WritePGNtoLaTeX(tb, stopLocation);
     }
     if (IsColorFormat()) {
@@ -2872,9 +2851,8 @@ Game::WritePGN (TextBuffer * tb, uint stopLocation)
 //    }
 
     date_DecodeToString (Date, dateStr);
-    if (IsHtmlFormat()) { tb->PrintLine("<p><b>"); }
-    if (IsLatexFormat()) { tb->PrintLine ("{\\bf"); }
-
+    if (IsHtmlFormat()) { tb->PrintLine("<p><b>"); }    
+    
 //    if (IsColorFormat()) {
 //        tb->AddTranslation ('<', "<lt>");
 //        tb->AddTranslation ('>', "<gt>");
@@ -2884,8 +2862,7 @@ Game::WritePGN (TextBuffer * tb, uint stopLocation)
         // Print tags in short, 3-line format:
 
         if (IsHtmlFormat()) 
-           tb->PrintString ("<center>");
-        if (IsLatexFormat()) { tb->PrintString ("$\\circ$ "); }
+           tb->PrintString ("<center>");        
         if (PgnFormat==PGN_FORMAT_Color) {tb->PrintString ("<tag>"); }
         tb->PrintString (WhiteStr);
         if (WhiteElo > 0) {
@@ -2895,10 +2872,6 @@ Game::WritePGN (TextBuffer * tb, uint stopLocation)
         switch (PgnFormat) {
         case PGN_FORMAT_HTML:
             tb->PrintString (" &nbsp;&nbsp; -- &nbsp;&nbsp; ");
-            break;
-        case PGN_FORMAT_LaTeX:
-            tb->PrintString (newline);
-            tb->PrintString ("$\\bullet$ ");
             break;
         default:
             tb->PrintString ("   --   ");
@@ -2919,8 +2892,7 @@ Game::WritePGN (TextBuffer * tb, uint stopLocation)
             tb->PrintString (RoundStr);
             tb->PrintString (")");
         }
-        tb->PrintString (IsHtmlFormat() ? "&nbsp;&nbsp; " : "  ");
-        if (IsLatexFormat()) { tb->PrintString (newline); }
+        tb->PrintString (IsHtmlFormat() ? "&nbsp;&nbsp; " : "  ");        
         if (!strEqual (SiteStr, "")  &&  !strEqual (SiteStr, "?")) {
             tb->PrintString (SiteStr);
             tb->PrintString (IsHtmlFormat() ? " &nbsp; &nbsp; " : "  ");
@@ -2932,12 +2904,10 @@ Game::WritePGN (TextBuffer * tb, uint stopLocation)
         tb->PrintString (dateStr);
 
         // Print ECO code:
-        tb->PrintString (IsHtmlFormat() ? " &nbsp; &nbsp; " : "  ");
-        if (IsLatexFormat()) { tb->PrintString ("\\hfill "); }
+        tb->PrintString (IsHtmlFormat() ? " &nbsp; &nbsp; " : "  ");        
         tb->PrintString (RESULT_LONGSTR[Result]);
         if (EcoCode != 0) {
-            tb->PrintString (IsHtmlFormat() ? " &nbsp; &nbsp; " : "  ");
-            if (IsLatexFormat()) { tb->PrintString ("\\hfill "); }
+            tb->PrintString (IsHtmlFormat() ? " &nbsp; &nbsp; " : "  ");            
             ecoStringT ecoStr;
             eco_ToExtendedString (EcoCode, ecoStr);
             tb->PrintString (ecoStr);
@@ -2948,23 +2918,18 @@ Game::WritePGN (TextBuffer * tb, uint stopLocation)
         // Print FEN if non-standard start:
 
         if (NonStandardStart) {
-	    DString dstr;
-	    char fenStr [256];
-	    StartPos->PrintFEN (fenStr, FEN_ALL_FIELDS);
+	        DString dstr;
+	        char fenStr [256];
+	        StartPos->PrintFEN (fenStr, FEN_ALL_FIELDS);
 
-            if (IsLatexFormat()) {
-                tb->PrintString ("\n\\begin{diagram}\n");
-                StartPos->DumpLatexBoard (&dstr);
-                tb->PrintString (dstr.Data());
-                tb->PrintString ("\n\\end{diagram}\n");
-            } else if (IsHtmlFormat()) {
-		dstr.Append ("<br>");
-		dstr.Append (fenStr);
-                StartPos->DumpHtmlBoard (&dstr, HtmlStyle, NULL);
-                tb->PrintString (dstr.Data());
+            if (IsHtmlFormat()) {
+		       dstr.Append ("<br>");
+		       dstr.Append (fenStr);
+               StartPos->DumpHtmlBoard (&dstr, HtmlStyle, NULL);
+               tb->PrintString (dstr.Data());
             } else {
-                sprintf (temp, "Position: %s%s", fenStr, newline);
-                tb->PrintString (temp);
+               sprintf (temp, "Position: %s%s", fenStr, newline);
+               tb->PrintString (temp);
             }
         }
         if (IsHtmlFormat())
@@ -3046,11 +3011,7 @@ Game::WritePGN (TextBuffer * tb, uint stopLocation)
 //    }
 
     if (IsHtmlFormat()) { tb->PrintLine("</b></p>"); }
-    if (IsLatexFormat()) {
-        tb->PrintLine ("}\n\\begin{chess}{\\bf ");
-    } else {
-        tb->PrintString (newline);
-    }
+    tb->PrintString (newline);
 
     // Now print the move list. First, we note the current position and
     // move, so we can reconstruct the game state afterwards:
@@ -3063,13 +3024,9 @@ Game::WritePGN (TextBuffer * tb, uint stopLocation)
     NumMovesPrinted = 1;
     StopLocation = stopLocation;
     WriteMoveList (tb, StartPlyCount, oldCurrentMove, true, false);
-    if (IsHtmlFormat()) { tb->PrintString ("<b>"); }
-    if (IsLatexFormat()) { tb->PrintString ("\n}\\end{chess}\n{\\bf "); }
+    if (IsHtmlFormat()) { tb->PrintString ("<b>"); }    
     if (IsColorFormat()) { tb->PrintString ("<tag>"); }
     tb->PrintWord (RESULT_LONGSTR [Result]);
-    if (IsLatexFormat()) {
-        tb->PrintString ("}\n\\begin{center} \\hrule \\end{center}");
-    }
     if (IsHtmlFormat()) { tb->PrintString ("</b><hr></p>"); }
     if (IsColorFormat()) { tb->PrintString ("</tag>"); }
     tb->NewLine();
@@ -3101,19 +3058,21 @@ Game::WritePGNtoLaTeX(TextBuffer * tb, uint stopLocation)
 {
 	char temp [255];
 	char dateStr [20];
-	const char * newline = "\\\\\n";
+//	const char * newline = "\\\\\n";
 	const char * preCommentStr = "";
 	const char * postCommentStr = "\\\\[1ex]\n";
-	const char * preScoreStr = "\\textcolor{ScoreColor}{\\it";
-	const char * postScoreStr = "}\n";
+//	const char * preScoreStr = "\\textcolor{ScoreColor}{\\it";
+//	const char * postScoreStr = "}\n";
 	const char * preVariationStr = "\\textcolor{VariationColor}{\\variation{";
 	const char * postVariationStr = "}}\n\\\\[1ex]\n";
-	const char * diagramStr = "\\begin{center}\n\\vspace{1ex}\n\\showboard\n\\vspace{1ex}\n\\end{center}\n";
-	const char * startTable = "";
-	const char * startColumn = "";
-	const char * nextColumn = "";
-	const char * endColumn = "";
-	const char * endTable = "";
+	const char * diagramStr = "\\begin{center}\n\\vspace{1ex}\n\\chessboard\n\\vspace{1ex}\n\\end{center}\n";
+	const char * diagramStrStart = "\\begin{center}\n\\vspace{1ex}\n\\chessboard[";        
+    const char * diagramStrStop = "]\\vspace{1ex}\n\\end{center}\n";        
+//	const char * startTable = "";
+//	const char * startColumn = "";
+//	const char * nextColumn = "";
+//	const char * endColumn = "";
+//	const char * endTable = "";
 	bool printDiagrams = true;
 	bool diagramPrinted = false;
 	bool inMainline = false;
@@ -3208,11 +3167,11 @@ Game::WritePGNtoLaTeX(TextBuffer * tb, uint stopLocation)
 	tb->PrintString(RESULT_LONGSTR[Result]);
 	tb->PrintString("\\\\\n");
 	tb->PrintString("\\end{tabularx}\n\\\\[1ex]");
-	tb->PrintLine("}\n\\newgame\n");
+	tb->PrintLine("}\n\\newchessgame\n");
 
 	// Note the current position and
 	// move, so we can reconstruct the game state afterwards:
-	moveT * oldCurrentMove = CurrentMove;
+//	moveT * oldCurrentMove = CurrentMove;
 	if (stopLocation == 0) {
 		SaveState();
 	}
@@ -3336,23 +3295,23 @@ Game::WritePGNtoLaTeX(TextBuffer * tb, uint stopLocation)
 	// Print FEN if non-standard start:
 
 	if (NonStandardStart) {
-		char fenStr [256];
-		StartPos->PrintFEN(fenStr, FEN_ALL_FIELDS);
-		sprintf(temp, "%s", fenStr);
+		char fenStr [256];        
+		StartPos->PrintFEN(fenStr, FEN_ALL_FIELDS);                
+		sprintf(temp, "moveid=%d%c,setfen=%s",StartPos->GetFullMoveCount(),(StartPos->GetToMove() == WHITE ? 'w' : 'b'),fenStr);        
 
-		tb->PrintString("\\fenboard{");
+		tb->PrintString("\\newchessgame[");
 		tb->PrintString(temp);
-		tb->PrintString("}\n");
-		tb->PrintString("\\largeboard\n");
+		tb->PrintString("]\n");
 		tb->PrintString(diagramStr);
 	}
 
-	tb->PrintString("\\smallboard\n\\showmoverOn\n");
+	// tb->PrintString("\\chessboard[smallboard]\n");
 
 
 	// Back to the start and now parse the moves...
 
-	MoveToPly(0);
+	MoveToPly(0);   
+   
 	PgnLastMovePos = PgnNextMovePos = 1;
 	m = CurrentMove;
 	char from[4] = "   ";
@@ -3383,20 +3342,20 @@ Game::WritePGNtoLaTeX(TextBuffer * tb, uint stopLocation)
 					    ) {
 						if (!diagramPrinted) {
 							diagramPrinted = true;
-							tb->PrintString(diagramStr);
-						}
-						square_Print(m->moveData.from, from);
-						square_Print(m->moveData.to, to);
-						if (CurrentPos->GetToMove() == WHITE) {
-							tb->PrintString("\\psset{linecolor=WhitePiecesGraphColor}\n");
-						} else {
-							tb->PrintString("\\psset{linecolor=BlackPiecesGraphColor}\n");
-						}
-						sprintf(temp, "\\highlight{%s,%s}\n", from, to);
-						tb->PrintString(temp);
-						sprintf(temp, "\\printarrow{%s}{%s}\n", from, to);
-						tb->PrintString(temp);
-						tb->PrintString("\\psset{linecolor=black}\n");
+							tb->PrintString(diagramStrStart);
+				//      }
+				//		square_Print(m->moveData.from, from);
+				//		square_Print(m->moveData.to, to);
+				//		if (CurrentPos->GetToMove() == WHITE) {
+				//			tb->PrintString("\\psset{linecolor=WhitePiecesGraphColor}\n");
+				//		} else {
+				//			tb->PrintString("\\psset{linecolor=BlackPiecesGraphColor}\n");
+				//		}
+                        tb->PrintString("lastmoveid,pgfstyle=border,color=red,");
+                        tb->PrintString("markfields={\\xskakget{moveto},\\xskakget{movefrom}},");
+                        tb->PrintString("pgfstyle=straightmove,markmove=\\xskakget{movefrom}-\\xskakget{moveto}");
+                        tb->PrintString(diagramStrStop);
+                        }
 					}
 				}
 			}
@@ -3425,20 +3384,24 @@ Game::WritePGNtoLaTeX(TextBuffer * tb, uint stopLocation)
 				inMainline = false;
 				if (!diagramPrinted) {
 					diagramPrinted = true;
-					tb->PrintString(diagramStr);
+					tb->PrintString(diagramStrStart);
+                    tb->PrintString("lastmoveid,pgfstyle=border,color=red,");
+                    tb->PrintString("markfields={\\xskakget{moveto},\\xskakget{movefrom}},");
+                    tb->PrintString("pgfstyle=straightmove,markmove=\\xskakget{movefrom}-\\xskakget{moveto}");
+                    tb->PrintString(diagramStrStop);                    
 				}
-				square_Print(m->moveData.from, from);
-				square_Print(m->moveData.to, to);
-				if (CurrentPos->GetToMove() == WHITE) {
-					tb->PrintString("\\psset{linecolor=WhitePiecesGraphColor}\n");
-				} else {
-					tb->PrintString("\\psset{linecolor=BlackPiecesGraphColor}\n");
-				}
-				sprintf(temp, "\\highlight{%s,%s}\n", from, to);
-				tb->PrintString(temp);
-				sprintf(temp, "\\printarrow{%s}{%s}\n", from, to);
-				tb->PrintString(temp);
-				tb->PrintString("\\psset{linecolor=black}\n");
+				//square_Print(m->moveData.from, from);
+				//square_Print(m->moveData.to, to);
+				//if (CurrentPos->GetToMove() == WHITE) {
+				//	tb->PrintString("\\psset{linecolor=WhitePiecesGraphColor}\n");
+				//} else {
+				//	tb->PrintString("\\psset{linecolor=BlackPiecesGraphColor}\n");
+				//}
+				//sprintf(temp, "\\highlight{%s,%s}\n", from, to);
+				//tb->PrintString(temp);
+				//sprintf(temp, "\\printarrow{%s}{%s}\n", from, to);
+				//tb->PrintString(temp);
+				//tb->PrintString("\\psset{linecolor=black}\n");
 			} else {
 				game_printNag(m->nags[i], temp, true, PGN_FORMAT_LaTeX);
 				tb->PrintWord(temp);
@@ -3472,20 +3435,24 @@ Game::WritePGNtoLaTeX(TextBuffer * tb, uint stopLocation)
 				if (strIsPrefix("#", m->comment) || (d != NULL)) {
 					if (!diagramPrinted) {
 						diagramPrinted = true;
-						tb->PrintString(diagramStr);
+						tb->PrintString(diagramStrStart);
+                        tb->PrintString("lastmoveid,pgfstyle=border,color=red,");
+                        tb->PrintString("markfields={\\xskakget{moveto},\\xskakget{movefrom}},");
+                        tb->PrintString("pgfstyle=straightmove,markmove=\\xskakget{movefrom}-\\xskakget{moveto}");
+                        tb->PrintString(diagramStrStop);                        
 					}
-					square_Print(m->moveData.from, from);
-					square_Print(m->moveData.to, to);
-					if (CurrentPos->GetToMove() == WHITE) {
-						tb->PrintString("\\psset{linecolor=WhitePiecesGraphColor}\n");
-					} else {
-						tb->PrintString("\\psset{linecolor=BlackPiecesGraphColor}\n");
-					}
-					sprintf(temp, "\\highlight{%s,%s}\n", from, to);
-					tb->PrintString(temp);
-					sprintf(temp, "\\printarrow{%s}{%s}\n", from, to);
-					tb->PrintString(temp);
-					tb->PrintString("\\psset{linecolor=black}\n");
+					//square_Print(m->moveData.from, from);
+					//square_Print(m->moveData.to, to);
+					//if (CurrentPos->GetToMove() == WHITE) {
+					//	tb->PrintString("\\psset{linecolor=WhitePiecesGraphColor}\n");
+					//} else {
+					//	tb->PrintString("\\psset{linecolor=BlackPiecesGraphColor}\n");
+					//}
+					///sprintf(temp, "\\highlight{%s,%s}\n", from, to);
+					//tb->PrintString(temp);
+					//sprintf(temp, "\\printarrow{%s}{%s}\n", from, to);
+					//tb->PrintString(temp);
+					//tb->PrintString("\\psset{linecolor=black}\n");
 				}
 				if (d != NULL) {
 					memcpy(d, "   ", 3);
@@ -3506,20 +3473,24 @@ Game::WritePGNtoLaTeX(TextBuffer * tb, uint stopLocation)
 
 			if (!diagramPrinted) {
 				diagramPrinted = true;
-				tb->PrintString(diagramStr);
+				tb->PrintString(diagramStrStart);
+                tb->PrintString("lastmoveid,pgfstyle=border,color=red,");
+                tb->PrintString("markfields={\\xskakget{moveto},\\xskakget{movefrom}},");
+                tb->PrintString("pgfstyle=straightmove,markmove=\\xskakget{movefrom}-\\xskakget{moveto}");
+                tb->PrintString(diagramStrStop);
 			}
-			square_Print(m->moveData.from, from);
-			square_Print(m->moveData.to, to);
-			if (CurrentPos->GetToMove() == WHITE) {
-				tb->PrintString("\\psset{linecolor=WhitePiecesGraphColor}\n");
-			} else {
-				tb->PrintString("\\psset{linecolor=BlackPiecesGraphColor}\n");
-			}
-			sprintf(temp, "\\highlight{%s,%s}\n", from, to);
-			tb->PrintString(temp);
-			sprintf(temp, "\\printarrow{%s}{%s}\n", from, to);
-			tb->PrintString(temp);
-			tb->PrintString("\\psset{linecolor=black}\n");
+//			square_Print(m->moveData.from, from);
+//			square_Print(m->moveData.to, to);
+//			if (CurrentPos->GetToMove() == WHITE) {
+//				tb->PrintString("\\psset{linecolor=WhitePiecesGraphColor}\n");
+//			} else {
+//				tb->PrintString("\\psset{linecolor=BlackPiecesGraphColor}\n");
+//			}
+//			sprintf(temp, "\\highlight{%s,%s}\n", from, to);
+//			tb->PrintString(temp);
+//			sprintf(temp, "\\printarrow{%s}{%s}\n", from, to);
+//			tb->PrintString(temp);
+//			tb->PrintString("\\psset{linecolor=black}\n");
 
 			tmp = m;
 
@@ -3540,14 +3511,15 @@ Game::WritePGNtoLaTeX(TextBuffer * tb, uint stopLocation)
 					v = v->next;
 				}
 
+                // TODO Adding Variation markers to diagram with xskak    
 				square_Print(v->moveData.from, from);
 				square_Print(v->moveData.to, to);
-				tb->PrintString("\\psset{linecolor=VariationColor}\n");
+				// tb->PrintString("\\psset{linecolor=VariationColor}\n");
 				sprintf(temp, "\\highlight{%s,%s}\n", from, to);
-				tb->PrintString(temp);
+				// tb->PrintString(temp);
 				sprintf(temp, "\\printarrow{%s}{%s}\n", from, to);
-				tb->PrintString(temp);
-				tb->PrintString("\\psset{linecolor=black}\n");
+				// tb->PrintString(temp);
+				// tb->PrintString("\\psset{linecolor=black}\n");
 
 				tb->PrintString(preVariationStr);
 
@@ -4244,7 +4216,7 @@ encodeVariation (ByteBuffer * buf, moveT * m, uint * subVarCount,
 // is detected. It is changed to the actual comment later when the
 // comments are decoded.
 
-char * defaultComment = "";
+char* defaultComment = (char *)"";
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -262,6 +262,7 @@ proc ::preport::makeReportWin {args} {
     button $w.b.opts -text [tr OprepFileOptions] -command ::preport::setOptions
     button $w.b.help -textvar ::tr(Help) -command {helpWindow Reports Player}
     button $w.b.viewHTML -text $::tr(OprepViewHTML) -command ::preport::previewHTML
+    button $w.b.previewLaTeX -text "Preview Latex" -command ::preport::previewLaTeX
     button $w.b.update -textvar ::tr(Update) -command ::preport::preportDlg
     button $w.b.close -textvar ::tr(Close) -command "focus .main ; destroy $w"
 
@@ -273,6 +274,8 @@ proc ::preport::makeReportWin {args} {
     pack $w.b.close $w.b.find $w.b.update -side right -padx 2 -pady 2
     if {$::windowsOS} {
       pack $w.b.viewHTML -side left -padx 2 -pady 2
+    } else {
+      pack $w.b.previewLaTeX -side left -padx 2 -pady 2
     }
     pack $w.b.opts -side left -padx 2 -pady 2
     ::preport::ConfigMenus
@@ -377,6 +380,56 @@ proc ::preport::setOptions {} {
 }
 
 
+# previewLaTeX:
+#   Saves the report to a temporary file, runs latex on it, then
+#   "dvips" to produce PostScript, and "ghostview" to display it.
+
+proc ::preport::previewLaTeX {} {
+  busyCursor .
+  set tmpdir $::scidLogDir
+  set tmpfile "TempOpeningReport"
+  set fname [file join $tmpdir $tmpfile]
+  catch {exec /bin/sh -c "rm $fname.*" }
+  if {[catch {set tempfile [open $fname.tex w]}]} {
+    tk_messageBox -title "Scid: Error writing report" -type ok -icon warning \
+        -message "Unable to write the file: $fname.tex" -parent .oprepWin
+  }
+  # Add the "batchmode" command to the top of the file to prevent latex
+  # pausing for input on errors:
+  puts $tempfile "\\batchmode"
+  puts $tempfile [::preport::report latex 1]
+  close $tempfile
+  
+  if {[catch {exec pdflatex --version} result] == 0} {
+    #cool we have pdflatex availabale
+    # pdflatex -interaction=nonstopmode %.tex
+    if {! [catch {exec /bin/sh -c "cd $tmpdir; pdflatex -interaction=nonstopmode '$tmpfile.tex'" >& /dev/null}]} {
+       if {[catch {exec /bin/sh -c "evince '$fname.pdf'" >& /dev/null &}]} {
+          tk_messageBox -title "Scid Error" -icon warning -type ok -parent .oprepWin \
+              -message "Unable to run \"evince\" to view the report."
+       }
+    }      
+  } else {
+    #no pdflatex so lets try the old way
+  if {! [catch {exec /bin/sh -c "cd $tmpdir; latex '$tmpfile.tex'" >& /dev/null}]} {
+    if {[catch {exec /bin/sh -c "cd $tmpdir; dvips '$tmpfile.dvi'" >& /dev/null}]} {
+      tk_messageBox -title "Scid Error" -icon warning -type ok -parent .oprepWin \
+          -message "Unable to run \"dvips\" to convert the report to PostScript."
+    } else {
+      if {[catch {exec /bin/sh -c "evince '$fname.ps'" >& /dev/null &}]} {
+        tk_messageBox -title "Scid Error" -icon warning -type ok -parent .oprepWin \
+            -message "Unable to run \"xdvi\" to view the report."
+      }
+    }
+  } else {
+    tk_messageBox -title "Scid Error" -type ok -icon warning -parent .oprepWin \
+        -message "Error(s) running latex on the file: $fname.tex\n\nSee $fname.log for details."
+    # todo: $fname.log (TempOpeningReport.log) doesn't exist
+  }
+  }
+  unbusyCursor .
+}
+
 # previewHTML:
 #   Saves the report to a temporary file, and invokes the user's web
 #   browser to display it.
@@ -443,7 +496,7 @@ proc ::preport::_reset {} {
 proc ::preport::_title {title} {
   set fmt $::preport::_data(fmt)
   if {$fmt == "latex"} {
-    return "\\begin{center}{\\LARGE \\bf $title}\\end{center}\n\n"
+    return "\\begin{center}{\\LARGE \\color{blue}$title}\\end{center}\n\n"
   } elseif {$fmt == "html"} {
     return "<h2><center>$title</center></h2>\n\n"
   } elseif {$fmt == "ctext"} {
@@ -502,18 +555,24 @@ proc ::preport::report {fmt {withTable 1}} {
   # can be generated and displayed if necessary:
   sc_report player notes $withTable $numRows
 
-  set n "\n"; set p "\n\n"; set preText ""; set postText ""
-  set percent "%"; set bullet "  * "
+  set n "\n"; set p "\n\n"; set preText ""; set postText "";
+  set bb "\""; set eb "\""; set ls ":";
+  set percent "%"; set bullet "  * ";
+  set ml ""; set mo "";
+  set va ""; set vo "";
   if {$fmt == "latex"} {
-    set n "\\\\\n"; set p "\n\n"
-    #set preText "{\\samepage\\begin{verbatim}\n"
-    #set postText "\\end{verbatim}\n}\n"
-    set percent "\\%"; set bullet "\\hspace{0.5cm}\$\\bullet\$"
+    set n "\\\\\n"; set p "\n\n"; set ls ": &";
+    set preText "\\begin{tabularx}{0.8\\textwidth}{rX} \n";
+    set postText "\\end{tabularx}\n"
+    set percent "\\%"; set bullet "\\hspace{0.5cm}\$\\bullet\$";
+    set bb "\\textbf{"; set eb "}";
+    set ml "\\mainline{"; set mo "}";
   } elseif {$fmt == "html"} {
-    set n "<br>\n"; set p "<p>\n\n"
-    set preText "<pre>\n"; set postText "</pre>\n"
+    set n "<br>\n"; set p "<p>\n\n"; 
+    set preText "<pre>\n"; set postText "</pre>\n";
+    set bb "<strong>"; set eb "</strong>";
   } elseif {$fmt == "ctext"} {
-    set preText "<tt>"; set postText "</tt>"
+    set preText "<tt>"; set postText "</tt>"    
   }
 
   # Generate the report:
@@ -527,16 +586,22 @@ proc ::preport::report {fmt {withTable 1}} {
   # set r [string map [list "\[OprepTitle\]" $tr(PReportTitle)] $r]
 
   append r [::preport::_title $::preport::_player]
-
-  append r "$tr(Player): \"$::preport::_player\""
-  if {$::preport::_color == "white"} {
-    append r " $tr(PReportColorWhite)"
+  append r $preText  
+  append r "$tr(Player)$ls $bb{$::preport::_player}$eb"     
+  if {$::preport::_color == "white"} {   
+    append r " $tr(PReportColorWhite)$n"
   } else {
-    append r " $tr(PReportColorBlack)"
+    append r " $tr(PReportColorBlack)$n"
   }
   set eco ""
+  set line [sc_report player line]
   if {$::preport::_pos == "current"  &&  ![sc_pos isAt start]} {
-    append r " [format $tr(PReportMoves) [sc_report player line]]"
+    if {$fmt == "latex"} {
+      append r "\\newchessgame%\n"
+      append r "\\hidemoves{$line}%\\n"
+    } 
+    
+    append r "$tr(PReportBeginning)$ls \\printchessgame"
     set eco [sc_report player eco]
   }
   append r " ("
@@ -545,14 +610,15 @@ proc ::preport::report {fmt {withTable 1}} {
   }
   append r "$rgames"
   if {$fmt == "ctext"} { append r "</run></darkblue>"; }
-  append r " $games)$n"
-  append r "$tr(Database): [file tail [sc_base filename]] "
+  append r " $games)$n"  
+  append r "$tr(Database)$ls [file tail [sc_base filename]] "
   append r "([::utils::thousands [sc_base numGames]] $games)$n"
   if {$eco != ""} {
-    append r "$tr(ECO): $eco$n"
+     append r "$tr(ECO)$ls $eco $n"
   }
-  append r "$::tr(OprepGenerated) $::scidName [sc_info version], [::utils::date::today]$n"
-
+  append r "$::tr(OprepGenerated)$ls $::scidName [sc_info version], [::utils::date::today] $n"
+  append r $postText  
+    
   if {$preport(Stats)  ||  $preport(Oldest) > 0  ||  $preport(Newest) > 0  ||
       $preport(MostFrequentOpponents) > 0  ||  $preport(Results)} {
     append r [::preport::_sec $tr(OprepStatsHist)]
@@ -563,11 +629,11 @@ proc ::preport::report {fmt {withTable 1}} {
   }
   if {$preport(Oldest) > 0} {
     append r [::preport::_subsec $tr(OprepOldest)]
-    append r [sc_report player best o $preport(Oldest)]
+    append r "$preText[sc_report player best o $preport(Oldest)]$postText"
   }
   if {$preport(Newest) > 0} {
     append r [::preport::_subsec $tr(OprepNewest)]
-    append r [sc_report player best n $preport(Newest)]
+    append r "$preText[sc_report player best n $preport(Newest)]$postText"
   }
   if {$preport(MostFrequentOpponents) > 0} {
     append r [::preport::_subsec "$tr(OprepMostFrequentOpponents)"]
@@ -600,7 +666,7 @@ proc ::preport::report {fmt {withTable 1}} {
   }
   if {$preport(HighRating) > 0} {
     append r [::preport::_subsec $tr(OprepHighRating)]
-    append r [sc_report player best a $preport(HighRating)]
+    append r "$preText[sc_report player best a $preport(HighRating)]$postText"
   }
 
   if {$preport(Themes)  ||  $preport(MostFrequentEcoCodes) > 0  ||
@@ -644,7 +710,7 @@ proc ::preport::report {fmt {withTable 1}} {
 
   # Eszet (ss) characters seem to be mishandled by LaTeX, even with
   # the font encoding package, so convert them explicitly:
-  if {$fmt == "latex"} { regsub -all ß $r {{\\ss}} r }
+  if {$fmt == "latex"} { regsub -all ï¿½ $r {{\\ss}} r }
 
   return $r
 }

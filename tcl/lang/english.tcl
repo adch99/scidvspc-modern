@@ -211,8 +211,7 @@ menuText E ToolsExpCurrentPGN "Export Game to PGN" 15 \
 menuText E ToolsExpCurrentHTML "Export Game to HTML" 15 \
   {Write current game to a HTML file}
 menuText E ToolsExpCurrentHTMLJS "Export Game to HTML and JavaScript" 15 {Write current game to a HTML and JavaScript file}  
-menuText E ToolsExpCurrentLaTeX "Export Game to LaTeX (chess12)" 15 {Write current game to a LaTeX file using chess12}
-menuText E ToolsExpCurrentLaTeXSkak "Export Game to LaTeX (skak)" 15 {Write current game to a LaTeX file using skak}
+menuText E ToolsExpCurrentLaTeX "Export Game to LaTeX" 15 {Write current game to a LaTeX file using xSkak}
 menuText E ToolsExpFilter "Export All Filter Games" 1 \
   {Write all filtered games to a text file}
 menuText E ToolsExpFilterPGN "Export Filter to PGN" 17 \
@@ -220,8 +219,7 @@ menuText E ToolsExpFilterPGN "Export Filter to PGN" 17 \
 menuText E ToolsExpFilterHTML "Export Filter to HTML" 17 \
   {Write all filtered games to a HTML file}
 menuText E ToolsExpFilterHTMLJS "Export Filter to HTML and JavaScript" 17 {Write all filtered games to a HTML and JavaScript file}  
-menuText E ToolsExpFilterLaTeX "Export Filter to LaTeX (Chess12)" 17  {Write all filtered games to a LaTeX file}
-menuText E ToolsExpFilterLaTeXSkak "Export Filter to LaTeX (Skak)" 17  {Write all filtered games to a LaTeX file}
+menuText E ToolsExpFilterLaTeX "Export Filter to LaTeX" 17  {Write all filtered games to a LaTeX file}
 menuText E ToolsExpFilterGames "Export Gamelist to Text" 19 {Print a formatted Gamelist.}
 menuText E ToolsImportOne "Import PGN Text" 0 \
   {Import a game from PGN text}
@@ -1190,6 +1188,7 @@ translate E OprepViewLaTeX {View LaTeX}
 translate E PReportTitle {Player Report}
 translate E PReportColorWhite {with the White pieces}
 translate E PReportColorBlack {with the Black pieces}
+translate E PReportBeginning {Beginning with}
 translate E PReportMoves {after %s}
 translate E PReportOpenings {Openings}
 translate E PReportClipbase {Empty clipbase and copy matching games to it}

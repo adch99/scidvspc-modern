@@ -225,7 +225,6 @@ menuText D ToolsExpCurrentHTMLJS "Partie in HTML/JavaScript-Datei exportieren...
 menuText D ToolsExpCurrentLaTeX "Partie in LaTeX-Datei exportieren..." 10 \
   {Aktuelle Partie in eine LaTeX-Datei schreiben}
 # ====== TODO To be translated ======
-menuText D ToolsExpCurrentLaTeXSkak "Export Game to LaTeX (Skak)" 15 {Write current game to a LaTeX file}
 menuText D ToolsExpFilter "Alles im Filter exportieren" 16 \
   {Alle Partien im Filter in eine Textdatei schreiben}
 menuText D ToolsExpFilterPGN "Filter in PGN-Datei exportieren..." 10 \
@@ -236,7 +235,6 @@ menuText D ToolsExpFilterHTMLJS "Filter in HTML/JavaScript exportieren..." 17 {A
 menuText D ToolsExpFilterLaTeX "Filter in LaTeX-Datei exportieren..." 10 \
   {Alle Partien im Filter in eine LaTeX-Datei schreiben}
 # ====== TODO To be translated ======
-menuText D ToolsExpFilterLaTeXSkak "Export Filter to LaTeX (Skak)" 17  {Write all filtered games to a LaTeX file}
 # ====== TODO To be translated ======
 menuText D ToolsExpFilterGames "Export Gamelist to Text" 19 {Print a formatted Gamelist.}
 menuText D ToolsImportOne "Eine PGN-Partie importieren..." 16 \
@@ -1245,6 +1243,8 @@ translate D OprepViewLaTeX {Zeige LaTeX}
 translate D PReportTitle {Spielerbericht}
 translate D PReportColorWhite {mit den weißen Steinen}
 translate D PReportColorBlack {mit den schwarzen Steinen}
+# ====== TODO To be translated ======
+translate D PReportBeginning {Beginning with}
 translate D PReportMoves {nach %s}
 translate D PReportOpenings {Eröffnungen}
 translate D PReportClipbase {Leere Zwischenablage und kopiere gefundene Spiele}

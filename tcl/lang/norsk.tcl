@@ -225,7 +225,6 @@ menuText O ToolsExpCurrentHTMLJS "Export Game to HTML and JavaScript File..." 15
 menuText O ToolsExpCurrentLaTeX "Eksporter partil til LaTeX fil..." 0 \
   {Skriv dette partiet til en LaTeX-fil}
 # ====== TODO To be translated ======
-menuText O ToolsExpCurrentLaTeXSkak "Export Game to LaTeX (Skak)" 15 {Write current game to a LaTeX file}
 menuText O ToolsExpFilter "Eksporter alle partier i filteret" 0 \
   {Skriv alle partier i filteret til en tekstfil}
 menuText O ToolsExpFilterPGN "Eksporter filter til PGN-fil..." 0 \
@@ -237,7 +236,6 @@ menuText O ToolsExpFilterHTMLJS "Export Filter to HTML and JavaScript File..." 1
 menuText O ToolsExpFilterLaTeX "Eksporter filter til LaTeX-fil..." 0 \
   {Skriv alle partier i filteret til en LaTeX-fil}
 # ====== TODO To be translated ======
-menuText O ToolsExpFilterLaTeXSkak "Export Filter to LaTeX (Skak)" 17  {Write all filtered games to a LaTeX file}
 # ====== TODO To be translated ======
 menuText O ToolsExpFilterGames "Export Gamelist to Text" 19 {Print a formatted Gamelist.}
 menuText O ToolsImportOne "Importer ett PGN-parti..." 0 \
@@ -1400,6 +1398,8 @@ translate O OprepViewLaTeX {View LaTeX} ;# ***
 translate O PReportTitle {Player Report} ;# ***
 translate O PReportColorWhite {with the White pieces} ;# ***
 translate O PReportColorBlack {with the Black pieces} ;# ***
+# ====== TODO To be translated ======
+translate O PReportBeginning {Beginning with}
 translate O PReportMoves {after %s} ;# ***
 translate O PReportOpenings {Openings} ;# ***
 translate O PReportClipbase {Empty clipbase and copy matching games to it} ;# ***

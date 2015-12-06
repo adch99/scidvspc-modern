@@ -220,7 +220,6 @@ menuText G ToolsExpCurrentHTMLJS "Εξαγωγή σε HTML με JavaScript" 2 {�
 menuText G ToolsExpCurrentLaTeX "Εξαγωγή σε LaTeX" 3 \
   {Εγγραφή παρτίδας σε αρχείο LaTeX}
 # ====== TODO To be translated ======
-menuText G ToolsExpCurrentLaTeXSkak "Export Game to LaTeX (Skak)" 15 {Write current game to a LaTeX file}
 menuText G ToolsExpFilter "Εξαγωγή Φιλτρ.Παρτίδων" 4 \
   {Εγγραφή Όλων των φιλτραρισμένων παρτίδων σε αρχείο κειμένου}
 menuText G ToolsExpFilterPGN "Εξαγωγή σε PGN" 0 \
@@ -231,7 +230,6 @@ menuText G ToolsExpFilterHTMLJS "Εξαγωγή σε HTML με JavaScript" 2 {Ε
 menuText G ToolsExpFilterLaTeX "Εξαγωγή σε LaTeX" 3 \
   {Εγγραφή Όλων των φιλτραρισμένων παρτίδων σε αρχείο LaTeX}
 # ====== TODO To be translated ======
-menuText G ToolsExpFilterLaTeXSkak "Export Filter to LaTeX (Skak)" 17  {Write all filtered games to a LaTeX file}
 # ====== TODO To be translated ======
 menuText G ToolsExpFilterGames "Export Gamelist to Text" 19 {Print a formatted Gamelist.}
 menuText G ToolsImportOne "Εισαγωγή Κειμένου PGN" 9 \
@@ -1243,6 +1241,8 @@ translate G OprepViewLaTeX {Προβολή LaTeX}
 translate G PReportTitle {Αναφορά Παίκτη}
 translate G PReportColorWhite {με τα Λευκά κομμάτια}
 translate G PReportColorBlack {με τα Μαύρα κομμάτια}
+# ====== TODO To be translated ======
+translate G PReportBeginning {Beginning with}
 translate G PReportMoves {μετά από %s}
 translate G PReportOpenings {Ανοίγματα}
 translate G PReportClipbase {Άδειασμα clipbase και αντιγραφή παρτίδων που ταιριάζουν}

@@ -223,7 +223,6 @@ menuText H ToolsExpCurrentHTMLJS "Export Game to HTML and JavaScript File..." 15
 menuText H ToolsExpCurrentLaTeX "Exportálás LaTeX-fájlba..." 11 \
   {LaTeX-fájlba írja az aktuális játszmát.}
 # ====== TODO To be translated ======
-menuText H ToolsExpCurrentLaTeXSkak "Export Game to LaTeX (Skak)" 15 {Write current game to a LaTeX file}
 menuText H ToolsExpFilter "Az összes szûrt játszma exportálása" 10 \
   {Szövegfájlba írja az összes szûrt játszmát.}
 menuText H ToolsExpFilterPGN "Szûrõ exportálása PGN-fájlba..." 18 \
@@ -235,7 +234,6 @@ menuText H ToolsExpFilterHTMLJS "Export Filter to HTML and JavaScript File..." 1
 menuText H ToolsExpFilterLaTeX "Szûrõ exportálása LaTeX-fájlba..." 18 \
   {LaTeX-fájlba írja az összes szûrt játszmát.}
 # ====== TODO To be translated ======
-menuText H ToolsExpFilterLaTeXSkak "Export Filter to LaTeX (Skak)" 17  {Write all filtered games to a LaTeX file}
 # ====== TODO To be translated ======
 menuText H ToolsExpFilterGames "Export Gamelist to Text" 19 {Print a formatted Gamelist.}
 menuText H ToolsImportOne "PGN-játszma importálása..." 0 \
@@ -1331,6 +1329,8 @@ translate H OprepViewLaTeX {LaTeX megtekintése}
 translate H PReportTitle {Összefoglaló játékosról}
 translate H PReportColorWhite {világossal}
 translate H PReportColorBlack {sötéttel}
+# ====== TODO To be translated ======
+translate H PReportBeginning {Beginning with}
 translate H PReportMoves {%s után}
 translate H PReportOpenings {Megnyitások}
 translate H PReportClipbase {Kiüríti a vágólapot, és odamásolja a feltételnek megfelelõ játszmákat}
