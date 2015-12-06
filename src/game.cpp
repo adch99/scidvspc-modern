@@ -727,7 +727,7 @@ Game::Clear()
 //      Converts a string to a gameFormatT, returning true on success
 //      or false on error.
 //      The string should be a case-insensitive unique prefix of
-//      "plain" (or "pgn"), "HTML", "LaTeX", "Skak" or "Color".
+//      "plain" (or "pgn"), "HTML", "LaTeX", or "Color".
 bool
 Game::PgnFormatFromString (const char * str, gameFormatT * fmt)
 {
@@ -737,10 +737,8 @@ Game::PgnFormatFromString (const char * str, gameFormatT * fmt)
         *fmt = PGN_FORMAT_Plain;
     } else if (strIsCasePrefix (str, "HTML")) {
         *fmt = PGN_FORMAT_HTML;
-    } else if (strIsCasePrefix (str, "LaTeX")) {
+    } else if (strIsCasePrefix (str, "Latex")) {
         *fmt = PGN_FORMAT_LaTeX;
-    } else if (strIsCasePrefix (str, "Skak")) {
-        *fmt = PGN_FORMAT_Skak;
     } else if (strIsCasePrefix (str, "Color")) {
         *fmt = PGN_FORMAT_Color;
     } else {
@@ -3047,7 +3045,7 @@ Game::WritePGN (TextBuffer * tb, uint stopLocation)
 //
 //      There's been an extensive rewrite of the code for writing PGN
 //      to LaTeX in order to capitalise on the features offered by the
-//      skak package; mostly this involves letting LaTeX do what LaTeX
+//      xskak package; mostly this involves letting LaTeX do what LaTeX
 //      does best (formatting) and just worrying about dumping the
 //      right content into the right tags in the output file. If the
 //      user wants fancier formatting, LaTeX is pretty much the gold

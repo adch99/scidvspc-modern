@@ -208,12 +208,9 @@ proc setExportText {exportType} {
     "HTML" {
       set title "Set HTML file export text"
     }
-    "LaTeX" {
+    "Latex" {
       set title "Set LaTeX file export text"
     } 
-    "Skak" {
-      set title "Set LaTeX skak file export text"
-    }
     default {
       return
     }

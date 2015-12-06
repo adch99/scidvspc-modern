@@ -208,8 +208,7 @@ enum gameFormatT {
     PGN_FORMAT_Plain = 0,        // Plain regular PGN output
     PGN_FORMAT_HTML = 1,         // HTML format
     PGN_FORMAT_LaTeX = 2,        // LaTeX format
-    PGN_FORMAT_Color = 3,        // PGN, with color tags <red> etc
-    PGN_FORMAT_Skak = 4          // LaTeX (with skak package) format
+    PGN_FORMAT_Color = 3    
 };
 
 #define PGN_STYLE_TAGS             1
