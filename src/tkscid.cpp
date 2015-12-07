@@ -2091,7 +2091,7 @@ sc_base_sort (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     if (order) {
       for (uint i=0; i < db->numGames; i++) {
 	 newfilter->Set(i, db->filter->Get(order[i]));
-	 if (order[i] == db->gameNumber)
+	 if (order[i] == (uint) db->gameNumber)
 	   thisgame = i;
       }
     }
@@ -9179,7 +9179,8 @@ sc_game_tags_get (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         if (db->numGames > 0) {
             gameNumberT prevgame;
             // db->gameNumber is set to -1 for a new game, and it is (int) when perhaps it should be (uint)
-            if (db->gameNumber == 0 || db->gameNumber > db->numGames) {
+            // Corrected for type comparision - Richard Ashwell (R.A)
+            if (db->gameNumber == 0 || (db->gameNumber > 0 && (uint)db->gameNumber > db->numGames)) {
               prevgame = db->numGames - 1;
             } else {
               prevgame = db->gameNumber - 1;
