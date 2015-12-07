@@ -14,8 +14,7 @@ ifeq ($(WIN_TARGET),win64)
 else
   MINGW_DIR=/usr/local/cross-win32
   TCL_DIR=/usr/local/cross-tcl
-  #MINGW_TARGET=i386-mingw32msvc
-  MINGW_TARGET=i686-pc-mingw32
+  MINGW_TARGET=i686-w64-mingw32
 endif
 
 ### Compiler and linker

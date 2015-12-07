@@ -19,9 +19,9 @@ ifeq ($(WIN_TARGET),win64)
   TCL_DIR=/opt/cross_tcl64
   MINGW_TARGET=x86_64-w64-mingw32
 else
-  MINGW_DIR=/usr/i686-pc-mingw32/sys-root/mingw/
+  MINGW_DIR=/usr/i686-w64-mingw32/
   TCL_DIR=/usr/local/cross-tcl
-  MINGW_TARGET=i686-pc-mingw32
+  MINGW_TARGET=i686-w64-mingw32
 endif
 
 ### Compiler and linker
