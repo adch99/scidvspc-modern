@@ -3505,7 +3505,6 @@ sc_base_fix_corrupted (ClientData cd, Tcl_Interp * ti, int argc, const char ** a
         return errorResult (ti, "Error opening index file.");
     }
     recalcNameFrequencies (nb, idxTemp);
-    uint numGames = idxTemp->GetNumGames();
     idxTemp->CloseIndexFile();
 
     // Now, add only the names with nonzero frequencies to a new namebase:
@@ -4179,7 +4178,6 @@ sc_compact_games (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         return errorResult (ti, "Error creating temporary file; compaction cancelled.");
     }
 
-    bool treeFileOutOfDate = false;
     gameNumberT newNumGames = 0;
     bool interrupted = 0;
     const char * errMsg = "";
@@ -4202,7 +4200,6 @@ sc_compact_games (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         }
         IndexEntry * ieOld = db->idx->FetchEntry (i);
         if (ieOld->GetDeleteFlag()) {
-            treeFileOutOfDate = true;
             continue;
         }
         IndexEntry ieNew;
@@ -4212,14 +4209,12 @@ sc_compact_games (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                                    ieOld->GetLength());
         if (err != OK) {
             // Just skip corrupt games:
-            treeFileOutOfDate = true;
             continue;
         }
         db->bbuf->BackToStart();
         err = scratchGame->Decode (db->bbuf, GAME_DECODE_NONE);
         if (err != OK) {
             // Just skip corrupt games:
-            treeFileOutOfDate = true;
             continue;
         }
         err = newIdx->AddGame (&newNumGames, &ieNew);
@@ -14259,7 +14254,7 @@ sc_tree_search (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     bool hideMoves = false;
     bool shortDisplay = false;
-    bool showTimeStats = true;
+    //  bool showTimeStats = true; // Stats are disabled at the moment
     bool showEpdData = true;
     bool listMode = false;
     bool adjustMode = false;
@@ -14289,7 +14284,7 @@ db->bbuf->Empty();
                 base = &(dbList[baseNum - 1]);
             }
         } else if (strIsPrefix (argv[arg], "-time")) {
-            showTimeStats = strGetBoolean (argv[arg+1]);
+            // showTimeStats = strGetBoolean (argv[arg+1]); // Stats are turned off at the moment
         } else if (strIsPrefix (argv[arg], "-epd")) {
             showEpdData = strGetBoolean (argv[arg+1]);
         } else if (strIsPrefix (argv[arg], "-list")) {

@@ -259,7 +259,9 @@ int scid_book_movesupdate(char * moves, char * probs, const int BookNumber, char
 #ifdef _WIN32
 	_chsize(fileno(BookFile[BookNumber]),  ftell(BookFile[BookNumber]));
 #else
-	ftruncate (fileno(BookFile[BookNumber]), (off_t) ftell(BookFile[BookNumber]));
+	if (ftruncate (fileno(BookFile[BookNumber]), (off_t) ftell(BookFile[BookNumber])) == -1) {
+	  return -1; // Fail
+        }
 #endif
     }
     return 0; // success

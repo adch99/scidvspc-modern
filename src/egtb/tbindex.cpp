@@ -910,52 +910,52 @@ static void VInitSquaresTable
 				{
 			case x_piecePawn:
 				if (
-					0 != TbColumn (sq) && sqKing == sq+7 ||
-					7 != TbColumn (sq) && sqKing == sq+9
+					(0 != TbColumn (sq) && sqKing == sq+7) ||
+					(7 != TbColumn (sq) && sqKing == sq+9)
 				   )
 				   continue;
 				break;
 			case x_pieceKnight:
 				if (
-					TbRow (sq) >= 2 && TbColumn (sq) >= 1 && sqKing == sq-17 ||
-					TbRow (sq) >= 2 && TbColumn (sq) <= 6 && sqKing == sq-15 ||
-					TbRow (sq) >= 1 && TbColumn (sq) >= 2 && sqKing == sq-10 ||
-					TbRow (sq) >= 1 && TbColumn (sq) <= 5 && sqKing == sq-6 ||
-					TbRow (sq) <= 6 && TbColumn (sq) >= 2 && sqKing == sq+6 ||
-					TbRow (sq) <= 6 && TbColumn (sq) <= 5 && sqKing == sq+10 ||
-					TbRow (sq) <= 5 && TbColumn (sq) >= 1 && sqKing == sq+15 ||
-					TbRow (sq) <= 5 && TbColumn (sq) <= 6 && sqKing == sq+17
+					(TbRow (sq) >= 2 && TbColumn (sq) >= 1 && sqKing == sq-17) ||
+					(TbRow (sq) >= 2 && TbColumn (sq) <= 6 && sqKing == sq-15) ||
+					(TbRow (sq) >= 1 && TbColumn (sq) >= 2 && sqKing == sq-10) ||
+					(TbRow (sq) >= 1 && TbColumn (sq) <= 5 && sqKing == sq-6) ||
+					(TbRow (sq) <= 6 && TbColumn (sq) >= 2 && sqKing == sq+6) ||
+					(TbRow (sq) <= 6 && TbColumn (sq) <= 5 && sqKing == sq+10) ||
+					(TbRow (sq) <= 5 && TbColumn (sq) >= 1 && sqKing == sq+15) ||
+					(TbRow (sq) <= 5 && TbColumn (sq) <= 6 && sqKing == sq+17)
 				   )
 					continue;
 				break;
 			case x_pieceBishop:
 				if (
-					0 != TbRow (sq) && 0 != TbColumn (sq) && sqKing == sq-9 ||
-					0 != TbRow (sq) && 7 != TbColumn (sq) && sqKing == sq-7 ||
-					7 != TbRow (sq) && 0 != TbColumn (sq) && sqKing == sq+7 ||
-					7 != TbRow (sq) && 7 != TbColumn (sq) && sqKing == sq+9
+					(0 != TbRow (sq) && 0 != TbColumn (sq) && sqKing == sq-9) ||
+					(0 != TbRow (sq) && 7 != TbColumn (sq) && sqKing == sq-7) ||
+					(7 != TbRow (sq) && 0 != TbColumn (sq) && sqKing == sq+7) ||
+					(7 != TbRow (sq) && 7 != TbColumn (sq) && sqKing == sq+9)
 				   )
 					continue;
 				break;
 			case x_pieceRook:
 				if (
-					0 != TbColumn (sq) && sqKing == sq-1 ||
-					7 != TbColumn (sq) && sqKing == sq+1 ||
-					0 != TbRow (sq) && sqKing == sq-8 ||
-					7 != TbRow (sq) && sqKing == sq+8
+					(0 != TbColumn (sq) && sqKing == sq-1) ||
+					(7 != TbColumn (sq) && sqKing == sq+1) ||
+					(0 != TbRow (sq) && sqKing == sq-8) ||
+					(7 != TbRow (sq) && sqKing == sq+8)
 				   )
 					continue;
 				break;
 			case x_pieceQueen:
 				if (
-					0 != TbColumn (sq) && sqKing == sq-1 ||
-					7 != TbColumn (sq) && sqKing == sq+1 ||
-					0 != TbRow (sq) && sqKing == sq-8 ||
-					7 != TbRow (sq) && sqKing == sq+8 ||
-					0 != TbRow (sq) && 0 != TbColumn (sq) && sqKing == sq-9 ||
-					0 != TbRow (sq) && 7 != TbColumn (sq) && sqKing == sq-7 ||
-					7 != TbRow (sq) && 0 != TbColumn (sq) && sqKing == sq+7 ||
-					7 != TbRow (sq) && 7 != TbColumn (sq) && sqKing == sq+9
+					(0 != TbColumn (sq) && sqKing == sq-1) ||
+					(7 != TbColumn (sq) && sqKing == sq+1) ||
+					(0 != TbRow (sq) && sqKing == sq-8) ||
+					(7 != TbRow (sq) && sqKing == sq+8) ||
+					(0 != TbRow (sq) && 0 != TbColumn (sq) && sqKing == sq-9) ||
+					(0 != TbRow (sq) && 7 != TbColumn (sq) && sqKing == sq-7) ||
+					(7 != TbRow (sq) && 0 != TbColumn (sq) && sqKing == sq+7) ||
+					(7 != TbRow (sq) && 7 != TbColumn (sq) && sqKing == sq+9)
 				   )
 					continue;
 				break;
@@ -1201,7 +1201,7 @@ static void VInitEnumerations (void)
 								rgcTriplePawnless[pi1][pi2][pi3]);
 					}
 #endif
-		printf ("\nAllocated %dk\n\n", (unsigned long)(cbAllocated + 1023UL)/1024UL);
+		printf ("\nAllocated %luk\n\n", (unsigned long)(cbAllocated + 1023UL)/1024UL);
 		}
 	}
 
@@ -3709,7 +3709,7 @@ extern "C" int FReadTableToMemory
 			exit (1);
 			}
 		cb = ftell (fp);
-		if (-1 == cb)
+		if ((long)-1 == cb)
 			{
 			printf ("*** Cannot find length of %s\n", pszName);
 			exit (1);

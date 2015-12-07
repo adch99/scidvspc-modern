@@ -322,18 +322,16 @@ int
 Recognizer::KBPK (Position * pos)
 {
     byte * material = pos->GetMaterial();
-    squareT wk, bk;
+    squareT bk;
     fyleT wrongFile = A_FYLE;  // Wrong-color bishop rook-pawn file.
     // Set up piece squares so that White has the bishop and pawn(s),
     // and make sure all pawns are on the wrong rook-pawn file:
     if (material[WB] == 1) {
-        wk = pos->GetKingSquare(WHITE);
         bk = pos->GetKingSquare(BLACK);
         if (pos->SquareColorCount(WB,WHITE) == 1) { wrongFile = H_FYLE; }
         if (pos->FyleCount(WP, wrongFile) != material[WP]) { return UNKNOWN; }
     } else {
         ASSERT (material[BB] == 1);
-        wk = square_FlipRank(pos->GetKingSquare(BLACK));
         bk = square_FlipRank(pos->GetKingSquare(WHITE));
         if (pos->SquareColorCount(BB,BLACK) == 1) { wrongFile = H_FYLE; }
         if (pos->FyleCount(BP, wrongFile) != material[BP]) { return UNKNOWN; }
