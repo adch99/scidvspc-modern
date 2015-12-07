@@ -1849,40 +1849,32 @@ set helpText(LaTeX) {<h1>Using LaTeX with Scid</h1>
   LaTeX is an extension to TeX, a popular typesetting system.
   Scid can export games and Opening Reports to the LaTeX format.
   </p>
-  <h2>Installing Chess12 Font</h2>
-  <p>
-  To typeset the LaTeX files produced by Scid, in addtion to LaTex
-  one must have the Chess12 font package installed.  Shane prepared a 
-  <url http://scid.sourceforge.net/download/chess12.tar.gz>custom chess12</url>
-  font package. He notes:
-  </p>
+  <h2>Installation</h2>
   <p><i>
-It should (hopefully!) work on most systems where dvips is the standard
-tool used to produce PostScript files from DVI files.
+  Scid vs. PC no longer uses Chess12 for LaTeX output.
+  </i></p>
 
-After downloading and extracting chess12.tar.gz, you will need to set up some
-environment variables so the programs latex, xdvi and dvips know where to find
-the chess font files </i></p>
-<p> You will need something like this in your ~/.bashrc file:
-<br>
-<br>
-    CHESSFONT="/usr/local/share/scid/chess12" (for example)
-<br>
-    TEXINPUTS="${CHESSFONT}/inputs:"
-<br>
-    TEXFONTS="${CHESSFONT}/fonts:"
-<br>
-    XDVIFONTS="${CHESSFONT}/pkfonts:"
-<br>
-    MFINPUTS="${CHESSFONT}/mf:"
-<br>
-    PKFONTS="${CHESSFONT}/pkfonts:"
-<br>
-    export CHESSFONT TEXINPUTS TEXFONTS XDVIFONTS MFINPUTS PKFONTS
-<br>
+  <p>
+  The LaTeX packages required by Scid vs. PC  are included, or automatically
+  added, by most modern LaTeX systems.  These packages are
   </p>
+  <ul>
+       <li>KOMAScript - for typesetting the overall reports</li>
+       <li>pstricks-add - for typesetting analysis charts</li>
+       <li>xskak - for typesetting chess moves and boards</li>
+  </ul>
+  <p>
+  To use the Latex preview options for the Opening and Player Reports,
+  it is recommend to have a pdf viewer available in your 
+  environment/system. Compatible viewers are
+  </p>
+  <ul>
+        <li><b>Linux</b> - evince, ..</li>
+        <li><b>OS X</b> - TODO</li>
+        <li><b>Windows</b> - TODO</li>
+  </li>
 
-  <p><footer>Updated: Scid vs. PC 4.8, April 2011</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.16, December 2015</footer></p>
 }
 
 set helpTitle(PGN) "PGN Window"
