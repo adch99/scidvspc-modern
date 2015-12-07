@@ -13484,7 +13484,7 @@ sc_report (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         return errorResult (ti, "No report has been created yet.");
     }
 
-    if (index != OPT_CREATE && report->GetBase() != currentBase) {
+    if (index != OPT_CREATE && report->GetBase() != (uint) currentBase) {
       return errorResult (ti, "sc_report: please select report base.");
       // Automatically switching requires updating gui
       // db = &(dbList[report->GetBase()]);
@@ -13975,11 +13975,11 @@ sc_tree_best (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         char wname[15];
         char bname[15];
 
-        snprintf (wname, 12, ie->GetWhiteName (base->nb));
+        snprintf (wname, 12, "%s", ie->GetWhiteName (base->nb));
 	strTrimSurname (wname, 1);
 	strPad (wname, wname, 12, ' ');
 
-        snprintf (bname, 12, ie->GetBlackName (base->nb));
+        snprintf (bname, 12, "%s", ie->GetBlackName (base->nb));
 	strTrimSurname (bname, 1);
         strPad (bname, bname, 12, ' ');
 
@@ -14009,8 +14009,8 @@ sc_tree_best (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         char event[15];
         char site[15];
         char combo[32];
-        snprintf (event, 15, ie->GetEventName (base->nb));
-        snprintf (site, 15, ie->GetSiteName (base->nb));
+        snprintf (event, 15, "%s", ie->GetEventName (base->nb));
+        snprintf (site, 15, "%s", ie->GetSiteName (base->nb));
 
         if (strIsUnknownName(site)) 
 	  snprintf (combo, 32, "%s", event);
