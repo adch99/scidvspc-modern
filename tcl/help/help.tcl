@@ -1587,8 +1587,8 @@ Right-clicking game(s) presents a context menu for various actions. Double-click
 <p>Quick searches can be performed by entering text in the combo-box and pressing Enter, or clicking the <b>Filter</b> button.
 Use "+" as a logical AND with the <b>Filter</b> button. For example: "Kasparov+Karpov".
 Similarly, the entry-box allows finding a particular game by number. Both these widgets will load the current game by pressing Control+Enter.</p>
-<p><i>For more info about Searches and Filters, <a Searches>see here</a> or below.
-<br>The order of the Game List fields is only configurable by editing Scid vs. PC's Gui (scid.gui/glistFields)
+<p><i>To see games matching the current position, set 'adjust filter' in the <a Tree>Tree window</a>.
+For more info about Searches and Filters, <a Searches>see here</a> or below.
 </i></p>
 <h3>Sorting the Game List</h3>
 <p>The database can be <b>permanently sorted</b> by clicking column titles.
@@ -6912,6 +6912,8 @@ set helpText(Board) {<h1>Board Options</h1>
 </p>
 <h3><name Textures>Custom Pieces</name></h3>
 <p>
+<i>The Merida1 pieces now have high-quality larger sizes.</i>
+</p><p>
 Place base 64 encoded piece sets in the directory <b>$HOME/.scidvspc/pieces</b>, and they will be added to the 
 Board Options window. There is a limit of 12 piece sets only.
 Some extra sets (including blindfold) can be got 
@@ -6931,5 +6933,5 @@ For instructions on making Scid piece sets, download
 </i></p>
 
 </p>
-<p><footer>Updated:</b> - Scid vs. PC 4.11 August 2013</footer></p>
+<p><footer>Updated:</b> - Scid vs. PC 4.16 December 2015</footer></p>
 }
