@@ -70,7 +70,7 @@ int TkDND_RegisterDragDropObjCmd(ClientData clientData, Tcl_Interp *interp,
 
   pDropTarget = new TkDND_DropTarget(interp, tkwin);
   if (pDropTarget == NULL) {
-    Tcl_SetResult(interp, "out of memory", TCL_STATIC);
+    Tcl_SetResult(interp, (char *) "out of memory", TCL_STATIC);
     return TCL_ERROR;
   }
   hret = RegisterDragDrop(Tk_GetHWND(Tk_WindowId(tkwin)), pDropTarget);
@@ -136,14 +136,14 @@ int TkDND_DoDragDropObjCmd(ClientData clientData, Tcl_Interp *interp,
   Tcl_UniChar      *unicode, *ptr_u;
   FORMATETC        *m_pfmtetc;
   STGMEDIUM        *m_pstgmed;
-  static char *DropTypes[] = {
+  static const char *DropTypes[] = {
     "CF_UNICODETEXT", "CF_TEXT", "CF_HDROP",
     (char *) NULL
   };
   enum droptypes {
     TYPE_CF_UNICODETEXT, TYPE_CF_TEXT, TYPE_CF_HDROP
   };
-  static char *DropActions[] = {
+  static const char *DropActions[] = {
     "copy", "move", "link", "ask",  "private", "refuse_drop",
     "default",
     (char *) NULL
@@ -163,7 +163,7 @@ int TkDND_DoDragDropObjCmd(ClientData clientData, Tcl_Interp *interp,
   status = Tcl_ListObjGetElements(interp, objv[2], &elem_nu, &elem);
   if (status != TCL_OK) return status;
   for (i = 0; i < elem_nu; i++) {
-    status = Tcl_GetIndexFromObj(interp, elem[i], (const char **)DropActions,
+    status = Tcl_GetIndexFromObj(interp, elem[i], DropActions,
                                  "dropactions", 0, &index);
     if (status != TCL_OK) return status;
     switch ((enum dropactions) index) {
@@ -193,7 +193,7 @@ int TkDND_DoDragDropObjCmd(ClientData clientData, Tcl_Interp *interp,
     m_pfmtetc[i].tymed          = TYMED_HGLOBAL;
     m_pstgmed[i].tymed          = TYMED_HGLOBAL;
     m_pstgmed[i].pUnkForRelease = 0;
-    status = Tcl_GetIndexFromObj(interp, elem[i], (const char **) DropTypes,
+    status = Tcl_GetIndexFromObj(interp, elem[i], DropTypes,
                                  "dropactions", 0, &index);
     if (status == TCL_OK) {
       switch ((enum droptypes) index) {
@@ -244,7 +244,7 @@ int TkDND_DoDragDropObjCmd(ClientData clientData, Tcl_Interp *interp,
 #endif /* UNICODE */
             CurPosition = (TCHAR *) (LPBYTE(pDropFiles) + sizeof(DROPFILES)); 
             for (i = 0; i < file_nu; i++) {
-              char *native_name;
+              const char *native_name;
               TCHAR *pszFileName;
               TCHAR api_name[MAX_PATH+2];
               // Convert File Name to native paths...
@@ -306,14 +306,14 @@ int TkDND_DoDragDropObjCmd(ClientData clientData, Tcl_Interp *interp,
   
   pDataObject = new TkDND_DataObject(m_pfmtetc, m_pstgmed, elem_nu);
   if (pDataObject == NULL) {
-    Tcl_SetResult(interp, "unable to create OLE Data object", TCL_STATIC);
+    Tcl_SetResult(interp, (char *) "unable to create OLE Data object", TCL_STATIC);
     return TCL_ERROR;
   }
   
   pDropSource = new TkDND_DropSource();
   if (pDropSource == NULL) {
     pDataObject->Release();
-    Tcl_SetResult(interp, "unable to create OLE Drop Source object",TCL_STATIC);
+    Tcl_SetResult(interp, (char *) "unable to create OLE Drop Source object",TCL_STATIC);
     return TCL_ERROR;
   }
 
@@ -328,12 +328,12 @@ int TkDND_DoDragDropObjCmd(ClientData clientData, Tcl_Interp *interp,
   delete[] m_pstgmed;
   if (dwResult == DRAGDROP_S_DROP) {
     switch (dwEffect) {
-      case DROPEFFECT_COPY: Tcl_SetResult(interp, "copy", TCL_STATIC); break;
-      case DROPEFFECT_MOVE: Tcl_SetResult(interp, "move", TCL_STATIC); break;
-      case DROPEFFECT_LINK: Tcl_SetResult(interp, "link", TCL_STATIC); break;
+      case DROPEFFECT_COPY: Tcl_SetResult(interp, (char *) "copy", TCL_STATIC); break;
+      case DROPEFFECT_MOVE: Tcl_SetResult(interp, (char *) "move", TCL_STATIC); break;
+      case DROPEFFECT_LINK: Tcl_SetResult(interp, (char *) "link", TCL_STATIC); break;
     }
   } else {
-    Tcl_SetResult(interp, "refuse_drop", TCL_STATIC);
+    Tcl_SetResult(interp, (char *) "refuse_drop", TCL_STATIC);
   }
   return TCL_OK;
 error:
@@ -388,7 +388,7 @@ int DLLEXPORT Tkdnd_Init(Tcl_Interp *interp) {
    */
   Tcl_GetVersion(&major, &minor, &patchlevel, NULL);
   if ((major == 8) && (minor == 3) && (patchlevel < 3)) {
-    Tcl_SetResult(interp, "tkdnd requires Tk 8.3.3 or greater", TCL_STATIC);
+    Tcl_SetResult(interp, (char *) "tkdnd requires Tk 8.3.3 or greater", TCL_STATIC);
     return TCL_ERROR;
   }
 

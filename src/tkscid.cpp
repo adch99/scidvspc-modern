@@ -7874,7 +7874,7 @@ sc_game_merge (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     }
     dstr->Append ("\n", ie->GetEventName (base->nb));
     dstr->Append (", ", ie->GetYear());
-    db->game->SetMoveComment ((char *) dstr->Data());
+    db->game->SetMoveComment (dstr->Data());
     delete dstr;
 
     merge->MoveToPly (mergePly);
@@ -8483,11 +8483,11 @@ sc_savegame (Tcl_Interp * ti, Game * game, gameNumberT gnum, scidBaseT * base)
 
     // Now we add the names to the NameBase
     // If replacing, we decrement the frequency of the old names.
-    char * s;
+    const char * s;
     idNumberT id = 0;
 
     // WHITE:
-    s = game->GetWhiteStr();  if (!s) { s = (char *) "?"; }
+    s = game->GetWhiteStr();  if (!s) { s = "?"; }
     if (base->nb->AddName (NAME_PLAYER, s, &id) == ERROR_NameBaseFull) {
         snprintf (temp, sizeof(temp), "Player Name limit of %u exceeded\n", NAME_MAX_ID [NAME_PLAYER]);
         Tcl_AppendResult (ti, temp, NULL);
@@ -8497,7 +8497,7 @@ sc_savegame (Tcl_Interp * ti, Game * game, gameNumberT gnum, scidBaseT * base)
     iE.SetWhite (id);
 
     // BLACK:
-    s = game->GetBlackStr();  if (!s) { s = (char *) "?"; }
+    s = game->GetBlackStr();  if (!s) { s = "?"; }
     if (base->nb->AddName (NAME_PLAYER, s, &id) == ERROR_NameBaseFull) {
         snprintf (temp, sizeof(temp), "Player Name limit of %u exceeded\n", NAME_MAX_ID [NAME_PLAYER]);
         Tcl_AppendResult (ti, temp, NULL);
@@ -8507,7 +8507,7 @@ sc_savegame (Tcl_Interp * ti, Game * game, gameNumberT gnum, scidBaseT * base)
     iE.SetBlack (id);
 
     // EVENT:
-    s = game->GetEventStr();  if (!s) { s = (char *) "?"; }
+    s = game->GetEventStr();  if (!s) { s = "?"; }
     if (base->nb->AddName (NAME_EVENT, s, &id) == ERROR_NameBaseFull) {
         snprintf (temp, sizeof(temp), "Event Name limit of %u exceeded\n", NAME_MAX_ID [NAME_EVENT]);
         Tcl_AppendResult (ti, temp, NULL);
@@ -8517,7 +8517,7 @@ sc_savegame (Tcl_Interp * ti, Game * game, gameNumberT gnum, scidBaseT * base)
     iE.SetEvent (id);
 
     // SITE:
-    s = game->GetSiteStr();  if (!s) { s = (char *) "?"; }
+    s = game->GetSiteStr();  if (!s) { s = "?"; }
     if (base->nb->AddName (NAME_SITE, s, &id) == ERROR_NameBaseFull) {
         snprintf (temp, sizeof(temp), "Site Name limit of %u exceeded\n", NAME_MAX_ID [NAME_SITE]);
         Tcl_AppendResult (ti, temp, NULL);
@@ -8527,7 +8527,7 @@ sc_savegame (Tcl_Interp * ti, Game * game, gameNumberT gnum, scidBaseT * base)
     iE.SetSite (id);
 
     // ROUND:
-    s = game->GetRoundStr();  if (!s) { s = (char *) "?"; }
+    s = game->GetRoundStr();  if (!s) { s = "?"; }
     if (base->nb->AddName (NAME_ROUND, s, &id) == ERROR_NameBaseFull) {
         snprintf (temp, sizeof(temp), "Round Name limit of %u exceeded\n", NAME_MAX_ID [NAME_ROUND]);
         Tcl_AppendResult (ti, temp, NULL);
@@ -8634,7 +8634,7 @@ sc_savegame (Tcl_Interp * ti, scidBaseT * sourceBase, ByteBuffer * bbuf, IndexEn
     idNumberT id = 0;
 
     // WHITE:
-	s = srcIe->GetWhiteName( sourceBase->nb);  if (!s) { s = (char *) "?"; }
+	s = srcIe->GetWhiteName( sourceBase->nb);  if (!s) { s = "?"; }
     if (base->nb->AddName (NAME_PLAYER, s, &id) == ERROR_NameBaseFull) {
         Tcl_AppendResult (ti, "Too many player names.", NULL);
         return TCL_ERROR;
@@ -8643,7 +8643,7 @@ sc_savegame (Tcl_Interp * ti, scidBaseT * sourceBase, ByteBuffer * bbuf, IndexEn
     iE.SetWhite (id);
 
     // BLACK:
-    s = srcIe->GetBlackName( sourceBase->nb);  if (!s) { s = (char *) "?"; }
+    s = srcIe->GetBlackName( sourceBase->nb);  if (!s) { s = "?"; }
     if (base->nb->AddName (NAME_PLAYER, s, &id) == ERROR_NameBaseFull) {
         Tcl_AppendResult (ti, "Too many player names.", NULL);
         return TCL_ERROR;
@@ -8652,7 +8652,7 @@ sc_savegame (Tcl_Interp * ti, scidBaseT * sourceBase, ByteBuffer * bbuf, IndexEn
     iE.SetBlack (id);
 
     // EVENT:
-    s = srcIe->GetEventName( sourceBase->nb);  if (!s) { s = (char *) "?"; }
+    s = srcIe->GetEventName( sourceBase->nb);  if (!s) { s = "?"; }
     if (base->nb->AddName (NAME_EVENT, s, &id) == ERROR_NameBaseFull) {
         Tcl_AppendResult (ti, "Too many event names.", NULL);
         return TCL_ERROR;
@@ -8661,7 +8661,7 @@ sc_savegame (Tcl_Interp * ti, scidBaseT * sourceBase, ByteBuffer * bbuf, IndexEn
     iE.SetEvent (id);
 
     // SITE:
-    s = srcIe->GetSiteName( sourceBase->nb);  if (!s) { s = (char *) "?"; }
+    s = srcIe->GetSiteName( sourceBase->nb);  if (!s) { s = "?"; }
     if (base->nb->AddName (NAME_SITE, s, &id) == ERROR_NameBaseFull) {
         Tcl_AppendResult (ti, "Too many site names.", NULL);
         return TCL_ERROR;
@@ -8670,7 +8670,7 @@ sc_savegame (Tcl_Interp * ti, scidBaseT * sourceBase, ByteBuffer * bbuf, IndexEn
     iE.SetSite (id);
 
     // ROUND:
-    s = srcIe->GetRoundName( sourceBase->nb);  if (!s) { s = (char *) "?"; }
+    s = srcIe->GetRoundName( sourceBase->nb);  if (!s) { s = "?"; }
     if (base->nb->AddName (NAME_ROUND, s, &id) == ERROR_NameBaseFull) {
         Tcl_AppendResult (ti, "Too many round names.", NULL);
         return TCL_ERROR;
@@ -9197,17 +9197,17 @@ sc_game_tags_get (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             g->LoadStandardTags (ie, db->nb);
         }
     }
-    char * s;
+    const char * s;
     int index = strExactMatch (tagName, options);
 
     switch (index) {
     case T_Event:
-        s = g->GetEventStr();  if (!s) { s = (char *) "?"; }
+        s = g->GetEventStr();  if (!s) { s = "?"; }
         Tcl_AppendResult (ti, s, NULL);
         break;
 
     case T_Site:
-        s = g->GetSiteStr();  if (!s) { s = (char *) "?"; }
+        s = g->GetSiteStr();  if (!s) { s = "?"; }
         Tcl_AppendResult (ti, s, NULL);
         break;
 
@@ -9229,17 +9229,17 @@ sc_game_tags_get (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         return setUintWidthResult (ti, date_GetDay (g->GetDate()), 2);
 
     case T_Round:
-        s = g->GetRoundStr();  if (!s) { s = (char *) "?"; }
+        s = g->GetRoundStr();  if (!s) { s = "?"; }
         Tcl_AppendResult (ti, s, NULL);
         break;
 
     case T_White:
-        s = g->GetWhiteStr();  if (!s) { s = (char *) "?"; }
+        s = g->GetWhiteStr();  if (!s) { s = "?"; }
         Tcl_AppendResult (ti, s, NULL);
         break;
 
     case T_Black:
-        s = g->GetBlackStr();  if (!s) { s = (char *) "?"; }
+        s = g->GetBlackStr();  if (!s) { s = "?"; }
         Tcl_AppendResult (ti, s, NULL);
         break;
 

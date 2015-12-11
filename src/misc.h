@@ -254,7 +254,7 @@ errorT  removeFile (const char * fname, const char * suffix);
 errorT  createFile (const char * fname, const char * suffix);
 
 #ifdef WINCE
-errorT  writeString (/*FILE * */Tcl_Channel fp, char * str, uint length);
+errorT  writeString (/*FILE * */Tcl_Channel fp, const char * str, uint length);
 errorT  readString  (/*FILE * */Tcl_Channel fp, char * str, uint length);
 
 
@@ -415,7 +415,7 @@ readCompactUint (/*FILE * */Tcl_Channel fp)
 }
 
 #else
-errorT  writeString (FILE * fp, char * str, uint length);
+errorT  writeString (FILE * fp, const char * str, uint length);
 errorT  readString  (FILE * fp, char * str, uint length);
 
 

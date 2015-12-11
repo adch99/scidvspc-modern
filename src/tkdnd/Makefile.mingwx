@@ -8,19 +8,18 @@ endif
 TCL_VERSION=85
 
 ifeq ($(WIN_TARGET),win64)
-  MINGW_DIR=/opt/cross_win64
-  TCL_DIR=/opt/cross_tcl64
-  MINGW_TARGET=x86_64-w64-mingw32
+TCL_DIR=/opt/cross_tcl64
+MINGW_TARGET=x86_64-w64-mingw32
 else
-  MINGW_DIR=/usr/local/cross-win32
-  TCL_DIR=/usr/local/cross-tcl
-  MINGW_TARGET=i686-w64-mingw32
+TCL_DIR=/usr/local/cross-tcl
+#MINGW_TARGET=i686-pc-mingw32
+MINGW_TARGET=i686-w64-mingw32
 endif
 
 ### Compiler and linker
 CXX=$(MINGW_TARGET)-g++
 CC=$(MINGW_TARGET)-gcc
-LINK=$(MINGW_TARGET)-g++
+LINK=$(CXX)
 
 .PHONY : clean
 .PRECIOUS:

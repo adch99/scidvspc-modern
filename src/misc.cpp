@@ -1412,7 +1412,7 @@ fileExists (const char * name, const char * suffix)
 //      Lengths of zero bytes ARE allowed.
 #ifdef WINCE
 errorT
-writeString (/*FILE * */Tcl_Channel fp, char * str, uint length)
+writeString (/*FILE * */Tcl_Channel fp, const char * str, uint length)
 {
     ASSERT (fp != NULL  &&  str != NULL);
     int result = 0;
@@ -1441,7 +1441,7 @@ readString (/*FILE * */ Tcl_Channel fp, char * str, uint length)
 #else
 
 errorT
-writeString (FILE * fp, char * str, uint length)
+writeString (FILE * fp, const char * str, uint length)
 {
     ASSERT (fp != NULL  &&  str != NULL);
     int result = 0;

@@ -3708,8 +3708,8 @@ extern "C" int FReadTableToMemory
 			printf ("*** Seek in %s failed\n", pszName);
 			exit (1);
 			}
-		cb = ftell (fp);
-		if ((long)-1 == cb)
+		cb = (INDEX) ftell (fp);
+		if (cb == (INDEX)-1)
 			{
 			printf ("*** Cannot find length of %s\n", pszName);
 			exit (1);

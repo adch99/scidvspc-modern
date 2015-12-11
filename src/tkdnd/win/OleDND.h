@@ -114,34 +114,34 @@ extern "C" {
 #define STRING_(s) s,TEXT(#s)
 typedef struct {
   UINT   cfFormat;
-  TCHAR *name;
+  const TCHAR *name;
 } CLIP_FORMAT_STRING_TABLE;
 
 static CLIP_FORMAT_STRING_TABLE ClipboardFormatBook[] = {
-  STRING_(CF_TEXT),
-  STRING_(CF_BITMAP),
-  STRING_(CF_METAFILEPICT),
-  STRING_(CF_SYLK),
-  STRING_(CF_DIF),
-  STRING_(CF_TIFF),
-  STRING_(CF_OEMTEXT),
-  STRING_(CF_DIB),
-  STRING_(CF_PALETTE),
-  STRING_(CF_PENDATA),
-  STRING_(CF_RIFF),
-  STRING_(CF_WAVE),
-  STRING_(CF_UNICODETEXT),
-  STRING_(CF_ENHMETAFILE),
-  STRING_(CF_HDROP),
-  STRING_(CF_LOCALE),
-  STRING_(CF_OWNERDISPLAY),
-  STRING_(CF_DSPTEXT),
-  STRING_(CF_DSPBITMAP),
-  STRING_(CF_DSPMETAFILEPICT),
-  STRING_(CF_DSPENHMETAFILE),
-  STRING_(CF_GDIOBJFIRST),
-  STRING_(CF_PRIVATEFIRST),
-  0, 0
+  { STRING_(CF_TEXT) },
+  { STRING_(CF_BITMAP) },
+  { STRING_(CF_METAFILEPICT) },
+  { STRING_(CF_SYLK) },
+  { STRING_(CF_DIF) },
+  { STRING_(CF_TIFF) },
+  { STRING_(CF_OEMTEXT) },
+  { STRING_(CF_DIB) },
+  { STRING_(CF_PALETTE) },
+  { STRING_(CF_PENDATA) },
+  { STRING_(CF_RIFF) },
+  { STRING_(CF_WAVE) },
+  { STRING_(CF_UNICODETEXT) },
+  { STRING_(CF_ENHMETAFILE) },
+  { STRING_(CF_HDROP) },
+  { STRING_(CF_LOCALE) },
+  { STRING_(CF_OWNERDISPLAY) },
+  { STRING_(CF_DSPTEXT) },
+  { STRING_(CF_DSPBITMAP) },
+  { STRING_(CF_DSPMETAFILEPICT) },
+  { STRING_(CF_DSPENHMETAFILE) },
+  { STRING_(CF_GDIOBJFIRST) },
+  { STRING_(CF_PRIVATEFIRST) },
+  { 0, 0 }
 }; /* ClipboardFormatBook */
 
 /*****************************************************************************
@@ -401,7 +401,7 @@ public:
       return currentFormat;
     }; /* GetCurrentFormat */
 
-    TCHAR *GetCurrentFormatName(void) {
+    const TCHAR *GetCurrentFormatName(void) {
       for (int i = 0; ClipboardFormatBook[i].name != 0; i++) {
         if (ClipboardFormatBook[i].cfFormat == currentFormat)
                      return ClipboardFormatBook[i].name;
@@ -529,7 +529,7 @@ class TkDND_DropTarget: public IDropTarget {
               *pressedkeys = Tcl_NewListObj(0, NULL), *result,
               *codelist    = Tcl_NewListObj(0, NULL);
       int i, status, index;
-      static char *DropActions[] = {
+      static const char *DropActions[] = {
         "copy", "move", "link", "ask",  "private", "refuse_drop",
         "default", 
         (char *) NULL
@@ -593,7 +593,7 @@ class TkDND_DropTarget: public IDropTarget {
       if (status == TCL_OK) {
         /* Get the returned action... */
         result = Tcl_GetObjResult(interp); Tcl_IncrRefCount(result);
-        status = Tcl_GetIndexFromObj(interp, result, (const char **)DropActions,
+        status = Tcl_GetIndexFromObj(interp, result, DropActions,
                                      "dropactions", 0, &index);
         Tcl_DecrRefCount(result);
         if (status != TCL_OK) index = ActionDefault;
@@ -613,7 +613,7 @@ class TkDND_DropTarget: public IDropTarget {
     STDMETHODIMP DragOver(DWORD grfKeyState, POINTL pt, DWORD *pdwEffect) {
       Tcl_Obj *objv[5], *pressedkeys = Tcl_NewListObj(0, NULL), *result;
       int i, status, index;
-      static char *DropActions[] = {
+      static const char *DropActions[] = {
         "copy", "move", "link", "ask",  "private", "refuse_drop",
         "default",
         (char *) NULL
@@ -650,7 +650,7 @@ class TkDND_DropTarget: public IDropTarget {
       if (status == TCL_OK) {
         /* Get the returned action... */
         result = Tcl_GetObjResult(interp); Tcl_IncrRefCount(result);
-        status = Tcl_GetIndexFromObj(interp, result, (const char **)DropActions,
+        status = Tcl_GetIndexFromObj(interp, result, DropActions,
                                      "dropactions", 0, &index);
         Tcl_DecrRefCount(result);
         if (status != TCL_OK) index = ActionDefault;
@@ -681,7 +681,7 @@ class TkDND_DropTarget: public IDropTarget {
       Tcl_Obj *objv[7], *result, **typeObj, *data = NULL, *type,
               *pressedkeys = NULL;
       int i, type_index, status, index, typeObjc;
-      static char *DropTypes[] = {
+      static const char *DropTypes[] = {
         "CF_UNICODETEXT", "CF_TEXT", "CF_HDROP",
         "FileGroupDescriptorW", "FileGroupDescriptor",
         (char *) NULL
@@ -690,7 +690,7 @@ class TkDND_DropTarget: public IDropTarget {
         TYPE_CF_UNICODETEXT, TYPE_CF_TEXT, TYPE_CF_HDROP,
         TYPE_FILEGROUPDESCRIPTORW, TYPE_FILEGROUPDESCRIPTOR
       };
-      static char *DropActions[] = {
+      static const char *DropActions[] = {
         "copy", "move", "link", "ask",  "private", "refuse_drop",
         "default",
         (char *) NULL
@@ -710,7 +710,7 @@ class TkDND_DropTarget: public IDropTarget {
       // Try to get the data.
       for (type_index = 0; type_index < typeObjc; ++type_index) {
         status = Tcl_GetIndexFromObj(interp, typeObj[type_index],
-                             (const char **)DropTypes, "droptypes", 0, &index);
+                             DropTypes, "droptypes", 0, &index);
         if (status == TCL_OK) {
           switch ((enum droptypes) index) {
             case TYPE_CF_UNICODETEXT:
@@ -783,7 +783,7 @@ class TkDND_DropTarget: public IDropTarget {
       if (status == TCL_OK) {
         /* Get the returned action... */
         result = Tcl_GetObjResult(interp); Tcl_IncrRefCount(result);
-        status = Tcl_GetIndexFromObj(interp, result, (const char **)DropActions,
+        status = Tcl_GetIndexFromObj(interp, result, DropActions,
                                      "dropactions", 0, &index);
         Tcl_DecrRefCount(result);
         if (status != TCL_OK) index = ActionDefault;
