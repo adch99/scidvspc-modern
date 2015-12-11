@@ -699,7 +699,7 @@ proc ::windows::gamelist::Popup {w x y X Y} {
 
     if {$menutype == "short"} {
     $menu add command -label $::tr(GlistRemoveThisGameFromFilter) -command ::windows::gamelist::Remove
-    $menu add command -label $::tr(GlistDeleteField) -command "$w.c.delete invoke"
+    $menu add command -label $::tr(GlistDeleteField) -command "$w.b.delete invoke"
     $menu add cascade -label $::tr(Flag)      -menu $menu.flags
     $menu add command -label $::tr(SetFilter) -command "$w.b.select invoke"
     $menu add separator
