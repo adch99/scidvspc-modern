@@ -401,8 +401,14 @@ OpLine::PrintSummary (DString * dstr, uint format, bool fullDate, bool nmoves)
     const char * s = White;
     while (*s != 0  &&  *s != ',') {
         if (format == OPTABLE_LaTeX) {
-            if (*s == '_'  ||  *s == '$'  || *s == '%') {
+            switch (*s) {
+            case '_':
+            case '$':
+            case '%':
+            case '&':
+            case '#':
                 dstr->AddChar ('\\');
+                break;
             }
         }
         dstr->AddChar (*s);
@@ -443,7 +449,27 @@ OpLine::PrintSummary (DString * dstr, uint format, bool fullDate, bool nmoves)
     }
     dstr->Append (postName);
     if (BlackElo > 0) { dstr->Append (preElo, BlackElo, postElo); }
-    dstr->Append (", ", Site, " ");
+    
+    // Add Site to Note with correct escaping for latex
+    dstr->Append(", ");
+    s = Site;
+    while (*s != 0) {
+        if (format == OPTABLE_LaTeX) {
+            switch (*s) {
+            case '_':
+            case '$':
+            case '%':
+            case '&':
+            case '#':
+                dstr->AddChar ('\\');
+                break;
+            }
+        }
+        dstr->AddChar (*s);
+        s++;
+    }
+    dstr->Append (" ");
+    
     if (fullDate) {
         char dateStr [16];
         date_DecodeToString (Date, dateStr);

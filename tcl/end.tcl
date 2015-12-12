@@ -194,37 +194,29 @@ proc updateMergeGame {args} {
   $w.f.text configure -state disabled
 }
 
-# setExportText:
-#   Allows the user to modify the text printed at the start and end of a
-#   file for a particular export format
-#
-proc setExportText {exportType} {
-  global exportStartFile exportEndFile
+#   Set Export options for PGN, HTML and LaTeX laugh
 
-  switch -- $exportType {
-    "PGN" {
-      set title "Set PGN file export text"
-    }
-    "HTML" {
-      set title "Set HTML file export text"
-    }
-    "Latex" {
-      set title "Set LaTeX file export text"
-    } 
-    default {
-      return
-    }
-  }
+proc setExportText {exportType} {
+  global exportStartFile exportEndFile latexRendering
 
   set w .setExportText$exportType
-  if {[winfo exists $w]} { return }
+
+  if {[winfo exists $w]} {
+    raiseWin $w
+    return
+  }
+
   toplevel $w
-  wm title $w "$title"
+  wm withdraw $w
+  wm title $w "Set $exportType file export text"
+  if {$exportType == "Latex"} {
+      bind $w <F1> {helpWindow LaTeX}
+  }
 
   frame $w.buttons
   pack $w.buttons -side bottom -fill x -anchor e
 
-  set pane [::utils::pane::Create $w.pane start end 500 400]
+  set pane [::utils::pane::Create $w.pane start end 500 400 0.7]
   ::utils::pane::SetRange $w.pane 0.3 0.7
   pack $pane -side top -expand true -fill both
   foreach f [list $pane.start $pane.end] type {start end} {
@@ -241,27 +233,78 @@ proc setExportText {exportType} {
     grid $f.xbar -row 2 -column 0 -sticky nesw
     grid rowconfig $f 1 -weight 1 -minsize 0
     grid columnconfig $f 0 -weight 1 -minsize 0
-  }
+  } 
 
   $pane.start.text insert end $exportStartFile($exportType)
   $pane.end.text insert end $exportEndFile($exportType)
+  
+  # Additional Latex options
+  if {$exportType == "Latex"} {
+    frame $w.latexlead -width 500 -height 100
+    pack $w.latexlead -side top -pady 10
+    label $w.latexlead.descr -font font_Bold -text "LaTeX System Options"
+    grid $w.latexlead.descr -row 0 -column 0 -sticky w
+    set panelatex [::utils::pane::Create $w.panelatex rendering viewing 500 200]        
+    pack $panelatex -side top -expand true -fill both     
+    foreach f [list $panelatex.rendering $panelatex.viewing] type {rendering viewing} {
+      label $f.title -font font_Bold -text "Command for $type $exportType file:"
+      text $f.text -wrap none  \
+          -yscroll "$f.ybar set" -xscroll "$f.xbar set"
+      scrollbar $f.ybar -orient vertical -command "$f.text yview"
+      scrollbar $f.xbar -orient horizontal -command "$f.text xview"
+      bind $f.text <FocusIn> {%W configure -background lightYellow}
+      bind $f.text <FocusOut> {%W configure -background white}
+      grid $f.title -row 0 -column 0 -sticky w
+      grid $f.text -row 1 -column 0 -sticky nesw
+      grid $f.ybar -row 1 -column 1 -sticky nesw
+      grid $f.xbar -row 2 -column 0 -sticky nesw
+      grid rowconfig $f 1 -weight 1 -minsize 0
+      grid columnconfig $f 0 -weight 1 -minsize 0
+    }  
+    $panelatex.rendering.text insert end $latexRendering(engine)
+    $panelatex.viewing.text insert end $latexRendering(viewer)
+  }
 
-  button $w.buttons.default -text "Reset to Default" -command "
-  $pane.start.text delete 1.0 end
-  $pane.start.text insert end \$default_exportStartFile($exportType)
-  $pane.end.text delete 1.0 end
-  $pane.end.text insert end \$default_exportEndFile($exportType)
-  "
-  dialogbutton $w.buttons.ok -text "OK" -command "
-  set exportStartFile($exportType) \[$pane.start.text get 1.0 end-1c\]
-  set exportEndFile($exportType) \[$pane.end.text get 1.0 end-1c\]
-  focus .main
-  destroy $w
-  "
+  if {$exportType == "Latex"} {
+    button $w.buttons.default -text "Reset to Default" -command "
+    $pane.start.text delete 1.0 end
+    $pane.start.text insert end \$default_exportStartFile($exportType)
+    $pane.end.text delete 1.0 end
+    $pane.end.text insert end \$default_exportEndFile($exportType)
+    $panelatex.rendering.text delete 1.0 end
+    $panelatex.rendering.text insert end \$default_latexRendering(engine)    
+    $panelatex.viewing.text delete 1.0 end
+    $panelatex.viewing.text insert end \$default_latexRendering(viewer)    
+    "
+    dialogbutton $w.buttons.ok -text "OK" -command "
+    set exportStartFile($exportType) \[$pane.start.text get 1.0 end-1c\]
+    set exportEndFile($exportType) \[$pane.end.text get 1.0 end-1c\]
+    set latexRendering(engine) \[$panelatex.rendering.text get 1.0 end-1c\]
+    set latexRendering(viewer) \[$panelatex.viewing.text get 1.0 end-1c\]
+    focus .main
+    destroy $w
+    "        
+  } else {
+    button $w.buttons.default -text "Reset to Default" -command "
+    $pane.start.text delete 1.0 end
+    $pane.start.text insert end \$default_exportStartFile($exportType)
+    $pane.end.text delete 1.0 end
+    $pane.end.text insert end \$default_exportEndFile($exportType)
+    "
+    dialogbutton $w.buttons.ok -text "OK" -command "
+    set exportStartFile($exportType) \[$pane.start.text get 1.0 end-1c\]
+    set exportEndFile($exportType) \[$pane.end.text get 1.0 end-1c\]
+    focus .main
+    destroy $w
+    "
+  }
+
   dialogbutton $w.buttons.cancel -text $::tr(Cancel) -command "focus .main ; destroy $w"
   pack $w.buttons.default -side left -padx 5 -pady 2
   pack $w.buttons.cancel $w.buttons.ok -side right -padx 5 -pady 2
-  focus $pane.start.text
+
+  placeWinCenter $w 
+  wm deiconify $w
 }
 
 image create photo htmldiag0 -data {

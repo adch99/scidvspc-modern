@@ -933,6 +933,10 @@ $m add command -label OptionsSave -command {
       puts $optionF "set exportEndFile($type) [list $exportEndFile($type)]"
     }
     puts $optionF ""
+    foreach type {engine viewer} {
+      puts $optionF "set latexRendering($type) [list $latexRendering($type)]"
+    }
+    puts $optionF ""
     foreach i [lsort [array names informant]] {
       puts $optionF "set informant($i) [list $informant($i)]"
     }

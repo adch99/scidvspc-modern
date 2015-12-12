@@ -578,10 +578,8 @@ proc bh0 {w tag} {
   $w configure -cursor {}
 }
 
-# openURL:
-#    Sends a command to the user's web browser to view a webpage given
-#    its URL.
-#
+### Open a webpage in the user's (configured?) web browser
+
 proc openURL {url} {
   global windowsOS macOS
   busyCursor .
@@ -593,24 +591,30 @@ proc openURL {url} {
     } else {
       catch {exec start $url &}
     }
-    unbusyCursor .
-    return
-  }
-
-  if {$macOS} {
+  } elseif {$macOS} {
     if {[catch {exec /bin/sh -c "open -a Firefox $url"}]} {
       catch {exec /bin/sh -c "open -a Safari $url" &}
     }
-    unbusyCursor .
-    return
-  }
+  } else {
+    # The problem with the code commented out is it will leave two tabs  
+    # open as the first will start firefox but fail the tab because of
+    # the invalid switch and string. 
+    # then the second call will open a second tab in the already 
+    # running firefox. - R.A.
 
-  ### Linux and other OS need firefox
-
-  # First, try -remote mode
-  if {[catch {exec /bin/sh -c "firefox -remote 'openURL($url)'"}]} {
-    # Now try a new firefox process
-    catch {exec /bin/sh -c "firefox '$url'" &}
+    #if {[catch {exec /bin/sh -c "firefox -remote 'openURL($url)'"}]} {
+    #  # Now try a new firefox process
+    #  catch {exec /bin/sh -c "firefox '$url'" &}
+    #}
+    
+    # This implementation is more similar to other platforms
+    # This will work with other browsers if the user has set 
+    # them as their preferred and fall back to firefox if not
+      
+    if {[catch {exec /bin/sh -c "xdg-open '$url'" &}]} {
+	# Then a specific one if node preferred
+	catch {exec /bin/sh -c "firefox '$url'" &}
+    }
   }
   unbusyCursor .
 }

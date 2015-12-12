@@ -272,11 +272,8 @@ proc ::preport::makeReportWin {args} {
     pack $w.b -side bottom -fill x
     pack $w.scroll -side top -fill both -expand yes
     pack $w.b.close $w.b.find $w.b.update -side right -padx 2 -pady 2
-    if {$::windowsOS} {
-      pack $w.b.viewHTML -side left -padx 2 -pady 2
-    } else {
-      pack $w.b.previewLaTeX -side left -padx 2 -pady 2
-    }
+    pack $w.b.viewHTML -side left -padx 2 -pady 2
+    pack $w.b.previewLaTeX -side left -padx 2 -pady 2
     pack $w.b.opts -side left -padx 2 -pady 2
     ::preport::ConfigMenus
     placeWinCenter $w
@@ -382,52 +379,164 @@ proc ::preport::setOptions {} {
 
 # previewLaTeX:
 #   Saves the report to a temporary file, runs latex on it, then
-#   "dvips" to produce PostScript, and "ghostview" to display it.
+#   open a viewer to display it.
 
 proc ::preport::previewLaTeX {} {
   busyCursor .
   set tmpdir $::scidLogDir
-  set tmpfile "TempOpeningReport"
+  set tmpfile "TempPlayerReport"  
+  set texfile "$tmpfile.tex"
+  set dvifile "$tmpfile.dvi"
+  
   set fname [file join $tmpdir $tmpfile]
-  catch {exec /bin/sh -c "rm $fname.*" }
+  if ($::windowsOS) {
+    catch {exec $::env(ComSpec) /c "del $fname.*" }
+  } else {
+    catch {exec /bin/sh -c "rm $fname.*" }
+  }
+  set pdffile "$fname.pdf"
+  set latexLog "$fname.log"
+  
   if {[catch {set tempfile [open $fname.tex w]}]} {
     tk_messageBox -title "Scid: Error writing report" -type ok -icon warning \
-        -message "Unable to write the file: $fname.tex" -parent .oprepWin
+        -message "Unable to write the file: $fname.tex" -parent .preportWin
   }
+  
   # Add the "batchmode" command to the top of the file to prevent latex
   # pausing for input on errors:
+  # Leaving this for now, but probably no longer neccessary as the nonstopmode 
+  # switch does the same thing. But it doesn't hurt to have it in case
+  # end user changes switches or uses some form of latex that doesn't
+  # recognized that switch.  Most include latex, pdflatex, xelatex, lualatex   
   puts $tempfile "\\batchmode"
-  puts $tempfile [::preport::report latex 1]
+  
+  puts $tempfile [::preport::report latex 1]  
   close $tempfile
   
-  if {[catch {exec pdflatex --version} result] == 0} {
-    #cool we have pdflatex availabale
-    # pdflatex -interaction=nonstopmode %.tex
-    if {! [catch {exec /bin/sh -c "cd $tmpdir; pdflatex -interaction=nonstopmode '$tmpfile.tex'" >& /dev/null}]} {
-       if {[catch {exec /bin/sh -c "evince '$fname.pdf'" >& /dev/null &}]} {
-          tk_messageBox -title "Scid Error" -icon warning -type ok -parent .oprepWin \
-              -message "Unable to run \"evince\" to view the report."
-       }
-    }      
-  } else {
-    #no pdflatex so lets try the old way
-  if {! [catch {exec /bin/sh -c "cd $tmpdir; latex '$tmpfile.tex'" >& /dev/null}]} {
-    if {[catch {exec /bin/sh -c "cd $tmpdir; dvips '$tmpfile.dvi'" >& /dev/null}]} {
-      tk_messageBox -title "Scid Error" -icon warning -type ok -parent .oprepWin \
-          -message "Unable to run \"dvips\" to convert the report to PostScript."
+  # Initial Defaults in case they blanked preferences
+
+  set latexEngine "pdflatex -interaction=nonstopmode"  
+    
+  if {$::unixOS} {
+    if {[catch {exec xdg-mime query default application/pdf} result] == 0} {
+      # cool unix has a registered app for pdfs so lets use it 
+      set latexViewer "xdg-open"
     } else {
-      if {[catch {exec /bin/sh -c "evince '$fname.ps'" >& /dev/null &}]} {
-        tk_messageBox -title "Scid Error" -icon warning -type ok -parent .oprepWin \
-            -message "Unable to run \"xdvi\" to view the report."
+      # try and detect the destop to make at least best guess
+      if {[info exists ::env(XDG_CURRENT_DESKTOP)]} {
+        set unixDesktop = [string tolower $::env(XDG_CURRENT_DESKTOP)]
+      } else {
+        switch -regexp -matchvar denv -- $::env(XDG_DATA_DIRS) {
+          .*(gnome|xfce|kde).* { set unixDesktop $denv }
+          default { set unixDesktop "unknown" }
+        } 
+        switch $linuxDesktop {
+          "gnome" {set latexViewer "evince"}
+          "kde"   {set latexViewer "okular"}
+          "xfce"  {set latexViewer "evince"}
+          default {set latexViewer "xpdf"}
+        }
       }
     }
+  }
+   
+  if {$::windowsOS} {
+     # this will invoke the windows registered pdf handler
+     set latexViewer "start "
+  }
+  if {$::macOS} {
+     # this will invoke the OS / X registered pdf handler
+     # use open -a if you want to force to the built in preview
+     set latexViewer "open "
+  }
+    
+  # User Preference overrides  
+  if {$::latexRendering(engine) != ""} {
+    set latexEngine $::latexRendering(engine)
+  }
+  if {$::latexRendering(viewer) != ""} {
+    set latexViewer $::latexRendering(viewer)
+  }
+  
+  # Ok here we have latex engine but we want the actual app as well with out switches 
+  # So we can do an existance check or a version check if we want. The trick here because
+  # the app might have spaces in a path name to the app we want to search up to first 
+  # switch however switches in windows can be forward slashes
+  set latexEngineCmd [string trim $latexEngine]
+  if {$::windowsOS} {      
+    if {[string first " /" $latexEngineCmd] != -1} {
+        set latexEngineCmd [string range $latexEngineCmd 0 [expr {[string first " /" $latexEngineCmd] -1}]]
+    }
   } else {
-    tk_messageBox -title "Scid Error" -type ok -icon warning -parent .oprepWin \
-        -message "Error(s) running latex on the file: $fname.tex\n\nSee $fname.log for details."
-    # todo: $fname.log (TempOpeningReport.log) doesn't exist
+    if {[string first " -" $latexEngineCmd] != -1} {
+        set latexEngineCmd [string range $latexEngineCmd 0 [expr {[string first " -" $latexEngineCmd] -1}]]
+    }
   }
-  }
-  unbusyCursor .
+    
+  # TODO: Better translations for error dialogs ???
+  #
+  # exec seems very picky about using variables for the shell and shell switches 
+  # so for now just repeating this block of code for the windows differences - R.A.
+
+  if {$::windowsOS} {
+    if {[catch {exec $latexEngineCmd --version} result] == 0} {            
+      if {![catch {exec $::env(ComSpec) /c "cd $tmpdir & $latexEngine '$texfile'" >& $latexLog }]} {             
+        if {[catch {exec $::env(ComSpec) /c "$latexViewer $pdffile" >& $latexLog &}]} {
+            tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
+                -message "Unable to view the report.\n\nSee $fname.log for details."
+        }
+      } else {
+        tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
+            -message "Unable to generate the report.\n\nSee $fname.log for details."
+      }      
+    } else {
+      # Current engine not available so lets try the old way
+      if {![catch {exec $::env(ComSpec) /c "cd $tmpdir & latex -interaction=nonstopmode '$texfile'" >& $latexLog}]} {
+        if {![catch {exec $::env(ComSpec) /c "cd $tmpdir & dvipdfm $dvifile" >& $latexLog}]} {
+          if {[catch {exec $::env(ComSpec) /c "$latexViewer $pdffile" >& $latexLog &}]} {
+            tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
+                -message "Unable to view the report.\n\nSee $fname.log for details."
+          }
+        } else {          
+          tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
+              -message "Unable to convert the report to pdf.\n\nSee $fname.log for details."
+        } 
+      } else {
+        tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
+              -message "Unable to generate the report. \n\nSee $fname.log for details."      
+      } 
+    }
+  } else {
+    # Linux / OS X
+    if {[catch {exec $latexEngineCmd --version} result] == 0} {            
+      if {![catch {exec /bin/sh -c "cd $tmpdir; $latexEngine '$texfile'" >& $latexLog }]} {             
+        if {[catch {exec /bin/sh -c "$latexViewer $pdffile" >& $latexLog &}]} {
+            tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
+                -message "Unable to view the report.\n\nSee $fname.log for details."
+        }
+      } else {
+        tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
+            -message "Unable to generate the report.\n\nSee $fname.log for details."
+      }      
+    } else {
+      # No pdflatex available so lets try the old way
+      if {![catch {exec /bin/sh -c "cd $tmpdir; latex '$texfile'" >& $latexLog}]} {
+        if {![catch {exec /bin/sh -c "cd $tmpdir; dvipdfm $dvifile" >& $latexLog}]} {
+          if {[catch {exec /bin/sh -c "$latexViewer $pdffile" >& $latexLog &}]} {
+            tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
+                -message "Unable to view the report.\n\nSee $fname.log for details."
+          }
+        } else {          
+          tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
+              -message "Unable to convert the report to pdf.\n\nSee $fname.log for details."
+        } 
+      } else {
+        tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
+              -message "Unable to generate the report. \n\nSee $fname.log for details."      
+      } 
+    }     
+  }     
+  unbusyCursor .  
 }
 
 # previewHTML:
