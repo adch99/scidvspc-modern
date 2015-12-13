@@ -268,6 +268,7 @@ public:
     bool        IsKingInCheckDir (directionT dir);
     bool        IsKingInCheck (simpleMoveT * sm);
     bool        IsKingInMate ();
+    bool        IsStaleMate ();
     bool        IsLegal ();
 
     bool        IsPromoMove (squareT from, squareT to);

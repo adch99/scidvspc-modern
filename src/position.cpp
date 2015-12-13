@@ -1733,8 +1733,19 @@ Position::IsKingInMate (void)
     CalcPins ();
     MoveList mlist;
     GenCheckEvasions (&mlist, EMPTY, GEN_ALL_MOVES, &checkSquares);
-    if (mlist.Size() == 0) { return true; }
-    return false;
+    return (mlist.Size() == 0);
+}
+
+bool
+Position::IsStaleMate (void)
+{
+    SquareList checkSquares;
+    uint numChecks = CalcNumChecks (GetKingSquare(ToMove), &checkSquares);
+    if (numChecks > 0) { return false; }
+    CalcPins ();
+    MoveList mlist;
+    GenerateMoves (&mlist, EMPTY, GEN_ALL_MOVES, false);
+    return (mlist.Size() == 0);
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~

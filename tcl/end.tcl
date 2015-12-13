@@ -2009,7 +2009,8 @@ while {$argc > 0} {
             -fBrilliancy $sHeaderFlags(BrilliancyFlag) \
             -fBlunder $sHeaderFlags(BlunderFlag) \
             -fUser $sHeaderFlags(UserFlag) \
-            -pgn $sPgnlist -wtitles $wtitles -btitles $btitles
+            -pgn $sPgnlist -wtitles $wtitles -btitles $btitles \
+            -ignoreCase $sPgncase -gameend $sGameEnd \
             ::splash::add "   Header filter file $startbase correctly applied"
         }
       }

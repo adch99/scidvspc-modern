@@ -74,7 +74,7 @@ proc ::search::header::defaults {} {
   global sEco sEcoMin sEcoMax sHeaderFlags sGlMin sGlMax
   global sGnumMin sGnumMax
   global sResWin sResLoss sResDraw sResOther glstart
-  global sPgntext sTitles
+  global sPgntext sTitles sPgncase sGameEnd
 
   set sWhite "";  set sBlack ""
   set sEvent ""; set sSite "";  set sRound ""
@@ -89,6 +89,8 @@ proc ::search::header::defaults {} {
   set sResWin 1; set sResLoss 1; set sResDraw 1; set sResOther 1
   set sIgnoreCol No
   set sSideToMove wb
+  set sPgncase 0
+  set sGameEnd Any
   foreach flag  [ concat $::sHeaderFlagList $::sHeaderCustomFlagList ] { set sHeaderFlags($flag) both }
   foreach i [array names sPgntext] { set sPgntext($i) "" }
   foreach i $::sTitleList {
@@ -109,11 +111,10 @@ proc search::header {} {
   global sWhiteEloMin sWhiteEloMax sBlackEloMin sBlackEloMax
   global sEloDiffMin sEloDiffMax sSideToMove
   global sEco sEcoMin sEcoMax sHeaderFlags sGlMin sGlMax sTitleList sTitles
-  global sResWin sResLoss sResDraw sResOther glstart sPgntext
+  global sResWin sResLoss sResDraw sResOther glstart sPgncase sPgntext sGameEnd
 
   set w .sh
   if {[winfo exists $w]} {
-    wm deiconify $w
     raiseWin $w
     return
   }
@@ -314,6 +315,13 @@ proc search::header {} {
   pack $w.ends.label $w.ends.white $w.ends.sep1 \
       $w.ends.black $w.ends.sep2 $w.ends.both -side left
   pack $w.ends -side top -fill x
+
+  # Checkmate ?
+
+  label $w.ends.endslabel -textvar ::tr(GameEnd) -font $bold
+  ttk::combobox $w.ends.ending -font $regular -width 12 -values {Any Checkmate Stalemate} -textvariable sGameEnd
+  pack $w.ends.ending -side right
+  pack $w.ends.endslabel -side right -padx 3
 
   ## Game Number
 
@@ -517,7 +525,7 @@ proc search::header {} {
 	-fCustom5 $sHeaderFlags(CustomFlag5) \
 	-fCustom6 $sHeaderFlags(CustomFlag6) \
         -pgn $sPgnlist -wtitles $wtitles -btitles $btitles \
-        -ignoreCase $sPgncase \
+        -ignoreCase $sPgncase -gameend $sGameEnd \
         ]
 
     grab release .sh.b.stop
@@ -565,7 +573,7 @@ proc ::search::header::save {} {
   global sWhiteEloMin sWhiteEloMax sBlackEloMin sBlackEloMax
   global sEloDiffMin sEloDiffMax sGlMin sGlMax
   global sEco sEcoMin sEcoMax sHeaderFlags sSideToMove
-  global sResWin sResLoss sResDraw sResOther glstart sPgntext
+  global sResWin sResLoss sResDraw sResOther glstart sPgntext sPgncase sGameEnd
 
   set ftype { { "Scid SearchOptions files" {".sso"} } }
   set fName [tk_getSaveFile -initialdir $::initialDir(sso) -filetypes $ftype -title "Create a SearchOptions file" -parent .sh]
@@ -587,7 +595,7 @@ proc ::search::header::save {} {
   # First write the regular variables:
   foreach i {sWhite sBlack sEvent sSite sRound sDateMin sDateMax sResWin
     sResLoss sResDraw sResOther sWhiteEloMin sWhiteEloMax sBlackEloMin
-    sBlackEloMax sEcoMin sEcoMax sEloDiffMin sEloDiffMax
+    sBlackEloMax sEcoMin sEcoMax sEloDiffMin sEloDiffMax sPgncase sGameEnd
     sIgnoreCol sSideToMove sGlMin sGlMax ::search::filter::operation} {
     puts $searchF "set $i [list [set $i]]"
   }

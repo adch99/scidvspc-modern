@@ -16138,7 +16138,7 @@ parseTitles (const char * str)
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // sc_search_header:
-//    Searches by header information.
+//    Searches by header information. (also pgn text, and checkmate/stalemate)
 int
 sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
@@ -16227,6 +16227,7 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     int pgnTextCount = 0;
     char ** sPgnText = NULL;
     bool ignoreCase = 0;
+    char gameEnd = 'A'; // Any
 
     const char * options[] = {
         "white", "black", "event", "site", "round",
@@ -16238,7 +16239,7 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         "fMiddlegame", "fEndgame", "fNovelty", "fPawnStructure",
         "fTactics", "fKingside", "fQueenside", "fBrilliancy", "fBlunder",
         "fUser", "fCustom1" , "fCustom2" , "fCustom3" ,
-        "fCustom4" , "fCustom5" , "fCustom6" , "pgn", "ignoreCase", NULL
+        "fCustom4" , "fCustom5" , "fCustom6" , "pgn", "ignoreCase", "gameend", NULL
     };
     enum {
         OPT_WHITE, OPT_BLACK, OPT_EVENT, OPT_SITE, OPT_ROUND,
@@ -16250,7 +16251,7 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         OPT_FMIDDLEGAME, OPT_FENDGAME, OPT_FNOVELTY, OPT_FPAWNSTRUCT,
         OPT_FTACTICS, OPT_FKSIDE, OPT_FQSIDE, OPT_FBRILLIANCY, OPT_FBLUNDER,
         OPT_FUSER, OPT_FCUSTOM1, OPT_FCUSTOM2, OPT_FCUSTOM3,
-        OPT_FCUSTOM4,  OPT_FCUSTOM5, OPT_FCUSTOM6, OPT_PGN, OPT_PGNCASE
+        OPT_FCUSTOM4,  OPT_FCUSTOM5, OPT_FCUSTOM6, OPT_PGN, OPT_PGNCASE, OPT_GAMEEND
     };
 
     int arg = 2;
@@ -16397,11 +16398,16 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             ignoreCase = strGetBoolean (value);
             break;
 
+        case OPT_GAMEEND:
+            gameEnd = value[0];
+            break;
+
         default:
             return InvalidCommand (ti, "sc_search header", options);
         }
     }
     if (arg != argc) { return errorResult (ti, "Odd number of parameters."); }
+
     // Set up White name matches array:
     if (sWhite != NULL  &&  sWhite[0] != 0) {
         char * search = sWhite;
@@ -16413,11 +16419,7 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         }
         // Search players for match on White name:
         idNumberT numNames = db->nb->GetNumNames(NAME_PLAYER);
-#ifdef WINCE
-        mWhite =  (bool * )my_Tcl_Alloc(sizeof( bool [numNames]));
-#else
         mWhite = new bool [numNames];
-#endif
         for (idNumberT i=0; i < numNames; i++) {
             const char * name = db->nb->GetName (NAME_PLAYER, i);
             if (wildcard) {
@@ -16427,7 +16429,6 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             }
         }
     }
-#ifndef WINCE
     if (wTitles != NULL  &&  spellChecker[NAME_PLAYER] != NULL) {
         bool allTitlesOn = true;
         for (uint t=0; t < NUM_TITLES; t++) {
@@ -16437,11 +16438,7 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             idNumberT i;
             idNumberT numNames = db->nb->GetNumNames(NAME_PLAYER);
             if (mWhite == NULL) {
-#ifdef WINCE
-        mWhite =  (bool * )my_Tcl_Alloc(sizeof( bool [numNames]));
-#else
                 mWhite = new bool [numNames];
-#endif
                 for (i=0; i < numNames; i++) { mWhite[i] = true; }
             }
             for (i=0; i < numNames; i++) {
@@ -16466,7 +16463,6 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             }
         }
     }
-#endif
 
     // Set up Black name matches array:
     if (sBlack != NULL  &&  sBlack[0] != 0) {
@@ -16479,11 +16475,7 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         }
         // Search players for match on Black name:
         idNumberT numNames = db->nb->GetNumNames(NAME_PLAYER);
-#ifdef WINCE
-        mBlack =  (bool * )my_Tcl_Alloc(sizeof( bool [numNames]));
-#else
         mBlack = new bool [numNames];
-#endif
         for (idNumberT i=0; i < numNames; i++) {
             const char * name = db->nb->GetName (NAME_PLAYER, i);
             if (wildcard) {
@@ -16493,7 +16485,6 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             }
         }
     }
-#ifndef WINCE
     if (bTitles != NULL  &&  spellChecker[NAME_PLAYER] != NULL) {
         bool allTitlesOn = true;
         for (uint t=0; t < NUM_TITLES; t++) {
@@ -16503,11 +16494,7 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             idNumberT i;
             idNumberT numNames = db->nb->GetNumNames(NAME_PLAYER);
             if (mBlack == NULL) {
-#ifdef WINCE
-                mBlack =  (bool * )my_Tcl_Alloc(sizeof( bool [numNames]));
-#else
                 mBlack = new bool [numNames];
-#endif
                 for (i=0; i < numNames; i++) { mBlack[i] = true; }
             }
             for (i=0; i < numNames; i++) {
@@ -16532,7 +16519,6 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             }
         }
     }
-#endif
 
     // Set up Event name matches array:
     if (sEvent != NULL  &&  sEvent[0] != 0) {
@@ -16545,11 +16531,7 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         }
         // Search players for match on Event name:
         idNumberT numNames = db->nb->GetNumNames(NAME_EVENT);
-#ifdef WINCE
-                mEvent =  (bool * )my_Tcl_Alloc(sizeof( bool [numNames]));
-#else
         mEvent = new bool [numNames];
-#endif
         for (idNumberT i=0; i < numNames; i++) {
             const char * name = db->nb->GetName (NAME_EVENT, i);
             if (wildcard) {
@@ -16571,11 +16553,7 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         }
         // Search players for match on Site name:
         idNumberT numNames = db->nb->GetNumNames(NAME_SITE);
-#ifdef WINCE
-                mSite =  (bool * )my_Tcl_Alloc(sizeof( bool [numNames]));
-#else
         mSite = new bool [numNames];
-#endif
         for (idNumberT i=0; i < numNames; i++) {
             const char * name = db->nb->GetName (NAME_SITE, i);
             if (wildcard) {
@@ -16597,11 +16575,7 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         }
         // Search players for match on Event name:
         idNumberT numNames = db->nb->GetNumNames(NAME_ROUND);
-#ifdef WINCE
-                mRound =  (bool * )my_Tcl_Alloc(sizeof( bool [numNames]));
-#else
         mRound = new bool [numNames];
-#endif
         for (idNumberT i=0; i < numNames; i++) {
             const char * name = db->nb->GetName (NAME_ROUND, i);
             if (wildcard) {
@@ -16703,6 +16677,7 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         }
 
         bool match = false;
+
         if (matchGameFlags (ie, fStdStart, fPromotions,
                             fComments, fVariations, fAnnotations, fDelete,
                             fWhiteOp, fBlackOp, fMiddlegame, fEndgame,
@@ -16738,13 +16713,16 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             }
         }
 
+
+        // Stalemate or Checkmate ??
+        // - or -
         // Now try to match the comment text if applicable:
         // Note that it is not worth using a faster staring search
         // algorithm like Boyer-Moore or Knuth-Morris-Pratt since
         // profiling showed most that most of the time is spent
         // generating the PGN representation of each game.
 
-        if (match  &&  pgnTextCount > 0) {
+        if (match  &&  (pgnTextCount > 0 || gameEnd == 'S' || gameEnd == 'C')) {
             if (match  &&  db->gfile->ReadGame (db->bbuf, ie->GetOffset(),
                                                 ie->GetLength()) != OK) {
                 match = false;
@@ -16753,6 +16731,16 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                 match = false;
             }
             if (match) {
+	      if (gameEnd == 'S' || gameEnd == 'C') {
+		while (scratchGame->MoveForward() == OK) {} ;
+		Position * p = scratchGame->GetCurrentPos();
+		if (gameEnd == 'S') {
+		     match = (p->IsStaleMate());
+		} else {
+		     match = (p->IsKingInMate());
+		}
+	      }
+              if (match && pgnTextCount > 0) {
                 db->tbuf->Empty();
                 db->tbuf->SetWrapColumn (99999);
                 scratchGame->LoadStandardTags (ie, db->nb);
@@ -16772,6 +16760,7 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 		  for (int m=0; m < pgnTextCount; m++) {
 		     if (match) { match = strContains (buf, sPgnText[m]); }
 		  }
+              }
             }
         }
 
@@ -16786,20 +16775,6 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             db->dbFilter->Set (i, 0);
         }
     }
-#ifdef WINCE
-    if (sWhite != NULL) { my_Tcl_Free((char*) sWhite); }
-    if (sBlack != NULL) { my_Tcl_Free((char*) sBlack); }
-    if (sEvent != NULL) { my_Tcl_Free((char*) sEvent); }
-    if (sSite  != NULL) { my_Tcl_Free((char*) sSite);  }
-    if (sRound != NULL) { my_Tcl_Free((char*) sRound); }
-    if (mWhite != NULL) { my_Tcl_Free((char*) mWhite); }
-    if (mBlack != NULL) { my_Tcl_Free((char*) mBlack); }
-    if (mEvent != NULL) { my_Tcl_Free((char*) mEvent); }
-    if (mSite  != NULL) { my_Tcl_Free((char*) mSite);  }
-    if (mRound != NULL) { my_Tcl_Free((char*) mRound); }
-    if (wTitles != NULL) { my_Tcl_Free((char*) wTitles); }
-    if (bTitles != NULL) { my_Tcl_Free((char*) bTitles); }
-#else
     if (sWhite != NULL) { delete[] sWhite; }
     if (sBlack != NULL) { delete[] sBlack; }
     if (sEvent != NULL) { delete[] sEvent; }
@@ -16812,7 +16787,6 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     if (mRound != NULL) { delete[] mRound; }
     if (wTitles != NULL) { delete[] wTitles; }
     if (bTitles != NULL) { delete[] bTitles; }
-#endif
 
     Tcl_Free ((char *) sPgnText);
 
