@@ -1008,8 +1008,149 @@ namespace eval html {
     if {$selection == "filter"} {
       closeProgressWindow
     }
+  }  
+} 
+# end of html namespace
+
+### Merges ::optable::previewLaTeX and ::preport::previewLaTeX
+#   TODO : test on windows and OS X
+
+proc previewLatex {type command parent} {
+  
+  busyCursor $parent
+  update
+  
+  # config file names
+  set tmpdir $::scidLogDir    
+  set tmpfile "Scid-$type-Report"
+  set texfile $tmpfile.tex
+  set dvifile $tmpfile.dvi    
+  set fname [file join $tmpdir $tmpfile]
+  file delete $fname
+  set pdffile "$fname.pdf"
+  set latexLog "$fname.log"
+  
+  if {[catch {set tempfile [open $fname.tex w]}]} {
+    tk_messageBox -title "Scid: Error writing report" -type ok -icon warning \
+        -message "Unable to write the file: $fname.tex" -parent pw
+    unbusyCursor .
+    return
   }
 
-}
+  puts $tempfile [eval $command]
+  close $tempfile
+
+  # Initial Defaults in case they blanked preferences 
+  set latexEngine "pdflatex -interaction=nonstopmode"  
+    
+  if {$::windowsOS} {
+    # this will invoke the windows registered pdf handler
+    set latexViewer start
+  } elseif {$::macOS} {
+    # this will invoke the OS / X registered pdf handler
+    # use open -a if you want to force to the built in preview
+    set latexViewer open
+  } else {
+    if {[catch {exec xdg-mime query default application/pdf} result] == 0} {
+      # cool unix has a registered app for pdfs so lets use it 
+      set latexViewer "xdg-open"
+    } else {
+      # try and detect the destop to make at least best guess
+      if {[info exists ::env(XDG_CURRENT_DESKTOP)]} {
+        set unixDesktop = [string tolower $::env(XDG_CURRENT_DESKTOP)]
+      } else {
+        switch -regexp -matchvar denv -- $::env(XDG_DATA_DIRS) {
+          .*(gnome|xfce|kde).* { set unixDesktop $denv }
+          default { set unixDesktop "unknown" }
+        } 
+        switch $linuxDesktop {
+          gnome   {set latexViewer evince}
+          kde     {set latexViewer okular}
+          xfce    {set latexViewer evince}
+          default {set latexViewer xpdf}
+        }
+      }
+    }
+  }
+    
+  # User Preference overrides  
+  if {$::latexRendering(engine) != ""} {
+    set latexEngine $::latexRendering(engine)
+  }
+  if {$::latexRendering(viewer) != ""} {
+    set latexViewer $::latexRendering(viewer)
+  }
+  
+  set latexEngineCmd [string trim $latexEngine]
+  if {$::windowsOS} {      
+    if {[string first " /" $latexEngineCmd] != -1} {
+        set latexEngineCmd [string range $latexEngineCmd 0 [expr {[string first " /" $latexEngineCmd] -1}]]
+    }
+  } else {
+    if {[string first " -" $latexEngineCmd] != -1} {
+        set latexEngineCmd [string range $latexEngineCmd 0 [expr {[string first " -" $latexEngineCmd] -1}]]
+    }
+  }
+      
+  if {$::windowsOS} {
+    if {[catch {exec $latexEngineCmd --version} result] == 0} {            
+      if {![catch {exec $::env(ComSpec) /c "cd $tmpdir & $latexEngine '$texfile'" >& $latexLog }]} {             
+        if {[catch {exec $::env(ComSpec) /c "$latexViewer $pdffile" >& $latexLog &}]} {
+            tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
+                -message "Unable to view the report.\n\nSee $fname.log for details."
+        }
+      } else {
+        tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
+            -message "Unable to generate the report.\n\nSee $fname.log for details."
+      }      
+    } else {
+      # Current engine not available so lets try the old way
+      if {![catch {exec $::env(ComSpec) /c "cd $tmpdir & latex -interaction=nonstopmode '$texfile'" >& $latexLog}]} {
+        if {![catch {exec $::env(ComSpec) /c "cd $tmpdir & dvipdfm $dvifile" >& $latexLog}]} {
+          if {[catch {exec $::env(ComSpec) /c "$latexViewer $pdffile" >& $latexLog &}]} {
+            tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
+                -message "Unable to view the report.\n\nSee $fname.log for details."
+          }
+        } else {          
+          tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
+              -message "Unable to convert the report to pdf.\n\nSee $fname.log for details."
+        } 
+      } else {
+        tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
+              -message "Unable to generate the report. \n\nSee $fname.log for details."      
+      } 
+    }
+  } else {
+    # Linux / OS X
+    if {[catch {exec $latexEngineCmd --version} result] == 0} {            
+      if {![catch {exec /bin/sh -c "cd $tmpdir; $latexEngine '$texfile'" >& $latexLog }]} {             
+        if {[catch {exec /bin/sh -c "$latexViewer $pdffile" >& $latexLog &}]} {
+            tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
+                -message "Unable to view the report.\n\nSee $fname.log for details."
+        }
+      } else {
+        tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
+            -message "Unable to generate the report.\n\nSee $fname.log for details."
+      }      
+    } else {
+      # No pdflatex available so lets try the old way
+      if {![catch {exec /bin/sh -c "cd $tmpdir; latex '$texfile'" >& $latexLog}]} {
+        if {![catch {exec /bin/sh -c "cd $tmpdir; dvipdfm $dvifile" >& $latexLog}]} {
+          if {[catch {exec /bin/sh -c "$latexViewer $pdffile" >& $latexLog &}]} {
+            tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
+                -message "Unable to view the report.\n\nSee $fname.log for details."
+          }
+        } else {          
+          tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
+              -message "Unable to convert the report to pdf.\n\nSee $fname.log for details."
+        } 
+      } else {
+        tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
+              -message "Unable to generate the report. \n\nSee $fname.log for details."      
+      } 
+    }     
+  }     
+  unbusyCursor .  
+} 
 
 # end of misc.tcl

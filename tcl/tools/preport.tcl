@@ -68,12 +68,11 @@ proc ::preport::preportDlg {{player {}}} {
   grid $w.g.start   -row 2 -column 1 -sticky w
   grid $w.g.current -row 2 -column 2 -sticky w
 
-  checkbutton $w.g.clipbase -text $::tr(PReportClipbase) \
-    -variable ::preport::_clipbase
-  grid $w.g.clipbase -row 3 -column 0 -columnspan 3 -sticky w
+  pack [frame $w.b2] -side top -fill x
+  pack [checkbutton $w.clipbase -text $::tr(PReportClipbase) \
+    -variable ::preport::_clipbase] -side top
   addHorizontalRule $w
   pack [frame $w.b] -side bottom -fill x
-  pack [frame $w.b2] -side bottom -fill x
   set whiteName [sc_game info white]
   set blackName [sc_game info black]
   dialogbutton $w.b2.white -text "$::tr(White) ($whiteName)" -command {
@@ -108,7 +107,7 @@ proc ::preport::preportDlg {{player {}}} {
   }
   packbuttons right $w.b.cancel $w.b.help $w.b.ok
   if {[sc_base current] == [sc_info clipbase]} {
-    $w.g.clipbase configure -state disabled
+    $w.clipbase configure -state disabled
   }
   bind $w <Return> [list $w.b.ok invoke]
   bind $w <Escape> [list $w.b.cancel invoke]
@@ -214,7 +213,9 @@ proc ::preport::makeReportWin {args} {
   if {[lsearch -exact $args "-nodisplay"] >= 0} { return }
 
   set w .preportWin
-  if {![winfo exists $w]} {
+  if {[winfo exists $w]} {
+    raiseWin $w
+  } else {
     toplevel $w
     wm withdraw $w
     wm title $w "$::tr(PReportTitle)"
@@ -255,14 +256,15 @@ proc ::preport::makeReportWin {args} {
     bindWheeltoFont $w
 
     autoscrollframe -bars y $w.scroll text $w.text \
-      -height 30 -width 85 -font font_Small -setgrid 1 -wrap word \
-       -foreground black -cursor top_left_arrow
+      -font font_Small -setgrid 1 -wrap word \
+      -foreground black -cursor top_left_arrow
     ::htext::init $w.text
     frame $w.b
     button $w.b.opts -text [tr OprepFileOptions] -command ::preport::setOptions
     button $w.b.help -textvar ::tr(Help) -command {helpWindow Reports Player}
-    button $w.b.viewHTML -text $::tr(OprepViewHTML) -command ::preport::previewHTML
-    button $w.b.previewLaTeX -text "Preview Latex" -command ::preport::previewLaTeX
+    button $w.b.previewLatex -textvar ::tr(OprepViewLaTeX) \
+      -command {previewLatex Player {::preport::report latex 1} .preportWin}
+    button $w.b.viewHTML -textvar ::tr(OprepViewHTML) -command ::preport::previewHTML
     button $w.b.update -textvar ::tr(Update) -command ::preport::preportDlg
     button $w.b.close -textvar ::tr(Close) -command "focus .main ; destroy $w"
 
@@ -272,16 +274,13 @@ proc ::preport::makeReportWin {args} {
     pack $w.b -side bottom -fill x
     pack $w.scroll -side top -fill both -expand yes
     pack $w.b.close $w.b.find $w.b.update -side right -padx 2 -pady 2
-    pack $w.b.viewHTML -side left -padx 2 -pady 2
-    pack $w.b.previewLaTeX -side left -padx 2 -pady 2
-    pack $w.b.opts -side left -padx 2 -pady 2
+    pack $w.b.previewLatex $w.b.viewHTML $w.b.opts -side left -padx 2 -pady 2
     ::preport::ConfigMenus
     placeWinCenter $w
+    wm geom $w 150x42
     update
     wm deiconify $w
-  } else {
-    raiseWin $w
-  }
+  } 
 
   busyCursor .
   $w.text configure -state normal
@@ -374,169 +373,6 @@ proc ::preport::setOptions {} {
   update
   placeWinOverParent $w .preportWin
   wm deiconify $w
-}
-
-
-# previewLaTeX:
-#   Saves the report to a temporary file, runs latex on it, then
-#   open a viewer to display it.
-
-proc ::preport::previewLaTeX {} {
-  busyCursor .
-  set tmpdir $::scidLogDir
-  set tmpfile "TempPlayerReport"  
-  set texfile "$tmpfile.tex"
-  set dvifile "$tmpfile.dvi"
-  
-  set fname [file join $tmpdir $tmpfile]
-  if ($::windowsOS) {
-    catch {exec $::env(ComSpec) /c "del $fname.*" }
-  } else {
-    catch {exec /bin/sh -c "rm $fname.*" }
-  }
-  set pdffile "$fname.pdf"
-  set latexLog "$fname.log"
-  
-  if {[catch {set tempfile [open $fname.tex w]}]} {
-    tk_messageBox -title "Scid: Error writing report" -type ok -icon warning \
-        -message "Unable to write the file: $fname.tex" -parent .preportWin
-  }
-  
-  # Add the "batchmode" command to the top of the file to prevent latex
-  # pausing for input on errors:
-  # Leaving this for now, but probably no longer neccessary as the nonstopmode 
-  # switch does the same thing. But it doesn't hurt to have it in case
-  # end user changes switches or uses some form of latex that doesn't
-  # recognized that switch.  Most include latex, pdflatex, xelatex, lualatex   
-  puts $tempfile "\\batchmode"
-  
-  puts $tempfile [::preport::report latex 1]  
-  close $tempfile
-  
-  # Initial Defaults in case they blanked preferences
-
-  set latexEngine "pdflatex -interaction=nonstopmode"  
-    
-  if {$::unixOS} {
-    if {[catch {exec xdg-mime query default application/pdf} result] == 0} {
-      # cool unix has a registered app for pdfs so lets use it 
-      set latexViewer "xdg-open"
-    } else {
-      # try and detect the destop to make at least best guess
-      if {[info exists ::env(XDG_CURRENT_DESKTOP)]} {
-        set unixDesktop = [string tolower $::env(XDG_CURRENT_DESKTOP)]
-      } else {
-        switch -regexp -matchvar denv -- $::env(XDG_DATA_DIRS) {
-          .*(gnome|xfce|kde).* { set unixDesktop $denv }
-          default { set unixDesktop "unknown" }
-        } 
-        switch $linuxDesktop {
-          "gnome" {set latexViewer "evince"}
-          "kde"   {set latexViewer "okular"}
-          "xfce"  {set latexViewer "evince"}
-          default {set latexViewer "xpdf"}
-        }
-      }
-    }
-  }
-   
-  if {$::windowsOS} {
-     # this will invoke the windows registered pdf handler
-     set latexViewer "start "
-  }
-  if {$::macOS} {
-     # this will invoke the OS / X registered pdf handler
-     # use open -a if you want to force to the built in preview
-     set latexViewer "open "
-  }
-    
-  # User Preference overrides  
-  if {$::latexRendering(engine) != ""} {
-    set latexEngine $::latexRendering(engine)
-  }
-  if {$::latexRendering(viewer) != ""} {
-    set latexViewer $::latexRendering(viewer)
-  }
-  
-  # Ok here we have latex engine but we want the actual app as well with out switches 
-  # So we can do an existance check or a version check if we want. The trick here because
-  # the app might have spaces in a path name to the app we want to search up to first 
-  # switch however switches in windows can be forward slashes
-  set latexEngineCmd [string trim $latexEngine]
-  if {$::windowsOS} {      
-    if {[string first " /" $latexEngineCmd] != -1} {
-        set latexEngineCmd [string range $latexEngineCmd 0 [expr {[string first " /" $latexEngineCmd] -1}]]
-    }
-  } else {
-    if {[string first " -" $latexEngineCmd] != -1} {
-        set latexEngineCmd [string range $latexEngineCmd 0 [expr {[string first " -" $latexEngineCmd] -1}]]
-    }
-  }
-    
-  # TODO: Better translations for error dialogs ???
-  #
-  # exec seems very picky about using variables for the shell and shell switches 
-  # so for now just repeating this block of code for the windows differences - R.A.
-
-  if {$::windowsOS} {
-    if {[catch {exec $latexEngineCmd --version} result] == 0} {            
-      if {![catch {exec $::env(ComSpec) /c "cd $tmpdir & $latexEngine '$texfile'" >& $latexLog }]} {             
-        if {[catch {exec $::env(ComSpec) /c "$latexViewer $pdffile" >& $latexLog &}]} {
-            tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
-                -message "Unable to view the report.\n\nSee $fname.log for details."
-        }
-      } else {
-        tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
-            -message "Unable to generate the report.\n\nSee $fname.log for details."
-      }      
-    } else {
-      # Current engine not available so lets try the old way
-      if {![catch {exec $::env(ComSpec) /c "cd $tmpdir & latex -interaction=nonstopmode '$texfile'" >& $latexLog}]} {
-        if {![catch {exec $::env(ComSpec) /c "cd $tmpdir & dvipdfm $dvifile" >& $latexLog}]} {
-          if {[catch {exec $::env(ComSpec) /c "$latexViewer $pdffile" >& $latexLog &}]} {
-            tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
-                -message "Unable to view the report.\n\nSee $fname.log for details."
-          }
-        } else {          
-          tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
-              -message "Unable to convert the report to pdf.\n\nSee $fname.log for details."
-        } 
-      } else {
-        tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
-              -message "Unable to generate the report. \n\nSee $fname.log for details."      
-      } 
-    }
-  } else {
-    # Linux / OS X
-    if {[catch {exec $latexEngineCmd --version} result] == 0} {            
-      if {![catch {exec /bin/sh -c "cd $tmpdir; $latexEngine '$texfile'" >& $latexLog }]} {             
-        if {[catch {exec /bin/sh -c "$latexViewer $pdffile" >& $latexLog &}]} {
-            tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
-                -message "Unable to view the report.\n\nSee $fname.log for details."
-        }
-      } else {
-        tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
-            -message "Unable to generate the report.\n\nSee $fname.log for details."
-      }      
-    } else {
-      # No pdflatex available so lets try the old way
-      if {![catch {exec /bin/sh -c "cd $tmpdir; latex '$texfile'" >& $latexLog}]} {
-        if {![catch {exec /bin/sh -c "cd $tmpdir; dvipdfm $dvifile" >& $latexLog}]} {
-          if {[catch {exec /bin/sh -c "$latexViewer $pdffile" >& $latexLog &}]} {
-            tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
-                -message "Unable to view the report.\n\nSee $fname.log for details."
-          }
-        } else {          
-          tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
-              -message "Unable to convert the report to pdf.\n\nSee $fname.log for details."
-        } 
-      } else {
-        tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
-              -message "Unable to generate the report. \n\nSee $fname.log for details."      
-      } 
-    }     
-  }     
-  unbusyCursor .  
 }
 
 # previewHTML:

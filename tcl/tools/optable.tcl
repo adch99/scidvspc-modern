@@ -89,11 +89,7 @@ proc ::optable::makeReportWin {args} {
           -fill black -text "0:00 / 0:00"
       pack $w.c$i -side top -pady 10
     }
-    wm resizable $w 0 0
-    # Set up geometry for middle of screen:
-    set x [winfo screenwidth $w]; set x [expr $x - 400]; set x [expr $x / 2]
-    set y [winfo screenheight $w]; set y [expr $y - 20]; set y [expr $y / 2]
-    wm geometry $w +$x+$y
+    placeWinCenter $w
     wm deiconify $w
     grab $w.b.cancel
     sc_progressBar $w.c1 bar 401 21 time
@@ -169,32 +165,32 @@ proc ::optable::makeReportWin {args} {
     bind $w <Key-End> "$w.text yview moveto 0.99"
     bindMouseWheel $w $w.text
 
-    text $w.text -height 30 -width 85 -font font_Small -setgrid 1 \
+    text $w.text -setgrid 1 \
         -wrap word  -foreground black -yscrollcommand "$w.ybar set" \
         -cursor top_left_arrow
     ::htext::init $w.text
     scrollbar $w.ybar -command "$w.text yview"
     frame $w.b
-    button $w.b.previewLaTeX -textvar ::tr(OprepViewLaTeX) -font font_Small \
-        -command ::optable::previewLaTeX
-    button $w.b.previewHTML -textvar ::tr(OprepViewHTML) -font font_Small \
+    button $w.b.previewLatex -textvar ::tr(OprepViewLaTeX) \
+        -command {previewLatex Opening {::optable::report latex 1 $::optable::_flip} .oprepWin}
+    button $w.b.previewHTML -textvar ::tr(OprepViewHTML) \
         -command ::optable::previewHTML
-    button $w.b.opts -text [tr OprepFileOptions] -command ::optable::setOptions -font font_Small
-    label $w.b.lexclude -text "Exclude:" -font font_Small
-    menubutton $w.b.exclude -textvar ::optable::_data(exclude) -font font_Small \
+    button $w.b.opts -text [tr OprepFileOptions] -command ::optable::setOptions 
+    label $w.b.lexclude -text "Exclude:" 
+    menubutton $w.b.exclude -textvar ::optable::_data(exclude) \
         -indicatoron 1 -relief raised -bd 2 -menu $w.b.exclude.m -padx 1
     menu $w.b.exclude.m -tearoff 0
-    button $w.b.update -textvar ::tr(Update) -font font_Small -command {
+    button $w.b.update -textvar ::tr(Update) -command {
       set ::optable::_data(yview) [lindex [.oprepWin.text yview] 0]
       ::optable::makeReportWin
       .oprepWin.text yview moveto $::optable::_data(yview)
     }
-    button $w.b.mergeGames -textvar ::tr(MergeGames) -command ::optable::mergeGames -font font_Small
-    button $w.b.help -textvar ::tr(Help) -command {helpWindow Reports Opening} -font font_Small
-    button $w.b.close -textvar ::tr(Close) -font font_Small -command "
-      destroy $w"
+    button $w.b.mergeGames -textvar ::tr(MergeGames) -command ::optable::mergeGames 
+    button $w.b.help -textvar ::tr(Help) -command {helpWindow Reports Opening} 
+    button $w.b.close -textvar ::tr(Close) -command "destroy $w"
     bind $w <Destroy> {
       if {"%W" == ".oprepWin"} {
+	set ::optable::_data(exclude) ---
 	focus .main
 	sc_tree clean $::optable::opReportBase
       }
@@ -202,18 +198,19 @@ proc ::optable::makeReportWin {args} {
 
     bindWheeltoFont $w
 
-    entry $w.b.find -width 10 -textvariable ::oreport(find) -highlightthickness 0 -font font_Small
+    entry $w.b.find -width 10 -textvariable ::oreport(find) -highlightthickness 0 
     configFindEntryBox $w.b.find ::oreport .oprepWin.text
 
-    pack $w.b -side bottom -fill x
+    pack $w.b -side bottom -fill x -pady 3
     pack $w.ybar -side right -fill y
     pack $w.text -side left -fill both -expand yes
-    pack $w.b.close $w.b.find $w.b.update -side right -padx 1 -pady 2
-    pack $w.b.previewLaTeX -side left -padx 1 -pady 2
-    pack $w.b.previewHTML -side left -padx 1 -pady 2
-    pack $w.b.opts $w.b.lexclude $w.b.exclude $w.b.mergeGames -side left -padx 1 -pady 2
+    pack $w.b.close $w.b.find $w.b.update -side right -padx 2
+    pack $w.b.previewLatex -side left -padx 2
+    pack $w.b.previewHTML -side left -padx 2
+    pack $w.b.opts $w.b.lexclude $w.b.exclude $w.b.mergeGames -side left -padx 2
     ::optable::ConfigMenus
     placeWinCenter $w
+    wm geom $w 150x42
     update
     wm deiconify $w
   }
@@ -221,12 +218,12 @@ proc ::optable::makeReportWin {args} {
   catch {destroy $w.text.bd}
   set old_showMaterial $::gameInfo(showMaterial)
   set ::gameInfo(showMaterial) 0
-  ::board::new $w.text.bd 30
+  ::board::new $w.text.bd 40
   if {$::optable::_flip} { ::board::flip $w.text.bd }
   $w.text.bd configure -relief solid -borderwidth 1
   for {set i 0} {$i < 63} {incr i} {
     ::board::bind $w.text.bd $i <ButtonPress-1> ::optable::flipBoard
-    #::board::bind $w.text.bd $i <ButtonPress-3> ::optable::resizeBoard
+    ::board::bind $w.text.bd $i <ButtonPress-3> ::optable::resizeBoard
   }
   ::board::update $w.text.bd [sc_pos board]
   $w.b.exclude.m delete 0 end
@@ -250,9 +247,9 @@ proc ::optable::makeReportWin {args} {
   ::windows::stats::Refresh
   set ::gameInfo(showMaterial) $old_showMaterial
 }
-################################################################################
-# merges the N best games up to P plies to current game
-################################################################################
+
+### Merge the N best games up to P plies to current game
+
 proc ::optable::mergeGames { {game_count 50} {ply 999} } {
   set base  $::optable::opReportBase
   set current [sc_game number]
@@ -280,9 +277,6 @@ proc ::optable::mergeGames { {game_count 50} {ply 999} } {
   tk_messageBox -title "Merge Complete" -type ok -icon info -message "Merge Complete."
   updateBoard -pgn
 }
-################################################################################
-#
-################################################################################
 
 proc ::optable::flipBoard {} {
   set old_showMaterial $::gameInfo(showMaterial)
@@ -295,7 +289,7 @@ proc ::optable::flipBoard {} {
 proc ::optable::resizeBoard {} {
   set bd .oprepWin.text.bd
   set size [::board::size $bd]
-  if {$size >= 40} { set size 25 } else { incr size 5 }
+  if {$size >= 60} { set size 30 } else { incr size 5 }
   ::board::resize $bd $size
 }
 
@@ -340,7 +334,7 @@ proc ::optable::setOptions {} {
       grid $w.f.fsep$row$left -row $row -column $left -sticky we -columnspan 4
     } elseif {[info exists yesno($i)]} {
       checkbutton $w.f.f$i -variable ::optable($i) -onvalue 1 -offvalue 0
-      label $w.f.t$i -textvar ::tr(Oprep$i) -font font_Small
+      label $w.f.t$i -textvar ::tr(Oprep$i) 
       grid $w.f.f$i -row $row -column $left -sticky n
       grid $w.f.t$i -row $row -column $right -sticky w -columnspan 3
     } else {
@@ -348,7 +342,7 @@ proc ::optable::setOptions {} {
       # Pascal Georges : changed combobox to spinbox to widen choices
       if {$i == "MaxGames"} {
         spinbox $w.f.s$i -textvariable ::optable($i) -from 0 -to 5000 -increment 50 \
-            -width 5 -justify right -font font_Small
+            -width 5 -justify right 
       } else  {
         set tmpcombo {}
 
@@ -358,12 +352,12 @@ proc ::optable::setOptions {} {
         ttk::combobox $w.f.s$i -textvariable ::optable($i) -width 2 -height 11 -values $tmpcombo
       }
       
-      label $w.f.t$i -textvar ::tr(Oprep$i) -font font_Small
+      label $w.f.t$i -textvar ::tr(Oprep$i) 
       grid $w.f.s$i -row $row -column $left ;# -sticky e
       if {$i == "MostFrequent"  ||  $i == "Shortest"} {
-        checkbutton $w.f.w$i -text $::tr(White) -font font_Small \
+        checkbutton $w.f.w$i -text $::tr(White) \
             -variable ::optable(${i}White)
-        checkbutton $w.f.b$i -text $::tr(Black) -font font_Small \
+        checkbutton $w.f.b$i -text $::tr(Black) \
             -variable ::optable(${i}Black)
         grid $w.f.t$i -row $row -column $right -sticky w
         grid $w.f.w$i -row $row -column 2
@@ -399,151 +393,6 @@ proc ::optable::setOptions {} {
   update
   placeWinOverParent $w .oprepWin
   wm deiconify $w
-}
-
-### See comments in ::preport::previewLaTeX
-
-proc ::optable::previewLaTeX {} {
-  busyCursor .
-  set tmpdir $::scidLogDir
-  set tmpfile "TempOpeningReport"  
-  set texfile "$tmpfile.tex"
-  set dvifile "$tmpfile.dvi"
-  
-  set fname [file join $tmpdir $tmpfile]
-  if ($::windowsOS) {
-    catch {exec $::env(ComSpec) /c "del $fname.*" }
-  } else {
-    catch {exec /bin/sh -c "rm $fname.*" }
-  }
-  set pdffile "$fname.pdf"
-  set latexLog "$fname.log"
-  
-  if {[catch {set tempfile [open $fname.tex w]}]} {
-    tk_messageBox -title "Scid: Error writing report" -type ok -icon warning \
-        -message "Unable to write the file: $fname.tex" -parent .oprepWin
-  }
-  
-  puts $tempfile "\\batchmode"
-    
-  puts $tempfile [::optable::report latex 1 $::optable::_flip]
-  close $tempfile
-  
-  # Initial Defaults in case they blanked preferences
-
-  set latexEngine "pdflatex -interaction=nonstopmode"  
-    
-  if {$::unixOS} {
-    if {[catch {exec xdg-mime query default application/pdf} result] == 0} {
-      # cool unix has a registered app for pdfs so lets use it 
-      set latexViewer "xdg-open"
-    } else {
-      # try and detect the destop to make at least best guess
-      if {[info exists ::env(XDG_CURRENT_DESKTOP)]} {
-        set unixDesktop = [string tolower $::env(XDG_CURRENT_DESKTOP)]
-      } else {
-        switch -regexp -matchvar denv -- $::env(XDG_DATA_DIRS) {
-          .*(gnome|xfce|kde).* { set unixDesktop $denv }
-          default { set unixDesktop "unknown" }
-        } 
-        switch $linuxDesktop {
-          "gnome" {set latexViewer "evince"}
-          "kde"   {set latexViewer "okular"}
-          "xfce"  {set latexViewer "evince"}
-          default {set latexViewer "xpdf"}
-        }
-      }
-    }
-  }
-   
-  if {$::windowsOS} {
-     # this will invoke the windows registered pdf handler
-     set latexViewer "start "
-  }
-  if {$::macOS} {
-     # this will invoke the OS / X registered pdf handler
-     # use open -a if you want to force to the built in preview
-     set latexViewer "open "
-  }
-    
-  # User Preference overrides  
-  if {$::latexRendering(engine) != ""} {
-    set latexEngine $::latexRendering(engine)
-  }
-  if {$::latexRendering(viewer) != ""} {
-    set latexViewer $::latexRendering(viewer)
-  }
-  
-  set latexEngineCmd [string trim $latexEngine]
-  if {$::windowsOS} {      
-    if {[string first " /" $latexEngineCmd] != -1} {
-        set latexEngineCmd [string range $latexEngineCmd 0 [expr {[string first " /" $latexEngineCmd] -1}]]
-    }
-  } else {
-    if {[string first " -" $latexEngineCmd] != -1} {
-        set latexEngineCmd [string range $latexEngineCmd 0 [expr {[string first " -" $latexEngineCmd] -1}]]
-    }
-  }
-  
-  if {$::windowsOS} {  
-    if {[catch {exec $latexEngineCmd --version} result] == 0} {            
-      if {![catch {exec $::env(ComSpec) /c "cd $tmpdir & $latexEngine '$texfile'" >& $latexLog }]} {             
-        if {[catch {exec $::env(ComSpec) /c "$latexViewer $pdffile" >& $latexLog &}]} {
-            tk_messageBox -title "Scid Error" -icon warning -type ok -parent .oprepWin \
-                -message "Unable to view the report.\n\nSee $fname.log for details."
-        }
-      } else {
-        tk_messageBox -title "Scid Error" -icon warning -type ok -parent .oprepWin \
-            -message "Unable to generate the report.\n\nSee $fname.log for details."
-      }      
-    } else {
-      # Current engine not available so lets try the old way
-      if {![catch {exec $::env(ComSpec) /c "cd $tmpdir & latex -interaction=nonstopmode '$texfile'" >& $latexLog}]} {
-        if {![catch {exec $::env(ComSpec) /c "cd $tmpdir & dvipdfm $dvifile" >& $latexLog}]} {
-          if {[catch {exec $::env(ComSpec) /c "$latexViewer $pdffile" >& $latexLog &}]} {
-            tk_messageBox -title "Scid Error" -icon warning -type ok -parent .oprepWin \
-                -message "Unable to view the report.\n\nSee $fname.log for details."
-          }
-        } else {          
-          tk_messageBox -title "Scid Error" -icon warning -type ok -parent .oprepWin \
-              -message "Unable to convert the report to pdf.\n\nSee $fname.log for details."
-        } 
-      } else {
-        tk_messageBox -title "Scid Error" -icon warning -type ok -parent .oprepWin \
-              -message "Unable to generate the report. \n\nSee $fname.log for details."      
-      } 
-    }
-  } else {
-    # for non windows environments
-    if {[catch {exec $latexEngineCmd --version} result] == 0} {            
-      if {![catch {exec /bin/sh -c "cd $tmpdir; $latexEngine '$texfile'" >& $latexLog }]} {             
-        if {[catch {exec /bin/sh -c "$latexViewer $pdffile" >& $latexLog &}]} {
-            tk_messageBox -title "Scid Error" -icon warning -type ok -parent .oprepWin \
-                -message "Unable to view the report.\n\nSee $fname.log for details."
-        }
-      } else {
-        tk_messageBox -title "Scid Error" -icon warning -type ok -parent .oprepWin \
-            -message "Unable to generate the report.\n\nSee $fname.log for details."
-      }      
-    } else {
-      # No pdflatex available so lets try the old way
-      if {![catch {exec /bin/sh -c "cd $tmpdir; latex '$texfile'" >& $latexLog}]} {
-        if {![catch {exec /bin/sh -c "cd $tmpdir; dvipdfm $dvifile" >& $latexLog}]} {
-          if {[catch {exec /bin/sh -c "$latexViewer $pdffile" >& $latexLog &}]} {
-            tk_messageBox -title "Scid Error" -icon warning -type ok -parent .oprepWin \
-                -message "Unable to view the report.\n\nSee $fname.log for details."
-          }
-        } else {          
-          tk_messageBox -title "Scid Error" -icon warning -type ok -parent .oprepWin \
-              -message "Unable to convert the report to pdf.\n\nSee $fname.log for details."
-        } 
-      } else {
-        tk_messageBox -title "Scid Error" -icon warning -type ok -parent .oprepWin \
-              -message "Unable to generate the report. \n\nSee $fname.log for details."      
-      } 
-    }     
-  }     
-  unbusyCursor .
 }
 
 # previewHTML:
@@ -1424,7 +1273,7 @@ proc ::optable::editFavoritesDlg {} {
   set ::reportFavoritesTemp $::reportFavorites
   # wm transient $w .
   entry $w.e -width 60 -foreground black  \
-      -textvariable reportFavoritesName -font font_Small -exportselection 0
+      -textvariable reportFavoritesName -exportselection 0
 
   trace variable reportFavoritesName w ::optable::editFavoritesRefresh
   pack [frame $w.b] -side bottom -fill x
@@ -1432,7 +1281,7 @@ proc ::optable::editFavoritesDlg {} {
   frame $w.f
   pack $w.f -side top -fill both -expand yes
 
-  listbox $w.f.list -width 50 -height 10 -fg black -exportselection 0 -font font_Small \
+  listbox $w.f.list -width 50 -height 10 -fg black -exportselection 0 \
     -setgrid 1 -yscrollcommand "$w.f.ybar set"
   scrollbar $w.f.ybar -takefocus 0 -command "$w.f.list yview"
 

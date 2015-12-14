@@ -3234,7 +3234,7 @@ set helpText(Reports) {<h1>Reports</h1>
   displays various information about the current position.
   </p>
   <p><i>
-  Some features are affected by an internal limit of 10000 games.
+  Some features are affected by an internal limit of 10,000 games.
   For large reports statistics will be complete, but clicking on hyperlinks (for example)
   may not always show *all* matching games.
   </i></p>
@@ -3263,14 +3263,15 @@ set helpText(Reports) {<h1>Reports</h1>
 
   <h4>Features</h4>
   <p>
+  Clicking on the board will flip it. Right-clicking will resize it.
   Most coloured items in the report window are clickable, and
   invoke some relevant action. For example - clicking a game reference
   will load that game, or clicking a positional theme will set the filter
   to matching games.
   </p>
   <p>
-  The <b>Merge Games</b> button merges all games from the
-  Opening Report into the current game as variations (including full reference).
+  <b>Merge Games</b> merges the 50 best games from the
+  Opening Report into the current game as variations, including full references.
   </p>
   <p>
   <b>Exclude</b> allows removal of a move from the Theory Table.
