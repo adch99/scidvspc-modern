@@ -518,6 +518,7 @@ public:
                              moveT * oldCurrentMove,
                              bool printMoveNum, bool inComment);
     errorT    WritePGN (TextBuffer * tb, uint stopLocation);
+    errorT    WritePGNAnalysisToLatex(TextBuffer * tb);
     errorT    WritePGNtoLaTeX(TextBuffer * tb, uint stopLocation);
     errorT    WriteToPGN (TextBuffer * tb);
     errorT    MoveToLocationInPGN (TextBuffer * tb, uint stopLocation);

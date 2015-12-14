@@ -819,7 +819,7 @@ strIsScore(const char *str)
       if ((*test >='0') && (*test<='9')){ //If we've found a number...
          test--;
          if ((*test=='+')||(*test=='-')){ //And it looks like a score...
-               printf("Possible number: %s\n",test);
+               // printf("Possible number: %s\n",test);
                return true; //It might be a score
          }
          test++;
@@ -856,12 +856,12 @@ strGetScore(const char *str)
       }
       test++;
    }
-   printf("%s\n%s\n",str,test);
-	strTrimRight(test, " \t\r\n)");
-   printf("Possible Score String: %s\n\n",test);
+   // printf("%s\n%s\n",str,test);
+   strTrimRight(test, " \t\r\n)");
+   // printf("Possible Score String: %s\n\n",test);
    fflush(stdout);
-	char *tmp = NULL;
-	return strtod(test, &tmp);
+   char *tmp = NULL;
+   return strtod(test, &tmp);
 }
 
 

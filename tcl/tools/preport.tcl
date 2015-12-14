@@ -692,16 +692,28 @@ proc ::preport::report {fmt {withTable 1}} {
   set tgames [lindex $counts 1]
 
   set r $::optable::_docStart($fmt)
-  # set r [string map [list "\[OprepTitle\]" $tr(PReportTitle)] $r]
-
-  append r [::preport::_title $::preport::_player]
-  append r $preText  
-  append r "$tr(Player)$ls $bb{$::preport::_player}$eb"     
+  set propername $::preport::_player
+  if ([string first "," $propername]) {    
+    set fields [split $propername ","]
+    lassign $fields lastname firstname extracomma
+    set propername [concat $firstname $lastname]
+    if {$extracomma != ""} {
+      set propername [concat $propername $extracomma]
+    }    
+  }     
+  
+  # Use this if you want title last name first -- append r [::preport::_title $::preport::_player]
+  append r [::preport::_title $propername]
+  
+  append r $preText
+  append r "$tr(Player)$ls$bb$propername$eb"
+         
   if {$::preport::_color == "white"} {   
-    append r " $tr(PReportColorWhite)$n"
+    append r " $tr(PReportColorWhite)"
   } else {
-    append r " $tr(PReportColorBlack)$n"
+    append r " $tr(PReportColorBlack)"
   }
+  
   set eco ""
   set line [sc_report player line]
   if {$::preport::_pos == "current"  &&  ![sc_pos isAt start]} {
@@ -710,7 +722,7 @@ proc ::preport::report {fmt {withTable 1}} {
       append r "\\hidemoves{$line}%\\n"
     } 
     
-    append r "$tr(PReportBeginning)$ls \\printchessgame"
+    append r "$n$tr(PReportBeginning)$ls \\printchessgame"      
     set eco [sc_report player eco]
   }
   append r " ("

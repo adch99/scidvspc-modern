@@ -1498,7 +1498,7 @@ sc_base_export (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     gameFormatT outputFormat = PGN_FORMAT_Plain;
     const char * startText = "";
     const char * endText = "";
-    const char * usage = "Usage: sc_base export current|filter PGN|HTML|LaTeX|Skak <pgn_filename> options...";
+    const char * usage = "Usage: sc_base export current|filter PGN|HTML|Latex <pgn_filename> options...";
     uint pgnStyle = PGN_STYLE_TAGS;
 
     const char * options[] = {

@@ -26,6 +26,9 @@
 #include "textbuf.h"
 #include "stored.h"
 
+// Include header for math
+#include <math.h>
+
 // Include header file for memcpy():
 #ifdef WIN32
 #  include <memory.h>
@@ -3034,6 +3037,244 @@ Game::WritePGN (TextBuffer * tb, uint stopLocation)
     return OK;
 }
 
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Game::WritePGNAnalysisToLatex():
+errorT
+Game::WritePGNAnalysisToLatex(TextBuffer * tb)
+{
+    char temp [255];
+    
+  	MoveToPly(0);
+	PgnLastMovePos = PgnNextMovePos = 1;
+    moveT * m = CurrentMove;
+
+	double scores[NumHalfMoves];
+	char events[NumHalfMoves];
+	for (int i = 0; i < NumHalfMoves; i++) {
+		scores[i] = 0;
+		events[i] = ' ';
+	}
+
+	double maxScore = 0;
+	double minScore = 0;
+    int numScoresFound = 0;
+    int minScoresRequired = 3;
+	bool scoresFound = false;
+
+	int x = 0;
+    // Handle gaps in scores using average curve or lastscore
+    // to fill the missing score    
+    double lastScore = HUGE_VAL;    
+	while (m->marker != END_MARKER) {
+		if (m->comment != NULL) {
+         if (strIsScore(m->comment)) {
+			numScoresFound++;
+            double possibleScore = strGetScore(m->comment);
+            if (possibleScore == 0.0) {
+                if (lastScore==HUGE_VAL) {
+                    // since this is the first score it is okay and more probable to stay 0.0
+                    // latter it might make more sense to check if starting move is white
+                    // and starting move = first move and match most engine analysis by giving
+                    // white a slight punch of say 0.1 instead.
+                } else {
+                    // More probably here since this not the first score in the game
+                    // That it is really a missing score so set to lastScore if the delta
+                    // is > 0.1 an improvement can be made here of doing a lookahead at the
+                    // next score and if it is in range average them difference instead
+                    // however this will more reflect the actuals from the computer
+                    // We could instead plot a smooth curve through the data as a seperate line
+                    possibleScore = (fabs(lastScore-possibleScore) > 0.1) ? lastScore : possibleScore;
+                }                
+            } else {
+                if (possibleScore == HUGE_VAL || possibleScore == -HUGE_VAL) {
+                    // Score is out of range
+                    if (lastScore != HUGE_VAL) {
+                        // Not the first score so correct via Last Score
+                        possibleScore = lastScore;
+                    } else {
+                        // Very first score is out of wack so normalize it
+                        possibleScore = 0.0;
+                    }
+                }                
+            }            
+            scores[x] = possibleScore;
+            lastScore = possibleScore;
+            // get maxes later because of new compressions on y scales
+            // maxScore = (scores[x] > maxScore) ? scores[x] : maxScore;
+            // minScore = (scores[x] < minScore) ? scores[x] : minScore;
+         }
+			if (strstr(m->comment, "BLUNDER") != NULL) {
+				events[x] = 'B';
+			}
+		}
+		MoveForward();
+		m = CurrentMove;
+		x++;
+	}
+    
+    // Need a minimum # of scores before a chart will make sense
+    if (numScoresFound >= minScoresRequired) {
+       scoresFound = true;
+    }  
+
+    // As it is a whole move graph lets continue the score on a half move
+    int scoreHalfMoves = x;
+    if (scoreHalfMoves % 2) {        
+        scores[scoreHalfMoves] = lastScore;
+        scoreHalfMoves++;         
+    }    
+
+   // Most analysis scores are roughly in centipawns where 1.0 = Pawn, 3.0 = Minor piece
+   // But analysis includes much more than material differences and scores can very
+   // greatly for example when an enigne starts see most paths leading to decisive 
+   // winning positions it isn't uncommond for an analysis score to swing into the hundreds
+   // This adds a challenge when graphing to allow the details to be seen in lower
+   // scales while allowing details to also be seen in higher scales.
+   // 
+   // New multi teir y scaling
+   // 0 - 3 Natural Y scale
+   // 3 - 10 Compressed Y scale covering 3 - 20
+   // 10 - 15 Compressed Y scale covering 20 - 50
+   // New cap on Y scall of 50 
+   // Compress secondary and tertiary Y scales and cap Y scale
+   for (int i=0; i<scoreHalfMoves; i++) {
+       double y = scores[i];  
+       double ynew = fabs(y);  // absolute
+       double sign = (y > 0) ? 1 : ((y < 0) ? -1 : 0);
+       if (ynew>3 && ynew<=20) {
+          double oldrange = 20-3;
+          double newrange = 10-3;
+          ynew = ((ynew-3) * newrange / oldrange) + 3;
+       } else {
+         if (ynew>20 && ynew<=50) {
+            double oldrange = 50-20;
+            double newrange = 15-10;
+            ynew = ((ynew-20) * newrange / oldrange) + 10;
+         }   
+       }      
+       if (ynew > 50) ynew = 15; 
+       ynew = ynew * sign;
+       maxScore = (ynew > maxScore) ? ynew : maxScore;
+       minScore = (ynew < minScore) ? ynew : minScore;       
+       scores[i] = ynew;       
+   }
+   
+   // Getting maxX from the number of half moves is a little awkward
+   // int maxX = ((NumHalfMoves / 10) + 1) * 5;
+   int xTick = 5;       
+   int lastX = (scoreHalfMoves / 2) + 1; // Number of Moves to Cover
+   int maxX = ((lastX + xTick - 1) / xTick) * xTick;
+   bool finalTick = false;
+   if (maxX - lastX > 1) {
+       finalTick = true;
+   }  
+    
+   int maxY = 5;
+   int minY = -5;
+   
+   double yscale=0.003;
+   
+   if (maxScore > 10) {          
+       maxY = 15;       
+       yscale+=0.008;
+   } else {
+       if (maxScore > 3) {     
+          maxY = 10;          
+          yscale+=0.004;
+       } 
+   }
+   
+   if (minScore < -10) {                 
+       minY = -15;
+       yscale+=0.008;
+   } else {
+       if (minScore < -3) {     
+          minY = -10;
+          yscale+=0.004;
+       } 
+   }
+   
+   // Is the graph more landscape or portrait? 
+   float latexUnitSize = maxX > (maxY - minY) ? maxX : (maxY - minY); 
+   // latexUnitSize is how many divisions of the text width, not an absolute measurement
+   latexUnitSize = 1.0/latexUnitSize; 
+
+	if (scoresFound) {
+		sprintf(temp, "\\begin{minipage}{\\textwidth}\n");
+		tb->PrintString(temp);
+		tb->PrintString("Analysis Scoregraph:\n{\n\\center\n");
+		sprintf(temp, "\\psset{linewidth=0.7pt, yunit=%0.4f\\paperheight, xunit=%0.4f\\textwidth}\n", yscale, latexUnitSize );
+		tb->PrintString(temp);
+		sprintf(temp, "\\pspicture[](0,%d)(%d,%d)\n", minY, lastX, maxY);
+		tb->PrintString(temp);
+		sprintf(temp, "\\psframe*[fillstyle=solid,fillcolor=EvenGameColor,linecolor=EvenGameColor](1,-3)(%d,3)\n", lastX);
+		tb->PrintString(temp);
+        sprintf(temp, "\\psgrid[gridwidth=0pt,gridcolor=GridColor,griddots=1,subgriddiv=1,subgridwidth=10,gridlabels=0pt](1,0)(1,%d)(%d,-4)\n", minY, lastX);
+        tb->PrintString(temp);
+        sprintf(temp, "\\psgrid[gridwidth=0pt,gridcolor=GridColor,griddots=1,subgriddiv=1,subgridwidth=10,gridlabels=0pt](1,0)(1,4)(%d,%d)\n", lastX, maxY);        		
+		tb->PrintString(temp);
+        sprintf(temp, "\\psaxes[linewidth=1pt,linecolor=GridColor,tickstyle=bottom,Dy=5,labels=x,Dx=5,Ox=0](1,0)(1,%d)(%d,%d)\n", minY, lastX, maxY);
+        tb->PrintString(temp);
+        sprintf(temp, "\\rput(0,0){0}\\rput(0,-5){-5}\\rput(0,5){5}");
+        tb->PrintString(temp);
+        if (maxY > 5) {
+            sprintf(temp, "\\rput(0,10){20}");
+            tb->PrintString(temp);            
+        }
+        if (maxY > 10) {
+            sprintf(temp, "\\rput(0,15){50}");
+            tb->PrintString(temp);                        
+        }
+        if (minY < -5) { 
+            sprintf(temp, "\\rput(0,-10){-20}");
+            tb->PrintString(temp);            
+        }
+        if (maxY < -10) {
+            sprintf(temp, "\\rput(0,-15){-50}");
+            tb->PrintString(temp);                        
+        }
+        if (finalTick) {
+            sprintf(temp, "\\rput(%d,-1.30){%d}\\psline(%d,0)(%d,-0.5)",lastX,lastX,lastX,lastX);
+            tb->PrintString(temp);                       
+        }                        
+		for (int x = 1; x < NumHalfMoves; x++) {
+			if (events[x] != ' ') {
+				if (events[x] == 'B') {
+					sprintf(temp, "\n\\pscircle[linecolor=red](%d,%.2f){%0.2f}\n", x/2+1, scores[x], (scores[x] - scores[x - 1]) / 3);
+					tb->PrintString(temp);
+				}
+			}
+		}
+
+		sprintf(temp, "\n\\psline[linewidth=1.5pt,linecolor=%s](1,0)", (scores[1] > 0) ? "WhitePiecesGraphColor" : "BlackPiecesGraphColor");
+		tb->PrintString(temp);
+		for (int x = 1; x < scoreHalfMoves; x++) {
+			if ((scores[x - 1] >= 0) && (scores[x] < 0)) {
+				tb->PrintString("\n\\psline[linewidth=1.5pt,linewidth=1pt,linecolor=BlackPiecesGraphColor]");
+				sprintf(temp, "(%.1f,%.2f)", ((float)x - 1)/2+1, scores[x - 1]);
+				tb->PrintString(temp);
+			}
+			if ((scores[x - 1] < 0) && (scores[x] >= 0)) {
+				tb->PrintString("\n\\psline[linewidth=1.5pt,linewidth=1pt,linecolor=WhitePiecesGraphColor]");
+				sprintf(temp, "(%.1f,%.2f)", ((float)x - 1)/2+1, scores[x - 1]);
+				tb->PrintString(temp);
+			}
+			sprintf(temp, "(%.1f,%.2f)", (float)x/2+1, scores[x]);
+			tb->PrintString(temp);
+		}        
+
+		tb->PrintString("\n\\endpspicture\n\\\\[1ex]}\n");
+		sprintf(temp, "\\end{minipage}\n");
+		tb->PrintString(temp);
+	}
+	tb->PrintString("\\hrulefill\n\\\\\n");
+	tb->PrintString("\\end{@twocolumnfalse}\n]\n");
+    
+    MoveToPly(0);	       
+    return OK;
+}
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Game::WritePGNtoLaTeX():
 //      Write a game in PGN to a textbuffer for LaTeX output.  If stopLocation is
@@ -3169,129 +3410,18 @@ Game::WritePGNtoLaTeX(TextBuffer * tb, uint stopLocation)
 
 	// Note the current position and
 	// move, so we can reconstruct the game state afterwards:
-//	moveT * oldCurrentMove = CurrentMove;
+	moveT * oldCurrentMove = CurrentMove;
 	if (stopLocation == 0) {
 		SaveState();
 	}
-	MoveToPly(0);
-	PgnLastMovePos = PgnNextMovePos = 1;
+        
+    WritePGNAnalysisToLatex(tb);
 
-	NumMovesPrinted = 1;
-	StopLocation = stopLocation;
-
-	moveT * m = CurrentMove;
+	moveT * m = oldCurrentMove;
 	moveT * v = NULL;
 	moveT * tmp = NULL;
-
-
-/* FIXME: split out the graphing of analysis scores from here and add
- * in autoscaling and perhaps tagging of blunders with move numbers for
- * quick reference in analysis */
-
-	double scores[NumHalfMoves];
-	char events[NumHalfMoves];
-	for (int i = 0; i < NumHalfMoves; i++) {
-		scores[i] = 0;
-		events[i] = ' ';
-	}
-
-	double maxScore = 0;
-	double minScore = 0;
-	bool scoresFound = false;
-
-	int x = 0;
-	while (m->marker != END_MARKER) {
-		if (m->comment != NULL) {
-         if (strIsScore(m->comment)) {
-				scoresFound = true;
-            scores[x] = strGetScore(m->comment);
-            maxScore = (scores[x] > maxScore) ? scores[x] : maxScore;
-            minScore = (scores[x] < minScore) ? scores[x] : minScore;
-         }
-			if (strstr(m->comment, "BLUNDER") != NULL) {
-				events[x] = 'B';
-			}
-		}
-		MoveForward();
-		m = CurrentMove;
-		x++;
-	}
-
-   // Cap the eval graph at +/- 40 to keep it sane. 
-   // This is a quick patch that will get replaced with better graph logic in the future.
-   for (int i = 0; i<x; i++) {
-      if (scores[i] >= 0) {
-         scores[i] = scores[i] > 40 ? 40 : scores[i];
-      } else {
-         scores[i] = scores[i] < -40 ? -40 : scores[i];
-      }
-   }
-   
-   // Getting maxX from the number of half moves is a little awkward
-	int maxX = ((NumHalfMoves / 10) + 1) * 5; 
-
-   // With both max and min Y, we cap at +/-40 but also want to at
-   // least show the +/- 3 boundary in the graph (the +- piece range)
-	int maxY = maxScore > 40 ? 40 : (((int)maxScore / 5) + 1) * 5;
-	maxY = maxScore > 4 ? maxY : 4;
-	int minY = minScore < -40 ? -40 : (((int)minScore / 5) - 1) * 5;
-	minY = minScore < -4 ? minY : -4;
-   
-   // Is the graph more landscape or portrait? 
-   float latexUnitSize = maxX > (maxY - minY) ? maxX : (maxY - minY); 
-   // latexUnitSize is how many divisions of the text width, not an absolute measurement
-   latexUnitSize = 1.0/latexUnitSize; 
-
-	if (scoresFound) {
-		sprintf(temp, "\\begin{minipage}{\\textwidth}\n");
-		tb->PrintString(temp);
-		tb->PrintString("Analysis Scoregraph:\n{\n\\center\n");
-		sprintf(temp, "\\psset{linewidth=0.7pt, unit=%0.4f\\textwidth}\n", latexUnitSize );
-		tb->PrintString(temp);
-		sprintf(temp, "\\pspicture[](0,%d)(%d,%d)\n", minY, maxX, maxY);
-		tb->PrintString(temp);
-		sprintf(temp, "\\psframe*[fillstyle=solid,fillcolor=EvenGameColor,linecolor=EvenGameColor](0,-3)(%d,3)\n", maxX);
-		tb->PrintString(temp);
-		sprintf(temp, "\\psgrid[gridwidth=1pt,gridcolor=GridColor,griddots=1,subgriddiv=1,gridlabels=0pt,unit=%0.4f\\textwidth](0,%d)(%d,%d)\n", latexUnitSize*5 , minY/5, maxX/5, maxY/5);
-		tb->PrintString(temp);
-		sprintf(temp, "\\psaxes[linewidth=1pt,linecolor=GridColor,tickstyle=bottom,Dx=5,Dy=5](0,0)(0,%d)(%d,%d)\n", minY, maxX, maxY);
-		tb->PrintString(temp);
-
-		for (int x = 1; x < NumHalfMoves; x++) {
-			if (events[x] != ' ') {
-				if (events[x] == 'B') {
-					sprintf(temp, "\\pscircle[linecolor=red](%d,%.2f){%0.2f}\n", x/2, scores[x], (scores[x] - scores[x - 1]) / 3);
-					tb->PrintString(temp);
-				}
-			}
-		}
-
-		sprintf(temp, "\\psline[linecolor=%s](0,0)", (scores[1] > 0) ? "WhitePiecesGraphColor" : "BlackPiecesGraphColor");
-		tb->PrintString(temp);
-		for (int x = 1; x < NumHalfMoves; x++) {
-			if ((scores[x - 1] >= 0) && (scores[x] < 0)) {
-				tb->PrintString("\n\\psline[linecolor=BlackPiecesGraphColor]");
-				sprintf(temp, "(%.1f,%.2f)", ((float)x - 1)/2, scores[x - 1]);
-				tb->PrintString(temp);
-			}
-			if ((scores[x - 1] < 0) && (scores[x] >= 0)) {
-				tb->PrintString("\n\\psline[linecolor=WhitePiecesGraphColor]");
-				sprintf(temp, "(%.1f,%.2f)", ((float)x - 1)/2, scores[x - 1]);
-				tb->PrintString(temp);
-			}
-			sprintf(temp, "(%.1f,%.2f)", (float)x/2, scores[x]);
-			tb->PrintString(temp);
-		}
-
-		tb->PrintString("\n\\endpspicture\n\\\\[1ex]}\n");
-		sprintf(temp, "\\end{minipage}\n");
-		tb->PrintString(temp);
-	}
-	tb->PrintString("\\hrulefill\n\\\\\n");
-	tb->PrintString("\\end{@twocolumnfalse}\n]\n");
-
+    
 	// Print FEN if non-standard start:
-
 	if (NonStandardStart) {
 		char fenStr [256];        
 		StartPos->PrintFEN(fenStr, FEN_ALL_FIELDS);                
@@ -3303,15 +3433,8 @@ Game::WritePGNtoLaTeX(TextBuffer * tb, uint stopLocation)
 		tb->PrintString(diagramStr);
 	}
 
-	// tb->PrintString("\\chessboard[smallboard]\n");
-
-
-	// Back to the start and now parse the moves...
-
-	MoveToPly(0);   
-   
 	PgnLastMovePos = PgnNextMovePos = 1;
-	m = CurrentMove;
+	m = oldCurrentMove;
 	char from[4] = "   ";
 	char to[4] = "   ";
 
@@ -3324,7 +3447,7 @@ Game::WritePGNtoLaTeX(TextBuffer * tb, uint stopLocation)
 
 		if (isNullMove(m)) {
 			if (m->comment) {
-				if (strIsScore(m->comment)) {
+				if (strIsScore(m->comment) && strlen(m->comment) < 8) {
 
 				} else {
 					tb->PrintString("}\n");

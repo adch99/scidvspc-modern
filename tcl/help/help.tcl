@@ -1865,7 +1865,17 @@ set helpText(LaTeX) {<h1>Using LaTeX with Scid</h1>
 <li>pgf (pgfcore.sty)</li>
 <li>lmodern (lmodern.sty)</li>
 <li>texlive-pstricks (pstricks-add.sty)</li>
+<li>texlive-xetex (xelatex)</li>
   </ul>
+<h2>Generating PDF</h2>
+<p>Latex will generally need to be converted to PDF. Scid's Latex preview function will do this, but for manually
+converting to pdf, use this command <b>xelatex file.tex</b></p>
+
+<p>The older method for doing this is<ul>
+<li>latex file.tex       // This will create a file.dvi file</li>
+<li>dvi2ps file.dvi     // Then this will create a file.ps file</li>
+<li>ps2pdf file.ps     // Then this will create a file.pdf</li>
+</ul></p>
 <h2>Viewing</h2>
   <p>
   To use the Latex preview options for the Opening and Player Reports,
