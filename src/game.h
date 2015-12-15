@@ -207,7 +207,7 @@ enum gameExactMatchT {
 enum gameFormatT {
     PGN_FORMAT_Plain = 0,        // Plain regular PGN output
     PGN_FORMAT_HTML = 1,         // HTML format
-    PGN_FORMAT_LaTeX = 2,        // LaTeX format
+    PGN_FORMAT_Latex = 2,        // Latex format
     PGN_FORMAT_Color = 3    
 };
 
@@ -546,7 +546,7 @@ public:
     static bool PgnFormatFromString (const char * str, gameFormatT * fmt);
     bool      IsPlainFormat () { return (PgnFormat == PGN_FORMAT_Plain); }
     bool      IsHtmlFormat  () { return (PgnFormat == PGN_FORMAT_HTML); }
-    bool      IsLatexFormat () { return (PgnFormat == PGN_FORMAT_LaTeX); }    
+    bool      IsLatexFormat () { return (PgnFormat == PGN_FORMAT_Latex); }    
     bool      IsColorFormat () { return (PgnFormat == PGN_FORMAT_Color); }
 
     void      SetHtmlStyle (uint style) { HtmlStyle = style; }

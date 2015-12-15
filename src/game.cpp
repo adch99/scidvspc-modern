@@ -208,7 +208,7 @@ game_printNag (byte nag, char * str, bool asSymbol, gameFormatT format)
     }
 
     if (asSymbol) {
-       if (format == PGN_FORMAT_LaTeX) {
+       if (format == PGN_FORMAT_Latex) {
          if (nag < (sizeof evalNagsLatex / sizeof (const char *)))
            strcpy (str, evalNagsLatex[nag]);
          else
@@ -220,7 +220,7 @@ game_printNag (byte nag, char * str, bool asSymbol, gameFormatT format)
            sprintf (str, "$%i", nag);
        }
        if (nag == NAG_Diagram) {
-          if (format == PGN_FORMAT_LaTeX) {
+          if (format == PGN_FORMAT_Latex) {
               strcpy (str, evalNagsLatex[nag]);
           } else if (format == PGN_FORMAT_HTML) {
               strcpy(str, "<i>(D)</i>");
@@ -230,7 +230,7 @@ game_printNag (byte nag, char * str, bool asSymbol, gameFormatT format)
        }
        return;
     } else {
-    sprintf (str, "%s$%d", format == PGN_FORMAT_LaTeX ? "\\" : "", nag);
+    sprintf (str, "%s$%d", format == PGN_FORMAT_Latex ? "\\" : "", nag);
     }
 }
 
@@ -730,7 +730,7 @@ Game::Clear()
 //      Converts a string to a gameFormatT, returning true on success
 //      or false on error.
 //      The string should be a case-insensitive unique prefix of
-//      "plain" (or "pgn"), "HTML", "LaTeX", or "Color".
+//      "plain" (or "pgn"), "HTML", "Latex", or "Color".
 bool
 Game::PgnFormatFromString (const char * str, gameFormatT * fmt)
 {
@@ -741,7 +741,7 @@ Game::PgnFormatFromString (const char * str, gameFormatT * fmt)
     } else if (strIsCasePrefix (str, "HTML")) {
         *fmt = PGN_FORMAT_HTML;
     } else if (strIsCasePrefix (str, "Latex")) {
-        *fmt = PGN_FORMAT_LaTeX;
+        *fmt = PGN_FORMAT_Latex;
     } else if (strIsCasePrefix (str, "Color")) {
         *fmt = PGN_FORMAT_Color;
     } else {
@@ -2373,7 +2373,7 @@ Game::WriteMoveList (TextBuffer *tb, uint plyCount,
 
         bool printThisMove = true;
         if (isNullMove(m)) {
-            // Null moves are not printed in LaTeX or HTML:
+            // Null moves are not printed in Latex or HTML:
             if (IsLatexFormat()  ||  IsHtmlFormat()) {
                 printThisMove = false;
                 printMoveNum = true;
@@ -3524,7 +3524,7 @@ Game::WritePGNtoLaTeX(TextBuffer * tb, uint stopLocation)
 				//tb->PrintString(temp);
 				//tb->PrintString("\\psset{linecolor=black}\n");
 			} else {
-				game_printNag(m->nags[i], temp, true, PGN_FORMAT_LaTeX);
+				game_printNag(m->nags[i], temp, true, PGN_FORMAT_Latex);
 				tb->PrintWord(temp);
 			}
 		}
@@ -3658,7 +3658,7 @@ Game::WritePGNtoLaTeX(TextBuffer * tb, uint stopLocation)
 					tb->PrintWord(temp);
 
 					for (uint i = 0; i < (uint)v->nagCount; i++) {
-						game_printNag(v->nags[i], temp, true, PGN_FORMAT_LaTeX);
+						game_printNag(v->nags[i], temp, true, PGN_FORMAT_Latex);
 						tb->PrintString(temp);
 					}
 
