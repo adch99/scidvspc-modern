@@ -114,6 +114,7 @@ proc ::optable::makeReportWin {args} {
     if {$::optable::_interrupt} { return }
   }
   set ::optable::_data(tree) $newTreeData
+  # We latexifyTree here and not when we request "View Latex" to assure the report tree and latex tree are the same.
   ::optable::latexifyTree
   set ::optable::_data(bdLaTeX) [sc_pos tex]
   set ::optable::_data(bdHTML) [sc_pos html]
@@ -302,7 +303,6 @@ proc ::optable::setOptions {} {
   }
   toplevel $w
   wm withdraw $w
-  wm resizable $w 0 0
   wm title $w  "[tr ToolsOpReport] [tr OprepFileOptions]"
 
   pack [frame $w.f] -side top -fill x -padx 5 -pady 5
@@ -312,14 +312,15 @@ proc ::optable::setOptions {} {
   }
   set left 0
   set right 1
-  foreach i {Stats Oldest Newest Popular MostFrequent sep \
-        AvgPerf HighRating sep \
-        Results Shortest col \
-        MoveOrders MovesFrom Themes Endgames gap sep \
-        MaxGames ExtraMoves sep} {
+  foreach i {OprepStatsHist   Stats Oldest Newest Popular MostFrequent sep \
+             OprepRatingsPerf AvgPerf HighRating sep \
+             OprepTrends      Results Shortest sep \
+             OprepMovesThemes MoveOrders MovesFrom Themes Endgames sep \
+             OprepTheoryTable MaxGames ExtraMoves} {
     set from 0; set to 10; set tick 1; set res 1
 
     if {$i == "col"} {
+      # Used to signfify a second column, but now unused - S.A.
       incr left 4
       frame $w.f.colsep$left -width 8
       grid $w.f.colsep$left -row 0 -column $left
@@ -330,28 +331,25 @@ proc ::optable::setOptions {} {
       # nothing
     } elseif {$i == "sep"} {
       frame $w.f.fsep$row$left -height 2 -borderwidth 2 -relief sunken 
-      frame $w.f.tsep$row$left -height 2 -borderwidth 2 -relief sunken 
-      grid $w.f.fsep$row$left -row $row -column $left -sticky we -columnspan 4
+      # frame $w.f.tsep$row$left -height 2 -borderwidth 2 -relief sunken 
+      grid $w.f.fsep$row$left -row $row -column $left -sticky we -columnspan 4 -pady 2
     } elseif {[info exists yesno($i)]} {
       checkbutton $w.f.f$i -variable ::optable($i) -onvalue 1 -offvalue 0
       label $w.f.t$i -textvar ::tr(Oprep$i) 
       grid $w.f.f$i -row $row -column $left -sticky n
       grid $w.f.t$i -row $row -column $right -sticky w -columnspan 3
+    } elseif {[string match Oprep* $i]} {
+      # section heading
+      label $w.f.f$i -textvar ::tr($i) -font font_Bold
+      grid $w.f.f$i -row $row -column $left -columnspan 4 ;# -sticky e
     } else {
-      
       # Pascal Georges : changed combobox to spinbox to widen choices
       if {$i == "MaxGames"} {
         spinbox $w.f.s$i -textvariable ::optable($i) -from 0 -to 5000 -increment 50 \
             -width 5 -justify right 
       } else  {
-        set tmpcombo {}
-
-        for {set x $from} {$x <= $to} {incr x $res} {
-          lappend tmpcombo $x
-        }
-        ttk::combobox $w.f.s$i -textvariable ::optable($i) -width 2 -height 11 -values $tmpcombo
+        spinbox $w.f.s$i -textvariable ::optable($i) -width 3 -from $from -to $to -justify right
       }
-      
       label $w.f.t$i -textvar ::tr(Oprep$i) 
       grid $w.f.s$i -row $row -column $left ;# -sticky e
       if {$i == "MostFrequent"  ||  $i == "Shortest"} {
@@ -470,21 +468,10 @@ proc ::optable::saveReport {fmt} {
   unbusyCursor .
 }
 
-proc ::optable::create {} {
-  set ::optable::_data(tree) [sc_tree search -time 0 -epd 0 -adjust 1]
-  ::optable::latexifyTree
-  set ::optable::_data(bdLaTeX) [sc_pos tex]
-  set ::optable::_data(bdHTML) [sc_pos html]
-  set ::optable::_data(bdLaTeX_flip) [sc_pos tex flip]
-  set ::optable::_data(bdHTML_flip) [sc_pos html -flip 1]
-  sc_report opening create $::optable(ExtraMoves) $::optable(MaxGames)
-  ::optable::setupRatios
-}
-
 # latexifyTree
 #   Convert the plain text tree output used for text/html reports
 #   to a table for LaTeX output.
-#
+
 proc ::optable::latexifyTree {} {
   set ::optable::_data(moves) {}
   if {! [info exists ::optable::_data(tree)]} { return }
@@ -798,11 +785,11 @@ proc ::optable::_subsec {text} {
   }
   return "\n$::optable::_data(sec).$::optable::_data(subsec)  $text\n\n"
 }
-################################################################################
+
 # report:
 #   Produces a report in the appropriate format. If "withTable" is true,
 #   the theory table is also included.
-################################################################################
+
 proc ::optable::report {fmt withTable {flipPos 0}} {
   global tr
   sc_report opening format $fmt
