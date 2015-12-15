@@ -4,7 +4,7 @@
 namespace eval ::optable {}
 array set ::optable::_data {}
 
-set ::optable::_data(exclude) "---"
+set ::optable::_data(exclude) none
 set ::optable::_docStart(text) {}
 set ::optable::_docEnd(text) {}
 set ::optable::_docStart(ctext) {}
@@ -176,9 +176,9 @@ proc ::optable::makeReportWin {args} {
     button $w.b.previewHTML -textvar ::tr(OprepViewHTML) \
         -command ::optable::previewHTML
     button $w.b.opts -text [tr OprepFileOptions] -command ::optable::setOptions 
-    label $w.b.lexclude -text "Exclude:" 
+    label $w.b.lexclude -textvar ::tr(Exclude)
     menubutton $w.b.exclude -textvar ::optable::_data(exclude) \
-        -indicatoron 1 -relief raised -bd 2 -menu $w.b.exclude.m -padx 1
+        -indicatoron 1 -relief raised -bd 2 -menu $w.b.exclude.m -width 5
     menu $w.b.exclude.m -tearoff 0
     button $w.b.update -textvar ::tr(Update) -command {
       set ::optable::_data(yview) [lindex [.oprepWin.text yview] 0]
@@ -227,14 +227,14 @@ proc ::optable::makeReportWin {args} {
   }
   ::board::update $w.text.bd [sc_pos board]
   $w.b.exclude.m delete 0 end
-  $w.b.exclude.m add radiobutton -label "---" \
+  $w.b.exclude.m add radiobutton -label "none" \
       -variable ::optable::_data(exclude) -command "$w.b.update invoke"
   foreach move $::optable::_data(moves) {
     $w.b.exclude.m add radiobutton -label $move \
         -variable ::optable::_data(exclude) -command "$w.b.update invoke"
   }
   if {[lsearch $::optable::_data(moves) $::optable::_data(exclude)] < 0} {
-    set ::optable::_data(exclude) "---"
+    set ::optable::_data(exclude) "none"
   }
   busyCursor .
   $w.text configure -state normal
@@ -551,7 +551,7 @@ proc ::optable::setupRatios {} {
     set filter [lindex $r 0]
     set all [lindex $r 1]
     if {$filter == 0} {
-      set ::optable::_data(range$start) "---"
+      set ::optable::_data(range$start) "none"
     } else {
       set ::optable::_data(range$start) \
           [expr {int(double($all) / double($filter))} ]

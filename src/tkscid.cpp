@@ -13652,7 +13652,8 @@ sc_report_create (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     }
     const char * excludeMove = "";
     if (argc > 5) { excludeMove = argv[5]; }
-    if (excludeMove[0] == '-') { excludeMove = ""; }
+
+    if (strcmp (excludeMove, "none") == 0) { excludeMove = ""; }
 
     bool showProgress = startProgressBar();
     if (reports[reportType] != NULL) {
