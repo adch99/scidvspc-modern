@@ -381,7 +381,7 @@ proc exportOptions {exportType} {
   wm withdraw $w
   wm title $w "[tr OptionsExport]"
   wm transient $w .main
-  wm protocol $w WM_DELETE_WINDOW { }
+  wm protocol $w WM_DELETE_WINDOW {set exportFlags(ok) 0}
   bind $w <Escape> "$w.b.cancel invoke"
   bind $w <Return> "$w.b.ok invoke"
   bind $w <F1> {helpWindow Export}
@@ -529,7 +529,6 @@ proc exportGames {selection exportType} {
   }
 
   if {[exportOptions $exportType] == 0} { return }
-  sc_info html $exportFlags(htmldiag)
 
   switch -- $exportType {
     "PGN" {
@@ -542,6 +541,7 @@ proc exportGames {selection exportType} {
       set default ".pgn"
     }
     "HTML" {
+      sc_info html $exportFlags(htmldiag)
       set ftype {
         { "HTML files" {".html" ".htm"} }
         { "All files" {"*"} }
@@ -986,16 +986,16 @@ proc nameEditor {} {
   }
 
   dialogbutton $w.buttons.help -textvar ::tr(Help) -command {helpWindow Maintenance Editing}
-  dialogbutton $w.buttons.cancel -textvar ::tr(Close) -command {focus .main ; destroy .nedit}
+  dialogbutton $w.buttons.cancel -textvar ::tr(Close) -command "destroy $w"
   pack $w.buttons -side top -pady 5
   pack $w.buttons.replace $w.buttons.help $w.buttons.cancel -side left -padx 10
 
   label $w.status -text "" -width 1 -font font_Small -relief sunken -anchor w
 
   wm resizable $w 0 0
-  bind $w <Escape> {focus .main ; destroy .nedit}
-  bind $w <Return> {.nedit.buttons.replace invoke}
-  bind $w <Destroy> {}
+  bind $w <Escape> "destroy $w"
+  bind $w <Return> "$w.buttons.replace invoke"
+  bind $w <Destroy> { if {"%W" == ".nedit"} {focus .main ; destroy .nedit}}
   bind $w <F1> {helpWindow Maintenance Editing}
   focus $w
   $w.typeButtons.$editNameType invoke

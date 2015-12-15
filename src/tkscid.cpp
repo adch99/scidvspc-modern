@@ -1455,6 +1455,7 @@ exportGame (Game * g, FILE * exportFile, gameFormatT format, uint pgnStyle, Char
     // Format-specific settings:
     switch (format) {
     case PGN_FORMAT_HTML:
+	g->SetHtmlStyle (htmlDiagStyle);
     case PGN_FORMAT_LaTeX:
         db->tbuf->NewlinesToSpaces (false);
         g->AddPgnStyle (PGN_STYLE_SHORT_HEADER);
@@ -1466,7 +1467,6 @@ exportGame (Game * g, FILE * exportFile, gameFormatT format, uint pgnStyle, Char
         break;
     }
 
-    g->SetHtmlStyle (htmlDiagStyle);
     g->WriteToPGN (db->tbuf);
     db->tbuf->NewLine();
 
