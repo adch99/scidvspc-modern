@@ -574,10 +574,8 @@ proc exportGames {selection exportType {fName {}}} {
   if {$fName == ""} {
     return
   }
-  if {$::macOS} {
-    if {![string match *$default $fName] && ![string match *.* $fName]} {
+  if {$::macOS && ![string match *$default $fName] && ![string match *.* $fName]} {
       append fName $default
-    }
   }
   set initialDir(pgn) [file dirname $fName]
 

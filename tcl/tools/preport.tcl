@@ -285,6 +285,12 @@ proc ::preport::makeReportWin {args} {
   busyCursor .
   $w.text configure -state normal
   $w.text delete 1.0 end
+
+  if {$::preport::_pos == "current"  &&  ![sc_pos isAt start]} {
+    puts Board!
+    # todo , insert a board (?)
+  }
+
   regsub -all "\n" $report "<br>" report
   ::htext::display $w.text $report
   $w.text configure -state disabled
@@ -417,6 +423,9 @@ proc ::preport::saveReport {fmt} {
   set fname [tk_getSaveFile -initialdir $::env(HOME) -filetypes $ftype -parent .preportWin \
                -defaultextension $default -title "Save Opening Report"]
   if {$fname == ""} { return }
+  if {$::macOS && ![string match *$default $fName] && ![string match *.* $fName]} {
+      append fName $default
+  }
 
   busyCursor .
   if {[catch {set tempfile [open $fname w]}]} {
@@ -551,14 +560,17 @@ proc ::preport::report {fmt {withTable 1}} {
   }
   
   set eco ""
-  set line [sc_report player line]
   if {$::preport::_pos == "current"  &&  ![sc_pos isAt start]} {
+    set line [sc_report player line]
     if {$fmt == "latex"} {
-      append r "\\newchessgame%\n"
-      append r "\\hidemoves{$line}%\\n"
+      # broke - S.A
+      # append r "\\newchessgame%\n"
+      # append r "\\hidemoves{$line}%\\n"
+      # append r "$n$tr(PReportBeginning)$ls"      
+      append r " [format $tr(PReportMoves) [sc_report player line]]"
+    } else {
+      append r " [format $tr(PReportMoves) [sc_report player line]]"
     } 
-    
-    append r "$n$tr(PReportBeginning)$ls \\printchessgame"      
     set eco [sc_report player eco]
   }
   append r " ("

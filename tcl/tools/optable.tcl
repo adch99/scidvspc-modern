@@ -446,6 +446,9 @@ proc ::optable::saveReport {fmt} {
   set fname [tk_getSaveFile -initialdir $::env(HOME) -filetypes $ftype -parent .oprepWin \
       -defaultextension $default -title "Save Opening Report"]
   if {$fname == ""} { return }
+  if {$::macOS && ![string match *$default $fname] && ![string match *.* $fname]} {
+      append fname $default
+  }
 
   busyCursor .
   if {[catch {set tempfile [open $fname w]}]} {
