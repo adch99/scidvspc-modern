@@ -263,7 +263,7 @@ proc ::preport::makeReportWin {args} {
     button $w.b.opts -text [tr OprepFileOptions] -command ::preport::setOptions
     button $w.b.help -textvar ::tr(Help) -command {helpWindow Reports Player}
     button $w.b.previewLatex -textvar ::tr(OprepViewLaTeX) \
-      -command {previewLatex Player {::preport::report latex 1} .preportWin}
+      -command {previewLatex Scid-Player-Report {::preport::report latex 1} .preportWin}
     button $w.b.viewHTML -textvar ::tr(OprepViewHTML) -command ::preport::previewHTML
     button $w.b.update -textvar ::tr(Update) -command ::preport::preportDlg
     button $w.b.close -textvar ::tr(Close) -command "focus .main ; destroy $w"

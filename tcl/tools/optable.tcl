@@ -173,7 +173,7 @@ proc ::optable::makeReportWin {args} {
     scrollbar $w.ybar -command "$w.text yview"
     frame $w.b
     button $w.b.previewLatex -textvar ::tr(OprepViewLaTeX) \
-        -command {previewLatex Opening {::optable::report latex 1 $::optable::_flip} .oprepWin}
+        -command {previewLatex Scid-Opening-Report {::optable::report latex 1 $::optable::_flip} .oprepWin}
     button $w.b.previewHTML -textvar ::tr(OprepViewHTML) \
         -command ::optable::previewHTML
     button $w.b.opts -text [tr OprepFileOptions] -command ::optable::setOptions 
@@ -312,13 +312,13 @@ proc ::optable::setOptions {} {
   }
   set left 0
   set right 1
+  set from 0
+  set to 10
   foreach i {OprepStatsHist   Stats Oldest Newest Popular MostFrequent sep \
              OprepRatingsPerf AvgPerf HighRating sep \
              OprepTrends      Results Shortest sep \
              OprepMovesThemes MoveOrders MovesFrom Themes Endgames sep \
              OprepTheoryTable MaxGames ExtraMoves} {
-    set from 0; set to 10; set tick 1; set res 1
-
     if {$i == "col"} {
       # Used to signfify a second column, but now unused - S.A.
       incr left 4

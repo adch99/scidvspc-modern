@@ -616,52 +616,50 @@ menu $m.exportcurrent
 $m add cascade -label ToolsExpCurrent -menu $m.exportcurrent
 set helpMessage($m,[incr menuindex]) ToolsExpCurrent
 
-$m.exportcurrent add command -label ToolsExpCurrentPGN \
-    -command {exportGames current PGN}
+$m.exportcurrent add command -label ToolsExpCurrentPGN -command {exportGames current PGN}
 set helpMessage($m.exportcurrent,0) ToolsExpCurrentPGN
 
-$m.exportcurrent add command -label ToolsExpCurrentHTML \
-    -command {exportGames current HTML}
+$m.exportcurrent add command -label ToolsExpCurrentHTML -command {exportGames current HTML}
 set helpMessage($m.exportcurrent,1) ToolsExpCurrentHTML
 
-$m.exportcurrent add command -label ToolsExpCurrentHTMLJS \
-    -command {::html::exportCurrentGame}
+$m.exportcurrent add command -label ToolsExpCurrentHTMLJS -command {::html::exportCurrentGame}
 set helpMessage($m.exportcurrent,2) ToolsExpCurrentHTMLJS
 
-$m.exportcurrent add command -label ToolsExpCurrentLaTeX \
-    -command {exportGames current Latex}
+$m.exportcurrent add command -label ToolsExpCurrentLaTeX -command {exportGames current Latex}
 set helpMessage($m.exportcurrent,3) ToolsExpCurrentLaTeX
+
+$m.exportcurrent add command -label ToolsPreviewCurrentLaTeX -command {
+  ### $::scidLogDir must be usedhere, as previewLatex also looks there.
+  #   and xelatex must be configure instead of pdflatex
+  set latexFilename Game-[sc_game number]
+  exportGames current Latex [file join $::scidLogDir $latexFilename.tex]
+  previewLatex $latexFilename {} .
+}
 
 menu $m.exportfilter
 
 $m add cascade -label ToolsExpFilter -menu $m.exportfilter
 set helpMessage($m,[incr menuindex]) ToolsExpFilter
 
-$m.exportfilter add command -label ToolsExpFilterPGN \
-    -command {exportGames filter PGN}
+$m.exportfilter add command -label ToolsExpFilterPGN -command {exportGames filter PGN}
 set helpMessage($m.exportfilter,0) ToolsExpFilterPGN
 
-$m.exportfilter add command -label ToolsExpFilterHTML \
-    -command {exportGames filter HTML}
+$m.exportfilter add command -label ToolsExpFilterHTML -command {exportGames filter HTML}
 set helpMessage($m.exportfilter,1) ToolsExpFilterHTML
 
-$m.exportfilter add command -label ToolsExpFilterHTMLJS \
-    -command {::html::exportCurrentFilter}
+$m.exportfilter add command -label ToolsExpFilterHTMLJS -command {::html::exportCurrentFilter}
 set helpMessage($m.exportfilter,2) ToolsExpFilterHTMLJS
 
-$m.exportfilter add command -label ToolsExpFilterLaTeX \
-    -command {exportGames filter Latex}
+$m.exportfilter add command -label ToolsExpFilterLaTeX -command {exportGames filter Latex}
 set helpMessage($m.exportfilter,3) ToolsExpFilterLaTeX
 
-$m.exportfilter add command -label ToolsExpFilterGames \
-    -command openExportGList
+$m.exportfilter add command -label ToolsExpFilterGames -command openExportGList
 set helpMessage($m.exportfilter,3) ToolsExpFilterGames
 
 $m add separator
 incr menuindex
 
-$m add command -label ToolsImportOne \
-    -accelerator "control-I" -command importPgnGame
+$m add command -label ToolsImportOne -accelerator "control-I" -command importPgnGame
 bind .main <Control-I> importPgnGame
 set helpMessage($m,[incr menuindex]) ToolsImportOne
 

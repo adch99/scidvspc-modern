@@ -1015,30 +1015,33 @@ namespace eval html {
 ### Merges ::optable::previewLaTeX and ::preport::previewLaTeX
 #   TODO : test on windows and OS X
 
-proc previewLatex {type command parent} {
+proc previewLatex {filename command parent} {
   
   busyCursor $parent
   update
   
   # config file names
   set tmpdir $::scidLogDir    
-  set tmpfile "Scid-$type-Report"
-  set texfile $tmpfile.tex
-  set dvifile $tmpfile.dvi    
-  set fname [file join $tmpdir $tmpfile]
-  file delete $fname
+  set texfile $filename.tex
+  set dvifile $filename.dvi    
+  set fname [file join $tmpdir $filename]
   set pdffile "$fname.pdf"
   set latexLog "$fname.log"
-  
-  if {[catch {set tempfile [open $fname.tex w]}]} {
-    tk_messageBox -title "Scid: Error writing report" -type ok -icon warning \
-        -message "Unable to write the file: $fname.tex" -parent pw
-    unbusyCursor .
-    return
-  }
 
-  puts $tempfile [eval $command]
-  close $tempfile
+  # Null command means that $filename.tex is already generated.
+  if {$command != ""} {
+    file delete $fname.tex
+    
+    if {[catch {set filedes [open $fname.tex w]}]} {
+      tk_messageBox -title "Scid: Error writing report" -type ok -icon warning \
+	  -message "Unable to write the file: $fname.tex" -parent pw
+      unbusyCursor .
+      return
+    }
+
+    puts $filedes [eval $command]
+    close $filedes
+  }
 
   # Initial Defaults in case they blanked preferences 
   set latexEngine "pdflatex -interaction=nonstopmode"  
@@ -1072,7 +1075,7 @@ proc previewLatex {type command parent} {
       }
     }
   }
-    
+
   # User Preference overrides  
   if {$::latexRendering(engine) != ""} {
     set latexEngine $::latexRendering(engine)
@@ -1096,11 +1099,11 @@ proc previewLatex {type command parent} {
     if {[catch {exec $latexEngineCmd --version} result] == 0} {            
       if {![catch {exec $::env(ComSpec) /c "cd $tmpdir & $latexEngine '$texfile'" >& $latexLog }]} {             
         if {[catch {exec $::env(ComSpec) /c "$latexViewer $pdffile" >& $latexLog &}]} {
-            tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
+            tk_messageBox -title "Scid Error" -icon warning -type ok -parent $parent \
                 -message "Unable to view the report.\n\nSee $fname.log for details."
         }
       } else {
-        tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
+        tk_messageBox -title "Scid Error" -icon warning -type ok -parent $parent \
             -message "Unable to generate the report.\n\nSee $fname.log for details."
       }      
     } else {
@@ -1108,15 +1111,15 @@ proc previewLatex {type command parent} {
       if {![catch {exec $::env(ComSpec) /c "cd $tmpdir & latex -interaction=nonstopmode '$texfile'" >& $latexLog}]} {
         if {![catch {exec $::env(ComSpec) /c "cd $tmpdir & dvipdfm $dvifile" >& $latexLog}]} {
           if {[catch {exec $::env(ComSpec) /c "$latexViewer $pdffile" >& $latexLog &}]} {
-            tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
+            tk_messageBox -title "Scid Error" -icon warning -type ok -parent $parent \
                 -message "Unable to view the report.\n\nSee $fname.log for details."
           }
         } else {          
-          tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
+          tk_messageBox -title "Scid Error" -icon warning -type ok -parent $parent \
               -message "Unable to convert the report to pdf.\n\nSee $fname.log for details."
         } 
       } else {
-        tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
+        tk_messageBox -title "Scid Error" -icon warning -type ok -parent $parent \
               -message "Unable to generate the report. \n\nSee $fname.log for details."      
       } 
     }
@@ -1125,11 +1128,11 @@ proc previewLatex {type command parent} {
     if {[catch {exec $latexEngineCmd --version} result] == 0} {            
       if {![catch {exec /bin/sh -c "cd $tmpdir; $latexEngine '$texfile'" >& $latexLog }]} {             
         if {[catch {exec /bin/sh -c "$latexViewer $pdffile" >& $latexLog &}]} {
-            tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
+            tk_messageBox -title "Scid Error" -icon warning -type ok -parent $parent \
                 -message "Unable to view the report.\n\nSee $fname.log for details."
         }
       } else {
-        tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
+        tk_messageBox -title "Scid Error" -icon warning -type ok -parent $parent \
             -message "Unable to generate the report.\n\nSee $fname.log for details."
       }      
     } else {
@@ -1137,15 +1140,15 @@ proc previewLatex {type command parent} {
       if {![catch {exec /bin/sh -c "cd $tmpdir; latex '$texfile'" >& $latexLog}]} {
         if {![catch {exec /bin/sh -c "cd $tmpdir; dvipdfm $dvifile" >& $latexLog}]} {
           if {[catch {exec /bin/sh -c "$latexViewer $pdffile" >& $latexLog &}]} {
-            tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
+            tk_messageBox -title "Scid Error" -icon warning -type ok -parent $parent \
                 -message "Unable to view the report.\n\nSee $fname.log for details."
           }
         } else {          
-          tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
+          tk_messageBox -title "Scid Error" -icon warning -type ok -parent $parent \
               -message "Unable to convert the report to pdf.\n\nSee $fname.log for details."
         } 
       } else {
-        tk_messageBox -title "Scid Error" -icon warning -type ok -parent .preportWin \
+        tk_messageBox -title "Scid Error" -icon warning -type ok -parent $parent \
               -message "Unable to generate the report. \n\nSee $fname.log for details."      
       } 
     }     

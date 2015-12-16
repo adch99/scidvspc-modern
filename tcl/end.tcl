@@ -372,7 +372,7 @@ image create photo htmldiag1 -data {
 
 ### Prompts the user to select exporting options.
 
-proc exportOptions {exportType} {
+proc exportOptions {exportType {fName {}}} {
   global exportFlags
 
   set w .exportFlagsWin
@@ -387,51 +387,53 @@ proc exportOptions {exportType} {
   bind $w <F1> {helpWindow Export}
 
   pack [frame $w.o] -side top -fill x -pady 5 -padx 5
-  label $w.o.append -text $::tr(AddToExistingFile)
-  radiobutton $w.o.appendOn -text $::tr(Yes) \
-      -variable exportFlags(append) -value 1
-  radiobutton $w.o.appendOff -text $::tr(No) \
-      -variable exportFlags(append) -value 0
+
+  set row 0
+  if {$fName == {}} {
+    label $w.o.append -text $::tr(AddToExistingFile)
+    radiobutton $w.o.appendOn -text $::tr(Yes) -variable exportFlags(append) -value 1
+    radiobutton $w.o.appendOff -text $::tr(No) -variable exportFlags(append) -value 0
+    grid $w.o.$append    -row $row -column 0 -sticky w
+    grid $w.o.$appendOn  -row $row -column 1 -sticky w
+    grid $w.o.$appendOff -row $row -column 2 -sticky w
+    incr row
+  } else {
+    set exportFlags(append) 0
+  }
+
   label $w.o.space -text [tr PgnOptSpace]
-  radiobutton $w.o.spaceOn -text $::tr(Yes) \
-      -variable exportFlags(space) -value 1
-  radiobutton $w.o.spaceOff -text $::tr(No) \
-      -variable exportFlags(space) -value 0
+  radiobutton $w.o.spaceOn -text $::tr(Yes) -variable exportFlags(space) -value 1
+  radiobutton $w.o.spaceOff -text $::tr(No) -variable exportFlags(space) -value 0
+
   label $w.o.comments -text $::tr(ExportComments)
-  radiobutton $w.o.commentsOn -text $::tr(Yes) \
-      -variable exportFlags(comments) -value 1
-  radiobutton $w.o.commentsOff -text $::tr(No) \
-      -variable exportFlags(comments) -value 0
+  radiobutton $w.o.commentsOn -text $::tr(Yes) -variable exportFlags(comments) -value 1
+  radiobutton $w.o.commentsOff -text $::tr(No) -variable exportFlags(comments) -value 0
+
   label $w.o.stripMarks -text $::tr(ExportStripMarks)
-  radiobutton $w.o.stripMarksOn -text $::tr(Yes) \
-      -variable exportFlags(stripMarks) -value 1
-  radiobutton $w.o.stripMarksOff -text $::tr(No) \
-      -variable exportFlags(stripMarks) -value 0
+  radiobutton $w.o.stripMarksOn -text $::tr(Yes) -variable exportFlags(stripMarks) -value 1
+  radiobutton $w.o.stripMarksOff -text $::tr(No) -variable exportFlags(stripMarks) -value 0
+
   label $w.o.indentc -text $::tr(IndentComments)
-  radiobutton $w.o.indentcOn -text $::tr(Yes) \
-      -variable exportFlags(indentc) -value 1
-  radiobutton $w.o.indentcOff -text $::tr(No) \
-      -variable exportFlags(indentc) -value 0
+  radiobutton $w.o.indentcOn -text $::tr(Yes) -variable exportFlags(indentc) -value 1
+  radiobutton $w.o.indentcOff -text $::tr(No) -variable exportFlags(indentc) -value 0
+
   label $w.o.vars -text $::tr(ExportVariations)
   radiobutton $w.o.varsOn -text $::tr(Yes) -variable exportFlags(vars) -value 1
   radiobutton $w.o.varsOff -text $::tr(No) -variable exportFlags(vars) -value 0
+
   label $w.o.indentv -text $::tr(IndentVariations)
-  radiobutton $w.o.indentvOn -text $::tr(Yes) \
-      -variable exportFlags(indentv) -value 1
-  radiobutton $w.o.indentvOff -text $::tr(No) \
-      -variable exportFlags(indentv) -value 0
+  radiobutton $w.o.indentvOn -text $::tr(Yes) -variable exportFlags(indentv) -value 1
+  radiobutton $w.o.indentvOff -text $::tr(No) -variable exportFlags(indentv) -value 0
+
   label $w.o.column -text $::tr(ExportColumnStyle)
-  radiobutton $w.o.columnOn -text $::tr(Yes) \
-      -variable exportFlags(column) -value 1
-  radiobutton $w.o.columnOff -text $::tr(No) \
-      -variable exportFlags(column) -value 0
+  radiobutton $w.o.columnOn -text $::tr(Yes) -variable exportFlags(column) -value 1
+  radiobutton $w.o.columnOff -text $::tr(No) -variable exportFlags(column) -value 0
+
   label $w.o.symbols -text $::tr(ExportSymbolStyle)
-  radiobutton $w.o.symbolsOn -text "! +=" \
-      -variable exportFlags(symbols) -value 1
-  radiobutton $w.o.symbolsOff -text {$2 $14} \
-      -variable exportFlags(symbols) -value 0
-  set row 0
-  foreach i {append space comments stripMarks indentc vars indentv column} {
+  radiobutton $w.o.symbolsOn -text "! +=" -variable exportFlags(symbols) -value 1
+  radiobutton $w.o.symbolsOff -text {$2 $14} -variable exportFlags(symbols) -value 0
+
+  foreach i {space comments stripMarks indentc vars indentv column} {
     grid $w.o.${i}    -row $row -column 0 -sticky w
     grid $w.o.${i}On  -row $row -column 1 -sticky w
     grid $w.o.${i}Off -row $row -column 2 -sticky w
@@ -448,10 +450,8 @@ proc exportOptions {exportType} {
   # Extra option for PGN format: handling of null moves
   if {$exportType == "PGN"} {
     label $w.o.nullMoves -text "Convert null moves to comments"
-    radiobutton $w.o.convertNullMoves -text $::tr(Yes) \
-        -variable exportFlags(convertNullMoves) -value 1
-    radiobutton $w.o.keepNullMoves -text $::tr(No) \
-        -variable exportFlags(convertNullMoves) -value 0
+    radiobutton $w.o.convertNullMoves -text $::tr(Yes) -variable exportFlags(convertNullMoves) -value 1
+    radiobutton $w.o.keepNullMoves -text $::tr(No) -variable exportFlags(convertNullMoves) -value 0
     grid $w.o.nullMoves        -row $row -column 0 -sticky w
     grid $w.o.convertNullMoves -row $row -column 1 -sticky w
     grid $w.o.keepNullMoves    -row $row -column 2 -sticky w
@@ -470,10 +470,8 @@ proc exportOptions {exportType} {
   if {$exportType == "HTML"} {
     label $w.o.space3 -text ""
     label $w.o.hdiag -text "Diagram"
-    radiobutton $w.o.hb0 -text "bitmaps" \
-        -variable exportFlags(htmldiag) -value 0
-    radiobutton $w.o.hb1 -text "bitmaps2" \
-        -variable exportFlags(htmldiag) -value 1
+    radiobutton $w.o.hb0 -text "bitmaps" -variable exportFlags(htmldiag) -value 0
+    radiobutton $w.o.hb1 -text "bitmaps2" -variable exportFlags(htmldiag) -value 1
     label $w.o.hl0 -image htmldiag0
     label $w.o.hl1 -image htmldiag1
     grid $w.o.space3 -row $row -column 0
@@ -510,7 +508,7 @@ proc exportOptions {exportType} {
 
 ### Export current game or all filtered games to a new PGN, LaTeX or Html file.
 
-proc exportGames {selection exportType} {
+proc exportGames {selection exportType {fName {}}} {
   global ::pgn::moveNumberSpaces exportStartFile exportEndFile exportFlags initialDir
   set exportFilter 0
   if {$selection == "filter"} { set exportFilter 1 }
@@ -528,7 +526,7 @@ proc exportGames {selection exportType} {
     }
   }
 
-  if {[exportOptions $exportType] == 0} { return }
+  if {[exportOptions $exportType $fName] == 0} { return }
 
   switch -- $exportType {
     "PGN" {
@@ -569,8 +567,10 @@ proc exportGames {selection exportType} {
     set getfile tk_getSaveFile
     set title "Create $title"
   }
-  set fName [$getfile -initialdir $idir -filetypes $ftype \
-      -defaultextension $default -title $title]
+  if {$fName == ""} {
+    set fName [$getfile -initialdir $idir -filetypes $ftype \
+	-defaultextension $default -title $title]
+  }
   if {$fName == ""} {
     return
   }
