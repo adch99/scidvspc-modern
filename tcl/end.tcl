@@ -393,9 +393,9 @@ proc exportOptions {exportType {fName {}}} {
     label $w.o.append -text $::tr(AddToExistingFile)
     radiobutton $w.o.appendOn -text $::tr(Yes) -variable exportFlags(append) -value 1
     radiobutton $w.o.appendOff -text $::tr(No) -variable exportFlags(append) -value 0
-    grid $w.o.$append    -row $row -column 0 -sticky w
-    grid $w.o.$appendOn  -row $row -column 1 -sticky w
-    grid $w.o.$appendOff -row $row -column 2 -sticky w
+    grid $w.o.append    -row $row -column 0 -sticky w
+    grid $w.o.appendOn  -row $row -column 1 -sticky w
+    grid $w.o.appendOff -row $row -column 2 -sticky w
     incr row
   } else {
     set exportFlags(append) 0
