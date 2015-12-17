@@ -1043,117 +1043,50 @@ proc previewLatex {filename command parent} {
     close $filedes
   }
 
-  # Initial Defaults in case they blanked preferences 
-  set latexEngine "pdflatex -interaction=nonstopmode"  
-    
-  if {$::windowsOS} {
-    # this will invoke the windows registered pdf handler
-    set latexViewer start
-  } elseif {$::macOS} {
-    # this will invoke the OS / X registered pdf handler
-    # use open -a if you want to force to the built in preview
-    set latexViewer open
-  } else {
-    if {[catch {exec xdg-mime query default application/pdf} result] == 0} {
-      # cool unix has a registered app for pdfs so lets use it 
-      set latexViewer "xdg-open"
-    } else {
-      # try and detect the destop to make at least best guess
-      if {[info exists ::env(XDG_CURRENT_DESKTOP)]} {
-        set unixDesktop = [string tolower $::env(XDG_CURRENT_DESKTOP)]
-      } else {
-        switch -regexp -matchvar denv -- $::env(XDG_DATA_DIRS) {
-          .*(gnome|xfce|kde).* { set unixDesktop $denv }
-          default { set unixDesktop "unknown" }
-        } 
-        switch $linuxDesktop {
-          gnome   {set latexViewer evince}
-          kde     {set latexViewer okular}
-          xfce    {set latexViewer evince}
-          default {set latexViewer xpdf}
-        }
-      }
-    }
-  }
+  # Defaults are set in tcl/start.tcl
 
-  # User Preference overrides  
-  if {$::latexRendering(engine) != ""} {
+  if {$::latexRendering(engine) == ""} {
+    set latexEngine $::default_latexRendering(engine)
+  } else {
     set latexEngine $::latexRendering(engine)
   }
-  if {$::latexRendering(viewer) != ""} {
+
+  if {$::latexRendering(viewer) == ""} {
+    set latexViewer $::default_latexRendering(viewer)
+  } else {
     set latexViewer $::latexRendering(viewer)
   }
-  
-  set latexEngineCmd [string trim $latexEngine]
-  if {$::windowsOS} {      
-    if {[string first " /" $latexEngineCmd] != -1} {
-        set latexEngineCmd [string range $latexEngineCmd 0 [expr {[string first " /" $latexEngineCmd] -1}]]
-    }
-  } else {
-    if {[string first " -" $latexEngineCmd] != -1} {
-        set latexEngineCmd [string range $latexEngineCmd 0 [expr {[string first " -" $latexEngineCmd] -1}]]
-    }
-  }
-      
+
+  set err_engine "Unable to generate the report with command \"$latexEngine\".\n
+Edit Options->Exporting->Latex to change the engine.\n
+See $fname.log for details."
+
+  set err_viewer "Unable to view the report with viewer \"$latexViewer\".\n
+Edit Options->Exporting->Latex to change viewer.\n
+See $fname.log for details."
+
+
   if {$::windowsOS} {
-    if {[catch {exec $latexEngineCmd --version} result] == 0} {            
-      if {![catch {exec $::env(ComSpec) /c "cd $tmpdir & $latexEngine '$texfile'" >& $latexLog }]} {             
+      if {[catch {exec $::env(ComSpec) /c "cd '$tmpdir'  & $latexEngine '$texfile'" >& $latexLog }]} {             
+        tk_messageBox -title "Scid Error" -icon warning -type ok -parent $parent -message $err_engine
+      } else {
         if {[catch {exec $::env(ComSpec) /c "$latexViewer $pdffile" >& $latexLog &}]} {
-            tk_messageBox -title "Scid Error" -icon warning -type ok -parent $parent \
-                -message "Unable to view the report.\n\nSee $fname.log for details."
+            tk_messageBox -title "Scid Error" -icon warning -type ok -parent $parent -message $err_viewer
         }
-      } else {
-        tk_messageBox -title "Scid Error" -icon warning -type ok -parent $parent \
-            -message "Unable to generate the report.\n\nSee $fname.log for details."
       }      
-    } else {
-      # Current engine not available so lets try the old way
-      if {![catch {exec $::env(ComSpec) /c "cd $tmpdir & latex -interaction=nonstopmode '$texfile'" >& $latexLog}]} {
-        if {![catch {exec $::env(ComSpec) /c "cd $tmpdir & dvipdfm $dvifile" >& $latexLog}]} {
-          if {[catch {exec $::env(ComSpec) /c "$latexViewer $pdffile" >& $latexLog &}]} {
-            tk_messageBox -title "Scid Error" -icon warning -type ok -parent $parent \
-                -message "Unable to view the report.\n\nSee $fname.log for details."
-          }
-        } else {          
-          tk_messageBox -title "Scid Error" -icon warning -type ok -parent $parent \
-              -message "Unable to convert the report to pdf.\n\nSee $fname.log for details."
-        } 
-      } else {
-        tk_messageBox -title "Scid Error" -icon warning -type ok -parent $parent \
-              -message "Unable to generate the report. \n\nSee $fname.log for details."      
-      } 
-    }
   } else {
     # Linux / OS X
-    if {[catch {exec $latexEngineCmd --version} result] == 0} {            
-      if {![catch {exec /bin/sh -c "cd $tmpdir; $latexEngine '$texfile'" >& $latexLog }]} {             
-        if {[catch {exec /bin/sh -c "$latexViewer $pdffile" >& $latexLog &}]} {
-            tk_messageBox -title "Scid Error" -icon warning -type ok -parent $parent \
-                -message "Unable to view the report.\n\nSee $fname.log for details."
-        }
-      } else {
-        tk_messageBox -title "Scid Error" -icon warning -type ok -parent $parent \
-            -message "Unable to generate the report.\n\nSee $fname.log for details."
-      }      
+    if {[catch {exec /bin/sh -c "cd '$tmpdir' ; $latexEngine '$texfile'" >& $latexLog }]} {             
+      unbusyCursor .  
+      tk_messageBox -title "Scid Error" -icon warning -type ok -parent $parent -message $err_engine
     } else {
-      # No pdflatex available so lets try the old way
-      if {![catch {exec /bin/sh -c "cd $tmpdir; latex '$texfile'" >& $latexLog}]} {
-        if {![catch {exec /bin/sh -c "cd $tmpdir; dvipdfm $dvifile" >& $latexLog}]} {
-          if {[catch {exec /bin/sh -c "$latexViewer $pdffile" >& $latexLog &}]} {
-            tk_messageBox -title "Scid Error" -icon warning -type ok -parent $parent \
-                -message "Unable to view the report.\n\nSee $fname.log for details."
-          }
-        } else {          
-          tk_messageBox -title "Scid Error" -icon warning -type ok -parent $parent \
-              -message "Unable to convert the report to pdf.\n\nSee $fname.log for details."
-        } 
-      } else {
-        tk_messageBox -title "Scid Error" -icon warning -type ok -parent $parent \
-              -message "Unable to generate the report. \n\nSee $fname.log for details."      
-      } 
-    }     
+      if {[catch {exec /bin/sh -c "$latexViewer $pdffile" >& $latexLog }]} {
+	  unbusyCursor .  
+	  tk_messageBox -title "Scid Error" -icon warning -type ok -parent $parent -message $err_viewer
+      }
+    }      
   }     
   unbusyCursor .  
-} 
+}
 
 # end of misc.tcl
