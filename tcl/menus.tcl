@@ -628,10 +628,11 @@ set helpMessage($m.exportcurrent,2) ToolsExpCurrentHTMLJS
 $m.exportcurrent add command -label ToolsExpCurrentLaTeX -command {exportGames current Latex}
 set helpMessage($m.exportcurrent,3) ToolsExpCurrentLaTeX
 
-$m.exportcurrent add command -label ToolsPreviewCurrentLaTeX -command {
+$m.exportcurrent add command -label ToolsExpCurrentLaTeX -command {
   ### $::scidLogDir must be usedhere, as previewLatex also looks there.
-  #   and xelatex must be configure instead of pdflatex
-  set latexFilename Game-[sc_game number]
+  ### and xelatex must be configure instead of pdflatex
+
+  set latexFilename Game-Preview
   exportGames current Latex [file join $::scidLogDir $latexFilename.tex]
   previewLatex $latexFilename {} .
 }
@@ -652,6 +653,12 @@ set helpMessage($m.exportfilter,2) ToolsExpFilterHTMLJS
 
 $m.exportfilter add command -label ToolsExpFilterLaTeX -command {exportGames filter Latex}
 set helpMessage($m.exportfilter,3) ToolsExpFilterLaTeX
+
+$m.exportfilter add command -label ToolsExpFilterLatex -command {
+  set latexFilename Games-Preview
+  exportGames filter Latex [file join $::scidLogDir $latexFilename.tex]
+  previewLatex $latexFilename {} .
+}
 
 $m.exportfilter add command -label ToolsExpFilterGames -command openExportGList
 set helpMessage($m.exportfilter,3) ToolsExpFilterGames
@@ -1486,9 +1493,13 @@ proc setLanguageMenus {{lang ""}} {
   foreach tag {ToolsExpCurrentPGN ToolsExpCurrentHTML ToolsExpCurrentHTMLJS ToolsExpCurrentLaTeX} {
     configMenuText .menu.tools.exportcurrent [tr $tag $oldLang] $tag $lang
   }
+  .menu.tools.exportcurrent entryconfig 4 -label "[tr ToolsExpCurrentLaTeX] ([tr OprepViewLaTeX])"
+
   foreach tag {ToolsExpFilterPGN ToolsExpFilterHTML ToolsExpFilterHTMLJS ToolsExpFilterLaTeX ToolsExpFilterGames} {
     configMenuText .menu.tools.exportfilter [tr $tag $oldLang] $tag $lang
   }
+  .menu.tools.exportfilter entryconfig 4 -label "[tr ToolsExpFilterLaTeX] ([tr OprepViewLaTeX])"
+
   foreach tag {Board Colour Toolbar Names Recent Fonts GInfo Fics Moves Startup Language
     Numbers Windows Theme Export ECO Spell Table BooksDir TacticsBasesDir Sounds Save AutoSave} {
     configMenuText .menu.options [tr Options$tag $oldLang] Options$tag $lang
