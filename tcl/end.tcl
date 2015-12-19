@@ -220,70 +220,54 @@ proc setExportText {exportType} {
   ::utils::pane::SetRange $w.pane 0.3 0.7
   pack $pane -side top -expand true -fill both
   foreach f [list $pane.start $pane.end] type {start end} {
-    label $f.title -font font_Bold -text "Text at $type of $exportType file:"
+    label $f.title -font font_Bold -text "Text at $type of $exportType file"
     text $f.text -wrap none  \
         -yscroll "$f.ybar set" -xscroll "$f.xbar set"
     scrollbar $f.ybar -orient vertical -command "$f.text yview"
     scrollbar $f.xbar -orient horizontal -command "$f.text xview"
-    bind $f.text <FocusIn> {%W configure -background lightYellow}
-    bind $f.text <FocusOut> {%W configure -background white}
     grid $f.title -row 0 -column 0 -sticky w
     grid $f.text -row 1 -column 0 -sticky nesw
     grid $f.ybar -row 1 -column 1 -sticky nesw
     grid $f.xbar -row 2 -column 0 -sticky nesw
     grid rowconfig $f 1 -weight 1 -minsize 0
     grid columnconfig $f 0 -weight 1 -minsize 0
-  } 
+  }
 
   $pane.start.text insert end $exportStartFile($exportType)
   $pane.end.text insert end $exportEndFile($exportType)
   
   # Additional Latex options
   if {$exportType == "Latex"} {
-    frame $w.latexlead -width 500 -height 100
-    pack $w.latexlead -side top -pady 10
-    label $w.latexlead.descr -font font_Bold -text "LaTeX System Options"
-    grid $w.latexlead.descr -row 0 -column 0 -sticky w
-    set panelatex [::utils::pane::Create $w.panelatex rendering viewing 500 200]        
-    pack $panelatex -side top -expand true -fill both     
-    foreach f [list $panelatex.rendering $panelatex.viewing] type {rendering viewing} {
-      label $f.title -font font_Bold -text "Command for $type $exportType file:"
-      text $f.text -wrap none  \
-          -yscroll "$f.ybar set" -xscroll "$f.xbar set"
-      scrollbar $f.ybar -orient vertical -command "$f.text yview"
-      scrollbar $f.xbar -orient horizontal -command "$f.text xview"
-      bind $f.text <FocusIn> {%W configure -background lightYellow}
-      bind $f.text <FocusOut> {%W configure -background white}
-      grid $f.title -row 0 -column 0 -sticky w
-      grid $f.text -row 1 -column 0 -sticky nesw
-      grid $f.ybar -row 1 -column 1 -sticky nesw
-      grid $f.xbar -row 2 -column 0 -sticky nesw
-      grid rowconfig $f 1 -weight 1 -minsize 0
-      grid columnconfig $f 0 -weight 1 -minsize 0
-    }  
-    $panelatex.rendering.text insert end $latexRendering(engine)
-    $panelatex.viewing.text insert end $latexRendering(viewer)
-  }
+    label $w.descr -font font_Bold -text "LaTeX System Options"
+    pack $w.descr -side top
 
-  if {$exportType == "Latex"} {
+    foreach f {rendering viewer} {
+      pack [frame $w.$f] -fill x -side top -pady 3
+      pack [label $w.$f.label -text "Command for $f:"] -side left
+      pack [entry $w.$f.entry -width 30] -side right -padx 2
+    }
+    $w.rendering.entry insert 0  $latexRendering(engine)
+    $w.viewer.entry    insert 0  $latexRendering(viewer)
+
     button $w.buttons.default -text "Reset to Default" -command "
-    $pane.start.text delete 1.0 end
-    $pane.start.text insert end \$default_exportStartFile($exportType)
-    $pane.end.text delete 1.0 end
-    $pane.end.text insert end \$default_exportEndFile($exportType)
-    $panelatex.rendering.text delete 1.0 end
-    $panelatex.rendering.text insert end \$default_latexRendering(engine)    
-    $panelatex.viewing.text delete 1.0 end
-    $panelatex.viewing.text insert end \$default_latexRendering(viewer)    
+      $pane.start.text delete 1.0 end
+      $pane.start.text insert end \$default_exportStartFile(Latex)
+      $pane.end.text delete 1.0 end
+      $pane.end.text insert end \$default_exportEndFile(Latex)
+      $w.rendering.entry delete 0 end
+      $w.viewer.entry   delete 0 end
+      $w.rendering.entry insert 0 \$default_latexRendering(engine)
+      $w.viewer.entry   insert 0 \$default_latexRendering(viewer)
     "
     dialogbutton $w.buttons.ok -text "OK" -command "
-    set exportStartFile($exportType) \[$pane.start.text get 1.0 end-1c\]
-    set exportEndFile($exportType) \[$pane.end.text get 1.0 end-1c\]
-    set latexRendering(engine) \[$panelatex.rendering.text get 1.0 end-1c\]
-    set latexRendering(viewer) \[$panelatex.viewing.text get 1.0 end-1c\]
-    focus .main
-    destroy $w
+      set exportStartFile(Latex) \[$pane.start.text get 1.0 end-1c\]
+      set exportEndFile(Latex)   \[$pane.end.text get 1.0 end-1c\]
+      set latexRendering(engine) \[string trim \[$w.rendering.entry get\]\]
+      set latexRendering(viewer) \[string trim \[$w.viewer.entry get\]\]
+      focus .main
+      destroy $w
     "        
+    addHorizontalRule $w
   } else {
     button $w.buttons.default -text "Reset to Default" -command "
     $pane.start.text delete 1.0 end

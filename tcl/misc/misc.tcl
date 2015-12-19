@@ -1080,7 +1080,7 @@ See $fname.log for details."
       unbusyCursor .  
       tk_messageBox -title "Scid Error" -icon warning -type ok -parent $parent -message $err_engine
     } else {
-      if {[catch {exec /bin/sh -c "$latexViewer $pdffile" >& $latexLog }]} {
+      if {[catch {exec /bin/sh -c "$latexViewer $pdffile" >& $latexLog &}]} {
 	  unbusyCursor .  
 	  tk_messageBox -title "Scid Error" -icon warning -type ok -parent $parent -message $err_viewer
       }
