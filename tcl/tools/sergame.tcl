@@ -498,6 +498,7 @@ namespace eval sergame {
 
     if { [::sergame::checkEndOfGame] } {
       catch {::game::Save}
+      updateBoard -pgn
       return
     }
 
