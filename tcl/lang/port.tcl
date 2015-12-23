@@ -481,9 +481,9 @@ translate U allOthersLose {qualquer outro perde}
 translate U matesIn {mate em}
 translate U hasCheckmated {recebeu xeque-mate}
 translate U longest {mais longo}
-translate U WinningMoves {Winning moves} ;# ***
-translate U DrawingMoves {Drawing moves} ;# ***
-translate U LosingMoves {Losing moves} ;# ***
+translate U WinningMoves {Movimentos que ganham} ;# ***
+translate U DrawingMoves {Movimentos que empatam} ;# ***
+translate U LosingMoves {Movimentos que perdem} ;# ***
 translate U UnknownMoves {Unknown-result moves} ;# ***
 
 # Tip of the day:
@@ -537,8 +537,7 @@ menuText U TreeOptShort "Short Display" 0 {Don't show ELO information}
 menuText U TreeOptAutosave "Salvar automaticamente arquivo de cache" 0 \
   {Salvar automaticamente o arquivo de cache quando fechar a janela de arvore}
 menuText U TreeOptAutomask "Abrir máscara automaticamente" 0 "Auto-Load most recent mask with a tree open."
-# ====== TODO To be translated ======
-menuText U TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
+menuText U TreeOptShowBar "Mostrar Barra de Progresso" 0 "Mostrar barra de progresso da árvore."
 menuText U TreeHelp "Ajuda" 0
 menuText U TreeHelpTree "Ajuda para árvore" 0
 menuText U TreeHelpIndex "Índice da Ajuda" 0
@@ -552,9 +551,10 @@ translate U TreeBestGames {Melhores jogos da árvore}
 translate U TreeAdjust {Ajustar Filtro}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
-# todo
-translate U TreeTitleRow {    Move      Frequency    Score Draws AvElo Perf AvYear ECO}
-translate U TreeTitleRowShort {    Move      Frequency    Score Draws}
+# ====== TODO To be translated ======
+translate U TreeTitleRow      {    Move      Frequency    Score  Draw AvElo Perf AvYear ECO}
+# ====== TODO To be translated ======
+translate U TreeTitleRowShort {    Move      Frequency    Score  Draw}
 translate U TreeTotal {TOTAL}
 translate U DoYouWantToSaveFirst {Quer guardar primeiro?}
 translate U AddToMask {Adicionar à máscara}
@@ -685,14 +685,12 @@ translate U BlundersNotBest {Apenas grandes erros}
 translate U AnnotateBlundersOnlyScoreChange {Nos erros anotar a desvalorização da posição em pontos: }
 translate U AnnotateTitle {Configurar Anotação}
 translate U BlundersThreshold {Limiar}
-# ====== TODO To be translated ======
-translate U ScoreFormat {Score format}
+translate U ScoreFormat {Formato da avaliação}
 translate U CutOff {Não anotar:}
 translate U LowPriority {Baixa prioridade no CPU} ;# ***
 translate U LogEngines {Tamanho do Registo}
 translate U LogName {Adicionar Nome}
-# ====== TODO To be translated ======
-translate U MaxPly {Max Ply}
+translate U MaxPly {Máximo de lances}
 translate U ClickHereToSeeMoves {Clicar aqui para ver os lances}
 translate U ConfigureInformant {Configurar Informant}
 translate U Informant!? {Movimento Interessante}
@@ -816,12 +814,12 @@ menuText U OprepHelpReport "Ajuda para Relatório de abertura" 0
 menuText U OprepHelpIndex "Índice da Ajuda" 0
 
 # Header search:
-translate U HeaderSearch {Busca por cabecalho}
+translate U HeaderSearch {Busca por cabeçalho}
 translate U EndSideToMove {Quem move na posição final} ;# ***
 translate U GamesWithNoECO {Jogos sem ECO?}
 translate U GameLength {Tamanho do jogo}
 translate U FindGamesWith {Encontrar jogos com}
-translate U StdStart {Inicio padrão}
+translate U StdStart {Início padrão}
 translate U Promotions {Promoções}
 translate U Comments {Comentários}
 translate U Variations {Variantes}
@@ -855,7 +853,7 @@ translate U GlistYear {Ano}
 translate U GlistEventDate {Evento-Data}
 translate U GlistResult {Resultado}
 translate U GlistLength {Tamanho}
-translate U GlistCountry {Pais}
+translate U GlistCountry {País}
 translate U GlistECO {ECO}
 translate U GlistOpening {Abertura}
 translate U GlistEndMaterial {End-Material}
@@ -879,16 +877,13 @@ translate U GlistRemoveGameAndBelowFromFilter  {Remover jogo (e todos abaixo da 
 translate U GlistDeleteGame {Apagar/Recuperar este jogo} 
 translate U GlistDeleteAllGames {Apagar todos os jogos no filtro}
 translate U GlistUndeleteAllGames {Recuperar todos os jogos no filtro} 
-# ====== TODO To be translated ======
-translate U GlistAlignL {Align left}
-# ====== TODO To be translated ======
-translate U GlistAlignR {Align right}
-# ====== TODO To be translated ======
-translate U GlistAlignC {Align center}
+translate U GlistAlignL {Alinhar à esquerda}
+translate U GlistAlignR {Alinhar à direita}
+translate U GlistAlignC {Alinhar ao centro}
 
 # Maintenance window:
 translate U DatabaseName {Nome da base de dados:}
-translate U TypeIcon {Icone de Tipo}
+translate U TypeIcon {Icone de Tipo:}
 translate U NumOfGames {Jogos:}
 translate U NumDeletedGames {Jogos apagados:}
 translate U NumFilterGames {Jogos no filtro:}
@@ -1089,8 +1084,7 @@ Você realmente quer que esta base de dados seja apenas de leitura?}
 
 # Exit dialog:
 translate U ExitDialog {Você quer realmente sair do Scid?}
-# ====== TODO To be translated ======
-translate U ClearGameDialog {This game has been altered.\nDo you wish to save it?}
+translate U ClearGameDialog {Este jogo foi alterado.  Você realmente quer continuar e descartar as mudanças feitas?  }
 translate U ExitUnsaved {As seguintes bases têm alterações não gravadas. Se sair agora, essas alterações serão perdidas.} ;# ***
 
 # Import window:
@@ -1258,7 +1252,7 @@ translate U ClassifyExtended {Extensoes Scid ("B12j", ...)}
 translate U NameFile {Arquivo de nomes}
 translate U GameFile {Arquivo de jogos}
 translate U Names {Nomes}
-translate U Unused {Nao usado}
+translate U Unused {Não usado}
 translate U SizeKb {Tamanho (kb)}
 translate U CurrentState {Estado Atual}
 translate U AfterCompaction {Após compactação}
@@ -1358,9 +1352,9 @@ translate U RecentFilesExtra {N.º de bases recentes no submenu extra} ;# ***
 
 # My Player Names options:
 translate U MyPlayerNamesDescription {
-Escrever abaixo uma lista de nomes de jogadores preferidos, um nome em cada linha. Sinais de completamento (e.g. "?" para qualquer caracter individual, "*" para qualquer sequência de caracteres) são permitidos.
+Escrever abaixo uma lista de nomes de jogadores preferidos, um nome em cada linha. São permitidos sinais de completamento (e.g. "?" para qualquer caracter individual, "*" para qualquer sequência de caracteres).
 
-Cada vez que for carregada uma partida que tenha um nome de jogador na lista, the main window chessboard will be rotated if necessary to show the game from that players perspective.
+Cada vez que for carregada uma partida que tenha um nome de jogador na lista, o tabuleiro rodará, se necessário, para mostrar a partida na perspetiva desse jogador.
 } ;# ***
 translate U showblunderexists {assinalar erro}
 translate U showblundervalue {assinalar valor do erro}
@@ -1474,10 +1468,8 @@ translate U addAnnotatorTag {Colocar etiqueta de anotador}
 translate U AddScoreToShortAnnotations {Colocar avaliação nas anotações abreviadas}
 translate U Export {Exportar}
 translate U BookPartiallyLoaded {Livro parcialmente carregado}
-# ====== TODO To be translated ======
-translate U AddLine {Add Line}
-# ====== TODO To be translated ======
-translate U RemLine {Remove Line}
+translate U AddLine {Adicionar Linha}
+translate U RemLine {Remover Linha}
 translate U Calvar {Cálculo de variantes}
 translate U ConfigureCalvar {Configuração}
 translate U Reti {Reti}
