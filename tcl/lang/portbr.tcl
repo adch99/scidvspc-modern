@@ -290,6 +290,8 @@ menuText B OptionsFicsCommands "Init Commands" 0
 menuText B OptionsFicsNoRes "No Results" 0
 # ====== TODO To be translated ======
 menuText B OptionsFicsNoReq "No Requests" 0
+# ====== TODO To be translated ======
+menuText B OptionsFicsPremove "Allow Premove" 0
 menuText B OptionsLanguage "Linguagem" 0 {Menu de selecao de linguagem}
 # ====== TODO To be translated ======
 menuText B OptionsMovesTranslatePieces "Translate pieces" 0 {Translate first letter of pieces}

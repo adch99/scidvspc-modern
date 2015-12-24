@@ -265,6 +265,8 @@ menuText P OptionsFicsSize "Board Size" 0
 menuText P OptionsFicsCommands "Init Commands" 0
 menuText P OptionsFicsNoRes "Bez rezultatu" 0
 menuText P OptionsFicsNoReq "Bez wyzwania" 0
+# ====== TODO To be translated ======
+menuText P OptionsFicsPremove "Allow Premove" 0
 menuText P OptionsLanguage "Język" 0 {Wybierz język}
 menuText P OptionsMovesTranslatePieces "Tłumacz oznaczenia figur" 0 {Tłumacz pierwsze litery figur}
 menuText P OptionsMovesHighlightLastMove "Podświetl ostatnie posunięcie" 0 {Podświetl ostatnie posunięcie}

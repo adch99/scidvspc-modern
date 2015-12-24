@@ -1198,20 +1198,22 @@ proc confirmReplaceMove {} {
 ### unused S.A.
 # proc addNullMove {} { addMove null null }
 
-# addMove:
 #   Adds the move indicated by sq1 and sq2 if it is legal. If the move
 #   is a promotion, getPromoPiece will be called to get the promotion
 #   piece from the user.
 #   If the optional parameter is "-animate", the move will be animated.
 
 proc addMove { sq1 sq2 {animate ""}} {
-  if { $::fics::playing == -1} { return } ;# not player's turn
-
   global EMPTY
+
+  if {[winfo exists .fics] && $::fics::playing == -1 && ! $::fics::allow_premove} {
+    # not player's turn
+    return
+  }
 
   set nullmove [expr {$sq1 == "null"  &&  $sq2 == "null"}]
 
-  if {!$nullmove  &&  [sc_pos isLegal $sq1 $sq2] == 0} {
+  if {$::fics::playing == 1 && !$nullmove  &&  [sc_pos isLegal $sq1 $sq2] == 0} {
     # Illegal move, but if it is King takes king then treat it as
     # entering a null move:
     set board [sc_pos board]
@@ -1254,28 +1256,37 @@ proc addMove { sq1 sq2 {animate ""}} {
   set moveUCI_rev $san1$san2$promoLetter
   ### moveUCI seems to be used by serGame, novag *and* fics below, so standardise them a little S.A.
 
-  set move [sc_game info nextMoveUCI]
-  if { ([string compare -nocase $moveUCI $move] == 0 || \
-        [string compare -nocase $moveUCI_rev $move] == 0) && ! $nullmove } {
-    sc_move forward
-    updateBoard
-    return
-  }
-
-  set varList [sc_var list UCI]
-  set i 0
-  foreach { move } $varList {
-       if { [ string compare -nocase $moveUCI $move] == 0 } {
-               sc_var moveInto $i
-               updateBoard
-               return
-       }
-       incr i
-  }
-
   if {[sc_pos isAt vend]} {
+    if {[winfo exists .fics] && $::fics::playing == -1} {
+      ### Premove
+      # we can't easily decide if isPromotion until the move is made,
+      # so add the squares to ::premove and check then.
+      set ::startArrowSquare $san2
+      drawArrow $sq1 $::commenteditor::State(markColor)
+      set ::fics::premove [list ${san2}${san1} $sq1 $sq2]
+      return
+    }
     set action replace
   } else {
+    ### If this move already exists, don't duplicate it
+    set move [sc_game info nextMoveUCI]
+    if { ([string compare -nocase $moveUCI $move] == 0 || \
+	  [string compare -nocase $moveUCI_rev $move] == 0) && ! $nullmove } {
+      sc_move forward
+      updateBoard
+      return
+    }
+
+    set varList [sc_var list UCI]
+    set i 0
+    foreach { move } $varList {
+	 if { [ string compare -nocase $moveUCI $move] == 0 } {
+		 sc_var moveInto $i
+		 updateBoard
+		 return
+	 }
+	 incr i
+    }
     set action [confirmReplaceMove]
   }
 
@@ -1424,7 +1435,7 @@ proc pressSquare {square confirm} {
 
   set ::addVariationWithoutAsking $confirm
 
-  if { [winfo exists .fics] && $::fics::playing == -1} { return } ;# not player's turn
+  if { [winfo exists .fics] && $::fics::playing == -1 && !$::fics::allow_premove} { return } ;# not player's turn
 
   # if training with calculations of var is on, just log the event
   if { [winfo exists .calvarWin] } {

@@ -440,44 +440,47 @@ set pgnColor(Background) "\#ffffff"
 array set findopponent {}
 
 proc initFICSDefaults {} {
-  set ::fics::use_timeseal 0
-  if {$::macOS} {
-    set ::fics::timeseal_exec "$::scidExeDir/timeseal"
-  } else {
-    set ::fics::timeseal_exec "timeseal"
+  namespace eval fics {
+    set use_timeseal 0
+    if {$::macOS} {
+      set timeseal_exec "$::scidExeDir/timeseal"
+    } else {
+      set timeseal_exec "timeseal"
+    }
+    set server        freechess.org
+    set port_fics     5000
+    set port_timeseal 5001
+    set login         ""
+    set password      ""
+    set findopponent(initTime) 10
+    set findopponent(incTime)  10
+    set findopponent(rated)    rated
+    set findopponent(color)    ""
+    set findopponent(limitrating) 0
+    set findopponent(rating1)  1000
+    set findopponent(rating2)  1500
+    set findopponent(manual)   manual
+    set findopponent(formula)  ""
+    set consolebg grey35
+    set consolefg LimeGreen
+    set chanoff 1
+    set shouts 1
+    set server_ip   0.0.0.0
+    set autopromote 0
+    set autoraise 1
+    set size 2
+    set sound 0
+    set no_results 0
+    set no_requests 0
+    # these are duplicated in fics::editInitCommands
+    set init_commands [list \
+      {set gin  0} \
+      {set echo 1} \
+      {set seek 0} \
+    ]
+    set show_buttons 1
+    set allow_premove 1
   }
-  set ::fics::server        freechess.org
-  set ::fics::port_fics     5000
-  set ::fics::port_timeseal 5001
-  set ::fics::login         ""
-  set ::fics::password      ""
-  set ::fics::findopponent(initTime) 10
-  set ::fics::findopponent(incTime)  10
-  set ::fics::findopponent(rated)    rated
-  set ::fics::findopponent(color)    ""
-  set ::fics::findopponent(limitrating) 0
-  set ::fics::findopponent(rating1)  1000
-  set ::fics::findopponent(rating2)  1500
-  set ::fics::findopponent(manual)   manual
-  set ::fics::findopponent(formula)  ""
-  set ::fics::consolebg grey35
-  set ::fics::consolefg LimeGreen
-  set ::fics::chanoff 1
-  set ::fics::shouts 1
-  set ::fics::server_ip   0.0.0.0
-  set ::fics::autopromote 0
-  set ::fics::autoraise 1
-  set ::fics::size 2
-  set ::fics::sound 0
-  set ::fics::no_results 0
-  set ::fics::no_requests 0
-  # these are duplicated in fics::editInitCommands
-  set ::fics::init_commands [list \
-    {set gin  0} \
-    {set echo 1} \
-    {set seek 0} \
-  ]
-  set ::fics::show_buttons 1
 }
 
 initFICSDefaults

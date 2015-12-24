@@ -1428,10 +1428,6 @@ proc drawArrow {sq color} {
   } else  {
     set oldComment [sc_pos getComment]
     set to [::board::san $sq]
-    if {$::fics::playing} {
-      # todo - add 'Q' to premove if ::fics::autopromote
-      set ::fics::premove ${startArrowSquare}${to}
-    }
     if {$startArrowSquare != $to } {
       set erase [regexp "\[\x5B\]%draw arrow,$startArrowSquare,$to,$color\[\x5D\]" $oldComment]
       regsub "\[\x5B\]%draw arrow,$startArrowSquare,$to,$::commenteditor::colorRegsub\[\x5D\]" $oldComment "" newComment

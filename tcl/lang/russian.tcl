@@ -262,6 +262,8 @@ menuText R OptionsFicsSize "Размер доски" 0
 menuText R OptionsFicsCommands "Команды инициализации" 0
 menuText R OptionsFicsNoRes "Без результатов" 0
 menuText R OptionsFicsNoReq "Без запросов" 0
+# ====== TODO To be translated ======
+menuText R OptionsFicsPremove "Allow Premove" 0
 menuText R OptionsLanguage "Язык" 0 {Меню выбора языка}
 menuText R OptionsMovesTranslatePieces "Перевод фигур" 0 {Перевести первый символ фигуры}
 menuText R OptionsMovesHighlightLastMove "Подсветить последний ход" 0 {Подсветить последний ход}

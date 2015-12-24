@@ -307,6 +307,8 @@ menuText Y OptionsFicsCommands "Init Commands" 0
 menuText Y OptionsFicsNoRes "No Results" 0
 # ====== TODO To be translated ======
 menuText Y OptionsFicsNoReq "No Requests" 0
+# ====== TODO To be translated ======
+menuText Y OptionsFicsPremove "Allow Premove" 0
 menuText Y OptionsLanguage "Jezik" 0 {Izaberi jezik}
 # ====== TODO To be translated ======
 menuText Y OptionsMovesTranslatePieces "Translate pieces" 0 {Translate first letter of pieces}

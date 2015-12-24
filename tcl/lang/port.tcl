@@ -257,6 +257,8 @@ menuText U OptionsFicsSize "Tamanho do Tabuleiro" 0
 menuText U OptionsFicsCommands "Comandos de Início" 0
 menuText U OptionsFicsNoRes "Ocultar Resultados" 0
 menuText U OptionsFicsNoReq "Ocultar Pedidos" 0
+# ====== TODO To be translated ======
+menuText U OptionsFicsPremove "Allow Premove" 0
 menuText U OptionsLanguage "Linguagem" 0 {Menu de selecao de linguagem}
 menuText U OptionsMovesTranslatePieces "Traduzir peças" 0 {Traduzir a primeira letra das peças}
 menuText U OptionsMovesHighlightLastMove "Destacar último movimento" 0 {Destaca o último movimento}

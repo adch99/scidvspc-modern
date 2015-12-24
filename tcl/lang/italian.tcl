@@ -275,6 +275,8 @@ menuText I OptionsFicsCommands "Init Commands" 0
 menuText I OptionsFicsNoRes "No Results" 0
 # ====== TODO To be translated ======
 menuText I OptionsFicsNoReq "No Requests" 0
+# ====== TODO To be translated ======
+menuText I OptionsFicsPremove "Allow Premove" 0
 menuText I OptionsLanguage "Lingua" 0 {Sceglie una nuova lingua di menu}
 menuText I OptionsMovesTranslatePieces "Traduci i pezzi" 0 {Traduce la prima lettera dei pezzi}
 # ====== TODO To be translated ======

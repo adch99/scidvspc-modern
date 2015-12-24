@@ -284,6 +284,8 @@ menuText D OptionsFicsSize "Brettgröße" 0
 menuText D OptionsFicsCommands "Startbefehle" 0
 menuText D OptionsFicsNoRes "Keine Ergebnisse" 0
 menuText D OptionsFicsNoReq "Keine Anfragen" 0
+# ====== TODO To be translated ======
+menuText D OptionsFicsPremove "Allow Premove" 0
 menuText D OptionsLanguage "Sprache" 0 {Sprache wählen}
 menuText D OptionsMovesTranslatePieces "Figurennamen übersetzen" 0 {Übersetze den ersten Buchstaben der Figurenbezeichnung}
 menuText D OptionsMovesHighlightLastMove "Letzen Zug hervorheben" 0 {Rahmt Start- und Zielfeld des letzten Zuges farbig ein}

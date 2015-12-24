@@ -308,6 +308,8 @@ menuText O OptionsFicsCommands "Init Commands" 0
 menuText O OptionsFicsNoRes "No Results" 0
 # ====== TODO To be translated ======
 menuText O OptionsFicsNoReq "No Requests" 0
+# ====== TODO To be translated ======
+menuText O OptionsFicsPremove "Allow Premove" 0
 menuText O OptionsLanguage "Språk" 0 {Velg menyspråk}
 # ====== TODO To be translated ======
 menuText O OptionsMovesTranslatePieces "Translate pieces" 0 {Translate first letter of pieces}

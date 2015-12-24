@@ -279,6 +279,8 @@ menuText S OptionsFicsSize "Tamaño del Tablero" 0
 menuText S OptionsFicsCommands "Comandos iniciales" 0
 menuText S OptionsFicsNoRes "Sin resultados" 0
 menuText S OptionsFicsNoReq "Sin respuesta" 0
+# ====== TODO To be translated ======
+menuText S OptionsFicsPremove "Allow Premove" 0
 menuText S OptionsLanguage "Lenguaje" 0 {Selecciona el lenguaje del menú}
 menuText S OptionsMovesTranslatePieces "Traducir piezas" 0 {Traducir la primera letra de las piezas}
 menuText S OptionsMovesHighlightLastMove "Resalta última jugada" 0 {Resalta la última jugada}

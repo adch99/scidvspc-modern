@@ -948,7 +948,7 @@ $m add command -label OptionsSave -command {
     puts $optionF ""
 
     # save FICS config
-    foreach i { use_timeseal timeseal_exec port_fics port_timeseal login password consolebg consolefg chanoff shouts server_ip consolebg consolefg autopromote autoraise size sound no_results no_requests server init_commands show_buttons} {
+    foreach i { use_timeseal timeseal_exec port_fics port_timeseal login password consolebg consolefg chanoff shouts server_ip consolebg consolefg autopromote autoraise size sound no_results no_requests server init_commands show_buttons allow_premove} {
       puts $optionF "set ::fics::$i [list [set ::fics::$i]]"
     }
     foreach i [lsort [array names ::fics::findopponent]] {
@@ -1097,6 +1097,7 @@ $m add cascade     -label OptionsFicsSize     -menu $m.size
 $m add separator
 $m add checkbutton -label OptionsFicsNoRes    -variable ::fics::no_results
 $m add checkbutton -label OptionsFicsNoReq    -variable ::fics::no_requests
+$m add checkbutton -label OptionsFicsPremove  -variable ::fics::allow_premove
 
 menu $m.size -tearoff 1
 if {$::fics::size > 5} {set ::fics::size 3} ; # ::fics::size used to be 25 to 50, but now is a radiobutton
@@ -1530,7 +1531,7 @@ proc setLanguageMenus {{lang ""}} {
         OptionsMoves$tag $lang
   }
 
-  foreach tag {OptionsWindowsRaise OptionsFicsAuto OptionsSounds OptionsFicsColour OptionsColour OptionsFonts OptionsFicsCommands OptionsFicsSize OptionsFicsNoRes OptionsFicsNoReq} {
+  foreach tag {OptionsWindowsRaise OptionsFicsAuto OptionsSounds OptionsFicsColour OptionsColour OptionsFonts OptionsFicsCommands OptionsFicsSize OptionsFicsNoRes OptionsFicsNoReq OptionsFicsPremove} {
     configMenuText .menu.options.fics [tr $tag $oldLang] $tag $lang
   }
 

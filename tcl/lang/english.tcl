@@ -275,6 +275,7 @@ menuText E OptionsFicsSize "Board Size" 0
 menuText E OptionsFicsCommands "Init Commands" 0
 menuText E OptionsFicsNoRes "No Results" 0
 menuText E OptionsFicsNoReq "No Requests" 0
+menuText E OptionsFicsPremove "Allow Premove" 0
 
 menuText E OptionsLanguage "Language" 0 {Select menu language}
 menuText E OptionsMovesTranslatePieces "Translate Pieces" 0 {Translate first letter of pieces}

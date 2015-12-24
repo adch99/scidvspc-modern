@@ -273,6 +273,8 @@ menuText N OptionsFicsSize "Board Size" 0
 menuText N OptionsFicsCommands "Init Commands" 0
 menuText N OptionsFicsNoRes "Geen uitslagen" 0
 menuText N OptionsFicsNoReq "Geen verzoeken" 0
+# ====== TODO To be translated ======
+menuText N OptionsFicsPremove "Allow Premove" 0
 menuText N OptionsLanguage "Kies taal" 0 {Kies taal}
 menuText N OptionsMovesTranslatePieces "Stukken vertalen" 0 {Vertalen eerste letters van de stukken}
 menuText N OptionsMovesHighlightLastMove "Markeren laatste zet" 0 {De laatst gespeelde zet markeren}

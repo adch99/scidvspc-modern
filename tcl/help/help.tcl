@@ -5618,8 +5618,8 @@ Opponent and Offers Graph</a> buttons. Other buttons include:
 Premove allows one to decide your next move before your opponent has moved,
 allowing for very quick play - essential for Blitz games.
 </p><p>
-In Scid vs. PC, premove is done by holding down the <b>Control</b> key and clicking
-on the FROM and TO squares. A coloured line will be drawn, and - if legal -
+Premove is done like any other move, but pressing the From and To squares.
+A coloured line will be drawn, and - if legal -
 this move will be played immediately your opponent has.
 To cancel premove, press the <b>Escape</b> key.
 </p>

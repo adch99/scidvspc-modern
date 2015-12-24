@@ -286,6 +286,8 @@ menuText C OptionsFicsCommands "Init Commands" 0
 menuText C OptionsFicsNoRes "No Results" 0
 # ====== TODO To be translated ======
 menuText C OptionsFicsNoReq "No Requests" 0
+# ====== TODO To be translated ======
+menuText C OptionsFicsPremove "Allow Premove" 0
 menuText C OptionsLanguage "Jazyk" 0 {Vybrat jazyk menu}
 # ====== TODO To be translated ======
 menuText C OptionsMovesTranslatePieces "Translate pieces" 0 {Translate first letter of pieces}

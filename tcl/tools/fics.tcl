@@ -2061,11 +2061,29 @@ namespace eval fics {
 	    ### Send premove 
 	    if {$fen == [sc_pos fen]} {
 	      updateBoard -pgn -animate
+	      lassign $::fics::premove move sq1 sq2
+	      set promoLetter ""
+	      catch {
+		if {[sc_pos isPromotion $sq1 $sq2] == 1 && ![winfo exists .promoWin]} {
+		  set promo [getPromoPiece]
+		  switch -- $promo {
+		    2 { set promoLetter "q"}
+		    3 { set promoLetter "r"}
+		    4 { set promoLetter "b"}
+		    5 { set promoLetter "n"}
+		    default {set promoLetter ""}
+		  }
+		}
+	      }
+
               # should we use "proc addSanMove"
-              if { [catch {sc_move addSan $::fics::premove}]} {
-                puts "Premove $::fics::premove failed"
+              if { [catch {sc_move addSan $move$promoLetter}]} {
+                puts "Premove $move failed"
               } else {
-		::fics::writechan $::fics::premove
+		if {$promoLetter != ""} {
+		  ::fics::writechan "promote $promoLetter"
+		}
+		::fics::writechan $move
 		### Stop clock
 		if {[sc_pos side] == "white"} {
 		  ::gameclock::stop 2

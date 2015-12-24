@@ -289,6 +289,8 @@ menuText G OptionsFicsSize "Board Size" 0
 menuText G OptionsFicsCommands "Init Commands" 0
 menuText G OptionsFicsNoRes "Χωρίς Αποτελέσματα" 3
 menuText G OptionsFicsNoReq "Χωρίς Αιτήματα" 9
+# ====== TODO To be translated ======
+menuText G OptionsFicsPremove "Allow Premove" 0
 
 menuText G OptionsLanguage "Γλώσσα" 2 {Επιλογής Γλώσσας Μενού}
 menuText G OptionsMovesTranslatePieces "Μετάφραση Κομματιών" 0 {Μετάφραση Πρώτου Γράμματος Κομματιών}

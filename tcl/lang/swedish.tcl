@@ -266,6 +266,8 @@ menuText W OptionsFicsCommands "Init Commands" 0
 menuText W OptionsFicsNoRes "No Results" 0
 # ====== TODO To be translated ======
 menuText W OptionsFicsNoReq "No Requests" 0
+# ====== TODO To be translated ======
+menuText W OptionsFicsPremove "Allow Premove" 0
 menuText W OptionsLanguage "Språk" 0 {Välj språk}
 menuText W OptionsMovesTranslatePieces "Översätt pjäser" 0 {Översätt första bokstaven för pjäser}
 menuText W OptionsMovesHighlightLastMove "Markera senaste draget" 0 {Markera senaste draget}

@@ -291,6 +291,8 @@ menuText H OptionsFicsCommands "Init Commands" 0
 menuText H OptionsFicsNoRes "No Results" 0
 # ====== TODO To be translated ======
 menuText H OptionsFicsNoReq "No Requests" 0
+# ====== TODO To be translated ======
+menuText H OptionsFicsPremove "Allow Premove" 0
 menuText H OptionsLanguage "Nyelv" 0 {A menü nyelvének kiválasztása}
 # ====== TODO To be translated ======
 menuText H OptionsMovesTranslatePieces "Translate pieces" 0 {Translate first letter of pieces}
