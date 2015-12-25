@@ -1213,7 +1213,9 @@ proc addMove { sq1 sq2 {animate ""}} {
 
   set nullmove [expr {$sq1 == "null"  &&  $sq2 == "null"}]
 
-  if {$::fics::playing == 1 && !$nullmove  &&  [sc_pos isLegal $sq1 $sq2] == 0} {
+  # dont check for illegal move if playing fics && opponents move
+  set allowPremove [expr {[winfo exists .fics] && $::fics::playing == -1}]
+  if {!$allowPremove && !$nullmove  &&  [sc_pos isLegal $sq1 $sq2] == 0} {
     # Illegal move, but if it is King takes king then treat it as
     # entering a null move:
     set board [sc_pos board]
@@ -1257,7 +1259,7 @@ proc addMove { sq1 sq2 {animate ""}} {
   ### moveUCI seems to be used by serGame, novag *and* fics below, so standardise them a little S.A.
 
   if {[sc_pos isAt vend]} {
-    if {[winfo exists .fics] && $::fics::playing == -1} {
+    if {$allowPremove} {
       ### Premove
       # we can't easily decide if isPromotion until the move is made,
       # so add the squares to ::premove and check then.
