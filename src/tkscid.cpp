@@ -13905,10 +13905,8 @@ if (sortBest) {
           continue;
 	bestIndex[insert++] = gnum;
 	count++;
-	if (count > maxGames) {
-          count = maxGames;
+	if (count == maxGames)
           break;
-        }
     }
     for (uint i=0; i < count/2; i++) {
 	tmp = bestIndex[i];
