@@ -577,6 +577,8 @@ menuText D TreeOptAutosave "Autom. Cache-Datei sichern" 4 \
 menuText D TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
 # ====== TODO To be translated ======
 menuText D TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
+# ====== TODO To be translated ======
+menuText D TreeOptSortBest "Sort Best Games" 0 "Sort Best Games by ELO."
 menuText D TreeHelp "Hilfe" 0
 menuText D TreeHelpTree "Zugbaumhilfe" 0
 menuText D TreeHelpIndex "Index" 0

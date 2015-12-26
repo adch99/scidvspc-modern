@@ -24,7 +24,7 @@ proc ::tree::doConfigMenus { baseNumber  { lang "" } } {
   foreach idx {0 1 2 3} tag {Alpha ECO Freq Score } {
     configMenuText $m.sort $idx TreeSort$tag $lang
   }
-  foreach idx {0 1 3 4 5 6 8 9 10} tag {Lock Training Short ShowBar Automask Autosave Slowmode Fastmode FastAndSlowmode} {
+  foreach idx {0 1 3 4 5 6 7 9 10 11} tag {Lock Training SortBest Short ShowBar Automask Autosave Slowmode Fastmode FastAndSlowmode} {
     configMenuText $m.opt $idx TreeOpt$tag $lang
   }
   foreach idx {0 1} tag {Tree Index} {
@@ -72,6 +72,11 @@ proc ::tree::Open {{baseNumber 0}} {
   ::setTitle $w "[lindex "[tr WindowsTree]" 0] \[[file tail [sc_base filename $baseNumber]]\]"
 
   set tree(base$baseNumber) $baseNumber
+  if {$::tree::sortBest} {
+    set tree(sortBest$baseNumber) Best
+  } else {
+    set tree(sortBest$baseNumber) Order
+  }
   ### The number of bestgames to display is not configurable anymore (except here) S.A.
   foreach {i j} {
     training	0
@@ -87,6 +92,7 @@ proc ::tree::Open {{baseNumber 0}} {
   }
   trace variable tree(bestMax$baseNumber) w "::tree::doTrace bestMax"
   trace variable tree(bestRes$baseNumber) w "::tree::doTrace bestRes"
+  trace variable tree(sortBest$baseNumber) w "::tree::doTrace sortBest"
 
   ### todo: fix this properly
   # Destroy is handled by "bind $w.f.tl <Destroy>"
@@ -172,6 +178,7 @@ proc ::tree::Open {{baseNumber 0}} {
       -command "::tree::toggleLock $baseNumber"
   $w.menu.opt add checkbutton -label TreeOptTraining -variable tree(training$baseNumber) -command "::tree::refreshTraining $baseNumber"
   $w.menu.opt add separator
+  $w.menu.opt add checkbutton -label TreeOptSortBest -variable ::tree::sortBest
   $w.menu.opt add checkbutton -label TreeOptShort   -variable ::tree::short   -command ::tree::refresh
   $w.menu.opt add checkbutton -label TreeOptShowBar -variable ::tree::showBar -command {
     for {set i 1} {$i <= [sc_base count total]} {incr i} {
@@ -328,6 +335,7 @@ proc ::tree::closeTree {baseNumber} {
 
   trace remove variable tree(bestMax$baseNumber) write "::tree::doTrace bestMax"
   trace remove variable tree(bestRes$baseNumber) write "::tree::doTrace bestRes"
+  trace remove variable tree(sortBest$baseNumber) write "::tree::doTrace sortBest"
 
   set ::geometry(treeWin$baseNumber) [wm geometry .treeWin$baseNumber]
   focus .main
@@ -513,7 +521,7 @@ proc ::tree::refresh {{ baseNumber {} }} {
 
 proc ::tree::dorefresh { baseNumber } {
 
-  global tree glstart
+  global tree glstart glistSize
   set w .treeWin$baseNumber
 
   if { ! $tree(autorefresh$baseNumber) } { return }
@@ -549,8 +557,17 @@ proc ::tree::dorefresh { baseNumber } {
   # ::tree::status "" $baseNumber
   if {$::tree(adjustfilter$baseNumber)} {
     ::windows::stats::Refresh
-    set glstart 1
-    ::windows::gamelist::Refresh
+    ### See the last game (bind $w <End> from gamelist.tcl)
+    set totalSize [sc_filter count]
+    set glstart $totalSize
+    set lastEntry [expr $totalSize - $glistSize]
+    if {$lastEntry < 1} {
+      set lastEntry 1
+    }
+    if {$glstart > $lastEntry} {
+      set glstart $lastEntry
+    }
+    ::windows::gamelist::Refresh last
   }
 
   # Only the most recent tree_search succeeds
@@ -1114,12 +1131,17 @@ proc ::tree::best { baseNumber } {
     pack $w.blist.ybar -side right -fill y
     pack $w.blist.list -side left -fill both -expand yes
     bind $w.blist.list <<ListboxSelect>>  "::tree::bestMenu $baseNumber"
-    label $w.b.result -text " $::tr(Result:)" -font font_Small
+
+    label $w.b.result -text " $::tr(Result)" -font font_Small
     tk_optionMenu $w.b.res tree(bestRes$baseNumber) All 1-0 0-1 {1-0 0-1} {1/2-1/2}
-    $w.b.res configure -font font_Small -relief ridge -borderwidth 0 -direction right
+    $w.b.res configure -font font_Small -direction right
+
+    label $w.b.sort -text " $::tr(Sort)" -font font_Small
+    tk_optionMenu $w.b.sortMenu tree(sortBest$baseNumber) Best Order
+    $w.b.sortMenu configure -font font_Small -direction right
 
     button $w.b.close -text $::tr(Close) -command "destroy $w" -width 9 -font font_Small
-    pack $w.b.close $w.b.res $w.b.result -side right -padx 5 -pady 5
+    pack $w.b.close $w.b.res $w.b.result $w.b.sortMenu $w.b.sort -side right -padx 5 -pady 5
     bind $w <Configure> "recordWinSize $w"
     focus $w.blist.list
     ::createToplevelFinalize $w
@@ -1129,13 +1151,19 @@ proc ::tree::best { baseNumber } {
   set count 0
 
   if {! [sc_base inUse]} { return }
+# why are we catching this. I think it is because too many unusual cases/chars to be handled in the listbox
 catch {
-  foreach {idx line} [sc_tree best $tree(base$baseNumber) $tree(bestMax$baseNumber) $tree(bestRes$baseNumber)] {
+  foreach {idx line} [
+      sc_tree best $tree(base$baseNumber) $tree(bestMax$baseNumber) $tree(bestRes$baseNumber) $tree(sortBest$baseNumber)
+  ] {
     incr count
     # listbox widget does not like ' character
     set line [ string map { "'" "\'" } $line ]
     $w.blist.list insert end "  $line"
     lappend tree(bestList$baseNumber) $idx
+  }
+  if {$tree(sortBest$baseNumber) == "Order"} {
+    $w.blist.list see end
   }
 }
 }

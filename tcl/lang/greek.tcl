@@ -582,6 +582,8 @@ menuText G TreeOptAutosave "Αυτομ.Αποθήκευση Cache" 0 \
 menuText G TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
 # ====== TODO To be translated ======
 menuText G TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
+# ====== TODO To be translated ======
+menuText G TreeOptSortBest "Sort Best Games" 0 "Sort Best Games by ELO."
 menuText G TreeHelp "Βοήθεια" 0
 menuText G TreeHelpTree "Βοήθεια Δένδρου" 0
 menuText G TreeHelpIndex "Ευρετήριο" 0

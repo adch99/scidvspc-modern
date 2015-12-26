@@ -598,6 +598,8 @@ menuText I TreeOptAutosave "File di cache per Auto-salvare" 0 \
 menuText I TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
 # ====== TODO To be translated ======
 menuText I TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
+# ====== TODO To be translated ======
+menuText I TreeOptSortBest "Sort Best Games" 0 "Sort Best Games by ELO."
 menuText I TreeHelp "Aiuto" 0
 menuText I TreeHelpTree "Aiuto per l'albero" 0
 menuText I TreeHelpIndex "Indice di aiuto" 0

@@ -553,6 +553,8 @@ menuText P TreeOptAutosave "Automatyczny zapis bufora" 0 \
 menuText P TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
 # ====== TODO To be translated ======
 menuText P TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
+# ====== TODO To be translated ======
+menuText P TreeOptSortBest "Sort Best Games" 0 "Sort Best Games by ELO."
 menuText P TreeHelp "Pomoc" 2
 menuText P TreeHelpTree "Drzewo" 0
 menuText P TreeHelpIndex "Spis treści" 0

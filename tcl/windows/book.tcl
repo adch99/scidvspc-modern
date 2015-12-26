@@ -749,7 +749,7 @@ if {0} {
     if { $::book::isReadonly > 0 } { return }
 
     set reply [ tk_messageBox -title $::tr(AddLine) -type yesno -icon info -parent .bookTuningWin -message \
-     {Remove all book moves from this position till game end ?} ]
+     {Remove this line (from current position onwards) ?} ]
     if {$reply != {yes}} {return}
 
     busyCursor .

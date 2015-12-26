@@ -604,6 +604,8 @@ menuText H TreeOptAutosave "Cache-fájl automatikus mentése" 11 \
 menuText H TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
 # ====== TODO To be translated ======
 menuText H TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
+# ====== TODO To be translated ======
+menuText H TreeOptSortBest "Sort Best Games" 0 "Sort Best Games by ELO."
 menuText H TreeHelp "Segítség" 0
 menuText H TreeHelpTree "Segítség a fához" 0
 menuText H TreeHelpIndex "Tartalom" 0

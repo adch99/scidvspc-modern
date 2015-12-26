@@ -549,6 +549,7 @@ menuText E TreeOptShort "Short Display" 0 {Don't show ELO information}
 menuText E TreeOptAutosave "Auto-Save Cache" 0 {Auto-save the cache file when closing the tree window}
 menuText E TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
 menuText E TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
+menuText E TreeOptSortBest "Sort Best Games" 0 "Sort Best Games by ELO."
 menuText E TreeHelp "Help" 0
 menuText E TreeHelpTree "Tree Help" 0
 menuText E TreeHelpIndex "Help Index" 0

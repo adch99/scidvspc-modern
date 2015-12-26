@@ -644,6 +644,8 @@ menuText O TreeOptAutosave "Autolagre hurtigbuffer" 0 \
 menuText O TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
 # ====== TODO To be translated ======
 menuText O TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
+# ====== TODO To be translated ======
+menuText O TreeOptSortBest "Sort Best Games" 0 "Sort Best Games by ELO."
 menuText O TreeHelp "Hjelp" 0
 menuText O TreeHelpTree "Tre hjelp" 0
 menuText O TreeHelpIndex "Innholdsfortegnelse" 0

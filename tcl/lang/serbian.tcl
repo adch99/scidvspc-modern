@@ -644,6 +644,8 @@ menuText Y TreeOptAutosave "Automatski saèuvaj cache fajl" 0 \
 menuText Y TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
 # ====== TODO To be translated ======
 menuText Y TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
+# ====== TODO To be translated ======
+menuText Y TreeOptSortBest "Sort Best Games" 0 "Sort Best Games by ELO."
 menuText Y TreeHelp "Pomoæ" 0
 menuText Y TreeHelpTree "Pomoæ za stablo" 0
 menuText Y TreeHelpIndex "Sadr¾aj pomoæi" 0

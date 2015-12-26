@@ -2104,11 +2104,14 @@ search for games that do not reached this position!
 </p>
   <h3><name Best>Best Games Window</name></h3>
   <p>
-  This button <button b_list> will show a list of
-  highest-rated games for the current tree (shown in order of average rating).
+  This button <button b_list> will show games matching the current position.
+  </p><p>
+  Normally, the best games (ie - highest rated) are displayed; but selecting the
+  Sort button allows the games to be sorted by their order in the database.
+  (The default for this feature can be altered in the Tree Options menu).
   </p>
   <p>
-  You can restrict the list to show games with a particular result.
+  You can also restrict the list to show games with a particular result.
   </p>
 
   <h3>Tree Masks</h3>

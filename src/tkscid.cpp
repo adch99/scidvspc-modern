@@ -13821,8 +13821,8 @@ sc_tree (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 int
 sc_tree_best (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
-    if (argc != 5) {
-        return errorResult (ti, "Usage: sc_tree best <baseNum> <count> <results>");
+    if (argc != 6) {
+        return errorResult (ti, "Usage: sc_tree best <baseNum> <count> <results> <sort>");
     }
 
     scidBaseT * base = db;
@@ -13851,18 +13851,20 @@ sc_tree_best (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         results[RESULT_Draw] = results[RESULT_None] = true;
     }
 
+    // "Best" or "Order"
+    bool sortBest = (argv[5][0] == 'B') ;
+
     uint count = 0;
-#ifdef WINCE
-    uint * bestIndex = (uint *) my_Tcl_Alloc(sizeof( uint [maxGames]));
-    uint * bestElo = (uint *) my_Tcl_Alloc(sizeof( uint [maxGames]));
-#else
     uint * bestIndex = new uint [maxGames];
     uint * bestElo = new uint [maxGames];
-#endif
+    uint tmp;
+    IndexEntry * ie;
+    uint insert;
 
+if (sortBest) {
     for (uint gnum=0; gnum < base->numGames; gnum++) {
         if (base->treeFilter->Get(gnum) == 0) { continue; }
-        IndexEntry * ie = base->idx->FetchEntry (gnum);
+        ie = base->idx->FetchEntry (gnum);
         if (! results [ie->GetResult()]) { continue; }
         eloT welo = ie->GetWhiteElo();
         eloT belo = ie->GetBlackElo();
@@ -13871,14 +13873,14 @@ sc_tree_best (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         uint avg = (welo + belo) / 2;
 
         // Start at end of best list and work up as far as possible:
-        uint insert = count;
+        insert = count;
         while (insert > 0) {
             if (bestElo[insert-1] >= avg) { break; }
             insert--;
         }
         if (insert < maxGames) {
             // Move all lower-rated games down one place:
-            for (uint tmp=count; tmp > insert; tmp--) {
+            for (tmp=count; tmp > insert; tmp--) {
                 if (tmp >= maxGames) { continue; }
                 bestElo[tmp] = bestElo[tmp-1];
                 bestIndex[tmp] = bestIndex[tmp-1];
@@ -13890,6 +13892,31 @@ sc_tree_best (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             if (count > maxGames) { count = maxGames; }
         }
     }
+} else {
+    insert = 0;
+    // Insert the last maxGames games
+    // then reverse the order so they appear the same as in the gamelist
+    for (uint gnum = base->numGames ; gnum > 0 ; ) {
+	gnum--;
+        if (base->treeFilter->Get(gnum) == 0)
+          continue;
+        ie = base->idx->FetchEntry (gnum);
+        if (! results [ie->GetResult()])
+          continue;
+	bestIndex[insert++] = gnum;
+	count++;
+	if (count > maxGames) {
+          count = maxGames;
+          break;
+        }
+    }
+    for (uint i=0; i < count/2; i++) {
+	tmp = bestIndex[i];
+	bestIndex[i] = bestIndex[count-1-i];
+	bestIndex[count-1-i] = tmp;
+    }
+
+}
 
     // Now generate the Tcl list of best game details:
     char line[256];
@@ -13964,13 +13991,8 @@ sc_tree_best (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         Tcl_AppendElement (ti, line);
     }
 
-#ifdef WINCE
-    my_Tcl_Free((char*)bestIndex);
-    my_Tcl_Free((char*)bestElo);
-#else
     delete[] bestIndex;
     delete[] bestElo;
-#endif
 
     return TCL_OK;
 }
