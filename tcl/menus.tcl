@@ -925,6 +925,9 @@ $m add command -label OptionsSave -command {
     foreach i [lsort [array names twinSettings]] {
       puts $optionF "set twinSettings($i) [list $twinSettings($i)]"
     }
+    foreach i [lsort [array names cleaner]] {
+      puts $optionF "set cleaner($i) [list $cleaner($i)]"
+    }
     puts $optionF ""
     foreach i {Regular Menu Small Tiny Fixed} {
       puts $optionF "set fontOptions($i) [list $fontOptions($i)]"

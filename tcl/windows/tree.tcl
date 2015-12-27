@@ -32,24 +32,21 @@ proc ::tree::doConfigMenus { baseNumber  { lang "" } } {
   }
 }
 
-################################################################################
+
 proc ::tree::ConfigMenus { { lang "" } } {
   for {set i 1 } {$i <= [sc_base count total]} {incr i} {
     ::tree::doConfigMenus $i $lang
   }
 }
-################################################################################
+
 proc ::tree::menuCopyToSelection { baseNumber } {
   setClipboard [.treeWin$baseNumber.f.tl get 1.0 end]
 }
-################################################################################
+
 proc ::tree::treeFileSave {base} {
-  busyCursor .
-  update
   if {[catch {sc_tree write $base} result]} {
     tk_messageBox -type ok -icon warning -title "Scid: Error writing file" -message $result -parent .treeWin$base
   }
-  unbusyCursor .
 }
 
 proc ::tree::Open {{baseNumber 0}} {

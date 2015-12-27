@@ -2286,19 +2286,7 @@ puts refresh
 }
 
 
-# cleanerWin:
 #   Run a selection of several maintenance tasks in one action.
-
-set cleaner(players) 1
-set cleaner(events) 1
-set cleaner(sites) 1
-set cleaner(rounds) 1
-set cleaner(eco) 1
-set cleaner(elo) 1
-set cleaner(twins) 1
-set cleaner(cnames) 0
-set cleaner(cgames) 0
-set cleaner(tree) 0
 
 proc cleanerWin {} {
   set w .mtoolWin
@@ -2369,6 +2357,12 @@ proc doCleaner {} {
       [string trim $::tr(CleanerConfirm)] "" \
       0 $::tr(Yes) $::tr(No)]
   if {$answer != 0} { return }
+
+  set confirm [::game::ConfirmDiscard]
+  if {$confirm == 2} { return }
+  if {$confirm == 0} {
+    ::game::Save
+  }
 
   set w .mtoolStatus
   if {! [winfo exists $w]} {
@@ -2498,25 +2492,26 @@ proc doCleaner {} {
   }
 
   if {$cleaner(tree)} {
+    set base [sc_base current]
+    if {![winfo exists .treeWin$base]} {
+      ::tree::Open $base
+    }
     mtoolAdd $t "$count: [tr TreeFileFill]..."
     incr count
-    sc_game push
-    set base [sc_base current]
     set len [llength $::tree(standardLines)]
     foreach line $::tree(standardLines) {
       sc_game new
       if {[llength $line] > 0}  {
         foreach move $line {sc_move addSan $move}
       }
-      sc_tree search -base $base
-      update
+      ::tree::mutex_refresh
     }
-    catch {sc_tree write $base} result
-    sc_game pop
+    ::tree::treeFileSave $base
     $t insert end "   Done.\n"
   }
 
   mtoolAdd $t "Done."
+  sc_game new
   updateBoard
   ::windows::gamelist::Refresh
   ::crosstab::Refresh

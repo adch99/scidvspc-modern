@@ -2158,8 +2158,8 @@ search for games that do not reached this position!
   <p>
   The tree window has a file menu command named <term>Save Cache</term>.
   When you select this, the current contents of the tree cache in memory
-  are written to a file (with the suffix <b>.stc</b>) to speed up future
-  use of Tree mode with this database.
+  are written to a file (with the suffix <b>.stc</b>, in the same directory as the database)
+  to speed up future use of Tree mode with this database.
   </p>
   <p>
   The <term>Fill cache file</term> command in the file menu of the tree

@@ -226,6 +226,17 @@ set ::tree::short 1
 set ::tree::mask::recentMask {}
 set ::tree::mask::autoLoadMask 0
 
+set cleaner(players) 1
+set cleaner(events) 1
+set cleaner(sites) 1
+set cleaner(rounds) 1
+set cleaner(eco) 1
+set cleaner(elo) 1
+set cleaner(twins) 1
+set cleaner(cnames) 0
+set cleaner(cgames) 0
+set cleaner(tree) 0
+
 #############################################################
 # Customisable variables:
 
