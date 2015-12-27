@@ -627,8 +627,8 @@ proc ::docking::add_tab {path args} {
   eval [list $dsttab add $path] $args -text "$title"
   if {$chummy != ""} {
     # Insert path next to it's friend
-    # But sometimes it doesnt insert immediately after ???
-    $dsttab insert $path [expr [$dsttab index $chummy] + 1]
+    # pathname insert pos subwindow options...
+    $dsttab insert [expr [$dsttab index $chummy] + 1] $path
   }
 
   setMenuMark $dsttab $path
