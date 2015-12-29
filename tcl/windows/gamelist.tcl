@@ -134,7 +134,7 @@ proc ::windows::gamelist::FilterText {} {
 #
 # Previously it would treat "+" as a logical AND... but it's just too slow for tcl.
 
-proc ::windows::gamelist::FindText {{load 0}} {
+proc ::windows::gamelist::FindText {} {
   global glstart
   variable findtext
 
@@ -146,20 +146,14 @@ proc ::windows::gamelist::FindText {{load 0}} {
   set temp [sc_filter textfind $::windows::gamelist::findcase $glstart $findtext]
   unbusyCursor .glistWin
 
-  # This is a bit buggy. We can't load/match the game 0 :(
   if {$temp < 1} {
     set glstart 1
     ::windows::gamelist::Refresh first
     bell
   } else {
-    if {$load} {
-      ::game::Load $temp
-    }
     set glstart $temp
     ::windows::gamelist::Refresh first
-    if {!$load} {
-      .glistWin.tree selection set [lindex [.glistWin.tree children {}] 0]
-    }
+    .glistWin.tree selection set [lindex [.glistWin.tree children {}] 0]
   }
 }
 
@@ -525,7 +519,7 @@ proc ::windows::gamelist::Open {} {
   # ::utils::history::SetLimit ::windows::gamelist::findtext 5
   # ::utils::history::PruneList ::windows::gamelist::findtext
 
-  bind $w.b.find <Control-Return> {::windows::gamelist::FindText 1}
+  bind $w.b.find <Control-Return> {::game::Load $::glstart}
   bind $w.b.find <Return> {::windows::gamelist::FindText}
   bind $w.b.find <Home> "$w.b.find icursor 0; break"
   bind $w.b.find <End> "$w.b.find icursor end; break"
