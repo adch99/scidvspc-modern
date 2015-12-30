@@ -584,15 +584,18 @@ proc ::docking::add_tab {path args} {
     # dsttab is set to .fdocktreeWin$base
   } else {
     foreach tb [array names tbs] {
+      # It's possible to have no ".nb" so use this instead of ($tb != ".nb")
+      set tabs [$tb tabs]
+      set tabcount [llength $tabs]
+      set notMainBoard [expr {[lsearch $tabs .fdockmain] == -1}]
       # Note - $x, $y, $h are currently never used as criteria
       set x [winfo rootx $tb]
       set y [winfo rooty $tb]
       set w [winfo width $tb]
       set h [winfo height $tb]
-      set tabcount [llength [$tb tabs]]
 
       ### Some windows the largest (widest) pane
-      if {($path == ".fdockfics" && $tb != ".nb")||
+      if {($path == ".fdockfics" && $notMainBoard) ||
            $path == ".fdocktbWin" ||
            $path == ".fdockcrosstabWin" ||
            $path == ".fdockglistWin"} {
@@ -600,7 +603,7 @@ proc ::docking::add_tab {path args} {
       } else {
         ### Others get the least crowded
         # todo: make some get a small/medium sized paned window
-        set rel {$tabcount < $_tabcount && $tb != ".nb"}
+        set rel {$tabcount < $_tabcount && $notMainBoard}
       }
       if {$dsttab==""} {
         set dsttab $tb
