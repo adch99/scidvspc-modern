@@ -467,6 +467,11 @@ proc ::file::Close {{base -1}} {
 
     bind . <Control-Key-$base> {}
 
+    ### Need these here, as otherwise a db "open base as tree" window won't close. S.A.
+    ## (hmmm - this line is making us switch to empty base instead of clipbase when tree is closed and is locked)
+    # but placing it before the (following) ::file::SwitchToBase commands seems to fix eveything.
+    if {[winfo exists .treeWin$base]} { destroy .treeWin$base }
+
     # If closing current base - reset current game and switch to clipbase
     if { $current == $base } {
       setTrialMode 0 0
@@ -475,11 +480,6 @@ proc ::file::Close {{base -1}} {
     } else {
       ::file::SwitchToBase $current
     }
-
-    ### Need these here, as otherwise a db "open base as tree" window won't close. S.A.
-
-    # (hmmm - this line is making us switch to empty base instead of clipbase when tree is closed and is locked)
-    if {[winfo exists .treeWin$base]} { destroy .treeWin$base }
     
     if {[winfo exists .emailWin]} { destroy .emailWin }
   } else {
@@ -560,6 +560,7 @@ proc ::file::openBaseAsTree { { fName "" } } {
     set ::initialDir(file) [file tail $fName]
   }
 
+
   if {[file extension $fName] == ""} {
     set fName "$fName.si4"
   }
@@ -567,6 +568,20 @@ proc ::file::openBaseAsTree { { fName "" } } {
   if {[file extension $fName] == ".si3" && [file exists $fName]} {
     ::file::Upgrade [file rootname $fName]
     return
+  }
+
+  ### Check it is not already open
+  # Name handling is a little clumsy, but is tested
+  if {[file extension $fName] == ".si4"} {
+    set rName [file rootname $fName]
+  } else {
+    set rName $fName
+  }
+  for {set i 1} {$i <= [sc_base count total]} {incr i} {
+    if {$rName == [sc_base filename $i]} {
+      ::tree::Open $i
+      return
+    }
   }
 
   set err 0
