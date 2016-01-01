@@ -1748,6 +1748,8 @@ translate D DockLeft {Nach links}
 translate D DockRight {Nach rechts}
 translate D Undock {Fenster befreien}
 translate D ChangeIcon {Symbol ändern}
+# ====== TODO To be translated ======
+translate D More {More}
 
 # Drag & Drop
 translate D CannotOpenUri {Die folgenden URI können nicht geöffnet werden:}

@@ -1710,6 +1710,8 @@ translate R Undock {Расстыковать}
 
 # Switcher window
 translate R ChangeIcon {Сменить иконку...}
+# ====== TODO To be translated ======
+translate R More {More}
 translate R CannotOpenUri {Не могу открыть следующий идентификатор URI:}
 translate R InvalidUri {Принятое содержимое не является допустимым списком URI.}
 translate R UriRejected	{Следующие файлы будут отклонены:}

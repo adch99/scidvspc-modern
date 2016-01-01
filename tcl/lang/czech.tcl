@@ -2020,6 +2020,8 @@ translate C DockRight {Pøesunout doprava}
 # ====== TODO To be translated ======
 translate C Undock {Undock}
 translate C ChangeIcon {Zmìnit ikonu}
+# ====== TODO To be translated ======
+translate C More {More}
 
 # Drag & Drop
 # ====== TODO To be translated ======

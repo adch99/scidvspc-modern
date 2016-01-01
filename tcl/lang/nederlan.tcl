@@ -1762,6 +1762,8 @@ translate N DockLeft {Zend naar links}
 translate N DockRight {Zend naar rechts}
 translate N Undock {Losmaken}
 translate N ChangeIcon {Verander icon}
+# ====== TODO To be translated ======
+translate N More {More}
 
 # Drag & Drop
 translate N CannotOpenUri {Kan de volgende URI niet openen:}

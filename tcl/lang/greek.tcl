@@ -1757,6 +1757,8 @@ translate G Undock {Αποκόλληση}
 
 # Switcher window
 translate G ChangeIcon {Αλλαγή εικονιδίου}
+# ====== TODO To be translated ======
+translate G More {More}
 
 # Drag & Drop
 translate G CannotOpenUri {Αδυναμία ανοίγματος URI:}

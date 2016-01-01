@@ -1723,6 +1723,8 @@ translate W DockLeft {Drag till vänster}
 translate W DockRight {Drag till höger}
 translate W Undock {Avdocka}
 translate W ChangeIcon {Ändra ikon...}
+# ====== TODO To be translated ======
+translate W More {More}
 
 # Drag & Drop
 translate W CannotOpenUri {Åtkomst nekad för foldern '%s'.}

@@ -2040,6 +2040,8 @@ translate H DockRight {Mozgatás jobbra}
 translate H Undock {Feloldás}
 # ====== TODO To be translated ======
 translate H ChangeIcon {Change icon}
+# ====== TODO To be translated ======
+translate H More {More}
 
 # Drag & Drop
 # ====== TODO To be translated ======

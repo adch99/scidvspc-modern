@@ -2016,6 +2016,8 @@ translate B DockLeft {Mover para a esquerda}
 translate B DockRight {Mover para a direita}
 translate B Undock {Desacoplar}
 translate B ChangeIcon {Alterar icone}
+# ====== TODO To be translated ======
+translate B More {More}
 
 # Drag & Drop
 # ====== TODO To be translated ======

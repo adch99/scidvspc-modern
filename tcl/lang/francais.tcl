@@ -1678,6 +1678,8 @@ translate F DockLeft {Déplacer à gauche}
 translate F DockRight {Déplacer à droite}
 translate F Undock {Détacher}
 translate F ChangeIcon {Changer icone}
+# ====== TODO To be translated ======
+translate F More {More}
 
 # Drag & Drop
 # ====== TODO To be translated ======

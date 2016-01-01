@@ -1696,6 +1696,8 @@ translate P DockLeft {Przenieś na lewo}
 translate P DockRight {Przenieś na prawo}
 translate P Undock {Odłącz}
 translate P ChangeIcon {Zmień ikonę}
+# ====== TODO To be translated ======
+translate P More {More}
 
 
 # Drag & Drop

@@ -2164,6 +2164,8 @@ translate O Undock {Undock}
 # ====== TODO To be translated ======
 translate O ChangeIcon {Change icon...}
 # ====== TODO To be translated ======
+translate O More {More}
+# ====== TODO To be translated ======
 
 # Drag & Drop
 # ====== TODO To be translated ======

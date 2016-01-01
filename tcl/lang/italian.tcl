@@ -1862,6 +1862,8 @@ translate I DockRight {Move to right}
 translate I Undock {Undock}
 # ====== TODO To be translated ======
 translate I ChangeIcon {Change icon}
+# ====== TODO To be translated ======
+translate I More {More}
 
 # Drag & Drop
 translate I CannotOpenUri {Impossibile aprire il seguente URI:}

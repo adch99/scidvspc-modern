@@ -2168,6 +2168,8 @@ translate Y DockRight {Move to right}
 translate Y Undock {Undock}
 # ====== TODO To be translated ======
 translate Y ChangeIcon {Change icon}
+# ====== TODO To be translated ======
+translate Y More {More}
 
 # Drag & Drop
 # ====== TODO To be translated ======

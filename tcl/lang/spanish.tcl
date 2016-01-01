@@ -1704,6 +1704,8 @@ translate S DockLeft {Mover a la izquierda}
 translate S DockRight {Mover a la derecha}
 translate S Undock {Ventana flotante}
 translate S ChangeIcon {Cambiar icono}
+# ====== TODO To be translated ======
+translate S More {More}
 
 # Drag & Drop
 translate S CannotOpenUri {No se puede abrir la siguiente URI:}

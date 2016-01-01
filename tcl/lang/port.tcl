@@ -1666,6 +1666,8 @@ translate U DockLeft {Mover para a esquerda}
 translate U DockRight {Mover para a direita}
 translate U Undock {Desacoplar}
 translate U ChangeIcon {Alterar icone}
+# ====== TODO To be translated ======
+translate U More {More}
 
 # Drag & Drop
 translate U CannotOpenUri {Não é possível abrir o seguinte URI:}
