@@ -1465,12 +1465,12 @@ set helpText(Switcher) {<h1>The Database Switcher</h1>
   gives visual feedback on open databases. 
   The name, <a Filter>filter</a> state, and icon
   of each database is displayed, and the active database is highlighted
-  with a yellow background. At the left most is a <a Bookmarks>bookmark</a> button.
+  with a coloured background. At the left most is a <a Bookmarks>bookmark</a> button.
   </p>
   <p>
-  Right-clicking a database produces a popup menu
-  from which one can reset its <a Filter>filter</a>, mark base as Read-Only or
-  close the database. Middle clicking a base will show/hide the icons.
+  Right-clicking a database produces a popup menu. From this, one can perform <a Filter>filter</a> ops, mark base as Read-Only or
+  close the database. There is also an extra menu which shows <a Tree>Tree</a> or <a Tree Best>Best Games</a>, or changes the icon.
+  Middle clicking a base will show/hide the icons.
   </p>
   <h2><name draganddrop>Drag and Drop</name></h2>
   <p>
@@ -1483,7 +1483,7 @@ set helpText(Switcher) {<h1>The Database Switcher</h1>
   This is an important way to manage and copy games within databases.
   </p>
 
-  <p><footer>Updated: Scid 4.8 April 2012</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.16, January 2016</footer></p>
 }
 
 

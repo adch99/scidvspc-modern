@@ -1105,11 +1105,22 @@ proc ::tree::toggleBest { baseNumber } {
   }
 }
 
+proc ::tree::OpenBest {baseNumber} {
+  set w .treeBest$baseNumber
+  if {[winfo exists $w]} {
+    raiseWin $w
+  } else {
+    ::tree::best $baseNumber
+  }
+}
+
 proc ::tree::best { baseNumber } {
   global tree
 
   set w .treeBest$baseNumber
-  if {! [winfo exists .treeWin$baseNumber]} { return }
+  if {! [winfo exists .treeWin$baseNumber]} {
+    ::tree::Open $baseNumber
+  }
   # Hmmm... listbox widgets seem to clash, so need this hack
   if {[winfo exists .variations]} { return }
   if {! [winfo exists $w]} {

@@ -1686,6 +1686,7 @@ translate E Undock {Undock}
 
 # Switcher window
 translate E ChangeIcon {Change icon}
+translate E More {More}
 
 # Drag & Drop
 translate E CannotOpenUri {Cannot open the following URI:}

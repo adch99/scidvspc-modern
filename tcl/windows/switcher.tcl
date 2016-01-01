@@ -934,10 +934,24 @@ proc ::windows::switcher::Open {} {
 
     $f.menu add command -label [tr FileReadOnly] -command "makeBaseReadOnly .glistWin.baseWin $i"
 
-    set closeLabel [tr FileClose]
-    if {$i == [sc_info clipbase]} { set closeLabel [tr EditReset] }
+    if {$i == [sc_info clipbase]} {
+      set closeLabel [tr EditReset]
+    } else {
+      set closeLabel [tr FileClose]
+    }
 
     $f.menu add command -label $closeLabel -command [list ::file::Close $i]
+
+    $f.menu add separator
+
+    $f.menu add cascade -label [tr More] -menu $f.menu.show
+
+      menu $f.menu.show
+      $f.menu.show add command -label WindowsTree  -command "::tree::Open $i"
+      $f.menu.show add command -label TreeFileBest -command "::tree::OpenBest $i"
+      $f.menu.show add command -label [tr ChangeIcon] -command "changeBaseType $i $w"
+      configMenuText $f.menu.show 0 WindowsTree  $::language
+      configMenuText $f.menu.show 1 TreeFileBest $::language
 
     foreach win {"" .img .name} {
       bind $f$win <ButtonPress-3> "tk_popup $f.menu %X %Y"
