@@ -377,11 +377,7 @@ main (int argc, char * argv[])
     // - but i can't get is to play nice with Windows "open with" feature S.A
 
     newArgc++;
-#ifdef WINCE
-    newArgv = (char **) my_Tcl_Alloc (sizeof (char *) * newArgc);
-#else
     newArgv = (char **) malloc (sizeof (char *) * newArgc);
-#endif
     newArgv[0] = argv[0];
     for (int i = 1; i < argc; i++) { newArgv[i+1] = argv[i]; }
 
@@ -396,34 +392,15 @@ main (int argc, char * argv[])
 #  endif  // ifdef SOURCE_TCL_FILE
 #endif  // ifdef WIN32
 
-#ifndef WINCE
 #ifdef TCL_ONLY
     Tcl_Main (newArgc, newArgv, scid_InitTclTk);
 #else
     Tk_Main (newArgc, newArgv, scid_InitTclTk);
 #endif
-#endif
     exit(0);
     return 0;
 }
 
-#ifdef WINCE
-int
-Tkscid_Init (Tcl_Interp * ti)
-{
-  //lowPrio(253);
-// ==============================================================
-    int code;
-    currentTclInterp = ti;
-    if (Tcl_InitStubs(ti, TCL_VERSION, 0) == NULL) {
-      return TCL_ERROR;
-    }
-    code = Tcl_PkgProvide(ti, "Tkscid", "1.0");
-    if (code != TCL_OK) {
-  return code;
-    }
-// ==============================================================
-#else
 #ifndef TCL_ONLY 
 #ifndef __APPLE__
 extern "C" int Tkdnd_Init (Tcl_Interp*);
@@ -435,7 +412,6 @@ int
 scid_InitTclTk (Tcl_Interp * ti)
 {
 
-#endif
     if (Tcl_Init (ti) == TCL_ERROR) { return TCL_ERROR; }
 #ifndef TCL_ONLY
     if (Tk_Init (ti) == TCL_ERROR) { return TCL_ERROR; }
@@ -479,11 +455,7 @@ scid_InitTclTk (Tcl_Interp * ti)
     for (int epdID=0; epdID < MAX_EPD; epdID++) { pbooks[epdID] = NULL; }
 
     // Initialise global Scid database variables:
-#ifdef WINCE
-    dbList = (scidBaseT * ) my_Tcl_Alloc( sizeof(scidBaseT [MAX_BASES]));
-#else
     dbList = new scidBaseT [MAX_BASES];
-#endif
 
     for (int base=0; base < MAX_BASES; base++) {
         db = &(dbList[base]);
@@ -984,11 +956,7 @@ sc_base_open (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     showProgress = startProgressBar();
 
     bool readOnly = false;  // Open database read-only.
-#ifdef WINCE
-    bool fastOpen = true;  // Fast open (no flag counts, etc)
-#else
     bool fastOpen = false;  // Fast open (no flag counts, etc)
-#endif
     const char * usage = "Usage: sc_base open [-readonly] [-fast] <filename>";
 
     // Check options:
@@ -1073,40 +1041,11 @@ sc_base_open (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     }
 
     // Read entire index, showing progress every 20,000 games if applicable:
-#ifdef WINCE
-    if (db->idx->ReadEntireFile (2000, base_progress, (void *) ti) != OK) {
-
-    // If the database is the clipbase, do not close it, just clear it:
-    if (db == clipbase) {
-      sc_clipbase_clear (ti);
-    } else {
-      db->idx->CloseIndexFile();
-      db->idx->Clear();
-      db->nb->Clear();
-      db->gfile->Close();
-      db->idx->SetDescription (errMsgNotOpen(ti));
-      clearFilter (db, 0);
-
-      if (db->duplicates != NULL) {
-        my_Tcl_Free((char*) db->duplicates);
-        db->duplicates = NULL;
-      }
-
-      db->inUse = false;
-      db->gameNumber = -1;
-      db->numGames = 0;
-      recalcFlagCounts (db);
-      strCopy (db->fileName, "<empty>");
-      return errorResult (ti, "Error: base too big");
-      }
-    }
-#else
     if (showProgress) {
         db->idx->ReadEntireFile (20000, base_progress, (void *) ti);
     } else {
       db->idx->ReadEntireFile ();
     }
-#endif
 
     if (db->idx->VerifyFile (db->nb) != OK) {
         db->idx->CloseIndexFile();
@@ -1292,11 +1231,7 @@ sc_base_close (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     clearFilter (basePtr, 0);
 
     if (basePtr->duplicates != NULL) {
-#ifdef WINCE
-        my_Tcl_Free((char *) basePtr->duplicates);
-#else
         delete[] basePtr->duplicates;
-#endif
         basePtr->duplicates = NULL;
     }
 

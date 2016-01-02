@@ -898,11 +898,7 @@ Index::FreeEntries ()
         ASSERT (Entries[i] != NULL);
         delete[] Entries[i];
     }
-#ifdef WINCE
-    my_Tcl_Free((char*)Entries);
-#else
     delete[] Entries;
-#endif
     Entries = NULL;
     InMemory = false;
 }
@@ -1079,11 +1075,7 @@ Index::CloseIndexFile ( bool NoHeader )
     if (InMemory) { FreeEntries(); }
 
     if (EntriesHeap != NULL) {
-#ifdef WINCE
-        my_Tcl_Free((char*) EntriesHeap);
-#else
         delete[] EntriesHeap;
-#endif
 
         EntriesHeap = NULL;
     }
@@ -1121,12 +1113,7 @@ Index::ReadEntireFile (int reportFrequency,
 
     uint numChunks = NumChunksRequired();
 
-#ifdef WINCE
-    Entries = (IndexEntry**)my_Tcl_AttemptAlloc(sizeof( IndexEntryPtr [numChunks]));
-    if ( Entries == NULL ) return !OK;
-#else
     Entries = new IndexEntryPtr [numChunks];
-#endif
 
     uint progressCounter = 0;
     int reportAfter = reportFrequency;
@@ -1136,14 +1123,6 @@ Index::ReadEntireFile (int reportFrequency,
     for (uint chunkCount = 0; chunkCount < numChunks; chunkCount++) {
         Entries[chunkCount] = new IndexEntry [INDEX_ENTRY_CHUNKSIZE];
 
-#ifdef WINCE
-        if (Entries[chunkCount] == NULL) {
-          // free all slots allocated so far
-          for (uint i = 0; i < chunkCount ; i ++) delete[] Entries[i];
-          my_Tcl_Free((char*) Entries);
-          return !OK;
-        }
-#endif
         uint gamesToRead = GetNumGames() - readCount;
         if (gamesToRead > INDEX_ENTRY_CHUNKSIZE) {
             gamesToRead = INDEX_ENTRY_CHUNKSIZE;
@@ -1163,11 +1142,7 @@ Index::ReadEntireFile (int reportFrequency,
             for (uint i = 0; i <= chunkCount; i++) {
                 delete[] Entries[i];
             }
-#ifdef WINCE
-            my_Tcl_Free((char*) Entries);
-#else
             delete[] Entries;
-#endif
             Entries = NULL;
             InMemory = false;
             return err;
@@ -1344,21 +1319,13 @@ Index::AddGame (gameNumberT * g, IndexEntry * ie, bool initIE)
             //printf ("Increasing to %u chunks\n", newNumChunks);
             ASSERT (oldNumChunks + 1 == newNumChunks);
             // We need to enlarge the in-memory array:
-#ifdef WINCE
-            IndexEntryPtr * newEntries = (IndexEntry**)my_Tcl_Alloc(sizeof( IndexEntryPtr [newNumChunks]));
-#else
             IndexEntryPtr * newEntries = new IndexEntryPtr [newNumChunks];
-#endif
             for (uint i=0; i < oldNumChunks; i++) {
                 newEntries[i] = Entries[i];
             }
             newEntries[oldNumChunks] = new IndexEntry [INDEX_ENTRY_CHUNKSIZE];
             if (Entries != NULL) {
-#ifdef WINCE
-            my_Tcl_Free((char*) Entries);
-#else
             delete[] Entries;
-#endif
 }
             Entries = newEntries;
         }
@@ -1368,11 +1335,7 @@ Index::AddGame (gameNumberT * g, IndexEntry * ie, bool initIE)
 
     // Invalidate the EntriesHeap array of sorted entry indexes:
     if (EntriesHeap != NULL) {
-#ifdef WINCE
-            my_Tcl_Free((char*) EntriesHeap);
-#else
-            delete[] EntriesHeap;
-#endif
+        delete[] EntriesHeap;
         EntriesHeap = NULL;
     }
 
@@ -1493,17 +1456,9 @@ Index::Sort (NameBase * nb, int reportFrequency,
     // Allocate and initialise the array of pointers to IndexEntries:
 
     if (EntriesHeap != NULL) {
-#ifdef WINCE
-            my_Tcl_Free((char*) EntriesHeap);
-#else
-            delete[] EntriesHeap;
-#endif
+        delete[] EntriesHeap;
     }
-#ifdef WINCE
-    EntriesHeap = (uint*)my_Tcl_Alloc(sizeof(new uint [heapSize + 1]));
-#else
     EntriesHeap = new uint [heapSize + 1];
-#endif
 
     for (count=0; count < heapSize; count++) {
         EntriesHeap [count+1] = count;
@@ -1576,11 +1531,7 @@ errorT
 Index::VerifySort (void)
 {
     ASSERT (EntriesHeap != NULL);
-#ifdef WINCE
-    bool * found = (bool *) my_Tcl_Alloc(sizeof(bool [Header.numGames]));
-#else
     bool * found = new bool [Header.numGames];
-#endif
 
     uint count;
 
@@ -1594,20 +1545,12 @@ Index::VerifySort (void)
         if (! found[count]) {
             fprintf (stderr, "FATAL ERROR in sorting algorithm: ");
             fprintf (stderr, "Game %u was not in sorted array!\n", count+1);
-#ifdef WINCE
-            my_Tcl_Free((char*) found);
-#else
             delete[] found;
-#endif
 
             return ERROR_Corrupt;
         }
     }
-#ifdef WINCE
-            my_Tcl_Free((char*) found);
-#else
-            delete[] found;
-#endif
+    delete[] found;
     return OK;
 }
 
@@ -1689,11 +1632,7 @@ Index::WriteSorted (int reportFrequency,
         (*progressFn) (progressData, 1, 1);
     }
     Dirty = 1;
-#ifdef WINCE
-            my_Tcl_Free((char*) EntriesHeap);
-#else
-            delete[] EntriesHeap;
-#endif
+    delete[] EntriesHeap;
 
     EntriesHeap = NULL;
     return OK;
@@ -1729,11 +1668,7 @@ Index::ParseSortCriteria (const char * inputStr)
             length++;
             if (length >= 255) {
                 SortCriteria[0] = SORT_sentinel;
-#ifdef WINCE
-                if (ErrorMsg) { my_Tcl_Free( ErrorMsg); }
-#else
                 if (ErrorMsg) { delete[] ErrorMsg; }
-#endif
                 ErrorMsg = strDuplicate ("Error: sort field too long!");
                 return ERROR;
             }
@@ -1745,11 +1680,7 @@ Index::ParseSortCriteria (const char * inputStr)
             if (length > 0) {
                 if (criListLen >= (INDEX_MaxSortCriteria - 1)) {
                     SortCriteria[0] = SORT_sentinel;
-#ifdef WINCE
-                    if (ErrorMsg != NULL) { my_Tcl_Free( ErrorMsg ); }
-#else
                     if (ErrorMsg != NULL) { delete[] ErrorMsg; }
-#endif
 
                     ErrorMsg = strDuplicate (
                         "Error: Too many fields in sort criteria!");
@@ -1768,13 +1699,8 @@ Index::ParseSortCriteria (const char * inputStr)
                 if (index == -1) {
                     // Invalid criteria name:
                     SortCriteria[0] = SORT_sentinel;
-#ifdef WINCE
-                    if (ErrorMsg != NULL) { my_Tcl_Free( ErrorMsg); }
-                    ErrorMsg = my_Tcl_Alloc(sizeof( char [512]));
-#else
                     if (ErrorMsg != NULL) { delete[] ErrorMsg; }
                     ErrorMsg = new char [512];
-#endif
                     sprintf (ErrorMsg, "Error: invalid sort field: %s", name);
                     return ERROR;
                 }
@@ -1789,13 +1715,8 @@ Index::ParseSortCriteria (const char * inputStr)
         } else {  // Invalid character in list:
             SortCriteria[0] = SORT_sentinel;
 
-#ifdef WINCE
-                    if (ErrorMsg != NULL) { my_Tcl_Free( ErrorMsg); }
-                    ErrorMsg = my_Tcl_Alloc(sizeof( char [80]));
-#else
             if (ErrorMsg != NULL) { delete[] ErrorMsg; }
             ErrorMsg = new char [80];
-#endif
 
             sprintf (ErrorMsg,
                      "Error: invalid character in sort field list: \"%c\"",
