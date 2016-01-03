@@ -59,7 +59,7 @@ WinMMap::WinMMap(char const* filename)
     m_file = CreateFileA(
 					filename,
 					GENERIC_READ,
-					0,
+					FILE_SHARE_READ | FILE_SHARE_WRITE ,
 					0,
 					OPEN_EXISTING,
 					FILE_FLAG_SEQUENTIAL_SCAN | FILE_ATTRIBUTE_READONLY | FILE_ATTRIBUTE_TEMPORARY,
