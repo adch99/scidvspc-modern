@@ -83,12 +83,10 @@ proc ::windows::stats::Open {} {
 
 proc ::windows::stats::Refresh {} {
   variable display
-  if {[winfo exists .playerInfoWin]} { playerInfo }
-  # ::windows::gamelist::Refresh
-  ::maint::Refresh
-  updateStatusBar
+  if {[winfo exists .playerInfoWin]} {
+    playerInfo
+  }
   ::tools::graphs::filter::Refresh
-  #Klimmek. Update Absfilter window
   ::tools::graphs::absfilter::Refresh
   if {! [winfo exists .statsWin]} { return }
 
