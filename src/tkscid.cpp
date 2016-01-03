@@ -5722,7 +5722,6 @@ sc_flags (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
       // Is this game deleted or have other user-settable flags 
 
       // max is 19 flags (previously ???)
-      char userFlags[32];
       int flagCount = 0;
       int deleted = 0;
 
@@ -5731,35 +5730,42 @@ sc_flags (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 	  const char * flagStr = userFlags;
 	  if (*flagStr == 'D') {
               deleted = 1;
-	      if (flagStr[1]) {
-		  Tcl_AppendResult (ti, "(", translate (ti, "deleted"), "), ",  NULL);
-              } else {
-		  Tcl_AppendResult (ti, "(", translate (ti, "deleted"), ")", NULL);
-              }
+	      Tcl_AppendResult (ti, "(", translate (ti, "deleted"), ")  ",  NULL);
               flagStr++;
           }
 
 	  if (*flagStr != 0) {
-              Tcl_AppendResult (ti, translate (ti, "flags", "flags"), ": ", flagStr, NULL);
+	      char flagName[100];
+	      uint custom;
+	      Tcl_AppendResult (ti, translate (ti, "flags", "flags"), ": ", NULL); // , flagStr
 	      while (*flagStr != 0) {
-		  const char * flagName = NULL;
+		  flagName[0] = 0;
+		  custom = 0;
 		  switch (*flagStr) {
-		      case 'W': flagName = "WhiteOpFlag"; break;
-		      case 'B': flagName = "BlackOpFlag"; break;
-		      case 'M': flagName = "MiddlegameFlag"; break;
-		      case 'E': flagName = "EndgameFlag"; break;
-		      case 'N': flagName = "NoveltyFlag"; break;
-		      case 'P': flagName = "PawnFlag"; break;
-		      case 'T': flagName = "TacticsFlag"; break;
-		      case 'Q': flagName = "QsideFlag"; break;
-		      case 'K': flagName = "KsideFlag"; break;
-		      case '!': flagName = "BrilliancyFlag"; break;
-		      case '?': flagName = "BlunderFlag"; break;
-		      case 'U': flagName = "UserFlag"; break;
-		      /*** todo : print Custom Flag labels ***/
+		      case 'W': strcpy (flagName, "WhiteOpFlag"); break;
+		      case 'B': strcpy (flagName, "BlackOpFlag"); break;
+		      case 'M': strcpy (flagName, "MiddlegameFlag"); break;
+		      case 'E': strcpy (flagName, "EndgameFlag"); break;
+		      case 'N': strcpy (flagName, "NoveltyFlag"); break;
+		      case 'P': strcpy (flagName, "PawnFlag"); break;
+		      case 'T': strcpy (flagName, "TacticsFlag"); break;
+		      case 'Q': strcpy (flagName, "QsideFlag"); break;
+		      case 'K': strcpy (flagName, "KsideFlag"); break;
+		      case '!': strcpy (flagName, "BrilliancyFlag"); break;
+		      case '?': strcpy (flagName, "BlunderFlag"); break;
+		      case 'U': strcpy (flagName, "UserFlag"); break;
+		      default : custom = (uint)(*flagStr - '1') + 1;
+				if (custom >=1 && custom <= CUSTOM_FLAG_MAX) {
+				    db->idx->GetCustomFlagDesc(flagName, custom);
+				    if (!flagName[0])
+					sprintf (flagName, "(%i)", custom);
+				}
 		  }
-		  if (flagName != NULL) {
-		      Tcl_AppendResult (ti, (flagCount > 0 ? ", " : " - "), translate (ti, flagName), NULL);
+		  if (flagName[0]) {
+		      if (custom) 
+			  Tcl_AppendResult (ti, (flagCount > 0 ? ", " : ""), flagName, NULL);
+		      else 
+			  Tcl_AppendResult (ti, (flagCount > 0 ? ", " : ""), translate (ti, flagName), NULL);
 		  }
 		  flagCount++;
 		  flagStr++;
@@ -6523,7 +6529,9 @@ sc_game_firstMoves (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
 //    Extra calling methods:
 //      sc_game flag <flag> filter <0|1|invert> operates on all filtered games.
 //      sc_game flag <flag> all <0|1|invert> operates on all games.
-//      sc_game flag <flag> description 
+//      sc_game flag <1-6> description 
+//      sc_game flag <1-6> setdescription [set ::customEntry$i]
+
 int
 sc_game_flag (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {

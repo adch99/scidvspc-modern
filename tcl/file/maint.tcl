@@ -349,9 +349,8 @@ proc ::maint::ChangeBaseDescription {} {
   catch {grab $w}
 }
 
-################################################################################
 #  Change custom flags description
-################################################################################
+
 proc ::maint::ChangeCustomDescription {} {
   set w .bcustom
   if {[winfo exists $w]} { return }
@@ -382,6 +381,7 @@ proc ::maint::ChangeCustomDescription {} {
     grab release .bcustom
     destroy .bcustom
     refreshCustomFlags
+    updateStatusBar
   }
 
   dialogbutton $w.b.help -textvar ::tr(Help) -command {helpWindow Flags}

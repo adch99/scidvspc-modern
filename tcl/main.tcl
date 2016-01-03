@@ -187,14 +187,11 @@ proc warnStatusBar {warning} {
 proc updateStatusBar {} {
   global statusBar moveEntry
 
-  # Why are these things refreshed here ???
-
   ::windows::gamelist::checkAltered
 
   # Exit if engine 1 is running in status bar
   if {$::analysis(mini) && [winfo exists .analysisWin1]} {return}
 
-  # ::windows::switcher::Refresh
   ::maint::Refresh
 
   set statusBar "  "
@@ -220,7 +217,7 @@ proc updateStatusBar {} {
 
   set gameNum [sc_game number]
 
-  append statusBar "$fname: $::tr(game) $gameNum [sc_flags $gameNum verbose]"
+  append statusBar "$fname: $::tr(game)  $gameNum   [sc_flags $gameNum verbose]"
 
   if {[sc_base isReadOnly]} {
     append statusBar " ($::tr(readonly))"
