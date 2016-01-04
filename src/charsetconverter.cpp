@@ -465,10 +465,11 @@ struct CharsetConverter::Buffer
 
   void replace(std::string& str)
   {
+    m_size = str.size();
     if (m_std)
       m_std->swap(str);
     else
-      m_txt->ReplaceContent(str.c_str(), str.size());
+      m_txt->ReplaceContent(str.c_str(), m_size);
   }
 };
 
