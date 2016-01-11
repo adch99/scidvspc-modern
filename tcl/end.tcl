@@ -363,7 +363,7 @@ proc exportOptions {exportType {fName {}}} {
   set exportFlags(ok) -1
   toplevel $w
   wm withdraw $w
-  wm title $w "[tr OptionsExport]"
+  wm title $w "[tr OptionsExport] $exportType"
   wm transient $w .main
   wm protocol $w WM_DELETE_WINDOW {set exportFlags(ok) 0}
   bind $w <Escape> "$w.b.cancel invoke"
@@ -558,7 +558,7 @@ proc exportGames {selection exportType {fName {}}} {
   if {$fName == ""} {
     return
   }
-  if {$::macOS && ![string match *$default $fName] && ![string match *.* $fName]} {
+  if {![string match *$default $fName]} {
       append fName $default
   }
   set initialDir(pgn) [file dirname $fName]
