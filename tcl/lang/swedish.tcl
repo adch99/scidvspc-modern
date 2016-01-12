@@ -482,8 +482,8 @@ translate W GameEnd {Slutställning}
 translate W LineEnd {Varianten slut}
 
 # Player information:
-translate W PInfoAll {<b>alla</b> partier}
-translate W PInfoFilter {<b>filtrerade</b> partier}
+translate W PInfoAll {alla partier}
+translate W PInfoFilter {filtrerade partier}
 translate W PInfoAgainst {Resultat mot}
 translate W PInfoMostWhite {De vanligaste öppningarna som vit}
 translate W PInfoMostBlack {De vanligaste öppningarna som svart}

@@ -462,8 +462,8 @@ translate R GameEnd {Конец партии}
 translate R LineEnd {Конец плана}
 
 # Player information:
-translate R PInfoAll {<b>всех</b> партий}
-translate R PInfoFilter {<b>фильтрованных</b> партий}
+translate R PInfoAll {всех партий}
+translate R PInfoFilter {фильтрованных партий}
 translate R PInfoAgainst {Результаты против}
 translate R PInfoMostWhite {Наиболее частые дебюты за белых}
 translate R PInfoMostBlack {Наиболее частые дебюты за чёрных}

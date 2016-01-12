@@ -459,8 +459,8 @@ translate U GameEnd {Fim do jogo}
 translate U LineEnd {Fim da linha}
 
 # Player information:
-translate U PInfoAll {<b>todos</b> os jogos}
-translate U PInfoFilter {os jogos <b>filtrados</b>}
+translate U PInfoAll {todos os jogos}
+translate U PInfoFilter {os jogos filtrados}
 translate U PInfoAgainst {Resultados contra}
 translate U PInfoMostWhite {Aberturas mais comuns com as Brancas}
 translate U PInfoMostBlack {Aberturas mais comuns com as Pretas}

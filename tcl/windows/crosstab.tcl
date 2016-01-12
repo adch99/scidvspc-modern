@@ -332,6 +332,7 @@ proc ::crosstab::setFilter {{round {}}} {
     sc_game crosstable filter -round $round $crosstab(deleted) 
   }
   set glstart 1
+  ::windows::stats::Refresh
   ::windows::gamelist::Refresh
   updateStatusBar
 }

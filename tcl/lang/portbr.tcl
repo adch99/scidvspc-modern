@@ -516,8 +516,8 @@ translate B GameEnd {Fim do jogo}
 translate B LineEnd {Fim da linha}
 
 # Player information:
-translate B PInfoAll {<b>todos</b> os jogos}
-translate B PInfoFilter {os jogos <b>filtrados</b>}
+translate B PInfoAll {todos os jogos}
+translate B PInfoFilter {os jogos filtrados}
 translate B PInfoAgainst {Resultados contra}
 translate B PInfoMostWhite {Aberturas mais comuns com as Brancas}
 translate B PInfoMostBlack {Aberturas mais comuns com as Pretas}

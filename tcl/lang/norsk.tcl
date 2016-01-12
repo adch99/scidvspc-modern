@@ -543,8 +543,8 @@ translate O GameEnd {Slutt på parti}
 translate O LineEnd {Slutt på linje}
 
 # Player information:
-translate O PInfoAll {<b>alle</b> partier}
-translate O PInfoFilter {partier i <b>filteret</b>}
+translate O PInfoAll {alle partier}
+translate O PInfoFilter {partier i filteret}
 translate O PInfoAgainst {Resultater mot}
 translate O PInfoMostWhite {Hyppigste åpning som hvit}
 translate O PInfoMostBlack {Hyppigste åpning som sort}

@@ -543,8 +543,8 @@ translate Y GameEnd {Kraj partije}
 translate Y LineEnd {Kraj serije poteza}
 
 # Player information:
-translate Y PInfoAll {<b>svih</b> partija}
-translate Y PInfoFilter {<b>filtriranih</b> partija}
+translate Y PInfoAll {svih partija}
+translate Y PInfoFilter {filtriranih partija}
 translate Y PInfoAgainst {Rezultati protiv}
 translate Y PInfoMostWhite {Najèe¹æe igrana otvaranja sa belim figurama}
 translate Y PInfoMostBlack {Najèe¹æe igrana otvaranja sa crnim figurama}

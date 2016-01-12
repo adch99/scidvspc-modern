@@ -493,8 +493,8 @@ translate D GameEnd {Partieende}
 translate D LineEnd {Ende der Zugfolge}
 
 # Player information:
-translate D PInfoAll {<b>alle</b> Spiele}
-translate D PInfoFilter {<b>Filter</b>-Spiele}
+translate D PInfoAll {Alle Spiele}
+translate D PInfoFilter {Filter-Spiele}
 translate D PInfoAgainst {Ergebnisse gegen}
 translate D PInfoMostWhite {Häufigste Eröffnungen als Weißer}
 translate D PInfoMostBlack {Häufigste Eröffnungen als Schwarzer}

@@ -514,8 +514,8 @@ translate C GameEnd {Konec partie}
 translate C LineEnd {Konec série tahù}
 
 # Player information:
-translate C PInfoAll {<b>v¹ech</b> partií}
-translate C PInfoFilter {<b>filtrovaných</b> partií}
+translate C PInfoAll {v¹ech partií}
+translate C PInfoFilter {filtrovaných partií}
 translate C PInfoAgainst {Výsledky proti}
 translate C PInfoMostWhite {Nejèastìj¹í zahájení za bílé}
 translate C PInfoMostBlack {Nejèastìj¹í zahájení za èerné}

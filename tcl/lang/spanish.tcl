@@ -487,8 +487,8 @@ translate S GameEnd {Fin de partida}
 translate S LineEnd {Fin de línea}
 
 # Player information:
-translate S PInfoAll {<b>todas</b> las partidas}
-translate S PInfoFilter {las partidas <b>filtradas</b>}
+translate S PInfoAll {todas las partidas}
+translate S PInfoFilter {las partidas filtradas}
 translate S PInfoAgainst {Resultados contra}
 translate S PInfoMostWhite {Aperturas más comunes con Blancas}
 translate S PInfoMostBlack {Aperturas más comunes con Negras}

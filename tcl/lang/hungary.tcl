@@ -519,8 +519,8 @@ translate H GameEnd {Játszma vége}
 translate H LineEnd {Elágazás vége}
 
 # Player information:
-translate H PInfoAll {<b>összes</b> játszma alapján}
-translate H PInfoFilter {<b>szûrt</b> játszmák alapján}
+translate H PInfoAll {összes játszma alapján}
+translate H PInfoFilter {szûrt játszmák alapján}
 translate H PInfoAgainst {Eredmények, ha az ellenfél}
 translate H PInfoMostWhite {Leggyakoribb megnyitások világosként}
 translate H PInfoMostBlack {Leggyakoribb megnyitások sötétként}

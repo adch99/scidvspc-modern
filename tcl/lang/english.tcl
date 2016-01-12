@@ -474,8 +474,8 @@ translate E GameEnd {End of game}
 translate E LineEnd {End of line}
 
 # Player information:
-translate E PInfoAll {<b>All games</b>}
-translate E PInfoFilter {<b>Filter games</b>}
+translate E PInfoAll {All games}
+translate E PInfoFilter {Filter games}
 translate E PInfoAgainst {Against}
 translate E PInfoMostWhite {Most common openings as White}
 translate E PInfoMostBlack {Most common openings as Black}

@@ -501,8 +501,8 @@ translate I GameEnd {Fine della partita}
 translate I LineEnd {Fine della variante}
 
 # Player information:
-translate I PInfoAll {<b>tutte</b> le partite}
-translate I PInfoFilter {le partite nel <b>filtro</b>}
+translate I PInfoAll {tutte le partite}
+translate I PInfoFilter {le partite nel filtro}
 translate I PInfoAgainst {Risultati contro}
 translate I PInfoMostWhite {Le piu' frequenti aperture con il Bianco}
 translate I PInfoMostBlack {Le piu' frequenti aperture con il Nero}

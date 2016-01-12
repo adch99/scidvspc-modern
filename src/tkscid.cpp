@@ -12208,7 +12208,19 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         strTrimDate (temp);
         Tcl_AppendResult (ti, "  to  ", temp, NULL);
     }
+
     Tcl_AppendResult (ti, newline, NULL);
+
+    if (totalcount[STATS_FILTER] != totalcount[STATS_ALL]) {
+      sprintf (temp, "%s: %s%u %s%s",
+	       translate (ti, "Filter"),
+	       htextOutput ? "<green><run sc_name info -F {}; ::playerInfoRefresh>" : "",
+	       totalcount[STATS_FILTER],
+	       (totalcount[STATS_FILTER] == 1 ?
+		translate (ti, "game") : translate (ti, "games")),
+	       htextOutput ? "</run></green>" : "");
+      Tcl_AppendResult (ti, temp, NULL);
+    }
 
     // Won , Drawn, Lost heading
     // (hmmm... no translations)
@@ -12226,7 +12238,7 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     // Print stats for all games:
 
-    strCopy (temp, translate (ti, "PInfoAll"));
+    sprintf (temp, "<b>%s</b>", translate (ti, "PInfoAll"));
     if (! htextOutput) { strTrimMarkup (temp); }
     Tcl_AppendResult (ti, newline, startHeading, temp,
                       endHeading, newline, NULL);
@@ -12320,7 +12332,7 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     // Now print stats for games in the filter:
 
-    strCopy (temp, translate (ti, "PInfoFilter"));
+    sprintf (temp, "<b>%s</b>", translate (ti, "PInfoFilter"));
     if (! htextOutput) { strTrimMarkup (temp); }
     Tcl_AppendResult (ti, startHeading, temp,
                       endHeading, newline, NULL);
