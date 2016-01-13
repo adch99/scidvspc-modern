@@ -6048,7 +6048,6 @@ isCrosstableGame (IndexEntry * ie, idNumberT siteID, idNumberT eventID,
 int
 sc_game_crosstable (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
-#ifndef WINCE
     static const char * options [] = {
         "plain", "html", "hypertext", "latex", "filter", "count", NULL
     };
@@ -6156,7 +6155,6 @@ sc_game_crosstable (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
             case EOPT_GNUMBER:
                 // Game number to print the crosstable for is
                 // given in the next argument:
-                // (Is this used ? S.A.)
                 if (arg+1 >= argc) { return errorResult (ti, usageMsg); }
                 gameNumber = strGetUnsigned (argv[arg+1]);
                 arg++;
@@ -6391,7 +6389,6 @@ sc_game_crosstable (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
     }
     delete ctable;
     delete dstr;
-#endif
     return TCL_OK;
 }
 

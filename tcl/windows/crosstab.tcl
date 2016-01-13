@@ -52,12 +52,12 @@ proc ::crosstab::ConfigMenus {{lang ""}} {
 }
 
 
-proc ::crosstab::Open {} {
+proc ::crosstab::Open {{game {}}} {
   global crosstab 
 
   set w .crosstabWin
   if {[winfo exists $w]} {
-    ::crosstab::Refresh
+    ::crosstab::Refresh $game
     raiseWin $w
     return
   }
@@ -318,27 +318,38 @@ proc ::crosstab::Open {} {
   bindWheeltoFixed $w
 
   bind $w <Destroy> {}
-  ::crosstab::Refresh
+  ::crosstab::Refresh $game
 
   bind $w <Configure> "recordWinSize $w"
   ::createToplevelFinalize $w
 }
 
 proc ::crosstab::setFilter {{round {}}} {
-  global crosstab glstart
-  if {$round == {}} {
-    sc_game crosstable filter $crosstab(deleted)
-  } else {
-    sc_game crosstable filter -round $round $crosstab(deleted) 
+  global crosstab glstart crosstabGame crosstabBase
+
+  set currentBase [sc_base current]
+  if {$currentBase != $crosstabBase} {
+    sc_base switch $crosstabBase
   }
+
+  if {$round == {}} {
+    sc_game crosstable filter -gameNumber $crosstabGame $crosstab(deleted)
+  } else {
+    sc_game crosstable filter -round $round -gameNumber $crosstabGame $crosstab(deleted) 
+  }
+
+  if {$currentBase != $crosstabBase} {
+    sc_base switch $currentBase
+  }
+
   set glstart 1
   ::windows::stats::Refresh
   ::windows::gamelist::Refresh
   updateStatusBar
 }
 
-proc ::crosstab::Refresh {} {
-  global crosstab
+proc ::crosstab::Refresh {{game {}}} {
+  global crosstab crosstabGame crosstabBase
   set w .crosstabWin
   if {! [winfo exists $w]} { return }
 
@@ -356,14 +367,25 @@ proc ::crosstab::Refresh {} {
   # pack $w.b.stop -side right -padx 5 -pady 3
   # catch {grab $w.b.stop}
   # update
+
+  if {$game == {}} {
+    # Since we aren't autoupdating crosstable, remember which base/game the table is for, for ::crosstab::setFilter
+    set crosstabGame [sc_game number]
+  } else {
+    set crosstabGame $game
+  }
+  set crosstabBase [sc_base current]
+
   if {[
   catch {sc_game crosstable $crosstab(text) $crosstab(sort) $crosstab(type) \
          $crosstab(ratings) $crosstab(countries) $crosstab(tallies) $crosstab(titles) \
          $crosstab(colors) $crosstab(groups) $crosstab(ages) \
-         $crosstab(breaks) $crosstab(cnumbers) $crosstab(deleted) $crosstab(threewin) $crosstab(tiewin) $crosstab(tiehead)} result
+         $crosstab(breaks) $crosstab(cnumbers) $crosstab(deleted) $crosstab(threewin) $crosstab(tiewin) $crosstab(tiehead) \
+         -gameNumber $crosstabGame } result
   ]} {
     puts "sc_game crosstable failed"
   }
+
   $w.f.text configure -state normal
   if {$crosstab(text) == "plain"} {
     $w.f.text insert end $result

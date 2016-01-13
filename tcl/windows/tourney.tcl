@@ -363,7 +363,6 @@ proc ::tourney::refresh {{option ""}} {
     if {$np == 2} { set best "$one $winner\t$two $runnerup" }
 
     $t tag bind g$count <ButtonPress-3> [list ::tourney::select $g $event 1]
-    $t tag bind g$count <ButtonPress-2> [list ::tourney::select $g $event 1]
     $t tag bind g$count <ButtonPress-1> [list ::tourney::select $g $event]
     $t tag bind g$count <Any-Enter> "$t tag configure g$count -background $hc"
     $t tag bind g$count <Any-Leave> "$t tag configure g$count -background {}"
@@ -413,13 +412,14 @@ proc ::tourney::check {} {
   }
 }
 
-proc ::tourney::select {gnum event {openCrosstable 0}} {
-  # It'd be better if a new game wasn't loaded automatically,
-  # but crosstable only works with current game perhaps.
+proc ::tourney::select {gnum event {load 0}} {
 
-  if {[catch {::game::Load $gnum} result]} {
-    tk_messageBox -type ok -icon info -title "Scid" -message $result
-    return
+  # We now nolonger have to autoload crosstable game
+  if {$load} {
+    if {[catch {::game::Load $gnum} result]} {
+      tk_messageBox -type ok -icon info -title "Scid" -message $result
+      return
+    }
   }
 
   # Filter this event... Could we catch this ? S.A.
@@ -431,10 +431,6 @@ proc ::tourney::select {gnum event {openCrosstable 0}} {
   flipBoardForPlayerNames
   updateBoard -pgn
   updateTitle
-  if {$openCrosstable} {
-    ::crosstab::Open
-  } else {
-    ::crosstab::Refresh
-  }
+  ::crosstab::Open $gnum
 }
 

@@ -1551,8 +1551,8 @@ set helpText(Tmt) {<h1>The Tournament Finder window</h1>
   Adjust these fields in the widget, and press <b>Update</b> to see the new results.
   </p>
   <p>
-  Clicking on a tournament loads its first game and updates the <a Crosstable>Crosstable</a> if it is open.
-  Right-clicking loads the game, and automaticaly opens the Crosstable.
+  Clicking on a tournament updates the <a Crosstable>Crosstable</a>.
+  Right-clicking will also load the first game.
   </p>
   <h3>Sorting Tournaments</h3>
   <p>
@@ -1571,7 +1571,7 @@ set helpText(Tmt) {<h1>The Tournament Finder window</h1>
   or select a particular country - by choosing (or entering) its three-letter standard code.
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.8 June 2012</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.16 January 2016</footer></p>
 }
 
 set helpTitle(GameList) "Game List window"
