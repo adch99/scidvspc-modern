@@ -7202,13 +7202,16 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     Tcl_AppendResult (ti, temp, "</blue>", NULL);
 
     if ( *dateStr == '?' )
-      sprintf (temp, "  (<blue><run gameSave -1 date>%s</run></blue>)", dateStr);
-    else {
-      if ( *db->game->GetRoundStr() == '?' )
-	sprintf (temp, "  (%s)", dateStr);
-      else
-	sprintf (temp, "  (%s, %s %s)", dateStr, translate (ti, "Round"), db->game->GetRoundStr());
-    }
+      sprintf (temp, "  (<blue><run gameSave -1 date>?</run></blue>");
+    else 
+      sprintf (temp, "  (%s", dateStr);
+
+    Tcl_AppendResult (ti, temp, NULL);
+
+    if ( *db->game->GetRoundStr() == '?' )
+      sprintf (temp, ")");
+    else
+      sprintf (temp, ", %s %s)", translate (ti, "Round"), db->game->GetRoundStr());
 
     Tcl_AppendResult (ti, temp, NULL);
 
