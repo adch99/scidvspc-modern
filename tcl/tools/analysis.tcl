@@ -1193,11 +1193,6 @@ proc okAnnotation {n} {
   destroy .configAnnotation
 
   if {[sc_pos isAt vend]} {
-    if {[sc_pos isAt start]} {
-      # No moves in game
-      cancelAutoplay
-      return
-    }
     # Starting analysis from game end - probably want to be at start
     sc_move start
     updateBoard  -pgn

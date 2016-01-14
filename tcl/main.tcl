@@ -1622,6 +1622,14 @@ proc autoplay {} {
   }
 
   if { [sc_pos isAt end] } {
+    if { [sc_pos isAt start] } {
+      # zero move game - still needs work
+      set text [format "%d:%+.2f" $analysis(depth$n) $analysis(score$n)]
+      sc_pos setComment "[sc_pos getComment] $text"
+      updateBoard -pgn
+      nextgameAutoplay $n
+      return
+    }
     set move_done [sc_game info previousMoveNT]
     if { [string index $move_done end] != "#" && $::annotate(WithVars) != "no"} {
       # Add a variation for the last move of the game
@@ -1710,7 +1718,7 @@ proc nextgameAutoplay {n} {
     if {$annotate(addTag)} {
       appendTag Annotator " $analysis(name$n)"
     }
-    set ::wentOutOfBook 0
+    set ::wentOutOfBook [sc_pos isAt end]
     updateMenuStates
     updateStatusBar
     updateTitle
