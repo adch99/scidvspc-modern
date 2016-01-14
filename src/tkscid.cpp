@@ -2856,7 +2856,7 @@ class Tourney
     idNumberT EventID;
     NameBase * NB;
     dateT     StartDate;
-    dateT     EndDate;
+    dateT     EndDate; // unused
     dateT     MinDate;
     dateT     MaxDate;
     dateT     EventDate;
@@ -3176,7 +3176,7 @@ sc_base_tournaments (ClientData cd, Tcl_Interp * ti, int argc, const char ** arg
         // Search this hash bucket for the right tourney:
         while (tp != NULL) {
             if (tp->SiteID == siteID  &&  tp->EventID == eventID
-                && (eventDate == tp->EventDate || (date >= tp->MinDate  &&  date <= tp->MaxDate))) {
+                && ((eventDate != ZERO_DATE && eventDate == tp->EventDate) || (date >= tp->MinDate  &&  date <= tp->MaxDate))) {
                 tp->AddGame (ie, i);
                 found = true;
                 break;
@@ -6029,7 +6029,7 @@ isCrosstableGame (IndexEntry * ie, idNumberT siteID, idNumberT eventID,
     if (ie->GetSite() != siteID  ||  ie->GetEvent() != eventID) {
       return false;
     }
-    if (eventDate != 0  &&  ie->GetEventDate() == eventDate) {
+    if (eventDate != ZERO_DATE  &&  ie->GetEventDate() == eventDate) {
       return true;
     }
 

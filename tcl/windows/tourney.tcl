@@ -420,6 +420,9 @@ proc ::tourney::select {gnum event {load 0}} {
       tk_messageBox -type ok -icon info -title "Scid" -message $result
       return
     }
+    flipBoardForPlayerNames
+    updateBoard -pgn
+    updateTitle
   }
 
   # Filter this event... Could we catch this ? S.A.
@@ -428,9 +431,6 @@ proc ::tourney::select {gnum event {load 0}} {
   # sc_game crosstable filter
   # ::windows::gamelist::Refresh
 
-  flipBoardForPlayerNames
-  updateBoard -pgn
-  updateTitle
   ::crosstab::Open $gnum
 }
 
