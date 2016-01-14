@@ -494,8 +494,8 @@ proc exportOptions {exportType {fName {}}} {
 
 proc exportGames {selection exportType {fName {}}} {
   global ::pgn::moveNumberSpaces exportStartFile exportEndFile exportFlags initialDir
-  set exportFilter 0
-  if {$selection == "filter"} { set exportFilter 1 }
+
+  set exportFilter [expr {$selection == "filter"}]
   if {$exportFilter} {
     # Check that we have some games to export:
     if {![sc_base inUse]} {

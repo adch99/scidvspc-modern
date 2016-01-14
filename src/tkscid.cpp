@@ -1575,6 +1575,7 @@ sc_base_export (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     if (outputFormat == PGN_FORMAT_Plain || useUTF8) {
         charsetConverter = new CharsetConverter(useUTF8 ? "utf-8" : "iso8859-1");
+	db->tbuf->SetWrapColumn (75);
     }
 
     if (!exportFilter) {
@@ -1593,7 +1594,6 @@ sc_base_export (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     updateStart = update = 10;  // Update progress bar every 10 games
     uint numSeen = 0;
     uint numToExport = exportFilter ? db->filter->Count() : 1;
-    db->tbuf->SetWrapColumn (75);
 
     for (uint i=0; i < db->numGames; i++) {
         if (db->filter->Get(i)) { // Export this game:
