@@ -2748,7 +2748,13 @@ proc ::board::_animate {w} {
 
 proc boardToFile { format filepath } {
 
+  if {[catch {
   package require img::window
+  } result ]} {
+    set result "Screenshot requires Tcl package TkImg (libtk-img).\n\n$result"
+    tk_messageBox -type ok -icon error -title "Scid" -message $result
+    return
+  }
 
   set w .main.board
   set board $w.bd
