@@ -1468,9 +1468,9 @@ for {set i 0} { $i < 64 } { incr i } {
 
 # These binds must be moved back into for loop
 # if we want to use the above "addMarker" bindings
-bind .main.board.bd <B1-Motion> {::board::dragPiece .main.board %X %Y}
-bind .main.board.bd <ButtonRelease-1> {releaseSquare .main.board %X %Y}
-bind .main.board.bd <ButtonRelease-2> {releaseSquare .main.board %X %Y}
+bind .main.board.bd <B1-Motion> {::board::dragPiece .main.board %x %y}
+bind .main.board.bd <ButtonRelease-1> {releaseSquare .main.board %x %y}
+bind .main.board.bd <ButtonRelease-2> {releaseSquare .main.board %x %y}
 
 foreach i {o q r n k O Q R B N K} {
   bind .main <$i> "moveEntry_Char [string toupper $i]"

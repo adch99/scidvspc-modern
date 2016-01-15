@@ -244,7 +244,7 @@ proc ::commenteditor::Open {} {
     ::board::bind $board $square <ButtonPress-1> [namespace code \
         [list InsertMark $board $square]]
     ::board::bind $board $square <ButtonRelease-1> [namespace code \
-        [list ButtonReleased $board %b %X %Y]]
+        [list ButtonReleased $board %b %x %y]]
     #::board::bind $board $square <ButtonPress-2> [namespace code \
     #        [list InsertMark $board [expr {$square + 64}]]]
     ::board::bind $board $square <ButtonPress-3> [namespace code \
@@ -457,12 +457,12 @@ proc ::commenteditor::ClearComments {win} {
 # Arguments:
 #	board	The frame variable of the board.
 #	button	The number (%b) of the button that was released.
-#	x_root	The x-coodinate (%X) from the event.
-#	y_root	The y-coodinate (%Y) from the event.
+#	x 	The x (%x) from the event.
+#	y 	The y (%y) from the event.
 # Results:
 #
-proc ::commenteditor::ButtonReleased {board button x_root y_root} {
-  set square [::board::getSquare $board $x_root $y_root]
+proc ::commenteditor::ButtonReleased {board button x y} {
+  set square [::board::getSquare $board $x $y]
   if {$square < 0}  {
     set State(pending) ""
     return

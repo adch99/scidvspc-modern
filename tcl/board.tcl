@@ -1470,16 +1470,11 @@ proc ::board::resize2 {w psize} {
 }
 
 # ::board::getSquare
-#   Given a board frame and root-window X and Y screen coordinates,
+#   Given a board frame and x and y coordinates,
 #   returns the square number (0-63) containing that screen location,
 #   or -1 if the location is outside the board.
 #
 proc ::board::getSquare {w x y} {
-  if {[winfo containing $x $y] != "$w.bd"} {
-    return -1
-  }
-  set x [expr {$x - [winfo rootx $w.bd]}]
-  set y [expr {$y - [winfo rooty $w.bd]}]
   set psize $::board::_size($w)
   set border $::board::_border($w)
   set x [expr {int($x / ($psize+$border))}]
@@ -2127,8 +2122,6 @@ proc ::board::setDragSquare {w sq} {
 proc ::board::dragPiece {w x y} {
   set sq $::board::_drag($w)
   if {$sq < 0} { return }
-  set x [expr {$x - [winfo rootx $w.bd]} ]
-  set y [expr {$y - [winfo rooty $w.bd]} ]
   $w.bd coords p$sq $x $y
   $w.bd raise p$sq
 }

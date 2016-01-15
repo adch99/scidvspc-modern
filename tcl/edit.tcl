@@ -505,8 +505,8 @@ proc setupBoard {} {
     $sbd.bd bind p$i <ButtonPress-2> "copyBoardPiece $i"
     $sbd.bd bind p$i <ButtonPress-3> "setupBoardPiece $i 1"
   }
-  bind $sbd.bd <B1-Motion> "::board::dragPiece $sbd %X %Y"
-  bind $sbd.bd <ButtonRelease-1> "releaseSetupSquare $sbd %X %Y"
+  bind $sbd.bd <B1-Motion> "::board::dragPiece $sbd %x %y"
+  bind $sbd.bd <ButtonRelease-1> "releaseSetupSquare $sbd %x %y"
   bind $w <ButtonPress-4> "switchPastePiece next"
   bind $w <ButtonPress-5> "switchPastePiece prev"
 
