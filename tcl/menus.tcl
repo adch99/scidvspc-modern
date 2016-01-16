@@ -634,6 +634,7 @@ $m.exportcurrent add command -label ToolsExpCurrentLaTeX -command {
 
   set latexFilename Game-Preview
   if {[exportGames current Latex [file join $::scidLogDir $latexFilename.tex]] != "0"} {
+    update ; # todo - redraw . after progress window withdraws
     previewLatex $latexFilename {} .
   }
 }
@@ -657,8 +658,10 @@ set helpMessage($m.exportfilter,3) ToolsExpFilterLaTeX
 
 $m.exportfilter add command -label ToolsExpFilterLatex -command {
   set latexFilename Games-Preview
-  exportGames filter Latex [file join $::scidLogDir $latexFilename.tex]
-  previewLatex $latexFilename {} .
+  if {[exportGames filter Latex [file join $::scidLogDir $latexFilename.tex]] != "0"} { 
+    update
+    previewLatex $latexFilename {} .
+  }
 }
 
 $m.exportfilter add command -label ToolsExpFilterGames -command openExportGList
