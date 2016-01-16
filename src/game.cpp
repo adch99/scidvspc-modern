@@ -3469,6 +3469,27 @@ if (inMainline) {
 		    tb->PrintString("lastmoveid,pgfstyle=border,color=gray,");
 		    tb->PrintString("markfields={\\xskakget{moveto},\\xskakget{movefrom}},");
 		    tb->PrintString("pgfstyle=straightmove,markmove=\\xskakget{movefrom}-\\xskakget{moveto}");
+
+/*
+		    // TODO Adding Variation markers to diagram with xskak
+		    for (uint i=0; i < m->numVariations; i++) {
+				MoveIntoVariation (i);
+
+				char from[] = "    ";
+				char to[] = "    ";
+				square_Print(CurrentMove->moveData.from, from);
+				square_Print(CurrentMove->moveData.to, to);
+				tb->PrintString("\\psset{linecolor=VariationColor}\n");
+				sprintf(temp, "\\highlight{%s,%s}\n", from, to);
+				tb->PrintString(temp);
+				sprintf(temp, "\\printarrow{%s}{%s}\n", from, to);
+				tb->PrintString(temp);
+				tb->PrintString("\\psset{linecolor=black}\n");
+
+				MoveExitVariation();
+		    }
+*/
+
 		    tb->PrintString(diagramStrStop);
 
 		    for (uint i=0; i < m->numVariations; i++) {
@@ -3483,14 +3504,7 @@ if (inMainline) {
 					
 					int vMoveNo = CurrentPos->GetFullMoveCount();
 					v = CurrentMove;
-	/*
-					if (v->comment) {
-						tb->PrintString(preCommentStr);
-						tb->PrintString(v->comment);
-						tb->PrintString("\n");
-						tb->PrintString(postCommentStr);
-					}
-	*/
+
 
 					if (piece_Color(v->moveData.movingPiece) == WHITE) {
 						tb->PrintInt(vMoveNo, ". ");
@@ -3507,25 +3521,15 @@ if (inMainline) {
 					    game_printNag(v->nags[i], temp, true, PGN_FORMAT_Latex);
 					    tb->PrintString(temp);
 					}
+					/*  in-var comments aren't decoded / working
+					    if (v->comment != NULL && ! CommentEmpty(v->comment) ) {
+						if (PgnStyle & PGN_STYLE_INDENT_COMMENTS)
+							tb->PrintString("\n");
 
-	/*
-					// TODO Adding Variation markers to diagram with xskak
-					square_Print(v->moveData.from, from);
-					square_Print(v->moveData.to, to);
-					// tb->PrintString("\\psset{linecolor=VariationColor}\n");
-					sprintf(temp, "\\highlight{%s,%s}\n", from, to);
-					// tb->PrintString(temp);
-					sprintf(temp, "\\printarrow{%s}{%s}\n", from, to);
-					// tb->PrintString(temp);
-					// tb->PrintString("\\psset{linecolor=black}\n");
-	*/
+						WriteComment (tb , preCommentStr, v->comment, postCommentStr);
+					    }
+					*/
 
-
-					while (v->marker != END_MARKER) {
-
-
-						v = v->next;
-					}
 					if (piece_Color(v->moveData.movingPiece) == WHITE) {
 						tb->PrintString(" ");
 					} else {
