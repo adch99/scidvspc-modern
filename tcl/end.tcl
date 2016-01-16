@@ -396,6 +396,11 @@ proc exportOptions {exportType {fName {}}} {
   label $w.o.stripMarks -text $::tr(ExportStripMarks)
   radiobutton $w.o.stripMarksOn -text $::tr(Yes) -variable exportFlags(stripMarks) -value 1
   radiobutton $w.o.stripMarksOff -text $::tr(No) -variable exportFlags(stripMarks) -value 0
+  # We don't save this value, instead ...
+  if {$exportType != "PGN"} {
+    set exportFlags(stripMarks) 1
+  }
+
 
   label $w.o.indentc -text $::tr(IndentComments)
   radiobutton $w.o.indentcOn -text $::tr(Yes) -variable exportFlags(indentc) -value 1

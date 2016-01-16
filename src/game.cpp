@@ -2174,8 +2174,7 @@ Game::GetNextMoveUCI (char * str)
   CurrentPos->MakeUCIString (&(m->moveData), str);
   //MoveForward();
 }
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// commentEmpty:
+
 //    Called by WriteMoveList to check there is really
 //    something to print given display options.
 //    comment is supposed to be non null
@@ -2205,11 +2204,7 @@ Game::CommentEmpty ( const char * comment)
       }
       ret = empty;
 
-  #ifdef WINCE
-      my_Tcl_Free((char*) s);
-  #else
       delete[] s;
-  #endif
     }
 
     return ret;
@@ -2261,14 +2256,8 @@ Game::WriteComment (TextBuffer * tb, const char * preStr,
       if (IsColorFormat()) { tb->PrintString ("</c>"); }
     }
 
-    if (PgnStyle & PGN_STYLE_STRIP_MARKS) {
-#ifdef WINCE
-        my_Tcl_Free((char*) s);
-#else
+    if (PgnStyle & PGN_STYLE_STRIP_MARKS)
         delete[] s;
-#endif
-    }
-
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3449,55 +3438,16 @@ if (inMainline) {
 			}
 		}
 
-		// todo - fix comments for []
-		if (0 && m->comment) {
-			if (strIsScore(m->comment)) {
-				// todo: we need to remove the [] from comments
-				if (CurrentPos->GetToMove() == WHITE) {
-					tb->PrintString(" ");
-				} else {
-					tb->PrintString("  ");
-				}
-				/*
-				   tb->PrintString(preCommentStr);
-				   tb->PrintString(m->comment);
-				   tb->PrintString(postCommentStr);
-				*/
-			} else {
-			  if (inMainline) {
+		if (m->comment != NULL && ! CommentEmpty(m->comment) ) {
+			if (inMainline) 
 				tb->PrintString("}\n");
-			  }
-				inMainline = false;
+			inMainline = false;
 
-				tb->PrintString(preCommentStr);
-				tb->PrintString(m->comment);
+			if (PgnStyle & PGN_STYLE_INDENT_COMMENTS)
 				tb->PrintString("\n");
-				tb->PrintString(postCommentStr);
 
-				char *d = strstr(m->comment, "(D)");
-				if (strIsPrefix("#", m->comment) || d) {
-					if (!diagramPrinted) {
-					    diagramPrinted = true;
-					    tb->PrintString(diagramStrStart);
-					    tb->PrintString("lastmoveid,pgfstyle=border,color=gray,");
-					    tb->PrintString("markfields={\\xskakget{moveto},\\xskakget{movefrom}},");
-					    tb->PrintString("pgfstyle=straightmove,markmove=\\xskakget{movefrom}-\\xskakget{moveto}");
-					    tb->PrintString(diagramStrStop);
-					}
-					//square_Print(m->moveData.from, from);
-					//square_Print(m->moveData.to, to);
-					//if (CurrentPos->GetToMove() == WHITE) {
-					//	tb->PrintString("\\psset{linecolor=WhitePiecesGraphColor}\n");
-					//} else {
-					//	tb->PrintString("\\psset{linecolor=BlackPiecesGraphColor}\n");
-					//}
-					///sprintf(temp, "\\highlight{%s,%s}\n", from, to);
-					//tb->PrintString(temp);
-					//sprintf(temp, "\\printarrow{%s}{%s}\n", from, to);
-					//tb->PrintString(temp);
-					//tb->PrintString("\\psset{linecolor=black}\n");
-				}
-			}
+			WriteComment (tb , preCommentStr, m->comment, postCommentStr);
+
 		} else if (CurrentPos->GetToMove() == WHITE) {
 			tb->PrintString(" ");
 		} else {
