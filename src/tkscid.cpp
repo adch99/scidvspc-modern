@@ -401,7 +401,7 @@ main (int argc, char * argv[])
     return 0;
 }
 
-#ifndef TCL_ONLY 
+#ifndef TCL_ONLY
 #ifndef __APPLE__
 extern "C" int Tkdnd_Init (Tcl_Interp*);
 extern void Tk_Selection_Init (Tcl_Interp*);
@@ -750,7 +750,7 @@ sc_base (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 	      }
 	      basePtr = &(dbList[baseNum - 1]);
             }
-            
+
             if (! basePtr->inUse) {
                 return errorResult (ti, errMsgNotOpen(ti));
             }
@@ -1306,7 +1306,7 @@ int
 sc_base_check (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
     bool showProgress = startProgressBar();
-    uint update = 5000;  
+    uint update = 5000;
     uint updateStart = 5000;
     IndexEntry *ie = NULL;
     char gameNumber[16];
@@ -1365,7 +1365,7 @@ sc_base_check (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     if (ErrorBuffer->Length() > 0) {
         Tcl_AppendElement (ti, ErrorBuffer->Data());
-    } 
+    }
     return (ErrorBuffer->Length() == 0) ? TCL_OK : TCL_ERROR;
 }
 
@@ -1377,7 +1377,7 @@ static void
 exportGame (Game * g, FILE * exportFile, gameFormatT format, uint pgnStyle, CharsetConverter* converter)
 {
     char old_language = language;
- 
+
     db->tbuf->Empty();
 
     g->ResetPgnStyle (pgnStyle);
@@ -1950,7 +1950,7 @@ sc_base_sort (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     }
 
     // if (status == ERROR )
-    // ERROR define seems broken with mingwx 
+    // ERROR define seems broken with mingwx
     if (status != OK ) {
       return errorResult (ti, "Sort Failed.");
     }
@@ -3246,14 +3246,14 @@ sc_base_upgrade (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     if (newIndex->OpenIndexFile(FMODE_ReadOnly) == OK) {
         newIndex->CloseIndexFile();
-        delete oldIndex;  
-        delete newIndex; 
+        delete oldIndex;
+        delete newIndex;
         return errorResult (ti, "An upgraded version of this database already exists.");
     }
 
     if (oldIndex->OpenOldIndexFile (FMODE_ReadOnly) != OK) {
-        delete oldIndex;  
-        delete newIndex; 
+        delete oldIndex;
+        delete newIndex;
         return errorResult (ti, "Error opening the old database.");
     }
 
@@ -3272,7 +3272,7 @@ sc_base_upgrade (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     oldMFile->Seek(0);
     newMFile->Seek(0);
-    
+
     oldMFile->ReadNBytes( buf, 8);
     newMFile->WriteNBytes(buf, 8);
 
@@ -3285,14 +3285,14 @@ sc_base_upgrade (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     // write the descriptions of the custom flags added with v4 version of base
     memset( buf, 0, 256 );
     newMFile->WriteNBytes( buf, CUSTOM_FLAG_MAX * ( CUSTOM_FLAG_DESC_LENGTH+1 ) );
-    
+
     // Now copy each index entry
     uint i;
     uint numGames = oldIndex->GetNumGames();
     errorT err = OK;
     uint updateStart = 250;
     uint update = updateStart;
-    
+
     for (i=0; i < numGames; i++) {
         if (showProgress) {
             update--;
@@ -3302,16 +3302,16 @@ sc_base_upgrade (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                 updateProgressBar (ti, i, numGames);
             }
         }
-        
+
         oldMFile->ReadNBytes(buf, 4 + 2);
         newMFile->WriteNBytes(buf, 4 + 2);
-        
+
         // insert one byte for Length_High and user bits
         newMFile->WriteNBytes( "\0", 1 );
 
         oldMFile->ReadNBytes(buf, 40 );
         newMFile->WriteNBytes(buf, 40 );
-        
+
     }
 
     oldIndex->CloseIndexFile();
@@ -3321,8 +3321,8 @@ sc_base_upgrade (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         if (err != OK) { setResult (ti, "Error writing name file"); }
     }
 
-    delete oldIndex;  
-    delete newIndex;  
+    delete oldIndex;
+    delete newIndex;
 
     if (interruptedProgress()) {
         removeFile (fname, INDEX_SUFFIX);
@@ -3421,7 +3421,7 @@ sc_base_fix_corrupted (ClientData cd, Tcl_Interp * ti, int argc, const char ** a
     strAppend (tempName, "_OLD");
     idxOld->SetFileName (tempName);
     idxNew->SetFileName (filename);
-    
+
     printf ("Renaming %s%s to %s%s in case of error...\n",
             filename, INDEX_SUFFIX, tempName, INDEX_SUFFIX);
     if (renameFile (filename, tempName, INDEX_SUFFIX) != OK) {
@@ -3596,7 +3596,7 @@ sc_epd (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         		forwards = 0;
         		int tmp = to;
         		to = from;
-        		from = tmp; 
+        		from = tmp;
         	}
         	if ( to < 1 || to > (int) pbooks[epdID]->Size() ||
         			 from < 1 || from > (int) pbooks[epdID]->Size() )
@@ -4039,7 +4039,7 @@ sc_compact_games (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     delete newIdx; delete newGfile; \
     removeFile (newName, INDEX_SUFFIX); \
     removeFile (newName, GFILE_SUFFIX)
-    // ; delete newFilter; 
+    // ; delete newFilter;
 
     if (newIdx->CreateIndexFile (FMODE_WriteOnly) != OK) {
         CLEANUP;
@@ -4132,7 +4132,7 @@ sc_compact_games (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     newIdx->SetType (db->idx->GetType());
     newIdx->SetDescription (db->idx->GetDescription());
-    
+
     // Copy custom flags description
     char newDesc[ CUSTOM_FLAG_DESC_LENGTH + 1 ];
     for ( byte b = 1 ; b <= CUSTOM_FLAG_MAX ; b++ ) {
@@ -4346,11 +4346,11 @@ sc_compact_stats (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
           Tcl_AppendResult (ti, "Usage: sc_compact stats [games|names]", NULL);
           return TCL_ERROR;
         }
-        
+
         bool setFilter = 0;
         if (strcmp( argv[2], "games_setfilter") == 0)
           setFilter = 1;
-      
+
         // Game file compaction:
 
         uint nFullBlocks = 0;
@@ -4360,7 +4360,7 @@ sc_compact_stats (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         for (uint i=0; i < db->numGames; i++) {
             IndexEntry * ie = db->idx->FetchEntry (i);
             if (! ie->GetDeleteFlag()) {
-                if (setFilter) 
+                if (setFilter)
                   db->dbFilter->Set (i, 0);
                 gameCount++;
                 // Can this game fit in the current block?
@@ -4372,7 +4372,7 @@ sc_compact_stats (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                     lastBlockBytes = length;
                 }
             } else {
-                if (setFilter) 
+                if (setFilter)
                   db->dbFilter->Set (i, 1);
             }
         }
@@ -4849,7 +4849,7 @@ sc_filter (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     enum {
         FILTER_COPY, FILTER_COUNT, FILTER_FIRST, FILTER_FREQ,
         FILTER_INDEX, FILTER_LAST, FILTER_LOCATE, FILTER_NEGATE,
-        FILTER_NEXT, FILTER_PREV, FILTER_REMOVE, FILTER_RESET, FILTER_END, 
+        FILTER_NEXT, FILTER_PREV, FILTER_REMOVE, FILTER_RESET, FILTER_END,
         FILTER_SIZE, FILTER_STATS, FILTER_TEXTFIND, FILTER_TEXTFILTER, FILTER_VALUE,
         FILTER_CLEAR
     };
@@ -4981,9 +4981,9 @@ sc_filter_copy (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     uint newSize = targetBase->numGames + targetCount;
     targetBase->filter->SetCapacity(newSize);
     // (FilterSize, Count, is increased in sc_savegame below)
-    if( targetBase->filter != targetBase->dbFilter ) 
+    if( targetBase->filter != targetBase->dbFilter )
         targetBase->dbFilter->SetCapacity(newSize);
-    if( targetBase->treeFilter != NULL) 
+    if( targetBase->treeFilter != NULL)
         targetBase->treeFilter->SetCapacity(newSize);
 
     for (uint i=0; i < sourceBase->numGames; i++) {
@@ -5100,7 +5100,7 @@ sc_filter_freq (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     if (argc == 6) {
         guessElo = strGetUnsigned (argv[5]);
     }
-    //Klimmek: define _NoEloGuess_: Do not guess Elo, else old behavior    
+    //Klimmek: define _NoEloGuess_: Do not guess Elo, else old behavior
     if ( guessElo ) {
     // Double min/max Elos to avoid halving every mean Elo:
         minElo = minElo + minElo;
@@ -5258,7 +5258,7 @@ sc_filter_next (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
         uint nextNumber = db->gameNumber + 1;
 
-	if (argc > 2) 
+	if (argc > 2)
 	    nextNumber = strGetUnsigned (argv[2]) + 1;
 
         while (nextNumber < db->numGames) {
@@ -5282,7 +5282,7 @@ sc_filter_prev (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
         int prevNumber = db->gameNumber - 1;
 
-	if (argc > 2) 
+	if (argc > 2)
 	    prevNumber = strGetUnsigned (argv[2]) - 1;
 
         while (prevNumber >= 0) {
@@ -5317,7 +5317,7 @@ sc_filter_remove (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     // Zero main filter games accordingly
     if( db->dbFilter != db->filter) {
         for (uint i=0; i < db->numGames; i++) {
-            if( db->dbFilter->Get(i) == 0 ) 
+            if( db->dbFilter->Get(i) == 0 )
                 db->filter->Set(i,0);
         }
     }
@@ -5373,7 +5373,7 @@ sc_filter_end (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     return TCL_OK;
 }
 
-//    Takes an optional base number (defaults to current base) and 
+//    Takes an optional base number (defaults to current base) and
 //    clears all filters ie. db filter as well as tree filter
 //    To clear only the tree filter use sc_tree clean
 
@@ -5428,7 +5428,7 @@ sc_filter_stats (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     for (uint i=0; i < db->numGames; i++) {
         IndexEntry * ie = db->idx->FetchEntry (i);
         if (db->filter->Get(i)) {
-            if ( max == 0 ) { //Old Statistic : 
+            if ( max == 0 ) { //Old Statistic :
                 if (statType == STATS_ELO  &&
                     (ie->GetWhiteElo() < min  ||  ie->GetBlackElo() < min)) {
                     continue;
@@ -5438,7 +5438,7 @@ sc_filter_stats (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                     continue;
                 }
             } else { //Klimmek:  new statistic: evaluation in intervalls
-                //count all games where player whith highest Elo is in the specific range      
+                //count all games where player whith highest Elo is in the specific range
                 if (statType == STATS_ELO ) {
                     if (inv_max) {
                         uint maxi = ie->GetWhiteElo();
@@ -5447,7 +5447,7 @@ sc_filter_stats (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                             continue;
                     }
                     else {
-                //count all games where player whith lowest Elo is in the specific range      
+                //count all games where player whith lowest Elo is in the specific range
                         uint mini = ie->GetWhiteElo();
                         if ( mini > ie->GetBlackElo() ) mini = ie->GetBlackElo();
                         if (mini < min  ||  mini >= max)
@@ -5493,7 +5493,7 @@ sc_filter_textfind (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
         return errorResult (ti, "Usage: sc_filter textfind <case_bool> <startGame> <searchText>");
     }
 
-    if (strGetUnsigned(argv[2])==0) 
+    if (strGetUnsigned(argv[2])==0)
 	stringcompare = strContains;
     else
 	stringcompare = strCaseContains;
@@ -5543,7 +5543,7 @@ sc_filter_textfilter (ClientData cd, Tcl_Interp * ti, int argc, const char ** ar
         return errorResult (ti, "Usage: sc_filter textfilter <case_bool> <searchText>");
     }
 
-    if (strGetUnsigned(argv[2])==0) 
+    if (strGetUnsigned(argv[2])==0)
 	stringcompare = strContains;
     else
 	stringcompare = strCaseContains;
@@ -5643,7 +5643,7 @@ updateMainFilter( scidBaseT * dbase)
     }
 }
 
-// Same as above, but only update non-zero values for their ply 
+// Same as above, but only update non-zero values for their ply
 void
 updateMainFilter2( scidBaseT * dbase)
 {
@@ -5668,7 +5668,7 @@ setMainFilter( scidBaseT * dbase)
     }
 }
 
-void 
+void
 clearFilter( scidBaseT * dbase, uint size)
 {
     if(dbase->dbFilter && dbase->dbFilter != dbase->filter)
@@ -5719,7 +5719,7 @@ sc_flags (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
       Tcl_AppendResult (ti, userFlags, NULL);
     } else {
       // verbose mode
-      // Is this game deleted or have other user-settable flags 
+      // Is this game deleted or have other user-settable flags
 
       // max is 19 flags (previously ???)
       int flagCount = 0;
@@ -5762,9 +5762,9 @@ sc_flags (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 				}
 		  }
 		  if (flagName[0]) {
-		      if (custom) 
+		      if (custom)
 			  Tcl_AppendResult (ti, (flagCount > 0 ? ", " : ""), flagName, NULL);
-		      else 
+		      else
 			  Tcl_AppendResult (ti, (flagCount > 0 ? ", " : ""), translate (ti, flagName), NULL);
 		  }
 		  flagCount++;
@@ -5775,7 +5775,7 @@ sc_flags (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
       /*** Twins (duplicates) ***/
       if (db->duplicates != NULL  &&  db->duplicates[gnum] != 0) {
-          if (deleted > 0 || flagCount > 0) 
+          if (deleted > 0 || flagCount > 0)
 	    Tcl_AppendResult (ti, "  (", translate (ti, "twin"), ")", NULL);
           else
 	    Tcl_AppendResult (ti, "(", translate (ti, "twin"), ")", NULL);
@@ -6165,7 +6165,7 @@ sc_game_crosstable (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
             case EOPT_TIEWIN_ON:   tiewin = true  ; break;
             case EOPT_TIEHEAD_OFF:  tiehead = false ; break;
             case EOPT_TIEHEAD_ON:   tiehead = true  ; break;
-            case EOPT_ROUND: 
+            case EOPT_ROUND:
                 if (arg+1 >= argc) { return errorResult (ti, usageMsg); }
                 roundNumber = strGetUnsigned (argv[arg+1]);
                 // Clear filter here
@@ -6526,7 +6526,7 @@ sc_game_firstMoves (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
 //    Extra calling methods:
 //      sc_game flag <flag> filter <0|1|invert> operates on all filtered games.
 //      sc_game flag <flag> all <0|1|invert> operates on all games.
-//      sc_game flag <1-6> description 
+//      sc_game flag <1-6> description
 //      sc_game flag <1-6> setdescription [set ::customEntry$i]
 
 int
@@ -7133,7 +7133,7 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     // <br> is used for newlines S.A. &&&
     // Other markups (eg <red>, <gbold>) are text tags defined in htext.tcl
-    // <bold> markup seems broken, so using <gbold> 
+    // <bold> markup seems broken, so using <gbold>
     // A few fields are alligned with TABS
 
     /*** Player names, result line ****/
@@ -7186,8 +7186,8 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     date_DecodeToString (db->game->GetDate(), dateStr);
     strTrimDate (dateStr);
 
-    // Hide some of this info if unknown 
-    
+    // Hide some of this info if unknown
+
     sprintf (temp, "<br>%s : <blue>", translate (ti, "Event"));
     Tcl_AppendResult (ti, temp, NULL);
 
@@ -7203,7 +7203,7 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     if ( *dateStr == '?' )
       sprintf (temp, "  (<blue><run gameSave -1 date>?</run></blue>");
-    else 
+    else
       sprintf (temp, "  (%s", dateStr);
 
     Tcl_AppendResult (ti, temp, NULL);
@@ -7289,7 +7289,7 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 	  Tcl_AppendResult (ti, nagstr, NULL);
         }
 	Tcl_AppendResult (ti, "</gray>",  NULL);
-    }  
+    }
 
     /*** (Var) ***/
     Tcl_AppendResult (ti, "\t", NULL);
@@ -7380,7 +7380,7 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             if (ch == 0) { break; }
             if (ch == '\n') {
                 lines++;
-                if (commentHeight > 1) 
+                if (commentHeight > 1)
 		  Tcl_AppendResult (ti, "<br>", NULL);
                 else
 		  appendCharResult (ti, ' ');
@@ -8266,7 +8266,7 @@ sc_game_push (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         db->game->Encode (db->bbuf, NULL);
         db->game->RestoreState();
         db->bbuf->BackToStart();
-        if (copyfast) 
+        if (copyfast)
           g->Decode (db->bbuf, GAME_DECODE_NONE);
         else
           g->Decode (db->bbuf, GAME_DECODE_ALL);
@@ -8325,7 +8325,7 @@ sc_savegame (Tcl_Interp * ti, Game * game, gameNumberT gnum, scidBaseT * base)
     IndexEntry iE;
     iE.Init();
 
-    
+
     if (game->Encode (base->bbuf, &iE) != OK) {
       Tcl_AppendResult (ti, "Error encoding game.", NULL);
       return TCL_ERROR;
@@ -8349,7 +8349,7 @@ sc_savegame (Tcl_Interp * ti, Game * game, gameNumberT gnum, scidBaseT * base)
       }
       base->numGames = base->idx->GetNumGames();
     }
-    
+
     base->bbuf->BackToStart();
 
     // Now try writing the game to the gfile:
@@ -8444,7 +8444,7 @@ sc_savegame (Tcl_Interp * ti, Game * game, gameNumberT gnum, scidBaseT * base)
     if (! replaceMode) {
         base->filter->Append (1);  // Added game is in filter by default.
         if(base->filter != base->dbFilter)
-           base->dbFilter->Append (1); 
+           base->dbFilter->Append (1);
         if(base->treeFilter)
            base->treeFilter->Append (1);
 
@@ -8496,7 +8496,7 @@ sc_savegame (Tcl_Interp * ti, scidBaseT * sourceBase, ByteBuffer * bbuf, IndexEn
         return TCL_ERROR;
     }
     base->numGames = base->idx->GetNumGames();
-  
+
     base->bbuf->BackToStart();
 
     // Now try writing the game to the gfile:
@@ -8571,7 +8571,7 @@ sc_savegame (Tcl_Interp * ti, scidBaseT * sourceBase, ByteBuffer * bbuf, IndexEn
     if (! replaceMode) {
         base->filter->Append (1);  // Added game is in filter by default.
         if(base->filter != base->dbFilter)
-           base->dbFilter->Append (1); 
+           base->dbFilter->Append (1);
         if(base->treeFilter)
            base->treeFilter->Append (1);
 
@@ -8705,7 +8705,7 @@ sc_game_scores (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     float min = -max;
     bool inv_w = false;
     bool inv_b = false;
-    
+
     if (argc == 3) {
         max = atof (argv[2]);
         min = -max;
@@ -8836,7 +8836,7 @@ sc_game_strip (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     parser.ParseGame (db->game);
 
     // Restore PGN style (Short header)
-    if (old_style & PGN_STYLE_SHORT_HEADER) 
+    if (old_style & PGN_STYLE_SHORT_HEADER)
       db->game->SetPgnStyle (PGN_STYLE_SHORT_HEADER, true);
 
     db->game->MoveToPly (old_ply);
@@ -9258,7 +9258,7 @@ sc_game_tags_set (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                     for (int i=0; i < largc; i++) {
                         char tagStr [1024];
                         char valueStr [1024];
-                        //if ( sscanf (largv[i], "%s", tagStr ) == 1 &&  
+                        //if ( sscanf (largv[i], "%s", tagStr ) == 1 &&
                         //	sscanf (largv[i+1], "%s", valueStr) == 1) {
                         // Usage :: sc_game tags set -extra [ list "Annotator \"boob [sc_pos moveNumber]\"\n" ]
                         if (sscanf (largv[i], "%s \"%[^\"]\"\n", tagStr, valueStr) == 2) {
@@ -10138,7 +10138,7 @@ sc_move_addSan (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 //    to the game. The result is translated.
 //    In case of an error, return the moves that could be converted.
 int
-sc_move_addUCI (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv) 
+sc_move_addUCI (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
     char s[8], tmp[10];
     if (argc < 3) { return TCL_OK; }
@@ -10154,7 +10154,7 @@ sc_move_addUCI (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         ptr += 5;
       } else if (ptr[4] == 0) {
         s[4] = 0;
-        ptr += 4;        
+        ptr += 4;
       } else {
         s[4] = ptr[4];
         s[5] = 0;
@@ -10729,7 +10729,7 @@ sc_pos_isPromo (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 int
 sc_pos_isInsufficient (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
-    if (argc != 2) 
+    if (argc != 2)
         return errorResult (ti, "Usage: sc_pos isInsufficient");
 
     Position * pos = db->game->GetCurrentPos();
@@ -10739,9 +10739,9 @@ sc_pos_isInsufficient (ClientData cd, Tcl_Interp * ti, int argc, const char ** a
 
     if (numPieces < 3 || \
        (numPieces == 3 && ((pos->MaterialValue(WHITE)) == 3 || pos->MaterialValue(BLACK) == 3)) || \
-       (numPieces == 4 &&  pos->MaterialValue(WHITE)  == 3 && pos->MaterialValue(BLACK) == 3)) 
+       (numPieces == 4 &&  pos->MaterialValue(WHITE)  == 3 && pos->MaterialValue(BLACK) == 3))
       return setBoolResult (ti, true);
-    else 
+    else
       return setBoolResult (ti, false);
 }
 
@@ -10805,7 +10805,7 @@ sc_pos_matchMoves (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             kingside_castle=1;
         } else {
            if (strEqual (str, "O-O-O")) {
-             if (kingside_castle) 
+             if (kingside_castle)
                 strCopy (str1, "OQ");
              else {
                 strCopy (str1, "OO");
@@ -10881,7 +10881,7 @@ sc_pos_moves (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         return errorResult (ti, "Usage: sc_pos moves");
     }
     Position * p = db->game->GetCurrentPos();
-    sanListT sanList; 
+    sanListT sanList;
     p->CalcSANStrings (&sanList, SAN_NO_CHECKTEST);
 
     for (uint i=0; i < sanList.num; i++) {
@@ -11503,8 +11503,8 @@ sc_name_edit (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
       return TCL_ERROR;
     }
 
-    // skip this check is we are searching for "*" and the field is OPT_EVENT SITE or ROUND 
-    if (option != OPT_DATE  &&  option != OPT_EVENTDATE 
+    // skip this check is we are searching for "*" and the field is OPT_EVENT SITE or ROUND
+    if (option != OPT_DATE  &&  option != OPT_EVENTDATE
         && !(oldName[0]=='*' && oldName[1]==0 && (option == OPT_EVENT || option == OPT_SITE || option == OPT_ROUND))) {
         if (db->nb->FindExactName (nt, oldName, &oldID) != OK) {
             Tcl_AppendResult (ti, "The ", NAME_TYPE_STRING[nt],
@@ -11817,7 +11817,7 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         lastPlayerName = strDuplicate (playerName);
     }
 
-    if (!playerName[0]) 
+    if (!playerName[0])
         return TCL_OK;
 
     // Try to find player name in this database:
@@ -11825,7 +11825,7 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     errorT found = db->nb->FindExactName (NAME_PLAYER, playerName, &id);
 
-    if (found != OK && ratingsOnly) 
+    if (found != OK && ratingsOnly)
        return TCL_OK;
 
     char temp  [500];
@@ -11881,7 +11881,7 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 	      };
 	      if (titleTable[i].id[0] != 0) {
 		// this is a little confusing, just to get the multiple "titles" on one line
-		if (count==0 && mark) 
+		if (count==0 && mark)
 		  Tcl_AppendResult (ti, startHeading, translate (ti,"Title"), ":	", endHeading, titleTable[i].data, NULL);
 		else {
 		  if (count==0)
@@ -11943,7 +11943,7 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 	      }
 
 	      if (t_country[0] != '-') {
-		if (count==0 && !mark) 
+		if (count==0 && !mark)
 		  Tcl_AppendResult (ti, startHeading, translate (ti,"Country"), ":	", endHeading, temp , newline, NULL);
 		else {
 		  if (count==0)
@@ -11979,7 +11979,7 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 		Tcl_AppendResult (ti, "	", note->text, newline, NULL);
 		note = note->next;
 	    }
-	} 
+	}
 
 	if (text && *text) Tcl_AppendResult (ti, newline, NULL);
       }
@@ -12065,7 +12065,7 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         dateT date = ZERO_DATE;
 
         // Remove from filter if not this person
-        if (setRefine && whiteId != id && blackId != id) 
+        if (setRefine && whiteId != id && blackId != id)
             db->dbFilter->Set (i, 0);
 
         // Track statistics as white and black:
@@ -12179,7 +12179,7 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     bWidth = wbtWidth + Utf_offset(trBlack);
     tWidth = wbtWidth + Utf_offset(trTotal);
 
-    //// sprintf format to display won, drawn, lost statistics S.A 
+    //// sprintf format to display won, drawn, lost statistics S.A
 
     const char * fmt = "%s  %-*s %3u%c%02u%%   +%s%4u%s  -%s%4u%s  =%s%4u%s  %4u%c%c /%s%4u%s";
 
@@ -13908,7 +13908,7 @@ if (sortBest) {
         char belo_str[15];
 
         if (welo > 0) {
-          if (wEstimate) 
+          if (wEstimate)
 	    snprintf (welo_str, 15, "*(%4hi)", welo);
           else
 	    snprintf (welo_str, 15, " (%4hi)", welo);
@@ -13916,7 +13916,7 @@ if (sortBest) {
           sprintf (welo_str, "       ");
         }
         if (belo > 0) {
-          if (bEstimate) 
+          if (bEstimate)
 	    snprintf (belo_str, 15, "*(%4hi)", belo);
           else
 	    snprintf (belo_str, 15, " (%4hi)", belo);
@@ -13933,9 +13933,9 @@ if (sortBest) {
         snprintf (event, 15, "%s", ie->GetEventName (base->nb));
         snprintf (site, 15, "%s", ie->GetSiteName (base->nb));
 
-        if (strIsUnknownName(site)) 
+        if (strIsUnknownName(site))
 	  snprintf (combo, 32, "%s", event);
-        else 
+        else
 	  snprintf (combo, 32, "%s (%s)", event, site);
 
         char result[4];
@@ -13978,7 +13978,7 @@ sc_tree_clean (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 	  base->dbFilter->Set(i,base->treeFilter->Get(i));
 	}
 	return TCL_OK;
-      } 
+      }
       return setResult (ti, errMsgNotOpen(ti));
     }
 
@@ -14450,7 +14450,7 @@ db->bbuf->Empty();
     // Update the normal filter (if desired) S.A.
     if (adjustMode)
       updateMainFilter(base);
-    else 
+    else
       updateMainFilter2(base);
 
     // Now we generate the score of each move: it is the expected score per
@@ -14891,7 +14891,7 @@ sc_search_board (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     }
 
     if (argc < 6  ||  argc > 7) { return errorResult (ti, usageStr); }
-    
+
     filterOpT filterOp = strGetFilterOp (argv[2]);
 
     bool useHpSigSpeedup = false;
@@ -14938,7 +14938,7 @@ sc_search_board (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
       currentBase = baseNum - 1;
       db = &(dbList[currentBase]);
     }
-    
+
     Timer timer;  // Start timing this search.
 
     Position * posFlip =  NULL;
@@ -15901,27 +15901,27 @@ matchGameFlags (IndexEntry * ie, flagT fStdStart, flagT fPromos,
     if ((flag && !flag_Yes(fCustom2))  ||  (!flag && !flag_No(fCustom2))) {
       return false;
     }
-    
+
     flag = ie->GetCustomFlag(3);
     if ((flag && !flag_Yes(fCustom3))  ||  (!flag && !flag_No(fCustom3))) {
       return false;
     }
-    
+
     flag = ie->GetCustomFlag(4);
     if ((flag && !flag_Yes(fCustom4))  ||  (!flag && !flag_No(fCustom4))) {
       return false;
     }
-    
+
     flag = ie->GetCustomFlag(5);
     if ((flag && !flag_Yes(fCustom5))  ||  (!flag && !flag_No(fCustom5))) {
       return false;
     }
-    
+
     flag = ie->GetCustomFlag(6);
     if ((flag && !flag_Yes(fCustom6))  ||  (!flag && !flag_No(fCustom6))) {
       return false;
     }
-    
+
     // If we reach here, the game matched all flag restrictions.
     return true;
 }
@@ -15956,7 +15956,7 @@ matchGameHeader (IndexEntry * ie, NameBase * nb,
         // This game ends with Black to move:
         if (! bToMove) { return false; }
     }
-    
+
 
     dateT date = ie->GetDate();
     if (date < dateMin  ||  date > dateMax) { return false; }
@@ -16138,7 +16138,7 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     flagT fCustom4 = FLAG_BOTH;
     flagT fCustom5 = FLAG_BOTH;
     flagT fCustom6 = FLAG_BOTH;
-        
+
     int pgnTextCount = 0;
     char ** sPgnText = NULL;
     bool ignoreCase = 0;
@@ -16755,7 +16755,7 @@ sc_var (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     case VAR_CREATE:
 	if (db->game->AtVarStart()) {
-          if (db->game->AtVarEnd()) 
+          if (db->game->AtVarEnd())
             break;
           else
 	    // We at a var marker, "sc_var exit" to allign the new var alongside this one - S.A
@@ -16947,18 +16947,18 @@ sc_book (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     case BOOK_CLOSE:
         return sc_book_close (cd, ti, argc, argv);
 
-    case BOOK_MOVE:  
+    case BOOK_MOVE:
         return sc_book_moves (cd, ti, argc, argv);
 
-    case BOOK_POSITIONS:  
+    case BOOK_POSITIONS:
         return sc_book_positions (cd, ti, argc, argv);
 
-    case BOOK_UPDATE:  
+    case BOOK_UPDATE:
         return sc_book_update (cd, ti, argc, argv);
 
-    case BOOK_MOVES_UPDATE:  
+    case BOOK_MOVES_UPDATE:
         return sc_book_movesupdate (cd, ti, argc, argv);
-        
+
     default:
         return InvalidCommand (ti, "sc_book", options);
     }
@@ -16975,7 +16975,7 @@ sc_book_load (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     if (argc != 4) {
         return errorResult (ti, "Usage: sc_book load bookfile slot");
     }
- 
+
     uint slot = strGetUnsigned (argv[3]);
 
     int bookstate = polyglot_open(argv[2], slot);
