@@ -3149,7 +3149,7 @@ Position::DumpHtmlBoard (DString * dstr, uint style, const char * dir, bool flip
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Position::DumpLatexBoard():
+// Is this used now ? - S.A 
 //      Prints the board in a format used by a chess package that is
 //      available for the LaTeX  or TeX typesetting language.
 void

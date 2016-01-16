@@ -633,8 +633,9 @@ $m.exportcurrent add command -label ToolsExpCurrentLaTeX -command {
   ### and xelatex must be configure instead of pdflatex
 
   set latexFilename Game-Preview
-  exportGames current Latex [file join $::scidLogDir $latexFilename.tex]
-  previewLatex $latexFilename {} .
+  if {[exportGames current Latex [file join $::scidLogDir $latexFilename.tex]] != "0"} {
+    previewLatex $latexFilename {} .
+  }
 }
 
 menu $m.exportfilter

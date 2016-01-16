@@ -510,7 +510,7 @@ proc exportGames {selection exportType {fName {}}} {
     }
   }
 
-  if {[exportOptions $exportType $fName] == 0} { return }
+  if {[exportOptions $exportType $fName] == 0} { return 0 }
 
   switch -- $exportType {
     "PGN" {
