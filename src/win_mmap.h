@@ -56,10 +56,14 @@ WinMMap::WinMMap(char const* filename)
 {
     ASSERT (filename != NULL);
 
+    // Using FILE_SHARE_READ | FILE_SHARE_WRITE
+    // enables success mingw-w64 32 compilers, but creates a nasty conflict on mingw-64 64 bit compilers.
+    // Since mingw does not have a 60 bit compiler, we probably need VCC to make this work
+    // But not really an issue as modern windows systems have fast file accesses anyway.
     m_file = CreateFileA(
 					filename,
 					GENERIC_READ,
-					FILE_SHARE_READ | FILE_SHARE_WRITE ,
+					0, // FILE_SHARE_READ | FILE_SHARE_WRITE 
 					0,
 					OPEN_EXISTING,
 					FILE_FLAG_SEQUENTIAL_SCAN | FILE_ATTRIBUTE_READONLY | FILE_ATTRIBUTE_TEMPORARY,
