@@ -66,13 +66,13 @@ project is authored by <ref name="Stevenaaus" id="contact_"> and numerous contri
 <label id="download_">
 <sect> download <p>
 
-source <url url="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.15.tgz/download" name="scid_vs_pc-4.15.tgz">
+source <url url="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.16.tgz/download" name="scid_vs_pc-4.16.tgz">
 
-windows <url url="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.15.exe/download" name="Scid vs PC-4.15.exe">
+windows <url url="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.16.exe/download" name="Scid vs PC-4.16.exe">
 
-windows 64 bit <url url="http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.15.x64.exe/download" name="Scid vs PC-4.15.x64.exe">
+windows 64 bit <url url="http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.16.x64.exe/download" name="Scid vs PC-4.16.x64.exe">
 
-mac <url url="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.15.dmg/download" name="ScidvsMac-4.15.dmg">
+mac <url url="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.16.dmg/download" name="ScidvsMac-4.16.dmg">
 
 <url url="https://sourceforge.net/project/showfiles.php?group_id=263836" name="browse files">
 
@@ -103,8 +103,8 @@ or as a tarball <url url="https://sourceforge.net/p/scidvspc/code/HEAD/tarball" 
   <p>Then, installing from source:</p>
 
 <code>
-tar -xzf scid_vs_pc-4.15.tgz
-cd scid_vs_pc-4.15
+tar -xzf scid_vs_pc-4.16.tgz
+cd scid_vs_pc-4.16
 ./configure
 sudo make install
 scid
@@ -128,7 +128,7 @@ C:\Users\[USERNAME]\AppData\Local\VirtualStore\Program Files\Scid vs PC
 
 <sect2> Mac OS X <p>
 
-The <ref name="ScidvsMac-4.15 app" id="download_"> should include everything you need. Simply drag and drop the App into /Applications (or similar).
+The <ref name="ScidvsMac-4.16 app" id="download_"> should include everything you need. Simply drag and drop the App into /Applications (or similar).
 
 <em>Users upgrading may have to remove (or edit) <bf>$HOME/.scidvspc/config/engines.dat</bf>
 to properly configure the chess engines.</em>

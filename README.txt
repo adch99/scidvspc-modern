@@ -124,17 +124,17 @@
 
   3.  download
 
-  source scid_vs_pc-4.15.tgz
-  <http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.15.tgz/download>
+  source scid_vs_pc-4.16.tgz
+  <http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.16.tgz/download>
 
-  windows Scid vs PC-4.15.exe
-  <http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.15.exe/download>
+  windows Scid vs PC-4.16.exe
+  <http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.16.exe/download>
 
-  windows 64 bit Scid vs PC-4.15.x64.exe
-  <http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.15.x64.exe/download>
+  windows 64 bit Scid vs PC-4.16.x64.exe
+  <http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.16.x64.exe/download>
 
-  mac ScidvsMac-4.15.dmg
-  <http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.15.dmg/download>
+  mac ScidvsMac-4.16.dmg
+  <http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.16.dmg/download>
 
   browse files
   <https://sourceforge.net/project/showfiles.php?group_id=263836>
@@ -167,8 +167,8 @@
   Then, installing from source:
 
   ______________________________________________________________________
-  tar -xzf scid_vs_pc-4.15.tgz
-  cd scid_vs_pc-4.15
+  tar -xzf scid_vs_pc-4.16.tgz
+  cd scid_vs_pc-4.16
   ./configure
   sudo make install
   scid
@@ -201,7 +201,7 @@
 
   4.0.3.  Mac OS X
 
-  The ``ScidvsMac-4.15 app'' should include everything you need. Simply
+  The ``ScidvsMac-4.16 app'' should include everything you need. Simply
   drag and drop the App into /Applications (or similar).
 
   Users upgrading may have to remove (or edit)
