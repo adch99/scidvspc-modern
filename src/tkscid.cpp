@@ -12244,6 +12244,38 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                       endHeading, newline, NULL);
 
     score = percent = 0;
+    if (totalcount[STATS_ALL] > 0) {
+        score = bothscore[STATS_ALL][RESULT_White] * 2
+            + bothscore[STATS_ALL][RESULT_Draw]
+            + bothscore[STATS_ALL][RESULT_None];
+        percent = score * 5000 / totalcount[STATS_ALL];
+    }
+    sprintf (temp, fmt,
+             htextOutput ? "<tt>" : "",
+             tWidth,
+             trTotal,
+             percent / 100, decimalPointChar, percent % 100,
+             htextOutput ? "<green><run sc_name info -fwW {}; ::playerInfoRefresh>" : "",
+             bothscore[STATS_ALL][RESULT_White],
+             htextOutput ? "</run></green>" : "",
+             htextOutput ? "<green><run sc_name info -flL {}; ::playerInfoRefresh>" : "",
+             bothscore[STATS_ALL][RESULT_Black],
+             htextOutput ? "</run></green>" : "",
+             htextOutput ? "<green><run sc_name info -fdD {}; ::playerInfoRefresh>" : "",
+             bothscore[STATS_ALL][RESULT_Draw],
+             htextOutput ? "</run></green>" : "",
+             score / 2, decimalPointChar, score % 2 ? '5' : '0',
+             htextOutput ? "<green><run sc_name info -faA {}; ::playerInfoRefresh>" : "",
+             totalcount[STATS_ALL],
+             htextOutput ? "</run></green></tt>" : "");
+    Tcl_AppendResult (ti, temp, newline, NULL);
+
+    if (htextOutput) {
+      snprintf (temp, wbtWidth + 45, "------------------------------------------------------------------------------");
+      Tcl_AppendResult (ti, "<tt>  " , temp , "</tt>", newline, NULL);
+    }
+
+    score = percent = 0;
     if (whitecount[STATS_ALL] > 0) {
         score = whitescore[STATS_ALL][RESULT_White] * 2
             + whitescore[STATS_ALL][RESULT_Draw]
@@ -12298,44 +12330,39 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
              htextOutput ? "</run></green></tt>" : "");
     Tcl_AppendResult (ti, temp, newline, NULL);
 
-    if (htextOutput) {
-      snprintf (temp, wbtWidth + 45, "------------------------------------------------------------------------------");
-      Tcl_AppendResult (ti, "<tt>  " , temp , "</tt>", newline, NULL);
-    }
-
-    score = percent = 0;
-    if (totalcount[STATS_ALL] > 0) {
-        score = bothscore[STATS_ALL][RESULT_White] * 2
-            + bothscore[STATS_ALL][RESULT_Draw]
-            + bothscore[STATS_ALL][RESULT_None];
-        percent = score * 5000 / totalcount[STATS_ALL];
-    }
-    sprintf (temp, fmt,
-             htextOutput ? "<tt>" : "",
-             tWidth,
-             trTotal,
-             percent / 100, decimalPointChar, percent % 100,
-             htextOutput ? "<green><run sc_name info -fwW {}; ::playerInfoRefresh>" : "",
-             bothscore[STATS_ALL][RESULT_White],
-             htextOutput ? "</run></green>" : "",
-             htextOutput ? "<green><run sc_name info -flL {}; ::playerInfoRefresh>" : "",
-             bothscore[STATS_ALL][RESULT_Black],
-             htextOutput ? "</run></green>" : "",
-             htextOutput ? "<green><run sc_name info -fdD {}; ::playerInfoRefresh>" : "",
-             bothscore[STATS_ALL][RESULT_Draw],
-             htextOutput ? "</run></green>" : "",
-             score / 2, decimalPointChar, score % 2 ? '5' : '0',
-             htextOutput ? "<green><run sc_name info -faA {}; ::playerInfoRefresh>" : "",
-             totalcount[STATS_ALL],
-             htextOutput ? "</run></green></tt>" : "");
-    Tcl_AppendResult (ti, temp, newline, NULL);
-
     // Now print stats for games in the filter:
 
     sprintf (temp, "<b>%s</b>", translate (ti, "PInfoFilter"));
     if (! htextOutput) { strTrimMarkup (temp); }
     Tcl_AppendResult (ti, startHeading, temp,
                       endHeading, newline, NULL);
+
+    score = percent = 0;
+    if (totalcount[STATS_FILTER] > 0) {
+        score = bothscore[STATS_FILTER][RESULT_White] * 2
+            + bothscore[STATS_FILTER][RESULT_Draw]
+            + bothscore[STATS_FILTER][RESULT_None];
+        percent = score * 5000 / totalcount[STATS_FILTER];
+    }
+    sprintf (temp, fmt,
+             htextOutput ? "<tt>" : "",
+             tWidth,
+             trTotal,
+             percent / 100, decimalPointChar, percent % 100,
+             "", bothscore[STATS_FILTER][RESULT_White], "",
+             "", bothscore[STATS_FILTER][RESULT_Black], "",
+             "", bothscore[STATS_FILTER][RESULT_Draw], "",
+             score / 2, decimalPointChar, score % 2 ? '5' : '0',
+             htextOutput ? "<green><run sc_name info -F {}; ::playerInfoRefresh>" : "",
+             totalcount[STATS_FILTER],
+             htextOutput ? "</run></green></tt>" : "");
+    Tcl_AppendResult (ti, temp, newline, NULL);
+
+    if (htextOutput) {
+      snprintf (temp, wbtWidth + 45, "------------------------------------------------------------------------------");
+      Tcl_AppendResult (ti, "<tt>  " , temp , "</tt>", newline, NULL);
+    }
+
     score = percent = 0;
     if (whitecount[STATS_FILTER] > 0) {
         score = whitescore[STATS_FILTER][RESULT_White] * 2
@@ -12376,32 +12403,6 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
              htextOutput ? "</tt>" : "");
     Tcl_AppendResult (ti, temp, newline, NULL);
 
-    if (htextOutput) {
-      snprintf (temp, wbtWidth + 45, "------------------------------------------------------------------------------");
-      Tcl_AppendResult (ti, "<tt>  " , temp , "</tt>", newline, NULL);
-    }
-
-    score = percent = 0;
-    if (totalcount[STATS_FILTER] > 0) {
-        score = bothscore[STATS_FILTER][RESULT_White] * 2
-            + bothscore[STATS_FILTER][RESULT_Draw]
-            + bothscore[STATS_FILTER][RESULT_None];
-        percent = score * 5000 / totalcount[STATS_FILTER];
-    }
-    sprintf (temp, fmt,
-             htextOutput ? "<tt>" : "",
-             tWidth,
-             trTotal,
-             percent / 100, decimalPointChar, percent % 100,
-             "", bothscore[STATS_FILTER][RESULT_White], "",
-             "", bothscore[STATS_FILTER][RESULT_Black], "",
-             "", bothscore[STATS_FILTER][RESULT_Draw], "",
-             score / 2, decimalPointChar, score % 2 ? '5' : '0',
-             htextOutput ? "<green><run sc_name info -F {}; ::playerInfoRefresh>" : "",
-             totalcount[STATS_FILTER],
-             htextOutput ? "</run></green></tt>" : "");
-    Tcl_AppendResult (ti, temp, newline, NULL);
-
     // Now print stats for games against the current opponent:
 
     if (opponent != NULL) {
@@ -12409,6 +12410,38 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                           translate (ti, "PInfoAgainst"), " ",
                           startBold, opponent, endBold,
                           endHeading, newline, NULL);
+
+        score = percent = 0;
+        if (totalcount[STATS_OPP] > 0) {
+            score = bothscore[STATS_OPP][RESULT_White] * 2
+                + bothscore[STATS_OPP][RESULT_Draw]
+                + bothscore[STATS_OPP][RESULT_None];
+            percent = score * 5000 / totalcount[STATS_OPP];
+	}
+        sprintf (temp, fmt,
+                 htextOutput ? "<tt>" : "",
+                 tWidth,
+                 trTotal,
+                 percent / 100, decimalPointChar, percent % 100,
+                 htextOutput ? "<green><run sc_name info -owW {}; ::playerInfoRefresh>" : "",
+                 bothscore[STATS_OPP][RESULT_White],
+                 htextOutput ? "</run></green>" : "",
+                 htextOutput ? "<green><run sc_name info -olL {}; ::playerInfoRefresh>" : "",
+                 bothscore[STATS_OPP][RESULT_Black],
+                 htextOutput ? "</run></green>" : "",
+                 htextOutput ? "<green><run sc_name info -odD {}; ::playerInfoRefresh>" : "",
+                 bothscore[STATS_OPP][RESULT_Draw],
+                 htextOutput ? "</run></green>" : "",
+                 score / 2, decimalPointChar, score % 2 ? '5' : '0',
+                 htextOutput ? "<green><run sc_name info -oaA {}; ::playerInfoRefresh>" : "",
+                 totalcount[STATS_OPP],
+                 htextOutput ? "</run></green></tt>" : "");
+        Tcl_AppendResult (ti, temp, newline, NULL);
+
+	if (htextOutput) {
+	  snprintf (temp, wbtWidth + 45, "------------------------------------------------------------------------------");
+	  Tcl_AppendResult (ti, "<tt>  " , temp , "</tt>", newline, NULL);
+        }
 
         score = percent = 0;
         if (whitecount[STATS_OPP] > 0) {
@@ -12464,37 +12497,6 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                  htextOutput ? "</run></green></tt>" : "");
         Tcl_AppendResult (ti, temp, newline, NULL);
 
-	if (htextOutput) {
-	  snprintf (temp, wbtWidth + 45, "------------------------------------------------------------------------------");
-	  Tcl_AppendResult (ti, "<tt>  " , temp , "</tt>", newline, NULL);
-        }
-
-        score = percent = 0;
-        if (totalcount[STATS_OPP] > 0) {
-            score = bothscore[STATS_OPP][RESULT_White] * 2
-                + bothscore[STATS_OPP][RESULT_Draw]
-                + bothscore[STATS_OPP][RESULT_None];
-            percent = score * 5000 / totalcount[STATS_OPP];
-    }
-        sprintf (temp, fmt,
-                 htextOutput ? "<tt>" : "",
-                 tWidth,
-                 trTotal,
-                 percent / 100, decimalPointChar, percent % 100,
-                 htextOutput ? "<green><run sc_name info -owW {}; ::playerInfoRefresh>" : "",
-                 bothscore[STATS_OPP][RESULT_White],
-                 htextOutput ? "</run></green>" : "",
-                 htextOutput ? "<green><run sc_name info -olL {}; ::playerInfoRefresh>" : "",
-                 bothscore[STATS_OPP][RESULT_Black],
-                 htextOutput ? "</run></green>" : "",
-                 htextOutput ? "<green><run sc_name info -odD {}; ::playerInfoRefresh>" : "",
-                 bothscore[STATS_OPP][RESULT_Draw],
-                 htextOutput ? "</run></green>" : "",
-                 score / 2, decimalPointChar, score % 2 ? '5' : '0',
-                 htextOutput ? "<green><run sc_name info -oaA {}; ::playerInfoRefresh>" : "",
-                 totalcount[STATS_OPP],
-                 htextOutput ? "</run></green></tt>" : "");
-        Tcl_AppendResult (ti, temp, newline, NULL);
     }
 
     // Now print common openings played:
