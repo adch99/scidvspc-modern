@@ -34,25 +34,30 @@ See <run ::tip::show 0><green>Tip of the Day</green></run> for some helpful hint
 
 <h3>Features</h3>
 <ul>
-<li>Computer Tournaments.</li>
-<li>Rewritten Gamelist widget: deleted items are greyed, a Compact button, Flag widgets, and the Database Switcher resides here.</li>
-<li>Improved Computer Game and FICS features.</li>
-<li>Drag+Drop for ms windows and Xorg (Linux,BSD,etc).</li>
-<li>Improved Undo and Redo features</li>
-<li>Tri-coloured Tree bar-graphs alongside statistics.</li>
-<li>Ratings Graph can show multiple players</li>
+<li>Overhauled, intuitive and customizable interface</li>
+<li>Engine versus engine computer tournaments</li>
+<li>Extra search features, including move, end-of-game, and stalemate/checkmate searches</li>
+<li>Drag+Drop file opens for Windows and Linux</li>
+<li>Rewritten Gamelist widget with convenient context menus and buttons, and integrated Database Switcher</li>
+<li>Improved Computer Game and FICS features, including premove, and simultaneous observed games</li>
+<li>Many chess engine improvements, including max-ply option, an unlimited number of engines running, and the function hot-keys can be explicitly set.
+<li>Tri-coloured Tree bar-graphs, and options for more or less statistics</li>
+<li>Ratings Graph can show multiple players, and Score graph is an attractive bar graph</li>
 <li>Improved Book windows, including book compare, and remove move features</li>
-<li>Separate board sections are hideable via right-click.</li>
-<li>A re-done Button Bar with nicer look and feel.</li>
-<li>Restructured Analysis Engines widget. The function hot-keys can be explicitly set, Engine 1 can be docked into the Status Bar, and any number of engines may run at one time.</li>
-<li>The Chessboard/Pieces config widget has been overhauled, and includes support for custom tiles.</li>
-<li>Setup Board has many fixes and improvements.</li>
-<li>The Help index is meaningful to new users, with links to the game's main features.</li>
-<li>Clickable Variation Arrows, and Paste Variation feature.</li>
-<li>A user friendly Annotation feature. </li>
+<li>Redone Button and Tool bars</li>
+<li>The Chessboard/Pieces config widget has been overhauled, and includes support for custom tiles and pieces</li>
+<li>Clickable Tablebase moves</li>
+<li>Recent Game and Player-info histories</li>
+<li>Bug tested Undo and Redo features</li>
+<li>The Help index is meaningful to new users, with links to the game's main features</li>
+<li>Clickable Variation Arrows, and Paste Variation feature</li>
+<li>A user friendly Annotation feature, with search-to-depth feature</li>
+<li>Better support for UTF and Latin character sets in PGN export/imports</li>
+<li>Improved and more powerful Tree Mask feature</li>
+<li>
 <li>Most chess variants (such as Chess960 / Fischer Chess) are wholly unsupported.<li>
 </ul>
-  <p><footer>Updated: Scid vs. PC 4.15 September 2015</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.16 January 2016</footer></p>
 }
 
 set helpTitle(GUI) {Scid's GUI}
@@ -5848,6 +5853,36 @@ set helpText(Sound) {<h1>Sound</h1>
 
 set helpTitle(Changelog) "Scid vs PC Changelog"
 set helpText(Changelog) {<h1>Changelog</h1>
+
+<h4>4.16 (January 24, 2016)</h4>
+<ul>
+<li>New Checkmate/Stalemate general search option</li>
+<li>Make fics premove work properly, and with promotion</li>
+<li>New Switcher menus to Open Tree/Best Games/Change Icon, and negate any open base filter</li>
+<li>The Best Games window can now be unsorted (on ELO)</li>
+<li>Tree window has a short-display option (default is on)</li>
+<li>New Merida1 piece set with large sizes (from Richard)</li>
+<li>Change the colours of the switcher current-base, and of book/book-tuning/tree next-moves</li>
+<li>Update all Latex export features from Chess12 to the modern Skak (author Richard Ashwell) and add Latex previews for game exports (linux only)</li>
+<li>Some Opening-Report and Player-Report fixes, and fix the Opening-Table options window</li>
+<li>Show the custom flag names in the statusbar</li>
+<li>Player Info: Add an extra 'Filter Games' hyperlink</li>
+<li>Tournament finder: Change behaviour re showing tournament crosstable</li>
+<li>Portugese update from G. Silva. Spanish update from Benigno</li>
+<li>Add 50 move draw detection to Phalanx and UCI computer games</li>
+<li>And new fics 'smoves+' command stores move-time (%emt fields)</li>
+<br>
+<br>
+<b>Bug fixes</b>
+<li>Export PGN bugfix introduced in 4.15</li>
+<li>Properly handle OpenRecentAsTree, if base is already opened</li>
+<li>'Round' wasn't getting shown in the gameinfo if Date was unset</li>
+<li>Annotation: try to handle zero move games</li>
+<li>Work aroud for occasional Tcl issue which affects piece dragging</li>
+<li>Game Save dialog didn't have translations</li>
+<li>Remove a heap of compiler warnings</li>
+<li>Tournament finder was showing incorrect number of games</li>
+</ul>
 
 <h4>4.15 (November 20, 2015)</h4>
 <br>
