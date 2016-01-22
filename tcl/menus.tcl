@@ -657,10 +657,15 @@ $m.exportfilter add command -label ToolsExpFilterLaTeX -command {exportGames fil
 set helpMessage($m.exportfilter,3) ToolsExpFilterLaTeX
 
 $m.exportfilter add command -label ToolsExpFilterLatex -command {
-  set latexFilename Games-Preview
-  if {[exportGames filter Latex [file join $::scidLogDir $latexFilename.tex]] != "0"} { 
-    update
-    previewLatex $latexFilename {} .
+  if {[sc_filter count] > 5} {
+    tk_messageBox -type ok -icon info -title "Scid: Latex Preview" \
+	-message {Latex Preview has a maximum of 5 games.}
+  } else {
+    set latexFilename Games-Preview
+    if {[exportGames filter Latex [file join $::scidLogDir $latexFilename.tex]] != "0"} { 
+      update
+      previewLatex $latexFilename {} .
+    }
   }
 }
 

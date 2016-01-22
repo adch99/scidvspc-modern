@@ -3408,6 +3408,10 @@ Game::WritePGNtoLaTeX(TextBuffer * tb, uint stopLocation)
 
 		for (uint i = 0; i < (uint)m->nagCount; i++) {
 			if (printDiagrams && m->nags[i] == NAG_Diagram) {
+			    if (strcmp(m->san, "O-O-O") != 0) 
+				printf ("Latex chessboard cant't display O-O-O. No diagram.\n");
+			    else {
+
 if (inMainline) {
 				tb->PrintString("}\n");
 }
@@ -3432,6 +3436,7 @@ if (inMainline) {
 				//sprintf(temp, "\\printarrow{%s}{%s}\n", from, to);
 				//tb->PrintString(temp);
 				//tb->PrintString("\\psset{linecolor=black}\n");
+			    }
 			} else {
 				game_printNag(m->nags[i], temp, true, PGN_FORMAT_Latex);
 				tb->PrintWord(temp);
@@ -3464,11 +3469,12 @@ if (inMainline) {
 			tb->PrintString("}\n");
 			inMainline = false;
 		    }
-
-		    tb->PrintString(diagramStrStart);
-		    tb->PrintString("lastmoveid,pgfstyle=border,color=gray,");
-		    tb->PrintString("markfields={\\xskakget{moveto},\\xskakget{movefrom}},");
-		    tb->PrintString("pgfstyle=straightmove,markmove=\\xskakget{movefrom}-\\xskakget{moveto}");
+		    if (strcmp(m->san, "O-O-O") != 0) {
+		      printf ("Latex chessboard cant't display O-O-O. No diagram.\n");
+		      tb->PrintString(diagramStrStart);
+		      tb->PrintString("lastmoveid,pgfstyle=border,color=gray,");
+		      tb->PrintString("markfields={\\xskakget{moveto},\\xskakget{movefrom}},");
+		      tb->PrintString("pgfstyle=straightmove,markmove=\\xskakget{movefrom}-\\xskakget{moveto}");
 
 /*
 		    // TODO Adding Variation markers to diagram with xskak
@@ -3490,7 +3496,8 @@ if (inMainline) {
 		    }
 */
 
-		    tb->PrintString(diagramStrStop);
+		      tb->PrintString(diagramStrStop);
+		    }
 
 		    for (uint i=0; i < m->numVariations; i++) {
 				tb->PrintString(preVariationStr);
