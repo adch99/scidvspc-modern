@@ -3408,9 +3408,10 @@ Game::WritePGNtoLaTeX(TextBuffer * tb, uint stopLocation)
 
 		for (uint i = 0; i < (uint)m->nagCount; i++) {
 			if (printDiagrams && m->nags[i] == NAG_Diagram) {
-			    if (strcmp(m->san, "O-O-O") != 0) 
-				printf ("Latex chessboard cant't display O-O-O. No diagram.\n");
-			    else {
+			    if (strncmp(m->san, "O-O", 3) == 0) {
+				printf ("Latex chessboard can't display castling. No diagram.\n");
+				// The problem is the movefrom and moveto fields, which now both hold two squares
+			    } else {
 
 if (inMainline) {
 				tb->PrintString("}\n");
@@ -3469,8 +3470,10 @@ if (inMainline) {
 			tb->PrintString("}\n");
 			inMainline = false;
 		    }
-		    if (strcmp(m->san, "O-O-O") != 0) {
-		      printf ("Latex chessboard cant't display O-O-O. No diagram.\n");
+		    if (strncmp(m->san, "O-O", 3) == 0) {
+		      printf ("Latex chessboard cant't display castling. No diagram.\n");
+		      // The problem is the movefrom and moveto fields, which now both hold two squares
+                    } else {
 		      tb->PrintString(diagramStrStart);
 		      tb->PrintString("lastmoveid,pgfstyle=border,color=gray,");
 		      tb->PrintString("markfields={\\xskakget{moveto},\\xskakget{movefrom}},");
