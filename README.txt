@@ -79,7 +79,7 @@
 
   2.0.1.  New and Improved features
 
-  o  Overhauled, intuitive and customizable interface.
+  o  Overhauled and customizable interface.
 
   o  Engine versus engine computer tournaments.
 
@@ -132,7 +132,7 @@
 
   o
 
-  o  Most chess variants (such as Chess960 / Fischer Chess) are wholly
+  o  Most chess variants (such as Chess960 / Fischer Chess) are
      unsupported.
 
   3.  download

@@ -34,7 +34,7 @@ See <run ::tip::show 0><green>Tip of the Day</green></run> for some helpful hint
 
 <h3>Features</h3>
 <ul>
-<li>Overhauled, intuitive and customizable interface</li>
+<li>Overhauled and customizable interface</li>
 <li>Engine versus engine computer tournaments</li>
 <li>Extra search features, including move, end-of-game, and stalemate/checkmate searches</li>
 <li>Drag+Drop file opens for Windows and Linux</li>

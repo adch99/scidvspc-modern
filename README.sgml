@@ -40,7 +40,7 @@ project is authored by <ref name="Stevenaaus" id="contact_"> and numerous contri
 
 <itemize>
 
-<item> Overhauled, intuitive and customizable interface.
+<item> Overhauled and customizable interface.
 <item> Engine versus engine computer tournaments.
 <item> Extra search features, including move, end-of-game, and stalemate/checkmate searches.
 <item> Drag+Drop file opens for Windows and Linux.
@@ -61,7 +61,7 @@ project is authored by <ref name="Stevenaaus" id="contact_"> and numerous contri
 <item> Better support for UTF and Latin character sets in PGN export/imports.
 <item> Improved and more powerful Tree Mask feature.
 <item>
-<item> Most chess variants (such as Chess960 / Fischer Chess) are wholly unsupported.
+<item> Most chess variants (such as Chess960 / Fischer Chess) are unsupported.
 
 </itemize>
 
@@ -396,6 +396,7 @@ Chessbase databases and many chess variants.</p>
 <item>Portugese update from G. Silva. Spanish update from Benigno.
 <item>Add 50 move draw detection to Phalanx and UCI computer games.
 <item>And new fics 'smoves+' command stores move-time (%emt fields).
+<newline><newline>
 
 Bug fixes
 <item>Export PGN bugfix introduced in 4.15.
