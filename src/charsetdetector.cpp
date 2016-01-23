@@ -33,35 +33,29 @@ isAscii(char const* str, unsigned len)
 
 CharsetDetector::Info::Info()
   :m_encoding("ascii")
-  ,m_isASCII(true)
-  ,m_isLatin1(false)
-  ,m_isWindoze(false)
-  ,m_isDOS(false)
-  ,m_isUTF8(false)
+  ,m_charset(ASCII)
 {
-}
-
-
-CharsetDetector::Info::Info(std::string const& encoding)
-  :m_isASCII(false)
-  ,m_isLatin1(false)
-  ,m_isWindoze(false)
-  ,m_isDOS(false)
-  ,m_isUTF8(false)
-{
-  setup(encoding);
 }
 
 
 void
 CharsetDetector::Info::setup(std::string const& encoding)
 {
+  ASSERT(  encoding == "ascii"
+        || encoding == "iso8859-1"
+        || encoding == "cp1252"
+        || encoding == "cp850"
+        || encoding == "utf-8");
+
   m_encoding = encoding;
-  m_isASCII = (m_encoding == "ascii");
-  m_isLatin1 = (m_encoding == "iso8859-1");
-  m_isWindoze = (m_encoding == "cp1252");
-  m_isDOS = (m_encoding == "cp850");
-  m_isUTF8 = (m_encoding == "utf-8");
+  
+  switch (encoding[0])
+  {
+    case 'a': m_charset = ASCII; break;
+    case 'i': m_charset = Latin1; break;
+    case 'u': m_charset = UTF8; break;
+    case 'c': m_charset = (encoding[2] == '1') ? Windoze : DOS; break;
+  }
 }
 
 
@@ -70,6 +64,8 @@ CharsetDetector::CharsetDetector()
   ,m_latin1(0)
   ,m_cp850(0)
   ,m_cp1252(0)
+  ,m_latin1Detected(false)
+  ,m_cp1252Detected(false)
 {
 }
 
@@ -137,6 +133,26 @@ void CharsetDetector::detect(char const* value, unsigned len)
 
 
 void
+CharsetDetector::finish2()
+{
+    if (m_cp1252 > m_cp850)
+    {
+      setup("cp1252");
+      m_cp1252Detected = true;
+    }
+    else if (m_cp850 >= 0)
+    {
+      if (m_latin1 >= 0 && m_latin1Detected)
+        setup("iso8859-1"); // it's more likely Latin-1
+      else if (m_cp1252 >= 0 && (m_latin1Detected || m_cp1252Detected))
+        setup("cp1252");   // it's more likely Windoze
+      else
+        setup("cp850");
+    }
+}
+
+
+void
 CharsetDetector::finish()
 {
   DataEnd();
@@ -144,20 +160,26 @@ CharsetDetector::finish()
   if ((isASCII() && m_ascii == -1) || (isLatin1() && m_latin1 == -1))
   {
     if (m_latin1 >= 0 && m_latin1 >= m_cp850 && m_latin1 >= m_cp1252)
+    {
       setup("iso8859-1");
-    else if (m_cp1252 > m_cp850)
-      setup("cp1252");
-    else if (m_cp850 >= 0)
-      setup("cp850");
+      m_latin1Detected = true;
+    }
+    else
+    {
+      finish2();
+    }
   }
   else if (isLatin1())
   {
     if (m_latin1 >= m_cp850 && m_latin1 >= m_cp1252)
+    {
       setup("iso8859-1");
-    else if (m_cp1252 > m_cp850)
-      setup("cp1252");
-    else if (m_cp850 >= 0)
-      setup("cp850");
+      m_latin1Detected = true;
+    }
+    else
+    {
+      finish2();
+    }
   }
 }
 

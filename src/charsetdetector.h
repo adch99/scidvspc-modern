@@ -32,6 +32,8 @@ class CharsetDetector : public nsUniversalDetector
 {
 public:
 
+  enum { ASCII, Latin1, Windoze, DOS, UTF8, LAST = UTF8 };
+
   CharsetDetector();
 
   // Test whether the encoding is UTF-8.
@@ -79,35 +81,47 @@ private:
     Info();
     Info(std::string const& encoding);
 
+    bool isUTF8() const;
+    bool isLatin1() const;
+    bool isWindows() const;
+    bool isDOS() const;
+    bool isASCII() const;
+
     void setup(std::string const& encoding);
 
     std::string m_encoding;
-
-    bool m_isASCII;
-    bool m_isLatin1;
-    bool m_isWindoze;
-    bool m_isDOS;
-    bool m_isUTF8;
+    unsigned    m_charset;
   };
 
   // We have to override the reporting function.
   void Report(char const* charset) override;
+
+  void finish2();
 
   Info  m_info;
   int   m_ascii;
   int   m_latin1;
   int   m_cp850;
   int   m_cp1252;
+  bool  m_latin1Detected;
+  bool  m_cp1252Detected;
 };
 
 
-inline bool CharsetDetector::isUTF8() const                     { return m_info.m_isUTF8; }
-inline bool CharsetDetector::isASCII() const                    { return m_info.m_isASCII; }
-inline bool CharsetDetector::isLatin1() const                   { return m_info.m_isLatin1; }
-inline bool CharsetDetector::isWindows() const                  { return m_info.m_isWindoze; }
-inline bool CharsetDetector::isDOS() const                      { return m_info.m_isDOS; }
+inline bool CharsetDetector::Info::isUTF8() const               { return m_charset == UTF8; }
+inline bool CharsetDetector::Info::isASCII() const              { return m_charset == ASCII; }
+inline bool CharsetDetector::Info::isLatin1() const             { return m_charset == Latin1; }
+inline bool CharsetDetector::Info::isWindows() const            { return m_charset == Windoze; }
+inline bool CharsetDetector::Info::isDOS() const                { return m_charset == DOS; }
+inline bool CharsetDetector::isUTF8() const                     { return m_info.isUTF8(); }
+inline bool CharsetDetector::isASCII() const                    { return m_info.isASCII(); }
+inline bool CharsetDetector::isLatin1() const                   { return m_info.isLatin1(); }
+inline bool CharsetDetector::isWindows() const                  { return m_info.isWindows(); }
+inline bool CharsetDetector::isDOS() const                      { return m_info.isDOS(); }
 inline std::string const& CharsetDetector::encoding() const     { return m_info.m_encoding; }
 inline void CharsetDetector::setup(std::string const& encoding) { m_info.setup(encoding); }
+inline CharsetDetector::Info::Info(std::string const& encoding) { setup(encoding); }
+
 
 
 #if __cplusplus <= 201103

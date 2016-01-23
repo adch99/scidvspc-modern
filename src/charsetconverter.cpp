@@ -155,16 +155,16 @@ static char const CP1252Weight[256] =
   0, 0, 1, 0, 1, _, 1, 0, // 98 ... 9f
   0, 1, 5, 5, 5, 5, 5, 5, // a0 ... a7
   0, 0, 0, 0, 0, 0, 0, 0, // a8 ... af
-  0, 1, 0, 0, 0, 0, 0, 0, // b0 ... b7
-  0, 0, 0, 1, 0, 1, 0, 2, // b8 ... bf
-  1, 1, 1, 1, 5, 2, 2, 1, // c0 ... c7
+  0, 2, 0, 0, 0, 0, 0, 0, // b0 ... b7
+  0, 0, 5, 1, 0, 1, 0, 2, // b8 ... bf
+  1, 1, 1, 2, 5, 2, 2, 1, // c0 ... c7
   2, 3, 1, 1, 1, 1, 1, 1, // c8 ... cf
-  0, 3, 2, 3, 1, 3, 5, 0, // d0 ... d7
-  3, 1, 2, 1, 5, 1, 1, 0, // d8 ... df
+  0, 3, 2, 3, 1, 5, 5, 0, // d0 ... d7
+  3, 1, 2, 1, 5, 1, 1, 5, // d8 ... df
   2, 3, 1, 1, 5, 3, 3, 1, // e0 ... e7
   2, 3, 1, 1, 1, 1, 1, 1, // e8 ... ef
-  0, 0, 1, 3, 1, 1, 1, 0, // f0 ... f7
-  3, 1, 3, 1, 1, 1, 0, 0, // f8 ... ff
+  0, 2, 1, 3, 1, 1, 5, 0, // f0 ... f7
+  3, 1, 3, 1, 5, 1, 0, 0, // f8 ... ff
 };
 
 static char const Latin1Weight[256] =
@@ -193,15 +193,15 @@ static char const Latin1Weight[256] =
   0, 2, 0, 0, 0, 0, 0, 0, // a0 ... a7
   0, 1, 0, 1, 0, 0, 0, 0, // a8 ... af
   0, 2, 0, 0, 0, 0, 0, 0, // b0 ... b7
-  0, 0, 0, 1, 0, 0, 0, 2, // b8 ... bf
-  1, 1, 1, 2, 5, 1, 0, 0, // c0 ... c7
-  1, 1, 1, 1, 0, 0, 0, 0, // c8 ... cf
-  0, 2, 1, 1, 1, 5, 0, 0, // d0 ... d7
-  3, 1, 1, 1, 5, 0, 0, 5, // d8 ... df
-  1, 2, 1, 1, 5, 3, 2, 0, // e0 ... e7
-  1, 2, 1, 1, 0, 0, 0, 0, // e8 ... ef
-  0, 2, 1, 2, 1, 1, 5, 0, // f0 ... f7
-  0, 1, 2, 1, 5, 0, 0, 0, // f8 ... ff
+  0, 0, 5, 1, 0, 1, 0, 2, // b8 ... bf
+  1, 1, 1, 2, 5, 2, 2, 1, // c0 ... c7
+  2, 3, 1, 1, 1, 1, 1, 1, // c8 ... cf
+  0, 3, 2, 3, 1, 5, 5, 0, // d0 ... d7
+  3, 1, 2, 1, 5, 1, 1, 5, // d8 ... df
+  2, 3, 1, 1, 5, 3, 3, 1, // e0 ... e7
+  2, 3, 1, 1, 1, 1, 1, 1, // e8 ... ef
+  0, 2, 1, 3, 1, 1, 5, 0, // f0 ... f7
+  3, 1, 3, 1, 5, 1, 0, 0, // f8 ... ff
 };
 #undef _
 
@@ -441,10 +441,10 @@ appendCodePointToUTF8String(std::string& result, unsigned code)
 
 inline std::string const& CharsetConverter::Codec::encoding() const { return m_info.m_encoding; }
 
-inline bool CharsetConverter::Codec::isUTF8() const     { return m_info.m_isUTF8; }
-inline bool CharsetConverter::Codec::isLatin1() const   { return m_info.m_isLatin1; }
-inline bool CharsetConverter::Codec::isWindoze() const  { return m_info.m_isWindoze; }
-inline bool CharsetConverter::Codec::isDOS() const      { return m_info.m_isDOS; }
+inline bool CharsetConverter::Codec::isUTF8() const     { return m_info.isUTF8(); }
+inline bool CharsetConverter::Codec::isLatin1() const   { return m_info.isLatin1(); }
+inline bool CharsetConverter::Codec::isWindoze() const  { return m_info.isWindows(); }
+inline bool CharsetConverter::Codec::isDOS() const      { return m_info.isDOS(); }
 
 
 struct CharsetConverter::Buffer
@@ -477,6 +477,7 @@ struct CharsetConverter::Buffer
 CharsetConverter::Codec::Codec()
   :m_impl(nullptr)
 {
+  ::memset(m_cache, 0, sizeof(m_cache));
   detectSystemEncoding();
 }
 
@@ -484,14 +485,18 @@ CharsetConverter::Codec::Codec()
 CharsetConverter::Codec::Codec(std::string const& encoding)
   :m_impl(nullptr)
 {
+  ::memset(m_cache, 0, sizeof(m_cache));
   setup(encoding);
 }
 
 
 CharsetConverter::Codec::~Codec()
 {
-  if (m_impl)
-    Tcl_FreeEncoding(m_impl);
+  for (unsigned i = 0; i < sizeof(m_cache)/sizeof(m_cache[0]); ++i)
+  {
+    if (m_cache[i])
+      Tcl_FreeEncoding(m_cache[i]);
+  }
 }
 
 
@@ -506,14 +511,20 @@ CharsetConverter::Codec::detectSystemEncoding()
 
 
 void
+CharsetConverter::Codec::setupImpl()
+{
+  if (!m_cache[m_info.m_charset])
+    m_cache[m_info.m_charset] = Tcl_GetEncoding(nullptr, m_info.m_encoding.c_str());
+
+  m_impl = m_cache[m_info.m_charset];
+}
+
+
+void
 CharsetConverter::Codec::setup(std::string const& encoding)
 {
   m_info.setup(encoding);
-
-  if (m_impl)
-    Tcl_FreeEncoding(m_impl);
-
-  m_impl = Tcl_GetEncoding(nullptr, encoding.c_str());
+  setupImpl();
 }
 
 
@@ -521,11 +532,7 @@ void
 CharsetConverter::Codec::setup(Info const& info)
 {
   m_info = info;
-
-  if (m_impl)
-    Tcl_FreeEncoding(m_impl);
-
-  m_impl = Tcl_GetEncoding(nullptr, m_info.m_encoding.c_str());
+  setupImpl();
 }
 
 

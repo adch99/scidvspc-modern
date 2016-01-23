@@ -169,10 +169,12 @@ private:
 
     void setup(std::string const& encoding);
     void setup(Info const& info);
+    void setupImpl();
     void detectSystemEncoding();
 
     Info m_info;
     struct Tcl_Encoding_* m_impl;
+    struct Tcl_Encoding_* m_cache[CharsetDetector::LAST + 1];
   };
 
   class Buffer;
