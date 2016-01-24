@@ -781,7 +781,7 @@ proc changeBaseType {baseNum {parent .}} {
   set w .btypeWin
   toplevel $w
   wm withdraw $w
-  wm title $w "Choose database icon"
+  wm title $w "Choose database type"
 
   text $w.t -yscrollcommand "$w.yscroll set" -font font_Regular \
     -height 25 -width 40  -wrap none -cursor top_left_arrow
@@ -949,7 +949,9 @@ proc ::windows::switcher::Open {} {
       menu $f.menu.show
       $f.menu.show add command -label WindowsTree  -command "::tree::Open $i"
       $f.menu.show add command -label TreeFileBest -command "::tree::OpenBest $i"
+      $f.menu add separator
       $f.menu.show add command -label [tr ChangeIcon] -command "changeBaseType $i $w"
+      $f.menu.show add command -label [tr ShowIcons] -command ::windows::switcher::toggleicons
       configMenuText $f.menu.show 0 WindowsTree  $::language
       configMenuText $f.menu.show 1 TreeFileBest $::language
 
