@@ -2056,10 +2056,11 @@ update
 bind $dot_w <Configure> {recordWinSize $dot_w}
 
 ### Bindings to map/unmap all windows when main window is mapped
+# Dammit - how do we 
 
 if { $::docking::USE_DOCKING } {
-  bind .fdockmain <Map> {raiseAllWindows}
-  bind .fdockmain <Unmap> { showHideAllWindows iconify}
+  bind .pw <Map> {raiseAllWindows}
+  bind .pw  <Unmap> {showHideAllWindows iconify}
 } else {
   # Bind this to the main canvas as statusbar can now be hidden
   bind .main.board.bd <Map> { raiseAllWindows }
