@@ -6,7 +6,7 @@
 //  Part of:    Scid vs. PC
 //  Version:    4.15
 //
-//  Notice:     Copyright (c) 2015  Gregor Cramer.  All rights reserved.
+//  Notice:     Copyright (c) 2015-2016  Gregor Cramer.  All rights reserved.
 //
 //  Author:     Gregor Cramer (gcramer@users.sourceforge.net)
 //
@@ -82,8 +82,7 @@ static enum State const State_Transition_Tbl[12][8] =
 #undef _
 
 
-inline
-static State
+inline static State
 nextState(State current, unsigned char c)
 {
   return State_Transition_Tbl[Byte_Class_Lookup_Tbl[c]][current];
@@ -169,10 +168,10 @@ static char const CP1252Weight[256] =
 
 static char const Latin1Weight[256] =
 {
-  _, _, _, _, _, _, _, _, // 00 ... 07
-  _, _, _, _, _, _, _, _, // 08 ... 0f
-  _, _, _, _, _, _, _, _, // 10 ... 17
-  _, _, _, _, _, _, _, _, // 18 ... 1f
+  0, 0, 0, 0, 0, 0, 0, 0, // 00 ... 07
+  0, 0, 0, 0, 0, 0, 0, 0, // 08 ... 0f
+  0, 0, 0, 0, 0, 0, 0, 0, // 10 ... 17
+  0, 0, 0, 0, 0, 0, 0, 0, // 18 ... 1f
   0, 0, 0, 0, 0, 0, 0, 0, // 20 ... 27
   0, 0, 0, 0, 0, 0, 0, 0, // 28 ... 2f
   0, 0, 0, 0, 0, 0, 0, 0, // 20 ... 27
@@ -212,24 +211,32 @@ inline static bool isFirst(char const* s) { return (static_cast<unsigned char>(*
 inline static bool isTail(char const* s)  { return (static_cast<unsigned char>(*s) & 0xc0) == 0x80; }
 
 
-static unsigned
-charLength(char const* str)
+namespace {
+  namespace bits {
+
+    static unsigned
+    utf8CharLength(char const* str)
+    {
+      unsigned char c = *str;
+
+      if ((c & 0xe0) == 0xc0) return 2;
+      if ((c & 0xf0) == 0xe0) return 3;
+      if ((c & 0xf8) == 0xf0) return 4;
+
+      char const* t = str + 5;
+      while (isTail(t))
+        ++t;
+      return t - str;
+    }
+
+  } // namespace bits
+} // namespace
+
+
+inline static unsigned
+utf8CharLength(char const* str)
 {
-  unsigned char c = *str;
-
-  if (c < 0x80) return 1;
-
-  switch (c & 0xf0)
-  {
-    case 0xc0: return 2;
-    case 0xe0: return 3;
-    case 0xf0: return 4;
-  }
-
-  char const* t = str + 5;
-  while (isTail(t))
-    ++t;
-  return t - str;
+  return static_cast<unsigned char>(*str) < 0x80 ? 1 : bits::utf8CharLength(str);
 }
 
 
@@ -392,7 +399,7 @@ findConversion(unsigned code)
 }
 
 
-static void
+inline static void
 appendTwoOctets(std::string& result, unsigned code)
 {
   char buf[2] = { char((code >> 6) | 0xc0), char((code & 0x3f) | 0x80) };
@@ -400,7 +407,7 @@ appendTwoOctets(std::string& result, unsigned code)
 }
 
 
-static void
+inline static void
 appendThreeOctets(std::string& result, unsigned code)
 {
   char buf[3] =
@@ -413,7 +420,7 @@ appendThreeOctets(std::string& result, unsigned code)
 }
 
 
-static void
+inline static void
 appendFourOctets(std::string& result, unsigned code)
 {
   char buf[4] =
@@ -439,7 +446,7 @@ appendCodePointToUTF8String(std::string& result, unsigned code)
 }
 
 
-inline std::string const& CharsetConverter::Codec::encoding() const { return m_info.m_encoding; }
+inline CharsetDetector::CharSet CharsetConverter::Codec::charset() const { return m_info.m_charset; }
 
 inline bool CharsetConverter::Codec::isUTF8() const     { return m_info.isUTF8(); }
 inline bool CharsetConverter::Codec::isLatin1() const   { return m_info.isLatin1(); }
@@ -497,6 +504,9 @@ CharsetConverter::Codec::~Codec()
     if (m_cache[i])
       Tcl_FreeEncoding(m_cache[i]);
   }
+
+  for (ImplMap::iterator i = m_implMap.begin(); i != m_implMap.end(); ++i)
+    Tcl_FreeEncoding(i->second);
 }
 
 
@@ -513,10 +523,23 @@ CharsetConverter::Codec::detectSystemEncoding()
 void
 CharsetConverter::Codec::setupImpl()
 {
-  if (!m_cache[m_info.m_charset])
-    m_cache[m_info.m_charset] = Tcl_GetEncoding(nullptr, m_info.m_encoding.c_str());
+  if (m_info.m_charset == CharsetDetector::Other)
+  {
+    std::pair<ImplMap::iterator,bool> result =
+        m_implMap.insert(ImplMap::value_type(m_info.m_encoding, nullptr));
 
-  m_impl = m_cache[m_info.m_charset];
+    if (result.second)
+      result.first->second = m_impl = Tcl_GetEncoding(nullptr, m_info.m_encoding.c_str());
+    else
+      m_impl = result.first->second;
+  }
+  else
+  {
+    if (!m_cache[m_info.m_charset])
+      m_cache[m_info.m_charset] = Tcl_GetEncoding(nullptr, m_info.m_encoding.c_str());
+
+    m_impl = m_cache[m_info.m_charset];
+  }
 }
 
 
@@ -589,7 +612,7 @@ CharsetConverter::isConvertibleToLatin1(char const* str)
 
     if (c & 0x80)
     {
-      unsigned charLen  = ::charLength(str);
+      unsigned charLen  = ::utf8CharLength(str);
       unsigned code     = ::utf8ToUnicode(str, charLen);
 
       if (::findConversion(code))
@@ -620,7 +643,7 @@ CharsetConverter::isConvertibleToLatin1(char const* str)
 
 
 std::string
-CharsetConverter::mapChessBaseFigurineToUTF8(const char * s)
+CharsetConverter::mapChessBaseFigurineToUTF8(const char* s)
 {
   std::string str;
 
@@ -630,7 +653,7 @@ CharsetConverter::mapChessBaseFigurineToUTF8(const char * s)
 
     if (c & 0x80)
     {
-      unsigned charLen = ::charLength(s);
+      unsigned charLen = ::utf8CharLength(s);
       unsigned char d = s[1];
 
       if (charLen == 2 && (0xc2 <= c && c <= 0xc3) && (0xa2 <= d && d <= 0xa7))
@@ -892,7 +915,7 @@ CharsetConverter::fixLatin1(std::string const& in, std::string& out)
         }
       }
 
-      unsigned len = ::charLength(str);
+      unsigned len = ::utf8CharLength(str);
       out.append(str, len);
       str += len;
     }
@@ -928,7 +951,7 @@ CharsetConverter::removeInvalidSequences(std::string& str, unsigned len, char co
 
   while (s < e)
   {
-    switch (::charLength(s))
+    switch (::utf8CharLength(s))
     {
       case 1: // 0bbbbbbb
         result.append(s++, 1);
@@ -1044,7 +1067,7 @@ CharsetConverter::convertFromUTF8(std::string const& in, std::string& out)
                                 src, srcLen,
                                 flags,
                                 &state,
-                                dst,  buf.size(),
+                                dst, buf.size(),
                                 &bytesIn,
                                 &bytesOut,
                                 &dstChars);
@@ -1069,7 +1092,7 @@ CharsetConverter::convertFromUTF8(std::string const& in, std::string& out)
 
         if (static_cast<unsigned char>(*src) & 0x80)
         {
-          unsigned charLen  = ::charLength(src);
+          unsigned charLen  = ::utf8CharLength(src);
           unsigned code     = ::utf8ToUnicode(src, charLen);
 
           if (char const* conversion = ::findConversion(code))
@@ -1242,8 +1265,7 @@ CharsetConverter::doConversion(Buffer& text)
   m_detector.detect(text.str(), text.size());
 
   if (   m_detector.isASCII() // the detector couldn't detect the character set
-      || (   m_detector.isLatin1()
-          && !validateLatin1(text.str(), text.size()))) // detection is wrong
+      || (m_detector.isLatin1() && !validateLatin1(text.str(), text.size()))) // detection is wrong
   {
     // This may happen if:
     // 1. The character set is CP850 or CP1252 encoded with single bytes.
@@ -1273,6 +1295,25 @@ CharsetConverter::doConversion(Buffer& text)
       text.replace(dst);
       m_detector.setup("utf-8");
     }
+    else if (m_detector.isLatin1()) // does not happen under Windoze
+    {
+      // ----------------------------------------------------------------------
+      // This part is a bit experimental, and should be removed if
+      // not successful in practice.
+      // ----------------------------------------------------------------------
+      std::string src(text.str(), text.size());
+      std::string dst;
+
+      if (fixLatin1(src, dst))
+      {
+        // This was originally a Latin-1 string with invalid UTF-8 conversion,
+        // but we could restore the content. This happens often with Scid
+        // databases. (For example an import of a PGN file with UTF-8 encoded
+        // Latin-1 character set.)
+        text.replace(dst);
+        m_detector.setup("utf-8");
+      }
+    }
     else
     {
       // The character set is unrecognizable, so convertToUTF8() will do
@@ -1280,27 +1321,7 @@ CharsetConverter::doConversion(Buffer& text)
     }
   }
 
-  if (m_detector.isLatin1()) // does not happen under Windoze
-  {
-    // ----------------------------------------------------------------------
-    // This part is a bit experimental, and should be removed if
-    // not successful in practice.
-    // ----------------------------------------------------------------------
-    std::string src(text.str(), text.size());
-    std::string dst;
-
-    if (fixLatin1(src, dst))
-    {
-      // This was originally a Latin-1 string with invalid UTF-8 conversion,
-      // but we could restore the content. This happens often with Scid
-      // databases. (For example an import of a PGN file with UTF-8 encoded
-      // Latin-1 character set.)
-      text.replace(dst);
-      m_detector.setup("utf-8");
-    }
-  }
-
-  if (m_detector.encoding() == m_wanted.encoding())
+  if (m_detector.charset() == m_wanted.charset())
   {
     if (!m_wanted.isUTF8() || isUTF8)
       return true;
@@ -1309,7 +1330,7 @@ CharsetConverter::doConversion(Buffer& text)
     return makeValid(src, m_wanted.isUTF8() ? "\xef\xbf\xbd" : "?") == 0;
   }
 
-  if (m_detector.encoding() != m_text.encoding())
+  if (m_detector.charset() != m_text.charset())
     m_text.setup(m_detector.m_info);
 
   std::string src(text.str(), text.size());
@@ -1359,6 +1380,6 @@ CharsetConverter::doConversion(std::string& text)
 }
 
 //////////////////////////////////////////////////////////////////////
-//  EOF: charsetconverter.h
+//  EOF: charsetconverter.cpp
 //////////////////////////////////////////////////////////////////////
 // vi:set ts=2 sw=2 et:

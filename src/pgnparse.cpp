@@ -525,12 +525,15 @@ PgnParser::GetComment (char * buffer, uint bufSize)
     int ch;
     int startLine = LineCounter;
     ch = GetChar();
+
+	 ASSERT(bufSize > 0);
+
     while (ch != EndChar  &&  ch != '}') {
         if (NewlinesToSpaces  &&  ch == '\n') { ch = ' '; }
-        if (bufSize > 0) { *outPtr++ = (char) ch; bufSize--; }
+        if (bufSize > 1) { *outPtr++ = (char) ch; bufSize--; }
         ch = GetChar();
     }
-    if (buffer) { *outPtr = 0; }
+    *outPtr = 0; // must be nul-terminated
     if (ch == EndChar) {
         char tempStr[80];
         sprintf (tempStr, "started on line %u\n", startLine);
@@ -1162,7 +1165,7 @@ PgnParser::ParseMoves (Game * game, char * buffer, uint bufSize)
             break;
 
         case TOKEN_Comment:
-            GetComment (buffer, MAX_COMMENT_SIZE);
+            GetComment (buffer, bufSize);
             strSingleSpace (buffer);
             game->SetMoveComment (buffer);
             break;
@@ -1307,10 +1310,10 @@ PgnParser::ParseGame (Game * game)
     {
         CharDetector->finish();
 
-        if (CharDetector->encoding() != "utf-8")
-            DoCharsetConversion(game);
-        else
+        if (CharDetector->charset() == CharsetDetector::UTF8)
             MapChessBaseFigurine(game);
+        else
+            DoCharsetConversion(game);
 
         CharDetector->reset();
         CharConverter->reset();
@@ -1389,9 +1392,6 @@ void
 PgnParser::DoCharsetConversion(Game * game)
 {
     CharConverter->setupDetected();
-
-    std::string str;
-    std::string tmp;
 
     // Convert standard tags.
 

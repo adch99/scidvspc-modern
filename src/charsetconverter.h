@@ -6,7 +6,7 @@
 //  Part of:    Scid vs. PC
 //  Version:    4.15
 //
-//  Notice:     Copyright (c) 2015  Gregor Cramer.  All rights reserved.
+//  Notice:     Copyright (c) 2015-2016  Gregor Cramer.  All rights reserved.
 //
 //  Author:     Gregor Cramer (gcramer@users.sourceforge.net)
 //
@@ -17,6 +17,7 @@
 
 #include "charsetdetector.h"
 #include <string>
+#include <map>
 
 extern "C" { struct Tcl_Encoding_; }
 
@@ -24,6 +25,8 @@ extern "C" { struct Tcl_Encoding_; }
 class CharsetConverter
 {
 public:
+
+  typedef CharsetDetector::CharSet CharSet;
 
   // Construct a character set convert with system encoding.
   CharsetConverter();
@@ -96,7 +99,7 @@ public:
   // Some helpers:
   // ----------------------------------------------------------------------
 
-  // Forcing a valid UTF-8 string. The returns value gives (approximately)
+  // Forcing a valid UTF-8 string. The returned value gives (approximately)
   // the number of characters lost because of invalid UTF-8 sequences.
   // Any lost character will be replaced with the given replacement string.
   static unsigned makeValid(std::string& str, char const* replacement = "\xef\xbf\xbd");
@@ -105,7 +108,7 @@ public:
   // (invalid UTF-8). So we have to remove such invalid sequences. With
   // a bit luck this will work without any loss.
   // In fact this function will do some more fixes: removing surrogates,
-  // invalid bytes, and forbidden code points). In such cases the number
+  // invalid bytes, and forbidden code points. In such cases the number
   // of lost characters (approximately) will be returned. Any lost character
   // will be replaced with the given replacement string.
   static unsigned removeInvalidSequences(std::string& str, char const* replacement = "\xef\xbf\xbd");
@@ -141,7 +144,7 @@ public:
   // String content is Latin-1? Returns a probablity weight, -1 is NO.
   static int detectLatin1(char const* str, unsigned len);
 
-  // Try to fix a corruped Latin-1 string.
+  // Try to fix an UTF8-8 string which was originally Latin-1 before conversion to UTF-8.
   static bool fixLatin1(std::string const& in, std::string& out);
 
   // Map ChessBase figurine (inside UTF-8 string) to UTF-8.
@@ -160,7 +163,7 @@ private:
     Codec(Codec const&);
     Codec& operator=(Codec const&);
 
-    std::string const& encoding() const;
+    CharSet charset() const;
 
     bool isUTF8() const;
     bool isLatin1() const;
@@ -172,9 +175,12 @@ private:
     void setupImpl();
     void detectSystemEncoding();
 
+    typedef std::map<std::string,struct Tcl_Encoding_*> ImplMap;
+
     Info m_info;
     struct Tcl_Encoding_* m_impl;
     struct Tcl_Encoding_* m_cache[CharsetDetector::LAST + 1];
+    ImplMap m_implMap;
   };
 
   class Buffer;
@@ -202,9 +208,12 @@ inline bool CharsetConverter::succeeded() const { return !m_error && !m_failed; 
 
 inline bool CharsetConverter::isAscii(std::string const& str) { return isAscii(str.c_str()); }
 
-inline std::string const& CharsetConverter::systemEncoding() const   { return m_system.m_info.m_encoding; }
-inline std::string const& CharsetConverter::wantedEncoding() const   { return m_wanted.m_info.m_encoding; }
-inline std::string const& CharsetConverter::detectedEncoding() const { return m_text.m_info.m_encoding; }
+inline std::string const&
+CharsetConverter::systemEncoding() const   { return m_system.m_info.m_encoding; }
+inline std::string const&
+CharsetConverter::wantedEncoding() const   { return m_wanted.m_info.m_encoding; }
+inline std::string const&
+CharsetConverter::detectedEncoding() const { return m_text.m_info.m_encoding; }
 
 inline void CharsetConverter::reset() { m_error = false; }
 

@@ -6,7 +6,7 @@
 //  Part of:    Scid vs. PC
 //  Version:    4.15
 //
-//  Notice:     Copyright (c) 2015  Gregor Cramer.  All rights reserved.
+//  Notice:     Copyright (c) 2015-2016  Gregor Cramer.  All rights reserved.
 //
 //  Author:     Gregor Cramer (gcramer@users.sourceforge.net)
 //
@@ -41,20 +41,15 @@ CharsetDetector::Info::Info()
 void
 CharsetDetector::Info::setup(std::string const& encoding)
 {
-  ASSERT(  encoding == "ascii"
-        || encoding == "iso8859-1"
-        || encoding == "cp1252"
-        || encoding == "cp850"
-        || encoding == "utf-8");
-
   m_encoding = encoding;
   
   switch (encoding[0])
   {
-    case 'a': m_charset = ASCII; break;
-    case 'i': m_charset = Latin1; break;
-    case 'u': m_charset = UTF8; break;
-    case 'c': m_charset = (encoding[2] == '1') ? Windoze : DOS; break;
+    case 'a': m_charset = (encoding == "ascii") ? ASCII : Other; break;
+    case 'i': m_charset = (encoding == "iso8859-1") ? Latin1 : Other; break;
+    case 'u': m_charset = (encoding == "utf-8") ? UTF8 : Other; break;
+    case 'c': m_charset = (encoding == "cp1252") ? Windoze : (encoding == "cp850" ? DOS : Other); break;
+    default: m_charset = Other; break;
   }
 }
 
@@ -142,10 +137,10 @@ CharsetDetector::finish2()
     }
     else if (m_cp850 >= 0)
     {
-      if (m_latin1 >= 0 && m_latin1Detected)
-        setup("iso8859-1"); // it's more likely Latin-1
-      else if (m_cp1252 >= 0 && (m_latin1Detected || m_cp1252Detected))
+      if (m_cp1252 >= 0 && m_cp1252Detected)
         setup("cp1252");   // it's more likely Windoze
+      else if (m_latin1 >= 0 && m_latin1Detected)
+        setup("iso8859-1"); // it's more likely Latin-1
       else
         setup("cp850");
     }
@@ -199,6 +194,6 @@ void CharsetDetector::Report(char const* charset)
 }
 
 //////////////////////////////////////////////////////////////////////
-//  EOF: charsetdetector.h
+//  EOF: charsetdetector.cpp
 //////////////////////////////////////////////////////////////////////
 // vi:set ts=2 sw=2 et:

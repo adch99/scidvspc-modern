@@ -81,10 +81,7 @@ WinMMap::WinMMap(char const* filename)
 						 filename);
 
     if (m_mapping == INVALID_HANDLE_VALUE)
-    {
-        CloseHandle(m_file);
         return;
-    }
 
     m_address = MapViewOfFile(m_mapping, FILE_MAP_READ, 0, 0, 0);
     m_size = GetFileSize(m_file, 0);
