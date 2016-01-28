@@ -949,7 +949,7 @@ proc ::windows::switcher::Open {} {
       menu $f.menu.show
       $f.menu.show add command -label WindowsTree  -command "::tree::Open $i"
       $f.menu.show add command -label TreeFileBest -command "::tree::OpenBest $i"
-      $f.menu add separator
+      $f.menu.show add separator
       $f.menu.show add command -label [tr ChangeIcon] -command "changeBaseType $i $w"
       $f.menu.show add checkbutton -label [tr ShowIcons] -variable ::windows::switcher::icons -command ::windows::switcher::Refresh
       $f.menu.show add checkbutton -label [tr ConfirmCopy] -variable ::windows::switcher::confirmCopy 
