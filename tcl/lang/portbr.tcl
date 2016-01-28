@@ -426,6 +426,8 @@ translate B Store {Guardar}
 translate B Update {Atualizar}
 translate B ChangeOrient {Muda orientacao da janela}
 translate B ShowIcons {Show Icons} ;# ***
+# ====== TODO To be translated ======
+translate B ConfirmCopy {Confirm Copy}
 translate B None {Nenhum}
 translate B First {Primeiro}
 translate B Current {Atual}

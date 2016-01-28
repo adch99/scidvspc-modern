@@ -404,6 +404,8 @@ translate S Store {Almacenar}
 translate S Update {Actualizar}
 translate S ChangeOrient {Cambiar orientación de la ventana}
 translate S ShowIcons {Mostrar iconos}
+# ====== TODO To be translated ======
+translate S ConfirmCopy {Confirm Copy}
 translate S None {Ninguno}
 translate S First {Primera}
 translate S Current {Actual}

@@ -404,6 +404,8 @@ translate D Store {Speichern}
 translate D Update {Aktualisieren}
 translate D ChangeOrient {Fensterausrichtung ändern}
 translate D ShowIcons {Icons anzeigen} ;# ***
+# ====== TODO To be translated ======
+translate D ConfirmCopy {Confirm Copy}
 translate D None {Keine}
 translate D First {Erste}
 translate D Current {Aktuelle}

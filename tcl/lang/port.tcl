@@ -376,6 +376,8 @@ translate U Store {Guardar}
 translate U Update {Atualizar}
 translate U ChangeOrient {Muda orientação da janela}
 translate U ShowIcons {Mostrar Ícons} ;# ***
+# ====== TODO To be translated ======
+translate U ConfirmCopy {Confirm Copy}
 translate U None {Nenhum}
 translate U First {Primeiro}
 translate U Current {Atual}

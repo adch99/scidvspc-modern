@@ -393,6 +393,8 @@ translate W Store {Spara}
 translate W Update {Uppdatera}
 translate W ChangeOrient {Ãndra fönstrets orientering}
 translate W ShowIcons {Visa Ikoner} ;# ***
+# ====== TODO To be translated ======
+translate W ConfirmCopy {Confirm Copy}
 translate W None {Ingen}
 translate W First {Första}
 translate W Current {Aktuella}

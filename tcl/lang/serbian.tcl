@@ -453,6 +453,8 @@ translate Y Store {Saèuvaj}
 translate Y Update {Osve¾i}
 translate Y ChangeOrient {Promeni orijentaciju prozora}
 translate Y ShowIcons {Show Icons} ;# ***
+# ====== TODO To be translated ======
+translate Y ConfirmCopy {Confirm Copy}
 translate Y None {None} ;# ***
 translate Y First {Prvu}
 translate Y Current {Trenutna}

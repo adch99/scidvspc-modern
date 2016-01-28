@@ -381,6 +381,8 @@ translate F Store {Enregistrer}
 translate F Update {Mettre à jour}
 translate F ChangeOrient {Changer l'orientation de la fenêtre}
 translate F ShowIcons {Montrer les icones}
+# ====== TODO To be translated ======
+translate F ConfirmCopy {Confirm Copy}
 translate F None {Aucun}
 translate F First {Premier}
 translate F Current {En cours}

@@ -5,6 +5,11 @@
 ###	 make -f Makefile.mingwx W64=1
 ### Copyright (C) 2013-2015, O. Sezer (sezero@users.sourceforge.net)
 
+# To build tcl use "./configure --host=i686-w64-mingw32"
+# and change:
+# INSTALL_ROOT    = /usr/local/cross-tcl-8.6.4
+
+
 ifeq ($(W64),1)
 WIN_TARGET=win64
 else

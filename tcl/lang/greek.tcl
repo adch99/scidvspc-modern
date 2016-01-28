@@ -411,6 +411,8 @@ translate G Store {Αποθήκευση}
 translate G Update {Ενημέρωση}
 translate G ChangeOrient {Αλλαγή προσανατολισμού}
 translate G ShowIcons {Εικονίδια}
+# ====== TODO To be translated ======
+translate G ConfirmCopy {Confirm Copy}
 translate G None {Κενό}
 translate G First {Πρώτη}
 translate G Current {Τρέχουσα}

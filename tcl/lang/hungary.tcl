@@ -429,6 +429,8 @@ translate H Store {Tárol}
 translate H Update {Frissít}
 translate H ChangeOrient {Ablak elhelyezkedésének változtatása}
 translate H ShowIcons {Show Icons} ;# ***
+# ====== TODO To be translated ======
+translate H ConfirmCopy {Confirm Copy}
 translate H None {Nincs}
 translate H First {Elsõ}
 translate H Current {Aktuális}

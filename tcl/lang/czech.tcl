@@ -425,6 +425,8 @@ translate C Store {Uschovat}
 translate C Update {Aktualizovat}
 translate C ChangeOrient {Zmìnit orientaci okna}
 translate C ShowIcons {Show Icons} ;# ***
+# ====== TODO To be translated ======
+translate C ConfirmCopy {Confirm Copy}
 translate C None {Nic}
 translate C First {První}
 translate C Current {Aktuální}

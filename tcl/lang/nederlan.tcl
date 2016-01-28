@@ -398,6 +398,8 @@ translate N Store {Opbergen}
 translate N Update {Bijwerken}
 translate N ChangeOrient {Wijzigen venster oriëntatie}
 translate N ShowIcons {Toon iconen} ;
+# ====== TODO To be translated ======
+translate N ConfirmCopy {Confirm Copy}
 translate N None {Geen}
 translate N First {Eerste}
 translate N Current {Huidige}

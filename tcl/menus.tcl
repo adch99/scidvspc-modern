@@ -862,7 +862,7 @@ $m add command -label OptionsSave -command {
     annotate(WantedDepth) annotate(Depth) autoplayDelay animateDelay boardCoords boardSTM 
     moveEntry(AutoExpand) moveEntry(Coord)
     translatePieces highlightLastMove highlightLastMoveWidth highlightLastMoveColor 
-    askToReplaceMoves ::windows::switcher::icons locale(numeric) 
+    askToReplaceMoves ::windows::switcher::icons ::windows::switcher::confirmCopy locale(numeric) 
     spellCheckFile ::splash::keepopen autoRaise autoIconify windowsDock autoLoadLayout
     exportFlags(comments) exportFlags(space) exportFlags(vars) exportFlags(indentc)
     exportFlags(indentv) exportFlags(column) exportFlags(htmldiag) exportFlags(utf8)

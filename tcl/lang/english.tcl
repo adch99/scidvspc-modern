@@ -391,6 +391,7 @@ translate E Store {Store}
 translate E Update {Update}
 translate E ChangeOrient {Change window orientation}
 translate E ShowIcons {Show Icons}
+translate E ConfirmCopy {Confirm Copy}
 translate E None {None}
 translate E First {First}
 translate E Current {Current}

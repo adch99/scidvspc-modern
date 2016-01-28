@@ -378,6 +378,8 @@ translate R Store {Сохранить}
 translate R Update {Обновить}
 translate R ChangeOrient {Изменить ориентацию окна}
 translate R ShowIcons {Показать иконки}
+# ====== TODO To be translated ======
+translate R ConfirmCopy {Confirm Copy}
 translate R None {Никакой}
 translate R First {Первый}
 translate R Current {Текущий}

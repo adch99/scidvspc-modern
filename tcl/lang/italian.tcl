@@ -412,6 +412,8 @@ translate I Store {Memorizza}
 translate I Update {Aggiorna}
 translate I ChangeOrient {Modifica l'orientamento della finestra}
 translate I ShowIcons {Show Icons} ;# ***
+# ====== TODO To be translated ======
+translate I ConfirmCopy {Confirm Copy}
 translate I None {Nessuno}
 translate I First {Prima}
 translate I Current {Attuale}

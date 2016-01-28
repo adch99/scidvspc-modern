@@ -454,6 +454,8 @@ translate O Store {Lagre}
 translate O Update {Oppdater}
 translate O ChangeOrient {Vend vindu}
 translate O ShowIcons {Show Icons} ;# ***
+# ====== TODO To be translated ======
+translate O ConfirmCopy {Confirm Copy}
 translate O None {Ingen}
 translate O First {Første}
 translate O Current {Gjeldende}

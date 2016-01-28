@@ -951,7 +951,9 @@ proc ::windows::switcher::Open {} {
       $f.menu.show add command -label TreeFileBest -command "::tree::OpenBest $i"
       $f.menu add separator
       $f.menu.show add command -label [tr ChangeIcon] -command "changeBaseType $i $w"
-      $f.menu.show add command -label [tr ShowIcons] -command ::windows::switcher::toggleicons
+      $f.menu.show add checkbutton -label [tr ShowIcons] -variable ::windows::switcher::icons -command ::windows::switcher::Refresh
+      $f.menu.show add checkbutton -label [tr ConfirmCopy] -variable ::windows::switcher::confirmCopy 
+
       configMenuText $f.menu.show 0 WindowsTree  $::language
       configMenuText $f.menu.show 1 TreeFileBest $::language
 
@@ -1143,7 +1145,7 @@ proc copyFilter {frombaseNum tobaseNum} {
   }
 
   # If copying to the clipbase, do not bother asking for confirmation:
-  if {$tobaseNum == [sc_info clipbase]} {
+  if {!$::windows::switcher::confirmCopy || $tobaseNum == [sc_info clipbase]} {
     progressWindow "Scid" "$::tr(CopyGames)..." $::tr(Cancel) "sc_progressBar"
     busyCursor .
     set copyErr [catch {sc_filter copy $frombaseNum $tobaseNum} result]

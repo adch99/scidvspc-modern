@@ -389,6 +389,8 @@ translate P Store {Zapamiętaj}
 translate P Update {Uaktualnij}
 translate P ChangeOrient {Zmień położenie okna}
 translate P ShowIcons {Pokaż ikony}
+# ====== TODO To be translated ======
+translate P ConfirmCopy {Confirm Copy}
 translate P None {Brak}
 translate P First {Pierwsza}
 translate P Current {Aktualną}
