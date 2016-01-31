@@ -1202,7 +1202,7 @@ proc ::tree::toggleAdjust {baseNumber} {
     ::tree::dorefresh $baseNumber
   } else {
     # User has deselected AdjustFilter, so they probably want the current filter to stay
-    # So set dbFilter to the current treeFilter via overloaded sc_tree_clean
+    # So set dbFilter to the current Filter via overloaded sc_tree_clean
     sc_tree clean $baseNumber updateFilter
   }
 }

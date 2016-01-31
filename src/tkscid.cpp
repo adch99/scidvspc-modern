@@ -13977,7 +13977,7 @@ sc_tree_clean (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
       if(base->treeFilter && base->dbFilter != base->filter) {
 	for (uint i=0; i < base->numGames; i++) {
-	  base->dbFilter->Set(i,base->treeFilter->Get(i));
+	  base->dbFilter->Set(i,base->filter->Get(i));
 	}
 	return TCL_OK;
       }
