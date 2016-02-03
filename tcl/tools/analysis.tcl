@@ -1786,6 +1786,7 @@ proc addAnalysisVariation {{n -1}} {
   }
 
   ::pgn::Refresh 1
+  updateStatusBar
   updateGameinfo
   ::tools::graphs::score::Refresh
   if {$isAt_vend && ![sc_pos isAt vend]} {
@@ -1865,6 +1866,7 @@ proc addAllVariations {{n 1} {rightclick 0}} {
   }
 
   ::pgn::Refresh 1 
+  updateStatusBar
   ::tools::graphs::score::Refresh
 }
 
