@@ -231,7 +231,7 @@ proc ::crosstab::Open {{game {}}} {
   $w.menu.sort add radiobutton -label CrosstabSortRating \
     -variable crosstab(sort) -value rating -command ::crosstab::Refresh
 
-  $w.menu.type add radiobutton -label CrosstabTypeAuto -font font_Small \
+  $w.menu.type add radiobutton -label CrosstabTypeAuto \
     -variable crosstab(type) -value auto -command ::crosstab::Refresh
   $w.menu.type add radiobutton -label CrosstabTypeAll \
     -variable crosstab(type) -value allplay -command ::crosstab::Refresh
