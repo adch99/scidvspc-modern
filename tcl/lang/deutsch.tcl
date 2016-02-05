@@ -474,6 +474,10 @@ translate D StartPos {Stellung}
 translate D Total {Summe}
 translate D readonly {schreibgeschützt}
 translate D altered {geändert}
+# ====== TODO To be translated ======
+translate D tagsDescript {Extra tags (eg: Annotator "Anand")}
+# ====== TODO To be translated ======
+translate D prevTags {Use prev tags}
 
 # Standard error messages:
 translate D ErrNotOpen {Dies ist keine geöffnete Datenbank.}

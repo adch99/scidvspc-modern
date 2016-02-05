@@ -470,6 +470,10 @@ translate S StartPos {Posición inicial}
 translate S Total {Total}
 translate S readonly {sólo lectura}
 translate S altered {alterado}
+# ====== TODO To be translated ======
+translate S tagsDescript {Extra tags (eg: Annotator "Anand")}
+# ====== TODO To be translated ======
+translate S prevTags {Use prev tags}
 
 # Standard error messages:
 translate S ErrNotOpen {Esta base de datos no está abierta.}

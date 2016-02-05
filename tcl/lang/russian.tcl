@@ -445,6 +445,10 @@ translate R StartPos {Стартовая позиция}
 translate R Total {Всего}
 translate R readonly {Только для чтения}
 translate R altered {изменённый}
+# ====== TODO To be translated ======
+translate R tagsDescript {Extra tags (eg: Annotator "Anand")}
+# ====== TODO To be translated ======
+translate R prevTags {Use prev tags}
 
 # Standard error messages:
 translate R ErrNotOpen {Эта база данных не открыта.}

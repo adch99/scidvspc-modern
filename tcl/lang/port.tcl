@@ -442,6 +442,10 @@ translate U StartPos {Posição Inicial}
 translate U Total {Total}
 translate U readonly {apenas leitura}
 translate U altered {alterado}
+# ====== TODO To be translated ======
+translate U tagsDescript {Extra tags (eg: Annotator "Anand")}
+# ====== TODO To be translated ======
+translate U prevTags {Use prev tags}
 
 # Standard error messages:
 translate U ErrNotOpen {Esta base não está aberta.} ;# ***

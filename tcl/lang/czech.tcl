@@ -497,6 +497,10 @@ translate C Total {Celkem}
 translate C readonly {read-only} ;# ***
 # ====== TODO To be translated ======
 translate C altered {altered}
+# ====== TODO To be translated ======
+translate C tagsDescript {Extra tags (eg: Annotator "Anand")}
+# ====== TODO To be translated ======
+translate C prevTags {Use prev tags}
 
 # Standard error messages:
 translate C ErrNotOpen {To není otevøená databáze.}

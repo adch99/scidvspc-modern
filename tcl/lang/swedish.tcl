@@ -465,6 +465,10 @@ translate W Total {Totalt}
 translate W readonly {bara läsbar} ;# ***
 # ====== TODO To be translated ======
 translate W altered {altered}
+# ====== TODO To be translated ======
+translate W tagsDescript {Extra tags (eg: Annotator "Anand")}
+# ====== TODO To be translated ======
+translate W prevTags {Use prev tags}
 
 # Standard error messages:
 translate W ErrNotOpen {Databasen är inte öppen.}

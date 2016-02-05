@@ -484,6 +484,10 @@ translate I Total {Totale}
 translate I readonly {sola-lettura}
 # ====== TODO To be translated ======
 translate I altered {altered}
+# ====== TODO To be translated ======
+translate I tagsDescript {Extra tags (eg: Annotator "Anand")}
+# ====== TODO To be translated ======
+translate I prevTags {Use prev tags}
 
 # Standard error messages:
 translate I ErrNotOpen {Questo database non � aperto.}

@@ -483,6 +483,10 @@ translate G Total {Σύνολο}
 translate G readonly {read-only}
 # ====== TODO To be translated ======
 translate G altered {altered}
+# ====== TODO To be translated ======
+translate G tagsDescript {Extra tags (eg: Annotator "Anand")}
+# ====== TODO To be translated ======
+translate G prevTags {Use prev tags}
 
 # Standard error messages:
 translate G ErrNotOpen {Η Βάση δεν είναι ανοικτή.}

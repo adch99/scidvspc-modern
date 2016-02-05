@@ -456,6 +456,8 @@ translate E StartPos {Start position}
 translate E Total {Total}
 translate E readonly {read-only}
 translate E altered {altered}
+translate E tagsDescript {Extra tags (eg: Annotator "Anand")}
+translate E prevTags {Use prev tags}
 
 # Standard error messages:
 translate E ErrNotOpen {This is not an open database.}

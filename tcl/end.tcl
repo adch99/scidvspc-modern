@@ -1187,10 +1187,10 @@ proc gameSave {gnum {focus {}}} {
 
   # Extra tags label+button
 
-  label $f.extralabel -text {Extra tags (eg: Annotator "Anand")} -font font_Italic
+  label $f.extralabel -textvar ::tr(tagsDescript) -font font_Italic
   grid $f.extralabel -row 6 -column 8  -sticky n -pady 3
 
-  button $f.extrabutton -text "Use prev tags" -command {
+  button $f.extrabutton -textvar ::tr(prevTags) -command {
     set extraTags [sc_game tag get -last Extra]
     .save.g.extratext delete 1.0 end
     .save.g.extratext insert 1.0 $extraTags
@@ -1230,7 +1230,7 @@ proc gameSave {gnum {focus {}}} {
   grid $f.custom      -row 10 -column 8 -columnspan 2 -padx 10 -pady 2 -sticky nsew
   pack $f.custom.box -side left -padx 5
 
-  button $f.custom.ok -text Add -command {
+  button $f.custom.ok -textvar ::tr(GlistAddField) -command {
     catch {
       .save.g.extratext insert end "$customTags\n"
       .save.g.extratext see end

@@ -457,6 +457,10 @@ translate P StartPos {Pozycja początkowa}
 translate P Total {Razem}
 translate P readonly {tylko do odczytu}
 translate P altered {porzucone}
+# ====== TODO To be translated ======
+translate P tagsDescript {Extra tags (eg: Annotator "Anand")}
+# ====== TODO To be translated ======
+translate P prevTags {Use prev tags}
 
 # Standard error messages:
 translate P ErrNotOpen {To nie jest otwarta baza.} 

@@ -526,6 +526,10 @@ translate O Total {Sammenlagt}
 translate O readonly {skrivebeskyttet}
 # ====== TODO To be translated ======
 translate O altered {altered}
+# ====== TODO To be translated ======
+translate O tagsDescript {Extra tags (eg: Annotator "Anand")}
+# ====== TODO To be translated ======
+translate O prevTags {Use prev tags}
 
 # Standard error messages:
 translate O ErrNotOpen {This is not an open database.} ;# ***

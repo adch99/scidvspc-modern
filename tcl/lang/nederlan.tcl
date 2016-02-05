@@ -470,6 +470,10 @@ translate N Total {Totaal}
 translate N readonly {alleen-lezen}
 # ====== TODO To be translated ======
 translate N altered {altered}
+# ====== TODO To be translated ======
+translate N tagsDescript {Extra tags (eg: Annotator "Anand")}
+# ====== TODO To be translated ======
+translate N prevTags {Use prev tags}
 
 # Standard error messages:
 translate N ErrNotOpen {Deze database is niet geopend.}

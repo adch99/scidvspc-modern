@@ -502,6 +502,10 @@ translate H Total {Összesen}
 translate H readonly {read-only} ;# ***
 # ====== TODO To be translated ======
 translate H altered {altered}
+# ====== TODO To be translated ======
+translate H tagsDescript {Extra tags (eg: Annotator "Anand")}
+# ====== TODO To be translated ======
+translate H prevTags {Use prev tags}
 
 # Standard error messages:
 translate H ErrNotOpen {Ez az adatbázis nincs megnyitva.}
