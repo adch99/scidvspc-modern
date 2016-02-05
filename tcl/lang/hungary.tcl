@@ -505,7 +505,7 @@ translate H altered {altered}
 # ====== TODO To be translated ======
 translate H tagsDescript {Extra tags (eg: Annotator "Anand")}
 # ====== TODO To be translated ======
-translate H prevTags {Use prev tags}
+translate H prevTags {Use previous}
 
 # Standard error messages:
 translate H ErrNotOpen {Ez az adatbázis nincs megnyitva.}

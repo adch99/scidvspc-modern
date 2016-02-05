@@ -445,7 +445,7 @@ translate U altered {alterado}
 # ====== TODO To be translated ======
 translate U tagsDescript {Extra tags (eg: Annotator "Anand")}
 # ====== TODO To be translated ======
-translate U prevTags {Use prev tags}
+translate U prevTags {Use previous}
 
 # Standard error messages:
 translate U ErrNotOpen {Esta base não está aberta.} ;# ***

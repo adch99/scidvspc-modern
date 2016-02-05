@@ -451,7 +451,7 @@ translate F altered {changé}
 # ====== TODO To be translated ======
 translate F tagsDescript {Extra tags (eg: Annotator "Anand")}
 # ====== TODO To be translated ======
-translate F prevTags {Use prev tags}
+translate F prevTags {Use previous}
 
 # Standard error messages:
 translate F ErrNotOpen {Ceci n'est pas une base ouverte.}

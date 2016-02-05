@@ -1194,6 +1194,39 @@ proc gameSave {gnum {focus {}}} {
     set extraTags [sc_game tag get -last Extra]
     .save.g.extratext delete 1.0 end
     .save.g.extratext insert 1.0 $extraTags
+
+    foreach {i j} {White white Black black} {
+      set value [set $j]
+      if {$value == "?" || $value == ""} {
+	set $j [sc_game tag get -last $i]
+	set ${j}Elo   [sc_game tag get -last ${i}Elo]
+	set ${j}RType [sc_game tag get -last ${i}RType]
+      }
+    }
+    foreach {i j} {Event event Site site} {
+      set value [set $j]
+      if {$value == "?" || $value == ""} {
+	set $j [sc_game tag get -last $i]
+      }
+    }
+
+    if {$year == "????" && $month == "??" && $day == "??" } {
+      set year [sc_game tag get -last Year]
+      set month [sc_game tag get -last Month]
+      set day [sc_game tag get -last Day]
+      if {$year == 0} { set year "????" }
+      if {$month == 0} { set month "??" }
+      if {$day == 0} { set day "??" }
+    }
+    if {$eyear == "????" && $emonth == "??" && $eday == "??" } {
+      set eyear [sc_game tag get -last EYear]
+      set emonth [sc_game tag get -last EMonth]
+      set eday [sc_game tag get -last EDay]
+      if {$eyear == 0} { set eyear "????" }
+      if {$emonth == 0} { set emonth "??" }
+      if {$eday == 0} { set eday "??" }
+    }
+
   }
 
   # if {$gnum == 0} 

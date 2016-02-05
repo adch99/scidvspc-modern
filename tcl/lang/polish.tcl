@@ -460,7 +460,7 @@ translate P altered {porzucone}
 # ====== TODO To be translated ======
 translate P tagsDescript {Extra tags (eg: Annotator "Anand")}
 # ====== TODO To be translated ======
-translate P prevTags {Use prev tags}
+translate P prevTags {Use previous}
 
 # Standard error messages:
 translate P ErrNotOpen {To nie jest otwarta baza.} 

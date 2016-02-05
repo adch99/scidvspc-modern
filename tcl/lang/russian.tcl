@@ -448,7 +448,7 @@ translate R altered {изменённый}
 # ====== TODO To be translated ======
 translate R tagsDescript {Extra tags (eg: Annotator "Anand")}
 # ====== TODO To be translated ======
-translate R prevTags {Use prev tags}
+translate R prevTags {Use previous}
 
 # Standard error messages:
 translate R ErrNotOpen {Эта база данных не открыта.}

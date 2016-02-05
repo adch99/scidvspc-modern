@@ -529,7 +529,7 @@ translate Y altered {altered}
 # ====== TODO To be translated ======
 translate Y tagsDescript {Extra tags (eg: Annotator "Anand")}
 # ====== TODO To be translated ======
-translate Y prevTags {Use prev tags}
+translate Y prevTags {Use previous}
 
 # Standard error messages:
 translate Y ErrNotOpen {This is not an open database.} ;# ***

@@ -473,7 +473,7 @@ translate S altered {alterado}
 # ====== TODO To be translated ======
 translate S tagsDescript {Extra tags (eg: Annotator "Anand")}
 # ====== TODO To be translated ======
-translate S prevTags {Use prev tags}
+translate S prevTags {Use previous}
 
 # Standard error messages:
 translate S ErrNotOpen {Esta base de datos no está abierta.}

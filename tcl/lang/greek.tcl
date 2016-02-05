@@ -486,7 +486,7 @@ translate G altered {altered}
 # ====== TODO To be translated ======
 translate G tagsDescript {Extra tags (eg: Annotator "Anand")}
 # ====== TODO To be translated ======
-translate G prevTags {Use prev tags}
+translate G prevTags {Use previous}
 
 # Standard error messages:
 translate G ErrNotOpen {Η Βάση δεν είναι ανοικτή.}

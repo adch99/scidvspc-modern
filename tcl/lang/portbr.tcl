@@ -502,7 +502,7 @@ translate B altered {altered}
 # ====== TODO To be translated ======
 translate B tagsDescript {Extra tags (eg: Annotator "Anand")}
 # ====== TODO To be translated ======
-translate B prevTags {Use prev tags}
+translate B prevTags {Use previous}
 
 # Standard error messages:
 translate B ErrNotOpen {This is not an open database.} ;# ***

@@ -477,7 +477,7 @@ translate D altered {geändert}
 # ====== TODO To be translated ======
 translate D tagsDescript {Extra tags (eg: Annotator "Anand")}
 # ====== TODO To be translated ======
-translate D prevTags {Use prev tags}
+translate D prevTags {Use previous}
 
 # Standard error messages:
 translate D ErrNotOpen {Dies ist keine geöffnete Datenbank.}
