@@ -1151,7 +1151,7 @@ namespace eval fics {
 	  if {$::fics::sound} {
 	    ::utils::sound::PlayMove sound_end
 	  }
-	  if {! $::fics::no_results} {
+	  if {! $::fics::no_results && ($res != "*" || [sc_pos moveNumber] > 1)} {
 	    if {[string match "1/2*" $res]} {set res Draw}
 	    ::fics::killDialogs
 	    tk_messageBox -title "Game result" -icon info -type ok -message "$res"
