@@ -410,15 +410,11 @@ namespace eval fics {
       # ::fics::writechan "set gin $::fics::gamerequests" echo
     }
 
-    checkbutton $w.bottom.buttons.offers -text "$tr(FICSOffers) $tr(Graph)" -variable ::fics::graph(on) -command ::fics::showGraph -width 10 -state disabled
-    bind $w <Button-2> {
-      if {[string match .fics.bottom* %W]} {
-        .fics.bottom.buttons.offers invoke
-      }
-    }
-    grid $w.bottom.buttons.tells      -column 0 -row $row -sticky w
-    grid $w.bottom.buttons.shouts	-column 1 -row $row -sticky w
-    grid $w.bottom.buttons.offers       -column 2 -row $row -sticky w -padx 2 -pady 2
+    label $w.bottom.buttons.ping -textvar ::fics::ping -font font_Small
+
+    grid $w.bottom.buttons.tells  -column 0 -row $row
+    grid $w.bottom.buttons.shouts -column 1 -row $row
+    grid $w.bottom.buttons.ping   -column 2 -row $row
 
     incr row
     button $w.bottom.buttons.info  -textvar tr(FICSInfo) -command {
@@ -486,16 +482,16 @@ namespace eval fics {
     grid  $w.bottom.buttons.space -column 0 -row $row -columnspan 3 -sticky ew -pady 3
 
     incr row
+    button $w.bottom.buttons.offers  -text "$tr(FICSOffers) $tr(Graph)" -command {
+      set ::fics::graph(on) [expr {! $::fics::graph(on)}]
+      ::fics::showGraph
+    }
+    bind $w <Button-2> {if {[string match .fics.bottom* %W]} {.fics.bottom.buttons.offers invoke}}
     button $w.bottom.buttons.findopp -textvar tr(FICSFindOpponent) -command {::fics::findOpponent}
-    button $w.bottom.buttons.help    -textvar tr(Help) -command {helpWindow FICS}
     button $w.bottom.buttons.quit    -textvar tr(FICSQuit) -command {::fics::close}
-    grid $w.bottom.buttons.findopp -column 0 -row $row -sticky ew -padx 3 -pady 2
-    grid $w.bottom.buttons.help    -column 1 -row $row -sticky ew -padx 3 -pady 2
+    grid $w.bottom.buttons.offers  -column 0 -row $row -sticky ew -padx 3 -pady 2
+    grid $w.bottom.buttons.findopp -column 1 -row $row -sticky ew -padx 3 -pady 2
     grid $w.bottom.buttons.quit    -column 2 -row $row -sticky ew -padx 3 -pady 2
-
-    incr row
-    label $w.bottom.buttons.ping -textvar ::fics::ping -font font_Small
-    grid $w.bottom.buttons.ping -column 1 -row $row
 
     bind $w <Control-q> ::fics::close
     bind $w <Destroy>   ::fics::close
