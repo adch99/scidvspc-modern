@@ -3594,28 +3594,18 @@ proc updateAnalysis {{n 0} {reset 1}} {
 
   global analysis analysisWin windowsOS
 
-  if {$::comp(playing)} {
-    return
-  }
+  set analysis(side$n) [sc_pos side]
 
-  if {$analysis(pipe$n) == {}} {
+  if {$::comp(playing) ||
+      $analysis(pipe$n) == {} ||
+      !$analysis(seen$n) ||
+      !$analysis(analyzeMode$n) ||
+      $analysis(lockEngine$n) } {
     return
   }
-
-  # Return if no output has been seen from the analysis program yet
-  if {! $analysis(seen$n)} {
-    return
-  }
-
-  # No need to update if no analysis is running
-  if { !$analysis(analyzeMode$n) } {
-    return
-  }
-
-  # or if engine is locked
-  if { $analysis(lockEngine$n) } {
-    return
-  }
+  # analysis(seen$n)        - output has been seen from the analysis program yet
+  # analysis(analyzeMode$n) - analysis is running
+  # analysis(lockEngine$n) -  engine is locked
 
   set old_movelist $analysis(movelist$n)
   set movelist [sc_game moves coord]
@@ -3640,7 +3630,6 @@ proc updateAnalysis {{n 0} {reset 1}} {
   }
   # puts $movelist
   set analysis(movelist$n) $movelist
-  set analysis(side$n) [sc_pos side]
   set analysis(nonStdStart$n) $nonStdStart
 
   if {$n == $::annotate(Engine)} {
