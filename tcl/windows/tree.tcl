@@ -265,7 +265,7 @@ proc ::tree::Open {{baseNumber 0}} {
   button $w.buttons.stop -textvar ::tr(Stop) -font font_Small -command { sc_progressBar }
   button $w.buttons.close -textvar ::tr(Close) -font font_Small -command "destroy $w"
 
-  pack $w.buttons.best $w.buttons.training $w.buttons.short $w.buttons.refresh $w.buttons.adjust -side left -padx 3
+  pack $w.buttons.best $w.buttons.training $w.buttons.short $w.buttons.refresh $w.buttons.adjust -side left -padx 1
 
   pack $w.buttons.close $w.buttons.stop -side right -padx 3
   $w.buttons.stop configure -state disabled
