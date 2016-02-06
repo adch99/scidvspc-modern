@@ -247,7 +247,7 @@ proc ::tree::Open {{baseNumber 0}} {
   button $w.buttons.training -image tb_training -command "::tree::toggleTraining $baseNumber"
   ::utils::tooltip::Set $w.buttons.training [tr TreeOptTraining]
 
-  button $w.buttons.short -image tb_info -command "$w.menu.opt invoke 3" ; # TreeOptShort
+  button $w.buttons.short -image tb_info -command "$w.menu.opt invoke 4" ; # TreeOptShort
   ::utils::tooltip::Set $w.buttons.short [tr TreeOptShort]
 
   # add a button to start/stop tree refresh &&&
