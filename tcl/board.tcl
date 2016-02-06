@@ -694,9 +694,10 @@ LPb8QQEAOw==
 }
 
 image create photo b_list -data {
-  R0lGODdhGAAYAKEAANnZ2QAngf///wAAACwAAAAAGAAYAAACT4SPqcvtz4KctFZkc8a6SyyE
-  4kiKATgM5RqeRyCkgjfNIIu7BizjpA7gqWgS28vHAgqRI2VsSDTumCVnj2qF0qRB6g8DUSjD
-  CSVxQ06rEQUAOw==
+R0lGODlhHgAeAMIDAAAAAAAngdnZ2f///////////////////yH5BAEKAAQA
+LAAAAAAeAB4AAANmSLrc/jDKSau9OGsbuv8gKIUkOZZoNw5s675tsAIAbLNy
+FAz0kHq+1W2Yg+x6w1fxcaz9OkFd8rZ0NKeuauP63GkZO6xyVhNHjTzn88w0
+Z0eCuHxOl38Xgbqefld0TRuBgoOEhYYJADs=
 }
 
 ### Toolbar

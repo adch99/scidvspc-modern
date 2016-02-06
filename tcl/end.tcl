@@ -2178,6 +2178,7 @@ proc getTopLevel {{type {}}} {
 ### Hack to extract gif images out of Scid
 
 proc dumpImagesBase64 {dir} {
+  puts "Dumping images as base64 to $dir"
   package require base64
   file mkdir $dir
   set images [image names]
@@ -2198,6 +2199,7 @@ proc dumpImagesBase64 {dir} {
 }
 
 proc dumpImages {dir} {
+  puts "Dumping images to $dir"
   file mkdir $dir
   set images [image names]
   puts "dumpImagesGif: found images $images"
@@ -2215,20 +2217,22 @@ proc dumpImages {dir} {
       } else {
         set fname [file join $dir $i.png]
       }
-     $i write $fname -format png
+      if {[catch {
+        $i write $fname -format png
+      } message]} {
+        puts "$i write throws error '$message'"
+      }
     }
   }
 }
 
 # hmm... Control-Shift-F7 doesn't work for me ???
 bind .main <Control-Shift-F7> {
-    puts "Dumping images as base64 to /tmp/ScidImages"
-    dumpImagesBase64 /tmp/ScidImages
+    dumpImagesBase64 [file join $::env(HOME) ScidImages64]
 }
 
 bind .main <Control-Shift-F8> {
-    puts "Dumping images to ScidImages"
-    dumpImages ScidImages
+    dumpImages [file join $::env(HOME) ScidImages]
 }
 
 # Opening files by drag & drop on Scid icon on Mac
