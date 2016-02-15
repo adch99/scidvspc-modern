@@ -485,9 +485,9 @@ namespace eval fics {
     button $w.bottom.buttons.offers  -text "$tr(FICSOffers) $tr(Graph)" -command {
       set ::fics::graph(on) [expr {! $::fics::graph(on)}]
       ::fics::showGraph
-    }
+    } -state disabled
     bind $w <Button-2> {if {[string match .fics.bottom* %W]} {.fics.bottom.buttons.offers invoke}}
-    button $w.bottom.buttons.findopp -textvar tr(FICSFindOpponent) -command {::fics::findOpponent}
+    button $w.bottom.buttons.findopp -textvar tr(FICSFindOpponent) -command {::fics::findOpponent} -state disabled
     button $w.bottom.buttons.quit    -textvar tr(FICSQuit) -command {::fics::close}
     grid $w.bottom.buttons.offers  -column 0 -row $row -sticky ew -padx 3 -pady 2
     grid $w.bottom.buttons.findopp -column 1 -row $row -sticky ew -padx 3 -pady 2
@@ -1228,6 +1228,8 @@ namespace eval fics {
       .fics.bottom.buttons.offers  configure -state normal
       .fics.bottom.buttons.tells   configure -state normal
       .fics.bottom.buttons.shouts  configure -state normal
+      .fics.bottom.buttons.findopp configure -state normal
+      .fics.bottom.buttons.offers  configure -state normal
       .fics.command.send           configure -state normal
       .fics.command.clear          configure -state normal
       .fics.command.next           configure -state normal
