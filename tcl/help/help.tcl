@@ -2829,7 +2829,7 @@ with the format "stat01: time nodes ply mvleft mvtot mvname". The results can be
   </i></p>
 
   <p>After configuring the options and pressing OK, Autoplay
-  Mode is enabled and the engine starts its analysis.
+  Mode is enabled, tree updating is disabled, and the engine starts its analysis.
   A variation and/or score is
   automatically added for each position as the engine processes the game.
   Only positions from the current one until the end of the game
