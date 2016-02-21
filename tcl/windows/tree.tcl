@@ -521,7 +521,9 @@ proc ::tree::dorefresh { baseNumber } {
   global tree glstart glistSize
   set w .treeWin$baseNumber
 
-  if { ! $tree(autorefresh$baseNumber) || $::annotate(Engine) > -1} { return }
+  if { ! $tree(autorefresh$baseNumber) || $::annotate(Engine) > -1 || $::comp(playing)} {
+    return
+  }
 
   # busyCursor .
   sc_progressBar $w.progress bar 251 16

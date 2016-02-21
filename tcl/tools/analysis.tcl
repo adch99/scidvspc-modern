@@ -1961,7 +1961,7 @@ proc destroyAnalysisWin {n W} {
   } elseif {$annotate(Engine) == $n} {
     # Is annotation going ?
     set annotate(Button) 0
-    toggleAutoplay
+    cancelAutoplay
   }
 
   # Cancel scheduled commands
