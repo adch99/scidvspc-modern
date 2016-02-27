@@ -5,7 +5,8 @@
 # This also disables automatic menu posting
 # catch {tk::classic::restore menu}
 
-if {[tk windowingsystem] eq "x11"} {
+# Disabled
+if {0 && [tk windowingsystem] eq "x11"} {
   option add *Menu.useMotifHelp true widgetDefault
 }
 
