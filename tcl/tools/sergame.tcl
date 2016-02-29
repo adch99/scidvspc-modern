@@ -386,12 +386,12 @@ namespace eval sergame {
     pack $w.fclocks $w.fbuttons -side top -expand yes -fill both
 
     if {$::sergame::timeMode == "timebonus"} {
-      ::gameclock::new $w.fclocks 2 80 1
-      ::gameclock::new $w.fclocks 1 80 1
+      ::gameclock::new $w.fclocks 2 120 1
+      ::gameclock::new $w.fclocks 1 120 1
     } else {
       # dont call flag when playing seconds per move
-      ::gameclock::new $w.fclocks 2 80 0
-      ::gameclock::new $w.fclocks 1 80 0
+      ::gameclock::new $w.fclocks 2 120 0
+      ::gameclock::new $w.fclocks 1 120 0
     }
     # These are broken for flipped games. (Tacgame too)
     ::gameclock::setColor 1 white

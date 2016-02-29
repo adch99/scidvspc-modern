@@ -382,9 +382,9 @@ namespace eval fics {
 
     # Gameclocks are used, but never packed in fics now
     # black
-    ::gameclock::new $w.bottom.clocks 2 100 0 vertical
+    ::gameclock::new $w.bottom.clocks 2 120 0 digital
     # white
-    ::gameclock::new $w.bottom.clocks 1 100 0 vertical
+    ::gameclock::new $w.bottom.clocks 1 120 0 digital
 
     # can happen that fics is dead, but clocks still exist
     catch {

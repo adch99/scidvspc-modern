@@ -324,8 +324,8 @@ proc compOk {} {
     frame $w.clocks
     pack $w.clocks -side top -expand yes -fill x -padx 20
 
-    ::gameclock::new $w.clocks 1 80 1
-    ::gameclock::new $w.clocks 2 80 1
+    ::gameclock::new $w.clocks 1 120 1 horizontal digital
+    ::gameclock::new $w.clocks 2 120 1 horizontal digital
     ::gameclock::setColor 1 white
     ::gameclock::setColor 2 black
 

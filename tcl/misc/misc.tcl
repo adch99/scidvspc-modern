@@ -519,13 +519,9 @@ namespace eval gameclock {
       } else {
         set y $cy
       }
-      if {$sec > 0} {
-        # expired
-	set data(time$n) 00:00
-      } else {
-	set data(time$n) $m:$s
-      }
-      $data(id$n) create text $cx $y -text $data(time$n) -anchor center -fill $color -tag aig
+      set data(time$n) $m:$s
+
+      $data(id$n) create text $cx $y -text $data(time$n) -anchor center -fill $color -tag aig -font font_Regular
     }
   }
 

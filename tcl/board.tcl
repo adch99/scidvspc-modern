@@ -2349,7 +2349,8 @@ proc ::board::togglematerial {{w .main.board}} {
   } else {
     catch {grid remove $w.mat}
   }
-  ::board::ficslabels $w
+
+  # ::board::ficslabels $w
 }
 
 proc ::board::ficslabels {{w .main.board}} {

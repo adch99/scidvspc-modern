@@ -469,8 +469,8 @@ namespace eval tacgame {
     label $w.finformations.l3 -textvariable ::tacgame::scoreLabel -fg WhiteSmoke -bg SlateGray
     pack $w.finformations.l1 $w.finformations.l3 -padx 10 -pady 5 -side top -fill x
 
-    ::gameclock::new $w.fclocks 2 80
-    ::gameclock::new $w.fclocks 1 80
+    ::gameclock::new $w.fclocks 2 120
+    ::gameclock::new $w.fclocks 1 120
     ::gameclock::setColor 1 white
     ::gameclock::setColor 2 black
     ::gameclock::reset 1
