@@ -242,10 +242,10 @@ proc ::utils::sound::ChooseFolder {} {
   } else {
     set initialdir $::env(HOME)
   }
-  set newFolder [tk_chooseDirectory \
-      -initialdir $initialdir \
-      -parent .soundOptions \
-      -title "Scid: $::tr(SoundsFolder)"]
+  set newFolder [tk_chooseDirectory -initialdir $initialdir -parent .soundOptions -title "Scid: $::tr(SoundsFolder)"]
+  if {$newFolder == ""} {
+    return
+  }
   set ::utils::sound::soundFolder [file nativename $newFolder]
   ::utils::sound::soundFolderOK
 }

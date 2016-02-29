@@ -1938,6 +1938,14 @@ set font [font configure font_Small -family]
 font create font_SmallBold -family $font -size $fontsize -weight bold
 font create font_SmallItalic -family $font -size $fontsize -slant italic
 
+# Hidden-file dialog hack
+# https://sourceforge.net/p/pure-data/patches/208/
+catch {tk_getOpenFile -with-invalid-argument}
+namespace eval ::tk::dialog::file {
+  variable showHiddenBtn 1
+  variable showHiddenVar 0
+}
+
 ## ttk init
 # Gregor's code to give readonly combos/enrties/spinboxes a non-grey background
 set fbg {}
