@@ -5326,8 +5326,8 @@ set helpText(TacticsTrainer) {<h1>Mate in ..N.. Puzzles</h1>
 set helpTitle(FindBestMove) "Find best move"
 set helpText(FindBestMove) {<h1>Find Best Move</h1>
   <p>
-  The Find Best Move training excercise uses <b>specially prepared databases</b>
-  to train the player to find tactical shots (non-obvious and unique winning moves).
+  The Find Best Move feature uses specially prepared databases
+  to help you train to find tactical shots (non-obvious and unique winning moves).
   </p>
   <p>
   Scid will initially jump to the first relevant position in the current database,
@@ -5337,18 +5337,24 @@ set helpText(FindBestMove) {<h1>Find Best Move</h1>
   Re-selecting the Play--<gt>Training--<gt>FindBestMove menu, or double clicking to the left of the board, 
   will search for the next position/game.
   </p>
-  <h2>Preparing Databases</h2>
+  <h2>Compatible Databases</h2>
   <p>
-  Databases are prepared by <a Analysis Annotating>annotating games</a> with a UCI engine and enabling
-  "Mark tactical exercises". This marks relevant moves a special comment (beginning with <b>****D</b> and commented
-  in the analysis.tcl source file),  and tags the game with the tactics <b>T</b> flag.</p>
-  <p><i>For a move to be regarded as a Tactical Shot, it must be a unique winning move, that is not obvious - ie found at depth <lt>= 3.</i></p>
-  </p>
-  <p>
-  Mainline Scid mentions the existence of an already prepared base of 1500 games, but
-  the author can't find this base.
-  </p>
-  <p><footer>Updated: Scid vs. PC 4.9 December 2012</footer></p>
+  All relevant games must be flagged with the tactics <b>T</b> flag.
+  Thereafter, there are two ways a game can be marked.
+ </p><p>
+  Traditionally, databases are prepared by <a Analysis Annotating>annotating games</a> with a UCI engine and enabling
+  "Mark tactical exercises".
+<br><br>
+  <i>This marks relevant moves a special comment (beginning with <b>****D-<gt></b> and commented in the analysis.tcl source file).
+<br>
+  For a move to be regarded as a Tactical Shot, it must be a unique winning move, that is not obvious - ie found at depth <lt>= 3.</i>
+ </p><p>
+  But ScidvsPC will now also assume the game is a tactical excerise, if it has a non-standard start.
+  A good example is the <url http://gorgonian.weebly.com/uploads/1/7/2/2/17221082/auerswald.pgn>Auerswald Collection</url>
+<br>
+(Note - games must first be copied to si4 database and flagged with the tactics <b>T</b> flag from the maintenance window).</p>
+
+  <p><footer>Updated: Scid vs. PC 4.17 Feb 2016</footer></p>
 }
 
 # FICS Login

@@ -55,27 +55,19 @@ namespace eval tactics {
       return
     }
 
-    # Try to find in current game, from current pos (exit vars first)
-    catch { ;# if gamenumber == 0, sc_game flag T returns no boolean
-      if {[sc_game flag T [sc_game number]]} {
-	while {[sc_var level] != 0} { sc_var exit }
-	if {[llength [gotoNextTacticMarker] ] != 0} {
+    busyCursor .
+    update
+    for {set g [expr [sc_game number] +1] } { $g <= [sc_base numGames]} { incr g} {
+      sc_game load $g
+      if {[sc_game flag T $g]} {
+	# Look for non-std start, or tactical markers ****D->
+	if {[sc_game startBoard] || [llength [gotoNextTacticMarker] ] != 0} {
 	  set found 1
+	  break
 	}
       }
     }
-
-    if {!$found} {
-      for {set g [expr [sc_game number] +1] } { $g <= [sc_base numGames]} { incr g} {
-        sc_game load $g
-        if {![sc_game flag T $g]} { continue }
-        # go through all moves and look for tactical markers ****
-        if {[llength [gotoNextTacticMarker] ] != 0} {
-          set found 1
-          break
-        }
-      }
-    }
+    unbusyCursor .
 
     if { ! $found } {
       tk_messageBox -type ok -icon info -title {Find Best Move} -message "No (more) relevant games found."      
@@ -88,23 +80,15 @@ namespace eval tactics {
     updateTitle
   }
 
-  ################################################################################
-  # returns a list with depth score prevscore
-  # or an empty list if marker not found
-
   proc gotoNextTacticMarker {} {
     while {![sc_pos isAt end]} {
-      sc_move forward
       set cmt [sc_pos getComment]
-
-      ### Only matches ****D at start of line, but annotation feature now puts scores at start of line
-      # set res [scan $cmt "\*\*\*\*D%d %f->%f" dif prevscore score ]
-      # if {$res == 3} { return [list $dif $score $prevscore] }
 
       if {[string match {*\*\*\*\*D*->*} $cmt]} {
         # anything non-null
         return $cmt
       }
+      sc_move forward
     }
     return {}
   }
