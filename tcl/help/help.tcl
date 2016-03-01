@@ -3386,19 +3386,24 @@ players.
   </p>
 
 <h3><name Photos>Player Photos</name></h3>
-<p>To enable player photos, download "FIDE.spf" from the 
-<url http://scid.sourceforge.net/download.html>Scid download page</url>,
-and install it into Scid vs. PC's user directory.
+<p>To enable player photos, place Scid Photo Files (such as "FIDE.spf" from 
+<url http://scid.sourceforge.net/download.html>Scid download page</url>),
+into Scid vs. PC's user directory.
 On Linux and Macs this is "$HOME/.scidvspc", or "Scid vs PC/bin" on Windows.
 The <green><run raiseSplashWindow>Help--<gt>Startup Window</run></green> will help you find it's location, and
-will also indicate if the photo file has been loaded correctly.
+will also indicate if the photo files have been loaded correctly.
+</p>
+<p>Custom gifs can be placed into a "photos" directory beneath the user dir.
+They should preferably be 100x100, with the file name being the same as the player it portrays.
+Eg - a photo for Magnus should be placed in 'photos/Carlsen, Magnus.gif'.
+These photos will override any found in the .spf files.
 </p>
 <p>Once installed, available player photos are shown in the <a MainWindow GameInfo>game information</a> widget.
 Clicking on the photos makes them smaller. To disable them, deselect <green>Options--<gt>Game Information--<gt>Show Photos</green>.
 
 </p>
 
-  <p><footer>Updated: Scid vs. PC 4.15 June 2015</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.17 March 2016</footer></p>
 }
 
 set helpTitle(Graphs) "Graph windows"

@@ -135,7 +135,11 @@ proc playerInfo {{player ""} {raise 0}} {
 
   set player [trimEngineName $player]
   if {[info exists ::photo($player)]} {
-    image create photo photoPInfo -data $::photo($player)
+    if {[string match *.gif $::photo($player)]} {
+        image create photo photoPInfo -file [file join $::scidPhotosDir $::photo($player)]
+    } else {
+        image create photo photoPInfo -data $::photo($player)
+    }
     if {0} {
       label $w.photo 
       $w.photo configure -image photoPInfo -anchor ne

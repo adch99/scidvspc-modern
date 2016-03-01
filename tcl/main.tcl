@@ -969,9 +969,11 @@ proc readPhotoFile {fname} {
   catch {source $fname}
   set newcount [expr {[array size ::photo] - $oldcount}]
   if {$newcount > 0} {
-    ::splash::add "  Found $newcount photos in [file tail $fname]"
+    ::splash::add "    Found $newcount photos in [file tail $fname]"
   }
 }
+
+# called by FIDE.spf
 
 proc photo {player data} {
   #convert names tolower case and strip the first two blanks.
@@ -985,8 +987,10 @@ proc photo {player data} {
 
 array set photo {}
 
+### Read all Scid photo files (*.spf) in the data/user/config directories
+
 ::splash::add "Searching for player photos."
-# Read all Scid photo (*.spf) files in the Scid data/user/config directories:
+
 foreach photofile [glob -nocomplain -directory $scidDataDir "*.spf"] {
   readPhotoFile $photofile
 }
@@ -999,6 +1003,41 @@ foreach photofile [glob -nocomplain -directory $scidConfigDir "*.spf"] {
 foreach photofile [glob -nocomplain -directory [file join $scidShareDir "photos"] "*.spf"] {
   readPhotoFile $photofile
 }
+
+### Custom photos
+
+if {[file isdirectory $scidPhotosDir]} {
+  ::splash::add "Searching for gifs in $scidPhotosDir"
+  set pwd [pwd]
+  cd $scidPhotosDir
+  set count 0
+  foreach i [glob -nocomplain *.gif] {
+    # Filename must be the playername (eg "Abarca Aguirre, Manuel.gif")
+    # Instead of base64 data, we give FILENAME ($i)
+    set p [file rootname $i]
+    # and test image data now by creating tmpimage
+    if {[catch {
+      #convert names tolower case and strip the first two blanks.
+      set p [string tolower $p]
+      set strindex [string first " " $p]
+      set p [string replace $p $strindex $strindex]
+      set strindex [string first " " $p]
+      set p [string replace $p $strindex $strindex]
+      set ::photo($p) $i
+    }] || [catch {image create photo tmpimage -file $i} result]} {
+      unset ::photo($p)
+      ::splash::add "   Error processing photo $i: $result" error
+    } else {
+      incr count
+      # ::splash::add "   Ok processing photo $i" 
+    }
+  }
+  ::splash::add "    $count photos successfully loaded."
+  cd $pwd
+} else {
+  # ::splash::add "User Photos: no such directory $scidPhotosDir"
+}
+
 
 # Try to change the engine name: ignore version number, try to ignore blanks
 proc trimEngineName { engine } {
@@ -1047,7 +1086,11 @@ proc updatePlayerPhotos {{force ""}} {
   catch { set white [trimEngineName $white] }
   catch { set black [trimEngineName $black] }
   if {[info exists ::photo($black)]} {
-    image create photo photoB -data $::photo($black)
+    if {[string match *.gif $::photo($black)]} {
+        image create photo photoB -file [file join $::scidPhotosDir $::photo($black)]
+    } else {
+        image create photo photoB -data $::photo($black)
+    }
     image create photo photoB2 
     photoB2 copy photoB -subsample 2 2
     # force to update white, black size could be changed
@@ -1056,7 +1099,11 @@ proc updatePlayerPhotos {{force ""}} {
     image create photo photoB2 -data {}
   }
   if {[info exists ::photo($white)]} {
-    image create photo photoW -data $::photo($white)
+    if {[string match *.gif $::photo($white)]} {
+	image create photo photoW -file [file join $::scidPhotosDir $::photo($white)]
+    } else {
+	image create photo photoW -data $::photo($white)
+    }
     image create photo photoW2 
     photoW2 copy photoW -subsample 2 2
   } else {

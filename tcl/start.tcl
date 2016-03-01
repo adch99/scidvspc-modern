@@ -297,6 +297,7 @@ set scidConfigDir [file nativename [file join $scidUserDir "config"]]
 set scidDataDir [file nativename [file join $scidUserDir "data"]]
 set scidTexturesDir [file nativename [file join $scidUserDir "textures"]]
 set scidPiecesDir [file nativename [file join $scidUserDir "pieces"]]
+set scidPhotosDir [file nativename [file join $scidUserDir "photos"]]
 
 # boardSizes: sizes after 80 are copied rom smaller ones
 set boardSizes [list 25 30 35 40 45 50 55 60 65 70 75 80 90 100 110 120 130 140 150 160]
