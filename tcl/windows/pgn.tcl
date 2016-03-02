@@ -569,6 +569,7 @@ namespace eval pgn {
         } else {
 	  ::htext::display .pgnWin.text [PrepareForDisplay $pgnStr]
         }
+	.pgnWin.text configure -state normal
       } else {
         .pgnWin.text insert 1.0 $pgnStr
       }

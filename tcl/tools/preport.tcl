@@ -293,7 +293,6 @@ proc ::preport::makeReportWin {args} {
 
   regsub -all "\n" $report "<br>" report
   ::htext::display $w.text $report
-  $w.text configure -state disabled
   unbusyCursor .
   ::windows::gamelist::Refresh
   ::windows::stats::Refresh

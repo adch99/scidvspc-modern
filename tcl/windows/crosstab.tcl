@@ -259,8 +259,11 @@ proc ::crosstab::Open {{game {}}} {
   text $text -wrap none -font font_Fixed -setgrid 1 -cursor top_left_arrow \
      -yscroll "$w.f.ybar set" -xscroll "$w.f.xbar set"
   ::htext::init $text
-  $text tag configure bgGray -background {}
+
+  ### Unused (see below) as with new bg color options, hard to get nice color 
   # Crosstable will have striped appearance if {} is replaced by another colour
+  # $text tag configure bgGray -background {}
+
   scrollbar $w.f.ybar -command "$text yview"
   scrollbar $w.f.xbar -orient horizontal -command "$text xview"
   grid $text -row 0 -column 0 -sticky nesw
@@ -392,11 +395,15 @@ proc ::crosstab::Refresh {{game {}}} {
   } else {
     ::htext::display $w.f.text $result
   }
+
+if {0} {
   # Shade every second line to help readability:
+  $w.f.text configure -state normal
   set lastLineNum [expr {int([$w.f.text index end])}]
   for {set i 2} {$i <= $lastLineNum} {incr i 2} {
     $w.f.text tag add bgGray $i.0 "$i.0 lineend +1c"
   }
+}
   unbusyCursor .
   # catch {grab release $w.b.stop}
   # $w.b.stop configure -state disabled

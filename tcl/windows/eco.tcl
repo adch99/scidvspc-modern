@@ -189,7 +189,6 @@ proc ::windows::eco::Refresh {{code "x"}} {
   set header "<center>$section<br>"
   append header "<b>[lindex $stats 0] $::tr(games)</b>: +[lindex $stats 1] =[lindex $stats 2] -[lindex $stats 3]  (<b>[lindex $stats 5]%</b>)</center>\n\n"
   ::htext::display $text.text "$header[sc_eco summary $code 1]"
-  $text.text configure -state disabled
   $w.title configure -state normal
   $w.title delete 1.0 end
 

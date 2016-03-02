@@ -140,6 +140,7 @@ proc playerInfo {{player ""} {raise 0}} {
     } else {
         image create photo photoPInfo -data $::photo($player)
     }
+    $w.text configure -state normal
     if {0} {
       label $w.photo 
       $w.photo configure -image photoPInfo -anchor ne
@@ -151,11 +152,10 @@ proc playerInfo {{player ""} {raise 0}} {
 	$w.text image create 2.0 -image photoPInfo -align top -padx 3 -pady 5
       } ; # i cant get figging image to be below the text *&^%&!
     }
+    $w.text configure -state disabled
   } else {
     # place forget $w.photo
   }
-
-  $w.text configure -state disabled
 
   ::windows::gamelist::Refresh
   ::maint::Refresh
