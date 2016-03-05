@@ -267,7 +267,19 @@ menuText D CCEditCopy "Partieliste in Ablage" 0 {Kopiert die Parieliste als CSV 
 menuText D Options "Optionen" 0
 menuText D OptionsBoard "Schachbrett" 6 {Schachbrettoptionen}
 menuText D OptionsColour "Hintergrundfarbe" 0 {Default text widget color}
+# ====== TODO To be translated ======
+menuText D OptionsBackColour "Background" 0 {Default text widget color}
 menuText D OptionsEnableColour "Einschalten" 0 {}
+# ====== TODO To be translated ======
+menuText D OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
+# ====== TODO To be translated ======
+menuText D OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
+# ====== TODO To be translated ======
+menuText D OptionsRowColour "Rows" 0 {Default tree/book row color}
+# ====== TODO To be translated ======
+menuText D OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
+# ====== TODO To be translated ======
+menuText D OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 menuText D OptionsNames "Meine Spielernamen..." 0 {Editiere meine Spielernamen}
 menuText D OptionsExport "Export" 1 {Textausgabeoptionen ändern}
 menuText D OptionsFonts "Schriftarten" 3 {Schriftart wechseln}
@@ -837,6 +849,8 @@ menuText D CrosstabOptTitles "Titel" 0
 menuText D CrosstabOptBreaks "Stichkampfpunkte" 10
 menuText D CrosstabOptDeleted "Inklusive gelöschte Partien" 10
 menuText D CrosstabOptColors "Farben (nur Schweizer System)" 0
+# ====== TODO To be translated ======
+menuText D CrosstabOptColorRows "Color Rows" 0
 menuText D CrosstabOptColumnNumbers "Numerierte Spalten (Nur jeder-gegen-jeden-Tabelle)" 2
 menuText D CrosstabOptGroup "Punktgruppen" 5
 menuText D CrosstabSort "Sortieren" 0

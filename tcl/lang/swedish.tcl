@@ -245,7 +245,19 @@ menuText W Options "Alternativ" 2
 menuText W OptionsBoard "Brädet" 0 {Ändra brädets utseende}
 menuText W OptionsColour "Bakgrundsfärg" 0 {Standardtextfärg}
 # ====== TODO To be translated ======
+menuText W OptionsBackColour "Background" 0 {Default text widget color}
+# ====== TODO To be translated ======
 menuText W OptionsEnableColour "Enable" 0 {}
+# ====== TODO To be translated ======
+menuText W OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
+# ====== TODO To be translated ======
+menuText W OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
+# ====== TODO To be translated ======
+menuText W OptionsRowColour "Rows" 0 {Default tree/book row color}
+# ====== TODO To be translated ======
+menuText W OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
+# ====== TODO To be translated ======
+menuText W OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 menuText W OptionsNames "Spelarnamn..." 0 {Redigera spelares namn}
 menuText W OptionsExport "Export" 0 {Ändra exportalternativ}
 menuText W OptionsFonts "Typsnitt" 0 {Ändra typsnitt}
@@ -824,6 +836,8 @@ menuText W CrosstabOptTitles "Titlar" 0
 menuText W CrosstabOptBreaks "Tie-break poäng" 4
 menuText W CrosstabOptDeleted "Inkludera raderade partier" 8
 menuText W CrosstabOptColors "Färg (endast Schweizer)" 0
+# ====== TODO To be translated ======
+menuText W CrosstabOptColorRows "Color Rows" 0
 menuText W CrosstabOptColumnNumbers "Numrerade kolumner (Endast alla-mot-alla)" 2
 menuText W CrosstabOptGroup "Gruppresultat" 0
 menuText W CrosstabSort "Sortera" 0

@@ -270,7 +270,19 @@ menuText H Options "Beállítások" 0
 menuText H OptionsBoard "Sakktábla" 0 {Sakktábla megjelenésének megváltoztatása}
 menuText H OptionsColour "Background Colour" 0 {Default text widget color}
 # ====== TODO To be translated ======
+menuText H OptionsBackColour "Background" 0 {Default text widget color}
+# ====== TODO To be translated ======
 menuText H OptionsEnableColour "Enable" 0 {}
+# ====== TODO To be translated ======
+menuText H OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
+# ====== TODO To be translated ======
+menuText H OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
+# ====== TODO To be translated ======
+menuText H OptionsRowColour "Rows" 0 {Default tree/book row color}
+# ====== TODO To be translated ======
+menuText H OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
+# ====== TODO To be translated ======
+menuText H OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 menuText H OptionsNames "Játékosnevek..." 0 {Játékosnevek átszerkesztése}
 menuText H OptionsExport "Exportálás" 1 {Exportálási beállítások változtatása}
 menuText H OptionsFonts "Karakterkészlet" 0 {Karakterkészlet változtatása}
@@ -898,6 +910,8 @@ menuText H CrosstabOptTitles "Címek" 0
 menuText H CrosstabOptBreaks "Pontszám holtverseny eldöntéséhez" 0
 menuText H CrosstabOptDeleted "Törölt játszmákkal együtt" 0
 menuText H CrosstabOptColors "Színek (csak svájci rendszer esetén)" 2
+# ====== TODO To be translated ======
+menuText H CrosstabOptColorRows "Color Rows" 0
 menuText H CrosstabOptColumnNumbers "Számozott oszlopok (csak körmérkõzéshez)" 2
 menuText H CrosstabOptGroup "Pontcsoportok" 1
 menuText H CrosstabSort "Rendezés" 0

@@ -211,7 +211,7 @@ proc ::tree::Open {{baseNumber 0}} {
   $w.f.tl tag configure whitebg 
   $w.f.tl tag configure bluefg -foreground blue
   $w.f.tl tag configure movefg -foreground purple2
-  $w.f.tl tag configure nextmove -background lightsteelblue1
+  $w.f.tl tag configure nextmove -background $::rowcolor
   #   $w.f.tl tag configure nextmove -foreground seagreen3
 
   canvas $w.progress -width 250 -height 15  -relief solid -border 1

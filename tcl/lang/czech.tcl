@@ -265,7 +265,19 @@ menuText C Options "Volby" 0
 menuText C OptionsBoard "©achovnice" 1 {Volby zobrazení ¹achovnice}
 menuText C OptionsColour "Background Colour" 0 {Default text widget color}
 # ====== TODO To be translated ======
+menuText C OptionsBackColour "Background" 0 {Default text widget color}
+# ====== TODO To be translated ======
 menuText C OptionsEnableColour "Enable" 0 {}
+# ====== TODO To be translated ======
+menuText C OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
+# ====== TODO To be translated ======
+menuText C OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
+# ====== TODO To be translated ======
+menuText C OptionsRowColour "Rows" 0 {Default tree/book row color}
+# ====== TODO To be translated ======
+menuText C OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
+# ====== TODO To be translated ======
+menuText C OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 menuText C OptionsNames "Jména mých hráèù..." 0 {Editovat jména mých hráèù}
 menuText C OptionsExport "Volby exportu" 7 {Zmìnit volby pro textový export}
 menuText C OptionsFonts "Fonty" 2 {Zmìnit fonty}
@@ -891,6 +903,8 @@ menuText C CrosstabOptTitles "Titul" 0
 menuText C CrosstabOptBreaks "Výsledky tie-breaku" 10
 menuText C CrosstabOptDeleted "Vèetnì vymazaných partií" 9
 menuText C CrosstabOptColors "Barvy (jen pro ¹výcarský systém)" 0
+# ====== TODO To be translated ======
+menuText C CrosstabOptColorRows "Color Rows" 0
 menuText C CrosstabOptColumnNumbers "Èíslované sloupce (jen v tabulkách 'ka¾dý s ka¾dým')" 3
 menuText C CrosstabOptGroup "Skupiny podle skóre" 0
 menuText C CrosstabSort "Øadit" 2

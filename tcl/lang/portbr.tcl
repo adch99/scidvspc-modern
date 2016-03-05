@@ -268,7 +268,19 @@ menuText B Options "Opcoes" 0
 menuText B OptionsBoard "Chessboard" 0 {Chess board appearance options} ;# ***
 menuText B OptionsColour "Background Colour" 0 {Default text widget color}
 # ====== TODO To be translated ======
+menuText B OptionsBackColour "Background" 0 {Default text widget color}
+# ====== TODO To be translated ======
 menuText B OptionsEnableColour "Enable" 0 {}
+# ====== TODO To be translated ======
+menuText B OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
+# ====== TODO To be translated ======
+menuText B OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
+# ====== TODO To be translated ======
+menuText B OptionsRowColour "Rows" 0 {Default tree/book row color}
+# ====== TODO To be translated ======
+menuText B OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
+# ====== TODO To be translated ======
+menuText B OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 menuText B OptionsNames "My Player Names..." 0 {Edit my player names} ;# ***
 menuText B OptionsExport "Exportacao" 0 {Muda as opcoes de exportacao de texto}
 menuText B OptionsFonts "Fontes" 0 {Muda os fontes}
@@ -897,6 +909,8 @@ menuText B CrosstabOptTitles "Titulos" 0
 menuText B CrosstabOptBreaks "Scores de desempate" 0
 menuText B CrosstabOptDeleted "Include deleted games" 8 ;# ***
 menuText B CrosstabOptColors "Cores (apenas para tabela Swiss)" 0
+# ====== TODO To be translated ======
+menuText B CrosstabOptColorRows "Color Rows" 0
 menuText B CrosstabOptColumnNumbers "Numbered columns (All-play-all table only)" 2 ;# ***
 menuText B CrosstabOptGroup "Pontuacao do Grupo" 0
 menuText B CrosstabSort "Ordenar" 0

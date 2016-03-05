@@ -341,7 +341,7 @@ if {0} {
         if {[string length $y] < 3} {set y " $y"}
 	if {$x == $nextmove} {
 	  ### (why do i have to configure this here and not above ?)
-	  .bookWin.$z.booktext tag configure nextmove -background lightsteelblue1
+	  .bookWin.$z.booktext tag configure nextmove -background $::rowcolor
 	  .bookWin.$z.booktext insert end [format "%5s %3s\n" [::trans $x] $y] nextmove
 	} else {
 	  .bookWin.$z.booktext insert end [format "%5s %3s\n" [::trans $x] $y]
@@ -613,7 +613,7 @@ if {0} {
       lappend ::book::bookTuningMoves $x
       label $w.f.m$row -text [::trans $x] -justify right -anchor e -width 5 -font font_Fixed
       if {$x == $nextmove} {
-        $w.f.m$row configure -background lightsteelblue1
+        $w.f.m$row configure -background $::rowcolor
 	bind $w.f.m$row <ButtonPress-1> ::move::Forward
       } else {
 	bind $w.f.m$row <ButtonPress-1> "::book::makeBookMove $x"

@@ -263,7 +263,19 @@ menuText S CCEditCopy "Copiar lista de partidas a clipbase" 0 \
 menuText S Options "Opciones" 0
 menuText S OptionsBoard "Tablero" 0 {Opciones sobre el aspecto del tablero}
 menuText S OptionsColour "Color de fondo" 0 {Color de fondo por defecto}
+# ====== TODO To be translated ======
+menuText S OptionsBackColour "Background" 0 {Default text widget color}
 menuText S OptionsEnableColour "Activar" 0 {}
+# ====== TODO To be translated ======
+menuText S OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
+# ====== TODO To be translated ======
+menuText S OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
+# ====== TODO To be translated ======
+menuText S OptionsRowColour "Rows" 0 {Default tree/book row color}
+# ====== TODO To be translated ======
+menuText S OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
+# ====== TODO To be translated ======
+menuText S OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 menuText S OptionsNames "Mis Nombres de Jugador" 3 {Edita mis nombres de jugador}
 menuText S OptionsExport "Exportación" 0 {Cambia las opciones de exportación de texto}
 menuText S OptionsFonts "Fuentes" 0 {Cambia las fuentes}
@@ -826,6 +838,8 @@ menuText S CrosstabOptTitles "Títulos" 0
 menuText S CrosstabOptBreaks "Puntuaciones de desempate" 0
 menuText S CrosstabOptDeleted "Incluir partidas borradas" 17
 menuText S CrosstabOptColors "Colores (sólo en tabla de Suizos)" 0
+# ====== TODO To be translated ======
+menuText S CrosstabOptColorRows "Color Rows" 0
 menuText S CrosstabOptColumnNumbers "Columnas numeradas (sólo en tabla todos contra todos)" 11
 menuText S CrosstabOptGroup "Grupos de clasificación" 0
 menuText S CrosstabSort "Ordenar" 0

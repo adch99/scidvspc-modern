@@ -271,7 +271,19 @@ menuText G Options "Ρυθμίσεις" 2
 menuText G OptionsBoard "Σκακιέρα/Κομμάτια" 0 {Ρύθμιση Εμφάνισης Σκακιέρας}
 menuText G OptionsColour "Χρώμα Φόντου" 7 {Προπιλεγμένο Χρώμα Φόντου Κειμένου}
 # ====== TODO To be translated ======
+menuText G OptionsBackColour "Background" 0 {Default text widget color}
+# ====== TODO To be translated ======
 menuText G OptionsEnableColour "Enable" 0 {}
+# ====== TODO To be translated ======
+menuText G OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
+# ====== TODO To be translated ======
+menuText G OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
+# ====== TODO To be translated ======
+menuText G OptionsRowColour "Rows" 0 {Default tree/book row color}
+# ====== TODO To be translated ======
+menuText G OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
+# ====== TODO To be translated ======
+menuText G OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 menuText G OptionsNames "Τα Ονόματά μου" 3 {Επεξεργασία των Ονομάτων μου}
 menuText G OptionsExport "Εξαγωγές" 1 {Ρύθμιση Επιλογών Εξαγωγής}
 menuText G OptionsFonts "Γραμματοσειρές" 0 {Ρύθμιση Γραμματοσειρών}
@@ -841,6 +853,8 @@ menuText G CrosstabOptTitles "Τίτλοι" 0
 menuText G CrosstabOptBreaks "Σκορ Ισοπαλίας" 1
 menuText G CrosstabOptDeleted "Συμπερίληψη Διαγραμμένων" 9
 menuText G CrosstabOptColors "Χρώματα (Μόνο σε Σουηδικό)" 0
+# ====== TODO To be translated ======
+menuText G CrosstabOptColorRows "Color Rows" 0
 menuText G CrosstabOptColumnNumbers "Αριθμ.Στήλες (Μόνο σε Όλοι-εναντίον-Όλων)" 2
 menuText G CrosstabOptGroup "Σκορ Ομάδας" 7
 menuText G CrosstabSort "Ταξινόμηση με" 0

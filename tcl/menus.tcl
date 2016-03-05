@@ -876,7 +876,7 @@ $m add command -label OptionsSave -command {
     scidBooksDir scidBasesDir 
     ::book::lastBook1 ::book::lastBook2 ::book::lastTuning ::book::sortAlpha 
     ::book::showTwo ::book::oppMovesVisible ::gbrowser::size 
-    crosstab(type) crosstab(ages) crosstab(countries) crosstab(ratings) crosstab(titles) crosstab(breaks) 
+    crosstab(type) crosstab(ages) crosstab(countries) crosstab(ratings) crosstab(titles) crosstab(breaks) crosstab(colorrows)
     crosstab(deleted) crosstab(colors) crosstab(cnumbers) crosstab(groups) crosstab(sort) crosstab(tallies) crosstab(tiewin) crosstab(tiehead)
     ::utils::sound::soundFolder ::utils::sound::announceNew ::utils::sound::announceTock
     ::utils::sound::announceForward ::utils::sound::announceBack ::utils::sound::device
@@ -915,8 +915,7 @@ $m add command -label OptionsSave -command {
     puts $optionF ""
     puts $optionF "set analysisCommand [list $analysisCommand]"
     puts $optionF ""
-    foreach i {lite dark whitecolor blackcolor highcolor bestcolor bgcolor maincolor varcolor \
-          whiteborder blackborder borderwidth \
+    foreach i {lite dark highcolor bestcolor bgcolor maincolor varcolor rowcolor progcolor switchercolor borderwidth \
           pgnColor(Header) pgnColor(Main) pgnColor(Var) \
           pgnColor(Nag) pgnColor(Comment) pgnColor(Background) \
           pgnColor(Current) pgnColor(NextMove) } {
@@ -1193,8 +1192,111 @@ $m add checkbutton -label OptionsEnableColour -variable enableBackground -comman
     initBackgroundColour grey95
   }
 }
-$m add command -label OptionsColour -command SetBackgroundColour
-set helpMessage($m,1) OptionsColour
+$m add command -label OptionsBackColour -command SetBackgroundColour
+set helpMessage($m,1) OptionsBackColour
+$m add separator
+$m add command -label OptionsMainLineColour -command SetMainLineColour
+set helpMessage($m,1) OptionsMainLineColour
+$m add command -label OptionsVarLineColour -command SetVarLineColour
+set helpMessage($m,1) OptionsVarLineColour
+$m add command -label OptionsRowColour -command SetRowBackgroundColour
+set helpMessage($m,1) OptionsRowColour
+$m add command -label OptionsSwitcherColour -command SetRowSwitcherColour
+set helpMessage($m,1) OptionsSwitcherColour
+$m add command -label OptionsProgressColour -command SetProgressColour
+set helpMessage($m,1) OptionsProgressColour
+
+proc SetBackgroundColour {} {
+  global defaultBackground enableBackground
+  set temp [tk_chooseColor -initialcolor $defaultBackground -title [tr OptionsBackColour]]
+  if {$temp != {}} {
+    set defaultBackground $temp
+    set enableBackground 1
+    option add *Text*background $temp
+    option add *Listbox*background $temp
+    .main.gameInfo configure -bg $temp
+    initBackgroundColour $defaultBackground
+  }
+}
+
+proc SetMainLineColour {} {
+  global maincolor
+  set temp [tk_chooseColor -initialcolor $maincolor -title [tr OptionsMainLineColour]]
+  if {$temp != {}} {
+    set maincolor $temp
+    updateBoard
+    if {[::move::drawVarArrows]} { ::move::showVarArrows }
+  }
+}
+
+proc SetVarLineColour {} {
+  global varcolor
+  set temp [tk_chooseColor -initialcolor $varcolor -title [tr OptionsVarLineColour]]
+  if {$temp != {}} {
+    set varcolor $temp
+    updateBoard
+    if {[::move::drawVarArrows]} { ::move::showVarArrows }
+  }
+}
+
+proc SetRowBackgroundColour {} {
+  global rowcolor
+  set temp [tk_chooseColor -initialcolor $rowcolor -title [tr OptionsRowColour]]
+  if {$temp != {}} {
+    set rowcolor $temp
+    # todo
+    # ::tree::refresh
+    # if {[winfo exists .crosstabWin.f.text]} {.crosstabWin.f.text tag configure rowColor -background $::rowcolor}
+    if {[winfo exists .bookTuningWin]} {::book::refreshTuning}
+    if {[winfo exists .bookWin] } {::book::refresh}
+  }
+}
+
+proc SetRowSwitcherColour {} {
+  global switchercolor
+  set temp [tk_chooseColor -initialcolor $switchercolor -title [tr OptionsSwitcherColour]]
+  if {$temp != {}} {
+    set switchercolor $temp
+    ::windows::switcher::Refresh
+  }
+}
+
+proc SetProgressColour {} {
+  global progcolor
+  set temp [tk_chooseColor -initialcolor $progcolor -title [tr OptionsProgressColour]]
+  if {$temp != {}} {
+    set progcolor $temp
+  }
+}
+
+proc initBackgroundColour {colour} {
+    # border around gameinfo photos
+    .main.photoW configure -background $colour
+    .main.photoB configure -background $colour
+    ::ttk::style configure Treeview -background $colour
+    ::ttk::style configure Treeview -fieldbackground $colour
+    option add *Text*background $colour
+    option add *Listbox*background $colour
+    # Updating padding in tree would be nice, but now they have to close and re-open tree
+    # if {[winfo exists .baseWin.c]} { .baseWin.c configure -bg $temp }
+    recurseBackgroundColour . $colour
+    set ::defaultGraphBackgroud $colour
+    foreach i {.sgraph .rgraph .fgraph .afgraph} {
+      if {[winfo exists $i.c]} {
+        $i.c itemconfigure fill -fill $colour
+      }
+    }
+}
+
+proc recurseBackgroundColour {w colour} {
+     if {[winfo class $w] == "Text" || [winfo class $w] == "Listbox"} {
+         $w configure -background $colour
+     } else {
+       foreach c [winfo children $w] {
+	   recurseBackgroundColour $c $colour
+       }
+     }
+}
 
 ###############################
 
@@ -1519,7 +1621,7 @@ proc setLanguageMenus {{lang ""}} {
     configMenuText .menu.options [tr Options$tag $oldLang] Options$tag $lang
   }
 
-  foreach tag {Colour EnableColour} {
+  foreach tag {EnableColour BackColour MainLineColour VarLineColour RowColour SwitcherColour ProgressColour} {
     configMenuText .menu.options.colour [tr Options$tag $oldLang] Options$tag $lang
   }
 

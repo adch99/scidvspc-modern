@@ -25,49 +25,6 @@ set colorSchemes2 {
 }
 array set newColors {}
 
-proc SetBackgroundColour {} {
-  global defaultBackground enableBackground
-
-  set temp [tk_chooseColor -initialcolor $defaultBackground -title Scid]
-  if {$temp != {}} {
-    set defaultBackground $temp
-    set enableBackground 1
-    option add *Text*background $temp
-    option add *Listbox*background $temp
-    .main.gameInfo configure -bg $temp
-    initBackgroundColour $defaultBackground
-  }
-}
-
-proc initBackgroundColour {colour} {
-    # border around gameinfo photos
-    .main.photoW configure -background $colour
-    .main.photoB configure -background $colour
-    ::ttk::style configure Treeview -background $colour
-    ::ttk::style configure Treeview -fieldbackground $colour
-    option add *Text*background $colour
-    option add *Listbox*background $colour
-    # Updating padding in tree would be nice, but now they have to close and re-open tree
-    # if {[winfo exists .baseWin.c]} { .baseWin.c configure -bg $temp }
-    recurseBackgroundColour . $colour
-    set ::defaultGraphBackgroud $colour
-    foreach i {.sgraph .rgraph .fgraph .afgraph} {
-      if {[winfo exists $i.c]} {
-        $i.c itemconfigure fill -fill $colour
-      }
-    }
-}
-
-proc recurseBackgroundColour {w colour} {
-     if {[winfo class $w] == "Text" || [winfo class $w] == "Listbox"} {
-         $w configure -background $colour
-     } else {
-       foreach c [winfo children $w] {
-	   recurseBackgroundColour $c $colour
-       }
-     }
-}
-
 proc SetBoardTextures {} {
   global boardfile_dark boardfile_lite
   # handle cases of old configuration files
@@ -2193,7 +2150,6 @@ proc  ::board::lastMoveHighlight {w} {
 #   N.B. resize (and update) is also called when changing background tiles
 
 proc ::board::update {w {board ""} {animate 0} {resize 0}} {
-  global highcolor currentSq bestSq bestcolor bgcolor highlightLastMoveColor maincolor varcolor
 
   set oldboard $::board::_data($w)
   if {$board == {}} {

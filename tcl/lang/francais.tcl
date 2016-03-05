@@ -245,7 +245,19 @@ menuText F CCEditCopy "Copier parties dans Clipbase" 0 {Copy the games as CSV li
 menuText F Options "Options" 0
 menuText F OptionsBoard "Echiquier" 0 {Options d'aspect de l'échiquier}
 menuText F OptionsColour "Background Colour" 0 {Default text widget color}
+# ====== TODO To be translated ======
+menuText F OptionsBackColour "Background" 0 {Default text widget color}
 menuText F OptionsEnableColour "Activer" 0 {}
+# ====== TODO To be translated ======
+menuText F OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
+# ====== TODO To be translated ======
+menuText F OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
+# ====== TODO To be translated ======
+menuText F OptionsRowColour "Rows" 0 {Default tree/book row color}
+# ====== TODO To be translated ======
+menuText F OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
+# ====== TODO To be translated ======
+menuText F OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 menuText F OptionsNames "Mes noms de joueurs..." 0 {Editer mes noms de joueurs}
 menuText F OptionsExport "Exportation" 0 {Changer les options d'exportation}
 menuText F OptionsFonts "Polices" 0 {Changer les polices}
@@ -795,6 +807,8 @@ menuText F CrosstabOptTitles "Titres" 0
 menuText F CrosstabOptBreaks "Scores du départage" 4
 menuText F CrosstabOptDeleted "Inclure les parties effacées" 8
 menuText F CrosstabOptColors "Couleurs (système suisse uniquement)" 1
+# ====== TODO To be translated ======
+menuText F CrosstabOptColorRows "Color Rows" 0
 menuText F CrosstabOptColumnNumbers "Colonnes numérotées (Toutes rondes seulement)" 2
 menuText F CrosstabOptGroup "Scores du groupe" 0
 menuText F CrosstabSort "Trier" 0

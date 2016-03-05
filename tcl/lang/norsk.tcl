@@ -286,7 +286,19 @@ menuText O Options "Innstillinger" 0
 menuText O OptionsBoard "Chessboard" 0 {Chess board appearance options} ;# ***
 menuText O OptionsColour "Background Colour" 0 {Default text widget color}
 # ====== TODO To be translated ======
+menuText O OptionsBackColour "Background" 0 {Default text widget color}
+# ====== TODO To be translated ======
 menuText O OptionsEnableColour "Enable" 0 {}
+# ====== TODO To be translated ======
+menuText O OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
+# ====== TODO To be translated ======
+menuText O OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
+# ====== TODO To be translated ======
+menuText O OptionsRowColour "Rows" 0 {Default tree/book row color}
+# ====== TODO To be translated ======
+menuText O OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
+# ====== TODO To be translated ======
+menuText O OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 menuText O OptionsNames "My Player Names..." 0 {Edit my player names} ;# ***
 menuText O OptionsExport "Eksport" 0 {Endre innstillinger for eksport av tekst}
 menuText O OptionsFonts "Skrifttyper" 0 {Endre skrifttyper}
@@ -969,6 +981,8 @@ menuText O CrosstabOptTitles "Titler" 0
 menuText O CrosstabOptBreaks "Poengfordel" 0
 menuText O CrosstabOptDeleted "Include deleted games" 8 ;# ***
 menuText O CrosstabOptColors "Farger (kun sveitsisk)" 0
+# ====== TODO To be translated ======
+menuText O CrosstabOptColorRows "Color Rows" 0
 menuText O CrosstabOptColumnNumbers "Nummererte kolonner (kun alle-mot-alle-tabeller)" 0
 menuText O CrosstabOptGroup "Gruppepoeng" 0
 menuText O CrosstabSort "Sorter" 0

@@ -247,7 +247,19 @@ menuText P Options "Opcje" 0
 menuText P OptionsBoard "Szachownica" 0 {Konfiguracja wyglądu szachownicy}
 menuText P OptionsColour "Kolor tła" 0 {Domyślny kolor tła}
 # ====== TODO To be translated ======
+menuText P OptionsBackColour "Background" 0 {Default text widget color}
+# ====== TODO To be translated ======
 menuText P OptionsEnableColour "Enable" 0 {}
+# ====== TODO To be translated ======
+menuText P OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
+# ====== TODO To be translated ======
+menuText P OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
+# ====== TODO To be translated ======
+menuText P OptionsRowColour "Rows" 0 {Default tree/book row color}
+# ====== TODO To be translated ======
+menuText P OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
+# ====== TODO To be translated ======
+menuText P OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 menuText P OptionsNames "Moje nazwiska" 0 {Modyfikuj listę moich graczy}
 menuText P OptionsExport "Eksport" 0 {Zmień opcje eksportu tekstu}
 menuText P OptionsFonts "Czcionka" 0 {Zmień czcionkę}
@@ -807,6 +819,8 @@ menuText P CrosstabOptTitles "Tytuł" 0
 menuText P CrosstabOptBreaks "Punkty pomocnicze" 1
 menuText P CrosstabOptDeleted "Uwzględniaj usunięte partie" 0
 menuText P CrosstabOptColors "Kolory (tylko szwajcar)" 0
+# ====== TODO To be translated ======
+menuText P CrosstabOptColorRows "Color Rows" 0
 menuText P CrosstabOptColumnNumbers "Numerowane kolumny (tylko turniej kołowy)" 0
 menuText P CrosstabOptGroup "Grupuj po liczbie punktów" 0
 menuText P CrosstabSort "Sortowanie" 0

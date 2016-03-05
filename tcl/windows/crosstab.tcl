@@ -29,7 +29,7 @@ proc ::crosstab::ConfigMenus {{lang ""}} {
   ### Scid menus are the biggest steaming pile of shit S.A
   ### We have to skip over numbers for "separators"
 
-  foreach idx   {1 2 3 4 5 6 7 8 9 11 12 13 14 16 17} tag {Ages Nats Tallies Ratings Titles Breaks Deleted Colors ColumnNumbers TieHead TieWin ThreeWin Group ColorPlain ColorHyper} {
+  foreach idx   {1 2 3 4 5 6 7 8 9 10 12 13 14 15 17 18} tag {Ages Nats Tallies Ratings Titles Breaks Deleted Colors ColorRows ColumnNumbers TieHead TieWin ThreeWin Group ColorPlain ColorHyper} {
     configMenuText $m.opt $idx CrosstabOpt$tag $lang
   }
 
@@ -197,6 +197,9 @@ proc ::crosstab::Open {{game {}}} {
   $w.menu.opt add checkbutton -label CrosstabOptColors \
     -underline 0 -variable crosstab(colors) \
     -onvalue "+colors" -offvalue "-colors" -command ::crosstab::Refresh
+  $w.menu.opt add checkbutton -label CrosstabOptColorRows \
+    -underline 0 -variable crosstab(colorrows) \
+    -onvalue 1 -offvalue 0 -command ::crosstab::Refresh
   $w.menu.opt add checkbutton -label CrosstabOptColumnNumbers \
     -underline 0 -variable crosstab(cnumbers) \
     -onvalue "+numcolumns" -offvalue "-numcolumns" -command ::crosstab::Refresh
@@ -260,9 +263,8 @@ proc ::crosstab::Open {{game {}}} {
      -yscroll "$w.f.ybar set" -xscroll "$w.f.xbar set"
   ::htext::init $text
 
-  ### Unused (see below) as with new bg color options, hard to get nice color 
   # Crosstable will have striped appearance if {} is replaced by another colour
-  # $text tag configure bgGray -background {}
+  $text tag configure rowColor -background $::rowcolor
 
   scrollbar $w.f.ybar -command "$text yview"
   scrollbar $w.f.xbar -orient horizontal -command "$text xview"
@@ -396,12 +398,12 @@ proc ::crosstab::Refresh {{game {}}} {
     ::htext::display $w.f.text $result
   }
 
-if {0} {
+if {$crosstab(colorrows)} {
   # Shade every second line to help readability:
   $w.f.text configure -state normal
   set lastLineNum [expr {int([$w.f.text index end])}]
   for {set i 2} {$i <= $lastLineNum} {incr i 2} {
-    $w.f.text tag add bgGray $i.0 "$i.0 lineend +1c"
+    $w.f.text tag add rowColor $i.0 "$i.0 lineend +1c"
   }
 }
   unbusyCursor .

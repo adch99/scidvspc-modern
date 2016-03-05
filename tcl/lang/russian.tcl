@@ -246,7 +246,19 @@ menuText R CCEditCopy "Копировать список партий в буф�
 menuText R Options "Настройки" 0
 menuText R OptionsBoard "Шахматная доска" 0 {Настройки внешнего вида шахматной доски}
 menuText R OptionsColour "Цвет фона" 0 {Цвет текста по-умолчанию}
+# ====== TODO To be translated ======
+menuText R OptionsBackColour "Background" 0 {Default text widget color}
 menuText R OptionsEnableColour "Разрешить" 0 {}
+# ====== TODO To be translated ======
+menuText R OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
+# ====== TODO To be translated ======
+menuText R OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
+# ====== TODO To be translated ======
+menuText R OptionsRowColour "Rows" 0 {Default tree/book row color}
+# ====== TODO To be translated ======
+menuText R OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
+# ====== TODO To be translated ======
+menuText R OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 menuText R OptionsNames "Имена моего игрока" 3 {Редактировать имена моего игрока}
 menuText R OptionsExport "Экспорт" 0 {Изменить установки экспорта}
 menuText R OptionsFonts "Шрифты" 0 {Изменить шрифты}
@@ -794,6 +806,8 @@ menuText R CrosstabOptTitles "Титул" 0
 menuText R CrosstabOptBreaks "Счёт тай-брейков" 0
 menuText R CrosstabOptDeleted "Включить удалённые партии" 1
 menuText R CrosstabOptColors "Цвета (только для швейцарской системы)" 0
+# ====== TODO To be translated ======
+menuText R CrosstabOptColorRows "Color Rows" 0
 menuText R CrosstabOptColumnNumbers "Цифровые колонки (только для всех против всех)" 2
 menuText R CrosstabOptGroup "Групповой счёт" 0
 menuText R CrosstabSort "Сортировка" 0

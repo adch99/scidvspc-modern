@@ -254,7 +254,19 @@ menuText I Options "Opzioni" 0
 menuText I OptionsBoard "Scacchiera" 0 {Opzioni di visualizzazione della scacchiera}
 menuText I OptionsColour "Background Colour" 0 {Default text widget color}
 # ====== TODO To be translated ======
+menuText I OptionsBackColour "Background" 0 {Default text widget color}
+# ====== TODO To be translated ======
 menuText I OptionsEnableColour "Enable" 0 {}
+# ====== TODO To be translated ======
+menuText I OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
+# ====== TODO To be translated ======
+menuText I OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
+# ====== TODO To be translated ======
+menuText I OptionsRowColour "Rows" 0 {Default tree/book row color}
+# ====== TODO To be translated ======
+menuText I OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
+# ====== TODO To be translated ======
+menuText I OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 menuText I OptionsNames "I nomi dei miei giocatori ..." 0 {Edita i nomi dei miei giocatori}
 menuText I OptionsExport "Esportazione" 2 {Cambia le opzioni di importazione testo}
 menuText I OptionsFonts "Fonts" 0 {Cambia fonts}
@@ -895,6 +907,8 @@ menuText I CrosstabOptTitles "Titoli" 0
 menuText I CrosstabOptBreaks "Punteggi al Tie-break" 4
 menuText I CrosstabOptDeleted "Inserisce le partite cancellate" 8
 menuText I CrosstabOptColors "Colori (solo girone Svizzero)" 0
+# ====== TODO To be translated ======
+menuText I CrosstabOptColorRows "Color Rows" 0
 menuText I CrosstabOptColumnNumbers "A colonne (Solo la tabella dei tornei all'italiana)" 3
 menuText I CrosstabOptGroup "Punti del gruppo" 0
 menuText I CrosstabSort "Ordina" 0

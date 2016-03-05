@@ -144,13 +144,10 @@ menuText E WindowsPGN "PGN Window" 0 {Open/close the PGN (game notation) window}
 menuText E WindowsCross "Crosstable" 0 {Open/close the Tournament Crosstable}
 menuText E WindowsPList "Player Finder" 2 {Open/close the player finder}
 menuText E WindowsTmt "Tournaments" 2 {Open/close the tournament finder}
-menuText E WindowsSwitcher "Databases" 0 \
-  {Open/close the Database Switcher window}
-menuText E WindowsMaint "Maintenance Window" 0 \
-  {Open/close the Maintenance window}
+menuText E WindowsSwitcher "Databases" 0  {Open/close the Database Switcher window}
+menuText E WindowsMaint "Maintenance Window" 0 {Open/close the Maintenance window}
 menuText E WindowsECO "ECO Browser" 0 {Open/close the ECO Browser window}
-menuText E WindowsStats "Statistics Window" 0 \
-  {Open/close the filter statistics window}
+menuText E WindowsStats "Statistics Window" 0 {Open/close the filter statistics window}
 menuText E WindowsTree "Tree Window" 0 {Open/close the Tree window}
 menuText E WindowsTB "Tablebase Window" 1 {Open/close the Tablebase window}
 menuText E WindowsBook "Book Window" 0 {Open/close the Book window}
@@ -258,8 +255,14 @@ menuText E CCEditCopy "Copy Gamelist to Clipbase" 0 {Copy the games as CSV list 
 # Options menu:
 menuText E Options "Options" 0
 menuText E OptionsBoard "Chessboard/Pieces" 0 {Chess board appearance}
-menuText E OptionsColour "Background Colour" 0 {Default text widget color}
-menuText E OptionsEnableColour "Enable" 0 {}
+menuText E OptionsColour "Colours" 0 {Default text widget color}
+menuText E OptionsBackColour "Background" 0 {Default text widget color}
+menuText E OptionsEnableColour "Enable Background Colour" 0 {}
+menuText E OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
+menuText E OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
+menuText E OptionsRowColour "Rows" 0 {Default tree/book row color}
+menuText E OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
+menuText E OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 menuText E OptionsNames "My Player Names" 3 {Edit my player names}
 menuText E OptionsExport "Exporting" 0 {Change text export options}
 menuText E OptionsFonts "Fonts" 0 {Change fonts}
@@ -792,6 +795,7 @@ menuText E CrosstabOptTitles "Titles" 0
 menuText E CrosstabOptBreaks "Tie-Break Scores" 4
 menuText E CrosstabOptDeleted "Include Deleted Games" 8
 menuText E CrosstabOptColors "Colors (Swiss only)" 0
+menuText E CrosstabOptColorRows "Color Rows" 0
 menuText E CrosstabOptColumnNumbers "Numbered Columns (All-Play-All only)" 2
 menuText E CrosstabOptGroup "Group Scores" 0
 menuText E CrosstabSort "Sort by" 0

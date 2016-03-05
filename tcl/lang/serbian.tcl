@@ -285,7 +285,19 @@ menuText Y Options "Opcije" 0
 menuText Y OptionsBoard "Chessboard" 0 {Chess board appearance options} ;# ***
 menuText Y OptionsColour "Background Colour" 0 {Default text widget color}
 # ====== TODO To be translated ======
+menuText Y OptionsBackColour "Background" 0 {Default text widget color}
+# ====== TODO To be translated ======
 menuText Y OptionsEnableColour "Enable" 0 {}
+# ====== TODO To be translated ======
+menuText Y OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
+# ====== TODO To be translated ======
+menuText Y OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
+# ====== TODO To be translated ======
+menuText Y OptionsRowColour "Rows" 0 {Default tree/book row color}
+# ====== TODO To be translated ======
+menuText Y OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
+# ====== TODO To be translated ======
+menuText Y OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 menuText Y OptionsNames "My Player Names..." 0 {Edit my player names} ;# ***
 menuText Y OptionsExport "Izvoz" 0 {Promeni opcije tekstualnog izvoza}
 menuText Y OptionsFonts "Fontovi" 0 {Promeni fontove}
@@ -969,6 +981,8 @@ menuText Y CrosstabOptTitles "Titule" 0
 menuText Y CrosstabOptBreaks "Tie-break rezultati" 4
 menuText Y CrosstabOptDeleted "Include deleted games" 8 ;# ***
 menuText Y CrosstabOptColors "Boje (samo za ¹vajcarski sistem)" 0
+# ====== TODO To be translated ======
+menuText Y CrosstabOptColorRows "Color Rows" 0
 menuText Y CrosstabOptColumnNumbers "Numbered columns (All-play-all table only)" 2 ;# ***
 menuText Y CrosstabOptGroup "Grupi¹i rezultate" 0
 menuText Y CrosstabSort "Sortiraj" 0

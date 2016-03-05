@@ -255,7 +255,19 @@ menuText N Options "Opties" 0
 menuText N OptionsBoard "Bord" 0 {Opties  Uitzicht Schaakbord} ;
 menuText N OptionsColour "Achtergrondkleur" 0 {Standaard widget tekstkleur}
 # ====== TODO To be translated ======
+menuText N OptionsBackColour "Background" 0 {Default text widget color}
+# ====== TODO To be translated ======
 menuText N OptionsEnableColour "Enable" 0 {}
+# ====== TODO To be translated ======
+menuText N OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
+# ====== TODO To be translated ======
+menuText N OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
+# ====== TODO To be translated ======
+menuText N OptionsRowColour "Rows" 0 {Default tree/book row color}
+# ====== TODO To be translated ======
+menuText N OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
+# ====== TODO To be translated ======
+menuText N OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 menuText N OptionsNames "Mijn spelersnamen ..." 0 {Bewerk mijn spelersnamen} ;
 menuText N OptionsExport "Export" 1 {Wijzig tekst export opties}
 menuText N OptionsFonts "Lettertypes" 0 {Wijzig lettertype}
@@ -829,6 +841,8 @@ menuText N CrosstabOptTitles "Titels" 0
 menuText N CrosstabOptBreaks "Tie-break scores" 4
 menuText N CrosstabOptDeleted "Inclusief gewiste partijen" 8
 menuText N CrosstabOptColors "Kleuren (alleen bij Zwitsers)" 0
+# ====== TODO To be translated ======
+menuText N CrosstabOptColorRows "Color Rows" 0
 menuText N CrosstabOptColumnNumbers "Genummerde kolommen (Alleen bij gesloten tabel)" 2
 menuText N CrosstabOptGroup "Punten (groep)" 0
 menuText N CrosstabSort "Sorteren" 0

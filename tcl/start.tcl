@@ -396,29 +396,21 @@ set analysis(logName) 1
 set analysis(maxPly) 0
 set analysis(lowPriority) $::windowsOS
 
-# Colors: dark and lite are square colors
-#   whitecolor/blackcolor are piece colors (unused)
-#   highcolor is the color when something is selected.
-#   bestcolor is used to indicate a suggested move square.
-#   bgcolor   is the canvas bgcolor, and appears as the lines between the squares
-#   progcolor is progress bar colour
-#   maincolor is Main line arrow color
-#   varcolor  is Variation arrow colors
+# Colors
 
-set lite {#f3f3f3}
-set dark {#7389b6}
-set whitecolor  {#ffffff}
-set blackcolor  {#000000}
-set whiteborder {#000000}
-set blackborder {#ffffff}
-set highcolor   {#b0d0e0}
-set bestcolor   {#bebebe}
-set bgcolor     grey20
-set progcolor   rosybrown
-set buttoncolor {#b0c0d0}
+set lite        #f3f3f3
+set dark        #7389b6		;# dark and lite square colors
+set highcolor   #b0d0e0		;# color when something is selected
+set bestcolor   #bebebe		;# suggested move square
+set bgcolor     grey20		;# board (canvas) bg color, appears as the lines between the squares
+set progcolor   rosybrown	;# progress bar
+set buttoncolor #b0c0d0		;# (below)
+set maincolor   black		;# Main line arrow color
+set varcolor    grey80		;# Variation arrow colors
+set rowcolor    lightsteelblue1 ;# Tree/Crosstab/Book line/row bg color
+set switchercolor lightsteelblue3 ;# DB switcher
+
 set borderwidth 1
-set maincolor black
-set varcolor grey80
 
 # Set the radiobutton and checkbutton background color if desired.
 # I find the maroon color on Unix ugly!

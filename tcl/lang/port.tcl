@@ -241,7 +241,19 @@ menuText U CCEditCopy "Copiar Lista de Jogos para a base de cópia" 0 {Copia os j
 menuText U Options "Opções" 0
 menuText U OptionsBoard "Tabuleiro" 0 {Opções de aparência do tabuleiro} ;# ***
 menuText U OptionsColour "Cor do Fundo" 0 {Default text widget color}
+# ====== TODO To be translated ======
+menuText U OptionsBackColour "Background" 0 {Default text widget color}
 menuText U OptionsEnableColour "Aplicar" 0 {}
+# ====== TODO To be translated ======
+menuText U OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
+# ====== TODO To be translated ======
+menuText U OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
+# ====== TODO To be translated ======
+menuText U OptionsRowColour "Rows" 0 {Default tree/book row color}
+# ====== TODO To be translated ======
+menuText U OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
+# ====== TODO To be translated ======
+menuText U OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 menuText U OptionsNames "Meus Nomes de Jogador..." 0 {Editar os meus nomes de jogador} ;# ***
 menuText U OptionsExport "Exportação" 0 {Muda as Opções de exportacao de texto}
 menuText U OptionsFonts "Fontes" 0 {Muda os fontes}
@@ -788,6 +800,8 @@ menuText U CrosstabOptTitles "Títulos" 0
 menuText U CrosstabOptBreaks "Scores de desempate" 0
 menuText U CrosstabOptDeleted "Incluir jogos apagados" 8 ;# ***
 menuText U CrosstabOptColors "Cores (apenas para tabela Swiss)" 0
+# ====== TODO To be translated ======
+menuText U CrosstabOptColorRows "Color Rows" 0
 menuText U CrosstabOptColumnNumbers "Colunas numeradas (All-play-all table only)" 2 ;# ***
 menuText U CrosstabOptGroup "Pontuação do Grupo" 0
 menuText U CrosstabSort "Ordenar" 0
