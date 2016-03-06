@@ -2418,16 +2418,26 @@ namespace eval fics {
     after cancel ::fics::stayConnected
     set logged 0
 
-    if {$mode != "error"} {
-      catch {
-        writechan "exit"
+    if {$mode == "error"} {
+      if {$::fics::playing == -1 || $::fics::playing == 1} {
+        set t1 [::gameclock::getSec 1]
+        set t2 [::gameclock::getSec 2]
+	::commenteditor::appendComment "Disconnected\nWhiteclock [expr $t1 / 60]:[format {%02i} [expr $t1 % 60]] Blackclock [expr $t2 / 60]:[format {%02i} [expr $t2 % 60]]"
+        if {[sc_pos moveNumber] > 2} {
+          catch {::game::Save}
+          updateBoard -pgn
+        }
+        ::windows::gamelist::Refresh
       }
+    } else {
+	catch {writechan "exit"}
     }
     if {$fics::playing == 1 || $fics::playing == -1} {
       enableEngines
     }
     set ::fics::playing 0
     set ::fics::mainGame -1
+    set ::pause 0
     # Hmmm... why do we need to catch these ?
     catch { ::close $::fics::sockchan }
     catch { ::close $::fics::sockping }
