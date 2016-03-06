@@ -1185,16 +1185,7 @@ proc changeTheme {} {
 
 set m .menu.options.colour
 menu $m -tearoff -1
-$m add checkbutton -label OptionsEnableColour -variable enableBackground -command {
-  if {$::enableBackground} {
-    initBackgroundColour $defaultBackground
-  } else {
-    initBackgroundColour grey95
-  }
-}
-$m add command -label OptionsBackColour -command SetBackgroundColour
-set helpMessage($m,1) OptionsBackColour
-$m add separator
+
 $m add command -label OptionsMainLineColour -command SetMainLineColour
 set helpMessage($m,1) OptionsMainLineColour
 $m add command -label OptionsVarLineColour -command SetVarLineColour
@@ -1205,6 +1196,20 @@ $m add command -label OptionsSwitcherColour -command SetRowSwitcherColour
 set helpMessage($m,1) OptionsSwitcherColour
 $m add command -label OptionsProgressColour -command SetProgressColour
 set helpMessage($m,1) OptionsProgressColour
+$m add command -label OptionsCrossColour -command SetCrossColour
+set helpMessage($m,1) OptionsCrossColour
+
+$m add separator
+
+$m add checkbutton -label OptionsEnableColour -variable enableBackground -command {
+  if {$::enableBackground} {
+    initBackgroundColour $defaultBackground
+  } else {
+    initBackgroundColour grey95
+  }
+}
+$m add command -label OptionsBackColour -command SetBackgroundColour
+set helpMessage($m,1) OptionsBackColour
 
 proc SetBackgroundColour {} {
   global defaultBackground enableBackground
@@ -1266,6 +1271,15 @@ proc SetProgressColour {} {
   set temp [tk_chooseColor -initialcolor $progcolor -title [tr OptionsProgressColour]]
   if {$temp != {}} {
     set progcolor $temp
+  }
+}
+
+proc SetCrossColour {} {
+  global crosscolor
+  set temp [tk_chooseColor -initialcolor $crosscolor -title [tr OptionsCrossColour]]
+  if {$temp != {}} {
+    set crosscolor $temp
+    ::crosstab::Refresh
   }
 }
 
@@ -1621,7 +1635,7 @@ proc setLanguageMenus {{lang ""}} {
     configMenuText .menu.options [tr Options$tag $oldLang] Options$tag $lang
   }
 
-  foreach tag {EnableColour BackColour MainLineColour VarLineColour RowColour SwitcherColour ProgressColour} {
+  foreach tag {EnableColour BackColour MainLineColour VarLineColour RowColour SwitcherColour ProgressColour CrossColour} {
     configMenuText .menu.options.colour [tr Options$tag $oldLang] Options$tag $lang
   }
 

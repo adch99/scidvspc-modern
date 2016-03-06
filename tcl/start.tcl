@@ -409,6 +409,7 @@ set maincolor   black		;# Main line arrow color
 set varcolor    grey80		;# Variation arrow colors
 set rowcolor    lightsteelblue1 ;# Tree/Crosstab/Book line/row bg color
 set switchercolor lightsteelblue3 ;# DB switcher
+set crosscolor  grey80		;# Crosstable line colouring
 
 set borderwidth 1
 

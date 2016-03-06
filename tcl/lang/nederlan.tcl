@@ -268,6 +268,8 @@ menuText N OptionsRowColour "Rows" 0 {Default tree/book row color}
 menuText N OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 # ====== TODO To be translated ======
 menuText N OptionsProgressColour "Progressbar" 0 {Default progressbar color}
+# ====== TODO To be translated ======
+menuText N OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
 menuText N OptionsNames "Mijn spelersnamen ..." 0 {Bewerk mijn spelersnamen} ;
 menuText N OptionsExport "Export" 1 {Wijzig tekst export opties}
 menuText N OptionsFonts "Lettertypes" 0 {Wijzig lettertype}

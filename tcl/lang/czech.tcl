@@ -278,6 +278,8 @@ menuText C OptionsRowColour "Rows" 0 {Default tree/book row color}
 menuText C OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 # ====== TODO To be translated ======
 menuText C OptionsProgressColour "Progressbar" 0 {Default progressbar color}
+# ====== TODO To be translated ======
+menuText C OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
 menuText C OptionsNames "Jména mých hráèù..." 0 {Editovat jména mých hráèù}
 menuText C OptionsExport "Volby exportu" 7 {Zmìnit volby pro textový export}
 menuText C OptionsFonts "Fonty" 2 {Zmìnit fonty}

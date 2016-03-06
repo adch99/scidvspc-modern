@@ -284,6 +284,8 @@ menuText G OptionsRowColour "Rows" 0 {Default tree/book row color}
 menuText G OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 # ====== TODO To be translated ======
 menuText G OptionsProgressColour "Progressbar" 0 {Default progressbar color}
+# ====== TODO To be translated ======
+menuText G OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
 menuText G OptionsNames "Τα Ονόματά μου" 3 {Επεξεργασία των Ονομάτων μου}
 menuText G OptionsExport "Εξαγωγές" 1 {Ρύθμιση Επιλογών Εξαγωγής}
 menuText G OptionsFonts "Γραμματοσειρές" 0 {Ρύθμιση Γραμματοσειρών}

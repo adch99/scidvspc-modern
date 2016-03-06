@@ -299,6 +299,8 @@ menuText O OptionsRowColour "Rows" 0 {Default tree/book row color}
 menuText O OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 # ====== TODO To be translated ======
 menuText O OptionsProgressColour "Progressbar" 0 {Default progressbar color}
+# ====== TODO To be translated ======
+menuText O OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
 menuText O OptionsNames "My Player Names..." 0 {Edit my player names} ;# ***
 menuText O OptionsExport "Eksport" 0 {Endre innstillinger for eksport av tekst}
 menuText O OptionsFonts "Skrifttyper" 0 {Endre skrifttyper}

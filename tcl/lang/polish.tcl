@@ -260,6 +260,8 @@ menuText P OptionsRowColour "Rows" 0 {Default tree/book row color}
 menuText P OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 # ====== TODO To be translated ======
 menuText P OptionsProgressColour "Progressbar" 0 {Default progressbar color}
+# ====== TODO To be translated ======
+menuText P OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
 menuText P OptionsNames "Moje nazwiska" 0 {Modyfikuj listę moich graczy}
 menuText P OptionsExport "Eksport" 0 {Zmień opcje eksportu tekstu}
 menuText P OptionsFonts "Czcionka" 0 {Zmień czcionkę}

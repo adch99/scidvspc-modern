@@ -259,6 +259,8 @@ menuText R OptionsRowColour "Rows" 0 {Default tree/book row color}
 menuText R OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 # ====== TODO To be translated ======
 menuText R OptionsProgressColour "Progressbar" 0 {Default progressbar color}
+# ====== TODO To be translated ======
+menuText R OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
 menuText R OptionsNames "Имена моего игрока" 3 {Редактировать имена моего игрока}
 menuText R OptionsExport "Экспорт" 0 {Изменить установки экспорта}
 menuText R OptionsFonts "Шрифты" 0 {Изменить шрифты}

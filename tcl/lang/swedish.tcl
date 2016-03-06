@@ -258,6 +258,8 @@ menuText W OptionsRowColour "Rows" 0 {Default tree/book row color}
 menuText W OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 # ====== TODO To be translated ======
 menuText W OptionsProgressColour "Progressbar" 0 {Default progressbar color}
+# ====== TODO To be translated ======
+menuText W OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
 menuText W OptionsNames "Spelarnamn..." 0 {Redigera spelares namn}
 menuText W OptionsExport "Export" 0 {Ändra exportalternativ}
 menuText W OptionsFonts "Typsnitt" 0 {Ändra typsnitt}

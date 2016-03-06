@@ -280,6 +280,8 @@ menuText D OptionsRowColour "Rows" 0 {Default tree/book row color}
 menuText D OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 # ====== TODO To be translated ======
 menuText D OptionsProgressColour "Progressbar" 0 {Default progressbar color}
+# ====== TODO To be translated ======
+menuText D OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
 menuText D OptionsNames "Meine Spielernamen..." 0 {Editiere meine Spielernamen}
 menuText D OptionsExport "Export" 1 {Textausgabeoptionen ändern}
 menuText D OptionsFonts "Schriftarten" 3 {Schriftart wechseln}

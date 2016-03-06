@@ -259,6 +259,7 @@ append helpText(Index) {
   <li><a Analysis Debugging>Chess Engine</a>  debugging</li>
   <li><a Maintenance Cleaner>Cleaner</a></li>
   <li><a Clipbase>Clipbase</a></li>
+  <li><a Menus Colours>Colours</a> (various color options)</li>
   <li><a Cmdline>Command-line options</a></li>
   <li><a Comment>Comment Editor</a></li>
   <li><a Maintenance Twins>Comparing games</a> with the Twin Game Checker</li>
@@ -863,7 +864,6 @@ set helpText(Menus) {<h1>Scid Menus</h1>
 
   <h3><name Options>Options</name></h3>
   <p>
-  Here is where most options can be set.
   The option file is <b>$HOME/.scidvspc/config/options.dat</b>
   (and a few other files in the same directory).</p>
   <p><i>
@@ -873,10 +873,17 @@ set helpText(Menus) {<h1>Scid Menus</h1>
   They are saved automatically at program exit,
   or when the <green>Save Options</green> menu is selected.</p>
   <p>
-  N.B. The Docked Windows layout is not saved automatically, but may be done manually using <green>Save Layout</green>.
+  The Docked Windows layout is not saved automatically, but may be done manually using <green>Save Layout</green>.
 </p>
+  <h3><name Colours>Colours</name></h3>
+  <p>
+  The colours and themes for the Main Board are set in the <b>Options-<gt>Chessboard</b>,
+  but a few other colour settings are available in <b>Options-<gt>Colours</b>.
+</p><p>
+  The <b>rows</b> colour is for the highlighted row in the Tree and Book windows.
+  Crosstable coloured rows must be enabled in the Crosstable Options menus.
 
-  <p><footer>Updated: Scid vs. PC 4.15, May 2015</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.17, Mar 2016</footer></p>
 }
 
 

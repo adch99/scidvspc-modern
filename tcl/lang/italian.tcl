@@ -267,6 +267,8 @@ menuText I OptionsRowColour "Rows" 0 {Default tree/book row color}
 menuText I OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 # ====== TODO To be translated ======
 menuText I OptionsProgressColour "Progressbar" 0 {Default progressbar color}
+# ====== TODO To be translated ======
+menuText I OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
 menuText I OptionsNames "I nomi dei miei giocatori ..." 0 {Edita i nomi dei miei giocatori}
 menuText I OptionsExport "Esportazione" 2 {Cambia le opzioni di importazione testo}
 menuText I OptionsFonts "Fonts" 0 {Cambia fonts}
