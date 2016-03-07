@@ -3,8 +3,10 @@
 
 namespace eval ::crosstab {}
 
-foreach var   {sort type ages colors ratings countries tallies titles groups breaks deleted cnumbers text threewin tiewin tiehead} \
-        value {score auto +ages +colors +ratings +countries +tallies +titles -groups -breaks -deleted -numcolumns hypertext -threewin -tiewin -tiehead} {
+foreach var  \
+   {sort type ages colors ratings countries tallies titles groups breaks deleted cnumbers text threewin tiewin tiehead} \
+        value \
+   {score auto +ages +colors +ratings +countries +tallies +titles -groups -breaks -deleted -numcolumns hypertext -threewin -tiewin -tiehead} {
   if {![info exists crosstab($var)]} {
     set crosstab($var) $value
   }
@@ -398,17 +400,17 @@ proc ::crosstab::Refresh {{game {}}} {
     ::htext::display $w.f.text $result
   }
 
-if {$crosstab(colorrows)} {
-  set start [$w.f.text search -- ----- 0.0]
+if {$crosstab(colorrows) && $crosstab(type) != "knockout"} {
+  set start [$w.f.text search -- --------- 1.0]
   if {$start != {}} {
-    set end [$w.f.text search -- ----- "$start +1line"]
+    set end [$w.f.text search -- --------- "$start +1line"]
 
     # Shade every second line to help readability
     $w.f.text configure -state normal
     set startline [expr {int($start) + 1}]
     set endline   [expr {int($end) - 1}]
     for {set i $startline} {$i <= $endline} {incr i 2} {
-      $w.f.text tag add rowColor $i.0 "$i.0 lineend +1c"
+      $w.f.text tag add rowColor $i.0 "$i.end +1c"
     }
   }
 }

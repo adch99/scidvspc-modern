@@ -1455,7 +1455,11 @@ Optionally, Head-to-Head and Total-Wins tie-breaks (in that order), can also be 
 </p>
 
   <h4>Other Options</h4>
-  <p><b>Group Scores</b> draws a blank line between players with the same score.  </p>
+<ul>
+  <li><b>Group Scores</b> draws a blank line between players with the same score.  </li>
+  <li><b>Color Information</b> shows a w/b in the Swiss format, representing if player was white or black.</li>
+  <li><b>Color Rows</b> shades every second row. The color can be set in <b>MainMenu-<gt>Options-<gt>Colors</b>.</li>
+</ul>
 
   <h4>ELO Performance Ratings Calculation</h4>
   <p>To calculate ELO Performance ratings and ratings changes, Scid uses algorithms from the

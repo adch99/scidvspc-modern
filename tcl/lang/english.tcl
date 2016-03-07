@@ -255,9 +255,9 @@ menuText E CCEditCopy "Copy Gamelist to Clipbase" 0 {Copy the games as CSV list 
 # Options menu:
 menuText E Options "Options" 0
 menuText E OptionsBoard "Chessboard/Pieces" 0 {Chess board appearance}
-menuText E OptionsColour "Colours" 0 {Default text widget color}
+menuText E OptionsColour "Colors" 0 {Default text widget color}
 menuText E OptionsBackColour "Background" 0 {Default text widget color}
-menuText E OptionsEnableColour "Enable Background Colour" 0 {}
+menuText E OptionsEnableColour "Enable Background Color" 0 {}
 menuText E OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
 menuText E OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
 menuText E OptionsRowColour "Rows" 0 {Default tree/book row color}
@@ -274,7 +274,7 @@ menuText E OptionsFontsFixed "Fixed" 0 {Change the fixed-width font}
 menuText E OptionsGInfo "Game Information" 0 {Game information options}
 menuText E OptionsFics "FICS" 0 {Free Chess Internet Server}
 menuText E OptionsFicsAuto "Autopromote Queen" 0
-menuText E OptionsFicsColour "Text Colour" 0
+menuText E OptionsFicsColour "Text Color" 0
 menuText E OptionsFicsSize "Board Size" 0
 menuText E OptionsFicsCommands "Init Commands" 0
 menuText E OptionsFicsNoRes "No Results" 0
@@ -1572,7 +1572,7 @@ translate E FICSFilterFormula {Filter with formula}
 translate E FICSIssueSeek {Issue seek}
 translate E FICSAccept {Accept}
 translate E FICSDecline {Decline}
-translate E FICSColour {Colour}
+translate E FICSColour {Color}
 translate E FICSSend {Send}
 translate E FICSConnect {Connect}
 translate E FICSShouts {Shouts}
