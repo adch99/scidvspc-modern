@@ -239,9 +239,9 @@ append helpText(Index) {
 
   <h3><name B>B</name></h3>
   <ul>
-  <li>Custom <a Board Textures>background images</a></li>
   <li><a Finder>Backups</a></li>
   <li><a Tree Best>Best games</a> window</li>
+  <li><a Board>Board options</a> (textures and pieces)</li>
   <li><a Searches Board>Board searches</a></li>
   <li><a Book>Book</a> window</li>
   <li><a BookTuning>Book tuning</a></li>
@@ -406,6 +406,7 @@ append helpText(Index) {
   <li><a Export PDF>PDF</a> support</li>
   <li><a Pgnscid>Pgnscid</a></li>
   <li><a PInfo Photos>Photos</a></li>
+  <li><a Board>Pieces</a></li>
   <li><a FICS>Play on the Internet (FICS)</a></li>
   <li><a PTracker>Piece Tracker</a> window</li>
   <li><a PList>Player Finder</a> window</li>
@@ -455,7 +456,6 @@ append helpText(Index) {
   <ul>
   <li><a TB>Tablebases</a></li>
   <li>Finding extra PGN <a Maintenance Tags>Tags</a>
-  <li>Custom board <a Board Textures>textures</a></li>
   <li><a Crosstable tiebreak>Tie-Breaks</a></li>
   <li>The <a MainWindow Toolbar>Toolbar</a></li>
   <li><a Menus Tools>Tools menu</a></li>

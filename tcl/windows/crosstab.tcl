@@ -4,9 +4,9 @@
 namespace eval ::crosstab {}
 
 foreach var  \
-   {sort type ages colors ratings countries tallies titles groups breaks deleted cnumbers text threewin tiewin tiehead} \
+   {sort type ages colors ratings countries tallies titles groups breaks deleted cnumbers text threewin tiewin tiehead colorrows} \
         value \
-   {score auto +ages +colors +ratings +countries +tallies +titles -groups -breaks -deleted -numcolumns hypertext -threewin -tiewin -tiehead} {
+   {score auto +ages +colors +ratings +countries +tallies +titles -groups -breaks -deleted -numcolumns hypertext -threewin -tiewin -tiehead 1} {
   if {![info exists crosstab($var)]} {
     set crosstab($var) $value
   }
