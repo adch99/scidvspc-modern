@@ -18,6 +18,7 @@
 
 #include "common.h"
 #include "error.h"
+#include <string>
 
 
 class TextBuffer
@@ -36,6 +37,8 @@ private:
     bool   ConvertNewlines;  // If true, convert newlines to spaces.
     char * Buffer;
     char * Current;
+
+    std::string CurrentWord;
 
     bool   PausedTranslations;
     bool   HasTranslations;

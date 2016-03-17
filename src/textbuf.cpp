@@ -18,6 +18,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <string>
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //### TextBuffer::Init(): Initialise the textbuffer.
@@ -214,19 +215,17 @@ errorT
 TextBuffer::PrintString (const char * str)
 {
     errorT err;
-    char currentWord[1024];  // should be long enough for a word
+
     while (*str != 0) {
-        char * b = currentWord;
-        *b = 0;
+        CurrentWord.clear();
         // get next word and print it:
         while (*str != ' '  && *str != '\n'  &&  *str != '\0') {
-            *b = *str; b++; str++;
+            CurrentWord.push_back(*str++);
         }
         // end of word/line/text reached
-        *b = 0;
-        err = PrintWord (currentWord);
+        err = PrintWord (CurrentWord.c_str());
         if (err != OK) { return err; }
-        if (*str == 0) { return OK; }
+        if (*str == '\0') { return OK; }
         if (*str == '\n'  &&  !ConvertNewlines) {
             err = NewLine();
         } else {
