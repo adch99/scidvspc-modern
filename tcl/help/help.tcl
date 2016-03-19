@@ -6997,8 +6997,7 @@ set helpText(Board) {<h1>Board Options</h1>
 <i>The Merida1 pieces now have high-quality larger sizes.</i>
 </p><p>
 Place base 64 encoded piece sets in the directory <b>$HOME/.scidvspc/pieces</b>, and they will be added to the 
-Board Options window. There is a limit of 12 piece sets only.
-Some extra sets (including blindfold) can be got 
+Board Options window. Some extra sets (including blindfold) can be got 
 <url http://sourceforge.net/projects/scidvspc/files/extra_pieces.tgz/download>here</url>.
 </p>
 <p>Though Scid now supports larger sizes, these are generally scaled
