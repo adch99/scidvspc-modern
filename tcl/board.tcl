@@ -216,12 +216,12 @@ proc initBoardColors {} {
 
   ### Piece type and size ###
 
-  label  $w.sizes.label -text {Piece Style} -font font_Regular
+  label  $w.sizes.label -text [tr PgnOptChess] -font font_Regular
   pack   $w.sizes.label -side left
 
   frame $w.sizes.frame
   pack $w.sizes.frame -side right
-  label  $w.sizes.frame.label -text Size -font font_Regular
+  label  $w.sizes.frame.label -text [tr OptionsFicsSize] -font font_Regular
   pack   $w.sizes.frame.label -side left -anchor center
 
   button $w.sizes.frame.smaller -text - -font font_Small -borderwidth 1 \
