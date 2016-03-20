@@ -343,10 +343,12 @@ namespace eval fics {
 
     button $w.command.clear -textvar tr(Clear) -state disabled -command "
       $w.command.entry delete 0 end
+      $w.command.find  delete 0 end
     "
     bind $w.command.clear <Control-Button-1> "
       $w.console.text delete 0.0 end
       $w.console.text insert 0.0 \"FICS ($::scidName $::scidVersion)\n\"
+      break
     "
     button $w.command.next -textvar tr(Next) -state disabled -command {::fics::writechan next echo}
     button $w.command.hide -image bookmark_down -command ::fics::togglebuttons
