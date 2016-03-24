@@ -1915,7 +1915,7 @@ proc makeAnalysisMove {n} {
   if { [sc_move_add $move $n] } {
     ### Move fail
     set res 0
-    puts "Error adding move $move" ; # &&&
+    # puts "Error adding move $move"
     set analysis(waitForBestMove$n) 1
   } else {
     ::fics::checkAdd

@@ -79,7 +79,7 @@ proc ::file::ExitFast {} {
 # ::file::New
 #
 #   Opens file-save dialog and creates a new database.
-#
+
 proc ::file::New {} {
   if {[sc_base count free] == 0} {
     tk_messageBox -title "Scid" -type ok -icon info \
@@ -114,6 +114,7 @@ proc ::file::New {} {
     catch {sc_base type [sc_base current] 1}
     set fName $fName.si4
   }
+  set ::glistFlipped([sc_base current]) 0
   ::recentFiles::add $fName
   refreshWindows
   refreshSearchDBs
@@ -618,6 +619,7 @@ proc ::file::openBaseAsTree { { fName "" } } {
   unbusyCursor .
 
   set current [sc_base current]
+  set ::glistFlipped([sc_base current]) 0
   ::tree::Open
   set ::tree(locked$current) 1
 

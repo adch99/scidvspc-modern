@@ -1013,8 +1013,7 @@ proc ::windows::gamelist::Reload {} {
       toggleRotateBoard
     }
   } else {
-    # should not happen
-    puts "Oops - glistFlipped($b) not intialised"
+    # puts "Oops - glistFlipped($b) not intialised"
   }
 
   set w .glistWin
