@@ -3594,13 +3594,16 @@ proc updateAnalysis {{n 0} {reset 1}} {
 
   global analysis analysisWin windowsOS
 
+  if {$analysis(lockEngine$n)} {
+    return
+  }
+
   set analysis(side$n) [sc_pos side]
 
   if {$::comp(playing) ||
       $analysis(pipe$n) == {} ||
       !$analysis(seen$n) ||
-      !$analysis(analyzeMode$n) ||
-      $analysis(lockEngine$n) } {
+      !$analysis(analyzeMode$n) } {
     return
   }
   # analysis(seen$n)        - output has been seen from the analysis program yet
