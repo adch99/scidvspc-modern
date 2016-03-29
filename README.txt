@@ -11,8 +11,10 @@
         2..1 New and Improved features
 
   3. download
+        3..1 Other resources
+
   4. installation
-        4..1 Linux , FreeBSD
+        4..1 Linux , Unix
         4..2 Windows
         4..3 Mac OS X
 
@@ -137,29 +139,34 @@
 
   3.  download
 
-  source scid_vs_pc-4.16.tgz
+  Source scid_vs_pc-4.16.tgz
   <http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.16.tgz/download>
 
-  windows Scid vs PC-4.16.exe
+  Windows Scid vs PC-4.16.exe
   <http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.16.exe/download>
 
-  windows 64 bit Scid vs PC-4.16.x64.exe
+  Windows 64 bit Scid vs PC-4.16.x64.exe
   <http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.16.x64.exe/download>
 
-  mac ScidvsMac-4.16.dmg
+  Mac ScidvsMac-4.16.dmg
   <http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.16.dmg/download>
 
-  browse files
-  <https://sourceforge.net/project/showfiles.php?group_id=263836>
+  3.0.1.  Other resources
+
+  Fedora Packages (unofficial)
+  <https://copr.fedorainfracloud.org/coprs/awood/scid_vs_pc/>
 
   The latest code is available from subversion - svn checkout
-  http://svn.code.sf.net/p/scidvspc/code/ scidvspc-code
-  or as a tarball https://sourceforge.net/p/scidvspc/code/HEAD/tarball
+  http://svn.code.sf.net/p/scidvspc/code/ scidvspc-code or as a tarball
+  https://sourceforge.net/p/scidvspc/code/HEAD/tarball
   <https://sourceforge.net/p/scidvspc/code/HEAD/tarball>
+
+  Other project files
+  <https://sourceforge.net/project/showfiles.php?group_id=263836>
 
   4.  installation
 
-  4.0.1.  Linux , FreeBSD
+  4.0.1.  Linux , Unix
 
   Scid vs. PC requires Wish (Tcl/Tk) 8.5 or later (though 8.5.10 has
   nasty bugs and should be avoided), and a C++ compiler .

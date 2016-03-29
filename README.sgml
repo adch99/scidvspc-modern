@@ -69,24 +69,29 @@ project is authored by <ref name="Stevenaaus" id="contact_"> and numerous contri
 <label id="download_">
 <sect> download <p>
 
-source <url url="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.16.tgz/download" name="scid_vs_pc-4.16.tgz">
+Source <url url="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.16.tgz/download" name="scid_vs_pc-4.16.tgz">
 
-windows <url url="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.16.exe/download" name="Scid vs PC-4.16.exe">
+Windows <url url="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.16.exe/download" name="Scid vs PC-4.16.exe">
 
-windows 64 bit <url url="http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.16.x64.exe/download" name="Scid vs PC-4.16.x64.exe">
+Windows 64 bit <url url="http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.16.x64.exe/download" name="Scid vs PC-4.16.x64.exe">
 
-mac <url url="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.16.dmg/download" name="ScidvsMac-4.16.dmg">
+Mac <url url="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.16.dmg/download" name="ScidvsMac-4.16.dmg">
 
-<url url="https://sourceforge.net/project/showfiles.php?group_id=263836" name="browse files">
+<sect2> Other resources<p>
+<P>Fedora Packages (unofficial) <url url="https://copr.fedorainfracloud.org/coprs/awood/scid_vs_pc/">
+</P>
 
-The latest code is available from subversion - <bf>svn checkout http://svn.code.sf.net/p/scidvspc/code/ scidvspc-code</bf>
-<newline>
+<P>The latest code is available from subversion - <bf>svn checkout http://svn.code.sf.net/p/scidvspc/code/ scidvspc-code</bf>
 or as a tarball <url url="https://sourceforge.net/p/scidvspc/code/HEAD/tarball" name="https://sourceforge.net/p/scidvspc/code/HEAD/tarball">
+</P>
+
+<P>Other project <url url="https://sourceforge.net/project/showfiles.php?group_id=263836" name="files">
+</P>
 
 
 <sect> installation <p>
 
-<sect2> Linux , FreeBSD<p>
+<sect2> Linux , Unix<p>
   <p>
   Scid vs. PC requires Wish (Tcl/Tk) 8.5 or later (<bf>though 8.5.10 has nasty bugs and should be avoided</bf>), and a C++ compiler .
   <newline>
