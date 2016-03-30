@@ -61,7 +61,7 @@ See <run ::tip::show 0><green>Tip of the Day</green></run> for some helpful hint
 }
 
 set helpTitle(GUI) {Scid's GUI}
-set helpText(GUI) {<h1>Scid's Graphical User Interface</h1>
+set helpText(GUI) {<h1>Scid's User Interface</h1>
 
   <br>
   <ht><a Docking><b>Docked Windows</b></a></ht>
@@ -734,7 +734,7 @@ set helpText(Menus) {<h1>Scid Menus</h1>
   <li><green>Paste from Clipbase</green>  Pastes the active game of the <a Clipbase>Clipbase</a> to be the active game of the current database.</li>
   <br>
   <li><green>Strip</green>  Strips all comments or variations from the current game.</li>
-  <li><green>Undo</green>  Undo changes to this game. The undo buffer holds nine changes.</li>
+  <li><green>Undo</green>  Undo changes to this game. The undo buffer holds 20 positions.</li>
   <li><green>Redo</green>  Redo changes.</li>
   <br>
   <li><green>Add Variation</green>  Adds a new empty variation for the
@@ -889,20 +889,14 @@ set helpText(Menus) {<h1>Scid Menus</h1>
 
 set helpTitle(Moves) "Entering Moves"
 set helpText(Moves) {<h1>Move Entry and Options</h1>
-  <p>
-  Scid allows moves to be made using the mouse or keyboard.
+  <p>Scid uses the arrow keys and wheelmouse to move forward and back through a game. And at any time, moves can be entered using the mouse or keyboard.
+</p><p>
   Use the mouse to click on a piece, then the destination square. Alternatively one may drag the piece.
   </p>
-  
   <p>
-  Keyboard moves are made using the standard notation.
+  Keyboard moves are made using standard San or UCI notations.
   Castling is done with <b>OO</b>, or <b>OK</b> and <b>OQ</b>
-  for King and Queenside respectively.
-  </p>
-
-  <h4>Retracting Moves</h4>
-  <p>
-  To take back a move, use Left-Arrow, Backspace or Mousewheel-Up.
+  for King and Queenside respectively. For more info, see below.
   </p>
 
   <h4>Replacing Moves</h4>
@@ -910,7 +904,7 @@ set helpText(Moves) {<h1>Move Entry and Options</h1>
   When you enter a move where a move already exists,
   Scid will ask if you want to replace the
   move (when the old move and all after it will be lost), or
-  add the new move as a variation. If one finds this annoying, 
+  add the new move as a variation or new mainline. If one finds this annoying, 
   it is possible to skip this dialog by unchecking the
   <green>Options--<gt>Moves--<gt>Ask Before Replacing Moves</green> menu option
   </p>
@@ -922,9 +916,10 @@ set helpText(Moves) {<h1>Move Entry and Options</h1>
 
   <h4><name Undo>Undo</name></h4>
   <p>
-  From 4.6, Scid vs. PC has Undo and Redo features. This allows a 10 edit history
-  for Move, Variation, Comment and Game Information changes. The Undo and Redo commands are 
-  bound to <b>Control-z</b> and <b>Control-y</b>, but please use carefully as these shortcuts
+  Scid vs. PC has Undo and Redo features which store up to 20 
+  Move, Variation, Comment or Game Information changes. The Undo and Redo commands are 
+  bound to <b>Control-z</b> and <b>Control-y</b> (when the mouse is over the main board),
+  but they should be used carefully as these shortcuts
   are also the defaults for editing text windows such as the Comment Editor.
   </p>
 
@@ -940,11 +935,11 @@ set helpText(Moves) {<h1>Move Entry and Options</h1>
   game, and return to the original position when you exit trial mode.
   </p>
 
-  <h3><name Mistakes>Correcting Mistakes</name></h3>
+  <h4><name Mistakes>Correcting Mistakes</name></h4>
   <p>
   If you are entering a game and suddenly see an incorrect move several
   moves earlier, it is possible to correct it without losing the extra
-  moves you have added. The only way is to edit the PGN representation
+  moves you have added. This is done by editing the PGN representation
   of the game. Open the <a Import>Import</a> window, select "Paste Current
   Game", correct the incorrect move, then select "Import".
   </p>
@@ -952,53 +947,51 @@ set helpText(Moves) {<h1>Move Entry and Options</h1>
   <h3>Keyboard Move Entry</h3>
   <p>
   To enter moves from the keyboard, simply press letter and digit
-  keys. Accepted moves should be in <term>SAN notation</term>,
-  <i>without</i> the capture symbol (x) or the promotion symbol (=).
+  keys - in long or short algbraic notation - and
+  without the capture "x" or promotion "=" symbols.
   Moves are matched case-insensitively, so you can type
-  [n][f][3] instead of Nf3, for example (see below about Bishop/Pawn conflicts).
-  </p>
-  <p>
-  To ensure that no move is a prefix of any other move, the notation
-  for kingside and queenside castling is [O][K] and
-  [O][Q] respectively, instead of the usual O-O and O-O-O.
-  [This is a bug!]
+  nf3 instead of Nf3, for example.
   </p>
   <p>
   As you enter a move, the status bar will show the list of matching moves.
   </p>
   <p>
-  <b>Note</b> Lower-case letter matches to a pawn first, so a
-  [b] can match to a pawn or Bishop, but if there is a conflict
+  The notation for castling is [O][O], but Kingside and Queenside castling
+  can also be stipulated explicitly with [O][K] and [O][Q].
+  </p>
+  <p>
+  Lower-case letter matches to a pawn first, so a
+  [b] can match to a pawn or Bishop. If there is a conflict
   you must use a capital [B] for the Bishop move.
   </p>
 
   <h4>Coordinate Move Entry</h4>
   <p>
-  The Coordinate Move Entry option allows one to input moves of the form
-  <b>a2a4</b>  and <b>g1f3</b> (instead of Nf3). This is the default, but it
-  interferes with the Auto-Completion feature.
+  This move option allows one to input moves in UCI notation (such as
+  a2a4 and g1f3). This feature is enabled default, but it
+  interferes with the Auto-Completion feature (which is off by default).
   </p>
 
   <h4>Auto-Completion</h4>
   <p>
-  In the Options menu, you can select Keyboard Auto-Completion of moves.
-  With auto-completion, a move is made as soon as you have typed enough
-  to distinguish it from any other legal move. For example, with
-  auto-completion, you would only need to type [n][f] instead
-  of [n][f][3] for <b>Nf3</b> in the starting position.
-  This feature only works with <b>pawn moves</b> if <b>Coordinate Move Entry</b>
+  Is enabled via <green>Options--<gt>Moves--<gt>Keyboard Completion</green>.
+  and it makes a move as soon as you have typed enough
+  to distinguish it from any other legal move. For example,
+  you would only need to type [n][f] instead
+  of [n][f][3] in the starting position.
+  This feature only works with pawn moves if Coordinate Move Entry
   is disabled.
   </p>
 
   <h4>Suggested Moves</h4>
   <p>
   The Suggested Move feature, if enabled, highlights all squares
-  to which there is a legal move. This can be confusing at times, as is disblaed by default in Scid vs. PC.
+  to which there is a legal move. This can be confusing at times, as is disabled by default in Scid vs. PC.
   </p> 
 
   <h3><name Null>Entering Null Moves</name></h3>
   <p>
-  <a Variations Null>Null</a> (empty) moves can be useful in variations, where
+  <a Variations Null>Null Moves</a> (or empty moves) can be useful in variations where
   you want to skip a move for one side. You can enter a null move with the
   mouse by capturing one king with the other king, or with the keyboard by
   typing "<b>--</b>" (that is, pressing the minus key twice).
@@ -1033,7 +1026,7 @@ set helpText(Moves) {<h1>Move Entry and Options</h1>
   <li> =+	[=][+]</li>
   </ul>
 
-  <p><footer>Updated: Scid vs. PC 4.13 August 2014 </footer></p>
+  <p><footer>Updated: Scid vs. PC 4.17 March 2016 </footer></p>
 }
 
 set helpTitle(Searches) "Searches"

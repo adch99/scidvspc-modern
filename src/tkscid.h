@@ -100,7 +100,7 @@ const uint SCID_BackupCacheSize = 100;
 #endif
 
 // Number of undo levels
-#define UNDO_MAX 10
+#define UNDO_MAX 20
 
 //////////////////////////////////////////////////////////////////////
 //
