@@ -29,6 +29,11 @@ proc ::gbrowser::new {base gnum {ply -1} {w {}}} {
     return
   }
 
+  set offset [string first { -- } $header]
+  set white [string trim [string range $header 0 $offset]]
+  incr offset 4
+  set black [string trim [string range $header $offset [string first "\n" $header $offset]]]
+
   if {$w == {}} {
     ### Init browser window
     while {[winfo exists .gb$n]} { incr n }
@@ -136,7 +141,7 @@ proc ::gbrowser::new {base gnum {ply -1} {w {}}} {
     wm state $w normal
 
   } else {
-    # Already have a browser window topleve
+    # Already have a browser window toplevel
     # so just delete the old pgn text, and configure the buttons for their new meaning
 
     scan $w {.gb%i} n
@@ -156,6 +161,18 @@ proc ::gbrowser::new {base gnum {ply -1} {w {}}} {
       sc_move ply \$::gbrowser::ply($n)
       updateBoard -pgn"
     $w.b.merge configure -command "mergeGame $base $gnum"
+  }
+
+  set flipped 0
+  foreach pattern $::myPlayerNames {
+    if {[string match $pattern $black]} {
+      set flipped 1
+      ::board::flip $w.bd 1
+      break
+    }
+  }
+  if {!$flipped} {
+    ::board::flip $w.bd 0
   }
 
   # The gnum is stored in title, and also used later 
