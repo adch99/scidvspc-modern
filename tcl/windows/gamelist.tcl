@@ -567,8 +567,8 @@ proc ::windows::gamelist::Open {} {
   pack $w.b.close $w.b.findcase $w.b.find $w.b.filter $w.b.negate $w.b.reset -side right
   pack $w.b.save $w.b.bkm $w.b.gfirst $w.b.gprev $w.b.gnext $w.b.glast -side left
 
-  pack $w.b.compact -side right -padx 3
   pack $w.b.current $w.b.goto -side left -padx 3
+  pack $w.b.compact -side right -padx 3
 
   if {$::windowsOS} {
     # cant focus entry combo on windows as it hogs the wheelmouse
