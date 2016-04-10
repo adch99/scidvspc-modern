@@ -247,6 +247,7 @@ proc ::game::Load { selection {update 1} {raise 1}} {
   }
   refreshWindows
   ::bookmarks::AddCurrentGame
+  after idle {focus -force .main}
 }
 
 ### Replaces numerous 'sc_game save [sc_game number]' around the place.

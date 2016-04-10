@@ -71,6 +71,7 @@ proc importPgnGame {} {
   dialogbutton $w.b.import -text "$::tr(Import)" -command {
     sc_game new
     catch {sc_game import [.importWin.pane.edit.text get 0.0 end]} result
+    flipBoardForPlayerNames
     updateBoard -pgn
     updateTitle
 
