@@ -92,6 +92,7 @@ proc importPgnGame {} {
   pack $w.b.cancel $w.b.import $w.b.clear -side right -padx 10 -pady 2
 
   # Paste the current selected text automatically:
+  set texttopaste {}
   if {[catch {set texttopaste [selection get -selection PRIMARY]} ]} {
     catch {set texttopaste [selection get -selection CLIPBOARD]}
   }
