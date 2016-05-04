@@ -308,7 +308,7 @@ namespace eval sergame {
     set ::drawShown 0
 
     ::uci::startEngine $n
-    ::uci::sendUCIoptions $n
+    ::uci::sendUCIoptions $n 1
 
     set ::uci::uciInfo(prevscore$n) 0.0
     set ::uci::uciInfo(score$n) 0.0
@@ -364,6 +364,11 @@ namespace eval sergame {
       }
       sc_game tags set -date [::utils::date::today]
       if {[sc_base inUse [sc_base current]]} { catch {sc_game save 0}  }
+    }
+
+    if {$::uci::uciInfo(skill) != ""} {
+      # hmm - no spaces allowed in tags (Skill Level)
+      sc_game tags set -extra [list "SkillLevel \"$::uci::uciInfo(skill)\""]
     }
 
     updateBoard -pgn

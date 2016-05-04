@@ -37,6 +37,7 @@ namespace eval uci {
     set uciInfo(currmovenumber$n) 0
     # hmmm
     # set uciInfo(score$n) ""
+    set uciInfo(skill) ""
   }
 
   proc resetUciInfo2 {n} {
@@ -812,7 +813,7 @@ namespace eval uci {
   ### The engine replied readyok, so it's time to configure it (sends the options to the engine)
   ### It seems necessary to ask first if engine is ready
 
-  proc sendUCIoptions {n} {
+  proc sendUCIoptions {n {sergame 0}} {
     global analysis
     set engineData [ lindex $::engines(list) $n ]
     set options [ lindex $engineData 8 ]
@@ -823,6 +824,9 @@ namespace eval uci {
       ::sendToEngine $n "isready"
       vwait analysis(waitForReadyOk$n)
       ::sendToEngine $n "setoption name $name value $value"
+      if {$name == {Skill Level} && $sergame} {
+        set ::uci::uciInfo(skill) $value
+      }
     }
   }
 
