@@ -3544,6 +3544,9 @@ proc sendPosToEngineUCI {n  {delay 0}} {
         append cmd { [ } " after $delay sendPosToEngineUCI $n $delay " { ] }
         set analysis(after$n) [eval [list after idle $cmd]]
     } else {
+        if {[sc_pos moves] == {}} {
+          return
+        }
         ### Dont send position if annotating and in book
 	if { $::annotate(Engine) == $n && ! $::wentOutOfBook && $::useAnalysisBook} {
 	  bookAnnotation
