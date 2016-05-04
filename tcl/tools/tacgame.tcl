@@ -487,7 +487,21 @@ namespace eval tacgame {
     }
     pack $w.fbuttons.resume -expand yes -fill both -padx 10 -pady 2
 
-    button $w.fbuttons.restart -text Restart -command {
+    pack [label $w.fbuttons.space -text {}]
+
+    button $w.fbuttons.resign -text [tr Resign] -command {
+      if {[::board::opponentColor] == {white}} {
+        sc_game tags set -result 1
+      } else {
+        sc_game tags set -result 0
+      }
+      if {[sc_base inUse [sc_base current]]} { catch {sc_game save 0}  }
+      updateBoard -pgn
+      ::tacgame::abortGame
+    }
+    pack $w.fbuttons.resign -expand yes -fill both -padx 10 -pady 2
+
+    button $w.fbuttons.restart -text [tr Restart] -command {
       set ::pause 0
       .coachWin.fbuttons.resume configure -state disabled
       set ::lFen {}
