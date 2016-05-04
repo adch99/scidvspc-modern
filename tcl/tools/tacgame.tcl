@@ -923,6 +923,10 @@ namespace eval tacgame {
     }
 
     ::tacgame::stopAnalyze
+    set analysisCoach(automoveThinking$phalanx) 0
+    if {$::pause} {
+      return
+    }
 
     # Phalanx will move : update the score list to detect any blunder
     if {[info exists ::tacgame::sc1]} {
@@ -983,7 +987,6 @@ namespace eval tacgame {
       return
     }
 
-    set analysisCoach(automoveThinking$phalanx) 0
     set currentPosHash [sc_pos hash]
 
     ::tacgame::startAnalyze
