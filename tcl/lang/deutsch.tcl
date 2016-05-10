@@ -898,6 +898,8 @@ translate D GameLength {Partielänge}
 translate D FindGamesWith {Finde Partien mit den Markierungen (Flags)}
 translate D StdStart {Standardausgangsposition}
 translate D Promotions {Umwandlungen}
+# ====== TODO To be translated ======
+translate D UnderPromo {Under Prom.}
 translate D Comments {Kommentare}
 translate D Variations {Varianten}
 translate D Annotations {Anmerkungen}

@@ -885,6 +885,8 @@ translate S GameLength {Duración:}
 translate S FindGamesWith {Encontrar partidas con}
 translate S StdStart {Inicio estándar}
 translate S Promotions {Promociones}
+# ====== TODO To be translated ======
+translate S UnderPromo {Under Prom.}
 translate S Comments {Comentarios}
 translate S Variations {Variaciones}
 translate S Annotations {Anotaciones}

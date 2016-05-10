@@ -854,6 +854,8 @@ translate R GameLength {Длина партии}
 translate R FindGamesWith {Найти партии с флагами}
 translate R StdStart {Нестандартный дебют}
 translate R Promotions {Продвижения}
+# ====== TODO To be translated ======
+translate R UnderPromo {Under Prom.}
 translate R Comments {Комментарии}
 translate R Variations {Вариации}
 translate R Annotations {Аннотации}

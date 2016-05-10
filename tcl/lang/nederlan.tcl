@@ -889,6 +889,8 @@ translate N GameLength {Lengte partij}
 translate N FindGamesWith {Vind partijen met vlag}
 translate N StdStart {Niet standaard begin}
 translate N Promotions {Promoties}
+# ====== TODO To be translated ======
+translate N UnderPromo {Under Prom.}
 translate N Comments {Commentaar}
 translate N Variations {Varianten}
 translate N Annotations {Annotaties}

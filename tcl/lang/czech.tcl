@@ -951,6 +951,8 @@ translate C GameLength {Délka Partie}
 translate C FindGamesWith {Najít partie s pøíznaky}
 translate C StdStart {Nestandardní start}
 translate C Promotions {Promìny}
+# ====== TODO To be translated ======
+translate C UnderPromo {Under Prom.}
 translate C Comments {Komentáøe}
 translate C Variations {Varianty}
 translate C Annotations {Anotace}

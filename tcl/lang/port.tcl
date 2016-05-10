@@ -847,6 +847,8 @@ translate U GameLength {Tamanho do jogo}
 translate U FindGamesWith {Encontrar jogos com}
 translate U StdStart {Início padrão}
 translate U Promotions {Promoções}
+# ====== TODO To be translated ======
+translate U UnderPromo {Under Prom.}
 translate U Comments {Comentários}
 translate U Variations {Variantes}
 translate U Annotations {Anotações}

@@ -840,6 +840,7 @@ translate E GameLength {Game length}
 translate E FindGamesWith {Find games with flags}
 translate E StdStart {Non-standard start}
 translate E Promotions {Promotions}
+translate E UnderPromo {Under Prom.}
 translate E Comments {Comments}
 translate E Variations {Variations}
 translate E Annotations {Annotations}

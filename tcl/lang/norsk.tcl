@@ -1029,6 +1029,8 @@ translate O GameLength {Partilengde}
 translate O FindGamesWith {Finn partier merket med...}
 translate O StdStart {Vanlig utgangsstilling}
 translate O Promotions {Forfremmelser}
+# ====== TODO To be translated ======
+translate O UnderPromo {Under Prom.}
 translate O Comments {Kommentarer}
 translate O Variations {Variasjoner}
 translate O Annotations {Annotasjoner}

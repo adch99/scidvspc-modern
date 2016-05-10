@@ -1029,6 +1029,8 @@ translate Y GameLength {Du¾ina partije}
 translate Y FindGamesWith {Pronaði partije sa}
 translate Y StdStart {standardnim poèetkom}
 translate Y Promotions {sa promocijama}
+# ====== TODO To be translated ======
+translate Y UnderPromo {Under Prom.}
 translate Y Comments {Komentari}
 translate Y Variations {Varijante}
 translate Y Annotations {Napomene}

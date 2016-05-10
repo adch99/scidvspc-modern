@@ -958,6 +958,8 @@ translate H GameLength {Játszmahossz}
 translate H FindGamesWith {Megjelölt játszmák}
 translate H StdStart {Különleges kezdés}
 translate H Promotions {Gyalogátváltozások}
+# ====== TODO To be translated ======
+translate H UnderPromo {Under Prom.}
 translate H Comments {Megjegyzések}
 translate H Variations {Változatok}
 translate H Annotations {Értékelõ jelek}

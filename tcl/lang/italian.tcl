@@ -956,6 +956,8 @@ translate I GameLength {Lunghezza della partita}
 translate I FindGamesWith {Cerca partite con}
 translate I StdStart {Inizio standard}
 translate I Promotions {Promozioni}
+# ====== TODO To be translated ======
+translate I UnderPromo {Under Prom.}
 translate I Comments {Commenti}
 translate I Variations {Varianti}
 translate I Annotations {Annotazioni}

@@ -884,6 +884,8 @@ translate W GameLength {Partilängd}
 translate W FindGamesWith {Hitta flaggade partier}
 translate W StdStart {Normal utgångsställning}
 translate W Promotions {Förvandlingar}
+# ====== TODO To be translated ======
+translate W UnderPromo {Under Prom.}
 translate W Comments {Kommentarer}
 translate W Variations {Variationer}
 translate W Annotations {Noteringar}

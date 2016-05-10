@@ -15790,7 +15790,7 @@ sc_search_material (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
 //    specified index flag restrictions, for example, excluding
 //    deleted games or games without comments.
 bool
-matchGameFlags (IndexEntry * ie, flagT fStdStart, flagT fPromos,
+matchGameFlags (IndexEntry * ie, flagT fStdStart, flagT fPromos, flagT fUnderPromo,
                 flagT fComments, flagT fVars, flagT fNags, flagT fDelete,
                 flagT fWhiteOp, flagT fBlackOp, flagT fMiddle,
                 flagT fEndgame, flagT fNovelty, flagT fPawn,
@@ -15803,6 +15803,11 @@ matchGameFlags (IndexEntry * ie, flagT fStdStart, flagT fPromos,
 
     flag = ie->GetStartFlag();
     if ((flag && !flag_Yes(fStdStart))  ||  (!flag && !flag_No(fStdStart))) {
+        return false;
+    }
+
+    flag = ie->GetUnderPromoFlag();
+    if ((flag && !flag_Yes(fUnderPromo))  ||  (!flag && !flag_No(fUnderPromo))) {
         return false;
     }
 
@@ -16115,6 +16120,7 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     flagT fStdStart = FLAG_BOTH;
     flagT fPromotions = FLAG_BOTH;
+    flagT fUnderPromo = FLAG_BOTH;
     flagT fComments = FLAG_BOTH;
     flagT fVariations = FLAG_BOTH;
     flagT fAnnotations = FLAG_BOTH;
@@ -16148,7 +16154,7 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         "date", "results", "welo", "belo", "delo",
         "wtitles", "btitles", "toMove",
         "eco", "length", "gameNumber", "flip", "filter",
-        "fStdStart", "fPromotions", "fComments", "fVariations",
+        "fStdStart", "fPromotions", "fUnderPromo", "fComments", "fVariations",
         "fAnnotations", "fDelete", "fWhiteOpening", "fBlackOpening",
         "fMiddlegame", "fEndgame", "fNovelty", "fPawnStructure",
         "fTactics", "fKingside", "fQueenside", "fBrilliancy", "fBlunder",
@@ -16160,7 +16166,7 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         OPT_DATE, OPT_RESULTS, OPT_WELO, OPT_BELO, OPT_DELO,
         OPT_WTITLES, OPT_BTITLES, OPT_TOMOVE,
         OPT_ECO, OPT_LENGTH, OPT_GAMENUMBER, OPT_FLIP, OPT_FILTER,
-        OPT_FSTDSTART, OPT_FPROMOTIONS, OPT_FCOMMENTS, OPT_FVARIATIONS,
+        OPT_FSTDSTART, OPT_FPROMOTIONS, OPT_FUNDERPROMO, OPT_FCOMMENTS, OPT_FVARIATIONS,
         OPT_FANNOTATIONS, OPT_FDELETE, OPT_FWHITEOP, OPT_FBLACKOP,
         OPT_FMIDDLEGAME, OPT_FENDGAME, OPT_FNOVELTY, OPT_FPAWNSTRUCT,
         OPT_FTACTICS, OPT_FKSIDE, OPT_FQSIDE, OPT_FBRILLIANCY, OPT_FBLUNDER,
@@ -16278,6 +16284,7 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
         case OPT_FSTDSTART:    fStdStart    = strGetFlag (value); break;
         case OPT_FPROMOTIONS:  fPromotions  = strGetFlag (value); break;
+        case OPT_FUNDERPROMO:  fUnderPromo  = strGetFlag (value); break;
         case OPT_FCOMMENTS:    fComments    = strGetFlag (value); break;
         case OPT_FVARIATIONS:  fVariations  = strGetFlag (value); break;
         case OPT_FANNOTATIONS: fAnnotations = strGetFlag (value); break;
@@ -16592,7 +16599,7 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
         bool match = false;
 
-        if (matchGameFlags (ie, fStdStart, fPromotions,
+        if (matchGameFlags (ie, fStdStart, fPromotions, fUnderPromo,
                             fComments, fVariations, fAnnotations, fDelete,
                             fWhiteOp, fBlackOp, fMiddlegame, fEndgame,
                             fNovelty, fPawnStruct, fTactics, fKside,

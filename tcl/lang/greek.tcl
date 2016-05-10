@@ -901,6 +901,8 @@ translate G GameLength {Μήκος Παρτίδας}
 translate G FindGamesWith {Εύρεση παρτίδων με σημαίες}
 translate G StdStart {Μη τυπική έναρξη}
 translate G Promotions {Προαγωγές}
+# ====== TODO To be translated ======
+translate G UnderPromo {Under Prom.}
 translate G Comments {Σχόλια}
 translate G Variations {Βαριάντες}
 translate G Annotations {Σχολιασμοί}

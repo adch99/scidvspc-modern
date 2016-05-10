@@ -20,7 +20,7 @@ set sResWin 1; set sResLoss 1; set sResDraw 1; set sResOther 1
 set sGnumMin 1; set sGnumMax -1
 set sIgnoreCol No
 set sSideToMove wb
-set sHeaderFlagList {StdStart Promotions Comments Variations Annotations \
+set sHeaderFlagList {StdStart Promotions UnderPromo Comments Variations Annotations \
       DeleteFlag WhiteOpFlag BlackOpFlag MiddlegameFlag EndgameFlag \
       NoveltyFlag PawnFlag TacticsFlag KsideFlag QsideFlag \
       BrilliancyFlag BlunderFlag UserFlag }
@@ -502,6 +502,7 @@ proc search::header {} {
         -flip $sIgnoreCol -filter $::search::filter::operation \
         -fStdStart $sHeaderFlags(StdStart) \
         -fPromotions $sHeaderFlags(Promotions) \
+        -fUnderPromo $sHeaderFlags(UnderPromo) \
         -fComments $sHeaderFlags(Comments) \
         -fVariations $sHeaderFlags(Variations) \
         -fAnnotations $sHeaderFlags(Annotations) \

@@ -2009,6 +2009,7 @@ while {$argc > 0} {
             -flip $sIgnoreCol -filter $::search::filter::operation \
             -fStdStart $sHeaderFlags(StdStart) \
             -fPromotions $sHeaderFlags(Promotions) \
+            -fUnderPromo $sHeaderFlags(UnderPromo) \
             -fComments $sHeaderFlags(Comments) \
             -fVariations $sHeaderFlags(Variations) \
             -fAnnotations $sHeaderFlags(Annotations) \

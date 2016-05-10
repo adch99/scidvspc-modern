@@ -867,6 +867,8 @@ translate P GameLength {Długość}
 translate P FindGamesWith {Znajdź partie}
 translate P StdStart {cała partia}
 translate P Promotions {z promocją}
+# ====== TODO To be translated ======
+translate P UnderPromo {Under Prom.}
 translate P Comments {Komentarze}
 translate P Variations {Warianty}
 translate P Annotations {Uwagi}
