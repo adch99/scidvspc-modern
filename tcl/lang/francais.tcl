@@ -499,6 +499,8 @@ translate F PinfoLookupName {Chercher nom}
 # Tablebase information:
 translate F Draw {Nulle}
 translate F stalemate {pat}
+# ====== TODO To be translated ======
+translate F checkmate {checkmate}
 translate F withAllMoves {avec tous les coups}
 translate F withAllButOneMove {avec tous les coups sauf le dernier}
 translate F with {avec}
@@ -507,7 +509,6 @@ translate F lose {perte}
 translate F loses {pertes}
 translate F allOthersLose {toutes les autres pertes}
 translate F matesIn {mat en}
-translate F hasCheckmated {a maté}
 translate F longest {le plus long}
 translate F WinningMoves {Coups gagnants}
 translate F DrawingMoves {Coups faisant nulle}

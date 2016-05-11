@@ -550,6 +550,8 @@ translate C PinfoLookupName {Lookup Name}
 # Tablebase information:
 translate C Draw {Remíza}
 translate C stalemate {pat}
+# ====== TODO To be translated ======
+translate C checkmate {checkmate}
 translate C withAllMoves {se v¹emi tahy}
 translate C withAllButOneMove {se v¹emi tahy kromì posledního}
 translate C with {s}
@@ -558,7 +560,6 @@ translate C lose {prohrát}
 translate C loses {prohrává}
 translate C allOthersLose {v¹echny ostatní prohrávají}
 translate C matesIn {matuje bìhem}
-translate C hasCheckmated {zmatoval}
 translate C longest {nejdel¹í}
 translate C WinningMoves {vyhrávající tahy}
 translate C DrawingMoves {remizující tahy}

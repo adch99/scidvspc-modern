@@ -536,6 +536,8 @@ translate G PinfoLookupName {Lookup Name}
 # Tablebase information:
 translate G Draw {Ισοπαλία}
 translate G stalemate {ΠΑΤ}
+# ====== TODO To be translated ======
+translate G checkmate {checkmate}
 translate G withAllMoves {με όλες τις κινήσεις}
 translate G withAllButOneMove {με όλες εκτός από μία κίνηση}
 translate G with {με}
@@ -544,7 +546,6 @@ translate G lose {χάνει}
 translate G loses {χάνουν}
 translate G allOthersLose {όλες οι άλλες χάνουν}
 translate G matesIn {ματ σε}
-translate G hasCheckmated {έγινε ΜΑΤ}
 translate G longest {μακρύτερη}
 translate G WinningMoves {Κινήσεις που κερδίζουν}
 translate G DrawingMoves {Κινήσεις ισοπαλίας}

@@ -552,6 +552,8 @@ translate B PinfoLookupName {Lookup Name}
 # Tablebase information:
 translate B Draw {Empate}
 translate B stalemate {mate afogado}
+# ====== TODO To be translated ======
+translate B checkmate {checkmate}
 translate B withAllMoves {com todos os movimentos}
 translate B withAllButOneMove {com um movimento a menos}
 translate B with {com}
@@ -560,7 +562,6 @@ translate B lose {derrota}
 translate B loses {derrotas}
 translate B allOthersLose {qualquer outro perde}
 translate B matesIn {mate em}
-translate B hasCheckmated {recebeu xeque-mate}
 translate B longest {mais longo}
 translate B WinningMoves {Winning moves} ;# ***
 translate B DrawingMoves {Drawing moves} ;# ***

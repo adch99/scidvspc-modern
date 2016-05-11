@@ -521,6 +521,8 @@ translate S PinfoLookupName {Buscar nombre}
 # Tablebase information:
 translate S Draw {Tablas}
 translate S stalemate {rey ahogado}
+# ====== TODO To be translated ======
+translate S checkmate {checkmate}
 translate S withAllMoves {con todos los movimientos}
 translate S withAllButOneMove {con todos los movimientos excepto uno}
 translate S with {con}
@@ -529,7 +531,6 @@ translate S lose {formas de perder}
 translate S loses {hace perder}
 translate S allOthersLose {todos los demás hacen perder}
 translate S matesIn {mate en}
-translate S hasCheckmated {jaque mate}
 translate S longest {el mate más largo}
 translate S WinningMoves {Movimientos ganadores}
 translate S DrawingMoves {Movimientos para tablas}

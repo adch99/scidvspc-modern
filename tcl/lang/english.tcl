@@ -495,6 +495,7 @@ translate E PinfoLookupName {Lookup Name}
 # Tablebase information:
 translate E Draw {Draw}
 translate E stalemate {stalemate}
+translate E checkmate {checkmate}
 translate E withAllMoves {with all moves}
 translate E withAllButOneMove {with all but one move}
 translate E with {with}
@@ -503,7 +504,6 @@ translate E lose {lose}
 translate E loses {loses}
 translate E allOthersLose {all others lose}
 translate E matesIn {mates in}
-translate E hasCheckmated {has checkmated}
 translate E longest {longest}
 translate E WinningMoves {Winning moves}
 translate E DrawingMoves {Drawing moves}

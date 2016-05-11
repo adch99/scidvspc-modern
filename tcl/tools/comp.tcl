@@ -801,7 +801,7 @@ proc compNM {n m k} {
 	if {![sc_pos isCheck]} {
 	  ### stalemate
 	  sc_game tags set -result =
-	  sc_pos setComment Stalemate
+	  sc_pos setComment [tr stalemate]
 	} else {
 	  ### checkmate
 	  if {[sc_pos side] == {black}} {

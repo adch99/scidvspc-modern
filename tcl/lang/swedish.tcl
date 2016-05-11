@@ -518,6 +518,8 @@ translate W PinfoLookupName {Lookup Name}
 # Tablebase information:
 translate W Draw {Remi}
 translate W stalemate {patt}
+# ====== TODO To be translated ======
+translate W checkmate {checkmate}
 translate W withAllMoves {med alla drag}
 translate W withAllButOneMove {med alla drag utom ett}
 translate W with {med}
@@ -526,7 +528,6 @@ translate W lose {förlust}
 translate W loses {förluster}
 translate W allOthersLose {alla andra drag förlorar}
 translate W matesIn {med matt i}
-translate W hasCheckmated {har satt matt}
 translate W longest {längst}
 translate W WinningMoves {Vinstdrag}
 translate W DrawingMoves {Remidrag}

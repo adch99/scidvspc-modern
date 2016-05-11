@@ -579,6 +579,8 @@ translate Y PinfoLookupName {Lookup Name}
 # Tablebase information:
 translate Y Draw {Remi}
 translate Y stalemate {pat}
+# ====== TODO To be translated ======
+translate Y checkmate {checkmate}
 translate Y withAllMoves {sa svim potezima}
 translate Y withAllButOneMove {sa svim osim jednog poteza}
 translate Y with {sa}
@@ -587,7 +589,6 @@ translate Y lose {gubi}
 translate Y loses {gubi}
 translate Y allOthersLose {svi ostali gube}
 translate Y matesIn {matira u}
-translate Y hasCheckmated {je matirao}
 translate Y longest {najdu¾i}
 translate Y WinningMoves {Winning moves} ;# ***
 translate Y DrawingMoves {Drawing moves} ;# ***

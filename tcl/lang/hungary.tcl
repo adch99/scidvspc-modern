@@ -555,6 +555,8 @@ translate H PinfoLookupName {Lookup Name}
 # Tablebase information:
 translate H Draw {Döntetlen}
 translate H stalemate {patt}
+# ====== TODO To be translated ======
+translate H checkmate {checkmate}
 translate H withAllMoves {az összes lépéssel}
 translate H withAllButOneMove {egy híján az összes lépéssel}
 translate H with {with}
@@ -563,7 +565,6 @@ translate H lose {veszítenek}
 translate H loses {veszít}
 translate H allOthersLose {minden más veszít}
 translate H matesIn {mates in}
-translate H hasCheckmated {mattot adott}
 translate H longest {leghosszabb}
 translate H WinningMoves {Nyerõ lépés}
 translate H DrawingMoves {Döntetlenre vezetõ lépés}

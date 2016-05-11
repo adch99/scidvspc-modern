@@ -6967,7 +6967,7 @@ probe_tablebase (Tcl_Interp * ti, int mode, DString * dstr)
             if (score == -1) {
                 sprintf (tempStr, "# [%s %s %s",
                          translate (ti, toMove == WHITE ? "Black" : "White"),
-                         translate (ti, "hasCheckmated"),
+                         translate (ti, "checkmate"),
                          translate (ti, toMove == WHITE ? "White" : "Black"));
             } else {
                 sprintf (tempStr, "%s:%d [%s %s %d",

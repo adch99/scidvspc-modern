@@ -493,6 +493,8 @@ translate U PinfoLookupName {Ver Nome}
 # Tablebase information:
 translate U Draw {Empate}
 translate U stalemate {rei afogado}
+# ====== TODO To be translated ======
+translate U checkmate {checkmate}
 translate U withAllMoves {com todos os movimentos}
 translate U withAllButOneMove {exceto com um movimento}
 translate U with {com}
@@ -501,7 +503,6 @@ translate U lose {derrota}
 translate U loses {perde}
 translate U allOthersLose {qualquer outro perde}
 translate U matesIn {mate em}
-translate U hasCheckmated {recebeu xeque-mate}
 translate U longest {mais longo}
 translate U WinningMoves {Movimentos que ganham} ;# ***
 translate U DrawingMoves {Movimentos que empatam} ;# ***

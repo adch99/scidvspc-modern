@@ -527,6 +527,8 @@ translate D PinfoLookupName {Name suchen}
 # Tablebase information:
 translate D Draw {Remis}
 translate D stalemate {Patt}
+# ====== TODO To be translated ======
+translate D checkmate {checkmate}
 translate D withAllMoves {mit allen Zügen}
 translate D withAllButOneMove {mit allen außer einem Zug}
 translate D with {mit}
@@ -535,7 +537,6 @@ translate D lose {verlieren}
 translate D loses {verliert}
 translate D allOthersLose {alle anderen verlieren}
 translate D matesIn {setzt Matt in}
-translate D hasCheckmated {hat Matt gesetzt}
 translate D longest {längste}
 translate D WinningMoves {Gewinnzüge}
 translate D DrawingMoves {Remiszüge}

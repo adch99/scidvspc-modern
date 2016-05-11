@@ -579,6 +579,8 @@ translate O PinfoLookupName {Lookup Name}
 # Tablebase information:
 translate O Draw {Uavgjort}
 translate O stalemate {patt}
+# ====== TODO To be translated ======
+translate O checkmate {checkmate}
 translate O withAllMoves {med alle trekk}
 translate O withAllButOneMove {med alle trekk unntatt ett}
 translate O with {med}
@@ -587,7 +589,6 @@ translate O lose {taper} ;# tap?
 translate O loses {taper}
 translate O allOthersLose {alle andre taper}
 translate O matesIn {setter matt i}
-translate O hasCheckmated {har satt matt}
 translate O longest {lengste}
 translate O WinningMoves {Winning moves} ;# ***
 translate O DrawingMoves {Drawing moves} ;# ***

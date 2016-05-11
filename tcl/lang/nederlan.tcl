@@ -523,6 +523,8 @@ translate N PinfoLookupName {Lookup Name}
 # Tablebase information:
 translate N Draw {Remise}
 translate N stalemate {Pat}
+# ====== TODO To be translated ======
+translate N checkmate {checkmate}
 translate N withAllMoves {met alle zetten}
 translate N withAllButOneMove {alle zetten behalve één}
 translate N with {met}
@@ -531,7 +533,6 @@ translate N lose {verliezen}
 translate N loses {verliest}
 translate N allOthersLose {alle overigen verliezen}
 translate N matesIn {Mat in}
-translate N hasCheckmated {geeft mat}
 translate N longest {langste}
 translate N WinningMoves {Winnende zetten}
 translate N DrawingMoves {Remise zetten}

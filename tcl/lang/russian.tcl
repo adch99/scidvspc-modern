@@ -496,6 +496,8 @@ translate R PinfoLookupName {Поиск по имени}
 # Tablebase information:
 translate R Draw {Ничья}
 translate R stalemate {пат}
+# ====== TODO To be translated ======
+translate R checkmate {checkmate}
 translate R withAllMoves {со всеми ходами}
 translate R withAllButOneMove {со всеми, кроме одного хода}
 translate R with {с}
@@ -504,7 +506,6 @@ translate R lose {проиграно}
 translate R loses {проиграли}
 translate R allOthersLose {все остальные проиграны}
 translate R matesIn {мат за}
-translate R hasCheckmated {шах и мат}
 translate R longest {самый длинный}
 translate R WinningMoves {Выигрышные ходы}
 translate R DrawingMoves {Ничейные ходы}

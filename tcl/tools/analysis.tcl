@@ -3545,6 +3545,16 @@ proc sendPosToEngineUCI {n  {delay 0}} {
         set analysis(after$n) [eval [list after idle $cmd]]
     } else {
         if {[sc_pos moves] == {}} {
+	  set h .analysisWin$n.hist.text
+	  $h configure -state normal
+	  $h delete 1.0 end
+          if {[sc_pos isCheck]} {
+	    $h insert 1.0 ($::tr(checkmate))
+          } else {
+	    $h insert 1.0 ($::tr(stalemate))
+          }
+          # $h insert 1.0 "[tr No] [tr Moves]"
+	  $h configure -state disabled
           return
         }
         ### Dont send position if annotating and in book

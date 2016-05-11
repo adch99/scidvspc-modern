@@ -508,6 +508,8 @@ translate P PinfoLookupName {Wyszukaj Nazwisko}
 # Tablebase information:
 translate P Draw {remis}
 translate P stalemate {pat}
+# ====== TODO To be translated ======
+translate P checkmate {checkmate}
 translate P withAllMoves {po dowolnym posunięciu}
 translate P withAllButOneMove {po dowolnym posunięciu oprócz}
 translate P with {po}
@@ -516,7 +518,6 @@ translate P lose {przegrywają}
 translate P loses {przegrywa}
 translate P allOthersLose {inne posunięcia przegrywają}
 translate P matesIn {matują w}
-translate P hasCheckmated {matują}
 translate P longest {najlepsze}
 translate P WinningMoves {Wygrywające posunięcia}
 translate P DrawingMoves {Remisujące posunięcia} 

@@ -537,6 +537,8 @@ translate I PinfoLookupName {Lookup Name}
 # Tablebase information:
 translate I Draw {Patta}
 translate I stalemate {stallo}
+# ====== TODO To be translated ======
+translate I checkmate {checkmate}
 translate I withAllMoves {con tutte le mosse}
 translate I withAllButOneMove {con tutte le mosse tranne una}
 translate I with {con}
@@ -545,7 +547,6 @@ translate I lose {persa}
 translate I loses {perse}
 translate I allOthersLose {tutte le altre perse}
 translate I matesIn {matto in}
-translate I hasCheckmated {e' mattato}
 translate I longest {la piu' lunga}
 translate I WinningMoves {Mosse vincenti}
 translate I DrawingMoves {Mosse pattanti}
