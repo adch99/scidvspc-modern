@@ -228,9 +228,6 @@ proc findTclTkPaths {} {
             set success 0
         } else {
             puts $opt(tk_h)
-            if {$opt(tk_h) == "/usr/include"} {
-                set var(BASH_ENV) CPLUS_INCLUDE_PATH=/usr/include:/usr/local/include
-            }
         }
     }
 
