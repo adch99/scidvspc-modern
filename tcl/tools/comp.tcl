@@ -290,6 +290,9 @@ proc compOk {} {
     lappend players $j
     lappend names   [lindex [lindex $engines(list) $j] 0]
   }
+  if {$comp(firstonly)} {
+    set comp(firstN) [lindex $players 0]
+  }
 
   ### Check players are unique
   if {[llength [lsort -unique $players]] != $comp(count)} {
@@ -496,6 +499,13 @@ proc compNM {n m k} {
     sc_game tags set -date [::utils::date::today] -round $k -extra "{Movetime \"$comp(seconds)\"}"
   } else {
     sc_game tags set -date [::utils::date::today] -round $k -extra "{TimeControl \"$timecontrol/$comp(incr)\"}"
+  }
+  if {$comp(firstonly)} {
+    # Show games from first players view
+    if {( $n == $comp(firstN) &&  [::board::isFlipped .main.board] ) || \
+	( $m == $comp(firstN) && ![::board::isFlipped .main.board] ) } {
+      ::board::flip .main.board
+    }
   }
   update idletasks
   updateBoard -pgn
