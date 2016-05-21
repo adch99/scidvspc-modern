@@ -3135,6 +3135,13 @@ proc toggleEngineAnalysis {{n -1} {force 0}} {
   if {$analysis(analyzeMode$n)} {
     stopAnalyzeMode $n
     $b configure -image tb_play
+    if {[sc_pos moves] == {}} {
+      # remove checkmate/stalemate text
+      set h .analysisWin$n.hist.text
+      $h configure -state normal
+      $h delete 1.0 end
+      $h configure -state disabled
+    } 
     ::utils::tooltip::Set $b "$::tr(StartEngine)"
     .analysisWin$n.b.exclude configure -state disabled
     set analysis(exclude$n) ""
