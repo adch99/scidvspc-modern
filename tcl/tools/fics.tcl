@@ -2248,7 +2248,7 @@ namespace eval fics {
     # ... so don't update graph if playing
     vwaitTimed ::fics::sought 5000 "nowarn"
     if {$::fics::playing != 1 && $::fics::playing != -1 && $::fics::graph(on) && [winfo exists .fics]} {
-      after 2000 ::fics::updateGraph
+      after 1000 ::fics::updateGraph
     }
   }
 
