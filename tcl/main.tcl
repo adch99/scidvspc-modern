@@ -350,6 +350,14 @@ button .main.button.exitVar -image tb_outvar -command {
    updateBoard -animate
 }
 
+bind .main.button.exitVar <Button-3> {
+   set ::pause 1
+   while {[sc_var level] > 0} {
+     sc_var exit
+   }
+   updateBoard -animate
+}
+
 button .main.button.addVar -image tb_addvar -command {
     if {[sc_pos isAt vstart]  &&  [sc_pos isAt vend]} {
       return

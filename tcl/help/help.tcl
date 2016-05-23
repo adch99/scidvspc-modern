@@ -615,14 +615,17 @@ set helpText(MainWindow) {<h1>Scid Main Window</h1>
   <li> <button tb_prev> Move back one move  [left] </li>
   <li> <button tb_next> Move forward one move  [right] </li>
   <li> <button tb_end> Move to the end of the game  [end] </li>
-  <li> <button tb_invar> Move into a <a Variations>variation</a>  [v] </li>
-  <li> <button tb_outvar> Move out of the current variation  [z] </li>
+  <li> <button tb_invar> Move into a <a Variations>variation</a>  [v] (Holding button shows a menu of available variations)</li>
+  <li> <button tb_outvar> Move out of the current variation  [z] (Right-click exits all vars)</li>
   <li> <button tb_addvar> Add a new variation  [control+a]</li>
-  <li> <button autoplay_off> Start/stop <a MainWindow Autoplay>Autoplay mode</a> [control+z] </li>
+  <li> <button autoplay_off> Start/stop <a MainWindow Autoplay>Autoplay mode</a> [control+z] (Right-click autoplays all filter games)</li>
   <li> <button tb_trial> Start/stop <a Moves Trial>Trial mode</a> [control+space] </li>
   <li> <button tb_flip> Flip the board [control+f]</li>
   <li> <button tb_windows> Raise open windows [tab]. This feature may only work if you disable your window-manager's focus stealing policy.</li>
   </ul>
+  </p><p>
+  Additionally, right-clicking Autoplay will autoplay all filter games. Right-clicking 
+  </p>
 
   <h4><name Toolbar>Toolbar</name></h4>
   <p>
