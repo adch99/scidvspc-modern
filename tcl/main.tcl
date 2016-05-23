@@ -329,19 +329,59 @@ if {0} {
   }
 }
 
-frame .main.button.space3 -width 4
+###### Main Button Bar ########
 
+frame .main.button -relief raised -border 1
+button .main.button.start -image tb_start -command ::move::Start
+button .main.button.back -image tb_prev -command ::move::Back
+button .main.button.forward -image tb_next -command ::move::Forward
+button .main.button.end -image tb_end -command ::move::End
+frame .main.button.space -width 15
+
+# The go-into-variation button is a menubutton. 
+# It has a bug - Press button so vars are displayed, then use wheelmouse to change board position.
+# -> Button remains in pressed state (and draws all vars) until focus is lost from .main
+menubutton .main.button.intoVar -image tb_invar -menu .main.button.intoVar.menu -relief raised
+menu .main.button.intoVar.menu -tearoff 0 -font font_Regular
+
+button .main.button.exitVar -image tb_outvar -command {
+   set ::pause 1
+   sc_var exit
+   updateBoard -animate
+}
+
+button .main.button.addVar -image tb_addvar -command {
+    if {[sc_pos isAt vstart]  &&  [sc_pos isAt vend]} {
+      return
+    }
+
+    set endmove {}
+    if {[sc_pos isAt vend]} {
+      # Create new var with last move, and enter into it
+      set endmove [sc_game info previousMoveUCI]
+    }
+
+    sc_game undoPoint
+    sc_var create
+
+    if {$endmove != {}} {
+      sc_move addSan $endmove
+    }
+
+    updateBoard -pgn
+}
+
+button .main.button.autoplay -image autoplay_off -command toggleAutoplay
+button .main.button.trial    -image tb_trial     -command {setTrialMode toggle}
 button .main.button.flip     -image tb_flip      -command toggleRotateBoard
 button .main.button.windows  -image tb_windows   -command {raiseAllWindows 1}
-button .main.button.autoplay -image autoplay_off -command toggleAutoplay
 # Right-click Autoplays all games in filter
 bind .main.button.autoplay <Button-3> {toggleAutoplay 2}
-button .main.button.trial    -image tb_trial     -command {setTrialMode toggle}
 
-::utils::tooltip::Set .main.button.flip [tr FlipBoard]
-::utils::tooltip::Set .main.button.windows [tr RaiseWindows]
 ::utils::tooltip::Set .main.button.autoplay [tr AutoPlay]
 ::utils::tooltip::Set .main.button.trial [tr TrialMode]
+::utils::tooltip::Set .main.button.flip [tr FlipBoard]
+::utils::tooltip::Set .main.button.windows [tr RaiseWindows]
 
 foreach i {start back forward end intoVar exitVar addVar autoplay flip windows trial} {
   .main.button.$i configure -relief flat -border 1 -highlightthickness 0 -takefocus 0
