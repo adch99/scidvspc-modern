@@ -250,9 +250,6 @@ proc ::tree::Open {{baseNumber 0}} {
   button $w.buttons.short -image tb_info -command "$w.menu.opt invoke 4" ; # TreeOptShort
   ::utils::tooltip::Set $w.buttons.short [tr TreeOptShort]
 
-  # add a button to start/stop tree refresh &&&
-  # button $w.buttons.bStartStop -image engine_on -command "::tree::toggleRefresh $baseNumber" ;# -relief flat
-
   set helpMessage($w.buttons.best) TreeFileBest
   set helpMessage($w.buttons.training) TreeOptTraining
   set helpMessage($w.buttons.short) TreeOptTraining
@@ -262,13 +259,11 @@ proc ::tree::Open {{baseNumber 0}} {
   checkbutton $w.buttons.adjust -text [tr TreeAdjust] -font font_Small \
       -variable tree(adjustfilter$baseNumber) -command "::tree::toggleAdjust $baseNumber"
 
-  button $w.buttons.stop -textvar ::tr(Stop) -font font_Small -command { sc_progressBar }
   button $w.buttons.close -textvar ::tr(Close) -font font_Small -command "destroy $w"
 
   pack $w.buttons.best $w.buttons.training $w.buttons.short $w.buttons.refresh $w.buttons.adjust -side left -padx 1
 
-  pack $w.buttons.close $w.buttons.stop -side right -padx 3
-  $w.buttons.stop configure -state disabled
+  pack $w.buttons.close -side right -padx 3
 
   wm minsize $w 40 5
 
@@ -326,9 +321,9 @@ proc ::tree::closeTree {baseNumber} {
   }
 
   ::tree::hideCtxtMenu $baseNumber
-  if {[winfo exists .treeWin$baseNumber.buttons.stop]} {
-    .treeWin$baseNumber.buttons.stop invoke
-  }
+
+  # reset progress bar ?
+  sc_progressBar
 
   trace remove variable tree(bestMax$baseNumber) write "::tree::doTrace bestMax"
   trace remove variable tree(bestRes$baseNumber) write "::tree::doTrace bestRes"
@@ -508,7 +503,16 @@ proc ::tree::refresh {{ baseNumber {} }} {
     }
   } else {
     sc_tree search -cancel all
-    for {set i 1} {$i <= [sc_base count total]} {incr i} {
+    set count [sc_base count total]
+    if {!$::tree::showBar} {
+      # disable tree text
+      for {set i 1} {$i <= $count} {incr i} {
+	if {[winfo exists .treeWin$i]} {
+	  .treeWin$i.f.tl tag configure treetext -foreground grey
+	}
+      }
+    }
+    for {set i 1} {$i <= $count} {incr i} {
       if {[winfo exists .treeWin$i]} {
         if { [::tree::dorefresh $i] == "canceled" } { break }
       }
@@ -527,7 +531,7 @@ proc ::tree::dorefresh { baseNumber } {
 
   # busyCursor .
   sc_progressBar $w.progress bar 251 16
-  $w.buttons.stop configure -state normal
+
   set tree(refresh) 1
 
   update idletasks
@@ -546,7 +550,10 @@ proc ::tree::dorefresh { baseNumber } {
 
   catch {$w.f.tl itemconfigure 0 -foreground darkBlue}
 
-  $w.buttons.stop configure -state disabled -relief raised
+  if {!$::tree::showBar} {
+    # enable tree
+    $w.f.tl tag configure treetext -foreground black
+  }
 
   # unbusyCursor .
   set tree(refresh) 0
@@ -645,7 +652,7 @@ proc ::tree::displayLines { baseNumber moves } {
     $w.f.tl insert end "    "
   }
 
-  $w.f.tl insert end "[lindex $moves 0]\n"
+  $w.f.tl insert end "[lindex $moves 0]\n" treetext
   # blank bargraph in title
   if {$::tree::short} {
     set padding [expr [string length [lrange $::tr(TreeTitleRowShort) 2 end]] + 5]
@@ -702,7 +709,7 @@ proc ::tree::displayLines { baseNumber moves } {
     }
 
     # Move and stats
-    set tags [list $tagfg tagclick$i tagtooltip$i]
+    set tags [list treetext $tagfg tagclick$i tagtooltip$i]
 
     # Should we add a tag for the Next Move ???
     if {$move == $nextmove} {
@@ -768,7 +775,7 @@ proc ::tree::displayLines { baseNumber moves } {
       $w.f.tl image create end -image ::tree::mask::emptyImage -align center
       $w.f.tl insert end "    "
     }
-    $w.f.tl insert end "[lindex $moves $i]\n"
+    $w.f.tl insert end "[lindex $moves $i]\n" treetext
   }
 
   # blank bargraph in total
@@ -1251,9 +1258,7 @@ proc ::tree::primeWithGame { { fillMask 0 } } {
   set ::tree::cancelPrime 0
   progressWindow "Scid: [tr TreeFileFill]" "$::tree::totalMoves moves" $::tr(Cancel) {
     set ::tree::cancelPrime 1
-    for {set i 1 } {$i <= [sc_base count total]} {incr i} {
-      catch { .treeWin$i.buttons.stop invoke }
-    }
+    sc_progressBar
   }
   resetProgressWindow
   leftJustifyProgressWindow
