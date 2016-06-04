@@ -154,7 +154,7 @@ proc ::file::finder::Refresh {{newdir ""}} {
     "mod"  { set flist [lsort -integer -decreasing -index 4 $flist] }
   }
 
-  set hc grey85
+  set hc $::rowcolor
   $t delete 1.0 end
   set dcount 0
   # $t insert end [string toupper "$::tr(FinderDirs)\n"] {center bold}

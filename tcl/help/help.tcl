@@ -640,7 +640,6 @@ set helpText(MainWindow) {<h1>Scid Main Window</h1>
   Below the chessboard is general information about the current game. 
   It includes the <b>Player Names</b> and <b>Ratings</b>,
   <b>Event</b> and <b>Site</b> fields, and <b>ECO</b> codes.
-  The <b>Game Number</b> (and any flags) show specific info about this game in the database.
   </p>
   <p>
   If Scid can find a suitable <a PInfo Photos>photo file</a>  then player photos will appear here. Clicking on them will make them smaller.
@@ -661,9 +660,10 @@ set helpText(MainWindow) {<h1>Scid Main Window</h1>
 
   <h4><name Status>The Status Bar</name></h4>
   <p>
-  The status bar shows information about the current database. This includes
-  how many games are currently in the <a Filter>filter</a>, and whether the base is read-only.
-  When entering moves with the keyboard, matching moves are displayed here.
+  The Status Bar shows information about the current database and game -
+  including game number, game flags, and whether the game has been altered or the DB is read-only.
+  Occasionally other information is be shown - such as matching moves (when entering moves with the keyboard)
+  and occasional Fics notifications.
   </p>
 
   <h4><name Autoplay>Autoplay Mode</name></h4>
@@ -883,7 +883,8 @@ set helpText(Menus) {<h1>Scid Menus</h1>
   The colours and themes for the Main Board are set in the <b>Options-<gt>Chessboard</b>,
   but a few other colour settings are available in <b>Options-<gt>Colours</b>.
 </p><p>
-  The <b>rows</b> colour is for the highlighted row in the Tree and Book windows.
+  The <b>Rows</b> colour is for the highlighted row in the Tree, Books, Finder, PlayerFinder and TournamentFinder windows.
+<br>
   Crosstable coloured rows must be enabled in the Crosstable Options menus.
 
   <p><footer>Updated: Scid vs. PC 4.17, Mar 2016</footer></p>

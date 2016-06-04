@@ -180,7 +180,7 @@ proc ::plist::refresh {} {
     return
   }
 
-  set hc grey85
+  set hc $::rowcolor
   set count 0
   foreach player $pdata {
     incr count

@@ -331,7 +331,7 @@ proc ::tourney::refresh {{option ""}} {
 
   $t insert end "\n"
 
-  set hc grey85
+  set hc $::rowcolor
   set count 0
   foreach tmt $tlist {
     incr count
