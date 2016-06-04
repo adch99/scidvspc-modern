@@ -2930,6 +2930,8 @@ engines support both formats.
   developments. Pressing the <term>Open...</term> button will open
   this page in the web browser.
   </p>
+  <p>After the engine is configured, Scid vs PC will give it a <b>Date</b> stamp, according to the
+  executable's modification time.</p>
 
   <h2><name UCI>UCI Configuration Options</name></h2>
 

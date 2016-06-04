@@ -508,8 +508,8 @@ proc ::enginelist::edit {index {copy {}}} {
   set w .engineEdit
   if {$index == ""} { return }
   if {[winfo exists $w]} {
-    raiseWin $w
-    return
+    destroy $w
+    update idletasks
   }
 
 
@@ -534,15 +534,9 @@ proc ::enginelist::edit {index {copy {}}} {
   set engines(newArgs)	[lindex $e 2]
   set engines(newDir)	[lindex $e 3]
   set engines(newElo)	[lindex $e 4]
-  set engines(newTime)	[lindex $e 5]
   set engines(newURL)	[lindex $e 6]
   set engines(newUCI)	[lindex $e 7]
   set engines(newUCIoptions) [lindex $e 8]
-
-  set engines(newDate) $::tr(None)
-  if {$engines(newTime) > 0 } {
-    set engines(newDate) [::enginelist::date $engines(newTime)]
-  }
 
   toplevel $w
   wm title $w {Configure Engine}
@@ -649,21 +643,6 @@ proc ::enginelist::edit {index {copy {}}} {
   grid $f.bUCI -row $row -column 2 -sticky w -pady 1 -padx 3
   incr row
 
-  label $f.lTime -textvar ::tr(EngineTime)
-  label $f.eTime -textvariable engines(newDate) -anchor w -width 1
-  grid $f.lTime -row $row -column 0 -sticky w -pady 1 -padx 3
-  grid $f.eTime -row $row -column 1 -sticky we -pady 1 -padx 3
-  button $f.clearTime -textvar ::tr(Clear) -command {
-    set engines(newTime) 0
-    set engines(newDate) $::tr(None)
-  }
-  button $f.nowTime -textvar ::tr(Update) -command {
-    set engines(newTime) [clock seconds]
-    set engines(newDate) [::enginelist::date $engines(newTime)]
-  }
-  grid $f.clearTime -row $row -column 2 -sticky we -pady 1 -padx 3
-  grid $f.nowTime -row $row -column 3 -sticky we -pady 1 -padx 3
-
   frame $w.radio
   label $w.radio.label -text {Hot Key}
   radiobutton $w.radio.f2	-text F2 -variable hotkey -value F2
@@ -690,7 +669,7 @@ proc ::enginelist::edit {index {copy {}}} {
   set f [frame $w.buttons]
   dialogbutton $f.ok -text OK -command {
     # remove trailing spaces
-    foreach i {newName newCmd newArgs newDir newElo newTime newURL newUCI} {
+    foreach i {newName newCmd newArgs newDir newElo newURL newUCI} {
       set engines($i) [string trim $engines($i)]
     }
     if { $engines(newElo) == "" } { set engines(newElo) 0 }
@@ -698,6 +677,20 @@ proc ::enginelist::edit {index {copy {}}} {
       tk_messageBox -title Scid -icon info -parent .engineEdit \
         -message "The Name, Command and Directory fields must not be empty."
     } else {
+      # Ok - now set time to file modification (mtime) of executable
+      set engines(newTime) 0
+      if {[file executable $engines(newCmd)]} {
+	set engines(newTime) [file mtime $engines(newCmd)]
+      } else {
+	# No such file. Look for it in the path
+	catch {
+	 set exe [exec which $engines(newCmd)]
+	  if {[file executable $exe]} {
+	    set engines(newTime) [file mtime $exe]
+	  }
+	}
+      }
+
       set newEntry [list $engines(newName) $engines(newCmd) \
         $engines(newArgs) $engines(newDir) \
           $engines(newElo) $engines(newTime) \
