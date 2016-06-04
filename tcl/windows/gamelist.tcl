@@ -163,7 +163,6 @@ proc ::windows::gamelist::Load {number} {
   set number [string trim $number "\n"]
   set ::windows::gamelist::goto $number
   ::game::Load $number
-  after idle {focus -force .main}
 }
 
 proc ::windows::gamelist::showCurrent {} {
