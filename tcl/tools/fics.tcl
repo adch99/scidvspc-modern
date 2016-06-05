@@ -16,6 +16,7 @@ namespace eval fics {
   set waitForMoves ""
   set sought 0
   set soughtlist {}
+  set newsoughtlist {}
   set graph(init) 0
   set graph(width) 300
   # graph(height) overlaps the buttons frame, and is calculated below
@@ -854,7 +855,7 @@ namespace eval fics {
 
   }
 
-  # Appends an array to soughtlist if the parameter is correct
+  # Appends an array to newsoughtlist if the parameter is correct
   # returns 0 if the line is not parsed and so it is still pending for use
 
   proc parseSoughtLine { l } {
@@ -900,7 +901,7 @@ namespace eval fics {
       set ga(start) ""
     }
 
-    lappend ::fics::soughtlist [array get ga]
+    lappend ::fics::newsoughtlist [array get ga]
     return 1
   }
 
@@ -917,7 +918,10 @@ namespace eval fics {
 
     if { $::fics::sought } {
       if {[string match "* ad* displayed." $line]} {
+        # end of offers
 	set ::fics::sought 0
+	set ::fics::soughtlist $::fics::newsoughtlist
+        set ::fics::newsoughtlist {}
 	displayGraph
 	return
       }
@@ -1021,7 +1025,7 @@ namespace eval fics {
 
       # Setting this, stops automatically accepting rematches. (But algorythm needs fixing a little)
       set ::fics::findopponent(manual) manual
-      after cancel ::fics::updateGraph
+      after cancel ::fics::updateAds
 
       # Move a previously observed game back to the fics widget
       ::fics::demote_mainGame 
@@ -1090,7 +1094,7 @@ namespace eval fics {
 	::utils::sound::PlayMove sound_start
       }
 
-      ### hide offers graph ; sometime ::fics::updateGraph doesn't get cancelled though !?^&$%!
+      ### hide offers graph ; sometime ::fics::updateAds doesn't get cancelled though !?^&$%!
       set ::fics::graph(on) 0
       showGraph
 
@@ -2225,9 +2229,9 @@ namespace eval fics {
         set ::fics::graph(on) 0
         ::fics::showGraph
       }
-      updateGraph
+      updateAds
     } else {
-      after cancel ::fics::updateGraph
+      after cancel ::fics::updateAds
       bind .fics <Escape> ".fics.command.entry delete 0 end"
       pack forget $w.graph
       $w.graph.c delete game
@@ -2240,15 +2244,17 @@ namespace eval fics {
     .fics.console.text yview moveto 1
   }
 
-  proc updateGraph { } {
+  proc updateAds { } {
     set ::fics::sought 1
-    set ::fics::soughtlist {}
-    writechan "sought"
-    ### This vwait cause f-ing headaches.
-    # ... so don't update graph if playing
-    vwaitTimed ::fics::sought 5000 "nowarn"
+    # set ::fics::newsoughtlist {}
+
+    writechan sought
+    vwait ::fics::sought 
+
+    # Don't update Ads anymore if playing
     if {$::fics::playing != 1 && $::fics::playing != -1 && $::fics::graph(on) && [winfo exists .fics]} {
-      after 1000 ::fics::updateGraph
+      # We no longer have to wait till seeking new Ads (maybe this update could be where we call displayGraph
+      ::fics::updateAds
     }
   }
 
@@ -2256,7 +2262,7 @@ namespace eval fics {
   proc displayGraph {} {
     global ::fics::graph ::fics::offers_minelo ::fics::offers_maxelo ::fics::offers_mintime ::fics::offers_maxtime
 
-    after cancel ::fics::updateGraph
+    after cancel ::fics::updateAds
 
     set w .fics.bottom.graph
     set size 7
@@ -2416,7 +2422,7 @@ namespace eval fics {
     }
 
     set ::fics::sought 0
-    after cancel ::fics::updateGraph
+    after cancel ::fics::updateAds
     after cancel ::fics::stayConnected
     set logged 0
 
