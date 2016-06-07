@@ -163,16 +163,15 @@ proc ::gbrowser::new {base gnum {ply -1} {w {}}} {
     $w.b.merge configure -command "mergeGame $base $gnum"
   }
 
-  set flipped 0
   foreach pattern $::myPlayerNames {
+    if {[string match $pattern $white]} {
+      ::board::flip $w.bd 0
+      break
+    }
     if {[string match $pattern $black]} {
-      set flipped 1
       ::board::flip $w.bd 1
       break
     }
-  }
-  if {!$flipped} {
-    ::board::flip $w.bd 0
   }
 
   # The gnum is stored in title, and also used later 
