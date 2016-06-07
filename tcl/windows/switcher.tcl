@@ -1084,15 +1084,15 @@ proc ::windows::switcher::Refresh {} {
       } else {
         set name "[file tail [sc_base filename $i]]"
       }
-      $w.c.f$i.name configure -background $color -text "$name${sep}([filterText $i 100000])"
 
       if {[sc_base isReadOnly $i] && ![string match -nocase *pgn $name]} {
-        $w.c.f$i.menu entryconfigure 1 -state disabled
-        $w.c.f$i.name configure -foreground gray70
+        $w.c.f$i.menu entryconfigure 2 -state disabled
+        set name "$name ($::tr(readonly))"
       } else {
-        $w.c.f$i.menu entryconfigure 1 -state normal
-        $w.c.f$i.name configure -foreground black
+        $w.c.f$i.menu entryconfigure 2 -state normal
       }
+
+      $w.c.f$i.name configure -background $color -text "$name${sep}([filterText $i 100000])"
 
       $w.c itemconfigure tag$i -state normal
       $w.c coords tag$i [expr $x + 2] 2
