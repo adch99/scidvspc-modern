@@ -6828,7 +6828,8 @@ The window manager may interfere with some shortcuts.
 <li><b>control-i</b> - Gameinfo window</li>
 <li><b>control-t</b> - Tree window</li>
 <li><b>control-X</b> - Crosstable</li>
-<li><b>control-b</b> - Book window</li>
+<li><b>control-b</b> - Board options</li>
+<li><b>control-B</b> - Setup board</li>
 <li><b>control-Z</b> - Score graph</li>
 <li><b>escape</b> - Close window</li>
 </ul>
@@ -6864,7 +6865,7 @@ The window manager may interfere with some shortcuts.
 <li><b>control-home</b> - First game</li>
 <li><b>control-end</b> - Last game</li>
 <li><b>control-N</b> - New game</li>
-<li><b>control-G</b> - Load game number</li>
+<li><b>control-u</b> - Load game number</li>
 <li><b>control-?</b> - Load random game</li>
 <li></li>
 <li><b>control-o</b> - Open database</li>
@@ -6879,8 +6880,7 @@ The window manager may interfere with some shortcuts.
 
 <h4>Search / Filter</h4>
 <ul>
-<li><b>control-H</b> - General (header) search</li>
-<li><b>control-B</b> - Board search</li>
+<li><b>control-G</b> - General (header) search</li>
 <li><b>control-M</b> - Material search</li>
 <li></li>
 <li><b>control-r</b> - Reset filter</li>
@@ -6904,15 +6904,14 @@ The window manager may interfere with some shortcuts.
 
 <li><b>control-a</b> - Add variation</li>
 <li><b>control-A</b> - Analysis engines</li>
-<li><b>control-b</b> - Book window</li>
-<li><b>control-B</b> - Board search</li>
+<li><b>control-b</b> - Board options</li>
+<li><b>control-B</b> - Setup board</li>
 <li><b>control-c</b> - Copy game to Clipbase</li>
 <li><b>control-C</b> - Copy FEN</li>
 <li><b>control-e</b> - Comment editor</li>
 <li><b>control-f</b> - Flip Board</li>
 <li><b>control-g</b> - Goto move number</li>
-<li><b>control-G</b> - Load game number</li>
-<li><b>control-H</b> - General (header) search</li>
+<li><b>control-G</b> - General (header) search</li>
 <li><b>control-i</b> - Gameinfo window</li>
 <li><b>control-I</b> - Import PGN</li>
 <li><b>control-l</b> - Gamelist window</li>
@@ -6928,6 +6927,7 @@ The window manager may interfere with some shortcuts.
 <li><b>control-S</b> - Add game</li>
 <li><b>control-t</b> - Tree window</li>
 <li><b>control-T</b> - Tournament finder</li>
+<li><b>control-u</b> - Load game number</li>
 <li><b>control-v</b> - Paste game from Clipbase</li>
 <li><b>control-V</b> - Paste FEN</li>
 <li><b>control-w</b> - Close database</li>

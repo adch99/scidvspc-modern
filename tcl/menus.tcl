@@ -144,18 +144,16 @@ set helpMessage($m,[incr menuindex]) FileExit
 set menuindex -1
 set m .menu.edit
 
-$m add command -label EditSetup -command setupBoard
+$m add command -label EditSetup -command setupBoard -accelerator "control-B"
 set helpMessage($m,[incr menuindex]) EditSetup
 
 $m add command -label EditCopyBoard -accelerator "control-C" -command copyFEN
-bind .main <Control-C> copyFEN
 set helpMessage($m,[incr menuindex]) EditCopyBoard
 
 $m add command -label EditCopyPGN -command ::pgn::copyPgn
 set helpMessage($m,[incr menuindex]) EditCopyPGN
 
 $m add command -label EditPasteBoard -accelerator "control-V" -command pasteFEN
-bind .main <Control-V> pasteFEN
 set helpMessage($m,[incr menuindex]) EditPasteBoard
 
 $m add command -label EditPastePGN -command importPgnGame -accelerator "control-I"
@@ -335,13 +333,10 @@ $m  add separator
 incr menuindex
 
 $m  add command -label SearchHeader \
-    -command ::search::header -accelerator "control-H"
-bind .main <Control-H> ::search::header
+    -command ::search::header -accelerator "control-G"
 set helpMessage($m,[incr menuindex]) SearchHeader
 
-$m  add command -label SearchCurrent \
-    -command ::search::board -accelerator "control-B"
-bind .main <Control-B> ::search::board
+$m  add command -label SearchCurrent -command ::search::board
 set helpMessage($m,[incr menuindex]) SearchCurrent
 
 $m  add command -label SearchMaterial \
@@ -486,7 +481,7 @@ $m add command -label WindowsTB -command ::tb::Open -accelerator "control-="
 bind .main <Control-equal> ::tb::Open
 set helpMessage($m,[incr menuindex]) WindowsTB
 
-$m add command -label WindowsBook -command ::book::Open -accelerator "control-b"
+$m add command -label WindowsBook -command ::book::Open
 set helpMessage($m,[incr menuindex]) WindowsBook
 
 $m add command -label WindowsCorrChess -command ::CorrespondenceChess::CCWindow 

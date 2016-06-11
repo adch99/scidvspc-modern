@@ -1580,11 +1580,11 @@ proc standardShortcuts {w} {
   bind $w <Control-q> ::file::Exit
   bind $w <Control-g> ::game::GotoMoveNumber
   bind $w <Control-u> ::game::LoadNumber
-  bind $w <Control-B> ::search::board
-  bind $w <Control-H> ::search::header
+  bind $w <Control-G> ::search::header
   bind $w <Control-M> ::search::material
   bind $w <Control-e> ::commenteditor::Open
-  bind $w <Control-b> ::book::Open
+  bind $w <Control-B> ::setupBoard
+  bind $w <Control-b> ::chooseBoardColors
   bind $w <Control-l> ::windows::gamelist::Open
   bind $w <Control-p> ::pgn::Open
   bind $w <Control-T> ::tourney::Open
@@ -1614,7 +1614,6 @@ proc standardShortcuts {w} {
   bind $w <F3>    {::startAnalysisWin F3}
   bind $w <F4>    {::startAnalysisWin F4}
 
-  bind $w <Control-S> ::setupBoard
   bind $w <Control-C> ::copyFEN
   bind $w <Control-V> ::pasteFEN
   bind $w <Control-s> ::gameReplace
