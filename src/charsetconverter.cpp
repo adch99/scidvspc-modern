@@ -91,7 +91,7 @@ nextState(State current, unsigned char c)
 } // namespace
 
 
-#define _ (char)-1
+#define _ -1
 static char const CP850Weight[256] =
 {
   0, 0, 0, 0, 0, 0, 0, 0, // 00 ... 07
