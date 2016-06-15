@@ -5523,7 +5523,7 @@ or, highest rated games, such as
 <li>/x - atomic</li>
 </ul>
 </p>
-  One may browse all current games using the <b>games</b> command, or <b>unobserve</b> to stop following games.
+  One may browse all current games using the <b>games</b> command, or <b>unobserve</b> to stop oberving games.
   </p>
   <br>
   Observed games are shown as small boards (the size is configurable in Options--<gt>FICS)
@@ -5541,6 +5541,11 @@ or, highest rated games, such as
   FICS also has a concept of <b>primary</b> game. When observing multiple games, double click any board to make it your primary game,
   and the game number will be shown in bold.
   </p>
+
+<h3>Following Players</h3>
+  <p>The FICS <b>follow</b> command allows one to follow a specific player's games.
+  Using <b>follow+</b> in Scid vs PC will allow one to follow, and automatically save the games.
+</p>
 
   <h3><name exam>Examining and Loading Games</name></h3>
 
@@ -6785,7 +6790,7 @@ set helpText(Changelog) {<h1>Changelog</h1>
 set helpTitle(ShortCuts) "Shortcuts"
 set helpText(ShortCuts) {<h1>Keyboard Shortcuts</h1>
 <p>
-Shortcuts are <b>case sensitive</b>.
+Shortcuts are <b>case sensitive</b>, and can be overided by altering standardShortcuts() in Scid.gui (end.tcl).
 <br>
 The window manager may interfere with some shortcuts.
 <br>

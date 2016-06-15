@@ -222,6 +222,7 @@ proc ::game::Load { selection {update 1} {raise 1}} {
     }
     ::fics::demote_mainGame
     set ::fics::mainGame -1
+    set ::fics::autoload {}
   } else {
     set confirm [::game::ConfirmDiscard]
     if {$confirm == 2} { return -1 }

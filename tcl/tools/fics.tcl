@@ -8,6 +8,7 @@ namespace eval fics {
   set sockchan 0
   set seeklist {}
   set mainGame -1
+  set autoload {} ; # autoload this players games
   set observedGames {}
   set primary 0
   set playing 0
@@ -610,7 +611,8 @@ namespace eval fics {
 
     set c [lindex [split $l] 0]
     ::fics::addHistory $l
-    switch -glob [string trim $c] {
+    set c [string trim $c]
+    switch -glob $c {
       {}  {
 	  updateConsole {}
 	  return
@@ -648,7 +650,32 @@ namespace eval fics {
 	  updateBoard -pgn
 	  updateTitle
 	  return
-      } 
+      }
+
+      fol* {
+          set plus [expr {[string index [lindex $c 0] end] == "+"}]
+
+	  if {$plus && $::fics::playing == 1 || $::fics::playing == -1} {
+	    updateConsole "Scid: follow+ disabled while playing a game"
+	    return
+	  }
+
+          set l2 [lindex $l 1]
+          if {$plus && ($l2 == {} || [string index $l2 0] == {/})} {
+	    updateConsole "Scid: follow+ needs a player name"
+	    return
+          }
+
+          set ::fics::autoload $l2
+
+          if {$plus} {
+	    set l [string map {+ {}} $l]
+          }
+
+	  writechan $l echo
+	  return
+      }
+
       upload {
           # upload current game to examine mode
           if {$::fics::playing == 2} {
@@ -1030,6 +1057,7 @@ namespace eval fics {
       # Move a previously observed game back to the fics widget
       ::fics::demote_mainGame 
       set ::fics::mainGame -1 ; # reset to this new game with first style12 
+      set ::fics::autoload {}
 
       ::fics::disableEngines
 
@@ -1142,6 +1170,7 @@ namespace eval fics {
         if {[sc_pos moveNumber] > 2} {
 	  catch {::game::Save}
 	  updateBoard -pgn
+	  ::windows::gamelist::Refresh
         }
         # we need a better way to update gamelist when adding a new game
         ::windows::gamelist::Refresh
@@ -1317,7 +1346,9 @@ namespace eval fics {
       2 {
 	  if {[string match {\{*\} *} $line]} {
 	    # {White forfeits on time} 1-0
+if {[lindex $line 0] != {Still in progress}} {
 	    ::commenteditor::appendComment [lindex $line 0]
+}
 	    sc_game tags set -result [lindex $line 1]
 	    set ::fics::waitForMoves ""
 	    return
@@ -1889,23 +1920,34 @@ namespace eval fics {
     set game  [lindex $line 16]
     set color [lindex $line 9]
 
+    set white [lindex $line 17]
+    set black [lindex $line 18]
+    set state [lindex $line 19]
+    set whiteTime [lindex $line 24]
+    set blackTime [lindex $line 25]
+    if {$::fics::mainGame == -1 && (
+        ($white != {} && $white == $::fics::autoload) ||
+        ($black != {} && $black == $::fics::autoload) ) } {
+      catch {.fics.bottom.game$game.b.load invoke}
+    }
+
     ### Observed games are a row of small boards down the bottom left 
     if {[lsearch -exact $::fics::observedGames $game] > -1} {
       if { [::board::isFlipped .fics.bottom.game$game.bd] } {
 	if {$color == "W"} {
-	  .fics.bottom.game$game.b.black configure -text "[lindex $line 17] ([lindex $line 24] secs) X"
-	  .fics.bottom.game$game.w.white configure -text "[lindex $line 18] ([lindex $line 25] secs)"
+	  .fics.bottom.game$game.b.black configure -text "$white ($whiteTime secs) X"
+	  .fics.bottom.game$game.w.white configure -text "$black ($blackTime secs)"
 	} else {
-	  .fics.bottom.game$game.b.black configure -text "[lindex $line 17] ([lindex $line 24] secs)"
-	  .fics.bottom.game$game.w.white configure -text "[lindex $line 18] ([lindex $line 25] secs) X"
+	  .fics.bottom.game$game.b.black configure -text "$white ($whiteTime secs)"
+	  .fics.bottom.game$game.w.white configure -text "$black ($blackTime secs) X"
 	}
       } else {
 	if {$color == "W"} {
-	  .fics.bottom.game$game.w.white configure -text "[lindex $line 17] ([lindex $line 24] secs) X"
-	  .fics.bottom.game$game.b.black configure -text "[lindex $line 18] ([lindex $line 25] secs)"
+	  .fics.bottom.game$game.w.white configure -text "$white ($whiteTime secs) X"
+	  .fics.bottom.game$game.b.black configure -text "$black ($blackTime secs)"
 	} else {
-	  .fics.bottom.game$game.w.white configure -text "[lindex $line 17] ([lindex $line 24] secs)"
-	  .fics.bottom.game$game.b.black configure -text "[lindex $line 18] ([lindex $line 25] secs) X"
+	  .fics.bottom.game$game.w.white configure -text "$white ($whiteTime secs)"
+	  .fics.bottom.game$game.b.black configure -text "$black ($blackTime secs) X"
 	}
       }
 
@@ -1914,12 +1956,6 @@ namespace eval fics {
       ::board::update .fics.bottom.game$game.bd $boardmoves 1
       return
     }
-
-    set white [lindex $line 17]
-    set black [lindex $line 18]
-    set state [lindex $line 19]
-
-    # todo: make a "follow!" command that autoloads games into the main widget and saves them as each game finishes &&&
 
     # If not playing and not examiner (state 1, -1, 2), then we unobserve game, as its not in $observedGames
     if { $state != -1 && $state != 1 && $state != 2 && ($game != $::fics::mainGame) } {
