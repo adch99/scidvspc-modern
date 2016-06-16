@@ -1489,6 +1489,7 @@ proc updateMenuStates {} {
     $m.game entryconfig [tr GameReload] -state $state
     if {$isReadOnly} {set state disabled}
     $m.game entryconfig [tr GameDelete] -state $state
+    $m.game entryconfig [tr GameInfo] -state $state
 
     # Save add button:
     set state normal
