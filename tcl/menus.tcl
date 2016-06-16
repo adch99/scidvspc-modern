@@ -1444,10 +1444,10 @@ proc updateMenuStates {} {
 
   $m.file entryconfig [tr FileReadOnly] -state disabled
 
-  # update recent Tree list (open base as Tree)
+  # Recent Tree list (open base as Tree)
   ::recentFiles::treeshow .menu.file.recenttrees
 
-  # Remove and reinsert the Recent files list and Exit command:
+  # Remove and reinsert the Recent files list and Exit command
   $m.file add separator
   set idx 12
   $m.file delete $idx end
@@ -1460,7 +1460,7 @@ proc updateMenuStates {} {
       -command ::file::Exit
   set helpMessage($m.file,$idx) FileExit
 
-  # Configure File menu entry states::
+  # File menu entry states
   if {[sc_base inUse]} {
     set isReadOnly [sc_base isReadOnly]
     $m.file entryconfig [tr FileClose] -state normal
@@ -1470,11 +1470,18 @@ proc updateMenuStates {} {
         $m.tools.utils entryconfig [tr ToolsMaintName$i] -state normal
       }
       $m.file entryconfig [tr FileReadOnly] -state normal
+      $m.game entryconfig [tr GameInfo] -state normal
+    } else {
+      $m.game entryconfig [tr GameInfo] -state disabled
     }
 
-    # Load first/last/random buttons:
+    # Load first/last/random buttons
     set filtercount [sc_filter count]
-    if {$filtercount == 0} {set state disabled} else {set state normal}
+    if {$filtercount == 0} {
+      set state disabled
+    } else {
+      set state normal
+    }
     $m.game entryconfig [tr GameFirst] -state $state
     $m.game entryconfig [tr GameLast] -state $state
     $m.game entryconfig [tr GameRandom] -state $state
@@ -1485,31 +1492,38 @@ proc updateMenuStates {} {
     # .main.tb.gnext configure -state $state
 
     # Reload and Delete
-    if {[sc_game number]} {set state normal} else {set state disabled}
+    if {[sc_game number]} {
+      set state normal
+    } else {
+      set state disabled
+    }
     $m.game entryconfig [tr GameReload] -state $state
-    if {$isReadOnly} {set state disabled}
+    if {$isReadOnly} {
+      set state disabled
+    }
     $m.game entryconfig [tr GameDelete] -state $state
-    $m.game entryconfig [tr GameInfo] -state $state
 
-    # Save add button:
-    set state normal
-    if {$isReadOnly  ||  $::trialMode} {set state disabled}
+    # Save add button
+    if {$isReadOnly  ||  $::trialMode} {
+      set state disabled
+    } else {
+      set state normal
+    }
     $m.game entryconfig [tr GameAdd] -state $state
 
-    # Save replace button:
-    set state normal
+    # Save replace button
     if {[sc_game number] == 0  ||  $isReadOnly  ||  $::trialMode} {
       set state disabled
+    } else {
+      set state normal
     }
     $m.game entryconfig [tr GameReplace] -state $state
 
   } else {
-    # Base is not in use:
-    # (Is this ever used ? S.A)
-
+    # Base is not in use
     $m.file entryconfig [tr FileClose] -state disabled
 
-    # This gets called occasionally after closing tree and others (?)
+    # This gets called *occasionally* after closing tree and others (?)
     # but dont disable 'Info Browse List' as they never get re-enabled !
     foreach i {Replace Add First Prev Reload Next Last Random Number Info Browse List Delete} {
       $m.game entryconfig [tr Game$i] -state disabled
@@ -1524,8 +1538,11 @@ proc updateMenuStates {} {
     $m.tools entryconfig [tr ToolsExpFilter] -state normal
   }
 
-  set state disabled
-  if {[baseIsCompactable]} { set state normal }
+  if {[baseIsCompactable]} {
+    set state normal
+  } else {
+    set state disabled
+  }
   $m.tools.utils entryconfig [tr ToolsMaintCompact] -state $state
 
   ::search::Config
