@@ -274,6 +274,8 @@ namespace eval uci {
       if { $uciInfo(tmp_score$n) == "" || $uciInfo(pv$n) == "" } {
         if {$gui} {
           updateAnalysisText $n
+        } else {
+          set analysis(side$n) [sc_pos side]
         }
         return
       }
@@ -322,6 +324,8 @@ namespace eval uci {
 
       if {$gui} {
 	updateAnalysisText $n
+      } else {
+	set analysis(side$n) [sc_pos side]
       }
 
       # if Annotating, goto next move
