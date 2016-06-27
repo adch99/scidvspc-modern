@@ -666,9 +666,9 @@ namespace eval fics {
 	    return
           }
 
-          set ::fics::autoload $l2
 
           if {$plus} {
+	    set ::fics::autoload $l2
 	    set l [string map {+ {}} $l]
           }
 
