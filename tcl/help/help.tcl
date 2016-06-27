@@ -1952,7 +1952,9 @@ set helpText(PGN) {<h1>PGN Window</h1>
   not be available until Windows has updated the font cache. If they aren't available, browse the Windows\Fonts directory
   and double click the Scid fonts.
   </p>
-  <p> <b>OS X</b> users should also manually install the ttf fonts.
+  <p> <b>OS X</b> users should also manually install the font.</p>
+  
+  <p><url https://sourceforge.net/projects/scidvspc/files/support files/pgn_ttf_fonts.tgz/download>Download ttf font</url>
   </p>
 
   <h3>Options</h3>

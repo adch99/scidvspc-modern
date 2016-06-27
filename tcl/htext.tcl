@@ -587,13 +587,13 @@ proc openURL {url} {
   if {$windowsOS} {
     # On Windows, use the "start" command:
     if {[string match $::tcl_platform(os) "Windows NT"]} {
-      catch {exec $::env(COMSPEC) /c start $url &}
+      catch {exec $::env(COMSPEC) /c start \"$url\" &}
     } else {
       catch {exec start $url &}
     }
   } elseif {$macOS} {
-    if {[catch {exec /bin/sh -c "open -a Firefox $url"}]} {
-      catch {exec /bin/sh -c "open -a Safari $url" &}
+    if {[catch {exec /bin/sh -c "open -a Firefox \"$url\""}]} {
+      catch {exec /bin/sh -c "open -a Safari \"$url\"" &}
     }
   } else {
     # The problem with the code commented out is it will leave two tabs  
