@@ -1710,7 +1710,7 @@ proc autoplay {} {
       if {$::annotate(isBatch)} {
 	nextgameAutoplay $n
       } else {
-	toggleEngineAnalysis $n 1
+	toggleEngineAnalysis $n
 	cancelAutoplay
       }
       return
@@ -1742,7 +1742,7 @@ proc autoplay {} {
     if {$::annotate(isBatch) && [sc_game number] != 0} {
       nextgameAutoplay $n
     } else {
-      toggleEngineAnalysis $n 1
+      toggleEngineAnalysis $n
       cancelAutoplay
     }
     return
@@ -1780,7 +1780,7 @@ proc autoplay {} {
     if {$::annotate(isBatch) && [sc_game number] != 0} {
       nextgameAutoplay $n
     } else {
-      toggleEngineAnalysis $n 1
+      toggleEngineAnalysis $n
       cancelAutoplay
     }
     return
@@ -1795,7 +1795,7 @@ proc autoplay {} {
 proc nextgameAutoplay {n} {
   global autoplayDelay analysis annotate stack
 
-  toggleEngineAnalysis $n 1
+  toggleEngineAnalysis $n
   sc_game save [sc_game number]
   set analysis(prevscore$n) 0
 
@@ -1829,7 +1829,7 @@ proc nextgameAutoplay {n} {
     set analysis(moves$n)     {}
     set analysis(prevdepth$n) 0
 
-    toggleEngineAnalysis $n 1
+    toggleEngineAnalysis $n
     after $autoplayDelay autoplay
   } else  {
     cancelAutoplay

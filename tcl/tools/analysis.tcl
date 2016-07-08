@@ -1144,7 +1144,7 @@ proc initAnnotation {n} {
   focus -force $w ; # windows bug - doesn't get focus and <Escape> fails
   # have to start engine here for depth based anno niggles
   if {! $analysis(analyzeMode$n)} {
-    toggleEngineAnalysis $n 1
+    toggleEngineAnalysis $n
   }
   update
 }
@@ -3108,7 +3108,7 @@ proc autoplayFinishGame {n} {
 
 ### Start/stop engine analysis
 
-proc toggleEngineAnalysis {{n -1} {force 0}} {
+proc toggleEngineAnalysis {{n -1}} {
   global analysis annotate
 
   if {$n == -1} {

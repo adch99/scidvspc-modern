@@ -2589,7 +2589,7 @@ if {[lindex $line 0] != {Still in progress}} {
     for {set i 0} {$i < [llength $::engines(list)]} {incr i} {
       if {[winfo exists .analysisWin$i]} {
 	if {$::analysis(analyzeMode$i)} {
-	  toggleEngineAnalysis $i 1
+	  toggleEngineAnalysis $i
 	 }
 	.analysisWin$i.b.startStop configure -state disabled
       }

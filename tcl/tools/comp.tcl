@@ -489,8 +489,8 @@ proc compNM {n m k} {
 
   # Stop all engines
   # (Is this necessary ? We are sending a "stop" straight away. &&&)
-  if {$analysis(analyzeMode$n)} { toggleEngineAnalysis $n 1 }
-  if {$analysis(analyzeMode$m)} { toggleEngineAnalysis $m 1 }
+  if {$analysis(analyzeMode$n)} { toggleEngineAnalysis $n }
+  if {$analysis(analyzeMode$m)} { toggleEngineAnalysis $m }
   
   sc_game tags set -white $analysis(name$n)
   sc_game tags set -black $analysis(name$m)
