@@ -345,6 +345,7 @@ append helpText(Index) {
 
   <h3><name I>I</name></h3>
   <ul>
+  <li><a Moves Trial>Immediate Threat</a></li>
   <li><a Import>Import</a> window</li>
   <li><a Moves Informant>Informant Symbols</a></li>
   <li><a FICS>Internet play</a></li>
@@ -673,6 +674,9 @@ set helpText(MainWindow) {<h1>Scid Main Window</h1>
   be set from the <green>Options--<gt>Moves</green> menu
   </p>
   <p>
+  Pressing Control-Autoplay, allows autoplay to progress through all filter games.
+  </p>
+  <p>
   Autoplay is also started when the
   game is being <a Analysis Annotating>annotated</a>, and pressing the autoplay button will stop annotation.
   </p>
@@ -928,16 +932,18 @@ set helpText(Moves) {<h1>Move Entry and Options</h1>
   </p>
 
   <h4><name Trial>Trial Mode</name></h4>
-  <p><i>
-  Undo and Redo are disabled in Trial Mode.
-  </i></p>
   <p>
-  If you are studying a game and reach a position where you want to try
-  an alternative variation without altering the game, select
-  <green>Edit--<gt>Try variation</green> to enter trial
-  mode. You can then make temporary moves and changes to the
-  game, and return to the original position when you exit trial mode.
+  Trial Mode allows one to make temporary moves and changes to a game.
+  Pressing the Trial Mode button a second time ends Trial Mode, and reverts the game to it's original form.
   </p>
+  <p>
+  Control-Button enters Trial Mode, and automatically adds a <a Variations Null>null move</a>. This is handy to see immediate threats with chess engines.
+  </p>
+  <p><i>
+  Game Saves, Undo and Redo are disabled in Trial Mode.
+  When switching databases - Trial Mode automatically exits.
+  </i></p>
+  
 
   <h4><name Mistakes>Correcting Mistakes</name></h4>
   <p>
@@ -4274,7 +4280,6 @@ set helpText(Author) "<h1>Scid vs. PC</h1>
   <br>
   <li>Based on:</li>
   <li>Shane's Chess Information Database 3.6.26</li>
-  <li>(with many updates from mainline Scid).</li>
   <li>(C) Steven Atkinson (stevenaaus@yahoo.com), Shane Hudson,</li>
   <li>Pascal Georges and others.</li>
   <br>

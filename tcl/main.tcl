@@ -383,8 +383,9 @@ button .main.button.autoplay -image autoplay_off -command toggleAutoplay
 button .main.button.trial    -image tb_trial     -command {setTrialMode toggle}
 button .main.button.flip     -image tb_flip      -command toggleRotateBoard
 button .main.button.windows  -image tb_windows   -command {raiseAllWindows 1}
-# Right-click Autoplays all games in filter
-bind .main.button.autoplay <Button-3> {toggleAutoplay 2}
+# Control-click Autoplays all games in filter
+bind .main.button.autoplay <Control-Button-1> {toggleAutoplay 2 ; break}
+bind .main.button.trial    <Control-Button-1>  {setTrialMode toggleNull ; break}
 
 ::utils::tooltip::Set .main.button.autoplay [tr AutoPlay]
 ::utils::tooltip::Set .main.button.trial [tr TrialMode]
@@ -1853,24 +1854,34 @@ proc cancelAutoplay {} {
 
 set trialMode 0
 
-proc setTrialMode {mode {update 1}} {
+proc setTrialMode {mode {updateBoard 1}} {
   global trialMode
-  if {$mode == "toggle"} {
+
+  # Control-Trial-Button start trial mode and adds a null move
+  set nullMode [expr {$mode == "toggleNull"}]
+
+  if {[string match toggle* $mode]} {
     set mode [expr {1 - $trialMode}]
   }
   if {$mode == $trialMode} { return }
-  if {$mode == "update"} { set mode $trialMode }
+  if {$mode == "menu"} {
+    # called by edit->try variation menu, so dont toggle trialMode
+    set mode $trialMode
+  }
 
   if {$mode == 1} {
     set trialMode 1
     sc_game push copy
     .main.button.trial configure -image tb_trial_on
+    if {$nullMode} {
+      sc_move addSan null
+    }
   } else {
     set trialMode 0
     sc_game pop
     .main.button.trial configure -image tb_trial
   }
-  if {$update} {
+  if {$updateBoard} {
     updateBoard -pgn
   }
 }

@@ -1021,6 +1021,12 @@ proc gameSave {gnum {focus {}}} {
     return
   }
 
+  if {$::trialMode} {
+    tk_messageBox -type ok -icon error -title "Scid: Trial Mode" \
+      -message "Game Saves disabled in Trial Mode."
+    return
+  }
+
   set w .save
 
   if {[winfo exists $w]} {

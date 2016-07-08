@@ -213,7 +213,7 @@ $m add cascade -label EditMain -menu $m.main
 set helpMessage($m,[incr menuindex]) EditMain
 
 $m add checkbutton -label EditTrial -variable trialMode \
-    -accelerator "control-space" -command {setTrialMode update}
+    -accelerator "control-space" -command {setTrialMode menu}
 bind .main <Control-space> { setTrialMode toggle }
 set helpMessage($m,[incr menuindex]) EditTrial
 
