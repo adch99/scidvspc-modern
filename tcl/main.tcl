@@ -1320,13 +1320,10 @@ proc addMove { sq1 sq2 {animate ""}} {
       return
     }
   }
-  if {$nullmove} {
-    set char [string index [sc_game info previousMove] end]
-    if {$char == "#" || $char == "+"} {
+  if {$nullmove && [sc_pos isCheck]} {
       # dont add null move in check or mate
       tk_messageBox -type ok -message {Null Move while in Check is not allowed.} -parent .main.board -icon info
       return
-    }
   }
 
   if {[sc_pos isPromotion $sq1 $sq2] == 1} {
@@ -1873,7 +1870,7 @@ proc setTrialMode {mode {updateBoard 1}} {
     set trialMode 1
     sc_game push copy
     .main.button.trial configure -image tb_trial_on
-    if {$nullMode} {
+    if {$nullMode && ! [sc_pos isCheck]} {
       sc_move addSan null
     }
   } else {
