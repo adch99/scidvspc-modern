@@ -4385,14 +4385,15 @@ or any installed <a ComputerGame UCIGame>UCI Engine</a>.
 <i>Other computer opponents can be found in the
 training features of <a Analysis>Engine Analysis</a>, <a TB>Tablebases</a> and <a Tree>Tree</a></i>.
 </p>
+<p>To play as Black, simply flip the board before starting a game.</p>
 
 <h2><name PhalanxGame>Playing Phalanx</name></h2>
 <p>
 <run ::tacgame::config><green>Phalanx</green></run> is an old xboard engine written by Dusan Dobes.
 With it one may play a game of Normal, Fischer (castling not supported), or Random Pawns Chess.
 </p><p>
-It is not a strong chess engine by modern standards, and - even more - it is programmed to make "human" like errors.
-It's level can be adjusted roughly between 1400 (a young club member), to 2400.
+Recently, Dusan has updated Phalanx to be a stronger engine, with more sophisticated code for playing at different ELO.
+It's level can be adjusted roughly between 1400 (a novice club member), to 2400.
 There is also a computer coach (Toga II) watching, which will indicate when Phalanx has made a blunder.
 </p>
 <p><b>Coach's analysis time</b> <i>is the allowable time for the

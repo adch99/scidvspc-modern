@@ -1895,6 +1895,10 @@ proc pauseGame {args} {
     .serGameWin.fbuttons.resume configure -state normal
     after cancel ::sergame::engineGo
   }
+  catch {
+    ::gameclock::stop 1
+    ::gameclock::stop 2
+  }
 }
 
 ### Add current position, and check for 3 fold repetition or 50 move rule
