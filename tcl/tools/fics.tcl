@@ -2277,7 +2277,7 @@ if {[lindex $line 0] != {Still in progress}} {
 
     ### Repacking can make the console suspend, so seek to console end 
     update
-    .fics.console.text yview moveto 1
+    catch {.fics.console.text yview moveto 1} ; # in case we quit fics already
   }
 
   proc updateAds { } {
