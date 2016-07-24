@@ -371,6 +371,14 @@ PgnParser::ExtractPgnTag (const char * buffer, Game * game)
         buffer++;
     }
     if (! seenEndQuote) { return ERROR_PGNTag; }
+
+    // Silently convert null tags to '?'
+    // alternatively, we could show error messages by 'return ERROR_PGNTag'
+
+    if (lastQuoteIndex == 0) {
+      value[0] = '?';
+      lastQuoteIndex++;
+    }
     value[lastQuoteIndex] = 0;
 
     if (CharDetector)
