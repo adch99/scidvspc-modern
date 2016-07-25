@@ -371,14 +371,6 @@ PgnParser::ExtractPgnTag (const char * buffer, Game * game)
         buffer++;
     }
     if (! seenEndQuote) { return ERROR_PGNTag; }
-
-    // Silently convert null tags to '?'
-    // alternatively, we could show error messages by 'return ERROR_PGNTag'
-
-    if (lastQuoteIndex == 0) {
-      value[0] = '?';
-      lastQuoteIndex++;
-    }
     value[lastQuoteIndex] = 0;
 
     if (CharDetector)
@@ -386,6 +378,9 @@ PgnParser::ExtractPgnTag (const char * buffer, Game * game)
 
     // Now decide what to add to the game based on this tag:
     if (strEqual (tag, "White")) {
+        // The White, Black, Site, Event, Round tags should not be empty
+        // (Date and Result should also have values, but these will be set after ExtractPgnTag returns)
+        if (length == 0) { return ERROR_PGNTag; }
 #ifdef STANDARD_PLAYER_NAMES
         standardPlayerName (value);
 #endif
@@ -407,6 +402,7 @@ PgnParser::ExtractPgnTag (const char * buffer, Game * game)
         game->SetWhiteStr (value);
 
     } else if (strEqual (tag, "Black")) {
+        if (length == 0) { return ERROR_PGNTag; }
 #ifdef STANDARD_PLAYER_NAMES
         standardPlayerName (value);
 #endif
@@ -428,12 +424,15 @@ PgnParser::ExtractPgnTag (const char * buffer, Game * game)
         game->SetBlackStr (value);
 
     } else if (strEqual (tag, "Event")) {
+        if (length == 0) { return ERROR_PGNTag; }
         game->SetEventStr (value);
 
     } else if (strEqual (tag, "Site")) {
+        if (length == 0) { return ERROR_PGNTag; }
         game->SetSiteStr (value);
 
     } else if (strEqual (tag, "Round")) {
+        if (length == 0) { return ERROR_PGNTag; }
         game->SetRoundStr (value);
 
     } else if (strEqual (tag, "Result")) {
