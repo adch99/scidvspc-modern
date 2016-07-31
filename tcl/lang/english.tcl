@@ -1309,7 +1309,7 @@ translate E LoadGameNumber {Load Game number}
 translate E GotoMoveNumber {Goto Move number}
 
 # Copy games dialog:
-translate E CopyGames {Copy games}
+translate E CopyGames {Copying games}
 translate E CopyConfirm {
 Copy [::utils::thousands $nGamesToCopy] game(s)
 from "$fromName" to "$targetName"?

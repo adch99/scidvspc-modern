@@ -46,11 +46,8 @@ static char decimalPointChar = '.';
 static uint htmlDiagStyle = 0;
 
 // Default maximum number of games in the clipbase database:
-#ifdef WINCE
-const uint CLIPBASE_MAX_GAMES = 10000;
-#else
-const uint CLIPBASE_MAX_GAMES = 1000000;
-#endif
+const uint CLIPBASE_MAX_GAMES = 5000000; // 5 million
+
 // Actual current maximum number of games in the clipbase database:
 static uint clipbaseMaxGames = CLIPBASE_MAX_GAMES;
 
@@ -8306,8 +8303,7 @@ sc_savegame (Tcl_Interp * ti, Game * game, gameNumberT gnum, scidBaseT * base)
         return TCL_ERROR;
     }
     if (base == clipbase   &&  base->numGames >= clipbaseMaxGames) {
-        sprintf (temp, "The clipbase has a limit of %u games.\n",
-                 clipbaseMaxGames);
+        sprintf (temp, "The clipbase has a limit of %u games.\n", clipbaseMaxGames);
         Tcl_AppendResult (ti, temp, NULL);
         return TCL_ERROR;
     }

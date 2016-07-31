@@ -858,7 +858,7 @@ proc stripCommentsVars {arg {parent .}} {
   dialogbutton $w.f.b.go -text "[tr EditStrip] $arg" -command {
     destroy .stripCommentsVars
     set ::maint::cancelStrip 0
-    progressWindow "Scid" "Stripping $checkOption(arg)" $::tr(Cancel) ::maint::sc_progressBar
+    progressWindow "Scid" "Stripping $checkOption(arg)" $::tr(Stop) ::maint::sc_progressBar
     busyCursor .
     if {$checkOption(AllGames) == "all"} {
       set next 1
@@ -2252,7 +2252,7 @@ proc doStripTags {tag} {
   set result [tk_messageBox -title "Scid" -parent .striptags \
       -icon question -type yesno -message $msg]
   if {$result == "no"} { return 0 }
-  progressWindow "Scid" "Removing the PGN tag $tag." $::tr(Cancel) "sc_progressBar"
+  progressWindow "Scid" "Removing the PGN tag $tag." $::tr(Stop) "sc_progressBar"
   busyCursor .
   set err [catch {sc_base tag strip $tag $checkOption(AllGames)} result]
   unbusyCursor .
