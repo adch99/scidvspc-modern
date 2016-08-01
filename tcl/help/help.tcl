@@ -2530,16 +2530,16 @@ For example - the first two examples remove four digit ELOs from player names. T
 :%s/ *"]$/"]/
 </p>
 
-  <h3><name Ratings>Adding Elo Ratings to Games</name></h3>
+  <h3><name Ratings>Adding Elo Ratings</name></h3>
   <p>
-  The <b>Add Elo ratings</b> button (Maintenance window) searches for games with null player ratings.
-  If the spellcheck file has an ELO rating for the
-  player - at the date of the game - Scid will add such ratings to the database.
+  The spelling file <b>ratings.ssp</b> contains ELO / Date information for rated players.
+  The <b>Add Elo Ratings</b> button (in the Maintenance window) searches games and adds the appropriate
+  ELO rating <b>at the date of the game<b>. There is also the option to overwrite existing ratings.
   </p>
   <p>
   The <a Maintenance Spellfile>spellcheck file</a> provided with Scid does not contain
   the Elo rating information needed for this function. Instead,
-  the larger <b>ratings.ssp</b> file should be used.
+  the larger ratings.ssp file should be used.
   </p>
   <p>
   <i>Ratings are not added to games with known aliases.
@@ -2603,7 +2603,7 @@ For example - the first two examples remove four digit ELOs from player names. T
   back in a consistent and usable state.
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.13, August 2014</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.17, August 2016</footer></p>
 }
 
 set helpTitle(Sorting) "Sorting a database"

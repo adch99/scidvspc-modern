@@ -1465,6 +1465,9 @@ set scidConfigFiles(optrainer)   optrainer.dat
 
 set ecoFile {}
 
+set addRatings(overwrite) 0
+set addRatings(filter)    1
+
 # scidConfigFile:
 #   Returns the full path and name of a Scid configuration file,
 #   given its configuration type.

@@ -304,9 +304,17 @@ proc progressWindow {args} {
     set button [lindex $args 2]
     set command [lindex $args 3]
     set b 1
-  } else { return }
+  } else {
+    ::splash::add "progressWindow: wrong number of args" error
+    return
+  }
   wm title $w $title
+
+  # This is the best way to keep win on top, but
+  # has the effect of raising .main after progressWin closes :(
+  # We need a parent arg
   wm transient $w .main
+
   label $w.t -text $text
   pack $w.t -side top
   canvas $w.c -width 400 -height 20  -relief solid -border 1

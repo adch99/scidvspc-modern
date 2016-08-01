@@ -131,6 +131,7 @@ namespace eval fics {
     button $w.button.defaults -textvar tr(Defaults) -command {
       if {[tk_dialog .fics_dialog Abort "This will reset all FICS options. Do you wish to continue ?" question {} [tr Yes] [tr No]] == 0} {
 	initFICSDefaults
+	raiseWin .ficsConfig
       }
     }
 
