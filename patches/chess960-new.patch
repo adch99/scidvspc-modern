@@ -1,6 +1,22 @@
+Index: src/movelist.h
+===================================================================
+--- src/movelist.h	(revision 2571)
++++ src/movelist.h	(working copy)
+@@ -46,6 +46,11 @@
+     squareT  epSquare;       // pre-move information
+     ushort   oldHalfMoveClock;
+     int      score;          // used for alpha/beta ordering.
++
++    squareT  kingFrom;
++    squareT  kingTo;
++    squareT  rookFrom;
++    squareT  rookTo;
+ };
+ 
+ inline bool isNullMove (simpleMoveT * sm)
 Index: src/game.cpp
 ===================================================================
---- src/game.cpp	(revision 2566)
+--- src/game.cpp	(revision 2571)
 +++ src/game.cpp	(working copy)
 @@ -473,7 +473,8 @@
  void
@@ -280,37 +296,9 @@ Index: src/game.cpp
          *CurrentPos = *StartPos;
      }
  
-Index: src/game.h
-===================================================================
---- src/game.h	(revision 2566)
-+++ src/game.h	(working copy)
-@@ -327,6 +327,7 @@
-     errorT     DecodeTags (ByteBuffer * buf, bool storeTags);
-     errorT     DecodeVariation (ByteBuffer * buf, byte flags, uint level);
- 
-+
-     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     //  Game:  Public Functions
- public:
-Index: src/movelist.h
-===================================================================
---- src/movelist.h	(revision 2566)
-+++ src/movelist.h	(working copy)
-@@ -46,6 +46,11 @@
-     squareT  epSquare;       // pre-move information
-     ushort   oldHalfMoveClock;
-     int      score;          // used for alpha/beta ordering.
-+
-+    squareT  kingFrom;
-+    squareT  kingTo;
-+    squareT  rookFrom;
-+    squareT  rookTo;
- };
- 
- inline bool isNullMove (simpleMoveT * sm)
 Index: src/position.cpp
 ===================================================================
---- src/position.cpp	(revision 2566)
+--- src/position.cpp	(revision 2571)
 +++ src/position.cpp	(working copy)
 @@ -14,6 +14,7 @@
  
@@ -843,7 +831,7 @@ Index: src/position.cpp
          } else {
 Index: src/position.h
 ===================================================================
---- src/position.h	(revision 2566)
+--- src/position.h	(revision 2571)
 +++ src/position.h	(working copy)
 @@ -24,6 +24,8 @@
  #include "sqset.h"
@@ -889,9 +877,21 @@ Index: src/position.h
      // Methods to get the Board or piece lists -- used in game.cpp to
      // decode moves:
      squareT *   GetList (colorT c)    { return List[c]; }
+Index: src/game.h
+===================================================================
+--- src/game.h	(revision 2571)
++++ src/game.h	(working copy)
+@@ -327,6 +327,7 @@
+     errorT     DecodeTags (ByteBuffer * buf, bool storeTags);
+     errorT     DecodeVariation (ByteBuffer * buf, byte flags, uint level);
+ 
++
+     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     //  Game:  Public Functions
+ public:
 Index: src/tkscid.cpp
 ===================================================================
---- src/tkscid.cpp	(revision 2568)
+--- src/tkscid.cpp	(revision 2571)
 +++ src/tkscid.cpp	(working copy)
 @@ -516,8 +516,8 @@
      clipbase->backupCache->SetPolicy (TREECACHE_Oldest);
@@ -911,23 +911,268 @@ Index: src/tkscid.cpp
          hpSigFlip = posFlip->GetHPSig();
          msigFlip = matsig_Make (posFlip->GetMaterial());
      }
-Index: tcl/edit.tcl
+Index: tcl/misc/misc.tcl
 ===================================================================
---- tcl/edit.tcl	(revision 2566)
-+++ tcl/edit.tcl	(working copy)
-@@ -322,6 +322,9 @@
- proc validateFEN {fen} {
-   global setupFen
+--- tcl/misc/misc.tcl	(revision 2571)
++++ tcl/misc/misc.tcl	(working copy)
+@@ -1093,4 +1093,187 @@
+   unbusyCursor .  
+ }
  
-+  # Don't worry about validating castling in chess960
-+  return $fen
++namespace eval chess960 {}
 +
-   #### Do a sanity check on castling
-   #    .. helpful because illegal FENs crash engines
-   #    and we could also have one for enpassant
++proc ::chess960::Outermost {side col} {
++	variable board	;# is array[2] of { LHS King RHS }
++
++	set index [expr {[lindex $board $side 1] ? 2 : 0}]
++	set c [lindex $board $side $index]
++
++	if {$c == 0 || ($index == 0 ? $col < $c : $c < $col)} {
++		lset board $side $index $col
++	}
++}
++
++
++proc ::chess960::Setup {str} {
++	variable board	;# is array[2] of { LHS King RHS }
++
++	set row 1
++	set col 1
++
++	foreach ch [split $str ""] {
++		if {[string is digit $ch]} {
++			incr col [expr {[scan $ch "%c"] - 48}] ;# "0" has ASCII 48
++		} else {
++			switch $ch {
++				"/" { incr row; set col 0 }
++				"R" { if {$row == 8} { Outermost 0 $col } }
++				"r" { if {$row == 1} { Outermost 1 $col } }
++				"K" { if {$row == 8} { lset board 0 1 $col } }
++				"k" { if {$row == 1} { lset board 1 1 $col } }
++			}
++
++			incr col
++		}
++	}
++
++	if {[lindex $board 0 1] == 0 && [lindex $board 1 1] == 0} {
++		return 0
++	}
++
++	return 1
++}
++
++
++proc ::chess960::MapPiece {side index ch} {
++	variable board	;# is array[2] of { LHS King RHS }
++
++	set col [lindex $board $side $index]
++	if {$col} {
++		return [format "%c" [expr {$col + ($side ? 96 : 64)}]] ;# 64 is 'A'-1; 96 is 'a'-1
++	}
++	return $ch
++}
++
++
++# Convert X-FEN to Shredder-FEN.
++#
++# This function expects a valid FEN, otherwise the result is undetermined.
++# It doesn't matter if the given FEN is already a Shredder-FEN.
++proc ::chess960::convertToShredder {fen} {
++	variable board	;# is array[2] of { LHS King RHS }
++
++	if {[llength $fen] < 3} {
++		return $fen
++	}
++
++	set board {{0 0 0} {0 0 0}}
++
++	if {![Setup [lindex $fen 0]]} {
++		return $fen
++	}
++
++	set rights ""
++
++	foreach ch [split [lindex $fen 2] ""] {
++		switch $ch {
++			"K" { append rights [MapPiece 0 2 "K"] }
++			"Q" { append rights [MapPiece 0 0 "Q"] }
++			"k" { append rights [MapPiece 1 2 "k"] }
++			"q" { append rights [MapPiece 1 0 "q"] }
++
++			default { append rights $ch }
++		}
++	}
++
++	lset fen 2 $rights
++	return $fen
++}
++
++
++# Convert Shredder-FEN to X-FEN.
++#
++# This function expects a valid FEN, otherwise the result is undetermined.
++# It doesn't matter if the given FEN is already a X-FEN.
++proc ::chess960::convertToXFEN {fen} {
++	variable board	;# is array[2] of { LHS King RHS }
++
++	if {[llength $fen] < 3} {
++		return $fen
++	}
++
++	set board {{0 0 0} {0 0 0}}
++
++	if {![Setup [lindex $fen 0]]} {
++		return $fen
++	}
++
++	set rights ""
++
++	foreach ch [split [lindex $fen 2] ""] {
++		if {[string is upper $ch]} {
++			set file [expr {[scan $ch "%c"] - 64}] ;# 64 is 'A'-1
++
++			if {$file == [lindex $board 0 0]} {
++				append rights "Q"
++			} elseif {$file == [lindex $board 0 2]} {
++				append rights "K"
++			} else {
++				append rights $ch
++			}
++		} elseif {[string is lower $ch]} {
++			set file [expr {[scan $ch "%c"] - 96}] ;# 96 is 'a'-1
++
++			if {$file == [lindex $board 1 0]} {
++				append rights "q"
++			} elseif {$file == [lindex $board 1 2]} {
++				append rights "k"
++			} else {
++				append rights $ch
++			}
++		} else {
++			append rights $ch
++		}
++	}
++
++	lset fen 2 $rights
++	return $fen
++}
++
++
++proc ::chess960::numberToFEN {number} {
++	set KRN {"NNRKR" "NRNKR" "NRKNR" "NRKRN" "RNNKR" "RNKNR" "RNKRN" "RKNNR" "RKNRN" "RKRNN"}
++	set pattern "XXXXXXXX"
++	set number [expr {$number%960}]
++
++	set r [expr {$number%4}]
++	set q [expr {$number/4}]
++	set m [expr {$r*2 + 1}]
++	set r [expr {$q%4}]
++	set q [expr {$q/4}]
++	set n [expr {$r*2}]
++	set r [expr {$q%6}]
++	set q [expr {$q/6}]
++
++	set pattern [string replace $pattern $m $m "B"]
++	set pattern [string replace $pattern $n $n "B"]
++
++	for {set i 0} {$i < 8} {incr i} {
++		set ch [string index $pattern $i]
++		if {$ch eq "X" && [incr r -1] == -1} {
++			break;
++		}
++	}
++	set pattern [string replace $pattern $i $i "Q"]
++
++	set n 0
++	set krn [lindex $KRN $q]
++	for {set i 0} {$i < 8} {incr i} {
++		set ch [string index $pattern $i]
++		if {$ch eq "X"} {
++			set pattern [string replace $pattern $i $i [string index $krn $n]]
++			incr n
++		}
++	}
++
++	append fen [string tolower $pattern]
++	append fen "/pppppppp/8/8/8/8/PPPPPPPP/"
++	append fen $pattern
++	append fen " w KQkq - 0 1"
++
++	return $fen
++}
++
+ # end of misc.tcl
+Index: tcl/tools/sergame.tcl
+===================================================================
+--- tcl/tools/sergame.tcl	(revision 2571)
++++ tcl/tools/sergame.tcl	(working copy)
+@@ -325,6 +325,10 @@
+       ::sergame::sendToEngine $n "setoption name Ponder value false"
+     }
+ 
++    if {[sc_game startBoard]} {
++      sendToEngine $n "setoption name UCI_Chess960 value true"
++    }
++
+     # if will follow a specific opening line
+     if {$isOpening} {
+       set fields [split [lindex $openingList $chosenOpening] ":"]
+@@ -368,7 +372,10 @@
+ 
+     if {$::uci::uciInfo(skill) != ""} {
+       # hmm - no spaces allowed in tags (Skill Level)
+-      sc_game tags set -extra [list "SkillLevel \"$::uci::uciInfo(skill)\""]
++      set extraTags [sc_game tag get -last Extra]
++      set extraTagsList [split $extraTags "\n"]
++      lappend extraTagsList "SkillLevel \"$::uci::uciInfo(skill)\""
++      sc_game tags set -extra $extraTagsList
+     }
+ 
+     updateBoard -pgn
+Index: tcl/tools/analysis.tcl
+===================================================================
+--- tcl/tools/analysis.tcl	(revision 2571)
++++ tcl/tools/analysis.tcl	(working copy)
+@@ -3639,6 +3639,7 @@
+     # proc is called for any change in board position (including new games, and simple moves)
+     set nonStdStart [sc_game startBoard]
+     if {$nonStdStart} {
++      sendToEngine $n "setoption name UCI_Chess960 value true"
+       set analysis(startpos$n) "fen [sc_game startPos]"
+     } else {
+       set analysis(startpos$n) startpos
+Index: tcl/tools/fics.tcl
+===================================================================
+--- tcl/tools/fics.tcl	(revision 2571)
++++ tcl/tools/fics.tcl	(working copy)
+@@ -2564,12 +2564,18 @@
+ 
+   proc checkAdd {} {
+     if {$::fics::playing == 1 && [winfo exists .fics]}  {
+-      set moveUCI [sc_game info previousMoveUCI]
+-      if { [ string length $moveUCI ] == 5 } {
+-        set promoLetter [ string tolower [ string index $moveUCI end ] ]
+-        ::fics::writechan "promote $promoLetter"
++      # If just castled, send San move
++      set previousMove [sc_game info previousMove]
++      if {[string match O-O* $previousMove]} {
++	::fics::writechan $previousMove
++      } else {
++	set moveUCI [sc_game info previousMoveUCI]
++	if { [ string length $moveUCI ] == 5 } {
++	  set promoLetter [ string tolower [ string index $moveUCI end ] ]
++	  ::fics::writechan "promote $promoLetter"
++	}
++	::fics::writechan [string range $moveUCI 0 3 ]
+       }
+-      ::fics::writechan [string range $moveUCI 0 3 ]
+ 
+       ### Stop clock
+       if {[sc_pos side] == "white"} {
 Index: tcl/main.tcl
 ===================================================================
---- tcl/main.tcl	(revision 2566)
+--- tcl/main.tcl	(revision 2571)
 +++ tcl/main.tcl	(working copy)
 @@ -1296,6 +1296,7 @@
  #   piece from the user.
@@ -984,58 +1229,73 @@ Index: tcl/main.tcl
    }
    if {$nullmove && [sc_pos isCheck]} {
        # dont add null move in check or mate
-Index: tcl/tools/analysis.tcl
+Index: tcl/edit.tcl
 ===================================================================
---- tcl/tools/analysis.tcl	(revision 2566)
-+++ tcl/tools/analysis.tcl	(working copy)
-@@ -3639,6 +3639,7 @@
-     # proc is called for any change in board position (including new games, and simple moves)
-     set nonStdStart [sc_game startBoard]
-     if {$nonStdStart} {
-+      sendToEngine $n "setoption name UCI_Chess960 value true"
-       set analysis(startpos$n) "fen [sc_game startPos]"
-     } else {
-       set analysis(startpos$n) startpos
-Index: tcl/tools/fics.tcl
-===================================================================
---- tcl/tools/fics.tcl	(revision 2569)
-+++ tcl/tools/fics.tcl	(working copy)
-@@ -2564,12 +2564,18 @@
+--- tcl/edit.tcl	(revision 2571)
++++ tcl/edit.tcl	(working copy)
+@@ -63,6 +63,9 @@
+       set fenStr "$s1 $s2 [lrange $fenStr 2 end]"
+   }
  
-   proc checkAdd {} {
-     if {$::fics::playing == 1 && [winfo exists .fics]}  {
--      set moveUCI [sc_game info previousMoveUCI]
--      if { [ string length $moveUCI ] == 5 } {
--        set promoLetter [ string tolower [ string index $moveUCI end ] ]
--        ::fics::writechan "promote $promoLetter"
-+      # If just castled, send San move
-+      set previousMove [sc_game info previousMove]
-+      if {[string match O-O* $previousMove]} {
-+	::fics::writechan $previousMove
-+      } else {
-+	set moveUCI [sc_game info previousMoveUCI]
-+	if { [ string length $moveUCI ] == 5 } {
-+	  set promoLetter [ string tolower [ string index $moveUCI end ] ]
-+	  ::fics::writechan "promote $promoLetter"
-+	}
-+	::fics::writechan [string range $moveUCI 0 3 ]
-       }
--      ::fics::writechan [string range $moveUCI 0 3 ]
- 
-       ### Stop clock
-       if {[sc_pos side] == "white"} {
-Index: tcl/tools/sergame.tcl
-===================================================================
---- tcl/tools/sergame.tcl	(revision 2566)
-+++ tcl/tools/sergame.tcl	(working copy)
-@@ -325,6 +325,10 @@
-       ::sergame::sendToEngine $n "setoption name Ponder value false"
-     }
- 
-+    if {[sc_game startBoard]} {
-+      sendToEngine $n "setoption name UCI_Chess960 value true"
-+    }
++  # Handle Shredder fen's HAha type castling field
++  set fenStr [::chess960::convertToXFEN $fenStr]
 +
-     # if will follow a specific opening line
-     if {$isOpening} {
-       set fields [split [lindex $openingList $chosenOpening] ":"]
+   if {[catch {sc_game startBoard $fenStr}]} {
+     # Trim length, and remove newlines for error dialog
+     if {[string length $fenStr] > 80} {
+@@ -322,6 +325,9 @@
+ proc validateFEN {fen} {
+   global setupFen
+ 
++  # Don't worry about validating castling in chess960
++  return $fen
++
+   #### Do a sanity check on castling
+   #    .. helpful because illegal FENs crash engines
+   #    and we could also have one for enpassant
+@@ -638,6 +644,20 @@
+     makeSetupFen
+   } -width 10
+ 
++  frame $sr.b.960
++
++  label $sr.b.960.text -text "960 code"
++  entry $sr.b.960.entry -width 4 -validate all -vcmd {string is int %P}
++  pack $sr.b.960.text $sr.b.960.entry -side left
++
++  bind  $sr.b.960.entry <Return> {
++    set SP [expr [.setup.r.b.960.entry get] %% 960]
++    if {$SP == 0} {set SP 960}
++    set setupFen  [::chess960::numberToFEN $SP]
++    sc_game tags set -extra [list {Variant "Fischerandom"} "StartingPosition \"$SP\""]
++    setSetupBoardToFen
++  }
++
+  # Are these bullet-proof and correct ? 
+ 
+   button $sr.b.swap -text {Swap Colours} -command {
+@@ -695,6 +715,7 @@
+   pack $sr.b		-side top -pady 10
+   pack $sr.b.clear	-side top -padx 5 -pady 2
+   pack $sr.b.initial	-side top -padx 5 -pady 2
++  pack $sr.b.960        -side top -expand yes -fill x
+   pack [frame $sr.b.space -height 10] -side top
+   pack $sr.b.swap	-side top -padx 5 -pady 2
+   pack $sr.b.invert	-side top -padx 5 -pady 2
+Index: tcl/start.tcl
+===================================================================
+--- tcl/start.tcl	(revision 2571)
++++ tcl/start.tcl	(working copy)
+@@ -45,10 +45,10 @@
+ 
+ if {![catch {tk windowingsystem} wsystem] && $wsystem == "aqua"} {
+   set macOS 1
+-  set scidName {Scid vs. Mac}
++  set scidName {Scid vs. Mac 360}
+ } else {
+   set macOS 0
+-  set scidName {Scid vs. PC}
++  set scidName {Scid vs. 360}
+ }
+ 
+ # See if we're inside a Mac .app bundle.  This duplcates part of the command-line
