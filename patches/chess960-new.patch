@@ -1,22 +1,6 @@
-Index: src/movelist.h
-===================================================================
---- src/movelist.h	(revision 2571)
-+++ src/movelist.h	(working copy)
-@@ -46,6 +46,11 @@
-     squareT  epSquare;       // pre-move information
-     ushort   oldHalfMoveClock;
-     int      score;          // used for alpha/beta ordering.
-+
-+    squareT  kingFrom;
-+    squareT  kingTo;
-+    squareT  rookFrom;
-+    squareT  rookTo;
- };
- 
- inline bool isNullMove (simpleMoveT * sm)
 Index: src/game.cpp
 ===================================================================
---- src/game.cpp	(revision 2571)
+--- src/game.cpp	(revision 2575)
 +++ src/game.cpp	(working copy)
 @@ -473,7 +473,8 @@
  void
@@ -296,9 +280,37 @@ Index: src/game.cpp
          *CurrentPos = *StartPos;
      }
  
+Index: src/game.h
+===================================================================
+--- src/game.h	(revision 2575)
++++ src/game.h	(working copy)
+@@ -327,6 +327,7 @@
+     errorT     DecodeTags (ByteBuffer * buf, bool storeTags);
+     errorT     DecodeVariation (ByteBuffer * buf, byte flags, uint level);
+ 
++
+     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     //  Game:  Public Functions
+ public:
+Index: src/movelist.h
+===================================================================
+--- src/movelist.h	(revision 2575)
++++ src/movelist.h	(working copy)
+@@ -46,6 +46,11 @@
+     squareT  epSquare;       // pre-move information
+     ushort   oldHalfMoveClock;
+     int      score;          // used for alpha/beta ordering.
++
++    squareT  kingFrom;
++    squareT  kingTo;
++    squareT  rookFrom;
++    squareT  rookTo;
+ };
+ 
+ inline bool isNullMove (simpleMoveT * sm)
 Index: src/position.cpp
 ===================================================================
---- src/position.cpp	(revision 2571)
+--- src/position.cpp	(revision 2575)
 +++ src/position.cpp	(working copy)
 @@ -14,6 +14,7 @@
  
@@ -318,15 +330,15 @@ Index: src/position.cpp
 +//    can use it to find the rook in it's StartPos
 +//
 +squareT
-+Position::GetRookOrigSq( colorT tomove, int dir ) {
++Position::GetRookOrigSq( colorT color, int dir ) {
 +    Game * thisgame = GetOwner();
 +    if ( thisgame != NULL ) {
 +        Position * startpos = thisgame->GetStartPos();
 +        if ( startpos != NULL ) {
 +            pieceT * startboard = startpos->GetBoard();
-+            squareT kSquare = startpos->GetKingSquare(tomove);
++            squareT kSquare = startpos->GetKingSquare(color);
 +            rankT kRank = square_Rank(kSquare);
-+            pieceT friendlyRook = piece_Make(ToMove, ROOK);
++            pieceT friendlyRook = piece_Make(color, ROOK);
 +            for (squareT sq = kSquare; square_Rank(sq) == kRank; sq=sq+dir) {
 +                if (startboard[sq] == friendlyRook) {
 +                    return sq;
@@ -337,11 +349,11 @@ Index: src/position.cpp
 +    // this below will have to change (so far at least) if there ever becomes an ECO for 
 +    // non standard starts (like for interesting or popular 960 start positions)
 +    else {
-+        if (ToMove == WHITE) {
++        if (color == WHITE) {
 +            if (dir == -1) { return A1; }
 +            if (dir == 1) { return H1; }
 +        }
-+        if (ToMove == BLACK) {
++        if (color == BLACK) {
 +            if (dir == -1) { return A8; }
 +            if (dir == 1) { return H8; }
 +        }
@@ -829,9 +841,111 @@ Index: src/position.cpp
          if (MatchKingMove (&mlist, to) != OK) {
              return ERROR_InvalidMove;
          } else {
+@@ -3031,10 +3201,97 @@
+         if (Castling == 0)  {
+             *str++ = '-';
+         } else {
+-            if (GetCastling (WHITE, KSIDE))  { *str++ = 'K'; }
+-            if (GetCastling (WHITE, QSIDE))  { *str++ = 'Q'; }
+-            if (GetCastling (BLACK, KSIDE))  { *str++ = 'k'; }
+-            if (GetCastling (BLACK, QSIDE))  { *str++ = 'q'; }
++            Game * thisgame = GetOwner();
++            Position * startpos = NULL;
++            if ( thisgame != NULL ) { startpos = thisgame->GetStartPos(); }
++
++            if ( startpos ) {
++                squareT wking_sq = GetKingSquare(WHITE);
++                squareT bking_sq = GetKingSquare(BLACK);
++
++                squareT orig_white_king_rook_sq = GetRookOrigSq(WHITE,1);
++                squareT orig_white_queen_rook_sq = GetRookOrigSq(WHITE,-1);
++                squareT orig_black_king_rook_sq = GetRookOrigSq(BLACK,1);
++                squareT orig_black_queen_rook_sq = GetRookOrigSq(BLACK,-1);
++
++                squareT white_king_outer_rook_sq = NS;
++                squareT white_king_inner_rook_sq = NS;
++                squareT white_queen_outer_rook_sq = NS;
++                squareT white_queen_inner_rook_sq = NS;
++                squareT black_king_outer_rook_sq = NS;
++                squareT black_king_inner_rook_sq = NS;
++                squareT black_queen_outer_rook_sq = NS;
++                squareT black_queen_inner_rook_sq = NS;
++
++                for (int i=0; i<8; i++) {
++                    int wsq = A1+i;
++                    int bsq = A8+i;
++                    if ( Board[wsq] == WR) {
++                        if ( wsq < wking_sq ) { //queenside
++                            if ( white_queen_outer_rook_sq == NS ) { 
++                                white_queen_outer_rook_sq = wsq; 
++                                white_queen_inner_rook_sq = wsq;
++                            }
++                            else { white_queen_inner_rook_sq = wsq; }
++                        }
++                        else { //kingside
++                            if ( white_king_inner_rook_sq == NS ) { 
++                                white_king_inner_rook_sq = wsq; 
++                                white_king_outer_rook_sq = wsq;
++                            }
++                            else { white_king_outer_rook_sq = wsq; }
++                        }
++                    }
++                    if ( Board[bsq] == BR ) {
++                        if ( bsq < bking_sq ) { //queenside
++                            if ( black_queen_outer_rook_sq == NS ) { 
++                                black_queen_outer_rook_sq = bsq; 
++                                black_queen_inner_rook_sq = bsq;
++                            }
++                            else { black_queen_inner_rook_sq = bsq; }
++                        }
++                        else { //kingside
++                            if ( black_king_inner_rook_sq == NS ) { 
++                                black_king_inner_rook_sq = bsq; 
++                                black_king_outer_rook_sq = bsq;
++                            }
++                            else { black_king_outer_rook_sq = bsq; }
++                        }
++                    }
++                }
++
++                bool something = false;
++
++                if ( GetCastling (WHITE, KSIDE) ) {
++                    if ( white_king_outer_rook_sq != orig_white_king_rook_sq )  { *str++ = square_Fyle(white_king_inner_rook_sq) + 'A'; }
++                    else { *str++ = 'K'; }
++                    something = true;
++                }
++                if ( GetCastling (WHITE, QSIDE) ) {
++                    if ( white_queen_outer_rook_sq != orig_white_queen_rook_sq )  { *str++ = square_Fyle(white_queen_inner_rook_sq) + 'A'; }
++                    else { *str++ = 'Q'; }
++                    something = true;
++                }
++                if ( GetCastling (BLACK, KSIDE) ) {
++                    if ( black_king_outer_rook_sq != orig_black_king_rook_sq )  { *str++ = square_Fyle(black_king_inner_rook_sq) + 'a'; }
++                    else { *str++ = 'k'; }
++                    something = true;
++                }
++                if ( GetCastling (BLACK, QSIDE) ) {
++                    if ( black_queen_outer_rook_sq != orig_black_queen_rook_sq )  { *str++ = square_Fyle(black_queen_inner_rook_sq) + 'a'; }
++                    else { *str++ = 'q'; }
++                    something = true;
++                }
++
++                if ( ! something ) { *str++ = '-'; }
++            }
++
++            else {
++                if (GetCastling (WHITE, KSIDE))  { *str++ = 'K'; }
++                if (GetCastling (WHITE, QSIDE))  { *str++ = 'Q'; }
++                if (GetCastling (BLACK, KSIDE))  { *str++ = 'k'; }
++                if (GetCastling (BLACK, QSIDE))  { *str++ = 'q'; }
++            }
+         }
+         *str++ = ' ';
+ 
 Index: src/position.h
 ===================================================================
---- src/position.h	(revision 2571)
+--- src/position.h	(revision 2575)
 +++ src/position.h	(working copy)
 @@ -24,6 +24,8 @@
  #include "sqset.h"
@@ -866,32 +980,21 @@ Index: src/position.h
      void        Clear();        // No pieces on board
      void        StdStart();     // Standard chess starting position
      bool        IsStdStart();
-@@ -179,6 +184,10 @@
+@@ -179,6 +184,11 @@
      ushort      GetPlyCounter ()         { return PlyCounter; }
      ushort      GetFullMoveCount ()      { return PlyCounter / 2 + 1; }
  
 +    Game *      GetOwner()               { return Owner; }
 +    void        SetOwner(Game * owner)   { Owner = owner; }
-+    squareT     GetRookOrigSq( colorT tomove, int dir );
++
++    squareT     GetRookOrigSq( colorT color, int dir );
 +
      // Methods to get the Board or piece lists -- used in game.cpp to
      // decode moves:
      squareT *   GetList (colorT c)    { return List[c]; }
-Index: src/game.h
-===================================================================
---- src/game.h	(revision 2571)
-+++ src/game.h	(working copy)
-@@ -327,6 +327,7 @@
-     errorT     DecodeTags (ByteBuffer * buf, bool storeTags);
-     errorT     DecodeVariation (ByteBuffer * buf, byte flags, uint level);
- 
-+
-     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     //  Game:  Public Functions
- public:
 Index: src/tkscid.cpp
 ===================================================================
---- src/tkscid.cpp	(revision 2571)
+--- src/tkscid.cpp	(revision 2575)
 +++ src/tkscid.cpp	(working copy)
 @@ -516,8 +516,8 @@
      clipbase->backupCache->SetPolicy (TREECACHE_Oldest);
@@ -911,9 +1014,121 @@ Index: src/tkscid.cpp
          hpSigFlip = posFlip->GetHPSig();
          msigFlip = matsig_Make (posFlip->GetMaterial());
      }
+Index: tcl/edit.tcl
+===================================================================
+--- tcl/edit.tcl	(revision 2575)
++++ tcl/edit.tcl	(working copy)
+@@ -63,6 +63,9 @@
+       set fenStr "$s1 $s2 [lrange $fenStr 2 end]"
+   }
+ 
++  # Handle Shredder fen's HAha type castling field
++  set fenStr [::chess960::convertToXFEN $fenStr]
++
+   if {[catch {sc_game startBoard $fenStr}]} {
+     # Trim length, and remove newlines for error dialog
+     if {[string length $fenStr] > 80} {
+@@ -322,6 +325,9 @@
+ proc validateFEN {fen} {
+   global setupFen
+ 
++  # Don't worry about validating castling in chess960
++  return $fen
++
+   #### Do a sanity check on castling
+   #    .. helpful because illegal FENs crash engines
+   #    and we could also have one for enpassant
+@@ -638,6 +644,20 @@
+     makeSetupFen
+   } -width 10
+ 
++  frame $sr.b.960
++
++  label $sr.b.960.text -text "960 code"
++  entry $sr.b.960.entry -width 4 -validate all -vcmd {string is int %P}
++  pack $sr.b.960.text $sr.b.960.entry -side left
++
++  bind  $sr.b.960.entry <Return> {
++    set SP [expr [.setup.r.b.960.entry get] %% 960]
++    if {$SP == 0} {set SP 960}
++    set setupFen  [::chess960::numberToFEN $SP]
++    sc_game tags set -extra [list {Variant "Fischerandom"} "StartingPosition \"$SP\""]
++    setSetupBoardToFen
++  }
++
+  # Are these bullet-proof and correct ? 
+ 
+   button $sr.b.swap -text {Swap Colours} -command {
+@@ -695,6 +715,7 @@
+   pack $sr.b		-side top -pady 10
+   pack $sr.b.clear	-side top -padx 5 -pady 2
+   pack $sr.b.initial	-side top -padx 5 -pady 2
++  pack $sr.b.960        -side top -expand yes -fill x
+   pack [frame $sr.b.space -height 10] -side top
+   pack $sr.b.swap	-side top -padx 5 -pady 2
+   pack $sr.b.invert	-side top -padx 5 -pady 2
+Index: tcl/main.tcl
+===================================================================
+--- tcl/main.tcl	(revision 2575)
++++ tcl/main.tcl	(working copy)
+@@ -1296,6 +1296,7 @@
+ #   piece from the user.
+ #   If the optional parameter is "-animate", the move will be animated.
+ 
++#   sq1 == to, sq2 == from , but squares can also be selected in reverse order
+ proc addMove { sq1 sq2 {animate ""}} {
+   global EMPTY
+ 
+@@ -1317,8 +1318,44 @@
+     if {$k1 == "k"  &&  $k2 == "k"} {
+       set nullmove 1
+     } else {
+-      return
+-    }
++      # test/hack to see if we can translate old-style castling into 960 castling
++
++      set side [sc_pos side]
++      if {(($k1 == "k" && $k2 == ".") || ($k2 == "k" && $k1 == ".")) && [expr {abs ($sq1 - $sq2)}] == 2} {
++	  if {$k1 == "k"} {
++	    # test correct-side-to-move
++	    set king [string index $board $sq1]
++	    if {$side == "white" && $king == "k" || $side == "black" && $king == "K"} {return}
++
++	    set sign [expr {($sq2 - $sq1)/2}]
++            set sq2 [expr {$sq2 - $sign}] ; # to check neighbouring square
++            #incr sq2 till we hit a rook
++
++	    while {[string index $board $sq2] == "."} {
++	       incr sq2 $sign
++	    }
++            if {[string tolower [string index $board $sq2]] != "r"} {
++              return
++            }
++          } else {
++	    ### {$k2 == "k"}
++	    # test correct-side-to-move
++	    set king [string index $board $sq2]
++	    if {$side == "white" && $king == "k" || $side == "black" && $king == "K"} {return}
++
++	    set sign [expr {($sq1 - $sq2)/2}]
++            set sq1 [expr {$sq1 - $sign}]
++	    while {[string index $board $sq1] == "."} {
++	       incr sq1 $sign
++	    }
++            if {[string tolower [string index $board $sq1]] != "r"} {
++              return
++            }
++          }
++      } else {
++	return 
++      }
++    } 
+   }
+   if {$nullmove && [sc_pos isCheck]} {
+       # dont add null move in check or mate
 Index: tcl/misc/misc.tcl
 ===================================================================
---- tcl/misc/misc.tcl	(revision 2571)
+--- tcl/misc/misc.tcl	(revision 2575)
 +++ tcl/misc/misc.tcl	(working copy)
 @@ -1093,4 +1093,187 @@
    unbusyCursor .  
@@ -1103,9 +1318,74 @@ Index: tcl/misc/misc.tcl
 +}
 +
  # end of misc.tcl
+Index: tcl/start.tcl
+===================================================================
+--- tcl/start.tcl	(revision 2575)
++++ tcl/start.tcl	(working copy)
+@@ -45,10 +45,10 @@
+ 
+ if {![catch {tk windowingsystem} wsystem] && $wsystem == "aqua"} {
+   set macOS 1
+-  set scidName {Scid vs. Mac}
++  set scidName {Scid vs. Mac 360}
+ } else {
+   set macOS 0
+-  set scidName {Scid vs. PC}
++  set scidName {Scid vs. 360}
+ }
+ 
+ # See if we're inside a Mac .app bundle.  This duplcates part of the command-line
+Index: tcl/tools/analysis.tcl
+===================================================================
+--- tcl/tools/analysis.tcl	(revision 2575)
++++ tcl/tools/analysis.tcl	(working copy)
+@@ -3639,6 +3639,7 @@
+     # proc is called for any change in board position (including new games, and simple moves)
+     set nonStdStart [sc_game startBoard]
+     if {$nonStdStart} {
++      sendToEngine $n "setoption name UCI_Chess960 value true"
+       set analysis(startpos$n) "fen [sc_game startPos]"
+     } else {
+       set analysis(startpos$n) startpos
+Index: tcl/tools/fics.tcl
+===================================================================
+--- tcl/tools/fics.tcl	(revision 2575)
++++ tcl/tools/fics.tcl	(working copy)
+@@ -2157,6 +2157,7 @@
+       wm title $::dot_w "$::scidName: $white - $black (game $game: $::fics::timecontrol)"
+       updateBoard -pgn -animate
+     } else {
++puts "HMMMM \n$fen \n[sc_pos fen]"
+       ### Game out of sync, probably due to player takeback request (or opponent take back 2).
+       ### But also used to load observed games
+       # After player takeback, game gets reconstructed, comments are zeroed. Opponents takeback is handled better elsewhere.
+@@ -2564,12 +2565,18 @@
+ 
+   proc checkAdd {} {
+     if {$::fics::playing == 1 && [winfo exists .fics]}  {
+-      set moveUCI [sc_game info previousMoveUCI]
+-      if { [ string length $moveUCI ] == 5 } {
+-        set promoLetter [ string tolower [ string index $moveUCI end ] ]
+-        ::fics::writechan "promote $promoLetter"
++      # If just castled, send San move
++      set previousMove [sc_game info previousMove]
++      if {[string match O-O* $previousMove]} {
++	::fics::writechan $previousMove
++      } else {
++	set moveUCI [sc_game info previousMoveUCI]
++	if { [ string length $moveUCI ] == 5 } {
++	  set promoLetter [ string tolower [ string index $moveUCI end ] ]
++	  ::fics::writechan "promote $promoLetter"
++	}
++	::fics::writechan [string range $moveUCI 0 3 ]
+       }
+-      ::fics::writechan [string range $moveUCI 0 3 ]
+ 
+       ### Stop clock
+       if {[sc_pos side] == "white"} {
 Index: tcl/tools/sergame.tcl
 ===================================================================
---- tcl/tools/sergame.tcl	(revision 2571)
+--- tcl/tools/sergame.tcl	(revision 2575)
 +++ tcl/tools/sergame.tcl	(working copy)
 @@ -325,6 +325,10 @@
        ::sergame::sendToEngine $n "setoption name Ponder value false"
@@ -1130,172 +1410,3 @@ Index: tcl/tools/sergame.tcl
      }
  
      updateBoard -pgn
-Index: tcl/tools/analysis.tcl
-===================================================================
---- tcl/tools/analysis.tcl	(revision 2571)
-+++ tcl/tools/analysis.tcl	(working copy)
-@@ -3639,6 +3639,7 @@
-     # proc is called for any change in board position (including new games, and simple moves)
-     set nonStdStart [sc_game startBoard]
-     if {$nonStdStart} {
-+      sendToEngine $n "setoption name UCI_Chess960 value true"
-       set analysis(startpos$n) "fen [sc_game startPos]"
-     } else {
-       set analysis(startpos$n) startpos
-Index: tcl/tools/fics.tcl
-===================================================================
---- tcl/tools/fics.tcl	(revision 2571)
-+++ tcl/tools/fics.tcl	(working copy)
-@@ -2564,12 +2564,18 @@
- 
-   proc checkAdd {} {
-     if {$::fics::playing == 1 && [winfo exists .fics]}  {
--      set moveUCI [sc_game info previousMoveUCI]
--      if { [ string length $moveUCI ] == 5 } {
--        set promoLetter [ string tolower [ string index $moveUCI end ] ]
--        ::fics::writechan "promote $promoLetter"
-+      # If just castled, send San move
-+      set previousMove [sc_game info previousMove]
-+      if {[string match O-O* $previousMove]} {
-+	::fics::writechan $previousMove
-+      } else {
-+	set moveUCI [sc_game info previousMoveUCI]
-+	if { [ string length $moveUCI ] == 5 } {
-+	  set promoLetter [ string tolower [ string index $moveUCI end ] ]
-+	  ::fics::writechan "promote $promoLetter"
-+	}
-+	::fics::writechan [string range $moveUCI 0 3 ]
-       }
--      ::fics::writechan [string range $moveUCI 0 3 ]
- 
-       ### Stop clock
-       if {[sc_pos side] == "white"} {
-Index: tcl/main.tcl
-===================================================================
---- tcl/main.tcl	(revision 2571)
-+++ tcl/main.tcl	(working copy)
-@@ -1296,6 +1296,7 @@
- #   piece from the user.
- #   If the optional parameter is "-animate", the move will be animated.
- 
-+#   sq1 == to, sq2 == from , but squares can also be selected in reverse order
- proc addMove { sq1 sq2 {animate ""}} {
-   global EMPTY
- 
-@@ -1317,8 +1318,44 @@
-     if {$k1 == "k"  &&  $k2 == "k"} {
-       set nullmove 1
-     } else {
--      return
--    }
-+      # test/hack to see if we can translate old-style castling into 960 castling
-+
-+      set side [sc_pos side]
-+      if {(($k1 == "k" && $k2 == ".") || ($k2 == "k" && $k1 == ".")) && [expr {abs ($sq1 - $sq2)}] == 2} {
-+	  if {$k1 == "k"} {
-+	    # test correct-side-to-move
-+	    set king [string index $board $sq1]
-+	    if {$side == "white" && $king == "k" || $side == "black" && $king == "K"} {return}
-+
-+	    set sign [expr {($sq2 - $sq1)/2}]
-+            set sq2 [expr {$sq2 - $sign}] ; # to check neighbouring square
-+            #incr sq2 till we hit a rook
-+
-+	    while {[string index $board $sq2] == "."} {
-+	       incr sq2 $sign
-+	    }
-+            if {[string tolower [string index $board $sq2]] != "r"} {
-+              return
-+            }
-+          } else {
-+	    ### {$k2 == "k"}
-+	    # test correct-side-to-move
-+	    set king [string index $board $sq2]
-+	    if {$side == "white" && $king == "k" || $side == "black" && $king == "K"} {return}
-+
-+	    set sign [expr {($sq1 - $sq2)/2}]
-+            set sq1 [expr {$sq1 - $sign}]
-+	    while {[string index $board $sq1] == "."} {
-+	       incr sq1 $sign
-+	    }
-+            if {[string tolower [string index $board $sq1]] != "r"} {
-+              return
-+            }
-+          }
-+      } else {
-+	return 
-+      }
-+    } 
-   }
-   if {$nullmove && [sc_pos isCheck]} {
-       # dont add null move in check or mate
-Index: tcl/edit.tcl
-===================================================================
---- tcl/edit.tcl	(revision 2571)
-+++ tcl/edit.tcl	(working copy)
-@@ -63,6 +63,9 @@
-       set fenStr "$s1 $s2 [lrange $fenStr 2 end]"
-   }
- 
-+  # Handle Shredder fen's HAha type castling field
-+  set fenStr [::chess960::convertToXFEN $fenStr]
-+
-   if {[catch {sc_game startBoard $fenStr}]} {
-     # Trim length, and remove newlines for error dialog
-     if {[string length $fenStr] > 80} {
-@@ -322,6 +325,9 @@
- proc validateFEN {fen} {
-   global setupFen
- 
-+  # Don't worry about validating castling in chess960
-+  return $fen
-+
-   #### Do a sanity check on castling
-   #    .. helpful because illegal FENs crash engines
-   #    and we could also have one for enpassant
-@@ -638,6 +644,20 @@
-     makeSetupFen
-   } -width 10
- 
-+  frame $sr.b.960
-+
-+  label $sr.b.960.text -text "960 code"
-+  entry $sr.b.960.entry -width 4 -validate all -vcmd {string is int %P}
-+  pack $sr.b.960.text $sr.b.960.entry -side left
-+
-+  bind  $sr.b.960.entry <Return> {
-+    set SP [expr [.setup.r.b.960.entry get] %% 960]
-+    if {$SP == 0} {set SP 960}
-+    set setupFen  [::chess960::numberToFEN $SP]
-+    sc_game tags set -extra [list {Variant "Fischerandom"} "StartingPosition \"$SP\""]
-+    setSetupBoardToFen
-+  }
-+
-  # Are these bullet-proof and correct ? 
- 
-   button $sr.b.swap -text {Swap Colours} -command {
-@@ -695,6 +715,7 @@
-   pack $sr.b		-side top -pady 10
-   pack $sr.b.clear	-side top -padx 5 -pady 2
-   pack $sr.b.initial	-side top -padx 5 -pady 2
-+  pack $sr.b.960        -side top -expand yes -fill x
-   pack [frame $sr.b.space -height 10] -side top
-   pack $sr.b.swap	-side top -padx 5 -pady 2
-   pack $sr.b.invert	-side top -padx 5 -pady 2
-Index: tcl/start.tcl
-===================================================================
---- tcl/start.tcl	(revision 2571)
-+++ tcl/start.tcl	(working copy)
-@@ -45,10 +45,10 @@
- 
- if {![catch {tk windowingsystem} wsystem] && $wsystem == "aqua"} {
-   set macOS 1
--  set scidName {Scid vs. Mac}
-+  set scidName {Scid vs. Mac 360}
- } else {
-   set macOS 0
--  set scidName {Scid vs. PC}
-+  set scidName {Scid vs. 360}
- }
- 
- # See if we're inside a Mac .app bundle.  This duplcates part of the command-line
