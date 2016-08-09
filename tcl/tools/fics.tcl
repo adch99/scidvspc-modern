@@ -2620,7 +2620,7 @@ if {[lindex $line 0] != {Still in progress}} {
       set f $w.f$i
       frame $f
       entry $f.button -width 8
-      entry $f.command -width 30
+      entry $f.command -width 40
       $f.button insert 0 [lindex $::fics::user_buttons $i]
       $f.command insert 0 [lindex $::fics::user_commands $i]
       pack $f -side top -fill both -expand yes

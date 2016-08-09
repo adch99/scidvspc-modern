@@ -5636,9 +5636,14 @@ By default they are LimeGreen and grey35.
 </p>
 <h4>FICS Options</h4>
 <p>
-There are a few options in a right-click menu. 'No Requests'
+Right-clicking posts a menu with several options. 'No Requests'
 denies Takebacks, Adjournment, Abort and Draw requests. 'No Results' prevents game results
-dialogs. 'Board Size' refers to the small Observed Game boards.
+dialogs. 'Board Size' refers to the small Observed Game boards. Autoraise raises the main board
+when your opponent makes a move.
+</p>
+<p>
+There are also options to configure initialisation commands and to customize the top three buttons.
+This latter option requires a smidgin of tcl programming ;<gt>, and fics commands should probably be enclosed in quotes.
 </p>
 
   <h3>Buttons</h3>

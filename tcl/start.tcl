@@ -484,10 +484,8 @@ proc initFICSDefaults {} {
       set ::fics::user_buttons {FICSInfo FICSOpponent Abort}
       set ::fics::user_commands {
 	{::fics::writechan finger ; ::fics::writechan "inchannel $::fics::reallogin"}
-	{if {$::fics::opponent != {}} {
-	  ::fics::writechan "finger $::fics::opponent"
-	}}
-	{::fics::writechan abort}
+	{if {$::fics::opponent != {}} { ::fics::writechan "finger $::fics::opponent" }}
+	{::fics::writechan "abort"}
       }
     }
 
