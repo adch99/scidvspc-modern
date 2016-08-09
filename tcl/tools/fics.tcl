@@ -2624,8 +2624,10 @@ if {[lindex $line 0] != {Still in progress}} {
       $f.button insert 0 [lindex $::fics::user_buttons $i]
       $f.command insert 0 [lindex $::fics::user_commands $i]
       pack $f -side top -fill both -expand yes
-      pack $f.button $f.command -side left -fill x -expand yes
+      pack $f.button $f.command -side left -fill x -expand yes -pady 3 -padx 3
     }
+
+    addHorizontalRule $w
 
     frame $w.b
     pack $w.b -side bottom 
@@ -2670,6 +2672,7 @@ if {[lindex $line 0] != {Still in progress}} {
     } else {
       placeWinOverParent $w .
     }
+    bind $w <F1> {helpWindow FICSwidget}
     wm state $w normal
     update
   }
@@ -2690,6 +2693,8 @@ if {[lindex $line 0] != {Still in progress}} {
       $w.text insert end "$name\n"
     }
     pack $w.text -side top -fill both -expand yes
+
+    addHorizontalRule $w
 
     frame $w.b
     pack $w.b -side bottom 
@@ -2719,6 +2724,7 @@ set seek 0"
     } else {
       placeWinOverParent $w .
     }
+    bind $w <F1> {helpWindow FICSwidget}
     wm state $w normal
     update
   }
