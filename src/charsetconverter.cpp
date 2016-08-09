@@ -151,22 +151,22 @@ static int8_t const CP1252Weight[256] =
   0, 0, 0, 0, 0, 0, 0, 0, // 70 ... 77
   0, 0, 0, 0, 0, 0, 0, 0, // 78 ... 7f
 
-  1, _, 0, 0, 0, 0, 0, 0, // 80 ... 87
+  1, _, 1, 1, 1, 1, 1, 1, // 80 ... 87
   0, 0, 1, 0, 1, _, 0, _, // 88 ... 8f
-  1, 0, 0, 0, 0, 0, 0, 0, // 90 ... 97
-  0, 0, 1, 0, 1, _, 1, 0, // 98 ... 9f
+  1, 1, 1, 1, 1, 0, 0, 0, // 90 ... 97
+  0, 1, 1, 0, 1, _, 1, 0, // 98 ... 9f
   0, 1, 5, 5, 5, 5, 5, 5, // a0 ... a7
-  0, 0, 0, 0, 0, 0, 0, 0, // a8 ... af
-  0, 2, 0, 0, 0, 0, 0, 0, // b0 ... b7
-  0, 0, 5, 1, 0, 1, 0, 2, // b8 ... bf
+  0, 1, 3, 1, 1, 1, 1, 1, // a8 ... af
+  1, 1, 1, 1, 0, 1, 0, 0, // b0 ... b7
+  0, 1, 1, 1, 0, 1, 0, 2, // b8 ... bf
   1, 1, 1, 2, 5, 2, 2, 1, // c0 ... c7
   2, 3, 1, 1, 1, 1, 1, 1, // c8 ... cf
-  0, 3, 2, 3, 1, 5, 5, 0, // d0 ... d7
+  0, 3, 2, 3, 1, 5, 5, 1, // d0 ... d7
   3, 1, 2, 1, 5, 1, 1, 5, // d8 ... df
   2, 3, 1, 1, 5, 3, 3, 1, // e0 ... e7
   2, 3, 1, 1, 1, 1, 1, 1, // e8 ... ef
-  0, 2, 1, 3, 1, 1, 5, 0, // f0 ... f7
-  3, 1, 3, 1, 5, 1, 0, 0, // f8 ... ff
+  0, 2, 1, 3, 1, 1, 5, 1, // f0 ... f7
+  3, 1, 3, 1, 5, 1, 1, 0, // f8 ... ff
 };
 
 static int8_t const Latin1Weight[256] =
@@ -636,50 +636,6 @@ CharsetConverter::isConvertibleToLatin1(char const* str)
 }
 
 
-std::string
-CharsetConverter::mapChessBaseFigurineToUTF8(const char* s)
-{
-  std::string str;
-
-  while (*s)
-  {
-    unsigned char c = *s;
-
-    if (c & 0x80)
-    {
-      unsigned charLen = ::utf8CharLength(s);
-      unsigned char d = s[1];
-
-      if (charLen == 2 && (0xc2 <= c && c <= 0xc3) && (0xa2 <= d && d <= 0xa7))
-      {
-        switch (d)
-        {
-          case 0xa2: ::appendThreeOctets(str, 0x2654); break; // King
-          case 0xa3: ::appendThreeOctets(str, 0x2655); break; // Queen
-          case 0xa4: ::appendThreeOctets(str, 0x2658); break; // Knight
-          case 0xa5: ::appendThreeOctets(str, 0x2657); break; // Bishop
-          case 0xa6: ::appendThreeOctets(str, 0x2656); break; // Rook
-          case 0xa7: ::appendThreeOctets(str, 0x2659); break; // Pawn
-        }
-      }
-      else
-      {
-        str.append(s, charLen);
-      }
-
-      s += charLen;
-    }
-    else
-    {
-      str += c;
-      s += 1;
-    }
-  }
-
-  return str;
-}
-
-
 bool
 CharsetConverter::validateUTF8(char const* str, unsigned len)
 {
@@ -856,23 +812,48 @@ CharsetConverter::cp1252ToUTF8(std::string const& in, std::string& out)
 
     if (c & 0x80)
     {
-      if (c < 0xa8)
-      {
-        // NOTE: this table maps the special ChessBase code 0x90 to 0x21bb.
-        static unsigned const CodeTable[128] =
-        {
-          0x20ac, 0xfffd, 0x201a, 0x0192, 0x201e, 0x2026, 0x2020, 0x2021, // 80 ... 87
-          0x02c6, 0x2030, 0x0160, 0x2039, 0x0152, 0xfffd, 0x017d, 0xfffd, // 88 ... 8f
-          0x21bb, 0x2018, 0x2019, 0x201c, 0x201d, 0x2022, 0x2013, 0x2014, // 90 ... 97
-          0x02dc, 0x2122, 0x0161, 0x203a, 0x0153, 0xfffd, 0x017e, 0x0178, // 98 ... 9f
-          0x02a0, 0x00a1, 0x2654, 0x2655, 0x2658, 0x2657, 0x2656, 0x2659, // a0 ... a7
-        };
+      // ChessBase is exporting his own special symbol set as UTF-8, it seems that
+      // this company is without a plan.
 
-        ::appendCodePointToUTF8String(out, CodeTable[c - 0x80]);
-      }
-      else // this is identical to Latin-1
+      static unsigned const CodeTable[128] =
       {
-        ::appendTwoOctets(out, c);
+        0x20ac, 0xfffd, 0x2192, 0x2191, 0x21c6, 0x25b3, 0x25ef, 0x2299, // 80 ... 87
+        0x02c6, 0x2030, 0x0160, 0x2039, 0x0152, 0xfffd, 0x017d, 0xfffd, // 88 ... 8f
+        0x21bb, 0x21d4, 0x21d7, 0x2295, 0x229e, 0x2022, 0x2013, 0x2014, // 90 ... 97
+        0x02dc, 0x25a1, 0x0161, 0x203a, 0x0153, 0xfffd, 0x0023, 0x0178, // 98 ... 9f
+        0x02a0, 0x00a1, 0x2654, 0x2655, 0x2658, 0x2657, 0x2656, 0x2659, // a0 ... a7
+             0,      1, 0x230a, 0x27ea, 0x22a5, 0x25eb, 0x25e8, 0x259e, // a8 ... af
+             1, 0x00b1, 0x2a72, 0x2a71,      0, 0x2213,      0,      0, // b0 ... b7
+             0, 0x2313, 0x230b, 0x27eb,      0,      0,      0,      0, // b8 ... bf
+             0,      0,      0,      0,      0,      0,      0,      0, // c0 ... c7
+             0,      0,      0,      0,      0,      0,      0,      0, // c8 ... cf
+             0,      0,      0,      0,      0,      0,      0, 0x2715, // d0 ... d7
+             0,      0,      0,      0,      0,      0,      0,      0, // da ... df
+             0,      0,      0,      0,      0,      0,      0,      0, // e0 ... d7
+             0,      0,      0,      0,      0,      0,      0,      0, // e8 ... ef
+             0,      0,      0,      0,      0,      0,      0, 0x221e, // f0 ... f7
+             0,      0,      0,      0,      0,      0, 0x26a8,      0, // f8 ... ff
+      };
+
+      switch (unsigned code = CodeTable[c - 0x80])
+      {
+        case 0:
+          // this should be identical to Latin-1
+          ::appendTwoOctets(out, c);
+          break;
+
+        case 1:
+          ASSERT(c == 0xa9 || c == 0xb0);
+          if (c == 0xa9)
+            out.append("=/");
+          ::appendCodePointToUTF8String(out, 0x221e);
+          if (c == 0xb0)
+            out.append("/=");
+          break;
+
+        default:
+          ::appendCodePointToUTF8String(out, code);
+          break;
       }
     }
     else
@@ -1260,6 +1241,7 @@ CharsetConverter::doConversion(Buffer& text)
 
   m_detector.reset();
   m_detector.detect(text.str(), text.size());
+  m_detector.finish();
 
   if (   m_detector.isASCII() // the detector couldn't detect the character set
       || (m_detector.isLatin1() && !validateLatin1(text.str(), text.size()))) // detection is wrong
