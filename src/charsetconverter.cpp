@@ -812,7 +812,7 @@ CharsetConverter::cp1252ToUTF8(std::string const& in, std::string& out)
 
     if (c & 0x80)
     {
-      // ChessBase is exporting his own special symbol set as UTF-8, it seems that
+      // ChessBase is exporting his own special symbol set as Latin-1, it seems that
       // this company is without a plan.
 
       static unsigned const CodeTable[128] =
@@ -1236,67 +1236,73 @@ CharsetConverter::doConversion(Buffer& text)
 
   bool isUTF8 = validateUTF8(text.str(), text.size());
 
-  if (isUTF8 && m_wanted.isUTF8())
-    return true;
-
-  m_detector.reset();
-  m_detector.detect(text.str(), text.size());
-  m_detector.finish();
-
-  if (   m_detector.isASCII() // the detector couldn't detect the character set
-      || (m_detector.isLatin1() && !validateLatin1(text.str(), text.size()))) // detection is wrong
+  if (isUTF8)
   {
-    // This may happen if:
-    // 1. The character set is CP850 or CP1252 encoded with single bytes.
-    // 2. The character set detection failed, sometimes this happens with Latin-1.
+    if (m_wanted.isUTF8())
+      return true;
+    m_detector.setup("utf-8");
+  }
+  else
+  {
+    m_detector.reset();
+    m_detector.detect(text.str(), text.size());
+    m_detector.finish();
 
-    int cp850  = detectCP850(text.str(), text.size());
-    int cp1252 = detectCP1252(text.str(), text.size());
-    int latin1 = detectLatin1(text.str(), text.size());
+    if (   m_detector.isASCII() // the detector couldn't detect the character set
+        || (m_detector.isLatin1() && !validateLatin1(text.str(), text.size()))) // detection is wrong
+    {
+      // This may happen if:
+      // 1. The character set is CP850 or CP1252 encoded with single bytes.
+      // 2. The character set detection failed, sometimes this happens with Latin-1.
 
-    if (latin1 >= 0 && latin1 >= cp1252 && latin1 >= cp850) // detection of Latin-1 failed
-    {
-      m_detector.setup("iso8859-1"); // but this seems to be Latin-1
-    }
-    else if (cp1252 > cp850) // most probably it's CP1252 (Windoze)
-    {
-      std::string src(text.str(), text.size());
-      std::string dst;
-      cp1252ToUTF8(src, dst);
-      text.replace(dst);
-      m_detector.setup("utf-8");
-    }
-    else if (cp850 >= 0) // probably it's CP850 (MSDOS)
-    {
-      std::string src(text.str(), text.size());
-      std::string dst;
-      cp850ToUTF8(src, dst);
-      text.replace(dst);
-      m_detector.setup("utf-8");
-    }
-    else if (m_detector.isLatin1()) // does not happen under Windoze
-    {
-      // ----------------------------------------------------------------------
-      // This part is a bit experimental, and should be removed if
-      // not successful in practice.
-      // ----------------------------------------------------------------------
-      std::string src(text.str(), text.size());
-      std::string dst;
+      int cp850  = detectCP850(text.str(), text.size());
+      int cp1252 = detectCP1252(text.str(), text.size());
+      int latin1 = detectLatin1(text.str(), text.size());
 
-      if (fixLatin1(src, dst))
+      if (latin1 >= 0 && latin1 >= cp1252 && latin1 >= cp850) // detection of Latin-1 failed
       {
-        // This was originally a Latin-1 string with invalid UTF-8 conversion,
-        // but we could restore the content. This happens often with Scid
-        // databases. (For example an import of a PGN file with UTF-8 encoded
-        // Latin-1 character set.)
+        m_detector.setup("iso8859-1"); // but this seems to be Latin-1
+      }
+      else if (cp1252 > cp850) // most probably it's CP1252 (Windoze)
+      {
+        std::string src(text.str(), text.size());
+        std::string dst;
+        cp1252ToUTF8(src, dst);
         text.replace(dst);
         m_detector.setup("utf-8");
       }
-    }
-    else
-    {
-      // The character set is unrecognizable, so convertToUTF8() will do
-      // the required conversions.
+      else if (cp850 >= 0) // probably it's CP850 (MSDOS)
+      {
+        std::string src(text.str(), text.size());
+        std::string dst;
+        cp850ToUTF8(src, dst);
+        text.replace(dst);
+        m_detector.setup("utf-8");
+      }
+      else if (m_detector.isLatin1()) // does not happen under Windoze
+      {
+        // ----------------------------------------------------------------------
+        // This part is a bit experimental, and should be removed if
+        // not successful in practice.
+        // ----------------------------------------------------------------------
+        std::string src(text.str(), text.size());
+        std::string dst;
+
+        if (fixLatin1(src, dst))
+        {
+          // This was originally a Latin-1 string with invalid UTF-8 conversion,
+          // but we could restore the content. This happens often with Scid
+          // databases. (For example an import of a PGN file with UTF-8 encoded
+          // Latin-1 character set.)
+          text.replace(dst);
+          m_detector.setup("utf-8");
+        }
+      }
+      else
+      {
+        // The character set is unrecognizable, so convertToUTF8() will do
+        // the required conversions.
+      }
     }
   }
 
