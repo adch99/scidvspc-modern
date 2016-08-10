@@ -911,6 +911,8 @@ CharsetConverter::fixLatin1(std::string const& in, std::string& out)
 unsigned
 CharsetConverter::removeInvalidSequences(std::string& str, unsigned len, char const* replacement)
 {
+  typedef unsigned char Byte;
+
   ASSERT(len <= str.size());
 
   // remove overlong sequences:
@@ -936,14 +938,14 @@ CharsetConverter::removeInvalidSequences(std::string& str, unsigned len, char co
         break;
 
       case 2: // // 110bbbbb 10bbbbbb
-        if ((s[1] & 0xc0) != 0x80)      // invalid
+        if ((Byte(s[1]) & 0xc0) != 0x80)      // invalid
         {
           result.append(replacement);
           replaced += 1;
         }
-        else if ((s[0] & 0xfe) == 0xc0)  // overlong
+        else if ((Byte(s[0]) & 0xfe) == 0xc0) // overlong
         {
-          char buf[1] = { char(s[1] & 0x7f) };
+          char buf[1] = { char(Byte(s[1]) & 0x7f) };
           result.append(buf, 1);
         }
         else
@@ -955,23 +957,24 @@ CharsetConverter::removeInvalidSequences(std::string& str, unsigned len, char co
         break;
 
       case 3: // 1110bbbb 10bbbbbb 10bbbbbb
-        if ((s[1] & 0xc0) != 0x80 || (s[2] & 0xc0) != 0x80)    // invalid
+        if ((Byte(s[1]) & 0xc0) != 0x80 || (Byte(s[2]) & 0xc0) != 0x80)  // invalid
         {
           result.append(replacement);
           replaced += 1;
         }
-        else if (s[0] == 0xe0 && (s[1] & 0xe0) == 0x80)        // overlong
+        else if (Byte(s[0]) == 0xe0 && (Byte(s[1]) & 0xe0) == 0x80)      // overlong
         {
-          char buf[1] = { char(s[2] & 0x7f) };
+          char buf[1] = { char(Byte(s[2]) & 0x7f) };
           result.append(buf, 1);
         }
-        else if (s[0] == 0xed && (s[1] & 0xe0) == 0xa0)        // surrogate
+        else if (Byte(s[0]) == 0xed && (Byte(s[1]) & 0xe0) == 0xa0)      // surrogate
         {
           result.append(replacement);
           replaced += 1;
         }
-        else if (s[0] == 0xef && s[1] == 0xbf && (s[2] & 0xfe) == 0xbe)  // U+FFFE or U+FFFF
+        else if (Byte(s[0]) == 0xef && Byte(s[1]) == 0xbf && (Byte(s[2]) & 0xfe) == 0xbe)
         {
+          // U+FFFE or U+FFFF
           result.append(replacement);
           replaced += 1;
         }
@@ -984,17 +987,18 @@ CharsetConverter::removeInvalidSequences(std::string& str, unsigned len, char co
         break;
 
       case 4: // 11110bbb 10bbbbbb 10bbbbbb 10bbbbbb
-        if ((s[1] & 0xc0) != 0x80 || (s[2] & 0xc0) != 0x80 || (s[3] & 0xc0) != 0x80)  // invalid
+        if ((Byte(s[1]) & 0xc0) != 0x80 || (Byte(s[2]) & 0xc0) != 0x80 || (Byte(s[3]) & 0xc0) != 0x80)
         {
+          // invalid
           result.append(replacement);
           replaced += 1;
         }
-        else if (s[0] == 0xf0 && (s[1] & 0xf0) == 0x80)  // overlong
+        else if (Byte(s[0]) == 0xf0 && (Byte(s[1]) & 0xf0) == 0x80)  // overlong
         {
-          char buf[1] = { char(s[3] & 0x7f) };
+          char buf[1] = { char(Byte(s[3]) & 0x7f) };
           result.append(buf, 1);
         }
-        else if ((s[0] == 0xf4 && s[1] > 0x8f) || s[0] > 0xf4)  // > U+10FFFF
+        else if ((Byte(s[0]) == 0xf4 && Byte(s[1]) > 0x8f) || Byte(s[0]) > 0xf4)  // > U+10FFFF
         {
           result.append(replacement);
           replaced += 1;

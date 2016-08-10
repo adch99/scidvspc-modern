@@ -181,7 +181,7 @@ private:
     ImplMap m_implMap;
   };
 
-  class Buffer;
+  struct Buffer;
 
   bool doConversion(Buffer& text);
 
