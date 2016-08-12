@@ -3926,7 +3926,7 @@ proc automove_go {n} {
 ################################################################################
 proc sc_move_add { moves n } {
   if { $::analysis(uci$n) } {
-    return [::uci::sc_move_add $moves]
+    return [ catch { sc_move addUCI $moves } ]
   } else  {
     return [ catch { sc_move addSan $moves } ]
   }

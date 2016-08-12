@@ -10128,7 +10128,7 @@ sc_move_addSan (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // sc_move_addUCI:
 //    Takes moves in engine UCI format (e.g. "g1f3") and adds them
-//    to the game. The result is translated.
+//    to the game. The result is no-longer translated.
 //    In case of an error, return the moves that could be converted.
 int
 sc_move_addUCI (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
@@ -10138,6 +10138,16 @@ sc_move_addUCI (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     char * ptr = (char *) argv[2];
 
     while (*ptr != 0) {
+
+      // get rid of leading piece
+      switch (*ptr) {
+        case 'K' :
+        case 'Q' :
+        case 'R' :
+        case 'B' :
+        case 'N' : ptr++;
+      }
+
       s[0] = ptr[0];
       s[1] = ptr[1];
       s[2] = ptr[2];
@@ -10155,22 +10165,17 @@ sc_move_addUCI (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
       }
       simpleMoveT sm;
       Position * pos = db->game->GetCurrentPos();
-      errorT err = pos->ReadCoordMove (&sm, s, true);
-      if (err == OK) {
-        err = db->game->AddMove (&sm, NULL);
-        if (err == OK) {
-            db->gameAltered = true;
-            db->game->GetPrevSAN (tmp);
-            transPieces(tmp);
-            Tcl_AppendResult (ti, tmp, " ", NULL);
-        } else {
-            //Tcl_AppendResult (ti, "Error reading move(s): ", ptr, NULL);
-            break;
-        }
-      } else {
-        //Tcl_AppendResult (ti, "Error reading move(s): ", ptr, NULL);
-        break;
-      }
+
+      if (pos->ReadCoordMove (&sm, s, true) != OK)
+        return TCL_ERROR;
+
+      if (db->game->AddMove (&sm, NULL) != OK)
+        return TCL_ERROR;
+
+      db->gameAltered = true;
+      db->game->GetPrevSAN (tmp);
+      // transPieces(tmp);
+      Tcl_AppendResult (ti, tmp, " ", NULL);
     }
 
     return TCL_OK;
