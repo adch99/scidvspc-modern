@@ -292,6 +292,35 @@ Index: src/game.h
      //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      //  Game:  Public Functions
  public:
+Index: src/gfile.h
+===================================================================
+--- src/gfile.h	(revision 2577)
++++ src/gfile.h	(working copy)
+@@ -28,8 +28,7 @@
+ #else
+ #define GF_BLOCKSIZE  131072 //524288
+ #endif
+-// const char OLD_GFILE_SUFFIX [] = ".sg3";
+-const char GFILE_SUFFIX [] = ".sg4";
++const char GFILE_SUFFIX [] = ".sg960";
+ 
+ 
+ // The block structure type:
+Index: src/index.h
+===================================================================
+--- src/index.h	(revision 2577)
++++ src/index.h	(working copy)
+@@ -30,8 +30,8 @@
+ //////////////////////////////////////////////////////////////////////
+ //  Index:  Constants
+ 
+-const char         INDEX_SUFFIX[]     = ".si4";
+-const char         OLD_INDEX_SUFFIX[] = ".si3";
++const char         INDEX_SUFFIX[]     = ".si960";
++const char         OLD_INDEX_SUFFIX[] = ".si4";
+ const char         INDEX_MAGIC[8]     = "Scid.si";
+ const gameNumberT  MAX_GAMES          = 16777214;
+ // max. number of games is 2^(3*8)-1-1,
 Index: src/movelist.h
 ===================================================================
 --- src/movelist.h	(revision 2577)
@@ -308,9 +337,61 @@ Index: src/movelist.h
  };
  
  inline bool isNullMove (simpleMoveT * sm)
+Index: src/namebase.cpp
+===================================================================
+--- src/namebase.cpp	(revision 2577)
++++ src/namebase.cpp	(working copy)
+@@ -111,24 +111,7 @@
+     fileNameT fname;
+     strcpy (fname, Fname);
+     strcat (fname, suffix);
+-#ifdef WINCE
+-    //if ((FilePtr = fopen (fname, "rb")) == NULL) {
+-    if ((FilePtr = my_Tcl_OpenFileChannel(NULL, fname, "r", 0666)) == 0) {
+-        //Handle = Tcl_OpenFileChannel(NULL, name, modeStr, 0666);//fopen (name, modeStr);
+-        return ERROR_FileOpen;
+-    }
+- my_Tcl_SetChannelOption(NULL, FilePtr, "-encoding", "binary");
+- my_Tcl_SetChannelOption(NULL, FilePtr, "-translation", "binary");
+ 
+-    readString(FilePtr, Header.magic, 8);
+-    if (strcmp (Header.magic, NAMEBASE_MAGIC) != 0) {
+-        my_Tcl_Close(NULL, FilePtr);//fclose (FilePtr);
+-        FilePtr = NULL;
+-        return ERROR_BadMagic;
+-    }
+-
+-#else
+-
+     if ((FilePtr = fopen (fname, "rb")) == NULL) {
+         return ERROR_FileOpen;
+     }
+@@ -139,7 +122,7 @@
+         FilePtr = NULL;
+         return ERROR_BadMagic;
+     }
+-#endif
++
+     Header.timeStamp = readFourBytes (FilePtr);
+     Header.numNames[NAME_PLAYER] = readThreeBytes (FilePtr);
+     Header.numNames[NAME_EVENT] = readThreeBytes (FilePtr);
+Index: src/namebase.h
+===================================================================
+--- src/namebase.h	(revision 2577)
++++ src/namebase.h	(working copy)
+@@ -55,8 +55,7 @@
+ const caseFlagT
+     CASE_SENSITIVE = 0,  CASE_INSENSITIVE = 1;
+ 
+-// const char OLD_NAMEBASE_SUFFIX[] = ".sn3";
+-const char NAMEBASE_SUFFIX[] = ".sn4";
++const char NAMEBASE_SUFFIX[] = ".sn960";
+ 
+ const char NAMEBASE_MAGIC[8] = "Scid.sn";
+ 
 Index: src/position.cpp
 ===================================================================
---- src/position.cpp	(revision 2577)
+--- src/position.cpp	(revision 2583)
 +++ src/position.cpp	(working copy)
 @@ -14,6 +14,7 @@
  
@@ -1180,7 +1261,7 @@ Index: src/position.h
      squareT *   GetList (colorT c)    { return List[c]; }
 Index: src/tkscid.cpp
 ===================================================================
---- src/tkscid.cpp	(revision 2577)
+--- src/tkscid.cpp	(revision 2583)
 +++ src/tkscid.cpp	(working copy)
 @@ -516,8 +516,8 @@
      clipbase->backupCache->SetPolicy (TREECACHE_Oldest);
@@ -1192,7 +1273,132 @@ Index: src/tkscid.cpp
      db = &(dbList[currentBase]);
  
  #ifndef TCL_ONLY
-@@ -14947,6 +14947,7 @@
+@@ -1019,7 +1019,6 @@
+         }
+         return TCL_ERROR;
+     }
+-
+     if (db->nb->ReadNameFile() != OK) {
+         base_open_failure(oldBaseNum);
+         return errorResult (ti, "Error opening name file.");
+@@ -3224,115 +3223,10 @@
+ 
+ //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ // sc_base_upgrade:
+-//    Upgrades an old (version 3.x, suffix .si3) Scid database
+-//    to version 4 (suffix .si4).
++//    Stub, as si4 db format is unchanged to 9 (960)
+ int
+ sc_base_upgrade (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
+ {
+-    bool showProgress = startProgressBar();
+-
+-    if (argc != 3) {
+-        return errorResult (ti, "Usage: sc_base upgrade <old-database>");
+-    }
+-    const char * fname = argv[2];
+-    Index * oldIndex = new Index;
+-    Index * newIndex = new Index;
+-
+-    oldIndex->SetFileName (fname);
+-    newIndex->SetFileName (fname);
+-
+-    if (newIndex->OpenIndexFile(FMODE_ReadOnly) == OK) {
+-        newIndex->CloseIndexFile();
+-        delete oldIndex;
+-        delete newIndex;
+-        return errorResult (ti, "An upgraded version of this database already exists.");
+-    }
+-
+-    if (oldIndex->OpenOldIndexFile (FMODE_ReadOnly) != OK) {
+-        delete oldIndex;
+-        delete newIndex;
+-        return errorResult (ti, "Error opening the old database.");
+-    }
+-
+-    if (newIndex->CreateIndexFile (FMODE_WriteOnly) != OK) {
+-        oldIndex->CloseIndexFile();
+-        delete oldIndex;
+-        delete newIndex;
+-        return errorResult (ti, "Error creating the new dataabse.");
+-    }
+-
+-    MFile * oldMFile = oldIndex->GetMFile();
+-    MFile * newMFile = newIndex->GetMFile();
+-
+-    char buf[256];
+-    // First copy the header with new version number
+-
+-    oldMFile->Seek(0);
+-    newMFile->Seek(0);
+-
+-    oldMFile->ReadNBytes( buf, 8);
+-    newMFile->WriteNBytes(buf, 8);
+-
+-    oldMFile->ReadTwoBytes();
+-    newMFile->WriteTwoBytes(SCID_VERSION);
+-
+-    oldMFile->ReadNBytes(buf, 4 + 3 + 3 + SCID_DESC_LENGTH + 1);
+-    newMFile->WriteNBytes(buf, 4 + 3 + 3 + SCID_DESC_LENGTH + 1);
+-
+-    // write the descriptions of the custom flags added with v4 version of base
+-    memset( buf, 0, 256 );
+-    newMFile->WriteNBytes( buf, CUSTOM_FLAG_MAX * ( CUSTOM_FLAG_DESC_LENGTH+1 ) );
+-
+-    // Now copy each index entry
+-    uint i;
+-    uint numGames = oldIndex->GetNumGames();
+-    errorT err = OK;
+-    uint updateStart = 250;
+-    uint update = updateStart;
+-
+-    for (i=0; i < numGames; i++) {
+-        if (showProgress) {
+-            update--;
+-            if (update == 0) {
+-                update = updateStart;
+-                if (interruptedProgress()) { break; }
+-                updateProgressBar (ti, i, numGames);
+-            }
+-        }
+-
+-        oldMFile->ReadNBytes(buf, 4 + 2);
+-        newMFile->WriteNBytes(buf, 4 + 2);
+-
+-        // insert one byte for Length_High and user bits
+-        newMFile->WriteNBytes( "\0", 1 );
+-
+-        oldMFile->ReadNBytes(buf, 40 );
+-        newMFile->WriteNBytes(buf, 40 );
+-
+-    }
+-
+-    oldIndex->CloseIndexFile();
+-    newIndex->CloseIndexFile(true); // don't write again the header
+-
+-    if (err == OK  &&  !interruptedProgress()) {
+-        if (err != OK) { setResult (ti, "Error writing name file"); }
+-    }
+-
+-    delete oldIndex;
+-    delete newIndex;
+-
+-    if (interruptedProgress()) {
+-        removeFile (fname, INDEX_SUFFIX);
+-        return errorResult (ti, "Upgrading was cancelled.");
+-    }
+-
+-    if (err != OK) {
+-        removeFile (fname, INDEX_SUFFIX);
+-        return TCL_ERROR;
+-    }
+-
+-    if (showProgress) { updateProgressBar (ti, 1, 1); }
+-
+     return TCL_OK;
+ }
+ 
+@@ -14952,6 +14846,7 @@
          char cboard [40];
          pos->PrintCompactStrFlipped (cboard);
          posFlip->ReadFromCompactStr ((byte *) cboard);
@@ -1202,9 +1408,9 @@ Index: src/tkscid.cpp
      }
 Index: tcl/edit.tcl
 ===================================================================
---- tcl/edit.tcl	(revision 2577)
+--- tcl/edit.tcl	(revision 2585)
 +++ tcl/edit.tcl	(working copy)
-@@ -63,6 +63,9 @@
+@@ -67,6 +67,9 @@
        set fenStr "$s1 $s2 [lrange $fenStr 2 end]"
    }
  
@@ -1214,7 +1420,7 @@ Index: tcl/edit.tcl
    if {[catch {sc_game startBoard $fenStr}]} {
      # Trim length, and remove newlines for error dialog
      if {[string length $fenStr] > 80} {
-@@ -322,6 +325,9 @@
+@@ -332,6 +335,9 @@
  proc validateFEN {fen} {
    global setupFen
  
@@ -1224,7 +1430,7 @@ Index: tcl/edit.tcl
    #### Do a sanity check on castling
    #    .. helpful because illegal FENs crash engines
    #    and we could also have one for enpassant
-@@ -638,6 +644,20 @@
+@@ -650,6 +656,20 @@
      makeSetupFen
    } -width 10
  
@@ -1245,7 +1451,7 @@ Index: tcl/edit.tcl
   # Are these bullet-proof and correct ? 
  
    button $sr.b.swap -text {Swap Colours} -command {
-@@ -695,6 +715,7 @@
+@@ -707,6 +727,7 @@
    pack $sr.b		-side top -pady 10
    pack $sr.b.clear	-side top -padx 5 -pady 2
    pack $sr.b.initial	-side top -padx 5 -pady 2
@@ -1253,9 +1459,418 @@ Index: tcl/edit.tcl
    pack [frame $sr.b.space -height 10] -side top
    pack $sr.b.swap	-side top -padx 5 -pady 2
    pack $sr.b.invert	-side top -padx 5 -pady 2
+Index: tcl/file/bookmark.tcl
+===================================================================
+--- tcl/file/bookmark.tcl	(revision 2577)
++++ tcl/file/bookmark.tcl	(working copy)
+@@ -233,7 +233,7 @@
+     if {$success == -1} {
+       return
+     }
+-    ::recentFiles::add "[file rootname $fname].si4"
++    ::recentFiles::add "[file rootname $fname].si960"
+   }
+   # Find and load the best database game matching the bookmark:
+   set white [lindex $entry 5]
+Index: tcl/file/finder.tcl
+===================================================================
+--- tcl/file/finder.tcl	(revision 2577)
++++ tcl/file/finder.tcl	(working copy)
+@@ -316,8 +316,8 @@
+   set r [file rootname $f]
+   set d [clock format [clock seconds] -format "-%Y.%m.%d-%H%M" ]
+   set ext [string tolower [file extension $f]]
+-  if { $ext == ".si4" } {
+-    if { [catch { file copy "$r.sg4" "$r$d.sg4" ; file copy "$r.sn4" "$r$d.sn4" } err ] } {
++  if { $ext == ".si960" } {
++    if { [catch { file copy "$r.sg960" "$r$d.sg960" ; file copy "$r.sn960" "$r$d.sn960" } err ] } {
+       tk_messageBox -title Scid -icon error -type ok -message "File copy error $err"
+       return
+     }
+@@ -341,8 +341,8 @@
+   }
+   set dir [tk_chooseDirectory -initialdir [file dirname $f] -parent .finder]
+   if {$dir != ""} {
+-    if { [string tolower [file extension $f]] == ".si4" } {
+-      if { [catch { file copy "[file rootname $f].sg4" "[file rootname $f].sn4" $dir } err ] } {
++    if { [string tolower [file extension $f]] == ".si960" } {
++      if { [catch { file copy "[file rootname $f].sg960" "[file rootname $f].sn960" $dir } err ] } {
+         tk_messageBox -title Scid -icon error -type ok -message "File copy error $err" -parent .finder
+         return
+       }
+@@ -367,9 +367,9 @@
+   }
+   set dir [tk_chooseDirectory -initialdir [file dirname $f] -parent .finder ]
+   if {$dir != ""} {
+-    if { [string tolower [file extension $f]] == ".si4" } {
++    if { [string tolower [file extension $f]] == ".si960" } {
+       
+-      if { [catch { file rename "[file rootname $f].sg4" "[file rootname $f].sn4" $dir } err ] } {
++      if { [catch { file rename "[file rootname $f].sg960" "[file rootname $f].sn960" $dir } err ] } {
+         tk_messageBox -title Scid -icon error -type ok -message "File rename error $err" -parent .finder
+         return
+       }
+@@ -409,15 +409,15 @@
+ 
+   set n "[file dirname $f]/$newname"
+ 
+-  if { [string tolower [file extension $f]] == {.si4} } {
+-    if {[file exists "$newname.si4"]} {
+-      tk_messageBox -title Scid -icon error -type ok -message "$newname.si4 already exists" -parent .finder
++  if { [string tolower [file extension $f]] == {.si960} } {
++    if {[file exists "$newname.si960"]} {
++      tk_messageBox -title Scid -icon error -type ok -message "$newname.si960 already exists" -parent .finder
+       return
+     }
+ 
+     if { [catch {
+-	    file rename "$r.sg4" "$n.sg4"
+-	    file rename "$r.sn4" "$n.sn4"
++	    file rename "$r.sg960" "$n.sg960"
++	    file rename "$r.sn960" "$n.sn960"
+ 	 } err ] } {
+       tk_messageBox -title Scid -icon error -type ok -message "File copy error $err"
+       return
+@@ -482,8 +482,8 @@
+   set answer [tk_messageBox -title Scid -icon warning -type yesno -parent .finder \
+                 -message "Do you want to permanently delete $f ?"]
+   if {$answer == "yes"} {
+-    if { [string tolower [file extension $f]] == ".si4" } {
+-      file delete "[file rootname $f].sg4" "[file rootname $f].sn4" "[file rootname $f].stc"
++    if { [string tolower [file extension $f]] == ".si960" } {
++      file delete "[file rootname $f].sg960" "[file rootname $f].sn960" "[file rootname $f].stc"
+     }
+     file delete $f
+   }
+@@ -531,10 +531,10 @@
+       set showFile 0
+       set rootname [file rootname $f]
+       set type PGN
+-      if {$ext == ".si4"} {
++      if {$ext == ".si960"} {
+         set showFile 1
+         set type Scid
+-      } elseif {$ext == ".si3"} {
++      } elseif {$ext == ".si4"} {
+         set showFile 1
+         set type Old
+       } elseif {$ext == ".epd"} {
+Index: tcl/file/maint.tcl
+===================================================================
+--- tcl/file/maint.tcl	(revision 2577)
++++ tcl/file/maint.tcl	(working copy)
+@@ -12,7 +12,7 @@
+ ################################################################################
+ proc ::maint::fixCorruptedBase {} {
+   set ftype {
+-    { "Scid databases" {".si4"} }
++    { "Scid databases" {".si960"} }
+   }
+   set fName [tk_getOpenFile -initialdir $::initialDir(base) -filetypes $ftype -title "Open a Scid file"]
+   if {$fName == ""} { return }
+Index: tcl/file/recent.tcl
+===================================================================
+--- tcl/file/recent.tcl	(revision 2577)
++++ tcl/file/recent.tcl	(working copy)
+@@ -74,7 +74,7 @@
+ 
+ proc ::recentFiles::load {fname} {
+   set rname $fname
+-  if {[file extension $rname] == ".si4"} {
++  if {[file extension $rname] == ".si960"} {
+     set rname [file rootname $rname]
+   }
+   for {set i 1} {$i <= [sc_base count total]} {incr i} {
+Index: tcl/file.tcl
+===================================================================
+--- tcl/file.tcl	(revision 2577)
++++ tcl/file.tcl	(working copy)
+@@ -87,8 +87,8 @@
+     return
+   }
+   set ftype {
+-    { "Scid databases, EPD files" {".si4" ".epd"} }
+-    { "Scid databases" {".si4"} }
++    { "Scid databases, EPD files" {".si960" ".epd"} }
++    { "Scid databases" {".si960"} }
+     { "EPD files" {".epd"} }
+   }
+   if {! [file isdirectory $::initialDir(base)] } {
+@@ -102,7 +102,7 @@
+       return
+     }
+   } else {
+-    if {[file extension $fName] == ".si4"} {
++    if {[file extension $fName] == ".si960"} {
+       set fName [file rootname $fName]
+     } 
+     if {[catch {sc_base create $fName} result]} {
+@@ -112,7 +112,7 @@
+     }
+     # set default icon
+     catch {sc_base type [sc_base current] 1}
+-    set fName $fName.si4
++    set fName $fName.si960
+   }
+   set ::glistFlipped([sc_base current]) 0
+   ::recentFiles::add $fName
+@@ -127,7 +127,6 @@
+ # But it is used everywhere, and will take some time to fix
+ 
+ proc ::file::Open {{fName ""} {parent .} {update 1}} {
+-
+   if {[sc_base count free] == 0} {
+     tk_messageBox -type ok -icon info -title "Scid" \
+         -message "Too many databases are open; close one first" -parent $parent
+@@ -136,15 +135,15 @@
+ 
+   if {[sc_info gzip]} {
+     set ftype {
+-      { {All Scid files} {.si4 .si3 .pgn .PGN .pgn.gz .epd .epd.gz} }
+-      { {Scid databases} {.si4 .si3} }
++      { {All Scid files} {.si960 .si4 .pgn .PGN .pgn.gz .epd .epd.gz} }
++      { {Scid databases} {.si960 .si4} }
+       { {PGN files} {.pgn .PGN .pgn.gz} }
+       { {EPD files} {.epd .EPD .epd.gz} }
+     }
+   } else {
+     set ftype {
+-      { {All Scid files} {.si4 .si3 .pgn .PGN .epd} }
+-      { {Scid databases} {.si4 .si3} }
++      { {All Scid files} {.si960 .si4 .pgn .PGN .epd} }
++      { {Scid databases} {.si960 .si4} }
+       { {PGN files} {.pgn .PGN} }
+       { {EPD files} {.epd .EPD} }
+     }
+@@ -161,17 +160,17 @@
+   setTrialMode 0 0
+ 
+   set ext [file extension $fName]
+-  if {$ext == "" || [file readable "$fName.si4"]} {
+-    set fName "$fName.si4"
+-    set ext .si4
++  if {$ext == "" || [file readable "$fName.si960"]} {
++    set fName "$fName.si960"
++    set ext .si960
+   }
+ 
+-  if {$ext == ".sg4" || $ext == ".sn4"} {
+-    set fName "[file rootname $fName].si4"
+-    set ext .si4
++  if {$ext == ".sg960" || $ext == ".sn960"} {
++    set fName "[file rootname $fName].si960"
++    set ext .si960
+   }
+ 
+-  if {$ext == ".si3" && [file exists $fName]} {
++  if {$ext == ".si4" && [file exists $fName]} {
+     ::file::Upgrade [file rootname $fName]
+     return
+   }
+@@ -192,7 +191,7 @@
+   set err 0
+   busyCursor .
+ 
+-  if {$ext == ".si4"} {
++  if {$ext == ".si960"} {
+     set fName [file rootname $fName]
+     if {[catch {openBase $fName} result]} {
+       set err 1
+@@ -202,11 +201,11 @@
+       unbusyCursor .
+       tk_messageBox -icon warning -type ok -parent $parent \
+           -title "Scid: Error opening file" -message "$result"
+-      ::recentFiles::remove "$fName.si4"
++      ::recentFiles::remove "$fName.si960"
+       return -1
+     } else {
+       set ::initialDir(base) [file dirname $fName]
+-      ::recentFiles::add "$fName.si4"
++      ::recentFiles::add "$fName.si960"
+     }
+   } elseif {[string match "*.epd" [string tolower $fName]]} {
+     # EPD file:
+@@ -368,14 +367,14 @@
+ 
+ # ::file::Upgrade
+ #
+-#   Upgrades an old (version 3) Scid database to version 4.
++#   Upgrades an old (version 4) Scid database to version 960.
+ #
+ proc ::file::Upgrade {name} {
+-  if {[file readable "$name.si4"]} {
++  if {[file readable "$name.si960"]} {
+     set msg [string trim $::tr(ConfirmOpenNew)]
+     set res [tk_messageBox -title "Scid" -type yesno -icon info -message $msg]
+     if {$res == "no"} { return }
+-    ::file::Open "$name.si4"
++    ::file::Open "$name.si960"
+     return
+   }
+ 
+@@ -382,37 +381,31 @@
+   set msg [string trim $::tr(ConfirmUpgrade)]
+   set res [tk_messageBox -title "Scid" -type yesno -icon info -message $msg]
+   if {$res == "no"} { return }
+-  progressWindow "Scid" "$::tr(Upgrading): [file tail $name]"\
+-      $::tr(Cancel) "sc_progressBar"
+-  busyCursor .
+-  update
+   set err [catch {sc_base upgrade $name} res]
+-  unbusyCursor .
+-  closeProgressWindow
+   if {$err} {
+     tk_messageBox -title "Scid" -type ok -icon warning \
+         -message "Unable to upgrade the database:\n$res"
+     return
+   } else  {
+-    # rename game and name files, delete old .si3
+-    file rename "$name.sg3"  "$name.sg4"
+-    file rename "$name.sn3"  "$name.sn4"
+-    file delete "$name.si3"
++    # rename game and name files, delete old .si4
++    file rename "$name.sg4"  "$name.sg960"
++    file rename "$name.sn4"  "$name.sn960"
++    file rename "$name.si4"  "$name.si960"
+   }
+-  ::file::Open "$name.si4"
++  ::file::Open "$name.si960"
+ }
+ 
+ # openBase:
+ #    Opens a Scid database, showing a progress bar in a separate window
+ #    if the database is around 5 Mb or larger in size.
+-#   ::file::Open should be used if the base is not already in si4 format
++#   ::file::Open should be used if the base is not already in si960 format
+ 
+ proc openBase {name} {
+ 
+   # This check should probably be done somewhere else
+   # But fixing issue/all scenarios is very painful , so leave it here steven!
+-  if {![file exists $name.si4]} {
+-    return -code error "File \"$name.si4\" doesn't exist."
++  if {![file exists $name.si960]} {
++    return -code error "File \"$name.si960\" doesn't exist."
+   }
+ 
+   # Depending on how file is opened, windows can have "\" file separators
+@@ -426,8 +419,8 @@
+   set bsize 0
+ 
+   ### wrong i think
+-  # set gfile "[file rootname $name].sg4" 
+-  set gfile "$name.sg4"
++  # set gfile "[file rootname $name].sg960" 
++  set gfile "$name.sg960"
+ 
+   if {! [catch {file size $gfile} err]} { set bsize $err }
+   set showProgress 0
+@@ -539,14 +532,14 @@
+   if {$fName == ""} {
+     if {[sc_info gzip]} {
+       set ftype {
+-        { "Scid databases, PGN files" {".si4" ".si3" ".pgn" ".PGN" ".pgn.gz"} }
+-        { "Scid databases" {".si4" ".si3"} }
++        { "Scid databases, PGN files" {".si960" ".si4" ".pgn" ".PGN" ".pgn.gz"} }
++        { "Scid databases" {".si960" ".si4"} }
+         { "PGN files" {".pgn" ".PGN" ".pgn.gz"} }
+       }
+     } else {
+       set ftype {
+-        { "Scid databases, PGN files" {".si4" ".si3" ".pgn" ".PGN"} }
+-        { "Scid databases" {".si4" ".si3"} }
++        { "Scid databases, PGN files" {".si960" ".si4" ".pgn" ".PGN"} }
++        { "Scid databases" {".si960" ".si4"} }
+         { "PGN files" {".pgn" ".PGN"} }
+       }
+     }
+@@ -563,10 +556,10 @@
+ 
+ 
+   if {[file extension $fName] == ""} {
+-    set fName "$fName.si4"
++    set fName "$fName.si960"
+   }
+ 
+-  if {[file extension $fName] == ".si3" && [file exists $fName]} {
++  if {[file extension $fName] == ".si4" && [file exists $fName]} {
+     ::file::Upgrade [file rootname $fName]
+     return
+   }
+@@ -573,7 +566,7 @@
+ 
+   ### Check it is not already open
+   # Name handling is a little clumsy, but is tested
+-  if {[file extension $fName] == ".si4"} {
++  if {[file extension $fName] == ".si960"} {
+     set rName [file rootname $fName]
+   } else {
+     set rName $fName
+@@ -587,7 +580,7 @@
+ 
+   set err 0
+   busyCursor .
+-  if {[file extension $fName] == ".si4"} {
++  if {[file extension $fName] == ".si960"} {
+     set fName [file rootname $fName]
+     if {[catch {openBase $fName} result]} {
+       unbusyCursor .
+@@ -597,7 +590,7 @@
+     } else {
+       set ::initialDir(base) [file dirname $fName]
+       set ::initialDir(file) [file tail $fName]
+-      ::recentFiles::add "$fName.si4"
++      ::recentFiles::add "$fName.si960"
+     }
+   } else {
+     # PGN file:
+@@ -739,7 +732,7 @@
+       append message \n\n [join $rejectList \n]
+     }
+     set detail [tr UriRejectedDetail]
+-    append detail " .sci, .si4, .si3, .cbh, .pgn, .pgn.gz, .zip"
++    append detail " .sci, .si960, .si4, .cbh, .pgn, .pgn.gz, .zip"
+     tk_messageBox -icon info -type ok -parent . -message $message -detail $detail
+   }
+ 
+Index: tcl/help/help.tcl
+===================================================================
+--- tcl/help/help.tcl	(revision 2578)
++++ tcl/help/help.tcl	(working copy)
+@@ -4300,6 +4300,8 @@
+   <li>Project page  <url http://sourceforge.net/projects/scidvspc>http://sourceforge.net/projects/scidvspc</url></li>
+   <li>Online documentation <url http://scidvspc.sourceforge.net/doc/Contents.htm>http://scidvspc.sourceforge.net/doc/Contents.htm</url></li>
+   <br>
++  <li>Chess 960 Essay <url http://www.dwheeler.com/essays/Fischer_Random_Chess.html>http://www.dwheeler.com/essays/Fischer_Random_Chess.html</url></li>
++  <br>
+   <li>Millbase database <url http://katar.weebly.com/index.html>http://katar.weebly.com/index.html</url></li>
+   <li>Player Information resources  <url http://sourceforge.net/projects/scid/files/Player Data/>http://sourceforge.net/projects/scid/files/Player Data/</url></li>
+   <li>FICS <url http://www.freechess.org>www.freechess.org</url></li>
+Index: tcl/lang/english.tcl
+===================================================================
+--- tcl/lang/english.tcl	(revision 2577)
++++ tcl/lang/english.tcl	(working copy)
+@@ -1354,15 +1354,13 @@
+ # Upgrading databases:
+ translate E Upgrading {Upgrading}
+ translate E ConfirmOpenNew {
+-This is an old-format (si3) database that cannot be opened in Scid 4.0, but a new-format (si4) version has already been created.
++This is an old-format (si4) database, but a new-format (si960) version has already been created.
+ 
+ Do you want to open the new-format version of the database?
+ }
+ translate E ConfirmUpgrade {
+-This is an "si3" format database. It must be converted to "si4" before it can be used in Scid vs. PC 4.0.
++This is an "si4" format database. It must be renamed to "si960" before being used Scid vs. 960.
+ 
+-This process is irreversible and only needs to be done once. You can cancel if it takes too long.
+-
+ Do you want to upgrade this database now?
+ }
+ 
 Index: tcl/main.tcl
 ===================================================================
---- tcl/main.tcl	(revision 2577)
+--- tcl/main.tcl	(revision 2584)
 +++ tcl/main.tcl	(working copy)
 @@ -1296,6 +1296,7 @@
  #   piece from the user.
@@ -1521,9 +2136,39 @@ Index: tcl/start.tcl
  }
  
  # See if we're inside a Mac .app bundle.  This duplcates part of the command-line
+@@ -287,7 +287,7 @@
+   # so choose something dumb
+   set scidLogDir {C:\log}
+ } else {
+-  set scidUserDir [file nativename "~/.scidvspc"]
++  set scidUserDir [file nativename "~/.scidvs960"]
+   set scidLogDir [file nativename [file join $scidUserDir "log"]]
+ }
+ 
+@@ -1409,8 +1409,8 @@
+       if {$ext == ".sg4" || $ext == ".sn4"} {
+         set file "[file rootname $file].si4"
+       }
+-      if {$ext == ".sg3" || $ext == ".sn3"} {
+-        set file "[file rootname $file].si3"
++      if {$ext == ".sg960" || $ext == ".sn960"} {
++        set file "[file rootname $file].si960"
+       }
+ 
+       # Check if base is already opened
+@@ -1871,7 +1871,8 @@
+ ::splash::add "$::scidName $::scidVersion ($::scidVersionDate)."
+ ::splash::add "http://scidvspc.sourceforge.net"
+ ::splash::add ""
+-::splash::add "(C) Steven Atkinson (stevenaaus@yahoo.com) 2008-2016"
++::splash::add "(C) Britton Farrar (brittonfarrar@gmail.com) 2016"
++::splash::add "(C) Steven Atkinson 2008-2016"
+ ::splash::add "(C) Pascal Georges 2006-2008"
+ ::splash::add "(C) Shane Hudson 1999-2004"
+ ::splash::add "(C) Gregor Cramer, Fulvio Benini and others."
 Index: tcl/tools/analysis.tcl
 ===================================================================
---- tcl/tools/analysis.tcl	(revision 2577)
+--- tcl/tools/analysis.tcl	(revision 2584)
 +++ tcl/tools/analysis.tcl	(working copy)
 @@ -3639,6 +3639,7 @@
      # proc is called for any change in board position (including new games, and simple moves)
@@ -1571,7 +2216,7 @@ Index: tcl/tools/fics.tcl
        if {[sc_pos side] == "white"} {
 Index: tcl/tools/sergame.tcl
 ===================================================================
---- tcl/tools/sergame.tcl	(revision 2577)
+--- tcl/tools/sergame.tcl	(revision 2583)
 +++ tcl/tools/sergame.tcl	(working copy)
 @@ -325,6 +325,10 @@
        ::sergame::sendToEngine $n "setoption name Ponder value false"
@@ -1596,3 +2241,16 @@ Index: tcl/tools/sergame.tcl
      }
  
      updateBoard -pgn
+Index: tcl/tools/tactics.tcl
+===================================================================
+--- tcl/tools/tactics.tcl	(revision 2577)
++++ tcl/tools/tactics.tcl	(working copy)
+@@ -124,7 +124,7 @@
+     # go through all bases and take descriptions
+     set baseList {}
+     set baseDesc {}
+-    set fileList [  lsort -dictionary [ glob -nocomplain -directory $basePath *.si4 ] ]
++    set fileList [  lsort -dictionary [ glob -nocomplain -directory $basePath *.si960 ] ]
+     foreach file  $fileList {
+       if {[sc_base slot $file] == 0} {
+         sc_base open [file rootname $file]
