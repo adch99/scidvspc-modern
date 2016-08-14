@@ -11489,19 +11489,20 @@ sc_name_edit (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         newDate = date_EncodeFromString (argv[5]);
     }
 
+    // "*" will match anything in EVENT, SITE and a few others
+    bool glob = (oldName[0]=='*' && oldName[1]==0 && (option == OPT_EVENT || option == OPT_SITE || option == OPT_ROUND));
+
     // Find the existing name in the namebase:
     idNumberT oldID = 0;
 
     // dont' allow globbing unless it is filter only.
-    if (((oldName[0]=='*' && oldName[1]==0) ||
-         (oldName[0]=='?' && oldName[1]==0)) && editSelection == EDIT_ALL) {
+    if ((glob || (oldName[0]=='?' && oldName[1]==0)) && editSelection == EDIT_ALL) {
       Tcl_AppendResult (ti, "Using '*' and '?' to match field names is potentially harmful, and not allowed with 'All games'.",NULL);
       return TCL_ERROR;
     }
 
     // skip this check is we are searching for "*" and the field is OPT_EVENT SITE or ROUND
-    if (option != OPT_DATE  &&  option != OPT_EVENTDATE
-        && !(oldName[0]=='*' && oldName[1]==0 && (option == OPT_EVENT || option == OPT_SITE || option == OPT_ROUND))) {
+    if (option != OPT_DATE  &&  option != OPT_EVENTDATE && ! glob) {
         if (db->nb->FindExactName (nt, oldName, &oldID) != OK) {
             Tcl_AppendResult (ti, "The ", NAME_TYPE_STRING[nt],
                               " name \"", oldName, "\" does not exist.", NULL);
@@ -11557,17 +11558,13 @@ sc_name_edit (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         }
         ie = db->idx->FetchEntry (i);
         if (editSelection == EDIT_CTABLE
-            && !isCrosstableGame (ie, siteId, eventId, firstDate, lastDate,
-                                  eventDate)) {
+            && !isCrosstableGame (ie, siteId, eventId, firstDate, lastDate, eventDate)) {
             continue;
         }
 
         // Fetch the index entry and see if any editing is required:
         newIE = *ie;
         int edits = 0;
-
-        // "*" will match anything in EVENT, SITE and a few others
-        bool glob = (oldName[0]=='*' && oldName[1]==0);
 
         switch (option) {
         case OPT_PLAYER:
@@ -11585,6 +11582,8 @@ sc_name_edit (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             if (glob || ie->GetEvent() == oldID) {
                 newIE.SetEvent (newID);
                 edits++;
+                if (glob)
+                    oldID = ie->GetEvent();
             }
             break;
 
@@ -11592,6 +11591,8 @@ sc_name_edit (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             if (glob || ie->GetSite() == oldID) {
                 newIE.SetSite (newID);
                 edits++;
+                if (glob)
+                    oldID = ie->GetSite();
             }
             break;
 
@@ -11599,6 +11600,8 @@ sc_name_edit (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             if (glob || ie->GetRound() == oldID) {
                 newIE.SetRound (newID);
                 edits++;
+                if (glob)
+                    oldID = ie->GetRound();
             }
             break;
 
@@ -11662,6 +11665,7 @@ sc_name_edit (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     Tcl_AppendResult (ti, temp, NULL);
     return TCL_OK;
 }
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // sc_name_retrievename:
 //    Check for the right name in spellcheck and return it.
