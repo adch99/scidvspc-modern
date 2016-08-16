@@ -12782,11 +12782,7 @@ sc_name_plist (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         default:
             return InvalidCommand (ti, "sc_name plist -sort", sortModes);
     }
-#ifdef WINCE
-    namebaseNodeT * plist = (idNumberT *)my_Tcl_Alloc(sizeof( namebaseNodeT [maxListSize + 1]));
-#else
-    namebaseNodeT * plist = new namebaseNodeT [maxListSize + 1];
-#endif
+    namebaseNodeT * plist = new namebaseNodeT [maxListSize];
 
     NameBase * nb = db->nb;
     uint nPlayers = nb->GetNumNames(NAME_PLAYER);
@@ -12811,18 +12807,14 @@ sc_name_plist (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
         plist[listSize++] = node;
 
-	if (listSize > maxListSize)
+	if (listSize >= maxListSize)
 	    break;
     }
 
     qsort(plist, listSize, sizeof(plist[0]), comp);
 
     // Generate the list of player data:
-#ifdef WINCE
-    Tcl_DString * ds = (Tcl_DString *) my_Tcl_Alloc( sizeof(Tcl_DString ));
-#else
     Tcl_DString * ds = new Tcl_DString;
-#endif
     Tcl_DStringInit (ds);
 
     for (uint p=0; p < listSize; p++) {
@@ -12843,13 +12835,8 @@ sc_name_plist (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     }
     Tcl_DStringResult (ti, ds);
     Tcl_DStringFree (ds);
-#ifdef WINCE
-    my_Tcl_Free((char*)ds);
-    my_Tcl_Free((char*)plist);
-#else
     delete ds;
     delete[] plist;
-#endif
     return TCL_OK;
 }
 

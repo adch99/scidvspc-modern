@@ -854,6 +854,8 @@ proc nameEditor {} {
           grid .nedit.g.toL -row 1 -column 1 -sticky e
           grid .nedit.g.fromE -row 0 -column 2 -sticky w
           grid .nedit.g.toE -row 1 -column 2 -sticky w
+          set editName {}
+          set editNameNew {}
           checkNeditReplace
         }
     pack $w.typeButtons.$j -side left -padx 5
