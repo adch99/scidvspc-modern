@@ -67,6 +67,7 @@ proc ::game::Clear {} {
   updateBoard -pgn
   updateTitle
   updateMenuStates
+  ::tools::graphs::score::Refresh
 }
 
 #   Strips all comments or variations from a game
