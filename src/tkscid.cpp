@@ -17,6 +17,8 @@
 
 #include <errno.h>
 #include <stdlib.h>
+#include <utility>
+#include <vector>
 #include <set>
 
 # include "charsetconverter.h"
@@ -12659,7 +12661,7 @@ enum playerCompareT {
 typedef const nameNodeT * namebaseNodeT;
 inline static namebaseNodeT node(void const* n) { return *((namebaseNodeT *)n); }
 
-int
+static int
 compareNames(const void * lhs, const void * rhs)
 {
     const char * name1 = node(lhs)->name;
@@ -12672,21 +12674,21 @@ compareNames(const void * lhs, const void * rhs)
     return compare;
 }
 
-int
+static int
 compareElo(const void * lhs, const void * rhs)
 {
     int compare = node(rhs)->data.maxElo - node(lhs)->data.maxElo;
     return compare ? compare : compareNames(lhs, rhs);
 }
 
-int
+static int
 compareGames(const void * lhs, const void * rhs)
 {
     int compare = node(rhs)->data.frequency - node(lhs)->data.frequency;
     return compare ? compare : compareNames(lhs, rhs);
 }
 
-int
+static int
 compareOldest(const void * lhs, const void * rhs)
 {
     // Sort by oldest game year in ascending order:
@@ -12694,7 +12696,7 @@ compareOldest(const void * lhs, const void * rhs)
     return compare ? compare : compareNames(lhs, rhs);
 }
 
-int
+static int
 compareNewest(const void * lhs, const void * rhs)
 {
     // Sort by newest game date in descending order:
@@ -12702,7 +12704,7 @@ compareNewest(const void * lhs, const void * rhs)
     return compare ? compare : compareNames(lhs, rhs);
 }
 
-int
+static int
 comparePhoto(const void * lhs, const void * rhs)
 {
     int compare = (int)node(rhs)->data.hasPhoto - (int)node(lhs)->data.hasPhoto;
@@ -12723,7 +12725,6 @@ sc_name_plist (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     uint minElo = 0;
     uint maxElo = MAX_ELO;
     uint maxListSize = db->nb->GetNumNames(NAME_PLAYER);
-    uint listSize = 0;
 
     if (! db->inUse) { return errorResult (ti, errMsgNotOpen(ti)); }
     if (db->numGames == 0) { return TCL_OK; }
@@ -12782,10 +12783,11 @@ sc_name_plist (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         default:
             return InvalidCommand (ti, "sc_name plist -sort", sortModes);
     }
-    namebaseNodeT * plist = new namebaseNodeT [maxListSize];
 
     NameBase * nb = db->nb;
     uint nPlayers = nb->GetNumNames(NAME_PLAYER);
+    std::vector<namebaseNodeT> plist;
+
     for (uint id = 0; id < nPlayers; id++) {
 	namebaseNodeT node = nb->GetNode(NAME_PLAYER, id);
 
@@ -12804,39 +12806,37 @@ sc_name_plist (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         //}
 
         // Insert this player into the ordered array if necessary:
-
-        plist[listSize++] = node;
-
-	if (listSize >= maxListSize)
-	    break;
+        plist.push_back(node);
     }
 
-    qsort(plist, listSize, sizeof(plist[0]), comp);
+    if (!plist.empty())
+        qsort(&plist.front(), plist.size(), sizeof(plist[0]), comp);
 
     // Generate the list of player data:
     Tcl_DString * ds = new Tcl_DString;
     Tcl_DStringInit (ds);
 
-    for (uint p=0; p < listSize; p++) {
+    maxListSize = std::min(maxListSize, uint(plist.size()));
+    for (uint p=0; p < maxListSize; p++) {
         Tcl_DStringStartSublist (ds);
+        namebaseNodeT node = plist[p];
         char tmp[16];
-	sprintf (tmp, "%u", plist[p]->data.frequency);
+        sprintf (tmp, "%u", node->data.frequency);
         Tcl_DStringAppendElement(ds, tmp);
-	sprintf (tmp, "%u", date_GetYear(plist[p]->data.firstDate));
+        sprintf (tmp, "%u", date_GetYear(node->data.firstDate));
         Tcl_DStringAppendElement(ds, tmp);
-	sprintf (tmp, "%u", date_GetYear(plist[p]->data.lastDate));
+        sprintf (tmp, "%u", date_GetYear(node->data.lastDate));
         Tcl_DStringAppendElement(ds, tmp);
-	sprintf (tmp, "%u", plist[p]->data.maxElo);
+        sprintf (tmp, "%u", node->data.maxElo);
         Tcl_DStringAppendElement(ds, tmp);
         //strCopy (tmp, nb->HasPhoto(plist[p]) ? "1" : "0");
         //Tcl_DStringAppendElement(ds, tmp);
-	Tcl_DStringAppendElement(ds, plist[p]->name);
+        Tcl_DStringAppendElement(ds, node->name);
         Tcl_DStringEndSublist (ds);
     }
     Tcl_DStringResult (ti, ds);
     Tcl_DStringFree (ds);
     delete ds;
-    delete[] plist;
     return TCL_OK;
 }
 
