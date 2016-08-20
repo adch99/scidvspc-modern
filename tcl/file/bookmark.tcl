@@ -217,7 +217,11 @@ proc ::bookmarks::Go {entry} {
   # Is the base already open ?
   set slot [sc_base slot $fname]
   if {$slot != 0} {
-    sc_base switch $slot
+    if {[sc_base current] != $slot} {
+      sc_base switch $slot
+      ::plist::refresh
+      ::tourney::refresh
+    }
   } else {
     busyCursor .
     ### updateBoard -pgn gets called three times, so try passing "update = 0" to the first two.
@@ -233,6 +237,8 @@ proc ::bookmarks::Go {entry} {
     if {$success == -1} {
       return
     }
+    ::plist::refresh
+    ::tourney::refresh
     ::recentFiles::add "[file rootname $fname].si4"
   }
   # Find and load the best database game matching the bookmark:

@@ -265,7 +265,7 @@ proc importPgnFile {} {
     doPgnFileImport $fname "" 1
   }
 
-  refreshWindows
+  refreshWindows all
 }
 
 proc doPgnFileImport {fname text {multiple 0} } {

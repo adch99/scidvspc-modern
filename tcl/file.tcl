@@ -116,7 +116,7 @@ proc ::file::New {} {
   }
   set ::glistFlipped([sc_base current]) 0
   ::recentFiles::add $fName
-  refreshWindows
+  refreshWindows all
   refreshSearchDBs
   updateBoard -pgn
 }
@@ -181,7 +181,7 @@ proc ::file::Open {{fName ""} {parent .} {update 1}} {
   set slot [sc_base slot $fName]
   if {$slot != 0} {
     sc_base switch $slot
-    refreshWindows
+    refreshWindows all
     updateBoard -pgn
     return
   }
@@ -266,7 +266,7 @@ proc ::file::Open {{fName ""} {parent .} {update 1}} {
   }
 
   if {$update} {
-    refreshWindows
+    refreshWindows all
     refreshSearchDBs
     ::bookmarks::AddCurrentGame
     updateBoard -pgn
@@ -274,16 +274,22 @@ proc ::file::Open {{fName ""} {parent .} {update 1}} {
   # else bookmarks will call refreshWindows after correct game loaded
 }
 
-proc refreshWindows {} {
+proc refreshWindows {{all no}} {
   ::windows::gamelist::Reload
-  # done in updateBoard
+  ### Done in updateBoard
   # ::tree::refresh
   ::windows::stats::Refresh
   ::tools::graphs::score::Refresh
-  # too slow to refresh all the time
-  # ::crosstab::Refresh
-  ::plist::refresh
-  ::tourney::refresh
+  
+  if {$all != "no"} {
+    ### too slow to refresh all the time
+    # ::crosstab::Refresh
+    ### Some refreshes will have to call these two themselves
+    ### They *should* be done *sometime* when doing a base switch
+    ::plist::refresh
+    ::tourney::refresh
+  }
+
   updateMenuStates
   updateTitle
   updateStatusBar
@@ -503,7 +509,7 @@ proc ::file::SwitchToBase {b} {
 
   updateBoard -pgn
 
-  refreshWindows
+  refreshWindows all
 }
 
 proc ::file::SwitchToNextBase {{dir 1}} {

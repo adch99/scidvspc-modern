@@ -278,6 +278,9 @@ proc ::game::LoadMenu {w base gnum x y} {
   $m entryconfigure 1 -command "
     if {\[sc_base current\] != $base} {
       sc_base switch $base
+      # These two not now refreshed with game::Load below
+      ::plist::refresh
+      ::tourney::refresh
     }
     ::game::Load $gnum"
   $m entryconfigure 2 -command "mergeGame $base $gnum"
