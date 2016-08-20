@@ -3041,6 +3041,66 @@ Tourney::HasPlayer (const char * playerStr)
     return false;
 }
 
+//   These functions are
+//   Called by sc_base_tournaments to compare two tournaments
+
+// typedef const Tourney * tourneyPtrT;
+inline static tourneyPtrT tnode(void const* n) { return *((tourneyPtrT *)n); }
+
+static int
+compTourneyElo(const void * lhs, const void * rhs)
+{
+    return tnode(rhs)->MeanElo() - tnode(lhs)->MeanElo();
+
+    /* Hmmm. Why does MeanElo have a different calculation than below ?
+    if (! tnode(rhs)->EloSum || ! tnode(rhs)->EloCount)
+      return -1;
+    if (! tnode(lhs)->EloSum || ! tnode(lhs)->EloCount)
+      return 1;
+    return tnode(rhs)->EloSum / tnode(rhs)->EloCount - tnode(lhs)->EloSum / tnode(lhs)->EloCount;
+    */
+}
+
+static int
+compTourneyEvent (const void * lhs, const void * rhs)
+{
+    const char * name1 = tnode(lhs)->NB->GetName (NAME_EVENT, tnode(lhs)->EventID);
+    const char * name2 = tnode(rhs)->NB->GetName (NAME_EVENT, tnode(rhs)->EventID);
+
+    int compare = strCaseCompare (name1, name2);
+    if (compare == 0) { compare = strCompare (name1, name2); }
+    return compare;
+}
+
+static int
+compTourneySite (const void * lhs, const void * rhs)
+{
+    const char * name1 = tnode(lhs)->NB->GetName (NAME_SITE, tnode(lhs)->SiteID);
+    const char * name2 = tnode(rhs)->NB->GetName (NAME_SITE, tnode(rhs)->SiteID);
+
+    int compare = strCaseCompare (name1, name2);
+    if (compare == 0) { compare = strCompare (name1, name2); }
+    return compare;
+}
+
+static int
+compTourneyPlayers(const void * lhs, const void * rhs)
+{
+    return tnode(rhs)->NumPlayers - tnode(lhs)->NumPlayers;
+}
+
+static int
+compTourneyGames(const void * lhs, const void * rhs)
+{
+    return tnode(rhs)->NumGames - tnode(lhs)->NumGames;
+}
+
+static int
+compTourneyNewest(const void * lhs, const void * rhs)
+{
+    return tnode(rhs)->StartDate - tnode(lhs)->StartDate;
+}
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // sc_base_tournaments:
 //    Returns information on tournaments in the current database.
@@ -3060,6 +3120,7 @@ sc_base_tournaments (ClientData cd, Tcl_Interp * ti, int argc, const char ** arg
     uint maxPlayers = 999;
     const char * country = NULL;
     const char * siteStr = NULL;
+    const char * sortStr = NULL;
     const char * eventStr = NULL;
     const char * playerStr = NULL;
     dateT minDate = ZERO_DATE;
@@ -3071,17 +3132,16 @@ sc_base_tournaments (ClientData cd, Tcl_Interp * ti, int argc, const char ** arg
     if (db->numGames == 0) {
 	return TCL_OK;
     }
-    // if (db->numGames == 0) { return errorResult (ti, "The current database has no games."); }
 
     static const char * options [] = {
         "-start", "-end", "-country", "-minElo", "-maxElo",
         "-minGames", "-maxGames", "-minPlayers", "-maxPlayers",
-        "-size", "-site", "-event", "-player", NULL
+        "-size", "-site", "-event", "-player", "-sort", NULL
     };
     enum {
         T_START, T_END, T_COUNTRY, T_MINELO, T_MAXELO,
         T_MINGAMES, T_MAXGAMES, T_MINPLAYERS, T_MAXPLAYERS,
-        T_SIZE, T_SITE, T_EVENT, T_PLAYER
+        T_SIZE, T_SITE, T_EVENT, T_PLAYER, T_SORT
     };
     int arg = 2;
     while (arg+1 < argc) {
@@ -3103,6 +3163,7 @@ sc_base_tournaments (ClientData cd, Tcl_Interp * ti, int argc, const char ** arg
             case T_SITE:       siteStr = value;                         break;
             case T_EVENT:      eventStr = value;                        break;
             case T_PLAYER:     playerStr = value;                       break;
+            case T_SORT:       sortStr = value;                         break;
             default:
                 return InvalidCommand (ti, "sc_base tournaments", options);
         }
@@ -3182,39 +3243,60 @@ sc_base_tournaments (ClientData cd, Tcl_Interp * ti, int argc, const char ** arg
             }
             tp = tp->Next;
         }
-        if (found) { continue; }
-        // if (numTourneys >= maxTourneys) { continue; }
-
-        // Have to add a new tourney:
-        tp = new Tourney (ie, db->nb);
-        tp->AddGame (ie, i);
-        tp->Next = hashTable[hash];
-        hashTable[hash] = tp;
-        numTourneys++;
+        if (!found) {
+	  // Have to add a new tourney:
+	  tp = new Tourney (ie, db->nb);
+	  tp->AddGame (ie, i);
+	  tp->Next = hashTable[hash];
+	  hashTable[hash] = tp;
+	  numTourneys++;
+        }
     }
+
+    std::vector<tourneyPtrT> tlist;
+
+    // Now gather all tourneys from the hash table into a vector for sorting
+    // Is there a better way to do this ??
+
+    for (i=0; i < TOURNEY_HASH_SIZE; i++) {
+      tourneyPtrT tp = hashTable[i];
+      while (tp != NULL) {
+        if ( tp->MeanElo() >= minMeanElo
+	 &&  tp->MeanElo() <= maxMeanElo
+	 &&  tp->NumPlayers >= minPlayers
+	 &&  tp->NumPlayers <= maxPlayers
+	 &&  tp->NumGames >= minGames  &&  tp->NumGames <= maxGames
+	 &&  tp->HasPlayer (playerStr)) {
+	  tlist.push_back(tp);
+        }
+        tp = tp->Next;
+      }
+    }
+
+    typedef int (*comparT)(const void *, const void *);
+    comparT comp = compTourneyNewest;
+
+    if (!strCompare(sortStr,"Games"))   comp = compTourneyGames;
+    if (!strCompare(sortStr,"Elo"))     comp = compTourneyElo;
+    if (!strCompare(sortStr,"Players")) comp = compTourneyPlayers;
+    if (!strCompare(sortStr,"Site"))    comp = compTourneySite;
+    if (!strCompare(sortStr,"Event"))   comp = compTourneyEvent;
+
+    if (!tlist.empty()) qsort(&tlist.front(), tlist.size(), sizeof(tlist[0]), comp);
 
     Tcl_DString ds;
     Tcl_DStringInit (&ds);
-    uint numPrinted = 0;
-    if (playerStr != NULL  &&  playerStr[0] == 0) { playerStr = NULL; }
-    for (i=0; i < TOURNEY_HASH_SIZE; i++) {
-        Tourney * tp = hashTable[i];
-        while (tp != NULL) {
-            Tourney * next = tp->Next;
-            if (numPrinted < maxTourneys
-                &&  tp->MeanElo() >= minMeanElo
-                &&  tp->MeanElo() <= maxMeanElo
-                &&  tp->NumPlayers >= minPlayers
-                &&  tp->NumPlayers <= maxPlayers
-                &&  tp->NumGames >= minGames  &&  tp->NumGames <= maxGames
-                &&  tp->HasPlayer (playerStr)) {
-                tp->Dump (&ds);
-                numPrinted++;
-            }
-            delete tp;
-            tp = next;
-        }
+
+    // This seems to do nothing!
+    // if (playerStr != NULL  &&  playerStr[0] == 0) { playerStr = NULL; }
+
+    maxTourneys = std::min(maxTourneys, uint(tlist.size()));
+
+    for (uint i=0; i < maxTourneys; i++) {
+	tlist[i]->Dump (&ds);
     }
+
+    // cleanup tlist ??
     delete[] useSite;
     if (useEvent != NULL) { delete[] useEvent; }
     delete[] hashTable;
@@ -12649,14 +12731,10 @@ sc_name_match (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     return TCL_OK;
 }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// comparePlayers:
+
+//   These functions are
 //   Called by sc_name_plist to compare two players in the
 //   current database.
-enum playerCompareT {
-    PLAYER_SORT_ELO, PLAYER_SORT_GAMES, PLAYER_SORT_NAME,
-    PLAYER_SORT_OLDEST, PLAYER_SORT_NEWEST, PLAYER_SORT_PHOTO
-};
 
 typedef const nameNodeT * namebaseNodeT;
 inline static namebaseNodeT node(void const* n) { return *((namebaseNodeT *)n); }

@@ -239,7 +239,7 @@ proc ::tourney::defaults {} {
   set ::tourney::player ""
 }
 
-proc ::tourney::refresh {{option ""}} {
+proc ::tourney::refresh {} {
   set w .tourney
   if {! [winfo exists $w]} { return }
 
@@ -258,48 +258,25 @@ proc ::tourney::refresh {{option ""}} {
   $t delete 1.0 end
   update
   set fastmode 0
-  if {$option == "-fast"} { set fastmode 1 }
 
-  if {$fastmode  &&  $::tourney::list != ""} {
-    set tlist $::tourney::list
-  } else {
-    if {[catch {sc_base tournaments \
-                  -start $::tourney::start \
-                  -end $::tourney::end \
-                  -size 2500 \
-                  -minPlayers $::tourney::minPlayers \
-                  -maxPlayers $::tourney::maxPlayers \
-                  -minGames $::tourney::minGames \
-                  -maxGames $::tourney::maxGames \
-                  -minElo $::tourney::minElo \
-                  -maxElo $::tourney::maxElo \
-                  -country [string toupper $::tourney::country] \
-                  -site $::tourney::site \
-                  -event $::tourney::event \
-                  -player $::tourney::player \
-                } tlist]} {
-      $t insert end $tlist
-      $t configure -state disabled
-      unbusyCursor .
-      return
-    }
-    set ::tourney::list $tlist
-  }
+  set tlist [sc_base tournaments \
+		-start $::tourney::start \
+		-end $::tourney::end \
+		-size $::tourney::size \
+		-minPlayers $::tourney::minPlayers \
+		-maxPlayers $::tourney::maxPlayers \
+		-minGames $::tourney::minGames \
+		-maxGames $::tourney::maxGames \
+		-minElo $::tourney::minElo \
+		-maxElo $::tourney::maxElo \
+		-country [string toupper $::tourney::country] \
+		-site $::tourney::site \
+		-event $::tourney::event \
+		-player $::tourney::player \
+		-sort $::tourney::sort \
+  ]
 
-  ### tlist list elements are
-  #
-  # {Date, Site, Event, Players, Games, Elo, ?, Winner}
-
-  switch $::tourney::sort {
-    "None" {}
-    "Date" { set tlist [lsort -decreasing -index 0 $tlist] }
-    "Players" { set tlist [lsort -integer -decreasing -index 3 $tlist] }
-    "Games" { set tlist [lsort -integer -decreasing -index 4 $tlist] }
-    "Elo" { set tlist [lsort -integer -decreasing -index 5 $tlist] }
-    "Site" { set tlist [lsort -dict -index 1 $tlist] }
-    "Event" { set tlist [lsort -dict -index 2 $tlist] }
-    "Winner" { set tlist [lsort -dict -index 7 $tlist] }
-  }
+  set ::tourney::list $tlist
 
   # Title headings
 
@@ -307,7 +284,7 @@ proc ::tourney::refresh {{option ""}} {
     $t tag configure s$i -font font_SmallBold
     $t tag bind s$i <1> "
       set ::tourney::sort $i
-      ::tourney::refresh -fast"
+      ::tourney::refresh"
     $t tag bind s$i <Any-Enter> "$t tag config s$i -background grey85"
     $t tag bind s$i <Any-Leave> "$t tag config s$i -background {}"
   }
