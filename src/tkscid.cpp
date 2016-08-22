@@ -20,6 +20,7 @@
 #include <utility>
 #include <vector>
 #include <set>
+#include <unordered_set>
 
 # include "charsetconverter.h"
 
@@ -2851,6 +2852,8 @@ struct tourneyPlayerT {
 class Tourney
 {
   public:
+    enum { TOURNEY_HASH_SIZE = 32768 };
+
     idNumberT SiteID;
     idNumberT EventID;
     NameBase * NB;
@@ -2865,33 +2868,55 @@ class Tourney
     uint      EloSum;
     uint      EloCount;
     gameNumberT FirstGame;
-    Tourney  * Next;
+    tourneyPlayerT const * Best[2];
 
     Tourney(IndexEntry * ie, NameBase * nb);
+    Tourney(uint eventID, uint siteID);
     ~Tourney();
 
+    static uint HashKey (uint eventID, uint siteID) {
+	return (eventID + siteID) % TOURNEY_HASH_SIZE;
+    }
+
     void AddGame (IndexEntry * ie, gameNumberT g);
-    void Dump (Tcl_DString * ds);
-    uint MeanElo() {
-        return (EloCount == 0 ? 0 : (EloSum + EloCount/2) / EloCount);
+    void Dump (Tcl_DString * ds) const;
+    void PrepareBestPlayers ();
+    uint MeanElo() const {
+	return EloCount == 0 ? 0 : uint(float(EloSum)/float(EloCount) + 0.5);
     };
-    bool HasPlayer (const char * playerStr);
+    bool HasPlayer (const char * playerStr) const;
+
+    // for unordered_set:
+
+    uint HashKey() const { return HashKey(EventID, SiteID); }
 };
-typedef Tourney * tourneyPtrT;
+
+// This constructor only constructs a key object.
+Tourney::Tourney (uint eventID_, uint siteID_)
+    :SiteID(eventID_)
+    ,EventID(siteID_)
+    ,NB(NULL)
+    ,PlayerList(NULL)
+{
+}
 
 Tourney::Tourney (IndexEntry * ie, NameBase * nb)
+    :SiteID(ie->GetSite())
+    ,EventID(ie->GetEvent())
+    ,NB(nb)
+    ,StartDate(ie->GetDate())
+    ,EndDate(ie->GetDate())
+    ,MinDate(date_AddMonths (StartDate, -3))
+    ,MaxDate(date_AddMonths (StartDate,  3))
+    ,EventDate(ie->GetEventDate())
+    ,NumGames(0)
+    ,NumPlayers(0)
+    ,PlayerList(NULL)
+    ,EloSum(0)
+    ,EloCount(0)
 {
-    SiteID = ie->GetSite();
-    EventID = ie->GetEvent();
-    NB = nb;
-    StartDate = EndDate = ie->GetDate();
-    EventDate = ie->GetEventDate();
-    MinDate = date_AddMonths (StartDate, -3);
-    MaxDate = date_AddMonths (StartDate,  3);
-    NumGames = NumPlayers = 0;
-    PlayerList = NULL;
-    EloSum = EloCount = 0;
-    Next = NULL;
+    ASSERT(nb);
+    Best[0] = Best[1] = NULL;
 }
 
 Tourney::~Tourney()
@@ -2908,6 +2933,8 @@ Tourney::~Tourney()
 void
 Tourney::AddGame (IndexEntry * ie, gameNumberT g)
 {
+    ASSERT(NB); // fails if this is only a key
+
     idNumberT whiteID = ie->GetWhite();
     idNumberT blackID = ie->GetBlack();
     uint wElo = ie->GetWhiteElo();
@@ -2977,8 +3004,37 @@ Tourney::AddGame (IndexEntry * ie, gameNumberT g)
 }
 
 void
-Tourney::Dump (Tcl_DString * ds)
+Tourney::PrepareBestPlayers()
 {
+    ASSERT(NB); // fails if this is only a key
+
+    for (uint i=0; i < 2; i++) {
+        uint bestElo = 0;
+        int bestScore = -1;
+	tourneyPlayerT * best = NULL;
+        tourneyPlayerT * p = PlayerList;
+
+        while (p != NULL) {
+            if (p->score > bestScore || (p->score == bestScore && p->elo > bestElo)) {
+                best = p;
+                bestScore = p->score;
+                bestElo = p->elo;
+            }
+            p = p->next;
+        }
+
+	if (best) {
+	    best->score = -1;
+	    Best[i] = best;
+	}
+    }
+}
+
+void
+Tourney::Dump (Tcl_DString * ds) const
+{
+    ASSERT(NB); // fails if this is only a key
+
     char str [16];
 
     Tcl_DStringStartSublist (ds);
@@ -2997,39 +3053,27 @@ Tourney::Dump (Tcl_DString * ds)
     Tcl_DStringAppendElement (ds, str);
     // Append the name, rating and score for the top two players:
     for (uint i=0; i < 2; i++) {
-        uint bestElo = 0;
-        int bestScore = -1;
-        tourneyPlayerT * best = NULL;
-        tourneyPlayerT * p = PlayerList;
-        while (p != NULL) {
-            if (p->score > bestScore
-                ||  (p->score == bestScore && p->elo > bestElo)) {
-                best = p;
-                bestScore = p->score;
-                bestElo = p->elo;
-            }
-            p = p->next;
-        }
-        if (best != NULL) {
-            best->score = -1;
-            Tcl_DStringAppendElement (ds, NB->GetName (NAME_PLAYER, best->id));
-            sprintf (str, "%u", bestElo);
-            Tcl_DStringAppendElement (ds, str);
-            sprintf (str, "%d", bestScore/2);
-            if (bestScore & 1) { strAppend (str, ".5"); }
-            Tcl_DStringAppendElement (ds, str);
-        } else {
-            Tcl_DStringAppendElement (ds, "");
-            Tcl_DStringAppendElement (ds, "0");
-            Tcl_DStringAppendElement (ds, "0");
-        }
+	if (Best[i] != NULL) {
+	    Tcl_DStringAppendElement (ds, NB->GetName (NAME_PLAYER, Best[i]->id));
+	    sprintf (str, "%u", Best[i]->elo);
+	    Tcl_DStringAppendElement (ds, str);
+	    sprintf (str, "%d", Best[i]->score/2);
+	    if (Best[i]->score & 1) { strAppend (str, ".5"); }
+	    Tcl_DStringAppendElement (ds, str);
+	} else {
+	    Tcl_DStringAppendElement (ds, "");
+	    Tcl_DStringAppendElement (ds, "0");
+	    Tcl_DStringAppendElement (ds, "0");
+	}
     }
     Tcl_DStringEndSublist (ds);
 }
 
 bool
-Tourney::HasPlayer (const char * playerStr)
+Tourney::HasPlayer (const char * playerStr) const
 {
+    ASSERT(NB); // fails if this is only a key
+
     if (playerStr == NULL) { return true; }
     tourneyPlayerT *p = PlayerList;
     while (p != NULL) {
@@ -3041,64 +3085,127 @@ Tourney::HasPlayer (const char * playerStr)
     return false;
 }
 
-//   These functions are
-//   Called by sc_base_tournaments to compare two tournaments
 
-// typedef const Tourney * tourneyPtrT;
-inline static tourneyPtrT tnode(void const* n) { return *((tourneyPtrT *)n); }
-
-static int
-compTourneyElo(const void * lhs, const void * rhs)
+struct SortTourney
 {
-    return tnode(rhs)->MeanElo() - tnode(lhs)->MeanElo();
+    static int
+    compElo(const Tourney * lhs, const Tourney * rhs)
+    {
+	return rhs->MeanElo() - lhs->MeanElo();
 
-    /* Hmmm. Why does MeanElo have a different calculation than below ?
-    if (! tnode(rhs)->EloSum || ! tnode(rhs)->EloCount)
-      return -1;
-    if (! tnode(lhs)->EloSum || ! tnode(lhs)->EloCount)
-      return 1;
-    return tnode(rhs)->EloSum / tnode(rhs)->EloCount - tnode(lhs)->EloSum / tnode(lhs)->EloCount;
-    */
-}
+	/* Hmmm. Why does MeanElo have a different calculation than below ?
+	if (! rhs->EloSum || ! rhs->EloCount)
+	  return -1;
+	if (! lhs->EloSum || ! lhs->EloCount)
+	  return 1;
+	return rhs->EloSum / rhs->EloCount - lhs->EloSum / lhs->EloCount;
+	*/
 
-static int
-compTourneyEvent (const void * lhs, const void * rhs)
-{
-    const char * name1 = tnode(lhs)->NB->GetName (NAME_EVENT, tnode(lhs)->EventID);
-    const char * name2 = tnode(rhs)->NB->GetName (NAME_EVENT, tnode(rhs)->EventID);
+	/*
+	 * Because it is not required that this function returns -1, 0, +1. For comparison
+	 * the following has to be fulfilled:
+	 * - return = 0 if equal
+	 * - return > 0 if lhs > rhs
+	 * - return < 0 if lhs < rhs
+	 * This will give an ascending order. But this function is used for descending order,
+	 * so it has been reversed (see "return ..." above). (GC)
+	 */
+    }
 
-    int compare = strCaseCompare (name1, name2);
-    if (compare == 0) { compare = strCompare (name1, name2); }
-    return compare;
-}
+    static int
+    compEvent (const Tourney * lhs, const Tourney * rhs)
+    {
+	const char * name1 = lhs->NB->GetName (NAME_EVENT, lhs->EventID);
+	const char * name2 = rhs->NB->GetName (NAME_EVENT, rhs->EventID);
 
-static int
-compTourneySite (const void * lhs, const void * rhs)
-{
-    const char * name1 = tnode(lhs)->NB->GetName (NAME_SITE, tnode(lhs)->SiteID);
-    const char * name2 = tnode(rhs)->NB->GetName (NAME_SITE, tnode(rhs)->SiteID);
+	int compare = strCaseCompare (name1, name2);
+	if (compare == 0) { compare = strCompare (name1, name2); }
+	return compare;
+    }
 
-    int compare = strCaseCompare (name1, name2);
-    if (compare == 0) { compare = strCompare (name1, name2); }
-    return compare;
-}
+    static int
+    compSite (const Tourney * lhs, const Tourney * rhs)
+    {
+	const char * name1 = lhs->NB->GetName (NAME_SITE, lhs->SiteID);
+	const char * name2 = rhs->NB->GetName (NAME_SITE, rhs->SiteID);
 
-static int
-compTourneyPlayers(const void * lhs, const void * rhs)
-{
-    return tnode(rhs)->NumPlayers - tnode(lhs)->NumPlayers;
-}
+	int compare = strCaseCompare (name1, name2);
+	if (compare == 0) { compare = strCompare (name1, name2); }
+	return compare;
+    }
 
-static int
-compTourneyGames(const void * lhs, const void * rhs)
-{
-    return tnode(rhs)->NumGames - tnode(lhs)->NumGames;
-}
+    static int
+    compPlayers(const Tourney * lhs, const Tourney * rhs)
+    {
+	return rhs->NumPlayers - lhs->NumPlayers;
+    }
 
-static int
-compTourneyNewest(const void * lhs, const void * rhs)
-{
-    return tnode(rhs)->StartDate - tnode(lhs)->StartDate;
+    static int
+    compGames(const Tourney * lhs, const Tourney * rhs)
+    {
+	return rhs->NumGames - lhs->NumGames;
+    }
+
+    static int
+    compNewest(const Tourney * lhs, const Tourney * rhs)
+    {
+	return rhs->StartDate - lhs->StartDate;
+    }
+
+    static int
+    compWinner(const Tourney * lhs, const Tourney * rhs)
+    {
+        int compare = 0;
+        const tourneyPlayerT * lhsBest;
+        const tourneyPlayerT * rhsBest;
+	const char * name1;
+	const char * name2;
+        // compare first winner, then second winner, alphabetically
+	for (uint i=0; i < 2; i++) {
+	      lhsBest = lhs->Best[i];
+	      rhsBest = rhs->Best[i];
+              if (!lhsBest || !rhsBest) 
+                  continue;
+	      name1 = lhs->NB->GetName (NAME_PLAYER, lhsBest->id);
+	      name2 = rhs->NB->GetName (NAME_PLAYER, rhsBest->id);
+	      compare = strCaseCompare (name1, name2);
+	      if (compare == 0) 
+		  compare = strCompare (name1, name2);
+	      if (compare != 0)
+		  return compare;
+        }
+        return 0;
+    }
+
+    typedef int (*Comp) (const Tourney * lhs, const Tourney *rhs);
+    Comp comp;
+
+    SortTourney (Comp comp_) :comp(comp_) {}
+
+    // std::multiset expects this less operator, it returns whether
+    // lhs is less than rhs.
+
+    bool operator () (const Tourney *lhs, const Tourney *rhs) const
+    {
+	return comp(lhs, rhs) < 0;
+    }
+};
+
+namespace std {
+    // This class will compute the hash key for std::unordered_set.
+    template<>
+    struct hash<Tourney>
+    {
+	std::size_t operator () (Tourney const& t) const { return t.HashKey(); }
+    };
+
+    // This class provides an equality operation for std::unordered_set.
+    template<>
+    struct equal_to<Tourney>
+    {
+	// Tourney's are always unique.
+	bool operator () (const Tourney&, const Tourney&) const { return false; }
+    };
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3110,7 +3217,6 @@ sc_base_tournaments (ClientData cd, Tcl_Interp * ti, int argc, const char ** arg
     const char * usage = "Usage: sc_base tournaments [-<option> <value> ...]";
 
     uint i;
-    uint numTourneys = 0;
     uint maxTourneys = 100;
     uint minMeanElo = 0;
     uint maxMeanElo = 4000;
@@ -3170,33 +3276,33 @@ sc_base_tournaments (ClientData cd, Tcl_Interp * ti, int argc, const char ** arg
     }
     if (arg != argc) { return errorResult (ti, usage); }
 
-    uint numSites = db->nb->GetNumNames (NAME_SITE);
+    // std::unordered_set is based on a hash table.
+    // Note that we cannot use std::ordered_set, because sorting is not
+    // possible as long as not all games are assigned to the appropriate
+    // tourney object.
+    typedef std::unordered_set<Tourney> TourneyHash;
 
-    bool * useSite = new bool [numSites];
-    for (i=0; i < numSites; i++) { useSite[i] = true; }
+    std::vector<bool> useSite(db->nb->GetNumNames (NAME_SITE), true);
+    TourneyHash hashTable;
 
-    const uint TOURNEY_HASH_SIZE = 32768;
-    tourneyPtrT * hashTable = new tourneyPtrT [TOURNEY_HASH_SIZE];
-
-    for (i=0; i < TOURNEY_HASH_SIZE; i++) { hashTable[i] = NULL; }
-
-    // If the country is "---", ignore it:
-    if (country != NULL  &&  strEqual (country, "---")) {
-        country = NULL;
-    }
-    // Find all sites in the selected country, if any:
-    if (country != NULL  &&  country[0] != 0) {
-        for (i=0; i < numSites; i++) {
-            const char * site = db->nb->GetName (NAME_SITE, i);
-            uint len = strLength (site);
-            if (len > 3) { site += len - 3; }
-            if (! strEqual (site, country)) { useSite[i] = false; }
-        }
+    if (country) {
+	// If the country is "---", ignore it:
+	if (strEqual (country, "---")) {
+	    country = NULL;
+	} else if (country[0] != 0) {
+	    // Find all sites in the selected country, if any:
+	    for (i=0; i < useSite.size(); i++) {
+		const char * site = db->nb->GetName (NAME_SITE, i);
+		uint len = strLength (site);
+		if (len > 3) { site += len - 3; }
+		if (! strEqual (site, country)) { useSite[i] = false; }
+	    }
+	}
     }
 
     // Restrict search to sites containing the given site string:
     if (siteStr != NULL  &&  siteStr[0] != 0) {
-        for (i=0; i < numSites; i++) {
+        for (i=0; i < useSite.size(); i++) {
             if (! useSite[i]) { continue; }
             const char * site = db->nb->GetName (NAME_SITE, i);
             if (! strAlphaContains (site, siteStr)) {
@@ -3206,12 +3312,10 @@ sc_base_tournaments (ClientData cd, Tcl_Interp * ti, int argc, const char ** arg
     }
 
     // Restrict search to events containing the given event string:
-    bool * useEvent = NULL;
+    std::vector<bool> useEvent;
     if (eventStr != NULL  &&  eventStr[0] != 0) {
-        uint numEvents = db->nb->GetNumNames (NAME_EVENT);
-        useEvent = new bool [numEvents];
-        for (i=0; i < numEvents; i++) {
-            useEvent[i] = true;
+	useEvent.resize(db->nb->GetNumNames (NAME_EVENT), true);
+        for (i=0; i < useEvent.size(); i++) {
             const char * event = db->nb->GetName (NAME_EVENT, i);
             if (! strAlphaContains (event, eventStr)) {
                 useEvent[i] = false;
@@ -3229,77 +3333,116 @@ sc_base_tournaments (ClientData cd, Tcl_Interp * ti, int argc, const char ** arg
         idNumberT siteID = ie->GetSite();
         if (! useSite[siteID]) { continue; }
         idNumberT eventID = ie->GetEvent();
-        if (useEvent != NULL  &&  !useEvent[eventID]) { continue; }
-        uint hash = (siteID + eventID) % TOURNEY_HASH_SIZE;
-        Tourney * tp = hashTable[hash];
-        bool found = 0;
-        // Search this hash bucket for the right tourney:
-        while (tp != NULL) {
-            if (tp->SiteID == siteID  &&  tp->EventID == eventID
-                && ((eventDate != ZERO_DATE && eventDate == tp->EventDate) || (date >= tp->MinDate  &&  date <= tp->MaxDate))) {
-                tp->AddGame (ie, i);
-                found = true;
-                break;
-            }
-            tp = tp->Next;
-        }
-        if (!found) {
-	  // Have to add a new tourney:
-	  tp = new Tourney (ie, db->nb);
-	  tp->AddGame (ie, i);
-	  tp->Next = hashTable[hash];
-	  hashTable[hash] = tp;
-	  numTourneys++;
-        }
+        if (!useEvent.empty() && !useEvent[eventID]) { continue; }
+
+	const Tourney *thisTourney;
+
+	if (hashTable.bucket_count() == 0) {
+	    // This hash table is empty, so add a new tourney. This case needs a
+	    // special handling, because hashTable.bucket() is undefined for
+	    // empty tables.
+	    // C++: emplace(...) gives us a pair <iterator,bool>. 'first'
+	    // C++: is accessing the first member, and operator '*' gives
+	    // C++: an object of class Tourney, so operator '&' will give
+	    // C++: a pointer to this object.
+	    thisTourney = &(*hashTable.emplace(ie, db->nb).first);
+	} else {
+	    uint bucketIndex = hashTable.bucket(Tourney(eventID, siteID));
+
+	    // iterate over a bucket
+	    // C++: 'auto' will deduce the correct type from assigned value. In this
+	    // C++: case it will be a iterator (concrete type is TourneyHash::const_iterator).
+	    auto tp = hashTable.cbegin(bucketIndex);
+	    auto end = hashTable.cend(bucketIndex);
+
+	    for ( ; tp != end; ++tp) {
+		if (tp->EventID == eventID
+		    &&  tp->SiteID == siteID
+		    &&  ((eventDate != ZERO_DATE  &&  eventDate == tp->EventDate)
+			||  (date >= tp->MinDate  &&  date <= tp->MaxDate))) {
+		    break;
+		}
+	    }
+
+	    if (tp == end) {
+		// Have to add a new tourney:
+		// C++: emplace(...) gives us a pair <iterator,bool>. 'first'
+		// C++: is accessing the first member, and operator '*' gives
+		// C++: an object of class Tourney, so operator '&' will give
+		// C++: a pointer to this object.
+		thisTourney = &(*hashTable.emplace(ie, db->nb).first);
+	    } else {
+		// We've found an appropriate tourney.
+		// C++: operator '*' applied to this iterator gives an object of
+		// C++: class Tourney, so operator '&' will give a pointer to this
+		// C++: object.
+		thisTourney = &(*tp);
+	    }
+	}
+
+	// We need a const cast, because the set only provides const elements,
+	// but AddGame() does not change the key, so it's okay.
+	const_cast<Tourney *>(thisTourney)->AddGame(ie, i);
     }
 
-    std::vector<tourneyPtrT> tlist;
+    // Now gather all tourneys from the hash table into a set for sorting.
+    // -------------------------------------------------------------------
 
-    // Now gather all tourneys from the hash table into a vector for sorting
-    // Is there a better way to do this ??
+    // We start with preparing all the tourney objects, so we can even
+    // sort on best scores. Because we will dump the best players anyway,
+    // we have to do the preparation even if we do not sort on best scores.
 
-    for (i=0; i < TOURNEY_HASH_SIZE; i++) {
-      tourneyPtrT tp = hashTable[i];
-      while (tp != NULL) {
-        if ( tp->MeanElo() >= minMeanElo
-	 &&  tp->MeanElo() <= maxMeanElo
-	 &&  tp->NumPlayers >= minPlayers
-	 &&  tp->NumPlayers <= maxPlayers
-	 &&  tp->NumGames >= minGames  &&  tp->NumGames <= maxGames
-	 &&  tp->HasPlayer (playerStr)) {
-	  tlist.push_back(tp);
-        }
-        tp = tp->Next;
-      }
+    for (auto tp = hashTable.cbegin(), e = hashTable.cend(); tp != e; ++tp) {
+	// It's unavoidable to cast the constness away, because hash objects
+	// are always const. But our operation will not change the key, so
+	// it's no problem.
+	const_cast<Tourney &>(*tp).PrepareBestPlayers();
     }
 
-    typedef int (*comparT)(const void *, const void *);
-    comparT comp = compTourneyNewest;
+    auto comp = SortTourney::compNewest;
 
-    if (!strCompare(sortStr,"Games"))   comp = compTourneyGames;
-    if (!strCompare(sortStr,"Elo"))     comp = compTourneyElo;
-    if (!strCompare(sortStr,"Players")) comp = compTourneyPlayers;
-    if (!strCompare(sortStr,"Site"))    comp = compTourneySite;
-    if (!strCompare(sortStr,"Event"))   comp = compTourneyEvent;
+    if (!strCompare(sortStr,"Games"))   comp = SortTourney::compGames;
+    if (!strCompare(sortStr,"Elo"))     comp = SortTourney::compElo;
+    if (!strCompare(sortStr,"Players")) comp = SortTourney::compPlayers;
+    if (!strCompare(sortStr,"Site"))    comp = SortTourney::compSite;
+    if (!strCompare(sortStr,"Event"))   comp = SortTourney::compEvent;
+    // Only possible because we already have prepared for best players.
+    if (!strCompare(sortStr,"Winner"))	comp = SortTourney::compWinner;
 
-    if (!tlist.empty()) qsort(&tlist.front(), tlist.size(), sizeof(tlist[0]), comp);
+    typedef std::multiset<const Tourney *, SortTourney> TourneySet;
+
+    // Now build a set, sorted by given method.
+    SortTourney sortOp(comp);	// the comparison operator
+    TourneySet tset(sortOp);	// a set sorting with given comparison operator
+
+    for (auto tp = hashTable.cbegin(), e = hashTable.cend(); tp != e; ++tp) {
+	uint meanElo = tp->MeanElo();
+
+	if ( meanElo >= minMeanElo
+	&&  meanElo <= maxMeanElo
+	&&  tp->NumPlayers >= minPlayers
+	&&  tp->NumPlayers <= maxPlayers
+	&&  tp->NumGames >= minGames
+	&&  tp->NumGames <= maxGames
+	&&  tp->HasPlayer (playerStr)) {
+	    tset.insert(&(*tp)); // sorted insertion
+	}
+    }
 
     Tcl_DString ds;
     Tcl_DStringInit (&ds);
 
-    // This seems to do nothing!
-    // if (playerStr != NULL  &&  playerStr[0] == 0) { playerStr = NULL; }
+    maxTourneys = std::min(maxTourneys, uint(tset.size()));
+    uint count = 0;
 
-    maxTourneys = std::min(maxTourneys, uint(tlist.size()));
+    for (auto tp = tset.cbegin(), e = tset.cend(); tp != e; ++tp) {
+	(*tp)->Dump(&ds);
 
-    for (uint i=0; i < maxTourneys; i++) {
-	tlist[i]->Dump (&ds);
+	// Don't return more tourney results than requested.
+	if (++count == maxTourneys) {
+	    break;
+	}
     }
-
-    // cleanup tlist ??
-    delete[] useSite;
-    if (useEvent != NULL) { delete[] useEvent; }
-    delete[] hashTable;
 
     Tcl_DStringResult (ti, &ds);
     Tcl_DStringFree (&ds);
@@ -9137,7 +9280,7 @@ sc_game_tags_get (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         if (db->numGames > 0) {
             gameNumberT prevgame;
             // db->gameNumber is set to -1 for a new game, and it is (int) when perhaps it should be (uint)
-            if (db->gameNumber == 0 || db->gameNumber > db->numGames) {
+            if (db->gameNumber == 0 || db->gameNumber > int(db->numGames)) {
               prevgame = db->numGames - 1;
             } else {
               prevgame = db->gameNumber - 1;
@@ -12732,62 +12875,74 @@ sc_name_match (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 }
 
 
-//   These functions are
-//   Called by sc_name_plist to compare two players in the
-//   current database.
-
 typedef const nameNodeT * namebaseNodeT;
-inline static namebaseNodeT node(void const* n) { return *((namebaseNodeT *)n); }
 
-static int
-compareNames(const void * lhs, const void * rhs)
+struct SortNamebaseNodes
 {
-    const char * name1 = node(lhs)->name;
-    const char * name2 = node(rhs)->name;
+    static int
+    compareNames(namebaseNodeT lhs, namebaseNodeT rhs)
+    {
+	const char * name1 = lhs->name;
+	const char * name2 = rhs->name;
 
-    // If equal, resolve by comparing names, first case-insensitive and
-    // then case-sensitively if still tied:
-    int compare = strCaseCompare (name1, name2);
-    if (compare == 0) { compare = strCompare (name1, name2); }
-    return compare;
-}
+	// If equal, resolve by comparing names, first case-insensitive and
+	// then case-sensitively if still tied:
+	int compare = strCaseCompare (name1, name2);
+	if (compare == 0) { compare = strCompare (name1, name2); }
+	return compare;
+    }
 
-static int
-compareElo(const void * lhs, const void * rhs)
-{
-    int compare = node(rhs)->data.maxElo - node(lhs)->data.maxElo;
-    return compare ? compare : compareNames(lhs, rhs);
-}
+    static int
+    compareElo(namebaseNodeT lhs, namebaseNodeT rhs)
+    {
+	int compare = rhs->data.maxElo - lhs->data.maxElo;
+	return compare ? compare : compareNames(lhs, rhs);
+    }
 
-static int
-compareGames(const void * lhs, const void * rhs)
-{
-    int compare = node(rhs)->data.frequency - node(lhs)->data.frequency;
-    return compare ? compare : compareNames(lhs, rhs);
-}
+    static int
+    compareGames(namebaseNodeT lhs, namebaseNodeT rhs)
+    {
+	int compare = rhs->data.frequency - lhs->data.frequency;
+	return compare ? compare : compareNames(lhs, rhs);
+    }
 
-static int
-compareOldest(const void * lhs, const void * rhs)
-{
-    // Sort by oldest game year in ascending order:
-    int compare = node(lhs)->data.firstDate - node(rhs)->data.firstDate;
-    return compare ? compare : compareNames(lhs, rhs);
-}
+    static int
+    compareOldest(namebaseNodeT lhs, namebaseNodeT rhs)
+    {
+	// Sort by oldest game year in ascending order:
+	int compare = lhs->data.firstDate - rhs->data.firstDate;
+	return compare ? compare : compareNames(lhs, rhs);
+    }
 
-static int
-compareNewest(const void * lhs, const void * rhs)
-{
-    // Sort by newest game date in descending order:
-    int compare = date_GetYear(node(rhs)->data.firstDate) - date_GetYear(node(lhs)->data.firstDate);
-    return compare ? compare : compareNames(lhs, rhs);
-}
+    static int
+    compareNewest(namebaseNodeT lhs, namebaseNodeT rhs)
+    {
+	// Sort by newest game date in descending order:
+	int compare = date_GetYear(rhs->data.firstDate) - date_GetYear(lhs->data.firstDate);
+	return compare ? compare : compareNames(lhs, rhs);
+    }
 
-static int
-comparePhoto(const void * lhs, const void * rhs)
-{
-    int compare = (int)node(rhs)->data.hasPhoto - (int)node(lhs)->data.hasPhoto;
-    return compare ? compare : compareNames(lhs, rhs);
-}
+    static int
+    comparePhoto(namebaseNodeT lhs, namebaseNodeT rhs)
+    {
+	int compare = (int)rhs->data.hasPhoto - (int)lhs->data.hasPhoto;
+	return compare ? compare : compareNames(lhs, rhs);
+    }
+
+    typedef int (*Comp) (namebaseNodeT lhs, namebaseNodeT rhs);
+    Comp comp;
+
+    SortNamebaseNodes (Comp comp_) :comp(comp_) {}
+
+    // std::multiset expects this less operator, it returns whether
+    // lhs is less than rhs.
+
+    bool operator () (namebaseNodeT lhs, namebaseNodeT rhs) const
+    {
+	return comp(lhs, rhs) < 0;
+    }
+};
+
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // sc_name_plist:
@@ -12849,22 +13004,28 @@ sc_name_plist (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     }
 
     if (arg != argc) { return errorResult (ti, usage); }
-    typedef int (*comparT)(const void *, const void *);
-    comparT comp;
+
+    // C++: 'auto' will deduce the correct type from assigned value.
+    auto comp = SortNamebaseNodes::compareNewest;
+
     switch (sortMode) {
-        case SORT_ELO:    comp = compareElo;    break;
-        case SORT_GAMES:  comp = compareGames;  break;
-        case SORT_OLDEST: comp = compareOldest; break;
-        case SORT_NEWEST: comp = compareNewest; break;
-        case SORT_NAME:   comp = compareNames;  break;
-        case SORT_PHOTO:  comp = comparePhoto;  break;
+        case SORT_ELO:    comp = SortNamebaseNodes::compareElo;    break;
+        case SORT_GAMES:  comp = SortNamebaseNodes::compareGames;  break;
+        case SORT_OLDEST: comp = SortNamebaseNodes::compareOldest; break;
+        case SORT_NEWEST: comp = SortNamebaseNodes::compareNewest; break;
+        case SORT_NAME:   comp = SortNamebaseNodes::compareNames;  break;
+        case SORT_PHOTO:  comp = SortNamebaseNodes::comparePhoto;  break;
         default:
             return InvalidCommand (ti, "sc_name plist -sort", sortModes);
     }
 
+    typedef std::multiset<namebaseNodeT, SortNamebaseNodes> NamebaseNodeSet;
+
     NameBase * nb = db->nb;
     uint nPlayers = nb->GetNumNames(NAME_PLAYER);
-    std::vector<namebaseNodeT> plist;
+
+    SortNamebaseNodes sortOp(comp);
+    NamebaseNodeSet pset(sortOp);
 
     for (uint id = 0; id < nPlayers; id++) {
 	namebaseNodeT node = nb->GetNode(NAME_PLAYER, id);
@@ -12883,21 +13044,25 @@ sc_name_plist (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         //    nb->SetHasPhoto (id, true);
         //}
 
-        // Insert this player into the ordered array if necessary:
-        plist.push_back(node);
+        // Insert this player into the ordered set if necessary:
+        pset.insert(node);
     }
-
-    if (!plist.empty())
-        qsort(&plist.front(), plist.size(), sizeof(plist[0]), comp);
 
     // Generate the list of player data:
     Tcl_DString * ds = new Tcl_DString;
     Tcl_DStringInit (ds);
 
-    maxListSize = std::min(maxListSize, uint(plist.size()));
-    for (uint p=0; p < maxListSize; p++) {
+    maxListSize = std::min(maxListSize, uint(pset.size()));
+    uint count = 0;
+
+    // C++: 'auto' will deduce the correct type from assigned value. In this
+    // C++: case it will be a iterator (concrete type is NamebaseNodeSet::const_iterator).
+    // C++: Note that in C++ pre-increment is preferred over post-increment, this means
+    // C++: '++i' is better than 'i++' (pre-increment returns the modified object, but
+    // C++: post-increment must return a copy of the object before modification).
+    for (auto i = pset.cbegin(), e = pset.cend(); i != e; ++i) {
         Tcl_DStringStartSublist (ds);
-        namebaseNodeT node = plist[p];
+        namebaseNodeT node = *i; // C++: '*' is dereferencing the object from iterator
         char tmp[16];
         sprintf (tmp, "%u", node->data.frequency);
         Tcl_DStringAppendElement(ds, tmp);
@@ -12907,10 +13072,14 @@ sc_name_plist (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         Tcl_DStringAppendElement(ds, tmp);
         sprintf (tmp, "%u", node->data.maxElo);
         Tcl_DStringAppendElement(ds, tmp);
-        //strCopy (tmp, nb->HasPhoto(plist[p]) ? "1" : "0");
+        //strCopy (tmp, nb->HasPhoto(pset[p]) ? "1" : "0");
         //Tcl_DStringAppendElement(ds, tmp);
         Tcl_DStringAppendElement(ds, node->name);
         Tcl_DStringEndSublist (ds);
+
+	if (++count == maxListSize) {
+	    break;
+	}
     }
     Tcl_DStringResult (ti, ds);
     Tcl_DStringFree (ds);
@@ -14245,8 +14414,9 @@ sc_tree_search (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     int sortMethod = SORT_FREQUENCY; // default move order: frequency
 
     scidBaseT * base = db;
+    db->bbuf->Empty();
+
     static std::set<scidBaseT**> search_pool;
-db->bbuf->Empty();
 
     // Check that there is an even number of optional arguments and
     // parse them as option-value pairs:
