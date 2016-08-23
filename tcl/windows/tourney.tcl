@@ -285,7 +285,7 @@ proc ::tourney::refresh {} {
     $t tag bind s$i <1> "
       set ::tourney::sort $i
       ::tourney::refresh"
-    $t tag bind s$i <Any-Enter> "$t tag config s$i -background grey85"
+    $t tag bind s$i <Any-Enter> "$t tag config s$i -background $::rowcolor"
     $t tag bind s$i <Any-Leave> "$t tag config s$i -background {}"
   }
 

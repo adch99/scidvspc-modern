@@ -161,7 +161,7 @@ proc ::plist::refresh {} {
   foreach i {Games Oldest Newest Elo Name} {
     $t tag configure s$i -font font_SmallBold
     $t tag bind s$i <1> "set ::plist::sort $i; ::plist::refresh"
-    $t tag bind s$i <Any-Enter> "$t tag config s$i -background grey85"
+    $t tag bind s$i <Any-Enter> "$t tag config s$i -background $::rowcolor"
     $t tag bind s$i <Any-Leave> "$t tag config s$i -background {}"
     $t insert end "\t" title
     $t insert end [tr PListSort$i] [list title s$i]
