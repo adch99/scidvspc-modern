@@ -77,7 +77,7 @@ proc ::tourney::Open {{player {}}} {
   ### tabulation formatting
 
   #                    Count    Date  Players Games    Elo     Event   Site  Winner Runnerup
-  foreach {tab justify} {3 r    4 l    18 r    23 r    30 r    32 l    55 l  76 l    94 l} {
+  foreach {tab justify} {4 r    6 l    22 r    27 r    34 r    36 l    65 l  89 l    115 l} {
     set tabwidth [expr {$xwidth * $tab} ]
     lappend tablist $tabwidth $justify
   }
@@ -331,13 +331,14 @@ proc ::tourney::refresh {} {
     # append winner " $score1"
     # append runnerup " $score2"
     ### add an extra space because {1. } is roughly the same width as {1=}
-    set one "1. "
-    set two "2. "
     if {$score1 == $score2} {
-      set one "1="; set two "1="
+      set one "1="
+      set two "1="
+    } else {
+      set one "1. "
+      set two "2. "
     }
-    set best "$one $winner\t$two $runnerup, ..."
-    if {$np == 2} { set best "$one $winner\t$two $runnerup" }
+    set best "$one $winner\t$two $runnerup" 
 
     $t tag bind g$count <ButtonPress-3> [list ::tourney::select $g $event 1]
     $t tag bind g$count <ButtonPress-1> [list ::tourney::select $g $event]

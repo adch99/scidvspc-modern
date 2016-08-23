@@ -3016,15 +3016,17 @@ Tourney::PrepareBestPlayers()
 
         while (p != NULL) {
             if (p->score > bestScore || (p->score == bestScore && p->elo > bestElo)) {
-                best = p;
-                bestScore = p->score;
-                bestElo = p->elo;
+                if (!(i == 1 && Best[0] == p)) {
+		  best = p;
+		  bestScore = p->score;
+		  bestElo = p->elo;
+               }
             }
             p = p->next;
         }
 
 	if (best) {
-	    best->score = -1;
+	    best->score = bestScore;
 	    Best[i] = best;
 	}
     }
