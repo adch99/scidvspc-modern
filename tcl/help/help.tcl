@@ -3657,7 +3657,7 @@ set helpText(Bookmarks) {<h1>Bookmarks</h1>
   <p>
   With the bookmark editor you can change the label for
   each bookmark, and add folders for better organization.
-  Double clicking entries will load the game, and the 'Delete' , 'Up' and 'Down' keys
+  Double clicking entries will load the game, and the 'Delete', 'Control+Up' and 'Control+Down' keys
   can be used to delete a bookmark, or reorder it in the list.
   </p>
 

@@ -346,16 +346,18 @@ proc ::bookmarks::Edit {} {
   pack [frame $w.b1] -side bottom -fill x -pady 2
   pack $w.e -side bottom -fill x
   pack [frame $w.f] -side top -fill both -expand 1
+  # hmmm - selectmode browse doesnt work as expected because of our ListboxSelect binding
+  # and trace binding, and some silly issue i couldnt figure. So use single
   listbox $w.f.list -height 10 -yscrollcommand "$w.f.ybar set" \
-    -exportselection 0 -font font_Small -setgrid 1
+    -exportselection 0 -font font_Small -setgrid 1 -selectmode single
   scrollbar $w.f.ybar -takefocus 0 -command "$w.f.list yview"
   bind $w.f.list <<ListboxSelect>>  ::bookmarks::EditSelect
   bind $w.f.list <Double-Button-1>  {
     ::bookmarks::Go [lindex $bookmarks(data) [lindex [.bmedit.f.list curselection] 0]]
     if {[::bookmarks::CanAdd]} { .bmedit.b1.newGame configure -state normal }
   }
-  bind $w.f.list <Up> "$w.b1.up invoke ; break"
-  bind $w.f.list <Down> "$w.b1.down invoke ; break"
+  bind $w.f.list <Control-Up> "$w.b1.up invoke ; break"
+  bind $w.f.list <Control-Down> "$w.b1.down invoke ; break"
   bind $w.f.list <Delete> ::bookmarks::EditDelete
   pack $w.f.ybar -side right -fill y
   pack $w.f.list -side left -fill both -expand yes
@@ -447,7 +449,9 @@ proc ::bookmarks::EditSelect {{sel ""}} {
   }
   set e [lindex $bookmarks(data) $sel]
   set bookmarks(ismenu) [::bookmarks::isfolder $e]
+  trace variable bookmarks(edit) w {}
   set bookmarks(edit) [::bookmarks::Text $e]
+  trace variable bookmarks(edit) w ::bookmarks::EditRefresh
 }
 
 # ::bookmarks::isfolder:
