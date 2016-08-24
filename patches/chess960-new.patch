@@ -1,6 +1,76 @@
+Index: Makefile.conf
+===================================================================
+--- Makefile.conf	(revision 2591)
++++ Makefile.conf	(working copy)
+@@ -211,7 +211,7 @@
+ 	install -m 755 -d $(SHAREDIR)
+ 	install -m 755 -d $(BINDIR)
+ 	install -m 755 -d $(SHAREDIR)/data/
+-	install -m 755 scid $(SCRIPTS) $(EXECS) $(BINDIR)
++	install -m 755 scid-vs-variants $(SCRIPTS) $(EXECS) $(BINDIR)
+ 	install -m 644 -p scid.eco $(SHAREDIR)/data/
+ 	install -m 644 -p spelling.ssp $(SHAREDIR)
+ 	install -m 755 -d $(SHAREDIR)/books
+@@ -268,7 +268,7 @@
+ 	rm -rf $(SHAREDIR)/data/
+ 	rm -f $(SHAREDIR)/data/scid.eco
+ 	rm -f $(SHAREDIR)/spelling.ssp
+-	rm -f $(BINDIR)/scid $(BINDIR)/sc_addmove $(BINDIR)/sc_epgn
++	rm -f $(BINDIR)/scid-vs-variants $(BINDIR)/sc_addmove $(BINDIR)/sc_epgn
+ 	rm -f $(BINDIR)/sc_spell $(BINDIR)/sc_eco $(BINDIR)/sc_import
+ 	rm -f $(BINDIR)/sc_remote $(BINDIR)/sc_tree $(BINDIR)/scidpgn
+ 	rm -f $(BINDIR)/pgnfix $(BINDIR)/spliteco
+@@ -323,9 +323,9 @@
+ 
+ 
+ scid: $(TCLS)
+-	rm -f ./scid
+-	cat $(TCLS) > ./scid
+-	chmod +x scid
++	rm -f ./scid-vs-variants
++	cat $(TCLS) > ./scid-vs-variants
++	chmod +x scid-vs-variants
+ 
+ ### Some of these targets are totally unused, and need sorting out. S.A
+ 
+Index: Makefile.conf.darwin
+===================================================================
+--- Makefile.conf.darwin	(revision 2591)
++++ Makefile.conf.darwin	(working copy)
+@@ -207,7 +207,7 @@
+ 	install -m 755 -d $(SHAREDIR)
+ 	install -m 755 -d $(BINDIR)
+ 	install -m 755 -d $(SHAREDIR)/data/
+-	install -m 755 scid $(SCRIPTS) $(EXECS) $(BINDIR)
++	install -m 755 scid-vs-variants $(SCRIPTS) $(EXECS) $(BINDIR)
+ 	install -m 644 -p scid.eco $(SHAREDIR)/data/
+ 	install -m 644 -p spelling.ssp $(SHAREDIR)
+ 	install -m 755 -d $(SHAREDIR)/books
+@@ -246,7 +246,7 @@
+ 	rm -rf $(SHAREDIR)/data/
+ 	rm -f $(SHAREDIR)/data/scid.eco
+ 	rm -f $(SHAREDIR)/spelling.ssp
+-	rm -f $(BINDIR)/scid $(BINDIR)/sc_addmove $(BINDIR)/sc_epgn
++	rm -f $(BINDIR)/scid-vs-variants $(BINDIR)/sc_addmove $(BINDIR)/sc_epgn
+ 	rm -f $(BINDIR)/sc_spell $(BINDIR)/sc_eco $(BINDIR)/sc_import
+ 	rm -f $(BINDIR)/sc_remote $(BINDIR)/sc_tree $(BINDIR)/scidpgn
+ 	rm -f $(BINDIR)/pgnfix $(BINDIR)/spliteco
+@@ -281,9 +281,9 @@
+ 
+ 
+ scid: $(TCLS)
+-	rm -f ./scid
+-	cat $(TCLS) > ./scid
+-	chmod +x scid
++	rm -f ./scid-vs-variants
++	cat $(TCLS) > ./scid-vs-variants
++	chmod +x scid-vs-variants
+ 
+ ### Mac OSX App
+ 
 Index: src/game.cpp
 ===================================================================
---- src/game.cpp	(revision 2577)
+--- src/game.cpp	(revision 2591)
 +++ src/game.cpp	(working copy)
 @@ -473,7 +473,8 @@
  void
@@ -280,21 +350,9 @@ Index: src/game.cpp
          *CurrentPos = *StartPos;
      }
  
-Index: src/game.h
-===================================================================
---- src/game.h	(revision 2577)
-+++ src/game.h	(working copy)
-@@ -327,6 +327,7 @@
-     errorT     DecodeTags (ByteBuffer * buf, bool storeTags);
-     errorT     DecodeVariation (ByteBuffer * buf, byte flags, uint level);
- 
-+
-     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     //  Game:  Public Functions
- public:
 Index: src/gfile.h
 ===================================================================
---- src/gfile.h	(revision 2577)
+--- src/gfile.h	(revision 2591)
 +++ src/gfile.h	(working copy)
 @@ -28,8 +28,7 @@
  #else
@@ -308,7 +366,7 @@ Index: src/gfile.h
  // The block structure type:
 Index: src/index.h
 ===================================================================
---- src/index.h	(revision 2577)
+--- src/index.h	(revision 2591)
 +++ src/index.h	(working copy)
 @@ -30,8 +30,8 @@
  //////////////////////////////////////////////////////////////////////
@@ -323,7 +381,7 @@ Index: src/index.h
  // max. number of games is 2^(3*8)-1-1,
 Index: src/movelist.h
 ===================================================================
---- src/movelist.h	(revision 2577)
+--- src/movelist.h	(revision 2591)
 +++ src/movelist.h	(working copy)
 @@ -46,6 +46,11 @@
      squareT  epSquare;       // pre-move information
@@ -339,7 +397,7 @@ Index: src/movelist.h
  inline bool isNullMove (simpleMoveT * sm)
 Index: src/namebase.cpp
 ===================================================================
---- src/namebase.cpp	(revision 2577)
+--- src/namebase.cpp	(revision 2591)
 +++ src/namebase.cpp	(working copy)
 @@ -111,24 +111,7 @@
      fileNameT fname;
@@ -377,7 +435,7 @@ Index: src/namebase.cpp
      Header.numNames[NAME_EVENT] = readThreeBytes (FilePtr);
 Index: src/namebase.h
 ===================================================================
---- src/namebase.h	(revision 2577)
+--- src/namebase.h	(revision 2591)
 +++ src/namebase.h	(working copy)
 @@ -55,8 +55,7 @@
  const caseFlagT
@@ -391,7 +449,7 @@ Index: src/namebase.h
  
 Index: src/position.cpp
 ===================================================================
---- src/position.cpp	(revision 2583)
+--- src/position.cpp	(revision 2591)
 +++ src/position.cpp	(working copy)
 @@ -14,6 +14,7 @@
  
@@ -1202,7 +1260,7 @@ Index: src/position.cpp
  
 Index: src/position.h
 ===================================================================
---- src/position.h	(revision 2577)
+--- src/position.h	(revision 2591)
 +++ src/position.h	(working copy)
 @@ -24,6 +24,8 @@
  #include "sqset.h"
@@ -1261,9 +1319,9 @@ Index: src/position.h
      squareT *   GetList (colorT c)    { return List[c]; }
 Index: src/tkscid.cpp
 ===================================================================
---- src/tkscid.cpp	(revision 2583)
+--- src/tkscid.cpp	(revision 2597)
 +++ src/tkscid.cpp	(working copy)
-@@ -516,8 +516,8 @@
+@@ -519,8 +519,8 @@
      clipbase->backupCache->SetPolicy (TREECACHE_Oldest);
  
      currentBase = 0;
@@ -1273,7 +1331,7 @@ Index: src/tkscid.cpp
      db = &(dbList[currentBase]);
  
  #ifndef TCL_ONLY
-@@ -1019,7 +1019,6 @@
+@@ -1022,7 +1022,6 @@
          }
          return TCL_ERROR;
      }
@@ -1281,7 +1339,7 @@ Index: src/tkscid.cpp
      if (db->nb->ReadNameFile() != OK) {
          base_open_failure(oldBaseNum);
          return errorResult (ti, "Error opening name file.");
-@@ -3224,115 +3223,10 @@
+@@ -3453,115 +3452,10 @@
  
  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  // sc_base_upgrade:
@@ -1398,7 +1456,7 @@ Index: src/tkscid.cpp
      return TCL_OK;
  }
  
-@@ -14952,6 +14846,7 @@
+@@ -15191,6 +15085,7 @@
          char cboard [40];
          pos->PrintCompactStrFlipped (cboard);
          posFlip->ReadFromCompactStr ((byte *) cboard);
@@ -1408,7 +1466,7 @@ Index: src/tkscid.cpp
      }
 Index: tcl/edit.tcl
 ===================================================================
---- tcl/edit.tcl	(revision 2585)
+--- tcl/edit.tcl	(revision 2591)
 +++ tcl/edit.tcl	(working copy)
 @@ -67,6 +67,9 @@
        set fenStr "$s1 $s2 [lrange $fenStr 2 end]"
@@ -1461,12 +1519,12 @@ Index: tcl/edit.tcl
    pack $sr.b.invert	-side top -padx 5 -pady 2
 Index: tcl/file/bookmark.tcl
 ===================================================================
---- tcl/file/bookmark.tcl	(revision 2577)
+--- tcl/file/bookmark.tcl	(revision 2598)
 +++ tcl/file/bookmark.tcl	(working copy)
-@@ -233,7 +233,7 @@
-     if {$success == -1} {
-       return
+@@ -239,7 +239,7 @@
      }
+     ::plist::refresh
+     ::tourney::refresh
 -    ::recentFiles::add "[file rootname $fname].si4"
 +    ::recentFiles::add "[file rootname $fname].si960"
    }
@@ -1474,7 +1532,7 @@ Index: tcl/file/bookmark.tcl
    set white [lindex $entry 5]
 Index: tcl/file/finder.tcl
 ===================================================================
---- tcl/file/finder.tcl	(revision 2577)
+--- tcl/file/finder.tcl	(revision 2591)
 +++ tcl/file/finder.tcl	(working copy)
 @@ -316,8 +316,8 @@
    set r [file rootname $f]
@@ -1557,7 +1615,7 @@ Index: tcl/file/finder.tcl
        } elseif {$ext == ".epd"} {
 Index: tcl/file/maint.tcl
 ===================================================================
---- tcl/file/maint.tcl	(revision 2577)
+--- tcl/file/maint.tcl	(revision 2591)
 +++ tcl/file/maint.tcl	(working copy)
 @@ -12,7 +12,7 @@
  ################################################################################
@@ -1570,7 +1628,7 @@ Index: tcl/file/maint.tcl
    if {$fName == ""} { return }
 Index: tcl/file/recent.tcl
 ===================================================================
---- tcl/file/recent.tcl	(revision 2577)
+--- tcl/file/recent.tcl	(revision 2591)
 +++ tcl/file/recent.tcl	(working copy)
 @@ -74,7 +74,7 @@
  
@@ -1583,7 +1641,7 @@ Index: tcl/file/recent.tcl
    for {set i 1} {$i <= [sc_base count total]} {incr i} {
 Index: tcl/file.tcl
 ===================================================================
---- tcl/file.tcl	(revision 2577)
+--- tcl/file.tcl	(revision 2593)
 +++ tcl/file.tcl	(working copy)
 @@ -87,8 +87,8 @@
      return
@@ -1690,7 +1748,7 @@ Index: tcl/file.tcl
      }
    } elseif {[string match "*.epd" [string tolower $fName]]} {
      # EPD file:
-@@ -368,14 +367,14 @@
+@@ -374,14 +373,14 @@
  
  # ::file::Upgrade
  #
@@ -1708,7 +1766,7 @@ Index: tcl/file.tcl
      return
    }
  
-@@ -382,37 +381,31 @@
+@@ -388,37 +387,31 @@
    set msg [string trim $::tr(ConfirmUpgrade)]
    set res [tk_messageBox -title "Scid" -type yesno -icon info -message $msg]
    if {$res == "no"} { return }
@@ -1754,7 +1812,7 @@ Index: tcl/file.tcl
    }
  
    # Depending on how file is opened, windows can have "\" file separators
-@@ -426,8 +419,8 @@
+@@ -432,8 +425,8 @@
    set bsize 0
  
    ### wrong i think
@@ -1765,7 +1823,7 @@ Index: tcl/file.tcl
  
    if {! [catch {file size $gfile} err]} { set bsize $err }
    set showProgress 0
-@@ -539,14 +532,14 @@
+@@ -545,14 +538,14 @@
    if {$fName == ""} {
      if {[sc_info gzip]} {
        set ftype {
@@ -1784,7 +1842,7 @@ Index: tcl/file.tcl
          { "PGN files" {".pgn" ".PGN"} }
        }
      }
-@@ -563,10 +556,10 @@
+@@ -569,10 +562,10 @@
  
  
    if {[file extension $fName] == ""} {
@@ -1797,7 +1855,7 @@ Index: tcl/file.tcl
      ::file::Upgrade [file rootname $fName]
      return
    }
-@@ -573,7 +566,7 @@
+@@ -579,7 +572,7 @@
  
    ### Check it is not already open
    # Name handling is a little clumsy, but is tested
@@ -1806,7 +1864,7 @@ Index: tcl/file.tcl
      set rName [file rootname $fName]
    } else {
      set rName $fName
-@@ -587,7 +580,7 @@
+@@ -593,7 +586,7 @@
  
    set err 0
    busyCursor .
@@ -1815,7 +1873,7 @@ Index: tcl/file.tcl
      set fName [file rootname $fName]
      if {[catch {openBase $fName} result]} {
        unbusyCursor .
-@@ -597,7 +590,7 @@
+@@ -603,7 +596,7 @@
      } else {
        set ::initialDir(base) [file dirname $fName]
        set ::initialDir(file) [file tail $fName]
@@ -1824,7 +1882,7 @@ Index: tcl/file.tcl
      }
    } else {
      # PGN file:
-@@ -739,7 +732,7 @@
+@@ -745,7 +738,7 @@
        append message \n\n [join $rejectList \n]
      }
      set detail [tr UriRejectedDetail]
@@ -1835,7 +1893,7 @@ Index: tcl/file.tcl
  
 Index: tcl/help/help.tcl
 ===================================================================
---- tcl/help/help.tcl	(revision 2578)
+--- tcl/help/help.tcl	(revision 2598)
 +++ tcl/help/help.tcl	(working copy)
 @@ -4300,6 +4300,8 @@
    <li>Project page  <url http://sourceforge.net/projects/scidvspc>http://sourceforge.net/projects/scidvspc</url></li>
@@ -1848,7 +1906,7 @@ Index: tcl/help/help.tcl
    <li>FICS <url http://www.freechess.org>www.freechess.org</url></li>
 Index: tcl/lang/english.tcl
 ===================================================================
---- tcl/lang/english.tcl	(revision 2577)
+--- tcl/lang/english.tcl	(revision 2591)
 +++ tcl/lang/english.tcl	(working copy)
 @@ -1354,15 +1354,13 @@
  # Upgrading databases:
@@ -1870,7 +1928,7 @@ Index: tcl/lang/english.tcl
  
 Index: tcl/main.tcl
 ===================================================================
---- tcl/main.tcl	(revision 2584)
+--- tcl/main.tcl	(revision 2591)
 +++ tcl/main.tcl	(working copy)
 @@ -1296,6 +1296,7 @@
  #   piece from the user.
@@ -1929,7 +1987,7 @@ Index: tcl/main.tcl
        # dont add null move in check or mate
 Index: tcl/misc/misc.tcl
 ===================================================================
---- tcl/misc/misc.tcl	(revision 2577)
+--- tcl/misc/misc.tcl	(revision 2591)
 +++ tcl/misc/misc.tcl	(working copy)
 @@ -1093,4 +1093,187 @@
    unbusyCursor .  
@@ -2121,7 +2179,7 @@ Index: tcl/misc/misc.tcl
  # end of misc.tcl
 Index: tcl/start.tcl
 ===================================================================
---- tcl/start.tcl	(revision 2578)
+--- tcl/start.tcl	(revision 2591)
 +++ tcl/start.tcl	(working copy)
 @@ -45,10 +45,10 @@
  
@@ -2168,7 +2226,7 @@ Index: tcl/start.tcl
  ::splash::add "(C) Gregor Cramer, Fulvio Benini and others."
 Index: tcl/tools/analysis.tcl
 ===================================================================
---- tcl/tools/analysis.tcl	(revision 2584)
+--- tcl/tools/analysis.tcl	(revision 2591)
 +++ tcl/tools/analysis.tcl	(working copy)
 @@ -3639,6 +3639,7 @@
      # proc is called for any change in board position (including new games, and simple moves)
@@ -2180,7 +2238,7 @@ Index: tcl/tools/analysis.tcl
        set analysis(startpos$n) startpos
 Index: tcl/tools/fics.tcl
 ===================================================================
---- tcl/tools/fics.tcl	(revision 2579)
+--- tcl/tools/fics.tcl	(revision 2591)
 +++ tcl/tools/fics.tcl	(working copy)
 @@ -2157,6 +2157,7 @@
        wm title $::dot_w "$::scidName: $white - $black (game $game: $::fics::timecontrol)"
@@ -2216,7 +2274,7 @@ Index: tcl/tools/fics.tcl
        if {[sc_pos side] == "white"} {
 Index: tcl/tools/sergame.tcl
 ===================================================================
---- tcl/tools/sergame.tcl	(revision 2583)
+--- tcl/tools/sergame.tcl	(revision 2591)
 +++ tcl/tools/sergame.tcl	(working copy)
 @@ -325,6 +325,10 @@
        ::sergame::sendToEngine $n "setoption name Ponder value false"
@@ -2243,7 +2301,7 @@ Index: tcl/tools/sergame.tcl
      updateBoard -pgn
 Index: tcl/tools/tactics.tcl
 ===================================================================
---- tcl/tools/tactics.tcl	(revision 2577)
+--- tcl/tools/tactics.tcl	(revision 2591)
 +++ tcl/tools/tactics.tcl	(working copy)
 @@ -124,7 +124,7 @@
      # go through all bases and take descriptions
