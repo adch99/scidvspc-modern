@@ -1725,6 +1725,7 @@ proc compactNames {} {
   destroy $w
   ::windows::gamelist::Refresh
   ::maint::Refresh
+  ::plist::refresh
   if {[winfo exists .maintWin]} {
     raiseWin .maintWin
   }
