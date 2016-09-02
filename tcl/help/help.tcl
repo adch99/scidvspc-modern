@@ -1304,7 +1304,9 @@ from a paused engine.
   Setting Options-<gt>Moves-<gt>ShowVariationWindow will automatically show
   this window when a variation is found.</p>
   <p>In the variation window one can select a variation with the up/down
-  keys and then hitting enter. This allows for game navigation with keyboard only.
+  keys and then hitting enter, or pressing 0, 1, 2 etc for each variation.
+  Additionally, 'vv' will enter the first var.
+  </p><p>
   To leave a variation, use "z" or up-arrow.
   </p>
 

@@ -612,6 +612,7 @@ proc showVars {} {
   bind $w <Return> { enterVar }
   bind $w <ButtonRelease-1> { enterVar }
   bind $w <Right> { enterVar }
+  bind $w <KeyPress-v> "enterVar 1"
   bind $w <Up> {
     set cur [.variations.lbVar curselection]
     .variations.lbVar selection clear $cur
