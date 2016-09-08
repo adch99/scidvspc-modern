@@ -67,7 +67,6 @@ proc resetEngine {n} {
   set analysis(has_playother$n) 0     ;# Engine has playother command
   set analysis(send_sigint$n) 0       ;# Engine wants INT signal
   set analysis(wants_usermove$n) 0    ;# Engine wants "usermove" before moves
-  set analysis(isCrafty$n) 0          ;# Engine appears to be Crafty
   set analysis(wholeSeconds$n) 0      ;# Engine times in seconds not centisec
   set analysis(analyzeMode$n) 0       ;# Scid has started analyze mode
   set analysis(invertScore$n) 1       ;# Score is for side to move, not white
@@ -3712,13 +3711,6 @@ proc updateAnalysis {{n 0} {reset 1}} {
       # Get out of analyze mode, to send moves.
       sendToEngine $n "exit"
       
-      ### Try living without this Crafty hack S.A.
-      # On Crafty, "force" command has different meaning when not in
-      # XBoard mode, and some users have noticed Crafty not being in
-      # that mode at this point -- although I cannot reproduce this.
-      # So just re-send "xboard" to Crafty to make sure:
-      # if {$analysis(isCrafty$n)} { sendToEngine $n xboard }
-      
       # Stop engine replying to moves.
       sendToEngine $n "force"
 
@@ -3729,11 +3721,6 @@ proc updateAnalysis {{n 0} {reset 1}} {
 
       if {$analysis(has_setboard$n)} {
 	sendToEngine $n "setboard [sc_pos fen]"
-
-	# "mn" command is specific to crafty
-	if {$analysis(isCrafty$n)} {
-          sendToEngine $n "mn [sc_pos moveNumber]"
-        }
 	sendToEngine $n analyze
 	return
       }

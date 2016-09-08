@@ -48,7 +48,6 @@ proc detectWBEngine {n engineOutput} {
     sendToEngine $n {noise 1000}
     sendToEngine $n {egtb off} ; # turn off end game table book
     sendToEngine $n {resign 0} ; # turn off alarm (resigning ?)
-    set analysis(isCrafty$n) 1
     set analysis(has_setboard$n) 1
     set analysis(has_analyze$n) 1
     set analysis(wbEngineDetected$n) 1
