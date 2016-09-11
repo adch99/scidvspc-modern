@@ -754,6 +754,9 @@ namespace eval fics {
   proc findOpponent {} {
     global tr
 
+    if {$::fics::playing == 1 || $::fics::playing == -1} {
+      return
+    }
     set w .ficsfindopp
     if {[winfo exists $w]} {
       raiseWin $w
