@@ -1,5 +1,5 @@
 --- spelling.ssp.diffme	2015-06-12 21:48:28.000000000 +1000
-+++ spelling.ssp	2015-06-17 10:12:38.000000000 +1000
++++ spelling.ssp	2016-09-12 19:41:27.494657470 +1000
 @@ -5,6 +5,9 @@
  # Spellcheck file for Scid with the
  # FiDE ratings 05-2015 Last modified at 30-05-2015
@@ -27,16 +27,18 @@
  A F M, Mahfuzul Haque   #-   BAN [1771] ????
     %Bio FIDEID 10201971
     = A f m, Mahfuzul Haque
-@@ -14677,7 +14690,7 @@
+@@ -14677,8 +14690,9 @@
  Anand, Viswanathan      #gm  IND [2817] 1969
     %Bio World Junior Champion (U20), 1987
     %Bio FIDE World Champion 2000-2002
 -   %Bio World Champion 2007-
 +   %Bio World Champion 2007-2013
     %Bio FIDEID 5000017
++   = Anand, V
  Ananda Kr, Sahu         #-   IND [1779] 1975
     %Bio FIDEID 35005006
-@@ -32918,12 +32931,12 @@
+ Ananda Kumar, Krishnamoorthy  #-   IND [1874] 1973
+@@ -32918,12 +32932,12 @@
     %Bio FIDEID 616150
  Baron, Jens             #-   GER [1886] 1990
     %Bio FIDEID 24664413
@@ -51,7 +53,7 @@
  Baron, Michel           #-   FRA [1405] 1935
     %Bio FIDEID 20623577
  Baron, Premysl          #-   CZE [1930] 1979
-@@ -38583,6 +38596,7 @@
+@@ -38583,6 +38597,7 @@
  Bellin, Jana M          #wgm CZE/ENG [2340] 1947
     %Bio FIDEID 402168
     = Hartston-Miles-Bellin, Jana M
@@ -59,7 +61,7 @@
     = Miles, Jana
     = Bellin, Jana
     = Malypetrova, Jana
-@@ -50335,6 +50349,8 @@
+@@ -50335,6 +50350,8 @@
     %Bio FIDEID 20693737
  Bonhomme, Jean-Christophe  #-   FRA [1814] 1973
     %Bio FIDEID 26082160
@@ -68,7 +70,7 @@
  Boni de Aristizabal, Marco  #-   ESP [1949] 1968
     %Bio FIDEID 22219552
     = Boni De Aristizabal, Marco
-@@ -65188,6 +65204,7 @@
+@@ -65188,6 +65205,7 @@
     %Bio FIDEID 1506870
  Carlsen, Magnus         #gm  NOR [2882] 1990
     %Bio FIDEID 1503014
@@ -76,7 +78,16 @@
  Carlsen, Tonny          #-   DEN [1839] 1985
     %Bio FIDEID 1434160
  Carlsen, Torben Erik    #cim BRA [....] ????
-@@ -84867,7 +84884,7 @@
+@@ -66036,7 +66054,7 @@
+    %Bio Olympiad Women 2006
+    %Bio FIDEID 5600502
+    = Pulpan, Oana
+-Caruana, Fabiano        #gm  USA/ITA [2844] 1992
++Caruana, Fabiano        #gm  ITA/USA [2844] 1992
+    %Bio FIDEID 2020009
+    = Caruana, F
+ Caruana, George         #-   MLT [1814] ????
+@@ -84867,7 +84885,7 @@
     %Bio FIDEID 1407384
  Dalchow, Jonas          #-   GER [1803] 2001
     %Bio FIDEID 12971251
@@ -85,7 +96,7 @@
     %Bio FIDEID 3213145
  Dale, Colin             #-   JPN [2083] 1971
     %Bio FIDEID 7000979
-@@ -141092,6 +141109,7 @@
+@@ -141092,6 +141110,7 @@
     %Bio FIDEID 2800713
  Gluzman, Mikhail        #im  AUS [2447] 1967
     %Bio FIDEID 3201783
@@ -93,7 +104,7 @@
  Gluzman, Sam            #-   AUS [1749] 1998
     %Bio FIDEID 3215210
  Glyakin, Andrei         #-   RUS [1555] 2003
-@@ -160270,6 +160288,7 @@
+@@ -160270,6 +160289,7 @@
     %Bio FIDEID 400262
     = Hartston, William Roland
     = Hartston, W R
@@ -101,7 +112,7 @@
  Hartung, Jerry          #-   LUX [2230] 1979
     %Bio FIDEID 4000480
  Hartung, Katja          #w   GER [2042] 1982
-@@ -172187,6 +172206,7 @@
+@@ -172187,6 +172207,7 @@
  Hughes, Steve           #-   USA [2138] 1961
     %Bio FIDEID 2017130
     = Hughes, Stephen
@@ -109,7 +120,16 @@
  Hughes, Tyler B         #fm  USA [2312] 1990
     %Bio FIDEID 2026775
  Hughey, Leah            #w   CAN [1691] ????
-@@ -186196,6 +186216,7 @@
+@@ -174933,7 +174954,7 @@
+    = Ilijin, Neboisa
+ Illina, Natalia         #w   UKR [2083] 2000
+    %Bio FIDEID 14129418
+-Illingworth, Max        #im  AUS [2495] 1992
++Illingworth, Max        #gm  AUS [2495] 1992
+    %Bio FIDEID 3205207
+ Illiyas, K V            #-   IND [1329] 1979
+    %Bio FIDEID 35017756
+@@ -186196,6 +186217,7 @@
  Jordan, William         #fm  AUS [2365] 1957
     %Bio FIDEID 3200876
     = Jordan, William J
@@ -117,7 +137,7 @@
  Jordan, Wolfgang        #-   GER [2249] 1955
     %Bio FIDEID 4650956
  Jordana Vargas, Julio   #-   ESP [2004] 1974
-@@ -224956,6 +224977,7 @@
+@@ -224956,6 +224978,7 @@
  Lane, Gary W            #im  ENG/AUS [2464] 1964
     %Bio FIDEID 3203301
     = Lane, Gary William
@@ -125,7 +145,7 @@
     = Lane, G W
  Lane, Hakan             #-   DEN [1929] 1975
     %Bio FIDEID 1433695
-@@ -233069,6 +233091,7 @@
+@@ -233069,6 +233092,7 @@
     %Bio FIDEID 8601968
  Li, Chao2               #gm  CHN [2748] 1989
     %Bio FIDEID 8604436
@@ -133,7 +153,16 @@
  Li, Chin Chon           #-   MAC [1495] 2004
     %Bio FIDEID 15400484
  Li, Dariia              #w   KGZ [1506] ????
-@@ -281951,6 +281974,7 @@
+@@ -242594,7 +242618,7 @@
+    %Bio FIDEID 12401463
+ Ly, Marcel              #-   FRA [1714] 1983
+    %Bio FIDEID 641790
+-Ly, Moulthun            #im  AUS [2466] 1991
++Ly, Moulthun            #gm  AUS [2466] 1991
+    %Bio FIDEID 3204405
+ Ly, Quoc Long           #-   VIE [1924] 1992
+    %Bio FIDEID 12404446
+@@ -281951,6 +281975,7 @@
     %Bio FIDEID 2610981
  Murray, Bruce D         #-   AUS [2169] 1959
     %Bio FIDEID 3205177
@@ -141,7 +170,7 @@
  Murray, Burn            #-   USA [2078] 1930
     %Bio FIDEID 2017296
  Murray, David           #-   IRL [2183] 1984
-@@ -416391,8 +416415,12 @@
+@@ -416391,8 +416416,12 @@
     %Bio FIDEID 30907616
  Thomas, Ben             #-   WLS [1850] 2000
     %Bio FIDEID 1801252
@@ -154,7 +183,7 @@
  Thomas, Daniel          #-   SCO [1832] 1996
     %Bio FIDEID 2401525
  Thomas, David           #-   LIB [2210] ????
-@@ -466845,6 +466873,9 @@
+@@ -466845,6 +466874,9 @@
  #   AUT  Austria
  #   AZE  Azerbaijan
  
@@ -164,7 +193,7 @@
  Curacao AHO
  Willemstad AHO
  
-@@ -468323,28 +468354,14 @@
+@@ -468323,28 +468355,14 @@
  %Prefix "08. " "8. "
  %Prefix "09. " "9. "
  
@@ -201,7 +230,7 @@
  
  # Standardize playoff/women/team/etc suffixes:
  
-@@ -468381,6 +468398,9 @@
+@@ -468381,6 +468399,9 @@
  %Suffix " jr"   " junior"
  %Suffix " Jr"   " junior"
  
@@ -211,7 +240,7 @@
  Corr
     = corr
     = cr
-@@ -468583,6 +468603,10 @@
+@@ -468583,6 +468604,10 @@
  @ROUND ""
  
  ### START OF ROUND SECTION
