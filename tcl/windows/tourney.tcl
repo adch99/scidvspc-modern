@@ -25,6 +25,8 @@ proc ::tourney::Open {{player {}}} {
       set ::tourney::player $player
       set ::tourney::site {}
       set ::tourney::event {}
+      set ::tourney::minPlayers 1
+      set ::tourney::minGames 1
       ::tourney::refresh
     }
     raiseWin $w
@@ -33,11 +35,7 @@ proc ::tourney::Open {{player {}}} {
 
   if {! [info exists ::tourney::_defaults]} { ::tourney::defaults }
 
-  if {$player == {}} {
-    # Override the defaults for start-up window. "-10" represents last ten years
-    set ::tourney::start "[expr [::utils::date::today year] - 10].01.01"
-    set ::tourney::minGames 4
-  } else {
+  if {$player != {}} {
     # No start date
     set ::tourney::start 1800.01.01
   }
@@ -62,7 +60,7 @@ proc ::tourney::Open {{player {}}} {
   bind $w <Key-End> "$w.t.text yview moveto 0.99"
 
   foreach i {t o1 o2 o3 b} {frame $w.$i}
-  text $w.t.text -width 75 -height 22 -font font_Small -wrap none \
+  text $w.t.text -width 120 -height 22 -font font_Small -wrap none \
     -fg black  -yscrollcommand "$w.t.ybar set" -setgrid 1 \
     -cursor top_left_arrow -xscrollcommand "$w.t.xbar set"
   scrollbar $w.t.ybar -command "$w.t.text yview" -width 12 -takefocus 0
@@ -227,9 +225,9 @@ proc ::tourney::defaults {} {
   set ::tourney::start "1960.??.??"
   set ::tourney::end "$year.12.31"
   set ::tourney::size 1000
-  set ::tourney::minPlayers 2
+  set ::tourney::minPlayers 4
   set ::tourney::maxPlayers 1999
-  set ::tourney::minGames 1
+  set ::tourney::minGames 10
   set ::tourney::maxGames 9999
   set ::tourney::minElo 0
   set ::tourney::maxElo 4000

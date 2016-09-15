@@ -1582,17 +1582,10 @@ set helpText(Tmt) {<h1>The Tournament Finder window</h1>
   <b>clicking on a column title</b>.
   </p>
   <p>
-  But sorting can be slightly misleading. For example, clicking the Games
-  column does not generally show *all* the tournaments with the greatest number of games.
-  Rather, it simply sorts the current 100 games (for example)
-  that are the first in the base to match the selection criteria.
-  </p>
-  <p>
-  To address this issue, and also speed up tournament searches, select a fairly narrow Date range (a few years at most),
-  or select a particular country - by choosing (or entering) its three-letter standard code.
+  In Scid vs. PC 4.17 we implemented a new sort algorithm. Sort results are no longer dependant on the list size.
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.16 January 2016</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.17 September 2016</footer></p>
 }
 
 set helpTitle(GameList) "Game List window"
