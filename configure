@@ -384,7 +384,7 @@ cat <<EOF > testcompilerflag.cpp
 int main() { return 0; }
 EOF
 
-__CC__ -std=c++11 -o testcompilerflag testcompilerflag.cpp
+__CC__ -std=c++0x -o testcompilerflag testcompilerflag.cpp
 if [ -f testcompilerflag ]; then
     exit 0
 else
@@ -417,9 +417,10 @@ proc probeCompiler {} {
     global TestCpp11Flag var
     set probe [regsub -all __CC__ $TestCpp11Flag $var(CXX)]
     if {[Probe testcompilerflag $probe]} {
-        append var(CXXFLAGS) " -std=c++11"
+       # we now enable this against tkscid.cpp in Makefile.conf
+       # append var(CXXFLAGS) " -std=c++11"
     } else {
-       puts "\nError: compiler $var(CXX) does not support C++11.\n"
+       puts "\nError: compiler $var(CXX) does not support C++0x (C++11).\n"
        exit 1
     }
 }

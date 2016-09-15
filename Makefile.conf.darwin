@@ -448,10 +448,10 @@ eco2epd: src/eco2epd.o $(OBJS) src/pbook.o $(CHARSETCONVOBJS)
 ### Rules to create .o files from .cpp files:
 
 src/tcscid.o: src/tkscid.cpp
-	$(BASH_ENV) $(CXX) $(CXXFLAGS) $(TCL_INCLUDE) -DTCL_ONLY -o src/tcscid.o -c src/tkscid.cpp
+	$(BASH_ENV) $(CXX) $(CXXFLAGS) -std=c++0x $(TCL_INCLUDE) -DTCL_ONLY -o src/tcscid.o -c src/tkscid.cpp
 
 src/tkscid.o: src/tkscid.cpp
-	$(BASH_ENV) $(CXX) $(CXXFLAGS) $(TCL_INCLUDE) -o src/tkscid.o -c src/tkscid.cpp
+	$(BASH_ENV) $(CXX) $(CXXFLAGS) -std=c++0x $(TCL_INCLUDE) -o src/tkscid.o -c src/tkscid.cpp
 
 ### The endgame tablebase code in the egtb/ subdirectory (not written by me)
 

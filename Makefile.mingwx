@@ -3,12 +3,9 @@
 ### Change MINGW_TARGET and TCL_DIR to meet your setup
 ### To build for Win64 using MinGW-w64:
 ###	 make -f Makefile.mingwx W64=1
+### To build for Fed14
+###	 make -f Makefile.mingwx FED=1
 ### Copyright (C) 2013-2015, O. Sezer (sezero@users.sourceforge.net)
-
-# To build tcl use "./configure --host=i686-w64-mingw32"
-# and change:
-# INSTALL_ROOT    = /usr/local/cross-tcl-8.6.4
-
 
 ifeq ($(W64),1)
 WIN_TARGET=win64
@@ -20,12 +17,15 @@ endif
 TCL_VERSION=85
 
 ifeq ($(WIN_TARGET),win64)
-TCL_DIR=/opt/cross_tcl64
-MINGW_TARGET=x86_64-w64-mingw32
+  TCL_DIR=/opt/cross_tcl64
+  MINGW_TARGET=x86_64-w64-mingw32
 else
-TCL_DIR=/usr/local/cross-tcl
-#MINGW_TARGET=i686-pc-mingw32
-MINGW_TARGET=i686-w64-mingw32
+  TCL_DIR=/usr/local/cross-tcl
+ifeq ($(FED),1)
+  MINGW_TARGET=i686-pc-mingw32
+else
+  MINGW_TARGET=i686-w64-mingw32
+endif
 endif
 
 ### Compiler and linker
@@ -53,7 +53,7 @@ WARNINGS = -Wall
 
 CFLAGS = -DWIN32 -O2 $(WARNINGS) $(DEBUG)
 
-CXXFLAGS = -fno-rtti -fno-exceptions $(CFLAGS) $(SCIDFLAGS)
+CXXFLAGS = -fno-rtti $(CFLAGS) $(SCIDFLAGS)
 
 LDFLAGS = 
 
@@ -200,15 +200,15 @@ strip:
 
 
 src/tcscid.o: src/tkscid.cpp
-	$(CXX) $(CXXFLAGS) -I$(TCL_DIR)/include -DTCL_ONLY -c src/tkscid.cpp \
+	$(CXX) $(CXXFLAGS) -std=c++0x -I$(TCL_DIR)/include -DTCL_ONLY -c src/tkscid.cpp \
 	  -o ./src/tcscid.o
 
 src/tkscid.o: src/tkscid.cpp
-	$(CXX) $(CXXFLAGS) -I$(TCL_DIR)/include -c src/tkscid.cpp \
+	$(CXX) $(CXXFLAGS) -std=c++0x -I$(TCL_DIR)/include -c src/tkscid.cpp \
 	  -o ./src/tkscid.o
 
 src/scid.o: src/tkscid.cpp
-	$(CXX) $(CXXFLAGS) -I$(TCL_DIR)/include -DSOURCE_TCL_FILE="\"scid.gui\"" \
+	$(CXX) $(CXXFLAGS) -std=c++0x -I$(TCL_DIR)/include -DSOURCE_TCL_FILE="\"scid.gui\"" \
 	  -c src/tkscid.cpp -o ./src/scid.o
 
 src/probe.o: src/probe.cpp src/egtb/tbindex.cpp src/egtb/tbdecode.c

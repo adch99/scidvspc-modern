@@ -3210,6 +3210,10 @@ namespace std {
     };
 }
 
+#if __cplusplus < 201103L // pre C++11
+# define emplace(expr, ...) insert(Tourney(expr, ##__VA_ARGS__))
+#endif
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // sc_base_tournaments:
 //    Returns information on tournaments in the current database.
