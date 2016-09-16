@@ -9,10 +9,10 @@ set ::plist::sort Name
 
 proc ::plist::defaults {} {
   set ::plist::name ""
-  set ::plist::minGames 0
+  set ::plist::minGames 5
   set ::plist::maxGames 9999
-  set ::plist::minElo 0
-  set ::plist::maxElo [sc_info limit elo]
+  set ::plist::minElo 1500
+  set ::plist::maxElo 3000
   set ::plist::size 1000
 }
 
@@ -152,6 +152,7 @@ proc ::plist::refresh {} {
   wm title $w "[tr WindowsPList]: [file tail [sc_base filename]]"
 
   busyCursor .
+  update
   ::utils::history::AddEntry ::plist::name $::plist::name
   set t $w.t.text
   $t configure -state normal
