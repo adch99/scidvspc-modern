@@ -1,5 +1,5 @@
 
-#define AppVersion '4.16'
+#define AppVersion '4.17'
 #define AppName    'Scid vs PC'
 #define ActiveTclUrl 'http://www.activestate.com/activetcl/downloads'
 
