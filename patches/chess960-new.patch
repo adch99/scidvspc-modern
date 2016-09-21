@@ -1,3 +1,10 @@
+src author - Britton Farrar
+This works well! and seems to be a bug free chess 960 implementation.
+Castling moves are encoded Kx(rook) instead of K-c1 K-g1
+We are now using si960 instead of si4 because other versions of Scid will throw nasty errors if trying to open a si4 chess 960 game
+
+Future work is here: https://github.com/brittonf/scid-vs-variants
+
 Index: Makefile.conf
 ===================================================================
 --- Makefile.conf	(revision 2591)

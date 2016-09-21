@@ -2183,6 +2183,9 @@
 
   o  FICS  <http://www.freechess.org>
 
+  o  Scid vs. 960/variants (Chess960 support)
+     <https://github.com/brittonf/scid-vs-variants>
+
   o  FICS game archives  <http://ficsgames.org>
 
   o  The PGN and EPD standards
