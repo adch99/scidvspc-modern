@@ -524,6 +524,7 @@ namespace eval tacgame {
       ::gameclock::reset 2
       ::gameclock::draw 1
       ::gameclock::draw 2
+      pack .coachWin.fclocks -after .coachWin.finformations
       ::tacgame::resetValues
       updateBoard -pgn
 	if {[sc_pos side] == "white"} {
@@ -551,7 +552,7 @@ namespace eval tacgame {
     bind $w <F1> { helpWindow ComputerGame PhalanxGame}
     bind $w <Escape> ::tacgame::abortGame
     bind $w <Configure> "recordWinSize $w"
-    wm minsize $w 45 0
+    wm minsize $w [winfo reqwidth $w] 0
 
     ::tacgame::phalanxGo
 

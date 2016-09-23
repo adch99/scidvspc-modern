@@ -701,6 +701,8 @@ Windows can also be undocked by right-clicking the tab, though Mac OS X does not
 Window focus automatically follows the mouse around, and also impacts which keyboard bindings are active.
 Most bindings are active when the mouse is over the Main Board.</p>
 <p>
+The window's menus are accessible via clicking the arrow in the window tab.
+</p><p>
 With the focus on a window tab, one can press the Tab key to move between window panes. Control+Tab switches between active tabs.
 </p>
 <p><i>
@@ -4372,7 +4374,7 @@ See the polyglot documentation for more options.
 
 # Tactical game window help
 set helpTitle(ComputerGame) "Playing the Computer"
-set helpText(ComputerGame) {<h1>Playing the Computer</h1>
+set helpText(ComputerGame) {<h1><name PhalanxGame>Playing the Computer</name></h1>
 
 <p> Scid offers two ways to play a Computer Opponent. They are against <a ComputerGame PhalanxGame>Phalanx</a>,
 or any installed <a ComputerGame UCIGame>UCI Engine</a>.
@@ -4381,9 +4383,10 @@ or any installed <a ComputerGame UCIGame>UCI Engine</a>.
 <i>Other computer opponents can be found in the
 training features of <a Analysis>Engine Analysis</a>, <a TB>Tablebases</a> and <a Tree>Tree</a></i>.
 </p>
-<p>To play as Black, simply flip the board before starting a game.</p>
+<p>To play as Black, simply flip the board before starting a game.
+The clocks may be hidden by pressing the 'x' on the White clock.</p>
 
-<h2><name PhalanxGame>Playing Phalanx</name></h2>
+<h2>Playing Phalanx</h2>
 <p>
 <run ::tacgame::config><green>Phalanx</green></run> is an old xboard engine written by Dusan Dobes.
 With it one may play a game of Normal, Fischer (castling not supported), or Random Pawns Chess.

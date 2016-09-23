@@ -450,7 +450,7 @@ namespace eval sergame {
     bind $w <Destroy> ::sergame::abortGame
     bind $w <Escape> ::sergame::abortGame
     bind $w <Configure> "recordWinSize $w"
-    wm minsize $w 45 0
+    wm minsize $w [winfo reqwidth $w] 0
 
     # setup clocks
     if {$::sergame::timeMode == "timebonus"} {

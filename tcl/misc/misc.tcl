@@ -480,6 +480,12 @@ namespace eval gameclock {
     ::gameclock::reset $n
     ::gameclock::draw $n
     bind $data(id$n) <Button-1> "::gameclock::toggleClock $n"
+    if {$n == 1} {
+      # Hide-clock button in the white clock
+      place [button $parent.close -image arrow_close -relief flat -command "pack forget $parent"] \
+        -in $data(id$n) -relx 0 -x 1 -rely 0.0 -y 1 -anchor nw
+    }
+
   }
 
   proc draw { n } {
