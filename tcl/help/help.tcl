@@ -4293,7 +4293,7 @@ set helpText(Author) "<h1>Scid vs. PC</h1>
   <li>Using Tcl/Tk version [info patchlevel]</li>
 
 </ul> </ul> </ul> 
-  <p><footer>(Project Updated: $::scidVersion, $::scidVersionDate)</footer></p>
+  <p><footer>(Project Updated: $::scidVersionDate)</footer></p>
   </p>
 "
 
@@ -5900,6 +5900,60 @@ set helpText(Sound) {<h1>Sound</h1>
 set helpTitle(Changelog) "Scid vs PC Changelog"
 set helpText(Changelog) {<h1>Changelog</h1>
 
+<h4>4.17 (October 25, 2016)</h4>
+<ul>
+<li>Analysis/Engine window</li>
+<li>  * Show checkmate/stalemate messages instead of sending 'no-move positions' to engine</li>
+<li>  * In engine configuration window the 'Date' field of an engine is now its exe modification time (mtime)</li>
+<li>  * Speed enhancements for processing UCI engine moves (pv)</li>
+<li>Gregor's improvements to the player and tournament finders (which Shane never implemented properly)</li>
+<li>  * Previously - only the *first* 50 tournaments were used (eg) when looking for the 50 tournaments with most players</li>
+<li>  * Compilers must now support c++0x / c++11</li>
+<br>
+<li>Custom player photos (Place correctly named gifs in $HOME/.scidvspc/photos or bin/photos)</li>
+<li>Resign button for playing UCI engines and Phalanx, analog clocks can now be hidden ('x' button in the white clock), and add the 'Skill Level' to the pgn header (eg - as used by Stockfish)</li>
+<li>New Chess 960 patch! Thanks to Britton Farrar, who now has a project at https://github.com/brittonf/scid-vs-variants</li>
+<li>New 'Under Promotion' search item in General Search</li>
+<br>
+<li>Computer Tournament: when 'First engine plays others', flip board to show games from first engine's view</li>
+<li>Flip game browser if matches myPlayerNames</li>
+<li>Clipbase game limit is now 5,000,000, and game undo buffer is 20</li>
+<li>Chess Pieces: remove 12 piece-set limit, and adventurer and kingdom pieces. Reinstate old Merida1 as Merida3</li>
+<li>Row colour is now configurable for Player/Tourney/DB finders and Crosstable rows</li>
+<li>Fics</li>
+<li>  * Offers graph is updated in a better manner</li>
+<li>  * Save game and add message disconnected while playing</li>
+<li>  * Top three buttons are now configurable</li>
+<li>  * Add a 'follow+' command, which automatically saves followed games</li>
+<li>Tweak Find Best Move feature, which now also recognizes non-standard starts</li>
+<li>Game Save dialog: extend use of 'Use prev tags' to 'Use previous' (for Names, Site, Event, Elo, dates)</li>
+<li>Switcher - replace readonly foreground color with a '(readonly)' message, and add a 'Confirm Copy' option menu</li>
+<li>Disable tree updates while annotating games and computer tournament</li>
+<li>Tree: Instead of having a 'stop' button, grey the tree text when updating (if progressBar is hidden)</li>
+<li>Change a few shortcuts. control-b board colours. control-B setup board. control-G general search</li>
+<li>Control-TrialMode button, automatically adds a null move, and tweak the trial mode button pic</li>
+<li>Gregors namebase hardening</li>
+<li>PGN Import now converts any empty Name/Event/Site/Round tags to '?' (according to pgn standard, these should not be empty)</li>
+<li>Minor fixes for Setup Board</li>
+<li>Allow Merging Games with non standard starts</li>
+<li>Bind pressing 'vv' keys to enter first variation</li>
+<li>Remove Crafty specific command 'mn', and it seems unsupported in Crafty 25</li>
+<li>In the tree window, when deselecting "Adjust Games", we now keep the current gamelist/filter</li>
+<li>Make hideNextMove non-persistent</li>
+<li>Right clicking 'Exit Var' button will exit all vars</li>
+<br>
+<br>
+<b>Bug fixes</b>
+<li>Fix name counts when using globbing in the name editor</li>
+<li>Fix Mate-in-N (Tactics) bug</li>
+<li>Some  charsetconverter (internationalisation) fixes from Gregor</li>
+<li>Removed xdg-open for opening URLs which just doesnt work for me</li>
+<li>Tree info button (short display) was broke</li>
+<li>Bugfixes for compiling on some linux platforms (including Raspberry Pi 2)</li>
+<li>Some clock fixes. Digital clock was busted (counting up). CompTournament clocks are now digital only</li>
+<li>Stop tacgame/phalanx from failing to restart</li>
+</ul>
+
 <h4>4.16 (January 24, 2016)</h4>
 <ul>
 <li>New Checkmate/Stalemate general search option</li>
@@ -6766,44 +6820,6 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li> Player finder + Tournament Finder sub-widgets alligned</li>
 <li> Statistics window restructured</li>
 </ul>
-</ul>
-
-<h4>4.0 (July 1, 2010)</h4>
-<ul>
-<li>Computer Chess tournament feature</li>
-<li>The Gamelist widget has been rewritten to work with huge databases. Other new features include a case insensitive search, deleted items are greyed out, and there's a "Compact" button to empty trash with</li>
-<li>Add a background colour option that applies to many text widgets, including gameinfo, pgn window and help window</li>
-<li>Restructured the analysis widgets, putting toolbar on top, tiny board at bottom, tweaking toolbar icons and reparenting analysis died error dialog</li>
-<li>Update the book and book-tuning windows (untested, from SCID)</li>
-<li>Add a new logo, and some wm title tweaks</li>
-<li>Board Screenshot feature (Control+F12)</li>
-<li>Bind mouse wheel to move progression (and widget resize) for the little browser windows</li>
-<li>Change all comboboxes to ttk::combobox</li>
-<li>Allow xboard lowercase promotion moves (eg while g7g8Q always worked, g7g8q previously failed)</li>
-<li>Enable hovering over toolbar help pop-ups</li>
-<li>Fix up analysis widget "lock to position" feature</li>
-<li>All analysis windows can now use annotation, and autoplay feature</li>
-<li>Bind F4 to start another analysis window</li>
-<li>Various C fixes from SCID</li>
-<li>Sync the tools::connect-hardware feature with SCID (untested)</li>
-<li>When using the setup board widget, do a sanity check about the FEN's castling field</li>
-<li>Some minor version fixes anticipating tcl8.6</li>
-<li>Small bugfix: variation pop-up could previously throw errors if moving through movs fast</li>
-<li>F1 *toggles* help window</li>
-<li>[Remove space-only lines from project - they mess up vim's paragraph traversal feature]</li>
-<li>FICS "withdraws offer" fix</li>
-<li>Toolbar icons tweak</li>
-<li>Allow databses to have "." in their name</li>
-<li>Tactical Game stores game result</li>
-<li>Set Game Info widget includes Site field</li>
-<li>Small "update idletasks" in main.tcl improves main board responsiveness</li>
-<li>Fix up the history limit of combobox-es (especially the setup board FEN combo)</li>
-<li>UCI kludges for Prodeo and Rybka from SCID (untested)</li>
-<li>Turn off craftys egtb (end game tablebook) for the analysis widget</li>
-<li>Comment editor bugfix - unbind left/right from main board</li>
-<li>Fix for matsig.cpp overflow (unapplied? , untested)</li>
-<li>Key binding for first/last game is now Control+Home/End instead of Control+Shift+Up/Down</li>
-<li>Perform a db refresh after importing PGN file(s)</li>
 </ul>
 }
 

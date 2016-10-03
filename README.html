@@ -110,7 +110,7 @@ project is authored by
 <LI> Better support for UTF and Latin character sets in PGN export/imports.</LI>
 <LI> Improved and more powerful Tree Mask feature.</LI>
 <LI></LI>
-<LI> Most chess variants (such as Chess960 / Fischer Chess) are unsupported.
+<LI> Chess 960 / Fischer Chess is now supported (only by a patch).
 </LI>
 </UL>
 </P>
@@ -121,13 +121,13 @@ project is authored by
 
 
 <P>Source 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.16.tgz/download">scid_vs_pc-4.16.tgz</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.17.tgz/download">scid_vs_pc-4.17.tgz</A></P>
 <P>Windows 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.16.exe/download">Scid vs PC-4.16.exe</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.17.exe/download">Scid vs PC-4.17.exe</A></P>
 <P>Windows 64 bit 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.16.x64.exe/download">Scid vs PC-4.16.x64.exe</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.17.x64.exe/download">Scid vs PC-4.17.x64.exe</A></P>
 <P>Mac 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.16.dmg/download">ScidvsMac-4.16.dmg</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.17.dmg/download">ScidvsMac-4.17.dmg</A></P>
 <P>
 <H3>Other resources</H3>
 
@@ -157,8 +157,8 @@ If your distro does not provide these packages ("tkimg", "tcl-snack"), you can i
 <P>Then, installing from source:</P>
 <HR>
 <PRE>
-tar -xzf scid_vs_pc-4.16.tgz
-cd scid_vs_pc-4.16
+tar -xzf scid_vs_pc-4.17.tgz
+cd scid_vs_pc-4.17
 ./configure
 sudo make install
 scid
@@ -183,7 +183,7 @@ C:\Users\[USERNAME]\AppData\Local\VirtualStore\Program Files\Scid vs PC</P>
 
 
 <P>The 
-<A HREF="#download_">ScidvsMac-4.16 app</A> should include everything you need. Simply drag and drop the App into /Applications (or similar).</P>
+<A HREF="#download_">ScidvsMac-4.17 app</A> should include everything you need. Simply drag and drop the App into /Applications (or similar).</P>
 <P><EM>Users upgrading may have to remove (or edit) <B>$HOME/.scidvspc/config/engines.dat</B>
 to properly configure the chess engines.</EM></P>
 <P>OS X  has a poor implementation of Tcl, and docked mode has minor bugs (some windows work better after being moved around, keyboard shortcuts are very hit and miss).</P>
@@ -425,6 +425,65 @@ Chessbase databases and many chess variants.</P>
 
 
 <P>
+<H3>Scid vs. PC 4.17</H3>
+
+
+<P>
+<UL>
+<LI>Analysis/Engine window.</LI>
+<LI>  * Show checkmate/stalemate messages instead of sending 'no-move positions' to engine.</LI>
+<LI>  * In engine configuration window the 'Date' field of an engine is now its exe modification time (mtime).</LI>
+<LI>  * Speed enhancements for processing UCI engine moves (pv).<BR><BR>
+
+Gregor's improvements to the player and tournament finders (which Shane never implemented properly).</LI>
+<LI>  * Previously - only the *first* 50 tournaments were used (eg) when looking for the 50 tournaments with most players.</LI>
+<LI>  * Compilers must now support c++0x / c++11.<BR><BR>
+</LI>
+<LI>Custom player photos (Place correctly named gifs in $HOME/.scidvspc/photos or bin/photos).</LI>
+<LI>Resign button for playing UCI engines and Phalanx, analog clocks can now be hidden ('x' button in the white clock), and add the 'Skill Level' to the pgn header (eg - as used by Stockfish).</LI>
+<LI>New Chess 960 patch! Thanks to Britton Farrar, who now has a project at https://github.com/brittonf/scid-vs-variants.</LI>
+<LI>New 'Under Promotion' search item in General Search.</LI>
+<LI>Computer Tournament: when 'First engine plays others', flip board to show games from first engine's view.</LI>
+<LI>Flip game browser if matches myPlayerNames.</LI>
+<LI>Clipbase game limit is now 5,000,000, and game undo buffer is 20.</LI>
+<LI>Chess Pieces: remove 12 piece-set limit, and adventurer and kingdom pieces. Reinstate old Merida1 as Merida3.</LI>
+<LI>Row colour is now configurable for Player/Tourney/DB finders and Crosstable rows.<BR><BR>
+
+Fics</LI>
+<LI>  * Offers graph is updated in a better manner.</LI>
+<LI>  * Save game and add message disconnected while playing.</LI>
+<LI>  * Top three buttons are now configurable.</LI>
+<LI>  * Add a 'follow+' command, which automatically saves followed games.<BR><BR></LI>
+<LI>Tweak Find Best Move feature, which now also recognizes non-standard starts.</LI>
+<LI>Game Save dialog: extend use of 'Use prev tags' to 'Use previous' (for Names, Site, Event, Elo, dates).</LI>
+<LI>Switcher - replace readonly foreground color with a '(readonly)' message, and add a 'Confirm Copy' option menu.</LI>
+<LI>Disable tree updates while annotating games and computer tournament.</LI>
+<LI>Tree: Instead of having a 'stop' button, grey the tree text when updating (if progressBar is hidden).</LI>
+<LI>Change a few shortcuts. control-b board colours. control-B setup board. control-G general search.</LI>
+<LI>Control-TrialMode button, automatically adds a null move, and tweak the trial mode button pic.</LI>
+<LI>Gregors namebase hardening.</LI>
+<LI>PGN Import now converts any empty Name/Event/Site/Round tags to '?' (according to pgn standard, these should not be empty).</LI>
+<LI>Minor fixes for Setup Board.</LI>
+<LI>Allow Merging Games with non standard starts.</LI>
+<LI>Bind pressing 'vv' keys to enter first variation.</LI>
+<LI>Remove Crafty specific command 'mn', and it seems unsupported in Crafty 25.</LI>
+<LI>In the tree window, when deselecting "Adjust Games", we now keep the current gamelist/filter.</LI>
+<LI>Make hideNextMove non-persistent.</LI>
+<LI>Right clicking 'Exit Var' button will exit all vars.<BR><BR>
+
+Bug fixes</LI>
+<LI>Fix name counts when using globbing in the name editor.</LI>
+<LI>Fix Mate-in-N (Tactics) bug.</LI>
+<LI>Some  charsetconverter (internationalisation) fixes from Gregor.</LI>
+<LI>Removed xdg-open for opening URLs which just doesnt work for me.</LI>
+<LI>Tree info button (short display) was broke.</LI>
+<LI>Bugfixes for compiling on some linux platforms (including Raspberry Pi 2).</LI>
+<LI>Some clock fixes. Digital clock was busted (counting up). CompTournament clocks are now digital only.</LI>
+<LI>Stop tacgame/phalanx from failing to restart.
+
+</LI>
+</UL>
+</P>
 <H3>Scid vs. PC 4.16</H3>
 
 
@@ -1349,10 +1408,10 @@ works in rural australia.</P>
 <A HREF="http://sourceforge.net/projects/scid/files/Player Data/">http://sourceforge.net/projects/scid/files/Player Data/</A></LI>
 <LI>FICS 
 <A HREF="http://www.freechess.org">http://www.freechess.org</A></LI>
-<LI>Scid vs. 960/variants (Chess960 support) 
-<A HREF="https://github.com/brittonf/scid-vs-variants">https://github.com/brittonf/scid-vs-variants</A></LI>
 <LI>FICS game archives 
 <A HREF="http://ficsgames.org">http://ficsgames.org</A></LI>
+<LI>Scid vs. 960/variants (Chess960 support) 
+<A HREF="https://github.com/brittonf/scid-vs-variants">https://github.com/brittonf/scid-vs-variants</A></LI>
 <LI>The PGN and EPD standards 
 <A HREF="http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm">http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm</A></LI>
 <LI>Pgn of players 
