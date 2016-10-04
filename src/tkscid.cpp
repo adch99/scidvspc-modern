@@ -6047,7 +6047,12 @@ sc_game (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     if (argc > 1) { index = strUniqueMatch (argv[1], options);}
 
-    bool trialMode = (Tcl_GetVar (ti, "trialMode", TCL_GLOBAL_ONLY)[0] == '1');
+    const char *trial_mode_val;
+    bool trialMode;
+    if ((trial_mode_val = Tcl_GetVar (ti, "trialMode", TCL_GLOBAL_ONLY)) != NULL)
+        trialMode = trial_mode_val[0] == '1';
+    else
+        trialMode = false;
 
     switch (index) {
     case GAME_ALTERED:
