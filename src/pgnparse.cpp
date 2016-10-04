@@ -37,6 +37,8 @@ void
 PgnParser::Init ()
 {
     ErrorBuffer = new DString;
+    CharConverter = NULL;
+    CharDetector = NULL;
     Reset();
 }
 
@@ -56,8 +58,6 @@ PgnParser::Reset()
     ResultWarnings = true;
     NewlinesToSpaces = true;
     NumIgnoredTags = 0;
-    CharConverter = NULL;
-    CharDetector = NULL;
 }
 
 void
