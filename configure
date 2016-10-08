@@ -11,7 +11,7 @@ exec tclsh "$0" ${1+"$@"}
 set var(CXX) g++
 set var(CC) gcc
 set var(LINK) g++
-set var(DEBUG) #-DASSERTIONS
+set var(DEBUG) {#-DASSERTIONS -g}
 set var(CFLAGS) {-O2 -fno-exceptions}
 set var(CXXFLAGS) {-fno-rtti}
 set var(LDFLAGS) {}
@@ -549,7 +549,7 @@ proc usage {} {
     puts {  CXXFLAGS     Extra flags for C++ Default: "-fno-rtti"}
     puts {  LDFLAGS      Linker flags        Default: ""}
     puts {  WARNINGS     C++ warnings        Default: "-Wall"}
-    puts {  DEBUG        Debugging flags     Use DEBUG="-DASSERTIONS" for assertions}
+    puts {  DEBUG        Debugging flags     Use DEBUG="-DASSERTIONS -g" for assertions and debug symbols}
     puts {  SCIDFLAGS    Scid customizations Default: ""}
     puts {  BINDIR       Location to install executables}
     puts {  SHAREDIR     Location to install extra files (ECO, Spelling.ssp, etc)}
