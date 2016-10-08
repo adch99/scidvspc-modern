@@ -2496,7 +2496,7 @@ perform a <a Compact>namebase compaction</a>.
   The file should be loaded on startup, or can be <run
   readSpellCheckFile><green>loaded manually</green></run>.<i>
   Updated versions are available at the
-  <url http://sourceforge.net/projects/scid/files/Player%20Data/>Scid Website</url>.
+  <url http://sourceforge.net/projects/scid/files/Player Data/>Scid Website</url>.
   </i></p>
   
   <h3><name Spellcheck>Spell Checking</name></h3>
@@ -7036,23 +7036,22 @@ set helpText(Board) {<h1>Board Options</h1>
 <p>
 <i>The Merida1 pieces now have high-quality larger sizes.</i>
 </p><p>
-Place base 64 encoded piece sets in the directory <b>$HOME/.scidvspc/pieces</b>, and they will be added to the 
-Board Options window. Some extra sets (including blindfold) can be got 
-<url http://sourceforge.net/projects/scidvspc/files/extra_pieces.tgz/download>here</url>.
+Place custom piece sets in the directory <b>$HOME/.scidvspc/pieces</b>, and they will be added to the 
+Board Options window. These can be found at our 
+<url https://sourceforge.net/projects/scidvspc/files/support files/chess pieces/>pieces page</url>.
 </p>
-<p>Though Scid now supports larger sizes, these are generally scaled
-from the smaller one, so sizes 25, 30, 35 ... 80 are the only ones needed
-in the custom pieces. Some user made pieces may include some larger sizes properly (i.e. unscaled),
-notably the FritzSWS pieces at <url http://gorgonian.weebly.com/scid-vs-pc.html>Gorgonian's Chess Site</url></i>
+<p>Some of these include high detail pieces suitable for large displays.
+notably Ken's and Paul's, and the FritzSWS pieces at
+<url http://gorgonian.weebly.com/scid-vs-pc.html>Gorgonian's Chess Site</url>
 </p>
 <p>
-For instructions on making Scid piece sets, download 
-<url http://sourceforge.net/projects/scidvspc/files/scid_chess_pieces.tgz/download>this file</url>.
+Paul's also include instructions for making high detail pieces from svg using Inkscape
+You can find the older instructions to make Scid pieces in scid_chess_pieces.tgz.
 </p>
 <p><i>
    Examine <green><run raiseSplashWindow>Startup Window</run></green> for the status of loading user textures and pieces.
 </i></p>
 
 </p>
-<p><footer>Updated:</b> - Scid vs. PC 4.16 December 2015</footer></p>
+<p><footer>Updated:</b> - Scid vs. PC 4.17 October 2016</footer></p>
 }
