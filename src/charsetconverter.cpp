@@ -529,7 +529,8 @@ CharsetConverter::Codec::setupImpl()
   if (m_info.m_charset == CharsetDetector::Other)
   {
     std::pair<ImplMap::iterator,bool> result =
-        m_implMap.insert(ImplMap::value_type(m_info.m_encoding, nullptr));
+        // gcc-4.4 has any problem with NULL
+        m_implMap.insert(ImplMap::value_type(m_info.m_encoding, static_cast<Tcl_Encoding>(nullptr)));
 
     if (result.second)
       result.first->second = m_impl = Tcl_GetEncoding(nullptr, m_info.m_encoding.c_str());
