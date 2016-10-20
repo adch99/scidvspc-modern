@@ -74,6 +74,8 @@ proc importPgnGame {} {
     flipBoardForPlayerNames
     updateBoard -pgn
     updateTitle
+    updateMenuStates
+    ::tools::graphs::score::Refresh
 
     if {$result == {PGN text imported with no errors or warnings.}} {
       destroy .importWin; focus .main
