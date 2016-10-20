@@ -542,6 +542,8 @@
      can now be hidden ('x' button in the white clock), and add the
      'Skill Level' to the pgn header (eg - as used by Stockfish).
 
+  o  A patch to include Gregor's tk::text improvements.
+
   o  New Chess 960 patch! Thanks to Britton Farrar, who now has a
      project at https://github.com/brittonf/scid-vs-variants.
 
@@ -614,6 +616,8 @@
   o  Right clicking 'Exit Var' button will exit all vars.
 
      Bug fixes
+
+  o  Fix a nasty memory leak (in PgnParser).
 
   o  Fix name counts when using globbing in the name editor.
 

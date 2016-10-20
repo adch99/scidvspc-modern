@@ -5912,6 +5912,7 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <br>
 <li>Custom player photos (Place correctly named gifs in $HOME/.scidvspc/photos or bin/photos)</li>
 <li>Resign button for playing UCI engines and Phalanx, analog clocks can now be hidden ('x' button in the white clock), and add the 'Skill Level' to the pgn header (eg - as used by Stockfish)</li>
+<li>A patch to include Gregor's tk::text improvements</li>
 <li>New Chess 960 patch! Thanks to Britton Farrar, who now has a project at https://github.com/brittonf/scid-vs-variants</li>
 <li>New 'Under Promotion' search item in General Search</li>
 <br>
@@ -5944,6 +5945,7 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <br>
 <br>
 <b>Bug fixes</b>
+<li>Fix a nasty memory leak (in PgnParser)</li>
 <li>Fix name counts when using globbing in the name editor</li>
 <li>Fix Mate-in-N (Tactics) bug</li>
 <li>Some  charsetconverter (internationalisation) fixes from Gregor</li>

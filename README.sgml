@@ -401,6 +401,7 @@ Gregor's improvements to the player and tournament finders (which Shane never im
 
 <item>Custom player photos (Place correctly named gifs in $HOME/.scidvspc/photos or bin/photos).
 <item>Resign button for playing UCI engines and Phalanx, analog clocks can now be hidden ('x' button in the white clock), and add the 'Skill Level' to the pgn header (eg - as used by Stockfish).
+<item>A patch to include Gregor's tk::text improvements.
 <item>New Chess 960 patch! Thanks to Britton Farrar, who now has a project at https://github.com/brittonf/scid-vs-variants.
 <item>New 'Under Promotion' search item in General Search.
 <item>Computer Tournament: when 'First engine plays others', flip board to show games from first engine's view.
@@ -435,6 +436,7 @@ Fics
 <newline><newline>
 
 Bug fixes
+<item>Fix a nasty memory leak (in PgnParser).
 <item>Fix name counts when using globbing in the name editor.
 <item>Fix Mate-in-N (Tactics) bug.
 <item>Some  charsetconverter (internationalisation) fixes from Gregor.
