@@ -45,7 +45,7 @@ Root: "HKCU"; Subkey: "Software\Classes\scid"; Flags: uninsdeletevalue; Tasks: a
 Root: "HKCU"; Subkey: "Software\Classes\scid\shell\open\command"; ValueType: string; ValueData: """{app}\bin\scid"" ""%1"""; Flags: uninsdeletevalue; Tasks: associate_si4
 
 [Files]
-Source: "bin\*";  DestDir: "{app}\bin"; CopyMode: normal; Flags: recursesubdirs
+Source: "bin\*";  DestDir: "{app}\bin"; CopyMode: normal; Flags: recursesubdirs createallsubdirs
 Source: "lib\*"; DestDir: "{app}\lib";  CopyMode: normal; Flags: recursesubdirs
 Source: "doc\*"; DestDir: "{app}\doc";  CopyMode: normal; Flags: recursesubdirs
 Source: "COPYING.txt"; DestDir: "{app}";  CopyMode: normal; Flags: recursesubdirs
