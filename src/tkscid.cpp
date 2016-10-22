@@ -9291,7 +9291,7 @@ sc_game_tags_get (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         if (db->numGames > 0) {
             gameNumberT prevgame;
             // db->gameNumber is set to -1 for a new game, and it is (int) when perhaps it should be (uint)
-            if (db->gameNumber == 0 || db->gameNumber > int(db->numGames)) {
+            if (db->gameNumber == 0 || db->gameNumber == -1 || db->gameNumber > int(db->numGames)) {
               prevgame = db->numGames - 1;
             } else {
               prevgame = db->gameNumber - 1;
