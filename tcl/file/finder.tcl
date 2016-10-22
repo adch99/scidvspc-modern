@@ -1,10 +1,10 @@
-
-####################
-# File finder window
+###
+### finder.tcl
+###
 
 set ::file::finder::data(stop) 0
 
-### Open/Close the finder
+### Open/Close the file finder
 
 proc ::file::finder::Open {} {
   set w .finder
@@ -78,6 +78,8 @@ proc ::file::finder::Open {} {
   $w.t.text tag configure center -justify center
   set xwidth [font measure [$w.t.text cget -font] "x"]
   set tablist {}
+  # tablist is used in spacing *both* the dirlist (at top) and the file details columns
+  # ... but this should be changed so we have more room in the filelist 'name' column S.A
   #                      name   size   type   date   path
   foreach {tab justify} {       29 r   31 l   50 r   55 l} {
     set tabwidth [expr {$xwidth * $tab} ]
@@ -89,12 +91,12 @@ proc ::file::finder::Open {} {
   checkbutton $w.b.sub -text [tr FinderFileSubdirs] \
       -variable ::file::finder::data(recurse) -onvalue 1 -offvalue 0 \
       -command ::file::finder::Refresh
-  # the stop button seems broke S.A.
-  dialogbutton $w.b.stop -textvar ::tr(Stop) -command {set finder(stop) 1 }
+  dialogbutton $w.b.stop -textvar ::tr(Stop) -command {set ::file::finder::data(stop) 1 }
   dialogbutton $w.b.help -textvar ::tr(Help) -command {helpWindow Finder}
   dialogbutton $w.b.close -textvar ::tr(Close) -command "destroy $w"
   bind $w <Escape>        "$w.b.close invoke"
   bind $w <Control-slash> "$w.b.close invoke"
+  bindWheeltoFont $w
 
   # Bind left button to close ctxt menu:
   bind $w <ButtonPress-1> {
@@ -234,7 +236,7 @@ proc ::file::finder::Refresh {{newdir ""}} {
   foreach i $flist {
     set size [lindex $i 0]
     set type [lindex $i 1]
-    set fname [string range [lindex $i 2] 0 15] ; # limit to 16 chars S.A.
+    set fname [string range [lindex $i 2] 0 23] 
     set path [lindex $i 3]
     # If case path has spaces, they break tag bindings, so use this tag
     set pathtag [string map {{ } _} $path]
@@ -247,7 +249,7 @@ proc ::file::finder::Refresh {{newdir ""}} {
     if {$est} { set esize "~" }
     append esize [::utils::thousands $size]
     $t insert end "$esize\t" f$pathtag
-    $t insert end $type [list $type f$pathtag]
+    $t insert end "$type" [list $type f$pathtag]
     $t insert end "\t[clock format $mtime -format {%d-%m-%Y}]" f$pathtag
     $t insert end "\t" f$pathtag
     set dir [file dirname $path]
@@ -564,7 +566,7 @@ proc ::file::finder::GetFiles {dir {len -1}} {
         lappend flist [list $size $type [file tail $rootname] $path $mtime $est]
       }
     }
-    update
+    update idletasks
     if {$data(stop)} { break }
   }
   if {$data(recurse)} {
@@ -617,4 +619,6 @@ proc ::file::finder::OpenDIR {} {
   wm resizable $w 0 0
   catch {grab $w}
 }
+
+### end of finder.tcl
 
