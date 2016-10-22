@@ -75,19 +75,6 @@ Index: Makefile.conf.darwin
  
  ### Mac OSX App
  
-Index: Scid vs PC.iss
-===================================================================
---- Scid vs PC.iss	(revision 2618)
-+++ Scid vs PC.iss	(working copy)
-@@ -11,7 +11,7 @@
- AppVersion={# AppVersion}
- AppPublisher=Steven Atkinson
- AppPublisherURL=http://scidvspc.sourceforge.net
--AppCopyright=Steven Atkinson (C) 2009 - 2015  Steven Atkinson (and others)
-+AppCopyright=Steven Atkinson (C) 2009 - 2016  Steven Atkinson (and others)
- DefaultDirName={sd}\{# AppName}-{# AppVersion}
- UsePreviousAppDir=no
- DefaultGroupName={# AppName}
 Index: src/game.cpp
 ===================================================================
 --- src/game.cpp	(revision 2618)
