@@ -11,7 +11,7 @@ proc ::plist::defaults {} {
   set ::plist::name ""
   set ::plist::minGames 1
   set ::plist::maxGames 9999
-  set ::plist::minElo 1500
+  set ::plist::minElo 0
   set ::plist::maxElo 3000
   set ::plist::size 1000
 }
