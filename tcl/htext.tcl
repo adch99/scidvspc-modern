@@ -587,7 +587,7 @@ proc openURL {url} {
   if {$windowsOS} {
     # On Windows, use the "start" command:
     if {[string match $::tcl_platform(os) "Windows NT"]} {
-      catch {exec $::env(COMSPEC) /c start \"$url\" &}
+      catch {exec $::env(COMSPEC) /c start "$url" &}
     } else {
       catch {exec start $url &}
     }

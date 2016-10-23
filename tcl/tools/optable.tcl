@@ -13,7 +13,7 @@ set ::optable::_flip 0
 
 set ::optable::_docStart(html) {<html>
   <head>
-  <title>[OprepTitle]</title>
+  <title>Opening Report</title>
   <style type="text/css">
   <!--
   h1 { color:#990000 }
