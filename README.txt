@@ -222,21 +222,21 @@
   4.0.3.  Mac OS X
 
   The ``ScidvsMac-4.17 app'' should include everything you need. Simply
-  drag and drop the App into /Applications (or similar).
+  drag and drop the App into /Applications (or similar). Due to
+  complicated build reasons, it seems only Yosemite (OS X 10.10) and
+  later are now supported.
+
+  OS X has a relatively poor implementation of Tcl/Tk, and we use a 32
+  bit carbon build of Tcl 8.5 - which is the least buggy version. Cocoa
+  Wish 8.6 has made progress, and is now a useable alternative for those
+  able to compile from source and seeking a little more speed, but it is
+  still not recommended due to numerous rendering anomalies.  To compile
+  from source - once you have XCode installed - please read ScidvsMac-
+  HowTo.rtfd in the source tarball.
 
   Users upgrading may have to remove (or edit)
   $HOME/.scidvspc/config/engines.dat to properly configure the chess
   engines.
-
-  OS X has a poor implementation of Tcl, and docked mode has minor bugs
-  (some windows work better after being moved around, keyboard shortcuts
-  are very hit and miss).
-
-  To compile from source - once you have XCode installed - please read
-  ScidvsMac-HowTo.rtfd in the source tarball.
-
-  OS X's Cocoa port of Wish is broken, with little chance of repair.
-  Scid vs PC ships with a custom 32bit Carbon build of Wish.
 
   5.  news
 
