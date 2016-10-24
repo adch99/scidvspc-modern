@@ -93,22 +93,17 @@ or as a tarball <url url="https://sourceforge.net/p/scidvspc/code/HEAD/tarball" 
 
 <sect2> Linux , Unix<p>
   <p>
-  Scid vs. PC requires Wish (Tcl/Tk) 8.5 or later (<bf>though 8.5.10 has nasty bugs and should be avoided</bf>), and a C++ compiler .
+  Scid vs. PC requires Wish (Tcl/Tk) 8.5 or later (though 8.5.10 has nasty bugs and should be avoided), and a C++ compiler .
   <newline>
   Example packages required include "tcl, tk, tcl-devel, tk-devel" and
   "gcc-c++ , libstdc++"; but of course will vary with your distribution.
   </p>
 
-  <p>
-  Extra chess pieces (such as Berlin) are now enabled by default for Wish 8.6, but 8.5 requires installing TkImg. Sound support requires Snack.
-<newline>
-  If your distro does not provide these packages ("tkimg", "tcl-snack"), you can install from source using these links (both of which have fixes applied).
-<newline>
-<url name="TkImg" url="https://sourceforge.net/project/downloading.php?group_id=263836&amp;filename=tkimg1.3.scidvspc.tar.bz2">, 
-<url name="Snack" url="http://sourceforge.net/projects/scidvspc/files/support%20files/snack2.2.10.scidvspc.tgz/download">.
-</p>
+<p><em>The default installation directory is <bf>/usr/local</bf>, which is generally empty, but any
+version of Scid here will be overwritten. To install into <bf>/usr</bf> (for eg)
+use <bf>./configure BINDIR=/usr/bin/ SHAREDIR=/usr/share/scid/</bf></em></p>
 
-  <p>Then, installing from source:</p>
+  <p>Installing from source:</p>
 
 <code>
 tar -xzf scid_vs_pc-4.17.tgz
@@ -118,10 +113,16 @@ sudo make install
 scid
 </code>
 
-<p><em>It is also possible to install Scid vs. PC into <bf>/usr</bf>, instead of the normal <bf>/usr/local</bf>.
-This allows for parallel installation with mainline Scid, and is done by: <bf>./configure BINDIR=/usr/bin/ SHAREDIR=/usr/share/scid/</bf></em></p>
-
 <p>Debian / Mint / Ubuntu users may be interested in this <url name="link" url="http://www.linuxx.eu/2012/11/scid-vs-pc-installation-guide-ubuntu.html">.</p>
+
+  <p>
+  Extra chess pieces (such as Berlin) are now enabled by default for Wish 8.6, but 8.5 requires installing TkImg. Sound support requires Snack.
+<newline>
+  If your distro does not provide these packages ("tkimg", "tcl-snack"), you can install from source using these links (both of which have fixes applied).
+<newline>
+<url name="TkImg" url="https://sourceforge.net/project/downloading.php?group_id=263836&amp;filename=tkimg1.3.scidvspc.tar.bz2">, 
+<url name="Snack" url="http://sourceforge.net/projects/scidvspc/files/support%20files/snack2.2.10.scidvspc.tgz/download">.
+</p>
 
 <sect2> Windows <p>
 Windows installation simply requires downloading the <ref name="executable" id="download_">, and following the prompts.

@@ -173,18 +173,12 @@
   Example packages required include "tcl, tk, tcl-devel, tk-devel" and
   "gcc-c++ , libstdc++"; but of course will vary with your distribution.
 
-  Extra chess pieces (such as Berlin) are now enabled by default for
-  Wish 8.6, but 8.5 requires installing TkImg. Sound support requires
-  Snack.
-  If your distro does not provide these packages ("tkimg", "tcl-snack"),
-  you can install from source using these links (both of which have
-  fixes applied).
-  TkImg
-  <https://sourceforge.net/project/downloading.php?group_id=263836&filename=tkimg1.3.scidvspc.tar.bz2>,
-  Snack
-  <http://sourceforge.net/projects/scidvspc/files/support%20files/snack2.2.10.scidvspc.tgz/download>.
+  The default installation directory is /usr/local, which is generally
+  empty, but any version of Scid here will be overwritten. To install
+  into /usr (for eg) use ./configure BINDIR=/usr/bin/
+  SHAREDIR=/usr/share/scid/
 
-  Then, installing from source:
+  Installing from source:
 
   ______________________________________________________________________
   tar -xzf scid_vs_pc-4.17.tgz
@@ -195,14 +189,20 @@
   ______________________________________________________________________
 
 
-  It is also possible to install Scid vs. PC into /usr, instead of the
-  normal /usr/local.  This allows for parallel installation with
-  mainline Scid, and is done by: ./configure BINDIR=/usr/bin/
-  SHAREDIR=/usr/share/scid/
-
   Debian / Mint / Ubuntu users may be interested in this link
   <http://www.linuxx.eu/2012/11/scid-vs-pc-installation-guide-
   ubuntu.html>.
+
+  Extra chess pieces (such as Berlin) are now enabled by default for
+  Wish 8.6, but 8.5 requires installing TkImg. Sound support requires
+  Snack.
+  If your distro does not provide these packages ("tkimg", "tcl-snack"),
+  you can install from source using these links (both of which have
+  fixes applied).
+  TkImg
+  <https://sourceforge.net/project/downloading.php?group_id=263836&filename=tkimg1.3.scidvspc.tar.bz2>,
+  Snack
+  <http://sourceforge.net/projects/scidvspc/files/support%20files/snack2.2.10.scidvspc.tgz/download>.
 
   4.0.2.  Windows
 

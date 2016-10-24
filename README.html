@@ -147,14 +147,13 @@ or as a tarball
 <H3>Linux , Unix</H3>
 
 
-<P>Scid vs. PC requires Wish (Tcl/Tk) 8.5 or later (<B>though 8.5.10 has nasty bugs and should be avoided</B>), and a C++ compiler .<BR>
+<P>Scid vs. PC requires Wish (Tcl/Tk) 8.5 or later (though 8.5.10 has nasty bugs and should be avoided), and a C++ compiler .<BR>
 Example packages required include "tcl, tk, tcl-devel, tk-devel" and
 "gcc-c++ , libstdc++"; but of course will vary with your distribution.</P>
-<P>Extra chess pieces (such as Berlin) are now enabled by default for Wish 8.6, but 8.5 requires installing TkImg. Sound support requires Snack.<BR>
-If your distro does not provide these packages ("tkimg", "tcl-snack"), you can install from source using these links (both of which have fixes applied).<BR>
-<A HREF="https://sourceforge.net/project/downloading.php?group_id=263836&amp;filename=tkimg1.3.scidvspc.tar.bz2">TkImg</A>, 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/support%20files/snack2.2.10.scidvspc.tgz/download">Snack</A>.</P>
-<P>Then, installing from source:</P>
+<P><EM>The default installation directory is <B>/usr/local</B>, which is generally empty, but any
+version of Scid here will be overwritten. To install into <B>/usr</B> (for eg)
+use <B>./configure BINDIR=/usr/bin/ SHAREDIR=/usr/share/scid/</B></EM></P>
+<P>Installing from source:</P>
 <HR>
 <PRE>
 tar -xzf scid_vs_pc-4.17.tgz
@@ -166,10 +165,12 @@ scid
 <HR>
 </P>
 
-<P><EM>It is also possible to install Scid vs. PC into <B>/usr</B>, instead of the normal <B>/usr/local</B>.
-This allows for parallel installation with mainline Scid, and is done by: <B>./configure BINDIR=/usr/bin/ SHAREDIR=/usr/share/scid/</B></EM></P>
 <P>Debian / Mint / Ubuntu users may be interested in this 
 <A HREF="http://www.linuxx.eu/2012/11/scid-vs-pc-installation-guide-ubuntu.html">link</A>.</P>
+<P>Extra chess pieces (such as Berlin) are now enabled by default for Wish 8.6, but 8.5 requires installing TkImg. Sound support requires Snack.<BR>
+If your distro does not provide these packages ("tkimg", "tcl-snack"), you can install from source using these links (both of which have fixes applied).<BR>
+<A HREF="https://sourceforge.net/project/downloading.php?group_id=263836&amp;filename=tkimg1.3.scidvspc.tar.bz2">TkImg</A>, 
+<A HREF="http://sourceforge.net/projects/scidvspc/files/support%20files/snack2.2.10.scidvspc.tgz/download">Snack</A>.</P>
 <H3>Windows </H3>
 
 <P>Windows installation simply requires downloading the 
