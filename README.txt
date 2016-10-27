@@ -222,9 +222,14 @@
   4.0.3.  Mac OS X
 
   The ``ScidvsMac-4.17 app'' should include everything you need. Simply
-  drag and drop the App into /Applications (or similar). Due to
-  complicated build reasons, it seems only Yosemite (OS X 10.10) and
-  later are now supported.
+  drag and drop the App into /Applications (or similar).
+
+  Due to complicated build reasons, it seems only Yosemite (OS X 10.10)
+  and later are now supported.
+
+  Users upgrading may have to remove (or edit)
+  $HOME/.scidvspc/config/engines.dat to properly configure the chess
+  engines.
 
   OS X has a relatively poor implementation of Tcl/Tk, and we use a 32
   bit carbon build of Tcl 8.5 - which is the least buggy version. Cocoa
@@ -233,10 +238,6 @@
   still not recommended due to numerous rendering anomalies.  To compile
   from source - once you have XCode installed - please read ScidvsMac-
   HowTo.rtfd in the source tarball.
-
-  Users upgrading may have to remove (or edit)
-  $HOME/.scidvspc/config/engines.dat to properly configure the chess
-  engines.
 
   5.  news
 
@@ -2334,19 +2335,8 @@
 
   o  Xboard engine protocol  <http://www.open-
      aurec.com/wbforum/WinBoard/engine-intf.html>
-     Popular chess portals
-
-  o  <http://www.chessbase.com>
-
-  o  <http://www.theweekinchess.com/>
-
-  o  <http://www.chesschat.org>
 
   o  Inno setup  <http://www.jrsoftware.org/isinfo.php> (used to make
      windows installer)
-
-  o  Professional quality chess icons  <http://www.virtualpieces.net>
-
-  o  Tango icons  <http://tango.freedesktop.org/Tango_Desktop_Project>
 
 
