@@ -10394,10 +10394,14 @@ sc_move_addUCI (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
       } else if (ptr[4] == 0) {
         s[4] = 0;
         ptr += 4;
-      } else {
+      } else if (ptr[5] == ' ') {
         s[4] = ptr[4];
         s[5] = 0;
         ptr += 6;
+      } else { //ptr[5] == 0
+        s[4] = ptr[4];
+        s[5] = 0;
+        ptr += 5;
       }
       simpleMoveT sm;
       Position * pos = db->game->GetCurrentPos();
