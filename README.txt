@@ -241,6 +241,12 @@
 
   5.  news
 
+   October 2016
+
+  4.17 has a bit of a tough life, and is being re-released with a bug
+  fix 28th October.  Otherwise, it is an exciting release for hackers,
+  with patches for chess960 and Gregors speedy tkText rewrite.
+
    April 2015
 
   Exciting to have some usability fixes for the Tree Mask. Hopefully
