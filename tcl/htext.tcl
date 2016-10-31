@@ -502,6 +502,7 @@ proc ::htext::display {w helptext {section {}} {fixed 1}} {
 	while {[winfo exists $winName]} { append winName a }
 	label $winName -image $imgName -relief flat -borderwidth 0
 	$w window create end -window $winName
+	bindMouseWheel $winName $w
       }
 
       if {[strIsPrefix {button } $tagName]} {
@@ -514,11 +515,13 @@ proc ::htext::display {w helptext {section {}} {fixed 1}} {
 	  $winName configure -width $imgSize -height $imgSize
 	}
 	$w window create end -window $winName
+	bindMouseWheel $winName $w
       }
 
       if {[strIsPrefix {window } $tagName]} {
 	set winName [string range $tagName 7 end]
 	$w window create end -window $winName
+	bindMouseWheel $winName $w
       }
     }
 
