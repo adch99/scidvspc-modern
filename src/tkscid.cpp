@@ -11,18 +11,23 @@
 //
 //////////////////////////////////////////////////////////////////////
 
+#ifdef _WIN32
+#define NOMINMAX
+#endif
 
 #include "tkscid.h"
-#include <fcntl.h>
 
+#include <fcntl.h>
 #include <errno.h>
 #include <stdlib.h>
+
+#include <algorithm>
 #include <utility>
 #include <vector>
 #include <set>
 #include <unordered_set>
 
-# include "charsetconverter.h"
+#include "charsetconverter.h"
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Global variables:
@@ -3214,6 +3219,9 @@ namespace std {
 # define emplace(expr, ...) insert(Tourney(expr, ##__VA_ARGS__))
 #endif
 
+//inline static uint max(uint a, uint b) { return a > b ? a : b; }
+//inline static uint min(uint a, uint b) { return a < b ? a : b; }
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // sc_base_tournaments:
 //    Returns information on tournaments in the current database.
@@ -3568,9 +3576,6 @@ sc_base_upgrade (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     return TCL_OK;
 }
-
-inline static uint max(uint a, uint b) { return a > b ? a : b; }
-inline static uint min(uint a, uint b) { return a < b ? a : b; }
 
 inline static idNumberT
 safeNameId(idNumberT id, idNumberT numEntries) { return id < numEntries ? id : 0; }
@@ -7948,7 +7953,7 @@ sc_game_merge (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             }
         }
     }
-    delete mergeBoards;
+    delete[] mergeBoards;
 
     if (matchPly == 0) {
         return errorResult (ti, "No matching position found.");

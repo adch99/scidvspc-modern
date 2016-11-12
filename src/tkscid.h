@@ -39,14 +39,11 @@
 
 // Include header files for finding directory of executable program
 // in Windows if necessary.
-// Note: I have no idea what the WIN32_LEAN_AND_MEAN definition when
-// including windows.h does, but lots of other source code I have seen
-// does it -- although "lean Windows" sure is an oxymoron!
-#ifdef WIN32
-#  define WIN32_LEAN_AND_MEAN 1
+#ifdef _WIN32
+#  ifndef WIN32_LEAN_AND_MEAN
+#  define WIN32_LEAN_AND_MEAN
+#  endif
 #  include <windows.h>
-#  undef WIN32_LEAN_AND_MEAN
-#  include <winbase.h>
 #else
 #  include <sys/resource.h>   // For getpriority() and setpriority().
 #endif

@@ -31,6 +31,7 @@
 
 // Include header file for memcpy():
 #ifdef WIN32
+#  include <malloc.h>
 #  include <memory.h>
 #else
 #  include <string.h>
@@ -2989,13 +2990,19 @@ Game::WritePGNGraphToLatex(TextBuffer * tb)
 {
 	char temp [255];
 
-  	MoveToPly(0);
+	MoveToPly(0);
 	PgnLastMovePos = PgnNextMovePos = 1;
 	moveT * m = CurrentMove;
 
-	double scores[NumHalfMoves];
-	char events[NumHalfMoves];
-	for (int i = 0; i < NumHalfMoves; i++) {
+	const int _arrcnt = (NumHalfMoves < 1) ? 1 : NumHalfMoves;
+#ifdef _MSC_VER /* VS2015 can do val arrays?? can't remember.. */
+	double * scores = (double *) _alloca(_arrcnt * sizeof(double));
+	char * events = (char *) _alloca(_arrcnt * sizeof(char));
+#else
+	double scores[_arrcnt];
+	char events[_arrcnt];
+#endif
+	for (int i = 0; i < _arrcnt; i++) {
 		scores[i] = 0;
 		events[i] = ' ';
 	}

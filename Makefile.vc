@@ -136,9 +136,7 @@ SCID_INCLUDES	= $(TCL_INCLUDES) $(TK_INCLUDES)
 TK_LIB		= "$(TCL_DIR)\lib\tk$(TCL_VERSION).lib" $(TCL_LIB)
 
 ##	Needed to link clipboard, drag and drop deps (others?)
-
-DND_LIBS_DIR	= "%WindowsSdkDir%\Lib\win8\um\%PROCESSOR_ARCHITECTURE%"
-DND_LIBS	= $(DND_LIBS_DIR)\user32.lib $(DND_LIBS_DIR)\shell32.lib $(DND_LIBS_DIR)\ole32.lib 
+DND_LIBS	= user32.lib shell32.lib ole32.lib
 
 ##	SCID_FLAGS: Scid customization flags.
 #	Use -DZLIB if your system does not have zlib and you need
@@ -244,6 +242,34 @@ SCID_OBJS= \
       $(TMP_DIR)\stored.obj \
       $(TMP_DIR)\movelist.obj 
 
+CHARSETCONVOBJS= $(TMP_DIR)\charsetdetector.obj \
+      $(TMP_DIR)\charsetconverter.obj \
+      $(TMP_DIR)\universalchardet\CharDistribution.obj \
+      $(TMP_DIR)\universalchardet\JpCntx.obj \
+      $(TMP_DIR)\universalchardet\LangBulgarianModel.obj \
+      $(TMP_DIR)\universalchardet\LangCyrillicModel.obj \
+      $(TMP_DIR)\universalchardet\LangGreekModel.obj \
+      $(TMP_DIR)\universalchardet\LangHebrewModel.obj \
+      $(TMP_DIR)\universalchardet\LangHungarianModel.obj \
+      $(TMP_DIR)\universalchardet\LangThaiModel.obj \
+      $(TMP_DIR)\universalchardet\nsBig5Prober.obj \
+      $(TMP_DIR)\universalchardet\nsCharSetProber.obj \
+      $(TMP_DIR)\universalchardet\nsEscCharsetProber.obj \
+      $(TMP_DIR)\universalchardet\nsEscSM.obj \
+      $(TMP_DIR)\universalchardet\nsEUCJPProber.obj \
+      $(TMP_DIR)\universalchardet\nsEUCKRProber.obj \
+      $(TMP_DIR)\universalchardet\nsEUCTWProber.obj \
+      $(TMP_DIR)\universalchardet\nsGB2312Prober.obj \
+      $(TMP_DIR)\universalchardet\nsHebrewProber.obj \
+      $(TMP_DIR)\universalchardet\nsLatin1Prober.obj \
+      $(TMP_DIR)\universalchardet\nsMBCSGroupProber.obj \
+      $(TMP_DIR)\universalchardet\nsMBCSSM.obj \
+      $(TMP_DIR)\universalchardet\nsSBCharSetProber.obj \
+      $(TMP_DIR)\universalchardet\nsSBCSGroupProber.obj \
+      $(TMP_DIR)\universalchardet\nsSJISProber.obj \
+      $(TMP_DIR)\universalchardet\nsUniversalDetector.obj \
+      $(TMP_DIR)\universalchardet\nsUTF8Prober.obj
+
 ##	SCID_XOBJS: all the extra .obj files that make up Scid.
 
 SCID_XOBJS = \
@@ -321,6 +347,7 @@ SCID_TCLS= \
 #	-QI0f	:Enable Pentium 0x0f Fix
 
 OPTIMIZE	= /O2
+EHFLAGS = /EHsc
 
 ##	WARNINGS: I always compile with all warnings on (-Wall)
 #	Note: (-W2) is the default for MS compiler.
@@ -339,7 +366,7 @@ PROFILE		= $(PROFILE) -DWIN32 -DWIN32_LEAN_AND_MEAN
 ##	CFLAGS: C++ compiler flags
 #	-c	:Compile Without linking
 
-CFLAGS		= $(PROFILE) $(OPTIMIZE) $(WARNINGS) $(SCID_FLAGS) \
+CFLAGS		= $(PROFILE) $(OPTIMIZE) $(EHFLAGS) $(WARNINGS) $(SCID_FLAGS) \
 			$(SCID_INCLUDES) -c -nologo \
 			-I"$(VS_DIR)\VC\include" \
 			-I"$(VS_SDK_DIR)\include"
@@ -366,52 +393,54 @@ setup:
 	@if not exist $(TMP_DIR)\pol\nul @echo Makefile.vc: Creating directory '$(TMP_DIR)\pol'...
 	@if not exist $(TMP_DIR)\pol\nul mkdir $(TMP_DIR)\pol
 	@if not exist $(TMP_DIR)\tkdnd mkdir $(TMP_DIR)\tkdnd
+	@if not exist $(TMP_DIR)\universalchardet mkdir $(TMP_DIR)\universalchardet
 
 scid.gui: setup $(SCID_TCLS)
 	@type $(SCID_TCLS) > $(OUT_DIR)\scid.gui
 
-scmerge.exe: $(TMP_DIR)\scmerge.obj $(SCID_OBJS)
+scmerge.exe: $(TMP_DIR)\scmerge.obj $(SCID_OBJS) $(CHARSETCONVOBJS)
 	@echo *** scmerge.exe
-	$(LD) $(LDFLAGS) $(TMP_DIR)\scmerge.obj $(SCID_OBJS) $(TCL_LIB) \
+	$(LD) $(LDFLAGS) $(TMP_DIR)\scmerge.obj $(SCID_OBJS) $(CHARSETCONVOBJS) $(TCL_LIB) \
 		/out:$(OUT_DIR)\scmerge.exe
 
-pgnscid.exe: $(TMP_DIR)\pgnscid.obj $(SCID_OBJS)
+pgnscid.exe: $(TMP_DIR)\pgnscid.obj $(SCID_OBJS) $(CHARSETCONVOBJS)
 	@echo *** pgnscid.exe
-	$(LD) $(LDFLAGS) $(TMP_DIR)\pgnscid.obj $(SCID_OBJS) $(TCL_LIB) \
+	$(LD) $(LDFLAGS) $(TMP_DIR)\pgnscid.obj $(SCID_OBJS) $(CHARSETCONVOBJS) $(TCL_LIB) \
 		/out:$(OUT_DIR)\pgnscid.exe
 
-scidt.exe: $(TMP_DIR)\scidt.obj $(SCID_OBJS)
+scidt.exe: $(TMP_DIR)\scidt.obj $(SCID_OBJS) $(CHARSETCONVOBJS)
 	@echo *** scidt.exe
-	$(LD) $(LDFLAGS) $(TMP_DIR)\scidt.obj $(SCID_OBJS) $(TCL_LIB) \
+	$(LD) $(LDFLAGS) $(TMP_DIR)\scidt.obj $(SCID_OBJS) $(CHARSETCONVOBJS) $(TCL_LIB) \
 		/out:$(OUT_DIR)\scidt.exe
 
-scidlet.exe: $(TMP_DIR)\scidlet.obj $(SCID_XOBJS)
+scidlet.exe: $(TMP_DIR)\scidlet.obj $(SCID_OBJS)
 	@echo *** scidlet.exe
-	$(LD) $(LDFLAGS) $(TMP_DIR)\scidlet.obj $(SCID_XOBJS) $(TCL_LIB) \
-		/out:$(OUT_DIR)\scidlet.exe
+	$(LD) $(LDFLAGS) $(TMP_DIR)\scidlet.obj $(TMP_DIR)\engine.obj $(TMP_DIR)\recog.obj $(TMP_DIR)\misc.obj \
+		$(TMP_DIR)\position.obj $(TMP_DIR)\movelist.obj $(TMP_DIR)\dstring.obj $(TMP_DIR)\myassert.obj \
+		$(TCL_LIB) /out:$(OUT_DIR)\scidlet.exe
 
-scid.exe: setup $(TMP_DIR)\scid.obj $(SCID_XOBJS) $(SCID_TK_OBJS)
+scid.exe: setup $(TMP_DIR)\scid.obj $(SCID_XOBJS) $(CHARSETCONVOBJS) $(SCID_TK_OBJS)
 	@echo *** scid.exe
-	$(LD) $(LDFLAGS) $(TMP_DIR)\scid.obj $(SCID_XOBJS) $(SCID_TK_OBJS) $(TK_LIB) $(DND_LIBS) \
+	$(LD) $(LDFLAGS) $(TMP_DIR)\scid.obj $(SCID_XOBJS) $(CHARSETCONVOBJS) $(SCID_TK_OBJS) $(TK_LIB) $(DND_LIBS) \
 		/out:$(OUT_DIR)\scid.exe \
 		/subsystem:windows /entry:mainCRTStartup
 
-tcscid.exe: $(TMP_DIR)\tcscid.obj $(SCID_XOBJS)
+tcscid.exe: $(TMP_DIR)\tcscid.obj $(SCID_XOBJS) $(CHARSETCONVOBJS)
 	@echo *** tcscid.exe
-	$(LD) $(LDFLAGS) $(TMP_DIR)\tcscid.obj $(SCID_XOBJS) $(TCL_LIB) \
+	$(LD) $(LDFLAGS) $(TMP_DIR)\tcscid.obj $(SCID_XOBJS) $(CHARSETCONVOBJS) $(TCL_LIB) \
 		/out:$(OUT_DIR)\tcscid.exe
 
 ## Currently unused ?
 
-tkscid.exe: $(TMP_DIR)\tkscid.obj $(SCID_XOBJS) $(SCID_TK_OBJS) 
+tkscid.exe: $(TMP_DIR)\tkscid.obj $(SCID_XOBJS) $(CHARSETCONVOBJS) $(SCID_TK_OBJS) 
 	@echo *** tkscid.exe
-	$(LD) $(LDFLAGS) $(TMP_DIR)\tkscid.obj $(SCID_XOBJS) $(SCID_TK_OBJS) $(TK_LIB) $(DND_LIBS) \
+	$(LD) $(LDFLAGS) $(TMP_DIR)\tkscid.obj $(SCID_XOBJS) $(CHARSETCONVOBJS) $(SCID_TK_OBJS) $(TK_LIB) $(DND_LIBS) \
 		/out:$(OUT_DIR)\tkscid.exe
 
-eco2epd.exe: $(TMP_DIR)\eco2epd.obj $(TMP_DIR)\pbook.obj $(SCID_OBJS)
+eco2epd.exe: $(TMP_DIR)\eco2epd.obj $(TMP_DIR)\pbook.obj $(SCID_OBJS) $(CHARSETCONVOBJS)
 	@echo *** eco2epd.exe
 	$(LD) $(LDFLAGS) $(TMP_DIR)\eco2epd.obj $(TMP_DIR)\pbook.obj \
-		$(SCID_OBJS) /out:$(OUT_DIR)\eco2epd.exe
+		$(SCID_OBJS) $(CHARSETCONVOBJS) /out:$(OUT_DIR)\eco2epd.exe
 
 #--------------------------------------------------------------------
 # Special case object file targets
@@ -439,6 +468,9 @@ $(TMP_DIR)\probe.obj: src\probe.cpp src\egtb\tbindex.cpp src\egtb\tbdecode.c
 
 {src\tkdnd\win}.cpp{$(TMP_DIR)\tkdnd}.obj:
 	$(CC) $(CFLAGS) -Fo$(TMP_DIR)\tkdnd\ $<
+
+{src\universalchardet}.cpp{$(TMP_DIR)\universalchardet}.obj:
+	$(CC) $(CFLAGS) -Fo$(TMP_DIR)\universalchardet\ $<
 
 {src\polyglot}.cpp{$(TMP_DIR)\pol}.obj:
 	$(CC) $(CFLAGS) -Fo$(TMP_DIR)\pol\ $<

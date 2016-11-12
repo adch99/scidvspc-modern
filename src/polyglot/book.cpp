@@ -17,8 +17,10 @@
 #include "san.h"
 #include "util.h"
 #include "list.h"
-#ifndef _MSC_VER
+#ifndef _WIN32
 #include <unistd.h>
+#else
+#include <io.h>
 #endif
 
 // types
@@ -269,14 +271,12 @@ int scid_book_movesupdate(char * moves, char * probs, const int BookNumber, char
 
 // =================================================================
 int scid_book_close(const int BookNumber) {
-	if (BookFile[BookNumber] != NULL) {
+  if (BookFile[BookNumber] != NULL) {
     if (fclose(BookFile[BookNumber]) == EOF) {
       return -1;
-   	}
-
-
-	}
-	return 0;
+    }
+  }
+  return 0;
 }
 // =================================================================
 int scid_book_open(const char file_name[], const int BookNumber) {
@@ -293,7 +293,6 @@ int scid_book_open(const char file_name[], const int BookNumber) {
       if (BookFile[BookNumber] == NULL) return -1;
    }
    //--------------------------------------------------
-
 
    if (fseek(BookFile[BookNumber],0,SEEK_END) == -1) {
       return -1;

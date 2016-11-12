@@ -41,7 +41,7 @@ invokeTkSelection(Tcl_Interp *ti, int objc, Tcl_Obj* const objv[])
 	return Tcl_EvalObjv(ti, objc, objs, 0);
 }
 
-# if defined(WIN32)
+# if defined(_WIN32)
 
 #  include <windows.h>
 #  include <shellapi.h>/* (needed for HDROP) */

@@ -21,14 +21,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#ifndef WIN32
+#ifndef _WIN32
 #  include <unistd.h>
 #endif
 
-#ifdef WIN32
-#  define WIN32_LEAN_AND_MEAN 1
+#ifdef _WIN32
+#  ifndef WIN32_LEAN_AND_MEAN
+#  define WIN32_LEAN_AND_MEAN
+#  endif
 #  include <windows.h>
-#  undef WIN32_LEAN_AND_MEAN
 #endif
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -45,7 +46,7 @@ inputReady (void)
 {
     if (unfinishedCommand[0] != 0) { return true; }
 
-#ifdef WIN32
+#ifdef _WIN32
     static int init = 0, pipe;
     static HANDLE inh;
     DWORD dw;
