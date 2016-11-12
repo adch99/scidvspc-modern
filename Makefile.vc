@@ -3,7 +3,7 @@
 #
 #	Quick start: Initialise build environment, and build all
 #
-#		"%ProgramFiles%\Microsoft Visual Studio 11.0\VC\vcvarsall.bat"
+#		"%ProgramFiles%\Microsoft Visual Studio 12.0\VC\vcvarsall.bat"
 #		nmake -f Makefile.vc
 
 #	Note, to clean binaries/gui use
@@ -26,9 +26,6 @@
 #
 #	Release
 #		c:\scid_src>nmake -f Makefile.vc release
-#
-#	Release with English and French only
-#		c:\scid_src>nmake -f Makefile.vc release LANG=francais
 #
 #	Release with Tcl in a non-default directory
 #		c:\scid_src>nmake -f Makefile.vc release TCL_DIR="C:\Temp\Tcl"
@@ -57,24 +54,6 @@
 #
 #		VS_SDK_DIR=<path>
 #			-- Base directory of visual studio SDK. Should contain subdirectory $(VS_DIR)\Windows\v5.0\Include
-#		LANG=<language>
-#			-- This allows you to build the GUI with only english
-#			   and one other language
-#			<language>
-#				portbr		-- Brazilian Portuguese
-#				port		-- Portuguese
-#				czech		-- Czech
-#				deutsch		-- German
-#				english		-- English only
-#				spanish		-- Spanish
-#				francais	-- French
-#				hungary		-- Hungarian
-#				italian		-- Italian
-#				nederlan	-- Dutch
-#				norsk		-- Norwegian
-#				polish		-- Polish
-#				serbian		-- Serbian
-#				swedish		-- Swedish
 
 #--------------------------------------------------------------------
 # Environment Setup
@@ -291,18 +270,12 @@ SCID_TK_OBJS = \
 	$(TMP_DIR)\tkdnd\TkDND_OleDND.obj
 
 
-### LANGUAGES: List of additional Tcl files to include in Scid for
-#       multi-language menu support.
-#       By default, it is all the contributed languages, but you
-#       can reduce the size of the Scid program by only specifying
-#       the languages you want supported.
+## LANGUAGES are now source from scidShareDir/lang
 
-LANGUAGES = tcl\lang\deutsch.tcl tcl\lang\francais.tcl tcl\lang\italian.tcl tcl\lang\nederlan.tcl tcl\lang\spanish.tcl tcl\lang\portbr.tcl tcl\lang\port.tcl tcl\lang\swedish.tcl tcl\lang\norsk.tcl tcl\lang\polish.tcl tcl\lang\czech.tcl tcl\lang\hungary.tcl tcl\lang\serbian.tcl
-	
 ##	SCID_TCLS: Setup the .tcl files for scid
 
 SCID_TCLS= \
- tcl\start.tcl \
+  tcl\start.tcl \
   tcl\config.tcl \
   tcl\bitmaps.tcl \
   tcl\language.tcl \
@@ -332,7 +305,7 @@ SCID_TCLS= \
     tcl\tools\reper.tcl tcl\tools\graphs.tcl tcl\tools\tablebase.tcl tcl\tools\ptracker.tcl \
   tcl\help\help.tcl tcl\help\tips.tcl \
   tcl\menus.tcl tcl\board.tcl tcl\move.tcl tcl\main.tcl tcl\tools\correspondence.tcl \
-    tcl\lang\english.tcl $(LANGUAGES) tcl\dnd\tkdnd.tcl tcl\dnd\tkdnd_windows.tcl \
+    tcl\lang\english.tcl tcl\dnd\tkdnd.tcl tcl\dnd\tkdnd_windows.tcl \
   tcl\tools\fics.tcl tcl\tools\uci.tcl tcl\end.tcl tcl\tools\tacgame.tcl tcl\tools\sergame.tcl tcl\tools\calvar.tcl tcl\tools\tactics.tcl tcl\tools\novag.tcl tcl\misc\flags.tcl tcl\tools\inputengine.tcl
 
 
@@ -347,6 +320,20 @@ SCID_TCLS= \
 #	-QI0f	:Enable Pentium 0x0f Fix
 
 OPTIMIZE	= /O2
+
+##	Exception handling model (/EH). From MSDN:
+#	a: catches both asynchronous (structured) and synchronous
+#	   (C++) exceptions.
+#	s: Catches C++ exceptions only and tells the compiler to
+#	   assume that functions declared as extern "C" may throw
+#	c: If used with s (/EHsc), catches C++ exceptions only and
+#	   tells the compiler to assume that functions declared as
+#	   extern "C" never throw a C++ exception.
+#	/EHca is equivalent to /EHa.
+#
+#	Without /EHsc, compiler outputs this warning:
+#	[...]\xlocale(337) : warning C4530: C++ exception handler used,
+#		  but unwind semantics are not enabled. Specify /EHsc
 EHFLAGS = /EHsc
 
 ##	WARNINGS: I always compile with all warnings on (-Wall)
@@ -360,7 +347,6 @@ WARNINGS	= -W2
 #	-DWIN32_LEAN_AND_MEAN	:Speeds building times by excluding some less
 #				 common APIs, and SEEMS NECESSARY at some stage
 
-# PROFILE		= $(PROFILE) -DWIN32  -D_X86_
 PROFILE		= $(PROFILE) -DWIN32 -DWIN32_LEAN_AND_MEAN
 
 ##	CFLAGS: C++ compiler flags

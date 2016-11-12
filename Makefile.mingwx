@@ -149,11 +149,6 @@ scid.gui: $(TCLS)
 	rm -f ./scid.gui
 	cat $(TCLS) > ./scid.gui
 
-# escid.gui: scid GUI with English only, no extra language support.
-escid.gui: $(TCLS)
-	rm -f ./escid.gui
-	cat $(TCLS_ENGLISH_ONLY) > ./escid.gui
-
 scmerge.exe: src/scmerge.o $(OBJS)
 	$(LINK) -o scmerge.exe src/scmerge.o $(OBJS) $(CHARSETCONVOBJS) -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION)
 
