@@ -269,6 +269,10 @@ SCID_TK_OBJS = \
 	$(TMP_DIR)\tk_selection.obj \
 	$(TMP_DIR)\tkdnd\TkDND_OleDND.obj
 
+## And the resource file
+
+SCID_RES = \
+	$(TMP_DIR)\scid.res
 
 ## LANGUAGES are now source from scidShareDir/lang
 
@@ -405,9 +409,10 @@ scidlet.exe: $(TMP_DIR)\scidlet.obj $(SCID_OBJS)
 		$(TMP_DIR)\position.obj $(TMP_DIR)\movelist.obj $(TMP_DIR)\dstring.obj $(TMP_DIR)\myassert.obj \
 		$(TCL_LIB) /out:$(OUT_DIR)\scidlet.exe
 
-scid.exe: setup $(TMP_DIR)\scid.obj $(SCID_XOBJS) $(CHARSETCONVOBJS) $(SCID_TK_OBJS)
+scid.exe: setup $(TMP_DIR)\scid.obj $(SCID_XOBJS) $(CHARSETCONVOBJS) $(SCID_TK_OBJS) $(SCID_RES)
 	@echo *** scid.exe
-	$(LD) $(LDFLAGS) $(TMP_DIR)\scid.obj $(SCID_XOBJS) $(CHARSETCONVOBJS) $(SCID_TK_OBJS) $(TK_LIB) $(DND_LIBS) \
+	$(LD) $(LDFLAGS) $(TMP_DIR)\scid.obj $(SCID_XOBJS) $(CHARSETCONVOBJS) $(SCID_TK_OBJS) $(SCID_RES) \
+		$(TK_LIB) $(DND_LIBS) \
 		/out:$(OUT_DIR)\scid.exe \
 		/subsystem:windows /entry:mainCRTStartup
 
@@ -469,7 +474,7 @@ $(TMP_DIR)\probe.obj: src\probe.cpp src\egtb\tbindex.cpp src\egtb\tbdecode.c
 
 {src\zlib}.c{$(TMP_DIR)}.obj:
 	$(CC) $(CFLAGS) -Fo$(TMP_DIR)\ $<
-	
+
 .rc{$(TMP_DIR)}.res:
 	$(RC) -r -Fo$(TMP_DIR)\$(@B).res $<
 

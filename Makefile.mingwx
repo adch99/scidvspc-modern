@@ -55,7 +55,20 @@ CFLAGS = -DWIN32 -O2 $(WARNINGS) $(DEBUG)
 
 CXXFLAGS = -fno-rtti $(CFLAGS) $(SCIDFLAGS)
 
-LDFLAGS = 
+LDFLAGS =
+RCFLAGS = --output-format=coff
+
+ifeq ($(WIN_TARGET),win64)
+CFLAGS += -m64
+#CXXFLAGS+= -m64
+LDFLAGS+= -m64
+RCFLAGS+= --target=pe-x86-64
+else
+CFLAGS += -m32
+#CXXFLAGS+= -m32
+LDFLAGS+= -m32
+RCFLAGS+= --target=pe-i386
+endif
 
 ### EXECS: all the evecutable programs compiled from C++ files.
 EXECS= pgnscid.exe scidt.exe scid.exe tcscid.exe scmerge.exe eco2epd.exe scidlet.exe
@@ -164,11 +177,11 @@ scidlet.exe: src/scidlet.o src/engine.o src/recog.o $(OBJS)
 
 scid.exe: src/scid.o $(OBJS) $(CHARSETCONVOBJS) src/tree.o src/filter.o \
             src/pbook.o src/crosstab.o src/spellchk.o src/probe.o \
-            src/optable.o src/engine.o src/recog.o scid.coff src/tkdnd/TkDND_OleDND.o src/tk_selection.o
+            src/optable.o src/engine.o src/recog.o src/tkdnd/TkDND_OleDND.o src/tk_selection.o scid.res
 	$(LINK) $(LDFLAGS) -o scid.exe src/scid.o $(OBJS) $(CHARSETCONVOBJS) \
             src/tree.o src/filter.o src/pbook.o \
             src/crosstab.o src/spellchk.o src/probe.o \
-            src/optable.o src/engine.o src/recog.o scid.coff src/tkdnd/TkDND_OleDND.o src/tk_selection.o \
+            src/optable.o src/engine.o src/recog.o src/tkdnd/TkDND_OleDND.o src/tk_selection.o scid.res \
 	    -mwindows -lole32 -luuid -L$(TCL_DIR)/lib -ltk$(TCL_VERSION) -ltcl$(TCL_VERSION)
 
 tcscid.exe: src/tcscid.o $(OBJS) src/tree.o src/filter.o \
@@ -183,11 +196,11 @@ tcscid.exe: src/tcscid.o $(OBJS) src/tree.o src/filter.o \
 eco2epd.exe: src/eco2epd.o src/pbook.o $(OBJS) $(CHARSETCONVOBJS)
 	$(LINK) -o eco2epd.exe src/eco2epd.o src/pbook.o $(OBJS) $(CHARSETCONVOBJS) -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION)
 
-scid.coff: scid.rc
-	$(RC) -O coff scid.rc scid.coff
+scid.res: scid.rc
+	$(RC) $(RCFLAGS) -o scid.res scid.rc
 
 clean:
-	rm -f src/*.o src/zlib/*.o src/polyglot/*.o src/universalchardet/*.o $(EXECS) scid.gui scid.coff
+	rm -f src/*.o src/zlib/*.o src/polyglot/*.o src/universalchardet/*.o $(EXECS) scid.gui scid.res
 	$(MAKE) -C src/tkdnd/ -f Makefile.mingwx clean
 
 strip:

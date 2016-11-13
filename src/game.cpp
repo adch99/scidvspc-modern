@@ -26,16 +26,12 @@
 #include "textbuf.h"
 #include "stored.h"
 
-// Include header for math
-#include <math.h>
-
-// Include header file for memcpy():
-#ifdef WIN32
-#  include <malloc.h>
-#  include <memory.h>
-#else
-#  include <string.h>
+#ifdef _MSC_VER
+#include <intrin.h> /* for _alloca(), etc.. */
 #endif
+
+#include <math.h>
+#include <string.h>
 
 // Piece letters translation
 // (not all languages have piece translation)
@@ -2988,21 +2984,21 @@ Game::WritePGN (TextBuffer * tb, uint stopLocation)
 errorT
 Game::WritePGNGraphToLatex(TextBuffer * tb)
 {
-	char temp [255];
+	char temp [256];
 
 	MoveToPly(0);
 	PgnLastMovePos = PgnNextMovePos = 1;
 	moveT * m = CurrentMove;
 
-	const int _arrcnt = (NumHalfMoves < 1) ? 1 : NumHalfMoves;
-#ifdef _MSC_VER /* VS2015 can do val arrays?? can't remember.. */
+	const uint _arrcnt = (!NumHalfMoves)? 1 : NumHalfMoves;
+#ifdef _MSC_VER /* no support for C99 VLAs */
 	double * scores = (double *) _alloca(_arrcnt * sizeof(double));
 	char * events = (char *) _alloca(_arrcnt * sizeof(char));
 #else
 	double scores[_arrcnt];
 	char events[_arrcnt];
 #endif
-	for (int i = 0; i < _arrcnt; i++) {
+	for (uint i = 0; i < _arrcnt; i++) {
 		scores[i] = 0;
 		events[i] = ' ';
 	}
