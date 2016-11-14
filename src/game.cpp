@@ -2991,12 +2991,13 @@ Game::WritePGNGraphToLatex(TextBuffer * tb)
 	moveT * m = CurrentMove;
 
 	const uint _arrcnt = (!NumHalfMoves)? 1 : NumHalfMoves;
+	const uint _arrcnt2 = (_arrcnt + 3) & ~3;
 #ifdef _MSC_VER /* no support for C99 VLAs */
 	double * scores = (double *) _alloca(_arrcnt * sizeof(double));
-	char * events = (char *) _alloca(_arrcnt * sizeof(char));
+	char * events = (char *) _alloca(_arrcnt2 * sizeof(char));
 #else
 	double scores[_arrcnt];
-	char events[_arrcnt];
+	char events[_arrcnt2];
 #endif
 	for (uint i = 0; i < _arrcnt; i++) {
 		scores[i] = 0;
