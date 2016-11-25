@@ -836,7 +836,11 @@ proc ::tree::displayLines { baseNumber moves } {
       $w.f.tl insert end [::tree::mask::getNag $maskmove] tagclick$idx
 
       # Move
-      $w.f.tl insert end "[::trans $maskmove] " [ list movefg tagclick$idx ]
+      if {$maskmove == $nextmove} {
+	$w.f.tl insert end "[::trans $maskmove] " [ list movefg tagclick$idx nextmove ]
+      } else {
+	$w.f.tl insert end "[::trans $maskmove] " [ list movefg tagclick$idx ]
+      }
 
       # Comment
       set comment [lindex $m 3]
@@ -1976,9 +1980,13 @@ proc ::tree::mask::addComment { { move "" } {parent .} } {
   set oldComment [ string trim $oldComment ]
   autoscrollframe $w.f text $w.f.e -width 40 -height 5 -wrap word -setgrid 1
   $w.f.e insert end $oldComment
-  dialogbutton $w.ok -text OK -command "::tree::mask::updateComment $move ; destroy $w ; ::tree::refresh"
   pack  $w.f  -side top -expand 1 -fill both -padx 3 -pady 3
-  pack  $w.ok -side bottom
+  pack [frame $w.buttons] -side bottom -pady 2
+  dialogbutton $w.buttons.cancel -textvar ::tr(Cancel) -command "destroy $w"
+  dialogbutton $w.buttons.ok -text OK -command "::tree::mask::updateComment $move ; destroy $w ; ::tree::refresh"
+  bind $w <Escape> "destroy $w"
+  pack  $w.buttons.ok     -side left  -padx 10
+  pack  $w.buttons.cancel -side right -padx 10
   focus $w.f.e
 }
 
