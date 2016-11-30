@@ -921,16 +921,12 @@ Crosstable::PrintAllPlayAll (DString * dstr, uint playerLimit)
                 if (clash != NULL) {
                     if (OutputFormat == CROSSTABLE_Hypertext) {
                       if (CurrentGame == clash->gameNum)
-                        sprintf (stemp, "<green><g_%u>%c</g></green>",
-                                 clash->gameNum,
-                                 RESULT_CHAR[clash->result]);
+                        sprintf (stemp, "<green><g_%u>%c</g></green>", clash->gameNum, RESULT_CHAR[clash->result]);
                       else
-                        sprintf (stemp, "<blue><g_%u>%c</g></blue>",
-                                 clash->gameNum,
-                                 RESULT_CHAR[clash->result]);
-                        dstr->Append (stemp);
+                        sprintf (stemp, "<blue><g_%u>%c</g></blue>", clash->gameNum, RESULT_CHAR[clash->result]);
+                      dstr->Append (stemp);
                     } else {
-                        dstr->AddChar (RESULT_CHAR[clash->result]);
+                      dstr->AddChar (RESULT_CHAR[clash->result]);
                     }
                     clash = clash->next;
                 } else {

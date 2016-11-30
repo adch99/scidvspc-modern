@@ -2990,16 +2990,15 @@ Game::WritePGNGraphToLatex(TextBuffer * tb)
 	PgnLastMovePos = PgnNextMovePos = 1;
 	moveT * m = CurrentMove;
 
-	const uint _arrcnt = (!NumHalfMoves)? 1 : NumHalfMoves;
-	const uint _arrcnt2 = (_arrcnt + 3) & ~3;
+	const uint arrcnt = (!NumHalfMoves)? 1 : NumHalfMoves;
 #ifdef _MSC_VER /* no support for C99 VLAs */
-	double * scores = (double *) _alloca(_arrcnt * sizeof(double));
-	char * events = (char *) _alloca(_arrcnt2 * sizeof(char));
+	double * scores = (double *) _alloca(arrcnt * sizeof(double));
+	char   * events = (char   *) _alloca(arrcnt * sizeof(char));
 #else
-	double scores[_arrcnt];
-	char events[_arrcnt2];
+	double scores[arrcnt];
+	char   events[arrcnt];
 #endif
-	for (uint i = 0; i < _arrcnt; i++) {
+	for (uint i = 0; i < arrcnt; i++) {
 		scores[i] = 0;
 		events[i] = ' ';
 	}
