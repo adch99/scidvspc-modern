@@ -853,6 +853,7 @@ namespace eval fics {
     button $w.cancel -text $tr(Cancel) -command "destroy $w" -width 10
 
     bind $w <F1> {helpWindow FICSfindopp}
+    bind $w <Escape> "$w.cancel invoke"
 
     incr row
     grid $w.seek   -column 0 -row $row -padx 3 -pady 8
@@ -860,7 +861,7 @@ namespace eval fics {
     grid $w.cancel -column 3 -row $row -padx 3 -pady 8 -sticky e
 
     update
-    placeWinOverParent $w .fics
+    placeWinOverPointer $w
     wm state $w normal
   }
 
@@ -1054,8 +1055,6 @@ namespace eval fics {
       catch {destroy .ficsOffers}
       ::fics::checkRaise
 
-      # Setting this, stops automatically accepting rematches. (But algorythm needs fixing a little)
-      set ::fics::findopponent(manual) manual
       after cancel ::fics::updateAds
 
       # Move a previously observed game back to the fics widget
@@ -1386,11 +1385,11 @@ if {[lindex $line 0] != {Still in progress}} {
     } ;# waitformoves
 
     if {[string match "Challenge:*" $line]} {
-	if {[winfo exists .ficsOffers] && $::fics::findopponent(manual) == {auto}} {
-            writechan accept
-	} else {
-	    ::fics::addOffer $line
-	}
+      if {![winfo exists .ficsOffers] || $::fics::findopponent(manual) == {manual}} {
+	  ::fics::addOffer $line
+      } else {
+	  writechan accept
+      }
     }
 
     if {[string match "Challenge * removed*" $line]} {
