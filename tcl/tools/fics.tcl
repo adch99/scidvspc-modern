@@ -18,6 +18,7 @@ namespace eval fics {
   set sought 0
   set soughtlist {}
   set newsoughtlist {}
+  set thisName ""
   set graph(init) 0
   set graph(width) 300
   # graph(height) overlaps the buttons frame, and is calculated below
@@ -1865,10 +1866,12 @@ if {[lindex $line 0] != {Still in progress}} {
       # remove seek from graph
       if { $::fics::graph(on) } {
         for {set idx 0} { $idx < [llength $::fics::soughtlist]} { incr idx } {
-          array set g [lindex $::fics::soughtlist $idx]
-          set num $g(game)
-          if { $num == $l } {
+          array set ga [lindex $::fics::soughtlist $idx]
+          if { $ga(game) == $l } {
             .fics.bottom.graph.c delete game_$idx
+	    if {$ga(name) == $::fics::thisName} {
+		.fics.bottom.graph.c delete status
+	    }
             break
           }
         }
@@ -2381,8 +2384,11 @@ if {[lindex $line 0] != {Still in progress}} {
 
   proc acceptGraphGame { idx } {
     array set ga [lindex $::fics::soughtlist $idx]
-    catch {
-      writechan "play $ga(game)" echo
+    # Check the game idx and game name still correspond
+    if {$::fics::thisName == $ga(name)} {
+	catch {
+	  writechan "play $ga(game)" echo
+	}
     }
   }
 
@@ -2398,10 +2404,11 @@ if {[lindex $line 0] != {Still in progress}} {
     set w .fics.bottom.graph
 
     $w.c itemconfig game_$idx -width 2
-    set gl [lindex $::fics::soughtlist $idx]
-    if { $gl == "" } { return }
-    array set l [lindex $::fics::soughtlist $idx]
+    set ga [lindex $::fics::soughtlist $idx]
+    if { $ga == "" } { return }
+    array set l $ga
     set m "$l(name)($l(elo)) $l(time_init)/$l(time_inc) $l(rated) $l(type) $l(color) $l(start)"
+    set ::fics::thisName $l(name)
     
     $w.c delete status
     $w.c create text 20 0 -tags status -text "$m" -font font_Regular -anchor nw
