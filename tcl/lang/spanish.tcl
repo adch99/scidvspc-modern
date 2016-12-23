@@ -226,8 +226,8 @@ menuText S ToolsImportOne "Importar partida PGN" 0 \
   {Importa una partida de un texto PGN}
 menuText S ToolsImportFile "Importar archivo de partidas PGN" 2 \
   {Importa partidas de un archivo PGN}
-menuText S ToolsStartEngine1 "Arrancar motor 1" 0  {Arrancar motor 1}
-menuText S ToolsStartEngine2 "Arrancar motor 2" 0  {Arrancar Motor 2}
+menuText S ToolsStartEngine1 "Iniciar motor 1" 0  {Iniciar motor 1}
+menuText S ToolsStartEngine2 "Iniciar motor 2" 0  {Iniciar Motor 2}
 menuText S ToolsScreenshot "Captura de pantalla" 0
 menuText S Play "Jugar" 0
 menuText S CorrespondenceChess "Ajedrez por correo" 0 \
@@ -263,21 +263,14 @@ menuText S CCEditCopy "Copiar lista de partidas a clipbase" 0 \
 menuText S Options "Opciones" 0
 menuText S OptionsBoard "Tablero" 0 {Opciones sobre el aspecto del tablero}
 menuText S OptionsColour "Color de fondo" 0 {Color de fondo por defecto}
-# ====== TODO To be translated ======
-menuText S OptionsBackColour "Background" 0 {Default text widget color}
+menuText S OptionsBackColour "Fondo" 0 {Color del widget de texto predeterminado}
 menuText S OptionsEnableColour "Activar" 0 {}
-# ====== TODO To be translated ======
-menuText S OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
-# ====== TODO To be translated ======
-menuText S OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
-# ====== TODO To be translated ======
-menuText S OptionsRowColour "Rows" 0 {Default tree/book row color}
-# ====== TODO To be translated ======
-menuText S OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
-# ====== TODO To be translated ======
-menuText S OptionsProgressColour "Progressbar" 0 {Default progressbar color}
-# ====== TODO To be translated ======
-menuText S OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
+menuText S OptionsMainLineColour "Flechas principales" 0 {Flechas principales}
+menuText S OptionsVarLineColour "Flechas de variación" 0 {Flechas de variación}
+menuText S OptionsRowColour "Filas" 0 {Color predeterminado de la columna de árbol/libro}
+menuText S OptionsSwitcherColour "Conmutador" 0 {Color del conmutador db predeterminado}
+menuText S OptionsProgressColour "Barra de progreso" 0 {Color predeterminado de la barra de progreso}
+menuText S OptionsCrossColour "Filas de tabla cruzada" 0 {Color predeterminado de fila de tabla cruzada}
 menuText S OptionsNames "Mis Nombres de Jugador" 3 {Edita mis nombres de jugador}
 menuText S OptionsExport "Exportación" 0 {Cambia las opciones de exportación de texto}
 menuText S OptionsFonts "Fuentes" 0 {Cambia las fuentes}
@@ -290,13 +283,11 @@ menuText S OptionsFics "FICS" 0
 menuText S OptionsFicsAuto "Autopromoción Reina" 0
 menuText S OptionsFicsColour "Color del texto" 0
 menuText S OptionsFicsSize "Tamaño del Tablero" 0
-# ====== TODO To be translated ======
-menuText S OptionsFicsButtons "User Buttons" 0
+menuText S OptionsFicsButtons "Botones de usuario" 0
 menuText S OptionsFicsCommands "Comandos iniciales" 0
 menuText S OptionsFicsNoRes "Sin resultados" 0
 menuText S OptionsFicsNoReq "Sin respuesta" 0
-# ====== TODO To be translated ======
-menuText S OptionsFicsPremove "Allow Premove" 0
+menuText S OptionsFicsPremove "Permitir Pre-movimiento" 0
 menuText S OptionsLanguage "Lenguaje" 0 {Selecciona el lenguaje del menú}
 menuText S OptionsMovesTranslatePieces "Traducir piezas" 0 {Traducir la primera letra de las piezas}
 menuText S OptionsMovesHighlightLastMove "Resalta última jugada" 0 {Resalta la última jugada}
@@ -412,16 +403,14 @@ translate S MergeGames {Mezclar o fusionar partidas}
 translate S Preview {Vista previa}
 translate S Revert {Retroceder}
 translate S Save {Guardar}
-# ====== TODO To be translated ======
-translate S DontSave {Don't Save}
+translate S DontSave {No guardar}
 translate S Search {Buscar}
 translate S Stop {Parar}
 translate S Store {Almacenar}
 translate S Update {Actualizar}
 translate S ChangeOrient {Cambiar orientación de la ventana}
 translate S ShowIcons {Mostrar iconos}
-# ====== TODO To be translated ======
-translate S ConfirmCopy {Confirm Copy}
+translate S ConfirmCopy {Confirmar Copia}
 translate S None {Ninguno}
 translate S First {Primera}
 translate S Current {Actual}
@@ -476,20 +465,18 @@ translate S Database {Base de datos}
 translate S Filter {Filtro}
 translate S Reset {Reiniciar}
 translate S IgnoreCase {Ignorar el Asunto}
-translate S noGames {no hay partidas}
-translate S allGames {todas las partidas}
+translate S noGames {No hay partidas}
+translate S allGames {Todas las partidas}
 translate S empty {vacía}
 translate S clipbase {clipbase}
 translate S score {puntuación}
-translate S Start {Posición}
+translate S Start {Principio}
 translate S StartPos {Posición inicial}
 translate S Total {Total}
 translate S readonly {sólo lectura}
 translate S altered {alterado}
-# ====== TODO To be translated ======
-translate S tagsDescript {Extra tags (eg: Annotator "Anand")}
-# ====== TODO To be translated ======
-translate S prevTags {Use previous}
+translate S tagsDescript {Etiquetas adicionales (p.e.: Annotator "Anand")}
+translate S prevTags {Usar el anterior}
 
 # Standard error messages:
 translate S ErrNotOpen {Esta base de datos no está abierta.}
@@ -509,8 +496,8 @@ translate S GameEnd {Fin de partida}
 translate S LineEnd {Fin de línea}
 
 # Player information:
-translate S PInfoAll {todas las partidas}
-translate S PInfoFilter {las partidas filtradas}
+translate S PInfoAll {Todas las partidas}
+translate S PInfoFilter {Las partidas filtradas}
 translate S PInfoAgainst {Resultados contra}
 translate S PInfoMostWhite {Aperturas más comunes con Blancas}
 translate S PInfoMostBlack {Aperturas más comunes con Negras}
@@ -523,8 +510,7 @@ translate S PinfoLookupName {Buscar nombre}
 # Tablebase information:
 translate S Draw {Tablas}
 translate S stalemate {rey ahogado}
-# ====== TODO To be translated ======
-translate S checkmate {checkmate}
+translate S checkmate {mate}
 translate S withAllMoves {con todos los movimientos}
 translate S withAllButOneMove {con todos los movimientos excepto uno}
 translate S with {con}
@@ -597,14 +583,12 @@ menuText S TreeOptLock "Bloquear" 1 \
   {Bloquea/desbloquea el árbol de la base de datos actual}
 menuText S TreeOptTraining "Entrenamiento" 2 \
   {Activa/desactiva el modo de entrenamiento de árbol}
-# ====== TODO To be translated ======
-menuText S TreeOptShort "Short Display" 0 {Don't show ELO information}
+menuText S TreeOptShort "Pantalla corta" 0 {No mostrar información de ELO}
 menuText S TreeOptAutosave "Autoguardar archivo caché" 0 \
   {Guarda automáticamente el archivo caché cuando se cierra la ventana de árbol}
 menuText S TreeOptAutomask "Carga automática de máscara" 0 "Carga automática de máscara con un arbol abierto."
 menuText S TreeOptShowBar "Mostrar barra de progreso" 0 "Mostrar barra de progreso del árbol"
-# ====== TODO To be translated ======
-menuText S TreeOptSortBest "Sort Best Games" 0 "Sort Best Games by ELO."
+menuText S TreeOptSortBest "Ordenar mejores partidas" 0 "Ordenar mejores partidas por ELO."
 menuText S TreeHelp "Ayuda" 1
 menuText S TreeHelpTree "Ayuda del árbol" 4
 menuText S TreeHelpIndex "Índice de la ayuda" 0
@@ -733,25 +717,25 @@ translate S ShowAnalysisBoard {Mostrar tablero de análisis}
 translate S ShowInfo {Muestra info del motor}
 translate S FinishGame {Finalizar partida}
 translate S StopEngine {Parar motor}
-translate S StartEngine {Arrancar motor}
+translate S StartEngine {Iniciar motor}
 translate S ExcludeMove {Excluir movimiento}
 translate S LockEngine {Bloquea motor en posición actual}
 translate S AnalysisCommand {Dirección de análisis}
 translate S PreviousChoices {Elección previa}
 translate S AnnotateTime {Segundos por movimiento}
-translate S AnnotateWhich {Qué Lado}
-translate S AnnotateAll {Movimientos por ambos Lados}
+translate S AnnotateWhich {¿Qué Lado?}
+translate S AnnotateAll {Movimientos de ambos Lados}
 translate S AnnotateAllMoves {Todos los movimientos}
-translate S AnnotateWhite {Sólo movimientos de blancas}
-translate S AnnotateBlack {Sólo movimientos de negras}
+translate S AnnotateWhite {Sólo movimientos de las blancas}
+translate S AnnotateBlack {Sólo movimientos de las negras}
 translate S AnnotateNotBest {Cuando el movimiento no es el mejor}
 translate S AnnotateBlundersOnly {Cuando el movimiento es un disparate}
-translate S BlundersNotBest {Errores/No Mejor}
+translate S BlundersNotBest {Fallo/No Mejor}
 translate S AnnotateBlundersOnlyScoreChange {Análisis reporta errores, con cambio de puntuación desde: }
 translate S AnnotateTitle {Configurar anotación}
-translate S BlundersThreshold {Umbral del error }
+translate S BlundersThreshold {(Umbral)}
 translate S ScoreFormat {Formato de puntuación}
-translate S CutOff {Punto de corte}
+translate S CutOff {Corte}
 translate S LowPriority {Baja prioridad del procesador}
 translate S LogEngines {Tamaño del registro}
 translate S LogName {Añadir nombre}
@@ -833,7 +817,7 @@ menuText S CrosstabOpt "Opciones" 0
 menuText S CrosstabOptColorPlain "Texto simple" 0
 menuText S CrosstabOptColorHyper "Hipertexto" 0
 menuText S CrosstabOptTieWin "Desempate por victorias" 1
-menuText S CrosstabOptTieHead "Desempate por head-head" 1
+menuText S CrosstabOptTieHead "Desempate por head-to-head" 1
 menuText S CrosstabOptThreeWin "3 Puntos por victoria" 1
 menuText S CrosstabOptAges "Edad en años" 1
 menuText S CrosstabOptNats "Nacionalidades" 0
@@ -843,8 +827,7 @@ menuText S CrosstabOptTitles "Títulos" 0
 menuText S CrosstabOptBreaks "Puntuaciones de desempate" 0
 menuText S CrosstabOptDeleted "Incluir partidas borradas" 17
 menuText S CrosstabOptColors "Colores (sólo en tabla de Suizos)" 0
-# ====== TODO To be translated ======
-menuText S CrosstabOptColorRows "Color Rows" 0
+menuText S CrosstabOptColorRows "Filas de color" 0
 menuText S CrosstabOptColumnNumbers "Columnas numeradas (sólo en tabla todos contra todos)" 11
 menuText S CrosstabOptGroup "Grupos de clasificación" 0
 menuText S CrosstabSort "Ordenar" 0
@@ -888,8 +871,7 @@ translate S GameLength {Duración:}
 translate S FindGamesWith {Encontrar partidas con}
 translate S StdStart {Inicio estándar}
 translate S Promotions {Promociones}
-# ====== TODO To be translated ======
-translate S UnderPromo {Under Prom.}
+translate S UnderPromo {Bajo promoción}
 translate S Comments {Comentarios}
 translate S Variations {Variaciones}
 translate S Annotations {Anotaciones}
@@ -1135,11 +1117,11 @@ translate S GoBack {Volver atrás}
 # Replace move dialog:
 translate S ReplaceMove {Reemplazar movimiento}
 translate S AddNewVar {Añadir nueva variación}
-translate S NewMainLine {Nueva Línea Principal}
+translate S NewMainLine {Nueva línea principal}
 translate S ReplaceMoveMessage {Ya existe un movimiento.
 
-Por favor, entre elección
-Replazar movimiento descartará todos los movimientos posteriores}
+Por favor, seleccione su opción
+La opción Reemplazar movimiento eliminará todos los movimientos posteriores}
 
 # Make database read-only dialog:
 translate S ReadOnlyDialog {Si haces que esta base de datos sea de sólo lectura no se permitirán hacer cambios. No se podrán guardar o reemplazar partidas, y no se podrán alterar las señales de borrada. Cualquier ordenación o clasificación por ECO será temporal.
@@ -1150,9 +1132,8 @@ Puedes hacer fácilmente escribible la base de datos otra vez cerrándola y abrién
 
 # Exit dialog:
 translate S ExitDialog {¿Realmente quieres salir de Scid?}
-# ====== TODO To be translated ======
-translate S ClearGameDialog {This game has been altered.\nDo you wish to save it?}
-translate S ExitUnsaved {La siguiente base de datos tiene cambios en partidas no guardados. Si sales ahora se perderán estos cambios.}
+translate S ClearGameDialog {Esta partida ha sido alterada.\n¿Desea guardarla?}
+translate S ExitUnsaved {La siguiente base de datos tiene cambios en partidas no guardadas. Si sales ahora se perderán estos cambios.}
 
 # Import window:
 translate S PasteCurrentGame {Pegar partida actual}
@@ -1244,8 +1225,7 @@ translate S OprepViewLaTeX {Ver LaTeX}
 translate S PReportTitle {Informe del jugador}
 translate S PReportColorWhite {con las piezas blancas}
 translate S PReportColorBlack {con las piezas negras}
-# ====== TODO To be translated ======
-translate S PReportBeginning {Beginning with}
+translate S PReportBeginning {Empezando con}
 translate S PReportMoves {%s después}
 translate S PReportOpenings {Aperturas}
 translate S PReportClipbase {Vaciar portapapeles y copiar las partidas}
@@ -1327,7 +1307,7 @@ translate S CurrentState {Estado actual}
 translate S AfterCompaction {Después de la compactación}
 translate S CompactNames {Compactar archivo de nombres}
 translate S CompactGames {Compactar archivo de partidas}
-translate S NoUnusedNames "No hay nombres sin usar, por tanto el nombre del fichero está ya totalmente compactado."
+translate S NoUnusedNames "No hay nombres sin usar, por tanto, el fichero de nombres está ya totalmente compactado."
 translate S NoUnusedGames "El fichero ya está totalmente compactado."
 translate S NameFileCompacted {El fichero de nombre para la base de datos "[file tail [sc_base filename]]" fue compactado.}
 translate S GameFileCompacted {El fichero de partidas para la base de datos "[file tail [sc_base filename]]" fue compactado.}
@@ -1515,7 +1495,7 @@ translate S DepthPerMove {Profundidad por movimiento}
 translate S MoveControl {Movimiento del control}
 translate S TimeLabel {Tiempo por movimiento}
 translate S AddVars {Añadir las variaciones}
-translate S AddScores {Añadir marcados}
+translate S AddScores {Añadir valoración o puntuación}
 translate S Engine {Motor}
 translate S TimeMode {Modo de tiempo}
 translate S TimeBonus {Tiempo + bonus}
@@ -1524,15 +1504,15 @@ translate S TimeSec {seg}
 translate S AllExercisesDone {Todos los ejercicio hechos}
 translate S MoveOutOfBook {Movimiento fuera del libro}
 translate S LastBookMove {Último movimiento del libro}
-translate S AnnotateSeveralGames {Anotar las partidas\ndesde la actual a: }
-translate S FindOpeningErrors {Solo errores de apertura}
+translate S AnnotateSeveralGames {Anotar las partidas\ndesde la actual a la: }
+translate S FindOpeningErrors {Solo errores de apertura en los primeros}
 translate S MarkTacticalExercises {Marca ejercicios tácticos}
 translate S UseBook {Usar libro de aperturas (Book)}
 translate S MultiPV {Variantes múltiples}
 translate S Hash {Memoria Hash}
 translate S OwnBook {Usar libro (book) del motor}
 translate S BookFile {Libro de aperturas}
-translate S AnnotateVariations {Procesar sub-variaciones}
+translate S AnnotateVariations {Procesar variantes}
 translate S ShortAnnotations {Anotaciones cortas}
 translate S addAnnotatorTag {Añadir etiqueta de anotador}
 translate S AddScoreToShortAnnotations {Añadir puntuación para anotaciones cortas}
@@ -1731,8 +1711,7 @@ translate S DockLeft {Mover a la izquierda}
 translate S DockRight {Mover a la derecha}
 translate S Undock {Ventana flotante}
 translate S ChangeIcon {Cambiar icono}
-# ====== TODO To be translated ======
-translate S More {More}
+translate S More {Más}
 
 # Drag & Drop
 translate S CannotOpenUri {No se puede abrir la siguiente URI:}
