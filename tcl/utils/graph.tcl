@@ -115,14 +115,16 @@ proc ::utils::graph::isgraph {graph} {
 }
 
 
-# data:
 #    Adds a new data set to the graph, or modifies an existing one.
-#
+
 proc ::utils::graph::data args {
   variable _data
   variable _defaults
   set graph [lindex $args 0]
   set dataset [lindex $args 1]
+
+  # This concat doesnt make any attempt to remove previously defined data.
+  # ie - it send multiple "-coords" (for eg) to _configure
 
   set args [concat data $graph,$dataset $_defaults(data) \
               [lrange $args 2 end]]
@@ -174,12 +176,13 @@ proc ::utils::graph::configure args {
 }
 
 
-# _configure:
 #    Handle configuration of both the graph, and individual data sets.
 #    The first arg (type) should be "graph" or "data". The second should
 #    be a graph name for graph configuration, or a "graph,set" pair
 #    for dataset configuration.
-#
+
+#    eg: data score,bounds -points 0 -lines 1 -bars 0 -color red -outline black -radius 2  -linewidth 1 -barwidth 1.0 -key {} -coords {} -points 0 -lines 0 -bars 0 -coords {1 -0.9 1 0.9}
+
 proc ::utils::graph::_configure args {
   variable _data
   set type [lindex $args 0]
@@ -209,6 +212,9 @@ proc ::utils::graph::redraw {graph} {
   $::utils::graph::_data($graph,canvas) delete -withtag g$graph
   ::utils::graph::plot_axes $graph
   ::utils::graph::plot_data $graph
+  if {$graph == "score"} {
+    ::utils::graph::updateMove
+  }
 }
 
 #    Replot the graph axes.
@@ -401,6 +407,22 @@ proc ::utils::graph::plot_data {graph} {
     set outline $_data($graph,$dataset,outline)
     set tag g$graph
     set coords [scale_data $graph $_data($graph,$dataset,coords)]
+
+    if {$graph == "score" && $dataset == "data" } {
+      ### Init move offset list, used for highlighting the current move
+      # $_data($graph,$dataset,coords)
+      # 2.0 0.16 2.5 0.19 3.5 0.17 4.0 0.10 4.5 0
+
+      set moveList {}
+      foreach {i j} $_data($graph,$dataset,coords) {k l} $coords {
+	# Reverse this # 3->2.0 4->2.5 5->3.0
+	set ply [expr {int($i*2 - 1)}]
+	lappend moveList $ply $k
+      }
+      set _data($graph,moveList) $moveList
+    }
+
+
     set ncoords [expr {[llength $coords] - 1}]
 
     # Draw key:
@@ -460,11 +482,30 @@ proc ::utils::graph::plot_data {graph} {
         set y [lindex $coords [expr {$i + 1}]]
         $canvas create rectangle \
           [expr {$x-$hwidth}] $y [expr {$x+$hwidth}] $base \
-          -fill $color -outline $outline -tag $tag
+          -fill $color -outline $outline -tags [list $tag moves move$x]
       }
     }
   }
   $_data($graph,canvas) raise outline
+}
+
+proc ::utils::graph::updateMove {} {
+  variable _data
+
+  set canvas .sgraph.c
+
+  if {![winfo exists $canvas] || ![info exists _data(score,moveList)]} {
+    return
+  }
+
+  # Hmmm... 10-50 u_seconds
+  $canvas itemconfigure moves -fill $_data(score,data,color)
+
+  set result [lsearch $_data(score,moveList) [sc_pos location]]
+  if {$result > -1} {
+    incr result
+    $canvas itemconfigure move[lindex $_data(score,moveList) $result] -fill black
+  }
 }
 
 
@@ -557,9 +598,9 @@ proc ::utils::graph::yunmap {graph cy} {
             double($_data($graph,yfac))}]
 }
 
-# scale_data:
 #    Transforms an even-sized list of graph coordinates to canvas units.
-#
+#    eg: 2.0 0.16 2.5 0.19 3.5 0.17 4.0 0.10 4.5 0
+
 proc ::utils::graph::scale_data {graph coords} {
   set result {}
   for {set i 0} {$i < [llength $coords] - 1} {incr i 2} {

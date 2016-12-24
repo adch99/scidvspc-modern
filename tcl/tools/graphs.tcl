@@ -437,7 +437,7 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
     menu $w.menu.options
     foreach i {White Black} {
       $w.menu.options add checkbutton -label GraphOptions$i \
-        -variable ::tools::graphs::score::$i  -command ::tools::graphs::score::Refresh
+        -variable ::tools::graphs::score::invert$i  -command ::tools::graphs::score::Refresh
     }
 
     $w.menu.options add checkbutton -label {Show Dots} \
