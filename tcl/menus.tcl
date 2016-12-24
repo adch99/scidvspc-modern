@@ -298,10 +298,16 @@ set helpMessage($m,[incr menuindex]) GameNumber
 $m add separator
 incr menuindex
 
-$m add command -label GameDeepest -command {
+$m add command -label GameDeepest -command IdentifyOpening 
+
+proc IdentifyOpening {} {
   sc_move ply [sc_eco game ply]
+  if {!$::gameInfo(show)} {
+    toggleGameInfo
+  }
   updateBoard
 }
+
 set helpMessage($m,[incr menuindex]) GameDeepest
 
 $m add command -label GameGotoMove -accelerator "control-g" \

@@ -327,7 +327,7 @@ append helpText(Index) {
   <h3><name G>G</name></h3>
   <ul>
   <li><a Flags>Game flags</a></li>
-  <li><a MainWindow GameInfo>Game Info</a></li>
+  <li><a MainWindow GameInfo>Game Information</a> window</li>
   <li><a GameList>Game List</a> window</li>
   <li><a Menus Game>Game menu</a></li>
   <li><a Searches Header>General searches</a></li>
@@ -636,9 +636,12 @@ set helpText(MainWindow) {<h1>Scid Main Window</h1>
   Right-clicking the Replace Game icon does a quick save.
   </p>
 
-  <h4><name GameInfo>Game Information Area</name></h4>
+  <h4><name GameInfo>Game Information Window</name></h4>
+
+  <p><i>The Game Info window can be hidden/unhidden by pressing Control-i</i></p>
+
   <p>
-  Below the chessboard is general information about the current game. 
+  Below the Chessboard is general information about the current game. 
   It includes the <b>Player Names</b> and <b>Ratings</b>,
   <b>Event</b> and <b>Site</b> fields, and <b>ECO</b> codes.
   </p>
@@ -4126,15 +4129,21 @@ set helpText(NAGs) {<h1>NAG Values</h1>
 set helpTitle(ECO) "ECO Guide"
 set helpText(ECO) {<h1>ECO Codes</h1>
   <p>
-  <b>Encyclopedia of Chess Openings</b> classifications are codes used to identify chess openings.
-  Each code consists of a letter from A to E, followed by two digits. (For example,
-  <b>C33</b>, which represents the <b>King's Gambit Accepted</b>).
+  ECO stands for <b>Encyclopedia of Chess Openings</b>. They are codes identifying chess opening,
+  each consisting of a letter from A to E, followed by two digits. For example -
+  <b>C33</b> represents the <b>King's Gambit Accepted</b>.
   There are five hundred distinct ECO codes.
+  </p>
+
+  <p>
+  To see a game's ECO code, select 
+  <run IdentifyOpening><green>Game-<gt>Identify Opening</green></run>
+  and examine the <a MainWindow GameInfo>Game Information</a> window.
   </p>
 
   <h3>Scid Extensions to ECO</h3>
   <p>
-  The ECO system is, howvere, very limited and insufficient for modern games.
+  The ECO system is however fairly limited, and insufficient for modern games.
   Some codes are never used, while others are overly frequent.
   To improve this, Scid allows an optional
   extension to the basic ECO codes. Codes may be extended with a
@@ -4269,7 +4278,7 @@ set helpText(ECO) {<h1>ECO Codes</h1>
   <li>  <b>E9</b>  E7 + 4...d6 5.Nf3: <i>King's Indian, main lines</i> </li>
   </ul>
 
-  <p><footer>Updated: Scid vs. PC 4.12, Feb 2014</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.18, Dec 2016</footer></p>
 }
 
 
