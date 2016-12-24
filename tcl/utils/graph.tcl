@@ -603,9 +603,9 @@ proc ::utils::graph::set_range {graph} {
   set _data($graph,aymax) [expr {floor($ymax/$ytick) * $ytick +$ytick}]
 
   # Using ceil() above to score graph breaks ratings graph, so add a
-  # hack to make handle score grph
-  if {$graph == "score" && $_data($graph,aymax) == "11.0"} {
-    set _data($graph,aymax) 10.0
+  # hack to make handle score graph
+  if {$graph == "score" && $_data($graph,aymax) >= "11.0"} {
+    set _data($graph,aymax) [expr {$_data($graph,aymax) - 1.0}]
   }
 
   # Explicitly set boundaries override the detected ranges:

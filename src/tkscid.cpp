@@ -8947,7 +8947,7 @@ sc_game_scores (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         max = atof (argv[2]);
         min = -max;
     }
-    // Klimmek: check Invertflags
+    // fixme: f-ing Klimmek's invert score option excludes use of max (which itself is unused at the moment)
     else if (argc == 4) {
         inv_w = atoi (argv[2]);
         inv_b = atoi (argv[3]);
