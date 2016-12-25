@@ -505,12 +505,9 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
     }
   }
 
-  catch {
-    # fixme: it's probably not good to be catching gui elements S.A.
     ::utils::graph::data score data -color $linecolor -points 0 -lines 0 -bars 1 \
        -barwidth .7 -outline grey \
        -coords [sc_game scores $::tools::graphs::score::invertWhite $::tools::graphs::score::invertBlack]
-  }
   ::utils::graph::redraw score
 }
 

@@ -265,7 +265,6 @@ proc ::crosstab::Open {{game {}}} {
      -yscroll "$w.f.ybar set" -xscroll "$w.f.xbar set"
   ::htext::init $text
 
-  # Crosstable will have striped appearance if {} is replaced by another colour
   $text tag configure rowColor -background $::crosscolor
 
   scrollbar $w.f.ybar -command "$text yview"

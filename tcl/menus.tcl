@@ -916,7 +916,7 @@ $m add command -label OptionsSave -command {
     puts $optionF ""
     puts $optionF "set analysisCommand [list $analysisCommand]"
     puts $optionF ""
-    foreach i {lite dark highcolor bestcolor bgcolor maincolor varcolor rowcolor progcolor switchercolor borderwidth \
+    foreach i {lite dark highcolor bestcolor bgcolor maincolor varcolor rowcolor progcolor crosscolor switchercolor borderwidth \
           pgnColor(Header) pgnColor(Main) pgnColor(Var) \
           pgnColor(Nag) pgnColor(Comment) pgnColor(Background) \
           pgnColor(Current) pgnColor(NextMove) } {
@@ -1281,7 +1281,9 @@ proc SetCrossColour {} {
   set temp [tk_chooseColor -initialcolor $crosscolor -title [tr OptionsCrossColour]]
   if {$temp != {}} {
     set crosscolor $temp
-    ::crosstab::Refresh
+    if {[winfo exists .crosstabWin.f.text]} {
+      .crosstabWin.f.text tag configure rowColor -background $crosscolor
+    }
   }
 }
 
