@@ -413,13 +413,16 @@ proc ::utils::graph::plot_data {graph} {
       # $_data($graph,$dataset,coords)
       # 2.0 0.16 2.5 0.19 3.5 0.17 4.0 0.10 4.5 0
 
-      set moveList {}
+      set plyList  {}
+      set coordList {}
       foreach {i j} $_data($graph,$dataset,coords) {k l} $coords {
 	# Reverse this # 3->2.0 4->2.5 5->3.0
 	set ply [expr {int($i*2 - 1)}]
-	lappend moveList $ply $k
+	lappend plyList $ply
+	lappend coordList $k
       }
-      set _data($graph,moveList) $moveList
+      set _data($graph,plyList) $plyList
+      set _data($graph,coordList) $coordList
     }
 
 
@@ -494,17 +497,18 @@ proc ::utils::graph::updateMove {} {
 
   set canvas .sgraph.c
 
-  if {![winfo exists $canvas] || ![info exists _data(score,moveList)]} {
+  if {![winfo exists $canvas] || ![info exists _data(score,plyList)]} {
     return
   }
 
   # Hmmm... 10-50 u_seconds
   $canvas itemconfigure moves -fill $_data(score,data,color)
-
-  set result [lsearch $_data(score,moveList) [sc_pos location]]
+  if {[sc_var level]} {
+    return
+  }
+  set result [lsearch $_data(score,plyList) [sc_pos location]]
   if {$result > -1} {
-    incr result
-    $canvas itemconfigure move[lindex $_data(score,moveList) $result] -fill black
+    $canvas itemconfigure move[lindex $_data(score,coordList) $result] -fill black
   }
 }
 
