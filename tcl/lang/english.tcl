@@ -264,6 +264,8 @@ menuText E OptionsRowColour "Rows" 0 {Default tree/book row color}
 menuText E OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 menuText E OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 menuText E OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
+menuText E OptionsScoreColour "Score Graph" 0 {}
+menuText E OptionsScoreBarColour "Score Graph current" 0 {}
 menuText E OptionsNames "My Player Names" 3 {Edit my player names}
 menuText E OptionsExport "Exporting" 0 {Change text export options}
 menuText E OptionsFonts "Fonts" 0 {Change fonts}
@@ -666,8 +668,10 @@ menuText E GraphFileColor "Save as Color PostScript" 8
 menuText E GraphFileGrey "Save as Greyscale PostScript" 8
 menuText E GraphFileClose "Close" 0
 menuText E GraphOptions "Options" 0
-menuText E GraphOptionsWhite "White" 0
-menuText E GraphOptionsBlack "Black" 0
+menuText E GraphOptionsWhite "Invert White" 0
+menuText E GraphOptionsBlack "Invert Black" 0
+menuText E GraphOptionsDots "Show Dots" 0
+menuText E GraphOptionsBar "Highlight Current Move" 0
 menuText E GraphOptionsBoth "Both" 1
 menuText E GraphOptionsPInfo "Player Info player" 0
 translate E GraphFilterTitle "Frequency per 1000 Games"

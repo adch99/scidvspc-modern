@@ -261,6 +261,10 @@ menuText R OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 menuText R OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 # ====== TODO To be translated ======
 menuText R OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
+# ====== TODO To be translated ======
+menuText R OptionsScoreColour "Score Graph" 0 {}
+# ====== TODO To be translated ======
+menuText R OptionsScoreBarColour "Score Graph current" 0 {}
 menuText R OptionsNames "Имена моего игрока" 3 {Редактировать имена моего игрока}
 menuText R OptionsExport "Экспорт" 0 {Изменить установки экспорта}
 menuText R OptionsFonts "Шрифты" 0 {Изменить шрифты}
@@ -677,6 +681,10 @@ menuText R GraphFileClose "Закрыть окно" 6
 menuText R GraphOptions "Параметры" 0
 menuText R GraphOptionsWhite "Белые" 0
 menuText R GraphOptionsBlack "Чёрные" 0
+# ====== TODO To be translated ======
+menuText R GraphOptionsDots "Show Dots" 0
+# ====== TODO To be translated ======
+menuText R GraphOptionsBar "Highlight Current Move" 0
 menuText R GraphOptionsBoth "Оба" 0
 menuText R GraphOptionsPInfo "Игрок - информация об игроке" 0
 translate R GraphFilterTitle "Диаграмма фильтра: частота на 1000 партий"

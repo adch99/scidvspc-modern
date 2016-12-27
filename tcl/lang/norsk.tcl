@@ -301,6 +301,10 @@ menuText O OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 menuText O OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 # ====== TODO To be translated ======
 menuText O OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
+# ====== TODO To be translated ======
+menuText O OptionsScoreColour "Score Graph" 0 {}
+# ====== TODO To be translated ======
+menuText O OptionsScoreBarColour "Score Graph current" 0 {}
 menuText O OptionsNames "My Player Names..." 0 {Edit my player names} ;# ***
 menuText O OptionsExport "Eksport" 0 {Endre innstillinger for eksport av tekst}
 menuText O OptionsFonts "Skrifttyper" 0 {Endre skrifttyper}
@@ -817,6 +821,10 @@ menuText O GraphFileClose "Lukk vindu" 0
 menuText O GraphOptions "Innstillinger" 0
 menuText O GraphOptionsWhite "Hvit" 0
 menuText O GraphOptionsBlack "Sort" 0
+# ====== TODO To be translated ======
+menuText O GraphOptionsDots "Show Dots" 0
+# ====== TODO To be translated ======
+menuText O GraphOptionsBar "Highlight Current Move" 0
 menuText O GraphOptionsBoth "Begge" 0
 menuText O GraphOptionsPInfo "Spiller Info spiller" 0
 translate O GraphFilterTitle "Filtergraf: hyppighet per 1000 partier"

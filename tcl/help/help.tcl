@@ -3496,13 +3496,18 @@ from the Tools menu. Right-clicking the graph will refresh it.
   These scores have one of the formats +0.25, [% +0.25] , or [%eval +0.25]. The later two formats allow these scores to be hidden in  the PGN window by enabling PGN-<gt>Hide Codes.
   The values are represented from White's perspective (so a negative value means black is ahead).
   In cases when the scores are not from White's perspective, one can select an option
-  (in the Options Menu) for a correct perspective.
+  (in the Options Menu) for an inverted perspective.
   </p>
   <h4>Features</h4>
-  <p>
-  Left Click positionally in the graph to go to the corresponding move.
-<br>
-  Right Clicking anywhere in the score graph will perform a refresh.</p>
+
+  <p>Left Click positionally in the graph to go to the corresponding move.</p>
+
+  <p>Right Clicking anywhere in the score graph will perform a refresh.</p>
+
+  <p>The current move is now highlighted a different colour, though for performance reasons (on OS X mainly), this can be disabled.
+  It is also possible to change the Graph colour via
+<green><run SetScoreColour>Options-<gt>Colors-<gt>Score Graph</run></green> and
+<green><run SetScoreBarColour>Options-<gt>Colors-<gt>Score Graph current</run></green>.
   
 
   <p><footer>Updated: Scid vs. PC 4.15 Sept 2015</footer></p>

@@ -497,7 +497,7 @@ proc ::utils::graph::updateMove {} {
 
   set canvas .sgraph.c
 
-  if {![winfo exists $canvas] || ![info exists _data(score,plyList)]} {
+  if {!$::tools::graphs::showbar || ![winfo exists $canvas] || ![info exists _data(score,plyList)]} {
     return
   }
 
@@ -508,7 +508,7 @@ proc ::utils::graph::updateMove {} {
   }
   set result [lsearch $_data(score,plyList) [sc_pos location]]
   if {$result > -1} {
-    $canvas itemconfigure move[lindex $_data(score,coordList) $result] -fill black
+    $canvas itemconfigure move[lindex $_data(score,coordList) $result] -fill $::scorebarcolor
   }
 }
 

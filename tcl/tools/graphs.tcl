@@ -409,7 +409,7 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
     return
   }
 
-  set linecolor steelblue
+  set linecolor $::scorecolor
   set linewidth 2
   set psize 2
 
@@ -433,15 +433,16 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
     $w.menu.file add command -label GraphFileClose -command "destroy $w"
 
     $w.menu add cascade -label GraphOptions -menu $w.menu.options
-    #Klimmek: Checkbuttons for Invert white/black Score in Score graph
+
     menu $w.menu.options
+
+    $w.menu.options add checkbutton -label GraphOptionsBar \
+      -variable ::tools::graphs::showbar -command ::tools::graphs::score::Refresh
+
     foreach i {White Black} {
       $w.menu.options add checkbutton -label GraphOptions$i \
         -variable ::tools::graphs::score::invert$i  -command ::tools::graphs::score::Refresh
     }
-
-    $w.menu.options add checkbutton -label {Show Dots} \
-      -variable ::tools::graphs::showpoints -command ::tools::graphs::score::Refresh
 
     $w.menu add cascade -label $::tr(Help) -menu $w.menu.help -underline 0
     menu $w.menu.help
@@ -522,8 +523,8 @@ proc ::tools::graphs::score::ConfigMenus {{lang ""}} {
   foreach idx {0 1 3} tag {Color Grey Close} {
     configMenuText $m.file $idx GraphFile$tag $lang
   }
-  #Klimmek: translate optionsmenu
-  foreach idx {0 1} tag {White Black} {
+
+  foreach idx {0 1 2} tag {Bar White Black} {
     configMenuText $m.options $idx GraphOptions$tag $lang
   }
 }
@@ -618,7 +619,7 @@ proc ::tools::graphs::rating::Refresh {{player {}}} {
 
     $w.menu add cascade -label GraphOptions -menu $w.menu.showdots
     menu $w.menu.showdots
-    $w.menu.showdots add checkbutton -label {Show Dots} \
+    $w.menu.showdots add checkbutton -label GraphOptionsDots \
       -variable ::tools::graphs::showpoints -command ::tools::graphs::rating::Refresh
 
     $w.menu add cascade -label {Start Year} -menu $w.menu.options
@@ -741,6 +742,7 @@ proc ::tools::graphs::rating::ConfigMenus {{lang ""}} {
     configMenuText $m $idx Graph$tag $lang
   }
   configMenuText $m 1 GraphOptions $lang
+  configMenuText $m.showdots 0 GraphOptionsDots $lang
 
   foreach idx {0 1 3} tag {Color Grey Close} {
     configMenuText $m.file $idx GraphFile$tag $lang

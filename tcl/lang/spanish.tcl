@@ -271,6 +271,10 @@ menuText S OptionsRowColour "Filas" 0 {Color predeterminado de la columna de árb
 menuText S OptionsSwitcherColour "Conmutador" 0 {Color del conmutador db predeterminado}
 menuText S OptionsProgressColour "Barra de progreso" 0 {Color predeterminado de la barra de progreso}
 menuText S OptionsCrossColour "Filas de tabla cruzada" 0 {Color predeterminado de fila de tabla cruzada}
+# ====== TODO To be translated ======
+menuText S OptionsScoreColour "Score Graph" 0 {}
+# ====== TODO To be translated ======
+menuText S OptionsScoreBarColour "Score Graph current" 0 {}
 menuText S OptionsNames "Mis Nombres de Jugador" 3 {Edita mis nombres de jugador}
 menuText S OptionsExport "Exportación" 0 {Cambia las opciones de exportación de texto}
 menuText S OptionsFonts "Fuentes" 0 {Cambia las fuentes}
@@ -700,6 +704,10 @@ menuText S GraphFileClose "Cerrar ventana" 0
 menuText S GraphOptions "Opciones" 0
 menuText S GraphOptionsWhite "Blancas" 0
 menuText S GraphOptionsBlack "Negras" 0
+# ====== TODO To be translated ======
+menuText S GraphOptionsDots "Show Dots" 0
+# ====== TODO To be translated ======
+menuText S GraphOptionsBar "Highlight Current Move" 0
 menuText S GraphOptionsBoth "Ambos" 0
 menuText S GraphOptionsPInfo "Información jugador" 0
 translate S GraphFilterTitle "Filtro gráfico: frecuencia por 1000 partidas"

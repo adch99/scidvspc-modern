@@ -896,7 +896,7 @@ $m add command -label OptionsSave -command {
     FilterMaxYear FilterMinYear FilterStepYear FilterGuessELO lookTheme autoResizeBoard
     comp(timecontrol) comp(seconds) comp(base) comp(incr) comp(timeout) comp(name) comp(usebook) comp(book)
     comp(rounds) comp(showclock) comp(debug) comp(animate) comp(firstonly) comp(ponder) comp(showscores)
-    ::tools::graphs::filter::type  ::tools::graphs::absfilter::type ::tools::graphs::showpoints
+    ::tools::graphs::filter::type  ::tools::graphs::absfilter::type ::tools::graphs::showpoints ::tools::graphs::showbar
     maintFlag useGraphFigurine photosMinimized bookmarks(gamehistory) playerInfoHistory
     glistSize glexport glistColOrder glistColWidth glistColAnchor addRatings(overwrite) addRatings(filter)} {
 
@@ -916,7 +916,7 @@ $m add command -label OptionsSave -command {
     puts $optionF ""
     puts $optionF "set analysisCommand [list $analysisCommand]"
     puts $optionF ""
-    foreach i {lite dark highcolor bestcolor bgcolor maincolor varcolor rowcolor progcolor crosscolor switchercolor borderwidth \
+    foreach i {lite dark highcolor bestcolor bgcolor maincolor varcolor rowcolor progcolor crosscolor scorecolor scorebarcolor switchercolor borderwidth \
           pgnColor(Header) pgnColor(Main) pgnColor(Var) \
           pgnColor(Nag) pgnColor(Comment) pgnColor(Background) \
           pgnColor(Current) pgnColor(NextMove) } {
@@ -1200,6 +1200,10 @@ $m add command -label OptionsProgressColour -command SetProgressColour
 set helpMessage($m,1) OptionsProgressColour
 $m add command -label OptionsCrossColour -command SetCrossColour
 set helpMessage($m,1) OptionsCrossColour
+$m add command -label OptionsScoreColour -command SetScoreColour
+set helpMessage($m,1) OptionsScoreColour
+$m add command -label OptionsScoreBarColour -command SetScoreBarColour
+set helpMessage($m,1) OptionsScoreBarColour
 
 $m add separator
 
@@ -1284,6 +1288,25 @@ proc SetCrossColour {} {
     if {[winfo exists .crosstabWin.f.text]} {
       .crosstabWin.f.text tag configure rowColor -background $crosscolor
     }
+  }
+}
+
+proc SetScoreColour {} {
+  global scorecolor
+  set temp [tk_chooseColor -initialcolor $scorecolor -title [tr OptionsScoreColour]]
+  if {$temp != {}} {
+    set scorecolor $temp
+    ::tools::graphs::score::Refresh
+  }
+}
+
+proc SetScoreBarColour {} {
+  global scorebarcolor
+  set temp [tk_chooseColor -initialcolor $scorebarcolor -title [tr OptionsScoreBarColour]]
+  if {$temp != {}} {
+    set scorebarcolor $temp
+    set ::tools::graphs::showbar 1
+    ::tools::graphs::score::Refresh
   }
 }
 
@@ -1657,7 +1680,7 @@ proc setLanguageMenus {{lang ""}} {
     configMenuText .menu.options [tr Options$tag $oldLang] Options$tag $lang
   }
 
-  foreach tag {EnableColour BackColour MainLineColour VarLineColour RowColour SwitcherColour ProgressColour CrossColour} {
+  foreach tag {EnableColour BackColour MainLineColour VarLineColour RowColour SwitcherColour ProgressColour CrossColour ScoreColour ScoreBarColour} {
     configMenuText .menu.options.colour [tr Options$tag $oldLang] Options$tag $lang
   }
 

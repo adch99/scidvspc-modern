@@ -260,6 +260,10 @@ menuText W OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 menuText W OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 # ====== TODO To be translated ======
 menuText W OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
+# ====== TODO To be translated ======
+menuText W OptionsScoreColour "Score Graph" 0 {}
+# ====== TODO To be translated ======
+menuText W OptionsScoreBarColour "Score Graph current" 0 {}
 menuText W OptionsNames "Spelarnamn..." 0 {Redigera spelares namn}
 menuText W OptionsExport "Export" 0 {Ändra exportalternativ}
 menuText W OptionsFonts "Typsnitt" 0 {Ändra typsnitt}
@@ -702,6 +706,10 @@ menuText W GraphFileClose "Stäng fönster" 6
 menuText W GraphOptions "Alternativ" 0
 menuText W GraphOptionsWhite "Vit" 0
 menuText W GraphOptionsBlack "Svart" 0
+# ====== TODO To be translated ======
+menuText W GraphOptionsDots "Show Dots" 0
+# ====== TODO To be translated ======
+menuText W GraphOptionsBar "Highlight Current Move" 0
 menuText W GraphOptionsBoth "Båda" 1
 menuText W GraphOptionsPInfo "Spelarinformation" 0
 translate W GraphFilterTitle "Filterdiagram: antal per 1000 partier"

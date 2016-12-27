@@ -270,6 +270,10 @@ menuText N OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 menuText N OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 # ====== TODO To be translated ======
 menuText N OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
+# ====== TODO To be translated ======
+menuText N OptionsScoreColour "Score Graph" 0 {}
+# ====== TODO To be translated ======
+menuText N OptionsScoreBarColour "Score Graph current" 0 {}
 menuText N OptionsNames "Mijn spelersnamen ..." 0 {Bewerk mijn spelersnamen} ;
 menuText N OptionsExport "Export" 1 {Wijzig tekst export opties}
 menuText N OptionsFonts "Lettertypes" 0 {Wijzig lettertype}
@@ -707,6 +711,10 @@ menuText N GraphFileClose "Venster sluiten" 0
 menuText N GraphOptions "Opties" 0
 menuText N GraphOptionsWhite "Wit" 0
 menuText N GraphOptionsBlack "Zwart" 0
+# ====== TODO To be translated ======
+menuText N GraphOptionsDots "Show Dots" 0
+# ====== TODO To be translated ======
+menuText N GraphOptionsBar "Highlight Current Move" 0
 menuText N GraphOptionsBoth "Beide" 1
 menuText N GraphOptionsPInfo "Speler informatie" 0
 translate N GraphFilterTitle "Filtergrafiek: frequentie per 1000 partijen"

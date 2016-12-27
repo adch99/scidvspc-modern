@@ -286,6 +286,10 @@ menuText G OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 menuText G OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 # ====== TODO To be translated ======
 menuText G OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
+# ====== TODO To be translated ======
+menuText G OptionsScoreColour "Score Graph" 0 {}
+# ====== TODO To be translated ======
+menuText G OptionsScoreBarColour "Score Graph current" 0 {}
 menuText G OptionsNames "Τα Ονόματά μου" 3 {Επεξεργασία των Ονομάτων μου}
 menuText G OptionsExport "Εξαγωγές" 1 {Ρύθμιση Επιλογών Εξαγωγής}
 menuText G OptionsFonts "Γραμματοσειρές" 0 {Ρύθμιση Γραμματοσειρών}
@@ -718,6 +722,10 @@ menuText G GraphFileClose "Κλείσιμο" 0
 menuText G GraphOptions "Ρυθμίσεις" 0
 menuText G GraphOptionsWhite "Λευκά" 0
 menuText G GraphOptionsBlack "Μαύρα" 0
+# ====== TODO To be translated ======
+menuText G GraphOptionsDots "Show Dots" 0
+# ====== TODO To be translated ======
+menuText G GraphOptionsBar "Highlight Current Move" 0
 menuText G GraphOptionsBoth "Αμφότεροι" 1
 menuText G GraphOptionsPInfo "Παίκτης Πληροφορίες" 0
 translate G GraphFilterTitle "Συχνότητα άνα 1000 Παρτίδες"

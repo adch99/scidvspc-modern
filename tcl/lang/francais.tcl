@@ -260,6 +260,10 @@ menuText F OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 menuText F OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 # ====== TODO To be translated ======
 menuText F OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
+# ====== TODO To be translated ======
+menuText F OptionsScoreColour "Score Graph" 0 {}
+# ====== TODO To be translated ======
+menuText F OptionsScoreBarColour "Score Graph current" 0 {}
 menuText F OptionsNames "Mes noms de joueurs..." 0 {Editer mes noms de joueurs}
 menuText F OptionsExport "Exportation" 0 {Changer les options d'exportation}
 menuText F OptionsFonts "Polices" 0 {Changer les polices}
@@ -678,6 +682,10 @@ menuText F GraphFileClose "Fermer la fenêtre" 0
 menuText F GraphOptions "Options" 0
 menuText F GraphOptionsWhite "Blancs" 0
 menuText F GraphOptionsBlack "Noirs" 0
+# ====== TODO To be translated ======
+menuText F GraphOptionsDots "Show Dots" 0
+# ====== TODO To be translated ======
+menuText F GraphOptionsBar "Highlight Current Move" 0
 menuText F GraphOptionsBoth "Les deux" 4
 menuText F GraphOptionsPInfo "Informations joueurs" 0
 translate F GraphFilterTitle "Graphique de filtre: fréquence pour 1000 parties"

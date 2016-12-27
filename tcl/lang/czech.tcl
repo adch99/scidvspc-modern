@@ -280,6 +280,10 @@ menuText C OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 menuText C OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 # ====== TODO To be translated ======
 menuText C OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
+# ====== TODO To be translated ======
+menuText C OptionsScoreColour "Score Graph" 0 {}
+# ====== TODO To be translated ======
+menuText C OptionsScoreBarColour "Score Graph current" 0 {}
 menuText C OptionsNames "Jména mých hráèù..." 0 {Editovat jména mých hráèù}
 menuText C OptionsExport "Volby exportu" 7 {Zmìnit volby pro textový export}
 menuText C OptionsFonts "Fonty" 2 {Zmìnit fonty}
@@ -739,6 +743,10 @@ menuText C GraphFileClose "Zavøít okno" 0
 menuText C GraphOptions "Volby" 0
 menuText C GraphOptionsWhite "Bílý" 0
 menuText C GraphOptionsBlack "Èerný" 1
+# ====== TODO To be translated ======
+menuText C GraphOptionsDots "Show Dots" 0
+# ====== TODO To be translated ======
+menuText C GraphOptionsBar "Highlight Current Move" 0
 menuText C GraphOptionsBoth "Oba" 0
 menuText C GraphOptionsPInfo "Informace o hráèi" 0
 translate C GraphFilterTitle "Graf filtru: èetnost na 1000 partií"

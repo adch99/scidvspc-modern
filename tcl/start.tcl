@@ -168,6 +168,7 @@ set ::file::finder::data(Old) 1
 set ::tools::graphs::absfilter::type year
 set ::tools::graphs::filter::type year
 set ::tools::graphs::showpoints 1
+set ::tools::graphs::showbar [expr ! $::macOS] ; # too slow on macs
 set annotate(addTag) 1
 set annotate(Moves) all
 set annotate(WithVars) blunders
@@ -410,6 +411,8 @@ set varcolor    grey80		;# Variation arrow colors
 set rowcolor    lightsteelblue1 ;# Tree/Crosstab/Book line/row bg color
 set switchercolor lightsteelblue3 ;# DB switcher
 set crosscolor  grey80		;# Crosstable line colouring
+set scorecolor  steelblue	;# Score Graph bars
+set scorebarcolor  grey10	;# Score Graph current move
 
 set borderwidth 1
 

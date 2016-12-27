@@ -285,6 +285,10 @@ menuText H OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 menuText H OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 # ====== TODO To be translated ======
 menuText H OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
+# ====== TODO To be translated ======
+menuText H OptionsScoreColour "Score Graph" 0 {}
+# ====== TODO To be translated ======
+menuText H OptionsScoreBarColour "Score Graph current" 0 {}
 menuText H OptionsNames "Játékosnevek..." 0 {Játékosnevek átszerkesztése}
 menuText H OptionsExport "Exportálás" 1 {Exportálási beállítások változtatása}
 menuText H OptionsFonts "Karakterkészlet" 0 {Karakterkészlet változtatása}
@@ -746,6 +750,10 @@ menuText H GraphFileClose "Ablak bezárása" 8
 menuText H GraphOptions "Beállítások" 0
 menuText H GraphOptionsWhite "Világos" 0
 menuText H GraphOptionsBlack "Sötét" 0
+# ====== TODO To be translated ======
+menuText H GraphOptionsDots "Show Dots" 0
+# ====== TODO To be translated ======
+menuText H GraphOptionsBar "Highlight Current Move" 0
 menuText H GraphOptionsBoth "Mindkettõ" 1
 menuText H GraphOptionsPInfo "A játékosinformáció játékosa" 0
 translate H GraphFilterTitle "Szûrõgrafikon: gyakoriság 1000 játszmánként"

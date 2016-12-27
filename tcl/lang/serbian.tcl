@@ -300,6 +300,10 @@ menuText Y OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 menuText Y OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 # ====== TODO To be translated ======
 menuText Y OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
+# ====== TODO To be translated ======
+menuText Y OptionsScoreColour "Score Graph" 0 {}
+# ====== TODO To be translated ======
+menuText Y OptionsScoreBarColour "Score Graph current" 0 {}
 menuText Y OptionsNames "My Player Names..." 0 {Edit my player names} ;# ***
 menuText Y OptionsExport "Izvoz" 0 {Promeni opcije tekstualnog izvoza}
 menuText Y OptionsFonts "Fontovi" 0 {Promeni fontove}
@@ -817,6 +821,10 @@ menuText Y GraphFileClose "Zatvori prozor" 6
 menuText Y GraphOptions "Opcije" 0
 menuText Y GraphOptionsWhite "Beli" 0
 menuText Y GraphOptionsBlack "Crni" 0
+# ====== TODO To be translated ======
+menuText Y GraphOptionsDots "Show Dots" 0
+# ====== TODO To be translated ======
+menuText Y GraphOptionsBar "Highlight Current Move" 0
 menuText Y GraphOptionsBoth "Oba" 1
 menuText Y GraphOptionsPInfo "Informacije o igraèu" 0
 translate Y GraphFilterTitle "Filter graph: frequency per 1000 games" ;# ***
