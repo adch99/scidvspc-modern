@@ -1601,7 +1601,7 @@ proc standardShortcuts {w} {
   bind $w <Control-t> ::tree::Open
   bind $w <Control-A> ::enginelist::choose
   bind $w <Control-X> ::crosstab::Open
-  bind $w <Control-Z> ::tools::graphs::score::Toggle
+  bind $w <Control-Z> ::tools::graphs::score::Raise
   bind $w <Control-I> importPgnGame
 
   ### These should probably be moved to a different proc/place - S.A.

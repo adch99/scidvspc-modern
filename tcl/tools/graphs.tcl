@@ -384,10 +384,10 @@ set ::tools::graphs::score::invertBlack 0
 
 ### Game Score graph
 
-proc ::tools::graphs::score::Toggle {} {
+proc ::tools::graphs::score::Raise {} {
   set w .sgraph
   if {[winfo exists $w]} {
-    destroy $w
+    raiseWin $w
   } else {
     ::tools::graphs::score::Init
   }
@@ -468,7 +468,16 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
     bind $w.c <ButtonPress-2> {::tools::graphs::score::ShowBoard %x %y %X %Y}
     bind $w.c <ButtonRelease-2> ::pgn::HideBoard
     bind $w <Escape> "destroy $w"
-    bind $w <Control-Z> "destroy $w"
+    bind $w <space>  toggleEngineAnalysis
+    if {$::windowsOS || $::macOS} {
+      bind $w.c <MouseWheel> {
+	if {[expr -%D] < 0} { ::move::Back }
+	if {[expr -%D] > 0} { ::move::Forward }
+      }
+    } else {
+      bind $w.c <Button-4> ::move::Back
+      bind $w.c <Button-5> ::move::Forward
+    }
 
     ::tools::graphs::score::ConfigMenus
     ::createToplevelFinalize $w

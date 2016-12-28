@@ -606,8 +606,8 @@ $m add command -label ToolsRating -command {::tools::graphs::rating::Refresh bot
 set helpMessage($m,[incr menuindex]) ToolsRating
 
 $m add command -label ToolsScore \
-    -accelerator "control-Z" -command ::tools::graphs::score::Toggle
-bind .main <Control-Z> ::tools::graphs::score::Toggle
+    -accelerator "control-Z" -command ::tools::graphs::score::Raise
+bind .main <Control-Z> ::tools::graphs::score::Raise
 set helpMessage($m,[incr menuindex]) ToolsScore
 
 $m add separator

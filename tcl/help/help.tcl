@@ -3489,7 +3489,7 @@ from the Tools menu. Right-clicking the graph will refresh it.
 
   <h3><name Score>Score Graph</name></h3>
   <p>
-  The <green><run ::tools::graphs::score::Toggle>Score Graph</run></green> (Control-Shift-Z)
+  The <green><run ::tools::graphs::score::Raise>Score Graph</run></green> (Control-Shift-Z)
   shows the move evaluations (stored as comments in the current game) as a graph. </p>
   <p>
   The first step in using the Score Graph is to add scores to a game with Scid's <a Analysis Annotating>annotation feature</a>.
