@@ -408,7 +408,6 @@ proc ::file::Upgrade {name} {
   ::file::Open "$name.si4"
 }
 
-# openBase:
 #    Opens a Scid database, showing a progress bar in a separate window
 #    if the database is around 5 Mb or larger in size.
 #   ::file::Open should be used if the base is not already in si4 format
@@ -454,8 +453,7 @@ proc openBase {name} {
   }
 }
 
-
-#   Close the active base.
+### Close the active base.
 
 proc ::file::Close {{base -1}} {
   # Remember the current base
@@ -486,6 +484,10 @@ proc ::file::Close {{base -1}} {
       ::file::SwitchToBase clipbase
     } else {
       ::file::SwitchToBase $current
+    }
+
+    if {[info exists ::crosstabBase] && $base == $::crosstabBase} {
+      ::crosstab::Refresh
     }
     
     if {[winfo exists .emailWin]} { destroy .emailWin }

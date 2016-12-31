@@ -2186,6 +2186,12 @@ sc_base_switch (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     if (baseNum < 1  ||  baseNum > MAX_BASES) {
         return errorResult (ti, "sc_base switch: Invalid base number.");
     }
+
+    // Should we do this check here ? Some places (eg file::Exit)
+    // switch to unopened bases then do a 'base inUse' check
+    // if (! dbList[baseNum - 1].inUse) 
+    //   return errorResult (ti, "sc_base switch: This base is not open.");
+
     currentBase = baseNum - 1;
     db = &(dbList[currentBase]);
     return TCL_OK;
