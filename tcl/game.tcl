@@ -81,6 +81,7 @@ proc ::game::Strip {type {parent .}} {
   }
   updateBoard -pgn
   updateTitle
+  ::tools::graphs::score::Refresh
 }
 
 proc ::game::TruncateBegin {} {
@@ -92,6 +93,7 @@ proc ::game::TruncateBegin {} {
   }
   updateBoard -pgn
   updateTitle
+  ::tools::graphs::score::Refresh
 }
 
 proc ::game::Truncate {} {
@@ -103,6 +105,7 @@ proc ::game::Truncate {} {
   }
   updateBoard -pgn
   updateTitle
+  ::tools::graphs::score::Refresh
 }
 
 proc ::game::Delete {} {

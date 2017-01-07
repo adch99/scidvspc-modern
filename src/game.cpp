@@ -1347,10 +1347,8 @@ Game::TruncateAndFreeMove (moveT * thisMove)
 }
 
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Game::TruncateStart():
 //      Truncate all moves leading to current position.
-//      todo: copy comments (in WritePGN?)
+
 void
 Game::TruncateStart (void)
 {
@@ -1371,6 +1369,8 @@ Game::TruncateStart (void)
     uint  old_style = GetPgnStyle ();
     if (PgnStyle & PGN_STYLE_SHORT_HEADER)
       SetPgnStyle (PGN_STYLE_SHORT_HEADER, false);
+    // hmmm - why do we have to set this explicitly here S.A
+    SetPgnStyle (PGN_STYLE_COMMENTS, true);
     WriteToPGN (&tb);
     Init();
     PgnParser parser (tb.GetBuffer());
