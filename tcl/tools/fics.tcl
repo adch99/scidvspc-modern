@@ -258,6 +258,8 @@ namespace eval fics {
     unbusyCursor .
   }
 
+  ### Main fics widget
+
   proc connect {{guest no}} {
     global ::fics::sockchan ::fics::seeklist ::fics::graph fontOptions tr
 
@@ -321,6 +323,7 @@ namespace eval fics {
     ### is font_Regular working here ? &&&
     bindMouseWheel $w $w.console.text 
     bindWheeltoFixed $w
+    bind $w <F11>  toggleFullScreen
 
     pack $w.console.scroll -side right -fill y 
     pack $w.console.text -side left -fill both -expand 1

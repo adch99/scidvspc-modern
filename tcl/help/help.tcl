@@ -3028,10 +3028,12 @@ Both times are in seconds.
 
   <h3>Notes</h3>
 <br>
-  * Engine scores (and times) can be stored as comments by enabling "set comp(showscores) 1" in the GUI.
+  * Scid vs PC's Gui does take more CPU overhead than other Computer Tournament managers, but effort is made to not include this time in each engine's time-slice.
+  Additionally, the Clock Widgets take a small CPU slice - around .0005 seconds per move on my 2600MHz Core2Quad.
 <br><br>
-  * Updating Scid's interface does take some CPU activity, but effort is made to not include this time in each engine's time-slice.
-  Additionally, the Clock Widgets> take a small CPU slice - around .0005 seconds per move on my 2600MHz Core2Quad.
+  * For some general information about Computer Tournaments, try this 
+<url http://en.chessbase.com/post/fair-play-in-engine-match>Chessbase link</url>.
+
 <br>
   <h3>Todo</h3>
 <br>
