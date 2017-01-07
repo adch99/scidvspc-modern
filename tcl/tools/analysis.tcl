@@ -49,11 +49,13 @@ proc resetEngine {n} {
   set analysis(seen$n) 0              ;# Seen any output from engine yet?
   set analysis(seenEval$n) 0          ;# Seen evaluation line yet?
   set analysis(score$n) 0             ;# Current score in centipawns
+  set analysis(scoremate$n) 0
   set analysis(prevscore$n) 0         ;# Immediately previous score in centipawns
   set analysis(prevmoves$n) {}        ;# Immediately previous best line out from engine
   set analysis(nodes$n) 0             ;# Number of (kilo)nodes searched
   set analysis(depth$n) 0             ;# Depth in ply
   set analysis(prevdepth$n) 0         ;# Previous depth
+  set analysis(prevmate$n) 0
   set analysis(time$n) 0              ;# Time in centisec (or sec; see below)
   set analysis(moves$n) {}            ;# PV (best line) output from engine
   set analysis(seldepth$n) 0
@@ -125,16 +127,17 @@ proc calculateNodes {{n}} {
 }
 
 
-# resetAnalysis:
-#   Resets the analysis statistics: score, depth, etc.
-#
+### Lesser reset of analysis statistics
+
 proc resetAnalysis {{n 0}} {
   global analysis
 
   set analysis(score$n) 0
   set analysis(scoremate$n) 0
+  set analysis(prevscore$n) 0
   set analysis(nodes$n) 0
   set analysis(prevdepth$n) 0
+  set analysis(prevmate$n) 0
   set analysis(depth$n) 0
   set analysis(time$n) 0
   set analysis(moves$n) {}
@@ -148,7 +151,6 @@ namespace eval enginelist {}
 
 set engines(list) {}
 
-# engine:
 #   Global procedure to add an engine to the engine list.
 #   Called from the "engines.dat" configuration file
 
@@ -1167,6 +1169,8 @@ proc okAnnotation {n} {
     }
   }
 
+  resetAnalysis $n
+
   set ::useAnalysisBookName [$w.usebook.comboBooks get]
   set ::book::lastBook1 $::useAnalysisBookName
   set ::prevNag {}
@@ -1264,6 +1268,7 @@ proc bookAnnotation { {n 1} } {
   ### Animation ??
   # for {set i 0} {$i<100} {incr i} { update ; after [expr $::autoplayDelay / 100] }
   set analysis(prevscore$n) $analysis(score$n)
+  set analysis(prevmate$n)  $analysis(scoremate$n)
   set analysis(prevmoves$n) $analysis(moves$n)
   # updateBoard -pgn
 }
@@ -1423,6 +1428,7 @@ proc addAnnotation {tomove} {
   if {$annotate(Moves) == {white}  &&  $tomove == {white} ||
     $annotate(Moves) == {black}  &&  $tomove == {black} } {
     set analysis(prevscore$n) $analysis(score$n)
+    set analysis(prevmate$n)  $analysis(scoremate$n)
     set analysis(prevmoves$n) $analysis(moves$n)
     return
   }
@@ -1451,6 +1457,7 @@ proc addAnnotation {tomove} {
 
     if {$move1 == $move2} {
       set analysis(prevscore$n) $analysis(score$n)
+      set analysis(prevmate$n)  $analysis(scoremate$n)
       set analysis(prevmoves$n) $analysis(moves$n)
       if {$annotate(WithScore) == "allmoves"} {
 	addScore $n single 1
@@ -1464,14 +1471,27 @@ proc addAnnotation {tomove} {
   set score $analysis(score$n)
   set prevscore $analysis(prevscore$n)
 
+  if {$analysis(nonStdStart$n) && [sc_pos location] == 1} {
+    set prevscore $score
+    set analysis(prevmate$n) $analysis(scoremate$n)
+  }
   set deltamove [expr {$score - $prevscore}]
   set isBlunder 0
 
-  ### Don't process if score above cut-off score,
+  ### Don't process if score above cut-off score
   # excepting for the case when score goes from -5 to +7 (eg)
-if {abs($prevscore) < $annotate(cutoff) || abs($score) < $annotate(cutoff) || \
-   (abs($deltamove) > abs($score) && $score*$prevscore < 0)} {
+  # , and not a missed short(er) mate
+
   ### Calculate isBlunder
+
+  # Fancy inequality test that checks if there is a missed/shorter mate for white and black
+  # Works even though black's mates are negative ;)
+  if {$analysis(prevmate$n) &&  \
+      (!$analysis(scoremate$n) || ($analysis(scoremate$n) < ( $analysis(prevmate$n) - 1))) } {
+    set isBlunder 2
+  } else {
+  if {abs($prevscore) < $annotate(cutoff) || abs($score) < $annotate(cutoff) || \
+     (abs($deltamove) > abs($score) && $score*$prevscore < 0)} {
   if {$annotate(WithVars) != "notbest"} {
     if { $deltamove < [expr 0.0 - $annotate(blunder)] && $tomove == {black} || \
           $deltamove > $annotate(blunder) && $tomove == {white} } {
@@ -1488,7 +1508,8 @@ if {abs($prevscore) < $annotate(cutoff) || abs($score) < $annotate(cutoff) || \
       set isBlunder 1
     }
   }
-}
+  }
+  }
 
 
   if {$annotate(WithVars) == "no"} {
@@ -1529,11 +1550,16 @@ if {abs($prevscore) < $annotate(cutoff) || abs($score) < $annotate(cutoff) || \
     if { $analysis(prevmoves$n) != {}} {
       sc_move back
       sc_var create
+
+      if {$isBlunder == "2"} {
+	sc_pos setComment "Mate in [expr {abs($analysis(prevmate$n))}]"
+      }
+
       set moves $analysis(prevmoves$n)
       sc_moveAdd $moves $n
       set nag [ scoreToNag $prevscore ]
       if {$nag != {}} {
-	sc_pos addNag $nag
+        sc_pos addNag $nag
       }
       sc_var exit
       sc_move forward
@@ -1573,6 +1599,11 @@ if {abs($prevscore) < $annotate(cutoff) || abs($score) < $annotate(cutoff) || \
       # Add the variation:
       if { $analysis(prevmoves$n) != {}} {
 	sc_var create
+
+	if {$isBlunder == "2"} {
+	  sc_pos setComment "Mate in [expr {abs($analysis(prevmate$n))}]..."
+	}
+
 	set moves $analysis(prevmoves$n)
 	# Add as many moves as possible from the engine analysis:
 	sc_moveAdd $moves $n
@@ -1589,6 +1620,7 @@ if {abs($prevscore) < $annotate(cutoff) || abs($score) < $annotate(cutoff) || \
   }
 
   set analysis(prevscore$n) $analysis(score$n)
+  set analysis(prevmate$n) $analysis(scoremate$n)
   set analysis(prevmoves$n) $analysis(moves$n)
 
   updateBoard -pgn
