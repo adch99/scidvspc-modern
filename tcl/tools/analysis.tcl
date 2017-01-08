@@ -1484,10 +1484,18 @@ proc addAnnotation {tomove} {
 
   ### Calculate isBlunder
 
-  # Fancy inequality test that checks if there is a missed/shorter mate for white and black
-  # Works even though black's mates are negative ;)
-  if {$analysis(prevmate$n) &&  \
-      (!$analysis(scoremate$n) || ($analysis(scoremate$n) < ( $analysis(prevmate$n) - 1))) } {
+  # Inequality test that checks if there is a missed/shorter mate for white and black
+  # Only check for mates < WantedDepth - 3 (say) , otherwise engine results aren't too accurate
+
+  if {[sc_pos side] == "black"} {
+    set test [expr {$analysis(prevmate$n) > 0 && $analysis(prevmate$n) < ($annotate(WantedDepth) - 3)}]
+    set shorterMate [expr {($analysis(scoremate$n) > ( $analysis(prevmate$n) - 1))}]
+  } else {
+    set test [expr {$analysis(prevmate$n) < 0 && abs($analysis(prevmate$n)) < ($annotate(WantedDepth) - 3)}]
+    set shorterMate [expr {($analysis(scoremate$n) < ( $analysis(prevmate$n) + 1))}]
+  }
+
+  if {$test &&  (!$analysis(scoremate$n) || $shorterMate) } {
     set isBlunder 2
   } else {
   if {abs($prevscore) < $annotate(cutoff) || abs($score) < $annotate(cutoff) || \

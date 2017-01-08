@@ -2846,7 +2846,7 @@ with the format "stat01: time nodes ply mvleft mvtot mvname". The results can be
   Games can be automatically analyzed using
   the Annotate Button <button tb_annotate> (in the <a Analysis>Analysis Engine</a> toolbar).
   This feature adds Scores, <a Comment>Comments</a>, <a Moves Informant>Informants</a>,
-  and Bestlines to games.</p>
+  Bestlines and short missed Mates to games.</p>
 
   <p><i>
   The Annotate button is only shown in the </i><b>first</b><i> engine window.
