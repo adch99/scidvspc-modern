@@ -1996,6 +1996,10 @@ proc destroyAnalysisWin {n W} {
     cancelAutoplay
   }
 
+  if { $n == 1 && $analysis(mini)} {
+    toggleMini
+  }
+
   # Cancel scheduled commands
   if {$analysis(after$n) != ""} {
       after cancel $analysis(after$n)
@@ -2251,7 +2255,9 @@ proc makeAnalysisWin {{n 0} {options {}}} {
 
   if {$n == 1 && $analysis(mini)} {
     # Run engine in status bar. It is "niced" at procedure end.
-    catch {wm state $w withdrawn}
+    if {!$::docking::USE_DOCKING} {
+      catch {wm state $w withdrawn}
+    }
   }
 
   bind $w <F1> { helpWindow Analysis }
@@ -2511,18 +2517,25 @@ proc toggleMini {} {
 
   global analysisWin1 analysis
 
-  if {![winfo exists .analysisWin1]} { return }
+  if {![winfo exists .analysisWin1]} {
+    updateStatusBar
+    return
+  }
 
   set analysis(mini) [expr !$analysis(mini)]
 
   if {$analysis(mini)} {
     # make window small
-    catch {wm state .analysisWin1 withdrawn}
+    if {!$::docking::USE_DOCKING} {
+      catch {wm state .analysisWin1 withdrawn}
+    }
     update
     set analysis(priority1) idle ; # nice priority
   } else {
     # make window big
-    catch {wm state .analysisWin1 normal}
+    if {!$::docking::USE_DOCKING} {
+      catch {wm state .analysisWin1 normal}
+    }
     updateStatusBar
     update
     .analysisWin1.hist.text yview moveto 1
