@@ -730,7 +730,6 @@ translate P AnnotateNotBest {Tylko posunięcia lepsze niż w partii}
 translate P AnnotateBlundersOnly {Tylko oczywiste błędy}
 # ====== TODO To be translated ======
 translate P BlundersNotBest {Blunders/Not Best}
-translate P AnnotateBlundersOnlyScoreChange {Tylko błędy ze zmianą oceny z/na: }
 translate P AnnotateTitle {Konfiguracja komentarza}
 translate P BlundersThreshold {Granica błędu}
 # ====== TODO To be translated ======

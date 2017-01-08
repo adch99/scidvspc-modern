@@ -872,7 +872,6 @@ translate O AnnotateBlundersOnly {When game move is an obvious blunder}
 # ====== TODO To be translated ======
 translate O BlundersNotBest {Blunders/Not Best}
 # ====== TODO To be translated ======
-translate O AnnotateBlundersOnlyScoreChange {Analysis reports blunder, with score change from/to: }
 # ====== TODO To be translated ======
 translate O AnnotateTitle {Konfigurer Annotation}
 translate O BlundersThreshold {Threshold}

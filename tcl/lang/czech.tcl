@@ -794,7 +794,6 @@ translate C AnnotateBlundersOnly {When game move is an obvious blunder}
 # ====== TODO To be translated ======
 translate C BlundersNotBest {Blunders/Not Best}
 # ====== TODO To be translated ======
-translate C AnnotateBlundersOnlyScoreChange {Analysis reports blunder, with score change from/to: }
 translate C AnnotateTitle {Konfigurace Anotace}
 # ====== TODO To be translated ======
 translate C BlundersThreshold {Threshold}

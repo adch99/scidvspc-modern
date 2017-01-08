@@ -801,7 +801,6 @@ translate H AnnotateBlundersOnly {When game move is an obvious blunder}
 # ====== TODO To be translated ======
 translate H BlundersNotBest {Blunders/Not Best}
 # ====== TODO To be translated ======
-translate H AnnotateBlundersOnlyScoreChange {Analysis reports blunder, with score change from/to: }
 # ====== TODO To be translated ======
 translate H AnnotateTitle {Állítsa Jegyzet}
 translate H BlundersThreshold {Threshold}

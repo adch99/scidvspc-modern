@@ -759,7 +759,6 @@ translate G AnnotateNotBest {Όταν η κίνηση δεν είναι η Κα�
 translate G AnnotateBlundersOnly {Όταν η κίνηση είναι Σοβαρό Σφάλμα}
 # ====== TODO To be translated ======
 translate G BlundersNotBest {Blunders/Not Best}
-translate G AnnotateBlundersOnlyScoreChange {Η Ανάλυση σχολιάζει ως Σοβαρό Σφάλμα, με διαφορά υλικού από/σε: }
 translate G AnnotateTitle {Ρυθμίσεις Σχολιαστή}
 translate G BlundersThreshold {Threshold}
 # ====== TODO To be translated ======

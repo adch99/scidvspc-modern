@@ -748,7 +748,6 @@ translate N AnnotateNotBest {Als de partijzet niet de beste is.}
 translate N AnnotateBlundersOnly {Als de partijzet een blunder is}
 # ====== TODO To be translated ======
 translate N BlundersNotBest {Blunders/Not Best}
-translate N AnnotateBlundersOnlyScoreChange {Blunder analyse rapport, met scorewijziging van/naar: }
 translate N AnnotateTitle {Configureren annotatie}
 translate N BlundersThreshold {Ondergrens}
 # ====== TODO To be translated ======

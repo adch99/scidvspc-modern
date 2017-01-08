@@ -743,7 +743,6 @@ translate W AnnotateNotBest {När partidraget inte är det bästa}
 translate W AnnotateBlundersOnly {När partidraget är en uppenbar blunder}
 # ====== TODO To be translated ======
 translate W BlundersNotBest {Blunders/Not Best}
-translate W AnnotateBlundersOnlyScoreChange {Analysen rapporterar blunder, med värderingsförändringar från/till}
 translate W AnnotateTitle {Konfigurera Anteckningar}
 translate W BlundersThreshold {Tröskelvärde}
 # ====== TODO To be translated ======

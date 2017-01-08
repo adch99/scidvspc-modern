@@ -813,7 +813,6 @@ translate I AnnotateNotBest {Quando la mossa della partita non e' la migliore}
 translate I AnnotateBlundersOnly {Quando la mossa è chiaramente un errore}
 # ====== TODO To be translated ======
 translate I BlundersNotBest {Blunders/Not Best}
-translate I AnnotateBlundersOnlyScoreChange {L'analisi riporta come errori, con variazione del punteggio da/a:}
 translate I AnnotateTitle {Configurare Annotazione}
 translate I BlundersThreshold {Limite}
 # ====== TODO To be translated ======

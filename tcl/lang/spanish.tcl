@@ -739,7 +739,6 @@ translate S AnnotateBlack {Sólo movimientos de las negras}
 translate S AnnotateNotBest {Cuando el movimiento no es el mejor}
 translate S AnnotateBlundersOnly {Cuando el movimiento es un disparate}
 translate S BlundersNotBest {Fallo/No Mejor}
-translate S AnnotateBlundersOnlyScoreChange {Análisis reporta errores, con cambio de puntuación desde: }
 translate S AnnotateTitle {Configurar anotación}
 translate S BlundersThreshold {(Umbral)}
 translate S ScoreFormat {Formato de puntuación}

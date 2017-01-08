@@ -703,7 +703,6 @@ translate E AnnotateBlack {Black moves only}
 translate E AnnotateNotBest {When move is not the best}
 translate E AnnotateBlundersOnly {When move is a blunder}
 translate E BlundersNotBest {Blunders/Not Best}
-translate E AnnotateBlundersOnlyScoreChange {Analysis reports blunder, with score change from/to: }
 translate E AnnotateTitle {Configure Annotation}
 translate E BlundersThreshold {Threshold}
 translate E ScoreFormat {Score format}

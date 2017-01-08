@@ -755,7 +755,6 @@ translate D AnnotateNotBest {Wenn der Partiezug nicht der beste Zug ist}
 translate D AnnotateBlundersOnly {Wenn der Partiezug ein offensichtlicher Fehler ist}
 # ====== TODO To be translated ======
 translate D BlundersNotBest {Blunders/Not Best}
-translate D AnnotateBlundersOnlyScoreChange {Analyse berichtet Fehler, Bewertungsänderung von/nach: }
 translate D AnnotateTitle {konfigurieren Annotation}
 translate D BlundersThreshold {Grenze}
 # ====== TODO To be translated ======

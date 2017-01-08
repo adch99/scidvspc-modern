@@ -717,7 +717,6 @@ translate R AnnotateNotBest {Если ход не лучший}
 translate R AnnotateBlundersOnly {Когда ход в партии является очевидной ошибкой}
 # ====== TODO To be translated ======
 translate R BlundersNotBest {Blunders/Not Best}
-translate R AnnotateBlundersOnlyScoreChange {Анализ отчёта ошибок, которые изменяли счёт от/до:}
 translate R AnnotateTitle {Настроить аннотацию}
 translate R BlundersThreshold {Порог}
 # ====== TODO To be translated ======

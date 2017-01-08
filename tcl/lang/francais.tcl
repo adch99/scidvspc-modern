@@ -718,7 +718,6 @@ translate F AnnotateNotBest {Quand le coup de la partie n'est pas le meilleur}
 translate F AnnotateBlundersOnly {Quand le coup est une erreur}
 # ====== TODO To be translated ======
 translate F BlundersNotBest {Blunders/Not Best}
-translate F AnnotateBlundersOnlyScoreChange {Coup faible, le score varie de/à: }
 translate F AnnotateTitle {Configurer Annotation}
 translate F BlundersThreshold {Seuil de l'erreur}
 # ====== TODO To be translated ======
