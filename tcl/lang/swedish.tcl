@@ -744,6 +744,8 @@ translate W AnnotateBlundersOnly {När partidraget är en uppenbar blunder}
 # ====== TODO To be translated ======
 translate W BlundersNotBest {Blunders/Not Best}
 translate W AnnotateTitle {Konfigurera Anteckningar}
+# ====== TODO To be translated ======
+translate W AnnotateMissedMates {Missed/shorter mates}
 translate W BlundersThreshold {Tröskelvärde}
 # ====== TODO To be translated ======
 translate W ScoreFormat {Score format}

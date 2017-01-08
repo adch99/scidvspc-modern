@@ -874,6 +874,8 @@ translate O BlundersNotBest {Blunders/Not Best}
 # ====== TODO To be translated ======
 # ====== TODO To be translated ======
 translate O AnnotateTitle {Konfigurer Annotation}
+# ====== TODO To be translated ======
+translate O AnnotateMissedMates {Missed/shorter mates}
 translate O BlundersThreshold {Threshold}
 # ====== TODO To be translated ======
 translate O ScoreFormat {Score format}

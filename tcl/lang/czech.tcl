@@ -796,6 +796,8 @@ translate C BlundersNotBest {Blunders/Not Best}
 # ====== TODO To be translated ======
 translate C AnnotateTitle {Konfigurace Anotace}
 # ====== TODO To be translated ======
+translate C AnnotateMissedMates {Missed/shorter mates}
+# ====== TODO To be translated ======
 translate C BlundersThreshold {Threshold}
 # ====== TODO To be translated ======
 translate C ScoreFormat {Score format}

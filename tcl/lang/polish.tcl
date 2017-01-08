@@ -731,6 +731,8 @@ translate P AnnotateBlundersOnly {Tylko oczywiste błędy}
 # ====== TODO To be translated ======
 translate P BlundersNotBest {Blunders/Not Best}
 translate P AnnotateTitle {Konfiguracja komentarza}
+# ====== TODO To be translated ======
+translate P AnnotateMissedMates {Missed/shorter mates}
 translate P BlundersThreshold {Granica błędu}
 # ====== TODO To be translated ======
 translate P ScoreFormat {Score format}

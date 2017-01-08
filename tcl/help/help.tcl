@@ -2846,7 +2846,16 @@ with the format "stat01: time nodes ply mvleft mvtot mvname". The results can be
   Games can be automatically analyzed using
   the Annotate Button <button tb_annotate> (in the <a Analysis>Analysis Engine</a> toolbar).
   This feature adds Scores, <a Comment>Comments</a>, <a Moves Informant>Informants</a>,
-  Bestlines and short missed Mates to games.</p>
+  Bestlines to games. </p>
+
+  <p>
+  There is also a new option to add <b>Missed Mates</b>. This adds all missed
+  and shorter mates which are at least a few ply shorter of the 'Depth per move'
+  setting (as at higher ply, the engine's results are not too reliable).
+  Additionally, the added line may not be complete - ie. it may not end in mate.
+  This is due to the engine reporting "Mate in n", but not actually giving the
+  whole line/PV, which is a common UCI engine oddity.
+  </p>
 
   <p><i>
   The Annotate button is only shown in the </i><b>first</b><i> engine window.

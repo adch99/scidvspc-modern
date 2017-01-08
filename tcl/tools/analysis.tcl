@@ -1005,6 +1005,10 @@ proc initAnnotation {n} {
   pack $w.notbest $w.blunders -side top -fill x
   pack $w.allmoves $w.none -side top -fill x
 
+  checkbutton $w.missedmates -textvar ::tr(AnnotateMissedMates) -variable annotate(MissedMates) -anchor w
+
+  pack $w.missedmates -side top -anchor w
+
   addHorizontalRule $w
 
   ### Which side
@@ -1117,6 +1121,7 @@ proc initAnnotation {n} {
   if {!$analysis(uci$n)} {
     set annotate(markExercises) 0
     $w.batch.cbMarkTactics configure -state disabled
+    $w.missedmates configure -state disabled
   }
 
   set w .configAnnotation
@@ -1137,7 +1142,7 @@ proc initAnnotation {n} {
 
   bind $w <Escape> "$w.buttons.cancel invoke"
   bind $w <Return> "$w.buttons.ok invoke"
-  bind $w <Destroy> "$w.buttons.cancel invoke"
+  bind $w <Destroy> "catch {$w.buttons.cancel invoke}"
   bind $w <Configure> "recordWinSize $w"
   bind $w <F1> {helpWindow Analysis Annotating}
   placeWinOverParent $w .analysisWin$n
@@ -1487,36 +1492,38 @@ proc addAnnotation {tomove} {
   # Inequality test that checks if there is a missed/shorter mate for white and black
   # Only check for mates < WantedDepth - 3 (say) , otherwise engine results aren't too accurate
 
-  if {[sc_pos side] == "black"} {
-    set test [expr {$analysis(prevmate$n) > 0 && $analysis(prevmate$n) < ($annotate(WantedDepth) - 3)}]
-    set shorterMate [expr {($analysis(scoremate$n) > ( $analysis(prevmate$n) - 1))}]
-  } else {
-    set test [expr {$analysis(prevmate$n) < 0 && abs($analysis(prevmate$n)) < ($annotate(WantedDepth) - 3)}]
-    set shorterMate [expr {($analysis(scoremate$n) < ( $analysis(prevmate$n) + 1))}]
+  if {$annotate(MissedMates)} {
+    if {[sc_pos side] == "black"} {
+      set test [expr {$analysis(prevmate$n) > 0 && $analysis(prevmate$n) < ($annotate(WantedDepth) - 3)}]
+      set shorterMate [expr {($analysis(scoremate$n) > ( $analysis(prevmate$n) - 1))}]
+    } else {
+      set test [expr {$analysis(prevmate$n) < 0 && abs($analysis(prevmate$n)) < ($annotate(WantedDepth) - 3)}]
+      set shorterMate [expr {($analysis(scoremate$n) < ( $analysis(prevmate$n) + 1))}]
+    }
   }
 
-  if {$test &&  (!$analysis(scoremate$n) || $shorterMate) } {
+  if {$annotate(MissedMates) && $test &&  (!$analysis(scoremate$n) || $shorterMate) } {
     set isBlunder 2
   } else {
-  if {abs($prevscore) < $annotate(cutoff) || abs($score) < $annotate(cutoff) || \
-     (abs($deltamove) > abs($score) && $score*$prevscore < 0)} {
-  if {$annotate(WithVars) != "notbest"} {
-    if { $deltamove < [expr 0.0 - $annotate(blunder)] && $tomove == {black} || \
-          $deltamove > $annotate(blunder) && $tomove == {white} } {
-      set isBlunder 1
+    if {abs($prevscore) < $annotate(cutoff) || abs($score) < $annotate(cutoff) || \
+       (abs($deltamove) > abs($score) && $score*$prevscore < 0)} {
+      if {$annotate(WithVars) != "notbest"} {
+	if { $deltamove < [expr 0.0 - $annotate(blunder)] && $tomove == {black} || \
+	      $deltamove > $annotate(blunder) && $tomove == {white} } {
+	  set isBlunder 1
+	}
+	# if the game is dead, and the score continues to go down, don't add any comment
+	if { $prevscore > $::informant("++-") && $tomove == {white} || \
+	      $prevscore < [expr 0.0 - $::informant("++-") ] && $tomove == {black} } {
+	  set isBlunder 0
+	}
+      } else { ;# notbest
+	if { $deltamove < 0.0 && $tomove == {black} || \
+	      $deltamove > 0.0 && $tomove == {white} } {
+	  set isBlunder 1
+	}
+      }
     }
-    # if the game is dead, and the score continues to go down, don't add any comment
-    if { $prevscore > $::informant("++-") && $tomove == {white} || \
-          $prevscore < [expr 0.0 - $::informant("++-") ] && $tomove == {black} } {
-      set isBlunder 0
-    }
-  } else { ;# notbest
-    if { $deltamove < 0.0 && $tomove == {black} || \
-          $deltamove > 0.0 && $tomove == {white} } {
-      set isBlunder 1
-    }
-  }
-  }
   }
 
 

@@ -814,6 +814,8 @@ translate I AnnotateBlundersOnly {Quando la mossa è chiaramente un errore}
 # ====== TODO To be translated ======
 translate I BlundersNotBest {Blunders/Not Best}
 translate I AnnotateTitle {Configurare Annotazione}
+# ====== TODO To be translated ======
+translate I AnnotateMissedMates {Missed/shorter mates}
 translate I BlundersThreshold {Limite}
 # ====== TODO To be translated ======
 translate I ScoreFormat {Score format}

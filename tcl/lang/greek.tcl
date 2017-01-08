@@ -760,6 +760,8 @@ translate G AnnotateBlundersOnly {Όταν η κίνηση είναι Σοβαρ
 # ====== TODO To be translated ======
 translate G BlundersNotBest {Blunders/Not Best}
 translate G AnnotateTitle {Ρυθμίσεις Σχολιαστή}
+# ====== TODO To be translated ======
+translate G AnnotateMissedMates {Missed/shorter mates}
 translate G BlundersThreshold {Threshold}
 # ====== TODO To be translated ======
 translate G ScoreFormat {Score format}

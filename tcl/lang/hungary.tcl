@@ -803,6 +803,8 @@ translate H BlundersNotBest {Blunders/Not Best}
 # ====== TODO To be translated ======
 # ====== TODO To be translated ======
 translate H AnnotateTitle {Állítsa Jegyzet}
+# ====== TODO To be translated ======
+translate H AnnotateMissedMates {Missed/shorter mates}
 translate H BlundersThreshold {Threshold}
 # ====== TODO To be translated ======
 translate H ScoreFormat {Score format}

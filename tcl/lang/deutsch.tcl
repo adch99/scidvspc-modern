@@ -756,6 +756,8 @@ translate D AnnotateBlundersOnly {Wenn der Partiezug ein offensichtlicher Fehler
 # ====== TODO To be translated ======
 translate D BlundersNotBest {Blunders/Not Best}
 translate D AnnotateTitle {konfigurieren Annotation}
+# ====== TODO To be translated ======
+translate D AnnotateMissedMates {Missed/shorter mates}
 translate D BlundersThreshold {Grenze}
 # ====== TODO To be translated ======
 translate D ScoreFormat {Score format}

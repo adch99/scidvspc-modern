@@ -740,6 +740,8 @@ translate S AnnotateNotBest {Cuando el movimiento no es el mejor}
 translate S AnnotateBlundersOnly {Cuando el movimiento es un disparate}
 translate S BlundersNotBest {Fallo/No Mejor}
 translate S AnnotateTitle {Configurar anotación}
+# ====== TODO To be translated ======
+translate S AnnotateMissedMates {Missed/shorter mates}
 translate S BlundersThreshold {(Umbral)}
 translate S ScoreFormat {Formato de puntuación}
 translate S CutOff {Corte}

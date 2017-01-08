@@ -718,6 +718,8 @@ translate R AnnotateBlundersOnly {Когда ход в партии являет
 # ====== TODO To be translated ======
 translate R BlundersNotBest {Blunders/Not Best}
 translate R AnnotateTitle {Настроить аннотацию}
+# ====== TODO To be translated ======
+translate R AnnotateMissedMates {Missed/shorter mates}
 translate R BlundersThreshold {Порог}
 # ====== TODO To be translated ======
 translate R ScoreFormat {Score format}

@@ -719,6 +719,8 @@ translate F AnnotateBlundersOnly {Quand le coup est une erreur}
 # ====== TODO To be translated ======
 translate F BlundersNotBest {Blunders/Not Best}
 translate F AnnotateTitle {Configurer Annotation}
+# ====== TODO To be translated ======
+translate F AnnotateMissedMates {Missed/shorter mates}
 translate F BlundersThreshold {Seuil de l'erreur}
 # ====== TODO To be translated ======
 translate F ScoreFormat {Score format}

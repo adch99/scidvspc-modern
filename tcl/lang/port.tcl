@@ -718,6 +718,8 @@ translate U AnnotateNotBest {Quando o movimento jogado não for o melhor}
 translate U AnnotateBlundersOnly {Quando a jogada é um grande erro}
 translate U BlundersNotBest {Apenas grandes erros}
 translate U AnnotateTitle {Configurar Anotação}
+# ====== TODO To be translated ======
+translate U AnnotateMissedMates {Missed/shorter mates}
 translate U BlundersThreshold {Limiar}
 translate U ScoreFormat {Formato da avaliação}
 translate U CutOff {Não anotar:}

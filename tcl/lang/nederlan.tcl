@@ -749,6 +749,8 @@ translate N AnnotateBlundersOnly {Als de partijzet een blunder is}
 # ====== TODO To be translated ======
 translate N BlundersNotBest {Blunders/Not Best}
 translate N AnnotateTitle {Configureren annotatie}
+# ====== TODO To be translated ======
+translate N AnnotateMissedMates {Missed/shorter mates}
 translate N BlundersThreshold {Ondergrens}
 # ====== TODO To be translated ======
 translate N ScoreFormat {Score format}
