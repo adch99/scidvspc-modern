@@ -1491,18 +1491,22 @@ proc addAnnotation {tomove} {
 
   # Inequality test that checks if there is a missed/shorter mate for white and black
   # Only check for mates < WantedDepth - 3 (say) , otherwise engine results aren't too accurate
+  #
+  # Note: in uci.tcl we convert the engine scoremates to white's perspective.
+  # ie - Mate for black == < 0
 
   if {$annotate(MissedMates)} {
-    if {[sc_pos side] == "black"} {
+    if {$tomove == "black"} {
+      # check for white missed mate
       set test [expr {$analysis(prevmate$n) > 0 && $analysis(prevmate$n) < ($annotate(WantedDepth) - 3)}]
-      set shorterMate [expr {($analysis(scoremate$n) > ( $analysis(prevmate$n) - 1))}]
+      set shorterMate [expr {$analysis(scoremate$n) > ( $analysis(prevmate$n) - 1) || $analysis(scoremate$n) <= 0}]
     } else {
       set test [expr {$analysis(prevmate$n) < 0 && abs($analysis(prevmate$n)) < ($annotate(WantedDepth) - 3)}]
-      set shorterMate [expr {($analysis(scoremate$n) < ( $analysis(prevmate$n) + 1))}]
+      set shorterMate [expr {$analysis(scoremate$n) < ( $analysis(prevmate$n) + 1) || $analysis(scoremate$n) >= 0}]
     }
   }
 
-  if {$annotate(MissedMates) && $test &&  (!$analysis(scoremate$n) || $shorterMate) } {
+  if {$annotate(MissedMates) && $test && $shorterMate} {
     set isBlunder 2
   } else {
     if {abs($prevscore) < $annotate(cutoff) || abs($score) < $annotate(cutoff) || \

@@ -601,11 +601,11 @@ set helpTitle(MainWindow) "Scid Main Window"
 set helpText(MainWindow) {<h1>Scid Main Window</h1>
   <p>
   This section explains the main board (showing the current game), the game information area, and a few other widgets.
-  Separate help pages describe the <a Menus>menus</a>, how-to <a Moves>enter chess moves</a>, and <a ShortCuts General>keyboard shortcuts</a>
-  for navigating games.
+  Separate help pages describe the <a Menus>menus</a>, <a Menus Colours>colours</a>, how-to <a Moves>enter chess moves</a>,
+  <a ShortCuts General>keyboard shortcuts</a> for navigating games, and <a Comment Diagrams>drawing arrows and marks</a>
   </p>
   <p>
-  <i>See Scid's <run ::tip::show><green>Tip of the Day</green></run> for many helplful hints.</i>
+  <i>See Scid's <run ::tip::show><green>Tip of the Day</green></run> for mmore helplful hints.</i>
   </p>
 
   <h4>Main Button Bar</h4>
@@ -882,19 +882,18 @@ set helpText(Menus) {<h1>Scid Menus</h1>
   On Windows the options directory is (unfortunately) in the program installation directory</i>, <b>bin/config</b>.
   </p>
   <p>
-  They are saved automatically at program exit,
-  or when the <green>Save Options</green> menu is selected.</p>
+  Options are saved automatically at program exit, or when <b>Options-<gt>Save Options</b> is selected.</p>
   <p>
-  The Docked Windows layout is not saved automatically, but may be done manually using <green>Save Layout</green>.
+  The <a Docking>Docked Windows</a> layout is not saved automatically, but may be done manually using <b>Options-<gt>Save Layout</b>.
 </p>
   <h3><name Colours>Colours</name></h3>
   <p>
-  The colours and themes for the Main Board are set in the <b>Options-<gt>Chessboard</b>,
+  The colours and themes for the Main Board are set in the <run ::chooseBoardColors><green>Options-<gt>Chessboard</green></run>,
   but a few other colour settings are available in <b>Options-<gt>Colours</b>.
 </p><p>
   The <b>Rows</b> colour is for the highlighted row in the Tree, Books, Finder, PlayerFinder and TournamentFinder windows.
-<br>
   Crosstable coloured rows must be enabled in the Crosstable Options menus.
+  The Board arrows and drawables' colours are set in the <a Comment Diagrams>Comment Editor</a>.
 
   <p><footer>Updated: Scid vs. PC 4.17, Mar 2016</footer></p>
 }
@@ -1392,8 +1391,8 @@ set helpText(Comment) {<h1>The Comment Editor</h1>
 
   <h4>Drawing Arrows</h4>
   <p>
-  Arrows can be done in two ways. In the main board, Hold control and click on the start square, then end square.
-  Alternatively, in the Comment Editor, arrows can be drawn (and erased) by dragging between two squares.
+  Arrows can be done in two ways. In the Main Board, while holding Control, click on the start square then end square.
+  Alternatively in the Comment Editor, arrows can be drawn (and erased) by dragging between two squares.
   </p>
   <p>
   The technical format of arrows is:
