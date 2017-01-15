@@ -1192,6 +1192,23 @@ Game::MainVariation (uint varNumber)
 
     m = CurrentMove->varChild->next; // first move in first variation
 
+    if (CurrentMove->varChild->comment) {
+      // move the prevar comment as "(comment)" to the promoted move - S.A
+      char newcomment[strLength(CurrentMove->varChild->comment) + strLength(CurrentMove->varChild->next->comment) + 3];
+
+      if (CurrentMove->varChild->next->comment) {
+	sprintf (newcomment, "(%s) %s", CurrentMove->varChild->comment, CurrentMove->varChild->next->comment);
+      } else {
+	sprintf (newcomment, "(%s)", CurrentMove->varChild->comment);
+      }
+
+      StrAlloc->Delete (CurrentMove->varChild->comment);
+      StrAlloc->Delete (m->comment);
+
+      CurrentMove->varChild->comment = NULL;
+      m->comment = StrAlloc->Duplicate(newcomment);
+    }
+
     CurrentMove->moveData  = m->moveData;
     CurrentMove->comment   = m->comment;
     CurrentMove->next      = m->next;
