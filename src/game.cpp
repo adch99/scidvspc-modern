@@ -1194,7 +1194,9 @@ Game::MainVariation (uint varNumber)
 
     if (CurrentMove->varChild->comment) {
       // move the prevar comment as "(comment)" to the promoted move - S.A
-      char newcomment[strLength(CurrentMove->varChild->comment) + strLength(CurrentMove->varChild->next->comment) + 3];
+      char newcomment[strLength(CurrentMove->varChild->comment) + \
+      ( CurrentMove->varChild->next->comment ? strLength(CurrentMove->varChild->next->comment) : 0 ) \
+      + 3 + 1];
 
       if (CurrentMove->varChild->next->comment) {
 	sprintf (newcomment, "(%s) %s", CurrentMove->varChild->comment, CurrentMove->varChild->next->comment);
