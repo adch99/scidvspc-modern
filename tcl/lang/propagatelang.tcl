@@ -19,7 +19,9 @@ exec tclsh "$0" "$@"
 array set encodings {
   czech iso8859-2
   deutsch iso8859-1
+  finnish iso8859-1
   francais iso8859-1
+  greek utf-8
   hungary iso8859-2
   italian utf-8
   nederlan iso8859-1
@@ -31,13 +33,14 @@ array set encodings {
   serbian iso8859-2
   spanish iso8859-1
   swedish iso8859-1
-  greek utf-8
 }
 
 array set codes {
   czech C
   deutsch D
+  finnish L
   francais F
+  greek G
   hungary H
   italian I
   nederlan N
@@ -49,11 +52,10 @@ array set codes {
   serbian Y
   spanish S
   swedish W
-  greek G
 }
 
-set languages {czech deutsch francais hungary italian nederlan norsk polish
-  portbr port russian spanish swedish greek serbian
+set languages {czech deutsch finnish francais greek hungary italian nederlan norsk polish
+  portbr port russian serbian spanish swedish 
 }
 
 ################################################################################

@@ -13,6 +13,7 @@ exec tclsh "$0" "$@"
 array set codes {
   czech C
   deutsch D
+  finnish L
   francais F
   greek G
   hungary H
@@ -28,8 +29,8 @@ array set codes {
   swedish W
 }
 
-set languages {czech deutsch francais greek hungary italian nederlan norsk polish
-  portbr port spanish swedish serbian russian
+set languages {czech deutsch finnish francais greek hungary italian nederlan norsk polish
+  portbr port russian serbian spanish swedish 
 }
 
 ################################################################################

@@ -6,7 +6,7 @@
 # (1) Choose a letter code for the language. Currently assigned codes are:
 #      E=English, D=Deutsch, F=Francais, S=Spanish, B=Brasil Portuguese, U=Portuguese
 #      P=Polish, N=Nederlands, W=Swedish, O=Norsk, C=Czech, H=Hungarian,
-#      Y=Serbian.
+#      Y=Serbian, L=Finnish (Linus!)
 #
 # (2) Edit the code below that has the lines "addLanguage ..." and add your
 #     new language. The final digit in each line is the index of the

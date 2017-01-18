@@ -72,6 +72,7 @@ proc addLanguage {letter name underline {encodingSystem ""}} {
 array set langTable {
   C {czech    Czech      0 iso8859-2 cz}
   D {deutsch  Deutsch    0 iso8859-1 de}
+  L {finnish  Finnish    0 iso8859-1 {}}
   F {francais Francais   0 iso8859-1 fr}
   G {greek    Greek      0 utf-8     gr}
   H {hungary  Hungarian  0 iso8859-2 hu}
