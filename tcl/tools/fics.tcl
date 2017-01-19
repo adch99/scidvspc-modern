@@ -643,11 +643,9 @@ namespace eval fics {
 	    set l [string map {smoves+ smoves} $l]
           }
 
-	  sc_game new
+	  ::game::Clear noconfirm
 	  set ::fics::mainGame -1
 	  set ::fics::playing 0
-	  updateBoard -pgn
-	  updateTitle
 
 	  writechan $l echo
 
@@ -719,10 +717,7 @@ namespace eval fics {
           return
       } 
       ex* {
-	  set confirm [::game::ConfirmDiscard]
-	  if {$confirm == 2} {return}
-	  if {$confirm == 0} {::game::Save}
-          sc_game new
+          ::game::Clear
       }
       moretime {
 	  ::commenteditor::appendComment "$::fics::reallogin gives $l"
@@ -1068,7 +1063,7 @@ namespace eval fics {
 
       ::fics::disableEngines
 
-      sc_game new
+      ::game::Clear noconfirm
 
       set idx1 [string first "(" $line]
       set white [string trim [string range $line 10 [expr $idx1 -1]] ]

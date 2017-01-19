@@ -55,11 +55,13 @@ proc ::game::ConfirmDiscard {} {
 #   Clears the active game, checking first if it is altered.
 #   Updates any affected windows.
 
-proc ::game::Clear {} {
-  set confirm [::game::ConfirmDiscard]
-  if {$confirm == 2} { return }
-  if {$confirm == 0} {
-    ::game::Save
+proc ::game::Clear {{confirm yes}} {
+  if {$confirm == "yes"} {
+    set confirm [::game::ConfirmDiscard]
+    if {$confirm == 2} { return }
+    if {$confirm == 0} {
+      ::game::Save
+    }
   }
 
   setTrialMode 0
