@@ -401,7 +401,10 @@ namespace eval ExtHardware {
     ::ExtHardware::HWbuttonImg tb_eng_query
 
     set w .exthardwareConfig
-    if { [winfo exists $w]} { return }
+    if { [winfo exists $w]} {
+      raiseWin $w
+      return
+    }
     toplevel $w
     wm state $w withdrawn
     wm title $w [::tr ExtHWConfigConnection]
@@ -453,7 +456,7 @@ namespace eval ExtHardware {
 
     grid $w.showbutton -stick w     -row 5 -column 1
 
-    grid [frame $w.buttons]         -row 6 -column 1 -pady 10 -sticky w
+    grid [frame $w.buttons]         -row 6 -column 0 -columnspan 2 -pady 10 
 
     dialogbutton $w.buttons.ok -text OK -command {
        ::ExtHardware::saveHardwareOptions
@@ -461,11 +464,13 @@ namespace eval ExtHardware {
        destroy .exthardwareConfig
        $::ExtHardware::bindbutton
     }
+    dialogbutton $w.buttons.help -text [::tr Help] -command {helpWindow HardwareConfig}
+
     dialogbutton $w.buttons.cancel -text [::tr Cancel] -command "::ExtHardware::HWbuttonImg tb_eng_disconnected ; destroy $w"
 
-    pack $w.buttons.ok $w.buttons.cancel -side left -padx 20
+    pack $w.buttons.ok $w.buttons.help $w.buttons.cancel -side left -padx 20
 
-    bind $w <F1> { helpWindow HardwareConfig}
+    bind $w <F1> {helpWindow HardwareConfig}
 
     update
     placeWinOverParent $w .

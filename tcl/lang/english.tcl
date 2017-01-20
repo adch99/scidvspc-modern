@@ -186,7 +186,7 @@ menuText E ToolsMaintNameRound "Spellcheck Round Names" 11 {Spellcheck round nam
 menuText E ToolsMaintFixBase "Repair base" 0 {Try to repair a corrupted base}
 
 menuText E ToolsConnectHardware "Connect Hardware" 0 {Connect external hardware}
-menuText E ToolsConnectHardwareConfigure "Configure..." 0 {Configure external hardware and connection}
+menuText E ToolsConnectHardwareConfigure "Configure" 0 {Configure external hardware and connection}
 menuText E ToolsConnectHardwareNovagCitrineConnect "Connect Novag Citrine" 9 {Connect Novag Citrine with Scid}
 menuText E ToolsConnectHardwareInputEngineConnect "Connect Input Engine" 9 {Connect Input Engine (e.g. DGT board) with Scid}
 # these three unused
@@ -1670,7 +1670,7 @@ translate E CCDlgConfigRelayHelp {Go to the games page on http://www.iccf-webche
 
 
 # Connect Hardware dialoges
-translate E ExtHWConfigConnection {Configure external hardware}
+translate E ExtHWConfigConnection {Configure External Hardware}
 translate E ExtHWPort {Port}
 translate E ExtHWEngineCmd {Engine command}
 translate E ExtHWEngineParam {Engine parameter}
