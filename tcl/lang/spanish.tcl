@@ -192,9 +192,6 @@ menuText S ToolsConnectHardware "Conectar hardware" 0 {Conectar  hardware extern
 menuText S ToolsConnectHardwareConfigure "Configurar..." 0 {Configurar conexión a hardware externo}
 menuText S ToolsConnectHardwareNovagCitrineConnect "Conectar Novag Citrine" 0 {Conectar Novag Citrine}
 menuText S ToolsConnectHardwareInputEngineConnect "Conectar Tablero" 0 {Conectar tablero de entra (p.ej. DGT)}
-menuText S ToolsNovagCitrine "Novag Citrine" 0 {Novag Citrine}
-menuText S ToolsNovagCitrineConfig "Configuración" 0 {Configuración Novag Citrine}
-menuText S ToolsNovagCitrineConnect "Conectar" 0 {Conectar Novag}
 menuText S ToolsPInfo "Información del jugador" 16 \
   {Abrir/actualizar la ventana de información del jugador}
 menuText S ToolsPlayerReport "Informe del jugador" 3 \

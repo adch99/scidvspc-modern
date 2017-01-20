@@ -189,10 +189,6 @@ menuText E ToolsConnectHardware "Connect Hardware" 0 {Connect external hardware}
 menuText E ToolsConnectHardwareConfigure "Configure" 0 {Configure external hardware and connection}
 menuText E ToolsConnectHardwareNovagCitrineConnect "Connect Novag Citrine" 9 {Connect Novag Citrine with Scid}
 menuText E ToolsConnectHardwareInputEngineConnect "Connect Input Engine" 9 {Connect Input Engine (e.g. DGT board) with Scid}
-# these three unused
-menuText E ToolsNovagCitrine "Novag Citrine" 0 {Novag Citrine}
-menuText E ToolsNovagCitrineConfig "Configuration" 0 {Novag Citrine configuration}
-menuText E ToolsNovagCitrineConnect "Connect" 0 {Novag Citrine connect}
 
 menuText E ToolsPInfo "Player Information"  0 \
   {Open/update the Player Information window}

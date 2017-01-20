@@ -187,9 +187,6 @@ menuText F ToolsConnectHardware "Brancher hardware" 0 {Brancher hardware extérie
 menuText F ToolsConnectHardwareConfigure "Configurer..." 0 {Configurer la connexion au hardware extérieur}
 menuText F ToolsConnectHardwareNovagCitrineConnect "Brancher Novag Citrine" 0 {Brancher Novag Citrine}
 menuText F ToolsConnectHardwareInputEngineConnect "Brancher périphérique d'entrée" 0 {Brancher ériphérique d'entrée (par ex. DGT)}
-menuText F ToolsNovagCitrine "Novag Citrine" 0 {Novag Citrine}
-menuText F ToolsNovagCitrineConfig "Configurer" 0 {Configurer Novag Citrine}
-menuText F ToolsNovagCitrineConnect "Connecter" 0 {Connecter Novag Citrine}
 menuText F ToolsPInfo "Information sur les joueurs"  0 \
   {Ouvrir/Mettre à jour la fenêtre d'information sur les joueurs}
 menuText F ToolsPlayerReport "Rapport pour le joueur" 3 \

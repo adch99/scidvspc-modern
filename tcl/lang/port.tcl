@@ -182,9 +182,6 @@ menuText U ToolsConnectHardware "Ligar Hardware" 0 {Connect external hardware}
 menuText U ToolsConnectHardwareConfigure "Configurar..." 0 {Configure external hardware and connection}
 menuText U ToolsConnectHardwareNovagCitrineConnect "Ligar Novag Citrine" 9 {Connect Novag Citrine with Scid}
 menuText U ToolsConnectHardwareInputEngineConnect "Ligar tabuleiro eletrónico" 9 {Connect Input Engine (e.g. DGT board) with Scid}
-menuText U ToolsNovagCitrine "Novag Citrine" 0 {Novag Citrine}
-menuText U ToolsNovagCitrineConfig "Configuração" 0 {Configurar Novag Citrine}
-menuText U ToolsNovagCitrineConnect "Ligar" 0 {Ligar Novag Citrine}
 
 menuText U ToolsPInfo "Informação do Jogador"  0 \
   {Abre/atualiza a janela de informacao do jogador}

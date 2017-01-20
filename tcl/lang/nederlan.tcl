@@ -191,9 +191,6 @@ menuText N ToolsConnectHardware "Verbind hardware" 0 {Externe hardware verbinden
 menuText N ToolsConnectHardwareConfigure "Configureer..." 0 {Configureer externe hardware en verbinding}
 menuText N ToolsConnectHardwareNovagCitrineConnect "Verbind Novag Citrine" 0 {Verbind Novag Citrine met ScidvsPC}
 menuText N ToolsConnectHardwareInputEngineConnect "Invoer Engine aansluiten" 0 {Invoer Engine aansluiten(e.g. DGT)}
-menuText N ToolsNovagCitrine "Novag Citrine" 0 {Novag Citrine}
-menuText N ToolsNovagCitrineConfig "Configuratie" 0 {Novag Citrine configuratie}
-menuText N ToolsNovagCitrineConnect "Aansluiten" 0 {Novag Citrine aansluiten}
 menuText N ToolsPInfo "Spelerinformatie"  6 \
   {Open/wijzig het spelerinformatievenster}
 menuText N ToolsPlayerReport "Speler rapport " 7 \

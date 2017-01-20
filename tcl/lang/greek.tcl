@@ -198,10 +198,6 @@ menuText G ToolsConnectHardware "Σύνδεση Hardware" 3 {Σύνδεση εξ
 menuText G ToolsConnectHardwareConfigure "Ρύθμιση..." 0 {Ρύθμιση εξωτερικού hardware και σύνδεση}
 menuText G ToolsConnectHardwareNovagCitrineConnect "Σύνδεση Novag Citrine" 0 {Σύνδεση του Novag Citrine με το Scid}
 menuText G ToolsConnectHardwareInputEngineConnect "Σύνδεση Μηχ. Εισαγωγής" 8 {Σύνδεση Μηχανής Εισαγωγής Κινήσεων (e.g. DGT board) με το Scid}
-# these three unused
-menuText G ToolsNovagCitrine "Novag Citrine" 0 {Novag Citrine}
-menuText G ToolsNovagCitrineConfig "Ρύθμιση" 0 {Ρυθμίσεις Novag Citrine}
-menuText G ToolsNovagCitrineConnect "Σύνδεση" 0 {Σύνδεση Novag Citrine}
 
 menuText G ToolsPInfo "Πληροφορίες Παίκτη"  5 \
   {Άνοιγμα/κλείσιμο παραθύρου Πληροφοριών σχετικά με τον Παίκτη}

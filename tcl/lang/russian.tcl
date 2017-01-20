@@ -179,9 +179,6 @@ menuText R ToolsConnectHardware "Подключение к оборудован�
 menuText R ToolsConnectHardwareConfigure "Настройка..." 0 {Настройка внешнего оборудования и подключения}
 menuText R ToolsConnectHardwareNovagCitrineConnect "Соединение с компьютером Novag Citrine" 0 {Соединение с компьютером Novag Citrine}
 menuText R ToolsConnectHardwareInputEngineConnect "Соединение с входящим движком" 0 {Соединение Scid с входящим движком (например, доска DGT)}
-menuText R ToolsNovagCitrine "Компьютер Novag Citrine" 0 {Компьютер Novag Citrine}
-menuText R ToolsNovagCitrineConfig "Конфигурация" 0 {Настройка компьютера Novag Citrine}
-menuText R ToolsNovagCitrineConnect "Соединение" 0 {Соединение с Novag Citrine}
 
 menuText R ToolsPInfo "Информация об игроке"  1 \
   {Открыть/обновить окно информации об игроке}

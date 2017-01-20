@@ -158,10 +158,6 @@ menuText L ToolsConnectHardware "Yhdistä hardware" 0 {Yhditä ulkoinen hardware}
 menuText L ToolsConnectHardwareConfigure "Konfiguroi..." 0 {Konfiguroi ulkoinen hardware ja yhteys}
 menuText L ToolsConnectHardwareNovagCitrineConnect "Yhdistä Novag Citrine" 9 {Yhditä Novag Citrine Scidin kanssa}
 menuText L ToolsConnectHardwareInputEngineConnect "Yhdistä syöttöohjelma" 9 {Yhdistä syöttöohjelma (esim. DGT-lauta) Scidin kanssa}
-# these three unused
-menuText L ToolsNovagCitrine "Novag Citrine" 0 {Novag Citrine}
-menuText L ToolsNovagCitrineConfig "Asetukset" 0 {Novag Citrine-asetukset}
-menuText L ToolsNovagCitrineConnect "Yhdistä" 0 {Yhdistä Novag Citrine}
 
 menuText L ToolsPInfo "Pelaajan tiedot"  0 \
   {Avaa/päivitä pelaajainformaatioikkuna}

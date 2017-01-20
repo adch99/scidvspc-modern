@@ -183,9 +183,6 @@ menuText W ToolsConnectHardware "Anslut hårdvara" 0 {Anslut extern hårdvara}
 menuText W ToolsConnectHardwareConfigure "Konfigurera..." 0 {Konfigurera extern hårdvara och anslutning}
 menuText W ToolsConnectHardwareNovagCitrineConnect "Anslut Novag Citrine" 0 {Anslut Novag Citrine}
 menuText W ToolsConnectHardwareInputEngineConnect "Anslut Inmatningsmotor" 0 {Anslut Inmatningsmotor (t ex DGT)}
-menuText W ToolsNovagCitrine "Novag Citrine" 0 {Novag Citrine}
-menuText W ToolsNovagCitrineConfig "Konfiguration" 0 {Novag Citrine Konfiguration}
-menuText W ToolsNovagCitrineConnect "Anslut" 0 {Anslut Novag Citrine}
 menuText W ToolsPInfo "Spelarinformation"  0 \
   {Öppna/ uppdatera spelarinformation}
 menuText W ToolsPlayerReport "Spelarrapport" 3 \

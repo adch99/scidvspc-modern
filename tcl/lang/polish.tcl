@@ -186,9 +186,6 @@ menuText P ToolsConnectHardware "Podłącz urządzenie" 0 {Podłącz zewnętrzne
 menuText P ToolsConnectHardwareConfigure "Konfiguruj..." 0 {Konfiguruj zewnętrzne urządzenie i połączenie}
 menuText P ToolsConnectHardwareNovagCitrineConnect "Podłącz Novag Citrine" 0 {Podłącz Novag Citrine}
 menuText P ToolsConnectHardwareInputEngineConnect "Podłącz urządzenie wejściowe" 0 {Podłącz urządzenie wejściowe, na przykład DGT}
-menuText P ToolsNovagCitrine "Novag Citrine" 0 {Novag Citrine}
-menuText P ToolsNovagCitrineConfig "Konfiguracja" 0 {Konfiguracja Novag Citrine}
-menuText P ToolsNovagCitrineConnect "Podłącz" 0 {Podłącz Novag Citrine}
 menuText P ToolsPInfo "Informacje o zawodniku"  0 \
   {Otwórz/odśwież okno informacji o zawodniku}
 menuText P ToolsPlayerReport "Raport o graczu" 9 \

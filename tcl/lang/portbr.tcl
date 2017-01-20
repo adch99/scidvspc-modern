@@ -199,11 +199,8 @@ menuText B ToolsConnectHardwareConfigure "Configure..." 0 {Configure external ha
 menuText B ToolsConnectHardwareNovagCitrineConnect "Connect Novag Citrine" 9 {Connect Novag Citrine with Scid}
 menuText B ToolsConnectHardwareInputEngineConnect "Connect Input Engine" 9 {Connect Input Engine (e.g. DGT board) with Scid}
 # ====== TODO To be translated ======
-menuText B ToolsNovagCitrine "Novag Citrine" 0 {Novag Citrine}
 # ====== TODO To be translated ======
-menuText B ToolsNovagCitrineConfig "Configuration" 0 {Novag Citrine configuration}
 # ====== TODO To be translated ======
-menuText B ToolsNovagCitrineConnect "Connect" 0 {Novag Citrine connect}
 
 menuText B ToolsPInfo "Informacao do Jogador"  0 \
   {Abre/atualiza a janela de informacao do jogador}
