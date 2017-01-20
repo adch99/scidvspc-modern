@@ -10,32 +10,11 @@ exec tclsh "$0" "$@"
 # program which verifies that every language file has the same
 # translation commands in the same order as english.tcl.
 
-array set codes {
-  czech C
-  deutsch D
-  finnish L
-  francais F
-  greek G
-  hungary H
-  italian I
-  nederlan N
-  norsk O
-  polish P
-  portbr B
-  port U
-  russian R
-  serbian Y
-  spanish S
-  swedish W
-}
+source langList.tcl
 
-set languages {czech deutsch finnish francais greek hungary italian nederlan norsk polish
-  portbr port russian serbian spanish swedish 
-}
-
-################################################################################
 # handle multiple lines statements and keep only lines with
 # menuText translate helpMsg
+
 proc multiLines {tmp} {
   set data {}
   for {set i 0} {$i < [llength $tmp]} {incr i} {

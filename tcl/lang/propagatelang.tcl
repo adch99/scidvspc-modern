@@ -16,49 +16,8 @@ exec tclsh "$0" "$@"
 #      or "propagatelang.tcl" for all files
 # "====== TODO To be translated ======" is inserted appropriately
 
-array set encodings {
-  czech iso8859-2
-  deutsch iso8859-1
-  finnish iso8859-1
-  francais iso8859-1
-  greek utf-8
-  hungary iso8859-2
-  italian utf-8
-  nederlan iso8859-1
-  norsk iso8859-1
-  polish utf-8
-  portbr iso8859-1
-  port iso8859-1
-  russian utf-8
-  serbian iso8859-2
-  spanish iso8859-1
-  swedish iso8859-1
-}
+source langList.tcl
 
-array set codes {
-  czech C
-  deutsch D
-  finnish L
-  francais F
-  greek G
-  hungary H
-  italian I
-  nederlan N
-  norsk O
-  polish P
-  portbr B
-  port U
-  russian R
-  serbian Y
-  spanish S
-  swedish W
-}
-
-set languages {czech deutsch finnish francais greek hungary italian nederlan norsk polish
-  portbr port russian serbian spanish swedish 
-}
-
-################################################################################
 proc checkfile {code langfile enc} {
   # Read this language file and the english file:
 
