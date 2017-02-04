@@ -1631,6 +1631,10 @@ Sorting is not undoable, and may affect search and tree performance. For more de
   the database is compacted - whence they will be <b>permanently deleted</b> from the database.
   This can be done by the <b>Compact</b> button, or 
   from the <a Maintenance>maintenance</a> window.</p>
+<p><i>The Game List only deletes (up to) a page of games at a time. Deleting or manipulating ALL filtered games,
+is also done from the Maintenance window.</i></p>
+
+
 <p><i>The default database (Clipbase) cannot be compacted</i>.</p>
 
 <h3>Buttons</h3>
@@ -2438,7 +2442,7 @@ set helpText(Maintenance) {<h1>Database Maintenance</h1>
 <green><run ::maint::Open>Maintenance Window</b></run></green> (Control+m).
   </p>
   <p>
-  Operations include - <a Flags>Edit Game Flags</a>, <a Maintenance Spellcheck>Spellcheck Names</a>,
+  Operations include - using <a Flags>Delete (and other Game Flags)</a>, <a Maintenance Spellcheck>Spellcheck Names</a>,
   <a Compact>Compact</a> and <a Sorting>Sort</a> databases, and delete PGN Tags, Comments and Variations.
   </p>
   <p><i>
@@ -2682,12 +2686,11 @@ set helpText(Flags) {<h1>Game Flags</h1>
   <p>
   Game Flags are indicators of some characteristic, such as <b>Brilliant Play</b> or <b>White Opening</b>,
   and are used for classifying games and enabling fast database searches.
-  </p><p>
   There are <b>12 user flags</b> and <b>6 custom flags</b>
   </p>
   <p>
-  Additionally, games may be marked with the special-case <b>Delete Flag</b> which
-  indicates they will be removed when the database it is next <a Compact>compacted</a>.
+  Additionally, <b>Delete</b> is just a special-case flag, which
+  indicates games will be removed when the database it is next <a Compact>compacted</a>.
   </p>
   <p>
   The 12 user flags are

@@ -470,34 +470,9 @@ proc ::windows::gamelist::Open {} {
 
   set ::windows::gamelist::goto {}
 
-  button $w.b.select -textvar ::tr(SetFilter) -font font_Small -relief flat -command {
-    set items [.glistWin.tree selection]
-    if { "$items" == "" } {
-      bell
-    } else {
-      sc_filter reset
-      # remove the select items (Hmmm... will reset ply value though :-( )
-      foreach i $items {
-	sc_filter remove [.glistWin.tree set $i Number]
-      }
-      sc_filter negate
-      set glstart 1
-      ::windows::gamelist::Refresh
-    }
-  }
-
-  ### Filter items
-  button $w.b.remove -textvar ::tr(GlistRemoveThisGameFromFilter) -font font_Small -relief flat -command ::windows::gamelist::Remove
-  # Trim extra space from this crowded frame
-  if {!$::windowsOS} {
-    $w.b.remove configure -width 5
-    $w.b.select configure -width 5
-  }
   bind $w.tree <Delete> "::windows::gamelist::Remove 1"
-  bind $w.tree <Control-Delete> "$w.b.delete invoke"
+  bind $w.tree <Control-Delete> ::windows::gamelist::Delete
 
-  button $w.b.removeabove -text Rem -image arrow_up -compound right -font font_Small -relief flat -command {::windows::gamelist::removeFromFilter up}
-  button $w.b.removebelow -text Rem -image arrow_down -compound right -font font_Small -relief flat -command {::windows::gamelist::removeFromFilter down}
   button $w.b.reset -textvar ::tr(Reset) -font font_Small -relief flat -command ::search::filter::reset
   button $w.b.negate -text [lindex [tr SearchNegate] 0] -font font_Small -relief flat -command ::search::filter::negate
 
@@ -533,38 +508,18 @@ proc ::windows::gamelist::Open {} {
   }
   bind $w.b.goto <Control-Return> {
     ::windows::gamelist::showNum $::windows::gamelist::goto
-    .glistWin.b.load invoke
-  }
-  dialogbutton $w.b.browse -text $::tr(Browse) -font font_Small -command {
-    set selection [.glistWin.tree selection]
-    if { $selection != {} } {
-      ::gbrowser::new 0 [.glistWin.tree set [lindex $selection 0] Number]
-    }
+    ::windows::gamelist::LoadSelection
   }
 
   dialogbutton $w.b.current -font font_Small -textvar ::tr(Current) -command ::windows::gamelist::showCurrent
 
-  # no longer packed, but still used as Control-Enter binding
-  dialogbutton $w.b.load -text Load -font font_Small -command {
-    set selection [.glistWin.tree selection]
-    if { $selection != {} } {
-      ::windows::gamelist::Load [.glistWin.tree set [lindex $selection 0] Number]
-    }
-  }
-
-  dialogbutton $w.b.delete -text $::tr(Delete) -font font_Small -command {
-    ::windows::gamelist::ToggleFlag D
-    ::windows::gamelist::Refresh
-    configDeleteButtons
-  }
-
-  dialogbutton $w.b.compact -text [lindex $::tr(CompactDatabase) 0] -font font_Small -command "compactGames $w ; configDeleteButtons"
-  configDeleteButtons
+  dialogbutton $w.b.compact -text [lindex $::tr(CompactDatabase) 0] -font font_Small -command "compactGames $w ; configCompactButton"
+  configCompactButton
 
   dialogbutton $w.b.help  -textvar ::tr(Help) -width 5 -font font_Small -command { helpWindow GameList }
   dialogbutton $w.b.close -textvar ::tr(Close) -font font_Small -command { focus .main ; destroy .glistWin }
 
-  pack $w.b.close $w.b.findcase $w.b.find $w.b.filter $w.b.negate $w.b.reset -side right
+  pack $w.b.findcase $w.b.find $w.b.filter $w.b.negate $w.b.reset -side right
   pack $w.b.save $w.b.bkm $w.b.gfirst $w.b.gprev $w.b.gnext $w.b.glast -side left
 
   pack $w.b.current $w.b.goto -side left -padx 3
@@ -600,6 +555,42 @@ proc ::windows::gamelist::Open {} {
   ::createToplevelFinalize $w
 
   bind $w <Configure> {::windows::gamelist::Configure %W }
+}
+
+proc ::windows::gamelist::Delete {} {
+  ::windows::gamelist::ToggleFlag D
+  ::windows::gamelist::Refresh
+  configCompactButton
+}
+
+proc ::windows::gamelist::LoadSelection {} {
+  set selection [.glistWin.tree selection]
+  if { $selection != {} } {
+    ::windows::gamelist::Load [.glistWin.tree set [lindex $selection 0] Number]
+  }
+}
+
+proc ::windows::gamelist::Browse {} {
+  set selection [.glistWin.tree selection]
+  if { $selection != {} } {
+    ::gbrowser::new 0 [.glistWin.tree set [lindex $selection 0] Number]
+  }
+}
+
+proc ::windows::gamelist::Select {} {
+  set items [.glistWin.tree selection]
+  if { "$items" == "" } {
+    bell
+  } else {
+    sc_filter reset
+    # remove the select items (Hmmm... will reset ply value though :-( )
+    foreach i $items {
+      sc_filter remove [.glistWin.tree set $i Number]
+    }
+    sc_filter negate
+    set glstart 1
+    ::windows::gamelist::Refresh
+  }
 }
 
 proc ::windows::gamelist::setColumnTitles {} {
@@ -699,21 +690,21 @@ proc ::windows::gamelist::Popup {w x y X Y} {
 
     if {$menutype == "short"} {
     $menu add command -label $::tr(GlistRemoveThisGameFromFilter) -command ::windows::gamelist::Remove
-    $menu add command -label $::tr(GlistDeleteField) -command "$w.b.delete invoke"
+    $menu add command -label $::tr(GlistDeleteField) -command ::windows::gamelist::Delete
     $menu add cascade -label $::tr(Flag)      -menu $menu.flags
-    $menu add command -label $::tr(SetFilter) -command "$w.b.select invoke"
+    $menu add command -label $::tr(SetFilter) -command ::windows::gamelist::Select
     $menu add separator
     $menu add command -label $::tr(Reset) -command "$w.b.reset invoke"
     } else {
-    $menu add command -label $::tr(LoadGame) -command "$w.b.load invoke"
-    $menu add command -label $::tr(Browse) -command "$w.b.browse invoke"
-    $menu add command -label $::tr(GlistDeleteField) -command "$w.b.delete invoke"
+    $menu add command -label $::tr(LoadGame) -command ::windows::gamelist::LoadSelection
+    $menu add command -label $::tr(Browse) -command ::windows::gamelist::Browse
+    $menu add command -label $::tr(GlistDeleteField) -command ::windows::gamelist::Delete
     $menu add cascade -label $::tr(Flag)      -menu $menu.flags
-    $menu add command -label $::tr(SetFilter) -command "$w.b.select invoke"
+    $menu add command -label $::tr(SetFilter) -command ::windows::gamelist::Select
     $menu add separator
     $menu add command -label $::tr(GlistRemoveThisGameFromFilter) -command ::windows::gamelist::Remove
-    $menu add command -label $::tr(GlistRemoveGameAndAboveFromFilter) -command "$w.b.removeabove invoke"
-    $menu add command -label $::tr(GlistRemoveGameAndBelowFromFilter) -command "$w.b.removebelow invoke"
+    $menu add command -label $::tr(GlistRemoveGameAndAboveFromFilter) -command {::windows::gamelist::removeFromFilter up}
+    $menu add command -label $::tr(GlistRemoveGameAndBelowFromFilter) -command {::windows::gamelist::removeFromFilter down}
     $menu add command -label $::tr(Reset) -command "$w.b.reset invoke"
     }
     menu $menu.flags -tearoff -1
@@ -834,24 +825,16 @@ proc ::windows::gamelist::checkAltered {} {
   }
 }
 
-proc configDeleteButtons {} {
+proc configCompactButton {} {
   # also check the Flag button
   set w .glistWin
   # debug puts [sc_base current] &&&
   if {[sc_base current] == [sc_info clipbase]} {
     ### Can't compact clipbase
     $w.b.compact configure -state disabled
-    $w.b.delete configure -state normal
   } elseif {[sc_base isReadOnly]} {
-    $w.b.delete configure -state disabled
     $w.b.compact configure -state disabled
   } else {
-
-    ### do we want to always check the delete and flag buttons ? &&&
-    #  if {[.glistWin.tree selection] == ""} disable delete, flag
-    # $w.tree tag bind click <Button-1> {configDeleteButtons}
-
-    $w.b.delete configure -state normal
     $w.b.compact configure -state normal
   }
 }
@@ -1144,7 +1127,7 @@ proc ::windows::gamelist::Refresh {{see {}}} {
   }
   $w.vsb configure -to $to
 
-  configDeleteButtons
+  configCompactButton
   ::windows::switcher::Refresh
 }
 

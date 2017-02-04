@@ -1970,7 +1970,7 @@ proc makeBaseReadOnly {{parent .} {base {}}} {
     if {$base == $current} {
       updateMenuStates
       if {[winfo exists .glistWin]} {
-	configDeleteButtons
+	configCompactButton
       }
       updateStatusBar
     }
