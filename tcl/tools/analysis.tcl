@@ -4211,11 +4211,6 @@ jI2Oj5CRkpOUlZaXmJmakg0TGSCfGRMNog2SDhQaIScsLCchGhQOp6mrra+x
 s5Gdn6CjvqabwsPExcbHyMnKy8zMgQA7
 }
 
-image create photo tb_popup -data {
-R0lGODlhDAAgAIABAAAAAP///yH5BAEKAAEALAAAAAAMACAAAAIdjI+py+0P
-o5y0VgAMXjv01H1a5pFHaFrqyrbu6xQAOw==
-}
-
 ### Make a little toplevel text widget to display an engine log
 
 proc engineShowLog {n} {

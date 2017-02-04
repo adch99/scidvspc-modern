@@ -441,7 +441,7 @@ proc ::windows::gamelist::Open {} {
     bind .glistWin $i +::windows::gamelist::showCurrent
   }
 
-  ### One row of buttons, etc
+  ### One row of buttons, with an expandable button frame in the middle
 
   button $w.b.save -image tb_save -relief flat -command {
     if {[sc_game number] != 0} {
@@ -473,26 +473,9 @@ proc ::windows::gamelist::Open {} {
   bind $w.tree <Delete> "::windows::gamelist::Remove 1"
   bind $w.tree <Control-Delete> ::windows::gamelist::Delete
 
-  button $w.b.reset -textvar ::tr(Reset) -font font_Small -relief flat -command ::search::filter::reset
-  button $w.b.negate -text [lindex [tr SearchNegate] 0] -font font_Small -relief flat -command ::search::filter::negate
-
-  ### Filter items against the find entry widget
-  button $w.b.filter -font font_Small -relief flat -textvar ::tr(Filter) \
-    -command {::windows::gamelist::FilterText}
-
-  # button $w.b.findlabel -font font_Small -relief flat -textvar ::tr(GlistFindText) \
-  #   -command {::windows::gamelist::FindText}
-
-  # button $w.b.findall -font font_Small -relief flat -text "Find All" \
-  #   -command {::windows::gamelist::FindText}
-
   ttk::combobox $w.b.find -width 10 -font font_Small -textvariable ::windows::gamelist::findtext
   ::utils::history::SetCombobox ::windows::gamelist::findtext $w.b.find
   bind $w <Control-f> "focus $w.b.find"
-
-  # didn't use to work
-  # ::utils::history::SetLimit ::windows::gamelist::findtext 5
-  # ::utils::history::PruneList ::windows::gamelist::findtext
 
   bind $w.b.find <Control-Return> {::game::Load $::glstart}
   bind $w.b.find <Return> {::windows::gamelist::FindText}
@@ -511,19 +494,27 @@ proc ::windows::gamelist::Open {} {
     ::windows::gamelist::LoadSelection
   }
 
-  dialogbutton $w.b.current -font font_Small -textvar ::tr(Current) -command ::windows::gamelist::showCurrent
+  ### Expandable button frame in the middle of the buttons row.
+  set f $w.b.f
+  frame $f
 
-  dialogbutton $w.b.compact -text [lindex $::tr(CompactDatabase) 0] -font font_Small -command "compactGames $w ; configCompactButton"
+  button $f.compact -text [lindex $::tr(CompactDatabase) 0] -font font_Small -relief flat -command "
+    compactGames $w
+    configCompactButton"
+  button $f.current -font font_Small -relief flat -textvar ::tr(Current) -command ::windows::gamelist::showCurrent
+  button $f.reset -textvar ::tr(Reset) -font font_Small -relief flat -command ::search::filter::reset
+  button $f.negate -text [lindex [tr SearchNegate] 0] -font font_Small -relief flat -command ::search::filter::negate
+  ### Filter items against the find entry widget
+  button $f.filter -font font_Small -relief flat -textvar ::tr(Filter) -command ::windows::gamelist::FilterText
+
   configCompactButton
 
-  dialogbutton $w.b.help  -textvar ::tr(Help) -width 5 -font font_Small -command { helpWindow GameList }
-  dialogbutton $w.b.close -textvar ::tr(Close) -font font_Small -command { focus .main ; destroy .glistWin }
+  pack $f.filter $f.negate $f.reset $f.current $f.compact -side right
 
-  pack $w.b.findcase $w.b.find $w.b.filter $w.b.negate $w.b.reset -side right
-  pack $w.b.save $w.b.bkm $w.b.gfirst $w.b.gprev $w.b.gnext $w.b.glast -side left
+  pack $w.b.save $w.b.bkm $w.b.gfirst $w.b.gprev $w.b.gnext $w.b.glast $w.b.goto -side left
+  pack $w.b.findcase $w.b.find $f -side right
 
-  pack $w.b.current $w.b.goto -side left -padx 3
-  pack $w.b.compact -side right -padx 3
+  button $w.b.popup -image tb_popup_left -height 32 -width 16 -command ::windows::gamelist::popupButtonBar -relief flat
 
   if {$::windowsOS} {
     # cant focus entry combo on windows as it hogs the wheelmouse
@@ -555,6 +546,84 @@ proc ::windows::gamelist::Open {} {
   ::createToplevelFinalize $w
 
   bind $w <Configure> {::windows::gamelist::Configure %W }
+
+  update
+  after idle {::windows::gamelist::placePopupButton}
+}
+
+proc ::windows::gamelist::placePopupButton {} {
+  set w .glistWin
+  catch {
+    place forget $w.b.popup
+  }
+  if {[winfo reqwidth $w.b.f] > [winfo width $w.b.f]} {
+    place $w.b.popup -in $w.b.f -anchor w -x 0 -y 12
+  }
+}
+
+### Make a transient toplevel button bar (from analysis.tcl)
+
+proc ::windows::gamelist::popupButtonBar {} {
+
+  if {[winfo exists .t]} {
+    return
+  }
+
+  toplevel .t
+  wm withdraw .t
+  set w .glistWin.b.f
+
+  pack [frame .t.f -relief solid -borderwidth 1]
+  set t .t.f
+  catch {wm transient .t [winfo toplevel .main]}
+  wm overrideredirect .t 1
+
+  set offset 14
+  foreach b [winfo children $w] {
+    if {![catch {pack info $b}]} {
+      eval "pack \[[string tolower [winfo class $b]] $t.[string range $b $offset end]\] -side left"
+    }
+  }
+  foreach button [winfo children $w] {
+    set b [string range $button $offset end]
+    foreach opt [$w.$b configure] {
+      set o [lindex $opt 0]
+      catch {
+        $t.$b  configure $o [$w.$b cget $o]
+      }
+    }
+  }
+
+  bind .t <ButtonRelease-1> {destroy .t}
+  bind .t <Leave> {if {"%W" == ".t"} {destroy .t}}
+  bind $w <Destroy> +[list destroy .t]
+
+  update
+  set X [expr [winfo rootx $w] - 1]
+  set moveLeft [expr {[winfo width $w] - [winfo reqwidth $w]}]
+  if {$moveLeft < 0} {
+    incr X $moveLeft
+  }
+
+  # handle case when up against right side of screen
+
+  set space [expr {[winfo screenwidth .main] - ($X + [winfo reqwidth .t])}]
+  if {$space < 0} {
+    incr X $space
+  }
+  # and right side
+  if {$X < 0} {
+    set X 0
+  }
+
+  if {$::windowsOS} {
+    wm state .t normal
+    raise .t
+    wm geometry .t +$X+[expr [winfo rooty $w] - 1]
+  } else {
+    wm geometry .t +$X+[expr [winfo rooty $w] - 1]
+    wm state .t normal
+  }
 }
 
 proc ::windows::gamelist::Delete {} {
@@ -687,6 +756,7 @@ proc ::windows::gamelist::Popup {w x y X Y} {
     }
 
     menu $menu -tearoff 0
+    set f $w.b.f
 
     if {$menutype == "short"} {
     $menu add command -label $::tr(GlistRemoveThisGameFromFilter) -command ::windows::gamelist::Remove
@@ -694,7 +764,7 @@ proc ::windows::gamelist::Popup {w x y X Y} {
     $menu add cascade -label $::tr(Flag)      -menu $menu.flags
     $menu add command -label $::tr(SetFilter) -command ::windows::gamelist::Select
     $menu add separator
-    $menu add command -label $::tr(Reset) -command "$w.b.reset invoke"
+    $menu add command -label $::tr(Reset) -command "$f.reset invoke"
     } else {
     $menu add command -label $::tr(LoadGame) -command ::windows::gamelist::LoadSelection
     $menu add command -label $::tr(Browse) -command ::windows::gamelist::Browse
@@ -705,7 +775,7 @@ proc ::windows::gamelist::Popup {w x y X Y} {
     $menu add command -label $::tr(GlistRemoveThisGameFromFilter) -command ::windows::gamelist::Remove
     $menu add command -label $::tr(GlistRemoveGameAndAboveFromFilter) -command {::windows::gamelist::removeFromFilter up}
     $menu add command -label $::tr(GlistRemoveGameAndBelowFromFilter) -command {::windows::gamelist::removeFromFilter down}
-    $menu add command -label $::tr(Reset) -command "$w.b.reset invoke"
+    $menu add command -label $::tr(Reset) -command "$f.reset invoke"
     }
     menu $menu.flags -tearoff -1
     foreach flag $maintFlaglist  {
@@ -797,6 +867,9 @@ proc ::windows::gamelist::Configure {window} {
     recordWinSize .glistWin
     ::windows::gamelist::Refresh
   }
+  if {$window == ".glistWin.b.f"} {
+    ::windows::gamelist::placePopupButton
+  }
 }
 
 proc ::windows::gamelist::checkAltered {} {
@@ -827,15 +900,15 @@ proc ::windows::gamelist::checkAltered {} {
 
 proc configCompactButton {} {
   # also check the Flag button
-  set w .glistWin
+  set f .glistWin.b.f
   # debug puts [sc_base current] &&&
   if {[sc_base current] == [sc_info clipbase]} {
     ### Can't compact clipbase
-    $w.b.compact configure -state disabled
+    $f.compact configure -state disabled
   } elseif {[sc_base isReadOnly]} {
-    $w.b.compact configure -state disabled
+    $f.compact configure -state disabled
   } else {
-    $w.b.compact configure -state normal
+    $f.compact configure -state normal
   }
 }
 

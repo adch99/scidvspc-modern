@@ -1090,6 +1090,18 @@ MiYpKCYCCjSBIoUJGUW6uCFyI8aMhxAjzohxY4jCfU4ualwoZKPHjxx7gByp
 MCFJkkEAADs=
 }
 
+# Used by analysis widget and gamelist widget popup buttons
+
+image create photo tb_popup -data {
+R0lGODlhDAAgAIABAAAAAP///yH5BAEKAAEALAAAAAAMACAAAAIdjI+py+0P
+o5y0VgAMXjv01H1a5pFHaFrqyrbu6xQAOw==
+}
+
+image create photo tb_popup_left -data {
+R0lGODlhDAAgAKECANnZ2QAAAP///////yH5BAEAAAAALAAAAAAMACAAAAId
+hI+py+0Po5y0WhCCyYljjXheB45hCV7qyrbuaxQAOw==
+}
+
 # Double size the toolbar buttons (disabled)
 if {0} {
   image create photo tempimage
