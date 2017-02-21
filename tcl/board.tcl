@@ -660,10 +660,10 @@ Z0eCuHxOl38Xgbqefld0TRuBgoOEhYYJADs=
 ### Toolbar
 
 set tb .main.tb
-frame $tb -relief raised -border 0
+frame  $tb -relief raised -border 0
 button $tb.new -image tb_new -command ::file::New
-button .main.tb.open -image tb_open -command ::file::Open
-button .main.tb.save -image tb_save -command {
+button $tb.open -image tb_open -command ::file::Open
+button $tb.save -image tb_save -command {
   if {[sc_game number] != 0} {
     #busyCursor .
     gameReplace
@@ -674,43 +674,42 @@ button .main.tb.save -image tb_save -command {
   }
 }
 # Quick save is right click
-bind .main.tb.save <Button-3> {
+bind $tb.save <Button-3> {
   if {[%W cget -state] != "disabled"} {gameQuickSave}
   break
 }
 
-button .main.tb.close -image tb_close -command ::file::Close
-button .main.tb.finder -image tb_finder -command ::file::finder::Open
-menubutton .main.tb.bkm -image tb_bkm -menu .main.tb.bkm.menu
-menu .main.tb.bkm.menu
-bind .main.tb.bkm <ButtonPress-1> "+.main.tb.bkm configure -relief flat"
+button $tb.close -image tb_close -command ::file::Close
+button $tb.finder -image tb_finder -command ::file::finder::Open
+menubutton $tb.bkm -image tb_bkm -menu $tb.bkm.menu
+menu $tb.bkm.menu
+bind $tb.bkm <ButtonPress-1> "+$tb.bkm configure -relief flat"
 
-
-frame .main.tb.space1 -width 12
-button .main.tb.newgame -image tb_newgame -command ::game::Clear
-button .main.tb.copy -image tb_copy -command copyGame
-button .main.tb.paste -image tb_paste -command pasteGame
-frame .main.tb.space2 -width 12
-button .main.tb.gfirst -image tb_gfirst -command {::game::LoadNextPrev first}
-button .main.tb.gprev -image tb_gprev -command {::game::LoadNextPrev previous}
-button .main.tb.gnext -image tb_gnext -command {::game::LoadNextPrev next}
-button .main.tb.glast -image tb_glast -command {::game::LoadNextPrev last}
-frame .main.tb.space3 -width 12
-button .main.tb.rfilter -image tb_rfilter -command ::search::filter::reset
-button .main.tb.bsearch -image tb_bsearch -command ::search::board
-button .main.tb.hsearch -image tb_hsearch -command ::search::header
-button .main.tb.msearch -image tb_msearch -command ::search::material
-frame .main.tb.space4 -width 12
-button .main.tb.glist   -image tb_glist   -command ::windows::gamelist::Open
-button .main.tb.pgn     -image tb_pgn     -command ::pgn::Open
-button .main.tb.tmt     -image tb_tmt     -command ::tourney::Open
-button .main.tb.comment -image tb_comment -command ::commenteditor::Open
-button .main.tb.maint   -image tb_maint   -command ::maint::Open
-button .main.tb.eco     -image tb_eco     -command ::windows::eco::Open
-button .main.tb.tree    -image tb_tree    -command ::tree::Open
-button .main.tb.book    -image tb_book    -command ::book::Open
-button .main.tb.crosst  -image tb_crosst  -command ::crosstab::Open
-button .main.tb.engine  -image tb_engine  -command {makeAnalysisWin -1}
+frame  $tb.space1  -width 12
+button $tb.newgame -image tb_newgame -command ::game::Clear
+button $tb.copy    -image tb_copy -command copyGame
+button $tb.paste   -image tb_paste -command pasteGame
+frame  $tb.space2  -width 12
+button $tb.gfirst  -image tb_gfirst -command {::game::LoadNextPrev first}
+button $tb.gprev   -image tb_gprev -command {::game::LoadNextPrev previous}
+button $tb.gnext   -image tb_gnext -command {::game::LoadNextPrev next}
+button $tb.glast   -image tb_glast -command {::game::LoadNextPrev last}
+frame  $tb.space3  -width 12
+button $tb.rfilter -image tb_rfilter -command ::search::filter::reset
+button $tb.bsearch -image tb_bsearch -command ::search::board
+button $tb.hsearch -image tb_hsearch -command ::search::header
+button $tb.msearch -image tb_msearch -command ::search::material
+frame  $tb.space4  -width 12
+button $tb.glist   -image tb_glist   -command ::windows::gamelist::Open
+button $tb.pgn     -image tb_pgn     -command ::pgn::Open
+button $tb.tmt     -image tb_tmt     -command ::tourney::Open
+button $tb.comment -image tb_comment -command ::commenteditor::Open
+button $tb.maint   -image tb_maint   -command ::maint::Open
+button $tb.eco     -image tb_eco     -command ::windows::eco::Open
+button $tb.tree    -image tb_tree    -command ::tree::Open
+button $tb.book    -image tb_book    -command ::book::Open
+button $tb.crosst  -image tb_crosst  -command ::crosstab::Open
+button $tb.engine  -image tb_engine  -command {makeAnalysisWin -1}
 
 # Set toolbar help status messages:
 foreach {b m} {
@@ -723,17 +722,17 @@ foreach {b m} {
   maint WindowsMaint eco WindowsECO tree WindowsTree book WindowsBook crosst WindowsCross tmt WindowsTmt 
   engine ToolsAnalysis
 } {
-  set helpMessage(.main.tb.$b) $m
+  set helpMessage($tb.$b) $m
   # ::utils::tooltip::Set $tb.$b $m
 }
 
 foreach i {new open save close finder bkm newgame copy paste gprev gnext gfirst glast \
       rfilter hsearch bsearch msearch glist pgn comment maint eco tree book crosst tmt engine} {
-  .main.tb.$i configure -relief flat -border 1 -highlightthickness 0 -anchor n -takefocus 0
-  ::utils::tooltip::Set .main.tb.$i [tr $::helpMessage(.main.tb.$i)]
+  $tb.$i configure -relief flat -border 1 -highlightthickness 0 -anchor n -takefocus 0
+  ::utils::tooltip::Set $tb.$i [tr $::helpMessage($tb.$i)]
 }
 
-#pack .main.tb -side top -fill x -before .main.button
+#pack $tb -side top -fill x -before .main.button
 
 proc changeToolbar {{zero 1}} {
     array set ::toolbar [array get ::toolbar_temp]
