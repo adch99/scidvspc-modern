@@ -438,7 +438,7 @@ set ::pgn::shortHeader 0
 set ::pgn::boldMainLine 0
 set ::pgn::columnFormat 0
 set ::pgn::stripMarks 0
-set ::pgn::showScrollbar 0
+set ::pgn::showScrollbar 1
 set pgnColor(Header) "\#00008b"
 set pgnColor(Main) "\#000000"
 set pgnColor(Var) "\#0000ee"
@@ -1001,7 +1001,11 @@ proc createToplevel { w } {
     return "already_exists"
   }
 
-  if { $::docking::USE_DOCKING && ! [ ::docking::isUndocked $w ] } {
+  catch {
+    unset ::docking::notebook_name($f)
+  }
+
+  if { $::docking::USE_DOCKING } {
     frame $f  -container 1
     toplevel .$name -use [ winfo id $f ]
     ::docking::add_tab $f
