@@ -1894,7 +1894,13 @@ foreach line $::splash::cache {
 # A lot of code assumes tcl_platform is either windows or unix, so
 # lotsa stuff may break if this is not the case.
 
-::splash::add "Using Tcl/Tk version: [info patchlevel]"
+if {[catch {.splash.t configure -insertforeground blue}]} {
+  set result No
+} else {
+  set result Yes
+}
+::splash::add "Using Tcl/Tk version: [info patchlevel] (with Gregor's tk::text - $result)"
+
 ::splash::add "$tcl_platform(os) operating system, version $tcl_platform(osVersion)"
 if {(! $windowsOS)  &&  (! $unixOS)} {
   ::splash::add "Operating System may not be supported"
