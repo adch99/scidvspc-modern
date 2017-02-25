@@ -462,15 +462,15 @@ proc ::htext::display {w helptext {section {}} {fixed 1}} {
       }
       if {[info exists startIndex($tagName)]} {
         switch -- $tagName {
-          m  {$w tag add $moveTag $startIndex(m) [$w index insert]}
-          a  {$w tag add $linkTag $startIndex(a) [$w index insert]}
-          g  {$w tag add $gameTag $startIndex(g) [$w index insert]}
-          c  {$w tag add $commentTag $startIndex(c) [$w index insert]}
-          pi {$w tag add $playerTag $startIndex(pi) [$w index insert]}
-          url {$w tag add $urlTag $startIndex(url) [$w index insert]}
-          run {$w tag add $runTag $startIndex(run) [$w index insert]}
-          go {$w tag add $goTag $startIndex(go) [$w index insert]}
-          default {$w tag add $tagName $startIndex($tagName) [$w index insert]}
+          m  {$w tag add $moveTag startm insert}
+          a  {$w tag add $linkTag starta insert}
+          g  {$w tag add $gameTag startg insert}
+          c  {$w tag add $commentTag startc insert}
+          pi {$w tag add $playerTag startpi insert}
+          url {$w tag add $urlTag starturl insert}
+          run {$w tag add $runTag startrun insert}
+          go {$w tag add $goTag startgo insert}
+          default {$w tag add $tagName start$tagName insert}
         }
         unset startIndex($tagName)
       }
@@ -490,7 +490,9 @@ proc ::htext::display {w helptext {section {}} {fixed 1}} {
         h2 - h3 - h4 - ht - p - br  {$w insert end \n}
       }
       # Set the start index for this type of tag
-      set startIndex($tagName) [$w index insert]
+      set startIndex($tagName) 1
+      $w mark set start$tagName insert
+      $w mark gravity start$tagName left
       # menu is now unused i think - S.A.
       if {$tagName == {menu}} {$w insert end \[}
     }
