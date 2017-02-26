@@ -358,6 +358,14 @@ menuText U GInfoTBAll "Tabelas de Finais: resultado e melhores movimentos" 19
 menuText U GInfoDelete "Recuperar este jogo" 0
 menuText U GInfoMark "Desmarcar este jogo" 0
 menuText U GInfoInformant "Configurar valores de Avaliação" 0
+# ====== TODO To be translated ======
+menuText U GInfoMenuBar "Menu Bar"  0
+# ====== TODO To be translated ======
+menuText U GInfoToolBar "Tool Bar"  0
+# ====== TODO To be translated ======
+menuText U GInfoButtonBar "Button Bar"  0
+# ====== TODO To be translated ======
+menuText U GInfoStatusBar "Menu Bar"  0
 translate U FlipBoard {Rodar Tabuleiro}
 translate U RaiseWindows {Ativar janelas}
 translate U AutoPlay {Jogo automático}

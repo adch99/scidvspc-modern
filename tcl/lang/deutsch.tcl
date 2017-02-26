@@ -384,6 +384,14 @@ menuText D GInfoTBAll "Endspieltabellen: Ergebnis und bester Zug" 31
 menuText D GInfoDelete "(Ent)Lösche diese Partie" 5
 menuText D GInfoMark "(Un)Markiere diese Partie" 4
 menuText D GInfoInformant "Informatorwerte konfigurieren" 0
+# ====== TODO To be translated ======
+menuText D GInfoMenuBar "Menu Bar"  0
+# ====== TODO To be translated ======
+menuText D GInfoToolBar "Tool Bar"  0
+# ====== TODO To be translated ======
+menuText D GInfoButtonBar "Button Bar"  0
+# ====== TODO To be translated ======
+menuText D GInfoStatusBar "Menu Bar"  0
 translate D FlipBoard {Brett drehen}
 # ====== TODO To be translated ======
 translate D RaiseWindows {Raise windows}

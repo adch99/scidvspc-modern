@@ -429,6 +429,14 @@ menuText Y GInfoMark "Mark/Unmark this game" 0 ;# ***
 # ====== TODO To be translated ======
 menuText Y GInfoInformant "Configure informant values" 0
 # ====== TODO To be translated ======
+menuText Y GInfoMenuBar "Menu Bar"  0
+# ====== TODO To be translated ======
+menuText Y GInfoToolBar "Tool Bar"  0
+# ====== TODO To be translated ======
+menuText Y GInfoButtonBar "Button Bar"  0
+# ====== TODO To be translated ======
+menuText Y GInfoStatusBar "Menu Bar"  0
+# ====== TODO To be translated ======
 translate Y FlipBoard {Flip board}
 # ====== TODO To be translated ======
 translate Y RaiseWindows {Raise windows}

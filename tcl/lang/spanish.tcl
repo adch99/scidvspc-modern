@@ -376,6 +376,14 @@ menuText S GInfoTBAll "TBs: resultado y mejor movimiento" 23
 menuText S GInfoDelete "(No)Borrar esta partida" 4
 menuText S GInfoMark "(No)Marcar esta partida" 4
 menuText S GInfoInformant "Configurar valores de información" 0
+# ====== TODO To be translated ======
+menuText S GInfoMenuBar "Menu Bar"  0
+# ====== TODO To be translated ======
+menuText S GInfoToolBar "Tool Bar"  0
+# ====== TODO To be translated ======
+menuText S GInfoButtonBar "Button Bar"  0
+# ====== TODO To be translated ======
+menuText S GInfoStatusBar "Menu Bar"  0
 
 translate S FlipBoard {Girar el tablero}
 translate S RaiseWindows {Aumentar ventanas}

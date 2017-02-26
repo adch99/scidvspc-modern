@@ -402,6 +402,14 @@ menuText B GInfoMark "Desmarcar este jogo" 0
 # ====== TODO To be translated ======
 menuText B GInfoInformant "Configure informant values" 0
 # ====== TODO To be translated ======
+menuText B GInfoMenuBar "Menu Bar"  0
+# ====== TODO To be translated ======
+menuText B GInfoToolBar "Tool Bar"  0
+# ====== TODO To be translated ======
+menuText B GInfoButtonBar "Button Bar"  0
+# ====== TODO To be translated ======
+menuText B GInfoStatusBar "Menu Bar"  0
+# ====== TODO To be translated ======
 translate B FlipBoard {Flip board}
 # ====== TODO To be translated ======
 translate B RaiseWindows {Raise windows}

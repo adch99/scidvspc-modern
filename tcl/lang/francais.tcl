@@ -362,6 +362,14 @@ menuText F GInfoTBAll "Tables de finales: résultat et meilleurs coups" 19
 menuText F GInfoDelete "(Récupérer)Effacer cette partie" 4
 menuText F GInfoMark "(Dé)Marquer cette partie" 4
 menuText F GInfoInformant "Configurer les valeurs de notation" 0
+# ====== TODO To be translated ======
+menuText F GInfoMenuBar "Menu Bar"  0
+# ====== TODO To be translated ======
+menuText F GInfoToolBar "Tool Bar"  0
+# ====== TODO To be translated ======
+menuText F GInfoButtonBar "Button Bar"  0
+# ====== TODO To be translated ======
+menuText F GInfoStatusBar "Menu Bar"  0
 translate F FlipBoard {Retourner l'échiquier}
 # ====== TODO To be translated ======
 translate F RaiseWindows {Raise windows}

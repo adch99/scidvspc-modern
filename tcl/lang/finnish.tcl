@@ -329,6 +329,14 @@ menuText L GInfoTBAll "Loppupelitietokannat: tulos ja parhaat siirrot" 19
 menuText L GInfoDelete "Palauta poistettu peli" 4
 menuText L GInfoMark "Poista t‰m‰n pelin merkint‰" 4
 menuText L GInfoInformant "Konfiguroi informantin arvot" 0
+# ====== TODO To be translated ======
+menuText L GInfoMenuBar "Menu Bar"  0
+# ====== TODO To be translated ======
+menuText L GInfoToolBar "Tool Bar"  0
+# ====== TODO To be translated ======
+menuText L GInfoButtonBar "Button Bar"  0
+# ====== TODO To be translated ======
+menuText L GInfoStatusBar "Menu Bar"  0
 
 translate L FlipBoard {K‰‰nn‰ lauta}
 translate L RaiseWindows {Nosta ikkunat}

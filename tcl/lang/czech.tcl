@@ -401,6 +401,14 @@ menuText C GInfoMark "Oznaèit/Odznaèit tuto partii" 0
 # ====== TODO To be translated ======
 menuText C GInfoInformant "Configure informant values" 0
 # ====== TODO To be translated ======
+menuText C GInfoMenuBar "Menu Bar"  0
+# ====== TODO To be translated ======
+menuText C GInfoToolBar "Tool Bar"  0
+# ====== TODO To be translated ======
+menuText C GInfoButtonBar "Button Bar"  0
+# ====== TODO To be translated ======
+menuText C GInfoStatusBar "Menu Bar"  0
+# ====== TODO To be translated ======
 translate C FlipBoard {Flip board}
 # ====== TODO To be translated ======
 translate C RaiseWindows {Raise windows}

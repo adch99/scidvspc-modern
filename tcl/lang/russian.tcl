@@ -359,6 +359,14 @@ menuText R GInfoTBAll "Табличные базы: результат и луч
 menuText R GInfoDelete "(Восстановить) удалить эту партию" 1
 menuText R GInfoMark "(Снять отметку) отметить эту партию" 1
 menuText R GInfoInformant "Настройка значений подсказчика" 0
+# ====== TODO To be translated ======
+menuText R GInfoMenuBar "Menu Bar"  0
+# ====== TODO To be translated ======
+menuText R GInfoToolBar "Tool Bar"  0
+# ====== TODO To be translated ======
+menuText R GInfoButtonBar "Button Bar"  0
+# ====== TODO To be translated ======
+menuText R GInfoStatusBar "Menu Bar"  0
 
 translate R FlipBoard {Перевернуть доску}
 translate R RaiseWindows {Выдвигать окна}

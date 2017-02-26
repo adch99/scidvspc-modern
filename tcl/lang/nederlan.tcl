@@ -377,6 +377,14 @@ menuText N GInfoDelete "Partij wissen/terughalen" 9
 menuText N GInfoMark "Partij markeren/niet markeren" 7
 menuText N GInfoInformant "Configureer informant waarden" 0
 # ====== TODO To be translated ======
+menuText N GInfoMenuBar "Menu Bar"  0
+# ====== TODO To be translated ======
+menuText N GInfoToolBar "Tool Bar"  0
+# ====== TODO To be translated ======
+menuText N GInfoButtonBar "Button Bar"  0
+# ====== TODO To be translated ======
+menuText N GInfoStatusBar "Menu Bar"  0
+# ====== TODO To be translated ======
 translate N FlipBoard {Flip board}
 # ====== TODO To be translated ======
 translate N RaiseWindows {Raise windows}
