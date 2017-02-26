@@ -326,6 +326,7 @@ menuText U OptionsRecent "Arquivos recentes..." 0 \
   {Change the number of recent files displayed in the File menu} ;# ***
 menuText U OptionsBooksDir "Pasta dos Livros..." 0 {Sets the opening books directory}
 menuText U OptionsTacticsBasesDir "Pasta dos Arquivos..." 0 {Sets the tactics (training) bases directory}
+menuText U OptionsInformant "Configurar valores de Avaliação" 0
 menuText U OptionsSave "Guardar Configuração" 0 \
   "Guarda a configuração no arquivo $::optionsFile"
 menuText U OptionsAutoSave "Guardar Opções ao sair" 0 \
@@ -357,7 +358,6 @@ menuText U GInfoTBResult "Tabelas de Base: apenas resultado" 12
 menuText U GInfoTBAll "Tabelas de Finais: resultado e melhores movimentos" 19
 menuText U GInfoDelete "Recuperar este jogo" 0
 menuText U GInfoMark "Desmarcar este jogo" 0
-menuText U GInfoInformant "Configurar valores de Avaliação" 0
 # ====== TODO To be translated ======
 menuText U GInfoMenuBar "Menu Bar"  0
 # ====== TODO To be translated ======

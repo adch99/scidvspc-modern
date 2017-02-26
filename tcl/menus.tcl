@@ -813,6 +813,9 @@ set helpMessage($m,[incr menuindex]) OptionsBooksDir
 $m add command -label OptionsTacticsBasesDir -command setTacticsBasesDir
 set helpMessage($m,[incr menuindex]) OptionsTacticsBasesDir
 
+$m add command -label OptionsInformant -command configInformant
+set helpMessage($m,[incr menuindex]) OptionsInformant
+
 proc setBooksDir {} {
   global scidBooksDir
   set dir [tk_chooseDirectory -initialdir $scidBooksDir -mustexist 1 -title "[tr Book] [tr Directory]"]
@@ -1007,8 +1010,6 @@ $m.ginfo add radiobutton -label GInfoTBResult \
     -variable gameInfo(showTB) -value 1 -command checkGameInfoHeight
 $m.ginfo add radiobutton -label GInfoTBAll \
     -variable gameInfo(showTB) -value 2 -command checkGameInfoHeight
-$m.ginfo add separator
-$m.ginfo add command -label GInfoInformant -command configInformant
 
 menu $m.entry -tearoff 1
 $m.entry add checkbutton -label OptionsMovesAsk \
@@ -1676,7 +1677,7 @@ proc setLanguageMenus {{lang ""}} {
   .menu.tools.exportfilter entryconfig 4 -label "[tr ToolsExpFilterLaTeX] ([tr OprepViewLaTeX])"
 
   foreach tag {Board Colour Toolbar Names Recent Fonts GInfo Fics Moves Startup Language
-    Numbers Windows Theme Export ECO Spell Table BooksDir TacticsBasesDir Sounds Save AutoSave} {
+    Numbers Windows Theme Export ECO Spell Table BooksDir TacticsBasesDir Informant Sounds Save AutoSave} {
     configMenuText .menu.options [tr Options$tag $oldLang] Options$tag $lang
   }
 
@@ -1694,7 +1695,7 @@ proc setLanguageMenus {{lang ""}} {
   }
 
   foreach tag {HideNext Show Coords Material FEN Marks Wrap FullComment Photos \
-        TBNothing TBResult TBAll Informant} {
+        TBNothing TBResult TBAll} {
     configMenuText .menu.options.ginfo [tr GInfo$tag $oldLang] \
         GInfo$tag $lang
   }
@@ -1800,6 +1801,8 @@ proc checkMenuUnderline {menu} {
   return $duplicates
 }
 
+### Hmmm - Not possible to cancel this widget. TODO
+
 proc configInformant {} {
   global informant
 
@@ -1828,7 +1831,7 @@ proc configInformant {} {
   }
 
   dialogbutton $w.buttons.defaults -textvar ::tr(Defaults) -command resetInformants
-  dialogbutton $w.buttons.help -textvar ::tr(Help) -command {helpWindow Moves Informant}
+  dialogbutton $w.buttons.help -textvar ::tr(Help) -command {helpWindow Analysis Annotating}
   dialogbutton $w.buttons.ok -text OK -command "destroy $w"
   pack $w.main $w.buttons -pady 5
 

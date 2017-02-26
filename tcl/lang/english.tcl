@@ -327,6 +327,7 @@ menuText E OptionsTable "Tablebase Directory" 10 \
 menuText E OptionsRecent "Recent Entries" 0 {Change the number of entries shown in the File/Game-History menus}
 menuText E OptionsBooksDir "Books Directory" 0 {Sets the opening books directory}
 menuText E OptionsTacticsBasesDir "Bases Directory" 0 {Sets the tactics (training) bases directory}
+menuText E OptionsInformant "Configure Informant Values" 0
 menuText E OptionsSave "Save Options" 0 "Save all settable options to the file $::optionsFile"
 menuText E OptionsAutoSave "Auto-Save Options on Exit" 0 \
   {Auto-save all options when exiting Scid}
@@ -357,7 +358,6 @@ menuText E GInfoTBResult "Tablebases: Result Only" 12
 menuText E GInfoTBAll "Tablebases: Result and Best Moves" 19
 menuText E GInfoDelete "(Un)Delete This Game" 4
 menuText E GInfoMark "(Un)Mark This Game" 4
-menuText E GInfoInformant "Configure Informant Values" 0
 menuText E GInfoMenuBar "Menu Bar"  0
 menuText E GInfoToolBar "Tool Bar"  0
 menuText E GInfoButtonBar "Button Bar"  0

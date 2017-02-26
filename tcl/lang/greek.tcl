@@ -356,6 +356,7 @@ menuText G OptionsTable "Κατάλογος Φινάλε" 10 \
 menuText G OptionsRecent "Πρόσφατα Αρχεία" 1 {Επιλογή του αριθμού των πρόσφατων αρχείων που θα εμφανίζονται στο μενού Αρχεία}
 menuText G OptionsBooksDir "Κατάλογος Ανοιγμάτων" 10 {Επιλογή του καταλόγου βιβλίων ανοιγμάτων}
 menuText G OptionsTacticsBasesDir "Κατάλογος Βάσεων" 10 {Επιλογή του καταλόγου Βάσεων, για τακτικές ασκήσεις (εκπαίδευση)}
+menuText G OptionsInformant "Ρύθμιση Αξιών Χαρακτηρισμών" 1
 menuText G OptionsSave "Αποθήκευση Ρυθμίσεων" 18 "Αποθήκευση όλων των ρυθμίσεων στο αρχείο $::optionsFile"
 menuText G OptionsAutoSave "Αυτομ.Αποθηκ.στην Έξοδο" 11 \
   {Αυτόματη αποθήκευση όλων των ρυθμίσεων κατά την έξοδο του προγράμματος Scid}
@@ -386,7 +387,6 @@ menuText G GInfoTBResult "Φινάλε: Μόνο αποτελέσματα" 9
 menuText G GInfoTBAll "Φινάλε: Αποτελέσματα & Καλύτερη Κινήση" 21
 menuText G GInfoDelete "Διαγραφή (ή μη) Παρτίδας" 1
 menuText G GInfoMark "Επισήμανση (ή μη) Παρτίδας" 1
-menuText G GInfoInformant "Ρύθμιση Αξιών Χαρακτηρισμών" 1
 # ====== TODO To be translated ======
 menuText G GInfoMenuBar "Menu Bar"  0
 # ====== TODO To be translated ======

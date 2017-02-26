@@ -369,6 +369,8 @@ menuText H OptionsRecent "Aktuális fájlok..." 3 \
 menuText H OptionsBooksDir "Books directory..." 0 {Sets the opening books directory}
 # ====== TODO To be translated ======
 menuText H OptionsTacticsBasesDir "Bases directory..." 0 {Sets the tactics (training) bases directory}
+# ====== TODO To be translated ======
+menuText H OptionsInformant "Configure informant values" 0
 menuText H OptionsSave "Beállítások mentése" 12 \
   "Minden beállítható értéket elment a $::optionsFile fájlba."
 menuText H OptionsAutoSave "Beállítások automatikus mentése kilépéskor." 0 \
@@ -402,8 +404,6 @@ menuText H GInfoTBResult "Végjátéktáblázatok: csak eredmény" 25
 menuText H GInfoTBAll "Végjátéktáblázatok: eredmény és a legjobb lépések" 42
 menuText H GInfoDelete "Törli/helyreállítja ezt a játszmát." 0
 menuText H GInfoMark "Megjelöli ezt a játszmát/megszünteti a jelölést." 0
-# ====== TODO To be translated ======
-menuText H GInfoInformant "Configure informant values" 0
 # ====== TODO To be translated ======
 menuText H GInfoMenuBar "Menu Bar"  0
 # ====== TODO To be translated ======

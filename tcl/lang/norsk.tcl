@@ -394,6 +394,8 @@ menuText O OptionsRecent "Recent files..." 0 \
 menuText O OptionsBooksDir "Books directory..." 0 {Sets the opening books directory}
 # ====== TODO To be translated ======
 menuText O OptionsTacticsBasesDir "Bases directory..." 0 {Sets the tactics (training) bases directory}
+# ====== TODO To be translated ======
+menuText O OptionsInformant "Configure informant values" 0
 menuText O OptionsSave "Lagre innstillinger" 0 \
   "Lagre alle instillinger til $::optionsFile"
 menuText O OptionsAutoSave "Autolagre innstillinger ved avslutning" 0 \
@@ -427,8 +429,6 @@ menuText O GInfoTBResult "Tabellbaser: kun resultater" 0
 menuText O GInfoTBAll "Tabellbaser: resultater og beste trekk" 0
 menuText O GInfoDelete "Slett/gjenopprett dette partiet" 0
 menuText O GInfoMark "(Av)Merk dette partiet" 0
-# ====== TODO To be translated ======
-menuText O GInfoInformant "Configure informant values" 0
 # ====== TODO To be translated ======
 menuText O GInfoMenuBar "Menu Bar"  0
 # ====== TODO To be translated ======

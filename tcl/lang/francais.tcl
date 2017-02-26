@@ -331,6 +331,7 @@ menuText F OptionsRecent "Fichiers récents..." 0 \
   {Changer le nombre de fichiers récents affichés dans le menu Fichier}
 menuText F OptionsBooksDir "Répertoire des bibliothèques..." 0 {Répertoire des bibliothèques d'ouverture}
 menuText F OptionsTacticsBasesDir "Répertoire des bases d'entrainement..." 0 {Répertoire des bases pour l'entrainement tactique}
+menuText F OptionsInformant "Configurer les valeurs de notation" 0
 menuText F OptionsSave "Sauver les options" 0 "Sauver les options dans le fichier $::optionsFile"
 menuText F OptionsAutoSave "Sauvegarde automatique des options" 0 \
   {Sauvegarder automatiquement toutes les options en quittant Scid}
@@ -361,7 +362,6 @@ menuText F GInfoTBResult "Tables de finales: Seulement le résultat" 12
 menuText F GInfoTBAll "Tables de finales: résultat et meilleurs coups" 19
 menuText F GInfoDelete "(Récupérer)Effacer cette partie" 4
 menuText F GInfoMark "(Dé)Marquer cette partie" 4
-menuText F GInfoInformant "Configurer les valeurs de notation" 0
 # ====== TODO To be translated ======
 menuText F GInfoMenuBar "Menu Bar"  0
 # ====== TODO To be translated ======

@@ -365,6 +365,8 @@ menuText C OptionsRecent "Nedávné soubory..." 0 \
 menuText C OptionsBooksDir "Books directory..." 0 {Sets the opening books directory}
 # ====== TODO To be translated ======
 menuText C OptionsTacticsBasesDir "Bases directory..." 0 {Sets the tactics (training) bases directory}
+# ====== TODO To be translated ======
+menuText C OptionsInformant "Configure informant values" 0
 menuText C OptionsSave "Ulo¾it volby" 0 \
   "Ulo¾it v¹echny nastavitelné volby do souboru $::optionsFile"
 menuText C OptionsAutoSave "Automaticky ukládat volby pøi ukonèení" 20 \
@@ -398,8 +400,6 @@ menuText C GInfoTBResult "Tabulky koncovek: jen výsledek" 23
 menuText C GInfoTBAll "Tabulky koncovek: výsledek a nejlep¹í tahy" 39
 menuText C GInfoDelete "Vymazat/Nemazat tuto partii" 0
 menuText C GInfoMark "Oznaèit/Odznaèit tuto partii" 0
-# ====== TODO To be translated ======
-menuText C GInfoInformant "Configure informant values" 0
 # ====== TODO To be translated ======
 menuText C GInfoMenuBar "Menu Bar"  0
 # ====== TODO To be translated ======
