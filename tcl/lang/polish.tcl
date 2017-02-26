@@ -368,6 +368,14 @@ menuText P GInfoDelete "Usuń/przywróć tę partię" 0
 menuText P GInfoMark "Włącz/wyłącz zaznaczenie tej partii" 0
 menuText P GInfoInformant "Konfiguruj oceny Informatora" 0
 # ====== TODO To be translated ======
+menuText P GInfoMenuBar "Menu Bar"  0
+# ====== TODO To be translated ======
+menuText P GInfoToolBar "Tool Bar"  0
+# ====== TODO To be translated ======
+menuText P GInfoButtonBar "Button Bar"  0
+# ====== TODO To be translated ======
+menuText P GInfoStatusBar "Menu Bar"  0
+# ====== TODO To be translated ======
 translate P FlipBoard {Flip board}
 # ====== TODO To be translated ======
 translate P RaiseWindows {Raise windows}

@@ -432,18 +432,18 @@ pack [label .main.gameInfoMini.black -font font_Regular -cursor hand2] -side rig
 
 menu .main.gameInfo.menu -tearoff 0 -background gray90
 
-.main.gameInfo.menu add checkbutton -label {Menu Bar} -variable gameInfo(showMenu) -command showMenubar
-.main.gameInfo.menu add checkbutton -label {Tool Bar} -variable gameInfo(showTool) -command toggleToolbar
-.main.gameInfo.menu add checkbutton -label {Button Bar} -variable gameInfo(showButtons) -command toggleButtonBar
-.main.gameInfo.menu add checkbutton -label {Game Info} -variable gameInfo(show) -command showGameInfo
-.main.gameInfo.menu add checkbutton -label {Status Bar} -variable gameInfo(showStatus) -command toggleStatus
+.main.gameInfo.menu add checkbutton -label GInfoMenuBar -variable gameInfo(showMenu) -command showMenubar
+.main.gameInfo.menu add checkbutton -label GInfoToolBar -variable gameInfo(showTool) -command toggleToolbar
+.main.gameInfo.menu add checkbutton -label GInfoButtonBar -variable gameInfo(showButtons) -command toggleButtonBar
+.main.gameInfo.menu add checkbutton -label WindowsGameinfo -variable gameInfo(show) -command showGameInfo
+.main.gameInfo.menu add checkbutton -label GInfoStatusBar -variable gameInfo(showStatus) -command toggleStatus
 
 .main.gameInfo.menu add separator
 
 .main.gameInfo.menu add checkbutton -label GInfoShow \
     -variable boardSTM -offvalue 0 -onvalue 1 -command {::board::togglestm .main.board}
 
-.main.gameInfo.menu add checkbutton -label {Highlight last move} \
+.main.gameInfo.menu add checkbutton -label OptionsMovesHighlightLastMove \
     -variable ::highlightLastMove -offvalue 0 -onvalue 1 -command updateBoard
 
 .main.gameInfo.menu add checkbutton -label GInfoFEN \

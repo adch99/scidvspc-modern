@@ -390,6 +390,14 @@ menuText I GInfoDelete "Recupera/Cancella questa partita" 9
 menuText I GInfoMark "Smarca/Marca questa partita" 7
 menuText I GInfoInformant "Configura i valori informativi" 0
 # ====== TODO To be translated ======
+menuText I GInfoMenuBar "Menu Bar"  0
+# ====== TODO To be translated ======
+menuText I GInfoToolBar "Tool Bar"  0
+# ====== TODO To be translated ======
+menuText I GInfoButtonBar "Button Bar"  0
+# ====== TODO To be translated ======
+menuText I GInfoStatusBar "Menu Bar"  0
+# ====== TODO To be translated ======
 translate I FlipBoard {Flip board}
 # ====== TODO To be translated ======
 translate I RaiseWindows {Raise windows}

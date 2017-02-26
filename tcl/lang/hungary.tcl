@@ -405,6 +405,14 @@ menuText H GInfoMark "Megjelöli ezt a játszmát/megszünteti a jelölést." 0
 # ====== TODO To be translated ======
 menuText H GInfoInformant "Configure informant values" 0
 # ====== TODO To be translated ======
+menuText H GInfoMenuBar "Menu Bar"  0
+# ====== TODO To be translated ======
+menuText H GInfoToolBar "Tool Bar"  0
+# ====== TODO To be translated ======
+menuText H GInfoButtonBar "Button Bar"  0
+# ====== TODO To be translated ======
+menuText H GInfoStatusBar "Menu Bar"  0
+# ====== TODO To be translated ======
 translate H FlipBoard {Flip board}
 # ====== TODO To be translated ======
 translate H RaiseWindows {Raise windows}

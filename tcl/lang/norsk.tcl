@@ -430,6 +430,14 @@ menuText O GInfoMark "(Av)Merk dette partiet" 0
 # ====== TODO To be translated ======
 menuText O GInfoInformant "Configure informant values" 0
 # ====== TODO To be translated ======
+menuText O GInfoMenuBar "Menu Bar"  0
+# ====== TODO To be translated ======
+menuText O GInfoToolBar "Tool Bar"  0
+# ====== TODO To be translated ======
+menuText O GInfoButtonBar "Button Bar"  0
+# ====== TODO To be translated ======
+menuText O GInfoStatusBar "Menu Bar"  0
+# ====== TODO To be translated ======
 translate O FlipBoard {Flip board}
 # ====== TODO To be translated ======
 translate O RaiseWindows {Raise windows}

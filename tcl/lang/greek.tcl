@@ -388,6 +388,14 @@ menuText G GInfoDelete "Διαγραφή (ή μη) Παρτίδας" 1
 menuText G GInfoMark "Επισήμανση (ή μη) Παρτίδας" 1
 menuText G GInfoInformant "Ρύθμιση Αξιών Χαρακτηρισμών" 1
 # ====== TODO To be translated ======
+menuText G GInfoMenuBar "Menu Bar"  0
+# ====== TODO To be translated ======
+menuText G GInfoToolBar "Tool Bar"  0
+# ====== TODO To be translated ======
+menuText G GInfoButtonBar "Button Bar"  0
+# ====== TODO To be translated ======
+menuText G GInfoStatusBar "Menu Bar"  0
+# ====== TODO To be translated ======
 translate G FlipBoard {Flip board}
 # ====== TODO To be translated ======
 translate G RaiseWindows {Raise windows}

@@ -371,6 +371,14 @@ menuText W GInfoDelete "Återta/Radera detta parti" 0
 menuText W GInfoMark "(Av-)Markera detta parti" 5
 menuText W GInfoInformant "Konfigurera Informant-parametrar" 0
 # ====== TODO To be translated ======
+menuText W GInfoMenuBar "Menu Bar"  0
+# ====== TODO To be translated ======
+menuText W GInfoToolBar "Tool Bar"  0
+# ====== TODO To be translated ======
+menuText W GInfoButtonBar "Button Bar"  0
+# ====== TODO To be translated ======
+menuText W GInfoStatusBar "Menu Bar"  0
+# ====== TODO To be translated ======
 translate W FlipBoard {Flip board}
 # ====== TODO To be translated ======
 translate W RaiseWindows {Raise windows}

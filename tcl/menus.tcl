@@ -1744,9 +1744,11 @@ proc setLanguageMenus {{lang ""}} {
   # Its' proably tied in with my half-baked Gamelist Widget, and FLAGS
   #  foreach tag {HideNext Show Coords Material FEN Marks Wrap FullComment Photos TBNothing TBResult TBAll Delete Mark} 
 
-  foreach tag {HideNext Show Coords Material FEN} {
+  foreach tag {HideNext Show Coords Material FEN MenuBar ToolBar ButtonBar StatusBar} {
     configMenuText .main.gameInfo.menu [tr GInfo$tag $oldLang] GInfo$tag $lang
   }
+  configMenuText .main.gameInfo.menu [tr OptionsMovesHighlightLastMove $oldLang] OptionsMovesHighlightLastMove $lang
+  configMenuText .main.gameInfo.menu [tr WindowsGameinfo $oldLang] WindowsGameinfo $lang
 
   ::pgn::ConfigMenus
   ::windows::stats::ConfigMenus
