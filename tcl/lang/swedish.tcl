@@ -336,6 +336,7 @@ menuText W OptionsRecent "Senast använda filer..." 16 \
   {Ãndra antalet senast använda filer som visas i Arkivmenyn}
 menuText W OptionsBooksDir "Öppningsbokskatalog..." 0 {Anger Öppningsbokskatalogen}
 menuText W OptionsTacticsBasesDir "Taktikbaskatalog..." 0 {Anger Taktikbaskatalog (för träning)}
+menuText W OptionsInformant "Konfigurera Informant-parametrar" 0
 menuText W OptionsSave "Spara alternativ" 7 \
   "Spara alla alternativ till en inställningsfil"
 menuText W OptionsAutoSave "Autospara vid avslut" 1 \
@@ -369,7 +370,6 @@ menuText W GInfoTBResult "Slutspelsdatabaser: endast resultat" 28
 menuText W GInfoTBAll "Slutspelsdatabaser: resultat och bästa drag" 33
 menuText W GInfoDelete "Återta/Radera detta parti" 0
 menuText W GInfoMark "(Av-)Markera detta parti" 5
-menuText W GInfoInformant "Konfigurera Informant-parametrar" 0
 # ====== TODO To be translated ======
 menuText W GInfoMenuBar "Menu Bar"  0
 # ====== TODO To be translated ======

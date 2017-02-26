@@ -335,6 +335,7 @@ menuText P OptionsRecent "Ostatnie pliki..." 0 \
 
 menuText P OptionsBooksDir "Katalog książek debiutowych..." 0 {Ustaw katalog książek debiutowych}
 menuText P OptionsTacticsBasesDir "Katalog baz..." 0 {Ustaw katalog baz treningowych}
+menuText P OptionsInformant "Konfiguruj oceny Informatora" 0
 menuText P OptionsSave "Zapamiętaj opcje" 0 \
   "Zapamiętaj wszystkie ustawienia w pliku $::optionsFile"
 menuText P OptionsAutoSave "Automatycznie zapisuj opcje" 0 \
@@ -366,7 +367,6 @@ menuText P GInfoTBResult "Tablica końcówek: tylko wynik" 18
 menuText P GInfoTBAll "Tablica końcówek: wszystko" 18
 menuText P GInfoDelete "Usuń/przywróć tę partię" 0
 menuText P GInfoMark "Włącz/wyłącz zaznaczenie tej partii" 0
-menuText P GInfoInformant "Konfiguruj oceny Informatora" 0
 # ====== TODO To be translated ======
 menuText P GInfoMenuBar "Menu Bar"  0
 # ====== TODO To be translated ======

@@ -328,6 +328,7 @@ menuText R OptionsRecent "Недавно используемые файлы..."
   {Изменить количество недавно используемых файлов в меню "Файл"}
 menuText R OptionsBooksDir "Директория книг..." 0 {Установить директорию книг дебютов}
 menuText R OptionsTacticsBasesDir "Директория баз..." 0 {Установить директорию баз тактик (тренировок)}
+menuText R OptionsInformant "Настройка значений подсказчика" 0
 menuText R OptionsSave "Сохранить установки" 0 "Сохранить все установки в файл $::optionsFile"
 menuText R OptionsAutoSave "Автосохранение установок при выходе" 0 \
   {Автосохранение всех установок при выходе из программы}
@@ -358,7 +359,6 @@ menuText R GInfoTBResult "Табличные базы: только резуль
 menuText R GInfoTBAll "Табличные базы: результат и лучшие ходы" 4
 menuText R GInfoDelete "(Восстановить) удалить эту партию" 1
 menuText R GInfoMark "(Снять отметку) отметить эту партию" 1
-menuText R GInfoInformant "Настройка значений подсказчика" 0
 # ====== TODO To be translated ======
 menuText R GInfoMenuBar "Menu Bar"  0
 # ====== TODO To be translated ======

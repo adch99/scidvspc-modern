@@ -1024,7 +1024,7 @@ set helpText(Moves) {<h1>Move Entry and Options</h1>
   Scid also uses some of these symbols for <a Analysis Annotating>Automatic
   Annotations</a>. To this end, the symbols are associated
   with a certain pawn value which can be set via 
-  <run configInformant><green>Options-<gt>Game Information-<gt>Configure Informant Values</green></run>. 
+  <run configInformant><green>Options-<gt>Configure Informant Values</green></run>. 
   </p>
 
   <ul>
@@ -2904,6 +2904,9 @@ with the format "stat01: time nodes ply mvleft mvtot mvname". The results can be
      generate exercises for the training function <a FindBestMove>Find
      Best Move</a>. (UCI only).</li>
   </ul>
+<p><i>
+  Informant values are also <run configInformant><green>configurable</green></run>.                     
+</i></p>
 
   <h3>Training</h3>
   <p>

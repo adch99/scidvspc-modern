@@ -344,6 +344,7 @@ menuText N OptionsRecent "Recente bestanden..." 0 \
   {Wijzig het aantal recent gebruikte bestanden in het Bestand menu}
 menuText N OptionsBooksDir "Openingboek map..." 3 {Map met openingsboeken instellen}
 menuText N OptionsTacticsBasesDir "Databases map..." 0 {Map met de tactieken (training) databases instellen}
+menuText N OptionsInformant "Configureer informant waarden" 0
 menuText N OptionsSave "Opties bewaren" 9 \
   "Bewaar alle instellingen in het bestand $::optionsFile"
 menuText N OptionsAutoSave "Automatisch bewaren opties tijdens afsluiten" 1 \
@@ -375,7 +376,6 @@ menuText N GInfoTBResult  "Eindspel tablebases: alleen resultaat" 12
 menuText N GInfoTBAll "Eindspel tablebases: resultaat en beste zetten" 19
 menuText N GInfoDelete "Partij wissen/terughalen" 9
 menuText N GInfoMark "Partij markeren/niet markeren" 7
-menuText N GInfoInformant "Configureer informant waarden" 0
 # ====== TODO To be translated ======
 menuText N GInfoMenuBar "Menu Bar"  0
 # ====== TODO To be translated ======

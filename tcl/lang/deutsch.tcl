@@ -352,6 +352,7 @@ menuText D OptionsRecent "Aktuelle Dateien..." 9 \
   {Anzahl der aktuellen Dateien im Dateimenü ändern}
 menuText D OptionsBooksDir "Buchverzeichnis..." 0 {Eröffnungsbuchverzeichnis einstellen}
 menuText D OptionsTacticsBasesDir "Bases Verzeichnis..." 0 {Verzeichnis für taktische Trainingsdatenbanken einstellen}
+menuText D OptionsInformant "Informatorwerte konfigurieren" 0
 menuText D OptionsSave "Optionen speichern" 0 \
   "Alle einstellbaren Optionen in der Datei $::optionsFile sichern"
 menuText D OptionsAutoSave "Autom. speichern bei Beenden" 0 \
@@ -383,7 +384,6 @@ menuText D GInfoTBResult "Endspieltabellen: nur Ergebnis" 22
 menuText D GInfoTBAll "Endspieltabellen: Ergebnis und bester Zug" 31
 menuText D GInfoDelete "(Ent)Lösche diese Partie" 5
 menuText D GInfoMark "(Un)Markiere diese Partie" 4
-menuText D GInfoInformant "Informatorwerte konfigurieren" 0
 # ====== TODO To be translated ======
 menuText D GInfoMenuBar "Menu Bar"  0
 # ====== TODO To be translated ======

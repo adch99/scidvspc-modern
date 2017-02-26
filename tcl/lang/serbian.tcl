@@ -393,6 +393,8 @@ menuText Y OptionsRecent "Recent files..." 0 \
 menuText Y OptionsBooksDir "Books directory..." 0 {Sets the opening books directory}
 # ====== TODO To be translated ======
 menuText Y OptionsTacticsBasesDir "Bases directory..." 0 {Sets the tactics (training) bases directory}
+# ====== TODO To be translated ======
+menuText Y OptionsInformant "Configure informant values" 0
 menuText Y OptionsSave "Saèuvaj opcije" 0 \
   "Saèuvaj sve opcije u fajl $::optionsFile"
 menuText Y OptionsAutoSave "Auto-saèuvaj opcije na izlasku" 0 \
@@ -426,8 +428,6 @@ menuText Y GInfoTBResult "Baza zavr¹nica: samo rezultati" 16
 menuText Y GInfoTBAll "Baza zavr¹nica: rezultat i najbolji potezi" 16
 menuText Y GInfoDelete "Obri¹i/vrati ovu partiju" 0
 menuText Y GInfoMark "Mark/Unmark this game" 0 ;# ***
-# ====== TODO To be translated ======
-menuText Y GInfoInformant "Configure informant values" 0
 # ====== TODO To be translated ======
 menuText Y GInfoMenuBar "Menu Bar"  0
 # ====== TODO To be translated ======

@@ -355,6 +355,7 @@ menuText I OptionsRecent "File utilizzati di recente..." 0 \
   {Cambia il numero di file recentemente utilizzati visualizzato nel menu file}
 menuText I OptionsBooksDir "Directory del libro delle aperture..." 0 {Configura la directory per il libro delle aperture}
 menuText I OptionsTacticsBasesDir "Directory dei Database..." 0 {Configura la directory per i database di allenamento}
+menuText I OptionsInformant "Configura i valori informativi" 0
 menuText I OptionsSave "Salva Opzioni" 0 \
   "Salva tutte le opzioni definibili nel file $::optionsFile"
 menuText I OptionsAutoSave "Salva Opzioni all'uscita" 0 \
@@ -388,7 +389,6 @@ menuText I GInfoTBResult "Tablebases: solo risultato" 12
 menuText I GInfoTBAll "Tablebases: risultato e mosse migliori" 19
 menuText I GInfoDelete "Recupera/Cancella questa partita" 9
 menuText I GInfoMark "Smarca/Marca questa partita" 7
-menuText I GInfoInformant "Configura i valori informativi" 0
 # ====== TODO To be translated ======
 menuText I GInfoMenuBar "Menu Bar"  0
 # ====== TODO To be translated ======

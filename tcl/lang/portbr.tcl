@@ -366,6 +366,8 @@ menuText B OptionsRecent "Recent files..." 0 \
 menuText B OptionsBooksDir "Books directory..." 0 {Sets the opening books directory}
 # ====== TODO To be translated ======
 menuText B OptionsTacticsBasesDir "Bases directory..." 0 {Sets the tactics (training) bases directory}
+# ====== TODO To be translated ======
+menuText B OptionsInformant "Configure informant values" 0
 menuText B OptionsSave "Salvar Configuracao" 0 \
   "Salva a configuracao no arquivo $::optionsFile"
 menuText B OptionsAutoSave "Salva Opcoes ao sair" 0 \
@@ -399,8 +401,6 @@ menuText B GInfoTBResult "Tabelas de Base: apenas resultado" 12
 menuText B GInfoTBAll "Tabelas de Base: resultado e melhores movimentos" 19
 menuText B GInfoDelete "Recuperar este jogo" 0
 menuText B GInfoMark "Desmarcar este jogo" 0
-# ====== TODO To be translated ======
-menuText B GInfoInformant "Configure informant values" 0
 # ====== TODO To be translated ======
 menuText B GInfoMenuBar "Menu Bar"  0
 # ====== TODO To be translated ======

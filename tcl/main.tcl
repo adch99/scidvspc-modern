@@ -481,6 +481,9 @@ if { !$::docking::USE_DOCKING } {
 bind .main <ButtonPress-2> {
   if {"%W" != ".main.board.bd"} {toggleGameInfo}
 }
+bind .main.gameInfo <ButtonPress-3> {
+  tk_popup .menu.options.ginfo %X %Y
+}
 
 # bind . <F9> {contextmenu %X %Y}
 

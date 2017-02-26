@@ -343,6 +343,7 @@ menuText S OptionsRecent "Archivos recientes" 0 \
   {Cambia el número de archivos recientes mostrados en el menú Archivo}
 menuText S OptionsBooksDir "Carpeta de libros de Aperturas (Books)" 0 {Fija la carpeta de los libros de aperturas (Books)}
 menuText S OptionsTacticsBasesDir "Carpeta de bases" 0 {Fija la carpeta de la base de entrenamiento táctico}
+menuText S OptionsInformant "Configurar valores de información" 0
 menuText S OptionsSave "Guardar opciones" 0 \
   "Guarda todas las opciones en el fichero $::optionsFile"
 menuText S OptionsAutoSave "Autoguardar opciones al salir" 0 \
@@ -375,7 +376,6 @@ menuText S GInfoTBResult  "TBs: sólo resultado" 10
 menuText S GInfoTBAll "TBs: resultado y mejor movimiento" 23
 menuText S GInfoDelete "(No)Borrar esta partida" 4
 menuText S GInfoMark "(No)Marcar esta partida" 4
-menuText S GInfoInformant "Configurar valores de información" 0
 # ====== TODO To be translated ======
 menuText S GInfoMenuBar "Menu Bar"  0
 # ====== TODO To be translated ======
