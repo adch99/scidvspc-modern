@@ -217,8 +217,11 @@ proc initBoardColors {} {
   ### Piece type and size ###
 
   label  $w.sizes.label -text [tr PgnOptChess] -font font_Regular
-  pack   $w.sizes.label -side left
 
+if { $::docking::USE_DOCKING } {
+  pack $w.sizes.label -pady 5
+} else {
+  pack $w.sizes.label -side left
   frame $w.sizes.frame
   pack $w.sizes.frame -side right
   label  $w.sizes.frame.label -text [tr OptionsFicsSize] -font font_Regular
@@ -229,6 +232,7 @@ proc initBoardColors {} {
   button $w.sizes.frame.larger -text + -font font_Small -borderwidth 1 \
     -command {::board::resize .main.board +1}
   pack $w.sizes.frame.larger $w.sizes.frame.smaller -side right
+}
 
   if {$png_image_support} {
     set l 0
