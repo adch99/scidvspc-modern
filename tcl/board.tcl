@@ -218,7 +218,7 @@ proc initBoardColors {} {
 
   label  $w.sizes.label -text [tr PgnOptChess] -font font_Regular
 
-if { $::docking::USE_DOCKING } {
+if { $::docking::USE_DOCKING && $::autoResizeBoard} {
   pack $w.sizes.label -pady 5
 } else {
   pack $w.sizes.label -side left
