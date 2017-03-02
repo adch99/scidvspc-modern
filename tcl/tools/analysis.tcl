@@ -408,7 +408,7 @@ proc ::enginelist::choose {} {
     ::enginelist::edit [lindex [.enginelist.list.list curselection] 0]
   }
 
-  dialogbutton $w.buttons.copy -text [lindex $::tr(CopyGames) 0] -command {
+  dialogbutton $w.buttons.copy -textvar ::tr(FinderCtxCopy) -command {
     ::enginelist::edit [lindex [.enginelist.list.list curselection] 0] copy
   }
 
