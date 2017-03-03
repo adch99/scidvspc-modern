@@ -487,7 +487,7 @@ $m add command -label WindowsTB -command ::tb::Open -accelerator "control-="
 bind .main <Control-equal> ::tb::Open
 set helpMessage($m,[incr menuindex]) WindowsTB
 
-$m add command -label WindowsBook -command ::book::Open
+$m add command -label WindowsBook -command ::book::Open -accelerator "control-b"
 set helpMessage($m,[incr menuindex]) WindowsBook
 
 $m add command -label WindowsCorrChess -command ::CorrespondenceChess::CCWindow 

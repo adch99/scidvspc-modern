@@ -1592,7 +1592,7 @@ proc standardShortcuts {w} {
   bind $w <Control-M> ::search::material
   bind $w <Control-e> ::commenteditor::Open
   bind $w <Control-B> ::setupBoard
-  bind $w <Control-b> ::chooseBoardColors
+  bind $w <Control-b> ::book::Open
   bind $w <Control-l> ::windows::gamelist::Open
   bind $w <Control-p> ::pgn::Open
   bind $w <Control-T> ::tourney::Open
