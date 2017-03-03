@@ -7164,7 +7164,7 @@ The window manager may interfere with some shortcuts.
 <li><b>control-i</b> - Gameinfo window</li>
 <li><b>control-t</b> - Tree window</li>
 <li><b>control-X</b> - Crosstable</li>
-<li><b>control-b</b> - Board options</li>
+<li><b>control-b</b> - Book window</li>
 <li><b>control-B</b> - Setup board</li>
 <li><b>control-Z</b> - Score graph</li>
 <li><b>escape</b> - Close window</li>
@@ -7240,7 +7240,7 @@ The window manager may interfere with some shortcuts.
 
 <li><b>control-a</b> - Add variation</li>
 <li><b>control-A</b> - Analysis engines</li>
-<li><b>control-b</b> - Board options</li>
+<li><b>control-b</b> - Book window</li>
 <li><b>control-B</b> - Setup board</li>
 <li><b>control-c</b> - Copy game to Clipbase</li>
 <li><b>control-C</b> - Copy FEN</li>
