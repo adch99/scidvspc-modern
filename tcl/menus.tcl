@@ -990,31 +990,46 @@ $m.ginfo add checkbutton -label GInfoHideNext \
     -variable gameInfo(hideNextMove) -offvalue 0 -onvalue 1 -command updateBoard
 $m.ginfo add checkbutton -label GInfoShow \
     -variable boardSTM -offvalue 0 -onvalue 1 -command {::board::togglestm .main.board}
-$m.ginfo add checkbutton -label GInfoFEN \
-    -variable gameInfo(showFEN) -offvalue 0 -onvalue 1 -command checkGameInfoHeight
+$m.ginfo add checkbutton -label GInfoFEN -variable gameInfo(showFEN) -offvalue 0 -onvalue 1 -command {
+  checkGameInfoHeight
+  if {!$::gameInfo(show)} {
+    toggleGameInfo
+  }
+}
 $m.ginfo add checkbutton -label GInfoMarks \
     -variable gameInfo(showMarks) -offvalue 0 -onvalue 1 -command updateBoard
 $m.ginfo add checkbutton -label GInfoWrap \
     -variable gameInfo(wrap) -offvalue 0 -onvalue 1 -command updateBoard
-$m.ginfo add checkbutton -label GInfoFullComment \
-    -variable gameInfo(fullComment) -offvalue 0 -onvalue 1 -command updateBoard
-$m.ginfo add checkbutton -label GInfoPhotos \
-    -variable gameInfo(photos) -offvalue 0 -onvalue 1 \
-    -command {updatePlayerPhotos -force}
+$m.ginfo add checkbutton -label GInfoFullComment -variable gameInfo(fullComment) -offvalue 0 -onvalue 1 -command {
+  if {!$::gameInfo(show)} {
+    toggleGameInfo
+  }
+  updateBoard
+}
+$m.ginfo add checkbutton -label GInfoPhotos -variable gameInfo(photos) -offvalue 0 -onvalue 1 -command {
+  updatePlayerPhotos -force
+  if {!$::gameInfo(show)} {
+    toggleGameInfo
+  }
+}
 $m.ginfo add command -label GInfoMaterial -command toggleMat
 $m.ginfo add command -label GInfoCoords -command toggleCoords
+
 $m.ginfo add separator
-$m.ginfo add radiobutton -label GInfoTBNothing \
-    -variable gameInfo(showTB) -value 0 -command checkGameInfoHeight
-$m.ginfo add radiobutton -label GInfoTBResult \
-    -variable gameInfo(showTB) -value 1 -command checkGameInfoHeight
-$m.ginfo add radiobutton -label GInfoTBAll \
-    -variable gameInfo(showTB) -value 2 -command checkGameInfoHeight
+
+foreach i {GInfoTBNothing GInfoTBResult GInfoTBAll} j {0 1 2} {
+  $m.ginfo add radiobutton -label $i -variable gameInfo(showTB) -value $j -command {
+    checkGameInfoHeight
+    if {!$::gameInfo(show)} {
+      toggleGameInfo
+    }
+  }
+}
 
 menu $m.entry -tearoff 1
 $m.entry add checkbutton -label OptionsMovesAsk \
     -variable askToReplaceMoves -offvalue 0 -onvalue 1
-set helpMessage($m.entry,0) OptionsMovesAsk \
+set helpMessage($m.entry,0) OptionsMovesAsk 
 
 $m.entry add checkbutton -label OptionsMovesShowVarArrows \
     -variable showVarArrows -offvalue 0 -onvalue 1
