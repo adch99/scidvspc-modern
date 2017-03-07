@@ -446,8 +446,12 @@ menu .main.gameInfo.menu -tearoff 0 -background gray90
 .main.gameInfo.menu add checkbutton -label OptionsMovesHighlightLastMove \
     -variable ::highlightLastMove -offvalue 0 -onvalue 1 -command updateBoard
 
-.main.gameInfo.menu add checkbutton -label GInfoFEN \
-    -variable gameInfo(showFEN) -offvalue 0 -onvalue 1 -command checkGameInfoHeight
+.main.gameInfo.menu add checkbutton -label GInfoFEN -variable gameInfo(showFEN) -offvalue 0 -onvalue 1 -command {
+  checkGameInfoHeight
+  if {!$::gameInfo(show)} {
+    toggleGameInfo
+  }
+}
 
 .main.gameInfo.menu add checkbutton -label GInfoHideNext \
     -variable gameInfo(hideNextMove) -offvalue 0 -onvalue 1 -command updateBoard
@@ -1062,7 +1066,7 @@ foreach photofile [glob -nocomplain -directory [file join $scidShareDir "photos"
 ### Custom photos
 
 if {[file isdirectory $scidPhotosDir]} {
-  ::splash::add "Searching for gifs in $scidPhotosDir"
+  ::splash::add "Searching for custom photos (gifs) in $scidPhotosDir"
   set pwd [pwd]
   cd $scidPhotosDir
   set count 0
@@ -1087,7 +1091,7 @@ if {[file isdirectory $scidPhotosDir]} {
       # ::splash::add "   Ok processing photo $i" 
     }
   }
-  ::splash::add "    $count photos successfully loaded."
+  ::splash::add "    $count custom photos successfully loaded."
   cd $pwd
 } else {
   # ::splash::add "User Photos: no such directory $scidPhotosDir"

@@ -1818,6 +1818,8 @@ proc ::splash::make {} {
       ::splash::add {}
       ::splash::add "$scidName $scidVersion Console"
       ::splash::add {------------------------------------}
+      ::splash::add {Here you can enter commands to the Scid interpreter for execution.}
+      ::splash::add {Try - "time {foreach i [array names helpText] {helpWindow $i}}" for a simple test and benchmark.}
     }
     set command [string trim [.splash.command get]]
     ::splash::add "# $command"
