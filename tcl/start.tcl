@@ -249,8 +249,10 @@ set scidExecutable [info nameofexecutable]
 
 if {$scidExecutable == {}} {
   ### Shit. Wish8.6b2 returns {} 
-  # I wonder if new tcl-8.5 works ok ?
-  if {$unixOS} {
+  if {$macOS} {
+    set scidExecutable /Applications/ScidvsMac.app/Contents/MacOS/scid
+    puts "scidExecutable is null. Now is \"$scidExecutable\""
+  } elseif {$unixOS} {
     catch {
       set scidExecutable [exec readlink /proc/[pid]/exe]
     }
