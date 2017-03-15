@@ -1,7 +1,7 @@
 # port.tcl:
 # Scid in Portuguese.
 # Translated by R. Silva (martinus at FICS)
-# Last edited 2015-04-19
+# Last edited 2017-03-15
 
 addLanguage U {Portuguese} 0 ;#iso8859-1
 
@@ -75,7 +75,7 @@ menuText U EditPasteBoard "Colar Posição" 12 \
 # Game menu:
 menuText U Game "Jogo" 0
 menuText U GameNew "Novo Jogo" 0 \
-  {Limpa o jogo corrente, descartando qualquer alteracao}
+  {Limpa o jogo corrente, descartando qualquer alteração}
 menuText U GameFirst "Primeiro Jogo" 5 {Carrega o primeiro jogo filtrado}
 menuText U GamePrev "Jogo Anterior" 5 {Carrega o jogo anterior}
 menuText U GameReload "Recarrega o Jogo atual" 3 \
@@ -238,25 +238,16 @@ menuText U CCEditCopy "Copiar Lista de Jogos para a base de cópia" 0 {Copia os j
 menuText U Options "Opções" 0
 menuText U OptionsBoard "Tabuleiro" 0 {Opções de aparência do tabuleiro} ;# ***
 menuText U OptionsColour "Cor do Fundo" 0 {Default text widget color}
-# ====== TODO To be translated ======
-menuText U OptionsBackColour "Background" 0 {Default text widget color}
+menuText U OptionsBackColour "Fundo" 0 {Default text widget color}
 menuText U OptionsEnableColour "Aplicar" 0 {}
-# ====== TODO To be translated ======
-menuText U OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
-# ====== TODO To be translated ======
-menuText U OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
-# ====== TODO To be translated ======
-menuText U OptionsRowColour "Rows" 0 {Default tree/book row color}
-# ====== TODO To be translated ======
-menuText U OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
-# ====== TODO To be translated ======
-menuText U OptionsProgressColour "Progressbar" 0 {Default progressbar color}
-# ====== TODO To be translated ======
-menuText U OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
-# ====== TODO To be translated ======
-menuText U OptionsScoreColour "Score Graph" 0 {}
-# ====== TODO To be translated ======
-menuText U OptionsScoreBarColour "Score Graph current" 0 {}
+menuText U OptionsMainLineColour "Setas da Linha Principal" 0 {Mainline arrows}
+menuText U OptionsVarLineColour "Setas da Variante" 0 {Variation arrows}
+menuText U OptionsRowColour "Linhas" 0 {Default tree/book row color}
+menuText U OptionsSwitcherColour "Alternador" 0 {Default db switcher color}
+menuText U OptionsProgressColour "Barra de Progresso" 0 {Default progressbar color}
+menuText U OptionsCrossColour "Linhas da tabela cruzada" 0 {Default crosstable row color}
+menuText U OptionsScoreColour "Gráfico dos Pontos" 0 {}
+menuText U OptionsScoreBarColour "Gráfico de pontos atual" 0 {}
 menuText U OptionsNames "Meus Nomes de Jogador..." 0 {Editar os meus nomes de jogador} ;# ***
 menuText U OptionsExport "Exportação" 0 {Muda as Opções de exportacao de texto}
 menuText U OptionsFonts "Fontes" 0 {Muda os fontes}
@@ -269,13 +260,11 @@ menuText U OptionsFics "FICS" 0
 menuText U OptionsFicsAuto "Promover sempre a Dama" 0
 menuText U OptionsFicsColour "Cor do Texto" 0
 menuText U OptionsFicsSize "Tamanho do Tabuleiro" 0
-# ====== TODO To be translated ======
-menuText U OptionsFicsButtons "User Buttons" 0
+menuText U OptionsFicsButtons "Botões do Utilizador" 0
 menuText U OptionsFicsCommands "Comandos de Início" 0
 menuText U OptionsFicsNoRes "Ocultar Resultados" 0
 menuText U OptionsFicsNoReq "Ocultar Pedidos" 0
-# ====== TODO To be translated ======
-menuText U OptionsFicsPremove "Allow Premove" 0
+menuText U OptionsFicsPremove "Permitir Movimento Antecipado" 0
 menuText U OptionsLanguage "Linguagem" 0 {Menu de selecao de linguagem}
 menuText U OptionsMovesTranslatePieces "Traduzir peças" 0 {Traduzir a primeira letra das peças}
 menuText U OptionsMovesHighlightLastMove "Destacar último movimento" 0 {Destaca o último movimento}
@@ -358,14 +347,10 @@ menuText U GInfoTBResult "Tabelas de Base: apenas resultado" 12
 menuText U GInfoTBAll "Tabelas de Finais: resultado e melhores movimentos" 19
 menuText U GInfoDelete "Recuperar este jogo" 0
 menuText U GInfoMark "Desmarcar este jogo" 0
-# ====== TODO To be translated ======
-menuText U GInfoMenuBar "Menu Bar"  0
-# ====== TODO To be translated ======
-menuText U GInfoToolBar "Tool Bar"  0
-# ====== TODO To be translated ======
-menuText U GInfoButtonBar "Button Bar"  0
-# ====== TODO To be translated ======
-menuText U GInfoStatusBar "Menu Bar"  0
+menuText U GInfoMenuBar "Barra do Menú"  0
+menuText U GInfoToolBar "Barra de Funções"  0
+menuText U GInfoButtonBar "Barra Inferior"  0
+menuText U GInfoStatusBar "Barra de Menús"  0
 translate U FlipBoard {Rodar Tabuleiro}
 translate U RaiseWindows {Ativar janelas}
 translate U AutoPlay {Jogo automático}
@@ -393,16 +378,14 @@ translate U MergeGames {Juntar jogos}
 translate U Preview {Visualização}
 translate U Revert {Reverter}
 translate U Save {Guardar}
-# ====== TODO To be translated ======
-translate U DontSave {Don't Save}
+translate U DontSave {Não Gravar}
 translate U Search {Pesquisar}
 translate U Stop {Parar}
 translate U Store {Guardar}
 translate U Update {Atualizar}
 translate U ChangeOrient {Muda orientação da janela}
 translate U ShowIcons {Mostrar Ícons} ;# ***
-# ====== TODO To be translated ======
-translate U ConfirmCopy {Confirm Copy}
+translate U ConfirmCopy {Confirma copiar}
 translate U None {Nenhum}
 translate U First {Primeiro}
 translate U Current {Atual}
@@ -467,10 +450,8 @@ translate U StartPos {Posição Inicial}
 translate U Total {Total}
 translate U readonly {apenas leitura}
 translate U altered {alterado}
-# ====== TODO To be translated ======
-translate U tagsDescript {Extra tags (eg: Annotator "Anand")}
-# ====== TODO To be translated ======
-translate U prevTags {Use previous}
+translate U tagsDescript {Etiqueta Extra (eg: Anotador "Anand")}
+translate U prevTags {Usar o anterior}
 
 # Standard error messages:
 translate U ErrNotOpen {Esta base não está aberta.} ;# ***
@@ -504,8 +485,7 @@ translate U PinfoLookupName {Ver Nome}
 # Tablebase information:
 translate U Draw {Empate}
 translate U stalemate {rei afogado}
-# ====== TODO To be translated ======
-translate U checkmate {checkmate}
+translate U checkmate {xequemate}
 translate U withAllMoves {com todos os movimentos}
 translate U withAllButOneMove {exceto com um movimento}
 translate U with {com}
@@ -566,18 +546,15 @@ menuText U TreeOptStartStop "Atualização automática" 0 {Liga/Desliga a atualizaç
 menuText U TreeOptLock "Lock" 0 {Trava/Destrava a arvore para o banco corrente}
 menuText U TreeOptTraining "Treinamento" 0 \
   {Liga/Desliga o modo treinamento na arvore}
-# ====== TODO To be translated ======
-menuText U TreeOptShort "Short Display" 0 {Don't show ELO information}
+menuText U TreeOptShort "Visualisação sumária" 0 {Não mostra Elo}
 menuText U TreeOptAutosave "Salvar automaticamente arquivo de cache" 0 \
   {Salvar automaticamente o arquivo de cache quando fechar a janela de arvore}
 menuText U TreeOptAutomask "Abrir máscara automaticamente" 0 "Auto-Load most recent mask with a tree open."
 menuText U TreeOptShowBar "Mostrar Barra de Progresso" 0 "Mostrar barra de progresso da árvore."
-# ====== TODO To be translated ======
-menuText U TreeOptSortBest "Sort Best Games" 0 "Sort Best Games by ELO."
+menuText U TreeOptSortBest "Ordenar melhores jogos" 0 "Ordena lhores josgos por ELO."
 menuText U TreeHelp "Ajuda" 0
 menuText U TreeHelpTree "Ajuda para árvore" 0
 menuText U TreeHelpIndex "Índice da Ajuda" 0
-
 translate U SaveCache {Salvar Cache}
 translate U Training {Treinamento}
 translate U LockTree {Travamento}
@@ -587,10 +564,8 @@ translate U TreeBestGames {Melhores jogos da árvore}
 translate U TreeAdjust {Ajustar Filtro}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
-# ====== TODO To be translated ======
-translate U TreeTitleRow      {    Move      Frequency    Score  Draw AvElo Perf AvYear ECO}
-# ====== TODO To be translated ======
-translate U TreeTitleRowShort {    Move      Frequency    Score  Draw}
+translate U TreeTitleRow      {    Lance      Frequência    Pontos  Empate MédiaElo Perf MédiaAno ECO}
+translate U TreeTitleRowShort {    Lance      Frequência    Pontos  Empate}
 translate U TreeTotal {TOTAL}
 translate U DoYouWantToSaveFirst {Quer guardar primeiro?}
 translate U AddToMask {Adicionar à máscara}
@@ -687,10 +662,8 @@ menuText U GraphFileClose "Fecha janela" 6
 menuText U GraphOptions "Opções" 0
 menuText U GraphOptionsWhite "Branco" 0
 menuText U GraphOptionsBlack "Preto" 0
-# ====== TODO To be translated ======
-menuText U GraphOptionsDots "Show Dots" 0
-# ====== TODO To be translated ======
-menuText U GraphOptionsBar "Highlight Current Move" 0
+menuText U GraphOptionsDots "Mostrar Pontos" 0
+menuText U GraphOptionsBar "Destacar Lance atual" 0
 menuText U GraphOptionsBoth "Ambos" 0
 menuText U GraphOptionsPInfo "Informação do Jogador" 0
 translate U GraphFilterTitle "Filtrar gráfico: frequência por 1000 jogos" ;# ***
@@ -723,8 +696,7 @@ translate U AnnotateNotBest {Quando o movimento jogado não for o melhor}
 translate U AnnotateBlundersOnly {Quando a jogada é um grande erro}
 translate U BlundersNotBest {Apenas grandes erros}
 translate U AnnotateTitle {Configurar Anotação}
-# ====== TODO To be translated ======
-translate U AnnotateMissedMates {Missed/shorter mates}
+translate U AnnotateMissedMates {Falhou/xequemate mais rápdo}
 translate U BlundersThreshold {Limiar}
 translate U ScoreFormat {Formato da avaliação}
 translate U CutOff {Não anotar:}
@@ -819,8 +791,7 @@ menuText U CrosstabOptTitles "Títulos" 0
 menuText U CrosstabOptBreaks "Scores de desempate" 0
 menuText U CrosstabOptDeleted "Incluir jogos apagados" 8 ;# ***
 menuText U CrosstabOptColors "Cores (apenas para tabela Swiss)" 0
-# ====== TODO To be translated ======
-menuText U CrosstabOptColorRows "Color Rows" 0
+menuText U CrosstabOptColorRows "Colorir Linhas" 0
 menuText U CrosstabOptColumnNumbers "Colunas numeradas (All-play-all table only)" 2 ;# ***
 menuText U CrosstabOptGroup "Pontuação do Grupo" 0
 menuText U CrosstabSort "Ordenar" 0
@@ -864,8 +835,7 @@ translate U GameLength {Tamanho do jogo}
 translate U FindGamesWith {Encontrar jogos com}
 translate U StdStart {Início padrão}
 translate U Promotions {Promoções}
-# ====== TODO To be translated ======
-translate U UnderPromo {Under Prom.}
+translate U UnderPromo {Subpromoção}
 translate U Comments {Comentários}
 translate U Variations {Variantes}
 translate U Annotations {Anotações}
@@ -901,7 +871,7 @@ translate U GlistLength {Tamanho}
 translate U GlistCountry {País}
 translate U GlistECO {ECO}
 translate U GlistOpening {Abertura}
-translate U GlistEndMaterial {End-Material}
+translate U GlistEndMaterial {Final-Material}
 translate U GlistDeleted {Apagado}
 translate U GlistFlags {Marcas}
 translate U GlistVariations {Variantes}
@@ -1220,8 +1190,7 @@ translate U OprepViewLaTeX {Ver LaTeX} ;# ***
 translate U PReportTitle {Relatório de Jogador} ;# ***
 translate U PReportColorWhite {com as peças Brancas} ;# ***
 translate U PReportColorBlack {com as peças Pretas} ;# ***
-# ====== TODO To be translated ======
-translate U PReportBeginning {Beginning with}
+translate U PReportBeginning {Começando com}
 translate U PReportMoves {após %s} ;# ***
 translate U PReportOpenings {Aberturas} ;# ***
 translate U PReportClipbase {Limpar base de trabalho e preencher com cópia do jogos filtrados} ;# ***
@@ -1612,7 +1581,7 @@ translate U FICSCensor {Censurar}
 
 translate U CCDlgConfigureWindowTitle {Configurar Xadrez por correspondencia}
 translate U CCDlgCGeneraloptions {Opções Gerais}
-translate U CCDlgDefaultDB {Base default:}
+translate U CCDlgDefaultDB {Base padrão:}
 translate U CCDlgInbox {Caixa de Entrada (caminho):}
 translate U CCDlgOutbox {Caixa de Saida (caminho):}
 translate U CCDlgXfcc {Configuração do Xfcc:}
@@ -1677,24 +1646,22 @@ translate U CCDlgConfigRelay {Observar jogos}
 translate U CCDlgConfigRelayHelp {Go to the games page on http://www.iccf-webchess.com and display the game to be observed.  If you see the chessboard copy the URL from your browser to the list below. One URL per line only!\nExample: http://www.iccf-webchess.com/MakeAMove.aspx?id=266452}
 
 # Connect Hardware dialoges
-# TODO....
 translate U ExtHWConfigConnection {Configurar hardware externo}
-translate U ExtHWPort {Port}
+translate U ExtHWPort {Porta}
 translate U ExtHWEngineCmd {Engine command}
-translate U ExtHWEngineParam {Engine parameter}
-translate U ExtHWShowButton {Show button in main window}
+translate U ExtHWEngineParam {Configurar Engine}
+translate U ExtHWShowButton {Mostrar botão na janela principal}
 translate U ExtHWHardware {Hardware}
 translate U ExtHWNovag {Novag Citrine}
-translate U ExtHWInputEngine {Input Engine}
-translate U ExtHWNoBoard {No board}
+translate U ExtHWInputEngine {Ligar Engine}
+translate U ExtHWNoBoard {Sem tabuleiro}
 
 # Input Engine dialogs
-# TODO....
-translate U IEConsole {Input Engine Console}
-translate U IESending {Moves sent for}
+translate U IEConsole {Controlo do engine ligado}
+translate U IESending {Lances enviados para}
 translate U IESynchronise {Sincronizar}
 translate U IERotate  {Rodar}
-translate U IEUnableToStart {Unable to start Input Engine:}
+translate U IEUnableToStart {Impossível iniciar Engine:}
 
 # Calculation of Variations
 translate U DoneWithPosition {Posição definida}
@@ -1707,8 +1674,7 @@ translate U DockLeft {Mover para a esquerda}
 translate U DockRight {Mover para a direita}
 translate U Undock {Desacoplar}
 translate U ChangeIcon {Alterar icone}
-# ====== TODO To be translated ======
-translate U More {More}
+translate U More {Mais}
 
 # Drag & Drop
 translate U CannotOpenUri {Não é possível abrir o seguinte URI:}
