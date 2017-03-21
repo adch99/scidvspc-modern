@@ -46,6 +46,7 @@ proc ::commenteditor::Open {} {
   set w .commentWin
   if {[winfo exists $w]} {
     raiseWin $w
+    focus $w.cf.text
     return
   }
 
