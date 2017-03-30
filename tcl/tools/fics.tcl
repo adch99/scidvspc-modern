@@ -2161,7 +2161,7 @@ if {[lindex $line 0] != {Still in progress}} {
     if {$fen == [sc_pos fen]} {
       wm title $::dot_w "$::scidName: $white - $black (game $game: $::fics::timecontrol)"
       updateBoard -pgn -animate
-    } else {
+    } elseif {$whiteTime > 0 && $blackTime > 0} {
       ### Game out of sync, probably due to player takeback request (or opponent take back 2).
       ### But also used to load observed games
       # After player takeback, game gets reconstructed, comments are zeroed. Opponents takeback is handled better elsewhere.
