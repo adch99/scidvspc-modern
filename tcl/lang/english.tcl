@@ -361,7 +361,7 @@ menuText E GInfoMark "(Un)Mark This Game" 4
 menuText E GInfoMenuBar "Menu Bar"  0
 menuText E GInfoToolBar "Tool Bar"  0
 menuText E GInfoButtonBar "Button Bar"  0
-menuText E GInfoStatusBar "Menu Bar"  0
+menuText E GInfoStatusBar "Status Bar"  0
 
 translate E FlipBoard {Flip board}
 translate E RaiseWindows {Raise windows}

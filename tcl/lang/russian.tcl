@@ -366,7 +366,7 @@ menuText R GInfoToolBar "Tool Bar"  0
 # ====== TODO To be translated ======
 menuText R GInfoButtonBar "Button Bar"  0
 # ====== TODO To be translated ======
-menuText R GInfoStatusBar "Menu Bar"  0
+menuText R GInfoStatusBar "Status Bar"  0
 
 translate R FlipBoard {Перевернуть доску}
 translate R RaiseWindows {Выдвигать окна}

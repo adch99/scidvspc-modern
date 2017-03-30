@@ -90,7 +90,7 @@ menuText L GameBrowse "Selaa pelejä" 0
 menuText L GameList "Listaa kaikki pelit" 0
 menuText L GameDelete "Poista peli" 0
 menuText L GameDeepest "Identifoi avaus" 0 {Siirry syvimpään ECO-avauskirjassa listattuun peliasemaan}
-menuText L GameGotoMove "Siirry tiettyyn numeroon" 5 {Siirry tiettyyn pelisiirtoon tässä pelissä}
+menuText L GameGotoMove "Siirry tiettyyn pelisiirtoon" 5 {Siirry tiettyyn pelisiirtoon tässä pelissä}
 menuText L GameNovelty "Löydä uutuus" 7 {Löydä ensimmäinen aikaisemmin pelaamaton siirto tässä pelissä}
 
 # Search Menu:
@@ -125,9 +125,9 @@ menuText L WindowsCorrChess "Kirjeenvaihtoikkuna" 1 {Avaa/sulje kirjeenvaihtoikk
 # Tools menu:
 menuText L Tools "Työkalut" 0
 menuText L ToolsAnalysis "Analyysiohjelma" 0 {Konfiguroi analyysiohjelmat}
-menuText L ToolsEmail "Email-manageri" 0 {Avaa/sulje sähköpostin shakkimanageri-ikkuna}
-menuText L ToolsFilterGraph "Suht. suodatingrafiikka" 12 {Avaa/sulje suodatingrafiikkaikkkuna suhteellisia arvoja varten}
-menuText L ToolsAbsFilterGraph "Abs. suodatingrafiikka" 7 {Avaa/sulje suodatingrafiikkaikkuna absoluuttisia arvoja varten}
+menuText L ToolsEmail "Sähköpostimanageri" 0 {Avaa/sulje sähköpostin shakkimanageri-ikkuna}
+menuText L ToolsFilterGraph "Suhteellinen suodatingrafiikka" 12 {Avaa/sulje suodatingrafiikkaikkkuna suhteellisia arvoja varten}
+menuText L ToolsAbsFilterGraph "Absoluuttinen suodatingrafiikka" 7 {Avaa/sulje suodatingrafiikkaikkuna absoluuttisia arvoja varten}
 menuText L ToolsOpReport "Avausraportti" 0 {Luo avausraportti nykyistä asemaa varten}
 menuText L ToolsTracker "Upseerinjäljittäjä"  6 {Avaa upseerinjäljittäjäikkuna}
 menuText L ToolsTraining "Harjoitus"  7 {Harjoitustyökalut (taktiikat,avaukset,...) }
@@ -165,7 +165,7 @@ menuText L ToolsPlayerReport "Pelaajaraportti" 3 \
   {Luo pelaajaraportti}
 menuText L ToolsRating "Pelaajan ELO-luku" 0 \
   {Luo grafiikka nykyisen pelin pelaajien ELO-lukujen historiasta}
-menuText L ToolsScore "Tulosrafiikka" 0 {Näytä tulosgrafiikkaikkuna}
+menuText L ToolsScore "Tulosgrafiikka" 0 {Näytä tulosgrafiikkaikkuna}
 menuText L ToolsExpCurrent "Vie nykyinen peli" 8 \
   {Kirjoita nykyinen peli tekstitiedostoon}
 menuText L ToolsExpCurrentPGN "Vie peli PGN-muotoon" 15 \
@@ -194,21 +194,21 @@ menuText L ToolsScreenshot "Kuvankaappaus laudasta" 0  {Ota kuvankaappaus}
 menuText L Play "Pelaa" 0 {Pelaa pelejä}
 
 # --- Correspondence Chess
-menuText L CorrespondenceChess "Kirjeshakki" 0 {Toiminnot eMailia ja Xfccää varten perustuen kirjeshakkiin}
+menuText L CorrespondenceChess "Kirjeshakki" 0 {Toiminnot sähköpostia ja Xfcc:ää varten perustuen kirjeshakkiin}
 menuText L CCConfigure "Konfiguroi" 0 {Konfiguroi ulkoiset työkalut ja yleiset asetukset}
 menuText L CCConfigRelay "Tarkkaile pelejä" 10 {Konfiguroi tarkkailtavat pelit}
 menuText L CCOpenDB "Avaa tietokanta" 0 {Avaa oletuskirjeshakkitietokanta}
 menuText L CCRetrieve "Palauta pelit" 0 {Palauta pelit ulkoisen (Xfcc-) avustajan kautta}
 menuText L CCInbox "Käsittele saapuneet-laatikko" 8 {Käsittele kaikki tiedostot Scidin saapuneet-laatikossa}
-menuText L CCSend "Lähetä siirto" 0 {Lähetä siirtosi eMailin tai ulkoisen (Xfcc-) avustajan kautta}
+menuText L CCSend "Lähetä siirto" 0 {Lähetä siirtosi sähköpostin tai ulkoisen (Xfcc-) avustajan kautta}
 
-menuText L CCResign "Antaudu" 1 {Antaudu (ei eMailin kautta)}
-menuText L CCClaimDraw "Vaadi tasapeliä" 6 {Lähetä siirto ja vaadi tasapeliä (ei eMailin kautta)}
-menuText L CCOfferDraw "Tarjoa tasapeliä" 1 {Lähetä siirto ja tarjoa tasapeliä (ei eMailin kautta)}
-menuText L CCAcceptDraw "Hyväksy tasapeli" 0 {Hyväksy tasapelitarjous (ei eMail:in kautta)}
+menuText L CCResign "Antaudu" 1 {Antaudu (ei sähköpostin kautta)}
+menuText L CCClaimDraw "Vaadi tasapeliä" 6 {Lähetä siirto ja vaadi tasapeliä (ei sähköpostin kautta)}
+menuText L CCOfferDraw "Tarjoa tasapeliä" 1 {Lähetä siirto ja tarjoa tasapeliä (ei sähköpostin kautta)}
+menuText L CCAcceptDraw "Hyväksy tasapeli" 0 {Hyväksy tasapelitarjous (ei sähköpostin kautta)}
 
-menuText L CCNewMailGame "Uusi eMail-peli" 2 {Aloita uusi eMail-peli}
-menuText L CCMailMove "Postita siirto" 0 {Lähetä siirto eMailin kautta vastustajalle}
+menuText L CCNewMailGame "Uusi sähköpostipeli" 2 {Aloita uusi sähköpostipeli}
+menuText L CCMailMove "Postita siirto" 0 {Lähetä siirto sähköpostin kautta vastustajalle}
 menuText L CCGamePage "Pelisivu" 0 {Kutsu peli verkkoselaimen kautta}
 
 # menu in cc window:
@@ -229,10 +229,8 @@ menuText L OptionsRowColour "Rivit" 0 {Oletus puu/kirja-rivin väri}
 menuText L OptionsSwitcherColour "Katkaisin" 0 {Oletus db-valitsijan väri}
 menuText L OptionsProgressColour "Edistymispalkki" 0 {Edistymispalkin oletusväri}
 menuText L OptionsCrossColour "Turnaustaulukon rivit" 0 {Tulostaulukon rivin väri}
-# ====== TODO To be translated ======
-menuText L OptionsScoreColour "Score Graph" 0 {}
-# ====== TODO To be translated ======
-menuText L OptionsScoreBarColour "Score Graph current" 0 {}
+menuText L OptionsScoreColour "Tulosgrafiikka" 0 {}
+menuText L OptionsScoreBarColour "Nykyinen tulosgrafiikka" 0 {}
 menuText L OptionsNames "Oman pelaajan nimet" 3 {Muokkaa oman pelaajan nimiä}
 menuText L OptionsExport "Vienti" 0 {Muuta tekstinviennin vaihtoehtoja}
 menuText L OptionsFonts "Kirjasintyypit" 0 {Muuta kirjasintyyppejä}
@@ -329,14 +327,11 @@ menuText L GInfoTBResult "Loppupelitietokannat: ainoastaan tulos" 12
 menuText L GInfoTBAll "Loppupelitietokannat: tulos ja parhaat siirrot" 19
 menuText L GInfoDelete "Palauta poistettu peli" 4
 menuText L GInfoMark "Poista tämän pelin merkintä" 4
-# ====== TODO To be translated ======
-menuText L GInfoMenuBar "Menu Bar"  0
-# ====== TODO To be translated ======
-menuText L GInfoToolBar "Tool Bar"  0
-# ====== TODO To be translated ======
-menuText L GInfoButtonBar "Button Bar"  0
-# ====== TODO To be translated ======
-menuText L GInfoStatusBar "Menu Bar"  0
+menuText L GInfoMenuBar "Valikkorivi"  0
+menuText L GInfoToolBar "Työkalurivi"  0
+menuText L GInfoButtonBar "Painikerivi"  0
+# TODO
+menuText L GInfoStatusBar "Status Bar"  0
 
 translate L FlipBoard {Käännä lauta}
 translate L RaiseWindows {Nosta ikkunat}
@@ -645,10 +640,8 @@ menuText L GraphFileClose "Sulje" 0
 menuText L GraphOptions "Vaihtoehdot" 0
 menuText L GraphOptionsWhite "Valkoinen" 0
 menuText L GraphOptionsBlack "Musta" 0
-# ====== TODO To be translated ======
-menuText L GraphOptionsDots "Show Dots" 0
-# ====== TODO To be translated ======
-menuText L GraphOptionsBar "Highlight Current Move" 0
+menuText L GraphOptionsDots "Näytä pisteet" 0
+menuText L GraphOptionsBar "Korosta nykyinen siirto" 0
 menuText L GraphOptionsBoth "Molemmat" 1
 menuText L GraphOptionsPInfo "Pelaaja Tieto pelaaja" 0
 translate L GraphFilterTitle "Yleisyys 1000:ssa pelissä"
@@ -681,8 +674,7 @@ translate L AnnotateNotBest {Kun siirto ei ole paras}
 translate L AnnotateBlundersOnly {Kun siirto on möhläys}
 translate L BlundersNotBest {Möhläykset/ei paras siirto}
 translate L AnnotateTitle {Konfiguroi kommentti}
-# ====== TODO To be translated ======
-translate L AnnotateMissedMates {Missed/shorter mates}
+translate L AnnotateMissedMates {Huomaamatta jääneet/lyhyemmät matit}
 translate L BlundersThreshold {Raja-arvo}
 translate L ScoreFormat {Lopputuloksen formaatti}
 translate L CutOff {Katkaise}
@@ -1285,7 +1277,7 @@ translate L ExportStripMarks {Poista ruutu/nuoli-merkkikoodit kommenteista?}
 
 # Goto game/move dialogs:
 translate L LoadGameNumber {Lataa peli numero}
-translate L GotoMoveNumber {Mene siirto numeroon}
+translate L GotoMoveNumber {Mene siirtonumeroon}
 
 # Copy games dialog:
 translate L CopyGames {Pelien kopionti}

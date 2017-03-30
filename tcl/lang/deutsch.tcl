@@ -391,7 +391,7 @@ menuText D GInfoToolBar "Tool Bar"  0
 # ====== TODO To be translated ======
 menuText D GInfoButtonBar "Button Bar"  0
 # ====== TODO To be translated ======
-menuText D GInfoStatusBar "Menu Bar"  0
+menuText D GInfoStatusBar "Status Bar"  0
 translate D FlipBoard {Brett drehen}
 # ====== TODO To be translated ======
 translate D RaiseWindows {Raise windows}

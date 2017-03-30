@@ -350,7 +350,7 @@ menuText U GInfoMark "Desmarcar este jogo" 0
 menuText U GInfoMenuBar "Barra do Menú"  0
 menuText U GInfoToolBar "Barra de Funções"  0
 menuText U GInfoButtonBar "Barra Inferior"  0
-menuText U GInfoStatusBar "Barra de Menús"  0
+menuText U GInfoStatusBar "Barra de Estado"  0
 translate U FlipBoard {Rodar Tabuleiro}
 translate U RaiseWindows {Ativar janelas}
 translate U AutoPlay {Jogo automático}
