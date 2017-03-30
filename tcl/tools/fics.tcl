@@ -1166,6 +1166,8 @@ namespace eval fics {
 
         set t1 [::gameclock::getSec 1]
         set t2 [::gameclock::getSec 2]
+	if {$t1 < 0} {set t1 0}
+	if {$t2 < 0} {set t2 0}
 	::commenteditor::appendComment "$resultcomment\nWhiteclock [expr $t1 / 60]:[format {%02i} [expr $t1 % 60]] Blackclock [expr $t2 / 60]:[format {%02i} [expr $t2 % 60]]"
         sc_game tags set -result $res
         # if {![string match  {*Game aborted*} $line]} 
@@ -2474,6 +2476,8 @@ if {[lindex $line 0] != {Still in progress}} {
       if {$::fics::playing == -1 || $::fics::playing == 1} {
         set t1 [::gameclock::getSec 1]
         set t2 [::gameclock::getSec 2]
+	if {$t1 < 0} {set t1 0}
+	if {$t2 < 0} {set t2 0}
 	::commenteditor::appendComment "Disconnected\nWhiteclock [expr $t1 / 60]:[format {%02i} [expr $t1 % 60]] Blackclock [expr $t2 / 60]:[format {%02i} [expr $t2 % 60]]"
         if {[sc_pos moveNumber] > 2} {
           catch {::game::Save}
