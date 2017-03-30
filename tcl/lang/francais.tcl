@@ -369,7 +369,7 @@ menuText F GInfoToolBar "Tool Bar"  0
 # ====== TODO To be translated ======
 menuText F GInfoButtonBar "Button Bar"  0
 # ====== TODO To be translated ======
-menuText F GInfoStatusBar "Menu Bar"  0
+menuText F GInfoStatusBar "Status Bar"  0
 translate F FlipBoard {Retourner l'échiquier}
 # ====== TODO To be translated ======
 translate F RaiseWindows {Raise windows}

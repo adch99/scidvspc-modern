@@ -377,7 +377,7 @@ menuText W GInfoToolBar "Tool Bar"  0
 # ====== TODO To be translated ======
 menuText W GInfoButtonBar "Button Bar"  0
 # ====== TODO To be translated ======
-menuText W GInfoStatusBar "Menu Bar"  0
+menuText W GInfoStatusBar "Status Bar"  0
 # ====== TODO To be translated ======
 translate W FlipBoard {Flip board}
 # ====== TODO To be translated ======
