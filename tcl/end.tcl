@@ -1554,10 +1554,6 @@ if {$windowsOS || $macOS} {
     if {[expr -%D] < 0} { ::move::Back }
     if {[expr -%D] > 0} { ::move::Forward }
   }
-  bind .main <Shift-MouseWheel> {
-    if {[expr -%D] < 0} { ::move::Back 10 }
-    if {[expr -%D] > 0} { ::move::Forward 10}
-  }
   if { $::docking::USE_DOCKING } {
     bindWheeltoFont .main
   } else {
