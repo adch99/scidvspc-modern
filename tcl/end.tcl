@@ -548,6 +548,9 @@ proc exportGames {selection exportType {fName {}}} {
     }
     default { return }
   }
+  if {! [file isdirectory $idir] } {
+    set idir $::env(HOME)
+  }
 
   if {$exportFlags(append)} {
     set getfile tk_getOpenFile
@@ -2239,11 +2242,10 @@ bind .main <Control-Shift-F8> {
     dumpImages [file join $::env(HOME) ScidImages]
 }
 
-# Opening files by drag & drop on Scid icon on Mac
-# Todo: implement for Windows and Linux (haha!)
+### Opening files by double click on Mac
+# todo - fix up Mac file drop
 
 if {$::macOS} {
-  # We opened for a drag & drop request, process it now:
   set isopenBaseready 1
   if {$dndargs != 0} {
     set isopenBaseready 2
