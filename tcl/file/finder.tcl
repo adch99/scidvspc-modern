@@ -287,9 +287,7 @@ proc ::file::finder::Refresh {{newdir ""}} {
   unbusyCursor .
 
 }
-################################################################################
-#
-################################################################################
+
 proc ::file::finder::contextMenu {win fullPath x y} {
 
   update idletasks
@@ -311,15 +309,19 @@ proc ::file::finder::contextMenu {win fullPath x y} {
   tk_popup $mctxt $x $y
 
 }
-################################################################################
-# will backup a base in the form name-date.ext
-################################################################################
+
+### Backup a base in the form name-date.ext
+
 proc ::file::finder::backup { f } {
   set r [file rootname $f]
   set d [clock format [clock seconds] -format "-%Y.%m.%d-%H%M" ]
   set ext [string tolower [file extension $f]]
+
+  busyCursor .
+  update
   if { $ext == ".si4" } {
     if { [catch { file copy "$r.sg4" "$r$d.sg4" ; file copy "$r.sn4" "$r$d.sn4" } err ] } {
+      unbusyCursor .
       tk_messageBox -title Scid -icon error -type ok -message "File copy error $err"
       return
     }
@@ -327,15 +329,15 @@ proc ::file::finder::backup { f } {
   }
 
   if { [catch { file copy "$r[file extension $f]" "$r$d[file extension $f]" } err ] } {
+    unbusyCursor .
     tk_messageBox -title Scid -icon error -type ok -message "File copy error $err"
     return
   }
 
+  unbusyCursor .
   ::file::finder::Refresh
 }
-################################################################################
-#
-################################################################################
+
 proc ::file::finder::copy { f } {
   if {[sc_base slot $f] != 0} {
     tk_messageBox -title Scid -icon error -type ok -message "Close base first" -parent .finder
@@ -359,9 +361,7 @@ proc ::file::finder::copy { f } {
 
   }
 }
-################################################################################
-#
-################################################################################
+
 proc ::file::finder::move { f } {
   if {[sc_base slot $f] != 0} {
     tk_messageBox -title Scid -icon error -type ok -message "Close base first" -parent .finder
@@ -472,10 +472,6 @@ proc ::file::finder::getname {} {
   return "$::tmp"
 }
 
-################################################################################
-#
-################################################################################
-
 proc ::file::finder::delete { f } {
   if {[sc_base slot $f] != 0} {
     tk_messageBox -title Scid -icon error -type ok -message "Close base first" -parent .finder
@@ -492,9 +488,6 @@ proc ::file::finder::delete { f } {
   ::file::finder::Refresh
 }
 
-################################################################################
-#
-################################################################################
 proc ::file::finder::ConfigMenus {{lang ""}} {
   if {! [winfo exists .finder]} { return }
   if {$lang == ""} { set lang $::language }
