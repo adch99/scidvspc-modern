@@ -828,7 +828,6 @@ namespace eval uci {
       ::sendToEngine $n "isready"
       vwait analysis(waitForReadyOk$n)
       ::sendToEngine $n "setoption name $name value $value"
-if {$sergame} {puts $name,$value}
       if {$name == {Skill Level} && $sergame} {
         set ::uci::uciInfo(skill) [list SkillLevel $value]
       }
@@ -842,9 +841,14 @@ if {$sergame} {puts $name,$value}
   ### Called by calvar.tcl sergame.tcl tactics.tcl and tacgame.tcl
   ### Logging not currently used.
 
-  proc startEngine {n} {
+  proc startSilentEngine {n} {
 
     global ::uci::uciInfo analysis
+
+    if {[winfo exists .analysisWin$n]} {
+      # Kill any analysis windows using this engine.
+      makeAnalysisWin $n
+    }
 
     resetUciInfo $n
     resetUciInfo2 $n
