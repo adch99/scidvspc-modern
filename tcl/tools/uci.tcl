@@ -37,7 +37,6 @@ namespace eval uci {
     set uciInfo(currmovenumber$n) 0
     # hmmm
     # set uciInfo(score$n) ""
-    set uciInfo(skill) ""
   }
 
   proc resetUciInfo2 {n} {
@@ -56,6 +55,7 @@ namespace eval uci {
     # set uciInfo(currline$n) ""
     set uciInfo(bestmove$n) ""
     set uciInfo(searchmoves$n) ""
+    set uciInfo(skill) ""
   }
 
   ### if gui = 0 -> engine mode,   pipe used is $uciInfo(pipe$n)
@@ -828,8 +828,12 @@ namespace eval uci {
       ::sendToEngine $n "isready"
       vwait analysis(waitForReadyOk$n)
       ::sendToEngine $n "setoption name $name value $value"
+if {$sergame} {puts $name,$value}
       if {$name == {Skill Level} && $sergame} {
-        set ::uci::uciInfo(skill) $value
+        set ::uci::uciInfo(skill) [list SkillLevel $value]
+      }
+      if {$name == "UCI_Elo" && $sergame} {
+        set ::uci::uciInfo(skill) [list UCI_Elo $value]
       }
     }
   }
