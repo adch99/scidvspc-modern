@@ -715,7 +715,7 @@ namespace eval tactics {
       if { [string equal -nocase -length 4 [lindex $e 0] "toga" ] } {
 	# Start engine in analysis mode
         set ::tactics::engineSlot $index
-	::uci::startEngine $index
+	::uci::startSilentEngine $index
 	return 1
       }
       incr index

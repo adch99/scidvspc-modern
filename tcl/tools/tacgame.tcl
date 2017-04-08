@@ -542,7 +542,7 @@ namespace eval tacgame {
     pack $w.fbuttons.close -expand yes -fill both -padx 10 -pady 2
 
     ::tacgame::launchPhalanx $phalanx
-    ::uci::startEngine $toga 
+    ::uci::startSilentEngine $toga 
     set ::uci::uciInfo(multipv$toga) 1
     changePVSize $toga
 

@@ -307,7 +307,7 @@ namespace eval sergame {
     set ::lFen {}
     set ::drawShown 0
 
-    ::uci::startEngine $n
+    ::uci::startSilentEngine $n
     ::uci::sendUCIoptions $n 1
 
     set ::uci::uciInfo(prevscore$n) 0.0

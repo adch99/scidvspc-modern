@@ -469,7 +469,7 @@ proc compNM {n m k} {
   if {[winfo exists .analysisWin$m]} "destroy .analysisWin$m"
 
   ### makeAnalysisWin creates a toplevel widget to run an engine but we don't really need a toplevel %<
-  # The problem is that only UCI has a procedure for running an engine without a toplevel (uci::startEngine).
+  # The problem is that only UCI has a procedure for running an engine without a toplevel (uci::startSilentEngine).
   # There is currently no equivalent for xboard engines
 
   makeAnalysisWin $n

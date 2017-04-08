@@ -208,7 +208,7 @@ namespace eval calvar {
     wm minsize $w 45 0
 
     # start engine and set MultiPV to 10
-    ::uci::startEngine $n
+    ::uci::startSilentEngine $n
 
     set ::analysis(multiPVCount$n) 10
     ::uci::sendToEngine $n "setoption name MultiPV value $::analysis(multiPVCount$n)"
