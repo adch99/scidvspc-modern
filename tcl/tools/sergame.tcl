@@ -350,7 +350,6 @@ namespace eval sergame {
       }
     }
     if {!$::sergame::startFromCurrent} {
-      # create a new game if a DB is opened
       sc_game new
       sc_game tags set -event "UCI Game"
       set player_name [getMyPlayerName]
@@ -363,12 +362,10 @@ namespace eval sergame {
 	sc_game tags set -white $player_name
       }
       sc_game tags set -date [::utils::date::today]
-      if {[sc_base inUse [sc_base current]]} { catch {sc_game save 0}  }
     }
 
     if {$::uci::uciInfo(skill) != ""} {
-      # hmm - no spaces allowed in tags (Skill Level)
-      sc_game tags set -extra [list "SkillLevel \"$::uci::uciInfo(skill)\""]
+      sc_game tags set -extra [list "[lindex $::uci::uciInfo(skill) 0] \"[lindex $::uci::uciInfo(skill) 1]\""]
     }
 
     updateBoard -pgn
