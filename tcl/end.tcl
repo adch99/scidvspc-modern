@@ -767,14 +767,13 @@ proc updateMatchList { tw nametype maxMatches name el op } {
       $tw insert end "$count\t$string\n" [list tag$i focus$i]
     }
 
-    # Control-N key binding
-    bind $entrywidget <Control-Key-$i> "
-      set $name \"$string\"
-      if {\[catch {$entrywidget icursor end}\]} {
-        puts \"Oops: $entrywidget is not an entry widget\"
-      }"
-
-    incr i
+    # Control-N key binding (and make sure we are binding to the entry widgets only)
+    if {[winfo class $entrywidget] == "Entry"} {
+      bind $entrywidget <Control-Key-$i> "
+	set $name \"$string\"
+	$entrywidget icursor end"
+      incr i
+    }
   }
   $tw configure -state disabled
 
@@ -787,14 +786,6 @@ proc clearMatchList { tw } {
   $tw delete 0.0 end
   $tw configure -state disabled
 }
-
-# Traces to update the match list as names are typed in:
-
-trace variable event w { updateMatchList .save.g.list e 9 }
-trace variable site  w { updateMatchList .save.g.list s 9 }
-trace variable white w { updateMatchList .save.g.list p 9 }
-trace variable black w { updateMatchList .save.g.list p 9 }
-trace variable round w { updateMatchList .save.g.list r 9 }
 
 set editName ""
 set editNameNew ""
@@ -1365,8 +1356,9 @@ proc addGameSaveEntry {name row textname nametype} {
   grid .save.g.label$name -row $row -column 0 -sticky w
   grid .save.g.entry$name -row $row -column 1 -columnspan 7 -sticky w
 
-  # New FocusIn binding for gameSave. Correct ??? S.A
-  bind .save.g.entry$name <FocusIn> "updateMatchList .save.g.list $nametype 9 $name {} {}"
+  # updateMatchList with focus in or key press
+  bind .save.g.entry$name <FocusIn>    "updateMatchList .save.g.list $nametype 9 $name {} {}"
+  bind .save.g.entry$name <KeyRelease> "updateMatchList .save.g.list $nametype 9 $name {} {}"
 }
 
 #    Called by gameSave when the user presses the "Save" button
