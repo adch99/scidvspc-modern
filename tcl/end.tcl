@@ -1205,7 +1205,7 @@ proc gameSave {gnum {focus {}}} {
 	set ${j}RType [sc_game tag get -last ${i}RType]
       }
     }
-    foreach {i j} {Event event Site site} {
+    foreach {i j} {Event event Site site Round round} {
       set value [set $j]
       if {$value == "?" || $value == ""} {
 	set $j [sc_game tag get -last $i]
