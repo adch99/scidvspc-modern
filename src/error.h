@@ -66,6 +66,7 @@ const errorT
 
     // Scan Errors
     ERROR_PGNTag = 501,
+    ERROR_PGNTagNull = 502,
 
     // Buffer errors
     ERROR_BufferFull = 601,
