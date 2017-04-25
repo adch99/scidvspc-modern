@@ -187,16 +187,6 @@ void
 PgnParser::LogError (const char * errMessage, const char * text)
 {
     NumErrors++;
-#ifdef WINCE
-//     if (ErrorFile != NULL) {
-        //fprintf (ErrorFile, "%s%s [line %u]\n", errMessage, text, LineCounter);
-        if (InFile != NULL) {
-            printf ("%s:", InFile->GetFileName());
-        }
-        printf ("%u: %s%s\n", LineCounter, errMessage, text);
-        return;
-//     }
-#else
     if (ErrorFile != NULL) {
         //fprintf (ErrorFile, "%s%s [line %u]\n", errMessage, text, LineCounter);
         if (InFile != NULL) {
@@ -205,7 +195,6 @@ PgnParser::LogError (const char * errMessage, const char * text)
         fprintf (ErrorFile, "(game %u, line %u) %s%s\n", GameCounter, LineCounter, errMessage, text);
         return;
     }
-#endif
     ErrorBuffer->Append ("(game ", GameCounter);
     ErrorBuffer->Append (", line ", LineCounter, ") ");
     ErrorBuffer->Append (errMessage, text, "\n");
@@ -380,7 +369,7 @@ PgnParser::ExtractPgnTag (const char * buffer, Game * game)
     if (strEqual (tag, "White")) {
         // The White, Black, Site, Event, Round tags should not be empty
         // (Date and Result should also have values, but these will be set after ExtractPgnTag returns)
-        if (length == 0) { return ERROR_PGNTag; }
+        if (length == 0) { return ERROR_PGNTagNull; }
 #ifdef STANDARD_PLAYER_NAMES
         standardPlayerName (value);
 #endif
@@ -402,7 +391,7 @@ PgnParser::ExtractPgnTag (const char * buffer, Game * game)
         game->SetWhiteStr (value);
 
     } else if (strEqual (tag, "Black")) {
-        if (length == 0) { return ERROR_PGNTag; }
+        if (length == 0) { return ERROR_PGNTagNull; }
 #ifdef STANDARD_PLAYER_NAMES
         standardPlayerName (value);
 #endif
@@ -424,15 +413,15 @@ PgnParser::ExtractPgnTag (const char * buffer, Game * game)
         game->SetBlackStr (value);
 
     } else if (strEqual (tag, "Event")) {
-        if (length == 0) { return ERROR_PGNTag; }
+        if (length == 0) { return ERROR_PGNTagNull; }
         game->SetEventStr (value);
 
     } else if (strEqual (tag, "Site")) {
-        if (length == 0) { return ERROR_PGNTag; }
+        if (length == 0) { return ERROR_PGNTagNull; }
         game->SetSiteStr (value);
 
     } else if (strEqual (tag, "Round")) {
-        if (length == 0) { return ERROR_PGNTag; }
+        if (length == 0) { return ERROR_PGNTagNull; }
         game->SetRoundStr (value);
 
     } else if (strEqual (tag, "Result")) {
@@ -1243,17 +1232,10 @@ PgnParser::ParseMoves (Game * game, char * buffer, uint bufSize)
 errorT
 PgnParser::ParseGame (Game * game)
 {
-#ifdef WINCE
-    char * buffer = my_Tcl_Alloc(sizeof( char [MAX_COMMENT_SIZE]));
-    uint preGameTextLength = 0;
-
-    char * preGameTextBuffer = my_Tcl_Alloc(sizeof(char [MAX_COMMENT_SIZE]));
-#else
     char * buffer = new char [MAX_COMMENT_SIZE];
     uint preGameTextLength = 0;
 
     char * preGameTextBuffer = new char [MAX_COMMENT_SIZE];
-#endif
 
     GameCounter++;
     errorT err = ERROR_NotFound;
@@ -1273,7 +1255,9 @@ PgnParser::ParseGame (Game * game)
                 }
                 ParseMode = PARSE_Header;
             }
-            if (ExtractPgnTag (buffer, game) != OK) {
+            errorT pgnRes = ExtractPgnTag (buffer, game);
+            // Don't throw errors for null pgn tags - too verbose
+            if (pgnRes != OK && pgnRes != ERROR_PGNTagNull) {
                 LogError ("Error reading tag: ", buffer);
             }
 
@@ -1305,13 +1289,8 @@ PgnParser::ParseGame (Game * game)
 
         token = GetNextToken (buffer, MAX_COMMENT_SIZE);
     }
-#ifdef WINCE
-    my_Tcl_Free( buffer );
-    my_Tcl_Free( preGameTextBuffer );
-#else
     delete[] buffer;
     delete[] preGameTextBuffer;
-#endif
 
     if (err != ERROR_NotFound && CharDetector)
     {
