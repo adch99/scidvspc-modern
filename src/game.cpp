@@ -906,7 +906,8 @@ Game::SetMoveComment (const char * comment)
 {
     ASSERT (CurrentMove != NULL  &&  CurrentMove->prev != NULL);
     moveT * m = CurrentMove->prev;
-    if (m->comment != NULL) { StrAlloc->Delete (m->comment); }
+    if (m->comment)
+        StrAlloc->Delete (m->comment);
     if (comment == NULL) {
         m->comment = NULL;
     } else {
@@ -1205,7 +1206,8 @@ Game::MainVariation (uint varNumber)
       }
 
       StrAlloc->Delete (CurrentMove->varChild->comment);
-      StrAlloc->Delete (m->comment);
+      if (m->comment)
+        StrAlloc->Delete (m->comment);
 
       CurrentMove->varChild->comment = NULL;
       m->comment = StrAlloc->Duplicate(newcomment);
