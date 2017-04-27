@@ -35,6 +35,22 @@ static const uint PBOOK_HASH_BYTES = (PBOOK_HASH_BITS >> 3);
 typedef char compactBoardStr [36];
 
 
+PBook::~PBook ()
+{
+    bookNodeT * node;
+
+    for (uint i=0; i <= PBOOK_MAX_MATERIAL; i++) {
+        Tree[i]->IterateStart();
+        while ((node = Tree[i]->Iterate()) != NULL) {
+            delete[] node->data.comment;
+        }
+        delete Tree[i];
+    }
+    delete[] FileName;
+    delete[] HashFlags;
+    delete[] NodeList;
+}
+
 void
 PBook::SetHashFlag (Position * pos) {
     uint hash = PBOOK_HASH(pos);
