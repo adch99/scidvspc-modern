@@ -3017,7 +3017,7 @@ proc processAnalysisInput {n} {
     if {$analysis(invertScore$n) && $analysis(side$n) == "black"} {
       set temp_score [expr { 0.0 - $temp_score } ]
     }
-    if {$analysis(maxPly) > 0} {
+    if {$analysis(maxPly) > 0 && $analysis(scoremate$n) == 0} {
       set temp_moves [lrange $temp_moves 0 [expr {$analysis(maxPly) - 1}]]
     }
     set analysis(depth$n) $temp_depth
