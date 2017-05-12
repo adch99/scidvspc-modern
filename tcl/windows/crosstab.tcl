@@ -319,6 +319,12 @@ proc ::crosstab::Open {{game {}}} {
     bind $text <Shift-Button-5> "$text xview scroll 5 units ; break"
     bind $text <Button-4> "$text yview scroll -1 units"
     bind $text <Button-5> "$text yview scroll  1 units"
+    bind $text <Button> {
+      # Buttons 6 and 7 are the left/right for advanced wheelscroll buttons
+      # but aren't supported by Button-6 (see http://wiki.tcl.tk/12696)
+      if {"%b" == "6"} { .crosstabWin.f.text xview scroll -10 units }
+      if {"%b" == "7"} { .crosstabWin.f.text xview scroll  10 units }
+    }
   }
 
   bindWheeltoFixed $w
