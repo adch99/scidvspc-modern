@@ -378,7 +378,15 @@ proc ::windows::gamelist::Open {} {
   bind $w <Up>  {}
   bind $w <Down> {}
   bind $w.tree <Left>  "$w.tree xview scroll -40 units ; break"
-  bind $w.tree <Right> "$w.tree xview scroll 40 units ; break"
+  bind $w.tree <Right> "$w.tree xview scroll  40 units ; break"
+  bind $w.tree <Button> {
+    if {!$::macOS} {
+      # Buttons 6 and 7 are the left/right for advanced wheelscroll buttons
+      # but aren't supported by Button-6 (see http://wiki.tcl.tk/12696)
+      if {"%b" == "6"} { .glistWin.tree xview scroll -40 units }
+      if {"%b" == "7"} { .glistWin.tree xview scroll  40 units }
+    }
+  }
   bind $w.tree <Up>    {::windows::gamelist::Scroll -1 ; break}
   bind $w.tree <Down>  {::windows::gamelist::Scroll  1 ; break}
   bind $w <Prior> {::windows::gamelist::Scroll -$glistSize}
