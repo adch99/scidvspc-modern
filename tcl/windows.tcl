@@ -81,6 +81,8 @@ proc setWinLocation {win} {
     if {$macOS} {
       set min_x 0
       set min_y 22
+      # Have a stab and allocate 50 pixels for the mac dock
+      incr max_y -50
     } else {
       set min_x 0
       set min_y 0
@@ -149,9 +151,25 @@ proc placeWinOverPointer {w} {
   set y [winfo pointery .]
   set width [winfo reqwidth $w]
   set height [winfo reqheight $w]
-  if {$x>0 && $y>0 } {
-    wm geometry $w +[expr $x - $width/2]+[expr $y - $height/2]
+
+  set max_x [expr [winfo screenwidth .main]]
+  set max_y [expr [winfo screenheight .main]]
+  if {$::macOS} {
+    set min_x 0
+    set min_y 22
+    # Have a stab and allocate 50 pixels for the mac dock
+    incr max_y -50
+  } else {
+    set min_x 0
+    set min_y 0
   }
+
+  if {[expr {$x + $width > $max_x}]} { set x [expr $max_x - $width] }
+  if {[expr {$y + $height > $max_y}]} { set y [expr $max_y - $height] }
+  if { $x < $min_x } { set x $min_x }
+  if { $y < $min_y } { set y $min_y }
+
+  catch [list wm geometry $w "+$x+$y"]
 }
 
 proc placeWinCenter {w} {
