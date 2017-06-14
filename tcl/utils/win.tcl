@@ -675,7 +675,7 @@ set ::docking::layout_dest_notebook ""
 proc ::docking::layout_save { slot } {
   if {[winfo exists .fics]} {
     tk_messageBox -title Scid -icon question -type ok -message "Cannot save layout with FICS opened"
-    return
+    return 0
   }
 
   # on Windows the geometry is false if the window was maximized (x and y offsets are the ones before the maximization)
@@ -693,16 +693,17 @@ proc ::docking::layout_save { slot } {
 
   if {$tree_count > 1} {
     tk_messageBox -title Scid -icon question -type ok -message "Cannot save layout with multiple Trees."
-    return
+    return 0
   }
 
   if {$best_count && [string first fdocktreeBest $layout] < [string first fdocktreeWin $layout]} {
     tk_messageBox -title Scid -icon question -type ok -message "Cannot save layout: Tree must precede Best Games."
-    return
+    return 0
   }
 
   set ::docking::layout_list($slot) [list [list "MainWindowGeometry" $geometry] ]
   lappend ::docking::layout_list($slot) $layout
+  return 1
 }
 
 ################################################################################
