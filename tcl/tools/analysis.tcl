@@ -244,7 +244,7 @@ if {[llength $engines(list)] == 0} {
     return
   }
 
-  if {$macApp} {
+  if {$macOS} {
     engine "Name Toga
             Cmd  $scidShareDir/engines/toga/fruit
             Dir  $scidUserDir

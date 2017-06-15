@@ -5,7 +5,7 @@ namespace eval ::config {}
 
 if {$windowsOS} {
   set scidShareDir $scidExeDir
-} elseif {$macApp} {
+} elseif {$macOS} {
   set scidShareDir [file normalize [file join $scidExeDir "../Resources"]]
 } else {
   if {![info exists scidShareDir]} {

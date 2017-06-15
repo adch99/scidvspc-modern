@@ -458,6 +458,7 @@ namespace eval uci {
       } else {
         set parent .
       }
+      # This is broke on OS X... messageBox does not draw until user destroys .splash
       tk_messageBox -title "Error starting UCI engine" \
           -icon warning -type ok -message "Unable to start program \n$cmd $arg" -parent $parent
       return
@@ -861,12 +862,6 @@ namespace eval uci {
     set analysisCommand [ toAbsPath [lindex $engineData 1] ]
     set analysisArgs [lindex $engineData 2]
     set analysisDir [ toAbsPath [lindex $engineData 3] ]
-
-    if {$::macApp && [file pathtype $analysisCommand] != "absolute"} {
-      # Maybe if they put a full path in the config they knew what they wanted?
-      # Otherwise, look in the analysisDir. - dr
-      set analysisCommand [file join $analysisDir $analysisCommand]
-    }
 
     # If the analysis directory is not current dir, cd to it:
     set oldpwd ""
