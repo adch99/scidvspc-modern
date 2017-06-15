@@ -44,24 +44,16 @@ if {0} {
 }
 
 if {![catch {tk windowingsystem} wsystem] && $wsystem == "aqua"} {
+  # Note - we don't currently support installing on Mac in the unix fashion (ie /usr)
   set macOS 1
   set scidName {Scid vs. Mac}
+  if {[file isdirectory /usr/local/bin]} {
+    # Wish does not use the Bash path for some reason
+    set env(PATH) $env(PATH):/usr/local/bin
+  }
 } else {
   set macOS 0
   set scidName {Scid vs. PC}
-}
-
-# See if we're inside a Mac .app bundle.  This duplcates part of the command-line
-# parsing, which options should probably be done earlier, but I'm afraid to move
-# things around that much - dr
-
-# Mavericks has discarded "-psn", so just assume started as App unless "-noapp" passed
-
-if { $::macOS && ([string first "-noapp" $argv] == -1)} {
-  # Remember that we were invoked in a MacOS app bundle
-  set macApp 1
-} else {
-  set macApp 0
 }
 
 # Check that on Unix, the version of tkscid matches the version of this
@@ -1455,7 +1447,7 @@ if { $macOS } {
 
 # Add empty updateStatusBar proc to avoid errors caused by early
 # closing of the splash window:
-#
+
 proc updateStatusBar {} {}
 
 set ::splash::keepopen 1
@@ -1780,7 +1772,24 @@ proc ::splash::make {} {
   if {!($::windowsOS && $::docking::USE_DOCKING)} {
      wm withdraw .
   }
+
   set w [toplevel .splash]
+
+  ### Calculate size of the OS X dock
+  #   - but it is busted. Maximized height doesnt want to work, and 'update's don't seem to help
+  if {0 && $::macOS} {
+      wm state $w zoomed
+      set height_maximized [winfo height $w]
+      wm state $w normal
+
+      wm attributes $w -fullscreen 1
+      set height_fullscreen [winfo height $w]
+      wm attributes $w -fullscreen 0
+
+      set ::macDockHeight [expr $height_fullscreen - $height_maximized]
+      ::splash::add "OS X Dock height is $::macDockHeight"
+  }
+
   wm withdraw $w
   wm protocol $w WM_DELETE_WINDOW [list wm withdraw $w]
   wm title $w "Welcome to $::scidName $::scidVersion"

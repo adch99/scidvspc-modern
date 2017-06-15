@@ -602,12 +602,6 @@ namespace eval tacgame {
     set analysisArgs [lindex $engineData 2]
     set analysisDir [ ::toAbsPath [lindex $engineData 3] ]
 
-    if {$::macApp && [file pathtype $analysisCommand] != "absolute"} {
-      # Maybe if they put a full path in the config they knew what they wanted?
-      # Otherwise, look in the analysisDir. - dr
-      set analysisCommand [file join $analysisDir $analysisCommand]
-    }
-
     # turn phalanx book, ponder and learning off, easy on
     # convert Elo = 1400 to level 100 up to Elo=2400 to level 0
     set easylevel [expr int(100-(100*($level-1400)/(2400-1400)))]
