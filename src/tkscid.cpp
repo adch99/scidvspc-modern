@@ -14059,60 +14059,59 @@ sc_tree_best (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     IndexEntry * ie;
     uint insert;
 
-if (sortBest) {
-    for (uint gnum=0; gnum < base->numGames; gnum++) {
-        if (base->treeFilter->Get(gnum) == 0) { continue; }
-        ie = base->idx->FetchEntry (gnum);
-        if (! results [ie->GetResult()]) { continue; }
-        eloT welo = ie->GetWhiteElo();
-        eloT belo = ie->GetBlackElo();
-        if (welo == 0) { welo = base->nb->GetElo (ie->GetWhite()); }
-        if (belo == 0) { belo = base->nb->GetElo (ie->GetBlack()); }
-        uint avg = (welo + belo) / 2;
+    if (sortBest) {
+        for (uint gnum=0; gnum < base->numGames; gnum++) {
+            if (base->treeFilter->Get(gnum) == 0) { continue; }
+            ie = base->idx->FetchEntry (gnum);
+            if (! results [ie->GetResult()]) { continue; }
+            eloT welo = ie->GetWhiteElo();
+            eloT belo = ie->GetBlackElo();
+            if (welo == 0) { welo = base->nb->GetElo (ie->GetWhite()); }
+            if (belo == 0) { belo = base->nb->GetElo (ie->GetBlack()); }
+            uint avg = (welo + belo) / 2;
 
-        // Start at end of best list and work up as far as possible:
-        insert = count;
-        while (insert > 0) {
-            if (bestElo[insert-1] >= avg) { break; }
-            insert--;
-        }
-        if (insert < maxGames) {
-            // Move all lower-rated games down one place:
-            for (tmp=count; tmp > insert; tmp--) {
-                if (tmp >= maxGames) { continue; }
-                bestElo[tmp] = bestElo[tmp-1];
-                bestIndex[tmp] = bestIndex[tmp-1];
+            // Start at end of best list and work up as far as possible:
+            insert = count;
+            while (insert > 0) {
+                if (bestElo[insert-1] >= avg) { break; }
+                insert--;
             }
-            // Add details for this game:
-            bestElo[insert] = avg;
-            bestIndex[insert] = gnum;
+            if (insert < maxGames) {
+                // Move all lower-rated games down one place:
+                for (tmp=count; tmp > insert; tmp--) {
+                    if (tmp >= maxGames) { continue; }
+                    bestElo[tmp] = bestElo[tmp-1];
+                    bestIndex[tmp] = bestIndex[tmp-1];
+                }
+                // Add details for this game:
+                bestElo[insert] = avg;
+                bestIndex[insert] = gnum;
+                count++;
+                if (count > maxGames) { count = maxGames; }
+            }
+        }
+    } else {
+        insert = 0;
+        // Insert the last maxGames games
+        // then reverse the order so they appear the same as in the gamelist
+        for (uint gnum = base->numGames ; gnum > 0 ; ) {
+            gnum--;
+            if (base->treeFilter->Get(gnum) == 0)
+              continue;
+            ie = base->idx->FetchEntry (gnum);
+            if (! results [ie->GetResult()])
+              continue;
+            bestIndex[insert++] = gnum;
             count++;
-            if (count > maxGames) { count = maxGames; }
+            if (count == maxGames)
+              break;
+        }
+        for (uint i=0; i < count/2; i++) {
+            tmp = bestIndex[i];
+            bestIndex[i] = bestIndex[count-1-i];
+            bestIndex[count-1-i] = tmp;
         }
     }
-} else {
-    insert = 0;
-    // Insert the last maxGames games
-    // then reverse the order so they appear the same as in the gamelist
-    for (uint gnum = base->numGames ; gnum > 0 ; ) {
-	gnum--;
-        if (base->treeFilter->Get(gnum) == 0)
-          continue;
-        ie = base->idx->FetchEntry (gnum);
-        if (! results [ie->GetResult()])
-          continue;
-	bestIndex[insert++] = gnum;
-	count++;
-	if (count == maxGames)
-          break;
-    }
-    for (uint i=0; i < count/2; i++) {
-	tmp = bestIndex[i];
-	bestIndex[i] = bestIndex[count-1-i];
-	bestIndex[count-1-i] = tmp;
-    }
-
-}
 
     // Now generate the Tcl list of best game details:
     const char * formatStr = argv[6];
