@@ -1127,8 +1127,56 @@ proc ::tree::OpenBest {baseNumber} {
   }
 }
 
-proc ::tree::best { baseNumber } {
-  global tree
+### Bastardised from gamelist.tcl
+
+# Subset of glistField
+set blistFields {
+  g Number      e 7
+  w White       w 14
+  b Black       w 14
+  r Result      e 5
+  m Length      e 5
+  d Date        w 10
+  e Event       w 10
+  W WElo        e 5
+  B BElo        e 5
+  n Round       e 5
+  s Site        w 10
+  c Country     e  3
+  E EventDate   w  7
+}
+
+set blistHeaders {}
+set blistSortShortcuts {}
+set temp_order {}
+set temp_widths {}
+set temp_anchors {}
+set blistCodes {}
+### blistCodes is a printf format style string. A \n is used to split the main "sc_game list"
+# string into a proper list for processing. It is now appended in sc_game_list
+
+set i 0
+foreach {code col anchor width} $blistFields {
+  lappend blistHeaders $col
+  lappend blistSortShortcuts $code
+  lappend temp_order $i
+  lappend temp_widths [expr {$width * 8}] ; # [font measure [ttk::style lookup [$w.tree cget -style] -font] "X"]
+  lappend temp_anchors $anchor
+  lappend blistCodes "$code* "
+  incr i
+}
+if {! [info exists blistColOrder]} {
+  set blistColOrder $temp_order
+}
+if {! [info exists blistColWidth]} {
+  set blistColWidth $temp_widths
+}
+if {! [info exists blistColAnchor]} {
+  set blistColAnchor $temp_anchors
+}
+
+proc ::tree::best {baseNumber} {
+  global tree blistCodes
 
   set w .treeBest$baseNumber
   if {! [winfo exists .treeWin$baseNumber]} {
@@ -1147,56 +1195,196 @@ proc ::tree::best { baseNumber } {
     pack [frame $w.b] -side bottom -fill x
     frame $w.blist
     pack $w.blist -side top -expand true -fill both
-    listbox $w.blist.list  -yscrollcommand "$w.blist.ybar set" -font font_Fixed -selectmode single -highlightthickness 0
-    scrollbar $w.blist.ybar -command "$w.blist.list yview" -takefocus 0
-    pack $w.blist.ybar -side right -fill y
-    pack $w.blist.list -side left -fill both -expand yes
-    bind $w.blist.list <<ListboxSelect>>  "::tree::bestMenu $baseNumber"
+
+    ### Best Games treeview stuff, bastardised from gamelist.tcl
+
+    ttk::treeview $w.tree -columns $::blistHeaders -displaycolumns $::blistColOrder -show headings -yscroll "$w.ybar set" -xscroll "$w.xbar set"
+
+    # title font isn't working &&& I don't think it's configurable !
+    $w.tree tag configure treetitle -font font_H1
+
+    # this font is working, but doesn't affect how many entries fit on a screen, and isn't enabled
+    $w.tree tag configure treefont -font font_Regular
+
+    bind $w.tree <Button-3> "::tree::bestPopup $baseNumber %W %x %y %X %Y"
+
+    $w.tree tag bind click2 <Double-Button-1> "
+      if {\[sc_base current\] != $baseNumber} {
+	sc_base switch $baseNumber
+	::plist::refresh
+	::tourney::refresh
+      }
+      ::game::Load \[%W set \[%W focus\] Number\]
+    "
+
+    $w.tree tag configure error -foreground red
+
+    # Hmm... seems no way to change the deafult blue bg colour for selected items
+    # without using (extra) tags. So this colour must look ok with a blue background
+
+    if {$::enableBackground} {
+      ::ttk::style configure Treeview -background $::defaultBackground
+      ::ttk::style configure Treeview -fieldbackground $::defaultBackground
+    }
+
+    ### Init the ttk_treeview column titles
+    set font [ttk::style lookup [$w.tree cget -style] -font]
+    foreach col $::blistHeaders width $::blistColWidth anchor $::blistColAnchor {
+	$w.tree column $col -width $width -anchor $anchor -stretch 0
+    }
+    ::tree::bestColumnTitles $w
+
+    ::ttk::scrollbar $w.ybar -command "$w.tree yview" -takefocus 0
+    ::ttk::scrollbar $w.xbar -command "$w.tree xview" -takefocus 0 -orient horizontal
+
+    grid $w.tree -in $w.blist -row 0 -column 0 -sticky news
+    grid $w.ybar -in $w.blist -row 0 -column 1 -sticky news
+    grid $w.xbar -in $w.blist -row 1 -column 0 -sticky news
+
+    grid rowconfig $w.blist 0 -weight 1 -minsize 0
+    grid columnconfig $w.blist 0 -weight 1 -minsize 0
 
     label $w.b.result -text " $::tr(Result)" -font font_Small
     tk_optionMenu $w.b.res tree(bestRes$baseNumber) All 1-0 0-1 {1-0 0-1} {1/2-1/2}
     $w.b.res configure -font font_Small -direction right
 
+    if {$::tree::sortBest} {
+      set tree(sortBest$baseNumber) Best
+    } else {
+      set tree(sortBest$baseNumber) Order
+    }
     label $w.b.sort -text " $::tr(Sort)" -font font_Small
     tk_optionMenu $w.b.sortMenu tree(sortBest$baseNumber) Best Order
     $w.b.sortMenu configure -font font_Small -direction right
 
     button $w.b.close -text $::tr(Close) -command "destroy $w" -width 9 -font font_Small
     pack $w.b.close $w.b.res $w.b.result $w.b.sortMenu $w.b.sort -side right -padx 5 -pady 5
-    bind $w <Configure> "recordWinSize $w"
-    focus $w.blist.list
+    focus $w.tree
     ::createToplevelFinalize $w
+    bind $w <Configure> "::tree::bestConfigure $w %W"
+    bind $w <Destroy> "::tree::bestWidths $w"
   }
-  $w.blist.list delete 0 end
+  $w.tree delete [$w.tree children {}]
+
   set tree(bestList$baseNumber) {}
   set count 0
 
-  if {! [sc_base inUse]} { return }
-# why are we catching this. I think it is because too many unusual cases/chars to be handled in the listbox
-catch {
-  foreach {idx line} [
-      sc_tree best $tree(base$baseNumber) $tree(bestMax$baseNumber) $tree(bestRes$baseNumber) $tree(sortBest$baseNumber)
-  ] {
-    incr count
-    # listbox widget does not like ' character
-    set line [ string map { "'" "\'" } $line ]
-    $w.blist.list insert end "  $line"
-    lappend tree(bestList$baseNumber) $idx
+  if {![sc_base inUse $baseNumber]} {
+    return
   }
+
+  set chunk [sc_tree best $tree(base$baseNumber) $tree(bestMax$baseNumber) $tree(bestRes$baseNumber) $tree(sortBest$baseNumber) $blistCodes]
+
+  # strip trailing "\n" and split into a list
+  set chunk [string range $chunk 0 end-1]
+  set  VALUES [split $chunk "\n"]
+
+  foreach values $VALUES {
+    # Gregors encoding conversion
+    set values [encoding convertfrom $values]
+
+    if {[catch {set thisindex [lindex $values 0]}]} {
+      ### Mismatched brace in game values. Bad!
+      # Scid's gamelist handles it ok, but game causes errors in other places
+      set thisindex [string range $values 1 [string first " " $values]]
+      $w.tree insert {} end -values [list $thisindex {Unmatched brace} {in game}] -tag [list click2 error]
+    } else {
+      $w.tree insert {} end -values $values -tag click2
+    }
+  }
+
   if {$tree(sortBest$baseNumber) == "Order"} {
-    $w.blist.list see end
+    $w.tree see [lindex [$w.tree children {}] end]
+  } else {
+    $w.tree see [lindex [$w.tree children {}] 0]
   }
 }
+
+### New Best Games procs, bastardised from gamelist.tcl
+
+proc ::tree::bestConfigure {w window} {
+  if {$window == "$w.tree"} {
+    bestWidths $w
+    recordWinSize $w
+  }
 }
+proc ::tree::bestWidths {w} { 
+  global blistFields blistColWidth
+  set widths {}
+  if {![catch {
+    # Save column widths
+    foreach {code col anchor width} $blistFields {
+      lappend widths [$w.tree column $col -width]
+    }
+  }]} {
+    set blistColWidth $widths
+  }
+}
+proc ::tree::bestColumnTitles {w} {
+  foreach {code col anchor null} $::blistFields {
+    if {[info exists ::tr(Glist$col)]} {
+      set name $::tr(Glist$col)
+    } else {
+      set name $col
+    }
+    $w.tree heading $col -text $name
+  }
+}
+### $w is ignored on these three procs,
+### all tree windows have same layout
+proc ::tree::bestInsertCol {w col after} {
+  set b [expr [string trimleft $after {#}]]
+  set d [lsearch -exact $::blistColOrder $col]
+  set ::blistColOrder [linsert $::blistColOrder $b $col]
+  if {$d > -1} {
+    if {$d > $b} {
+      incr d
+    }
+    set ::blistColOrder [lreplace $::blistColOrder $d $d]
+  }
+  set count [sc_base count total]
+  for {set i 1} {$i <= $count} {incr i} {
+    if {[winfo exists .treeBest$i.tree]} {
+      .treeBest$i.tree configure -displaycolumns $::blistColOrder
+    }
+  }
+}
+proc ::tree::bestRemoveCol {w col} {
+  set d [expr [string trimleft $col {#}] -1]
+  set ::blistColOrder [lreplace $::blistColOrder $d $d]
+  set count [sc_base count total]
+  for {set i 1} {$i <= $count} {incr i} {
+    if {[winfo exists .treeBest$i.tree]} {
+      .treeBest$i.tree configure -displaycolumns $::blistColOrder
+    }
+  }
+}
+proc ::tree::bestResetCols {w} {
+  global blistColOrder blistColWidth blistColAnchor
 
-
-proc ::tree::bestMenu { baseNumber } {
-      set w .treeBest$baseNumber
-      if {![catch {set sel [$w.blist.list curselection]}] && $sel != {}} {
-	set gnum [lindex $::tree(bestList$baseNumber) $sel]
-	::game::LoadMenu $w.blist.list $baseNumber $gnum [winfo pointerx .] [winfo pointery .]
+  set i 0
+  set blistColOrder {}
+  set blistColWidth {}
+  set blistColAnchor {}
+  set count [sc_base count total]
+  foreach {code col anchor width} $::blistFields {
+    lappend blistColOrder $i
+    lappend blistColWidth [expr {$width * 8}]
+    lappend blistColAnchor $anchor
+    for {set i 1} {$i <= $count} {incr i} {
+      if {[winfo exists .treeBest$i.tree]} {
+	$w column $col -anchor $anchor
       }
+    }
+    incr i
+  }
+  for {set i 1} {$i <= $count} {incr i} {
+    if {[winfo exists .treeBest$i.tree]} {
+      .treeBest$i.tree configure -displaycolumns $::blistColOrder
+    }
+  }
 }
+
 
 ### todo - fix the multiple tree windows, esp. when switching between bases S.A.
 
@@ -1205,6 +1393,129 @@ proc ::tree::toggleRefresh { baseNumber } {
 
   if {$tree(autorefresh$baseNumber)} {
     ::tree::refresh $baseNumber
+  }
+}
+proc ::tree::bestPopup {baseNumber w x y X Y} {
+
+  global blistHeaders
+
+  # Identify region requires at least tk 8.5.9 (?)
+
+  if { [catch {set region [$w identify region $x $y] }] } {
+    if {[$w identify row $x $y] == "" } {
+      set region "heading"
+    } else {
+      set region ""
+    }
+  }
+
+  if { $region == "heading" } {
+
+    ### Titles context menu
+
+    set col [$w identify column $x $y]
+    set col_idx [lsearch -exact $::blistHeaders [$w column $col -id] ]
+
+    set menu $w.context
+
+    if { [winfo exists $menu] } {destroy $menu}
+    if { [winfo exists $menu.addcol] } {destroy $menu.addcol}
+    menu $menu -tearoff 0
+    menu $menu.addcol -tearoff 0
+
+    # Column menus
+    $menu.addcol delete 0 end
+    set i 0
+    foreach h $::blistHeaders {
+        $menu.addcol add command -label $::tr(Glist$h) -command "::tree::bestInsertCol $w $i $col"
+      incr i
+    }
+    $menu add cascade -label $::tr(GlistAddField) -menu $menu.addcol
+    $menu add command -label $::tr(GlistRemoveThisGameFromFilter) -command "::tree::bestRemoveCol $w $col"
+
+    $menu add separator
+
+    $menu add command -label $::tr(GlistAlignL) \
+		   -command "$w column $col -anchor w; lset ::blistColAnchor $col_idx w"
+    $menu add command -label $::tr(GlistAlignR) \
+		   -command "$w column $col -anchor e; lset ::blistColAnchor $col_idx e"
+    $menu add command -label $::tr(GlistAlignC) \
+		   -command "$w column $col -anchor c; lset ::blistColAnchor $col_idx c"
+
+    $menu add separator
+    $menu add command -label $::tr(Reset) -command "::tree::bestResetCols $w"
+
+    tk_popup $menu $X $Y
+
+  } else {
+
+    ### Gamelist context menus
+
+    set row [$w identify row $x $y]
+    set selection [$w selection]
+
+    if {$row == "" } {
+      return
+    }
+
+    if {[lsearch $selection $row] == -1 || [llength $selection] == 1} {
+      event generate $w <ButtonPress-1> -x $x -y $y
+    } else {
+      puts "OOPS!"
+    }
+
+    # set number [$w set [$w focus] Number]
+    # set number [string trim $number "\n"]
+
+    ### nb - redefined $w here
+
+    set w .treeBest$baseNumber
+    set menu $w.context
+
+    if { [winfo exists $menu] } {
+      destroy $menu
+    }
+
+    menu $menu -tearoff 0
+
+    $menu add command -label $::tr(Browse) -command "::tree::bestBrowse $baseNumber"
+    $menu add command -label $::tr(LoadGame) -command "::tree::bestLoadSelection $baseNumber"
+    $menu add command -label $::tr(MergeGame) -command "::tree::bestMerge $baseNumber"
+
+    tk_popup $menu [winfo pointerx .] [winfo pointery .]
+  }
+}
+proc ::tree::bestLoadSelection {baseNumber} {
+  set w .treeBest$baseNumber
+  set selection [$w.tree selection]
+  if {$selection != {}} {
+    if {[sc_base current] != $baseNumber} {
+      sc_base switch $baseNumber
+      ::plist::refresh
+      ::tourney::refresh
+    }
+    ::game::Load [$w.tree set [lindex $selection 0] Number]
+  }
+}
+
+proc ::tree::bestBrowse {baseNumber} {
+  set w .treeBest$baseNumber
+  set selection [$w.tree selection]
+  if { $selection != {} } {
+    if {[sc_base current] != $baseNumber} {
+      sc_base switch $baseNumber
+      ::plist::refresh
+      ::tourney::refresh
+    }
+    ::gbrowser::new 0 [$w.tree set [lindex $selection 0] Number]
+  }
+}
+
+proc ::tree::bestMerge {baseNumber} {
+  set w .treeBest$baseNumber
+  set selection [$w.tree selection]
+  if { $selection != {} } {
+    mergeGame $baseNumber [$w.tree set [lindex $selection 0] Number]
   }
 }
 

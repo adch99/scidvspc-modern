@@ -6944,6 +6944,11 @@ probe_tablebase (Tcl_Interp * ti, int mode, DString * dstr)
     }
 
     if (scid_TB_Probe (db->game->GetCurrentPos(), &score) != OK) {
+        // Is it desirable to show captures in the gameinfo tablebase results ???
+        // scid_TB_Probe is returning !OK (for eg, if we can take a piece).
+        // and the winning move is not being shown in the gameinfo tb summary
+        // eg,    3k2B1/8/8/1N6/K7/8/b7/8 w - - 0 2
+        // for the fullReport, it is being calculated as bestMove
         if (! fullReport) { return false; }
     }
 
@@ -7710,8 +7715,6 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     return TCL_OK;
 }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// sc_game_list:
 //    Returns a portion of the game list according to the current filter.
 //    Takes start and count, where start is in the range (1..FilterCount).
 //    The next argument is the format string -- see index.cpp for details
@@ -7720,6 +7723,7 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 //    is returned indicating the line number where the current game
 //    occured in the output (where 1 is the first line), or 0 if it
 //    did not occur in the output at all.
+
 int
 sc_game_list (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
@@ -7735,19 +7739,7 @@ sc_game_list (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     if (start < 1  ||  start > db->numGames) { return TCL_OK; }
     uint fcount = db->filter->Count();
     if (fcount > count) { fcount = count; }
-#ifdef WINCE
-   /*FILE * */ Tcl_Channel fp = NULL;
-    if (argc == 6) {
-      fp = my_Tcl_OpenFileChannel(NULL, argv[5], "w", 0666);
-//        fp = fopen (argv[5], "w");
-        if (fp == NULL) {
-            Tcl_AppendResult (ti, "Error opening file: ", argv[5], NULL);
-            return TCL_ERROR;
-        }
- my_Tcl_SetChannelOption(NULL, fp, "-encoding", "binary");
- my_Tcl_SetChannelOption(NULL, fp, "-translation", "binary");
 
-#else
     FILE * fp = NULL;
     if (argc == 6) {
         fp = fopen (argv[5], "w");
@@ -7755,7 +7747,6 @@ sc_game_list (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             Tcl_AppendResult (ti, "Error opening file: ", argv[5], NULL);
             return TCL_ERROR;
         }
-#endif
     }
 
     uint index = db->filter->FilteredCountToIndex(start);
@@ -7775,11 +7766,7 @@ sc_game_list (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             if (showProgress) {  // Update the percentage done bar:
                 if (update <= 0) {
                     update = updateStart;
-#ifdef WINCE
-                    if (fp != NULL) { /*fflush*/my_Tcl_Flush (fp); }
-#else
                     if (fp != NULL) { fflush (fp); }
-#endif
                     updateProgressBar (ti, start, fcount);
                     if (interruptedProgress()) { break; }
                 }
@@ -7797,11 +7784,7 @@ sc_game_list (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                 Tcl_AppendResult (ti, temp, "\n", NULL);
             } else {
                 //fputs (temp, fp);
-#ifdef WINCE
-                my_Tcl_Write(fp, temp, strlen(temp));
-#else
                 fputs (temp, fp);
-#endif
             }
             count--;
             start++;
@@ -7809,11 +7792,7 @@ sc_game_list (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         index++;
     }
     if (showProgress) { updateProgressBar (ti, 1, 1); }
-#ifdef WINCE
-    if (fp != NULL) { my_Tcl_Close (NULL,fp); }
-#else
     if (fp != NULL) { fclose (fp); }
-#endif
     if (returnLineNum) { return setUintResult (ti, 0); }
     return TCL_OK;
 }
@@ -14040,8 +14019,8 @@ sc_tree (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 int
 sc_tree_best (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
-    if (argc != 6) {
-        return errorResult (ti, "Usage: sc_tree best <baseNum> <count> <results> <sort>");
+    if (argc != 7) {
+        return errorResult (ti, "Usage: sc_tree best <baseNum> <count> <results> <sort> <formatStr>");
     }
 
     scidBaseT * base = db;
@@ -14136,76 +14115,16 @@ if (sortBest) {
 }
 
     // Now generate the Tcl list of best game details:
-    char line[256];
+    const char * formatStr = argv[6];
+    char temp[2048];
 
     for (uint i=0; i < count; i++) {
         IndexEntry * ie = base->idx->FetchEntry (bestIndex[i]);
-        eloT welo = ie->GetWhiteElo();
-        eloT belo = ie->GetBlackElo();
-        bool wEstimate = false;
-        bool bEstimate = false;
-        if (welo == 0) {
-            welo = base->nb->GetElo (ie->GetWhite());
-            wEstimate = true;
-        }
-        if (belo == 0) {
-            belo = base->nb->GetElo (ie->GetBlack());
-            bEstimate = true;
-        }
 
-        appendUintElement (ti, bestIndex[i] + 1);
-
-        char wname[15];
-        char bname[15];
-
-        snprintf (wname, 12, "%s", ie->GetWhiteName (base->nb));
-	strTrimSurname (wname, 1);
-	strPad (wname, wname, 12, ' ');
-
-        snprintf (bname, 12, "%s", ie->GetBlackName (base->nb));
-	strTrimSurname (bname, 1);
-        strPad (bname, bname, 12, ' ');
-
-        char welo_str[15];
-        char belo_str[15];
-
-        if (welo > 0) {
-          if (wEstimate)
-	    snprintf (welo_str, 15, "*(%4hi)", welo);
-          else
-	    snprintf (welo_str, 15, " (%4hi)", welo);
-        } else {
-          sprintf (welo_str, "       ");
-        }
-        if (belo > 0) {
-          if (bEstimate)
-	    snprintf (belo_str, 15, "*(%4hi)", belo);
-          else
-	    snprintf (belo_str, 15, " (%4hi)", belo);
-        } else {
-          sprintf (belo_str, "       ");
-        }
-
-        char year[15];
-        snprintf (year, 15, "%4u", ie->GetYear());
-
-        char event[15];
-        char site[15];
-        char combo[32];
-        snprintf (event, 15, "%s", ie->GetEventName (base->nb));
-        snprintf (site, 15, "%s", ie->GetSiteName (base->nb));
-
-        if (strIsUnknownName(site))
-	  snprintf (combo, 32, "%s", event);
-        else
-	  snprintf (combo, 32, "%s (%s)", event, site);
-
-        char result[4];
-        strPad (result, RESULT_STR[ie->GetResult()], 3, ' ');
-
-        snprintf (line, sizeof(line), "%s%s - %s%s %s %s %s",
-           wname, welo_str, bname, belo_str, result, year, combo);
-        Tcl_AppendElement (ti, line);
+        // This seems solid, but we should be wary, as in sc_game_list PrintGameInfo
+        // is only used on current base, but here we are using it for any open base
+	ie->PrintGameInfo (temp, 0, bestIndex[i]+1, base->nb, formatStr);
+	Tcl_AppendResult (ti, temp, "\n", NULL);
     }
 
     delete[] bestIndex;
@@ -14421,7 +14340,7 @@ int
 sc_tree_search (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
     static const char * usageStr =
-      "Usage: sc_tree search [-hideMoves <0|1>] [-sort alpha|eco|frequency|score] [-time <0|1>] [-epd <0|1>] [-list <0|1>] [-fastmode <0|1>] [-adjust <0|1>] [-short <0|1>]";
+      "Usage: sc_tree search [-hideMoves <0|1>] [-sort alpha|eco|frequency|score] [-time <0|1>] [-epd <0|1>] [-list <0|1>] [-fastmode <0|1>] [-adjust <0|1>] [-short <0|1>] [-base <baseNumber>]";
 
     // Sort options: these should match the moveSortE enumerated type.
     static const char * sortOptions[] = {
