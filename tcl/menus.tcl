@@ -902,7 +902,8 @@ $m add command -label OptionsSave -command {
     comp(rounds) comp(showclock) comp(debug) comp(animate) comp(firstonly) comp(ponder) comp(showscores)
     ::tools::graphs::filter::type  ::tools::graphs::absfilter::type ::tools::graphs::showpoints ::tools::graphs::showbar
     maintFlag useGraphFigurine photosMinimized bookmarks(gamehistory) playerInfoHistory
-    glistSize glexport glistColOrder glistColWidth glistColAnchor addRatings(overwrite) addRatings(filter)} {
+    glistSize glexport glistColOrder glistColWidth glistColAnchor addRatings(overwrite) addRatings(filter)
+    blistColOrder blistColWidth blistColAnchor} {
 
       puts $optionF "set $i [list [set $i]]"
 

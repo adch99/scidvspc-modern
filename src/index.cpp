@@ -394,7 +394,7 @@ IndexEntry::GetFlagStr (char * str, const char * flags)
 // IndexEntry::PrintGameInfo():
 //
 //      Prints the info for a single game to a string, according to the
-//      format string provided. Called by by sc_game_list() in tkscid.cpp
+//      format string provided. Called by by sc_game_list() and sc_tree_best() in tkscid.cpp
 //      and from scidt.cpp for its game listing (-l) option.
 //
 //      The format string indicates what information to print. Non-letters
@@ -450,7 +450,7 @@ IndexEntry::PrintGameInfo (char * outStr,
             if (width == 0) { width = 1; }  // Minimum fixed width = 1.
 
             switch (c) {
-            case 'f':   // Game number, filtered
+            case 'f':   // Game number, filtered (Currently unused)
                 sprintf (temp, "%*d", width, gnFiltered);
                 out = strAppend (out, temp);
                 break;

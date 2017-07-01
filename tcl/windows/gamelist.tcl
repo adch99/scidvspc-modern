@@ -1174,7 +1174,10 @@ proc ::windows::gamelist::Refresh {{see {}}} {
 
     if {[catch {set thisindex [lindex $values 0]}]} {
       ### Mismatched brace in game values. Bad!
-      # Scid's gamelist handles it ok, but game causes errors in other places
+      # The gamelist handles it ok, but game causes errors in other places
+      # It's possible we could make properly formed lists by using Tcl_AppendElement
+      # instead of Tcl_AppendResult in sc_game_list, but it is untested.
+
       set thisindex [string range $values 1 [string first " " $values]]
       $w.tree insert {} 0 -values [list $thisindex {Unmatched brace} {in game}] -tag [list click2 error]
     } else {
@@ -1196,7 +1199,7 @@ proc ::windows::gamelist::Refresh {{see {}}} {
   ## but isnt working properly S.A
   # if {$see == {first}} 
 
-  $w.tree see [lindex [.glistWin.tree children {}] 0]
+  $w.tree see [lindex [$w.tree children {}] 0]
 
   # if {$see == {last}} { $w.tree see [lindex [.glistWin.tree children {}] end] } 
 
