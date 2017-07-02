@@ -595,13 +595,14 @@ namespace eval pgn {
 	### Necessary for (eg 23. (\n) Qa5
 	.pgnWin.text see [lindex $moveRange 1]
       } else {
-	# Hack to see new empty Vars
-        catch {
+	# Hack to see new empty Vars but it is still quite poor.
+	# To fix properly, we need to get [sc_pos pgnOffset] working for new empty vars
+	catch {
 	  if {[sc_var level] > 0} {
 	    set offset [sc_pos location]
 	    set moveRange [.pgnWin.text tag nextrange m_$offset 1.0]
 	    .pgnWin.text see [lindex $moveRange 1]
-	    .pgnWin.text yview scroll 1 u
+	    .pgnWin.text yview scroll [expr {[sc_var number] + 1}] u
 	  }
         }
       }
