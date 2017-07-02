@@ -164,26 +164,13 @@ isNullMove (moveT * m)
 // Freed moves can be added to the FreeList, but it is not essential to
 // do so, since all space for moves is deleted when the game is cleared.
 
-#ifdef WINCE
-  #define MOVE_CHUNKSIZE 60    // Save memory (especially for Tree). What is the impact on memory fragmentation ?
-#else
   #define MOVE_CHUNKSIZE 100    // Allocate space for 100 moves at a time.
-#endif
 
 struct moveChunkT {
     moveT moves [MOVE_CHUNKSIZE];
     uint numFree;
     moveChunkT * next;
 };
-
-#ifdef WINCE
-#define MOVE_CHUNKSIZE_LOWMEM 25
-struct moveChunkLowMemT {
-    moveT moves [MOVE_CHUNKSIZE_LOWMEM];
-    uint numFree;
-    moveChunkLowMemT * next;
-};
-#endif
 
 struct tagT
 {
@@ -299,7 +286,7 @@ private:
 
     NameBase *  NBase;      // needed for referencing id numbers.
 
-    tagT        TagList [	MAX_TAGS];
+    tagT        TagList [MAX_TAGS];
     uint        NumTags;
 
     uint        NumMovesPrinted; // Used in recursive WriteMoveList method.
@@ -313,10 +300,6 @@ private:
                                  // PGN output, as a byte offset.
     uint        PgnNextMovePos;  // The place of the next move in the
                                  // PGN output, as a byte offset.
-#ifdef WINCE
-    bool        LowMem; // set to true if the game should use a low memory chuncksize
-    moveChunkLowMemT * MoveChunkLowMem;
-#endif
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //  Game:  Private Functions
 
@@ -330,33 +313,7 @@ private:
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //  Game:  Public Functions
 public:
-#ifdef WINCE
-  void* operator new(size_t sz) {
-    void* m = my_Tcl_Alloc(sz);
-    return m;
-  }
-  void operator delete(void* m) {
-    my_Tcl_Free((char*)m);
-  }
-  void* operator new [] (size_t sz) {
-    void* m = my_Tcl_AttemptAlloc(sz);
-    return m;
-  }
-
-  void operator delete [] (void* m) {
-    my_Tcl_Free((char*)m);
-  }
-
-#endif
-
-#ifdef WINCE
-    Game()      { LowMem = false; Init(); }
-// Position costs 1028 bytes : use a global one as this will only be called by sc_tree
-// when LowMem is set
-    Game(bool b)      { LowMem = true; CurrentPos = &staticPosition; Init(); }
-#else
     Game()      { Init(); }
-#endif
 
     ~Game();
 
@@ -417,7 +374,7 @@ public:
     errorT   DeleteVariationAndFree (uint varNumber);
     errorT   FirstVariation (uint varNumber);
     errorT   MainVariation (uint varNumber);
-		uint 		 GetVarNumber();
+    uint     GetVarNumber();
 
     void     SetMoveComment (const char * comment);
     char *   GetMoveComment () { return CurrentMove->prev->comment; }
@@ -522,11 +479,7 @@ public:
     errorT    WritePGNGraphToLatex(TextBuffer * tb);
     errorT    WriteToPGN (TextBuffer * tb);
     errorT    MoveToLocationInPGN (TextBuffer * tb, uint stopLocation);
-#ifdef WINCE
-    errorT    WriteExtraTags (/*FILE **/Tcl_Channel fp);
-#else
     errorT    WriteExtraTags (FILE * fp);
-#endif
     uint      GetPgnOffset (byte nextMoveFlag) {
         return (nextMoveFlag ? PgnNextMovePos : PgnLastMovePos);
     }
