@@ -540,7 +540,7 @@ namespace eval pgn {
   #    tags will be updated.
   ################################################################################
   proc Refresh {{pgnNeedsUpdate 0}} {
-	 global useGraphFigurine
+    global useGraphFigurine
 
     if {![winfo exists .pgnWin]} {
       return
@@ -583,21 +583,27 @@ namespace eval pgn {
       set offset [sc_pos pgnOffset]
       set moveRange [.pgnWin.text tag nextrange m_$offset 1.0]
       if {[llength $moveRange] == 2} {
-       .pgnWin.text tag add Current [lindex $moveRange 0] [lindex $moveRange 1]
+	.pgnWin.text tag add Current [lindex $moveRange 0] [lindex $moveRange 1]
 
-       ### There's a bottleneck here when large pgn files are shown on one line
-       ### Slowdown is internal to Tk. (from the text manpage)
-       # <q> Very  long  text  lines  can be expensive, especially if they have
-       # many marks and tags within them. </q>
+	### There's a bottleneck here when large pgn files are shown on one line
+	### Slowdown is internal to Tk , but Using Gregor's new tk::text fixes it :)
 
-       .pgnWin.text see [lindex $moveRange 0]
-       # Better is -
-       # see "[lindex $moveRange 0] + 1 lines"
-       # but the damn thing doesnt work on actual lines, only text lines
-       ### Necessary for (eg 23. (\n) Qa5
-       .pgnWin.text see [lindex $moveRange 1]
+	.pgnWin.text see [lindex $moveRange 0]
+	# Better is -
+	# see "[lindex $moveRange 0] + 1 lines"
+	# but the damn thing doesnt work on actual lines, only text lines
+	### Necessary for (eg 23. (\n) Qa5
+	.pgnWin.text see [lindex $moveRange 1]
       } else {
-       # .pgnWin.text yview moveto 0
+	# Hack to see new empty Vars
+        catch {
+	  if {[sc_var level] > 0} {
+	    set offset [sc_pos location]
+	    set moveRange [.pgnWin.text tag nextrange m_$offset 1.0]
+	    .pgnWin.text see [lindex $moveRange 1]
+	    .pgnWin.text yview scroll 1 u
+	  }
+        }
       }
     } else {
       # Highlight current move in text only widget
