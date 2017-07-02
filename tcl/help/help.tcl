@@ -259,7 +259,7 @@ append helpText(Index) {
   <li><a Analysis Debugging>Chess Engine</a>  debugging</li>
   <li><a Maintenance Cleaner>Cleaner</a></li>
   <li><a Clipbase>Clipbase</a></li>
-  <li><a Menus Colours>Colours</a> (various color options)</li>
+  <li><a Menus Colours>Colours</a> (various colour options)</li>
   <li><a Cmdline>Command-line options</a></li>
   <li><a Comment>Comment Editor</a></li>
   <li><a Maintenance Twins>Comparing games</a> with the Twin Game Checker</li>
@@ -543,7 +543,7 @@ set helpText(Hints) {<h1>Scid Hints</h1>
   file and save options so it will be loaded every time you start Scid.
   </p>
 
-  <h4>While entering a game, I realise i have entered an incorrect move half-way though. Can I easily correct it?</h4>
+  <h4>While entering a game, I entered an incorrect move half-way though. Can I easily correct it?</h4>
   <p>
   You must use the <a Import>Import</a> window. See <a Moves Mistakes>entering moves</a> for more information.
   </p>
@@ -2259,7 +2259,7 @@ set helpText(TreeMasks) {<h1>Tree Masks</h1>
   </p>
   <p>
   <i>The indepencence of Masks from a database
-  make them a very powerful tool for handling opening repertoirs.
+  make them a very powerful tool for handling opening repertoires.
   Contrary to the traditional way of opening lines, Masks
   have the advantage to handle transpositions transparently, simply
   because they are based on the current positions instead of a line
@@ -2287,13 +2287,13 @@ set helpText(TreeMasks) {<h1>Tree Masks</h1>
   The most recent Mask file may be automatically opened via Tree-<gt>Options-<gt>Auto-Load-Mask.
   </p>
   <p><i>
-  For an opening repertoir , one might consider having
+  For an opening repertoire , one might consider having
   two masks, one for White, and one for Black openings.
   </i></p>
   <h3>Configuring Masks</h3>
   <ul>
   <li><term>Markers</term> (1 and 2) allow two graphical markers to be attached to a move. They
-  are mainly meant to handle opening repertoirs. The available options
+  are mainly meant to handle opening repertoires. The available options
   are:
      <ul>
      <li> <img ::rep::_tb_include> Include line in repertoire</li>
@@ -2348,7 +2348,7 @@ set helpText(TreeMasks) {<h1>Tree Masks</h1>
   The Mask Display feature shows the current Mask in a line
   style. Starting at the current position all subsequent moves are
   sorted into some unfoldable tree to give an overview of the current
-  lines of play - similar to what is found in many repertoir books.
+  lines of play - similar to what is found in many repertoire books.
   Not all information is displayed (e.g. Comments are
   shorted to fit the display). Additionally, as Masks
   work on positions rather than move sequences, they may contain loops
@@ -2358,7 +2358,7 @@ set helpText(TreeMasks) {<h1>Tree Masks</h1>
   <h3>Conversion to Masks</h3>
   <p>
   Setting up a mask can be a tedious task, especially for complex
-  opening repertoirs. However, if such a repertoir is available as a
+  opening repertoires. However, if such a repertoire is available as a
   Scid Database or a number of PGN games, or lines stored in usual
   chess games, Scid can use that information to set up suitable
   Masks automatically.
@@ -2460,7 +2460,7 @@ set helpText(Maintenance) {<h1>Database Maintenance</h1>
   same moves; up to the length of the shorter game , or 60 moves maximum.
   </p>
   <p>
-  When you have identified twins, it is good practise
+  When you have identified twins, it is good practice
   to confirm they have been correctly marked. Selecting "Set filter to twins to be deleted" 
   allows easy perusal through the <b>Twin Game Checker</b> window
   (which automatically appears). Here, tag differences are highlighted, and
@@ -2613,7 +2613,7 @@ For example - the first two examples remove four digit ELOs from player names. T
   <h3>Repair a Base</h3>
   <p>
   In the rare case that a Scid Database is corrupted, one might try to
-  repair it using Tools--<gt>Maintanance--<gt>Repair base. For this to work,
+  repair it using Tools--<gt>Maintenance--<gt>Repair base. For this to work,
   the base in question must not be opened (which is not possible in
   most cases anyway). Scid will then try its best to get the database
   back in a consistent and usable state.
@@ -2979,7 +2979,7 @@ because implementation is very problematic.</p>
 
   <h2><name Debugging>Debugging Engine Crashes</name></h2>
   <p>
-  If an engine fails to start, or crashes, one may examine it's log file.
+  If an engine fails to start, or crashes, one may examine its log file.
   These are kept in the Scidvspc's log directory and can be viewed
 via the <button tb_annotate> button in the <run ::enginelist::choose><green>engine configuration</green></run> widget.
 The <b>Log Size</b> is the max number of lines in the log. Setting it to zero disables logging altogether.</p>
@@ -3019,7 +3019,7 @@ Both times are in seconds.
 <p>
   <b>Permanent Thinking</b> allows engines to play at their strongest.
   For UCI engines, it enables pondering, and sets Xboard engines to hard mode.
-<i>Permanent Thinking does not work with non-standadrd start positions.</i>
+<i>Permanent Thinking does not work with non-standard start positions.</i>
 </p>
 <p>
   <b>Use book</b> gives UCI engines access to polyglot opening books, enabling a greater variety
@@ -3131,8 +3131,8 @@ set helpText(CalVar) {<h1>Calculation of Variations</h1>
   <p>
   To finalise the move, one should click one of the NAG codes buttons.
   The engine will evaluate the move, after which the user may enter more good moves.
-  When the user has finished entering thier best moves, click
-  <b>Done with position</b>. The engine will append (any) misssed lines to the game PGN.
+  When the user has finished entering their best moves, click
+  <b>Done with position</b>. The engine will append (any) missed lines to the game PGN.
   </p>
   <h4>Bugs</h4>
   <p>This feature does not work from within an existing variation, of at the end of a game.
@@ -5414,7 +5414,7 @@ set helpText(FindBestMove) {<h1>Find Best Move</h1>
 <br>
   For a move to be regarded as a Tactical Shot, it must be a unique winning move, that is not obvious - ie found at depth <lt>= 3.</i>
  </p><p>
-  But ScidvsPC will now also assume the game is a tactical excerise, if it has a non-standard start.
+  But ScidvsPC will now also assume the game is a tactical exercise, if it has a non-standard start.
   A good example is the <url http://gorgonian.weebly.com/uploads/1/7/2/2/17221082/auerswald.pgn>Auerswald Collection</url>
 <br>
 (Note - games must first be copied to si4 database and flagged with the tactics <b>T</b> flag from the maintenance window).</p>
