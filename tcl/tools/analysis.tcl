@@ -1829,6 +1829,8 @@ proc addAnalysisVariation {{n -1}} {
   }
 
   ::pgn::Refresh 1
+  catch {.pgnWin.text yview scroll 1 u}
+
   updateStatusBar
   updateGameinfo
   ::tools::graphs::score::Refresh
@@ -1981,6 +1983,7 @@ proc makeAnalysisMove {n} {
     updateBoard -pgn -animate
     ::utils::sound::AnnounceNewMove $move
   }
+  catch {.pgnWin.text yview scroll 1 u}
   return $res
 }
 
