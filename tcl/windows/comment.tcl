@@ -166,7 +166,7 @@ proc ::commenteditor::Open {} {
 
   frame $w.b
   # todo: make this frame more persistant than others
-  pack $w.b -side top -ipady 4 -padx 2 -pady 4 -fill x
+  pack $w.b -side top -padx 2 -pady 3 -fill x
 
   button $w.b.hide -image bookmark_down -command {
     set ::commenteditor::showBoard [expr {($::commenteditor::showBoard + 1) % 3}]
