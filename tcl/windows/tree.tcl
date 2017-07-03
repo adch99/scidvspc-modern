@@ -235,7 +235,7 @@ proc ::tree::Open {{baseNumber 0}} {
   # label $w.status -width 1 -anchor w -font font_Small -relief sunken -textvar tree(status$baseNumber)
   # pack $w.status -side bottom -fill x
 
-  pack [frame $w.buttons -relief sunken] -side bottom -fill x -pady 5
+  pack [frame $w.buttons -relief sunken] -side bottom -fill x -pady 3
   if {$::tree::showBar} {
     pack $w.progress -side bottom
   }
@@ -1258,7 +1258,7 @@ proc ::tree::best {baseNumber} {
     $w.b.sortMenu configure -font font_Small -direction right
 
     button $w.b.close -text $::tr(Close) -command "destroy $w" -width 9 -font font_Small
-    pack $w.b.close $w.b.res $w.b.result $w.b.sortMenu $w.b.sort -side right -padx 5 -pady 5
+    pack $w.b.close $w.b.res $w.b.result $w.b.sortMenu $w.b.sort -side right -padx 5 -pady 3
     focus $w.tree
     ::createToplevelFinalize $w
     bind $w <Configure> "::tree::bestConfigure $w %W"
