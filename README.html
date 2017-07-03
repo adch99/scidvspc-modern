@@ -121,13 +121,13 @@ project is authored by
 
 
 <P>Source 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.17.tgz/download">scid_vs_pc-4.17.tgz</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.18.tgz/download">scid_vs_pc-4.18.tgz</A></P>
 <P>Windows 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.17.exe/download">Scid vs PC-4.17.exe</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.18.exe/download">Scid vs PC-4.18.exe</A></P>
 <P>Windows 64 bit 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.17.x64.exe/download">Scid vs PC-4.17.x64.exe</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.18.x64.exe/download">Scid vs PC-4.18.x64.exe</A></P>
 <P>Mac 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.17.dmg/download">ScidvsMac-4.17.dmg</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.18.dmg/download">ScidvsMac-4.18.dmg</A></P>
 <P>
 <H3>Other resources</H3>
 
@@ -156,8 +156,8 @@ use <B>./configure BINDIR=/usr/bin/ SHAREDIR=/usr/share/scid/</B></EM></P>
 <P>Installing from source:</P>
 <HR>
 <PRE>
-tar -xzf scid_vs_pc-4.17.tgz
-cd scid_vs_pc-4.17
+tar -xzf scid_vs_pc-4.18.tgz
+cd scid_vs_pc-4.18
 ./configure
 sudo make install
 scid
@@ -184,7 +184,7 @@ C:\Users\[USERNAME]\AppData\Local\VirtualStore\Program Files\Scid vs PC</P>
 
 
 <P>The 
-<A HREF="#download_">ScidvsMac-4.17 app</A> should include everything you need. Simply drag and drop the App into /Applications (or similar).</P>
+<A HREF="#download_">ScidvsMac-4.18 app</A> should include everything you need. Simply drag and drop the App into /Applications (or similar).</P>
 <P>Due to complicated build reasons, it seems only Yosemite (OS X 10.10) and later are now supported. </P>
 <P><EM>Users upgrading may have to remove (or edit) <B>$HOME/.scidvspc/config/engines.dat</B>
 to properly configure the chess engines.</EM></P>
@@ -429,6 +429,40 @@ Chessbase databases and many chess variants.</P>
 
 
 <P>
+<H3>Scid vs. PC 4.18</H3>
+
+
+<P>
+<UL>
+<LI>New Best Games widget, similar to the Gamelist.</LI>
+<LI>Score Graph now highlights the current move.</LI>
+<LI>New annotation feature: Show missed/shorter mates.</LI>
+<LI>A little new Gamelist button to reveal hidden/squeezed buttons (finally!).</LI>
+<LI>The GameInfo Window has a right-click menu, and other minor menu changes.</LI>
+<LI>Basic support for horizontal scrolling (in gamelist, crosstable and bestgames) for mousewheel buttons with horizontal capability..</LI>
+<LI>Finnish translation, from Mika Kaakinen.<BR><BR>
+</LI>
+<LI>Engines: if an engine shows a Mating line, show the whole line in analysis window, disregarding Max-Ply variable.</LI>
+<LI>Don't show an error message when importing null PGN tags... too verbose.</LI>
+<LI>Fics: try to handle case when move is made after run out of time. (We don't want to mark the game as out of sync).</LI>
+<LI>Minor Translation, Mask and Fics tweaks.</LI>
+<LI>Hide Board resize buttons in docked mode if auto-resize is enabled.</LI>
+<LI>Revert Control-b binding to Book window.</LI>
+<LI>Focus the text box of Comment Editor when raised.</LI>
+<LI>Show a busy cursor when backing-up databases in the finder.</LI>
+<LI>Game Save: also use previous Round with the 'Use Previous' button/feature.</LI>
+<LI>Running Engine 1 in the statusbar needs special handling if using docking, as it cannot be withdrawn properly and was confusing before.</LI>
+<LI>Show correct position in the pgn window after adding a new var/move.</LI>
+<LI>Show PGN scrollbar by default.<BR><BR>
+
+Bug Fixes</LI>
+<LI>Redock Windows after they have been undocked then destroyed. Before, such windows were remade undocked, and *without* menus.</LI>
+<LI>Keep comments when truncating game from start.</LI>
+<LI>Fix broken 'Copy' button in Engine's config window.</LI>
+<LI>Promoting variations didn't handle precomments.
+</LI>
+</UL>
+</P>
 <H3>Scid vs. PC 4.17</H3>
 
 
@@ -486,7 +520,6 @@ Bug fixes</LI>
 <LI>Bugfixes for compiling on some linux platforms (including Raspberry Pi 2).</LI>
 <LI>Some clock fixes. Digital clock was busted (counting up). CompTournament clocks are now digital only.</LI>
 <LI>Stop tacgame/phalanx from failing to restart.
-
 </LI>
 </UL>
 </P>

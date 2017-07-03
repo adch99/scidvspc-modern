@@ -6194,6 +6194,37 @@ set helpText(Sound) {<h1>Sound</h1>
 set helpTitle(Changelog) "Scid vs PC Changelog"
 set helpText(Changelog) {<h1>Changelog</h1>
 
+<h4>4.18 (July 1, 2017)</h4>
+<ul>
+<li>New Best Games widget, similar to the Gamelist</li>
+<li>Score Graph now highlights the current move</li>
+<li>New annotation feature: Show missed/shorter mates</li>
+<li>A little new Gamelist button to reveal hidden/squeezed buttons (finally!)</li>
+<li>The GameInfo Window has a right-click menu, and other minor menu changes</li>
+<li>Basic support for horizontal scrolling (in gamelist, crosstable and bestgames) for mousewheel buttons with horizontal capability.</li>
+<li>Finnish translation, from Mika Kaakinen</li>
+<br>
+<li>Engines: if an engine shows a Mating line, show the whole line in analysis window, disregarding Max-Ply variable</li>
+<li>Don't show an error message when importing null PGN tags... too verbose</li>
+<li>Fics: try to handle case when move is made after run out of time. (We don't want to mark the game as out of sync)</li>
+<li>Minor Translation, Mask and Fics tweaks</li>
+<li>Hide Board resize buttons in docked mode if auto-resize is enabled</li>
+<li>Revert Control-b binding to Book window</li>
+<li>Focus the text box of Comment Editor when raised</li>
+<li>Show a busy cursor when backing-up databases in the finder</li>
+<li>Game Save: also use previous Round with the 'Use Previous' button/feature</li>
+<li>Running Engine 1 in the statusbar needs special handling if using docking, as it cannot be withdrawn properly and was confusing before</li>
+<li>Show correct position in the pgn window after adding a new var/move</li>
+<li>Show PGN scrollbar by default</li>
+</ul><br>
+<b>Bug Fixes</b>
+<ul>
+<li>Redock Windows after they have been undocked then destroyed. Before, such windows were remade undocked, and *without* menus</li>
+<li>Keep comments when truncating game from start</li>
+<li>Fix broken 'Copy' button in Engine's config window</li>
+<li>Promoting variations didn't handle precomments</li>
+</ul>
+
 <h4>4.17 (October 25, 2016)</h4>
 <ul>
 <li>Analysis/Engine window</li>
@@ -7055,67 +7086,6 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li> Work around for batch annotation bug (still under dev by Joost)</li>
 <li> Header search widget tidy</li>
 <li> New icon</li>
-</ul>
-
-<h4>4.1 (October 10, 2010)</h4>
-<ul>
-<li> Quite a few FICS tweaks, including new help pages and D.O.S. attack fixes</li>
-<li> Numerous Gamelist improvements (see below)</li>
-<li> Tree widget improvements: next move is highlighted, main filter is now independant of Tree filter, wheel mouse bindings</li>
-<li> Tactics feature fixed up: Renamed "Puzzle" , and Problem Solutions can now be browsed in-game</li>
-<li> Analysis window "add variation" now *appends* variations if at var end</li>
-<li> Comment Editor has undo and redo bindings</li>
-<li> Main board grid colour can be changed</li>
-<li> Setup board can rotate and flip the board</li>
-<li> Clicking on moves in the gameinfo area shows Comment Editor</li>
-<li> Better window raising/focusing</li>
-<li> Kill analysis window after batch annotations</li>
-<li> New marble tile theme and colour themes</li>
-<li> Some menu re-ordering</li>
-<li> Recent Files menu is basename only</li>
-<li> Remove Control+V game paste binding .... too dangerous</li>
-<li> Further refinements of Switcher widget and Icons</li>
-<li> ttk comboboxes are no longer grey</li>
-<li> Analysis widget scrolling will pause to allow backwards review</li>
-<li> Splash widget changes, and remove pop-up for missing Bases and Book directories</li>
-<li> Rewritten Help items</li>
-<li></li>
-
-<li> Gamelist improvements -</li>
-<ul>
-<li>Field order rearranged</li>
-<li>Columns now sort in both directions, with arrow depicting direction</li>
-<li>Deleting items works better</li>
-<li>Can be sorted by ELO</li>
-<li>Draws sorted alongside no-result</li>
-<li>Delete and Compact buttons disable better</li>
-</ul>
-
-<li> Bugfixes -</li>
-<ul>
-<li> Twinchecker PGN text diff-ing was sometimes broken</li>
-<li> Phalanx observes tournament feature time control</li>
-<li> Fix "Show Suggested Move" feature</li>
-<li> Fix occasionaly issue with erroneously selecting squares, then being unable to reselect them</li>
-<li> Ignore crafty's resignations which caused X-window flash events</li>
-<li> No context menu if dragging a piece</li>
-<li> RobboLito (and others ?) had uppercase piece promotion which occasionally broke</li>
-<li> "Show Suggested Move" was broken</li>
-<li> Gamelist sometimes left off the last or first item</li>
-</ul>
-
-<li> Widget tidies -</li>
-<ul>
-<li> Analysis engine config widget</li>
-<li> Maintenance tweaks</li>
-<li> Game save widget made better</li>
-<li> Parent Date widget</li>
-<li> Delete twins</li>
-<li> Database Switcher changes, including new icons</li>
-<li> Finder now has three columns (and other changes)</li>
-<li> Player finder + Tournament Finder sub-widgets alligned</li>
-<li> Statistics window restructured</li>
-</ul>
 </ul>
 }
 
