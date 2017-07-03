@@ -1259,6 +1259,18 @@ proc ::tree::best {baseNumber} {
 
     button $w.b.close -text $::tr(Close) -command "destroy $w" -width 9 -font font_Small
     pack $w.b.close $w.b.res $w.b.result $w.b.sortMenu $w.b.sort -side right -padx 5 -pady 3
+
+    bind $w.tree <Left>  "$w.tree xview scroll -40 units ; break"
+    bind $w.tree <Right> "$w.tree xview scroll  40 units ; break"
+    if {!$::macOS} {
+      bind $w.tree <Button> "
+	  # Buttons 6 and 7 are the left/right for advanced wheelscroll buttons
+	  # but aren't supported by Button-6 (see http://wiki.tcl.tk/12696)
+	  if {\"%b\" == \"6\"} { $w.tree xview scroll -30 units }
+	  if {\"%b\" == \"7\"} { $w.tree xview scroll  30 units }
+      "
+    }
+
     focus $w.tree
     ::createToplevelFinalize $w
     bind $w <Configure> "::tree::bestConfigure $w %W"
