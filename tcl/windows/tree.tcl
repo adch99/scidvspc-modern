@@ -1274,7 +1274,7 @@ proc ::tree::best {baseNumber} {
     focus $w.tree
     ::createToplevelFinalize $w
     bind $w <Configure> "::tree::bestConfigure $w %W"
-    bind $w <Destroy> "::tree::bestWidths $w"
+    bind $w <Destroy> "+::tree::bestWidths $w"
   }
   $w.tree delete [$w.tree children {}]
 
