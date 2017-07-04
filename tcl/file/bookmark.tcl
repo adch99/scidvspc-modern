@@ -274,7 +274,7 @@ proc ::bookmarks::Go {entry} {
   }
   refreshSearchDBs
   ::bookmarks::AddCurrentGame
-  updateBoard -pgn
+  updateBoard -pgn -switch
 }
 
 ### Deletes all submenus of a bookmark menu.

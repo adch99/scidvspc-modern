@@ -583,6 +583,9 @@ namespace eval pgn {
       set offset [sc_pos pgnOffset]
       set moveRange [.pgnWin.text tag nextrange m_$offset 1.0]
       if {[llength $moveRange] == 2} {
+        # Save previous offset for undetermined 'see's. EG add-empty-var and undos/redos(?)
+	set ::pgn::prevOffset $offset
+
 	.pgnWin.text tag add Current [lindex $moveRange 0] [lindex $moveRange 1]
 
 	### There's a bottleneck here when large pgn files are shown on one line
@@ -595,15 +598,13 @@ namespace eval pgn {
 	### Necessary for (eg 23. (\n) Qa5
 	.pgnWin.text see [lindex $moveRange 1]
       } else {
-	# Hack to see new empty Vars but it is still quite poor.
+	# Nasty hack to see new empty Vars but it is still quite poor and ugly.
+	# We also need a new '-switch' arg to updateBoard. (commit 2725)
 	# To fix properly, we need to get [sc_pos pgnOffset] working for new empty vars
-	catch {
-	  if {[sc_var level] > 0} {
-	    set offset [sc_pos location]
-	    set moveRange [.pgnWin.text tag nextrange m_$offset 1.0]
-	    .pgnWin.text see [lindex $moveRange 1]
-	    .pgnWin.text yview scroll [expr {[sc_var number] + 1}] u
-	  }
+	set offset $::pgn::prevOffset
+	set moveRange [.pgnWin.text tag nextrange m_$offset 1.0]
+	if {![sc_pos isAt start] && [llength $moveRange] == 2} {
+	  .pgnWin.text see "[lindex $moveRange 1] + 1 lines"
         }
       }
     } else {

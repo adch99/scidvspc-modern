@@ -428,6 +428,7 @@ set ::pgn::boldMainLine 0
 set ::pgn::columnFormat 0
 set ::pgn::stripMarks 0
 set ::pgn::showScrollbar 1
+set ::pgn::prevOffset 0
 set pgnColor(Header) "\#00008b"
 set pgnColor(Main) "\#000000"
 set pgnColor(Var) "\#0000ee"

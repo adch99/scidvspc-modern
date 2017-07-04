@@ -1829,7 +1829,10 @@ proc addAnalysisVariation {{n -1}} {
   }
 
   ::pgn::Refresh 1
-  catch {.pgnWin.text yview scroll 1 u}
+
+  # Scroll down one line
+  # Often the current move is at the bottom of the viewable, and new var will not be shown
+  .pgnWin.text yview scroll 1 u
 
   updateStatusBar
   updateGameinfo
@@ -1983,7 +1986,6 @@ proc makeAnalysisMove {n} {
     updateBoard -pgn -animate
     ::utils::sound::AnnounceNewMove $move
   }
-  catch {.pgnWin.text yview scroll 1 u}
   return $res
 }
 
