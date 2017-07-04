@@ -188,12 +188,18 @@ proc ::utils::date::_redraw {win} {
 }
 
 proc ::utils::date::_layout {time} {
+  set m [clock format $time -format "%m"]
   set month [string trimleft [clock format $time -format "%m"] 0]
   set year  [clock format $time -format "%Y"]
 
-  foreach lastday {31 30 29 28} {
-    if {[catch {clock scan "$year-$month-$lastday"}] == 0} { break }
+  foreach lastday {29 30 31 32} {
+    # 'clock' does not have a validation command (?), so make our own
+    if {"$year-$m-$lastday" != [clock format [clock scan $year-$m-$lastday] -format {%Y-%m-%d}]} {
+      break
+    }
   }
+  incr lastday -1
+
   set seconds [clock scan "$year-$month-1"]
   set firstday [clock format $seconds -format %w]
   set weeks [expr {ceil(double($lastday+$firstday)/7)} ]
