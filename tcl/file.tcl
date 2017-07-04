@@ -118,7 +118,7 @@ proc ::file::New {} {
   ::recentFiles::add $fName
   refreshWindows all
   refreshSearchDBs
-  updateBoard -pgn
+  updateBoard -pgn -switch
 }
 
 ### Main file open procedure. If no filename given, shows a file-open dialog
@@ -182,7 +182,7 @@ proc ::file::Open {{fName ""} {parent .} {update 1}} {
   if {$slot != 0} {
     sc_base switch $slot
     refreshWindows all
-    updateBoard -pgn
+    updateBoard -pgn -switch
     return
   }
 
@@ -269,7 +269,7 @@ proc ::file::Open {{fName ""} {parent .} {update 1}} {
     refreshWindows all
     refreshSearchDBs
     ::bookmarks::AddCurrentGame
-    updateBoard -pgn
+    updateBoard -pgn -switch
   }
   # else bookmarks will call refreshWindows after correct game loaded
 }
@@ -509,7 +509,7 @@ proc ::file::SwitchToBase {b} {
   # if {[winfo exists .treeWin$b]} { destroy .treeWin$b }
   if {[winfo exists .emailWin]} { destroy .emailWin }
 
-  updateBoard -pgn
+  updateBoard -pgn -switch
 
   refreshWindows all
 }

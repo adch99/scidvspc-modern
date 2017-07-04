@@ -801,6 +801,7 @@ proc updateBoard {args} {
   foreach arg $args {
     if {! [string compare $arg "-pgn"]} { set pgnNeedsUpdate 1 }
     if {! [string compare $arg "-animate"]} { set animate 1 }
+    if {! [string compare $arg "-switch"]} { set ::pgn::prevOffset 0 }
   }
 
   # Todo - verify this call is not redundant. We also call Refresh late in updateBoard3
