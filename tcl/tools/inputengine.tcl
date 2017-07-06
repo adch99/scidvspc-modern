@@ -831,7 +831,7 @@ namespace eval inputengine {
           logEngine "$line"
 
           if {[catch {sc_move addSan $m}]} {
-             ::utils::sound::PlayMove sound_alert
+             ::utils::sound::PlayMove sound_start
              logEngine "  info Illegal move detected!"
              logEngine "  info Ignoring: $m"
              .inputengineconsole.bPiece configure -background red

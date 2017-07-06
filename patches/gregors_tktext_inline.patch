@@ -88548,7 +88548,7 @@ Index: src/tktext/tkTextMark.c
 +	TkTextIndexSetSegment(&index, textPtr->startMarker);
 +	/* ensure fixed length (depending on pointer size) */
 +	snprintf(uniqName, sizeof(uniqName),
-+#ifdef TCL_WIDE_INT_IS_LONG
++#if defined(TCL_WIDE_INT_IS_LONG) || defined(_WIN64)
 +	    "##ID##0x%016"PRIx64"##0x%016"PRIx64"##%08u##", /* we're on a real 64-bit system */
 +	    (uint64_t) textPtr, (uint64_t) textPtr->sharedTextPtr, ++textPtr->uniqueIdCounter);
 +#else /* ifndef TCL_WIDE_INT_IS_LONG */
