@@ -55,9 +55,9 @@ See <run ::tip::show 0><green>Tip of the Day</green></run> for some helpful hint
 <li>Better support for UTF and Latin character sets in PGN export/imports</li>
 <li>Improved and more powerful Tree Mask feature</li>
 <li>
-<li>Most chess variants (such as Chess960 / Fischer Chess) are wholly unsupported.<li>
+<li>Chess variants are unsupported except for Chess960/Fischer Chess - which is supported by a source-code patch.<li>
 </ul>
-  <p><footer>Updated: Scid vs. PC 4.16 January 2016</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.18 July 2017</footer></p>
 }
 
 set helpTitle(GUI) {Scid's GUI}
@@ -5699,7 +5699,7 @@ Opponent and Offers Graph</a> buttons. Other buttons include:
     <li><term>Clear</term> Clear command entry box. <term>Control+Clear</term> clears all of previous messages</li>
     <li><term>Next</term> Send "next" for next page of help info</li>
     <li><term>Rematch</term> Request a rematch with previous opponent</li>
-    <li><term>Censor</term> Add Opponent to your censor list, or if not playing, display '+censor'</li>
+    <li><term>Censor</term> Add Opponent to your censor list, or if not playing, display '+censor'. (Control-Button censors the person chatting to you).</li>
   </ul>
 
 <h3><name premove>Premove</name></h3>
