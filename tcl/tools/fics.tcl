@@ -41,6 +41,7 @@ namespace eval fics {
   set premove {}
   set examresult *
   set entrytime 0
+  set chatter {}
 
   set ignore_abort 0
   set ignore_adjourn 0
@@ -466,22 +467,22 @@ namespace eval fics {
       catch { ::commenteditor::appendComment "$::fics::reallogin requests takeback $::fics::playerslastmove" }
     }
     button $w.bottom.buttons.censor -textvar tr(FICSCensor) -command {
-      if {$::fics::opponent != {}} {
-        if {$::fics::playing == 1 || $::fics::playing == -1} {
-	  ::fics::writechan "+censor $::fics::opponent" echo
-        } else  {
-	  .fics.command.entry delete 0 end
-	  .fics.command.entry insert 0 "+censor $::fics::opponent"
-        }
+      if {$::fics::opponent != ""} {
+	::fics::writechan "+censor $::fics::opponent" echo
       } else {
-        .fics.command.entry delete 0 end
-        .fics.command.entry insert 0 "+censor "
+	.fics.command.entry delete 0 end
+	.fics.command.entry insert 0 "+censor "
       }
     }
-   bind $w.bottom.buttons.censor <Control-Button-1> {
-        .fics.command.entry delete 0 end
-        .fics.command.entry insert 0 "+censor "
-   }
+    bind $w.bottom.buttons.censor <Control-Button-1> {
+      if {$::fics::chatter != ""} {
+	::fics::writechan "+censor $::fics::chatter" echo
+      } else {
+	.fics.command.entry delete 0 end
+	.fics.command.entry insert 0 "+censor "
+      }
+      break
+    }
     grid $w.bottom.buttons.takeback  -column 0 -row $row -sticky ew -padx 3 -pady 2
     grid $w.bottom.buttons.takeback2 -column 1 -row $row -sticky ew -padx 3 -pady 2
     grid $w.bottom.buttons.censor    -column 2 -row $row -sticky ew -padx 3 -pady 2
@@ -1646,6 +1647,9 @@ if {[lindex $line 0] != {Still in progress}} {
                               ROBO* {
 				    }
 			      default {
+				      if {$::fics::opponent != $t2} {
+					set ::fics::chatter $t2
+				      }
 				      if {$::fics::playing != 0} {
 					::commenteditor::appendComment "\[$t2\] $t3"
 				      }
@@ -1669,15 +1673,22 @@ if {[lindex $line 0] != {Still in progress}} {
 			    }
                           }
 			}
-	{* says: *}	{ $t insert end "$line\n" tells 
+	{* says: *}	{ $t insert end "$line\n" tells
 			  catch {
                             regexp {(.*) says: (.*$)} $line t1 t2 t3
                             # remove trailing [342] (eg) from player name
                             if {[regexp {(^.*)\[.*\]} $t2 t0 t4]} {
-			      ::commenteditor::appendComment "\[$t4\] $t3"
+			      set chatter $t4
                             } else {
-			      ::commenteditor::appendComment "\[$t2\] $t3"
-                            } 
+			      set chatter $t2
+                            }
+			    if {[string match *(U) $chatter]} {
+			      set chatter [string range $chatter 0 end-3]
+			    }
+			    ::commenteditor::appendComment "\[$chatter\] $t3"
+			    if {$::fics::opponent != $chatter} {
+			      set ::fics::chatter $chatter
+			    }
                           }
 			}
         {Draw request sent*} { ::commenteditor::appendComment "$::fics::reallogin offers draw"
