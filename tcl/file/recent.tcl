@@ -37,6 +37,7 @@ proc ::recentFiles::save {{reportError 0}} {
 
 proc ::recentFiles::remove {fname} {
   ::recentFiles::add $fname 1
+  updateMenuStates
 }
 
 ### Add a file to the recent files list, or move it to the front if file is already in the list.
