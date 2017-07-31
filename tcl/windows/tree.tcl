@@ -1292,6 +1292,10 @@ proc ::tree::best {baseNumber} {
   set  VALUES [split $chunk "\n"]
 
   foreach values $VALUES {
+    # First item is always gamenum, used to form tree(bestList$n), used for next/prev in game browser
+    lappend tree(bestList$baseNumber) [lindex $values 0]
+    set values [lrange $values 1 end]
+
     # Gregors encoding conversion
     set values [encoding convertfrom $values]
 
@@ -1514,12 +1518,7 @@ proc ::tree::bestBrowse {baseNumber} {
   set w .treeBest$baseNumber
   set selection [$w.tree selection]
   if { $selection != {} } {
-    if {[sc_base current] != $baseNumber} {
-      sc_base switch $baseNumber
-      ::plist::refresh
-      ::tourney::refresh
-    }
-    ::gbrowser::new 0 [$w.tree set [lindex $selection 0] Number]
+    ::gbrowser::new $baseNumber [$w.tree set [lindex $selection 0] Number]
   }
 }
 
