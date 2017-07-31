@@ -14116,14 +14116,18 @@ sc_tree_best (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     // Now generate the Tcl list of best game details:
     const char * formatStr = argv[6];
     char temp[2048];
+    char tempStr[128];
 
     for (uint i=0; i < count; i++) {
         IndexEntry * ie = base->idx->FetchEntry (bestIndex[i]);
 
+	// We need the gamenumber for the tree(bestList) and gbrowser
+	sprintf (tempStr, "%u ", bestIndex[i] + 1);
+
         // This seems solid, but we should be wary, as in sc_game_list PrintGameInfo
         // is only used on current base, but here we are using it for any open base
 	ie->PrintGameInfo (temp, 0, bestIndex[i]+1, base->nb, formatStr);
-	Tcl_AppendResult (ti, temp, "\n", NULL);
+	Tcl_AppendResult (ti, tempStr, temp, "\n", NULL);
     }
 
     delete[] bestIndex;
