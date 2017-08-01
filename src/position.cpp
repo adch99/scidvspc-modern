@@ -2375,6 +2375,7 @@ Position::ReadMove (simpleMoveT * m, const char * str, tokenT token)
     if (token == TOKEN_Move_Pawn  ||  token == TOKEN_Move_Promote) {
 
         pieceT promo = EMPTY;
+
         if (token == TOKEN_Move_Promote) {
             // Last char must be Q/R/B/N.
             // Accept the move even if it is of the form "a8Q" not "a8=Q":
@@ -2422,6 +2423,12 @@ Position::ReadMove (simpleMoveT * m, const char * str, tokenT token)
         toRank = rank_FromChar (s[slen-1]);
         to = square_Make (toFyle, toRank);
         if (to == NS) { return ERROR_InvalidMove; }
+
+	// Handle default promotions: e.g. a move like 'b1' will be interpreted as 'b1=Q'.
+	if (token == TOKEN_Move_Pawn && (toRank == RANK_1 || toRank == RANK_8)) {
+	    token = TOKEN_Move_Promote;
+	    promo = QUEEN;
+	}
 
         if (MatchPawnMove (&mlist, frFyle, to, promo) != OK) {
             return ERROR_InvalidMove;
@@ -2502,10 +2509,9 @@ Position::ReadMove (simpleMoveT * m, const char * str, tokenT token)
 }
 
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Position::ParseMove():
-//      Parse a single move from SAN-style notation.
-//
+//  Parse a single move from SAN-style notation.
+//  Only used by scidlet - S.A
+
 errorT
 Position::ParseMove (simpleMoveT * sm, const char * line)
 {
