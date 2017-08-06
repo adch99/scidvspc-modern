@@ -1190,7 +1190,10 @@ namespace eval fics {
 	  if {! $::fics::no_results && ($res != "*" || [sc_pos moveNumber] > 1)} {
 	    if {[string match "1/2*" $res]} {set res Draw}
 	    ::fics::killDialogs
-	    tk_messageBox -title "Game result" -icon info -type ok -message "$res"
+            # pause a second to allow the move animation to complete
+            after $::animateDelay "
+	      tk_messageBox -title \"Game result\" -icon info -type ok -message \"$res\"
+            "
 	  }
 	}
 	# &&& do we need ::fics::remove_observedGame $num (todo check)
