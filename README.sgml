@@ -69,13 +69,13 @@ project is authored by <ref name="Stevenaaus" id="contact_"> and numerous contri
 <label id="download_">
 <sect> download <p>
 
-Source <url url="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.18.tgz/download" name="scid_vs_pc-4.18.tgz">
+Source <url url="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.18.1.tgz/download" name="scid_vs_pc-4.18.1.tgz">
 
-Windows <url url="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.18.exe/download" name="Scid vs PC-4.18.exe">
+Windows <url url="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.18.1.exe/download" name="Scid vs PC-4.18.1.exe">
 
-Windows 64 bit <url url="http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.18.x64.exe/download" name="Scid vs PC-4.18.x64.exe">
+Windows 64 bit <url url="http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.18.1.x64.exe/download" name="Scid vs PC-4.18.1.x64.exe">
 
-Mac <url url="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.18.dmg/download" name="ScidvsMac-4.18.dmg">
+Mac <url url="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.18.1.dmg/download" name="ScidvsMac-4.18.1.dmg">
 
 <sect2> Other resources<p>
 <P>Fedora Packages (unofficial) <url url="https://copr.fedorainfracloud.org/coprs/awood/scid_vs_pc/">
@@ -106,8 +106,8 @@ use <bf>./configure BINDIR=/usr/bin/ SHAREDIR=/usr/share/scid/</bf></em></p>
   <p>Installing from source:</p>
 
 <code>
-tar -xzf scid_vs_pc-4.18.tgz
-cd scid_vs_pc-4.18
+tar -xzf scid_vs_pc-4.18.1.tgz
+cd scid_vs_pc-4.18.1
 ./configure
 sudo make install
 scid
@@ -137,7 +137,7 @@ C:\Users\[USERNAME]\AppData\Local\VirtualStore\Program Files\Scid vs PC
 
 <sect2> Mac OS X <p>
 
-The <ref name="ScidvsMac-4.18 app" id="download_"> should include everything you need. Simply drag and drop the App into /Applications (or similar).</p>
+The <ref name="ScidvsMac-4.18.1 app" id="download_"> should include everything you need. Simply drag and drop the App into /Applications (or similar).</p>
 
 <p>Due to complicated build reasons, it seems only Yosemite (OS X 10.10) and later are now supported. </p>
 
@@ -150,6 +150,10 @@ To compile from source - once you have XCode installed - please read <bf>ScidvsM
 </p>
 
 <sect> news <p>
+
+<bf> July 2017 </bf>
+
+Thanks to (our best bug reporter) Ileano for finding a bug in the new Best-Games/Browser feature. I've made a 4.18.1 point release to include the fix. This version also includes a minor PGN import fix.
 
 <bf> October 2016 </bf>
 

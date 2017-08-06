@@ -140,17 +140,17 @@
 
   3.  download
 
-  Source scid_vs_pc-4.18.tgz
-  <http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.18.tgz/download>
+  Source scid_vs_pc-4.18.1.tgz
+  <http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.18.1.tgz/download>
 
-  Windows Scid vs PC-4.18.exe
-  <http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.18.exe/download>
+  Windows Scid vs PC-4.18.1.exe
+  <http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.18.1.exe/download>
 
-  Windows 64 bit Scid vs PC-4.18.x64.exe
-  <http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.18.x64.exe/download>
+  Windows 64 bit Scid vs PC-4.18.1.x64.exe
+  <http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.18.1.x64.exe/download>
 
-  Mac ScidvsMac-4.18.dmg
-  <http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.18.dmg/download>
+  Mac ScidvsMac-4.18.1.dmg
+  <http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.18.1.dmg/download>
 
   3.0.1.  Other resources
 
@@ -182,8 +182,8 @@
   Installing from source:
 
   ______________________________________________________________________
-  tar -xzf scid_vs_pc-4.18.tgz
-  cd scid_vs_pc-4.18
+  tar -xzf scid_vs_pc-4.18.1.tgz
+  cd scid_vs_pc-4.18.1
   ./configure
   sudo make install
   scid
@@ -222,8 +222,8 @@
 
   4.0.3.  Mac OS X
 
-  The ``ScidvsMac-4.18 app'' should include everything you need. Simply
-  drag and drop the App into /Applications (or similar).
+  The ``ScidvsMac-4.18.1 app'' should include everything you need.
+  Simply drag and drop the App into /Applications (or similar).
 
   Due to complicated build reasons, it seems only Yosemite (OS X 10.10)
   and later are now supported.
@@ -241,6 +241,12 @@
   HowTo.rtfd in the source tarball.
 
   5.  news
+
+   July 2017
+
+  Thanks to (our best bug reporter) Ileano for finding a bug in the new
+  Best-Games/Browser feature. I've made a 4.18.1 point release to
+  include the fix. This version also includes a minor PGN import fix.
 
    October 2016
 
