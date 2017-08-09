@@ -672,7 +672,7 @@ namespace eval inputengine {
 
   proc logEngine {msg} {
     set t .inputengineconsole.console
-    $t insert end "$line\n"
+    $t insert end "$msg\n"
     $t yview moveto 1
   }
 
