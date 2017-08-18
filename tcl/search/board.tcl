@@ -73,7 +73,12 @@ proc ::search::board {} {
   $w.refdb.lb configure -values $::listbases
 
   if {$found > -1} {
-    $w.refdb.lb current $found
+    if {[catch {
+      $w.refdb.lb current $found
+    }]} {
+    # hmmm - still can throw error
+    $w.refdb.lb current [expr {[llength $::listbases] - 1}]
+    }
   } else {
     $w.refdb.lb current [expr {[llength $::listbases] - 1}]
   }
