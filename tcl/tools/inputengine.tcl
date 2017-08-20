@@ -12,7 +12,7 @@
 ###    Author     : Alexander Wagner
 ###    Language   : TCL
 
-# Hacked by stevenaaus Dec, 2012;
+# Hacked by stevenaaus Dec 2012, August 2017
 #
 # This file handles the configuration widgets for Novag and Input Engine
 # and also connect for the Input Engine. Namespaces 'ExtHardware' and 'inputengine'.
@@ -351,11 +351,11 @@ namespace eval ExtHardware {
 
      if { [winfo exists .main.button.exthardware]} { 
         catch {
-        if { $::ExtHardware::showbutton} {
-	   pack .main.button.space4 .main.button.exthardware -side left -padx 2
-        } else {
-	   pack forget .main.button.space4 .main.button.exthardware
-        }
+	    if { $::ExtHardware::showbutton} {
+	       pack .main.button.space4 .main.button.exthardware -side left -padx 2
+	    } else {
+	       pack forget .main.button.space4 .main.button.exthardware
+	    }
         }
         return 
      } else {
@@ -547,8 +547,8 @@ namespace eval inputengine {
 
     label     $w.lmode   -text [::tr IESending]
 
-    ::board::new $w.bd 25
-     $w.bd configure -relief solid -borderwidth 1
+    ::board::new $w.bd 35
+    $w.bd configure -relief solid -borderwidth 1
 
     label     $w.engine      -text "$::ExtHardware::engine $::ExtHardware::port $::ExtHardware::param"
 
@@ -562,11 +562,15 @@ namespace eval inputengine {
     button $w.bRotate        -text [::tr IERotate]      -command { ::inputengine::rotateboard }
 
     button $w.bSync          -text [::tr IESynchronise] -command { ::inputengine::synchronise }
-    button $w.bClose         -text [::tr Close]         -command { ::inputengine::connectdisconnect }
+    button $w.bClose         -text [::tr Close]         -command "destroy $w"
 
     # Buttons for visual move announcement
     button $w.bPiece -image $inputengine::MovingPieceImg
     button $w.bMove  -font moveFont -text  $inputengine::MoveText
+
+#SA These three commented lines (when enabled) allow for testing the widget without a connection
+#SA ::inputengine::setPieceImage bq80
+
     $w.bPiece configure -relief flat -border 0 -highlightthickness 0 -takefocus 0
     $w.bMove  configure -relief flat -border 0 -highlightthickness 0 -takefocus 0
 
@@ -580,31 +584,39 @@ namespace eval inputengine {
     # Store the time as comment
     checkbutton $w.bStoreClock -text "Store Clock" -variable ::inputengine::StoreClock
 
-    grid $w.console    -stick ns    -column 0  -row 0 -columnspan 12
+    grid rowconfigure $w 0 -weight 1
+    grid rowconfigure $w 11 -pad 10
+    grid columnconfigure $w {2 3 4 5 6} -weight 1
+
+    grid $w.console    -stick nsew  -column 0  -row 0 -columnspan 12
     grid $w.ysc        -stick ns    -column 12 -row 0
 
     grid $w.engine     -stick ewns   -column 0  -row 1 -columnspan 9
 
-    grid $w.lmode      -stick ew    -column 0  -row 2
+    grid $w.lmode      -stick ew    -column 0  -row 2 -padx 12
     grid $w.sendboth   -stick e     -column 2  -row 2 
     grid $w.sendwhite               -column 4  -row 2 
     grid $w.sendblack  -stick w     -column 6  -row 2 
 
-    grid $w.bInfo      -stick ew    -column 0  -row 3
-    ###---### grid $w.bRotate   -stick ew    -column 0  -row 4
-    grid $w.bSync      -stick ew    -column 0  -row 5
-    grid $w.bStoreClock -stick ew   -column 0  -row 6
-    grid $w.bClose     -stick ew    -column 0  -row 11
+    grid $w.bInfo      -stick ew    -column 0  -row 3 -padx 12
+    ###---### grid $w.bRotate   -stick ew    -column 0  -row 4 -padx 12
+    grid $w.bSync      -stick ew    -column 0  -row 5 -padx 12
+    grid $w.bStoreClock -stick ew   -column 0  -row 6 -padx 12
+    grid $w.bClose     -stick ew    -column 0  -row 11 -padx 12
 
-    grid $w.bPiece     -stick nwes  -column 2  -row 3 -rowspan 9 -columnspan 3
-    grid $w.bMove      -stick nwes  -column 5  -row 3 -rowspan 9 -columnspan 3
+    grid $w.bPiece     -stick nwes  -column 2  -row 3 -rowspan 7 -columnspan 3
+    grid $w.bMove      -stick nwes  -column 5  -row 3 -rowspan 7 -columnspan 3
 
     grid $w.wClock     -stick nwes  -column 9 -row 11 -columnspan 7
     grid $w.bClock     -stick nwes  -column 9 -row 1  -columnspan 7
 
-    grid $w.bd         -stick nw    -column 9  -row 2 -rowspan 9 -columnspan 7
+    grid $w.bd         -stick nw    -column 9  -row 2 -rowspan 9 -columnspan 7 -padx 12
 
-    bind $w <Destroy> { catch ::inputengine::disconnect }
+    bind $w <Destroy> {
+	if {"%W" == ".inputengineconsole"} {
+	    catch ::inputengine::disconnect
+	}
+    }
     bind $w <F1> { helpWindow InputEngine}
   }
 
@@ -628,7 +640,7 @@ namespace eval inputengine {
 
   #----------------------------------------------------------------------
   # connect():
-  #     Fire upt the input engine and connect it to a local pipe.
+  #     Fire up the input engine and connect it to a local pipe.
   #     Also register the eventhandler
   #----------------------------------------------------------------------
   proc connect {} {
@@ -652,7 +664,7 @@ namespace eval inputengine {
   }
 
   #----------------------------------------------------------------------
-  # disconneet()
+  # disconnect()
   #    Disconnect and close the input engine
   #----------------------------------------------------------------------
   proc disconnect {} {
@@ -664,10 +676,6 @@ namespace eval inputengine {
     ::inputengine::sendToEngine "stop"
     ::inputengine::sendToEngine "quit"
     set ::inputengine::connectimg tb_eng_disconnected
-
-    if { [winfo exists ::inputengine::.inputengineconsole]} { 
-       destroy ::inputengine::.inputengineconsole
-    }
   }
 
   proc logEngine {msg} {
@@ -703,14 +711,14 @@ namespace eval inputengine {
     ::inputengine::newgame
   }
 
-  #----------------------------------------------------------------------
-  # resetEngine()
-  #    Resets the engines global variables
-  #----------------------------------------------------------------------
+  # Reset the engine's global variables and close DGT window
+
   proc resetEngine {} {
     global ::inputengine::InputEngine
 
     ::ExtHardware::HWbuttonImg tb_eng_disconnected
+#SA puts nope
+#SA return
     destroy .inputengineconsole
     set ::inputengine::InputEngine(pipe)     ""
     set ::inputengine::InputEngine(log)      ""
@@ -808,8 +816,8 @@ namespace eval inputengine {
     set pipe $::inputengine::InputEngine(pipe)
     set line     [string trim [gets $pipe] ]
 
-    # Close the pipe in case the engine was stoped
-    if [eof $pipe] {
+    # Close the pipe in case the engine was stopped
+    if {[eof $pipe]} {
       catch {close $pipe}
       ::inputengine::resetEngine
       return
@@ -928,16 +936,16 @@ namespace eval inputengine {
             }
           } \
           {moving piece: [A-Z] *} {
-            .inputengineconsole.bPiece configure -image $::board::letterToPiece([string range $event 14 end])80
+            ::inputengine::setPieceImage $::board::letterToPiece([string range $event 14 end])80
           }\
           {moving piece: [a-z] *} {
-            .inputengineconsole.bPiece configure -image $::board::letterToPiece([string range $event 14 end])80
+            ::inputengine::setPieceImage $::board::letterToPiece([string range $event 14 end])80
           }\
           "!new game!" {
             ::inputengine::newgame
             .inputengineconsole.bPiece configure -background blue
             .inputengineconsole.bMove  configure -background blue -text "OK"
-            .inputengineconsole.bPiece configure -image $::board::letterToPiece(K)80
+            ::inputengine::setPieceImage wk80
           } \
           "!move now!" {
             logEngine "< info $event"
@@ -947,26 +955,26 @@ namespace eval inputengine {
             ::inputengine::endgame "1-0"
             .inputengineconsole.bPiece configure -background white
             .inputengineconsole.bMove  configure -background white -text "1-0"
-            .inputengineconsole.bPiece configure -image $::board::letterToPiece(K)80
+            ::inputengine::setPieceImage wk80
           } \
           "!end game 0-1!" {
             logEngine "< info $event"
             ::inputengine::endgame "0-1"
             .inputengineconsole.bPiece configure -background gray
             .inputengineconsole.bMove  configure -background gray -text "0-1"
-            .inputengineconsole.bPiece configure -image $::board::letterToPiece(k)80
+            ::inputengine::setPieceImage bk80
           } \
           "!end game 1/2-1/2!" {
             logEngine "< info $event"
             ::inputengine::endgame "1/2-1/2"
             .inputengineconsole.bPiece configure -background black
             .inputengineconsole.bMove  configure -background white -text "1/2-1/2"
-            .inputengineconsole.bPiece configure -image $::board::letterToPiece(.)80
+            ::inputengine::setPieceImage $::board::letterToPiece(.)80
           } \
           "!enter setup mode!" {
             .inputengineconsole.bPiece configure -background yellow
             .inputengineconsole.bMove  configure -background yellow -text "Setup"
-            .inputengineconsole.bPiece configure -image $::board::letterToPiece(K)80
+            ::inputengine::setPieceImage wk80
             logEngine "< info $event"
           } \
           "!end setup mode!" {
@@ -974,7 +982,7 @@ namespace eval inputengine {
             ::inputengine::synchronise
             .inputengineconsole.bPiece configure -background yellow
             .inputengineconsole.bMove  configure -background yellow -text "OK"
-            .inputengineconsole.bPiece configure -image $::board::letterToPiece(q)80
+            ::inputengine::setPieceImage bq80
           } \
           "!white to move!" {
             set ::inputengine::toMove "White"
@@ -1081,6 +1089,18 @@ namespace eval inputengine {
   }
 
 
+  proc setPieceImage {image} {
+    if {$::macOS} {
+      # Mac wish 8.5 does not like transparent images on some widgets (in this
+      # case, .inputengineconsole.bPiece is a button) so remove transparency.
+      # NB Mac buttons also ignore '-background', but we have not fixed this
+      catch {image delete bPieceImage}
+      image create photo bPieceImage -format png -data [$image data -format png -background white]
+      .inputengineconsole.bPiece configure -image bPieceImage
+    } else {
+      .inputengineconsole.bPiece configure -image $image
+    }
+  }
 
 }
 
