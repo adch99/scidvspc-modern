@@ -578,7 +578,7 @@ set helpMessage($m,[incr menuindex]) ToolsTracker
 $m add command -label ToolsEmail -command ::tools::email
 set helpMessage($m,[incr menuindex]) ToolsEmail
 
-# Connect Hardware
+# External Hardware
 menu $m.hardware
 $m add cascade -label ToolsConnectHardware -menu $m.hardware
 set helpMessage($m,[incr menuindex]) ToolsConnectHardware
