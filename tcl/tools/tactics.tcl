@@ -51,26 +51,51 @@ namespace eval tactics {
     set found 0
 
     if {![sc_base inUse] || [sc_base numGames] == 0} {
-      tk_messageBox -type ok -icon info -title {Find Best Move} -message "No games in database"      
+      tk_messageBox -type ok -icon info -title {Find Best Move} -message "No games in database"     
       return
     }
-
+   
     busyCursor .
     update
-    for {set g [expr [sc_game number] +1] } { $g <= [sc_base numGames]} { incr g} {
-      sc_game load $g
-      if {[sc_game flag T $g]} {
-	# Look for non-std start, or tactical markers ****D->
-	if {[sc_game startBoard] || [llength [gotoNextTacticMarker] ] != 0} {
-	  set found 1
-	  break
-	}
+   
+    # Try to find in current game, from current pos (exit vars first)
+    catch {
+      # if gamenumber == 0, sc_game flag T returns no boolean
+      if {[sc_game flag T [sc_game number]]} {
+	while {[sc_var level] != 0} { sc_var exit }
+	  if {[llength [gotoNextTacticMarker] ] != 0} {
+	    set found 1
+	  }
       }
     }
-    unbusyCursor .
 
+    if {!$found} {
+      # Then search other 'T' flagged games in DB
+      for {set g [expr [sc_game number] +1] } { $g <= [sc_base numGames]} { incr g} {
+        if {![sc_game flag T $g]} {
+          continue
+        }
+        sc_game load $g
+        # go through all moves and look for tactical markers ****D->
+        if {[llength [gotoNextTacticMarker] ] != 0} {
+          set found 1
+          break
+        } else {
+          # A tactical flagged game (without ****D-> markers) with non-standard start position,
+	  # begins probably with a tactical position.
+          if {[sc_game startBoard]} {
+	    sc_move start
+            set found 1
+            break
+          }
+        }
+      }
+    }
+   
+    unbusyCursor .
+   
     if { ! $found } {
-      tk_messageBox -type ok -icon info -title {Find Best Move} -message "No (more) relevant games found."      
+      tk_messageBox -type ok -icon info -title {Find Best Move} -message "No (more) relevant games found."     
       sc_game load 1
     } else  {
       sideToMoveAtBottom
@@ -80,18 +105,23 @@ namespace eval tactics {
     updateTitle
   }
 
+  ################################################################################
+  # returns a list with depth score prevscore
+  # or an empty list if marker not found
+
   proc gotoNextTacticMarker {} {
     while {![sc_pos isAt end]} {
+      sc_move forward
       set cmt [sc_pos getComment]
 
       if {[string match {*\*\*\*\*D*->*} $cmt]} {
         # anything non-null
         return $cmt
       }
-      sc_move forward
     }
     return {}
   }
+
 
   ### Configuration dialog for Mate in N puzzle
   # (Had some associated core dumps here, possibly when scidBasesDir is wrongly set in config S.A)
