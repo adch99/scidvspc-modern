@@ -2200,6 +2200,12 @@ proc makeAnalysisWin {{n 0} {options {}}} {
   }
 
   set engineData [lindex $::engines(list) $n]
+  # sanity check
+  if {[llength $engineData] < 7} {
+    puts "Oops : no data for engine $n"
+    return
+  }
+
   set analysisName [lindex $engineData 0]
   set analysisCommand [ toAbsPath [lindex $engineData 1] ]
   set analysisArgs [lindex $engineData 2]
