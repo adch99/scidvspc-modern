@@ -833,6 +833,10 @@ translate L BrilliancyFlag {Loistokkuus}
 translate L BlunderFlag {Möhläys}
 translate L UserFlag {Käyttäjä}
 translate L PgnContains {PGN sisältää tekstiä}
+# ====== TODO To be translated ======
+translate L PreComment {Pre-game Comment}
+# ====== TODO To be translated ======
+translate L PostComment {End Comment}
 
 # Game list window:
 translate L GlistNumber {Numero}

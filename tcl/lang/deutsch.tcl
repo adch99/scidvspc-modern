@@ -934,6 +934,10 @@ translate D BrilliancyFlag {Glänzend}
 translate D BlunderFlag {Grober Fehler}
 translate D UserFlag {Benutzer}
 translate D PgnContains {PGN enthält Text}
+# ====== TODO To be translated ======
+translate D PreComment {Pre-game Comment}
+# ====== TODO To be translated ======
+translate D PostComment {End Comment}
 
 # Game list window:
 translate D GlistNumber {Nummer}

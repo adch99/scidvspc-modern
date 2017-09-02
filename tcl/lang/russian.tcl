@@ -890,6 +890,10 @@ translate R BrilliancyFlag {Великолепно}
 translate R BlunderFlag {Ошибка}
 translate R UserFlag {Пользователь}
 translate R PgnContains {Текст PGN}
+# ====== TODO To be translated ======
+translate R PreComment {Pre-game Comment}
+# ====== TODO To be translated ======
+translate R PostComment {End Comment}
 
 # Game list window:
 translate R GlistNumber {Номер}

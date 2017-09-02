@@ -1065,6 +1065,10 @@ translate Y BrilliancyFlag {Brilijantnost}
 translate Y BlunderFlag {Gre¹ka}
 translate Y UserFlag {Korisnik}
 translate Y PgnContains {PGN contains text} ;# ***
+# ====== TODO To be translated ======
+translate Y PreComment {Pre-game Comment}
+# ====== TODO To be translated ======
+translate Y PostComment {End Comment}
 
 # Game list window:
 translate Y GlistNumber {Broj}

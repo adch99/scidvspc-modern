@@ -16302,6 +16302,8 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     gameNumRange[1] = -1;  // Default: stop searching at last game.
 
     bool ignoreColors = false;
+    bool preComment = false;
+    bool postComment = false;
     filterOpT filterOp = FILTEROP_RESET;
 
     flagT fStdStart = FLAG_BOTH;
@@ -16345,7 +16347,7 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         "fMiddlegame", "fEndgame", "fNovelty", "fPawnStructure",
         "fTactics", "fKingside", "fQueenside", "fBrilliancy", "fBlunder",
         "fUser", "fCustom1" , "fCustom2" , "fCustom3" ,
-        "fCustom4" , "fCustom5" , "fCustom6" , "pgn", "ignoreCase", "gameend", NULL
+        "fCustom4" , "fCustom5" , "fCustom6" , "pgn", "ignoreCase", "gameend", "preComment", "postComment", NULL
     };
     enum {
         OPT_WHITE, OPT_BLACK, OPT_EVENT, OPT_SITE, OPT_ROUND,
@@ -16357,7 +16359,7 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         OPT_FMIDDLEGAME, OPT_FENDGAME, OPT_FNOVELTY, OPT_FPAWNSTRUCT,
         OPT_FTACTICS, OPT_FKSIDE, OPT_FQSIDE, OPT_FBRILLIANCY, OPT_FBLUNDER,
         OPT_FUSER, OPT_FCUSTOM1, OPT_FCUSTOM2, OPT_FCUSTOM3,
-        OPT_FCUSTOM4,  OPT_FCUSTOM5, OPT_FCUSTOM6, OPT_PGN, OPT_PGNCASE, OPT_GAMEEND
+        OPT_FCUSTOM4,  OPT_FCUSTOM5, OPT_FCUSTOM6, OPT_PGN, OPT_PGNCASE, OPT_GAMEEND, OPT_PRECOMMENT, OPT_POSTCOMMENT
     };
 
     int arg = 2;
@@ -16507,6 +16509,14 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
         case OPT_GAMEEND:
             gameEnd = value[0];
+            break;
+
+        case OPT_PRECOMMENT:
+            preComment = strGetBoolean (value);
+            break;
+
+        case OPT_POSTCOMMENT:
+            postComment = strGetBoolean (value);
             break;
 
         default:
@@ -16829,16 +16839,19 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         // profiling showed most that most of the time is spent
         // generating the PGN representation of each game.
 
-        if (match  &&  (pgnTextCount > 0 || gameEnd == 'S' || gameEnd == 'C')) {
-            if (match  &&  db->gfile->ReadGame (db->bbuf, ie->GetOffset(),
-                                                ie->GetLength()) != OK) {
+        if (match  &&  (pgnTextCount > 0 || gameEnd == 'S' || gameEnd == 'C' || preComment || postComment)) {
+            if (db->gfile->ReadGame (db->bbuf, ie->GetOffset(), ie->GetLength()) != OK) {
                 match = false;
             }
             if (match  &&  scratchGame->Decode (db->bbuf, GAME_DECODE_ALL) != OK) {
                 match = false;
             }
+
+
             if (match) {
+
 	      if (gameEnd == 'S' || gameEnd == 'C') {
+                // Game is actually at endPos, so this line should be removed
 		while (scratchGame->MoveForward() == OK) {} ;
 		Position * p = scratchGame->GetCurrentPos();
 		if (gameEnd == 'S') {
@@ -16847,6 +16860,21 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 		     match = (p->IsKingInMate());
 		}
 	      }
+
+	      if (match && (preComment || postComment)) {
+		char * tmpComment;
+		if (postComment) {
+		  tmpComment = scratchGame->GetMoveComment();
+                  // Don't match comments starting with [ and ending with ]
+		  match = ((tmpComment != NULL) && (tmpComment[0] != '[' || tmpComment[strlen(tmpComment) - 1] != ']'));
+		}
+		if (match && preComment) {
+		  scratchGame->MoveToPly(0);
+		  tmpComment = scratchGame->GetMoveComment();
+		  match = ((tmpComment != NULL) && (tmpComment[0] != '[' || tmpComment[strlen(tmpComment) - 1] != ']'));
+		}
+	      }
+
               if (match && pgnTextCount > 0) {
                 db->tbuf->Empty();
                 db->tbuf->SetWrapColumn (99999);
@@ -16867,7 +16895,7 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 		  for (int m=0; m < pgnTextCount; m++) {
 		     if (match) { match = strContains (buf, sPgnText[m]); }
 		  }
-              }
+	    }
             }
         }
 

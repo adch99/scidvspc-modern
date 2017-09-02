@@ -994,6 +994,10 @@ translate H BrilliancyFlag {Csillogás}
 translate H BlunderFlag {Elnézés}
 translate H UserFlag {Felhasználó}
 translate H PgnContains {Szöveg a PGN-ben}
+# ====== TODO To be translated ======
+translate H PreComment {Pre-game Comment}
+# ====== TODO To be translated ======
+translate H PostComment {End Comment}
 
 # Game list window:
 translate H GlistNumber {Szám}

@@ -903,6 +903,10 @@ translate P BrilliancyFlag {Nagroda za piękność}
 translate P BlunderFlag {Podstawka}
 translate P UserFlag {Inne}
 translate P PgnContains {PGN zawiera tekst}
+# ====== TODO To be translated ======
+translate P PreComment {Pre-game Comment}
+# ====== TODO To be translated ======
+translate P PostComment {End Comment}
 
 # Game list window:
 translate P GlistNumber {Numer}
