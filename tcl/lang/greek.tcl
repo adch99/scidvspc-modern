@@ -936,6 +936,10 @@ translate G BrilliancyFlag {Εξαιρετική}
 translate G BlunderFlag {Σοβαρό Σφάλμα}
 translate G UserFlag {Χρήστη}
 translate G PgnContains {PGN με σχόλια}
+# ====== TODO To be translated ======
+translate G PreComment {Pre-game Comment}
+# ====== TODO To be translated ======
+translate G PostComment {End Comment}
 
 # Game list window:
 translate G GlistNumber {Αριθμός}

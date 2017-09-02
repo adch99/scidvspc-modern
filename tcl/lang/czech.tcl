@@ -987,6 +987,10 @@ translate C BrilliancyFlag {Brilantní}
 translate C BlunderFlag {Hrubka}
 translate C UserFlag {U¾ivatel}
 translate C PgnContains {PGN obsahuje text}
+# ====== TODO To be translated ======
+translate C PreComment {Pre-game Comment}
+# ====== TODO To be translated ======
+translate C PostComment {End Comment}
 
 # Game list window:
 translate C GlistNumber {Èíslo}

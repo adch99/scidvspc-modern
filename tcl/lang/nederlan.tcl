@@ -925,6 +925,10 @@ translate N BrilliancyFlag {Briljant}
 translate N BlunderFlag {Blunder}
 translate N UserFlag {Gebruiker}
 translate N PgnContains {PGN bevat tekst}
+# ====== TODO To be translated ======
+translate N PreComment {Pre-game Comment}
+# ====== TODO To be translated ======
+translate N PostComment {End Comment}
 
 # Game list window:
 translate N GlistNumber {Nummer}

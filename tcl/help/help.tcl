@@ -1097,6 +1097,10 @@ set helpText(Searches) {<h1>Searches in Scid</h1>
   <b>Ignore Colors</b> option.
   </p>
   <p>
+  A search can also be done for a pre-game comment or final move comment.
+  But these searches will *not* match hidden comments (ie - those starting with '[' *and* ending with ']').
+  </p>
+  <p>
   Finally, the Header search can be used to find any text
   (case-sensitive and without wildcards) in the PGN representation of
   each game.  You may enter up to three text phrases, and they must

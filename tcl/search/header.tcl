@@ -91,6 +91,8 @@ proc ::search::header::defaults {} {
   set sSideToMove wb
   set sPgncase 0
   set sGameEnd Any
+  set preComment 0
+  set postComment 0
   foreach flag  [ concat $::sHeaderFlagList $::sHeaderCustomFlagList ] { set sHeaderFlags($flag) both }
   foreach i [array names sPgntext] { set sPgntext($i) "" }
   foreach i $::sTitleList {
@@ -111,7 +113,7 @@ proc search::header {} {
   global sWhiteEloMin sWhiteEloMax sBlackEloMin sBlackEloMax
   global sEloDiffMin sEloDiffMax sSideToMove
   global sEco sEcoMin sEcoMax sHeaderFlags sGlMin sGlMax sTitleList sTitles
-  global sResWin sResLoss sResDraw sResOther glstart sPgncase sPgntext sGameEnd
+  global sResWin sResLoss sResDraw sResOther glstart sPgncase sPgntext sGameEnd preComment postComment
 
   set w .sh
   if {[winfo exists $w]} {
@@ -350,6 +352,11 @@ proc search::header {} {
   }
   pack $f.first $f.last $f.all -side left -padx 5
 
+  # Pre game comment
+  checkbutton $f.preComment -textvar ::tr(PreComment) -variable preComment -font $bold 
+  checkbutton $f.postComment -textvar ::tr(PostComment) -variable postComment -font $bold 
+  pack $f.postComment $f.preComment -side right
+
   set f [frame $w.pgntext]
   pack $f -side top -fill x
   label $f.l1 -textvar ::tr(PgnContains) -font $bold
@@ -499,6 +506,7 @@ proc search::header {} {
         -length [list $sGlMin $sGlMax] \
         -toMove $sSideToMove \
         -gameNumber [list $sGnumMin $sGnumMax] \
+        -preComment $preComment -postComment $postComment \
         -flip $sIgnoreCol -filter $::search::filter::operation \
         -fStdStart $sHeaderFlags(StdStart) \
         -fPromotions $sHeaderFlags(Promotions) \

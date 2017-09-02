@@ -1065,6 +1065,10 @@ translate O BrilliancyFlag {Brillians}
 translate O BlunderFlag {Tabbe}
 translate O UserFlag {Bruker}
 translate O PgnContains {PGN inneholder tekst}
+# ====== TODO To be translated ======
+translate O PreComment {Pre-game Comment}
+# ====== TODO To be translated ======
+translate O PostComment {End Comment}
 
 # Game list window:
 translate O GlistNumber {Nummer}
