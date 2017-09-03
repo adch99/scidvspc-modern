@@ -2375,7 +2375,7 @@
   o  Online documentation
      <http://scidvspc.sourceforge.net/doc/Contents.htm>
 
-  o  Millbase database  <http://katar.weebly.com/index.html>
+  o  Kingbase database  <http://www.kingbase-chess.net/ >
 
   o  Player Information resources
      <http://sourceforge.net/projects/scid/files/Player Data/>
@@ -2384,8 +2384,24 @@
 
   o  FICS game archives  <http://ficsgames.org>
 
+  o  Kayvan's Cross platform 'docker' images
+     <https://github.com/ksylvan/scidvspc>
+
+  o  Chess Tech blog, with some ScidvsPC tutorials
+     <https://chesstech.wordpress.com/>
+
   o  Scid vs. 960/variants (Chess960 support)
      <https://github.com/brittonf/scid-vs-variants>
+
+  o  Debian/Mint/Ubuntu installation how-to
+     <http://www.linuxx.eu/2012/11/scid-vs-pc-installation-guide-
+     ubuntu.html>
+
+  o  Ed Collins' Scid vs. PC page
+     <http://edcollins.com/chess/scidvspc/index.html>
+
+  o  Gorgonian's custom pieces  <http://gorgonian.weebly.com/scid-vs-
+     pc.html>
 
   o  The PGN and EPD standards
      <http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm>
@@ -2393,6 +2409,13 @@
   o  Pgn of players  <http://www.pgnmentor.com/files.html#players>
 
   o  Pgn of events  <http://www.pgnmentor.com/files.html#events>
+
+  o  Inno setup  <http://www.jrsoftware.org/isinfo.php> (used to make
+     windows installer)
+
+  o  Professional quality chess icons  <www.virtualpieces.net>
+
+  o  Tango icons  <http://tango.freedesktop.org/Tango_Desktop_Project>
 
   o  Mailing list subscribe (must be a member to post to list)
      <https://lists.sourceforge.net/lists/listinfo/scidvspc-users>
@@ -2409,8 +2432,5 @@
 
   o  Xboard engine protocol  <http://www.open-
      aurec.com/wbforum/WinBoard/engine-intf.html>
-
-  o  Inno setup  <http://www.jrsoftware.org/isinfo.php> (used to make
-     windows installer)
 
 

@@ -4348,6 +4348,8 @@ set helpText(Related) {<h1>Links</h1>
   <li>Player Information resources  <url http://sourceforge.net/projects/scid/files/Player Data/>http://sourceforge.net/projects/scid/files/Player Data/</url></li>
   <li>FICS <url http://www.freechess.org>www.freechess.org</url></li>
   <li>FICS game archives <url http://ficsgames.org>http://ficsgames.org</url></li>
+  <li>Kayvan's Cross platform 'docker' images <url https://github.com/ksylvan/scidvspc>https://github.com/ksylvan/scidvspc</url></li>
+  <li>Chess Tech blog, with some ScidvsPC tutorials <url https://chesstech.wordpress.com/>https://chesstech.wordpress.com/</url></li>
   <li>Scid vs. 960/variants (Chess960 support) <url https://github.com/brittonf/scid-vs-variants>https://github.com/brittonf/scid-vs-variants</url></li>
   <li>Debian/Mint/Ubuntu installation how-to <url http://www.linuxx.eu/2012/11/scid-vs-pc-installation-guide-ubuntu.html>http://www.linuxx.eu/2012/11/scid-vs-pc-installation-guide-ubuntu.html</url></li>
   <li>Ed Collins' Scid vs. PC page <url http://edcollins.com/chess/scidvspc/index.html>http://edcollins.com/chess/scidvspc/index.html</url></li>
@@ -4356,25 +4358,18 @@ set helpText(Related) {<h1>Links</h1>
   <li>Common PGN extensions <url http://www.enpassant.dk/chess/palview/enhancedpgn.htm>http://www.enpassant.dk/chess/palview/enhancedpgn.htm</url></li>
   <li>Pgn of players <url http://www.pgnmentor.com/files.html#players>www.pgnmentor.com/files.html#players</url></li>
   <li>Pgn of events <url http://www.pgnmentor.com/files.html#events>www.pgnmentor.com/files.html#events</url></li>
+  <li><url http://www.jrsoftware.org/isinfo.php>Inno setup</url> (used to make windows installer)</li>
+  <li>Professional quality chess icons  <url http://www.virtualpieces.net>www.virtualpieces.net</url></li>
+  <li>Tango icons <url http://tango.freedesktop.org/Tango_Desktop_Project>http://tango.freedesktop.org/Tango_Desktop_Project</url></li>
 <br>
   <li>Mailing list subscribe (must be a member to post to list) <url https://lists.sourceforge.net/lists/listinfo/scidvspc-users>https://lists.sourceforge.net/lists/listinfo/scidvspc-users</url></li>
   <li>Mailing list archive <url http://www.mail-archive.com/scidvspc-users@lists.sourceforge.net/>http://www.mail-archive.com/scidvspc-users@lists.sourceforge.net/</url></li>
   <li>Programmer's reference <url http://scidvspc.sourceforge.net/doc/progref.html>http://scidvspc.sourceforge.net/doc/progref.html</url></li>
   <li>UCI engine protocol <url http://wbec-ridderkerk.nl/html/UCIProtocol.html>http://wbec-ridderkerk.nl/html/UCIProtocol.html</url></li>
   <li>Xboard engine protocol <url http://www.open-aurec.com/wbforum/WinBoard/engine-intf.html>http://www.open-aurec.com/wbforum/WinBoard/engine-intf.html</url></li>
-  <br>
-  <li>Popular chess portals.</li>
-  <ul>
-  <li>  <url http://www.chessbase.com>www.chessbase.com </url></li>
-  <li>  <url http://www.theweekinchess.com>www.theweekinchess.com </url></li>
-  <li>  <url http://www.chesschat.org>www.chesschat.org </url></li>
-  </ul>
-  <li><url http://www.jrsoftware.org/isinfo.php>Inno setup</url> (used to make windows installer)</li>
-  <li>Professional quality chess icons  <url http://www.virtualpieces.net>www.virtualpieces.net</url></li>
-  <li>Tango icons <url http://tango.freedesktop.org/Tango_Desktop_Project>http://tango.freedesktop.org/Tango_Desktop_Project</url></li>
 
   </ul>
-<p><footer>Updated: Scid vs PC 4.10, August 2013</footer></p>
+<p><footer>Updated: Scid vs PC 4.19, September 2017</footer></p>
 }
 
 # Book window help
