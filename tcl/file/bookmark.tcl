@@ -239,7 +239,12 @@ proc ::bookmarks::Go {entry} {
     }
     ::plist::refresh
     ::tourney::refresh
-    ::recentFiles::add "[file rootname $fname].si4"
+    # PGN can be 'bookmarked' by the recentGames feature, so handle them
+    if {[string compare -nocase [string range $fname end-3 end] .pgn] == 0} {
+      ::recentFiles::add $fname
+    } else {
+      ::recentFiles::add "[file rootname $fname].si4"
+    }
   }
   # Find and load the best database game matching the bookmark:
   set white [lindex $entry 5]
