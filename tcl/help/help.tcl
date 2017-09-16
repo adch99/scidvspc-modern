@@ -4349,7 +4349,7 @@ set helpText(Related) {<h1>Links</h1>
   <li>FICS <url http://www.freechess.org>www.freechess.org</url></li>
   <li>FICS game archives <url http://ficsgames.org>http://ficsgames.org</url></li>
   <li>Kayvan's Cross platform 'docker' images <url https://github.com/ksylvan/scidvspc>https://github.com/ksylvan/scidvspc</url></li>
-  <li>Chess Tech blog, with some ScidvsPC tutorials <url https://chesstech.wordpress.com/>https://chesstech.wordpress.com/</url></li>
+  <li>Chess Tech blog, with some ScidvsPC tutorials <url http://chesstech.info/>http://chesstech.info/</url></li>
   <li>Scid vs. 960/variants (Chess960 support) <url https://github.com/brittonf/scid-vs-variants>https://github.com/brittonf/scid-vs-variants</url></li>
   <li>Debian/Mint/Ubuntu installation how-to <url http://www.linuxx.eu/2012/11/scid-vs-pc-installation-guide-ubuntu.html>http://www.linuxx.eu/2012/11/scid-vs-pc-installation-guide-ubuntu.html</url></li>
   <li>Ed Collins' Scid vs. PC page <url http://edcollins.com/chess/scidvspc/index.html>http://edcollins.com/chess/scidvspc/index.html</url></li>
