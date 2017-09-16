@@ -2388,7 +2388,7 @@
      <https://github.com/ksylvan/scidvspc>
 
   o  Chess Tech blog, with some ScidvsPC tutorials
-     <https://chesstech.wordpress.com/>
+     <http://chesstech.info/>
 
   o  Scid vs. 960/variants (Chess960 support)
      <https://github.com/brittonf/scid-vs-variants>
