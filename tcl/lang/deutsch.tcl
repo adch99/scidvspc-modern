@@ -1400,6 +1400,8 @@ translate D ExportColumnStyle {Tabellarisch (ein Zug pro Zeile)?}
 translate D ExportSymbolStyle {Symbolische Notation:}
 translate D ExportStripMarks \
   {Felder-/Pfeilemarkierzeichen aus den Kommentaren entfernen?}
+# ====== TODO To be translated ======
+translate D ExportFlags {Export Scid Flags}
 
 # Goto game/move dialogs:
 translate D LoadGameNumber {Geben Sie die zu ladende Spielnr. ein:}

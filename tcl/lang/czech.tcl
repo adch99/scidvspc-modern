@@ -1479,6 +1479,8 @@ translate C IndentVariations {Odsazovat varianty?}
 translate C ExportColumnStyle {Sloupcový styl (jeden tah na øádek)?}
 translate C ExportSymbolStyle {Styl pro symbolické anotace:}
 translate C ExportStripMarks {Odstranit kódové znaèky polí/¹ipek z komentáøù?}
+# ====== TODO To be translated ======
+translate C ExportFlags {Export Scid Flags}
 
 # Goto game/move dialogs:
 translate C LoadGameNumber {Vlo¾te èíslo partie:}

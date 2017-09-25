@@ -1437,12 +1437,12 @@ sc_base_export (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     const char * options[] = {
         "-append", "-starttext", "-endtext", "-comments", "-variations",
         "-spaces", "-symbols", "-indentComments", "-indentVariations",
-        "-column", "-noMarkCodes", "-convertNullMoves", "-utf8", NULL
+        "-column", "-noMarkCodes", "-scidFlags", "-convertNullMoves", "-utf8", NULL
     };
     enum {
         OPT_APPEND, OPT_STARTTEXT, OPT_ENDTEXT, OPT_COMMENTS, OPT_VARIATIONS,
         OPT_SPACES, OPT_SYMBOLS, OPT_INDENTC, OPT_INDENTV,
-        OPT_COLUMN, OPT_NOMARKS, OPT_CONVERTNULL, OPT_UTF8
+        OPT_COLUMN, OPT_NOMARKS, OPT_SCIDFLAGS, OPT_CONVERTNULL, OPT_UTF8
     };
 
     if (argc < 5) { return errorResult (ti, usage); }
@@ -1518,6 +1518,10 @@ sc_base_export (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
         case OPT_NOMARKS:
             if (flag) { pgnStyle |= PGN_STYLE_STRIP_MARKS; }
+            break;
+
+        case OPT_SCIDFLAGS:
+            if (flag) { pgnStyle |= PGN_STYLE_SCIDFLAGS; }
             break;
 
         case OPT_CONVERTNULL:
@@ -8316,14 +8320,14 @@ sc_game_pgn (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         "-column", "-comments", "-base", "-gameNumber", "-format",
         "-shortHeader", "-indentComments", "-indentVariations",
         "-symbols", "-tags", "-variations", "-width", "-space",
-        "-markCodes", "-unicode", "-stripbraces",
+        "-markCodes", "-scidFlags", "-unicode", "-stripbraces",
         NULL
     };
     enum {
         OPT_COLUMN, OPT_COMMENTS, OPT_BASE, OPT_GAME_NUMBER, OPT_FORMAT,
         OPT_SHORT_HDR, OPT_INDENT_COMMENTS, OPT_INDENT_VARS,
         OPT_SYMBOLS, OPT_TAGS, OPT_VARS, OPT_WIDTH, OPT_SPACE,
-        OPT_NOMARKS, OPT_UNICODE, OPT_STRIPBRACES,
+        OPT_NOMARKS, OPT_SCIDFLAGS, OPT_UNICODE, OPT_STRIPBRACES,
     };
 
     scidBaseT * base = db;
@@ -8421,6 +8425,8 @@ sc_game_pgn (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                     bitmask = PGN_STYLE_INDENT_COMMENTS; break;
                 case OPT_NOMARKS:
                     bitmask = PGN_STYLE_STRIP_MARKS;     break;
+                case OPT_SCIDFLAGS:
+                    bitmask = PGN_STYLE_SCIDFLAGS;       break;
                 case OPT_UNICODE:
                     bitmask = PGN_STYLE_UNICODE;         break;
                 case OPT_STRIPBRACES:

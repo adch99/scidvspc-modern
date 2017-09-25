@@ -1354,6 +1354,8 @@ translate P IndentVariations {Wcinaj warianty?}
 translate P ExportColumnStyle {Kolumny (jedno posunięcie w wierszu)?}
 translate P ExportSymbolStyle {Styl znaków komentarza:}
 translate P ExportStripMarks {Usuwać z komentarzy kody kolorowania pól/strzałek?} 
+# ====== TODO To be translated ======
+translate P ExportFlags {Export Scid Flags}
 
 # Goto game/move dialogs:
 translate P LoadGameNumber {Podaj numer partii do wczytania:}

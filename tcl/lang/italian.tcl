@@ -1447,6 +1447,8 @@ translate I IndentVariations {Indenta varianti?}
 translate I ExportColumnStyle {Stile colonna (una mossa per riga)?}
 translate I ExportSymbolStyle {Stile annotazione simbolica:}
 translate I ExportStripMarks {Togliere i codici di casella/freccia dai commenti?}
+# ====== TODO To be translated ======
+translate I ExportFlags {Export Scid Flags}
 
 # Goto game/move dialogs:
 translate I LoadGameNumber {Inserire il numero della partita da caricare:}

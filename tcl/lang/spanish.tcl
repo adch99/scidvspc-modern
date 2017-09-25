@@ -1336,6 +1336,8 @@ translate S IndentVariations {¿Sangrar variaciones?}
 translate S ExportColumnStyle {¿Estilo de columna (un movimiento por línea)?}
 translate S ExportSymbolStyle {Estilo de anotación simbólico:}
 translate S ExportStripMarks {¿Quitar marca de códigos de casilla/flecha de los comentarios?}
+# ====== TODO To be translated ======
+translate S ExportFlags {Export Scid Flags}
 
 # Goto game/move dialogs:
 translate S LoadGameNumber {Entra el número de la partida a cargar:}

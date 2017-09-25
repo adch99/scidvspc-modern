@@ -1787,15 +1787,18 @@ set helpText(Export) {<h1>Exporting Games</h1>
   <p>
   The use of '{' and '}' inside comments is also against the standard, and Scid vs. PC replaces these with parenthesis when exporting PGN.
   </p>
+<p>Scid vs. PC also has the option to preserve Scid flags - including the Delete flag. This allows one to export games to
+PGN, perform some text editing on the file (for example), and then reload the games while still preserving the DB flags.
+</p>
 
 
-<p>
+  <h3>HTML with JavaScript</h3>
+<p><i>
   Diagrams are drawn (in HTML or LaTeX formats),
   wherever a <b>D</b> nag, or a comment (starts with <b>#</b>) appears.
   In the case of HTML, Scid's bitmaps directory should be placed alongside your exported file.
-  </p>
+  </i></p>
 
-  <h3>HTML with JavaScript</h3>
   <p>
   While the HTML export generates a static file that may contain
   static board diagrams, this format offers dynamic HTML, that allows
@@ -1828,7 +1831,7 @@ set helpText(Export) {<h1>Exporting Games</h1>
 <ul><li>pdflatex -interaction batchmode mytexfile.tex</li></ul>
 </p>
 
-  <p><footer>Updated: Scid vs. PC 4.15 June 2015</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.18 Sept 2017</footer></p>
 }
 
 set helpTitle(Encoding) "PGN Encoding"

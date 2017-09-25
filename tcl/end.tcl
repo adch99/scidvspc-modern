@@ -401,6 +401,11 @@ proc exportOptions {exportType {fName {}}} {
     set exportFlags(stripMarks) 1
   }
 
+  label $w.o.scidFlags -text $::tr(ExportFlags)
+  radiobutton $w.o.scidFlagsOn -text $::tr(Yes) -variable exportFlags(scidFlags) -value 1
+  radiobutton $w.o.scidFlagsOff -text $::tr(No) -variable exportFlags(scidFlags) -value 0
+  # We won't save this value
+  set exportFlags(scidFlags) 0
 
   label $w.o.indentc -text $::tr(IndentComments)
   radiobutton $w.o.indentcOn -text $::tr(Yes) -variable exportFlags(indentc) -value 1
@@ -422,7 +427,7 @@ proc exportOptions {exportType {fName {}}} {
   radiobutton $w.o.symbolsOn -text "! +=" -variable exportFlags(symbols) -value 1
   radiobutton $w.o.symbolsOff -text {$2 $14} -variable exportFlags(symbols) -value 0
 
-  foreach i {space comments stripMarks indentc vars indentv column} {
+  foreach i {space comments stripMarks scidFlags indentc vars indentv column} {
     grid $w.o.${i}    -row $row -column 0 -sticky w
     grid $w.o.${i}On  -row $row -column 1 -sticky w
     grid $w.o.${i}Off -row $row -column 2 -sticky w
@@ -583,7 +588,7 @@ proc exportGames {selection exportType {fName {}}} {
       -comments $exportFlags(comments) -variations $exportFlags(vars) \
       -space $exportFlags(space) -symbols $exportFlags(symbols) \
       -indentC $exportFlags(indentc) -indentV $exportFlags(indentv) \
-      -column $exportFlags(column) -noMarkCodes $exportFlags(stripMarks) \
+      -column $exportFlags(column) -noMarkCodes $exportFlags(stripMarks) -scidFlags $exportFlags(scidFlags) \
       -convertNullMoves $exportFlags(convertNullMoves) -utf8 $exportFlags(utf8)
   }]
 

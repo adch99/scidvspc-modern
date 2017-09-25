@@ -1485,6 +1485,8 @@ translate B IndentVariations {Identar Variantes?}
 translate B ExportColumnStyle {Estilo Coluna (um movimento por linha)?}
 translate B ExportSymbolStyle {Estilo de anotacao simbolica:}
 translate B ExportStripMarks {Strip square/arrow mark codes from comments?} ;# ***
+# ====== TODO To be translated ======
+translate B ExportFlags {Export Scid Flags}
 
 # Goto game/move dialogs:
 translate B LoadGameNumber {Entre o numero do jogo a ser carregado:}

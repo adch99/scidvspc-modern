@@ -1347,6 +1347,8 @@ translate R IndentVariations {Варианты с отступом?}
 translate R ExportColumnStyle {В колонку (один ход на строку)?}
 translate R ExportSymbolStyle {Стиль символьной аннотации:}
 translate R ExportStripMarks {Удалить маркированные коды полей/стрелок из комментариев?}
+# ====== TODO To be translated ======
+translate R ExportFlags {Export Scid Flags}
 
 # Goto game/move dialogs:
 translate R LoadGameNumber {Введите номер партии для загрузки:}
