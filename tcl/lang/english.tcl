@@ -1310,6 +1310,7 @@ translate E IndentVariations {Indent variations?}
 translate E ExportColumnStyle {Column style (one move per line)?}
 translate E ExportSymbolStyle {Symbolic annotation style:}
 translate E ExportStripMarks {Strip square/arrow mark codes from comments?}
+translate E ExportFlags {Export Scid Flags}
 
 # Goto game/move dialogs:
 translate E LoadGameNumber {Load Game number}

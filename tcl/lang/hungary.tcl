@@ -1488,6 +1488,8 @@ translate H IndentVariations {Változatok igazítása?}
 translate H ExportColumnStyle {Oszlop stílusa (soronként egy lépés)?}
 translate H ExportSymbolStyle {Szimbólumok stílusa:}
 translate H ExportStripMarks {Kivegye a megjegyzésekbõl a mezõ- és nyílmegjelöléseket?}
+# ====== TODO To be translated ======
+translate H ExportFlags {Export Scid Flags}
 
 # Goto game/move dialogs:
 translate H LoadGameNumber {A betöltendõ játszma sorszáma:}

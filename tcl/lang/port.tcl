@@ -1296,6 +1296,8 @@ translate U IndentVariations {Alinhar Variantes?}
 translate U ExportColumnStyle {Estilo Coluna (um movimento por linha)?}
 translate U ExportSymbolStyle {Estilo de anotação simbólica:}
 translate U ExportStripMarks {Apagar dos comentários as marcas de casa/seta?} ;# ***
+# ====== TODO To be translated ======
+translate U ExportFlags {Export Scid Flags}
 
 # Goto game/move dialogs:
 translate U LoadGameNumber {Entre o n.º do jogo a ser carregado:}

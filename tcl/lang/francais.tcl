@@ -1341,6 +1341,8 @@ translate F IndentVariations {Indenter les variantes?}
 translate F ExportColumnStyle {Style en colonne (un coup par ligne)?}
 translate F ExportSymbolStyle {Style d'annotation symbolique:}
 translate F ExportStripMarks {Enlever les codes de marquages de flèches et de coloration de cases des commentaires?}
+# ====== TODO To be translated ======
+translate F ExportFlags {Export Scid Flags}
 
 # Goto game/move dialogs:
 translate F LoadGameNumber {Entrer le numéro de la partie à charger:}

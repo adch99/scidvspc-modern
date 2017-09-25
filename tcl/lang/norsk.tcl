@@ -1558,6 +1558,8 @@ translate O IndentVariations {Rykk inn variasjoner}
 translate O ExportColumnStyle {Bruk kolonner (ett trekk per linje)}
 translate O ExportSymbolStyle {Symbolnotasjoner}
 translate O ExportStripMarks {Fjern alle fargekoder og piler fra kommentarer?}
+# ====== TODO To be translated ======
+translate O ExportFlags {Export Scid Flags}
 
 # Goto game/move dialogs:
 translate O LoadGameNumber {Angi partinummer som skal lastes inn:}

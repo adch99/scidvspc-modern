@@ -1561,6 +1561,8 @@ translate Y IndentVariations {Uvuci pasus kod varijanata?}
 translate Y ExportColumnStyle {Pasus stil (jedan potez po liniji)?}
 translate Y ExportSymbolStyle {Stil simbolièkih napomena:}
 translate Y ExportStripMarks {Strip square/arrow mark codes from comments?} ;# ***
+# ====== TODO To be translated ======
+translate Y ExportFlags {Export Scid Flags}
 
 # Goto game/move dialogs:
 translate Y LoadGameNumber {Unesi broj partije za uèitavanje:}

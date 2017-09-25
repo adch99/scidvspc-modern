@@ -1380,6 +1380,8 @@ translate N IndentVariations {Inspringen varianten?}
 translate N ExportColumnStyle {Kolomstijl (een zet per regel)?}
 translate N ExportSymbolStyle {Symbolische annotatie stijl:}
 translate N ExportStripMarks {Wis vierkante haken/pijlen markeer codes uit de commentaar?}
+# ====== TODO To be translated ======
+translate N ExportFlags {Export Scid Flags}
 
 # Goto game/move dialogs:
 translate N LoadGameNumber {Geef het nummer van de te laden partij:}

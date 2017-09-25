@@ -1394,6 +1394,8 @@ translate G IndentVariations {Εσοχές Βαριάντων;}
 translate G ExportColumnStyle {Μορφή Στήλης (κίνηση ανά γραμμή);}
 translate G ExportSymbolStyle {Μορφή Συμβολισμού Σχολιασμού:}
 translate G ExportStripMarks {Αφαίρεση τετραγώνων/τόξων από Σχόλια;}
+# ====== TODO To be translated ======
+translate G ExportFlags {Export Scid Flags}
 
 # Goto game/move dialogs:
 translate G LoadGameNumber {Φόρτωση Αριθμ.Παρτίδας}

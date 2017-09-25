@@ -1278,6 +1278,8 @@ translate L IndentVariations {Sisennä muunnelmat?}
 translate L ExportColumnStyle {Sarakkeen tyyli (yksi siirto riviä kohden)?}
 translate L ExportSymbolStyle {Symbolinen huomautustyyli:}
 translate L ExportStripMarks {Poista ruutu/nuoli-merkkikoodit kommenteista?}
+# ====== TODO To be translated ======
+translate L ExportFlags {Export Scid Flags}
 
 # Goto game/move dialogs:
 translate L LoadGameNumber {Lataa peli numero}

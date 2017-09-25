@@ -1376,6 +1376,8 @@ translate W IndentVariations {Dra in variationer?}
 translate W ExportColumnStyle {Kolumnstil (ett drag per rad)?}
 translate W ExportSymbolStyle {Symbolbaserade kommentarer:}
 translate W ExportStripMarks {Avlägsna koder för fält och pilar från kommentarerna?}
+# ====== TODO To be translated ======
+translate W ExportFlags {Export Scid Flags}
 
 # Goto game/move dialogs:
 translate W LoadGameNumber {Ange partiets nummer:}
