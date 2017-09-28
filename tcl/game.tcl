@@ -289,10 +289,12 @@ proc ::game::LoadMenu {w base gnum x y} {
     }
     ::game::Load $gnum"
   $m entryconfigure 2 -command "mergeGame $base $gnum"
-  # could also use tk_popup here, but this seems ok
-  event generate $w <ButtonRelease-1>
-  $m post $x $y
-  event generate $m <ButtonPress-1>
+  ### Use tk_popup, as use of menu "post" doesn't allow for any way to cancel the menu
+  ### - escape key exits window altogether :(
+  ### Why were these events generated %( - S.A.
+  # event generate $w <ButtonRelease-1>
+  tk_popup $m $x $y
+  # event generate $m <ButtonPress-1>
 }
 
 
