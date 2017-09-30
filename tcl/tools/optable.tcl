@@ -392,9 +392,7 @@ proc ::optable::setOptions {} {
   wm deiconify $w
 }
 
-# previewHTML:
-#   Saves the report to a temporary file, and invokes the user's web
-#   browser to display it.
+### Save the report to a temporary file, and invoke the user's web browser to display it.
 
 proc ::optable::previewHTML {} {
   busyCursor .
@@ -413,7 +411,7 @@ proc ::optable::previewHTML {} {
   unbusyCursor .
 }
 
-#   Saves the current opening report to a file.
+###  Save the current opening report to a file.
 #   "fmt" is the format: text, html or latex.
 #   "type" is the report type: report, table, or both.
 
@@ -470,9 +468,7 @@ proc ::optable::saveReport {fmt} {
   unbusyCursor .
 }
 
-# latexifyTree
-#   Convert the plain text tree output used for text/html reports
-#   to a table for LaTeX output.
+### Convert the plain text tree output used for text/html reports to a table for LaTeX output.
 
 proc ::optable::latexifyTree {} {
   set ::optable::_data(moves) {}
@@ -788,9 +784,7 @@ proc ::optable::_subsec {text} {
   return "\n$::optable::_data(sec).$::optable::_data(subsec)  $text\n\n"
 }
 
-# report:
-#   Produces a report in the appropriate format. If "withTable" is true,
-#   the theory table is also included.
+### Produces a report in the appropriate format. If "withTable" is true, the theory table is also included.
 
 proc ::optable::report {fmt withTable {flipPos 0}} {
   global tr
@@ -1063,11 +1057,10 @@ proc ::optable::report {fmt withTable {flipPos 0}} {
     if {$fmt == "latex"} {
       append r "\n\\end{center}\n"
       append r "\\begin{tabularx}{0.9\\textwidth}{rlX} \\hline \n"
-    }    
-    if {$fmt == "latex"} {
       append r [sc_report opening moveOrders $maxOrders]
       append r "\\end{tabularx}\n"
     } else {
+      append r "\n"
       append r [::trans [sc_report opening moveOrders $maxOrders]]
     }
   }
@@ -1128,9 +1121,8 @@ proc ::optable::report {fmt withTable {flipPos 0}} {
   return $r
 }
 
-# table:
-#   Produces only the ECO table, not any other part of the report.
-#
+###   Produces only the ECO table, not any other part of the report.
+
 proc ::optable::table {fmt} {
   sc_report opening format $fmt
   set ::optable::_data(fmt) $fmt
@@ -1167,9 +1159,8 @@ proc ::optable::updateFavoritesMenu {} {
   }
 }
 
-# favoriteReportNames
-#   Return a list of the favorite report names.
-#
+### Return a list of the favorite report names.
+
 proc ::optable::favoriteReportNames {} {
   set reportNames {}
   foreach entry $::reportFavorites {
@@ -1475,7 +1466,7 @@ proc ::optable::reportFavoritesOK {} {
   switch $reportFormat {
     "html" { set suffix ".html" }
     "text" { set suffix ".txt" }
-    "latex" { set suffix "tex" }
+    "latex" { set suffix ".tex" }
   }
 
   set w .reportsProgress
