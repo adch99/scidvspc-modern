@@ -18810,9 +18810,9 @@ E50 "Nimzo-Indian: 4.e3 O-O 5.Nf3 b6"
 E50 "Nimzo-Indian: 4.e3 O-O 5.Nf3 c5"
   1.d4 Nf6 2.c4 e6 3.Nc3 Bb4 4.e3 O-O 5.Nf3 c5 *
 E50 "Nimzo-Indian: 4.e3 O-O 5.Nf3 c5 6.Bd3"
-  1.d4 Nf6 2.c4 e6 3.Nc3 Bb4 4.e3 O-O 5.Nf3 c5 6.Be2 *
-E50 "Nimzo-Indian: 4.e3 O-O 5.Nf3 c5 6.Be2"
   1.d4 Nf6 2.c4 e6 3.Nc3 Bb4 4.e3 O-O 5.Nf3 c5 6.Bd3 *
+E50 "Nimzo-Indian: 4.e3 O-O 5.Nf3 c5 6.Be2"
+  1.d4 Nf6 2.c4 e6 3.Nc3 Bb4 4.e3 O-O 5.Nf3 c5 6.Be2 *
 E50 "Nimzo-Indian: 4.e3 O-O 5.Nf3 c5 6.Bd3 Nc6"
   1.d4 Nf6 2.c4 e6 3.Nc3 Bb4 4.e3 O-O 5.Nf3 c5 6.Bd3 Nc6 *
 E50 "Nimzo-Indian: 4.e3 O-O 5.Nf3 c5 6.Bd3 Nc6 7.O-O"
