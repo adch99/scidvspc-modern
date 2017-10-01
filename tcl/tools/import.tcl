@@ -200,15 +200,13 @@ proc importVar {} {
   }
 }
 
-### Only used by optable ??
+### Only used by optable src/tcl
 
 proc importMoveList {line} {
   sc_move start
   sc_move addSan $line
   updateBoard -pgn
 }
-
-### Unused
 
 proc importMoveListTrans {line} {
 
