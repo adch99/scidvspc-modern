@@ -13949,11 +13949,7 @@ sc_report_select (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     }
     setMainFilter(db);
 
-#ifdef WINCE
-    my_Tcl_Free((char*) matches);
-#else
     delete[] matches;
-#endif
 
     return TCL_OK;
 }
