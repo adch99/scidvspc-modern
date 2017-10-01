@@ -59,7 +59,10 @@ proc playerInfo {{player ""} {raise 0}} {
     button $w.b.report -text [tr ToolsPlayerReport] -command {::preport::preportDlg $playerInfoName}
     button $w.b.tourney -text [tr WindowsTmt] -command {::tourney::Open $playerInfoName}
     label $w.b.space -width 2
-    button $w.b.update -textvar ::tr(Update) -command {playerInfo $playerInfoName} -width 10
+    button $w.b.update -textvar ::tr(Update) -command {
+      playerInfo $playerInfoName
+      playerInfoRefresh
+    } -width 10
     # button $w.b.help -textvar ::tr(Help) -command {helpWindow PInfo} -width 10
     button $w.b.close -textvar ::tr(Close) -command "destroy $w" -width 10
 
@@ -157,10 +160,6 @@ proc playerInfo {{player ""} {raise 0}} {
     # place forget $w.photo
   }
 
-  ::windows::gamelist::Refresh
-  ::maint::Refresh
-
-  #raiseWin $w
 }
 
 # Refresh after hyperlinks in the playerinfo widget are clicked
@@ -170,6 +169,7 @@ proc playerInfoRefresh {} {
   set ::glstart 1
   raiseWin .glistWin
   ::windows::stats::Refresh
+  ::windows::gamelist::Refresh
 }
 
 proc playerInfoConfigMenus {} {
