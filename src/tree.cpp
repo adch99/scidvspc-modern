@@ -364,27 +364,10 @@ errorT
 TreeCache::ReadFile (const char * fname)
 {
     // Only read the file if the cache is empty:
-    if (NumInUse > 0) { return OK; }
-#ifdef WINCE
-    /*FILE * */Tcl_Channel fp;
-    fileNameT fullname;
-    strCopy (fullname, fname);
-    strAppend (fullname, TREEFILE_SUFFIX);
-
-    //fp = fopen (fullname, "rb");
-    fp = mySilent_Tcl_OpenFileChannel(NULL, fullname, "r", 0666);
-    if (fp == NULL) {
-        return ERROR_FileOpen;
+    if (NumInUse > 0) {
+      return OK;
     }
- my_Tcl_SetChannelOption(NULL, fp, "-encoding", "binary");
- my_Tcl_SetChannelOption(NULL, fp, "-translation", "binary");
 
-    uint magic = readFourBytes (fp);
-    if (magic != TREEFILE_MAGIC) {
-        //fclose (fp);
-        my_Tcl_Close(NULL, fp);
-
-#else
     FILE * fp;
     fileNameT fullname;
     strCopy (fullname, fname);
@@ -398,7 +381,6 @@ TreeCache::ReadFile (const char * fname)
     uint magic = readFourBytes (fp);
     if (magic != TREEFILE_MAGIC) {
         fclose (fp);
-#endif
         return ERROR_Corrupt;
     }
     readTwoBytes (fp);  // Scid Version; unused
