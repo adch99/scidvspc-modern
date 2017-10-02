@@ -14345,41 +14345,41 @@ int
 sc_tree_search (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
     static const char * usageStr =
-      "Usage: sc_tree search [-hideMoves <0|1>] [-sort alpha|eco|frequency|score] [-time <0|1>] [-epd <0|1>] [-list <0|1>] [-fastmode <0|1>] [-adjust <0|1>] [-short <0|1>] [-base <baseNumber>]";
+	"Usage: sc_tree search [-hideMoves <0|1>] [-sort alpha|eco|frequency|score] [-time <0|1>] [-epd <0|1>] [-list <0|1>] [-fastmode <0|1>] [-adjust <0|1>] [-short <0|1>] [-base <baseNumber>]";
 
-    // Sort options: these should match the moveSortE enumerated type.
-    static const char * sortOptions[] = {
-        "alpha", "eco", "frequency", "score", NULL
-    };
+      // Sort options: these should match the moveSortE enumerated type.
+      static const char * sortOptions[] = {
+	  "alpha", "eco", "frequency", "score", NULL
+      };
 
-    char tempTrans[10];
+      char tempTrans[10];
 
-    bool hideMoves = false;
-    bool shortDisplay = false;
-    //  bool showTimeStats = true; // Stats are disabled at the moment
-    bool showEpdData = true;
-    bool listMode = false;
-    bool adjustMode = false;
-    bool fastMode = false;
-    int sortMethod = SORT_FREQUENCY; // default move order: frequency
+      bool hideMoves = false;
+      bool shortDisplay = false;
+      //  bool showTimeStats = true; // Stats are disabled at the moment
+      bool showEpdData = true;
+      bool listMode = false;
+      bool adjustMode = false;
+      bool fastMode = false;
+      int sortMethod = SORT_FREQUENCY; // default move order: frequency
 
-    scidBaseT * base = db;
-    db->bbuf->Empty();
+      scidBaseT * base = db;
+      db->bbuf->Empty();
 
-    static std::set<scidBaseT**> search_pool;
+      static std::set<scidBaseT**> search_pool;
 
-    // Check that there is an even number of optional arguments and
-    // parse them as option-value pairs:
-    int arg = 2;
-    int argsLeft = (argc - arg);
-    if (argsLeft % 2 != 0) { return errorResult (ti, usageStr); }
+      // Check that there is an even number of optional arguments and
+      // parse them as option-value pairs:
+      int arg = 2;
+      int argsLeft = (argc - arg);
+      if (argsLeft % 2 != 0) { return errorResult (ti, usageStr); }
 
-    while (arg < argc) {
-        if (strIsPrefix (argv[arg], "-sort")) {
-            sortMethod = strUniqueMatch (argv[arg+1], sortOptions);
-        } else if (strIsPrefix (argv[arg], "-hideMoves")) {
-            hideMoves = strGetBoolean (argv[arg+1]);
-        } else if (strIsPrefix (argv[arg], "-shortDisplay")) {
+      while (arg < argc) {
+	if (strIsPrefix (argv[arg], "-sort")) {
+	    sortMethod = strUniqueMatch (argv[arg+1], sortOptions);
+	} else if (strIsPrefix (argv[arg], "-hideMoves")) {
+	    hideMoves = strGetBoolean (argv[arg+1]);
+	} else if (strIsPrefix (argv[arg], "-shortDisplay")) {
             shortDisplay = strGetBoolean (argv[arg+1]);
         } else if (strIsPrefix (argv[arg], "-base")) {
             int baseNum = strGetInteger (argv[arg+1]);

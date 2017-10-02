@@ -2193,55 +2193,50 @@ search for games that do not reached this position!
   </p>
 
   <h3>Caching for Faster Results</h3>
+  <p><i>The Tree Cache is not as important as for older versions, as Scid now has an Interuptible Tree feature.</i></p>
   <p>
-  Scid maintains a cache of tree search results for the positions with the
-  most matching games. If you move forward and back in a game in tree mode,
-  you will see the tree window update almost instantly when the position
+  Scid maintains an in-memory cache of Tree Search results. If you move forward and back in a game in Tree Mode,
+  you will see the Tree Window update almost instantly when the position
   being searched for is in the cache.
+  Configuration of this feature is via the Tree Window menus.
   </p>
   <p>
-  The tree window has a file menu command named <term>Save Cache</term>.
-  When you select this, the current contents of the tree cache in memory
-  are written to a file (with the suffix <b>.stc</b>, in the same directory as the database)
-  to speed up future use of Tree mode with this database.
+  This cache can be written to disk for future use with the <b>Save Cache</b> command,
+  which writes the current cache to a file with the suffix <b>.stc</b>
+  , in the same directory as the database.  One may also select <b>Auto-Save Cache</b>
+  to automatically save the cache when the base is closed.
   </p>
   <p>
-  The <term>Fill cache file</term> command in the file menu of the tree
-  window fills the cache file with data for many opening positions.
+  The <b>Fill Cache File</b> command, fills the cache file with data for many opening positions.
   It does a tree search for about 100 of the most common opening positions,
   then saves the cache file.
   </p>
+  <p><i>
+  The maximum size of the Cache is configurable, and defaults to 1000 lines.
+  The Tree Cache file (.stc) is completely redundant. One may remove
+  it without affecting the database, and in fact it is discarded by Scid
+  whenever an action occurs that could leave it out of date - for example,
+  adding or replacing a game, sorting the database, or changing the cache size.
+  </i></p>
   <p>
-  The maximum number of lines in the Cache can be configured by File /
-  Cache size. The default are up to 1000 lines.
+  Alternatively, one may fill the cache with the contents of a
+  base or single game. The cache will be filled with
+  these contents, including all variationss, though gGenerally, the cache size will not be
+  large enough for a whole base. In this case, less common lines are discarded for those more common.
+  This is most helpful if one has one or more repertoire bases that can serve as input. 
   </p>
   <p>
-  Alternatively, one can fill the cache also with the content of a
-  base or a game by choosing File / Fill Cache with base and File /
-  Fill Cache with game, respectively. The cache will be filled with
-  the contents of these including all variations. This is most helpful
-  if one has one or more repertoire bases that can serve as input. 
-  <p>
-  Tree refresh can be dramatically enhanced if the database is sorted
-  by ECO code then compacted (see the <a Maintenance>maintenance</a>
-  window). Once this is achieved (the whole process can last several
-  hours), turn on the option <term>Fast mode</term>. The refresh of
-  the Tree window will be 20 times faster in average at the cost of
-  some inaccuracies (games not in current filter will not be taken
-  into account). By turning off the <term>Fast mode</term> option you
-  will see the difference in the number of games when all the
-  transpositions are taken into account.  If you want to get a preview
-  of statistics then get a precise Tree, use the option <term>Fast and
-  slow mode</term> 
-  </p>
-  <p>
-  Note that a tree cache (.stc) file is completely redundant; you can remove
-  it without affecting the database, and in fact it is removed by Scid
-  whenever an action occurs that could leave it out of date; for example,
-  adding or replacing a game, or sorting the database.
+  Tree Refresh can be sped-up if the database is sorted
+  by ECO code and then compacted (see the <a Maintenance>maintenance</a>
+  window). Once this is achieved (which can take some time),
+  turn on the option <b>Fast Mode</b>. Tree Window refresh will be 20 times faster on average
+  at the cost of some inaccuracies; games not in current filter will not be taken
+  into account. Also, Fast mode does not update the Tree Cache, nor
+  consider move transpositions; and to allow for this there is a third alternative.
+  The <b>Fast and Slow Mode</b> initially gives one a preview of statistics, then performs a slow update afterwards.
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.18, July 2017</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.19, October 2017</footer></p>
 }
 
 set helpTitle(TreeMasks) "Tree Masks"
