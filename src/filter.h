@@ -38,7 +38,7 @@ class Filter
     uint    FilterCount;    // Number of nonzero values in filter.
     uint    Capacity;       // Number of bytes allocated for Data[].
     byte *  Data;           // The actual filter data.
-    byte * oldDataTree; // keeps filter data to speed Tree searches (fastMode) 
+    byte *  oldDataTree; // keeps filter data to speed Tree searches (fastMode) 
     uint    CachedFilteredCount;  // These members cache the most recent
     uint    CachedIndex;          // filteteredCount to index translation.
     
@@ -59,10 +59,15 @@ class Filter
     void    SetFilterSize(uint size);
     uint    IndexToFilteredCount (uint index);
     uint    FilteredCountToIndex (uint filteredCount);
+    // Used by CompressedFilter class.
     const byte *  GetData () {
-        return (const byte *) Data; }    // Used by CompressedFilter class.
-    // declarations for "fastmode" tree search (should be made private with getters/setters ?)
-    const byte *  GetOldDataTree () {  return (const byte *) oldDataTree; }    // Used by Tree in fast mode
+        return (const byte *) Data;
+    }
+    // Declarations for "fastmode" tree search (should be made private with getters/setters ?)
+    // Used by Tree in fast mode
+    const byte *  GetOldDataTree () {
+         return (const byte *) oldDataTree;
+    }
     bool isValidOldDataTree; // true if the filter was saved from cache or calculated from all games
     ushort oldDataTreePly;
     void saveFilterForFastMode(uint ply);

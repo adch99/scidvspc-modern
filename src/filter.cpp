@@ -132,10 +132,8 @@ Filter::FilteredCountToIndex (uint filteredCount)
     return index;
 }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Filter::saveFilterForFastMode():
-//      Reads the compressed filter from the specified open file.
-//
+// Read the compressed filter from the specified open file.
+
 void Filter::saveFilterForFastMode(uint ply) {
   memcpy( (void*) GetOldDataTree(), GetData(), Size() );
   isValidOldDataTree = true;
