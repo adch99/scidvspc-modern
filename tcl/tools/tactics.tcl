@@ -454,7 +454,6 @@ namespace eval tactics {
 
     updateBoard -pgn
     set ::tactics::prevFen [sc_pos fen]
-    ::windows::gamelist::Refresh
     ::tree::refresh
     ::windows::stats::Refresh
     updateMenuStates
@@ -507,7 +506,6 @@ namespace eval tactics {
   proc abnormalContinuation {} {
     ::tactics::stopAnalyze
     ::tactics::resetValues
-    ::windows::gamelist::Refresh
     ::tree::refresh
     ::windows::stats::Refresh
     updateMenuStates
@@ -692,7 +690,6 @@ namespace eval tactics {
       }
     }
 
-    ::windows::gamelist::Refresh
     ::tree::refresh
     ::windows::stats::Refresh
     updateMenuStates

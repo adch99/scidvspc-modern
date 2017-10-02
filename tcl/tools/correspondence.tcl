@@ -2758,7 +2758,6 @@ namespace eval CorrespondenceChess {
 			}
 			set ::initialDir(base) [file dirname $fName]
 		}
-		::windows::gamelist::Refresh
 		::tree::refresh
 		::windows::stats::Refresh
 		updateMenuStates
@@ -2811,7 +2810,6 @@ namespace eval CorrespondenceChess {
 
 		CorrespondenceChess::updateConsole "info: search [sc_filter count]"
 
-		::windows::gamelist::Refresh
 		::windows::stats::Refresh
 
 		# There should be only one result. If so, load it and place the

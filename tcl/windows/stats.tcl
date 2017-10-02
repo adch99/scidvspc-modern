@@ -81,14 +81,22 @@ proc ::windows::stats::Open {} {
   ::windows::stats::Refresh
 }
 
+### Used as a hub to update after filter changed - S.A
+
 proc ::windows::stats::Refresh {} {
   variable display
   if {[winfo exists .playerInfoWin]} {
     playerInfo
   }
+  ::windows::gamelist::Refresh
+  ::maint::Refresh
+  updateStatusBar
   ::tools::graphs::filter::Refresh
   ::tools::graphs::absfilter::Refresh
-  if {! [winfo exists .statsWin]} { return }
+
+  if {! [winfo exists .statsWin]} {
+    return
+  }
 
   # Set up variables for translated phrases:
   set all [::utils::string::Capital $::tr(allGames)]

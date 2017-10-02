@@ -192,8 +192,6 @@ proc updateStatusBar {} {
   # Exit if engine 1 is running in status bar
   if {$::analysis(mini) && [winfo exists .analysisWin1]} {return}
 
-  ::maint::Refresh
-
   set statusBar "  "
 
   if {$moveEntry(Text) != ""} {

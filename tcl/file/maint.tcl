@@ -61,8 +61,6 @@ proc ::maint::SetGameFlags {flag type value} {
     default { return }
   }
   updateBoard
-  ::windows::gamelist::Refresh
-  ::maint::Refresh
   ::windows::stats::Refresh
 }
 
@@ -745,20 +743,19 @@ proc doMarkDups {{parent .}} {
           -variations $twinSettings(variations) \
           -delete $twinSettings(delete)} result]} {
     unbusyCursor .
-    ::windows::gamelist::Refresh
+    ::windows::stats::Refresh
     tk_messageBox -type ok -parent $parent -icon info \
         -title "Scid" -message $result
     set result 0
   } else {
     unbusyCursor .
-    ::windows::gamelist::Refresh
+    ::windows::stats::Refresh
     set message [subst $::tr(TwinCheckFound1)]
     if {$result > 0} {append message $::tr(TwinCheckFound2)}
     append message "."
     tk_messageBox -type ok -parent $parent -icon info -title [concat "Scid: " $::tr(Result)] \
         -message $message
   }
-  ::maint::Refresh
   return $result
 }
 
@@ -1562,11 +1559,10 @@ proc dualplus {n side} {
 }
 
 
-# shareTwinTags:
 #   Updates the tags of two twin games by sharing information,
 #   filling in the date, round or ratings of each game based on
 #   the other where possible.
-#
+
 proc shareTwinTags {g1 g2 {parent .}} {
   set sharelist [sc_game tags share check $g1 $g2]
   if {[llength $sharelist] == 0} { return }
@@ -1758,9 +1754,8 @@ proc compactGames {parent} {
   }
 
   set stats [sc_compact stats games_setfilter]
-  ::windows::stats::Refresh
   set ::glstart 1
-  ::windows::gamelist::Refresh
+  ::windows::stats::Refresh
 
   set numberDeleted [expr {[lindex $stats 0] - [lindex $stats 2]}]
   if {[tk_messageBox -title "$::tr(CompactDatabase): [file tail [sc_base filename]]" -parent $parent \
@@ -2514,9 +2509,8 @@ proc doCleaner {} {
   mtoolAdd $t "Done."
   sc_game new
   updateBoard
-  ::windows::gamelist::Refresh
+  ::windows::stats::Refresh
   ::crosstab::Refresh
-  ::maint::Refresh
   $w.b.close configure -state normal
   catch {grab release $w}
   unbusyCursor .

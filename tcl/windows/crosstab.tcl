@@ -356,8 +356,6 @@ proc ::crosstab::setFilter {{round {}}} {
 
   set glstart 1
   ::windows::stats::Refresh
-  ::windows::gamelist::Refresh
-  updateStatusBar
 }
 
 proc ::crosstab::Refresh {{game {}}} {

@@ -295,7 +295,6 @@ proc ::preport::makeReportWin {args} {
   ::htext::display $w.text $report
   unbusyCursor .
   ::windows::stats::Refresh
-  ::windows::gamelist::Refresh
 }
 
 
@@ -574,7 +573,7 @@ proc ::preport::report {fmt {withTable 1}} {
   }
   append r " ("
   if {$fmt == "ctext"} {
-    append r "<darkblue><run sc_report player select all 0; ::windows::stats::Refresh ; ::windows::gamelist::Refresh>"
+    append r "<darkblue><run sc_report player select all 0; ::windows::stats::Refresh>"
   }
   append r "$rgames"
   if {$fmt == "ctext"} { append r "</run></darkblue>"; }

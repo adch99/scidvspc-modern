@@ -1453,20 +1453,16 @@ catch {
   }
 }
 
-##################################################
-
-# updateMenuStates:
-#   Update all the menus, rechecking which state each item should be in.
+###  Update all the menus, rechecking which state each item should be in.
 
 proc updateMenuStates {} {
   global totalBaseSlots windowsOS dot_w
 
   set ::currentSlot [sc_base current]
   set lang $::language
-  set m .menu
+  set current $::currentSlot
 
-  # Switch to database number $i
-  set current [sc_base current]
+  set m .menu
   $m.file.switch delete 0 9
   
   for {set i 1} { $i <= $totalBaseSlots } { incr i } {
@@ -1474,7 +1470,7 @@ proc updateMenuStates {} {
 
     # Only show menu items for open database slots
     if {$fname != {[empty]} } {
-      $m.file.switch add command -command "set currentSlot $i" \
+      $m.file.switch add command -command "set ::currentSlot $i" \
 	  -label "$fname" -underline 5 -accelerator "control-$i" \
           -command "::file::SwitchToBase $i"
       bind .main <Control-Key-$i> "::file::SwitchToBase $i"
@@ -1596,7 +1592,6 @@ proc updateMenuStates {} {
   $m.tools.utils entryconfig [tr ToolsMaintCompact] -state $state
 
   ::search::Config
-  ::maint::Refresh
   ::bookmarks::Refresh
 }
 

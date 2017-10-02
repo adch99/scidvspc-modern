@@ -1421,7 +1421,7 @@ proc gsave { gnum } {
   }
 
   updateBoard -pgn
-  ::windows::gamelist::Refresh
+  ::windows::stats::Refresh
   updateTitle
   return 1
 }
@@ -2035,8 +2035,6 @@ while {$argc > 0} {
         }
       }
       set glstart 1
-      # needed ?
-      ::windows::gamelist::Refresh
       ::windows::stats::Refresh
     }
   } else {

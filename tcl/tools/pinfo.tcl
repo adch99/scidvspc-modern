@@ -169,7 +169,6 @@ proc playerInfoRefresh {} {
   set ::glstart 1
   raiseWin .glistWin
   ::windows::stats::Refresh
-  ::windows::gamelist::Refresh
 }
 
 proc playerInfoConfigMenus {} {
