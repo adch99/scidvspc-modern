@@ -354,7 +354,6 @@ proc ::tree::closeTree {baseNumber} {
   # Hack to stop another unusual coredump.
   # (Save game in clipbase with tree1 open but base1 not in use. Close tree)
   after idle {
-    ::windows::gamelist::Refresh
     ::windows::stats::Refresh
   }
 }
@@ -565,7 +564,6 @@ proc ::tree::dorefresh { baseNumber } {
 
   # ::tree::status "" $baseNumber
   if {$::tree(adjustfilter$baseNumber)} {
-    ::windows::stats::Refresh
     ### See the last game (bind $w <End> from gamelist.tcl)
     set totalSize [sc_filter count]
     set glstart $totalSize
@@ -576,7 +574,7 @@ proc ::tree::dorefresh { baseNumber } {
     if {$glstart > $lastEntry} {
       set glstart $lastEntry
     }
-    ::windows::gamelist::Refresh last
+    ::windows::stats::Refresh
   }
 
   # Only the most recent tree_search succeeds

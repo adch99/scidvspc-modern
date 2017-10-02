@@ -854,7 +854,6 @@ proc ::windows::gamelist::Remove {{shownext 0}} {
   $w delete $items
 
   ::windows::stats::Refresh
-  ::windows::gamelist::Refresh
   if {$shownext} {
     ::windows::gamelist::showNum $gl_num nobell
   }
@@ -1062,7 +1061,8 @@ proc setGamelistTitle {} {
   setTitle .glistWin "[tr WindowsGList]: $fname [sc_filter count]/[sc_base numGames] $::tr(games)" 
 }
 
-# called by file.tcl when db is changed
+### Called by refreshWindows (file.tcl) when db is changed
+### refreshWindows calls gamelist::Refresh later via ::windows::stats::Refresh
 
 proc ::windows::gamelist::Reload {} {
   global glistSortedBy glstart
@@ -1089,12 +1089,12 @@ proc ::windows::gamelist::Reload {} {
 
   set glistSortedBy {}
   sc_base sortup
-  ::windows::gamelist::Refresh
 }
 
 # Returns the treeview item for current game (if it is shown in widget)
 
 proc ::windows::gamelist::Refresh {{see {}}} {
+
   global glistCodes glstart glistSize glistSortColumn glistSortedBy glistStart glPieceMapping
 
   set w .glistWin
@@ -1120,7 +1120,6 @@ proc ::windows::gamelist::Refresh {{see {}}} {
 
   ::windows::gamelist::SetSize
 
-  updateStatusBar
   $w.tree delete [$w.tree children {}]
 
   # check boundries !
@@ -1279,7 +1278,6 @@ proc ::windows::gamelist::removeFromFilter {dir} {
   }
 
   ::windows::stats::Refresh
-  ::windows::gamelist::Refresh
   ::windows::gamelist::showNum $gl_num nobell
 }
 

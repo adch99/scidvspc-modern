@@ -146,7 +146,6 @@ proc ::search::board {} {
     .sb.b.stop configure -state disabled
     .sb.status configure -text $str
     set glstart 1
-    ::windows::gamelist::Refresh
 
     set gamesFound [lindex $str 0]
     if { $::searchRefBase && $gamesFound > 0 && $gamesFound != {Database}} {
@@ -265,7 +264,6 @@ proc ::search::moves {} {
       .sm.b.stop configure -state disabled
       set glstart 1
       ::search::loadFirstGame
-      ::windows::gamelist::Refresh
       ::windows::stats::Refresh
     }
     .sm.status configure -text $str

@@ -243,7 +243,6 @@ proc ::optable::makeReportWin {args} {
   regsub -all "\n" $report "<br>" report
   ::htext::display $w.text $report
   unbusyCursor .
-  ::windows::gamelist::Refresh
   ::windows::stats::Refresh
   set ::gameInfo(showMaterial) $old_showMaterial
 }

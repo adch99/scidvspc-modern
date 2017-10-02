@@ -39,7 +39,6 @@ proc ::search::filter::reset {{base {}}} {
   } else {
     set ::glistStart($base) 1
   }
-  ::windows::gamelist::Refresh
   ::windows::stats::Refresh
   updateMenuStates
 }
@@ -58,7 +57,6 @@ proc ::search::filter::negate {{base {}}} {
     sc_base switch $currentBaseNum
   }
 
-  ::windows::gamelist::Refresh
   ::windows::stats::Refresh
   updateMenuStates
 }
@@ -70,7 +68,6 @@ proc ::search::filter::end {} {
   global glstart
   sc_filter end
   ::move::End
-  ::windows::gamelist::Refresh
   ::windows::stats::Refresh
   updateMenuStates
 }
@@ -109,9 +106,7 @@ proc ::search::addFilterOpFrame {w {small 0}} {
 }
 
 
-# ::search::Config
-#
-#   Sets state of Search button in Header, Board and Material windows
+###  Sets state of Search button in Header, Board and Material windows
 
 proc ::search::Config {{state ""}} {
   if {$state == ""} {

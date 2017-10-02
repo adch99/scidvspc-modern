@@ -588,7 +588,6 @@ proc ::search::material {} {
     #tk_messageBox -type ok -title $::tr(SearchResults) -message $str
     .sm.status configure -text $str
     set glstart 1
-    ::windows::gamelist::Refresh
     ::search::loadFirstGame
     ::windows::stats::Refresh
   }

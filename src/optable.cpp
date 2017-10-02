@@ -2114,7 +2114,7 @@ OpTable::PopularMoveOrders (DString * dstr, uint count)
         if (Format == OPTABLE_CText) {
             dstr->Append ("<tab><darkblue>");
             dstr->Append ("<run sc_report ", Type, " select mo ");
-            dstr->Append (MoveOrder[i].id, "; ::windows::stats::Refresh ; ::windows::gamelist::Refresh>");
+            dstr->Append (MoveOrder[i].id, "; ::windows::stats::Refresh>");
         }
         if (forLatex) {            
             sprintf(tempStr, "%u", i+1);
@@ -2205,7 +2205,7 @@ OpTable::ThemeReport (DString * dstr, uint argc, const char ** argv)
         strPad (tempStr, argv[theme], longestLength, ' ');
         if (Format == OPTABLE_CText) {
             dstr->Append ("<darkblue><run sc_report ", Type, " select theme ");
-            dstr->Append (theme, "; ::windows::stats::Refresh ; ::windows::gamelist::Refresh>");
+            dstr->Append (theme, "; ::windows::stats::Refresh>");
         }
         dstr->Append (" ", tempStr);
         if (Format == OPTABLE_CText) { dstr->Append ("</run></darkblue>"); }
@@ -2334,7 +2334,7 @@ OpTable::EndMaterialReport (DString * dstr, const char * repGames,
             dstr->Append (nextCell);
             if (Format == OPTABLE_CText  &&  t == OPTABLE_Line) {
                 dstr->Append ("<darkblue><run sc_report ", Type);
-                dstr->Append (" select end ", i, "; ::windows::stats::Refresh ; ::windows::gamelist::Refresh>");
+                dstr->Append (" select end ", i, "; ::windows::stats::Refresh>");
             }
             dstr->Append (preNum, numStr, percentStr, postNum);
             if (Format == OPTABLE_CText  &&  t == OPTABLE_Line) {

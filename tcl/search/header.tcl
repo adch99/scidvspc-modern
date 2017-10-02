@@ -543,7 +543,6 @@ proc search::header {} {
 
     .sh.status configure -text "Result: $str"
     set glstart 1
-    ::windows::gamelist::Refresh
 
     ::search::loadFirstGame
 
