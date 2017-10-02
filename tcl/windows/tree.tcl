@@ -582,16 +582,16 @@ proc ::tree::dorefresh { baseNumber } {
 
   if {[winfo exists .treeBest$baseNumber]} {::tree::best $baseNumber}
 
-  # ========================================
   if { $tree(fastmode$baseNumber) == 2 } {
-    # ::tree::status "" $baseNumber
+    ### Slow + Fast mode - now redo the tree search in slow mode
     sc_progressBar $w.progress bar 251 16
-    set moves [sc_tree search -hide $tree(training$baseNumber) -sort $tree(order$baseNumber) -base $baseNumber -fastmode 0]
-    ### todo: should we have "-adjust $tree(adjustfilter$baseNumber)"  here ?
+
+    # Hmmm - why does the canvas/graph not get displayed if "-short" is not stipulated ?
+    set moves [sc_tree search -hide $tree(training$baseNumber) -sort $tree(order$baseNumber) -base $baseNumber \
+                              -fastmode 0 -adjust $tree(adjustfilter$baseNumber) -short $::tree::short]
 
     displayLines $baseNumber $moves
   }
-  # ========================================
 }
 
 ### Insert lines into the tree widget S.A.
