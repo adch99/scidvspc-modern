@@ -538,7 +538,6 @@ menuText S TreeFileFillWithBase "Rellenar caché con base" 0 \
   {Rellena el archivo caché con todas las partidas de la base actual}
 menuText S TreeFileFillWithGame "Rellenar caché con partida" 0 \
   {Rellena el fichero caché con movimientos de la partida actual en la base actual}
-menuText S TreeFileSetCacheSize "Tamaño de caché" 0 {Fija el tamaño del caché}
 menuText S TreeFileCacheInfo "Información de caché" 0 \
   {Información y uso del caché}
 menuText S TreeFileSave "Guardar archivo caché" 0 \
@@ -590,6 +589,7 @@ menuText S TreeOptShort "Pantalla corta" 0 {No mostrar información de ELO}
 menuText S TreeOptAutosave "Autoguardar archivo caché" 0 \
   {Guarda automáticamente el archivo caché cuando se cierra la ventana de árbol}
 menuText S TreeOptAutomask "Carga automática de máscara" 0 "Carga automática de máscara con un arbol abierto."
+menuText S TreeOptCacheSize "Tamaño de caché" 0 {Fija el tamaño del caché}
 menuText S TreeOptShowBar "Mostrar barra de progreso" 0 "Mostrar barra de progreso del árbol"
 menuText S TreeOptSortBest "Ordenar mejores partidas" 0 "Ordenar mejores partidas por ELO."
 menuText S TreeHelp "Ayuda" 1

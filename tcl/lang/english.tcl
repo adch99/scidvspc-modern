@@ -521,7 +521,6 @@ translate E TipAtStartup {Show tip on startup}
 menuText E TreeFile "Tree" 0
 menuText E TreeFileFillWithBase "Fill Cache with base" 0 {Fill the cache file with all games in current base}
 menuText E TreeFileFillWithGame "Fill Cache with game" 0 {Fill the cache file with current game in current base}
-menuText E TreeFileSetCacheSize "Cache size" 0 {Set the cache size}
 menuText E TreeFileCacheInfo "Cache info" 0 {Get info on cache usage}
 menuText E TreeFileSave "Save Cache File" 0 {Save the tree cache (.stc) file}
 menuText E TreeFileFill "Fill Cache File" 0 \
@@ -558,6 +557,7 @@ menuText E TreeOptTraining "Training" 0 {Turn on/off tree training mode}
 menuText E TreeOptShort "Short Display" 0 {Don't show ELO information}
 menuText E TreeOptAutosave "Auto-Save Cache" 0 {Auto-save the cache file when closing the tree window}
 menuText E TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
+menuText E TreeOptCacheSize "Cache size" 0 {Set the cache size}
 menuText E TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 menuText E TreeOptSortBest "Sort Best Games" 0 "Sort Best Games by ELO."
 menuText E TreeHelp "Help" 0

@@ -543,7 +543,6 @@ translate P TipAtStartup {Pokaż poradę przy starcie}
 menuText P TreeFile "Plik" 0
 menuText P TreeFileFillWithBase "Wypełnij bufor bazą" 0 {Wypełnij plik bufora wszystkimi partiami w aktualnej bazie}
 menuText P TreeFileFillWithGame "Wypełnij bufor partią" 0 {Wypełnij plik bufora aktualną partią}
-menuText P TreeFileSetCacheSize "Wielkość bufora" 0 {Ustaw wielkość bufora}
 menuText P TreeFileCacheInfo "Informacje o buforze" 0 {Wyświetl informacje o wykorzystaniu bufora}
 menuText P TreeFileSave "Zapisz bufor" 7 {Zapisz plik bufora (.stc)}
 menuText P TreeFileFill "Twórz standardowy plik cache" 0 {Wstaw typowe pozycje debiutowe do bufora}
@@ -583,6 +582,7 @@ menuText P TreeOptAutosave "Automatyczny zapis bufora" 0 \
   {Automatycznie zapisz plik bufora przy wyjściu}
 # ====== TODO To be translated ======
 menuText P TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
+menuText P TreeOptCacheSize "Wielkość bufora" 0 {Ustaw wielkość bufora}
 # ====== TODO To be translated ======
 menuText P TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 # ====== TODO To be translated ======

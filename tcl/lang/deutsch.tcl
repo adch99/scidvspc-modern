@@ -1,4 +1,4 @@
-### deutsch.tcl:
+Opttsch.tcl:
 #  German language support for Scid.
 #  Contributors: Bernhard Bialas, Jürgen Clos et al.
 #  Untranslated messages are marked with a "***" comment.
@@ -562,7 +562,6 @@ translate D TipAtStartup {Tipp beim Starten}
 menuText D TreeFile "Datei" 0
 menuText D TreeFileFillWithBase "Cache mit Datenbank füllen" 0 {Die Cache-Datei wird mit allen Partien der aktuellen Datenbank befüllt.}
 menuText D TreeFileFillWithGame "Cache mit Partie füllen" 0 {Die Cache-Datei wird mit der aktuellen Partien befüllt.}
-menuText D TreeFileSetCacheSize "Cachegröße" 0 {Cachegröße auswählen.}
 menuText D TreeFileCacheInfo "Cache Informationen" 0 {Info über Cachenutzung anzeigen.}
 menuText D TreeFileSave "Cache-Datei sichern" 12 \
   {Speichere die Zugbaum-Cache-Datei (.stc)}
@@ -607,6 +606,7 @@ menuText D TreeOptAutosave "Autom. Cache-Datei sichern" 4 \
   {Beim Schließen des Zugbaums automatisch Cache-Datei sichern}
 # ====== TODO To be translated ======
 menuText D TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
+menuText D TreeOptCacheSize "Cachegröße" 0 {Cachegröße auswählen.}
 # ====== TODO To be translated ======
 menuText D TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 # ====== TODO To be translated ======

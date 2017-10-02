@@ -587,7 +587,6 @@ translate B TipAtStartup {Dica ao iniciar}
 menuText B TreeFile "Arquivo" 0
 menuText B TreeFileFillWithBase "Carregar Cache com base" 0 {Carrega todos os jogos da base corrente no Cache}
 menuText B TreeFileFillWithGame "Carregar Cache com jogo" 0 {Carrega o jogo corrente da base corrente no Cache}
-menuText B TreeFileSetCacheSize "Tamanho do Cache" 0 {Define o tamanho do cache}
 menuText B TreeFileCacheInfo "Informação do Cache" 0 {Informações sobre a utilização do cache}
 menuText B TreeFileSave "Salvar arquivo de cache" 0 \
   {Salvar o arquivo de cache da arvore (.stc)}
@@ -632,6 +631,7 @@ menuText B TreeOptAutosave "Salvar automaticamente arquivo de cache" 0 \
   {Salvar automaticamente o arquivo de cache quando fechar a janela de arvore}
 # ====== TODO To be translated ======
 menuText B TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
+menuText B TreeOptCacheSize "Tamanho do Cache" 0 {Define o tamanho do cache}
 # ====== TODO To be translated ======
 menuText B TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 # ====== TODO To be translated ======

@@ -570,7 +570,6 @@ translate G TipAtStartup {Εμφάνιση Υπόδειξης στην Εκκί�
 menuText G TreeFile "Δένδρο" 0
 menuText G TreeFileFillWithBase "Γέμισμα Cache από Βάση" 18 {Γέμισμα της προσωρινής μνήμης με όλες τις παρτίδες της παρούσας Βάσης}
 menuText G TreeFileFillWithGame "Γέμισμα Cache από Παρτίδα" 18 {Γέμισμα της προσωρινής μνήμης με την συγκεκριμένη παρτίδα}
-menuText G TreeFileSetCacheSize "Μέγεθος Cache" 0 {Ορισμός μεγέθους προσωρινής μνήμης}
 menuText G TreeFileCacheInfo "Πληροφ. Cache" 5 {Πληροφορίες χρήσης προσωρινής μνήμης}
 menuText G TreeFileSave "Αποθήκευση Cache" 3 {Αποθήκευση σε αρχείο προσωρινής μνήμης (.stc)}
 menuText G TreeFileFill "Γέμισμα Αρχείου Cache" 0 \
@@ -611,6 +610,7 @@ menuText G TreeOptAutosave "Αυτομ.Αποθήκευση Cache" 0 \
   {Αυτόματη αποθήκευση της προσωρινής μνήμης με το κλείσιμο του παραθύρου}
 # ====== TODO To be translated ======
 menuText G TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
+menuText G TreeOptCacheSize "Μέγεθος Cache" 0 {Ορισμός μεγέθους προσωρινής μνήμης}
 # ====== TODO To be translated ======
 menuText G TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 # ====== TODO To be translated ======

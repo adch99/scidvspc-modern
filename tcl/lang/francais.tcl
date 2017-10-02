@@ -534,7 +534,6 @@ translate F TipAtStartup {Conseil au démarrage}
 menuText F TreeFile "Fichier" 0
 menuText F TreeFileFillWithBase "Remplir cache avec base" 0 {Remplir le cache avec toutes les parties de la base courante}
 menuText F TreeFileFillWithGame "Remplir cache avec partie" 0 {Remplir le cache avec la partie de la base courante}
-menuText F TreeFileSetCacheSize "Taille du cache" 0 {Taille du cache}
 menuText F TreeFileCacheInfo "Info cache" 0 {Afficher information sur l'utilisation du cache}
 menuText F TreeFileSave "Sauver le cache" 0
 menuText F TreeFileFill "Remplir le cache" 0
@@ -571,6 +570,7 @@ menuText F TreeOptShort "Short Display" 0 {Don't show ELO information}
 menuText F TreeOptAutosave "Sauver le cache automatiquement" 0
 # ====== TODO To be translated ======
 menuText F TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
+menuText F TreeOptCacheSize "Taille du cache" 0 {Taille du cache}
 # ====== TODO To be translated ======
 menuText F TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 # ====== TODO To be translated ======

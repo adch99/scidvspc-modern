@@ -617,8 +617,6 @@ menuText O TreeFileFillWithBase "Fill Cache with base" 0 {Fill the cache file wi
 # ====== TODO To be translated ======
 menuText O TreeFileFillWithGame "Fill Cache with game" 0 {Fill the cache file with current game in current base}
 # ====== TODO To be translated ======
-menuText O TreeFileSetCacheSize "Cache size" 0 {Set the cache size}
-# ====== TODO To be translated ======
 menuText O TreeFileCacheInfo "Cache info" 0 {Get info on cache usage}
 menuText O TreeFileSave "Lagre hurtigbuffer" 0 {Lagrer hurtigbufferfilen (.stc)}
 menuText O TreeFileFill "Fyll hurtigbuffer" 0 \
@@ -674,6 +672,8 @@ menuText O TreeOptAutosave "Autolagre hurtigbuffer" 0 \
   {Autolagrer hurtigbufferet når vinduet lukkes}
 # ====== TODO To be translated ======
 menuText O TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
+# ====== TODO To be translated ======
+menuText O TreeOptCacheSize "Cache size" 0 {Set the cache size}
 # ====== TODO To be translated ======
 menuText O TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 # ====== TODO To be translated ======
