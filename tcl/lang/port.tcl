@@ -508,7 +508,6 @@ translate U TipAtStartup {Dica ao iniciar}
 menuText U TreeFile "Arquivo" 0
 menuText U TreeFileFillWithBase "Carregar Cache com base" 0 {Carrega todos os jogos da base corrente no Cache}
 menuText U TreeFileFillWithGame "Carregar Cache com jogo" 0 {Carrega o jogo corrente da base corrente no Cache}
-menuText U TreeFileSetCacheSize "Tamanho da Cache" 0 {Define o tamanho do cache}
 menuText U TreeFileCacheInfo "Informação da Cache" 0 {Informações sobre a utilização do cache}
 menuText U TreeFileSave "Salvar arquivo de cache" 0 \
   {Salvar o arquivo de cache da arvore (.stc)}
@@ -550,6 +549,7 @@ menuText U TreeOptShort "Visualisação sumária" 0 {Não mostra Elo}
 menuText U TreeOptAutosave "Salvar automaticamente arquivo de cache" 0 \
   {Salvar automaticamente o arquivo de cache quando fechar a janela de arvore}
 menuText U TreeOptAutomask "Abrir máscara automaticamente" 0 "Auto-Load most recent mask with a tree open."
+menuText U TreeOptCacheSize "Tamanho da Cache" 0 {Define o tamanho do cache}
 menuText U TreeOptShowBar "Mostrar Barra de Progresso" 0 "Mostrar barra de progresso da árvore."
 menuText U TreeOptSortBest "Ordenar melhores jogos" 0 "Ordena lhores josgos por ELO."
 menuText U TreeHelp "Ajuda" 0

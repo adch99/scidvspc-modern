@@ -558,7 +558,6 @@ translate N TipAtStartup {Tip bij opstarten}
 menuText N TreeFile "BoomDatabase" 0
 menuText N TreeFileFillWithBase "Vul het cache met database" 0 {Vul het cachebestand met alle partijen uit de huidige database}
 menuText N TreeFileFillWithGame "Vul het cache met de partij" 0 {Vul het cachebestand met het huidige partij uit de huidige database}
-menuText N TreeFileSetCacheSize "Cache grootte" 0 {Stel de grootte van het cache bestand in}
 menuText N TreeFileCacheInfo "Cache info" 0 {Vraag informatie over het gebruik van de cache}
 menuText N TreeFileSave " BoomData Bewaren" 0 {Bewaar de boomdata in een boomcache (.stc) bestand}
 menuText N TreeFileFill "Vullen boomcache bestand" 0 \
@@ -600,6 +599,7 @@ menuText N TreeOptAutosave "Autom.cache-data Bewaren" 4 \
   {Automatisch bewaren van het cache bestand bij sluiten boomvenster}
 # ====== TODO To be translated ======
 menuText N TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
+menuText N TreeOptCacheSize "Cache grootte" 0 {Stel de grootte van het cache bestand in}
 # ====== TODO To be translated ======
 menuText N TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 # ====== TODO To be translated ======

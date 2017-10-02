@@ -572,7 +572,6 @@ translate I TipAtStartup {Suggerimento all'avvio}
 menuText I TreeFile "File" 0
 menuText I TreeFileFillWithBase "Riempi Cache con Database" 0 {Riempie la cache con tutte le partite nel database attuale}
 menuText I TreeFileFillWithGame "Riempi Cache con Partita" 0 {Riempie la cache con la partita corrente del database attuale}
-menuText I TreeFileSetCacheSize "Dimensione Cache" 0 {Seleziona la dimensione della cache}
 menuText I TreeFileCacheInfo "Informazioni Cache" 0 {Ottiene informazioni sull'uso della cache}
 menuText I TreeFileSave "Salva il file di cache" 0 \
   {Salva il file (.stc) della cache dell'albero}
@@ -628,6 +627,7 @@ menuText I TreeOptAutosave "File di cache per Auto-salvare" 0 \
   {Salva automaticamente il file di cache quando si chiude la finestra dell'albero}
 # ====== TODO To be translated ======
 menuText I TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
+menuText I TreeOptCacheSize "Dimensione Cache" 0 {Seleziona la dimensione della cache}
 # ====== TODO To be translated ======
 menuText I TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 # ====== TODO To be translated ======

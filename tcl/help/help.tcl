@@ -2141,7 +2141,7 @@ search for games that do not reached this position!
   Move (alphabetically), ECO code, Frequency, or Score.
   </p>
   <p>
-  The Adjust-Filter checkbox alters the gamelist/filter so that only games matching the current position are displayed.
+  The <b>Adjust-Filter</b> checkbox alters the gamelist/filter so that only games matching the current position are displayed.
   Its behaviour is a little complicated. Deselecting Adjust-Filter will set the regular filter to the <i>current</i>
   (adjusted) filter. But closing the Tree, will restore the regular filter to how it was when Adjust-Filter was selected.
 </p>
@@ -2193,47 +2193,43 @@ search for games that do not reached this position!
   </p>
 
   <h3>Caching for Faster Results</h3>
-  <p><i>The Tree Cache is not as important as for older versions, as Scid now has an Interuptible Tree feature.</i></p>
+  <p><i>The Tree Cache is not as important as previously, as Scid now has an Interuptible Tree feature.</i></p>
   <p>
-  Scid maintains an in-memory cache of Tree Search results. If you move forward and back in a game in Tree Mode,
-  you will see the Tree Window update almost instantly when the position
-  being searched for is in the cache.
+  Scid maintains an in-memory cache of tree search results. This allows the Tree Window to update much faster
+  when the current position is in the cache.
   Configuration of this feature is via the Tree Window menus.
   </p>
   <p>
   This cache can be written to disk for future use with the <b>Save Cache</b> command,
-  which writes the current cache to a file with the suffix <b>.stc</b>
-  , in the same directory as the database.  One may also select <b>Auto-Save Cache</b>
-  to automatically save the cache when the base is closed.
+  which writes the cache to a file with the suffix <b>.stc</b>,
+  in the same directory as the database.  One may also select <b>Auto-Save Cache</b>
+  to automatically save the cache when the base is closed; though this may not work when Scid is quit before closing a base.
   </p>
   <p>
-  The <b>Fill Cache File</b> command, fills the cache file with data for many opening positions.
-  It does a tree search for about 100 of the most common opening positions,
-  then saves the cache file.
+  The <b>Fill Cache File</b> command fills the cache with data for around 100 of the most common openings.
   </p>
   <p><i>
   The maximum size of the Cache is configurable, and defaults to 1000 lines.
-  The Tree Cache file (.stc) is completely redundant. One may remove
+  The cache file (.stc) is completely disposable. One may remove
   it without affecting the database, and in fact it is discarded by Scid
   whenever an action occurs that could leave it out of date - for example,
-  adding or replacing a game, sorting the database, or changing the cache size.
+  adding or replacing a game, sorting the database, or decreasing the cache size.
   </i></p>
   <p>
   Alternatively, one may fill the cache with the contents of a
-  base or single game. The cache will be filled with
-  these contents, including all variationss, though gGenerally, the cache size will not be
-  large enough for a whole base. In this case, less common lines are discarded for those more common.
-  This is most helpful if one has one or more repertoire bases that can serve as input. 
+  base or single game, including all variations. Generally, the cache will not be
+  large enough for a whole base. In this case, less common lines will be discarded for those more common.
+  This feature is useful if you have one, or more, repertoire bases that can serve as input. 
   </p>
   <p>
   Tree Refresh can be sped-up if the database is sorted
   by ECO code and then compacted (see the <a Maintenance>maintenance</a>
-  window). Once this is achieved (which can take some time),
+  window). Once this is done (which can take some time),
   turn on the option <b>Fast Mode</b>. Tree Window refresh will be 20 times faster on average
   at the cost of some inaccuracies; games not in current filter will not be taken
   into account. Also, Fast mode does not update the Tree Cache, nor
-  consider move transpositions; and to allow for this there is a third alternative.
-  The <b>Fast and Slow Mode</b> initially gives one a preview of statistics, then performs a slow update afterwards.
+  consider move transpositions. To allow for this there is a third Tree mode.
+  <b>Fast and Slow Mode</b> initially gives one a preview of statistics, then performs a slow update afterwards.
   </p>
 
   <p><footer>Updated: Scid vs. PC 4.19, October 2017</footer></p>

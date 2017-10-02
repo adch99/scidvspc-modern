@@ -491,7 +491,6 @@ translate L TipAtStartup {Näytä vinkki käynnistettäessä}
 menuText L TreeFile "Puu" 0
 menuText L TreeFileFillWithBase "Täytä välimuisti tietokannalla" 0 {Täytä välimuisti kaikilla nykyisessä tietokannassa olevilla peleillä}
 menuText L TreeFileFillWithGame "Täytä välimuisti pelillä" 0 {Täytä välimuistitiedosto nykyisen tietokannan nykyisellä pelillä}
-menuText L TreeFileSetCacheSize "Välimuistin koko" 0 {Aseta välimuistin koko}
 menuText L TreeFileCacheInfo "Välimuistin tiedot" 0 {Hanki tietoa välimuistin käytöstä}
 menuText L TreeFileSave "Tallenna välimuistitiedosto" 0 {Tallenna puuvälimuisti (.stc)tiedosto}
 menuText L TreeFileFill "Täytä välimuistitiedosto" 0 \
@@ -528,6 +527,7 @@ menuText L TreeOptTraining "Harjoitus" 0 {Käännä päälle/pois puuharjoitusmoodi}
 menuText L TreeOptShort "Lyhyt näyttö" 0 {Älä näytä ELO-informaatiota}
 menuText L TreeOptAutosave "Tallenna automaattisesti välimuisti" 0 {Tallenna automaattisesti välimuistitiedosto puuikkunaa suljettaessa}
 menuText L TreeOptAutomask "Lataa automaattisesti naamio" 0 "Lataa automaattisesti äskettäisin naamio auki olevalla puulla."
+menuText L TreeOptCacheSize "Välimuistin koko" 0 {Aseta välimuistin koko}
 menuText L TreeOptShowBar "Näytä edistymispalkki" 0 "Näytä puun edistymispalkki."
 menuText L TreeOptSortBest "Lajittele parhaat pelit" 0 "Lajittele parhaat pelit ECOn mukaan."
 menuText L TreeHelp "Apu" 0

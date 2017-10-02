@@ -15,7 +15,7 @@ proc ::tree::doConfigMenus { baseNumber  { lang "" } } {
   foreach idx {0 1 2 3 4} tag {File Mask Sort Opt Help} {
     configMenuText $m $idx Tree$tag $lang
   }
-  foreach idx {0 1 2 3 4 5 7 9 11} tag {Save Fill FillWithBase FillWithGame SetCacheSize CacheInfo Best Copy Close} {
+  foreach idx {0 1 2 3 4 6 8 10} tag {Save Fill FillWithBase FillWithGame CacheInfo Best Copy Close} {
     configMenuText $m.file $idx TreeFile$tag $lang
   }
   foreach idx {0 1 2 3 4 6 7 8 9 10 11} tag {New Open OpenRecent Save Close FillWithLine FillWithGame FillWithBase Search Info Display} {
@@ -24,7 +24,7 @@ proc ::tree::doConfigMenus { baseNumber  { lang "" } } {
   foreach idx {0 1 2 3} tag {Alpha ECO Freq Score } {
     configMenuText $m.sort $idx TreeSort$tag $lang
   }
-  foreach idx {0 1 3 4 5 6 7 9 10 11} tag {Lock Training SortBest Short ShowBar Automask Autosave Slowmode Fastmode FastAndSlowmode} {
+  foreach idx {1 2 4 5 6 7 8 9 11 12 13} tag {Lock Training SortBest Short ShowBar Automask Autosave CacheSize Slowmode Fastmode FastAndSlowmode} {
     configMenuText $m.opt $idx TreeOpt$tag $lang
   }
   foreach idx {0 1} tag {Tree Index} {
@@ -115,20 +115,16 @@ proc ::tree::Open {{baseNumber 0}} {
   $w.menu add cascade -label TreeOpt  -menu $w.menu.opt
   $w.menu add cascade -label TreeHelp -menu $w.menu.help
   foreach i {file mask sort opt help} {
-    menu $w.menu.$i -tearoff 0
+    menu $w.menu.$i
   }
+  $w.menu.opt configure -tearoff 1
+
 
   $w.menu.file add command -label TreeFileSave -command "::tree::treeFileSave $baseNumber"
   $w.menu.file add command -label TreeFileFill -command "::tree::prime $baseNumber"
   $w.menu.file add command -label TreeFileFillWithBase -command "::tree::primeWithBase $baseNumber"
   $w.menu.file add command -label TreeFileFillWithGame -command "::tree::primeWithGame"
 
-  menu $w.menu.file.size
-  foreach i { 250 500 1000 2000 5000 10000 } {
-    $w.menu.file.size add radiobutton -label "$i" -value $i -variable ::tree::cachesize($baseNumber) -command "::tree::setCacheSize $baseNumber $i"
-  }
-
-  $w.menu.file add cascade -menu $w.menu.file.size -label TreeFileSetCacheSize
   $w.menu.file add command -label TreeFileCacheInfo -command "::tree::getCacheInfo $baseNumber"
 
   $w.menu.file add separator
@@ -191,6 +187,13 @@ proc ::tree::Open {{baseNumber 0}} {
   }
   $w.menu.opt add checkbutton -label TreeOptAutomask -variable ::tree::mask::autoLoadMask
   $w.menu.opt add checkbutton -label TreeOptAutosave -variable tree(autoSave$baseNumber)
+  $w.menu.opt add cascade -menu $w.menu.opt.size -label TreeOptCacheSize
+
+  menu $w.menu.opt.size
+  foreach i { 250 500 1000 2000 5000 10000 } {
+    $w.menu.opt.size add radiobutton -label $i -value $i -variable ::tree::cachesize($baseNumber) \
+                                     -command "::tree::setCacheSize $baseNumber $i"
+  }
 
   $w.menu.opt add separator
 
@@ -247,7 +250,7 @@ proc ::tree::Open {{baseNumber 0}} {
   button $w.buttons.training -image tb_training -command "::tree::toggleTraining $baseNumber"
   ::utils::tooltip::Set $w.buttons.training [tr TreeOptTraining]
 
-  button $w.buttons.short -image tb_info -command "$w.menu.opt invoke 4" ; # TreeOptShort
+  button $w.buttons.short -image tb_info -command "$w.menu.opt invoke 5" ; # TreeOptShort
   ::utils::tooltip::Set $w.buttons.short [tr TreeOptShort]
 
   set helpMessage($w.buttons.best) TreeFileBest
@@ -1550,7 +1553,8 @@ proc ::tree::setCacheSize { base size } {
 proc ::tree::getCacheInfo { base } {
   set ci [sc_tree cacheinfo $base]
   tk_messageBox -title "Cache Info" -type ok -icon info \
-      -message "Cache used : [lindex $ci 0] / [lindex $ci 1]" -parent .treeWin$base
+      -message "Base: [file tail [sc_base filename $base]]
+Cache used : [lindex $ci 0] / [lindex $ci 1]" -parent .treeWin$base
 
 }
 

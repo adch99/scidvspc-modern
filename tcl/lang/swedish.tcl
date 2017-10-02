@@ -553,7 +553,6 @@ translate W TipAtStartup {Tips vid start}
 menuText W TreeFile "Fil" 0
 menuText W TreeFileFillWithBase "Fyll Cache med databas" 0 {Fyll Cachefilen med alla partier i den aktuella databasen}
 menuText W TreeFileFillWithGame "Fyll Cache med parti" 0 {Fyll Cachefilen med aktuellt parti i den aktuella databasen}
-menuText W TreeFileSetCacheSize "Cachestorlek" 0 {Ange Cachestorleken}
 menuText W TreeFileCacheInfo "Cacheinformation" 0 {Få information om Cacheanvändning}
 menuText W TreeFileSave "Spara cachefil" 0 {Spara trädcache (*.stc)-filen}
 menuText W TreeFileFill "Fyll cachefil" 0 \
@@ -594,6 +593,7 @@ menuText W TreeOptAutosave "Spara cache filen automatiskt" 0 \
   {Spara cachefilen automatiskt när trädfönstret stängs}
 # ====== TODO To be translated ======
 menuText W TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
+menuText W TreeOptCacheSize "Cachestorlek" 0 {Ange Cachestorleken}
 # ====== TODO To be translated ======
 menuText W TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 # ====== TODO To be translated ======

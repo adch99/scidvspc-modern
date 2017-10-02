@@ -617,8 +617,6 @@ menuText Y TreeFileFillWithBase "Fill Cache with base" 0 {Fill the cache file wi
 # ====== TODO To be translated ======
 menuText Y TreeFileFillWithGame "Fill Cache with game" 0 {Fill the cache file with current game in current base}
 # ====== TODO To be translated ======
-menuText Y TreeFileSetCacheSize "Cache size" 0 {Set the cache size}
-# ====== TODO To be translated ======
 menuText Y TreeFileCacheInfo "Cache info" 0 {Get info on cache usage}
 menuText Y TreeFileSave "Saèuvaj cache fajl" 0 {Saèuvaj cache (.stc) fajl stabla}
 menuText Y TreeFileFill "Ispuni cache fajl" 0 \
@@ -674,6 +672,8 @@ menuText Y TreeOptAutosave "Automatski saèuvaj cache fajl" 0 \
   {Automatski saèuvaj cache fajl pri zatvaranju prozora stabla}
 # ====== TODO To be translated ======
 menuText Y TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
+# ====== TODO To be translated ======
+menuText Y TreeOptCacheSize "Cache size" 0 {Set the cache size}
 # ====== TODO To be translated ======
 menuText Y TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 # ====== TODO To be translated ======

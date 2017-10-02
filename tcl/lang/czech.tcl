@@ -585,7 +585,6 @@ translate C TipAtStartup {Tip pøi spu¹tìní}
 menuText C TreeFile "Soubor" 0
 menuText C TreeFileFillWithBase "Naplnit cache z databáze" 0 {Naplnit cachovací soubor v¹emi partiemi z aktuální databáze}
 menuText C TreeFileFillWithGame "Naplnit cache partií" 0 {Naplnit cachovací soubor aktuální partií z aktuální databáze}
-menuText C TreeFileSetCacheSize "Velikost cache" 0 {Nastavit velikost cache}
 menuText C TreeFileCacheInfo "Informace o cache" 0 {Získat informaci o vyu¾ití cache}
 menuText C TreeFileSave "Ulo¾it cache soubor" 0 \
   {Ulo¾it stromový cache (.stc) soubor}
@@ -627,6 +626,7 @@ menuText C TreeOptAutosave "Automatické ukládání cache souboru" 0 \
   {Automatické ukládání cache souboru pøi uzavøení stromového okna}
 # ====== TODO To be translated ======
 menuText C TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
+menuText C TreeOptCacheSize "Velikost cache" 0 {Nastavit velikost cache}
 # ====== TODO To be translated ======
 menuText C TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 # ====== TODO To be translated ======

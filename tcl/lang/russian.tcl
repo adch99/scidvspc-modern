@@ -531,7 +531,6 @@ translate R TipAtStartup {Совет при загрузке}
 menuText R TreeFile "Файл" 0
 menuText R TreeFileFillWithBase "Заполнить кеш базой" 0 {Заполнить файл кеша всеми партиями из текущей базы}
 menuText R TreeFileFillWithGame "Заполнить кеш партией" 0 {Заполнить файл кеша текущей партией из текущей базы}
-menuText R TreeFileSetCacheSize "Размер кеша" 0 {Устанавливает размер кеша}
 menuText R TreeFileCacheInfo "Информация о кеше" 0 {Получает информацию об используемом кеше}
 menuText R TreeFileSave "Сохранить файл кеша" 0 {Сохранить файл кеша дерева (.stc)}
 menuText R TreeFileFill "Заполнить файл кеша" 0 \
@@ -572,6 +571,7 @@ menuText R TreeOptAutosave "Автосохранение файла кеша" 0 
   {Автосохранение файла кеша, когда закрывается окно дерева}
 # ====== TODO To be translated ======
 menuText R TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
+menuText R TreeOptCacheSize "Размер кеша" 0 {Устанавливает размер кеша}
 # ====== TODO To be translated ======
 menuText R TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 # ====== TODO To be translated ======
