@@ -1388,16 +1388,16 @@ proc ::tree::bestResetCols {w} {
     lappend blistColOrder $i
     lappend blistColWidth [expr {$width * 8}]
     lappend blistColAnchor $anchor
-    for {set i 1} {$i <= $count} {incr i} {
-      if {[winfo exists .treeBest$i.tree]} {
+    for {set j 1} {$j <= $count} {incr j} {
+      if {[winfo exists .treeBest$j.tree]} {
 	$w column $col -anchor $anchor
       }
     }
     incr i
   }
-  for {set i 1} {$i <= $count} {incr i} {
-    if {[winfo exists .treeBest$i.tree]} {
-      .treeBest$i.tree configure -displaycolumns $::blistColOrder
+  for {set j 1} {$j <= $count} {incr j} {
+    if {[winfo exists .treeBest$j.tree]} {
+      .treeBest$j.tree configure -displaycolumns $::blistColOrder
     }
   }
 }
