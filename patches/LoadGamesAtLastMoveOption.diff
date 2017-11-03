@@ -1,0 +1,341 @@
+This enables an option to load games at the last position.
+It is fully implemented, but it breaks 'loading at ply' for bestgames and probably other things.
+So isn't getting used for the time being. Maybe could get done properly with more testing, but too much of a hack anyway.
+S.A.
+
+Index: tcl/file/bookmark.tcl
+===================================================================
+--- tcl/file/bookmark.tcl	(revision 2759)
++++ tcl/file/bookmark.tcl	(working copy)
+@@ -169,7 +169,8 @@
+   }
+   set text [::bookmarks::New game]
+   # Don't remember ply for game history
+-  lset text 4 1
++  # and use '0' instead of '1' to indicate not to break optionsGotoLastMove
++  lset text 4 0
+   set i [lsearch $bookmarks(gamehistory) $text]
+   if {$i > -1} {
+     set bookmarks(gamehistory) [lreplace $bookmarks(gamehistory) $i $i]
+@@ -265,8 +266,11 @@
+       if {$success == -1} {
+ 	return
+       }
+-      sc_move pgn $ply
+       flipBoardForPlayerNames
++      # ply 0 used by gamehistory to indicate not to load to ply
++      if {$ply != 0} {
++        sc_move pgn $ply
++      }
+ 
+       # show this game in gamelist
+       set ::glistStart([sc_base current]) $best
+Index: tcl/lang/czech.tcl
+===================================================================
+--- tcl/lang/czech.tcl	(revision 2759)
++++ tcl/lang/czech.tcl	(working copy)
+@@ -371,6 +371,8 @@
+   "Ulo�it v�echny nastaviteln� volby do souboru $::optionsFile"
+ menuText C OptionsAutoSave "Automaticky ukl�dat volby p�i ukon�en�" 20 \
+   {Automaticky ukl�dat v�echny volby p�i ukon�en� Scidu}
++# ====== TODO To be translated ======
++menuText C OptionsGotoLastMove "Games Load at Last Move" 0 
+ 
+ # Help menu:
+ menuText C Help "N�pov�da" 0
+Index: tcl/lang/deutsch.tcl
+===================================================================
+--- tcl/lang/deutsch.tcl	(revision 2759)
++++ tcl/lang/deutsch.tcl	(working copy)
+@@ -357,6 +357,8 @@
+   "Alle einstellbaren Optionen in der Datei $::optionsFile sichern"
+ menuText D OptionsAutoSave "Autom. speichern bei Beenden" 0 \
+   {Alle Optionen beim Beenden von Scid automatisch speichern}
++# ====== TODO To be translated ======
++menuText D OptionsGotoLastMove "Games Load at Last Move" 0 
+ 
+ # Help menu:
+ menuText D Help "Hilfe" 0
+Index: tcl/lang/english.tcl
+===================================================================
+--- tcl/lang/english.tcl	(revision 2759)
++++ tcl/lang/english.tcl	(working copy)
+@@ -331,6 +331,7 @@
+ menuText E OptionsSave "Save Options" 0 "Save all settable options to the file $::optionsFile"
+ menuText E OptionsAutoSave "Auto-Save Options on Exit" 0 \
+   {Auto-save all options when exiting Scid}
++menuText E OptionsGotoLastMove "Games Load at Last Move" 0 
+ 
+ # Help menu:
+ menuText E Help "Help" 0
+Index: tcl/lang/finnish.tcl
+===================================================================
+--- tcl/lang/finnish.tcl	(revision 2759)
++++ tcl/lang/finnish.tcl	(working copy)
+@@ -300,6 +300,8 @@
+ menuText L OptionsSave "Tallenna vaihtoehdot" 0 "Tallenna kaikki asetettavissa olevat vaihtoehdot $::optionsFile"
+ menuText L OptionsAutoSave "Tallenna automaattisesti vaihtoehdot poistuessa" 0 \
+   {Tallenna automaattisesti kaikki vaihtoehdot poistuttaessa Scidist�}
++# ====== TODO To be translated ======
++menuText L OptionsGotoLastMove "Games Load at Last Move" 0 
+ 
+ # Help menu:
+ menuText L Help "Apu" 0
+Index: tcl/lang/francais.tcl
+===================================================================
+--- tcl/lang/francais.tcl	(revision 2759)
++++ tcl/lang/francais.tcl	(working copy)
+@@ -335,6 +335,8 @@
+ menuText F OptionsSave "Sauver les options" 0 "Sauver les options dans le fichier $::optionsFile"
+ menuText F OptionsAutoSave "Sauvegarde automatique des options" 0 \
+   {Sauvegarder automatiquement toutes les options en quittant Scid}
++# ====== TODO To be translated ======
++menuText F OptionsGotoLastMove "Games Load at Last Move" 0 
+ 
+ # Help menu:
+ menuText F Help "Aide" 0
+Index: tcl/lang/greek.tcl
+===================================================================
+--- tcl/lang/greek.tcl	(revision 2759)
++++ tcl/lang/greek.tcl	(working copy)
+@@ -360,6 +360,8 @@
+ menuText G OptionsSave "Αποθήκευση Ρυθμίσεων" 18 "Αποθήκευση όλων των ρυθμίσεων στο αρχείο $::optionsFile"
+ menuText G OptionsAutoSave "Αυτομ.Αποθηκ.στην Έξοδο" 11 \
+   {Αυτόματη αποθήκευση όλων των ρυθμίσεων κατά την έξοδο του προγράμματος Scid}
++# ====== TODO To be translated ======
++menuText G OptionsGotoLastMove "Games Load at Last Move" 0 
+ 
+ # Help menu:
+ menuText G Help "Βοήθεια" 0
+Index: tcl/lang/hungary.tcl
+===================================================================
+--- tcl/lang/hungary.tcl	(revision 2759)
++++ tcl/lang/hungary.tcl	(working copy)
+@@ -375,6 +375,8 @@
+   "Minden be�ll�that� �rt�ket elment a $::optionsFile f�jlba."
+ menuText H OptionsAutoSave "Be�ll�t�sok automatikus ment�se kil�p�skor." 0 \
+   {Automatikusan elment minden be�ll�t�st, amikor kil�psz SCID-b�l.}
++# ====== TODO To be translated ======
++menuText H OptionsGotoLastMove "Games Load at Last Move" 0 
+ 
+ # Help menu:
+ menuText H Help "Seg�ts�g" 0
+Index: tcl/lang/italian.tcl
+===================================================================
+--- tcl/lang/italian.tcl	(revision 2759)
++++ tcl/lang/italian.tcl	(working copy)
+@@ -360,6 +360,8 @@
+   "Salva tutte le opzioni definibili nel file $::optionsFile"
+ menuText I OptionsAutoSave "Salva Opzioni all'uscita" 0 \
+   {Salva automaticamente tutte le opzioni quando si esce da Scid}
++# ====== TODO To be translated ======
++menuText I OptionsGotoLastMove "Games Load at Last Move" 0 
+ 
+ # Help menu:
+ menuText I Help "Aiuto" 0
+Index: tcl/lang/nederlan.tcl
+===================================================================
+--- tcl/lang/nederlan.tcl	(revision 2759)
++++ tcl/lang/nederlan.tcl	(working copy)
+@@ -349,6 +349,8 @@
+   "Bewaar alle instellingen in het bestand $::optionsFile"
+ menuText N OptionsAutoSave "Automatisch bewaren opties tijdens afsluiten" 1 \
+   {Automatisch bewaren alle gewijzigde opties bij het afsluiten van ScidvsPC}
++# ====== TODO To be translated ======
++menuText N OptionsGotoLastMove "Games Load at Last Move" 0 
+ 
+ # Help menu:
+ menuText N Help "Help" 0
+Index: tcl/lang/norsk.tcl
+===================================================================
+--- tcl/lang/norsk.tcl	(revision 2759)
++++ tcl/lang/norsk.tcl	(working copy)
+@@ -400,6 +400,8 @@
+   "Lagre alle instillinger til $::optionsFile"
+ menuText O OptionsAutoSave "Autolagre innstillinger ved avslutning" 0 \
+   {Autolagre alle innstillinger n�r Scid avsluttes}
++# ====== TODO To be translated ======
++menuText O OptionsGotoLastMove "Games Load at Last Move" 0 
+ 
+ # Help menu:
+ menuText O Help "Hjelp" 0
+Index: tcl/lang/polish.tcl
+===================================================================
+--- tcl/lang/polish.tcl	(revision 2759)
++++ tcl/lang/polish.tcl	(working copy)
+@@ -340,6 +340,8 @@
+   "Zapamiętaj wszystkie ustawienia w pliku $::optionsFile"
+ menuText P OptionsAutoSave "Automatycznie zapisuj opcje" 0 \
+   {Automatycznie zapisz opcje przy zamykaniu programu}
++# ====== TODO To be translated ======
++menuText P OptionsGotoLastMove "Games Load at Last Move" 0 
+ 
+ menuText P Help "Pomoc" 2
+ menuText P HelpContents "Spis treści" 0 {Pokaż spis treści pomocy} 
+Index: tcl/lang/port.tcl
+===================================================================
+--- tcl/lang/port.tcl	(revision 2759)
++++ tcl/lang/port.tcl	(working copy)
+@@ -320,6 +320,8 @@
+   "Guarda a configura��o no arquivo $::optionsFile"
+ menuText U OptionsAutoSave "Guardar Op��es ao sair" 0 \
+   {Salva automaticamente todas as Op��es quando sair do Scid}
++# ====== TODO To be translated ======
++menuText U OptionsGotoLastMove "Games Load at Last Move" 0 
+ 
+ # Help menu:
+ menuText U Help "Ajuda" 0
+Index: tcl/lang/portbr.tcl
+===================================================================
+--- tcl/lang/portbr.tcl	(revision 2759)
++++ tcl/lang/portbr.tcl	(working copy)
+@@ -372,6 +372,8 @@
+   "Salva a configuracao no arquivo $::optionsFile"
+ menuText B OptionsAutoSave "Salva Opcoes ao sair" 0 \
+   {Salva automaticamente todas as opcoes quando sair do Scid}
++# ====== TODO To be translated ======
++menuText B OptionsGotoLastMove "Games Load at Last Move" 0 
+ 
+ # Help menu:
+ menuText B Help "Ajuda" 0
+Index: tcl/lang/russian.tcl
+===================================================================
+--- tcl/lang/russian.tcl	(revision 2759)
++++ tcl/lang/russian.tcl	(working copy)
+@@ -332,6 +332,8 @@
+ menuText R OptionsSave "Сохранить установки" 0 "Сохранить все установки в файл $::optionsFile"
+ menuText R OptionsAutoSave "Автосохранение установок при выходе" 0 \
+   {Автосохранение всех установок при выходе из программы}
++# ====== TODO To be translated ======
++menuText R OptionsGotoLastMove "Games Load at Last Move" 0 
+ 
+ # Help menu:
+ menuText R Help "Помощь" 2
+Index: tcl/lang/serbian.tcl
+===================================================================
+--- tcl/lang/serbian.tcl	(revision 2759)
++++ tcl/lang/serbian.tcl	(working copy)
+@@ -399,6 +399,8 @@
+   "Sa�uvaj sve opcije u fajl $::optionsFile"
+ menuText Y OptionsAutoSave "Auto-sa�uvaj opcije na izlasku" 0 \
+   {Auto-sa�uvaj sve opcije pri izlasku iz Scid-a}
++# ====== TODO To be translated ======
++menuText Y OptionsGotoLastMove "Games Load at Last Move" 0 
+ 
+ # Help menu:
+ menuText Y Help "Pomo�" 2
+Index: tcl/lang/spanish.tcl
+===================================================================
+--- tcl/lang/spanish.tcl	(revision 2759)
++++ tcl/lang/spanish.tcl	(working copy)
+@@ -346,6 +346,8 @@
+   "Guarda todas las opciones en el fichero $::optionsFile"
+ menuText S OptionsAutoSave "Autoguardar opciones al salir" 0 \
+   {Guarda autom�ticamente todas las opciones cuando se sale de Scid}
++# ====== TODO To be translated ======
++menuText S OptionsGotoLastMove "Games Load at Last Move" 0 
+ 
+ # Help menu:
+ menuText S Help "Ayuda" 1
+Index: tcl/lang/swedish.tcl
+===================================================================
+--- tcl/lang/swedish.tcl	(revision 2759)
++++ tcl/lang/swedish.tcl	(working copy)
+@@ -341,6 +341,8 @@
+   "Spara alla alternativ till en inst�llningsfil"
+ menuText W OptionsAutoSave "Autospara vid avslut" 1 \
+   {Spara alla alternativ n�r du avslutar Scid}
++# ====== TODO To be translated ======
++menuText W OptionsGotoLastMove "Games Load at Last Move" 0 
+ 
+ # Help menu:
+ menuText W Help "Hj�lp" 0
+Index: tcl/main.tcl
+===================================================================
+--- tcl/main.tcl	(revision 2759)
++++ tcl/main.tcl	(working copy)
+@@ -765,11 +765,13 @@
+     if {[string match $pattern $white]} {
+       ::board::flip $board 0
+       set ::flippedForPlayer 0
++      if {$::optionsGotoLastMove} { sc_move end }
+       return
+     }
+     if {[string match $pattern $black]} {
+       ::board::flip $board 1
+       set ::flippedForPlayer 1
++      if {$::optionsGotoLastMove} { sc_move end }
+       return
+     }
+   }
+@@ -779,6 +781,10 @@
+     ::board::flip $board 0
+   }
+   set ::flippedForPlayer 0
++
++  # Ugly to do this here... but convenient.
++  # Move to end of game if option set
++  if {$::optionsGotoLastMove} { sc_move end }
+ }
+ 
+ # updateBoard:
+Index: tcl/menus.tcl
+===================================================================
+--- tcl/menus.tcl	(revision 2759)
++++ tcl/menus.tcl	(working copy)
+@@ -834,6 +834,9 @@
+   }
+ }
+ 
++$m add checkbutton -label OptionsGotoLastMove -variable optionsGotoLastMove
++incr menuindex
++
+ $m add separator
+ incr menuindex
+ 
+@@ -862,8 +865,8 @@
+     ::pgn::indentVars ::pgn::indentComments ::defaultBackground ::::defaultGraphBackgroud ::enableBackground
+     ::pgn::shortHeader ::pgn::boldMainLine ::pgn::stripMarks 
+     ::pgn::symbolicNags ::pgn::moveNumberSpaces ::pgn::columnFormat ::pgn::showScrollbar
+-    myPlayerNames optionsAutoSave ::tree::mask::recentMask ::tree::mask::autoLoadMask ::tree::showBar ::tree::short ::tree::sortBest
+-    ecoFile suggestMoves showVarPopup showVarArrows 
++    ::tree::mask::recentMask ::tree::mask::autoLoadMask ::tree::showBar ::tree::short ::tree::sortBest
++    myPlayerNames optionsAutoSave optionsGotoLastMove ecoFile suggestMoves showVarPopup showVarArrows 
+     annotate(blunder) annotate(addTag) annotate(Moves) annotate(WithVars) annotate(WithScore) useAnalysisBook annotate(isVar) annotate(scoreType) annotate(cutoff) annotate(MissedMates)
+     annotate(WantedDepth) annotate(Depth) autoplayDelay animateDelay boardCoords boardSTM 
+     moveEntry(AutoExpand) moveEntry(Coord)
+@@ -1689,7 +1692,7 @@
+   .menu.tools.exportfilter entryconfig 4 -label "[tr ToolsExpFilterLaTeX] ([tr OprepViewLaTeX])"
+ 
+   foreach tag {Board Colour Toolbar Names Recent Fonts GInfo Fics Moves Startup Language
+-    Numbers Windows Theme Export ECO Spell Table BooksDir TacticsBasesDir Informant Sounds Save AutoSave} {
++    Numbers Windows Theme Export ECO Spell Table BooksDir TacticsBasesDir Informant Sounds Save AutoSave GotoLastMove} {
+     configMenuText .menu.options [tr Options$tag $oldLang] Options$tag $lang
+   }
+ 
+Index: tcl/start.tcl
+===================================================================
+--- tcl/start.tcl	(revision 2759)
++++ tcl/start.tcl	(working copy)
+@@ -616,6 +616,9 @@
+ # Auto-save options when exiting:
+ set optionsAutoSave 1
+ 
++# Automatically goto last move when games open
++set optionsGotoLastMove 0
++
+ #  Numeric locale: first char is decimal, second is thousands.
+ #  Example: ".," for "1,234.5" format; ",." for "1.234,5" format.
+ set locale(numeric) ".,"
+Index: tcl/windows/tourney.tcl
+===================================================================
+--- tcl/windows/tourney.tcl	(revision 2759)
++++ tcl/windows/tourney.tcl	(working copy)
+@@ -396,7 +396,6 @@
+       tk_messageBox -type ok -icon info -title "Scid" -message $result
+       return
+     }
+-    flipBoardForPlayerNames
+     updateBoard -pgn
+     updateTitle
+   }
