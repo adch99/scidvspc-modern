@@ -1,6 +1,5 @@
-This enables an option to load games at the last position.
-It is fully implemented, but it breaks 'loading at ply' for bestgames and probably other things.
-So isn't getting used for the time being. Maybe could get done properly with more testing, but too much of a hack anyway.
+This enables an option to load games at the last position - if they are not flagged to load at ply already.
+It is fully implemented... might be ok to use, but is a real hack, and needs testing
 S.A.
 
 Index: tcl/file/bookmark.tcl
@@ -258,13 +257,13 @@ Index: tcl/main.tcl
      if {[string match $pattern $white]} {
        ::board::flip $board 0
        set ::flippedForPlayer 0
-+      if {$::optionsGotoLastMove} { sc_move end }
++      if {$::optionsGotoLastMove && [sc_pos isAt start]} { sc_move end }
        return
      }
      if {[string match $pattern $black]} {
        ::board::flip $board 1
        set ::flippedForPlayer 1
-+      if {$::optionsGotoLastMove} { sc_move end }
++      if {$::optionsGotoLastMove && [sc_pos isAt start]} { sc_move end }
        return
      }
    }
@@ -275,7 +274,7 @@ Index: tcl/main.tcl
 +
 +  # Ugly to do this here... but convenient.
 +  # Move to end of game if option set
-+  if {$::optionsGotoLastMove} { sc_move end }
++  if {$::optionsGotoLastMove && [sc_pos isAt start]} { sc_move end }
  }
  
  # updateBoard:
