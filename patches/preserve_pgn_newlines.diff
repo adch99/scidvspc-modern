@@ -1,0 +1,52 @@
+This patch preserves newlines from PGN imports.
+This is probably desirable, but because the parser is used so much, it is not (yet) implemented.
+The special handling of newlines and spaceseen is to handle column formatted pgns.
+See https://sourceforge.net/p/scidvspc/discussion/959280/thread/144fb2e3/?limit=25#b0a6
+
+Index: src/misc.cpp
+===================================================================
+--- src/misc.cpp	(revision 2759)
++++ src/misc.cpp	(working copy)
+@@ -749,7 +749,7 @@
+     // Loop through the string compacting out unwanted whitespace:
+ 
+     while (*forward) {
+-        if (isspace (*forward)) {
++        if (isspace (*forward) && *forward != '\n') {
+             if (spaceSeen) {
+                 // Already seen whitespace, so skip over this char.
+             } else {
+@@ -758,7 +758,11 @@
+                 length++;
+             }
+         } else {
+-            spaceSeen = false;
++            // special handling of \n
++            if (*forward != '\n')
++                spaceSeen = false;
++            else
++                spaceSeen = true;
+             *back++ = *forward;
+             length++;
+         }
+@@ -771,7 +775,6 @@
+         ASSERT (back != str);
+         back--;
+         length--;
+-        ASSERT (*back == ' ');
+     }
+ 
+     *back = 0;
+Index: src/pgnparse.cpp
+===================================================================
+--- src/pgnparse.cpp	(revision 2763)
++++ src/pgnparse.cpp	(working copy)
+@@ -523,7 +523,7 @@
+     ASSERT(bufSize > 0);
+ 
+     while (ch != EndChar  &&  ch != '}') {
+-        if (NewlinesToSpaces  &&  ch == '\n') { ch = ' '; }
++        // if (NewlinesToSpaces  &&  ch == '\n') { ch = ' '; }
+         if (bufSize > 1) { *outPtr++ = (char) ch; bufSize--; }
+         ch = GetChar();
+     }
