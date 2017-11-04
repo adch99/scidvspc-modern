@@ -48,9 +48,7 @@ PgnParser::Reset()
     UnGetCount = 0;
     NumErrors = 0;
     BytesSeen = 0;
-#ifndef WINCE
     ErrorFile = NULL;
-#endif
     LineCounter = 0;
     GameCounter = 0;
     StorePreGameText = true;
@@ -522,7 +520,7 @@ PgnParser::GetComment (char * buffer, uint bufSize)
     int startLine = LineCounter;
     ch = GetChar();
 
-	 ASSERT(bufSize > 0);
+    ASSERT(bufSize > 0);
 
     while (ch != EndChar  &&  ch != '}') {
         if (NewlinesToSpaces  &&  ch == '\n') { ch = ' '; }
@@ -1162,6 +1160,9 @@ PgnParser::ParseMoves (Game * game, char * buffer, uint bufSize)
 
         case TOKEN_Comment:
             GetComment (buffer, bufSize);
+            // We remove extra spaces from comments.
+            // Problem is, this is fine for indented comments (as we'd find in column formatted pgn)
+            // , but not desirable for non-indented comments, where we want to preserve newlines (for eg)
             strSingleSpace (buffer);
             game->SetMoveComment (buffer);
             break;
