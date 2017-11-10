@@ -7846,11 +7846,18 @@ sc_game_load (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         return errorResult (ti, "This game appears to be corrupt.");
     }
 
+  // Get ply from tree filter if possible
+  if (db->treeFilter && db->treeFilter->Get(gnum) > 0) {
+      db->game->MoveToPly(db->treeFilter->Get(gnum) - 1);
+  } else {
+
     if (db->filter->Get(gnum) > 0) {
         db->game->MoveToPly(db->filter->Get(gnum) - 1);
     } else {
         db->game->MoveToPly(0);
     }
+
+  }
 
     db->game->LoadStandardTags (ie, db->nb);
     db->gameNumber = gnum;
