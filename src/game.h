@@ -32,9 +32,6 @@ char transPiecesChar(char c);
 extern int language; // default to english
 extern const char *langPieces[];
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-//  Game: Constants
-
 // Common NAG Annotation symbol values:
 const byte
     NAG_GoodMove = 1,
@@ -219,18 +216,9 @@ byte  game_parseNag (const char * str);
 
 uint strGetRatingType (const char * name);
 
-
-//////////////////////////////////////////////////////////////////////
-//  Game:  Class Definition
-
-static Position staticPosition;
-
 class Game
 {
 private:
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    //  Game:  Data structures
-
     gameNumberT GameNumber;     // first game in file is game 0
     bool        NonStandardStart;      // 1 if non-standard start.
     char *      FenString;      // fen string if non-standard start. (UNUSED)
@@ -300,8 +288,6 @@ private:
                                  // PGN output, as a byte offset.
     uint        PgnNextMovePos;  // The place of the next move in the
                                  // PGN output, as a byte offset.
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    //  Game:  Private Functions
 
     void       AllocateMoreMoves ();
     inline moveT *    NewMove();
@@ -310,8 +296,7 @@ private:
     errorT     DecodeTags (ByteBuffer * buf, bool storeTags);
     errorT     DecodeVariation (ByteBuffer * buf, byte flags, uint level);
 
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    //  Game:  Public Functions
+
 public:
     Game()      { Init(); }
 
