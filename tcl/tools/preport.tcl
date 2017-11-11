@@ -320,7 +320,7 @@ proc ::preport::setOptions {} {
                MaxGames ExtraMoves} {
     set from 0; set to 10; set tick 1; set res 1
     if {$i == "MaxGames"} {
-      set from 0; set to 1000; set tick 100; set res 100
+      set from 0; set to 1000; set tick 200; set res 100
     }
     if {$i == "sep"} {
       frame $w.f.fsep$row -height 2 -borderwidth 2 -relief sunken 
