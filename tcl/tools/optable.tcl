@@ -877,7 +877,7 @@ proc ::optable::report {fmt withTable {flipPos 0}} {
   if {$fmt == "ctext"} {
     append r "<darkblue><run sc_report opening select all 0; ::windows::stats::Refresh>"
   }
-  append r "$rgames"
+  append r [::utils::thousands $rgames]
   if {$fmt == "ctext"} { append r "</run></darkblue>"; }
   append r " $games)$n"
   set eco [sc_report opening eco]
@@ -1109,7 +1109,6 @@ proc ::optable::report {fmt withTable {flipPos 0}} {
       set comment [format $tr(OprepTableComment) $::optable(MaxGames)]
     }
     append r [sc_report opening print $numRows $sec $comment]
-    # puts [sc_report opening print $numRows $sec $comment]
   }
   append r $::optable::_docEnd($fmt)
 

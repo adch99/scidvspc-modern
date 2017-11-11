@@ -1609,7 +1609,7 @@ shows all filter games in the currently open database/PGN file.</p>
 and at the bottom you'll find the <a Switcher>Database Switcher</a>.</p>
 <p>Clicking a game will select it. Select multiple games using Control+Click and Shift+Click.
 Right-clicking game(s) presents a context menu for various actions. Double-clicking loads a game.</p>
-<p>Right-clicking a Column Title allows one to reorder them, or change the alignment.</p>
+<p>Right-clicking a Column Title allows one to reorder them ('add' also repositions a column), or change the alignment.</p>
 <p>Quick searches can be performed by entering text in the combo-box and pressing Enter, or clicking the <b>Filter</b> button.
 Use "+" as a logical AND with the <b>Filter</b> button. For example: "Kasparov+Karpov".
 Similarly, the entry-box allows finding a particular game by number. Both these widgets will load the current game by pressing Control+Enter.</p>
