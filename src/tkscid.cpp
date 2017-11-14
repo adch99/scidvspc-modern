@@ -39,9 +39,7 @@ static int currentBase = 0;
 static Position * scratchPos = NULL;   // temporary "scratch" position.
 static Game * scratchGame = NULL;      // "scratch" game for searches, etc.
 static PBook * ecoBook = NULL;         // eco classification pbook.
-#ifndef WINCE
 static SpellChecker * spellChecker [NUM_NAME_TYPES] = {NULL};  // Name correction.
-#endif
 
 static progressBarT progBar;
 
@@ -61,29 +59,16 @@ static uint clipbaseMaxGames = CLIPBASE_MAX_GAMES;
 
 // MAX_BASES is the maximum number of databases that can be open,
 // including the clipbase database.
-#ifdef WINCE
-const int MAX_BASES = 3;
-#else
 const int MAX_BASES = 9;
-#endif
 const int CLIPBASE_NUM = MAX_BASES - 1;
 
 // MAX_EPD is the maximum number of EPD files that can be open.
-#ifdef WINCE
-const int MAX_EPD = 0;
-#else
 const int MAX_EPD = 4;
-#endif
 static PBook * pbooks [MAX_EPD];
 
 // Declare scid_InitTclTk, to initialise the Tcl interpreter:
-#ifdef WINCE
 
-extern "C" int Tkscid_Init (Tcl_Interp * interp);
-
-#else
 int scid_InitTclTk (Tcl_Interp * interp);
-#endif
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // InvalidCommand():
@@ -197,7 +182,6 @@ recalcFlagCounts (scidBaseT * basePtr)
     for (i=0; i < NUM_RESULT_TYPES; i++) {
         stats->nResults[i] = 0;
     }
-#ifndef WINCE
     for (i=0; i < 1; i++) {
         stats->ecoCount0[i].count = 0;
         stats->ecoCount0[i].results[RESULT_White] = 0;
@@ -233,7 +217,6 @@ recalcFlagCounts (scidBaseT * basePtr)
         stats->ecoCount4[i].results[RESULT_Draw] = 0;
         stats->ecoCount4[i].results[RESULT_None] = 0;
     }
-#endif
     // Read stats from index entry of each game:
     for (uint gnum=0; gnum < basePtr->numGames; gnum++) {
         IndexEntry * ie = basePtr->idx->FetchEntry (gnum);
@@ -281,7 +264,6 @@ recalcFlagCounts (scidBaseT * basePtr)
         eco_ToExtendedString (eco, ecoStr);
         uint length = strLength (ecoStr);
         resultT result = ie->GetResult();
-#ifndef WINCE
         if (length >= 3) {
             uint code = 0;
             stats->ecoCount0[code].count++;
@@ -301,14 +283,12 @@ recalcFlagCounts (scidBaseT * basePtr)
                 stats->ecoCount4[code].results[result]++;
             }
         }
-#endif
     }
 }
 
 void
 recalcEstimatedRatings (NameBase * nb)
 {
-#ifndef WINCE
     // Update estimated ratings from spellcheck file if available:
     if (spellChecker[NAME_PLAYER] == NULL) { return; }
     for (idNumberT id=0; id < nb->GetNumNames(NAME_PLAYER); id++) {
@@ -323,7 +303,6 @@ recalcEstimatedRatings (NameBase * nb)
             }
         }
     }
-#endif
 }
 
 void
@@ -2447,13 +2426,8 @@ sc_base_duplicates (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
 
     uint deletedCount = 0;
     const uint GLIST_HASH_SIZE = 32768;
-#ifdef WINCE
-    gNumListPtrT * gHashTable = (gNumListPtrT *)my_Tcl_Alloc(sizeof(gNumListPtrT [GLIST_HASH_SIZE]));
-    gNumListT * gNumList = (gNumListT * )my_Tcl_Alloc(sizeof( gNumListT [db->numGames]));
-#else
     gNumListPtrT * gHashTable = new gNumListPtrT [GLIST_HASH_SIZE];
     gNumListT * gNumList = new gNumListT [db->numGames];
-#endif
 
     dupCriteriaT criteria;
     criteria.exactNames  = false;
@@ -2538,11 +2512,7 @@ sc_base_duplicates (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
 
     // Setup duplicates array:
     if (db->duplicates == NULL) {
-#ifdef WINCE
-        db->duplicates = (uint*)my_Tcl_Alloc(sizeof( uint [db->numGames]));
-#else
         db->duplicates = new uint [db->numGames];
-#endif
     }
     for (uint d=0; d < db->numGames; d++) {
         db->duplicates[d] = 0;
@@ -2686,13 +2656,8 @@ sc_base_duplicates (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
     db->idx->WriteHeader();
     recalcFlagCounts (db);
     if (showProgress) { updateProgressBar (ti, 1, 1); }
-#ifdef WINCE
-    my_Tcl_Free((char*)gHashTable);
-    my_Tcl_Free((char*) gNumList);
-#else
     delete[] gHashTable;
     delete[] gNumList;
-#endif
 
     return setUintResult (ti, deletedCount);
 }
@@ -4475,11 +4440,7 @@ sc_compact_names (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     for (nt = NAME_FIRST; nt <= NAME_LAST; nt++) {
         idNumberT numNames = nb->GetNumNames (nt);
-#ifdef WINCE
-        idMapping[nt] = (idNumberT *) my_Tcl_Alloc( sizeof(idNumberT [numNames]) );
-#else
         idMapping[nt] = new idNumberT [numNames];
-#endif
         for (idNumberT oldID = 0; oldID < numNames; oldID++) {
             uint frequency = nb->GetFrequency (nt, oldID);
             if (frequency > 0) {
@@ -4542,11 +4503,7 @@ sc_compact_names (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     }
 
     for (nt = NAME_FIRST; nt <= NAME_LAST; nt++) {
-#ifdef WINCE
-        my_Tcl_Free((char*) idMapping[nt]);
-#else
         delete[] idMapping[nt];
-#endif
     }
 
     if (err != OK) { return TCL_ERROR; }
@@ -5003,11 +4960,7 @@ sc_eco_translate (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         return errorResult (ti, "Usage: sc_eco translate <lang> <from> <to>");
     }
 
-#ifdef WINCE
-    ecoTranslateT * trans = (ecoTranslateT * )my_Tcl_Alloc( sizeof(ecoTranslateT));
-#else
     ecoTranslateT * trans = new ecoTranslateT;
-#endif
     trans->next = ecoTranslations;
     trans->language = argv[2][0];
     trans->from = strDuplicate (argv[3]);
@@ -5045,11 +4998,7 @@ translateECO (Tcl_Interp * ti, const char * strFrom, DString * dstrTo)
                     in++;
                 }
             }
-#ifdef WINCE
-            my_Tcl_Free((char*) temp);
-#else
             delete[] temp;
-#endif
         }
         trans = trans->next;
     }
@@ -7660,11 +7609,7 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             }
         }
         Tcl_AppendResult (ti, "</run></green>", NULL);
-#ifdef WINCE
-        my_Tcl_Free((char*) str);
-#else
         delete[] str;
-#endif
     }
 
 
@@ -9932,20 +9877,12 @@ sc_info_fsize (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     }
 
     const uint maxBytes = 65536;
-#ifdef WINCE
-    char * buffer =  my_Tcl_Alloc(sizeof( char [maxBytes]));
-#else
     char * buffer =  new char [maxBytes];
-#endif
     uint bytes = maxBytes - 1;
     if (bytes > fsize) { bytes = fsize; }
     if (pgnFile.ReadNBytes (buffer, bytes) != OK) {
         pgnFile.Close();
-#ifdef WINCE
-        my_Tcl_Free((char*) buffer);
-#else
         delete[] buffer;
-#endif
         return errorResult (ti, "Error reading file");
     }
     pgnFile.Close();
@@ -9984,11 +9921,7 @@ sc_info_fsize (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         }
         ngames = -ngames;
     }
-#ifdef WINCE
-        my_Tcl_Free((char*) buffer);
-#else
-        delete[] buffer;
-#endif
+    delete[] buffer;
     return setIntResult (ti, ngames);
 }
 
@@ -10071,7 +10004,6 @@ sc_info_limit (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 int
 sc_info_priority (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
-#ifndef WINCE
 #ifdef WIN32
     const char * usage = "Usage: sc_info priority <pid> [normal|idle]";
     if (argc < 3  ||  argc > 4) { return errorResult (ti, usage); }
@@ -10134,7 +10066,6 @@ sc_info_priority (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     int priority = getpriority (PRIO_PROCESS, pid);
     appendIntResult (ti, priority);
 #endif  // #ifdef WIN32
-#endif
     return TCL_OK;
 }
 
@@ -11079,11 +11010,7 @@ sc_pos_matchMoves (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                 Tcl_AppendElement (ti, str);
             }
         }
-#ifdef WINCE
-        my_Tcl_Free((char*) newPrefix);
-#else
         delete[] newPrefix;
-#endif
     }
 
     // If the prefix string starts with a file (a-h), also add coordinate
@@ -11169,20 +11096,12 @@ sc_pos_pgnBoard (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     if ( parser.ParseGame(g) == ERROR_NotFound) {
         // No PGN header tags were found, so try just parsing moves:
         g->Clear();
-#ifdef WINCE
-        char * buf = my_Tcl_Alloc(sizeof( char [8000]));
-#else
         char * buf = new char [8000];
-#endif
         parser.Reset (argv[2]);
         parser.SetEndOfInputWarnings (false);
         parser.SetResultWarnings (false);
         parser.ParseMoves (g, buf, 8000);
-#ifdef WINCE
-        my_Tcl_Free((char*) buf);
-#else
         delete[] buf;
-#endif
     }
 
     char boardStr [200];
@@ -11343,15 +11262,9 @@ sc_progressBar (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     case 6:
         progBar.state = true;
         progBar.interrupt = false;
-#ifdef WINCE
-        my_Tcl_Free((char*) progBar.canvName);
-        my_Tcl_Free((char*) progBar.rectName);
-        my_Tcl_Free((char*) progBar.timeName);
-#else
         delete[] progBar.canvName;
         delete[] progBar.rectName;
         delete[] progBar.timeName;
-#endif
         progBar.canvName = strDuplicate (argv[1]);
         progBar.rectName = strDuplicate (argv[2]);
         progBar.width = strGetInteger (argv[3]);
@@ -11455,15 +11368,9 @@ sc_name_correct (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     uint errorCount = 0;
     uint correctionCount = 0;
     uint nameCount = nb->GetNumNames(nt);
-#ifdef WINCE
-    idNumberT * newIDs = (idNumberT *) my_Tcl_Alloc(sizeof( idNumberT [nameCount]));
-    dateT * startDate = (dateT *) my_Tcl_Alloc(sizeof( dateT [nameCount]));
-    dateT * endDate = (dateT *) my_Tcl_Alloc(sizeof( dateT [nameCount]));
-#else
     idNumberT * newIDs = new idNumberT [nameCount];
     dateT * startDate = new dateT [nameCount];
     dateT * endDate = new dateT [nameCount];
-#endif
 
     for (idNumberT id=0; id < nameCount; id++) {
         newIDs[id] = id;
@@ -11509,26 +11416,18 @@ sc_name_correct (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     }
 
     if (correctionCount == 0) {
-#ifdef WINCE
-        my_Tcl_Free((char*) newIDs);
-#else
         delete[] newIDs;
         delete[] startDate;
         delete[] endDate;
-#endif
 
         return setResult (ti, "No valid corrections were found.");
     }
 
     // Write the name file first, for safety:
     if ((!db->memoryOnly)  &&  db->nb->WriteNameFile() != OK) {
-#ifdef WINCE
-        my_Tcl_Free((char*) newIDs);
-#else
         delete[] newIDs;
         delete[] startDate;
         delete[] endDate;
-#endif
         return errorResult (ti, "Error writing name file.");
     }
 
@@ -11616,25 +11515,17 @@ sc_name_correct (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         // Write the new index entry if it has changed:
         if (corrected) {
             if (db->idx->WriteEntries (&newIE, i, 1) != OK) {
-#ifdef WINCE
-        my_Tcl_Free((char*) newIDs);
-#else
-        delete[] newIDs;
-	delete[] startDate;
-	delete[] endDate;
-#endif
+		delete[] newIDs;
+		delete[] startDate;
+		delete[] endDate;
                 return errorResult (ti, "Error writing index file.");
             }
         }
     }
 
-#ifdef WINCE
-        my_Tcl_Free((char*) newIDs);
-#else
-        delete[] newIDs;
-	delete[] startDate;
-	delete[] endDate;
-#endif
+    delete[] newIDs;
+    delete[] startDate;
+    delete[] endDate;
 
     if (db->idx->WriteHeader() != OK) {
         return errorResult (ti, "Error writing index file.");
@@ -11917,7 +11808,6 @@ sc_name_edit (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 int
 sc_name_retrievename (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
-#ifndef WINCE
     const char * usageStr = "Usage: sc_name retrievename <player>";
     SpellChecker * spChecker = spellChecker[NAME_PLAYER];
 
@@ -11930,7 +11820,6 @@ sc_name_retrievename (ClientData cd, Tcl_Interp * ti, int argc, const char ** ar
         const char * note = spChecker->Correct (playerName);
         Tcl_AppendResult (ti, (note == NULL)? playerName : note, NULL);
     }
-#endif
     return TCL_OK;
 }
 
@@ -12280,11 +12169,7 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     bool seenRating = false;
     const uint monthMax = YEAR_MAX * 12;
     const uint monthMin = startYear * 12;
-#ifdef WINCE
-    eloT * eloByMonth = (eloT *) my_Tcl_Alloc( sizeof(eloT [monthMax]));
-#else
     eloT * eloByMonth = new eloT [monthMax];
-#endif
     for (uint month=0; month < monthMax; month++) { eloByMonth[month] = 0; }
 
     // if (setFilter || setOpponent) { db->dbFilter->Fill (0); }
@@ -12868,11 +12753,7 @@ sc_name_match (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     const char * prefix = argv[arg++];
     uint maxMatches = strGetUnsigned (argv[arg++]);
     if (maxMatches == 0) { return TCL_OK; }
-#ifdef WINCE
-    idNumberT * array = (idNumberT *) my_Tcl_Alloc(sizeof(idNumberT [maxMatches]));
-#else
     idNumberT * array = new idNumberT [maxMatches];
-#endif
     uint matches = db->nb->GetFirstMatches (nt, prefix, maxMatches, array);
     for (uint i=0; i < matches; i++) {
         uint freq = db->nb->GetFrequency (nt, array[i]);
@@ -12883,11 +12764,7 @@ sc_name_match (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             appendUintElement (ti, db->nb->GetElo (array[i]));
         }
     }
-#ifdef WINCE
-    my_Tcl_Free((char*) array);
-#else
     delete[] array;
-#endif
 
     return TCL_OK;
 }
@@ -13129,7 +13006,6 @@ sc_name_plist (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 int
 sc_name_ratings (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
-#ifndef WINCE
     const char * options[] = {
         "-nomonth", "-update", "-debug", "-test", "-change", "-filter" };
     enum {
@@ -13257,7 +13133,6 @@ sc_name_ratings (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     }
     appendUintElement (ti, numChangedRatings);
     appendUintElement (ti, numChangedGames);
-#endif
     return TCL_OK;
 }
 
@@ -13271,7 +13146,6 @@ sc_name_ratings (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 int
 sc_name_read (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
-#ifndef WINCE
     if (argc == 2) {
         for (nameT nt = NAME_FIRST; nt <= NAME_LAST; nt++) {
             uint numNames = 0;
@@ -13311,7 +13185,6 @@ sc_name_read (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         spellChecker[nt] = temp_spellChecker;
         appendUintElement (ti, spellChecker[nt]->NumCorrectNames());
     }
-#endif
     return TCL_OK;
 }
 
@@ -14857,9 +14730,7 @@ sc_tree_search (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             perf = perfSum / perfCount;
             uint score = (totalScore + 5) / 10;
             if (db->game->GetCurrentPos()->GetToMove() == BLACK) { score = 100 - score; }
-#ifndef WINCE
             perf = Crosstable::Performance (perf, score);
-#endif
         }
 
         if (listMode) {
@@ -15471,11 +15342,7 @@ patternT *
 addPattern (patternT * pattHead, patternT * addPatt)
 {
     // Create a new pattern structure:
-#ifdef WINCE
-    patternT * newPatt = (patternT *) my_Tcl_Alloc(sizeof(new patternT));
-#else
     patternT * newPatt = new patternT;
-#endif
 
     // Initialise it:
     newPatt->flag = addPatt->flag;
@@ -15497,11 +15364,7 @@ freePatternList (patternT * patt)
     patternT * nextPatt;
     while (patt) {
         nextPatt = patt->next;
-#ifdef WINCE
-        my_Tcl_Free((char*)patt);
-#else
         delete patt;
-#endif
         patt = nextPatt;
     }
 }
@@ -16229,11 +16092,7 @@ const char * titleStr [NUM_TITLES] = {
 bool *
 parseTitles (const char * str)
 {
-#ifdef WINCE
-    bool * titles = (bool * ) my_Tcl_Alloc(sizeof( bool [NUM_TITLES]));
-#else
     bool * titles = new bool [NUM_TITLES];
-#endif
     for (uint t=0; t < NUM_TITLES; t++) { titles[t] = false; }
 
     str = strFirstWord (str);
