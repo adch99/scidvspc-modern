@@ -7791,18 +7791,20 @@ sc_game_load (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         return errorResult (ti, "This game appears to be corrupt.");
     }
 
-  // Get ply from tree filter if possible
-  if (db->treeFilter && db->treeFilter->Get(gnum) > 0) {
-      db->game->MoveToPly(db->treeFilter->Get(gnum) - 1);
-  } else {
+    // Get ply from tree filter if no interesting ply from filter
+    // We have to consider things like "move search" performed, while tree is open.
 
-    if (db->filter->Get(gnum) > 0) {
-        db->game->MoveToPly(db->filter->Get(gnum) - 1);
+    uint ply = db->filter->Get(gnum);
+
+    if (ply <= 1 && db->treeFilter)
+        ply = db->treeFilter->Get(gnum);
+
+    if (ply > 0) {
+	db->game->MoveToPly(ply - 1);
     } else {
-        db->game->MoveToPly(0);
+	db->game->MoveToPly(0);
     }
 
-  }
 
     db->game->LoadStandardTags (ie, db->nb);
     db->gameNumber = gnum;
