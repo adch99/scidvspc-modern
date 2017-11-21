@@ -20,6 +20,8 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <stdlib.h>
+#include <iostream>
+#include <csetjmp>
 
 #include <algorithm>
 #include <utility>
@@ -14886,9 +14888,9 @@ int
 sc_search (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
     static const char * options [] = {
-        "board", "moves", "header", "material", NULL
+        "board", "moves", "cql", "header", "material", NULL
     };
-    enum { OPT_BOARD, OPT_MOVES, OPT_HEADER, OPT_MATERIAL };
+    enum { OPT_BOARD, OPT_MOVES, OPT_CQL, OPT_HEADER, OPT_MATERIAL };
 
     int index = -1;
     if (argc > 1) { index = strUniqueMatch (argv[1], options); }
@@ -14905,6 +14907,10 @@ sc_search (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     case OPT_MOVES:
 	ret = sc_search_moves (cd, ti, argc, argv);
+	break;
+
+    case OPT_CQL:
+	ret = sc_search_cql (cd, ti, argc, argv);
 	break;
 
     case OPT_HEADER:
@@ -15334,6 +15340,226 @@ sc_search_moves (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     return TCL_OK;
 }
 
+// Search on CQL syntax.
+// Lionel Hampton --  October 2017
+
+int
+sc_search_cql (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
+{
+    uint gameNum;
+    const char * usageStr =
+      "Usage: sc_search cql <filterOp> <stripSwitch> <silentSwitch> <syntax>";
+    bool showProgress = startProgressBar();
+
+    if (!db->inUse) return errorResult (ti, errMsgNotOpen(ti));
+
+    if (argc != 6) { return errorResult (ti, usageStr); }
+
+    filterOpT filterOp = strGetFilterOp (argv[2]);
+
+    // argv[3] is the strip switch
+    bool stripSwitch = false;
+    if (argv[3][0] == '1') stripSwitch = true;
+
+    // argv[4] is the silent switch
+    // This corresponds to the 'Add Comments' user option.
+    bool silentSwitch = true;
+    if (argv[4][0] == '1') silentSwitch = false;
+
+    // If the base is readonly, just run the query in silent mode.
+    if (db->fileMode==FMODE_ReadOnly) silentSwitch = true;
+
+    // This will let the engine run slightly more efficiently.
+    // The larger effect of silentSwitch is that we will simply not replace the game.
+    extern bool CqlSilent;
+    CqlSilent = silentSwitch;
+
+    // argv[5] is CQL syntax
+    // printf("CQL Syntax:\n%s\n", argv[5]);
+
+    // All cql based asserts leave an error msg in the cqlErrMsg global.
+    // However, the assert is not the only path to longjmp(), and the
+    // error msg is not always set. Hence, we null out the pointer before
+    // nesting our way down the call stack.  Additional diagnostic info
+    // (especially for syntax errors) is relayed in the cqlDiagnostic global.
+    extern char *cqlErrMsg, *cqlDiagnostic;
+    cqlErrMsg = NULL;
+    cqlDiagnostic = NULL;
+
+    // We believe it is safe to employ longjmp(), since all CQL destructors are trivial.
+    // Nonetheless, TODO: maybe should use C++ exception handling here...
+    extern std::jmp_buf jump_buffer;
+    bool jumpBoundary = false;
+    if (setjmp(jump_buffer) != 0 ) {
+      if (cqlErrMsg) Tcl_AppendResult (ti, cqlErrMsg, NULL);
+      else Tcl_AppendResult (ti, "Error reported back from CQL engine.", NULL);
+      if (cqlDiagnostic) Tcl_AppendResult (ti, "|", "ERROR: ", cqlDiagnostic, NULL);
+      if (jumpBoundary) {
+        // Do not commit the games matched and replaced thus far to the base.
+        return errorResult (ti, "longjmp() beyond expected boundary... see <stdout> for detail.");
+        fprintf(stderr, "\nERROR: longjmp() while matching game number %d\n", gameNum);
+      }
+      return TCL_OK;
+    }
+
+    // Set to true to show some useful info on <stdout>.
+    extern bool CqlShowLex, CqlShowParse, CqlDebug;
+    CqlShowLex = false;
+    CqlShowParse = false;
+    CqlDebug = false;
+
+    // Parse the CQL script.
+    bool parseBufferCql(char*);
+    parseBufferCql((char *)argv[5]);
+
+    // Working theory holds that:
+    // -- All parsing errors are caught above.
+    // -- No long jumps should occur beyond this point.
+    // -- If a jump does occur, either the game is corrupted or we found a CQL bug.
+    jumpBoundary = true;
+
+    Timer timer;  // Start timing this search.
+
+    uint skipcount = 0;
+    uint updateStart, update;
+    // this is a tradeoff... some queries are EXTREMELY compute-intensive
+    updateStart = update = 250;  // Update progress bar every 250 games
+    //updateStart = update = 1000;  // Update progress bar every 1000 games
+
+    // If filter operation is to reset the filter, reset it:
+    if (filterOp == FILTEROP_RESET) {
+        filter_reset (db, 1);
+        filterOp = FILTEROP_AND;
+    }
+    uint startFilterCount = startFilterSize (db, filterOp);
+
+    // Here is the loop that searches on each game:
+    IndexEntry * ie;
+    Game * g = scratchGame;  // TODO: how is this NOT a memory leak?
+    bool dirtyFlag = false;  // has a game been replaced?
+
+    for (gameNum=0; gameNum < db->numGames; gameNum++) {
+        // Update the percentage done bar:
+        if (showProgress) {
+            update--;
+            if (update == 0) {
+                update = updateStart;
+                updateProgressBar (ti, gameNum, db->numGames);
+                if (interruptedProgress()) { break; }
+            }
+        }
+
+        // First, apply the filter operation:
+        if (filterOp == FILTEROP_AND) {  // Skip any games not in the filter:
+            if (db->dbFilter->Get(gameNum) == 0) {
+                skipcount++;
+                continue;
+            }
+        } else /* filterOp==FILTEROP_OR*/ { // Skip any games in the filter:
+            if (db->dbFilter->Get(gameNum) != 0) {
+                skipcount++;
+                continue;
+            } else {
+                // OK, this game is NOT in the filter.
+                // Add it so filterCounts are kept up to date:
+                db->dbFilter->Set (gameNum, 1);
+            }
+        }
+
+        // Skip games with no gamefile record:
+        // TODO: What does this mean???
+        // Thought it would be non-standard openings with no moves (just
+        // a FEN tag), but no...
+        ie = db->idx->FetchEntry (gameNum);
+        if (ie->GetLength() == 0) {
+            db->dbFilter->Set (gameNum, 0);
+            skipcount++;
+            continue;
+        }
+
+        // Load the game.
+        if (db->gfile->ReadGame (db->bbuf, ie->GetOffset(), ie->GetLength()) != OK) {
+            return errorResult (ti, "Error reading game file.");
+        }
+
+        g->Decode (db->bbuf, GAME_DECODE_ALL); // variations, comments and non-standards
+        g->LoadStandardTags (ie, db->nb); // for metadata matches
+        g->SetNumber (gameNum + 1); // for game range tests
+        g->SetAltered(false);  // the CQL engine will set this flag when adding comments
+
+        char *comment, *match;
+        int countMatch;
+
+        // Strip existing MATCH markers left by a previous query.
+        if (stripSwitch) {
+          countMatch = 0;
+          g->MoveToPly(0);
+          while (g->MoveForward() == OK) {
+            if ((comment = g->GetMoveComment())) {
+              if ((match = strstr(comment, "MATCH"))) {
+                if (match == comment) g->SetMoveComment(NULL);
+                else match[0] = 0;  // truncate the mark and all that follows
+                countMatch++;
+              }
+            }
+          }
+          if (countMatch) g->SetAltered(true);
+        }
+
+        // See if the game matches.
+        bool match_gameCql(Game *);  // this is our surrogate in the cql code... see comment
+        extern uint matchPlyFirst; // set by the cql engine
+        if ( match_gameCql(g) ) {
+          if (matchPlyFirst >= 254) { matchPlyFirst = 254; } // is 254 enough cushion?
+          db->dbFilter->Set (gameNum, matchPlyFirst + 1);
+        } else {
+          db->dbFilter->Set (gameNum, 0); // remove the game from the filter
+        }
+
+        // Do not replace the game if we are in silent mode,
+        // regardless of whether or not the game has been altered.
+        if (g->GetAltered() && !silentSwitch) {
+          if (sc_savegame (ti, g, gameNum+1, db) != OK) { return TCL_ERROR; }
+          dirtyFlag = true;
+        }
+    }
+
+    // If necessary, update index and name files:
+    // Technically, the dirty flag will never be set if we're in silent mode,
+    // but anyone new to this code is likely to introduce a bug or two,
+    // so we make the double check.
+    if (dirtyFlag && !silentSwitch) {
+        db->gfile->FlushAll();
+        if (db->idx->WriteHeader() != OK) {
+            return errorResult (ti, "Error writing index file.");
+        }
+        // Not sure this is absolutely necessary, only that counts are
+        // bumped up and down when game is replaced.  But why should that
+        // matter... it's a wash.
+        if (! db->memoryOnly  &&  db->nb->WriteNameFile() != OK) {
+            return errorResult (ti, "Error writing name file.");
+        }
+    }
+
+    if (showProgress) { updateProgressBar (ti, 1, 1); }
+
+    // Now print statistics and time for the search:
+    char temp[200];
+    int centisecs = timer.CentiSecs();
+    if (gameNum != db->numGames) {
+        Tcl_AppendResult (ti, errMsgSearchInterrupted(ti), "  ", NULL);
+    }
+    sprintf (temp, "%d / %d  (%d%c%02d s)",
+             db->dbFilter->Count(), startFilterCount,
+             centisecs / 100, decimalPointChar, centisecs % 100);
+    Tcl_AppendResult (ti, temp, NULL);
+#ifdef SHOW_SKIPPED_STATS
+    sprintf(temp, "  Skipped %u games.", skipcount);
+    Tcl_AppendResult (ti, temp, NULL);
+#endif
+
+    return TCL_OK;
+}
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // addPattern():

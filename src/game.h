@@ -298,6 +298,10 @@ private:
 
 
 public:
+    errorT WritePGN_CQL(TextBuffer * tb, uint stoplocation);
+    errorT WriteToPGN_CQL(TextBuffer * tb);
+    void handleinitialcomment_CQL(TextBuffer * tb);
+
     Game()      { Init(); }
 
     ~Game();
@@ -344,6 +348,10 @@ public:
             return NULL;
         }
         return &(m->moveData);
+    }
+
+    moveT * GetCurrentMoveCQL () {
+        return CurrentMove;
     }
 
     inline void InitMove (moveT * m);

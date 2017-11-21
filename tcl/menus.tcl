@@ -353,6 +353,9 @@ set helpMessage($m,[incr menuindex]) SearchMaterial
 $m add command -label SearchMoves -command ::search::moves
 set helpMessage($m,[incr menuindex]) SearchMoves
 
+$m add command -label CQL -command ::search::cql
+set helpMessage($m,[incr menuindex]) CQL
+
 $m  add separator
 incr menuindex
 
