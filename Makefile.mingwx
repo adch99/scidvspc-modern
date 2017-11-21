@@ -70,6 +70,8 @@ LDFLAGS+= -m32
 RCFLAGS+= --target=pe-i386
 endif
 
+CQL_INCLUDE = -Isrc/cql -Isrc
+
 ### EXECS: all the evecutable programs compiled from C++ files.
 EXECS= pgnscid.exe scidt.exe scid.exe tcscid.exe scmerge.exe eco2epd.exe scidlet.exe
 
@@ -102,6 +104,103 @@ CHARSETCONVOBJS= src/charsetdetector.o src/charsetconverter.o \
       src/universalchardet/nsSBCharSetProber.o src/universalchardet/nsSBCSGroupProber.o \
       src/universalchardet/nsSJISProber.o src/universalchardet/nsUniversalDetector.o \
       src/universalchardet/nsUTF8Prober.o
+
+# Integrated CQL objects.
+CQLOBJS_I=  \
+	src/cql/i_assignnode.o src/cql/i_attacknode.o src/cql/i_beginvariationnode.o \
+	src/cql/i_betweennode.o src/cql/i_chesstypes.o src/cql/i_clone.o \
+	src/cql/i_colortransform.o src/cql/i_commentbase.o src/cql/i_composetransform.o \
+	src/cql/i_countable.o src/cql/i_countnode.o src/cql/i_cqlinitialize.o \
+	src/cql/i_cqlnodematch.o src/cql/i_cqlnode.o \
+	src/cql/i_dihedraltransform.o src/cql/i_directionmatch.o src/cql/i_direction.o \
+	src/cql/i_directionparameter.o src/cql/i_echodistancespec.o src/cql/i_echolcaspec.o \
+	src/cql/i_echolongestsubstringspec.o src/cql/i_echomatchinfo.o src/cql/i_echonode.o \
+	src/cql/i_echoparse.o src/cql/i_echosidetomovespec.o src/cql/i_echospec.o \
+	src/cql/i_echosquarespec.o src/cql/i_echosquarespec-transform.o src/cql/i_echotransformspec.o \
+	src/cql/i_elonode.o src/cql/i_eventnode.o src/cql/i_existsnode.o \
+	src/cql/i_extensionnode.o src/cql/i_filename.o src/cql/i_forallnode.o \
+	src/cql/i_futurenode.o src/cql/i_futurestarnode.o src/cql/i_gamesortinfo.o \
+	src/cql/i_holderconstituent.o src/cql/i_keywords.o src/cql/i_lexer.o \
+	src/cql/i_longestcommonsubstring.o src/cql/i_markboardmap.o src/cql/i_markboard.o \
+	src/cql/i_markboardstatic.o src/cql/i_matchcommentnode.o src/cql/i_matchcountnode.o \
+	src/cql/i_match.o src/cql/i_movebase.o src/cql/i_movenumbernode.o \
+	src/cql/i_nodematch.o src/cql/i_node.o src/cql/i_nodetransform.o \
+	src/cql/i_notnode.o src/cql/i_numericvariable.o src/cql/i_onnode.o \
+	src/cql/i_optionalconstituent.o src/cql/i_origChanges.o src/cql/i_originnode.o \
+	src/cql/i_ornode.o src/cql/i_orsetnode.o src/cql/i_parser.o \
+	src/cql/i_pastnode.o src/cql/i_paststarnode.o src/cql/i_pieceidnode.o \
+	src/cql/i_piecelocmatch.o src/cql/i_pieceloc.o src/cql/i_piecelocparse.o \
+	src/cql/i_piover4transform.o src/cql/i_playernode.o src/cql/i_plusconstituent.o \
+	src/cql/i_positionnode.o src/cql/i_powerdifferencenode.o src/cql/i_powernode.o \
+	src/cql/i_raynode.o src/cql/i_seqconstituent.o src/cql/i_seqret.o \
+	src/cql/i_sequencebase.o src/cql/i_sequencematch.o src/cql/i_setbase.o \
+	src/cql/i_shifttransform.o src/cql/i_sitenode.o src/cql/i_sortvalue.o \
+	src/cql/i_squaremask.o src/cql/i_squarevariable.o src/cql/i_starconstituent.o \
+	src/cql/i_tagvariable.o src/cql/i_token.o src/cql/i_tokenstream.o \
+	src/cql/i_transformbase.o src/cql/i_transform_members.o src/cql/i_transformnode.o \
+	src/cql/i_transform.o src/cql/i_transform-parse.o src/cql/i_transformsetnode.o \
+	src/cql/i_util.o src/cql/i_variable.o src/cql/i_variations.o \
+	src/cql/i_vectorconstituent.o src/cql/i_vectornode.o src/cql/i_version.o \
+	src/cql/i_yearnode.o
+
+# Standalone CQL objects.
+CQLOBJS_S= src/cql/s_cql.o \
+	src/cql/s_assignnode.o src/cql/s_attacknode.o src/cql/s_beginvariationnode.o \
+	src/cql/s_betweennode.o src/cql/s_chesstypes.o src/cql/s_clone.o \
+	src/cql/s_colortransform.o src/cql/s_commentbase.o src/cql/s_composetransform.o \
+	src/cql/s_countable.o src/cql/s_countnode.o src/cql/s_cqlinitialize.o \
+	src/cql/s_cqlnodematch.o src/cql/s_cqlnode.o \
+	src/cql/s_dihedraltransform.o src/cql/s_directionmatch.o src/cql/s_direction.o \
+	src/cql/s_directionparameter.o src/cql/s_echodistancespec.o src/cql/s_echolcaspec.o \
+	src/cql/s_echolongestsubstringspec.o src/cql/s_echomatchinfo.o src/cql/s_echonode.o \
+	src/cql/s_echoparse.o src/cql/s_echosidetomovespec.o src/cql/s_echospec.o \
+	src/cql/s_echosquarespec.o src/cql/s_echosquarespec-transform.o src/cql/s_echotransformspec.o \
+	src/cql/s_elonode.o src/cql/s_eventnode.o src/cql/s_existsnode.o \
+	src/cql/s_extensionnode.o src/cql/s_filename.o src/cql/s_forallnode.o \
+	src/cql/s_futurenode.o src/cql/s_futurestarnode.o src/cql/s_gamesortinfo.o \
+	src/cql/s_holderconstituent.o src/cql/s_keywords.o src/cql/s_lexer.o \
+	src/cql/s_longestcommonsubstring.o src/cql/s_markboardmap.o src/cql/s_markboard.o \
+	src/cql/s_markboardstatic.o src/cql/s_matchcommentnode.o src/cql/s_matchcountnode.o \
+	src/cql/s_match.o src/cql/s_movebase.o src/cql/s_movenumbernode.o \
+	src/cql/s_nodematch.o src/cql/s_node.o src/cql/s_nodetransform.o \
+	src/cql/s_notnode.o src/cql/s_numericvariable.o src/cql/s_onnode.o \
+	src/cql/s_optionalconstituent.o src/cql/s_origChanges.o src/cql/s_originnode.o \
+	src/cql/s_ornode.o src/cql/s_orsetnode.o src/cql/s_parser.o \
+	src/cql/s_pastnode.o src/cql/s_paststarnode.o src/cql/s_pieceidnode.o \
+	src/cql/s_piecelocmatch.o src/cql/s_pieceloc.o src/cql/s_piecelocparse.o \
+	src/cql/s_piover4transform.o src/cql/s_playernode.o src/cql/s_plusconstituent.o \
+	src/cql/s_positionnode.o src/cql/s_powerdifferencenode.o src/cql/s_powernode.o \
+	src/cql/s_raynode.o src/cql/s_seqconstituent.o src/cql/s_seqret.o \
+	src/cql/s_sequencebase.o src/cql/s_sequencematch.o src/cql/s_setbase.o \
+	src/cql/s_shifttransform.o src/cql/s_sitenode.o src/cql/s_sortvalue.o \
+	src/cql/s_squaremask.o src/cql/s_squarevariable.o src/cql/s_starconstituent.o \
+	src/cql/s_tagvariable.o src/cql/s_token.o src/cql/s_tokenstream.o \
+	src/cql/s_transformbase.o src/cql/s_transform_members.o src/cql/s_transformnode.o \
+	src/cql/s_transform.o src/cql/s_transform-parse.o src/cql/s_transformsetnode.o \
+	src/cql/s_util.o src/cql/s_variable.o src/cql/s_variations.o \
+	src/cql/s_vectorconstituent.o src/cql/s_vectornode.o src/cql/s_version.o \
+	src/cql/s_yearnode.o \
+	src/bytebuf.o src/crosstab.o src/date.o src/dstring.o \
+	src/filter.o src/game.o src/gfile.o src/index.o src/matsig.o \
+	src/mfile.o src/misc.o src/movelist.o src/myassert.o src/namebase.o \
+	src/optable.o src/pgnparse.o src/pbook.o src/position.o src/probe.o \
+	src/spellchk.o src/stored.o src/stralloc.o src/textbuf.o src/tree.o
+
+CQLHEADERS= \
+	src/cql/chesstypes.h src/cql/clonevec.h src/cql/commentflags.h \
+	src/cql/direction.h src/cql/echomatchinfo.h src/cql/echonode.h src/cql/echospec.h \
+	src/cql/lexer.h src/cql/gamesortinfo.h src/cql/markboard.h src/cql/myvector.h \
+	src/cql/node.h src/cql/parser.h src/cql/range.h src/cql/seqconstituent.h \
+	src/cql/seqret.h src/cql/sequence.h src/cql/sortvalue.h src/cql/squaremask.h \
+	src/cql/token.h src/cql/tokenstream.h src/cql/transform.h src/cql/util.h \
+	src/cql/variable.h src/cql/variationflags.h src/cql/cql.h \
+	src/attacks.h src/bytebuf.h src/common.h src/date.h src/dstring.h \
+	src/error.h src/filter.h src/game.h src/gfile.h src/hash.h \
+	src/index.h src/matsig.h src/mfile.h src/misc.h src/movelist.h \
+	src/myassert.h src/optable.h src/pgnparse.h src/position.h src/sqlist.h \
+	src/sqmove.h src/sqset.h src/stralloc.h src/strtree.h src/textbuf.h \
+	src/tokens.h src/tree.h
+
 
 
 ### ZLIBOBJS: object files in the zlib compression library.
@@ -175,23 +274,26 @@ scidlet.exe: src/scidlet.o src/engine.o src/recog.o $(OBJS)
 	$(LINK) $(LDFLAGS) -o scidlet.exe src/scidlet.o src/engine.o src/recog.o \
           src/misc.o src/position.o src/movelist.o src/dstring.o src/myassert.o
 
-scid.exe: src/scid.o $(OBJS) $(CHARSETCONVOBJS) src/tree.o src/filter.o \
+scid.exe: src/scid.o $(OBJS) $(CQLOBJS_I) $(CHARSETCONVOBJS) src/tree.o src/filter.o \
             src/pbook.o src/crosstab.o src/spellchk.o src/probe.o \
             src/optable.o src/engine.o src/recog.o src/tkdnd/TkDND_OleDND.o src/tk_selection.o scid.res
-	$(LINK) $(LDFLAGS) -o scid.exe src/scid.o $(OBJS) $(CHARSETCONVOBJS) \
+	$(LINK) $(LDFLAGS) -o scid.exe src/scid.o $(OBJS) $(CQLOBJS_I) $(CHARSETCONVOBJS) \
             src/tree.o src/filter.o src/pbook.o \
             src/crosstab.o src/spellchk.o src/probe.o \
             src/optable.o src/engine.o src/recog.o src/tkdnd/TkDND_OleDND.o src/tk_selection.o scid.res \
 	    -mwindows -lole32 -luuid -L$(TCL_DIR)/lib -ltk$(TCL_VERSION) -ltcl$(TCL_VERSION)
 
-tcscid.exe: src/tcscid.o $(OBJS) src/tree.o src/filter.o \
+tcscid.exe: src/tcscid.o $(OBJS) $(CQLOBJS_I) src/tree.o src/filter.o \
             src/pbook.o src/crosstab.o src/spellchk.o src/probe.o \
             src/optable.o src/engine.o src/recog.o $(CHARSETCONVOBJS)
-	$(LINK) $(LDFLAGS) -o tcscid.exe src/tcscid.o $(OBJS) $(CHARSETCONVOBJS) -ltcl$(TCL_VERSION) \
+	$(LINK) $(LDFLAGS) -o tcscid.exe src/tcscid.o $(OBJS) $(CQLOBJS_I) $(CHARSETCONVOBJS) -ltcl$(TCL_VERSION) \
             src/tree.o src/filter.o src/pbook.o \
             src/crosstab.o src/spellchk.o src/probe.o \
             src/optable.o src/engine.o src/recog.o \
             -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION)
+
+scql: $(CQLOBJS_S) $(CHARSETCONVOBJS)
+	$(LINK) $(LDFLAGS) -o scql $(CQLOBJS_S) $(CHARSETCONVOBJS) $(ZLIB) $(TCL_LIBRARY)
 
 eco2epd.exe: src/eco2epd.o src/pbook.o $(OBJS) $(CHARSETCONVOBJS)
 	$(LINK) -o eco2epd.exe src/eco2epd.o src/pbook.o $(OBJS) $(CHARSETCONVOBJS) -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION)
@@ -200,7 +302,7 @@ scid.res: scid.rc
 	$(RC) $(RCFLAGS) -o scid.res scid.rc
 
 clean:
-	rm -f src/*.o src/zlib/*.o src/polyglot/*.o src/universalchardet/*.o $(EXECS) scid.gui scid.res
+	rm -f src/*.o src/zlib/*.o src/polyglot/*.o src/universalchardet/*.o src/cql/*.o $(EXECS) scid.gui scid.res
 	$(MAKE) -C src/tkdnd/ -f Makefile.mingwx clean
 
 strip:
@@ -231,3 +333,9 @@ src/probe.o: src/probe.cpp src/egtb/tbindex.cpp src/egtb/tbdecode.c
 src/tkdnd/TkDND_OleDND.o: src/tkdnd/win/TkDND_OleDND.cpp
 	$(MAKE) -C src/tkdnd/ -f Makefile.mingwx CC="$(CC)" LINK="$(LINK)" CXXFLAGS="$(CXXFLAGS)" \
               WIN_TARGET="$(WIN_TARGET)" TCL_VERSION="$(TCL_VERSION)" TCL_DIR="$(TCL_DIR)"
+
+src/cql/s_%.o: src/cql/%.cpp
+	$(CXX) $(DEBUG) -O2 -std=c++0x -Wall -Wno-write-strings -Wno-char-subscripts  -Wno-parentheses -Wno-sign-compare -fdiagnostics-show-option -DSTANDALONE -DASSERTIONS $(CQL_INCLUDE) $(TCL_INCLUDE) -o $@ -c $<
+
+src/cql/i_%.o: src/cql/%.cpp
+	$(CXX) $(CFLAGS) $(SCIDFLAGS) $(DEBUG) -O2 -std=c++0x -Wall -Wno-write-strings -Wno-char-subscripts  -Wno-parentheses -Wno-sign-compare -fdiagnostics-show-option -DINTEGRATED -DASSERTIONS $(CQL_INCLUDE) $(TCL_INCLUDE) -o $@ -c $<

@@ -107,6 +107,9 @@ private:
     uint            Hash;           // Hash value.
     uint            PawnHash;       // Pawn structure hash value.
 
+    //uint            NumChecks;      // Number of checks.  CQL
+    //SquareList      CheckSquares;   // Stores pieces checking the king.  CQL
+
     MoveList        LegalMoves;     // list of legal moves
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -138,6 +141,9 @@ private:
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //  Position:  Public Functions
 public:
+    bool IsKingInStalemateCQL();
+    bool IsKingInMateCQL();
+    bool IsKingInCheckCQL();
 
 #ifdef WINCE
   void* operator new(size_t sz) {
@@ -178,6 +184,8 @@ public:
     void        SetPlyCounter (ushort x) { PlyCounter = x; }
     ushort      GetPlyCounter ()         { return PlyCounter; }
     ushort      GetFullMoveCount ()      { return PlyCounter / 2 + 1; }
+    MoveList *  GetLegalMoves ()         { return &LegalMoves; }
+
 
     // Methods to get the Board or piece lists -- used in game.cpp to
     // decode moves:

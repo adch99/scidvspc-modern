@@ -124,6 +124,7 @@ class MFile
     uint          ReadFourBytes ();
 
     inline const char * GetFileName ();
+    void skipNonAscii(); // CQL
 };
 
 

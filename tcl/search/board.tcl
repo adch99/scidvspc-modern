@@ -282,3 +282,140 @@ proc ::search::moves {} {
   wm state $w normal
   focus $w.g.moves
 }
+
+set ::search::cqlStripSwitch 0
+set ::search::cqlCommentSwitch 0
+
+proc ::search::cql {} {
+  global glstart
+
+  set w .scql
+  if {[winfo exists $w]} {
+    wm deiconify $w
+    raiseWin $w
+    return
+  }
+
+  toplevel $w
+  wm withdraw $w
+  wm title $w "CQL $::tr(Search)"
+
+  bind $w <Escape> "$w.b.cancel invoke"
+  #bind $w <Return> "$w.b.search invoke"
+  bind $w <F1> { helpWindow CQL }
+
+  label $w.type -text "CQL Script" -font font_Bold
+  pack $w.type -side top
+
+  pack [frame $w.g] -side top -expand 1 -fill both -padx 2 -pady 1
+  text $w.g.syntax -height 12 -width 64 -wrap word -yscrollcommand "$w.g.ybar set" -undo 1 -relief flat
+
+  grid $w.g.syntax -row 0 -column 0 -sticky news
+  grid [scrollbar $w.g.ybar -command "$w.g.syntax yview" -takefocus 0] \
+    -row 0 -column 1 -sticky news
+  grid rowconfig $w.g 0 -weight 1 -minsize 0
+  grid columnconfig $w.g 0 -weight 1 -minsize 0
+
+  bind $w.g.syntax <Control-a> {.scql.g.syntax tag add sel 0.0 end-1c ; break}
+  bind $w.g.syntax <Control-z> {catch {.scql.g.syntax edit undo} ; break}; # Control-z is default text binding anyway
+  bind $w.g.syntax <Control-y> {catch {.scql.g.syntax edit redo} ; break}; # but the others are not
+  bind $w.g.syntax <Control-r> {catch {.scql.g.syntax edit redo} ; break}
+
+  addHorizontalRule $w
+
+  pack [frame $w.s] -side top
+  label $w.s.strip -font font_Bold -text "Strip Position Marks"
+  radiobutton $w.s.stripyes -text Yes -variable ::search::cqlStripSwitch -value 1
+  radiobutton $w.s.stripno  -text No  -variable ::search::cqlStripSwitch -value 0
+
+  label $w.s.comment -font font_Bold -text "Allow Comments"
+  radiobutton $w.s.commentyes -text Yes -variable ::search::cqlCommentSwitch -value 1
+  radiobutton $w.s.commentno  -text No  -variable ::search::cqlCommentSwitch -value 0
+  pack $w.s.comment $w.s.commentyes $w.s.commentno [label $w.s.space -width 5] \
+       $w.s.strip   $w.s.stripyes   $w.s.stripno   -side left -pady 1
+
+  addHorizontalRule $w
+
+  ::search::addFilterOpFrame $w
+  addHorizontalRule $w
+
+  canvas $w.progress -height 20 -width 300  -relief solid -border 1
+  $w.progress create rectangle 0 0 0 0 -fill $::progcolor -outline $::progcolor -tags bar
+  $w.progress create text 295 10 -anchor e -font font_Regular -tags time \
+      -fill black -text "0:00 / 0:00"
+
+  frame $w.b
+  dialogbutton $w.b.stop -textvar ::tr(Stop) -command sc_progressBar
+  $w.b.stop configure -state disabled
+
+  dialogbutton $w.b.search -textvar ::tr(Search) -command {
+    set confirm [::game::ConfirmDiscard]
+    if {$confirm == 2} { return }
+    if {$confirm == 0} {
+      ::game::Save
+    }
+
+    set w .scql
+
+    busyCursor .
+    $w.b.stop configure -state normal
+    grab $w.b.stop
+    sc_progressBar $w.progress bar 301 21 time
+
+    set cqlSyntax [$w.g.syntax get 0.0 end]
+    #puts $cqlSyntax
+
+    set err [catch {
+      set str [sc_search cql $::search::filter::operation $::search::cqlStripSwitch \
+            $::search::cqlCommentSwitch $cqlSyntax]
+    } result]
+
+    unbusyCursor .
+    grab release $w.b.stop
+    $w.b.stop configure -state disabled
+
+    if {$err} {
+      tk_messageBox -title "Scid" -type ok -icon warning \
+        -message "Fatal error returned from CQL query:\n$result"
+      return
+    }
+
+    if {[sc_filter count] > 0} {
+      set glstart 1
+      ::search::loadFirstGame
+    } else {
+      # current game could be altered
+      if {$::search::cqlStripSwitch && $::search::cqlCommentSwitch} {
+        ::game::Reload
+      }
+    }
+    ::windows::stats::Refresh
+
+    set index [string first | $str]
+    if { $index == -1 } {
+      set strStatus $str
+      set strDiag {}
+    } else {
+      set strStatus [string range $str 0 $index-1]
+      set strDiag [string range $str $index+1 end]
+    }
+
+    $w.status configure -text $strStatus
+    $w.diagnostic configure -text $strDiag
+  }
+
+  dialogbutton $w.b.cancel -textvar ::tr(Close) -command "focus .main ; destroy $w"
+  packbuttons right $w.b.cancel $w.b.stop $w.b.search
+  label $w.diagnostic -text "" -width 1 -font font_Small -relief sunken -anchor w
+  label $w.status -text "" -width 1 -font font_Small -relief sunken -anchor w
+  pack $w.diagnostic -side bottom -fill x
+  pack $w.status -side bottom -fill x
+  pack $w.b -side bottom -fill x
+  pack $w.progress -side bottom -pady 2
+
+  ::search::Config
+
+  placeWinOverParent $w .
+  wm state $w normal
+  focus $w.g.syntax
+}

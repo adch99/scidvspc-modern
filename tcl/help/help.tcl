@@ -271,6 +271,7 @@ append helpText(Index) {
   <li><a Import CCRL>Computer Chess (CCRL) game imports</a></li>
   <li><a Author>Contact information</a></li>
   <li><a Contents>Contents</a></li>
+  <li><a CQL>CQL</a> Chess Query Language</li>
   <li><a Crosstable>Crosstable</a></li>
   </ul>
 
@@ -1055,6 +1056,8 @@ set helpText(Searches) {<h1>Searches in Scid</h1>
   <li><a Searches Header>General</a> (or Header) searches - such as Players, Result or Date</li>
   <li><a Searches Board>Game Positions</a> - matching the Current Board</li>
   <li><a Searches Material>Material and Piece Pattern</a> searches.</li>
+  <li><a Searches Move>Move Sequence</a> searches.</li>
+  <li><a CQL>Chess Query Language</a> searches.</li>
   </p>
   <p>
   Searches display their results by adjusting the <a Filter>Filter</a> with matching games.
@@ -1191,8 +1194,7 @@ set helpText(Searches) {<h1>Searches in Scid</h1>
   <p> For example, use <b>Rh8 ? R1h7</b> to find doubling of rooks on the H file.</p>
   <p>The <b>Check Test</b> option allows one to input moves of the form <b>Qh7+</b>
   (or <b>Rh8#</b>, but these checks slow the search down a little. Judicious
-use of <b>Side to Move</b> can speed up the search.</p>
-  </p>
+  use of <b>Side to Move</b> can speed up the search.</p>
 
   <h3><name Settings>Saving Search Settings</name></h3>
   <p>
@@ -1214,6 +1216,127 @@ use of <b>Side to Move</b> can speed up the search.</p>
   <p><footer>Updated: Scid vs. PC 4.15 June 2015</footer></p>
 }
 
+set helpTitle(CQL) "CQL"
+set helpText(CQL) {<h1>Chess Query Language</h1>
+  <p>
+  CQL is a powerful query language with a rich set of filters which
+  allow for the expression of some very complex searches. CQL also has a somewhat 
+  cryptic syntax and semantics which, on occasion,
+  will encourage the user to do some seriously stupid things.
+  </p>
+  <p>
+  Not to be an alarmist about it but, as a trivial example,
+  the innocuous-looking CQL script:
+  <ul>
+  <li><b>cql() comment "this is a comment"</b></li>
+  </ul>
+  will add a comment to every
+  move of every game in the database... probably not something one would want to
+  do with a 6 million game base.
+  </p>
+  <p>
+  Therefore, <b>CAUTION</b>: 1) One should back up one's database, and 2) Unless and until
+  one is thoroughly familiar with the subtleties of the language, one should
+  probably experiment with a base of not more than 50K games.
+  </p>  
+  <p>
+  The only change a CQL query might make to a game is by way of adding (or removing) 
+  comments.  But that constitutes a modified game and 
+  one should remember that every modified game effectively generates 
+  a <b>new</b> game in the database (though not from the user's perspective).
+  To avoid excessive game replacement, one should make liberal use of CQL's
+  <b>silent</b> keyword and conservative use of CQL's <b>comment</b> keyword.
+  </p>
+  <p>
+  With regard to verbosity, 
+  the CQL search window includes a radio button 'Add Comments' for controlling the running
+  mode of the CQL engine.  That option, from a user perspective, has the same effect
+  as setting the database to read-only (when set to No, the default).
+  However, setting that option to Yes should not be considered an imperative.
+  Some CQL filters and keywords (<b>silent</b> for example), will over-ride 
+  the control implications of the radio button.
+  </p>
+  <p>
+  Regardless of whether the engine is running in silent mode or verbose mode,
+  the game position will be set to the first matching positon flagged by the query.
+  In addition, when not running in silent mode, the CQL engine will add 
+  (or append) a MATCH mark as a move comment to every position which matches all the
+  filters of the CQL script.
+  Those position marks can be very convenient for locating the
+  positions one has searched for in each of the games in the resulting game filter.
+  </p>
+  <p>
+  However, those marks will linger unless they are explicitly stripped.  The CQL 
+  Search window includes a radio button setting for stripping position marks in games.
+  The mark and everything following the mark in the comment will be stripped.
+  The stripping takes place before the game is searched for a match, so the CQL engine
+  may add new marks after the old marks have been stripped.
+  </p>
+  <p>
+  To strip marks from
+  all games in the database, one has two options: 1) Strip all comments from the
+  database from the maintenance window, 2) Submit a query with the <b>silent</b> parameter
+  set in the CQL header and the strip option set to <b>Yes</b> and the add-comments
+  option set to <b>Yes</b>.
+  </p>
+  <p>
+  Note that marks will not be stripped out of variations
+  (the processing overhead is simply too high in this context).
+  If that becomes a serious issue, there are three options: 1) Option #1 above, 2)
+  export the database to PGN format and pipe the result through a stream editor, or
+  3) confine one's CQL queries to the main line (the default) or run silent when 
+  searching through variations.
+  </p>
+  <p>
+  Status and diagnostics returned from the CQL query will appear at the bottom
+  of the search window.  Any syntax error will display a brief explanation in the 
+  diagnostics area.  More diagnostics will be sent to <b>standard output</b>, which
+  can be observed by executing Scid from the command line. For the industrious user, even
+  more information can be had by setting the bools CqlShowLex, CqlShowParse, and
+  CqlDebug to <b>true</b> in tkscid.cpp, then rebuilding tkscid.
+  </p>
+  <p>
+  A few CQL keywords, which are non-sensical in an Scid context, have null effect.
+  The CQL header params <b>input</b> and <b>output</b> are obvious candidates. 
+  Also, the <b>sort filter</b> has been vanquished for the time being.
+  (If there is sufficient demand for the feature, it might be implemented at a later date.)
+  And the CQL header may now be given as empty ( <b>cql()</b> ), 
+  unlike with the standalone cql executable.
+  </p>
+  <p>
+  It's worth noting that for many searches which can be expressed with CQL,
+  the equivalent native Scid search (header, material, pattern, etc) will require much less
+  processing overhead.  The CQL engine is not optimized for trivial queries, but one
+  will find that the CQL language has far more depth and range when it comes to complex
+  queries than any other search feature presently available in Scid.
+  </p>
+  <p>
+  So much so that we offer one last cautionary note.  As a not-so-trivial example,
+  the CQL script:
+  <ul>
+  <li><b>cql()
+  piece 2 8 $pawn in Pa-h2
+  next* move from $pawn promote A
+  </b></li>
+  </ul>
+  which will match a game where multiple White pawns on the second rank 
+  eventually promote, is so compute-intensive that you will be sure that the application
+  has gone stone-cold dead.  It hasn't.  The progress bar will eventually come to
+  life and the Stop button will finally be enabled, and you may bail out of the search
+  if you like.  Or, alternatively, go to bed and check the results in the morning.
+  Be aware that the Stop button will exhibit considerable latency.
+  </p>
+  <p>
+  But enough with the dooms-day rhetoric.  Enjoy the adventure.
+  </p>
+  <p>
+  Thanks go to Lewis Stiller and Gady Costeff for their innovative work on CQL.
+  Documentation for the language can be found on 
+  <url http://www.gadycosteff.com/cql>their CQL site</url>
+  </p>
+
+  <p><footer>Updated: Scid vs. PC 4.19 Nov 2017</footer></p>
+}
 set helpTitle(Filter) "The Filter"
 set helpText(Filter) {<h1>The Filter</h1>
   <p>

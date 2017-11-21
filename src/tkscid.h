@@ -565,6 +565,7 @@ int sc_var_promote    (TCL_ARGS);
 int sc_search         (TCL_ARGS);
 int sc_search_board   (TCL_ARGS);
 int sc_search_moves   (TCL_ARGS);
+int sc_search_cql     (TCL_ARGS);
 int sc_search_material (TCL_ARGS);
 int sc_search_header  (TCL_ARGS);
 
