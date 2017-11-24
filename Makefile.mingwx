@@ -53,7 +53,7 @@ WARNINGS = -Wall
 
 CFLAGS = -DWIN32 -O2 $(WARNINGS) $(DEBUG)
 
-CXXFLAGS = -fno-rtti $(CFLAGS) $(SCIDFLAGS)
+CXXFLAGS = $(CFLAGS) $(SCIDFLAGS)
 
 LDFLAGS =
 RCFLAGS = --output-format=coff
@@ -335,7 +335,7 @@ src/tkdnd/TkDND_OleDND.o: src/tkdnd/win/TkDND_OleDND.cpp
               WIN_TARGET="$(WIN_TARGET)" TCL_VERSION="$(TCL_VERSION)" TCL_DIR="$(TCL_DIR)"
 
 src/cql/s_%.o: src/cql/%.cpp
-	$(CXX) $(DEBUG) -O2 -std=c++0x -Wall -Wno-write-strings -Wno-char-subscripts  -Wno-parentheses -Wno-sign-compare -fdiagnostics-show-option -DSTANDALONE -DASSERTIONS $(CQL_INCLUDE) $(TCL_INCLUDE) -o $@ -c $<
+	$(CXX) $(CXXFLAGS) -std=c++0x -Wall -Wno-write-strings -Wno-char-subscripts  -Wno-parentheses -Wno-sign-compare -fdiagnostics-show-option -DSTANDALONE $(CQL_INCLUDE) $(TCL_INCLUDE) -o $@ -c $<
 
 src/cql/i_%.o: src/cql/%.cpp
-	$(CXX) $(CFLAGS) $(SCIDFLAGS) $(DEBUG) -O2 -std=c++0x -Wall -Wno-write-strings -Wno-char-subscripts  -Wno-parentheses -Wno-sign-compare -fdiagnostics-show-option -DINTEGRATED -DASSERTIONS $(CQL_INCLUDE) $(TCL_INCLUDE) -o $@ -c $<
+	$(CXX) $(CXXFLAGS) -std=c++0x -Wall -Wno-write-strings -Wno-char-subscripts  -Wno-parentheses -Wno-sign-compare -fdiagnostics-show-option -DINTEGRATED $(CQL_INCLUDE) $(TCL_INCLUDE) -o $@ -c $<

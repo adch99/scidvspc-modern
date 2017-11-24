@@ -13,7 +13,7 @@ set var(CC) gcc
 set var(LINK) {$(CXX)}
 set var(DEBUG) {#-DASSERTIONS -g}
 set var(CFLAGS) {-O2 -fno-exceptions}
-set var(CXXFLAGS) {-fno-rtti}
+set var(CXXFLAGS) {}
 set var(LDFLAGS) {}
 set var(WARNINGS) -Wall
 set var(SCIDFLAGS) {}
