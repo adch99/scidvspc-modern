@@ -447,11 +447,10 @@ proc writeMakefile {{type ""}} {
             {You have not run "./configure" yet.  The default settings are:}
     } else {
         set success [findTclTkPaths]
-        set var(CONFIG_RESULT) \
-            {Sorry, "./configure" was not successful. The default settings are:}
         if {$success} {
-           set var(CONFIG_RESULT) \
-               {The settings determined by "./configure" are:}
+          set var(CONFIG_RESULT) {The settings determined by "./configure" are:}
+        } else {
+	  set var(CONFIG_RESULT) {Sorry, "./configure" was not successful. The default settings are:}
         }
     }
 
@@ -463,6 +462,10 @@ proc writeMakefile {{type ""}} {
 
     checkZlib
     probeCompiler
+
+    if {![string match *-O* $var(CFLAGS)]} {
+       puts "\n    WARNING, No '-O' optimisation found in CFLAGS. CQL Search feature may be broken."
+    }
 
     if {[catch {set from [open "$Makefile_conf" r]}]} {
        puts "Error opening file for reading: $Makefile_conf"
@@ -567,9 +570,11 @@ proc usage {} {
     puts {Debug, without languages}
     puts {  ./configure LANGUAGES="" DEBUG="-DASSERTIONS"}
     puts {Optimize for Core2}
-    puts {  ./configure "CFLAGS=-march=core2" "LDFLAGS=-march=core2"}
+    puts {  ./configure "CFLAGS=-O2 -march=core2" "LDFLAGS=-march=core2"}
     puts {Make a universal binary for OSX (i386 and PPC)}
     puts {  ./configure "CFLAGS=-arch i386 -arch ppc" "LDFLAGS=-arch i386 -arch ppc"}
+    puts {Default OS X setup}
+    puts {  ./configure "CFLAGS=-O2 -arch i386" "LDFLAGS=-arch i386"}
     puts {Compile with clang/clang++}
     puts {  ./configure CXX=clang++ CC=clang}
     puts {}
