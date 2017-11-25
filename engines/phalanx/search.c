@@ -446,9 +446,11 @@ else
 		/* Fix some misbehaviour of root moves randomness when
 		 * close to game end. */
 		if( Flag.random && G[Counter].mtrl <= Q_VALUE+R_VALUE )
+		{
 			for( i=0; i!=n; i++ )
 				if( abs(Alpha)>29990 ) rr[i]=0;
 				else rr[i]/=2;
+		}
 
 		if( abs(Alpha) > 29000 )
 		{
