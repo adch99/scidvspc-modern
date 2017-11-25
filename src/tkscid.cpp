@@ -1581,7 +1581,7 @@ sc_base_export (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     Game * g = scratchGame;
     IndexEntry * ie;
     uint updateStart, update;
-    updateStart = update = 10;  // Update progress bar every 10 games
+    updateStart = update = 100;  // Update progress bar every 10 games
     uint numSeen = 0;
     uint numToExport = exportFilter ? db->filter->Count() : 1;
 
@@ -5147,7 +5147,7 @@ sc_filter_copy (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         return errorResult (ti, "Usage: sc_filter copy <fromBase> <toBase>");
     }
     uint updateStart, update;
-    updateStart = update = 100;  // Update progress bar every 100 games
+    updateStart = update = 1000;  // Update progress bar every 100 games
 
     int sourceBaseNum = strGetInteger (argv[2]);
     int targetBaseNum = strGetInteger (argv[3]);
@@ -15423,8 +15423,7 @@ sc_search_cql (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     uint skipcount = 0;
     uint updateStart, update;
     // this is a tradeoff... some queries are EXTREMELY compute-intensive
-    updateStart = update = 250;  // Update progress bar every 250 games
-    //updateStart = update = 1000;  // Update progress bar every 1000 games
+    updateStart = update = 1000;  // Update progress bar every 1000 games
 
     // If filter operation is to reset the filter, reset it:
     if (filterOp == FILTEROP_RESET) {
