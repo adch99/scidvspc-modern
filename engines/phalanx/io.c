@@ -861,7 +861,7 @@ tgamenode p, q;
 
    /* Now we should have the fifty-move info */
    i = 0;
-   while (isdigit((int)*f) && f != '\0') /* find the end of the fifty-move info */
+   while (isdigit((int)*f) && *f != '\0') /* find the end of the fifty-move info */
       i = 10*i + (*f - '0'), f++;
    q.rule50 = i < 50 ? i : 50;
    if (i > 0 && p.m.special != 0) /* we have a "previous" move because of e.p. */
