@@ -1070,6 +1070,12 @@ translate P SearchBoardFiles {Kolumny (ten sam materiał, pionki na tych samych 
 translate P SearchBoardAny {Materiał (ten sam materiał, pozycja dowolna)}
 translate P SearchInRefDatabase { Szukaj w bazie }
 translate P LookInVars {Przeszukuj warianty}
+# ====== TODO To be translated ======
+translate P CQLLabel {CQL Script}
+# ====== TODO To be translated ======
+translate P CQLComments {Allow Comments}
+# ====== TODO To be translated ======
+translate P CQLStrip {Strip Match Comments}
 
 # Material search:
 translate P MaterialSearch {Wyszukiwanie wg materiału}

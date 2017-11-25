@@ -162,7 +162,7 @@ menuText E ToolsAbsFilterGraph "Abs. Filter Graph" 7 {Open/close the filter grap
 menuText E ToolsOpReport "Opening Report" 0 {Generate an opening report for the current position}
 menuText E ToolsTracker "Piece Tracker"  6 {Open the Piece Tracker window}
 menuText E ToolsTraining "Training"  7 {Training tools (tactics, openings,...) }
-menuText E ToolsComp "Tournament" 0 {Chess engine tournament}
+menuText E ToolsComp "Computer Tournament" 0 {Chess engine tournament}
 menuText E ToolsTacticalGame "Computer - Phalanx"  0 {Play a game with tactics}
 menuText E ToolsSeriousGame "Computer - UCI Engine"  11 {Play against an UCI engine}
 menuText E ToolsTrainTactics "Mate in ..N.. Puzzle"  0 {Solve "Mate in" puzzles}
@@ -1032,6 +1032,10 @@ translate E SearchBoardFiles {Files (same material, all pawns on same files)}
 translate E SearchBoardAny {Any (same material, pawns and pieces anywhere)}
 translate E SearchInRefDatabase { Search in database }
 translate E LookInVars {Look in variations}
+
+translate E CQLLabel {CQL Script}
+translate E CQLComments {Allow Comments}
+translate E CQLStrip {Strip Match Comments}
 
 # Material search:
 translate E MaterialSearch {Material Search}

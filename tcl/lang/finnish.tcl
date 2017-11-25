@@ -1002,6 +1002,12 @@ translate L SearchBoardFiles {Linjat (sama materiaali, kaikki sotilaat samoilla 
 translate L SearchBoardAny {Mikä tahansa (sama materiaali, sotilaat ja upseerit missä tahansa)}
 translate L SearchInRefDatabase {Etsi tietokannasta }
 translate L LookInVars {Katso muunnelmista}
+# ====== TODO To be translated ======
+translate L CQLLabel {CQL Script}
+# ====== TODO To be translated ======
+translate L CQLComments {Allow Comments}
+# ====== TODO To be translated ======
+translate L CQLStrip {Strip Match Comments}
 
 # Material search:
 translate L MaterialSearch {Materiaalihaku}

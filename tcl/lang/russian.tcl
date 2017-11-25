@@ -1061,6 +1061,12 @@ translate R SearchBoardFiles {Ряды (тот же материал, все п�
 translate R SearchBoardAny {Любая (тот же материал, пешки и фигуры в любом месте)}
 translate R SearchInRefDatabase { Поиск в базе }
 translate R LookInVars {Посмотреть в вариантах}
+# ====== TODO To be translated ======
+translate R CQLLabel {CQL Script}
+# ====== TODO To be translated ======
+translate R CQLComments {Allow Comments}
+# ====== TODO To be translated ======
+translate R CQLStrip {Strip Match Comments}
 
 # Material search:
 translate R MaterialSearch {Поиск материала}

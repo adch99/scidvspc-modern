@@ -1161,6 +1161,12 @@ translate I SearchBoardAny {Dovunque (stesso materiale, pedoni e pezzi dovunque)
 # ====== TODO To be translated ======
 translate I SearchInRefDatabase { Search in base }
 translate I LookInVars {Osserva nelle varianti}
+# ====== TODO To be translated ======
+translate I CQLLabel {CQL Script}
+# ====== TODO To be translated ======
+translate I CQLComments {Allow Comments}
+# ====== TODO To be translated ======
+translate I CQLStrip {Strip Match Comments}
 
 # Material search:
 translate I MaterialSearch {Ricerca Materiale}

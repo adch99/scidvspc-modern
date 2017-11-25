@@ -1264,6 +1264,12 @@ translate O SearchBoardAny {Alle (samme kvalitet, bønder og brikker hvor som hel
 # ====== TODO To be translated ======
 translate O SearchInRefDatabase { Search in base }
 translate O LookInVars {Søk i variasjoner}
+# ====== TODO To be translated ======
+translate O CQLLabel {CQL Script}
+# ====== TODO To be translated ======
+translate O CQLComments {Allow Comments}
+# ====== TODO To be translated ======
+translate O CQLStrip {Strip Match Comments}
 
 # Material search:
 translate O MaterialSearch {Kvalitetssøk}

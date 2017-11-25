@@ -1264,6 +1264,12 @@ translate Y SearchBoardAny {Materijal (isti materijal, pe¹aci i figure bilo gde)
 # ====== TODO To be translated ======
 translate Y SearchInRefDatabase { Search in base }
 translate Y LookInVars {Pogledaj u varijantama}
+# ====== TODO To be translated ======
+translate Y CQLLabel {CQL Script}
+# ====== TODO To be translated ======
+translate Y CQLComments {Allow Comments}
+# ====== TODO To be translated ======
+translate Y CQLStrip {Strip Match Comments}
 
 # Material search:
 translate Y MaterialSearch {Pretraga po materijalu}
