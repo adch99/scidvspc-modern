@@ -329,8 +329,8 @@ proc ::search::cql {} {
   radiobutton $w.s.stripno  -text No  -variable ::search::cqlStripSwitch -value 0
 
   label $w.s.comment -font font_Bold -text "Allow Comments"
-  radiobutton $w.s.commentyes -text Yes -variable ::search::cqlCommentSwitch -value 1
-  radiobutton $w.s.commentno  -text No  -variable ::search::cqlCommentSwitch -value 0
+  radiobutton $w.s.commentyes -text Yes -variable ::search::cqlCommentSwitch -value 1 -command checkCQLSearch
+  radiobutton $w.s.commentno  -text No  -variable ::search::cqlCommentSwitch -value 0 -command checkCQLSearch
   pack $w.s.comment $w.s.commentyes $w.s.commentno [label $w.s.space -width 5] \
        $w.s.strip   $w.s.stripyes   $w.s.stripno   -side left -pady 1
 
@@ -363,11 +363,12 @@ proc ::search::cql {} {
     sc_progressBar $w.progress bar 301 21 time
 
     set cqlSyntax [$w.g.syntax get 0.0 end]
-    #puts $cqlSyntax
+
+    # Only allow CQL commenting for the clipbase
+    set allowComments [expr  {([sc_base current] == [sc_info clipbase]) && $::search::cqlCommentSwitch}]
 
     set err [catch {
-      set str [sc_search cql $::search::filter::operation $::search::cqlStripSwitch \
-            $::search::cqlCommentSwitch $cqlSyntax]
+      set str [sc_search cql $::search::filter::operation $::search::cqlStripSwitch $allowComments $cqlSyntax]
     } result]
 
     unbusyCursor .
@@ -415,7 +416,34 @@ proc ::search::cql {} {
 
   ::search::Config
 
+  checkCQLSearch
   placeWinOverParent $w .
   wm state $w normal
   focus $w.g.syntax
+}
+
+proc checkCQLSearch {} {
+  set w .scql.s
+
+  if {![winfo exists $w]} {return}
+
+  if {[sc_base current] != [sc_info clipbase]} {
+    foreach i {comment commentyes commentno strip stripyes stripno} {
+      $w.$i configure -state disabled
+    }
+  } else {
+    foreach i {comment commentyes commentno} {
+      $w.$i configure -state normal
+    }
+
+    if {$::search::cqlCommentSwitch} {
+      set s normal
+    } else {
+      set s disabled
+    }
+    foreach i {strip stripyes stripno} {
+      $w.$i configure -state $s
+    }
+
+  }
 }
