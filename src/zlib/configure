@@ -167,6 +167,54 @@ else
 fi
 
 cat > $test.c <<EOF
+#include <stdio.h>
+#include "zconf.h"
+
+#ifdef STDC
+
+#include <stdarg.h> 
+
+int test (const char *format, /* args */ ...)
+{
+  char buf[10];
+  va_list va;
+  int len;
+
+  va_start(va, format);
+  len = vsnprintf(buf, sizeof(buf), format, va);
+  va_end(va);
+
+  return len;
+}
+
+#else /* not ANSI C */
+
+int test(format, a1, a2)
+  const char *format;
+  int a1, a2;
+{
+  char buf[10];
+  int len;
+
+  len = snprintf(buf, sizeof(buf), format, a1, a2);
+
+  return len;
+}
+#endif
+
+int main(void)
+{
+  exit(0);
+}
+EOF
+if test "`($CC -c $CFLAGS $test.c) 2>&1`" = ""; then
+  CFLAGS="$CFLAGS -DHAS_vsnprintf -DHAS_snprintf"
+  echo Checking for [v]snprintf support... Yes.
+else
+  echo Checking for [v]snprintf support... No.
+fi
+
+cat > $test.c <<EOF
 #include <sys/types.h>
 #include <sys/mman.h>
 #include <sys/stat.h>
