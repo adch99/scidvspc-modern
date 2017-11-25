@@ -294,6 +294,7 @@ proc refreshWindows {{all no}} {
   updateTitle
   updateStatusBar
   refreshCustomFlags
+  checkCQLSearch
 }
 
 ### Update a few widgets with the Custom Flags
