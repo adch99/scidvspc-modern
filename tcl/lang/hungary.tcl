@@ -1194,6 +1194,12 @@ translate H SearchBoardAny {Bármi (azonos anyag, gyalogok és figurák bárhol)}
 # ====== TODO To be translated ======
 translate H SearchInRefDatabase { Search in base }
 translate H LookInVars {Változatokban is keres.}
+# ====== TODO To be translated ======
+translate H CQLLabel {CQL Script}
+# ====== TODO To be translated ======
+translate H CQLComments {Allow Comments}
+# ====== TODO To be translated ======
+translate H CQLStrip {Strip Match Comments}
 
 # Material search:
 translate H MaterialSearch {Keresés anyagra}

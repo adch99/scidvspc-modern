@@ -1184,6 +1184,12 @@ translate C SearchBoardFiles {Sloupce (tentý¾ materiál, v¹ichni pì¹ci na stejnýc
 translate C SearchBoardAny {Jakákoliv (tentý¾ materiál, pì¹ci a figury kdekoliv)}
 translate C SearchInRefDatabase { Hledat v databázi }
 translate C LookInVars {Dívat se do variant}
+# ====== TODO To be translated ======
+translate C CQLLabel {CQL Script}
+# ====== TODO To be translated ======
+translate C CQLComments {Allow Comments}
+# ====== TODO To be translated ======
+translate C CQLStrip {Strip Match Comments}
 
 # Material search:
 translate C MaterialSearch {Hledat materiál}

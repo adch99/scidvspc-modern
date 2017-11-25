@@ -1057,6 +1057,12 @@ translate F SearchBoardFiles {Colonnes (même matériel, tous les pions sur mêmes 
 translate F SearchBoardAny {Tous (même matériel, pions et pièces n'importe où)}
 translate F SearchInRefDatabase { Dans la base de référence }
 translate F LookInVars {Chercher dans les variantes}
+# ====== TODO To be translated ======
+translate F CQLLabel {CQL Script}
+# ====== TODO To be translated ======
+translate F CQLComments {Allow Comments}
+# ====== TODO To be translated ======
+translate F CQLStrip {Strip Match Comments}
 
 # Material search:
 translate F MaterialSearch {Rechercher Motifs}

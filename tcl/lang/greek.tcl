@@ -1113,6 +1113,12 @@ translate G SearchBoardFiles {Στήλες (ίδιο υλικό, όλα τα π�
 translate G SearchBoardAny {Οποιαδήποτε (ίδιο υλικό, πιόνια και κομμάτια οπουδήποτε)}
 translate G SearchInRefDatabase { Αναζήτηση στη Βάση }
 translate G LookInVars {Αναζήτηση σε βαριάντες}
+# ====== TODO To be translated ======
+translate G CQLLabel {CQL Script}
+# ====== TODO To be translated ======
+translate G CQLComments {Allow Comments}
+# ====== TODO To be translated ======
+translate G CQLStrip {Strip Match Comments}
 
 # Material search:
 translate G MaterialSearch {Αναζήτηση Υλικού}

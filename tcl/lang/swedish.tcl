@@ -1089,6 +1089,12 @@ translate W SearchBoardFiles {Filer (samma material, alla bönder på samma filer)
 translate W SearchBoardAny {Obestämt (samma material, bönder och pjäser på valfria rutor)}
 translate W SearchInRefDatabase {Sök i databas}
 translate W LookInVars {Sök i variationer}
+# ====== TODO To be translated ======
+translate W CQLLabel {CQL Script}
+# ====== TODO To be translated ======
+translate W CQLComments {Allow Comments}
+# ====== TODO To be translated ======
+translate W CQLStrip {Strip Match Comments}
 
 # Material search:
 translate W MaterialSearch {Materialsökning}

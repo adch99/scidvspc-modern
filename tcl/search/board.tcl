@@ -304,7 +304,7 @@ proc ::search::cql {} {
   #bind $w <Return> "$w.b.search invoke"
   bind $w <F1> { helpWindow CQL }
 
-  label $w.type -text "CQL Script" -font font_Bold
+  label $w.type -textvar ::tr(CQLLabel) -font font_Bold
   pack $w.type -side top
 
   pack [frame $w.g] -side top -expand 1 -fill both -padx 2 -pady 1
@@ -324,11 +324,11 @@ proc ::search::cql {} {
   addHorizontalRule $w
 
   pack [frame $w.s] -side top
-  label $w.s.strip -font font_Bold -text "Strip Position Marks"
+  label $w.s.strip -font font_Bold -textvar ::tr(CQLStrip)
   radiobutton $w.s.stripyes -text Yes -variable ::search::cqlStripSwitch -value 1
   radiobutton $w.s.stripno  -text No  -variable ::search::cqlStripSwitch -value 0
 
-  label $w.s.comment -font font_Bold -text "Allow Comments"
+  label $w.s.comment -font font_Bold -textvar ::tr(CQLComments)
   radiobutton $w.s.commentyes -text Yes -variable ::search::cqlCommentSwitch -value 1 -command checkCQLSearch
   radiobutton $w.s.commentno  -text No  -variable ::search::cqlCommentSwitch -value 0 -command checkCQLSearch
   pack $w.s.comment $w.s.commentyes $w.s.commentno [label $w.s.space -width 5] \

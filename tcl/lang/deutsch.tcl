@@ -1111,6 +1111,12 @@ translate D SearchBoardFiles {Linien (gleiches Material, alle Bauern auf gleiche
 translate D SearchBoardAny {Material (gleiches Material, Bauern und Figuren beliebig)}
 translate D SearchInRefDatabase { In folgender Datenbank suchen }
 translate D LookInVars {Schaue in Varianten}
+# ====== TODO To be translated ======
+translate D CQLLabel {CQL Script}
+# ====== TODO To be translated ======
+translate D CQLComments {Allow Comments}
+# ====== TODO To be translated ======
+translate D CQLStrip {Strip Match Comments}
 
 # Material search:
 translate D MaterialSearch {Materialsuchen}

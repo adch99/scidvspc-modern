@@ -1056,6 +1056,12 @@ translate S SearchBoardFiles {Columnas (igual material, todos los peones en las 
 translate S SearchBoardAny {Cualquiera (igual material, peones y piezas en cualquier parte)}
 translate S SearchInRefDatabase {Búsqueda en la base de referencia}
 translate S LookInVars {Mirar en variaciones}
+# ====== TODO To be translated ======
+translate S CQLLabel {CQL Script}
+# ====== TODO To be translated ======
+translate S CQLComments {Allow Comments}
+# ====== TODO To be translated ======
+translate S CQLStrip {Strip Match Comments}
 
 # Material search:
 translate S MaterialSearch {Búsqueda de material}

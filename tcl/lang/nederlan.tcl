@@ -1093,6 +1093,12 @@ translate N SearchBoardFiles {Lijnen (hetzelfde materiaal, alle pionnen op dezel
 translate N SearchBoardAny {Willekeurig (hetzelfde materiaal, pionnen en stukken willekeurig)}
 translate N SearchInRefDatabase {Zoek in database }
 translate N LookInVars {Zoek in varianten}
+# ====== TODO To be translated ======
+translate N CQLLabel {CQL Script}
+# ====== TODO To be translated ======
+translate N CQLComments {Allow Comments}
+# ====== TODO To be translated ======
+translate N CQLStrip {Strip Match Comments}
 
 # Material search:
 translate N MaterialSearch {Zoeken materiaal}
