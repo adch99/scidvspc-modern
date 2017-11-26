@@ -305,25 +305,9 @@ proc ::search::cql {} {
   bind $w <F1> { helpWindow CQL }
 
   label $w.type -textvar ::tr(CQLLabel) -font font_Bold
-  pack $w.type -side top
+  pack  $w.type -side top
 
-  pack [frame $w.g] -side top -expand 1 -fill both -padx 2 -pady 1
-  text $w.g.syntax -height 12 -width 64 -wrap word -yscrollcommand "$w.g.ybar set" -undo 1 -relief flat
-
-  grid $w.g.syntax -row 0 -column 0 -sticky news
-  grid [scrollbar $w.g.ybar -command "$w.g.syntax yview" -takefocus 0] \
-    -row 0 -column 1 -sticky news
-  grid rowconfig $w.g 0 -weight 1 -minsize 0
-  grid columnconfig $w.g 0 -weight 1 -minsize 0
-
-  bind $w.g.syntax <Control-a> {.scql.g.syntax tag add sel 0.0 end-1c ; break}
-  bind $w.g.syntax <Control-z> {catch {.scql.g.syntax edit undo} ; break}; # Control-z is default text binding anyway
-  bind $w.g.syntax <Control-y> {catch {.scql.g.syntax edit redo} ; break}; # but the others are not
-  bind $w.g.syntax <Control-r> {catch {.scql.g.syntax edit redo} ; break}
-
-  addHorizontalRule $w
-
-  pack [frame $w.s] -side top
+  frame $w.s
   label $w.s.strip -font font_Bold -textvar ::tr(CQLStrip)
   radiobutton $w.s.stripyes -text Yes -variable ::search::cqlStripSwitch -value 1
   radiobutton $w.s.stripno  -text No  -variable ::search::cqlStripSwitch -value 0
@@ -334,10 +318,7 @@ proc ::search::cql {} {
   pack $w.s.comment $w.s.commentyes $w.s.commentno [label $w.s.space -width 5] \
        $w.s.strip   $w.s.stripyes   $w.s.stripno   -side left -pady 1
 
-  addHorizontalRule $w
 
-  ::search::addFilterOpFrame $w
-  addHorizontalRule $w
 
   canvas $w.progress -height 20 -width 300  -relief solid -border 1
   $w.progress create rectangle 0 0 0 0 -fill $::progcolor -outline $::progcolor -tags bar
@@ -345,8 +326,7 @@ proc ::search::cql {} {
       -fill black -text "0:00 / 0:00"
 
   frame $w.b
-  dialogbutton $w.b.stop -textvar ::tr(Stop) -command sc_progressBar
-  $w.b.stop configure -state disabled
+  dialogbutton $w.b.stop -textvar ::tr(Stop) -command sc_progressBar -state disabled
 
   dialogbutton $w.b.search -textvar ::tr(Search) -command {
     set confirm [::game::ConfirmDiscard]
@@ -356,6 +336,9 @@ proc ::search::cql {} {
     }
 
     set w .scql
+
+    $w.status     configure -text {}
+    $w.diagnostic configure -text {}
 
     busyCursor .
     $w.b.stop configure -state normal
@@ -409,10 +392,37 @@ proc ::search::cql {} {
   packbuttons right $w.b.cancel $w.b.stop $w.b.search
   label $w.diagnostic -text "" -width 1 -font font_Small -relief sunken -anchor w
   label $w.status -text "" -width 1 -font font_Small -relief sunken -anchor w
+
+  # Two status bars (?) and the button bar
   pack $w.diagnostic -side bottom -fill x
-  pack $w.status -side bottom -fill x
-  pack $w.b -side bottom -fill x
-  pack $w.progress -side bottom -pady 2
+  pack $w.status     -side bottom -fill x
+  pack $w.b          -side bottom -fill x
+
+  pack $w.progress   -side bottom -pady 2
+  pack [frame $w.line4 -height 2 -borderwidth 2 -relief sunken] -fill x -pady 5 -side bottom
+
+  ::search::addFilterOpFrame $w 0 bottom
+  pack [frame $w.line5 -height 2 -borderwidth 2 -relief sunken] -fill x -pady 5 -side bottom
+
+  pack $w.s          -side bottom
+  pack [frame $w.line6 -height 2 -borderwidth 2 -relief sunken] -fill x -pady 5 -side bottom
+
+  ### pack text widget last to allow for nice resizing
+
+  frame $w.g
+  pack $w.g -side top -expand 1 -fill both -padx 2 -pady 1
+
+  text $w.g.syntax -height 12 -width 64 -wrap word -yscrollcommand "$w.g.ybar set" -undo 1
+  scrollbar $w.g.ybar -command "$w.g.syntax yview" -takefocus 0
+
+  pack $w.g.ybar -side right -fill y
+  pack $w.g.syntax -side left -fill both -expand 1
+
+  bind $w.g.syntax <Control-a> {.scql.g.syntax tag add sel 0.0 end-1c ; break}
+  bind $w.g.syntax <Control-z> {catch {.scql.g.syntax edit undo} ; break}; # Control-z is default text binding anyway
+  bind $w.g.syntax <Control-y> {catch {.scql.g.syntax edit redo} ; break}; # but the others are not
+  bind $w.g.syntax <Control-r> {catch {.scql.g.syntax edit redo} ; break}
+
 
   ::search::Config
 
