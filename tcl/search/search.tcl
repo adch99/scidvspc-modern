@@ -80,11 +80,11 @@ proc ::search::filter::end {} {
 # (but there should be different variables, to avoid interaction)
 # and can be  0 (And), 1 (Or), 2 (Ignore/Reset) which is the default
 
-proc ::search::addFilterOpFrame {w {small 0}} {
+proc ::search::addFilterOpFrame {w {small 0} {side top}} {
   set f $w.filterop
 
   frame $f
-  pack  $f -side top
+  pack  $f -side $side
   if {$small} {
     set regular font_Small
     set bold    font_SmallBold
