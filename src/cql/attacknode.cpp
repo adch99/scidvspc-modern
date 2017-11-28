@@ -28,7 +28,7 @@ void AttackNode::addcounts(pieceT piece, pieceT*board, squareT square){
     addkingcounts(board,square);
     return;
   case EMPTY: return;
-  default: ASSERT(0);
+  default: CQL_ASSERT(0);
   }
 }
 	     
@@ -50,7 +50,7 @@ void AttackNode::addknightcounts(pieceT*board, squareT square){
 }
 
 void AttackNode::addpawncounts(pieceT pawn, pieceT*board,squareT square){
-  ASSERT(pawn==WP||pawn==BP);
+  CQL_ASSERT(pawn==WP||pawn==BP);
   int rankoff=pawn==WP?1:-1;
   addnonsliding(-1,rankoff,board,square);
   addnonsliding(1,rankoff,board,square);

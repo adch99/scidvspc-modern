@@ -14,10 +14,6 @@ using std::vector;
 #include "direction.h"
 #include "myvector.h"
 
-#ifndef ASSERT
-#define ASSERT(x) {if(!(x)) {printf("Assert fails: %s: %d\n",__FILE__,__LINE__);myexit(1);}}
-#endif
-
 extern char *cqlErrMsg;
 extern char *cqlDiagnostic;
 
@@ -28,6 +24,8 @@ void uassert(bool b);
 void uassert(bool b, const char*s, const char* s1);
 void uassert(bool, const char*s);
 void myexit();
+
+#define CQL_ASSERT(x) {if(!(x)) { printf("Assert fails: %s: %d\n",__FILE__,__LINE__); uassert(false, "Internal CQL Error: assert fails"); }}
 
 void tab();
 void indent();

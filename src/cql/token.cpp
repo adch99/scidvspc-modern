@@ -16,7 +16,7 @@ void Token::printLocation(){
 }
 
 StringToken::StringToken(const char *c){
-  ASSERT(c);
+  CQL_ASSERT(c);
   value=c;
 }
 
@@ -28,7 +28,7 @@ bool PieceToken::isAllowed(char c){
 }
 
 PieceToken::PieceToken(char c){
-  ASSERT(isAllowed(c));
+  CQL_ASSERT(isAllowed(c));
   value=c;
 }
 

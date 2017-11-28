@@ -1,7 +1,7 @@
 #include "node.h"
 
 int matchCount = 0;
-uint matchPlyFirst;
+uint CqlMatchPlyFirst;
 
 void CqlNode::do_match(MFilter*p,Game*game){
   NumericVariable*mc=Variable::matchCountVariable();
@@ -11,7 +11,7 @@ void CqlNode::do_match(MFilter*p,Game*game){
   auto id=MarkBoard::identity(game);
   if(p->match_position(game)){
     mc->increment();
-    if (!matchCount++) matchPlyFirst = game->GetCurrentPly();
+    if (!matchCount++) CqlMatchPlyFirst = game->GetCurrentPly();
     if(p->annotateFlag&&!isSilent())
       MarkBoard::gameAppendComment(game,"MATCH");
   }
@@ -123,9 +123,8 @@ void CqlNode::match(){
 // of a header from this directory in tkscid.cpp descends into include-file-hell.
 
 CqlNode* nodeScid = NULL;
-//bool silentFlag;
 
-bool match_gameCql(Game *game) {
+bool CqlMatchGame(Game *game) {
 
   // override the CQL header silent param
   //if (CqlSilent) nodeScid->CommentFlags::makeSilent();

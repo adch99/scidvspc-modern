@@ -1,4 +1,6 @@
 #include "tokenstream.h"
+#include "util.h"
+
 void Tokens::print(){
   printf("Tokens: Bottom: %d size: %lu Tokens:\n",bottom, tokens.size());
   for(int i=0;i<tokens.size();++i){
@@ -19,13 +21,13 @@ Token* Tokens::current(){
 }
 
 void Tokens::forward(){
-  ASSERT(!eof());
+  CQL_ASSERT(!eof());
   ++bottom;
 }
 
 Tokens::Tokens(vector<Token*>ts){
   for(auto s:ts)
-    {ASSERT (s!=NULL);}
+    {CQL_ASSERT (s!=NULL);}
   tokens=ts;
   bottom=0;
 }

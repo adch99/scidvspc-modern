@@ -172,7 +172,7 @@ void util::my_dump_board(boardT board){
 }
 
 int util::squareShiftDirection(int sq, directionT direction){
-  ASSERT(sq>=0&&sq<64&&direction<=DOWN_RIGHT);
+  CQL_ASSERT(sq>=0&&sq<64&&direction<=DOWN_RIGHT);
   int s=square_Move(sq,direction);
   if (s>=64) s=-1;
   return s;
