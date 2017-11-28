@@ -2,6 +2,7 @@
 const char* CqlBuild="8.51";
 const char* CqlVersion="5.1";
 bool CqlDebug=false;
+bool CqlShowDtor=false;
 const char* CqlDate=__DATE__ ;
 bool CqlParseOnly=false;
 bool CqlShowParse=false;

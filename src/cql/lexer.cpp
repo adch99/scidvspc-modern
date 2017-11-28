@@ -198,8 +198,8 @@ char * readstring(char * syntax){
 
 Token* makeToken(char* val){
   char*current=val;
-  ASSERT(current);
-  ASSERT(strlen(current));
+  CQL_ASSERT(current);
+  CQL_ASSERT(strlen(current));
   uassert(strlen(val)<100,"Max token size too large");
   Token* t=NULL;
   if(!t) t=match_LParen(current);
@@ -219,59 +219,59 @@ Token* makeToken(char* val){
 }
 
 Token* match_Star(char*v){
-  ASSERT(v);
+  CQL_ASSERT(v);
   if (*v=='*') return new StarToken;
   return NULL;
 }
 Token* match_Plus(char*v){
-  ASSERT(v);
+  CQL_ASSERT(v);
   if (*v=='+') return new PlusToken;
   return NULL;
 }
 Token* match_QuestionMark(char*v){
-  ASSERT(v);
+  CQL_ASSERT(v);
   if (*v=='?') return new QuestionMarkToken;
   return NULL;
 }
 
 Token* match_Bar(char*v){
-  ASSERT(v);
+  CQL_ASSERT(v);
   if (*v=='|') return new BarToken;
   return NULL;
 }
 
 Token* match_LParen(char*v){
-  ASSERT(v);
+  CQL_ASSERT(v);
   if(*v=='(') return new LParenToken;
   return NULL;
 }
 
 Token* match_RParen(char*v){
-  ASSERT(v);
+  CQL_ASSERT(v);
   if(*v==')') return new RParenToken;
   return NULL;
 }
 
 Token* match_LBrace(char*v){
-  ASSERT(v);
+  CQL_ASSERT(v);
   if(*v=='{') return new LBraceToken;
   return NULL;
 }
 
 Token* match_RBrace(char*v){
-  ASSERT(v);
+  CQL_ASSERT(v);
   if(*v=='}') return new RBraceToken;
   return NULL;
 }
 
 Token* match_LessThan(char*v){
-  ASSERT(v);
+  CQL_ASSERT(v);
   if(*v=='<') return new LessThanToken;
   return NULL;
 }
 
 Token* match_GreaterThan(char*v){
-  ASSERT(v);
+  CQL_ASSERT(v);
   if(*v=='>') return new GreaterThanToken;
   return NULL;
 }
@@ -291,7 +291,7 @@ Token* match_keyword(char*input){
 }
 
 bool match_letterdigits(char*input){
-  ASSERT(input);
+  CQL_ASSERT(input);
   char*current=input;
   while(char c=*current++)
     if(!isalnum(c))return false;
@@ -299,7 +299,7 @@ bool match_letterdigits(char*input){
 }
 
 Token* match_name(char*input){
-  ASSERT(input);
+  CQL_ASSERT(input);
   char*current=input;
   while(char c=*current++)
     if(!isalnum(c)&&
@@ -312,7 +312,7 @@ Token* match_name(char*input){
 
 bool match_letterdigit(char**inputp,char * ch){
   char*current=*inputp;
-  ASSERT(current);
+  CQL_ASSERT(current);
   if(isalnum(current[0])){
     *inputp= *inputp+1;
     return true;

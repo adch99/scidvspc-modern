@@ -83,7 +83,7 @@ void MarkBoard::gameForward(Game*g){
 
 void MarkBoard::gameBackup(Game*g){
   if(global()){
-    ASSERT(g==global()->game);
+    CQL_ASSERT(g==global()->game);
     global()->MoveBackup();
   }
   else g->MoveBackup();

@@ -63,7 +63,7 @@ PieceToken* match_singlepiecespecifier(char**inputp){
 //simplepiecespecifier= R | N | ... | '?' | '.
 PieceToken* match_simplepiecespecifier(char**inputp){
   char*input= *inputp;
-  ASSERT(input);
+  CQL_ASSERT(input);
   char c=input[0];
   PieceToken* st=PieceToken::create(c);
   if(!st)return NULL;
@@ -103,12 +103,12 @@ bool match_alphanums(char**inputp, char* result, int maxlength){
   while(isalnum(current[len])){
     if(len>=maxlength){
       printf("error\n");
-      ASSERT(0);
+      CQL_ASSERT(0);
     }
     ++len;
   }
   if(len==0) return false;
-  ASSERT(len<maxlength);
+  CQL_ASSERT(len<maxlength);
   for(int i=0;i<len;++i)
     result[i]=current[i];
   result[len]=0;
@@ -118,7 +118,7 @@ bool match_alphanums(char**inputp, char* result, int maxlength){
 
 bool match_char(char**inputp,char c){
   char*current=*inputp;
-  ASSERT(current);
+  CQL_ASSERT(current);
   if(current[0]==c){
     *inputp= *inputp+1;
     return true;}
@@ -141,7 +141,7 @@ bool match_squarespecifier(char**inputp, vector<SquareToken*>*squaresp){
 //file = [a-h]
 bool match_file(char**inputp,int * result){
   char*current=*inputp;
-  ASSERT(current);
+  CQL_ASSERT(current);
   char f=current[0];
   if(f>='a'&&f<='h'){
     *result=f-'a';
@@ -154,7 +154,7 @@ bool match_file(char**inputp,int * result){
 //rank= [1-8]
 bool match_rank(char**inputp,int * result){
   char*current=*inputp;
-  ASSERT(current);
+  CQL_ASSERT(current);
   char r=current[0];
   if(r>='1'&&r<='8'){
     *result=r-'1';
@@ -264,7 +264,7 @@ bool match_rankrange(char**inputp,int*min,int*max){
 VariableToken* match_variable(char**inputp){
   char*current=*inputp;
   char*name=new char[42];
-  ASSERT(current);
+  CQL_ASSERT(current);
   if(!match_char(&current,'$')) return NULL;
   name[0]='$';
   if(!match_alphanums(&current,name+1,40))

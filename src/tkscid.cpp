@@ -15389,28 +15389,31 @@ sc_search_cql (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     // We believe it is safe to employ longjmp(), since all CQL destructors are trivial.
     // Nonetheless, TODO: maybe should use C++ exception handling here...
     extern std::jmp_buf jump_buffer;
+    void CqlFreeRes();
     bool jumpBoundary = false;
     if (setjmp(jump_buffer) != 0 ) {
+      CqlFreeRes();
       if (cqlErrMsg) Tcl_AppendResult (ti, cqlErrMsg, NULL);
       else Tcl_AppendResult (ti, "Error reported back from CQL engine.", NULL);
       if (cqlDiagnostic) Tcl_AppendResult (ti, "|", "ERROR: ", cqlDiagnostic, NULL);
       if (jumpBoundary) {
         // Do not commit the games matched and replaced thus far to the base.
-        return errorResult (ti, "longjmp() beyond expected boundary... see <stdout> for detail.");
         fprintf(stderr, "\nERROR: longjmp() while matching game number %d\n", gameNum);
+        return errorResult (ti, "longjmp() beyond expected boundary... see <stdout> for detail.");
       }
       return TCL_OK;
     }
 
     // Set to true to show some useful info on <stdout>.
-    extern bool CqlShowLex, CqlShowParse, CqlDebug;
+    extern bool CqlShowLex, CqlShowParse, CqlDebug, CqlShowDtor;
     CqlShowLex = false;
     CqlShowParse = false;
+    CqlShowDtor = true;
     CqlDebug = false;
 
     // Parse the CQL script.
-    bool parseBufferCql(char*);
-    parseBufferCql((char *)argv[5]);
+    bool CqlParseBuffer(char*);
+    CqlParseBuffer((char *)argv[5]);
 
     // Working theory holds that:
     // -- All parsing errors are caught above.
@@ -15490,10 +15493,11 @@ sc_search_cql (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         int countMatch;
 
         // Strip existing MATCH markers left by a previous query.
-        if (stripSwitch) {
+        // Save the cpu cycles if we're running silent.
+        if (stripSwitch && !silentSwitch) {
           countMatch = 0;
           g->MoveToPly(0);
-          while (g->MoveForward() == OK) {
+          do {
             if ((comment = g->GetMoveComment())) {
               if ((match = strstr(comment, "MATCH"))) {
                 if (match == comment) g->SetMoveComment(NULL);
@@ -15501,16 +15505,16 @@ sc_search_cql (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                 countMatch++;
               }
             }
-          }
+          } while (g->MoveForward() == OK);
           if (countMatch) g->SetAltered(true);
         }
 
         // See if the game matches.
-        bool match_gameCql(Game *);  // this is our surrogate in the cql code... see comment
-        extern uint matchPlyFirst; // set by the cql engine
-        if ( match_gameCql(g) ) {
-          if (matchPlyFirst >= 254) { matchPlyFirst = 254; } // is 254 enough cushion?
-          db->dbFilter->Set (gameNum, matchPlyFirst + 1);
+        bool CqlMatchGame(Game *);  // this is our surrogate in the cql code... see comment
+        extern uint CqlMatchPlyFirst; // set by the cql engine
+        if ( CqlMatchGame(g) ) {
+          if (CqlMatchPlyFirst >= 254) { CqlMatchPlyFirst = 254; } // is 254 enough cushion?
+          db->dbFilter->Set (gameNum, CqlMatchPlyFirst + 1);
         } else {
           db->dbFilter->Set (gameNum, 0); // remove the game from the filter
         }
@@ -15522,6 +15526,9 @@ sc_search_cql (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
           dirtyFlag = true;
         }
     }
+
+    // Free the engine's query resources.
+    CqlFreeRes();
 
     // If necessary, update index and name files:
     // Technically, the dirty flag will never be set if we're in silent mode,
