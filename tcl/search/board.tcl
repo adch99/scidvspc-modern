@@ -299,6 +299,8 @@ proc ::search::cql {} {
   toplevel $w
   wm withdraw $w
   wm title $w "CQL $::tr(Search)"
+  setWinLocation $w
+  setWinSize $w
 
   bind $w <Escape> "$w.b.cancel invoke"
   #bind $w <Return> "$w.b.search invoke"
@@ -317,8 +319,6 @@ proc ::search::cql {} {
   radiobutton $w.s.commentno  -text No  -variable ::search::cqlCommentSwitch -value 0 -command checkCQLSearch
   pack $w.s.comment $w.s.commentyes $w.s.commentno [label $w.s.space -width 5] \
        $w.s.strip   $w.s.stripyes   $w.s.stripno   -side left -pady 1
-
-
 
   canvas $w.progress -height 20 -width 300  -relief solid -border 1
   $w.progress create rectangle 0 0 0 0 -fill $::progcolor -outline $::progcolor -tags bar
@@ -389,7 +389,14 @@ proc ::search::cql {} {
   }
 
   dialogbutton $w.b.cancel -textvar ::tr(Close) -command "focus .main ; destroy $w"
+
   packbuttons right $w.b.cancel $w.b.stop $w.b.search
+
+  dialogbutton $w.b.save -textvar ::tr(Save) -command ::search::cqlSave
+  dialogbutton $w.b.load -textvar ::tr(LoadGame) -command ::search::cqlLoad
+
+  packbuttons left  $w.b.save $w.b.load
+
   label $w.diagnostic -text "" -width 1 -font font_Small -relief sunken -anchor w
   label $w.status -text "" -width 1 -font font_Small -relief sunken -anchor w
 
@@ -427,9 +434,62 @@ proc ::search::cql {} {
   ::search::Config
 
   checkCQLSearch
-  placeWinOverParent $w .
+
+  bind $w <Configure> "recordWinSize $w"
   wm state $w normal
   focus $w.g.syntax
+}
+
+proc ::search::cqlSave {} {
+  set w .scql
+
+  set ftype {
+    { "CQL file" {".cql"} }
+  }
+  set fName [tk_getSaveFile -initialdir $::initialDir(sso) -filetypes $ftype \
+             -parent $w -title {Save a CQL Query}]
+  if {$fName == ""} { return }
+  set ::initialDir(sso) [file dirname $fName]
+
+  if {[string compare [file extension $fName] ".cql"] != 0} {
+    append fName ".cql"
+  }
+
+  if {[catch {set searchF [open $fName w]}]} {
+    tk_messageBox -title Error -type ok -icon error -message "Unable to create CQL file: $fName"
+    return
+  }
+  puts $searchF [$w.g.syntax get 0.0 end]
+  close $searchF
+}
+
+proc ::search::cqlLoad {} {
+  set w .scql
+
+  set ftype {
+    {{CQL files}  {.cql} }
+    {{Text files} {.txt} }
+    {{All files}       * }
+  }
+  if {! [file isdirectory $::initialDir(sso)] } {
+    set ::initialDir(sso) $::env(HOME)
+  }
+  set fName [tk_getOpenFile -initialdir $::initialDir(sso) -filetypes $ftype -title "Select a CQL query file"]
+
+  if {$fName != ""} {
+    if {![catch {open $fName r} fd]} {
+      $w.g.syntax delete 0.0 end
+      while {[gets $fd line] >= 0 && ![eof $fd]} {
+	$w.g.syntax insert end "$line\n"
+      }
+      close $fd
+      set ::initialDir(sso) [file dirname $fName]
+    } else {
+      tk_messageBox -title Error -type ok -icon error -message "Unable to open CQL file $fName for reading."
+    }
+  }
+
+
 }
 
 proc checkCQLSearch {} {
