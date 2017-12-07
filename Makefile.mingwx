@@ -3,7 +3,8 @@
 ### Change MINGW_TARGET and TCL_DIR to meet your setup
 ### To build for Win64 using MinGW-w64:
 ###	 make -f Makefile.mingwx W64=1
-### To build for Fed14
+### To build on Fedora-14 using a toolchain based on mingw.org
+### instead of mingw-w64:
 ###	 make -f Makefile.mingwx FED=1
 ### Copyright (C) 2013-2015, O. Sezer (sezero@users.sourceforge.net)
 
@@ -32,6 +33,7 @@ endif
 CXX=$(MINGW_TARGET)-g++
 CC=$(MINGW_TARGET)-gcc
 RC=$(MINGW_TARGET)-windres
+STRIP=$(MINGW_TARGET)-strip
 LINK=$(CXX)
 
 
@@ -52,11 +54,10 @@ SCIDFLAGS = -DZLIB
 WARNINGS = -Wall
 
 CFLAGS = -DWIN32 -O2 $(WARNINGS) $(DEBUG)
-
 CXXFLAGS = $(CFLAGS) $(SCIDFLAGS)
-
-LDFLAGS =
 RCFLAGS = --output-format=coff
+
+LDFLAGS = -static-libgcc -static-libstdc++
 
 ifeq ($(WIN_TARGET),win64)
 CFLAGS += -m64
@@ -70,7 +71,7 @@ LDFLAGS+= -m32
 RCFLAGS+= --target=pe-i386
 endif
 
-CQL_INCLUDE = -Isrc/cql -Isrc
+CQL_INCLUDE = -Isrc/cql -Isrc -I$(TCL_DIR)/include
 
 ### EXECS: all the evecutable programs compiled from C++ files.
 EXECS= pgnscid.exe scidt.exe scid.exe tcscid.exe scmerge.exe eco2epd.exe scidlet.exe
@@ -89,6 +90,19 @@ SCIDOBJS= src/misc.o src/index.o src/date.o src/namebase.o src/position.o \
       src/polyglot/move_do.o src/polyglot/move_gen.o src/polyglot/move_legal.o src/polyglot/option.o \
       src/polyglot/parse.o src/polyglot/pgn.o src/polyglot/piece.o src/polyglot/random.o \
       src/polyglot/san.o src/polyglot/search.o src/polyglot/square.o src/polyglot/util.o
+
+## SCID_XOBJS: all the extra .obj files that make up Scid.
+SCID_XOBJS = src/crosstab.o \
+      src/engine.o \
+      src/filter.o \
+      src/optable.o \
+      src/pbook.o \
+      src/probe.o \
+      src/recog.o \
+      src/spellchk.o \
+      src/tree.o
+
+SCID_TK_OBJS = src/tk_selection.o src/TkDND_OleDND.o
 
 CHARSETCONVOBJS= src/charsetdetector.o src/charsetconverter.o \
       src/universalchardet/CharDistribution.o src/universalchardet/JpCntx.o \
@@ -201,8 +215,6 @@ CQLHEADERS= \
 	src/sqmove.h src/sqset.h src/stralloc.h src/strtree.h src/textbuf.h \
 	src/tokens.h src/tree.h
 
-
-
 ### ZLIBOBJS: object files in the zlib compression library.
 
 ZLIBOBJS= src/zlib/adler32.o src/zlib/compress.o src/zlib/crc32.o \
@@ -258,84 +270,72 @@ TCLS= \
 all: $(EXECS) scid.gui
 
 scid.gui: $(TCLS)
-	rm -f ./scid.gui
-	cat $(TCLS) > ./scid.gui
+	rm -f scid.gui
+	cat $(TCLS) > scid.gui
 
 scmerge.exe: src/scmerge.o $(OBJS)
-	$(LINK) -o scmerge.exe src/scmerge.o $(OBJS) $(CHARSETCONVOBJS) -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION)
+	$(LINK) $(LDFLAGS) -o scmerge.exe src/scmerge.o $(OBJS) $(CHARSETCONVOBJS) -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION)
 
 pgnscid.exe: src/pgnscid.o $(OBJS) $(CHARSETCONVOBJS)
-	$(LINK) -o pgnscid.exe src/pgnscid.o $(OBJS) $(CHARSETCONVOBJS) -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION)
+	$(LINK) $(LDFLAGS) -o pgnscid.exe src/pgnscid.o $(OBJS) $(CHARSETCONVOBJS) -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION)
 
 scidt.exe: src/scidt.o $(OBJS) $(CHARSETCONVOBJS)
-	$(LINK) -o scidt.exe src/scidt.o $(OBJS) $(CHARSETCONVOBJS) -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION)
+	$(LINK) $(LDFLAGS) -o scidt.exe src/scidt.o $(OBJS) $(CHARSETCONVOBJS) -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION)
 
 scidlet.exe: src/scidlet.o src/engine.o src/recog.o $(OBJS)
 	$(LINK) $(LDFLAGS) -o scidlet.exe src/scidlet.o src/engine.o src/recog.o \
           src/misc.o src/position.o src/movelist.o src/dstring.o src/myassert.o
 
-scid.exe: src/scid.o $(OBJS) $(CQLOBJS_I) $(CHARSETCONVOBJS) src/tree.o src/filter.o \
-            src/pbook.o src/crosstab.o src/spellchk.o src/probe.o \
-            src/optable.o src/engine.o src/recog.o src/tkdnd/TkDND_OleDND.o src/tk_selection.o scid.res
-	$(LINK) $(LDFLAGS) -o scid.exe src/scid.o $(OBJS) $(CQLOBJS_I) $(CHARSETCONVOBJS) \
-            src/tree.o src/filter.o src/pbook.o \
-            src/crosstab.o src/spellchk.o src/probe.o \
-            src/optable.o src/engine.o src/recog.o src/tkdnd/TkDND_OleDND.o src/tk_selection.o scid.res \
+scid.exe: src/scid.o $(OBJS) $(CQLOBJS_I) $(CHARSETCONVOBJS) $(SCID_XOBJS) $(SCID_TK_OBJS) scid.res
+	$(LINK) $(LDFLAGS) -o scid.exe src/scid.o $(OBJS) $(CQLOBJS_I) $(CHARSETCONVOBJS) $(SCID_XOBJS) $(SCID_TK_OBJS) scid.res \
 	    -mwindows -lole32 -luuid -L$(TCL_DIR)/lib -ltk$(TCL_VERSION) -ltcl$(TCL_VERSION)
 
-tcscid.exe: src/tcscid.o $(OBJS) $(CQLOBJS_I) src/tree.o src/filter.o \
-            src/pbook.o src/crosstab.o src/spellchk.o src/probe.o \
-            src/optable.o src/engine.o src/recog.o $(CHARSETCONVOBJS)
-	$(LINK) $(LDFLAGS) -o tcscid.exe src/tcscid.o $(OBJS) $(CQLOBJS_I) $(CHARSETCONVOBJS) -ltcl$(TCL_VERSION) \
-            src/tree.o src/filter.o src/pbook.o \
-            src/crosstab.o src/spellchk.o src/probe.o \
-            src/optable.o src/engine.o src/recog.o \
-            -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION)
+tcscid.exe: src/tcscid.o $(OBJS) $(CQLOBJS_I) $(SCID_XOBJS) $(CHARSETCONVOBJS)
+	$(LINK) $(LDFLAGS) -o tcscid.exe src/tcscid.o $(OBJS) $(CQLOBJS_I) $(CHARSETCONVOBJS) $(SCID_XOBJS) \
+	    -ltcl$(TCL_VERSION) -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION)
 
-scql: $(CQLOBJS_S) $(CHARSETCONVOBJS)
-	$(LINK) $(LDFLAGS) -o scql $(CQLOBJS_S) $(CHARSETCONVOBJS) $(ZLIB) $(TCL_LIBRARY)
+scql.exe: $(CQLOBJS_S) $(CHARSETCONVOBJS) $(ZLIBOBJS)
+	$(LINK) $(LDFLAGS) -o scql.exe $(CQLOBJS_S) $(CHARSETCONVOBJS) $(ZLIBOBJS) -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION)
 
 eco2epd.exe: src/eco2epd.o src/pbook.o $(OBJS) $(CHARSETCONVOBJS)
-	$(LINK) -o eco2epd.exe src/eco2epd.o src/pbook.o $(OBJS) $(CHARSETCONVOBJS) -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION)
+	$(LINK) $(LDFLAGS) -o eco2epd.exe src/eco2epd.o src/pbook.o $(OBJS) $(CHARSETCONVOBJS) -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION)
 
 scid.res: scid.rc
 	$(RC) $(RCFLAGS) -o scid.res scid.rc
 
 clean:
 	rm -f src/*.o src/zlib/*.o src/polyglot/*.o src/universalchardet/*.o src/cql/*.o $(EXECS) scid.gui scid.res
-	$(MAKE) -C src/tkdnd/ -f Makefile.mingwx clean
 
 strip:
-	$(MINGW_TARGET)-strip $(EXECS)
+	$(STRIP) $(EXECS)
 
 
 src/tcscid.o: src/tkscid.cpp
 	$(CXX) $(CXXFLAGS) -std=c++0x -I$(TCL_DIR)/include -DTCL_ONLY -c src/tkscid.cpp \
-	  -o ./src/tcscid.o
+	  -o src/tcscid.o
 
 src/tkscid.o: src/tkscid.cpp
 	$(CXX) $(CXXFLAGS) -std=c++0x -I$(TCL_DIR)/include -c src/tkscid.cpp \
-	  -o ./src/tkscid.o
+	  -o src/tkscid.o
 
 src/scid.o: src/tkscid.cpp
 	$(CXX) $(CXXFLAGS) -std=c++0x -I$(TCL_DIR)/include -DSOURCE_TCL_FILE="\"scid.gui\"" \
-	  -c src/tkscid.cpp -o ./src/scid.o
+	  -c src/tkscid.cpp -o src/scid.o
 
 src/probe.o: src/probe.cpp src/egtb/tbindex.cpp src/egtb/tbdecode.c
-	$(CXX) $(CXXFLAGS) -Wno-missing-braces $(TB) -c src/probe.cpp -o ./src/probe.o
+	$(CXX) $(CXXFLAGS) -Wno-missing-braces $(TB) -c src/probe.cpp -o src/probe.o
 
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) -I$(TCL_DIR)/include -c $< -o ./$@
+	$(CXX) $(CXXFLAGS) -I$(TCL_DIR)/include -c $< -o $@
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o ./$@
+	$(CC) $(CFLAGS) -c $< -o $@
 
-src/tkdnd/TkDND_OleDND.o: src/tkdnd/win/TkDND_OleDND.cpp
-	$(MAKE) -C src/tkdnd/ -f Makefile.mingwx CC="$(CC)" LINK="$(LINK)" CXXFLAGS="$(CXXFLAGS)" \
-              WIN_TARGET="$(WIN_TARGET)" TCL_VERSION="$(TCL_VERSION)" TCL_DIR="$(TCL_DIR)"
+src/TkDND_OleDND.o: src/tkdnd/win/TkDND_OleDND.cpp
+	$(CXX) $(CXXFLAGS) -Wno-format-security -I$(TCL_DIR)/include -Isrc/tkdnd/win -c $< -o $@
 
 src/cql/s_%.o: src/cql/%.cpp
-	$(CXX) $(CXXFLAGS) -std=c++0x -Wall -Wno-write-strings -Wno-char-subscripts  -Wno-parentheses -Wno-sign-compare -fdiagnostics-show-option -DSTANDALONE $(CQL_INCLUDE) $(TCL_INCLUDE) -o $@ -c $<
+	$(CXX) $(CXXFLAGS) -std=c++0x -Wall -Wno-write-strings -Wno-char-subscripts  -Wno-parentheses -Wno-sign-compare -fdiagnostics-show-option -DSTANDALONE $(CQL_INCLUDE) -o $@ -c $<
 
 src/cql/i_%.o: src/cql/%.cpp
-	$(CXX) $(CXXFLAGS) -std=c++0x -Wall -Wno-write-strings -Wno-char-subscripts  -Wno-parentheses -Wno-sign-compare -fdiagnostics-show-option -DINTEGRATED $(CQL_INCLUDE) $(TCL_INCLUDE) -o $@ -c $<
+	$(CXX) $(CXXFLAGS) -std=c++0x -Wall -Wno-write-strings -Wno-char-subscripts  -Wno-parentheses -Wno-sign-compare -fdiagnostics-show-option -DINTEGRATED $(CQL_INCLUDE) -o $@ -c $<
