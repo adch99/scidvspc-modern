@@ -314,7 +314,7 @@ src\probe.o: src\probe.cpp src\egtb\tbindex.cpp src\egtb\tbdecode.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 src\TkDND_OleDND.o: src\tkdnd\win\TkDND_OleDND.cpp
-	$(CXX) $(CXXFLAGS) -Wno-format-security -I$(TCL_DIR)\include -Isrc\tkdnd\win -c $< -o $@
+	$(CXX) $(CXXFLAGS) -I$(TCL_DIR)\include -Isrc\tkdnd\win -c $< -o $@
 
 src\cql\s_%.o: src\cql\%.cpp
 	$(CXX) $(CXXFLAGS) -std=c++0x -Wall -Wno-write-strings -Wno-char-subscripts  -Wno-parentheses -Wno-sign-compare -fdiagnostics-show-option -DSTANDALONE $(CQL_INCLUDE) -o $@ -c $<
