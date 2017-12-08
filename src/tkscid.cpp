@@ -14523,8 +14523,10 @@ sc_tree_search (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     // Update the normal filter (if desired) S.A.
     if (adjustMode)
 	updateMainFilter(base);
-    else
-	updateMainFilter2(base);
+
+    //// No longer update the main filter for ply.
+    //// Game ply is got from treeFilter in sc_game_load
+    // else updateMainFilter2(base);
 
     // Now we generate the score of each move: it is the expected score per
     // 1000 games. Also generate the ECO code of each move.
