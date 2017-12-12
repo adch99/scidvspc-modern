@@ -21,7 +21,7 @@ set colorSchemes2 {
   { Grey	#dfdfdf #808080 #b0d0e0 #bebebe black }
   { Rosy	#f8dbcc rosybrown #b0d0e0 #bebebe rosybrown4}
   { SteelBlue	lightsteelblue steelblue #51a068 #e0d873 #002958}
-  { Red		rosybrown1 indianred3 #ffa07a lightsalmon #780000}
+  { GreenSA     #46a631 #006400 #008064 rosybrown4 #8bb869 }
 }
 array set newColors {}
 
@@ -166,10 +166,9 @@ proc chooseAColor {w c} {
 }
 
 proc chooseBoardColors {} {
-
-  if {[winfo exists .bdOptions]} {
-    focus .main
-    destroy .bdOptions
+  set w .bdOptions
+  if {[winfo exists $w]} {
+    raiseWin $w
   } else {
     initBoardColors
   }
