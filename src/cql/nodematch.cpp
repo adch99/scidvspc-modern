@@ -851,8 +851,7 @@ void Tokens::show_error(const char* message){
     current()->print();
     printf("\n");
   }
-  cqlDiagnostic = (char*)message;
-  myexit();
+  uassert(false, message);
 }
 
 VectorNode* Tokens::match_vectornode(){

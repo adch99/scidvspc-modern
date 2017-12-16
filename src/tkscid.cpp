@@ -15388,24 +15388,6 @@ sc_search_cql (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     cqlErrMsg = NULL;
     cqlDiagnostic = NULL;
 
-    // We believe it is safe to employ longjmp(), since all CQL destructors are trivial.
-    // Nonetheless, TODO: maybe should use C++ exception handling here...
-    extern std::jmp_buf jump_buffer;
-    void CqlFreeRes();
-    bool jumpBoundary = false;
-    if (setjmp(jump_buffer) != 0 ) {
-      CqlFreeRes();
-      if (cqlErrMsg) Tcl_AppendResult (ti, cqlErrMsg, NULL);
-      else Tcl_AppendResult (ti, "Error reported back from CQL engine.", NULL);
-      if (cqlDiagnostic) Tcl_AppendResult (ti, "|", "ERROR: ", cqlDiagnostic, NULL);
-      if (jumpBoundary) {
-        // Do not commit the games matched and replaced thus far to the base.
-        fprintf(stderr, "\nERROR: longjmp() while matching game number %d\n", gameNum);
-        return errorResult (ti, "longjmp() beyond expected boundary... see <stdout> for detail.");
-      }
-      return TCL_OK;
-    }
-
     // Set to true to show some useful info on <stdout>.
     extern bool CqlShowLex, CqlShowParse, CqlDebug, CqlShowDtor;
     CqlShowLex = false;
@@ -15413,15 +15395,21 @@ sc_search_cql (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     CqlShowDtor = true;
     CqlDebug = false;
 
+    // We believe it is safe to employ longjmp(), since all CQL destructors are trivial.
+    // Nonetheless, TODO: maybe should use C++ exception handling here...
+    extern std::jmp_buf jump_buffer;
+    void CqlFreeRes();
+    if (setjmp(jump_buffer) != 0 ) {
+      CqlFreeRes();
+      if (cqlErrMsg) Tcl_AppendResult (ti, cqlErrMsg, NULL);
+      else Tcl_AppendResult (ti, "Error reported back from CQL engine.", NULL);
+      if (cqlDiagnostic) Tcl_AppendResult (ti, "|", cqlDiagnostic, NULL);
+      return TCL_OK;
+    }
+
     // Parse the CQL script.
     bool CqlParseBuffer(char*);
     CqlParseBuffer((char *)argv[5]);
-
-    // Working theory holds that:
-    // -- All parsing errors are caught above.
-    // -- No long jumps should occur beyond this point.
-    // -- If a jump does occur, either the game is corrupted or we found a CQL bug.
-    jumpBoundary = true;
 
     Timer timer;  // Start timing this search.
 
@@ -15441,8 +15429,16 @@ sc_search_cql (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     IndexEntry * ie;
     Game * g = scratchGame;  // TODO: how is this NOT a memory leak?
     bool dirtyFlag = false;  // has a game been replaced?
+    bool jumpFlag = false;   // have we caught a longjump()?
 
     for (gameNum=0; gameNum < db->numGames; gameNum++) {
+        // If we're just finishing out after a longjump(), remove all remaining
+        // games from the filter.
+        if (jumpFlag) {
+          db->dbFilter->Set (gameNum, 0); // remove the game from the filter
+          continue;
+        }
+
         // Update the percentage done bar:
         if (showProgress) {
             update--;
@@ -15511,11 +15507,19 @@ sc_search_cql (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
           if (countMatch) g->SetAltered(true);
         }
 
+        if (setjmp(jump_buffer) != 0 ) {
+          printf("CQL longjump() while matching gamenumber %d\n", gameNum+1);
+          //db->gameNumber = gameNum;
+          jumpFlag = true;
+          db->dbFilter->Set (gameNum, g->GetCurrentPly() + 1);
+          continue;
+        }
+
         // See if the game matches.
         bool CqlMatchGame(Game *);  // this is our surrogate in the cql code... see comment
         extern uint CqlMatchPlyFirst; // set by the cql engine
         if ( CqlMatchGame(g) ) {
-          if (CqlMatchPlyFirst >= 254) { CqlMatchPlyFirst = 254; } // is 254 enough cushion?
+          if (CqlMatchPlyFirst > 254) { CqlMatchPlyFirst = 254; } // is 254 enough cushion?
           db->dbFilter->Set (gameNum, CqlMatchPlyFirst + 1);
         } else {
           db->dbFilter->Set (gameNum, 0); // remove the game from the filter
@@ -15533,10 +15537,7 @@ sc_search_cql (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     CqlFreeRes();
 
     // If necessary, update index and name files:
-    // Technically, the dirty flag will never be set if we're in silent mode,
-    // but anyone new to this code is likely to introduce a bug or two,
-    // so we make the double check.
-    if (dirtyFlag && !silentSwitch) {
+    if (dirtyFlag) {
         db->gfile->FlushAll();
         if (db->idx->WriteHeader() != OK) {
             return errorResult (ti, "Error writing index file.");
@@ -15552,19 +15553,26 @@ sc_search_cql (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     if (showProgress) { updateProgressBar (ti, 1, 1); }
 
     // Now print statistics and time for the search:
-    char temp[200];
-    int centisecs = timer.CentiSecs();
-    if (gameNum != db->numGames) {
-        Tcl_AppendResult (ti, errMsgSearchInterrupted(ti), "  ", NULL);
-    }
-    sprintf (temp, "%d / %d  (%d%c%02d s)",
+    // If the jump flag is set, we're falling out with an exception.
+    if (jumpFlag) {
+      if (cqlErrMsg) Tcl_AppendResult (ti, cqlErrMsg, NULL);
+      else Tcl_AppendResult (ti, "Error reported back from CQL engine.", NULL);
+      if (cqlDiagnostic) Tcl_AppendResult (ti, "|", cqlDiagnostic, NULL);
+    } else {
+      char temp[200];
+      int centisecs = timer.CentiSecs();
+      if (gameNum != db->numGames) {
+          Tcl_AppendResult (ti, errMsgSearchInterrupted(ti), "  ", NULL);
+      }
+      sprintf (temp, "%d / %d  (%d%c%02d s)",
              db->dbFilter->Count(), startFilterCount,
              centisecs / 100, decimalPointChar, centisecs % 100);
-    Tcl_AppendResult (ti, temp, NULL);
+      Tcl_AppendResult (ti, temp, NULL);
 #ifdef SHOW_SKIPPED_STATS
-    sprintf(temp, "  Skipped %u games.", skipcount);
-    Tcl_AppendResult (ti, temp, NULL);
+      sprintf(temp, "  Skipped %u games.", skipcount);
+      Tcl_AppendResult (ti, temp, NULL);
 #endif
+    }
 
     return TCL_OK;
 }

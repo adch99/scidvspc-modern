@@ -55,7 +55,7 @@ void uassert(bool b){
 void uassert(bool b,const char*s){
   if (!b){
     printf("error: %s\n",s);
-    cqlErrMsg = (char*)s;
+    cqlDiagnostic = (char*)s;
     myexit();
   }
 }
@@ -65,10 +65,10 @@ void uassert(bool b,const char*s, const char*s2){
   if (!b){
     printf("error: %s %s\n",s,s2);
     if ( strlen(s) + strlen(s2) >= sizeof(assertBuffer)) {
-      cqlErrMsg = "Internal CQL Error: assert message too long";
+      cqlDiagnostic = "Internal CQL Error: assert message too long";
     } else {
       sprintf(assertBuffer, "%s %s",s,s2);
-      cqlErrMsg = assertBuffer;
+      cqlDiagnostic = assertBuffer;
     }
     myexit();
   }
