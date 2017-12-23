@@ -338,7 +338,6 @@ proc ::search::cql {} {
     set w .scql
 
     $w.status     configure -text {}
-    $w.diagnostic configure -text {}
 
     busyCursor .
     $w.b.stop configure -state normal
@@ -375,17 +374,12 @@ proc ::search::cql {} {
     }
     ::windows::stats::Refresh
 
-    set index [string first | $str]
-    if { $index == -1 } {
-      set strStatus $str
-      set strDiag {}
-    } else {
-      set strStatus [string range $str 0 $index-1]
-      set strDiag [string range $str $index+1 end]
+    set index [string first "|" $str]
+    if { $index > 5 } {
+      set str "[string range $str 0 $index-1] -- [string range $str $index+1 end]"
     }
 
-    $w.status configure -text $strStatus
-    $w.diagnostic configure -text $strDiag
+    $w.status configure -text $str
   }
 
   dialogbutton $w.b.cancel -textvar ::tr(Close) -command "focus .main ; destroy $w"
@@ -397,11 +391,8 @@ proc ::search::cql {} {
 
   packbuttons left  $w.b.save $w.b.load
 
-  label $w.diagnostic -text "" -width 1 -font font_Small -relief sunken -anchor w
-  label $w.status -text "" -width 1 -font font_Small -relief sunken -anchor w
+  label $w.status -text "" -font font_Small -relief sunken -anchor w
 
-  # Two status bars (?) and the button bar
-  pack $w.diagnostic -side bottom -fill x
   pack $w.status     -side bottom -fill x
   pack $w.b          -side bottom -fill x
 
