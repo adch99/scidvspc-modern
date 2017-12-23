@@ -1231,41 +1231,46 @@ set helpText(CQL) {<h1>Chess Query Language</h1>
   Other CQL commands also allow for other comments to be added and for processing of variations.
   These additional comments will *not* be removed with the Strip button, and neither does stripping 
   remove any comments from variations.
-  </p><p>
-  Status and diagnostics returned from the CQL query will appear at the bottom
-  of the search window.  Any syntax error will display a brief explanation in the 
-  diagnostics area.  More diagnostics will be sent to <b>standard output</b>, which
-  can be observed by executing Scid from the command line. For the industrious user, even
-  more information can be had by setting the bools CqlShowLex, CqlShowParse, and
-  CqlDebug to <b>true</b> in tkscid.cpp, then rebuilding tkscid.
   </p>
   <p>
-  A few CQL keywords, which are non-sensical in an Scid context, have null effect.
-  The CQL header params <b>input</b> and <b>output</b> are obvious candidates. 
-  Also, the <b>sort filter</b> has been vanquished for the time being.
-  (If there is sufficient demand for the feature, it might be implemented at a later date.)
-  And the CQL header may now be given as empty ( <b>cql()</b> ), 
-  unlike with the standalone cql executable.
-  </p>
-  <p>
-  It's worth noting that for many searches which can be expressed with CQL,
+  It's worth noting that for many simple CQL searches,
   the equivalent native Scid search (header, material, pattern, etc) will be much faster.
   CQL is not optimized for trivial queries - though it is more powerful of course -
   and as a result complex searches can be very slow.
   </p>
   <p>
   Thanks go to Lewis Stiller and Gady Costeff for their innovative work on CQL.
-  Documentation for the language can be found on 
+<br>
+  Fairly technical documentation for their language can be found at
   <url http://www.gadycosteff.com/cql>their CQL site</url>
   </p>
-  <p>
-<h4>Examples</h4>
-<ul>
-<li>cql() shifthorizontal shiftvertical flipcolor {ra8 rc8 Pb7} ;# Find all pawn forks both rooks.</li>
-</ul>
-</p>
 
-  <p><footer>Updated: Scid vs. PC 4.19 Nov 2017</footer></p>
+  <h3>Examples</h3>
+  <ul>
+  <li>cql() shifthorizontal shiftvertical flipcolor {ra8 rc8 Pb7} ; Find all pawn forks both rooks.</li>
+  <li>cql() flipcolor shifthorizontal countsquares 3 P[b2-7] ; Tripled pawns
+  <li>cql() flipcolor flip { next2 5 100 ((move from Q to up 1 Q move from Q to right 1 Q)+ {move from Q to up 1 Q}? ) } ; Queen 'Staircase'
+  </ul>
+  </p>
+
+  <h3>Technical</h3>
+  <p>
+  This feature is not mature; it leaks memory, is not terribly re-entrant (some errors will make
+  future searches broken until ScidvsPC is restarted), and can choke on games with <a Variations Null>null move</a>.
+  </p>
+  <p>
+  Some error messages will be shown in the status bar, others 
+  in more detail on the command line (Linux and OS X only). For developers, more 
+  information can be had by setting the variables CqlShowLex, CqlShowParse, and CqlDebug in tkscid.cpp.
+  </p>
+  <p>
+  A few CQL keywords which are non-sensical in an Scid context, have null effect.
+  The CQL header params <b>input</b> and <b>output</b> are obvious candidates, likewise
+  the CQL header will now generally be empty  <b>cql()</b> , unlike the standalone CQL executable.
+  The <b>sort filter</b> has been disabled for the time being, though may be implemented later.
+  </p>
+
+  <p><footer>Updated: Scid vs. PC 4.19 Dec 2017</footer></p>
 }
 set helpTitle(Filter) "The Filter"
 set helpText(Filter) {<h1>The Filter</h1>

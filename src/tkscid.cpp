@@ -15353,24 +15353,21 @@ sc_search_cql (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
       "Usage: sc_search cql <filterOp> <stripSwitch> <silentSwitch> <syntax>";
     bool showProgress = startProgressBar();
 
-    if (!db->inUse) return errorResult (ti, errMsgNotOpen(ti));
+    if (argc != 6)
+      return errorResult (ti, usageStr);
 
-    if (argc != 6) { return errorResult (ti, usageStr); }
+    if (!db->inUse)
+      return errorResult (ti, errMsgNotOpen(ti));
 
     filterOpT filterOp = strGetFilterOp (argv[2]);
 
-    // argv[3] is the strip switch
-    bool stripSwitch = false;
-    if (argv[3][0] == '1') stripSwitch = true;
+    bool stripSwitch = (argv[3][0] == '1');
 
-    // argv[4] is the silent switch
-    // This corresponds to the 'Add Comments' user option.
-    bool silentSwitch = true;
-    if (argv[4][0] == '1') silentSwitch = false;
+    // This corresponds to the 'Allow Comments' user option.
+    bool silentSwitch = (argv[4][0] != '1');
 
     // If the base is readonly, just run the query in silent mode.
     if (db->fileMode==FMODE_ReadOnly) silentSwitch = true;
-
     // This will let the engine run slightly more efficiently.
     // The larger effect of silentSwitch is that we will simply not replace the game.
     extern bool CqlSilent;
@@ -15402,7 +15399,7 @@ sc_search_cql (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     if (setjmp(jump_buffer) != 0 ) {
       CqlFreeRes();
       if (cqlErrMsg) Tcl_AppendResult (ti, cqlErrMsg, NULL);
-      else Tcl_AppendResult (ti, "Error reported back from CQL engine.", NULL);
+      else Tcl_AppendResult (ti, "Error reported back from CQL engine", NULL);
       if (cqlDiagnostic) Tcl_AppendResult (ti, "|", cqlDiagnostic, NULL);
       return TCL_OK;
     }
@@ -15556,7 +15553,7 @@ sc_search_cql (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     // If the jump flag is set, we're falling out with an exception.
     if (jumpFlag) {
       if (cqlErrMsg) Tcl_AppendResult (ti, cqlErrMsg, NULL);
-      else Tcl_AppendResult (ti, "Error reported back from CQL engine.", NULL);
+      else Tcl_AppendResult (ti, "Error reported back from CQL engine", NULL);
       if (cqlDiagnostic) Tcl_AppendResult (ti, "|", cqlDiagnostic, NULL);
     } else {
       char temp[200];
