@@ -293,15 +293,15 @@ strip:
 
 
 src\tcscid.o: src\tkscid.cpp
-	$(CXX) $(CXXFLAGS) -std=c++0x -I$(TCL_DIR)\include -DTCL_ONLY -c src\tkscid.cpp \
+	$(CXX) $(CXXFLAGS) -std=c++11 -I$(TCL_DIR)\include -DTCL_ONLY -c src\tkscid.cpp \
 	  -o src\tcscid.o
 
 src\tkscid.o: src\tkscid.cpp
-	$(CXX) $(CXXFLAGS) -std=c++0x -I$(TCL_DIR)\include -c src\tkscid.cpp \
+	$(CXX) $(CXXFLAGS) -std=c++11 -I$(TCL_DIR)\include -c src\tkscid.cpp \
 	  -o src\tkscid.o
 
 src\scid.o: src\tkscid.cpp
-	$(CXX) $(CXXFLAGS) -std=c++0x -I$(TCL_DIR)\include -DSOURCE_TCL_FILE="\"scid.gui\"" \
+	$(CXX) $(CXXFLAGS) -std=c++11 -I$(TCL_DIR)\include -DSOURCE_TCL_FILE="\"scid.gui\"" \
 	  -c src\tkscid.cpp -o src\scid.o
 
 src\probe.o: src\probe.cpp src\egtb\tbindex.cpp src\egtb\tbdecode.c
@@ -317,7 +317,7 @@ src\TkDND_OleDND.o: src\tkdnd\win\TkDND_OleDND.cpp
 	$(CXX) $(CXXFLAGS) -I$(TCL_DIR)\include -Isrc\tkdnd\win -c $< -o $@
 
 src\cql\s_%.o: src\cql\%.cpp
-	$(CXX) $(CXXFLAGS) -std=c++0x -Wall -Wno-write-strings -Wno-char-subscripts  -Wno-parentheses -Wno-sign-compare -fdiagnostics-show-option -DSTANDALONE $(CQL_INCLUDE) -o $@ -c $<
+	$(CXX) $(CXXFLAGS) -std=c++11 -Wall -Wno-write-strings -Wno-char-subscripts  -Wno-parentheses -Wno-sign-compare -fdiagnostics-show-option -DSTANDALONE $(CQL_INCLUDE) -o $@ -c $<
 
 src\cql\i_%.o: src\cql\%.cpp
-	$(CXX) $(CXXFLAGS) -std=c++0x -Wall -Wno-write-strings -Wno-char-subscripts  -Wno-parentheses -Wno-sign-compare -fdiagnostics-show-option -DINTEGRATED $(CQL_INCLUDE) -o $@ -c $<
+	$(CXX) $(CXXFLAGS) -std=c++11 -Wall -Wno-write-strings -Wno-char-subscripts  -Wno-parentheses -Wno-sign-compare -fdiagnostics-show-option -DINTEGRATED $(CQL_INCLUDE) -o $@ -c $<
