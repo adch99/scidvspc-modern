@@ -389,8 +389,9 @@ TransformSetNode* Tokens::match_transformsetnode(){
   return tset;
 }
 
+int Tokens::nextid=0;
+
 NumericVariable* Tokens::match_optionalnumericvariable(bool ismax){
-  static int nextid=0;
   const char*name=match_quotedstring();
   if(!name){
     ++nextid;

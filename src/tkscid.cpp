@@ -15395,9 +15395,9 @@ sc_search_cql (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     // We believe it is safe to employ longjmp(), since all CQL destructors are trivial.
     // Nonetheless, TODO: maybe should use C++ exception handling here...
     extern std::jmp_buf jump_buffer;
-    void CqlFreeRes();
+    void CqlReset();
     if (setjmp(jump_buffer) != 0 ) {
-      CqlFreeRes();
+      CqlReset();
       if (cqlErrMsg) Tcl_AppendResult (ti, cqlErrMsg, NULL);
       else Tcl_AppendResult (ti, "Error reported back from CQL engine", NULL);
       if (cqlDiagnostic) Tcl_AppendResult (ti, "|", cqlDiagnostic, NULL);
@@ -15530,8 +15530,8 @@ sc_search_cql (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         }
     }
 
-    // Free the engine's query resources.
-    CqlFreeRes();
+    // Reset the engine.
+    CqlReset();
 
     // If necessary, update index and name files:
     if (dirtyFlag) {

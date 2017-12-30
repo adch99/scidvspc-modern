@@ -6,6 +6,7 @@
   
 class Tokens{
  public:
+  static int nextid;
   void print();
   int bottom;
   vector<Token*>tokens;

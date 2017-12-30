@@ -168,9 +168,10 @@ bool MarkBoard::gameSeekIdDescendants(moveT*myid, Game*game, bool vars){
   }
   return false;
 }
+
+int  MarkBoard::lastignored=-1;
   
 void MarkBoard::gameAppendComment(Game*game, const char* comment){
-  static int  lastignored=-1;
   uassert(comment);
   uassert(strlen(comment)<2000);
   if(strlen(comment)==0)return;
@@ -233,8 +234,9 @@ vector<simpleMoveT*> MarkBoard::getMoves(Game*game,bool searchvars){
   return moves;
 }
   
+int MarkBoard::gamenumber=0;
+
 vector<simpleMoveT*> MarkBoard::getLegalMoves(Game*game){
-  static int gamenumber=0;
   static std::map<moveT*,vector<simpleMoveT*>> legalmap;
   if(game->GetNumber()!=gamenumber){
     gamenumber=game->GetNumber();
