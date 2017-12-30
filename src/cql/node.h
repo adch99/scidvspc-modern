@@ -85,6 +85,8 @@ class SetBase: public MFilter{ //abstract
 
 class PieceLoc:public SetBase{
  public:
+  static moveT* lastid;
+  static int lastgamenumber;
   SquareMask pieces;
   SquareMask squaremask;
   vector<Variable*> variables;

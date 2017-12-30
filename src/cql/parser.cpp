@@ -1,6 +1,7 @@
 #include "parser.h"
 #include "lexer.h"
 #include "cql.h"
+#include "tokenstream.h"
 
 static Tokens* GlobalTokens;
 
@@ -77,7 +78,21 @@ bool CqlParseBuffer(char *buffer) {
   return true;
 }
 
-void CqlFreeRes() {
+// Reset initialised statics and free mem resources.
+void CqlReset() {
+
+  MarkBoard::gamenumber=0;
+  MarkBoard::lastignored=-1;
+  if (MarkBoard::globalMarkBoard) {
+    delete MarkBoard::globalMarkBoard;
+    MarkBoard::globalMarkBoard=NULL;
+  }
+
+  Tokens::nextid=0;
+
+  PieceLoc::lastid=NULL;
+  PieceLoc::lastgamenumber=-1;
+
   if (nodeScid) {
     delete nodeScid;
     nodeScid = NULL;

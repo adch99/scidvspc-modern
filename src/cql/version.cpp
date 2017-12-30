@@ -21,4 +21,3 @@ Range* CqlGameNumberRange=0;
 Range* CqlYearRange=0;
 const char* CqlPlayer=0;
 
-

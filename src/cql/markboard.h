@@ -33,6 +33,9 @@ class MarkBoard{
   void pushstate();
     //class variables
   static MarkBoard * globalMarkBoard;
+  static int lastignored;
+  static int gamenumber;
+
 
   //static methods
   static int getSquare(markT mark);
