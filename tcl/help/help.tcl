@@ -2741,16 +2741,20 @@ set helpTitle(Flags) "Game Flags"
 set helpText(Flags) {<h1>Game Flags</h1>
 
   <p>
-  Game Flags are indicators of some characteristic, such as <b>Brilliant Play</b> or <b>White Opening</b>,
+  Game Flags are indicators of some characteristic, such as "Brilliant Play" or "White Opening",
   and are used for classifying games and enabling fast database searches.
   There are <b>12 user flags</b> and <b>6 custom flags</b>
   </p>
-  <p>
-  Additionally, <b>Delete</b> is just a special-case flag, which
-  indicates games will be removed when the database it is next <a Compact>compacted</a>.
+
+  <p> Flags are set in the <a Maintenance>Maintenance Window</a>. Select the desired
+  flag from the menu-button, and then use the appropriate "Mark" button.
+  The <a GameList Del>Delete</a> flag has its own buttons,
+  but it is just a special-case flag which indicates games will be removed when the
+  database it is next <a Compact>compacted</a>.
+  Scid vs. PC also allows quick flag tagging via the <a GameList>Game List</a> context menu.
   </p>
   <p>
-  The 12 user flags are
+  The User Flags are
   </p>
 
   <ul>
@@ -2768,36 +2772,30 @@ set helpText(Flags) {<h1>Game Flags</h1>
   <li>U - User-defined</li>
   </ul>
   <p>
-  The 6 custom flags (1 to 6) are user changeable, and can have labels up to eight characters long.
+  The Custom Flags (1 to 6) have labels up to eight characters long, which are
+  changeable in the Maintenance Window.
   </p>
 
   <p>
-  Flags are set in the <a Maintenance>Maintenance Window</a>. Scid vs. PC also allows quick flag tagging via the <a
-  GameList>Game List</a> context menu.
-  </p>
-  <p>
-  You can use a <a Searches Header>Header Search</a> to find all
-  games in a database that have a particular flag turned on or off,
+  You can use a <a Searches Header>Header Search</a> to find 
+  games with a particular flag turned on or off,
   or use flags as part of more complex searches.
   </p>
   <p>
-  Since all the user flags (except Delete) have
+  Since all the user flags (except Delete and Tactics) have
   no special significance, one may use them for any purpose.
   For example, you could use the Kingside (K)
   flag for kingside pawn storms, or kingside heavy piece attacks,
   or even for endgames with all pawns on the kingside.
   </p>
   <p>
-  Note, sensible handling of flags can speed up searches significantly!
-  </p>
-  <p>
-  The following functions of Scid set or require flags:
+  More information about use of the <b>Tactics</b> flag can be found in
   <ul>
-     <li><a Analysis Annotating>Mark tactical exercise</a>: sets the (T) flag
-     <li><a FindBestMove>Training-<gt>Find best move</a>: evaluates the (T) flag
+     <li><a Analysis Annotating>Mark tactical exercise</a> (sets the T flag)
+     <li><a FindBestMove>Training-<gt>Find best move</a> (evaluates the T flag)
   </ul>
 
-  <p><footer>Updated: Scid vs. PC 4.4, May 2011</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.19, Jan 2018</footer></p>
 }
 
 set helpTitle(Analysis) "Analysis Window"
