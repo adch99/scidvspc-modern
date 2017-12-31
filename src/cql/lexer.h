@@ -3,8 +3,6 @@
 
 bool lexFile(const char*filename, vector<Token*>*tokens);
 bool lexStream(FILE*file,char*buffer,vector<Token*>*tokens);
-//bool lexStream(FILE*file,vector<Token*>*tokens) { return lexStream(file,NULL,tokens); }
-//bool lexStream(char*buffer,vector<Token*>*tokens) { return lexStream(NULL,buffer,tokens); }
 char * readstring(FILE * file);
 char * readstring(char * buffer);
 Token* makeToken(char* val);

@@ -251,38 +251,6 @@ Game::WriteToPGN_CQL(TextBuffer * tb){
   return WritePGN_CQL(tb,0);
 }
 
-bool
-Position::IsKingInMateCQL ()
-{
-  return IsKingInMate();
-
-    //NumChecks = CalcNumChecks (GetKingSquare(ToMove), &CheckSquares);
-    //if (NumChecks == 0) { return false; }
-    //CalcPins ();
-    //MoveList mlist;
-    //GenCheckEvasions (&mlist, EMPTY, GEN_ALL_MOVES, &CheckSquares);
-    //if (mlist.Size() == 0) { return true; }
-    //return false;
-}
-
-bool Position::IsKingInCheckCQL(){
-  return IsKingInCheck();
-
-  //return CalcNumChecks (GetKingSquare(ToMove),&CheckSquares)>0;
-}
-
-bool Position::IsKingInStalemateCQL(){
-  return IsStaleMate();
-
-  //puts("enter IsKingInStalemateCQL");
-  //GenerateMoves();
-  //if (LegalMoves.Size()!=0)return false;
-  //puts("LegalMoves is zero");
-  //CalcNumChecks(GetKingSquare(ToMove));
-  //printf("Numchecks == %d\n", NumChecks);
-  //return NumChecks==0;
-}
-  
 void MFile::skipNonAscii(){
   uassert(Handle&&Location==0);
   int c;
