@@ -3,8 +3,9 @@
 #include "cql.h"
 #include "tokenstream.h"
 
-static Tokens* GlobalTokens;
+static Tokens* CqlGlobalTokens;
 
+#ifdef STANDALONE
 CqlNode* parseFile(const char* filename){
   if(CqlDebug)printf("Parser: lexing file: %s\n",filename);
   vector<Token*> tokens;
@@ -12,7 +13,7 @@ CqlNode* parseFile(const char* filename){
   if(CqlShowLex)
     printf("Got return of: %d and ntokens: %lu\n",ret,tokens.size());
   Tokens * ts=new Tokens(tokens);
-  GlobalTokens=ts;
+  CqlGlobalTokens=ts;
   if(CqlShowLex){
     printf("Printing the token stream for file: %s:\n",filename);
     ts->print();
@@ -28,8 +29,9 @@ CqlNode* parseFile(const char* filename){
   n->addSortFields(n->sortfields);
   return n;
 }
+#endif
 
-
+#ifdef INTEGRATED
 CqlNode* parseBuffer(char* buffer){
   static bool pbDoOnce = true;
   if(CqlDebug)printf("Parser: lexing buffer:\n");
@@ -38,7 +40,7 @@ CqlNode* parseBuffer(char* buffer){
   if(CqlShowLex)
     printf("Got return of: %d and ntokens: %lu\n",ret,tokens.size());
   Tokens * ts=new Tokens(tokens);
-  GlobalTokens=ts;
+  CqlGlobalTokens=ts;
   if(CqlShowLex){
     printf("Printing the token stream:\n");
     ts->print();
@@ -57,17 +59,19 @@ CqlNode* parseBuffer(char* buffer){
   n->addSortFields(n->sortfields);
   return n;
 }
+#endif
 
 void showTokens(){
-  if(!GlobalTokens)
+  if(!CqlGlobalTokens)
     printf("No global tokens\n");
-  GlobalTokens->print();
+  CqlGlobalTokens->print();
 }
 
 
 // Everything below this line is kludgeville... necessary because any inclusion
 // of a header from this directory in tkscid.cpp descends into include-file-hell.
 
+#ifdef INTEGRATED
 extern CqlNode* nodeScid;
 
 bool CqlParseBuffer(char *buffer) {
@@ -98,8 +102,9 @@ void CqlReset() {
     nodeScid = NULL;
   }
 
-  if (GlobalTokens) {
-    delete GlobalTokens;
-    GlobalTokens = NULL;
+  if (CqlGlobalTokens) {
+    delete CqlGlobalTokens;
+    CqlGlobalTokens = NULL;
   }
 }
+#endif

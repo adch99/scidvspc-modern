@@ -1,6 +1,6 @@
 #include "node.h"
 
-int matchCount = 0;
+int CqlMatchCount = 0;
 uint CqlMatchPlyFirst;
 
 void CqlNode::do_match(MFilter*p,Game*game){
@@ -11,7 +11,7 @@ void CqlNode::do_match(MFilter*p,Game*game){
   auto id=MarkBoard::identity(game);
   if(p->match_position(game)){
     mc->increment();
-    if (!matchCount++) CqlMatchPlyFirst = game->GetCurrentPly();
+    if (!CqlMatchCount++) CqlMatchPlyFirst = game->GetCurrentPly();
     if(p->annotateFlag&&!isSilent())
       MarkBoard::gameAppendComment(game,"MATCH");
   }
@@ -54,7 +54,7 @@ bool CqlNode::match_game(Game*game){
   for(GameFilter* gf : gamefilters)
     if(!gf->match_game(game))
       return false;
-  matchCount = 0;
+  CqlMatchCount = 0;
   do_match(filter,game);
   int nmatches=(int)(mc->getValue());
   uassert(nmatches==(int)(mc->getExtremalValue()));
@@ -122,22 +122,17 @@ void CqlNode::match(){
 // Everything below this line is kludgeville... necessary because any inclusion
 // of a header from this directory in tkscid.cpp descends into include-file-hell.
 
+#ifdef INTEGRATED
 CqlNode* nodeScid = NULL;
 
 bool CqlMatchGame(Game *game) {
-
-  // override the CQL header silent param
-  //if (CqlSilent) nodeScid->CommentFlags::makeSilent();
-
   Range* gamenumberrange = nodeScid->gamenumberrange;
   int currentGameNumber = game->GetNumber();
-  //printf("game number: %d\n", currentGameNumber);
   if(gamenumberrange) {
-    //printf("game range: %d %d\n", gamenumberrange->min, gamenumberrange->max);
     if(currentGameNumber > gamenumberrange->max || currentGameNumber < gamenumberrange->min)
       return false;
   }
 
   return nodeScid->match_game(game);
 }
-
+#endif

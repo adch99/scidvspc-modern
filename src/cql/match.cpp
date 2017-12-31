@@ -28,7 +28,7 @@ bool TerminalNode::match_position(Game*game){
 
 bool CheckNode::match_position(Game*game){
   Position*pos=game->GetCurrentPos();
-  return pos->IsKingInCheckCQL();
+  return pos->IsKingInCheck();
 }
 
 bool InVariationNode::match_position(Game*game){
@@ -41,13 +41,13 @@ bool InMainlineNode::match_position(Game*game){
 
 bool MateNode::match_position(Game*game){
   Position*pos=game->GetCurrentPos();
-  return pos->IsKingInMateCQL();
+  return pos->IsKingInMate();
 }
 
 
 bool StalemateNode::match_position(Game*game){
   Position*pos=game->GetCurrentPos();
-  return pos->IsKingInStalemateCQL();
+  return pos->IsStaleMate();
 }
 
 

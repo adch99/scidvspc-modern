@@ -107,9 +107,6 @@ private:
     uint            Hash;           // Hash value.
     uint            PawnHash;       // Pawn structure hash value.
 
-    //uint            NumChecks;      // Number of checks.  CQL
-    //SquareList      CheckSquares;   // Stores pieces checking the king.  CQL
-
     MoveList        LegalMoves;     // list of legal moves
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -141,28 +138,6 @@ private:
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     //  Position:  Public Functions
 public:
-    bool IsKingInStalemateCQL();
-    bool IsKingInMateCQL();
-    bool IsKingInCheckCQL();
-
-#ifdef WINCE
-  void* operator new(size_t sz) {
-    void* m = my_Tcl_Alloc(sz);
-    return m;
-  }
-  void operator delete(void* m) {
-    my_Tcl_Free((char*)m);
-  }
-  void* operator new [] (size_t sz) {
-    void* m = my_Tcl_AttemptAlloc(sz);
-    return m;
-  }
-
-  void operator delete [] (void* m) {
-    my_Tcl_Free((char*)m);
-  }
-
-#endif
     Position()   { Init(); }
     Position(const Position& p);
     ~Position()  {}
