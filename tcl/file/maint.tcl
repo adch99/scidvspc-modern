@@ -202,7 +202,7 @@ proc ::maint::Open {} {
     }
   }
 
-  label $w.delete.title -textvar ::tr(DeleteFlag) -font $bold
+  label $w.delete.title -textvar ::tr(GlistFlags) -font $bold
   menubutton $w.mark.title -menu $w.mark.title.m -indicatoron 1 -relief flat -font $bold
   menu $w.mark.title.m -font $font
 
