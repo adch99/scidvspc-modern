@@ -786,7 +786,7 @@ proc checkAllGames {} {
   frame $w.f.b
   dialogbutton $w.f.b.go -textvar ::tr(CheckGames) -command {
     busyCursor .
-    .checkGames.f.b.cancel configure -command "sc_progressBar"
+    .checkGames.f.b.cancel configure -command sc_progressBar
     .checkGames.f.b.cancel configure -textvar ::tr(Stop)
     sc_progressBar .checkGames.f.progress bar 301 21 time
     grab .checkGames.f.b.cancel
@@ -854,38 +854,25 @@ proc stripCommentsVars {arg {parent .}} {
   frame $w.f.b
   dialogbutton $w.f.b.go -text "[tr EditStrip] $arg" -command {
     destroy .stripCommentsVars
-    set ::maint::cancelStrip 0
-    progressWindow "Scid" "Stripping $checkOption(arg)" $::tr(Stop) ::maint::sc_progressBar
+    progressWindow "Scid" "Stripping $checkOption(arg)" $::tr(Stop) sc_progressBar
     busyCursor .
-    if {$checkOption(AllGames) == "all"} {
-      set next 1
-      set numGames [sc_base numGames]
-      while {$next <= $numGames && !$::maint::cancelStrip} {
-	updateProgressWindow $next $numGames
-	sc_game load $next
-        sc_game strip $checkOption(arg)
-        sc_game save $next
-        incr next
-      }
-    } else {
-      set next [sc_filter first]
-      set numGames [sc_filter count]
-      set i 0
-      while {$next && !$::maint::cancelStrip} {
-	incr i
-	updateProgressWindow $i $numGames
-	sc_game load $next
-        sc_game strip $checkOption(arg)
-        sc_game save $next
-        set next [sc_filter next]
-      }
+
+    set current [sc_game number]
+
+    sc_game strip $checkOption(arg) $checkOption(AllGames)
+
+    catch {
+      sc_game load $current
+      updateBoard -pgn
     }
+
     unbusyCursor .
     closeProgressWindow
     # wtf is the gamelist refresh making it go blank !?
     # ::windows::gamelist::Refresh
     updateBoard -pgn
   }
+
   dialogbutton $w.f.b.cancel -textvar ::tr(Cancel) -command "focus .main ; destroy $w"
   
   pack $w.f.label $w.f.g -side top -pady 5
@@ -898,12 +885,6 @@ proc stripCommentsVars {arg {parent .}} {
   bind $w <Escape> "$w.f.b.cancel invoke"
   placeWinOverParent $w $parent
   wm state $w normal
-}
-
-set ::maint::cancelStrip 0
-
-proc ::maint::sc_progressBar {} {
-  set ::maint::cancelStrip 1
 }
 
 set classifyOption(AllGames) all
@@ -1764,8 +1745,7 @@ proc compactGames {parent} {
     return
   }
   
-  progressWindow "Scid" [concat $::tr(CompactGames) "..."] \
-      $::tr(Cancel) "sc_progressBar"
+  progressWindow "Scid" [concat $::tr(CompactGames) "..."] $::tr(Cancel) sc_progressBar
   busyCursor .
   set err [catch {sc_compact games} result]
   unbusyCursor .
@@ -2071,8 +2051,7 @@ proc stripExtraTags {{parent .}} {
   }
 
   set ::interrupt 0
-  progressWindow "Scid" "Searching for extra PGN tags." \
-      $::tr(Cancel) "set ::interrupt 1; sc_progressBar"
+  progressWindow "Scid" "Searching for extra PGN tags." $::tr(Cancel) "set ::interrupt 1; sc_progressBar"
   busyCursor .
   set err [catch {sc_base tag list} result]
   unbusyCursor .
@@ -2248,7 +2227,7 @@ proc doStripTags {tag} {
   set result [tk_messageBox -title "Scid" -parent .striptags \
       -icon question -type yesno -message $msg]
   if {$result == "no"} { return 0 }
-  progressWindow "Scid" "Removing the PGN tag $tag." $::tr(Stop) "sc_progressBar"
+  progressWindow "Scid" "Removing the PGN tag $tag." $::tr(Stop) sc_progressBar
   busyCursor .
   set err [catch {sc_base tag strip $tag $checkOption(AllGames)} result]
   unbusyCursor .
@@ -2265,8 +2244,7 @@ proc doStripTags {tag} {
 proc findStripTags {tag} {
   global checkOption
 
-  # progressWindow "Scid" "Finding games with the PGN tag $tag" \
-      $::tr(Cancel) "sc_progressBar"
+  # progressWindow "Scid" "Finding games with the PGN tag $tag" $::tr(Cancel) sc_progressBar
   busyCursor .
   update
   sc_base tag find $tag $checkOption(AllGames)

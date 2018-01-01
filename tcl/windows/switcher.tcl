@@ -1139,14 +1139,14 @@ proc copyFilter {frombaseNum tobaseNum} {
   set parent .glistWin
 
   if {$err != ""} {
-    tk_messageBox -type ok -icon info -title "Scid" \
+    tk_messageBox -type ok -icon info -title Scid \
         -message "$::tr(CopyErr) \nfrom \"$fromName\" to \"$targetName\".\n$err" -parent $parent
     return
   }
 
   # If copying to the clipbase, do not bother asking for confirmation:
   if {!$::windows::switcher::confirmCopy || $tobaseNum == [sc_info clipbase]} {
-    progressWindow "Scid" "$::tr(CopyGames)..." $::tr(Stop) "sc_progressBar"
+    progressWindow Scid "$::tr(CopyGames)..." $::tr(Stop) sc_progressBar
     busyCursor .
     set copyErr [catch {sc_filter copy $frombaseNum $tobaseNum} result]
     unbusyCursor .
@@ -1154,7 +1154,7 @@ proc copyFilter {frombaseNum tobaseNum} {
     ::windows::gamelist::Refresh
     # hmmmm... how to stop . getting raised over .glistWin ?
     if {$copyErr} {
-      tk_messageBox -type ok -icon info -title "Scid" -message $result -parent $parent
+      tk_messageBox -type ok -icon info -title Scid -message $result -parent $parent
     }
     return
   }
@@ -1166,7 +1166,7 @@ proc copyFilter {frombaseNum tobaseNum} {
   frame $w.b
   dialogbutton $w.b.go -text $::tr(FinderCtxCopy) -command "
     busyCursor .
-    $w.b.cancel configure -command \"sc_progressBar\"
+    $w.b.cancel configure -command sc_progressBar
     $w.b.cancel configure -text $::tr(Stop)
     sc_progressBar $w.bar bar 301 21 time
     grab $w.b.cancel

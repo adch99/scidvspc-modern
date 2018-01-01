@@ -8972,17 +8972,22 @@ sc_game_startPos (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     return TCL_OK;
 }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// sc_game_strip:
-//    Strips all comments, variations or annotations from a game.
+//    Strip all comments or variations from a game.
+
 int
 sc_game_strip (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
     const char * usage =
-        "Usage: sc_game strip [comments|variations]";
+        "Usage: sc_game strip [comments|variations] [all|filter]";
 
     const char * options[] = { "comments", "variations", NULL };
     enum { OPT_COMS, OPT_VARS };
+
+    const char * filter[]  = { "all", "filter", NULL };
+    enum { OPT_ALL, OPT_FILTER };
+
+    if (argc < 3 || argc > 4) 
+        return errorResult (ti, usage);
 
     // we need to switch off short header style or PGN parsing will not work
     uint  old_style = db->game->GetPgnStyle ();
@@ -8995,38 +9000,131 @@ sc_game_strip (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     db->game->AddPgnStyle (PGN_STYLE_VARS);
     db->game->SetPgnFormat (PGN_FORMAT_Plain);
 
-    int index = -1;
-    if (argc == 3) { index = strUniqueMatch (argv[2], options); }
+    int type = -1;
+    type = strUniqueMatch (argv[2], options);
 
-    switch (index) {
+    switch (type) {
         case OPT_COMS: db->game->RemovePgnStyle (PGN_STYLE_COMMENTS); break;
         case OPT_VARS: db->game->RemovePgnStyle (PGN_STYLE_VARS); break;
         default: return errorResult (ti, usage);
     }
 
-    int old_lang = language;
-    language = 0;
-    db->tbuf->Empty();
-    db->tbuf->SetWrapColumn (99999);
-    db->game->WriteToPGN (db->tbuf);
-    PgnParser parser;
-    parser.Reset ((const char *) db->tbuf->GetBuffer());
-    scratchGame->Clear();
-    if (parser.ParseGame (scratchGame)) {
-        return errorResult (ti, "Error: unable to strip this game.");
+    bool singleGame = {argc == 3};
+
+    if (singleGame) {
+	int old_lang = language;
+	language = 0;
+	db->tbuf->Empty();
+	db->tbuf->SetWrapColumn (99999);
+	db->game->WriteToPGN (db->tbuf);
+	PgnParser parser;
+
+	parser.Reset ((const char *) db->tbuf->GetBuffer());
+	scratchGame->Clear();
+	if (parser.ParseGame (scratchGame)) {
+	    return errorResult (ti, "Error: unable to strip this game.");
+	}
+	parser.Reset ((const char *) db->tbuf->GetBuffer());
+	db->game->Clear();
+	parser.ParseGame (db->game);
+
+	// Restore PGN style (Short header)
+	if (old_style & PGN_STYLE_SHORT_HEADER)
+	    db->game->SetPgnStyle (PGN_STYLE_SHORT_HEADER, true);
+
+	db->game->MoveToPly (old_ply);
+	db->gameAltered = true;
+	language = old_lang;
+	return TCL_OK;
+    } else {
+	int old_lang = language;
+	language = 0;
+	PgnParser parser;
+
+	db->tbuf->Empty();
+	db->tbuf->SetWrapColumn (99999);
+
+	int index = -1;
+	index = strUniqueMatch (argv[3], filter);
+	switch (index) {
+	  case OPT_ALL:  filter_reset (db, 1); break;
+	  case OPT_FILTER: break;
+	  default: return errorResult (ti, usage);
+        }
+
+	bool showProgress = startProgressBar();
+	uint updateStart, update;
+	updateStart = update = 500;  // Update progress bar every .... games
+
+	IndexEntry * ie;
+	Game * g = scratchGame;
+
+	for (uint gameNum=0; gameNum < db->numGames; gameNum++) {
+
+	    if (showProgress) {
+		update--;
+		if (update == 0) {
+		    update = updateStart;
+		    updateProgressBar (ti, gameNum, db->numGames);
+		    if (interruptedProgress()) { break; }
+		}
+	    }
+
+
+            if (db->dbFilter->Get(gameNum) == 0) {
+                continue;
+            }
+
+	    ie = db->idx->FetchEntry (gameNum);
+
+
+// Fixme ? Possibly some major inaccuracies - S.A.
+
+	    // Load the game.
+	    if (db->gfile->ReadGame (db->bbuf, ie->GetOffset(), ie->GetLength()) != OK) {
+		return errorResult (ti, "Error reading game file.");
+	    }
+	    g->Clear();
+	    g->Decode (db->bbuf, GAME_DECODE_ALL); // variations, comments and non-standards
+	    g->LoadStandardTags (ie, db->nb); // for metadata matches
+	    g->SetNumber (gameNum + 1); // for game range tests
+	    g->SetAltered(false);
+
+	    db->tbuf->Empty();
+	    db->tbuf->SetWrapColumn (99999);
+
+// seems we have to continually remove the style
+	    switch (type) {
+		case OPT_COMS: g->RemovePgnStyle (PGN_STYLE_COMMENTS); break;
+		case OPT_VARS: g->RemovePgnStyle (PGN_STYLE_VARS); break;
+		default: return errorResult (ti, usage);
+	    }
+
+	    g->WriteToPGN (db->tbuf);
+	    parser.Reset ((const char *) db->tbuf->GetBuffer());
+	    parser.ParseGame (g);
+
+	    if (sc_savegame (ti, g, gameNum+1, db) != OK) { return TCL_ERROR; }
+
+// necessary ??
+	    db->gfile->FlushAll();
+	    if (db->idx->WriteHeader() != OK) {
+		return errorResult (ti, "Error writing index file.");
+	    }
+
+	}
+
+	if (showProgress) { updateProgressBar (ti, 1, 1); }
+
+	// Restore PGN style (Short header)
+	if (old_style & PGN_STYLE_SHORT_HEADER)
+	    db->game->SetPgnStyle (PGN_STYLE_SHORT_HEADER, true);
+
+// end of fix me
+
+	language = old_lang;
+	return TCL_OK;
     }
-    parser.Reset ((const char *) db->tbuf->GetBuffer());
-    db->game->Clear();
-    parser.ParseGame (db->game);
-
-    // Restore PGN style (Short header)
-    if (old_style & PGN_STYLE_SHORT_HEADER)
-      db->game->SetPgnStyle (PGN_STYLE_SHORT_HEADER, true);
-
-    db->game->MoveToPly (old_ply);
-    db->gameAltered = true;
-    language = old_lang;
-    return TCL_OK;
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
