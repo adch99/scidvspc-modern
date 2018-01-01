@@ -9044,23 +9044,31 @@ sc_game_strip (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 	db->tbuf->Empty();
 	db->tbuf->SetWrapColumn (99999);
 
-	int index = -1;
-	index = strUniqueMatch (argv[3], filter);
+	bool limitToFilter;
+	int index = strUniqueMatch (argv[3], filter);
+
 	switch (index) {
-	  case OPT_ALL:  filter_reset (db, 1); break;
-	  case OPT_FILTER: break;
+	  case OPT_ALL:    limitToFilter = 0 ; break;
+	  case OPT_FILTER: limitToFilter = 1 ; break;
 	  default: return errorResult (ti, usage);
         }
 
 	bool showProgress = startProgressBar();
 	uint updateStart, update;
-	updateStart = update = 500;  // Update progress bar every .... games
+	updateStart = update = 250;  // Update progress bar every .... games
 
 	IndexEntry * ie;
 	Game * g = scratchGame;
 
-	for (uint gameNum=0; gameNum < db->numGames; gameNum++) {
+        g->SetPgnStyle (PGN_STYLE_COMMENTS,true);
+        g->SetPgnStyle (PGN_STYLE_VARS,true);
+	switch (type) {
+	    case OPT_COMS: g->RemovePgnStyle (PGN_STYLE_COMMENTS); break;
+	    case OPT_VARS: g->RemovePgnStyle (PGN_STYLE_VARS); break;
+	    default: return errorResult (ti, usage);
+	}
 
+	for (uint gameNum=0; gameNum < db->numGames; gameNum++) {
 	    if (showProgress) {
 		update--;
 		if (update == 0) {
@@ -9070,13 +9078,15 @@ sc_game_strip (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 		}
 	    }
 
-
-            if (db->dbFilter->Get(gameNum) == 0) {
+            if (limitToFilter && db->dbFilter->Get(gameNum) == 0) {
                 continue;
             }
 
 	    ie = db->idx->FetchEntry (gameNum);
 
+	    if ((type == OPT_COMS && ie->GetCommentCount() == 0) ||
+                (type == OPT_VARS && ie->GetVariationCount() == 0))
+		continue;
 
 // Fixme ? Possibly some major inaccuracies - S.A.
 
@@ -9085,20 +9095,14 @@ sc_game_strip (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 		return errorResult (ti, "Error reading game file.");
 	    }
 	    g->Clear();
-	    g->Decode (db->bbuf, GAME_DECODE_ALL); // variations, comments and non-standards
+	    if (g->Decode (db->bbuf, GAME_DECODE_ALL) != OK)
+		continue;
 	    g->LoadStandardTags (ie, db->nb); // for metadata matches
-	    g->SetNumber (gameNum + 1); // for game range tests
-	    g->SetAltered(false);
+	    // g->SetNumber (gameNum + 1); // for game range tests
+	    // g->SetAltered(false);
 
 	    db->tbuf->Empty();
 	    db->tbuf->SetWrapColumn (99999);
-
-// seems we have to continually remove the style
-	    switch (type) {
-		case OPT_COMS: g->RemovePgnStyle (PGN_STYLE_COMMENTS); break;
-		case OPT_VARS: g->RemovePgnStyle (PGN_STYLE_VARS); break;
-		default: return errorResult (ti, usage);
-	    }
 
 	    g->WriteToPGN (db->tbuf);
 	    parser.Reset ((const char *) db->tbuf->GetBuffer());
@@ -9115,6 +9119,10 @@ sc_game_strip (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 	}
 
 	if (showProgress) { updateProgressBar (ti, 1, 1); }
+
+	// hmmm scratchGame is static. Maybe we should reset its style
+        g->SetPgnStyle (PGN_STYLE_COMMENTS,true);
+        g->SetPgnStyle (PGN_STYLE_VARS,true);
 
 	// Restore PGN style (Short header)
 	if (old_style & PGN_STYLE_SHORT_HEADER)

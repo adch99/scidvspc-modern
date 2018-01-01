@@ -861,15 +861,12 @@ proc stripCommentsVars {arg {parent .}} {
 
     sc_game strip $checkOption(arg) $checkOption(AllGames)
 
-    catch {
-      sc_game load $current
-      updateBoard -pgn
-    }
-
     unbusyCursor .
     closeProgressWindow
-    # wtf is the gamelist refresh making it go blank !?
-    # ::windows::gamelist::Refresh
+    if {$current} {
+      sc_game load $current
+    }
+    ::windows::gamelist::Refresh
     updateBoard -pgn
   }
 
