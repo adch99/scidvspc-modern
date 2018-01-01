@@ -137,7 +137,7 @@ namespace eval book {
       destroy $w
       set ::book::currentBook1 {}
       set ::book::currentBook2 {}
-      tk_messageBox -title "Scid" -type ok -icon error -message "No books found in books directory \"$bookPath\""
+      tk_messageBox -title Scid -type ok -icon error -message "No books found in books directory \"$bookPath\""
       return
     }
 
@@ -238,7 +238,7 @@ namespace eval book {
 if {0} {
     # we make a redundant check here, another one is done a few line above
     if { [catch {bookSelect} ] } {
-      tk_messageBox -title "Scid" -type ok -icon error -message "No books found. Check books directory"
+      tk_messageBox -title Scid -type ok -icon error -message "No books found. Check books directory"
       set ::book::currentBook1 ""
       set ::book::currentBook2 ""
       destroy  .bookWin
@@ -455,7 +455,7 @@ if {0} {
     set bookList [  lsort -dictionary [ glob -nocomplain -directory $bookPath *.bin ] ]
     # No book found
     if { [llength $bookList] == 0 } {
-      tk_messageBox -title "Scid" -type ok -icon error -message "No books found. Check books directory"
+      tk_messageBox -title Scid -type ok -icon error -message "No books found. Check books directory"
       set ::book::currentBook ""
       destroy $w
       return
@@ -801,7 +801,7 @@ if {0} {
     # set reply [ tk_messageBox -title $::tr(Export) -type okcancel -icon info -parent .bookTuningWin -message {Export will attempt to insert all book moves (from the current position) into this game.} ]
     # if {$reply != {ok}} {return}
 
-    progressWindow "Scid" "ExportingBook..." $::tr(Cancel) "::book::sc_progressBar"
+    progressWindow Scid "ExportingBook..." $::tr(Cancel) "::book::sc_progressBar"
     set ::book::cancelBookExport 0
     set ::book::exportCount 0
     ::book::book2pgn
@@ -811,7 +811,7 @@ if {0} {
       tk_messageBox -title Scid -type ok -icon info \
           -message "$::tr(Movesloaded)  $::book::exportCount\n$::tr(BookPartiallyLoaded)"
     } else  {
-      tk_messageBox -title "Scid" -type ok -icon info -message "$::tr(Movesloaded)  $::book::exportCount"
+      tk_messageBox -title Scid -type ok -icon info -message "$::tr(Movesloaded)  $::book::exportCount"
     }
     updateBoard -pgn
   }

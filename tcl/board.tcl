@@ -2667,7 +2667,7 @@ proc boardToFile { format filepath } {
   package require img::window
   } result ]} {
     set result "Screenshot requires Tcl package TkImg (libtk-img).\n\n$result"
-    tk_messageBox -type ok -icon error -title "Scid" -message $result
+    tk_messageBox -type ok -icon error -title Scid -message $result
     return
   }
 
@@ -2719,7 +2719,7 @@ proc boardToFile { format filepath } {
 
   if {[llength $filename]} {
     if {[catch {$image write -format $format $filename} result ]} {
-      tk_messageBox -type ok -icon error -title "Scid" -message $result -parent .
+      tk_messageBox -type ok -icon error -title Scid -message $result -parent .
     }
   }
   image delete $image

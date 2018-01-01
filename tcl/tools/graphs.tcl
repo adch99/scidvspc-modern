@@ -14,7 +14,7 @@ proc ::tools::graphs::Save {mode w} {
                -defaultextension ".eps" -title "Scid: Save Graph"]
   if {$fname == ""} { return }
   if {[catch {$w postscript -file $fname -colormode $mode} result]} {
-    tk_messageBox -icon info -parent $w -title "Scid" -message $result
+    tk_messageBox -icon info -parent $w -title Scid -message $result
   }
 }
 

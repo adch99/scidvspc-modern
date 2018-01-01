@@ -289,7 +289,7 @@ proc ::windows::eco::LoadFile {} {
   set fullname [tk_getOpenFile -initialdir [pwd] -filetypes $ftype -title "Load ECO file"]
   if {[string compare $fullname ""]} {
     if {[catch {sc_eco read $fullname} result]} {
-      tk_messageBox -title "Scid" -type ok \
+      tk_messageBox -title Scid -type ok \
           -icon warning -message $result
     } else {
       set ecoFile $fullname

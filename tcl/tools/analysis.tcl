@@ -2702,7 +2702,7 @@ proc excludeMovePopup {n} {
   # OS X doesnt manage the transient properly
   catch {wm withdraw .tooltip}
   set w [toplevel .excludeMove]
-  wm title $w "Scid"
+  wm title $w Scid
   wm state $w withdrawn
 
   label $w.label -textvar ::tr(ExcludeMove)
@@ -3117,11 +3117,11 @@ proc checkEngineIsAlive {n} {
     }
     if { $exit_status != 0 } {
 	logEngineNote $n {Engine terminated with exit code $exit_status: "\"$standard_error\""}
-	tk_messageBox -type ok -icon info -parent $parent -title "Scid" \
+	tk_messageBox -type ok -icon info -parent $parent -title Scid \
 		      -message "The analysis engine terminated with exit code $exit_status: \"$standard_error\""
     } else {
 	logEngineNote $n {Engine terminated without exit code: "\"$standard_error\""}
-	tk_messageBox -type ok -icon info -parent $parent -title "Scid" \
+	tk_messageBox -type ok -icon info -parent $parent -title Scid \
 		      -message "The analysis engine terminated without exit code: \"$standard_error\""
     }
 

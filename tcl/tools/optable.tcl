@@ -269,7 +269,7 @@ proc ::optable::mergeGames { {game_count 50} {ply 999} } {
     if {$game_number == $current} {continue}
     set err [ catch { sc_game merge $base $game_number $ply } result ]
     if {$err} {
-      tk_messageBox -title "Scid" -type ok -icon info -message "Unable to merge the selected game:\n$result"
+      tk_messageBox -title Scid -type ok -icon info -message "Unable to merge the selected game:\n$result"
       break
     }
   }
@@ -1400,7 +1400,7 @@ set reportType full
 proc ::optable::generateFavoriteReports {} {
   global reportFavorites
   if {[llength $reportFavorites] == 0} {
-    tk_messageBox -title "Scid" -type ok -icon info \
+    tk_messageBox -title Scid -type ok -icon info \
         -message "You have no favorite report positions."
     return
   }
@@ -1486,7 +1486,7 @@ proc ::optable::reportFavoritesOK {} {
     set moves [lindex $entry 1]
     set fname [file join $reportDir "$name$suffix"]
     if {[catch {open $fname w} f]} {
-      tk_messageBox -title "Scid" -icon warning -type ok \
+      tk_messageBox -title Scid -icon warning -type ok \
           -message "Unable to write file: $fname\n$f"
       grab release $w
       destroy $w

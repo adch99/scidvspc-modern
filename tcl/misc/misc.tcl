@@ -643,7 +643,7 @@ namespace eval html {
     catch { file copy -force [file join $sourcedir scid.js] $dirtarget }
     catch { file copy -force [file join $sourcedir scid.css] $dirtarget }
     writeIndex "[file join $dirtarget $prefix].html" $prefix
-    progressWindow "Scid" "Exporting games..." $::tr(Stop) "sc_progressBar"
+    progressWindow Scid "Exporting games..." $::tr(Stop) sc_progressBar
     busyCursor .
     set savedGameNum [sc_game number]
     set gn [sc_filter first]
@@ -1009,7 +1009,7 @@ namespace eval html {
   ################################################################################
   proc exportPGN { fName selection } {
     if {$selection == "filter"} {
-      progressWindow "Scid" "Exporting games..." $::tr(Stop) "sc_progressBar"
+      progressWindow Scid "Exporting games..." $::tr(Stop) sc_progressBar
     }
     busyCursor .
     sc_base export $selection "PGN" $fName -append 0 -starttext "" -endtext "" -comments 1 -variations 1 \

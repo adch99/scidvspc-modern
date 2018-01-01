@@ -358,7 +358,7 @@ proc ::search::cql {} {
     $w.b.stop configure -state disabled
 
     if {$err} {
-      tk_messageBox -title "Scid" -type ok -icon warning \
+      tk_messageBox -title Scid -type ok -icon warning \
         -message "Fatal error returned from CQL query:\n$result"
       return
     }

@@ -3433,7 +3433,7 @@ namespace eval CorrespondenceChess {
 			# to implement than individual sorting upon import.
 			if {$::CorrespondenceChess::ListOrder == $::CorrespondenceChess::CCOrderClassic} {
 				set sortCriteria "Site, Event, Round, Result, White, Black"
-				progressWindow "Scid" "Sorting the database..."
+				progressWindow Scid "Sorting the database..."
 				set err [catch {sc_base sort $sortCriteria \
 										{changeProgressWindow "Sorting..."} \
 									 } result]

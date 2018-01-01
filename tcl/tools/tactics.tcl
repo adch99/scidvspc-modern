@@ -146,7 +146,7 @@ namespace eval tactics {
     setWinLocation $w
 
     if {[sc_base count free] == 0} {
-      tk_messageBox -type ok -icon info -title "Scid" -message "Too many databases are open; close one first"
+      tk_messageBox -type ok -icon info -title Scid -message "Too many databases are open; close one first"
       return
     }
 
@@ -375,7 +375,7 @@ namespace eval tactics {
     set wasOpened 0
 
     if {[sc_base count free] == 0} {
-      tk_messageBox -type ok -icon info -title "Scid" -message "Too many databases are opened\nClose one first"
+      tk_messageBox -type ok -icon info -title Scid -message "Too many databases are opened\nClose one first"
       return
     }
     # check if the base is already opened
@@ -384,13 +384,13 @@ namespace eval tactics {
       set wasOpened 1
     } else  {
       if { [catch { sc_base open $base }] } {
-        tk_messageBox -type ok -icon warning -title "Scid" -message "Unable to open base"
+        tk_messageBox -type ok -icon warning -title Scid -message "Unable to open base"
         return
       }
     }
 
     # reset site tag for each game
-    progressWindow "Scid" $::tr(ResettingScore) $::tr(Cancel) "::tactics::sc_progressBar"
+    progressWindow Scid $::tr(ResettingScore) $::tr(Cancel) "::tactics::sc_progressBar"
     set numGames [sc_base numGames]
     set cancelScoreReset 0
     for {set g 1} { $g <= $numGames } { incr g} {
@@ -442,7 +442,7 @@ namespace eval tactics {
     }
     # it seems we finished the serial
     if {! $newGameFound } {
-      tk_messageBox -title "Scid" -icon info -type ok -message $::tr(AllExercisesDone)
+      tk_messageBox -title Scid -icon info -type ok -message $::tr(AllExercisesDone)
       return
     }
     set ::tactics::lastGameLoaded $g
@@ -496,7 +496,7 @@ namespace eval tactics {
     if {$::tactics::showSolution} {
       return
     }
-    tk_messageBox -title "Scid" -icon info -type ok -message $::tr(MateFound)
+    tk_messageBox -title Scid -icon info -type ok -message $::tr(MateFound)
     ::tactics::loadNextGame
   }
   ################################################################################
@@ -569,7 +569,7 @@ namespace eval tactics {
     # compare results
     set res [::tactics::foundBestLine]
     if {  $res != ""} {
-      tk_messageBox -title "Scid" -icon info -type ok -message "$::tr(BestSolutionNotFound)\n$res"
+      tk_messageBox -title Scid -icon info -type ok -message "$::tr(BestSolutionNotFound)\n$res"
       # take back last move so restore engine status
       set analysisEngine(score) $prevScore
       set analysisEngine(moves) $prevLine
@@ -677,7 +677,7 @@ namespace eval tactics {
   proc loadBase { name } {
 
     if {[sc_base count free] == 0} {
-      tk_messageBox -type ok -icon info -title "Scid" -message "Too many databases are open; close one first"
+      tk_messageBox -type ok -icon info -title Scid -message "Too many databases are open; close one first"
       return
     }
     # check if the base is already opened
@@ -685,7 +685,7 @@ namespace eval tactics {
       sc_base switch [sc_base slot $name]
     } else  {
       if { [catch { sc_base open $name }] } {
-        tk_messageBox -type ok -icon warning -title "Scid" -message "Unable to open base"
+        tk_messageBox -type ok -icon warning -title Scid -message "Unable to open base"
         return
       }
     }
@@ -751,7 +751,7 @@ namespace eval tactics {
     # failsafe only ???
     set ::tactics::engineSlot 0
 
-    tk_messageBox -type ok -icon warning -parent . -title "Scid" \
+    tk_messageBox -type ok -icon warning -parent . -title Scid \
       -message "Unable to find engine.\nPlease configure engine with Toga as name"
     return 0
 

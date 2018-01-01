@@ -118,7 +118,7 @@ proc mergeGame {{base 0} {gnum 0}} {
   set err [catch {sc_game merge $base $gnum} result]
   sc_game pop
   if {$err} {
-    tk_messageBox -title "Scid" -type ok -icon info \
+    tk_messageBox -title Scid -type ok -icon info \
         -message "Unable to merge the selected game:\n$result"
     return
   }
@@ -577,7 +577,7 @@ proc exportGames {selection exportType {fName {}}} {
   set initialDir(pgn) [file dirname $fName]
 
   if {$exportFilter} {
-    progressWindow "Scid" "Exporting games..." $::tr(Stop) "sc_progressBar"
+    progressWindow Scid "Exporting games..." $::tr(Stop) sc_progressBar
   }
  # tk_messageBox -title "Debug" -type ok -icon error -message "Export Type $exportType" 
   busyCursor .
@@ -612,7 +612,7 @@ proc openExportGList {} {
   global glexport
 
   if {[sc_filter count] < 1} {
-    tk_messageBox -type ok -icon info -title "Scid" \
+    tk_messageBox -type ok -icon info -title Scid \
       -message "There are no games in the filter." -parent .glistWin
     return
   }
@@ -694,14 +694,14 @@ proc saveExportGList {} {
   set showProgress 0
   if {[sc_filter count] >= 20000} { set showProgress 1 }
   if {$showProgress} {
-    progressWindow "Scid" "Saving game list..." $::tr(Cancel) sc_progressBar
+    progressWindow Scid "Saving game list..." $::tr(Cancel) sc_progressBar
   }
   busyCursor .
   set res [catch {sc_game list 1 $::MAX_GAMES "$glexport\n" $fname} err]
   unbusyCursor .
   if {$showProgress} { closeProgressWindow }
   if {$res} {
-    tk_messageBox -type ok -icon warning -title "Scid" -message $err
+    tk_messageBox -type ok -icon warning -title Scid -message $err
     return
   }
   destroy .glexport
@@ -962,7 +962,7 @@ proc nameEditor {} {
       }
     }
     if {$err} {
-      tk_messageBox -type ok -icon info -parent .nedit -title "Scid" \
+      tk_messageBox -type ok -icon info -parent .nedit -title Scid \
           -message $result
     } else {
       .nedit.status configure -text $result
@@ -1411,7 +1411,7 @@ proc gsave { gnum } {
     set res [sc_game save $gnum]
 
     if {$res != {}} {
-      tk_messageBox -type ok -icon info -parent .save -title "Scid" -message $res
+      tk_messageBox -type ok -icon info -parent .save -title Scid -message $res
     } else {
       if {$gnum == 0} {
 	# add new game to history

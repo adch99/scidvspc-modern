@@ -78,7 +78,7 @@ proc ::game::Strip {type {parent .}} {
   sc_game undoPoint
 
   if {[catch {sc_game strip $type} result]} {
-    tk_messageBox -parent $parent -type ok -icon info -title "Scid" -message $result
+    tk_messageBox -parent $parent -type ok -icon info -title Scid -message $result
     return
   }
   updateBoard -pgn
@@ -90,7 +90,7 @@ proc ::game::TruncateBegin {} {
   sc_game undoPoint
 
   if {[catch {sc_game truncate -start} result]} {
-    tk_messageBox -parent . -type ok -icon info -title "Scid" -message $result
+    tk_messageBox -parent . -type ok -icon info -title Scid -message $result
     return
   }
   updateBoard -pgn
@@ -102,7 +102,7 @@ proc ::game::Truncate {} {
   sc_game undoPoint
 
   if {[catch {sc_game truncate} result]} {
-    tk_messageBox -parent . -type ok -icon info -title "Scid" -message $result
+    tk_messageBox -parent . -type ok -icon info -title Scid -message $result
     return
   }
   updateBoard -pgn
@@ -192,7 +192,7 @@ proc ::game::LoadNumber {} {
   dialogbutton $b.load -text "OK" -command {
     # todo: Can we integrate this into ::file::Open
     if {[catch {sc_game load $::game::entryLoadNumber} result]} {
-      tk_messageBox -type ok -icon info -title "Scid" -message $result
+      tk_messageBox -type ok -icon info -title Scid -message $result
     }
     focus .main
     destroy .glnumDialog

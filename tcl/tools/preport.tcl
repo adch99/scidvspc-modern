@@ -18,7 +18,7 @@ set ::preport::_clipbase 0
 proc ::preport::preportDlg {{player {}}} {
 
   if {[sc_base numGames] == 0} {
-    tk_messageBox -title "Scid" -type ok -icon warning -message "No games in current base"
+    tk_messageBox -title Scid -type ok -icon warning -message "No games in current base"
     return
   }
 

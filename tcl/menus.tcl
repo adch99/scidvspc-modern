@@ -1053,7 +1053,7 @@ foreach i {1 2 3 4 5} {
   $m.entry.highlightlastmove.width add radiobutton -label $i -value $i -variable ::highlightLastMoveWidth -command updateBoard
 }
 $m.entry.highlightlastmove add command -label OptionsMovesHighlightLastMoveColor -command {
-  set col [ tk_chooseColor -initialcolor $::highlightLastMoveColor -title "Scid"]
+  set col [ tk_chooseColor -initialcolor $::highlightLastMoveColor -title Scid]
   if { $col != "" } {
     set ::highlightLastMoveColor $col
     updateBoard
