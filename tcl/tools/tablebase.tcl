@@ -752,7 +752,7 @@ if { $::tb::online_available } {
 proc ::tb::random {} {
   global tbInfo
   if {[catch {sc_game startBoard "random:$tbInfo(material)"} err]} {
-    tk_messageBox -title "Scid" -icon warning -type ok -message $err
+    tk_messageBox -title Scid -icon warning -type ok -message $err
     return
   }
   # The material is valid, so clear the game and regenerate a
@@ -769,7 +769,7 @@ proc ::tb::random {} {
 
 proc ::tb::setFEN {fen} {
   if {[catch {sc_game startBoard $fen} err]} {
-    tk_messageBox -title "Scid" -icon info -type ok -message $err
+    tk_messageBox -title Scid -icon info -type ok -message $err
     return
   }
   # The FEN is valid, so clear the game and reset the FEN:

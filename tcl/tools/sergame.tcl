@@ -727,7 +727,7 @@ namespace eval sergame {
       }
       
       if {$blunder != 0} {
-        set answer [tk_messageBox -icon question -parent .main.board -title "Scid" -type yesno -message $::tr($tBlunder) ]
+        set answer [tk_messageBox -icon question -parent .main.board -title Scid -type yesno -message $::tr($tBlunder) ]
         if {$answer == yes} {
           sc_move back 1
           updateBoard -pgn

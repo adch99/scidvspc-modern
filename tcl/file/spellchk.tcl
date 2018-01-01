@@ -63,7 +63,7 @@ proc updateSpellCheckWin {type} {
   if {[catch {sc_name spellcheck -surnames $spellcheckSurnames -ambiguous $spellcheckAmbiguous $type} result]} {
     grab release $b.cancel
     unbusyCursor .
-    tk_messageBox -parent $w -type ok -icon info -title "Scid" -message $result
+    tk_messageBox -parent $w -type ok -icon info -title Scid -message $result
   } else {
     grab release $b.cancel
     unbusyCursor .
@@ -119,7 +119,7 @@ proc openSpellCheckWin {type {parent .}} {
 
   button $f.ok -textvar ::tr(MakeCorrections) -underline 0 -command {
     if {[sc_base current] != 9} {
-      set result [tk_messageBox -title "Scid" -parent .spellcheckWin -icon question \
+      set result [tk_messageBox -title Scid -parent .spellcheckWin -icon question \
 	-type yesno -message "Please confirm making Name corrections.\nThis cannot be undone."]
       if {$result == "no"} {return 0}
     }

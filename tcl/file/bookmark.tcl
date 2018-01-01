@@ -230,7 +230,7 @@ proc ::bookmarks::Go {entry} {
     if {[catch {set success [::file::Open $fname . 0]} result]} {
       unbusyCursor .
       tk_messageBox -icon warning -type ok -parent . \
-        -title "Scid" -message "Unable to load the database:\n$fname\n\n$result"
+        -title Scid -message "Unable to load the database:\n$fname\n\n$result"
       return
     }
     unbusyCursor .
@@ -259,7 +259,7 @@ proc ::bookmarks::Go {entry} {
   # don't reload current game if not necessary
   if {[sc_game number] != $best} {
     if {[catch {set success [::game::Load $best 0]}]} {
-      tk_messageBox -icon warning -type ok -parent . -title "Scid" -message "Unable to load game number: $best"
+      tk_messageBox -icon warning -type ok -parent . -title Scid -message "Unable to load game number: $best"
       return
     } else {
       if {$success == -1} {
@@ -577,7 +577,7 @@ proc ::bookmarks::Save {{reportError 0}} {
   set filename [scidConfigFile bookmarks]
   if  {[catch {open $filename w} f]} {
     if {$reportError} {
-      tk_messageBox -title "Scid" -type ok -icon warning \
+      tk_messageBox -title Scid -type ok -icon warning \
         -message "Unable to write bookmarks file: $filename\n$f"
     }
     return

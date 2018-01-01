@@ -82,7 +82,7 @@ proc ::file::ExitFast {} {
 
 proc ::file::New {} {
   if {[sc_base count free] == 0} {
-    tk_messageBox -title "Scid" -type ok -icon info \
+    tk_messageBox -title Scid -type ok -icon info \
         -message "Too many databases open; close one first"
     return
   }
@@ -129,7 +129,7 @@ proc ::file::New {} {
 proc ::file::Open {{fName ""} {parent .} {update 1}} {
 
   if {[sc_base count free] == 0} {
-    tk_messageBox -type ok -icon info -title "Scid" \
+    tk_messageBox -type ok -icon info -title Scid \
         -message "Too many databases are open; close one first" -parent $parent
     return
   }
@@ -380,24 +380,24 @@ proc refreshSearchDBs {} {
 proc ::file::Upgrade {name} {
   if {[file readable "$name.si4"]} {
     set msg [string trim $::tr(ConfirmOpenNew)]
-    set res [tk_messageBox -title "Scid" -type yesno -icon info -message $msg]
+    set res [tk_messageBox -title Scid -type yesno -icon info -message $msg]
     if {$res == "no"} { return }
     ::file::Open "$name.si4"
     return
   }
 
   set msg [string trim $::tr(ConfirmUpgrade)]
-  set res [tk_messageBox -title "Scid" -type yesno -icon info -message $msg]
+  set res [tk_messageBox -title Scid -type yesno -icon info -message $msg]
   if {$res == "no"} { return }
-  progressWindow "Scid" "$::tr(Upgrading): [file tail $name]"\
-      $::tr(Cancel) "sc_progressBar"
+  progressWindow Scid "$::tr(Upgrading): [file tail $name]"\
+      $::tr(Cancel) sc_progressBar
   busyCursor .
   update
   set err [catch {sc_base upgrade $name} res]
   unbusyCursor .
   closeProgressWindow
   if {$err} {
-    tk_messageBox -title "Scid" -type ok -icon warning \
+    tk_messageBox -title Scid -type ok -icon warning \
         -message "Unable to upgrade the database:\n$res"
     return
   } else  {
@@ -439,7 +439,7 @@ proc openBase {name} {
   set showProgress 0
   if {$bsize > 5000000} { set showProgress 1 }
   if {$showProgress} {
-    progressWindow "Scid" "$::tr(OpeningTheDatabase): [file tail $name]"
+    progressWindow Scid "$::tr(OpeningTheDatabase): [file tail $name]"
   }
   if {$::fastDBopen} {
     set err [catch {sc_base open -fast $name} result]
@@ -540,7 +540,7 @@ proc ::file::openBaseAsTree { { fName "" } } {
   set oldbase [sc_base current]
 
   if {[sc_base count free] == 0} {
-    tk_messageBox -type ok -icon info -title "Scid" \
+    tk_messageBox -type ok -icon info -title Scid \
         -message "Too many databases are open; close one first"
     return
   }

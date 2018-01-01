@@ -393,7 +393,7 @@ proc ::tourney::select {gnum event {load 0}} {
   # We now nolonger have to autoload crosstable game
   if {$load} {
     if {[catch {::game::Load $gnum} result]} {
-      tk_messageBox -type ok -icon info -title "Scid" -message $result
+      tk_messageBox -type ok -icon info -title Scid -message $result
       return
     }
     flipBoardForPlayerNames

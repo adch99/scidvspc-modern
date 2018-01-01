@@ -1013,7 +1013,7 @@ proc SortBy {tree col} {
       } else {
         set name $col
       }
-      set answer [tk_messageBox -parent $w -title "Scid" -type yesno -default yes -icon question \
+      set answer [tk_messageBox -parent $w -title Scid -type yesno -default yes -icon question \
           -message "[tr GlistSort] \"[file tail [sc_base filename]]\" by $name ?"]
       if {$answer != "yes"} { return }
     }

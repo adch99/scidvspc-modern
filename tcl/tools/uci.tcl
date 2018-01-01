@@ -438,7 +438,7 @@ namespace eval uci {
 
     if {[info exists ::uci::uciInfo(pipe$n)]} {
       if {$::uci::uciInfo(pipe$n) != ""} {
-        tk_messageBox -title "Scid" -icon warning -type ok -message "An engine is already running"
+        tk_messageBox -title Scid -icon warning -type ok -message "An engine is already running"
         return
       }
     }
@@ -930,11 +930,11 @@ namespace eval uci {
 
     if { $exit_status != 0 } {
 	# logEngineNote $n {Engine terminated with exit code $exit_status: "\"$standard_error\""}
-	tk_messageBox -type ok -icon info -parent . -title "Scid" \
+	tk_messageBox -type ok -icon info -parent . -title Scid \
 		      -message "The uci engine terminated with exit code $exit_status: \"$standard_error\""
     } else {
 	# logEngineNote $n {Engine terminated without exit code: "\"$standard_error\""}
-	tk_messageBox -type ok -icon info -parent . -title "Scid" \
+	tk_messageBox -type ok -icon info -parent . -title Scid \
 		      -message "The uci engine terminated without exit code: \"$standard_error\""
     }
     return 0

@@ -106,7 +106,7 @@ proc ::tools::email::config {} {
   wm resizable $w 1 0
   wm withdraw $w
 
-  wm title $w "Scid"
+  wm title $w Scid
   label $w.use -text "Send email using:" -font font_Bold
   frame $w.smtp
   radiobutton $w.smtp.b -text "SMTP server:" -variable email(smtp) -value 1
@@ -180,7 +180,7 @@ proc ::tools::email::LoadButton {} {
   set details [lindex $emailData $idx]
   if {[llength [lindex $details 3]] > 0} {
     if {[catch {::game::Load [lindex [lindex $details 3] 0]} result]} {
-      tk_messageBox -type ok -icon warning -title "Scid" -message $result
+      tk_messageBox -type ok -icon warning -title Scid -message $result
     } else {
       sc_move end
     }
@@ -444,7 +444,7 @@ proc ::tools::email::processMessage {w idx} {
       -message "Error sending email: $result"
   } else {
     ::tools::email::addSentReceived $idx s
-    tk_messageBox -icon info -type ok -title "Scid" -message $result
+    tk_messageBox -icon info -type ok -title Scid -message $result
     destroy $w
   }
 }

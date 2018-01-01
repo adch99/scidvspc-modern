@@ -127,7 +127,7 @@ namespace eval tacgame {
     }
 
     if { $phalanx == -1 } {
-      tk_messageBox -title "Scid" -icon warning -type ok -message "Could not find Phalanx in Engine List"
+      tk_messageBox -title Scid -icon warning -type ok -message "Could not find Phalanx in Engine List"
       return
     }
       
@@ -144,7 +144,7 @@ namespace eval tacgame {
     }
 
     if { $toga == -1 } {
-      tk_messageBox -title "Scid" -icon warning -type ok -message "Could not find Toga in Engline List"
+      tk_messageBox -title Scid -icon warning -type ok -message "Could not find Toga in Engline List"
       return
     }
 
@@ -720,7 +720,7 @@ namespace eval tacgame {
     if { ! $analysisCoach(seen$phalanx) && $line != {Phalanx XXIV} } {
       # Is there a bug here... Control flow somehow continues, giving an error
       ::tacgame::abortGame
-      tk_messageBox -type ok -icon warning -parent . -title "Scid" -message \
+      tk_messageBox -type ok -icon warning -parent . -title Scid -message \
         "Phalanx reports version \"$line\", but should be \"Phalanx XXIV\"."
       focus .main
       return
@@ -731,7 +731,7 @@ namespace eval tacgame {
       fileevent $analysisCoach(pipe$phalanx) readable {}
       catch {close $analysisCoach(pipe$phalanx)}
       set analysisCoach(pipe$phalanx) ""
-      tk_messageBox -type ok -icon info -parent . -title "Scid" \
+      tk_messageBox -type ok -icon info -parent . -title Scid \
           -message "Phalanx terminated without warning; it probably crashed or had an internal error."
     }
 

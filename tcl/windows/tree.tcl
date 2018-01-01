@@ -1055,7 +1055,7 @@ proc ::tree::prime { baseNumber } {
   if {! [sc_base inUse]} { return }
   set fname [sc_base filename $base]
   if {[string index $fname 0] == "\["  ||  [file extension $fname] == ".pgn"} {
-    tk_messageBox -parent .treeWin$baseNumber -icon info -type ok -title "Scid" \
+    tk_messageBox -parent .treeWin$baseNumber -icon info -type ok -title Scid \
         -message "Sorry, only Scid-format database files can have a tree cache file." -parent .treeWin$baseNumber
     return
   }
@@ -1101,7 +1101,7 @@ proc ::tree::prime { baseNumber } {
     #set pergame [expr double($result) / double([sc_base numGames])]
     #append a [format "%.2f" $pergame]
     #append a " bytes per game"
-    #tk_messageBox -type ok -parent .treeWin -title "Scid" -message $a
+    #tk_messageBox -type ok -parent .treeWin -title Scid -message $a
   }
   sc_game pop
   unbusyCursor .
@@ -2335,12 +2335,12 @@ proc ::tree::mask::fillWithLine {{op {}} {move {}} {args {}}} {
   set ::tree::mask::controlButton 0
 
   if {$::tree::mask::maskFile == ""} {
-    tk_messageBox -title "Scid" -type ok -icon warning -message [ tr OpenAMaskFileFirst]
+    tk_messageBox -title Scid -type ok -icon warning -message [ tr OpenAMaskFileFirst]
     return
   }
 
   if {[sc_var level] > 0} {
-    tk_messageBox -title "Scid" -type ok -icon warning -message "Can't add lne from inside a variation."
+    tk_messageBox -title Scid -type ok -icon warning -message "Can't add lne from inside a variation."
     return
   }
 
@@ -2393,7 +2393,7 @@ proc ::tree::mask::fillWithLine {{op {}} {move {}} {args {}}} {
 
 proc ::tree::mask::fillWithGame {} {
   if {$::tree::mask::maskFile == ""} {
-    tk_messageBox -title "Scid" -type ok -icon warning -message [ tr OpenAMaskFileFirst]
+    tk_messageBox -title Scid -type ok -icon warning -message [ tr OpenAMaskFileFirst]
     return
   }
   # primeWithGame is actually filling the tree cache also, slowing this proc down
@@ -2406,7 +2406,7 @@ proc ::tree::mask::fillWithGame {} {
 
 proc ::tree::mask::fillWithBase {base} {
   if {$::tree::mask::maskFile == ""} {
-    tk_messageBox -title "Scid" -type ok -icon warning -message [ tr OpenAMaskFileFirst]
+    tk_messageBox -title Scid -type ok -icon warning -message [ tr OpenAMaskFileFirst]
     return
   }
   ::tree::primeWithBase $base 1

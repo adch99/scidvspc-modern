@@ -19,11 +19,11 @@ proc ::maint::fixCorruptedBase {} {
   set fName [file rootname $fName]
 
   if {[sc_base slot $fName] != 0} {
-    tk_messageBox -type ok -icon info -title "Scid" -message "$fName is already opened.\nClose it first"
+    tk_messageBox -type ok -icon info -title Scid -message "$fName is already opened.\nClose it first"
     return
   }
 
-  progressWindow "Scid" [concat $::tr(CompactNames) "..."]
+  progressWindow Scid [concat $::tr(CompactNames) "..."]
   busyCursor .
   set err [catch {sc_base fixCorrupted $fName} result]
   unbusyCursor .
@@ -31,7 +31,7 @@ proc ::maint::fixCorruptedBase {} {
   if {$err} {
     tk_messageBox -type ok -icon warning -title "Scid: Error compacting file" -message $result
   } else {
-    tk_messageBox -type ok -icon info -title "Scid" -message "Base $fName was repaired"
+    tk_messageBox -type ok -icon info -title Scid -message "Base $fName was repaired"
   }
 
 }
@@ -475,7 +475,7 @@ proc ::maint::SetAutoloadGame {{parent .}} {
   set w .autoload
   if {[winfo exists $w]} { return }
   toplevel $w
-  wm title $w "Scid"
+  wm title $w Scid
   bind $w <F1> {helpWindow Maintenance Autoload}
   set autoloadGame [sc_base autoload]
 
@@ -745,7 +745,7 @@ proc doMarkDups {{parent .}} {
     unbusyCursor .
     ::windows::stats::Refresh
     tk_messageBox -type ok -parent $parent -icon info \
-        -title "Scid" -message $result
+        -title Scid -message $result
     set result 0
   } else {
     unbusyCursor .
@@ -793,7 +793,7 @@ proc checkAllGames {} {
     if {[catch  {sc_base check $checkOption(AllGames)} result]} {
       grab release .checkGames.f.b.cancel
       unbusyCursor .
-      tk_messageBox -parent .checkGames -type ok -icon info -title "Scid" -message $result
+      tk_messageBox -parent .checkGames -type ok -icon info -title Scid -message $result
     } else {
       grab release .checkGames.f.b.cancel
       unbusyCursor .
@@ -828,7 +828,7 @@ proc checkAllGames {} {
 
 proc stripCommentsVars {arg {parent .}} {
   if {$arg != "comments" && $arg != "variations"} { 
-    tk_messageBox -type ok -icon info -title "Scid" -message "stripCommentsVars: must be 'comments' or 'variations'"
+    tk_messageBox -type ok -icon info -title Scid -message "stripCommentsVars: must be 'comments' or 'variations'"
     return
   }
   set w .stripCommentsVars
@@ -854,7 +854,7 @@ proc stripCommentsVars {arg {parent .}} {
   frame $w.f.b
   dialogbutton $w.f.b.go -text "[tr EditStrip] $arg" -command {
     destroy .stripCommentsVars
-    progressWindow "Scid" "Stripping $checkOption(arg)" $::tr(Stop) sc_progressBar
+    progressWindow Scid "Stripping $checkOption(arg)" $::tr(Stop) sc_progressBar
     busyCursor .
 
     set current [sc_game number]
@@ -955,7 +955,7 @@ proc makeClassifyWin {{parent .}} {
     if {[catch  {sc_eco base $classifyOption(AllGames) $classifyOption(ExtendedCodes)} result]} {
       grab release .classify.b.cancel
       unbusyCursor .
-      tk_messageBox -parent .classify -type ok -icon info -title "Scid" -message $result
+      tk_messageBox -parent .classify -type ok -icon info -title Scid -message $result
     } else {
       grab release .classify.b.cancel
       unbusyCursor .
@@ -1553,7 +1553,7 @@ proc shareTwinTags {g1 g2 {parent .}} {
     append msg [concat $::tr(game) " $gn: $tag: \"$old\" -> \"$new\""]
     append msg "\n"
   }
-  set answer [tk_messageBox -parent $parent -title "Scid" \
+  set answer [tk_messageBox -parent $parent -title Scid \
       -type okcancel -default ok -icon question -message $msg]
   if {$answer != "ok"} { return }
   sc_game tags share update $g1 $g2
@@ -1680,7 +1680,7 @@ proc compactNames {} {
     ::game::Save
   }
 
-  progressWindow "Scid" [concat $::tr(CompactNames) "..."]
+  progressWindow Scid [concat $::tr(CompactNames) "..."]
   busyCursor .
   set err [catch {sc_compact names} result]
   unbusyCursor .
@@ -1745,7 +1745,7 @@ proc compactGames {parent} {
     return
   }
   
-  progressWindow "Scid" [concat $::tr(CompactGames) "..."] $::tr(Cancel) sc_progressBar
+  progressWindow Scid [concat $::tr(CompactGames) "..."] $::tr(Cancel) sc_progressBar
   busyCursor .
   set err [catch {sc_compact games} result]
   unbusyCursor .
@@ -1906,7 +1906,7 @@ proc sortDatabase {} {
         -message "This is not an open database; there are no games to sort."
     return
   }
-  progressWindow "Scid" "Sorting the database..."
+  progressWindow Scid "Sorting the database..."
   busyCursor .
   # can be messed up by gamelist sort
   sc_base sortup
@@ -1959,7 +1959,7 @@ proc makeBaseReadOnly {{parent .} {base {}}} {
 
 proc allocateRatings {{parent .}} {
   if {[catch {sc_name ratings -test 1} result]} {
-    tk_messageBox -type ok -icon info -parent $parent -title "Scid" -message $result
+    tk_messageBox -type ok -icon info -parent $parent -title Scid -message $result
     return
   }
   set w .ardialog
@@ -2008,16 +2008,16 @@ proc allocateRatings {{parent .}} {
 proc doAllocateRatings {parent} {
   global addRatings
   if {[catch {sc_name ratings -test 1} result]} {
-    tk_messageBox -type ok -icon info -parent $parent -title "Scid" -message $result
+    tk_messageBox -type ok -icon info -parent $parent -title Scid -message $result
     return
   }
-  progressWindow "Scid" "Adding Elo ratings..."
+  progressWindow Scid "Adding Elo ratings..."
   busyCursor .
   if {[catch {sc_name ratings -change $addRatings(overwrite) -filter $addRatings(filter)} result]} {
     closeProgressWindow
     raiseWin $parent
     tk_messageBox -type ok -icon warning -parent $parent \
-        -title "Scid" -message $result
+        -title Scid -message $result
   } else {
     closeProgressWindow
     set r [::utils::thousands [lindex $result 0]]
@@ -2032,7 +2032,7 @@ proc doAllocateRatings {parent} {
 
     raiseWin $parent
     tk_messageBox -type ok -icon info -parent $parent \
-        -title "Scid" -message [subst $::tr(AddedRatings)]
+        -title Scid -message [subst $::tr(AddedRatings)]
   }
   unbusyCursor .
 }
@@ -2051,16 +2051,16 @@ proc stripExtraTags {{parent .}} {
   }
 
   set ::interrupt 0
-  progressWindow "Scid" "Searching for extra PGN tags." $::tr(Cancel) "set ::interrupt 1; sc_progressBar"
+  progressWindow Scid "Searching for extra PGN tags." $::tr(Cancel) "set ::interrupt 1; sc_progressBar"
   busyCursor .
   set err [catch {sc_base tag list} result]
   unbusyCursor .
   closeProgressWindow
   if {$::interrupt} { 
-    tk_messageBox -title "Scid" -icon warning -type ok -message "Searching cancelled.\n\nTag list and counts are not correct." -parent $parent
+    tk_messageBox -title Scid -icon warning -type ok -message "Searching cancelled.\n\nTag list and counts are not correct." -parent $parent
   }
   if {$err} {
-    tk_messageBox -title "Scid" -icon warning -type ok -message $result -parent $parent
+    tk_messageBox -title Scid -icon warning -type ok -message $result -parent $parent
     return
   }
 
@@ -2224,17 +2224,17 @@ proc doStripTags {tag} {
   global checkOption
 
   set msg "Do you want to remove all occurences of \"$tag\" from $checkOption(AllGames) games ?"
-  set result [tk_messageBox -title "Scid" -parent .striptags \
+  set result [tk_messageBox -title Scid -parent .striptags \
       -icon question -type yesno -message $msg]
   if {$result == "no"} { return 0 }
-  progressWindow "Scid" "Removing the PGN tag $tag." $::tr(Stop) sc_progressBar
+  progressWindow Scid "Removing the PGN tag $tag." $::tr(Stop) sc_progressBar
   busyCursor .
   set err [catch {sc_base tag strip $tag $checkOption(AllGames)} result]
   unbusyCursor .
   closeProgressWindow
   if {$err} {
     set count 0
-    tk_messageBox -title "Scid" -parent .striptags -type ok -icon info -message $result
+    tk_messageBox -title Scid -parent .striptags -type ok -icon info -message $result
   } else {
     set count $result
   }
@@ -2244,7 +2244,7 @@ proc doStripTags {tag} {
 proc findStripTags {tag} {
   global checkOption
 
-  # progressWindow "Scid" "Finding games with the PGN tag $tag" $::tr(Cancel) sc_progressBar
+  # progressWindow Scid "Finding games with the PGN tag $tag" $::tr(Cancel) sc_progressBar
   busyCursor .
   update
   sc_base tag find $tag $checkOption(AllGames)
@@ -2327,7 +2327,7 @@ proc cleanerWin {} {
 proc doCleaner {} {
   global cleaner twinSettings
 
-  set answer [tk_dialog .mtoolDialog "Scid" \
+  set answer [tk_dialog .mtoolDialog Scid \
       [string trim $::tr(CleanerConfirm)] "" \
       0 $::tr(Yes) $::tr(No)]
   if {$answer != 0} { return }

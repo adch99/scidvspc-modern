@@ -1348,7 +1348,7 @@ if { $macOS } {
     # Wait for openBase to be ready, if needed.
     if {$isopenBaseready == 0} {
       if {$dndargs != 0} {
-        tk_messageBox -type ok -icon info -title "Scid" -message \
+        tk_messageBox -type ok -icon info -title Scid -message \
             "Please, wait until Scid finish starting up."
         return
       } else {
@@ -1360,7 +1360,7 @@ if { $macOS } {
 
     # Are we busy opening files? if so, display message and do nothing
     if {$dndisbusy != 0} {
-      tk_messageBox -type ok -icon info -title "Scid" -message \
+      tk_messageBox -type ok -icon info -title Scid -message \
           "Please, wait until the previou(s) database(s) are opened and try again."
       return
     }
@@ -1377,7 +1377,7 @@ if { $macOS } {
     foreach file $args {
       # Check for available slots:
       if {[sc_base count free] == 0} {
-        tk_messageBox -type ok -icon info -title "Scid" \
+        tk_messageBox -type ok -icon info -title Scid \
             -message "Too many databases are open; close at least one \n\
             before opening more databases"
         #::splash::add "No slot available."
