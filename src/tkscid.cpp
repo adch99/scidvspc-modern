@@ -8966,8 +8966,9 @@ sc_game_startBoard (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
 int
 sc_game_startPos (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
-    char boardStr [200];
-    db->game->GetStartPos()->PrintFEN (boardStr, FEN_ALL_FIELDS);
+    char boardStr [200] = "";
+    if (db->game->HasNonStandardStart()) 
+	db->game->GetStartPos()->PrintFEN (boardStr, FEN_ALL_FIELDS);
     Tcl_AppendResult (ti, boardStr, NULL);
     return TCL_OK;
 }
