@@ -9,8 +9,8 @@
 exec tcscid "$0" "$@"
 
 if {$argc != 1} { 
-    puts "Usage: scidpgn database"
-    puts "Example: scidpgn  mybase"
+    puts "scidpgn: prints the PGN representation of all games in a Scid database, with all comments and variations."
+    puts "Usage:   scidpgn database"
     exit 1
 }
 
