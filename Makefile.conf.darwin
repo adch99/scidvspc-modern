@@ -268,11 +268,10 @@ TCLS= \
   tcl/tools/fics.tcl tcl/tools/uci.tcl tcl/end.tcl tcl/tools/tacgame.tcl tcl/tools/sergame.tcl tcl/tools/calvar.tcl tcl/tools/tactics.tcl tcl/tools/novag.tcl tcl/misc/flags.tcl tcl/tools/inputengine.tcl
 
 
-### SCRIPTS:
-# Small extra programs. Most are written in Tcl using tcscid, but
-# a few contributed ones may be in Python or other languages.
+# There are several scripts in the "scripts" directory, but most are probably not used
+# so just include a couple of them now
 
-SCRIPTS= sc_addmove sc_epgn sc_spell sc_eco sc_import sc_remote sc_tree scidpgn pgnfix spliteco
+SCRIPTS= sc_remote scidpgn 
 
 ####################
 
