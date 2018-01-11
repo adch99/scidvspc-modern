@@ -71,7 +71,7 @@ set tips(E) {
     Mastering Scid's <a Docking>Docked Windows</a> feature is tricky, but allows for a very configurable desktop.
   }
   {
-    Using <b>Control+Wheelmouse</b> in the Main/Pgn/Help windows will adjust the text size.
+    Right-clicking the <b>Game Save</b> icon in the toolbar will quickly save the current game.
   }
   {
     Entering moves can be done with the mouse or keyboard
@@ -94,16 +94,16 @@ set tips(E) {
   {
     You can see the moves, comments and variations of the current game
     in the <a PGN>PGN Window</a>.
-    Prssing middle-mouse on a move will show a preview of that position.
+    Pressing middle-mouse on a move will show a preview of that position.
   }
   {
     Copy games from one database to another using drag and drop
-    in the <a Switcher>Database Switcher</a> (in the bottom of the gamelist).
-    Dragging filtered games to the Clipbase allows one to sort the games without having to sort the
-    whole base.
+    in the <a Switcher>Database Switcher</a> (at the bottom of the gamelist).
+    Dragging filtered games to the Clipbase allows one to sort the games without permanently
+    sorting the whole base.
   }
   {
-    Single-game PGN files can be saved via <b>File--<gt>Save PGN</b>
+    Single-game PGN files can be saved via <b>File--<gt>Save PGN</b>.
     But larger PGN files are always opened read-only.
     <br><br>
     For more information, see <a BrowsingPGN>PGN and Scid</a>
@@ -114,13 +114,13 @@ set tips(E) {
   }
   {
     Clicking on a player's name shows the <a PInfo>Player Information Window</a>.
-    From here, one can easily select all games by the player 
+    From here, one can easily select all the player's games 
     by clicking on the Win/Lose/Filter values (in green).
   }
   {
     Important databases can be made <b>Read-Only</b> temporarily
     by right-clicking in the <a Switcher>Database Switcher</a>, or (permanently) by changing
-    the database's file permissions through Windows/Linux/OSX.
+    the database's file permissions through Windows/Linux/OS X.
   }
   {
    The <a Maintenance Editing>Name Editor</a> allows one to substitute individual 
@@ -132,24 +132,24 @@ set tips(E) {
     Sorting>sorting</a> it by Event Date, then Event
     (instead of Date then Event), as
     this keeps games in the same tournament, but with different dates,
-    together. (Assuming they all have the same EventDate).
+    together. (Assuming they all have the same Event Date).
   }
   {
     Before looking for <a Maintenance Twins>Twin Games</a>, it is a good idea
-    to <a Maintenance Spellcheck>spell check</a> your database, as this
+    to <a Maintenance Spellcheck>Spell Check</a> your database, as this
     allows Scid to better find twins.
   }
   {
     <a Flags>Flags</a> are useful for marking database games with
-    particular characteristics , such as pawn structure, tactics, etc.
-    This can be done in Scid vs. PC's gamelist. There are also 6 custom flags, whose labels can
+    particular characteristics; such as pawn structure, tactics, etc.
+    This can be done in Scid vs. PC's gamelist. There are also six custom flags, whose labels can
     be changed in the <a Maintenance>Maintenance</a> window.
   } 
   {
     You can search for flagged or deleted games with the
     <a Searches Header>General Search</a> window.
     After saving Search Criteria with the <b>Save</b> button, these saves can then
-    be reloaded later from Scid's main <b>Search Menu</b>.
+    be reloaded later via <b>Search--<gt>Load Search File</b>.
   }
   {
     If you are playing through a game and want to quickly try out some moves
@@ -189,9 +189,9 @@ set tips(E) {
     In a <a Searches Header>General Search</a>, Player/Event/Site/Round
     Names are case-insensitive and match anywhere in a name. You can choose
     to do more precise searches using double-quotes and the wildcards
-    "?" (any single character) and "*" (zero or more characters)
+    '?' (any single character) and '*' (zero or more characters)
     For example, searching for <b>belg</b> (in the site field) shows many matches
-    but <b>"*Belgium*" shows fewer matches.
+    but <b>"*Belgium*"</b> shows fewer matches.
   }
   {
     If you want to correct a move in a game without losing all the moves
@@ -202,8 +202,7 @@ set tips(E) {
   {
     If you have an ECO classification file loaded, you can go to the
     deepest classified position in the current game with
-    <b>Identify Opening</b> in the <b>Game</b> menu
-    (shortcut: Control-Shift-D).
+    <b>Identify Opening</b> in the <b>Game</b> menu.
   }
   {
     If you want to check the size of a file or its date of last modification
@@ -228,8 +227,8 @@ set tips(E) {
     for highly rated players, and of the most recent games.
   }
   {
-    You can resize the main board size with <b>Control+Wheelmouse</b>, or by
-    <b>Control-Shift-Left/Right</b>.
+    You can quickly adjust many font sizes by moving the mouse over a window, and using
+    <b>Control+Wheelmouse</b>. In the main window, press 'Tab' to raise any covered windows.
   }
   {
     After a <a Searches>search</a>, you can browse through all
