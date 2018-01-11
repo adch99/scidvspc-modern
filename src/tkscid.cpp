@@ -8973,8 +8973,8 @@ sc_game_startPos (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     return TCL_OK;
 }
 
-//    Strip all comments or variations from a game.
-
+//    Strip all comments or variations from game(s)
+//    todo - this should probably be rewritten properly, instead of using/overloading PGN parsing 
 int
 sc_game_strip (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
