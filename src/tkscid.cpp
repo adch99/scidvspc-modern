@@ -6682,7 +6682,7 @@ sc_game_firstMoves (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
     }
 
     uint gNum = strGetUnsigned (argv[2]);
-    if (gNum < 0  ||  gNum > db->numGames) {
+    if (gNum > db->numGames) {
         return errorResult (ti, "Invalid game number.");
     }
 
