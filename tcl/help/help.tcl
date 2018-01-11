@@ -878,28 +878,6 @@ set helpText(Menus) {<h1>Scid Menus</h1>
   <br>
   <li><green>Board Screenshot</green>  Save a screenshot of the board to a file.</li>
   </ul>
-
-  <h3><name Options>Options</name></h3>
-  <p>
-  The option file is <b>$HOME/.scidvspc/config/options.dat</b>
-  (and a few other files in the same directory).</p>
-  <p><i>
-  On Windows the options directory is (unfortunately) in the program installation directory</i>, <b>bin/config</b>.
-  </p>
-  <p>
-  Options are saved automatically at program exit, or when <b>Options-<gt>Save Options</b> is selected.</p>
-  <p>
-  The <a Docking>Docked Windows</a> layout is not saved automatically, but may be done manually using <b>Options-<gt>Save Layout</b>.
-</p>
-  <h3><name Colours>Colours</name></h3>
-  <p>
-  The colours and themes for the Main Board are set in the <run ::chooseBoardColors><green>Options-<gt>Chessboard</green></run>,
-  but a few other colour settings are available in <b>Options-<gt>Colours</b>.
-</p><p>
-  The <b>Rows</b> colour is for the highlighted row in the Tree, Books, Finder, PlayerFinder and TournamentFinder windows.
-  Crosstable coloured rows must be enabled in the Crosstable Options menus.
-  The Board arrows and drawables' colours are set in the <a Comment Diagrams>Comment Editor</a>.
-
   <p><footer>Updated: Scid vs. PC 4.17, Mar 2016</footer></p>
 }
 
@@ -3951,16 +3929,25 @@ set helpText(Formats) {<h1>Scid File Formats</h1>
 
 set helpTitle(Options) "Options"
 set helpText(Options) {<h1>Options and Preferences</h1>
+
   <p>
-  Scid's options are stored in Scid-User-Directory/<b>config/options.dat</b>.
-  These are generally saved when Scid closes, but can also be saved by the <b>Save Options</b> menu
+  On Linux and Mac, the options directory is <b>$HOME/.scidvspc/config/</b>
+  On Windows the directory is in the program installation directory/<b>bin/config</b>.
+  In here you'll find the main options file <b>options.dat</b>, and a few other files.
   </p>
   <p>
-  The <green><run chooseBoardColors>Board and Chesspiece</run></green> options window allows to configure the look and feel.
-  </p>
+  Options are saved automatically at program exit, or when <b>Options-<gt>Save Options</b> is selected.</p>
   <p>
-  The options themselves are very numerous, and are generally dealt with in
-  their own Help items, but below you'll find a few items explained.
+  The <a Docking>Docked Windows</a> layout is not saved automatically, but may be done manually using <b>Options-<gt>Save Layout</b>.
+</p>
+  <h3><name Colours>Colours</name></h3>
+  <p>
+  The colours and themes for the Main Board are set in the <run ::chooseBoardColors><green>Options-<gt>Chessboard</green></run>,
+  but a few other colour settings are available in <b>Options-<gt>Colours</b>.
+</p><p>
+  The <b>Rows</b> colour is for the highlighted row in the Tree, Books, Finder, PlayerFinder and TournamentFinder windows.
+  Crosstable coloured rows must be enabled in the Crosstable Options menus.
+  The Board arrows and drawables' colours are set in the <a Comment Diagrams>Comment Editor</a>.
   </p>
 
   <h3><name MyPlayerNames>My Player Names</name></h3>
@@ -3985,16 +3972,12 @@ set helpText(Options) {<h1>Options and Preferences</h1>
   Scid has four basic fonts; <b>Regular</b>, <b>Menu</b>, <b>Small</b> and <b>Fixed</b>,
   which can be customized via the <green>Options-<gt>Fonts</green> menus.
   </p>
-  <p><i>Many windows can quickly resize fonts by using Control+WheelMouse</i>
+  <p><i>Many windows can quickly resize fonts by using Control+WheelMouse</i>.
   </p>
   <p>
   The <b>Fixed</b> font is used by the <a Tree>Tree</a> and <a Crosstable>Crosstable</a> windows, and requires a fixed-width font to make text allign nicely.
   </p>
-  <p>
-  The new <b>PGN Figurines</b> feature require the truetype font ScidChessBerin.ttf to be installed on your operating system. Scid vs. PC attempts to do this, but issues may arise in which case this feature will be disabled in the PGN Options Menu.
-  </p>
-
-  <p><footer>Updated: Scid vs. PC 4.6 September 2011</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.19 Jan 2018</footer></p>
 }
 
 set helpTitle(NAGs) "NAG values"
