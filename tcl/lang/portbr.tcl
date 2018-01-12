@@ -370,6 +370,8 @@ menuText B OptionsTacticsBasesDir "Bases directory..." 0 {Sets the tactics (trai
 menuText B OptionsInformant "Configure informant values" 0
 menuText B OptionsSave "Salvar Configuracao" 0 \
   "Salva a configuracao no arquivo $::optionsFile"
+# ====== TODO To be translated ======
+menuText B OptionsSaveBases "Save Bases as Default" 0 
 menuText B OptionsAutoSave "Salva Opcoes ao sair" 0 \
   {Salva automaticamente todas as opcoes quando sair do Scid}
 

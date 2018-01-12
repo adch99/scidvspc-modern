@@ -347,6 +347,8 @@ menuText N OptionsTacticsBasesDir "Databases map..." 0 {Map met de tactieken (tr
 menuText N OptionsInformant "Configureer informant waarden" 0
 menuText N OptionsSave "Opties bewaren" 9 \
   "Bewaar alle instellingen in het bestand $::optionsFile"
+# ====== TODO To be translated ======
+menuText N OptionsSaveBases "Save Bases as Default" 0 
 menuText N OptionsAutoSave "Automatisch bewaren opties tijdens afsluiten" 1 \
   {Automatisch bewaren alle gewijzigde opties bij het afsluiten van ScidvsPC}
 

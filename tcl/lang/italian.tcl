@@ -358,6 +358,8 @@ menuText I OptionsTacticsBasesDir "Directory dei Database..." 0 {Configura la di
 menuText I OptionsInformant "Configura i valori informativi" 0
 menuText I OptionsSave "Salva Opzioni" 0 \
   "Salva tutte le opzioni definibili nel file $::optionsFile"
+# ====== TODO To be translated ======
+menuText I OptionsSaveBases "Save Bases as Default" 0 
 menuText I OptionsAutoSave "Salva Opzioni all'uscita" 0 \
   {Salva automaticamente tutte le opzioni quando si esce da Scid}
 

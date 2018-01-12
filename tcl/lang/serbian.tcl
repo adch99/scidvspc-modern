@@ -397,6 +397,8 @@ menuText Y OptionsTacticsBasesDir "Bases directory..." 0 {Sets the tactics (trai
 menuText Y OptionsInformant "Configure informant values" 0
 menuText Y OptionsSave "Saèuvaj opcije" 0 \
   "Saèuvaj sve opcije u fajl $::optionsFile"
+# ====== TODO To be translated ======
+menuText Y OptionsSaveBases "Save Bases as Default" 0 
 menuText Y OptionsAutoSave "Auto-saèuvaj opcije na izlasku" 0 \
   {Auto-saèuvaj sve opcije pri izlasku iz Scid-a}
 

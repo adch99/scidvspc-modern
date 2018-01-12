@@ -344,6 +344,8 @@ menuText S OptionsTacticsBasesDir "Carpeta de bases" 0 {Fija la carpeta de la ba
 menuText S OptionsInformant "Configurar valores de información" 0
 menuText S OptionsSave "Guardar opciones" 0 \
   "Guarda todas las opciones en el fichero $::optionsFile"
+# ====== TODO To be translated ======
+menuText S OptionsSaveBases "Save Bases as Default" 0 
 menuText S OptionsAutoSave "Autoguardar opciones al salir" 0 \
   {Guarda automáticamente todas las opciones cuando se sale de Scid}
 

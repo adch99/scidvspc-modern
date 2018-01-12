@@ -358,6 +358,8 @@ menuText G OptionsBooksDir "Κατάλογος Ανοιγμάτων" 10 {Επι�
 menuText G OptionsTacticsBasesDir "Κατάλογος Βάσεων" 10 {Επιλογή του καταλόγου Βάσεων, για τακτικές ασκήσεις (εκπαίδευση)}
 menuText G OptionsInformant "Ρύθμιση Αξιών Χαρακτηρισμών" 1
 menuText G OptionsSave "Αποθήκευση Ρυθμίσεων" 18 "Αποθήκευση όλων των ρυθμίσεων στο αρχείο $::optionsFile"
+# ====== TODO To be translated ======
+menuText G OptionsSaveBases "Save Bases as Default" 0 
 menuText G OptionsAutoSave "Αυτομ.Αποθηκ.στην Έξοδο" 11 \
   {Αυτόματη αποθήκευση όλων των ρυθμίσεων κατά την έξοδο του προγράμματος Scid}
 

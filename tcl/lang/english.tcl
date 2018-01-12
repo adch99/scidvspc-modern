@@ -329,6 +329,7 @@ menuText E OptionsBooksDir "Books Directory" 0 {Sets the opening books directory
 menuText E OptionsTacticsBasesDir "Bases Directory" 0 {Sets the tactics (training) bases directory}
 menuText E OptionsInformant "Configure Informant Values" 0
 menuText E OptionsSave "Save Options" 0 "Save all settable options to the file $::optionsFile"
+menuText E OptionsSaveBases "Save Bases as Default" 0 
 menuText E OptionsAutoSave "Auto-Save Options on Exit" 0 \
   {Auto-save all options when exiting Scid}
 

@@ -188,6 +188,7 @@ set comp(showscores) 0 ; # add engine scores as comments
 set photosMinimized 0
 set bookmarks(gamehistory) {}
 set playerInfoHistory {}
+set defaultDBs {}
 
 proc ::docking::init_layout_list {{recover 0}} {
   # Default window docking layouts
