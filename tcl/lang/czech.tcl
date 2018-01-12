@@ -369,6 +369,8 @@ menuText C OptionsTacticsBasesDir "Bases directory..." 0 {Sets the tactics (trai
 menuText C OptionsInformant "Configure informant values" 0
 menuText C OptionsSave "Ulo¾it volby" 0 \
   "Ulo¾it v¹echny nastavitelné volby do souboru $::optionsFile"
+# ====== TODO To be translated ======
+menuText C OptionsSaveBases "Save Bases as Default" 0 
 menuText C OptionsAutoSave "Automaticky ukládat volby pøi ukonèení" 20 \
   {Automaticky ukládat v¹echny volby pøi ukonèení Scidu}
 

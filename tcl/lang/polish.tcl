@@ -338,6 +338,8 @@ menuText P OptionsTacticsBasesDir "Katalog baz..." 0 {Ustaw katalog baz treningo
 menuText P OptionsInformant "Konfiguruj oceny Informatora" 0
 menuText P OptionsSave "Zapamiętaj opcje" 0 \
   "Zapamiętaj wszystkie ustawienia w pliku $::optionsFile"
+# ====== TODO To be translated ======
+menuText P OptionsSaveBases "Save Bases as Default" 0 
 menuText P OptionsAutoSave "Automatycznie zapisuj opcje" 0 \
   {Automatycznie zapisz opcje przy zamykaniu programu}
 

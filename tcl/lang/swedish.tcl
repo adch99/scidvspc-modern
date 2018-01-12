@@ -339,6 +339,8 @@ menuText W OptionsTacticsBasesDir "Taktikbaskatalog..." 0 {Anger Taktikbaskatalo
 menuText W OptionsInformant "Konfigurera Informant-parametrar" 0
 menuText W OptionsSave "Spara alternativ" 7 \
   "Spara alla alternativ till en inställningsfil"
+# ====== TODO To be translated ======
+menuText W OptionsSaveBases "Save Bases as Default" 0 
 menuText W OptionsAutoSave "Autospara vid avslut" 1 \
   {Spara alla alternativ när du avslutar Scid}
 

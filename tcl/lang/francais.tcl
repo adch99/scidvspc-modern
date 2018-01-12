@@ -333,6 +333,8 @@ menuText F OptionsBooksDir "Répertoire des bibliothèques..." 0 {Répertoire des b
 menuText F OptionsTacticsBasesDir "Répertoire des bases d'entrainement..." 0 {Répertoire des bases pour l'entrainement tactique}
 menuText F OptionsInformant "Configurer les valeurs de notation" 0
 menuText F OptionsSave "Sauver les options" 0 "Sauver les options dans le fichier $::optionsFile"
+# ====== TODO To be translated ======
+menuText F OptionsSaveBases "Save Bases as Default" 0 
 menuText F OptionsAutoSave "Sauvegarde automatique des options" 0 \
   {Sauvegarder automatiquement toutes les options en quittant Scid}
 

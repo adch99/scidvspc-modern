@@ -318,6 +318,8 @@ menuText U OptionsTacticsBasesDir "Pasta dos Arquivos..." 0 {Sets the tactics (t
 menuText U OptionsInformant "Configurar valores de Avaliação" 0
 menuText U OptionsSave "Guardar Configuração" 0 \
   "Guarda a configuração no arquivo $::optionsFile"
+# ====== TODO To be translated ======
+menuText U OptionsSaveBases "Save Bases as Default" 0 
 menuText U OptionsAutoSave "Guardar Opções ao sair" 0 \
   {Salva automaticamente todas as Opções quando sair do Scid}
 

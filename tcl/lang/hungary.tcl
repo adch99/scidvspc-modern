@@ -373,6 +373,8 @@ menuText H OptionsTacticsBasesDir "Bases directory..." 0 {Sets the tactics (trai
 menuText H OptionsInformant "Configure informant values" 0
 menuText H OptionsSave "Beállítások mentése" 12 \
   "Minden beállítható értéket elment a $::optionsFile fájlba."
+# ====== TODO To be translated ======
+menuText H OptionsSaveBases "Save Bases as Default" 0 
 menuText H OptionsAutoSave "Beállítások automatikus mentése kilépéskor." 0 \
   {Automatikusan elment minden beállítást, amikor kilépsz SCID-bõl.}
 

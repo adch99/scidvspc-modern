@@ -577,7 +577,7 @@ proc exportGames {selection exportType {fName {}}} {
   set initialDir(pgn) [file dirname $fName]
 
   if {$exportFilter} {
-    progressWindow Scid "Exporting games..." $::tr(Stop) sc_progressBar
+    progressWindow Scid "Exporting games" $::tr(Stop) sc_progressBar
   }
  # tk_messageBox -title "Debug" -type ok -icon error -message "Export Type $exportType" 
   busyCursor .
@@ -694,7 +694,7 @@ proc saveExportGList {} {
   set showProgress 0
   if {[sc_filter count] >= 20000} { set showProgress 1 }
   if {$showProgress} {
-    progressWindow Scid "Saving game list..." $::tr(Cancel) sc_progressBar
+    progressWindow Scid "Saving game list" $::tr(Cancel) sc_progressBar
   }
   busyCursor .
   set res [catch {sc_game list 1 $::MAX_GAMES "$glexport\n" $fname} err]
@@ -1932,7 +1932,19 @@ if {$loadAtStart(spell)} {
 
 proc fullname {fname} {
   # http://wiki.tcl.tk/10078
-  return [file dirname [file normalize $fname/__]]
+  return [file dirname [file normalize "$fname/__"]]
+}
+
+# If no commandline args, load default DBs (if any)
+
+if {$defaultDBs != {}} {
+  if {$argc == 0} {
+    ::splash::add "Using default bases: $defaultDBs"
+    set argv $defaultDBs
+    set argc [llength $argv]
+  } else {
+    ::splash::add "Not loading default bases as other command line args."
+  }
 }
 
 # Loading a database if specified on the command line:
@@ -1956,13 +1968,13 @@ while {$argc > 0} {
     break
   }
   if {[string match "*.epd*" $startbase]} {
-    ::splash::add "Opening EPD file: $startbase..."
+    ::splash::add "Opening EPD file: $startbase"
     if {![newEpdWin openSilent $startbase]} {
       ::splash::add "   Error opening EPD file: $startbase" error
     }
     set initialDir(epd) [file dirname $startbase]
   } elseif {[string match "*.sso" $startbase]} {
-    ::splash::add "Opening filter file: $startbase..."
+    ::splash::add "Opening filter file: $startbase"
     if {[catch {uplevel "#0" source $startbase} err]} {
       ::splash::add "   Error opening $startbase: $err" error
     } else {
@@ -2044,7 +2056,7 @@ while {$argc > 0} {
     }
   } else {
     busyCursor .
-    ::splash::add "Opening database: $startbase ..."
+    ::splash::add "Opening database: $startbase"
     set err 0
     set errMessage ""
     if {[string match "*.pgn" $startbase] || \

@@ -849,6 +849,22 @@ if {$::docking::USE_DOCKING} {
   }
 }
 
+$m add command -label OptionsSaveBases -command {
+  set defaultDBs {}
+  foreach i {1 2 3 4 5 6 7 8} {
+    if {[sc_base inUse $i]} {
+      lappend defaultDBs [sc_base filename $i]
+    }
+  }
+  if {$defaultDBs == {}} {
+    set ::statusBar "Default bases cleared"
+  } else {
+    set ::statusBar "Default bases now $defaultDBs"
+  }
+}
+
+set helpMessage($m,[incr menuindex]) OptionsSaveBases
+
 $m add command -label OptionsSave -command {
   set optionF ""
   if {[catch {open [scidConfigFile options] w} optionF]} {
@@ -904,7 +920,7 @@ $m add command -label OptionsSave -command {
     comp(timecontrol) comp(seconds) comp(base) comp(incr) comp(timeout) comp(name) comp(usebook) comp(book)
     comp(rounds) comp(showclock) comp(debug) comp(animate) comp(firstonly) comp(ponder) comp(showscores)
     ::tools::graphs::filter::type  ::tools::graphs::absfilter::type ::tools::graphs::showpoints ::tools::graphs::showbar
-    maintFlag useGraphFigurine photosMinimized bookmarks(gamehistory) playerInfoHistory
+    maintFlag useGraphFigurine photosMinimized bookmarks(gamehistory) playerInfoHistory defaultDBs
     glistSize glexport glistColOrder glistColWidth glistColAnchor addRatings(overwrite) addRatings(filter)
     blistColOrder blistColWidth blistColAnchor} {
 
@@ -1692,7 +1708,7 @@ proc setLanguageMenus {{lang ""}} {
   .menu.tools.exportfilter entryconfig 4 -label "[tr ToolsExpFilterLaTeX] ([tr OprepViewLaTeX])"
 
   foreach tag {Board Colour Toolbar Names Recent Fonts GInfo Fics Moves Startup Language
-    Numbers Windows Theme Export ECO Spell Table BooksDir TacticsBasesDir Informant Sounds Save AutoSave} {
+    Numbers Windows Theme Export ECO Spell Table BooksDir TacticsBasesDir Informant Sounds SaveBases Save AutoSave} {
     configMenuText .menu.options [tr Options$tag $oldLang] Options$tag $lang
   }
 

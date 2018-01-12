@@ -298,6 +298,8 @@ menuText L OptionsBooksDir "Avauskirjaston hakemisto" 0 {Aseta avauskirjaston ha
 menuText L OptionsTacticsBasesDir "Tietokantojen hakemisto" 0 {Aseta taktiikka (harjoitus)tietokantojen hakemisto}
 menuText L OptionsInformant "Konfiguroi informantin arvot" 0
 menuText L OptionsSave "Tallenna vaihtoehdot" 0 "Tallenna kaikki asetettavissa olevat vaihtoehdot $::optionsFile"
+# ====== TODO To be translated ======
+menuText L OptionsSaveBases "Save Bases as Default" 0 
 menuText L OptionsAutoSave "Tallenna automaattisesti vaihtoehdot poistuessa" 0 \
   {Tallenna automaattisesti kaikki vaihtoehdot poistuttaessa Scidistä}
 

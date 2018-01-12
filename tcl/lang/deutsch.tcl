@@ -355,6 +355,8 @@ menuText D OptionsTacticsBasesDir "Bases Verzeichnis..." 0 {Verzeichnis für takt
 menuText D OptionsInformant "Informatorwerte konfigurieren" 0
 menuText D OptionsSave "Optionen speichern" 0 \
   "Alle einstellbaren Optionen in der Datei $::optionsFile sichern"
+# ====== TODO To be translated ======
+menuText D OptionsSaveBases "Save Bases as Default" 0 
 menuText D OptionsAutoSave "Autom. speichern bei Beenden" 0 \
   {Alle Optionen beim Beenden von Scid automatisch speichern}
 

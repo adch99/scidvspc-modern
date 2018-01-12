@@ -398,6 +398,8 @@ menuText O OptionsTacticsBasesDir "Bases directory..." 0 {Sets the tactics (trai
 menuText O OptionsInformant "Configure informant values" 0
 menuText O OptionsSave "Lagre innstillinger" 0 \
   "Lagre alle instillinger til $::optionsFile"
+# ====== TODO To be translated ======
+menuText O OptionsSaveBases "Save Bases as Default" 0 
 menuText O OptionsAutoSave "Autolagre innstillinger ved avslutning" 0 \
   {Autolagre alle innstillinger når Scid avsluttes}
 
