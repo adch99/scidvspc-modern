@@ -1331,49 +1331,50 @@ BiLwWAinQMMZ/m+Fc+II4/LBD601CCnYYGI2OOLBIx5IQAAAOw==
 
 wm iconphoto . -default icon
 
-# Opening files by drag & drop on Scid icon on Mac
-if { $macOS } {
-  # Drag & Drop
-  set dndisbusy 0
-  set isopenBaseready 0
-  set dndargs 0
+# Opening files by double clicks/open-with on Mac
+set mac_args 0
 
-  proc dragndrop {args} {
-    global dndisbusy
-    global isopenBaseready
-    global dndargs
+if {$macOS} {
+  set mac_busy 0
+  set isMacBaseReady 0
+
+  proc macOpenWith {args} {
+    global mac_busy
+    global isMacBaseReady
+    global mac_args
 
     # Un-nest arguments:
     set args [join $args]
 
     # Wait for openBase to be ready, if needed.
-    if {$isopenBaseready == 0} {
-      if {$dndargs != 0} {
+    # (does not seem to be accessed)
+    if {$isMacBaseReady == 0} {
+      if {$mac_args != 0} {
         tk_messageBox -type ok -icon info -title Scid -message \
             "Please, wait until Scid finish starting up."
         return
       } else {
         # Save file names for later use:
-        set dndargs $args
+        set mac_args $args
       }
       return
     }
 
     # Are we busy opening files? if so, display message and do nothing
-    if {$dndisbusy != 0} {
+    if {$mac_busy != 0} {
       tk_messageBox -type ok -icon info -title Scid -message \
-          "Please, wait until the previou(s) database(s) are opened and try again."
+          "Please, wait until the previous database(s) are opened and try again."
       return
     }
 
     # Un-nest argumens again if Scid opened on drag & drop
-    if {$isopenBaseready == 2} {
+    if {$isMacBaseReady == 2} {
       # Un-nest arguments:
       set args [join $args]
-      set isopenBaseready 1
+      set isMacBaseReady 1
     }
 
-    set dndisbusy 1
+    set mac_busy 1
     set errmsg ""
     foreach file $args {
       # Check for available slots:
@@ -1420,16 +1421,17 @@ if { $macOS } {
         updateBoard -pgn
       } else  {
         # All seems good, let's open those files:
-        wm deiconify $::dot_w
+        # (deiconify doesn't seem necessary - S.A. 2018)
+        # wm deiconify $::dot_w
         ::file::Open $file
         focus .main
       }
     }
-    set dndisbusy 0
-    set dndargs 0
+    set mac_busy 0
+    set mac_args 0
   }
   proc tkOpenDocument {args} {
-    after idle [list dragndrop $args]
+    after idle [list macOpenWith $args]
   }
   rename tkOpenDocument ::tk::mac::OpenDocument
 
