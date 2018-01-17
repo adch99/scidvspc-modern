@@ -1938,7 +1938,7 @@ proc fullname {fname} {
 # If no commandline args, load default DBs (if any)
 
 if {$defaultDBs != {}} {
-  if {$argc == 0} {
+  if {$argc == 0 && $mac_args == 0} {
     ::splash::add "Using default bases: $defaultDBs"
     set argv $defaultDBs
     set argc [llength $argv]
@@ -2258,11 +2258,11 @@ bind .main <Control-Shift-F8> {
 # todo - fix up Mac file drop
 
 if {$::macOS} {
-  set isopenBaseready 1
-  if {$dndargs != 0} {
-    set isopenBaseready 2
-    catch {::tk::mac::OpenDocument $dndargs} errmsg
-    #::splash::add "Opening file(s)...\$dndargs"    
+  set isMacBaseReady 1
+  if {$mac_args != 0} {
+    set isMacBaseReady 2
+    ::splash::add "::tk::mac::OpenDocument $mac_args"    
+    catch {::tk::mac::OpenDocument $mac_args} errmsg
   }
 }
 
