@@ -695,7 +695,7 @@ set helpText(MainWindow) {<h1>Scid Main Window</h1>
 set helpTitle(Docking) "Docked Windows"
 set helpText(Docking) {<h1>Docked Windows</h1>
 <p>
-Scid can work in two modes. In Docked Windows mode (the default), most windows
+Scid's GUI has two modes. In Docked Windows mode (the default), most windows
 are tiled - or docked - into a single large window. 
 Docking is enabled or disabled in <b>Options-<gt>Windows</b>,
 where you can also load any of the three built-in layouts, or save your own Window
@@ -3931,7 +3931,7 @@ set helpTitle(Options) "Options"
 set helpText(Options) {<h1>Options and Preferences</h1>
 
   <p>
-  On Linux and Mac, the options directory is <b>$HOME/.scidvspc/config/</b>
+  On Linux and Mac, the options directory is <b>$HOME/.scidvspc/config/</b>.
   On Windows the directory is in the program installation directory/<b>bin/config</b>.
   In here you'll find the main options file <b>options.dat</b>, and a few other files.
   </p>
@@ -3939,6 +3939,8 @@ set helpText(Options) {<h1>Options and Preferences</h1>
   Options are saved automatically at program exit, or when <b>Options-<gt>Save Options</b> is selected.</p>
   <p>
   The <a Docking>Docked Windows</a> layout is not saved automatically, but may be done manually using <b>Options-<gt>Save Layout</b>.
+</p><p>
+  <b>Save Bases as Default</b> will reopen all current databases the next time Scid starts (without command line options/files).
 </p>
   <h3><name Colours>Colours</name></h3>
   <p>
