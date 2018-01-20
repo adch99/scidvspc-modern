@@ -262,7 +262,6 @@ proc ::search::moves {} {
       unbusyCursor .
       grab release .sm.b.stop
       .sm.b.stop configure -state disabled
-      set glstart 1
       ::search::loadFirstGame
       ::windows::stats::Refresh
     }
@@ -364,7 +363,6 @@ proc ::search::cql {} {
     }
 
     if {[sc_filter count] > 0} {
-      set glstart 1
       ::search::loadFirstGame
     } else {
       # current game could be altered

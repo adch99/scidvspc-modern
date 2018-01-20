@@ -145,8 +145,7 @@ proc ::search::usefile {} {
 }
 
 proc ::search::loadFirstGame {} {
-    ## Used to not load if the Tree of current base is opened "(of there will be filter collision)"
-    ## but probably not necessary now tree is unlocked.
-    # set w ".treeWin[sc_base current]" ; if {[winfo exists $w]} { return }    
+    set ::glstart 1
+    set ::glistStart([sc_base current]) 1
     ::game::Load [sc_filter first]
 }
