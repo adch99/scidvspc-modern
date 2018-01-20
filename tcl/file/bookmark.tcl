@@ -269,10 +269,12 @@ proc ::bookmarks::Go {entry} {
       flipBoardForPlayerNames
 
       # show this game in gamelist
+      set ::glstart $best
       set ::glistStart([sc_base current]) $best
     }
   } else {
     sc_move pgn $ply
+    set ::glstart $best
     set ::glistStart([sc_base current]) $best
 
     refreshWindows
