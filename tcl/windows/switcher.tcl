@@ -932,7 +932,13 @@ proc ::windows::switcher::Open {} {
     $f.menu add command -label [tr SearchNegate] -command "::search::filter::negate $i"
     # needs some work in search.tcl and tkscid.cpp 
 
-    $f.menu add command -label [tr FileReadOnly] -command "makeBaseReadOnly .glistWin.baseWin $i"
+    $f.menu add command -label [tr FileReadOnly] -command "
+      makeBaseReadOnly .glistWin.baseWin $i
+      if {\[sc_base current\] == $i} {
+        .main.tb.save configure -state disabled
+        .glistWin.b.save configure -state disabled
+      }
+    "
 
     if {$i == [sc_info clipbase]} {
       set closeLabel [tr EditReset]

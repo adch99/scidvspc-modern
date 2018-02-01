@@ -985,8 +985,11 @@ sc_base_open (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     db->nb->SetFileName (filename);
 
     db->memoryOnly = false;
-    db->fileMode = FMODE_Both;
-    if (readOnly) { db->fileMode = FMODE_ReadOnly; }
+    if (readOnly)
+         db->fileMode = FMODE_ReadOnly;
+    else
+         db->fileMode = FMODE_Both;
+
     errorT err;
     err = db->idx->OpenIndexFile (db->fileMode);
 
@@ -4078,6 +4081,9 @@ sc_clipbase_clear (Tcl_Interp * ti)
     clipbase->idx->CloseIndexFile();
     clipbase->idx->CreateMemoryOnly();
     clipbase->idx->SetType (2);
+
+    // Hmmm - clearing clipbase in read_only resets read-only
+    clipbase->fileMode = FMODE_Both;
 
     clipbase->numGames = 0;
     clearFilter (clipbase, clipbase->numGames);
