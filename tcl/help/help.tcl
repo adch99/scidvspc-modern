@@ -241,7 +241,8 @@ append helpText(Index) {
   <ul>
   <li><a Finder>Backups</a></li>
   <li><a Tree Best>Best games</a> window</li>
-  <li><a Board>Board options</a> (textures and pieces)</li>
+  <li><a MainWindow>Board setup</a></li>
+  <li><a Board>Board textures and pieces</a></li>
   <li><a Searches Board>Board searches</a></li>
   <li><a Book>Book</a> window</li>
   <li><a BookTuning>Book tuning</a></li>
@@ -259,7 +260,7 @@ append helpText(Index) {
   <li><a Analysis Debugging>Chess Engine</a>  debugging</li>
   <li><a Maintenance Cleaner>Cleaner</a></li>
   <li><a Clipbase>Clipbase</a></li>
-  <li><a Menus Colours>Colours</a> (various colour options)</li>
+  <li><a Options Colours>Colours</a> (various colour options)</li>
   <li><a Cmdline>Command-line options</a></li>
   <li><a Comment>Comment Editor</a></li>
   <li><a Maintenance Twins>Comparing games</a> with the Twin Game Checker</li>
@@ -602,15 +603,15 @@ set helpText(Hints) {<h1>Scid Hints</h1>
 }
 
 
-set helpTitle(MainWindow) "Scid Main Window"
-set helpText(MainWindow) {<h1>Scid Main Window</h1>
+set helpTitle(MainWindow) "Main Window"
+set helpText(MainWindow) {<h1>Scid vs. PC's Main Window</h1>
   <p>
-  This section explains the main board (showing the current game), the game information area, and a few other widgets.
-  Separate help pages describe the <a Menus>menus</a>, <a Menus Colours>colours</a>, how-to <a Moves>enter chess moves</a>,
-  <a ShortCuts General>keyboard shortcuts</a> for navigating games, and <a Comment Diagrams>drawing arrows and marks</a>
+  This section describes the main board (showing the current game), the game information area below it, and a few other widgets.
+  Also see separate help pages about the <a Menus>menus</a>, <a Board>board customisations</a>, <a Options Colours>other colours</a>, how-to <a Moves>enter chess moves</a>,
+  <a ShortCuts General>keyboard shortcuts</a> for navigating games, and <a Comment Diagrams>drawing arrows and marks.</a>
   </p>
   <p>
-  <i>See Scid's <run ::tip::show><green>Tip of the Day</green></run> for mmore helplful hints.</i>
+  <i>Right-clicking the 'Board' tab, (or the whole board in undocked mode), allows one to show/hide many elements described below. See Scid's <run ::tip::show><green>Tip of the Day</green></run> for more helplful hints.</i>
   </p>
 
   <h4>Main Button Bar</h4>
@@ -630,7 +631,7 @@ set helpText(MainWindow) {<h1>Scid Main Window</h1>
   <li> <button tb_windows> Raise open windows [tab]. This feature may only work if you disable your window-manager's focus stealing policy.</li>
   </ul>
   </p><p>
-  Additionally, right-clicking Autoplay will autoplay all filter games. Right-clicking 
+  Additionally, Control-button + Autoplay will play through all filter games.
   </p>
 
   <h4><name Toolbar>Toolbar</name></h4>
@@ -646,8 +647,8 @@ set helpText(MainWindow) {<h1>Scid Main Window</h1>
   <p><i>The Game Info window can be hidden/unhidden by pressing Control-i</i></p>
 
   <p>
-  Below the Chessboard is general information about the current game. 
-  It includes the <b>Player Names</b> and <b>Ratings</b>,
+  Below the main board is general information about the current game. 
+  It includes <b>Player Names</b>, <b>Ratings</b>,
   <b>Event</b> and <b>Site</b> fields, and <b>ECO</b> codes.
   </p>
   <p>
@@ -664,7 +665,6 @@ set helpText(MainWindow) {<h1>Scid Main Window</h1>
   <h4>Material Values</h4>
   <p>
   On the right hand side of the board the <b>material</b> balance is displayed by small chess pieces.
-  One may also right-click the board and select 'Toggle Material' to display all taken pieces.
   </p>
 
   <h4><name Status>The Status Bar</name></h4>
@@ -689,7 +689,7 @@ set helpText(MainWindow) {<h1>Scid Main Window</h1>
   game is being <a Analysis Annotating>annotated</a>, and pressing the autoplay button will stop annotation.
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.14 Dec 2014 </footer></p>
+  <p><footer>Updated: Scid vs. PC 4.19 Feb 2018 </footer></p>
 }
 
 set helpTitle(Docking) "Docked Windows"
@@ -7316,8 +7316,8 @@ The window manager may interfere with some shortcuts.
 <p><footer>Updated:</b> - Scid vs. PC 4.9 April 2013</footer></p>
 }
 
-set helpTitle(Board) "Board Options"
-set helpText(Board) {<h1>Board Options</h1>
+set helpTitle(Board) "Board Customisation"
+set helpText(Board) {<h1>Board Customisation</h1>
 <p>
    Tk (and Scid) only support the GIF image format by default -
    but PNG and JPG images (and pieces) are supported by the TkImg
