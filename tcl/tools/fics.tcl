@@ -493,6 +493,10 @@ namespace eval fics {
 
     incr row
     button $w.bottom.buttons.offers  -text "$tr(FICSOffers) $tr(Graph)" -command {
+      if {$::fics::playing == 1 || $::fics::playing == -1} {
+	::fics::updateConsole "Scid: Offers Graph disabled while playing a game"
+	return
+      }
       set ::fics::graph(on) [expr {! $::fics::graph(on)}]
       ::fics::showGraph
     } -state disabled
@@ -627,7 +631,7 @@ namespace eval fics {
       smove* {
 	  # smoves recreates a game without any further announcment
 	  if {$::fics::playing == 1 || $::fics::playing == -1} {
-	    updateConsole "Scid: smoves disabled while playing a game"
+	    ::fics::updateConsole "Scid: smoves disabled while playing a game"
 	    return
 	  }
 
