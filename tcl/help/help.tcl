@@ -1253,8 +1253,7 @@ set helpText(CQL) {<h1>Chess Query Language</h1>
 set helpTitle(Filter) "The Filter"
 set helpText(Filter) {<h1>The Filter</h1>
   <p>
-  Scid's Filter represents a subset of games in the current base or pgn archive. At any time, each game is either
-  included in or excluded from the filter, as displayed by the <a GameList>Game List</a> widget.
+  Scid's Filter represents a selection of games from the current base (or pgn archive). Filtered games are displayed in the <a GameList>Game List</a> widget.
   </p>
   <p>
   The Filter is often used to show <a Searches>Search</a> results.
@@ -1546,10 +1545,10 @@ set helpText(Switcher) {<h1>The Database Switcher</h1>
   Two separate forms of Drag and Drop are enabled.
   <br> <br>
   * Files can be opened from the Windows, KDE or Gnome file managers by dropping
-  them onto the Switcher at the bottom of the Game List. Files can also be dropped to the Gameinfo widget in the main board.
+  them onto the Switcher at the bottom of the Game List. (Files can also be dropped to the Gameinfo widget and Main board).
   <br> <br>
   * Dragging within the Switcher from one base to another, copies filtered games.
-  This is an important way to manage and copy games within databases.
+  This is an important way to manage and copy games within databases. Copying to databases (other than the clipbase) requires confirmation, but this can be disabled from the switcher context menu.
   </p>
 
   <p><footer>Updated: Scid vs. PC 4.16, January 2016</footer></p>
@@ -1646,19 +1645,19 @@ and at the bottom you'll find the <a Switcher>Database Switcher</a>.</p>
 <p>Clicking a game will select it. Select multiple games using Control+Click and Shift+Click.
 Right-clicking game(s) presents a context menu for various actions. Double-clicking loads a game.</p>
 <p>Right-clicking a Column Title allows one to reorder them ('add' also repositions a column), or change the alignment.</p>
-<p>Quick searches can be performed by entering text in the combo-box and pressing Enter, or clicking the <b>Filter</b> button.
-Use "+" as a logical AND with the <b>Filter</b> button. For example: "Kasparov+Karpov".
-Similarly, the entry-box allows finding a particular game by number. Both these widgets will load the current game by pressing Control+Enter.</p>
+<p>Quick searches can be performed by entering text in the combobox and pressing Enter, or clicking the <b>Filter</b> button.
+Use "+" as a logical AND with Filter, eg "Kasparov+Karpov".
+Similarly, the entrybox allows finding a particular game by number. Both these widgets will load the current game by pressing Control+Enter.</p>
 <p><i>To see games matching the current position, set 'adjust filter' in the <a Tree>Tree window</a>.
 For more info about Searches and Filters, <a Searches>see here</a> or below.
 </i></p>
 <h3>Sorting the Game List</h3>
 <p>The database can be <b>permanently sorted</b> by clicking column titles.
-Sorting is not undoable, and may affect search and tree performance. For more details see <a Sorting>Sorting Database</a>.
+Sorting is not undoable, and may (marginally) affect search and tree performance. For more details see <a Sorting>Sorting Database</a>.
 </p>
 
   <h3><name Del>Filtered and Deleted Games</name></h3>
-  <p>Scid has two notions of removed games - which can be confusing.</p>
+  <p>Scid has two notions of removed games, which can be confusing.</p>
 
   <p>The first is <b>Filtered Games</b>.  In the Game List widget,
   right-clicking some games and selecting <b>Remove</b>
@@ -1672,7 +1671,7 @@ Sorting is not undoable, and may affect search and tree performance. For more de
   This can be done by the <b>Compact</b> button, or 
   from the <a Maintenance>maintenance</a> window.</p>
 <p><i>The Game List only deletes (up to) a page of games at a time. Deleting or manipulating ALL filtered games,
-is also done from the Maintenance window.</i></p>
+is done from the Maintenance window.</i></p>
 
 
 <p><i>The default database (Clipbase) cannot be compacted</i>.</p>
@@ -1685,12 +1684,12 @@ is also done from the Maintenance window.</i></p>
 <li><img tb_gprev> - load previous filter game</li>
 <li><img tb_gnext> - load next filter game</li>
 <li><img tb_glast> - load last filter game</li>
-<li><b>Reset</b> - resets game filter</li>
+<li><b>Reset</b> - reset game filter</li>
 <li><b>Negate</b> - negate game filter</li>
-<li><b>Filter</b> - performs a general filter for entered text</li>
+<li><b>Filter</b> - searches/filters the current filter for entered text</li>
 <li><b>Find</b> - (Press 'Enter' in the entrybox) perform a (slow) general find for entered text</li>
 <br>
-<li><b>Current</b> - highlights the current game (if it has not been filtered)</li>
+<li><b>Current</b> - highlight the current game (if it has not been filtered)</li>
 <li><b>Compact</b> -  database (game) compaction.</li>
 </ul>
 </p>
@@ -1703,10 +1702,10 @@ is also done from the Maintenance window.</i></p>
 <li>Control+r - Reset the filter</li>
 <li>Control+c - Copy game to clipbase</li>
 <li>Control+v - Paste game from clipbase to current base</li>
-<li>Control+Enter load selected game</li>
 <br>
-<li>Resize column widths by dragging the column edge.</li>
-<li>Drag and Drop files in the switcher (from Windows/KDE/Gnome).</li>
+<li>Resize column widths by dragging the column edges.</li>
+<li>Drag and Drop file opens from KDE/Gnome to the switcher (from Windows/KDE/Gnome).</li>
+<li>Drag and Drop between switcher icons to copy files.</li>
 <li>Middle-click the Game List to hide the button bar.</li>
 </ul>
 
