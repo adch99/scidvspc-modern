@@ -445,8 +445,20 @@ proc ::windows::gamelist::Open {} {
   bind $w <Control-r> ::search::filter::reset
   bind $w <Control-n> ::search::filter::negate
 
-  foreach i { <Control-Home> <Control-End> <Control-Down> <Control-Up> <Control-question>} {
-    bind .glistWin $i +::windows::gamelist::showCurrent
+  foreach i {<Control-Home> <Control-End> <Control-Down> <Control-Up>} \
+          j {first last next previous} {
+    bind $w $i +::windows::gamelist::showCurrent; # actions already bound from focus
+    bind $w.tree $i "
+      ::game::LoadNextPrev $j
+      ::windows::gamelist::showCurrent
+      break
+    "
+  }
+  bind $w <Control-question> +::windows::gamelist::showCurrent
+  bind $w.tree <Control-question> {
+    ::game::LoadRandom
+    ::windows::gamelist::showCurrent
+    break
   }
 
   ### One row of buttons, with an expandable button frame in the middle
