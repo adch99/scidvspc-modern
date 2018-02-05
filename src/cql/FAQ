@@ -1,8 +1,0 @@
-
-These are the Scid vs PC CQL Search frequently asked questions:
-
-Q: I just ran a CQL query and forgot to give the <silent> parameter in the CQL header.  How can I strip the position match marks out of just the games that matched that query?
-
-A: The game list filter has been set to just those games that satisfied the query.  Re-submit the same query, with the <silent> parameter given, the Filter Setting at "AND", and the Strip option set to "Yes".
-
-
