@@ -1,10 +1,11 @@
 #pragma once
 #include "util.h"
+#include "deleteable.h"
 class PieceLoc;
 class SquareToken;
 class PieceToken;
 
-class Token {
+class Token:public Deleteable {
  public:
   static int CurrentLine;
   static int CurrentChar;

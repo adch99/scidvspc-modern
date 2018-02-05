@@ -42,10 +42,28 @@ void MarkBoardMap::print(){
     }
 }
 
+void MarkBoardMap::make_null_move(squareT fromsquare, squareT tosquare, pieceT*board, colorT color){
+  // NULL MOVE CONTRIVED EXCEPTION... testing purposes only
+  //uassert(false, "contrived null move markboard exception");
+  uassert(square_valid(fromsquare)&&
+	  square_valid(tosquare)&&
+	  fromsquare==tosquare&&
+	  (color==WHITE||color==BLACK),
+	  "make_null_move internal 1");
+  pieceT p = piece_Type(board[fromsquare]);
+  uassert(p==KING,"expecting a king on the null move from square");
+  return;
+}
+  
+			
 void MarkBoardMap::make_move(squareT fromsquare,
 			     squareT tosquare,
 			     pieceT*board,
 			     colorT color){
+  if(fromsquare==tosquare){
+    make_null_move(fromsquare,tosquare,board,color);
+    return;}
+  
   uassert(square_valid(fromsquare)&&
 	  square_valid(tosquare)&&
 	  fromsquare!=tosquare &&

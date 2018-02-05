@@ -72,12 +72,12 @@ EchoSquareSpec* Tokens::match_echosquarespec(){
   Range*mismatch=NULL;
   while(true)
     if(match_keyword("sourcesquares")){
-      source=match_setbase();
+      source=match_set();
       if(!source) show_error("missing set specifier after 'sourcesquares'");
       continue;
     }
     else if(match_keyword("targetsquares")){
-      target=match_setbase();
+      target=match_set();
       if(!target) show_error("missing set specifier after 'targetsquares'");
       continue;
     }

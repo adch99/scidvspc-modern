@@ -1,5 +1,6 @@
 #pragma once
-class Transform{
+#include "deleteable.h"
+class Transform {
  public:
   virtual squareT transform(squareT s)=0;
   static vector<Transform*>nonidentity(const vector<Transform*>&);

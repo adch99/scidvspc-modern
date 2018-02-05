@@ -1,6 +1,6 @@
 #include "node.h"
 
-PastNode::PastNode(vector<SeqConstituent*>cs,Range*r,bool isskip):SequenceBase(cs,r,isskip){
+PastNode::PastNode(vector<SeqConstituent*>cs,Range*r,bool isskip, bool allownest):SequenceBase(cs,r,isskip,allownest){
 }
 
 SeqRet PastNode::compute(HolderConstituent*holder,SeqStack&stack){

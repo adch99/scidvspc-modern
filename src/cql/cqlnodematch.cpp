@@ -50,6 +50,7 @@ bool CqlNode::match_game(Game*game){
   if(!isSilent())MarkBoard::gameAppendComment(game,buffer); 
 #endif
   if(usemarks) MarkBoard::mark(game);
+  SequenceBase::nestsClear();
   NumericVariable::resetAll();
   NumericVariable*mc=Variable::matchCountVariable();
   mc->bindNumeric(0);
@@ -126,16 +127,15 @@ void CqlNode::match(){
 // of a header from this directory in tkscid.cpp descends into include-file-hell.
 
 #ifdef INTEGRATED
-CqlNode* nodeScid = NULL;
 
 bool CqlMatchGame(Game *game) {
-  Range* gamenumberrange = nodeScid->gamenumberrange;
+  Range* gamenumberrange = CqlParseRoot->gamenumberrange;
   int currentGameNumber = game->GetNumber();
   if(gamenumberrange) {
     if(currentGameNumber > gamenumberrange->max || currentGameNumber < gamenumberrange->min)
       return false;
   }
 
-  return nodeScid->match_game(game);
+  return CqlParseRoot->match_game(game);
 }
 #endif

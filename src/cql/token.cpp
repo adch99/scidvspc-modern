@@ -16,19 +16,19 @@ void Token::printLocation(){
 }
 
 StringToken::StringToken(const char *c){
-  CQL_ASSERT(c);
+  uassert(c);
   value=c;
 }
 
 bool PieceToken::isAllowed(char c){
-  static char* allowed="RNBQKPrnbqkpAaU?.";
+  static char* allowed="RNBQKPrnbqkpAaU?_";
   for (int i=0;i<strlen(allowed);++i)
     if (c==allowed[i])return true;
   return false;
 }
 
 PieceToken::PieceToken(char c){
-  CQL_ASSERT(isAllowed(c));
+  uassert(isAllowed(c));
   value=c;
 }
 

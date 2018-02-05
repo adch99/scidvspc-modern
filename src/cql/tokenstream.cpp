@@ -21,13 +21,13 @@ Token* Tokens::current(){
 }
 
 void Tokens::forward(){
-  CQL_ASSERT(!eof());
+  uassert(!eof());
   ++bottom;
 }
 
 Tokens::Tokens(vector<Token*>ts){
   for(auto s:ts)
-    {CQL_ASSERT (s!=NULL);}
+    {uassert (s!=NULL);}
   tokens=ts;
   bottom=0;
 }

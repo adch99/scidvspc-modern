@@ -4,9 +4,8 @@
 #include "node.h"
     
   
-class Tokens{
+class Tokens : public Deleteable{
  public:
-  static int nextid;
   void print();
   int bottom;
   vector<Token*>tokens;
@@ -24,19 +23,20 @@ class Tokens{
   PgnNode* match_pgnnode();
   OutputNode* match_outputnode();
   ResultNode* match_resultnode();
-  vector<Node*>* match_some_cqlfeatures();
+  vector<Node*> match_some_cqlfeatures();
   KeywordToken* match_keyword(const char*v);
   bool match_lparen();
   bool match_rparen();
   bool match_bar();
   Node* match_basicnode();
-  Node* match_basicnode_no_or();
+  Node* match_basicnode_no_suffix();
   Node* match_simplenode();
   PieceLoc* match_pieceloc();
   Node* match_compoundnode();
+  bool match_dot();
   Node* match_tagnode();
-  PositionNode* match_positionnode();
-  CountNode* match_countnode();
+  Node* match_positionnode();
+  CountSquaresNode* match_countsquaresnode();
   Token* match_variable();
   vector<Node*> match_some_basicnodes();
   ForallNode* match_forallnode();
@@ -54,7 +54,7 @@ class Tokens{
   NotNode*match_notnode();
   KeywordToken*match_transformkeyword();
   KeywordToken*match_raykeyword();
-  SetBase*match_setbase();
+  SetBase*match_set();
   static vector<directionT> directionsFromRayKeyword(KeywordToken*);
   //  bool match_lessthan();
   //  bool match_greaterthan();
@@ -65,18 +65,14 @@ class Tokens{
   bool match_lbrace();
   bool match_rbrace();
   void show_error(const char* message);
-  NotSetNode* match_notsetnode();
   VectorNode* match_vectornode();
   vector<DirectionParameter> match_directionparameters();
   DirectionParameter* match_directionparameter();
-  vector<Direction>*match_direction();
+  vector<Direction>match_direction();
   vector<Direction> match_raydirections(bool * isattack);
-  GapNode* match_gapnode();
-  TransformBase* match_fliptransform();
-  TransformBase* match_shifttransform();
   TransformNode* match_transformnode();
-  TransformBase* match_transformbase();
-  TransformSetNode* match_transformsetnode();
+  TransformNode* match_shifttransform();
+  TransformNode* match_fliptransform();
   NumericVariable* match_numericvariable();
   Node* match_countable();
   MatchCountNode* match_matchcountnode();
@@ -86,7 +82,7 @@ class Tokens{
   AnyNode* match_anynode();
   BetweenNode* match_betweennode();
   ExtensionNode* match_extensionnode();
-  OnNode* match_onnode();
+  OnNode* match_onnode(Node* prefix);
   SetBase*match_fromexp();
   SetBase*match_toexp();
   PieceLoc*match_promoteexp();
@@ -106,18 +102,12 @@ class Tokens{
   EchoDistanceSpec* match_echodescendant();
   PowerNode* match_powernode();
   PowerDifferenceNode* match_powerdifferencenode();
-  ExistsNode* match_existsnode();
-  ExistsNode* match_ranged_existsnode(Range**);
-  CountNode* match_count_existsnode();
-  PieceIdNode* match_pieceidnode();
-  PieceIdNode* match_ranged_pieceidnode(Range**);
-  CountNode* match_count_pieceidnode();
+  Node* match_existsnode();
+  Node* match_pieceidnode();
   vector<Transform*>match_echotransforms();
   EchoSideToMoveSpec* match_echosidetomovespec();
+  OrNode* match_ornode(Node*prefix);
   OriginNode* match_originnode();
-  Node* match_orsuffix();
-  SetBase* match_onsuffix();
-  SetBase* match_primary_setbase();
   MatchCommentNode* match_matchcommentnode();
   const char* match_quotedstring();
   bool match_keywords(const char *v1, const char*v2);
@@ -138,6 +128,7 @@ class Tokens{
   bool match_star();
   bool match_questionmark();
   bool match_plus();
+  Range* match_repeat_range();
   HolderConstituent*match_holderconstituent();
   VectorConstituent*match_vectorconstituent();
   SeqConstituent*match_seqsuffix(SeqConstituent*c);

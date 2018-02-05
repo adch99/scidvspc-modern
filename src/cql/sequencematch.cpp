@@ -3,6 +3,7 @@
 SequenceBase*Tokens::match_sequencenode(){
   bool isfuture{false};
   bool is2{false};
+  bool nestban{false};
   if (match_keyword("next")){
     isfuture=true;
     is2=false;
@@ -21,13 +22,17 @@ SequenceBase*Tokens::match_sequencenode(){
   }
   else return NULL;
   Range*range=match_range();
+  if (match_keyword("nestban"))
+    nestban=true;
+  if (nestban&&!isfuture)
+    show_error("the 'nestban' keyword can only be used with 'next'");
   VectorConstituent*argsv=match_vectorconstituent();
   if(!argsv)
     show_error("invalid or missing argument list in next/previous");
   vector<SeqConstituent*>ps=argsv->constituents;
   SequenceBase*ret=NULL;
-  if(isfuture) ret = new FutureNode(ps,range,is2);
-  else ret = new PastNode(ps,range,is2);
+  if(isfuture) ret = new FutureNode(ps,range,is2,nestban);
+  else ret = new PastNode(ps,range,is2,nestban);
   ret->setOffsets();
   return ret;
 }
@@ -60,7 +65,11 @@ SeqConstituent* Tokens::match_seqsuffix(SeqConstituent*c){
       current=new PlusConstituent(current);
     else if (match_questionmark())
       current=new OptionalConstituent(current);
-    else break;
+    else {
+      Range*range=match_repeat_range();
+      if(!range) break;
+      current=new RepeatConstituent(current,range->min,range->max);
+    }
   }
   return current;
 }
@@ -85,3 +94,22 @@ HolderConstituent* Tokens::match_holderconstituent(){
     show_error("Invalid and unexpected entry in next/previous");
   return new HolderConstituent(filter);
 }
+
+Range* Tokens::match_repeat_range(){
+  int x=save();
+  if (!match_lbrace()){
+    restore(x);
+    return NULL;}
+  Range*range=match_range();
+  if(!range){
+    restore(x);
+    return NULL;}
+  if(!match_rbrace()){
+    restore(x);
+    return NULL;
+  }
+  if(range->min<0||range->max<range->min)
+    show_error("Invalid range to repeat expression: min must be nonnegative and smaller than max");
+  return range;
+}
+  

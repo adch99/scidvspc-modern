@@ -1,5 +1,6 @@
 #pragma once
-class Range{
+#include "deleteable.h"
+class Range: public Deleteable{
  public:
   int min;
   int max;

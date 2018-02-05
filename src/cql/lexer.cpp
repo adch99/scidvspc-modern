@@ -10,7 +10,7 @@ bool lexFile(const char*filename, vector<Token*>*tokens){
   FILE * file=fopen(filename,"r");
   if (file==NULL){
     fprintf(stderr,"Could not open file: %s\n",filename);
-    myexit();
+    exit(1);
   }
   return lexStream(file,NULL,tokens);
   fclose(file);
@@ -102,7 +102,7 @@ char * readstring(FILE * file){
     }
     else if (nextchar>500){
       fprintf(stderr,"token too long: readstring");
-      myexit();
+      exit(1);
     }
     else buffer[nextchar++]=c;
   }
@@ -198,8 +198,7 @@ char * readstring(char * syntax){
 
 Token* makeToken(char* val){
   char*current=val;
-  CQL_ASSERT(current);
-  CQL_ASSERT(strlen(current));
+  uassert(current&&strlen(current),"makeToken bad arg");
   uassert(strlen(val)<100,"Max token size too large");
   Token* t=NULL;
   if(!t) t=match_LParen(current);
@@ -214,64 +213,73 @@ Token* makeToken(char* val){
   if(!t) t=match_piecedesignator(current);
   if(!t) t=match_quotedstring(current);
   if(!t) t=match_name(current);
-  uassert(t,"Unknown token: ",val);
+  if (t==NULL){
+    //If val has a '.' in it, then it is likely due to a wrong CQL version:
+    uassert(current==val,"makeToken: logic");
+    for(current=val;*current;++current)
+	uassert(*current!='.',
+		"A lexer error involving a token with a '.' in it was observed. The '.' means 'any' since version 5.2. Use '_' to denote an empty square: ",
+		val);
+    uassert(false,"Lexer: Unknown or not understood sequence of characters: ",val);
+  } // if (t==NULL)
+  uassert(t,"make_token: internal");
   return t;
 }
 
 Token* match_Star(char*v){
-  CQL_ASSERT(v);
+  uassert(v,"match_Star internal");
   if (*v=='*') return new StarToken;
   return NULL;
 }
 Token* match_Plus(char*v){
-  CQL_ASSERT(v);
+  uassert(v);
   if (*v=='+') return new PlusToken;
   return NULL;
 }
 Token* match_QuestionMark(char*v){
-  CQL_ASSERT(v);
+  uassert(v);
   if (*v=='?') return new QuestionMarkToken;
   return NULL;
 }
 
 Token* match_Bar(char*v){
-  CQL_ASSERT(v);
+  uassert(v);
   if (*v=='|') return new BarToken;
   return NULL;
 }
 
 Token* match_LParen(char*v){
-  CQL_ASSERT(v);
+  uassert(v);
   if(*v=='(') return new LParenToken;
   return NULL;
 }
 
 Token* match_RParen(char*v){
-  CQL_ASSERT(v);
+  uassert(v);
   if(*v==')') return new RParenToken;
   return NULL;
 }
 
 Token* match_LBrace(char*v){
-  CQL_ASSERT(v);
+  uassert(v);
   if(*v=='{') return new LBraceToken;
   return NULL;
 }
 
 Token* match_RBrace(char*v){
-  CQL_ASSERT(v);
+  uassert(v);
   if(*v=='}') return new RBraceToken;
   return NULL;
 }
 
 Token* match_LessThan(char*v){
-  CQL_ASSERT(v);
+  uassert(v);
   if(*v=='<') return new LessThanToken;
   return NULL;
 }
 
 Token* match_GreaterThan(char*v){
-  CQL_ASSERT(v);
+  uassert(v);
   if(*v=='>') return new GreaterThanToken;
   return NULL;
 }
@@ -291,7 +299,7 @@ Token* match_keyword(char*input){
 }
 
 bool match_letterdigits(char*input){
-  CQL_ASSERT(input);
+  uassert(input);
   char*current=input;
   while(char c=*current++)
     if(!isalnum(c))return false;
@@ -299,7 +307,7 @@ bool match_letterdigits(char*input){
 }
 
 Token* match_name(char*input){
-  CQL_ASSERT(input);
+  uassert(input);
   char*current=input;
   while(char c=*current++)
     if(!isalnum(c)&&
@@ -312,7 +320,7 @@ Token* match_name(char*input){
 
 bool match_letterdigit(char**inputp,char * ch){
   char*current=*inputp;
-  CQL_ASSERT(current);
+  uassert(current);
   if(isalnum(current[0])){
     *inputp= *inputp+1;
     return true;

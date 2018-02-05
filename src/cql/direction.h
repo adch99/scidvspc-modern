@@ -6,7 +6,7 @@ class Direction{
    int yoffset;
   Direction(int xoff,int yoff);
   char* toString();
-  static vector<Direction> *directionsFromString(const char*s);
+  static vector<Direction> directionsFromString(const char*s);
   void print();
   squareT apply(squareT square);
   squareT apply(squareT square, int ntimes);

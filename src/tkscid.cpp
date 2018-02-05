@@ -15492,17 +15492,14 @@ sc_search_cql (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     // All cql based asserts leave an error msg in the cqlErrMsg global.
     // However, the assert is not the only path to longjmp(), and the
     // error msg is not always set. Hence, we null out the pointer before
-    // nesting our way down the call stack.  Additional diagnostic info
-    // (especially for syntax errors) is relayed in the cqlDiagnostic global.
-    extern char *cqlErrMsg, *cqlDiagnostic;
+    // nesting our way down the call stack.
+    extern char *cqlErrMsg;
     cqlErrMsg = NULL;
-    cqlDiagnostic = NULL;
 
     // Set to true to show some useful info on <stdout>.
-    extern bool CqlShowLex, CqlShowParse, CqlDebug, CqlShowDtor;
+    extern bool CqlShowLex, CqlShowParse, CqlDebug;
     CqlShowLex = false;
     CqlShowParse = false;
-    CqlShowDtor = true;
     CqlDebug = false;
 
     // We believe it is safe to employ longjmp(), since all CQL destructors are trivial.
@@ -15513,7 +15510,6 @@ sc_search_cql (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
       CqlReset();
       if (cqlErrMsg) Tcl_AppendResult (ti, cqlErrMsg, NULL);
       else Tcl_AppendResult (ti, "Error reported back from CQL engine", NULL);
-      if (cqlDiagnostic) Tcl_AppendResult (ti, "|", cqlDiagnostic, NULL);
       return TCL_OK;
     }
 
@@ -15667,7 +15663,6 @@ sc_search_cql (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     if (jumpFlag) {
       if (cqlErrMsg) Tcl_AppendResult (ti, cqlErrMsg, NULL);
       else Tcl_AppendResult (ti, "Error reported back from CQL engine", NULL);
-      if (cqlDiagnostic) Tcl_AppendResult (ti, "|", cqlDiagnostic, NULL);
     } else {
       char temp[200];
       int centisecs = timer.CentiSecs();

@@ -20,6 +20,11 @@ MarkBoard*MarkBoard::global(){
   return globalMarkBoard;
 }
 
+bool MarkBoard::myIsNullMove(simpleMoveT* sm){
+  uassert(sm,"myIsNullMove: null parameter");
+  return isNullMove(sm);
+}
+
 void MarkBoard::print(){
   printf("%s stacksize: %lu printing the markmap\n",
 	 thisclass(),
@@ -42,7 +47,8 @@ void MarkBoard::MoveForward(){
   uassert(currentmove!=NULL);
   squareT from=currentmove->from;
   squareT to=currentmove->to;
-  uassert(square_valid(from)&&square_valid(to)&&from!=to,"mark forward internal");
+  bool isnull=myIsNullMove(currentmove);
+  uassert(isnull || (square_valid(from)&&square_valid(to)&&from!=to),"mark forward internal");
   Position * position=game->GetCurrentPos();
   pieceT * board=position->GetBoard();
   colorT color=position->GetToMove();

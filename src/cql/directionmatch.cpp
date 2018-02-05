@@ -1,6 +1,6 @@
 #include "util.h"
 
-vector<Direction>* Direction::directionsFromString(const char*s){
+vector<Direction> Direction::directionsFromString(const char*s){
   typedef Direction D;
   typedef vector<Direction>V;
   D up(0,1);
@@ -21,7 +21,7 @@ vector<Direction>* Direction::directionsFromString(const char*s){
   V anydirection{northwest,northeast,southwest,southeast,up,down,left,right};
   
  
-#define X(q) if(strcmp(s,#q)==0) return new vector<Direction>{q}
+#define X(q) if(strcmp(s,#q)==0) return vector<Direction>{q}
 
       X(up);
       X(down);
@@ -32,7 +32,7 @@ vector<Direction>* Direction::directionsFromString(const char*s){
       X(southeast);
       X(southwest);
 
-#define Y(q) if(strcmp(s,#q)==0) return new vector<Direction>{q}
+#define Y(q) if(strcmp(s,#q)==0) return vector<Direction>{q}
       Y(diagonal);
       Y(orthogonal);
       Y(vertical);
@@ -41,6 +41,6 @@ vector<Direction>* Direction::directionsFromString(const char*s){
       Y(offdiagonal);
       Y(anydirection);
    
-      return NULL;
+      return vector<Direction>{};
 }
    

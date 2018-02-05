@@ -2,6 +2,16 @@
 int Node::counter=0;     
 int Node::ndisabled=0;
 
+bool Node::isSet(){
+  SetBase* set=dynamic_cast<SetBase*>(this);
+  return set && set->isSet();
+}
+
+bool Node::isCountable(){
+  Countable* countable=dynamic_cast<Countable*>(this);
+  return countable&&countable->isCountable();
+}
+
 void Node::cloneverify(Node*s,Node*t){
   uassert(s,"cloneverify s");
   uassert(t,"cloneverify t");
@@ -156,9 +166,10 @@ void Node::makeSilentRecursively(){
     child->makeSilentRecursively();
   }
 }
+
+//I have no idea why this is here or what this does
 void Node::makeNotNodeSilentRecursively(){
-  if(dynamic_cast<NotNode*>(this)||
-     dynamic_cast<NotSetNode*>(this))
+  if(dynamic_cast<NotNode*>(this))
     makeSilentRecursively();
   for(Node*child:children()){
         uassert(child,"null child notsilentrecursive");

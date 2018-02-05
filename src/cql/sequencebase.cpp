@@ -4,6 +4,7 @@ void SequenceBase::print(){
   printVariationFlags();
   if(isSilent())printf("silent ");
   if (isSkip()) getSkipConstituent()->print();
+  printf("nestBan: %d",nestBan);
   for(int i=0;i<nconstituents();++i){
     printf("\n");
     indent();
@@ -27,9 +28,10 @@ vnode SequenceBase::children(){
   return v;
 }
   
-SequenceBase::SequenceBase(vector<SeqConstituent*>cs,Range*r,bool isskip){
+SequenceBase::SequenceBase(vector<SeqConstituent*>cs,Range*r,bool isskip,bool nestbanparam){
   range=r;
   constituents=cs;
+  nestBan=nestbanparam;
   for(auto c:constituents)uassert(c,"sbsb");
   if (isskip) {
     theWhiteHolder=new HolderConstituent(new ColorNode(WHITE));
@@ -56,8 +58,11 @@ void SequenceBase::setOffsets(){
     constituents[i]->setOffsets(i);
 }
 
+
 bool SequenceBase::match_position(Game*g){
   uassert(game==NULL&&g,"fnmpg");
+  if (nestBan&&nestSeenPosition(g))
+    return false;
   game=g;
   if(isSkip()) initializeSkip();
   auto me=MarkBoard::identity(game);
@@ -95,6 +100,7 @@ SeqRet SequenceBase::compute(SeqStack &stack){
   SeqConstituent*top=stack.back();
   stack.pop_back();
   StarConstituent*star=dynamic_cast<StarConstituent*>(top);
+  RepeatConstituent*repeat=dynamic_cast<RepeatConstituent*>(top);
   HolderConstituent*holder=dynamic_cast<HolderConstituent*>(top);
   VectorConstituent*vc=dynamic_cast<VectorConstituent*>(top);
   PlusConstituent*plus=dynamic_cast<PlusConstituent*>(top);
@@ -102,6 +108,8 @@ SeqRet SequenceBase::compute(SeqStack &stack){
   SeqRet ret(false);
   if(star)
     ret=compute(star,stack);
+  else if (repeat)
+    ret=compute(repeat,stack);
   else if(holder)
     ret=compute(holder,stack);
   else if (vc)
@@ -117,6 +125,30 @@ SeqRet SequenceBase::compute(SeqStack &stack){
   return ret;
 }
 
+SeqRet SequenceBase::compute(RepeatConstituent*repeat,SeqStack&stack){
+  int nrepetitions=0;
+  SeqConstituent*c = repeat->constituent;
+  size_t stacklen=stack.size();
+  SeqRet best=SeqRet(false);
+  for (nrepetitions=repeat->min;
+       nrepetitions<=repeat->max;
+       ++nrepetitions){
+    uassert(stack.size()==stacklen);
+    for (int i=0;i<nrepetitions;++i)
+      stack.push_back(c);
+    uassert(stack.size()==stacklen+nrepetitions);
+    SeqRet ret=compute(stack);
+    uassert(stack.size()==stacklen+nrepetitions);
+    best=std::max(ret,best);
+    for (int i=0;i<nrepetitions;++i)
+      stack.pop_back();
+    uassert(stack.size()==stacklen);
+  }
+  uassert(stack.size()==stacklen);
+  return best;
+}
+
+    
 SeqRet SequenceBase::compute(StarConstituent*star,SeqStack&stack){
   SeqRet unused=compute(stack);
   SeqConstituent*c=star->constituent;
@@ -260,3 +292,13 @@ bool SequenceBase::skipCurrentPosition()const{
   return skipColor(tomove);
 }
 
+
+bool SequenceBase::match_count(Game*game, NumValue*value){
+  if (match_position(game)){
+    uassert (count>=0,"match_count");
+    *value=(NumValue)(count);
+    return true;
+  }
+  return false;
+}
+    
