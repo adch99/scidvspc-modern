@@ -1,6 +1,7 @@
 #include "util.h"
 #include "cql.h"
 #include "markboard.h"
+#include "cqlglobals.h"
 #include <map>
 
 int  MarkBoard::number_children(Game*game, bool searchvariations){
@@ -83,7 +84,7 @@ void MarkBoard::gameForward(Game*g){
 
 void MarkBoard::gameBackup(Game*g){
   if(global()){
-    CQL_ASSERT(g==global()->game);
+    uassert(g==global()->game,"gameBackup");
     global()->MoveBackup();
   }
   else g->MoveBackup();
@@ -169,8 +170,6 @@ bool MarkBoard::gameSeekIdDescendants(moveT*myid, Game*game, bool vars){
   return false;
 }
 
-int  MarkBoard::lastignored=-1;
-  
 void MarkBoard::gameAppendComment(Game*game, const char* comment){
   uassert(comment);
   uassert(strlen(comment)<2000);
@@ -199,9 +198,9 @@ void MarkBoard::gameAppendComment(Game*game, const char* comment){
   uassert(*current==0);
   sprintf(current,"%s",comment);
   if(strlen(buffer)>500){
-    if(lastignored!=game->GetNumber()){
-      lastignored=game->GetNumber();
-      printf("\nNote: Truncating long comment in game: %d\n",lastignored);
+    if(MarkBoard_gameAppendComment_lastignored!=game->GetNumber()){
+      MarkBoard_gameAppendComment_lastignored=game->GetNumber();
+      printf("\nNote: Truncating long comment in game: %d\n",MarkBoard_gameAppendComment_lastignored);
     }
     return;
   }
@@ -234,10 +233,10 @@ vector<simpleMoveT*> MarkBoard::getMoves(Game*game,bool searchvars){
   return moves;
 }
   
-int MarkBoard::gamenumber=0;
-
 vector<simpleMoveT*> MarkBoard::getLegalMoves(Game*game){
-  static std::map<moveT*,vector<simpleMoveT*>> legalmap;
+  uassert(false,"getLegalMoves is not implemented");
+  static int gamenumber=0; //ignore non-reentrancy as not called
+  static std::map<moveT*,vector<simpleMoveT*>> legalmap; //ignore non-reentrancy as not called
   if(game->GetNumber()!=gamenumber){
     gamenumber=game->GetNumber();
     legalmap.clear();
@@ -257,4 +256,9 @@ vector<simpleMoveT*> MarkBoard::getLegalMoves(Game*game){
   return legalmap[me];
 }
   
-  
+void MarkBoard::restart(){
+  if(globalMarkBoard){
+    delete globalMarkBoard;
+    globalMarkBoard=NULL;
+  }
+}

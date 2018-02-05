@@ -19,23 +19,15 @@ bool NotNode::match_position(Game*game){
   return !filter->match_position(game);
 }
 
-NotSetNode::NotSetNode(SetBase*b){
-  uassert(b,"internal nsn");
-  filter=b;
+
+SquareMask NotNode::getSquares(Game*game){
+  SetBase*set=dynamic_cast<SetBase*>(filter);
+  uassert(set,"NotNode: attempt to use a non-set as a set");
+  uassert(set->isSet(),"NotNode: attempt to use a non-set-filter in this instance as set filter");
+  return ~(set->getSquares(game));
 }
 
-void NotSetNode::print(){
-  printf(("\n"));
-  tab();
-  printf("<%s ",thisclass());
-  filter->print();
-  printf(" not>");
-}
+bool NotNode::isSet(){
+  return filter->isSet();
+};
 
-SquareMask NotSetNode::getSquares(Game*game){
-  return ~(filter->getSquares(game));
-}
-
-bool NotSetNode::match_position(Game*game){
-  return !filter->match_position(game);
-}

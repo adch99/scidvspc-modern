@@ -14,6 +14,7 @@ bool KeywordToken::isReserved(const char* s){
       "cql",
       "comment",
       "countsquares",
+      "depth",
       "descendant",
       "dihedral",
       "echodihedral",
@@ -38,7 +39,6 @@ bool KeywordToken::isReserved(const char* s){
       "flipvertical",
       "from",
       "gamenumber",
-      "gap",
       "hascomment",
       "in",
       "initial",
@@ -58,10 +58,12 @@ bool KeywordToken::isReserved(const char* s){
       "mismatch",
       "move",
       "movenumber",
+      "nestban",
       "next",
       "next2",
       "next*",
       "not",
+      "null",
       "number",
       "on",
       "or",
@@ -75,12 +77,14 @@ bool KeywordToken::isReserved(const char* s){
       "previous",
       "previous2",
       "previous*",
+      "primary",
       "promote",
       "ray",
       "relation",
       "result",
       "rotate45",
       "rotate90",
+      "secondary",
       "shift",
       "shifthorizontal",
       "shiftvertical",
@@ -98,7 +102,8 @@ bool KeywordToken::isReserved(const char* s){
       "variations",
       "white",
       "wtm",
-      "year"
+      "year",
+      "."
 	};
   
   uassert(s,"reserved, internal");

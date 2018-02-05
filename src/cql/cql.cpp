@@ -31,6 +31,7 @@ int main(int argc, char*argv[]){
     //exit(0);
   }
 }
+
 	      
 int Cql_InitTcl(Tcl_Interp * ti) {
 
@@ -45,6 +46,10 @@ int Cql_InitTcl(Tcl_Interp * ti) {
 	
 void parseargs(int argc, char*argv[]){
   int nextarg=0;
+  if(argc==1){
+    printhelp();
+    exit(0);
+  }
   while (++nextarg<argc){
     char*current=argv[nextarg];
     if(current==NULL || strlen(current)==0) break;
@@ -64,6 +69,8 @@ void parseargs(int argc, char*argv[]){
 	CqlPgnFilename=argv[nextarg];
       uassert(filename_is_pgn(CqlPgnFilename),"invalid pgn input filename from command line", CqlPgnFilename);
     }
+    else if (!strcmp(current,"--nolinearize"))
+      CqlDoNotLinearize=true;
     else if (!strcmp(current,"--output")||!strcmp(current,"-o")){
       ++nextarg;
       uassert(nextarg<argc,"CQL command line: missing output file argument");
@@ -77,13 +84,13 @@ void parseargs(int argc, char*argv[]){
       CqlPlayer=argv[nextarg];
       uassert(CqlPlayer,"missing player");
     }
-    else if (!strcmp(current,"-g")||!strcmp(current,"--gamenumber")){
+    else if (!strcmp(current,"-g")||!strcmp(current,"--gamenumber")||!strcmp(current,"--game")){
       ++nextarg;
       uassert(nextarg<argc,"CQL command line: missing gamenumber");
       int gamestart=0;
       int gamestop=0;
       if (!util::positiveIntValue(argv[nextarg],&gamestart))
-	uassert(false,"expected positive integer following -g or --gamenumber");
+	uassert(false,"expected positive integer following -g or --game");
       uassert(gamestart>0,"internal");
       if(nextarg+1<argc&& util::positiveIntValue(argv[nextarg+1],&gamestop))
 	nextarg++;
@@ -108,7 +115,7 @@ void parseargs(int argc, char*argv[]){
     }
     else if (!strcmp(current,"-h")|| !strcmp (current,"--help")){
       printhelp();
-      exit(1);
+      exit(0);
     }
     else if (current[0]=='-'){
       fprintf(stderr, "CQL: invalid option: %s. Printing help: \n",current);
@@ -130,14 +137,15 @@ void parseargs(int argc, char*argv[]){
 }
 
 void printhelp(){
-  printf("Cql version %s.  Usage: cql options filename\n",CqlVersion);
-  printf("Read CQL file filename.cql using options. Allowed options: \n");
-  printf("-o outputfile.pgn (or --output outputfile.pgn): write output to outputfile.pgn\n");
-  printf("-i inputfile.pgn (or --pgn inputfile.pgn, or --input inputfile.pgn): read games from inputfile.pgn\n");
-  printf("-g number, or -g number number, or --gamefile number, or --gamefile number number to specify the range of games to search\n");
-  printf("--player playername to restrict output to given playername\n");
-  printf("--year number or --year number number to restrict output to year in the given range\n");
-  printf("--silent: do not add any annotations to matched games\n");
+  printf("CQL usage: cql options filename\n");
+  printf(" the 'filename' above should a be a file with extension .cql. The allowed options are:\n");
+  printf("--help or -h: print this message\n");
   printf("--parse: parse only, do not run [not supported]\n");
+  printf("--player playername to restrict output to given playername\n");
+  printf("--silent: do not add any annotations to matched games\n");
+  printf("--year number or --year number number to restrict output to year in the given range\n");
+  printf("-g number, or -g number number, or --game number, or --game number number to specify the range of games to search\n");
+  printf("-i inputfile.pgn (or --pgn inputfile.pgn, or --input inputfile.pgn): read games from inputfile.pgn\n");
+  printf("-o outputfile.pgn (or --output outputfile.pgn): write output to outputfile.pgn\n");
 }
 

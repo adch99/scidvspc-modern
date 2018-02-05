@@ -54,7 +54,7 @@ bool operator<(const SeqRet&a, const SeqRet&b){
 
 void SeqRet::addParent(Game*game, int offset){
   uassert(ids.size()==offsets.size());
-  uassert(isTrue(),"addParent false");
+  uassert(isTrue(),"SeqRet::addParent false");
   //  uassert(offsets.empty()||offset<0||offsets.back()>=offset,"SeqRet offset");
   ids.push_back(MarkBoard::identity(game));
   offsets.push_back(offset);

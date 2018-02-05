@@ -1,15 +1,17 @@
 #include "node.h"
-PastStarNode::PastStarNode(Node*node,Range*r){
+PastStarNode::PastStarNode(Node*node,Range*r,int depth){
   uassert(node);
   filter=dynamic_cast<MFilter*>(node);
   uassert(filter,"unexpected nonmfilter to paststarnode");
   range=r;
+  depthMax=depth;
 }
 
 void PastStarNode::print(){
   printf("<%s ",thisclass());
-  if(range)range->print();
   if(isSilent())printf("silent ");
+  if(range)range->print();
+  if(depthMax>=0) printf("depthMax: %d",depthMax);
   printf("\n");indent();tab();
   filter->print();
   unindent();
@@ -32,7 +34,7 @@ bool PastStarNode::match_position(Game*game){
   bool variation=MarkBoard::inVariation(game);
   auto pid=MarkBoard::identity(game);
   vector<moveT*> ids;
-  compute_counts(game,ids);
+  compute_counts(game,ids,0);
   uassert(count==(int)(ids.size()));
   uassert(pid==MarkBoard::identity(game));
   if(!range&&!count)return false;
@@ -50,7 +52,8 @@ bool PastStarNode::match_position(Game*game){
   return true;
 }
 
-void PastStarNode::compute_counts(Game*game,vector<moveT*>&ids){
+void PastStarNode::compute_counts(Game*game,vector<moveT*>&ids,int depth){
+  if (depthMax>=0 && depth>depthMax) return;
   if(!range&&count)return;
   moveT* me=MarkBoard::identity(game);
   bool variation=MarkBoard::inVariation(game);
@@ -61,7 +64,7 @@ void PastStarNode::compute_counts(Game*game,vector<moveT*>&ids){
   }
   if(game->GetCurrentPly()==0) return;
   MarkBoard::gameBackup(game);
-  compute_counts(game,ids);
+  compute_counts(game,ids,depth+1);
   MarkBoard::gameToChild(me,game,variation);
 }
 

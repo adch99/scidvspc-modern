@@ -28,7 +28,7 @@ void AttackNode::addcounts(pieceT piece, pieceT*board, squareT square){
     addkingcounts(board,square);
     return;
   case EMPTY: return;
-  default: CQL_ASSERT(0);
+  default: uassert(false,"attacknode bad switch");
   }
 }
 	     
@@ -50,7 +50,7 @@ void AttackNode::addknightcounts(pieceT*board, squareT square){
 }
 
 void AttackNode::addpawncounts(pieceT pawn, pieceT*board,squareT square){
-  CQL_ASSERT(pawn==WP||pawn==BP);
+  uassert(pawn==WP||pawn==BP,"addpawncounts internal");
   int rankoff=pawn==WP?1:-1;
   addnonsliding(-1,rankoff,board,square);
   addnonsliding(1,rankoff,board,square);
@@ -89,8 +89,18 @@ vnode AttackNode::children(){
   return vnode{attacking,attacked};
 }
 
+bool AttackNode::match_count(Game*game,NumValue*value){
+  uassert(isCountable()&&!isSet(), "Attempt to count an attack filter without a range");
+  if(match_position(game)){
+    *value=(NumValue)(count);
+    return true;
+  }
+  return false;
+}
+
 //Below is highly inefficient: it computes all attacks of all pieces in attacking
 //Should be fixed later.
+
 bool AttackNode::match_position(Game *game){ //This also MUST SET THE COUNTS
   pieceT * board=game->GetCurrentPos()->GetBoard();
   for (int i=0;i<64;++i) squarecounts[i]=0;
@@ -107,13 +117,9 @@ bool AttackNode::match_position(Game *game){ //This also MUST SET THE COUNTS
   else return range->valid(count);
 }
 
-bool AttackNode::match_square(squareT square, Game*game){
-  uassert(false,"This method is disabled for AttackNode as it could implicate an efficiency issue");
-  return false;
-}
-
 SquareMask AttackNode::getSquares(Game*game){
   SquareMask mask;
+  uassert(isSet(),"Attack filter has a range, but is used as a square set");
   if(!match_position(game)) return mask;
   SquareMask attackedsquares=attacked->getSquares(game); //computed here and in match_position
   for(int sq=0;sq<64;++sq)
@@ -122,4 +128,11 @@ SquareMask AttackNode::getSquares(Game*game){
   return mask;
 }
 
+bool AttackNode::isSet(){
+  return range==NULL;
+}
+
+bool AttackNode::isCountable(){
+  return range!=NULL;
+}
 

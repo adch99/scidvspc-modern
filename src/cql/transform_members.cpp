@@ -49,10 +49,6 @@ void TransformNode::transform_in_place(Transform*t){
   Node::transform_in_place(t);
 }
 
-void TransformSetNode::transform_in_place(Transform*t){
-  uassert(!expanded(),"transform_in_place on expanded setnode");
-  Node::transform_in_place(t);
-}
 
       
 

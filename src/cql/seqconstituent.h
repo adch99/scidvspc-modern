@@ -11,10 +11,24 @@ class SeqConstituent : public Node{
   int theOffset{-1};
 };
 
+class RepeatConstituent : public SeqConstituent{
+ public:
+  SeqConstituent* constituent{NULL};
+  RepeatConstituent(SeqConstituent*,int, int);
+  CVV(RepeatConstituent);
+  int min= -1;
+  int max= -1;
+  bool matchesNull();
+  void print();
+  vnode children(){return vnode{constituent};}
+  void deepify(){constituent=constituent->clone();}
+  void setOffsets(int i);
+};
+
 class StarConstituent : public SeqConstituent{
  public:
   SeqConstituent*constituent{NULL};
-  StarConstituent(vector<SeqConstituent*>);
+  //  StarConstituent(vector<SeqConstituent*>);
   StarConstituent(SeqConstituent*);
   CVV(StarConstituent);
   bool matchesNull(){return true;}

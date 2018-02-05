@@ -1,6 +1,6 @@
 #include "node.h"
 #include "tokenstream.h"
-TransformBase* Tokens::match_shifttransform(){
+TransformNode* Tokens::match_shifttransform(){
   KeywordToken *k=match_keyword("shift");
   if(!k)k=match_keyword("shiftvertical");
   if(!k)k=match_keyword("shifthorizontal");
@@ -21,11 +21,11 @@ TransformBase* Tokens::match_shifttransform(){
     for(auto t:ShiftTransform::shiftVertical())
       transforms.push_back(t);
   else uassert(false, "internal shift");
-  return TransformBase::create(transforms,node,range);
+  return TransformNode::create(transforms,node,range);
 }
   
     
-TransformBase* Tokens::match_fliptransform(){
+TransformNode* Tokens::match_fliptransform(){
   KeywordToken *k=NULL;
   if(!k) k=match_keyword("flip");
   if(!k) k=match_keyword("flipvertical");
@@ -59,5 +59,5 @@ TransformBase* Tokens::match_fliptransform(){
     transforms.push_back(ColorTransform::flipColorTransform());
   else
     uassert(false,"internal fliptransform");
-  return TransformBase::create(transforms,node,range);
+  return TransformNode::create(transforms,node,range);
 }

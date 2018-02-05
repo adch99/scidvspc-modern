@@ -165,7 +165,7 @@ GameSortInfo CqlNode::makeInfo(Game*game){
   vector<SortValue> values;
   for(NumericVariable* var : sortfields)
     values.push_back(SortValue(var->getExtremalValue(),var->isMax()));
-  char*out=util::game_to_string(game);
+  string out=util::game_to_string(game);
   return GameSortInfo(out,values);
 }
   

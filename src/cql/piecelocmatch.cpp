@@ -15,11 +15,7 @@ SquareMask PieceLoc::getSquares(Game*game){
   return ret&getPieceMask(game);
 }
 
-moveT* PieceLoc::lastid=NULL;
-int PieceLoc::lastgamenumber=-1;
-
 SquareMask PieceLoc::getPieceMask(Game*game){
-  static SquareMask lastmask;
   int gamenumber=game->GetNumber();
   auto me=MarkBoard::identity(game);
   if(lastid==me&&lastgamenumber==gamenumber)

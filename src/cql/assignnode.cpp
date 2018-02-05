@@ -4,6 +4,7 @@ AssignNode::AssignNode(NumericVariable * var, Node * filter){
   uassert(var&&filter);
   node=dynamic_cast<Countable*>(filter);
   uassert(node,"unexpected non-countable argument to assignnode");
+  uassert(node->isCountable(),"argument to assign node is not an actual countable node");
 }
 
 bool AssignNode::match_position(Game*game){

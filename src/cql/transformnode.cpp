@@ -1,6 +1,55 @@
 #include "node.h"
 // for TransformNode::transform_in_place(Transform*t) see the file transform_members.cpp
 
+TransformNode* TransformNode::create(vector<Transform*> ts,Node*n,Range*r){
+  uassert(n);
+  TransformNode* nbasenode=dynamic_cast<TransformNode*>(n);
+  Range*subrange=NULL;
+  if(nbasenode)subrange=nbasenode->range;
+  if(!r&&nbasenode&&!subrange){
+    uassert(!nbasenode->expanded());
+    vector<Transform*>basets=nbasenode->getTransforms();
+    vector<Transform*>composedts=
+      ComposeTransform::composeVectors(ts,basets);
+    Node* source=nbasenode->getSource();
+    return create(composedts,source,r);
+  }
+  MFilter* mf=dynamic_cast<MFilter*>(n);
+  uassert(mf, "tb::create: invalid node");
+  return new TransformNode(ts,mf,r);
+}
+
+bool TransformNode::isSet(){
+  if (range)return false;
+  if(expanded()){
+    uassert(filter==NULL,"TransformNode:isSet i1");
+    uassert(transformedFilters.size(),"TransformNode:isSet i2");
+    for (auto tf:transformedFilters) // We actually only need to check the 0'th element
+      if(!tf->isSet()) return false;
+    return true;
+  }
+  uassert(filter,"TransformNode::isSet i3");
+  return filter->isSet();
+}
+
+bool TransformNode::isCountable(){
+  return range!=NULL;
+}
+
+SquareMask TransformNode::getSquares(Game*game){
+  uassert(isSet(),"Attempt to use a transform node as a square set when its argument is not a set");
+    uassert(expanded(),"tsn not expanded");
+  SquareMask mask;
+  for(auto set : transformedFilters){
+    SetBase* converted=dynamic_cast<SetBase*>(set);
+    uassert(converted,"Internal error in transformnode.getSquares: a transformed filter is not a setbase");
+    uassert(converted->isSet(),"internal error in TransforNode::getSquares: converted transformed filter is not a set");
+    mask|=converted->getSquares(game);
+  }
+  return mask;
+}
+
+
 void TransformNode::expand(){
   uassert(transformedFilters.empty()&&filter);
   for(auto transform : transforms){
@@ -68,13 +117,13 @@ void TransformNode::print(){
 }
 
 void TransformNode::deepify(){
-  uassert(!expanded());
+  uassert(!expanded(),"TransformNode: deepify: internal");
   filter=filter->clone();
 }
     
 bool TransformNode::expanded(){
   uassert(!filter&&transformedFilters.size() ||
-	  filter&&transformedFilters.empty());
+	  filter&&transformedFilters.empty(),"TransformNode::expanded internal");
   return filter==NULL;
 }
 

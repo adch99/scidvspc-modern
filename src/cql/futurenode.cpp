@@ -1,6 +1,6 @@
 #include "node.h"
 
-FutureNode::FutureNode(vector<SeqConstituent*>cs,Range*r,bool isskip):SequenceBase(cs,r,isskip){
+FutureNode::FutureNode(vector<SeqConstituent*>cs,Range*r,bool isskip,bool allownest):SequenceBase(cs,r,isskip,allownest){
 }
 
 SeqRet FutureNode::compute(HolderConstituent*holder,SeqStack&stack){
@@ -8,15 +8,17 @@ SeqRet FutureNode::compute(HolderConstituent*holder,SeqStack&stack){
   uassert(holder,"fncholdererr");
   MFilter*filter=holder->filter;
   uassert(filter,"fncfilter");
+  if (!CqlDoNotLinearize && !linearize(filter).empty())
+    return computeLinearize(holder,stack);
   if(!filter->match_position(game))
     return SeqRet(false);
   if(stack.empty())return SeqRet(game,holder->getOffset());
   auto me=MarkBoard::identity(game);
   int nchildren=MarkBoard::number_children(game,getSearchVariations());
   SeqRet best(false);
-  for(int child=0;child<nchildren;++child){
-    MarkBoard::move_to_child(game,child);
-    SeqRet sub=SequenceBase::compute(stack); //Why do I need this?
+  for(int childindex=0;childindex<nchildren;++childindex){
+    MarkBoard::move_to_child(game,childindex);
+    SeqRet sub=SequenceBase::compute(stack); //Why do I need the class qualifier?
     best=std::max(best,sub);
     MarkBoard::gameBackup(game);
   }
@@ -51,6 +53,7 @@ void FutureNode::notate(SeqRet& ret){
     uassert(thisid==ret.getId(index),"idcheck fail notate");
     int offset=ret.getOffset(index);
     if(offset>=0){
+      nestRegisterPosition(game);
       ++positionsseen;
       sprintf(buffer,"NEXT %d (position %d of %d)",offset+1,positionsseen,positionsexpected);
       MarkBoard::gameAppendComment(game,buffer);

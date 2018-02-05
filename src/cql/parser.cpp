@@ -3,8 +3,6 @@
 #include "cql.h"
 #include "tokenstream.h"
 
-static Tokens* CqlGlobalTokens;
-
 #ifdef STANDALONE
 CqlNode* parseFile(const char* filename){
   if(CqlDebug)printf("Parser: lexing file: %s\n",filename);
@@ -19,12 +17,14 @@ CqlNode* parseFile(const char* filename){
     ts->print();
   }
   Variable::createNumericVariable("matchcount",true);
+  uassert(!CqlParseRoot,"parser: expecting a null CqlParseRoot");
   CqlNode* n=ts->match_cqlnode();
+  CqlParseRoot=n;
   uassert(n!=NULL,"CQL: Unable to parse file: %s",filename);
   n->setChildVariations();
   n->setUseMarks();
   if(n->isSilent()) n->makeSilentRecursively();
-  n->makeNotNodeSilentRecursively();
+  n->makeNotNodeSilentRecursively(); // Not sure why this is here
   n->expand();
   n->addSortFields(n->sortfields);
   return n;
@@ -49,7 +49,9 @@ CqlNode* parseBuffer(char* buffer){
     Variable::createNumericVariable("matchcount",true);
     pbDoOnce = false;
   }
+  uassert(!CqlParseRoot,"parser: expecting a null CqlParseRoot");
   CqlNode* n=ts->match_cqlnode();
+  CqlParseRoot=n;
   uassert(n!=NULL,"CQL: Unable to parse buffer");
   n->setChildVariations();
   n->setUseMarks();
@@ -72,11 +74,10 @@ void showTokens(){
 // of a header from this directory in tkscid.cpp descends into include-file-hell.
 
 #ifdef INTEGRATED
-extern CqlNode* nodeScid;
 
 bool CqlParseBuffer(char *buffer) {
 
-  nodeScid = parseBuffer(buffer);
+  parseBuffer(buffer);
 
   // If there's a problem, we'll longjmp() our way out of it before we reach this point.
   return true;
@@ -85,26 +86,12 @@ bool CqlParseBuffer(char *buffer) {
 // Reset initialised statics and free mem resources.
 void CqlReset() {
 
-  MarkBoard::gamenumber=0;
-  MarkBoard::lastignored=-1;
-  if (MarkBoard::globalMarkBoard) {
-    delete MarkBoard::globalMarkBoard;
-    MarkBoard::globalMarkBoard=NULL;
-  }
+  //if (MarkBoard::globalMarkBoard) {
+    //delete MarkBoard::globalMarkBoard;
+    //MarkBoard::globalMarkBoard=NULL;
+  //}
 
-  Tokens::nextid=0;
+  cql_initialize();
 
-  PieceLoc::lastid=NULL;
-  PieceLoc::lastgamenumber=-1;
-
-  if (nodeScid) {
-    delete nodeScid;
-    nodeScid = NULL;
-  }
-
-  if (CqlGlobalTokens) {
-    delete CqlGlobalTokens;
-    CqlGlobalTokens = NULL;
-  }
 }
 #endif

@@ -1,11 +1,10 @@
 #include "node.h"
 #include "gamesortinfo.h"
 
-GameSortInfo::GameSortInfo(const char*d, vector<SortValue> v){
+GameSortInfo::GameSortInfo(string d, vector<SortValue> v){
   values=v;
-  uassert(d);
-  data=util::copy(d);
-  uassert(!strcmp(data,d));
+  uassert(!d.empty(),"bad gamesortinfo constructor arg");
+  data=d;
 }
 
 void GameSortInfo::print(){
@@ -13,7 +12,7 @@ void GameSortInfo::print(){
 }
 
 void GameSortInfo::output(FILE* os)const{
-  fprintf(os,"%s\n\n",data);
+  fprintf(os,"%s\n\n",data.data());
 }
 
 void GameSortInfo::output(FILE* os, const vector<GameSortInfo>& v){
@@ -43,7 +42,7 @@ void GameSortInfo::sort(vector<GameSortInfo>& v){
 
 
 bool operator<(const GameSortInfo& a, const GameSortInfo& b){
-  uassert(a.data&&b.data&&a.values.size()==b.values.size());
+  uassert(!a.data.empty()&&!b.data.empty()&&a.values.size()==b.values.size(),"gamesortinfo < internal");
   int len=(int)(a.values.size());
   for (int i=0;i<len;i++)
     if(b.values[i]<a.values[i]) return true;

@@ -96,7 +96,7 @@ vector<pieceT> PieceLoc::piecesFromChar(char c){
   case 'A': return A;
   case 'a': return a;
   case 'U': return U;
-  case '.': return dot;
+  case '_': return dot;
   case '?': return questionmark;
   };
   uassert(false,"invalid piece character");

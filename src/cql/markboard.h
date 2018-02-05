@@ -9,6 +9,7 @@ class MarkBoardMap{
   void verify(Game*game);
   const char*thisclass(){return "MarkBoardMap";}
   void make_move(squareT from, squareT to, pieceT*board, colorT color);
+  void make_null_move(squareT from, squareT to, pieceT*board, colorT color);
 };
 
 
@@ -33,15 +34,15 @@ class MarkBoard{
   void pushstate();
     //class variables
   static MarkBoard * globalMarkBoard;
-  static int lastignored;
-  static int gamenumber;
 
 
   //static methods
+  static void restart(); //delete current globalMarkBoard if any
   static int getSquare(markT mark);
   static markT getMark(int square);
   static simpleMoveT* getCurrentMove(Game*game);
   static moveT* identity(Game*game);
+  static bool myIsNullMove(simpleMoveT*);
   static pieceT piece_at_square(squareT square, Game*game);
   static int number_children(Game*game, bool searchvariations);
   static void move_to_child(Game*game, int child);
