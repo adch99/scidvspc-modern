@@ -501,6 +501,17 @@ proc ::file::Close {{base -1}} {
   }
   refreshSearchDBs
   set ::glistStart($current) 1
+
+  catch {
+    # Update sorting vars for the gamelist titles
+    if {$base == $current} {
+      set glistSortedBy  [lindex $::glistSortColumn($base) 0]
+      if {$glistSortedBy != {} } {
+	.glistWin.tree heading $glistSortedBy -image {}
+      }
+    }
+    unset ::glistSortColumn($base)
+  }
 }
 
 
