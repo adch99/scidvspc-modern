@@ -670,7 +670,8 @@ proc ::tree::displayLines { baseNumber moves } {
   for { set i 1 } { $i < [expr $len - 3 ] } { incr i } {
     set line [lindex $moves $i]
     if {$line == ""} { continue }
-    set move [::untrans [lindex $line 1]]
+    set trans_move [lindex $line 1]
+    set move [untrans $trans_move]
     lappend lMoves $move
 
     set tagfg {}
@@ -713,7 +714,7 @@ proc ::tree::displayLines { baseNumber moves } {
     set tags [list treetext $tagfg tagclick$i tagtooltip$i]
 
     # Should we add a tag for the Next Move ???
-    if {$move == $nextmove} {
+    if {$trans_move == $nextmove} {
       lappend tags nextmove
     }
 

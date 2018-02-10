@@ -270,7 +270,7 @@ if {0} {
     global ::book::bookMoves
 
     set height 0
-    set nextmove [sc_game info nextMove]
+    set nextmove [untrans [sc_game info nextMove]]
 
     set moves1 [sc_book moves $::book::bookSlot1]
 
@@ -597,7 +597,7 @@ if {0} {
     global ::book::bookTuningMoves
     set ::book::bookTuningMoves {}
     set moves [sc_book moves $::book::bookTuningSlot]
-    set nextmove [sc_game info nextMove]
+    set nextmove [untrans [sc_game info nextMove]]
 
     set w .bookTuningWin
     # erase previous children

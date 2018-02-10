@@ -242,6 +242,14 @@ proc setLanguage {{lang ""}} {
     }
   }
   set oldLang $lang
+  ::pgn::Refresh 1
+
+  # Not so important, but update pieces straight away
+  if {$::translatePieces} {
+    ::tree::refresh
+    if {[winfo exists .bookWin] } {::book::refresh}
+    if {[winfo exists .bookTuningWin]} {::book::refreshTuning}
+  }
 }
 
 ################################################################################
