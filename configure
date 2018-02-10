@@ -35,7 +35,8 @@ set var(LANGUAGES) [list \
   tcl/lang/nederlan.tcl \
   tcl/lang/spanish.tcl \
   tcl/lang/serbian.tcl \
-  tcl/lang/swedish.tcl ]
+  tcl/lang/swedish.tcl \
+  tcl/lang/turkish.tcl ]
 set var(OBJS) {$(SCIDOBJS)}
 set var(BINDIR) /usr/local/bin
 set var(SHAREDIR) /usr/local/share/scid
