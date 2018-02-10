@@ -17,6 +17,7 @@ array set codes {
   serbian Y
   spanish S
   swedish W
+  turkish T
 }
 
 array set encodings {
@@ -36,6 +37,7 @@ array set encodings {
   serbian iso8859-2
   spanish iso8859-1
   swedish iso8859-1
+  turkish utf-8
 }
 
 set languages [array names encodings]

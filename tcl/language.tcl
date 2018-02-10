@@ -36,6 +36,8 @@ set   transPieces(W) { P B K K Q D R T B L N S }
 set untransPieces(W) { B P K K D Q T R L B S N }
 set   transPieces(G) { P S K P Q B R [ B A N I }
 set untransPieces(G) { S P P K B Q [ R A B I N }
+set   transPieces(T) { P P K S Q V R K B F N A }
+set untransPieces(T) { P P S K V Q K R F B A N }
 
 ################################################################################
 proc trans { msg } {
@@ -86,6 +88,7 @@ array set langTable {
   Y {serbian  Serbian    2 iso8859-2 {}}
   S {spanish  Spanish    1 iso8859-1 es}
   W {swedish  Swedish    1 iso8859-1 sw}
+  T {turkish  Turkish    0 utf-8     tr}
 }
 
 proc initLanguageMenus {} {
