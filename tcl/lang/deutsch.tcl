@@ -1,4 +1,4 @@
-Opttsch.tcl:
+### deutsch.tcl
 #  German language support for Scid.
 #  Contributors: Bernhard Bialas, Jürgen Clos et al.
 #  Untranslated messages are marked with a "***" comment.
