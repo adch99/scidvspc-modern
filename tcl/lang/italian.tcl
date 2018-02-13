@@ -407,6 +407,8 @@ translate I RaiseWindows {Raise windows}
 translate I AutoPlay {Autoplay}
 # ====== TODO To be translated ======
 translate I TrialMode {Trial mode}
+# ====== TODO To be translated ======
+translate I KeepOpen {Keep open after startup}
 
 # General buttons:
 # ====== TODO To be translated ======

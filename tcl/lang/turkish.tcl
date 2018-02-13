@@ -338,6 +338,7 @@ translate T FlipBoard {Tahtayı çevir}
 translate T RaiseWindows {Gizle-göster}
 translate T AutoPlay {otamatik oynat}
 translate T TrialMode {Deneme modu}
+translate T KeepOpen {Başlatma sonrasında açık tutun}
 
 # General buttons:
 translate T Apply {Uygula}
@@ -543,8 +544,8 @@ translate T TreeBestGames {En İyi Oyunlar}
 translate T TreeAdjust {Filtreyi Ayarla}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
-translate T TreeTitleRow      {    Hamle      sıklık    Sonuç  Beraberlik AvElo Perf Yıla Göre ECO}
-translate T TreeTitleRowShort {    Hamle      sıklık    Sonuç  Beraberlik}
+translate T TreeTitleRow      {    Hamle       sıklık     Sonuç  Kura AvElo Perf  Yıla Göre ECO}
+translate T TreeTitleRowShort {    Hamle       sıklık     Sonuç  Kura}
 translate T TreeTotal {TOPLAM}
 translate T DoYouWantToSaveFirst {Kaydetmek istiyor musunuz}
 translate T AddToMask {Maskeye Ekle}

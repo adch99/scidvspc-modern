@@ -405,6 +405,8 @@ translate G RaiseWindows {Raise windows}
 translate G AutoPlay {Autoplay}
 # ====== TODO To be translated ======
 translate G TrialMode {Trial mode}
+# ====== TODO To be translated ======
+translate G KeepOpen {Keep open after startup}
 
 # General buttons:
 translate G Apply {Εφαρμογή}

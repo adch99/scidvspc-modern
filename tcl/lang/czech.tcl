@@ -418,6 +418,8 @@ translate C RaiseWindows {Raise windows}
 translate C AutoPlay {Autoplay}
 # ====== TODO To be translated ======
 translate C TrialMode {Trial mode}
+# ====== TODO To be translated ======
+translate C KeepOpen {Keep open after startup}
 
 # General buttons:
 # ====== TODO To be translated ======

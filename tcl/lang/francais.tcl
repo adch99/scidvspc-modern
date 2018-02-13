@@ -377,6 +377,8 @@ translate F FlipBoard {Retourner l'échiquier}
 translate F RaiseWindows {Raise windows}
 translate F AutoPlay {Lecture automatique}
 translate F TrialMode {Mode d'essai}
+# ====== TODO To be translated ======
+translate F KeepOpen {Keep open after startup}
 
 # General buttons:
 translate F Apply {Appliquer}
@@ -591,7 +593,7 @@ translate F TreeBestGames {Arbre des meilleures parties}
 translate F TreeAdjust {Ajuster filtre}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
-translate F TreeTitleRow {    Coup       Fréquence   Score Nulle EloMoy Perf AnnéeMoy ECO}
+translate F TreeTitleRow      {    Coup       Fréquence   Score Nulle EloMoy Perf Année ECO}
 translate F TreeTitleRowShort {    Coup       Fréquence   Score Nulle}
 translate F TreeTotal {TOTAL}
 translate F DoYouWantToSaveFirst {voulez-vous d'abord sauvegarder}

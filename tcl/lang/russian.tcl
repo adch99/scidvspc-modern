@@ -374,6 +374,8 @@ translate R FlipBoard {Перевернуть доску}
 translate R RaiseWindows {Выдвигать окна}
 translate R AutoPlay {Автоигра}
 translate R TrialMode {Пробный режим}
+# ====== TODO To be translated ======
+translate R KeepOpen {Keep open after startup}
 
 # General buttons:
 translate R Apply {Принять}

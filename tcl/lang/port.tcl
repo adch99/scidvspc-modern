@@ -357,6 +357,8 @@ translate U FlipBoard {Rodar Tabuleiro}
 translate U RaiseWindows {Ativar janelas}
 translate U AutoPlay {Jogo automático}
 translate U TrialMode {Modo de Teste}
+# ====== TODO To be translated ======
+translate U KeepOpen {Keep open after startup}
 
 # General buttons:
 translate U Apply {Aplicar}
