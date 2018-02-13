@@ -1080,14 +1080,14 @@ proc gameSave {gnum {focus {}}} {
   if {$emonth == 0} { set emonth "??" }
   if {$eday == 0} { set eday "??" }
 
-  addGameSaveEntry white 0 ::tr(White:) p
-  addGameSaveEntry black 1 ::tr(Black:) p
-  addGameSaveEntry event 2 ::tr(Event:) e
-  addGameSaveEntry site  3 ::tr(Site:)  s
-  addGameSaveEntry round 4 ::tr(Round:) r
+  addGameSaveEntry white 0 ::tr(White) p
+  addGameSaveEntry black 1 ::tr(Black) p
+  addGameSaveEntry event 2 ::tr(Event) e
+  addGameSaveEntry site  3 ::tr(Site)  s
+  addGameSaveEntry round 4 ::tr(Round) r
 
   frame $f.dateframe
-  label $f.datelabel -textvar ::tr(Date:)
+  label $f.datelabel -textvar ::tr(Date)
   entry $f.dateyear -width 6  -relief sunken -textvariable year -justify right
   label $f.datedot1 -text "."
   entry $f.datemonth -width 3  -relief sunken -textvariable month -justify right
@@ -1114,7 +1114,7 @@ proc gameSave {gnum {focus {}}} {
   pack $f.today -in $f.dateframe -side left
 
   frame $f.edateframe
-  label $f.edatelabel -textvar ::tr(EventDate:)
+  label $f.edatelabel -textvar ::tr(EventDate)
   entry $f.edateyear -width 6  -relief sunken \
       -textvariable eyear -justify right
   label $f.edatedot1 -text "."
@@ -1145,7 +1145,7 @@ proc gameSave {gnum {focus {}}} {
 
   # Game result
 
-  label $f.reslabel -textvar ::tr(Result:)
+  label $f.reslabel -textvar ::tr(Result)
   ttk::combobox $f.resentry -values {1 0 = *} -width 7 \
     -textvariable resultVal -state readonly
   grid $f.reslabel -row 7 -column 0 -sticky w
@@ -1153,12 +1153,12 @@ proc gameSave {gnum {focus {}}} {
 
   # White/Black Elo
 
-  label $f.welolabel -text "$::tr(White:) "
+  label $f.welolabel -text "$::tr(White) "
   ttk::combobox $f.wrtype -values [sc_info ratings] -width 7 \
     -textvariable whiteRType -state readonly
   ttk::entry $f.weloentry -width 6 -textvariable whiteElo -justify right
   
-  label $f.belolabel -text "$::tr(Black:) "
+  label $f.belolabel -text "$::tr(Black) "
   ttk::combobox $f.brtype -values [sc_info ratings] -width 7 \
     -textvariable blackRType -state readonly
   ttk::entry $f.beloentry -width 6 -textvariable blackElo -justify right
@@ -1172,7 +1172,7 @@ proc gameSave {gnum {focus {}}} {
 
   # Eco
 
-  label $f.ecolabel -text "ECO Code:"
+  label $f.ecolabel -text "ECO Code"
   ttk::entry $f.ecoentry -width 6  -textvariable eco -justify right
   grid $f.ecolabel -row 10 -column 0 -sticky w
   grid $f.ecoentry -row 10 -column 2 -sticky w

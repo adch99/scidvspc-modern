@@ -269,11 +269,11 @@ proc ::ptrack::make {} {
       -command "::ptrack::recolor $col"
   }
   $f.b configure -image ptrack_$::ptrack::color
-  label $f.label -text $::tr(GlistColor:) -font font_Bold
+  label $f.label -text $::tr(GlistColor): -font font_Bold
   pack $f.label $f.b -side left -pady 5
 
   set f $w.t.mode
-  label $f.mode -text $::tr(TrackerStat:) -font font_Bold
+  label $f.mode -text $::tr(TrackerStat): -font font_Bold
   grid $f.mode -row 0 -column 0
   radiobutton $f.games -text $::tr(TrackerGames) -anchor w \
     -variable ::ptrack::mode -value "-games"
@@ -283,7 +283,7 @@ proc ::ptrack::make {} {
   grid $f.time -row 2 -column 0 -sticky we
 
   set f $w.t.moves
-  label $f.lfrom -text $::tr(TrackerMoves:) -font font_Bold
+  label $f.lfrom -text $::tr(TrackerMoves): -font font_Bold
   entry $f.from -width 3 -justify right -textvariable ::ptrack::moves(start)
   label $f.lto -text "-"
   entry $f.to -width 3 -justify right -textvariable ::ptrack::moves(end)
