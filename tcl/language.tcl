@@ -1,4 +1,5 @@
-### lang.tcl: Support for multiple-language menus, buttons, etc.
+### language.tcl
+### Support for multiple-language menus, buttons, etc.
 ### Part of Scid, which is Copyright 2001-2003 Shane Hudson.
 
 array set langEncoding {}
@@ -9,11 +10,11 @@ if {[catch {encoding names}]} {
 } else {
   set hasEncoding 1
 }
-################################################################################
-#  Translation of pieces
+
+###  Translation of pieces
 #  Note - also change tkscid.cpp and game.cpp
 #  Note - not all languages have piece translation 
-################################################################################
+
 array set transPieces {}
 
 set   transPieces(F) { P P K R Q D R T B F N C }
@@ -39,9 +40,9 @@ set untransPieces(G) { S P P K B Q [ R A B I N }
 set   transPieces(T) { P P K S Q V R K B F N A }
 set untransPieces(T) { P P S K V Q K R F B A N }
 
-################################################################################
-proc trans { msg } {
-  if { $::language == "E" || ! $::translatePieces || $msg == "\[end\]"} {
+
+proc trans {msg} {
+  if { $::language == "E" || ! $::translatePieces || $msg == {[end]} } {
     return $msg
   }
   if { [ catch { set t [string map $::transPieces($::language) $msg ]} ] } {
@@ -49,7 +50,7 @@ proc trans { msg } {
   }
   return $t
 }
-################################################################################
+
 proc untrans { msg } {
   if { $::language == "E"  || ! $::translatePieces || $msg == "\[end\]"} {
     return $msg
@@ -135,10 +136,9 @@ proc menuText {args} {
 
 array set tr {}
 array set translations {}
-################################################################################
-# translate:
-#    Assigns a translation for future reference.
-################################################################################
+
+###  Assigns a translation for future reference.
+
 proc translate {lang tag label} {
   regsub {\\n} $label "\n" label
   set ::translations($lang,$tag) $label
@@ -160,10 +160,9 @@ proc translateECO {lang pairList} {
     sc_eco translate $lang $from $to
   }
 }
-################################################################################
-# tr:
-#    Given a tag and language, returns the stored text for that tag.
-################################################################################
+
+### translate text or menu
+
 proc tr {tag {lang ""}} {
   global menuLabel tr
   if {$lang == ""} {set lang $::language}
@@ -182,9 +181,8 @@ proc tr {tag {lang ""}} {
   # Finally, just give up and return the original tag
   return $tag
 }
-################################################################################
-#
-################################################################################
+
+
 proc setLanguage {{lang ""}} {
   global menuLabel menuUnder oldLang hasEncoding langEncoding langTable
 
@@ -224,12 +222,13 @@ proc setLanguage {{lang ""}} {
     puts "setLanguage_$lang error: $err"
   }
 
-  # TODO: Check this !
-  if {$hasEncoding  && $langEncoding($lang) != ""} {
-    # encoding system $langEncoding($lang)
-  }
+  ### Unused
+  # https://wiki.tcl.tk/2616
+  # if {$hasEncoding  && $langEncoding($lang) != ""} {
+  #  # encoding system $langEncoding($lang)
+  # }
 
-  # If using Tk, translate all menus:
+  # If using Tk, translate all menus
   if {! [catch {winfo exists .}]} {
     setLanguageMenus $lang
     if {[winfo exists .glistWin]} {
@@ -245,6 +244,12 @@ proc setLanguage {{lang ""}} {
     }
   }
   set oldLang $lang
+
+  catch {
+    .splash.auto    configure -textvar ::tr(KeepOpen)
+    .splash.dismiss configure -textvar ::tr(Close)
+  }
+
   ::pgn::Refresh 1
 
   # Not so important, but update pieces straight away

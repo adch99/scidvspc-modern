@@ -447,6 +447,8 @@ translate O RaiseWindows {Raise windows}
 translate O AutoPlay {Autoplay}
 # ====== TODO To be translated ======
 translate O TrialMode {Trial mode}
+# ====== TODO To be translated ======
+translate O KeepOpen {Keep open after startup}
 
 # General buttons:
 # ====== TODO To be translated ======

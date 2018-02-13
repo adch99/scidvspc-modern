@@ -385,6 +385,8 @@ translate P RaiseWindows {Raise windows}
 translate P AutoPlay {Autoplay}
 # ====== TODO To be translated ======
 translate P TrialMode {Trial mode}
+# ====== TODO To be translated ======
+translate P KeepOpen {Keep open after startup}
 
 # General buttons:
 translate P Apply {Zastosuj}

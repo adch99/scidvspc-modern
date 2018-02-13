@@ -399,6 +399,8 @@ translate D FlipBoard {Brett drehen}
 translate D RaiseWindows {Raise windows}
 translate D AutoPlay {Abspielen}
 translate D TrialMode {Züge ausprobieren}
+# ====== TODO To be translated ======
+translate D KeepOpen {Keep open after startup}
 
 # General buttons:
 # todo

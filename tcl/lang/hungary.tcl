@@ -422,6 +422,8 @@ translate H RaiseWindows {Raise windows}
 translate H AutoPlay {Autoplay}
 # ====== TODO To be translated ======
 translate H TrialMode {Trial mode}
+# ====== TODO To be translated ======
+translate H KeepOpen {Keep open after startup}
 
 # General buttons:
 # ====== TODO To be translated ======

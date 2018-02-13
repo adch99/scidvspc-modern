@@ -385,6 +385,8 @@ translate S FlipBoard {Girar el tablero}
 translate S RaiseWindows {Aumentar ventanas}
 translate S AutoPlay {Reproducción automática}
 translate S TrialMode {Modo de prueba}
+# ====== TODO To be translated ======
+translate S KeepOpen {Keep open after startup}
 
 # General buttons:
 translate S Apply {Aplicar}

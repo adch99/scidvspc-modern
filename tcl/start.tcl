@@ -1812,7 +1812,8 @@ proc ::splash::make {} {
        -font font_Regular -wrap word \
       -yscrollcommand [list $w.ybar set] -setgrid 1
   scrollbar $w.ybar -command [list $w.t yview]
-  # Hmm - translations aren't set up yet
+
+  # Translations aren't set up yet, but these are handled in setLanguage
   checkbutton $w.auto -text "Keep open after startup" \
       -variable ::splash::keepopen -font font_Small -pady 5 -padx 5
   button $w.dismiss -text Close -width 8 -command [list wm withdraw $w] \
@@ -1868,8 +1869,6 @@ proc ::splash::make {} {
   $w.t insert end "        $::scidName     " scid_title
   $w.t image create end -image icon -padx 20 -pady 10
 }
-
-# new logo from www.vitualpieces.net
 
 ::splash::make
 

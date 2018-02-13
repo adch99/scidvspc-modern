@@ -388,6 +388,8 @@ translate W RaiseWindows {Raise windows}
 translate W AutoPlay {Autoplay}
 # ====== TODO To be translated ======
 translate W TrialMode {Trial mode}
+# ====== TODO To be translated ======
+translate W KeepOpen {Keep open after startup}
 
 # General buttons:
 # ====== TODO To be translated ======
@@ -614,8 +616,8 @@ translate W TreeBestGames {Bästa partier i trädet}
 translate W TreeAdjust {Adjust Filter}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
-translate W TreeTitleRow { Drag       Frekvens        Res.  Remi   Elo~  Nivå År~ ECO}
-translate W TreeTitleRowShort { Drag       Frekvens        Res. Remi}
+translate W TreeTitleRow      { Drag       Frekvens         Res. Remi Elo~  Nivå   År~ ECO}
+translate W TreeTitleRowShort { Drag       Frekvens         Res. Remi}
 translate W TreeTotal {TOTALT}
 translate W DoYouWantToSaveFirst {Vill du spara först}
 translate W AddToMask {Lägg till i Sökmask}

@@ -339,6 +339,8 @@ translate L FlipBoard {K‰‰nn‰ lauta}
 translate L RaiseWindows {Nosta ikkunat}
 translate L AutoPlay {Automaattinen peli}
 translate L TrialMode {Kokeilumoodi}
+# ====== TODO To be translated ======
+translate L KeepOpen {Keep open after startup}
 
 # General buttons:
 translate L Apply {Sovella}
