@@ -499,7 +499,7 @@ proc ::search::material {} {
   label $f.t2 -image wb20
   label $f.t3 -text "- 1" 
   label $f.t4 -image bb20
-  label $f.t5 -textvar ::tr(squares:) 
+  label $f.t5 -textvar ::tr(squares) 
   radiobutton $f.same -textvar ::tr(SameColor) -variable oppBishops \
       -value "Same" -padx 5 -pady 4 
   radiobutton $f.opp -textvar ::tr(OppColor) -variable oppBishops \
@@ -514,7 +514,7 @@ proc ::search::material {} {
 
   set f $w.move
   pack [frame $f] -side top -ipady 5
-  label $f.fromlab -textvar ::tr(MoveNumberRange:)
+  label $f.fromlab -textvar ::tr(MoveNumberRange)
   entry $f.from -width 4 -relief sunken -textvar minMoveNum -justify right
   label $f.tolab -text " - "
   entry $f.to -width 4 -relief sunken -textvar maxMoveNum -justify right
