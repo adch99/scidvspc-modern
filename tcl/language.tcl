@@ -138,23 +138,17 @@ array set tr {}
 array set translations {}
 
 ###  Assigns a translation for future reference.
+# extra translations for suffixes ":","..." are removed - S.A.
 
 proc translate {lang tag label} {
   regsub {\\n} $label "\n" label
   set ::translations($lang,$tag) $label
   set ::tr($tag) $label
-  foreach extra {":" "..."} {
-    set newtag "${tag}${extra}"
-    set newlabel "${label}${extra}"
-    set ::translations($lang,$newtag) $newlabel
-    set ::tr($newtag) $newlabel
-  }
 }
-################################################################################
-# translateECO:
+
 #    Given a pair list of ECO opening name phrase translations,
 #    assigns the translations for future reference.
-################################################################################
+
 proc translateECO {lang pairList} {
   foreach {from to} $pairList {
     sc_eco translate $lang $from $to
