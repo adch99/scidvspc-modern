@@ -651,7 +651,7 @@ translate C TreeAdjust {Adjust Filter}
 # check the tree window to make sure it lines up with the actual columns.
 translate C TreeTitleRow {    Tah       Frekvence    Skóre Remíz PrElo Perf PrRok ECO}
 translate C TreeTitleRowShort {    Tah       Frekvence    Skóre Remíz}
-translate C TreeTotal {CELKEM}
+translate C TreeTotal: {CELKEM:}
 translate C DoYouWantToSaveFirst {Chcete nejprve ulo¾it}
 translate C AddToMask {Pøidat do masky}
 translate C RemoveFromMask {Odstranit z masky}

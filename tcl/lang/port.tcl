@@ -570,7 +570,7 @@ translate U TreeAdjust {Ajustar Filtro}
 # check the tree window to make sure it lines up with the actual columns.
 translate U TreeTitleRow      {    Lance      Frequência    Pontos  Empate MédiaElo Perf MédiaAno ECO}
 translate U TreeTitleRowShort {    Lance      Frequência    Pontos  Empate}
-translate U TreeTotal {TOTAL}
+translate U TreeTotal: {TOTAL:}
 translate U DoYouWantToSaveFirst {Quer guardar primeiro?}
 translate U AddToMask {Adicionar à máscara}
 translate U RemoveFromMask {Remover da máscara}

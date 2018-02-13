@@ -611,7 +611,7 @@ translate S TreeAdjust {Ajustar filtro}
 # check the tree window to make sure it lines up with the actual columns.
 translate S TreeTitleRow {    Movim.    Frecuencia   Puntu. Tablas AvElo Perf AvAño ECO}
 translate S TreeTitleRowShort {    Movim.    Frecuencia   Puntu. Tablas}
-translate S TreeTotal {TOTAL}
+translate S TreeTotal: {TOTAL:}
 translate S DoYouWantToSaveFirst {Quieres salvar primero}
 translate S AddToMask {Añadir a máscara}
 translate S RemoveFromMask {Elimina desde la máscara}

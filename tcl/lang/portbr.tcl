@@ -657,7 +657,7 @@ translate B TreeAdjust {Adjust Filter}
 # todo
 translate B TreeTitleRow {    Move      Frequency    Score Draws AvElo Perf AvYear ECO}
 translate B TreeTitleRowShort {    Move      Frequency    Score Draws}
-translate B TreeTotal {TOTAL}
+translate B TreeTotal: {TOTAL:}
 translate B DoYouWantToSaveFirst {Quer salvar primeiro?}
 translate B AddToMask {Adicionar à máscara}
 translate B RemoveFromMask {Remover da máscara}

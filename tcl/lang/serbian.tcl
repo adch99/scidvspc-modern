@@ -699,7 +699,7 @@ translate Y TreeAdjust {Adjust Filter}
 # todo
 translate Y TreeTitleRow {    Move      Frequency    Score Draws AvElo Perf AvYear ECO}
 translate Y TreeTitleRowShort {    Move      Frequency    Score Draws}
-translate Y TreeTotal {UKUPNO}
+translate Y TreeTotal: {UKUPNO:}
 # ====== TODO To be translated ======
 translate Y DoYouWantToSaveFirst {Do you want to save}
 # ====== TODO To be translated ======

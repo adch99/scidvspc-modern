@@ -634,7 +634,7 @@ translate G TreeAdjust {Adjust Filter}
 # check the tree window to make sure it lines up with the actual columns.
 translate G TreeTitleRow {    Κίνηση     Συχνότητα  Σκορ Ισοπ Μ-ELO  Αποδ Μ-Έτη ECO}
 translate G TreeTitleRowShort {    Κίνηση     Συχνότητα  Σκορ Ισοπ}
-translate G TreeTotal {ΣΥΝΟΛΟ   }
+translate G TreeTotal: {ΣΥΝΟΛΟ:   }
 translate G DoYouWantToSaveFirst {Να αποθηκευτεί}
 translate G AddToMask {Προσθήκη σε Μάσκα}
 translate G RemoveFromMask {Αφαίρεση από Μάσκα}

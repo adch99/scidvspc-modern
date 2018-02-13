@@ -699,7 +699,7 @@ translate O TreeAdjust {Adjust Filter}
 # todo
 translate O TreeTitleRow {    Move      Frequency    Score Draws AvElo Perf AvYear ECO}
 translate O TreeTitleRowShort {    Move      Frequency    Score Draws}
-translate O TreeTotal {SAMMENLAGT}
+translate O TreeTotal: {SAMMENLAGT:}
 # ====== TODO To be translated ======
 translate O DoYouWantToSaveFirst {Do you want to save}
 # ====== TODO To be translated ======

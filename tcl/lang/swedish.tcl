@@ -618,7 +618,7 @@ translate W TreeAdjust {Adjust Filter}
 # check the tree window to make sure it lines up with the actual columns.
 translate W TreeTitleRow      { Drag       Frekvens         Res. Remi Elo~  Nivå   År~ ECO}
 translate W TreeTitleRowShort { Drag       Frekvens         Res. Remi}
-translate W TreeTotal {TOTALT}
+translate W TreeTotal: {TOTALT:}
 translate W DoYouWantToSaveFirst {Vill du spara först}
 translate W AddToMask {Lägg till i Sökmask}
 translate W RemoveFromMask {Ta bort från Sökmask}

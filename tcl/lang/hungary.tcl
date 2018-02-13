@@ -656,7 +656,7 @@ translate H TreeBestGames {A fa legjobb játszmái}
 translate H TreeAdjust {Adjust Filter}
 translate H TreeTitleRow {    Lépés    Gyakoriság    Eredm   év ÁtlÉlõ Telj. Átl.  ECO}
 translate H TreeTitleRowShort {    Lépés    Gyakoriság    Eredm   év}
-translate H TreeTotal {ÖSSZESEN}
+translate H TreeTotal: {ÖSSZESEN: }
 translate H DoYouWantToSaveFirst {Akarod elõbb menteni?}
 translate H AddToMask {Add hozzá a maszkhoz}
 translate H RemoveFromMask {Vedd ki a maszkból}

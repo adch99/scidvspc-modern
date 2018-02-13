@@ -595,7 +595,7 @@ translate F TreeAdjust {Ajuster filtre}
 # check the tree window to make sure it lines up with the actual columns.
 translate F TreeTitleRow      {    Coup       Fréquence   Score Nulle EloMoy Perf Année ECO}
 translate F TreeTitleRowShort {    Coup       Fréquence   Score Nulle}
-translate F TreeTotal {TOTAL}
+translate F TreeTotal: {TOTAL:}
 translate F DoYouWantToSaveFirst {voulez-vous d'abord sauvegarder}
 translate F AddToMask {Ajouter au masque}
 translate F RemoveFromMask {Enlever du masque}
