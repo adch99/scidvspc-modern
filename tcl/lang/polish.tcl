@@ -606,7 +606,7 @@ translate P TreeAdjust {Ustaw filtr}
 # check the tree window to make sure it lines up with the actual columns.
 translate P TreeTitleRow {    Pos.        Częstość   Wynik Remis  Rav Rperf Rok   ECO}
 translate P TreeTitleRowShort {    Pos.        Częstość   Wynik Remis}
-translate P TreeTotal {RAZEM}
+translate P TreeTotal: {RAZEM:}
 translate P DoYouWantToSaveFirst {Zapisać najpierw}
 translate P AddToMask {Dodaj do maski}
 translate P RemoveFromMask {Usuń z maski}

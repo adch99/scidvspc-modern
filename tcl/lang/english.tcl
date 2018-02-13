@@ -576,7 +576,7 @@ translate E TreeAdjust {Adjust Filter}
 # check the tree window to make sure it lines up with the actual columns.
 translate E TreeTitleRow      {    Move      Frequency    Score  Draw AvElo Perf AvYear ECO}
 translate E TreeTitleRowShort {    Move      Frequency    Score  Draw}
-translate E TreeTotal {TOTAL}
+translate E TreeTotal: {TOTAL:}
 translate E DoYouWantToSaveFirst {Do you want to save}
 translate E AddToMask {Add to Mask}
 translate E RemoveFromMask {Remove from Mask}

@@ -631,7 +631,7 @@ translate D TreeAdjust {Filter anpassen}
 # check the tree window to make sure it lines up with the actual columns.
 translate D TreeTitleRow {    Zug       Häufigkeit    Pkte Remis  Elo  Erflg Jahr ECO}
 translate D TreeTitleRowShort {    Zug       Häufigkeit    Pkte Remis}
-translate D TreeTotal {SUMME}
+translate D TreeTotal: {SUMME:}
 translate D DoYouWantToSaveFirst {Soll zuerst gespeichert werden}
 translate D AddToMask {Addiere zu Maske}
 translate D RemoveFromMask {Entferne von Maske}

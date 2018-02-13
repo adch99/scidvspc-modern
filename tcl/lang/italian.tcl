@@ -653,7 +653,7 @@ translate I TreeAdjust {Adjust Filter}
 # check the tree window to make sure it lines up with the actual columns.
 translate I TreeTitleRow {    Mossa     Frequenza    Punt. Patta AvElo Perf AvAnno ECO}
 translate I TreeTitleRowShort {    Mossa     Frequenza    Punt. Patta}
-translate I TreeTotal {TOTALE}
+translate I TreeTotal: {TOTALE:}
 # ====== TODO To be translated ======
 translate I DoYouWantToSaveFirst {Do you want to save}
 # ====== TODO To be translated ======

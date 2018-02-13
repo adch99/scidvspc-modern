@@ -594,7 +594,7 @@ translate R TreeAdjust {Установить фильтр}
 # check the tree window to make sure it lines up with the actual columns.
 translate R TreeTitleRow { Перемеще    частоты       Счет Нари. AvElo Perf AvYear ECO}
 translate R TreeTitleRowShort { Перемеще    частоты       Счет Нари.}
-translate R TreeTotal {ИТОГ}
+translate R TreeTotal: {ИТОГ:     }
 translate R DoYouWantToSaveFirst {Вы хотите сохранить первым}
 translate R AddToMask {Добавить в маску}
 translate R RemoveFromMask {Удалить из маски}

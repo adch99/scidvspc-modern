@@ -548,7 +548,7 @@ translate L TreeAdjust {Mukauta suodatin}
 # check the tree window to make sure it lines up with the actual columns.
 translate L TreeTitleRow      {    Siirto      Yleisyys    Tulos  Tasapeli Keskim‰.Elo Perf Keskim‰.Vuosi ECO}
 translate L TreeTitleRowShort {    Siirto      Yleisyys    Tulos  Tasapeli}
-translate L TreeTotal {SUMMA}
+translate L TreeTotal: {SUMMA:}
 translate L DoYouWantToSaveFirst {Haluatko tallentaa}
 translate L AddToMask {Lis‰‰ naamioon}
 translate L RemoveFromMask {Poista naamiosta}

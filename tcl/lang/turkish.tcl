@@ -546,7 +546,7 @@ translate T TreeAdjust {Filtreyi Ayarla}
 # check the tree window to make sure it lines up with the actual columns.
 translate T TreeTitleRow      {    Hamle       sıklık     Sonuç  Kura AvElo Perf  Yıla Göre ECO}
 translate T TreeTitleRowShort {    Hamle       sıklık     Sonuç  Kura}
-translate T TreeTotal {TOPLAM}
+translate T TreeTotal: {TOPLAM:}
 translate T DoYouWantToSaveFirst {Kaydetmek istiyor musunuz}
 translate T AddToMask {Maskeye Ekle}
 translate T RemoveFromMask {Maskeden çıkar}
