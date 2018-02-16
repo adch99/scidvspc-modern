@@ -1095,7 +1095,7 @@ proc ::optable::report {fmt withTable {flipPos 0}} {
     if {$fmt == "latex"} {
       append r "\\begin{center}\n"
     }
-    append r "$tr(OprepEndClass:)$n"
+    append r "$tr(OprepEndClass):$n"
     if {$fmt == "latex"} {
       append r "\\end{center}"
     }
