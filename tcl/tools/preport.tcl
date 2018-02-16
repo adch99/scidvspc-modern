@@ -661,7 +661,7 @@ proc ::preport::report {fmt {withTable 1}} {
   }
   if {$preport(Endgames)} {
     append r [::preport::_subsec $tr(OprepEndgames)]
-    append r "$tr(OprepEndClass:)$n"
+    append r "$tr(OprepEndClass):$n"
     append r [sc_report player endmat]
   }
 
