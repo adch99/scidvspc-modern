@@ -10,8 +10,8 @@
 exec tclsh "$0" "$@"
 
 set ::scidName {Scid vs. PC}
-set ::scidVersion 4.18
-set ::scidVersionDate {Jul 1, 2017}
+set ::scidVersion 4.19
+set ::scidVersionDate {Mar 14, 2018}
 source help.tcl
 
 file mkdir doc
