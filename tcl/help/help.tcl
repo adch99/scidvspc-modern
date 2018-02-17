@@ -2258,6 +2258,8 @@ search for games that do not reached this position!
   large enough for a whole base. In this case, less common lines will be discarded for those more common.
   This feature is useful if you have one, or more, repertoire bases that can serve as input. 
   </p>
+
+  <h3>Fast / Slow Mode</h3>
   <p>
   Tree Refresh can be sped-up if the database is sorted
   by ECO code and then compacted (see the <a Maintenance>maintenance</a>
@@ -2267,6 +2269,8 @@ search for games that do not reached this position!
   into account. Also, Fast mode does not update the Tree Cache, nor
   consider move transpositions. To allow for this there is a third Tree mode.
   <b>Fast and Slow Mode</b> initially gives one a preview of statistics, then performs a slow update afterwards.
+  For more info see Pascal's comment's
+<br><br>https://sourceforge.net/p/scid/mailman/scid-users/thread/48103F94.1010408%40free.fr/
   </p>
 
   <p><footer>Updated: Scid vs. PC 4.19, October 2017</footer></p>
@@ -3760,10 +3764,10 @@ set helpText(Cmdline) {<h1>Command Line Options</h1>
   </p>
 
   <h3>Fast Mode</h3>
-  <p>Starting in fast mode skips loading the
-  spelling (or ratings) file, and also recalculating name frequencies; as well as
-  flag counts and estimated ratings. Scid vs. PC has recently reduced the bugs in name frequency handling,
-  so using fast mode may now be ok, but is still not generally recommended.
+  <p>Scid vs. PC's fast mode skips loading the
+  spelling (or ratings) file, and recalculating name frequencies (as well as
+  flag counts and estimated ratings). Scid vs. PC has recently reduced the bugs in name frequency handling,
+  so using fast mode may now be fine, but is still not generally recommended.
   </p>
   <p><footer>Updated: Scid vs. PC 4.19 Feb 2018</footer></p>
 }
