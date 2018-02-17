@@ -122,17 +122,25 @@ proc ::search::Config {{state ""}} {
 }
 
 
-proc ::search::usefile {} {
-  set ftype { { "Scid SearchOption files" {".sso"} } }
-  if {! [file isdirectory $::initialDir(sso)] } {
-    set ::initialDir(sso) $::env(HOME)
-  } 
-  set ::fName [tk_getOpenFile -initialdir $::initialDir(sso) \
-                 -filetypes $ftype -title "Select a SearchOptions file"]
-  if {$::fName == ""} { return }
-  set ::initialDir(sso) [file dirname $::fName]
+proc ::search::usefile {{file {}}} {
+  global fName initialDir env
 
-  if {[catch {uplevel "#0" {source $::fName} } ]} {
+  if {$file != {}} {
+    set fName $file
+  } else {
+    set ftype { { "Scid SearchOption files" {".sso"} } }
+    if {! [file isdirectory $initialDir(sso)] } {
+      set initialDir(sso) $env(HOME)
+    } 
+    set fName [tk_getOpenFile -initialdir $initialDir(sso) \
+		   -filetypes $ftype -title "Select a SearchOptions file"]
+  }
+  if {$fName == ""} {
+    return
+  }
+  set initialDir(sso) [file dirname $fName]
+
+  if {[catch {uplevel "#0" {source $fName} } ]} {
     tk_messageBox -title "Scid: Error reading file" -type ok -icon warning \
                 -message "Unable to open or read SearchOptions file: $fName"
   } else {
