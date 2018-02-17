@@ -316,6 +316,7 @@ append helpText(Index) {
 
   <h3><name F>F</name></h3>
   <ul>
+  <li><a Cmdline>Fast mode</a>
   <li><a FICS>FICS</a> (Free Internet Chess Server)</li>
   <li><a Finder>File Finder</a></li>
   <li><a Formats>File formats</a></li>
@@ -403,6 +404,7 @@ append helpText(Index) {
   <li><a ECO>Opening classification</a> (ECO)</li>
   <li><a Reports Opening>Opening Reports</a></li>
   <li><a Options>Options</a></li>
+  <li>Command line <a Cmdline>options</a></li>
   </ul>
 
   <h3><name P>P</name></h3>
@@ -3740,42 +3742,30 @@ set helpText(Bookmarks) {<h1>Bookmarks</h1>
   <p><footer>Updated: Scid vs. PC 4.10, July 2013</footer></p>
 }
 
-set helpTitle(Cmdline) "Command-line options"
-set helpText(Cmdline) {<h1>Command-line Options</h1>
+set helpTitle(Cmdline) "Command Line Options"
+set helpText(Cmdline) {<h1>Command Line Options</h1>
   <p>
-  When you start Scid from a shell or console, there are command-line
-  options you can specify. Scid-format databases (with or without a
-  file suffix such as ".si4") and PGN files to be opened can be given
-  (for example)
   <ul>
-  <li><b>scid mybase newgames.pgn</b></li>
+  <li>-xtb : turn off <a TB>tablebases</a></li>
+  <li>-xspell : don't load the <a Maintenance Spellcheck>spelling</a> file.</li>
+  <li>-xeco : don't load the <a ECO>ECO openings classification</a> file.</li>
+  <li>-fast | -f : Start in fast mode (see below).</li> 
   </ul>
-  will immediately open the Scid Database "mybase" and the
-  PGN file "newgames.pgn".
+
+  <p>Other args given on the command line are expected to be databases, pgn files or search files.
+  For databases, the file suffix ".si4" is optional.
   </p>
-  <p>
-  There are also optional arguments to control which files Scid should
-  search for and use when it starts. You can turn off the use of
-  <a TB>tablebases</a> with the <b>-xtb</b> (or <b>-xt</b>) option,
-  avoid loading the <a ECO>ECO openings classification</a> file with
-  <b>-xeco</b> or <b>-xe</b>, and avoid loading the
-  <a Maintenance Spellcheck>spelling</a> file
-  with <b>-xspell</b> or <b>-xs</b>. Also, the option <b>-fast</b>
-  or <b>-f</b> does all three, so <b>scid -f</b> is equivalent
-  to <b>scid -xeco -xspell -xtb</b>.
+  <p> Example: <b>scid -fast mybase newgames.pgn</b>
+  will start in fast mode, opening "mybase.si4" and the "newgames.pgn".
   </p>
 
-  <p>
-  Additionally, a filter file (.sso) can be used on the command line.
-  <ul>
-  <li>scid mybase myfilter</li>
-  </ul>
-  will open mybase and run myfilter immediately against it to select a
-  set of games. This can e.g. be used to select a list of unfinished
-  games in a pgn file.
+  <h3>Fast Mode</h3>
+  <p>Starting in fast mode skips loading the
+  spelling (or ratings) file, and also recalculating name frequencies; as well as
+  flag counts and estimated ratings. Scid vs. PC has recently reduced the bugs in name frequency handling,
+  so using fast mode may now be ok, but is still not generally recommended.
   </p>
-
-  <p><footer>Updated: Scid 3.6.26, October 2008</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.19 Feb 2018</footer></p>
 }
 
 set helpTitle(Pgnscid) "Pgnscid"
