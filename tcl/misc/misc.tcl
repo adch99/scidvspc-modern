@@ -227,6 +227,8 @@ proc _autoscrollMap {frame} {
 array set scid_busycursor {}
 set scid_busycursorState 0
 
+### Way too complicated sh*t - S.A.
+
 proc doBusyCursor {w flag} {
   global scid_busycursor
   if {! [winfo exists $w]} { return }
@@ -283,7 +285,6 @@ proc addVerticalRule {w {xpadding 5} {relief sunken}} {
 }
 
 
-# progressWindow:
 #   Creates a window with a label, progress bar, and (if specified),
 #   a cancel button and cancellation command.
 
@@ -316,7 +317,7 @@ proc progressWindow {args} {
   wm transient $w .main
 
   label $w.t -text $text
-  pack $w.t -side top
+  pack $w.t -side top -pady 5
   canvas $w.c -width 400 -height 20  -relief solid -border 1
   $w.c create rectangle 0 0 0 0 -fill $::progcolor -outline $::progcolor -tags bar
   $w.c create text 395 10 -anchor e -font font_Regular -tags time \
@@ -331,6 +332,9 @@ proc progressWindow {args} {
   }
 
   sc_progressBar $w.c bar 401 21 time
+
+  # proc busyCursor is kindof broken , and has been set by file::Open, so go direct
+  catch {$w configure -cursor watch}
 
   placeWinOverParent $w .
   update idletasks
