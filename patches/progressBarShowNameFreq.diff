@@ -1,0 +1,279 @@
+Index: src/tkscid.cpp
+===================================================================
+--- src/tkscid.cpp	(revision 2823)
++++ src/tkscid.cpp	(working copy)
+@@ -1043,9 +1043,13 @@
+ 
+     db->numGames = db->idx->GetNumGames();
+ 
+-    // Compute name frequencies, flag counts, etc unless a fast open
+-    // was requested:
++    // Compute name frequencies, flag counts, etc unless fast open was requested
+     if (! fastOpen) {
++        if (showProgress) {
++          // Bit of a hack to update progressBar message - S.A.
++          Tcl_Eval (ti, ".progressWin.t configure -text $::tr(UpdatingNameCounts)");
++          Tcl_Eval (ti, "update");
++        }       
+         recalcNameFrequencies (db->nb, db->idx);
+         recalcFlagCounts (db);
+         recalcEstimatedRatings (db->nb);
+Index: tcl/file.tcl
+===================================================================
+--- tcl/file.tcl	(revision 2823)
++++ tcl/file.tcl	(working copy)
+@@ -441,7 +441,8 @@
+   set showProgress 0
+   if {$bsize > 5000000} { set showProgress 1 }
+   if {$showProgress} {
+-    progressWindow Scid "$::tr(OpeningTheDatabase): [file tail $name]"
++    set baseName [file tail $name]
++    progressWindow $baseName "$::tr(OpeningTheDatabase): $baseName"
+   }
+   if {$::fastDBopen} {
+     set err [catch {sc_base open -fast $name} result]
+Index: tcl/lang/czech.tcl
+===================================================================
+--- tcl/lang/czech.tcl	(revision 2823)
++++ tcl/lang/czech.tcl	(working copy)
+@@ -510,6 +510,8 @@
+ translate C Deleted {Vymaz�n(a)}
+ translate C SearchResults {Hledat v�sledky}
+ translate C OpeningTheDatabase {Datab�ze zah�jen�}
++# ====== TODO To be translated ======
++translate C UpdatingNameCounts {Checking Name frequencies}
+ translate C Database {Datab�ze}
+ translate C Filter {Filtr}
+ # ====== TODO To be translated ======
+Index: tcl/lang/deutsch.tcl
+===================================================================
+--- tcl/lang/deutsch.tcl	(revision 2823)
++++ tcl/lang/deutsch.tcl	(working copy)
+@@ -489,6 +489,8 @@
+ translate D Deleted {Gel�scht}
+ translate D SearchResults {Suchergebnisse}
+ translate D OpeningTheDatabase {Datenbank �ffnen}
++# ====== TODO To be translated ======
++translate D UpdatingNameCounts {Checking Name frequencies}
+ translate D Database {Datenbank}
+ translate D Filter {Filter}
+ translate D Reset {Zur�cksetzen}
+Index: tcl/lang/english.tcl
+===================================================================
+--- tcl/lang/english.tcl	(revision 2823)
++++ tcl/lang/english.tcl	(working copy)
+@@ -451,6 +451,7 @@
+ translate E Deleted {Deleted}
+ translate E SearchResults {Search Results}
+ translate E OpeningTheDatabase {Opening database}
++translate E UpdatingNameCounts {Checking Name frequencies}
+ translate E Database {Database}
+ translate E Filter {Filter}
+ translate E Reset {Reset}
+Index: tcl/lang/finnish.tcl
+===================================================================
+--- tcl/lang/finnish.tcl	(revision 2823)
++++ tcl/lang/finnish.tcl	(working copy)
+@@ -423,6 +423,8 @@
+ translate L Deleted {Poistetut}
+ translate L SearchResults {Etsi lopputuloksia}
+ translate L OpeningTheDatabase {Avaustietokanta}
++# ====== TODO To be translated ======
++translate L UpdatingNameCounts {Checking Name frequencies}
+ translate L Database {Tietokanta}
+ translate L Filter {Suodatin}
+ translate L Reset {Nollaa}
+Index: tcl/lang/francais.tcl
+===================================================================
+--- tcl/lang/francais.tcl	(revision 2823)
++++ tcl/lang/francais.tcl	(working copy)
+@@ -463,6 +463,8 @@
+ translate F Deleted {�limin�}
+ translate F SearchResults {R�sultats de la recherche}
+ translate F OpeningTheDatabase {Ouverture de la base}
++# ====== TODO To be translated ======
++translate F UpdatingNameCounts {Checking Name frequencies}
+ translate F Database {Base}
+ translate F Filter {Filtre}
+ translate F Reset {R�initialiser}
+Index: tcl/lang/greek.tcl
+===================================================================
+--- tcl/lang/greek.tcl	(revision 2823)
++++ tcl/lang/greek.tcl	(working copy)
+@@ -495,6 +495,8 @@
+ translate G Deleted {Διαγραμμένη}
+ translate G SearchResults {Αποτελέσματα Αναζήτησης}
+ translate G OpeningTheDatabase {Άνοιγμα Βάσης}
++# ====== TODO To be translated ======
++translate G UpdatingNameCounts {Checking Name frequencies}
+ translate G Database {Βάση}
+ translate G Filter {Φίλτρο}
+ # ====== TODO To be translated ======
+Index: tcl/lang/hungary.tcl
+===================================================================
+--- tcl/lang/hungary.tcl	(revision 2823)
++++ tcl/lang/hungary.tcl	(working copy)
+@@ -514,6 +514,8 @@
+ translate H Deleted {t�r�lt}
+ translate H SearchResults {A keres�s eredm�nye}
+ translate H OpeningTheDatabase {Adatb�zis megnyit�sa}
++# ====== TODO To be translated ======
++translate H UpdatingNameCounts {Checking Name frequencies}
+ translate H Database {Adatb�zis}
+ translate H Filter {Sz�r�}
+ # ====== TODO To be translated ======
+Index: tcl/lang/italian.tcl
+===================================================================
+--- tcl/lang/italian.tcl	(revision 2823)
++++ tcl/lang/italian.tcl	(working copy)
+@@ -497,6 +497,8 @@
+ translate I Deleted {Cancellato}
+ translate I SearchResults {Risultati della ricerca}
+ translate I OpeningTheDatabase {Database di aperture}
++# ====== TODO To be translated ======
++translate I UpdatingNameCounts {Checking Name frequencies}
+ translate I Database {Database}
+ translate I Filter {Filtro}
+ # ====== TODO To be translated ======
+Index: tcl/lang/nederlan.tcl
+===================================================================
+--- tcl/lang/nederlan.tcl	(revision 2823)
++++ tcl/lang/nederlan.tcl	(working copy)
+@@ -483,6 +483,8 @@
+ translate N Deleted {Verwijderd}
+ translate N SearchResults {Zoekresultaten}
+ translate N OpeningTheDatabase {Database aan het openen}
++# ====== TODO To be translated ======
++translate N UpdatingNameCounts {Checking Name frequencies}
+ translate N Database {Database}
+ translate N Filter {Filter}
+ # ====== TODO To be translated ======
+Index: tcl/lang/norsk.tcl
+===================================================================
+--- tcl/lang/norsk.tcl	(revision 2823)
++++ tcl/lang/norsk.tcl	(working copy)
+@@ -539,6 +539,8 @@
+ translate O Deleted {Slettet}
+ translate O SearchResults {S�k i resultater}
+ translate O OpeningTheDatabase {�pningsdatabase}
++# ====== TODO To be translated ======
++translate O UpdatingNameCounts {Checking Name frequencies}
+ translate O Database {Database}
+ translate O Filter {Filter}
+ # ====== TODO To be translated ======
+Index: tcl/lang/polish.tcl
+===================================================================
+--- tcl/lang/polish.tcl	(revision 2823)
++++ tcl/lang/polish.tcl	(working copy)
+@@ -472,6 +472,8 @@
+ translate P Deleted {Usunięta}
+ translate P SearchResults {Wyniki wyszukiwania}
+ translate P OpeningTheDatabase {Otwieranie bazy}
++# ====== TODO To be translated ======
++translate P UpdatingNameCounts {Checking Name frequencies}
+ translate P Database {Bazy}
+ translate P Filter {Filtr}
+ translate P Reset {Przeładuj}
+Index: tcl/lang/port.tcl
+===================================================================
+--- tcl/lang/port.tcl	(revision 2823)
++++ tcl/lang/port.tcl	(working copy)
+@@ -440,6 +440,8 @@
+ translate U Deleted {Apagado}
+ translate U SearchResults {Resultados da Pesquisa}
+ translate U OpeningTheDatabase {Abrindo a Base de Dados}
++# ====== TODO To be translated ======
++translate U UpdatingNameCounts {Checking Name frequencies}
+ translate U Database {Base de dados}
+ translate U Filter {Filtro}
+ translate U Reset {Repor}
+Index: tcl/lang/portbr.tcl
+===================================================================
+--- tcl/lang/portbr.tcl	(revision 2823)
++++ tcl/lang/portbr.tcl	(working copy)
+@@ -511,6 +511,8 @@
+ translate B Deleted {Apagado}
+ translate B SearchResults {Resultados da Pesquisa}
+ translate B OpeningTheDatabase {Abrindo a Base de Dados}
++# ====== TODO To be translated ======
++translate B UpdatingNameCounts {Checking Name frequencies}
+ translate B Database {Base de dados}
+ translate B Filter {Filtro}
+ # ====== TODO To be translated ======
+Index: tcl/lang/russian.tcl
+===================================================================
+--- tcl/lang/russian.tcl	(revision 2823)
++++ tcl/lang/russian.tcl	(working copy)
+@@ -460,6 +460,8 @@
+ translate R Deleted {Удалена}
+ translate R SearchResults {Поиск результатов}
+ translate R OpeningTheDatabase {Открытие базы данных}
++# ====== TODO To be translated ======
++translate R UpdatingNameCounts {Checking Name frequencies}
+ translate R Database {База данных}
+ translate R Filter {Фильтр}
+ translate R Reset {Сброс}
+Index: tcl/lang/serbian.tcl
+===================================================================
+--- tcl/lang/serbian.tcl	(revision 2823)
++++ tcl/lang/serbian.tcl	(working copy)
+@@ -538,6 +538,8 @@
+ translate Y Deleted {Izbrisano}
+ translate Y SearchResults {Tra�i rezultate}
+ translate Y OpeningTheDatabase {Otvaranje baze}
++# ====== TODO To be translated ======
++translate Y UpdatingNameCounts {Checking Name frequencies}
+ translate Y Database {Baza}
+ translate Y Filter {Filter}
+ # ====== TODO To be translated ======
+Index: tcl/lang/spanish.tcl
+===================================================================
+--- tcl/lang/spanish.tcl	(revision 2823)
++++ tcl/lang/spanish.tcl	(working copy)
+@@ -468,6 +468,8 @@
+ translate S Deleted {Borrar}
+ translate S SearchResults {Buscar resultados}
+ translate S OpeningTheDatabase {Abriendo base de datos}
++# ====== TODO To be translated ======
++translate S UpdatingNameCounts {Checking Name frequencies}
+ translate S Database {Base de datos}
+ translate S Filter {Filtro}
+ translate S Reset {Reiniciar}
+Index: tcl/lang/swedish.tcl
+===================================================================
+--- tcl/lang/swedish.tcl	(revision 2823)
++++ tcl/lang/swedish.tcl	(working copy)
+@@ -478,6 +478,8 @@
+ translate W Deleted {Raderad}
+ translate W SearchResults {S�kresultat}
+ translate W OpeningTheDatabase {�ppnar databas}
++# ====== TODO To be translated ======
++translate W UpdatingNameCounts {Checking Name frequencies}
+ translate W Database {Databas}
+ translate W Filter {Filter}
+ # ====== TODO To be translated ======
+Index: tcl/lang/turkish.tcl
+===================================================================
+--- tcl/lang/turkish.tcl	(revision 2823)
++++ tcl/lang/turkish.tcl	(working copy)
+@@ -420,6 +420,8 @@
+ translate T Deleted {silindi}
+ translate T SearchResults {arama sonuçları}
+ translate T OpeningTheDatabase {Açılış Veritabanı}
++# ====== TODO To be translated ======
++translate T UpdatingNameCounts {Checking Name frequencies}
+ translate T Database {Veritabanı}
+ translate T Filter {Filtre}
+ translate T Reset {Sıfırla}
+Index: tcl/misc/misc.tcl
+===================================================================
+--- tcl/misc/misc.tcl	(revision 2828)
++++ tcl/misc/misc.tcl	(working copy)
+@@ -287,6 +287,7 @@
+ 
+ #   Creates a window with a label, progress bar, and (if specified),
+ #   a cancel button and cancellation command.
++#   (Toplevel name also used in tkscid::sc_base_open)
+ 
+ proc progressWindow {args} {
+   set w .progressWin
