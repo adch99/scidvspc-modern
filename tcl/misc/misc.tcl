@@ -227,35 +227,53 @@ proc _autoscrollMap {frame} {
 array set scid_busycursor {}
 set scid_busycursorState 0
 
-### Way too complicated sh*t - S.A.
+# Change window cursor to busy/watch
+# Some children may have custom cursors, so (recursively) disable them temporarily
 
 proc doBusyCursor {w flag} {
   global scid_busycursor
-  if {! [winfo exists $w]} { return }
-  # The comment editor window "flashes" when its cursor is changed,
-  # no idea why but skip over it:
-  if {$w == ".commentWin"} { return }
-  if {[winfo class $w] == "Menu"} { return }
+
+  if {![winfo exists $w]} {
+    return
+  }
+
+  # The comment editor window "flashes" when its cursor is changed, Why ?
+  if {$w == ".commentWin"} {
+    return
+  }
+
+  if {[winfo class $w] == "Menu"} {
+    return
+  }
 
   if {$flag} {
-    if { [ catch { set scid_busycursor($w) [$w cget -cursor] } ] } {
+    if { [ catch {
+        set scid_busycursor($w) [$w cget -cursor]
+    } ] } {
       return
     }
     catch {$w configure -cursor watch}
   } else {
     catch {$w configure -cursor $scid_busycursor($w)} err
   }
-  foreach i [winfo children $w] { doBusyCursor $i $flag }
+  foreach i [winfo children $w] {
+    doBusyCursor $i $flag
+  }
 }
 
 proc busyCursor {w {flag 1}} {
   global scid_busycursor scid_busycursorState
-  if {$scid_busycursorState == $flag} { return }
+
+  if {$scid_busycursorState == $flag} {
+    return
+  }
   set scid_busycursorState $flag
   doBusyCursor $w $flag
 }
 
-proc unbusyCursor {w} {busyCursor $w 0}
+proc unbusyCursor {w} {
+  busyCursor $w 0
+}
 
 
 # addHorizontalRule, addVerticalRule
