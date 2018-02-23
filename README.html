@@ -121,13 +121,13 @@ project is authored by
 
 
 <P>Source 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.18.1.tgz/download">scid_vs_pc-4.18.1.tgz</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.19.tgz/download">scid_vs_pc-4.19.tgz</A></P>
 <P>Windows 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.18.1.exe/download">Scid vs PC-4.18.1.exe</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.19.exe/download">Scid vs PC-4.19.exe</A></P>
 <P>Windows 64 bit 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.18.1.x64.exe/download">Scid vs PC-4.18.1.x64.exe</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.19.x64.exe/download">Scid vs PC-4.19.x64.exe</A></P>
 <P>Mac 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.18.1.dmg/download">ScidvsMac-4.18.1.dmg</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.19.dmg/download">ScidvsMac-4.19.dmg</A></P>
 <P>
 <H3>Other resources</H3>
 
@@ -156,8 +156,8 @@ use <B>./configure BINDIR=/usr/bin/ SHAREDIR=/usr/share/scid/</B></EM></P>
 <P>Installing from source:</P>
 <HR>
 <PRE>
-tar -xzf scid_vs_pc-4.18.1.tgz
-cd scid_vs_pc-4.18.1
+tar -xzf scid_vs_pc-4.19.tgz
+cd scid_vs_pc-4.19
 ./configure
 sudo make install
 scid
@@ -184,7 +184,7 @@ C:\Users\[USERNAME]\AppData\Local\VirtualStore\Program Files\Scid vs PC</P>
 
 
 <P>The 
-<A HREF="#download_">ScidvsMac-4.18.1 app</A> should include everything you need. Simply drag and drop the App into /Applications (or similar).</P>
+<A HREF="#download_">ScidvsMac-4.19 app</A> should include everything you need. Simply drag and drop the App into /Applications (or similar).</P>
 <P>Due to complicated build reasons, it seems only Yosemite (OS X 10.10) and later are now supported. </P>
 <P><EM>Users upgrading may have to remove (or edit) <B>$HOME/.scidvspc/config/engines.dat</B>
 to properly configure the chess engines.</EM></P>
@@ -431,6 +431,36 @@ Chessbase databases and many chess variants.</P>
 
 
 <P>
+<H3>Scid vs. PC 4.19</H3>
+
+<P>
+<UL>
+<LI>New 'Default Databases' feature (Options->Save Bases as Default).</LI>
+<LI>CQL 5.2 search feature (Search->CQL). Thanks Lionel and CQL authors.</LI>
+<LI>General search can now match any (non-hidden) pre-game or final move Comment.</LI>
+<LI>Export Scid Flags feature.</LI>
+<LI>Big speed up for bulk Strip Comments/Variations feature. (Also make the 'Stop' button work).</LI>
+<LI>Improvements to loading games at the correct position (resolve a conflict between the tree window and search results), and small Tree speed-up.</LI>
+<LI>New 'Ascii' chess pieces (thanks HGM) and 'Green' colour scheme.</LI>
+<LI>New Turkish translation (thanks Ali Sen).<BR><BR>
+</LI>
+<LI>Some tree tweaks and doco updates, and tree Fast+Slow mode now doesn't break the win/lose graph.</LI>
+<LI>Tweak progress bar update frequencies (base export, game copy).</LI>
+<LI>OS X has a faster build.</LI>
+<LI>New Windows build system from Oz.</LI>
+<LI>A new script, 'sc_filter_pgn', which filters multiple PGN files for games matching a certain position.</LI>
+<LI>FICS - Offers Graph is disabled while playing a game. Change the censor button a little, and control+censor censors person chatting to you.</LI>
+<LI>Input engine fixes (DGT board). Widget now resizes ok, and bitmaps display properly on OS X. Thanks to Davy De Roeck for debugging it on OS X.<BR><BR>
+
+Bug Fixes</LI>
+<LI>Fixes regarding other language piece letters.</LI>
+<LI>Fix up showing the first gamelist/game in searches.</LI>
+<LI>Fix up the days of the months in the calender widget.</LI>
+<LI>Fix up window placement on multi display desktops.</LI>
+<LI>Best games 'Reset Column titles' was broke.</LI>
+<LI>sc_game startPos segfaults if !HasNonStandardStart.</LI>
+</UL>
+</P>
 <H3>Scid vs. PC 4.18</H3>
 
 
@@ -810,7 +840,7 @@ Analysis and Annotation changes:</LI>
 <LI>Strip PGN Tags improvements </LI>
 <LI>Right-clicking toolbar Game-Save icon quick saves game.</LI>
 <LI>Sound devices can now be selected; mainly useful for Linux systems</LI>
-<LI>Dont insert newlines into PGN copied to text buffer... Some web PGN browsers don't work with newlines following movenum. eg "10.<BR>Nxc3"</LI>
+<LI>Dont insert newlines into PGN copied to text buffer... Some web PGN browsers don't work with newlines following movenum. eg "10.(newline)Nxc3"</LI>
 <LI>Save game history when Scid quits</LI>
 <LI>Remove tree status bar. Same info avail in switcher and tree text widget. </LI>
 <LI>Booktuning nextmove is now highlighted (same as Book), and padding has been tweaked a bit.</LI>

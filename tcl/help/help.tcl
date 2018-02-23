@@ -6220,6 +6220,36 @@ set helpText(Sound) {<h1>Sound</h1>
 
 set helpTitle(Changelog) "Scid vs PC Changelog"
 set helpText(Changelog) {<h1>Changelog</h1>
+<h4>4.19 (March 15, 2018)</h4>
+<ul>
+
+<li>New 'Default Databases' feature (Options-<gt>Save Bases as Default)</li>
+<li>CQL 5.2 search feature (Search-<gt>CQL). Thanks Lionel and CQL authors</li>
+<li>General search can now match any (non-hidden) pre-game or final move Comment</li>
+<li>Export Scid Flags feature</li>
+<li>Big speed up for bulk Strip Comments/Variations feature. (Also make the 'Stop' button work)</li>
+<li>Improvements to loading games at the correct position (resolve a conflict between the tree window and search results), and small Tree speed-up</li>
+<li>New 'Ascii' chess pieces (thanks HGM) and 'Green' colour scheme</li>
+<li>New Turkish translation (thanks Ali Sen)</li>
+<br>
+
+<li>Some tree tweaks and doco updates, and tree Fast+Slow mode now doesn't break the win/lose graph</li>
+<li>Tweak progress bar update frequencies (base export, game copy)</li>
+<li>OS X has a faster build</li>
+<li>New Windows build system from Oz</li>
+<li>A new script, 'sc_filter_pgn', which filters multiple PGN files for games matching a certain position</li>
+<li>FICS - Offers Graph is disabled while playing a game. Change the censor button a little, and control+censor censors person chatting to you</li>
+<li>Input engine fixes (DGT board). Widget now resizes ok, and bitmaps display properly on OS X. Thanks to Davy De Roeck for debugging it on OS X</li>
+</ul><br>
+<b>Bug Fixes</b>
+<ul>
+<li>Fixes regarding other language piece letters</li>
+<li>Fix up showing the first gamelist/game in searches</li>
+<li>Fix up the days of the months in the calender widget</li>
+<li>Fix up window placement on multi display desktops</li>
+<li>Best games 'Reset Column titles' was broke</li>
+<li>sc_game startPos segfaults if !HasNonStandardStart</li>
+</ul>
 
 <h4>4.18 (July 1, 2017)</h4>
 <ul>
@@ -7092,27 +7122,6 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li> Numerous GUI fixes</li>
 <li> Revert PlayerInfo to old format, but add a "Won Drawn Lost" header</li>
 <li> Tweak crosstable knock-out format</li>
-</ul>
-
-<h4>4.2 (December 10, 2010)</h4>
-<ul>
-<li> si4 database support</li>
-<li> Tree and mask improvements from Scid (excepting Fulvio's delayed tree code, which has issues)</li>
-<li> Overhaul right-click menu and allow toolbar / menubar / statusbar to be hidden</li>
-<li> Allow tournament games to start from current position
-<li> Easier 64 bit compilation</li>
-<li> Include Scid's correspondence feature</li>
-<li> Make analysis widget info properly hideable, and tweak buttons</li>
-<li> Tweak game save forms
-<li> A couple of Mac fixes, including the broken gamelist widget (bad!)</li>
-<li> Restructure game info widget - Player names are more prominent, Length field added, Colors made consistent</li>
-<li> Reincluded Merida2 pieces</li>
-<li> Remove Repertoire editor (same functionality via Tree Masks)</li>
-<li> New Finder rename function</li>
-<li> PGN indentation fix (especially for comments)</li>
-<li> Work around for batch annotation bug (still under dev by Joost)</li>
-<li> Header search widget tidy</li>
-<li> New icon</li>
 </ul>
 }
 
