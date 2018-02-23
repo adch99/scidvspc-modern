@@ -191,12 +191,15 @@ set helpMessage($m,[incr menuindex]) EditRedo
 bind .main <Control-z> {menuUndo undo}
 bind .main <Control-y> {menuUndo redo}
 
-# Little procedure to handle undo fails because of trial mode
-# - but (in tkscid) don't handle buffer zeros this way. Statusbar already shows if game altered
-
 proc menuUndo {action} {
-  if {![catch {sc_game $action}]} {
-    updateBoard -pgn
+  if {[catch {set changed [sc_game $action]} result]} {
+    # undo/redo fails because of trial mode throw error
+    set ::statusBar $result
+  } else {
+    # returns 0/fail if no action taken
+    if {$changed != "0"} {
+      updateBoard -pgn
+    }
   }
 }
 

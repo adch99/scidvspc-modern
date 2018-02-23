@@ -6125,31 +6125,30 @@ sc_game (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         break;
 
     case GAME_TRUNCATEANDFREE:
-            old_language = language;
-            language = 0;
-           // Truncate from the current position to the end of the game
-           // and free moves memory (to FreeList
-            db->game->TruncateAndFree();
-            db->gameAltered = true;
-            language = old_language;
-        break;
+	// Unused todo : test TruncateAndFree (which fixes minor memory leaks)
+
+	old_language = language;
+	language = 0;
+	db->game->TruncateAndFree();
+	db->gameAltered = true;
+	language = old_language;
+	break;
 
     case GAME_UNDO:
-	if (trialMode) {
-	    Tcl_Eval (ti, "set ::statusBar {'undo' disabled in trial mode}");
-	    return TCL_ERROR;
-	}
+	if (trialMode) 
+	    return errorResult (ti, "'undo' disabled in trial mode");
 
-        if (db->undoIndex > -1) {
-	    g = db->game;
-            // Save this game for later redo
-	    db->game = db->undoGame[db->undoIndex];
-	    db->undoGame[db->undoIndex] = g;
+	if (db->undoIndex <= -1)
+	    return setResult (ti, "0");
 
-	    db->undoIndex--;
-	    db->gameAltered = (db->undoIndex != db->undoCurrent) || db->undoCurrentNotAvail ;
-        }
-        break;
+	g = db->game;
+	// Save this game for later redo
+	db->game = db->undoGame[db->undoIndex];
+	db->undoGame[db->undoIndex] = g;
+
+	db->undoIndex--;
+	db->gameAltered = (db->undoIndex != db->undoCurrent) || db->undoCurrentNotAvail ;
+	break;
 
     case GAME_MAKE_UNDO_POINT:
         if (trialMode)
@@ -6203,22 +6202,21 @@ sc_game (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         break;
 
     case GAME_REDO:
-	if (trialMode) {
-	    Tcl_Eval (ti, "set ::statusBar {'redo' disabled in trial mode}");
-	    return TCL_ERROR;
-	}
+	if (trialMode)
+	    return errorResult (ti, "'redo' disabled in trial mode");
 
-        if (db->undoIndex < db->undoMax) {
-	    db->undoIndex++;
-            // swap current game and undoGame[db->undoIndex]
-	    g = db->undoGame[db->undoIndex];
-	    db->undoGame[db->undoIndex] = db->game;
+	if (db->undoIndex >= db->undoMax)
+	    return setResult (ti, "0");
 
-	    // db->gameAltered = true; //g->GetAltered();
-	    db->gameAltered = (db->undoIndex != db->undoCurrent) || db->undoCurrentNotAvail ;
-	    db->game = g;
-        }
-        break;
+	db->undoIndex++;
+	// swap current game and undoGame[db->undoIndex]
+	g = db->undoGame[db->undoIndex];
+	db->undoGame[db->undoIndex] = db->game;
+
+	// db->gameAltered = true; //g->GetAltered();
+	db->gameAltered = (db->undoIndex != db->undoCurrent) || db->undoCurrentNotAvail ;
+	db->game = g;
+	break;
 
     default:
         return InvalidCommand (ti, "sc_game", options);
