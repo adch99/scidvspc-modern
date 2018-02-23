@@ -630,10 +630,8 @@ set helpText(MainWindow) {<h1>Scid vs. PC's Main Window</h1>
   <li> <button autoplay_off> Start/stop <a MainWindow Autoplay>Autoplay mode</a> [control+z] (Right-click autoplays all filter games)</li>
   <li> <button tb_trial> Start/stop <a Moves Trial>Trial mode</a> [control+space] </li>
   <li> <button tb_flip> Flip the board [control+f]</li>
-  <li> <button tb_windows> Raise open windows [tab]. This feature may only work if you disable your window-manager's focus stealing policy.</li>
+  <li> <button tb_windows> Raise open windows [tab]. This feature may only work if you disable your window-manager's focus stealing policy. (Right-click shows Splash window)</li>
   </ul>
-  </p><p>
-  Additionally, Control-button + Autoplay will play through all filter games.
   </p>
 
   <h4><name Toolbar>Toolbar</name></h4>
@@ -684,7 +682,7 @@ set helpText(MainWindow) {<h1>Scid vs. PC's Main Window</h1>
   be set from the <green>Options--<gt>Moves</green> menu
   </p>
   <p>
-  Pressing Control-Autoplay, allows autoplay to progress through all filter games.
+  Right-clicking Autoplay allows autoplay to progress through all filter games.
   </p>
   <p>
   Autoplay is also started when the
@@ -926,7 +924,7 @@ set helpText(Moves) {<h1>Move Entry and Options</h1>
   Pressing the Trial Mode button a second time ends Trial Mode, and reverts the game to it's original form.
   </p>
   <p>
-  Control-Button enters Trial Mode, and automatically adds a <a Variations Null>null move</a>. This is handy to see immediate threats with chess engines.
+  Right-clicking enters Trial Mode, and automatically adds a <a Variations Null>null move</a>. This is handy to see immediate threats with chess engines.
   </p>
   <p><i>
   Game Saves, Undo and Redo are disabled in Trial Mode.
