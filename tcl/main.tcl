@@ -381,9 +381,19 @@ button .main.button.autoplay -image autoplay_off -command toggleAutoplay
 button .main.button.trial    -image tb_trial     -command {setTrialMode toggle}
 button .main.button.flip     -image tb_flip      -command toggleRotateBoard
 button .main.button.windows  -image tb_windows   -command {raiseAllWindows 1}
-# Control-click Autoplays all games in filter
-bind .main.button.autoplay <Control-Button-1> {toggleAutoplay 2 ; break}
-bind .main.button.trial    <Control-Button-1>  {setTrialMode toggleNull ; break}
+
+# Right-click raises .splash
+bind .main.button.windows <Button-3> {
+  wm deiconify .splash
+  raise .splash
+  break
+}
+
+# Right-click Autoplays all games in filter
+bind .main.button.autoplay <Button-3> {toggleAutoplay 2 ; break}
+
+# Right-click adds a null move and enters trial mode
+bind .main.button.trial    <Button-3>  {setTrialMode toggleNull ; break}
 
 ::utils::tooltip::Set .main.button.autoplay [tr AutoPlay]
 ::utils::tooltip::Set .main.button.trial [tr TrialMode]
