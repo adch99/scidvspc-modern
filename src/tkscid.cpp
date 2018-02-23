@@ -6135,8 +6135,10 @@ sc_game (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         break;
 
     case GAME_UNDO:
-        if (trialMode)
-            break;
+	if (trialMode) {
+	    Tcl_Eval (ti, "set ::statusBar {'undo' disabled in trial mode}");
+	    return TCL_ERROR;
+	}
 
         if (db->undoIndex > -1) {
 	    g = db->game;
@@ -6201,8 +6203,10 @@ sc_game (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         break;
 
     case GAME_REDO:
-        if (trialMode)
-            break;
+	if (trialMode) {
+	    Tcl_Eval (ti, "set ::statusBar {'redo' disabled in trial mode}");
+	    return TCL_ERROR;
+	}
 
         if (db->undoIndex < db->undoMax) {
 	    db->undoIndex++;

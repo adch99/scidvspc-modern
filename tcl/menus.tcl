@@ -184,12 +184,21 @@ incr menuindex
 $m add cascade -label EditStrip -menu $m.strip
 set helpMessage($m,[incr menuindex]) EditStrip
 
-$m add command -label EditUndo -command {sc_game undo ; updateBoard -pgn}
+$m add command -label EditUndo -command {menuUndo undo}
 set helpMessage($m,[incr menuindex]) EditUndo
-$m add command -label EditRedo -command {sc_game redo ; updateBoard -pgn}
+$m add command -label EditRedo -command {menuUndo redo}
 set helpMessage($m,[incr menuindex]) EditRedo
-bind .main <Control-z> {sc_game undo ; updateBoard -pgn}
-bind .main <Control-y> {sc_game redo ; updateBoard -pgn}
+bind .main <Control-z> {menuUndo undo}
+bind .main <Control-y> {menuUndo redo}
+
+# Little procedure to handle undo fails because of trial mode
+# - but (in tkscid) don't handle buffer zeros this way. Statusbar already shows if game altered
+
+proc menuUndo {action} {
+  if {![catch {sc_game $action}]} {
+    updateBoard -pgn
+  }
+}
 
 $m add separator
 incr menuindex
