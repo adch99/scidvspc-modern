@@ -60,18 +60,28 @@ menuText S EditStripEnd "Movimientos hasta el final" 0 \
   {Quita los movimientos hasta el final de la partida}
 menuText S EditReset "Poner a cero la base de trabajo" 0 \
   {Pone a cero la base de trabajo (clipbase) para que esté completamente vacía}
-menuText S EditCopy "Copiar esta partida a la base de trabajo" 1 \
-  {Copia esta partida a la base de trabajo (clipbase)}
-menuText S EditPaste "Pegar la última partida de la base de trabajo" 2 \
-  {Pega la partida activa en la base de trabajo (clipbase) aquí}
-menuText S EditPastePGN "Pegar el texto de la base de trabajo como partida PGN..." 10 \
-  {Interpreta el texto de la base de trabajo (clipbase) como una partida en notacion PGN y la pega aquí}
-menuText S EditSetup "Iniciar tablero de posición..." 26 \
+# Benigno
+menuText S EditCopy "Copiar partida a Clipbase" 1 \
+  {Copia esta partida a Clipbase}
+# Benigno
+menuText S EditPaste "Pegar última partida de Clipbase" 2 \
+  {Pega la última partida de la Clipbase aquí}
+
+# Benigno
+menuText S EditPastePGN "Pegar texto como partida PGN..." 10 \
+  {Interpreta el texto del portapapeles como una partida en notacion PGN y la pega aquí}
+
+# Benigno
+menuText S EditSetup "Editar posición..." 26 \
   {Inicia el tablero de posición con la posición de la partida}
+
 menuText S EditCopyBoard "Copiar posición" 8 \
   {Copia el tablero actual en notación FEN a la selección de texto (clipboard)}
-menuText S EditCopyPGN "Copiar PGN" 0 {}
-menuText S EditPasteBoard "Pegar tablero inicial" 6 \
+# Benigno
+menuText S EditCopyPGN "Copiar partida PGN" 0 {} 
+
+# Benigno
+menuText S EditPasteBoard "Pegar posición" 6 \
   {Coloca el tablero inicial de la selección de texto actual (clipboard)}
 
 # Game menu:
@@ -104,8 +114,11 @@ menuText S GameNovelty "Encontrar novedad" 7 \
 
 # Search Menu:
 menuText S Search "Buscar" 0
-menuText S SearchReset "Poner a cero el filtro" 0 \
-  {Poner a cero el filtro para que todas la partidas estén incluidas}
+
+# Benigno
+menuText S SearchReset "Reiniciar el filtro" 0 \
+  {Eliminar el filtro para que todas la partidas estén incluidas}
+
 menuText S SearchNegate "Invertir filtro" 0 {Invierte el filtro para sólo incluir las partidas excluidas}
 menuText S SearchEnd "Mover a último filtro" 0
 menuText S SearchCurrent "Tablero actual..." 0 \
@@ -344,8 +357,9 @@ menuText S OptionsTacticsBasesDir "Carpeta de bases" 0 {Fija la carpeta de la ba
 menuText S OptionsInformant "Configurar valores de información" 0
 menuText S OptionsSave "Guardar opciones" 0 \
   "Guarda todas las opciones en el fichero $::optionsFile"
-# ====== TODO To be translated ======
-menuText S OptionsSaveBases "Save Bases as Default" 0 
+
+menuText S OptionsSaveBases "Guardar bases por defecto" 0 
+
 menuText S OptionsAutoSave "Autoguardar opciones al salir" 0 \
   {Guarda automáticamente todas las opciones cuando se sale de Scid}
 
@@ -385,8 +399,8 @@ translate S FlipBoard {Girar el tablero}
 translate S RaiseWindows {Aumentar ventanas}
 translate S AutoPlay {Reproducción automática}
 translate S TrialMode {Modo de prueba}
-# ====== TODO To be translated ======
-translate S KeepOpen {Keep open after startup}
+
+translate S KeepOpen {Mantener abierto después del inicio}
 
 # General buttons:
 translate S Apply {Aplicar}
@@ -898,10 +912,8 @@ translate S BrilliancyFlag {Genialidad}
 translate S BlunderFlag {Error}
 translate S UserFlag {Usuario}
 translate S PgnContains {PGN contiene texto}
-# ====== TODO To be translated ======
-translate S PreComment {Pre-game Comment}
-# ====== TODO To be translated ======
-translate S PostComment {End Comment}
+translate S PreComment {Comentario previo al juego}
+translate S PostComment {Fin del comentario} 
 
 # Game list window:
 translate S GlistNumber {Número}
@@ -1052,7 +1064,10 @@ translate S BoardSearch {Tablero de búsqueda}
 translate S FilterOperation {Operación en filtro actual:}
 translate S FilterAnd {Y (Restringir filtro)}
 translate S FilterOr {O (Añadir al filtro)}
-translate S FilterIgnore {IGNORAR (Poner a cero el filtro)}
+
+# Benigno
+translate S FilterIgnore {IGNORAR (Reiniciar el filtro)}
+
 translate S SearchType {Tipo de búsqueda}
 translate S SearchBoardExact {Posición exacta (todas las piezas en las mismas casillas)}
 translate S SearchBoardPawns {Peones (igual material, todos los peones en las mismas casillas)}
@@ -1060,12 +1075,9 @@ translate S SearchBoardFiles {Columnas (igual material, todos los peones en las 
 translate S SearchBoardAny {Cualquiera (igual material, peones y piezas en cualquier parte)}
 translate S SearchInRefDatabase {Búsqueda en la base de referencia}
 translate S LookInVars {Mirar en variaciones}
-# ====== TODO To be translated ======
-translate S CQLLabel {CQL Script}
-# ====== TODO To be translated ======
-translate S CQLComments {Allow Comments}
-# ====== TODO To be translated ======
-translate S CQLStrip {Strip Match Comments}
+translate S CQLLabel {Búsqueda CQL}
+translate S CQLComments {Permite comentarios}
+translate S CQLStrip {Quita comentarios de la partida}
 
 # Material search:
 translate S MaterialSearch {Búsqueda de material}
@@ -1346,8 +1358,8 @@ translate S IndentVariations {¿Sangrar variaciones?}
 translate S ExportColumnStyle {¿Estilo de columna (un movimiento por línea)?}
 translate S ExportSymbolStyle {Estilo de anotación simbólico:}
 translate S ExportStripMarks {¿Quitar marca de códigos de casilla/flecha de los comentarios?}
-# ====== TODO To be translated ======
-translate S ExportFlags {Export Scid Flags}
+
+translate S ExportFlags {Exportar Marcas de Scid}
 
 # Goto game/move dialogs:
 translate S LoadGameNumber {Entra el número de la partida a cargar:}
