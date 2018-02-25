@@ -60,10 +60,19 @@ WinMMap::WinMMap(char const* filename)
     // enables success mingw-w64 32 compilers, but creates a nasty conflict on mingw-64 64 bit compilers.
     // Since mingw does not have a 60 bit compiler, we probably need VCC to make this work
     // But not really an issue as modern windows systems have fast file accesses anyway.
+
+    // Update Feb 2018
+    // Since moving to native gcc windows builds, we have enabled the FILE_SHARE_READ | FILE_SHARE_WRITE
+    // options below, which work with fast file opens on Oz's machine,
+    // and also my 32bit mint17 g++-mingw-w64-i686: /usr/bin/i686-w64-mingw32-c++ system.
+    // Oz also sent some good info about the previous mingw builds on Fedora
+    // See gmail "Scid 4.19 mmap file opens"
+    // (but these system builds now fail with our new (CQL) C++11 features).
+
     m_file = CreateFileA(
 					filename,
 					GENERIC_READ,
-					0, // FILE_SHARE_READ | FILE_SHARE_WRITE 
+					FILE_SHARE_READ | FILE_SHARE_WRITE ,
 					0,
 					OPEN_EXISTING,
 					FILE_FLAG_SEQUENTIAL_SCAN | FILE_ATTRIBUTE_READONLY | FILE_ATTRIBUTE_TEMPORARY,
