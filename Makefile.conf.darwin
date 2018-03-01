@@ -269,7 +269,7 @@ SCRIPTS= sc_remote scidpgn
 
 all: all_scid engines
 
-all_scid: scid $(SCRIPTS) $(EXECS)
+all_scid: scid mac_buttons $(SCRIPTS) $(EXECS)
 
 engines: phalanx toga
 
@@ -361,7 +361,7 @@ scid: $(TCLS)
 
 ### Mac OSX App
 
-mac_app: all_scid engines mac_rename mac_buttons
+mac_app: all_scid engines mac_rename
 	install -m 755 -d dist/ScidvsMac.app/Contents/MacOS
 	install -m 755 -d dist/ScidvsMac.app/Contents/Resources/data
 	install -m 755 -d dist/ScidvsMac.app/Contents/Resources/books
