@@ -1533,7 +1533,17 @@ if {$::macOS} {
   bind .main <BackSpace> ::move::Back
 }
 
-bind .main <Escape> "moveEntry_Clear 1"
+bind .main <Escape> clearAllMoves
+
+# Clear all keyboard and mouse move events
+proc clearAllMoves {} {
+  moveEntry_Clear 1
+  if {$::selectedSq > -1} {
+    pressSquare $::selectedSq 0
+  }
+  releaseSquare .main.board -1 -1
+}
+
 bind .main <Tab> {raiseAllWindows 1}
 
 bind .main <Return> addAnalysisMove

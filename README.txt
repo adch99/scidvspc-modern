@@ -553,6 +553,9 @@
 
   o  New Turkish translation (thanks Ali Sen).
 
+  o  Right-clicking button bar changes, including right-click Window
+     button shows Splash window.
+
   o  Some tree tweaks and doco updates, and tree Fast+Slow mode now
      doesn't break the win/lose graph.
 
@@ -568,6 +571,8 @@
   o  FICS - Offers Graph is disabled while playing a game. Change the
      censor button a little, and control+censor censors person chatting
      to you.
+
+  o  Escape key in main board cancels piece dragging/move.
 
   o  Input engine fixes (DGT board). Widget now resizes ok, and bitmaps
      display properly on OS X. Thanks to Davy De Roeck for debugging it

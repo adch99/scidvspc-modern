@@ -1275,13 +1275,14 @@ proc getPromoPiece {} {
 #      "replace" to replace the move, truncating the game.
 #      "var" to add the move as a new variation.
 #      "cancel" to do nothing.
-#
+
 set addVariationWithoutAsking 0
 
 proc confirmReplaceMove {} {
-  global askToReplaceMoves trialMode
+  global askToReplaceMoves trialMode selectedSq
 
-  set ::selectedSq -1 ;# may fix a rare bug about move clicking S.A.
+  ### Now done later, as selectedSq is used by clearAllMoves to uncheck dragged (cancelled) moves
+  # set ::selectedSq -1 ;# may fix a rare bug about move clicking S.A.
 
   if {$::addVariationWithoutAsking} { return var }
 
@@ -1299,12 +1300,13 @@ proc confirmReplaceMove {} {
         $::tr(AddNewVar) [tr EditTrial] \
         $::tr(Cancel)} answer
   option add *Dialog.msg.wrapLength 3i interactive
-  if {$answer == 0} { return replace }
-  if {$answer == 1} { return mainline }
-  if {$answer == 2} { return var }
-  if {$answer == 3} { setTrialMode 1; return replace }
+  if {$answer == 0} { set ::selectedSq -1 ; return replace }
+  if {$answer == 1} { set ::selectedSq -1 ; return mainline }
+  if {$answer == 2} { set ::selectedSq -1 ; return var }
+  if {$answer == 3} { set ::selectedSq -1 ; setTrialMode 1; return replace }
 
-  return cancel
+  # answer == 4
+  clearAllMoves ; return cancel
 }
 
 ### unused S.A.
