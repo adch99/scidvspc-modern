@@ -549,7 +549,8 @@
      conflict between the tree window and search results), and small
      Tree speed-up.
 
-  o  New 'Ascii' chess pieces (thanks HGM) and 'Green' colour scheme.
+  o  Remove 'Magnetic' for Paul's chess pieces. New 'Ascii' chess pieces
+     (thanks HGM) and 'Green' colour scheme.
 
   o  New Turkish translation (thanks Ali Sen).
 
