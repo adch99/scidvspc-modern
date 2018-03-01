@@ -404,16 +404,18 @@ Chessbase databases and many chess variants.</p>
 <item>Export Scid Flags feature.
 <item>Big speed up for bulk Strip Comments/Variations feature. (Also make the 'Stop' button work).
 <item>Improvements to loading games at the correct position (resolve a conflict between the tree window and search results), and small Tree speed-up.
-<item>New 'Ascii' chess pieces (thanks HGM) and 'Green' colour scheme.
+<item>Remove 'Magnetic' for Paul's chess pieces. New 'Ascii' chess pieces (thanks HGM) and 'Green' colour scheme.
 <item>New Turkish translation (thanks Ali Sen).
 <newline><newline>
 
+<item>Right-clicking button bar changes, including right-click Window button shows Splash window.
 <item>Some tree tweaks and doco updates, and tree Fast+Slow mode now doesn't break the win/lose graph.
 <item>Tweak progress bar update frequencies (base export, game copy).
 <item>OS X has a faster build.
 <item>New Windows build system from Oz.
 <item>A new script, 'sc_filter_pgn', which filters multiple PGN files for games matching a certain position.
 <item>FICS - Offers Graph is disabled while playing a game. Change the censor button a little, and control+censor censors person chatting to you.
+<item>Escape key in main board cancels piece dragging/move.
 <item>Input engine fixes (DGT board). Widget now resizes ok, and bitmaps display properly on OS X. Thanks to Davy De Roeck for debugging it on OS X.
 <newline><newline>
 

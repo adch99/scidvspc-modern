@@ -893,6 +893,7 @@ set helpText(Moves) {<h1>Move Entry and Options</h1>
   Castling is done with <b>OO</b>, or <b>OK</b> and <b>OQ</b>
   for King and Queenside respectively. For more info, see below.
   </p>
+  <p><i>Pressing </i><b>Escape</b><i> cancels keyboard and mouse move entry.</i></p>
 
   <h4>Replacing Moves</h4>
   <p>
@@ -6227,16 +6228,18 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li>Export Scid Flags feature</li>
 <li>Big speed up for bulk Strip Comments/Variations feature. (Also make the 'Stop' button work)</li>
 <li>Improvements to loading games at the correct position (resolve a conflict between the tree window and search results), and small Tree speed-up</li>
-<li>New 'Ascii' chess pieces (thanks HGM) and 'Green' colour scheme</li>
+<li>Remove 'Magnetic' for Paul's chess pieces. New 'Ascii' chess pieces (thanks HGM), and 'Green' colour scheme</li>
 <li>New Turkish translation (thanks Ali Sen)</li>
 <br>
 
+<li>Right-clicking button bar changes, including right-click Window button shows Splash window</li>
 <li>Some tree tweaks and doco updates, and tree Fast+Slow mode now doesn't break the win/lose graph</li>
 <li>Tweak progress bar update frequencies (base export, game copy)</li>
 <li>OS X has a faster build</li>
 <li>New Windows build system from Oz</li>
 <li>A new script, 'sc_filter_pgn', which filters multiple PGN files for games matching a certain position</li>
 <li>FICS - Offers Graph is disabled while playing a game. Change the censor button a little, and control+censor censors person chatting to you</li>
+<li>Escape key in main board cancels piece dragging/move</li>
 <li>Input engine fixes (DGT board). Widget now resizes ok, and bitmaps display properly on OS X. Thanks to Davy De Roeck for debugging it on OS X</li>
 </ul><br>
 <b>Bug Fixes</b>
