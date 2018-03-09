@@ -1561,6 +1561,7 @@ bind .main <minus><minus> "addMove null null"
 proc standardWheelMouseBindings {} {
   # MouseWheel in main window
   if {$::windowsOS || $::macOS} {
+  if {$::windowsOS || $::macWheelMouse } {
     bind .main <MouseWheel> {
       if {[expr -%D] < 0} { ::move::Back }
       if {[expr -%D] > 0} { ::move::Forward }
@@ -1573,6 +1574,7 @@ proc standardWheelMouseBindings {} {
 	if {[expr -%D] > 0} {::board::resize .main.board -1}
       }
     }
+  }
   } else {
     bind .main <Button-4> ::move::Back
     bind .main <Button-5> ::move::Forward
