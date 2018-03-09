@@ -934,7 +934,7 @@ $m add command -label OptionsSave -command {
     ::tools::graphs::filter::type  ::tools::graphs::absfilter::type ::tools::graphs::showpoints ::tools::graphs::showbar
     maintFlag useGraphFigurine photosMinimized bookmarks(gamehistory) playerInfoHistory defaultDBs
     glistSize glexport glistColOrder glistColWidth glistColAnchor addRatings(overwrite) addRatings(filter)
-    blistColOrder blistColWidth blistColAnchor} {
+    blistColOrder blistColWidth blistColAnchor macWheelMouse} {
 
       puts $optionF "set $i [list [set $i]]"
 
@@ -1017,6 +1017,21 @@ set helpMessage($m,[incr menuindex]) OptionsSave
 
 $m add checkbutton -label OptionsAutoSave -variable optionsAutoSave
 set helpMessage($m,[incr menuindex]) OptionsAutoSave
+
+if {$::macOS} {
+# God-fucking-awful hack to fix broken OS X non-handling of magic mouse wheel 
+# The hardware has a very sensitive wheel, but nowhere to disable it. S.A
+$m add checkbutton -label "Enable Wheelmouse " -variable macWheelMouse -command {
+  if {$::macWheelMouse} {
+    bind .main <MouseWheel> {
+      if {[expr -%D] < 0} { ::move::Back }
+      if {[expr -%D] > 0} { ::move::Forward }
+    }
+  } else {
+    bind .main <MouseWheel> {}
+  }
+}
+}
 
 menu $m.ginfo -tearoff 1
 $m.ginfo add checkbutton -label GInfoHideNext \
