@@ -2425,49 +2425,37 @@ proc ::board::stm {w} {
 
 }
 
-# ::board::coords
-#   Add or remove coordinates around the edge of the board.
-#   Klimmek: Toggle between 0,1,2.
+# Display/update coordinates around the edge of the board 
+# Currently only used by .main.board (i think)
+# Values are 0 (none), 1 (single sided coords), 2 (double sided)
 
 proc ::board::coords {w} {
-  set coords [expr {1 + $::board::_coords($w)} ]
-  if { $coords > 2 } { set coords 0 }
-  set ::board::_coords($w) $coords
-
+  set coords $::board::_coords($w)
   if {$coords == 0 } {
-    for {set i 1} {$i <= 8} {incr i} {
-      grid configure $w.lrank$i
-      grid configure $w.rrank$i
-    }
-    foreach i {a b c d e f g h} {
-      grid configure $w.tfile$i
-      grid configure $w.bfile$i
-    }
+    set action1 remove
+    set action2 remove
   } elseif {$coords == 1 } {
-    for {set i 1} {$i <= 8} {incr i} {
-      grid remove $w.lrank$i
-      grid remove $w.rrank$i
-    }
-    foreach i {a b c d e f g h} {
-      grid remove $w.tfile$i
-      grid remove $w.bfile$i
-    }
-  } else { #Klimmek: coords == 2 then show left and bottom
-    for {set i 1} {$i <= 8} {incr i} {
-      grid configure $w.lrank$i
-      grid remove $w.rrank$i
-    }
-    foreach i {a b c d e f g h} {
-      grid remove $w.tfile$i
-      grid configure $w.bfile$i
-    }
+    set action1 configure
+    set action2 remove
+  } else { # coords == 2
+    set action1 configure
+    set action2 configure
+  }
+
+  foreach i {1 2 3 4 5 6 7 8} {
+    grid $action1 $w.lrank$i
+    grid $action2 $w.rrank$i
+  }
+  foreach i {a b c d e f g h} {
+    grid $action1 $w.bfile$i
+    grid $action2 $w.tfile$i
   }
 }
 
-# ::board::animate
+
 #   Check for board changes that appear to be a valid chess move,
 #   and start animating the move if applicable.
-#
+
 proc ::board::animate {w oldboard newboard} {
   global animateDelay
   variable castlingList

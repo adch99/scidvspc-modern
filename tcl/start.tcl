@@ -1074,12 +1074,7 @@ proc resizeMainBoard {} {
   }
 
   # coordinates
-  if { $::board::_coords($bd) == 2 || $::board::_coords($bd) == 0} {
-    incr height_used [ lindex [ grid bbox $bd 1 9 ] 3 ]
-  }
-  if { $::board::_coords($bd) == 0 } {
-    incr height_used [ lindex [ grid bbox $bd 1 0 ] 3 ]
-  }
+  incr height_used [expr {$::fd_size * $::boardCoords}]
 
   # game info &&& fixme
   set min_game_info_height [expr {6 + $gameInfo(showFEN) + $::macOS}]
@@ -1111,14 +1106,11 @@ proc resizeMainBoard {} {
   set width_used 12
   if {[winfo exists .fics]} {
     ### proc ::board::ficslabels
-    incr width_used 16
+    incr width_used [expr {$::fd_size * 2}]
   }
-  if { $::board::_coords($bd) == 2 || $::board::_coords($bd) == 0} {
-    incr width_used [ lindex [ grid bbox $bd 2 1 ] 2 ]
-  }
-  if { $::board::_coords($bd) == 0 } {
-    incr width_used [ lindex [ grid bbox $bd 11 1 ] 2 ]
-  }
+
+  incr width_used [expr {$::fd_size * $::boardCoords}]
+
   if {$::board::_stm($bd)} {
     incr width_used [ lindex [ grid bbox $bd 1 1] 2 ]
     incr width_used 10

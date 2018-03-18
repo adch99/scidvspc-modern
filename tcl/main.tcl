@@ -236,9 +236,11 @@ proc toggleRotateBoard {} {
 
 proc toggleCoords {} {
   global boardCoords
-  set coords [expr {1 + $boardCoords} ]
-  if { $coords > 2 } { set coords 0 }
-  set boardCoords $coords
+
+  incr boardCoords
+  if { $boardCoords > 2 } { set boardCoords 0 }
+  set ::board::_coords(.main.board) $boardCoords
+
   ::board::coords .main.board
 }
 
@@ -417,6 +419,7 @@ pack .main.button.start .main.button.back .main.button.forward .main.button.end 
 #.main.board.bd configure -relief solid -border 2
 ::board::showMarks .main.board 1
 if {$boardCoords} {
+  set ::board::_coords(.main.board) $boardCoords
   ::board::coords .main.board
 }
 if {$boardSTM} {
