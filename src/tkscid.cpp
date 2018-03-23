@@ -4623,11 +4623,11 @@ sc_eco (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     int index = -1;
     static const char * options [] = {
         "base", "game", "read", "reset", "size", "summary",
-        "translate", NULL
+        "translate", "find", NULL
     };
     enum {
         ECO_BASE, ECO_GAME, ECO_READ, ECO_RESET, ECO_SIZE, ECO_SUMMARY,
-        ECO_TRANSLATE
+        ECO_TRANSLATE, ECO_FIND
     };
 
     if (argc > 1) { index = strUniqueMatch (argv[1], options); }
@@ -4651,6 +4651,9 @@ sc_eco (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     case ECO_SUMMARY:
         return sc_eco_summary (cd, ti, argc, argv);
+
+    case ECO_FIND:
+        return sc_eco_find (cd, ti, argc, argv);
 
     case ECO_TRANSLATE:
         return sc_eco_translate (cd, ti, argc, argv);
@@ -4908,7 +4911,7 @@ sc_eco_read (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 int
 sc_eco_summary (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
-    bool color = true;
+    bool color = 0;
     if (argc != 3  &&  argc != 4) {
         return errorResult (ti, "Usage: sc_eco summary <ECO-prefix> [<bool:color>]");
     }
@@ -4918,6 +4921,64 @@ sc_eco_summary (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     DString * temp = new DString;
     bool inMoveList = false;
     ecoBook->EcoSummary (argv[2], temp);
+    translateECO (ti, temp->Data(), dstr);
+    temp->Clear();
+    if (color) {
+        DString * oldstr = dstr;
+        dstr = new DString;
+        const char * s = oldstr->Data();
+        while (*s) {
+            char ch = *s;
+            switch (ch) {
+            case '[':
+                dstr->Append ("<tab>");
+                dstr->AddChar (ch);
+                break;
+            case ']':
+                dstr->AddChar (ch);
+                dstr->Append ("<blue><run importMoveListTrans {");
+                inMoveList = true;
+                temp->Clear();
+                break;
+            case '\n':
+                if (inMoveList) {
+                    dstr->Append ("}>", temp->Data());
+                    inMoveList = false;
+                }
+                dstr->Append ("</run></blue></tab><br>");
+                break;
+            default:
+                dstr->AddChar (ch);
+                if (inMoveList) { temp->AddChar (transPiecesChar(ch)); }//{ temp->AddChar (ch); }
+            }
+            s++;
+        }
+        delete oldstr;
+    }
+    Tcl_AppendResult (ti, dstr->Data(), NULL);
+    delete temp;
+    delete dstr;
+    return TCL_OK;
+}
+
+//    Find ECO entries matching a case-sensitive string.
+//    in plain text or color (Scid hypertext) format.
+
+int
+sc_eco_find (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
+{
+    if (argc != 3 && argc != 4) {
+        return errorResult (ti, "Usage: sc_eco find <string> [color]");
+    }
+    if (!ecoBook) { return TCL_OK; }
+
+    bool color = 0;
+    if (argc == 4) { color = strGetBoolean (argv[3]); }
+
+    DString * dstr = new DString;
+    DString * temp = new DString;
+    bool inMoveList = false;
+    ecoBook->EcoFind (argv[2], temp);
     translateECO (ti, temp->Data(), dstr);
     temp->Clear();
     if (color) {

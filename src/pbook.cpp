@@ -396,6 +396,32 @@ PBook::EcoSummary (const char * ecoPrefix, DString * dstr)
     }    
 }
 
+void
+PBook::EcoFind (const char * find, DString * dstr)
+{
+    // uint depth = strLength (ecoPrefix);
+    // const char * prevEcoStr = "";
+    for (uint i=0; i < NodeListCount; i++) {
+        bookNodeT * node = NodeList[i];
+        if (node == NULL) { continue; }
+        const char * comment = node->data.comment;
+        const char * ecoStr = epd_findOpcode (comment, "eco");
+        const char * movesStr = epd_findOpcode (comment, "moves");
+        if (ecoStr != NULL  &&  strContains (ecoStr,find)) {
+            while (*ecoStr != '\n'  &&  *ecoStr != 0) {
+                dstr->AddChar (*ecoStr);
+                ecoStr++;
+            }
+            dstr->Append ("  ");
+            while (*movesStr != '\n'  &&  *movesStr != 0) {
+                dstr->AddChar (*movesStr);
+                movesStr++;
+            }
+            dstr->AddChar ('\n');
+        }
+    }    
+}
+
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // PBook::StripOpcode:
 //    Strips the specified opcode from every position in the book.
