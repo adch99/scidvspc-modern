@@ -440,6 +440,7 @@ int sc_eco_game       (TCL_ARGS);
 int sc_eco_read       (TCL_ARGS);
 int sc_eco_summary    (TCL_ARGS);
 int sc_eco_translate  (TCL_ARGS);
+int sc_eco_find       (TCL_ARGS);
 
 int sc_filter         (TCL_ARGS);
 int sc_filter_count   (TCL_ARGS);

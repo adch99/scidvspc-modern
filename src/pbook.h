@@ -112,6 +112,7 @@ class PBook
     errorT  FindSummary (Position * pos, DString * target);
     uint    StripOpcode (const char * opcode);
     void    EcoSummary (const char * ecoPrefix, DString * dstr);
+    void    EcoFind    (const char * find, DString * dstr);
     void    DumpStats (FILE * fp);
     uint    NumPositionBytes () { return Stats_PositionBytes; }
     uint    NumCommentBytes ()  { return Stats_CommentBytes; }

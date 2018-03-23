@@ -39,12 +39,25 @@ proc ::windows::eco::Refresh {{code "x"}} {
     pack $w.title -side top -fill x
     frame $w.b
     pack $w.b -side bottom -fill x
-    button $w.b.classify -textvar ::tr(ReclassifyGames) -command classifyAllGames
+
+    entry $w.b.find 
+    bind $w.b.find <Return> {
+      set w .ecograph
+      set text $w.pane.text
+
+      set find [string trim [$w.b.find get]]
+      if {$find != {}} {
+	$text.text configure -state normal
+	$text.text delete 1.0 end
+	::htext::display $text.text [sc_eco find $find 1]
+      }
+    }
+
     button $w.b.up -image bookmark_up -command { ::windows::eco::KeyPress "<" }
     dialogbutton $w.b.refresh -textvar ::tr(Update) -command "::windows::eco::Refresh"
     dialogbutton $w.b.help -textvar ::tr(Help) -command {helpWindow ECO Browser}
     dialogbutton $w.b.close -textvar ::tr(Close) -command "destroy $w"
-    pack $w.b.classify -side left -padx 5 -pady 5
+    pack $w.b.find -side left -padx 5 -pady 5 -fill x -expand yes
     packbuttons right $w.b.close $w.b.help $w.b.refresh $w.b.up
     set pane [::utils::pane::Create $w.pane graph text 500 400 0.5]
     ::utils::pane::SetRange $w.pane 0.3 0.7
@@ -68,16 +81,7 @@ proc ::windows::eco::Refresh {{code "x"}} {
     grid rowconfig $text 0 -weight 1 -minsize 0
     grid columnconfig $text 0 -weight 1 -minsize 0
 
-    foreach i {0 1 2 3 4 5 6 7 8 9 A B C D E a b c d e f g h i j k l m n o p
-               q r s t u v w x y z} {
-      bind $w <KeyPress-$i> "::windows::eco::KeyPress $i"
-    }
-
     standardShortcuts $w
-
-    foreach i {Left Delete less BackSpace} {
-      bind $w <KeyPress-$i> {::windows::eco::KeyPress "<"}
-    }
 
     bind $w <Home>  {.ecograph.pane.text.text yview moveto 0}
     bind $w <End>   {.ecograph.pane.text.text yview moveto 1.0}
@@ -227,10 +231,9 @@ proc ::windows::eco::Select {xc} {
   ::windows::eco::Refresh
 }
 
-# ::windows::eco::KeyPress
-#
-#    Handles keyboard events in ECO browser window
-#
+#    Handle keyboard events in ECO browser window
+#  Mostly unused now - S.A.
+
 proc ::windows::eco::KeyPress {key} {
   set code $::windows::eco::code
   set len [string length $code]

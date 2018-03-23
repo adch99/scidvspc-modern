@@ -28,12 +28,6 @@
 #     as the first letter. Two menu entries
 #     that appear in the same menu should have a different underlined letter.
 #     If in doubt, just make them all "0"
-#
-# (4) Optionally, make new help entries such as
-#
-#     set helpTitle(D,Contents) "Inhaltsverzeichnis"
-#     set helpText(D,Contents) {<h1>Inhaltsverzeichnis Scid-Hilfe</h1>...}
-#     ..... see deutsch.tcl for an example.
 
 addLanguage E English 0
 

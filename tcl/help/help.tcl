@@ -4214,8 +4214,8 @@ set helpText(ECO) {<h1>ECO Codes</h1>
   <h3><name Browser>The ECO Browser Window</name></h3>
   <p>
   Scid's
-  <run ::windows::eco::Open><green>ECO Browser</green></run> shows positions associated
-  with each ECO code, and their frequency and performance amongst <b>ECO classified games</b> in the current database. 
+  <run ::windows::eco::Open><green>ECO Browser</green></run> shows information
+  about ECO codes and their frequency and performance for <b>ECO classified games</b> in the current database. 
   </p>
   <p>
   The upper pane shows a bar graph with three sections: the lowest
