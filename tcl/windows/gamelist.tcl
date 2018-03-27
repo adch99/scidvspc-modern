@@ -677,7 +677,7 @@ proc ::windows::gamelist::Select {} {
       sc_filter remove [.glistWin.tree set $i Number]
     }
     sc_filter negate
-    set glstart 1
+    set ::glstart 1
     ::windows::gamelist::Refresh
   }
 }
