@@ -1694,6 +1694,15 @@ is done from the Maintenance window.</i></p>
 <li><b>Compact</b> -  database (game) compaction.</li>
 </ul>
 </p>
+
+<h3>Notes</h3>
+<ul>
+<li>The <b>Country</b> field is actually the last three letters of the Site (if the third last is capitalized, and preceded by a space). The <a Maintenance Spellcheck>Spellchecking</a> Site name tool may be helpful to add Country names. </li>
+<li>A maximum of 50 comments are recorded/shown.</li>
+<li>ELO shown in brackets are guess-estimates.</li>
+</ul>
+</p>
+
 <h3>Other Features</h3>
 <ul>
 <li>Pressing Delete removes selected game(s) from filter</li>
@@ -1722,6 +1731,7 @@ is done from the Maintenance window.</i></p>
   you are interested in adding the whole game or just its next few moves.
   </p>
 <p><i>The board size can be resized by Control+Wheelmouse or Control+Shift+Left/Right.</i></p>
+<p><i>The current gamelist may be exported as text from ScidvsPC's Tools-<gt>ExportFilter menu.</i></p>
   
 
   <p><footer>Updated: Scid vs. PC 4.14, March 2015</footer></p>

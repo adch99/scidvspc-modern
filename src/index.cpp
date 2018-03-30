@@ -613,12 +613,18 @@ IndexEntry::PrintGameInfo (char * outStr,
                 out += strPad (out, GetEventName (nb), width, ' ');
                 break;
 
-            case 'c':   // Country (Last three chars of Site Name)
+            // Country (Last three chars of Site Name. Must be preceded by a space)
+            // todo - allow for special case "USSR" ?
+            case 'c':
                 {
                     const char * country = GetSiteName (nb);
                     uint len = strLength (country);
-                    if (len > 3) { country = country + len - 3; }
-                    out += strPad (out, country, width, ' ');
+                    if (len > 3 && country[len-4] == ' ' && isupper(country[len-3])) {
+                        country = country + len - 3;
+			out += strPad (out, country, width, ' ');
+                    } else {
+			out += strPad (out, "?", width, ' ');
+                    }
                 }
                 break;
 
@@ -780,8 +786,17 @@ IndexEntry::Compare (IndexEntry * ie, int * fields, NameBase * nb)
                 const char * sTwo = ie->GetSiteName (nb);
                 uint slenOne = strLength (sOne);
                 uint slenTwo = strLength (sTwo);
-                if (slenOne > 3) { sOne += slenOne - 3; }
-                if (slenTwo > 3) { sTwo += slenTwo - 3; }
+                // Ignore Country if !(third last is capitalized && preceded by a space)
+                if (slenOne < 4 || sOne[slenOne-4] != ' ' || ! isupper(sOne[slenOne-3])) {
+                    res = 1;
+                    break;
+                }
+                if (slenTwo < 4 || sTwo[slenTwo-4] != ' ' || ! isupper(sTwo[slenTwo-3])) {
+                    res = -1;
+                    break;
+                }
+                sOne += slenOne - 3;
+                sTwo += slenTwo - 3;
                 res = strCompare (sOne, sTwo);
             }
             break;

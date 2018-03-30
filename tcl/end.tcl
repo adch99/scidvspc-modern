@@ -640,7 +640,7 @@ proc openExportGList {} {
   pack $w.tfmt -side top -fill x
   $w.tfmt insert end \
 "w White            b Black            W White Elo        B Black Elo
-m Moves count      r Result           y Year             d Date
+m Moves count      r Result           y Year             d Date   c Country
 e Event            s Site             n Round            o ECO code
 g Game number      f Filtered number  F Final material   S Non-std start pos
 D Deleted flag     U User flags       C Comments flag    V Variations flag  \n"
