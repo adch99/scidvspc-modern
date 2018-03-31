@@ -1201,6 +1201,8 @@ set helpText(CQL) {<h1>Chess Query Language</h1>
   CQL is a powerful query language which allows for a huge variety of searches.
   It differs from normal Scid searches in that it can also add detailed comments to matching games.
   </p><p><i>
+  Quick and powerful position searches can be done by marking squares with Shift+Click, then opening the CQL search dialog.
+  </i></p><p>
   Because of CQL's cryptic nature, adding comments is restricted to the clipbase,
   and must be enabled with <b>Allow Comments</b>.
   </i></p><p>

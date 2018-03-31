@@ -292,6 +292,7 @@ proc ::search::cql {} {
   if {[winfo exists $w]} {
     wm deiconify $w
     raiseWin $w
+    parseCommentForCQL
     return
   }
 
@@ -328,12 +329,6 @@ proc ::search::cql {} {
   dialogbutton $w.b.stop -textvar ::tr(Stop) -command sc_progressBar -state disabled
 
   dialogbutton $w.b.search -textvar ::tr(Search) -command {
-    set confirm [::game::ConfirmDiscard]
-    if {$confirm == 2} { return }
-    if {$confirm == 0} {
-      ::game::Save
-    }
-
     set w .scql
 
     $w.status     configure -text {}
@@ -421,12 +416,12 @@ proc ::search::cql {} {
 
 
   ::search::Config
-
   checkCQLSearch
 
   bind $w <Configure> "recordWinSize $w"
   wm state $w normal
   focus $w.g.syntax
+  parseCommentForCQL
 }
 
 proc ::search::cqlSave {} {
@@ -481,6 +476,8 @@ proc ::search::cqlLoad {} {
 
 }
 
+### Validate/set configure status of some CQL widgets
+
 proc checkCQLSearch {} {
   set w .scql.s
 
@@ -504,5 +501,26 @@ proc checkCQLSearch {} {
       $w.$i configure -state $s
     }
 
+  }
+}
+
+### Check current position for '%draw,full,SQUARE,color' comments and insert them as CQL search params
+
+proc parseCommentForCQL {} {
+  set comment [sc_pos getComment]
+  if {[string match {*%draw full,*} $comment]} {
+    set squares {}
+    foreach line [split $comment %] {
+      set line [string map {, \ } $line]
+      if  {[scan $line %s%s%s%s a b c d] >= 4 && $a == "draw" && $b == "full"} {
+        set piece [string index [sc_pos board] [::board::sq $c]]
+        if {$piece == "."} {set piece {_}} ; # empty squares
+        lappend squares $piece$c
+      }
+    }
+    if {$squares != {}} {
+      .scql.g.syntax delete 0.0 end
+      .scql.g.syntax insert end "cql () $squares"
+    } 
   }
 }
