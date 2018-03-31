@@ -1363,7 +1363,10 @@ Commands:
 / <a href="#pos_pgnOffset">pgnOffset</a>
 / <a href="#pos_probe">probe</a>
 / <a href="#pos_setComment">setComment</a>
-/ <a href="#pos_side">side</a>.
+/ <a href="#pos_side">side</a>
+/ <a href="#pos_moves">moves</a>
+/ <a href="#pos_movesUCI">movesUCI</a>
+/ <a href="#pos_location">location</a>
 </p>
 <p>
 This group contains commands related to the current position.
@@ -1509,6 +1512,21 @@ Sets the comment for the current position.
 <h4><a name="pos_side">sc_pos side</a></h4>
 <p>
 Returns the side to move: "white" or "black".
+</p>
+
+<h4><a name="pos_moves">sc_pos moves <i>text</i></a></h4>
+<p>
+Returns the games movelist in SAN.
+</p>
+
+<h4><a name="pos_movesUCI">sc_pos movesUCI <i>text</i></a></h4>
+<p>
+Returns the games movelist in UCI / alegraic notation.
+</p>
+
+<h4><a name="pos_location">sc_pos location <i>text</i></a></h4>
+<p>
+Returns the current game 'ply'.
 </p>
 
 
