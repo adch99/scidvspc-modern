@@ -2026,7 +2026,9 @@ while {$argc > 0} {
       set initialDir(file) [file tail $startbase]
       # this sets initialDir(file) for all files, not just pgn... 
       # but initialDir(file) is only (currently) used when saving pgn S.A.
-      catch {sc_game load auto}
+      
+      # Done in file::Open
+      # catch {sc_game load auto}
       flipBoardForPlayerNames
     }
   }
