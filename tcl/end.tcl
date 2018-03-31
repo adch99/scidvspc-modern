@@ -1462,6 +1462,7 @@ proc addMarker {sq color} {
   if {!$erase} {
     append newComment " \[%draw full,$to,$color\]"
   }
+  sc_game undoPoint
   sc_pos setComment $newComment
   ::pgn::Refresh 1
   updateBoard
