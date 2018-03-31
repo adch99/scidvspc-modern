@@ -248,7 +248,8 @@ proc ::file::Open {{fName ""} {parent .} {update 1}} {
   set ::glstart 1
   if {$err == 0} {
     catch {sc_game load auto}
-    set ::glstart [sc_game number]
+    # Setting this here makes the gamelist show *only* last line of "default" opened DBs
+    # set ::glstart [sc_game number]
     flipBoardForPlayerNames
     set ::glistFlipped([sc_base current]) $::flippedForPlayer
     if {[sc_game number] != 1 && [winfo exists .glistWin]} {

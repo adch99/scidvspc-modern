@@ -568,7 +568,10 @@ proc ::windows::gamelist::Open {} {
   bind $w <Configure> {::windows::gamelist::Configure %W }
 
   update
-  after idle {::windows::gamelist::placePopupButton}
+  after idle {
+    ::windows::gamelist::placePopupButton
+    ::windows::gamelist::showCurrent
+  }
 }
 
 proc ::windows::gamelist::placePopupButton {} {
