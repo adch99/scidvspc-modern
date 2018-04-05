@@ -2048,12 +2048,16 @@ updateTitle
 updateLocale
 updateMenuStates
 update
-bind $dot_w <Configure> {recordWinSize $dot_w}
 
 ### Bindings to map/unmap all windows when main window is mapped
 # Dammit - how do we 
 
 if { $::docking::USE_DOCKING } {
+  bind $dot_w <Configure> {
+    if {"%W" == $dot_w} {
+      recordWinSize $dot_w
+    }
+  }
   bind .pw <Map> {raiseAllWindows}
   bind .pw  <Unmap> {showHideAllWindows iconify}
 } else {
