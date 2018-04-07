@@ -6,17 +6,15 @@ Scid vs. PC Programmer's Reference
 <style type="text/css">
 !--
   body { background: #ffffff; }
-  h1, h2, h3, h4, h5 { color: #990000; }
-  h1 { align: center; }
+  h2, h3, h4, h5 { color: steelblue; }
+  h1, h2 { color: blue; }
 -->
 </style>
 </head>
 
 <body bgcolor="#ffffff">
 <h1>Scid vs. PC Programmer's Reference</h1>
-Author: Shane G Hudson, 16-Jan-2002
-<br>
-Last updated by Stevenaaus, 14-Mar-2013
+Authors: Shane G Hudson (16 Jan 2002), Stevenaaus (2015 -)
 
 <hr>
 <h2><a name="contents">Contents</a></h2>
@@ -26,6 +24,7 @@ Last updated by Stevenaaus, 14-Mar-2013
 1. <a href="#intro">Introduction</a> <br>
 2. <a href="#base">sc_base</a> <br>
 3. <a href="#book">sc_book</a> <br>
+3. <a href="#epd">sc_epd</a> <br>
 4. <a href="#clipbase">sc_clipbase</a> <br>
 5. <a href="#compact">sc_compact</a> <br>
 6. <a href="#filter">sc_filter</a> <br>
@@ -40,7 +39,6 @@ Last updated by Stevenaaus, 14-Mar-2013
 14. <a href="#search">sc_search</a> <br>
 15. <a href="#tree">sc_tree</a> <br>
 16. <a href="#var">sc_var</a> <br>
-17. <a href="#string">Extra string commands</a> <br>
 </td></tr>
 </tbody></table>
 <hr>
@@ -56,23 +54,22 @@ Two versions of the database interface exist.
 <li> <b>Tcscid</b> uses Tcl alone and has no GUI. It is useful for
      writing small scripts that manipulate Scid databases. </li>
 </l> <br>
-So it is easy to write programs that use Scid databases, provided you
+So it is easy to write programs that use Scid databases provided you
 know some Tcl (which is a very easy scripting language to learn)
 and know the extra Scid-specific commands.
-<b>This document explains these extra commands.</b>
+</p>
+<p>This document explains these extra commands.</b>
 The Scid source code also includes a "scripts" directory with
 several scripting examples.
-</p>
-<p>
 The Tcl commands provided by tcscid and tkscid start with
 the prefix "sc_" (except for a couple of string processing functions),
 and are implemented, and further documented, in the file src/tkscid.cpp.
 </p>
 
-<p>
-On <b>Windows</b>, things are a little different. The executable <b>tkscid</b> is
-renamed to <b>scid.exe</b>, and the Tcl/Tk fontend <b>scid</b> is renamed to
-<b>scid.gui</b>. The Windows equivalent of <b>tcscid</b> is <b>tcscid.exe</b>.</p>
+<p><i>
+On <b>MS Windows</b> things are a little different. The executable tkscid is
+renamed to <b>scid.exe</b>, and the Tcl/Tk fontend scid is renamed to
+<b>scid.gui</b>. The Windows equivalent of tcscid is tcscid.exe.</i></p>
 
 <!--
 <h4>Scid Tcl program idioms</h4>
@@ -109,6 +106,8 @@ Commands:
 / <a href="#base_open">open</a>
 / <a href="#base_slot">slot</a>
 / <a href="#base_sort">sort</a>
+/ <a href="#base_sort_updown">sortup</a>
+/ <a href="#base_sort_updown">sortdown</a>
 / <a href="#base_stats">stats</a>
 / <a href="#base_switch">switch</a>
 / <a href="#base_tournaments">tournaments</a>
@@ -278,10 +277,10 @@ filename if it is opened, or 0 if it is not open in Scid. The filename
 may represent a Scid-format database or a PGN file.
 </p>
 
-<h4><a name="base_sort">sc_base sort <i>criteria</i></a></h4>
+<h4><a name="base_sort">sc_base sort <i>criteria</i> [script]</a></h4>
 <p>
 Sorts the current database by the <i>criteria</i>, which is a string
-containing the criteria to use.
+containing the criteria to use, (optionally executing script before completing sort).
 Updates the <a href="#progressBar">progress bar</a> if applicable.
 Each criterion in the string should be from the following list and
 separated by commas, dots or spaces.
@@ -290,6 +289,11 @@ separated by commas, dots or spaces.
 Sorting criteria are:
 Date, Year, Event, Site, Round, White, Black, Eco, Result, Length,
 Rating, Country, Month, Deleted and Marked.
+</p>
+
+<h4><a name="base_sort_updown">sc_base sortup|sortdown</a></h4>
+<p>
+Set sorting order (does not perform sort).
 </p>
 
 <h4><a name="base_stats">sc_base stats [<i>slot</i>]</a></h4>
@@ -316,7 +320,7 @@ Switches to the specified database slot. The slot can be a number,
 or "c" for the clipbase.
 </p>
 
-<h4><a name="base_tournaments">sc_base tounaments [<i>-option value ...</i>]</a></h4>
+<h4><a name="base_tournaments">sc_base tournaments [<i>-option value ...</i>]</a></h4>
 <p>
 Returns a list containing information about selected tournaments in
 the current database, with each list element being a 13-element
@@ -355,7 +359,11 @@ Updates the <a href="#progressBar">progress bar</a> if applicable.
 
 <!-- ************************************************************ -->
 
-<h2><a name="book">sc_book</a></h2>
+<h2><a name="epd">sc_epd</a></h2>
+
+<p>
+<i>TODO - check this section is ok. It has been renamed from sc_book at sometime.</i>
+</p>
 
 <p>
 Commands:
@@ -377,7 +385,7 @@ Commands:
 / <a href="#book_write">write</a>
 </p>
 <p>
-This group contains commands for handling "book" (EPD) files.
+This group contains commands for handling EPD files.
 An EPD file contains a number of chess positions, one per line,
 with extra text for each position in the form of opcodes (such
 as "bm" for best move and "pv" for principal variation). Each
@@ -388,103 +396,113 @@ newline characters instead; this makes EPD positions far easier
 to edit.
 </p>
 <p>
-Most sc_book commands take a <i>bookID</i> parameter which is
-the value returned by sc_book create or sc_book open.
+Most sc_epd commands take an <i>ID</i> parameter which is
+the value returned by sc_epd create or sc_epd open.
 </p>
 
-<h4><a name="book_altered">sc_book altered <i>bookID</i></a></h4>
+<h4><a name="epd_altered">sc_epd altered <i>epdID</i></a></h4>
 <p>
-Returns a boolean value indicating if the book has been altered
+Returns a boolean value indicating if the epd has been altered
 since it was last opened, created or saved.
 </p>
 
-<h4><a name="book_available">sc_book available</a></h4>
+<h4><a name="epd_available">sc_epd available</a></h4>
 <p>
-Returns a boolean value indicating if another book file can
+Returns a boolean value indicating if another epd file can
 currently be opened or created.
-Use <a href="#info_limit">sc_info limit books</a> to find the
-maximum number of books Scid can have open at any time.
+Use <a href="#info_limit">sc_info limit epd</a> to find the
+maximum number of epd Scid can have open at any time.
 </p>
 
-<h4><a name="book_close">sc_book close <i>bookID</i></a></h4>
+<h4><a name="epd_close">sc_epd close <i>epdID</i></a></h4>
 <p>
-Closes the book file, without saving it.
+Closes the epd file, without saving it.
 </p>
 
-<h4><a name="book_create">sc_book create <i>filename</i></a></h4>
+<h4><a name="epd_create">sc_epd create <i>filename</i></a></h4>
 <p>
-Creates a new empty book file called <i>filename</i>.
-Returns its <i>bookID</i> or an error message.
+Creates a new empty epd file called <i>filename</i>.
+Returns its <i>epdID</i> or an error message.
 </p>
 
-<h4><a name="book_deepest">sc_book deepest <i>bookID</i></a></h4>
+<h4><a name="epd_deepest">sc_epd deepest <i>epdID</i></a></h4>
 <p>
 Returns the deepest ply in the current game (main moves only,
-not variations) that matches a position in the book.
+not variations) that matches a position in the epd.
 </p>
 
-<h4><a name="book_get">sc_book get <i>bookID</i></a></h4>
+<h4><a name="epd_get">sc_epd get <i>epdID</i></a></h4>
 <p>
-Returns the book file text for the current position.
+Returns the epd file text for the current position.
 </p>
 
-<h4><a name="book_moves">sc_book moves <i>bookID</i></a></h4>
+<h4><a name="epd_moves">sc_epd moves <i>epdID</i></a></h4>
 <p>
 Returns the list of all legal moves (in standard algebraic
-notation) from the current position that are recorded in this book.
+notation) from the current position that are recorded in this epd.
 </p>
 
-<h4><a name="book_name">sc_book name <i>bookID</i></a></h4>
+<h4><a name="epd_name">sc_epd name <i>epdID</i></a></h4>
 <p>
-Returns the filename for the book.
+Returns the filename for the epd.
 </p>
 
-<h4><a name="book_next">sc_book next <i>bookID</i></a></h4>
-<p>
-Clears the current game and sets its start position to
-be that of the next position found in the book (in the order
-they are stored in the book file).
-</p>
-
-<h4><a name="book_open">sc_book open <i>filename</i></a></h4>
-<p>
-Opens an existing book file called <i>filename</i>.
-Returns its <i>bookID</i> or an error message.
-</p>
-
-<h4><a name="book_prev">sc_book prev <i>bookID</i></a></h4>
+<h4><a name="epd_next">sc_epd next <i>epdID</i></a></h4>
 <p>
 Clears the current game and sets its start position to
-be that of the previous position found in the book (in the order
-they are stored in the book file).
+be that of the next position found in the epd (in the order
+they are stored in the epd file).
 </p>
 
-<h4><a name="book_readonly">sc_book readonly <i>bookID</i></a></h4>
+<h4><a name="epd_open">sc_epd open <i>filename</i></a></h4>
 <p>
-Returns a boolean value indicating whether this book file is
+Opens an existing epd file called <i>filename</i>.
+Returns its <i>epdID</i> or an error message.
+</p>
+
+<h4><a name="epd_prev">sc_epd prev <i>epdID</i></a></h4>
+<p>
+Clears the current game and sets its start position to
+be that of the previous position found in the epd (in the order
+they are stored in the epd file).
+</p>
+
+<h4><a name="epd_readonly">sc_epd readonly <i>epdID</i></a></h4>
+<p>
+Returns a boolean value indicating whether this epd file is
 read-only and cannot be edited.
 </p>
 
-<h4><a name="book_set">sc_book set <i>bookID</i> <i>text</i></a></h4>
+<h4><a name="epd_set">sc_epd set <i>epdID</i> <i>text</i></a></h4>
 <p>
-Sets the book file text for the current position.
+Sets the epd file text for the current position.
 </p>
 
-<h4><a name="book_size">sc_book size <i>bookID</i></a></h4>
+<h4><a name="epd_size">sc_epd size <i>epdID</i></a></h4>
 <p>
-Returns the number of positions recorded in the book.
+Returns the number of positions recorded in the epd.
 </p>
 
-<h4><a name="book_strip">sc_book strip <i>bookID</i> <i>opcode</i></a></h4>
+<h4><a name="epd_strip">sc_epd strip <i>epdID</i> <i>opcode</i></a></h4>
 <p>
-Strips the specified EPD <i>opcode</i> from all positions in the book.
+Strips the specified EPD <i>opcode</i> from all positions in the epd.
 </p>
 
-<h4><a name="book_write">sc_book write <i>bookID</i></a></h4>
+<h4><a name="epd_write">sc_epd write <i>epdID</i></a></h4>
 <p>
-Saves the current book file, and keeps it open.
+Saves the current epd file, and keeps it open.
 </p>
 
+<!-- ************************************************************ -->
+
+<h2><a name="book">sc_book</a></h2>
+
+<p>
+Commands: load / close / moves / positions / movesupdate / update
+</p>
+<p>
+Commands to access polyglot books (.bin / fruit format) TODO
+</p>
 
 <!-- ************************************************************ -->
 
@@ -1786,32 +1804,8 @@ with the current move.
 </p>
 
 
-<!-- ************************************************************ -->
-
-<h2><a name="string">Extra string commands</a></h2>
-
-<p>
-Commands:
-<a href="#strIsPrefix">strIsPrefix</a>
-/ <a href="#strPrefixLen">strPrefixLen</a>
-</p>
-<p>
-These commands implement a couple of string functions I needed to
-have that were not available in Tcl, and would have been far
-slower if written in Tcl instead of C++.
-</p>
-
-<h4><a name="strIsPrefix">strIsPrefix <i>short</i> <i>long</i></a></h4>
-<p>
-Returns a boolean value indicating if <i>short</i> is a prefix 
-of <i>long</i>.
-</p>
-
-<h4><a name="strPrefixLen">strPrefixLen <i>s1</i> <i>s2</i></a></h4>
-<p>
-Returns the length of the common prefix of <i>s1</i> and <i>s2</i>.
-</p>
-
 <hr>
+
+Last updated 3 April 2018
 
 </body></html>

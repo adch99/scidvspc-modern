@@ -1914,16 +1914,15 @@ sc_base_piecetrack (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
     return TCL_OK;
 }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// sc_base_sort:
 //    Sorts the games in a database.
+
 int
 sc_base_sort (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
     bool showProgress = startProgressBar();
 
-    if (argc <= 3) {
-        return errorResult (ti, "Usage: sc_base sort <criteria>");
+    if (argc < 3 || argc > 4) {
+        return errorResult (ti, "Usage: sc_base sort <criteria> [script]");
     }
     if (db->idx->ParseSortCriteria (argv[2]) != OK) {
         return errorResult (ti, "Invalid sorting criteria.");
@@ -1975,8 +1974,8 @@ sc_base_sort (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
       db->treeFilter = new Filter( db->numGames);
     }
 
-    //Re-order and write the index, showing progress if applicable:
-    if (argc >= 4  &&  showProgress) {
+    // Re-order and write the index, showing progress if applicable:
+    if (argc == 4  &&  showProgress) {
         Tcl_Eval (ti, (char *) argv[3]);
         restartProgressBar (ti);
         db->idx->WriteSorted (20000, base_progress, (void *) ti);
