@@ -865,7 +865,7 @@ namespace eval fics {
     grid $w.cancel -column 3 -row $row -padx 3 -pady 8 -sticky e
 
     update
-    placeWinOverPointer $w
+    placeWinOverParent $w .fics
     wm state $w normal
   }
 
