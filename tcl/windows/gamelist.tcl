@@ -99,7 +99,7 @@ if {! [info exists glistColAnchor]} {
 # glistNames is set from glistFields
 # Number White Black Result Length Event Round Date WElo BElo Site ECO Deleted Opening Flags Variations Comments Annos Start
 
-# These fields are used by "sc_base sort $col {}" in proc SortBy
+# These fields are used by "sc_base sort $col" in proc SortBy
 # (ECO/Eco case seems to differ, but not matter)
 # src/index.cpp: static const char * sortCriteriaNames[] = 
 # Date, Event, Site, Round, White, Black, Eco, Result, Length, Rating, WElo, BElo, Country, Month, Deleted, Eventdate, Variations, Comments
@@ -1058,7 +1058,7 @@ proc SortBy {tree col} {
     update
 
     # This catch is annoying, but if we remove it, how do we unbusyCursor when sort fails ?
-    catch {sc_base sort $col {}}
+    catch {sc_base sort $col}
 
     unbusyCursor .
     updateBoard

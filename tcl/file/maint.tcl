@@ -23,7 +23,7 @@ proc ::maint::fixCorruptedBase {} {
     return
   }
 
-  progressWindow Scid [concat $::tr(CompactNames) "..."]
+  progressWindow Scid $::tr(CompactNames)
   busyCursor .
   set err [catch {sc_base fixCorrupted $fName} result]
   unbusyCursor .
@@ -1677,7 +1677,7 @@ proc compactNames {} {
     ::game::Save
   }
 
-  progressWindow Scid [concat $::tr(CompactNames) "..."]
+  progressWindow Scid $::tr(CompactNames)
   busyCursor .
   set err [catch {sc_compact names} result]
   unbusyCursor .
@@ -1742,7 +1742,7 @@ proc compactGames {parent} {
     return
   }
   
-  progressWindow Scid [concat $::tr(CompactGames) "..."] $::tr(Cancel) sc_progressBar
+  progressWindow Scid $::tr(CompactGames) $::tr(Cancel) sc_progressBar
   busyCursor .
   set err [catch {sc_compact games} result]
   unbusyCursor .
@@ -1903,11 +1903,11 @@ proc sortDatabase {} {
         -message "This is not an open database; there are no games to sort."
     return
   }
-  progressWindow Scid "Sorting the database..."
+  progressWindow Scid "Sorting the database."
   busyCursor .
   # can be messed up by gamelist sort
   sc_base sortup
-  set err [catch {sc_base sort $sortCriteria(real) {changeProgressWindow "Storing results..."} } result]
+  set err [catch {sc_base sort $sortCriteria(real) {changeProgressWindow "Storing results."} } result]
   unbusyCursor .
   closeProgressWindow
 
@@ -2008,7 +2008,7 @@ proc doAllocateRatings {parent} {
     tk_messageBox -type ok -icon info -parent $parent -title Scid -message $result
     return
   }
-  progressWindow Scid "Adding Elo ratings..."
+  progressWindow Scid "Adding Elo ratings."
   busyCursor .
   if {[catch {sc_name ratings -change $addRatings(overwrite) -filter $addRatings(filter)} result]} {
     closeProgressWindow
