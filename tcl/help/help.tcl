@@ -3156,7 +3156,7 @@ Arasanx UCI <lt>= 14.1 does not work with Permanent Thinking.
 set helpTitle(CalVar) "Calculation of variation"
 set helpText(CalVar) {<h1>Calculation of Variations</h1>
   <p>
-   This training exercise (also known as the <b>Stoyko Exercise</b>)
+   The <run ::calvar::config><green>Calculation of Variations</green></run> excercise (also known as the <b>Stoyko Exercise</b>)
    involves analysing a complex position, to find and evaluate as many sound
    lines as possible.
   </p> 
@@ -5429,7 +5429,7 @@ set helpText(TacticsTrainer) {<h1>Mate in ..N.. Puzzles</h1>
 set helpTitle(FindBestMove) "Find best move"
 set helpText(FindBestMove) {<h1>Find Best Move</h1>
   <p>
-  The Find Best Move feature uses specially prepared databases
+  The Play-<gt>Training-<gt>Find Best Move feature uses specially prepared databases
   to help you train to find tactical shots (non-obvious and unique winning moves).
   </p>
   <p>

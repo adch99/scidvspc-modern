@@ -114,11 +114,13 @@ namespace eval calvar {
 
     label $f.lTime2 -text "Initial thinking time"
     spinbox $f.sbTime2  -width 3 -textvariable ::calvar::thinkingTimePosition -from 5 -to 300 -increment 5 -validate all -vcmd {string is int %P}
-    pack $f.lTime2 $f.sbTime2 -side left
+    grid $f.lTime2 -row 0 -column 0
+    grid $f.sbTime2 -row 0 -column 1
 
     label $f.lTime -text "Variation thinking time"
     spinbox $f.sbTime  -width 3 -textvariable ::calvar::thinkingTimePerLine -from 5 -to 120 -increment 5 -validate all -vcmd {string is int %P}
-    pack $f.lTime $f.sbTime -side left
+    grid $f.lTime -row 1 -column 0
+    grid $f.sbTime -row 1 -column 1
 
     frame $w.fbuttons
     pack $w.fbuttons
