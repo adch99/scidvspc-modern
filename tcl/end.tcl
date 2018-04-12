@@ -1998,23 +1998,8 @@ while {$argc > 0} {
   } else {
     busyCursor .
     ::splash::add "Opening database: $startbase"
-    set err 0
     set errMessage ""
-    if {[string match "*.pgn" $startbase] || \
-          [string match "*.PGN" $startbase] || \
-          [string match "*.pgn.gz" $startbase]} {
-      set err [catch {sc_base create $startbase true} errMessage]
-      if {$err == 0} {
-        set err [catch {
-                  doPgnFileImport $startbase "Opening [file tail $startbase] read-only.\n"
-                 } errMessage]
-        if {!$err} {
-	  sc_base type [sc_base current] 3
-        }
-      }
-    } else {
-      set err [catch { ::file::Open $startbase} errMessage]
-    }
+    set err [catch { ::file::Open $startbase} errMessage]
     if {$err} {
       ### Above err and errMessage should be shown as dialog messages S.A.
       ### Umm... they are. ? S.A.
