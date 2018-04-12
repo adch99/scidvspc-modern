@@ -361,7 +361,7 @@ proc progressWindow {args} {
   if {$b} {
     catch { grab $w.b.cancel }
   } else {
-    grab $w
+    catch {grab $w}
   }
   # This raises above whole desktop on KDE. Bad!
   # but not sure of best way to do it.
