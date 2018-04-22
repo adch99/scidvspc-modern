@@ -703,9 +703,13 @@ $m add separator
 incr menuindex
 
 $m add command -label ToolsScreenshot -command {boardToFile {} {}} -accelerator control-F12
-bind .main <Control-Shift-F12> {boardToFile {} {}}
 set helpMessage($m,[incr menuindex]) {Board Screenshot}
-
+if {$windowsOS} {
+  # Screenshot is broken on windows
+  $m entryconfigure 23 -state disabled 
+} else {
+  bind .main <Control-Shift-F12> {boardToFile {} {}}
+}
 
 ### Options menu:
 
