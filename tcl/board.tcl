@@ -206,11 +206,11 @@ proc initBoardColors {} {
   frame $w.sizes
   pack $w.sizes -side top -padx 3 -expand 1 -fill x -padx 20
 
-  frame $w.pieces1
-  pack $w.pieces1 -side top
-  if {$png_image_support} {
-    frame $w.pieces0
-    pack $w.pieces0 -side top
+  set pieceRows [expr [llength $boardStyles]/9 + 1]
+
+  for {set row 1} {$row <= $pieceRows} {incr row} {
+    frame $w.pieces$row
+    pack $w.pieces$row -side top
   }
 
   ### Piece type and size ###
@@ -233,24 +233,17 @@ if { $::docking::USE_DOCKING && $::autoResizeBoard} {
   pack $w.sizes.frame.larger $w.sizes.frame.smaller -side right
 }
 
-  if {$png_image_support} {
-    set l 0
-    foreach i $boardStyles {
-      set j [string tolower $i]
-      button $w.pieces$l.$j -text $i -font font_Small -borderwidth 1 -command "
-	set boardStyle $i
-	setPieceFont $i"
-      pack $w.pieces$l.$j -side left
+  set row 1
+  foreach i $boardStyles {
+    set j [string tolower $i]
+    button $w.pieces$row.$j -text $i -font font_Small -borderwidth 1 -command "
+      set boardStyle $i
+      setPieceFont $i"
+    pack $w.pieces$row.$j -side left
 
-      set l [expr !$l]
-    }
-  } else {
-    foreach i $boardStyles {
-      set j [string tolower $i]
-      button $w.pieces1.$j -text $i -font font_Small -borderwidth 1 -command "
-	set boardStyle $i
-	setPieceFont $i"
-      pack $w.pieces1.$j -side left
+    incr row
+    if {$row > $pieceRows} {
+      set row 1
     }
   }
 
