@@ -2814,7 +2814,9 @@ making for easier <a Analysis Debugging>Debugging</a>.
   which, when running docked, will run at low CPU priority.<p>
 
   <p>
-  <b>Space Bar</b> is bound to engine start/stop. Pressing <b>Enter</b> will add the engine's current best move, and <b>Control+Enter</b>, the whole line.
+  <b>Space Bar</b> is bound to engine start/stop. Pressing <b>Enter</b> will
+  add the engine's current best move, and <b>Control+Enter</b>, the whole line.
+  Keys <b>1 to 5</b> will set the engine's PV.
   </p>
   <p>
   At the top of the window are some useful Buttons.
