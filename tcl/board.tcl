@@ -206,7 +206,13 @@ proc initBoardColors {} {
   frame $w.sizes
   pack $w.sizes -side top -padx 3 -expand 1 -fill x -padx 20
 
-  set pieceRows [expr [llength $boardStyles]/9 + 1]
+  set piecesPerRow 9
+  set pieceRows [expr ([llength $boardStyles]-1)/$piecesPerRow + 1]
+  # eg - if 10 piece styles, pack them in two rows of 5 instead of 9 + 1
+  set piecesPerRow [expr [llength $boardStyles]/$pieceRows]
+  if {[llength $boardStyles] % $pieceRows != 0} {
+    incr piecesPerRow
+  }
 
   for {set row 1} {$row <= $pieceRows} {incr row} {
     frame $w.pieces$row
@@ -234,16 +240,20 @@ if { $::docking::USE_DOCKING && $::autoResizeBoard} {
 }
 
   set row 1
+  set counter 0
   foreach i $boardStyles {
     set j [string tolower $i]
+    if {[winfo exists $w.pieces$row.$j]} {
+      continue
+    }
     button $w.pieces$row.$j -text $i -font font_Small -borderwidth 1 -command "
       set boardStyle $i
       setPieceFont $i"
     pack $w.pieces$row.$j -side left
 
-    incr row
-    if {$row > $pieceRows} {
-      set row 1
+    incr counter
+    if {$counter % $piecesPerRow == 0} {
+      incr row
     }
   }
 
