@@ -1954,9 +1954,14 @@ proc fullname {fname} {
 
 if {$defaultDBs != {}} {
   if {$argc == 0 && $mac_args == 0} {
-    ::splash::add "Using default bases: $defaultDBs"
-    set argv $defaultDBs
-    set argc [llength $argv]
+    if {[file readable [lindex $defaultDBs 0]] || [file readable "[lindex $defaultDBs 0].si4"]} {
+      ::splash::add "Using default bases: $defaultDBs"
+      set argv $defaultDBs
+      set argc [llength $argv]
+    } else {
+      ::splash::add "Not loading default bases as file [lindex $defaultDBs 0] not readble." error
+      set defaultDBs {}
+    }
   } else {
     ::splash::add "Not loading default bases as other command line args."
   }
