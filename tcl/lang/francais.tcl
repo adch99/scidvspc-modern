@@ -287,6 +287,8 @@ menuText F OptionsMovesHighlightLastMove "Surbrillance dernier coup" 0 {Surbrill
 menuText F OptionsMovesHighlightLastMoveDisplay "Afficher" 0 {Afficher la surbrillance du dernier coup}
 menuText F OptionsMovesHighlightLastMoveWidth "Epaisseur" 0 {Epaisseur de la ligne}
 menuText F OptionsMovesHighlightLastMoveColor "Couleur" 0 {Couleur de la ligne}
+# ====== TODO To be translated ======
+menuText F OptionsMovesColorSelected "Color Selected Square" 0 {Color move}
 menuText F OptionsMoves "Coups" 2 {Gestion des coups}
 menuText F OptionsMovesAsk "Demander avant d'écraser les coups" 0 \
   {Demander avant d'écraser un coup existant}

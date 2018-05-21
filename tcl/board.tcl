@@ -1407,18 +1407,40 @@ proc ::board::getSquare {w x y} {
   return $sq
 }
 
-# ::board::showMarks
-#   Turns on/off the showing of marks (colored squares).
-#
+### Turns on/off the showing of marks (colored squares).
+
 proc ::board::showMarks {w value} {
   set ::board::_showMarks($w) $value
 }
 
-# ::board::colorSquare
+### Draw a border or color square of selected Square
+
+proc ::board::highlightSquare {args} {
+
+  if {$::colorActiveSquare} {
+    # color square
+    eval ::board::colorSquare $args
+  } else {
+    # similar to DrawRectangle, but using diferent "-tag"
+    set board [lindex $args 0].bd
+    # draw border (more useful for textures)
+    if {[llength $args] > 2} {
+      set square [lindex $args 1]
+      if {$square < 0  ||  $square > 63} { puts "error square = $square" ; return }
+      set box [::board::mark::GetBox $board $square 1.0 1]
+      $board create rectangle $box -outline black -width $::highlightLastMoveWidth -tag moveRectangle
+      # Only using black at the moment, but could use (another?) colour
+      # -outline $::highlightLastMoveColor ???
+    } else  {
+      $board delete moveRectangle
+    }
+  }
+}
+
 #   Colors the specified square (0-63) of the board.
 #   If the color is the empty string, the appropriate
 #   color for the square (light or dark) is used.
-#
+
 proc ::board::colorSquare {w i {color {}}} {
   # if {$i < 0 || $i > 63} return
   if {$i < 0} return

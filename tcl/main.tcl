@@ -1512,7 +1512,7 @@ proc addSanMove {san {animate ""} {noTraining ""}} {
 #   to indicate the suggested move.
 #
 proc enterSquare { square } {
-  global highcolor currentSq bestSq bestcolor selectedSq suggestMoves
+  global currentSq bestSq bestcolor selectedSq suggestMoves
   set currentSq $square
   if {$selectedSq == -1} {
     set bestSq -1
@@ -1520,8 +1520,8 @@ proc enterSquare { square } {
       set bestSq [sc_pos bestSquare $square]
     }
     if {[expr {$bestSq != -1}]} {
-      ::board::colorSquare .main.board $square $bestcolor
-      ::board::colorSquare .main.board $bestSq $bestcolor
+      ::board::highlightSquare .main.board $square $bestcolor
+      ::board::highlightSquare .main.board $bestSq $bestcolor
     }
   }
 }
@@ -1530,14 +1530,7 @@ proc enterSquare { square } {
 #    Recolors squares to normal (lite/dark) color.
 
 proc leaveSquare { square } {
-  global currentSq selectedSq bestSq
-  #Klimmek: not needed anymore
-  #  if {$square != $selectedSq} {
-  #    ::board::colorSquare .main.board $square
-  #  }
-  if {$bestSq != -1} {
-    #Klimmek: changed, because Scid "hangs" very often (after 5-7 moves)
-    #    ::board::colorSquare .main.board $bestSq
+  if {$::bestSq != -1} {
     ::board::update .main.board
   }
 }
@@ -1561,7 +1554,7 @@ proc pressSquare {square confirm} {
 
   if {$selectedSq == -1} {
     set selectedSq $square
-    ::board::colorSquare .main.board $square $highcolor
+    ::board::highlightSquare .main.board $square $highcolor
     # Drag this piece if it is the same color as the side to move:
     set c [string index [sc_pos side] 0]  ;# will be "w" or "b"
     set p [string index [::board::piece .main.board $square] 0] ;# "w", "b" or "e"
@@ -1570,8 +1563,8 @@ proc pressSquare {square confirm} {
     }
   } else {
     ::board::setDragSquare .main.board -1
-    ::board::colorSquare .main.board $selectedSq
-    ::board::colorSquare .main.board $square
+    ::board::highlightSquare .main.board $selectedSq
+    ::board::highlightSquare .main.board $square
     if {$square != $selectedSq} {
       addMove $square $selectedSq -animate
     }
@@ -1603,8 +1596,8 @@ proc releaseSquare {w x y} {
       # User pressed and released on same square, so make the
       # suggested move if there is one:
       set selectedSq -1
-      ::board::colorSquare $w $bestSq
-      ::board::colorSquare $w $square
+      ::board::highlightSquare $w $bestSq
+      ::board::highlightSquare $w $square
       addMove $square $bestSq -animate
       enterSquare $square
     } else {
@@ -1617,9 +1610,9 @@ proc releaseSquare {w x y} {
     }
     # User has dragged to another square, so try to add this as a move:
     addMove $square $selectedSq
-    ::board::colorSquare $w $selectedSq
+    ::board::highlightSquare $w $selectedSq
     set selectedSq -1
-    ::board::colorSquare $w $square
+    ::board::highlightSquare $w $square
   }
   set ::addVariationWithoutAsking 0
 }

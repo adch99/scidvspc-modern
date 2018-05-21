@@ -255,6 +255,8 @@ menuText T OptionsMovesHighlightLastMove "Son Hamleyiı Vurgula" 0 {Son hareketi
 menuText T OptionsMovesHighlightLastMoveDisplay "Son hamleyi Göster" 0 {Son hareketi vurgulayın Vurgu}
 menuText T OptionsMovesHighlightLastMoveWidth "Genişlik" 0 {Hat kalınlığı}
 menuText T OptionsMovesHighlightLastMoveColor "Çizgi rengi" 0 {Çizgi rengi}
+# ====== TODO To be translated ======
+menuText T OptionsMovesColorSelected "Color Selected Square" 0 {Color move}
 menuText T OptionsMoves "hamle" 0 {Hamle Giriş seçenekleri}
 menuText T OptionsMovesAsk "üzerine yazmadan önce sor" 0 \
   {Var olan Hamlelerin üzerine yazmadan önce sor}

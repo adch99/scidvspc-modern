@@ -271,6 +271,8 @@ menuText U OptionsMovesHighlightLastMove "Destacar último movimento" 0 {Destaca 
 menuText U OptionsMovesHighlightLastMoveDisplay "Mostrar" 0 {Mostra o destaque do último movimento}
 menuText U OptionsMovesHighlightLastMoveWidth "Espessura" 0 {Espessura da linha}
 menuText U OptionsMovesHighlightLastMoveColor "Cor" 0 {Cor da linha}
+# ====== TODO To be translated ======
+menuText U OptionsMovesColorSelected "Color Selected Square" 0 {Color move}
 menuText U OptionsMoves "Movimentos" 0 {Opções para entrada dos movimentos}
 menuText U OptionsMovesAsk "Perguntar antes de substituir movimentos" 0 \
   {Pergunta antes de substituir movimentos existentes}

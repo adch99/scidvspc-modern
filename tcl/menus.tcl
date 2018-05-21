@@ -898,7 +898,7 @@ $m add command -label OptionsSave -command {
     ::pgn::shortHeader ::pgn::boldMainLine ::pgn::stripMarks 
     ::pgn::symbolicNags ::pgn::moveNumberSpaces ::pgn::columnFormat ::pgn::showScrollbar
     myPlayerNames optionsAutoSave ::tree::mask::recentMask ::tree::mask::autoLoadMask ::tree::showBar ::tree::short ::tree::sortBest
-    ecoFile suggestMoves showVarPopup showVarArrows 
+    ecoFile suggestMoves showVarPopup showVarArrows colorActiveSquare
     annotate(blunder) annotate(addTag) annotate(Moves) annotate(WithVars) annotate(WithScore) useAnalysisBook annotate(isVar) annotate(scoreType) annotate(cutoff) annotate(MissedMates)
     annotate(WantedDepth) annotate(Depth) autoplayDelay animateDelay boardCoords boardSTM 
     moveEntry(AutoExpand) moveEntry(Coord)
@@ -1090,6 +1090,10 @@ set helpMessage($m.entry,10) OptionsMovesShowVarArrows
 $m.entry add checkbutton -label OptionsShowVarPopup \
     -variable showVarPopup -offvalue 0 -onvalue 1
 set helpMessage($m.entry,6) OptionsShowVarPopup
+
+$m.entry add checkbutton -label OptionsMovesColorSelected \
+    -variable colorActiveSquare -offvalue 0 -onvalue 1
+# FMD set helpMessage($m.entry,6) OptionsMovesColorSelected
 
 menu $m.entry.highlightlastmove -tearoff 1
 $m.entry add cascade -label OptionsMovesHighlightLastMove -menu  $m.entry.highlightlastmove
@@ -1763,7 +1767,7 @@ proc setLanguageMenus {{lang ""}} {
   }
   configMenuText .menu.options.entry [tr OptionsShowVarPopup $oldLang] OptionsShowVarPopup $lang
   # S.A. here's how to fix these f-ing menus. &&&
-  foreach tag {Ask Animate Delay Suggest Key Coord Space TranslatePieces HighlightLastMove ShowVarArrows} {
+  foreach tag {Ask Animate Delay Suggest Key Coord Space TranslatePieces HighlightLastMove ShowVarArrows ColorSelected} {
     configMenuText .menu.options.entry [tr OptionsMoves$tag $oldLang] \
         OptionsMoves$tag $lang
   }

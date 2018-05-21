@@ -298,6 +298,8 @@ menuText N OptionsMovesHighlightLastMove "Markeren laatste zet" 0 {De laatst ges
 menuText N OptionsMovesHighlightLastMoveDisplay "Tonen" 0 {Tonen laatste zet markering}
 menuText N OptionsMovesHighlightLastMoveWidth "Dikte" 0 {Dikte van de lijn}
 menuText N OptionsMovesHighlightLastMoveColor "Kleur" 0 {Kleur van de lijn}
+# ====== TODO To be translated ======
+menuText N OptionsMovesColorSelected "Color Selected Square" 0 {Color move}
 menuText N OptionsMoves "Zetten" 0 {Wijzig optie voor zet-invoer}
 menuText N OptionsMovesAsk "Bevestiging voor overschrijven" 0 \
   {Bevestig het overschrijven van bestaande zetten}
