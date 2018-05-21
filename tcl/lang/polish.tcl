@@ -290,6 +290,8 @@ menuText P OptionsMovesHighlightLastMove "Podświetl ostatnie posunięcie" 0 {Po
 menuText P OptionsMovesHighlightLastMoveDisplay "Pokaż" 0 {Pokaż ostatnie posunięcie}
 menuText P OptionsMovesHighlightLastMoveWidth "Grubość" 0 {Grubość linii}
 menuText P OptionsMovesHighlightLastMoveColor "Kolor" 0 {Kolor linii}
+# ====== TODO To be translated ======
+menuText P OptionsMovesColorSelected "Color Selected Square" 0 {Color move}
 menuText P OptionsMoves "Posunięcia" 0 {Wprowadzanie posunięć}
 menuText P OptionsMovesAsk "Zapytaj przed zastąpieniem posunięć" 0 \
   {Zapytaj przed zastąpieniem aktualnych posunięć}

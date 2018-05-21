@@ -314,6 +314,8 @@ menuText G OptionsMovesHighlightLastMove "Επισήμανση Τελευταί�
 menuText G OptionsMovesHighlightLastMoveDisplay "Εμφάνιση" 0 {DΕμφανίζει την  Τελευταία Κίνηση Επισημανσμένη}
 menuText G OptionsMovesHighlightLastMoveWidth "Πλάτος" 0 {Πλάτος Γραμμής}
 menuText G OptionsMovesHighlightLastMoveColor "Χρώμα" 0 {Χρώμα Γραμμής}
+# ====== TODO To be translated ======
+menuText G OptionsMovesColorSelected "Color Selected Square" 0 {Color move}
 menuText G OptionsMoves "Κινήσεις" 0 {Επιλογές εισαγωγής κίνησης}
 menuText G OptionsMovesAsk "Ερώτηση Αντικατάστασης Κίνησης" 1 \
   {Ερώτηση πριν την αντικατάσταση υπάρχουσας κίνησης}

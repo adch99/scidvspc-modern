@@ -309,6 +309,8 @@ menuText D OptionsMovesHighlightLastMove "Letzen Zug hervorheben" 0 {Rahmt Start
 menuText D OptionsMovesHighlightLastMoveDisplay "Anzeigen" 0 {Hervorhebung des letzen Zuges anzeigen}
 menuText D OptionsMovesHighlightLastMoveWidth "Dicke" 0 {Dicke der Linie}
 menuText D OptionsMovesHighlightLastMoveColor "Farbe" 0 {Farbe der Linie}
+# ====== TODO To be translated ======
+menuText D OptionsMovesColorSelected "Color Selected Square" 0 {Color move}
 menuText D OptionsMoves "Züge" 0 {Zugeingabeoptionen}
 menuText D OptionsMovesAsk "Fragen vor Ersetzen" 0 \
   {Vor Überschreiben existierender Züge nachfragen}

@@ -338,6 +338,8 @@ menuText O OptionsMovesHighlightLastMoveDisplay "Show" 0 {Display last move High
 menuText O OptionsMovesHighlightLastMoveWidth "Width" 0 {Thickness of line}
 # ====== TODO To be translated ======
 menuText O OptionsMovesHighlightLastMoveColor "Color" 0 {Color of line}
+# ====== TODO To be translated ======
+menuText O OptionsMovesColorSelected "Color Selected Square" 0 {Color move}
 menuText O OptionsMoves "Trekk" 0 {Innstillinger for hvordan trekk angis}
 menuText O OptionsMovesAsk "Spør før trekk erstattes" 0 \
   {Spør før eksisterende trekk erstattes av et nytt}

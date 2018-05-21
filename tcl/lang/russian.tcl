@@ -287,6 +287,8 @@ menuText R OptionsMovesHighlightLastMove "Подсветить последни�
 menuText R OptionsMovesHighlightLastMoveDisplay "Показать" 0 {Показать  последние подсвеченные ходы}
 menuText R OptionsMovesHighlightLastMoveWidth "Толщина" 0 {Толщина линии}
 menuText R OptionsMovesHighlightLastMoveColor "Цвет" 0 {Цвет линии}
+# ====== TODO To be translated ======
+menuText R OptionsMovesColorSelected "Color Selected Square" 0 {Color move}
 menuText R OptionsMoves "Ходы" 0 {Установки для ходов}
 menuText R OptionsMovesAsk "Спросить перед заменой ходов" 0 \
   {Спросить перед перезаписью любых ходов}

@@ -255,6 +255,8 @@ menuText L OptionsMovesHighlightLastMove "Korosta viimeisin siirto" 0 {Korosta v
 menuText L OptionsMovesHighlightLastMoveDisplay "Näytä" 0 {Näytä viimeisin siirto korostettuna}
 menuText L OptionsMovesHighlightLastMoveWidth "Leveys" 0 {Viivan leveys}
 menuText L OptionsMovesHighlightLastMoveColor "Väri" 0 {Viivan väri}
+# ====== TODO To be translated ======
+menuText L OptionsMovesColorSelected "Color Selected Square" 0 {Color move}
 menuText L OptionsMoves "Siirrot" 0 {Siirron suorittamisen vaihtoehdot}
 menuText L OptionsMovesAsk "Kysy ennen siirtojen korvaamista" 0 \
   {Kysy ennen olemassaolevien siirtojen korvaamista}
