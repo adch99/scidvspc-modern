@@ -6058,7 +6058,7 @@ sc_game (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         "firstMoves", "flag",       "import",     "info",
         "load",       "list",       "merge",      "moves",
         "new",        "novelty",    "number",     "pgn",
-        "pop",        "push",       "save",       "scores",
+        "pop",        "push",       "save",       "scores",	"values",
         "startBoard", "startPos",   "strip",      "summary",    "tags",
         "truncate", "truncatefree", "undo",      "undoPoint",   "redo",  NULL
     };
@@ -6067,7 +6067,7 @@ sc_game (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         GAME_FIRSTMOVES, GAME_FLAG,       GAME_IMPORT,     GAME_INFO,
         GAME_LOAD,       GAME_LIST,       GAME_MERGE,      GAME_MOVES,
         GAME_NEW,        GAME_NOVELTY,    GAME_NUMBER,     GAME_PGN,
-        GAME_POP,        GAME_PUSH,       GAME_SAVE,       GAME_SCORES,
+        GAME_POP,        GAME_PUSH,       GAME_SAVE,       GAME_SCORES,     GAME_VALUES,
         GAME_STARTBOARD, GAME_STARTPOS,   GAME_STRIP,      GAME_SUMMARY,    GAME_TAGS,
         GAME_TRUNCATE, GAME_TRUNCATEANDFREE, GAME_UNDO,    GAME_MAKE_UNDO_POINT,  GAME_REDO
     };
@@ -6153,6 +6153,9 @@ sc_game (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     case GAME_SCORES:
         return sc_game_scores (cd, ti, argc, argv);
+
+    case GAME_VALUES:
+        return sc_game_values (cd, ti, argc, argv);
 
     case GAME_STARTBOARD:
         return sc_game_startBoard (cd, ti, argc, argv);
@@ -8893,8 +8896,6 @@ sc_game_save (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     return TCL_OK;
 }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// addScoreToList:
 //    Called by sc_game_scores to check a comment for a numeric
 //    evaluation (a score), and add it to the list result for the
 //    specified Tcl interpreter if a score is found.
@@ -8926,8 +8927,6 @@ addScoreToList (Tcl_Interp * ti, int moveCounter, const char * comment,
 }
 
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// sc_game_scores:
 //    Returns a Tcl list of the numeric scores of each move, as found
 //    in the commment for each move.
 //    A score is a number with the format
@@ -8958,15 +8957,11 @@ sc_game_scores (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     bool inv_w = false;
     bool inv_b = false;
 
-    if (argc == 3) {
-        max = atof (argv[2]);
-        min = -max;
-    }
-    // fixme: f-ing Klimmek's invert score option excludes use of max (which itself is unused at the moment)
-    else if (argc == 4) {
-        inv_w = atoi (argv[2]);
-        inv_b = atoi (argv[3]);
-    }
+    if (argc != 4)
+        return errorResult (ti, "Usage: sc_game scores invert_white invert_black");
+
+    inv_w = atoi (argv[2]);
+    inv_b = atoi (argv[3]);
 
     Game * g = db->game;
     const char * comment;
@@ -8982,12 +8977,48 @@ sc_game_scores (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     return TCL_OK;
 }
 
-//~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// sc_game_startBoard:
-//    Sets the starting position from a FEN string.
-//    If there is no FEN string argument, a boolean value is
-//    returned indicating whether the current game starts with
-//    a setup positon.
+// Similar to sc_game_scores, but returns only [%<type> VALUE] lists
+
+int
+sc_game_values (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
+{
+    if (argc != 3)
+        return errorResult (ti, "Usage: sc_game values <type>");
+
+    int moveCounter = 0;
+
+    Game * g = db->game;
+    const char * comment;
+    char type[20];
+    snprintf (type, 20, "[%%%s ", argv[2]);
+
+    g->SaveState ();
+    g->MoveToPly (0);
+    while (g->MoveForward() == OK) {
+        int offset;
+        moveCounter++;
+        comment = g->GetMoveComment();
+        if (comment && (offset = strContainsIndex (comment, type)) > -1) {
+
+	    char buffer[1024], buffer2[1024];
+	    sprintf (buffer, "%.1f", (float)moveCounter * 0.5 + 0.5);
+
+	    sscanf (comment + offset + strlen(type), "%s ", buffer2);
+            
+            // needs a terminating ']' (which we remove)
+            if (buffer2[strlen(buffer2)-1] == ']') {
+              buffer2[strlen(buffer2)-1] = 0;
+	      Tcl_AppendElement (ti, buffer);
+	      Tcl_AppendElement (ti, buffer2);
+            }
+        }
+    }
+    db->game->RestoreState ();
+    return TCL_OK;
+}
+
+//  Tests for non-standard start, or sets the start position from a FEN string.
+
 int
 sc_game_startBoard (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
