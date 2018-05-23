@@ -298,7 +298,6 @@ menuText R OptionsMovesDelay "Временная задержка автоигр
   {Установить время задержки для режима автоигры}
 menuText R OptionsMovesCoord "Координаты ходов" 1 \
   {Принять стиль записи ходов с координатами ("g1f3")}
-menuText R OptionsMovesSuggest "Показать рекомендуемые ходы" 0 \
   {Включить/выключить советуемые ходы}
 menuText R OptionsShowVarPopup "Показать окно вариантов" 0 {Включает/выключает отображение окна вариантов}
 menuText R OptionsMovesSpace "Добавлять пробелы после номера хода" 0 {Добавлять пробелы после номера хода}
@@ -1385,7 +1384,6 @@ translate R CopyErrNotOpen {не открыта}
 translate R LightSquares {Светлые поля}
 translate R DarkSquares {Тёмные поля}
 translate R SelectedSquares {Выбранные поля}
-translate R SuggestedSquares {Поля подсказанных ходов}
 translate R Grid {Сетка}
 translate R Previous {Назад}
 translate R WhitePieces {Белые фигуры}

@@ -301,7 +301,6 @@ menuText P OptionsMovesDelay "Automatyczne przeglądanie..." 0 \
   {Ustaw opóźnienie przy automatycznym przeglądaniu partii}
 menuText P OptionsMovesCoord "Posunięcia w formacie \"g1f3\"" 0 \
   {Akceptuj posunięcia wprowadzone w formacie "g1f3"}
-menuText P OptionsMovesSuggest "Pokaż proponowane posunięcia" 1 \
   {Włącz/wyłącz proponowanie posunięć}
 menuText P OptionsShowVarPopup "Pokaż okno wariantów" 0 {Włącz/wyłącz wyświetlanie okna wariantów}  
 menuText P OptionsMovesSpace "Dodaj spację po numerze posunięcia" 0 {Dodawaj spację po numerze posunięcia}  
@@ -1392,7 +1391,6 @@ translate P CopyErrNotOpen {nie jest otwarta}
 translate P LightSquares {Jasne pola}
 translate P DarkSquares {Ciemne pola}
 translate P SelectedSquares {Wybrane pola}
-translate P SuggestedSquares {Wybrane posunięcie}
 translate P Grid {Krata}
 translate P Previous {Poprzednie}
 translate P WhitePieces {Białe figury}

@@ -298,7 +298,6 @@ menuText F OptionsMovesDelay "Délai entre les coups" 3 \
   {Positionner le délai entre deux coups en mode automatique}
 menuText F OptionsMovesCoord "Coordonnées entre les coups" 0 \
   {Accepter l'entrée des coups par coordonnées ("g1f3")}
-menuText F OptionsMovesSuggest "Montrer les coups suggérés" 0 \
   {Activer/Désactiver le mode de suggestion de coup}
 menuText F OptionsShowVarPopup "Montrer fenêtre des variantes" 0 {Affichage automatique des variantes}  
 menuText F OptionsMovesSpace "Ajouter un espace après le numéro du coup" 0 {Espace après numéro du coup}  
@@ -1379,7 +1378,6 @@ translate F CopyErrNotOpen {n'est pas ouverte}
 translate F LightSquares {Cases blanches}
 translate F DarkSquares {Cases noires}
 translate F SelectedSquares {Cases sélectionnées}
-translate F SuggestedSquares {Cases des coups suggérés}
 translate F Grid {Grille}
 translate F Previous {Précédents}
 translate F WhitePieces {Pièces blanches}

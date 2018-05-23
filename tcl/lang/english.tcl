@@ -290,8 +290,6 @@ menuText E OptionsMovesDelay "Autoplay Time Delay" 1 \
   {Set the time delay for autoplay mode}
 menuText E OptionsMovesCoord "Coordinate Move Entry" 0 \
   {Accept coordinate-style move entry (e.g. "g1f3")}
-menuText E OptionsMovesSuggest "Show Suggested Moves" 0 \
-  {Turn on/off move suggestion}
 menuText E OptionsShowVarPopup "Show Variation Window" 0 {Turn on/off the display of a variations window}  
 menuText E OptionsMovesSpace "Add Spaces after Move Number" 0 {Add spaces after move number}  
 menuText E OptionsMovesKey "Keyboard Completion" 0 \
@@ -1334,7 +1332,6 @@ translate E CopyErrNotOpen {is not open}
 translate E LightSquares {Light squares}
 translate E DarkSquares {Dark squares}
 translate E SelectedSquares {Selected}
-translate E SuggestedSquares {Suggested}
 translate E Grid {Grid}
 translate E Previous {Previous}
 translate E WhitePieces {White pieces}
