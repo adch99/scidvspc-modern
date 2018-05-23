@@ -302,7 +302,6 @@ menuText W OptionsMovesDelay "Fördröjning vid automatspel..." 1 \
   {Ange fördröjning mellan dragen när datorn spelar själv}
 menuText W OptionsMovesCoord "Koordinater" 0 \
   {Acceptera koordinater ("g1f3") vid dragangivelse}
-menuText W OptionsMovesSuggest "Visa föreslagna drag" 0 \
   {Visa/ Dölj föreslagna drag}
 menuText W OptionsShowVarPopup "Visa Variantfönster" 0 {Starta/Avsluta visningen av ett Variantfönster} 
 menuText W OptionsMovesSpace "Lägg till mellanslag efter dragnummer" 0 {Lägg till mellanslag efter dragnummer} 
@@ -1414,7 +1413,6 @@ translate W CopyErrNotOpen {är ej öppen}
 translate W LightSquares {Ljusa fält}
 translate W DarkSquares {Mörka fält}
 translate W SelectedSquares {Valda fält}
-translate W SuggestedSquares {Föreslagna fält}
 translate W Grid {Ruta}
 translate W Previous {Föregående}
 translate W WhitePieces {Vita pjäser}

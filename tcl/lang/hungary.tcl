@@ -332,7 +332,6 @@ menuText H OptionsMovesDelay "Automatikus visszajátszás késleltetése..." 0 \
   {Beállítja a késleltetést automatikus visszajátszáshoz.}
 menuText H OptionsMovesCoord "Lépés megadása koordinátákkal" 15 \
   {Koordinátákkal megadott lépést ("g1f3") is elfogad.}
-menuText H OptionsMovesSuggest "Javaslat" 0 \
   {Be/kikapcsolja a lépésjavaslatot.}
 # ====== TODO To be translated ======
 menuText H OptionsShowVarPopup "Show Variation Window" 0 {Turn on/off the display of a variations window}  
@@ -1526,7 +1525,6 @@ translate H CopyErrNotOpen {nincs megnyitva.}
 translate H LightSquares {Világos mezõk}
 translate H DarkSquares {Sötét mezõk}
 translate H SelectedSquares {Kiválasztott mezõk}
-translate H SuggestedSquares {Javasolt lépések mezõi}
 # todo
 translate H Grid {Grid}
 translate H Previous {Korábbi}

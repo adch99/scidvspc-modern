@@ -266,7 +266,6 @@ menuText T OptionsMovesDelay "Otomatik Oynatma Zamanı Gecikmesi" 1 \
   {Otomatik oynatma modu için zaman gecikmesini ayarlayın}
 menuText T OptionsMovesCoord "Klavyeden Oynama" 0 \
   {Koordinat stili oynama girişini kabul edin (ör. "g1f3")}
-menuText T OptionsMovesSuggest "Önerilen Hamleleri Göster" 0 \
   {Önerilen hamle için açma / kapama}
 menuText T OptionsShowVarPopup "Varyant Penceresini Aç/Kapat" 0 {Turn on/off the display of a variations window}  
 menuText T OptionsMovesSpace "Hamle numarasından sonra boşluk ekle" 0 {Hamle numarasından sonra boşluk ekle}  
@@ -1316,7 +1315,6 @@ translate T CopyErrNotOpen {açık değil}
 translate T LightSquares {Açık kareler}
 translate T DarkSquares {Koyu kareler}
 translate T SelectedSquares {seçilmiş}
-translate T SuggestedSquares {Önerilen}
 translate T Grid {Çerçeve}
 translate T Previous {Önceki}
 translate T WhitePieces {Beyaz Taşlar}

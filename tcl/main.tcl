@@ -1222,7 +1222,6 @@ proc mapPhotos {} {
 # These three should be ::board::_selectedSq($w) etc instead of globals
 set selectedSq -1
 set currentSq -1
-set bestSq -1
 
 set EMPTY 0
 set KING 1
@@ -1505,34 +1504,10 @@ proc addSanMove {san {animate ""} {noTraining ""}} {
   }
 }
 
-# enterSquare:
 #   Called when the mouse pointer enters a board square.
-#   Finds the best matching square for a move (if there is a
-#   legal move to or from this square), and colors the squares
-#   to indicate the suggested move.
-#
+
 proc enterSquare { square } {
-  global currentSq bestSq bestcolor selectedSq suggestMoves
-  set currentSq $square
-  if {$selectedSq == -1} {
-    set bestSq -1
-    if {$suggestMoves} {
-      set bestSq [sc_pos bestSquare $square]
-    }
-    if {[expr {$bestSq != -1}]} {
-      ::board::highlightSquare .main.board $square $bestcolor
-      ::board::highlightSquare .main.board $bestSq $bestcolor
-    }
-  }
-}
-
-#    Called when the mouse pointer leaves a board square.
-#    Recolors squares to normal (lite/dark) color.
-
-proc leaveSquare { square } {
-  if {$::bestSq != -1} {
-    ::board::update .main.board
-  }
+  set ::currentSq $square
 }
 
 #    Called when the left mouse button is pressed on a square.
@@ -1582,7 +1557,7 @@ proc releaseSquare {w x y} {
 
   if { [winfo exists .calvarWin] } { return }
 
-  global selectedSq bestSq
+  global selectedSq
 
   ::board::setDragSquare $w -1
   set square [::board::getSquare $w $x $y]
@@ -1592,18 +1567,7 @@ proc releaseSquare {w x y} {
   }
 
   if {$square == $selectedSq} {
-    if {$::suggestMoves} {
-      # User pressed and released on same square, so make the
-      # suggested move if there is one:
-      set selectedSq -1
-      ::board::highlightSquare $w $bestSq
-      ::board::highlightSquare $w $square
-      addMove $square $bestSq -animate
-      enterSquare $square
-    } else {
-      # Current square is the square user pressed the button on,
-      # so we do nothing.
-    }
+    # suggested-moves feature removed S.A
   } else {
     if {$selectedSq == -1} {
       return

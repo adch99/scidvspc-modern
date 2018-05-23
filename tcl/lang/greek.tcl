@@ -325,7 +325,6 @@ menuText G OptionsMovesDelay "Χρ.Καθυστέρηση Αναπαραγωγή
   {Ορισμός χρόνου καθυστέρησης της Αναπαραγωγής}
 menuText G OptionsMovesCoord "Κίνηση με Συντεταγμένες" 11 \
   {Αποδοχή Κινήσεων με Συντεταγμένες (πχ "g1f3")}
-menuText G OptionsMovesSuggest "Εμφάνιση Προτεινόμενης" 0 \
   {Εμφάνιση ή μη Προτεινόμενης Κίνησης}
 menuText G OptionsShowVarPopup "Εμφάνιση Παραθύρου Βαριάντων" 9 {Εμφάνιση ή μη Παραθύρου Βαριάντων}  
 menuText G OptionsMovesSpace "Προσθ.Κενού Μετά Αριθμ.Κίνησης" 6 {Προσθήκη κενού μετά από τον αριθμό της κίνησης}  
@@ -1430,7 +1429,6 @@ translate G CopyErrNotOpen {δεν είναι ανοικτή}
 translate G LightSquares {Λευκά τετράγωνα}
 translate G DarkSquares {Μαύρα τετράγωνα}
 translate G SelectedSquares {Επιλεγμένα}
-translate G SuggestedSquares {Προτεινόμενα}
 translate G Grid {Πλαίσιο}
 translate G Previous {Προηγούμενη}
 translate G WhitePieces {Λευκά κομμάτια}

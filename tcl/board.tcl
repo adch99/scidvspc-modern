@@ -7,21 +7,21 @@
 array set ::board::letterToPiece \
   {R wr r br N wn n bn B wb b bb Q wq q bq K wk k bk P wp p bp . e}
 
-# { name(unused), lite, dark, highcolor, bestcolor, bgcolor, highlightLastMoveColor }
+# { name(unused), lite, dark, highcolor, bgcolor, highlightLastMoveColor (missing) }
 
 set colorSchemes1 {
-  { Blue-white	#f3f3f3 #7389b6 #f3f484 #b8cbf8 steelblue4}
-  { Blue-ish	#d0e0d0 #80a0a0 #b0d0e0 #f0f0a0 grey}
-  { M.Thomas	#d3d9a8 #51a068 #e0d873 #86a000 grey20}
-  { GreenYellow	#e0d070 #70a070 #b0d0e0 #bebebe #29764e}
-  { Brown	#d0c0a0 #a08050 #b0d0e0 #bebebe tan4}
+  { Blue-white	#f3f3f3 #7389b6 #f3f484 steelblue4}
+  { Blue-ish	#d0e0d0 #80a0a0 #b0d0e0 grey}
+  { M.Thomas	#d3d9a8 #51a068 #e0d873 grey20}
+  { GreenYellow	#e0d070 #70a070 #b0d0e0 #29764e}
+  { Brown	#d0c0a0 #a08050 #b0d0e0 tan4}
 }
 set colorSchemes2 {
-  { Tan		#fbdbc4 #cc9c83 #b0d0e0 #bebebe rosybrown4}
-  { Grey	#dfdfdf #808080 #b0d0e0 #bebebe black }
-  { Rosy	#f8dbcc rosybrown #b0d0e0 #bebebe rosybrown4}
-  { SteelBlue	lightsteelblue steelblue #51a068 #e0d873 #002958}
-  { GreenSA     #46a631 #006400 #008064 rosybrown4 #8bb869 }
+  { Tan		#fbdbc4 #cc9c83 #b0d0e0 rosybrown4}
+  { Grey	#dfdfdf #808080 #b0d0e0 black }
+  { Rosy	#f8dbcc rosybrown #b0d0e0 rosybrown4}
+  { SteelBlue	lightsteelblue steelblue #51a068 #002958}
+  { GreenSA     #46a631 #006400 #008064 #8bb869 }
 }
 array set newColors {}
 
@@ -74,20 +74,19 @@ proc setBoardColor {row choice} {
   set newColors(lite) [lindex $list 1]
   set newColors(dark) [lindex $list 2]
   set newColors(highcolor) [lindex $list 3]
-  set newColors(bestcolor) [lindex $list 4]
-  set newColors(bgcolor)   [lindex $list 5]
+  set newColors(bgcolor)   [lindex $list 4]
   # highlightLastMoveColor needs to be added to colorSchemes1 , colorSchemes2 above 
-  set newColors(highlightLastMoveColor)   $::highlightLastMoveColor
+  set newColors(highlightLastMoveColor) $::highlightLastMoveColor
   set newColors(maincolor) $::maincolor
   set newColors(varcolor)  $::varcolor
 }
 
 proc applyBoardColors {} {
 
-  global newColors lite dark highcolor bestcolor bgcolor highlightLastMoveColor borderwidth maincolor varcolor
+  global newColors lite dark highcolor bgcolor highlightLastMoveColor borderwidth maincolor varcolor
 
   set w .bdOptions
-  set colors {lite dark highcolor bestcolor bgcolor highlightLastMoveColor maincolor varcolor}
+  set colors {lite dark highcolor bgcolor highlightLastMoveColor maincolor varcolor}
 
   foreach i $colors {
     set $i $newColors($i)
@@ -100,7 +99,6 @@ proc applyBoardColors {} {
     $w.bd.$i configure -background $newColors(lite)
   }
   $w.bd.bb configure -background $newColors(highcolor)
-  $w.bd.wk configure -background $newColors(bestcolor)
   foreach i $colors {
     $w.select.b$i configure -background $newColors($i)
   }
@@ -180,10 +178,10 @@ proc chooseBoardColors {} {
 
 proc initBoardColors {} {
 
-  global lite dark highcolor bestcolor bgcolor highlightLastMoveColor png_image_support maincolor varcolor
+  global lite dark highcolor bgcolor highlightLastMoveColor png_image_support maincolor varcolor
   global newColors boardStyles boardStyle boardSizes
 
-  set colors {lite dark highcolor bestcolor bgcolor highlightLastMoveColor maincolor varcolor}
+  set colors {lite dark highcolor bgcolor highlightLastMoveColor maincolor varcolor}
   set w .bdOptions
 
   if { [winfo exists $w] } {
@@ -302,10 +300,11 @@ if { $::docking::USE_DOCKING && $::autoResizeBoard} {
   }
 
   set f $w.select
-  foreach row {0 0 1 1 0 1 2 2} column {0 2 0 2 4 4 0 2} c {
-    lite dark highcolor bestcolor bgcolor highlightLastMoveColor maincolor varcolor
+
+  foreach row {0 0 1 0 1 2 1} column {0 2 0 4 4 0 2} c {
+    lite dark highcolor bgcolor highlightLastMoveColor maincolor varcolor
   } n {
-    LightSquares DarkSquares SelectedSquares SuggestedSquares Grid Previous ArrowMain ArrowVar
+    LightSquares DarkSquares SelectedSquares Grid Previous ArrowMain ArrowVar
   } {
     label $f.b$c -width 2 -background [set $c] 
     bind  $f.b$c <Button-1> "chooseAColor $w $c"

@@ -327,7 +327,6 @@ menuText C OptionsMovesDelay "Prodleva pøi automatickém pøehrávání..." 1 \
   {Nastavit èasovou prodlevu pøi automatickém pøehrávání}
 menuText C OptionsMovesCoord "Souøadnicové zadávání tahù" 0 \
   {Povolit zadávání tahù pomocí souøadnic (napø. "g1f3")}
-menuText C OptionsMovesSuggest "Ukázat navrhované tahy" 0 \
   {Zapnout/vypnout zobrazování navrhovaných tahù}
 # ====== TODO To be translated ======
 menuText C OptionsShowVarPopup "Show Variation Window" 0 {Turn on/off the display of a variations window}  
@@ -1517,7 +1516,6 @@ translate C CopyErrNotOpen {není otevøena}
 translate C LightSquares {Bílá pole}
 translate C DarkSquares {Èerná pole}
 translate C SelectedSquares {Vybraná pole}
-translate C SuggestedSquares {Pole navrhovaných tahù}
 # todo
 translate C Grid {Grid}
 translate C Previous {Pøedchozí}
