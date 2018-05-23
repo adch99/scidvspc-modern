@@ -450,15 +450,13 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
 
     canvas $w.c -width 500 -height 300
     $w.c create text 25 5 -tag text -justify center -width 1 -font font_Regular -anchor n
-    # $w.c create text 25 340 -tag text2 -text {Move Number} -justify center -font font_Regular
     pack $w.c -side top -expand yes -fill both
     bind $w <F1> {helpWindow Graphs Score}
     standardShortcuts $w
     bind $w <Configure> {
       .sgraph.c itemconfigure text -width [expr {[winfo width .sgraph.c] - 50}]
-      # .sgraph.c itemconfigure text2 -width [expr {[winfo width .sgraph.c] - 50}]
-      .sgraph.c coords text [expr {[winfo width .sgraph.c] / 2}] 2
-      ::utils::graph::configure score -height [expr {[winfo height .sgraph.c] - 90}]
+      .sgraph.c coords text [expr {[winfo width .sgraph.c] / 2}] 6
+      ::utils::graph::configure score -height [expr {[winfo height .sgraph.c] - 62}]
       ::utils::graph::configure score -width [expr {[winfo width .sgraph.c] - 50}]
       ::utils::graph::redraw score
       recordWinSize .sgraph
@@ -484,10 +482,10 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
   }
 
   $w.c itemconfigure text -width [expr {[winfo width $w.c] - 50}]
-  $w.c coords text [expr {[winfo width $w.c] / 2}] 2
-  set height [expr {[winfo height $w.c] - 90} ]
+  $w.c coords text [expr {[winfo width $w.c] / 2}] 6
+  set height [expr {[winfo height $w.c] - 62} ]
   set width [expr {[winfo width $w.c] - 50} ]
-  ::utils::graph::create score -width $width -height $height -xtop 25 -ytop 50 \
+  ::utils::graph::create score -width $width -height $height -xtop 25 -ytop 35 \
     -ytick 1 -xtick 5 -font font_Small -canvas $w.c -textcolor black \
     -hline {{gray90 1 each 1} {black 1 at 0}} \
     -vline {{gray90 1 each 1} {steelBlue 1 each 5}}
@@ -501,23 +499,17 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
   if {$whiteelo == 0} {set whiteelo ""} else {set whiteelo "($whiteelo)"}
   if {$blackelo == 0} {set blackelo ""} else {set blackelo "($blackelo)"}  
   switch [sc_game tag get Result] {
-    1 {
-  $w.c itemconfigure text -text "[sc_game info white] $whiteelo - [sc_game info black] $blackelo (1-0)\n[sc_game info site]  [sc_game info date]"
-    }
-    0 {
-  $w.c itemconfigure text -text "[sc_game info white] $whiteelo - [sc_game info black] $blackelo (0-1)\n[sc_game info site]  [sc_game info date]"
-    }
-    = {
-  $w.c itemconfigure text -text "[sc_game info white] $whiteelo - [sc_game info black] $blackelo (1/2-1/2)\n[sc_game info site]  [sc_game info date]"
-    }
-    default {
-  $w.c itemconfigure text -text "[sc_game info white] $whiteelo - [sc_game info black] $blackelo\n[sc_game info site]  [sc_game info date]"
-    }
+    1 { set result " (1-0)" }
+    0 { set result " (0-1)" }
+    = { set result " (1/2-1/2)" }
+    default { set result {} }
   }
+  $w.c itemconfigure text -text "[sc_game info white] $whiteelo - [sc_game info black] $blackelo$result"
 
-    ::utils::graph::data score data -color $linecolor -points 0 -lines 0 -bars 1 \
-       -barwidth .7 -outline grey \
-       -coords [sc_game scores $::tools::graphs::score::invertWhite $::tools::graphs::score::invertBlack]
+  ::utils::graph::data score data -color $linecolor -points 0 -lines 0 -bars 1 \
+     -barwidth .7 -outline grey \
+     -coords [sc_game scores $::tools::graphs::score::invertWhite $::tools::graphs::score::invertBlack]
+
   ::utils::graph::redraw score
 }
 
