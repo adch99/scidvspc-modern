@@ -156,6 +156,7 @@ set ::tools::graphs::absfilter::type year
 set ::tools::graphs::filter::type year
 set ::tools::graphs::showpoints 1
 set ::tools::graphs::showbar [expr ! $::macOS] ; # too slow on macs
+set ::tools::graphs::type Auto
 set macWheelMouse 1
 set annotate(addTag) 1
 set annotate(Moves) all

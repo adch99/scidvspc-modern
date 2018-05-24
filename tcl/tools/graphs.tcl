@@ -415,7 +415,6 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
 
   if {![winfo exists $w]} {
     ::createToplevel $w
-    ::setTitle $w "[tr ToolsScore]"
 
     setWinLocation $w
     setWinSize $w
@@ -435,6 +434,13 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
     $w.menu add cascade -label GraphOptions -menu $w.menu.options
 
     menu $w.menu.options
+
+    foreach type {Auto Score Time} {
+      $w.menu.options add radiobutton -label $type -variable ::tools::graphs::type -value $type \
+        -command ::tools::graphs::score::Refresh
+    }
+
+    $w.menu.options add separator
 
     $w.menu.options add checkbutton -label GraphOptionsBar \
       -variable ::tools::graphs::showbar -command ::tools::graphs::score::Refresh
@@ -481,13 +487,79 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
     ::createToplevelFinalize $w
   }
 
+  ### first up, decide on graph type and  axis
+
+  if {$::tools::graphs::type == "Score"} {
+    ::setTitle $w "[tr ToolsScore]"
+    set values [sc_game scores $::tools::graphs::score::invertWhite $::tools::graphs::score::invertBlack]
+    set yticks 1
+    set hlines {{gray90 1 each 1} {black 1 at 0}}
+  } else {
+    ::setTitle $w "Time Graph"
+
+    # Thanks to Uwe Klimmek for motivation to write this feature and minor code snippets
+    set values {}
+    set whiteSum 0
+    set blackSum 0
+
+    foreach {i emt} [sc_game values emt] {
+      set s [scan $emt "%f:%f:%f" ho mi sec]
+      switch $s {
+	2 {
+            set seconds [expr { $ho*60 + $mi}]
+	    lappend values $i $seconds
+          }
+        3 {
+            set seconds [expr { $ho*3600 + $mi*60 + $sec}]
+	    lappend values $i $seconds
+	 }
+        default {}
+      } 
+    }
+
+  
+    if {$::tools::graphs::type == "Auto" && [llength $values] < 5} {
+      # no emt so try score graph
+      ::setTitle $w "[tr ToolsScore]"
+      set values [sc_game scores $::tools::graphs::score::invertWhite $::tools::graphs::score::invertBlack]
+      set yticks 1
+      set hlines {{gray90 1 each 1} {black 1 at 0}}
+    } else {
+      set max 0
+      set valuesW {}
+      set valuesB {}
+      # Find max Value of time, then set the tick value vor horizontal lines
+      foreach {i j} $values {
+	  if {[string is integer $i]} {
+	    lappend valuesW $i $j
+	  } else {
+	    lappend valuesB $i $j
+	  }
+	  if {$j > $max} {set max $j}
+      }
+      set yticks 2
+      set hlines {{gray90 1 each 1} {black 1 at 0}}
+      if {$max > 20} {
+        set yticks 5
+      }
+      if {$max > 50} {
+        set yticks 10
+	set hlines {{gray90 1 each 2} {black 1 at 0}}
+      }
+      if {$max > 100} {
+        set yticks 20
+	set hlines {{gray90 1 each 5} {black 1 at 0}}
+      }
+    }
+  }
+
   $w.c itemconfigure text -width [expr {[winfo width $w.c] - 50}]
   $w.c coords text [expr {[winfo width $w.c] / 2}] 6
   set height [expr {[winfo height $w.c] - 62} ]
   set width [expr {[winfo width $w.c] - 50} ]
   ::utils::graph::create score -width $width -height $height -xtop 25 -ytop 35 \
-    -ytick 1 -xtick 5 -font font_Small -canvas $w.c -textcolor black \
-    -hline {{gray90 1 each 1} {black 1 at 0}} \
+    -ytick $yticks -xtick 5 -font font_Small -canvas $w.c -textcolor black \
+    -hline $hlines \
     -vline {{gray90 1 each 1} {steelBlue 1 each 5}}
 
   # Create fake dataset with bounds so we see at least -1.0 to 1.0:
@@ -507,8 +579,7 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
   $w.c itemconfigure text -text "[sc_game info white] $whiteelo - [sc_game info black] $blackelo$result"
 
   ::utils::graph::data score data -color $linecolor -points 0 -lines 0 -bars 1 \
-     -barwidth .7 -outline grey \
-     -coords [sc_game scores $::tools::graphs::score::invertWhite $::tools::graphs::score::invertBlack]
+     -barwidth .7 -outline grey -coords $values
 
   ::utils::graph::redraw score
 }
@@ -525,7 +596,7 @@ proc ::tools::graphs::score::ConfigMenus {{lang ""}} {
     configMenuText $m.file $idx GraphFile$tag $lang
   }
 
-  foreach idx {0 1 2} tag {Bar White Black} {
+  foreach idx {4 5 6} tag {Bar White Black} {
     configMenuText $m.options $idx GraphOptions$tag $lang
   }
 }
