@@ -1092,7 +1092,9 @@ $m.entry add checkbutton -label OptionsShowVarPopup \
 set helpMessage($m.entry,6) OptionsShowVarPopup
 
 $m.entry add checkbutton -label OptionsMovesColorSelected \
-    -variable colorActiveSquare -offvalue 0 -onvalue 1
+    -variable colorActiveSquare -offvalue 0 -onvalue 1 -command {
+      if {$::colorActiveSquare} {.main.board.bd delete moveRectangle}
+    }
 # FMD set helpMessage($m.entry,6) OptionsMovesColorSelected
 
 menu $m.entry.highlightlastmove -tearoff 1
