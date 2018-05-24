@@ -1539,7 +1539,7 @@ proc pressSquare {square confirm} {
   } else {
     ::board::setDragSquare .main.board -1
     ::board::highlightSquare .main.board $selectedSq
-    ::board::highlightSquare .main.board $square
+    # ::board::highlightSquare .main.board $square
     if {$square != $selectedSq} {
       addMove $square $selectedSq -animate
     }
@@ -1576,7 +1576,7 @@ proc releaseSquare {w x y} {
     addMove $square $selectedSq
     ::board::highlightSquare $w $selectedSq
     set selectedSq -1
-    ::board::highlightSquare $w $square
+    # ::board::highlightSquare $w $square
   }
   set ::addVariationWithoutAsking 0
 }
