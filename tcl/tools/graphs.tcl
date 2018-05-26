@@ -404,6 +404,7 @@ proc ::tools::graphs::score::Refresh {} {
 
 proc ::tools::graphs::score::Refresh2 {{init 0}} {
   set w .sgraph
+  set type $::tools::graphs::type
 
   if {![winfo exists $w.c] && ! $init} {
     return
@@ -435,8 +436,9 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
 
     menu $w.menu.options
 
-    foreach type {Auto Score Time} {
-      $w.menu.options add radiobutton -label $type -variable ::tools::graphs::type -value $type \
+    # (adjust ConfigMenus 6 7 8 below)
+    foreach i {Auto Score Time {Score Combo} {Time Combo}} {
+      $w.menu.options add radiobutton -label $i -variable ::tools::graphs::type -value $i \
         -command ::tools::graphs::score::Refresh
     }
 
@@ -489,65 +491,69 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
 
   ### first up, decide on graph type and  axis
 
-  if {$::tools::graphs::type == "Score"} {
-    ::setTitle $w "[tr ToolsScore]"
-    set values [sc_game scores $::tools::graphs::score::invertWhite $::tools::graphs::score::invertBlack]
-    set yticks 1
-    set hlines {{gray90 1 each 1} {black 1 at 0}}
-  } else {
-    ::setTitle $w "Time Graph"
+  set whiteValues {}
+  set blackValues {}
 
+  # default y-axis is Score
+  set yticks 1
+  set hlines {{gray90 1 each 1} {black 1 at 0}}
+
+  if {[string match Score* $type] || $type == "Auto"} {
+    set scoreValues [sc_game scores $::tools::graphs::score::invertWhite $::tools::graphs::score::invertBlack]
+  } 
+  if {[string match *Combo $type] || $type == "Time" } {
     # Thanks to Uwe Klimmek for motivation to write this feature and minor code snippets
-    set values {}
-    set whiteSum 0
-    set blackSum 0
-
+    set emtValues {}
     foreach {i emt} [sc_game values emt] {
+      set seconds ""
       set s [scan $emt "%f:%f:%f" ho mi sec]
       switch $s {
 	2 {
             set seconds [expr { $ho*60 + $mi}]
-	    lappend values $i $seconds
+            lappend emtValues $i $seconds
           }
         3 {
             set seconds [expr { $ho*3600 + $mi*60 + $sec}]
-	    lappend values $i $seconds
+            lappend emtValues $i $seconds
 	 }
         default {}
-      } 
+      }
     }
 
-  
-    if {$::tools::graphs::type == "Auto" && [llength $values] < 5} {
-      # no emt so try score graph
-      ::setTitle $w "[tr ToolsScore]"
-      set values [sc_game scores $::tools::graphs::score::invertWhite $::tools::graphs::score::invertBlack]
-      set yticks 1
-      set hlines {{gray90 1 each 1} {black 1 at 0}}
-    } else {
-      set max 0
-      set valuesW {}
-      set valuesB {}
-      # Find max Value of time, then set the tick value vor horizontal lines
-      foreach {i j} $values {
-	  if {[string is integer $i]} {
-	    lappend valuesW $i $j
-	  } else {
-	    lappend valuesB $i $j
-	  }
-	  if {$j > $max} {set max $j}
-      }
+    # process time data
+    set maxEmt 1
+    set whiteSum 0.0
+    set blackSum 0.0
+    # Find max Value of time, then set the tick value for horizontal lines
+
+    foreach {i j} $emtValues {
+	if {[string match *.0 $i]} {
+	  set whiteSum [expr $whiteSum + $j]
+	  lappend whiteValues $i $whiteSum
+	} else {
+	  set blackSum [expr $blackSum + $j]
+	  lappend blackValues $i $blackSum
+	}
+	if {$j > $maxEmt} {set maxEmt $j}
+    }
+
+    # Set scale for emt values if not showing score
+    # Auto - score 1st, then emt
+    # Score
+    # Time - emt
+    ### yscale is emt
+    if {[string match Time* $type] || ($type == "Auto" && [llength $scoreValues] < 5)} {
       set yticks 2
       set hlines {{gray90 1 each 1} {black 1 at 0}}
-      if {$max > 20} {
-        set yticks 5
+      if {$maxEmt > 20} {
+	set yticks 5
       }
-      if {$max > 50} {
-        set yticks 10
+      if {$maxEmt > 50} {
+	set yticks 10
 	set hlines {{gray90 1 each 2} {black 1 at 0}}
       }
-      if {$max > 100} {
-        set yticks 20
+      if {$maxEmt > 100} {
+	set yticks 20
 	set hlines {{gray90 1 each 5} {black 1 at 0}}
       }
     }
@@ -557,6 +563,7 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
   $w.c coords text [expr {[winfo width $w.c] / 2}] 6
   set height [expr {[winfo height $w.c] - 62} ]
   set width [expr {[winfo width $w.c] - 50} ]
+
   ::utils::graph::create score -width $width -height $height -xtop 25 -ytop 35 \
     -ytick $yticks -xtick 5 -font font_Small -canvas $w.c -textcolor black \
     -hline $hlines \
@@ -565,7 +572,7 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
   # Create fake dataset with bounds so we see at least -1.0 to 1.0:
   ::utils::graph::data score bounds -points 0 -lines 0 -bars 0 -coords {1 -0.9 1 0.9}
 
-  # Update the graph:
+  # Graph title is a canvas "text" item
   set whiteelo [sc_game tag get WhiteElo]
   set blackelo [sc_game tag get BlackElo]  
   if {$whiteelo == 0} {set whiteelo ""} else {set whiteelo "($whiteelo)"}
@@ -578,8 +585,77 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
   }
   $w.c itemconfigure text -text "[sc_game info white] $whiteelo - [sc_game info black] $blackelo$result"
 
+  # Finalise graph
+
+  switch $type {
+    Score {
+      set lineGraph 0
+      set values $scoreValues
+      ::setTitle $w "[tr ToolsScore]"
+    }
+    Time {
+      set lineGraph 0
+      set values $emtValues
+      ::setTitle $w "Time Graph"
+    }
+    {Score Combo} {
+      set lineGraph 1
+      set values $scoreValues
+      ::setTitle $w "[tr ToolsScore]"
+    }
+    {Time Combo} {
+      set lineGraph 1
+      set values $emtValues
+      ::setTitle $w "Time Graph"
+    }
+    Auto {
+      set lineGraph 1
+      if {[llength $scoreValues] < 10 && [llength $scoreValues] < [llength $emtValues]} {
+        set values $emtValues
+	::setTitle $w "Time Graph"
+      } else {
+        set values $scoreValues
+	::setTitle $w "[tr ToolsScore]"
+      }
+    }
+  }
+
   ::utils::graph::data score data -color $linecolor -points 0 -lines 0 -bars 1 \
      -barwidth .7 -outline grey -coords $values
+
+  # if showing linegraph, calculate maximum y axis and adjust line graph value
+  if {$lineGraph && [expr [llength $whiteValues] + [llength $blackValues]] > 10} {
+    set max 1
+    foreach {i j} $values {
+      if {$j > $max} {set max $j}
+    }
+    # ensure we are doing float arithetic
+    if {[string is integer $max]} {
+      set max $max.0
+    }
+    set maxWhite [lindex $whiteValues end]
+    set maxBlack [lindex $whiteValues end]
+    if {$maxBlack > $maxWhite} {
+      set maxLines $maxBlack
+    } else {
+      set maxLines $maxWhite
+    }
+    set scale [expr $max / $maxLines]
+    set scaledWhiteValues {}
+    set scaledBlackValues {}
+    foreach {i j} $whiteValues {
+      lappend scaledWhiteValues $i [expr $j * $scale]
+    }
+    foreach {i j} $blackValues {
+      lappend scaledBlackValues $i [expr $j * $scale]
+    }
+
+    ::utils::graph::data score lineWhite -color grey50 -points 0 -lines 1 -linewidth 2 -radius 2 -bars 0 -coords $scaledWhiteValues
+    ::utils::graph::data score lineBlack -color black -points 0 -lines 1 -linewidth 2 -radius 2 -bars 0 -coords $scaledBlackValues
+    # set key [::utils::string::Surname $p]
+    # -key $key -coords [sc_name info -ratings:$year -elo:$elo $p]
+    
+  }
 
   ::utils::graph::redraw score
 }
@@ -596,7 +672,7 @@ proc ::tools::graphs::score::ConfigMenus {{lang ""}} {
     configMenuText $m.file $idx GraphFile$tag $lang
   }
 
-  foreach idx {4 5 6} tag {Bar White Black} {
+  foreach idx {6 7 8} tag {Bar White Black} {
     configMenuText $m.options $idx GraphOptions$tag $lang
   }
 }
