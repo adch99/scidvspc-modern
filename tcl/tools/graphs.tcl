@@ -501,9 +501,9 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
   if {[string match Score* $type] || $type == "Auto"} {
     set scoreValues [sc_game scores $::tools::graphs::score::invertWhite $::tools::graphs::score::invertBlack]
   } 
+  set emtValues {}
   if {[string match *Combo $type] || $type == "Time" } {
     # Thanks to Uwe Klimmek for motivation to write this feature and minor code snippets
-    set emtValues {}
     foreach {i emt} [sc_game values emt] {
       set seconds ""
       set s [scan $emt "%f:%f:%f" ho mi sec]
