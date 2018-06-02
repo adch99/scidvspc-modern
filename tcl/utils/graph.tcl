@@ -214,6 +214,8 @@ proc ::utils::graph::redraw {graph} {
   ::utils::graph::plot_data $graph
   if {$graph == "score"} {
     ::utils::graph::updateMove
+    # Print a little title on the top left of graph
+    $::utils::graph::_data(score,canvas) create text 30 50 -text $::tools::graphs::score::title -font font_Small -anchor w
   }
 }
 

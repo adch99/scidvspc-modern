@@ -468,7 +468,6 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
       ::utils::graph::configure score -height [expr {[winfo height .sgraph.c] - 62}]
       ::utils::graph::configure score -width [expr {[winfo width .sgraph.c] - 50}]
       ::utils::graph::redraw score
-      .sgraph.c create text 30 50 -text $::tools::graphs::score::title -font font_Small -anchor w
       recordWinSize .sgraph
     }
     bind $w.c <ButtonPress-3> ::tools::graphs::score::Refresh
@@ -544,7 +543,7 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
     # Score
     # Time - emt
     ### yscale is emt
-    if {[string match Time* $type] || ($type == "Auto" && [llength $scoreValues] < 5)} {
+    if {[string match Time* $type] || (($type == "Auto" || $type == "Score Combo") && [llength $scoreValues] < 5)} {
       set yticks 2
       set hlines {{gray90 1 each 1} {black 1 at 0}}
       if {$maxEmt > 20} {
@@ -621,6 +620,9 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
       }
     }
   }
+  ###### Override above ######
+  # It's ugly, but for clarity, show type on graph
+  set title $type
 
   set ::tools::graphs::score::title $title
 
@@ -638,13 +640,20 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
       set max $max.0
     }
     set maxWhite [lindex $whiteValues end]
-    set maxBlack [lindex $whiteValues end]
+    set maxBlack [lindex $blackValues end]
     if {$maxBlack > $maxWhite} {
       set maxLines $maxBlack
     } else {
       set maxLines $maxWhite
     }
-    set scale [expr $max / $maxLines]
+
+    if {$type == "Score Combo" && [llength $scoreValues] < 5} {
+      # Scale to emt yaxis , as no Scores
+      # ... or we *could* use a "total time" scale if we recalculate yticks, hlines
+      set scale [expr $maxEmt / $maxLines]
+    } else {
+      set scale [expr $max / $maxLines]
+    }
     set scaledWhiteValues {}
     set scaledBlackValues {}
     foreach {i j} $whiteValues {
@@ -661,7 +670,6 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
   }
 
   ::utils::graph::redraw score
-  $w.c create text 30 50 -text $::tools::graphs::score::title -font font_Small -anchor w
 }
 
 proc ::tools::graphs::score::ConfigMenus {{lang ""}} {
