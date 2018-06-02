@@ -466,6 +466,7 @@ append helpText(Index) {
   <li><a TB>Tablebases</a></li>
   <li>Finding extra PGN <a Maintenance Tags>Tags</a>
   <li><a Crosstable tiebreak>Tie-Breaks</a></li>
+  <li><a Graphs Score>Time Graph</a></li>
   <li>The <a MainWindow Toolbar>Toolbar</a></li>
   <li><a Menus Tools>Tools menu</a></li>
   <li><a Tourney>Tournament</a> of Chess Engines</li>
@@ -3552,12 +3553,12 @@ in the <a PInfo>Player Information</a> window, or by selecting "Player Ratings"
 from the Tools menu. Right-clicking the graph will refresh it.
   </p>
 
-  <h3><name Score>Score Graph</name></h3>
+  <h3><name Score>Score/Time Graph</name></h3>
   <p>
-  The <green><run ::tools::graphs::score::Raise>Score Graph</run></green> (Control-Shift-Z)
-  shows the move evaluations (stored as comments in the current game) as a graph. </p>
-  <p>
-  The first step in using the Score Graph is to add scores to a game with Scid's <a Analysis Annotating>annotation feature</a>.
+  The <green><run ::tools::graphs::score::Raise>Score/Time Graph</run></green> (Control-Shift-Z)
+  shows the Move Evaluations or Move Times (stored as comments in the current game) as a graph. </p>
+  <p>The graph type is changed in Graph-<gt>Options, and data gathered from the standard PGN comments (or "commands") <b>%eval</b> and <b>%emt</b>.</p>
+  <p>Alterntively, Scid vs PC can add scores using the <a Analysis Annotating>annotation feature</a>.
   These scores have one of the formats +0.25, [% +0.25] , or [%eval +0.25]. The later two formats allow these scores to be hidden in  the PGN window by enabling PGN-<gt>Hide Codes.
   The values are represented from White's perspective (so a negative value means black is ahead).
   In cases when the scores are not from White's perspective, one can select an option
@@ -3575,7 +3576,7 @@ from the Tools menu. Right-clicking the graph will refresh it.
 <green><run SetScoreBarColour>Options-<gt>Colors-<gt>Score Graph current</run></green>.
   
 
-  <p><footer>Updated: Scid vs. PC 4.15 Sept 2015</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.20 June 2018</footer></p>
 }
 
 set helpTitle(TB) "Tablebases"
