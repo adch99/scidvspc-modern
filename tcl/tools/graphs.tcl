@@ -416,6 +416,7 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
 
   if {![winfo exists $w]} {
     ::createToplevel $w
+    ::setTitle $w $::tr(Graph)
 
     setWinLocation $w
     setWinSize $w
@@ -467,6 +468,7 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
       ::utils::graph::configure score -height [expr {[winfo height .sgraph.c] - 62}]
       ::utils::graph::configure score -width [expr {[winfo width .sgraph.c] - 50}]
       ::utils::graph::redraw score
+      .sgraph.c create text 30 50 -text $::tools::graphs::score::title -font font_Small -anchor w
       recordWinSize .sgraph
     }
     bind $w.c <ButtonPress-3> ::tools::graphs::score::Refresh
@@ -502,7 +504,7 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
     set scoreValues [sc_game scores $::tools::graphs::score::invertWhite $::tools::graphs::score::invertBlack]
   } 
   set emtValues {}
-  if {[string match *Combo $type] || $type == "Time" } {
+  if {$type != "Score" } {
     # Thanks to Uwe Klimmek for motivation to write this feature and minor code snippets
     foreach {i emt} [sc_game values emt] {
       set seconds ""
@@ -591,34 +593,36 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
     Score {
       set lineGraph 0
       set values $scoreValues
-      ::setTitle $w "[tr ToolsScore]"
+      set title {Score Graph}
     }
     Time {
       set lineGraph 0
       set values $emtValues
-      ::setTitle $w "Time Graph"
+      set title {Time Graph (seconds)}
     }
     {Score Combo} {
       set lineGraph 1
       set values $scoreValues
-      ::setTitle $w "[tr ToolsScore]"
+      set title {Score Graph}
     }
     {Time Combo} {
       set lineGraph 1
       set values $emtValues
-      ::setTitle $w "Time Graph"
+      set title {Time Graph (seconds)}
     }
     Auto {
       set lineGraph 1
       if {[llength $scoreValues] < 10 && [llength $scoreValues] < [llength $emtValues]} {
         set values $emtValues
-	::setTitle $w "Time Graph"
+	set title {Time Graph (seconds)}
       } else {
         set values $scoreValues
-	::setTitle $w "[tr ToolsScore]"
+	set title {Score Graph}
       }
     }
   }
+
+  set ::tools::graphs::score::title $title
 
   ::utils::graph::data score data -color $linecolor -points 0 -lines 0 -bars 1 \
      -barwidth .7 -outline grey -coords $values
@@ -654,10 +658,10 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
     ::utils::graph::data score lineBlack -color black -points 0 -lines 1 -linewidth 2 -radius 2 -bars 0 -coords $scaledBlackValues
     # set key [::utils::string::Surname $p]
     # -key $key -coords [sc_name info -ratings:$year -elo:$elo $p]
-    
   }
 
   ::utils::graph::redraw score
+  $w.c create text 30 50 -text $::tools::graphs::score::title -font font_Small -anchor w
 }
 
 proc ::tools::graphs::score::ConfigMenus {{lang ""}} {
