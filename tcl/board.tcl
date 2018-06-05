@@ -1427,7 +1427,7 @@ proc ::board::highlightSquare {args} {
       set square [lindex $args 1]
       if {$square < 0  ||  $square > 63} { puts "error square = $square" ; return }
       set box [::board::mark::GetBox $board $square 1.0 1]
-      $board create rectangle $box -outline black -width $::highlightLastMoveWidth -tag moveRectangle
+      $board create rectangle $box -outline black -width $::highlightLastMoveWidth -tag {moveRectangle mark}
       # Only using black at the moment, but could use (another?) colour
       # -outline $::highlightLastMoveColor ???
     } else  {
