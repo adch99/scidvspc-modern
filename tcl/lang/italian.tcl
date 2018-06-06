@@ -315,7 +315,6 @@ menuText I OptionsMovesDelay "Intervallo di tempo per il gioco automatico..." 1 
   {Definisce l'intervallo di tempo per il gioco automatico}
 menuText I OptionsMovesCoord "Immissione mossa per coordinate" 0 \
   {Accetta l'input di mossa mediante coordinate ("g1f3")}
-  {Attiva/Disattiva il suggerimento di mosse}
 menuText I OptionsShowVarPopup "Mostra Finestra Varianti" 0 {Attiva/Disattiva la visualizzazione della finestra delle varianti}
 menuText I OptionsMovesSpace "Aggiungi Spazi dopo Mossa" 0 {Agginuge spazi dopo il numero della mossa}
 menuText I OptionsMovesKey "Completamento da tastiera" 0 \

@@ -282,7 +282,6 @@ menuText U OptionsMovesDelay "Tempo de atraso p/ Jogo automático..." 1 \
   {Define o tempo de espera antes de entrar no modo de jogo automatico}
 menuText U OptionsMovesCoord "Entrada de movimentos por coordenadas" 0 \
   {Aceita o estilo de entrada de movimentos por coordenadas ("g1f3")}
-  {Liga/desliga sugestao de movimentos}
 menuText U OptionsShowVarPopup "Mostrar janela de Variantes" 0 {Turn on/off the display of a variations window}  
 menuText U OptionsMovesSpace "Adicionar um espaço depois do número do lance" 0 {Add spaces after move number}  
 menuText U OptionsMovesKey "Auto completar" 0 \

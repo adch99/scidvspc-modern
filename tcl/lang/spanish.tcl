@@ -317,7 +317,6 @@ menuText S OptionsMovesDelay "Retardo del Automovimiento" 1 \
   {Pone el tiempo de demora para el modo de automovimiento}
 menuText S OptionsMovesCoord "Entrada de movimientos coordinada" 0 \
   {Acepta entrada de movimientos en sistema "coordinado" ("g1f3")}
-  {Activa/desactiva la sugerencia de movimientos}
 menuText S OptionsShowVarPopup "Mostrar ventana de variaciones" 0 {Activa/desactivar la ventana de variaciones}
 menuText S OptionsMovesSpace "Añadir espacios detrás de número de jugada" 0 {Añadir espacios detrás del número de jugada}  
 menuText S OptionsMovesKey "Teclado inteligente" 0 \
