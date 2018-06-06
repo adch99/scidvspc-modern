@@ -327,7 +327,6 @@ menuText C OptionsMovesDelay "Prodleva pøi automatickém pøehrávání..." 1 \
   {Nastavit èasovou prodlevu pøi automatickém pøehrávání}
 menuText C OptionsMovesCoord "Souøadnicové zadávání tahù" 0 \
   {Povolit zadávání tahù pomocí souøadnic (napø. "g1f3")}
-  {Zapnout/vypnout zobrazování navrhovaných tahù}
 # ====== TODO To be translated ======
 menuText C OptionsShowVarPopup "Show Variation Window" 0 {Turn on/off the display of a variations window}  
 # ====== TODO To be translated ======

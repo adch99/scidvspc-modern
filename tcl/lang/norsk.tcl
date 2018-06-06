@@ -349,7 +349,6 @@ menuText O OptionsMovesDelay "Autospillforsinkelse..." 0 \
   {Sett forsinkelsen ved automatisk gjennomgang av partiet}
 menuText O OptionsMovesCoord "Koordinater" 0 \
   {Tillat angivelse av koordinater ("g1f3")}
-  {Slå av/på forslag til trekk}
 # ====== TODO To be translated ======
 menuText O OptionsShowVarPopup "Show Variation Window" 0 {Turn on/off the display of a variations window}  
 # ====== TODO To be translated ======

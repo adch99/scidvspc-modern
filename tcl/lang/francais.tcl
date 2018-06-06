@@ -298,7 +298,6 @@ menuText F OptionsMovesDelay "Délai entre les coups" 3 \
   {Positionner le délai entre deux coups en mode automatique}
 menuText F OptionsMovesCoord "Coordonnées entre les coups" 0 \
   {Accepter l'entrée des coups par coordonnées ("g1f3")}
-  {Activer/Désactiver le mode de suggestion de coup}
 menuText F OptionsShowVarPopup "Montrer fenêtre des variantes" 0 {Affichage automatique des variantes}  
 menuText F OptionsMovesSpace "Ajouter un espace après le numéro du coup" 0 {Espace après numéro du coup}  
 menuText F OptionsMovesKey "Complétion clavier" 0 \

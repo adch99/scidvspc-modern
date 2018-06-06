@@ -309,7 +309,6 @@ menuText N OptionsMovesDelay "Tijdinstelling voor auto-spelen" 10 \
   {Stel de tijd in voor het automatisch spelen van de zetten}
 menuText N OptionsMovesCoord "Zet-ingave" 0 \
   {Accepteer de volgende manier van zetten invoeren ("g1f3")}
-  {Schakel hints aan of uit}
 menuText N OptionsShowVarPopup "Toon variantenvenster" 0 {In-/Uitschakelen weergeven van het variantenvenster} 
 menuText N OptionsMovesSpace "Spaties zetten achter zetnummer" 0 {Zet spaties na het zetnummer}  
 menuText N OptionsMovesKey "Auto-aanvullen" 0 \

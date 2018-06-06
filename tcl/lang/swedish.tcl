@@ -302,7 +302,6 @@ menuText W OptionsMovesDelay "Fördröjning vid automatspel..." 1 \
   {Ange fördröjning mellan dragen när datorn spelar själv}
 menuText W OptionsMovesCoord "Koordinater" 0 \
   {Acceptera koordinater ("g1f3") vid dragangivelse}
-  {Visa/ Dölj föreslagna drag}
 menuText W OptionsShowVarPopup "Visa Variantfönster" 0 {Starta/Avsluta visningen av ett Variantfönster} 
 menuText W OptionsMovesSpace "Lägg till mellanslag efter dragnummer" 0 {Lägg till mellanslag efter dragnummer} 
 menuText W OptionsMovesKey "Tangentkomplettering" 0 \

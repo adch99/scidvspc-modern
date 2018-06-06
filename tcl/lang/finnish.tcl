@@ -266,7 +266,6 @@ menuText L OptionsMovesDelay "Automaattisen pelaamisen viivästys" 1 \
   {Aseta aikaviivästys automaattisen pelaamisen moodille}
 menuText L OptionsMovesCoord "Koordinoi siirron tekeminen" 0 \
   {Hyväksy koordinaattityylinen siirron suoritus (esim. "g1f3")}
-  {Käännä päälle/pois siirtoehdotus}
 menuText L OptionsShowVarPopup "Näytä muunnelmaikkuna" 0 {Käännä päälle/pois muunnelmaikkunan näyttö}  
 menuText L OptionsMovesSpace "Lisää välilyöntejä siirron numeron jälkeen" 0 {Lisää välilyöntejä siirron numeron jälkeen}  
 menuText L OptionsMovesKey "Näppäimistön täydentäminen" 0 \

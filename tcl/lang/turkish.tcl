@@ -266,7 +266,6 @@ menuText T OptionsMovesDelay "Otomatik Oynatma Zamanı Gecikmesi" 1 \
   {Otomatik oynatma modu için zaman gecikmesini ayarlayın}
 menuText T OptionsMovesCoord "Klavyeden Oynama" 0 \
   {Koordinat stili oynama girişini kabul edin (ör. "g1f3")}
-  {Önerilen hamle için açma / kapama}
 menuText T OptionsShowVarPopup "Varyant Penceresini Aç/Kapat" 0 {Turn on/off the display of a variations window}  
 menuText T OptionsMovesSpace "Hamle numarasından sonra boşluk ekle" 0 {Hamle numarasından sonra boşluk ekle}  
 menuText T OptionsMovesKey "Klavye Tamamlama" 0 \

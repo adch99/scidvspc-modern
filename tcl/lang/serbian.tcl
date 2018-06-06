@@ -348,7 +348,6 @@ menuText Y OptionsMovesDelay "Odlaganje izmeðu poteza..." 1 \
   {Podesi vreme odlaganja pri automatskom pregledanju poteza}
 menuText Y OptionsMovesCoord "Uno¹enje koordinata poteza" 0 \
   {Prihvati uno¹enje poteza pomoæu koordinata ("g1f3")}
-  {Ukljuèi/iskljuèi preporuèene poteze}
 # ====== TODO To be translated ======
 menuText Y OptionsShowVarPopup "Show Variation Window" 0 {Turn on/off the display of a variations window}  
 # ====== TODO To be translated ======
