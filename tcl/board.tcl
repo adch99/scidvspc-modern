@@ -244,9 +244,10 @@ if { $::docking::USE_DOCKING && $::autoResizeBoard} {
     if {[winfo exists $w.pieces$row.$j]} {
       continue
     }
-    button $w.pieces$row.$j -text $i -font font_Small -borderwidth 1 -command "
-      set boardStyle $i
-      setPieceFont $i $w.pieces$row.$j"
+    button $w.pieces$row.$j -text $i -font font_Small -borderwidth 1 \
+      -command "setPieceFont $i $w.pieces$row.$j"
+
+
     pack $w.pieces$row.$j -side left
     if {$i == $boardStyle} {
       set boardStyleActiveButton $w.pieces$row.$j
@@ -401,6 +402,20 @@ if { $::docking::USE_DOCKING && $::autoResizeBoard} {
   packbuttons top $w.buttons.ok
 
   applyBoardColors
+}
+
+###  Given a piece font name, resets all piece images in all available board sizes to that font
+
+proc setPieceFont {font button} {
+  global boardSizes boardStyle boardStyleActiveButton
+
+  set boardStyle $font
+  foreach size $boardSizes {
+    setPieceData $font $size
+  }
+  $boardStyleActiveButton configure -font font_Small
+  set boardStyleActiveButton $button
+  $boardStyleActiveButton configure -font font_SmallBold
 }
 
 
