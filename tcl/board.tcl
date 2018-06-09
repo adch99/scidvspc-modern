@@ -179,7 +179,7 @@ proc chooseBoardColors {} {
 proc initBoardColors {} {
 
   global lite dark highcolor bgcolor highlightLastMoveColor png_image_support maincolor varcolor
-  global newColors boardStyles boardStyle boardSizes
+  global newColors boardStyles boardStyle boardSizes boardStyleActiveButton
 
   set colors {lite dark highcolor bgcolor highlightLastMoveColor maincolor varcolor}
   set w .bdOptions
@@ -246,8 +246,12 @@ if { $::docking::USE_DOCKING && $::autoResizeBoard} {
     }
     button $w.pieces$row.$j -text $i -font font_Small -borderwidth 1 -command "
       set boardStyle $i
-      setPieceFont $i"
+      setPieceFont $i $w.pieces$row.$j"
     pack $w.pieces$row.$j -side left
+    if {$i == $boardStyle} {
+      set boardStyleActiveButton $w.pieces$row.$j
+      $boardStyleActiveButton configure -font font_SmallBold
+    }
 
     incr counter
     if {$counter % $piecesPerRow == 0} {
