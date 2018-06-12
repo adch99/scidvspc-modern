@@ -720,6 +720,9 @@ translate E Informant++- {The game is considered won}
 
 # Book window
 translate E Book {Book}
+translate E OtherBook {Other Moves}
+translate E Alphabetical {Alphabetical}
+translate E TwoBooks {Two Books}
 
 # Analysis Engine open dialog:
 translate E EngineList {Analysis Engines}

@@ -699,6 +699,12 @@ translate L Informant++- {Peli on voitettu}
 
 # Book window
 translate L Book {Avauskirjasto}
+# ====== TODO To be translated ======
+translate L OtherBook {Other Moves}
+# ====== TODO To be translated ======
+translate L Alphabetical {Alphabetical}
+# ====== TODO To be translated ======
+translate L TwoBooks {Two Books}
 
 # Analysis Engine open dialog:
 translate L EngineList {Analyysiohjelmat}

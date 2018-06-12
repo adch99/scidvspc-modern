@@ -919,6 +919,12 @@ translate Y Informant+- {White has a decisive advantage}
 translate Y Informant++- {The game is considered won}
 # ====== TODO To be translated ======
 translate Y Book {Book}
+# ====== TODO To be translated ======
+translate Y OtherBook {Other Moves}
+# ====== TODO To be translated ======
+translate Y Alphabetical {Alphabetical}
+# ====== TODO To be translated ======
+translate Y TwoBooks {Two Books}
 
 # Analysis Engine open dialog:
 translate Y EngineList {Analysis Engine List} ;# ***

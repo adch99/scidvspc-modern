@@ -697,6 +697,12 @@ translate T Informant++- {Oyun kazanılan kabul edilir}
 
 # Book window
 translate T Book {Kitap}
+# ====== TODO To be translated ======
+translate T OtherBook {Other Moves}
+# ====== TODO To be translated ======
+translate T Alphabetical {Alphabetical}
+# ====== TODO To be translated ======
+translate T TwoBooks {Two Books}
 
 # Analysis Engine open dialog:
 translate T EngineList {Motor listesi}

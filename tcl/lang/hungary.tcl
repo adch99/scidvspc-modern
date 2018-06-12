@@ -848,6 +848,12 @@ translate H Informant+- {White has a decisive advantage}
 translate H Informant++- {The game is considered won}
 # ====== TODO To be translated ======
 translate H Book {Book}
+# ====== TODO To be translated ======
+translate H OtherBook {Other Moves}
+# ====== TODO To be translated ======
+translate H Alphabetical {Alphabetical}
+# ====== TODO To be translated ======
+translate H TwoBooks {Two Books}
 
 # Analysis Engine open dialog:
 translate H EngineList {Elemzõ motorok listája}

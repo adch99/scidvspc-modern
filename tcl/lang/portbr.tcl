@@ -847,6 +847,12 @@ translate B Informant+- {White has a decisive advantage}
 translate B Informant++- {The game is considered won}
 # ====== TODO To be translated ======
 translate B Book {Book}
+# ====== TODO To be translated ======
+translate B OtherBook {Other Moves}
+# ====== TODO To be translated ======
+translate B Alphabetical {Alphabetical}
+# ====== TODO To be translated ======
+translate B TwoBooks {Two Books}
 
 # Analysis Engine open dialog:
 translate B EngineList {Lista de Programas de Analise}

@@ -841,6 +841,12 @@ translate C Informant+- {White has a decisive advantage}
 translate C Informant++- {The game is considered won}
 # ====== TODO To be translated ======
 translate C Book {Book}
+# ====== TODO To be translated ======
+translate C OtherBook {Other Moves}
+# ====== TODO To be translated ======
+translate C Alphabetical {Alphabetical}
+# ====== TODO To be translated ======
+translate C TwoBooks {Two Books}
 
 # Analysis Engine open dialog:
 translate C EngineList {Seznam programù pro analýzu}
