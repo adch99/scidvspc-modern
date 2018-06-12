@@ -719,6 +719,12 @@ translate U Informant+/- {Vantagem das brancas}
 translate U Informant+- {Vantagem decisiva das brancas}
 translate U Informant++- {O jogo considera-se ganho}
 translate U Book {Livro}
+# ====== TODO To be translated ======
+translate U OtherBook {Other Moves}
+# ====== TODO To be translated ======
+translate U Alphabetical {Alphabetical}
+# ====== TODO To be translated ======
+translate U TwoBooks {Two Books}
 
 # Analysis Engine open dialog:
 translate U EngineList {Lista de Programas de Análise}

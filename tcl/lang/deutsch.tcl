@@ -789,6 +789,12 @@ translate D Informant+/- {Weiﬂ hat m‰ﬂigen Vorteil}
 translate D Informant+- {Weiﬂ hat groﬂen Vorteil}
 translate D Informant++- {Partie wird gewonnen}
 translate D Book {Buch}
+# ====== TODO To be translated ======
+translate D OtherBook {Other Moves}
+# ====== TODO To be translated ======
+translate D Alphabetical {Alphabetical}
+# ====== TODO To be translated ======
+translate D TwoBooks {Two Books}
 
 # Analysis Engine open dialog:
 translate D EngineList {Analyse-Engines}

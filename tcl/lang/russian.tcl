@@ -751,6 +751,12 @@ translate R Informant++- {Партия считается выигранной}
 
 # Book window
 translate R Book {Книга}
+# ====== TODO To be translated ======
+translate R OtherBook {Other Moves}
+# ====== TODO To be translated ======
+translate R Alphabetical {Alphabetical}
+# ====== TODO To be translated ======
+translate R TwoBooks {Two Books}
 
 # Analysis Engine open dialog:
 translate R EngineList {Список анализирующих движков}

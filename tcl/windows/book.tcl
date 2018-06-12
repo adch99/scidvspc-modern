@@ -165,9 +165,9 @@ namespace eval book {
       $w.main.combo2 configure -state disabled
     }
     
-    checkbutton $w.main.alpha -text {Alphabetical} -variable ::book::sortAlpha  -command ::book::refresh
+    checkbutton $w.main.alpha -textvar ::tr(Alphabetical) -variable ::book::sortAlpha  -command ::book::refresh
 
-    checkbutton $w.main.showtwo -text {Two Books} -variable ::book::showTwo  -command {
+    checkbutton $w.main.showtwo -textvar ::tr(TwoBooks) -variable ::book::showTwo  -command {
       if {$::book::showTwo} {
         .bookWin.main.combo2 configure -state normal
 	pack .bookWin.2 -fill both -side right
@@ -178,22 +178,12 @@ namespace eval book {
       ::book::refresh
     }
 
-    checkbutton $w.main.showopp -text {Opponent's Book} -variable ::book::oppMovesVisible \
-       -command { ::book::togglePositionsDisplay }
-    ::utils::tooltip::Set $w.main.showopp {Moves to which the opponent has a reply}
+    checkbutton $w.main.showother -textvar ::tr(OtherBook) -variable ::book::oppMovesVisible -command ::book::togglePositionsDisplay
+    ::utils::tooltip::Set $w.main.showother {Moves leading to other book positions}
 
     pack $w.main.alpha   -side top -anchor w -pady 5
     pack $w.main.showtwo     -side top -anchor w -pady 5
-    pack $w.main.showopp -side top -anchor w -pady 5
-
-    frame $w.main.buttons
-    pack $w.main.buttons -side bottom -pady 10
-
-    button $w.main.buttons.back -image tb_prev -command ::move::Back -relief flat
-    button $w.main.buttons.next -image tb_next -command ::move::Forward -relief flat
-
-    pack $w.main.buttons.back -side left  -padx 3
-    pack $w.main.buttons.next -side right -padx 3
+    pack $w.main.showother -side top -anchor w -pady 5
 
     dialogbutton $w.main.help -textvariable ::tr(Help) -command {helpWindow Book}
     dialogbutton $w.main.close -textvariable ::tr(Close) -command "destroy $w"
@@ -393,6 +383,10 @@ if {0} {
       set action replace
     } else {
       set action [confirmReplaceMove]
+    }
+
+    if {$action != "cancel"} {
+      sc_game undoPoint
     }
 
     if {$action == "replace"} {

@@ -848,6 +848,12 @@ translate I Informant+/- {Il bianco ha un moderato vantaggio}
 translate I Informant+- {Il bianco ha un vantaggio decisivo}
 translate I Informant++- {La partita è considerata vinta}
 translate I Book {Libro}
+# ====== TODO To be translated ======
+translate I OtherBook {Other Moves}
+# ====== TODO To be translated ======
+translate I Alphabetical {Alphabetical}
+# ====== TODO To be translated ======
+translate I TwoBooks {Two Books}
 
 # Analysis Engine open dialog:
 translate I EngineList {Lista dei motori di analisi}

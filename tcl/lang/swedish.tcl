@@ -778,6 +778,12 @@ translate W Informant+/- {Vit har en liten fördel}
 translate W Informant+- {Vit har en avgörande fördel}
 translate W Informant++- {Partiet anses vara vunnet}
 translate W Book {Bok}
+# ====== TODO To be translated ======
+translate W OtherBook {Other Moves}
+# ====== TODO To be translated ======
+translate W Alphabetical {Alphabetical}
+# ====== TODO To be translated ======
+translate W TwoBooks {Two Books}
 
 # Analysis Engine open dialog:
 translate W EngineList {Lista över schackprogram}

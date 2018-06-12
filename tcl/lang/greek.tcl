@@ -795,6 +795,12 @@ translate G Informant++- {Η Παρτίδα έχει κερδηθεί}
 
 # Book window
 translate G Book {Ανοίγματα}
+# ====== TODO To be translated ======
+translate G OtherBook {Other Moves}
+# ====== TODO To be translated ======
+translate G Alphabetical {Alphabetical}
+# ====== TODO To be translated ======
+translate G TwoBooks {Two Books}
 
 # Analysis Engine open dialog:
 translate G EngineList {Μηχανές Ανάλυσης}

@@ -752,6 +752,12 @@ translate F Informant++- {La partie est gagnée}
 
 # Book window
 translate F Book {Bibliothèque}
+# ====== TODO To be translated ======
+translate F OtherBook {Other Moves}
+# ====== TODO To be translated ======
+translate F Alphabetical {Alphabetical}
+# ====== TODO To be translated ======
+translate F TwoBooks {Two Books}
 
 # Analysis Engine open dialog:
 translate F EngineList {Liste des moteurs d'analyse}

@@ -762,6 +762,12 @@ translate P Informant+/- {Wyraźna przewaga}
 translate P Informant+- {Rozstrzygająca przewaga}
 translate P Informant++- {Wygrana}
 translate P Book {Książka debiutowa}
+# ====== TODO To be translated ======
+translate P OtherBook {Other Moves}
+# ====== TODO To be translated ======
+translate P Alphabetical {Alphabetical}
+# ====== TODO To be translated ======
+translate P TwoBooks {Two Books}
 
 # Analysis Engine open dialog:
 translate P EngineList {Programy szachowe}

@@ -774,6 +774,12 @@ translate S Informant+/- {Blancas tienen ventaja}
 translate S Informant+- {Blancas tienen una ventaja decisiva}
 translate S Informant++- {La partida es considerada ganada}
 translate S Book {Libro}
+# ====== TODO To be translated ======
+translate S OtherBook {Other Moves}
+# ====== TODO To be translated ======
+translate S Alphabetical {Alphabetical}
+# ====== TODO To be translated ======
+translate S TwoBooks {Two Books}
 
 # Analysis Engine open dialog:
 translate S EngineList {Lista de motores de análisis}

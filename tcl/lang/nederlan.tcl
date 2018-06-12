@@ -783,6 +783,12 @@ translate N Informant+/- {Wit heeft duidelijk voordeel}
 translate N Informant+- {Wit heeft een beslissend voordeel}
 translate N Informant++- {Je mag stellen dat de partij gewonnen is}
 translate N Book {Openingenboek}
+# ====== TODO To be translated ======
+translate N OtherBook {Other Moves}
+# ====== TODO To be translated ======
+translate N Alphabetical {Alphabetical}
+# ====== TODO To be translated ======
+translate N TwoBooks {Two Books}
 
 # Analysis Engine open dialog:
 translate N EngineList {Analyse enginelijst}

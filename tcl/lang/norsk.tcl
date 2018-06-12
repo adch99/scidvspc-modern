@@ -919,6 +919,12 @@ translate O Informant+- {White has a decisive advantage}
 translate O Informant++- {The game is considered won}
 # ====== TODO To be translated ======
 translate O Book {Book}
+# ====== TODO To be translated ======
+translate O OtherBook {Other Moves}
+# ====== TODO To be translated ======
+translate O Alphabetical {Alphabetical}
+# ====== TODO To be translated ======
+translate O TwoBooks {Two Books}
 
 # Analysis Engine open dialog:
 translate O EngineList {Liste over analysemotorer}

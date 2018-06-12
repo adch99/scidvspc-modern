@@ -4415,17 +4415,22 @@ set helpText(Book) {<h1>Book Window</h1>
   Opening Books are small databases recording moves at the start of a game
   and how often each move occurs. Scid's <run
   ::book::Open><green>Book Window</green></run> allows perusal of opening
-  books, and a few nifty features besides.
+  books, and a few extra features.
   </p><p>
   <i>Scid uses the popular <b>Polyglot</b> book format, and comes with a few
   databases  already installed, including gm2600.bin and Elo2400.bin</i>.  </p>
 <h2>Features</h2>
   <p>
   In Scid vs. PC, two books can be viewed at once. Normally, moves are listed in order
-  of frequency, but selecting the <b>Alphabetical</b> box will sort them; placing
+  of weight, but selecting the <b>Alphabetical</b> box will sort them, placing
   like moves side-by-side.
   </p>
-<p>Scid also has an Opponent's Book. [todo ???] and <a BookTuning>Book Tuning</a> feature.</p>
+  <p>
+  The <b>Other Moves</b> button shows moves not in the book, but which lead to book positions.
+  </p>
+  <p>
+  See also the <a BookTuning>Book Tuning</a> feature.
+  </p>
 
 <h2><name Polyglot>Polyglot</name></h2>
 
@@ -4447,7 +4452,7 @@ See the polyglot documentation for more options.
 <p>
 <b>polyglot merge-book -in1 w.bin -in2 b.bin out book.bin</b>
 </p>
-<p><footer>Updated: Scid vs. PC 4.6 October, 2011</footer></p>
+<p><footer>Updated: Scid vs. PC 4.19 June, 2018</footer></p>
 }
 
 # Tactical game window help
