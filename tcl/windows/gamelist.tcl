@@ -800,6 +800,11 @@ proc ::windows::gamelist::Popup {w x y X Y} {
     $menu add command -label $::tr(GlistRemoveGameAndBelowFromFilter) -command {::windows::gamelist::removeFromFilter down}
     $menu add command -label $::tr(Reset) -command "$f.reset invoke"
     }
+    if {[sc_base isReadOnly]} {
+      $menu entryconfigure $::tr(GlistDeleteField) -state disabled
+      $menu entryconfigure $::tr(Flag) -state disabled
+    }
+
     menu $menu.flags -tearoff -1
     foreach flag $maintFlaglist  {
       # dont translate CustomFlag (todo)
@@ -921,13 +926,9 @@ proc ::windows::gamelist::checkAltered {} {
 }
 
 proc configCompactButton {} {
-  # also check the Flag button
   set f .glistWin.b.f
-  # debug puts [sc_base current] &&&
-  if {[sc_base current] == [sc_info clipbase]} {
-    ### Can't compact clipbase
-    $f.compact configure -state disabled
-  } elseif {[sc_base isReadOnly]} {
+
+  if {[sc_base current] == [sc_info clipbase] || [sc_base isReadOnly]} {
     $f.compact configure -state disabled
   } else {
     $f.compact configure -state normal
