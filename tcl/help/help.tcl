@@ -5370,7 +5370,7 @@ set helpText(TacticsTrainer) {<h1>Mate in ..N.. Puzzles</h1>
   <p>
   Scid's
 <run ::tactics::config><green>Mate in ...</green></run> widget
-  is a handy way to improve your chess skills. And waste some time!
+  is a handy way to improve your chess skills.
   The feature is fairly straight forward, though not especially polished.
 </p>
   <h3>Configuration</h3>
@@ -5403,7 +5403,7 @@ set helpText(TacticsTrainer) {<h1>Mate in ..N.. Puzzles</h1>
   Some exercises do not end in a mate, with the
   solution only giving a clear advantage. If one wants to play out these
   scenarios and only count the exercise solved in case of a win, just
-  check the <term>Win won game</term> option. This option has no
+  check the <term>Playout exercises</term> option. This option has no
   meaning in case of a clear mate solution.
   </p>
   <p>

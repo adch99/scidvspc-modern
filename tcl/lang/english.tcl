@@ -1447,7 +1447,7 @@ translate E Next {Next}
 translate E ResettingScore {Resetting score}
 translate E LoadingGame {Loading game}
 translate E MateFound {Mate found}
-translate E BestSolutionNotFound {Best solution NOT found !}
+translate E BestSolutionNotFound {Best solution not found.}
 translate E MateNotFound {Mate not found}
 translate E ShorterMateExists {Shorter mate exists}
 translate E ScorePlayed {Score played}
@@ -1455,7 +1455,7 @@ translate E Expected {expected}
 translate E ChooseTrainingBase {Choose Training Base}
 translate E Thinking {Thinking}
 translate E AnalyzeDone {Analyze done}
-translate E WinWonGame {Win won game}
+translate E WinWonGame {Playout exercises}
 translate E Lines {Lines}
 translate E ConfigureUCIengine {Configure Engine}
 translate E SpecificOpening {Specific opening}

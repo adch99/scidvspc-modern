@@ -29,8 +29,7 @@ namespace eval tactics {
   # set labelSolution {. . . . . . }
   set lastGameLoaded 0
   set prevFen ""
-  ### This used to be significant, but now is dynamic, according to which slot "toga" has
-  # set engineSlot 5
+
   # Don't try to find the exact best move but to win a won game (that is a mate in 5 is ok even if there was a pending mate in 2)
   set winWonGame 0
 
@@ -130,9 +129,8 @@ namespace eval tactics {
     global ::tactics::basePath ::tactics::baseList ::tactics::baseDesc
     set basePath $::scidBasesDir
 
-    set w .tacticsWin
-    if {[winfo exists $w]} {
-      destroy $w
+    if {[winfo exists .tacticsWin]} {
+      destroy .tacticsWin
     }
 
     set w .configTactics
@@ -140,6 +138,7 @@ namespace eval tactics {
       raiseWin $w
       return
     }
+
     update
     toplevel $w
     wm title $w $::tr(ConfigureTactics)
@@ -189,7 +188,7 @@ namespace eval tactics {
 
     listbox $w.fconfig.flist.lb -selectmode single -exportselection 0 \
         -yscrollcommand "$w.fconfig.flist.ybar set" -height 10 -width 30
-    bind $w.fconfig.flist.lb <Double-Button-1> ::tactics::start
+    bind $w.fconfig.flist.lb <Double-Button-1> "::tactics::start $w"
 
     scrollbar $w.fconfig.flist.ybar -command "$w.fconfig.flist.lb yview"
     pack $w.fconfig.flist.lb $w.fconfig.flist.ybar -side left -fill y
@@ -205,7 +204,7 @@ namespace eval tactics {
       set desc [lindex $::tactics::baseDesc $current]
       if {[tk_messageBox -type yesno -parent .configTactics -icon question \
 	     -title {Confirm Reset} -message "Confirm resetting \"$desc\" database"] == {yes}} {
-	::tactics::resetScores $name
+	::tactics::resetScores $name .configTactics
       }
     }
     pack $w.fconfig.reset.button
@@ -219,7 +218,7 @@ namespace eval tactics {
     pack $w.fconfig.flimit.analysisTime -side bottom
 
     frame $w.fconfig.fbutton
-    dialogbutton $w.fconfig.fbutton.ok -text Ok -command ::tactics::start
+    dialogbutton $w.fconfig.fbutton.ok -text Ok -command "::tactics::start $w"
     dialogbutton $w.fconfig.fbutton.cancel -text $::tr(Cancel) -command "focus .main ; destroy $w"
     pack $w.fconfig.fbutton.ok $w.fconfig.fbutton.cancel -expand yes -side left -padx 20 -pady 2
     pack $w.fconfig $w.fconfig.flist $w.fconfig.reset -side top
@@ -235,16 +234,19 @@ namespace eval tactics {
     bind $w <F1> { helpWindow TacticsTrainer }
   }
 
-  ################################################################################
-  #
-  ################################################################################
-  proc start {} {
+
+  proc start {parent} {
     global ::tactics::analysisEngine ::askToReplaceMoves ::tactics::askToReplaceMoves_old
 
     set current [.configTactics.fconfig.flist.lb curselection]
     set base [lindex $::tactics::baseList [expr $current * 2]]
     set desc [lindex $::tactics::baseDesc $current]
-    destroy .configTactics
+
+    if {![::tactics::loadBase [file rootname $base] $parent]} {
+      return
+    }
+
+    destroy $parent
 
     set ::gameInfo(hideNextMove) 1
     if {[winfo exists .pgnWin]} {
@@ -307,8 +309,6 @@ namespace eval tactics {
     bind $w <Configure> "recordWinSize $w"
     bind $w <F1> { helpWindow TacticsTrainer }
 
-    ::tactics::loadBase [file rootname $base]
-
     setInfoEngine "---"
     ::tactics::loadNextGame
     ::tactics::mainLoop
@@ -331,9 +331,7 @@ namespace eval tactics {
 
     catch { ::uci::closeUCIengine $::tactics::engineSlot }
   }
-  ################################################################################
-  #
-  ################################################################################
+
   proc toggleSolution {} {
     global ::tactics::showSolution ::tactics::labelSolution ::tactics::analysisEngine
 
@@ -364,10 +362,7 @@ namespace eval tactics {
     update
   }
 
-  ################################################################################
-  #
-  ################################################################################
-  proc resetScores {name} {
+  proc resetScores {name parent} {
     global ::tactics::cancelScoreReset ::tactics::baseList
 
     set base [file rootname $name]
@@ -375,7 +370,7 @@ namespace eval tactics {
     set wasOpened 0
 
     if {[sc_base count free] == 0} {
-      tk_messageBox -type ok -icon info -title Scid -message "Too many databases are opened\nClose one first"
+      tk_messageBox -type ok -icon info -title Scid -message "Too many databases are opened\nClose one first" -parent $parent
       return
     }
     # check if the base is already opened
@@ -384,9 +379,13 @@ namespace eval tactics {
       set wasOpened 1
     } else  {
       if { [catch { sc_base open $base }] } {
-        tk_messageBox -type ok -icon warning -title Scid -message "Unable to open base"
+        tk_messageBox -type ok -icon warning -title Scid -message "Unable to open base" -parent $parent
         return
       }
+    }
+    if {[sc_base isReadOnly]} {
+        tk_messageBox -type ok -icon warning -title Scid -message "Base $base is read-only" -parent $parent
+        return
     }
 
     # reset site tag for each game
@@ -622,10 +621,6 @@ namespace eval tactics {
       set matePending 1
       #  Engine may find a mate then put a score != 300 but rather 10
       if {[string index $line end] != "#"} {
-        # Engine line does not end with a # but the score is a mate (we can't count plies here)
-        if {[sc_pos side] == "white" && $score < -300 || [sc_pos side] == "black" && $score > 300} {
-          return ""
-        }
         if {! $::tactics::winWonGame } {
           return $::tr(MateNotFound)
         } else  {
@@ -674,20 +669,24 @@ namespace eval tactics {
   ################################################################################
   # Loads a base bundled with Scid (in ./bases directory)
   ################################################################################
-  proc loadBase { name } {
+  proc loadBase {name parent} {
 
     if {[sc_base count free] == 0} {
-      tk_messageBox -type ok -icon info -title Scid -message "Too many databases are open; close one first"
-      return
+      tk_messageBox -type ok -icon info -title Scid -message "Too many databases are open; close one first" -parent $parent
+      return 0
     }
     # check if the base is already opened
     if {[sc_base slot $name] != 0} {
       sc_base switch [sc_base slot $name]
     } else  {
       if { [catch { sc_base open $name }] } {
-        tk_messageBox -type ok -icon warning -title Scid -message "Unable to open base"
-        return
+        tk_messageBox -type ok -icon warning -title Scid -message "Unable to open base" -parent $parent
+        return 0
       }
+    }
+    if {[sc_base isReadOnly]} {
+        tk_messageBox -type ok -icon warning -title Scid -message "Base $name is read-only" -parent $parent
+        return 0
     }
 
     ::tree::refresh
@@ -696,6 +695,7 @@ namespace eval tactics {
     updateBoard -pgn
     updateTitle
     updateStatusBar
+    return 1
   }
 
   ################################################################################
