@@ -1442,6 +1442,9 @@ proc addAnnotation {tomove} {
     return
   }
 
+  ### Hmmm - this stops last move blunders from being annotated.
+  ### Remove it, and see if there's any issues S.A
+if {0}
   # Cannot (yet) add a variation at the end of the game or a variation:
   if {[sc_pos isAt vend]} {
       addScore $n single 1
@@ -1449,6 +1452,7 @@ proc addAnnotation {tomove} {
       ::tools::graphs::score::Refresh
       return
   }
+}
 
   # set text [format "%d:%+.2f" $analysis(depth$n) $analysis(score$n)]
   set moves $analysis(moves$n)
