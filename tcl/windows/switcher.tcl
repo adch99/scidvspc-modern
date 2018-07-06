@@ -956,6 +956,9 @@ proc ::windows::switcher::Open {} {
       $f.menu.show add command -label WindowsTree  -command "::tree::Open $i"
       $f.menu.show add command -label TreeFileBest -command "::tree::OpenBest $i"
       $f.menu.show add separator
+      $f.menu.show add command -label LoadFilter  -command "loadFilter $i"
+      $f.menu.show add command -label SaveFile -command "saveFilter $i"
+      $f.menu.show add separator
       $f.menu.show add command -label [tr ChangeIcon] -command "changeBaseType $i $w"
       $f.menu.show add checkbutton -label [tr ShowIcons] -variable ::windows::switcher::icons -command ::windows::switcher::Refresh
       $f.menu.show add checkbutton -label [tr ConfirmCopy] -variable ::windows::switcher::confirmCopy 
@@ -1199,4 +1202,50 @@ proc copyFilter {frombaseNum tobaseNum} {
   bind $w <Return> "$w.b.go invoke"
   bind $w <Escape> "$w.b.cancel invoke"
   focus $w.b.go
+}
+
+proc saveFilter {base} {
+  global initialDir env
+
+  set ftype { { "Scid Filter files" {".sff"} } }
+  if {! [file isdirectory $initialDir(sff)] } {
+    set initialDir(sff) $env(HOME)
+  } 
+  set fName [tk_getSaveFile -initialdir $initialDir(sff) -initialfile [file tail [sc_base filename $base]].sff \
+                -filetypes $ftype -title "Create a Filter file" -parent .glistWin]
+  if {$fName == ""} {
+    return
+  }
+
+  set initialDir(sff) [file dirname $fName]
+  if {[string compare [file extension $fName] ".sff"] != 0} {
+    append fName ".sff"
+  }
+}
+
+proc loadFilter {base} {
+  global initialDir env
+
+  set ftype { { "Scid Filter files" {".sff"} } }
+  if {! [file isdirectory $initialDir(sff)] } {
+    set initialDir(sff) $env(HOME)
+  } 
+  set fName [tk_getOpenFile -initialdir $initialDir(sff) -parent .glistWin \
+		 -filetypes $ftype -title "Select a Filter file"]
+  if {$fName == ""} {
+    return
+  }
+
+  set initialDir(sff) [file dirname $fName]
+return
+  if {[catch {uplevel "#0" {source $fName} } ]} {
+    tk_messageBox -title "Scid: Error reading file" -type ok -icon warning \
+                -message "Unable to open or read SearchOptions file: $fName"
+  } else {
+    switch -- $::searchType {
+      "Material" { ::search::material }
+      "Header"   { ::search::header }
+      default    { return }
+    }
+  }
 }
