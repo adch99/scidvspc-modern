@@ -508,6 +508,7 @@ set initialDir(html) $::env(HOME)
 set initialDir(tex)  $::env(HOME)
 set initialDir(stm)  $::env(HOME)
 set initialDir(sso)  $::env(HOME)
+set initialDir(sff)  $::env(HOME)
 set initialDir(report) $::env(HOME)
 set initialDir(tablebase1) ""
 set initialDir(tablebase2) ""
