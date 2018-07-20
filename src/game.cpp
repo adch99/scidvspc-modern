@@ -32,6 +32,7 @@
 
 #include <math.h>
 #include <string.h>
+#include <ctype.h>
 
 // Piece letters translation
 // (not all languages have piece translation)
@@ -816,6 +817,28 @@ Game::SetMoveComment (const char * comment)
     } else {
         m->comment = StrAlloc->Duplicate (comment);
         // CommentsFlag = 1;
+    }
+}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Game::AppendMoveComment():
+//      Append to the comment for a move. A comment before the game
+//      itself is stored as a comment of FirstMove.
+//
+void
+Game::AppendMoveComment (const char * comment)
+{
+    ASSERT (CurrentMove != NULL  &&  CurrentMove->prev != NULL);
+    if (comment != NULL) {
+	moveT * m = CurrentMove->prev;
+	if (m->comment) {
+	    uint length = strLength (m->comment);
+	    char delim = length == 0 || isspace (m->comment[length - 1]) ? '\0' : ' ';
+	    m->comment = StrAlloc->Append (m->comment, comment, delim);
+	} else {
+	    m->comment = StrAlloc->Duplicate (comment);
+	    // CommentsFlag = 1;
+	}
     }
 }
 

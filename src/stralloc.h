@@ -112,6 +112,7 @@ class StrAllocator
 
     inline char * New (uint numBytes);  // Allocates a new string.
     char *  Duplicate (const char * original);  // Duplicates a string.
+    char *  Append (const char * str, const char * tail, char delim = '\0');  // Append to a string.
 
     uint   MemoryUsed ();    // Returns total allocated memory.
 };

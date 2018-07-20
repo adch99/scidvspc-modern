@@ -16,6 +16,8 @@
 #include "stralloc.h"
 #include "misc.h"
 
+#include <string.h>
+
 void
 StrAllocator::NewBucket ()
 {
@@ -67,6 +69,47 @@ StrAllocator::Duplicate (const char * original)
         *s = *original;  s++;  original++;
     }
     *s = 0;
+    return newStr;
+}
+
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// StrAllocator::Append():
+//      Append to an existing string.
+//
+char *
+StrAllocator::Append (const char * str, const char * tail, char delim)
+{
+    ASSERT (str != NULL);
+    ASSERT (tail != NULL);
+
+    uint oldSize  = strLength (str);
+    uint tailSize = strLength (tail);
+    uint addSize  = tailSize + (delim ? 1 : 0);
+    uint newSize  = oldSize + addSize;
+
+    if (str == LastAllocAddress && FirstBucket->bytesFree >= addSize) {
+	// Append to last string.
+	ASSERT(LastAllocSize == oldSize + 1);
+	if (delim) {
+	    LastAllocAddress[oldSize++] = delim;
+	}
+	::strncpy (LastAllocAddress + oldSize, tail, tailSize);
+	LastAllocAddress[newSize] = '\0';
+	LastAllocSize = newSize + 1;
+	FirstBucket->bytesFree -= addSize;
+	return LastAllocAddress;
+    }
+    
+    // Allocate new string.
+    char * newStr = New (newSize + 1);
+    ::strncpy (newStr, str, oldSize);
+    if (delim) {
+	newStr[oldSize++] = delim;
+    }
+    ::strncpy (newStr + oldSize, tail, tailSize);
+    newStr[newSize] = '\0';
+    Delete (str);
     return newStr;
 }
 
