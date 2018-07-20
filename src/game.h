@@ -370,6 +370,7 @@ public:
     uint     GetVarNumber();
 
     void     SetMoveComment (const char * comment);
+    void     AppendMoveComment (const char * comment);
     char *   GetMoveComment () { return CurrentMove->prev->comment; }
 
     inline errorT AddNag (byte nag);

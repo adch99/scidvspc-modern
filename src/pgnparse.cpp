@@ -1164,7 +1164,7 @@ PgnParser::ParseMoves (Game * game, char * buffer, uint bufSize)
             // Problem is, this is fine for indented comments (as we'd find in column formatted pgn)
             // , but not desirable for non-indented comments, where we want to preserve newlines (for eg)
             strSingleSpace (buffer);
-            game->SetMoveComment (buffer);
+            game->AppendMoveComment (buffer);
             break;
 
         case TOKEN_LineComment:
