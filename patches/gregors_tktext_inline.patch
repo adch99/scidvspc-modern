@@ -1,4 +1,4 @@
-Gregor's tktext patch version 2017-feb
+Gregor's tktext patch version 2017-feb (revised to apply cleanly August 2018)
 
 This patch inlines Gregor's awesome rewritten tk::text proc into Scid vs. PC.
 It primarily speeds the text widget tag processing, but also fixes quite a few
@@ -7,7 +7,6 @@ bugs and introduces new features. Please see:
 It is currently still beta, but should be included in mainline wish soon/when it is finalised.
 
 Apply this patch, then re-run configure, and make install as normal
-Note - debugging (using the flags "-DTRACE_BUG=1 -g") should (must) now be enabled.
 
 S.A.
 
@@ -95,11 +94,11 @@ S.A.
 +/* vi:set ts=8 sw=4: */
 Index: Makefile.conf
 ===================================================================
---- Makefile.conf	(revision 2668)
+--- Makefile.conf	(revision 2876)
 +++ Makefile.conf	(working copy)
-@@ -124,6 +124,24 @@
-       src/universalchardet/nsSJISProber.o src/universalchardet/nsUniversalDetector.o \
-       src/universalchardet/nsUTF8Prober.o
+@@ -215,6 +215,24 @@
+   src/spellchk.o src/stored.o src/stralloc.o src/textbuf.o src/tree.o
+ 
  
 +TKTEXTOBJS= \
 +		src/tktext/tkBitField.o \
@@ -122,7 +121,7 @@ Index: Makefile.conf
  ### ZLIBOBJS: object files in the zlib compression library.
  
  ZLIBOBJS= src/zlib/adler32.o src/zlib/compress.o src/zlib/crc32.o \
-@@ -168,6 +186,7 @@
+@@ -250,6 +268,7 @@
    tcl/search/search.tcl \
      tcl/search/board.tcl tcl/search/header.tcl tcl/search/material.tcl \
    tcl/contrib/ezsmtp/ezsmtp.tcl \
@@ -130,30 +129,31 @@ Index: Makefile.conf
      tcl/tools/email.tcl \
      tcl/tools/import.tcl \
      tcl/tools/optable.tcl tcl/tools/preport.tcl tcl/tools/pinfo.tcl \
-@@ -301,7 +320,7 @@
+@@ -382,7 +401,7 @@
  	fi
  
  clean:
--	rm -f game.* tkscid.so tkscid.dll position.* src/*.o src/universalchardet/*.o src/zlib/*.o src/zlib/*.a src/polyglot/*.o $(EXECS) scid $(SCRIPTS)
-+	rm -f game.* tkscid.so tkscid.dll position.* src/*.o src/universalchardet/*.o src/tktext/*.o src/zlib/*.o src/zlib/*.a src/polyglot/*.o $(EXECS) scid $(SCRIPTS)
+-	rm -f game.* tkscid.so tkscid.dll position.* src/*.o src/universalchardet/*.o src/zlib/*.o src/zlib/*.a src/polyglot/*.o src/cql/*.o $(EXECS) scql scid $(SCRIPTS)
++	rm -f game.* tkscid.so tkscid.dll position.* src/*.o src/universalchardet/*.o src/tktext/*.o src/zlib/*.o src/zlib/*.a src/polyglot/*.o src/cql/*.o $(EXECS) scql scid $(SCRIPTS)
  	cd engines/phalanx/ && make clean && cd ../../
  	cd engines/toga/src/ && make clean && cd ../../../
  	cd src/tkdnd/ && make clean && cd ../..
-@@ -397,9 +416,9 @@
+@@ -478,10 +497,10 @@
  scidt: src/scidt.o $(OBJS) $(CHARSETCONVOBJS)
  	$(LINK) $(LDFLAGS) -o scidt src/scidt.o $(OBJS) $(CHARSETCONVOBJS) $(ZLIB) $(TCL_LIBRARY)
  
--tkscid: src/tkscid.o $(OBJS) $(CHARSETCONVOBJS) src/tree.o src/filter.o src/pbook.o src/crosstab.o src/spellchk.o \
-+tkscid: src/tkscid.o $(OBJS) $(CHARSETCONVOBJS) $(TKTEXTOBJS) src/tree.o src/filter.o src/pbook.o src/crosstab.o src/spellchk.o \
+-tkscid: src/tkscid.o $(OBJS) $(CQLOBJS_I) $(CHARSETCONVOBJS) \
++tkscid: src/tkscid.o $(OBJS) $(CQLOBJS_I) $(CHARSETCONVOBJS) $(TKTEXTOBJS) \
+         src/tree.o src/filter.o src/pbook.o src/crosstab.o src/spellchk.o \
          src/probe.o src/optable.o src/engine.o src/recog.o src/tkdnd/TkDND_XDND.o src/tk_selection.o
--	$(LINK) $(LDFLAGS) -o tkscid src/tkscid.o $(OBJS) $(CHARSETCONVOBJS) src/tree.o \
-+	$(LINK) $(LDFLAGS) -o tkscid src/tkscid.o $(OBJS) $(CHARSETCONVOBJS) $(TKTEXTOBJS) src/tree.o \
+-	$(LINK) $(LDFLAGS) -o tkscid src/tkscid.o $(OBJS) $(CQLOBJS_I) $(CHARSETCONVOBJS) src/tree.o \
++	$(LINK) $(LDFLAGS) -o tkscid src/tkscid.o $(OBJS) $(CQLOBJS_I) $(CHARSETCONVOBJS) $(TKTEXTOBJS) src/tree.o \
          src/filter.o src/pbook.o src/crosstab.o src/spellchk.o src/probe.o src/optable.o \
          src/engine.o src/recog.o src/tkdnd/TkDND_XDND.o src/tk_selection.o $(ZLIB) $(TK_LIBRARY)
  
-@@ -432,6 +451,16 @@
- %.o: %.cpp
- 	$(BASH_ENV) $(CXX) $(CXXFLAGS) $(TCL_INCLUDE) -o $@ -c $<
+@@ -524,6 +543,16 @@
+ 	$(BASH_ENV) $(CXX) $(CXXFLAGS) -std=c++11 -Wall -Wno-write-strings -Wno-char-subscripts  -Wno-parentheses -Wno-sign-compare -fdiagnostics-show-option -DINTEGRATED $(CQL_INCLUDE) $(TCL_INCLUDE) -o $@ -c $<
+ 
  
 +### Rule for compiling TkText source files:
 +
@@ -170,11 +170,11 @@ Index: Makefile.conf
  src/zlib/%.o: src/zlib/%.c
 Index: Makefile.conf.darwin
 ===================================================================
---- Makefile.conf.darwin	(revision 2668)
+--- Makefile.conf.darwin	(revision 2876)
 +++ Makefile.conf.darwin	(working copy)
-@@ -122,6 +122,24 @@
-       src/universalchardet/nsSJISProber.o src/universalchardet/nsUniversalDetector.o \
-       src/universalchardet/nsUTF8Prober.o
+@@ -213,6 +213,24 @@
+   src/optable.o src/pgnparse.o src/pbook.o src/position.o src/probe.o \
+   src/spellchk.o src/stored.o src/stralloc.o src/textbuf.o src/tree.o
  
 +TKTEXTOBJS= \
 +		src/tktext/tkBitField.o \
@@ -197,7 +197,7 @@ Index: Makefile.conf.darwin
  ### ZLIBOBJS: object files in the zlib compression library.
  
  ZLIBOBJS= src/zlib/adler32.o src/zlib/compress.o src/zlib/crc32.o \
-@@ -165,6 +183,7 @@
+@@ -247,6 +265,7 @@
    tcl/search/search.tcl \
      tcl/search/board.tcl tcl/search/header.tcl tcl/search/material.tcl \
    tcl/contrib/ezsmtp/ezsmtp.tcl \
@@ -205,30 +205,30 @@ Index: Makefile.conf.darwin
      tcl/tools/email.tcl \
      tcl/tools/import.tcl \
      tcl/tools/optable.tcl tcl/tools/preport.tcl tcl/tools/pinfo.tcl \
-@@ -260,7 +279,7 @@
+@@ -341,7 +360,7 @@
  	# They all exist in the one directory, and don't want to trash it by accident
  
  clean:
--	rm -f game.* tkscid.so position.* src/*.o src/universalchardet/*.o src/zlib/*.o src/zlib/*.a src/polyglot/*.o $(EXECS) scid $(SCRIPTS)
-+	rm -f game.* tkscid.so position.* src/*.o src/universalchardet/*.o src/tktext/*.o src/zlib/*.o src/zlib/*.a src/polyglot/*.o $(EXECS) scid $(SCRIPTS)
+-	rm -f game.* tkscid.so position.* src/*.o src/universalchardet/*.o src/zlib/*.o src/zlib/*.a src/polyglot/*.o src/cql/*.o $(EXECS) scid $(SCRIPTS)
++	rm -f game.* tkscid.so position.* src/*.o src/universalchardet/*.o src/tktext/*.o src/zlib/*.o src/zlib/*.a src/polyglot/*.o src/cql/*.o $(EXECS) scid $(SCRIPTS)
  	cd engines/phalanx/ && make clean && cd ../../
  	cd engines/toga/src/ && make clean && cd ../../../
  
-@@ -425,9 +444,9 @@
+@@ -506,9 +525,9 @@
  scidt: src/scidt.o $(OBJS) $(CHARSETCONVOBJS)
  	$(LINK) $(LDFLAGS) -o scidt src/scidt.o $(OBJS) $(CHARSETCONVOBJS) $(ZLIB) $(TCL_LIBRARY)
  
--tkscid: src/tkscid.o $(OBJS) $(CHARSETCONVOBJS) src/tree.o src/filter.o src/pbook.o src/crosstab.o \
-+tkscid: src/tkscid.o $(OBJS) $(CHARSETCONVOBJS) $(TKTEXTOBJS) src/tree.o src/filter.o src/pbook.o src/crosstab.o \
+-tkscid: src/tkscid.o $(OBJS) $(CQLOBJS_I) $(CHARSETCONVOBJS) src/tree.o src/filter.o src/pbook.o src/crosstab.o \
++tkscid: src/tkscid.o $(OBJS) $(CQLOBJS_I) $(CHARSETCONVOBJS) $(TKTEXTOBJS) src/tree.o src/filter.o src/pbook.o src/crosstab.o \
            src/spellchk.o src/probe.o src/optable.o src/engine.o src/recog.o
--	$(LINK) $(LDFLAGS) -o tkscid src/tkscid.o $(OBJS) $(CHARSETCONVOBJS) src/tree.o src/filter.o src/pbook.o src/crosstab.o src/spellchk.o src/probe.o src/optable.o src/engine.o src/recog.o $(ZLIB) $(TK_LIBRARY)
-+	$(LINK) $(LDFLAGS) -o tkscid src/tkscid.o $(OBJS) $(CHARSETCONVOBJS) $(TKTEXTOBJS) src/tree.o src/filter.o src/pbook.o src/crosstab.o src/spellchk.o src/probe.o src/optable.o src/engine.o src/recog.o $(ZLIB) $(TK_LIBRARY)
+-	$(LINK) $(LDFLAGS) -o tkscid src/tkscid.o $(OBJS) $(CQLOBJS_I) $(CHARSETCONVOBJS) src/tree.o src/filter.o src/pbook.o src/crosstab.o src/spellchk.o src/probe.o src/optable.o src/engine.o src/recog.o $(ZLIB) $(TK_LIBRARY)
++	$(LINK) $(LDFLAGS) -o tkscid src/tkscid.o $(OBJS) $(CQLOBJS_I) $(CHARSETCONVOBJS) $(TKTEXTOBJS) src/tree.o src/filter.o src/pbook.o src/crosstab.o src/spellchk.o src/probe.o src/optable.o src/engine.o src/recog.o $(ZLIB) $(TK_LIBRARY)
  
- tcscid: src/tcscid.o $(OBJS) $(CHARSETCONVOBJS) src/tree.o src/filter.o src/pbook.o src/crosstab.o \
+ tcscid: src/tcscid.o $(OBJS) $(CQLOBJS_I) $(CHARSETCONVOBJS) src/tree.o src/filter.o src/pbook.o src/crosstab.o \
            src/spellchk.o src/probe.o src/optable.o src/engine.o src/recog.o
-@@ -456,6 +475,17 @@
- %.o: %.cpp
- 	$(BASH_ENV) $(CXX) $(CXXFLAGS) $(TCL_INCLUDE) -o $@ -c $<
+@@ -547,6 +566,17 @@
+ 	$(BASH_ENV) $(CXX) $(CXXFLAGS) -std=c++11 -Wall -Wno-write-strings -Wno-char-subscripts  -Wno-parentheses -Wno-sign-compare -fdiagnostics-show-option -DINTEGRATED $(CQL_INCLUDE) $(TCL_INCLUDE) -o $@ -c $<
+ 
  
 +### Rule for compiling TkText source files:
 +
@@ -246,11 +246,11 @@ Index: Makefile.conf.darwin
  src/zlib/%.o: src/zlib/%.c
 Index: Makefile.mingwx
 ===================================================================
---- Makefile.mingwx	(revision 2668)
+--- Makefile.mingwx	(revision 2876)
 +++ Makefile.mingwx	(working copy)
-@@ -103,6 +103,23 @@
-       src/universalchardet/nsSJISProber.o src/universalchardet/nsUniversalDetector.o \
-       src/universalchardet/nsUTF8Prober.o
+@@ -36,6 +36,23 @@
+ STRIP=$(MINGW_TARGET)-strip
+ LINK=$(CXX)
  
 +TKTEXTOBJS= \
 +		src/tktext/tkBitField.o \
@@ -270,9 +270,9 @@ Index: Makefile.mingwx
 +		src/tktext/tkTextUndo.o \
 +		src/tktext/tkTextWind.o
  
- ### ZLIBOBJS: object files in the zlib compression library.
- 
-@@ -143,6 +160,7 @@
+ ### TB: Using Nalimov tablebases with Scid. Use "TB = -DSCID_USE_TB" for
+ #      tablebase support, or just "TB = " for no tablebase capability.
+@@ -246,6 +263,7 @@
    tcl/search/search.tcl \
      tcl/search/board.tcl tcl/search/header.tcl tcl/search/material.tcl \
    tcl/contrib/ezsmtp/ezsmtp.tcl \
@@ -280,31 +280,29 @@ Index: Makefile.mingwx
      tcl/tools/email.tcl \
      tcl/tools/import.tcl \
      tcl/tools/optable.tcl tcl/tools/preport.tcl tcl/tools/pinfo.tcl \
-@@ -175,10 +193,10 @@
+@@ -278,8 +296,8 @@
  	$(LINK) $(LDFLAGS) -o scidlet.exe src/scidlet.o src/engine.o src/recog.o \
            src/misc.o src/position.o src/movelist.o src/dstring.o src/myassert.o
  
--scid.exe: src/scid.o $(OBJS) $(CHARSETCONVOBJS) src/tree.o src/filter.o \
-+scid.exe: src/scid.o $(OBJS) $(CHARSETCONVOBJS) $(TKTEXTOBJS) src/tree.o src/filter.o \
-             src/pbook.o src/crosstab.o src/spellchk.o src/probe.o \
-             src/optable.o src/engine.o src/recog.o src/tkdnd/TkDND_OleDND.o src/tk_selection.o scid.res
--	$(LINK) $(LDFLAGS) -o scid.exe src/scid.o $(OBJS) $(CHARSETCONVOBJS) \
-+	$(LINK) $(LDFLAGS) -o scid.exe src/scid.o $(OBJS) $(CHARSETCONVOBJS) $(TKTEXTOBJS) \
-             src/tree.o src/filter.o src/pbook.o \
-             src/crosstab.o src/spellchk.o src/probe.o \
-             src/optable.o src/engine.o src/recog.o src/tkdnd/TkDND_OleDND.o src/tk_selection.o scid.res \
-@@ -200,7 +218,7 @@
+-scid.exe: src/scid.o $(OBJS) $(CQLOBJS_I) $(CHARSETCONVOBJS) $(SCID_XOBJS) $(SCID_TK_OBJS) scid.res
+-	$(LINK) $(LDFLAGS) -o scid.exe src/scid.o $(OBJS) $(CQLOBJS_I) $(CHARSETCONVOBJS) $(SCID_XOBJS) $(SCID_TK_OBJS) scid.res \
++scid.exe: src/scid.o $(OBJS) $(CQLOBJS_I) $(CHARSETCONVOBJS) $(TKTEXTOBJS) $(SCID_XOBJS) $(SCID_TK_OBJS) scid.res
++	$(LINK) $(LDFLAGS) -o scid.exe src/scid.o $(OBJS) $(CQLOBJS_I) $(CHARSETCONVOBJS) $(TKTEXTOBJS) $(SCID_XOBJS) $(SCID_TK_OBJS) scid.res \
+ 	    -mwindows -lole32 -luuid -L$(TCL_DIR)/lib -ltk$(TCL_VERSION) -ltcl$(TCL_VERSION)
+ 
+ tcscid.exe: src/tcscid.o $(OBJS) $(CQLOBJS_I) $(SCID_XOBJS) $(CHARSETCONVOBJS)
+@@ -296,7 +314,7 @@
  	$(RC) $(RCFLAGS) -o scid.res scid.rc
  
  clean:
--	rm -f src/*.o src/zlib/*.o src/polyglot/*.o src/universalchardet/*.o $(EXECS) scid.gui scid.res
-+	rm -f src/*.o src/zlib/*.o src/polyglot/*.o src/universalchardet/*.o src/tktext/*.o $(EXECS) scid.gui scid.res
- 	$(MAKE) -C src/tkdnd/ -f Makefile.mingwx clean
+-	rm -f src/*.o src/zlib/*.o src/polyglot/*.o src/universalchardet/*.o src/cql/*.o $(EXECS) scid.gui scid.res
++	rm -f src/*.o src/zlib/*.o src/polyglot/*.o src/universalchardet/*.o src/tktext/*.o src/cql/*.o $(EXECS) scid.gui scid.res
  
  strip:
-@@ -222,6 +240,24 @@
+ 	$(STRIP) $(EXECS)
+@@ -317,6 +335,24 @@
  src/probe.o: src/probe.cpp src/egtb/tbindex.cpp src/egtb/tbdecode.c
- 	$(CXX) $(CXXFLAGS) -Wno-missing-braces $(TB) -c src/probe.cpp -o ./src/probe.o
+ 	$(CXX) $(CXXFLAGS) -Wno-missing-braces $(TB) -c src/probe.cpp -o src/probe.o
  
 +### Rule for compiling TkText source files:
 +
@@ -325,28 +323,22 @@ Index: Makefile.mingwx
 +### End of rule for compiling TkText
 +
  %.o: %.cpp
- 	$(CXX) $(CXXFLAGS) -I$(TCL_DIR)/include -c $< -o ./$@
+ 	$(CXX) $(CXXFLAGS) -I$(TCL_DIR)/include -c $< -o $@
  
-@@ -231,3 +267,5 @@
- src/tkdnd/TkDND_OleDND.o: src/tkdnd/win/TkDND_OleDND.cpp
- 	$(MAKE) -C src/tkdnd/ -f Makefile.mingwx CC="$(CC)" LINK="$(LINK)" CXXFLAGS="$(CXXFLAGS)" \
-               WIN_TARGET="$(WIN_TARGET)" TCL_VERSION="$(TCL_VERSION)" TCL_DIR="$(TCL_DIR)"
-+
-+### End of Makefile
 Index: src/tkscid.cpp
 ===================================================================
---- src/tkscid.cpp	(revision 2668)
+--- src/tkscid.cpp	(revision 2876)
 +++ src/tkscid.cpp	(working copy)
-@@ -85,6 +85,8 @@
+@@ -72,6 +72,8 @@
+ 
  int scid_InitTclTk (Tcl_Interp * interp);
- #endif
  
 +extern "C" int Tk_TextObjCmd(ClientData clientData, Tcl_Interp *interp, int objc, Tcl_Obj *const objv[]);
 +
  //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  // InvalidCommand():
  //    Given a Tcl Interpreter, a major command name (e.g. "sc_base") and
-@@ -529,11 +531,16 @@
+@@ -510,11 +512,16 @@
      db = &(dbList[currentBase]);
  
  #ifndef TCL_ONLY
