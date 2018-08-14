@@ -311,10 +311,10 @@ work may not be too hard.  https://github.com/sshivaji/ctgexporter
 
 <sect1> known issues <p>
 <itemize>
-<item> Linux sound playback is buggy.
+<item> Linux sound playback is buggy/broken.
 <item> Tcl/Tk-8.5.10 is buggy.
 <item> OS X docked mode has some issues due to it's poor Tcl/Tk.
-<item> <bf>Focus Issues</bf>. Kde users can allow Tcl apps to properly raise themselves by
+<item> <bf>Focus Issues</bf>. KDE users can allow Tcl apps to properly raise themselves by
 configuring <i>desktop > window behavior > advanced > focus stealing prevention</i>
 set to "none"
 <item> Sometimes Scid vs. PC may have very loud/wrong colours.
@@ -337,6 +337,7 @@ to create large databases from pgn. Typing "pgnscid somefile.pgn" creates a new 
 <itemize>
 <item> Using "ALT+F"... etc key bindings to access the menus is badly broke. This is a Tcl/Tk issue.
 <item> Window focus/raise issues, another Tcl/Tk issue. 
+<item> Screenshots are broken/disabled.
 </itemize>
 </itemize>
 
