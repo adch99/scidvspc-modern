@@ -425,13 +425,13 @@
   6.4.  known issues
 
 
-  o  Linux sound playback is buggy.
+  o  Linux sound playback is buggy/broken.
 
   o  Tcl/Tk-8.5.10 is buggy.
 
   o  OS X docked mode has some issues due to it's poor Tcl/Tk.
 
-  o  Focus Issues. Kde users can allow Tcl apps to properly raise
+  o  Focus Issues. KDE users can allow Tcl apps to properly raise
      themselves by configuring desktop > window behavior > advanced >
      focus stealing prevention set to "none"
 
@@ -460,6 +460,8 @@
         broke. This is a Tcl/Tk issue.
 
      o  Window focus/raise issues, another Tcl/Tk issue.
+
+     o  Screenshots are broken.
 
   6.6.  thanks
 
