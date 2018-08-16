@@ -29,7 +29,7 @@ array set encodings {
   hungary iso8859-2
   italian utf-8
   nederlan iso8859-1
-  norsk iso8859-1
+  norsk utf-8
   polish utf-8
   portbr iso8859-1
   port iso8859-1

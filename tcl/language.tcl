@@ -81,7 +81,7 @@ array set langTable {
   H {hungary  Hungarian  0 iso8859-2 hu}
   I {italian  Italian    0 utf-8     it}
   N {nederlan Nederlands 0 iso8859-1 ne}
-  O {norsk    Norsk      1 iso8859-1 no}
+  O {norsk    Norsk      1 utf-8     no}
   P {polish   Polish     0 utf-8     {}}
   B {portbr   {Brazil Portuguese} 0 iso8859-1 {}}
   U {port     Portuguese 0 iso8859-1 {}}
