@@ -1,213 +1,199 @@
+#
 # norsk.tcl
+#
 # Text for menu names and status bar help messages in Norwegian.
-# First created for Scid 3.2.beta2 by morten.skarstad@sapphire.no.
-# Edited for Scid 3.2.beta4
-# Thanks to Martin Skjˆldebrand, swedish.tcl was of great help to me.
+# First created for Scid 3.2.beta2
+# Thanks to Martin Skj√∂ldebrand, swedish.tcl was of great help to me.
+#
+# Massive update for Scid vs PC 4.19. Translated missing strings, 
+# fixed some inconsistencies and aligned with english.tcl. 180815 MS
+#
+# (1) Choose a letter code for the language. Currently assigned codes are:
+#      E=English, D=Deutsch, F=Francais, S=Spanish, B=Brasil Portuguese, U=Portuguese
+#      P=Polish, N=Nederlands, W=Swedish, O=Norsk, C=Czech, H=Hungarian,
+#      Y=Serbian, L=Finnish (Linus!)
+#
+# (2) Edit the code below that has the lines "addLanguage ..." and add your
+#     new language. The final digit in each line is the index of the
+#     letter to underline in the menu, counting from 0 as the first letter.
+#
+# (3) Change anything "in quotes" or {in braces} for the menuText and translate commands.
+#
+#     A menu command has the format:
+#         menuText L tag "Name..." underline {HelpMessage}
+#
+#     A general word or message translation has the format:
+#         translate L tag {message}
+#
+# Notes:
+#
+#     "HelpMessage" can be left out if desired, as they are not currently used in Scid vs. PC
+#
+#     "underline" is the index of the letter to underline, counting from 0
+#     as the first letter. Two menu entries
+#     that appear in the same menu should have a different underlined letter.
+#     If in doubt, just make them all "0"
+#
 
-addLanguage O Norsk 1 ;#iso8859-1
+addLanguage O Norsk 1 ;#utf-8
 
 proc setLanguage_O {} {
 
 # File menu:
 menuText O File "Fil" 0
 menuText O FileNew "Ny..." 0 {Lag en ny Scid-database}
-menuText O FileOpen "≈pne..." 0 {≈pne en Scid-database}
-menuText O FileClose "Lukk" 0 {Lukk aktiv Scid-database}
-menuText O FileFinder "S¯k" 0 {≈pne s¯kevinduet}
-menuText O FileSavePgn "Save Pgn..." 0 {}
-# ====== TODO To be translated ======
-menuText O FileOpenBaseAsTree "Open Base as Tree" 13   {Open a base and use it in Tree window}
-# ====== TODO To be translated ======
-menuText O FileOpenRecentBaseAsTree "Open Recent as Tree" 0   {Open a recent base and use it in Tree window}
-menuText O FileBookmarks "Bokmerker" 0 {Bokmerkemeny (snarvei: Ctrl+B)}
+menuText O FileOpen "√Öpne..." 0 {√Öpne en Scid-database}
+menuText O FileClose "Lukk" 2 {Lukk aktiv Scid-database}
+menuText O FileFinder "S√∏k" 0 {√Öpne s√∏kevinduet}
+menuText O FileSavePgn "Lagre Pgn..." 0 {}
+menuText O FileOpenBaseAsTree "√Öpne base som tre" 14   {√Öpne en base og bruk det i trevinduet}
+menuText O FileOpenRecentBaseAsTree "√Öpne nylig som tre" 6   {√Öpne en nylig brukt base i trevinduet}
+menuText O FileBookmarks "Bokmerker" 3 {Bokmerkemeny (snarvei: Ctrl+B)}
 menuText O FileBookmarksAdd "Legg til bokmerke" 0 \
-  {Sett bokmerke til nÂvÊrende database, parti og stilling}
+  {Sett bokmerke til n√•v√¶rende database, parti og stilling}
 menuText O FileBookmarksFile "Lagre bokmerke" 0 \
-  {Lagre et bokmerke for nÂvÊrende database, parti og stilling}
+  {Lagre et bokmerke for n√•v√¶rende database, parti og stilling}
 menuText O FileBookmarksEdit "Ordne bokmerker" 0 \
   {Vedlikehold av bokmerkene}
 menuText O FileBookmarksList "Vis kataloger som enkel liste" 24 \
   {Vis bokmerker som liste, ikke undermenyer}
 menuText O FileBookmarksSub "Vis kataloger som undermenyer" 18 \
   {Vis bokmerke-katalogene som undermenyer, ikke liste}
-menuText O FileReadOnly "Skrivebeskytt..." 6 \
-  {Hindrer endringer pÂ databasen}
-menuText O FileSwitch "Switch to database" 0 \
-  {Switch to a different opened database} ;# ***
-menuText O FileExit "Avslutt" 0 {Avslutt Scid}
 
-# Edit menu:
+menuText O FileReadOnly "Skrivebeskytt..." 6 \
+  {Hindrer endringer p√• databasen}
+menuText O FileSwitch "Bytt til database" 9 \
+  {Bytt til en annen √•pen database}
+menuText O FileExit "Avslutt" 1 {Avslutt Scid vs PC} # Hurtigtast fungerer ikke?
+
+# Edit menu: TODO: snarveier
 menuText O Edit "Rediger" 0
 menuText O EditAdd "Legg til variasjon" 0 {Legg til en variasjon av dette trekket i partiet}
-menuText O EditPasteVar "Lim Variasjon" 0
+menuText O EditPasteVar "Lim inn variasjon" 0
 menuText O EditDelete "Slett variasjon" 0 {Slett en variasjon av dette trekket}
-menuText O EditFirst "Flytt variasjon ¯verst" 0 \
-  {Gj¯r variasjonen til den ¯verste pÂ listen}
-menuText O EditMain "Gj¯r variasjon til hovedlinje" 0 \
-  {Gj¯r variasjon til hovedlinje}
-menuText O EditTrial "Pr¯v variasjon" 0 \
-  {Start/avslutt pr¯vemodus, for Â teste ut en ide pÂ brettet}
+menuText O EditFirst "Flytt variasjon √∏verst" 0 \
+  {Gj√∏r variasjonen til den √∏verste p√• listen}
+menuText O EditMain "Gj√∏r variasjon til hovedlinje" 0 \
+  {Gj√∏r variasjon til hovedlinje}
+menuText O EditTrial "Pr√∏v variasjon" 0 \
+  {Start/avslutt pr√∏vemodus, for √• teste ut en ide p√• brettet}
 menuText O EditStrip "Fjern" 0 {Fjern kommentarer eller variasjoner fra partiet}
-# ====== TODO To be translated ======
-menuText O EditUndo "Undo" 0 {Undo last game change}
-menuText O EditRedo "Redo" 0
+menuText O EditUndo "Angre" 0 {Angre siste endring i parti}
+menuText O EditRedo "Gjenta" 0 {Gj√∏r om angret handling}
 menuText O EditStripComments "Kommentarer" 0 \
   {Fjern alle kommentarer og annotasjoner fra dette partiet}
 menuText O EditStripVars "Variasjoner" 0 {Fjern alle variasjoner fra dette partiet}
-menuText O EditStripBegin "Moves from the beginning" 1 \
-  {Strip moves from the beginning of the game} ;# ***
-menuText O EditStripEnd "Moves to the end" 0 \
-  {Strip moves to the end of the game} ;# ***
+menuText O EditStripBegin "Trekk fra begynnelsen" 1 \
+  {Fjern trekk fra begynnelsen av partiet}
+menuText O EditStripEnd "Trekk til slutten" 0 \
+  {Fjern trekk til slutten av partiet}
 menuText O EditReset "Rensk utklippsbase" 0 \
-  {T¯mmer utklippsbasen fullstendig}
+  {T√∏mmer utklippsbasen fullstendig}
 menuText O EditCopy "Kopier partiet til utklippsbasen" 0 \
   {Kopier dette partiet til utklippsbasen}
 menuText O EditPaste "Lim inn siste parti fra utklippsbasen" 0 \
   {Limer inn gjeldende parti fra utklippsbasen her}
-menuText O EditPastePGN "Paste Clipboard text as PGN game..." 10 \
-  {Interpret the clipboard text as a game in PGN notation and paste it here} ;# ***
-menuText O EditSetup "Still opp stilling..." 0 \
-  {Lag en startstilling for dette partiet}
-menuText O EditCopyBoard "Copy position" 6 \
-  {Copy the current board in FEN notation to the text selection (clipboard)} ;# ***
-menuText O EditCopyPGN "Copy PGN" 0 {}
+menuText O EditPastePGN "Lim inn utklippstavle som PGN..." 0 \
+  {Leser PGN fra utklippstavlen og limer det inn her}
+menuText O EditSetup "Sett opp stilling..." 0 \
+  {Angi utgangsstilling for dette partiet}
+menuText O EditCopyBoard "Kopier stilling" 0 \
+  {Kopier brettet som FEN til utklippstavlen}
+menuText O EditCopyPGN "Kopier PGN" 0 \
+  {Kopierer partiet som PGN til utklippstavle}
 menuText O EditPasteBoard "Lim inn stilling" 0 \
   {Lag en startstilling fra gjeldende utvalg (utklippstavle)}
 
-# Game menu:
+# Game menu: TODO: snarveier
 menuText O Game "Parti" 0
-menuText O GameNew "Nytt parti" 0 \
-  {Sletter alle trekk og starter et nytt parti}
-menuText O GameFirst "Hent f¯rste parti" 0 {Henter f¯rste parti fra filteret}
+menuText O GameNew "Nytt parti" 0 {Sletter alle trekk og starter et nytt parti}
+menuText O GameFirst "Hent f√∏rste parti" 0 {Henter f√∏rste parti fra filteret}
 menuText O GamePrev "Hent forrige parti" 0 {Henter forrige parti fra filteret}
-menuText O GameReload "Hent dette partiet" 0 \
-  {Henter dette partiet pÂ nytt og fjerner alle endringer}
+menuText O GameReload "Hent dette partiet" 0 {Henter dette partiet p√• nytt og fjerner alle endringer}
 menuText O GameNext "Hent neste parti" 0 {Henter neste parti fra filteret}
 menuText O GameLast "Hent siste parti" 0 {Henter siste parti fra filteret}
 menuText O GameRandom "Hent tilfeldig parti" 8 {Hent tilfeldig parti fra filteret}
-menuText O GameNumber "Hent parti nummer..." 0 \
-  {Finn et parti ved Â angi nummeret}
-menuText O GameReplace "Lagre: Erstatt parti..." 0 \
-  {Lagre og overskriv dette partiet}
-menuText O GameAdd "Lagre som nytt parti..." 0 \
-  {Lagre dette partiet som et nytt parti}
-menuText O GameInfo "Set Spillinformasjon" 0
-menuText O GameBrowse "Bla gjennom spill" 0
-menuText O GameList "List Alle spill" 0
-# ====== TODO To be translated ======
-menuText O GameDelete "Delete Game" 0
-menuText O GameDeepest "Identifiser Âpning" 0 \
-  {GÂ til dypeste posisjon i dette partiet listet i ECO-boken}
-menuText O GameGotoMove "GÂ til trekk..." 0 \
-  {GÂ til et angitt trekk i dette partiet}
-menuText O GameNovelty "Finn avvik..." 0 \
-  {Finn det f¯rste trekket i dette partiet som ikke har blitt spilt tidligere}
+menuText O GameNumber "Hent parti nummer..." 0 {Finn et parti ved √• angi nummeret}
+menuText O GameReplace "Overskriv parti..." 0 {Lagre og overskriv dette partiet}
+menuText O GameAdd "Lagre som nytt parti..." 0 {Lagre dette partiet som et nytt parti}
+menuText O GameInfo "Endre parti" 0
+menuText O GameBrowse "Bla gjennom partier" 0
+menuText O GameList "Vis alle partier" 0
+menuText O GameDelete "Slett parti" 0
+menuText O GameDeepest "Identifiser √•pning" 0 {G√• til dypeste posisjon i dette partiet listet i ECO-boken}
+menuText O GameGotoMove "G√• til trekk..." 0 {G√• til et angitt trekk i dette partiet}
+menuText O GameNovelty "Finn nyhet" 0 {Finn det f√∏rste trekket i dette partiet som ikke har blitt spilt tidligere}
 
-# Search Menu:
-menuText O Search "S¯k" 0
-menuText O SearchReset "Nullstill filter" 0 {Nullstill filteret til Â inneholde alle partier}
-menuText O SearchNegate "Snu filter" 0 {Reverserer filteret til Â kun inneholde eksluderte partier}
+# Search Menu: TODO: snarveier
+menuText O Search "S√∏k" 0
+menuText O SearchReset "Nullstill filter" 0 {Nullstill filteret til √• inneholde alle partier}
+menuText O SearchNegate "Snu filter" 0 {Reverserer filteret til √• kun inneholde eksluderte partier}
 menuText O SearchEnd "Flytt til Siste Filter" 0
-menuText O SearchCurrent "Stilling..." 0 {S¯k etter denne stillingen}
-menuText O SearchHeader "Header..." 0 {S¯k etter Header (partier, turnering etc) informasjon}
-menuText O SearchMaterial "Kvalitet/stilling..." 0 {S¯k pÂ kvalitet eller stilling}
-menuText O SearchMoves {Moves} 0 {}
-menuText O SearchUsing "Bruk s¯kefil..." 0 {S¯k vha lagrede s¯kevilkÂr}
+menuText O SearchCurrent "Stilling..." 0 {S√∏k etter denne stillingen}
+menuText O SearchHeader "Header..." 0 {S√∏k etter Header (partier, turnering etc) informasjon}
+menuText O SearchMaterial "Kvalitet/stilling..." 0 {S√∏k p√• kvalitet eller stilling}
+menuText O SearchMoves "Trekk" 0 {}
+menuText O SearchUsing "Bruk s√∏kefil..." 0 {S√∏k med lagrede s√∏kevilk√•r}
 
-# Windows menu:
+# Windows menu: TODO: snarveier
 menuText O Windows "Vinduer" 0
-menuText O WindowsGameinfo "Game Info" 0 {Show/hide the game info panel}
-menuText O WindowsComment "Kommentarer" 0 {≈pne/lukk kommentarvinduet}
-menuText O WindowsGList "Partioversikt" 0 {≈pne/lukk partioversikten}
-menuText O WindowsPGN "PGN-vindu" 0 {≈pne/lukk PGN-vinduet}
+menuText O WindowsGameinfo "Info om parti" 0 {Show/hide the game info panel}
+menuText O WindowsComment "Kommentarer" 0 {√Öpne/lukk kommentarvinduet}
+menuText O WindowsGList "Partioversikt" 0 {√Öpne/lukk partioversikten}
+menuText O WindowsPGN "PGN-vindu" 0 {√Öpne/lukk PGN-vinduet}
 menuText O WindowsCross "Krysstabell" 0 {Vis turnerigskrystabellen for dette partiet}
-menuText O WindowsPList "Player Finder" 2 {Open/close the player finder} ;# ***
-menuText O WindowsTmt "Turnerings¯ker" 0 {≈pne/lukk turneringss¯keren}
-menuText O WindowsSwitcher "Databasebytter" 0 \
-  {≈pne/lukk databasebytteren}
-menuText O WindowsMaint "Vedlikeholdsvindu" 0 \
-  {≈pne/lukk vedlikeholdsvinduet}
-menuText O WindowsECO "ECO-oversikt" 0 {≈pne/lukk ECO-oversikten}
-menuText O WindowsStats "Statistikkvindu" 0 \
-  {≈pne/lukk statistikk for filteret}
-menuText O WindowsTree "Trevindu" 0 {≈pne/lukk trevinduet}
-menuText O WindowsTB "Sluttspilltabellvindu" 0 \
-  {≈pne/lukk sluttspilltabellen}
-# ====== TODO To be translated ======
-menuText O WindowsBook "Book Window" 0 {Open/close the Book window}
-# ====== TODO To be translated ======
-menuText O WindowsCorrChess "Correspondence Window" 0 {Open/close the Correspondence window}
+menuText O WindowsPList "Finn spillere" 2 {}
+menuText O WindowsTmt "Turneringer" 0 {√Öpne/lukk turneringss√∏keren}
+menuText O WindowsSwitcher "Databaser" 0 {√Öpne/lukk databasebytteren}
+menuText O WindowsMaint "Vedlikeholdsvindu" 0 {√Öpne/lukk vedlikeholdsvinduet}
+menuText O WindowsECO "ECO-oversikt" 0 {√Öpne/lukk ECO-oversikten}
+menuText O WindowsStats "Statistikkvindu" 0 {√Öpne/lukk statistikk for filteret}
+menuText O WindowsTree "Trevindu" 0 {√Öpne/lukk trevinduet}
+menuText O WindowsTB "Sluttspilltabellvindu" 0 {√Öpne/lukk sluttspilltabellen}
+menuText O WindowsBook "Bokvindu" 0 {√Öpne/lukke bok-vinduet}
+menuText O WindowsCorrChess "Fjernsjakk" 0 {√Öpne/lukke fjernsjakk-vinduet}
 
-# Tools menu:
-menuText O Tools "Verkt¯y" 0
-menuText O ToolsAnalysis "Analysemotor..." 0 \
-  {Start/stopp en sjakkanalysemotor}
-menuText O ToolsEmail "Epostbehandler" 0 \
-  {≈pne/lukk epostbehandlingsvinduet}
-menuText O ToolsFilterGraph "Filtergraf" 7 \
-  {≈pne/lukk filtergrafvinduet}
-# ====== TODO To be translated ======
-menuText O ToolsAbsFilterGraph "Abs. Filter Graph" 7 {Open/close the filter graph window for absolute values}
-menuText O ToolsOpReport "≈pningsrapport" 0 \
-  {Lager en Âpningsrapport for denne stillingen}
-menuText O ToolsTracker "Brikkesporing"  0 {≈pne brikkesporingsvinduet}
-# ====== TODO To be translated ======
-menuText O ToolsTraining "Training"  0 {Training tools (tactics, openings,...) }
-menuText O ToolsComp "Tournament" 2 {Chess engine tournament}
-# ====== TODO To be translated ======
-menuText O ToolsTacticalGame "Tactical game"  0 {Play a game with tactics}
-# ====== TODO To be translated ======
-menuText O ToolsSeriousGame "Serious game"  0 {Play a serious game}
-# ====== TODO To be translated ======
-menuText O ToolsTrainTactics "Tactics"  0 {Solve tactics}
-# ====== TODO To be translated ======
-menuText O ToolsTrainCalvar "Calculation of variations"  0 {Calculation of variations training}
-# ====== TODO To be translated ======
-menuText O ToolsTrainFindBestMove "Find best move"  0 {Find best move}
-# ====== TODO To be translated ======
-menuText O ToolsTrainFics "Internet"  0 {Play on freechess.org}
-# ====== TODO To be translated ======
-menuText O ToolsBookTuning "Book tuning" 0 {Book tuning}
-menuText O ToolsMaint "Vedlikehold" 0 {Verkt¯y for Â vedlikeholde Scid-databasen}
-menuText O ToolsMaintWin "Vedlikeholdsvindu" 0 \
-  {≈pne/lukk Scids vedlikeholdsvindu}
-menuText O ToolsMaintCompact "Komprimer database..." 0 \
-  {Sletter ubrukte partier og navn}
-menuText O ToolsMaintClass "ECO-klassifiser partier..." 0 \
-  {Regn om ECO-koden for alle partier}
-menuText O ToolsMaintSort "Sorter database..." 0 \
-  {Sorter alle partier i databasen}
-menuText O ToolsMaintDelete "Slett duplikater..." 6 \
-  {Finner like partier og merker en av dem for sletting}
-menuText O ToolsMaintTwin "Duplikatsjekkvindu" 1 \
-  {≈pne/oppdatere duplikatsjekkvinduet}
-menuText O ToolsMaintNameEditor "Navneredigering" 5 \
-  {≈pne/lukk vinduet for navneredigering}
-menuText O ToolsMaintNamePlayer "Kontroller navn..." 0 \
-  {Sammenlign navn med stavekontroll-filen}
-menuText O ToolsMaintNameEvent "Kontroller anledninger..." 11 \
-  {Sammenlign anledninger med stavekontroll-filen}
-menuText O ToolsMaintNameSite "Kontroller stedsnavn..." 12 \
-  {Sammenlign stedsnavn med stavekontroll-filen}
-menuText O ToolsMaintNameRound "Kontroller runde-navn..." 11 \
-  {Sammenlign rundenavn med stavekontroll-filen}
-# ====== TODO To be translated ======
-menuText O ToolsMaintFixBase "Repair base" 0 {Try to repair a corrupted base}
-# ====== TODO To be translated ======
-menuText O ToolsConnectHardware "Connect Hardware" 0 {Connect external hardware}
-# ====== TODO To be translated ======
-menuText O ToolsConnectHardwareConfigure "Configure..." 0 {Configure external hardware and connection}
-# ====== TODO To be translated ======
-menuText O ToolsConnectHardwareNovagCitrineConnect "Connect Novag Citrine" 0 {Connect Novag Citrine}
-# ====== TODO To be translated ======
-menuText O ToolsConnectHardwareInputEngineConnect "Connect Input Engine" 0 {Connect Input Engine (e.g. DGT)}
-# ====== TODO To be translated ======
-# ====== TODO To be translated ======
-# ====== TODO To be translated ======
+# Tools menu: TODO: snarveier
+menuText O Tools "Verkt√∏y" 0
+menuText O ToolsAnalysis "Analysemotor..." 0 {Start/stopp en sjakkanalysemotor}
+menuText O ToolsEmail "Epostbehandler" 0 {√Öpne/lukk epostbehandlingsvinduet}
+menuText O ToolsFilterGraph "Filtergraf" 7 {√Öpne/lukk filtergrafvinduet}
+menuText O ToolsAbsFilterGraph "Absolutt Filtergraf" 7 {√Öpne/lukk filtergrafvinduet for absolutte verdier}
+menuText O ToolsOpReport "√Öpningsrapport" 0 {Lager en √•pningsrapport for denne stillingen}
+menuText O ToolsTracker "Brikkesporing"  0 {√Öpne brikkesporingsvinduet}
+menuText O ToolsTraining "Trening"  0 {Treningsverkt√∏y (taktikk, √•pninger...)}
+menuText O ToolsComp "Turnering" 0 {Turnering mellom sjakkmotorer}
+menuText O ToolsTacticalGame "Taktisk parti"  0 {Spill et parti med taktikker}
+menuText O ToolsSeriousGame "Seri√∏st parti"  0 {Spill et seri√∏st parti mot en UCI-motor}
+menuText O ToolsTrainTactics "Taktiske oppgaver"  0 {L√∏s taktiske oppgaver}
+menuText O ToolsTrainCalvar "Regn p√• varianter"  0 {Trening i √• bergegne varianter (Stoyko-√∏velser)}
+menuText O ToolsTrainFindBestMove "Finn beste trekk"  0 {Finn beste trekk}
+menuText O ToolsTrainFics "Internet (FICS)"  0 {Spill p√• freechess.org}
+menuText O ToolsBookTuning "Bokjustering" 0 {Finjuster √•pningsbok}
+
+menuText O ToolsMaint "Vedlikehold" 0 {Verkt√∏y for √• vedlikeholde Scid-databasen}
+menuText O ToolsMaintWin "Vedlikeholdsvindu" 0 {√Öpne/lukk Scids vedlikeholdsvindu}
+menuText O ToolsMaintCompact "Komprimer database..." 0 {Sletter ubrukte partier og navn}
+menuText O ToolsMaintClass "ECO-klassifiser partier..." 0 {Regn om ECO-koden for alle partier}
+menuText O ToolsMaintSort "Sorter database..." 0 {Sorter alle partier i databasen}
+menuText O ToolsMaintDelete "Slett duplikater..." 6 {Finner like partier og merker en av dem for sletting}
+menuText O ToolsMaintTwin "Duplikatsjekkvindu" 1 {√Öpne/oppdatere duplikatsjekkvinduet}
+menuText O ToolsMaintNameEditor "Navneredigering" 5 {√Öpne/lukk vinduet for navneredigering}
+menuText O ToolsMaintNamePlayer "Kontroller spillere..." 0 {Sammenlign navn med stavekontroll-filen}
+menuText O ToolsMaintNameEvent "Kontroller turneringer..." 11 {Sammenlign turneringer med stavekontroll-filen}
+menuText O ToolsMaintNameSite "Kontroller stedsnavn..." 12 {Sammenlign stedsnavn med stavekontroll-filen}
+menuText O ToolsMaintNameRound "Kontroller runde-navn..." 11 {Sammenlign rundenavn med stavekontroll-filen}
+menuText O ToolsMaintFixBase "Reparer database" 0 {Pr√∏ver √• reparere en √∏delagt database}
+
+menuText O ToolsConnectHardware "Koble til eksternt brett" 0 {Koble til eksternt brett}
+menuText O ToolsConnectHardwareConfigure "Konfigurer..." 0 {Konfigurer tilkobling til eksternt brett}
+menuText O ToolsConnectHardwareNovagCitrineConnect "Koble til Novag Citrine" 0 {Koble til Novag Citrine}
+menuText O ToolsConnectHardwareInputEngineConnect "Koble til ekstern motor" 0 {Koble til ekstern motor (f.eks. DGT)}
+
 menuText O ToolsPInfo "Spillerinformasjon"  0 \
-  {≈pne/oppdater informasjonsvinduet for denne spilleren}
-menuText O ToolsPlayerReport "Player Report" 3 \
-  {Generate a player report} ;# ***
+  {√Öpne/oppdater informasjonsvinduet for denne spilleren}
+menuText O ToolsPlayerReport "Spiller-rapport" 0 \
+  {Lag rapport om spiller}
 menuText O ToolsRating "Ratinggraf" 0 \
   {Tegner ratingen til disse spillerene over tid}
 menuText O ToolsScore "Poeng-graf" 0 {Viser poeng-grafen}
@@ -217,195 +203,139 @@ menuText O ToolsExpCurrentPGN "Eksporter parti til PGN-fil..." 0 \
   {Skriv dette partiet til en PGN-fil}
 menuText O ToolsExpCurrentHTML "Eksporter parti til HTML fil..." 0 \
   {Skriv dette partiet til en HTML-fil}
-# ====== TODO To be translated ======
-menuText O ToolsExpCurrentHTMLJS "Export Game to HTML and JavaScript File..." 15 {Write current game to a HTML and JavaScript file}  
-menuText O ToolsExpCurrentLaTeX "Eksporter partil til LaTeX fil..." 0 \
-  {Skriv dette partiet til en LaTeX-fil}
-# ====== TODO To be translated ======
+menuText O ToolsExpCurrentHTMLJS "Eksporter parti til HTML/Javascript..." 0 {Skriv dette partiet som HTML/Javascript}
+menuText O ToolsExpCurrentLaTeX "Eksporter partil til LaTeX fil..." 0 {Skriv dette partiet til en LaTeX-fil}
 menuText O ToolsExpFilter "Eksporter alle partier i filteret" 0 \
   {Skriv alle partier i filteret til en tekstfil}
 menuText O ToolsExpFilterPGN "Eksporter filter til PGN-fil..." 0 \
   {Skriv alle partier i filteret til en PGN-fil}
 menuText O ToolsExpFilterHTML "Eksporter filter til HTML-fil..." 0 \
   {Skriv alle partier i filteret til en HTML-fil}
-# ====== TODO To be translated ======
-menuText O ToolsExpFilterHTMLJS "Export Filter to HTML and JavaScript File..." 17 {Write all filtered games to a HTML and JavaScript file}  
-menuText O ToolsExpFilterLaTeX "Eksporter filter til LaTeX-fil..." 0 \
-  {Skriv alle partier i filteret til en LaTeX-fil}
-# ====== TODO To be translated ======
-# ====== TODO To be translated ======
-menuText O ToolsExpFilterGames "Export Gamelist to Text" 19 {Print a formatted Gamelist.}
+menuText O ToolsExpFilterHTMLJS "Eksporter filter til HTML/Javascript..." 0 {Lagre alle filtrerte partier til HTML/Javascript}
+menuText O ToolsExpFilterLaTeX "Eksporter filter til LaTeX-fil..." 0 {Skriv alle partier i filteret til en LaTeX-fil}
+menuText O ToolsExpFilterGames "Eksporter liste over partier som tekst" 0 {Lagrer en formatert liste over partiene}
 menuText O ToolsImportOne "Importer ett PGN-parti..." 0 \
   {Importer ett parti fra en PGN-fil}
-menuText O ToolsImportFile "Importer fil med PGN-partier..." 0 \
-  {Importer partier fra en PGN-fil}
-# ====== TODO To be translated ======
-menuText O ToolsStartEngine1 "Start engine 1" 0  {Start engine 1}
-# ====== TODO To be translated ======
-menuText O ToolsStartEngine2 "Start engine 2" 0  {Start engine 2}
-# ====== TODO To be translated ======
-menuText O ToolsScreenshot "Board Skjermbilde" 0
-menuText O Play "Play" 0
-# ====== TODO To be translated ======
-menuText O CorrespondenceChess "Correspondence Chess" 0 {Functions for eMail and Xfcc based correspondence chess}
-# ====== TODO To be translated ======
-menuText O CCConfigure "Configure..." 0 {Configure external tools and general setup}
-# ====== TODO To be translated ======
-menuText O CCConfigRelay "Configure observations..." 10 {Configure games to be observed}
-# ====== TODO To be translated ======
-menuText O CCOpenDB "Open Database..." 0 {Open the default Correspondence database}
-# ====== TODO To be translated ======
-menuText O CCRetrieve "Retrieve Games" 0 {Retrieve games via external (Xfcc-)helper}
-# ====== TODO To be translated ======
-menuText O CCInbox "Process Inobx" 0 {Process all files in scids Inbox}
-# ====== TODO To be translated ======
-menuText O CCSend "Send Move" 0 {Send your move via eMail or external (Xfcc-)helper}
-# ====== TODO To be translated ======
-menuText O CCResign "Resign" 0 {Resign (not via eMail)}
-# ====== TODO To be translated ======
-menuText O CCClaimDraw "Claim Draw" 0 {Send move and claim a draw (not via eMail)}
-# ====== TODO To be translated ======
-menuText O CCOfferDraw "Offer Draw" 0 {Send move and offer a draw (not via eMail)}
-# ====== TODO To be translated ======
-menuText O CCAcceptDraw "Accept Draw" 0 {Accept a draw offer (not via eMail)}
-# ====== TODO To be translated ======
-menuText O CCNewMailGame "New eMail Game..." 0 {Start a new eMail game}
-# ====== TODO To be translated ======
-menuText O CCMailMove "Mail Move..." 0 {Send the move via eMail to the opponent}
-# ====== TODO To be translated ======
-menuText O CCGamePage "Game Page..." 0 {Call up the game via the web browser}
-# ====== TODO To be translated ======
-menuText O CCEditCopy "Copy Gamelist to Clipbase" 0 {Copy the games as CSV list to clipbase}
+menuText O ToolsImportFile "Importer fil med PGN-partier..." 0 {Importer partier fra en PGN-fil}
+menuText O ToolsStartEngine1 "Start motor 1" 0  {Start motor 1}
+menuText O ToolsStartEngine2 "Start motor 2" 0  {Start motor 2}
+menuText O ToolsScreenshot "Skjermbilde av brett" 0
+
+# Play menue
+menuText O Play "Spill" 0
+
+# --- Correspondence Chess
+menuText O CorrespondenceChess "Fjernsjakk" 0 {Funksjoner for epost- og Xfcc-basert fjernsjakk}
+menuText O CCConfigure "Konfigurer..." 0 {Oppsett og innstillinger av eksterne verkt√∏y}
+menuText O CCConfigRelay "F√∏lg partier..." 10 {Sett opp partier som skal f√∏lges}
+menuText O CCOpenDB "√Öpne database..." 0 {√Öpne standard database for fjernsjakk}
+menuText O CCRetrieve "Hent partier" 0 {Hent partier med Xfcc-hjelper}
+menuText O CCInbox "Behandle innboks" 0 {Behandle alle filer i Scids innboks}
+menuText O CCSend "Send trekk" 0 {Send ditt trekk via epost eller Xfcc}
+
+menuText O CCResign "Gi opp" 0 {Gi opp (ikke via epost)}
+menuText O CCClaimDraw "Krev remis" 0 {Send trekk og krev remis (ikke via epost)}
+menuText O CCOfferDraw "Tilby remis" 0 {Send trekk og tilby remis (ikke via epost)}
+menuText O CCAcceptDraw "Godta remis" 0 {Godta tilbytt remis (ikke via epost)}
+
+menuText O CCNewMailGame "Nytt epost-parti..." 0 {Start nytt parti over epost}
+menuText O CCMailMove "Send trekk..." 0 {Send trekk til motstander via epost}
+menuText O CCGamePage "Parti-side..." 0 {Hent parti i nettleser}
+
+# menu in cc window:
+menuText O CCEditCopy "Kopier partiliste til utklippstavle" 0 {Kopier liste over partier til utklippstavle som CSV}
 
 
-# Options menu:
+
+
+# Options menu: TODO: snarveier
 menuText O Options "Innstillinger" 0
-menuText O OptionsBoard "Chessboard" 0 {Chess board appearance options} ;# ***
-menuText O OptionsColour "Background Colour" 0 {Default text widget color}
-# ====== TODO To be translated ======
-menuText O OptionsBackColour "Background" 0 {Default text widget color}
-# ====== TODO To be translated ======
-menuText O OptionsEnableColour "Enable" 0 {}
-# ====== TODO To be translated ======
-menuText O OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
-# ====== TODO To be translated ======
-menuText O OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
-# ====== TODO To be translated ======
-menuText O OptionsRowColour "Rows" 0 {Default tree/book row color}
-# ====== TODO To be translated ======
-menuText O OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
-# ====== TODO To be translated ======
-menuText O OptionsProgressColour "Progressbar" 0 {Default progressbar color}
-# ====== TODO To be translated ======
-menuText O OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
-# ====== TODO To be translated ======
-menuText O OptionsScoreColour "Score Graph" 0 {}
-# ====== TODO To be translated ======
-menuText O OptionsScoreBarColour "Score Graph current" 0 {}
-menuText O OptionsNames "My Player Names..." 0 {Edit my player names} ;# ***
+menuText O OptionsBoard "Sjakkbrett" 0 {Velg hvordan sjakkbrett skal se ut}
+menuText O OptionsColour "Farge" 0 {Standard tekstfarge}
+menuText O OptionsBackColour "Bakgrunn" 0 {Standard bakgrunnsfarge}
+menuText O OptionsEnableColour "Bruk bakgrunnsfarge" 0 {}
+menuText O OptionsMainLineColour "Hovedlinje piler" 0 {}
+menuText O OptionsVarLineColour "Variant piler" 0 {}
+menuText O OptionsRowColour "Rader" 0 {}
+menuText O OptionsSwitcherColour "Databasevelger" 0 {}
+menuText O OptionsProgressColour "Fremdriftslinje" 0 {Standard farge for fremdriftslinje}
+menuText O OptionsCrossColour "Rader i krysstabell" 0 {}
+menuText O OptionsScoreColour "Poeng-graf" 0 {}
+menuText O OptionsScoreBarColour "Gjeldene poeng-graf" 0 {}
+menuText O OptionsNames "Mine spillernavn..." 0 {Rediger mine spillernavn}
 menuText O OptionsExport "Eksport" 0 {Endre innstillinger for eksport av tekst}
 menuText O OptionsFonts "Skrifttyper" 0 {Endre skrifttyper}
 menuText O OptionsFontsRegular "Vanlig" 0 {Endre den vanlige skrifttypen}
-menuText O OptionsFontsMenu "Menu" 0 {Change the menu font} ;# ***
+menuText O OptionsFontsMenu "Meny" 0 {Velg skrifttype i menyer}
 menuText O OptionsFontsSmall "Liten" 0 {Endre den lille skrifttypen}
 menuText O OptionsFontsFixed "Fastbredde" 0 {Endre fastbreddeskrifttypen}
 menuText O OptionsGInfo "Partiinformasjon" 0 {Informasjonsinnstillinger}
 menuText O OptionsFics "FICS" 0
-# todo
-menuText O OptionsFicsAuto "Autopromote Queen" 0
-# ====== TODO To be translated ======
-menuText O OptionsFicsColour "Text Colour" 0
-# ====== TODO To be translated ======
-menuText O OptionsFicsSize "Board Size" 0
-# ====== TODO To be translated ======
-menuText O OptionsFicsButtons "User Buttons" 0
-# ====== TODO To be translated ======
-menuText O OptionsFicsCommands "Init Commands" 0
-# ====== TODO To be translated ======
-menuText O OptionsFicsNoRes "No Results" 0
-# ====== TODO To be translated ======
-menuText O OptionsFicsNoReq "No Requests" 0
-# ====== TODO To be translated ======
-menuText O OptionsFicsPremove "Allow Premove" 0
-menuText O OptionsLanguage "SprÂk" 0 {Velg menysprÂk}
-# ====== TODO To be translated ======
-menuText O OptionsMovesTranslatePieces "Translate pieces" 0 {Translate first letter of pieces}
-# ====== TODO To be translated ======
-menuText O OptionsMovesHighlightLastMove "Highlight last move" 0 {Highlight last move}
-# ====== TODO To be translated ======
-menuText O OptionsMovesHighlightLastMoveDisplay "Show" 0 {Display last move Highlight}
-# ====== TODO To be translated ======
-menuText O OptionsMovesHighlightLastMoveWidth "Width" 0 {Thickness of line}
-# ====== TODO To be translated ======
-menuText O OptionsMovesHighlightLastMoveColor "Color" 0 {Color of line}
+menuText O OptionsFicsAuto "Automatisk dronning" 0
+menuText O OptionsFicsColour "Tekstfarge" 0
+menuText O OptionsFicsSize "Brettst√∏rrelse" 0
+menuText O OptionsFicsButtons "Brukerdefinerte knapper" 0
+menuText O OptionsFicsCommands "Oppstartskommandoer" 0
+menuText O OptionsFicsNoRes "Ingen resultater" 0
+menuText O OptionsFicsNoReq "Ingen foresp√∏rsler" 0
+menuText O OptionsFicsPremove "Tillat forh√•ndstrekk" 0
+
+menuText O OptionsLanguage "Spr√•k" 0 {Velg menyspr√•k}
+menuText O OptionsMovesTranslatePieces "Oversett brikker" 0 {Oversett brikkenes f√∏rste bokstav}
+menuText O OptionsMovesHighlightLastMove "Marker siste trekk" 0 {Marker siste trekk}
+menuText O OptionsMovesHighlightLastMoveDisplay "Vis" 0 {Vis markering av siste trekk}
+menuText O OptionsMovesHighlightLastMoveWidth "Bredde" 0 {Tykkelse p√• linje}
+menuText O OptionsMovesHighlightLastMoveColor "Farge" 0 {Farge p√• linje}
 # ====== TODO To be translated ======
 menuText O OptionsMovesColorSelected "Color Selected Square" 0 {Color move}
 menuText O OptionsMoves "Trekk" 0 {Innstillinger for hvordan trekk angis}
-menuText O OptionsMovesAsk "Sp¯r f¯r trekk erstattes" 0 \
-  {Sp¯r f¯r eksisterende trekk erstattes av et nytt}
-menuText O OptionsMovesAnimate "Animation time" 1 \
-  {Set the amount of time used to animate moves} ;# ***
+menuText O OptionsMovesAsk "Sp√∏r f√∏r trekk erstattes" 0 \
+  {Sp√∏r f√∏r eksisterende trekk erstattes av et nytt}
+menuText O OptionsMovesAnimate "Animasjonslengde" 0 \
+  {Angir tiden som brukes for √• animere trekk}
 menuText O OptionsMovesDelay "Autospillforsinkelse..." 0 \
   {Sett forsinkelsen ved automatisk gjennomgang av partiet}
 menuText O OptionsMovesCoord "Koordinater" 0 \
   {Tillat angivelse av koordinater ("g1f3")}
-# ====== TODO To be translated ======
-menuText O OptionsShowVarPopup "Show Variation Window" 0 {Turn on/off the display of a variations window}  
-# ====== TODO To be translated ======
-menuText O OptionsMovesSpace "Add spaces after move number" 0 {Add spaces after move number}  
-menuText O OptionsMovesKey "Autofullf¯r" 0 \
-  {SlÂ av/pÂ autofullf¯riring av tastaturtrekk}
-# ====== TODO To be translated ======
-menuText O OptionsMovesShowVarArrows "Show Variation Arrows" 0 {Turn on/off arrows showing moves in variations}
+menuText O OptionsShowVarPopup "Vis varianter-vindu" 0 {Skru vinduet med varianter av/p√•}
+menuText O OptionsMovesSpace "Mellomrom etter trekknummer" 0 {Legg til mellomrom etter trekknummer}
+menuText O OptionsMovesKey "Autofullf√∏r" 0 \
+  {Sl√• av/p√• autofullf√∏riring av tastaturtrekk}
+menuText O OptionsMovesShowVarArrows "Vis piler for varianter" 0 {Skru piler for varianter av/p√•}
 menuText O OptionsNumbers "Tallformat" 0 {Angi tallformat}
-menuText O OptionsStartup "Oppstart" 0 {Angi vinduer som skal Âpne ved oppstart}
-# ====== TODO To be translated ======
-menuText O OptionsTheme "Theme" 0 {Change look of interface}
+menuText O OptionsStartup "Oppstart" 0 {Angi vinduer som skal √•pne ved oppstart}
+menuText O OptionsTheme "Tema" 0 {Endre utseende p√• grensesnitter}
 menuText O OptionsWindows "Vinduer" 0 {Vindusinnstillinger}
 menuText O OptionsWindowsIconify "Auto-minimer" 5 \
   {Minimerer alle vinduer sammen med hovedvinduet}
 menuText O OptionsWindowsRaise "Autoheving" 0 \
-  {Hever visse vinduer (fremdriftsvisere etc) nÂr de er skjult}
-menuText O OptionsSounds "Sounds..." 2 {Configure move announcement sounds} ;# ***
-# ====== TODO To be translated ======
-menuText O OptionsWindowsDock "Dock windows" 0 {Dock windows}
-# ====== TODO To be translated ======
-menuText O OptionsWindowsSaveLayout "Save layout" 0 {Save layout}
-# ====== TODO To be translated ======
-menuText O OptionsWindowsRestoreLayout "Restore layout" 0 {Restore layout}
-# ====== TODO To be translated ======
-menuText O OptionsWindowsShowGameInfo "Show game info" 0 {Show game info}
-# ====== TODO To be translated ======
-menuText O OptionsWindowsAutoLoadLayout "Auto load first layout" 0 {Auto load first layout at startup}
-# todo
-menuText O OptionsWindowsAutoResize "Auto resize board" 0 {}
-# ====== TODO To be translated ======
-menuText O OptionsWindowsFullScreen "Fullscreen" 0 {Toggle fullscreen mode}
-menuText O OptionsToolbar "Verkt¯ylinje i hovedvindu" 0 \
-  {Vis/skjul menylinjen i hovedvinduet}
+  {Hever visse vinduer (fremdriftsvisere etc) n√•r de er skjult}
+menuText O OptionsSounds "Lyder..." 0 {Konfigurer lyder for trekk}
+menuText O OptionsWindowsDock "Dokk vinduer" 0 {Dokk vinduer}
+menuText O OptionsWindowsSaveLayout "Lagre layout" 0 {Lagre layout}
+menuText O OptionsWindowsRestoreLayout "Gjenopprett layout" 0 {Gjenopprett layout}
+menuText O OptionsWindowsShowGameInfo "Vis parti-informasjon" 0 {Vis parti-informasjon}
+menuText O OptionsWindowsAutoLoadLayout "Hent f√∏rste layout automatisk" 0 {Henter automatisk f√∏rste layout ved oppstart}
+menuText O OptionsWindowsAutoResize "Endre brettst√∏rrelse automatisk" 0 {}
+menuText O OptionsWindowsFullScreen "Fullskjerm" 0 {Skru fullskjerm av/p√•}
+menuText O OptionsToolbar "Verkt√∏ylinje i hovedvindu" 0 {Vis/skjul menylinjen i hovedvinduet}
 menuText O OptionsECO "Hent ECO-fil..." 0 {Henter filen med ECO-klassifiseringer}
 menuText O OptionsSpell "Hent stavekontrollfil..." 0 \
   {Henter filen med stavekontrollen til Scid}
 menuText O OptionsTable "Tabellbasekatalog..." 0 \
   {Velg en tabellbase; Alle tabellbaser i katalogen vil bli brukt}
-menuText O OptionsRecent "Recent files..." 0 \
-  {Change the number of recent files displayed in the File menu} ;# ***
-# ====== TODO To be translated ======
-menuText O OptionsBooksDir "Books directory..." 0 {Sets the opening books directory}
-# ====== TODO To be translated ======
-menuText O OptionsTacticsBasesDir "Bases directory..." 0 {Sets the tactics (training) bases directory}
-# ====== TODO To be translated ======
-menuText O OptionsInformant "Configure informant values" 0
-menuText O OptionsSave "Lagre innstillinger" 0 \
-  "Lagre alle instillinger til $::optionsFile"
-# ====== TODO To be translated ======
-menuText O OptionsSaveBases "Save Bases as Default" 0 
+menuText O OptionsRecent "Nylige filer..." 0 {Bestem hvor mange nylige filer som skal vises i fil-menyene}
+menuText O OptionsBooksDir "Mappe med √•pningsb√∏ker..." 0 {Angir mappe med √•pnignsb√∏ker}
+menuText O OptionsTacticsBasesDir "Mappe med oppgaver..." 0 {Angir mappe med taktiske oppgaver}
+menuText O OptionsInformant "Kvalitetsverdier" 0
+menuText O OptionsSave "Lagre innstillinger" 0 "Lagre alle instillinger til $::optionsFile"
+menuText O OptionsSaveBases "Lagre baser som standard" 0 
 menuText O OptionsAutoSave "Autolagre innstillinger ved avslutning" 0 \
-  {Autolagre alle innstillinger nÂr Scid avsluttes}
+  {Autolagre alle innstillinger n√•r Scid avsluttes}
 
-# Help menu:
+# Help menu: TODO: snarveier
 menuText O Help "Hjelp" 0
-menuText O HelpContents "Contents" 0 {Show the help contents page} ;# ***
+menuText O HelpContents "Hjelp" 0 {Viser oversikten over hjelpe-systemet}
 menuText O HelpIndex "Innhold" 0 {Hjelpesystemets innhold}
 menuText O HelpGuide "Lynguide" 0 {Vis lynguiden}
 menuText O HelpHints "Hint" 0 {Vis hint}
@@ -416,51 +346,39 @@ menuText O HelpAbout "Om Scid" 0 {Informasjon om Scid}
 
 # Game info box popup menu:
 menuText O GInfoHideNext "Skjul neste trekk" 0
-# ====== TODO To be translated ======
-menuText O GInfoShow "Side to Move" 0
-# ====== TODO To be translated ======
-menuText O GInfoCoords "Toggle Coords" 0
+menuText O GInfoShow "Side i trekket" 0
+menuText O GInfoCoords "Vis koordinater" 0
 menuText O GInfoMaterial "Vis kvalitet" 0
 menuText O GInfoFEN "Vis FEN" 0
 menuText O GInfoMarks "Vis fargede ruter og piler" 0
 menuText O GInfoWrap "Tekstbryting" 0
 menuText O GInfoFullComment "Vis full kommentar" 0
-menuText O GInfoPhotos "Show Photos" 5 ;# ***
+menuText O GInfoPhotos "Vis bilder" 4
 menuText O GInfoTBNothing "Tabellbaser: ingenting" 0
 menuText O GInfoTBResult "Tabellbaser: kun resultater" 0
 menuText O GInfoTBAll "Tabellbaser: resultater og beste trekk" 0
 menuText O GInfoDelete "Slett/gjenopprett dette partiet" 0
 menuText O GInfoMark "(Av)Merk dette partiet" 0
-# ====== TODO To be translated ======
-menuText O GInfoMenuBar "Menu Bar"  0
-# ====== TODO To be translated ======
-menuText O GInfoToolBar "Tool Bar"  0
-# ====== TODO To be translated ======
-menuText O GInfoButtonBar "Button Bar"  0
-# ====== TODO To be translated ======
-menuText O GInfoStatusBar "Status Bar"  0
-# ====== TODO To be translated ======
-translate O FlipBoard {Flip board}
-# ====== TODO To be translated ======
-translate O RaiseWindows {Raise windows}
-# ====== TODO To be translated ======
-translate O AutoPlay {Autoplay}
-# ====== TODO To be translated ======
-translate O TrialMode {Trial mode}
-# ====== TODO To be translated ======
-translate O KeepOpen {Keep open after startup}
+menuText O GInfoMenuBar "Menylinje"  0
+menuText O GInfoToolBar "Verkt√∏ylinje"  0
+menuText O GInfoButtonBar "Knapperad"  0
+menuText O GInfoStatusBar "Statuslinje"  0
+
+translate O FlipBoard {Snu brettet}
+translate O RaiseWindows {Vinduer til forgrunnen}
+translate O AutoPlay {Spill automatisk}
+translate O TrialMode {Pr√∏vemodus}
+translate O KeepOpen {√Öpne ved oppstart}
 
 # General buttons:
-# ====== TODO To be translated ======
-translate O Apply {Apply}
+translate O Apply {Bruk}
 translate O Back {Tilbake}
-translate O Browse {Browse} ;# ***
+translate O Browse {Bla gjennom}
 translate O Cancel {Avbryt}
-# ====== TODO To be translated ======
-translate O Continue {Continue}
+translate O Continue {Fortsett}
 translate O Clear {Slett}
 translate O Close {Lukk}
-translate O Contents {Contents} ;# ***
+translate O Contents {Innhold}
 translate O Defaults {Standard}
 translate O Delete {Slett}
 translate O Graph {Graf}
@@ -470,31 +388,26 @@ translate O Index {Innhold}
 translate O LoadGame {Hent parti}
 translate O BrowseGame {Bla gjennom parti}
 translate O MergeGame {Smelt parti}
-# ====== TODO To be translated ======
-translate O MergeGames {Merge Games}
-translate O Preview {ForhÂndsvis}
-translate O Revert {Gj¯r om}
+translate O MergeGames {Flett partier}
+
+translate O Preview {Forh√•ndsvis}
+translate O Revert {Gj√∏r om}
 translate O Save {Lagre}
-# ====== TODO To be translated ======
-translate O DontSave {Don't Save}
-translate O Search {S¯k}
+translate O DontSave {Ikke lagre}
+translate O Search {S√∏k}
 translate O Stop {Stopp}
 translate O Store {Lagre}
 translate O Update {Oppdater}
 translate O ChangeOrient {Vend vindu}
-translate O ShowIcons {Show Icons} ;# ***
-# ====== TODO To be translated ======
-translate O ConfirmCopy {Confirm Copy}
+translate O ShowIcons {Vis ikoner}
+translate O ConfirmCopy {Bekreft kopiering}
 translate O None {Ingen}
-translate O First {F¯rste}
+translate O First {F√∏rste}
 translate O Current {Gjeldende}
 translate O Last {Siste}
-# ====== TODO To be translated ======
 translate O Font {Font}
-# ====== TODO To be translated ======
-translate O Change {Change}
-# ====== TODO To be translated ======
-translate O Random {Random}
+translate O Change {Endre}
+translate O Random {Tilfeldig}
 
 # General messages:
 translate O game {parti}
@@ -507,8 +420,8 @@ translate O No {Nei}
 translate O Both {Begge}
 translate O King {Konge}
 translate O Queen {Dronning}
-translate O Rook {TÂrn}
-translate O Bishop {L¯per}
+translate O Rook {T√•rn}
+translate O Bishop {L√∏per}
 translate O Knight {Springer}
 translate O Pawn {Bonde}
 translate O White {Hvit}
@@ -516,34 +429,32 @@ translate O Black {Sort}
 translate O Player {Spiller}
 translate O Rating {Rating}
 translate O RatingDiff {Ratingforskjell (Hvit - Sort)}
-translate O AverageRating {Average Rating} ;# ***
-translate O Event {Anledning}
+translate O AverageRating {Middels rating}
+translate O Event {Turnering}
 translate O Site {Sted}
 translate O Country {Land}
 translate O IgnoreColors {Overse farger}
-# ====== TODO To be translated ======
-translate O MatchEnd {End pos only}
+translate O MatchEnd {Kun sluttstilling}
 translate O Date {Dato}
-translate O EventDate {Anledningsdato}
-translate O Decade {Decade} ;# ***
-translate O Year {≈r}
-translate O Month {MÂned}
+translate O EventDate {Turneringsdato}
+translate O Decade {Ti√•r}
+translate O Year {√Ör}
+translate O Month {M√•ned}
 translate O Months {Januar Februar Mars April Mai Juni Juli August September Oktober November Desember}
-translate O Days {S¯n Man Tir Ons Tor Fre L¯r}
-translate O YearToToday {≈r til i dag}
+translate O Days {S√∏n Man Tir Ons Tor Fre L√∏r}
+translate O YearToToday {√Öret til i dag}
 translate O Result {Utfall}
 translate O Round {Runde}
 translate O Length {Lengde}
 translate O ECOCode {ECO-kode}
 translate O ECO {ECO}
 translate O Deleted {Slettet}
-translate O SearchResults {S¯k i resultater}
-translate O OpeningTheDatabase {≈pningsdatabase}
+translate O SearchResults {S√∏k i resultater}
+translate O OpeningTheDatabase {√Öpningsdatabase}
 translate O Database {Database}
 translate O Filter {Filter}
-# ====== TODO To be translated ======
-translate O Reset {Reset}
-translate O IgnoreCase {Ignorer sak}
+translate O Reset {Nullstill}
+translate O IgnoreCase {Bland store/sm√• bokstaver}
 translate O noGames {ingen partier}
 translate O allGames {alle partier}
 translate O empty {tom}
@@ -553,17 +464,14 @@ translate O Start {Start}
 translate O StartPos {Utgangsstilling}
 translate O Total {Sammenlagt}
 translate O readonly {skrivebeskyttet}
-# ====== TODO To be translated ======
-translate O altered {altered}
-# ====== TODO To be translated ======
-translate O tagsDescript {Extra tags (eg: Annotator "Anand")}
-# ====== TODO To be translated ======
-translate O prevTags {Use previous}
+translate O altered {endret}
+translate O tagsDescript {Ekstra tagger (f.eks.: Annotator "Anand")}
+translate O prevTags {Bruk forrige}
 
 # Standard error messages:
-translate O ErrNotOpen {This is not an open database.} ;# ***
-translate O ErrReadOnly {This database is read-only; it cannot be altered.} ;# ***
-translate O ErrSearchInterrupted {Search was interrupted; results are incomplete.} ;# ***
+translate O ErrNotOpen {Dette er ikke en √•pnet database.}
+translate O ErrReadOnly {Database kan kun leses, ikke endres.}
+translate O ErrSearchInterrupted {S√∏k ble avbrutt, resultater er ufullstendige.}
 
 # Game information:
 translate O twin {duplikat}
@@ -572,43 +480,40 @@ translate O comment {kommentar}
 translate O hidden {skjult}
 translate O LastMove {Siste trekk}
 translate O NextMove {Neste}
-translate O GameStart {Begynnelse pÂ parti}
-translate O LineStart {Begynnelse pÂ linje}
-translate O GameEnd {Slutt pÂ parti}
-translate O LineEnd {Slutt pÂ linje}
+translate O GameStart {Begynnelse p√• parti}
+translate O LineStart {Begynnelse p√• linje}
+translate O GameEnd {Slutt p√• parti}
+translate O LineEnd {Slutt p√• linje}
 
 # Player information:
 translate O PInfoAll {alle partier}
 translate O PInfoFilter {partier i filteret}
 translate O PInfoAgainst {Resultater mot}
-translate O PInfoMostWhite {Hyppigste Âpning som hvit}
-translate O PInfoMostBlack {Hyppigste Âpning som sort}
+translate O PInfoMostWhite {Hyppigste √•pning som hvit}
+translate O PInfoMostBlack {Hyppigste √•pning som sort}
 translate O PInfoRating {Historisk rating}
 translate O PInfoBio {Biografi}
-translate O PInfoEditRatings {Edit Ratings} ;# ***
-# ====== TODO To be translated ======
-translate O PinfoEditName {Edit Name}
-# ====== TODO To be translated ======
-translate O PinfoLookupName {Lookup Name}
+translate O PInfoEditRatings {Rediger ratinger}
+translate O PinfoEditName {Endre navn}
+translate O PinfoLookupName {Sl√• opp navn}
 
 # Tablebase information:
-translate O Draw {Uavgjort}
+translate O Draw {Remis}
 translate O stalemate {patt}
-# ====== TODO To be translated ======
-translate O checkmate {checkmate}
+translate O checkmate {matt}
 translate O withAllMoves {med alle trekk}
 translate O withAllButOneMove {med alle trekk unntatt ett}
 translate O with {med}
 translate O only {kun}
-translate O lose {taper} ;# tap?
+translate O lose {tap}
 translate O loses {taper}
 translate O allOthersLose {alle andre taper}
 translate O matesIn {setter matt i}
 translate O longest {lengste}
-translate O WinningMoves {Winning moves} ;# ***
-translate O DrawingMoves {Drawing moves} ;# ***
-translate O LosingMoves {Losing moves} ;# ***
-translate O UnknownMoves {Unknown-result moves} ;# ***
+translate O WinningMoves {Vinnende trekk}
+translate O DrawingMoves {Trekk som gir remis}
+translate O LosingMoves {Tapende trekk}
+translate O UnknownMoves {Trekk med ukjent resultat}
 
 # Tip of the day:
 translate O Tip {Tips}
@@ -616,158 +521,100 @@ translate O TipAtStartup {Tips ved oppstart}
 
 # Tree window menus:
 menuText O TreeFile "Fil" 0
-# ====== TODO To be translated ======
-menuText O TreeFileFillWithBase "Fill Cache with base" 0 {Fill the cache file with all games in current base}
-# ====== TODO To be translated ======
-menuText O TreeFileFillWithGame "Fill Cache with game" 0 {Fill the cache file with current game in current base}
-# ====== TODO To be translated ======
-menuText O TreeFileCacheInfo "Cache info" 0 {Get info on cache usage}
-menuText O TreeFileSave "Lagre hurtigbuffer" 0 {Lagrer hurtigbufferfilen (.stc)}
-menuText O TreeFileFill "Fyll hurtigbuffer" 0 \
-  {Fyller hurtigbufferet med de hyppigste Âpningsstillingene}
+menuText O TreeFileFillWithBase "Fyll mellomlager fra database" 0 {Fyll mellomlageret med partier fra denne databasen}
+menuText O TreeFileFillWithGame "Fyll mellomlager med parti" 0 {Fyll mellomlageret med dette partiet}
+menuText O TreeFileCacheInfo "Mellomlager info" 0 {Vis informasjon om bruk av mellomlager}
+menuText O TreeFileSave "Lagre mellomlager" 0 {Lagrer mellomlagerfilen (.stc)}
+menuText O TreeFileFill "Fyll mellomlager" 0 \
+  {Fyller hurtigbufferet med de hyppigste √•pningsstillingene}
 menuText O TreeFileBest "Idealparti" 0 {Show the best tree games list}
 menuText O TreeFileGraph "Grafikk" 0 {Vis grafen for denne grenen av treet}
 menuText O TreeFileCopy "Kopier treet til utklippstavlen" 0 \
   {Kopier statistikken for treet til utklippstavlen}
 menuText O TreeFileClose "Lukk trevindu" 0 {Lukker trevinduet}
-# ====== TODO To be translated ======
-menuText O TreeMask "Mask" 0
-# ====== TODO To be translated ======
-menuText O TreeMaskNew "New" 0 {New mask}
-# ====== TODO To be translated ======
-menuText O TreeMaskOpen "Open" 0 {Open mask}
-# ====== TODO To be translated ======
-menuText O TreeMaskOpenRecent "Open recent" 0 {Open recent mask}
-# ====== TODO To be translated ======
-menuText O TreeMaskSave "Save" 0 {Save mask}
-# ====== TODO To be translated ======
-menuText O TreeMaskClose "Close" 0 {Close mask}
-# ====== TODO To be translated ======
-menuText O TreeMaskFillWithLine "Fill with line" 0 {Fill mask with all previous moves}
-# ====== TODO To be translated ======
-menuText O TreeMaskFillWithGame "Fill with game" 0 {Fill mask with game}
-# ====== TODO To be translated ======
-menuText O TreeMaskFillWithBase "Fill with base" 0 {Fill mask with all games in base}
-# ====== TODO To be translated ======
-menuText O TreeMaskInfo "Info" 0 {Show statistics for current mask}
-# ====== TODO To be translated ======
-menuText O TreeMaskDisplay "Display mask map" 0 {Show mask data in a tree form}
-# ====== TODO To be translated ======
-menuText O TreeMaskSearch "Search" 0 {Search in current mask}
+menuText O TreeMask "Maske" 0
+menuText O TreeMaskNew "Ny" 0 {Ny maske}
+menuText O TreeMaskOpen "√Öpne" 0 {√Öpne maske}
+menuText O TreeMaskOpenRecent "√Öpne nylig" 0 {√Öpne nylig maske}
+menuText O TreeMaskSave "Lagre" 0 {Lagre maske}
+menuText O TreeMaskClose "Lukk" 0 {Lukk maske}
+menuText O TreeMaskFillWithLine "Fyll med linje" 0 {Legg alle trekk hittil i masken}
+menuText O TreeMaskFillWithGame "Fyll med parti" 0 {Legg hele partiet i masken}
+menuText O TreeMaskFillWithBase "Fyll med base" 0 {Legg alle partier i databasen i masken}
+menuText O TreeMaskInfo "Info" 0 {Vis statistikk for denne masken}
+menuText O TreeMaskDisplay "Vis maskekart" 0 {Viser tre med data fra masken}
+menuText O TreeMaskSearch "S√∏k" 0 {S√∏k i denne masken}
 menuText O TreeSort "Sorter" 0
 menuText O TreeSortAlpha "Alfabetisk" 0
 menuText O TreeSortECO "ECO-kode" 0
 menuText O TreeSortFreq "Hyppighet" 0
 menuText O TreeSortScore "Poeng" 0
 menuText O TreeOpt "Innstillinger" 0
-# ====== TODO To be translated ======
-menuText O TreeOptSlowmode "Slow mode" 0 {Slow mode for updates (high accuracy)}
-# ====== TODO To be translated ======
-menuText O TreeOptFastmode "Fast mode" 0 {Fast mode for updates (no move transposition)}
-# ====== TODO To be translated ======
-menuText O TreeOptFastAndSlowmode "Fast and slow mode" 0 {Fast mode then slow mode for updates}
-# ====== TODO To be translated ======
-menuText O TreeOptStartStop "Auto refreshing" 0 {Toggles automatic refreshing of the tree window}
-menuText O TreeOptLock "LÂs" 0 {LÂser treet til nÂvÊrende database}
-menuText O TreeOptTraining "Trening" 0 {SlÂr av/pÂ treningsmodus}
-# ====== TODO To be translated ======
-menuText O TreeOptShort "Short Display" 0 {Don't show ELO information}
-menuText O TreeOptAutosave "Autolagre hurtigbuffer" 0 \
-  {Autolagrer hurtigbufferet nÂr vinduet lukkes}
-# ====== TODO To be translated ======
-menuText O TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
-# ====== TODO To be translated ======
-menuText O TreeOptCacheSize "Cache size" 0 {Set the cache size}
-# ====== TODO To be translated ======
-menuText O TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
-# ====== TODO To be translated ======
-menuText O TreeOptSortBest "Sort Best Games" 0 "Sort Best Games by ELO."
+menuText O TreeOptSlowmode "Treg modus" 0 {Oppdaterer tregere, men mer n√∏yaktig}
+menuText O TreeOptFastmode "Rask modus" 0 {Oppdaterer raskere, men uten transponeringer}
+menuText O TreeOptFastAndSlowmode "Rask og treg modus" 0 {Rask modus, og s√• treg oppdatering}
+menuText O TreeOptStartStop "Oppdater automatisk" 0 {Angir om treet skal oppdateres automatisk}
+menuText O TreeOptLock "L√•s" 0 {L√•ser treet til n√•v√¶rende database}
+menuText O TreeOptTraining "Trening" 0 {Sl√•r av/p√• treningsmodus}
+menuText O TreeOptShort "Kort visning" 0 {Ikke vis ELO-informasjon}
+menuText O TreeOptAutosave "Autolagre hurtigbuffer" 0 {Autolagrer hurtigbufferet n√•r vinduet lukkes}
+menuText O TreeOptAutomask "√Öpne maske automatisk" 0 "√Öpner siste maske med et √•pent tre."
+menuText O TreeOptCacheSize "Mellomlager" 0 {St√∏rrelse p√• mellomlager}
+menuText O TreeOptShowBar "Vis fremdrift" 0 "Viser fremdrift."
+menuText O TreeOptSortBest "Sorter beste partier" 0 "Sorter beste partier etter ELO."
 menuText O TreeHelp "Hjelp" 0
 menuText O TreeHelpTree "Tre hjelp" 0
 menuText O TreeHelpIndex "Innholdsfortegnelse" 0
-
 translate O SaveCache {Lagre hurtigbuffer}
 translate O Training {Trening}
-translate O LockTree {LÂs}
-translate O TreeLocked {lÂst}
+translate O LockTree {L√•s}
+translate O TreeLocked {l√•st}
 translate O TreeBest {Beste}
-translate O TreeBestGames {Idealtrepartier}
-# ====== TODO To be translated ======
-translate O TreeAdjust {Adjust Filter}
+translate O TreeBestGames {Beste partier}
+translate O TreeAdjust {Juster filter}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
-# todo
-translate O TreeTitleRow {    Move      Frequency    Score Draws AvElo Perf AvYear ECO}
-translate O TreeTitleRowShort {    Move      Frequency    Score Draws}
+translate O TreeTitleRow      {    Trekk     Hyppighet    Score Remis Elo   Prst √Ör     ECO}
+translate O TreeTitleRowShort {    Trekk     Hyppighet    Score Remis}
 translate O TreeTotal: {SAMMENLAGT:}
-# ====== TODO To be translated ======
-translate O DoYouWantToSaveFirst {Do you want to save}
-# ====== TODO To be translated ======
-translate O AddToMask {Add to Mask}
-# ====== TODO To be translated ======
-translate O RemoveFromMask {Remove from Mask}
-# TODO
-translate O AddThisMoveToMask {Add Move to Mask}
-# ====== TODO To be translated ======
-translate O SearchMask {Search in Mask}
-# ====== TODO To be translated ======
-translate O DisplayMask {Display Mask}
-# ====== TODO To be translated ======
-translate O Nag {Nag code}
-# ====== TODO To be translated ======
-translate O Marker {Marker}
-# ====== TODO To be translated ======
-translate O Include {Include}
-# ====== TODO To be translated ======
-translate O Exclude {Exclude}
-# ====== TODO To be translated ======
-translate O MainLine {Main line}
-# ====== TODO To be translated ======
-translate O Bookmark {Bookmark}
-# ====== TODO To be translated ======
-translate O NewLine {New line}
-# ====== TODO To be translated ======
-translate O ToBeVerified {To be verified}
-# ====== TODO To be translated ======
-translate O ToTrain {To train}
-# ====== TODO To be translated ======
-translate O Dubious {Dubious}
-# ====== TODO To be translated ======
-translate O ToRemove {To remove}
-# ====== TODO To be translated ======
-translate O NoMarker {No marker}
-# ====== TODO To be translated ======
-translate O ColorMarker {Color}
-# ====== TODO To be translated ======
-translate O WhiteMark {White}
-# ====== TODO To be translated ======
-translate O GreenMark {Green}
-# ====== TODO To be translated ======
-translate O YellowMark {Yellow}
-# ====== TODO To be translated ======
-translate O BlueMark {Blue}
-# ====== TODO To be translated ======
-translate O RedMark {Red}
-# ====== TODO To be translated ======
-translate O CommentMove {Comment move}
-# ====== TODO To be translated ======
-translate O CommentPosition {Comment position}
-# ====== TODO To be translated ======
-translate O AddMoveToMaskFirst {Add move to mask first}
-# ====== TODO To be translated ======
-translate O OpenAMaskFileFirst {Open a mask file first}
-# ====== TODO To be translated ======
-translate O Positions {Positions}
-# ====== TODO To be translated ======
-translate O Moves {Moves}
+translate O DoYouWantToSaveFirst {Vil du lagre}
+translate O AddToMask {Legg til maske}
+translate O RemoveFromMask {Fjern fra maske}
+translate O AddThisMoveToMask {Legg trekk til maske}
+translate O SearchMask {S√∏k i maske}
+translate O DisplayMask {Vis maske}
+translate O Nag {Kvalitet}
+translate O Marker {Mark√∏r}
+translate O Include {Inkluder}
+translate O Exclude {Eksluder}
+translate O MainLine {Hovedvariant}
+translate O Bookmark {Bokmerk}
+translate O NewLine {Ny linje}
+translate O ToBeVerified {Skal sjekkes}
+translate O ToTrain {Skal trenes}
+translate O Dubious {Un√∏yaktig}
+translate O ToRemove {Skal fjernes}
+translate O NoMarker {Ingen mark√∏r}
+translate O ColorMarker {Farge}
+translate O WhiteMark {Hvit}
+translate O GreenMark {Gr√∏nn}
+translate O YellowMark {Gul}
+translate O BlueMark {Bl√•}
+translate O RedMark {R√∏d}
+translate O CommentMove {Kommenter trekk}
+translate O CommentPosition {Kommenter stilling}
+translate O AddMoveToMaskFirst {Legg trekk til masken f√∏rst}
+translate O OpenAMaskFileFirst {√Öpne en maskefil f√∏rst}
+translate O Positions {Stillinger}
+translate O Moves {Trekk}
 
 # Finder window:
 menuText O FinderFile "Fil" 0
 menuText O FinderFileSubdirs "Let i underkataloger" 0
-menuText O FinderFileClose "Lukk s¯kevindu" 0
+menuText O FinderFileClose "Lukk s√∏kevindu" 0
 menuText O FinderSort "Sorter" 0
 menuText O FinderSortType "Type" 0
-menuText O FinderSortSize "St¯rrelse" 0
+menuText O FinderSortSize "St√∏rrelse" 0
 menuText O FinderSortMod "Endret" 0
 menuText O FinderSortName "Navn" 0
 menuText O FinderSortPath "Sti" 0
@@ -777,46 +624,41 @@ menuText O FinderTypesOld "Scid-databaser i gammelt format" 0
 menuText O FinderTypesPGN "PGN-filer" 0
 menuText O FinderTypesEPD "EPD-filer" 0
 menuText O FinderHelp "Hjelp" 0
-menuText O FinderHelpFinder "S¯kehjelp" 0
+menuText O FinderHelpFinder "S√∏kehjelp" 0
 menuText O FinderHelpIndex "Innholdsfortegnelse" 0
-translate O FileFinder {S¯keverkt¯y}
+translate O FileFinder {S√∏keverkt√∏y}
 translate O FinderDir {Katalog}
 translate O FinderDirs {Kataloger}
 translate O FinderFiles {Filer}
 translate O FinderUpDir {opp}
-# ====== TODO To be translated ======
-translate O FinderCtxOpen {Open}
-# ====== TODO To be translated ======
-translate O FinderCtxBackup {Backup}
-# ====== TODO To be translated ======
-translate O FinderCtxCopy {Copy}
-# ====== TODO To be translated ======
-translate O FinderCtxMove {Move}
-# ====== TODO To be translated ======
-translate O FinderCtxDelete {Delete}
+translate O FinderCtxOpen {√Öpne}
+translate O FinderCtxBackup {Sikkerhetskopi}
+translate O FinderCtxCopy {Kopier}
+translate O FinderCtxMove {Flytt}
+translate O FinderCtxDelete {Slett}
 
 # Player finder:
 menuText O PListFile "Fil" 0
 menuText O PListFileUpdate "Oppdater" 0
-menuText O PListFileClose "Close Player Finder" 0 ;# ***
+menuText O PListFileClose "Lukk spillers√∏k" 0
 menuText O PListSort "Sorter" 0
-menuText O PListSortName "Name" 0 ;# ***
+menuText O PListSortName "Navn" 0
 menuText O PListSortElo "Elo" 0
 menuText O PListSortGames "Partier" 0
-menuText O PListSortOldest "Oldest" 0 ;# ***
-menuText O PListSortNewest "Newest" 0 ;# ***
+menuText O PListSortOldest "Eldste" 0
+menuText O PListSortNewest "Nyeste" 0
 
 # Tournament finder:
 menuText O TmtFile "Fil" 0
 menuText O TmtFileUpdate "Oppdater" 0
-menuText O TmtFileClose "Lukk turneringss¯ker" 0
+menuText O TmtFileClose "Lukk turneringss√∏ker" 0
 menuText O TmtSort "Sorter" 0
 menuText O TmtSortDate "Dato" 0
 menuText O TmtSortPlayers "Players" 0
 menuText O TmtSortGames "Partier" 0
 menuText O TmtSortElo "Elo" 0
 menuText O TmtSortSite "Sted" 0
-menuText O TmtSortEvent "Anledning" 1
+menuText O TmtSortEvent "Turnering" 1
 menuText O TmtSortWinner "Vinner" 0
 translate O TmtLimit "Listegrense"
 translate O TmtMeanElo "Laveste middel-ELO"
@@ -825,100 +667,66 @@ translate O TmtNone "Ingen passende turneringer funnet."
 # Graph windows:
 menuText O GraphFile "Fil" 0
 menuText O GraphFileColor "Lagre som farget PostScript..." 0
-menuText O GraphFileGrey "Lagre som grÂtonet PostScript..." 0
+menuText O GraphFileGrey "Lagre som gr√•tonet PostScript..." 0
 menuText O GraphFileClose "Lukk vindu" 0
 menuText O GraphOptions "Innstillinger" 0
 menuText O GraphOptionsWhite "Hvit" 0
 menuText O GraphOptionsBlack "Sort" 0
-# ====== TODO To be translated ======
-menuText O GraphOptionsDots "Show Dots" 0
-# ====== TODO To be translated ======
-menuText O GraphOptionsBar "Highlight Current Move" 0
+menuText O GraphOptionsDots "Vis punkter" 0
+menuText O GraphOptionsBar "Marker gjeldende trekk" 0
 menuText O GraphOptionsBoth "Begge" 0
 menuText O GraphOptionsPInfo "Spiller Info spiller" 0
 translate O GraphFilterTitle "Filtergraf: hyppighet per 1000 partier"
-# ====== TODO To be translated ======
-translate O GraphAbsFilterTitle "Filter Graph: frequency of the games"
-# ====== TODO To be translated ======
-translate O ConfigureFilter {Configure X Axis}
-# ====== TODO To be translated ======
-translate O FilterEstimate "Estimate"
-# ====== TODO To be translated ======
-translate O TitleFilterGraph "Scid: Filter Graph"
+translate O GraphAbsFilterTitle "Filtergraf: forekomster av partier"
+translate O ConfigureFilter {Konfigurer X-akse}
+translate O FilterEstimate "Anslag"
+translate O TitleFilterGraph "Scid: Filtergraf"
 
 # Analysis window:
-translate O AddVariation {Legg til variasjon}
-# ====== TODO To be translated ======
-translate O AddAllVariations {Add All Variations}
+translate O AddVariation {Legg til variant}
+translate O AddAllVariations {Legg til alle varianter}
 translate O AddMove {Legg til trekk}
 translate O Annotate {Annoter}
-# ====== TODO To be translated ======
-translate O ShowAnalysisBoard {Show analysis board}
-# ====== TODO To be translated ======
-translate O ShowInfo {Show engine info}
-# ====== TODO To be translated ======
-translate O FinishGame {Finish game}
-# ====== TODO To be translated ======
-translate O StopEngine {Stop engine}
-# ====== TODO To be translated ======
-translate O StartEngine {Start engine}
-# ====== TODO To be translated ======
-translate O ExcludeMove {Exclude Move}
-# ====== TODO To be translated ======
-translate O LockEngine {Lock engine to current position}
+translate O ShowAnalysisBoard {Vis analysebrett}
+translate O ShowInfo {Vis info om motor}
+translate O FinishGame {Fullf√∏r parti}
+translate O StopEngine {Stopp motor}
+translate O StartEngine {Start motor}
+translate O ExcludeMove {Eksluder trekk}
+translate O LockEngine {L√•s motor til denne stillingen}
 translate O AnalysisCommand {Analysekommando}
 translate O PreviousChoices {Tidligere valg}
 translate O AnnotateTime {Tid mellom trekk i sekunder}
 translate O AnnotateWhich {Legg til variasjoner}
 translate O AnnotateAll {For trekk av begge sider}
-# ====== TODO To be translated ======
-translate O AnnotateAllMoves {Annotate all moves}
+translate O AnnotateAllMoves {Annoter alle trekk}
 translate O AnnotateWhite {Kun for hvite trekk}
 translate O AnnotateBlack {Kun for sorte trekk}
-translate O AnnotateNotBest {NÂr trekket avviker fra beste linje}
-# ====== TODO To be translated ======
-translate O AnnotateBlundersOnly {When game move is an obvious blunder}
-# ====== TODO To be translated ======
-translate O BlundersNotBest {Blunders/Not Best}
-# ====== TODO To be translated ======
-# ====== TODO To be translated ======
-translate O AnnotateTitle {Konfigurer Annotation}
-# ====== TODO To be translated ======
-translate O AnnotateMissedMates {Missed/shorter mates}
-translate O BlundersThreshold {Threshold}
-# ====== TODO To be translated ======
-translate O ScoreFormat {Score format}
-# ====== TODO To be translated ======
+translate O AnnotateNotBest {N√•r trekket avviker fra beste linje}
+translate O AnnotateBlundersOnly {N√•r trekket er en √•penbar bukk}
+translate O BlundersNotBest {Bukk/ikke best}
+translate O AnnotateTitle {Konfigurer annotasjon}
+translate O AnnotateMissedMates {Mistet/kortere matt}
+translate O BlundersThreshold {Grense}
+translate O ScoreFormat {Score-format}
 translate O CutOff {Cut Off}
-translate O LowPriority {Low CPU priority} ;# ***
-# ====== TODO To be translated ======
-translate O LogEngines {Log Size}
-# ====== TODO To be translated ======
-translate O LogName {Add Name}
-# ====== TODO To be translated ======
-translate O MaxPly {Max Ply}
-# ====== TODO To be translated ======
-translate O ClickHereToSeeMoves {Click here to see moves}
-# ====== TODO To be translated ======
-translate O ConfigureInformant {Configure Informant}
-# ====== TODO To be translated ======
-translate O Informant!? {Interesting move}
-# ====== TODO To be translated ======
-translate O Informant? {Poor move}
-# ====== TODO To be translated ======
-translate O Informant?? {Blunder}
-# ====== TODO To be translated ======
-translate O Informant?! {Dubious move}
-# ====== TODO To be translated ======
-translate O Informant+= {White has a slight advantage}
-# ====== TODO To be translated ======
-translate O Informant+/- {White has a moderate advantage}
-# ====== TODO To be translated ======
-translate O Informant+- {White has a decisive advantage}
-# ====== TODO To be translated ======
-translate O Informant++- {The game is considered won}
-# ====== TODO To be translated ======
-translate O Book {Book}
+translate O LowPriority {Lav CPU-prioritet}
+translate O LogEngines {Loggst√∏rrelse}
+translate O LogName {Legg til navn}
+translate O MaxPly {Maks halvtrekk}
+translate O ClickHereToSeeMoves {Klikk her for √• se trekk}
+translate O ConfigureInformant {Configure Informant} ;# ***
+translate O Informant!? {Interessant trekk}
+translate O Informant? {D√•rlig trekk}
+translate O Informant?? {Bukk}
+translate O Informant?! {Un√∏yaktig trekk}
+translate O Informant+= {Hvit st√•r noe bedre}
+translate O Informant+/- {Hvit st√•r bedre}
+translate O Informant+- {Hvit st√•r betraktelig bedre}
+translate O Informant++- {Partiet anses som vunnet}
+
+# Book window
+translate O Book {Bok}
 # ====== TODO To be translated ======
 translate O OtherBook {Other Moves}
 # ====== TODO To be translated ======
@@ -928,9 +736,7 @@ translate O TwoBooks {Two Books}
 
 # Analysis Engine open dialog:
 translate O EngineList {Liste over analysemotorer}
-# ====== TODO To be translated ======
-translate O EngineKey {Key}
-# ====== TODO To be translated ======
+translate O EngineKey {Tast}
 translate O EngineType {Type}
 translate O EngineName {Navn}
 translate O EngineCmd {Kommandolinje}
@@ -940,7 +746,7 @@ translate O EngineElo {Elo}
 translate O EngineTime {Dato}
 translate O EngineNew {Ny}
 translate O EngineEdit {Rediger}
-translate O EngineRequired {Fete felter er n¯dvendige, de ¯vrige er valgfrie}
+translate O EngineRequired {Fete felter er n√∏dvendige, de √∏vrige er valgfrie}
 
 # Stats window menus:
 menuText O StatsFile "Fil" 0
@@ -950,7 +756,7 @@ menuText O StatsOpt "Innstillinger" 0
 
 # PGN window menus:
 menuText O PgnFile "Fil" 0
-menuText O PgnFileCopy "Copy Game to Clipboard" 0 ;# ***
+menuText O PgnFileCopy "Kopier parti til utklippstavle" 0
 menuText O PgnFilePrint "Skriv til fil..." 0
 menuText O PgnFileClose "Lukk PGN-vindu" 0
 menuText O PgnOpt "Vis" 0
@@ -962,25 +768,22 @@ menuText O PgnOptIndentV "Rykk inn variasjoner" 0
 menuText O PgnOptColumn "Bruk kolonner (ett trekk per linje)" 0
 menuText O PgnOptSpace "Mellomrom etter trekknummer" 0
 menuText O PgnOptStripMarks "Fjern fargekoder" 0
-menuText O PgnOptChess "Sjakk brikker" 0
+menuText O PgnOptChess "Sjakkbrikker" 0
 menuText O PgnOptScrollbar "Rullefelt" 0
-menuText O PgnOptBoldMainLine "Use Bold Text for Main Line Moves" 4 ;# ***
+menuText O PgnOptBoldMainLine "Fet skrift p√• hovedlinje" 0
 menuText O PgnColor "Farger" 0
 menuText O PgnColorHeader "Header..." 0
 menuText O PgnColorAnno "Annotasjoner..." 0
 menuText O PgnColorComments "Kommentarer..." 0
 menuText O PgnColorVars "Variasjoner..." 0
 menuText O PgnColorBackground "Bakgrunn..." 0
-# ====== TODO To be translated ======
-menuText O PgnColorMain "Main line..." 0
-# ====== TODO To be translated ======
-menuText O PgnColorCurrent "Current move background..." 1
-# ====== TODO To be translated ======
-menuText O PgnColorNextMove "Next move background..." 0
+menuText O PgnColorMain "Hovedlinje..." 0
+menuText O PgnColorCurrent "Bakgrunn p√• gjeldende trekk..." 1
+menuText O PgnColorNextMove "Bakgrunn p√• neste trekk..." 0
 menuText O PgnHelp "Hjelp" 0
 menuText O PgnHelpPgn "PGN-hjelp" 0
 menuText O PgnHelpIndex "Innholdsfortegnelse" 0
-translate O PgnWindowTitle {Game Notation - game %u} ;# ***
+translate O PgnWindowTitle {PGN: parti %u}
 
 # Crosstable window menus:
 menuText O CrosstabFile "Fil" 0
@@ -989,29 +792,24 @@ menuText O CrosstabFileHtml "Skriv til HTML-fil..." 0
 menuText O CrosstabFileLaTeX "Skriv til LaTeX-fil..." 0
 menuText O CrosstabFileClose "Lukk krysstabellvindu" 0
 menuText O CrosstabEdit "Rediger" 0
-menuText O CrosstabEditEvent "Anledning" 0
+menuText O CrosstabEditEvent "Turnering" 0
 menuText O CrosstabEditSite "Sted" 0
 menuText O CrosstabEditDate "Dato" 0
 menuText O CrosstabOpt "Vis" 0
 menuText O CrosstabOptColorPlain "Ren tekst" 0
 menuText O CrosstabOptColorHyper "Hypertekst" 0
-# ====== TODO To be translated ======
-menuText O CrosstabOptTieWin "Tie-Break by wins" 1
-# ====== TODO To be translated ======
-menuText O CrosstabOptTieHead "Tie-Break by head-head" 1
-# todo
-menuText O CrosstabOptThreeWin "3 Points for Win" 1
-menuText O CrosstabOptAges "Aldre i Âr" 0
+menuText O CrosstabOptTieWin "Kvalitet: partier vunnet" 0
+menuText O CrosstabOptTieHead "Kvalitet: innbyrdes oppgj√∏r" 0
+menuText O CrosstabOptThreeWin "3 poeng for seier" 1
+menuText O CrosstabOptAges "Aldre i √•r" 0
 menuText O CrosstabOptNats "Nasjonaliteter" 0
-# todo
-menuText O CrosstabOptTallies "Win/Loss/Draw" 0
+menuText O CrosstabOptTallies "Seier/tap/remis" 0
 menuText O CrosstabOptRatings "Ratinger" 0
 menuText O CrosstabOptTitles "Titler" 0
 menuText O CrosstabOptBreaks "Poengfordel" 0
-menuText O CrosstabOptDeleted "Include deleted games" 8 ;# ***
+menuText O CrosstabOptDeleted "Inkluder slettede partier" 0
 menuText O CrosstabOptColors "Farger (kun sveitsisk)" 0
-# ====== TODO To be translated ======
-menuText O CrosstabOptColorRows "Color Rows" 0
+menuText O CrosstabOptColorRows "Fargede rader" 0
 menuText O CrosstabOptColumnNumbers "Nummererte kolonner (kun alle-mot-alle-tabeller)" 0
 menuText O CrosstabOptGroup "Gruppepoeng" 0
 menuText O CrosstabSort "Sorter" 0
@@ -1019,9 +817,8 @@ menuText O CrosstabSortName "Navn" 0
 menuText O CrosstabSortRating "Rating" 0
 menuText O CrosstabSortScore "Poeng" 0
 menuText O CrosstabSortCountry "Land" 0
-# todo
 menuText O CrosstabType "Format" 0
-menuText O CrosstabTypeAll "Alle-mot-alle" 0
+menuText O CrosstabTypeAll "Berger" 0
 menuText O CrosstabTypeSwiss "Sveitsisk" 0
 menuText O CrosstabTypeKnockout "Kun vinnere" 0
 menuText O CrosstabTypeAuto "Auto" 0
@@ -1031,7 +828,7 @@ menuText O CrosstabHelpIndex "Innholdsfortegnelse" 0
 translate O SetFilter {Sett filter}
 translate O AddToFilter {Legg til i filter}
 translate O Swiss {Sveitsisk}
-translate O Category {Category} ;# ***
+translate O Category {Kategori}
 
 # Opening report window menus:
 menuText O OprepFile "Fil" 0
@@ -1040,45 +837,42 @@ menuText O OprepFileHtml "Skriv til HTML-fil..." 0
 menuText O OprepFileLaTeX "Skriv til LaTeX-fil..." 0
 menuText O OprepFileOptions "Innstillinger..." 0
 menuText O OprepFileClose "Lukk rapport-vindu" 0
-menuText O OprepFavorites "Favorites" 1 ;# ***
-menuText O OprepFavoritesAdd "Add Report..." 0 ;# ***
-menuText O OprepFavoritesEdit "Edit Report Favorites..." 0 ;# ***
-menuText O OprepFavoritesGenerate "Generate Reports..." 0 ;# ***
+menuText O OprepFavorites "Favoritter" 0
+menuText O OprepFavoritesAdd "Legg til rapport..." 0
+menuText O OprepFavoritesEdit "Rediger favorittrapporter..." 0
+menuText O OprepFavoritesGenerate "Generer rapporter..." 0
 menuText O OprepHelp "Hjelp" 0
-menuText O OprepHelpReport "≈pningsrapport hjelp" 0
+menuText O OprepHelpReport "√Öpningsrapport hjelp" 0
 menuText O OprepHelpIndex "Innholdsfortegnelse" 0
 
 # Header search:
-translate O HeaderSearch {Headers¯k}
-translate O EndSideToMove {Side to move at end of game} ;# ***
+translate O HeaderSearch {Headers√∏k}
+translate O EndSideToMove {Farge i trekket ved partiets slutt}
 translate O GamesWithNoECO {Partier uten ECO?}
 translate O GameLength {Partilengde}
 translate O FindGamesWith {Finn partier merket med...}
 translate O StdStart {Vanlig utgangsstilling}
-translate O Promotions {Forfremmelser}
-# ====== TODO To be translated ======
-translate O UnderPromo {Under Prom.}
+translate O Promotions {Bondeforvandlinger}
+translate O UnderPromo {Under-forvandling}
 translate O Comments {Kommentarer}
 translate O Variations {Variasjoner}
 translate O Annotations {Annotasjoner}
 translate O DeleteFlag {Slettet}
-translate O WhiteOpFlag {Hvit Âpning}
-translate O BlackOpFlag {Sort Âpning}
+translate O WhiteOpFlag {Hvit √•pning}
+translate O BlackOpFlag {Sort √•pning}
 translate O MiddlegameFlag {Midtspill}
 translate O EndgameFlag {Sluttspill}
 translate O NoveltyFlag {Avvik}
 translate O PawnFlag {Bondestruktur}
 translate O TacticsFlag {Taktikk}
-translate O QsideFlag {Spill pÂ dronningsiden}
-translate O KsideFlag {Spill pÂ kongesiden}
+translate O QsideFlag {Spill p√• dronningsiden}
+translate O KsideFlag {Spill p√• kongesiden}
 translate O BrilliancyFlag {Brillians}
 translate O BlunderFlag {Tabbe}
 translate O UserFlag {Bruker}
 translate O PgnContains {PGN inneholder tekst}
-# ====== TODO To be translated ======
-translate O PreComment {Pre-game Comment}
-# ====== TODO To be translated ======
-translate O PostComment {End Comment}
+translate O PreComment {Kommentar f√∏r partiet}
+translate O PostComment {Slutt-kommentar}
 
 # Game list window:
 translate O GlistNumber {Nummer}
@@ -1086,17 +880,17 @@ translate O GlistWhite {Hvit}
 translate O GlistBlack {Sort}
 translate O GlistWElo {H-Elo}
 translate O GlistBElo {S-Elo}
-translate O GlistEvent {Anledning}
+translate O GlistEvent {Turnering}
 translate O GlistSite {Sted}
 translate O GlistRound {Runde}
 translate O GlistDate {Dato}
-translate O GlistYear {≈r}
-translate O GlistEventDate {AnledningDato}
+translate O GlistYear {√Ör}
+translate O GlistEventDate {TurneringsDato}
 translate O GlistResult {Resultat}
 translate O GlistLength {Lengde}
 translate O GlistCountry {Land}
 translate O GlistECO {ECO}
-translate O GlistOpening {≈pning}
+translate O GlistOpening {√Öpning}
 translate O GlistEndMaterial {Slutt-kvalitet}
 translate O GlistDeleted {Slettet}
 translate O GlistFlags {Flagg}
@@ -1111,26 +905,19 @@ translate O GlistEditField {Still inn}
 translate O GlistAddField {Legg til}
 translate O GlistDeleteField {Fjern}
 translate O GlistColor {Farge}
-# ====== TODO To be translated ======
-translate O GlistSort {Sort database}
-# ====== TODO To be translated ======
-translate O GlistRemoveThisGameFromFilter  {Remove}
-# ====== TODO To be translated ======
-translate O GlistRemoveGameAndAboveFromFilter  {Remove game (and all above it)}
-# ====== TODO To be translated ======
-translate O GlistRemoveGameAndBelowFromFilter  {Remove game (and all below it)}
-# ====== TODO To be translated ======
-translate O GlistDeleteGame {(Un)Delete this game} 
-# ====== TODO To be translated ======
-translate O GlistDeleteAllGames {Delete all games in filter} 
-# ====== TODO To be translated ======
-translate O GlistUndeleteAllGames {Undelete all games in filter} 
-# ====== TODO To be translated ======
-translate O GlistAlignL {Align left}
-# ====== TODO To be translated ======
-translate O GlistAlignR {Align right}
-# ====== TODO To be translated ======
-translate O GlistAlignC {Align center}
+translate O GlistSort {Sorter database}
+
+# menu shown with right mouse button down on game list. 
+translate O GlistRemoveThisGameFromFilter  {Fjern}
+translate O GlistRemoveGameAndAboveFromFilter  {Fjern alle over}
+translate O GlistRemoveGameAndBelowFromFilter  {Fjern alle under}
+translate O GlistDeleteGame {(Angre) Sletting av partiet} 
+translate O GlistDeleteAllGames {Slett alle partier i filteret}
+translate O GlistUndeleteAllGames {Gjenopprett alle partier i filteret}
+
+translate O GlistAlignL {Venstrejuster}
+translate O GlistAlignR {H√∏yrejuster}
+translate O GlistAlignC {Sentrer}
 
 # Maintenance window:
 translate O DatabaseName {Databasenavn:}
@@ -1138,12 +925,11 @@ translate O TypeIcon {Ikon}
 translate O NumOfGames {Partier:}
 translate O NumDeletedGames {Slettede partier:}
 translate O NumFilterGames {Partier i filter:}
-translate O YearRange {Til/fra Âr:}
+translate O YearRange {Til/fra √•r:}
 translate O RatingRange {Til/fra rating:}
-translate O Description {Description} ;# ***
+translate O Description {Beskrivelse}
 translate O Flag {Flagg}
-# ====== TODO To be translated ======
-translate O CustomFlags {Custom flags}
+translate O CustomFlags {Egne flagg}
 translate O DeleteCurrent {Slett gjeldende parti}
 translate O DeleteFilter {Slett filtrerte partier}
 translate O DeleteAll {Slett alle partier}
@@ -1154,18 +940,15 @@ translate O DeleteTwins {Slett duplikatpartier}
 translate O MarkCurrent {Merk gjeldende parti}
 translate O MarkFilter {Merk filtrerte partier}
 translate O MarkAll {Merk alle partier}
-translate O UnmarkCurrent {Fjern merking pÂ gjeldende parti}
-translate O UnmarkFilter {Fjern merking pÂ filtrerte partier}
-translate O UnmarkAll {Fjern merking pÂ alle partier}
+translate O UnmarkCurrent {Fjern merking p√• gjeldende parti}
+translate O UnmarkFilter {Fjern merking p√• filtrerte partier}
+translate O UnmarkAll {Fjern merking p√• alle partier}
 translate O Spellchecking {Stavekontroll}
-# ====== TODO To be translated ======
-translate O MakeCorrections {Make Corrections}
-# ====== TODO To be translated ======
-translate O Ambiguous {Ambiguous}
-# ====== TODO To be translated ======
-translate O Surnames {Surnames}
+translate O MakeCorrections {Utf√∏r rettelser}
+translate O Ambiguous {Tvetydig}
+translate O Surnames {Etternavn}
 translate O Players {Spillere}
-translate O Events {Anledninger}
+translate O Events {Turneringer}
 translate O Sites {Steder}
 translate O Rounds {Runder}
 translate O DatabaseOps {Databasebehandling}
@@ -1176,120 +959,101 @@ translate O AddEloRatings {Legg til ELO-ratinger}
 translate O AutoloadGame {Start med parti nummer}
 translate O StripTags {Fjern PGN-merker}
 translate O StripTag {Fjern merke}
-# ====== TODO To be translated ======
-translate O CheckGames {Check games}
+translate O CheckGames {Sjekk partier}
 translate O Cleaner {Opprydding}
 translate O CleanerHelp {
-Scid-opprydding vil utf¯re alle handlinger du velger fra listen under pÂ gjeldende database.
+Scid-opprydding vil utf√∏re alle handlinger du velger fra listen under p√• gjeldende database.
 
 Gjeldende innstillinger i ECO-klassifiseringen og duplikatslettingdialogene vil virke inn om du velger disse funksjonene.
 }
 translate O CleanerConfirm {
-NÂr oppryddingen er i gang kan den ikke avbrytes!
+N√•r oppryddingen er i gang kan den ikke avbrytes!
 
-Dette kan ta lang tid pÂ en stor databse, avhengig av funksjonene du har valgt og disses gjeldende innstillinger.
+Dette kan ta lang tid p√• en stor databse, avhengig av funksjonene du har valgt og disses gjeldende innstillinger.
 
-Er du sikker pÂ at du vil starte vedlikeholdsfunksjonene du har valgt?
+Er du sikker p√• at du vil starte vedlikeholdsfunksjonene du har valgt?
 }
-# ====== TODO To be translated ======
-translate O TwinCheckUndelete {to flip; "u" undeletes both)}
-# ====== TODO To be translated ======
-translate O TwinCheckprevPair {Previous pair}
-# ====== TODO To be translated ======
-translate O TwinChecknextPair {Next pair}
-# ====== TODO To be translated ======
-translate O TwinChecker {Scid: Twin game checker}
-# ====== TODO To be translated ======
-translate O TwinCheckTournament {Games in tournament:}
-# ====== TODO To be translated ======
-translate O TwinCheckNoTwin {No twin  }
-# ====== TODO To be translated ======
-translate O TwinCheckNoTwinfound {No twin was detected for this game.\nTo show twins using this window, you must first use the "Delete twin games..." function. }
-# ====== TODO To be translated ======
-translate O TwinCheckTag {Share tags...}
-# ====== TODO To be translated ======
-translate O TwinCheckFound1 {Scid found $result twin games}
-# ====== TODO To be translated ======
-translate O TwinCheckFound2 { and set their delete flags}
-# ====== TODO To be translated ======
-translate O TwinCheckNoDelete {There are no games in this database to delete.}
-# ====== TODO To be translated ======
-translate O TwinCriteria1 { Your settings for finding twin games are potentially likely to\ncause non-twin games with similar moves to be marked as twins.}
-# ====== TODO To be translated ======
-translate O TwinCriteria2 {It is recommended that if you select "No" for "same moves", you should select "Yes" for the colors, event, site, round, year and month settings.\nDo you want to continue and delete twins anyway? }
-# ====== TODO To be translated ======
-translate O TwinCriteria3 {It is recommended that you specify "Yes" for at least two of the "same site", "same round" and "same year" settings.\nDo you want to continue and delete twins anyway?}
-# ====== TODO To be translated ======
-translate O TwinCriteriaConfirm {Scid: Confirm twin settings}
-# ====== TODO To be translated ======
-translate O TwinChangeTag "Change the following game tags:\n\n"
-# ====== TODO To be translated ======
-translate O AllocRatingDescription "This command will use the current spellcheck file to add Elo ratings to games in this database. Wherever a player has no currrent rating but his/her rating at the time of the game is listed in the spellcheck file, that rating will be added."
-# ====== TODO To be translated ======
-translate O RatingOverride "Overwrite existing non-zero ratings?"
-# ====== TODO To be translated ======
-translate O AddRatings "Add ratings to:"
-# ====== TODO To be translated ======
-translate O AddedRatings {Scid added $r Elo ratings in $g games.}
-# ====== TODO To be translated ======
+# Twinchecker
+translate O TwinCheckUndelete {for √• snu)}
+translate O TwinCheckprevPair {Forrige par}
+translate O TwinChecknextPair {Neste par}
+translate O TwinChecker {Tvillings√∏k}
+translate O TwinCheckTournament {Partier i turnering:}
+translate O TwinCheckNoTwin {Ingen par}
+translate O TwinCheckNoTwinfound {Ingen duplikat ble funnet til dette partiet.\nFor √• vise duplikater i dette vinduet m√• du f√∏rst bruke Duplikatsjekk-funskjonen. }
+translate O TwinCheckTag {Del tagger...}
+translate O TwinCheckFound1 {Scid fant $result duplikater}
+translate O TwinCheckFound2 { og markerte dem som slettet}
+translate O TwinCheckNoDelete {Ingen partier skal slettes i denne databasen.}
+# bug here... can't use \n\n
+translate O TwinCriteria1 {Advarsel: Svake kriterier\n}
+translate O TwinCriteria2 {Du har angitt "Nei" for "Samme trekk", som kan v√¶re farlig.\n
+Fortsett likevel?}
+translate O TwinCriteria3 {Du b√∏r angi "Ja" p√• minst to av "Samme sted", "Samme runde" og "Samme √•r".\n
+Fortsett likevel?}
+translate O TwinCriteriaConfirm {Scid: Bekreft duplikat-innstillinger}
+translate O TwinChangeTag "Endre disse taggene:\n\n"
+translate O AllocRatingDescription "Legger spilleres ratinger p√• relevante partier, med informasjon fra stave-/rating-filen."
+translate O RatingOverride "Overskrive eksisterende ratinger?"
+translate O AddRatings "Legg til ratinger p√•:"
+translate O AddedRatings {Scid la $r ratinger til $g partier.}
+
+#Bookmark editor
 translate O NewSubmenu "New submenu"
 
 # Comment editor:
 translate O AnnotationSymbols  {Notasjonssymboler:}
 translate O Comment {Kommentar:}
-translate O InsertMark {Insert mark} ;# ***
+translate O InsertMark {Sett inn merke}
 translate O InsertMarkHelp {
-Insert/remove mark: Select color, type, square.
-Insert/remove arrow: Right-click two squares.
-} ;# ***
+Sett inn merke: Velg farge, type, felt.
+Sett inn pil: H√∏yre-klikk to felter.
+}
 
 # Nag buttons in comment editor:
-translate O GoodMove {Good move} ;# ***
-translate O PoorMove {Poor move} ;# ***
-translate O ExcellentMove {Excellent move} ;# ***
-translate O Blunder {Tabbe}
-translate O InterestingMove {Interesting move} ;# ***
-translate O DubiousMove {Dubious move} ;# ***
-translate O WhiteDecisiveAdvantage {White has a decisive advantage} ;# ***
-translate O BlackDecisiveAdvantage {Black has a decisive advantage} ;# ***
-translate O WhiteClearAdvantage {White has a clear advantage} ;# ***
-translate O BlackClearAdvantage {Black has a clear advantage} ;# ***
-translate O WhiteSlightAdvantage {White has a slight advantage} ;# ***
-translate O BlackSlightAdvantage {Black has a slight advantage} ;# ***
-translate O Equality {Equality} ;# ***
-translate O Unclear {Unclear} ;# ***
-translate O Diagram {Diagram} ;# ***
+translate O GoodMove {Bra trekk}
+translate O PoorMove {D√•rlig trekk}
+translate O ExcellentMove {Utmerket trekk}
+translate O Blunder {Bukk}
+translate O InterestingMove {Interessant trekk}
+translate O DubiousMove {Un√∏yaktig trekk}
+translate O WhiteDecisiveAdvantage {Hvit st√•r klart bedre}
+translate O BlackDecisiveAdvantage {Sort st√•r klart bedre}
+translate O WhiteClearAdvantage {Hvit st√•r bedre}
+translate O BlackClearAdvantage {Sort st√•r bedre}
+translate O WhiteSlightAdvantage {Hvit st√•r noe bedre}
+translate O BlackSlightAdvantage {Sort st√•r noe bedre}
+translate O Equality {Jevnt}
+translate O Unclear {Uklart}
+translate O Diagram {Diagram}
 
 # Board search:
-translate O BoardSearch {Stillings¯k}
-translate O FilterOperation {Operasjoner pÂ gjeldende filter:}
-translate O FilterAnd {AND (Kun pÂ filter)}
+translate O BoardSearch {Stillings√∏k}
+translate O FilterOperation {Operasjoner p√• gjeldende filter:}
+translate O FilterAnd {AND (Kun p√• filter)}
 translate O FilterOr {OR (Legg til filter)}
 translate O FilterIgnore {IGNORE (Nullstill filter)}
-translate O SearchType {S¯ketype:}
-translate O SearchBoardExact {N¯yaktig stilling (alle brikker pÂ samme felt)}
-translate O SearchBoardPawns {B¯nder (samme kvalitet, alle b¯nder pÂ samme felt)}
-translate O SearchBoardFiles {Kolonner (samme kvalitet, alle b¯nder pÂ samme kolonner)}
-translate O SearchBoardAny {Alle (samme kvalitet, b¯nder og brikker hvor som helst)}
-# ====== TODO To be translated ======
-translate O SearchInRefDatabase { Search in base }
-translate O LookInVars {S¯k i variasjoner}
-# ====== TODO To be translated ======
-translate O CQLLabel {CQL Script}
-# ====== TODO To be translated ======
-translate O CQLComments {Allow Comments}
-# ====== TODO To be translated ======
-translate O CQLStrip {Strip Match Comments}
+translate O SearchType {S√∏ketype:}
+translate O SearchBoardExact {N√∏yaktig stilling (alle brikker p√• samme felt)}
+translate O SearchBoardPawns {B√∏nder (samme kvalitet, alle b√∏nder p√• samme felt)}
+translate O SearchBoardFiles {Kolonner (samme kvalitet, alle b√∏nder p√• samme kolonner)}
+translate O SearchBoardAny {Alle (samme kvalitet, b√∏nder og brikker hvor som helst)}
+translate O SearchInRefDatabase { S√∏k i base }
+translate O LookInVars {S√∏k i varianter}
+
+translate O CQLLabel {CQL skript}
+translate O CQLComments {Tillat kommentarer}
+translate O CQLStrip {Strip Match Comments} ;# ???
 
 # Material search:
-translate O MaterialSearch {Kvalitetss¯k}
+translate O MaterialSearch {Kvalitetss√∏k}
 translate O Material {Kvalitet}
-translate O Patterns {M¯nstre}
+translate O Patterns {M√∏nstre}
 translate O Zero {Null}
-translate O Any {Hvilke som helst}
+translate O Any {Alle}
 translate O CurrentBoard {Gjeldende stilling}
 translate O CommonEndings {Vanlige sluttspill}
-translate O CommonPatterns {Vanlige m¯nstre}
+translate O CommonPatterns {Vanlige m√∏nstre}
 translate O MaterialDiff {Kvalitetsforskjell}
 translate O squares {felt}
 translate O SameColor {Samme farge}
@@ -1300,86 +1064,77 @@ translate O MatchForAtLeast {Treff i minst}
 translate O HalfMoves {halvtrekk}
 
 # Common endings in material search:
-translate O EndingPawns {Pawn endings} ;# ***
-translate O EndingRookVsPawns {Rook vs. Pawn(s)} ;# ***
-translate O EndingRookPawnVsRook {Rook and 1 Pawn vs. Rook} ;# ***
-translate O EndingRookPawnsVsRook {Rook and Pawn(s) vs. Rook} ;# ***
-translate O EndingRooks {Rook vs. Rook endings} ;# ***
-translate O EndingRooksPassedA {Rook vs. Rook endings with a passed a-pawn} ;# ***
-translate O EndingRooksDouble {Double Rook endings} ;# ***
-translate O EndingBishops {Bishop vs. Bishop endings} ;# ***
-translate O EndingBishopVsKnight {Bishop vs. Knight endings} ;# ***
-translate O EndingKnights {Knight vs. Knight endings} ;# ***
-translate O EndingQueens {Queen vs. Queen endings} ;# ***
-translate O EndingQueenPawnVsQueen {Queen and 1 Pawn vs. Queen} ;# ***
-translate O BishopPairVsKnightPair {Two Bishops vs. Two Knights middlegame} ;# ***
+translate O EndingPawns {Bondesluttspill}
+translate O EndingRookVsPawns {T√•rn mot bonde/b√∏nder}
+translate O EndingRookPawnVsRook {T√•rn og bonde mot t√•rn}
+translate O EndingRookPawnsVsRook {T√•rn og b√∏nder mot t√•rn}
+translate O EndingRooks {T√•rn mot t√•rn}
+translate O EndingRooksPassedA {T√•rn mot t√•rn med fribonde p√• a}
+translate O EndingRooksDouble {Doble t√•rnsluttspill}
+translate O EndingBishops {L√∏per mot l√∏per}
+translate O EndingBishopVsKnight {L√∏per mot springer}
+translate O EndingKnights {Springer mot springer}
+translate O EndingQueens {Dronning mot dronning}
+translate O EndingQueenPawnVsQueen {Dronning og bonde mot dronning}
+translate O BishopPairVsKnightPair {Midtspill med to l√∏pere mot to springere}
 
 # Common patterns in material search:
-translate O PatternWhiteIQP {White IQP} ;# ***
-translate O PatternWhiteIQPBreakE6 {White IQP: d4-d5 break vs. e6} ;# ***
-translate O PatternWhiteIQPBreakC6 {White IQP: d4-d5 break vs. c6} ;# ***
-translate O PatternBlackIQP {Black IQP} ;# ***
-translate O PatternWhiteBlackIQP {White IQP vs. Black IQP} ;# ***
-translate O PatternCoupleC3D4 {White c3+d4 Isolated Pawn Couple} ;# ***
-translate O PatternHangingC5D5 {Black Hanging Pawns on c5 and d5} ;# ***
-translate O PatternMaroczy {Maroczy Center (with Pawns on c4 and e4)} ;# ***
-translate O PatternRookSacC3 {Rook Sacrifice on c3} ;# ***
-translate O PatternKc1Kg8 {O-O-O vs. O-O (Kc1 vs. Kg8)} ;# ***
-translate O PatternKg1Kc8 {O-O vs. O-O-O (Kg1 vs. Kc8)} ;# ***
-translate O PatternLightFian {Light-Square Fianchettos (Bishop-g2 vs. Bishop-b7)} ;# ***
-translate O PatternDarkFian {Dark-Square Fianchettos (Bishop-b2 vs. Bishop-g7)} ;# ***
-translate O PatternFourFian {Four Fianchettos (Bishops on b2,g2,b7,g7)} ;# ***
+translate O PatternWhiteIQP {Hvit IDB}
+translate O PatternWhiteIQPBreakE6 {Hvit IDB: d4-d5-brudd mot e6}
+translate O PatternWhiteIQPBreakC6 {Hvit IDB: d4-d5-brudd mot c6}
+translate O PatternBlackIQP {Sort IDB}
+translate O PatternWhiteBlackIQP {Hvit IDB mot sort IDB}
+translate O PatternCoupleC3D4 {Hvit c3+d4 isolerte b√∏nder}
+translate O PatternHangingC5D5 {Sorte l√∏se b√∏nder p√• c5 og d5}
+translate O PatternMaroczy {Maroczy-senter (b√∏nder p√• c4 og e4)}
+translate O PatternRookSacC3 {T√•rnoffer p√• c3}
+translate O PatternKc1Kg8 {O-O-O mot O-O (Kc1 mot Kg8)}
+translate O PatternKg1Kc8 {O-O mot O-O-O (Kg1 mot Kc8)}
+translate O PatternLightFian {Fianchetto p√• lyse felt (Lg2 mot Lb7)}
+translate O PatternDarkFian {Fianchetto p√• m√∏rke felt (Lb2 mot Lg7)}
+translate O PatternFourFian {Fire fianchettoer (Lb2, Lg2, Lb7, Lg7)}
 
 # Game saving:
 translate O Today {I dag}
 translate O ClassifyGame {Klassifiser parti}
 
 # Setup position:
-translate O EmptyBoard {T¯m brett}
+translate O EmptyBoard {T√∏m brett}
 translate O InitialBoard {Utgangsstilling}
 translate O SideToMove {Side i trekk}
 translate O MoveNumber {Trekk nummer}
-translate O Castling {Rokkade}
+translate O Castling {Rokade}
 translate O EnPassantFile {En Passant-kolonne}
 translate O ClearFen {Slett FEN}
 translate O PasteFen {Lim inn FEN}
-# ====== TODO To be translated ======
-translate O SaveAndContinue {Save and continue}
-# ====== TODO To be translated ======
-translate O DiscardChangesAndContinue {Discard Changes}
-# ====== TODO To be translated ======
-translate O GoBack {Go back}
+
+translate O SaveAndContinue {Lagre og fortsett}
+translate O DiscardChangesAndContinue {Forkast endringer}
+translate O GoBack {G√• tilbake}
 
 # Replace move dialog:
 translate O ReplaceMove {Erstatt trekk}
 translate O AddNewVar {Legg til ny variasjon}
-# ====== TODO To be translated ======
-translate O NewMainLine {New Main Line}
+translate O NewMainLine {Ny hovedlinje}
 translate O ReplaceMoveMessage {Et trekk eksisterer allerede her.
 
-Du kan erstatte det og slette alle f¯lgende trekk, eller du kan legge det til som en variasjon.
-
-(Du kan unngÂ denne meldingen i fremtiden ved Â slÂ av Sp¯r f¯r trekk erstattes-innstillingen i Innstillinger:Trekk-menyen.)}
+Du kan erstatte det og slette alle f√∏lgende trekk, eller du kan legge det til som en variasjon.
+(Du kan unng√• denne meldingen i fremtiden ved √• sl√• av Sp√∏r f√∏r trekk erstattes-innstillingen i Innstillinger:Trekk-menyen.)}
 
 # Make database read-only dialog:
-translate O ReadOnlyDialog {Hvis du skrivebeskytter denne databasen tillates ikke lenger endringer pÂ den. Ingen partier kan lagres eller erstattes, og ingen sletteflagg kan endres. All sortering eller ECO-klassifisering vil vÊre midlertidig.
+translate O ReadOnlyDialog {√ònsker du √• skrivebeskytte databasen?
 
-Du kan enkelt slÂ av skrivebeskyttelsen pÂ databasen ved Â lukke og gjenÂpne den.
+()Du kan enkelt sl√• av skrivebeskyttelsen p√• databasen ved √• lukke og gjen√•pne den.)}
 
-Vil du virkelig skrivebeskytte denne databasen?}
-
-# Exit dialog:
 translate O ExitDialog {Vil du virkelig avslutte Scid?}
-# ====== TODO To be translated ======
-translate O ClearGameDialog {This game has been altered.\nDo you wish to save it?}
-translate O ExitUnsaved {F¯lgende baser har ulagrede endringer i partier. Hvis du avslutter nÂ vil disse endringene gÂ tapt.}
+translate O ClearGameDialog {Partiet er endret.\nVil du lagre det?}
+translate O ExitUnsaved {F√∏lgende baser har ulagrede endringer i partier. Hvis du avslutter n√• vil disse endringene g√• tapt.}
 
 # Import window:
 translate O PasteCurrentGame {Lim inn gjeldende parti}
 translate O ImportHelp1 {Skriv eller lim inn et PGN-parti i feltet over.}
 translate O ImportHelp2 {Feil i importen vil vises her.}
-# ====== TODO To be translated ======
-translate O OverwriteExistingMoves {Overwrite existing moves ?}
+translate O OverwriteExistingMoves {Overskrive eksisterende trekk?}
 
 # ECO Browser:
 translate O ECOAllSections {alle ECO-deler}
@@ -1388,7 +1143,7 @@ translate O ECOSummary {Sammendrag for}
 translate O ECOFrequency {Hyppighet eller underkoder for}
 
 # Opening Report:
-translate O OprepTitle {≈pningsrapport}
+translate O OprepTitle {√Öpningsrapport}
 translate O OprepReport {Rapport}
 translate O OprepGenerated {Generert av}
 translate O OprepStatsHist {Statistikk og historie}
@@ -1399,23 +1154,23 @@ translate O OprepStatSince {Siden}
 translate O OprepOldest {Eldste partier}
 translate O OprepNewest {Nyeste partier}
 translate O OprepPopular {Trend}
-translate O OprepFreqAll {Frekvens i Âr:   }
-translate O OprepFreq1   {Det siste Âret: }
-translate O OprepFreq5   {De siste 5 Ârene: }
-translate O OprepFreq10  {De siste 10 Ârene: }
+translate O OprepFreqAll {Frekvens i √•r:   }
+translate O OprepFreq1   {Det siste √•ret: }
+translate O OprepFreq5   {De siste 5 √•rene: }
+translate O OprepFreq10  {De siste 10 √•rene: }
 translate O OprepEvery {hvert %u parti}
-translate O OprepUp {opp %u%s fra alle Âr}
-translate O OprepDown {ned %u%s fra alle Âr}
-translate O OprepSame {ingen endring fra alle Âr}
+translate O OprepUp {opp %u%s fra alle √•r}
+translate O OprepDown {ned %u%s fra alle √•r}
+translate O OprepSame {ingen endring fra alle √•r}
 translate O OprepMostFrequent {Hyppigste spillere}
-translate O OprepMostFrequentOpponents {Most frequent opponents} ;# ***
+translate O OprepMostFrequentOpponents {Mest hyppige motstandere}
 translate O OprepRatingsPerf {Ratinger og resultater}
 translate O OprepAvgPerf {Middelratinger og -resultater}
 translate O OprepWRating {Hvit rating}
 translate O OprepBRating {Sort rating}
 translate O OprepWPerf {Hvite resultater}
 translate O OprepBPerf {Sorte resultater}
-translate O OprepHighRating {Parti med h¯yeste gjennomsnittsrating}
+translate O OprepHighRating {Parti med h√∏yeste gjennomsnittsrating}
 translate O OprepTrends {Resultattrend}
 translate O OprepResults {Resultatlengde og -hyppighet}
 translate O OprepLength {Partilengde}
@@ -1426,56 +1181,55 @@ translate O OprepDraws {Uavgjort:      }
 translate O OprepWholeDB {hele databasen}
 translate O OprepShortest {Korteste seire}
 translate O OprepMovesThemes {Trekk og temaer}
-translate O OprepMoveOrders {Trekkrekkef¯lger til rapportert stilling}
+translate O OprepMoveOrders {Trekkrekkef√∏lger til rapportert stilling}
 translate O OprepMoveOrdersOne \
-  {Det var kun en trekkrekkef¯lge som f¯rte til denne stillingen:}
+  {Det var kun en trekkrekkef√∏lge som f√∏rte til denne stillingen:}
 translate O OprepMoveOrdersAll \
-  {Det var %u trekkrekkef¯lger som f¯rte til denne stillingen:}
+  {Det var %u trekkrekkef√∏lger som f√∏rte til denne stillingen:}
 translate O OprepMoveOrdersMany \
   {There were %u move orders reaching this position. The top %u are:}
 translate O OprepMovesFrom {Trekk fra rapportert stilling}
-translate O OprepMostFrequentEcoCodes {Most frequent ECO codes} ;# ***
+translate O OprepMostFrequentEcoCodes {Mest hyppige ECO-koder}
 translate O OprepThemes {Stillingstemaer}
-translate O OprepThemeDescription {Frequency of themes in the first %u moves of each game} ;# ***
+translate O OprepThemeDescription {Hyppighet av temaer i de f√∏rste %u trekk i hvert parti}
 translate O OprepThemeSameCastling {Rokkade til samme side}
 translate O OprepThemeOppCastling {Rokkade til motsatt side}
 translate O OprepThemeNoCastling {Ingen konger rokert}
-translate O OprepThemeKPawnStorm {Bondestorm pÂ kongesiden}
+translate O OprepThemeKPawnStorm {Bondestorm p√• kongesiden}
 translate O OprepThemeQueenswap {Byttede dronninger}
-translate O OprepThemeWIQP {White Isolated Queen Pawn} ;# ***
-translate O OprepThemeBIQP {Black Isolated Queen Pawn} ;# ***
-translate O OprepThemeWP567 {Hvit bonde pÂ rekke 5/6/7}
-translate O OprepThemeBP234 {Sort bonde pÂ rekke 2/3/4}
-translate O OprepThemeOpenCDE {≈pen c/d/e-kolonne}
-translate O OprepTheme1BishopPair {Kun en side har to l¯pere}
+translate O OprepThemeWIQP {Hvit isolert dronningbonde}
+translate O OprepThemeBIQP {Sort isolert dronningbond¬Ä}
+translate O OprepThemeWP567 {Hvit bonde p√• rekke 5/6/7}
+translate O OprepThemeBP234 {Sort bonde p√• rekke 2/3/4}
+translate O OprepThemeOpenCDE {√Öpen c/d/e-kolonne}
+translate O OprepTheme1BishopPair {Kun en side har to l√∏pere}
 translate O OprepEndgames {Sluttspill}
 translate O OprepReportGames {Rapporterte partier}
 translate O OprepAllGames    {Alle partier}
 translate O OprepEndClass {Materiale i sluttspillet}
 translate O OprepTheoryTable {Teoritabell}
-translate O OprepTableComment {Generert fra de %u h¯yest ratede partiene.}
+translate O OprepTableComment {Generert fra de %u h√∏yest ratede partiene.}
 translate O OprepExtraMoves {Ytterligere trekk notert i teoritabellen}
 translate O OprepMaxGames {Maksimalt antall partier i teoritabellen}
-translate O OprepViewHTML {View HTML} ;# ***
-translate O OprepViewLaTeX {View LaTeX} ;# ***
+translate O OprepViewHTML {Vis HTML}
+translate O OprepViewLaTeX {Vis LaTeX}
 
 # Player Report:
-translate O PReportTitle {Player Report} ;# ***
-translate O PReportColorWhite {with the White pieces} ;# ***
-translate O PReportColorBlack {with the Black pieces} ;# ***
-# ====== TODO To be translated ======
-translate O PReportBeginning {Beginning with}
-translate O PReportMoves {after %s} ;# ***
-translate O PReportOpenings {Openings} ;# ***
-translate O PReportClipbase {Empty clipbase and copy matching games to it} ;# ***
+translate O PReportTitle {Spiller-rapport}
+translate O PReportColorWhite {med hvite brikker}
+translate O PReportColorBlack {med sorte brikker}
+translate O PReportBeginning {Begynner med}
+translate O PReportMoves {etter %s}
+translate O PReportOpenings {√Öpninger}
+translate O PReportClipbase {T√∏m utklippsbase og kopier s√∏keresultater til den}
 
 # Piece Tracker window:
 translate O TrackerSelectSingle {Venstre museknapp merker denne brikken}
-translate O TrackerSelectPair {Venstre museknapp merker denne brikken; h¯yre merker alle brikker av denne typen.}
-translate O TrackerSelectPawn {Venstre museknapp merker denne brikken; h¯yre merker alle brikker av denne typen.}
+translate O TrackerSelectPair {Venstre museknapp merker denne brikken; h√∏yre merker alle brikker av denne typen.}
+translate O TrackerSelectPawn {Venstre museknapp merker denne brikken; h√∏yre merker alle brikker av denne typen.}
 translate O TrackerStat {Statistikk}
 translate O TrackerGames {% partier med trekk til felt}
-translate O TrackerTime {% tid pÂ hvert felt}
+translate O TrackerTime {% tid p√• hvert felt}
 translate O TrackerMoves {Trekk}
 translate O TrackerMovesStart {Oppgi trekket hvor sporingen skal begynne.}
 translate O TrackerMovesStop {Oppgi trekket hvor sporingen skal stoppe.}
@@ -1487,32 +1241,32 @@ translate O SelectTournamentGames {Kun partier i gjeldende turnering}
 translate O SelectOlderGames {Kun eldre partier}
 
 # Delete Twins window:
-translate O TwinsNote {For Â vÊre duplikater mÂ to partier minst ha de samme to spillerene, og kriterier du kan angi under. NÂr to duplikater finnes blir det korteste partiet slettet. Tips: Det er best Â kj¯re en stavekontroll f¯r duplikatsjekken, da det forbedrer s¯ket.}
-translate O TwinsCriteria {Kriterier: Duplikater mÂ ha...}
-translate O TwinsWhich {Unders¯k hvilke partier}
+translate O TwinsNote {For √• v√¶re duplikater m√• to partier minst ha de samme to spillerene, og kriterier du kan angi under. N√•r to duplikater finnes blir det korteste partiet slettet. Tips: Det er best √• kj√∏re en stavekontroll f√∏r duplikatsjekken, da det forbedrer s√∏ket.}
+translate O TwinsCriteria {Kriterier: Duplikater m√• ha...}
+translate O TwinsWhich {Unders√∏k hvilke partier}
 translate O TwinsColors {Spillere samme farge?}
-translate O TwinsEvent {Samme anledning?}
+translate O TwinsEvent {Samme turnering?}
 translate O TwinsSite {Samme sted?}
 translate O TwinsRound {Samme runde?}
-translate O TwinsYear {Samme Âr?}
-translate O TwinsMonth {Samme mÂned?}
+translate O TwinsYear {Samme √•r?}
+translate O TwinsMonth {Samme m√•ned?}
 translate O TwinsDay {Samme dag?}
 translate O TwinsResult {Samme utfall?}
 translate O TwinsECO {Samme ECO-kode?}
 translate O TwinsMoves {Samme trekk?}
 translate O TwinsPlayers {Sammenlign spillernavn:}
-translate O TwinsPlayersExact {N¯yaktig like}
-translate O TwinsPlayersPrefix {Kun f¯rste 4 bokstaver}
-translate O TwinsWhen {NÂr duplikatpartier slettes}
+translate O TwinsPlayersExact {N√∏yaktig like}
+translate O TwinsPlayersPrefix {Kun f√∏rste 4 bokstaver}
+translate O TwinsWhen {N√•r duplikatpartier slettes}
 translate O TwinsSkipShort {Overse alle partier kortere enn 5 trekk?}
-translate O TwinsUndelete {Gjenopprett alle partier f¯rst?}
+translate O TwinsUndelete {Gjenopprett alle partier f√∏rst?}
 translate O TwinsSetFilter {Sett filter til alle slettede duplikatpartier?}
 translate O TwinsComments {Behold alltid partier med kommentarer?}
 translate O TwinsVars {Behold alltid partier med variasjoner?}
 translate O TwinsDeleteWhich {Slett hvilket parti:}
 translate O TwinsDeleteShorter {Korteste parti}
 translate O TwinsDeleteOlder {Laveste partinummer}
-translate O TwinsDeleteNewer {H¯yeste partinummer}
+translate O TwinsDeleteNewer {H√∏yeste partinummer}
 translate O TwinsDelete {Slett partier}
 
 # Name editor window:
@@ -1520,20 +1274,19 @@ translate O NameEditType {Navnetype som skal redigeres}
 translate O NameEditSelect {Partier som skal redigeres}
 translate O NameEditReplace {Erstatt}
 translate O NameEditWith {med}
-translate O NameEditMatches {Treff: Trykk Ctrl+1 til Ctrl+9 for Â velge}
-# ====== TODO To be translated ======
-translate O CheckGamesWhich {Check games}
-# ====== TODO To be translated ======
-translate O CheckAll {All games}
-# ====== TODO To be translated ======
-translate O CheckSelectFilterGames {Only games in filter}
+translate O NameEditMatches {Treff: Trykk Ctrl+1 til Ctrl+9 for √• velge}
+
+# Check games window:
+translate O CheckGamesWhich {Sjekk partier}
+translate O CheckAll {Alle partier}
+translate O CheckSelectFilterGames {Kun partier i filteret}
 
 # Classify window:
 translate O Classify {Klassifiser}
 translate O ClassifyWhich {ECO-klassifiser hvilke partier}
 translate O ClassifyAll {Alle partier (overskriv gamle ECO-koder)}
-translate O ClassifyYear {Aller partier det siste Âret}
-translate O ClassifyMonth {Alle partier den siste mÂneden}
+translate O ClassifyYear {Aller partier det siste √•ret}
+translate O ClassifyMonth {Alle partier den siste m√•neden}
 translate O ClassifyNew {Kun partier uten ECO-kode}
 translate O ClassifyCodes {ECO-koder som skal brukes}
 translate O ClassifyBasic {Kun standardkoder ("B12", ...)}
@@ -1544,19 +1297,15 @@ translate O NameFile {Navnefil}
 translate O GameFile {Partifil}
 translate O Names {Navn}
 translate O Unused {Ubrukte}
-translate O SizeKb {St¯rrelse (kb)}
-translate O CurrentState {NÂvÊrende}
+translate O SizeKb {St√∏rrelse (kb)}
+translate O CurrentState {N√•v√¶rende}
 translate O AfterCompaction {Etter komprimering}
 translate O CompactNames {Komrimer navnefil}
 translate O CompactGames {Komprimer partifil}
-# ====== TODO To be translated ======
-translate O NoUnusedNames "There are no unused names, so the name file is already fully compacted."
-# ====== TODO To be translated ======
-translate O NoUnusedGames "The game file is already fully compacted."
-# ====== TODO To be translated ======
-translate O NameFileCompacted {The name file for "[file tail [sc_base filename]]" was compacted.}
-# ====== TODO To be translated ======
-translate O GameFileCompacted {The game file for "[file tail [sc_base filename]]" was compacted.}
+translate O NoUnusedNames "Det er ingen ubrukte navn i navnefilen."
+translate O NoUnusedGames "Partifilen er allerede komprimert."
+translate O NameFileCompacted {Navnefilen for "[file tail [sc_base filename]]" ble komprimert.}
+translate O GameFileCompacted {Partifilen for "[file tail [sc_base filename]]" ble komprimert.}
 
 # Sorting:
 translate O SortCriteria {Kriterier}
@@ -1565,7 +1314,6 @@ translate O CommonSorts {Vanlige sorteringer}
 translate O Sort {Sorter}
 
 # Exporting:
-# These lines do not use the excact notation of the original english.tcl, because this would cause inconsistency with the PGN window menus
 translate O AddToExistingFile {Legg partier til en eksisterende fil}
 translate O ExportComments {Eksporter kommentarer}
 translate O ExportVariations {Eksporter variasjoner}
@@ -1574,678 +1322,407 @@ translate O IndentVariations {Rykk inn variasjoner}
 translate O ExportColumnStyle {Bruk kolonner (ett trekk per linje)}
 translate O ExportSymbolStyle {Symbolnotasjoner}
 translate O ExportStripMarks {Fjern alle fargekoder og piler fra kommentarer?}
-# ====== TODO To be translated ======
-translate O ExportFlags {Export Scid Flags}
+translate O ExportFlags {Eksporter Scid-flagg}
 
 # Goto game/move dialogs:
 translate O LoadGameNumber {Angi partinummer som skal lastes inn:}
-translate O GotoMoveNumber {GÂ til trekk nummer:}
+translate O GotoMoveNumber {G√• til trekk nummer:}
 
 # Copy games dialog:
 translate O CopyGames {Kopier partier}
 translate O CopyConfirm {
-Vil du virkelig kopiere de [::utils::thousands $nGamesToCopy] filtrerte partiene fra "$fromName"
- til databasen "$targetName"?
+Vil du virkelig kopiere de [::utils::thousands $nGamesToCopy] filtrerte partiene 
+fra "$fromName" til "$targetName"?
 }
 translate O CopyErr {Kan ikke kopiere partiene}
 translate O CopyErrSource {kildedatabasen}
-translate O CopyErrTarget {mÂldatabasen}
+translate O CopyErrTarget {m√•ldatabasen}
 translate O CopyErrNoGames {har ingen partier i sitt filter}
 translate O CopyErrReadOnly {er skrivebeskyttet}
-translate O CopyErrNotOpen {er ikke Âpnet}
+translate O CopyErrNotOpen {er ikke √•pnet}
 
 # Colors:
 translate O LightSquares {Lyse felt}
-translate O DarkSquares {M¯rke felt}
+translate O DarkSquares {M√∏rke felt}
 translate O SelectedSquares {Merkede felt}
-# todo
-translate O Grid {Grid}
+translate O Grid {Ruter}
 translate O Previous {Tidligere}
 translate O WhitePieces {Hvite brikker}
 translate O BlackPieces {Sorte brikker}
 translate O WhiteBorder {Hvit ramme}
 translate O BlackBorder {Sort ramme}
-translate O ArrowMain   {Main Arrow}
-translate O ArrowVar    {Var Arrows}
+translate O ArrowMain   {Hovedpil}
+translate O ArrowVar    {Andre piler}
 
 # Novelty window:
-translate O FindNovelty {Finn avvik}
-translate O Novelty {Avvik}
-translate O NoveltyInterrupt {Avvikss¯k avbrutt}
-translate O NoveltyNone {Ingen avvik ble funnet i dette partiet}
-translate O NoveltyHelp {
-Scid vil finne det f¯rste trekket i det gjeldende partiet som f¯rer til en stilling som ikke finnes i den valgte databasen eller i ECO-Âpningsboken.}
+translate O FindNovelty {Finn nyhet}
+translate O Novelty {Nyhet}
+translate O NoveltyInterrupt {S√∏k etter nyhet avbrutt}
+translate O NoveltyNone {Ingen nyheter ble funnet i dette partiet}
+translate O NoveltyHelp {Scid vil finne det f√∏rste trekket i det gjeldende partiet som f√∏rer til en stilling som ikke finnes i den valgte databasen eller i ECO-√•pningsboken.}
 
 # Sounds configuration:
-translate O SoundsFolder {Sound Files Folder} ;# ***
-translate O SoundsFolderHelp {The folder should contain the files King.wav, a.wav, 1.wav, etc} ;# ***
-translate O SoundsAnnounceOptions {Move Announcement Options} ;# ***
-translate O SoundsAnnounceNew {Announce new moves as they are made} ;# ***
-translate O SoundsAnnounceForward {Announce moves when moving forward one move} ;# ***
-translate O SoundsAnnounceBack {Announce when retracting or moving back one move} ;# ***
+translate O SoundsFolder {Mappe med lydfiler}
+translate O SoundsFolderHelp {Mappen b√∏r inneholde filene king.wav, a.vaw, 1.wav osv}
+translate O SoundsAnnounceOptions {Innstillinger for opplesing av trekk}
+translate O SoundsAnnounceNew {Les trekk n√•r de gj√∏res}
+translate O SoundsAnnounceForward {Les trekk n√•r du blar ett trekk frem}
+translate O SoundsAnnounceBack {Les n√•r du trekker eller blar tilbake}
 
 # Upgrading databases:
 translate O Upgrading {Oppgraderer}
 translate O ConfirmOpenNew {
-Dette er en database i gammelt format (Scid 2) som ikke kan Âpnes i Scid 3, men en ny versjon (Scid 3) har allerede blitt opprettet.
+Dette er en database i gammelt format (si3) som ikke kan √•pnes i Scid 4, men et nytt format (si4) har allerede blitt opprettet.
 
-Vil du Âpne versjonen som er i det nye formatet?
+Vil du √•pne versjonen som er i det nye formatet?
 }
 translate O ConfirmUpgrade {
-Dette er en database i gammelt format (Scid2). En versjon i nytt format mÂ opprettes f¯r den kan brukes i Scid 3.
+Dette er en database i gammelt format (si3). En versjon i nytt format m√• opprettes f√∏r den kan brukes i Scid 4.0.
 
-Oppgradering vil opprette en ny versjon av databasen; det vil ikke redigere eller slette de opprinnelige filene.
+Dette kan ta en stund, men det trenger kun √• gj√∏res en gang. Du kan avbryte om du synes det tar for lang tid.
 
-Dette kan ta en stund, men det trenger kun Â gj¯res en gang. Du kan avbryte om det tar for lang tid.
-
-ÿnsker du Â oppgradere databasen nÂ?
+√ònsker du √• oppgradere databasen n√•?
 }
 
 # Recent files options:
-translate O RecentFilesMenu {Number of recent files in File menu} ;# ***
-translate O RecentFilesExtra {Number of recent files in extra submenu} ;# ***
+translate O RecentFilesMenu {Antall nylige filer i filmenyen}
+translate O RecentFilesExtra {Antall nylige filer i undermeny}
 
 # My Player Names options:
 translate O MyPlayerNamesDescription {
-Enter a list of preferred player names below, one name per line. Wildcards (e.g. "?" for any single character, "*" for any sequence of characters) are permitted.
-
-Every time a game with a player in the list is loaded, the main window chessboard will be rotated if necessary to show the game from that players perspective.
-} ;# ***
-# ====== TODO To be translated ======
-translate O showblunderexists {show blunder exists}
-# ====== TODO To be translated ======
-translate O showblundervalue {show blunder value}
-# ====== TODO To be translated ======
-translate O showscore {show score}
-# ====== TODO To be translated ======
-translate O coachgame {coach game}
-# ====== TODO To be translated ======
-translate O configurecoachgame {configure coach game}
-# ====== TODO To be translated ======
-translate O configuregame {Game configuration}
-# ====== TODO To be translated ======
-translate O Phalanxengine {Phalanx engine}
-# ====== TODO To be translated ======
-translate O Coachengine {Coach engine}
-# ====== TODO To be translated ======
-translate O difficulty {difficulty}
-# ====== TODO To be translated ======
-translate O hard {hard}
-# ====== TODO To be translated ======
-translate O easy {easy}
-# ====== TODO To be translated ======
-translate O Playwith {Play with}
-# ====== TODO To be translated ======
-translate O white {white}
-# ====== TODO To be translated ======
-translate O black {black}
-# ====== TODO To be translated ======
-translate O both {both}
-# ====== TODO To be translated ======
-translate O Play {Play}
-# ====== TODO To be translated ======
-translate O Noblunder {No blunder}
-# ====== TODO To be translated ======
-translate O blunder {blunder}
-# ====== TODO To be translated ======
-translate O Noinfo {-- No info --}
-# ====== TODO To be translated ======
-# ====== TODO To be translated ======
-# ====== TODO To be translated ======
-# ====== TODO To be translated ======
-translate O moveblunderthreshold {move is a blunder if loss is greater than}
-# ====== TODO To be translated ======
-translate O limitanalysis {limit engine analysis time}
-# ====== TODO To be translated ======
-translate O seconds {seconds}
-# ====== TODO To be translated ======
-translate O Abort {Abort}
-# ====== TODO To be translated ======
-translate O Resume {Resume}
-# ====== TODO To be translated ======
-translate O Restart {Restart}
-# ====== TODO To be translated ======
-translate O OutOfOpening {Out of opening}
-# ====== TODO To be translated ======
-translate O NotFollowedLine {You did not follow the line}
-# ====== TODO To be translated ======
-translate O DoYouWantContinue {Do you want yo continue ?}
-# ====== TODO To be translated ======
-translate O CoachIsWatching {Coach is watching}
-# ====== TODO To be translated ======
-translate O Ponder {Permanent thinking}
-# ====== TODO To be translated ======
-translate O LimitELO {Limit ELO strength}
-# ====== TODO To be translated ======
-translate O DubiousMovePlayedTakeBack {Dubious move played, do you want to take back ?}
-# ====== TODO To be translated ======
-translate O WeakMovePlayedTakeBack {Weak move played, do you want to take back ?}
-# ====== TODO To be translated ======
-translate O BadMovePlayedTakeBack {Bad move played, do you want to take back ?}
-# ====== TODO To be translated ======
-translate O Iresign {I resign}
-# ====== TODO To be translated ======
-translate O yourmoveisnotgood {your move is not good}
-# ====== TODO To be translated ======
-translate O EndOfVar {End of variation}
-# ====== TODO To be translated ======
-translate O Openingtrainer {Opening trainer}
-# ====== TODO To be translated ======
-translate O DisplayCM {Display candidate moves}
-# ====== TODO To be translated ======
-translate O DisplayCMValue {Display candidate moves value}
-# ====== TODO To be translated ======
-translate O DisplayOpeningStats {Show statistics}
-# ====== TODO To be translated ======
-translate O ShowReport {Show report}
-# ====== TODO To be translated ======
-translate O NumberOfGoodMovesPlayed {good moves played}
-# ====== TODO To be translated ======
-translate O NumberOfDubiousMovesPlayed {dubious moves played}
-# ====== TODO To be translated ======
-translate O NumberOfTimesPositionEncountered {times position encountered}
-# ====== TODO To be translated ======
-translate O PlayerBestMove  {Allow only best moves}
-# ====== TODO To be translated ======
-translate O OpponentBestMove {Opponent plays best moves}
-# ====== TODO To be translated ======
-translate O OnlyFlaggedLines {Only flagged lines}
-# ====== TODO To be translated ======
-translate O resetStats {Reset statistics}
-# ====== TODO To be translated ======
-translate O Movesloaded {Moves loaded}
-# ====== TODO To be translated ======
-translate O PositionsNotPlayed {Positions not played}
-# ====== TODO To be translated ======
-translate O PositionsPlayed {Positions played}
-# ====== TODO To be translated ======
-translate O Success {Success}
-# ====== TODO To be translated ======
-translate O DubiousMoves {Dubious moves}
-# ====== TODO To be translated ======
-# ====== TODO To be translated ======
-translate O ConfigureTactics {Configure tactics}
-# ====== TODO To be translated ======
-translate O ResetScores {Reset scores}
-# ====== TODO To be translated ======
-translate O LoadingBase {Loading base}
-# ====== TODO To be translated ======
-translate O Tactics {Tactics}
-# ====== TODO To be translated ======
-translate O ShowSolution {Show solution}
-# ====== TODO To be translated ======
-translate O Next {Next}
-# ====== TODO To be translated ======
-translate O ResettingScore {Resetting score}
-# ====== TODO To be translated ======
-translate O LoadingGame {Loading game}
-# ====== TODO To be translated ======
-translate O MateFound {Mate found}
-# ====== TODO To be translated ======
-translate O BestSolutionNotFound {Best solution NOT found !}
-# ====== TODO To be translated ======
-translate O MateNotFound {Mate not found}
-# ====== TODO To be translated ======
-translate O ShorterMateExists {Shorter mate exists}
-# ====== TODO To be translated ======
-translate O ScorePlayed {Score played}
-# ====== TODO To be translated ======
-translate O Expected {expected}
-# ====== TODO To be translated ======
-translate O ChooseTrainingBase {Choose training base}
-# ====== TODO To be translated ======
-translate O Thinking {Thinking}
-# ====== TODO To be translated ======
-translate O AnalyzeDone {Analyze done}
-# ====== TODO To be translated ======
-translate O WinWonGame {Win won game}
-# ====== TODO To be translated ======
-translate O Lines {Lines}
-# ====== TODO To be translated ======
-translate O ConfigureUCIengine {Configure UCI engine}
-# ====== TODO To be translated ======
-translate O SpecificOpening {Specific opening}
-# ====== TODO To be translated ======
-translate O StartNewGame {Start new game}
-# ====== TODO To be translated ======
-translate O FixedLevel {Fixed level}
-# ====== TODO To be translated ======
-translate O Opening {Opening}
-# ====== TODO To be translated ======
-translate O RandomLevel {Random level}
-# ====== TODO To be translated ======
-translate O StartFromCurrentPosition {Start from current position}
-# ====== TODO To be translated ======
-translate O FixedDepth {Fixed depth}
-# ====== TODO To be translated ======
-translate O Nodes {Nodes} 
-# ====== TODO To be translated ======
-translate O Depth {Depth}
-# ====== TODO To be translated ======
-translate O Time {Time} 
-# ====== TODO To be translated ======
-translate O SecondsPerMove {Seconds per move}
-# ====== TODO To be translated ======
-translate O DepthPerMove {Depth per move}
-# ====== TODO To be translated ======
-translate O MoveControl {Move Control}
-# ====== TODO To be translated ======
-translate O TimeLabel {Time per move}
-# ====== TODO To be translated ======
-translate O AddVars {Add Variations}
-# ====== TODO To be translated ======
-translate O AddScores {Add Score}
-# ====== TODO To be translated ======
-translate O Engine {Engine}
-# ====== TODO To be translated ======
-translate O TimeMode {Time mode}
-# ====== TODO To be translated ======
-translate O TimeBonus {Time + bonus}
-# ====== TODO To be translated ======
-# ====== TODO To be translated ======
+Legg inn foretrukne spillernavn, et navn per rad.
+Hver gang du laster inn et parti med en av disse spillerene vil brettet snus for denne spilleren om n√∏dvendig.
+}
+#Coach
+translate O showblunderexists {vis om Phalanx bukker}
+translate O showblundervalue {vis verdi p√• bukk}
+translate O showscore {vis score}
+translate O coachgame {parti med trener}
+translate O configurecoachgame {Konfigurer taktisk parti}
+translate O configuregame {Konfigurer UCI-parti}
+translate O Phalanxengine {Phalanx motor}
+translate O Coachengine {Trener-motor}
+translate O difficulty {venskelighetsgrad}
+translate O hard {vanskelig}
+translate O easy {lett}
+translate O Playwith {Spill som}
+translate O white {hvit}
+translate O black {sort}
+translate O both {begge}
+translate O Play {Spill}
+translate O Noblunder {Ingen bukk}
+translate O blunder {bukk}
+translate O Noinfo {-- Ingen info --}
+translate O moveblunderthreshold {trekk er en bukk om den taper mer enn}
+translate O limitanalysis {begrens motors analysetid}
+translate O seconds {sekunder}
+translate O Abort {Avbryt}
+translate O Resume {Fortsett}
+translate O Restart {Start p√• nytt}
+translate O OutOfOpening {Ute av √•pning}
+translate O NotFollowedLine {Du fulgte ikke linjen}
+translate O DoYouWantContinue {Vil du fortsette?}
+translate O CoachIsWatching {Trener f√∏lger med}
+translate O Ponder {Husk analyser}
+translate O LimitELO {Begrens ELO-styrke}
+translate O DubiousMovePlayedTakeBack {Du spilte et un√∏yaktig trekk, vil du ta det tilbake?}
+translate O WeakMovePlayedTakeBack {Du spilte et svakt trekk, vil du ta det tilbake?}
+translate O BadMovePlayedTakeBack {Du bukket, vil du ta det tilbake?}
+translate O Iresign {Jeg gir opp}
+translate O yourmoveisnotgood {ikke et bra trekk}
+translate O EndOfVar {Slutt p√• variasjon}
+translate O Openingtrainer {√Öpningstrener}
+translate O DisplayCM {Vis kandidat-trekk}
+translate O DisplayCMValue {Vis verdi p√• kandidat-trekk}
+translate O DisplayOpeningStats {Vis statistikk}
+translate O ShowReport {Vis rapport}
+translate O NumberOfGoodMovesPlayed {gode trekk spilt}
+translate O NumberOfDubiousMovesPlayed {un√∏yaktige trekk spilt}
+translate O NumberOfTimesPositionEncountered {forekomster av stillingen}
+translate O PlayerBestMove  {Tillat kun beste trekk}
+translate O OpponentBestMove {Motstander spiller beste trekk}
+translate O OnlyFlaggedLines {Kun flaggede linjer}
+translate O resetStats {Nullstill statistikk}
+translate O Movesloaded {Trekk lastet inn}
+translate O PositionsNotPlayed {Stillinger ikke spilt}
+translate O PositionsPlayed {Stillinger spilt}
+translate O Success {Suksess}
+translate O DubiousMoves {Un√∏yaktige trekk}
+translate O ConfigureTactics {Velg oppgaver}
+translate O ResetScores {Nullstill poeng}
+translate O LoadingBase {Laster base}
+translate O Tactics {Taktikk}
+translate O ShowSolution {Vis l√∏sning}
+translate O Next {Neste}
+translate O ResettingScore {Nullstiller poeng}
+translate O LoadingGame {Laster parti}
+translate O MateFound {Matt funnet}
+translate O BestSolutionNotFound {Beste l√∏sning IKKE funnet!}
+translate O MateNotFound {Matt ikke funnet}
+translate O ShorterMateExists {Det er en raskere matt}
+translate O ScorePlayed {Poeng spilt}
+translate O Expected {ventet}
+translate O ChooseTrainingBase {Velg treningsbase}
+translate O Thinking {Tenker}
+translate O AnalyzeDone {Analyse fullf√∏rt}
+translate O WinWonGame {Vinn vunnet parti}
+translate O Lines {Linjer}
+translate O ConfigureUCIengine {Konfigurer UCI-motor}
+translate O SpecificOpening {Spesifikk √•pning}
+translate O StartNewGame {Start nytt parti}
+translate O FixedLevel {Fast niv√•}
+translate O Opening {√Öpning}
+translate O RandomLevel {Tilfeldig niv√•}
+translate O StartFromCurrentPosition {Start fra denne stillingen}
+translate O FixedDepth {L√•st dybde}
+translate O Nodes {Noder}
+translate O Depth {Dybde}
+translate O Time {Tid}
+translate O SecondsPerMove {Sekunder per trekk}
+translate O DepthPerMove {Dybde per trekk}
+translate O MoveControl {Trekk-kontroll}
+translate O TimeLabel {Tid per trekk}
+translate O AddVars {Legg til variasjoner}
+translate O AddScores {Legg til poeng}
+translate O Engine {Motor}
+translate O TimeMode {Tidsbegrenset}
+translate O TimeBonus {Tid + bonus}
 translate O TimeMin {min}
-# ====== TODO To be translated ======
-translate O TimeSec {sec}
-# ====== TODO To be translated ======
-# ====== TODO To be translated ======
-# ====== TODO To be translated ======
-translate O AllExercisesDone {All exercises done}
-# ====== TODO To be translated ======
-translate O MoveOutOfBook {Move out of book}
-# ====== TODO To be translated ======
-translate O LastBookMove {Last book move}
-# ====== TODO To be translated ======
-translate O AnnotateSeveralGames {Annotate several games\nfrom current to :}
-# ====== TODO To be translated ======
-translate O FindOpeningErrors {Find opening errors}
-# ====== TODO To be translated ======
-translate O MarkTacticalExercises {Mark tactical exercises}
-# ====== TODO To be translated ======
-translate O UseBook {Use book}
-# ====== TODO To be translated ======
-translate O MultiPV {Multiple variations}
-# ====== TODO To be translated ======
-translate O Hash {Hash memory}
-# ====== TODO To be translated ======
-translate O OwnBook {Use engine book}
-# ====== TODO To be translated ======
-translate O BookFile {Opening book}
-# ====== TODO To be translated ======
-translate O AnnotateVariations {Annotate variations}
-# ====== TODO To be translated ======
-translate O ShortAnnotations {Short annotations}
-# ====== TODO To be translated ======
-translate O addAnnotatorTag {Add annotator tag}
-# ====== TODO To be translated ======
-translate O AddScoreToShortAnnotations {Add score to short annotations}
-# ====== TODO To be translated ======
-translate O Export {Export}
-# ====== TODO To be translated ======
-translate O BookPartiallyLoaded {Book partially loaded}
-# ====== TODO To be translated ======
-translate O AddLine {Add Line}
-# ====== TODO To be translated ======
-translate O RemLine {Remove Line}
-# ====== TODO To be translated ======
-translate O Calvar {Calculation of variations}
-# ====== TODO To be translated ======
-translate O ConfigureCalvar {Configuration}
-# ====== TODO To be translated ======
-# ====== TODO To be translated ======
+translate O TimeSec {sek}
+translate O AllExercisesDone {Alle √∏velser fullf√∏rt}
+translate O MoveOutOfBook {Trekk er ute av bok}
+translate O LastBookMove {Siste bok-trekk}
+translate O AnnotateSeveralGames {Annoter flere partiner\nfra dette til :}
+translate O FindOpeningErrors {Finn feil i √•pning}
+translate O MarkTacticalExercises {Marker taktiske √∏velser}
+translate O UseBook {Bruk bok}
+translate O MultiPV {Flere variasjoner}
+translate O Hash {Minne til hash}
+translate O OwnBook {Bruk motors bok}
+translate O BookFile {√Öpningsbok}
+translate O AnnotateVariations {Annoter variasjoner}
+translate O ShortAnnotations {Kort annotasjon}
+translate O addAnnotatorTag {Legg til tagg for annotator}
+translate O AddScoreToShortAnnotations {Gi poeng til annotasjoner}
+translate O Export {Eksport}
+translate O BookPartiallyLoaded {Bok delvis lastet}
+translate O AddLine {Legg til linje}
+translate O RemLine {Fjern linje}
+translate O Calvar {Beregning og variasjoner}
+translate O ConfigureCalvar {Konfigurasjon}
+# Opening names used in tacgame.tcl
 translate O Reti {Reti}
-# ====== TODO To be translated ======
-translate O English {English}
-# ====== TODO To be translated ======
-translate O d4Nf6Miscellaneous {1.d4 Nf6 Miscellaneous}
-# ====== TODO To be translated ======
+translate O English {Engelsk}
+translate O d4Nf6Miscellaneous {1.d4 Nf6 Forskjellige}
 translate O Trompowsky {Trompowsky}
-# ====== TODO To be translated ======
 translate O Budapest {Budapest}
-# ====== TODO To be translated ======
-translate O OldIndian {Old Indian}
-# ====== TODO To be translated ======
+translate O OldIndian {Gammel-indisk}
 translate O BenkoGambit {Benko Gambit}
-# ====== TODO To be translated ======
-translate O ModernBenoni {Modern Benoni}
-# ====== TODO To be translated ======
-translate O DutchDefence {Dutch Defence}
-# ====== TODO To be translated ======
-translate O Scandinavian {Scandinavian}
-# ====== TODO To be translated ======
-translate O AlekhineDefence {Alekhine Defence}
-# ====== TODO To be translated ======
+translate O ModernBenoni {Moderne Benoni}
+translate O DutchDefence {Hollandsk forsvar}
+translate O Scandinavian {Skandinavisk}
+translate O AlekhineDefence {Alekhines forsvar}
 translate O Pirc {Pirc}
-# ====== TODO To be translated ======
 translate O CaroKann {Caro-Kann}
-# ====== TODO To be translated ======
-translate O CaroKannAdvance {Caro-Kann Advance}
-# ====== TODO To be translated ======
-translate O Sicilian {Sicilian}
-# ====== TODO To be translated ======
-translate O SicilianAlapin {Sicilian Alapin}
-# ====== TODO To be translated ======
-translate O SicilianClosed {Sicilian Closed}
-# ====== TODO To be translated ======
-translate O SicilianRauzer {Sicilian Rauzer}
-# ====== TODO To be translated ======
-translate O SicilianDragon {Sicilian Dragon}
-# ====== TODO To be translated ======
-translate O SicilianScheveningen {Sicilian Scheveningen}
-# ====== TODO To be translated ======
-translate O SicilianNajdorf {Sicilian Najdorf}
-# ====== TODO To be translated ======
-translate O OpenGame {Open Game}
-# ====== TODO To be translated ======
-translate O Vienna {Vienna}
-# ====== TODO To be translated ======
-translate O KingsGambit {King's Gambit}
-# ====== TODO To be translated ======
-translate O RussianGame {Russian Game}
-# ====== TODO To be translated ======
-translate O ItalianTwoKnights {Italian/Two Knights}
-# ====== TODO To be translated ======
-translate O Spanish {Spanish}
-# ====== TODO To be translated ======
-translate O SpanishExchange {Spanish Exchange}
-# ====== TODO To be translated ======
-translate O SpanishOpen {Spanish Open}
-# ====== TODO To be translated ======
-translate O SpanishClosed {Spanish Closed}
-# ====== TODO To be translated ======
-translate O FrenchDefence {French Defence}
-# ====== TODO To be translated ======
-translate O FrenchAdvance {French Advance}
-# ====== TODO To be translated ======
-translate O FrenchTarrasch {French Tarrasch}
-# ====== TODO To be translated ======
-translate O FrenchWinawer {French Winawer}
-# ====== TODO To be translated ======
-translate O FrenchExchange {French Exchange}
-# ====== TODO To be translated ======
-translate O QueensPawn {Queen's Pawn}
-# ====== TODO To be translated ======
-translate O Slav {Slav}
-# ====== TODO To be translated ======
-translate O QGA {QGA}
-# ====== TODO To be translated ======
-translate O QGD {QGD}
-# ====== TODO To be translated ======
-translate O QGDExchange {QGD Exchange}
-# ====== TODO To be translated ======
-translate O SemiSlav {Semi-Slav}
-# ====== TODO To be translated ======
-translate O QGDwithBg5 {QGD with Bg5}
-# ====== TODO To be translated ======
-translate O QGDOrthodox {QGD Orthodox}
-# ====== TODO To be translated ======
-translate O Grunfeld {Gr¸nfeld}
-# ====== TODO To be translated ======
-translate O GrunfeldExchange {Gr¸nfeld Exchange}
-# ====== TODO To be translated ======
-translate O GrunfeldRussian {Gr¸nfeld Russian}
-# ====== TODO To be translated ======
-translate O Catalan {Catalan}
-# ====== TODO To be translated ======
-translate O CatalanOpen {Catalan Open}
-# ====== TODO To be translated ======
-translate O CatalanClosed {Catalan Closed}
-# ====== TODO To be translated ======
-translate O QueensIndian {Queen's Indian}
-# ====== TODO To be translated ======
-translate O NimzoIndian {Nimzo-Indian}
-# ====== TODO To be translated ======
-translate O NimzoIndianClassical {Nimzo-Indian Classical}
-# ====== TODO To be translated ======
-translate O NimzoIndianRubinstein {Nimzo-Indian Rubinstein}
-# ====== TODO To be translated ======
-translate O KingsIndian {King's Indian}
-# ====== TODO To be translated ======
-translate O KingsIndianSamisch {King's Indian S‰misch}
-# ====== TODO To be translated ======
-translate O KingsIndianMainLine {King's Indian Main Line}
-# ====== TODO To be translated ======
+translate O CaroKannAdvance {Caro-Kann fremskutt}
+translate O Sicilian {Siciliansk}
+translate O SicilianAlapin {Siciliansk Alapin}
+translate O SicilianClosed {Siciliansk lukket}
+translate O SicilianRauzer {Siciliansk Rauzer}
+translate O SicilianDragon {Siciliansk drage}
+translate O SicilianScheveningen {Siciliansk Scheveningen}
+translate O SicilianNajdorf {Siciliansk Najdorf}
+translate O OpenGame {√Öpnet parti}
+translate O Vienna {Wiener}
+translate O KingsGambit {Konge-gambit}
+translate O RussianGame {Russisk}
+translate O ItalianTwoKnights {Italiensk/to springere}
+translate O Spanish {Spansk}
+translate O SpanishExchange {Spansk avbytte}
+translate O SpanishOpen {Spansk √•pent}
+translate O SpanishClosed {Spansk lukket}
+translate O FrenchDefence {Fransk forsvar}
+translate O FrenchAdvance {Fransk fremskutt}
+translate O FrenchTarrasch {Fransk Tarrasch}
+translate O FrenchWinawer {Fransk Winawer}
+translate O FrenchExchange {Fransk avbytte}
+translate O QueensPawn {Dronningbonde}
+translate O Slav {Slavisk}
+translate O QGA {Dronning-gambit mottatt}
+translate O QGD {Dronning-gambit avvist}
+translate O QGDExchange {Dronning-gambit avbytte}
+translate O SemiSlav {Halv-Slavisk}
+translate O QGDwithBg5 {DGA med Lg5}
+translate O QGDOrthodox {DGA ortodoks}
+translate O Grunfeld {Gr√ºnfeld}
+translate O GrunfeldExchange {Gr√ºnfeld avbytte}
+translate O GrunfeldRussian {Gr√ºnfeld russisk}
+translate O Catalan {Katalansk}
+translate O CatalanOpen {Katalansk √•pen}
+translate O CatalanClosed {Katalansk lukket}
+translate O QueensIndian {Dronning-indisk}
+translate O NimzoIndian {Nimzo-indisk}
+translate O NimzoIndianClassical {Nimzo-indisk klassisk}
+translate O NimzoIndianRubinstein {Nimzo-indisk Rubinstein}
+translate O KingsIndian {Konge-indisk}
+translate O KingsIndianSamisch {Konge-indisk S√§misch}
+translate O KingsIndianMainLine {Konge-indisk hovedlinje}
 
-# FICS todo
-translate O ConfigureFics {Configure FICS}
-translate O FICSLogin {Login}
-translate O FICSGuest {Login as Guest}
-translate O FICSServerPort {Server port}
-translate O FICSServerAddress {IP Address}
-translate O FICSRefresh {Refresh}
-translate O FICSTimeseal {Timeseal}
-translate O FICSTimesealPort {Timeseal port}
-translate O FICSSilence {Console filter}
-translate O FICSOffers {Offers}
-translate O FICSGames {Games}
-translate O FICSFindOpponent {Find opponent}
-translate O FICSTakeback {Takeback}
-translate O FICSTakeback2 {Takeback 2}
-translate O FICSInitTime {Time (min)}
-translate O FICSIncrement {Increment (sec)}
-translate O FICSRatedGame {Rated Game}
-translate O FICSAutoColour {Automatic}
-translate O FICSManualConfirm {Confirm manually}
-translate O FICSFilterFormula {Filter with formula}
-translate O FICSIssueSeek {Issue seek}
-translate O FICSAccept {Accept}
-translate O FICSDecline {Decline}
-translate O FICSColour {Colour}
+# FICS
+translate O ConfigureFics {Konfigurer FICS}
+translate O FICSLogin {Logg inn}
+translate O FICSGuest {Logg inn som gjest}
+translate O FICSServerPort {Server-port}
+translate O FICSServerAddress {IP-addresse}
+translate O FICSRefresh {Oppdater}
+translate O FICSTimeseal {Tidsstempel}
+translate O FICSTimesealPort {Tidsstempel port}
+translate O FICSSilence {Konsoll-filter}
+translate O FICSOffers {Tilbud}
+translate O FICSGames {Partier}
+translate O FICSFindOpponent {Finn motstander}
+translate O FICSTakeback {Angre}
+translate O FICSTakeback2 {Angre 2}
+translate O FICSInitTime {Tid (min)}
+translate O FICSIncrement {Tillegg (sek)}
+translate O FICSRatedGame {Ratet parti}
+translate O FICSAutoColour {Automatisk}
+translate O FICSManualConfirm {Bekreft manuelt}
+translate O FICSFilterFormula {Filter med formel}
+translate O FICSIssueSeek {Utf√∏r s√∏k}
+translate O FICSAccept {Godta}
+translate O FICSDecline {Avvis}
+translate O FICSColour {Farge}
 translate O FICSSend {Send}
-translate O FICSConnect {Connect}
-# ====== TODO To be translated ======
-translate O FICSShouts {Shouts}
-# ====== TODO To be translated ======
-translate O FICSTells {Tells}
-# ====== TODO To be translated ======
-translate O FICSOpponent {Opponent Info}
-# ====== TODO To be translated ======
+translate O FICSConnect {Koble til}
+translate O FICSShouts {Rop}
+translate O FICSTells {Snakk}
+translate O FICSOpponent {Info om motstander}
 translate O FICSInfo {Info}
-# ====== TODO To be translated ======
-translate O FICSDraw {Offer Draw}
-# ====== TODO To be translated ======
-translate O FICSRematch {Rematch}
-# ====== TODO To be translated ======
-translate O FICSQuit {Quit FICS}
-# ====== TODO To be translated ======
-translate O FICSCensor {Censor}
+translate O FICSDraw {Tilby remis}
+translate O FICSRematch {Omkamp}
+translate O FICSQuit {Lukk FICS}
+translate O FICSCensor {Sensur}
 
-translate O CCDlgConfigureWindowTitle {Configure Correspondence Chess}
-# ====== TODO To be translated ======
-translate O CCDlgCGeneraloptions {General Options}
-# ====== TODO To be translated ======
-translate O CCDlgDefaultDB {Default Database:}
-# ====== TODO To be translated ======
-translate O CCDlgInbox {Inbox (path):}
-# ====== TODO To be translated ======
-translate O CCDlgOutbox {Outbox (path):}
-# ====== TODO To be translated ======
-translate O CCDlgXfcc {Xfcc Configuration:}
-# ====== TODO To be translated ======
-translate O CCDlgExternalProtocol {External Protocol Handler (e.g. Xfcc)}
-# ====== TODO To be translated ======
-translate O CCDlgFetchTool {Fetch Tool:}
-# ====== TODO To be translated ======
-translate O CCDlgSendTool {Send Tool:}
-# ====== TODO To be translated ======
-translate O CCDlgEmailCommunication {eMail Communication}
-# ====== TODO To be translated ======
-translate O CCDlgMailPrg {Mail program:}
-# ====== TODO To be translated ======
-translate O CCDlgBCCAddr {(B)CC Address:}
-# ====== TODO To be translated ======
-translate O CCDlgMailerMode {Mode:}
-# ====== TODO To be translated ======
-translate O CCDlgThunderbirdEg {e.g. Thunderbird, Mozilla Mail, Icedove...}
-# ====== TODO To be translated ======
-translate O CCDlgMailUrlEg {e.g. Evolution}
-# ====== TODO To be translated ======
-translate O CCDlgClawsEg {e.g Sylpheed Claws}
-# ====== TODO To be translated ======
-translate O CCDlgmailxEg {e.g. mailx, mutt, nail...}
-# ====== TODO To be translated ======
-translate O CCDlgAttachementPar {Attachment parameter:}
-# ====== TODO To be translated ======
-translate O CCDlgInternalXfcc {Use internal Xfcc support}
-# ====== TODO To be translated ======
-translate O CCDlgConfirmXfcc {Confirm moves}
-# ====== TODO To be translated ======
-translate O CCDlgSubjectPar {Subject parameter:}
-# ====== TODO To be translated ======
-translate O CCDlgDeleteBoxes {Empty In-/Outbox}
-# ====== TODO To be translated ======
-translate O CCDlgDeleteBoxesText {Do you really want to empty your In- and Outbox folders for Correspondence Chess? This requires a new sync to show the last state of your games}
-# ====== TODO To be translated ======
-translate O CCDlgConfirmMove {Confirm move}
-# ====== TODO To be translated ======
-translate O CCDlgConfirmMoveText {If you confirm, the following move and comment will be sent to the server:}
-# ====== TODO To be translated ======
-translate O CCDlgDBGameToLong {Inconsistent Mainline}
-# ====== TODO To be translated ======
-translate O CCDlgDBGameToLongError {The mainline in your database is longer than the game in your Inbox. If the Inbox contains current games, i.e. right after a sync, some moves were added to the mainline in the database erroneously.\nIn this case please shorten the mainline to (at max) move\n}
-# ====== TODO To be translated ======
-translate O CCDlgStartEmail {Start new eMail game}
-# ====== TODO To be translated ======
-translate O CCDlgYourName {Your Name:}
-# ====== TODO To be translated ======
-translate O CCDlgYourMail {Your eMail Address:}
-# ====== TODO To be translated ======
-translate O CCDlgOpponentName {Opponents Name:}
-# ====== TODO To be translated ======
-translate O CCDlgOpponentMail {Opponents eMail Address:}
-# ====== TODO To be translated ======
-translate O CCDlgGameID {Game ID (unique):}
-# ====== TODO To be translated ======
-translate O CCDlgTitNoOutbox {Scid: Correspondence Chess Outbox}
-# ====== TODO To be translated ======
-translate O CCDlgTitNoInbox {Scid: Correspondence Chess Inbox}
-# ====== TODO To be translated ======
-translate O CCDlgTitNoGames {Scid: No Correspondence Chess Games}
-# ====== TODO To be translated ======
-translate O CCErrInboxDir {Correspondence Chess inbox directory:}
-# ====== TODO To be translated ======
-translate O CCErrOutboxDir {Correspondence Chess outbox directory:}
-# ====== TODO To be translated ======
-translate O CCErrDirNotUsable {does not exist or is not accessible!\nPlease check and correct the settings.}
-# ====== TODO To be translated ======
-translate O CCErrNoGames {does not contain any games!\nPlease fetch them first.}
-# ====== TODO To be translated ======
-translate O CCDlgTitNoCCDB {Scid: No Correspondence Database}
-# ====== TODO To be translated ======
-translate O CCErrNoCCDB {No Database of type 'Correspondence' is opened. Please open one before using correspondence chess functions.}
-# ====== TODO To be translated ======
-translate O CCFetchBtn {Fetch games from the server and process the Inbox}
-# ====== TODO To be translated ======
-translate O CCPrevBtn {Goto previous game}
-# ====== TODO To be translated ======
-translate O CCNextBtn {Goto next game}
-# ====== TODO To be translated ======
-translate O CCSendBtn {Send move}
-# ====== TODO To be translated ======
-translate O CCEmptyBtn {Empty In- and Outbox}
-# ====== TODO To be translated ======
-translate O CCHelpBtn {Help on icons and status indicators.\nFor general Help press F1!}
-# ====== TODO To be translated ======
-translate O CCDlgServerName {Server Name:}
-# ====== TODO To be translated ======
-translate O CCDlgLoginName  {Login Name:}
-# ====== TODO To be translated ======
-translate O CCDlgPassword   {Password:}
-# ====== TODO To be translated ======
-translate O CCDlgURL        {Xfcc-URL:}
-# ====== TODO To be translated ======
-translate O CCDlgRatingType {Rating Type:}
-# ====== TODO To be translated ======
-translate O CCDlgDuplicateGame {Non-unique game ID}
-# ====== TODO To be translated ======
-translate O CCDlgDuplicateGameError {This game exists more than once in your database. Please delete all duplicates and compact your game file (File/Maintenance/Compact Database).}
-# ====== TODO To be translated ======
-translate O CCDlgSortOption {Sorting:}
-# ====== TODO To be translated ======
-translate O CCDlgListOnlyOwnMove {Only games I have the move}
-# ====== TODO To be translated ======
-translate O CCOrderClassicTxt {Site, Event, Round, Result, White, Black}
-# ====== TODO To be translated ======
-translate O CCOrderMyTimeTxt {My Clock}
-# ====== TODO To be translated ======
-translate O CCOrderTimePerMoveTxt {Time per move till next time control}
-# ====== TODO To be translated ======
-translate O CCOrderStartDate {Start date}
-# ====== TODO To be translated ======
-translate O CCOrderOppTimeTxt {Opponents Clock}
-# ====== TODO To be translated ======
-translate O CCDlgConfigRelay {Configure ICCF observations}
-# ====== TODO To be translated ======
-translate O CCDlgConfigRelayHelp {Go to the games page on http://www.iccf-webchess.com and display the game to be observed.  If you see the chessboard copy the URL from your browser to the list below. One URL per line only!\nExample: http://www.iccf-webchess.com/MakeAMove.aspx?id=266452}
 
-# ====== TODO To be translated ======
-translate O ExtHWConfigConnection {Configure external hardware}
-# ====== TODO To be translated ======
-translate O ExtHWPort {Port}
-# ====== TODO To be translated ======
-translate O ExtHWEngineCmd {Engine command}
-# ====== TODO To be translated ======
-translate O ExtHWEngineParam {Engine parameter}
-# ====== TODO To be translated ======
-translate O ExtHWShowButton {Show button}
-# ====== TODO To be translated ======
-translate O ExtHWHardware {Hardware}
-# ====== TODO To be translated ======
-translate O ExtHWNovag {Novag Citrine}
-# ====== TODO To be translated ======
-translate O ExtHWInputEngine {Input Engine}
-# ====== TODO To be translated ======
-translate O ExtHWNoBoard {No board}
-# ====== TODO To be translated ======
-translate O IEConsole {Input Engine Console}
-# ====== TODO To be translated ======
-translate O IESending {Moves sent for}
-# ====== TODO To be translated ======
-translate O IESynchronise {Synchronise}
-# ====== TODO To be translated ======
-translate O IERotate  {Rotate}
-# ====== TODO To be translated ======
-translate O IEUnableToStart {Unable to start Input Engine:}
-# ====== TODO To be translated ======
-translate O DoneWithPosition {Done with position}
-# ====== TODO To be translated ======
-translate O Board {Board}
-# ====== TODO To be translated ======
-translate O showGameInfo {Show game info}
-# ====== TODO To be translated ======
-translate O autoResizeBoard {Automatic resize of board}
-# ====== TODO To be translated ======
-translate O DockTop {Move to top}
-# ====== TODO To be translated ======
-translate O DockBottom {Move to bottom}
-# ====== TODO To be translated ======
-translate O DockLeft {Move to left}
-# ====== TODO To be translated ======
-translate O DockRight {Move to right}
-# ====== TODO To be translated ======
-translate O Undock {Undock}
-# ====== TODO To be translated ======
-translate O ChangeIcon {Change icon...}
-# ====== TODO To be translated ======
-translate O More {More}
-# ====== TODO To be translated ======
+# Correspondence Chess Dialogs:
+translate O CCDlgConfigureWindowTitle {Konfigurer fjern-sjakk}
+translate O CCDlgCGeneraloptions {Generelle innstillinger}
+translate O CCDlgDefaultDB {Standard database:}
+translate O CCDlgInbox {Innboks (bane):}
+translate O CCDlgOutbox {Utboks (bane):}
+translate O CCDlgXfcc {Xfcc konfigurasjon:}
+translate O CCDlgExternalProtocol {Ekstern h√•ndtering av protokoller (f.eks. Xfcc)}
+translate O CCDlgFetchTool {Hente-verkt√∏y:}
+translate O CCDlgSendTool {Sende-verkt√∏y:}
+translate O CCDlgEmailCommunication {epost-kommunikasjon}
+translate O CCDlgMailPrg {epost-program:}
+translate O CCDlgBCCAddr {(B)CC-adresse:}
+translate O CCDlgMailerMode {Modus:}
+translate O CCDlgThunderbirdEg {f.eks. Thunderbird, Mozilla Mail, Icedove...}
+translate O CCDlgMailUrlEg {f.eks. Evolution}
+translate O CCDlgClawsEg {f.eks. Sylpheed Claws}
+translate O CCDlgmailxEg {f.eks. mailx, mutt, nail...}
+translate O CCDlgAttachementPar {Parametre for vedlegg:}
+translate O CCDlgInternalXfcc {H√•ndter Xfcc internt}
+translate O CCDlgConfirmXfcc {Bekreft trekk}
+translate O CCDlgSubjectPar {Parametre for tittel:}
+translate O CCDlgDeleteBoxes {T√∏m inn-/utboks}
+translate O CCDlgDeleteBoxesText {Vil du virkelig t√∏mme inn- og utboksen for fjernsjakk?\nDette krever en ny synkronisering for √• vise fremgang i dine partier.}
+translate O CCDlgConfirmMove {Bekreft trekk}
+translate O CCDlgConfirmMoveText {Om du bekrefter vil dette trekket og kommentaren bli sendt til serveren:}
+translate O CCDlgDBGameToLong {Inkonsistent hovedlinje}
+translate O CCDlgDBGameToLongError {Hovedlinjen i databasen din er st√∏rre enn partiet i innboksen. Om innboksen inneholder aktuelle partier, alts√• nylig synkroniserte, ble noen trekk lagt til hovedlinjen i databasen ved en feil.\n
 
-# Drag & Drop
-# ====== TODO To be translated ======
-translate O CannotOpenUri {Cannot open the following URI:}
-# ====== TODO To be translated ======
-translate O InvalidUri {Drop content is not a valid URI list.}
-# ====== TODO To be translated ======
-translate O UriRejected	{The following files are rejected:}
-# ====== TODO To be translated ======
-translate O UriRejectedDetail {Only the listed file types can be handled:}
-# ====== TODO To be translated ======
-translate O EmptyUriList {Drop content is empty.}
-# ====== TODO To be translated ======
-translate O SelectionOwnerDidntRespond {Timeout during drop action: selection owner didn't respond.}
-
+I s√• fall, vennligst forkort hovedlinjen til (max) trekk\n
 }
 
-# Sjekkliste:
-# - Snarveier
+translate O CCDlgStartEmail {Start nytt epost-parti}
+translate O CCDlgYourName {Ditt navn:}
+translate O CCDlgYourMail {Din epost-adresse:}
+translate O CCDlgOpponentName {Motstanders navn:}
+translate O CCDlgOpponentMail {Motstanders mailadresse:}
+translate O CCDlgGameID {Parti-ID (unikt):}
 
+translate O CCDlgTitNoOutbox {Scid: Utboks for fjernsjakk}
+translate O CCDlgTitNoInbox {Scid: Innboks for fjernsjakk}
+translate O CCDlgTitNoGames {Scid: Ingen fjernsjakk-partier}
+translate O CCErrInboxDir {Mappe med innboksen til fjernsjakk:}
+translate O CCErrOutboxDir {Mappe med utboksen til fjernsjakk:}
+translate O CCErrDirNotUsable {er ikke tilgjengelig eller finnes ikke!\nKontroller og korriger innstillingene.}
+translate O CCErrNoGames {inneholder ikke noen partier!\nVennligst last dem ned f√∏rst.}
+
+translate O CCDlgTitNoCCDB {Scid: Ingen database for fjernsjakk}
+translate O CCErrNoCCDB {Ingen database av typen 'Fjernsjakk' er √•pen. Vennligst √•ne en f√∏r du bruker fjernsjakk-funskjonene.}
+
+translate O CCFetchBtn {Last ned partier fra tjeneren og behandle innboksen}
+translate O CCPrevBtn {G√• til tidligere parti}
+translate O CCNextBtn {G√• til neste parti}
+translate O CCSendBtn {Send trekk}
+translate O CCEmptyBtn {T√∏m inn- og utboks}
+translate O CCHelpBtn {Hjelp om ikoner og status-indikatorer.\nFor generell hjelp, trykk F1!}
+
+translate O CCDlgServerName {Tjenernavn:}
+translate O CCDlgLoginName  {Brukernavn:}
+translate O CCDlgPassword   {Passord:}
+translate O CCDlgURL        {Xfcc-lenke:}
+translate O CCDlgRatingType {Rating-type:}
+
+translate O CCDlgDuplicateGame {Ikke-unik parti-ID}
+translate O CCDlgDuplicateGameError {Dette partiet finnes flere steder i databasen din. Vennligst slett alle duplikater og komprimer partifilen (Verkt√∏y/Vedlikehold/Komprimer database)).}
+
+translate O CCDlgSortOption {Sortering:}
+translate O CCDlgListOnlyOwnMove {Kun partier med meg i trekket}
+translate O CCOrderClassicTxt {Sted, Turnering, Runde, Resultat, Hvit, Sort}
+translate O CCOrderMyTimeTxt {Min klokke}
+translate O CCOrderTimePerMoveTxt {Tid per trekk f√∏r neste tidskontroll}
+translate O CCOrderStartDate {Start-dato}
+translate O CCOrderOppTimeTxt {Motstanders klokke}
+
+translate O CCDlgConfigRelay {F√∏lg partier}
+translate O CCDlgConfigRelayHelp {G√• til parti-siden p√•  http://www.iccf-webchess.com og vis partiet som skal f√∏lges. Om du ser sjakkbrettet, kopier URLen fra nettleseren din til listen under. Kun en URL per parti!\nEksempel: http://www.iccf-webchess.com/MakeAMove.aspx?id=266452 }
+
+
+# Connect Hardware dialoges
+translate O ExtHWConfigConnection {Konfigurer ekstern maskinvare}
+translate O ExtHWPort {Port}
+translate O ExtHWEngineCmd {Motor-kommando}
+translate O ExtHWEngineParam {Motor-parametre}
+translate O ExtHWShowButton {Vis knapp}
+translate O ExtHWHardware {Maskinvare}
+translate O ExtHWNovag {Novag Citrine}
+translate O ExtHWInputEngine {Inndata-motor}
+translate O ExtHWNoBoard {Ingen brett}
+
+# Input Engine dialogs
+translate O IEConsole {Konsoll for inndata-motor}
+translate O IESending {Trekk sendt for}
+translate O IESynchronise {Synkroniser}
+translate O IERotate  {Roter}
+translate O IEUnableToStart {Klarer ikke √• starte inndata-motor:}
+# Calculation of Variations
+translate O DoneWithPosition {Ferdig med stilling}
+
+translate O Board {Brett}
+translate O showGameInfo {Vis parti-informasjon}
+translate O autoResizeBoard {Automatisk brettst√∏rrelse}
+translate O DockTop {Flytt til toppen}
+translate O DockBottom {Flytt til bunnen}
+translate O DockLeft {Flytt til venstre}
+translate O DockRight {Flytt til h√∏yre}
+translate O Undock {L√∏sriv}
+
+# Switcher window
+translate O ChangeIcon {Endre ikon...}
+translate O More {Mer}
+
+# Drag & Drop
+translate O CannotOpenUri {Kan ikke √•pne f√∏lgende URI:}
+translate O InvalidUri {Inneholder ikke en gyldig URI-liste.}
+translate O UriRejected	{Disse filene er avvist:}
+translate O UriRejectedDetail {Kun f√∏lgende filtyper kan h√•ndteres:}
+translate O EmptyUriList {Innholdet er tomt.}
+translate O SelectionOwnerDidntRespond {Tidsavbrudd under slipp: eier av utvalg svarte ikke.}
+
+}
 # end of norsk.tcl
