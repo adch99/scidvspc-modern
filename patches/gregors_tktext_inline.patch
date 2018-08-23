@@ -104154,7 +104154,7 @@ Index: tcl/tktext/text.tcl
 ===================================================================
 --- tcl/tktext/text.tcl	(revision 0)
 +++ tcl/tktext/text.tcl	(working copy)
-@@ -0,0 +1,1374 @@
+@@ -0,0 +1,1418 @@
 +# text.tcl --
 +#
 +# This file defines the default bindings for Tk text widgets and provides
@@ -104540,7 +104540,7 @@ Index: tcl/tktext/text.tcl
 +    }
 +}
 +bind Text <Meta-d> {
-+    if {!$tk_strictMotif && [%W compare end != insert+1i]} {
++    if {[%W cget -state] eq "normal" && !$tk_strictMotif && [%W compare end != insert+1i]} {
 +	%W delete insert [tk::TextNextWord %W insert]
 +    }
 +}
@@ -104602,10 +104602,8 @@ Index: tcl/tktext/text.tcl
 +}
 +set ::tk::Priv(prevPos) {}
 +
-+# The MouseWheel will typically only fire on Windows and MacOS X.
-+# However, someone could use the "event generate" command to produce one
-+# on other platforms.  We must be careful not to round -ve values of %D
-+# down to zero.
++# The MouseWheel events:
++# We must be careful not to round -ve values of %D down to zero.
 +
 +if {[tk windowingsystem] eq "aqua"} {
 +    bind Text <MouseWheel> {
@@ -104628,18 +104626,10 @@ Index: tcl/tktext/text.tcl
 +    #     (int)-1/3 = -1
 +    # The following code ensure equal +/- behaviour.
 +    bind Text <MouseWheel> {
-+	if {%D >= 0} {
-+	    %W yview scroll [expr {-%D/3}] pixels
-+	} else {
-+	    %W yview scroll [expr {(2-%D)/3}] pixels
-+	}
++	%W yview scroll [expr {%D >= 0 ? -%D/3 : (2-%D)/3}] pixels
 +    }
 +    bind Text <Shift-MouseWheel> {
-+	if {%D >= 0} {
-+	    %W xview scroll [expr {-%D/3}] pixels
-+	} else {
-+	    %W xview scroll [expr {(2-%D)/3}] pixels
-+	}
++	%W xview scroll [expr {%D >= 0 ? -%D/3 : (2-%D)/3}] pixels
 +    }
 +}
 +
@@ -104647,26 +104637,18 @@ Index: tcl/tktext/text.tcl
 +    # Support for mousewheels on Linux/Unix commonly comes through mapping
 +    # the wheel to the extended buttons.  If you have a mousewheel, find
 +    # Linux configuration info at:
-+    #	http://www.inria.fr/koala/colas/mouse-wheel-scroll/
++    #	http://linuxreviews.org/howtos/xfree/mouse/
 +    bind Text <4> {
-+	if {!$tk_strictMotif} {
-+	    %W yview scroll -50 pixels
-+	}
++	if {!$tk_strictMotif} { %W yview scroll -50 pixels }
 +    }
 +    bind Text <5> {
-+	if {!$tk_strictMotif} {
-+	    %W yview scroll 50 pixels
-+	}
++	if {!$tk_strictMotif} { %W yview scroll +50 pixels }
 +    }
 +    bind Text <Shift-4> {
-+	if {!$tk_strictMotif} {
-+	    %W xview scroll -50 pixels
-+	}
++	if {!$tk_strictMotif} { %W xview scroll -50 pixels }
 +    }
 +    bind Text <Shift-5> {
-+	if {!$tk_strictMotif} {
-+	    %W xview scroll 50 pixels
-+	}
++	if {!$tk_strictMotif} { %W xview scroll +50 pixels }
 +    }
 +}
 +
@@ -105200,12 +105182,44 @@ Index: tcl/tktext/text.tcl
 +#		to scroll backwards.
 +
 +proc ::tk::TextScrollPages {w count} {
++    if {$count > 0} {
++	if {[llength [$w dlineinfo end-1c]]} {
++	    # Last display line of very last line is visible.
++	    if {[llength [set res [$w dlineinfo -extents @first,last]]]} {
++		if {[lindex $res 3] == 0} {
++		    # Line is fully visible (vertically), so nothing to do.
++		    return insert
++		}
++		# Line is only partially visible, so jump to this line.
++		return [$w index "insert +[$w count -displaylines insert end-1c] displayline"]
++	    }
++	}
++    } else {
++	if {[llength [$w dlineinfo 1.0]]} {
++	    # First display line of very first line is visible.
++	    if {[llength [set res [$w dlineinfo -extents @first,0]]]} {
++		if {[lindex $res 1] == 0} {
++		    # Line is fully visible (vertically), so nothing to do.
++		    return insert
++		}
++		# Line is not fully visible, so jump to first line.
++		return [$w index "insert -[$w count -displaylines 1.0 insert] displayline"]
++	    }
++	}
++    }
 +    set bbox [$w bbox insert]
 +    $w yview scroll $count pages
 +    if {[llength $bbox] == 0} {
-+	return [$w index @[expr {[winfo height $w]/2}],0]
++	set newPos [$w index @[expr {[winfo height $w]/2}],0]
++    } else {
++	set newPos [$w index @[lindex $bbox 0],[lindex $bbox 1]]
 +    }
-+    return [$w index @[lindex $bbox 0],[lindex $bbox 1]]
++    if {[$w compare insert == $newPos]} {
++	# This may happen if a character is spanning the entire view,
++	# ensure that at least one line will change.
++	set newPos [$w index "[expr {$count > 0 ? "insert +1" : "insert -1"}] displayline"]
++    }
++    return $newPos
 +}
 +
 +# ::tk::TextTranspose --
@@ -105262,7 +105276,7 @@ Index: tcl/tktext/text.tcl
 +    if {![catch {set data [$w get sel.first sel.last]}]} {
 +	# make <<Cut>> an atomic operation on the Undo stack,
 +	# i.e. separate it from other delete operations on either side
-+	if {[$w cget -autoseparators]} {
++	if {[$w cget -autoseparators] && ([$w cget -state] eq "normal")} {
 +	    $w edit separator
 +	}
 +	clipboard clear -displayof $w
@@ -105270,7 +105284,7 @@ Index: tcl/tktext/text.tcl
 +	if {[$w cget -state] eq "normal"} {
 +	    ::tk::TextDelete $w sel.first sel.last
 +	}
-+	if {[$w cget -autoseparators]} {
++	if {[$w cget -autoseparators] && ([$w cget -state] eq "normal")} {
 +	    $w edit separator
 +	}
 +    }
@@ -105343,10 +105357,10 @@ Index: tcl/tktext/text.tcl
 +# op -		Function to use to find next position.
 +
 +proc ::tk::TextPrevPos {w start op} {
-+    set text ""
 +    set succ ""
 +    set cur $start
 +    while {[$w compare $cur > 1.0]} {
++	set text ""
 +	append text [$w get -displaychars "$cur linestart - 1i" $cur] $succ
 +	set pos [$op $text end]
 +	if {$pos >= 0} {
@@ -105426,7 +105440,6 @@ Index: tcl/tktext/text.tcl
 +#
 +# Arguments:
 +# w -		The text window.
-+# x, y - 	Position of the mouse.
 +# selection	atom name of the selection
 +
 +proc ::tk::TextInsertSelection {w selection} {
@@ -105456,8 +105469,8 @@ Index: tcl/tktext/text.tcl
 +# args -	Arguments for text insertion.
 +
 +proc ::tk_textInsert {w args} {
-+   # Use an internal command:
-+   uplevel [list $w tk_textInsert {*}$args]
++    # Use an internal command:
++    uplevel [list $w tk_textInsert {*}$args]
 +}
 +
 +# ::tk_textReplace --
@@ -105468,8 +105481,39 @@ Index: tcl/tktext/text.tcl
 +# args -	Arguments for text insertion.
 +
 +proc ::tk_textReplace {w args} {
-+   # Use an internal command:
-+   uplevel [list $w tk_textReplace {*}$args]
++    # Use an internal command:
++    uplevel [list $w tk_textReplace {*}$args]
++}
++
++# ::tk_textRebindMouseWheel --
++# This procedure is rebinding the mouse wheel events of the embedded
++# window to the container (the text widget). This is a quite important
++# convenience function, because the user might not be interested in
++# the internal handlings.
++#
++# Arguments:
++# text -	The container (text widget), send mouse wheel events
++#		to this container.
++# args -	Zero or more embedded windows. If none is specified,
++#		then rebind all the windows that are currently embedded.
++
++proc tk_textRebindMouseWheel {w args} {
++    if {[llength $args] == 0} {
++	set args [$w window names]
++    }
++    foreach ew $args {
++	set cls [winfo class $w]
++	foreach ev {MouseWheel Option-MouseWheel Shift-MouseWheel Shift-Option-MouseWheel} {
++	    if {[string length [bind $w <$ev>]] || [string length [bind $cls <$ev>]]} {
++		bind $ew <$ev> [list event generate $w <$ev> -delta %D]
++	    }
++	}
++	foreach ev {4 5 Shift-4 Shift-5} {
++	    if {[string length [bind $w <$ev>]] || [string length [bind $cls <$ev>]]} {
++		bind $ew <$ev> [list event generate $w <$ev>]
++	    }
++	}
++    }
 +}
 +
 +# ::tk_mergeRange --
@@ -105501,20 +105545,20 @@ Index: tcl/tktext/text.tcl
 +	lassign [split $s1 .] sline1 scol1
 +	lassign [split $e1 .] eline1 ecol1
 +
-+	# [$w compare "$e+1i" < $s1]
++	# compare "$e+1i" < $s1
 +	if {$eline < $sline1 || ($eline == $sline1 && $ecol + 1 < $scol1)} {
 +	    lappend newRangeList [list $s $e]
 +	    lappend newRangeList {*}[lrange $ranges $i end]
 +	    set ranges $newRangeList
 +	    return $newRangeList
 +	}
-+	# [$w compare $s <= "$e1+1i"]
++	# compare $s <= "$e1+1i"
 +	if {$sline < $eline1 || ($sline == $eline1 && $scol <= $ecol1 + 1)} {
 +	    # [$w compare $s > $s1]
 +	    if {$sline > $sline1 || ($sline == $sline1 && $scol > $scol1)} {
 +		set s $s1; set sline $sline1; set scol $scol1
 +	    }
-+	    # [$w compare $e < $e1]
++	    # compare $e < $e1
 +	    if {$eline < $eline1 || ($eline == $eline1 && $ecol < $ecol1)} {
 +		set e $e1; set eline $eline1; set ecol $ecol1
 +	    }
