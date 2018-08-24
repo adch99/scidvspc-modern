@@ -5,9 +5,14 @@ It primarily speeds the text widget tag processing, but also fixes quite a few
 bugs and introduces new features. Please see:
   http://scidb.sourceforge.net/tk/revised-text-widget.html
 
-Apply this patch, then re-run configure, and make install as normal
+Generaly usage will be something like
+  patch -p0 <patches/gregors_tktext_inline.patch
+  ./configure
+  make clean
+  make
+  sudo make install
 
-(To make this patch,
+(Devs only - To make this patch,
   copy -a sa scidvspc-gregor
   svn add src/tktext tcl/tktext
   svn diff > ../newfiles.patch
