@@ -1653,6 +1653,8 @@ if {[lindex $line 0] != {Still in progress}} {
 				    } 
                               ROBO* {
 				    }
+                              adminBOT* {
+				    }
 			      default {
 				      if {$::fics::opponent != $t2} {
 					set ::fics::chatter $t2
