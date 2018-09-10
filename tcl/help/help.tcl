@@ -66,6 +66,7 @@ set helpText(GUI) {<h1>Scid's User Interface</h1>
   <br>
   <ht><a Docking><b>Docked Windows</b></a></ht>
   <ht><a MainWindow>The <b>Main Board</b></a></ht>
+  <ht><a GameList>Game List window</a></ht>
   <ht><a Menus><b>Main Menus</b></a></ht>
   <ht><a Moves>Entering <b>Moves</b></a></ht>
   <br>
@@ -82,7 +83,7 @@ games.</p>
 
 <p>Though it is possible to play anonymously, to create a user account
 visit <url http://www.freechess.org>www.freechess.org</url>.
-Players may peruse their games at <url http://ficsgames.org>http://ficsgames.org</url>.
+Players may see their games at <url http://ficsgames.org>http://ficsgames.org</url>.
 </p>
 
 <p>To start FICS use <run ::fics::config><green>Play--<gt>Internet (FICS)</green></run>.
@@ -1372,7 +1373,7 @@ from a paused engine.
   </i></p>
   <p>
   One final issue arises with Engine Analysis. If you have null move <b>at then
-end</b> of a game or variation , the <a Analysis>analysis window</a> will not
+end</b> of a game or variation , the <a Analysis>Analysis Window</a> will not
 successfully add a variation to it. Instead, one should <b>first add a single
 move</b>, then variations may be added. This note also applies to the <b>
 <b>Paste Variation</b> feature.
@@ -1641,7 +1642,7 @@ shows all filter games in the currently open database/PGN file.</p>
 <p>Below the Game List are various buttons and entries,
 and at the bottom you'll find the <a Switcher>Database Switcher</a>.</p>
 <p>Clicking a game will select it. Select multiple games using Control+Click and Shift+Click.
-Right-clicking game(s) presents a context menu for various actions. Double-clicking loads a game.</p>
+Right-clicking game(s) shows a context menu for various actions. Double-clicking loads a game.</p>
 <p>Right-clicking a Column Title allows one to reorder them ('add' also repositions a column), or change the alignment.</p>
 <p>Quick searches can be performed by entering text in the combobox and pressing Enter, or clicking the <b>Filter</b> button.
 Use "+" as a logical AND with Filter, eg "Kasparov+Karpov".
@@ -2155,13 +2156,13 @@ set helpTitle(Tree) "Tree Window"
 set helpText(Tree) {<h1>Tree Window</h1>
   <p>
   The <run ::tree::Open><green>Tree Window</green></run> is an powerful Scid
-  feature. It shows the success rates of moves from the current
-  position; in the form of statistics, and a tri-coloured graph representing
+  feature. It shows information about moves from the current
+  position in the form of statistics and a coloured graph representing
   white-wins, draws, and black-wins.
   </p>
   <p><i>
   Scid's Tree search is fast because of a novel idea - we
-search for games that do not reached this position!
+search for games that do not reach this position!
   </i></p>
   <h3>Opening a Tree</h3>
   <p>One can open a database and then select <b>Windows--<gt>Tree Window</b>,
@@ -2171,9 +2172,8 @@ search for games that do not reached this position!
   <h3>General Use</h3>
   <p>
   The Tree Window shows statistics about the next move, as calulated from all games in the current base.
-  One may choose to show extended info by pressing <button tb_info>
-  <br>
-  The Score is always computed from white's perspective, so 100% means all White wins and 0% means all black
+  Extended info is shown by the <button tb_info> button.
+  The Score is always computed from white's perspective, so 100% means all White wins and 0% means all Black
   wins. Games with no result do not contribute to the percentage drawn, but as half-won/half-loss.
   </p>
   <p>
@@ -2804,42 +2804,42 @@ making for easier <a Analysis Debugging>Debugging</a>.
   <p>Starting them can be done in various ways
   By <run ::startAnalysisWin F2><green>pressing F2</green></run>
   , F3 or F4 from the Configuration Widget, or via the <b>Tools--<gt>Start Engine</b> menu.
-  Additionally, Engine 1 can be start/stopped by <b>double-clicking the statusbar</b>.
-  Right-clicking the Statusbar will dock/undock the engine,
+  Additionally, Engine 1 can be start/stopped by <b>double-clicking the status-bar</b>.
+  Right-clicking the status-bar will dock/undock the engine,
   which, when running docked, will run at low CPU priority.<p>
 
   <p>
-  <b>Space Bar</b> is bound to engine start/stop. Pressing <b>Enter</b> will
+  <b>Space Bar</b> makes the engine start/stop. Pressing <b>Enter</b> will
   add the engine's current best move, and <b>Control+Enter</b>, the whole line.
-  Keys <b>1 to 5</b> will set the engine's PV.
+  Keys <b>1 to 5</b> will set the engine's variation count (MultiPV).
   </p>
   <p>
-  At the top of the window are some useful Buttons.
+  At the top of the window are some useful buttons.
   <a Analysis Moves>Engine Analysis</a> occupy most of the space,
   and at the bottom is some <a Analysis Info>Extra Information</a> (which may be hidden).
   </p>
 
   <p>
   <i>The analysis output has three modes: No wrap, Word wrap, and Hidden.
-  These are toggled between by right-clicking the analysis window.</i>
+  These are toggled between by right-clicking the Analysis Window.</i>
   </p>
 
   <h3><name Buttons>Buttons</h3>
   <p>
-  At the top you'll find many cryptic buttons...
+  At the top you'll find the button bar
   <p>
   <ul>
-  <li> <button tb_play 32> <b>Play</b> / <button tb_pause 32> <b>Pause</b>. Start and stop engine analysis.
+  <li> <button tb_play 32> <b>Play</b> / <button tb_pause 32> <b>Pause</b>. Start / Stop engine analysis.
   <li> <button tb_addmove 32> <b>Add Move</b> 
-  adds the engine's best move to the current game.  (Right clicking adds the Engine Score).</li>
-  <li> <button tb_addvar 32> <b>Add Variation</b>  adds the whole main line.  (Right clicking adds the second variation if multi-pv enabled)</li>
-  <li> <button tb_addallvars 32> <b>Multi-PV</b>  if the engine supports multi-pv, add all principal variations.</li>
+  adds the engine's best move to the current game. (Right click adds the engine score).</li>
+  <li> <button tb_addvar 32> <b>Add Variation</b>  adds the whole main line.  (Right click adds the second variation if multi-pv enabled)</li>
+  <li> <button tb_addallvars 32> <b>MultiPV</b>  if the engine supports MultiPV, add all variations.</li>
 
   <li> <button tb_lockengine 32> <b>Lock Analysis</b> to a certain position.
   Hover cursor over this button to see stats for locked game.
   After a while, to add this analysis to game, return to the locked position, 
   press Pause, Unlock, and Add Variation.</li>
-  <li> <button tb_annotate 32> <b>Annotate</b> game (see below).</li>
+  <li> <button tb_annotate 32> <b>Annotate Game</b> (see <a Analysis Annotating>below</a>).</li>
   <li> <button tb_exclude 32> <b>Exclude Move(s)</b> helps refine the engine's search list (mainly UCI engines only). Hovering mouse shows the current excluded moves.</li>
   <li> <button tb_cpu 32> <b>Low CPU priority</b> 
   give the engine a low priority for CPU
@@ -2849,7 +2849,7 @@ making for easier <a Analysis Debugging>Debugging</a>.
   <li> <button tb_coords 32> <b>Show Board</b> displays a small working board.
   If engine is locked, the board displays the locked position.</li>
   <li> <button autoplay_off 32> <b>Shoot out</b>, or "demo", mode allows the engine to play out the game. (Engine must be running first).</li>
-  <li> <button tb_training 32> <b>Training</b> feature (see below).</li>
+  <li> <button tb_training 32> <b>Training</b> feature (see <a Analysis Training>below</a>).</li>
 <br>
   <li> And for Xboard engines only:</li>
   <li> <button tb_update 32> <b>Update</b> gets the engine to display a statistics line,
@@ -2857,38 +2857,36 @@ with the format "stat01: time nodes ply mvleft mvtot mvname". The results can be
   </ul>
   </p>
 
-  <h3><name Moves>Moves</name></h3>
+  <h3><name Moves>Moves / PV</name></h3>
   <p>
-  Each line of the main text widget contains an <b>Engine Analysis Info</b>.
+  Each line in the main text window contains an engine <b>Info</b>.
   The first number is the current <b>Search Depth</b>. The next (prefixed with
-  a +/-), is a <b>Move Score</b>.  It is measured in pawn units from the
-  perspective of white - a positive score means white is ahead, a negative score
-  means black. Then follows the move predictions.  </p>
+  a +/-), is a <b>Move Score</b>.  It is measured in 'pawns' from the
+  perspective of white. A positive score means white is ahead, a negative score
+  means black. Then follows the moves - also know as <b>Principal Variation</b> or <b>PV</b>.  </p>
   <p>
-  Many recent <term>UCI</term> engines also allow to analyse several lines at
-  once. Using this <term>Multi-PV</term> feature, the user can see the second or
-  third (etcetera) best continuations.  The best line is always on top and
-  highlighted.  If an engine allows for <term>Multi-PV analysis</term>, the spin
-  box can be used to set the number of principal variations shown.  In this case,
+  Most UCI engines allow one to analyse several moves (or <b>lines</b>) at
+  once. Using this <b>MultiPV</b> feature, the user can see the second or
+  third (et cetera) best continuations.  The best line is always on top and
+  highlighted.  If MultiPV is supported, the spinbox can be used to set the number of PV shown.  In this case,
   instead of the calculation history, only the resulting principal lines are
-  shown. The spin box is disabled if an engine does offer this feature.
+  shown. The spin box is disabled if an engine doesn't offer this feature.
   </p>
 
-  <h3><name Info>Extra Information</h3>
+  <h3><name Info>Extra Info</h3>
   <p>
-  At the bottom is some additional technical info. If this is hidden, it
-  can been seen by pressing the <b>Engine Info</b> button.
+  At the bottom is some additional technical info, shown/hidden by pressing the <button tb_info 32> button.
+  These are -
   <br>
-  <br>
-  <b>Depth</b>: the search depth already reached by
+  <br><b>Depth</b>  The search depth already reached by
   the engines calculations (in half moves).
-  <br><b>Nodes</b>: the number of positions analyzed for the current
+  <br><b>Nodes</b>  The number of positions analyzed for the current
   result (and the number of positions per second).
-  <br><b>Time</b>: the amount of time spent for the current analysis.
+  <br><b>Time</b>  The amount of time spent for the current analysis.
   </p><p>
-  Additional information includes the number of tablebase hits, a
+  Additional information may include - the number of tablebase hits, a
   more exact number of nodes analyzed per second, the watermark of the
-  engines hash and the current CPU load.
+  engines hash, and the current CPU load.
   </p>
 
   <h1>Features</h1>
@@ -2903,7 +2901,7 @@ with the format "stat01: time nodes ply mvleft mvtot mvname". The results can be
   <p>
   There is also a new option to add <b>Missed Mates</b>. This adds all missed
   and shorter mates which are at least a few ply shorter of the 'Depth per move'
-  setting (as at higher ply, the engine's results are not too reliable).
+  setting (- at higher ply, the engine's PV aren't always reliable).
   Additionally, the added line may not be complete - ie. it may not end in mate.
   This is due to the engine reporting "Mate in n", but not actually giving the
   whole line/PV, which is a common UCI engine oddity.
@@ -2954,11 +2952,13 @@ with the format "stat01: time nodes ply mvleft mvtot mvname". The results can be
   Informant values are also <run configInformant><green>configurable</green></run>.                     
 </i></p>
 
-  <h3>Training</h3>
+  <h3><name Training>Training</name></h3>
   <p>
-  The Training Button <button tb_training> (only available for engines 1 and 2) allows
-  one to play against the engine.  The engine moves first (from the current position) and may be stopped
-  by pressing the button again.
+  Training <button tb_training> is a poorly implemented Engine vs Player
+feature only available for the 2nd and 3rd engines (in the enginelist).
+The <a ComputerGame>Playing against the Computer</a> features are much better supported.
+</p><p>
+  From the current position (which must be end-of-game), the engine moves first, and may be stopped by pressing the button again.
   The time for each move is fixed, and analysis results are not updated while training mode is on.
   </p>
 
@@ -2973,7 +2973,7 @@ with the format "stat01: time nodes ply mvleft mvtot mvname". The results can be
   the program's <b>Command</b>, any <b>Parameters</b> it takes,
   whether it is uses the <b>UCI or Xboard</b> protocol, and also the
   <b>Directory</b> it should be run in.
-  This sounds complicated, but is not too hard :-)
+  This sounds complicated, but it is not too hard ;-)
   Sticking points are likely to be the choice of
   which directory to use, and whether it's UCI or not.</p>
 
@@ -3029,7 +3029,7 @@ because implementation is very problematic.</p>
 via the <button tb_annotate> button in the <run ::enginelist::choose><green>engine configuration</green></run> widget.
 The <b>Log Size</b> is the max number of lines in the log. Setting it to zero disables logging altogether.</p>
 
-  <p><footer>Updated: Scid vs. PC 4.15, September 2015</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.20, September 2018</footer></p>
 }
 
 set helpTitle(Tourney) "Computer Tournament"
@@ -6276,7 +6276,7 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li>Basic support for horizontal scrolling (in gamelist, crosstable and bestgames) for mousewheel buttons with horizontal capability.</li>
 <li>Finnish translation, from Mika Kaakinen</li>
 <br>
-<li>Engines: if an engine shows a Mating line, show the whole line in analysis window, disregarding Max-Ply variable</li>
+<li>Engines: if an engine shows a Mating line, show the whole line in Analysis Window, disregarding Max-Ply variable</li>
 <li>Don't show an error message when importing null PGN tags... too verbose</li>
 <li>Fics: try to handle case when move is made after run out of time. (We don't want to mark the game as out of sync)</li>
 <li>Minor Translation, Mask and Fics tweaks</li>
