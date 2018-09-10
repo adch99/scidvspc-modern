@@ -1530,7 +1530,8 @@ if {$::macOS} {
   # Hmm - OS X doesn't remember the focus state. Any others ??
   bind . <FocusIn> {focus .main}
 } else {
-  bind .main <BackSpace> ::move::Back
+  ### It is too easy to lose focus from a text widget, so leave backspace unbound - S.A.
+  # bind .main <BackSpace> ::move::Back
 }
 
 bind .main <Escape> clearAllMoves
