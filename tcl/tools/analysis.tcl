@@ -1217,8 +1217,10 @@ proc okAnnotation {n} {
     }
   }
   if {$autoplayMode == 0} { toggleAutoplay }
-  # Disable pause button, (But perhaps we can enable this. Seems to work in annotate mode now)
-  .analysisWin$n.b.startStop configure -state disabled
+  set disableButtons {startStop move line alllines exclude lockengine alllines training finishGame}
+  foreach b $disableButtons {
+    .analysisWin$n.b.$b configure -state disabled
+  }
 }
 
 ### Part of annotation process
@@ -2366,9 +2368,6 @@ proc makeAnalysisWin {{n 0} {options {}}} {
   button $w.b.exclude -image tb_exclude -command "excludeMovePopup $n" -relief $relief
   ::utils::tooltip::Set $w.b.exclude $::tr(ExcludeMove)
   trace variable analysis(exclude$n) w "excludeToolTip $n"
-  if {!$analysis(autostart$n)} {
-    $w.b.exclude configure -state disabled
-  }
 
   checkbutton $w.b.priority -image tb_cpu -indicatoron false -variable analysis(priority$n) \
     -onvalue idle -offvalue normal -command "setAnalysisPriority $n" -relief $relief -width 32 -height 32
@@ -2393,6 +2392,11 @@ proc makeAnalysisWin {{n 0} {options {}}} {
   set ::finishGameMode 0
   button $w.b.finishGame -image autoplay_off -command "toggleFinishGame $n"  -relief $relief
   ::utils::tooltip::Set $w.b.finishGame $::tr(FinishGame)
+
+  if {!$analysis(autostart$n)} {
+    $w.b.exclude configure -state disabled
+    # $w.b.finishGame configure -state disabled
+  }
 
   checkbutton $w.b.training -image tb_training  -indicatoron false -width 32 -height 32 \
     -command "toggleAutomove $n" -variable analysis(automove$n) -relief $relief
@@ -3161,9 +3165,7 @@ proc formatAnalysisMoves {text} {
 proc toggleFinishGame {n} {
   global analysis annotate
 
-  set b ".analysisWin$n.b.finishGame"
-
-  if { $annotate(Button) || $::autoplayMode || !$analysis(analyzeMode$n) } {
+  if { $annotate(Button) || $::autoplayMode } {
     return
   }
   if {! [sc_pos isAt vend]} {
@@ -3171,18 +3173,27 @@ proc toggleFinishGame {n} {
   }
 
   set ::finishGameMode [expr ! $::finishGameMode]
+  set disableButtons {startStop move line alllines exclude lockengine alllines training annotatebut}
+
   if {$::finishGameMode} {
-    $b configure -image autoplay_on
+    if {! $analysis(analyzeMode$n)} { toggleEngineAnalysis $n }
+    .analysisWin$n.b.finishGame configure -image autoplay_on
+    foreach b $disableButtons {
+      .analysisWin$n.b.$b configure -state disabled
+    }
     after $::autoplayDelay autoplayFinishGame $n
   } else  {
-    $b configure -image autoplay_off
+    .analysisWin$n.b.finishGame configure -image autoplay_off
+    foreach b $disableButtons {
+      .analysisWin$n.b.$b configure -state normal
+    }
     after cancel autoplayFinishGame
   }
 }
 
 proc autoplayFinishGame {n} {
   if {!$::finishGameMode || ![winfo exists .analysisWin$n]} {return}
-  .analysisWin$n.b.move invoke
+  makeAnalysisMove $n
   if { [string index [sc_game info previousMove] end] == {#}} {
     toggleFinishGame $n
     return
@@ -3196,7 +3207,7 @@ proc toggleEngineAnalysis {{n -1}} {
   global analysis annotate
 
   if {$n == -1} {
-    if {$fics::playing == 1 || $fics::playing == -1} {
+    if {$fics::playing == 1 || $fics::playing == -1 || $::finishGameMode || $annotate(Engine) > -1 || $::comp(playing)} {
       return
     }
     set n [findEngine]
