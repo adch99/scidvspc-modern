@@ -1561,9 +1561,14 @@ if {$::docking::USE_DOCKING} {
   set dot_w .main
 }
 
-if {$enableBackground} {
+if {$enableBackground == 1} {
   option add *Text*background $defaultBackground
   option add *Listbox*background $defaultBackground
+}
+
+if {$enableBackground == 2} {
+  # only valid after restart
+  option add *background $defaultBackground
 }
 
 # Reconfigure fonts if necessary

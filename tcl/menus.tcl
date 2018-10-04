@@ -1277,15 +1277,30 @@ set helpMessage($m,1) OptionsScoreBarColour
 
 $m add separator
 
-$m add checkbutton -label OptionsEnableColour -variable enableBackground -command {
-  if {$::enableBackground} {
-    initBackgroundColour $defaultBackground
-  } else {
-    initBackgroundColour grey95
-  }
-}
-$m add command -label OptionsBackColour -command SetBackgroundColour
+menu $m.back
+
+$m add cascade -label OptionsBackColour -menu $m.back
 set helpMessage($m,1) OptionsBackColour
+
+$m.back add command -label OptionsMovesHighlightLastMoveColor -command SetBackgroundColour
+$m.back add separator
+
+foreach i {No Some All} j {0 1 2} {
+  $m.back add radiobutton -label $i -value $j -variable ::enableBackground -command {
+    if {$::enableBackground == 2} {
+      set answer [tk_messageBox -type yesno -icon info -title Scid -message "Enabling background colour globally requires restart.\nExit now ?"]
+      if {$answer == "yes"} {
+	::file::Exit
+      }
+    }
+    if {$::enableBackground} {
+      initBackgroundColour $defaultBackground
+    } else {
+      initBackgroundColour grey95
+    }
+  }
+  set helpMessage($m.back,1) $i
+}
 
 proc SetBackgroundColour {} {
   global defaultBackground enableBackground
@@ -1745,9 +1760,10 @@ proc setLanguageMenus {{lang ""}} {
     configMenuText .menu.options [tr Options$tag $oldLang] Options$tag $lang
   }
 
-  foreach tag {EnableColour BackColour MainLineColour VarLineColour RowColour SwitcherColour ProgressColour CrossColour ScoreColour ScoreBarColour} {
+  foreach tag {BackColour MainLineColour VarLineColour RowColour SwitcherColour ProgressColour CrossColour ScoreColour ScoreBarColour} {
     configMenuText .menu.options.colour [tr Options$tag $oldLang] Options$tag $lang
   }
+  configMenuText .menu.options.colour.back [tr OptionsMovesHighlightLastMoveColor $oldLang] OptionsMovesHighlightLastMoveColor $lang
 
   foreach tag { Configure NovagCitrineConnect InputEngineConnect  } {
     configMenuText .menu.tools.hardware [tr ToolsConnectHardware$tag $oldLang] ToolsConnectHardware$tag $lang

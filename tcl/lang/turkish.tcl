@@ -222,7 +222,6 @@ menuText T Options "Seçenekler" 0
 menuText T OptionsBoard "Satranç tahtası/Taşlar" 0 {Satranç tahtası görünüşü}
 menuText T OptionsColour "Renkler" 0 {Default text widget color}
 menuText T OptionsBackColour "arka plan" 0 {Default text widget color}
-menuText T OptionsEnableColour "Arka Plan Rengini Etkinleştir" 0 {}
 menuText T OptionsMainLineColour "Ana Hamle Okları" 0 {Ana oklar}
 menuText T OptionsVarLineColour "Varyasyant Okları" 0 {Variation arrows}
 menuText T OptionsRowColour "Satır rengi" 0 {Varsayılan ağaç / kitap satır rengi}

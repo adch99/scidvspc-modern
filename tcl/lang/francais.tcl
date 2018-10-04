@@ -244,7 +244,6 @@ menuText F OptionsBoard "Echiquier" 0 {Options d'aspect de l'échiquier}
 menuText F OptionsColour "Background Colour" 0 {Default text widget color}
 # ====== TODO To be translated ======
 menuText F OptionsBackColour "Background" 0 {Default text widget color}
-menuText F OptionsEnableColour "Activer" 0 {}
 # ====== TODO To be translated ======
 menuText F OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
 # ====== TODO To be translated ======

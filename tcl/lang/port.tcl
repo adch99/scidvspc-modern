@@ -239,7 +239,6 @@ menuText U Options "Opções" 0
 menuText U OptionsBoard "Tabuleiro" 0 {Opções de aparência do tabuleiro} ;# ***
 menuText U OptionsColour "Cor do Fundo" 0 {Default text widget color}
 menuText U OptionsBackColour "Fundo" 0 {Default text widget color}
-menuText U OptionsEnableColour "Aplicar" 0 {}
 menuText U OptionsMainLineColour "Setas da Linha Principal" 0 {Mainline arrows}
 menuText U OptionsVarLineColour "Setas da Variante" 0 {Variation arrows}
 menuText U OptionsRowColour "Linhas" 0 {Default tree/book row color}

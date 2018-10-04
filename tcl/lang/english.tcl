@@ -247,7 +247,6 @@ menuText E Options "Options" 0
 menuText E OptionsBoard "Chessboard/Pieces" 0 {Chess board appearance}
 menuText E OptionsColour "Colors" 0 {Default text widget color}
 menuText E OptionsBackColour "Background" 0 {Default text widget color}
-menuText E OptionsEnableColour "Enable Background Color" 0 {}
 menuText E OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
 menuText E OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
 menuText E OptionsRowColour "Rows" 0 {Default tree/book row color}

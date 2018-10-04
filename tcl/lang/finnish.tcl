@@ -222,7 +222,6 @@ menuText L Options "Vaihtoehdot" 0
 menuText L OptionsBoard "Shakkilauta/nappulat" 0 {Shakkilaudan ulkoasu}
 menuText L OptionsColour "V‰rit" 0 {Oletustekstiwidgetin v‰ri}
 menuText L OptionsBackColour "Tausta" 0 {Oletustekstiwidgetin v‰ri}
-menuText L OptionsEnableColour "Salli taustav‰ri" 0 {}
 menuText L OptionsMainLineColour "P‰‰muunnelman nuolet" 0 {P‰‰muunnelman nuolet}
 menuText L OptionsVarLineColour "Muunnelman nuolet" 0 {Muunnelman nuolet}
 menuText L OptionsRowColour "Rivit" 0 {Oletus puu/kirja-rivin v‰ri}

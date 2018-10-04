@@ -269,7 +269,6 @@ menuText G OptionsColour "Χρώμα Φόντου" 7 {Προπιλεγμένο �
 # ====== TODO To be translated ======
 menuText G OptionsBackColour "Background" 0 {Default text widget color}
 # ====== TODO To be translated ======
-menuText G OptionsEnableColour "Enable" 0 {}
 # ====== TODO To be translated ======
 menuText G OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
 # ====== TODO To be translated ======

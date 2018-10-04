@@ -629,7 +629,7 @@ set helpText(MainWindow) {<h1>Scid vs. PC's Main Window</h1>
   <li> <button tb_invar> Move into a <a Variations>variation</a>  [v] (Holding button shows a menu of available variations)</li>
   <li> <button tb_outvar> Move out of the current variation  [z] (Right-click exits all vars)</li>
   <li> <button tb_addvar> Add a new variation  [control+a]</li>
-  <li> <button autoplay_off> Start/stop <a MainWindow Autoplay>Autoplay mode</a> [control+z] (Right-click autoplays all filter games)</li>
+  <li> <button autoplay_off> Start/stop <a MainWindow Autoplay>Autoplay mode</a> (Right-click autoplays all filter games)</li>
   <li> <button tb_trial> Start/stop <a Moves Trial>Trial mode</a> [control+space] </li>
   <li> <button tb_flip> Flip the board [control+f]</li>
   <li> <button tb_windows> Raise open windows [tab]. This feature may only work if you disable your window-manager's focus stealing policy. (Right-click shows Splash window)</li>
@@ -3951,6 +3951,9 @@ set helpText(Options) {<h1>Options and Preferences</h1>
   The <b>Rows</b> colour is for the highlighted row in the Tree, Books, Finder, PlayerFinder and TournamentFinder windows.
   Crosstable coloured rows must be enabled in the Crosstable Options menus.
   The Board arrows and drawables' colours are set in the <a Comment Diagrams>Comment Editor</a>.
+  </p>
+  <p>
+  The <b>Background Colour</b> feature has three options: No, Some and All. Enabling/disabling colour for All widgets requires Scid vs PC to restart.
   </p>
 
   <h3><name MyPlayerNames>My Player Names</name></h3>

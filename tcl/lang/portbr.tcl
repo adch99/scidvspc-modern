@@ -267,7 +267,6 @@ menuText B OptionsColour "Background Colour" 0 {Default text widget color}
 # ====== TODO To be translated ======
 menuText B OptionsBackColour "Background" 0 {Default text widget color}
 # ====== TODO To be translated ======
-menuText B OptionsEnableColour "Enable" 0 {}
 # ====== TODO To be translated ======
 menuText B OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
 # ====== TODO To be translated ======
