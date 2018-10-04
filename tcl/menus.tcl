@@ -1307,7 +1307,7 @@ proc SetBackgroundColour {} {
   set temp [tk_chooseColor -initialcolor $defaultBackground -title [tr OptionsBackColour]]
   if {$temp != {}} {
     set defaultBackground $temp
-    set enableBackground 1
+    if {!$enableBackground} {set enableBackground 1}
     option add *Text*background $temp
     option add *Listbox*background $temp
     .main.gameInfo configure -bg $temp
