@@ -284,7 +284,6 @@ menuText Y OptionsColour "Background Colour" 0 {Default text widget color}
 # ====== TODO To be translated ======
 menuText Y OptionsBackColour "Background" 0 {Default text widget color}
 # ====== TODO To be translated ======
-menuText Y OptionsEnableColour "Enable" 0 {}
 # ====== TODO To be translated ======
 menuText Y OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
 # ====== TODO To be translated ======

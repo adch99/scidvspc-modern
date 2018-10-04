@@ -254,7 +254,6 @@ menuText N OptionsColour "Achtergrondkleur" 0 {Standaard widget tekstkleur}
 # ====== TODO To be translated ======
 menuText N OptionsBackColour "Background" 0 {Default text widget color}
 # ====== TODO To be translated ======
-menuText N OptionsEnableColour "Enable" 0 {}
 # ====== TODO To be translated ======
 menuText N OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
 # ====== TODO To be translated ======

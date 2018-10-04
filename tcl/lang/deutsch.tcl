@@ -266,7 +266,6 @@ menuText D OptionsBoard "Schachbrett" 6 {Schachbrettoptionen}
 menuText D OptionsColour "Hintergrundfarbe" 0 {Default text widget color}
 # ====== TODO To be translated ======
 menuText D OptionsBackColour "Background" 0 {Default text widget color}
-menuText D OptionsEnableColour "Einschalten" 0 {}
 # ====== TODO To be translated ======
 menuText D OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
 # ====== TODO To be translated ======

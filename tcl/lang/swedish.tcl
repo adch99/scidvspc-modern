@@ -244,7 +244,6 @@ menuText W OptionsColour "Bakgrundsfärg" 0 {Standardtextfärg}
 # ====== TODO To be translated ======
 menuText W OptionsBackColour "Background" 0 {Default text widget color}
 # ====== TODO To be translated ======
-menuText W OptionsEnableColour "Enable" 0 {}
 # ====== TODO To be translated ======
 menuText W OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
 # ====== TODO To be translated ======

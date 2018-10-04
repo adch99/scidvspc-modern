@@ -246,7 +246,6 @@ menuText P OptionsColour "Kolor tła" 0 {Domyślny kolor tła}
 # ====== TODO To be translated ======
 menuText P OptionsBackColour "Background" 0 {Default text widget color}
 # ====== TODO To be translated ======
-menuText P OptionsEnableColour "Enable" 0 {}
 # ====== TODO To be translated ======
 menuText P OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
 # ====== TODO To be translated ======

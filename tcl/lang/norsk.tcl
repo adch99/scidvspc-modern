@@ -253,7 +253,6 @@ menuText O Options "Innstillinger" 0
 menuText O OptionsBoard "Sjakkbrett" 0 {Velg hvordan sjakkbrett skal se ut}
 menuText O OptionsColour "Farge" 0 {Standard tekstfarge}
 menuText O OptionsBackColour "Bakgrunn" 0 {Standard bakgrunnsfarge}
-menuText O OptionsEnableColour "Bruk bakgrunnsfarge" 0 {}
 menuText O OptionsMainLineColour "Hovedlinje piler" 0 {}
 menuText O OptionsVarLineColour "Variant piler" 0 {}
 menuText O OptionsRowColour "Rader" 0 {}

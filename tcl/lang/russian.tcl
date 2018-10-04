@@ -245,7 +245,6 @@ menuText R OptionsBoard "Шахматная доска" 0 {Настройки в
 menuText R OptionsColour "Цвет фона" 0 {Цвет текста по-умолчанию}
 # ====== TODO To be translated ======
 menuText R OptionsBackColour "Background" 0 {Default text widget color}
-menuText R OptionsEnableColour "Разрешить" 0 {}
 # ====== TODO To be translated ======
 menuText R OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
 # ====== TODO To be translated ======
