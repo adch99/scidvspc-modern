@@ -364,7 +364,7 @@ proc ::enginelist::choose {} {
   bind $w <F3> "startAnalysisWin F3"
   bind $w <F4> "startAnalysisWin F4"
 
-  label $w.flabel -textvar ::tr(EngineList) -font font_Large
+  label $w.flabel -textvar ::tr(EngineList) -font font_Regular
   pack $w.flabel -side top -pady 5
 
   frame $w.buttons
