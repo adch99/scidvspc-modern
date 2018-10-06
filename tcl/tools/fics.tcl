@@ -337,19 +337,19 @@ namespace eval fics {
     $w.console.text tag configure gameresult -foreground SlateBlue1
     $w.console.text tag configure channel -foreground rosybrown
 
-    entry $w.command.entry -insertofftime 0 -bg grey75 -font font_Large -validate key -vcmd {
+    entry $w.command.entry -insertofftime 0 -bg grey75 -font font_Small -validate key -vcmd {
       set ::fics::entrytime [clock milli]
       return 1
     }
 
     configHistory fics $w.command.entry
 
-    entry $w.command.find -width 10 -textvariable ::fics::helpWin(find)
+    entry $w.command.find -width 10 -textvariable ::fics::helpWin(find) -font font_Small
     configFindEntryBox $w.command.find ::fics::helpWin $w.console.text
 
-    button $w.command.send -textvar tr(FICSSend) -state disabled
+    button $w.command.send -textvar tr(FICSSend) -state disabled -font font_Small
 
-    button $w.command.clear -textvar tr(Clear) -state disabled -command "
+    button $w.command.clear -textvar tr(Clear) -state disabled -font font_Small -command "
       $w.command.entry delete 0 end
       $w.command.find  delete 0 end
     "
@@ -358,7 +358,7 @@ namespace eval fics {
       $w.console.text insert 0.0 \"FICS ($::scidName $::scidVersion)\n\"
       break
     "
-    button $w.command.next -textvar tr(Next) -state disabled -command {::fics::writechan next echo}
+    button $w.command.next -textvar tr(Next) -state disabled -font font_Small -command {::fics::writechan next echo}
     button $w.command.hide -image bookmark_down -command ::fics::togglebuttons
 
     bind $w <Control-p> ::pgn::Open
@@ -385,9 +385,9 @@ namespace eval fics {
            bind $w.console.text <FocusIn> "focus $w.command.entry"
     }
 
-    pack $w.command.entry -side left -fill x -expand 1 -padx 3 -pady 2
-    pack $w.command.find  -side left                   -padx 3 -pady 2
-    pack $w.command.hide $w.command.next $w.command.clear $w.command.send -side right -padx 3 -pady 2
+    pack $w.command.hide $w.command.next $w.command.clear $w.command.send -side right -padx 2 -pady 1
+    pack $w.command.entry -side left -fill x -expand 1 -padx 2 -pady 1
+    pack $w.command.find  -side left                   -padx 2 -pady 1
     focus $w.command.entry
 
     # Gameclocks are used, but never packed in fics now
