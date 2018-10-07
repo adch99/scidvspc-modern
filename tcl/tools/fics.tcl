@@ -407,14 +407,15 @@ namespace eval fics {
 
     set row 0
     # chanoff var is back to front with fics
-    checkbutton $w.bottom.buttons.tells -textvar tr(FICSTells) -state disabled \
+    checkbutton $w.bottom.buttons.tells -textvar tr(FICSTells) -font font_Small -state disabled \
     -variable ::fics::chanoff -command {
       ::fics::writechan "set chanoff [expr !$::fics::chanoff]" noecho
       if {$::fics::chanoff} {
 	::fics::writechan "set silence 0"
       }
     }
-    checkbutton $w.bottom.buttons.shouts -textvar tr(FICSShouts) -state disabled -variable ::fics::shouts -command {
+    checkbutton $w.bottom.buttons.shouts -textvar tr(FICSShouts) -font font_Small -state disabled \
+    -variable ::fics::shouts -command {
       ::fics::writechan "set shout $::fics::shouts" echo
       # ::fics::writechan "set cshout $::fics::shouts" noecho
       # ::fics::writechan "set gin $::fics::gamerequests" echo
