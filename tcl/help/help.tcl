@@ -500,7 +500,7 @@ append helpText(Index) {
 
   <h3><name X>X</name></h3>
   <ul>
-  <li><a CCXfcc>Xfcc support</a></li>
+  <li><a CCXfcc>Xfcc Support</a></li>
   </ul>
 
   <h3><name Y>Y</name></h3>
@@ -3041,7 +3041,7 @@ set helpText(Tourney) {<h1>Computer Tournament</h1>
   <a Analysis List>Analysis Engines</a> widget.
   </p>
   <p>
-  <i>Support for different engines is good, but some older xboard engines don't work well.
+  <i>Support for different engines is good, but some older XBoard engines don't work well.
   For more information about engine compatibility, see below.
   </i></p>
 
@@ -3140,7 +3140,7 @@ Zct<br>
 <br>
 Komodo performs well, but some versions have broken time-per-move time control.
 Pervious versions of Phalanx had no time control, but it now works well.
-Gnuchess may need the "-x" parameter to work in xboard mode (but recent versions also support UCI),
+Gnuchess may need the "-x" parameter to work in XBoard mode (but recent versions also support UCI),
 and only versions > 5.07 will properly handle time-per-game time control.
 Faile seems not to work well with time-per-move.
 Arasanx UCI <lt>= 14.1 does not work with Permanent Thinking.
@@ -4474,7 +4474,7 @@ The clocks may be hidden by pressing the 'x' on the White clock.</p>
 
 <h2>Playing Phalanx</h2>
 <p>
-<run ::tacgame::config><green>Phalanx</green></run> is an old xboard engine written by Dusan Dobes.
+<run ::tacgame::config><green>Phalanx</green></run> is an old XBoard engine written by Dusan Dobes.
 With it one may play a game of Normal, Fischer (castling not supported), or Random Pawns Chess.
 </p><p>
 Recently, Dusan has updated Phalanx to be a stronger engine, with more sophisticated code for playing at different ELO.
@@ -4536,23 +4536,20 @@ set helpText(Correspondence) {<h1>Correspondence Chess</h1>
 Correspondence Chess can be played in two ways.
 </p>
 <ul>
-   <li><a CCeMailChess>via eMail</a> proceeds by sending the current game via eMail
-   to your opponet once you made your move. To this end an eMail message
-   is created in your prefered email program with the current game
-   attached in PGN format (stripped of all comments and variations).
+   <li><a CCeMailChess>Email</a>. Mails the current game (stripped of comments and variations)
+   to your opponent when you make your move.  
    </li>
-   <li><a CCXfcc>Using Chess Servers</a> supporting the
-   <b>Xfcc</b> protocol. Here, external tools are used to fetch the games from
-   your account(s), and deliver them to Scid for synchronisation. After
+   <li>Using <a CCXfcc>Xfcc</a> Chess Servers. External tools are used to fetch the games from
+   your account(s) and deliver them to Scid for synchronisation. After
    making your move, it is also sent to your opponent using
-   Xfcc. The fetch and send tool are implemented as external tools, for
+   Xfcc. Fetch and Send are implemented as external tools, for
    easy extension if other protocols arise.
    </li>
 </ul>
 <p>
 Features can be accessed via the <b>Play-<gt>Correspondence Chess</b>
-menus, or by simply using
-  <run ::CorrespondenceChess::CCWindow><green>Windows-</gt>Correspondence</green></run>.
+menus, or the main
+<run ::CorrespondenceChess::CCWindow><green>Correspondence Chess</green></run> window.
 
 This window contains buttons to navigate through
 ongoing games, shortcut keys to fetch games by means of the Xfcc
@@ -4803,7 +4800,7 @@ general information.
 
 
 set helpTitle(CCXfcc) "Correspondence Chess Servers"
-set helpText(CCXfcc) {<h1>Correspondence Chess Servers</h1>
+set helpText(CCXfcc) {<h1>Correspondence Chess Servers / Xfcc</h1>
 
 <p>
 There exist several correspondence chess servers throughout the
@@ -4814,9 +4811,9 @@ The integration of Xfcc is done in Scid via external helper tools set
 in the <a CCSetupDialog>Configuration</a> dialog for correspondence
 chess.
 </p>
-<p><i>Scid's Xfcc support is dependant on the TCL <b>http</b> and <b>tDOM</b> packages.
+<p><i>Scid's Xfcc support is dependant on the TCL </i><b>http</b><i> and </i><b>tDOM</b><i> packages.
 See the <green><run raiseSplashWindow>Startup Window</run></green> to inspect
-if these packages are found.</i>
+if these packages are found. Package </i><b>tls</b><i> is also probably required.</i>
 
 </p>
 
@@ -4941,7 +4938,7 @@ set helpText(CCeMailChess) {<h1>Correspondence Chess via eMail</h1>
 
 <p>
 eMail offers a convenient way to play <a Correspondence>Correspondence Chess</a>. The
-standard Unix application is xboard and its cmail helper
+standard Unix application is XBoard and its cmail helper
 - as it has fast email processing, and still maintains PGN compliability.
 This is also the model which Scid uses.
 By preserving the whole PGN header, such games can be
@@ -4949,7 +4946,7 @@ played with any opponent who has a tool to handle PGN.
 </p>
 <p>
 Scid too can handle eMail correspondence games almost automatically;
-maintaining compatiblity with cmail and xboard.  It works by sending
+maintaining compatiblity with cmail and XBoard.  It works by sending
 the games as PGN attachments, including in
 the header certain tags that allows them to be recognised and
 sorted together. For this reason the user has to be careful with

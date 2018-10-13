@@ -236,8 +236,7 @@ menuText E CCNewMailGame "New eMail Game" 2 {Start a new eMail game}
 menuText E CCMailMove "Mail Move" 0 {Send the move via eMail to the opponent}
 menuText E CCGamePage "Game Page" 0 {Call up the game via the web browser}
 
-# menu in cc window:
-menuText E CCEditCopy "Copy Gamelist to Clipbase" 0 {Copy the games as CSV list to clipbase}
+menuText E CCEditCopy "Copy Gamelist to clipboard" 0 {Copy the games as CSV list to the clipboard}
 
 
 #  B    GHiJKL    Q  TUV XYZ
