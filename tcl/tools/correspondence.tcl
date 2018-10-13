@@ -12,11 +12,8 @@
 
 # http and tdom are required for the Xfcc protocol
 
-#======================================================================
-#
-# Xfcc interface for scid
-#
-#======================================================================
+### Xfcc interface for scid
+
 namespace eval Xfcc {
 
 	#----------------------------------------------------------------------
@@ -375,7 +372,7 @@ namespace eval Xfcc {
 				::CorrespondenceChess::updateConsole "info Server Error!"
 				set Title "Scid Error"
 				set Error "$server reported an unknown error."
-				tk_messageBox -icon warning -type ok -parent . \
+				tk_messageBox -icon warning -type ok \
 					-title $Title -message $Error
 			} \
 			"FeatureUnavailable" {
@@ -385,7 +382,7 @@ namespace eval Xfcc {
 				::CorrespondenceChess::updateConsole "info Authentication failed!"
 				set Title "Scid Authentication Failure!"
 				set Error "Could not authenticate to the Xfcc-Server.\nPlease check Username and Password for $server."
-				tk_messageBox -icon warning -type ok -parent . \
+				tk_messageBox -icon warning -type ok \
 					-title $Title -message $Error
 			} \
 			"InvalidGameID" {
@@ -946,9 +943,11 @@ namespace eval Xfcc {
 
 }
 
+### end namespace Xfcc
+
 #======================================================================
 #
-# Correspondence chess menues, dialogs and functions
+# Correspondence chess menus, dialogs and functions
 #
 #======================================================================
 image create photo tb_CC_Prev -data {
@@ -1262,8 +1261,9 @@ image create photo tb_CC_spacer -data {
 	R0lGODlhAQAYAIAAAP///////yH5BAEKAAEALAAAAAABABgAAAIEjI+pVwA7
 }
 
-#----------------------------------------------------------------------
-# Correspnodence Chess functions
+
+### Corresondence Chess functions
+
 namespace eval CorrespondenceChess {
 
 	# wether the console is already open or not
@@ -1463,7 +1463,7 @@ namespace eval CorrespondenceChess {
 			set currbase [sc_base current]
 			set fName [file rootname $CorrBase]
 			if {[catch {sc_base create $fName} result]} {
-					tk_messageBox -icon warning -type ok -parent . \
+					tk_messageBox -icon warning -type ok \
 						-title "Scid: Unable to create base" -message $result
 			}
 			# Type 6 == Correspondence chess
@@ -1640,7 +1640,7 @@ namespace eval CorrespondenceChess {
 		foreach idx {0 1} tag {CorrespondenceChess Edit} {
 			configMenuText $m $idx $tag $lang
 		}
-		foreach idx {0 1 3 4 6 7 8 9 10 11 13 14} tag {CCConfigure CCConfigRelay CCRetrieve  CCInbox  CCSend  CCResign  CCClaimDraw CCOfferDraw CCAcceptDraw CCGamePage  CCNewMailGame CCMailMove } {
+		foreach idx {0 1 3 4 6 7 8 9 10 11 13 14 16} tag {CCConfigure CCConfigRelay CCRetrieve  CCInbox  CCSend  CCResign  CCClaimDraw CCOfferDraw CCAcceptDraw CCGamePage  CCNewMailGame CCMailMove FileClose} {
 			configMenuText $m.correspondence $idx $tag $lang
 		}
 		foreach idx {0 } tag { CCEditCopy } {
@@ -1678,7 +1678,7 @@ namespace eval CorrespondenceChess {
 				set Title "Error"
 				append Error "$::CorrespondenceChess::Connector\n"
 				append Error [::tr CCErrDirNotUsable]
-				tk_messageBox -icon warning -type ok -parent . \
+				tk_messageBox -icon warning -type ok \
 					-title $Title -message $Error
 				return
 		} else {
@@ -1735,7 +1735,7 @@ namespace eval CorrespondenceChess {
 				set Title "Error"
 				append Error "$::CorrespondenceChess::Connector\n"
 				append Error [::tr CCErrDirNotUsable]
-				tk_messageBox -icon warning -type ok -parent . \
+				tk_messageBox -icon warning -type ok \
 					-title $Title -message $Error
 				return
 		} else {
@@ -1902,7 +1902,7 @@ namespace eval CorrespondenceChess {
 	#----------------------------------------------------------------------
 	# Generate the Correspondence Chess Window. This Window offers a
 	# console displaying whats going on and which game is displayed
-	# plus a gmae list containing current games synced in and their
+	# plus a game list containing current games synced in and their
 	# status. Xfcc offers quite some information here whereas eMail
 	# relies mostly on the user.
 	# Additionally this window contains the buttons for easy navigation
@@ -1912,6 +1912,7 @@ namespace eval CorrespondenceChess {
 		global scidDataDir helpMessage
 
 		set w .ccWindow
+
 		if {[winfo exists $w]} {
 			raiseWin $w
 			return
@@ -1926,10 +1927,10 @@ namespace eval CorrespondenceChess {
 
 		# enable the standard shortcuts
 		standardShortcuts $w
+		bind $w <Control-q> "destroy $w"
 
 		::CorrespondenceChess::EnableEngineAnalysis 0
 
-		# create the menu and add default CC menu items here as well
 		menu $w.menu
 		set m $w.menu
 		$w configure -menu $m
@@ -1939,6 +1940,7 @@ namespace eval CorrespondenceChess {
 		foreach i {correspondence edit} {
 			menu $w.menu.$i -tearoff 0
 		}
+		$w.menu add command -label Help -command "helpWindow Correspondence"
 
 		$m.correspondence add command -label CCConfigure   -command "::CorrespondenceChess::config $w"
 		set helpMessage($m.correspondence,0) CCConfigure
@@ -1970,6 +1972,8 @@ namespace eval CorrespondenceChess {
 		set helpMessage($m.correspondence,13) CCNewMailGame
 		$m.correspondence add command -label CCMailMove    -command {::CorrespondenceChess::eMailMove}
 		set helpMessage($m.correspondence,14) CCMailMove
+		$m.correspondence add separator
+		$m.correspondence add command -label FileClose     -command "destroy $w"
 
 		$m.edit add command -label CCEditCopy -accelerator "Ctrl+C" -command { ::CorrespondenceChess::List2Clipboard }
 
@@ -2705,7 +2709,7 @@ namespace eval CorrespondenceChess {
 				set Error [::tr CCErrInboxDir]
 				append Error "\n   $Inbox\n"
 				append Error [::tr CCErrDirNotUsable]
-				tk_messageBox -icon warning -type ok -parent . \
+				tk_messageBox -icon warning -type ok \
 					-title $Title -message $Error
 				return
 			}
@@ -2714,7 +2718,7 @@ namespace eval CorrespondenceChess {
 				set Error [::tr CCErrOutboxDir]
 				append Error "\n   $Outbox\n"
 				append Error [::tr CCErrDirNotUsable]
-				tk_messageBox -icon warning -type ok -parent . \
+				tk_messageBox -icon warning -type ok \
 					-title $Title -message $Error
 				return
 			}
@@ -2731,7 +2735,7 @@ namespace eval CorrespondenceChess {
 			if {$CorrSlot < 0} {
 				set Title [::tr CCDlgTitNoCCDB]
 				set Error [::tr CCErrNoCCDB]
-				tk_messageBox -icon warning -type ok -parent . \
+				tk_messageBox -icon warning -type ok \
 					-title $Title -message $Error
 			}
 		}
@@ -2748,7 +2752,7 @@ namespace eval CorrespondenceChess {
 
 		if {[catch {::file::Open $fName} result]} {
 			set err 1
-			tk_messageBox -icon warning -type ok -parent . \
+			tk_messageBox -icon warning -type ok \
 				-title "Scid: Error opening file" -message $result
 		} else {
 			if {[file extension $fName] == ".si3"} {
@@ -2857,7 +2861,7 @@ namespace eval CorrespondenceChess {
 			if {($plyEnd-$plyStart < 2) && ($Mode == "XFCC") && ($result == "*")} {
 				set Title [::tr CCDlgDBGameToLong]
 				set Error [::tr CCDlgDBGameToLongError]
-				tk_messageBox -icon warning -type ok -parent . \
+				tk_messageBox -icon warning -type ok \
 					-title $Title -message "$Error $mnClip (= ply $plyEnd)"
 			}
 
@@ -2969,7 +2973,7 @@ namespace eval CorrespondenceChess {
 			}
 			set Title [::tr CCDlgDuplicateGame]
 			set Error [::tr CCDlgDuplicateGameError]
-			tk_messageBox -icon warning -type ok -parent . \
+			tk_messageBox -icon warning -type ok \
 				-title $Title -message $Error
 		}
 	}
@@ -3612,7 +3616,7 @@ namespace eval CorrespondenceChess {
 				set Error [::tr CCErrInboxDir]
 				append Error "\n   $Inbox\n"
 				append Error [::tr CCErrNoGames]
-				tk_messageBox -icon warning -type ok -parent . \
+				tk_messageBox -icon warning -type ok \
 					-title $Title -message $Error
 			}
 		}
@@ -3919,8 +3923,7 @@ namespace eval CorrespondenceChess {
 
 		if {[regexp -nocase ^(https://)(.*) $uri]} {
 			if {[catch {package require tls}]} {
-				# Should we announce Failure in the GUI, as the error dialog will be shown elsewhere
-				# tk_messageBox -title "Xfcc Oops" -type ok -icon warning -message $NoHTTPS
+				tk_messageBox -title "Xfcc Oops" -type ok -icon warning -message $::CorrespondenceChess::NoHTTPS
 				return 0
 			} else {
 				::tls::init -ssl3 false -ssl2 false -tls1 true
@@ -3934,8 +3937,9 @@ namespace eval CorrespondenceChess {
 	}
 
 
-	#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-	# source the options file to overwrite the above setup
+	### All this is run on Scid init
+
+	# Source the options file to overwrite the above setup
 
 	set scidConfigFiles(correspondence) "correspondence.dat"
 	if {[catch {source [scidConfigFile correspondence]} ]} {
