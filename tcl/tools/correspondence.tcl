@@ -1637,15 +1637,14 @@ namespace eval CorrespondenceChess {
 
 		set m .ccWindow.menu
 
-		foreach idx {0 1} tag {CorrespondenceChess Edit} {
+		foreach idx {0 1 2} tag {CorrespondenceChess Edit HelpContents} {
 			configMenuText $m $idx $tag $lang
 		}
 		foreach idx {0 1 3 4 6 7 8 9 10 11 13 14 16} tag {CCConfigure CCConfigRelay CCRetrieve  CCInbox  CCSend  CCResign  CCClaimDraw CCOfferDraw CCAcceptDraw CCGamePage  CCNewMailGame CCMailMove FileClose} {
 			configMenuText $m.correspondence $idx $tag $lang
 		}
-		foreach idx {0 } tag { CCEditCopy } {
-			configMenuText $m.edit $idx $tag $lang
-		}
+		configMenuText $m.edit 0 CCEditCopy $lang
+		configMenuText $m.help 0 HelpContents $lang
 	}
 
 	#----------------------------------------------------------------------
@@ -1935,16 +1934,17 @@ namespace eval CorrespondenceChess {
 		set m $w.menu
 		$w configure -menu $m
 
-		$w.menu add cascade -label CorrespondenceChess -menu $w.menu.correspondence
-		$w.menu add cascade -label Edit                -menu $w.menu.edit
-		foreach i {correspondence edit} {
-			menu $w.menu.$i -tearoff 0
-		}
-		$w.menu add command -label Help -command "helpWindow Correspondence"
+		$m add cascade -label CorrespondenceChess -menu $m.correspondence
+		$m add cascade -label Edit                -menu $m.edit
+		$m add cascade -label HelpContents        -menu $m.help
+
+		menu $m.correspondence -tearoff 0
+		menu $m.edit -tearoff 0
+		menu $m.help -tearoff 0
 
 		$m.correspondence add command -label CCConfigure   -command "::CorrespondenceChess::config $w"
 		set helpMessage($m.correspondence,0) CCConfigure
-		$m.correspondence add command -label CCConfigRelay -command {::CorrespondenceChess::ConfigureRelay}
+		$m.correspondence add command -label CCConfigRelay -command ::CorrespondenceChess::ConfigureRelay
 		set helpMessage($m.correspondence,1) CCConfigRelay
 
 		$m.correspondence add separator
@@ -1976,6 +1976,7 @@ namespace eval CorrespondenceChess {
 		$m.correspondence add command -label FileClose     -command "destroy $w"
 
 		$m.edit add command -label CCEditCopy -accelerator "Ctrl+C" -command { ::CorrespondenceChess::List2Clipboard }
+		$m.help add command -label HelpContents -command "helpWindow Correspondence"
 
 		# Translate the menu
 		::CorrespondenceChess::doConfigMenus
