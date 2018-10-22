@@ -20,7 +20,10 @@ and then discard scidvspc-gregor)
 
 S.A.
 
---- Makefile.conf	(revision 2876)
+
+Index: Makefile.conf
+===================================================================
+--- Makefile.conf	(revision 2901)
 +++ Makefile.conf	(working copy)
 @@ -215,6 +215,24 @@
    src/spellchk.o src/stored.o src/stralloc.o src/textbuf.o src/tree.o
@@ -96,7 +99,7 @@ S.A.
  src/zlib/%.o: src/zlib/%.c
 Index: Makefile.conf.darwin
 ===================================================================
---- Makefile.conf.darwin	(revision 2876)
+--- Makefile.conf.darwin	(revision 2901)
 +++ Makefile.conf.darwin	(working copy)
 @@ -213,6 +213,24 @@
    src/optable.o src/pgnparse.o src/pbook.o src/position.o src/probe.o \
@@ -172,7 +175,7 @@ Index: Makefile.conf.darwin
  src/zlib/%.o: src/zlib/%.c
 Index: Makefile.mingw
 ===================================================================
---- Makefile.mingw	(revision 2891)
+--- Makefile.mingw	(revision 2901)
 +++ Makefile.mingw	(working copy)
 @@ -53,6 +53,23 @@
  STRIP=$(CROSS)strip
@@ -242,7 +245,7 @@ Index: Makefile.mingw
  
 Index: src/tkscid.cpp
 ===================================================================
---- src/tkscid.cpp	(revision 2876)
+--- src/tkscid.cpp	(revision 2901)
 +++ src/tkscid.cpp	(working copy)
 @@ -72,6 +72,8 @@
  
@@ -69292,7 +69295,7 @@ Index: src/tktext/tkTextDisp.c
 ===================================================================
 --- src/tktext/tkTextDisp.c	(revision 0)
 +++ src/tktext/tkTextDisp.c	(working copy)
-@@ -0,0 +1,14993 @@
+@@ -0,0 +1,15010 @@
 +/*
 + * tkTextDisp.c --
 + *
@@ -69303,7 +69306,7 @@ Index: src/tktext/tkTextDisp.c
 + *
 + * Copyright (c) 1992-1994 The Regents of the University of California.
 + * Copyright (c) 1994-1997 Sun Microsystems, Inc.
-+ * Copyright (c) 2015-2017 Gregor Cramer
++ * Copyright (c) 2015-2018 Gregor Cramer
 + *
 + * See the file "license.terms" for information on usage and redistribution of
 + * this file, and for a DISCLAIMER OF ALL WARRANTIES.
@@ -69335,7 +69338,7 @@ Index: src/tktext/tkTextDisp.c
 +# ifndef DEF_TEXT_INACTIVE_SELECT_COLOR_DISABLED
 +#  define DEF_TEXT_INACTIVE_SELECT_COLOR_DISABLED "1"
 +# endif
-+#else /* for partability to 8.5/6 */
++#else /* for portability to 8.5/6 */
 +# ifndef DEF_TEXT_INACTIVE_SELECT_COLOR_DISABLED
 +#  define DEF_TEXT_INACTIVE_SELECT_COLOR_DISABLED "0"
 +# endif
@@ -71392,11 +71395,11 @@ Index: src/tktext/tkTextDisp.c
 +		     * the focus.
 +		     */
 +		    || (textPtr->selAttrs.inactiveBorder
-+		    /*
-+		     * Don't show inactive selection in readonly widgets.
-+		     */
-+		    && !(textPtr->state != TK_TEXT_STATE_NORMAL
-+			&& *DEF_TEXT_INACTIVE_SELECT_COLOR_DISABLED == '1')))) {
++			/*
++			 * Don't show inactive selection in readonly widgets.
++			 */
++			&& (textPtr->state == TK_TEXT_STATE_NORMAL
++			    || *DEF_TEXT_INACTIVE_SELECT_COLOR_DISABLED == '0')))) {
 +	    borderPrio = FillStyle(tagPtr, &styleValues, haveFocus, containsSelection);
 +
 +	    if (borderPrio == -1) {
@@ -71720,6 +71723,7 @@ Index: src/tktext/tkTextDisp.c
 +LayoutGetNextSegment(
 +    TkTextSegment *segPtr)
 +{
++    assert(segPtr);
 +    while ((segPtr = segPtr->nextPtr)) {
 +	if (segPtr->typePtr == &tkTextCharType) {
 +	    return segPtr;
@@ -71735,6 +71739,7 @@ Index: src/tktext/tkTextDisp.c
 +LayoutGetNextCharChunk(
 +    TkTextDispChunk *chunkPtr)
 +{
++    assert(chunkPtr);
 +    while ((chunkPtr = chunkPtr->nextPtr)) {
 +	switch (chunkPtr->layoutProcs->type) {
 +	case TEXT_DISP_CHAR:	return chunkPtr;
@@ -72595,6 +72600,7 @@ Index: src/tktext/tkTextDisp.c
 +    TkTextSegment *segPtr,
 +    int offset)
 +{
++    assert(segPtr);
 +    if (offset < segPtr->size) {
 +	return false;
 +    }
@@ -78192,7 +78198,7 @@ Index: src/tktext/tkTextDisp.c
 +		dlPtr->oldY = dlPtr->y;
 +		dlPtr->flags &= ~(NEW_LAYOUT | OLD_Y_INVALID);
 +#ifdef MAC_OSX_TK
-+	    } else if (dInfoPtr->countWindows > 0 && dlPtr->chunkPtr != NULL) {
++	    } else if (dInfoPtr->countWindows > 0 && dlPtr->chunkPtr) {
 +		/*
 +		 * On macOS we need to redisplay all embedded windows which
 +		 * were moved by the call to TkScrollWindows above.  This is
@@ -81292,6 +81298,8 @@ Index: src/tktext/tkTextDisp.c
 +FindNextTagInfoChunk(
 +    TkTextDispChunk *chunkPtr)
 +{
++    assert(chunkPtr);
++
 +    for ( ; chunkPtr->nextPtr; chunkPtr = chunkPtr->nextPtr) {
 +	switch (chunkPtr->layoutProcs->type) {
 +	case TEXT_DISP_CHAR:   /* fallthru */
@@ -82176,7 +82184,11 @@ Index: src/tktext/tkTextDisp.c
 +	    for (chPtr = nextChunkPtr; chPtr; chPtr = chPtr->nextPtr) {
 +		width += chPtr->width;
 +	    }
-+	    desired = MIN(tabX, data->maxX) - width/2;
++	    if (data->maxX >= 0) {
++		desired = MIN(tabX, data->maxX) - width/2;
++	    } else {
++		desired = tabX - width/2;
++	    }
 +	    break;
 +
 +	case RIGHT:
@@ -82189,7 +82201,11 @@ Index: src/tktext/tkTextDisp.c
 +	    for (chPtr = nextChunkPtr; chPtr; chPtr = chPtr->nextPtr) {
 +		width += chPtr->width;
 +	    }
-+	    desired = MIN(tabX, data->maxX - data->tabOverhang) - width;
++	    if (data->maxX - data->tabOverhang >= 0) {
++		desired = MIN(tabX, data->maxX - data->tabOverhang) - width;
++	    } else {
++		desired = tabX - width;
++	    }
 +	    break;
 +
 +	case NUMERIC:
@@ -82201,7 +82217,11 @@ Index: src/tktext/tkTextDisp.c
 +	    for (chPtr = nextChunkPtr; chPtr && !chPtr->integralPart; chPtr = chPtr->nextPtr) {
 +		width += chPtr->width;
 +	    }
-+	    desired = MIN(tabX, data->maxX - data->tabOverhang) - width;
++	    if (data->maxX - data->tabOverhang >= 0) {
++		desired = MIN(tabX, data->maxX - data->tabOverhang) - width;
++	    } else {
++		desired = data->maxX - data->tabOverhang - width;
++	    }
 +	    data->tabApplied = false;
 +	    break;
 +	}
