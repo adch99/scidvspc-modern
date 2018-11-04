@@ -7615,29 +7615,30 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
       }
       Tcl_AppendResult (ti, "</run>", NULL);
     }
-    Tcl_AppendResult (ti, "\t", NULL);
-
-    if (showMaterialValue == 0) {
-        uint mWhite = db->game->GetCurrentPos()->MaterialValue (WHITE);
-        uint mBlack = db->game->GetCurrentPos()->MaterialValue (BLACK);
-        sprintf (temp, "   %s: %u-%u", translate (ti, "Material"), mWhite, mBlack);
-        Tcl_AppendResult (ti, temp, NULL);
-        if (mWhite > mBlack) {
-            sprintf (temp, ":+%u", mWhite - mBlack);
-            Tcl_AppendResult (ti, temp, NULL);
-        } else if (mBlack > mWhite) {
-            sprintf (temp, ":-%u", mBlack - mWhite);
-            Tcl_AppendResult (ti, temp, NULL);
-        }
-	Tcl_AppendResult (ti, "\t", NULL);
-    }
+    Tcl_AppendResult (ti, "\t\t", NULL);
 
     /*** Length ***/
     if (hideNextMove) {
         // sprintf (temp, "(%s: %s)", translate (ti, "Result"), translate (ti, "hidden"));
     } else {
-      sprintf (temp, "\t\t%s: %u   ", translate (ti, "Length"), (db->game->GetNumHalfMoves() + 1) / 2);
+      sprintf (temp, "%s: %-5u   ", translate (ti, "Length"), (db->game->GetNumHalfMoves() + 1) / 2);
       Tcl_AppendResult (ti, temp, NULL);
+    }
+
+    /*** Material ***/
+    if (showMaterialValue == 0) {
+        uint mWhite = db->game->GetCurrentPos()->MaterialValue (WHITE);
+        uint mBlack = db->game->GetCurrentPos()->MaterialValue (BLACK);
+        sprintf (temp, "%s: ", translate (ti, "Material"));
+        Tcl_AppendResult (ti, temp, NULL);
+        if (mWhite > mBlack) {
+            sprintf (temp, "+%-2u", mWhite - mBlack);
+        } else if (mBlack > mWhite) {
+            sprintf (temp, "-%-2u", mBlack - mWhite);
+        } else {
+            sprintf (temp, "%-3u", 0);
+        }
+        Tcl_AppendResult (ti, temp, NULL);
     }
 
     /*** Comment ***/
