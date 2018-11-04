@@ -971,7 +971,7 @@ proc updateGameinfo {} {
   .main.gameInfo configure -state normal
   .main.gameInfo delete 0.0 end
   ::htext::display .main.gameInfo [sc_game info -hide $gameInfo(hideNextMove) \
-      -material $gameInfo(showMaterial) \
+      -material 0 \
       -cfull $gameInfo(fullComment) \
       -fen $gameInfo(showFEN) -tb $gameInfo(showTB)]
   if {$gameInfo(wrap)} {
