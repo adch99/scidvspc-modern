@@ -490,6 +490,15 @@ proc setupBoard {} {
   # We now use ::board for the Setup board 
   # We probably change selectedSq (etc) from a global to something board specific
   ::board::new $sbd $setupboardSize 0
+
+  # Show double coords if main board has them
+  if {$::boardCoords == 2} {
+    set ::board::_coords($sbd) 2
+  } else {
+    set ::board::_coords($sbd) 1
+  }
+  ::board::coords $sbd
+
   if { [::board::isFlipped .main.board] } {
      ::board::flip $sbd
   }
@@ -510,7 +519,6 @@ proc setupBoard {} {
   }
 
   pack $sbd -padx 10 -pady 10
-  pack $sbd.bd
 
   for {set i 0} {$i < 64} {incr i} {
     $sbd.bd bind p$i <ButtonPress-1> "set ::selectedSq $i ; ::board::setDragSquare $sbd $i"
@@ -647,10 +655,19 @@ proc setupBoard {} {
       "RNBQKBNRPPPPPPPP................................pppppppprnbqkbnr"
     setBoard .setup.l.bd $setupBd $setupboardSize
     set castling KQkq
+    set pawnNum 0
+    set moveNum 1
     makeSetupFen
   } -width 10
 
- # Are these bullet-proof and correct ? 
+  button $sr.b.flip -text [lindex [tr FlipBoard] 0] -command {
+    makeSetupFen
+    ::board::flip .setup.l.bd
+    ::board::update .setup.l.bd $setupBd
+  } -width 10
+
+  # Are these bullet-proof and correct ? 
+  # but make them a little smaller, as they are hardly used
 
   button $sr.b.swap -text {Swap Colours} -command {
     set tmp {}
@@ -674,7 +691,7 @@ proc setupBoard {} {
     }
 
     makeSetupFen
-  } -width 10
+  } -width 10 -font font_Small
 
   button $sr.b.invert -text Invert -command {
     # reverse line order
@@ -688,7 +705,7 @@ proc setupBoard {} {
     }
     setBoard .setup.l.bd $setupBd $setupboardSize
     makeSetupFen
-  } -width 10
+  } -width 10 -font font_Small
 
   button $sr.b.transpose -text Transpose -command {
     # reverse each line
@@ -702,15 +719,16 @@ proc setupBoard {} {
     }
     setBoard .setup.l.bd $setupBd $setupboardSize
     makeSetupFen
-  } -width 10
+  } -width 10 -font font_Small
 
   pack $sr.b		-side top -pady 10
   pack $sr.b.clear	-side top -padx 5 -pady 2
   pack $sr.b.initial	-side top -padx 5 -pady 2
+  pack $sr.b.flip	-side top -padx 5 -pady 2
   pack [frame $sr.b.space -height 10] -side top
-  pack $sr.b.swap	-side top -padx 5 -pady 2
-  pack $sr.b.invert	-side top -padx 5 -pady 2
-  pack $sr.b.transpose	-side top -padx 5 -pady 2
+  pack $sr.b.swap	-side top -padx 5 -pady 1
+  pack $sr.b.invert	-side top -padx 5 -pady 1
+  pack $sr.b.transpose	-side top -padx 5 -pady 1
 
   ### Buttons: Setup and Cancel.
 
