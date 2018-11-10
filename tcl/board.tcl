@@ -2469,7 +2469,7 @@ proc ::board::stm {w} {
 }
 
 # Display/update coordinates around the edge of the board 
-# Currently only used by .main.board (i think)
+# Currently only used by .main.board and setupBoard
 # Values are 0 (none), 1 (single sided coords), 2 (double sided)
 
 proc ::board::coords {w} {
