@@ -4934,8 +4934,10 @@ sc_eco_summary (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                 dstr->AddChar (ch);
                 break;
             case ']':
+                // Fulvio's bugfix for
+                // https://sourceforge.net/p/scid/bugs/63/
                 dstr->AddChar (ch);
-                dstr->Append ("<blue><run importMoveListTrans {");
+                dstr->Append ("<blue><run importMoveList {");
                 inMoveList = true;
                 temp->Clear();
                 break;
@@ -4961,7 +4963,6 @@ sc_eco_summary (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 }
 
 //    Find ECO entries matching a case-sensitive string.
-//    in plain text or color (Scid hypertext) format.
 
 int
 sc_eco_find (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
@@ -4972,6 +4973,7 @@ sc_eco_find (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     if (!ecoBook) { return TCL_OK; }
 
     bool color = 0;
+    // Currently only color output is used (tcl/windows/eco.tcl, sc_eco find, argc == 4) S.A.
     if (argc == 4) { color = strGetBoolean (argv[3]); }
 
     DString * dstr = new DString;
@@ -4993,7 +4995,7 @@ sc_eco_find (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                 break;
             case ']':
                 dstr->AddChar (ch);
-                dstr->Append ("<blue><run importMoveListTrans {");
+                dstr->Append ("<blue><run importMoveList {");
                 inMoveList = true;
                 temp->Clear();
                 break;
