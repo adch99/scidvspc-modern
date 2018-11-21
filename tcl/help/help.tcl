@@ -466,6 +466,7 @@ append helpText(Index) {
   <ul>
   <li><a TB>Tablebases</a></li>
   <li>Finding extra PGN <a Maintenance Tags>Tags</a>
+  <li><a Options Themes>Themes</a></li>
   <li><a Crosstable tiebreak>Tie-Breaks</a></li>
   <li><a Graphs Score>Time Graph</a></li>
   <li>The <a MainWindow Toolbar>Toolbar</a></li>
@@ -3983,7 +3984,28 @@ set helpText(Options) {<h1>Options and Preferences</h1>
   <p>
   The <b>Fixed</b> font is used by the <a Tree>Tree</a> and <a Crosstable>Crosstable</a> windows, and requires a fixed-width font to make text allign nicely.
   </p>
-  <p><footer>Updated: Scid vs. PC 4.19 Jan 2018</footer></p>
+  <h3><name Themes>Themes</name></h3>
+  <p>
+Tk has a feature known as "themes" (or "Themed Tk - ttk), which allow for
+custom graphics and colours for some specific GUI elements (or widgets).
+Tk comes with a few themes installed by default, and these can be
+selected in <b>Options-<gt>Themes</b>. 
+</p><p>Installing extra themes can be tricky - and most custom themes are not terribly mature/complete.
+ScidvsPC does not make extensive use of the themes features, prefering instead the 
+mature (though boring) default Tk widgets.
+  </p>
+<p>
+Basic installation is of the form:
+<ul>
+    <li>Copy the theme to one of Tk library directories (eg /usr/lib/tk8.6).</li>
+    <li>(or) source myThemes.tcl</li>
+    <li>package require ttk::theme::MyTheme</li>
+    <li>ttk::style theme use MyTheme</li>
+</ul>
+These instructions can be included into Scid's GUI, or issued in ScidvsPC's startup window command line.
+  </p>
+
+  <p><footer>Updated: Scid vs. PC 4.20 Nov 2018</footer></p>
 }
 
 set helpTitle(NAGs) "NAG values"
