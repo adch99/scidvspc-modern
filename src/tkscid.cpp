@@ -9008,9 +9008,16 @@ sc_game_values (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
 	    sscanf (comment + offset + strlen(type), "%s ", buffer2);
             
-            // needs a terminating ']' (which we remove)
-            if (buffer2[strlen(buffer2)-1] == ']') {
-              buffer2[strlen(buffer2)-1] = 0;
+            // find the text upto the terminating ']'
+            int found = 0, i = 0 ;
+            while (buffer2[i++]) {
+              if (buffer2[i] == ']') {
+                found = 1;
+                break;
+              }
+            }
+            if (found) {
+              buffer2[i] = 0;
 	      Tcl_AppendElement (ti, buffer);
 	      Tcl_AppendElement (ti, buffer2);
             }

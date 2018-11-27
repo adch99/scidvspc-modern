@@ -647,13 +647,21 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
       set maxLines $maxWhite
     }
 
-    if {$type == "Score Combo" && [llength $scoreValues] < 5} {
-      # Scale to emt yaxis , as no Scores
-      # ... or we *could* use a "total time" scale if we recalculate yticks, hlines
-      set scale [expr $maxEmt / $maxLines]
-    } else {
-      set scale [expr $max / $maxLines]
+    catch {
+	if {$type == "Score Combo" && [llength $scoreValues] < 5} {
+	  # Scale to emt yaxis , as no Scores
+	  # ... or we *could* use a "total time" scale if we recalculate yticks, hlines
+	  set scale [expr $maxEmt / $maxLines]
+	} else {
+	  set scale [expr $max / $maxLines]
+	}
     }
+    # On engine tournaments, all emt may be 0.0
+    # Also handle above possible (?) divide by zero
+    if { $maxLines <= 0 || ![info exists scale]} {
+      set scale 0
+    }
+
     set scaledWhiteValues {}
     set scaledBlackValues {}
     foreach {i j} $whiteValues {
