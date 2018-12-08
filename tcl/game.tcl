@@ -265,6 +265,7 @@ proc ::game::Save {} {
     if {$n == 0} {
       # add new game to history
       ::bookmarks::AddCurrentGame
+      updateMenuStates
     }
 }
 
