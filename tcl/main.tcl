@@ -1822,7 +1822,7 @@ proc cancelAutoplay {} {
   if {$annotate(Engine) > -1} {
     if {[winfo exists .analysisWin$annotate(Engine).b.startStop]} {
       set n $annotate(Engine)
-      set disableButtons {startStop move line alllines exclude lockengine alllines training finishGame}
+      set disableButtons {startStop move line alllines exclude lockengine alllines training finishGame multipv}
       foreach b $disableButtons {
         .analysisWin$n.b.$b configure -state normal
       }
