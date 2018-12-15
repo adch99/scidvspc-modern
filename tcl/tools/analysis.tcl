@@ -1217,7 +1217,7 @@ proc okAnnotation {n} {
     }
   }
   if {$autoplayMode == 0} { toggleAutoplay }
-  set disableButtons {startStop move line alllines exclude lockengine alllines training finishGame}
+  set disableButtons {startStop move line alllines exclude lockengine alllines training finishGame multipv}
   foreach b $disableButtons {
     .analysisWin$n.b.$b configure -state disabled
   }
@@ -3173,7 +3173,7 @@ proc toggleFinishGame {n} {
   }
 
   set ::finishGameMode [expr ! $::finishGameMode]
-  set disableButtons {startStop move line alllines exclude lockengine alllines training annotatebut}
+  set disableButtons {startStop move line alllines exclude lockengine alllines training annotatebut multipv}
 
   if {$::finishGameMode} {
     if {! $analysis(analyzeMode$n)} { toggleEngineAnalysis $n }
