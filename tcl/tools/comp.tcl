@@ -33,7 +33,7 @@ proc compInit {} {
   wm title $w "Configure Tournament"
   setWinLocation $w
 
-  pack [frame $w.engines] -side top
+  pack [frame $w.engines -borderwidth 2 -relief ridge] -side left -expand yes -fill both
   addHorizontalRule $w
   pack [frame $w.config] -fill x -expand 1
   addHorizontalRule $w
@@ -41,11 +41,11 @@ proc compInit {} {
 
   ### Engines
 
-  pack [frame $w.engines.top] -side top -expand 1 -fill x -pady 5
-  grid [label $w.engines.top.label -text "Number of Engines"] -row 0 -column 0 -sticky w
+  grid [frame $w.engines.top] -row 0 -column 0 -pady 5 -sticky n
+  grid [label $w.engines.top.label -text "Number of Engines"] -row 0 -column 0
   grid [spinbox $w.engines.top.count -textvariable comp(count) -from 2 -to [llength $engines(list)] -width 4 -highlightthickness 0] -row 0 -column 1  -padx 15
   dialogbutton $w.engines.top.update -text $::tr(Update) -command drawCombos
-  grid $w.engines.top.update -row 0 -column 2 -sticky e
+  grid $w.engines.top.update -row 0 -column 2 
 
   set comp(countcombos) $comp(count)
   drawCombos
@@ -285,7 +285,7 @@ proc compOk {} {
   } 
 
   for {set i 0} {$i < $comp(count)} {incr i} {
-    set j [$w.engines.list.$i.combo current]
+    set j [$w.engines.$i.combo current]
     lappend comp(players) $j
     lappend players $j
     lappend names   [lindex [lindex $engines(list) $j] 0]
@@ -307,8 +307,8 @@ proc compOk {} {
   ### Reconfigure init widget for pausing
 
   for {set i 0} {$i < $comp(count)} {incr i} {
-    $w.engines.list.$i.combo configure -state disabled ; # disable widgets too
-    $w.engines.list.$i.configure configure -state disabled 
+    $w.engines.$i.combo configure -state disabled ; # disable widgets too
+    $w.engines.$i.configure configure -state disabled 
   }
   foreach j {.comp.config .comp.engines .comp.engines.top .comp.config.control .comp.config.timesecs .comp.config.timegame .comp.config.book} {
     foreach i [winfo children $j] {
@@ -375,9 +375,14 @@ proc compOk {} {
   set num_games [llength $comp(games)]
   puts "$num_games GAMES total: $comp(games)"
 
-  ttk::progressbar $w.progress -mode determinate \
-    -maximum $num_games -variable comp(current)
+  ttk::progressbar $w.progress -mode determinate -maximum $num_games -variable comp(current)
   pack $w.progress -side bottom -fill x -padx 10 -pady 5
+  if {"$comp(name)" != ""} {
+    label $w.statusbar -text "$comp(name): $num_games games"
+  } else {
+    label $w.statusbar -text "$num_games games"
+  }
+  pack $w.statusbar -side bottom -fill x -pady 2
 
   ### Play games
 
@@ -392,7 +397,7 @@ proc compOk {} {
     if {$n != {} && $m != {}} {
       puts "Game [expr $comp(current) + 1]: $name1 vs. $name2"
       incr comp(current)
-      compNM $n $m $k
+      compNM $n $m $k $name1 $name2
     }
     set thisgame [lindex $comp(games) $comp(current)]
   } 
@@ -423,10 +428,11 @@ proc compOk {} {
   }
 }
 
-proc compNM {n m k} {
+proc compNM {n m k name1 name2} {
   global analysis comp ::uci::uciInfo
 
   set comp(result) {}
+  set comp(resultComment) {}
 
   if {$comp(timecontrol) == "pergame"} {
     set comp(wtime) [expr int($comp(base)*1000)]
@@ -775,7 +781,7 @@ proc compNM {n m k} {
 	    if {$comment > 0} {
               set comment +$comment
             }
-	    sc_pos setComment $comment
+	    sc_pos setComment "\[%eval $comment\]"
           }
         } else {
 	  sc_pos setComment "\[%ms $expired\]\[%eval $analysis(score$current_engine)\]"
@@ -803,15 +809,13 @@ proc compNM {n m k} {
       ### Check if game is over
 
       if {[sc_pos isInsufficient]} {
-	  sc_game tags set -result =
-	  sc_pos setComment {Scid: Insufficient Material}
+	  compResult {=} {Scid: Insufficient Material}
 	  break
       }
       if {[sc_pos moves] == {}} {
 	if {![sc_pos isCheck]} {
 	  ### stalemate
-	  sc_game tags set -result =
-	  sc_pos setComment [tr stalemate]
+	  compResult {=} [tr stalemate]
 	} else {
 	  ### checkmate
 	  if {[sc_pos side] == {black}} {
@@ -827,13 +831,11 @@ proc compNM {n m k} {
 	lappend comp(fen) $f
 	if {[llength [lsearch -all $comp(fen) $f]] > 2 || [lindex $fen 4] > 99} {
           if {[lindex $fen 4] > 99} {
-	    sc_pos setComment "50 move rule"
+	    compResult {=} "50 move rule"
           } else {
 	    # Could we use "sc_pos analyse" for 3 fold detection ?
-	    sc_pos setComment "3 fold repetition"
+	    compResult {=} "3 fold repetition"
           }
-	  sc_game tags set -result =
-	  ### draw
 	  break
 	} 
       }
@@ -844,8 +846,7 @@ proc compNM {n m k} {
 	if {$comp(timecontrol) == "pergame"} {
 	  set comp(btime) [expr $comp(btime) - $expired]
           if {$comp(btime) < 0} {
-            sc_game tags set -result 1
-	    sc_pos setComment {Black loses on time}
+	    compResult 1 {Black loses on time}
             break
           }
           # add time increment
@@ -859,8 +860,7 @@ proc compNM {n m k} {
           after [expr {$comp(wtime) + $comp(delta)}] compTimeout
         } else {
           if {$expired > $comp(permoveleeway)*$comp(time)} {
-            sc_game tags set -result 1
-	    sc_pos setComment "Blacks move takes $expired secs"
+	    compResult 1 "Blacks move takes $expired secs"
             break
           }
           # Automatically time-out comp in $movetime + 2 secs
@@ -873,8 +873,7 @@ proc compNM {n m k} {
 	if {$comp(timecontrol) == "pergame"} {
 	  set comp(wtime) [expr $comp(wtime) - $expired]
           if {$comp(wtime) < 0} {
-            sc_game tags set -result 0
-	    sc_pos setComment {White loses on time}
+	    compResult 0 {White loses on time}
             break
           }
           # add time increment
@@ -888,8 +887,7 @@ proc compNM {n m k} {
 	  after [expr {$comp(btime) + $comp(delta)}] compTimeout
         } else {
           if {$expired > $comp(permoveleeway)*$comp(time)} {
-            sc_game tags set -result 0
-	    sc_pos setComment "Whites move takes $expired secs"
+	    compResult 0 "Whites move takes $expired secs"
             break
           }
           # Automatically time-out comp in $movetime + 2 secs
@@ -929,12 +927,29 @@ proc compNM {n m k} {
 
   ### Save game
 
-  # Perhaps game has been adjudicated by user ?
+  # In case game has been adjudicated by user, set result here
   if {$comp(result) != {}} {
     sc_game tags set -result $comp(result)
   }
 
-  puts "Game $n - $m is over. Result [sc_game tags get Result]"
+  set result [sc_game tags get Result]
+  puts "Game $n - $m is over. Result $result"
+  switch $result {
+    1 { set tmp 1-0 }
+    0 { set tmp 0-1 }
+    = { set tmp Draw }
+    default { set tmp {} }
+  }
+
+  if {"$::comp(resultComment)" == ""} {
+    .comp.statusbar configure -text "$name1 v $name2 result: $tmp"
+  } else {
+    if {"$tmp" == ""} {
+      .comp.statusbar configure -text "$name1 v $name2 : $::comp(resultComment)"
+    } else {
+      .comp.statusbar configure -text "$name1 v $name2 : $::comp(resultComment), $tmp"
+    }
+  }
 
   if {$comp(timecontrol) == "pergame"} {
     set comment [sc_pos getComment]
@@ -956,6 +971,13 @@ proc compNM {n m k} {
   catch {destroy .analysisWin$n}
   catch {destroy .analysisWin$m}
   set comp(playing) 0
+}
+
+proc compResult {result comment} {
+  # Is set result necessary here ?
+  sc_game tags set -result $result
+  sc_pos setComment $comment
+  set ::comp(resultComment) $comment
 }
 
 proc makeCompMove {current_engine} {
@@ -1004,7 +1026,7 @@ proc drawCombos {} {
   }
 
   set w .comp
-  set l $w.engines.list
+  set l $w.engines
 
   if {[winfo exists $l]} {
     # Remember current players
@@ -1015,10 +1037,14 @@ proc drawCombos {} {
         lappend comp(players) [$l.$i.combo current]
       }
     }
-    destroy $l
+    foreach i [winfo children $l] {
+      if {"$i" != "$l.top"} {
+        destroy $i
+      }
+    }
   }
 
-  pack [frame $l] -side top -padx 5 -pady 2
+  # grid [frame $l] -col 0 -row $row -padx 5 -pady 2
 
   set values {}
 
@@ -1029,10 +1055,7 @@ proc drawCombos {} {
   for {set i 0} {$i < $comp(count)} {incr i} {
 
     frame $l.$i
-    # Only pack so many
-    if {$i < 12} {
-      pack $l.$i -side top
-    }
+    grid $l.$i -row [expr $i + 1] -column 0 -columnspan 3
 
     ttk::combobox  $l.$i.combo -width 20 -state readonly -values $values
 
@@ -1102,6 +1125,7 @@ proc compGameEnd {result {comment {Manual adjudication}}} {
     set comp(playing) 0
     set comp(result) $result
     sc_pos setComment $comment
+    set comp(resultComment) $comment
 
     set analysis(waitForReadyOk$comp(move)) 1
     set analysis(waitForBestMove$comp(move)) 1
@@ -1116,6 +1140,7 @@ proc compAbort {} {
     }
     set comp(playing) 0
     set comp(games) {}
+    set comp(resultComment) {Comp Aborted}
 
     catch {
       set analysis(waitForReadyOk$comp(move)) 1
@@ -1144,7 +1169,7 @@ proc compDestroy {} {
     # ttk::combobox seems to need destroying
     # for {set i 0} {$i < $comp(countcombos)} {incr i} {
     # must unbind .comp Destroy
-    # destroy  .comp.engines.list.$i
+    # destroy  .comp.engines.$i
     # }
 
     set comp(games) {}
