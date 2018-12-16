@@ -182,7 +182,7 @@ set comp(rounds) 2
 set comp(showclock) 0
 set comp(debug) 1 ; # print info to console
 set comp(animate) 1
-set comp(firstonly) 0
+set comp(type) Normal
 set comp(ponder) 0
 set comp(usebook) 0
 set comp(book) {}
