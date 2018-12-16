@@ -1081,22 +1081,6 @@ proc drawCombos {} {
   set w .comp
   set l $w.engines
 
-  if {[winfo exists $l]} {
-    # Remember current players
-    # ... before destroying widget (which is easiest)
-    set comp(players) {}
-    for {set i 0} {$i < $comp(count)} {incr i} {
-      catch {
-        lappend comp(players) [$l.$i.combo current]
-      }
-    }
-    foreach i [winfo children $l] {
-      if {"$i" != "$l.top"} {
-        destroy $i
-      }
-    }
-  }
-
   # grid [frame $l] -col 0 -row $row -padx 5 -pady 2
 
   set values {}
@@ -1106,6 +1090,10 @@ proc drawCombos {} {
   }
 
   for {set i 0} {$i < $comp(count)} {incr i} {
+
+    if {[winfo exists $l.$i]} {
+      continue
+    }
 
     frame $l.$i
     grid $l.$i -row [expr $i + 1] -column 0 -columnspan 3
@@ -1132,6 +1120,13 @@ proc drawCombos {} {
     }
 
   }
+
+  # destroy extra combos
+  while {[winfo exists $l.$i]} {
+    destroy $l.$i
+    incr i
+  }
+
   set comp(countcombos) $comp(count)
   update
 }
