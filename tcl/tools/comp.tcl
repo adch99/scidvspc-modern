@@ -4,16 +4,13 @@
 ### Copyright (C) 2010- Steven Atkinson
 
 # Credit to Fulvio for a few lines of UCI code that enabled me
-# to make this run nicely (without constantly reseting analysis),
-# and gave me impetus for a decent control structure using
-# semaphores/vwait instead of the often abused dig-deeper procedural flow 
-# sometimes evident in tcl programs.
+# to make this run nicely (without constantly reseting analysis).
+# Also thanks to Uwe for the Carousel scheduling feature.
 
 set comp(playing) 0
 set comp(current) 0
 set comp(games) {}
 set comp(count) 2 ; # number of computer players
-set comp(start) 0 ; # "Start at position" radiobutton
 set comp(delta) 2000; # 2 seconds is the time
 set comp(permoveleeway) 1.75 ;# 175% is the max allowed
 
@@ -138,13 +135,6 @@ proc compInit {} {
   grid $w.config.scorelabel -row $row -column 0 -sticky w -padx 5 
   grid $w.config.scorevalue -row $row -column 1 -padx 5 
 
-  incr row
-  label $w.config.firstonlylabel -text {First engine plays others}
-  checkbutton $w.config.firstonlyvalue -variable comp(firstonly) 
-
-  grid $w.config.firstonlylabel -row $row -column 0 -sticky w -padx 5 
-  grid $w.config.firstonlyvalue -row $row -column 1 -padx 5 
-
   ### Opening Book
 
   incr row
@@ -175,6 +165,27 @@ proc compInit {} {
   pack $w.config.book.label -side left -padx 10
   pack $w.config.book.combo $w.config.book.value -side right -padx 10
 
+  ### Scheduling / type
+
+  incr row
+  label $w.config.scheduling -text {Game Scheduling}
+  menubutton $w.config.type -textvar comp(type) -indicatoron 1 -relief raised \
+    -menu $w.config.type.m -width 18
+  menu $w.config.type.m -tearoff 0
+
+  $w.config.type.m delete 0 end
+  set i 0
+  foreach label {Normal Carousel {First plays others}} {
+    $w.config.type.m add radiobutton -label $label -value $i \
+      -command "set ::comp(type) \"$label\""
+    incr i
+  }
+
+  ###was checkbutton $w.config.firstonlyvalue -variable comp(firstonly) 
+
+  grid $w.config.scheduling -row $row -column 0 -sticky w -padx 5
+  grid $w.config.type -row $row -column 1 -sticky w -padx 5  -columnspan 2
+
   ### Start Position
 
   incr row
@@ -192,7 +203,6 @@ proc compInit {} {
       -command "set ::comp(startlabel) \"$label\""
     incr i
   }
-
 
   grid $w.config.startlabel -row $row -column 0 -sticky w -padx 5
   grid $w.config.start -row $row -column 1 -sticky w -padx 5  -columnspan 2
@@ -288,9 +298,9 @@ proc compOk {} {
     set j [$w.engines.$i.combo current]
     lappend comp(players) $j
     lappend players $j
-    lappend names   [lindex [lindex $engines(list) $j] 0]
+    lappend names [lindex [lindex $engines(list) $j] 0]
   }
-  if {$comp(firstonly)} {
+  if {$comp(type) == "First plays others"} {
     set comp(firstN) [lindex $players 0]
   }
 
@@ -355,6 +365,47 @@ proc compOk {} {
   
   ### Place games in cue
 
+  if {$comp(type) == "Carousel"} {
+
+    ### Uwe's Carousel/Rutschsystem scheduling, (C) Uwe Klimmek 2018
+
+    set gamesPerRound [expr int($comp(count)/2)]
+    set even [expr ($comp(count)+1) % 2]
+    set rounds [expr $comp(count) -1 ]
+    set last [expr $comp(count) -1 ]
+    set plist {}
+    set hlist {}
+    if {!$even} {
+      set last [expr $comp(count) - 2]
+      set rounds $comp(count)
+    }
+
+    for {set k 1} {$k <= $comp(rounds)} {incr k} {
+      for {set i 0} {$i < $comp(count)} {incr i} {
+	lappend plist $i
+      }
+      for {set l 1} {$l <= $rounds} {incr l} {
+	for {set i 0; set j $last } {$i < $gamesPerRound} {incr i; incr j -1 } {
+	  if { $even && [expr ($l-1) % 2] } {
+	    lappend comp(games) [list [lindex $comp(players) [lindex $plist $j]] [lindex $comp(players) [lindex $plist $i]] [lindex $names [lindex $plist $j]] [lindex $names [lindex $plist $i]] "$k.$l"]
+	    lappend hlist [list [lindex $comp(players) [lindex $plist $i]] [lindex $comp(players) [lindex $plist $j]] [lindex $names [lindex $plist $i]] [lindex $names [lindex $plist $j]] "[expr $k+1].$l"]
+	  } else {
+	    lappend comp(games) [list [lindex $comp(players) [lindex $plist $i]] [lindex $comp(players) [lindex $plist $j]] [lindex $names [lindex $plist $i]] [lindex $names [lindex $plist $j]] "$k.$l"]
+	    lappend hlist [list [lindex $comp(players) [lindex $plist $j]] [lindex $comp(players) [lindex $plist $i]] [lindex $names [lindex $plist $j]] [lindex $names [lindex $plist $i]] "[expr $k+1].$l"]
+	  }
+	}
+	set help [lindex $plist end];
+	set xlist [linsert $plist $even $help]
+	set plist [lreplace $xlist end end]
+      }
+      incr k
+      if { $k <= $comp(rounds) } {
+	append comp(games) " $hlist"
+	set hlist {}
+      }
+    }
+  } else {
+
   for {set i 0} {$i < $comp(count)} {incr i} {
     for {set j 0} {$j <= $i} {incr j} {
       if {$i != $j} {
@@ -366,12 +417,14 @@ proc compOk {} {
 	  }
 	}
       }
-      if {$comp(firstonly)} {break}
+      if {$comp(type) == "First plays others"} {
+        break
+      }
     }
   }
 
-  # This is no longer reliable because of comp(firstonly) option
-  # set num_games [expr {$comp(count) * ($comp(count)-1) * $comp(rounds) / 2}]
+  }
+
   set num_games [llength $comp(games)]
   puts "$num_games GAMES total: $comp(games)"
 
@@ -506,7 +559,7 @@ proc compNM {n m k name1 name2} {
   } else {
     sc_game tags set -date [::utils::date::today] -round $k -extra "{TimeControl \"$timecontrol/$comp(incr)\"}"
   }
-  if {$comp(firstonly)} {
+  if {$comp(type) == "First plays others"} {
     # Show games from first players view
     if {( $n == $comp(firstN) &&  [::board::isFlipped .main.board] ) || \
 	( $m == $comp(firstN) && ![::board::isFlipped .main.board] ) } {
