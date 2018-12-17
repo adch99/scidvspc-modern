@@ -186,7 +186,7 @@ set comp(type) Normal
 set comp(ponder) 0
 set comp(usebook) 0
 set comp(book) {}
-set comp(showscores) 0 ; # add engine scores as comments
+set comp(scoreType) No ; # add engine scores as comments
 set photosMinimized 0
 set bookmarks(gamehistory) {}
 set playerInfoHistory {}
