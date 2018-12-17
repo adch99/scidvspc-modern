@@ -136,7 +136,7 @@ namespace eval uci {
       # For a speed bump, ignore info lines if no display and playing a comp
       # Note - the "Add move" button requires parsing of these info lines
 
-      if {$comp(playing) && !$comp(showscores) && !$analysis(movesDisplay$n) } {
+      if {$comp(playing) && ($comp(scoreType) == "No") && !$analysis(movesDisplay$n) } {
          return
       }
 

@@ -130,10 +130,11 @@ proc compInit {} {
 
   incr row
   label $w.config.scorelabel -text {Engine Scores as Comments}
-  checkbutton $w.config.scorevalue -variable comp(showscores)
+  ttk::combobox $w.config.scorevalue -width 12 -textvariable comp(scoreType) \
+    -values {No {+1.5} {[% +1.5]} {[%eval +1.5]}}
 
-  grid $w.config.scorelabel -row $row -column 0 -sticky w -padx 5 
-  grid $w.config.scorevalue -row $row -column 1 -padx 5 
+  grid $w.config.scorelabel -row $row -column 0 -sticky w -padx 5
+  grid $w.config.scorevalue -row $row -column 1 -sticky e -padx 10
 
   ### Opening Book
 
@@ -162,7 +163,7 @@ proc compInit {} {
     $w.config.book.combo current $idx
   }
   grid $w.config.book -row $row -column 0 -columnspan 2 -sticky ew
-  pack $w.config.book.label -side left -padx 10
+  pack $w.config.book.label -side left -padx 5
   pack $w.config.book.combo $w.config.book.value -side right -padx 10
 
   ### Scheduling / type
@@ -827,20 +828,21 @@ proc compNM {n m k name1 name2} {
 
     if {[makeCompMove $current_engine]} {
       ### Store evaluation (and time)
-      if {$comp(showscores)} {
-        if {1} {
-	  set comment $analysis(score$current_engine)
-          if {$comment != 0} {
-	    if {$comment > 0} {
-              set comment +$comment
-            }
-	    sc_pos setComment "\[%eval $comment\]"
-          }
-        } else {
-	  sc_pos setComment "\[%ms $expired\]\[%eval $analysis(score$current_engine)\]"
-        }
-      }
 
+      if {$comp(scoreType) != "No"} {
+	set text $analysis(score$current_engine)
+	if {$text != 0} {
+	  if {$text > 0} {
+	    set text +$text
+	  }
+	  switch $comp(scoreType) {
+	    {[% +1.5]}     { set text "\[% $text\]" }
+	    {[%eval +1.5]} { set text "\[%eval $text\]" }
+	  }
+	  sc_pos setComment $text
+	}
+      }
+      # sc_pos setComment "\[%ms $expired\]\[%eval $analysis(score$current_engine)\]"
 
       ### Move success
 
