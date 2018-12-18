@@ -1034,7 +1034,8 @@ proc initAnnotation {n} {
 
   frame $w.scoreType
   label $w.scoreType.label -textvar ::tr(ScoreFormat)
-  ttk::combobox $w.scoreType.values -width 12 -textvariable annotate(scoreType) -values {{+1.5} {[% +1.5]} {[%eval +1.5]}}
+  ttk::combobox $w.scoreType.values -width 12 -textvariable annotate(scoreType) \
+    -state readonly  -values {{+1.5} {[% +1.5]} {[%eval +1.5]}}
 
   pack $w.scoreType -fill x
   pack $w.scoreType.label -side left -padx 10
@@ -1076,7 +1077,8 @@ proc initAnnotation {n} {
       incr i
   }
 
-  ttk::combobox $w.usebook.comboBooks -width 12 -values $tmp
+  # TODO: why isn't readonly working here ? checkState ?? S.A
+  ttk::combobox $w.usebook.comboBooks -width 12 -values $tmp -state readonly
   catch { $w.usebook.comboBooks current $idx }
 
   pack $w.usebook.cbBook -side left 

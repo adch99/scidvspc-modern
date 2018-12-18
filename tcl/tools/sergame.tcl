@@ -195,7 +195,7 @@ namespace eval sergame {
     checkbutton $w.fbook.cbUseBook -text $::tr(UseBook) -variable ::sergame::useBook
     set bookPath $::scidBooksDir
     set bookList [ lsort -dictionary [ glob -nocomplain -directory $bookPath *.bin ] ]
-    ttk::combobox $w.fbook.combo -width 12
+    ttk::combobox $w.fbook.combo -width 12 -state readonly
     if { [llength $bookList] == 0 } {
       $w.fbook.cbUseBook configure -state disabled
       set ::sergame::useBook 0
