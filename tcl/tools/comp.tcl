@@ -58,14 +58,14 @@ proc compInit {} {
   # after the three adjudication buttons have been packed
 
   grid $w.config.eventlabel -row $row -column 0 -sticky w -padx 5 -pady 2
-  grid $w.config.evententry -row $row -column 1 -sticky ew -padx 5 -pady 2
+  grid $w.config.evententry -row $row -column 1 -sticky ew -padx 8 -pady 2
 
   incr row
   label $w.config.roundslabel -text {Number of Rounds}
   spinbox $w.config.roundsvalue -textvariable comp(rounds) -from 1 -to 10 -width 9
 
   grid $w.config.roundslabel -row $row -column 0 -sticky w -padx 5 -pady 2
-  grid $w.config.roundsvalue -row $row -column 1 -sticky ew -padx 5 -pady 2
+  grid $w.config.roundsvalue -row $row -column 1 -sticky ew -padx 8 -pady 2
 
   incr row
   frame $w.config.control
@@ -131,10 +131,10 @@ proc compInit {} {
   incr row
   label $w.config.scorelabel -text {Engine Scores as Comments}
   ttk::combobox $w.config.scorevalue -width 12 -textvariable comp(scoreType) \
-    -values {No {+1.5} {[% +1.5]} {[%eval +1.5]}}
+    -state readonly -values {No {+1.5} {[% +1.5]} {[%eval +1.5]}}
 
   grid $w.config.scorelabel -row $row -column 0 -sticky w -padx 5
-  grid $w.config.scorevalue -row $row -column 1 -sticky e -padx 10
+  grid $w.config.scorevalue -row $row -column 1 -sticky e -padx 8
 
   ### Opening Book
 
@@ -145,7 +145,7 @@ proc compInit {} {
   set bookPath $::scidBooksDir
   set bookList [ lsort -dictionary [ glob -nocomplain -directory $bookPath *.bin ] ]
   set tmp {}
-  ttk::combobox $w.config.book.combo -width 12
+  ttk::combobox $w.config.book.combo -width 12 -state readonly
   if { [llength $bookList] == 0 } {
     $w.config.book.value configure -state disabled
     set comp(usebook) 0
@@ -164,49 +164,27 @@ proc compInit {} {
   }
   grid $w.config.book -row $row -column 0 -columnspan 2 -sticky ew
   pack $w.config.book.label -side left -padx 5
-  pack $w.config.book.combo $w.config.book.value -side right -padx 10
+  pack $w.config.book.combo $w.config.book.value -side right -padx 8
 
   ### Scheduling / type
 
   incr row
   label $w.config.scheduling -text {Game Scheduling}
-  menubutton $w.config.type -textvar comp(type) -indicatoron 1 -relief raised \
-    -menu $w.config.type.m -width 18
-  menu $w.config.type.m -tearoff 0
-
-  $w.config.type.m delete 0 end
-  set i 0
-  foreach label {Normal Carousel {First plays others}} {
-    $w.config.type.m add radiobutton -label $label -value $i \
-      -command "set ::comp(type) \"$label\""
-    incr i
-  }
-
-  ###was checkbutton $w.config.firstonlyvalue -variable comp(firstonly) 
+  ttk::combobox $w.config.type -width 19 -textvariable comp(type) \
+    -state readonly -values {Normal Carousel {First plays others}}
 
   grid $w.config.scheduling -row $row -column 0 -sticky w -padx 5
-  grid $w.config.type -row $row -column 1 -sticky w -padx 5  -columnspan 2
+  grid $w.config.type       -row $row -column 1 -sticky e -padx 8
 
   ### Start Position
 
   incr row
   label $w.config.startlabel -textvar ::tr(StartPos)
-  set comp(startlabel) {All games from start}
-  set comp(start) 0
-  menubutton $w.config.start -textvar comp(startlabel) -indicatoron 1 -relief raised \
-    -menu $w.config.start.m -width 18
-  menu $w.config.start.m -tearoff 0
-
-  $w.config.start.m delete 0 end
-  set i 0
-  foreach label {{All games from start} {First game from current} {All games from current}} {
-    $w.config.start.m add radiobutton -label $label -variable comp(start) -value $i \
-      -command "set ::comp(startlabel) \"$label\""
-    incr i
-  }
+  ttk::combobox $w.config.start -width 19 -textvariable comp(start) \
+    -state readonly -values {Normal {First game from current} {All games from current}}
 
   grid $w.config.startlabel -row $row -column 0 -sticky w -padx 5
-  grid $w.config.start -row $row -column 1 -sticky w -padx 5  -columnspan 2
+  grid $w.config.start -row $row -column 1 -sticky e -padx 8
 
   ### OK, Cancel Buttons
 
@@ -277,7 +255,7 @@ proc compOk {} {
 	-message {Database is read only. Continue ?} -parent $w]
     if {$answer != "ok"} {return}
   }
-  if {![sc_pos isAt end] && $comp(start) > 0} {
+  if {![sc_pos isAt end] && $comp(start) != "Normal"} {
     set answer [tk_messageBox -title Tournanment -icon question -type okcancel \
 	-message {Current game is not at end of game. Continue ?} -parent $w]
     if {$answer != "ok"} {return}
@@ -511,7 +489,7 @@ proc compNM {n m k name1 name2} {
 
   sc_game new
 
-  if {($comp(start) == 1 && $comp(current) == 1) || $comp(start) == 2} {
+  if {($comp(start) == {First game from current} && $comp(current) == 1) || $comp(start) == {All games from current}} {
     sc_game startBoard $comp(startfen)
     set comp(startpos) "fen $comp(startfen)"
   } else {

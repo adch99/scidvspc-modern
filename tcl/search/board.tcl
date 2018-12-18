@@ -52,7 +52,7 @@ proc ::search::board {} {
                -command "checkState ::searchRefBase $w.refdb.lb"
 
   set found -1
-  ttk::combobox $w.refdb.lb -textvariable refDatabase
+  ttk::combobox $w.refdb.lb -textvariable refDatabase -state readonly
   if {![info exists refDatabase]} {
     set refDatabase 0
   }

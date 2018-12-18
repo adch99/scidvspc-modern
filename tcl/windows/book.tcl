@@ -152,8 +152,8 @@ namespace eval book {
       if {$name2 == $f} { set idx2 $i }
       incr i
     }
-    ttk::combobox $w.main.combo1 -width 12 -values $tmp
-    ttk::combobox $w.main.combo2 -width 12 -values $tmp
+    ttk::combobox $w.main.combo1 -width 12 -values $tmp -state readonly
+    ttk::combobox $w.main.combo2 -width 12 -values $tmp -state readonly
 
     catch { $w.main.combo1 current $idx1 }
     catch { $w.main.combo2 current $idx2 }
@@ -467,7 +467,7 @@ if {0} {
       incr i
     }
 
-    ttk::combobox $w.left.combo -width 12 -values $tmp
+    ttk::combobox $w.left.combo -width 12 -values $tmp -state readonly
     catch { $w.left.combo current $idx }
 
     menubutton $w.left.add -text $::tr(AddMove) -menu $w.left.add.otherMoves -indicatoron 1

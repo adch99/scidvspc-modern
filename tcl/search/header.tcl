@@ -321,7 +321,7 @@ proc search::header {} {
   # Checkmate ?
 
   label $w.ends.endslabel -textvar ::tr(GameEnd) -font $bold
-  ttk::combobox $w.ends.ending -font $regular -width 12 -values {Any Checkmate Stalemate} -textvariable sGameEnd
+  ttk::combobox $w.ends.ending -font $regular -width 12 -values {Any Checkmate Stalemate} -textvariable sGameEnd -state readonly
   pack $w.ends.ending -side right
   pack $w.ends.endslabel -side right -padx 3
 
