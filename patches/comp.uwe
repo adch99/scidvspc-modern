@@ -1,7 +1,10 @@
-### Uwe Klimmek's version of ScidvsPC's Computer Tournament 
+### Computer Tournament 
+###
+### comp.tcl: part of Scid.
+
+### Uwe Klimmek's version
 # To use, replace comp.tcl with this file - S.A.
 
-### Uwe summarises:
 # Improved layout
 # Saving and loading tournaments
 # A slipping system (Rutschsystem, carousel) for a better round  system. 
@@ -10,7 +13,9 @@
 # - This way you can also play a tournament in parallel by starting 2x scidvspc.
 # Saving the used time
 # Interrupt and resume a tournament after a game.
-### I also note he has added a handy status bar and made losing on time a lot harder - S.A.
+# Option to autosave tournament after each game (recovers from system crash)
+# Option to replay time-losses/engine-crash games
+# Also - a handy status bar, and made losing on time a lot harder
 
 ### Copyright (C) 2010- Steven Atkinson
 ### Copyright (C) 2018  Uwe Klimmek
@@ -20,8 +25,7 @@
 # and gave me impetus for a decent control structure using
 # semaphores/vwait instead of the often abused dig-deeper procedural flow 
 # sometimes evident in tcl programs.
-
-set comp(showscores) 1
+##################################
 set comp(showtimes) 1
 set comp(showemt) 1
 set comp(base) 4
@@ -53,6 +57,10 @@ set comp(book) {}
 set comp(players) {}
 set comp(playernames) {}
 set comp(statustext) ""
+set comp(replaybrokengame) 1
+set comp(savebrokengame) 0
+set comp(autosave) 1
+set comp(scoreType) Yes
 
 proc storeTimeComment { color } {
     set sec [::gameclock::getSec $color]
@@ -249,9 +257,22 @@ proc compInit { } {
   ttk::checkbutton $w.config.animatevalue -text {Animate Moves} -variable comp(animate) 
   grid $w.config.animatevalue -row $row -column 0 -sticky w 
 
-  ttk::checkbutton $w.config.scorevalue -text {Engine Scores as Comments} -variable comp(showscores)
+  ttk::checkbutton $w.config.scorevalue -text {Engine Scores as Comments} -variable comp(scoreType) -onvalue Yes -offvalue No
   grid $w.config.scorevalue -row $row -column 1 -columnspan 2 -sticky w
 
+  incr row
+  ttk::label $w.config.0 -text "Broken or Lose on time games:"
+  grid $w.config.0 -row $row -column 0 -columnspan 2 -sticky w -pady "2 0"
+  incr row
+  ttk::checkbutton $w.config.replaybroken -text {Replay} -variable comp(replaybrokengame)
+  grid $w.config.replaybroken -row $row -column 0 -sticky w -padx 10
+  ttk::checkbutton $w.config.savebroken -text {Save} -variable comp(savebrokengame)
+  grid $w.config.savebroken -row $row -column 1 -sticky w -padx 10
+
+  incr row
+  ttk::checkbutton $w.config.autosave -text {Autosave after each game} -variable comp(autosave)
+  grid $w.config.autosave -row $row -column 0 -columnspan 2 -sticky w
+    
   ### Opening Book
 
   incr row
@@ -571,11 +592,16 @@ proc compOk {} {
       set wbt [string first "wtime" $res1] 
       if { $wbt >= 0 } { set res1 [string range $res1 0 [expr $wbt-1]] } 
       set comp(statustext) "Result $name1 - $name2: $res $res1"
-      incr comp(current)
+      if { $res != "Canceled" || !$comp(replaybrokengame) } {
+	  incr comp(current)
+      }
       ## wait short for cleanup the engine analysis windows
       set ::wfwd 0
       after 800 set ::wfwd 1
       vwait ::wfwd
+      if { $comp(autosave) } {
+	  autocompSave
+      }
     }
     if { $comp(endaftergame) } { toggleEndAfterGame; compSave; break }
     set thisgame [lindex $comp(games) [expr $comp(current) - 1]]
@@ -980,18 +1006,14 @@ proc compNM {n m k} {
 
     if {[makeCompMove $current_engine]} {
       ### Store evaluation (and time)
-      if {$comp(showscores)} {
-        if {1} {
+      if {$comp(scoreType) == Yes } {
 	  set comment $analysis(score$current_engine)
           if {$comment != 0} {
-	    if {$comment > 0} {
-              set comment +$comment
-            }
-            sc_pos setComment $comment
+	      if {$comment > 0} {
+		  set comment +$comment
+	      }
+	      sc_pos setComment $comment
           }
-        } else {
-	  sc_pos setComment "\[%ms $expired\]\[%eval $analysis(score$current_engine)\]"
-        }
       }
 
       ### Move success
@@ -1081,6 +1103,9 @@ proc compNM {n m k} {
           if {$comp(btime) < 0} {
             sc_game tags set -result 1
 	    sc_pos setComment {Black loses on time}
+	    if {$comp(replaybrokengame)} {
+		sc_game tags set -result *
+	    }
             break
           }
           # add time increment
@@ -1111,6 +1136,9 @@ proc compNM {n m k} {
           if {$comp(wtime) < 0} {
             sc_game tags set -result 0
 	    sc_pos setComment {White loses on time}
+	    if {$comp(replaybrokengame)} {
+		sc_game tags set -result *
+	    }
             break
           }
           # add time increment
@@ -1182,7 +1210,8 @@ sc_pos setComment "Move failed:"
     }
   }
 
-  if {![sc_base isReadOnly]} {
+  set res [sc_game tags get Result]
+  if {![sc_base isReadOnly] && ( $res != "*" || $comp(savebrokengame) || !$comp(replaybrokengame) )} {
     sc_game save [sc_game number]
     ::windows::gamelist::Refresh
     ::crosstab::Refresh
@@ -1264,7 +1293,7 @@ proc drawCombos {} {
 
   set col 0
   set row 0
-  set maxr 11
+  set maxr 12
   set startpad 0
   for {set i 0} {$i < $comp(count)} {incr i} {
     ttk::frame $l.$i
@@ -1393,19 +1422,33 @@ proc compSave {} {
     set types { {{Scid Tournament Files} {.sto}} }
     set filename [tk_getSaveFile -initialdir $scidConfigDir -initialfile $comp(name) -filetypes  $types -defaultextension ".sto"]
     if {$filename != ""} {
-	if { [catch {open $filename w} stofile]} {
-	    tk_messageBox -title "Scid: Save Tournament" -type ok -icon warning -message "Unable to write options file:\n$filename"
-	} else {
-	    puts $stofile "# Scid comptournament file"
-	    puts $stofile ""
-	    foreach i [array names comp] {
-		puts $stofile "set comp($i) [list $comp($i)]"
-	    }
-	    close $stofile
-	} 
+	doCompSave $filename
     }
+}
+proc autocompSave {} {
+    global comp
+    global scidConfigDir
+
+    set comp(fen) {}
+    set tname [string map { " " "" } $comp(name)]
+    append tname "_autosave.sto"
+    set filename [file join $scidConfigDir $tname]
+    doCompSave $filename
+}
+
+proc doCompSave { filename } {
+    global comp
+    if { [catch {open $filename w} stofile]} {
+	tk_messageBox -title "Scid: Save Tournament" -type ok -icon warning -message "Unable to write tournament file:\n$filename"
+    } else {
+	puts $stofile "# Scid comptournament file"
+	puts $stofile ""
+	foreach i [array names comp] {
+		puts $stofile "set comp($i) [list $comp($i)]"
+	}
+	close $stofile
+    } 
 }
 ###
 ### End of file: comp.tcl
 ###
-### from scidvspc analysis.tcl
