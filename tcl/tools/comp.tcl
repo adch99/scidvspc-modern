@@ -275,10 +275,12 @@ proc compOk {} {
 
   for {set i 0} {$i < $comp(count)} {incr i} {
     set j [$w.engines.$i.combo current]
-    lappend comp(players) $j
     lappend players $j
     lappend names [lindex [lindex $engines(list) $j] 0]
+    set comp(score$j) 0
   }
+  set comp(players) $players
+
   if {$comp(type) == "First plays others"} {
     set comp(firstN) [lindex $players 0]
   }
@@ -441,6 +443,23 @@ proc compOk {} {
     # voodoo that you do
     wm geometry .comp [wm geometry .comp]
     pack forget .comp.buttons.help
+
+    set winner_score 0
+    set winner {}
+    set j 0
+    foreach i $comp(players) {
+      if {$comp(score$i) == $winner_score} {
+        append winner ",[lindex [lindex $engines(list) $i] 0]"
+        set text Winners
+      }
+      if {$comp(score$i) > $winner_score} {
+        set winner_score $comp(score$i)
+        set winner [lindex [lindex $engines(list) $i] 0]
+        set text Winner
+      }
+      incr j
+    }
+    .comp.statusbar configure -text "Finished: $text $winner ([expr $winner_score/2.0]/[expr ($comp(count)-1)*$comp(rounds)])"
 
     # Hmm - if we leave this window open , and run F2 (say) the engines can sometimes stop working 
     # So better make sure this window gets closed
@@ -968,13 +987,13 @@ proc compNM {n m k name1 name2} {
   set result [sc_game tags get Result]
   puts "Game $n - $m is over. Result $result"
   switch $result {
-    1 { set tmp 1-0 }
-    0 { set tmp 0-1 }
-    = { set tmp Draw }
+    1 { set tmp 1-0 ; incr comp(score$n) 2 }
+    0 { set tmp 0-1 ; incr comp(score$m) 2 }
+    = { set tmp Draw ; incr comp(score$n) ; incr comp(score$m) }
     default { set tmp {} }
   }
 
-  if {"$::comp(resultComment)" == ""} {
+  if {$::comp(resultComment) == ""} {
     .comp.statusbar configure -text "$name1 v $name2 result: $tmp"
   } else {
     if {"$tmp" == ""} {
