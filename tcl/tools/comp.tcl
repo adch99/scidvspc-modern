@@ -51,7 +51,7 @@ proc compInit {} {
 
   set row 0
 
-  label $w.config.eventlabel -text {Event Name}
+  label $w.config.eventlabel -text {Tournament Name}
   entry $w.config.evententry -width 17 -textvariable comp(name) -borderwidth 1
 
   # 17 is magic number to pad the widget out to match the width
@@ -62,10 +62,10 @@ proc compInit {} {
 
   incr row
   label $w.config.roundslabel -text {Number of Rounds}
-  spinbox $w.config.roundsvalue -textvariable comp(rounds) -from 1 -to 10 -width 9
+  spinbox $w.config.roundsvalue -textvariable comp(rounds) -from 1 -to 10 -width 7
 
   grid $w.config.roundslabel -row $row -column 0 -sticky w -padx 5 -pady 2
-  grid $w.config.roundsvalue -row $row -column 1 -sticky ew -padx 8 -pady 2
+  grid $w.config.roundsvalue -row $row -column 1 -sticky e -padx 5 -pady 2
 
   incr row
   frame $w.config.control
@@ -459,7 +459,7 @@ proc compOk {} {
       }
       incr j
     }
-    .comp.statusbar configure -text "Finished: $text $winner ([expr $winner_score/2.0]/[expr ($comp(count)-1)*$comp(rounds)])"
+    .comp.statusbar configure -text "$text: $winner ([expr $winner_score/2.0]/[expr ($comp(count)-1)*$comp(rounds)])"
 
     # Hmm - if we leave this window open , and run F2 (say) the engines can sometimes stop working 
     # So better make sure this window gets closed

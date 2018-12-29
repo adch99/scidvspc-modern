@@ -3050,13 +3050,14 @@ set helpText(Tourney) {<h1>Computer Tournament</h1>
 
   <p>
   First, select the details of your tournament. Configurable items include:
-  the <b>Number of Competitors</b>, <b>Tournament Name</b>, <b>Time-Control Method</b> and <b>Period</b>.
+  the <b>Number of Engines</b>, <b>Tournament Name</b>, <b>Time-Control Method</b> and <b>Period</b>.
   If using the per-game time control, <b>Show Clocks</b> will display the engine's remaining time.
 </p>
 <p>
   <b>Time per Game</b> is the best time control method.
-  The first spinbox is the base time for the game, the second spinbox is the per-move increment.
-Both times are in seconds. 
+  The first spinbox is the base time for the game, the second spinbox is the per-move increment
+ (both times are in seconds). Rapid games can be played with 0 or 0.1 second increments (for example),
+but on slower systems (especially Mac OS X), engines may tend to lose on time.
 </p>
 <p>
   <b>Time per Move</b> games allow a generous time slice, and only forfeits an engine if it takes over 175%
@@ -3068,8 +3069,11 @@ Both times are in seconds.
 <i>Permanent Thinking does not work with non-standard start positions.</i>
 </p>
 <p>
-  <b>Use book</b> gives UCI engines access to polyglot opening books, enabling a greater variety
+  <b>Use book</b>  UCI engines access to polyglot opening books, enabling a greater variety
   of play. Book moves are selected in frequency according to their weight.
+</p>
+<p>
+  <b>Game Scheduling</b> has three options. Normal is a simplistic engines play in-order, while Carousel is a well known round-robin scheduling system. First-plays-others is not round-robin, but for testing one engine only.
 </p>
 <p>
   Scid's GUI does use more resources than other tournament managers, so, for short time controlled games,
@@ -3088,58 +3092,24 @@ Both times are in seconds.
   <p><i>
   Once the tournament is completed, be sure to have a look at the 
   <run ::crosstab::Open><green>Crosstable</green></run> window
-  to see the results summary.
+  to see the results summary. Uwe Klimmek has written an alternative Computer Tournament feature, which can be found in the 'patches' directory of the Scid vs PC source code.
   </i></p>
 
   <h3>Notes</h3>
-<br>
-  * Scid vs PC's Gui does take more CPU overhead than other Computer Tournament managers, but effort is made to not include this time in each engine's time-slice.
+<p>
+  Scid vs PC's Gui does take more CPU overhead than other Computer Tournament managers, but effort is made to not include this time in each engine's time-slice.
   Additionally, the Clock Widgets take a small CPU slice - around .0005 seconds per move on my 2600MHz Core2Quad.
-<br><br>
-  * For some general information about Computer Tournaments, try this 
+</p><p>
+  For some general information about Computer Tournaments, try this 
 <url http://en.chessbase.com/post/fair-play-in-engine-match>Chessbase link</url>.
+</p>
 
-<br>
-  <h3>Todo</h3>
-<br>
-  * Move options to a menu Options-<gt>Tournament
-<br>
   <h3>Engines</h3>
 <p>
-The author has tested quite a few engines under Linux, and a lesser number with Windows and Macs. These include:
-<br>
-<br>
-Arasanx<br>
-Chenard<br>
-Crafty<br>
-Critter<br>
-Faile<br>
-Gaviota<br>
-Glaurung<br>
-Gnu Chess 5<br>
-Gully<br>
-Hoi Chess<br>
-Homer<br>
-Ivanhoe<br>
-Komodo<br>
-Marvin<br>
-OliThink<br>
-Phalanx<br>
-Red Queen<br>
-RobboLito<br>
-Scidlet<br>
-Scorpio<br>
-Shredder Classic 4<br>
-Sjeng<br>
-Sloppy<br>
-Spike<br>
-Stockfish<br>
-Strelka 5<br>
-Toga (Fruit)<br>
-Umko 1.1<br>
-Zct<br>
-<br>
+The author has tested quite a few engines under Linux, and a lesser number with Windows and Macs. Generally, newer UCI engines will work better than older Xboard ones:
+</p><p>
 Komodo performs well, but some versions have broken time-per-move time control.
+Some versions of Stockfish aggressively grab the Cpu and may need 'Number of Threads' reduced.
 Pervious versions of Phalanx had no time control, but it now works well.
 Gnuchess may need the "-x" parameter to work in XBoard mode (but recent versions also support UCI),
 and only versions > 5.07 will properly handle time-per-game time control.
@@ -3147,7 +3117,7 @@ Faile seems not to work well with time-per-move.
 Arasanx UCI <lt>= 14.1 does not work with Permanent Thinking.
 </p>
 
-<p><footer>Updated: Scid vs. PC 4.14, Dec 2014</footer></p>
+<p><footer>Updated: Scid vs. PC 4.20, Dec 2018</footer></p>
 
 }
 
