@@ -917,13 +917,15 @@ Merge the specified game into a variation from the current game position.
 If given, endPly indicates to merge that number of moves only.
 </p>
 
-<h4><a name="game_moves">sc_game moves [<i>options</i>...]</a></h4>
+<h4><a name="game_moves">sc_game moves [coord | nonums]</a></h4>
 <p>
 Returns a string or list of the moves reaching the current game position.
-Optional arguments: "coord" for coordinate notation (1 move per line);
-"nomoves" for standard algebraic without move numbers (default output is
-standard algebraic with move numbers);
-"list" for list format instead of a single string.
+<br>
+Optional arguments: "coord" for coordinate/UCI notation
+<br>
+"nonums" for standard algebraic without move numbers
+<br>
+(Default output is standard algebraic with move numbers);
 </p>
 <p>
 This command is primarily used for getting the sequence of moves to

@@ -688,7 +688,6 @@ proc compNM {n m k name1 name2} {
   while {$comp(playing)} {
 
     # hmm... promo pieces are shown in uppercase, but this crashes some engines
-    # todo: make command "sc_game move uci"
     set movehistory [sc_game moves coord]
 
     if {$comp(showclock) && $comp(timecontrol) == "pergame"} {
