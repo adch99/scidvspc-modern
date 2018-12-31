@@ -1101,11 +1101,11 @@ proc compNM {n m k} {
 	if {$comp(timecontrol) == "pergame"} {
 	  set comp(btime) [expr $comp(btime) - $expired]
           if {$comp(btime) < 0} {
-            sc_game tags set -result 1
-	    sc_pos setComment {Black loses on time}
+	    set res 1
 	    if {$comp(replaybrokengame)} {
-		sc_game tags set -result *
+		set res *
 	    }
+	    compResult $res {Black loses on time}
             break
           }
           # add time increment
@@ -1120,8 +1120,11 @@ proc compNM {n m k} {
           after [expr {$comp(wtime) + $comp(delta)}] compTimeout
         } else {
           if {$expired > $comp(permoveleeway)*$comp(time)} {
-            sc_game tags set -result 1
-	    sc_pos setComment "Blacks move takes $expired secs"
+	    set res 1
+	    if {$comp(replaybrokengame)} {
+		set res *
+	    }
+	    compResult $res "Blacks move takes $expired secs"
             break
           }
           # Automatically time-out comp in $movetime + 2 secs
@@ -1134,11 +1137,11 @@ proc compNM {n m k} {
 	if {$comp(timecontrol) == "pergame"} {
 	  set comp(wtime) [expr $comp(wtime) - $expired]
           if {$comp(wtime) < 0} {
-            sc_game tags set -result 0
-	    sc_pos setComment {White loses on time}
+	    set res 0
 	    if {$comp(replaybrokengame)} {
-		sc_game tags set -result *
+		set res *
 	    }
+	    compResult $res {White loses on time}
             break
           }
           # add time increment
@@ -1153,8 +1156,11 @@ proc compNM {n m k} {
 	  after [expr {$comp(btime) + $comp(delta)}] compTimeout
         } else {
           if {$expired > $comp(permoveleeway)*$comp(time)} {
-            sc_game tags set -result 0
-	    sc_pos setComment "Whites move takes $expired secs"
+	    set res 0
+	    if {$comp(replaybrokengame)} {
+		set res *
+	    }
+	    compResult $res "Whites move takes $expired secs"
             break
           }
           # Automatically time-out comp in $movetime + 2 secs
@@ -1222,6 +1228,13 @@ sc_pos setComment "Move failed:"
   catch {destroy .analysisWin$n}
   catch {destroy .analysisWin$m}
   set comp(playing) 0
+}
+
+proc compResult {result comment} {
+  # Is set result necessary here ?
+  sc_game tags set -result $result
+  sc_pos setComment $comment
+  set ::comp(resultComment) $comment
 }
 
 proc makeCompMove {current_engine} {
