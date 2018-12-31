@@ -1468,7 +1468,7 @@ if {0} {
     sc_game push copyfast
     set move1 [lindex $analysis(prevmoves$n) 0]
     sc_move back 1
-    sc_moveAdd $move1 $n
+    moveAdd $move1 $n
     set move1 [sc_game info previousMoveNT]
     sc_game pop
 
@@ -1587,7 +1587,7 @@ if {0} {
       }
 
       set moves $analysis(prevmoves$n)
-      sc_moveAdd $moves $n
+      moveAdd $moves $n
       set nag [ scoreToNag $prevscore ]
       if {$nag != {}} {
         sc_pos addNag $nag
@@ -1637,7 +1637,7 @@ if {0} {
 
 	set moves $analysis(prevmoves$n)
 	# Add as many moves as possible from the engine analysis:
-	sc_moveAdd $moves $n
+	moveAdd $moves $n
 	set nag [ scoreToNag $prevscore ]
 	if {$nag != {}} {
 	  sc_pos addNag $nag
@@ -1813,12 +1813,12 @@ proc addAnalysisVariation {{n -1}} {
     if {$lastMove == {0000} } {
       sc_move addSan null
     } else {
-      sc_moveAdd $lastMove $n
+      moveAdd $lastMove $n
     }
   }
 
   # Add as many moves as possible from the engine analysis:
-  if {[sc_moveAdd $moves $n]} {
+  if {[moveAdd $moves $n]} {
     # Oops, add move failed
     if {$create_var} {
       sc_var exit
@@ -1911,11 +1911,11 @@ proc addAllVariations {{n 1} {rightclick 0}} {
       if {$lastMove == {0000} } {
 	sc_move addSan null
       } else {
-	sc_moveAdd $lastMove $n
+	moveAdd $lastMove $n
       }
     }
     # Add as many moves as possible from the engine analysis:
-    sc_moveAdd $moves $n
+    moveAdd $moves $n
     sc_var exit
 
     if {$addAtEnd} {
@@ -1972,7 +1972,7 @@ proc makeAnalysisMove {n} {
   }
 
   set analysis(automoveThinking$n) 0
-  if { [sc_moveAdd $move $n] } {
+  if { [moveAdd $move $n] } {
     ### Move fail
     set res 0
     # puts "Error adding move $move"
@@ -3606,7 +3606,7 @@ proc updateAnalysisBoard {n moves} {
   sc_game push copyfast
 
   # Make the engine moves and update the board:
-  sc_moveAdd $moves $n
+  moveAdd $moves $n
   ::board::update $bd [sc_pos board]
 
   # Pop the temporary game:
@@ -4005,7 +4005,7 @@ proc automoveGo {n} {
 }
 
 
-proc sc_moveAdd { moves n } {
+proc moveAdd {moves n} {
   if { $::analysis(uci$n) } {
     return [ catch { sc_move addUCI $moves } ]
   } else  {

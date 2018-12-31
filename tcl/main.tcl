@@ -1713,7 +1713,7 @@ proc autoplay {} {
       sc_var create
       sc_move addSan $move_done
       sc_pos setComment "[sc_pos getComment] $text"
-      sc_moveAdd $moves $n
+      moveAdd $moves $n
       # exit var and move to end
       sc_move end
       updateBoard -pgn

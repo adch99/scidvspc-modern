@@ -8034,24 +8034,35 @@ sc_game_merge (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // sc_game_moves:
 //    Return a string of the moves reaching the current game position.
-//    Optional arguments: "coord" for coordinate notation (1 move per line);
-//    "nomoves" for standard algebraic without move numbers.
 //    Default output is standard algebraic with move numbers.
+//    Optional args -
+//      "coord" for coordinate notation 
+//      "nonums" for standard algebraic without move numbers.
 int
 sc_game_moves (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
     bool sanFormat = true;
     bool printMoves = true;
-    bool listFormat = false;
     uint plyCount = 0;
     Game * g = db->game;
     uint MAXMOVES = g->GetCurrentPly() + 10; // overhead
     sanStringT * moveStrings = new sanStringT [MAXMOVES];
 
-    for (int arg = 2; arg < argc; arg++) {
-        if (argv[arg][0] == 'c') { sanFormat = false; }
-        if (argv[arg][0] == 'n') { printMoves = false; }
-        if (argv[arg][0] == 'l') { printMoves = false; }
+    const char * usage = "Usage: sc_game moves [coord | nonums]";
+
+    if (argc > 3) {
+        return errorResult (ti, usage);
+    }
+
+    if (argc == 3) {
+        if (strcmp (argv[2],"coord") == 0) {
+          sanFormat = false;
+        } else if (strcmp (argv[2],"nonums") == 0)  {
+          // currently unused - S.A.
+          printMoves = false;
+        } else {
+          return errorResult (ti, usage);
+        }
     }
 
     g->SaveState();
@@ -8113,11 +8124,7 @@ sc_game_moves (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         } else {
             strCopy (move, moveStrings [i - 1]);
         }
-        if (listFormat) {
-            Tcl_AppendElement (ti, move);
-        } else {
-            Tcl_AppendResult (ti, (count == 0 ? "" : " "), move, NULL);
-        }
+	Tcl_AppendResult (ti, (count == 0 ? "" : " "), move, NULL);
     }
     delete[] moveStrings;
     return TCL_OK;

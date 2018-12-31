@@ -269,7 +269,7 @@ proc ::tools::email::addSentReceived {idx type} {
     if {[catch {::game::Load $oppGNum}]} {
     } else {
       sc_move end
-      set m [llength [split [sc_game moves coord list]]]
+      set m [llength [split [sc_game moves coord]]]
       if {$m > 0} {
         set m [expr int(($m+1)/2)]
         set mnum [format "%3d  " $m]
