@@ -929,7 +929,7 @@ proc updateBoard3 {pgnNeedsUpdate} {
   #Change the order of refreshs: for example ::pgn::Refresh should be done before UpdatePlayerPhotos 
 
   updatePlayerPhotos
-  updateEpdWins
+  ::epd::updateEpdWins
   updateAnalysisWindows
   ::utils::graph::updateMove
 

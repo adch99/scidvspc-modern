@@ -203,11 +203,11 @@ namespace eval uci {
             set next [ lindex $data $i ]
             set uciInfo(scoremate$n) $next
             # A little hack to make (say) "mate in 1" better than "mate in 3"
-	    if { $next < 0} {
-		set uciInfo(tmp_score$n) [expr {-32750 - $next}]
-	    } else  {
-		set uciInfo(tmp_score$n) [expr {32750 - $next}]
-	    }
+            if { $next < 0} {
+                set uciInfo(tmp_score$n) [expr {-32750 - $next}]
+            } else  {
+                set uciInfo(tmp_score$n) [expr {32750 - $next}]
+            }
           }
           # convert the score to white's perspective (not engine's one)
 
@@ -299,6 +299,7 @@ namespace eval uci {
 	}
         set analysis(moves$n) $uciInfo(pv$n)
         set analysis(time$n) [expr {double($uciInfo(time$n)) / 1000.0} ]
+        set analysis(nodesraw$n) $uciInfo(nodes$n)
         set analysis(nodes$n) [calculateNodes $uciInfo(nodes$n)]
       }
       

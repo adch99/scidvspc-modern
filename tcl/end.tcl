@@ -1989,7 +1989,7 @@ while {$argc > 0} {
   }
   if {[string match "*.epd*" $startbase]} {
     ::splash::add "Opening EPD file: $startbase"
-    if {![newEpdWin openSilent $startbase]} {
+    if {![::epd::newEpdWin openSilent $startbase]} {
       ::splash::add "   Error opening EPD file: $startbase" error
     }
     set initialDir(epd) [file dirname $startbase]

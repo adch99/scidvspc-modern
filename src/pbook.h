@@ -89,6 +89,7 @@ class PBook
     bool    IsReadOnly() { return ReadOnly; }
 
     uint    GetLineNumber (void) { return LineCount; }
+    int    GetIndex (Position * pos);
 
     uint    Size () {
         uint total = 0;

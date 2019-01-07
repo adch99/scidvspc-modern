@@ -48,10 +48,11 @@ proc resetEngine {n} {
   set analysis(pipe$n) {}             ;# Communication pipe file channel
   set analysis(seen$n) 0              ;# Seen any output from engine yet?
   set analysis(seenEval$n) 0          ;# Seen evaluation line yet?
-  set analysis(score$n) 0             ;# Current score in centipawns
+  set analysis(score$n) 0             ;# Current score in pawns
   set analysis(scoremate$n) 0
   set analysis(prevscore$n) 0         ;# Immediately previous score in centipawns
   set analysis(prevmoves$n) {}        ;# Immediately previous best line out from engine
+  set analysis(nodesraw$n) 0          ;# Number of nodes searched
   set analysis(nodes$n) 0             ;# Number of (kilo)nodes searched
   set analysis(depth$n) 0             ;# Depth in ply
   set analysis(prevdepth$n) 0         ;# Previous depth
