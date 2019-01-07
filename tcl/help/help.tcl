@@ -3158,67 +3158,106 @@ set helpText(CalVar) {<h1>Calculation of Variations</h1>
   <p><footer>Updated: Scid vs. PC 4.7, January 2012</footer></p>
 }
 
-set helpTitle(EPD) "EPD files"
+set helpTitle(EPD) "EPD Files"
 set helpText(EPD) {<h1>EPD Files</h1>
   <p>
-  An <b>Extended Position Description</b> file is a text file with chess positions;
+  An <b>Extended Position Description</b> file is a text file with chess positions,
   each having some associated text.
-  <br>
   Like <a PGN>PGN</a>, it is a common standard for chess information.
   </p>
   <p>
   EPD files contain <a EPD opcodes>Opcodes</a> , or fields, which are separated by semicolons in the file,
-  but shown on separate lines in Scid's EPD Window.
+  but are shown on separate lines in Scid's EPD Window.
   (Semicolons within an EPD field are stored as "<b>\s</b>" to distinguish them from end-of-field markers).
-  They have a number of uses. Scid uses an EPD file to classify
-  games according to the <a ECO>ECO</a> system, and you can create an EPD file for your opening repertoire,
-  adding comments for positions you regularly reach in games [Feature removed].
+  EPD files have a number of uses, but are perhaps most commonly used for collections
+  of puzzles, end game studies and tactical shots.
   </p>
   <p>
   At most four EPD files can be open at any time.
   </p>
   <p><i>
-  Scid vs PC will automatically save changes to all EPD positions on the fly. 
-  To avoid dataloss, please backup EPD files before using them.
+  Opening an EPD file with duplicate or erroneous positions will silently eliminate
+  those positions.  Poorly formed or non-standard operands are accepted 
+  without complaint.
   </i></p>
 
-  <h3>Navigating EPD files</h3>
+  <p><i>
+  Scid vs PC will only save changes to EPD positions or fields when the EPD file 
+  is Saved from the EPD File menu.  If there have been modifications made
+  since the last Save, the status bar will give that indication. One can abort any
+  changes simply by destroying the EPD window or by exiting the application.
+  </i></p>
+
+  <h3>Navigating EPD Files</h3>
   <p>
   To browse the positions in an EPD file, use  the <b>Control+Down</b>,
   <b>Control+Up</b>, <b>Control+Home</b> or <b>Control+End</b> keys.
-  These commands move to the next/previous position in the file, clearing
+  These commands move to the next/previous or first/last position in the file, clearing
   the current game and setting its start position.
   </p>
 
-  <h3>Annotating</h3>
+  <h3>Annotating EPD Files</h3>
   <p>
   EPD files can be automatically annotated by the <b>Tools--<gt>Annotate Positions</b> menu.
-  A dialogue will ask for the Analysis Time 
-  , and the first analysis engine will start.
-  The EPD tags used are <b>acd</b>, <b>acn</b>, <b>ce</b> and <b>pv</b>.
+  A dialogue will ask for the Analysis Time, and the first analysis engine will start.
+  Pausing the analysis engine will terminate annotaion.
+  The EPD opcodes used are <b>acd</b>, <b>acn</b>, <b>ce</b>, <b>dm</b> and <b>pv</b>.
+  </p>
+  <p><i>
+  Annotation will first strip out all opcodes that are used in the process from all
+  positions in the listbox.  To undo any changes made during annotation, simply destroy
+  the EPD window without saving or closing the file.
+  </i></p>
+
+  <h3>Pasting Analysis</h3>
+  <p>
+  If an analysis engine is running, one can annotate a single position using
+  the <b>Edit--<gt>Paste Analysis</b> menu item.  Note that existing operands
+  will not be automatically stripped before pasting.
   </p>
 
-  <h3>Stripping out EPD fields</h3>
+  <h3>Stripping Out EPD Fields</h3>
   <p>
-  EPD files you find on the Internet may contain fields that do not
-  interest you, and they can waste a lot of space in the file.
+  EPD files one finds on the Internet may contain fields that are not of
+  interest, and they can waste a lot of space in the file.
   For example, an EPD file of computer evaluations might have ce, acd,
-  acn, pm, pv and id fields but you may only need the ce and pv fields.
+  acn, pm, pv and id fields but one may only need the ce and pv fields.
   </p>
   <p>
-  You can strip out an EPD opcode from all positions in the EPD file using
-  the <b>Tools--<gt>Strip out EPD field</b> menu.
+  Strip out an EPD opcode from all positions in the EPD file by using
+  the <b>Edit--<gt>Strip Opcodes</b> menu item.
   </p>
 
-  <h3>The EPD window status bar</h3>
+  <h3>Sorting EPD Fields</h3>
+  <p>
+  The EPD specification requires that opcodes appear in sorted order.  After editing
+  the EPD fields, one can sort them with the <b>Edit--<gt>Sort Opcodes</b> menu item.
+  (This only affects the operands for the current position.)
+  </p>
+
+  <h3>Adding a New Position</h3>
+  <p>
+  The main board's current position can be appended to the EPD file with the
+  <b>Edit--<gt>Add Position</b> menu item.  One cannot add a position which already
+  exists in the file. Attempting to do so will simply change the listbox selection to that
+  existing position.
+  </p>
+
+  <h3>Finding the Deepest Game Position</h3>
+  <p>
+  One can update the board to the deepest ply in the current game that matches
+  a position in the current EPD file by selecting the 
+  <b>Tools--<gt>Find Deepest Game Position</b> menu item.
+  </p>
+
+  <h3>The EPD Window Status Bar</h3>
   <p>
   The status bar of each EPD window shows:
   <ul>
-  <li>- the file status (<b>--</b> means unchanged, <b>XX</b> means
-  changed, and <b>%%</b> means read-only); </li>
   <li>- the file name; </li>
+  <li>- whether the file is readonly or has been modified; </li>
   <li>- the number of positions in the file; </li>
-  <li>- legal moves from the current position reach another position
+  <li>- legal moves from the current position that reach another position
   in this EPD file.</li>
   </ul>
 
@@ -3233,6 +3272,7 @@ set helpText(EPD) {<h1>EPD Files</h1>
   differs from the Analysis window which shows evaluations in pawns from
   Whites perspective. </li>
   <li> <b>cX</b> Comment (where <b>X</b> is a digit, 0-9).</li>
+  <li> <b>dm</b> Direct mate fullmove count.</li>
   <li> <b>eco</b> <a ECO>ECO</a> system opening code.</li>
   <li> <b>id</b> Unique Identification for this position.</li>
   <li> <b>nic</b> <i>New In Chess</i> system opening code.</li>

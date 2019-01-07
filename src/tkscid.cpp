@@ -3735,7 +3735,7 @@ sc_epd (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         "deepest",  "get",  "load",  "moves",
         "name",     "next",       "open",   "prev",
         "readonly", "set",        "size",   "strip",
-        "write",
+        "write",    "exists",     "index",
         NULL
     };
     enum {
@@ -3743,7 +3743,7 @@ sc_epd (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         EPD_DEEPEST,  EPD_GET,        EPD_LOAD,   EPD_MOVES,
         EPD_NAME,     EPD_NEXT,       EPD_OPEN,   EPD_PREV,
         EPD_READONLY, EPD_SET,        EPD_SIZE,   EPD_STRIP,
-        EPD_WRITE
+        EPD_WRITE,    EPD_EXISTS,     EPD_INDEX
     };
     int index = -1;
 
@@ -3783,8 +3783,10 @@ sc_epd (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         return setBoolResult (ti, pbooks[epdID]->IsAltered());
 
     case EPD_CLOSE:  // Closes EPD file without saving:
-        delete pbooks[epdID];
-        pbooks[epdID] = NULL;
+        if (pbooks[epdID] != NULL) {
+          delete pbooks[epdID];
+          pbooks[epdID] = NULL;
+        }
         break;
 
     case EPD_DEEPEST:
@@ -3799,6 +3801,8 @@ sc_epd (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         }
         break;
     case EPD_LOAD:   // Load the EPD position number N: (added by Pascal Georges)
+        // This is one helluva way to move the internal index, but it is forced
+        // on us by PBook constraints.
         {
         	if (argc != 5) {
             return errorResult (ti, "Usage: sc_epd load <epdID> <from> <to>");
@@ -3812,10 +3816,14 @@ sc_epd (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         		to = from;
         		from = tmp;
         	}
-        	if ( to < 1 || to > (int) pbooks[epdID]->Size() ||
-        			 from < 1 || from > (int) pbooks[epdID]->Size() )
-        		return errorResult (ti, "Bad EPD number");
-        	ASSERT (pbooks[epdID] != NULL);
+          // If from and/or to are out of range, nothing catastrophic happens... FindNext
+          // just happily wraps around.  But the check causes problems for a loaded
+          // file that was empty.  Then from is essentially undefined (zero or negative)
+          // but we still want to be able to bump the internal index up after adding a
+          // position.
+        	//if ( to < 1 || to > (int) pbooks[epdID]->Size() ||
+        			 //from < 1 || from > (int) pbooks[epdID]->Size() )
+        		//return errorResult (ti, "Bad EPD number");
     			PBook * pb = pbooks[epdID];
     			for (int i=from; i<to; i++) {
     				scratchPos->CopyFrom (db->game->GetCurrentPos());
@@ -3863,6 +3871,16 @@ sc_epd (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     case EPD_WRITE:
         return sc_epd_write (ti, epdID);
 
+    case EPD_EXISTS:
+        if (pbooks[epdID]->Find(db->game->GetCurrentPos(), NULL)) {
+          return setBoolResult (ti, false);
+        } else {
+          return setBoolResult (ti, true);
+        }
+
+    case EPD_INDEX:
+        return sc_epd_index (ti, epdID);
+
     default:
         ASSERT(0);  // Unreachable!
     }
@@ -3874,18 +3892,16 @@ sc_epd (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 // sc_epd_deepest:
 //    Returns the deepest ply in the current game (main moves only,
 //    not variations) that matches a position in this EPD file.
-int
+uint
 sc_epd_deepest (Tcl_Interp * ti, int epdID)
 {
-    ASSERT (pbooks[epdID] != NULL);
     PBook * pb = pbooks[epdID];
     uint ply = 0;
-    const char * text;
 
     db->game->SaveState();
     db->game->MoveToPly (0);
     do {
-        if (pb->Find (db->game->GetCurrentPos(), &text) == OK) {
+        if (pb->Find (db->game->GetCurrentPos(), NULL) == OK) {
             ply = db->game->GetCurrentPly();
         }
     } while (db->game->MoveForward() == OK);
@@ -3900,13 +3916,12 @@ sc_epd_deepest (Tcl_Interp * ti, int epdID)
 int
 sc_epd_moves (Tcl_Interp * ti, int epdID)
 {
-    ASSERT (pbooks[epdID] != NULL);
     PBook * pb = pbooks[epdID];
     const char * text;
     Position * gamePos = db->game->GetCurrentPos();
 
     scratchPos->CopyFrom (gamePos);
-	MoveList moveList;
+    MoveList moveList;
     gamePos->GenerateMoves (&moveList);
     sanListT sanList;
     gamePos->CalcSANStrings(&sanList, SAN_CHECKTEST);
@@ -3930,7 +3945,6 @@ sc_epd_moves (Tcl_Interp * ti, int epdID)
 int
 sc_epd_next (Tcl_Interp * ti, int epdID, bool forwards)
 {
-    ASSERT (pbooks[epdID] != NULL);
     PBook * pb = pbooks[epdID];
     scratchPos->CopyFrom (db->game->GetCurrentPos());
     if (pb->FindNext (scratchPos, forwards) == OK) {
@@ -3956,6 +3970,7 @@ sc_epd_open (Tcl_Interp * ti, int argc, const char ** argv, bool create)
     const char * filename = argv[2];
 
     // Check that this EPD file is not already open:
+    // TODO: THIS IS NOT WORKING!!!
     if ((strlen(filename) + strlen(PBOOK_SUFFIX)) >= sizeof(fileNameT)) {
         return errorResult (ti, "Error: file name too long.");
     }
@@ -3995,30 +4010,28 @@ sc_epd_open (Tcl_Interp * ti, int argc, const char ** argv, bool create)
 }
 
 int
+sc_epd_index (Tcl_Interp * ti, int epdID)
+{
+    PBook * pb = pbooks[epdID];
+    Position * pos = db->game->GetCurrentPos();
+    return setIntResult (ti, pb->GetIndex (pos));
+}
+
+int
 sc_epd_set (Tcl_Interp * ti, int epdID, const char * text)
 {
     PBook * pb = pbooks[epdID];
     Position * pos = db->game->GetCurrentPos();
-    ASSERT (pb != NULL);
-    const char * oldText;
-    errorT result = pb->Find (pos, &oldText);
 
-    // If empty string, delete this position if necessary:
-    if (text[0] == 0) {
-        if (result == OK) { pb->Delete (pos); }
-        return TCL_OK;
-    }
-    // Only set the text if it differs from the existing text:
-    if (result != OK  ||  !strEqual (oldText, text)) {
-        pb->Insert (pos, text);
-    }
+    // Insert() creates a new entry if the position doesn't exist and replaces
+    // the existing comment if it already exists.
+    pb->Insert (pos, text);
     return TCL_OK;
 }
 
 int
 sc_epd_write (Tcl_Interp * ti, int epdID)
 {
-    ASSERT (pbooks[epdID] != NULL);
     PBook * pb = pbooks[epdID];
     if (pb->WriteFile() != OK) {
         return errorResult (ti, "Error writing EPD file.");

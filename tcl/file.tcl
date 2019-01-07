@@ -98,7 +98,7 @@ proc ::file::New {} {
   if {$fName == {}} {
     return
   } elseif {[file extension $fName] == ".epd"} {
-    if {![newEpdWin create $fName]} {
+    if {![::epd::newEpdWin create $fName]} {
       return
     }
   } else {
@@ -210,8 +210,11 @@ proc ::file::Open {{fName ""} {parent .} {update 1}} {
     }
   } elseif {[string match "*.epd" [string tolower $fName]]} {
     # EPD file:
-    if {[newEpdWin open $fName]} {
+    if {[::epd::newEpdWin open $fName]} {
       ::recentFiles::add $fName
+      unbusyCursor .
+      ::bookmarks::AddCurrentGame
+      return
     } else {
       ::recentFiles::remove $fName
     }

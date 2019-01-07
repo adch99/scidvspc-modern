@@ -291,7 +291,6 @@ PBook::FindNext (Position * pos, bool forwards)
         } while (NodeList[NextIndex] == NULL);
     }
 
-
     bookNodeT * node = NodeList[NextIndex];
     ASSERT (node != NULL);
     errorT err = pos->ReadFromCompactStr ((const byte *) node->name);
@@ -342,6 +341,21 @@ PBook::Insert (Position * pos, const char * comment)
     Stats_TotalInserts++;
     return err;
 }
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// PBook::GetIndex():
+//    Get the index into the node list for the given position.
+int
+PBook::GetIndex (Position * pos)
+{
+    uint material = pos->GetCount(WHITE) + pos->GetCount(BLACK);
+    compactBoardStr cboard;
+    pos->PrintCompactStr (cboard);
+    bookNodeT * node = Tree[material]->Lookup (cboard);
+    if (!node) return -1;
+    else return node->data.id;
+}
+
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // PBook::Delete():
