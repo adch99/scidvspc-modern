@@ -3970,17 +3970,10 @@ sc_epd_open (Tcl_Interp * ti, int argc, const char ** argv, bool create)
     const char * filename = argv[2];
 
     // Check that this EPD file is not already open:
-    // TODO: THIS IS NOT WORKING!!!
-    if ((strlen(filename) + strlen(PBOOK_SUFFIX)) >= sizeof(fileNameT)) {
-        return errorResult (ti, "Error: file name too long.");
-    }
-    fileNameT fullname;
-    strCopy (fullname, filename);
-    strAppend (fullname, PBOOK_SUFFIX);
     int epdID;
     for (epdID = 0; epdID < MAX_EPD; epdID++) {
         if (pbooks[epdID] != NULL  &&
-                strEqual (fullname, pbooks[epdID]->GetFileName())) {
+                strEqual (filename, pbooks[epdID]->GetFileName())) {
             return errorResult (ti, "The EPD file you selected is already open.");
         }
     }
