@@ -3161,7 +3161,7 @@ set helpText(CalVar) {<h1>Calculation of Variations</h1>
 set helpTitle(EPD) "EPD Files"
 set helpText(EPD) {<h1>EPD Files</h1>
   <p>
-  An <b>Extended Position Description</b> file is a text file with chess positions,
+  An <b>Extended Position Description</b> file is a file with chess positions,
   each having some associated text.
   Like <a PGN>PGN</a>, it is a common standard for chess information.
   </p>
@@ -3182,10 +3182,8 @@ set helpText(EPD) {<h1>EPD Files</h1>
   </i></p>
 
   <p><i>
-  Scid vs PC will only save changes to EPD positions or fields when the EPD file 
-  is Saved from the EPD File menu.  If there have been modifications made
-  since the last Save, the status bar will give that indication. One can abort any
-  changes simply by destroying the EPD window or by exiting the application.
+  Scid vs PC no longer saves changes automatically (but from <b>File--<gt>Save</b>).
+  The current save status can be seen in the EPD status bar.
   </i></p>
 
   <h3>Navigating EPD Files</h3>
@@ -3200,12 +3198,12 @@ set helpText(EPD) {<h1>EPD Files</h1>
   <p>
   EPD files can be automatically annotated by the <b>Tools--<gt>Annotate Positions</b> menu.
   A dialogue will ask for the Analysis Time, and the first analysis engine will start.
-  Pausing the analysis engine will terminate annotaion.
+  Pausing the analysis engine will terminate annotation.
   The EPD opcodes used are <b>acd</b>, <b>acn</b>, <b>ce</b>, <b>dm</b> and <b>pv</b>.
   </p>
   <p><i>
   Annotation will first strip out all opcodes that are used in the process from all
-  positions in the listbox.  To undo any changes made during annotation, simply destroy
+  positions in the EPD file.  To undo any changes made during annotation, simply destroy
   the EPD window without saving or closing the file.
   </i></p>
 
@@ -3239,8 +3237,7 @@ set helpText(EPD) {<h1>EPD Files</h1>
   <p>
   The main board's current position can be appended to the EPD file with the
   <b>Edit--<gt>Add Position</b> menu item.  One cannot add a position which already
-  exists in the file. Attempting to do so will simply change the listbox selection to that
-  existing position.
+  exists in the file. Attempting to do so will simply select that position.
   </p>
 
   <h3>Finding the Deepest Game Position</h3>
@@ -3280,7 +3277,7 @@ set helpText(EPD) {<h1>EPD Files</h1>
   <li> <b>pv</b> Predicted variation: the line of best play.</li>
   </ul>
 
-  <p><footer>Updated: Scid vs. PC 4.15, August 2015</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.20, January 2019</footer></p>
 }
 
 set helpTitle(Email) "Email window"

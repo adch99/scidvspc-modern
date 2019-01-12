@@ -214,6 +214,7 @@ proc ::file::Open {{fName ""} {parent .} {update 1}} {
       ::recentFiles::add $fName
       unbusyCursor .
       ::bookmarks::AddCurrentGame
+      refreshWindows
       return
     } else {
       ::recentFiles::remove $fName
