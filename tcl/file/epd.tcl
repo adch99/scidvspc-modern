@@ -295,7 +295,7 @@ namespace eval epd {
 
   ################################################################################
   ### Update the EPD window to agree with the EPD internals for the current
-  ### board position. Does not update the position listbox.
+  ### board position. 
   ### This proc is also invoked whenever the main board is updated.
   ################################################################################
   proc updateEpdWin {id} {
@@ -326,6 +326,23 @@ namespace eval epd {
       append strStat {  [No moves from this position]}
     }
     $w.status configure -text $strStat
+
+    updateEpdListbox $id
+  }
+
+  # Why have we never updated the listbox position - S.A.
+
+  proc updateEpdListbox {id} {
+    set w .epd$id
+    set ply [sc_pos location]
+
+    ### Get the node list index of the matching position
+    set idx [sc_epd index $id]
+    # idx is -1 if no position match, but seems to not break below 
+
+    $w.lb selection clear 0 end
+    $w.lb selection set $idx
+    $w.lb see $idx
   }
 
   ################################################################################
@@ -665,14 +682,7 @@ namespace eval epd {
     sc_move ply $ply
     updateBoard
 
-    if { $ply != 0 } {
-      # get the node list index of the matching position
-      set idx [sc_epd index $id]
-      #tk_messageBox -type ok -icon info -title "EPD Matching Position" \
-          -message "Matched position is at line [expr $idx + 1]."
-    }
-
-    return
   }
+
 }
 
