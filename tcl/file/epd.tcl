@@ -138,6 +138,10 @@ namespace eval epd {
     $m add command -label "Save" -underline 0 -command "::epd::saveEpdWin $id"
     $m add command -label "Close" -underline 0 -command "::epd::closeEpdWin $id"
     wm protocol $w WM_DELETE_WINDOW "::epd::closeEpdWin $id"
+    bind $w <Destroy> "
+      wm protocol $w WM_DELETE_WINDOW {}
+      if {\"%W\" == \"$w\"} \"::epd::closeEpdWin $id\"
+    "
 
     set m $w.menu.edit.m
     $m add command -label "Cut" -acc "control-x" -underline 2 -command "tk_textCut $w.text"
@@ -147,7 +151,7 @@ namespace eval epd {
         -command "$w.text tag add sel 0.0 end-1c"
     $m add separator
     $m add command -label "Paste Analysis" -accelerator "control-P" \
-        -underline 0 -command "::epd::pasteAnalysis $w.text ; ::epd::storeEpdText $id"
+        -underline 0 -command "::epd::pasteAnalysis $w.text"
     $m add command -label "Sort Opcodes" -accel "control-S" \
         -underline 0 -command "::epd::sortEpdText $w.text $id"
     $m add command -label "Strip Opcodes" -accel "control-O" \
@@ -182,15 +186,16 @@ namespace eval epd {
     $w.text.edit add command -label "Paste" -command "tk_textPaste $w.text"
     bind $w.text <ButtonPress-3> "tk_popup $w.text.edit %X %Y"
 
-    bind $w <Destroy> "::epd::destroyEpdWin $id"
     bind $w <F1> { helpWindow EPD }
 
     bind $w <Control-Down> "::epd::nextEpd $id"
     bind $w <Control-Up> "::epd::prevEpd $id"
-    bind $w <Control-Shift-P> "::epd::pasteAnalysis $w.text ; ::epd::storeEpdText $id"
+    bind $w <Control-Shift-P> "::epd::pasteAnalysis $w.text"
     bind $w <Control-Shift-S> "::epd::sortEpdText $w.text $id"
     bind $w <Control-Shift-A> "::epd::addPosition $id"
     bind $w <Control-Shift-O> "::epd::chooseStripField $id"
+    bind $w <Control-q> "::epd::closeEpdWin $id"
+
 
     # the reason for including a break is a complete mystery, but without
     # the break it don't work...
@@ -212,23 +217,60 @@ namespace eval epd {
     return 1
   }
 
-  ################################################################################
-  ### Invoked when the window is destroyed.
-  ##############################################################################
-  proc destroyEpdWin {id} {
-    # Yes, we sometimes close it twice (first in closeEpdWin{}) and the second
-    # time through the id is deemed invalid so we catch the exception.
-    catch {sc_epd close $id}
+  proc isAltered {id} {
+    return [expr {[.epd$id.text edit modified] || [sc_epd altered $id]}]
   }
 
-  ################################################################################
-  ### Invoked when the window is closed normally.
-  ################################################################################
+  ### Destroy/Close epd window
+
   proc closeEpdWin {id} {
-    if {! [winfo exists .epd$id]} { return }
+    if {![winfo exists .epd$id]} {
+      return
+    }
+
+    # Catch unsaved epd changes (overkill) - S.A
+    if {[isAltered $id] && ![sc_epd readonly $id]} {
+      # based on ::game::ConfirmDiscard {}
+
+      set w .confirmEPDExit
+      toplevel $w
+      wm state $w withdrawn
+      wm title $w Scid
+      set ::epd::answer 2
+      pack [frame $w.top] -side top
+      addHorizontalRule $w
+      pack [frame $w.bottom] -expand 1 -fill x -side bottom
+
+      label $w.top.txt -text "This EPD file has been altered.\nDo you wish to save it?"
+      pack $w.top.txt -padx 5 -pady 5 -side right
+
+      button $w.bottom.b1 -width 10 -text $::tr(Save)     -command {destroy .confirmEPDExit ; set ::epd::answer 0}
+      button $w.bottom.b2 -width 10 -text $::tr(DontSave) -command {destroy .confirmEPDExit ; set ::epd::answer 1}
+      button $w.bottom.b3 -width 10 -text $::tr(Cancel)   -command {destroy .confirmEPDExit ; set ::epd::answer 2}
+      # 0 -> saves then continue
+      # 1 -> discard changes and continue
+      # 2 -> cancel action
+      pack $w.bottom.b1 $w.bottom.b2 $w.bottom.b3 -side left -padx 10 -pady 5
+
+      bind $w <Destroy> {set ::epd::answer 2}
+      bind $w <Right> "event generate $w <Tab>"
+      bind $w <Left> "event generate $w <Shift-Tab>"
+
+      update
+      placeWinOverParent $w .
+      wm state $w normal
+
+      catch { grab $w }
+
+      focus $w.bottom.b2
+      vwait ::epd::answer
+      if {$::epd::answer == 2} {return}
+      if {$::epd::answer == 0} "::epd::saveEpdWin $id"
+    }
+    bind .epd$id <Destroy> ""
     sc_epd close $id
     focus .main
-    destroy .epd$id; # which will invoke destroyEpdWin{}
+    destroy .epd$id
   }
 
   ################################################################################
@@ -238,7 +280,7 @@ namespace eval epd {
     # in case the last selected EPD line was edited...
     if { [.epd$id.text edit modified] } { storeEpdText $id }
 
-    if {[sc_epd altered $id]} {
+    if {[isAltered $id]} {
       if {[sc_epd readonly $id]} {
         tk_messageBox -type ok -icon error -title "Scid: EPD file error" \
           -message "Save failed\nEPD file is read-only."
@@ -263,7 +305,7 @@ namespace eval epd {
     $w.text delete 1.0 end
     $w.text insert end [sc_epd get $id]
 
-    # Reset the undo stacks between loads
+    # Reset the text window undo stacks between loads
     $w.text edit reset
 
     # reset the modified flag for all programmatic modifications
@@ -273,7 +315,7 @@ namespace eval epd {
     set strStat "[file tail [sc_epd name $id]]  [sc_epd size $id] positions"
     if {[sc_epd readonly $id]} {
       append strStat " ($::tr(readonly))"
-    } elseif {[sc_epd altered $id]} {
+    } elseif {[isAltered $id]} {
       append strStat " (modified)"
     }
     set moves [lsort -ascii [sc_epd moves $id]]
