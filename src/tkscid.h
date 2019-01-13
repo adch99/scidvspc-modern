@@ -422,8 +422,6 @@ int sc_epd_next       (Tcl_Interp * ti, int epdID, bool forwards);
 int sc_epd_open       (Tcl_Interp * ti, int argc, const char ** argv, bool create);
 int sc_epd_set        (Tcl_Interp * ti, int epdID, const char * text);
 int sc_epd_write      (Tcl_Interp * ti, int epdID);
-int sc_epd_index      (Tcl_Interp * ti, int epdID);
-// int sc_epd_load      	(Tcl_Interp * ti, int epdID, int from, int to);
 
 int sc_clipbase       (TCL_ARGS);
 int sc_clipbase_clear (Tcl_Interp * ti);
