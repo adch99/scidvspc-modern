@@ -3800,41 +3800,21 @@ sc_epd (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             }
         }
         break;
-    case EPD_LOAD:   // Load the EPD position number N: (added by Pascal Georges)
-        // This is one helluva way to move the internal index, but it is forced
-        // on us by PBook constraints.
+    case EPD_LOAD:
         {
-        	if (argc != 5) {
-            return errorResult (ti, "Usage: sc_epd load <epdID> <from> <to>");
+        	if (argc != 4) {
+            return errorResult (ti, "Usage: sc_epd load <epdID> <index>");
         	}
-        	int from = strGetInteger (argv[3]);
-        	int to = strGetInteger (argv[4]);
-        	int forwards = 1;
-        	if (to < from) {
-        		forwards = 0;
-        		int tmp = to;
-        		to = from;
-        		from = tmp;
-        	}
-          // If from and/or to are out of range, nothing catastrophic happens... FindNext
-          // just happily wraps around.  But the check causes problems for a loaded
-          // file that was empty.  Then from is essentially undefined (zero or negative)
-          // but we still want to be able to bump the internal index up after adding a
-          // position.
-        	//if ( to < 1 || to > (int) pbooks[epdID]->Size() ||
-        			 //from < 1 || from > (int) pbooks[epdID]->Size() )
-        		//return errorResult (ti, "Bad EPD number");
+        	int idx = strGetInteger (argv[3]);
     			PBook * pb = pbooks[epdID];
-    			for (int i=from; i<to; i++) {
-    				scratchPos->CopyFrom (db->game->GetCurrentPos());
-    				if (pb->FindNext (scratchPos, forwards) == OK) {
-        			db->game->Clear();
-        			db->gameNumber = -1;
-        			db->game->SetStartPos (scratchPos);
-        			db->gameAltered = true;
-    				}
-    			}
-    			return TCL_OK;
+          scratchPos->CopyFrom (db->game->GetCurrentPos());
+          if (pb->FindByIndex (scratchPos, idx) == OK) {
+            db->game->Clear();
+            db->gameNumber = -1;
+            db->game->SetStartPos (scratchPos);
+            db->gameAltered = true;
+          }
+          return TCL_OK;
         }
         break;
     case EPD_MOVES:
@@ -3879,7 +3859,18 @@ sc_epd (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         }
 
     case EPD_INDEX:
-        return sc_epd_index (ti, epdID);
+        // Get the node index for the current position, or if index is given,
+        // set the node index to that value.
+        {
+          PBook * pb = pbooks[epdID];
+          if (argc == 3) {
+            return setIntResult (ti, pb->GetIndex(db->game->GetCurrentPos()));
+          } else if (argc == 4) {
+            return setIntResult (ti, pb->SetIndex(strGetInteger(argv[3])));
+          } else {
+            return errorResult (ti, "Usage: sc_epd index <epdID> [<index>]");
+          }
+        }
 
     default:
         ASSERT(0);  // Unreachable!
@@ -4000,14 +3991,6 @@ sc_epd_open (Tcl_Interp * ti, int argc, const char ** argv, bool create)
         return TCL_ERROR;
     }
     return setIntResult (ti, freeID + 1);
-}
-
-int
-sc_epd_index (Tcl_Interp * ti, int epdID)
-{
-    PBook * pb = pbooks[epdID];
-    Position * pos = db->game->GetCurrentPos();
-    return setIntResult (ti, pb->GetIndex (pos));
 }
 
 int

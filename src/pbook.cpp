@@ -308,6 +308,34 @@ PBook::FindNext (Position * pos, bool forwards)
     return err;
 }
 
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// PBook::FindByIndex():
+// Find a position by index and set it.
+errorT
+PBook::FindByIndex (Position * pos, uint idx)
+{
+    ASSERT (pos != NULL);
+    uint totalSize = Size();
+    if (totalSize == 0 || idx < 0 || idx >= NodeListCount) { return ERROR_NotFound; }
+    if (NodeList[idx] == NULL) { return ERROR_NotFound; }
+
+    bookNodeT * node = NodeList[idx];
+    ASSERT (node != NULL);
+    errorT err = pos->ReadFromCompactStr ((const byte *) node->name);
+    if (err != OK) { return err; }
+    pos->SetEPTarget (node->data.enpassant);
+
+    // Now print to FEN and re-read, to ensure the piece lists are in
+    // the order produced by a FEN specification -- this is necessary
+    // since a game with a specified start position has the piece lists
+    // in the FEN-generated order:
+
+    char temp[200];
+    pos->PrintFEN (temp, FEN_CASTLING_EP);
+    err = pos->ReadFromFEN (temp);
+    return err;
+}
+
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // PBook::Insert(): Insert a position. Returns OK if a new position
@@ -340,6 +368,17 @@ PBook::Insert (Position * pos, const char * comment)
     Stats_Inserts[material]++;
     Stats_TotalInserts++;
     return err;
+}
+
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// PBook::SetIndex():
+//    Set the FindNext() index...
+int
+PBook::SetIndex (int idx)
+{
+    if (idx < 0 || idx >= NodeListCount) { return -1; }
+    NextIndex = idx;
+    return NextIndex;
 }
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -18,25 +18,19 @@ namespace eval epd {
   variable delayEpd
   variable stripField {}
   variable epdTimer
-  variable selection; # maintains a record of the last actively selected epd line
 
   set maxEpd [sc_info limit epd]
   set delayEpd 5
   array set epdTimer {}
-  array set selection {}
 
   ################################################################################
   ### Print the call stack to stdout.
   ################################################################################
   proc epdDebug { banner } {
-    puts ""
-    puts "EPD DEBUG: $banner"
-
-    set i [expr {[info level] - 1}]
+    puts "\nEPD DEBUG: $banner"
     puts "Call Stack:"
-    while {$i > 0} {
+    for {set i [expr [info level]-1]} {$i > 0} {incr i -1} {
       puts "\t[info level $i]"
-      incr i -1
     } 
     parray ::epd::selection
   }
@@ -334,11 +328,10 @@ namespace eval epd {
 
   proc updateEpdListbox {id} {
     set w .epd$id
-    set ply [sc_pos location]
 
     ### Get the node list index of the matching position
+    # returns -1 for no match
     set idx [sc_epd index $id]
-    # idx is -1 if no position match, but seems to not break below 
 
     $w.lb selection clear 0 end
     $w.lb selection set $idx
@@ -369,8 +362,6 @@ namespace eval epd {
   ### Then load the position for the currently selected EPD line.
   ################################################################################
   proc loadEpd { id } {
-    variable selection
-
     if { [sc_epd size $id] == 0 } { return }
 
     set w .epd$id
@@ -384,9 +375,7 @@ namespace eval epd {
     }
 
     set idx [$w.lb curselection]
-    #catch { sc_epd load $id $selection($id) $idx }
-    sc_epd load $id $selection($id) $idx
-    set selection($id) $idx
+    sc_epd load $id $idx
 
     if { [::board::opponentColor] == [sc_pos side] } { ::board::flip .main.board }
     updateBoard -pgn
@@ -399,6 +388,7 @@ namespace eval epd {
     if { [sc_epd size $id] == 0 } { return }
     set w .epd$id
     set idx [$w.lb curselection]
+    if { $idx == "" } { set idx [sc_epd size $id] }
     if {$idx > 0} {
       incr idx -1
       $w.lb selection clear 0 end
@@ -415,6 +405,7 @@ namespace eval epd {
     if { [sc_epd size $id] == 0 } { return }
     set w .epd$id
     set idx [$w.lb curselection]
+    if { $idx == "" } { set idx -1 }
     if {$idx < [ expr [$w.lb index end] - 1 ]} {
       incr idx 1
       $w.lb selection clear 0 end
@@ -429,15 +420,10 @@ namespace eval epd {
   ###  This proc only works if the file has just been opened.
   ################################################################################
   proc loadEpdLines { id } {
-    variable selection
-
     set w .epd$id
 
     set size [sc_epd size $id]
-    if { $size == 0 } { 
-      set selection($id) -1
-      return
-    }
+    if { $size == 0 } { return }
 
     for { set i 1 } { $i <= $size } { incr i } {
       sc_epd next $id
@@ -445,10 +431,8 @@ namespace eval epd {
       $w.lb insert end "$i    $fen"
     }
 
-    #if {! [catch {sc_epd load $id $size 1}]}
-    sc_epd load $id $size 1
+    sc_epd load $id 0
     $w.lb selection set 0
-    set selection($id) 0
     updateBoard -pgn
   }
 
@@ -491,7 +475,6 @@ namespace eval epd {
   proc launchAnalysis {id textwidget} {
     variable delayEpd
     variable epdTimer
-    variable selection
 
     set w .epd$id
 
@@ -508,7 +491,7 @@ namespace eval epd {
     set size [sc_epd size $id ]
     set epdTimer($id) 0
     for { set i 0 } { $i < $size } { incr i } {
-      $w.lb selection clear $selection($id)
+      $w.lb selection clear 0 end
       $w.lb selection set $i
       $w.lb see $i
       loadEpd $id
@@ -667,7 +650,6 @@ namespace eval epd {
     $w.lb selection clear 0 end
     $w.lb selection set $idx
     $w.lb see $idx
-    # sync the internal pbook state with the current selection
     loadEpd $id
   }
 

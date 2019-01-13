@@ -90,6 +90,7 @@ class PBook
 
     uint    GetLineNumber (void) { return LineCount; }
     int    GetIndex (Position * pos);
+    int    SetIndex (int idx);
 
     uint    Size () {
         uint total = 0;
@@ -107,6 +108,7 @@ class PBook
 
     errorT  Find (Position * pos, const char ** ptrComment);
     errorT  FindNext (Position * pos, bool forwards);
+    errorT  FindByIndex (Position * pos, uint idx);
     errorT  Insert (Position * pos, const char * comment);
     errorT  Delete (Position * pos);
     errorT  FindOpcode (Position * pos, const char * opcode, DString * target);
