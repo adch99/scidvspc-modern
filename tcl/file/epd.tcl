@@ -196,7 +196,6 @@ namespace eval epd {
     bind $w.text <Control-z> "catch \"$w.text edit undo\"; break;"
     bind $w.text <Control-r> "catch \"$w.text edit redo\"; break;"
     bind $w.text <Control-y> "catch \"$w.text edit redo\"; break;"
-    #bind $w.text <KeyPress> "set ::epd::keypress($id) true"
 
     loadEpdLines $id
     updateEpdWin $id
@@ -369,7 +368,6 @@ namespace eval epd {
     # (that position is still loaded at this point).
     # The flag is reset whenever the text box is programmatically modified.
     if { [$w.text edit modified] } {
-      #puts "text box was modified"
       storeEpdText $id
     }
 
@@ -649,7 +647,10 @@ namespace eval epd {
     $w.lb selection clear 0 end
     $w.lb selection set $idx
     $w.lb see $idx
-    loadEpd $id
+
+    # Is this necessary ?
+    # Removing it allows us to add an Epd position from a game without zeroing the game
+    #loadEpd $id
   }
 
   ################################################################################
