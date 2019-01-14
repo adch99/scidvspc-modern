@@ -292,7 +292,6 @@ PBook::FindNext (Position * pos, bool forwards)
     }
 
     bookNodeT * node = NodeList[NextIndex];
-    ASSERT (node != NULL);
     errorT err = pos->ReadFromCompactStr ((const byte *) node->name);
     if (err != OK) { return err; }
     pos->SetEPTarget (node->data.enpassant);
@@ -320,7 +319,6 @@ PBook::FindByIndex (Position * pos, uint idx)
     if (NodeList[idx] == NULL) { return ERROR_NotFound; }
 
     bookNodeT * node = NodeList[idx];
-    ASSERT (node != NULL);
     errorT err = pos->ReadFromCompactStr ((const byte *) node->name);
     if (err != OK) { return err; }
     pos->SetEPTarget (node->data.enpassant);
@@ -374,7 +372,7 @@ PBook::Insert (Position * pos, const char * comment)
 // PBook::SetIndex():
 //    Set the FindNext() index...
 int
-PBook::SetIndex (int idx)
+PBook::SetIndex (uint idx)
 {
     if (idx < 0 || idx >= NodeListCount) { return -1; }
     NextIndex = idx;

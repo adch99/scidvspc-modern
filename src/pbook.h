@@ -90,7 +90,7 @@ class PBook
 
     uint    GetLineNumber (void) { return LineCount; }
     int    GetIndex (Position * pos);
-    int    SetIndex (int idx);
+    int    SetIndex (uint idx);
 
     uint    Size () {
         uint total = 0;
