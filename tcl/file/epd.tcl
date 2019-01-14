@@ -32,7 +32,6 @@ namespace eval epd {
     for {set i [expr [info level]-1]} {$i > 0} {incr i -1} {
       puts "\t[info level $i]"
     } 
-    parray ::epd::selection
   }
 
   ################################################################################

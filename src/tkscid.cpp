@@ -3800,13 +3800,14 @@ sc_epd (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             }
         }
         break;
+
     case EPD_LOAD:
         {
-        	if (argc != 4) {
+          if (argc != 4) {
             return errorResult (ti, "Usage: sc_epd load <epdID> <index>");
-        	}
-        	int idx = strGetInteger (argv[3]);
-    			PBook * pb = pbooks[epdID];
+          }
+          int idx = strGetInteger (argv[3]);
+          PBook * pb = pbooks[epdID];
           scratchPos->CopyFrom (db->game->GetCurrentPos());
           if (pb->FindByIndex (scratchPos, idx) == OK) {
             db->game->Clear();
@@ -3814,9 +3815,9 @@ sc_epd (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             db->game->SetStartPos (scratchPos);
             db->gameAltered = true;
           }
-          return TCL_OK;
         }
         break;
+
     case EPD_MOVES:
         return sc_epd_moves (ti, epdID);
 
@@ -3866,7 +3867,7 @@ sc_epd (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
           if (argc == 3) {
             return setIntResult (ti, pb->GetIndex(db->game->GetCurrentPos()));
           } else if (argc == 4) {
-            return setIntResult (ti, pb->SetIndex(strGetInteger(argv[3])));
+            return setIntResult (ti, pb->SetIndex(strGetUnsigned(argv[3])));
           } else {
             return errorResult (ti, "Usage: sc_epd index <epdID> [<index>]");
           }
