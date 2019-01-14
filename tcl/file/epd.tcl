@@ -197,6 +197,8 @@ namespace eval epd {
     bind $w.text <Control-r> "catch \"$w.text edit redo\"; break;"
     bind $w.text <Control-y> "catch \"$w.text edit redo\"; break;"
 
+    bind $w.text <Leave> "if {\[$w.text edit modified\]} {::epd::storeEpdText $id}"
+
     loadEpdLines $id
     updateEpdWin $id
 
@@ -210,7 +212,8 @@ namespace eval epd {
   }
 
   proc isAltered {id} {
-    return [expr {[.epd$id.text edit modified] || [sc_epd altered $id]}]
+    # return [expr {[.epd$id.text edit modified] || [sc_epd altered $id]}]
+    return [expr {[sc_epd altered $id]}]
   }
 
   ### Destroy/Close epd window
@@ -269,9 +272,6 @@ namespace eval epd {
   ### Save changes to the EPD file.
   ################################################################################
   proc saveEpdWin {id} {
-    # in case the last selected EPD line was edited...
-    if { [.epd$id.text edit modified] } { storeEpdText $id }
-
     if {[isAltered $id]} {
       if {[sc_epd readonly $id]} {
         tk_messageBox -type ok -icon error -title "Scid: EPD file error" \
@@ -299,9 +299,6 @@ namespace eval epd {
 
     # Reset the text window undo stacks between loads
     $w.text edit reset
-
-    # reset the modified flag for all programmatic modifications
-    $w.text edit modified false 
 
     # update the EPD window status bar
     set strStat "[file tail [sc_epd name $id]]  [sc_epd size $id] positions"
@@ -363,13 +360,6 @@ namespace eval epd {
     if { [sc_epd size $id] == 0 } { return }
 
     set w .epd$id
-
-    # If the *user* has modified the text, update the corresponding EPD position
-    # (that position is still loaded at this point).
-    # The flag is reset whenever the text box is programmatically modified.
-    if { [$w.text edit modified] } {
-      storeEpdText $id
-    }
 
     set idx [$w.lb curselection]
     sc_epd load $id $idx
