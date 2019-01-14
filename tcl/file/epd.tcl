@@ -300,6 +300,9 @@ namespace eval epd {
     # Reset the text window undo stacks between loads
     $w.text edit reset
 
+    # reset the modified flag for all programmatic modifications
+    $w.text edit modified false
+
     # update the EPD window status bar
     set strStat "[file tail [sc_epd name $id]]  [sc_epd size $id] positions"
     if {[sc_epd readonly $id]} {
