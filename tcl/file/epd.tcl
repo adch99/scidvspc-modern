@@ -12,6 +12,14 @@
 #   duplicate or that has some problem with the FEN string.  Oddly, it does not 
 #   check for an illegal castling availibility field, which will likely crash the 
 #   analysis engine used for annotation.
+#
+# Caution:  Updating modifications to the text widget requires that the respective
+#   position be loaded on the main board.  When navigating the listbox, we update
+#   the internal text before updating the board.  However, when adding a position
+#   to the listbox the main board position is necessarily out of sync with a
+#   modified text widget.  Therefore we also update the internal text whenever we
+#   catch the mouse <Leave>ing the text widget, ensuring that the board position
+#   is the correct position.
 
 namespace eval epd {
   variable maxEpd
@@ -272,6 +280,10 @@ namespace eval epd {
   ### Save changes to the EPD file.
   ################################################################################
   proc saveEpdWin {id} {
+    # in case the last selected EPD line was edited...
+    # this is only necessary if somebody later binds, e.g., ctrl-q to close window
+    #if { [.epd$id.text edit modified] } { storeEpdText $id }
+
     if {[isAltered $id]} {
       if {[sc_epd readonly $id]} {
         tk_messageBox -type ok -icon error -title "Scid: EPD file error" \
@@ -293,15 +305,13 @@ namespace eval epd {
   proc updateEpdWin {id} {
     set w .epd$id
 
-    # update the text box with EPD opcodes
+    # update the text widget with EPD opcodes
     $w.text delete 1.0 end
     $w.text insert end [sc_epd get $id]
+    $w.text edit modified false
 
     # Reset the text window undo stacks between loads
     $w.text edit reset
-
-    # reset the modified flag for all programmatic modifications
-    $w.text edit modified false
 
     # update the EPD window status bar
     set strStat "[file tail [sc_epd name $id]]  [sc_epd size $id] positions"
@@ -323,6 +333,7 @@ namespace eval epd {
   }
 
   # Why have we never updated the listbox position - S.A.
+  # Because <sc_epd index> had not been implemented...
 
   proc updateEpdListbox {id} {
     set w .epd$id
@@ -350,7 +361,15 @@ namespace eval epd {
   ### Saves the text for a single EPD line.
   ################################################################################
   proc storeEpdText {id} {
-    set text [.epd$id.text get 1.0 "end-1c"]
+    set w .epd$id
+
+    $w.text edit modified false
+
+    # there are some edge cases and we don't want to be adding spurious
+    # positions to the node list...
+    if { ! [sc_epd exists $id] } { return }
+
+    set text [$w.text get 1.0 "end-1c"]
     sc_epd set $id $text
   }
 
@@ -363,6 +382,10 @@ namespace eval epd {
     if { [sc_epd size $id] == 0 } { return }
 
     set w .epd$id
+
+    # This is necessary in case the user navigates the listbox (<Control-Up>)
+    # without <Leave>ing the text widget.
+    if { [$w.text edit modified] } { storeEpdText $id }
 
     set idx [$w.lb curselection]
     sc_epd load $id $idx
@@ -641,9 +664,8 @@ namespace eval epd {
     $w.lb selection set $idx
     $w.lb see $idx
 
-    # Is this necessary ?
-    # Removing it allows us to add an Epd position from a game without zeroing the game
-    #loadEpd $id
+    # update the status bar
+    updateEpdWin $id
   }
 
   ################################################################################
