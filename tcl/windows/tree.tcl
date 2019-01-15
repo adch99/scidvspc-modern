@@ -711,7 +711,12 @@ proc ::tree::displayLines { baseNumber moves } {
     }
 
     # Move and stats
-    set tags [list treetext $tagfg tagclick$i tagtooltip$i]
+    # mask fg and treetext/blanking conflict
+    if {$tagfg != ""} {
+      set tags [list $tagfg   tagclick$i tagtooltip$i]
+    } else {
+      set tags [list treetext tagclick$i tagtooltip$i]
+    }
 
     # Should we add a tag for the Next Move ???
     if {$trans_move == $nextmove} {
