@@ -1845,7 +1845,7 @@ proc addAnalysisVariation {{n -1}} {
 
   # Scroll down one line
   # Often the current move is at the bottom of the viewable, and new var will not be shown
-  .pgnWin.text yview scroll 1 u
+  catch {.pgnWin.text yview scroll 1 u}
 
   updateStatusBar
   updateGameinfo
