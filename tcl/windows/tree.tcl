@@ -2,7 +2,6 @@
 
 ### (C) 2007 Pascal Georges : multiple Tree windows support
 ### Originally authored by Shane Hudson. All Mask features by Pascal Georges [S.A.]
-
 ### Three coloured bar graphs , mask fixes and other code by Stevenaaus
 
 set ::tree::trainingBase 0
@@ -1752,6 +1751,7 @@ namespace eval ::tree::mask {
   set searchMask_usecolor 0
   set searchMask_usemovecomment 0
   set searchMask_useposcomment 0
+  set displayMask_unfold 1
   set displayMask_showNag 1
   set displayMask_showComment 1
   
@@ -1846,14 +1846,18 @@ proc ::tree::mask::askForSave {{parent .}} {
     ### Issue here - closing app on linux - execution flows here, but the tk_messageBox fails to show up
     # (?) Issue here - Closing the database breaks the "-parent $parent" for some reason
     # Once we remove the parent option, the tree window stays open (albeit the menu widget gets destroyed!)
+    ## TODO - Now uses tk_dialog, please test
+
     if {![winfo exists $parent]} {
       set parent .
     }
 
-    set answer [tk_messageBox -title Scid -icon warning -type yesno \
-      -message "[tr DoYouWantToSaveFirst] [tr TreeMask] $::tree::mask::maskFile ?" -parent $parent]
+    set answer [tk_dialog .unsaved "[tr TreeMask] [tr altered]" \
+      "[tr TreeMask] \"[file rootname [file tail $::tree::mask::maskFile]]\" has been [tr altered].
+      [tr DoYouWantToSaveFirst] ?" \
+      question {} [tr Save] [tr DontSave]]
 
-    if {$answer == "yes"} {
+    if {$answer == 0} {
       ::tree::mask::save
     }
   }
@@ -1982,7 +1986,7 @@ proc ::tree::mask::contextMenu {control win move x y xc yc} {
     $mctxt.nag add command -label $nag -command [list ::tree::mask::op setNag 1 $move $nag]
   }
   
-  $mctxt add command -label [ tr CommentMove] -command [list ::tree::mask::op addComment 0 $move $win]
+  $mctxt add command -label [tr CommentMove] -command [list ::tree::mask::op addComment 0 $move $win]
 
   $mctxt add separator
 
@@ -2009,6 +2013,10 @@ proc ::tree::mask::contextMenu {control win move x y xc yc} {
     }
     incr row
   }
+
+  # Adding a trailing Mask menu doesn't work ? - S.A.
+  # $mctxt add separator
+  # $mctxt add cascade -label [tr Mask] -menu .treeWin1.menu.mask
 
   tk_popup $mctxt [winfo pointerx .] [winfo pointery .]
 
@@ -2282,7 +2290,7 @@ proc ::tree::mask::getImage { move nmr } {
 
 ################################################################################
 
-proc ::tree::mask::addComment { { move "" } {parent .} } {
+proc ::tree::mask::addComment { {move ""} {parent .} } {
   
   if {[string match *.f.tl $parent]} {
     # remove trailing .f.tl
@@ -2305,18 +2313,21 @@ proc ::tree::mask::addComment { { move "" } {parent .} } {
     wm title $w [::tr CommentPosition]
   } else  {
     set oldComment [::tree::mask::getComment $move ]
-    wm title $w [::tr CommentMove]
+    wm title $w [::tr CommentMove]\ $move
   }
   set oldComment [ string trim $oldComment ]
   autoscrollframe $w.f text $w.f.e -width 40 -height 5 -wrap word -setgrid 1
   $w.f.e insert end $oldComment
   pack  $w.f  -side top -expand 1 -fill both -padx 3 -pady 3
   pack [frame $w.buttons] -side bottom -pady 2
+
   dialogbutton $w.buttons.cancel -textvar ::tr(Cancel) -command "destroy $w"
   dialogbutton $w.buttons.ok -text OK -command "::tree::mask::updateComment $move ; destroy $w ; ::tree::refresh"
-  bind $w <Escape> "destroy $w"
   pack  $w.buttons.ok     -side left  -padx 10
   pack  $w.buttons.cancel -side right -padx 10
+
+  bind $w <Escape> "destroy $w"
+  bind $w <Control-Return> "$w.buttons.ok invoke"
   focus $w.f.e
 }
 
@@ -2512,13 +2523,17 @@ proc ::tree::mask::displayMask {} {
   frame $w.fcb
   pack $w.fcb -fill x -side bottom
 
-  checkbutton $w.fcb.nag -text [::tr "Nag"] -variable ::tree::mask::displayMask_showNag -command ::tree::mask::updateDisplayMask
-  checkbutton $w.fcb.comment -text [::tr "Comments"] -variable ::tree::mask::displayMask_showComment -command ::tree::mask::updateDisplayMask
+  checkbutton $w.fcb.unfold -font font_Small -text Unfold -variable ::tree::mask::displayMask_unfold \
+    -command ::tree::mask::updateDisplayMask
+  checkbutton $w.fcb.nag -font font_Small -text Nags/Markers -variable ::tree::mask::displayMask_showNag \
+    -command ::tree::mask::updateDisplayMask
+  checkbutton $w.fcb.comment -font font_Small -text [::tr Comments] -variable ::tree::mask::displayMask_showComment \
+    -command ::tree::mask::updateDisplayMask
 
-  dialogbutton $w.fcb.bupdate -text [::tr "Update"] -command ::tree::mask::updateDisplayMask
-  dialogbutton $w.fcb.close -text [::tr Close] -command {destroy .displaymask}
+  dialogbutton $w.fcb.bupdate -font font_Small -text [::tr Update] -command ::tree::mask::updateDisplayMask
+  dialogbutton $w.fcb.close   -font font_Small -text [::tr Close]  -command {destroy .displaymask}
 
-  pack $w.fcb.nag $w.fcb.comment -side left
+  pack $w.fcb.unfold $w.fcb.nag $w.fcb.comment -side left
   pack $w.fcb.close $w.fcb.bupdate -side right -padx 2 -pady 2
 
   pack $w.f -fill both -expand 1
@@ -2533,30 +2548,27 @@ proc ::tree::mask::displayMask {} {
   pack $w.f.ybar -side right -fill y
   pack $w.f.tree -side left -expand 1 -fill both
   
+  bind $w <Escape> {destroy .displaymask}
+  bind $w <Configure>  {recordWinSize .displaymask}
+  
+  $w.f.tree tag bind dblClickTree <Double-Button-1> "::tree::mask::maskTreeUnfold $w.f.tree"
+  
   updateDisplayMask
-  
-  bind $w <Escape> { destroy  .displaymask }
-  bind $w <Configure>  {
-    recordWinSize .displaymask
-  }
-  
-  $w.f.tree tag bind dblClickTree <Double-Button-1> {::tree::mask::maskTreeUnfold }
 }
-
-################################################################################
-### Update the extra "mask map" window if open
 
 proc ::tree::mask::updateDisplayMask {} {
   global ::tree::mask::mask
   
   set w .displaymask
-  if { ![winfo exists $w] } { return }
+  if { ![winfo exists $w] } {
+    return
+  }
 
   wm title $w "[::tr DisplayMask] [file tail $::tree::mask::maskFile]"
 
   set tree  $w.f.tree
-  $tree delete [ $tree children {} ]
-  set fen [toShortFen [sc_pos fen] ]
+  $tree delete [$tree children {}]
+  set fen [toShortFen [sc_pos fen]]
   # use clipbase to enter a dummy game
   set currentbase [sc_base current]
   sc_base switch clipbase
@@ -2575,7 +2587,7 @@ proc ::tree::mask::updateDisplayMask {} {
 }
 
 ################################################################################
-# creates a new image whose name is name1_name2, and concatenates two images.
+# creates a new image whose name is name1name2, and concatenates two images.
 # parameters are the markers, not the images names
 
 proc ::tree::mask::createImage {marker1 marker2} {
@@ -2597,22 +2609,18 @@ proc ::tree::mask::createImage {marker1 marker2} {
 
 ################################################################################
 
-proc  ::tree::mask::maskTreeUnfold {} {
-  set t .displaymask.f.tree
+proc  ::tree::mask::maskTreeUnfold {t} {
   
-  proc unfold {id} {
-    set t .displaymask.f.tree
+  proc unfold {t id} {
     foreach c [$t children $id] {
       $t item $c -open true
-      unfold $c
+      unfold $t $c
     }
   }
   
-  set id [$t selection]
-  unfold $id
+  unfold $t [$t selection]
 }
 
-################################################################################
 # returns the first line of multi-line string (separated with \n)
 
 proc ::tree::mask::trimToFirstLine {s} {
@@ -2621,7 +2629,7 @@ proc ::tree::mask::trimToFirstLine {s} {
 }
 
 
-proc ::tree::mask::populateDisplayMask { moves parent fen fenSeen posComment} {
+proc ::tree::mask::populateDisplayMask {moves parent fen fenSeen posComment} {
   global ::tree::mask::mask
   
   set posComment [ trimToFirstLine $posComment ]
@@ -2635,6 +2643,7 @@ proc ::tree::mask::populateDisplayMask { moves parent fen fenSeen posComment} {
   foreach m $moves {
     set move [lindex $m 0]
     if {$move == "null"} { continue }
+  if { $::tree::mask::displayMask_showNag } {
     set img ""
     if {[lindex $m 4] != "" && [lindex $m 5] == ""} {
       set img [lindex $m 4]
@@ -2652,21 +2661,23 @@ proc ::tree::mask::populateDisplayMask { moves parent fen fenSeen posComment} {
       set img $mark1$mark2
     }
     
-    set nag ""
-    if { $::tree::mask::displayMask_showNag } {
-      set nag [lindex $m 1]
-    }
+    set nag [lindex $m 1]
+  }
     
     if {[lindex $m 3] != "" && $::tree::mask::displayMask_showComment} {
-      set move_comment " [lindex $m 3]"
-      set move_comment [ trimToFirstLine $move_comment ]
+      set move_comment " ([trimToFirstLine [lindex $m 3]])"
     } else  {
       set move_comment ""
     }
     if { ! $::tree::mask::displayMask_showComment} {
       set posComment ""
     }
-    set id [ $tree insert $parent end -text "$posComment[::trans $move][set nag]$move_comment" -image $img -tags dblClickTree ]
+    if { $::tree::mask::displayMask_showNag } {
+      set id [ $tree insert $parent end -text "$posComment[::trans $move][set nag]$move_comment" -image $img -tags dblClickTree -open $::tree::mask::displayMask_unfold]
+    } else {
+      set id [ $tree insert $parent end -text "$posComment[::trans $move]$move_comment" -tags dblClickTree -open $::tree::mask::displayMask_unfold]
+    }
+
     if {[catch {sc_game startBoard $fen} err]} {
       puts "ERROR sc_game startBoard $fen => $err"
     }
@@ -2684,8 +2695,7 @@ proc ::tree::mask::populateDisplayMask { moves parent fen fenSeen posComment} {
         if {[lsearch $fenSeen $newfen] != -1} { return }
         lappend fenSeen $newfen
         if {[lindex $newmoves 0 3] != "" && $::tree::mask::displayMask_showComment } {
-          set move_comment " [lindex $newmoves 0 3]"
-          set move_comment [ trimToFirstLine $move_comment ]
+	  set move_comment " ([trimToFirstLine [lindex $newmoves 0 3]])"
         } else  {
           set move_comment ""
         }
@@ -2696,9 +2706,10 @@ proc ::tree::mask::populateDisplayMask { moves parent fen fenSeen posComment} {
         } else  {
           set pos_comment ""
         }
-        set nag ""
         if { $::tree::mask::displayMask_showNag } {
           set nag [ lindex $newmoves { 0 1 }  ]
+        } else {
+	  set nag ""
         }
         $tree item $id -text "[ $tree item $id -text ] $pos_comment[::trans [ lindex $newmoves { 0 0 }  ] ][ set nag  ]$move_comment"
         if { ! [info exists mask($newfen) ] } {
