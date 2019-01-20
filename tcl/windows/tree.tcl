@@ -17,7 +17,7 @@ proc ::tree::doConfigMenus { baseNumber  { lang "" } } {
   foreach idx {0 1 2 3 4 6 8 10} tag {Save Fill FillWithBase FillWithGame CacheInfo Best Copy Close} {
     configMenuText $m.file $idx TreeFile$tag $lang
   }
-  foreach idx {0 1 2 3 4 6 7 8 9 10 11} tag {New Open OpenRecent Save Close FillWithLine FillWithGame FillWithBase Search Info Display} {
+  foreach idx {0 1 2 3 4 6 7 8 9 10} tag {New Open OpenRecent Save Close Display Search FillWithLine FillWithGame FillWithBase} {
     configMenuText $m.mask $idx TreeMask$tag $lang
   }
   foreach idx {0 1 2 3} tag {Alpha ECO Freq Score } {
@@ -148,12 +148,11 @@ proc ::tree::Open {{baseNumber 0}} {
   $w.menu.mask add command -label TreeMaskSave -command "::tree::mask::save"
   $w.menu.mask add command -label TreeMaskClose -command "::tree::mask::close $w"
   $w.menu.mask add separator
+  $w.menu.mask add command -label TreeMaskDisplay -command "::tree::mask::displayMask"
+  $w.menu.mask add command -label TreeMaskSearch -command "::tree::mask::searchMask $baseNumber"
   $w.menu.mask add command -label TreeMaskFillWithLine -command "::tree::mask::fillWithLine"
   $w.menu.mask add command -label TreeMaskFillWithGame -command "::tree::mask::fillWithGame"
   $w.menu.mask add command -label TreeMaskFillWithBase -command "::tree::mask::fillWithBase $baseNumber"
-  $w.menu.mask add command -label TreeMaskSearch -command "::tree::mask::searchMask $baseNumber"
-  $w.menu.mask add command -label TreeMaskInfo -command "::tree::mask::infoMask $w"
-  $w.menu.mask add command -label TreeMaskDisplay -command "::tree::mask::displayMask"
   $w.menu.mask add command -label Help -command {helpWindow TreeMasks}
 
   foreach {label value} {
@@ -2488,23 +2487,8 @@ proc ::tree::mask::toShortFen {fen} {
   return $ret
 }
 
-################################################################################
-
-proc ::tree::mask::infoMask {{parent .}} {
-  global ::tree::mask::mask
-  
-  set npos [array size mask]
-  # set nmoves 0
-  set nmoves [lindex [ split [array statistics mask] "\n" ] end ]
-  # foreach pos $mask {
-  # incr nmoves [llength [lindex $pos 1]]
-  # }
-  tk_messageBox -title "Mask info" -type ok -icon info -message "Mask : $::tree::mask::maskFile\n[tr Positions] : $npos\n[tr Moves] : $nmoves" -parent $parent
-}
-
-################################################################################
-# Dumps mask content in a tree view widget
-# The current position is the reference base
+### Show mask content in a tree view widget
+### with the current position as the reference base
 
 proc ::tree::mask::displayMask {} {
   global ::tree::mask::mask
@@ -2564,7 +2548,7 @@ proc ::tree::mask::updateDisplayMask {} {
     return
   }
 
-  wm title $w "[::tr DisplayMask] [file tail $::tree::mask::maskFile]"
+  wm title $w "[::tr DisplayMask] [file tail $::tree::mask::maskFile], [array size mask] [::tr Positions]"
 
   set tree  $w.f.tree
   $tree delete [$tree children {}]
@@ -2728,7 +2712,7 @@ proc ::tree::mask::populateDisplayMask {moves parent fen fenSeen posComment} {
 }
 
 
-proc ::tree::mask::searchMask { baseNumber } {
+proc ::tree::mask::searchMask {baseNumber} {
   
   set w .searchmask
   if { [winfo exists $w] } {
@@ -2748,73 +2732,90 @@ proc ::tree::mask::searchMask { baseNumber } {
   grid $w.f1.search -column 0 -row 0 -rowspan 2 -padx 5
   
   # NAG selection
-  checkbutton $w.f1.nagl -text [tr Nag] -variable ::tree::mask::searchMask_usenag
+  checkbutton $w.f1.nagl -font font_Small -text [tr Nag] -variable ::tree::mask::searchMask_usenag
   menu $w.f1.nagmenu
   ttk::menubutton $w.f1.nag -textvariable ::tree::mask::searchMask_nag -menu $w.f1.nagmenu 
   set ::tree::mask::searchMask_nag  [::tr "None"]
   foreach nag [ list "!!" " !" "!?" "?!" " ?" "??" " ~" [::tr "None"]  ] {
-    $w.f1.nagmenu add command -label $nag -command "set ::tree::mask::searchMask_nag $nag"
+    $w.f1.nagmenu add command -label $nag -command "
+      set ::tree::mask::searchMask_nag $nag
+      set ::tree::mask::searchMask_usenag 1
+    "
   }
   grid $w.f1.nagl -column 1 -row 0 -pady 2
   grid $w.f1.nag  -column 1 -row 1 -padx 2
   
   # Markers 1 & 2
   foreach j { 0 1 } {
-    checkbutton $w.f1.ml$j -text "[tr Marker] [expr $j +1]" -variable ::tree::mask::searchMask_usemarker$j
+    checkbutton $w.f1.ml$j -font font_Small -text "[tr Marker] [expr $j +1]" -variable ::tree::mask::searchMask_usemarker$j
     menu $w.f1.menum$j
-    ttk::menubutton $w.f1.m$j -textvariable ::tree::mask::searchMask_trm$j -menu $w.f1.menum$j 
-    set ::tree::mask::searchMask_trm$j [tr "Include"]
+    ttk::menubutton $w.f1.m$j -image $::tree::mask::marker2image(Include) -menu $w.f1.menum$j 
     set ::tree::mask::searchMask_m$j $::tree::mask::marker2image(Include)
     foreach e { Include Exclude MainLine Bookmark White Black NewLine ToBeVerified ToTrain Dubious ToRemove } {
       set i $::tree::mask::marker2image($e)
       $w.f1.menum$j add command -label [ tr $e ] -image $i -compound left -command "
-         set ::tree::mask::searchMask_trm$j \"[tr $e ]\"
          set ::tree::mask::searchMask_m$j $i
+         $w.f1.m$j configure -image $i
+         set ::tree::mask::searchMask_usemarker$j 1
       "
       # I don't think menubuttons can use image AND text at the same time
-      # $w.f1.m$j configure -image $i
     }
     grid $w.f1.ml$j -column [expr 2 + $j] -row 0 -pady 2
     grid $w.f1.m$j  -column [expr 2 + $j] -row 1 -padx 2
   }
   
   # Color
-  checkbutton $w.f1.colorl -text [tr ColorMarker] -variable ::tree::mask::searchMask_usecolor
+  checkbutton $w.f1.colorl -font font_Small -text [tr ColorMarker] -variable ::tree::mask::searchMask_usecolor
   menu $w.f1.colormenu
   ttk::menubutton $w.f1.color -textvariable ::tree::mask::searchMask_trcolor -menu $w.f1.colormenu 
   set ::tree::mask::searchMask_trcolor  [::tr "White"]
   set ::tree::mask::searchMask_color "White"
   foreach c { "White" "Green" "Yellow" "Blue" "Red"} {
-    $w.f1.colormenu add command -label [ tr "${c}Mark" ] \
-        -command "set ::tree::mask::searchMask_trcolor [ tr ${c}Mark ] ; set ::tree::mask::searchMask_color $c"
+    $w.f1.colormenu add command -label [ tr "${c}Mark" ] -command "
+      set ::tree::mask::searchMask_trcolor [ tr ${c}Mark ]
+      set ::tree::mask::searchMask_color $c
+      set ::tree::mask::searchMask_usecolor 1
+    "
   }
   grid $w.f1.colorl -column 4 -row 0 -pady 2
   grid $w.f1.color  -column 4 -row 1 -padx 2
   
-  # Move annotation
-  checkbutton $w.f1.movecommentl -text "Move comment" -variable ::tree::mask::searchMask_usemovecomment
-  entry $w.f1.movecomment -textvariable ::tree::mask::searchMask_movecomment -width 12
+  # Move comment
+  checkbutton $w.f1.movecommentl -font font_Small -text "Move comment" -variable ::tree::mask::searchMask_usemovecomment
+  entry $w.f1.movecomment -font font_Small -textvariable ::tree::mask::searchMask_movecomment -width 12
   grid $w.f1.movecommentl -column 5 -row 0 -padx 2 -pady 2
   grid $w.f1.movecomment  -column 5 -row 1 -padx 2
   
-  # Position annotation
-  checkbutton $w.f1.poscommentl -text "Position comment" -variable ::tree::mask::searchMask_useposcomment
-  entry $w.f1.poscomment -textvariable ::tree::mask::searchMask_poscomment -width 12
+  # Position comment
+  checkbutton $w.f1.poscommentl -font font_Small -text "Position comment" -variable ::tree::mask::searchMask_useposcomment
+  entry $w.f1.poscomment -font font_Small -textvariable ::tree::mask::searchMask_poscomment -width 12
   grid $w.f1.poscommentl -column 6 -row 0 -padx 2 -pady 2
   grid $w.f1.poscomment  -column 6 -row 1 -padx 2
   
   # display search result
-  text $w.f2.text -yscrollcommand "$w.f2.ybar set" -xscrollcommand "$w.f2.xbar set" -height 20 -font font_Fixed -wrap none
-  scrollbar $w.f2.ybar -command "$w.f2.text yview"
-  scrollbar $w.f2.xbar -command "$w.f2.text xview" -orient horizontal
+
+  set tree $w.f2.text
+  set headings [list [string totitle [tr moves]] [string totitle [tr comment]] FEN]
+  ttk::treeview $tree -columns $headings -show headings \
+    -yscrollcommand "$w.f2.ybar set" -xscrollcommand "$w.f2.xbar set" -selectmode browse
+
+  # fuck, treeview is a c* of a widget
+  $tree tag bind click2 <Double-Button-1> "::tree::mask::searchClick $baseNumber \[%W set \[%W focus\] FEN\]"
+
+  foreach col $headings width {50 150 250} anchor {center w w} {
+    $tree heading $col -text $col -anchor center
+    $tree column  $col -width $width -anchor $anchor
+  }
+
+  scrollbar $w.f2.ybar -command "$tree yview"
+  scrollbar $w.f2.xbar -command "$tree xview" -orient horizontal
   pack $w.f2.ybar -side right -fill y
   pack $w.f2.xbar -side bottom -fill x
-  pack $w.f2.text -side left -fill both -expand yes
+  pack $tree -side left -fill both -expand yes
 
   setWinLocation $w
   setWinSize $w
   
-  bind $w.f2.text <ButtonPress-1> " ::tree::mask::searchClick %x %y %W $baseNumber "
   bind $w <Escape> {destroy .searchmask}
   bind $w <Configure> "recordWinSize $w"
   bind $w <F1> {helpWindow TreeMasks}
@@ -2823,7 +2824,6 @@ proc ::tree::mask::searchMask { baseNumber } {
 proc ::tree::mask::performSearch  { baseNumber } {
   global ::tree::mask::mask
   set t .searchmask.f2.text
-  $t configure -state normal
 
   # contains the search result (FEN)
   set res {}
@@ -2833,7 +2833,7 @@ proc ::tree::mask::performSearch  { baseNumber } {
   set pos_total 0
   set move_total 0
   
-  $t delete 1.0 end
+  $t delete [$t children {}]
   
   # Display FEN + moves and comments. Clicking on a line starts filtering current base
   foreach fen [array names mask] {
@@ -2843,7 +2843,8 @@ proc ::tree::mask::performSearch  { baseNumber } {
     set poscomment [ lindex $mask($fen) 1 ]
     if { $::tree::mask::searchMask_useposcomment  } {
       if { [string match -nocase "*$::tree::mask::searchMask_poscomment*"  $poscomment] } {
-	lappend res [format "%6s %-20s %s" {} [string range [string map {"\n" ""} $poscomment] 0 19] $fen]
+	# lappend res [format "%6s %-20s %s" {} [string range [string map {"\n" ""} $poscomment] 0 19] $fen]
+	lappend res [list {} $poscomment $fen]
         incr pos_count
       } else  {
         continue
@@ -2890,35 +2891,24 @@ proc ::tree::mask::performSearch  { baseNumber } {
         }
       }
       
-      lappend res [format "%6s %-20s %s" [::trans [lindex $m 0]] [string range [string map {"\n" ""} $movecomment] 0 19] $fen]
+      # lappend res [format "%6s %-20s %s" [::trans [lindex $m 0]] [string range [string map {"\n" ""} $movecomment] 0 19] $fen]
+      lappend res [list [::trans [lindex $m 0]] $movecomment $fen]
       incr move_count
     }
   }
   
   # output the result
   foreach l $res {
-    $t insert end "$l\n"
+    $t insert {} end -values $l -tags click2
   }
-  wm title .searchmask "[::tr SearchMask] \[[file tail [sc_base filename $baseNumber]]\] [::tr Positions] $pos_count/$pos_total - [::tr moves] $move_count/$move_total"
-
-  $t configure -state disabled
+  wm title .searchmask "[::tr SearchMask] \[[file tail [sc_base filename $baseNumber]]\] [::tr Positions] $pos_count/$pos_total - [string totitle [::tr moves]] $move_count/$move_total"
 }
 
 
-proc  ::tree::mask::searchClick {x y win baseNumber} {
+proc  ::tree::mask::searchClick {baseNumber fen} {
   global tree
 
-  set idx [ $win index @$x,$y ]
-  if { [ scan $idx "%d.%d" l c ] != 2 } {
-    # should never happen
-    return
-  }
-  set elt [$win get $l.0 $l.end]
-  set fen [string range $elt 28 end]
-
-  if {[llength $fen] < 4} {
-    return
-  }
+  if {[llength $fen] < 4} { return }
   
   # load the position in a temporary game (in clipbase), update the Trees then switch to Tree's base
   sc_base switch clipbase
