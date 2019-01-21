@@ -1330,7 +1330,8 @@ Engine::SetPosition (Position * newpos)
     RepStackSize = 0;
 
     // Clear the PV:
-    PV[0].length = 0;
+    for (uint i=0; i < ENGINE_MAX_PLY; i++)
+        PV[i].length = 0;
 
     // Change the tranposition table sequence number so existing
     // entries can be detected as old ones:
