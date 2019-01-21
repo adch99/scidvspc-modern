@@ -925,11 +925,7 @@ Engine::PlayMove (simpleMoveT * sm) {
     PushRepeat(&RootPos);
     RootPos.DoSimpleMove(sm);
     Pos.DoSimpleMove(sm);
-#ifdef WINCE
-    simpleMoveT * newMove = (simpleMoveT *) my_Tcl_Alloc(sizeof(simpleMoveT));
-#else
     simpleMoveT * newMove = new simpleMoveT;
-#endif
     *newMove = *sm;
     GameMoves[NumGameMoves] = newMove;
     NumGameMoves++;
@@ -948,11 +944,7 @@ Engine::RetractMove (void)
     NumGameMoves--;
     RootPos.UndoSimpleMove(GameMoves[NumGameMoves]);
     Pos.UndoSimpleMove(GameMoves[NumGameMoves]);
-#ifdef WINCE
-    my_Tcl_Free((char *)GameMoves);
-#else
     delete GameMoves[NumGameMoves];
-#endif
     TranTableSequence--;
 }
 
@@ -1082,13 +1074,8 @@ Engine::SetHashTableKilobytes (uint size)
 	{
       TranTableSize = bytes / sizeof(transTableEntryT);
       if ((TranTableSize % 2) == 1) { TranTableSize--; }
-#ifdef WINCE
-      if (TranTable != NULL) { my_Tcl_Free((char *) TranTable); }
-      TranTable = (transTableEntryT*)my_Tcl_Alloc(sizeof ( transTableEntryT [TranTableSize]));
-#else
       if (TranTable != NULL) { delete[] TranTable; }
       TranTable = new transTableEntryT [TranTableSize];
-#endif
     }
     ClearHashTable();
 }
@@ -1104,13 +1091,8 @@ Engine::SetPawnTableKilobytes (uint size)
 	if(PawnTableSize != bytes / sizeof(pawnTableEntryT))
 	{
       PawnTableSize = bytes / sizeof(pawnTableEntryT);
-#ifdef WINCE
-      if (PawnTable != NULL) { my_Tcl_Free((char *) PawnTable); }
-      PawnTable = (pawnTableEntryT*)my_Tcl_Alloc(sizeof (pawnTableEntryT [PawnTableSize]) );
-#else
       if (PawnTable != NULL) { delete[] PawnTable; }
       PawnTable = new pawnTableEntryT [PawnTableSize];
-#endif
     }
     ClearPawnTable();
 }
@@ -1331,11 +1313,7 @@ Engine::SetPosition (Position * newpos)
 {
     // Delete old game moves:
     for (uint i=0; i < NumGameMoves; i++) {
-#ifdef WINCE
-        my_Tcl_Free((char *) GameMoves[i]);
-#else
         delete GameMoves[i];
-#endif
     }
     NumGameMoves = 0;
 
@@ -2247,7 +2225,6 @@ Engine::ScoreMoves (MoveList * mlist)
 void
 Engine::Output (const char * format, ...)
 {
-#ifndef WINCE
     va_list ap;
     va_start (ap, format);
     vprintf (format, ap);
@@ -2255,7 +2232,6 @@ Engine::Output (const char * format, ...)
         vfprintf (LogFile, format, ap);
     }
     va_end (ap);
-#endif
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Engine::PrintPV

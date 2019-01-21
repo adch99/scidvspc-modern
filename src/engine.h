@@ -115,9 +115,7 @@ private:
     bool     PostInfo;      // If true, print post info to stdout.
     bool     XBoardMode;    // If true, print info in xboard format.
     bool     Pruning;       // If true, do futility pruning.
-#ifndef WINCE
     FILE *   LogFile;       // Output is to stdout and to this file.
-#endif
     uint     QNodeCount;    // Nodes examined in quiescent search.
     uint     NodeCount;     // Nodes examined in total.
     Timer    Elapsed;       // Timer for interrupting search.
@@ -183,32 +181,12 @@ private:
     void AdjustTime (bool easyMove);
 
 public:
-#ifdef WINCE
-  void* operator new(size_t sz) {
-    void* m = my_Tcl_Alloc(sz);
-    return m;
-  }
-  void operator delete(void* m) {
-    my_Tcl_Free((char*)m);
-  }
-  void* operator new [] (size_t sz) {
-    void* m = my_Tcl_AttemptAlloc(sz);
-    return m;
-  }
-
-  void operator delete [] (void* m) {
-    my_Tcl_Free((char*)m);
-  }
-
-#endif
     Engine()   {
         MaxDepth = ENGINE_MAX_PLY;      // A large default search depth
         SearchTime = 1000;  // Default search time: 1000 ms = one second.
         MinSearchTime = MaxSearchTime = SearchTime;
         MinDepthCheckTime = 4; // will not check time until depth is at least of this value
-#ifndef WINCE
         LogFile = NULL;
-#endif
         Debug = false;
         PostInfo = false;
         XBoardMode = false;
@@ -227,11 +205,7 @@ public:
         Pos.StdStart();
         PV[0].length = 0;
     }
-#ifdef WINCE
-    ~Engine()  { my_Tcl_Free((char*) TranTable);  my_Tcl_Free((char*) PawnTable); }
-#else
     ~Engine()  { delete[] TranTable;  delete[] PawnTable; }
-#endif
     void SetSearchDepth (uint ply) {
         if (ply < 1) { ply = 1; }
         if (ply > ENGINE_MAX_PLY) { ply = ENGINE_MAX_PLY; }
@@ -254,9 +228,7 @@ public:
     void SetXBoardMode (bool b) { XBoardMode = b; }
     bool InXBoardMode (void) { return XBoardMode; }
     void SetPruning (bool b) { Pruning = b; }
-#ifndef WINCE
     void SetLogFile (FILE * fp) { LogFile = fp; }
-#endif
     void SetHashTableKilobytes (uint sizeKB);
     void SetPawnTableKilobytes (uint sizeKB);
     uint NumHashTableEntries (void) { return TranTableSize; }
