@@ -203,7 +203,8 @@ public:
         NumGameMoves = 0;
         RootPos.StdStart();
         Pos.StdStart();
-        PV[0].length = 0;
+        for (uint i=0; i < ENGINE_MAX_PLY; i++)
+            PV[i].length = 0;
     }
     ~Engine()  { delete[] TranTable;  delete[] PawnTable; }
     void SetSearchDepth (uint ply) {
