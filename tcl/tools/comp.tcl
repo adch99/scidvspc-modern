@@ -610,6 +610,7 @@ proc compNM {n m k name1 name2} {
 	  sendToEngine $current_engine "easy"
         }
 	sendToEngine $current_engine "bk off"
+	sendToEngine $current_engine "nopost"
 
 	# done later
 	# sendToEngine $current_engine "st $comp(seconds)"
@@ -638,8 +639,7 @@ proc compNM {n m k name1 name2} {
             sendToEngine $current_engine "new"
           }
         } else {
-	  ## Don't test for setboard as Phalanx doest report this working feature
-	  # if {$analysis(has_setboard$current_engine)}
+	  # If no setboard... good luck
 	  sendToEngine $current_engine "setboard $comp(startfen)"
           # Without force, some engines try to play both side !?
 	  sendToEngine $current_engine "force"
