@@ -2970,7 +2970,7 @@ proc processAnalysisInput {n} {
     ### Should be careful not to use $line as a list as it can contain funny chars
 
     switch -glob $line {
-      {*y move is*} {
+      {[Mm]y move is*} {
 		 # "my move is", "My move is:"
 		 set analysis(moves$n) [lrange $line 3 end]
 		 set analysis(waitForBestMove$n) 0
@@ -3036,6 +3036,27 @@ proc processAnalysisInput {n} {
 
   }
 
+  # We should acknowledge 'My Moves' lines, as engines (eg scidlet) do not always/have-to send infos.
+
+  set temp_moves {}
+  if {[string match {[Mm]y move is*} $line]} {
+    # "my move is", "My move is:"
+    set temp_moves [lrange $line 3 end]
+  }
+  if {[string match {move *} $line]} {
+    set temp_moves [lrange $line 1 end]
+  }
+  if {$temp_moves != ""} {
+    set analysis(moves$n) [string trim $temp_moves]
+    updateAnalysisText $n
+    if {! $analysis(seenEval$n)} {
+      # This is the first evaluation line seen, so send the current
+      # position details to the engine:
+      set analysis(seenEval$n) 1
+    }
+    return
+  }
+
   # Scan the line from the engine for the analysis data
 
   set res [scan $line "%d%c %d %d %s %\[^\n\]\n" \
@@ -3052,7 +3073,7 @@ proc processAnalysisInput {n} {
     set analysis(score$n) $temp_score
     # Convert score to pawns from centipawns:
     set analysis(score$n) [expr {double($analysis(score$n)) / 100.0} ]
-    set analysis(moves$n) [formatAnalysisMoves $temp_moves]
+    set analysis(moves$n) [string trim $temp_moves]
     set analysis(time$n) $temp_time
     set analysis(nodes$n) [calculateNodes $temp_nodes]
 
@@ -3144,23 +3165,6 @@ proc checkEngineIsAlive {n} {
 
   }
   return 0
-}
-
-### Xboard only
-#   Given the text at the end of a line of analysis data from an engine,
-#   this proc tries to strip out some extra stuff engines add to make
-#   the text more compatible for adding as a variation.
-
-proc formatAnalysisMoves {text} {
-
-  # Trim any initial or final whitespace:
-  set text [string trim $text]
-
-  # Crafty adds "<HT>" for a hash table comment. Change it to "{HT}"
-  # Could probably remove this hack and it'd work fine, but leave it in i guess - S.A.
-  regsub <HT> $text {{HT}} text
-
-  return $text
 }
 
 ### Engine plays game till the end
