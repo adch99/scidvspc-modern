@@ -2936,9 +2936,9 @@ proc processAnalysisInput {n} {
       # First line of output from the program, so send initial commands:
       logEngineNote $n {First line from engine seen; sending it initial commands now.}
       sendToEngine $n xboard
-      sendToEngine $n {protover 2}
-      sendToEngine $n {easy}
-      sendToEngine $n post
+      sendToEngine $n "protover 2"
+      sendToEngine $n "easy"
+      sendToEngine $n "post"
     }
   }
 
@@ -3075,7 +3075,7 @@ proc processAnalysisInput {n} {
 
   # Check for a "stat01:" line, the reply to the "." command:
 
-  if {! [string compare [string range $line 0 6] "stat01:"]} {
+  if {[string match {stat01:*} $line]} {
     if {[scan $line "%s %d %s %d" \
           dummy temp_time temp_nodes temp_depth] == 4} {
       set analysis(depth$n) $temp_depth
@@ -3257,14 +3257,19 @@ proc startAnalyzeMode {{n 0} {force 0}} {
   if { $analysis(uci$n) } {
     updateAnalysis $n
   } else  {
-    if {$analysis(has_setboard$n)} {
-      sendToEngine $n "setboard [sc_pos fen]"
-    }
     if { $analysis(has_analyze$n) } {
       # why is this commented out. It crashes engine when re-instated S.A
       #updateAnalysis $n
+
+      # setboard should come after analyze
       sendToEngine $n analyze
+      if {$analysis(has_setboard$n)} {
+	sendToEngine $n "setboard [sc_pos fen]"
+      }
     } else  {
+      if {$analysis(has_setboard$n)} {
+	sendToEngine $n "setboard [sc_pos fen]"
+      }
       updateAnalysis $n ;# in order to handle special cases (engines without setboard and analyse commands)
     }
   }
