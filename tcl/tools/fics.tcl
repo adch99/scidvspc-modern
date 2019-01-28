@@ -347,9 +347,9 @@ namespace eval fics {
     entry $w.command.find -width 10 -textvariable ::fics::helpWin(find) -font font_Small
     configFindEntryBox $w.command.find ::fics::helpWin $w.console.text
 
-    button $w.command.send -textvar tr(FICSSend) -state disabled -font font_Small
+    button $w.command.send -textvar tr(FICSSend) -font font_Small
 
-    button $w.command.clear -textvar tr(Clear) -state disabled -font font_Small -command "
+    button $w.command.clear -textvar tr(Clear) -font font_Small -command "
       $w.command.entry delete 0 end
       $w.command.find  delete 0 end
     "
@@ -358,7 +358,7 @@ namespace eval fics {
       $w.console.text insert 0.0 \"FICS ($::scidName $::scidVersion)\n\"
       break
     "
-    button $w.command.next -textvar tr(Next) -state disabled -font font_Small -command {::fics::writechan next echo}
+    button $w.command.next -textvar tr(Next) -font font_Small -command {::fics::writechan next echo}
     button $w.command.hide -image bookmark_down -command ::fics::togglebuttons
 
     bind $w <Control-p> ::pgn::Open
@@ -407,14 +407,14 @@ namespace eval fics {
 
     set row 0
     # chanoff var is back to front with fics
-    checkbutton $w.bottom.buttons.tells -textvar tr(FICSTells) -font font_Small -state disabled \
+    checkbutton $w.bottom.buttons.tells -textvar tr(FICSTells) -font font_Small \
     -variable ::fics::chanoff -command {
       ::fics::writechan "set chanoff [expr !$::fics::chanoff]" noecho
       if {$::fics::chanoff} {
 	::fics::writechan "set silence 0"
       }
     }
-    checkbutton $w.bottom.buttons.shouts -textvar tr(FICSShouts) -font font_Small -state disabled \
+    checkbutton $w.bottom.buttons.shouts -textvar tr(FICSShouts) -font font_Small \
     -variable ::fics::shouts -command {
       ::fics::writechan "set shout $::fics::shouts" echo
       # ::fics::writechan "set cshout $::fics::shouts" noecho
@@ -500,13 +500,19 @@ namespace eval fics {
       }
       set ::fics::graph(on) [expr {! $::fics::graph(on)}]
       ::fics::showGraph
-    } -state disabled
+    }
     bind $w <Button-2> {if {[string match .fics.bottom* %W]} {.fics.bottom.buttons.offers invoke}}
-    button $w.bottom.buttons.findopp -textvar tr(FICSFindOpponent) -command {::fics::findOpponent} -state disabled
+    button $w.bottom.buttons.findopp -textvar tr(FICSFindOpponent) -command {::fics::findOpponent}
     button $w.bottom.buttons.quit    -textvar tr(FICSQuit) -command {::fics::close}
     grid $w.bottom.buttons.offers  -column 0 -row $row -sticky ew -padx 3 -pady 2
     grid $w.bottom.buttons.findopp -column 1 -row $row -sticky ew -padx 3 -pady 2
     grid $w.bottom.buttons.quit    -column 2 -row $row -sticky ew -padx 3 -pady 2
+
+    foreach i "[winfo children $w.bottom.buttons] [winfo children $w.command]" {
+      if {![string match $w.bottom.buttons.quit $i]} {
+	catch {$i configure -state disabled}
+      }
+    }
 
     bind $w <Control-q> ::fics::close
     bind $w <Destroy>   ::fics::close
@@ -1273,14 +1279,9 @@ namespace eval fics {
         writechan $i
       }
 
-      .fics.bottom.buttons.offers  configure -state normal
-      .fics.bottom.buttons.tells   configure -state normal
-      .fics.bottom.buttons.shouts  configure -state normal
-      .fics.bottom.buttons.findopp configure -state normal
-      .fics.bottom.buttons.offers  configure -state normal
-      .fics.command.send           configure -state normal
-      .fics.command.clear          configure -state normal
-      .fics.command.next           configure -state normal
+      foreach i "[winfo children .fics.bottom.buttons] [winfo children .fics.command]" {
+	  catch {$i configure -state normal}
+      }
 
       bind .fics.command.entry <Return> ::fics::cmd
       .fics.command.send configure -command ::fics::cmd
