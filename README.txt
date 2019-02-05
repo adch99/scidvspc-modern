@@ -170,8 +170,12 @@
 
   4.0.1.  Linux , Unix
 
-  Scid vs. PC requires Wish (Tcl/Tk) 8.5 or later (though 8.5.10 has
-  nasty bugs and should be avoided), and a C++ compiler .
+  Scid vs. PC requires Wish (Tcl/Tk) 8.5 or later and a C++ compiler.
+
+  Note Wish 8.5.10 has severe bugs, and many versions of Tk-8.6.x have
+  *severe* memory leaks.  To avoid, compile with Gregor's tk::text
+  (patches/gregors_tktext_inline.patch).
+
   Example packages required include "tcl, tk, tcl-devel, tk-devel" and
   "gcc-c++ , libstdc++"; but of course will vary with your distribution.
 
@@ -425,9 +429,14 @@
   6.4.  known issues
 
 
-  o  Linux sound playback is buggy/broken.
+  o  Linux sound playback is buggy/broken. The Wish sound package
+     (Snack) needs maintenance.
 
   o  Tcl/Tk-8.5.10 is buggy.
+
+  o  Some versions of Tk-8.6.x have *severe* memory leaks. To avoid,
+     compile with Gregor's tk::text
+     (patches/gregors_tktext_inline.patch).
 
   o  OS X docked mode has some issues due to it's poor Tcl/Tk.
 
@@ -461,7 +470,7 @@
 
      o  Window focus/raise issues, another Tcl/Tk issue.
 
-     o  Screenshots are broken.
+     o  Screenshots are broken/disabled.
 
   6.6.  thanks
 

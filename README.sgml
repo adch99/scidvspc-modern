@@ -93,8 +93,11 @@ or as a tarball <url url="https://sourceforge.net/p/scidvspc/code/HEAD/tarball" 
 
 <sect2> Linux , Unix<p>
   <p>
-  Scid vs. PC requires Wish (Tcl/Tk) 8.5 or later (though 8.5.10 has nasty bugs and should be avoided), and a C++ compiler .
-  <newline>
+  Scid vs. PC requires Wish (Tcl/Tk) 8.5 or later and a C++ compiler. 
+  </p>
+  <p><em>Note Wish 8.5.10 has severe bugs, and many versions of Tk-8.6.x have *severe* memory leaks.
+  To avoid, compile with Gregor's tk::text (patches/gregors_tktext_inline.patch).</em>
+  </p><p>
   Example packages required include "tcl, tk, tcl-devel, tk-devel" and
   "gcc-c++ , libstdc++"; but of course will vary with your distribution.
   </p>
@@ -311,8 +314,9 @@ work may not be too hard.  https://github.com/sshivaji/ctgexporter
 
 <sect1> known issues <p>
 <itemize>
-<item> Linux sound playback is buggy/broken.
+<item> Linux sound playback is buggy/broken. The Wish sound package (Snack) needs maintenance.
 <item> Tcl/Tk-8.5.10 is buggy.
+<item> Some versions of Tk-8.6.x have *severe* memory leaks. To avoid, compile with Gregor's tk::text (patches/gregors_tktext_inline.patch).
 <item> OS X docked mode has some issues due to it's poor Tcl/Tk.
 <item> <bf>Focus Issues</bf>. KDE users can allow Tcl apps to properly raise themselves by
 configuring <i>desktop > window behavior > advanced > focus stealing prevention</i>
