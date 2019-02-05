@@ -4386,16 +4386,17 @@ set helpText(Author) "<h1>Scid vs. PC</h1>
   <ul> <ul> <ul> <ul> <ul> <ul> <ul>
   <li>$::scidName  version $::scidVersion</li>
   <br>
-  <li><url http://scidvspc.sourceforge.net/>http://scidvspc.sourceforge.net/</url></li>
-  <li>Mailing list: <url http://www.mail-archive.com/scidvspc-users@lists.sourceforge.net/>archive</url>,
-  <url https://lists.sourceforge.net/lists/listinfo/scidvspc-users>subscribe</url></li>
-  <br>
   <li>Based on:</li>
   <li>Shane's Chess Information Database 3.6.26</li>
   <li>(C) Steven Atkinson (stevenaaus@yahoo.com), Shane Hudson,</li>
   <li>Pascal Georges and others.</li>
   <br>
   <li>Licenced under the GNU General Public License.</li>
+  <br>
+  <li><url http://scidvspc.sourceforge.net/>http://scidvspc.sourceforge.net/</url></li>
+  <li>Mailing list: <url http://www.mail-archive.com/scidvspc-users@lists.sourceforge.net/>archive</url>,
+  <url https://lists.sourceforge.net/lists/listinfo/scidvspc-users>subscribe</url></li>
+  <li><url https://www.google.com/search?q=Tree+site:scidvspc.sourceforge.net/doc/>Search online help</url> (eg).
   <br>
   <li>Using Tcl/Tk version [info patchlevel]</li>
 
