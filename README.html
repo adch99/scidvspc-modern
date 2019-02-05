@@ -147,8 +147,10 @@ or as a tarball
 <H3>Linux , Unix</H3>
 
 
-<P>Scid vs. PC requires Wish (Tcl/Tk) 8.5 or later (though 8.5.10 has nasty bugs and should be avoided), and a C++ compiler .<BR>
-Example packages required include "tcl, tk, tcl-devel, tk-devel" and
+<P>Scid vs. PC requires Wish (Tcl/Tk) 8.5 or later and a C++ compiler. </P>
+<P><EM>Note Wish 8.5.10 has severe bugs, and many versions of Tk-8.6.x have *severe* memory leaks.
+To avoid, compile with Gregor's tk::text (patches/gregors_tktext_inline.patch).</EM></P>
+<P>Example packages required include "tcl, tk, tcl-devel, tk-devel" and
 "gcc-c++ , libstdc++"; but of course will vary with your distribution.</P>
 <P><EM>The default installation directory is <B>/usr/local</B>, which is generally empty, but any
 version of Scid here will be overwritten. To install into <B>/usr</B> (for eg)
@@ -335,8 +337,9 @@ work may not be too hard.  https://github.com/sshivaji/ctgexporter</LI>
 
 <P>
 <UL>
-<LI> Linux sound playback is buggy/broken.</LI>
+<LI> Linux sound playback is buggy/broken. The Wish sound package (Snack) needs maintenance.</LI>
 <LI> Tcl/Tk-8.5.10 is buggy.</LI>
+<LI> Some versions of Tk-8.6.x have *severe* memory leaks. To avoid, compile with Gregor's tk::text (patches/gregors_tktext_inline.patch).</LI>
 <LI> OS X docked mode has some issues due to it's poor Tcl/Tk.</LI>
 <LI> <B>Focus Issues</B>. KDE users can allow Tcl apps to properly raise themselves by
 configuring desktop > window behavior > advanced > focus stealing prevention
@@ -365,7 +368,7 @@ to create large databases from pgn. Typing "pgnscid somefile.pgn" creates a new 
 <UL>
 <LI> Using "ALT+F"... etc key bindings to access the menus is badly broke. This is a Tcl/Tk issue.</LI>
 <LI> Window focus/raise issues, another Tcl/Tk issue. </LI>
-<LI> Screenshots are broken.</LI>
+<LI> Screenshots are broken/disabled.</LI>
 </UL>
 </LI>
 </UL>
