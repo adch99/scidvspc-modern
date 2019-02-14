@@ -1631,7 +1631,7 @@ proc standardShortcuts {w} {
   bind $w <Left>  ::move::Back
   bind $w <Down>  {::move::Forward 10}
   bind $w <Right> ::move::Forward
-  bind $w <End>   ::move::End
+  bind $w <End>   {::move::End 1}
   bind $w <F2>    {::startAnalysisWin F2}
   bind $w <F3>    {::startAnalysisWin F3}
   bind $w <F4>    {::startAnalysisWin F4}

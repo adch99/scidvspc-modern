@@ -70,13 +70,17 @@ proc ::move::Start {} {
   }
 }
 
-proc ::move::End {} {
+proc ::move::End {{var 0}} {
   if {$::fics::playing == 2} {
       ::fics::writechan {forward 256} noecho
       return
   }
   set ::pause 1
-  sc_move end
+  if {$var} {
+    sc_move endVar
+  } else {
+    sc_move end
+  }
   updateBoard
   if {[::move::drawVarArrows]} { ::move::showVarArrows }
 }
