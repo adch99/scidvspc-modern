@@ -578,7 +578,14 @@ proc ::preport::report {fmt {withTable 1}} {
   append r "$rgames"
   if {$fmt == "ctext"} { append r "</run></darkblue>"; }
   append r " $games)$n"  
-  append r "$tr(Database)$ls [file tail [sc_base filename]] "
+
+  set baseName [file tail [sc_base filename]]
+  if {$fmt == "latex"} {
+    # A latex f-me - underscores throw errors
+    set baseName [string map {_ -} $baseName]
+  }
+  append r "$tr(Database)$ls $baseName "
+
   append r "([::utils::thousands [sc_base numGames]] $games)$n"
   if {$eco != ""} {
      append r "$tr(ECO)$ls $eco $n"

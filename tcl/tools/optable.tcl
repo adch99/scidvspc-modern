@@ -867,7 +867,13 @@ proc ::optable::report {fmt withTable {flipPos 0}} {
     append r "\n<center><window .oprepWin.text.bd></center>\n"
   }  
 
-  append r "$tr(Database):$next [file tail [sc_base filename]] "
+  set baseName [file tail [sc_base filename]]
+  if {$fmt == "latex"} {
+    # A latex f-me - underscores throw errors
+    set baseName [string map {_ -} $baseName]
+  }
+  append r "$tr(Database):$next $baseName "
+
   append r "([::utils::thousands [sc_base numGames]] $games)$n"
   if {$fmt == "latex"} {
      append r "$tr(OprepReport):$next {\\printchessgame} ("
