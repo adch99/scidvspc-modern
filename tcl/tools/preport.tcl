@@ -543,7 +543,12 @@ proc ::preport::report {fmt {withTable 1}} {
     if {$extracomma != ""} {
       set propername [concat $propername $extracomma]
     }    
-  }     
+  }
+
+  if {$fmt == "latex"} {
+    # A latex f-me - underscores throw errors
+    set propername [string map {_ -} $propername]
+  }
   
   # Use this if you want title last name first -- append r [::preport::_title $::preport::_player]
   append r [::preport::_title $propername]
