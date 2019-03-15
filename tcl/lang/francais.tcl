@@ -389,7 +389,7 @@ translate F Clear {Effacer}
 translate F Close {Fermer}
 translate F Contents {Contenu}
 translate F Defaults {Par défaut}
-translate F Delete {Éliminer}
+translate F Delete {Supprimer}
 translate F Graph {Graphique}
 translate F Help {Aide}
 translate F Import {Importer}
