@@ -18,7 +18,7 @@ proc ::tools::graphs::Save {mode w} {
   if {$fname == ""} {
     return
   }
-  if {![file writable $fname]} {
+  if {![file writable [file dirname $fname]]} {
     tk_messageBox -icon info -parent $w -title Scid -message "File $fname not writeable."
     return
   }
