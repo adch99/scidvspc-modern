@@ -3565,7 +3565,7 @@ from the Tools menu. Right-clicking the graph will refresh it.
   <p>
   The <green><run ::tools::graphs::score::Raise>Score/Time Graph</run></green> (Control-Shift-Z)
   shows the Move Evaluations or Move Times (stored as comments in the current game) as a graph. </p>
-  <p>The graph type is changed in Graph-<gt>Options. Data for the graphs is found/gathered in the standard PGN comments (or "commands") <b>%eval</b> and <b>%emt</b>.</p>
+  <p>The graph type is changed in Graph-<gt>Options. Data for the graphs is found/gathered in the standard PGN comments (or "commands") <b>%eval</b> and <b>%emt</b>. <b>%clk</b> datas are also supported, but they are recalculated and displayed as %emt.</p>
   <p>Alterntively, Scid vs PC can add scores using the <a Analysis Annotating>annotation feature</a>.
   These scores have one of the formats +0.25, [% +0.25] , or the standard [%eval +0.25]. The later two formats allow these scores to be hidden in  the PGN window by enabling PGN-<gt>Hide Codes.
   The values are represented from White's perspective (so a negative value means black is ahead).

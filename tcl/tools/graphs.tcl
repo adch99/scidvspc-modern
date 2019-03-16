@@ -505,19 +505,56 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
   set emtValues {}
   if {$type != "Score" } {
     # Thanks to Uwe Klimmek for motivation to write this feature and minor code snippets
-    foreach {i emt} [sc_game values emt] {
-      set seconds ""
-      set s [scan $emt "%f:%f:%f" ho mi sec]
-      switch $s {
-	2 {
-            set seconds [expr { $ho*60 + $mi}]
-            lappend emtValues $i $seconds
-          }
-        3 {
-            set seconds [expr { $ho*3600 + $mi*60 + $sec}]
-            lappend emtValues $i $seconds
-	 }
-        default {}
+
+    # Ok - have a look at %clk values if they look ok and convert them to %emt if more of them
+    set emtData [sc_game values emt]
+    set clkData [sc_game values clk]
+    if {[llength $clkData] > [llength $emtData] && \
+        [lindex $clkData 0] == "1.0" && [scan [lindex $clkData 1] "%f:%f:%f" ho mi sec] == 3} {
+      set whiteSeconds [expr {$ho*3600 + $mi*60 + $sec}]
+      if {[scan [lindex $clkData 3] "%f:%f:%f" ho mi sec] == 3} {
+        # Ok - looks good, so proceed
+	set blackSeconds [expr {$ho*3600 + $mi*60 + $sec}]
+        # Guess the clk start time
+        if {$blackSeconds > $whiteSeconds} {
+          set initialSeconds $blackSeconds
+        } else {
+          set initialSeconds $whiteSeconds
+        }
+        # little bit of a guesstimate will mean the first movetime/emt is 1 second
+        set initialSeconds [expr {int(ceil($initialSeconds + .1))}]
+        set blackSeconds $initialSeconds
+        set whiteSeconds $initialSeconds
+
+	foreach {i wClk j bClk} $clkData {
+	  if {[scan $wClk "%f:%f:%f" ho mi sec] != 3} {continue}
+	  set secs [expr {$ho*3600 + $mi*60 + $sec}]
+	  set emt [expr {$whiteSeconds - $secs}]
+          set whiteSeconds $secs
+          lappend emtValues $i [expr {int($emt)}]
+
+	  if {[scan $bClk "%f:%f:%f" ho mi sec] != 3} {continue}
+	  set secs [expr {$ho*3600 + $mi*60 + $sec}]
+	  set emt [expr {$blackSeconds - $secs}]
+          set blackSeconds $secs
+          lappend emtValues $j [expr {int($emt)}]
+	}
+      }
+    } else {
+      foreach {i emt} $emtData {
+	set seconds ""
+	set s [scan $emt "%f:%f:%f" ho mi sec]
+	switch $s {
+	  2 {
+	      set seconds [expr { $ho*60 + $mi}]
+	      lappend emtValues $i $seconds
+	    }
+	  3 {
+	      set seconds [expr { $ho*3600 + $mi*60 + $sec}]
+	      lappend emtValues $i $seconds
+	   }
+	  default {}
+	}
       }
     }
 
