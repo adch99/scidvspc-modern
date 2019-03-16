@@ -6,13 +6,22 @@ set FilterMaxYear $maxyear
 #   Saves a graph (e.g. tree graph, filter graph, rating graph) to a
 #   color or greyscale Postscript file.
 #   The mode should be "color" or "gray".
+#
+#   Canvas postscript writing is a little hopeless
+#   Better just to use a system screenshot
 
 proc ::tools::graphs::Save {mode w} {
   if {! [winfo exists $w]} { return }
   set ftypes {{"PostScript files" {.eps .ps}} {"All files" *}}
-  set fname [tk_getSaveFile -filetypes $ftypes -parent $w \
+  set fname [tk_getSaveFile -initialdir $::env(HOME) -filetypes $ftypes -parent $w \
                -defaultextension ".eps" -title "Scid: Save Graph"]
-  if {$fname == ""} { return }
+  if {$fname == ""} {
+    return
+  }
+  if {![file writable $fname]} {
+    tk_messageBox -icon info -parent $w -title Scid -message "File $fname not writeable."
+    return
+  }
   if {[catch {$w postscript -file $fname -colormode $mode} result]} {
     tk_messageBox -icon info -parent $w -title Scid -message $result
   }
