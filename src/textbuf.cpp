@@ -40,11 +40,7 @@ void
 TextBuffer::Free (void)
 {
     if (Buffer != NULL) {
-#ifdef WINCE
-        my_Tcl_Free( Buffer);
-#else
         delete[] Buffer;
-#endif
         Buffer = NULL;
         BufferSize = 0;
     }
@@ -84,13 +80,9 @@ TextBuffer::AddTranslation (char ch, const char * str)
 void
 TextBuffer::SetBufferSize (uint length)
 {
-#ifdef WINCE
-    if (Buffer != NULL) { my_Tcl_Free( Buffer); }
-    Buffer = my_Tcl_Alloc(sizeof(char[length]));
-#else
     if (Buffer != NULL) { delete[] Buffer; }
-    Buffer = new char[length];
-#endif
+    // NewLine(), Indent(), PrintWord() seem to buffer overrun when '*Current = 0'
+    Buffer = new char[length+1];
     BufferSize = length;
     ByteCount = Column = LineCount = 0; LineIsEmpty = 1;
     Current = Buffer;
@@ -250,17 +242,6 @@ TextBuffer::ReplaceContent(const char * newContent, uint size)
 	 return OK;
 }
 
-#ifdef WINCE
-errorT
-TextBuffer::DumpToFile (/*FILE * */Tcl_Channel fp)
-{
-    ASSERT (fp != NULL);
-    my_Tcl_Write(fp, Buffer, ByteCount);
-    return OK;
-}
-
-#else
-
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //### TextBuffer::DumpToFile(): Output a textbuffer to an open file.
 errorT
@@ -271,7 +252,6 @@ TextBuffer::DumpToFile (FILE * fp)
     return OK;
 }
 
-#endif
 ///////////////////////////////////////////////////////////////////////////
 //  EOF: textbuf.cpp
 ///////////////////////////////////////////////////////////////////////////
