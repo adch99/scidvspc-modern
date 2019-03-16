@@ -659,7 +659,7 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
   }
   ###### Override above ######
   # It's ugly, but for clarity, show type on graph
-  set title $type
+  # set title $type
 
   set ::tools::graphs::score::title $title
 
