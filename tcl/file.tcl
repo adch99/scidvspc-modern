@@ -487,8 +487,6 @@ proc ::file::Close {{base -1}} {
 
     # If closing current base - reset current game and switch to clipbase
     if { $current == $base } {
-      setTrialMode 0 0
-      sc_game new
       ::file::SwitchToBase clipbase
     } else {
       ::file::SwitchToBase $current
@@ -534,6 +532,7 @@ proc ::file::SwitchToBase {b} {
 }
 
 proc ::file::SwitchToNextBase {{dir 1}} {
+  setTrialMode 0 0
   set b [sc_base current]
   set clipbase [sc_info clipbase]
 
