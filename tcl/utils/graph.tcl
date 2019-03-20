@@ -207,15 +207,16 @@ proc ::utils::graph::_configure args {
 #    Redraw the entire graph, axes and data.
 
 proc ::utils::graph::redraw {graph} {
+  variable _data
   if {! [::utils::graph::isgraph $graph]} { error "$graph: no such graph" }
-  if {! [info exists ::utils::graph::_data($graph,canvas)]} { return }
-  $::utils::graph::_data($graph,canvas) delete -withtag g$graph
+  if {! [info exists _data($graph,canvas)]} { return }
+  $_data($graph,canvas) delete -withtag g$graph
   ::utils::graph::plot_axes $graph
   ::utils::graph::plot_data $graph
   if {$graph == "score"} {
     ::utils::graph::updateMove
     # Print a little title on the top left of graph
-    $::utils::graph::_data(score,canvas) create text 30 50 -text $::tools::graphs::score::title -font font_Small -anchor w
+    $_data(score,canvas) create text [expr {$_data(score,xtop) + 10}] 50 -text $::tools::graphs::score::title -font font_Small -anchor w
   }
 }
 
