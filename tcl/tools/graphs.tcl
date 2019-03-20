@@ -540,12 +540,15 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
 	  set secs [expr {$ho*3600 + $mi*60 + $sec}]
 	  set emt [expr {$whiteSeconds - $secs}]
           set whiteSeconds $secs
+          # Increments/40-move-reached may give negative values :( So display %emt as zero
+          if {$emt < 0} {set emt 0}
           lappend emtValues $i [expr {int($emt)}]
 
 	  if {[scan $bClk "%f:%f:%f" ho mi sec] != 3} {continue}
 	  set secs [expr {$ho*3600 + $mi*60 + $sec}]
 	  set emt [expr {$blackSeconds - $secs}]
           set blackSeconds $secs
+          if {$emt < 0} {set emt 0}
           lappend emtValues $j [expr {int($emt)}]
 	}
       }
@@ -603,6 +606,18 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
 	set yticks 20
 	set hlines {{gray90 1 each 5} {black 1 at 0}}
       }
+      if {$maxEmt > 500} {
+	set yticks 50
+	set hlines {{gray90 1 each 5} {black 1 at 0}}
+      }
+      if {$maxEmt > 1000} {
+	set yticks 100
+	set hlines {{gray90 1 each 50} {black 1 at 0}}
+      }
+      if {$maxEmt > 2000} {
+	set yticks 200
+	set hlines {{gray90 1 each 100} {black 1 at 0}}
+      }
     }
   }
 
@@ -610,8 +625,12 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
   $w.c coords text [expr {[winfo width $w.c] / 2}] 6
   set height [expr {[winfo height $w.c] - 62} ]
   set width [expr {[winfo width $w.c] - 50} ]
-
-  ::utils::graph::create score -width $width -height $height -xtop 25 -ytop 35 \
+  if {$yticks >= 100} {
+    set xtop 40
+  } else {
+    set xtop 30
+  }
+  ::utils::graph::create score -width $width -height $height -xtop $xtop -ytop 35 \
     -ytick $yticks -xtick 5 -font font_Small -canvas $w.c -textcolor black \
     -hline $hlines \
     -vline {{gray90 1 each 1} {steelBlue 1 each 5}}

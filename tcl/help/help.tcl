@@ -2935,7 +2935,7 @@ with the format "stat01: time nodes ply mvleft mvtot mvname". The results can be
      (Scores can then be utilized by the <a Graphs Score>Score Graph</a>)</li>
      <li><b>Which Side</b> Select which side(s) should be annotated.</li>
 <br>
-     <li><b>Score format</b> Select how single scores will be formatted. The square bracket options will hide comments in the PGN window if PGN-<gt>Hide Codes is selected.</li>
+     <li><b>Score format</b> Select how single scores will be formatted. The square bracket options will hide comments in the PGN window if PGN-<gt>Options-<gt>Hide-Codes is selected.</li>
      <li><b>Add annotator tag</b>
      Store engine name as an "Annotator" tag in the PGN header.</li>
      <li><b>Process variations</b> Recursively process variations.</li>
@@ -3568,9 +3568,10 @@ from the Tools menu. Right-clicking the graph will refresh it.
   <p>
   The <green><run ::tools::graphs::score::Raise>Score/Time Graph</run></green> (Control-Shift-Z)
   shows the Move Evaluations or Move Times (stored as comments in the current game) as a graph. </p>
-  <p>The graph type is changed in Graph-<gt>Options. Data for the graphs is found/gathered in the standard PGN comments (or "commands") <b>%eval</b> and <b>%emt</b>. <b>%clk</b> datas are also supported, but they are recalculated and displayed as %emt.</p>
-  <p>Alterntively, Scid vs PC can add scores using the <a Analysis Annotating>annotation feature</a>.
-  These scores have one of the formats +0.25, [% +0.25] , or the standard [%eval +0.25]. The later two formats allow these scores to be hidden in  the PGN window by enabling PGN-<gt>Hide Codes.
+  <p>The graph type is changed in Graph-<gt>Options. Data for the graphs is found/gathered in the standard PGN comments or "commands" as <b>%eval</b> (scores) and <b>%emt</b> (move times).</p>
+  <p><b>%clk</b> datas are also supported, but they are recalculated and displayed as %emt. Additionally, they do not properly calculate time totals because of (generally) unknown time-increments, and the common 40-move time top-ups.</p>
+  <p>Alternatively, Scid vs PC can add scores using the <a Analysis Annotating>annotation feature</a>.
+  These scores have one of the formats +0.25, [% +0.25] , or the standard [%eval +0.25]. The later two formats allow these scores to be hidden in  the PGN window by enabling PGN-<gt>Options-<gt>Hide-Codes.
   The values are represented from White's perspective (so a negative value means black is ahead).
   In cases when the scores are not from White's perspective, one can select an option
   (in the Options Menu) for an inverted perspective.
