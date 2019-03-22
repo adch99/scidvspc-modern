@@ -75,6 +75,7 @@ proc ::utils::graph::create args {
   lappend ::utils::graph::_graphs $graph
   
   # Remove any existing data for this graph name:
+  catch {unset ::utils::graph::prevMove}
   foreach key [array names ::utils::graph::_data] {
     if {[string match "$graph,*" $key]} { unset ::utils::graph::_data($key) }
   }
@@ -256,6 +257,8 @@ proc ::utils::graph::plot_axes {graph} {
   $canvas create rectangle $xminc $yminc $xmaxc $ymaxc -outline $tickcolor -tag "$tag outline"
   $canvas create rectangle $xminc $yminc $xmaxc $ymaxc -fill $_data($graph,background) -tag "$tag fill"
 
+  # brect - Blue Rectangle of original tree graph
+  # Now unused - S.A.
   set brect $_data($graph,brect)
   for {set i 0} {$i < [llength $brect]} {incr i} {
     set item [lindex $brect $i]
@@ -407,6 +410,12 @@ proc ::utils::graph::plot_data {graph} {
 
   foreach dataset $_data($graph,sets) {
     set color $_data($graph,$dataset,color)
+    # Time bargraphs (ytick > 1) have dual coloured bars
+    if {$graph == "score" && $dataset == "data" && $_data($graph,ytick) > 1} {
+      set color2 [::utils::graph::gradient $color .3 .]
+    } else {
+      set color2 {}
+    }
     set outline $_data($graph,$dataset,outline)
     set tag g$graph
     set coords [scale_data $graph $_data($graph,$dataset,coords)]
@@ -482,13 +491,17 @@ proc ::utils::graph::plot_data {graph} {
       set hwidth [expr {$hwidth - [xmap $graph 0]}]
       set hwidth [expr {$hwidth / 2}]
       if {$hwidth < 1} { set hwidth 1 }
-
       for {set i 0} {$i < $ncoords} {incr i 2} {
         set x [lindex $coords $i]
         set y [lindex $coords [expr {$i + 1}]]
+        if {$color2 != {} && [expr {$i % 4}] == 0} {
+          set c $color2
+        } else {
+          set c $color
+        }
         $canvas create rectangle \
           [expr {$x-$hwidth}] $y [expr {$x+$hwidth}] $base \
-          -fill $color -outline $outline -tags [list $tag moves move$x]
+          -fill $c -outline $outline -tags [list $tag moves move$x]
       }
     }
   }
@@ -504,14 +517,18 @@ proc ::utils::graph::updateMove {} {
     return
   }
 
-  # Hmmm... 10-50 u_seconds
-  $canvas itemconfigure moves -fill $_data(score,data,color)
+  # Hmmm... a little slow doing this maybe ?
+  if {[info exists ::utils::graph::prevMove]} {
+    $canvas itemconfigure move$::utils::graph::prevMove -fill $::utils::graph::prevCol
+  }
   if {[sc_var level]} {
     return
   }
   set result [lsearch $_data(score,plyList) [sc_pos location]]
+  set ::utils::graph::prevMove [lindex $_data(score,coordList) $result]
+  set ::utils::graph::prevCol  [$canvas itemcget move$::utils::graph::prevMove -fill]
   if {$result > -1} {
-    $canvas itemconfigure move[lindex $_data(score,coordList) $result] -fill $::scorebarcolor
+    $canvas itemconfigure move$::utils::graph::prevMove -fill $::scorebarcolor
   }
 }
 
@@ -664,3 +681,57 @@ proc ::utils::graph::set_range {graph} {
   }
 }
 
+# gradient 
+# Bryan Oakley
+# https://wiki.tcl-lang.org/page/Making+color+gradients
+#
+#    color   - standard tk color; either a name or rgb value
+#              (eg: "red", "#ff0000", etc)
+#    factor  - a number between -1.0 and 1.0. Negative numbers
+#              cause the color to be adjusted towards black;
+#              positive numbers adjust the color towards white.
+#    window  - a window name; used internally as an argument to
+#              [winfo rgb]; defaults to "."
+
+proc ::utils::graph::gradient {rgb factor {window .}} {
+
+    foreach {r g b} [winfo rgb $window $rgb] {break}
+
+    ### Figure out color depth and number of bytes to use in
+    ### the final result.
+    if {($r > 255) || ($g > 255) || ($b > 255)} {
+	set max 65535
+	set len 4
+    } else {
+	set max 255
+	set len 2
+    }
+
+    ### Compute new red value by incrementing the existing
+    ### value by a value that gets it closer to either 0 (black)
+    ### or $max (white)
+    set range [expr {$factor >= 0.0 ? $max - $r : $r}]
+    set increment [expr {int($range * $factor)}]
+    incr r $increment
+
+    ### Compute a new green value in a similar fashion
+    set range [expr {$factor >= 0.0 ? $max - $g : $g}]
+    set increment [expr {int($range * $factor)}]
+    incr g $increment
+
+    ### Compute a new blue value in a similar fashion
+    set range [expr {$factor >= 0.0 ? $max - $b : $b}]
+    set increment [expr {int($range * $factor)}]
+    incr b $increment
+
+    ### Format the new rgb string
+    set rgb \
+	[format "#%.${len}X%.${len}X%.${len}X" \
+	     [expr {($r>$max)?$max:(($r<0)?0:$r)}] \
+	     [expr {($g>$max)?$max:(($g<0)?0:$g)}] \
+	     [expr {($b>$max)?$max:(($b<0)?0:$b)}]]
+
+
+    ### Return the new rgb string
+    return $rgb
+}
