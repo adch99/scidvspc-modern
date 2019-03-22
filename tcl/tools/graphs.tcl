@@ -520,6 +520,7 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
     set clkData [sc_game values clk]
     if {[llength $clkData] > [llength $emtData] && \
         [lindex $clkData 0] == "1.0" && [scan [lindex $clkData 1] "%f:%f:%f" ho mi sec] == 3} {
+      ### Time graph uses %clk
       set whiteSeconds [expr {$ho*3600 + $mi*60 + $sec}]
       if {[scan [lindex $clkData 3] "%f:%f:%f" ho mi sec] == 3} {
         # Ok - looks good, so proceed
@@ -536,6 +537,11 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
         set whiteSeconds $initialSeconds
 
 	foreach {i wClk j bClk} $clkData {
+          # If a single white | black %clk is missing, end graph here
+          if {![string match *.0 $i] || ($j != "" && ![string match *.5 $j])} {
+            puts "Ooops - mismatched %clk data \"$i $wClk $j $bClk\""
+            break
+          }
 	  if {[scan $wClk "%f:%f:%f" ho mi sec] != 3} {continue}
 	  set secs [expr {$ho*3600 + $mi*60 + $sec}]
 	  set emt [expr {$whiteSeconds - $secs}]
@@ -553,6 +559,7 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
 	}
       }
     } else {
+      ### Time graph uses %emt
       foreach {i emt} $emtData {
 	set seconds ""
 	set s [scan $emt "%f:%f:%f" ho mi sec]
