@@ -265,8 +265,6 @@ menuText N OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 # ====== TODO To be translated ======
 menuText N OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 # ====== TODO To be translated ======
-menuText N OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
-# ====== TODO To be translated ======
 menuText N OptionsScoreColour "Score Graph" 0 {}
 # ====== TODO To be translated ======
 menuText N OptionsScoreBarColour "Score Graph current" 0 {}
@@ -871,6 +869,8 @@ menuText N CrosstabOptDeleted "Inclusief gewiste partijen" 8
 menuText N CrosstabOptColors "Kleuren (alleen bij Zwitsers)" 0
 # ====== TODO To be translated ======
 menuText N CrosstabOptColorRows "Color Rows" 0
+# ====== TODO To be translated ======
+menuText N CrosstabOptRowsColor "Row Color" 0 {Default crosstable row color}
 menuText N CrosstabOptColumnNumbers "Genummerde kolommen (Alleen bij gesloten tabel)" 2
 menuText N CrosstabOptGroup "Punten (groep)" 0
 menuText N CrosstabSort "Sorteren" 0

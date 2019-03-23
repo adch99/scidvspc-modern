@@ -255,8 +255,6 @@ menuText W OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 # ====== TODO To be translated ======
 menuText W OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 # ====== TODO To be translated ======
-menuText W OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
-# ====== TODO To be translated ======
 menuText W OptionsScoreColour "Score Graph" 0 {}
 # ====== TODO To be translated ======
 menuText W OptionsScoreBarColour "Score Graph current" 0 {}
@@ -866,6 +864,8 @@ menuText W CrosstabOptDeleted "Inkludera raderade partier" 8
 menuText W CrosstabOptColors "Färg (endast Schweizer)" 0
 # ====== TODO To be translated ======
 menuText W CrosstabOptColorRows "Color Rows" 0
+# ====== TODO To be translated ======
+menuText W CrosstabOptRowsColor "Row Color" 0 {Default crosstable row color}
 menuText W CrosstabOptColumnNumbers "Numrerade kolumner (Endast alla-mot-alla)" 2
 menuText W CrosstabOptGroup "Gruppresultat" 0
 menuText W CrosstabSort "Sortera" 0

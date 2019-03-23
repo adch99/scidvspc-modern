@@ -279,7 +279,6 @@ menuText S OptionsVarLineColour "Flechas de variación" 0 {Flechas de variación}
 menuText S OptionsRowColour "Filas" 0 {Color predeterminado de la columna de árbol/libro}
 menuText S OptionsSwitcherColour "Conmutador" 0 {Color del conmutador db predeterminado}
 menuText S OptionsProgressColour "Barra de progreso" 0 {Color predeterminado de la barra de progreso}
-menuText S OptionsCrossColour "Filas de tabla cruzada" 0 {Color predeterminado de fila de tabla cruzada}
 menuText S OptionsScoreColour "Gráfico de puntuación" 0 {}
 menuText S OptionsScoreBarColour "Gráfico de puntuación actual" 0 {}
 menuText S OptionsNames "Mis Nombres de Jugador" 3 {Edita mis nombres de jugador}
@@ -856,6 +855,7 @@ menuText S CrosstabOptBreaks "Puntuaciones de desempate" 0
 menuText S CrosstabOptDeleted "Incluir partidas borradas" 17
 menuText S CrosstabOptColors "Colores (sólo en tabla de Suizos)" 0
 menuText S CrosstabOptColorRows "Filas de color" 0
+menuText S CrosstabOptRowsColor "Filas de tabla cruzada" 0 {Color predeterminado de fila de tabla cruzada}
 menuText S CrosstabOptColumnNumbers "Columnas numeradas (sólo en tabla todos contra todos)" 11
 menuText S CrosstabOptGroup "Grupos de clasificación" 0
 menuText S CrosstabSort "Ordenar" 0

@@ -264,8 +264,6 @@ menuText I OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 # ====== TODO To be translated ======
 menuText I OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 # ====== TODO To be translated ======
-menuText I OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
-# ====== TODO To be translated ======
 menuText I OptionsScoreColour "Score Graph" 0 {}
 # ====== TODO To be translated ======
 menuText I OptionsScoreBarColour "Score Graph current" 0 {}
@@ -937,6 +935,8 @@ menuText I CrosstabOptDeleted "Inserisce le partite cancellate" 8
 menuText I CrosstabOptColors "Colori (solo girone Svizzero)" 0
 # ====== TODO To be translated ======
 menuText I CrosstabOptColorRows "Color Rows" 0
+# ====== TODO To be translated ======
+menuText I CrosstabOptRowsColor "Row Color" 0 {Default crosstable row color}
 menuText I CrosstabOptColumnNumbers "A colonne (Solo la tabella dei tornei all'italiana)" 3
 menuText I CrosstabOptGroup "Punti del gruppo" 0
 menuText I CrosstabSort "Ordina" 0

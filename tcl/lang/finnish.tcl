@@ -227,7 +227,6 @@ menuText L OptionsVarLineColour "Muunnelman nuolet" 0 {Muunnelman nuolet}
 menuText L OptionsRowColour "Rivit" 0 {Oletus puu/kirja-rivin väri}
 menuText L OptionsSwitcherColour "Katkaisin" 0 {Oletus db-valitsijan väri}
 menuText L OptionsProgressColour "Edistymispalkki" 0 {Edistymispalkin oletusväri}
-menuText L OptionsCrossColour "Turnaustaulukon rivit" 0 {Tulostaulukon rivin väri}
 menuText L OptionsScoreColour "Tulosgrafiikka" 0 {}
 menuText L OptionsScoreBarColour "Nykyinen tulosgrafiikka" 0 {}
 menuText L OptionsNames "Oman pelaajan nimet" 3 {Muokkaa oman pelaajan nimiä}
@@ -781,6 +780,7 @@ menuText L CrosstabOptBreaks "Tiebreak-tulokset" 4
 menuText L CrosstabOptDeleted "Sisällytä poistetut pelit" 8
 menuText L CrosstabOptColors "Väritiedot (Ainoastaan Swiss)" 0
 menuText L CrosstabOptColorRows "Rivien väri" 0
+menuText L CrosstabOptRowsColor "Turnaustaulukon rivit" 0 {Tulostaulukon rivin väri}
 menuText L CrosstabOptColumnNumbers "Numeroidut sarakkeet (Ainoastaan kaikki-pelaa-kaikki)" 2
 menuText L CrosstabOptGroup "Ryhmän tulokset" 0
 menuText L CrosstabSort "Lajittele tietyn kriteerin mukaan" 0

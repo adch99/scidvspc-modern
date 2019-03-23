@@ -31,9 +31,10 @@ proc ::crosstab::ConfigMenus {{lang ""}} {
   ### Scid menus are the biggest steaming pile of shit S.A
   ### We have to skip over numbers for "separators"
 
-  foreach idx   {1 2 3 4 5 6 7 8 9 11 12 13 14 16 17 18} tag {Ages Nats Tallies Ratings Titles Breaks Deleted Colors ColumnNumbers TieHead TieWin ThreeWin Group ColorPlain ColorHyper ColorRows} {
+  foreach idx   {1 2 3 4 5 6 7 8 9 11 12 13 14 16 17 19 20} tag {Ages Nats Tallies Ratings Titles Breaks Deleted Colors ColumnNumbers TieHead TieWin ThreeWin Group ColorPlain ColorHyper ColorRows RowsColor} {
     configMenuText $m.opt $idx CrosstabOpt$tag $lang
   }
+  
 
   # Disable the Ages, Nats, Titles items if spellcheck not enabled. S.A
   if {!$::spellCheckFileExists} {
@@ -223,9 +224,13 @@ proc ::crosstab::Open {{game {}}} {
     -variable crosstab(text) -value plain -command ::crosstab::Refresh
   $w.menu.opt add radiobutton -label CrosstabOptColorHyper \
     -variable crosstab(text) -value hypertext -command ::crosstab::Refresh
+
+  $w.menu.opt add separator
+
   $w.menu.opt add checkbutton -label CrosstabOptColorRows \
     -underline 0 -variable crosstab(colorrows) \
     -onvalue 1 -offvalue 0 -command ::crosstab::Refresh
+  $w.menu.opt add command -label CrosstabOptRowsColor -command ::crosstab::SetCrossColour
 
   $w.menu.sort add radiobutton -label CrosstabSortScore \
     -variable crosstab(sort) -value score -command ::crosstab::Refresh
@@ -334,6 +339,21 @@ proc ::crosstab::Open {{game {}}} {
 
   bind $w <Configure> "recordWinSize $w"
   ::createToplevelFinalize $w
+}
+
+proc ::crosstab::SetCrossColour {} {
+  global crosscolor crosstab
+  set temp [tk_chooseColor -initialcolor $crosscolor -title [tr CrosstabOptRowsColor]]
+  if {$temp != {}} {
+    set crosscolor $temp
+    if {!$crosstab(colorrows)} {
+      set crosstab(colorrows) 1
+      ::crosstab::Refresh
+    }
+    if {[winfo exists .crosstabWin.f.text]} {
+      .crosstabWin.f.text tag configure rowColor -background $crosscolor
+    }
+  }
 }
 
 proc ::crosstab::setFilter {{round {}}} {

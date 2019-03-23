@@ -227,7 +227,6 @@ menuText T OptionsVarLineColour "Varyasyant Okları" 0 {Variation arrows}
 menuText T OptionsRowColour "Satır rengi" 0 {Varsayılan ağaç / kitap satır rengi}
 menuText T OptionsSwitcherColour "db anahtarlayıcı" 0 {Varsayılan db anahtarlayıcı rengi}
 menuText T OptionsProgressColour "İlerleme çubuğu" 0 {Varsayılan ilerleme çubuğu rengi}
-menuText T OptionsCrossColour "Çapraz tablo taban çizgisi" 0 {Çapraz tablo taban çizgisi rengi}
 menuText T OptionsScoreColour "Puan Grafiği" 0 {}
 menuText T OptionsScoreBarColour "Puan Grafiği akımı" 0 {}
 menuText T OptionsNames "Oyuncu adlarım" 3 {Oyuncu adlarımı düzenle}
@@ -779,6 +778,7 @@ menuText T CrosstabOptBreaks "uzatmaların sonucları" 4
 menuText T CrosstabOptDeleted "Silinen Oyunları Dahil Et" 8
 menuText T CrosstabOptColors "Renk Bilgisi (yalnızca İsviçre)" 0
 menuText T CrosstabOptColorRows "Renk Sıraları" 0
+menuText T CrosstabOptRowsColor "Çapraz tablo taban çizgisi" 0 {Çapraz tablo taban çizgisi rengi}
 menuText T CrosstabOptColumnNumbers "Numaralandırılmış sütunlar (All-Play-Only)" 2
 menuText T CrosstabOptGroup "Grup Puanları" 0
 menuText T CrosstabSort "Sırala" 0

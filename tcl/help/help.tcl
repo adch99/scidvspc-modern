@@ -3961,7 +3961,6 @@ set helpText(Options) {<h1>Options and Preferences</h1>
   but a few other colour settings are available in <b>Options-<gt>Colours</b>.
 </p><p>
   The <b>Rows</b> colour is for the highlighted row in the Tree, Books, Finder, PlayerFinder and TournamentFinder windows.
-  Crosstable coloured rows must be enabled in the Crosstable Options menus.
   The Board arrows and drawables' colours are set in the <a Comment Diagrams>Comment Editor</a>.
   </p>
   <p>

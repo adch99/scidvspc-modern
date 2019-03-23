@@ -280,8 +280,6 @@ menuText H OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 # ====== TODO To be translated ======
 menuText H OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 # ====== TODO To be translated ======
-menuText H OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
-# ====== TODO To be translated ======
 menuText H OptionsScoreColour "Score Graph" 0 {}
 # ====== TODO To be translated ======
 menuText H OptionsScoreBarColour "Score Graph current" 0 {}
@@ -940,6 +938,8 @@ menuText H CrosstabOptDeleted "Törölt játszmákkal együtt" 0
 menuText H CrosstabOptColors "Színek (csak svájci rendszer esetén)" 2
 # ====== TODO To be translated ======
 menuText H CrosstabOptColorRows "Color Rows" 0
+# ====== TODO To be translated ======
+menuText H CrosstabOptRowsColor "Row Color" 0 {Default crosstable row color}
 menuText H CrosstabOptColumnNumbers "Számozott oszlopok (csak körmérkõzéshez)" 2
 menuText H CrosstabOptGroup "Pontcsoportok" 1
 menuText H CrosstabSort "Rendezés" 0

@@ -462,6 +462,11 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
         -variable ::tools::graphs::score::invert$i  -command ::tools::graphs::score::Refresh
     }
 
+    $w.menu.options add separator
+
+    $w.menu.options add command -label OptionsScoreColour -command ::tools::graphs::SetScoreColour
+    $w.menu.options add command -label OptionsScoreBarColour -command ::tools::graphs::SetScoreBarColour
+
     $w.menu add cascade -label $::tr(Help) -menu $w.menu.help -underline 0
     menu $w.menu.help
     $w.menu.help add command -label $::tr(Help)  -accelerator F1 -command {helpWindow Graphs Score}
@@ -767,6 +772,10 @@ proc ::tools::graphs::score::ConfigMenus {{lang ""}} {
   foreach idx {6 7 8} tag {Bar White Black} {
     configMenuText $m.options $idx GraphOptions$tag $lang
   }
+
+  foreach idx {10 11} tag {Colour BarColour} {
+    configMenuText $m.options $idx OptionsScore$tag $lang
+  }
 }
 
 proc ::tools::graphs::score::Move {x y} {
@@ -972,6 +981,25 @@ proc ::tools::graphs::rating::Refresh {{player {}}} {
   ::utils::graph::redraw ratings
   $w.c itemconfigure text -text $title
   unbusyCursor $w
+}
+
+proc ::tools::graphs::SetScoreColour {} {
+  global scorecolor
+  set temp [tk_chooseColor -initialcolor $scorecolor -title [tr OptionsScoreColour]]
+  if {$temp != {}} {
+    set scorecolor $temp
+    ::tools::graphs::score::Refresh
+  }
+}
+
+proc ::tools::graphs::SetScoreBarColour {} {
+  global scorebarcolor
+  set temp [tk_chooseColor -initialcolor $scorebarcolor -title [tr OptionsScoreBarColour]]
+  if {$temp != {}} {
+    set scorebarcolor $temp
+    set ::tools::graphs::showbar 1
+    ::tools::graphs::score::Refresh
+  }
 }
 
 proc ::tools::graphs::rating::ConfigMenus {{lang ""}} {

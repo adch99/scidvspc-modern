@@ -1268,12 +1268,6 @@ $m add command -label OptionsSwitcherColour -command SetRowSwitcherColour
 set helpMessage($m,1) OptionsSwitcherColour
 $m add command -label OptionsProgressColour -command SetProgressColour
 set helpMessage($m,1) OptionsProgressColour
-$m add command -label OptionsCrossColour -command SetCrossColour
-set helpMessage($m,1) OptionsCrossColour
-$m add command -label OptionsScoreColour -command SetScoreColour
-set helpMessage($m,1) OptionsScoreColour
-$m add command -label OptionsScoreBarColour -command SetScoreBarColour
-set helpMessage($m,1) OptionsScoreBarColour
 
 $m add separator
 
@@ -1365,37 +1359,8 @@ proc SetProgressColour {} {
   }
 }
 
-proc SetCrossColour {} {
-  global crosscolor
-  set temp [tk_chooseColor -initialcolor $crosscolor -title [tr OptionsCrossColour]]
-  if {$temp != {}} {
-    set crosscolor $temp
-    if {[winfo exists .crosstabWin.f.text]} {
-      .crosstabWin.f.text tag configure rowColor -background $crosscolor
-    }
-  }
-}
-
-proc SetScoreColour {} {
-  global scorecolor
-  set temp [tk_chooseColor -initialcolor $scorecolor -title [tr OptionsScoreColour]]
-  if {$temp != {}} {
-    set scorecolor $temp
-    ::tools::graphs::score::Refresh
-  }
-}
-
-proc SetScoreBarColour {} {
-  global scorebarcolor
-  set temp [tk_chooseColor -initialcolor $scorebarcolor -title [tr OptionsScoreBarColour]]
-  if {$temp != {}} {
-    set scorebarcolor $temp
-    set ::tools::graphs::showbar 1
-    ::tools::graphs::score::Refresh
-  }
-}
-
 proc initBackgroundColour {colour} {
+    ### Hmm , todo - Use tk_setPalette!?!
     # border around gameinfo photos
     .main.photoW configure -background $colour
     .main.photoB configure -background $colour
@@ -1760,7 +1725,7 @@ proc setLanguageMenus {{lang ""}} {
     configMenuText .menu.options [tr Options$tag $oldLang] Options$tag $lang
   }
 
-  foreach tag {BackColour MainLineColour VarLineColour RowColour SwitcherColour ProgressColour CrossColour ScoreColour ScoreBarColour} {
+  foreach tag {BackColour MainLineColour VarLineColour RowColour SwitcherColour ProgressColour} {
     configMenuText .menu.options.colour [tr Options$tag $oldLang] Options$tag $lang
   }
   configMenuText .menu.options.colour.back [tr OptionsMovesHighlightLastMoveColor $oldLang] OptionsMovesHighlightLastMoveColor $lang

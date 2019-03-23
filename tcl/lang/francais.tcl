@@ -255,8 +255,6 @@ menuText F OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 # ====== TODO To be translated ======
 menuText F OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 # ====== TODO To be translated ======
-menuText F OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
-# ====== TODO To be translated ======
 menuText F OptionsScoreColour "Score Graph" 0 {}
 # ====== TODO To be translated ======
 menuText F OptionsScoreBarColour "Score Graph current" 0 {}
@@ -837,6 +835,8 @@ menuText F CrosstabOptDeleted "Inclure les parties effacées" 8
 menuText F CrosstabOptColors "Couleurs (système suisse uniquement)" 1
 # ====== TODO To be translated ======
 menuText F CrosstabOptColorRows "Color Rows" 0
+# ====== TODO To be translated ======
+menuText F CrosstabOptRowsColor "Row Color" 0 {Default crosstable row color}
 menuText F CrosstabOptColumnNumbers "Colonnes numérotées (Toutes rondes seulement)" 2
 menuText F CrosstabOptGroup "Scores du groupe" 0
 menuText F CrosstabSort "Trier" 0

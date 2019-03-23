@@ -258,7 +258,6 @@ menuText O OptionsVarLineColour "Variant piler" 0 {}
 menuText O OptionsRowColour "Rader" 0 {}
 menuText O OptionsSwitcherColour "Databasevelger" 0 {}
 menuText O OptionsProgressColour "Fremdriftslinje" 0 {Standard farge for fremdriftslinje}
-menuText O OptionsCrossColour "Rader i krysstabell" 0 {}
 menuText O OptionsScoreColour "Poeng-graf" 0 {}
 menuText O OptionsScoreBarColour "Gjeldene poeng-graf" 0 {}
 menuText O OptionsNames "Mine spillernavn..." 0 {Rediger mine spillernavn}
@@ -809,6 +808,7 @@ menuText O CrosstabOptBreaks "Poengfordel" 0
 menuText O CrosstabOptDeleted "Inkluder slettede partier" 0
 menuText O CrosstabOptColors "Farger (kun sveitsisk)" 0
 menuText O CrosstabOptColorRows "Fargede rader" 0
+menuText O CrosstabOptRowsColor "Rader i krysstabell" 0 {}
 menuText O CrosstabOptColumnNumbers "Nummererte kolonner (kun alle-mot-alle-tabeller)" 0
 menuText O CrosstabOptGroup "Gruppepoeng" 0
 menuText O CrosstabSort "Sorter" 0
