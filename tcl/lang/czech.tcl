@@ -275,8 +275,6 @@ menuText C OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 # ====== TODO To be translated ======
 menuText C OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 # ====== TODO To be translated ======
-menuText C OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
-# ====== TODO To be translated ======
 menuText C OptionsScoreColour "Score Graph" 0 {}
 # ====== TODO To be translated ======
 menuText C OptionsScoreBarColour "Score Graph current" 0 {}
@@ -933,6 +931,7 @@ menuText C CrosstabOptDeleted "Vèetnì vymazaných partií" 9
 menuText C CrosstabOptColors "Barvy (jen pro ¹výcarský systém)" 0
 # ====== TODO To be translated ======
 menuText C CrosstabOptColorRows "Color Rows" 0
+menuText C CrosstabOptRowsColor "Row Color" 0 {Default crosstable row color}
 menuText C CrosstabOptColumnNumbers "Èíslované sloupce (jen v tabulkách 'ka¾dý s ka¾dým')" 3
 menuText C CrosstabOptGroup "Skupiny podle skóre" 0
 menuText C CrosstabSort "Øadit" 2

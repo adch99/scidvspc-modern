@@ -257,8 +257,6 @@ menuText P OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 # ====== TODO To be translated ======
 menuText P OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 # ====== TODO To be translated ======
-menuText P OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
-# ====== TODO To be translated ======
 menuText P OptionsScoreColour "Score Graph" 0 {}
 # ====== TODO To be translated ======
 menuText P OptionsScoreBarColour "Score Graph current" 0 {}
@@ -849,6 +847,8 @@ menuText P CrosstabOptDeleted "Uwzględniaj usunięte partie" 0
 menuText P CrosstabOptColors "Kolory (tylko szwajcar)" 0
 # ====== TODO To be translated ======
 menuText P CrosstabOptColorRows "Color Rows" 0
+# ====== TODO To be translated ======
+menuText P CrosstabOptRowsColor "Row Color" 0 {Default crosstable row color}
 menuText P CrosstabOptColumnNumbers "Numerowane kolumny (tylko turniej kołowy)" 0
 menuText P CrosstabOptGroup "Grupuj po liczbie punktów" 0
 menuText P CrosstabSort "Sortowanie" 0

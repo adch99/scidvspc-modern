@@ -278,8 +278,6 @@ menuText B OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 # ====== TODO To be translated ======
 menuText B OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 # ====== TODO To be translated ======
-menuText B OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
-# ====== TODO To be translated ======
 menuText B OptionsScoreColour "Score Graph" 0 {}
 # ====== TODO To be translated ======
 menuText B OptionsScoreBarColour "Score Graph current" 0 {}
@@ -939,6 +937,8 @@ menuText B CrosstabOptDeleted "Include deleted games" 8 ;# ***
 menuText B CrosstabOptColors "Cores (apenas para tabela Swiss)" 0
 # ====== TODO To be translated ======
 menuText B CrosstabOptColorRows "Color Rows" 0
+# ====== TODO To be translated ======
+menuText B CrosstabOptRowsColor "Row Color" 0 {Default crosstable row color}
 menuText B CrosstabOptColumnNumbers "Numbered columns (All-play-all table only)" 2 ;# ***
 menuText B CrosstabOptGroup "Pontuacao do Grupo" 0
 menuText B CrosstabSort "Ordenar" 0

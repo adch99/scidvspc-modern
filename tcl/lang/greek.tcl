@@ -280,8 +280,6 @@ menuText G OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 # ====== TODO To be translated ======
 menuText G OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 # ====== TODO To be translated ======
-menuText G OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
-# ====== TODO To be translated ======
 menuText G OptionsScoreColour "Score Graph" 0 {}
 # ====== TODO To be translated ======
 menuText G OptionsScoreBarColour "Score Graph current" 0 {}
@@ -882,6 +880,8 @@ menuText G CrosstabOptDeleted "Συμπερίληψη Διαγραμμένων" 
 menuText G CrosstabOptColors "Χρώματα (Μόνο σε Σουηδικό)" 0
 # ====== TODO To be translated ======
 menuText G CrosstabOptColorRows "Color Rows" 0
+# ====== TODO To be translated ======
+menuText G CrosstabOptRowsColor "Row Color" 0 {Default crosstable row color}
 menuText G CrosstabOptColumnNumbers "Αριθμ.Στήλες (Μόνο σε Όλοι-εναντίον-Όλων)" 2
 menuText G CrosstabOptGroup "Σκορ Ομάδας" 7
 menuText G CrosstabSort "Ταξινόμηση με" 0

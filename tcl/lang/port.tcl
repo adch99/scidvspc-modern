@@ -244,7 +244,6 @@ menuText U OptionsVarLineColour "Setas da Variante" 0 {Variation arrows}
 menuText U OptionsRowColour "Linhas" 0 {Default tree/book row color}
 menuText U OptionsSwitcherColour "Alternador" 0 {Default db switcher color}
 menuText U OptionsProgressColour "Barra de Progresso" 0 {Default progressbar color}
-menuText U OptionsCrossColour "Linhas da tabela cruzada" 0 {Default crosstable row color}
 menuText U OptionsScoreColour "Gráfico dos Pontos" 0 {}
 menuText U OptionsScoreBarColour "Gráfico de pontos atual" 0 {}
 menuText U OptionsNames "Meus Nomes de Jogador..." 0 {Editar os meus nomes de jogador} ;# ***
@@ -800,6 +799,7 @@ menuText U CrosstabOptBreaks "Scores de desempate" 0
 menuText U CrosstabOptDeleted "Incluir jogos apagados" 8 ;# ***
 menuText U CrosstabOptColors "Cores (apenas para tabela Swiss)" 0
 menuText U CrosstabOptColorRows "Colorir Linhas" 0
+menuText U CrosstabOptRowsColor "Linhas da tabela cruzada" 0 {Default crosstable row color}
 menuText U CrosstabOptColumnNumbers "Colunas numeradas (All-play-all table only)" 2 ;# ***
 menuText U CrosstabOptGroup "Pontuação do Grupo" 0
 menuText U CrosstabSort "Ordenar" 0

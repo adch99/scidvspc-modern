@@ -295,8 +295,6 @@ menuText Y OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 # ====== TODO To be translated ======
 menuText Y OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 # ====== TODO To be translated ======
-menuText Y OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
-# ====== TODO To be translated ======
 menuText Y OptionsScoreColour "Score Graph" 0 {}
 # ====== TODO To be translated ======
 menuText Y OptionsScoreBarColour "Score Graph current" 0 {}
@@ -1011,6 +1009,8 @@ menuText Y CrosstabOptDeleted "Include deleted games" 8 ;# ***
 menuText Y CrosstabOptColors "Boje (samo za ¹vajcarski sistem)" 0
 # ====== TODO To be translated ======
 menuText Y CrosstabOptColorRows "Color Rows" 0
+# ====== TODO To be translated ======
+menuText Y CrosstabOptRowsColor "Row Color" 0 {Default crosstable row color}
 menuText Y CrosstabOptColumnNumbers "Numbered columns (All-play-all table only)" 2 ;# ***
 menuText Y CrosstabOptGroup "Grupi¹i rezultate" 0
 menuText Y CrosstabSort "Sortiraj" 0

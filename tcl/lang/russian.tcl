@@ -256,8 +256,6 @@ menuText R OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 # ====== TODO To be translated ======
 menuText R OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 # ====== TODO To be translated ======
-menuText R OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
-# ====== TODO To be translated ======
 menuText R OptionsScoreColour "Score Graph" 0 {}
 # ====== TODO To be translated ======
 menuText R OptionsScoreBarColour "Score Graph current" 0 {}
@@ -836,6 +834,8 @@ menuText R CrosstabOptDeleted "Включить удалённые партии"
 menuText R CrosstabOptColors "Цвета (только для швейцарской системы)" 0
 # ====== TODO To be translated ======
 menuText R CrosstabOptColorRows "Color Rows" 0
+# ====== TODO To be translated ======
+menuText R CrosstabOptRowsColor "Row Color" 0 {Default crosstable row color}
 menuText R CrosstabOptColumnNumbers "Цифровые колонки (только для всех против всех)" 2
 menuText R CrosstabOptGroup "Групповой счёт" 0
 menuText R CrosstabSort "Сортировка" 0

@@ -251,8 +251,7 @@ menuText E OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
 menuText E OptionsRowColour "Rows" 0 {Default tree/book row color}
 menuText E OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 menuText E OptionsProgressColour "Progressbar" 0 {Default progressbar color}
-menuText E OptionsCrossColour "Crosstable rows" 0 {Default crosstable row color}
-menuText E OptionsScoreColour "Score Graph" 0 {}
+menuText E OptionsScoreColour "Score Graph colour" 0 {}
 menuText E OptionsScoreBarColour "Score Graph current" 0 {}
 menuText E OptionsNames "My Player Names" 3 {Edit my player names}
 menuText E OptionsExport "Exporting" 0 {Change text export options}
@@ -798,6 +797,7 @@ menuText E CrosstabOptBreaks "Tie-Break Scores" 4
 menuText E CrosstabOptDeleted "Include Deleted Games" 8
 menuText E CrosstabOptColors "Color Information (Swiss only)" 0
 menuText E CrosstabOptColorRows "Color Rows" 0
+menuText E CrosstabOptRowsColor "Row Colour" 0 {Default crosstable row color}
 menuText E CrosstabOptColumnNumbers "Numbered Columns (All-Play-All only)" 2
 menuText E CrosstabOptGroup "Group Scores" 0
 menuText E CrosstabSort "Sort by" 0
