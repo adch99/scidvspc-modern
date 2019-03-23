@@ -444,9 +444,9 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
 
     $w.menu add cascade -label GraphOptions -menu $w.menu.options
 
-    menu $w.menu.options
+    menu $w.menu.options -tearoff 1
 
-    # (adjust ConfigMenus 6 7 8 below)
+    # (adjust ConfigMenus 7 8 9 , 11 12 below)
     foreach i {Auto Score Time {Score Combo} {Time Combo}} {
       $w.menu.options add radiobutton -label $i -variable ::tools::graphs::type -value $i \
         -command ::tools::graphs::score::Refresh
@@ -769,11 +769,11 @@ proc ::tools::graphs::score::ConfigMenus {{lang ""}} {
     configMenuText $m.file $idx GraphFile$tag $lang
   }
 
-  foreach idx {6 7 8} tag {Bar White Black} {
+  foreach idx {7 8 9} tag {Bar White Black} {
     configMenuText $m.options $idx GraphOptions$tag $lang
   }
-
-  foreach idx {10 11} tag {Colour BarColour} {
+  # todo - fix
+  foreach idx {11 12} tag {Colour BarColour} {
     configMenuText $m.options $idx OptionsScore$tag $lang
   }
 }
