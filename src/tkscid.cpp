@@ -9003,20 +9003,21 @@ sc_game_values (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 	    char buffer[1024], buffer2[1024];
 	    sprintf (buffer, "%.1f", (float)moveCounter * 0.5 + 0.5);
 
-	    sscanf (comment + offset + strlen(type), "%s ", buffer2);
-            
-            // find the text upto the terminating ']'
+	    const char * p = comment + offset + strlen(type);
+
             int found = 0, i = 0 ;
-            while (buffer2[i++]) {
-              if (buffer2[i] == ']') {
-                found = 1;
-                break;
-              }
+            while (p[i] && i < 1023) {
+		if (p[i] == ']') {
+		    found = 1;
+		    break;
+		}
+		buffer2[i] = p[i];
+		i++;
             }
             if (found) {
-              buffer2[i] = 0;
-	      Tcl_AppendElement (ti, buffer);
-	      Tcl_AppendElement (ti, buffer2);
+		buffer2[i] = 0;
+		Tcl_AppendElement (ti, buffer);
+		Tcl_AppendElement (ti, buffer2);
             }
         }
     }
