@@ -1,0 +1,153 @@
+A better looking result from using tk_setPalette to set global colors which also makes
+text colours changed for readability. But hmmm... the graphs turn yellow, 
+and there are other anomolies, but maybe only cause i previously used tk_bisque.
+
+Index: tcl/start.tcl
+===================================================================
+--- tcl/start.tcl	(revision 2945)
++++ tcl/start.tcl	(working copy)
+@@ -111,6 +111,7 @@
+ set ::pause 0
+ set ::defaultBackground white
+ set ::defaultGraphBackgroud white
++set ::was_setPalette 0
+ set ::enableBackground 0
+ set ::tacgame::threshold 0.9
+ set ::tacgame::levelMin 1200
+@@ -1565,13 +1566,19 @@
+ if {$enableBackground == 1} {
+   option add *Text*background $defaultBackground
+   option add *Listbox*background $defaultBackground
++} else {
++  if {$enableBackground == 2} {
++    set was_setPalette 1
++    tk_setPalette $defaultBackground
++  }
++  foreach i {.sgraph .rgraph .fgraph .afgraph} {
++    if {[winfo exists $i.c]} {
++      $i.c itemconfigure fill -fill $defaultBackground
++      puts "$i.c itemconfigure fill -fill $defaultBackground"
++    }
++  }
+ }
+ 
+-if {$enableBackground == 2} {
+-  # only valid after restart
+-  option add *background $defaultBackground
+-}
+-
+ # Reconfigure fonts if necessary
+ 
+ foreach i {Regular Menu Small Tiny Fixed} {
+Index: tcl/menus.tcl
+===================================================================
+--- tcl/menus.tcl	(revision 2958)
++++ tcl/menus.tcl	(working copy)
+@@ -1281,17 +1281,7 @@
+ 
+ foreach i {No Some All} j {0 1 2} {
+   $m.back add radiobutton -label $i -value $j -variable ::enableBackground -command {
+-    if {$::enableBackground == 2} {
+-      set answer [tk_messageBox -type yesno -icon info -title Scid -message "Enabling background colour globally requires restart.\nExit now ?"]
+-      if {$answer == "yes"} {
+-	::file::Exit
+-      }
+-    }
+-    if {$::enableBackground} {
+-      initBackgroundColour $defaultBackground
+-    } else {
+-      initBackgroundColour grey95
+-    }
++    initBackgroundColour
+   }
+   set helpMessage($m.back,1) $i
+ }
+@@ -1301,11 +1291,10 @@
+   set temp [tk_chooseColor -initialcolor $defaultBackground -title [tr OptionsBackColour]]
+   if {$temp != {}} {
+     set defaultBackground $temp
+-    if {!$enableBackground} {set enableBackground 1}
+-    option add *Text*background $temp
+-    option add *Listbox*background $temp
+-    .main.gameInfo configure -bg $temp
+-    initBackgroundColour $defaultBackground
++    if {!$enableBackground} {
++      set enableBackground 1
++    }
++    initBackgroundColour
+   }
+ }
+ 
+@@ -1359,26 +1348,56 @@
+   }
+ }
+ 
+-proc initBackgroundColour {colour} {
+-    ### Hmm , todo - Use tk_setPalette!?!
+-    # border around gameinfo photos
+-    .main.photoW configure -background $colour
+-    .main.photoB configure -background $colour
+-    ::ttk::style configure Treeview -background $colour
+-    ::ttk::style configure Treeview -fieldbackground $colour
+-    option add *Text*background $colour
+-    option add *Listbox*background $colour
+-    # Updating padding in tree would be nice, but now they have to close and re-open tree
+-    # if {[winfo exists .baseWin.c]} { .baseWin.c configure -bg $temp }
+-    recurseBackgroundColour . $colour
+-    set ::defaultGraphBackgroud $colour
+-    foreach i {.sgraph .rgraph .fgraph .afgraph} {
+-      if {[winfo exists $i.c]} {
+-        $i.c itemconfigure fill -fill $colour
++proc initBackgroundColour {} {
++    global defaultBackground enableBackground was_setPalette
++
++    if {$enableBackground == 2} {
++      set was_setPalette 1
++      tk_setPalette $defaultBackground
++      # setPallette does not affect these canvas, so handle separate
++      foreach i {.sgraph .rgraph .fgraph .afgraph} {
++        if {[winfo exists $i.c]} {
++          $i.c itemconfigure fill -fill $defaultBackground
++          puts "$i.c itemconfigure fill -fill $defaultBackground"
++        }
+       }
++    } else {
++      if {$was_setPalette} {
++	 tk_setPalette grey95
++	 set was_setPalette 0
++      } 
++      if {$::enableBackground == 1} {
++	setSelectColour $defaultBackground
++      } else {
++        # reset to default as-best we can
++	setSelectColour grey95
++      }
+     }
+ }
+ 
++proc setSelectColour {colour} {
++      option add *Text*background $colour
++      option add *Listbox*background $colour
++      .main.gameInfo configure -bg $colour
++
++      # border around gameinfo photos
++      .main.photoW configure -background $colour
++      .main.photoB configure -background $colour
++      ::ttk::style configure Treeview -background $colour
++      ::ttk::style configure Treeview -fieldbackground $colour
++      option add *Text*background $colour
++      option add *Listbox*background $colour
++      # Updating padding in tree would be nice, but now they have to close and re-open tree
++      # if {[winfo exists .baseWin.c]} { .baseWin.c configure -bg $temp }
++      recurseBackgroundColour . $colour
++      foreach i {.sgraph .rgraph .fgraph .afgraph} {
++	if {[winfo exists $i.c]} {
++	  $i.c itemconfigure fill -fill $colour
++	  puts "$i.c itemconfigure fill -fill $colour"
++	}
++      }
++}
++
+ proc recurseBackgroundColour {w colour} {
+      if {[winfo class $w] == "Text" || [winfo class $w] == "Listbox"} {
+          $w configure -background $colour
