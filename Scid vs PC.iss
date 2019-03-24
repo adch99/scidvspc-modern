@@ -1,5 +1,5 @@
 
-#define AppVersion '4.19'
+#define AppVersion '4.20'
 #define AppName    'Scid vs PC'
 #define ActiveTclUrl 'http://www.activestate.com/activetcl/downloads'
 
@@ -11,7 +11,7 @@ AppVerName={# AppName} {# AppVersion}
 AppVersion={# AppVersion}
 AppPublisher=Steven Atkinson
 AppPublisherURL=http://scidvspc.sourceforge.net
-AppCopyright=Steven Atkinson (C) 2009 - 2018  Steven Atkinson (and others)
+AppCopyright=Steven Atkinson (C) 2009 - 2019  Steven Atkinson (and others)
 DefaultDirName={sd}\{# AppName}-{# AppVersion}
 UsePreviousAppDir=no
 DefaultGroupName={# AppName}
