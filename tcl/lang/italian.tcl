@@ -1749,6 +1749,8 @@ translate I FICSTimeseal {Timeseal}
 translate I FICSTimesealPort {Timeseal port}
 translate I FICSSilence {Console filter}
 translate I FICSOffers {Offers}
+# ====== TODO To be translated ======
+translate I FICSMakeOffer {Make Offer}
 translate I FICSGames {Games}
 translate I FICSFindOpponent {Find opponent}
 translate I FICSTakeback {Takeback}

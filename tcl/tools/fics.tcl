@@ -841,7 +841,7 @@ namespace eval fics {
     frame $w.space$row -height 2 -borderwidth 2 -relief sunken
     grid  $w.space$row -column 0 -row $row -columnspan 3 -sticky ew -pady 3
 
-    button $w.seek -text {Make Offer} -command {
+    button $w.seek -text $tr(FICSMakeOffer) -command {
       set range ""
       if {$::fics::findopponent(limitrating) } {
         set range "$::fics::findopponent(rating1)-$::fics::findopponent(rating2)"
@@ -1756,9 +1756,9 @@ if {[lindex $line 0] != {Still in progress}} {
     toplevel $w
     wm state $w withdrawn
     wm title $w "Fics Offers"
-    pack [label $w.title -text "Offers for $::fics::reallogin" -font font_Regular] -side top -padx 20 -pady 5
+    pack [label $w.title -text "$::tr(FICSOffers) for $::fics::reallogin" -font font_Regular] -side top -padx 20 -pady 5
 
-    pack [button $w.cancel -text "Cancel" \
+    pack [button $w.cancel -text $::tr(Cancel) \
 	-command "::fics::writechan unseek ; destroy $w"] -side bottom -pady 5
     pack [frame $w.line -height 2 -borderwidth 2 -relief sunken ] \
         -fill x -expand 1 -side bottom -pady 2
@@ -1809,9 +1809,9 @@ if {[lindex $line 0] != {Still in progress}} {
     # Do we have to catch this ?
     pack [frame $f] -side top -padx 5 -pady 5
     pack [label $f.name -text "$PLAYER ($elo) $details" -width 40] -side left
-    pack [button $f.decline -text "decline" \
+    pack [button $f.decline -text $::tr(FICSDecline) \
 	-command "::fics::writechan \"decline $PLAYER\" ; ::fics::checkZeroOffers -1 $f" ] -side right -padx 5
-    pack [button $f.accept -text "accept" \
+    pack [button $f.accept -text $::tr(FICSAccept) \
 	-command "::fics::writechan \"accept $PLAYER\"  ; ::fics::checkZeroOffers -1 $f" ] -side right -padx 5
     update
     ### Hmmmm  - accepting an offer can kill this window at any time... How best to handle it ? todo
@@ -1860,9 +1860,9 @@ if {[lindex $line 0] != {Still in progress}} {
       } else {
 	if {![winfo exists $f]} {
 	  pack [frame $f] -side top -padx 5 -pady 5
-	  pack [label $f.name -text "No offers" -state disabled -width 40] -side left 
-	  pack [button $f.decline -text "decline" -state disabled ] -side right -padx 5
-	  pack [button $f.accept -text "accept" -state disabled ] -side right -padx 5
+	  pack [label $f.name -text "No [tr FICSOffers]" -state disabled -width 40] -side left 
+	  pack [button $f.decline -text [tr FICSDecline] -state disabled ] -side right -padx 5
+	  pack [button $f.accept -text [tr FICSAccept] -state disabled ] -side right -padx 5
 	}
       }
     } else {

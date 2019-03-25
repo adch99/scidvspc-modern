@@ -1641,6 +1641,8 @@ translate P FICSTimeseal {Timeseal}
 translate P FICSTimesealPort {Port Timeseal}
 translate P FICSSilence {Filtr konsoli}
 translate P FICSOffers {Propozycje}
+# ====== TODO To be translated ======
+translate P FICSMakeOffer {Make Offer}
 translate P FICSGames {Partie}
 translate P FICSFindOpponent {Znajdź przeciwnika}
 translate P FICSTakeback {Cofnij}

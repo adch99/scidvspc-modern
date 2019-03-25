@@ -1550,6 +1550,8 @@ translate L FICSTimeseal {Timeseal}
 translate L FICSTimesealPort {Timeseal-portti}
 translate L FICSSilence {Konsolisuodatin}
 translate L FICSOffers {Tarjoukset}
+# ====== TODO To be translated ======
+translate L FICSMakeOffer {Make Offer}
 translate L FICSGames {Pelit}
 translate L FICSFindOpponent {Löydä vastustaja}
 translate L FICSTakeback {Peru}

@@ -1945,6 +1945,8 @@ translate B FICSTimeseal {Timeseal}
 translate B FICSTimesealPort {Timeseal port}
 translate B FICSSilence {Console filter}
 translate B FICSOffers {Offers}
+# ====== TODO To be translated ======
+translate B FICSMakeOffer {Make Offer}
 translate B FICSGames {Games}
 translate B FICSFindOpponent {Find Opponent}
 translate B FICSTakeback {Takeback}

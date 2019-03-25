@@ -1948,6 +1948,8 @@ translate H FICSTimeseal {Idõbélyeg}
 translate H FICSTimesealPort {Idõbélyegport}
 translate H FICSSilence {Csend}
 translate H FICSOffers {Ajánlatok}
+# ====== TODO To be translated ======
+translate H FICSMakeOffer {Make Offer}
 translate H FICSGames {Játszmák}
 translate H FICSFindOpponent {Ellenfélkeresõ}
 translate H FICSTakeback {Visszavétel}

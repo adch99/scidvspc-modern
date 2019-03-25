@@ -1553,6 +1553,8 @@ translate T FICSTimeseal {Zaman mühürü}
 translate T FICSTimesealPort {Zaman mühür portu}
 translate T FICSSilence {Konsol filtresi}
 translate T FICSOffers {Teklifler}
+# ====== TODO To be translated ======
+translate T FICSMakeOffer {Make Offer}
 translate T FICSGames {Oyunlar}
 translate T FICSFindOpponent {Rakibini Bul}
 translate T FICSTakeback {Geri al}

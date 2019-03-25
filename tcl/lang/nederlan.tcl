@@ -1700,6 +1700,8 @@ translate N FICSTimeseal {Timeseal}
 translate N FICSTimesealPort {Timeseal poort}
 translate N FICSSilence {Stilte}
 translate N FICSOffers {Biedt aan}
+# ====== TODO To be translated ======
+translate N FICSMakeOffer {Make Offer}
 translate N FICSGames {Partijen}
 translate N FICSFindOpponent {Zoek tegenstander}
 translate N FICSTakeback {Terugnemen}

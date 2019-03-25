@@ -1567,6 +1567,7 @@ translate E FICSTimeseal {Timeseal}
 translate E FICSTimesealPort {Timeseal port}
 translate E FICSSilence {Console filter}
 translate E FICSOffers {Offers}
+translate E FICSMakeOffer {Make Offer}
 translate E FICSGames {Games}
 translate E FICSFindOpponent {Find Opponent}
 translate E FICSTakeback {Takeback}

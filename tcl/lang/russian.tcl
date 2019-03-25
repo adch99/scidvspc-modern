@@ -1634,6 +1634,8 @@ translate R FICSTimeseal {Timeseal}
 translate R FICSTimesealPort {Функция Timeseal}
 translate R FICSSilence {Фильтр консоли}
 translate R FICSOffers {Предложения}
+# ====== TODO To be translated ======
+translate R FICSMakeOffer {Make Offer}
 translate R FICSGames {Партии}
 translate R FICSFindOpponent {Поиск соперника}
 translate R FICSTakeback {Отменить 1 ход}

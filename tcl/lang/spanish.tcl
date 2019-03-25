@@ -1628,6 +1628,8 @@ translate S FICSTimeseal {Timeseal}
 translate S FICSTimesealPort {Puerto Timeseal}
 translate S FICSSilence {Silencio}
 translate S FICSOffers {Ofertas}
+# ====== TODO To be translated ======
+translate S FICSMakeOffer {Make Offer}
 translate S FICSGames {Partidas}
 translate S FICSFindOpponent {Buscar oponente}
 translate S FICSTakeback {Retrocede}
