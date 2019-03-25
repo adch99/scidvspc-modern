@@ -1574,6 +1574,8 @@ translate O FICSTimeseal {Tidsstempel}
 translate O FICSTimesealPort {Tidsstempel port}
 translate O FICSSilence {Konsoll-filter}
 translate O FICSOffers {Tilbud}
+# ====== TODO To be translated ======
+translate O FICSMakeOffer {Make Offer}
 translate O FICSGames {Partier}
 translate O FICSFindOpponent {Finn motstander}
 translate O FICSTakeback {Angre}

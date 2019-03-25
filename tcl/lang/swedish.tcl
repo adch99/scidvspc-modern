@@ -1662,6 +1662,8 @@ translate W FICSTimeseal {Timeseal}
 translate W FICSTimesealPort {Timeseal-port}
 translate W FICSSilence {Konsolfilter}
 translate W FICSOffers {Erbjudanden}
+# ====== TODO To be translated ======
+translate W FICSMakeOffer {Make Offer}
 translate W FICSGames {Partier}
 translate W FICSFindOpponent {Sök motståndare}
 translate W FICSTakeback {Ta tillbaka}

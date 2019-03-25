@@ -1562,6 +1562,8 @@ translate U FICSTimeseal {Timeseal}
 translate U FICSTimesealPort {Timeseal port}
 translate U FICSSilence {Console filter}
 translate U FICSOffers {Ofertas}
+# ====== TODO To be translated ======
+translate U FICSMakeOffer {Make Offer}
 translate U FICSGames {Games}
 translate U FICSFindOpponent {Desafiar}
 translate U FICSTakeback {Voltar atrás}

@@ -1612,7 +1612,8 @@ translate D FICSRefresh {Aktualisieren}
 translate D FICSTimeseal {Timeseal}
 translate D FICSTimesealPort {Timeseal Port}
 translate D FICSSilence {Konsolenfilter}
-translate D FICSOffers {Herausforderungen}
+translate D FICSOffers {Angebot}
+translate D FICSMakeOffer {Angebot Machen}
 translate D FICSGames {laufende Partien}
 translate D FICSFindOpponent {Gegner suchen}
 translate D FICSTakeback {Zurücknehmen}

@@ -1675,6 +1675,8 @@ translate G FICSTimeseal {Timeseal}
 translate G FICSTimesealPort {Timeseal port}
 translate G FICSSilence {Φίλτρο Κονσόλας}
 translate G FICSOffers {Προσφορές}
+# ====== TODO To be translated ======
+translate G FICSMakeOffer {Make Offer}
 translate G FICSGames {Παρτίδες}
 translate G FICSFindOpponent {Εύρεση Αντιπ.}
 translate G FICSTakeback {Αναίρεση}

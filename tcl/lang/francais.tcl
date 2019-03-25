@@ -1621,6 +1621,8 @@ translate F FICSTimeseal {Timeseal}
 translate F FICSTimesealPort {Port Timeseal}
 translate F FICSSilence {Silence}
 translate F FICSOffers {Offres}
+# ====== TODO To be translated ======
+translate F FICSMakeOffer {Make Offer}
 translate F FICSGames {Parties}
 translate F FICSFindOpponent {Trouver adversaire}
 translate F FICSTakeback {Reprendre un coup}

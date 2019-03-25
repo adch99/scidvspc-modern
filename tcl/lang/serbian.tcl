@@ -2020,6 +2020,8 @@ translate Y FICSTimeseal {Timeseal}
 translate Y FICSTimesealPort {Timeseal port}
 translate Y FICSSilence {Console filter}
 translate Y FICSOffers {Offers}
+# ====== TODO To be translated ======
+translate Y FICSMakeOffer {Make Offer}
 translate Y FICSGames {Games}
 translate Y FICSFindOpponent {Find opponent}
 translate Y FICSTakeback {Takeback}

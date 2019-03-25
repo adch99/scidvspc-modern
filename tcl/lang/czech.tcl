@@ -1937,6 +1937,8 @@ translate C FICSTimeseal {Timeseal}
 translate C FICSTimesealPort {Port timesealu}
 translate C FICSSilence {Ticho}
 translate C FICSOffers {Nabídky}
+# ====== TODO To be translated ======
+translate C FICSMakeOffer {Make Offer}
 translate C FICSGames {Hry}
 translate C FICSFindOpponent {Najít soupeøe}
 translate C FICSTakeback {Vrátit tah}
