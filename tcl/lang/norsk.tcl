@@ -4,9 +4,9 @@
 # Text for menu names and status bar help messages in Norwegian.
 # First created for Scid 3.2.beta2
 # Thanks to Martin Skjöldebrand, swedish.tcl was of great help to me.
-#
 # Massive update for Scid vs PC 4.19. Translated missing strings, 
 # fixed some inconsistencies and aligned with english.tcl. 180815 MS
+# Updated for Scid vs PC 4.20 190324 MS
 #
 # (1) Choose a letter code for the language. Currently assigned codes are:
 #      E=English, D=Deutsch, F=Francais, S=Spanish, B=Brasil Portuguese, U=Portuguese
@@ -284,8 +284,7 @@ menuText O OptionsMovesHighlightLastMove "Marker siste trekk" 0 {Marker siste tr
 menuText O OptionsMovesHighlightLastMoveDisplay "Vis" 0 {Vis markering av siste trekk}
 menuText O OptionsMovesHighlightLastMoveWidth "Bredde" 0 {Tykkelse på linje}
 menuText O OptionsMovesHighlightLastMoveColor "Farge" 0 {Farge på linje}
-# ====== TODO To be translated ======
-menuText O OptionsMovesColorSelected "Color Selected Square" 0 {Color move}
+menuText O OptionsMovesColorSelected "Farge på valgt felt" 0 {Color move}
 menuText O OptionsMoves "Trekk" 0 {Innstillinger for hvordan trekk angis}
 menuText O OptionsMovesAsk "Spør før trekk erstattes" 0 \
   {Spør før eksisterende trekk erstattes av et nytt}
@@ -725,12 +724,9 @@ translate O Informant++- {Partiet anses som vunnet}
 
 # Book window
 translate O Book {Bok}
-# ====== TODO To be translated ======
-translate O OtherBook {Other Moves}
-# ====== TODO To be translated ======
-translate O Alphabetical {Alphabetical}
-# ====== TODO To be translated ======
-translate O TwoBooks {Two Books}
+translate O OtherBook {Andre trekk}
+translate O Alphabetical {Alfabetisk}
+translate O TwoBooks {To bøker}
 
 # Analysis Engine open dialog:
 translate O EngineList {Liste over analysemotorer}
