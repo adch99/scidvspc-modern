@@ -1,7 +1,7 @@
 # port.tcl:
 # Scid in Portuguese.
 # Translated by R. Silva (martinus at FICS)
-# Last edited 2017-03-15
+# Last edited 2019-03-24
 
 addLanguage U {Portuguese} 0 ;#iso8859-1
 
@@ -269,8 +269,7 @@ menuText U OptionsMovesHighlightLastMove "Destacar último movimento" 0 {Destaca 
 menuText U OptionsMovesHighlightLastMoveDisplay "Mostrar" 0 {Mostra o destaque do último movimento}
 menuText U OptionsMovesHighlightLastMoveWidth "Espessura" 0 {Espessura da linha}
 menuText U OptionsMovesHighlightLastMoveColor "Cor" 0 {Cor da linha}
-# ====== TODO To be translated ======
-menuText U OptionsMovesColorSelected "Color Selected Square" 0 {Color move}
+menuText U OptionsMovesColorSelected "Colorir a casa selecionada" 0 {Color move}
 menuText U OptionsMoves "Movimentos" 0 {Opções para entrada dos movimentos}
 menuText U OptionsMovesAsk "Perguntar antes de substituir movimentos" 0 \
   {Pergunta antes de substituir movimentos existentes}
@@ -354,8 +353,7 @@ translate U FlipBoard {Rodar Tabuleiro}
 translate U RaiseWindows {Ativar janelas}
 translate U AutoPlay {Jogo automático}
 translate U TrialMode {Modo de Teste}
-# ====== TODO To be translated ======
-translate U KeepOpen {Keep open after startup}
+translate U KeepOpen {Manter aberto depois do início}
 
 # General buttons:
 translate U Apply {Aplicar}
@@ -716,12 +714,9 @@ translate U Informant+/- {Vantagem das brancas}
 translate U Informant+- {Vantagem decisiva das brancas}
 translate U Informant++- {O jogo considera-se ganho}
 translate U Book {Livro}
-# ====== TODO To be translated ======
-translate U OtherBook {Other Moves}
-# ====== TODO To be translated ======
-translate U Alphabetical {Alphabetical}
-# ====== TODO To be translated ======
-translate U TwoBooks {Two Books}
+translate U OtherBook {Outros Movimentos}
+translate U Alphabetical {Alfabético}
+translate U TwoBooks {Dois Livros}
 
 # Analysis Engine open dialog:
 translate U EngineList {Lista de Programas de Análise}
@@ -861,10 +856,8 @@ translate U BrilliancyFlag {Brilhantismo}
 translate U BlunderFlag {Erro!!!}
 translate U UserFlag {Usuario}
 translate U PgnContains {PGN contem texto}
-# ====== TODO To be translated ======
-translate U PreComment {Pre-game Comment}
-# ====== TODO To be translated ======
-translate U PostComment {End Comment}
+translate U PreComment {Comentário Inicial}
+translate U PostComment {Comentário Final}
 
 # Game list window:
 translate U GlistNumber {N.º}
@@ -1021,14 +1014,11 @@ translate U SearchBoardExact {Posição exata (todas as peças nas mesmas casas)}
 translate U SearchBoardPawns {Peões (mesmo material, todos os peões nas mesmas casas)}
 translate U SearchBoardFiles {Colunas (mesmo material, todos os peões na mesma coluna)}
 translate U SearchBoardAny {Qualquer (mesmo material, peões e peças em qualquer posição)}
-translate U SearchInRefDatabase { Pesquisa na base }
+translate U SearchInRefDatabase {Pesquisa na base}
 translate U LookInVars {Olhar nas variantes}
-# ====== TODO To be translated ======
-translate U CQLLabel {CQL Script}
-# ====== TODO To be translated ======
-translate U CQLComments {Allow Comments}
-# ====== TODO To be translated ======
-translate U CQLStrip {Strip Match Comments}
+translate U CQLLabel {Código CQL}
+translate U CQLComments {Permitir Comentários}
+translate U CQLStrip {Ocultar Comentários correspondentes}
 
 # Material search:
 translate U MaterialSearch {Pesquisa Material}
@@ -1310,8 +1300,7 @@ translate U IndentVariations {Alinhar Variantes?}
 translate U ExportColumnStyle {Estilo Coluna (um movimento por linha)?}
 translate U ExportSymbolStyle {Estilo de anotação simbólica:}
 translate U ExportStripMarks {Apagar dos comentários as marcas de casa/seta?} ;# ***
-# ====== TODO To be translated ======
-translate U ExportFlags {Export Scid Flags}
+translate U ExportFlags {Exportar Marcas Scid}
 
 # Goto game/move dialogs:
 translate U LoadGameNumber {Entre o n.º do jogo a ser carregado:}
@@ -1474,7 +1463,7 @@ translate U Nodes {Posições}
 translate U Depth {Profundidade}
 translate U Time {Tempo} 
 translate U SecondsPerMove {Segundos por movimento}
-translate U DepthPerMove {Profundidade por movimento}
+translate U DepthPerMove {Número de lances}
 translate U MoveControl {Analisar por}
 translate U TimeLabel {Tempo por movimento}
 translate U AddVars {Escrever Variantes}
