@@ -20,9 +20,11 @@ array set codes {
   turkish T
 }
 
+# Also change tcl/language.tcl
+
 array set encodings {
   czech iso8859-2
-  deutsch iso8859-1
+  deutsch utf-8
   finnish iso8859-1
   francais iso8859-1
   greek utf-8
