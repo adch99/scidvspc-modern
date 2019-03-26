@@ -213,8 +213,6 @@ set helpText(Scid) {<h1>Databases and General Use</h1>
   <li><a TB><b>Tablebases</b></a></li>
   </ul>
 
-  <h2><a Hints>Hints</a></h2>
-
   <p><footer>Updated: Scid vs. PC 4.7, January 2012</footer></p>
 }
 
@@ -347,7 +345,6 @@ append helpText(Index) {
   <ul>
   <li><a Searches Header>Header searches</a></li>
   <li><a Menus Help>Help menu</a></li>
-  <li><a Hints>Hints</a></li>
   </ul>
 
   <h3><name I>I</name></h3>
@@ -513,98 +510,6 @@ append helpText(Index) {
   </ul>
 
   <p><footer>Updated: Scid vs PC 4.0, June 2010</footer></p>
-}
-
-
-
-set helpTitle(Hints) "Scid Hints"
-set helpText(Hints) {<h1>Scid Hints</h1>
-
-  <h4>Can I load automatically load a databases</h4>
-  <p>
-  Only by adding databases, PGN files or <a EPD>EPD files</a>
-  to the command line. For example:
-  <ul>
-  <li> <b>scid  mybase  games.pgn.gz</b> </li>
-  </ul>
-  will load the database <b>mybase</b> and the gziped PGN file <b>games.pgn.gz</b>.
-  </p>
-
-  <h4>How can i change the board size?</h4>
-  <p>
-  Use the shortcut keys <b>Control+Shift+LeftArrow</b> and
-  <b>Control+Shift+RightArrow</b>, or <b>Control+Wheelmouse</b> (in undocked mode).
-  </p>
-
-  <h4>Can I hide the next move?</h4>
-  <p>
-  You can hide the next move via the main context (right-click) menu, <b>Hide next move</b>.
-  </p>
-
-  <h4>How can I see the ECO opening code for the current position?</h4>
-  <p>
-  The ECO code is displayed on the bottom line of the game
-  information box, below the chessboard in the <a MainWindow>main window</a>,
-  if you have the ECO classification file (<b>scid.eco</b>) loaded. <br>
-  The <a ECO>ECO codes</a> help page explains how to load the ECO classification
-  file and save options so it will be loaded every time you start Scid.
-  </p>
-
-  <h4>While entering a game, I entered an incorrect move half-way though. Can I easily correct it?</h4>
-  <p>
-  You must use the <a Import>Import</a> window. See <a Moves Mistakes>entering moves</a> for more information.
-  </p>
-
-  <h4>How do I copy games from one database to another?</h4>
-  <p>
-  Use the <a Switcher>Database Switcher</a> to drag and drop (<a Filter>filter</a>)
-  games between databases.
-  </p>
-
-  <h4>Every time I enter a move to replace another, I get a
-  "Replace Move?" dialog. Can I avoid this?</h4>
-  <p>
-  De-select the <b>Ask before replacing moves</b> option in the <green>Options: Moves</green> menu.
-  </p>
-
-  <h4>How can I use the tree window on a selection of games, not my whole database?</h4>
-  <p>
-  Using the Filter and <a Switcher>Database Switcher</a>, copy the relevant games to <a Clipbase>Clipbase</a>.
-  Then open the tree window in the Clipbase.
-  </p>
-
-  <h4>The Tree is slow for large databases. How do I speed it up?</h4>
-  <p>
-  Save the Tree cache often, to save tree results for future use.
-  See the caching section of the <a Tree>Tree</a> help page for details.
-  </p>
-
-  <h4>Can I edit the PGN representation of the game directly?</h4>
-  <p>
-  No. Yo must edit its PGN representation using the <a Import>Import game</a> window.
-  Just open it (shortcut key: <b>Control+Shift+I</b>) , select
-  <b>Paste current game</b>, edit the game and then <b>Import</b>.
-  </p>
-
-  <h4>My database has several spellings for some player names. How do I
-  correct them?</h4>
-  <p>
-  You can edit individual names or spellcheck all the names in a database
-  with the commands in the <green>File: Maintenance</green> menu.
-  See the <a Maintenance Editing>maintenance</a> page.
-  </p>
-
-  <h4>I have two databases open: one with my own games, and a large database of
-  grandmaster games. How do I compare one of my games to those in the large
-  database?</h4>
-  <p>
-  Just open the <a Tree>Tree</a> window for the reference database and
-  switch back to the game to compare by means of the database
-  switcher. Alternatively, a base can directly be opened as tree via
-  the <term>File</term> menu.
-  </p>
-
-  <p><footer>Updated: Scid vs. PC 4.3, December 2010</footer></p>
 }
 
 
