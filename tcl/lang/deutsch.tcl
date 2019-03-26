@@ -1612,7 +1612,7 @@ translate D FICSTimeseal {Timeseal}
 translate D FICSTimesealPort {Timeseal Port}
 translate D FICSSilence {Konsolenfilter}
 translate D FICSOffers {Angebot}
-translate D FICSMakeOffer {Angebot Machen}
+translate D FICSMakeOffer {Angebot machen}
 translate D FICSGames {laufende Partien}
 translate D FICSFindOpponent {Gegner suchen}
 translate D FICSTakeback {Zurücknehmen}
@@ -8055,13 +8055,14 @@ set helpText(D,FICSobserve) {<h1>FICS: weitere Funktionen</h1>
   <h3><name exam>Partien laden und untersuchen</name></h3>
 
   <p>FICS und ScidvsPC bieten zwei Wege, um Partien zu analysieren,
-  "smoves" und "examine".</p>
-  <p>Der Befehl <b>smoves</b> lädt eine zuvor gespielte oder
-  ausgesetzte Partie in das Hauptbrett. Die Verwendung von "smoves
-  GMShort -1" (z.B.) ist insofern besser, als die ganze Partie in Scid
-  geladen und so Varianten hinzugefügt und die Partie gespeichert
-  werden können. <b>smoves+</b> kann benutzt werden, um die bei den
-  Zügen verbrauchten Zeiten zu speichern.</p>
+  "smoves" und "examine".</p> <p>Der Befehl <b>smoves</b> lädt eine
+  zuvor gespielte oder ausgesetzte Partie in das Hauptbrett. Die
+  Verwendung von "smoves GMShort -1" (z.B.) ist insofern besser, als
+  die ganze Partie in Scid geladen und so Varianten hinzugefügt und
+  die Partie gespeichert werden können. <b>smoves+</b> kann benutzt
+  werden, um die bei den Zügen verbrauchten Zeiten zu speichern. Scid
+  vs. PC wird Ihren Spielernamen hinzufügen, falls keiner vorhanden ist
+  (z.B. "smoves+ -1").</p>
   
   <p>Das Kommando <b>examine</b> wird jetzt gut unterstützt und ist
   ein bequemer Weg für Gruppen oder Freunde, um Partien zu
