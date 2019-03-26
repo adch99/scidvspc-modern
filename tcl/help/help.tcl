@@ -5584,7 +5584,7 @@ or, highest rated games, such as
   The <b>smoves</b> command loads a previously played or suspended game into the main board.
   Using "smoves GMShort -1" (for eg) is better in that the whole game is loaded to Scid, and 
   it can thus have variations added, and the game saved. <b>smoves+</b> can be used to store
-the elapsed-move-times.
+the elapsed-move-times. Scid vs. PC will insert your playername if none is given (eg "smoves+ -1").
   </p>
   <p>
   The FICS <b>examine</b> command is now well supported, and is a convenient way

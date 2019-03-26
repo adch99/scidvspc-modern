@@ -651,15 +651,17 @@ namespace eval fics {
 	    if {$confirm == 0} {::game::Save}
           }
 
-	  set ::fics::waitForMoves no_meaning
 	  if {$c == "smoves+"} {
 	    set ::fics::waitForMoves emt
-            if {[string is integer [lindex $l 1]]} {
-              # if {smoves+ -1}, insert username
-              set l [linsert $l 1 $::fics::reallogin]
-            }
 	    set l [string map {smoves+ smoves} $l]
+          } else {
+	    set ::fics::waitForMoves no_meaning
           }
+
+	  # if no playername, insert it
+	  if {[string is integer [lindex $l 1]]} {
+	    set l [linsert $l 1 $::fics::reallogin]
+	  }
 
 	  ::game::Clear noconfirm
 	  set ::fics::mainGame -1
