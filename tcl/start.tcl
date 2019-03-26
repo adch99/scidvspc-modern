@@ -13,7 +13,7 @@
 exec "`dirname "$0"`"/tkscid "$0" "$@"
 
 set scidVersion 4.20
-set scidVersionDate {May 7, 2019}
+set scidVersionDate {Apr 7, 2019}
 
 package require Tcl 8.5
 package require Tk  8.5

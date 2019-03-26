@@ -6171,6 +6171,48 @@ set helpText(Sound) {<h1>Sound</h1>
 
 set helpTitle(Changelog) "Scid vs PC Changelog"
 set helpText(Changelog) {<h1>Changelog</h1>
+
+<h4>4.20 (Apr 7, 2019)</h4>
+<li>The Score Graph can now display move-times (using "%emt" and "%clk" pgn values)</li>
+<li>Option to display a black rectangle for the "selected square" instead of a coloured square (Options-<gt>Moves-<gt>ColorSelected)</li>
+<li>Several translation updates including a complete German help file from Christian Opitz</li>
+<li>The Setup Board window now has a coordinate axis and a flip button</li>
+<li>Computer Tournament - Don't enforce a ten-engine limit, have a new statusbar to show progress and the winner, include Uwe Klimmek's carousel scheduling</li>
+<li>EPD rewrite from Bonnie A. - Annotations are now compliant with the EPD specification, Flips the board to side-to-move, other bug fixes</li>
+<li>In Game Annotation, don't miss analysing last-move blunders</li>
+<li>The ECO finder has a basic "Find Opening by Name" feature</li>
+<li>A quick Piece Position Search implemented using CQL</li>
+<li>Gameinfo window always shows a rehoned "Material Advantage" value</li>
+<li>Board Options window can now display all custom piecesets in a gridded manner, and also highlights the current piece style</li>
+<li>FICs - Some changes to the button/font, and don't store adminBOT tells, improve smoves command</li>
+<li>Tree Mask - Add 'unfold' option to the Mask window, and fix up some allignment/font issues</li>
+<li>Update the Spelling file with Uwe's 2018 update</li>
+<li>Pressing 'End' key moves to end-of-variation (if in var) instead of end-of-game</li>
+<li>Minor Book Window fixes - enable undo, remove the arrow buttons (use wheelmouse instead), and properly name and document the 'Other Moves' button</li>
+<br>
+
+<li>Analysis Engines: pressing keys 1 to 5 sets PV</li>
+<li>Set undo point when marking squares</li>
+<li>Remove Suggested Moves feature</li>
+<li>Update Gregors tktext patch to current (2018-08-13)</li>
+<li>Xboard protocol fixes: setboard should come after analyze, send 'nopost' to xboard engines in comp mode, and acknowledge 'my move' in analysis, as sometimes xboard engines (scidlet) dont send any other infos</li>
+<li>Relocate a couple of colour option menus to their proper windows (Crosstable and Score Graph)</li>
+<li>In PGN import, handle the case when there are two comments for a single move</li>
+</ul><br>
+
+<b>Bug Fixes</b>
+<ul>
+<li>Fix serious built-in-engine and PGN-import errors</li>
+<li>Tree - the greying of the tree moves (if the progressbar is hidden) disabled the tree mask's move colouring</li>
+<li>Disable gamelist flag/delete menus if read-only</li>
+<li>Mate in N fix and hardening</li>
+<li>Ignore Country names if they dont look right in the gamelist and database sort</li>
+<li>Disable MS Windows screenshot feature (broken in Tk)</li>
+</ul>
+
+<li>New 'Default Databases' feature (Options-<gt>Save Bases as Default)</li>
+</ul>
+
 <h4>4.19 (March 15, 2018)</h4>
 <ul>
 
@@ -7046,36 +7088,6 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li>Don't perform logical ANDs in the "Find" widget using "+". Too slow</li>
 </ul>
 
-<h4>4.3 (March 10, 2011)</h4>
-<ul>
-<li> Clickable Variation arrows</li>
-<li> Paste Variation feature</li>
-<li> Database Switcher has been moved to the Gamelist Widget (and has some new icons)</li>
-<li> Gamelist can now perform logical ANDs in the search widget using "+", and include the date</li>
-<li> Gamelist now has remove-above and remove-below buttons</li>
-<li> FICS improvements, including a ping feature to indicate network health (*nix only), and player communications are saved as PGN comments</li>
-<li> FICS bug-fix: don't automatically accept rematches</li>
-<li> FICS "Opponent Info" button</li>
-<li> New Toolbar buttons: "Load First Game" , "Load Last Game"</li>
-<li> Bookmark Widget has been overhauled</li>
-<li> Analysis Engine's move history doesn't get spammed by "Mate in 1" (for eg) messages</li>
-<li> An engine can now be run in the Statusbar</li>
-<li> Allow engines to be reordered</li>
-<li> Simplify the Bestgames Widget : Remove the PGN pane, nice-ify the widget, and enable graph and best widgets to remember size</li>
-<li> Several interface speed-ups from Fulvio</li>
-<li> Other SCID C++ changes from Gerd and Fulvio, including "Don't decode games when copying games"</li>
-<li> Some Tree Search optimisations from SCID</li>
-<li> Sort by number of Variations and Comments from Gerd</li>
-<li> Help Widget has a search entrybox</li>
-<li> Help Widget font size (and Pgn Window) can be easily increased by control+wheelmouse </li>
-<li> When pasting FEN directly, do a castling sanity check</li>
-<li> Bugfix: When user starts scidvspc for the first time, Clipbase is left closed</li>
-<li> Browser widget has a nicer button bar, and windows wheel-mouse bindings</li>
-<li> Overhaul the Edit Menus</li>
-<li> Numerous GUI fixes</li>
-<li> Revert PlayerInfo to old format, but add a "Won Drawn Lost" header</li>
-<li> Tweak crosstable knock-out format</li>
-</ul>
 }
 
 set helpTitle(ShortCuts) "Shortcuts"

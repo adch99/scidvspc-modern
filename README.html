@@ -121,13 +121,13 @@ project is authored by
 
 
 <P>Source 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.19.tgz/download">scid_vs_pc-4.19.tgz</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.20.tgz/download">scid_vs_pc-4.20.tgz</A></P>
 <P>Windows 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.19.exe/download">Scid vs PC-4.19.exe</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.20.exe/download">Scid vs PC-4.20.exe</A></P>
 <P>Windows 64 bit 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.19.x64.exe/download">Scid vs PC-4.19.x64.exe</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.20.x64.exe/download">Scid vs PC-4.20.x64.exe</A></P>
 <P>Mac 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.19.dmg/download">ScidvsMac-4.19.dmg</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.20.dmg/download">ScidvsMac-4.20.dmg</A></P>
 <P>
 <H3>Other resources</H3>
 
@@ -158,9 +158,10 @@ use <B>./configure BINDIR=/usr/bin/ SHAREDIR=/usr/share/scid/</B></EM></P>
 <P>Installing from source:</P>
 <HR>
 <PRE>
-tar -xzf scid_vs_pc-4.19.tgz
-cd scid_vs_pc-4.19
+tar -xzf scid_vs_pc-4.20.tgz
+cd scid_vs_pc-4.20
 ./configure
+make
 sudo make install
 scid
 </PRE>
@@ -186,7 +187,7 @@ C:\Users\[USERNAME]\AppData\Local\VirtualStore\Program Files\Scid vs PC</P>
 
 
 <P>The 
-<A HREF="#download_">ScidvsMac-4.19 app</A> should include everything you need. Simply drag and drop the App into /Applications (or similar).</P>
+<A HREF="#download_">ScidvsMac-4.20 app</A> should include everything you need. Simply drag and drop the App into /Applications (or similar).</P>
 <P>Due to complicated build reasons, it seems only Yosemite (OS X 10.10) and later are now supported. </P>
 <P><EM>Users upgrading may have to remove (or edit) <B>$HOME/.scidvspc/config/engines.dat</B>
 to properly configure the chess engines.</EM></P>
@@ -435,6 +436,45 @@ Chessbase databases and many chess variants.</P>
 
 
 <P>
+<H3>Scid vs. PC 4.20</H3>
+
+<P>
+<UL>
+<LI>The Score Graph can now display move-times (using "%emt" and "%clk" pgn values).</LI>
+<LI>Option to display a black rectangle for the "selected square" instead of a coloured square (Options->Moves->ColorSelected).</LI>
+<LI>Several translation updates including a complete German help file from Christian Opitz.</LI>
+<LI>The Setup Board window now has a coordinate axis and a flip button.</LI>
+<LI>Computer Tournament - Don't enforce a ten-engine limit, have a new statusbar to show progress and the winner, include Uwe Klimmek's carousel scheduling.</LI>
+<LI>EPD rewrite from Bonnie A. - Annotations are now compliant with the EPD specification, Flips the board to side-to-move, other bug fixes.</LI>
+<LI>In Game Annotation, don't miss analysing last-move blunders.</LI>
+<LI>The ECO finder has a basic "Find Opening by Name" feature.</LI>
+<LI>A quick Piece Position Search implemented using CQL.</LI>
+<LI>Gameinfo window always shows a rehoned "Material Advantage" value.</LI>
+<LI>Board Options window can now display all custom piecesets in a gridded manner, and also highlights the current piece style.</LI>
+<LI>FICs - Some changes to the button/font, and don't store adminBOT tells, improve smoves command.</LI>
+<LI>Tree Mask - Add 'unfold' option to the Mask window, and fix up some allignment/font issues.</LI>
+<LI>Update the Spelling file with Uwe's 2018 update.</LI>
+<LI>Pressing 'End' key moves to end-of-variation (if in var) instead of end-of-game.</LI>
+<LI>Minor Book Window fixes - enable undo, remove the arrow buttons (use wheelmouse instead), and properly name and document the 'Other Moves' button.<BR><BR>
+</LI>
+<LI>Analysis Engines: pressing keys 1 to 5 sets PV.</LI>
+<LI>Set undo point when marking squares.</LI>
+<LI>Remove Suggested Moves feature.</LI>
+<LI>Update Gregors tktext patch to current (2018-08-13).</LI>
+<LI>Xboard protocol fixes: setboard should come after analyze, send 'nopost' to xboard engines in comp mode, and acknowledge 'my move' in analysis, as sometimes xboard engines (scidlet) dont send any other infos.</LI>
+<LI>Relocate a couple of colour option menus to their proper windows (Crosstable and Score Graph).</LI>
+<LI>In PGN import, handle the case when there are two comments for a single move.<BR><BR>
+
+Bug fixes</LI>
+<LI>Fix serious built-in-engine and PGN-import errors.</LI>
+<LI>Tree - the greying of the tree moves (if the progressbar is hidden) disabled the tree mask's move colouring.</LI>
+<LI>Disable gamelist flag/delete menus if read-only.</LI>
+<LI>Mate in N fix and hardening.</LI>
+<LI>Ignore Country names if they dont look right in the gamelist and database sort.</LI>
+<LI>Disable MS Windows screenshot feature (broken in Tk).
+</LI>
+</UL>
+</P>
 <H3>Scid vs. PC 4.19</H3>
 
 <P>
