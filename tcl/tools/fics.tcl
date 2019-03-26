@@ -626,9 +626,11 @@ namespace eval fics {
       return
     }
 
-    set c [lindex [split $l] 0]
     ::fics::addHistory $l
-    set c [string trim $c]
+
+    # Wofor do we do this for ?!
+    set c [string trim [lindex [split $l] 0]]
+
     switch -glob $c {
       {}  {
 	  updateConsole {}
@@ -652,6 +654,10 @@ namespace eval fics {
 	  set ::fics::waitForMoves no_meaning
 	  if {$c == "smoves+"} {
 	    set ::fics::waitForMoves emt
+            if {[string is integer [lindex $l 1]]} {
+              # if {smoves+ -1}, insert username
+              set l [linsert $l 1 $::fics::reallogin]
+            }
 	    set l [string map {smoves+ smoves} $l]
           }
 
