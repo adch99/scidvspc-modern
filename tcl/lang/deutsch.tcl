@@ -8673,6 +8673,47 @@ set helpText(D,Sound) {<h1>Ton</h1>
 set helpTitle(D,Changelog) "Scid vs PC Änderungshistorie"
 set helpText(D,Changelog) {<h1>Änderungshistorie</h1>
 
+<h4>4.20 (April 7, 2019)</h4>
+<li>The Score Graph can now display move-times (using "%emt" and "%clk" pgn values)</li>
+<li>Option to display a black rectangle for the "selected square" instead of a coloured square (Options-<gt>Moves-<gt>ColorSelected)</li>
+<li>Several translation updates including a complete German help file from Christian Opitz</li>
+<li>The Setup Board window now has a coordinate axis and a flip button</li>
+<li>Computer Tournament - Don't enforce a ten-engine limit, have a new statusbar to show progress and the winner, include Uwe Klimmek's carousel scheduling</li>
+<li>EPD rewrite from Bonnie A. - Annotations are now compliant with the EPD specification, Flips the board to side-to-move, other bug fixes</li>
+<li>In Game Annotation, don't miss analysing last-move blunders</li>
+<li>The ECO finder has a basic "Find Opening by Name" feature</li>
+<li>A quick Piece Position Search implemented using CQL</li>
+<li>Gameinfo window always shows a rehoned "Material Advantage" value</li>
+<li>Board Options window can now display all custom piecesets in a gridded manner, and also highlights the current piece style</li>
+<li>FICs - Some changes to the button/font, and don't store adminBOT tells, improve smoves command</li>
+<li>Tree Mask - Add 'unfold' option to the Mask window, and fix up some allignment/font issues</li>
+<li>Update the Spelling file with Uwe's 2018 update</li>
+<li>Pressing 'End' key moves to end-of-variation (if in var) instead of end-of-game</li>
+<li>Minor Book Window fixes - enable undo, remove the arrow buttons (use wheelmouse instead), and properly name and document the 'Other Moves' button</li>
+<br>
+
+<li>Analysis Engines: pressing keys 1 to 5 sets PV</li>
+<li>Set undo point when marking squares</li>
+<li>Remove Suggested Moves feature</li>
+<li>Update Gregors tktext patch to current (2018-08-13)</li>
+<li>Xboard protocol fixes: setboard should come after analyze, send 'nopost' to xboard engines in comp mode, and acknowledge 'my move' in analysis, as sometimes xboard engines (scidlet) dont send any other infos</li>
+<li>Relocate a couple of colour option menus to their proper windows (Crosstable and Score Graph)</li>
+<li>In PGN import, handle the case when there are two comments for a single move</li>
+</ul><br>
+
+<b>Bug Fixes</b>
+<ul>
+<li>Fix serious built-in-engine and PGN-import errors</li>
+<li>Tree - the greying of the tree moves (if the progressbar is hidden) disabled the tree mask's move colouring</li>
+<li>Disable gamelist flag/delete menus if read-only</li>
+<li>Mate in N fix and hardening</li>
+<li>Ignore Country names if they dont look right in the gamelist and database sort</li>
+<li>Disable MS Windows screenshot feature (broken in Tk)</li>
+</ul>
+
+<li>New 'Default Databases' feature (Options-<gt>Save Bases as Default)</li>
+</ul>
+
 <h4>4.19 (März 15, 2018)</h4>
 <ul>
 
