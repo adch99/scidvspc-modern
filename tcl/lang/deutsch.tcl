@@ -279,6 +279,8 @@ menuText D OptionsFontsFixed "Fest" 0 {Schriftart mit fester Breite (nichtpropor
 menuText D OptionsGInfo "Partieinformationen" 0 {Optionen für Informationsbereich}
 menuText D OptionsFics "FICS" 0
 menuText D OptionsFicsAuto "Autom. Umwandlung in Dame" 0
+# ====== TODO To be translated ======
+menuText D OptionsFicsClk "Store Clock times" 0
 menuText D OptionsFicsColour "Textfarbe" 0
 menuText D OptionsFicsSize "Brettgröße" 0
 menuText D OptionsFicsButtons "Benutzerschaltflächen" 0

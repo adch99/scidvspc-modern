@@ -293,6 +293,8 @@ menuText G OptionsFontsFixed "Σταθερής" 0 {Ρύθμιση Σταθερή
 menuText G OptionsGInfo "Πληροφορίες Παρτίδας" 17 {Ρύθμιση Πληροφοριών Παρτίδας}
 menuText G OptionsFics "FICS" 0 {Free Chess Internet Server}
 menuText G OptionsFicsAuto "Αυτομ.Προαγωγή σε Βασίλισσα" 0
+# ====== TODO To be translated ======
+menuText G OptionsFicsClk "Store Clock times" 0
 menuText G OptionsFicsColour "Χρώμα Κειμένου" 10
 # ====== TODO To be translated ======
 menuText G OptionsFicsSize "Board Size" 0

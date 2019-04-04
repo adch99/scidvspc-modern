@@ -1115,7 +1115,7 @@ PgnParser::ParseMoves (Game * game, char * buffer, uint bufSize)
                     char tempStr [500];
                     // Add an error comment to the game:
                     snprintf (tempStr, sizeof(tempStr), "Error reading move: %s", buffer);
-                    game->SetMoveComment (tempStr);
+                    game->AppendMoveComment (tempStr);
                     snprintf (tempStr, sizeof(tempStr), "Error reading move in game %s - %s, %u: ",
                              game->GetWhiteStr(), game->GetBlackStr(),
                              date_GetYear (game->GetDate()));

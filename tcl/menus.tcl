@@ -1001,7 +1001,7 @@ $m add command -label OptionsSave -command {
     puts $optionF ""
 
     # save FICS config
-    foreach i { use_timeseal timeseal_exec port_fics port_timeseal login password consolebg consolefg chanoff shouts server_ip consolebg consolefg autopromote autoraise size sound no_results no_requests server init_commands show_buttons allow_premove user_buttons user_commands} {
+    foreach i { use_timeseal timeseal_exec port_fics port_timeseal login password consolebg consolefg chanoff shouts server_ip consolebg consolefg autopromote storeclk autoraise size sound no_results no_requests server init_commands show_buttons allow_premove user_buttons user_commands} {
       puts $optionF "set ::fics::$i [list [set ::fics::$i]]"
     }
     foreach i [lsort [array names ::fics::findopponent]] {
@@ -1168,6 +1168,7 @@ set m .menu.options.fics
 menu $m -tearoff 1
 $m add checkbutton -label OptionsWindowsRaise -variable ::fics::autoraise
 $m add checkbutton -label OptionsFicsAuto     -variable ::fics::autopromote
+$m add checkbutton -label OptionsFicsClk      -variable ::fics::storeclk
 $m add checkbutton -label OptionsSounds       -variable ::fics::sound
 $m add command     -label OptionsFicsColour   -command ::fics::setForeGround
 $m add command     -label OptionsColour       -command ::fics::setBackGround
@@ -1751,7 +1752,7 @@ proc setLanguageMenus {{lang ""}} {
         OptionsMoves$tag $lang
   }
 
-  foreach tag {OptionsWindowsRaise OptionsFicsAuto OptionsSounds OptionsFicsColour OptionsColour OptionsFonts OptionsFicsButtons OptionsFicsCommands OptionsFicsSize OptionsFicsNoRes OptionsFicsNoReq OptionsFicsPremove} {
+  foreach tag {OptionsWindowsRaise OptionsFicsAuto OptionsFicsClk OptionsSounds OptionsFicsColour OptionsColour OptionsFonts OptionsFicsButtons OptionsFicsCommands OptionsFicsSize OptionsFicsNoRes OptionsFicsNoReq OptionsFicsPremove} {
     configMenuText .menu.options.fics [tr $tag $oldLang] $tag $lang
   }
 

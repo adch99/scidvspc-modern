@@ -256,6 +256,8 @@ menuText U OptionsFontsFixed "Fixo" 0 {Fonte de largura fixa}
 menuText U OptionsGInfo "Informações do Jogo" 0 {Opções de informacao do jogo}
 menuText U OptionsFics "FICS" 0
 menuText U OptionsFicsAuto "Promover sempre a Dama" 0
+# ====== TODO To be translated ======
+menuText U OptionsFicsClk "Store Clock times" 0
 menuText U OptionsFicsColour "Cor do Texto" 0
 menuText U OptionsFicsSize "Tamanho do Tabuleiro" 0
 menuText U OptionsFicsButtons "Botões do Utilizador" 0

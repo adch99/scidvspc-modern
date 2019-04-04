@@ -239,6 +239,8 @@ menuText L OptionsFontsFixed "Pysyvä" 0 {Muuta vakiolevyinen kirjaisintyyppi}
 menuText L OptionsGInfo "Pelin tiedot" 0 {Pelitietojen vaihtoehdot}
 menuText L OptionsFics "FICS" 0 {Free Chess Internet Server}
 menuText L OptionsFicsAuto "Korota automaattisesti kuningattareksi" 0
+# ====== TODO To be translated ======
+menuText L OptionsFicsClk "Store Clock times" 0
 menuText L OptionsFicsColour "Tekstin väri" 0
 menuText L OptionsFicsSize "Laudan koko" 0
 menuText L OptionsFicsButtons "Käyttäjän painikkeet" 0

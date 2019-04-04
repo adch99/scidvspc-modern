@@ -270,6 +270,8 @@ menuText O OptionsFontsFixed "Fastbredde" 0 {Endre fastbreddeskrifttypen}
 menuText O OptionsGInfo "Partiinformasjon" 0 {Informasjonsinnstillinger}
 menuText O OptionsFics "FICS" 0
 menuText O OptionsFicsAuto "Automatisk dronning" 0
+# ====== TODO To be translated ======
+menuText O OptionsFicsClk "Store Clock times" 0
 menuText O OptionsFicsColour "Tekstfarge" 0
 menuText O OptionsFicsSize "Brettstørrelse" 0
 menuText O OptionsFicsButtons "Brukerdefinerte knapper" 0

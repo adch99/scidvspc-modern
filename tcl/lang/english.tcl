@@ -263,6 +263,7 @@ menuText E OptionsFontsFixed "Fixed" 0 {Change the fixed-width font}
 menuText E OptionsGInfo "Game Information" 0 {Game information options}
 menuText E OptionsFics "FICS" 0 {Free Chess Internet Server}
 menuText E OptionsFicsAuto "Autopromote Queen" 0
+menuText E OptionsFicsClk "Store Clock times" 0
 menuText E OptionsFicsColour "Text Color" 0
 menuText E OptionsFicsSize "Board Size" 0
 menuText E OptionsFicsButtons "User Buttons" 0

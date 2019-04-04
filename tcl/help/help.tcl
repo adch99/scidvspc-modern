@@ -3616,9 +3616,9 @@ set helpText(TB) {<h1>Tablebases</h1>
   <h3>Obtaining Tablebase Files</h3>
   <p>
   The tablebases are available from 
+<url http://oics.olympuschess.com/tracker/index.php>Olympuschess.com</url>.
+and (previously)
 <url ftp://ftp.cis.uab.edu/pub/hyatt/TB/3-4-5/>Bob Hyatt's Ftp</url>
-and
-<url http://folk.uib.no/pfvaf/chesslib/Nalimov.htm>Chesslib</url>.
 <br>
   Play With Arena distribute the 4 piece tablebases as a 
 <url http://www.playwitharena.de/download/4-pieces-tbs.zip>single file</url>

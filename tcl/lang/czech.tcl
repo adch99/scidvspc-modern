@@ -289,6 +289,8 @@ menuText C OptionsGInfo "Informace o partii" 0 {Volby pro informace o partii}
 menuText C OptionsFics "FICS" 0
 menuText C OptionsFicsAuto "Autopromote královna" 0
 # ====== TODO To be translated ======
+menuText C OptionsFicsClk "Store Clock times" 0
+# ====== TODO To be translated ======
 menuText C OptionsFicsColour "Text Colour" 0
 # ====== TODO To be translated ======
 menuText C OptionsFicsSize "Board Size" 0

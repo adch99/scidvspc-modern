@@ -269,6 +269,8 @@ menuText W OptionsGInfo "Partiinformation" 0 {Alternativ för partiinformation}
 menuText W OptionsFics "FICS" 0
 menuText W OptionsFicsAuto "Autopronomera Drottningen" 0
 # ====== TODO To be translated ======
+menuText W OptionsFicsClk "Store Clock times" 0
+# ====== TODO To be translated ======
 menuText W OptionsFicsColour "Text Colour" 0
 # ====== TODO To be translated ======
 menuText W OptionsFicsSize "Board Size" 0

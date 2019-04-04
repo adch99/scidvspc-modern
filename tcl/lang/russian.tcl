@@ -269,6 +269,8 @@ menuText R OptionsFontsFixed "Моноширинные" 0 {Изменить мо
 menuText R OptionsGInfo "Информация о партии" 0 {Настройки информации о партии}
 menuText R OptionsFics "Сервер FICS" 0 {Free Chess Internet Server}
 menuText R OptionsFicsAuto "Автовыдвижение ферзя" 0
+# ====== TODO To be translated ======
+menuText R OptionsFicsClk "Store Clock times" 0
 menuText R OptionsFicsColour "Цвет текста" 0
 menuText R OptionsFicsSize "Размер доски" 0
 # ====== TODO To be translated ======

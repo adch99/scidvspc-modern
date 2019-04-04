@@ -278,6 +278,8 @@ menuText I OptionsGInfo "Informazioni sulla partita" 0 {Opzioni sulle informazio
 menuText I OptionsFics "FICS" 0
 menuText I OptionsFicsAuto "Autopromozione Regina" 0
 # ====== TODO To be translated ======
+menuText I OptionsFicsClk "Store Clock times" 0
+# ====== TODO To be translated ======
 menuText I OptionsFicsColour "Text Colour" 0
 # ====== TODO To be translated ======
 menuText I OptionsFicsSize "Board Size" 0

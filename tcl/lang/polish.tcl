@@ -270,6 +270,8 @@ menuText P OptionsFontsFixed "Stała" 0 {Zmień czcionkę stałej szerokości}
 menuText P OptionsGInfo "Informacje o partii" 0 {Sposób wyświetlania informacji o partii}
 menuText P OptionsFics "FICS" 0
 menuText P OptionsFicsAuto "Autopromote Królowa" 0
+# ====== TODO To be translated ======
+menuText P OptionsFicsClk "Store Clock times" 0
 menuText P OptionsFicsColour "Kolor tekstu" 0
 # ====== TODO To be translated ======
 menuText P OptionsFicsSize "Board Size" 0

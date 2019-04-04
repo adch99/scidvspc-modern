@@ -310,6 +310,8 @@ menuText Y OptionsFics "FICS" 0
 # todo
 menuText Y OptionsFicsAuto "Autopromote Queen" 0
 # ====== TODO To be translated ======
+menuText Y OptionsFicsClk "Store Clock times" 0
+# ====== TODO To be translated ======
 menuText Y OptionsFicsColour "Text Colour" 0
 # ====== TODO To be translated ======
 menuText Y OptionsFicsSize "Board Size" 0

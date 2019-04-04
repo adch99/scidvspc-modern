@@ -471,6 +471,7 @@ proc initFICSDefaults {} {
     set shouts 1
     set server_ip   0.0.0.0
     set autopromote 0
+    set storeclk 0
     set autoraise 1
     set size 2
     set sound 0
