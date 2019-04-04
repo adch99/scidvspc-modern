@@ -268,6 +268,8 @@ menuText F OptionsFontsFixed "Fixe" 0 {Changer les polices de chasse fixe}
 menuText F OptionsGInfo "Informations de la partie" 7 {Options d'information de la partie}
 menuText F OptionsFics "FICS" 0
 menuText F OptionsFicsAuto "Autopromote Reine" 0
+# ====== TODO To be translated ======
+menuText F OptionsFicsClk "Store Clock times" 0
 menuText F OptionsFicsColour "Couleur du texte" 0
 menuText F OptionsFicsSize "Taille de l'échiquier" 0
 # ====== TODO To be translated ======

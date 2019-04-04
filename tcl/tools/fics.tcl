@@ -2008,7 +2008,8 @@ if {[lindex $line 0] != {Still in progress}} {
     set blackRemainingTime [lindex $line 25]
     set moveNumber      [lindex $line 26]
     set verbose_move    [lindex $line 27]
-    set moveTime        [lindex $line 28]
+    # strip () from moveTime
+    set moveTime        [string range [lindex $line 28] 1 end-1]
     set moveSan         [lindex $line 29]
     set ::fics::playing [lindex $line 19]
     set ::fics::mainGame $game
@@ -2112,6 +2113,10 @@ if {[lindex $line 0] != {Still in progress}} {
       return
     }
 
+    if {$::fics::storeclk && $fics::playing == -1 && $moveSan != "none"} {
+      sc_pos setComment "\[%emt $moveTime\]"
+    }
+
     # puts $verbose_move
     # puts $moveSan
 
@@ -2133,6 +2138,10 @@ if {[lindex $line 0] != {Still in progress}} {
           # This is a common occurence when moving observed games to the main board
           # puts "error $err"
         } else {
+	  if {$::fics::storeclk} {
+	    sc_pos setComment "\[%emt $moveTime\]"
+          }
+
 	  if {$::fics::premove != {}} {
 	    ### Send premove 
 	    if {$fen == [sc_pos fen]} {

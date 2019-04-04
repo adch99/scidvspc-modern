@@ -239,6 +239,8 @@ menuText T OptionsFontsFixed "sabit" 0 {Sabit genişlikte yazı tipi değiştirm
 menuText T OptionsGInfo "Oyun Bilgisi" 0 {Game information options}
 menuText T OptionsFics "FICS" 0 {Ücretsiz Satranç İnternet Sunucusu}
 menuText T OptionsFicsAuto "Otamatik Vezir çıkart" 0
+# ====== TODO To be translated ======
+menuText T OptionsFicsClk "Store Clock times" 0
 menuText T OptionsFicsColour "Metin Rengi" 0
 menuText T OptionsFicsSize "Tahta Boyutu" 0
 menuText T OptionsFicsButtons "Kullanıcı Düğmeleri" 0

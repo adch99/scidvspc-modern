@@ -278,6 +278,8 @@ menuText N OptionsFontsFixed "Vaste grootte" 0 {Wijzig dit lettertype}
 menuText N OptionsGInfo "Partij informatie" 0 {Partij-informatie opties}
 menuText N OptionsFics "FICS" 0
 menuText N OptionsFicsAuto "Autopromotie koningin" 0
+# ====== TODO To be translated ======
+menuText N OptionsFicsClk "Store Clock times" 0
 menuText N OptionsFicsColour "Tekst kleur" 0
 # ====== TODO To be translated ======
 menuText N OptionsFicsSize "Board Size" 0

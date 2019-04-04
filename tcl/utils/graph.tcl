@@ -494,6 +494,7 @@ proc ::utils::graph::plot_data {graph} {
       for {set i 0} {$i < $ncoords} {incr i 2} {
         set x [lindex $coords $i]
         set y [lindex $coords [expr {$i + 1}]]
+        # todo - fixme. The light/dark color breaks if there is 1 missing %emt
         if {$color2 != {} && [expr {$i % 4}] == 0} {
           set c $color2
         } else {
