@@ -5583,8 +5583,7 @@ or, highest rated games, such as
   <p>
   The <b>smoves</b> command loads a previously played or suspended game into the main board.
   Using "smoves GMShort -1" (for eg) is better in that the whole game is loaded to Scid, and 
-  it can thus have variations added, and the game saved. <b>smoves+</b> can be used to store
-the elapsed-move-times. Scid vs. PC will insert your playername if none is given (eg "smoves+ -1").
+  it can thus have variations added, and the game saved. The elapsed-move-times will be stored as comments if FICS-<gt>Options-<gt>StoreClockTimes is selected. Scid vs. PC will insert your playername if none is given (eg "smoves -1").
   </p>
   <p>
   The FICS <b>examine</b> command is now well supported, and is a convenient way
@@ -5659,7 +5658,8 @@ By default they are LimeGreen and grey35.
 Right-clicking posts a menu with several options. 'No Requests'
 denies Takebacks, Adjournment, Abort and Draw requests. 'No Results' prevents game results
 dialogs. 'Board Size' refers to the small Observed Game boards. Autoraise raises the main board
-when your opponent makes a move.
+when your opponent makes a move. StoreClockTimes will store move times as comments
+(viewable in the <a Graphs Score>Score Graph</a>)
 </p>
 <p>
 There are also options to configure initialisation commands and to customize the top three buttons.
@@ -5692,7 +5692,7 @@ To cancel premove, press the <b>Escape</b> key.
 </p>
 
 <br>
-  <p><footer>Updated: Scid vs. PC 4.14 Jan 2015</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.20 Jan 2015</footer></p>
 }
 
 set helpTitle(FICScommands) {FICS Commands and Variables}
