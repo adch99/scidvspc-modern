@@ -637,7 +637,7 @@ namespace eval fics {
 	  return
 	  }
 
-      smove* {
+      smoves {
 	  # smoves recreates a game without any further announcment
 	  if {$::fics::playing == 1 || $::fics::playing == -1} {
 	    ::fics::updateConsole "Scid: smoves disabled while playing a game"
@@ -651,12 +651,7 @@ namespace eval fics {
 	    if {$confirm == 0} {::game::Save}
           }
 
-	  if {$c == "smoves+"} {
-	    set ::fics::waitForMoves emt
-	    set l [string map {smoves+ smoves} $l]
-          } else {
-	    set ::fics::waitForMoves no_meaning
-          }
+	  set ::fics::waitForMoves no_meaning
 
 	  # if no playername, insert it
 	  if {[string is integer [lindex $l 1]]} {
@@ -1335,12 +1330,12 @@ namespace eval fics {
 	    # 2.  c4      (0:25)     Bf5     (0:01)
 
 	    catch { sc_move addSan $m1 }
-	    if { $::fics::waitForMoves == "emt" } {
+	    if { $::fics::storeclk } {
               sc_pos setComment "\[%emt [string trim $t2 {)}]\]"
             }
 	    if {$m2 != ""} {
 	      catch { sc_move addSan $m2 }
-	      if { $::fics::waitForMoves == "emt" } {
+	      if { $::fics::storeclk } {
 		sc_pos setComment "\[%emt [string trim $t3 {)}]\]"
 	      }
 	    }
@@ -1368,9 +1363,9 @@ namespace eval fics {
       2 {
 	  if {[string match {\{*\} *} $line]} {
 	    # {White forfeits on time} 1-0
-if {[lindex $line 0] != {Still in progress}} {
-	    ::commenteditor::appendComment [lindex $line 0]
-}
+	    if {[lindex $line 0] != {Still in progress}} {
+	      ::commenteditor::appendComment [lindex $line 0]
+	    }
 	    sc_game tags set -result [lindex $line 1]
 	    set ::fics::waitForMoves ""
 	    return
