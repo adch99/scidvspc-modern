@@ -488,6 +488,7 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
     bind $w.c <ButtonPress-1> {::tools::graphs::score::Move %x %y}
     bind $w.c <ButtonPress-2> {::tools::graphs::score::ShowBoard %x %y %X %Y}
     bind $w.c <ButtonRelease-2> ::pgn::HideBoard
+    $w.c bind title <ButtonPress-3> "tk_popup $w.menu.options %X %Y"
     bind $w <Escape> "destroy $w"
     bind $w <space>  toggleEngineAnalysis
     if {$::windowsOS || $::macOS} {

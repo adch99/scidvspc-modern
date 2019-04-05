@@ -3473,12 +3473,12 @@ from the Tools menu. Right-clicking the graph will refresh it.
   <p>
   The <green><run ::tools::graphs::score::Raise>Score/Time Graph</run></green> (Control-Shift-Z)
   shows the Move Evaluations or Move Times (stored as comments in the current game) as a graph. </p>
-  <p>The graph type is changed in Graph-<gt>Options. Data for the graphs is found/gathered in the standard PGN comments or "commands" as <b>%eval</b> (scores) and <b>%emt</b> (move times).</p>
+  <p>The graph type is changed in Graph-<gt>Options or by right-clicking the in-graph title. Data for the graphs is found/gathered in the standard PGN comments or "commands" as <b>%eval</b> (scores) and <b>%emt</b> (move times).</p>
   <p><b>%clk</b> datas are also supported, but they are recalculated and displayed as %emt. Additionally, they do not properly calculate time totals because of (generally) unknown time-increments, and the common 40-move time top-ups.</p>
   <p>Alternatively, Scid vs PC can add scores using the <a Analysis Annotating>annotation feature</a>.
   These scores have one of the formats +0.25, [% +0.25] , or the standard [%eval +0.25]. The later two formats allow these scores to be hidden in  the PGN window by enabling PGN-<gt>Options-<gt>Hide-Codes.
   The values are represented from White's perspective (so a negative value means black is ahead).
-  In cases when the scores are not from White's perspective, one can select an option
+  In cases when the scores are not from White's perspective, one may select an option
   (in the Options Menu) for an inverted perspective.
   </p>
   <h4>Features</h4>
