@@ -279,8 +279,7 @@ menuText D OptionsFontsFixed "Fest" 0 {Schriftart mit fester Breite (nichtpropor
 menuText D OptionsGInfo "Partieinformationen" 0 {Optionen für Informationsbereich}
 menuText D OptionsFics "FICS" 0
 menuText D OptionsFicsAuto "Autom. Umwandlung in Dame" 0
-# ====== TODO To be translated ======
-menuText D OptionsFicsClk "Store Clock times" 0
+menuText D OptionsFicsClk "Bedenkzeiten speichern" 0
 menuText D OptionsFicsColour "Textfarbe" 0
 menuText D OptionsFicsSize "Brettgröße" 0
 menuText D OptionsFicsButtons "Benutzerschaltflächen" 0
@@ -5862,7 +5861,7 @@ set helpText(D,Graphs) {<h1>Grafikfenster</h1>
   Bewertungen haben eines der Formate +0.25, [% +0.25] oder den
   Standard [%eval +0.25]. Die beiden letzteren können im PGN-Fenster
   versteckt werden, indem man im
-  Menü <green>PGN--<gt>Ausgabe--<gt>Feld-Pfeilcodes verbergen</green>
+  Menü <green>PGN--<gt>Ausgabe--<gt>Feld-/Pfeilcodes verbergen</green>
   das Häkchen setzt. Die Bewertungen werden aus Sicht von Weiß
   angezeigt (ein negativer Wert zeigt also, daß Schwarz im Vorteil
   ist). Wenn die Bewertungen nicht aus der Sicht von Weiß sein sollen,
@@ -8061,10 +8060,11 @@ set helpText(D,FICSobserve) {<h1>FICS: weitere Funktionen</h1>
   zuvor gespielte oder ausgesetzte Partie in das Hauptbrett. Die
   Verwendung von "smoves GMShort -1" (z.B.) ist insofern besser, als
   die ganze Partie in Scid geladen und so Varianten hinzugefügt und
-  die Partie gespeichert werden können. <b>smoves+</b> kann benutzt
-  werden, um die bei den Zügen verbrauchten Zeiten zu speichern. Scid
-  vs. PC wird Ihren Spielernamen hinzufügen, falls keiner vorhanden ist
-  (z.B. "smoves+ -1").</p>
+  die Partie gespeichert werden können. Die verbrauchten Bedenkzeiten
+  werden als Kommentare gespeichert, falls
+  <green>Optionen--<gt>FICS--<gt>Bedenkzeiten speichern</green> aktiv
+  ist. Scid vs. PC wird Ihren Spielernamen hinzufügen, falls keiner
+  vorhanden ist (z.B. "smoves+ -1").</p>
   
   <p>Das Kommando <b>examine</b> wird jetzt gut unterstützt und ist
   ein bequemer Weg für Gruppen oder Freunde, um Partien zu
@@ -8141,8 +8141,11 @@ set helpText(D,FICSwidget) {<h1>FICS benutzen</h1>
   Abbruch- und Remisangebote ab. "Keine Ergebnisse" verhindert Dialoge
   über Partieergebnisse. "Brettgröße" bezieht sich auf die kleinen
   Schachbretter für Beobachtungspartien. "Autom. Heraufsetzen" setzt
-  das Schachbrett herauf, wenn Ihr Gegner einen Zug macht.
+  das Schachbrett herauf, wenn Ihr Gegner einen Zug
+  macht. "Bedenkzeiten speichern" speichert die Zugzeiten als
+  Kommentare (in der <a Graphs Score>Bewertungsgrafik</a> sichtbar).
   </p>
+	
   <p>Es gibt auch Optionen, um Initialisierungsbefehle zu
   konfigurieren und um die obersten drei Schaltflächen
   anzupassen. Diese letztere Möglichkeit erfordert ein kleines bißchen
@@ -8183,7 +8186,7 @@ set helpText(D,FICSwidget) {<h1>FICS benutzen</h1>
   drücken Sie die <b>Esc</b>-Taste.</p>
   
   <br>
-  <p><footer>Aktualisiert: Scid vs. PC 4.14 Jan 2015</footer></p>
+  <p><footer>Aktualisiert: Scid vs. PC 4.20 April 2019</footer></p>
 }
 
 set helpTitle(D,FICScommands) {FICS-Befehle und -Variablen}
