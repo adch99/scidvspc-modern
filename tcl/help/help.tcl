@@ -6210,9 +6210,6 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li>Disable MS Windows screenshot feature (broken in Tk)</li>
 </ul>
 
-<li>New 'Default Databases' feature (Options-<gt>Save Bases as Default)</li>
-</ul>
-
 <h4>4.19 (March 15, 2018)</h4>
 <ul>
 
