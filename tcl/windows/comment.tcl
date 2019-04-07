@@ -482,7 +482,6 @@ proc ::commenteditor::appendComment {arg} {
   } else {
     sc_pos setComment "$comment\n$arg"
   }
-  updateStatusBar
   updateBoard -pgn
 }
 
