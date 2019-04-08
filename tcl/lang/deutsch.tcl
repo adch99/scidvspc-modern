@@ -686,8 +686,8 @@ menuText D GraphFileColor "Als Farb-Postscript speichern..." 4
 menuText D GraphFileGrey "Als Graustufen-Postscript speichern..." 4
 menuText D GraphFileClose "Fenster schließen" 0
 menuText D GraphOptions "Optionen" 0
-menuText D GraphOptionsWhite "Weiß" 0
-menuText D GraphOptionsBlack "Schwarz" 0
+menuText D GraphOptionsWhite "Weiß invertieren" 0
+menuText D GraphOptionsBlack "Schwarz invertieren" 0
 menuText D GraphOptionsDots "Zeige Punkte" 0
 menuText D GraphOptionsBar "Aktuellen Zug hervorheben" 0
 menuText D GraphOptionsBoth "Beide" 0
