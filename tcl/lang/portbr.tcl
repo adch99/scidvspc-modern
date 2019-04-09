@@ -1754,6 +1754,14 @@ translate B Depth {Depth}
 # ====== TODO To be translated ======
 translate B Time {Time} 
 # ====== TODO To be translated ======
+translate B Auto {Auto}
+# ====== TODO To be translated ======
+translate B Score {Score}
+# ====== TODO To be translated ======
+translate B {Score Combo} {Score Combo}
+# ====== TODO To be translated ======
+translate B {Time Combo} {Time Combo}
+# ====== TODO To be translated ======
 translate B SecondsPerMove {Seconds per move}
 # ====== TODO To be translated ======
 translate B DepthPerMove {Depth per move}

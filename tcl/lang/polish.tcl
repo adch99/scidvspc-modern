@@ -1536,6 +1536,14 @@ translate P FixedDepth {Stała głębokość}
 translate P Nodes {Pozycje} 
 translate P Depth {Głębokość}
 translate P Time {Czas} 
+# ====== TODO To be translated ======
+translate P Auto {Auto}
+# ====== TODO To be translated ======
+translate P Score {Score}
+# ====== TODO To be translated ======
+translate P {Score Combo} {Score Combo}
+# ====== TODO To be translated ======
+translate P {Time Combo} {Time Combo}
 translate P SecondsPerMove {Sekundy na posunięcie}
 # ====== TODO To be translated ======
 translate P DepthPerMove {Depth per move}

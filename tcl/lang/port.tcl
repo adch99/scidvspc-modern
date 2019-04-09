@@ -1464,6 +1464,14 @@ translate U FixedDepth {Fixar profundidade de análise}
 translate U Nodes {Posições} 
 translate U Depth {Profundidade}
 translate U Time {Tempo} 
+# ====== TODO To be translated ======
+translate U Auto {Auto}
+# ====== TODO To be translated ======
+translate U Score {Score}
+# ====== TODO To be translated ======
+translate U {Score Combo} {Score Combo}
+# ====== TODO To be translated ======
+translate U {Time Combo} {Time Combo}
 translate U SecondsPerMove {Segundos por movimento}
 translate U DepthPerMove {Número de lances}
 translate U MoveControl {Analisar por}

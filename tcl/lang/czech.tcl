@@ -1747,6 +1747,14 @@ translate C Depth {Depth}
 # ====== TODO To be translated ======
 translate C Time {Time} 
 # ====== TODO To be translated ======
+translate C Auto {Auto}
+# ====== TODO To be translated ======
+translate C Score {Score}
+# ====== TODO To be translated ======
+translate C {Score Combo} {Score Combo}
+# ====== TODO To be translated ======
+translate C {Time Combo} {Time Combo}
+# ====== TODO To be translated ======
 translate C SecondsPerMove {Seconds per move}
 # ====== TODO To be translated ======
 translate C DepthPerMove {Depth per move}

@@ -1529,6 +1529,14 @@ translate S FixedDepth {Profundidad fija}
 translate S Nodes {Nodos} 
 translate S Depth {Profundidad}
 translate S Time {Tiempo} 
+# ====== TODO To be translated ======
+translate S Auto {Auto}
+# ====== TODO To be translated ======
+translate S Score {Score}
+# ====== TODO To be translated ======
+translate S {Score Combo} {Score Combo}
+# ====== TODO To be translated ======
+translate S {Time Combo} {Time Combo}
 translate S SecondsPerMove {Segundos por movimiento}
 translate S DepthPerMove {Profundidad por movimiento}
 translate S MoveControl {Movimiento del control}

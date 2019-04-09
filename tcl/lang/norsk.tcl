@@ -1475,6 +1475,14 @@ translate O FixedDepth {Låst dybde}
 translate O Nodes {Noder}
 translate O Depth {Dybde}
 translate O Time {Tid}
+# ====== TODO To be translated ======
+translate O Auto {Auto}
+# ====== TODO To be translated ======
+translate O Score {Score}
+# ====== TODO To be translated ======
+translate O {Score Combo} {Score Combo}
+# ====== TODO To be translated ======
+translate O {Time Combo} {Time Combo}
 translate O SecondsPerMove {Sekunder per trekk}
 translate O DepthPerMove {Dybde per trekk}
 translate O MoveControl {Trekk-kontroll}

@@ -1454,6 +1454,14 @@ translate T FixedDepth {Sabit derinlik}
 translate T Nodes {Düğümler}
 translate T Depth {derinlik}
 translate T Time {Zaman} 
+# ====== TODO To be translated ======
+translate T Auto {Auto}
+# ====== TODO To be translated ======
+translate T Score {Score}
+# ====== TODO To be translated ======
+translate T {Score Combo} {Score Combo}
+# ====== TODO To be translated ======
+translate T {Time Combo} {Time Combo}
 translate T SecondsPerMove {Hareket başına saniyeler}
 translate T DepthPerMove {Hareket başına derinlik}
 translate T MoveControl {Hareket Kontrolü}

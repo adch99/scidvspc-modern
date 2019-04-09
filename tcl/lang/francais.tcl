@@ -1522,6 +1522,14 @@ translate F FixedDepth {Profondeur fixe}
 translate F Nodes {Noeuds} 
 translate F Depth {Profondeur}
 translate F Time {Temps} 
+# ====== TODO To be translated ======
+translate F Auto {Auto}
+# ====== TODO To be translated ======
+translate F Score {Score}
+# ====== TODO To be translated ======
+translate F {Score Combo} {Score Combo}
+# ====== TODO To be translated ======
+translate F {Time Combo} {Time Combo}
 translate F SecondsPerMove {Secondes par coup}
 translate F DepthPerMove {Profondeur par coup}
 # ====== TODO To be translated ======

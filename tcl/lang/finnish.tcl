@@ -1451,6 +1451,14 @@ translate L FixedDepth {M‰‰r‰tty syvyys}
 translate L Nodes {Solmut}
 translate L Depth {Syvyys}
 translate L Time {Aika} 
+# ====== TODO To be translated ======
+translate L Auto {Auto}
+# ====== TODO To be translated ======
+translate L Score {Score}
+# ====== TODO To be translated ======
+translate L {Score Combo} {Score Combo}
+# ====== TODO To be translated ======
+translate L {Time Combo} {Time Combo}
 translate L SecondsPerMove {Sekunnit per siirto}
 translate L DepthPerMove {Syvyys per siirto}
 translate L MoveControl {Siirtokontrolli}

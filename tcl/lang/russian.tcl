@@ -1529,6 +1529,14 @@ translate R FixedDepth {Фиксированная глубина}
 translate R Nodes {Узлы}
 translate R Depth {Глубина}
 translate R Time {Время}
+# ====== TODO To be translated ======
+translate R Auto {Auto}
+# ====== TODO To be translated ======
+translate R Score {Score}
+# ====== TODO To be translated ======
+translate R {Score Combo} {Score Combo}
+# ====== TODO To be translated ======
+translate R {Time Combo} {Time Combo}
 translate R SecondsPerMove {Секунд на ход}
 # ====== TODO To be translated ======
 translate R DepthPerMove {Depth per move}
