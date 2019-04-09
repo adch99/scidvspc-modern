@@ -1830,6 +1830,14 @@ translate Y Depth {Depth}
 # ====== TODO To be translated ======
 translate Y Time {Time} 
 # ====== TODO To be translated ======
+translate Y Auto {Auto}
+# ====== TODO To be translated ======
+translate Y Score {Score}
+# ====== TODO To be translated ======
+translate Y {Score Combo} {Score Combo}
+# ====== TODO To be translated ======
+translate Y {Time Combo} {Time Combo}
+# ====== TODO To be translated ======
 translate Y SecondsPerMove {Seconds per move}
 # ====== TODO To be translated ======
 translate Y DepthPerMove {Depth per move}

@@ -448,7 +448,7 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
 
     # (adjust ConfigMenus 7 8 9 , 11 12 below)
     foreach i {Auto Score Time {Score Combo} {Time Combo}} {
-      $w.menu.options add radiobutton -label $i -variable ::tools::graphs::type -value $i \
+      $w.menu.options add radiobutton -label [::tr $i] -variable ::tools::graphs::type -value $i \
         -command ::tools::graphs::score::Refresh
     }
 
@@ -670,31 +670,31 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
     Score {
       set lineGraph 0
       set values $scoreValues
-      set title {Score Graph}
+      set title "[tr Score] [tr Graph]"
     }
     Time {
       set lineGraph 0
       set values $emtValues
-      set title {Time Graph (seconds)}
+      set title "[tr Time] [tr Graph] ([tr seconds])"
     }
     {Score Combo} {
       set lineGraph 1
       set values $scoreValues
-      set title {Score Graph}
+      set title "[tr Score] [tr Graph]"
     }
     {Time Combo} {
       set lineGraph 1
       set values $emtValues
-      set title {Time Graph (seconds)}
+      set title "[tr Time] [tr Graph] ([tr seconds])"
     }
     Auto {
       set lineGraph 1
       if {[llength $scoreValues] < 10 && [llength $scoreValues] < [llength $emtValues]} {
         set values $emtValues
-	set title {Time Graph (seconds)}
+        set title "[tr Time] [tr Graph] ([tr seconds])"
       } else {
         set values $scoreValues
-	set title {Score Graph}
+        set title "[tr Score] [tr Graph]"
       }
     }
   }

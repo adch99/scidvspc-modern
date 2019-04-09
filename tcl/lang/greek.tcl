@@ -1570,6 +1570,14 @@ translate G FixedDepth {Σταθερό βάθος}
 translate G Nodes {Nodes}
 translate G Depth {Βάθος}
 translate G Time {Χρόνος} 
+# ====== TODO To be translated ======
+translate G Auto {Auto}
+# ====== TODO To be translated ======
+translate G Score {Score}
+# ====== TODO To be translated ======
+translate G {Score Combo} {Score Combo}
+# ====== TODO To be translated ======
+translate G {Time Combo} {Time Combo}
 translate G SecondsPerMove {Δευτερόλεπτα Κίνησης}
 # ====== TODO To be translated ======
 translate G DepthPerMove {Depth per move}

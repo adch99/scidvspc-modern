@@ -1514,6 +1514,10 @@ translate D FixedDepth {Feste Tiefe}
 translate D Nodes {Knoten} 
 translate D Depth {Tiefe}
 translate D Time {Zeit} 
+translate D Auto {Automatisch}
+translate D Score {Bewertung}
+translate D {Score Combo} {Bewertung und Zeit}
+translate D {Time Combo} {Zeit und Bewertung}
 translate D SecondsPerMove {Sekunden pro Zug}
 translate D DepthPerMove {Tiefe pro Zug}
 translate D MoveControl {Zugkontrolle}

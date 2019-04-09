@@ -1592,6 +1592,14 @@ translate N FixedDepth {Vaste diepte}
 translate N Nodes {Knooppunten}
 translate N Depth {Diepte}
 translate N Time {Tijd} 
+# ====== TODO To be translated ======
+translate N Auto {Auto}
+# ====== TODO To be translated ======
+translate N Score {Score}
+# ====== TODO To be translated ======
+translate N {Score Combo} {Score Combo}
+# ====== TODO To be translated ======
+translate N {Time Combo} {Time Combo}
 translate N SecondsPerMove {Seconden per zet}
 # ====== TODO To be translated ======
 translate N DepthPerMove {Depth per move}

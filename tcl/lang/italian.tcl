@@ -1638,6 +1638,14 @@ translate I FixedDepth {Profondità fissa}
 translate I Nodes {Nodi}
 translate I Depth {Profondità}
 translate I Time {Tempo}
+# ====== TODO To be translated ======
+translate I Auto {Auto}
+# ====== TODO To be translated ======
+translate I Score {Score}
+# ====== TODO To be translated ======
+translate I {Score Combo} {Score Combo}
+# ====== TODO To be translated ======
+translate I {Time Combo} {Time Combo}
 translate I SecondsPerMove {Secondi per mossa}
 # ====== TODO To be translated ======
 translate I DepthPerMove {Depth per move}

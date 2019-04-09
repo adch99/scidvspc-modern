@@ -1557,6 +1557,14 @@ translate W FixedDepth {Fast sökdjup}
 translate W Nodes {Noder}
 translate W Depth {Sökdjup}
 translate W Time {Tid}
+# ====== TODO To be translated ======
+translate W Auto {Auto}
+# ====== TODO To be translated ======
+translate W Score {Score}
+# ====== TODO To be translated ======
+translate W {Score Combo} {Score Combo}
+# ====== TODO To be translated ======
+translate W {Time Combo} {Time Combo}
 translate W SecondsPerMove {Sekunder per drag}
 # ====== TODO To be translated ======
 translate W DepthPerMove {Depth per move}

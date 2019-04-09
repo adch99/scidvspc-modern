@@ -1467,6 +1467,10 @@ translate E FixedDepth {Fixed depth}
 translate E Nodes {Nodes}
 translate E Depth {Depth}
 translate E Time {Time} 
+translate E Auto {Auto}
+translate E Score {Score}
+translate E {Score Combo} {Score Combo}
+translate E {Time Combo} {Time Combo}
 translate E SecondsPerMove {Seconds per move}
 translate E DepthPerMove {Depth per move}
 translate E MoveControl {Move Control}
