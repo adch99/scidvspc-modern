@@ -2,7 +2,7 @@
 
 # French language support for Scid.
 # Translations contributed by:
-# Gilles Maire, Vincent Serisier, Joel Rivat, Pascal Heisel and Dale J.H Cannon
+# Gilles Maire, Vincent Serisier, Joel Rivat, Pascal Heisel, Dale J.H Cannon and Francois Paget
 
 # Untranslated messages are marked with a "TODO To be translated" comment.
 
@@ -153,7 +153,7 @@ menuText F ToolsAbsFilterGraph "Graphique de filtre absolu" 7 {Ouvrir/Fermer la 
 menuText F ToolsOpReport "Rapport d'ouverture" 0 {Générer un rapport d'ouvertures à partir de la position courante}
 menuText F ToolsTracker "Suivi de pièce"  0 {Ouvrir la fenêtre de suivi de pièce}
 menuText F ToolsTraining "Entrainement"  0 {Entrainement (tactique, ouvertures, ...) }
-menuText F ToolsComp "Tournament" 2 {Chess engine tournament}
+menuText F ToolsComp "Tournoi" 2 {Tournoi entre moteurs d'analyse}
 menuText F ToolsTacticalGame "Partie tactique"  0 {Jouer une partie tactique}
 menuText F ToolsSeriousGame "Partie sérieuse"  0 {Jouer une partie sans handicap}
 menuText F ToolsTrainTactics "Tactique"  0 {Résoudre des problèmes tactiques}
@@ -241,23 +241,15 @@ menuText F CCEditCopy "Copier parties dans Clipbase" 0 {Copy the games as CSV li
 # Options menu:
 menuText F Options "Options" 0
 menuText F OptionsBoard "Echiquier" 0 {Options d'aspect de l'échiquier}
-menuText F OptionsColour "Background Colour" 0 {Default text widget color}
-# ====== TODO To be translated ======
-menuText F OptionsBackColour "Background" 0 {Default text widget color}
-# ====== TODO To be translated ======
-menuText F OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
-# ====== TODO To be translated ======
-menuText F OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
-# ====== TODO To be translated ======
-menuText F OptionsRowColour "Rows" 0 {Default tree/book row color}
-# ====== TODO To be translated ======
-menuText F OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
-# ====== TODO To be translated ======
-menuText F OptionsProgressColour "Progressbar" 0 {Default progressbar color}
-# ====== TODO To be translated ======
-menuText F OptionsScoreColour "Score Graph" 0 {}
-# ====== TODO To be translated ======
-menuText F OptionsScoreBarColour "Score Graph current" 0 {}
+menuText F OptionsColour "Couleurs" 0 {Default text widget color}
+menuText F OptionsBackColour "Arrière-plan" 0 {Default text widget color}
+menuText F OptionsMainLineColour "Flèche coup principal" 0 {Mainline arrows}
+menuText F OptionsVarLineColour "Flèche coup variante" 0 {Variation arrows}
+menuText F OptionsRowColour "Surlignage coup bibliothèque" 0 {Default tree/book row color}
+menuText F OptionsSwitcherColour "Surlignage db switcher" 0 {Default db switcher color}
+menuText F OptionsProgressColour "Barre de progression" 0 {Default progressbar color}
+menuText F OptionsScoreColour "Barres graphiques de score" 0 {}
+menuText F OptionsScoreBarColour "Barre du score courant" 0 {}
 menuText F OptionsNames "Mes noms de joueurs..." 0 {Editer mes noms de joueurs}
 menuText F OptionsExport "Exportation" 0 {Changer les options d'exportation}
 menuText F OptionsFonts "Polices" 0 {Changer les polices}
@@ -272,22 +264,18 @@ menuText F OptionsFicsAuto "Autopromote Reine" 0
 menuText F OptionsFicsClk "Store Clock times" 0
 menuText F OptionsFicsColour "Couleur du texte" 0
 menuText F OptionsFicsSize "Taille de l'échiquier" 0
-# ====== TODO To be translated ======
-menuText F OptionsFicsButtons "User Buttons" 0
-# ====== TODO To be translated ======
-menuText F OptionsFicsCommands "Init Commands" 0
+menuText F OptionsFicsButtons "Boutons paramétrables" 0
+menuText F OptionsFicsCommands "Script d'initialisation" 0
 menuText F OptionsFicsNoRes "Sans résultats" 0
 menuText F OptionsFicsNoReq "Sans requêtes" 0
-# ====== TODO To be translated ======
-menuText F OptionsFicsPremove "Allow Premove" 0
+menuText F OptionsFicsPremove "Pré-move accepté" 0
 menuText F OptionsLanguage "Langue" 0 {Sélectionner le menu de choix des langues}
 menuText F OptionsMovesTranslatePieces "Traduction des pièces" 0 {Convertit la première lettre des pièces}
 menuText F OptionsMovesHighlightLastMove "Surbrillance dernier coup" 0 {Surbrillance du dernier coup}
 menuText F OptionsMovesHighlightLastMoveDisplay "Afficher" 0 {Afficher la surbrillance du dernier coup}
 menuText F OptionsMovesHighlightLastMoveWidth "Epaisseur" 0 {Epaisseur de la ligne}
 menuText F OptionsMovesHighlightLastMoveColor "Couleur" 0 {Couleur de la ligne}
-# ====== TODO To be translated ======
-menuText F OptionsMovesColorSelected "Color Selected Square" 0 {Color move}
+menuText F OptionsMovesColorSelected "Couleur sélectionnée Carré" 0 {Color move}
 menuText F OptionsMoves "Coups" 2 {Gestion des coups}
 menuText F OptionsMovesAsk "Demander avant d'écraser les coups" 0 \
   {Demander avant d'écraser un coup existant}
@@ -332,8 +320,7 @@ menuText F OptionsBooksDir "Répertoire des bibliothèques..." 0 {Répertoire des b
 menuText F OptionsTacticsBasesDir "Répertoire des bases d'entrainement..." 0 {Répertoire des bases pour l'entrainement tactique}
 menuText F OptionsInformant "Configurer les valeurs de notation" 0
 menuText F OptionsSave "Sauver les options" 0 "Sauver les options dans le fichier $::optionsFile"
-# ====== TODO To be translated ======
-menuText F OptionsSaveBases "Save Bases as Default" 0 
+menuText F OptionsSaveBases "Mémorisation des bases ouvertes" 0 
 menuText F OptionsAutoSave "Sauvegarde automatique des options" 0 \
   {Sauvegarder automatiquement toutes les options en quittant Scid}
 
@@ -363,21 +350,15 @@ menuText F GInfoTBResult "Tables de finales: Seulement le résultat" 12
 menuText F GInfoTBAll "Tables de finales: résultat et meilleurs coups" 19
 menuText F GInfoDelete "(Récupérer)Effacer cette partie" 4
 menuText F GInfoMark "(Dé)Marquer cette partie" 4
-# ====== TODO To be translated ======
-menuText F GInfoMenuBar "Menu Bar"  0
-# ====== TODO To be translated ======
-menuText F GInfoToolBar "Tool Bar"  0
-# ====== TODO To be translated ======
-menuText F GInfoButtonBar "Button Bar"  0
-# ====== TODO To be translated ======
-menuText F GInfoStatusBar "Status Bar"  0
+menuText F GInfoMenuBar "Barre de Menu"  0
+menuText F GInfoToolBar "Barre d'outils"  0
+menuText F GInfoButtonBar "Barre à boutons"  0
+menuText F GInfoStatusBar "Barre d'état"  0
 translate F FlipBoard {Retourner l'échiquier}
-# ====== TODO To be translated ======
-translate F RaiseWindows {Raise windows}
+translate F RaiseWindows {Fenêtre d'arbitrage}
 translate F AutoPlay {Lecture automatique}
 translate F TrialMode {Mode d'essai}
-# ====== TODO To be translated ======
-translate F KeepOpen {Keep open after startup}
+translate F KeepOpen {Afficher au démarrage}
 
 # General buttons:
 translate F Apply {Appliquer}
@@ -389,7 +370,7 @@ translate F Clear {Effacer}
 translate F Close {Fermer}
 translate F Contents {Contenu}
 translate F Defaults {Par défaut}
-translate F Delete {Supprimer}
+translate F Delete {Éliminer}
 translate F Graph {Graphique}
 translate F Help {Aide}
 translate F Import {Importer}
@@ -401,16 +382,14 @@ translate F MergeGames {Fusionner les parties}
 translate F Preview {Prévisualiser}
 translate F Revert {Revenir}
 translate F Save {Enregistrer}
-# ====== TODO To be translated ======
-translate F DontSave {Don't Save}
+translate F DontSave {Ne pas sauvegarder}
 translate F Search {Rechercher}
 translate F Stop {Arrêter}
 translate F Store {Enregistrer}
 translate F Update {Mettre à jour}
 translate F ChangeOrient {Changer l'orientation de la fenêtre}
 translate F ShowIcons {Montrer les icones}
-# ====== TODO To be translated ======
-translate F ConfirmCopy {Confirm Copy}
+translate F ConfirmCopy {Confirmer la copie}
 translate F None {Aucun}
 translate F First {Premier}
 translate F Current {En cours}
@@ -444,8 +423,7 @@ translate F Event {Événement}
 translate F Site {Lieux}
 translate F Country {Pays}
 translate F IgnoreColors {Ignorer les couleurs}
-# ====== TODO To be translated ======
-translate F MatchEnd {End pos only}
+translate F MatchEnd {Positon finale uniquement}
 translate F Date {Date}
 translate F EventDate {Événement date}
 translate F Decade {Décennie}
@@ -476,10 +454,8 @@ translate F StartPos {Position de départ}
 translate F Total {Total}
 translate F readonly {lecture seule}
 translate F altered {changé}
-# ====== TODO To be translated ======
-translate F tagsDescript {Extra tags (eg: Annotator "Anand")}
-# ====== TODO To be translated ======
-translate F prevTags {Use previous}
+translate F tagsDescript {Extra tags (ex: Annotator "Anand")}
+translate F prevTags {Précédent}
 
 # Standard error messages:
 translate F ErrNotOpen {Ceci n'est pas une base ouverte.}
@@ -513,8 +489,7 @@ translate F PinfoLookupName {Chercher nom}
 # Tablebase information:
 translate F Draw {Nulle}
 translate F stalemate {pat}
-# ====== TODO To be translated ======
-translate F checkmate {checkmate}
+translate F checkmate {mat}
 translate F withAllMoves {avec tous les coups}
 translate F withAllButOneMove {avec tous les coups sauf le dernier}
 translate F with {avec}
@@ -568,16 +543,12 @@ menuText F TreeOptFastAndSlowmode "Mode rapide puis lent" 0 {Mode rapide puis le
 menuText F TreeOptStartStop "Rafraîchissement auto" 0 {Rafraîchissement automatique de la fenêtre}
 menuText F TreeOptLock "Verrouille" 0 {Dé/verrouiller l'arbre à la base en cours}
 menuText F TreeOptTraining "Entraînement" 0 {Démarrer/Arrêter l'arbre du mode d'entraînement}
-# ====== TODO To be translated ======
-menuText F TreeOptShort "Short Display" 0 {Don't show ELO information}
+menuText F TreeOptShort "Affichage court" 0 {Affichage sans données ELO}
 menuText F TreeOptAutosave "Sauver le cache automatiquement" 0
-# ====== TODO To be translated ======
-menuText F TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
+menuText F TreeOptAutomask "Auto-chargement Mask" 0 "Auto-Load most recent mask with a tree open."
 menuText F TreeOptCacheSize "Taille du cache" 0 {Taille du cache}
-# ====== TODO To be translated ======
-menuText F TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
-# ====== TODO To be translated ======
-menuText F TreeOptSortBest "Sort Best Games" 0 "Sort Best Games by ELO."
+menuText F TreeOptShowBar "Affichage barre de progression" 0 "Show tree progress bar."
+menuText F TreeOptSortBest "Tri des meilleurs jeux" 0 "Tri des meilleurs jeux selon ELO."
 menuText F TreeHelp "Aide" 0
 menuText F TreeHelpTree "Aide Arbre" 0
 menuText F TreeHelpIndex "Index" 0
@@ -690,10 +661,8 @@ menuText F GraphFileClose "Fermer la fenêtre" 0
 menuText F GraphOptions "Options" 0
 menuText F GraphOptionsWhite "Blancs" 0
 menuText F GraphOptionsBlack "Noirs" 0
-# ====== TODO To be translated ======
-menuText F GraphOptionsDots "Show Dots" 0
-# ====== TODO To be translated ======
-menuText F GraphOptionsBar "Highlight Current Move" 0
+menuText F GraphOptionsDots "Montrer les points connus" 0
+menuText F GraphOptionsBar "Surbrillance de la position actuelle" 0
 menuText F GraphOptionsBoth "Les deux" 4
 menuText F GraphOptionsPInfo "Informations joueurs" 0
 translate F GraphFilterTitle "Graphique de filtre: fréquence pour 1000 parties"
@@ -724,16 +693,12 @@ translate F AnnotateWhite {Pour les coups des blancs seulement}
 translate F AnnotateBlack {Pour les coups des noirs seulement}
 translate F AnnotateNotBest {Quand le coup de la partie n'est pas le meilleur}
 translate F AnnotateBlundersOnly {Quand le coup est une erreur}
-# ====== TODO To be translated ======
-translate F BlundersNotBest {Blunders/Not Best}
+translate F BlundersNotBest {Erreurs/Imprécissions}
 translate F AnnotateTitle {Configurer Annotation}
-# ====== TODO To be translated ======
-translate F AnnotateMissedMates {Missed/shorter mates}
+translate F AnnotateMissedMates {Occasion manquée/Mat en moins de coups}
 translate F BlundersThreshold {Seuil de l'erreur}
-# ====== TODO To be translated ======
-translate F ScoreFormat {Score format}
-# ====== TODO To be translated ======
-translate F CutOff {Cut Off}
+translate F ScoreFormat {Format du score}
+translate F CutOff {Interruption}
 translate F LowPriority {Priorité processeur basse}
 translate F LogEngines {Taille du journal}
 translate F LogName {Ajouter nom}
@@ -751,12 +716,9 @@ translate F Informant++- {La partie est gagnée}
 
 # Book window
 translate F Book {Bibliothèque}
-# ====== TODO To be translated ======
-translate F OtherBook {Other Moves}
-# ====== TODO To be translated ======
-translate F Alphabetical {Alphabetical}
-# ====== TODO To be translated ======
-translate F TwoBooks {Two Books}
+translate F OtherBook {Autres mouvements}
+translate F Alphabetical {Alphabétique}
+translate F TwoBooks {Deux livres}
 
 # Analysis Engine open dialog:
 translate F EngineList {Liste des moteurs d'analyse}
@@ -801,9 +763,9 @@ menuText F PgnColorAnno "Annotations..." 0
 menuText F PgnColorComments "Commentaires..." 0
 menuText F PgnColorVars "Variantes..." 0
 menuText F PgnColorBackground "Couleur du fond..." 11
-menuText F PgnColorMain "Main line..." 0
-menuText F PgnColorCurrent "Current move background..." 1
-menuText F PgnColorNextMove "Next move background..." 0
+menuText F PgnColorMain "Ligne principale..." 0
+menuText F PgnColorCurrent "Surbrillance du coup joué..." 1
+menuText F PgnColorNextMove "Surbrillance du coup suivant..." 0
 menuText F PgnHelp "Aide" 0
 menuText F PgnHelpPgn "Aide PGN" 0
 menuText F PgnHelpIndex "Index" 0
@@ -822,10 +784,8 @@ menuText F CrosstabEditDate "Date" 0
 menuText F CrosstabOpt "Affichage" 0
 menuText F CrosstabOptColorPlain "Texte normal" 0
 menuText F CrosstabOptColorHyper "Hypertexte" 0
-# ====== TODO To be translated ======
-menuText F CrosstabOptTieWin "Tie-Break by wins" 1
-# ====== TODO To be translated ======
-menuText F CrosstabOptTieHead "Tie-Break by head-head" 1
+menuText F CrosstabOptTieWin "Départage par nombre de victoires" 1
+menuText F CrosstabOptTieHead "Départage par confrontation directe" 1
 menuText F CrosstabOptThreeWin "3 Points pour une victoire" 1
 menuText F CrosstabOptAges "Ages en années" 8
 menuText F CrosstabOptNats "Nationalités" 0
@@ -835,10 +795,8 @@ menuText F CrosstabOptTitles "Titres" 0
 menuText F CrosstabOptBreaks "Scores du départage" 4
 menuText F CrosstabOptDeleted "Inclure les parties effacées" 8
 menuText F CrosstabOptColors "Couleurs (système suisse uniquement)" 1
-# ====== TODO To be translated ======
-menuText F CrosstabOptColorRows "Color Rows" 0
-# ====== TODO To be translated ======
-menuText F CrosstabOptRowsColor "Row Color" 0 {Default crosstable row color}
+menuText F CrosstabOptColorRows "Lignes colorées" 0
+menuText F CrosstabOptRowsColor "Couleur de la ligne" 0 {Default crosstable row color}
 menuText F CrosstabOptColumnNumbers "Colonnes numérotées (Toutes rondes seulement)" 2
 menuText F CrosstabOptGroup "Scores du groupe" 0
 menuText F CrosstabSort "Trier" 0
@@ -883,8 +841,7 @@ translate F GameLength {Longueur de la partie}
 translate F FindGamesWith {Chercher les parties avec}
 translate F StdStart {Pos. départ non standard}
 translate F Promotions {Promotions}
-# ====== TODO To be translated ======
-translate F UnderPromo {Under Prom.}
+translate F UnderPromo {Promotions mineures}
 translate F Comments {Commentaires}
 translate F Variations {Variantes}
 translate F Annotations {Annotations}
@@ -902,10 +859,8 @@ translate F BrilliancyFlag {Spectaculaire}
 translate F BlunderFlag {Gaffe}
 translate F UserFlag {Utilisateur}
 translate F PgnContains {PGN contenant du texte}
-# ====== TODO To be translated ======
-translate F PreComment {Pre-game Comment}
-# ====== TODO To be translated ======
-translate F PostComment {End Comment}
+translate F PreComment {Commentaires initiaux}
+translate F PostComment {Commentaires finaux}
 
 # Game list window:
 translate F GlistNumber {Numéro}
@@ -961,8 +916,7 @@ translate F YearRange {Années:}
 translate F RatingRange {Classements:}
 translate F Description {Description}
 translate F Flag {Drapeau}
-# ====== TODO To be translated ======
-translate F CustomFlags {Custom flags}
+translate F CustomFlags {Drapeaux personnalisés}
 translate F DeleteCurrent {Effacer la partie courante}
 translate F DeleteFilter {Effacer le filtre de parties}
 translate F DeleteAll {Effacer toutes les parties}
@@ -1068,12 +1022,9 @@ translate F SearchBoardFiles {Colonnes (même matériel, tous les pions sur mêmes 
 translate F SearchBoardAny {Tous (même matériel, pions et pièces n'importe où)}
 translate F SearchInRefDatabase { Dans la base de référence }
 translate F LookInVars {Chercher dans les variantes}
-# ====== TODO To be translated ======
-translate F CQLLabel {CQL Script}
-# ====== TODO To be translated ======
-translate F CQLComments {Allow Comments}
-# ====== TODO To be translated ======
-translate F CQLStrip {Strip Match Comments}
+translate F CQLLabel {Script CQL}
+translate F CQLComments {Commentaires acceptés}
+translate F CQLStrip {Supprimer les commentaires}
 
 # Material search:
 translate F MaterialSearch {Rechercher Motifs}
@@ -1161,9 +1112,8 @@ Vous pouvez facilement rendre la base à nouveau accessible en écriture, en la fe
 Voulez vous vraiment passer cette base en lecture seule?}
 
 # Exit dialog:
-translate F ExitDialog {Voulez vous réellement quitter Scid?}
-# ====== TODO To be translated ======
-translate F ClearGameDialog {This game has been altered.\nDo you wish to save it?}
+translate F ExitDialog {Voulez-vous réellement quitter Scid?}
+translate F ClearGameDialog {Ce jeu a été modifié.\nVoulez-vous le sauvegarder?}
 translate F ExitUnsaved {Les bases de données suivantes ont des parties modifiées non sauvegardées. Si vous quittez maintenant, ces modifications seront perdues.}
 
 # Import window:
@@ -1254,8 +1204,7 @@ translate F OprepViewLaTeX {Voir en LaTeX}
 translate F PReportTitle {Rapport du joueur}
 translate F PReportColorWhite {avec les Blancs pièces}
 translate F PReportColorBlack {avec les Noirs pièces}
-# ====== TODO To be translated ======
-translate F PReportBeginning {Beginning with}
+translate F PReportBeginning {Commençant avec}
 translate F PReportMoves {après %s}
 translate F PReportOpenings {Ouvertures}
 translate F PReportClipbase {Vider le presse-papier et copier dedans toutes les parties qui correspondent}
@@ -1314,8 +1263,7 @@ translate F NameEditWith {avec}
 translate F NameEditMatches {Correspondances: Presser Alt+1 à Alt+9 pour sélectionner}
 translate F CheckGamesWhich {Vérifier les parties}
 translate F CheckAll {Toutes les parties}
-# ====== TODO To be translated ======
-translate F CheckSelectFilterGames {Only games in filter}
+translate F CheckSelectFilterGames {Jeux filtrés uniquement}
 
 # Classify window:
 translate F Classify {Classer}
@@ -1358,8 +1306,7 @@ translate F IndentVariations {Indenter les variantes?}
 translate F ExportColumnStyle {Style en colonne (un coup par ligne)?}
 translate F ExportSymbolStyle {Style d'annotation symbolique:}
 translate F ExportStripMarks {Enlever les codes de marquages de flèches et de coloration de cases des commentaires?}
-# ====== TODO To be translated ======
-translate F ExportFlags {Export Scid Flags}
+translate F ExportFlags {Exporter les drapeaux}
 
 # Goto game/move dialogs:
 translate F LoadGameNumber {Entrer le numéro de la partie à charger:}
@@ -1522,18 +1469,13 @@ translate F FixedDepth {Profondeur fixe}
 translate F Nodes {Noeuds} 
 translate F Depth {Profondeur}
 translate F Time {Temps} 
-# ====== TODO To be translated ======
 translate F Auto {Auto}
-# ====== TODO To be translated ======
 translate F Score {Score}
-# ====== TODO To be translated ======
-translate F {Score Combo} {Score Combo}
-# ====== TODO To be translated ======
-translate F {Time Combo} {Time Combo}
+translate F {Score Combo} {Score Combiné}
+translate F {Time Combo} {Time Combiné}
 translate F SecondsPerMove {Secondes par coup}
 translate F DepthPerMove {Profondeur par coup}
-# ====== TODO To be translated ======
-translate F MoveControl {Move Control}
+translate F MoveControl {Type d'analyse}
 translate F TimeLabel {Time per move}
 translate F AddVars {Ajouter les variantes}
 translate F AddScores {Additionner scores}
@@ -1631,8 +1573,7 @@ translate F FICSTimeseal {Timeseal}
 translate F FICSTimesealPort {Port Timeseal}
 translate F FICSSilence {Silence}
 translate F FICSOffers {Offres}
-# ====== TODO To be translated ======
-translate F FICSMakeOffer {Make Offer}
+translate F FICSMakeOffer {Faire une Offre}
 translate F FICSGames {Parties}
 translate F FICSFindOpponent {Trouver adversaire}
 translate F FICSTakeback {Reprendre un coup}
@@ -1730,17 +1671,13 @@ translate F ExtHWEngineParam {Paramètre du moteur}
 translate F ExtHWShowButton {Montrer bouton}
 translate F ExtHWHardware {Hardware}
 translate F ExtHWNovag {Novag Citrine}
-# ====== TODO To be translated ======
-translate F ExtHWInputEngine {Input Engine}
-# ====== TODO To be translated ======
-translate F ExtHWNoBoard {No board}
-# ====== TODO To be translated ======
-translate F IEConsole {Input Engine Console}
+translate F ExtHWInputEngine {Autre périphérique}
+translate F ExtHWNoBoard {Pas de plateau}
+translate F IEConsole {Console périphérique}
 translate F IESending {Les coups ont été envoyés par}
 translate F IESynchronise {Synchroniser}
 translate F IERotate  {Retourner}
-# ====== TODO To be translated ======
-translate F IEUnableToStart {Unable to start Input Engine:}
+translate F IEUnableToStart {Echec du démarrage périphérique:}
 translate F DoneWithPosition {Position terminée}
 translate F Board {Echiquier}
 translate F showGameInfo {Montrer le panneau d'info}
@@ -1751,22 +1688,15 @@ translate F DockLeft {Déplacer à gauche}
 translate F DockRight {Déplacer à droite}
 translate F Undock {Détacher}
 translate F ChangeIcon {Changer icone}
-# ====== TODO To be translated ======
-translate F More {More}
+translate F More {Plus...}
 
 # Drag & Drop
-# ====== TODO To be translated ======
-translate F CannotOpenUri {Cannot open the following URI:}
-# ====== TODO To be translated ======
-translate F InvalidUri {Drop content is not a valid URI list.}
-# ====== TODO To be translated ======
-translate F UriRejected	{The following files are rejected:}
-# ====== TODO To be translated ======
-translate F UriRejectedDetail {Only the listed file types can be handled:}
-# ====== TODO To be translated ======
-translate F EmptyUriList {Drop content is empty.}
-# ====== TODO To be translated ======
-translate F SelectionOwnerDidntRespond {Timeout during drop action: selection owner didn't respond.}
+translate F CannotOpenUri {Ouverture impossible de l'URI:}
+translate F InvalidUri {Les données déposées sont sans URI valide}
+translate F UriRejected	{Les fichiers suivant sont rejetés:}
+translate F UriRejectedDetail {Seuls les types de fichiers listés seront gérés:}
+translate F EmptyUriList {Le contenu déposé est vide.}
+translate F SelectionOwnerDidntRespond {Timeout durant l'envoi: absence de réponse.}
 
 ##########
 #
