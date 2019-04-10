@@ -415,7 +415,7 @@ Chessbase databases and many chess variants.</p>
 <item>A quick Piece Position Search implemented using CQL.
 <item>Gameinfo window always shows a rehoned "Material Advantage" value.
 <item>Board Options window can now display all custom piecesets in a gridded manner, and also highlights the current piece style.
-<item>FICs - Some changes to the button/font, and don't store adminBOT tells, improve smoves command.
+<item>FICs - Automatically store move-times, some changes to the button/font, and don't store adminBOT tells.
 <item>Tree Mask - Add 'unfold' option to the Mask window, and fix up some allignment/font issues.
 <item>Update the Spelling file with Uwe's 2018 update.
 <item>Pressing 'End' key moves to end-of-variation (if in var) instead of end-of-game.

@@ -575,8 +575,8 @@
   o  Board Options window can now display all custom piecesets in a
      gridded manner, and also highlights the current piece style.
 
-  o  FICs - Some changes to the button/font, and don't store adminBOT
-     tells, improve smoves command.
+  o  FICs - Automatically store move-times, some changes to the
+     button/font, and don't store adminBOT tells.
 
   o  Tree Mask - Add 'unfold' option to the Mask window, and fix up some
      allignment/font issues.
