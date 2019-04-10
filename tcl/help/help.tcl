@@ -6184,7 +6184,7 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li>A quick Piece Position Search implemented using CQL</li>
 <li>Gameinfo window always shows a rehoned "Material Advantage" value</li>
 <li>Board Options window can now display all custom piecesets in a gridded manner, and also highlights the current piece style</li>
-<li>FICs - Some changes to the button/font, and don't store adminBOT tells, improve smoves command</li>
+<li>FICs - Automatically store move-times, some changes to the button/font, and don't store adminBOT tells.</li>
 <li>Tree Mask - Add 'unfold' option to the Mask window, and fix up some allignment/font issues</li>
 <li>Update the Spelling file with Uwe's 2018 update</li>
 <li>Pressing 'End' key moves to end-of-variation (if in var) instead of end-of-game</li>
