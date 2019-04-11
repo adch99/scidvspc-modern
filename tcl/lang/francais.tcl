@@ -382,7 +382,7 @@ translate F MergeGames {Fusionner les parties}
 translate F Preview {Prévisualiser}
 translate F Revert {Revenir}
 translate F Save {Enregistrer}
-translate F DontSave {Ne pas sauvegarder}
+translate F DontSave {Ne pas sauve}
 translate F Search {Rechercher}
 translate F Stop {Arrêter}
 translate F Store {Enregistrer}
@@ -891,7 +891,7 @@ translate F GlistFindText {Rechercher texte}
 translate F GlistMoveField {Coup}
 translate F GlistEditField {Configurer}
 translate F GlistAddField {Ajouter}
-translate F GlistDeleteField {Enlever}
+translate F GlistDeleteField {Supprimer}
 translate F GlistColor {Couleur}
 translate F GlistSort {Trier la base}
 
