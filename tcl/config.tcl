@@ -25,7 +25,7 @@ if {![info exists scidBasesDir] || ![file isdirectory $scidBasesDir]} {
 # ecoFile: the ECO file for opening classification. Scid will try to load
 # this first, and if that fails, it will try to load  "scid.eco" in the
 # current directory.
-if {$ecoFile == ""} {
+if {$ecoFile == "" || ![file exists $ecoFile]} {
   if {$windowsOS} {
     set ecoFile [file join $scidDataDir "scid.eco"]
   } else {
@@ -34,7 +34,7 @@ if {$ecoFile == ""} {
 }
 
 # Spell-checking file: default is "spelling.ssp".
-if {![info exists spellCheckFile]} {
+if {![info exists spellCheckFile] || ![file exists $spellCheckFile]} {
   if {$windowsOS} {
     set spellCheckFile [file join $scidDataDir "spelling.ssp"]
   } else {
