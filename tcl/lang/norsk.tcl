@@ -46,8 +46,8 @@ menuText O FileOpen "Åpne..." 0 {Åpne en Scid-database}
 menuText O FileClose "Lukk" 2 {Lukk aktiv Scid-database}
 menuText O FileFinder "Søk" 0 {Åpne søkevinduet}
 menuText O FileSavePgn "Lagre Pgn..." 0 {}
-menuText O FileOpenBaseAsTree "Åpne base som tre" 14   {Åpne en base og bruk det i trevinduet}
-menuText O FileOpenRecentBaseAsTree "Åpne nylig som tre" 6   {Åpne en nylig brukt base i trevinduet}
+menuText O FileOpenBaseAsTree "Åpne base i trevisning" 14   {Åpne en base og bruk det i trevinduet}
+menuText O FileOpenRecentBaseAsTree "Åpne siste i trevisning" 6   {Åpne en nylig brukt base i trevinduet}
 menuText O FileBookmarks "Bokmerker" 3 {Bokmerkemeny (snarvei: Ctrl+B)}
 menuText O FileBookmarksAdd "Legg til bokmerke" 0 \
   {Sett bokmerke til nåværende database, parti og stilling}
@@ -271,7 +271,7 @@ menuText O OptionsGInfo "Partiinformasjon" 0 {Informasjonsinnstillinger}
 menuText O OptionsFics "FICS" 0
 menuText O OptionsFicsAuto "Automatisk dronning" 0
 # ====== TODO To be translated ======
-menuText O OptionsFicsClk "Store Clock times" 0
+menuText O OptionsFicsClk "Store klokker" 0
 menuText O OptionsFicsColour "Tekstfarge" 0
 menuText O OptionsFicsSize "Brettstørrelse" 0
 menuText O OptionsFicsButtons "Brukerdefinerte knapper" 0
@@ -714,7 +714,7 @@ translate O LogEngines {Loggstørrelse}
 translate O LogName {Legg til navn}
 translate O MaxPly {Maks halvtrekk}
 translate O ClickHereToSeeMoves {Klikk her for å se trekk}
-translate O ConfigureInformant {Configure Informant} ;# ***
+translate O ConfigureInformant {Angi kvalitetsverdier} ;
 translate O Informant!? {Interessant trekk}
 translate O Informant? {Dårlig trekk}
 translate O Informant?? {Bukk}
@@ -900,7 +900,7 @@ translate O GlistFindText {Finn tekst}
 translate O GlistMoveField {Trekk}
 translate O GlistEditField {Still inn}
 translate O GlistAddField {Legg til}
-translate O GlistDeleteField {Fjern}
+translate O GlistDeleteField {Slett}
 translate O GlistColor {Farge}
 translate O GlistSort {Sorter database}
 
@@ -1040,7 +1040,7 @@ translate O LookInVars {Søk i varianter}
 
 translate O CQLLabel {CQL skript}
 translate O CQLComments {Tillat kommentarer}
-translate O CQLStrip {Strip Match Comments} ;# ???
+translate O CQLStrip {Fjern matchende kommentarer}
 
 # Material search:
 translate O MaterialSearch {Kvalitetssøk}
