@@ -463,8 +463,9 @@ proc ::search::cqlLoad {} {
   if {$fName != ""} {
     if {![catch {open $fName r} fd]} {
       $w.g.syntax delete 0.0 end
-      while {[gets $fd line] >= 0 && ![eof $fd]} {
-	$w.g.syntax insert end "$line\n"
+      while {[gets $fd line] >= 0} {
+        $w.g.syntax insert end "$line\n"
+        if {[eof $fd]} { break }
       }
       close $fd
       set ::initialDir(sso) [file dirname $fName]
