@@ -1189,6 +1189,7 @@ namespace eval fics {
         if {[sc_pos moveNumber] > 2} {
 	  catch {::game::Save}
 	  updateBoard -pgn
+	  ::tools::graphs::score::Refresh
 	  ::windows::gamelist::Refresh
         }
         # we need a better way to update gamelist when adding a new game
