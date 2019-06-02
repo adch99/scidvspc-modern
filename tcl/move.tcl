@@ -76,7 +76,7 @@ proc ::move::End {{var 0}} {
       return
   }
   set ::pause 1
-  if {$var} {
+  if {$var && ![sc_pos isAt vend]} {
     sc_move endVar
   } else {
     sc_move end
