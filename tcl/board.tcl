@@ -1888,8 +1888,6 @@ proc ::board::mark::DrawRectangle { pathName square color pattern } {
       -outline $color -width $::highlightLastMoveWidth -dash $pattern -tag highlightLastMove
 }
 
-# ::board::mark::DrawTux --
-
 image create photo tux16x16 -data {
 R0lGODlhEAAQAMZeAAAAAAQCAQQEBAkGAAgICAwMDA4ODxAQEBISEiAhISQk
 JCQlKEBAQUFBQUJCQmJBBkREREdHR15LJE5OTlhYWHNmS2hoaHtqKX9vM45z
@@ -2072,7 +2070,7 @@ proc ::board::mark::DrawTux {pathName square discard} {
   if {!$len} return
   $pathName create image [lrange $box 5 6] \
       -image tux${len}x${len} \
-      -tag [list mark "mark$square" tux]
+      -tag [list mark "mark$square" tux] -state disabled
 }
 
 # ::board::mark::GetArrowCoords --
