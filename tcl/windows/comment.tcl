@@ -257,6 +257,8 @@ proc ::commenteditor::Open {} {
   set size 20	;# button/rectangle size
   pack [set types [frame $typeButtons.all]] -side left -padx 10
   set row 0
+
+  # buttons resolves to two rows of shapes
   foreach buttons $markTypeList {
     set column 0
     foreach shape $buttons {
