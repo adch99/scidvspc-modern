@@ -11,7 +11,7 @@ namespace eval ::commenteditor {
   set colorList {red orange yellow green blue skyBlue purple white black}
   set colorRegsub {(red|orange|yellow|green|blue|skyBlue|purple|white|black)}
   # Each list is a set of buttons in the dialog menu:
-  set markTypeList {{circle disk full x + - = ? !} {1 2 3 4 5 6 7 8 9}}
+  set markTypeList {{tux circle disk full + - = ? !} {1 2 3 4 5 6 7 8 9}}
 
   # IO state of the comment editor
   variable  State

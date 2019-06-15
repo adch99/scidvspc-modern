@@ -1292,7 +1292,7 @@ set helpTitle(Comment) "Comment Editor"
 set helpText(Comment) {<h1>The Comment Editor</h1>
   <p>
   The <run ::commenteditor::Open><green>Comment Editor</green></run> lets you add
-  comments and <a NAGs>annotations</a>, and also includes a small board for drawing arrows (etc). <i>These three sections can be shown/hidden by pressing the <img bookmark_down> button.</i>
+  comments and <a NAGs>annotations</a>, and also includes a small board for drawing arrows (etc). <i>These three sections can be shown/hidden by pressing the <img bookmark_down> button, though if sections are missing, try resizing the window.</i>
   </p>
 
   <h3>Comments</h3>
@@ -5306,11 +5306,14 @@ are lost, the old setup stays in place.
 set helpTitle(TacticsTrainer) "Mate in ..N.. Puzzles"
 set helpText(TacticsTrainer) {<h1>Mate in ..N.. Puzzles</h1>
   <p>
-  Scid's
-<run ::tactics::config><green>Mate in ...</green></run> widget
+  Scid's <run ::tactics::config><green>Mate in N</green></run> window
   is a handy way to improve your chess skills.
-  The feature is fairly straight forward, though not especially polished.
+  The feature is fairly straight forward, though not especially polished,
+  and is implemented using special databases containing the puzzles
+  , installed in Scid's default <run setTacticsBasesDir><green>Bases Directory</green></run>.
 </p>
+<p><i>Starting Mate-in-N, Scid opens all databases in this directory, so it is probably not a great place
+  to keep your personal databases, as this will cause the feature to hang or run slowly at start-up.</i></p>
   <h3>Configuration</h3>
   <p>
   The <term>Engine analysis time</term> slider limits Toga's
@@ -5349,13 +5352,7 @@ set helpText(TacticsTrainer) {<h1>Mate in ..N.. Puzzles</h1>
   position at hand. No evaluation is done on the time required to solve a problem.
   </p>
 
-  <h3>Other notes</h3>
-  <p>
-  This feature is implemented using special databases containing the puzzles
-  , installed in Scid's default <term>Bases</term> directory.
-  If for any reason this directory option has been changed , it can be specified in
-  <run setTacticsBasesDir><green>Options--<gt>Bases Directory</green></run>.
-  </p>
+  <h3>Notes</h3>
   <p>
   Unlike other bases, puzzle bases do not contain full games; only starting positions.
   Any puzzle book can be converted to a trainings base by setting up the
@@ -5363,7 +5360,7 @@ set helpText(TacticsTrainer) {<h1>Mate in ..N.. Puzzles</h1>
   In the <a Maintenance>Maintenance</a> window, set the new base type to <term>Tactics</term>,
   and edit the <term>Description</term> to give the database a name.
   </p>
-  <p><footer>Updated: Scid vs. PC 4.9, december 2012</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.21, April 2019</footer></p>
 }
 
 set helpTitle(FindBestMove) "Find best move"
