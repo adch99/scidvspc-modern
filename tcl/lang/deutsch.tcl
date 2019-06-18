@@ -3368,14 +3368,15 @@ set helpText(D,Variations) {<h1>Varianten</h1>
 
 set helpTitle(D,Comment) "Kommentareditor"
 set helpText(D,Comment) {<h1>Der Kommentareditor</h1>
-  <p>Mit
-  dem <run ::commenteditor::Open><green>Kommentareditor</green></run>
-  können Sie Kommentare und <a NAGs>Anmerkungen</a> hinzufügen. Er
-  enthält auch ein kleines Schachbrett für das Zeichnen von Pfeilen
+
+  <p>Mit dem <run
+  ::commenteditor::Open><green>Kommentareditor</green></run> können
+  Sie Kommentare und <a NAGs>Anmerkungen</a> hinzufügen. Er enthält
+  auch ein kleines Schachbrett für das Zeichnen von Pfeilen
   (usw.). <i>Diese drei Bereiche können durch das Drücken der
   Schaltfläche <img bookmark_down> angezeigt bzw. ausgeblendet
-  werden.</i>
-  </p>
+  werden. Falls jedoch Abschnitte fehlen, versuchen Sie, die
+  Fenstergröße zu ändern.</i> </p>
 
   <h3>Kommentare</h3>
   <p>Kommentare sind Texte, die zu einem bestimmten Zug gehören. Sie
@@ -7747,11 +7748,20 @@ set helpText(D,CCXfccSetupDialog) {<h1>Xfcc-Servereinstellung</h1>
 set helpTitle(D,TacticsTrainer) "Matt in ..n..-Puzzle"
 set helpText(D,TacticsTrainer) {<h1>"Matt in ..n.."-Puzzle</h1>
 
-  <p>Scids <run ::tactics::config><green>Matt in ...</green></run>
-  ist ein nützliches Mittel, um Ihre Schachfähigkeiten zu
-  verbessern. Die Funktion ist einfach geradlinig, obwohl sie nicht
-  besonders ausgefeilt ist.
-  </p>
+  <p>Scids <run ::tactics::config><green>Matt in ...</green></run> ist
+  ein nützliches Mittel, um Ihre Schachfähigkeiten zu verbessern. Die
+  Funktion ist einfach geradlinig, obwohl sie nicht besonders
+  ausgefeilt ist. Sie wurde eingebaut unter Verwendung von speziellen
+  Datenbanken, die Puzzles enthalten. Sie sind in Scids <run
+  setTacticsBasesDir><green> Standardverzeichnis für
+  Datenbanken</green></run> enthalten.</p>
+
+  <p><i>Beim Start von Matt-in-N öffnet Scid alle Datenbanken in
+  diesem Verzeichnis, so daß dies wahrscheinlich kein guter Platz
+  ist, um dort Ihre eigenen Datenbanken aufzubewahren. Dies führt
+  beim Start zu einem langsamen Ablauf oder das Programm bleibt
+  hängen.</i></p>
+	
   <h3>Konfiguration</h3>
   <p>Der Schieberegler für die <term>Analysezeit der Engine</term>
   begrenzt die Zeit für Toga, um das Puzzle (das spontan erstellt
@@ -7790,25 +7800,17 @@ set helpText(D,TacticsTrainer) {<h1>"Matt in ..n.."-Puzzle</h1>
   Bewertung bezüglich der benötigten Zeit.
   </p>
 
-  <h3>Weitere Hinweise</h3>
-  <p>Diese Funktion wurde eingebaut unter Verwendung besonderer
-  Datenbanken, die die Puzzle enthalten. Sie sind in Scids
-  Standarddatenbankverzeichnis installiert. Falls aus irgendwelchen
-  Gründen dieses Verzeichnis geändert wurde, kann es
-  in <run setTacticsBasesDir><green>Optionen--<gt>Datenbankenverzeichnis...</green></run>
-  angegeben werden.
-  </p>
-  <p>Im Gegensatz zu anderen Datenbanken enthalten Puzzle keine
-  vollständigen Partien, sondern nur Startpositionen. Jedes beliebige
-  Puzzlebuch kann in eine Trainingsdatenbank umgewandelt werden, indem
-  man die Stellungen aufbaut und die neue Datenbank
-  im <term>Datenbankenverzeichnis</term> speichert. Setzen Sie
-  im <a Maintenance>Wartungsfenster</a> den neuen Datenbanktyp
-  auf <term>Taktik</term> und editieren Sie
-  die <term>Beschreibung</term>, um der Datenbank einen Namen zu
-  geben.
-  </p>
-  <p><footer>Aktualisiert: Scid vs. PC 4.9, december 2012</footer></p>
+  <h3>Hinweise</h3>
+  <p>Im Gegensatz zu anderen Datenbanken enthalten Puzzle-Datenbanken
+  keine vollständigen Partien, sondern nur Anfangspositionen. Jedes
+  beliebige Puzzle-Buch kann in eine Trainingsdatenbank konvertiert
+  werden, indem man die Stellungen aufbaut und die neue Datenbank im
+  <term>Datenbankenverzeichnis</term> speichert. Setzen Sie im <a
+  Maintenance>Wartungs</a>fenster den neuen Datenbanktyp auf
+  <term>Taktik</term> und ändern Sie die <term>Beschreibung</term>, um
+  der Datenbank einen Namen zu geben.</p>
+
+  <p><footer>Aktualisiert: Scid vs. PC 4.21, April 2019</footer></p>
   }
 
 set helpTitle(D,FindBestMove) "Besten Zug finden"
