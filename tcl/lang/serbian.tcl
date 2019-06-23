@@ -289,6 +289,8 @@ menuText Y OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
 # ====== TODO To be translated ======
 menuText Y OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
 # ====== TODO To be translated ======
+menuText Y OptionsEngineLineColour "Engine Arrows" 0 {Engine arrows}
+# ====== TODO To be translated ======
 menuText Y OptionsRowColour "Rows" 0 {Default tree/book row color}
 # ====== TODO To be translated ======
 menuText Y OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
@@ -1613,6 +1615,8 @@ translate Y WhiteBorder {Ivica belih figura}
 translate Y BlackBorder {Ivica crnih figura}
 translate Y ArrowMain   {Main Arrow}
 translate Y ArrowVar    {Var Arrows}
+# ====== TODO To be translated ======
+translate Y ShowArrows  {Show Arrows}
 
 # Novelty window:
 translate Y FindNovelty {Pronaði novost}

@@ -370,8 +370,10 @@ proc ::enginelist::choose {} {
 
   frame $w.buttons
   frame $w.buttons2
+  frame $w.buttons3
 
   pack $w.buttons2 -side bottom -padx 5 -pady 8 -fill x
+  pack $w.buttons3 -side bottom -padx 5 -pady 3 -fill x
   pack $w.buttons -side bottom -padx 5 -pady 3 -fill x
 
   text $w.title -width 93 -height 1 -font font_Fixed -relief flat \
@@ -429,17 +431,23 @@ proc ::enginelist::choose {} {
     ::enginelist::delete [lindex [.enginelist.list.list curselection] 0]
   }
 
-  label $w.buttons2.sep -text "   "
+  label $w.buttons3.space -text " "
 
   label $w.buttons2.logengines        -textvar ::tr(LogEngines)
   entry $w.buttons2.logmax            -textvariable analysis(logMax) -width 6
   label $w.buttons2.ply               -textvar ::tr(MaxPly)
   spinbox $w.buttons2.maxply -width 4 -textvariable analysis(maxPly) -from 0 -to 20 -increment 1
   checkbutton $w.buttons2.logname     -variable analysis(logName)     -textvar ::tr(LogName)
-  checkbutton $w.buttons2.lowpriority -variable analysis(lowPriority) -textvar ::tr(LowPriority)
   dialogbutton $w.buttons2.start -textvar ::tr(Start) -command {
     makeAnalysisWin [lindex [.enginelist.list.list curselection] 0] settime
   }
+  
+  label       $w.buttons3.sizeLabel     -text [tr OptionsFicsSize]
+  spinbox     $w.buttons3.size -width 3 -textvariable analysis(boardSize) -from 1 -to 5 -increment 1
+  checkbutton $w.buttons3.showBoard -textvar tr(Board) -variable analysis(showBoard)
+  checkbutton $w.buttons3.showVar -textvar tr(ShowArrows) -variable analysis(boardShowsVar) -command "
+    catch \{$w.frame.bd.bd delete var\}"
+  checkbutton $w.buttons3.lowpriority -variable analysis(lowPriority) -textvar ::tr(LowPriority)
 
   # Right-click inits engine but doesn't start
   bind $w.buttons2.start <Button-3> {
@@ -452,8 +460,10 @@ proc ::enginelist::choose {} {
 
   pack $w.buttons.up $w.buttons.down $w.buttons.log $w.buttons.uci $w.buttons.edit $w.buttons.add $w.buttons.copy $w.buttons.delete -side left -expand yes
 
+  pack $w.buttons3.showBoard $w.buttons3.space $w.buttons3.sizeLabel $w.buttons3.size $w.buttons3.showVar $w.buttons3.lowpriority  -side left -padx 4
+
   pack $w.buttons2.close $w.buttons2.start -side right -padx 5 
-  pack $w.buttons2.logengines $w.buttons2.logmax $w.buttons2.ply $w.buttons2.maxply $w.buttons2.logname $w.buttons2.lowpriority -side left -padx 0 
+  pack $w.buttons2.logengines $w.buttons2.logmax $w.buttons2.ply $w.buttons2.maxply $w.buttons2.logname -side left -padx 4
 
   focus $w.buttons2.start
   # Focus is now set to listbox (in ::enginelist::listEngines) for keyboard shortcuts
@@ -2308,7 +2318,8 @@ proc makeAnalysisWin {{n 0} {options {}}} {
   setWinSize $w
   standardShortcuts $w
 
-  set analysis(showBoard$n) 0
+  set analysis(showBoard$n) $analysis(showBoard)
+  set analysis(boardShowsVar$n) $analysis(boardShowsVar)
 
   frame $w.b
   pack  $w.b -side top -fill x
@@ -2384,7 +2395,10 @@ proc makeAnalysisWin {{n 0} {options {}}} {
     -variable analysis(showEngineInfo$n) -command "toggleEngineInfo $n" -relief $relief
   ::utils::tooltip::Set $w.b.showinfo $::tr(ShowInfo)
 
-  button $w.b.showboard -image tb_coords -command "toggleAnalysisBoard $n" -relief $relief
+  button $w.b.showboard -image tb_coords -relief $relief -command "
+    set analysis(showBoard$n) \[expr \!\$analysis(showBoard$n)\]
+    initAnalysisBoard $n
+  "
   ::utils::tooltip::Set $w.b.showboard $::tr(ShowAnalysisBoard)
 
   # Xboard only. This button is unpacked later if UCI
@@ -2461,6 +2475,7 @@ proc makeAnalysisWin {{n 0} {options {}}} {
     pack $w.text -side bottom -fill both 
   }
   pack $w.hist -side top -expand 1 -fill both
+  initAnalysisBoard $n ; # Init board early to accomodate early engine startups
   pack $w.hist.ybar -side right -fill y
   pack $w.hist.xbar -side bottom -expand 0 -fill x
   pack $w.hist.text -side left -expand 1 -fill both
@@ -2662,7 +2677,7 @@ proc toggleMovesDisplay {n} {
     $h configure -state normal
     $h delete 0.0 end
     $h insert end "\n\n\n     Right click to see moves\n" blue
-    updateAnalysisBoard $n {}
+    updateAnalysisBoard $n
     $h configure -state disabled
   }
 }
@@ -3307,8 +3322,8 @@ proc toggleLockEngine {n} {
     set analysis(side$n)     [sc_pos side] ; # do we need this here. It is set in updateAnalysis
     set analysis(lockPos$n)  [sc_pos board]
     set analysis(lockFen$n)  [sc_pos fen]
-    if {[winfo exists .analysisWin$n.bd]} {
-      ::board::update .analysisWin$n.bd $analysis(lockPos$n)
+    if {[winfo exists .analysisWin$n.frame.bd]} {
+      ::board::update .analysisWin$n.frame.bd $analysis(lockPos$n)
     }
     ::utils::tooltip::Set .analysisWin$n.b.lockengine "[file tail [sc_base filename]], game [sc_game number]"
   } else {
@@ -3399,7 +3414,7 @@ proc updateAnalysisText {n} {
       $t insert end $moves blue
     }
     $t configure -state disabled
-    updateAnalysisBoard $n {}
+    updateAnalysisBoard $n
     return
   }
 
@@ -3552,29 +3567,37 @@ proc addMoveNumbers { e pv } {
 }
 
 ###  Toggle whether the small analysis board is shown
+###  ... not really an init, but updateAnalysisBoard is already taken
 
-proc toggleAnalysisBoard {n} {
+proc initAnalysisBoard {n} {
   global analysis
   set w .analysisWin$n
 
   # init if doesnt exist
-  if {![winfo exists $w.bd]} {
-    ::board::new $w.bd 25 0 $::board::_flip(.main.board)
-    $w.bd configure -relief solid -borderwidth 1
+  if {![winfo exists $w.frame.bd]} {
+    frame $w.frame
+    ::board::new $w.frame.bd [expr {$analysis(boardSize) * 5 + 20}] 0 $::board::_flip(.main.board)
+    button $w.frame.close -image arrow_close -font font_Small -relief flat -command "
+      set analysis(showBoard$n) 0
+      pack forget $w.frame
+    "
+    pack $w.frame.bd $w.frame.close -side left -anchor n
+    bind $w.frame.bd.bd <Button-1> "
+      set analysis(boardShowsVar$n) \[expr \!\$analysis(boardShowsVar$n)\]
+      updateAnalysisBoard $n
+   "
   }
   if {$analysis(lockEngine$n)} {
-    ::board::update $w.bd $analysis(lockPos$n)
+    ::board::update $w.frame.bd $analysis(lockPos$n)
   }
 
-  if { $analysis(showBoard$n) } {
-    set analysis(showBoard$n) 0
-    pack forget $w.bd
+  if {! $analysis(showBoard$n) } {
+    catch {pack forget $w.frame}
     # setWinSize .analysisWin$n
     # bind $w <Configure> "recordWinSize $w"
   } else {
     # bind $w <Configure> {}
-    set analysis(showBoard$n) 1
-    pack $w.bd -side bottom -before $w.hist 
+    pack $w.frame -side bottom -before $w.hist 
     update
     $w.hist.text configure -setgrid 1
     $w.text configure -setgrid 1
@@ -3596,34 +3619,42 @@ proc toggleEngineInfo {n} {
 
 ### Update the small analysis board in the analysis window,
 
-proc updateAnalysisBoard {n moves} {
+proc updateAnalysisBoard {n {moves {}}} {
   global analysis
 
   if {!$analysis(showBoard$n)} {
     return
   }
 
-  set bd .analysisWin$n.bd
+  set bd .analysisWin$n.frame.bd
   if {$::board::_flip($bd) != $::board::_flip(.main.board)} {
     ::board::flip $bd
   }
 
-  if {$analysis(lockEngine$n)} {
-    return
+  # New feature to show arrows for UCI engines
+  if {$analysis(boardShowsVar$n) && $analysis(uci$n)} {
+    if {!$analysis(lockEngine$n)} {::board::update $bd [sc_pos board]}
+    $bd.bd delete var
+      set var 0
+      if {$moves != ""} {
+	set sq_start [ ::board::sq [ string range $moves 0 1 ] ]
+	set sq_end [ ::board::sq [ string range $moves 2 3 ] ]
+	::board::mark::add $bd varComment $sq_start $sq_end $::engineLineColor
+	incr var
+      }
+  } else {
+    if {$analysis(lockEngine$n)} {
+      return
+    }
+    sc_game push copyfast
+
+    # Make the engine moves and update the board
+    moveAdd $moves $n
+    ::board::update $bd [sc_pos board]
+
+    sc_game pop
   }
-
-  # Push a temporary copy of the current game:
-  sc_game push copyfast
-
-  # Make the engine moves and update the board:
-  moveAdd $moves $n
-  ::board::update $bd [sc_pos board]
-
-  # Pop the temporary game:
-  sc_game pop
 }
-
-# Fulvio's analysis rewrite
 
 ################################################################################
 #   Wait for the engine to be ready then send position and go infinite
@@ -3662,6 +3693,9 @@ proc sendPosToEngineUCI {n  {delay 0}} {
           }
           # $h insert 1.0 "[tr No] [tr Moves]"
 	  $h configure -state disabled
+	  if {$analysis(boardShowsVar$n)} {
+	    updateAnalysisBoard $n
+	  }
           return
         }
         ### Dont send position if annotating and in book

@@ -274,6 +274,8 @@ menuText H OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
 # ====== TODO To be translated ======
 menuText H OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
 # ====== TODO To be translated ======
+menuText H OptionsEngineLineColour "Engine Arrows" 0 {Engine arrows}
+# ====== TODO To be translated ======
 menuText H OptionsRowColour "Rows" 0 {Default tree/book row color}
 # ====== TODO To be translated ======
 menuText H OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
@@ -1540,6 +1542,8 @@ translate H WhiteBorder {Világos körvonal}
 translate H BlackBorder {Sötét körvonal}
 translate H ArrowMain   {Main Arrow}
 translate H ArrowVar    {Var Arrows}
+# ====== TODO To be translated ======
+translate H ShowArrows  {Show Arrows}
 
 # Novelty window:
 translate H FindNovelty {Újítás keresése}

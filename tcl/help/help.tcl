@@ -2797,6 +2797,14 @@ with the format "stat01: time nodes ply mvleft mvtot mvname". The results can be
 
   <h1>Features</h1>
 
+  <h3>Analysis Board</h3>
+  <p>
+  The <button tb_coords 32> button will display a small chessboard which can show the UCI
+  Engine's selected move (with an arrow), or the end position of the engine's
+  analysis. Clicking the board toggles between these views. This feature can also
+  be made the default from the <a Analysis List>Engine Configuration</a> window.
+  </p>
+
   <h3><name Annotating>Annotating Games</name></h3>
   <p>
   Games can be automatically analyzed using
@@ -2935,7 +2943,7 @@ because implementation is very problematic.</p>
 via the <button tb_annotate> button in the <run ::enginelist::choose><green>engine configuration</green></run> widget.
 The <b>Log Size</b> is the max number of lines in the log. Setting it to zero disables logging altogether.</p>
 
-  <p><footer>Updated: Scid vs. PC 4.20, September 2018</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.21, June 2019</footer></p>
 }
 
 set helpTitle(Tourney) "Computer Tournament"
@@ -3930,7 +3938,7 @@ set helpText(NAGs) {<h1>NAG Values</h1>
   Standard <b>Numeric Annotation Glyphs</b> are defined in the
   <a Related>PGN Standard</a> and are listed below.
   <br>
-  <i>Scid's use of Ascii strings to represent annotations is common, but against the PGN standard.</i>
+  <i>Scid's use of Ascii strings to represent annotations is common, but against the PGN standard. There are options in the PGN window, and PGN Export window, to show Numeric Glyphs.</i>
   </p>
   <cyan>
   <ul>

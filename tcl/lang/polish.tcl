@@ -251,6 +251,8 @@ menuText P OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
 # ====== TODO To be translated ======
 menuText P OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
 # ====== TODO To be translated ======
+menuText P OptionsEngineLineColour "Engine Arrows" 0 {Engine arrows}
+# ====== TODO To be translated ======
 menuText P OptionsRowColour "Rows" 0 {Default tree/book row color}
 # ====== TODO To be translated ======
 menuText P OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
@@ -1405,6 +1407,8 @@ translate P WhiteBorder {Kontur białych figur}
 translate P BlackBorder {Kontur czarnych figur}
 translate P ArrowMain   {Główna strzałka}
 translate P ArrowVar    {Strzałka wariantów}
+# ====== TODO To be translated ======
+translate P ShowArrows  {Show Arrows}
 
 # Novelty window:
 translate P FindNovelty {Znajdź nowinkę}

@@ -272,6 +272,8 @@ menuText B OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
 # ====== TODO To be translated ======
 menuText B OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
 # ====== TODO To be translated ======
+menuText B OptionsEngineLineColour "Engine Arrows" 0 {Engine arrows}
+# ====== TODO To be translated ======
 menuText B OptionsRowColour "Rows" 0 {Default tree/book row color}
 # ====== TODO To be translated ======
 menuText B OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
@@ -1537,6 +1539,8 @@ translate B WhiteBorder {Borda Branca}
 translate B BlackBorder {Borda Preta}
 translate B ArrowMain   {Main Arrow}
 translate B ArrowVar    {Var Arrows}
+# ====== TODO To be translated ======
+translate B ShowArrows  {Show Arrows}
 
 # Novelty window:
 translate B FindNovelty {Buscar Novidade}

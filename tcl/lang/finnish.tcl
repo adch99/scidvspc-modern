@@ -224,6 +224,8 @@ menuText L OptionsColour "V‰rit" 0 {Oletustekstiwidgetin v‰ri}
 menuText L OptionsBackColour "Tausta" 0 {Oletustekstiwidgetin v‰ri}
 menuText L OptionsMainLineColour "P‰‰muunnelman nuolet" 0 {P‰‰muunnelman nuolet}
 menuText L OptionsVarLineColour "Muunnelman nuolet" 0 {Muunnelman nuolet}
+# ====== TODO To be translated ======
+menuText L OptionsEngineLineColour "Engine Arrows" 0 {Engine arrows}
 menuText L OptionsRowColour "Rivit" 0 {Oletus puu/kirja-rivin v‰ri}
 menuText L OptionsSwitcherColour "Katkaisin" 0 {Oletus db-valitsijan v‰ri}
 menuText L OptionsProgressColour "Edistymispalkki" 0 {Edistymispalkin oletusv‰ri}
@@ -1326,6 +1328,8 @@ translate L WhiteBorder {Valkoinen raja}
 translate L BlackBorder {Musta raja}
 translate L ArrowMain   {P‰‰nuoli}
 translate L ArrowVar    {Muunnelmanuolet}
+# ====== TODO To be translated ======
+translate L ShowArrows  {Show Arrows}
 
 # Novelty window:
 translate L FindNovelty {Lˆyd‰ uutuus}

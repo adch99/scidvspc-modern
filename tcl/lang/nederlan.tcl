@@ -259,6 +259,8 @@ menuText N OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
 # ====== TODO To be translated ======
 menuText N OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
 # ====== TODO To be translated ======
+menuText N OptionsEngineLineColour "Engine Arrows" 0 {Engine arrows}
+# ====== TODO To be translated ======
 menuText N OptionsRowColour "Rows" 0 {Default tree/book row color}
 # ====== TODO To be translated ======
 menuText N OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
@@ -1431,6 +1433,8 @@ translate N WhiteBorder {Witte rand}
 translate N BlackBorder {Zwarte rand}
 translate N ArrowMain   {Hoofdpijl}
 translate N ArrowVar    {Variatiepijl}
+# ====== TODO To be translated ======
+translate N ShowArrows  {Show Arrows}
 
 # Novelty window:
 translate N FindNovelty {Vind nieuwtje}

@@ -1761,6 +1761,11 @@ proc ::board::mark::add {win args} {
 	      }
 	      set new 1
             }
+    varComment {
+	      if {[catch {DrawVar $board $square $dest $color 0 small}]} {
+		return
+	      }
+	    }
     var*    {
 	      scan $type var%s varnum
 	      if {[catch {DrawVar $board $square $dest $color $varnum}]} {
@@ -1868,12 +1873,17 @@ proc ::board::mark::DrawArrow {pathName from to color} {
       {-tag [list mark arrows "mark${from}:${to}"]}
 }
 
-proc ::board::mark::DrawVar {pathName from to color varnum} {
+proc ::board::mark::DrawVar {pathName from to color varnum {small 0}} {
   if {$from < 0  ||  $from > 63} { return }
   if {$to   < 0  ||  $to   > 63} { return }
   set coord [GetArrowCoords $pathName $from $to]
-  $pathName create line $coord -fill $color -arrow last -width 5 -arrowshape {15 18 5} \
-    -activewidth 8 -tag [list mark var "mark${from}:${to}" var$varnum]
+  if {$small == "0"} {
+    $pathName create line $coord -fill $color -arrow last -width 5 -arrowshape {15 18 5} \
+      -activewidth 8 -tag [list mark var "mark${from}:${to}" var$varnum]
+  } else {
+    $pathName create line $coord -fill $color -arrow last -width 2 -arrowshape {9 12 3} \
+      -activewidth 4 -tag [list mark var "mark${from}:${to}" var$varnum]
+  }
 
   # Create arrow binding
   $pathName bind var$varnum <Button-1> "enterVar $varnum"

@@ -224,6 +224,8 @@ menuText T OptionsColour "Renkler" 0 {Default text widget color}
 menuText T OptionsBackColour "arka plan" 0 {Default text widget color}
 menuText T OptionsMainLineColour "Ana Hamle Okları" 0 {Ana oklar}
 menuText T OptionsVarLineColour "Varyasyant Okları" 0 {Variation arrows}
+# ====== TODO To be translated ======
+menuText T OptionsEngineLineColour "Engine Arrows" 0 {Engine arrows}
 menuText T OptionsRowColour "Satır rengi" 0 {Varsayılan ağaç / kitap satır rengi}
 menuText T OptionsSwitcherColour "db anahtarlayıcı" 0 {Varsayılan db anahtarlayıcı rengi}
 menuText T OptionsProgressColour "İlerleme çubuğu" 0 {Varsayılan ilerleme çubuğu rengi}
@@ -1329,6 +1331,8 @@ translate T WhiteBorder {Beyaz Taraf}
 translate T BlackBorder {Siyah taraf}
 translate T ArrowMain   {Ana Ok}
 translate T ArrowVar    {Varyant oku}
+# ====== TODO To be translated ======
+translate T ShowArrows  {Show Arrows}
 
 # Novelty window:
 translate T FindNovelty {Yenilik bul}

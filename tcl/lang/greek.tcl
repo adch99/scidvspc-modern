@@ -274,6 +274,8 @@ menuText G OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
 # ====== TODO To be translated ======
 menuText G OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
 # ====== TODO To be translated ======
+menuText G OptionsEngineLineColour "Engine Arrows" 0 {Engine arrows}
+# ====== TODO To be translated ======
 menuText G OptionsRowColour "Rows" 0 {Default tree/book row color}
 # ====== TODO To be translated ======
 menuText G OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
@@ -1443,6 +1445,8 @@ translate G WhiteBorder {Λευκό περίγραμμα}
 translate G BlackBorder {Μαύρο περίγραμμα}
 translate G ArrowMain   {Τόξο Κύριας}
 translate G ArrowVar    {Τόξο Βαριάντας}
+# ====== TODO To be translated ======
+translate G ShowArrows  {Show Arrows}
 
 # Novelty window:
 translate G FindNovelty {Αναζήτηση Καινοτομίας}

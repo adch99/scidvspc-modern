@@ -912,7 +912,7 @@ $m add command -label OptionsSave -command {
     gameInfo(show) gameInfo(photos) gameInfo(wrap) gameInfo(showStatus) 
     gameInfo(fullComment) gameInfo(showMarks) gameInfo(showMenu) gameInfo(showTool) 
     gameInfo(showMaterial) gameInfo(showFEN) gameInfo(showButtons) gameInfo(showTB) 
-    analysis(mini) engines(F2) engines(F3) engines(F4) analysis(logMax) analysis(logName) analysis(maxPly) analysis(lowPriority)
+    analysis(mini) engines(F2) engines(F3) engines(F4) analysis(logMax) analysis(logName) analysis(maxPly) analysis(lowPriority) analysis(boardSize) analysis(boardShowsVar) analysis(showBoard)
     scidBooksDir scidBasesDir 
     ::book::lastBook1 ::book::lastBook2 ::book::lastTuning ::book::sortAlpha 
     ::book::showTwo ::book::oppMovesVisible ::gbrowser::size 
@@ -956,7 +956,7 @@ $m add command -label OptionsSave -command {
     puts $optionF ""
     puts $optionF "set analysisCommand [list $analysisCommand]"
     puts $optionF ""
-    foreach i {lite dark highcolor bgcolor maincolor varcolor rowcolor progcolor crosscolor scorecolor scorebarcolor switchercolor borderwidth \
+    foreach i {lite dark highcolor bgcolor maincolor varcolor engineLineColor rowcolor progcolor crosscolor scorecolor scorebarcolor switchercolor borderwidth \
           pgnColor(Header) pgnColor(Main) pgnColor(Var) \
           pgnColor(Nag) pgnColor(Comment) pgnColor(Background) \
           pgnColor(Current) pgnColor(NextMove) } {
@@ -1263,6 +1263,8 @@ $m add command -label OptionsMainLineColour -command SetMainLineColour
 set helpMessage($m,1) OptionsMainLineColour
 $m add command -label OptionsVarLineColour -command SetVarLineColour
 set helpMessage($m,1) OptionsVarLineColour
+$m add command -label OptionsEngineLineColour -command SetEngineLineColour
+set helpMessage($m,1) OptionsEngineLineColour
 $m add command -label OptionsRowColour -command SetRowBackgroundColour
 set helpMessage($m,1) OptionsRowColour
 $m add command -label OptionsSwitcherColour -command SetRowSwitcherColour
@@ -1328,6 +1330,15 @@ proc SetVarLineColour {} {
     updateBoard
     if {[::move::drawVarArrows]} { ::move::showVarArrows }
   }
+}
+
+proc SetEngineLineColour {} {
+  global engineLineColor
+  set temp [tk_chooseColor -initialcolor $engineLineColor -title [tr OptionsEngineLineColour]]
+  if {$temp != {}} {
+    set engineLineColor $temp
+  }
+  updateAnalysisWindows
 }
 
 proc SetRowBackgroundColour {} {
@@ -1726,7 +1737,7 @@ proc setLanguageMenus {{lang ""}} {
     configMenuText .menu.options [tr Options$tag $oldLang] Options$tag $lang
   }
 
-  foreach tag {BackColour MainLineColour VarLineColour RowColour SwitcherColour ProgressColour} {
+  foreach tag {BackColour MainLineColour VarLineColour EngineLineColour RowColour SwitcherColour ProgressColour} {
     configMenuText .menu.options.colour [tr Options$tag $oldLang] Options$tag $lang
   }
   configMenuText .menu.options.colour.back [tr OptionsMovesHighlightLastMoveColor $oldLang] OptionsMovesHighlightLastMoveColor $lang

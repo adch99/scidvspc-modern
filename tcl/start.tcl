@@ -390,6 +390,9 @@ set analysis(logMax) 5000
 set analysis(logName) 1
 set analysis(maxPly) 0
 set analysis(lowPriority) $::windowsOS
+set analysis(showBoard) 0
+set analysis(boardSize) 2
+set analysis(boardShowsVar) 1
 
 # Colors
 
@@ -401,6 +404,7 @@ set progcolor   rosybrown	;# progress bar
 set buttoncolor #b0c0d0		;# (below)
 set maincolor   black		;# Main line arrow color
 set varcolor    grey80		;# Variation arrow colors
+set engineLineColor $maincolor  ;# Engine arrows
 set rowcolor    lightsteelblue1 ;# Tree/Crosstab/Book line/row bg color
 set switchercolor lightsteelblue3 ;# DB switcher
 set crosscolor  grey80		;# Crosstable line colouring

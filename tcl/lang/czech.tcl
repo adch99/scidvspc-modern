@@ -269,6 +269,8 @@ menuText C OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
 # ====== TODO To be translated ======
 menuText C OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
 # ====== TODO To be translated ======
+menuText C OptionsEngineLineColour "Engine Arrows" 0 {Engine arrows}
+# ====== TODO To be translated ======
 menuText C OptionsRowColour "Rows" 0 {Default tree/book row color}
 # ====== TODO To be translated ======
 menuText C OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
@@ -1530,6 +1532,8 @@ translate C WhiteBorder {Obrys bílých figur}
 translate C BlackBorder {Obrys èerných figur}
 translate C ArrowMain   {Main Arrow}
 translate C ArrowVar    {Var Arrows}
+# ====== TODO To be translated ======
+translate C ShowArrows  {Show Arrows}
 
 # Novelty window:
 translate C FindNovelty {Hledat novinku}
