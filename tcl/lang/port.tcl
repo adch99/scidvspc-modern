@@ -241,6 +241,8 @@ menuText U OptionsColour "Cor do Fundo" 0 {Default text widget color}
 menuText U OptionsBackColour "Fundo" 0 {Default text widget color}
 menuText U OptionsMainLineColour "Setas da Linha Principal" 0 {Mainline arrows}
 menuText U OptionsVarLineColour "Setas da Variante" 0 {Variation arrows}
+# ====== TODO To be translated ======
+menuText U OptionsEngineLineColour "Engine Arrows" 0 {Engine arrows}
 menuText U OptionsRowColour "Linhas" 0 {Default tree/book row color}
 menuText U OptionsSwitcherColour "Alternador" 0 {Default db switcher color}
 menuText U OptionsProgressColour "Barra de Progresso" 0 {Default progressbar color}
@@ -1335,6 +1337,8 @@ translate U WhiteBorder {Borda Branca}
 translate U BlackBorder {Borda Preta}
 translate U ArrowMain   {Main Arrow}
 translate U ArrowVar    {Var Arrows}
+# ====== TODO To be translated ======
+translate U ShowArrows  {Show Arrows}
 
 # Novelty window:
 translate U FindNovelty {Buscar Novidade}

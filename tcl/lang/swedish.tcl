@@ -249,6 +249,8 @@ menuText W OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
 # ====== TODO To be translated ======
 menuText W OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
 # ====== TODO To be translated ======
+menuText W OptionsEngineLineColour "Engine Arrows" 0 {Engine arrows}
+# ====== TODO To be translated ======
 menuText W OptionsRowColour "Rows" 0 {Default tree/book row color}
 # ====== TODO To be translated ======
 menuText W OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
@@ -1427,6 +1429,8 @@ translate W WhiteBorder {Vit kantlinje}
 translate W BlackBorder {Svart kantlinje}
 translate W ArrowMain   {Huvudpil}
 translate W ArrowVar    {Variantpilar}
+# ====== TODO To be translated ======
+translate W ShowArrows  {Show Arrows}
 
 # Novelty window:
 translate W FindNovelty {Hitta nyhet}

@@ -250,6 +250,8 @@ menuText R OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
 # ====== TODO To be translated ======
 menuText R OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
 # ====== TODO To be translated ======
+menuText R OptionsEngineLineColour "Engine Arrows" 0 {Engine arrows}
+# ====== TODO To be translated ======
 menuText R OptionsRowColour "Rows" 0 {Default tree/book row color}
 # ====== TODO To be translated ======
 menuText R OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
@@ -1398,6 +1400,8 @@ translate R WhiteBorder {Белые границы}
 translate R BlackBorder {Чёрные границы}
 translate R ArrowMain   {Основная стрелка}
 translate R ArrowVar    {Стрелки вариантов}
+# ====== TODO To be translated ======
+translate R ShowArrows  {Show Arrows}
 
 # Novelty window:
 translate R FindNovelty {Найти новинку}

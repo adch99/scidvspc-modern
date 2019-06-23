@@ -245,6 +245,8 @@ menuText F OptionsColour "Couleurs" 0 {Default text widget color}
 menuText F OptionsBackColour "Arrière-plan" 0 {Default text widget color}
 menuText F OptionsMainLineColour "Flèche coup principal" 0 {Mainline arrows}
 menuText F OptionsVarLineColour "Flèche coup variante" 0 {Variation arrows}
+# ====== TODO To be translated ======
+menuText F OptionsEngineLineColour "Engine Arrows" 0 {Engine arrows}
 menuText F OptionsRowColour "Surlignage coup bibliothèque" 0 {Default tree/book row color}
 menuText F OptionsSwitcherColour "Surlignage db switcher" 0 {Default db switcher color}
 menuText F OptionsProgressColour "Barre de progression" 0 {Default progressbar color}
@@ -1339,6 +1341,8 @@ translate F WhiteBorder {Bordure des pièces blanches}
 translate F BlackBorder {Bordure des pièces noires}
 translate F ArrowMain   {Main Arrow}
 translate F ArrowVar    {Var Arrows}
+# ====== TODO To be translated ======
+translate F ShowArrows  {Show Arrows}
 
 # Novelty window:
 translate F FindNovelty {Trouver la nouveauté}

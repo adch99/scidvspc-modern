@@ -248,6 +248,7 @@ menuText E OptionsColour "Colors" 0 {Default text widget color}
 menuText E OptionsBackColour "Background" 0 {Default text widget color}
 menuText E OptionsMainLineColour "Mainline Arrows" 0 {Mainline arrows}
 menuText E OptionsVarLineColour "Variation Arrows" 0 {Variation arrows}
+menuText E OptionsEngineLineColour "Engine Arrows" 0 {Engine arrows}
 menuText E OptionsRowColour "Rows" 0 {Default tree/book row color}
 menuText E OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 menuText E OptionsProgressColour "Progressbar" 0 {Default progressbar color}
@@ -1342,6 +1343,7 @@ translate E WhiteBorder {White border}
 translate E BlackBorder {Black border}
 translate E ArrowMain   {Main Arrow}
 translate E ArrowVar    {Var Arrows}
+translate E ShowArrows  {Show Arrows}
 
 # Novelty window:
 translate E FindNovelty {Find Novelty}

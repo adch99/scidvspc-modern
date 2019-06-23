@@ -255,6 +255,8 @@ menuText O OptionsColour "Farge" 0 {Standard tekstfarge}
 menuText O OptionsBackColour "Bakgrunn" 0 {Standard bakgrunnsfarge}
 menuText O OptionsMainLineColour "Hovedlinje piler" 0 {}
 menuText O OptionsVarLineColour "Variant piler" 0 {}
+# ====== TODO To be translated ======
+menuText O OptionsEngineLineColour "Engine Arrows" 0 {Engine arrows}
 menuText O OptionsRowColour "Rader" 0 {}
 menuText O OptionsSwitcherColour "Databasevelger" 0 {}
 menuText O OptionsProgressColour "Fremdriftslinje" 0 {Standard farge for fremdriftslinje}
@@ -1350,6 +1352,8 @@ translate O WhiteBorder {Hvit ramme}
 translate O BlackBorder {Sort ramme}
 translate O ArrowMain   {Hovedpil}
 translate O ArrowVar    {Andre piler}
+# ====== TODO To be translated ======
+translate O ShowArrows  {Show Arrows}
 
 # Novelty window:
 translate O FindNovelty {Finn nyhet}

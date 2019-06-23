@@ -264,6 +264,8 @@ menuText D OptionsColour "Farben" 0 {Default text widget color}
 menuText D OptionsBackColour "Hintergrund" 0 {Default text widget color}
 menuText D OptionsMainLineColour "Pfeilfarbe für Partiezug" 0 {Mainline arrows}
 menuText D OptionsVarLineColour "Pfeilfarbe für Variante" 0 {Variation arrows}
+# ====== TODO To be translated ======
+menuText D OptionsEngineLineColour "Engine Arrows" 0 {Engine arrows}
 menuText D OptionsRowColour "Farbe für eine Zeile" 0 {Default tree/book row color}
 menuText D OptionsSwitcherColour "Datenbankwechselfarbe" 0 {Default db switcher color}
 menuText D OptionsProgressColour "Fortschrittsbalken" 0 {Default progressbar color}
@@ -1381,6 +1383,8 @@ translate D WhiteBorder {Weiße Umrandung}
 translate D BlackBorder {Schwarze Umrandung}
 translate D ArrowMain   {Hauptpfeil}
 translate D ArrowVar    {Variantenpfeil}
+# ====== TODO To be translated ======
+translate D ShowArrows  {Show Arrows}
 
 # Novelty window:
 translate D FindNovelty {Finde Neuerung}

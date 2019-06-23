@@ -276,6 +276,8 @@ menuText S OptionsColour "Color de fondo" 0 {Color de fondo por defecto}
 menuText S OptionsBackColour "Fondo" 0 {Color del widget de texto predeterminado}
 menuText S OptionsMainLineColour "Flechas principales" 0 {Flechas principales}
 menuText S OptionsVarLineColour "Flechas de variación" 0 {Flechas de variación}
+# ====== TODO To be translated ======
+menuText S OptionsEngineLineColour "Engine Arrows" 0 {Engine arrows}
 menuText S OptionsRowColour "Filas" 0 {Color predeterminado de la columna de árbol/libro}
 menuText S OptionsSwitcherColour "Conmutador" 0 {Color del conmutador db predeterminado}
 menuText S OptionsProgressColour "Barra de progreso" 0 {Color predeterminado de la barra de progreso}
@@ -1398,6 +1400,8 @@ translate S WhiteBorder {Borde blancas}
 translate S BlackBorder {Borde negras}
 translate S ArrowMain   {Flecha línea principal}
 translate S ArrowVar    {Flechas de variaciones}
+# ====== TODO To be translated ======
+translate S ShowArrows  {Show Arrows}
 
 # Novelty window:
 translate S FindNovelty {Encontrar novedad}
