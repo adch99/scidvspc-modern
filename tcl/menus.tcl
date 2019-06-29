@@ -727,8 +727,9 @@ $m.exportfilter add command -label ToolsExpFilterEPD -command {
 
   while {$gn != 0} {
     sc_game load $gn
-    if {[sc_game startBoard]} {
-       puts $epdFile [lrange [sc_game startPos] 0 end-2]
+    # Only save games with nonstandard starts or have a ply set in the filter
+    if {[sc_game startBoard] || [sc_pos location]} {
+       puts $epdFile [lrange [sc_pos fen] 0 end-2]
     }
     set gn [sc_filter next]
     incr idx
