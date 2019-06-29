@@ -1784,7 +1784,8 @@ PGN, perform some text editing on the file (for example), and then reload the ga
 
   <h3><name EPD>EPD / FEN</name></h3>
   <p>
-  This feature runs through the filter and exports games (with non-standard start positions only) to a basic EPD file.
+  This feature runs through the filter, and exports select games to a basic EPD file.
+  Only games with non-standard start positions, or those that load into ply (for example, after a material search, or after Search-<gt>Filter to last move), will be saved.
   Note - subsequent loading of this file may show fewer positions than (non-standard) games, as EPD files discard duplicate positions.
 </p><p><i>
   Todo: support EPD halfmove and fullmove counters (hmvc and fmvn) with save and load... but this would break FEN only usages.
