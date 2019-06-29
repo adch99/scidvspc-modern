@@ -686,6 +686,61 @@ $m.exportfilter add command -label ToolsExpFilterLatex -command {
   }
 }
 
+$m.exportfilter add command -label ToolsExpFilterEPD -command {
+  # Check that we have some games to export:
+  if {![sc_base inUse]} {
+    tk_messageBox -title "Scid: Empty database" -type ok -icon info \
+	-message "This is an empty database, there are no games to export."
+    return
+  }
+  if {[sc_filter count] == 0} {
+    tk_messageBox -title "Scid: Filter empty" -type ok -icon info \
+	-message "The filter contains no games."
+    return
+  }
+  set confirm [::game::ConfirmDiscard]
+  if {$confirm == 2} { return }
+  if {$confirm == 0} {
+    ::game::Save
+  }
+  set ftype {
+    { "EPD files" {".epd" ".txt"} }
+    { "All files" {"*"} }
+  }
+  set idir $::initialDir(epd)
+  set fName [tk_getSaveFile -initialdir $idir -filetypes $ftype -defaultextension ".epd" -title "Create an EPD file"]
+  if {$fName == ""} { return }
+  set prefix [file rootname [file tail $fName] ]
+
+  if {[catch {open $fName w} epdFile]} {
+    tk_messageBox -title "Scid: Unable to write file" -type ok -icon warning \
+	-message "Unable to write file: $fName"
+    return
+  } 
+
+  busyCursor .
+  update
+  set savedGameNum [sc_game number]
+  set gn [sc_filter first]
+  set idx 1
+  set total [sc_filter count]
+
+  while {$gn != 0} {
+    sc_game load $gn
+    if {[sc_game startBoard]} {
+       puts $epdFile [lrange [sc_game startPos] 0 end-2]
+    }
+    set gn [sc_filter next]
+    incr idx
+  }
+
+  close $epdFile
+  unbusyCursor .
+  sc_game load $savedGameNum
+  updateBoard -pgn
+}
+set helpMessage($m.exportfilter,2) ToolsExpFilterEPD
+
 $m.exportfilter add command -label ToolsExpFilterGames -command openExportGList
 set helpMessage($m.exportfilter,3) ToolsExpFilterGames
 
@@ -1727,7 +1782,7 @@ proc setLanguageMenus {{lang ""}} {
   }
   .menu.tools.exportcurrent entryconfig 4 -label "[tr ToolsExpCurrentLaTeX] ([tr OprepViewLaTeX])"
 
-  foreach tag {ToolsExpFilterPGN ToolsExpFilterHTML ToolsExpFilterHTMLJS ToolsExpFilterLaTeX ToolsExpFilterGames} {
+  foreach tag {ToolsExpFilterPGN ToolsExpFilterHTML ToolsExpFilterHTMLJS ToolsExpFilterLaTeX ToolsExpFilterEPD ToolsExpFilterGames} {
     configMenuText .menu.tools.exportfilter [tr $tag $oldLang] $tag $lang
   }
   .menu.tools.exportfilter entryconfig 4 -label "[tr ToolsExpFilterLaTeX] ([tr OprepViewLaTeX])"

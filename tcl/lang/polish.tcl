@@ -213,6 +213,8 @@ menuText P ToolsExpFilterHTMLJS "Eksportuj filtr do HTML z Javascriptem..." 17 {
 menuText P ToolsExpFilterLaTeX "Do pliku LaTeX..." 9 \
   {Zapisz wyszukane partie do pliku LaTeX}
 # ====== TODO To be translated ======
+menuText P ToolsExpFilterEPD "Export Filter to EPD/FEN" 17 {Write all filtered games to an EPD File}
+# ====== TODO To be translated ======
 # ====== TODO To be translated ======
 menuText P ToolsExpFilterGames "Export Gamelist to Text" 19 {Print a formatted Gamelist.}
 menuText P ToolsImportOne "Wklej partię w formacie PGN..." 0 \

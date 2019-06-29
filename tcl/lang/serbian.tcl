@@ -232,6 +232,8 @@ menuText Y ToolsExpFilterHTMLJS "Export Filter to HTML and JavaScript File..." 1
 menuText Y ToolsExpFilterLaTeX "Izvezi filtrirane partije u LaTeX fajl..." 28 \
   {Snimi sve filtrirane partije u LaTeX fajl}
 # ====== TODO To be translated ======
+menuText Y ToolsExpFilterEPD "Export Filter to EPD/FEN" 17 {Write all filtered games to an EPD File}
+# ====== TODO To be translated ======
 # ====== TODO To be translated ======
 menuText Y ToolsExpFilterGames "Export Gamelist to Text" 19 {Print a formatted Gamelist.}
 menuText Y ToolsImportOne "Uvezi jednu PGN partiju..." 0 \

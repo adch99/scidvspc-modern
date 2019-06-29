@@ -316,6 +316,7 @@ append helpText(Index) {
   <h3><name F>F</name></h3>
   <ul>
   <li><a Cmdline>Fast mode</a>
+  <li>EPD and <a Export EPD>FEN</a> exports</li>
   <li><a FICS>FICS</a> (Free Internet Chess Server)</li>
   <li><a Finder>File Finder</a></li>
   <li><a Formats>File formats</a></li>
@@ -1773,15 +1774,23 @@ PGN, perform some text editing on the file (for example), and then reload the ga
   <p>
   See <a LaTeX>Using LaTeX with Scid</a> for more information.
   </p>
-  <h3><name PDF>Converting LaTeX to PDF</name></h3>
-<p>
+  <p>
+  <b><name PDF>Converting LaTeX to PDF</name></b>
   can be achieved on Unix systems with the <b>pdflatex</b> command.
   A quick conversion is of the form:
-<br>
-<ul><li>pdflatex -interaction batchmode mytexfile.tex</li></ul>
-</p>
+  <br>
+  <ul><li>pdflatex -interaction batchmode mytexfile.tex</li></ul>
+  </p>
 
-  <p><footer>Updated: Scid vs. PC 4.18 Sept 2017</footer></p>
+  <h3><name EPD>EPD / FEN</name></h3>
+  <p>
+  This feature runs through the filter and exports games (with non-standard start positions only) to a basic EPD file.
+  Note - subsequent loading of this file may show fewer positions than (non-standard) games, as EPD files discard duplicate positions.
+</p><p><i>
+  Todo: support EPD halfmove and fullmove counters (hmvc and fmvn) with save and load... but this would break FEN only usages.
+</i></p>
+
+  <p><footer>Updated: Scid vs. PC 4.21 June 2019</footer></p>
 }
 
 set helpTitle(Encoding) "PGN Encoding"
@@ -2797,14 +2806,6 @@ with the format "stat01: time nodes ply mvleft mvtot mvname". The results can be
 
   <h1>Features</h1>
 
-  <h3>Analysis Board</h3>
-  <p>
-  The <button tb_coords 32> button will display a small chessboard which can show the UCI
-  Engine's selected move (with an arrow), or the end position of the engine's
-  analysis. Clicking the board toggles between these views. This feature can also
-  be made the default from the <a Analysis List>Engine Configuration</a> window.
-  </p>
-
   <h3><name Annotating>Annotating Games</name></h3>
   <p>
   Games can be automatically analyzed using
@@ -2943,7 +2944,7 @@ because implementation is very problematic.</p>
 via the <button tb_annotate> button in the <run ::enginelist::choose><green>engine configuration</green></run> widget.
 The <b>Log Size</b> is the max number of lines in the log. Setting it to zero disables logging altogether.</p>
 
-  <p><footer>Updated: Scid vs. PC 4.21, June 2019</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.20, September 2018</footer></p>
 }
 
 set helpTitle(Tourney) "Computer Tournament"
@@ -3170,6 +3171,11 @@ set helpText(EPD) {<h1>EPD Files</h1>
   <li>- legal moves from the current position that reach another position
   in this EPD file.</li>
   </ul>
+
+  <h3>Exporting to EPD</h3>
+  <p>
+  Scid vs. PC provides a simple <a Export EPD>Export to EPD</a> feature.
+  </p>
 
   <h3><name opcodes>Standard EPD Opcodes</name></h3>
   <ul>

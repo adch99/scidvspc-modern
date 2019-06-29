@@ -182,6 +182,8 @@ menuText T ToolsExpFilterHTML "Filtrelenen oyunları bir HTML dosyasına yazın"
   {Filtrelenen oyunları bir HTML dosyasına yazın}
 menuText T ToolsExpFilterHTMLJS "Filtrelenen oyunları bir HTML ve JavaScript dosyasına yazın" 17 {Filtrelenen oyunları bir HTML ve JavaScript dosyasına yazın}  
 menuText T ToolsExpFilterLaTeX "Filtrelenen oyunları bir LaTeX dosyasına yazın" 17  {Filtrelenen oyunları bir LaTeX dosyasına yazın}
+# ====== TODO To be translated ======
+menuText T ToolsExpFilterEPD "Export Filter to EPD/FEN" 17 {Write all filtered games to an EPD File}
 menuText T ToolsExpFilterGames "Oyun listesini Metin'e Yaz" 19 {Biçimlendirilmiş bir Oyun listesini yazdırın.}
 menuText T ToolsImportOne "PGN Metninden oyun Al " 0 \
   {PGN metninden bir oyunu içe aktarma}

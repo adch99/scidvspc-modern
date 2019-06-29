@@ -231,6 +231,8 @@ menuText S ToolsExpFilterHTML "Exportar filtro a HTML" 17 \
 menuText S ToolsExpFilterHTMLJS "Exportar filtro a HTML y JavaScript" 17 {Escribir todas las partidas filtradas a fichero HTML y JavaScript}  
 menuText S ToolsExpFilterLaTeX "Exportar filtro a LaTeX" 17 \
   {Escribe todas las partidas filtradas en un archivo LaTeX}
+# ====== TODO To be translated ======
+menuText S ToolsExpFilterEPD "Export Filter to EPD/FEN" 17 {Write all filtered games to an EPD File}
 menuText S ToolsExpFilterGames "Exportar Listado a Texto" 19 {Print a formatted Gamelist.}
 menuText S ToolsImportOne "Importar partida PGN" 0 \
   {Importa una partida de un texto PGN}

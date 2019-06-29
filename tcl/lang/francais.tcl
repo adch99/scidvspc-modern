@@ -212,6 +212,8 @@ menuText F ToolsExpFilterHTML "Dans un fichier HTML..." 16 \
 menuText F ToolsExpFilterHTMLJS "Dans un fichier HTML et JavaScript..." 16 {Écrire le filtre dans un fichier HTML et JavaScript}  
 menuText F ToolsExpFilterLaTeX "Dans un fichier LaTeX..." 16 \
   {Écrire le filtre dans un fichier LaTeX}
+# ====== TODO To be translated ======
+menuText F ToolsExpFilterEPD "Export Filter to EPD/FEN" 17 {Write all filtered games to an EPD File}
 menuText F ToolsExpFilterGames "Exporter une liste de parties vers un fichier texte" 19 {Écrire une liste de parties vers un fichier texte formaté}
 menuText F ToolsImportOne "Importer une partie en PGN..." 0 \
   {Importer une partie à partir d'un texte PGN}

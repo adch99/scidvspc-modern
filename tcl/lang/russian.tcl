@@ -205,6 +205,8 @@ menuText R ToolsExpFilterHTML "Экспорт фильтрованных пар�
 menuText R ToolsExpFilterHTMLJS "Экспорт фильтрованных партий в HTML и JavaScript файл..." 17 {Записывает все фильтрованные партии в HTML и JavaScript файл}
 menuText R ToolsExpFilterLaTeX "Экспорт фильтрованных партий в файл LaTeX..." 3 \
   {Записать все фильтрованные партии в файл LaTeX}
+# ====== TODO To be translated ======
+menuText R ToolsExpFilterEPD "Export Filter to EPD/FEN" 17 {Write all filtered games to an EPD File}
 menuText R ToolsExpFilterGames "Экспортировать список партий" 19 {Печатать форматированный список партий.}
 menuText R ToolsImportOne "Импорт одной партии PGN..." 0 \
   {Импорт партии из текстового файла PGN}

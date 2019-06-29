@@ -182,6 +182,8 @@ menuText L ToolsExpFilterHTML "Vie suodatin HTML-muotoon" 17 \
   {Kirjoita kaikki suodatetut pelit HTML-tiedostoksi}
 menuText L ToolsExpFilterHTMLJS "Vie suodatin HTML ja JavaScript-muotoon" 17 {Kirjoita kaikki suodatetut pelit HTML- ja JavaScrip-tiedostoksi}  
 menuText L ToolsExpFilterLaTeX "Vie suodatin LaTeX-muotoon" 17  {Kirjoita kaikki suodatetut pelit LaTex-tiedostoksi}
+# ====== TODO To be translated ======
+menuText L ToolsExpFilterEPD "Export Filter to EPD/FEN" 17 {Write all filtered games to an EPD File}
 menuText L ToolsExpFilterGames "Vie pelilista tekstiksi" 19 {Tulosta muotoiltu pelilista}
 menuText L ToolsImportOne "Tuo PGN-teksti" 0 \
   {Tuo peli PGN-tekstistä}

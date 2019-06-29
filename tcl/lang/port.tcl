@@ -208,6 +208,8 @@ menuText U ToolsExpFilterHTML "Exporta jogos filtrados - HTML..." 17 \
 menuText U ToolsExpFilterHTMLJS "Exporta filtrados como HTML e JavaScript..." 17 {Write all filtered games to a HTML and JavaScript file}  
 menuText U ToolsExpFilterLaTeX "Exporta jogos filtrados - LaTex..." 17 \
   {Exporta todos os jogos filtrados para um arquivo LaTex}
+# ====== TODO To be translated ======
+menuText U ToolsExpFilterEPD "Export Filter to EPD/FEN" 17 {Write all filtered games to an EPD File}
 menuText U ToolsExpFilterGames "Export a Lista de Jogos como Texto" 19 {Print a formatted Gamelist.}
 menuText U ToolsImportOne "Importa PGN texto..." 0 \
   {Importa jogo de um texto em PGN}
