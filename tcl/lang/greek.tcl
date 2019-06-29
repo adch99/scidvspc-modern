@@ -226,6 +226,8 @@ menuText G ToolsExpFilterHTMLJS "Εξαγωγή σε HTML με JavaScript" 2 {Ε
 menuText G ToolsExpFilterLaTeX "Εξαγωγή σε LaTeX" 3 \
   {Εγγραφή Όλων των φιλτραρισμένων παρτίδων σε αρχείο LaTeX}
 # ====== TODO To be translated ======
+menuText G ToolsExpFilterEPD "Export Filter to EPD/FEN" 17 {Write all filtered games to an EPD File}
+# ====== TODO To be translated ======
 # ====== TODO To be translated ======
 menuText G ToolsExpFilterGames "Export Gamelist to Text" 19 {Print a formatted Gamelist.}
 menuText G ToolsImportOne "Εισαγωγή Κειμένου PGN" 9 \

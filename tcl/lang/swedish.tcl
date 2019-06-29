@@ -210,6 +210,8 @@ menuText W ToolsExpFilterHTMLJS "Exportera filtrerade till HTML och JavaScript-f
 menuText W ToolsExpFilterLaTeX "Exportera till LaTeX..." 15 \
   {Spara alla filterade partier till en LaTeX-fil}
 # ====== TODO To be translated ======
+menuText W ToolsExpFilterEPD "Export Filter to EPD/FEN" 17 {Write all filtered games to an EPD File}
+# ====== TODO To be translated ======
 # ====== TODO To be translated ======
 menuText W ToolsExpFilterGames "Export Gamelist to Text" 19 {Print a formatted Gamelist.}
 menuText W ToolsImportOne "Importera ett parti i PGN-format..." 0 \

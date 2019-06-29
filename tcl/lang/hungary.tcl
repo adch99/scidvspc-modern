@@ -231,6 +231,8 @@ menuText H ToolsExpFilterHTMLJS "Export Filter to HTML and JavaScript File..." 1
 menuText H ToolsExpFilterLaTeX "Szûrõ exportálása LaTeX-fájlba..." 18 \
   {LaTeX-fájlba írja az összes szûrt játszmát.}
 # ====== TODO To be translated ======
+menuText H ToolsExpFilterEPD "Export Filter to EPD/FEN" 17 {Write all filtered games to an EPD File}
+# ====== TODO To be translated ======
 # ====== TODO To be translated ======
 menuText H ToolsExpFilterGames "Export Gamelist to Text" 19 {Print a formatted Gamelist.}
 menuText H ToolsImportOne "PGN-játszma importálása..." 0 \

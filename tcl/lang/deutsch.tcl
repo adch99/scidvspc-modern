@@ -154,8 +154,8 @@ menuText D WindowsCorrChess "Fernschach" 0 {Öffnet/schließt das Fernschachfens
 
 # Tools menu:
 menuText D Tools "Werkzeuge" 0
-menuText D ToolsAnalysis "Analyseprogramm..." 0 \
-  {Schachanalyse-Programm starten/beenden}
+menuText D ToolsAnalysis "Analyse-Engine..." 0 \
+  {Schachanalyseprogramm starten/beenden}
 menuText D ToolsEmail "E-Mail-Manager" 7 \
   {E-Mail-Manager öffnen/schließen}
 menuText D ToolsFilterGraph "Relative Filtergrafik" 0 \
@@ -229,6 +229,8 @@ menuText D ToolsExpFilterHTMLJS "Filter in HTML/JavaScript exportieren..." 17 \
 	{Alle Partien im Filter werden in eine HTML und JavaScript Datei exportiert.}  
 menuText D ToolsExpFilterLaTeX "Filter in LaTeX-Datei exportieren..." 10 \
   {Alle Partien im Filter in eine LaTeX-Datei schreiben}
+# ====== TODO To be translated ======
+menuText D ToolsExpFilterEPD "Export Filter to EPD/FEN" 17 {Write all filtered games to an EPD File}
 menuText D ToolsExpFilterGames "Partienliste in eine Textdatei exportieren" 21 \
 	{Alle Partien im Filter werden in eine Textdatei exportiert.}
 menuText D ToolsImportOne "Eine PGN-Partie importieren..." 16 \
@@ -264,8 +266,7 @@ menuText D OptionsColour "Farben" 0 {Default text widget color}
 menuText D OptionsBackColour "Hintergrund" 0 {Default text widget color}
 menuText D OptionsMainLineColour "Pfeilfarbe für Partiezug" 0 {Mainline arrows}
 menuText D OptionsVarLineColour "Pfeilfarbe für Variante" 0 {Variation arrows}
-# ====== TODO To be translated ======
-menuText D OptionsEngineLineColour "Engine Arrows" 0 {Engine arrows}
+menuText D OptionsEngineLineColour "Engine-Pfeile" 0 {Engine-Pfeile}
 menuText D OptionsRowColour "Farbe für eine Zeile" 0 {Default tree/book row color}
 menuText D OptionsSwitcherColour "Datenbankwechselfarbe" 0 {Default db switcher color}
 menuText D OptionsProgressColour "Fortschrittsbalken" 0 {Default progressbar color}
@@ -1383,8 +1384,7 @@ translate D WhiteBorder {Weiße Umrandung}
 translate D BlackBorder {Schwarze Umrandung}
 translate D ArrowMain   {Hauptpfeil}
 translate D ArrowVar    {Variantenpfeil}
-# ====== TODO To be translated ======
-translate D ShowArrows  {Show Arrows}
+translate D ShowArrows  {Pfeile zeigen}
 
 # Novelty window:
 translate D FindNovelty {Finde Neuerung}
@@ -5075,6 +5075,14 @@ set helpText(D,Analysis) {<h1>Das Analysefenster</h1>
 
   <h1>Funktionen</h1>
 
+  <h3>Analysebrett</h3> <p>Die Schaltfläche <button tb_coords 32>
+  zeigt ein kleines Schachbrett, das die Schlußstellung der
+  Engine-Analyse oder den von der UCI-Engine ausgewählten Zug (mit
+  einem Pfeil) anzeigen kann. Ein Klick in das Brett schaltet zwischen
+  diesen Ansichten um. Diese Funktion kann auch im <a Analysis
+  List>Engine-Konfigurationsfenster</a> zur Voreinstellung gemacht
+  werden.
+  
   <h3><name Annotating>Partien kommentieren</name></h3>
   <p>Mit der Schaltfläche <button tb_annotate> (in der Werkzeugleiste
   des Analysefensters) können Partien automatisch analysiert
@@ -5241,7 +5249,7 @@ set helpText(D,Analysis) {<h1>Das Analysefenster</h1>
   die maximale Anzahl an Zeilen im Protokoll. Wenn man sie auf
   Null setzt, wird die Protokollierung insgesamt abgeschaltet.</p>
 
-  <p><footer>Aktualisiert: Scid vs. PC 4.20, September 2018</footer></p>
+  <p><footer>Aktualisiert: Scid vs. PC 4.21, Juni 2019</footer></p>
 }
 
 set helpTitle(D,Tourney) "Computerturniere"

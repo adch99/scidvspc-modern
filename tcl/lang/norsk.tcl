@@ -213,6 +213,8 @@ menuText O ToolsExpFilterHTML "Eksporter filter til HTML-fil..." 0 \
   {Skriv alle partier i filteret til en HTML-fil}
 menuText O ToolsExpFilterHTMLJS "Eksporter filter til HTML/Javascript..." 0 {Lagre alle filtrerte partier til HTML/Javascript}
 menuText O ToolsExpFilterLaTeX "Eksporter filter til LaTeX-fil..." 0 {Skriv alle partier i filteret til en LaTeX-fil}
+# ====== TODO To be translated ======
+menuText O ToolsExpFilterEPD "Export Filter to EPD/FEN" 17 {Write all filtered games to an EPD File}
 menuText O ToolsExpFilterGames "Eksporter liste over partier som tekst" 0 {Lagrer en formatert liste over partiene}
 menuText O ToolsImportOne "Importer ett PGN-parti..." 0 \
   {Importer ett parti fra en PGN-fil}
