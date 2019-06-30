@@ -2479,7 +2479,7 @@ proc makeAnalysisWin {{n 0} {options {}}} {
   pack $w.hist.ybar -side right -fill y
   pack $w.hist.xbar -side bottom -expand 0 -fill x
   pack $w.hist.text -side left -expand 1 -fill both
-  bind $w.hist.text <ButtonPress-3> "toggleMovesDisplay $n"
+  bind $w.hist.text <ButtonPress-2> "toggleMovesDisplay $n"
   $w.text tag configure blue -foreground blue ; # this only seems used in toggleAutomove ???
   $w.hist.text tag configure gray -foreground grey50 -lmargin2 [font measure font_Small xxxxxxxxxxxxxxxxxx]
   $w.hist.text tag configure blue -foreground darkblue
