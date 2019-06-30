@@ -229,8 +229,7 @@ menuText D ToolsExpFilterHTMLJS "Filter in HTML/JavaScript exportieren..." 17 \
 	{Alle Partien im Filter werden in eine HTML und JavaScript Datei exportiert.}  
 menuText D ToolsExpFilterLaTeX "Filter in LaTeX-Datei exportieren..." 10 \
   {Alle Partien im Filter in eine LaTeX-Datei schreiben}
-# ====== TODO To be translated ======
-menuText D ToolsExpFilterEPD "Export Filter to EPD/FEN" 17 {Write all filtered games to an EPD File}
+menuText D ToolsExpFilterEPD "Filter in EPD/FEN-Datei exportieren" 17 {Alle Filterpartien in eine EPD-Datei speichern}
 menuText D ToolsExpFilterGames "Partienliste in eine Textdatei exportieren" 21 \
 	{Alle Partien im Filter werden in eine Textdatei exportiert.}
 menuText D ToolsImportOne "Eine PGN-Partie importieren..." 16 \
@@ -2273,6 +2272,7 @@ append helpText(D,Index) {
   <li><a Tourney>Engine-Turniere</a></li>
   <li><a EPD>EPD-Dateien</a></li>
   <li><a EPD opcodes>EPD-Opcodes</a></li>
+  <li><a Export EPD>EPD- und FEN-Export</a></li>
   <li><a Graphs Score>Ergebnisgrafik</a></li>
   <li><a BookTuning>Eröffnungsbuch anpassen</a></li>
   <li><a Book>Eröffnungsbücher</a></li>
@@ -3848,7 +3848,7 @@ set helpText(D,Import) {<h1>Das Importfenster</h1>
 set helpTitle(D,Export) "Partien exportieren"
 set helpText(D,Export) {<h1>Partien exportieren</h1>
   <p>Befehle für das Exportieren von Partien in andere Formate sind im
-	Menü <green>Werkzeuge</green> zu finden. Es werden vier Dateiformate unterstützt:
+  Menü <green>Werkzeuge</green> zu finden. Es werden vier Dateiformate unterstützt:
   <ul>
   <li><a PGN>PGN</a> das Standardformat für Schachpartien</li>
   <li><b>HTML</b> für Web-Seiten</li>
@@ -3921,14 +3921,28 @@ set helpText(D,Export) {<h1>Partien exportieren</h1>
   benutzen</a>,
   </p>
 
-  <h3><name PDF>LaTeX nach PDF konvertieren</name></h3>
+  <b><name PDF>LaTeX nach PDF konvertieren</name></b>
   <p>Dies kann man auf Unix-Systemen mit dem Befehl <b>pdflatex</b>
   erreichen. Eine schnelle Konvertierung hat die Form
   <br>
   <ul><li>pdflatex -interaction batchmode mytexfile.tex</li></ul>
   </p>
 
-  <p><footer>Aktualisiert: Scid vs. PC 4.18 Sept 2017</footer></p>
+  <h3><name EPD>EPD / FEN</name></h3>
+  <p>Diese Funktion läuft durch den Filter und exportiert ausgewählte
+  Partien in eine einfache EPD-Datei. Nur Partien mit
+  Anfangsstellungen, die nicht standardkonform sind, oder solche, die
+  in einen Halbzug laden (z.B. nach einer Materialsuche oder nach
+  <b>Suche--<gt>Filterpartien mit Schlußstellung laden</b>), werden
+  gespeichert. Beachte: nachfolgendes Laden dieser Datei könnte
+  weniger Stellungen als (nicht standardkonforme) Partien anzeigen, da
+  EPD-Dateien doppelte Stellungen verwerfen.</p>
+
+  <p><i>Noch zu implemetieren: Unterstützung EPD-Zähler für Halbzüge
+  und ganze Züge (hmvc und fmvn) mit Speichern und Laden... Dies würde
+  aber die Verwendung von reinem FEN zerreißen.</i></p>
+
+  <p><footer>Aktualisiert: Scid vs. PC 4.21 Juni 2019</footer></p>
 }
 
 set helpTitle(D,Encoding) "PGN-Kodierung"
@@ -4975,7 +4989,7 @@ set helpText(D,Analysis) {<h1>Das Analysefenster</h1>
   </p>
 
   <p><i>Das Analyseergebnis hat drei Modi: kein Zeilenumbruch, mit
-  Zeilenumbruch und verborgen. Diese werden durch Rechtsklick im
+  Zeilenumbruch und verborgen. Diese werden durch Mittelklick im
   Analysefenster umgeschaltet.</i>
   </p>
 
@@ -5075,14 +5089,6 @@ set helpText(D,Analysis) {<h1>Das Analysefenster</h1>
 
   <h1>Funktionen</h1>
 
-  <h3>Analysebrett</h3> <p>Die Schaltfläche <button tb_coords 32>
-  zeigt ein kleines Schachbrett, das die Schlußstellung der
-  Engine-Analyse oder den von der UCI-Engine ausgewählten Zug (mit
-  einem Pfeil) anzeigen kann. Ein Klick in das Brett schaltet zwischen
-  diesen Ansichten um. Diese Funktion kann auch im <a Analysis
-  List>Engine-Konfigurationsfenster</a> zur Voreinstellung gemacht
-  werden.
-  
   <h3><name Annotating>Partien kommentieren</name></h3>
   <p>Mit der Schaltfläche <button tb_annotate> (in der Werkzeugleiste
   des Analysefensters) können Partien automatisch analysiert
@@ -5249,7 +5255,7 @@ set helpText(D,Analysis) {<h1>Das Analysefenster</h1>
   die maximale Anzahl an Zeilen im Protokoll. Wenn man sie auf
   Null setzt, wird die Protokollierung insgesamt abgeschaltet.</p>
 
-  <p><footer>Aktualisiert: Scid vs. PC 4.21, Juni 2019</footer></p>
+  <p><footer>Aktualisiert: Scid vs. PC 4.20, September 2018</footer></p>
 }
 
 set helpTitle(D,Tourney) "Computerturniere"
@@ -5516,6 +5522,11 @@ set helpText(D,EPD) {<h1>EPD-Dateien</h1>
   <li>- gültige Züge ab der aktuellen Stellung, die zu einer anderen
   Stellung in dieser EPD-Datei führen.</li>
   </ul>
+
+  <h3>Nach EPD exportieren</h3>
+  <p>Scid vs. PC stellt eine einfache Funktion <a Export EPD>Nach EPD
+  exportieren</a> zur Verfügung.
+  </p>
 
   <h3><name opcodes>Standard von EPD-Opcodes</name></h3>
   <ul>

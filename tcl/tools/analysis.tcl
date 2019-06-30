@@ -2676,7 +2676,7 @@ proc toggleMovesDisplay {n} {
   } else {
     $h configure -state normal
     $h delete 0.0 end
-    $h insert end "\n\n\n     Right click to see moves\n" blue
+    $h insert end "\n\n\n     Middle click to see moves\n" blue
     updateAnalysisBoard $n
     $h configure -state disabled
   }
