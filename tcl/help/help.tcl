@@ -2737,7 +2737,7 @@ making for easier <a Analysis Debugging>Debugging</a>.
 
   <p>
   <i>The analysis output has three modes: No wrap, Word wrap, and Hidden.
-  These are toggled between by right-clicking the Analysis Window.</i>
+  These are toggled between by middle-clicking the Analysis Window.</i>
   </p>
 
   <h3><name Buttons>Buttons</h3>
