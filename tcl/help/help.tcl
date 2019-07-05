@@ -2751,19 +2751,19 @@ making for easier <a Analysis Debugging>Debugging</a>.
   <li> <button tb_addvar 32> <b>Add Variation</b>  adds the whole main line.  (Right click adds the second variation if multi-pv enabled)</li>
   <li> <button tb_addallvars 32> <b>MultiPV</b>  if the engine supports MultiPV, add all variations.</li>
 
+  <li> <button tb_annotate 32> <b>Annotate Game</b> (see <a Analysis Annotating>below</a>).</li>
   <li> <button tb_lockengine 32> <b>Lock Analysis</b> to a certain position.
   Hover cursor over this button to see stats for locked game.
   After a while, to add this analysis to game, return to the locked position, 
   press Pause, Unlock, and Add Variation.</li>
-  <li> <button tb_annotate 32> <b>Annotate Game</b> (see <a Analysis Annotating>below</a>).</li>
+  <li> <button tb_coords 32> <b>Show Board</b> displays a small working board.
+  If engine is locked the board displays the locked position, otherwise middle-click toggles between display modes.</li>
   <li> <button tb_exclude 32> <b>Exclude Move(s)</b> helps refine the engine's search list (mainly UCI engines only). Hovering mouse shows the current excluded moves.</li>
   <li> <button tb_cpu 32> <b>Low CPU priority</b> 
   give the engine a low priority for CPU
   scheduling. On Windows, engines are run on low priority by default.
   On Unix systems the engines priority can not be set back to normal.  </li>
   <li> <button tb_info 32> <b>Show Info</b> show additional information.</li>
-  <li> <button tb_coords 32> <b>Show Board</b> displays a small working board.
-  If engine is locked, the board displays the locked position.</li>
   <li> <button autoplay_off 32> <b>Shoot out</b>, or "demo", mode allows the engine to play out the game. (Time delay is the same as for Autoplay).</li>
   <li> <button tb_training 32> <b>Training</b> feature (see <a Analysis Training>below</a>).</li>
 <br>

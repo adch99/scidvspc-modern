@@ -2379,6 +2379,12 @@ proc makeAnalysisWin {{n 0} {options {}}} {
     -variable analysis(lockEngine$n) -command "toggleLockEngine $n" -relief $relief
   ::utils::tooltip::Set $w.b.lockengine $::tr(LockEngine)
 
+  button $w.b.showboard -image tb_coords -relief $relief -command "
+    set analysis(showBoard$n) \[expr \!\$analysis(showBoard$n)\]
+    initAnalysisBoard $n
+  "
+  ::utils::tooltip::Set $w.b.showboard $::tr(ShowAnalysisBoard)
+
   button $w.b.exclude -image tb_exclude -command "excludeMovePopup $n" -relief $relief
   ::utils::tooltip::Set $w.b.exclude $::tr(ExcludeMove)
   trace variable analysis(exclude$n) w "excludeToolTip $n"
@@ -2394,12 +2400,6 @@ proc makeAnalysisWin {{n 0} {options {}}} {
   checkbutton $w.b.showinfo -image tb_info -indicatoron false -width 32 -height 32 \
     -variable analysis(showEngineInfo$n) -command "toggleEngineInfo $n" -relief $relief
   ::utils::tooltip::Set $w.b.showinfo $::tr(ShowInfo)
-
-  button $w.b.showboard -image tb_coords -relief $relief -command "
-    set analysis(showBoard$n) \[expr \!\$analysis(showBoard$n)\]
-    initAnalysisBoard $n
-  "
-  ::utils::tooltip::Set $w.b.showboard $::tr(ShowAnalysisBoard)
 
   # Xboard only. This button is unpacked later if UCI
   button $w.b.update -image tb_update \
@@ -2429,7 +2429,7 @@ proc makeAnalysisWin {{n 0} {options {}}} {
   }
 
   pack $w.b.startStop $w.b.move $w.b.line $w.b.alllines \
-       $w.b.multipv $w.b.annotatebut $w.b.lockengine $w.b.exclude $w.b.priority $w.b.showinfo $w.b.showboard \
+       $w.b.multipv $w.b.annotatebut $w.b.lockengine $w.b.showboard $w.b.exclude $w.b.priority $w.b.showinfo \
        $w.b.update $w.b.finishGame -side left
   if {!$showAnnoButton} {
     pack forget $w.b.annotatebut
@@ -3582,7 +3582,7 @@ proc initAnalysisBoard {n} {
       pack forget $w.frame
     "
     pack $w.frame.bd $w.frame.close -side left -anchor n
-    bind $w.frame.bd.bd <Button-1> "
+    bind $w.frame.bd.bd <Button-2> "
       set analysis(boardShowsVar$n) \[expr \!\$analysis(boardShowsVar$n)\]
       updateAnalysisBoard $n
    "
