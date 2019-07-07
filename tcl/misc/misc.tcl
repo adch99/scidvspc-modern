@@ -689,7 +689,11 @@ namespace eval html {
     closeProgressWindow
     unbusyCursor .
     exportPGN "[file join $dirtarget $prefix].pgn" "filter"
-    sc_game load $savedGameNum
+    if {$savedGameNum > 0} {
+      sc_game load $savedGameNum
+    } else {
+      sc_game new
+    }
   }
   ################################################################################
   proc sc_progressBar {} {

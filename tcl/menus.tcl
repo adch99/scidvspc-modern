@@ -737,7 +737,11 @@ $m.exportfilter add command -label ToolsExpFilterEPD -command {
 
   close $epdFile
   unbusyCursor .
-  sc_game load $savedGameNum
+  if {$savedGameNum > 0} {
+    sc_game load $savedGameNum
+  } else {
+    sc_game new
+  }
   updateBoard -pgn
 }
 set helpMessage($m.exportfilter,2) ToolsExpFilterEPD
