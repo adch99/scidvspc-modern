@@ -1,4 +1,4 @@
-### deutsch.tcl
+## deutsch.tcl
 #  German language support for Scid.
 #  Contributors: Bernhard Bialas, Jürgen Clos, Christian Opitz 
 #
@@ -2203,8 +2203,8 @@ set helpText(D,Scid) {<h1>Datenbanken und allgemeine Nutzung</h1>
   <p><footer>Aktualisiert: Scid vs. PC 4.7, Januar 2012</footer></p>
 }
 
-set helpTitle(D,Index) "Scid Help Topic Index"
-set helpText(D,Index) "<h1>$::scidName Help Index</h1>"
+set helpTitle(D,Index) "Scid Hilfeindex"
+set helpText(D,Index) "<h1>$::scidName Hilfeindex</h1>"
 append helpText(D,Index) {
 <br>
 <a Index A>  A</a> <a Index B>  B</a> <a Index C>  C</a> <a Index D>  D</a> <a Index  E> E</a> <a Index F>  F</a> <a Index G>  G</a> <a Index H>  H</a> <a Index I>  I</a> <a Index  J> J</a> <a Index K>  K</a> <a Index L>  L</a> <a Index M>  M</a> <a Index N>  N</a> <a Index O>  O</a> <a Index P>  P</a> <a Index Q>  Q</a> <a Index R>  R</a> <a Index S>  S</a> <a Index T>  T</a> <a Index U>  U</a> <a Index V>  V</a> <a Index W>  W</a> <a Index X>  X</a> <a Index Y>  Y</a> <a Index Z>  Z</a>
@@ -3396,7 +3396,6 @@ set helpText(D,Comment) {<h1>Der Kommentareditor</h1>
   vorhanden sein. Um einen Kommentar <b>vor einer Variante</b>
   hinzuzufügen, gehen Sie zuerst zum ersten Zug in der Variante und
   dann einen Zug zurück, bevor Sie den Kommentar eingeben.
-  Comments may also exist at the start of a game or variation.
   </p>
 
   <p><i>Mit dem Fokus im Kommentareditor können Sie durch die Partie
@@ -5008,6 +5007,9 @@ set helpText(D,Analysis) {<h1>Das Analysefenster</h1>
   <li> <button tb_addallvars 32> <b>alle Varianten hinzufügen</b> wenn
   das Schachprogramm MultiPV unterstützt, werden alle Varianten
   hinzugefügt.</li>
+
+  <li> <button tb_annotate 32> <b>Automatisch kommentieren</b>
+  (siehe <a Analysis Annotating>unten</a>).</li>
   <li> <button tb_lockengine 32> <b>Analyse anbinden</b> an aktuelle
   Stellung. Bewegen Sie den Mauszeiger über diese Schaltfläche, um für
   die gesperrte Analyse Statistiken zu sehen. Um diese Analyse nach
@@ -5015,8 +5017,10 @@ set helpText(D,Analysis) {<h1>Das Analysefenster</h1>
   der Partie hinzuzufügen, kehren Sie zu der gesperrten Stellung
   zurück, drücken Pause, entsperren die Analyse und fügen die Variante hinzu.
 </li>
-  <li> <button tb_annotate 32> <b>Autom. kommentieren</b>
-  (siehe <a Analysis Annotating>unten</a>).</li>
+  <li> <button tb_coords 32> <b>Analysebrett anzeigen</b> zeigt ein
+  kleines Hilfsschachbrett an. Wenn das Schachprogramm angehalten ist,
+  zeigt dieses Brett die gesperrte Stellung. Ein Klick mit der
+  mittleren Maustaste schaltet zwischen den Anzeigemodi um.</li>
   <li> <button tb_exclude 32> <b>Zug ausschließen</b> hilft, die
   Suchliste des Schachprogramms zu verfeinern (hauptsächlich nur
   UCI-Programme). Ein Bewegen des Mauszeigers über diese Schaltfläche
@@ -5029,9 +5033,6 @@ set helpText(D,Analysis) {<h1>Das Analysefenster</h1>
   <li> <button tb_info 32> <b>Engine-Informationen anzeigen</b> zeigt
   im Analysefenster unten zusätzliche Informationen des
   Schachprogramms an (Stellungsbewertung, Suchtiefe, Anzahl der Knoten usw.).</li>
-  <li> <button tb_coords 32> <b>Analysebrett anzeigen</b> zeigt ein
-  kleines Hilfsschachbrett an. Wenn das Schachprogramm angehalten ist,
-  zeigt dieses Brett die gesperrte Stellung.</li>
   <li> <button autoplay_off 32> <b>Partie beenden</b> (oder
   "Demo") läßt das Schachprogramm außerhalb der Partie
   weiterspielen (die Zeitverzögerung ist die gleiche wie beim
