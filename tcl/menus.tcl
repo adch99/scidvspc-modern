@@ -709,8 +709,12 @@ $m.exportfilter add command -label ToolsExpFilterEPD -command {
   }
   set idir $::initialDir(epd)
   set fName [tk_getSaveFile -initialdir $idir -filetypes $ftype -defaultextension ".epd" -title "Create an EPD file"]
-  if {$fName == ""} { return }
-  set prefix [file rootname [file tail $fName] ]
+  if {$fName == ""} {
+    return
+  }
+  if {[file extension $fName] != ".txt" && [file extension $fName] != ".epd" } {
+    append fName ".epd"
+  }
 
   if {[catch {open $fName w} epdFile]} {
     tk_messageBox -title "Scid: Unable to write file" -type ok -icon warning \

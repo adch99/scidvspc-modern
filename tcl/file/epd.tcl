@@ -136,8 +136,8 @@ namespace eval epd {
     set m $w.menu.file.m
     $m add command -label "New" -underline 0 -command {::epd::newEpdWin create}
     $m add command -label "Open" -underline 0 -command {::epd::newEpdWin open}
-    $m add command -label "Save" -underline 0 -command "::epd::saveEpdWin $id"
-    $m add command -label "Close" -underline 0 -command "::epd::closeEpdWin $id"
+    $m add command -label "Save" -acc "control-s" -underline 0 -command "::epd::saveEpdWin $id"
+    $m add command -label "Close" -acc "control-w" -underline 0 -command "::epd::closeEpdWin $id"
     wm protocol $w WM_DELETE_WINDOW "::epd::closeEpdWin $id"
     bind $w <Destroy> "
       wm protocol $w WM_DELETE_WINDOW {}
@@ -196,10 +196,11 @@ namespace eval epd {
     bind $w <Control-Shift-A> "::epd::addPosition $id"
     bind $w <Control-Shift-O> "::epd::chooseStripField $id"
     bind $w <Control-q> "::epd::closeEpdWin $id"
+    bind $w <Control-w> "::epd::closeEpdWin $id"
+    bind $w <Control-s> "::epd::saveEpdWin $id"
 
-
-    # the reason for including a break is a complete mystery, but without
-    # the break it don't work...
+    # 'break's are included to stop additional (identical and sometimes conflicting)
+    # bind's from subsequently being handled/executed by parent widgets
     bind $w.text <Control-a> "$w.text tag add sel 0.0 end-1c; break;"
     bind $w.text <Control-z> "catch \"$w.text edit undo\"; break;"
     bind $w.text <Control-r> "catch \"$w.text edit redo\"; break;"
