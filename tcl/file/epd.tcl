@@ -197,7 +197,9 @@ namespace eval epd {
     bind $w <Control-Shift-O> "::epd::chooseStripField $id"
     bind $w <Control-q> "::epd::closeEpdWin $id"
     bind $w <Control-w> "::epd::closeEpdWin $id"
-    bind $w <Control-s> "::epd::saveEpdWin $id"
+    bind $w <Control-s> "
+      if {\[$w.text edit modified\]} {::epd::storeEpdText $id}
+      ::epd::saveEpdWin $id"
 
     # 'break's are included to stop additional (identical and sometimes conflicting)
     # bind's from subsequently being handled/executed by parent widgets
