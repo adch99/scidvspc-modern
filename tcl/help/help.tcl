@@ -3076,30 +3076,26 @@ set helpText(CalVar) {<h1>Calculation of Variations</h1>
 set helpTitle(EPD) "EPD Files"
 set helpText(EPD) {<h1>EPD Files</h1>
   <p>
-  An <b>Extended Position Description</b> file is a file with chess positions,
-  each having some associated text.
-  Like <a PGN>PGN</a>, it is a common standard for chess information.
-  </p>
-  <p>
-  EPD files contain <a EPD opcodes>Opcodes</a> , or fields, which are separated by semicolons in the file,
-  but are shown on separate lines in Scid's EPD Window.
-  (Semicolons within an EPD field are stored as "<b>\s</b>" to distinguish them from end-of-field markers).
+  <b>Extended Position Description</b> files are a common standard for chess information and are composed of chess positions, each with some associated text.
+</p><p>
+  The positions are a slightly shortened FEN (the standard chess position) format.
+  The text is freeform, but normally made up of <a EPD opcodes>Opcodes</a>, or fields - separated by semicolons, but shown on separate lines in Scid's EPD Window. <i>Textual semicolons are stored as "\s" to distinguish them from end-of-field semicolons</i>.
+</p><p>
   EPD files have a number of uses, but are perhaps most commonly used for collections
   of puzzles, end game studies and tactical shots.
+<br>
+  Scid vs. PC provides a simple <a Export EPD>Export to EPD</a> feature.
   </p>
   <p>
-  At most four EPD files can be open at any time.
-  </p>
-  <p><i>
-  Opening an EPD file with duplicate or erroneous positions will silently eliminate
-  those positions.  Poorly formed or non-standard operands are accepted 
+  Up to four EPD files may be open at any time.
+  Opening a file with duplicate or erroneous positions will silently eliminate
+  these positions, though poorly formed or non-standard operands are accepted 
   without complaint.
-  </i></p>
+  </p>
 
   <p><i>
-  Scid vs PC no longer saves changes automatically (but from <b>File--<gt>Save</b>).
-  The current save status can be seen in the EPD status bar.
-  </i></p>
+  Scid vs PC no longer saves changes automatically, but from </i><b>File--<gt>Save</b>.
+  <i>The current save status can be seen in the EPD statusbar.</i></p>
 
   <h3>Navigating EPD Files</h3>
   <p>
@@ -3164,19 +3160,13 @@ set helpText(EPD) {<h1>EPD Files</h1>
 
   <h3>The EPD Window Status Bar</h3>
   <p>
-  The status bar of each EPD window shows:
+  The statusbar of each EPD window shows
   <ul>
-  <li>- the file name; </li>
-  <li>- whether the file is readonly or has been modified; </li>
-  <li>- the number of positions in the file; </li>
-  <li>- legal moves from the current position that reach another position
-  in this EPD file.</li>
+  <li>- the file name</li>
+  <li>- whether the file is readonly or has been modified</li>
+  <li>- the number of positions in the file</li>
+  <li>- legal moves from the current position that reach another position in this EPD file</li>
   </ul>
-
-  <h3>Exporting to EPD</h3>
-  <p>
-  Scid vs. PC provides a simple <a Export EPD>Export to EPD</a> feature.
-  </p>
 
   <h3><name opcodes>Standard EPD Opcodes</name></h3>
   <ul>
@@ -3197,7 +3187,7 @@ set helpText(EPD) {<h1>EPD Files</h1>
   <li> <b>pv</b> Predicted variation: the line of best play.</li>
   </ul>
 
-  <p><footer>Updated: Scid vs. PC 4.20, January 2019</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.21, July 2019</footer></p>
 }
 
 set helpTitle(Email) "Email window"

@@ -1993,6 +1993,7 @@ while {$argc > 0} {
       ::splash::add "   Error opening EPD file: $startbase" error
     }
     set initialDir(epd) [file dirname $startbase]
+    ::recentFiles::add $startbase
   } elseif {[string match "*.sso" $startbase]} {
     ::splash::add "Opening search file: $startbase"
     if {[catch {uplevel "#0" source $startbase} err]} {
