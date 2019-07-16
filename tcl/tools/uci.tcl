@@ -258,10 +258,11 @@ namespace eval uci {
            set uciInfo(cpuload$n) [format "%u%%" [expr {round( [lindex $data $i] / 10)}]]
            continue}
         if { $t == "string" } {
-          # seems unused
+          # uciInfo(string) seems unused
           incr i
           set uciInfo(string$n) [lrange $data $i end]
-          break}
+          # return without further processing as "info string" may cause updateAnalysisText to fail (if showEngineInfo)
+          return}
         # TODO parse following tokens if necessary  : refutation currline
         if { $t == "refutation" } { continue }
         if { $t == "currline" } { continue }
