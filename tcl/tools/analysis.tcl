@@ -442,9 +442,10 @@ proc ::enginelist::choose {} {
     makeAnalysisWin [lindex [.enginelist.list.list curselection] 0] settime
   }
   
+  checkbutton $w.buttons3.info      -textvar tr(FICSInfo) -variable analysis(showEngineInfo)
+  checkbutton $w.buttons3.showBoard -textvar tr(Board) -variable analysis(showBoard)
   label       $w.buttons3.sizeLabel     -text [tr OptionsFicsSize]
   spinbox     $w.buttons3.size -width 3 -textvariable analysis(boardSize) -from 1 -to 5 -increment 1
-  checkbutton $w.buttons3.showBoard -textvar tr(Board) -variable analysis(showBoard)
   checkbutton $w.buttons3.showVar -textvar tr(ShowArrows) -variable analysis(boardShowsVar) -command "
     catch \{$w.frame.bd.bd delete var\}"
   checkbutton $w.buttons3.lowpriority -variable analysis(lowPriority) -textvar ::tr(LowPriority)
@@ -460,7 +461,7 @@ proc ::enginelist::choose {} {
 
   pack $w.buttons.up $w.buttons.down $w.buttons.log $w.buttons.uci $w.buttons.edit $w.buttons.add $w.buttons.copy $w.buttons.delete -side left -expand yes
 
-  pack $w.buttons3.showBoard $w.buttons3.space $w.buttons3.sizeLabel $w.buttons3.size $w.buttons3.showVar $w.buttons3.lowpriority  -side left -padx 4
+  pack $w.buttons3.info $w.buttons3.showBoard $w.buttons3.space $w.buttons3.sizeLabel $w.buttons3.size $w.buttons3.showVar $w.buttons3.lowpriority  -side left -padx 4
 
   pack $w.buttons2.close $w.buttons2.start -side right -padx 5 
   pack $w.buttons2.logengines $w.buttons2.logmax $w.buttons2.ply $w.buttons2.maxply $w.buttons2.logname -side left -padx 4
@@ -2393,9 +2394,7 @@ proc makeAnalysisWin {{n 0} {options {}}} {
     -onvalue idle -offvalue normal -command "setAnalysisPriority $n" -relief $relief -width 32 -height 32
   ::utils::tooltip::Set $w.b.priority $::tr(LowPriority)
 
-  if {![info exists analysis(showEngineInfo$n)]} {
-    set analysis(showEngineInfo$n) 0
-  }
+  set analysis(showEngineInfo$n) $analysis(showEngineInfo)
 
   checkbutton $w.b.showinfo -image tb_info -indicatoron false -width 32 -height 32 \
     -variable analysis(showEngineInfo$n) -command "toggleEngineInfo $n" -relief $relief

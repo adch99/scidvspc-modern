@@ -391,6 +391,7 @@ set analysis(logName) 1
 set analysis(maxPly) 0
 set analysis(lowPriority) $::windowsOS
 set analysis(showBoard) 0
+set analysis(showEngineInfo) 0
 set analysis(boardSize) 2
 set analysis(boardShowsVar) 1
 
