@@ -1,5 +1,5 @@
---- scid.orig	2019-07-18 19:48:26.993859670 +1000
-+++ scid	2019-07-18 20:01:20.023344273 +1000
+--- scid.orig	2019-07-18 22:42:49.030475233 +1000
++++ scid	2019-07-18 22:43:52.158270255 +1000
 @@ -112017,7 +112017,7 @@
    }
  }
@@ -251,7 +251,16 @@
    $w.text tag configure blue -foreground blue ; # this only seems used in toggleAutomove ???
    $w.hist.text tag configure gray -foreground grey50 -lmargin2 [font measure font_Small xxxxxxxxxxxxxxxxxx]
    $w.hist.text tag configure blue -foreground darkblue
-@@ -143938,7 +143938,7 @@
+@@ -142202,7 +142202,7 @@
+   }
+ 
+   bind .t <ButtonRelease-1> {destroy .t}
+-  bind .t <ButtonRelease-3> {destroy .t}
++  bind .t <ButtonRelease-2> {destroy .t}
+   bind .t <Leave> {if {"%W" == ".t"} {destroy .t}}
+   bind $w <Destroy> +[list destroy .t]
+ 
+@@ -143946,7 +143946,7 @@
    bind $w <F1> {helpWindow Graphs Filter}
    standardShortcuts $w
    # bind $w.c <1> tools::graphs::filter::Switch
@@ -260,7 +269,7 @@
    bind $w <Escape> "destroy $w"
  
    foreach {name text} {decade Decade year Year elo Rating move moves} {
-@@ -144231,11 +144231,11 @@
+@@ -144239,11 +144239,11 @@
        ::utils::graph::redraw score
        recordWinSize .sgraph
      }
@@ -276,7 +285,7 @@
      bind $w <Escape> "destroy $w"
      bind $w <space>  toggleEngineAnalysis
      if {$::windowsOS || $::macOS} {
-@@ -144655,7 +144655,7 @@
+@@ -144663,7 +144663,7 @@
        update
        recordWinSize .rgraph
      }
@@ -285,7 +294,7 @@
      bind $w <Escape> "destroy $w"
      bind $w <Destroy> {set ::tools::graphs::rating::players {}}
  
-@@ -144805,7 +144805,7 @@
+@@ -144813,7 +144813,7 @@
    bind $w <F1> {helpWindow Graphs Filter}
    standardShortcuts $w
    # bind $w.c <1> tools::graphs::absfilter::Switch
@@ -294,7 +303,7 @@
    bind $w <Escape> "destroy $w"
    foreach {name text} {decade Decade year Year elo Rating move moves} {
      radiobutton $w.b.$name -padx 4 -pady 3 -text [string totitle $::tr($text)] \
-@@ -146988,7 +146988,7 @@
+@@ -146996,7 +146996,7 @@
      label $b -image b$p$::ptrack::psize -border 1 -relief raised
      grid $b -row 11 -column $c
      bind $b <1> "::ptrack::select $sq"
@@ -303,7 +312,7 @@
    }
    grid [frame $w.bd.gap2 -height 5] -row 12 -column 0
    foreach file {a b c d e f g h} c {1 2 3 4 5 6 7 8} p {p p p p p p p p} {
-@@ -146997,7 +146997,7 @@
+@@ -147005,7 +147005,7 @@
      label $b -image w$p$::ptrack::psize -border 1 -relief raised
      grid $b -row 13 -column $c
      bind $b <ButtonPress-1> "::ptrack::select $sq"
@@ -312,7 +321,7 @@
    }
    foreach file {a b c d e f g h} c {1 2 3 4 5 6 7 8} p {r n b q k b n r} {
      set sq ${file}1
-@@ -147009,15 +147009,15 @@
+@@ -147017,15 +147017,15 @@
  
    # Both-piece bindings:
    foreach sq {d1 e1 d8 e8} {
@@ -333,7 +342,7 @@
    }
  
    # Status-bar help:
-@@ -157478,7 +157478,7 @@
+@@ -157486,7 +157486,7 @@
    }
  }
  # Quick save is right click
@@ -342,7 +351,7 @@
    if {[%W cget -state] != "disabled"} {gameQuickSave}
    break
  }
-@@ -160181,7 +160181,7 @@
+@@ -160189,7 +160189,7 @@
     updateBoard -animate
  }
  
@@ -351,7 +360,7 @@
     set ::pause 1
     while {[sc_var level] > 0} {
       sc_var exit
-@@ -160216,17 +160216,17 @@
+@@ -160224,17 +160224,17 @@
  button .main.button.windows  -image tb_windows   -command {raiseAllWindows 1}
  
  # Right-click raises .splash
@@ -372,7 +381,7 @@
  
  ::utils::tooltip::Set .main.button.autoplay [tr AutoPlay]
  ::utils::tooltip::Set .main.button.trial [tr TrialMode]
-@@ -160322,12 +160322,12 @@
+@@ -160330,12 +160330,12 @@
  # Pop-up this menu with a right click on a few empty real estates (if not dragging)
  
  if { !$::docking::USE_DOCKING } {
@@ -388,7 +397,7 @@
    tk_popup .menu.options.ginfo %X %Y
  }
  
-@@ -169450,7 +169450,7 @@
+@@ -169458,7 +169458,7 @@
        set ::fics::graph(on) [expr {! $::fics::graph(on)}]
        ::fics::showGraph
      }
@@ -397,7 +406,7 @@
      button $w.bottom.buttons.findopp -textvar tr(FICSFindOpponent) -command {::fics::findOpponent}
      button $w.bottom.buttons.quit    -textvar tr(FICSQuit) -command {::fics::close}
      grid $w.bottom.buttons.offers  -column 0 -row $row -sticky ew -padx 3 -pady 2
-@@ -169467,7 +169467,7 @@
+@@ -169475,7 +169475,7 @@
      bind $w <Destroy>   ::fics::close
      bind $w <Configure> "::fics::recordFicsSize $w"
      bind $w <F1> {helpWindow FICS}
@@ -406,7 +415,7 @@
        tk_popup .menu.options.fics %X %Y
      }
  
-@@ -174293,7 +174293,7 @@
+@@ -174301,7 +174301,7 @@
  for {set i 0} { $i < 64 } { incr i } {
    ::board::bind .main.board $i <Enter> "enterSquare $i"
    ::board::bind .main.board $i <ButtonPress-1> "pressSquare $i 0"
@@ -415,7 +424,7 @@
    ::board::bind .main.board $i <Control-ButtonPress-1> "drawArrow $i \$::::commenteditor::State(markColor)"
    # ::board::bind .main.board $i <Control-ButtonPress-2> "drawArrow $i yellow"
    # ::board::bind .main.board $i <Control-ButtonPress-3> "drawArrow $i red"
-@@ -174310,7 +174310,7 @@
+@@ -174318,7 +174318,7 @@
  # if we want to use the above "addMarker" bindings
  bind .main.board.bd <B1-Motion> {::board::dragPiece .main.board %x %y}
  bind .main.board.bd <ButtonRelease-1> {releaseSquare .main.board %x %y}
@@ -424,7 +433,7 @@
  
  foreach i {o q r n k O Q R B N K} {
    bind .main <$i> "moveEntry_Char [string toupper $i]"
-@@ -174498,10 +174498,10 @@
+@@ -174506,10 +174506,10 @@
  }
  
  # todo mac button patch

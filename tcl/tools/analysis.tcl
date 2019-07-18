@@ -3660,7 +3660,7 @@ proc updateAnalysisBoard {n {moves {}}} {
 
 proc sendPosToEngineUCI {n  {delay 0}} {
 
-    global analysis ::uci::uciInfo
+    global analysis ::uci::uciInfo tr
 
     if {$analysis(after$n) != ""} {
 	after cancel $analysis(after$n)
@@ -4414,9 +4414,17 @@ proc popupButtonBar {n} {
         $t.$b  configure $o [$w.$b cget $o]
       }
     }
+    foreach bind [bind $button] {
+      if {[string match {<Button*} $bind]} {
+	catch {
+	      bind $t.$b $bind [bind $button $bind]
+	}
+      }
+    }
   }
 
   bind .t <ButtonRelease-1> {destroy .t}
+  bind .t <ButtonRelease-3> {destroy .t}
   bind .t <Leave> {if {"%W" == ".t"} {destroy .t}}
   bind $w <Destroy> +[list destroy .t]
 
