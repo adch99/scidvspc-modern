@@ -16,10 +16,6 @@
 # Removed sorting functionality
 # Other performance tweaks.
 
-# We aren't using stdout. Windows does not support it.
-# set analysis(log_stdout) 0
-set analysis(log_auto) 0
-
 set analysisBookSlot 1
 set useAnalysisBookName ""
 set wentOutOfBook 0
@@ -2420,6 +2416,8 @@ proc makeAnalysisWin {{n 0} {options {}}} {
 
   button $w.b.help -image tb_help  -command {helpWindow Analysis} -relief $relief
   ::utils::tooltip::Set $w.b.help $tr(Help)
+
+  bind $w.b.help <ButtonPress-3> "engineShowLog $n"
  
   if {$::macOS} {
     $w.b.startStop configure -width 30 -height 30
@@ -3710,9 +3708,9 @@ proc sendPosToEngineUCI {n  {delay 0}} {
 	}
 
         if {$uciInfo(searchmoves$n) == ""} {
-	  sendToEngine $n "go infinite"
+	  sendToEngine $n $::uci::goCommand
         } else {
-	  sendToEngine $n "go infinite searchmoves $uciInfo(searchmoves$n)"
+	  sendToEngine $n "$::uci::goCommand searchmoves $uciInfo(searchmoves$n)"
         }
         set analysis(go$n) 1
 
@@ -4294,16 +4292,20 @@ proc engineShowLog {n} {
   global analysis tr
 
   if {$n == {}} {
+    puts "oops engineShowLog"
     return
   }
-  set analysis(logfile) $n
 
-  set w .enginelog
+  set w .enginelog$n
 
   if {[winfo exists $w]} {
     $w.log delete 0.0 end
     raiseWin $w
   } else {
+    # We aren't using stdout. Windows does not support it.
+    # set analysis(log_stdout) 0
+    set analysis(logAuto$n) 0
+
     toplevel $w
     wm minsize $w 300 180
     setWinLocation $w
@@ -4328,11 +4330,11 @@ proc engineShowLog {n} {
     grid rowconfigure    $w.frame 1 -weight 0
     grid columnconfigure $w.frame 1 -weight 0
     
-    checkbutton $w.buttons.auto -text Auto -variable analysis(log_auto) -command engineAutoLog
-    dialogbutton $w.buttons.update -textvar tr(Update) -command engineUpdateLog
+    checkbutton $w.buttons.auto -text Auto -variable analysis(logAuto$n) -command "engineAutoLog $n"
+    dialogbutton $w.buttons.update -textvar tr(Update) -command "engineUpdateLog $n"
 
     entry $w.buttons.find -width 10 -textvar analysis(find) -highlightthickness 0
-    configFindEntryBox $w.buttons.find analysis .enginelog.log
+    configFindEntryBox $w.buttons.find analysis $w.log
 
     dialogbutton $w.buttons.ok -textvar tr(Close) -command "destroy $w"
 
@@ -4341,42 +4343,43 @@ proc engineShowLog {n} {
 
     bind $w <Configure> "recordWinSize $w"
   }
-  wm title $w "Engine Log: [lindex [lindex $::engines(list) $n] 0]"
-  engineAutoLog
+  wm title $w "[lindex [lindex $::engines(list) $n] 0] log"
+  engineAutoLog $n
   bind $w <Escape> "destroy $w"
   bind $w <F1> { helpWindow Analysis }
   $w.buttons.update invoke
-  .enginelog.log see 0.0
+  $w.log see 0.0
 }
 
 ### Open the log file for reading
 ### $analysis(log$n) may already be open... but we'll ignore this fil descriptor and creat our own i think
 
-proc engineUpdateLog {} {
+proc engineUpdateLog {n} {
+  set w .enginelog$n
 
-  set n $::analysis(logfile)
-  if {$n == {}} {return}
-  .enginelog.log delete 1.0 end
+  $w.log delete 1.0 end
   if {! [catch {open [file join $::scidLogDir engine$n.log] r} fd]} {
     # while {![eof $fd]} 
     while {[gets $fd line] >= 0 && ![eof $fd]} {
-      .enginelog.log insert end "$line\n"
+      $w.log insert end "$line\n"
     }
     close $fd
   }
-  .enginelog.log see end
+  $w.log see end
 }
 
 ### Automatically refreshes the engine log window
 # (Note it rereads the whole file every update. Obviously would be better
 # to run a tail on it, and probably not hard to do under Linux)
 
-proc engineAutoLog {} {
-  if {[winfo exists .enginelog] && $::analysis(log_auto)} {
-    .enginelog.buttons.update invoke
-    after 1000 engineAutoLog
+proc engineAutoLog {n} {
+  set w .enginelog$n
+
+  if {[winfo exists $w] && $::analysis(logAuto$n)} {
+    $w.buttons.update invoke
+    after 1000 "engineAutoLog $n"
   } else {
-    after cancel engineAutoLog
+    after cancel "engineAutoLog $n"
   }
 }
 
