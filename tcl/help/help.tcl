@@ -28,7 +28,7 @@ it you can play chess online or against the computer, browse tournaments
 downloaded in pgn format, create huge chess databases, and generate opening and player reports.
 </p>
 <p><i>
-See <run ::tip::show 0><green>Tip of the Day</green></run> for some helpful hints.
+See <run ::tip::show 0><green>Tip of the Day</green></run> for some helpful hints, or the <a Console>Splash Window</a> for info and debugging.
 </i></p>
 </p>
 
@@ -266,6 +266,7 @@ append helpText(Index) {
   <li><a ComputerGame>Computer Game</a></li>
   <li><a Tourney>Computer Tournament</a></li>
   <li><a Compact>Compacting a database</a></li>
+  <li>Scid vs PC's <a Console>Console</a></li>
   <li><a Correspondence>Correspondence Chess</a></li>
   <li><a CCIcons>Correspondence Chess Icons</a></li>
   <li><a Import CCRL>Computer Chess (CCRL) game imports</a></li>
@@ -455,6 +456,7 @@ append helpText(Index) {
   <li><a Maintenance Spellfile>Spellcheck File</a></li>
   <li><a Maintenance Spellcheck>Spellchecking</a> names</li>
   <li>Editing Name <a Maintenance Editing>Spelling</a></li>
+  <li><a Console>Startup</a> / Splash Window</li>
   <li><a MainWindow Status>Status bar</a></li>
   <li><a CalVar>Stoyko Exercise</a></li>
   <li><a Switcher>Switcher</a> window</li>
@@ -2765,6 +2767,7 @@ making for easier <a Analysis Debugging>Debugging</a>.
   On Unix systems the engines priority can not be set back to normal.  </li>
   <li> <button tb_info 32> <b>Show Info</b> show additional information.</li>
   <li> <button autoplay_off 32> <b>Shoot out</b>, or "demo", mode allows the engine to play out the game. (Time delay is the same as for Autoplay).</li>
+  <li> <button tb_help 32> <b>Help</b> button. (Right-click shows the engine log).
   <li> <button tb_training 32> <b>Training</b> feature (see <a Analysis Training>below</a>).</li>
 <br>
   <li> And for Xboard engines only:</li>
@@ -2938,14 +2941,16 @@ engines support both formats.
 <url http://wbec-ridderkerk.nl/html/UCIProtocol.html>UCI standard</url>. Additionally, Chess960 support is not enabled
 because implementation is very problematic.</p>
 
-  <h2><name Debugging>Debugging Engine Crashes</name></h2>
+  <h2><name Debugging>Advanced</name></h2>
   <p>
   If an engine fails to start, or crashes, one may examine its log file.
-  These are kept in the Scidvspc's log directory and can be viewed
-via the <button tb_annotate> button in the <run ::enginelist::choose><green>engine configuration</green></run> widget.
+  These are kept in the Scidvspc's log directory and can be viewed by right-clicking the <button tb_help> button,
+or via the <button tb_annotate> button in the <run ::enginelist::choose><green>engine configuration</green></run> widget.
 The <b>Log Size</b> is the max number of lines in the log. Setting it to zero disables logging altogether.</p>
+  <p>The default UCI command for <button tb_play> is "go infinite", but this may be altered by changing <b>::uci::goCommand</b> in ScidvsPC's Console.
+</p>
 
-  <p><footer>Updated: Scid vs. PC 4.20, September 2018</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.21, July 2019</footer></p>
 }
 
 set helpTitle(Tourney) "Computer Tournament"
@@ -3400,7 +3405,7 @@ players.
 <url http://scid.sourceforge.net/download.html>Scid download page</url>),
 into Scid vs. PC's user directory.
 On Linux and Macs this is "$HOME/.scidvspc", or "Scid vs PC/bin" on Windows.
-The <green><run raiseSplashWindow>Help--<gt>Startup Window</run></green> will help you find it's location, and
+The <a Console>Splash Window</a> will help you find it's location, and
 will also indicate if the photo files have been loaded correctly.
 </p>
 <p>Custom gifs can be placed into a "photos" directory beneath the user dir.
@@ -7279,7 +7284,7 @@ The window manager may interfere with some shortcuts.
 <li><b>control-shift-F12</b> - Screenshot</li>
 
 </ul>
-<p><footer>Updated:</b> - Scid vs. PC 4.9 April 2013</footer></p>
+<p><footer>Updated: Scid vs. PC 4.9 April 2013</footer></p>
 }
 
 set helpTitle(Board) "Board Customisation"
@@ -7315,9 +7320,22 @@ Paul's also include instructions for making high detail pieces from svg using In
 You can find the older instructions to make Scid pieces in scid_chess_pieces.tgz.
 </p>
 <p><i>
-   Examine <green><run raiseSplashWindow>Startup Window</run></green> for the status of loading user textures and pieces.
+   Examine the <a Console>Splash Window</a> for the status of loading user textures and pieces.
 </i></p>
+<p><footer>Updated: Scid vs. PC 4.17 October 2016</footer></p>
+}
 
+set helpTitle(Console) "Startup Window / Console"
+set helpText(Console) {<h1>Startup Window and Console</h1>
+<p>
+The <green><run raiseSplashWindow>Splash / Startup Window</run></green> shows various
+technical information about the system and program startup. In the bottom right corner is an
+entry-box for text searches; just type your text and press return.</p>
+<p>
+Just above the bottom is another, larger, entry-box. This is Scid vs PC's <b>Console</b> which enables input of Tcl/Tk commands for debugging and advanced use.
+For more information about Tcl, try 
+<url https://www.tutorialspoint.com/tcl-tk/>Tutorials Point's Tcl</url> and 
+<url https://www.tutorialspoint.com/tcl-tk/tk_overview.htm>Tk</url> tutorials.
 </p>
-<p><footer>Updated:</b> - Scid vs. PC 4.17 October 2016</footer></p>
+<p><footer>Updated: Scid vs. PC 4.21 July 2019</footer></p>
 }

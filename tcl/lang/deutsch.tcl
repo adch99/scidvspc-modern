@@ -5002,7 +5002,7 @@ set helpText(D,Analysis) {<h1>Das Analysefenster</h1>
   Partie den besten Zug des Schachprogramms hinzu (Rechtsklick fügt
   die Bewertung des Programms hinzu).</li>
   <li> <button tb_addvar 32> <b>Variante hinzufügen</b> fügt die ganze
-  Hauptvariante hinzu (Rechtsklik fügt eine zweite Variante hinzu,
+  Hauptvariante hinzu (Rechtsklick fügt eine zweite Variante hinzu,
   falls Multi-PV aktiviert ist).</li>
   <li> <button tb_addallvars 32> <b>alle Varianten hinzufügen</b> wenn
   das Schachprogramm MultiPV unterstützt, werden alle Varianten
@@ -5417,28 +5417,30 @@ set helpText(D,CalVar) {<h1>Berechnung von Varianten</h1>
 
 set helpTitle(D,EPD) "EPD-Dateien"
 set helpText(D,EPD) {<h1>EPD-Dateien</h1>
-  <p>Eine EPD-Datei (Extended Position Description) ist eine Datei
-  mit Stellungen, die jede einen bestimmten Text enthält.
-  <br>Es ist wie <a PGN>PGN</a> ein üblicher Standard für Schachinformationen.
-  </p>
-  <p>EPD-Dateien enthalten <a EPD opcodes>Opcodes</a> oder Felder, die
-  durch Semikolons getrennt sind, die aber in getrennten Zeilen im
-  EPD-Fenster angezeigt werden (Semikolons innerhalb eines EPD-Feldes
-  werden als "<b>s</b>" gespeichert, um sie von den Feldendezeichen zu
-  unterscheiden). Sie haben mehrere Anwendungszwecke, werden aber
+
+  <p>EPD-Dateien (Extended Position Description) sind ein allgemeiner
+  Standard für Schachinformationen und enthalten Schachstellungen, bei
+  denen jede mit einem bestimmten Text verbunden ist.</p>
+
+  <p>Die Stellungen sind in einem leicht gekürzten FEN-Format. Der
+  Text ist in freier Form, besteht aber normalerweise aus <a EPD
+  opcodes>Opcodes</a> oder Feldern, die durch Semikolons getrennt
+  sind, die aber in getrennten Zeilen im EPD-Fenster von Scid
+  angezeigt werden. <i>Semikolons als Text werden als "\s"
+  gespeichert, um sie von den Semikolonzeichen für das Feldende zu
+  unterscheiden.</i></p>
+
+  <p>EPD-Dateien haben mehrere Anwendungszwecke, werden aber
   vermutlich am häufigsten für Sammlungen von Puzzles, Endspielstudien
-  und taktischen Aufgaben benutzt. Scid benutzt eine EPD-Datei, um
-  Partien gemäß dem <a ECO>ECO</a>-System zu klassifizieren. Sie
-  können für Ihr Eröffnungsrepertoire eine EPD-Datei erstellen mit
-  Kommentaren für Stellungen, die Sie in Partien regelmäßig erreichen
-  [Funktion entfernt].
-  </p>
-  <p>Es können höchstens vier EPD-Dateien gleichzeitig geöffnet werden.
-  </p>
-  <p><i>Das Öffnen einer EPD-Datei mit doppelt vorhandenen oder
-  fehlerhaften Stellungen wird diese stillschweigend
-  löschen. Mangelhaft gebildete oder standardunübliche Operanden
-  werden klaglos akzeptiert.</i></p>
+  und taktischen Aufgaben benutzt.
+
+  Scid stellt eine einfache Funktion für den <a Export EPD>Export nach
+  EPD</a> zur Verfügung. </p>
+
+  <p>Es können bis zu vier EPD-Dateien gleichzeitig geöffnet werden.
+  Das Öffnen einer EPD-Datei mit doppelt vorhandenen oder fehlerhaften
+  Stellungen wird diese stillschweigend löschen. Mangelhaft gebildete
+  oder standardunübliche Operanden werden klaglos akzeptiert.</p>
 
   <p><i>Scid vs PC speichert nicht länger automatisch (aber aus dem
   Menü <green><b>Datei--<gt>Speichern</b></green>). Den aktuellen Speicherzustand
@@ -5515,13 +5517,13 @@ set helpText(D,EPD) {<h1>EPD-Dateien</h1>
   </p>
 
   <h3>Die Statusleiste im EPD-Fenster</h3>
-  <p>Die Statusleiste in jedem EPD-Fenster zeigt:
+  <p>Die Statusleiste in jedem EPD-Fenster zeigt
   <ul>
-  <li>- den Dateistatus</li>
+  <li>- den Dateinamen</li>
   <li>- ob die Datei im Nur-Lesen-Zustand ist oder geändert wurde</li>
   <li>- die Anzahl der Stellungen in der Datei </li>
   <li>- gültige Züge ab der aktuellen Stellung, die zu einer anderen
-  Stellung in dieser EPD-Datei führen.</li>
+  Stellung in dieser EPD-Datei führen</li>
   </ul>
 
   <h3>Nach EPD exportieren</h3>
@@ -5537,7 +5539,8 @@ set helpText(D,EPD) {<h1>EPD-Dateien</h1>
   of nodes searched)</li>
   <li> <b>acs</b> Suchdauer in Sekunden (analysis count: search time
   in seconds)</li>
-  <li> <b>bm</b> bester Zug (best move[s])</li>
+  <li> <b>bm</b> beste Züge (best moves): Züge, die aus einem bestimmten
+  Grund als am besten eingestuft werden</li>
   <li> <b>ce</b> (Centipawn evaluation) Bewertung in hundertstel
   Bauerneinheiten aus Sicht der
   <b>am Zug befindlichen Seite</b>. Beachten Sie, daß dies anders
@@ -5552,7 +5555,7 @@ set helpText(D,EPD) {<h1>EPD-Dateien</h1>
   <li> <b>pv</b> beste Partiefortsetzung (predicted variation)</li>
   </ul>
 
-  <p><footer>Aktualisiert: Scid vs. PC 4.20, Januar 2019</footer></p>
+  <p><footer>Aktualisiert: Scid vs. PC 4.21, Juli 2019</footer></p>
 }
 
 set helpTitle(D,Email) "Das E-Mail-Fenster"

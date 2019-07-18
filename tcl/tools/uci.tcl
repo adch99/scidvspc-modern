@@ -10,6 +10,7 @@ namespace eval uci {
   variable newOptions {}
 
   # set pipe ""
+  set goCommand "go infinite"
   set uciOptions {}
   set optList {}
   set oldOptions ""
