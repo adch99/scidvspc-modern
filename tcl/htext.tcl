@@ -266,10 +266,6 @@ proc ::htext::init {w} {
     $w tag configure nag -fore $::pgnColor(Nag)
     $w tag configure var -fore $::pgnColor(Var)
   }
-  $w tag configure ip1 -lmargin1 25 -lmargin2 25
-  $w tag configure ip2 -lmargin1 50 -lmargin2 50
-  $w tag configure ip3 -lmargin1 75 -lmargin2 75
-  $w tag configure ip4 -lmargin1 100 -lmargin2 100
 
   if {$graphFigurineAvailable} {
     $w tag configure f -font font_Figurine(normal)
@@ -433,6 +429,9 @@ proc ::htext::display {w helptext {section {}} {fixed 1}} {
         $w tag bind $commentTag <ButtonRelease-1> [list ::pgn::comment $commentTag]
         $w tag bind $commentTag <Any-Enter> [list u1 $w $commentTag]
         $w tag bind $commentTag <Any-Leave> [list u0 $w $commentTag]
+      } elseif {[string match ip* $tagName] && [string is integer [set margin [string range $tagName 2 end]]]} {
+        set margin [expr {25 * $margin}]
+        $w tag configure $tagName -lmargin1 $margin -lmargin2 $margin
       }
       
       if {$tagName == {h1}} {$w insert end \n}
