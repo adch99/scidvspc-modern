@@ -103,6 +103,7 @@ proc resetEngine {n} {
   set analysis(startpos$n) ""         ;# the startpos/fen for game. Uninit-ed
   set analysis(go$n) 0
   set analysis(exclude$n) ""
+  set analysis(logAuto$n) 0
 }
 
 resetEngines
@@ -2077,9 +2078,9 @@ proc destroyAnalysisWin {n W} {
   # catch {close $analysis(pipe$n)}
   close $analysis(pipe$n)
 
-  if {$analysis(log$n) != {}} {
-    catch {close $analysis(log$n)}
-    set analysis(log$n) {}
+  if {[info exists analysis(log$n)]} {
+    close $analysis(log$n)
+    unset analysis(log$n)
   }
   set analysis(pipe$n) {}
   set ::analysisWin$n 0
@@ -2135,17 +2136,31 @@ proc logEngine {n text} {
   # Print the log message to stdout if applicable:
   # if {$analysis(log_stdout)} { puts stdout "$n $text" }
 
-  if { [ info exists analysis(log$n)] && $analysis(log$n) != {}} {
+  if { [ info exists analysis(log$n)]} {
     puts $analysis(log$n) $text
-    catch { flush $analysis(log$n) }
+
+    # The problem with flushing in engineUpdateLog , is that after maxsize is reached
+    #  we close the pipe and it can no longer be flushed there.
+    # We have to catch flush to handle case when engine is closed.
+    after idle "catch \{ flush $analysis(log$n) \}"
+
+    if {$analysis(logAuto$n) && [winfo exists .enginelog$n.log]} {
+      # auto updating log widget is now done here, though there is definitely the chance of
+      # double inserting lines here if we process logEngine in the middle of a engineUpdateLog
+      # todo - handle this properly using semaphores
+      after idle "
+	.enginelog$n.log insert end \"$text\n\"
+	.enginelog$n.log see end
+      "
+    }
 
     # Close the log file if the limit is reached:
     incr analysis(logCount$n)
     if {$analysis(logCount$n) >= $analysis(logMax)} {
       puts $analysis(log$n) \
           "Note  : Log file size limit ($analysis(logMax) lines) reached."
-      catch {close $analysis(log$n)}
-      set analysis(log$n) {}
+      close $analysis(log$n)
+      unset analysis(log$n)
     }
   }
 }
@@ -4304,8 +4319,6 @@ proc engineShowLog {n} {
   } else {
     # We aren't using stdout. Windows does not support it.
     # set analysis(log_stdout) 0
-    set analysis(logAuto$n) 0
-
     toplevel $w
     wm minsize $w 300 180
     setWinLocation $w
@@ -4330,7 +4343,7 @@ proc engineShowLog {n} {
     grid rowconfigure    $w.frame 1 -weight 0
     grid columnconfigure $w.frame 1 -weight 0
     
-    checkbutton $w.buttons.auto -text Auto -variable analysis(logAuto$n) -command "engineAutoLog $n"
+    checkbutton $w.buttons.auto -text Auto -variable analysis(logAuto$n)
     dialogbutton $w.buttons.update -textvar tr(Update) -command "engineUpdateLog $n"
 
     entry $w.buttons.find -width 10 -textvar analysis(find) -highlightthickness 0
@@ -4342,9 +4355,10 @@ proc engineShowLog {n} {
     pack $w.buttons.ok $w.buttons.find -padx 15 -side right
 
     bind $w <Configure> "recordWinSize $w"
+    bind $w.log <space> "catch \{.analysisWin$n.b.startStop invoke\}"
   }
   wm title $w "[lindex [lindex $::engines(list) $n] 0] log"
-  engineAutoLog $n
+  engineUpdateLog $n
   bind $w <Escape> "destroy $w"
   bind $w <F1> { helpWindow Analysis }
   $w.buttons.update invoke
@@ -4366,21 +4380,6 @@ proc engineUpdateLog {n} {
     close $fd
   }
   $w.log see end
-}
-
-### Automatically refreshes the engine log window
-# (Note it rereads the whole file every update. Obviously would be better
-# to run a tail on it, and probably not hard to do under Linux)
-
-proc engineAutoLog {n} {
-  set w .enginelog$n
-
-  if {[winfo exists $w] && $::analysis(logAuto$n)} {
-    $w.buttons.update invoke
-    after 1000 "engineAutoLog $n"
-  } else {
-    after cancel "engineAutoLog $n"
-  }
 }
 
 ### Make a transient toplevel button bar
