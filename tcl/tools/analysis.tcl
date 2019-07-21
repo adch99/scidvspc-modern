@@ -104,6 +104,8 @@ proc resetEngine {n} {
   set analysis(go$n) 0
   set analysis(exclude$n) ""
   set analysis(logAuto$n) 0
+  set analysis(logWait$n) 0
+  set analysis(logUpdate$n) {}
 }
 
 resetEngines
@@ -2142,16 +2144,11 @@ proc logEngine {n text} {
     # The problem with flushing in engineUpdateLog , is that after maxsize is reached
     #  we close the pipe and it can no longer be flushed there.
     # We have to catch flush to handle case when engine is closed.
-    after idle "catch \{ flush $analysis(log$n) \}"
+    after idle "flushEngineLog $n"
 
-    if {$analysis(logAuto$n) && [winfo exists .enginelog$n.log]} {
-      # auto updating log widget is now done here, though there is definitely the chance of
-      # double inserting lines here if we process logEngine in the middle of a engineUpdateLog
-      # todo - handle this properly using semaphores
-      after idle "
-	.enginelog$n.log insert end \"$text\n\"
-	.enginelog$n.log see end
-      "
+    if {$analysis(logAuto$n) && !$analysis(logWait$n)} {
+      lappend analysis(logUpdate$n) $text
+      after idle "updateEngineLogText $n"
     }
 
     # Close the log file if the limit is reached:
@@ -2163,6 +2160,24 @@ proc logEngine {n text} {
       unset analysis(log$n)
     }
   }
+}
+
+proc flushEngineLog {n} {
+    after cancel "flushEngineLog $n"
+    catch {
+      flush $::analysis(log$n)
+    }
+}
+
+proc updateEngineLogText {n} {
+    after cancel "updateEngineLogText $n"
+    if {[winfo exists .enginelog$n.log]} {
+      foreach line $::analysis(logUpdate$n) {
+	.enginelog$n.log insert end "$line\n"
+      }
+      .enginelog$n.log see end
+    }
+    set ::analysis(logUpdate$n) {}
 }
 
 proc logEngineNote {n text} {
@@ -4343,7 +4358,7 @@ proc engineShowLog {n} {
     grid rowconfigure    $w.frame 1 -weight 0
     grid columnconfigure $w.frame 1 -weight 0
     
-    checkbutton $w.buttons.auto -text Auto -variable analysis(logAuto$n)
+    checkbutton $w.buttons.auto -text Auto -variable analysis(logAuto$n) -command "engineUpdateLog $n 1"
     dialogbutton $w.buttons.update -textvar tr(Update) -command "engineUpdateLog $n"
 
     entry $w.buttons.find -width 10 -textvar analysis(find) -highlightthickness 0
@@ -4368,8 +4383,10 @@ proc engineShowLog {n} {
 ### Open the log file for reading
 ### $analysis(log$n) may already be open... but we'll ignore this fil descriptor and creat our own i think
 
-proc engineUpdateLog {n} {
+proc engineUpdateLog {n {sync 0}} {
   set w .enginelog$n
+  
+  if {$sync} {set ::analysis(logWait$n) 1}
 
   $w.log delete 1.0 end
   if {! [catch {open [file join $::scidLogDir engine$n.log] r} fd]} {
@@ -4380,6 +4397,8 @@ proc engineUpdateLog {n} {
     close $fd
   }
   $w.log see end
+
+  if {$sync} {set ::analysis(logWait$n) 0}
 }
 
 ### Make a transient toplevel button bar
