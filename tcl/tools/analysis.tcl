@@ -2423,7 +2423,7 @@ proc makeAnalysisWin {{n 0} {options {}}} {
   set analysis(showEngineInfo$n) $analysis(showEngineInfo)
 
   checkbutton $w.b.showinfo -image tb_info -indicatoron false -width 32 -height 32 \
-    -variable analysis(showEngineInfo$n) -command "toggleEngineInfo $n" -relief $relief
+    -variable analysis(showEngineInfo$n) -command "toggleEngineInfo $n" -relief $relief -selectcolor {}
   ::utils::tooltip::Set $w.b.showinfo $tr(ShowInfo)
 
   # Xboard only. This button is unpacked later if UCI
