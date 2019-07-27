@@ -9,7 +9,7 @@
 //  Notice:     Copyright (c) 1999-2001  Shane Hudson.  All rights reserved.
 //
 //  Author:     Shane Hudson (sgh@users.sourceforge.net)
-//
+//              Steven  (2019) reverse sort feature (todo: Implement a proper per-criteria reverse sort)
 //////////////////////////////////////////////////////////////////////
 
 #include "common.h"
@@ -69,6 +69,7 @@ usage (void)
     fprintf (stderr, " -s[prefix]: list all sites starting with prefix \n");
     fprintf (stderr, " -r[prefix]: list all rounds starting with prefix \n");
     fprintf (stderr, " -S[sort-fields]: Sort the database \n");
+    fprintf (stderr, " -R[sort-fields]: Reverse sort the database \n");
     fprintf (stderr, "  Sort fields: date, year, event, site, round, white, black\n");
     fprintf (stderr, "      eco, result, length, rating, country\n");
     fprintf (stderr, "  Example: scidt -Syear,event,round,date myfile.si\n\n");
@@ -579,8 +580,9 @@ main (int argc, char *argv[])
     // Strip the suffix (e.g. ".si", ".sg") of filename if it has one:
     char * lastdot = strrchr (filename, '.');
     if (lastdot) {
-        if (!strCompare (lastdot, ".si")  ||  !strCompare (lastdot, ".sg")  ||
-            !strCompare (lastdot, ".sn")  ||  !strCompare (lastdot, ".s"))
+        if (!strCompare (lastdot, ".si")  ||  !strCompare (lastdot, ".sg") || !strCompare (lastdot, ".sn")
+        ||  !strCompare (lastdot, ".si4")  ||  !strCompare (lastdot, ".sg4")|| !strCompare (lastdot, ".sn4")
+        ||  !strCompare (lastdot, ".s"))
         {
             *lastdot = 0;
         }
@@ -720,7 +722,12 @@ main (int argc, char *argv[])
         compactGameFile ();
 
     ////////////////////////////////////
-    } else if (option[1] == 'S') {  // Sort the database
+    } else if (option[1] == 'S' || option[1] == 'R') {  // Sort the database
+        if (option[2] == 0) 
+          usage();
+        if (option[1] == 'R') { // Reverse sort
+          nb->SortOrder = 1;
+        }
         err = idx->OpenIndexFile(FMODE_Both);
         if (err != OK) { fileErr (filename, INDEX_SUFFIX, err); }
         err = nb->ReadNameFile();
