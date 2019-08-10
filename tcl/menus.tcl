@@ -766,7 +766,7 @@ set helpMessage($m,[incr menuindex]) ToolsImportFile
 $m add separator
 incr menuindex
 
-$m add command -label ToolsScreenshot -command {boardToFile {} {}} -accelerator control-F12
+$m add command -label ToolsScreenshot -command {boardToFile {} {}} -accelerator ctrl-sht-F12
 set helpMessage($m,[incr menuindex]) {Board Screenshot}
 if {$windowsOS} {
   # Screenshot is broken on windows

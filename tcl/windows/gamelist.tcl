@@ -179,25 +179,25 @@ proc ::windows::gamelist::showNum {index {bell 1}} {
   set result [sc_filter locate $index]
 
   # First, check that requested game is not filtered
-  if  { [sc_filter index $result] != $index \
-     || $result < 1 \
-     || $result > [sc_filter count]} {
+  if  { [sc_filter index $result] != $index || $result < 1  || $result > [sc_filter count]} {
     if {$bell==1} {
       flashEntryBox .glistWin.b.goto
     }
     .glistWin.tree selection set {}
   } else {
     # See if it's already on the screen
-    set found 0
+    set found {}
     foreach item [.glistWin.tree children {}] {
       if {[.glistWin.tree set $item Number] == $index} {
-	set found 1
+	set found $item
 	break
       }
     }
-    if {$found} {
+    if {$found != {}} {
       if {[sc_game number] != $index} {
 	.glistWin.tree selection set $item
+      } else {
+	.glistWin.tree see $found
       }
     } else {
       set glstart $result
@@ -214,15 +214,10 @@ proc ::windows::gamelist::showNum {index {bell 1}} {
       # Highlights CURRENT game if on screen, otherwise game "index"
       # Even when we'd prefer just to highlight "index" :<
 
-      set current_item [::windows::gamelist::Refresh first]
-      if {$current_item == {}} {
-	# Nasty, nasty recursive call... "found" above will now trigger and highlight this game
-	::windows::gamelist::showNum $index $bell
-      } else {
-        if {[sc_game number] != $index} {
-	  .glistWin.tree selection set $current_item
-        }
-      }
+      ::windows::gamelist::Refresh
+      # Nasty, nasty recursive call... "found" above will now trigger and highlight this game
+      # Don't really know how this works, it was kindof stupid before today S.A - 11/8/2019
+      ::windows::gamelist::showNum $index $bell
     }
   }
 }
@@ -1212,11 +1207,18 @@ proc ::windows::gamelist::Refresh {{see {}}} {
 
   ## first and last attempts to work around it's hard to know how many lines fit in ttk::treeview
   ## but isnt working properly S.A
-  # if {$see == {first}} 
-
-  $w.tree see [lindex [$w.tree children {}] 0]
-
-  # if {$see == {last}} { $w.tree see [lindex [.glistWin.tree children {}] end] } 
+  if {$see == {first}} {
+      $w.tree see [lindex [.glistWin.tree children {}] 0]
+  } else {
+    if {$see == {last}} {
+      $w.tree see [lindex [.glistWin.tree children {}] end]
+    } else {
+      # "none" is passed from ::windows::stats::Refresh 
+      if {$see != {none}} {
+	$w.tree see [lindex [$w.tree children {}] 0]
+      }
+    }
+  }
 
   setGamelistTitle
 
