@@ -1206,7 +1206,7 @@ namespace eval fics {
 	    if {[string match "1/2*" $res]} {set res Draw}
 	    ::fics::killDialogs
             # pause a second to allow the move animation to complete
-            after $::animateDelay "
+            after [expr {2 * $::animateDelay}] "
 	      tk_messageBox -title \"Game result\" -icon info -type ok -message \"$res\"
             "
 	  }

@@ -1982,8 +1982,10 @@ set helpText(D,Intro) {<h1>Einführung</h1>
   Sie im PGN-Format heruntergeladen haben, riesige Datenbanken
   erzeugen und Eröffnungs- und Spielerberichte erstellen.
   </p>
-<p><i> Siehe <run ::tip::show 0><green>Tip des Tages</green></run> für
-einige nützliche Hinweise.
+  <p><i> Siehe <run ::tip::show 0><green>Tip des Tages</green></run>
+  für einige nützliche Hinweise oder
+  das <a Console>Willkommensfenster</a>für Informationen und
+  Fehlersuche.
 </i></p>
 </p>
 
@@ -2336,6 +2338,7 @@ append helpText(D,Index) {
   <li><a NAGs>Kommentarsymbole (NAGs)</a></li>
   <li><a Comment>Kommentieren von Partien</a></li>
   <li><a Analysis List>Konfiguration einer Schach-Engine</a></li>
+  <li><a Console>Konsole</a></li>
   <li><a Author>Kontaktinformation</a></li>
   <li><a Crosstable>Kreuztabelle</a></li>
   </ul>
@@ -2470,6 +2473,7 @@ append helpText(D,Index) {
   <li><a MainWindow Toolbar>Werkzeugleiste</a></li>
   <li><a Graphs Rating>Wertungsgrafik</a></li>
   <li><a Moves Undo>Wiederholen</a></li>
+  <li><a Console>Willkommensfenster</a></li>
   </ul>
 
   <h3><name X>X</name></h3>
@@ -5037,6 +5041,8 @@ set helpText(D,Analysis) {<h1>Das Analysefenster</h1>
   "Demo") läßt das Schachprogramm außerhalb der Partie
   weiterspielen (die Zeitverzögerung ist die gleiche wie beim
   automatischen Abspielen).</li>
+  <li> <button tb_help 32> <b>Hilfeschaltfläche</b> (Rechtsklick
+  zeigt das Engine-Protokoll).
   <li> <button tb_training 32> <b>Training</b> (siehe <a Analysis
   Training>unten</a>).</li>
 <br>
@@ -5246,17 +5252,22 @@ set helpText(D,Analysis) {<h1>Das Analysefenster</h1>
   ist die Unterstützung für Chess960 nicht aktiviert, weil die
   Implementierung sehr problematisch ist.</p>
 
-  <h2><name Debugging>Fehlersuche bei Schachprogrammabstürzen</name></h2>
+  <h2><name Debugging>Fortgeschrittenes</name></h2>
   <p>Wenn ein Schachprogramm nicht startet oder abstürzt, könnte man
   seine Protokolldatei untersuchen. Es befindet sich im
-  Protokollverzeichnis von Scid vs. PC und kann mittels der
+  Protokollverzeichnis von Scid vs. PC und kann mittels Rechtsklick
+  der Schaltfläche <button tb_help> oder über die
   Schaltfläche <button tb_annotate> im
   Fenster <run ::enginelist::choose><green>Analyse-Engine...
-  </green></run> angesehen werden. Die <b>Protokollgröße</b> ist
-  die maximale Anzahl an Zeilen im Protokoll. Wenn man sie auf
-  Null setzt, wird die Protokollierung insgesamt abgeschaltet.</p>
+  </green></run> angesehen werden.  Die <b>Protokollgröße</b> ist die
+  maximale Anzahl an Zeilen im Protokoll. Wenn man sie auf Null setzt,
+  wird die Protokollierung insgesamt abgeschaltet.</p>
 
-  <p><footer>Aktualisiert: Scid vs. PC 4.20, September 2018</footer></p>
+  <p>Der Standard-UCI-Befehl für <button tb_play> ist "rechne
+  endlos". Dies kann aber in der Konsole von ScidvsPC über eine
+  Änderung von <b>::uci::goCommand</b> geändert werden.</p>
+
+  <p><footer>Aktualisiert: Scid vs. PC 4.21, Juli 2019</footer></p>
 }
 
 set helpTitle(D,Tourney) "Computerturniere"
@@ -5783,10 +5794,10 @@ set helpText(D,PInfo) {<h1>Spielerinformationen</h1>
   <url https://sourceforge.net/projects/scid/files/Player%20Data/>https://sourceforge.net/projects/scid/files/Player
   Data/</url>) in das Benutzerverzeichnis von Scid vs. PC. In Linux
   und Macs ist dies "$HOME/.scidvspc", in Windows "Scid vs
-  PC/bin". Das <green><run raiseSplashWindow>Hilfe--<gt>Startfenster</run></green>
-  zeigt Ihnen diesen Ort an. Es zeigt Ihnen auch, ob die Fotodateien
-  korrekt geladen wurden.
-  </p>
+  PC/bin". Das <a Console>Willkommensfenster</a> zeigt Ihnen diesen
+  Ort an. Es zeigt Ihnen auch, ob die Fotodateien korrekt geladen
+  wurden.</p>
+
   <p>Selbsterstellte gif-Fotos können in einem "photos"-Verzeichnis
   unterhalb des Benutzerverzeichnisses platziert werden. Sie sollten
   vorzugsweise 100x100 Pixel groß sein und mit dem Dateinamen versehen
@@ -9850,7 +9861,7 @@ set helpText(D,ShortCuts) {<h1>Tastaturkurzbefehle</h1>
 <li><b>Strg-Umschalt-F12</b> - Bildschirmkopie</li>
 
 </ul>
-<p><footer>Aktualisiert:</b> - Scid vs. PC 4.9 April 2013</footer></p>
+<p><footer>Aktualisiert: Scid vs. PC 4.9 April 2013</footer></p>
 }
 
 set helpTitle(D,Board) "Brett- und Figureneinstellungen"
@@ -9894,12 +9905,29 @@ set helpText(D,Board) {<h1>Brett- und Figureneinstellungen</h1>
   Anweisungen für die Erstellung von Scid-Figuren in
   scid_chess_pieces.tgz finden.</p>
 
-  <p><i>Sehen Sie
-  im <green><run raiseSplashWindow>Startfenster</run></green> nach
-  bezüglich des Ladens von Texturen und Figuren.</i></p>
+  <p><i>Sehen Sie bezüglich des Ladens von Texturen und
+  Figuren im <a Console>Willkommensfenster</a> nach.</i></p>
 
-</p>
-<p><footer>Aktualisiert:</b> - Scid vs. PC 4.17 Oktober 2016</footer></p>
+  <p><footer>Aktualisiert: Scid vs. PC 4.17 Oktober 2016</footer></p>
+}
+
+set helpTitle(Console) "Willkommensfenster/Konsole"
+set helpText(Console) {<h1>Willkommensfenster und Konsole</h1>
+<p>Das <green><run raiseSplashWindow>Willkommens-/Startfenster</run></green>
+  zeigt verschiedene technische Informationen über das System und den
+  Programmstart. In der unteren rechten Ecke ist ein Eingabefeld für
+  eine Textsuche. Geben Sie einfach Ihren Text ein und drücken Sie die
+  Return-Taste.</p>
+
+<p>Direkt darüber ist ein weiteres größeres Eingabefeld. Dies ist die
+  Konsole von Scid vs PC, die das Eingeben von Tcl/Tk-Befehlen für die
+  Fehlersuche sowie weitere Nutzungen ermöglicht. Für weitere
+  Informationen über Tcl probieren Sie die Anleitungen in
+  <url https://www.tutorialspoint.com/tcl-tk/>Tutorials Point's
+  Tcl</url> und
+  <url https://www.tutorialspoint.com/tcl-tk/tk_overview.htm>Tk</url>.</p>
+
+<p><footer>Aktualisiert: Scid vs. PC 4.21 Juli 2019</footer></p>
 }
 
 global tips
