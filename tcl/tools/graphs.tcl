@@ -704,6 +704,8 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
 
   set ::tools::graphs::score::title $title
 
+  # Hmm - should we make _data(score,data,outline) configurable (done here)
+
   ::utils::graph::data score data -color $linecolor -points 0 -lines 0 -bars 1 \
      -barwidth .7 -outline grey -coords $values
 
