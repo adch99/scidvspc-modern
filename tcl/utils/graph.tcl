@@ -518,9 +518,10 @@ proc ::utils::graph::updateMove {} {
     return
   }
 
-  # Hmmm... a little slow doing this maybe ?
+  # Restore colours of 'current' score bar.  Is it a little slow doing this ?
+  # NB - there is no easy way to highlight (eg book) moves without a datum in $_data(score,data,coords)
   if {[info exists ::utils::graph::prevMove]} {
-    $canvas itemconfigure move$::utils::graph::prevMove -fill $::utils::graph::prevCol
+    $canvas itemconfigure move$::utils::graph::prevMove -fill $::utils::graph::prevCol -outline $_data(score,data,outline)
   }
   if {[sc_var level]} {
     return
@@ -529,7 +530,7 @@ proc ::utils::graph::updateMove {} {
   set ::utils::graph::prevMove [lindex $_data(score,coordList) $result]
   set ::utils::graph::prevCol  [$canvas itemcget move$::utils::graph::prevMove -fill]
   if {$result > -1} {
-    $canvas itemconfigure move$::utils::graph::prevMove -fill $::scorebarcolor
+    $canvas itemconfigure move$::utils::graph::prevMove -fill $::scorebarcolor -outline $::scorebarcolor
   }
 }
 
