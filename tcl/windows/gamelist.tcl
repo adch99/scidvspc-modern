@@ -96,7 +96,7 @@ if {! [info exists glistColAnchor]} {
   set glistColAnchor $temp_anchors
 }
 
-# glistNames is set from glistFields
+# glistHeaders is set from glistFields
 # Number White Black Result Length Event Round Date WElo BElo Site ECO Deleted Opening Flags Variations Comments Annos Start
 
 # These fields are used by "sc_base sort $col" in proc SortBy
@@ -1106,7 +1106,7 @@ proc ::windows::gamelist::Reload {} {
 
 proc ::windows::gamelist::Refresh {{see {}}} {
 
-  global glistCodes glstart glistSize glistSortColumn glistSortedBy glistStart glPieceMapping
+  global glistCodes glstart glistSize glistSortColumn glistSortedBy glistStart glPieceMapping glistColOrder
 
   set w .glistWin
   if {![winfo exists $w]} {return}
@@ -1164,7 +1164,12 @@ proc ::windows::gamelist::Refresh {{see {}}} {
 
   set c [expr $glistEnd - $glstart + 1]
 
-  set chunk [sc_game list $glstart $c $glistCodes]
+  # Only send 'Moves' if showing Opening/Moves column (number 16)
+  if {[winfo exists .treeWin$b] && $::tree(adjustfilter$b) && ([lsearch $glistColOrder 16] > -1)} {
+    set chunk [sc_game list $glstart $c $glistCodes Moves]
+  } else {
+    set chunk [sc_game list $glstart $c $glistCodes]
+  }
   # remove trailing "\n"
   set chunk [string range $chunk 0 end-1]
 

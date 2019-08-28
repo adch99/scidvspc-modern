@@ -2019,7 +2019,7 @@ OpTable::AddMoveOrder (Game * g)
     // g->MoveToPly(0);
 
     DString * dstr = new DString;
-    g->GetPartialMoveList (dstr, g->GetCurrentPly());
+    g->GetPartialMoveList (dstr, 0, g->GetCurrentPly());
 
     // Search for this move order in the current list:
 

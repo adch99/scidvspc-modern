@@ -869,7 +869,7 @@ translate L GlistResult {Tulos}
 translate L GlistLength {Pituus}
 translate L GlistCountry {Maa}
 translate L GlistECO {ECO}
-translate L GlistOpening {Avaus}
+translate L GlistOpening {Siirrot}
 translate L GlistEndMaterial {Loppumateraali}
 translate L GlistDeleted {Poistetut}
 translate L GlistFlags {Liput}

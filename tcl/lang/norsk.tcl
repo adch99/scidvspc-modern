@@ -891,7 +891,7 @@ translate O GlistResult {Resultat}
 translate O GlistLength {Lengde}
 translate O GlistCountry {Land}
 translate O GlistECO {ECO}
-translate O GlistOpening {Åpning}
+translate O GlistOpening {Trekk}
 translate O GlistEndMaterial {Slutt-kvalitet}
 translate O GlistDeleted {Slettet}
 translate O GlistFlags {Flagg}

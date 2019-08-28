@@ -956,7 +956,7 @@ translate W GlistResult {Resultat}
 translate W GlistLength {Längd}
 translate W GlistCountry {Land}
 translate W GlistECO {ECO}
-translate W GlistOpening {Öppning}
+translate W GlistOpening {Drag}
 translate W GlistEndMaterial {Slutmaterial}
 translate W GlistDeleted {Raderad}
 translate W GlistFlags {Flaggor}

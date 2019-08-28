@@ -882,7 +882,7 @@ translate F GlistResult {Résultat}
 translate F GlistLength {Longueur}
 translate F GlistCountry {Pays}
 translate F GlistECO {ECO}
-translate F GlistOpening {Ouverture}
+translate F GlistOpening {Coups}
 translate F GlistEndMaterial {Matériel final}
 translate F GlistDeleted {Effacé}
 translate F GlistFlags {Drapeaux}

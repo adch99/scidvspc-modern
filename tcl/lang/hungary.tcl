@@ -1030,7 +1030,7 @@ translate H GlistResult {Eredmény}
 translate H GlistLength {Hossz}
 translate H GlistCountry {Ország}
 translate H GlistECO {ECO}
-translate H GlistOpening {Megnyitás}
+translate H GlistOpening {Lépések}
 translate H GlistEndMaterial {Végsõ anyagi helyzet}
 translate H GlistDeleted {Törölt}
 translate H GlistFlags {Megjelölések}

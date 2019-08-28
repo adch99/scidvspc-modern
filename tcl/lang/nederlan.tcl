@@ -961,7 +961,7 @@ translate N GlistResult {Uitslag}
 translate N GlistLength {Lengte}
 translate N GlistCountry {Land}
 translate N GlistECO {ECO}
-translate N GlistOpening {Opening}
+translate N GlistOpening {Zetten}
 translate N GlistEndMaterial {Eind-Materiaal}
 translate N GlistDeleted {Verwijderd}
 translate N GlistFlags {Markeringen}

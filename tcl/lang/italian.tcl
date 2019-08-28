@@ -1028,7 +1028,7 @@ translate I GlistResult {Risultato}
 translate I GlistLength {Lunghezza}
 translate I GlistCountry {Paese}
 translate I GlistECO {ECO}
-translate I GlistOpening {Apertura}
+translate I GlistOpening {Mosse}
 translate I GlistEndMaterial {Materiale a fine partita}
 translate I GlistDeleted {Cancellato}
 translate I GlistFlags {Identificatore}

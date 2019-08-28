@@ -881,7 +881,7 @@ translate E GlistResult {Result}
 translate E GlistLength {Length}
 translate E GlistCountry {Country}
 translate E GlistECO {ECO}
-translate E GlistOpening {Opening}
+translate E GlistOpening {Moves}
 translate E GlistEndMaterial {End Material}
 translate E GlistDeleted {Deleted}
 translate E GlistFlags {Flags}

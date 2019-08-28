@@ -6775,7 +6775,7 @@ sc_game_firstMoves (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv
     // Check plyCount is a reasonable value, or set it to current plycount.
     if (plyCount < 0  ||  plyCount > 80) { plyCount = g->GetCurrentPly(); }
     DString * dstr = new DString;
-    g->GetPartialMoveList (dstr, plyCount);
+    g->GetPartialMoveList (dstr, 0, plyCount);
     Tcl_AppendResult (ti, dstr->Data(), NULL);
     delete dstr;
     return TCL_OK;
@@ -7744,7 +7744,7 @@ sc_game_list (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
     bool showProgress = startProgressBar();
     if (argc != 5  &&  argc != 6) {
-        return errorResult (ti, "Usage: sc_game list <start> <count> <format> [<file>]");
+        return errorResult (ti, "Usage: sc_game list <start> <count> <format> [<file>|'Moves']");
     }
     if (! db->inUse) { return TCL_OK; }
 
@@ -7756,11 +7756,18 @@ sc_game_list (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     if (fcount > count) { fcount = count; }
 
     FILE * fp = NULL;
+    bool nextMoves = 0;
+
     if (argc == 6) {
-        fp = fopen (argv[5], "w");
-        if (fp == NULL) {
-            Tcl_AppendResult (ti, "Error opening file: ", argv[5], NULL);
-            return TCL_ERROR;
+	// Should we calculate Moves
+        if (!strcmp( argv[5], "Moves" )) {
+	    nextMoves = 1;
+        } else {
+	  fp = fopen (argv[5], "w");
+	  if (fp == NULL) {
+	      Tcl_AppendResult (ti, "Error opening file: ", argv[5], NULL);
+	      return TCL_ERROR;
+	  }
         }
     }
 
@@ -7771,10 +7778,12 @@ sc_game_list (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     int update, updateStart;
     update = updateStart = 5000;
     uint linenum = 0;
-    bool returnLineNum = false;
-    if (strEqual (formatStr, "-current")) {
-        returnLineNum = true;
-    }
+
+    DString * moveStr = new DString;
+    Game * g = scratchGame;
+
+    // Seems unused ? S.A.
+    bool returnLineNum = strEqual (formatStr, "-current");
 
     while (index < db->numGames  &&  count > 0) {
         if (db->filter->Get(index)) {
@@ -7793,7 +7802,35 @@ sc_game_list (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                 return setUintResult (ti, linenum);
             }
             ie = db->idx->FetchEntry (index);
-            ie->PrintGameInfo (temp, start, index+1, db->nb, formatStr);
+
+            if (nextMoves) {
+	      // Hack the gamelist 'Opening moves' to 'Next moves', and do a quick load of each game
+	      // based on "sc_game firstMoves <gameNum> <numMoves>"
+
+	      ushort plyCount = db->game->GetCurrentPly();
+	      if (plyCount > 0) {
+		db->bbuf->Empty();
+		if (ie->GetLength() == 0) {
+  // handle
+		} else {
+		    if (db->gfile->ReadGame (db->bbuf, ie->GetOffset(), ie->GetLength()) != OK) {
+			printf ("mybad handling game %u\n", index);
+		    } else {
+		      g->Clear();
+		      if (g->Decode (db->bbuf, GAME_DECODE_NONE) != OK) {
+			printf ("mybad decoding game %u\n", index);
+		    } else {
+			moveStr->Clear();
+			g->GetPartialMoveList (moveStr, plyCount, 6);
+		    }
+		  }
+		}
+	      }
+	      ie->PrintGameInfo (temp, start, index+1, db->nb, formatStr, moveStr->Data());
+	    } else {
+	      ie->PrintGameInfo (temp, start, index+1, db->nb, formatStr, "");
+            }
+
             if (fp == NULL) {
                 // separate lines by newline &&& Issues ?
                 Tcl_AppendResult (ti, temp, "\n", NULL);
@@ -7806,6 +7843,7 @@ sc_game_list (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         }
         index++;
     }
+    delete moveStr;
     if (showProgress) { updateProgressBar (ti, 1, 1); }
     if (fp != NULL) { fclose (fp); }
     if (returnLineNum) { return setUintResult (ti, 0); }
@@ -14236,7 +14274,7 @@ sc_tree_best (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
         // This seems solid, but we should be wary, as in sc_game_list PrintGameInfo
         // is only used on current base, but here we are using it for any open base
-	ie->PrintGameInfo (temp, 0, bestIndex[i]+1, base->nb, formatStr);
+	ie->PrintGameInfo (temp, 0, bestIndex[i]+1, base->nb, formatStr, "");
 	Tcl_AppendResult (ti, tempStr, temp, "\n", NULL);
     }
 
