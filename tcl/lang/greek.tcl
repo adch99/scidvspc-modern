@@ -972,7 +972,7 @@ translate G GlistResult {Αποτέλεσμα}
 translate G GlistLength {Μήκος}
 translate G GlistCountry {Χώρα}
 translate G GlistECO {ECO}
-translate G GlistOpening {Άνοιγμα}
+translate G GlistOpening {Κινήσεις}
 translate G GlistEndMaterial {Τελικό_Υλικό}
 translate G GlistDeleted {Διαγραμμένη}
 translate G GlistFlags {Σημαίες}

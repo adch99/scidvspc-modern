@@ -942,7 +942,7 @@ translate S GlistResult {Resultado}
 translate S GlistLength {Longitud}
 translate S GlistCountry {País}
 translate S GlistECO {ECO}
-translate S GlistOpening {Apertura}
+translate S GlistOpening {Movimientos}
 translate S GlistEndMaterial {Material final}
 translate S GlistDeleted {Borrado}
 translate S GlistFlags {Señal}

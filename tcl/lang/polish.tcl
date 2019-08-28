@@ -939,7 +939,7 @@ translate P GlistResult {Wynik}
 translate P GlistLength {Długość}
 translate P GlistCountry {Kraj}
 translate P GlistECO {ECO}
-translate P GlistOpening {Debiut}
+translate P GlistOpening {Posunięcia}
 translate P GlistEndMaterial {Materiał}
 translate P GlistDeleted {Usunięta}
 translate P GlistFlags {Oznaczenie}

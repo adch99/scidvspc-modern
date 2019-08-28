@@ -1063,7 +1063,7 @@ translate B GlistResult {Resultado}
 translate B GlistLength {Tamanho}
 translate B GlistCountry {Pais}
 translate B GlistECO {ECO}
-translate B GlistOpening {Abertura}
+translate B GlistOpening {Movimentos}
 translate B GlistEndMaterial {Material-Final}
 translate B GlistDeleted {Apagado}
 translate B GlistFlags {Sinalizador}

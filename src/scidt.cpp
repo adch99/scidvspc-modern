@@ -113,7 +113,7 @@ PrintGameList (Index * i, NameBase * nb, gameNumberT first,
     for (gn = first; gn <= last; gn++) {
         if (gn <= i->GetNumGames()) {
             i->ReadEntries (&iE, gn-1, 1);
-            iE.PrintGameInfo (temp, gn, gn, nb, fields);
+            iE.PrintGameInfo (temp, gn, gn, nb, fields, "");
             fputs (temp, outf);
             putc ('\n', outf);
         }

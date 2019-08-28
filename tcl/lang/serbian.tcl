@@ -1101,7 +1101,7 @@ translate Y GlistResult {Rezultat}
 translate Y GlistLength {Du¾ina}
 translate Y GlistCountry {Zemlja}
 translate Y GlistECO {E©O}
-translate Y GlistOpening {Otvaranje}
+translate Y GlistOpening {Moves}
 translate Y GlistEndMaterial {End-Material} ;# ***
 translate Y GlistDeleted {Izbrisano}
 translate Y GlistFlags {Oznaka}

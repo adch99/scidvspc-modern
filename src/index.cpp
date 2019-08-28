@@ -419,10 +419,12 @@ IndexEntry::GetFlagStr (char * str, const char * flags)
 //          W:  White Elo. Prints in width of 4, ignoring specified width.
 //          y:  Year. Prints in width of 4, ignoring specified width.
 //
+//          O: Opening
+//      Opening is replaced by "const char * moveStr" if supplied 
 void
 IndexEntry::PrintGameInfo (char * outStr,
                            gameNumberT gnFiltered, gameNumberT gnReal,
-                           NameBase * nb, const char * format)
+                           NameBase * nb, const char * format, const char * moveStr)
 {
     ASSERT (outStr != NULL  &&  nb != NULL  &&  format != NULL);
 
@@ -485,8 +487,10 @@ IndexEntry::PrintGameInfo (char * outStr,
                 break;
 
             case 'O':   // Opening moves
-                out += strPad (out, StoredLine::GetText(GetStoredLineCode()),
-                               width, ' ');
+                if (*moveStr)
+		    out += strPad (out, moveStr, width, ' ');
+                else 
+		    out += strPad (out, StoredLine::GetText(GetStoredLineCode()), width, ' ');
                 break;
 
             case 'F':   // Final position material

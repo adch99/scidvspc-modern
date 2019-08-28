@@ -906,7 +906,7 @@ translate D GlistResult {Ergebnis}
 translate D GlistLength {Länge}
 translate D GlistCountry {Land}
 translate D GlistECO {ECO}
-translate D GlistOpening {Eröffnung}
+translate D GlistOpening {Züge}
 translate D GlistEndMaterial {Endmaterial}
 translate D GlistDeleted {Gelöscht}
 translate D GlistFlags {Markierungen}

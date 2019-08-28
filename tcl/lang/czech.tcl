@@ -1022,7 +1022,7 @@ translate C GlistResult {Vısledek}
 translate C GlistLength {Délka}
 translate C GlistCountry {Zemì}
 translate C GlistECO {ECO}
-translate C GlistOpening {Zahájení}
+translate C GlistOpening {Tahy}
 translate C GlistEndMaterial {Materiál na konci}
 translate C GlistDeleted {Vymazán(a)}
 translate C GlistFlags {Pøíznak}

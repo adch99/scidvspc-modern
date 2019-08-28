@@ -1942,14 +1942,14 @@ Game::VarExactMatch (Position * searchPos, gameExactMatchT searchType)
 //      Write the first few moves of a game.
 //
 errorT
-Game::GetPartialMoveList (DString * outStr, uint plyCount)
+Game::GetPartialMoveList (DString * outStr, ushort startPly, uint plyCount)
 {
     // First, copy the relevant data so we can leave the game state
     // unaltered:
 
     SaveState ();
 
-    MoveToPly(0);
+    MoveToPly(startPly);
     char temp [80];
     for (uint i=0; i < plyCount; i++) {
         if (CurrentMove->marker == END_MARKER) {

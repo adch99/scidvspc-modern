@@ -926,7 +926,7 @@ translate R GlistResult {Результат}
 translate R GlistLength {Длина}
 translate R GlistCountry {Страна}
 translate R GlistECO {ECO}
-translate R GlistOpening {Дебют}
+translate R GlistOpening {Ходы}
 translate R GlistEndMaterial {Конечный материал}
 translate R GlistDeleted {Удалённые}
 translate R GlistFlags {Флаги}

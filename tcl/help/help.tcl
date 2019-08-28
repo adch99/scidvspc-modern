@@ -1605,6 +1605,7 @@ is done from the Maintenance window.</i></p>
 <h3>Notes</h3>
 <ul>
 <li>The <b>Country</b> field is actually the last three letters of the Site (if the third last is capitalized, and preceded by a space). The <a Maintenance Spellcheck>Spellchecking</a> Site name tool may be helpful to add Country names. </li>
+<li>The <b>Moves</b> field shows the Opening Moves or, if tree is adjusting the filter, each game's Next Moves.</li>
 <li>A maximum of 50 comments are recorded/shown.</li>
 <li>ELO shown in brackets are guess-estimates.</li>
 </ul>

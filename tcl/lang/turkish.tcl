@@ -867,7 +867,7 @@ translate T GlistResult {sonuç}
 translate T GlistLength {uzunluk}
 translate T GlistCountry {ülke}
 translate T GlistECO {ECO}
-translate T GlistOpening {Açılış}
+translate T GlistOpening {hamle}
 translate T GlistEndMaterial {son aletler}
 translate T GlistDeleted {silinen}
 translate T GlistFlags {Bayraklar}
