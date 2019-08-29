@@ -487,10 +487,13 @@ IndexEntry::PrintGameInfo (char * outStr,
                 break;
 
             case 'O':   // Opening moves
-                if (*moveStr)
-		    out += strPad (out, moveStr, width, ' ');
-                else 
-		    out += strPad (out, StoredLine::GetText(GetStoredLineCode()), width, ' ');
+                if (*moveStr) {
+                    strCopy (temp, moveStr);
+                } else { 
+                    strCopy (temp, StoredLine::GetText(GetStoredLineCode()));
+                }
+                transPieces(temp);
+                out += strPad (out, temp, width, ' ');
                 break;
 
             case 'F':   // Final position material
