@@ -212,6 +212,8 @@ proc setLanguage {{lang ""}} {
       } else {
 	sc_info language $info
       }
+    } else {
+      sc_info language en
     }
   }
   if {[catch {setLanguage_$lang} err]} {
