@@ -1953,6 +1953,9 @@ Game::GetPartialMoveList (DString * outStr, ushort startPly, uint plyCount)
     char temp [80];
     for (uint i=0; i < plyCount; i++) {
         if (CurrentMove->marker == END_MARKER) {
+            // Hack - Return a single space if end-of-game (and no-moves already), to stop start-moves from being displayed
+            if (!*(outStr->Data()))
+               outStr->Append (" ");
             break;
         }
         if (i != 0) { outStr->Append (" "); }

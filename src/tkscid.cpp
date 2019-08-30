@@ -7781,6 +7781,8 @@ sc_game_list (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     DString * moveStr = new DString;
     Game * g = scratchGame;
+    uint gamePly = db->game->GetCurrentPly();
+    bool gameNonStd = db->game->HasNonStandardStart();
 
     // Seems unused ? S.A.
     bool returnLineNum = strEqual (formatStr, "-current");
@@ -7807,23 +7809,28 @@ sc_game_list (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 	      // Hack the gamelist 'Opening moves' to 'Next moves', and do a quick load of each game
 	      // based on "sc_game firstMoves <gameNum> <numMoves>"
 
-	      ushort plyCount = db->game->GetCurrentPly();
-	      if (plyCount > 0) {
+	      if (gamePly > 0 || gameNonStd) {
 		db->bbuf->Empty();
 		if (ie->GetLength() == 0) {
-  // handle
+                    // todo
 		} else {
 		    if (db->gfile->ReadGame (db->bbuf, ie->GetOffset(), ie->GetLength()) != OK) {
 			printf ("mybad handling game %u\n", index);
 		    } else {
-		      g->Clear();
-		      if (g->Decode (db->bbuf, GAME_DECODE_NONE) != OK) {
-			printf ("mybad decoding game %u\n", index);
-		    } else {
-			moveStr->Clear();
-			g->GetPartialMoveList (moveStr, plyCount, 6);
+			g->Clear();
+			if (g->Decode (db->bbuf, GAME_DECODE_NONE) != OK) {
+			  printf ("mybad decoding game %u\n", index);
+			} else {
+			  moveStr->Clear();
+                          // Use treeFilter instead of GetCurrentPly to better handle games with NonStandardStart
+                          //   don't always use treeFilter because of wrong value when position repeats
+                          // Show 3 moves (6 ply)
+                          if (gameNonStd)
+			      g->GetPartialMoveList (moveStr, db->filter->Get(index), 6);
+                          else 
+			      g->GetPartialMoveList (moveStr, gamePly, 6);
+			}
 		    }
-		  }
 		}
 	      }
 	      ie->PrintGameInfo (temp, start, index+1, db->nb, formatStr, moveStr->Data());
@@ -14266,18 +14273,44 @@ sc_tree_best (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     char temp[2048];
     char tempStr[128];
 
+    DString * moveStr = new DString;
+    Game * g = scratchGame;
+    // We are using ply from current game (which may not be in the same db)
+    uint ply = db->game->GetCurrentPly();
+
     for (uint i=0; i < count; i++) {
-        IndexEntry * ie = base->idx->FetchEntry (bestIndex[i]);
+        ie = base->idx->FetchEntry (bestIndex[i]);
 
 	// We need the gamenumber for the tree(bestList) and gbrowser
 	sprintf (tempStr, "%u ", bestIndex[i] + 1);
 
+//*************
+                base->bbuf->Empty();
+                if (ie->GetLength() == 0) {
+                    // todo
+                } else {
+                    if (base->gfile->ReadGame (base->bbuf, ie->GetOffset(), ie->GetLength()) != OK) {
+                        printf ("mybadbest handling game %u\n", bestIndex[i]);
+                    } else {
+                        g->Clear();
+                        if (g->Decode (base->bbuf, GAME_DECODE_NONE) != OK) {
+                          printf ("mybadbest decoding game %u\n", bestIndex[i]);
+                        } else {
+                          moveStr->Clear();
+                          // Show 3 moves (6 ply)
+                          g->GetPartialMoveList (moveStr, ply, 6);
+                        }
+                    }
+                }
+
+//*************
         // This seems solid, but we should be wary, as in sc_game_list PrintGameInfo
         // is only used on current base, but here we are using it for any open base
-	ie->PrintGameInfo (temp, 0, bestIndex[i]+1, base->nb, formatStr, "");
+	ie->PrintGameInfo (temp, 0, bestIndex[i]+1, base->nb, formatStr, moveStr->Data());
 	Tcl_AppendResult (ti, tempStr, temp, "\n", NULL);
     }
 
+    delete moveStr;
     delete[] bestIndex;
     delete[] bestElo;
 
