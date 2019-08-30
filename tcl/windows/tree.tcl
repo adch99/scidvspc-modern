@@ -1149,6 +1149,7 @@ set blistFields {
   s Site        w 10
   c Country     e  3
   E EventDate   w  7
+  O Opening     w 6
 }
 
 set blistHeaders {}
@@ -1173,10 +1174,10 @@ foreach {code col anchor width} $blistFields {
 if {! [info exists blistColOrder]} {
   set blistColOrder $temp_order
 }
-if {! [info exists blistColWidth]} {
+if {! [info exists blistColWidth] || [llength $blistColWidth] != $i } {
   set blistColWidth $temp_widths
 }
-if {! [info exists blistColAnchor]} {
+if {! [info exists blistColAnchor] || [llength blistColAnchor] != $i} {
   set blistColAnchor $temp_anchors
 }
 
