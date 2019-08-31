@@ -7806,36 +7806,36 @@ sc_game_list (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             ie = db->idx->FetchEntry (index);
 
             if (nextMoves) {
-	      // Hack the gamelist 'Opening moves' to 'Next moves', and do a quick load of each game
-	      // based on "sc_game firstMoves <gameNum> <numMoves>"
+              // Hack the gamelist 'Opening moves' to 'Next moves', and do a quick load of each game
+              // based on "sc_game firstMoves <gameNum> <numMoves>"
 
-	      if (gamePly > 0 || gameNonStd || ie->GetStartFlag() ) {
-		db->bbuf->Empty();
-		if (ie->GetLength() == 0) {
+              if (gamePly > 0 || gameNonStd || ie->GetStartFlag() ) {
+                db->bbuf->Empty();
+                if (ie->GetLength() == 0) {
                     // todo
-		} else {
-		    if (db->gfile->ReadGame (db->bbuf, ie->GetOffset(), ie->GetLength()) != OK) {
-			printf ("mybad handling game %u\n", index);
-		    } else {
-			g->Clear();
-			if (g->Decode (db->bbuf, GAME_DECODE_NONE) != OK) {
-			  printf ("mybad decoding game %u\n", index);
-			} else {
-			  moveStr->Clear();
+                } else {
+                    if (db->gfile->ReadGame (db->bbuf, ie->GetOffset(), ie->GetLength()) != OK) {
+                        printf ("mybad handling game %u\n", index);
+                    } else {
+                        g->Clear();
+                        if (g->Decode (db->bbuf, GAME_DECODE_NONE) != OK) {
+                          printf ("mybad decoding game %u\n", index);
+                        } else {
+                          moveStr->Clear();
                           // Use treeFilter instead of GetCurrentPly to better handle games with NonStandardStart
                           //   don't always use treeFilter because of wrong value when position repeats
-                          // Show 3 moves (6 ply)
+                          // Show arbitary 3 moves (6 ply)
                           if (gameNonStd || ie->GetStartFlag())
-			      g->GetPartialMoveList (moveStr, db->filter->Get(index) - 1, 6);
+                              g->GetPartialMoveList (moveStr, db->filter->Get(index) - 1, 6);
                           else 
-			      g->GetPartialMoveList (moveStr, gamePly, 6);
-			}
-		    }
-		}
-	      }
-	      ie->PrintGameInfo (temp, start, index+1, db->nb, formatStr, moveStr->Data());
-	    } else {
-	      ie->PrintGameInfo (temp, start, index+1, db->nb, formatStr, "");
+                              g->GetPartialMoveList (moveStr, gamePly, 6);
+                        }
+                    }
+                }
+              }
+              ie->PrintGameInfo (temp, start, index+1, db->nb, formatStr, moveStr->Data());
+            } else {
+              ie->PrintGameInfo (temp, start, index+1, db->nb, formatStr, "");
             }
 
             if (fp == NULL) {
@@ -14282,31 +14282,28 @@ sc_tree_best (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     for (uint i=0; i < count; i++) {
         ie = base->idx->FetchEntry (bestIndex[i]);
 
-	// We need the gamenumber for the tree(bestList) and gbrowser
-	sprintf (tempStr, "%u ", bestIndex[i] + 1);
+        // We need the gamenumber for the tree(bestList) and gbrowser
+        sprintf (tempStr, "%u ", bestIndex[i] + 1);
 
-//*************
-                base->bbuf->Empty();
-                if (ie->GetLength() == 0) {
-                    // todo
+        if (ie->GetLength() == 0) {
+            // todo
+        } else {
+            if (base->gfile->ReadGame (base->bbuf, ie->GetOffset(), ie->GetLength()) != OK) {
+                printf ("mybadbest handling game %u\n", bestIndex[i]);
+            } else {
+                g->Clear();
+                if (g->Decode (base->bbuf, GAME_DECODE_NONE) != OK) {
+                  printf ("mybadbest decoding game %u\n", bestIndex[i]);
                 } else {
-                    if (base->gfile->ReadGame (base->bbuf, ie->GetOffset(), ie->GetLength()) != OK) {
-                        printf ("mybadbest handling game %u\n", bestIndex[i]);
-                    } else {
-                        g->Clear();
-                        if (g->Decode (base->bbuf, GAME_DECODE_NONE) != OK) {
-                          printf ("mybadbest decoding game %u\n", bestIndex[i]);
-                        } else {
-                          moveStr->Clear();
-                          if (gameNonStd || ie->GetStartFlag())
-			      g->GetPartialMoveList (moveStr, base->filter->Get(bestIndex[i]) - 1, 6);
-                          else 
-			      g->GetPartialMoveList (moveStr, gamePly, 6);
-                        }
-                    }
+                  moveStr->Clear();
+                  if (gameNonStd || ie->GetStartFlag())
+                      g->GetPartialMoveList (moveStr, base->filter->Get(bestIndex[i]) - 1, 6);
+                  else 
+                      g->GetPartialMoveList (moveStr, gamePly, 6);
                 }
+            }
+        }
 
-//*************
         // This seems solid, but we should be wary, as in sc_game_list PrintGameInfo
         // is only used on current base, but here we are using it for any open base
 	ie->PrintGameInfo (temp, 0, bestIndex[i]+1, base->nb, formatStr, moveStr->Data());
