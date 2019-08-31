@@ -280,7 +280,7 @@ menuText D OptionsFontsSmall "Klein" 0 {Kleine Zeichen}
 menuText D OptionsFontsFixed "Fest" 0 {Schriftart mit fester Breite (nichtproportional)}
 menuText D OptionsGInfo "Partieinformationen" 0 {Optionen für Informationsbereich}
 menuText D OptionsFics "FICS" 0
-menuText D OptionsFicsAuto "Autom. Umwandlung in Dame" 0
+menuText D OptionsFicsAuto "Automatische Umwandlung in Dame" 0
 menuText D OptionsFicsClk "Bedenkzeiten speichern" 0
 menuText D OptionsFicsColour "Textfarbe" 0
 menuText D OptionsFicsSize "Brettgröße" 0
@@ -301,22 +301,22 @@ menuText D OptionsMovesAsk "Fragen vor Ersetzen" 0 \
   {Vor Überschreiben existierender Züge nachfragen}
 menuText D OptionsMovesAnimate "Animation" 0 \
   {Zeit für Zuganimation einstellen}
-menuText D OptionsMovesDelay "Autom. vorspielen..." 7 \
+menuText D OptionsMovesDelay "Automatisch vorspielen..." 7 \
   {Zeit für automatisches Vorspielen einstellen}
 menuText D OptionsMovesCoord "Tastatureingabe" 0 \
   {Zugeingabe über Koordinaten ("g1f3") akzeptieren}
 menuText D OptionsShowVarPopup "Variantenfenster zeigen" 0 { Anzeige des Variantenauswahlfensters ein/ausschalten}  
 menuText D OptionsMovesSpace "Leerzeichen nach Zugnummer einfügen" 0 {Leerzeichen nach Zugnummer einfügen}  
-menuText D OptionsMovesKey "Autom. Zugergänzung" 10 \
+menuText D OptionsMovesKey "Automatische Zugergänzung" 10 \
   {Automatische Zugergänzung ein-/ausschalten}
 menuText D OptionsMovesShowVarArrows "Pfeile für Varianten anzeigen" 0 {Zeige Pfeile in Varianten an: ja/nein}
 menuText D OptionsNumbers "Zahlenformat" 5 {Zahlenformat wählen}
 menuText D OptionsStartup "Autostart" 1 {Fenster zum Öffnen bei Start auswählen}
 menuText D OptionsTheme "Design" 0 {Verändert das Aussehen der Oberfläche}
 menuText D OptionsWindows "Fenster" 6 {Fenster-Optionen}
-menuText D OptionsWindowsIconify "Autom. minimieren" 7 \
+menuText D OptionsWindowsIconify "Automatisch minimieren" 7 \
   {Alle Fenster mit dem Hauptfenster minimieren}
-menuText D OptionsWindowsRaise "Autom. Heraufsetzen" 7 \
+menuText D OptionsWindowsRaise "Automatisch heraufsetzen" 7 \
   {Bestimmte Fenster (z.B. Zustandsleiste) bei Bedarf öffnen}
 menuText D OptionsSounds "Töne..." 0 {Töne für Zugankündigung einstellen} ;# *** Hmm, :-|
 menuText D OptionsWindowsDock "Fenster docken" 0 {Fenster docken}
@@ -324,7 +324,7 @@ menuText D OptionsWindowsSaveLayout "Layout speichern" 0 {Das Fensterlayout absp
 menuText D OptionsWindowsRestoreLayout "Layout wiederherstellen" 0 {Das gespeicherte Fensterlayout wiederherstellen}
 menuText D OptionsWindowsShowGameInfo "Partieinformationen" 0 {Partieinformationen anzeigen}
 menuText D OptionsWindowsAutoLoadLayout "Automatisch laden: 1. Layout" 0 {Lädt das erste definierte Layout automatisch beim Programmstart}
-menuText D OptionsWindowsAutoResize "Brettgröße autom. anpassen" 0 {}
+menuText D OptionsWindowsAutoResize "Brettgröße automatisch anpassen" 0 {}
 menuText D OptionsWindowsFullScreen "Vollbild" 0 {Vollbild Modus umschalten}
 menuText D OptionsToolbar "Werkzeugleiste" 0 {Werkzeug- bzw. Symbolleiste Ein/Aus}
 menuText D OptionsECO "ECO-Datei laden..." 0 {ECO-Klassifikationsdatei laden}
@@ -340,7 +340,7 @@ menuText D OptionsInformant "Informatorwerte konfigurieren" 0
 menuText D OptionsSave "Optionen speichern" 0 \
   "Alle einstellbaren Optionen in der Datei $::optionsFile sichern"
 menuText D OptionsSaveBases "Datenbanken als Standard speichern" 0 
-menuText D OptionsAutoSave "Autom. speichern bei Beenden" 0 \
+menuText D OptionsAutoSave "Automatisch speichern bei Beenden" 0 \
   {Alle Optionen beim Beenden von Scid automatisch speichern}
 
 # Help menu:
@@ -572,9 +572,9 @@ menuText D TreeOptLock "Anbinden" 0 \
   {Zugbaum an aktive Datenbank anbinden(/lösen)}
 menuText D TreeOptTraining "Training" 0 {Trainingsmodus ein-/ausschalten}
 menuText D TreeOptShort "Kurze Anzeige" 0 {Zeige keine Elo-Information}
-menuText D TreeOptAutosave "Autom. Cache-Datei sichern" 4 \
+menuText D TreeOptAutosave "Automatisch Cache-Datei sichern" 4 \
   {Beim Schließen des Zugbaums automatisch Cache-Datei sichern}
-menuText D TreeOptAutomask "Autom. Laden der Maske" 0 "Autom. Laden der letzten Maske mit geöffnetem Baum"
+menuText D TreeOptAutomask "Automatisches Laden der Maske" 0 "Automatisches Laden der letzten Maske mit geöffnetem Baum"
 menuText D TreeOptCacheSize "Cache-Größe" 0 {Cache-Größe auswählen.}
 menuText D TreeOptShowBar "Fortschrittsbalken anzeigen" 0 "Zeigt Fortschrittsbalken an."
 menuText D TreeOptSortBest "Sortiere beste Partien" 0 "Sortier beste Partien nach ELO."
@@ -704,7 +704,7 @@ translate D TitleFilterGraph "Scid: Filtergrafik"
 translate D AddVariation {Variante hinzufügen}
 translate D AddAllVariations {Alle Varianten hinzufügen}
 translate D AddMove {Zug hinzufügen}
-translate D Annotate {Autom. kommentieren}
+translate D Annotate {Automatisch kommentieren}
 translate D ShowAnalysisBoard {Analysebrett anzeigen}
 translate D ShowInfo {Engine-Information anzeigen}
 translate D FinishGame {Partie beenden}
@@ -2591,7 +2591,7 @@ set helpText(D,MainWindow) {<h1>Hauptfenster von Scid vs. PC</h1>
   <h4><name Autoplay>Der Abspielmodus</name></h4>
   <p>Im Abspielmodus führt Scid automatisch die Züge bis zum Ende der
   aktuellen Partie aus. Die Zeit zwischen den Zügen kann über das
-  Menü <green>Optionen--<gt>Züge--<gt>Autom. vorspielen...</green>
+  Menü <green>Optionen--<gt>Züge--<gt>Automatisch vorspielen...</green>
   eingestellt werden.
   </p>
   <p>Ein Rechtsklick auf das Abspielensymbol <button autoplay_off>
@@ -2930,8 +2930,8 @@ set helpText(D,Moves) {<h1>Zugeingabe und Optionen</h1>
   </p>
 
   <h4>Automatische Zugergänzung</h4>
-  <p>Die automatische Zugergänzung wird
-  durch <green>Optionen--<gt>Züge--<gt>Autom. Zugergänzung</green>
+  <p>Die automatische Zugergänzung wird durch
+  <green>Optionen--<gt>Züge--<gt>Automatische Zugergänzung</green>
   eingeschaltet. Sie vervollständigt einen Zug, sobald Sie genügend
   eingetippt haben, um ihn eindeutig von anderen legalen Zügen zu
   unterscheiden. So reicht es z.B. in der Anfangsposition, nur [n][f]
@@ -3673,15 +3673,17 @@ set helpText(D,GameList) {<h1>Das Partienlistenfenster</h1>
 
   <p>Das <run ::windows::gamelist::Open><green>Partienlistenfenster</green></run>
   zeigt alle gefilterten Partien der aktuell geöffneten Datenbank/PGN-Datei.</p>
-  <p>Unterhalt der Partienliste sind verschiedene Schaltflächen und
+  <p>Unterhalb der Partienliste sind verschiedene Schaltflächen und
   Eingabefelder und unten finden Sie den <a Switcher>Datenbankwechsler</a>.</p>
   <p>Ein Klick auf einen Partieeintrag wählt die Partie aus. Um
   mehrere Partien auszuwählen, verwenden Sie Strg+Klick und
   Umschalt+Klick. Ein Rechtsklick auf eine Partie/mehrere Partien
   zeigt ein Kontextmenü für verschiedene Befehle. Ein Doppelklick lädt
   eine Partie.</p>
-  <p>Ein Rechtsklick auf einen Spaltentitel ermöglicht, die Spalten neu
-  anzuordnen oder die Ausrichtung zu ändern.</p>
+  <p>Ein Rechtsklick auf einen Spaltentitel ermöglicht es, Spalten
+  hinzuzufügen oder sie neu zu ordnen ("Hinzufügen" ordnet ebenfalls
+  eine Spalte neu). Man kann auch den Spaltentext unterschiedlich
+  ausrichten (links, rechts oder zentriert).</p>
   <p>Schnelles Suchen kann durch Texteingabe im Kombinationsfeld und
   Drücken der Enter-Taste oder durch Klicken auf
   die <b>Filter</b>-Schaltfläche erfolgen. Benutzen Sie mit dem Filter
@@ -3691,8 +3693,10 @@ set helpText(D,GameList) {<h1>Das Partienlistenfenster</h1>
   Drücken von Strg+Enter.</p>
   <p><i>Um Partien zu sehen, die mit der aktuellen Stellung
   übereinstimmen, aktivieren Sie im <a Tree>Zugbaumfenster</a> "Filter
-  anpassen". Über weitere Informationen zu Suchen und Filter
-  siehe <a Searches>In Scid suchen</a> oder nachstehende Ausführungen.
+  anpassen". Dies ändert auch die Spalte "Züge", die dann die
+  nachfolgenden Partiezüge anzeigt. Über weitere Informationen zu
+  Suchen und Filter siehe <a Searches>In Scid suchen</a> oder
+  nachstehende Ausführungen.
   </i></p>
 
   <h3>Die Partienliste sortieren</h3>
@@ -3744,13 +3748,18 @@ set helpText(D,GameList) {<h1>Das Partienlistenfenster</h1>
   </p>
 
   <h3>Anmerkungen</h3>
-  <p>Die Spalte <b>Land</b> enthält aktuell die letzten drei
+  <ul>
+	
+  <li>Die Spalte <b>Land</b> enthält aktuell die letzten drei
   Buchstaben des Turnierortes (wenn der drittletzte ein Großbuchstabe
   ist und ein Leerzeichen vorausgeht). Die Seite <a Maintenance
-  Spellcheck>Rechtschreibprüfung</a> könnte könnte hilfreich sein, um
-  Ländernamen hinzuzufügen.</p>
-  <p>Maximal 50 Kommentare werden aufgezeichnet/angezeigt.</p>
-  <p>Die Elo-Werte in Klammern sind Schätzungen.</p>
+  Spellcheck>Rechtschreibprüfung</a> könnte hilfreich sein, um
+  Ländernamen hinzuzufügen.</li>
+  <li>Die Spalte <b>Züge</b> zeigt die Eröffnungszüge oder, falls
+  der Zugbaum den Filter anpaßt, die nächsten Züge jeder Partie.</li>
+  <li>Maximal 50 Kommentare werden aufgezeichnet/angezeigt.</li>
+  <li>Die Elo-Werte in Klammern sind Schätzungen.</li>
+  </ul>
 
   <h3>Weitere Funktionen</h3>
   <ul>
@@ -3787,7 +3796,7 @@ set helpText(D,GameList) {<h1>Das Partienlistenfenster</h1>
   exportieren--<gt>Partienliste in eine Textdatei
   exportieren</green></i>.</p>
 
-  <p><footer>Aktualisiert: Scid vs. PC 4.14, März 2015</footer></p>
+  <p><footer>Aktualisiert: Scid vs. PC 4.21, August 2019</footer></p>
 }
 
 
@@ -4374,7 +4383,7 @@ set helpText(D,Tree) {<h1>Das Zugbaumfenster</h1>
   sichern</b> für zukünftige Nutzung auf Festplatte geschrieben
   werden. Der Befehl schreibt den Zwischenspeicher in eine Datei mit
   der Erweiterung <b>.stc</b> im gleichen Verzeichnis wie die
-  Datenbank. Man kann auch <b>Autom. Cache-Datei sichern</b> wählen,
+  Datenbank. Man kann auch <b>Automatisch Cache-Datei sichern</b> wählen,
   um den Zwischenspeicher automatisch zu sichern, wenn die Datenbank
   geschlossen wird. Dies könnte dann nicht funktionieren, wenn Scid
   beendet wird bevor die Datenbank geschlossen wird.
@@ -4471,7 +4480,7 @@ set helpText(D,TreeMasks) {<h1>Die Zugbaummasken</h1>
   aufgefordert, wenn Sie eine Maske schließen, die geändert wurde oder
   wenn das Zugbaumfenster geschlossen ist. Die zuletzt verwendete
   Maskendatei kann automatisch
-  über <green>Zugbaum--<gt>Optionen--<gt>Autom. Laden der
+  über <green>Zugbaum--<gt>Optionen--<gt>Automatisches Laden der
   Maske</green> geöffnet werden.
   </p>
   <p><i>Für ein Eröffnungsrepertoire könnte man in Erwägung ziehen,
@@ -8184,7 +8193,7 @@ set helpText(D,FICSwidget) {<h1>FICS benutzen</h1>
   Möglichkeiten. "Keine Anfragen" lehnt Rücknahme-, Unterbrechungs-,
   Abbruch- und Remisangebote ab. "Keine Ergebnisse" verhindert Dialoge
   über Partieergebnisse. "Brettgröße" bezieht sich auf die kleinen
-  Schachbretter für Beobachtungspartien. "Autom. Heraufsetzen" setzt
+  Schachbretter für Beobachtungspartien. "Automatisch heraufsetzen" setzt
   das Schachbrett herauf, wenn Ihr Gegner einen Zug
   macht. "Bedenkzeiten speichern" speichert die Zugzeiten als
   Kommentare (in der <a Graphs Score>Bewertungsgrafik</a> sichtbar).
