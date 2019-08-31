@@ -7809,7 +7809,7 @@ sc_game_list (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 	      // Hack the gamelist 'Opening moves' to 'Next moves', and do a quick load of each game
 	      // based on "sc_game firstMoves <gameNum> <numMoves>"
 
-	      if (gamePly > 0 || gameNonStd) {
+	      if (gamePly > 0 || gameNonStd || ie->GetStartFlag() ) {
 		db->bbuf->Empty();
 		if (ie->GetLength() == 0) {
                     // todo
@@ -7825,8 +7825,8 @@ sc_game_list (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                           // Use treeFilter instead of GetCurrentPly to better handle games with NonStandardStart
                           //   don't always use treeFilter because of wrong value when position repeats
                           // Show 3 moves (6 ply)
-                          if (gameNonStd)
-			      g->GetPartialMoveList (moveStr, db->filter->Get(index), 6);
+                          if (gameNonStd || ie->GetStartFlag())
+			      g->GetPartialMoveList (moveStr, db->filter->Get(index) - 1, 6);
                           else 
 			      g->GetPartialMoveList (moveStr, gamePly, 6);
 			}
@@ -14276,7 +14276,8 @@ sc_tree_best (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     DString * moveStr = new DString;
     Game * g = scratchGame;
     // We are using ply from current game (which may not be in the same db)
-    uint ply = db->game->GetCurrentPly();
+    uint gamePly = db->game->GetCurrentPly();
+    bool gameNonStd = db->game->HasNonStandardStart();
 
     for (uint i=0; i < count; i++) {
         ie = base->idx->FetchEntry (bestIndex[i]);
@@ -14297,8 +14298,10 @@ sc_tree_best (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                           printf ("mybadbest decoding game %u\n", bestIndex[i]);
                         } else {
                           moveStr->Clear();
-                          // Show 3 moves (6 ply)
-                          g->GetPartialMoveList (moveStr, ply, 6);
+                          if (gameNonStd || ie->GetStartFlag())
+			      g->GetPartialMoveList (moveStr, base->filter->Get(bestIndex[i]) - 1, 6);
+                          else 
+			      g->GetPartialMoveList (moveStr, gamePly, 6);
                         }
                     }
                 }
