@@ -1164,9 +1164,9 @@ proc ::windows::gamelist::Refresh {{see {}}} {
 
   set c [expr $glistEnd - $glstart + 1]
 
-  # Only send 'Moves' if showing Opening/Moves column (number 16)
+  # Only need to calulate nextMoves if showing Opening/Moves column (number 16)
   if {[winfo exists .treeWin$b] && $::tree(adjustfilter$b) && ([lsearch $glistColOrder 16] > -1)} {
-    set chunk [sc_game list $glstart $c $glistCodes Moves]
+    set chunk [sc_game list $glstart $c \!$glistCodes]
   } else {
     set chunk [sc_game list $glstart $c $glistCodes]
   }
