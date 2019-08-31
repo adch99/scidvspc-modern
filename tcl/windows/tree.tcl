@@ -1291,7 +1291,12 @@ proc ::tree::best {baseNumber} {
     return
   }
 
-  set chunk [sc_tree best $tree(base$baseNumber) $tree(bestMax$baseNumber) $tree(bestRes$baseNumber) $tree(sortBest$baseNumber) $blistCodes]
+  # Only need to calulate nextMoves if showing Opening/Moves column (number 13)
+  if {[lsearch $::blistColOrder 13] > -1} {
+    set chunk [sc_tree best $tree(base$baseNumber) $tree(bestMax$baseNumber) $tree(bestRes$baseNumber) $tree(sortBest$baseNumber) \!$blistCodes]
+  } else {
+    set chunk [sc_tree best $tree(base$baseNumber) $tree(bestMax$baseNumber) $tree(bestRes$baseNumber) $tree(sortBest$baseNumber) $blistCodes]
+  }
 
   # strip trailing "\n" and split into a list
   set chunk [string range $chunk 0 end-1]
