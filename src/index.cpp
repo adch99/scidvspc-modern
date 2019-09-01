@@ -397,30 +397,8 @@ IndexEntry::GetFlagStr (char * str, const char * flags)
 //      format string provided. Called by by sc_game_list() and sc_tree_best() in tkscid.cpp
 //      and from scidt.cpp for its game listing (-l) option.
 //
-//      The format string indicates what information to print. Non-letters
-//      in the string are printed as-is, while a letter (which should be
-//      followed by a numeric width) indicates a particular type of data.
-//      For example, "b12" indicates the Black player name in a width of 12.
-//      Some data types ignore the width field, or only accept certain values.
-//      Valid letter codes and their data:
-//          b:  Black player name.
-//          B:  Black Elo. Prints in width of 4, ignoring specified width.
-//          e:  Event name.
-//          f:  Game number, filtered (e.g. 1 = first game in filter).
-//          g:  Game number, actual (ignoring filter).
-//          m:  Number of moves. Prints "##" if width < 3 and numMoves > 99.
-//          M:  Final position material, e.g. "r1:r" for Rook+Pawn vs Rook.
-//          n:  Round name.
-//          o:  ECO code.
-//          r:  Result. Prints as 1 byte (1/0/=*) or as 3 bytes (1-0, etc).
-//          s:  Site name.
-//          S:  Start position flag. Prints "S" or " " (1 byte) ignoring width.
-//          w:  White player name.
-//          W:  White Elo. Prints in width of 4, ignoring specified width.
-//          y:  Year. Prints in width of 4, ignoring specified width.
-//
-//          O: Opening
-//      Opening is replaced by "const char * moveStr" if supplied 
+//      The format string is better documented in gamelist.tcl
+//      'O' Opening is replaced by "const char * moveStr" if supplied 
 void
 IndexEntry::PrintGameInfo (char * outStr,
                            gameNumberT gnFiltered, gameNumberT gnReal,
