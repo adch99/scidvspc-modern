@@ -7812,7 +7812,7 @@ sc_game_list (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
               // Hack the gamelist 'Opening moves' to 'Next moves', and do a quick load of each game
               // based on "sc_game firstMoves <gameNum> <numMoves>"
 
-              if (gamePly > 0 || gameNonStd || ie->GetStartFlag() ) {
+              if (gamePly > 0 || ! ie->GetStoredLineCode() || gameNonStd || ie->GetStartFlag() ) {
                 db->bbuf->Empty();
                 if (ie->GetLength() == 0) {
                     // todo
@@ -7835,6 +7835,11 @@ sc_game_list (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                         }
                     }
                 }
+              } else {
+                // prepend " " to StoredLine to allign with GetPartialMoveList
+                moveStr->Clear();
+                moveStr->Append(" ");
+                moveStr->Append(StoredLine::GetText(ie->GetStoredLineCode()));
               }
               ie->PrintGameInfo (temp, start, index+1, db->nb, formatStr, moveStr->Data());
             } else {
@@ -14296,7 +14301,7 @@ sc_tree_best (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         // We need the gamenumber for the tree(bestList) and gbrowser
         sprintf (tempStr, "%u ", bestIndex[i] + 1);
 
-    if (nextMoves) {
+	if (nextMoves) {
         if (ie->GetLength() == 0) {
             // todo
         } else {
@@ -14315,7 +14320,7 @@ sc_tree_best (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                 }
             }
         }
-    }
+	}
 
         // This seems solid, but we should be wary, as in sc_game_list PrintGameInfo
         // is only used on current base, but here we are using it for any open base
