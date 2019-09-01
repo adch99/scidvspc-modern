@@ -565,7 +565,7 @@ proc ::tree::dorefresh { baseNumber } {
     ### See the last game (bind $w <End> from gamelist.tcl)
     set totalSize [sc_filter count]
     set glstart $totalSize
-    set lastEntry [expr $totalSize - $glistSize]
+    set lastEntry [expr $totalSize - $glistSize + 1]
     if {$lastEntry < 1} {
       set lastEntry 1
     }

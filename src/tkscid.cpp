@@ -7734,10 +7734,13 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 //    Takes start and count, where start is in the range (1..FilterCount).
 //    The next argument is the format string -- see index.cpp for details
 //    of format strings.
-//    If the format string is "-current", then a single integer value
+//
+//    If the format string is "-current" (seems unused), then a single integer value
 //    is returned indicating the line number where the current game
 //    occured in the output (where 1 is the first line), or 0 if it
 //    did not occur in the output at all.
+//
+//    '!' prefixing the formatStr indicates next 'Moves' are to be calculated.
 
 int
 sc_game_list (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
