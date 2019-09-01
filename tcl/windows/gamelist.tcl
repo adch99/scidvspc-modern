@@ -4,11 +4,9 @@
 
 ### glistFields: code  name  anchor default-width
 
-#  The game list fields are not user configurable except by altering it here.
-#  Field order may be changed by moving their line up or down; and/or deleting/adding lines.
-#  The "g" (game number) field MUST appear somewhere. 
-#  The four optional fields (at bottom), may be enabled by removing the leading '#'
-#  These fields are also handled in PrintGameInfo (src/index.cpp)
+#  The game list fields are now user changeable ingame by right-clicking the gamelist title row.
+#  All fields are sent via sc_game list to PrintGameInfo (where these codes are significant)
+#  Order and displayed columns are configured via '-displaycolumns'
 
 set glistFields {
   g Number	e 7
@@ -35,23 +33,28 @@ set glistFields {
   F EndMaterial e  7
 }
 
+# Unused 
+# T:  Opening, with count (Stored line) (spacing ignored)
+# y:  Year. Prints in width of 4, ignoring specified width (spacing ignored)
+# f:  Game number, filtered (e.g. 1 = first game in filter)
+# ???
+# M:  Final position material, e.g. "r1:r" for Rook+Pawn vs Rook
+
 ### Index
 # b:  Black player name
 # B:  Black Elo. Prints in width of 4, ignoring specified width
 # d:  Game date
 # e:  Event name
-# f:  Game number, filtered (e.g. 1 = first game in filter)
 # g:  Game number, actual (ignoring filter)
 # m:  Number of moves. Prints "##" if width < 3 and numMoves > 99
-# M:  Final position material, e.g. "r1:r" for Rook+Pawn vs Rook
 # n:  Round name
 # o:  ECO code
+# O:  Opening Shows the opening moves if they are in the most common 255 openings. 
+#             If tree open and adjusting gamelist, shows "Next Moves"
 # r:  Result. Prints as 1 byte (1/0/=*) or as 3 bytes (1-0, etc)
 # s:  Site name
 # w:  White player name
 # W:  White Elo. Prints in width of 4, ignoring specified width
-# y:  Year. Prints in width of 4, ignoring specified width
-# ----------------------
 # S:  Start position flag. Prints "S" or " " (1 byte) ignoring width
 # c:  Country (last 3 chars of Site Name)
 # E:  Date of Event (stored relative to)
@@ -89,10 +92,10 @@ foreach {code col anchor width} $glistFields {
 if {! [info exists glistColOrder]} {
   set glistColOrder $temp_order
 }
-if {! [info exists glistColWidth]} {
+if {! [info exists glistColWidth] || [llength $glistColWidth] != $i} {
   set glistColWidth $temp_widths
 }
-if {! [info exists glistColAnchor]} {
+if {! [info exists glistColAnchor] || [llength $glistColAnchor] != $i} {
   set glistColAnchor $temp_anchors
 }
 
