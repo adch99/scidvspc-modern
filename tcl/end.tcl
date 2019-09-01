@@ -639,11 +639,11 @@ proc openExportGList {} {
   text $w.tfmt -width 1 -height 5 -font font_Fixed -wrap none -relief flat
   pack $w.tfmt -side top -fill x
   $w.tfmt insert end \
-"w White            b Black            W White Elo        B Black Elo
-m Moves count      r Result           y Year             d Date   c Country
-e Event            s Site             n Round            o ECO code
-g Game number      f Filtered number  F Final material   S Non-std start pos
-D Deleted flag     U User flags       C Comments flag    V Variations flag  \n"
+"w White        b Black   W White Elo        B Black Elo
+m Moves count  r Result  g Game number      d Date      c Country
+e Event        s Site    f Filter number    C Comments flag
+y Year         n Round   F Final Material   S NonStd Start flag
+D Deleted flag o ECO     O Opening / Moves  V Variations flag  \n"
 
   $w.tfmt configure -cursor top_left_arrow -state disabled
   label $w.lpreview -text $::tr(Preview) -font font_Bold
@@ -675,7 +675,8 @@ proc updateExportGList {args} {
   global glexport
   set w .glexport
   if {! [winfo exists $w]} { return }
-  set text [sc_game list 1 5 "$glexport "]
+  ### '!' prefix indicates to calculate each game next moves if at ply.
+  set text [sc_game list 1 5 "\!$glexport "]
   # remove trailing "\n"
   set text [string range $text 0 end-1]
 
@@ -697,7 +698,7 @@ proc saveExportGList {} {
     progressWindow Scid "Saving game list" $::tr(Cancel) sc_progressBar
   }
   busyCursor .
-  set res [catch {sc_game list 1 $::MAX_GAMES "$glexport\n" $fname} err]
+  set res [catch {sc_game list 1 $::MAX_GAMES "\!$glexport\n" $fname} err]
   unbusyCursor .
   if {$showProgress} { closeProgressWindow }
   if {$res} {

@@ -7831,6 +7831,7 @@ sc_game_list (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                           // Use treeFilter instead of GetCurrentPly to better handle games with NonStandardStart
                           //   don't always use treeFilter because of wrong value when position repeats
                           // Show arbitary 3 moves (6 ply)
+                          // Todo! - Make this work with position searches, where each game has it's own ply according to search result.
                           if (gameNonStd || ie->GetStartFlag())
                               g->GetPartialMoveList (moveStr, db->filter->Get(index) - 1, 6);
                           else 

@@ -43,8 +43,11 @@ set glistFields {
 ### Index
 # b:  Black player name
 # B:  Black Elo. Prints in width of 4, ignoring specified width
+# c:  Country (last 3 chars of Site Name)
 # d:  Game date
 # e:  Event name
+# E:  Event date (stored relative to Game date)
+# F:  Difference of material at game end (spacing ignored)
 # g:  Game number, actual (ignoring filter)
 # m:  Number of moves. Prints "##" if width < 3 and numMoves > 99
 # n:  Round name
@@ -53,12 +56,9 @@ set glistFields {
 #             If tree open and adjusting gamelist, shows "Next Moves"
 # r:  Result. Prints as 1 byte (1/0/=*) or as 3 bytes (1-0, etc)
 # s:  Site name
+# S:  Start position flag. Prints "S" or " " (1 byte) ignoring width
 # w:  White player name
 # W:  White Elo. Prints in width of 4, ignoring specified width
-# S:  Start position flag. Prints "S" or " " (1 byte) ignoring width
-# c:  Country (last 3 chars of Site Name)
-# E:  Date of Event (stored relative to)
-# F:  Difference of material at game end
 
 set ::windows::gamelist::isOpen 0
 set glstart 1
