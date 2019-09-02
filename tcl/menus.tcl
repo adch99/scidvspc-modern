@@ -961,7 +961,7 @@ $m add command -label OptionsSave -command {
     ::pgn::indentVars ::pgn::indentComments ::defaultBackground ::::defaultGraphBackgroud ::enableBackground
     ::pgn::shortHeader ::pgn::boldMainLine ::pgn::stripMarks 
     ::pgn::symbolicNags ::pgn::moveNumberSpaces ::pgn::columnFormat ::pgn::showScrollbar
-    myPlayerNames optionsAutoSave ::tree::mask::recentMask ::tree::mask::autoLoadMask ::tree::showBar ::tree::short ::tree::sortBest
+    myPlayerNames optionsAutoSave ::tree::mask::recentMask ::tree::mask::autoLoadMask ::tree::showBar ::tree::short ::tree::sortBest ::tree::autoAdjust
     ecoFile showVarPopup showVarArrows colorActiveSquare
     annotate(blunder) annotate(addTag) annotate(Moves) annotate(WithVars) annotate(WithScore) useAnalysisBook annotate(isVar) annotate(scoreType) annotate(cutoff) annotate(MissedMates)
     annotate(WantedDepth) annotate(Depth) autoplayDelay animateDelay boardCoords boardSTM 
