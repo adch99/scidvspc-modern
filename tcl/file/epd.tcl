@@ -287,13 +287,11 @@ namespace eval epd {
     # this is only necessary if somebody later binds, e.g., ctrl-q to close window
     #if { [.epd$id.text edit modified] } { storeEpdText $id }
 
-    if {[isAltered $id]} {
-      if {[sc_epd readonly $id]} {
-        tk_messageBox -type ok -icon error -title "Scid: EPD file error" \
-          -message "Save failed\nEPD file is read-only."
-      } else {
-        sc_epd write $id
-      }
+    if {[sc_epd readonly $id]} {
+      tk_messageBox -type ok -icon error -title "Scid: EPD file error" \
+        -message "Save failed\nEPD file is read-only."
+    } else {
+      sc_epd write $id
     }
 
     updateEpdWin $id
