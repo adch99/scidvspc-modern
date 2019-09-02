@@ -23,9 +23,11 @@ proc ::tree::doConfigMenus { baseNumber  { lang "" } } {
   foreach idx {0 1 2 3} tag {Alpha ECO Freq Score } {
     configMenuText $m.sort $idx TreeSort$tag $lang
   }
-  foreach idx {1 2 4 5 6 7 8 9 11 12 13} tag {Lock Training SortBest Short ShowBar Automask Autosave CacheSize Slowmode Fastmode FastAndSlowmode} {
+  foreach idx {1 2 4 5 6 8 9 10 12 13 14} tag {Lock Training SortBest Short ShowBar Automask Autosave CacheSize Slowmode Fastmode FastAndSlowmode} {
     configMenuText $m.opt $idx TreeOpt$tag $lang
   }
+  $m.opt entryconfig 7 -label "[tr Auto]-[tr TreeAdjust]"
+  
   foreach idx {0 1} tag {Tree Index} {
     configMenuText $m.help $idx TreeHelp$tag $lang
   }
@@ -68,6 +70,7 @@ proc ::tree::Open {{baseNumber 0}} {
   ::setTitle $w "[lindex "[tr WindowsTree]" 0] \[[file tail [sc_base filename $baseNumber]]\]"
 
   set tree(base$baseNumber) $baseNumber
+  set tree(adjustfilter$baseNumber) $::tree::autoAdjust
   if {$::tree::sortBest} {
     set tree(sortBest$baseNumber) Best
   } else {
@@ -79,7 +82,6 @@ proc ::tree::Open {{baseNumber 0}} {
     autorefresh	1
     locked	0
     status	""
-    adjustfilter 0
     bestMax	100 
     order	frequency
     bestRes	All
@@ -183,6 +185,7 @@ proc ::tree::Open {{baseNumber 0}} {
       }
     }
   }
+  $w.menu.opt add checkbutton -label TreeAdjust -variable ::tree::autoAdjust
   $w.menu.opt add checkbutton -label TreeOptAutomask -variable ::tree::mask::autoLoadMask
   $w.menu.opt add checkbutton -label TreeOptAutosave -variable tree(autoSave$baseNumber)
   $w.menu.opt add cascade -menu $w.menu.opt.size -label TreeOptCacheSize
