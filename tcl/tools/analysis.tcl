@@ -1162,7 +1162,6 @@ proc initAnnotation {n} {
   bind $w <Destroy> "catch {$w.buttons.cancel invoke}"
   bind $w <Configure> "recordWinSize $w"
   bind $w <F1> {helpWindow Analysis Annotating}
-  placeWinOverParent $w .analysisWin$n
   wm state $w normal
   focus -force $w ; # windows bug - doesn't get focus and <Escape> fails
   # have to start engine here for depth based anno niggles
