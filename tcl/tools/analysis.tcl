@@ -74,7 +74,7 @@ proc resetEngine {n} {
   set analysis(automoveTime$n) 3000
   set analysis(lastClicks$n) 0
   set analysis(after$n) {}
-  set analysis(log$n) {}              ;# Log file channel
+  catch {unset analysis(log$n)}       ;# Log file channel
   set analysis(logCount$n) 0          ;# Number of lines sent to log file
   set analysis(wbEngineDetected$n) 0  ;# Is this a special Winboard engine?
   set analysis(priority$n) normal     ;# CPU priority: idle/normal
@@ -2295,7 +2295,7 @@ proc makeAnalysisWin {{n 0} {options {}}} {
   if {$oldpwd != ""} { catch {cd $oldpwd} }
 
   # Open log file if applicable:
-  set analysis(log$n) {}
+  catch {unset analysis(log$n)}
   if {$analysis(logMax) > 0} {
     if {! [catch {open [file join $::scidLogDir "engine$n.log"] w} log]} {
       set analysis(log$n) $log
