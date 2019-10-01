@@ -825,6 +825,7 @@ namespace eval tacgame {
     if { [::tacgame::checkEndOfGame] } {
       catch {::game::Save}
       updateBoard -pgn
+      ::windows::gamelist::Refresh
       return
     }
 
