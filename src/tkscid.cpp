@@ -8681,7 +8681,7 @@ sc_savegame (Tcl_Interp * ti, Game * game, gameNumberT gnum, scidBaseT * base)
     // WHITE:
     s = game->GetWhiteStr();  if (!s) { s = "?"; }
     if (base->nb->AddName (NAME_PLAYER, s, &id) == ERROR_NameBaseFull) {
-        snprintf (temp, sizeof(temp), "Player Name limit of %u exceeded\n", NAME_MAX_ID [NAME_PLAYER]);
+        sprintf (temp, "Player Name limit of %u exceeded\n", NAME_MAX_ID [NAME_PLAYER]);
         Tcl_AppendResult (ti, temp, NULL);
         return TCL_ERROR;
     }
@@ -8691,7 +8691,7 @@ sc_savegame (Tcl_Interp * ti, Game * game, gameNumberT gnum, scidBaseT * base)
     // BLACK:
     s = game->GetBlackStr();  if (!s) { s = "?"; }
     if (base->nb->AddName (NAME_PLAYER, s, &id) == ERROR_NameBaseFull) {
-        snprintf (temp, sizeof(temp), "Player Name limit of %u exceeded\n", NAME_MAX_ID [NAME_PLAYER]);
+        sprintf (temp, "Player Name limit of %u exceeded\n", NAME_MAX_ID [NAME_PLAYER]);
         Tcl_AppendResult (ti, temp, NULL);
         return TCL_ERROR;
     }
@@ -8701,7 +8701,7 @@ sc_savegame (Tcl_Interp * ti, Game * game, gameNumberT gnum, scidBaseT * base)
     // EVENT:
     s = game->GetEventStr();  if (!s) { s = "?"; }
     if (base->nb->AddName (NAME_EVENT, s, &id) == ERROR_NameBaseFull) {
-        snprintf (temp, sizeof(temp), "Event Name limit of %u exceeded\n", NAME_MAX_ID [NAME_EVENT]);
+        sprintf (temp, "Event Name limit of %u exceeded\n", NAME_MAX_ID [NAME_EVENT]);
         Tcl_AppendResult (ti, temp, NULL);
         return TCL_ERROR;
     }
@@ -8711,7 +8711,7 @@ sc_savegame (Tcl_Interp * ti, Game * game, gameNumberT gnum, scidBaseT * base)
     // SITE:
     s = game->GetSiteStr();  if (!s) { s = "?"; }
     if (base->nb->AddName (NAME_SITE, s, &id) == ERROR_NameBaseFull) {
-        snprintf (temp, sizeof(temp), "Site Name limit of %u exceeded\n", NAME_MAX_ID [NAME_SITE]);
+        sprintf (temp, "Site Name limit of %u exceeded\n", NAME_MAX_ID [NAME_SITE]);
         Tcl_AppendResult (ti, temp, NULL);
         return TCL_ERROR;
     }
@@ -8721,7 +8721,7 @@ sc_savegame (Tcl_Interp * ti, Game * game, gameNumberT gnum, scidBaseT * base)
     // ROUND:
     s = game->GetRoundStr();  if (!s) { s = "?"; }
     if (base->nb->AddName (NAME_ROUND, s, &id) == ERROR_NameBaseFull) {
-        snprintf (temp, sizeof(temp), "Round Name limit of %u exceeded\n", NAME_MAX_ID [NAME_ROUND]);
+        sprintf (temp, "Round Name limit of %u exceeded\n", NAME_MAX_ID [NAME_ROUND]);
         Tcl_AppendResult (ti, temp, NULL);
         return TCL_ERROR;
     }
@@ -9046,8 +9046,8 @@ sc_game_values (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     Game * g = db->game;
     const char * comment;
-    char type[20];
-    snprintf (type, 20, "[%%%s ", argv[2]);
+    char type[50];
+    sprintf (type, "[%%%s ", argv[2]);
 
     g->SaveState ();
     g->MoveToPly (0);
@@ -12598,6 +12598,13 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     const char * fmt = "%s  %-*s %3u%c%02u%%   +%s%4u%s  -%s%4u%s  =%s%4u%s  %4u%c%c /%s%4u%s";
 
+    char separator_line[100];
+    memset (separator_line, '-', 100);
+    if (wbtWidth + 44 < 100) 
+      separator_line[wbtWidth + 44] = 0;
+    else
+      separator_line[99] = 0;
+
     if (ratingsOnly) { goto doRatings; }
 
     if (totalcount[STATS_ALL] == 0) {
@@ -12686,8 +12693,7 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     Tcl_AppendResult (ti, temp, newline, NULL);
 
     if (htextOutput) {
-      snprintf (temp, wbtWidth + 45, "------------------------------------------------------------------------------");
-      Tcl_AppendResult (ti, "<tt>  " , temp , "</tt>", newline, NULL);
+      Tcl_AppendResult (ti, "<tt>  " , separator_line , "</tt>", newline, NULL);
     }
 
     score = percent = 0;
@@ -12774,8 +12780,7 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     Tcl_AppendResult (ti, temp, newline, NULL);
 
     if (htextOutput) {
-      snprintf (temp, wbtWidth + 45, "------------------------------------------------------------------------------");
-      Tcl_AppendResult (ti, "<tt>  " , temp , "</tt>", newline, NULL);
+      Tcl_AppendResult (ti, "<tt>  " , separator_line , "</tt>", newline, NULL);
     }
 
     score = percent = 0;
@@ -12854,8 +12859,7 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         Tcl_AppendResult (ti, temp, newline, NULL);
 
 	if (htextOutput) {
-	  snprintf (temp, wbtWidth + 45, "------------------------------------------------------------------------------");
-	  Tcl_AppendResult (ti, "<tt>  " , temp , "</tt>", newline, NULL);
+	  Tcl_AppendResult (ti, "<tt>  " , separator_line , "</tt>", newline, NULL);
         }
 
         score = percent = 0;

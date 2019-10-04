@@ -28,9 +28,11 @@
 #include "myassert.h"
 #include "error.h"
 
+/* Windows _snprintf does not null terminate, so we don't use snprintf
 #ifdef _MSC_VER
 #define snprintf _snprintf
 #endif
+*/
 
 // Include the zlib header file if it is being compiled with Scid:
 #ifndef NO_ZLIB
