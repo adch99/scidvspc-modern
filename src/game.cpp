@@ -1121,9 +1121,8 @@ Game::MainVariation (uint varNumber)
 
     if (CurrentMove->varChild->comment) {
       // move the prevar comment as "(comment)" to the promoted move - S.A
-      char newcomment[strLength(CurrentMove->varChild->comment) + \
-      ( CurrentMove->varChild->next->comment ? strLength(CurrentMove->varChild->next->comment) : 0 ) \
-      + 3 + 1];
+      char * newcomment = (char*) malloc (strLength(CurrentMove->varChild->comment) + 
+      ( CurrentMove->varChild->next->comment ? strLength(CurrentMove->varChild->next->comment) : 0 ) + 3 + 1);
 
       if (CurrentMove->varChild->next->comment) {
         sprintf (newcomment, "(%s) %s", CurrentMove->varChild->comment, CurrentMove->varChild->next->comment);
@@ -1137,6 +1136,7 @@ Game::MainVariation (uint varNumber)
 
       CurrentMove->varChild->comment = NULL;
       m->comment = StrAlloc->Duplicate(newcomment);
+      free (newcomment);
     }
 
     CurrentMove->moveData  = m->moveData;
