@@ -42,6 +42,7 @@ namespace eval fics {
   set examresult *
   set entrytime 0
   set chatter {}
+  set examNotify 0
 
   set ignore_abort 0
   set ignore_adjourn 0
@@ -732,7 +733,8 @@ namespace eval fics {
           return
       } 
       ex* {
-          ::game::Clear
+	  ::game::Clear
+	  set ::fics::examNotify 1
       }
       moretime {
 	  ::commenteditor::appendComment "$::fics::reallogin gives $l"
@@ -2105,7 +2107,11 @@ namespace eval fics {
 	sc_game tags set -result $::fics::examresult
 	updateBoard -pgn
       }
-      wm title $::dot_w "$::scidName: $white - $black (examining game $game)"
+      if {$::fics::examNotify} {
+	wm title $::dot_w "$::scidName: $white - $black (examining game $game)"
+	updateConsole "Now examining game $game"
+	set ::fics::examNotify 0
+      }
       return
     }
 
@@ -2606,10 +2612,10 @@ namespace eval fics {
     }
   }
 
-  ### Send the last move made (via book, tree, engine or main.tcl) to fics if playing
+  ### Send the last move made (via book, tree, engine or main.tcl) to fics if playing or examining
 
   proc checkAdd {} {
-    if {$::fics::playing == 1 && [winfo exists .fics]}  {
+    if {[winfo exists .fics] && ($::fics::playing == 1 || $::fics::playing == 2)}  {
       set moveUCI [sc_game info previousMoveUCI]
       if { [ string length $moveUCI ] == 5 } {
         set promoLetter [ string tolower [ string index $moveUCI end ] ]
@@ -2617,11 +2623,13 @@ namespace eval fics {
       }
       ::fics::writechan [string range $moveUCI 0 3 ]
 
+      if {$::fics::playing == 1} {
       ### Stop clock
       if {[sc_pos side] == "white"} {
 	::gameclock::stop 2
       } else {
 	::gameclock::stop 1
+      }
       }
     }
   }
