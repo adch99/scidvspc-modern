@@ -462,15 +462,16 @@ proc initFICSDefaults {} {
     set port_timeseal 5001
     set login         ""
     set password      ""
-    set findopponent(initTime) 10
-    set findopponent(incTime)  10
-    set findopponent(rated)    rated
-    set findopponent(color)    ""
-    set findopponent(limitrating) 0
-    set findopponent(rating1)  1000
-    set findopponent(rating2)  1500
-    set findopponent(manual)   manual
-    set findopponent(formula)  ""
+    # wtf is this necessary
+    set ::fics::findopponent(initTime) 10
+    set ::fics::findopponent(incTime)  0
+    set ::fics::findopponent(rated)    unrated
+    set ::fics::findopponent(color)    auto
+    set ::fics::findopponent(limitrating) 0
+    set ::fics::findopponent(rating1)  1000
+    set ::fics::findopponent(rating2)  1500
+    set ::fics::findopponent(manual)   auto
+    set ::fics::findopponent(formula)  ""
     set consolebg grey35
     set consolefg LimeGreen
     set chanoff 1
