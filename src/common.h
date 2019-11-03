@@ -21,9 +21,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#ifdef WINCE
-#include <tcl.h>
-#endif
 #include "tclmy.h"
 #include "myassert.h"
 #include "error.h"
@@ -46,21 +43,16 @@
 // CONSTANTS:
 
 // Buffer sizes
-#ifdef WINCE
-#define BBUF_SIZE 30000
-#define TBUF_SIZE 100000
-#else
 #define BBUF_SIZE 256000 //120000
 #define TBUF_SIZE 1280000 //160000
-#endif
 
 typedef unsigned short versionT;
 
 // Version: div by 100 for major number, modulo 100 for minor number
 // so 109 = 1.9, 110 = 1.10, etc.
 
-const versionT SCID_VERSION = 400;     // Current file format version = 3.0
-const versionT SCID_OLDEST_VERSION = 400; // Oldest compatible format: 3.0
+const versionT SCID_VERSION = 400;        // Current file format version = 4.0
+const versionT SCID_OLDEST_VERSION = 400; // Oldest compatible format: 4.0
 
 const char SCID_VERSION_STRING[] = "4.20";     // Current version
 const char SCID_VERSION_DATE[] = "Apr 7, 2019";
@@ -745,27 +737,19 @@ square_Adjacent (squareT from, squareT to)
 //   and mix the bits around.
 
 inline void srandom32(uint seed) {
-#ifdef WINCE
-    srand (seed);
-#else
 #ifdef WIN32
     srand (seed);
 #else
     srandom (seed);
 #endif
-#endif
 }
 
 inline uint random32()
 {
-#ifdef WINCE
-    return rand() ^ (rand() << 16) ^ (rand() >> 16);
-#else
 #ifdef WIN32
     return rand() ^ (rand() << 16) ^ (rand() >> 16);
 #else
     return random() ^ (random() << 16) ^ (random() >> 16);
-#endif
 #endif
 }
 
