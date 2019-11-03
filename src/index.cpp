@@ -270,7 +270,7 @@ IndexEntry::Write (MFile * fp, versionT version)
     ASSERT (fp != NULL);
 
     // Cannot write old-version index files:
-    if (version < 400) { return ERROR_FileVersion; }
+    if (version < SCID_VERSION) { return ERROR_FileVersion; }
 
     version = 0;  // We dont have any version-specific code.
     
