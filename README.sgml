@@ -69,13 +69,15 @@ project is authored by <ref name="Stevenaaus" id="contact_"> and numerous contri
 <label id="download_">
 <sect> download <p>
 
-Source <url url="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.20.tgz/download" name="scid_vs_pc-4.20.tgz">
+Source <url url="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.21.tgz/download" name="scid_vs_pc-4.21.tgz">
 
-Windows <url url="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.20.exe/download" name="Scid vs PC-4.20.exe">
+Windows <url url="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.21.exe/download" name="Scid vs PC-4.21.exe">
 
-Windows 64 bit <url url="http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.20.x64.exe/download" name="Scid vs PC-4.20.x64.exe">
+Windows 64 bit <url url="http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.21.x64.exe/download" name="Scid vs PC-4.21.x64.exe">
 
-Mac <url url="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.20.dmg/download" name="ScidvsMac-4.20.dmg">
+Mac <url url="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.21.dmg/download" name="ScidvsMac-4.21.dmg">
+
+Mac 64bit (beta) <url url="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.21.x64.dmg/download" name="ScidvsMac-4.21.x64.dmg">
 
 <sect2> Other resources<p>
 <P>Fedora Packages (unofficial) <url url="https://copr.fedorainfracloud.org/coprs/awood/scid_vs_pc/">
@@ -109,8 +111,8 @@ use <bf>./configure BINDIR=/usr/bin/ SHAREDIR=/usr/share/scid/</bf></em></p>
   <p>Installing from source:</p>
 
 <code>
-tar -xzf scid_vs_pc-4.20.tgz
-cd scid_vs_pc-4.20
+tar -xzf scid_vs_pc-4.21.tgz
+cd scid_vs_pc-4.21
 ./configure
 make
 sudo make install
@@ -141,17 +143,18 @@ C:\Users\[USERNAME]\AppData\Local\VirtualStore\Program Files\Scid vs PC
 
 <sect2> Mac OS X <p>
 
-The <ref name="ScidvsMac-4.20 app" id="download_"> should include everything you need. Simply drag and drop the App into /Applications (or similar).</p>
+The <ref name="ScidvsMac-4.21 app" id="download_"> should include everything you need. Simply drag and drop the App into /Applications (or similar). It cannot be run from the dmg disk image.</p>
 
-<p>Due to complicated build reasons, it seems only Yosemite (OS X 10.10) and later are now supported. </p>
-
-<em>Users upgrading may have to remove (or edit) <bf>$HOME/.scidvspc/config/engines.dat</bf>
-to properly configure the chess engines.</em>
-
-<p>
-OS X  has a relatively poor implementation of Tcl/Tk, and we use a 32 bit carbon build of Tcl 8.5 - which is the least buggy version. Cocoa Wish 8.6 has made progress, and is now a useable alternative for those able to compile from source and seeking a little more speed, but it is still not recommended due to numerous rendering anomalies.
-To compile from source - once you have XCode installed - please read <bf>ScidvsMac-HowTo.rtfd</bf> in the source tarball.
+<p>Due to complicated build reasons, only Yosemite (OS X 10.10) and
+later are now supported.  Additionally, Catalina has removed 32-bit app
+support, and it is only supported by our beta ScidvsMac-x64 app,
+as 64-bit Wish is not as robust as the old version.
+</p><p>
+To compile from source - once you have XCode installed - please read <bf>ScidvsMac-HowTo.rtfd</bf> in the source tarball for some older information.
 </p>
+
+<p><em>Users upgrading may have to remove (or edit) <bf>$HOME/.scidvspc/config/engines.dat</bf>
+to properly configure the chess engines.</em></p>
 
 <sect> news <p>
 

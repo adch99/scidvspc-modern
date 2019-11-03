@@ -1078,7 +1078,7 @@ $m add command -label OptionsSave -command {
     }
 
     close $optionF
-    set ::statusBar "Options were saved to: [scidConfigFile options]"
+    set ::statusBar "Options saved to [scidConfigFile options]"
   }
 }
 set helpMessage($m,[incr menuindex]) OptionsSave

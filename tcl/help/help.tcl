@@ -1337,42 +1337,25 @@ set helpText(Comment) {<h1>The Comment Editor</h1>
   <h3><name Diagrams>Diagrams</name></h3>
   <p>
   In addition to text comments, Scid can also draw colour symbols and arrows on the board.
-  In the Comment Editor, press <img bookmark_down> to see a small board and diagrams.
+  These can be drawn straight onto the main board, or more detailed drawings can be made 
+  in the Comment Editor by pressing <img bookmark_down> to show/hide a small board and diagrams.
   </p>
 
   <h4>Drawing Arrows</h4>
   <p>
-  Arrows can be done in two ways. In the Main Board, while holding Control, click on the start square then end square.
-  Alternatively in the Comment Editor, arrows can be drawn (and erased) by dragging between two squares.
+  Arrows can be drawn in two ways. In the Main Board, hold Control and click on the start square and then end square.
+  Or in the Comment Editor arrows can be drawn (and erased) by dragging between two squares.
   </p>
-  <p>
-  The technical format of arrows is:
-  <b>[%arrow fromSquare toSquare color]</b>
-  where <b>fromSquare</b> and <b>toSquare</b> are square names like d4.
-  </p>
-  <p> Normally, the comments associated with these diagrams are hidden in the PGN
-window, but can be viewed by deselecting "Hide Square/Arrow Codes" in the PGN window
-options.</p>
   <h4>Colouring Squares</h4>
   <p>
-  Click on any square in the Comment Editor board to add the selected colour/mark.
-  The technical format is:
-  <b>[%mark square color]</b>
-  where <b>square</b> is a square name like d4 and <b>color</b> is any
-  recognized color name (such as red, blue4, darkGreen, lightSteelBlue)
-  or RGB code (six hexadecimal digits such as #a0b0c8).
-  If the color is omitted, it defaults to red.
+  Similarly, hold Shift and click on the main board to colour a square, or
+  click on any square in the Comment Editor board to add the selected colour/mark.
   </p>
-  <p>
-  A comment may contain any number of color commands, but each must have
-  in its own <b>[%mark ...]</b> tag.
-  For example, the comment text
-  <b>Now d6 [%mark d6] is weak and the knight can attack it
-  from b5. [%mark b5 #000070]</b>
-  will color d6 red and b5 with the dark-blue color #000070.
-  </p>
+  <p> The comments associated with these diagrams are visible as special % codes in the PGN
+window, but can be hidden by selecting "Hide Square/Arrow Codes" in the PGN window
+Options.</p>
 
-  <p><footer>Updated: Scid vs. PC 4.14, Nov 2014</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.21, Oct 2019</footer></p>
 }
 
 set helpTitle(Crosstable) "Crosstable Window"
