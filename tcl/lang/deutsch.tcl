@@ -3424,46 +3424,34 @@ set helpText(D,Comment) {<h1>Der Kommentareditor</h1>
 
   <h3><name Diagrams>Diagramme</name></h3>
   <p>Zusätzlich zu den Textkommentaren kann Scid auch Farbsymbole und
-  Pfeile auf das Schachbrett zeichnen. Drücken Sie im
-  Kommentareditor <img bookmark_down>, um ein kleines Schachbrett und
-  Diagramme zu sehen.
-  In addition to text comments, Scid can also draw colour symbols and arrows on the board.
-  In the Comment Editor, press <img bookmark_down> to see a small board and diagrams.
+  Pfeile auf das Schachbrett zeichnen. Sie können direkt auf das
+  Hauptbrett gezeichnet werden. Detailliertere Zeichnungen können im
+  Kommentareditor erstellt werden, indem man <img bookmark_down>
+  drückt, um ein kleines Brett und Diagramme zu sehen bzw. zu
+  verbergen.
   </p>
 
   <h4>Pfeile zeichnen</h4>
   <p>Pfeile können auf zwei Arten gezeichnet werden. Im Hauptbrett,
   während man die Strg-Taste gedrückt hält, auf das Startfeld klicken
   und dann auf das Zielfeld. Alternativ können im Kommentareditor
-  durch Ziehen zwischen zwei Feldern Pfeile gezeichnet (und entfernt) werden.
-  </p>
-  <p>Das technische Format der Pfeile ist:
-  <b>[%arrow fromSquare toSquare color]</b>
-  wo <b>fromSquare</b> und <b>toSquare</b> Feldnamen wie d4 sind.
-  </p>
-  <p>Normalerweise sind die Kommentare, die mit diesen Diagrammen
-  verbunden sind, im PGN-Fenster verborgen. Sie können aber im
-  PGN-Fenster durch Deaktivieren
-  von <green>PGN--<gt>Ausgabe--<gt>Feld-/Pfeilcodes verbergen</green>
-  angesehen werden.
-  </p>
-  <h4>Felder einfärben</h4>
-  <p>Klicken Sie auf ein beliebiges Feld im Kommentareditor, um die
-  ausgewählte Farbe/Markierung hinzuzufügen. Das technische Format ist:
-  <b>[%mark square color]</b>
-  wo <b>square</b> ein Feldname wie d4 ist und <b>color</b> ist eine
-  beliebige erkannte Farbe (wie red, blue4, darkGreen, lightSteelBlue)
-  oder ein RGB-Code (sechs Hexadezimalziffern wie #a0b0c8). Wenn die
-  Farbe ausgelassen wird, wird sie standardmäßig auf Rot gesetzt.
-  </p>
-  <p>Ein Kommentar kann eine beliebige Zahl an Farbbefehlen enthalten,
-  aber jeder muß sein eigenes Kennzeichen <b>[%mark ...]</b>
-  enthalten. Beispiel: im Kommentartext <b>Now d6 [%mark d6] is
-  weak and the knight can attack it from b5. [%mark b5 #000070]</b>
-  werden d6 rot und b5 mit der dunkelblauen Farbe #000070 eingefärbt.
+  durch Ziehen zwischen zwei Feldern Pfeile gezeichnet (und entfernt)
+  werden.
   </p>
 
-  <p><footer>Aktualisiert: Scid vs. PC 4.14, November 2014</footer></p>
+  <h4>Felder einfärben</h4>
+  <p>Entsprechend halten Sie die Umschalttaste gedrückt und klicken
+  ins Hauptbrett, um ein Feld einzufärben oder klicken Sie auf
+  irgendein Feld im Kommentareditior, um die ausgewählte
+  Farbe/Markierung hinzuzufügen.
+  </p>
+  <p>Die Kommentare zu diesen Diagrammen sind im PGN-Fenster als
+  besondere %-Codes sichtbar, sie können aber durch Auswahl von
+  "Feld-/Pfeilcodes verbergen" in den PGN-Fensteroptionen ausgeblendet
+  werden.
+  </p>
+
+  <p><footer>Aktualisiert: Scid vs. PC 4.21, Oktober 2019</footer></p>
 }
 
 set helpTitle(D,Crosstable) "Fenster Kreuztabelle"
