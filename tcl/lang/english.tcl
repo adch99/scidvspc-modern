@@ -841,7 +841,7 @@ translate E HeaderSearch {General Search}
 translate E EndSideToMove {Side to move at end of game}
 translate E GamesWithNoECO {Games with no ECO?}
 translate E GameLength {Game length}
-translate E FindGamesWith {Find games with flags}
+translate E FindGamesWith {Show Flag Options}
 translate E StdStart {Non-standard start}
 translate E Promotions {Promotions}
 translate E UnderPromo {Under Prom.}
