@@ -220,6 +220,9 @@ set ::tree::short 1
 set ::tree::autoAdjust 0
 set ::tree::mask::recentMask {}
 set ::tree::mask::autoLoadMask 0
+set ::tree::order frequency
+# Auto-save tree cache when closing tree window:
+set ::tree::autoSave 0
 
 set cleaner(players) 1
 set cleaner(events) 1
@@ -617,13 +620,6 @@ for { set year [clock format [clock seconds] -format {%Y}] } \
 set pgnStyle(Tags) 1
 set pgnStyle(Comments) 1
 set pgnStyle(Vars) 1
-
-
-# Default Tree sort method:
-set tree(order) frequency
-
-# Auto-save tree cache when closing tree window:
-set tree(autoSave) 0
 
 # Auto-save options when exiting:
 set optionsAutoSave 1

@@ -187,7 +187,7 @@ proc ::tree::Open {{baseNumber 0}} {
   }
   $w.menu.opt add checkbutton -label TreeAdjust -variable ::tree::autoAdjust
   $w.menu.opt add checkbutton -label TreeOptAutomask -variable ::tree::mask::autoLoadMask
-  $w.menu.opt add checkbutton -label TreeOptAutosave -variable tree(autoSave$baseNumber)
+  $w.menu.opt add checkbutton -label TreeOptAutosave -variable ::tree::autoSave
   $w.menu.opt add cascade -menu $w.menu.opt.size -label TreeOptCacheSize
 
   menu $w.menu.opt.size
@@ -334,13 +334,15 @@ proc ::tree::closeTree {baseNumber} {
   trace remove variable tree(sortBest$baseNumber) write "::tree::doTrace sortBest"
 
   set ::geometry(treeWin$baseNumber) [wm geometry .treeWin$baseNumber]
-  focus .main
 
-  if {$tree(autoSave$baseNumber)} {
+  if {$::tree::autoSave} {
     busyCursor .
     catch { sc_tree write $tree(base$baseNumber) } ; # necessary as it will be triggered twice
     unbusyCursor .
   }
+
+  # Will fail and force proc exit when Scid quit triggers closeTree
+  focus .main
 
   sc_tree clean $baseNumber
   if {$::tree(locked$baseNumber)} {
