@@ -1642,7 +1642,13 @@ proc standardShortcuts {w} {
   bind $w <Control-s> ::gameReplace
   bind $w <Control-S> ::gameAdd
 
-  bind $w <F11>  toggleFullScreen
+  if {$::macOS} {
+    bind $w <Command-f>  toggleFullScreen
+    # How do we catch command-q on the Mac ?
+    # bind $w <Command-q> ::file::Exit
+  } else {
+    bind $w <F11>  toggleFullScreen
+  }
   bind $w <Control-Shift-Left>  {::board::resize .main.board -1}
   bind $w <Control-Shift-Right> {::board::resize .main.board +1}
   standardGameShortcuts $w
