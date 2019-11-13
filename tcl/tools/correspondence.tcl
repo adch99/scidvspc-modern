@@ -1,16 +1,18 @@
 ###
 ### Correspondence.tcl: part of Scid.
 ### Copyright (C) 2008 Alexander Wagner
+### Minor changes stevenaaus
 ###
 ### $Id: correspondence.tcl,v 1.101 2010/12/23 14:08:18 arwagner Exp $
 ###
 ### Last change: <Thu, 2010/12/23 14:55:12 arwagner agamemnon>
 ###
 ### Add correspondence chess via eMail or external protocol to scid
-###
-#======================================================================
 
-# http and tdom are required for the Xfcc protocol
+### http and tdom are required for the Xfcc protocol
+### If having problems connecting, try updating tls and
+# package require tls 1.7
+# ::tls::init -ssl3 false -ssl2 false -tls1.2 true
 
 ### Xfcc interface for scid
 
@@ -232,13 +234,9 @@ namespace eval Xfcc {
 		wm title $w "\[$xfccrcfile\]"
 		ttk::button $w.bOk     -text OK -command "::Xfcc::xfccsrvstore; ::Xfcc::SaveXfcc; destroy .configXfccSrv"
 		ttk::button $w.bHelp   -text [::tr Help] -command {helpWindow CCXfccSetupDialog}
-		ttk::button $w.bAdd    -text  [::tr "GlistAddField"] -command {
-			::Xfcc::AddServer
-		}
+		ttk::button $w.bAdd    -text  [::tr "GlistAddField"] -command ::Xfcc::AddServer
 
-		ttk::button $w.bDelete -text [::tr "GlistDeleteField"] -command {
-			::Xfcc::DeleteServer
-		}
+		ttk::button $w.bDelete -text [::tr "GlistDeleteField"] -command ::Xfcc::DeleteServer
 		ttk::button $w.bCancel -text [::tr "Cancel"] -command "destroy $w"
 
 		listbox $w.xfccSrvList -height [expr [ array size ::Xfcc::xfccsrv ] / 4 + 1] -width 60 -selectmode single -list ::Xfcc::lsrvname
@@ -3919,14 +3917,15 @@ namespace eval CorrespondenceChess {
 			return 1
 		}
 
-		### If URI is https, register on default port 443 
+		### If URI is https, register on default port 443
 		### todo : make port configurable
 
 		if {[regexp -nocase ^(https://)(.*) $uri]} {
-			if {[catch {package require tls}]} {
+			if {[catch {package require tls} tls_version]} {
 				tk_messageBox -title "Xfcc Oops" -type ok -icon warning -message $::CorrespondenceChess::NoHTTPS
 				return 0
 			} else {
+				::splash::add "Loaded package tls, version $tls_version"
 				::tls::init -ssl3 false -ssl2 false -tls1 true
 				http::register https 443 ::tls::socket
 				set ::CorrespondenceChess::SeenHTTPS 1
@@ -3959,7 +3958,7 @@ namespace eval CorrespondenceChess {
 			::splash::add "tDOM package not found, disabling internal Xfcc support"
 			set XfccInternal -1
 		} else {
-			::splash::add "tDOM package $version found"
+			::splash::add "tDOM package $version found, internal Xfcc support enabled"
 		}
 	}
 
