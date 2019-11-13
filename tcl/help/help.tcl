@@ -502,6 +502,7 @@ append helpText(Index) {
   <h3><name X>X</name></h3>
   <ul>
   <li><a CCXfcc>Xfcc Support</a></li>
+  <li><a CCXfccSetupDialog>Xfcc Server Setup</a></li>
   </ul>
 
   <h3><name Y>Y</name></h3>
@@ -4744,11 +4745,11 @@ The integration of Xfcc is done in Scid via external helper tools set
 in the <a CCSetupDialog>Configuration</a> dialog for correspondence
 chess.
 </p>
-<p><i>Scid's Xfcc support is dependant on the TCL </i><b>http</b><i> and </i><b>tDOM</b><i> packages.
+<p>
+<i>Scid's Xfcc support is dependant on the TCL </i><b>http</b><i> , </i><b>tDOM</b><i> and </i><b>TLS</b><i> packages.
 See the <green><run raiseSplashWindow>Startup Window</run></green> to inspect
-if these packages are found. Package </i><b>tls</b><i> is also probably required.</i>
-
-</p>
+if these packages are found.  
+</i> </p>
 
 <h3>Start a new game</h3>
 <p>
@@ -5087,11 +5088,9 @@ server and should be used as default.
 <i>This item will be disabled if Xfcc support is not enabled.</i>
 </p>
 <p>
-This feature requires http and tDOM support for TCL to be installed.
-Usually, these modules are distributed with your TCL installation,
-however, on some systems they have to be installed explicitly. If
-either one is not found this function is disabled.
-</p>
+This feature requires http, tDOM and TLS support for TCL to be installed.
+See <a CCXfccSetupDialog>Xfcc Server Setup</a> for more information.</p>
+
 <p>
 <b>Xfcc Configuration</b>:
 Give the path and filename of the config file for the xfcc protocol
@@ -5233,6 +5232,11 @@ The dialog is separated in two parts: the upper half lists all server
 names defined, while the lower part lists all currently set
 configuration values for these files.
 </p>
+
+<p><i>For servers requiring tls1.2 protocol, tls-1.7 must be installed and some changes made to Scid's gui
+"package require tls 1.7" and "::tls::init -ssl3 false -ssl2 false -tls1.2 true"</p>
+</i></p>
+
 <h2>Necessary entries</h2>
 <ul>
 <li><term>Server name</term>: This specifies the name used for this specific
@@ -5293,7 +5297,7 @@ are added to the setup. By pressing <term>Cancel</term> all changes
 are lost, the old setup stays in place.
 </p>
 
-<p><footer>Updated: Scid 3.6.24, May 2008</footer></p>
+<p><footer>Updated: Scid vs. PC 4.21 Nov 2019</footer></p>
 }
 
 # Tactics Trainer
