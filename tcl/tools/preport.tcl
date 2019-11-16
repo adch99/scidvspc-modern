@@ -277,7 +277,6 @@ proc ::preport::makeReportWin {args} {
     pack $w.b.previewLatex $w.b.viewHTML $w.b.opts -side left -padx 2 -pady 2
     ::preport::ConfigMenus
     placeWinCenter $w
-    wm geom $w 150x42
     update
     wm deiconify $w
   } 
