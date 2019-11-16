@@ -2369,6 +2369,9 @@ proc makeAnalysisWin {{n 0} {options {}}} {
     $w.b.startStop configure -image tb_play
     ::utils::tooltip::Set $w.b.startStop "$tr(StartEngine)"
   }
+  if {$analysis(uci$n) && $::uci::goCommand != "go infinite"} {
+    ::utils::tooltip::Set $w.b.startStop $::uci::goCommand
+  }
 
   button $w.b.move -image tb_addmove -command "makeAnalysisMove $n" -relief $relief
   ::utils::tooltip::Set $w.b.move $tr(AddMove)
@@ -3278,13 +3281,21 @@ proc toggleEngineAnalysis {{n -1}} {
       $h delete 1.0 end
       $h configure -state disabled
     } 
-    ::utils::tooltip::Set $b "$tr(StartEngine)"
+    if {$analysis(uci$n) && $::uci::goCommand != "go infinite"} {
+      ::utils::tooltip::Set $b $::uci::goCommand
+    } else {
+      ::utils::tooltip::Set $b "$tr(StartEngine)"
+    }
     .analysisWin$n.b.exclude configure -state disabled
     set analysis(exclude$n) ""
   } else  {
     startAnalyzeMode $n
     $b configure -image tb_pause
-    ::utils::tooltip::Set $b "$tr(StopEngine)"
+    if {$analysis(uci$n) && $::uci::goCommand != "go infinite"} {
+      ::utils::tooltip::Set $b $::uci::goCommand
+    } else {
+      ::utils::tooltip::Set $b "$tr(StopEngine)"
+    }
     .analysisWin$n.b.exclude configure -state normal
   }
 }

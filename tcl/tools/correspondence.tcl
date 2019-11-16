@@ -1,7 +1,8 @@
 ###
 ### Correspondence.tcl: part of Scid.
-### Copyright (C) 2008 Alexander Wagner
-### Minor changes stevenaaus
+### THIS FEATURE MAY JUST BE BROKEN NOWADAYS ??? - S.A. 2019
+###
+### Copyright (C) 2008 Alexander Wagner , minor changes stevenaaus
 ###
 ### $Id: correspondence.tcl,v 1.101 2010/12/23 14:08:18 arwagner Exp $
 ###
@@ -11,8 +12,8 @@
 
 ### http and tdom are required for the Xfcc protocol
 ### If having problems connecting, try updating tls and
-# package require tls 1.7
-# ::tls::init -ssl3 false -ssl2 false -tls1.2 true
+###     package require tls 1.7
+###     ::tls::init -ssl3 false -ssl2 false -tls1.2 true
 
 ### Xfcc interface for scid
 

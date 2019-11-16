@@ -7226,10 +7226,10 @@ set helpText(D,CCXfcc) {<h1>Fernschachserver/Xfcc</h1>
   Fernschach vorgenommen wird.
   </p>
   <p><i>Scids Xfcc-Unterstützung hängt von den Tcl-Paketen
-  </i><b>http</b><i> und </i><b>tDOM</b><i> ab. Siehe
+  </i><b>http</b><i>, </i><b>tDOM</b><i> und </i><b>TLS</b><i>
+  ab. Siehe
   das <green><run raiseSplashWindow>Willkommensfenster</run></green>,
-  um festzustellen, ob diese Pakete gefunden wurden. Das
-  Paket <b>tls</b> wird wahrscheinlich ebenfalls benötigt.</i>
+  um festzustellen, ob diese Pakete gefunden wurden.
   </p>
 
   <h3>Eine neue Partie beginnen</h3>
@@ -7573,11 +7573,10 @@ set helpText(D,CCSetupDialog) {<h1>Fernschach konfigurieren</h1>
   als Voreinstellung genutzt werden. <i>Dieser Eintrag ist nicht
   verfügbar, falls die Xfcc-Unterstützung nicht möglich ist.</i>
   </p>
-  <p>Diese Funktion erfordert die Installation der http- und
-  tDOM-Unterstützung für TCL. Üblicherweise werden diese Module mit
-  Ihrer TCL-Installation mitgeliefert. Auf einigen Systemen müssen sie
-  jedoch extra installiert werden. Wenn ein Modul nicht gefunden wird,
-  ist diese Funktion nicht verfügbar.
+  <p>Diese Funktion erfordert die Installation der http-, TLS- und
+  tDOM-Unterstützung für TCL. Siehe
+  <a CCXfccSetupDialog>Xfcc-Servereinstellung</a> für weitere
+  Informationen.
   </p>
   <p><b>Xfcc-Konfiguration:</b> geben Sie Pfad und Dateiname der
   Konfigurationsdatei für die Xfcc-Protokollsteuerung an. Dieser Pfad
@@ -7721,6 +7720,12 @@ set helpText(D,CCXfccSetupDialog) {<h1>Xfcc-Servereinstellung</h1>
   auf, während der untere Teil alle aktuell eingestellten
   Konfigurationswerte für diese Dateien anzeigt.
   </p>
+  <p><i>Für Server, die das tls1.2-Protokoll verlangen, muß tls-1.7
+  installiert sein und einige Änderungen für die grafische
+  Benutzeroberfläche von Scid müssen erfolgt sein: "package require
+  tls 1.7" und "::tls::init -ssl3 false -ssl2 false -tls1.2 true".
+  </i></p>
+
   <h2>Notwendige Einträge</h2>
   <ul>
   <li><term>Servername</term>: dies legt den für diesen Server
@@ -7775,7 +7780,7 @@ set helpText(D,CCXfccSetupDialog) {<h1>Xfcc-Servereinstellung</h1>
   alle Änderungen verloren, die alten Einstellungen bleiben in Kraft.
   </p>
 
-  <p><footer>Aktualisiert: Scid 3.6.24, Mai 2008</footer></p>
+  <p><footer>Aktualisiert: Scid vs. PC 4.21, November 2019</footer></p>
   }
 
 # Tactics Trainer

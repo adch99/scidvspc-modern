@@ -2933,7 +2933,7 @@ because implementation is very problematic.</p>
   These are kept in the Scidvspc's log directory and can be viewed by right-clicking the <button tb_help> button,
 or via the <button tb_annotate> button in the <run ::enginelist::choose><green>engine configuration</green></run> widget.
 The <b>Log Size</b> is the max number of lines in the log. Setting it to zero disables logging altogether.</p>
-  <p>The default UCI command for <button tb_play> is "go infinite", but this may be altered by changing <b>::uci::goCommand</b> in ScidvsPC's Console.
+  <p>The default UCI command for <button tb_play> is "go infinite", but this may be altered by changing <b>::uci::goCommand</b> in ScidvsPC's <a Console>Console</a> (for example "set ::uci::goCommand {go movetime 60}").
 </p>
 
   <p><footer>Updated: Scid vs. PC 4.21, July 2019</footer></p>
