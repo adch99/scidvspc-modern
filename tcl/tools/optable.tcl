@@ -211,7 +211,6 @@ proc ::optable::makeReportWin {args} {
     pack $w.b.opts $w.b.lexclude $w.b.exclude $w.b.mergeGames -side left -padx 2
     ::optable::ConfigMenus
     placeWinCenter $w
-    wm geom $w 150x42
     update
     wm deiconify $w
   }
