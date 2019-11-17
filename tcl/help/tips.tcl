@@ -65,7 +65,7 @@ set tips(E) {
     by pressing <b>F1</b> in most windows.
   }
   {
-    You can hide (or show) various board components by right-clickng the 'Board' tab (or the whole Main Board in undocked mode).
+    You can show or hide various board components by right-clickng the 'Board' tab (or the whole Main Board in undocked mode).
   }
   {
     Mastering Scid's <a Docking>Docked Windows</a> feature is tricky, but allows for a very configurable desktop.

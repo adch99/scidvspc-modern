@@ -5261,8 +5261,9 @@ set helpText(D,Analysis) {<h1>Das Analysefenster</h1>
   wird die Protokollierung insgesamt abgeschaltet.</p>
 
   <p>Der Standard-UCI-Befehl für <button tb_play> ist "rechne
-  endlos". Dies kann aber in der Konsole von ScidvsPC über eine
-  Änderung von <b>::uci::goCommand</b> geändert werden.</p>
+  endlos". Dies kann aber in der <a Console>Konsole</a> von ScidvsPC
+  über eine Änderung von <b>::uci::goCommand</b> geändert werden
+  (z.B. "set ::uci::goCommand {go movetime 60}").</p>
 
   <p><footer>Aktualisiert: Scid vs. PC 4.21, Juli 2019</footer></p>
 }
