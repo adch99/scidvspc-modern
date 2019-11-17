@@ -10,6 +10,7 @@ set ::preport::_player ""
 set ::preport::_color white
 set ::preport::_pos start
 set ::preport::_clipbase 0
+set ::preport::_flip 0
 
 # preportDlg
 #   Present a dialog allowing the user to select the
@@ -208,9 +209,15 @@ proc ::preport::makeReportWin {args} {
     destroy $w
     if {$::preport::_interrupt} { return }
   }
-  set report [::preport::report ctext 1]
 
   if {[lsearch -exact $args "-nodisplay"] >= 0} { return }
+
+  # some of this probably isn't right S.A.
+  set ::preport::_data(bdLaTeX) [sc_pos tex]
+  set ::preport::_data(bdHTML) [sc_pos html]
+  set ::preport::_data(bdLaTeX_flip) [sc_pos tex flip]
+  set ::preport::_data(bdHTML_flip) [sc_pos html -flip 1]
+  set ::preport::showBoard  [expr {$::preport::_pos == "current"  &&  ![sc_pos isAt start]}]
 
   set w .preportWin
   if {[winfo exists $w]} {
@@ -279,21 +286,42 @@ proc ::preport::makeReportWin {args} {
     placeWinCenter $w
     update
     wm deiconify $w
-  } 
+  }
+
+  if {$::preport::showBoard} {
+    catch {destroy $w.text.bd}
+    ::board::new $w.text.bd 40 0
+    set ::preport::_flip [expr {$::preport::_color == "black"}]
+    if {$::preport::_flip} { ::board::flip $w.text.bd }
+    $w.text.bd configure -relief solid -borderwidth 1
+    for {set i 0} {$i < 63} {incr i} {
+      ::board::bind $w.text.bd $i <ButtonPress-1> ::preport::flipBoard
+      ::board::bind $w.text.bd $i <ButtonPress-3> ::preport::resizeBoard
+    }
+    ::board::update $w.text.bd [sc_pos board]
+  }
 
   busyCursor .
   $w.text configure -state normal
   $w.text delete 1.0 end
 
-  if {$::preport::_pos == "current"  &&  ![sc_pos isAt start]} {
-    puts Board!
-    # todo , insert a board (?)
-  }
-
+  set report [::preport::report ctext 1]
   regsub -all "\n" $report "<br>" report
   ::htext::display $w.text $report
   unbusyCursor .
   ::windows::stats::Refresh
+}
+
+proc ::preport::flipBoard {} {
+  ::board::flip .preportWin.text.bd
+  set ::preport::_flip [::board::isFlipped .preportWin.text.bd]
+}
+
+proc ::preport::resizeBoard {} {
+  set bd .preportWin.text.bd
+  set size [::board::size $bd]
+  if {$size >= 60} { set size 30 } else { incr size 5 }
+  ::board::resize $bd $size
 }
 
 
@@ -322,8 +350,8 @@ proc ::preport::setOptions {} {
       set from 0; set to 1000; set tick 200; set res 100
     }
     if {$i == "sep"} {
-      frame $w.f.fsep$row -height 2 -borderwidth 2 -relief sunken 
-      frame $w.f.tsep$row -height 2 -borderwidth 2 -relief sunken 
+      frame $w.f.fsep$row -height 2 -borderwidth 2 -relief sunken
+      frame $w.f.tsep$row -height 2 -borderwidth 2 -relief sunken
       grid $w.f.fsep$row -row $row -column 0 -sticky we -columnspan 4
       #grid $w.f.tsep$row -row $row -column 1 -sticky we -columnspan 2
     } elseif {[info exists yesno($i)]} {
@@ -518,12 +546,14 @@ proc ::preport::report {fmt {withTable 1}} {
     set percent "\\%"; set bullet "\\hspace{0.5cm}\$\\bullet\$";
     set bb "\\textbf{"; set eb "}";
     set ml "\\mainline{"; set mo "}";
+    set multicolumnstart "\\multicolumn{2}{c}{"
+    set multicolumnend "}"
   } elseif {$fmt == "html"} {
-    set n "<br>\n"; set p "<p>\n\n"; 
+    set n "<br>\n"; set p "<p>\n\n";
     set preText "<pre>\n"; set postText "</pre>\n";
     set bb "<strong>"; set eb "</strong>";
   } elseif {$fmt == "ctext"} {
-    set preText "<tt>"; set postText "</tt>"    
+    set preText "<tt>"; set postText "</tt>"
   }
 
   # Generate the report:
@@ -535,68 +565,98 @@ proc ::preport::report {fmt {withTable 1}} {
 
   set r $::optable::_docStart($fmt)
   set propername $::preport::_player
-  if ([string first "," $propername]) {    
+  if ([string first "," $propername]) {
     set fields [split $propername ","]
     lassign $fields lastname firstname extracomma
     set propername [concat $firstname $lastname]
     if {$extracomma != ""} {
       set propername [concat $propername $extracomma]
-    }    
+    }
   }
 
   if {$fmt == "latex"} {
     # A latex f-me - underscores throw errors
     set propername [string map {_ -} $propername]
   }
-  
-  # Use this if you want title last name first -- append r [::preport::_title $::preport::_player]
+
+  # Title
   append r [::preport::_title $propername]
-  
-  append r $preText
+
+  ### New Board for Player Report
+  # Good fucking luck messing with this overloaded bullshit
+  # Latex is a fucking piece of shit, but almost working
+  # ... we just need to set the board and make sure some stray $preText doesn't break it
+  if {$::preport::showBoard} {
+    if {$fmt == "latex"} {
+       append r "\\begin{tabularx}{1\\textwidth}{rX} \n"
+    } else {
+      append r "$preText"
+    }
+    if {$fmt == "latex"} {
+      if {$::preport::_flip} {
+	append r "$multicolumnstart \\chessboard\[inverse\] $multicolumnend $n"
+      } else {
+	append r "$multicolumnstart \\chessboard $multicolumnend $n"
+      }
+    } elseif {$fmt == "html"} {
+      if {$::preport::_flip} {
+	append r $::preport::_data(bdHTML_flip)
+      } else {
+	append r $::preport::_data(bdHTML)
+      }
+    } elseif {$fmt == "ctext"} {
+      append r "<center><window .preportWin.text.bd></center>\n\n"
+    }
+  } else {
+    if {$fmt == "latex"} {append r $preText}
+  }
+
   append r "$tr(Player)$ls$bb$propername$eb"
-         
-  if {$::preport::_color == "white"} {   
+
+  if {$::preport::_color == "white"} {
     append r " $tr(PReportColorWhite)"
   } else {
     append r " $tr(PReportColorBlack)"
   }
-  
-  set eco ""
-  if {$::preport::_pos == "current"  &&  ![sc_pos isAt start]} {
-    set line [sc_report player line]
-    if {$fmt == "latex"} {
-      # broke - S.A
-      # append r "\\newchessgame%\n"
-      # append r "\\hidemoves{$line}%\\n"
-      # append r "$n$tr(PReportBeginning)$ls"      
-      append r " [format $tr(PReportMoves) [sc_report player line]]"
-    } else {
-      append r " [format $tr(PReportMoves) [sc_report player line]]"
-    } 
-    set eco [sc_report player eco]
-  }
+
+ set eco ""
+ if {$::preport::showBoard} {
+   set line [sc_report player line]
+   if {$fmt == "latex"} {
+     # broke - S.A
+     # append r "\\newchessgame%\n"
+     # append r "\\hidemoves{$line}%\\n"
+     # append r "$n$tr(PReportBeginning)$ls"
+     append r " [format $tr(PReportMoves) [sc_report player line]]"
+   } else {
+     append r " [format $tr(PReportMoves) [sc_report player line]]"
+   }
+   set eco [sc_report player eco]
+ }
+
   append r " ("
   if {$fmt == "ctext"} {
     append r "<darkblue><run sc_report player select all 0; ::windows::stats::Refresh>"
   }
   append r "$rgames"
   if {$fmt == "ctext"} { append r "</run></darkblue>"; }
-  append r " $games)$n"  
+  append r " $games)$n"
 
   set baseName [file tail [sc_base filename]]
   if {$fmt == "latex"} {
     # A latex f-me - underscores throw errors
     set baseName [string map {_ -} $baseName]
   }
-  append r "$tr(Database)$ls $baseName "
 
+  append r "$tr(Database)$ls $baseName "
   append r "([::utils::thousands [sc_base numGames]] $games)$n"
+
   if {$eco != ""} {
      append r "$tr(ECO)$ls $eco $n"
   }
   append r "$::tr(OprepGenerated)$ls $::scidName [sc_info version], [::utils::date::today] $n"
-  append r $postText  
-    
+  append r $postText
+
   if {$preport(Stats)  ||  $preport(Oldest) > 0  ||  $preport(Newest) > 0  ||
       $preport(MostFrequentOpponents) > 0  ||  $preport(Results)} {
     append r [::preport::_sec $tr(OprepStatsHist)]

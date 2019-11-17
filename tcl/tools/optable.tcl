@@ -38,8 +38,8 @@ set ::optable::_docEnd(html) {</body>
   </html>
 }
 
-set ::optable::_docStart(latex) $::exportStartFile(Latex) 
-set ::optable::_docEnd(latex) $::exportEndFile(Latex) 
+set ::optable::_docStart(latex) $::exportStartFile(Latex)
+set ::optable::_docEnd(latex) $::exportEndFile(Latex)
 
 proc ::optable::ConfigMenus {{lang ""}} {
   if {! [winfo exists .oprepWin]} { return }
@@ -176,7 +176,7 @@ proc ::optable::makeReportWin {args} {
         -command {previewLatex Scid-Opening-Report {::optable::report latex 1 $::optable::_flip} .oprepWin}
     button $w.b.previewHTML -textvar ::tr(OprepViewHTML) \
         -command ::optable::previewHTML
-    button $w.b.opts -text [tr OprepFileOptions] -command ::optable::setOptions 
+    button $w.b.opts -text [tr OprepFileOptions] -command ::optable::setOptions
     label $w.b.lexclude -textvar ::tr(Exclude)
     menubutton $w.b.exclude -textvar ::optable::_data(exclude) \
         -indicatoron 1 -relief raised -bd 2 -menu $w.b.exclude.m -width 5
@@ -186,8 +186,8 @@ proc ::optable::makeReportWin {args} {
       ::optable::makeReportWin
       .oprepWin.text yview moveto $::optable::_data(yview)
     }
-    button $w.b.mergeGames -textvar ::tr(MergeGames) -command ::optable::mergeGames 
-    button $w.b.help -textvar ::tr(Help) -command {helpWindow Reports Opening} 
+    button $w.b.mergeGames -textvar ::tr(MergeGames) -command ::optable::mergeGames
+    button $w.b.help -textvar ::tr(Help) -command {helpWindow Reports Opening}
     button $w.b.close -textvar ::tr(Close) -command "destroy $w"
     bind $w <Destroy> {
       if {"%W" == ".oprepWin"} {
@@ -199,7 +199,7 @@ proc ::optable::makeReportWin {args} {
 
     bindWheeltoFont $w
 
-    entry $w.b.find -width 10 -textvariable ::oreport(find) -highlightthickness 0 
+    entry $w.b.find -width 10 -textvariable ::oreport(find) -highlightthickness 0
     configFindEntryBox $w.b.find ::oreport .oprepWin.text
 
     pack $w.b -side bottom -fill x -pady 3
@@ -216,9 +216,7 @@ proc ::optable::makeReportWin {args} {
   }
 
   catch {destroy $w.text.bd}
-  set old_showMaterial $::gameInfo(showMaterial)
-  set ::gameInfo(showMaterial) 0
-  ::board::new $w.text.bd 40
+  ::board::new $w.text.bd 40 0
   if {$::optable::_flip} { ::board::flip $w.text.bd }
   $w.text.bd configure -relief solid -borderwidth 1
   for {set i 0} {$i < 63} {incr i} {
@@ -243,7 +241,6 @@ proc ::optable::makeReportWin {args} {
   ::htext::display $w.text $report
   unbusyCursor .
   ::windows::stats::Refresh
-  set ::gameInfo(showMaterial) $old_showMaterial
 }
 
 ### Merge the N best games up to P plies to current game
@@ -277,11 +274,8 @@ proc ::optable::mergeGames { {game_count 50} {ply 999} } {
 }
 
 proc ::optable::flipBoard {} {
-  set old_showMaterial $::gameInfo(showMaterial)
-  set ::gameInfo(showMaterial) 0
   ::board::flip .oprepWin.text.bd
   set ::optable::_flip [::board::isFlipped .oprepWin.text.bd]
-  set ::gameInfo(showMaterial) $old_showMaterial
 }
 
 proc ::optable::resizeBoard {} {
@@ -327,12 +321,12 @@ proc ::optable::setOptions {} {
     } elseif {$i == "gap"} {
       # nothing
     } elseif {$i == "sep"} {
-      frame $w.f.fsep$row$left -height 2 -borderwidth 2 -relief sunken 
-      # frame $w.f.tsep$row$left -height 2 -borderwidth 2 -relief sunken 
+      frame $w.f.fsep$row$left -height 2 -borderwidth 2 -relief sunken
+      # frame $w.f.tsep$row$left -height 2 -borderwidth 2 -relief sunken
       grid $w.f.fsep$row$left -row $row -column $left -sticky we -columnspan 4 -pady 2
     } elseif {[info exists yesno($i)]} {
       checkbutton $w.f.f$i -variable ::optable($i) -onvalue 1 -offvalue 0
-      label $w.f.t$i -textvar ::tr(Oprep$i) 
+      label $w.f.t$i -textvar ::tr(Oprep$i)
       grid $w.f.f$i -row $row -column $left -sticky n
       grid $w.f.t$i -row $row -column $right -sticky w -columnspan 3
     } elseif {[string match Oprep* $i]} {
@@ -343,11 +337,11 @@ proc ::optable::setOptions {} {
       # Pascal Georges : changed combobox to spinbox to widen choices
       if {$i == "MaxGames"} {
         spinbox $w.f.s$i -textvariable ::optable($i) -from 0 -to 5000 -increment 50 \
-            -width 5 -justify right 
+            -width 5 -justify right
       } else  {
         spinbox $w.f.s$i -textvariable ::optable($i) -width 3 -from $from -to $to -justify right
       }
-      label $w.f.t$i -textvar ::tr(Oprep$i) 
+      label $w.f.t$i -textvar ::tr(Oprep$i)
       grid $w.f.s$i -row $row -column $left ;# -sticky e
       if {$i == "MostFrequent"  ||  $i == "Shortest"} {
         checkbutton $w.f.w$i -text $::tr(White) \
@@ -805,7 +799,7 @@ proc ::optable::report {fmt withTable {flipPos 0}} {
   if {$fmt == "latex"} {
     set n "\\\\\n"; set p "\n\n"
     set preText "\\begin{tabularx}{0.8\\textwidth}{rX} \n";
-    set postText "\\end{tabularx}\n"    
+    set postText "\\end{tabularx}\n"
     set percent "\\%"; set bullet "\\hspace{0.5cm}\$\\bullet\$"
     set next " & "
     set multicolumnstart "\\multicolumn{2}{c}{"
@@ -825,17 +819,17 @@ proc ::optable::report {fmt withTable {flipPos 0}} {
   set tgames [lindex $counts 1]
 
   set r {}
-  append r $::optable::_docStart($fmt)  
+  append r $::optable::_docStart($fmt)
   set line [::trans [sc_report opening line]]
   if {$line == ""} {
     # No starting Line so Report title is just a title
     set line $::tr(OprepTitle)
     append r [::optable::_title $line]
     if {$fmt == "latex"} {
-      append r "\\newchessgame%\n"      
-    }       
+      append r "\\newchessgame%\n"
+    }
   } else {
-    # There is a starting Line      
+    # There is a starting Line
     if {$fmt == "latex"} {
       append r "\\newchessgame%\n"
       append r "\\hidemoves{$line}%\n"
@@ -843,18 +837,18 @@ proc ::optable::report {fmt withTable {flipPos 0}} {
     } else {
       append r [::optable::_title $line]
     }
-  }   
-    
+  }
+
   if {$fmt == "latex"} {
     append r "\\begin{tabularx}{1\\textwidth}{rX} \n"
   } else {
     append r "$preText"
-  }  
+  }
   if {$fmt == "latex"} {
     if {$flipPos} {
-      append r "$multicolumnstart \\chessboard\[inverse\] $multicolumnend $n" 
+      append r "$multicolumnstart \\chessboard\[inverse\] $multicolumnend $n"
     } else {
-      append r "$multicolumnstart \\chessboard $multicolumnend $n"      
+      append r "$multicolumnstart \\chessboard $multicolumnend $n"
     }
   } elseif {$fmt == "html"} {
     if {$flipPos} {
@@ -864,7 +858,7 @@ proc ::optable::report {fmt withTable {flipPos 0}} {
     }
   } elseif {$fmt == "ctext"} {
     append r "\n<center><window .oprepWin.text.bd></center>\n"
-  }  
+  }
 
   set baseName [file tail [sc_base filename]]
   if {$fmt == "latex"} {
@@ -878,7 +872,7 @@ proc ::optable::report {fmt withTable {flipPos 0}} {
      append r "$tr(OprepReport):$next {\\printchessgame} ("
   } else {
      append r "$tr(OprepReport): $line ("
-  }  
+  }
   if {$fmt == "ctext"} {
     append r "<darkblue><run sc_report opening select all 0; ::windows::stats::Refresh>"
   }
@@ -890,7 +884,7 @@ proc ::optable::report {fmt withTable {flipPos 0}} {
     append r "$tr(ECO):$next $eco$n"
   }
 
-  append r "$::tr(OprepGenerated):$next $::scidName [sc_info version], [::utils::date::today]$n"    
+  append r "$::tr(OprepGenerated):$next $::scidName [sc_info version], [::utils::date::today]$n"
   append r "$postText"
   if {$rgames == 0} {
     append r $::optable::_docEnd($fmt)
@@ -997,7 +991,7 @@ proc ::optable::report {fmt withTable {flipPos 0}} {
   if {$::optable(AvgPerf)  ||  $::optable(HighRating)} {
     append r [::optable::_sec $tr(OprepRatingsPerf)]
   }
-  if {$::optable(AvgPerf)} {    
+  if {$::optable(AvgPerf)} {
     append r [::optable::_subsec $tr(OprepAvgPerf)]
     set e [sc_report opening elo white]
     set welo [lindex $e 0]; set wng [lindex $e 1]
