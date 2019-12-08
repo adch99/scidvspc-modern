@@ -217,6 +217,7 @@ proc ::docking::init_layout_list {{recover 0}} {
 
 ### Tree/mask options:
 set ::tree::showBar [expr {! $::macOS}]
+set ::tree::showFrame 1
 set ::tree::sortBest 1
 set ::tree::short 1
 set ::tree::autoAdjust 0

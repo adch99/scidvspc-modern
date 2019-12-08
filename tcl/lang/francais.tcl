@@ -552,6 +552,8 @@ menuText F TreeOptAutosave "Sauver le cache automatiquement" 0
 menuText F TreeOptAutomask "Auto-chargement Mask" 0 "Auto-Load most recent mask with a tree open."
 menuText F TreeOptCacheSize "Taille du cache" 0 {Taille du cache}
 menuText F TreeOptShowBar "Affichage barre de progression" 0 "Show tree progress bar."
+# ====== TODO To be translated ======
+menuText F TreeOptShowFrame "Show Button Bar" 0 "Show tree button bar."
 menuText F TreeOptSortBest "Tri des meilleurs jeux" 0 "Tri des meilleurs jeux selon ELO."
 menuText F TreeHelp "Aide" 0
 menuText F TreeHelpTree "Aide Arbre" 0

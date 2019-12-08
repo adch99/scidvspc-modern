@@ -638,6 +638,8 @@ menuText I TreeOptCacheSize "Dimensione Cache" 0 {Seleziona la dimensione della 
 # ====== TODO To be translated ======
 menuText I TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 # ====== TODO To be translated ======
+menuText I TreeOptShowFrame "Show Button Bar" 0 "Show tree button bar."
+# ====== TODO To be translated ======
 menuText I TreeOptSortBest "Sort Best Games" 0 "Sort Best Games by ELO."
 menuText I TreeHelp "Aiuto" 0
 menuText I TreeHelpTree "Aiuto per l'albero" 0

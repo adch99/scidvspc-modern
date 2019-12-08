@@ -535,6 +535,8 @@ menuText T TreeOptAutomask "otamatik-yükle Maskeyi" 0 "En son maskeyi bir ağa�
 # ====== TODO To be translated ======
 menuText T TreeOptCacheSize "Cache size" 0 {Set the cache size}
 menuText T TreeOptShowBar "İlerleme Çubuğunu Göster" 0 "Ağaç ilerleme çubuğunu göster."
+# ====== TODO To be translated ======
+menuText T TreeOptShowFrame "Show Button Bar" 0 "Show tree button bar."
 menuText T TreeOptSortBest "En İyi Oyunları Sıralayın" 0 "En İyi Oyunları ELO'ya Göre Sırala."
 menuText T TreeHelp "yardım" 0
 menuText T TreeHelpTree "Ağaç Yardımı" 0

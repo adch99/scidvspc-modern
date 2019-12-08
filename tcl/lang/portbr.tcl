@@ -671,6 +671,8 @@ menuText B TreeOptAutosave "Salvar automaticamente arquivo de cache" 0 \
 menuText B TreeOptAutomask "Auto carregar mascara" 0 "Auto carrega a mascara mais recente com a arvore aberta."
 menuText B TreeOptCacheSize "Tamanho do Cache" 0 {Define o tamanho do cache}
 menuText B TreeOptShowBar "Mostra barra de Progresso" 0 "Mostra a barra de progresso da arvore."
+# ====== TODO To be translated ======
+menuText B TreeOptShowFrame "Show Button Bar" 0 "Show tree button bar."
 
 
 

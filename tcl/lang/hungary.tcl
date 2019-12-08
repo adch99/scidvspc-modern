@@ -644,6 +644,8 @@ menuText H TreeOptCacheSize "A gyorsítótár mérete" 14 {Beállítja a gyorsítótár m
 # ====== TODO To be translated ======
 menuText H TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 # ====== TODO To be translated ======
+menuText H TreeOptShowFrame "Show Button Bar" 0 "Show tree button bar."
+# ====== TODO To be translated ======
 menuText H TreeOptSortBest "Sort Best Games" 0 "Sort Best Games by ELO."
 menuText H TreeHelp "Segítség" 0
 menuText H TreeHelpTree "Segítség a fához" 0

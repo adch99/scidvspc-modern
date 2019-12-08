@@ -564,6 +564,8 @@ menuText O TreeOptAutosave "Autolagre hurtigbuffer" 0 {Autolagrer hurtigbufferet
 menuText O TreeOptAutomask "Åpne maske automatisk" 0 "Åpner siste maske med et åpent tre."
 menuText O TreeOptCacheSize "Mellomlager" 0 {Størrelse på mellomlager}
 menuText O TreeOptShowBar "Vis fremdrift" 0 "Viser fremdrift."
+# ====== TODO To be translated ======
+menuText O TreeOptShowFrame "Show Button Bar" 0 "Show tree button bar."
 menuText O TreeOptSortBest "Sorter beste partier" 0 "Sorter beste partier etter ELO."
 menuText O TreeHelp "Hjelp" 0
 menuText O TreeHelpTree "Tre hjelp" 0

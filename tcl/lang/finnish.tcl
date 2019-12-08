@@ -537,6 +537,8 @@ menuText L TreeOptAutosave "Tallenna automaattisesti välimuisti" 0 {Tallenna aut
 menuText L TreeOptAutomask "Lataa automaattisesti naamio" 0 "Lataa automaattisesti äskettäisin naamio auki olevalla puulla."
 menuText L TreeOptCacheSize "Välimuistin koko" 0 {Aseta välimuistin koko}
 menuText L TreeOptShowBar "Näytä edistymispalkki" 0 "Näytä puun edistymispalkki."
+# ====== TODO To be translated ======
+menuText L TreeOptShowFrame "Show Button Bar" 0 "Show tree button bar."
 menuText L TreeOptSortBest "Lajittele parhaat pelit" 0 "Lajittele parhaat pelit ECOn mukaan."
 menuText L TreeHelp "Apu" 0
 menuText L TreeHelpTree "Puuapu" 0

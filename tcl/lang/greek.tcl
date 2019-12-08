@@ -621,6 +621,8 @@ menuText G TreeOptCacheSize "Μέγεθος Cache" 0 {Ορισμός μεγέθ�
 # ====== TODO To be translated ======
 menuText G TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 # ====== TODO To be translated ======
+menuText G TreeOptShowFrame "Show Button Bar" 0 "Show tree button bar."
+# ====== TODO To be translated ======
 menuText G TreeOptSortBest "Sort Best Games" 0 "Sort Best Games by ELO."
 menuText G TreeHelp "Βοήθεια" 0
 menuText G TreeHelpTree "Βοήθεια Δένδρου" 0

@@ -23,10 +23,10 @@ proc ::tree::doConfigMenus { baseNumber  { lang "" } } {
   foreach idx {0 1 2 3} tag {Alpha ECO Freq Score } {
     configMenuText $m.sort $idx TreeSort$tag $lang
   }
-  foreach idx {1 2 4 5 6 8 9 10 12 13 14} tag {Lock Training SortBest Short ShowBar Automask Autosave CacheSize Slowmode Fastmode FastAndSlowmode} {
+  foreach idx {1 2 4 5 6 7 9 10 11 13 14 15} tag {Lock Training SortBest Short ShowBar ShowFrame Automask Autosave CacheSize Slowmode Fastmode FastAndSlowmode} {
     configMenuText $m.opt $idx TreeOpt$tag $lang
   }
-  $m.opt entryconfig 7 -label "[tr Auto]-[tr TreeAdjust]"
+  $m.opt entryconfig 8 -label "[tr Auto]-[tr TreeAdjust]"
   
   foreach idx {0 1} tag {Tree Index} {
     configMenuText $m.help $idx TreeHelp$tag $lang
@@ -178,9 +178,23 @@ proc ::tree::Open {{baseNumber 0}} {
       if {[winfo exists .treeWin$i]} {
 	set w .treeWin$i
 	if {$::tree::showBar} {
-	  pack $w.progress -side bottom -before $w.f
+	  pack $w.progress -side bottom -pady 1 -before $w.f
 	} else {
 	  pack forget $w.progress
+	}
+      }
+    }
+  }
+  $w.menu.opt add checkbutton -label TreeOptShowFrame -variable ::tree::showFrame -command {
+    for {set i 1} {$i <= [sc_base count total]} {incr i} {
+      if {[winfo exists .treeWin$i]} {
+	set w .treeWin$i
+	if {$::tree::showFrame} {
+	  if {[catch {pack $w.buttons -side bottom -fill x -pady 2 -before $w.progress}]} {
+	    pack $w.buttons -side bottom -fill x -pady 1 -before $w.f
+          }
+	} else {
+	  pack forget $w.buttons
 	}
       }
     }
@@ -239,9 +253,12 @@ proc ::tree::Open {{baseNumber 0}} {
   # label $w.status -width 1 -anchor w -font font_Small -relief sunken -textvar tree(status$baseNumber)
   # pack $w.status -side bottom -fill x
 
-  pack [frame $w.buttons -relief sunken] -side bottom -fill x -pady 3
+  frame $w.buttons -relief sunken
+  if {$::tree::showFrame} {
+    pack $w.buttons -side bottom -fill x -pady 1
+  }
   if {$::tree::showBar} {
-    pack $w.progress -side bottom
+    pack $w.progress -side bottom -pady 1
   }
   pack $w.f -side top -expand 1 -fill both
 
