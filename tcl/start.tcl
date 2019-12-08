@@ -110,8 +110,10 @@ foreach ns {
 set ::MAX_GAMES [sc_info limit games]
 set ::pause 0
 set ::defaultBackground white
+set ::defaultForeground black
 set ::defaultGraphBackgroud white
 set ::enableBackground 0
+set ::enableForeground 0
 set ::tacgame::threshold 0.9
 set ::tacgame::levelMin 1200
 set ::tacgame::levelMax 2200
@@ -1566,6 +1568,20 @@ if {$::docking::USE_DOCKING} {
   set dot_w .main
 }
 
+if {$enableForeground == 1} {
+  # Text foreground only
+  option add *Text*foreground $defaultForeground
+
+  # Global colouring is disabled
+  # option add *Button*foreground $defaultForeground
+  # option add *Label*foreground $defaultForeground
+  # option add *Menubutton*foreground $defaultForeground
+  # option add *Checkbutton*foreground $defaultForeground
+  # option add *Radiobutton*foreground $defaultForeground
+
+  # Menus
+  # option add *menu*foreground white
+}
 if {$enableBackground == 1} {
   option add *Text*background $defaultBackground
   option add *Listbox*background $defaultBackground

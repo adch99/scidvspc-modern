@@ -6784,9 +6784,9 @@ set helpText(D,Related) {<h1>Links</h1>
   <li>FICS <url http://www.freechess.org>www.freechess.org</url></li>
   <li>FICS-Partienarchive <url http://ficsgames.org>http://ficsgames.org</url></li>
   <li>Kayvan's Cross platform 'docker' images <url https://github.com/ksylvan/scidvspc>https://github.com/ksylvan/scidvspc</url></li>
-  <li>Scid vs. 960/Varianten (Chess960-Unterstützung) <url https://github.com/brittonf/scid-vs-variants>https://github.com/brittonf/scid-vs-variants</url></li>
+  <li>Chess Tech Blog, mit einigen ScidvsPC-Anleitungen <url http://chesstech.info/>http://chesstech.info/</url></li>
   <li>Installationsführer Debian/Mint/Ubuntu <url http://www.linuxx.eu/2012/11/scid-vs-pc-installation-guide-ubuntu.html>http://www.linuxx.eu/2012/11/scid-vs-pc-installation-guide-ubuntu.html</url></li>
-  <li>Ed Collins Seite Scid vs. PC <url http://edcollins.com/chess/scidvspc/index.html>http://edcollins.com/chess/scidvspc/index.html</url></li>
+  <li>Ed Collins' Seite Scid vs. PC <url http://edcollins.com/chess/scidvspc/index.html>http://edcollins.com/chess/scidvspc/index.html</url></li>
   <li>Gorgonians selbsterstellte Figuren <url http://gorgonian.weebly.com/scid-vs-pc.html>http://gorgonian.weebly.com/scid-vs-pc.html</url></i>
   <li>Die Standards PGN und EPD <url http://www.saremba.de/chessgml/standards/pgn/pgn-complete.htm>www.saremba.de/chessgml/standards/pgn...</url></li>
   <li>Verbreitete PGN-Erweiterungen <url http://www.enpassant.dk/chess/palview/enhancedpgn.htm>http://www.enpassant.dk/chess/palview/enhancedpgn.htm</url></li>
@@ -6799,6 +6799,7 @@ set helpText(D,Related) {<h1>Links</h1>
   <li>Mailingliste abonnieren (man muß Mitglied sein, um in die Liste zu schreiben) <url https://lists.sourceforge.net/lists/listinfo/scidvspc-users>https://lists.sourceforge.net/lists/listinfo/scidvspc-users</url></li>
   <li>Mailinglistenarchiv <url http://www.mail-archive.com/scidvspc-users@lists.sourceforge.net/>http://www.mail-archive.com/scidvspc-users@lists.sourceforge.net/</url></li>
   <li>Programmeriererreferenz <url http://scidvspc.sourceforge.net/doc/progref.html>http://scidvspc.sourceforge.net/doc/progref.html</url></li>
+  <li>Entwicklung von Tcl <url www.tcl.tk/about/history.html>www.tcl.tk/about/history.html</url></li>
   <li>UCI-Protokoll <url http://wbec-ridderkerk.nl/html/UCIProtocol.html>http://wbec-ridderkerk.nl/html/UCIProtocol.html</url></li>
   <li>Xboard.Protokoll <url http://www.open-aurec.com/wbforum/WinBoard/engine-intf.html>http://www.open-aurec.com/wbforum/WinBoard/engine-intf.html</url></li>
   </ul>
@@ -9942,7 +9943,7 @@ set tips(D) {
   }
   {
   Durch Rechtsklick auf den Reiter 'Brett' können Sie mehrere
-  Brettkomponenten verbergen (oder anzeigen).
+  Brettkomponenten anzeigen oder verbergen.
   }
   {
   Die Fähigkeit von Scid, einzelne Fenster zu lösen oder anzuheften, ist
