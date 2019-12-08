@@ -512,7 +512,7 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
 
   # default y-axis is Score
   set yticks 1
-  set hlines {{gray90 1 each 1} {black 1 at 0}}
+  set hlines {{gray90 1 each 1} {steelBlue 1 each 5} {black 1 at 0}}
 
   if {[string match Score* $type] || $type == "Auto"} {
     set scoreValues [sc_game scores $::tools::graphs::score::invertWhite $::tools::graphs::score::invertBlack]
@@ -610,26 +610,27 @@ proc ::tools::graphs::score::Refresh2 {{init 0}} {
       set hlines {{gray90 1 each 1} {black 1 at 0}}
       if {$maxEmt > 20} {
 	set yticks 5
+	set hlines {{gray90 1 each 5} {black 1 at 0}}
       }
       if {$maxEmt > 50} {
 	set yticks 10
-	set hlines {{gray90 1 each 2} {black 1 at 0}}
+	set hlines {{gray90 1 each 10} {black 1 at 0}}
       }
       if {$maxEmt > 100} {
 	set yticks 20
-	set hlines {{gray90 1 each 5} {black 1 at 0}}
+	set hlines {{gray90 1 each 20} {black 1 at 0}}
       }
       if {$maxEmt > 500} {
 	set yticks 50
-	set hlines {{gray90 1 each 5} {black 1 at 0}}
+	set hlines {{gray90 1 each 50} {black 1 at 0}}
       }
       if {$maxEmt > 1000} {
 	set yticks 100
-	set hlines {{gray90 1 each 50} {black 1 at 0}}
+	set hlines {{gray90 1 each 100} {black 1 at 0}}
       }
       if {$maxEmt > 2000} {
 	set yticks 200
-	set hlines {{gray90 1 each 100} {black 1 at 0}}
+	set hlines {{gray90 1 each 200} {black 1 at 0}}
       }
     }
   }
