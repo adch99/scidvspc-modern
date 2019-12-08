@@ -958,7 +958,7 @@ $m add command -label OptionsSave -command {
     puts $optionF ""
 
   foreach i {boardSize boardStyle language ::pgn::showColor 
-    ::pgn::indentVars ::pgn::indentComments ::defaultBackground ::::defaultGraphBackgroud ::enableBackground
+    ::pgn::indentVars ::pgn::indentComments ::defaultBackground ::defaultForeground ::::defaultGraphBackgroud ::enableBackground ::enableForeground
     ::pgn::shortHeader ::pgn::boldMainLine ::pgn::stripMarks 
     ::pgn::symbolicNags ::pgn::moveNumberSpaces ::pgn::columnFormat ::pgn::showScrollbar
     myPlayerNames optionsAutoSave ::tree::mask::recentMask ::tree::mask::autoLoadMask ::tree::showBar ::tree::short ::tree::sortBest ::tree::autoAdjust
@@ -1317,6 +1317,9 @@ proc changeTheme {} {
       ::ttk::style configure Treeview -background $::defaultBackground
       ::ttk::style configure Treeview -fieldbackground $::defaultBackground
     }
+    if {$::enableForeground} {
+      ::ttk::style configure Treeview -foreground $::defaultForeground
+    }
     ::ttk::style configure TNotebook.Tab -font font_Menu
 }
 
@@ -1336,10 +1339,8 @@ set helpMessage($m,1) OptionsSwitcherColour
 $m add command -label OptionsProgressColour -command SetProgressColour
 set helpMessage($m,1) OptionsProgressColour
 
-$m add separator
 
 menu $m.back
-
 $m add cascade -label OptionsBackColour -menu $m.back
 set helpMessage($m,1) OptionsBackColour
 
@@ -1363,6 +1364,14 @@ foreach i {No Some All} j {0 1 2} {
   set helpMessage($m.back,1) $i
 }
 
+menu $m.fore
+$m add cascade -label OptionsFicsColour -menu $m.fore
+set helpMessage($m,1) OptionsFicsColour
+
+$m.fore add command -label OptionsMovesHighlightLastMoveColor -command SetForegroundColour
+$m.fore add checkbutton -label OptionsFicsColour -variable enableForeground
+$m.fore add separator
+
 proc SetBackgroundColour {} {
   global defaultBackground enableBackground
   set temp [tk_chooseColor -initialcolor $defaultBackground -title [tr OptionsBackColour]]
@@ -1373,6 +1382,21 @@ proc SetBackgroundColour {} {
     option add *Listbox*background $temp
     .main.gameInfo configure -bg $temp
     initBackgroundColour $defaultBackground
+  }
+}
+
+### Text foreground colour
+proc SetForegroundColour {} {
+  global defaultForeground enableForeground
+
+  set temp [tk_chooseColor -initialcolor $defaultForeground -title [tr OptionsBackColour]]
+  if {$temp != {}} {
+    set defaultForeground $temp
+    if {!$enableForeground} {set enableForeground 1}
+    set answer [tk_messageBox -type yesno -icon info -title Scid -message "Enabling text colour globally requires restart.\nExit now ?"]
+    if {$answer == "yes"} {
+      ::file::Exit
+    }
   }
 }
 
@@ -1804,7 +1828,10 @@ proc setLanguageMenus {{lang ""}} {
   foreach tag {BackColour MainLineColour VarLineColour EngineLineColour RowColour SwitcherColour ProgressColour} {
     configMenuText .menu.options.colour [tr Options$tag $oldLang] Options$tag $lang
   }
+  configMenuText .menu.options.colour [tr OptionsFicsColour $oldLang] OptionsFicsColour $lang
   configMenuText .menu.options.colour.back [tr OptionsMovesHighlightLastMoveColor $oldLang] OptionsMovesHighlightLastMoveColor $lang
+  configMenuText .menu.options.colour.fore [tr OptionsMovesHighlightLastMoveColor $oldLang] OptionsMovesHighlightLastMoveColor $lang
+  configMenuText .menu.options.colour.fore [tr OptionsFicsColour $oldLang] OptionsFicsColour $lang
 
   foreach tag { Configure NovagCitrineConnect InputEngineConnect  } {
     configMenuText .menu.tools.hardware [tr ToolsConnectHardware$tag $oldLang] ToolsConnectHardware$tag $lang

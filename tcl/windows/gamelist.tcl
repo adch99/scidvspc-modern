@@ -253,7 +253,7 @@ proc ::windows::gamelist::Open {} {
   ### ttk::style theme use alt
   # default classic alt clam
 
-  global highcolor helpMessage
+  global helpMessage
   global glistSortedBy glSortReversed glistSize
 
   set w .glistWin
@@ -325,9 +325,13 @@ proc ::windows::gamelist::Open {} {
 
   ::windows::gamelist::checkAltered
 
+  # Why does this have to be here ? Placing it in start.tcl doesn't work S.A
   if {$::enableBackground} {
     ::ttk::style configure Treeview -background $::defaultBackground
     ::ttk::style configure Treeview -fieldbackground $::defaultBackground
+  }
+  if {$::enableForeground} {
+    ::ttk::style configure Treeview -foreground $::defaultForeground
   }
 
   # $w.tree tag configure colour -background $::defaultBackground
