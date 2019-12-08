@@ -281,6 +281,8 @@ proc ::utils::graph::plot_axes {graph} {
   # Plot vertical guide lines:
   foreach vline $_data($graph,vline) {
     set color [lindex $vline 0]
+    # don't plot gray lines if bg enabled
+    if {$::enableBackground && $color == "gray90"} {continue}
     set width [lindex $vline 1]
     set type [lindex $vline 2]
     set inc [lindex $vline 3]
@@ -314,6 +316,8 @@ proc ::utils::graph::plot_axes {graph} {
   # Plot horizontal guide lines:
   foreach hline $_data($graph,hline) {
     set color [lindex $hline 0]
+    #  but probably ok to leave the horizontal lines in
+    # if {$::enableBackground && $color == "gray90"} {continue}
     set width [lindex $hline 1]
     set type [lindex $hline 2]
     set inc [lindex $hline 3]
