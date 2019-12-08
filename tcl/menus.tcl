@@ -1339,30 +1339,19 @@ set helpMessage($m,1) OptionsSwitcherColour
 $m add command -label OptionsProgressColour -command SetProgressColour
 set helpMessage($m,1) OptionsProgressColour
 
-
 menu $m.back
 $m add cascade -label OptionsBackColour -menu $m.back
 set helpMessage($m,1) OptionsBackColour
 
 $m.back add command -label OptionsMovesHighlightLastMoveColor -command SetBackgroundColour
-$m.back add separator
-
-foreach i {No Some All} j {0 1 2} {
-  $m.back add radiobutton -label $i -value $j -variable ::enableBackground -command {
-    if {$::enableBackground == 2} {
-      set answer [tk_messageBox -type yesno -icon info -title Scid -message "Enabling background colour globally requires restart.\nExit now ?"]
-      if {$answer == "yes"} {
-	::file::Exit
-      }
-    }
-    if {$::enableBackground} {
+$m.back add checkbutton -label Enable -variable enableBackground -command {
+    if {$enableBackground} {
       initBackgroundColour $defaultBackground
     } else {
       initBackgroundColour grey95
     }
-  }
-  set helpMessage($m.back,1) $i
 }
+set helpMessage($m.back,1) Enable
 
 menu $m.fore
 $m add cascade -label OptionsFicsColour -menu $m.fore
@@ -1830,6 +1819,7 @@ proc setLanguageMenus {{lang ""}} {
   }
   configMenuText .menu.options.colour [tr OptionsFicsColour $oldLang] OptionsFicsColour $lang
   configMenuText .menu.options.colour.back [tr OptionsMovesHighlightLastMoveColor $oldLang] OptionsMovesHighlightLastMoveColor $lang
+  configMenuText .menu.options.colour.back 1 OptionsBackColour $lang
   configMenuText .menu.options.colour.fore [tr OptionsMovesHighlightLastMoveColor $oldLang] OptionsMovesHighlightLastMoveColor $lang
   configMenuText .menu.options.colour.fore [tr OptionsFicsColour $oldLang] OptionsFicsColour $lang
 
