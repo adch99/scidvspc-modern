@@ -604,6 +604,8 @@ menuText W TreeOptCacheSize "Cachestorlek" 0 {Ange Cachestorleken}
 # ====== TODO To be translated ======
 menuText W TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 # ====== TODO To be translated ======
+menuText W TreeOptShowFrame "Show Button Bar" 0 "Show tree button bar."
+# ====== TODO To be translated ======
 menuText W TreeOptSortBest "Sort Best Games" 0 "Sort Best Games by ELO."
 menuText W TreeHelp "Hjälp" 0
 menuText W TreeHelpTree "Trädhjälp" 0

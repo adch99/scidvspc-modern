@@ -613,6 +613,8 @@ menuText S TreeOptAutosave "Autoguardar archivo caché" 0 \
 menuText S TreeOptAutomask "Carga automática de máscara" 0 "Carga automática de máscara con un arbol abierto."
 menuText S TreeOptCacheSize "Tamaño de caché" 0 {Fija el tamaño del caché}
 menuText S TreeOptShowBar "Mostrar barra de progreso" 0 "Mostrar barra de progreso del árbol"
+# ====== TODO To be translated ======
+menuText S TreeOptShowFrame "Show Button Bar" 0 "Show tree button bar."
 menuText S TreeOptSortBest "Ordenar mejores partidas" 0 "Ordenar mejores partidas por ELO."
 menuText S TreeHelp "Ayuda" 1
 menuText S TreeHelpTree "Ayuda del árbol" 4

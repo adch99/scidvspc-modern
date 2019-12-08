@@ -554,6 +554,7 @@ menuText E TreeOptAutosave "Auto-Save Cache" 0 {Auto-save the cache file when cl
 menuText E TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
 menuText E TreeOptCacheSize "Cache size" 0 {Set the cache size}
 menuText E TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
+menuText E TreeOptShowFrame "Show Button Bar" 0 "Show tree button bar."
 menuText E TreeOptSortBest "Sort Best Games" 0 "Sort Best Games by ELO."
 menuText E TreeHelp "Help" 0
 menuText E TreeHelpTree "Tree Help" 0

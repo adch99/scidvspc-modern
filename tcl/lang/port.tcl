@@ -556,6 +556,8 @@ menuText U TreeOptAutosave "Salvar automaticamente arquivo de cache" 0 \
 menuText U TreeOptAutomask "Abrir máscara automaticamente" 0 "Auto-Load most recent mask with a tree open."
 menuText U TreeOptCacheSize "Tamanho da Cache" 0 {Define o tamanho do cache}
 menuText U TreeOptShowBar "Mostrar Barra de Progresso" 0 "Mostrar barra de progresso da árvore."
+# ====== TODO To be translated ======
+menuText U TreeOptShowFrame "Show Button Bar" 0 "Show tree button bar."
 menuText U TreeOptSortBest "Ordenar melhores jogos" 0 "Ordena lhores josgos por ELO."
 menuText U TreeHelp "Ajuda" 0
 menuText U TreeHelpTree "Ajuda para árvore" 0

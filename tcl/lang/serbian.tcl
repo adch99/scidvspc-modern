@@ -684,6 +684,8 @@ menuText Y TreeOptCacheSize "Cache size" 0 {Set the cache size}
 # ====== TODO To be translated ======
 menuText Y TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 # ====== TODO To be translated ======
+menuText Y TreeOptShowFrame "Show Button Bar" 0 "Show tree button bar."
+# ====== TODO To be translated ======
 menuText Y TreeOptSortBest "Sort Best Games" 0 "Sort Best Games by ELO."
 menuText Y TreeHelp "Pomoæ" 0
 menuText Y TreeHelpTree "Pomoæ za stablo" 0

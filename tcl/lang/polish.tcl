@@ -593,6 +593,8 @@ menuText P TreeOptCacheSize "Wielkość bufora" 0 {Ustaw wielkość bufora}
 # ====== TODO To be translated ======
 menuText P TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 # ====== TODO To be translated ======
+menuText P TreeOptShowFrame "Show Button Bar" 0 "Show tree button bar."
+# ====== TODO To be translated ======
 menuText P TreeOptSortBest "Sort Best Games" 0 "Sort Best Games by ELO."
 menuText P TreeHelp "Pomoc" 2
 menuText P TreeHelpTree "Drzewo" 0
