@@ -500,8 +500,8 @@ translate D LineEnd {Ende der Zugfolge}
 translate D PInfoAll {Alle Spiele}
 translate D PInfoFilter {Filterspiele}
 translate D PInfoAgainst {Ergebnisse gegen}
-translate D PInfoMostWhite {Häufigste Eröffnungen als Weißer}
-translate D PInfoMostBlack {Häufigste Eröffnungen als Schwarzer}
+translate D PInfoMostWhite {Häufigste Eröffnungen mit Weiß}
+translate D PInfoMostBlack {Häufigste Eröffnungen mit Schwarz}
 translate D PInfoRating {ELO-Historie}
 translate D PInfoBio {Biographie}
 translate D PInfoEditRatings {Bewertung bearb.}
@@ -981,8 +981,7 @@ Aktuelle Einstellungen in den Menüs "ECO-Klassifikation" und "Dubletten lösche
 translate D CleanerConfirm {
 Ist der Bereiniger einmal gestartet, kann er nicht mehr unterbrochen werden!
 
-Dies kann lange dauern, speziell bei großen Datenbanken, abhängig von den
-ausgewählten Funktionen und deren Einstellungen.
+Dies kann lange dauern, speziell bei großen Datenbanken, abhängig von den ausgewählten Funktionen und deren Einstellungen.
 
 Sind Sie sicher, daß Sie die ausgewählten Wartungsarbeiten starten möchten?
 }
@@ -2238,7 +2237,7 @@ append helpText(D,Index) {
   <li><a ComputerGame>Computerpartie</a></li>
   <li><a Import CCRL>Computerschachpartienimporte (CCRL)</a></li>
   <li><a Tourney>Computerturniere</a></li>
-  <li><a CQL>CQL</a> Schachabfragesprache</li>
+  <li><a CQL>CQL</a> (Schachabfragesprache)</li>
   </ul>
 
   <h3><name D>D</name></h3>
@@ -2276,11 +2275,11 @@ append helpText(D,Index) {
   <li><a EPD opcodes>EPD-Opcodes</a></li>
   <li><a Export EPD>EPD- und FEN-Export</a></li>
   <li><a Graphs Score>Ergebnisgrafik</a></li>
+  <li><a Reports Opening>Eröffnungsberichte</a></li>
   <li><a BookTuning>Eröffnungsbuch anpassen</a></li>
   <li><a Book>Eröffnungsbücher</a></li>
-  <li><a Repertoire>Eröffnungsrepertoire</a></li>
   <li><a ECO>Eröffnungsklassifikation (ECO)</a></li>
-  <li><a Reports Opening>Eröffnungsberichte</a></li>
+  <li><a Repertoire>Eröffnungsrepertoire</a></li>
   <li><a HardwareConfig>Externe Hardware (Novag, DGT...)</a></li>
   </ul>
 
@@ -2387,23 +2386,24 @@ append helpText(D,Index) {
   <ul>
   <li><a Searches Header>Partiedatensuche</a></li>
   <li><a Crosstable tiebreak>Partieentscheidungen</a></li>
+  <li><a MainWindow GameInfo>Partieinformationsfenster</a></li>
+  <li><a Flags>Partiekennzeichen</a></li>
   <li><a Analysis Annotating>Partien bewerten</a></li>
   <li><a GameList Browsing>Partien durchsehen</a></li>
   <li><a Export>Partien exportieren</a></li>
   <li><a Maintenance Twins>Partien vergleichen</a> mit dem Dublettenprüfer</li>
   <li><a GameList Browsing>Partien verschmelzen</a></li>
-  <li><a MainWindow GameInfo>Partieinformationsfenster</a></li>
-  <li><a Flags>Partiekennzeichen</a></li>
   <li><a GameList>Partienlistenfenster</a></li>
+  <li><a Export PDF>PDF-Unterstützung</a></li>
   <li><a Comment Diagrams>Pfeile</a></li>
   <li><a Comment Diagrams>Pfeile zeichnen</a></li>
   <li><a BrowsingPGN>PGN und Scid</a></li>
   <li><a PGN>PGN-Fenster</a></li>
   <li><a Maintenance Tags>PGN-Kennzeichnungen finden</a>
-  <li><a Export PDF>PDF-Unterstützung</a></li>
   <li><a Pgnscid>Pgnscid</a></li>
   <li><a Book Polyglot>PolyGlot</a></li>
   <li><a Moves Trial>Probiermodus</a></li>
+  <li><a TacticsTrainer>Puzzle: Matt in ...</a></li>
   </ul>
 
   <h3><name Q>Q</name></h3>
@@ -2412,10 +2412,8 @@ append helpText(D,Index) {
 
   <h3><name R>R</name></h3>
   <ul>
-  <li><a TacticsTrainer>Puzzle: Matt in ...</a></li>
   <li><a Maintenance Spellcheck>Rechtschreibprüfung Namen</a></li>
   <li><a Maintenance Spellcheck>Rechtschreibprüfung Spielernamen</a></li>
-  <li><a Maintenance Spellfile>Schreibkorrekturdatei</a></li>
   <li><a Repertoire>Repertoireeditor</a></li>
   <li><a Moves Undo>Rückgängig machen</a></li>
   <li><a Import CCRL>Rundennamensproblem</a></li>
@@ -2426,15 +2424,16 @@ append helpText(D,Index) {
   <li><a Analysis Debugging>Schach-Engine: Fehlersuche</a></li>
   <li><a Analysis>Schach-Engines</a></li>
   <li><a Cmdline>Schnellstartmodus</a>
+  <li><a Maintenance Spellfile>Schreibkorrekturdatei</a></li>
   <li><a Options Fonts>Schriftarten</a></li>
   <li><a Formats>Si4-Datenbankformat</a></li>
   <li><a ComputerGame>Spiel gegen den Computer</a></li>
   <li><a FICS>Spielen im Internet (FICS)</a></li>
   <li><a Reports Player>Spielerberichte</a></li>
-  <li><a PList>Spielersuchfenster</a></li>
   <li><a PInfo Photos>Spielerfotos</a></li>
   <li><a PInfo>Spielerinformationen</a> </li>
   <li><a Options MyPlayerNames>Spielernamen, meine</a>
+  <li><a PList>Spielersuchfenster</a></li>
   <li><a MainWindow Status>Statusleiste</a></li>
   <li><a Searches Board>Stellungssuche</a></li>
   <li><a Searches>Suchen</a></li>
@@ -4351,11 +4350,10 @@ set helpText(D,Tree) {<h1>Das Zugbaumfenster</h1>
   den Datenbankstatistiken ab, so daß ein Zug, der in 80% der
   Datenbankpartien gespielt wurde, von Scid mit einer
   Wahrscheinlichkeit von 80% gewählt werden wird. Das Einschalten
-  dieser Funktion mit verstecken (oder auf Symbolgröße vekleinern) des
-  Zugbaumfensters und Eröffnungen gegen eine große Datenbank spielen
-  ist ein großartiger Weg, um die Kenntnisse Ihres
-  Eröffnungsrepertoires zu testen.
-  </p>
+  dieser Funktion mit verstecken (oder auf Symbolgröße verkleinern)
+  des Zugbaumfensters und Eröffnungen gegen eine große Datenbank
+  spielen ist ein guter Weg, um die Kenntnisse Ihres
+  Eröffnungsrepertoires zu testen.</p>
 
   <h3>Zwischenspeicherung für schnellere Ergebnisse</h3>
   <p><i>Der Zwischenspeicher des Zugbaumes ist nicht mehr so wichtig
@@ -6310,7 +6308,7 @@ set helpText(D,Options) {<h1>Optionen und Einstellungen</h1>
   <p>Die Farben und Themen für das Hauptbrett werden im Menü
   <run ::chooseBoardColors><green>Optionen--<gt>Schachbrett</green></run>
   eingestellt, aber ein paar andere Farbeinstellungen sind
-  unter <green>Optionen--<gt>Hintergrundfarbe</green> verfügbar.
+  unter <green>Optionen--<gt>Farben</green> verfügbar.
   </p>
 
   <p><b>Farbe für eine Zeile</b> wird verwendet für die
@@ -6319,9 +6317,10 @@ set helpText(D,Options) {<h1>Optionen und Einstellungen</h1>
   Feldfarben werden im <a Comment Diagrams>Kommentareditor</a>
   eingestellt.
   </p>
-  <p>Die Funktion <b>Hintergrundfarbe</b> hat drei Optionen: Keine,
-  Einige und Alle. Das De-/Aktivieren der Farbe für "Alle" erfordert
-  einen Neustart von Scid vs PC.
+  <p>Die Funktion <b>Hintergrundfarbe</b> setzt eine Hintergrundfarbe
+  für verschiedene textähnliche Fenster. Ebenso setzt <b>Textfarbe</b>
+  eine Vordergrundfarbe für die gleichen/ähnlichen Fenster. Diese
+  Änderung erfordert einen Neustart von Scid vs PC.
   </p>
 
   <h3><name MyPlayerNames>Meine Spielernamen</name></h3>
