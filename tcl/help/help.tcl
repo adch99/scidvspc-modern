@@ -3865,7 +3865,8 @@ set helpText(Options) {<h1>Options and Preferences</h1>
   The Board arrows and drawables' colours are set in the <a Comment Diagrams>Comment Editor</a>.
   </p>
   <p>
-  The <b>Background Colour</b> feature has three options: No, Some and All. Enabling/disabling colour for All widgets requires Scid vs PC to restart.
+  The <b>Background Colour</b> feature enables a bg colour for various text-like windows.
+  Likewise, <b>Text Colour</b> enables a text fg colour for the same/simliar windows, though this change requires ScidvsPC restart.
   </p>
 
   <h3><name MyPlayerNames>My Player Names</name></h3>
