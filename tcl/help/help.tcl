@@ -2081,7 +2081,7 @@ search for games that do not reach this position!
   wins. Games with no result do not contribute to the percentage drawn, but as half-won/half-loss.
   </p>
   <p>
-  Clicking on a move adds that move to the game.
+  Clicking on a move adds that move to the game. Middle-click shows/hides the button bar.
   </p>
   <p>
   The moves in the tree window can be sorted by
@@ -2183,7 +2183,7 @@ search for games that do not reach this position!
 <br><br>https://sourceforge.net/p/scid/mailman/scid-users/thread/48103F94.1010408%40free.fr/
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.19, October 2017</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.21, December 2019</footer></p>
 }
 
 set helpTitle(TreeMasks) "Tree Masks"

@@ -247,6 +247,9 @@ proc ::tree::Open {{baseNumber 0}} {
     if {[winfo exists .tooltip]} {wm withdraw .tooltip}
   }
 
+  # middle button toggles buttonbar
+  bind $w.f.tl <Button-2> "$w.menu.opt invoke \"[tr TreeOptShowFrame]\""
+
   bind $w <Configure> "recordWinSize $w"
 
   ### Tree statusbar now unused
@@ -574,7 +577,11 @@ proc ::tree::dorefresh { baseNumber } {
 
   if {!$::tree::showBar} {
     # enable tree
-    $w.f.tl tag configure treetext -foreground black
+    if {$::enableBackground} {
+      $w.f.tl tag configure treetext -foreground  $::defaultForeground
+    } else {
+      $w.f.tl tag configure treetext -foreground black
+    }
   }
 
   # unbusyCursor .
