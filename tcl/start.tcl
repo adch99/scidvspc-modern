@@ -1588,10 +1588,11 @@ if {$enableBackground == 1} {
   option add *Listbox*background $defaultBackground
 }
 
-if {$enableBackground == 2} {
-  # only valid after restart
-  option add *background $defaultBackground
-}
+# Global background disabled
+# if {$enableBackground == 2} {
+#   # only valid after restart
+#   option add *background $defaultBackground
+# }
 
 # Reconfigure fonts if necessary
 

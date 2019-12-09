@@ -577,8 +577,8 @@ menuText D TreeOptAutosave "Automatisch Cache-Datei sichern" 4 \
 menuText D TreeOptAutomask "Automatisches Laden der Maske" 0 "Automatisches Laden der letzten Maske mit geöffnetem Baum"
 menuText D TreeOptCacheSize "Cache-Größe" 0 {Cache-Größe auswählen.}
 menuText D TreeOptShowBar "Fortschrittsbalken anzeigen" 0 "Zeigt Fortschrittsbalken an."
-menuText D TreeOptShowFrame "Schaltflächenleiste anzeigen" 0 "Show tree button bar."
-menuText D TreeOptSortBest "Sortiere beste Partien" 0 "Sortier beste Partien nach ELO."
+menuText D TreeOptShowFrame "Schaltflächenleiste anzeigen" 0 "Zeigt Schaltflächenleiste für den Zugbaum"
+menuText D TreeOptSortBest "Sortiere beste Partien" 0 "Sortiert beste Partien nach ELO."
 menuText D TreeHelp "Hilfe" 0
 menuText D TreeHelpTree "Zugbaumhilfe" 0
 menuText D TreeHelpIndex "Index" 0
@@ -3023,7 +3023,7 @@ set helpText(D,Searches) {<h1>In Scid suchen</h1>
   berücksichtigen keine Leerzeichen. Beispiel: <b>Michael</b> paßt auf
   viele Vor- und Nachnamen. Genauere Ergebnisse erhält man mit
   Platzhalterzeichen (<b>?</b> für ein Zeichen, <b> * </b> für
-  Null oder mehr Zeichen) und Einschließen in
+  null oder mehr Zeichen) und Einschließen in
   Anführungszeichen. Beispielsweise findet eine Suche nach dem
   Ort <b>USA</b> amerikanische Städte, aber auch <b>Lausanne SUI</b>,
   was vermutlich nicht das ist, was Sie wollten. <b>"*USA"</b>
