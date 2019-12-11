@@ -1207,6 +1207,12 @@ translate N ExitDialog {Wilt u ScidvsPC werkelijk afsluiten?}
 # ====== TODO To be translated ======
 translate N ClearGameDialog {This game has been altered.\nDo you wish to save it?}
 translate N ExitUnsaved {In de volgende databases zijn partijen gewijzigd en niet opgeslagen. Als u nu afsluit zullen deze wijzigingen verloren gaan.}
+# ====== TODO To be translated ======
+translate N ChangeTextDialog {Enabling text colour globally requires restart.}
+# ====== TODO To be translated ======
+translate N ChangeDockDialog {Changing Docking requires a restart.}
+# ====== TODO To be translated ======
+translate N ExitNow {Exit now ?}
 
 # Import window:
 translate N PasteCurrentGame {Plak huidige partij}

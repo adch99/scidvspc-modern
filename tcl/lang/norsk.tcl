@@ -1132,6 +1132,12 @@ translate O ReadOnlyDialog {Ønsker du å skrivebeskytte databasen?
 translate O ExitDialog {Vil du virkelig avslutte Scid?}
 translate O ClearGameDialog {Partiet er endret.\nVil du lagre det?}
 translate O ExitUnsaved {Følgende baser har ulagrede endringer i partier. Hvis du avslutter nå vil disse endringene gå tapt.}
+# ====== TODO To be translated ======
+translate O ChangeTextDialog {Enabling text colour globally requires restart.}
+# ====== TODO To be translated ======
+translate O ChangeDockDialog {Changing Docking requires a restart.}
+# ====== TODO To be translated ======
+translate O ExitNow {Exit now ?}
 
 # Import window:
 translate O PasteCurrentGame {Lim inn gjeldende parti}

@@ -1178,6 +1178,12 @@ Puedes hacer fácilmente escribible la base de datos otra vez cerrándola y abrién
 translate S ExitDialog {¿Realmente quieres salir de Scid?}
 translate S ClearGameDialog {Esta partida ha sido alterada.\n¿Desea guardarla?}
 translate S ExitUnsaved {La siguiente base de datos tiene cambios en partidas no guardadas. Si sales ahora se perderán estos cambios.}
+# ====== TODO To be translated ======
+translate S ChangeTextDialog {Enabling text colour globally requires restart.}
+# ====== TODO To be translated ======
+translate S ChangeDockDialog {Changing Docking requires a restart.}
+# ====== TODO To be translated ======
+translate S ExitNow {Exit now ?}
 
 # Import window:
 translate S PasteCurrentGame {Pegar partida actual}

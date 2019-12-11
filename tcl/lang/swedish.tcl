@@ -1203,6 +1203,12 @@ translate W ExitDialog {Vill du verkligen avsluta Scid?}
 # ====== TODO To be translated ======
 translate W ClearGameDialog {This game has been altered.\nDo you wish to save it?}
 translate W ExitUnsaved {De följande databaserna har osparade förändringar. Om du avslutar nu, kommer dessa förändringar att gå förlorade.}
+# ====== TODO To be translated ======
+translate W ChangeTextDialog {Enabling text colour globally requires restart.}
+# ====== TODO To be translated ======
+translate W ChangeDockDialog {Changing Docking requires a restart.}
+# ====== TODO To be translated ======
+translate W ExitNow {Exit now ?}
 
 # Import window:
 translate W PasteCurrentGame {Klistra in aktuellt parti}

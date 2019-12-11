@@ -1110,6 +1110,12 @@ translate T ReadOnlyDialog {Bu veritabanını salt okunur yapmak ister misiniz?
 translate T ExitDialog {Gerçekten Scid'den çıkmak istiyor musun?}
 translate T ClearGameDialog {Bu oyun değiştirildi.\nKaydetmek istiyor musunuz?}
 translate T ExitUnsaved {Aşağıdaki veritabanlarına kaydedilmemiş oyunlar var. Şimdi çıkarsanız, bu değişiklikler kaybolacak.}
+# ====== TODO To be translated ======
+translate T ChangeTextDialog {Enabling text colour globally requires restart.}
+# ====== TODO To be translated ======
+translate T ChangeDockDialog {Changing Docking requires a restart.}
+# ====== TODO To be translated ======
+translate T ExitNow {Exit now ?}
 
 # Import window:
 translate T PasteCurrentGame {Geçerli Oyunu Yapıştır}

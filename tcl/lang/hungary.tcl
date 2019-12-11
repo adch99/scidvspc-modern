@@ -1310,6 +1310,12 @@ translate H ExitDialog {Tényleg ki akarsz lépni SCID-bõl?}
 # ====== TODO To be translated ======
 translate H ClearGameDialog {This game has been altered.\nDo you wish to save it?}
 translate H ExitUnsaved {A következõ adatbázisokban elmentetlen játszmaváltoztatások vannak. Ha most kilépsz, ezek a változtatások elvesznek.}
+# ====== TODO To be translated ======
+translate H ChangeTextDialog {Enabling text colour globally requires restart.}
+# ====== TODO To be translated ======
+translate H ChangeDockDialog {Changing Docking requires a restart.}
+# ====== TODO To be translated ======
+translate H ExitNow {Exit now ?}
 
 # Import window:
 translate H PasteCurrentGame {Beilleszti az aktuális játszmát.}

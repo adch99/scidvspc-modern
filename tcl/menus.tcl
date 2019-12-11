@@ -1267,7 +1267,7 @@ menu $m -tearoff -1
 
 $m add checkbutton -label OptionsWindowsDock -variable windowsDock -command {
   if {$::docking::USE_DOCKING != $windowsDock} {
-    set answer [tk_messageBox -type yesno -icon info -title Scid -message "Changing Docking requires a restart.\nExit now ?"]
+    set answer [tk_messageBox -type yesno -icon info -title Scid -message "[tr ChangeDockDialog]\n[tr ExitNow]"]
     if {$answer == "yes"} {
       ::file::Exit
     }
@@ -1382,7 +1382,7 @@ proc SetForegroundColour {} {
   if {$temp != {}} {
     set defaultForeground $temp
     if {!$enableForeground} {set enableForeground 1}
-    set answer [tk_messageBox -type yesno -icon info -title Scid -message "Enabling text colour globally requires restart.\nExit now ?"]
+    set answer [tk_messageBox -type yesno -icon info -title Scid -message "[tr ChangeTextDialog]\n[tr ExitNow]"]
     if {$answer == "yes"} {
       ::file::Exit
     }

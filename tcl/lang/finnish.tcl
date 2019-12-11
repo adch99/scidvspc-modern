@@ -1108,6 +1108,12 @@ translate L ReadOnlyDialog {Haluatko tehdä tästä tietokannasta kirjoitussuojatun
 translate L ExitDialog {Haluatko todella poistua Scid-ohjelmasta?}
 translate L ClearGameDialog {Tätä peliä on muutettu.\nDo haluatko tallentaa sen?}
 translate L ExitUnsaved {Seuraavissa tietokannoissa on tallentamattomia pelejä. Jos poistut nyt niin nämä muutokset häviävät.}
+# ====== TODO To be translated ======
+translate L ChangeTextDialog {Enabling text colour globally requires restart.}
+# ====== TODO To be translated ======
+translate L ChangeDockDialog {Changing Docking requires a restart.}
+# ====== TODO To be translated ======
+translate L ExitNow {Exit now ?}
 
 # Import window:
 translate L PasteCurrentGame {Liitä nykyinen peli}

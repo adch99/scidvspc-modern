@@ -1351,6 +1351,12 @@ translate B ExitDialog {Voce quer realmente sair do Scid?}
 
 translate B ClearGameDialog {Este jogo foi alterado.\nVoce quer salva-lo?}
 translate B ExitUnsaved {As bases a seguir tem mudanças nos jogos que não foram salvas. Se você sair agora, essas mudanças serão perdidas.} 
+# ====== TODO To be translated ======
+translate B ChangeTextDialog {Enabling text colour globally requires restart.}
+# ====== TODO To be translated ======
+translate B ChangeDockDialog {Changing Docking requires a restart.}
+# ====== TODO To be translated ======
+translate B ExitNow {Exit now ?}
 
 
 # Import window:

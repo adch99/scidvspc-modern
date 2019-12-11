@@ -1382,6 +1382,12 @@ translate Y ExitDialog {Da li zaista ¾elite da napustite Scid?}
 # ====== TODO To be translated ======
 translate Y ClearGameDialog {This game has been altered.\nDo you wish to save it?}
 translate Y ExitUnsaved {The following databases have unsaved game changes. If you exit now, these changes will be lost.} ;# ***
+# ====== TODO To be translated ======
+translate Y ChangeTextDialog {Enabling text colour globally requires restart.}
+# ====== TODO To be translated ======
+translate Y ChangeDockDialog {Changing Docking requires a restart.}
+# ====== TODO To be translated ======
+translate Y ExitNow {Exit now ?}
 
 # Import window:
 translate Y PasteCurrentGame {Prenesi tekuæu partiju}

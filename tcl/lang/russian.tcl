@@ -1176,6 +1176,12 @@ translate R ExitDialog {Вы действительно хотите выйти 
 # ====== TODO To be translated ======
 translate R ClearGameDialog {This game has been altered.\nDo you wish to save it?}
 translate R ExitUnsaved {Следующая база данных имеет не сохраненные изменённые партии. Если вы выйдите сейчас, изменения будут утеряны.}
+# ====== TODO To be translated ======
+translate R ChangeTextDialog {Enabling text colour globally requires restart.}
+# ====== TODO To be translated ======
+translate R ChangeDockDialog {Changing Docking requires a restart.}
+# ====== TODO To be translated ======
+translate R ExitNow {Exit now ?}
 
 # Import window:
 translate R PasteCurrentGame {Вставить текущую партию}

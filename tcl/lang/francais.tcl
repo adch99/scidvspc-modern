@@ -1121,6 +1121,12 @@ Voulez vous vraiment passer cette base en lecture seule?}
 translate F ExitDialog {Voulez-vous réellement quitter Scid?}
 translate F ClearGameDialog {Ce jeu a été modifié.\nVoulez-vous le sauvegarder?}
 translate F ExitUnsaved {Les bases de données suivantes ont des parties modifiées non sauvegardées. Si vous quittez maintenant, ces modifications seront perdues.}
+# ====== TODO To be translated ======
+translate F ChangeTextDialog {Enabling text colour globally requires restart.}
+# ====== TODO To be translated ======
+translate F ChangeDockDialog {Changing Docking requires a restart.}
+# ====== TODO To be translated ======
+translate F ExitNow {Exit now ?}
 
 # Import window:
 translate F PasteCurrentGame {Coller la partie courante}
