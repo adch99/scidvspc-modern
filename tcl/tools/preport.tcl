@@ -263,8 +263,7 @@ proc ::preport::makeReportWin {args} {
     bindWheeltoFont $w
 
     autoscrollframe -bars y $w.scroll text $w.text \
-      -font font_Small -setgrid 1 -wrap word \
-      -foreground black -cursor top_left_arrow
+      -font font_Small -setgrid 1 -wrap word -cursor top_left_arrow
     ::htext::init $w.text
     frame $w.b
     button $w.b.opts -text [tr OprepFileOptions] -command ::preport::setOptions

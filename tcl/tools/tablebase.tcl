@@ -159,8 +159,7 @@ proc ::tb::Open {} {
   pack $f.sec.label $f.sec.menu -side left -pady 1 -padx 10
 
   autoscrollframe $f.list text $f.list.text \
-      -width 35 -height 7 -font font_Fixed -wrap none \
-      -foreground black  -cursor top_left_arrow
+      -width 35 -height 7 -font font_Fixed -wrap none -cursor top_left_arrow
   $f.list configure -relief flat
   pack $f.list -side top
 
@@ -168,8 +167,7 @@ proc ::tb::Open {} {
   # addHorizontalRule $f
 
   autoscrollframe $f.data text $f.data.text \
-      -width 35 -height 0 -font font_Fixed -wrap none \
-      -foreground black  -cursor top_left_arrow
+      -width 35 -height 0 -font font_Fixed -wrap none -cursor top_left_arrow
   $f.data configure -relief flat
   pack $f.data -side top -fill y -expand yes
 
@@ -191,7 +189,7 @@ proc ::tb::Open {} {
     pack $f.results.online -side right -padx 6 -pady 2
   }
   
-  text $f.text -font font_Fixed -relief flat -wrap word -foreground black
+  text $f.text -font font_Fixed -relief flat -wrap word
   pack $f.text -side top -fill both -expand yes
 
   $f.text tag configure indent -lmargin2 [font measure font_Fixed  "        "]

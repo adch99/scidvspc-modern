@@ -1746,7 +1746,6 @@ namespace eval CorrespondenceChess {
 			wm title $w [::tr "CCDlgConfigRelay"]
 
 			autoscrollframe $w.desc text $w.desc.text \
-					-background gray90 -foreground black \
 					-width 60 -height 7 -wrap word -cursor top_left_arrow
 			$w.desc.text insert end [::tr "CCDlgConfigRelayHelp"]
 			$w.desc.text configure -state disabled

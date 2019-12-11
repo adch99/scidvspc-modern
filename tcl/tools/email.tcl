@@ -224,7 +224,7 @@ proc ::tools::email::TimesButton {type} {
   label $w.title -text "Email Times for [lindex $details 0]"
   frame $w.t
   text $w.t.text -height 15 -width 30 -font font_Fixed -setgrid 1 \
-    -yscrollcommand "$w.t.ybar set"  -fg black
+    -yscrollcommand "$w.t.ybar set"
   scrollbar $w.t.ybar -command "$w.t.text yview"
   frame $w.b
   button $w.b.ok -text "OK" -command {

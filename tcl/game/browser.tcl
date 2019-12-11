@@ -48,8 +48,7 @@ proc ::gbrowser::new {base gnum {ply -1} {w {}}} {
     # $w.bd configure -relief solid -borderwidth 1
     pack $w.bd -side left -padx 4 -pady 4
 
-    autoscrollframe $w.t text $w.t.text \
-      -foreground black  -wrap word \
+    autoscrollframe $w.t text $w.t.text -wrap word \
       -width 40 -height 12 -font font_Small -setgrid 1
     pack $w.t -side right -fill both -expand yes
 
