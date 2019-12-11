@@ -1185,6 +1185,12 @@ translate P ExitDialog {Na pewno zakończyć pracę z programem?}
 # ====== TODO To be translated ======
 translate P ClearGameDialog {This game has been altered.\nDo you wish to save it?}
 translate P ExitUnsaved {Następujące bazy zawierają niezapisane zmiany. Jeśli zamkniesz program teraz, zmiany zostaną utracone.} 
+# ====== TODO To be translated ======
+translate P ChangeTextDialog {Enabling text colour globally requires restart.}
+# ====== TODO To be translated ======
+translate P ChangeDockDialog {Changing Docking requires a restart.}
+# ====== TODO To be translated ======
+translate P ExitNow {Exit now ?}
 
 # Import window:
 translate P PasteCurrentGame {Wklej aktualną partię}

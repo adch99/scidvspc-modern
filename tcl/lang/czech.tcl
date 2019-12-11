@@ -1301,6 +1301,12 @@ translate C ExitDialog {Opravdu si pøejete ukonèit Scid?}
 # ====== TODO To be translated ======
 translate C ClearGameDialog {This game has been altered.\nDo you wish to save it?}
 translate C ExitUnsaved {Následující databáze obsahují partie s neulo¾enými zmìnami. Pokud nyní skonèíte, budou tyto zmìny ztraceny.}
+# ====== TODO To be translated ======
+translate C ChangeTextDialog {Enabling text colour globally requires restart.}
+# ====== TODO To be translated ======
+translate C ChangeDockDialog {Changing Docking requires a restart.}
+# ====== TODO To be translated ======
+translate C ExitNow {Exit now ?}
 
 # Import window:
 translate C PasteCurrentGame {Vlo¾it aktuální partii}

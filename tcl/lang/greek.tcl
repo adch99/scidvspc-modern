@@ -1223,6 +1223,12 @@ translate G ExitDialog {Επιθυμείτε να κλείσετε το ScidvsPC
 # ====== TODO To be translated ======
 translate G ClearGameDialog {This game has been altered.\nDo you wish to save it?}
 translate G ExitUnsaved {Οι ακόλουθες Βάσεις περιέχουν μη αποθηκευμένες παρτίδες. Αν κλείσετε την εφαρμογή τώρα, οι αλλαγές θα χαθούν.}
+# ====== TODO To be translated ======
+translate G ChangeTextDialog {Enabling text colour globally requires restart.}
+# ====== TODO To be translated ======
+translate G ChangeDockDialog {Changing Docking requires a restart.}
+# ====== TODO To be translated ======
+translate G ExitNow {Exit now ?}
 
 # Import window:
 translate G PasteCurrentGame {Επικόλληση Παρτίδας}

@@ -1117,6 +1117,12 @@ Você realmente quer que esta base de dados seja apenas de leitura?}
 translate U ExitDialog {Você quer realmente sair do Scid?}
 translate U ClearGameDialog {Este jogo foi alterado.  Você realmente quer continuar e descartar as mudanças feitas?  }
 translate U ExitUnsaved {As seguintes bases têm alterações não gravadas. Se sair agora, essas alterações serão perdidas.} ;# ***
+# ====== TODO To be translated ======
+translate U ChangeTextDialog {Enabling text colour globally requires restart.}
+# ====== TODO To be translated ======
+translate U ChangeDockDialog {Changing Docking requires a restart.}
+# ====== TODO To be translated ======
+translate U ExitNow {Exit now ?}
 
 # Import window:
 translate U PasteCurrentGame {Colar jogo corrente}

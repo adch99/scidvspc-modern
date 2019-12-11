@@ -1151,6 +1151,12 @@ Wollen Sie diese Datenbank wirklich schreibschützen?}
 translate D ExitDialog {Möchten Sie Scid beenden?}
 translate D ClearGameDialog {Diese Partie wurde geändert.\nWollen Sie sie speichern?}
 translate D ExitUnsaved {Die folgenden Datenbanken haben ungesicherte Partieänderungen. Wenn Sie jetzt beenden, gehen diese Änderungen verloren.}
+# ====== TODO To be translated ======
+translate D ChangeTextDialog {Enabling text colour globally requires restart.}
+# ====== TODO To be translated ======
+translate D ChangeDockDialog {Changing Docking requires a restart.}
+# ====== TODO To be translated ======
+translate D ExitNow {Exit now ?}
 
 # Import window:
 translate D PasteCurrentGame {Aktuelle Partie einfügen}
@@ -4292,7 +4298,8 @@ set helpText(D,Tree) {<h1>Das Zugbaumfenster</h1>
   wirken sich nicht auf den Remisprozentsatz aus, sondern sind halb
   gewonnen/halb verloren.
   </p>
-  <p>Ein Klick auf einen Zug fügt diesen der Partie hinzu.
+  <p>Ein Klick auf einen Zug fügt diesen der Partie hinzu. Ein Klick
+  mit der mittleren Maustaste zeigt/verbirgt die Symbolleiste.
   </p>
   <p>Die Züge im Baumfenster können sortiert werden nach Zug
   (alphabetisch), ECO-code, Häufigkeit oder Ergebnis.
@@ -4336,7 +4343,7 @@ set helpText(D,Tree) {<h1>Das Zugbaumfenster</h1>
   Schaltfläche <term>Sperren</term> im Zugbaumfenster aktiviert ist,
   dann wird das Schließen dieses Fensters auch die zugehörige
   Datenbank schließen. Zusätzlich schließt dies auch das zugehörige
-	Grafikfenster oder das Fenster mit den besten Partien. Wenn
+  Grafikfenster oder das Fenster mit den besten Partien. Wenn
   die <term>Sperren</term>-Schaltfläche nicht aktiv ist, dann läßt ein
   Schließen des Zugbaumfensters alle übrigen Fenster geöffnet.
   </p>
@@ -4414,7 +4421,7 @@ set helpText(D,Tree) {<h1>Das Zugbaumfenster</h1>
   <br>https://sourceforge.net/p/scid/mailman/scid-users/thread/48103F94.1010408%40free.fr/
   </p>
 
-  <p><footer>Aktualisiert: Scid vs. PC 4.19, Oktober 2017</footer></p>
+  <p><footer>Aktualisiert: Scid vs. PC 4.21, Dezember 2019</footer></p>
 }
 
 set helpTitle(D,TreeMasks) "Zugbaummasken"

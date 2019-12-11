@@ -1275,6 +1275,12 @@ translate I ExitDialog {Vuoi veramente uscire da Scid?}
 # ====== TODO To be translated ======
 translate I ClearGameDialog {This game has been altered.\nDo you wish to save it?}
 translate I ExitUnsaved {Il database ha partite modificate e non salvate. Se esci adesso queste modifiche saranno perse.}
+# ====== TODO To be translated ======
+translate I ChangeTextDialog {Enabling text colour globally requires restart.}
+# ====== TODO To be translated ======
+translate I ChangeDockDialog {Changing Docking requires a restart.}
+# ====== TODO To be translated ======
+translate I ExitNow {Exit now ?}
 
 # Import window:
 translate I PasteCurrentGame {Incolla la partita attuale}
