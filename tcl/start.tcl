@@ -1572,6 +1572,7 @@ if {$::docking::USE_DOCKING} {
 if {$enableForeground == 1} {
   # Text foreground only
   option add *Text*foreground $defaultForeground
+  option add *Listbox*foreground $defaultForeground
 
   # Global colouring is disabled
   # option add *Button*foreground $defaultForeground

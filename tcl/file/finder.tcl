@@ -64,7 +64,7 @@ proc ::file::finder::Open {} {
   frame $w.t -relief flat
   frame $w.b
   text $w.t.text -width 70 -height 25 -font font_Small -wrap none \
-      -fg black  -yscrollcommand "$w.t.ybar set" -setgrid 1 \
+      -yscrollcommand "$w.t.ybar set" -setgrid 1 \
       -cursor top_left_arrow
   scrollbar $w.t.ybar -command "$w.t.text yview" -width 12
   $w.t.text tag configure Up -foreground brown

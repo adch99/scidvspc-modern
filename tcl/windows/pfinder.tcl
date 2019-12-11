@@ -49,7 +49,7 @@ proc ::plist::Open {} {
   foreach i {t o1 o2 o3 b} {frame $w.$i}
   $w.t configure -relief sunken -borderwidth 1
   text $w.t.text -width 55 -height 25 -font font_Small -wrap none \
-    -fg black  -yscrollcommand "$w.t.ybar set" -setgrid 1 \
+    -yscrollcommand "$w.t.ybar set" -setgrid 1 \
     -cursor top_left_arrow -xscrollcommand "$w.t.xbar set" -borderwidth 0
   scrollbar $w.t.ybar -command "$w.t.text yview" -takefocus 0
   scrollbar $w.t.xbar -orient horiz -command "$w.t.text xview" -takefocus 0

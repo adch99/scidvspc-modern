@@ -166,9 +166,7 @@ proc ::optable::makeReportWin {args} {
     bind $w <Key-End> "$w.text yview moveto 0.99"
     bindMouseWheel $w $w.text
 
-    text $w.text -setgrid 1 \
-        -wrap word  -foreground black -yscrollcommand "$w.ybar set" \
-        -cursor top_left_arrow
+    text $w.text -setgrid 1 -wrap word  -yscrollcommand "$w.ybar set" -cursor top_left_arrow
     ::htext::init $w.text
     scrollbar $w.ybar -command "$w.text yview"
     frame $w.b
@@ -1249,8 +1247,7 @@ proc ::optable::editFavoritesDlg {} {
 
   set ::reportFavoritesTemp $::reportFavorites
   # wm transient $w .
-  entry $w.e -width 60 -foreground black  \
-      -textvariable reportFavoritesName -exportselection 0
+  entry $w.e -width 60 -textvariable reportFavoritesName -exportselection 0
 
   trace variable reportFavoritesName w ::optable::editFavoritesRefresh
   pack [frame $w.b] -side bottom -fill x
@@ -1258,7 +1255,7 @@ proc ::optable::editFavoritesDlg {} {
   frame $w.f
   pack $w.f -side top -fill both -expand yes
 
-  listbox $w.f.list -width 50 -height 10 -fg black -exportselection 0 \
+  listbox $w.f.list -width 50 -height 10 -exportselection 0 \
     -setgrid 1 -yscrollcommand "$w.f.ybar set"
   scrollbar $w.f.ybar -takefocus 0 -command "$w.f.list yview"
 
