@@ -1244,8 +1244,11 @@ proc getPromoPiece {} {
   }
   set ::selectedSq -1
   toplevel $w
-  ### doesnt work with non-docked mode and tkwait visibility
-  # wm transient $w .
+  ### wm transient doesnt work with non-docked mode and tkwait visibility
+  ## But we need it for Cocoa macOS, which otherwise can place promo toplevel under .
+  if {$::macOS} {
+    wm transient $w .
+  }
   wm title $w "Promotion"
   wm resizable $w 0 0
 
