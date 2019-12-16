@@ -1,0 +1,336 @@
+This feature was removed because it crashes When Options->Moves->Color Selected Square is deselected
+(ie when the new rectangle for selected square is used).
+And it sucks besides. This position
+r1bqkbnr/pppppppp/2n5/4P3/8/8/PPPP1PPP/RNBQKBNR b KQkq - 0 2 
+, the suggested knight move is retreat. wtf.
+This patch reinistates feature (english only) S.A
+
+Index: tcl/board.tcl
+===================================================================
+--- tcl/board.tcl	(revision 3054)
++++ tcl/board.tcl	(working copy)
+@@ -7,21 +7,21 @@
+ array set ::board::letterToPiece \
+   {R wr r br N wn n bn B wb b bb Q wq q bq K wk k bk P wp p bp . e}
+ 
+-# { name(unused), lite, dark, highcolor, bgcolor, highlightLastMoveColor (missing) }
++# { name(unused), lite, dark, highcolor, bestcolor, bgcolor, highlightLastMoveColor }
+ 
+ set colorSchemes1 {
+-  { Blue-white	#f3f3f3 #7389b6 #f3f484 steelblue4}
+-  { Blue-ish	#d0e0d0 #80a0a0 #b0d0e0 grey}
+-  { M.Thomas	#d3d9a8 #51a068 #e0d873 grey20}
+-  { GreenYellow	#e0d070 #70a070 #b0d0e0 #29764e}
+-  { Brown	#d0c0a0 #a08050 #b0d0e0 tan4}
++  { Blue-white	#f3f3f3 #7389b6 #f3f484 #b8cbf8 steelblue4}
++  { Blue-ish	#d0e0d0 #80a0a0 #b0d0e0 #f0f0a0 grey}
++  { M.Thomas	#d3d9a8 #51a068 #e0d873 #86a000 grey20}
++  { GreenYellow	#e0d070 #70a070 #b0d0e0 #bebebe #29764e}
++  { Brown	#d0c0a0 #a08050 #b0d0e0 #bebebe tan4}
+ }
+ set colorSchemes2 {
+-  { Tan		#fbdbc4 #cc9c83 #b0d0e0 rosybrown4}
+-  { Grey	#dfdfdf #808080 #b0d0e0 black }
+-  { Rosy	#f8dbcc rosybrown #b0d0e0 rosybrown4}
+-  { SteelBlue	lightsteelblue steelblue #51a068 #002958}
+-  { GreenSA     #46a631 #006400 #008064 #8bb869 }
++  { Tan		#fbdbc4 #cc9c83 #b0d0e0 #bebebe rosybrown4}
++  { Grey	#dfdfdf #808080 #b0d0e0 #bebebe black }
++  { Rosy	#f8dbcc rosybrown #b0d0e0 #bebebe rosybrown4}
++  { SteelBlue	lightsteelblue steelblue #51a068 #e0d873 #002958}
++  { GreenSA     #46a631 #006400 #008064 rosybrown4 #8bb869 }
+ }
+ array set newColors {}
+ 
+@@ -74,9 +74,10 @@
+   set newColors(lite) [lindex $list 1]
+   set newColors(dark) [lindex $list 2]
+   set newColors(highcolor) [lindex $list 3]
+-  set newColors(bgcolor)   [lindex $list 4]
++  set newColors(bestcolor) [lindex $list 4]
++  set newColors(bgcolor)   [lindex $list 5]
+   # highlightLastMoveColor needs to be added to colorSchemes1 , colorSchemes2 above 
+-  set newColors(highlightLastMoveColor) $::highlightLastMoveColor
++  set newColors(highlightLastMoveColor)   $::highlightLastMoveColor
+   set newColors(maincolor) $::maincolor
+   set newColors(varcolor)  $::varcolor
+ }
+@@ -83,10 +84,10 @@
+ 
+ proc applyBoardColors {} {
+ 
+-  global newColors lite dark highcolor bgcolor highlightLastMoveColor borderwidth maincolor varcolor
++  global newColors lite dark highcolor bestcolor bgcolor highlightLastMoveColor borderwidth maincolor varcolor
+ 
+   set w .bdOptions
+-  set colors {lite dark highcolor bgcolor highlightLastMoveColor maincolor varcolor}
++  set colors {lite dark highcolor bestcolor bgcolor highlightLastMoveColor maincolor varcolor}
+ 
+   foreach i $colors {
+     set $i $newColors($i)
+@@ -99,6 +100,7 @@
+     $w.bd.$i configure -background $newColors(lite)
+   }
+   $w.bd.bb configure -background $newColors(highcolor)
++  $w.bd.wk configure -background $newColors(bestcolor)
+   foreach i $colors {
+     $w.select.b$i configure -background $newColors($i)
+   }
+@@ -178,10 +180,10 @@
+ 
+ proc initBoardColors {} {
+ 
+-  global lite dark highcolor bgcolor highlightLastMoveColor png_image_support maincolor varcolor
++  global lite dark highcolor bestcolor bgcolor highlightLastMoveColor png_image_support maincolor varcolor
+   global newColors boardStyles boardStyle boardSizes boardStyleActiveButton
+ 
+-  set colors {lite dark highcolor bgcolor highlightLastMoveColor maincolor varcolor}
++  set colors {lite dark highcolor bestcolor bgcolor highlightLastMoveColor maincolor varcolor}
+   set w .bdOptions
+ 
+   if { [winfo exists $w] } {
+@@ -305,11 +307,10 @@
+   }
+ 
+   set f $w.select
+-
+-  foreach row {0 0 1 0 1 2 1} column {0 2 0 4 4 0 2} c {
+-    lite dark highcolor bgcolor highlightLastMoveColor maincolor varcolor
++  foreach row {0 0 1 1 0 1 2 2} column {0 2 0 2 4 4 0 2} c {
++    lite dark highcolor bestcolor bgcolor highlightLastMoveColor maincolor varcolor
+   } n {
+-    LightSquares DarkSquares SelectedSquares Grid Previous ArrowMain ArrowVar
++    LightSquares DarkSquares SelectedSquares SuggestedSquares Grid Previous ArrowMain ArrowVar
+   } {
+     label $f.b$c -width 2 -background [set $c] 
+     bind  $f.b$c <Button-1> "chooseAColor $w $c"
+Index: tcl/edit.tcl
+===================================================================
+--- tcl/edit.tcl	(revision 3054)
++++ tcl/edit.tcl	(working copy)
+@@ -769,7 +769,7 @@
+ 
+ proc releaseSetupSquare {w x y} {
+ 
+-  global selectedSq setupBd pastePiece setupboardSize
++  global selectedSq bestSq setupBd pastePiece setupboardSize
+ 
+   ::board::setDragSquare $w -1
+   set square [::board::getSquare $w $x $y]
+Index: tcl/end.tcl
+===================================================================
+--- tcl/end.tcl	(revision 3054)
++++ tcl/end.tcl	(working copy)
+@@ -1499,6 +1499,7 @@
+ # Todo: change pressSquare to "pressSquare $w" and make it usable by other boards.
+ for {set i 0} { $i < 64 } { incr i } {
+   ::board::bind .main.board $i <Enter> "enterSquare $i"
++  ::board::bind .main.board $i <Leave> "leaveSquare $i"
+   ::board::bind .main.board $i <ButtonPress-1> "pressSquare $i 0"
+   ::board::bind .main.board $i <ButtonPress-2> "pressSquare $i 1"
+   ::board::bind .main.board $i <Control-ButtonPress-1> "drawArrow $i \$::::commenteditor::State(markColor)"
+Index: tcl/help/help.tcl
+===================================================================
+--- tcl/help/help.tcl	(revision 3054)
++++ tcl/help/help.tcl	(working copy)
+@@ -893,6 +893,12 @@
+   is disabled.
+   </p>
+ 
++  <h4>Suggested Moves</h4>
++  <p>
++  The Suggested Move feature, if enabled, highlights all squares
++  to which there is a legal move. This can be confusing at times, as is disabled by default in Scid vs. PC.
++  </p> 
++
+   <h3><name Null>Entering Null Moves</name></h3>
+   <p>
+   <a Variations Null>Null Moves</a> (or empty moves) can be useful in variations where
+Index: tcl/lang/english.tcl
+===================================================================
+--- tcl/lang/english.tcl	(revision 3054)
++++ tcl/lang/english.tcl	(working copy)
+@@ -290,6 +290,8 @@
+   {Set the time delay for autoplay mode}
+ menuText E OptionsMovesCoord "Coordinate Move Entry" 0 \
+   {Accept coordinate-style move entry (e.g. "g1f3")}
++menuText E OptionsMovesSuggest "Show Suggested Moves" 0 \
++  {Turn on/off move suggestion}
+ menuText E OptionsShowVarPopup "Show Variation Window" 0 {Turn on/off the display of a variations window}  
+ menuText E OptionsMovesSpace "Add Spaces after Move Number" 0 {Add spaces after move number}  
+ menuText E OptionsMovesKey "Keyboard Completion" 0 \
+@@ -1340,6 +1342,7 @@
+ translate E LightSquares {Light squares}
+ translate E DarkSquares {Dark squares}
+ translate E SelectedSquares {Selected}
++translate E SuggestedSquares {Suggested}
+ translate E Grid {Grid}
+ translate E Previous {Previous}
+ translate E WhitePieces {White pieces}
+Index: tcl/main.tcl
+===================================================================
+--- tcl/main.tcl	(revision 3054)
++++ tcl/main.tcl	(working copy)
+@@ -1222,6 +1222,7 @@
+ # These three should be ::board::_selectedSq($w) etc instead of globals
+ set selectedSq -1
+ set currentSq -1
++set bestSq -1
+ 
+ set EMPTY 0
+ set KING 1
+@@ -1507,12 +1508,36 @@
+   }
+ }
+ 
++# enterSquare:
+ #   Called when the mouse pointer enters a board square.
+-
++#   Finds the best matching square for a move (if there is a
++#   legal move to or from this square), and colors the squares
++#   to indicate the suggested move.
++#
+ proc enterSquare { square } {
+-  set ::currentSq $square
++  global currentSq bestSq bestcolor selectedSq suggestMoves
++  set currentSq $square
++  if {$selectedSq == -1} {
++    set bestSq -1
++    if {$suggestMoves} {
++      set bestSq [sc_pos bestSquare $square]
++    }
++    if {[expr {$bestSq != -1}]} {
++      ::board::highlightSquare .main.board $square $bestcolor
++      ::board::highlightSquare .main.board $bestSq $bestcolor
++    }
++  }
+ }
+ 
++#    Called when the mouse pointer leaves a board square.
++#    Recolors squares to normal (lite/dark) color.
++
++proc leaveSquare { square } {
++  if {$::bestSq != -1} {
++    ::board::update .main.board
++  }
++}
++
+ #    Called when the left mouse button is pressed on a square.
+ #    Sets that square to be the selected square.
+ 
+@@ -1560,7 +1585,7 @@
+ 
+   if { [winfo exists .calvarWin] } { return }
+ 
+-  global selectedSq
++  global selectedSq bestSq
+ 
+   ::board::setDragSquare $w -1
+   set square [::board::getSquare $w $x $y]
+@@ -1570,7 +1595,18 @@
+   }
+ 
+   if {$square == $selectedSq} {
+-    # suggested-moves feature removed S.A
++    if {$::suggestMoves} {
++      # User pressed and released on same square, so make the
++      # suggested move if there is one:
++      set selectedSq -1
++      ::board::highlightSquare $w $bestSq
++      ::board::highlightSquare $w $square
++      addMove $square $bestSq -animate
++      enterSquare $square
++    } else {
++      # Current square is the square user pressed the button on,
++      # so we do nothing.
++    }
+   } else {
+     if {$selectedSq == -1} {
+       return
+Index: tcl/menus.tcl
+===================================================================
+--- tcl/menus.tcl	(revision 3054)
++++ tcl/menus.tcl	(working copy)
+@@ -962,7 +962,7 @@
+     ::pgn::shortHeader ::pgn::boldMainLine ::pgn::stripMarks 
+     ::pgn::symbolicNags ::pgn::moveNumberSpaces ::pgn::columnFormat ::pgn::showScrollbar
+     myPlayerNames optionsAutoSave ::tree::mask::recentMask ::tree::mask::autoLoadMask ::tree::showBar ::tree::short ::tree::sortBest ::tree::autoAdjust
+-    ::tree::autoSave ::tree::order ::tree::showFrame ecoFile showVarPopup showVarArrows colorActiveSquare
++    ::tree::autoSave ::tree::order ::tree::showFrame ecoFile suggestMoves showVarPopup showVarArrows colorActiveSquare
+     annotate(blunder) annotate(addTag) annotate(Moves) annotate(WithVars) annotate(WithScore) useAnalysisBook annotate(isVar) annotate(scoreType) annotate(cutoff) annotate(MissedMates)
+     annotate(WantedDepth) annotate(Depth) autoplayDelay animateDelay boardCoords boardSTM 
+     moveEntry(AutoExpand) moveEntry(Coord)
+@@ -1020,7 +1020,7 @@
+     puts $optionF ""
+     puts $optionF "set analysisCommand [list $analysisCommand]"
+     puts $optionF ""
+-    foreach i {lite dark highcolor bgcolor maincolor varcolor engineLineColor rowcolor progcolor crosscolor scorecolor scorebarcolor switchercolor borderwidth \
++    foreach i {lite dark highcolor bestcolor bgcolor maincolor varcolor engineLineColor rowcolor progcolor crosscolor scorecolor scorebarcolor switchercolor borderwidth \
+           pgnColor(Header) pgnColor(Main) pgnColor(Var) \
+           pgnColor(Nag) pgnColor(Comment) pgnColor(Background) \
+           pgnColor(Current) pgnColor(NextMove) } {
+@@ -1199,6 +1199,10 @@
+     -variable moveEntry(AutoExpand) -offvalue 0 -onvalue 1
+ set helpMessage($m.entry,4) OptionsMovesKey
+ 
++$m.entry add checkbutton -label OptionsMovesSuggest \
++    -variable suggestMoves -offvalue 0 -onvalue 1
++set helpMessage($m.entry,5) OptionsMovesSuggest
++
+ $m.entry add checkbutton -label OptionsMovesSpace \
+     -variable ::pgn::moveNumberSpaces -offvalue 0 -onvalue 1
+ set helpMessage($m.entry,7) OptionsMovesSpace
+@@ -1839,7 +1843,7 @@
+   }
+   configMenuText .menu.options.entry [tr OptionsShowVarPopup $oldLang] OptionsShowVarPopup $lang
+   # S.A. here's how to fix these f-ing menus. &&&
+-  foreach tag {Ask Animate Delay Key Coord Space TranslatePieces HighlightLastMove ShowVarArrows ColorSelected} {
++  foreach tag {Ask Animate Delay Suggest Key Coord Space TranslatePieces HighlightLastMove ShowVarArrows ColorSelected} {
+     configMenuText .menu.options.entry [tr OptionsMoves$tag $oldLang] \
+         OptionsMoves$tag $lang
+   }
+Index: tcl/start.tcl
+===================================================================
+--- tcl/start.tcl	(revision 3054)
++++ tcl/start.tcl	(working copy)
+@@ -407,6 +407,7 @@
+ set lite        #f3f3f3
+ set dark        #7389b6		;# dark and lite square colors
+ set highcolor   #b0d0e0		;# color when something is selected
++set bestcolor   #bebebe		;# suggested move square
+ set bgcolor     grey20		;# board (canvas) bg color, appears as the lines between the squares
+ set progcolor   rosybrown	;# progress bar
+ set buttoncolor #b0c0d0		;# (below)
+@@ -645,6 +646,9 @@
+ # Ask before replacing existing moves: on by default
+ set askToReplaceMoves 1
+ 
++# Show suggested moves
++set suggestMoves 0
++
+ # Show variations popup window, arrows
+ set showVarPopup 0
+ set showVarArrows 1
+Index: tcl/tools/calvar.tcl
+===================================================================
+--- tcl/tools/calvar.tcl	(revision 3054)
++++ tcl/tools/calvar.tcl	(working copy)
+@@ -214,8 +214,10 @@
+ 
+     set ::analysis(multiPVCount$n) 10
+     ::uci::sendToEngine $n "setoption name MultiPV value $::analysis(multiPVCount$n)"
++    set ::calvar::suggestMoves_old $::suggestMoves
+     set ::calvar::hideNextMove_old $::gameInfo(hideNextMove)
+ 
++    set ::suggestMoves 0
+     set ::gameInfo(hideNextMove) 1
+     updateBoard
+ 
+@@ -238,6 +240,7 @@
+     ::uci::closeUCIengine $n
+     focus .main
+     destroy .calvarWin
++    set ::suggestMoves $::calvar::suggestMoves_old
+     set ::gameInfo(hideNextMove) $::calvar::hideNextMove_old
+     updateBoard
+   }
