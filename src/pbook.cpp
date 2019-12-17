@@ -518,11 +518,12 @@ PBook::StripOpcode (const char * opcode)
             while (*s != 0  &&  *s != '\n') { s++; }
             if (*s == '\n') { s++; }
             while (*s != 0) { dstr.AddChar (*s);  s++; }
-        delete[] node->data.comment;
+            delete[] node->data.comment;
             node->data.comment = strDuplicate (dstr.Data());
         }
     }
     delete[] searchCode;
+    if (countFound > 0) Altered = true;
     return countFound;
 }
 
