@@ -48,6 +48,7 @@ namespace eval epd {
   ### is that we will then use ::initialDir(epd) as a starting point.
   ################################################################################
   proc newEpdWin {cmd {fname ""}} {
+    global tr
     variable maxEpd
 
     set showErrors 1
@@ -91,6 +92,8 @@ namespace eval epd {
         tk_messageBox -type ok -icon error -title "Scid: EPD file error" \
             -message $result
       }
+      # TODO - Handle case when fname is already open.  Currently, "epd open" fails,
+      # causing "return 0" below, and the already open EPD file is removed from recentFiles in file.tcl
       return 0
     }
 
@@ -122,10 +125,10 @@ namespace eval epd {
 
     frame $w.menu -borderwidth 3 -relief raised
     pack $w.menu  -side top -fill x
-    menubutton $w.menu.file -text File -menu $w.menu.file.m -underline 0
-    menubutton $w.menu.edit -text Edit -menu $w.menu.edit.m -underline 0
-    menubutton $w.menu.tools -text Tools -menu $w.menu.tools.m -underline 0
-    menubutton $w.menu.help -text Help -menu $w.menu.help.m -underline 0
+    menubutton $w.menu.file  -text [tr File]  -menu $w.menu.file.m -underline 0
+    menubutton $w.menu.edit  -text [tr Edit]  -menu $w.menu.edit.m -underline 0
+    menubutton $w.menu.tools -text [tr Tools] -menu $w.menu.tools.m -underline 0
+    menubutton $w.menu.help  -text [tr Help]  -menu $w.menu.help.m -underline 0
 
     foreach i {file edit tools help} {
       menu $w.menu.$i.m -tearoff 0
@@ -134,10 +137,10 @@ namespace eval epd {
     pack $w.menu.help -side right
 
     set m $w.menu.file.m
-    $m add command -label "New" -underline 0 -command {::epd::newEpdWin create}
-    $m add command -label "Open" -underline 0 -command {::epd::newEpdWin open}
-    $m add command -label "Save" -acc "control-s" -underline 0 -command "::epd::saveEpdWin $id"
-    $m add command -label "Close" -acc "control-w" -underline 0 -command "::epd::closeEpdWin $id"
+    $m add command -label [tr FileNew] -underline 0 -command {::epd::newEpdWin create}
+    $m add command -label [tr FileOpen] -underline 0 -command {::epd::newEpdWin open}
+    $m add command -label $tr(Save) -acc "control-s" -underline 0 -command "::epd::saveEpdWin $id"
+    $m add command -label $tr(Close) -acc "control-w" -underline 0 -command "::epd::closeEpdWin $id"
     wm protocol $w WM_DELETE_WINDOW "::epd::closeEpdWin $id"
     bind $w <Destroy> "
       wm protocol $w WM_DELETE_WINDOW {}
@@ -155,13 +158,13 @@ namespace eval epd {
         -underline 0 -command "::epd::pasteAnalysis $w.text"
     $m add command -label "Sort Opcodes" -accel "control-S" \
         -underline 0 -command "::epd::sortEpdText $w.text $id"
-    $m add command -label "Strip Opcodes" -accel "control-O" \
-        -underline 6 -command "::epd::chooseStripField $id"
     $m add command -label "Add Position" -accel "control-A" \
         -underline 0 -command "::epd::addPosition $id"
 
     set m $w.menu.tools.m
     $m add command -label "Annotate Positions" -underline 9 -command "::epd::annotateEpd $w.text $id"
+    $m add command -label "Strip Opcodes" -accel "control-O" \
+        -underline 6 -command "::epd::chooseStripField $id"
     $m add command -label "Find Deepest Game Position" -underline 5 -command "::epd::moveToDeepestMatch $id"
 
     $w.menu.help.m add command -label "EPD Help" -underline 0 -acc "F1" -command "helpWindow EPD"
@@ -474,17 +477,13 @@ namespace eval epd {
       ::epd::launchAnalysis $id $textwidget"
     dialogbutton $y.cancel -text $::tr(Cancel) -command "destroy $y"
     pack $y.ok $y.cancel -side left -padx 3 -pady 5
+    bind $y <F1> { helpWindow EPD }
     focus $y.spDelay
-    update ; # or grab will fail
-    grab $y
-
   }
 
   ################################################################################
   ###  Launch the analysis engine and annotate each EPD line with the analysis.
   ###  Pausing the analysis engine will terminate annotation.
-  ###  FIX THIS: The user is expected to be well-behaved (gone for a cup of coffee)
-  ###  during annotaion.
   ################################################################################
   proc launchAnalysis {id textwidget} {
     variable delayEpd
@@ -612,26 +611,28 @@ namespace eval epd {
     addHorizontalRule $w
     set b [frame $w.buttons]
     pack $b -side bottom -pady 5
-    button $b.ok -text "Strip EPD field" \
-        -command "::epd::stripEpdField $id \$stripField"
-    button $b.cancel -text $::tr(Cancel) -command "focus .epd$id.lb; destroy $w"
+    button $b.ok -text "Strip EPD field" -command "
+      destroy $w
+      ::epd::stripEpdField $id \$stripField
+    "
+    button $b.cancel -text $::tr(Cancel) -command "
+      destroy $w
+      focus .epd$id.lb
+    "
     pack $b.ok $b.cancel -side left -padx 5
     bind $w <Return> "$b.ok invoke"
     bind $w <Escape> "$b.cancel invoke"
-    focus .epdStrip.e
-    grab .epdStrip
+    bind $w <F1> { helpWindow EPD }
+    focus $w.e
   }
 
   ################################################################################
   ###  Strip an opcode from all EPD lines.
   ################################################################################
   proc stripEpdField {id field} {
-    if {! [winfo exists .epdStrip]} { return }
-    if {! [string compare $field ""]} { return }
+    if {$field == ""} {return}
     set result [sc_epd strip $id $field]
     updateEpdWin $id
-    destroy .epdStrip
-    update
     tk_messageBox -type ok -icon info -title "Scid: EPD field stripped" \
         -message "Scid found and stripped an EPD field named \"$field\" from\
         $result positions." -parent  .epd$id
