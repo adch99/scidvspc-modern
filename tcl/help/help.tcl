@@ -3112,8 +3112,7 @@ set helpText(EPD) {<h1>EPD Files</h1>
   <h3>Pasting Analysis</h3>
   <p>
   If an analysis engine is running, one can annotate a single position using
-  the <b>Edit--<gt>Paste Analysis</b> menu item.  Note that existing operands
-  will not be automatically stripped before pasting.
+  <b>Edit--<gt>Paste Analysis</b>. This will likewise strip the previous opcodes.
   </p>
 
   <h3>Stripping Out EPD Fields</h3>
@@ -3125,20 +3124,19 @@ set helpText(EPD) {<h1>EPD Files</h1>
   </p>
   <p>
   Strip out an EPD opcode from all positions in the EPD file by using
-  the <b>Edit--<gt>Strip Opcodes</b> menu item.
+  <b>Tools--<gt>Strip Opcodes</b>.
   </p>
 
   <h3>Sorting EPD Fields</h3>
   <p>
-  The EPD specification requires that opcodes appear in sorted order.  After editing
-  the EPD fields, one can sort them with the <b>Edit--<gt>Sort Opcodes</b> menu item.
-  (This only affects the operands for the current position.)
+  The EPD specification requires that opcodes are sorted.  After editing
+  EPD fields, one may sort the current position's opcodes with <b>Edit--<gt>Sort Opcodes</b>.
   </p>
 
   <h3>Adding a New Position</h3>
   <p>
-  The main board's current position can be appended to the EPD file with the
-  <b>Edit--<gt>Add Position</b> menu item.  One cannot add a position which already
+  The main board's current position can be appended to the EPD file with
+  <b>Edit--<gt>Add Position</b>.  One cannot add a position which already
   exists in the file. Attempting to do so will simply select that position.
   </p>
 
@@ -3178,7 +3176,7 @@ set helpText(EPD) {<h1>EPD Files</h1>
   <li> <b>pv</b> Predicted variation: the line of best play.</li>
   </ul>
 
-  <p><footer>Updated: Scid vs. PC 4.21, July 2019</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.21, December 2019</footer></p>
 }
 
 set helpTitle(Email) "Email window"

@@ -549,6 +549,19 @@ namespace eval epd {
     }
     if {$win == -1} { return }
 
+    # Delete current opcodes "acd" "acn" "ce" "dm" "pv"
+    set text [$textwidget get 1.0 end]
+    $textwidget delete 1.0 end
+    set lines [split $text "\n"]
+    foreach line $lines {
+      if {[string trim $line] == ""} {
+        continue
+      }
+      if {![regexp {^acd\ |^acn\ |^ce\ |^dm\ |^pv\ } $line]} {
+        $textwidget insert end $line\n
+      }
+    }
+
     $textwidget insert insert "acd $analysis(depth$win)\n"
     $textwidget insert insert "acn $analysis(nodesraw$win)\n"
     set dm [expr abs($analysis(scoremate$win))]
