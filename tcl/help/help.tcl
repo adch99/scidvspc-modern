@@ -3070,12 +3070,9 @@ set helpText(EPD) {<h1>EPD Files</h1>
   <b>Extended Position Description</b> files are a common standard for chess information and are composed of chess positions, each with some associated text.
 </p><p>
   The positions are a slightly shortened FEN (the standard chess position) format.
-  The text is freeform, but normally made up of <a EPD opcodes>Opcodes</a>, or fields - separated by semicolons, but shown on separate lines in Scid's EPD Window. <i>Textual semicolons are stored as "\s" to distinguish them from end-of-field semicolons</i>.
+  The text is freeform, but normally made up of <a EPD opcodes>Opcodes</a> , or fields, separated by semicolons but shown on separate lines in Scid's EPD Window.
 </p><p>
-  EPD files have a number of uses, but are perhaps most commonly used for collections
-  of puzzles, end game studies and tactical shots.
-<br>
-  Scid vs. PC provides a simple <a Export EPD>Export to EPD</a> feature.
+  EPD files have a number of uses, but are perhaps most commonly used for collections of puzzles, end game studies and tactical shots.
   </p>
   <p>
   Up to four EPD files may be open at any time.
@@ -3083,10 +3080,6 @@ set helpText(EPD) {<h1>EPD Files</h1>
   these positions, though poorly formed or non-standard operands are accepted 
   without complaint.
   </p>
-
-  <p><i>
-  Scid vs PC no longer saves changes automatically, but from </i><b>File--<gt>Save</b>.
-  <i>The current save status can be seen in the EPD statusbar.</i></p>
 
   <h3>Navigating EPD Files</h3>
   <p>
@@ -3111,8 +3104,8 @@ set helpText(EPD) {<h1>EPD Files</h1>
 
   <h3>Pasting Analysis</h3>
   <p>
-  If an analysis engine is running, one can annotate a single position using
-  <b>Edit--<gt>Paste Analysis</b>. This will likewise strip the previous opcodes.
+  Press F2 to start an engine, then select <b>Tools--<gt>Paste Analysis</b> (or Control+P) to annotate a single position,
+  overwriting any previous opcodes.
   </p>
 
   <h3>Stripping Out EPD Fields</h3>
@@ -3130,32 +3123,38 @@ set helpText(EPD) {<h1>EPD Files</h1>
   <h3>Sorting EPD Fields</h3>
   <p>
   The EPD specification requires that opcodes are sorted.  After editing
-  EPD fields, one may sort the current position's opcodes with <b>Edit--<gt>Sort Opcodes</b>.
+  EPD fields, one may sort the current position's opcodes with <b>Tools--<gt>Sort Opcodes</b>.
   </p>
 
   <h3>Adding a New Position</h3>
   <p>
   The main board's current position can be appended to the EPD file with
-  <b>Edit--<gt>Add Position</b>.  One cannot add a position which already
+  <b>Tools--<gt>Add Position</b>.  One cannot add a position which already
   exists in the file. Attempting to do so will simply select that position.
   </p>
 
   <h3>Finding the Deepest Game Position</h3>
   <p>
   One can update the board to the deepest ply in the current game that matches
-  a position in the current EPD file by selecting the 
-  <b>Tools--<gt>Find Deepest Game Position</b> menu item.
+  a position in the current EPD file by selecting <b>Tools--<gt>Find Deepest Game Position</b>.
   </p>
 
   <h3>The EPD Window Status Bar</h3>
   <p>
   The statusbar of each EPD window shows
   <ul>
-  <li>- the file name</li>
   <li>- whether the file is readonly or has been modified</li>
   <li>- the number of positions in the file</li>
   <li>- legal moves from the current position that reach another position in this EPD file</li>
   </ul>
+
+  <h3>Other Notes</h3>
+  <p>
+  <p>Scid vs. PC provides a simple <a Export EPD>Export to EPD</a> feature.</p>
+  <p>Textual semicolons are stored as "\s" to distinguish them from end-of-field semicolons.</p>
+  <p>Scid vs PC no longer saves changes automatically, but from </i><b>File--<gt>Save</b> (or Control+s).
+  The current save status can be seen in the EPD statusbar.</p>
+  </p>
 
   <h3><name opcodes>Standard EPD Opcodes</name></h3>
   <ul>

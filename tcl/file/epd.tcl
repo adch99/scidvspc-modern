@@ -106,7 +106,7 @@ namespace eval epd {
     setWinLocation $w
     setWinSize $w
 
-    wm title $w "Scid EPD: [file tail $fname]"
+    wm title $w "EPD file: [file tail $fname]"
     wm minsize $w 40 1
 
     frame $w.grid
@@ -123,20 +123,18 @@ namespace eval epd {
     scrollbar $w.ybar2 -takefocus 0 -command "$w.lb yview"
     scrollbar $w.xbar2 -orient horizontal -takefocus 0 -command "$w.lb xview"
 
-    frame $w.menu -borderwidth 3 -relief raised
-    pack $w.menu  -side top -fill x
-    menubutton $w.menu.file  -text [tr File]  -menu $w.menu.file.m -underline 0
-    menubutton $w.menu.edit  -text [tr Edit]  -menu $w.menu.edit.m -underline 0
-    menubutton $w.menu.tools -text [tr Tools] -menu $w.menu.tools.m -underline 0
-    menubutton $w.menu.help  -text [tr Help]  -menu $w.menu.help.m -underline 0
+    menu $w.menu
+    $w configure -menu $w.menu
+
+    $w.menu add cascade -label [tr File]  -menu $w.menu.file -underline 0
+    $w.menu add cascade -label [tr Tools] -menu $w.menu.tools -underline 0
+    $w.menu add cascade -label [tr Help]  -menu $w.menu.help -underline 0
 
     foreach i {file edit tools help} {
-      menu $w.menu.$i.m -tearoff 0
-      pack $w.menu.$i -side left
+      menu $w.menu.$i
     }
-    pack $w.menu.help -side right
 
-    set m $w.menu.file.m
+    set m $w.menu.file
     $m add command -label [tr FileNew] -underline 0 -command {::epd::newEpdWin create}
     $m add command -label [tr FileOpen] -underline 0 -command {::epd::newEpdWin open}
     $m add command -label $tr(Save) -acc "control-s" -underline 0 -command "::epd::saveEpdWin $id"
@@ -147,28 +145,18 @@ namespace eval epd {
       if {\"%W\" == \"$w\"} \"::epd::closeEpdWin $id\"
     "
 
-    set m $w.menu.edit.m
-    $m add command -label "Cut" -acc "control-x" -underline 2 -command "tk_textCut $w.text"
-    $m add command -label "Copy" -acc "control-c" -underline 0 -command "tk_textCopy $w.text"
-    $m add command -label "Paste" -acc "control-v" -underline 4 -command "tk_textPaste $w.text"
-    $m add command -label "Select All" -acc "control-a" -underline 2 \
-        -command "$w.text tag add sel 0.0 end-1c"
+    set m $w.menu.tools
+    $m add command -label "Paste Analysis" -accelerator "control-P" -underline 0 -command "::epd::pasteAnalysis $w.text"
+    $m add command -label "Sort Opcodes" -accel "control-S" -underline 0 -command "::epd::sortEpdText $w.text $id"
+    $m add command -label "Add Position" -accel "control-A" -underline 0 -command "::epd::addPosition $id"
     $m add separator
-    $m add command -label "Paste Analysis" -accelerator "control-P" \
-        -underline 0 -command "::epd::pasteAnalysis $w.text"
-    $m add command -label "Sort Opcodes" -accel "control-S" \
-        -underline 0 -command "::epd::sortEpdText $w.text $id"
-    $m add command -label "Add Position" -accel "control-A" \
-        -underline 0 -command "::epd::addPosition $id"
-
-    set m $w.menu.tools.m
     $m add command -label "Annotate Positions" -underline 9 -command "::epd::annotateEpd $w.text $id"
     $m add command -label "Strip Opcodes" -accel "control-O" \
         -underline 6 -command "::epd::chooseStripField $id"
     $m add command -label "Find Deepest Game Position" -underline 5 -command "::epd::moveToDeepestMatch $id"
 
-    $w.menu.help.m add command -label "EPD Help" -underline 0 -acc "F1" -command "helpWindow EPD"
-    $w.menu.help.m add command -label Index -underline 0 -command "helpWindow Index"
+    $w.menu.help add command -label "EPD Help" -underline 0 -acc "F1" -command "helpWindow EPD"
+    $w.menu.help add command -label Index -underline 0 -command "helpWindow Index"
 
     pack $w.status -side bottom -fill x
     pack $w.grid -fill both -expand yes
@@ -200,6 +188,7 @@ namespace eval epd {
     bind $w <Control-Shift-O> "::epd::chooseStripField $id"
     bind $w <Control-q> "::epd::closeEpdWin $id"
     bind $w <Control-w> "::epd::closeEpdWin $id"
+    bind $w <F2> {::startAnalysisWin F2}
     bind $w <Control-s> "
       if {\[$w.text edit modified\]} {::epd::storeEpdText $id}
       ::epd::saveEpdWin $id"
@@ -291,7 +280,7 @@ namespace eval epd {
     #if { [.epd$id.text edit modified] } { storeEpdText $id }
 
     if {[sc_epd readonly $id]} {
-      tk_messageBox -type ok -icon error -title "Scid: EPD file error" \
+      tk_messageBox -type ok -icon error -title "EPD file error" \
         -message "Save failed\nEPD file is read-only."
     } else {
       sc_epd write $id
@@ -317,12 +306,16 @@ namespace eval epd {
     # Reset the text window undo stacks between loads
     $w.text edit reset
 
-    # update the EPD window status bar
-    set strStat "[file tail [sc_epd name $id]]  [sc_epd size $id] positions"
+    ### Update the EPD window status bar
+    # Too much noise... filename already in the titlebar - S.A
+    # set strStat "[file tail [sc_epd name $id]]  [sc_epd size $id] positions"
+
+    set strStat "[sc_epd size $id] positions"
+
     if {[sc_epd readonly $id]} {
       append strStat " ($::tr(readonly))"
     } elseif {[isAltered $id]} {
-      append strStat " (modified)"
+      append strStat " ($::tr(altered))"
     }
     set moves [lsort -ascii [sc_epd moves $id]]
     set len [llength $moves]
@@ -465,7 +458,7 @@ namespace eval epd {
     set y .epdDelay
 
     toplevel $y
-    wm title $y "Scid EPD"
+    wm title $y "Annotate EPD"
     placeWinOverParent $y .epd$id
 
     label $y.label -text $::tr(AnnotateTime)
@@ -614,7 +607,7 @@ namespace eval epd {
 
     if {! [winfo exists .epd$id]} { return }
     set w [toplevel .epdStrip]
-    wm title $w "Scid: Strip EPD Opcode"
+    wm title $w "Strip EPD Opcode"
     placeWinOverParent $w .epd$id
     wm resizable $w false false
     label $w.label -text "Enter the name of the EPD opcode you want\n\
