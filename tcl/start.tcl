@@ -46,6 +46,10 @@ if {![catch {tk windowingsystem} wsystem] && $wsystem == "aqua"} {
     # Wish does not use the Bash path for some reason
     set env(PATH) $env(PATH):/usr/local/bin
   }
+  catch {
+    # Thanks to Francois for this hack to add treeview Control-Button-1 bindings to the gamelist
+    event add <<ToggleSelection>> <Control-ButtonPress-1>
+  }
 } else {
   set macOS 0
   set scidName {Scid vs. PC}
