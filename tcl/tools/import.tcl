@@ -200,7 +200,7 @@ proc importVar {} {
   }
 }
 
-### Only used by optable src/tcl
+### Only used by optable src/tcl and ::windows::eco::importMoveList
 
 proc importMoveList {line} {
   sc_move start

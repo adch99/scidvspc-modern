@@ -302,3 +302,18 @@ proc ::windows::eco::LoadFile {} {
   }
 }
 
+proc ::windows::eco::importMoveList {line} {
+  # if game num is 0, discard it, as it is probably just another eco line.
+  if {[sc_game number] != 0} {
+    set confirm [::game::ConfirmDiscard]
+    if {$confirm == 2} { return }
+    if {$confirm == 0} {
+      ::game::Save
+    }
+  }
+  setTrialMode 0
+  sc_game new
+  ::windows::gamelist::Refresh
+  ::importMoveList $line
+}
+

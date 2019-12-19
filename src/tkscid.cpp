@@ -4927,7 +4927,7 @@ sc_eco_summary (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                 // Fulvio's bugfix for
                 // https://sourceforge.net/p/scid/bugs/63/
                 dstr->AddChar (ch);
-                dstr->Append ("<blue><run importMoveList {");
+                dstr->Append ("<blue><run ::windows::eco::importMoveList {");
                 inMoveList = true;
                 temp->Clear();
                 break;
@@ -4985,7 +4985,7 @@ sc_eco_find (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                 break;
             case ']':
                 dstr->AddChar (ch);
-                dstr->Append ("<blue><run importMoveList {");
+                dstr->Append ("<blue><run ::windows::eco::importMoveList {");
                 inMoveList = true;
                 temp->Clear();
                 break;
