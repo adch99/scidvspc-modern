@@ -15,6 +15,10 @@ proc ::game::ConfirmDiscard {} {
   if {$::trialMode || [sc_base isReadOnly] || ![sc_game altered]} {
     return 1
   }
+  if {[sc_game info halfmoves] == 0} {
+    # Discard the "altered" games in the EPD window, and Setup Board if length is 0
+    return 1
+  }
 
   set w .confirmDiscard
   toplevel $w

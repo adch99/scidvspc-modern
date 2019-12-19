@@ -7396,6 +7396,8 @@ sc_game_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                 dupGameNum = db->duplicates [db->gameNumber];
             }
             return setUintResult (ti, dupGameNum);
+        } else if (strIsPrefix (argv[arg], "halfmoves")) {
+            return setUintResult (ti, db->game->GetNumHalfMoves());
         }
         arg++;
     }
