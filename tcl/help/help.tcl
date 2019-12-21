@@ -3092,7 +3092,7 @@ set helpText(EPD) {<h1>EPD Files</h1>
   <h3>Annotating EPD Files</h3>
   <p>
   EPD files can be automatically annotated by the <b>Tools--<gt>Annotate Positions</b> menu.
-  A dialogue will ask for the Analysis Time, and the first analysis engine will start.
+  A dialogue will ask for the Analysis Time and analysis engine, which will start.
   Pausing the analysis engine will terminate annotation.
   The EPD opcodes used are <b>acd</b>, <b>acn</b>, <b>ce</b>, <b>dm</b> and <b>pv</b>.
   </p>
@@ -3104,8 +3104,8 @@ set helpText(EPD) {<h1>EPD Files</h1>
 
   <h3>Pasting Analysis</h3>
   <p>
-  Press F2 to start an engine, then select <b>Tools--<gt>Paste Analysis</b> (or Control+P) to annotate a single position,
-  overwriting any previous opcodes.
+  Select <b>Tools--<gt>Paste Analysis</b> (or Control+P) to annotate a single position,
+  overwriting any previous opcodes. Pressing 'Space' in the listbox will start/stop an open engine.
   </p>
 
   <h3>Stripping Out EPD Fields</h3>
