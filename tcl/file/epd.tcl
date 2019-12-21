@@ -146,11 +146,12 @@ namespace eval epd {
     "
 
     set m $w.menu.tools
-    $m add command -label "Paste Analysis" -accelerator "control-P" -underline 0 -command "::epd::pasteAnalysis $w.text"
-    $m add command -label "Sort Opcodes" -accel "control-S" -underline 0 -command "::epd::sortEpdText $w.text $id"
+    $m add command -label "Paste Analysis" -accelerator "control-P" -underline 0 -command "::epd::pasteAnalysis $id"
+    $m add command -label "Sort Opcodes" -accel "control-S" -underline 0 -command "::epd::sortEpdText $id"
     $m add command -label "Add Position" -accel "control-A" -underline 0 -command "::epd::addPosition $id"
     $m add separator
-    $m add command -label "Annotate Positions" -underline 9 -command "::epd::annotateEpd $w.text $id"
+
+    $m add command -label "Annotate Positions" -underline 9 -command "::epd::configAnnotateEpd $id"
     $m add command -label "Strip Opcodes" -accel "control-O" \
         -underline 6 -command "::epd::chooseStripField $id"
     $m add command -label "Find Deepest Game Position" -underline 5 -command "::epd::moveToDeepestMatch $id"
@@ -182,13 +183,13 @@ namespace eval epd {
 
     bind $w <Control-Down> "::epd::nextEpd $id"
     bind $w <Control-Up> "::epd::prevEpd $id"
-    bind $w <Control-Shift-P> "::epd::pasteAnalysis $w.text"
-    bind $w <Control-Shift-S> "::epd::sortEpdText $w.text $id"
-    bind $w <Control-Shift-A> "::epd::addPosition $id"
-    bind $w <Control-Shift-O> "::epd::chooseStripField $id"
+    bind $w <Control-P> "::epd::pasteAnalysis $id ; break"
+    bind $w <Control-S> "::epd::sortEpdText $id"
+    bind $w <Control-A> "::epd::addPosition $id"
+    bind $w <Control-O> "::epd::chooseStripField $id"
     bind $w <Control-q> "::epd::closeEpdWin $id"
     bind $w <Control-w> "::epd::closeEpdWin $id"
-    bind $w <F2> {::startAnalysisWin F2}
+    bind $w.lb <space> {toggleEngineAnalysis}
     bind $w <Control-s> "
       if {\[$w.text edit modified\]} {::epd::storeEpdText $id}
       ::epd::saveEpdWin $id"
@@ -254,7 +255,7 @@ namespace eval epd {
       bind $w <Right> "event generate $w <Tab>"
       bind $w <Left> "event generate $w <Shift-Tab>"
 
-      update
+      update idletasks
       placeWinOverParent $w .
       wm state $w normal
 
@@ -446,71 +447,90 @@ namespace eval epd {
     updateBoard -pgn
   }
 
-  ################################################################################
-  ###  Annotate EPD lines given in the listbox.
-  ################################################################################
-  proc annotateEpd { textwidget id } {
-    global analysis
+  proc configAnnotateEpd {id} {
+    global analysis engines
 
-    if {! [winfo exists $textwidget]} { return }
+    if {! [winfo exists .epd$id.text]} { return }
 
     # choose analysis time
-    set y .epdDelay
+    set w .epdAnnotateConfig
 
-    toplevel $y
-    wm title $y "Annotate EPD"
-    placeWinOverParent $y .epd$id
+    toplevel $w
+    wm title $w "Annotate EPD"
+    placeWinOverParent $w .epd$id
 
-    label $y.label -text $::tr(AnnotateTime)
-    pack $y.label -side top -pady 5 -padx 5
-    spinbox $y.spDelay  -width 8 -textvariable ::epd::delayEpd -from 1 -to 300 -increment 1 -validate all -vcmd {string is int %P}
-    pack $y.spDelay -side top -pady 5
-    dialogbutton $y.ok -text OK -command "
-      destroy $y
-      ::epd::launchAnalysis $id $textwidget"
-    dialogbutton $y.cancel -text $::tr(Cancel) -command "destroy $y"
-    pack $y.ok $y.cancel -side left -padx 3 -pady 5
-    bind $y <F1> { helpWindow EPD }
-    focus $y.spDelay
+    frame $w.seconds
+    frame $w.engine
+
+    label $w.seconds.label -text $::tr(AnnotateTime)
+    spinbox $w.seconds.spDelay  -width 8 -textvariable ::epd::delayEpd -from 1 -to 300 -increment 1 -validate all -vcmd {string is int %P}
+
+    set values {}
+    foreach e $engines(list) {
+      lappend values [lindex $e 0]
+    }
+
+    ttk::combobox  $w.engine.combo -width 20 -state readonly -values $values
+    # Todo - restore previous engine 
+    $w.engine.combo current 0
+    label $w.engine.label -textvar ::tr(Engine)
+
+    pack $w.engine $w.seconds -side top -pady 5 -padx 5
+    pack $w.engine.label $w.engine.combo -side left -fill x -padx 5
+    pack $w.seconds.label $w.seconds.spDelay -side left -fill x -padx 5
+
+    frame $w.buttons
+    dialogbutton $w.buttons.ok -text OK -command "
+      set i \[$w.engine.combo current\]
+      destroy $w
+      update
+      ::epd::launchAnnotateEpd $id \$i
+    "
+    dialogbutton $w.buttons.cancel -text $::tr(Cancel) -command "destroy $w"
+    pack $w.buttons -side bottom -padx 5 -pady 5
+    pack $w.buttons.ok $w.buttons.cancel -side left -padx 5
+    bind $w <F1> { helpWindow EPD }
+    bind $w <Escape> "$w.buttons.cancel invoke"
   }
 
-  ################################################################################
-  ###  Launch the analysis engine and annotate each EPD line with the analysis.
-  ###  Pausing the analysis engine will terminate annotation.
-  ################################################################################
-  proc launchAnalysis {id textwidget} {
+  ###  Launch the analysis engine and annotate each EPD starting from the top
+  ###  Pausing analysis engine will terminate annotation.
+
+  proc launchAnnotateEpd {id win} {
     variable delayEpd
     variable epdTimer
 
     set w .epd$id
 
-    ### we use engine 0 for analysis
-    if {! [winfo exists .analysisWin0]} {
-      makeAnalysisWin 0
+    clearOpcodes $id
+
+    if {! [winfo exists .analysisWin$win]} {
+      makeAnalysisWin $win
     } else {
-      if {!$::analysis(analyzeMode0)} {
-        toggleEngineAnalysis 0
+      if {!$::analysis(analyzeMode$win)} {
+        toggleEngineAnalysis $win
       }
     }
 
-    clearOpcodes $id
     set size [sc_epd size $id ]
     set epdTimer($id) 0
     for { set i 0 } { $i < $size } { incr i } {
       $w.lb selection clear 0 end
       $w.lb selection set $i
       $w.lb see $i
+      # ok ?
+      update idletasks
       loadEpd $id
       after [expr $delayEpd * 1000 ] "set epdTimer($id) 1"
       vwait epdTimer($id)
-      pasteAnalysis $textwidget
+      pasteAnalysis $id $win
       storeEpdText $id
       updateEpdWin $id
-      if {! [winfo exists .analysisWin0] || !$::analysis(analyzeMode0)} {
+      if {! [winfo exists .analysisWin$win] || !$::analysis(analyzeMode$win)} {
         return
       }
     }
-    toggleEngineAnalysis 0
+    toggleEngineAnalysis $win
   }
 
   ################################################################################
@@ -527,17 +547,19 @@ namespace eval epd {
   ################################################################################
   ###  Annotate a single (current) EPD line in compliance with the EPD spec.
   ################################################################################
-  proc pasteAnalysis {textwidget} {
+  proc pasteAnalysis {id {win -1}} {
     global analysis
 
+    set textwidget .epd$id.text
     if {! [winfo exists $textwidget]} { return }
 
-    set win -1
-    # find an open analysis window
-    for {set i 0} {$i < [llength $::engines(list)]} {incr i} {
-      if {[winfo exists .analysisWin$i]} {
-        set win $i
-        break
+    if {$win == -1} {
+      # find an open analysis window
+      for {set i 0} {$i < [llength $::engines(list)]} {incr i} {
+	if {[winfo exists .analysisWin$i]} {
+	  set win $i
+	  break
+	}
       }
     }
     if {$win == -1} { return }
@@ -582,7 +604,8 @@ namespace eval epd {
   ################################################################################
   ###  Sort the opcodes in the text widget.
   ################################################################################
-  proc sortEpdText {textwidget id} {
+  proc sortEpdText {id} {
+    set textwidget .epd$id.text
     if {! [winfo exists $textwidget]} { return }
     set text [$textwidget get 1.0 "end-1c"]
     set fieldlist [split $text "\n"]
