@@ -2,7 +2,7 @@
 
 # Copyright (C) 2000  Shane Hudson
 # Copyright (C) 2007  Pascal Georges
-# Copyright (C) 2019  Bonnie A
+# Copyright (C) 2019  Bonnie A, stevenaaus
 
 # Note: Text and listbox widgets should include the option "-exportselection false" 
 # else this entire set of code falls apart. (Not to mention interference with other
@@ -589,16 +589,7 @@ namespace eval epd {
     }
     $textwidget insert insert "ce $ce\n"
     $textwidget insert insert "dm $dm\n"
-
-    # $textwidget insert insert "pv $analysis(moves$win)\n"
-    # the following is borrowed from ::uci::formatPV{}
-    set fen [sc_pos fen]
-    sc_game push
-    sc_game startBoard $fen
-    catch {sc_move addUCI $analysis(moves$win)} tmp
-    set tmp [string trim $tmp]
-    sc_game pop
-    $textwidget insert insert "pv $tmp\n"
+    $textwidget insert insert "pv $analysis(lastHistory$win)\n"
   }
 
   ################################################################################
