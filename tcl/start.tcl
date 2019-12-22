@@ -197,6 +197,9 @@ set comp(start) Normal
 set photosMinimized 0
 set bookmarks(gamehistory) {}
 set playerInfoHistory {}
+set epdAnnotateMode 0
+set epdDelay 3
+
 set defaultDBs {}
 
 proc ::docking::init_layout_list {{recover 0}} {
