@@ -2,7 +2,8 @@
 
 # Copyright (C) 2000  Shane Hudson
 # Copyright (C) 2007  Pascal Georges
-# Copyright (C) 2019  Bonnie A, stevenaaus
+# Copyright (C) 2019  Bonnie A
+# Copyright (C) 2019  stevenaaus
 
 # Note: Text and listbox widgets should include the option "-exportselection false" 
 # else this entire set of code falls apart. (Not to mention interference with other
@@ -21,15 +22,19 @@
 #   catch the mouse <Leave>ing the text widget, ensuring that the board position
 #   is the correct position.
 
+
+set epdAnnotation 0
+
 namespace eval epd {
   variable maxEpd
-  variable delayEpd
   variable stripField {}
   variable epdTimer
+  variable bestMove {}
+  variable epdNames
 
   set maxEpd [sc_info limit epd]
-  set delayEpd 5
   array set epdTimer {}
+  array set epdNames {}
 
   ################################################################################
   ### Print the call stack to stdout.
@@ -50,6 +55,7 @@ namespace eval epd {
   proc newEpdWin {cmd {fname ""}} {
     global tr
     variable maxEpd
+    variable epdName
 
     set showErrors 1
     if {$cmd == "openSilent"} {
@@ -100,13 +106,14 @@ namespace eval epd {
     # id is 1 for first epd window, 2 for second...
     set id $result
     set w .epd$id
+    set epdName($id) [file tail $fname]
 
     toplevel $w
     wm withdraw $w
     setWinLocation $w
     setWinSize $w
 
-    wm title $w "EPD file: [file tail $fname]"
+    wm title $w "EPD file: $epdName($id)"
     wm minsize $w 40 1
 
     frame $w.grid
@@ -151,9 +158,8 @@ namespace eval epd {
     $m add command -label "Add Position" -accel "control-A" -underline 0 -command "::epd::addPosition $id"
     $m add separator
 
-    $m add command -label "Annotate Positions" -underline 9 -command "::epd::configAnnotateEpd $id"
-    $m add command -label "Strip Opcodes" -accel "control-O" \
-        -underline 6 -command "::epd::chooseStripField $id"
+    $m add command -label "Analyze Positions" -underline 5 -command "::epd::configAnnotateEpd $id"
+    $m add command -label "Strip Opcodes" -accel "control-O" -underline 6 -command "::epd::chooseStripField $id"
     $m add command -label "Find Deepest Game Position" -underline 5 -command "::epd::moveToDeepestMatch $id"
 
     $w.menu.help add command -label "EPD Help" -underline 0 -acc "F1" -command "helpWindow EPD"
@@ -297,35 +303,50 @@ namespace eval epd {
   ### This proc is also invoked whenever the main board is updated.
   ################################################################################
   proc updateEpdWin {id} {
+    variable bestMove
+    global epdAnnotateMode epdAnnotation
+
     set w .epd$id
 
     # update the text widget with EPD opcodes
     $w.text delete 1.0 end
-    $w.text insert end [sc_epd get $id]
+    set text [sc_epd get $id]
+    $w.text insert end $text
     $w.text edit modified false
 
     # Reset the text window undo stacks between loads
     $w.text edit reset
 
+    if {$epdAnnotation && $epdAnnotateMode} {
+      # find bm (or am TODO) in epd data
+      if {[regexp -line bm\ .*\$ $text match]} {
+	set bestMove [lindex $match 1]
+      } else {
+	set bestMove {}
+      }
+    }
+
     ### Update the EPD window status bar
     # Too much noise... filename already in the titlebar - S.A
     # set strStat "[file tail [sc_epd name $id]]  [sc_epd size $id] positions"
 
-    set strStat "[sc_epd size $id] positions"
+    if {!$epdAnnotation} {
+      set strStat "[sc_epd size $id] positions"
 
-    if {[sc_epd readonly $id]} {
-      append strStat " ($::tr(readonly))"
-    } elseif {[isAltered $id]} {
-      append strStat " ($::tr(altered))"
+      if {[sc_epd readonly $id]} {
+	append strStat " ($::tr(readonly))"
+      } elseif {[isAltered $id]} {
+	append strStat " ($::tr(altered))"
+      }
+      set moves [lsort -ascii [sc_epd moves $id]]
+      set len [llength $moves]
+      if {$len} {
+	append strStat "  \[[llength $moves]: [join $moves " "]\]"
+      } else {
+	append strStat {  [No moves from this position]}
+      }
+      $w.status configure -text $strStat
     }
-    set moves [lsort -ascii [sc_epd moves $id]]
-    set len [llength $moves]
-    if {$len} {
-      append strStat "  \[[llength $moves]: [join $moves " "]\]"
-    } else {
-      append strStat {  [No moves from this position]}
-    }
-    $w.status configure -text $strStat
 
     updateEpdListbox $id
   }
@@ -448,7 +469,7 @@ namespace eval epd {
   }
 
   proc configAnnotateEpd {id} {
-    global analysis engines
+    global analysis engines epdAnnotateMode
 
     if {! [winfo exists .epd$id.text]} { return }
 
@@ -461,9 +482,10 @@ namespace eval epd {
 
     frame $w.seconds
     frame $w.engine
+    frame $w.mode
 
     label $w.seconds.label -text $::tr(AnnotateTime)
-    spinbox $w.seconds.spDelay  -width 8 -textvariable ::epd::delayEpd -from 1 -to 300 -increment 1 -validate all -vcmd {string is int %P}
+    spinbox $w.seconds.spDelay  -width 8 -textvariable ::epdDelay -from 1 -to 300 -increment 1 -validate all -vcmd {string is int %P}
 
     set values {}
     foreach e $engines(list) {
@@ -475,16 +497,23 @@ namespace eval epd {
     $w.engine.combo current 0
     label $w.engine.label -textvar ::tr(Engine)
 
-    pack $w.engine $w.seconds -side top -pady 5 -padx 5
-    pack $w.engine.label $w.engine.combo -side left -fill x -padx 5
+    radiobutton $w.mode.tally -variable epdAnnotateMode -value 1 -text "Count Best Moves"
+    radiobutton $w.mode.annot -variable epdAnnotateMode -value 0 -text "Annotate Positions"
+    radiobutton $w.mode.both  -variable epdAnnotateMode -value 2 -text "Both"
+
+    pack $w.engine $w.seconds $w.mode -side top -pady 5 -padx 5
+
+    pack $w.engine.label $w.engine.combo     -side left -fill x -padx 5
     pack $w.seconds.label $w.seconds.spDelay -side left -fill x -padx 5
+    pack $w.mode.tally $w.mode.annot $w.mode.both -side left -fill x -padx 3
 
     frame $w.buttons
     dialogbutton $w.buttons.ok -text OK -command "
       set i \[$w.engine.combo current\]
+      set name \[$w.engine.combo get\]
       destroy $w
       update
-      ::epd::launchAnnotateEpd $id \$i
+      ::epd::launchAnnotateEpd $id \$i \$name
     "
     dialogbutton $w.buttons.cancel -text $::tr(Cancel) -command "destroy $w"
     pack $w.buttons -side bottom -padx 5 -pady 5
@@ -496,13 +525,22 @@ namespace eval epd {
   ###  Launch the analysis engine and annotate each EPD starting from the top
   ###  Pausing analysis engine will terminate annotation.
 
-  proc launchAnnotateEpd {id win} {
-    variable delayEpd
+  proc launchAnnotateEpd {id win name} {
     variable epdTimer
+    variable bestPV
+    variable bestMove
+    global epdAnnotateMode epdAnnotation epdDelay
 
     set w .epd$id
 
-    clearOpcodes $id
+    set epdAnnotation 1
+    $w.status configure -text "Analyzing with $name ($epdDelay secs/move)"
+    update
+
+    if {$epdAnnotateMode != 1} {
+      # only clear codes if not just keeping counting bestmoves
+      clearOpcodes $id
+    }
 
     if {! [winfo exists .analysisWin$win]} {
       makeAnalysisWin $win
@@ -514,6 +552,11 @@ namespace eval epd {
 
     set size [sc_epd size $id ]
     set epdTimer($id) 0
+
+    # Tally correct/best moves
+    set bestMovesFound 0
+    set bestMovesNoted 0
+
     for { set i 0 } { $i < $size } { incr i } {
       $w.lb selection clear 0 end
       $w.lb selection set $i
@@ -521,16 +564,44 @@ namespace eval epd {
       # ok ?
       update idletasks
       loadEpd $id
-      after [expr $delayEpd * 1000 ] "set epdTimer($id) 1"
+      after [expr $epdDelay * 1000 ] "set epdTimer($id) 1"
       vwait epdTimer($id)
-      pasteAnalysis $id $win
-      storeEpdText $id
-      updateEpdWin $id
+
+      if {$epdAnnotateMode > 0} {
+        # find Best PV. (bestMove is updated in updateEpdWin)
+        # TODO xboard
+	set bestPV [lindex $::analysis(lastHistory$win) 0]
+puts "bestMove $bestMove, bestPV $bestPV"
+	if {$bestMove != ""} {
+	  incr bestMovesNoted
+	}
+	if {$bestMove == $bestPV} {
+	  incr bestMovesFound 
+	}
+      } 
+      if {$epdAnnotateMode != 1} {
+	pasteAnalysis $id $win
+	storeEpdText $id
+	updateEpdWin $id
+      }
+
+      # Check analysis window has not been destroyed/paused
       if {! [winfo exists .analysisWin$win] || !$::analysis(analyzeMode$win)} {
-        return
+        break
       }
     }
-    toggleEngineAnalysis $win
+
+    if {$::analysis(analyzeMode$win)} {
+      toggleEngineAnalysis $win
+    }
+
+    if {$epdAnnotation && $epdAnnotateMode > 0} {
+      set result "Result: $name ($epdDelay secs/move): Best moves found $bestMovesFound / $bestMovesNoted"
+      puts $result
+      $w.status configure -text $result
+      set epdAnnotation 0
+    }
+
   }
 
   ################################################################################
@@ -618,14 +689,14 @@ namespace eval epd {
   ################################################################################
   proc chooseStripField {id} {
     variable stripField
+    variable epdName
 
     if {! [winfo exists .epd$id]} { return }
     set w [toplevel .epdStrip]
     wm title $w "Strip EPD Opcode"
     placeWinOverParent $w .epd$id
     wm resizable $w false false
-    label $w.label -text "Enter the name of the EPD opcode you want\n\
-        removed from all positions in this file:"
+    label $w.label -text "EPD opcode to be removed from $epdName($id)"
     entry $w.e -width 10  -textvariable stripField
     pack $w.label $w.e -side top -pady 5 -padx 5
     addHorizontalRule $w
@@ -654,8 +725,7 @@ namespace eval epd {
     set result [sc_epd strip $id $field]
     updateEpdWin $id
     tk_messageBox -type ok -icon info -title "Scid: EPD field stripped" \
-        -message "Scid found and stripped an EPD field named \"$field\" from\
-        $result positions." -parent  .epd$id
+        -message "Scid stripped EPD field \"$field\" from $result positions." -parent .epd$id
   }
 
   ################################################################################
@@ -702,6 +772,5 @@ namespace eval epd {
     updateBoard
 
   }
-
 }
 

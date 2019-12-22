@@ -3157,10 +3157,12 @@ set helpText(EPD) {<h1>EPD Files</h1>
   </p>
 
   <h3><name opcodes>Standard EPD Opcodes</name></h3>
+<url https://www.chessprogramming.org/Extended_Position_Description#Opcode_mnemonics>Chessprogramming Opcodes</url>
   <ul>
   <li> <b>acd</b> Analysis count: depth searched.</li>
   <li> <b>acn</b> Analysis count: number of nodes searched.</li>
   <li> <b>acs</b> Analysis count: search time in seconds.</li>
+  <li> <b>mm</b> Avoid move: poor moves.</li>
   <li> <b>bm</b> Best moves: move(s) judged best for some reason.</li>
   <li> <b>ce</b> Centipawn evaluation: evaluation in hundredths of a
   pawn from the perspective of the <b>side to move</b> -- note this
