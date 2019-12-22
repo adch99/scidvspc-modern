@@ -3083,23 +3083,28 @@ set helpText(EPD) {<h1>EPD Files</h1>
 
   <h3>Navigating EPD Files</h3>
   <p>
-  To browse the positions in an EPD file, use  the <b>Control+Down</b>,
+  To browse the positions in an EPD file, simply click on any position, or use the <b>Control+Down</b>,
   <b>Control+Up</b>, <b>Control+Home</b> or <b>Control+End</b> keys.
-  These commands move to the next/previous or first/last position in the file, clearing
-  the current game and setting its start position.
+  These commands move to the next/previous or first/last position in the file, discarding any changes to
+  the current game and setting the scratch game's start position.
   </p>
 
   <h3>Annotating EPD Files</h3>
   <p>
-  EPD files can be automatically annotated by the <b>Tools--<gt>Annotate Positions</b> menu.
-  A dialogue will ask for the Analysis Time and analysis engine, which will start.
-  Pausing the analysis engine will terminate annotation.
-  The EPD opcodes used are <b>acd</b>, <b>acn</b>, <b>ce</b>, <b>dm</b> and <b>pv</b>.
+  EPD files can be analyzed with <b>Tools--<gt>Analyze Positions</b>.
+  A dialogue will ask for the Engine, Analysis Time and Analysis Mode, which will start.
+  Pausing the analysis engine will terminate analysis.
+  </p>
+  <p>The two modes are <b>Evaluate Best Moves</b>, and <b>Annotate</b>. Both modes involve running through
+  all positions with an engine. In Best Moves - the existing comments are scanned for a 'bm' field, and
+seeing if this matches the computer evaluation, showing a tally of correct bestmoves at the completion.
+  Annotate mode simply stores the engines evaluation in several opcodes, without checking the best move.
+  The opcodes used are <b>acd</b>, <b>acn</b>, <b>ce</b>, <b>dm</b> and <b>pv</b>.
+  Finally, both these modes can be run together.
   </p>
   <p><i>
-  Annotation will first strip out all opcodes that are used in the process from all
-  positions in the EPD file.  To undo any changes made during annotation, simply destroy
-  the EPD window without saving or closing the file.
+  Annotate mode will first strip out the above opcodes from all positions.
+  To undo any changes made, simply destroy the EPD window without saving the file.
   </i></p>
 
   <h3>Pasting Analysis</h3>
@@ -3132,6 +3137,9 @@ set helpText(EPD) {<h1>EPD Files</h1>
   <b>Tools--<gt>Add Position</b>.  One cannot add a position which already
   exists in the file. Attempting to do so will simply select that position.
   </p>
+  <p><i>
+  For technical reasons, there is no 'Delete Position' command. To achieve this one must edit the epd file manually with a text editor.
+  </i></p>
 
   <h3>Finding the Deepest Game Position</h3>
   <p>
@@ -3157,12 +3165,11 @@ set helpText(EPD) {<h1>EPD Files</h1>
   </p>
 
   <h3><name opcodes>Standard EPD Opcodes</name></h3>
-<url https://www.chessprogramming.org/Extended_Position_Description#Opcode_mnemonics>Chessprogramming Opcodes</url>
   <ul>
   <li> <b>acd</b> Analysis count: depth searched.</li>
   <li> <b>acn</b> Analysis count: number of nodes searched.</li>
   <li> <b>acs</b> Analysis count: search time in seconds.</li>
-  <li> <b>mm</b> Avoid move: poor moves.</li>
+  <li> <b>am</b> Avoid move: poor moves.</li>
   <li> <b>bm</b> Best moves: move(s) judged best for some reason.</li>
   <li> <b>ce</b> Centipawn evaluation: evaluation in hundredths of a
   pawn from the perspective of the <b>side to move</b> -- note this
@@ -3176,6 +3183,7 @@ set helpText(EPD) {<h1>EPD Files</h1>
   <li> <b>pm</b> Predicted move: the first move of the PV.</li>
   <li> <b>pv</b> Predicted variation: the line of best play.</li>
   </ul>
+<url https://www.chessprogramming.org/Extended_Position_Description#Opcode_mnemonics>Chessprogramming Opcodes</url>
 
   <p><footer>Updated: Scid vs. PC 4.21, December 2019</footer></p>
 }

@@ -156,11 +156,11 @@ namespace eval epd {
     $m add command -label "Paste Analysis" -accelerator "control-P" -underline 0 -command "::epd::pasteAnalysis $id"
     $m add command -label "Sort Opcodes" -accel "control-S" -underline 0 -command "::epd::sortEpdText $id"
     $m add command -label "Add Position" -accel "control-A" -underline 0 -command "::epd::addPosition $id"
+    $m add command -label "Find Deepest Game Position" -underline 5 -command "::epd::moveToDeepestMatch $id"
     $m add separator
 
     $m add command -label "Analyze Positions" -underline 5 -command "::epd::configAnnotateEpd $id"
     $m add command -label "Strip Opcodes" -accel "control-O" -underline 6 -command "::epd::chooseStripField $id"
-    $m add command -label "Find Deepest Game Position" -underline 5 -command "::epd::moveToDeepestMatch $id"
 
     $w.menu.help add command -label "EPD Help" -underline 0 -acc "F1" -command "helpWindow EPD"
     $w.menu.help add command -label Index -underline 0 -command "helpWindow Index"
@@ -497,8 +497,8 @@ namespace eval epd {
     $w.engine.combo current 0
     label $w.engine.label -textvar ::tr(Engine)
 
-    radiobutton $w.mode.tally -variable epdAnnotateMode -value 1 -text "Count Best Moves"
-    radiobutton $w.mode.annot -variable epdAnnotateMode -value 0 -text "Annotate Positions"
+    radiobutton $w.mode.tally -variable epdAnnotateMode -value 1 -text "Eval Best Moves"
+    radiobutton $w.mode.annot -variable epdAnnotateMode -value 0 -text "Annotate"
     radiobutton $w.mode.both  -variable epdAnnotateMode -value 2 -text "Both"
 
     pack $w.engine $w.seconds $w.mode -side top -pady 5 -padx 5
