@@ -930,8 +930,7 @@ proc nameEditor {} {
   eval tk_optionMenu $w.g.rtype editNameRType [sc_info ratings]
   $w.g.rtype configure -pady 2 -relief flat
 
-  text $w.g.list -height 9 -width 40 -relief sunken \
-      -background grey90 -tabs {2c left} -wrap none
+  text $w.g.list -height 9 -width 40 -relief sunken -tabs {2c left} -wrap none
 
   grid $w.g.list -row 2 -column 1 -rowspan 9 -columnspan 2 -sticky n -pady 5
 
@@ -1183,8 +1182,7 @@ proc gameSave {gnum {focus {}}} {
 
   # Autocomplete text widget and label
 
-  text $f.list -height 9 -width 30 -relief sunken -background grey90 \
-      -tabs {2c left} -wrap none -cursor arrow
+  text $f.list -height 9 -width 30 -relief sunken -tabs {2c left} -wrap none -cursor arrow
   clearMatchList $f.list
 
   # label $f.title -textvar ::tr(NameEditMatches) -font font_Italic
