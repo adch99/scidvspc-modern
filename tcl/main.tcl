@@ -709,7 +709,7 @@ proc editMyPlayerNames {} {
 
   frame $w.desc -borderwidth 0
   set height [expr {$::language == "E" ? 3 : 8}]
-  text $w.desc.text -background gray90 -width 50 -height $height -wrap word
+  text $w.desc.text -width 50 -height $height -wrap word
   $w.desc.text insert end [string trim $::tr(MyPlayerNamesDescription)]
   $w.desc.text configure -state disabled
   pack $w.desc -side top -fill x
