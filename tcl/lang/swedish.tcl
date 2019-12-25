@@ -653,7 +653,8 @@ translate W CommentMove {Kommentera drag}
 translate W CommentPosition {Kommentera position}
 translate W AddMoveToMaskFirst {Lägg till drag till sökmask först}
 translate W OpenAMaskFileFirst {Öppna en sökmaskmaskfil först}
-translate W Positions {Positioner}
+# ====== TODO To be translated ======
+translate W positions {positions}
 translate W Moves {Drag}
 
 # Finder window:
@@ -1821,6 +1822,20 @@ translate W UriRejectedDetail {Bara listade filtyper kan behandlas:}
 translate W EmptyUriList {Innehåll som släpps är tomt.}
 # ====== TODO To be translated ======
 translate W SelectionOwnerDidntRespond {Timeout during drop action: selection owner didn't respond.}
+# ====== TODO To be translated ======
+translate W PasteAnal {Paste Analysis}
+# ====== TODO To be translated ======
+translate W SortOpcodes {Sort Opcodes}
+# ====== TODO To be translated ======
+translate W AddPosition {Add Position}
+# ====== TODO To be translated ======
+translate W FindPos {Find Deepest Game Position}
+# ====== TODO To be translated ======
+translate W AnalPosition {Analyze Positions}
+# ====== TODO To be translated ======
+translate W StripOpcodes {Strip Opcodes}
+# ====== TODO To be translated ======
+translate W NoMoves {No moves from this position}
 
 }
 

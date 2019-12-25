@@ -658,7 +658,8 @@ translate N CommentMove {Commentaar op zet}
 translate N CommentPosition {Commentaar op stelling}
 translate N AddMoveToMaskFirst {Voeg de zet eerst toe aan het masker}
 translate N OpenAMaskFileFirst {Open eerst een maskerbestand}
-translate N Positions {Stellingen}
+# ====== TODO To be translated ======
+translate N positions {positions}
 translate N Moves {Zetten}
 
 # Finder window:
@@ -1859,6 +1860,20 @@ translate N UriRejected        {De volgende bestanden zijn afgekeurd:}
 translate N UriRejectedDetail {Alleen de vermelde bestandstypes kunnen worden verwerkt:}
 translate N EmptyUriList {Geplakte inhoud is leeg.}
 translate N SelectionOwnerDidntRespond {Time-out tijdens plakken data: geen reactie van geselecteerde eigenaar.}
+# ====== TODO To be translated ======
+translate N PasteAnal {Paste Analysis}
+# ====== TODO To be translated ======
+translate N SortOpcodes {Sort Opcodes}
+# ====== TODO To be translated ======
+translate N AddPosition {Add Position}
+# ====== TODO To be translated ======
+translate N FindPos {Find Deepest Game Position}
+# ====== TODO To be translated ======
+translate N AnalPosition {Analyze Positions}
+# ====== TODO To be translated ======
+translate N StripOpcodes {Strip Opcodes}
+# ====== TODO To be translated ======
+translate N NoMoves {No moves from this position}
 }
 
 # end of nederlan.tcl

@@ -692,7 +692,8 @@ translate H CommentMove {Lépés kommentálása}
 translate H CommentPosition {Állás kommentálása}
 translate H AddMoveToMaskFirst {Elõbb add hozzá a lépést a maszkhoz}
 translate H OpenAMaskFileFirst {Elõbb nyiss meg egy maszkfájlt}
-translate H Positions {Állások}
+# ====== TODO To be translated ======
+translate H positions {positions}
 translate H Moves {Lépések}
 
 # Finder window:
@@ -2143,6 +2144,20 @@ translate H UriRejectedDetail {Only the listed file types can be handled:}
 translate H EmptyUriList {Drop content is empty.}
 # ====== TODO To be translated ======
 translate H SelectionOwnerDidntRespond {Timeout during drop action: selection owner didn't respond.}
+# ====== TODO To be translated ======
+translate H PasteAnal {Paste Analysis}
+# ====== TODO To be translated ======
+translate H SortOpcodes {Sort Opcodes}
+# ====== TODO To be translated ======
+translate H AddPosition {Add Position}
+# ====== TODO To be translated ======
+translate H FindPos {Find Deepest Game Position}
+# ====== TODO To be translated ======
+translate H AnalPosition {Analyze Positions}
+# ====== TODO To be translated ======
+translate H StripOpcodes {Strip Opcodes}
+# ====== TODO To be translated ======
+translate H NoMoves {No moves from this position}
 
 }
 

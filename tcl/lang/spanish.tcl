@@ -660,7 +660,8 @@ translate S CommentMove {Comentar movimiento}
 translate S CommentPosition {Comentar posición}
 translate S AddMoveToMaskFirst {Añadir primero el movimiento a la máscara}
 translate S OpenAMaskFileFirst {Abrir primero un fichero de máscara}
-translate S Positions {Posiciones}
+# ====== TODO To be translated ======
+translate S positions {positions}
 translate S Moves {Jugadas}
 
 # Finder window:
@@ -1783,6 +1784,20 @@ translate S UriRejected	{Los siguientes archivos fueron rechazados:}
 translate S UriRejectedDetail {Sólo pueden manejarse los tipos de archivo listados:}
 translate S EmptyUriList {Descartar. Contenido está vacío.}
 translate S SelectionOwnerDidntRespond {Tiempo excedido durante la operación: el propietario de la selección no respondió.}
+# ====== TODO To be translated ======
+translate S PasteAnal {Paste Analysis}
+# ====== TODO To be translated ======
+translate S SortOpcodes {Sort Opcodes}
+# ====== TODO To be translated ======
+translate S AddPosition {Add Position}
+# ====== TODO To be translated ======
+translate S FindPos {Find Deepest Game Position}
+# ====== TODO To be translated ======
+translate S AnalPosition {Analyze Positions}
+# ====== TODO To be translated ======
+translate S StripOpcodes {Strip Opcodes}
+# ====== TODO To be translated ======
+translate S NoMoves {No moves from this position}
 
 }
 # end of spanish.tcl

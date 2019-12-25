@@ -716,7 +716,8 @@ translate I AddMoveToMaskFirst {Add move to mask first}
 # ====== TODO To be translated ======
 translate I OpenAMaskFileFirst {Open a mask file first}
 # ====== TODO To be translated ======
-translate I Positions {Positions}
+translate I positions {positions}
+# ====== TODO To be translated ======
 # ====== TODO To be translated ======
 translate I Moves {Moves}
 
@@ -1959,6 +1960,20 @@ translate I UriRejected	{I seguenti file sono rifiutati:}
 translate I UriRejectedDetail {Solo i seguenti tipi di file possono essere gestiti;}
 translate I EmptyUriList {Gli archivi trascinati sono vuoti.}
 translate I SelectionOwnerDidntRespond {Tempo scaduto durante operazione di trascinamento: intestatario selezione non ha risposto.}
+# ====== TODO To be translated ======
+translate I PasteAnal {Paste Analysis}
+# ====== TODO To be translated ======
+translate I SortOpcodes {Sort Opcodes}
+# ====== TODO To be translated ======
+translate I AddPosition {Add Position}
+# ====== TODO To be translated ======
+translate I FindPos {Find Deepest Game Position}
+# ====== TODO To be translated ======
+translate I AnalPosition {Analyze Positions}
+# ====== TODO To be translated ======
+translate I StripOpcodes {Strip Opcodes}
+# ====== TODO To be translated ======
+translate I NoMoves {No moves from this position}
 
 }
 

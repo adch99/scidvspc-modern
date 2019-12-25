@@ -599,7 +599,7 @@ translate E CommentMove {Comment move}
 translate E CommentPosition {Comment position}
 translate E AddMoveToMaskFirst {Add move to mask first}
 translate E OpenAMaskFileFirst {Open a mask file first}
-translate E Positions {Positions}
+translate E positions {positions}
 translate E Moves {Moves}
 
 # Finder window:
@@ -1724,6 +1724,14 @@ translate E UriRejected	{The following files are rejected:}
 translate E UriRejectedDetail {Only the listed file types can be handled:}
 translate E EmptyUriList {Drop content is empty.}
 translate E SelectionOwnerDidntRespond {Timeout during drop action: selection owner didn't respond.}
+
+translate E PasteAnal {Paste Analysis}
+translate E SortOpcodes {Sort Opcodes}
+translate E AddPosition {Add Position}
+translate E FindPos {Find Deepest Game Position}
+translate E AnalPosition {Analyze Positions}
+translate E StripOpcodes {Strip Opcodes}
+translate E NoMoves {No moves from this position}
 
 }
 # end of english.tcl

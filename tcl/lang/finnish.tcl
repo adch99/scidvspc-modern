@@ -583,7 +583,8 @@ translate L CommentMove {Kommenttisiirto}
 translate L CommentPosition {Kommenttiasema}
 translate L AddMoveToMaskFirst {Lisää siirto ensiksi naamioon}
 translate L OpenAMaskFileFirst {Avaa ensiksi naamiotiedosto}
-translate L Positions {Asemat}
+# ====== TODO To be translated ======
+translate L positions {positions}
 translate L Moves {Siirrot}
 
 # Finder window:
@@ -1722,6 +1723,20 @@ translate L UriRejected	{Seuraavat tiedostot hylätään:}
 translate L UriRejectedDetail {Vain listatut tiedostotyypit voidaan käsitellä:}
 translate L EmptyUriList {Pudotussisältö on tyhjä.}
 translate L SelectionOwnerDidntRespond {Aikakatkaisu pudotustoiminnon aikana: valinnan omistaja ei vastannut}
+# ====== TODO To be translated ======
+translate L PasteAnal {Paste Analysis}
+# ====== TODO To be translated ======
+translate L SortOpcodes {Sort Opcodes}
+# ====== TODO To be translated ======
+translate L AddPosition {Add Position}
+# ====== TODO To be translated ======
+translate L FindPos {Find Deepest Game Position}
+# ====== TODO To be translated ======
+translate L AnalPosition {Analyze Positions}
+# ====== TODO To be translated ======
+translate L StripOpcodes {Strip Opcodes}
+# ====== TODO To be translated ======
+translate L NoMoves {No moves from this position}
 
 }
 # end of finnish.tcl

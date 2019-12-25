@@ -581,7 +581,8 @@ translate T CommentMove {Hamleyi yorumla}
 translate T CommentPosition {Konumu yorumla}
 translate T AddMoveToMaskFirst {Önce maskeye Hamle ekle}
 translate T OpenAMaskFileFirst {önce bir maske dosyası aç}
-translate T Positions {konumlar}
+# ====== TODO To be translated ======
+translate T positions {positions}
 translate T Moves {hamle}
 
 # Finder window:
@@ -1723,6 +1724,20 @@ translate T UriRejected	{Aşağıdaki dosyalar reddedildi:}
 translate T UriRejectedDetail {Yalnızca listelenen dosya türleri işlenebilir:}
 translate T EmptyUriList {Uri içeriği boş.}
 translate T SelectionOwnerDidntRespond {Bırakma eylemi sırasında zaman aşımı: seçim sahibi yanıt vermedi.}
+# ====== TODO To be translated ======
+translate T PasteAnal {Paste Analysis}
+# ====== TODO To be translated ======
+translate T SortOpcodes {Sort Opcodes}
+# ====== TODO To be translated ======
+translate T AddPosition {Add Position}
+# ====== TODO To be translated ======
+translate T FindPos {Find Deepest Game Position}
+# ====== TODO To be translated ======
+translate T AnalPosition {Analyze Positions}
+# ====== TODO To be translated ======
+translate T StripOpcodes {Strip Opcodes}
+# ====== TODO To be translated ======
+translate T NoMoves {No moves from this position}
 
 }
 

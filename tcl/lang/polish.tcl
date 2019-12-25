@@ -640,7 +640,8 @@ translate P CommentMove {Komentuj posunięcie}
 translate P CommentPosition {Komentuj pozycję}
 translate P AddMoveToMaskFirst {Najpierw dodaj posunięcie do maski}
 translate P OpenAMaskFileFirst {Najpierw otwórz plik maski}
-translate P Positions {Pozycje}
+# ====== TODO To be translated ======
+translate P positions {positions}
 translate P Moves {Posunięcia}
 
 # Finder window:
@@ -1798,6 +1799,20 @@ translate P UriRejectedDetail {Only the listed file types can be handled:}
 translate P EmptyUriList {Drop content is empty.}
 # ====== TODO To be translated ======
 translate P SelectionOwnerDidntRespond {Timeout during drop action: selection owner didn't respond.}
+# ====== TODO To be translated ======
+translate P PasteAnal {Paste Analysis}
+# ====== TODO To be translated ======
+translate P SortOpcodes {Sort Opcodes}
+# ====== TODO To be translated ======
+translate P AddPosition {Add Position}
+# ====== TODO To be translated ======
+translate P FindPos {Find Deepest Game Position}
+# ====== TODO To be translated ======
+translate P AnalPosition {Analyze Positions}
+# ====== TODO To be translated ======
+translate P StripOpcodes {Strip Opcodes}
+# ====== TODO To be translated ======
+translate P NoMoves {No moves from this position}
 
 }
 

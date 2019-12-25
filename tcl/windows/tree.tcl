@@ -2583,7 +2583,7 @@ proc ::tree::mask::updateDisplayMask {} {
     return
   }
 
-  wm title $w "[::tr DisplayMask] [file tail $::tree::mask::maskFile], [array size mask] [::tr Positions]"
+  wm title $w "[::tr DisplayMask] [file tail $::tree::mask::maskFile], [array size mask] [::tr positions]"
 
   set tree  $w.f.tree
   $tree delete [$tree children {}]
@@ -2936,7 +2936,7 @@ proc ::tree::mask::performSearch  { baseNumber } {
   foreach l $res {
     $t insert {} end -values $l -tags click2
   }
-  wm title .searchmask "[::tr SearchMask] \[[file tail [sc_base filename $baseNumber]]\] [::tr Positions] $pos_count/$pos_total - [string totitle [::tr moves]] $move_count/$move_total"
+  wm title .searchmask "[::tr SearchMask] \[[file tail [sc_base filename $baseNumber]]\] [::tr positions] $pos_count/$pos_total - [::tr moves] $move_count/$move_total"
 }
 
 

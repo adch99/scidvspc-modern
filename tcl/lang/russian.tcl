@@ -628,7 +628,8 @@ translate R CommentMove {Комментировать ход}
 translate R CommentPosition {Комментировать позицию}
 translate R AddMoveToMaskFirst {Добавить ход в маску первым}
 translate R OpenAMaskFileFirst {Открыть первый файл маски}
-translate R Positions {Позиции}
+# ====== TODO To be translated ======
+translate R positions {positions}
 translate R Moves {Ходы}
 
 # Finder window:
@@ -1805,6 +1806,20 @@ translate R UriRejected	{Следующие файлы будут отклоне
 translate R UriRejectedDetail {Только описанные типы файлов могут быть обработаны:}
 translate R EmptyUriList {Принятое содержимое пусто.}
 translate R SelectionOwnerDidntRespond {Таймаут принятия информации: владелей веделенного фрагмента не отвечает.}
+# ====== TODO To be translated ======
+translate R PasteAnal {Paste Analysis}
+# ====== TODO To be translated ======
+translate R SortOpcodes {Sort Opcodes}
+# ====== TODO To be translated ======
+translate R AddPosition {Add Position}
+# ====== TODO To be translated ======
+translate R FindPos {Find Deepest Game Position}
+# ====== TODO To be translated ======
+translate R AnalPosition {Analyze Positions}
+# ====== TODO To be translated ======
+translate R StripOpcodes {Strip Opcodes}
+# ====== TODO To be translated ======
+translate R NoMoves {No moves from this position}
 
 }
 # end of russian.tcl

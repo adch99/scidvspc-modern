@@ -685,7 +685,8 @@ translate C CommentMove {Okomentovat tah}
 translate C CommentPosition {Okomentovat pozici}
 translate C AddMoveToMaskFirst {Nejprve pøidejte tah do masky}
 translate C OpenAMaskFileFirst {Nejprve otevøete soubor masky}
-translate C Positions {Pozice}
+# ====== TODO To be translated ======
+translate C positions {positions}
 translate C Moves {Tahy}
 
 # Finder window:
@@ -2122,6 +2123,20 @@ translate C UriRejectedDetail {Only the listed file types can be handled:}
 translate C EmptyUriList {Drop content is empty.}
 # ====== TODO To be translated ======
 translate C SelectionOwnerDidntRespond {Timeout during drop action: selection owner didn't respond.}
+# ====== TODO To be translated ======
+translate C PasteAnal {Paste Analysis}
+# ====== TODO To be translated ======
+translate C SortOpcodes {Sort Opcodes}
+# ====== TODO To be translated ======
+translate C AddPosition {Add Position}
+# ====== TODO To be translated ======
+translate C FindPos {Find Deepest Game Position}
+# ====== TODO To be translated ======
+translate C AnalPosition {Analyze Positions}
+# ====== TODO To be translated ======
+translate C StripOpcodes {Strip Opcodes}
+# ====== TODO To be translated ======
+translate C NoMoves {No moves from this position}
 
 }
 
