@@ -50,12 +50,13 @@ namespace eval sergame {
 
     frame $w.fengines -relief groove -borderwidth 1
     frame $w.ftime -relief groove -borderwidth 1
-    frame $w.fconfig -borderwidth 1
+    frame $w.fconfig
+    frame $w.fcoach 
     frame $w.fbook -relief groove -borderwidth 1
     frame $w.fopening -relief groove -borderwidth 1
     frame $w.fbuttons
 
-    pack $w.fengines $w.ftime $w.fconfig $w.fbook -side top -fill x
+    pack $w.fengines $w.ftime $w.fconfig $w.fcoach $w.fbook -side top -fill x
     pack $w.fopening -side top -fill both -expand 1
     pack $w.fbuttons -side top -fill x
 
@@ -187,8 +188,9 @@ namespace eval sergame {
     pack $w.fconfig.cbPonder  -side top -anchor w
 
     # Coach is watching (warn if the user makes weak/bad moves)
-    checkbutton $w.fconfig.cbCoach -text $::tr(CoachIsWatching) -variable ::sergame::coachIsWatching
-    pack $w.fconfig.cbCoach -side top -anchor w
+    checkbutton $w.fcoach.cbCoach -text $::tr(CoachIsWatching) -variable ::sergame::coachIsWatching
+    button $w.fcoach.bCoach -text [tr OptionsInformant] -command configInformant
+    pack $w.fcoach.cbCoach $w.fcoach.bCoach -side left -padx 10
 
     # Book checkbutton and combobox
 
@@ -515,7 +517,7 @@ namespace eval sergame {
 
   proc engineGo {} {
     global ::sergame::isOpening ::sergame::openingMovesList ::sergame::openingMovesHash \
-           ::sergame::openingMoves ::sergame::timeMode ::sergame::outOfOpening
+           ::sergame::openingMoves ::sergame::timeMode ::sergame::outOfOpening informant ::uci::uciInfo
 
     set n $::sergame::engine
 
@@ -699,36 +701,17 @@ namespace eval sergame {
     set ::uci::uciInfo(bestmove$n) ""
     vwait ::uci::uciInfo(bestmove$n)
 
-    # -------------------------------------------------------------
-    # if weak move detected, propose the user to tack back
-    if { $::sergame::coachIsWatching && $::uci::uciInfo(prevscore$n) != "" } {
-      set blunder 0
-      set delta [expr $::uci::uciInfo(score$n) - $::uci::uciInfo(prevscore$n)]
-      if {$delta > $::informant("?!") && [::board::opponentColor] == "white" ||
-        $delta < [expr 0.0 - $::informant("?!")] && [::board::opponentColor] == "black" } {
-        set blunder 1
-      }
-      
-      if {$delta > $::informant("?") && [::board::opponentColor] == "white" ||
-        $delta < [expr 0.0 - $::informant("?")] && [::board::opponentColor] == "black" } {
-        set blunder 2
-      }
-      
-      if {$delta > $::informant("??") && [::board::opponentColor] == "white" ||
-        $delta < [expr 0.0 - $::informant("??")] && [::board::opponentColor] == "black" } {
-        set blunder 3
-      }
-      
-      if {$blunder == 1} {
-        set tBlunder "DubiousMovePlayedTakeBack"
-      } elseif {$blunder == 2} {
-        set tBlunder "WeakMovePlayedTakeBack"
-      } elseif {$blunder == 3} {
-        set tBlunder "BadMovePlayedTakeBack"
-      }
-      
-      if {$blunder != 0} {
-        set answer [tk_messageBox -icon question -parent .main.board -title Scid -type yesno -message $::tr($tBlunder) ]
+    # If weak move detected, propose the user to takeback (if game not considered won "++-")
+
+    if { $::sergame::coachIsWatching && $::uci::uciInfo(prevscore$n) != "" && ![sc_pos isAt start] && 
+        (([::board::opponentColor] == "black" && $uciInfo(score$n) <  $::informant("++-")) ||
+         ([::board::opponentColor] == "white" && $uciInfo(score$n) > -$::informant("++-"))) } {
+      set delta [expr $uciInfo(score$n) - $uciInfo(prevscore$n)]
+      if {$delta >  $informant("?") && [::board::opponentColor] == "white" ||
+          $delta < -$informant("?") && [::board::opponentColor] == "black" } {
+
+        set answer [tk_messageBox -icon question -parent .main.board -title Scid -type yesno \
+                      -message "$::tr(WeakMovePlayedTakeBack) Material +/- [format %.2f [expr abs($delta)]]" ]
         if {$answer == yes} {
           sc_move back 1
           updateBoard -pgn
