@@ -600,7 +600,8 @@ translate F CommentMove {Annoter coup}
 translate F CommentPosition {Annoter position}
 translate F AddMoveToMaskFirst {Ajoutez d'abord le coup au masque}
 translate F OpenAMaskFileFirst {Ouvrez d'abord un masque}
-translate F Positions {Positions}
+# ====== TODO To be translated ======
+translate F positions {positions}
 translate F Moves {Coups}
 
 # Finder window:
@@ -1711,6 +1712,20 @@ translate F UriRejected	{Les fichiers suivant sont rejetés:}
 translate F UriRejectedDetail {Seuls les types de fichiers listés seront gérés:}
 translate F EmptyUriList {Le contenu déposé est vide.}
 translate F SelectionOwnerDidntRespond {Timeout durant l'envoi: absence de réponse.}
+# ====== TODO To be translated ======
+translate F PasteAnal {Paste Analysis}
+# ====== TODO To be translated ======
+translate F SortOpcodes {Sort Opcodes}
+# ====== TODO To be translated ======
+translate F AddPosition {Add Position}
+# ====== TODO To be translated ======
+translate F FindPos {Find Deepest Game Position}
+# ====== TODO To be translated ======
+translate F AnalPosition {Analyze Positions}
+# ====== TODO To be translated ======
+translate F StripOpcodes {Strip Opcodes}
+# ====== TODO To be translated ======
+translate F NoMoves {No moves from this position}
 
 ##########
 #

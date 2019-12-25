@@ -762,7 +762,8 @@ translate Y AddMoveToMaskFirst {Add move to mask first}
 # ====== TODO To be translated ======
 translate Y OpenAMaskFileFirst {Open a mask file first}
 # ====== TODO To be translated ======
-translate Y Positions {Positions}
+translate Y positions {positions}
+# ====== TODO To be translated ======
 # ====== TODO To be translated ======
 translate Y Moves {Moves}
 
@@ -2271,6 +2272,20 @@ translate Y UriRejectedDetail {Only the listed file types can be handled:}
 translate Y EmptyUriList {Drop content is empty.}
 # ====== TODO To be translated ======
 translate Y SelectionOwnerDidntRespond {Timeout during drop action: selection owner didn't respond.}
+# ====== TODO To be translated ======
+translate Y PasteAnal {Paste Analysis}
+# ====== TODO To be translated ======
+translate Y SortOpcodes {Sort Opcodes}
+# ====== TODO To be translated ======
+translate Y AddPosition {Add Position}
+# ====== TODO To be translated ======
+translate Y FindPos {Find Deepest Game Position}
+# ====== TODO To be translated ======
+translate Y AnalPosition {Analyze Positions}
+# ====== TODO To be translated ======
+translate Y StripOpcodes {Strip Opcodes}
+# ====== TODO To be translated ======
+translate Y NoMoves {No moves from this position}
 
 }
 # end of serbian.tcl

@@ -668,7 +668,8 @@ translate G CommentMove {Σχόλιο κίνησης}
 translate G CommentPosition {Σχόλιο θέσης}
 translate G AddMoveToMaskFirst {Προσθήκη Κίνησης σε μάσκα πρώτα}
 translate G OpenAMaskFileFirst {Άνοιγμα αρχείου μάσκας πρώτα}
-translate G Positions {Θέσεις}
+# ====== TODO To be translated ======
+translate G positions {positions}
 translate G Moves {Κινήσεις}
 
 # Finder window:
@@ -1853,6 +1854,20 @@ translate G UriRejected	{Τα ακόλουθα αρχεία απορρίφθηκ
 translate G UriRejectedDetail {Μόνο οι συγκεκριμένοι τύποι αρχείων λειτουργούν:}
 translate G EmptyUriList {Το περιεχόμενο είναι άδειο.}
 translate G SelectionOwnerDidntRespond {Λήξη προθεσμίας: η εφαρμογή δεν αποκρίθηκε.}
+# ====== TODO To be translated ======
+translate G PasteAnal {Paste Analysis}
+# ====== TODO To be translated ======
+translate G SortOpcodes {Sort Opcodes}
+# ====== TODO To be translated ======
+translate G AddPosition {Add Position}
+# ====== TODO To be translated ======
+translate G FindPos {Find Deepest Game Position}
+# ====== TODO To be translated ======
+translate G AnalPosition {Analyze Positions}
+# ====== TODO To be translated ======
+translate G StripOpcodes {Strip Opcodes}
+# ====== TODO To be translated ======
+translate G NoMoves {No moves from this position}
 
 }
 # end of greek.tcl

@@ -602,7 +602,8 @@ translate U CommentMove {Comentar movimento}
 translate U CommentPosition {Comentar posição}
 translate U AddMoveToMaskFirst {Adicionar movimento à máscara primeiro}
 translate U OpenAMaskFileFirst {Abrir uma máscara primeiro}
-translate U Positions {Posições}
+# ====== TODO To be translated ======
+translate U positions {positions}
 translate U Moves {Movimentos}
 
 # Finder window:
@@ -1717,6 +1718,20 @@ translate U UriRejected	{Os seguintes ficheiros são recusados:}
 translate U UriRejectedDetail {Apenas os ficheiros do tipo listado podem ser despachados:}
 translate U EmptyUriList {O conteúdo a largar está vazio.}
 translate U SelectionOwnerDidntRespond {O tempo esgotou durante a entrega: o dono da seleção não respondeu.}
+# ====== TODO To be translated ======
+translate U PasteAnal {Paste Analysis}
+# ====== TODO To be translated ======
+translate U SortOpcodes {Sort Opcodes}
+# ====== TODO To be translated ======
+translate U AddPosition {Add Position}
+# ====== TODO To be translated ======
+translate U FindPos {Find Deepest Game Position}
+# ====== TODO To be translated ======
+translate U AnalPosition {Analyze Positions}
+# ====== TODO To be translated ======
+translate U StripOpcodes {Strip Opcodes}
+# ====== TODO To be translated ======
+translate U NoMoves {No moves from this position}
 
 }
 

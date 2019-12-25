@@ -610,7 +610,8 @@ translate O CommentMove {Kommenter trekk}
 translate O CommentPosition {Kommenter stilling}
 translate O AddMoveToMaskFirst {Legg trekk til masken først}
 translate O OpenAMaskFileFirst {Åpne en maskefil først}
-translate O Positions {Stillinger}
+# ====== TODO To be translated ======
+translate O positions {positions}
 translate O Moves {Trekk}
 
 # Finder window:
@@ -1744,6 +1745,20 @@ translate O UriRejected	{Disse filene er avvist:}
 translate O UriRejectedDetail {Kun følgende filtyper kan håndteres:}
 translate O EmptyUriList {Innholdet er tomt.}
 translate O SelectionOwnerDidntRespond {Tidsavbrudd under slipp: eier av utvalg svarte ikke.}
+# ====== TODO To be translated ======
+translate O PasteAnal {Paste Analysis}
+# ====== TODO To be translated ======
+translate O SortOpcodes {Sort Opcodes}
+# ====== TODO To be translated ======
+translate O AddPosition {Add Position}
+# ====== TODO To be translated ======
+translate O FindPos {Find Deepest Game Position}
+# ====== TODO To be translated ======
+translate O AnalPosition {Analyze Positions}
+# ====== TODO To be translated ======
+translate O StripOpcodes {Strip Opcodes}
+# ====== TODO To be translated ======
+translate O NoMoves {No moves from this position}
 
 }
 # end of norsk.tcl

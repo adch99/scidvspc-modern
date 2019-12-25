@@ -624,7 +624,7 @@ translate D CommentMove {Zug kommentieren}
 translate D CommentPosition {Position kommentieren}
 translate D AddMoveToMaskFirst {Zug zuerst zur Maske hinzufügen}
 translate D OpenAMaskFileFirst {Zunächst Maske öffnen}
-translate D Positions {Positionen}
+translate D positions {positionen}
 translate D Moves {Züge}
 
 # Finder window:
@@ -1752,6 +1752,20 @@ translate D UriRejected	{Die folgenden Dateien wurden zurückgewiesen:}
 translate D UriRejectedDetail {Nur die aufgelisteten Dateitypen können gehandhabt werden:}
 translate D EmptyUriList {Der Drop-Inhalt ist leer.}
 translate D SelectionOwnerDidntRespond {Zeitüberschreitung während der Drop-Aktion: der Eigentümer des Drop-Inhalts antwortete nicht.}
+# ====== TODO To be translated ======
+translate D PasteAnal {Paste Analysis}
+# ====== TODO To be translated ======
+translate D SortOpcodes {Sort Opcodes}
+# ====== TODO To be translated ======
+translate D AddPosition {Add Position}
+# ====== TODO To be translated ======
+translate D FindPos {Find Deepest Game Position}
+# ====== TODO To be translated ======
+translate D AnalPosition {Analyze Positions}
+# ====== TODO To be translated ======
+translate D StripOpcodes {Strip Opcodes}
+# ====== TODO To be translated ======
+translate D NoMoves {No moves from this position}
 
 }
 

@@ -723,7 +723,8 @@ translate B CommentMove {Comentar movimento}
 translate B CommentPosition {Comentar posição}
 translate B AddMoveToMaskFirst {Adicionar movimento à máscara primeiro}
 translate B OpenAMaskFileFirst {Abrir uma máscara primeiro}
-translate B Positions {Posições}
+# ====== TODO To be translated ======
+translate B positions {positions}
 translate B Moves {Movimentos}
 
 # Finder window:
@@ -2173,6 +2174,20 @@ translate B UriRejectedDetail {Somente os tipos de arquivo listados podem ser tr
 translate B EmptyUriList {Conteudo informado está vazio.}
 
 translate B SelectionOwnerDidntRespond {Timeout durante o envio: proprietario da seleção não responde.}
+# ====== TODO To be translated ======
+translate B PasteAnal {Paste Analysis}
+# ====== TODO To be translated ======
+translate B SortOpcodes {Sort Opcodes}
+# ====== TODO To be translated ======
+translate B AddPosition {Add Position}
+# ====== TODO To be translated ======
+translate B FindPos {Find Deepest Game Position}
+# ====== TODO To be translated ======
+translate B AnalPosition {Analyze Positions}
+# ====== TODO To be translated ======
+translate B StripOpcodes {Strip Opcodes}
+# ====== TODO To be translated ======
+translate B NoMoves {No moves from this position}
 
 }
 

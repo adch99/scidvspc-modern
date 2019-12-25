@@ -153,17 +153,17 @@ namespace eval epd {
     "
 
     set m $w.menu.tools
-    $m add command -label "Paste Analysis" -accelerator "control-P" -underline 0 -command "::epd::pasteAnalysis $id"
-    $m add command -label "Sort Opcodes" -accel "control-S" -underline 0 -command "::epd::sortEpdText $id"
-    $m add command -label "Add Position" -accel "control-A" -underline 0 -command "::epd::addPosition $id"
-    $m add command -label "Find Deepest Game Position" -underline 5 -command "::epd::moveToDeepestMatch $id"
+    $m add command -label $tr(PasteAnal) -accelerator "control-P" -underline 0 -command "::epd::pasteAnalysis $id"
+    $m add command -label $tr(SortOpcodes) -accel "control-S" -underline 0 -command "::epd::sortEpdText $id"
+    $m add command -label $tr(AddPosition) -accel "control-A" -underline 0 -command "::epd::addPosition $id"
+    $m add command -label $tr(FindPos) -underline 5 -command "::epd::moveToDeepestMatch $id"
     $m add separator
 
-    $m add command -label "Analyze Positions" -underline 5 -command "::epd::configAnnotateEpd $id"
-    $m add command -label "Strip Opcodes" -accel "control-O" -underline 6 -command "::epd::chooseStripField $id"
+    $m add command -label $tr(AnalPosition) -underline 5 -command "::epd::configAnnotateEpd $id"
+    $m add command -label $tr(StripOpcodes) -accel "control-O" -underline 6 -command "::epd::chooseStripField $id"
 
-    $w.menu.help add command -label "EPD Help" -underline 0 -acc "F1" -command "helpWindow EPD"
-    $w.menu.help add command -label Index -underline 0 -command "helpWindow Index"
+    $w.menu.help add command -label "EPD [tr Help]" -underline 0 -acc "F1" -command "helpWindow EPD"
+    $w.menu.help add command -label [tr HelpIndex] -underline 0 -command "helpWindow Index"
 
     pack $w.status -side bottom -fill x
     pack $w.grid -fill both -expand yes
@@ -338,7 +338,7 @@ namespace eval epd {
     # set strStat "[file tail [sc_epd name $id]]  [sc_epd size $id] positions"
 
     if {!$epdAnnotation} {
-      set strStat "[sc_epd size $id] positions"
+      set strStat "[sc_epd size $id] $::tr(positions)"
 
       if {[sc_epd readonly $id]} {
 	append strStat " ($::tr(readonly))"
@@ -350,7 +350,7 @@ namespace eval epd {
       if {$len} {
 	append strStat "  \[[llength $moves]: [join $moves " "]\]"
       } else {
-	append strStat {  [No moves from this position]}
+	append strStat "  \[[tr NoMoves]\]"
       }
       $w.status configure -text $strStat
     }
