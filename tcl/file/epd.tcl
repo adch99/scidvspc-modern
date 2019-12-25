@@ -29,7 +29,7 @@ namespace eval epd {
   variable maxEpd
   variable stripField {}
   variable epdTimer
-  variable bestMove {}
+  variable bestMoves {}
   variable epdNames
 
   set maxEpd [sc_info limit epd]
@@ -303,7 +303,7 @@ namespace eval epd {
   ### This proc is also invoked whenever the main board is updated.
   ################################################################################
   proc updateEpdWin {id} {
-    variable bestMove
+    variable bestMoves
     global epdAnnotateMode epdAnnotation
 
     set w .epd$id
@@ -318,11 +318,18 @@ namespace eval epd {
     $w.text edit reset
 
     if {$epdAnnotation && $epdAnnotateMode} {
-      # find bm (or am TODO) in epd data
+      # find bm and am in epd data
       if {[regexp -line bm\ .*\$ $text match]} {
-	set bestMove [lindex $match 1]
+        # Multiple bm's are possible... replace commas with spaces
+	set bestMoves [string map {, { }} [string range $match 3 end]]
       } else {
-	set bestMove {}
+        # opcode "am" is avoid move.
+	if {[regexp -line am\ .*\$ $text match]} {
+          # Prefix bms with "avoid"
+	  set bestMoves "avoid [string map {, { }} [string range $match 3 end]]"
+	} else {
+          set bestMoves {}
+        }
       }
     }
 
@@ -528,7 +535,7 @@ namespace eval epd {
   proc launchAnnotateEpd {id win name} {
     variable epdTimer
     variable bestPV
-    variable bestMove
+    variable bestMoves
     global epdAnnotateMode epdAnnotation epdDelay
 
     set w .epd$id
@@ -568,17 +575,20 @@ namespace eval epd {
       vwait epdTimer($id)
 
       if {$epdAnnotateMode > 0} {
-        # find Best PV. (bestMove is updated in updateEpdWin)
+        # find Best PV. (bestMoves is updated in updateEpdWin)
         # TODO xboard
 	set bestPV [lindex $::analysis(lastHistory$win) 0]
-puts "bestMove $bestMove, bestPV $bestPV"
-	if {$bestMove != ""} {
+	if {$bestMoves != ""} {
 	  incr bestMovesNoted
 	}
-	if {$bestMove == $bestPV} {
-	  incr bestMovesFound 
-	}
-      } 
+        if {[string match avoid* $bestMoves]} {
+          # Avoid moves
+          set bestMoves [string range $bestMoves 6 end] 
+	  if {[lsearch -exact $bestMoves $bestPV] == -1} {incr bestMovesFound}
+        } else {
+	  if {[lsearch -exact $bestMoves $bestPV] > -1} {incr bestMovesFound}
+        }
+      }
       if {$epdAnnotateMode != 1} {
 	pasteAnalysis $id $win
 	storeEpdText $id
