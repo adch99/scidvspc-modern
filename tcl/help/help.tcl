@@ -4463,12 +4463,12 @@ limited the coach is allowed to think in the background.</i></p>
   If the game is set for a fixed time per move, this will weaken the
   engine. On the other hand, the engine might move immediately, if the
   player made the move it was analysing on the players time.</li>
-  <li><b>Coach is Watching</b> will open a dialogue offering to take
-  back a move if the player made a blunder (due to the engines
-  evaluation of his last move).</li>
+  <li><b>Coach is Watching</b> offers the player to take back a move if the computer thinks it is a blunder.
+  The blunder value used is that of the Informant "Poor move" (not "Blunder") , and is configurable in the Informants window,
+where one may also alter the "Game is considered Won", which acts as a cutoff above which blunders are not notified.</li>
   </ul>
 
-  <p><footer>Updated: Scid vs. PC 4.7 January 2012</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.21 December 2019</footer></p>
 }
 
 set helpTitle(Correspondence) "Correspondence Chess"
