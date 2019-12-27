@@ -47,6 +47,41 @@ namespace eval epd {
     } 
   }
 
+  proc epdFindText {id entry} {
+    set lb .epd$id.lb
+    set text .epd$id.text
+    set find [$entry get]
+    set i [$lb curselect]
+    set size [$lb size]
+    set found {}
+    busyCursor . ; update
+    while {$i < $size && $found == {}} {
+      $lb selection clear 0 end
+      $lb selection set [incr i]
+      event generate $lb <<ListboxSelect>>     
+      update idletasks
+      # puts [sc_epd get $id]
+	set found [$text search -regexp -nocase -- $find 0.0]
+    }
+    unbusyCursor .
+    $text tag remove Highlight 1.0 end
+
+    if {$found == {}} {
+      flashEntryBox $entry
+    } else {
+      if {[ regexp {(.*)\.(.*)} $found t1 line char]} {
+	$text see $found
+	# find the length of matching text
+	regexp -nocase -- $find [$text get $line.0 $line.end] matchVar
+	set length [string length $matchVar]
+	if {$length < 1} {
+	  set length 1
+	}
+	$text tag add Highlight $found $line.[expr $char + $length]
+      }
+    }
+  }
+
   ################################################################################
   ### Open up a new EPD window.
   ### The only real benefit of entering from the EPD file menu (with a null filename)
@@ -120,11 +155,17 @@ namespace eval epd {
     text $w.text  -font font_Regular -width 60 -height 8 \
         -wrap none -setgrid 1 -yscrollcommand "$w.ybar set" \
         -xscrollcommand "$w.xbar set" -undo 1 -exportselection false
+    $w.text tag configure Highlight -background orange
+
     scrollbar $w.ybar -takefocus 0 -command "$w.text yview"
     scrollbar $w.xbar -orient horizontal -takefocus 0 -command "$w.text xview"
 
-    label $w.status -width 1 -anchor w -font font_Small -relief sunken
-
+    frame $w.bottom
+    label $w.bottom.status -font font_Small -relief flat
+    entry $w.bottom.find -width 10 -font font_Small
+    bind  $w.bottom.find <Return> "::epd::epdFindText $id $w.bottom.find"
+    pack $w.bottom.status -side left
+    pack $w.bottom.find   -side right
     listbox $w.lb  -font font_Regular -width 60 -height 8 -setgrid 1 -yscrollcommand "$w.ybar2 set" \
         -xscrollcommand "$w.xbar2 set" -selectmode single -exportselection false
     scrollbar $w.ybar2 -takefocus 0 -command "$w.lb yview"
@@ -165,7 +206,7 @@ namespace eval epd {
     $w.menu.help add command -label "EPD [tr Help]" -underline 0 -acc "F1" -command "helpWindow EPD"
     $w.menu.help add command -label [tr HelpIndex] -underline 0 -command "helpWindow Index"
 
-    pack $w.status -side bottom -fill x
+    pack $w.bottom -side bottom -fill x
     pack $w.grid -fill both -expand yes
     grid $w.text -in $w.grid -row 0 -column 0 -sticky news
     grid $w.ybar -in $w.grid -row 0 -column 1 -sticky news
@@ -352,7 +393,7 @@ namespace eval epd {
       } else {
 	append strStat "  \[[tr NoMoves]\]"
       }
-      $w.status configure -text $strStat
+      $w.bottom.status configure -text $strStat
     }
 
     updateEpdListbox $id
@@ -541,7 +582,7 @@ namespace eval epd {
     set w .epd$id
 
     set epdAnnotation 1
-    $w.status configure -text "Analyzing with $name ($epdDelay secs/move)"
+    $w.bottom.status configure -text "Analyzing with $name ($epdDelay secs/move)"
     update
 
     if {$epdAnnotateMode != 1} {
@@ -608,10 +649,9 @@ namespace eval epd {
     if {$epdAnnotation && $epdAnnotateMode > 0} {
       set result "Result: $name ($epdDelay secs/move): Best moves found $bestMovesFound / $bestMovesNoted"
       puts $result
-      $w.status configure -text $result
+      $w.bottom.status configure -text $result
       set epdAnnotation 0
     }
-
   }
 
   ################################################################################
