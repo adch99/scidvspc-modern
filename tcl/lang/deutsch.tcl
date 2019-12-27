@@ -226,12 +226,12 @@ menuText D ToolsExpFilterPGN "Filter in PGN-Datei exportieren..." 10 \
 menuText D ToolsExpFilterHTML "Filter in HTML-Datei exportieren..." 10 \
   {Alle Partien im Filter in eine HTML-Datei schreiben}
 menuText D ToolsExpFilterHTMLJS "Filter in HTML/JavaScript exportieren..." 17 \
-	{Alle Partien im Filter werden in eine HTML und JavaScript Datei exportiert.}  
+  {Alle Partien im Filter werden in eine HTML und JavaScript Datei exportiert.}  
 menuText D ToolsExpFilterLaTeX "Filter in LaTeX-Datei exportieren..." 10 \
   {Alle Partien im Filter in eine LaTeX-Datei schreiben}
 menuText D ToolsExpFilterEPD "Filter in EPD/FEN-Datei exportieren" 17 {Alle Filterpartien in eine EPD-Datei speichern}
 menuText D ToolsExpFilterGames "Partienliste in eine Textdatei exportieren" 21 \
-	{Alle Partien im Filter werden in eine Textdatei exportiert.}
+  {Alle Partien im Filter werden in eine Textdatei exportiert.}
 menuText D ToolsImportOne "Eine PGN-Partie importieren..." 16 \
   {Eine Partie im PGN-Format eingeben oder einfügen}
 menuText D ToolsImportFile "PGN-Partien importieren..." 0 \
@@ -248,7 +248,7 @@ menuText D CCOpenDB "Datenbank öffnen..." 0 {Öffnet die Standarddatenbank für
 menuText D CCRetrieve "Partien abrufen" 0 {Synchronisiert Partien mit dem Posteingang und mittels (Xfcc-)Hilfsprogramm}
 menuText D CCInbox "Posteingang synchronisieren" 12 {Synchronisiert alle Partien im Posteingang}
 menuText D CCSend "Zug senden" 0 {Verschickt den letzten Zug via E-Mail oder exterem (Xfcc-)Hilfsprogramm}
-menuText D CCResign "Aufgeben" 0 {Partie aufgeben (funktioniert nicht via E-Mail)}
+menuText D CCResign "Aufgeben" 0 {Partie aufgeben}
 menuText D CCClaimDraw "Remis reklamieren" 1 {Zug senden und Remis reklamieren (funktioniert nicht via E-Mail)}
 menuText D CCOfferDraw "Remis anbieten" 0 {Zug senden und Remis anbieten (funktioniert nicht via E-Mail)}
 menuText D CCAcceptDraw "Remis annehmen" 10 {Remis annehmen (funktioniert nicht via E-Mail)}
@@ -319,7 +319,7 @@ menuText D OptionsWindowsIconify "Automatisch minimieren" 7 \
 menuText D OptionsWindowsRaise "Automatisch heraufsetzen" 7 \
   {Bestimmte Fenster (z.B. Zustandsleiste) bei Bedarf öffnen}
 menuText D OptionsSounds "Töne..." 0 {Töne für Zugankündigung einstellen} ;# *** Hmm, :-|
-menuText D OptionsWindowsDock "Fenster docken" 0 {Fenster docken}
+menuText D OptionsWindowsDock "Fenster andocken" 0 {Fenster andocken}
 menuText D OptionsWindowsSaveLayout "Layout speichern" 0 {Das Fensterlayout abspeichern}
 menuText D OptionsWindowsRestoreLayout "Layout wiederherstellen" 0 {Das gespeicherte Fensterlayout wiederherstellen}
 menuText D OptionsWindowsShowGameInfo "Partieinformationen" 0 {Partieinformationen anzeigen}
@@ -624,7 +624,7 @@ translate D CommentMove {Zug kommentieren}
 translate D CommentPosition {Position kommentieren}
 translate D AddMoveToMaskFirst {Zug zuerst zur Maske hinzufügen}
 translate D OpenAMaskFileFirst {Zunächst Maske öffnen}
-translate D positions {positionen}
+translate D positions {Stellungen}
 translate D Moves {Züge}
 
 # Finder window:
@@ -923,7 +923,7 @@ translate D GlistAddField {Hinzufügen}
 translate D GlistDeleteField {Löschen}
 translate D GlistColor {Farbe}
 translate D GlistSort {Datenbank sortieren}
-translate D GlistRemoveThisGameFromFilter  {Partie}
+translate D GlistRemoveThisGameFromFilter  {Partie aus Filter entfernen}
 translate D GlistRemoveGameAndAboveFromFilter  {Partie (und alle oberhalb)}
 translate D GlistRemoveGameAndBelowFromFilter  {Partie (und alle darunter)}
 translate D GlistDeleteGame {(Ent)Lösche Partie}
@@ -1151,12 +1151,9 @@ Wollen Sie diese Datenbank wirklich schreibschützen?}
 translate D ExitDialog {Möchten Sie Scid beenden?}
 translate D ClearGameDialog {Diese Partie wurde geändert.\nWollen Sie sie speichern?}
 translate D ExitUnsaved {Die folgenden Datenbanken haben ungesicherte Partieänderungen. Wenn Sie jetzt beenden, gehen diese Änderungen verloren.}
-# ====== TODO To be translated ======
-translate D ChangeTextDialog {Enabling text colour globally requires restart.}
-# ====== TODO To be translated ======
-translate D ChangeDockDialog {Changing Docking requires a restart.}
-# ====== TODO To be translated ======
-translate D ExitNow {Exit now ?}
+translate D ChangeTextDialog {Das globale Aktivieren der Textfarbe erfordert einen Neustart.}
+translate D ChangeDockDialog {Das Andocken ändern erfordert einen Neustart.}
+translate D ExitNow {Jetzt beenden?}
 
 # Import window:
 translate D PasteCurrentGame {Aktuelle Partie einfügen}
@@ -1404,7 +1401,7 @@ Scid wird den ersten Zug aus der aktuellen Partie finden, welcher zu einer Posit
 translate D SoundsFolder {Sound-Dateienverzeichnis}
 translate D SoundsFolderHelp {Das Verzeichnis sollte enthalten: King.wav, a.wav, 1.wav etc.}
 translate D SoundsAnnounceOptions {Optionen für Zugankündigung}
-	# *** Ist das so gemeint? Ich kann's nicht ausprobieren (keine Soundkarte...).
+  # *** Ist das so gemeint? Ich kann's nicht ausprobieren (keine Soundkarte...).
 translate D SoundsAnnounceNew {Kündige neue Züge an, wenn sie ausgeführt werden}
 translate D SoundsAnnounceForward {Künde Zug an beim Vorwärtspielen}
 translate D SoundsAnnounceBack {Kündige Zug an beim Zurückgehen}
@@ -1752,20 +1749,13 @@ translate D UriRejected	{Die folgenden Dateien wurden zurückgewiesen:}
 translate D UriRejectedDetail {Nur die aufgelisteten Dateitypen können gehandhabt werden:}
 translate D EmptyUriList {Der Drop-Inhalt ist leer.}
 translate D SelectionOwnerDidntRespond {Zeitüberschreitung während der Drop-Aktion: der Eigentümer des Drop-Inhalts antwortete nicht.}
-# ====== TODO To be translated ======
-translate D PasteAnal {Paste Analysis}
-# ====== TODO To be translated ======
-translate D SortOpcodes {Sort Opcodes}
-# ====== TODO To be translated ======
-translate D AddPosition {Add Position}
-# ====== TODO To be translated ======
-translate D FindPos {Find Deepest Game Position}
-# ====== TODO To be translated ======
-translate D AnalPosition {Analyze Positions}
-# ====== TODO To be translated ======
-translate D StripOpcodes {Strip Opcodes}
-# ====== TODO To be translated ======
-translate D NoMoves {No moves from this position}
+translate D PasteAnal {Analyse einfügen}
+translate D SortOpcodes {Opcodes sortieren}
+translate D AddPosition {Stellung hinzufügen}
+translate D FindPos {Tiefste Partiestellung finden}
+translate D AnalPosition {Stellungen analysieren}
+translate D StripOpcodes {Opcodes entfernen}
+translate D NoMoves {Keine Züge ab dieser Stellung}
 
 }
 
@@ -2714,19 +2704,19 @@ set helpText(D,Menus) {<h1>Menüs</h1>
   Variante als Hauptfortsetzung im Tausch mit ihrem Vorgänger.</li>
   <li><green>Variante testen</green>  Ermöglicht einen <a Moves
   Trial>Versuchsmodus</a>, um eine temporäre Variante auszuprobieren,
-	ohne die aktuelle Partie zu ändern.</li>
+  ohne die aktuelle Partie zu ändern.</li>
 
   <h3><name Game>Partie</name></h3>
   <ul>
   <li><green>Neue Partie</green>  Setzt die aktive Partie in einen
-	neuen Zustand. Ungesicherte Änderungen gehen verloren.</li>
+  neuen Zustand. Ungesicherte Änderungen gehen verloren.</li>
   <li><green>Partie ersetzen...</green>  Speichert und ersetzt die
-	aktuelle Partie in der Datenbank.</li>
+  aktuelle Partie in der Datenbank.</li>
   <li><green>Partie speichern...</green>  Speichert diese Partie und
-	fügt sie der Datenbank hinzu.</li>
+  fügt sie der Datenbank hinzu.</li>
   <br>
   <li><green>Partieinformationen setzen...</green>  Setzt verschiedene
-	Angaben zur aktuellen Partie.</li>
+  Angaben zur aktuellen Partie.</li>
   <li><green>Partien durchsuchen</green>  Zeigt eine einzelne Partie
   in einem separaten Fenster an. In diesem können weitere Partien angezeigt werden.</li>
   <li><green>Alle Spiele</green>  Zeigt eine Liste mit allen Partien an.</li>
@@ -2756,7 +2746,7 @@ set helpText(D,Menus) {<h1>Menüs</h1>
   <li><green>Filter invertieren</green>  Kehrt den Filter um, um nur
   die Partien anzuzeigen, die bisher ausgeschlossen waren.</li>
   <li><green>Filterpartien mit Schlußstellung laden</green>  Zeigt
-	alle Partien mit ihrem letzten Zug.</li>
+  alle Partien mit ihrem letzten Zug.</li>
   <br>
   <li><green>Partiedaten...</green>  Führt eine <a Searches Header>Partiedatensuche</a> durch wie z.B. Spielernamen.</li>
   <li><green>Brett...</green>  Führt eine <a Searches Board>Brettsuche</a> durch.</li>
@@ -2766,10 +2756,10 @@ set helpText(D,Menus) {<h1>Menüs</h1>
   <br>
   <li><green>Spielersuche</green>  Sucht nach einem Spielernamen.</li>
   <li><green>Turniersuche</green>  Sucht nach einem Turner mittels
-	Datum oder Name.</li>
+  Datum oder Name.</li>
   <br>
   <li><green>Mit Suchoptionsdatei...</green>  Führt eine Suche durch
-	anhand Kriterien, die in einer <a Searches Settings>Suchoptionsdatei</a> gespeichert sind.</li>
+  anhand Kriterien, die in einer <a Searches Settings>Suchoptionsdatei</a> gespeichert sind.</li>
   </ul>
 
   <h3><name Windows>Fenster</name></h3>
@@ -2801,16 +2791,16 @@ set helpText(D,Menus) {<h1>Menüs</h1>
   <br>
   <li><green>Wartung</green>  Funktionen zur <a Maintenance>Datenbankwartung</a>.</li>
   <ul>
-	<li><green>Wartungsfenster</green>  Öffnet/schließt das Datenbankwartungsfenster.</li>
+  <li><green>Wartungsfenster</green>  Öffnet/schließt das Datenbankwartungsfenster.</li>
   <li><green>Namenseditor</green>  Erlaubt das Ändern von Partiedaten
   wie Namen von Spielern, Turnierbezeichnung, Ort, Runde, Elo, Tagesdatum
-	und Turnierdatum</li>
+  und Turnierdatum</li>
   <li><green>Datenbank komprimieren...</green>  Führt eine
   Datenbankkomprimierung durch.</li>
   <li><green>Sortieren...</green>  Sortiert die Datenbank nach Namen,
   Wertungszahl usw.</li>
   <li><green>Schreibkorrektur Spieler/Ereignis/Ort/Runde...</green>
-	Durchsucht die Schreibkorrekturdatei für mögliche Namenskorrekturen.</li>
+  Durchsucht die Schreibkorrekturdatei für mögliche Namenskorrekturen.</li>
   <li><green>Dubletten löschen...</green>  Findet <a Maintenance Twins>Dubletten</a> in der Datenbank.</li>
   <li><green>Dubletten prüfen...</green>  Repariert eine fehlerhafte Datenbank.</li>
   </ul>
@@ -2836,15 +2826,15 @@ set helpText(D,Menus) {<h1>Menüs</h1>
   von Partien</a>.</li>
   <br>
   <li><green>Eine PGN-Partie importieren...</green>  Öffnet
-	ein <a Import>PGN-Importfenster</a> für das manuelle Eingeben von
-	Partiezügen bzw. Einfügen von Text im <a PGN>PGN-Format</a>.</li>
+  ein <a Import>PGN-Importfenster</a> für das manuelle Eingeben von
+  Partiezügen bzw. Einfügen von Text im <a PGN>PGN-Format</a>.</li>
   <li><green>PGN-Partien importieren...</green>  Importiert eine
-	Datei, die Partien im PGN-Format enthält, in die aktuelle
-	Datenbank. Beachten Sie, daß in diesem Dialog mehrere Dateien
-	gleichzeitig ausgewählt werden können.</li>
+  Datei, die Partien im PGN-Format enthält, in die aktuelle
+  Datenbank. Beachten Sie, daß in diesem Dialog mehrere Dateien
+  gleichzeitig ausgewählt werden können.</li>
   <br>
   <li><green>Bildschirmfoto</green>  Speichert ein Bildschirmfoto
-	des Schachbretts in eine Datei.</li>
+  des Schachbretts in eine Datei.</li>
   </ul>
   <p><footer>Aktualisiert: Scid vs. PC 4.17, März 2016</footer></p>
 }
@@ -3258,8 +3248,8 @@ set helpText(D,Filter) {<h1>Der Filter</h1>
   <p>Der Filter wird häufig benutzt, um Suchergebnisse anzuzeigen.
   </p>
   </p><i>Verwechseln Sie nicht gefilterte Partien mit gelöschten
-	Partien. Dies sind zwei <a GameList Del>verschiedene
-	Dinge.</a></i>
+  Partien. Dies sind zwei <a GameList Del>verschiedene
+  Dinge.</a></i>
   <p>Sie können auch alle Filterpartien einer Datenbank mit Hilfe
   des <a Switcher>Datenbankwechslers</a> in eine andere Datenbank
   kopieren.
@@ -3506,10 +3496,10 @@ set helpText(D,Crosstable) {<h1>Das Fenster Kreuztabelle</h1>
   30 Spielern.</li>
   <br>
   <li><b>Schweizer System</b> - Für Turniere mit einer großen Anzahl
-	an Spielern. Kann bis zu 200 Spieler und 20 Runden anzeigen. Scid
-	verwendet bei jeder Partie das Merkmal "Runde", um eine
-	Kreuztabelle nach Schweizer System zu erstellen, so daß Sie keine
-	Partien sehen, wenn sie keine numerischen Rundenwerte enthalten.
+  an Spielern. Kann bis zu 200 Spieler und 20 Runden anzeigen. Scid
+  verwendet bei jeder Partie das Merkmal "Runde", um eine
+  Kreuztabelle nach Schweizer System zu erstellen, so daß Sie keine
+  Partien sehen, wenn sie keine numerischen Rundenwerte enthalten.
   </li>
   <br>
   <li><b>K.o-System</b> - Zeigt Partieergebnisse Runde für Runde.</li>
@@ -3526,13 +3516,13 @@ set helpText(D,Crosstable) {<h1>Das Fenster Kreuztabelle</h1>
 
   <h4>Weitere Optionen</h4>
   <ul>
-	<li><b>Punktzahlen gruppieren</b> fügt eine Leerzeile nach
-	Spielern mit gleicher Punktzahl ein.</li>
-	<li><b>Farbinformation</b> zeigt w/b im Schweizer System. Dies
-	zeigt an, ob der Spieler Weiß (w) oder Schwarz (b) hatte.</li>
-	<li><b>Zeilenfarbe</b> schattiert jede zweite Zeile. Die Farbe
-	kann im Menü <green>Optionen--<gt>Hintergrundfabe--<gt>Zeilenfarbe Kreuztabelle</green>
-	gewählt werden.</li>
+  <li><b>Punktzahlen gruppieren</b> fügt eine Leerzeile nach
+  Spielern mit gleicher Punktzahl ein.</li>
+  <li><b>Farbinformation</b> zeigt w/b im Schweizer System. Dies
+  zeigt an, ob der Spieler Weiß (w) oder Schwarz (b) hatte.</li>
+  <li><b>Zeilenfarbe</b> schattiert jede zweite Zeile. Die Farbe
+  kann im Menü <green>Optionen--<gt>Hintergrundfabe--<gt>Zeilenfarbe Kreuztabelle</green>
+  gewählt werden.</li>
   </ul>
 
   <h4>Berechnung der Elo-Leistung</h4>
@@ -3757,7 +3747,7 @@ set helpText(D,GameList) {<h1>Das Partienlistenfenster</h1>
 
   <h3>Anmerkungen</h3>
   <ul>
-	
+  
   <li>Die Spalte <b>Land</b> enthält aktuell die letzten drei
   Buchstaben des Turnierortes (wenn der drittletzte ein Großbuchstabe
   ist und ein Leerzeichen vorausgeht). Die Seite <a Maintenance
@@ -4167,17 +4157,17 @@ set helpText(D,PGN) {<h1>PGN-Fenster</h1>
 
   <h3>Das Kontextmenu</h3>
   <ul>
-	 <li><term>Variante löschen:</term> löscht die aktuelle Variante</li>
-	 <li><term>Als erste Variante setzen:</term> verschiebt die aktuelle
-	   Variante an die erste Position aller Varianten auf dieser Ebene</li>
-	 <li><term>Variante als Partiefortsetzung:</term> macht die
-	 aktuelle Variante zur Partiefortsetzung und kennzeichnet die
-	 momentane Hauptfortsetzung als Variante</li>
-	 <li><term>Entfernen Züge ab Anfang</term> löscht alle Partiezüge</li>
-	 <li><term>Entfernen Züge bis Ende</term> löscht alle Züge ab dem
-	 aktuellen Zug</li>
-	 <li><term>Entfernen Kommentare</term> löscht alle Kommentare</li>
-	 <li><term>Entfernen Varianten</term> löscht alle Varianten </li>
+   <li><term>Variante löschen:</term> löscht die aktuelle Variante</li>
+   <li><term>Als erste Variante setzen:</term> verschiebt die aktuelle
+     Variante an die erste Position aller Varianten auf dieser Ebene</li>
+   <li><term>Variante als Partiefortsetzung:</term> macht die
+   aktuelle Variante zur Partiefortsetzung und kennzeichnet die
+   momentane Hauptfortsetzung als Variante</li>
+   <li><term>Entfernen Züge ab Anfang</term> löscht alle Partiezüge</li>
+   <li><term>Entfernen Züge bis Ende</term> löscht alle Züge ab dem
+   aktuellen Zug</li>
+   <li><term>Entfernen Kommentare</term> löscht alle Kommentare</li>
+   <li><term>Entfernen Varianten</term> löscht alle Varianten </li>
   </ul>
 
   <p><footer>Aktualisiert: Scid vs. PC 4.10, Juli 2013</footer></p>
@@ -4497,23 +4487,23 @@ set helpText(D,TreeMasks) {<h1>Die Zugbaummasken</h1>
 
   <h3>Masken konfigurieren</h3>
   <ul>
-	<li><term>Marker</term> (1 und 2) ermöglichen das Anhängen von zwei grafischen
-	  Markierungen an einen Zug. Sie sind hauptsächlich für den Umgang
-	  mit Eröffnungsrepertoires gedacht. Die verfügbaren Möglichkeiten sind:
-	 <ul>
-	 <li> <img ::rep::_tb_include> Zug in Repertoire aufnehmen</li>
-	 <li> <img ::rep::_tb_exclude> Zug aus Repertoire ausschließen</li>
-	 <li> <img ::tree::mask::imageMainLine> Hauptfortsetzung</li>
-	 <li> <img tb_bkm> Lesezeichen</li>
-	 <li> <img ::tree::mask::imageWhite> Weiß</li>
-	 <li> <img ::tree::mask::imageBlack> Schwarz</li>
-	 <li> <img tb_new> neue Zugfolge</li>
-	 <li> <img tb_rfilter> mit weiterer Analyse zu überprüfen</li>
-	 <li> <img tb_msearch> zu trainieren</li>
-	 <li> <img tb_help_small> zweifelhafte Zugfolge</li>
-	 <li> <img tb_cut> zu entfernen</li>
-	 <li> keine Markierung</li>
-	 </ul>
+  <li><term>Marker</term> (1 und 2) ermöglichen das Anhängen von zwei grafischen
+    Markierungen an einen Zug. Sie sind hauptsächlich für den Umgang
+    mit Eröffnungsrepertoires gedacht. Die verfügbaren Möglichkeiten sind:
+   <ul>
+   <li> <img ::rep::_tb_include> Zug in Repertoire aufnehmen</li>
+   <li> <img ::rep::_tb_exclude> Zug aus Repertoire ausschließen</li>
+   <li> <img ::tree::mask::imageMainLine> Hauptfortsetzung</li>
+   <li> <img tb_bkm> Lesezeichen</li>
+   <li> <img ::tree::mask::imageWhite> Weiß</li>
+   <li> <img ::tree::mask::imageBlack> Schwarz</li>
+   <li> <img tb_new> neue Zugfolge</li>
+   <li> <img tb_rfilter> mit weiterer Analyse zu überprüfen</li>
+   <li> <img tb_msearch> zu trainieren</li>
+   <li> <img tb_help_small> zweifelhafte Zugfolge</li>
+   <li> <img tb_cut> zu entfernen</li>
+   <li> keine Markierung</li>
+   </ul>
   </li>
   <br>
   <li><term>Farbe</term> Ermöglicht für eine persönliche Hervorhebung
@@ -5182,8 +5172,8 @@ set helpText(D,Analysis) {<h1>Das Analysefenster</h1>
   <li><b>Eröffnungsfehler finden</b> Nur nach Eröffnungsfehlern suchen
   (bis zur angegebenen Zugzahl)</li>
   <li><b>Taktische Übungen markieren</b> Dies kann benutzt werden, um
-	Übungen für die Trainingsfunktion <a FindBestMove>Finde den besten
-	Zug</a> zu erstellen (nur UCI).</li>
+  Übungen für die Trainingsfunktion <a FindBestMove>Finde den besten
+  Zug</a> zu erstellen (nur UCI).</li>
  </ul>
   <p><i>Informatorwerte sind
   ebenfalls <run configInformant><green>konfigurierbar</green></run>.</i></p>
@@ -5411,12 +5401,12 @@ set helpText(D,CalVar) {<h1>Berechnung von Varianten</h1>
   </p>
   <p>Die Konfiguration ist ziemlich einfach und umfaßt
   <ul>
-	 <li>* Das zu verwendende UCI-Schachprogramm</li>
-	 <li>* <b>Anfängliche Berechnungszeit</b> - Anzahl der Sekunden
-	 für das Schachprogramm für die Stellungsanalyse</li>
-	 <li>* <b>Berechnungszeit Varianten</b> - Anzahl der Sekunden für
-	 das Schachprogramm, um jede vom Anwender angegebene Variante zu
-	 analysieren</li>
+   <li>* Das zu verwendende UCI-Schachprogramm</li>
+   <li>* <b>Anfängliche Berechnungszeit</b> - Anzahl der Sekunden
+   für das Schachprogramm für die Stellungsanalyse</li>
+   <li>* <b>Berechnungszeit Varianten</b> - Anzahl der Sekunden für
+   das Schachprogramm, um jede vom Anwender angegebene Variante zu
+   analysieren</li>
   </ul></p>
   <p>Ein Klick auf Start beginnt die Übung.
   </p>
@@ -5455,112 +5445,125 @@ set helpText(D,EPD) {<h1>EPD-Dateien</h1>
   Text ist in freier Form, besteht aber normalerweise aus <a EPD
   opcodes>Opcodes</a> oder Feldern, die durch Semikolons getrennt
   sind, die aber in getrennten Zeilen im EPD-Fenster von Scid
-  angezeigt werden. <i>Semikolons als Text werden als "\s"
-  gespeichert, um sie von den Semikolonzeichen für das Feldende zu
-  unterscheiden.</i></p>
+  angezeigt werden.</p>
 
   <p>EPD-Dateien haben mehrere Anwendungszwecke, werden aber
   vermutlich am häufigsten für Sammlungen von Puzzles, Endspielstudien
   und taktischen Aufgaben benutzt.
-
-  Scid stellt eine einfache Funktion für den <a Export EPD>Export nach
-  EPD</a> zur Verfügung. </p>
 
   <p>Es können bis zu vier EPD-Dateien gleichzeitig geöffnet werden.
   Das Öffnen einer EPD-Datei mit doppelt vorhandenen oder fehlerhaften
   Stellungen wird diese stillschweigend löschen. Mangelhaft gebildete
   oder standardunübliche Operanden werden klaglos akzeptiert.</p>
 
-  <p><i>Scid vs PC speichert nicht länger automatisch (aber aus dem
-  Menü <green><b>Datei--<gt>Speichern</b></green>). Den aktuellen Speicherzustand
-  kann man in der EPD-Statusleiste sehen.
-  </i></p>
-
   <h3>Durch EPD-Dateien navigieren</h3>
-  <p>Um durch die Stellungen in einer EPD-Datei zu stöbern, benutzen
-  Sie die Tasten <b>Strg+Pfeil abwärts</b>,
-  <b>Strg+Pfeil aufwärts</b>, <b>Strg+Pos1</b>
-  oder <b>Strg+Ende</b>. Diese Befehle bewegen zur nächsten
-  bzw. vorhergehenden oder ersten bzw. letzten Stellung in der Datei,
-  löschen die aktuelle Partie und setzen die Anfangsstellung.
-  </p>
+
+  <p>Um durch die Stellungen in einer EPD-Datei zu stöbern, klicken
+  Sie einfach auf eine beliebige Stellung oderbenutzen Sie die Tasten
+  <b>Strg+Pfeil abwärts</b>, <b>Strg+Pfeil aufwärts</b>,
+  <b>Strg+Pos1</b> oder <b>Strg+Ende</b>. Diese Befehle bewegen zur
+  nächsten bzw. vorhergehenden oder ersten bzw. letzten Stellung in
+  der Datei, verwerfen etwaige Änderungen an der aktuellen Partie und
+  setzen die Anfangsstellung der Testpartie.</p>
 
   <h3>Kommentierung</h3>
-  <p>EPD-Dateien können im EPD-Fenster automatisch durch das
-  Menü <green><b>Werkzeuge--<gt>Stellungen kommentieren</b></green>
-  mit Kommentaren versehen werden. Ein Dialog fragt nach der
-  Analysedauer und anschließend startet das erste
-  Analyseschachprogramm. Ein Anhalten des Analyseprogramms beendet die
-  Kommentierung. Die verwendeten EPD-Opcodes
-  sind <b>acd</b>, <b>acn</b>, <b>ce</b>, <b>dm</b> und <b>pv</b>.
-  </p>
-  <p><i>Die Kommentierung entfernt zuerst alle Opcodes aus allen
-  Stellungen in der EPD-Datei, die in der Bearbeitung verwendet
-  werden. Um irgendwelche Änderungen, die während der Kommentierung
-  durchgeführt wurden, rückgängig zu machen, schließen Sie einfach das
-  EPD-Fenster, ohne zu speichern oder die Datei zu schließen.
-  </i></p>
+	
+  <p>EPD-Dateien können im EPD-Fenster über das
+  Menü <green><b>Werkzeuge--<gt>Stellungen analysieren</b></green>
+  analysiert werden. Ein Dialog fragt nach der Engine, der Analysezeit
+  und dem Analysemodus, der gestartet wird. Ein Anhalten der Engine
+  beendet die Analyse.</p>
+
+  <p>Die beiden Modi sind <b>Eval Best Moves</b> (Beste Züge bewerten)
+  und <b>Annotate</b> (Kommentieren). Beide Modi bedeuten, daß mit
+  einer Engine alle Stellungen durchlaufen werden. Bei "Beste Züge" -
+  die vorhandenen Kommentare werden nach einem "bm"-Eintrag abgesucht
+  - wird geschaut, ob diese mit der Computerbewertung
+  übereinstimmen. Es wird dann bei der Ergänzung eine Anzahl von
+  korrekten besten Zügen angezeigt. Der Modus "Kommentieren" speichert
+  einfach die Engine-Bewertung in verschiedenen Opcodes, ohne daß der
+  beste Zug geprüft wird. Die verwendeten Opcodes sind <b>acd</b>,
+  <b>acn</b>, <b>ce</b>, <b>dm</b> und <b>pv</b>. Und zu guter Letzt
+  können diese beiden Modi auch zusammen laufen.</p>
+
+  <p><i>Der Kommentierungsmodus entfernt zuerst obige Opcodes aus
+  allen Stellungen. Um irgendwelche durchgeführten Änderungen
+  rückgängig zu machen, schließen Sie einfach das Fenster, ohne die
+  Datei zu speichern.</i></p>
 
   <h3>Analysen einfügen</h3>
-  <p>Wenn ein Analyseschachprogramm läuft, kann man eine Stellung
-  kommentieren, indem man den Menüpunkt <green><b>Bearbeiten--<gt>Analyse
-  einfügen</b></green> auswählt. Beachten Sie, daß vorhandene
-  Operanden vor dem Einfügen nicht automatisch entfernt werden.
-  </p>
+
+  <p>Wählen Sie <green><b>Werkzeuge--<gt>Analyse einfügen</b></green>
+  (oder Strg-P), um eine einzelne Stellung zu kommentieren. Dies
+  überschreibt etwaige vorherige Opcodes. Ein Drücken der Leertaste im
+  Listenfeld startet bzw. stoppt das Analyseprogramm.</p>
 
   <h3>EPD-Opcodes entfernen</h3>
+
   <p>EPD-Dateien, die Sie im Internet finden, können Felder enthalten,
   die Sie nicht interessieren. Sie können viel Platz in der Datei
   verschwenden. Beispielsweise könnte eine EPD-Datei mit
   Computerbewertungen die Opcodes ce, acd, acn, pm, pv und id
-  enthalten, aber Sie bräuchten nur die Felder ce und pv.
-  </p>
+  enthalten, aber Sie bräuchten nur die Felder ce und pv.</p>
 
   <p>Sie können aus allen Stellungen in der EPD-Datei den EPD-Opcode
-  entfernen, indem Sie den Menübefehl <green>Bearbeiten--<gt>Opcode
-  entfernen</green> benutzen.
-  </p>
+  entfernen, indem Sie den Menübefehl <green><b>Werkzeuge--<gt>Opcodes
+  entfernen</b></green> benutzen.</p>
 
   <h3>EPD-Felder sortieren</h3>
-  <p>Die EPD-Spezifikation fordert, daß Opcodes in sortierter
-  Reihenfolge erscheinen. Nach einem Editieren von EPD-Feldern können
-  Sie sie mit dem Menübefehl <green><b>Bearbeiten--<gt>Opcodes
-  sortieren</b></green> sortieren (dies betrifft nur die Operanden für
-  die aktuelle Stellung).
-  </p>
+
+  <p>Die EPD-Spezifikation fordert, daß Opcodes sortiert sind. Nach
+  einem Editieren von EPD-Feldern können Sie sie mit dem Menübefehl
+  <green><b>Werkzeuge--<gt>Opcodes sortieren</b></green>
+  sortieren.</p>
 
   <h3>Eine neue Stellung hinzufügen</h3>
-  <p>Mit dem Menübefehl <green><b>Bearbeiten--<gt>Neue Stellung
+
+  <p>Mit dem Menübefehl <green><b>Werkzeuge--<gt>Stellung
   hinzufügen</b></green> kann die im Hauptbrett aktuell enthaltene
   Stellung der EPD-Datei hinzugefügt werden. Man kann keine Stellung
   hinzufügen, die in der Datei bereits vorhanden ist. Ein solcher
-  Versuch wählt einfach diese Stellung aus.
-  </p>
+  Versuch wählt einfach diese Stellung aus.</p>
+
+  <p><i>Aus technischen Gründen gibt es keinen Befehl "Stellung
+  löschen". Um dies zu erreichen, muß man die EPD-Datei manuell mit
+  einem Texteditor überarbeiten.</i></p>
 
   <h3>Die tiefste Partiestellung finden</h3>
+
   <p>Man kann das Schachbrett zum tiefsten Halbzug in der aktuellen
   Partie aktualisieren, das auf eine Stellung in der aktuellen
-  EPD-Datei paßt, indem man den
-  Menübefehl <green><b>Werkzeuge--<gt>Tiefste Partiestellung
-  finden</b></green> auswählt.
-  </p>
+  EPD-Datei paßt, indem man den Menübefehl
+  <green><b>Werkzeuge--<gt>Tiefste Partiestellung finden</b></green>
+  auswählt.</p>
 
   <h3>Die Statusleiste im EPD-Fenster</h3>
+
   <p>Die Statusleiste in jedem EPD-Fenster zeigt
   <ul>
-  <li>- den Dateinamen</li>
   <li>- ob die Datei im Nur-Lesen-Zustand ist oder geändert wurde</li>
   <li>- die Anzahl der Stellungen in der Datei </li>
   <li>- gültige Züge ab der aktuellen Stellung, die zu einer anderen
   Stellung in dieser EPD-Datei führen</li>
   </ul>
 
-  <h3>Nach EPD exportieren</h3>
-  <p>Scid vs. PC stellt eine einfache Funktion <a Export EPD>Nach EPD
-  exportieren</a> zur Verfügung.
-  </p>
+  <h3>Weitere Hinweise</h3>
+
+  <p>Scid vs. PC stellt eine einfache Funktion <a Export EPD>Export
+  nach EPD</a> zur Verfügung.</p>
+	
+  <p>Semikolons als Text werden als "\s" gespeichert, um sie von
+  Semikolonzeichen für das Feldende zu unterscheiden.</p>
+
+  <p>Scid vs PC speichert Änderungen nicht länger automatisch, sondern
+  mittels </i><green><b>Datei--<gt>Speichern</b></green> (oder
+  control-s).</p>
+
+  <p>Der aktuelle Speicherstatus ist in der EPD-Statusleiste
+  sichtbar.</p>
 
   <h3><name opcodes>Standard von EPD-Opcodes</name></h3>
+
   <ul>
   <li> <b>acd</b> durchsuchte Tiefe (analysis count: depth
   searched)</li>
@@ -5568,6 +5571,7 @@ set helpText(D,EPD) {<h1>EPD-Dateien</h1>
   of nodes searched)</li>
   <li> <b>acs</b> Suchdauer in Sekunden (analysis count: search time
   in seconds)</li>
+  <li> <b>am</b> schlechte Züge (avoid move)</li>
   <li> <b>bm</b> beste Züge (best moves): Züge, die aus einem bestimmten
   Grund als am besten eingestuft werden</li>
   <li> <b>ce</b> (Centipawn evaluation) Bewertung in hundertstel
@@ -5584,7 +5588,11 @@ set helpText(D,EPD) {<h1>EPD-Dateien</h1>
   <li> <b>pv</b> beste Partiefortsetzung (predicted variation)</li>
   </ul>
 
-  <p><footer>Aktualisiert: Scid vs. PC 4.21, Juli 2019</footer></p>
+  <p> <url
+  https://www.chessprogramming.org/Extended_Position_Description#Opcode_mnemonics>Chessprogramming
+  Opcodes</url></p>
+
+  <p><footer>Aktualisiert: Scid vs. PC 4.21, Dezember 2019</footer></p>
 }
 
 set helpTitle(D,Email) "Das E-Mail-Fenster"
@@ -6217,7 +6225,7 @@ set helpText(D,Formats) {<h1>Die Dateiformate von Scid</h1>
   Partiendatei (.sg4).
   </p>
   <p><i>Scid weist für einige Datenfelder nur drei Bytes zu. Das
-	bedeutet, daß die höchste Partienanzahl 16.777.214 ist.</i>
+  bedeutet, daß die höchste Partienanzahl 16.777.214 ist.</i>
   </p>
 
   <h3>Die Indexdatei (.si4)</h3>
@@ -6238,10 +6246,10 @@ set helpText(D,Formats) {<h1>Die Dateiformate von Scid</h1>
   Namen. Die Grenzen sind:
   </p>
   <ul><ul>
-	<li>Spielernamen: 2^20 - 1</li>
-	<li>Turniernamen: 2^19 - 1</li>
-	<li>Ortsnamen: 2^19 - 1</li>
-	<li>Rundennamen: 2^18 - 1</li>
+  <li>Spielernamen: 2^20 - 1</li>
+  <li>Turniernamen: 2^19 - 1</li>
+  <li>Ortsnamen: 2^19 - 1</li>
+  <li>Rundennamen: 2^18 - 1</li>
   </ul></ul>Sie sind in der Datei <b>namebase.h</b> festgelegt. Die
   Namensdatei ist üblicherweise die kleinste der drei Datenbankdateien.
   </p>
@@ -6390,10 +6398,10 @@ set helpText(D,Options) {<h1>Optionen und Einstellungen</h1>
   </p>
   <p>Die Basisinstallation hat die Form:
   <ul>
-	<li>Kopieren Sie das Thema in eines der Tk-Bibliotheksverzeichnisse (z.B. /usr/lib/tk8.6).</li>
-	<li>(oder) source myThemes.tcl</li>
-	<li>package require ttk::theme::MyTheme</li>
-	<li>ttk::style theme use MyTheme</li>
+  <li>Kopieren Sie das Thema in eines der Tk-Bibliotheksverzeichnisse (z.B. /usr/lib/tk8.6).</li>
+  <li>(oder) source myThemes.tcl</li>
+  <li>package require ttk::theme::MyTheme</li>
+  <li>ttk::style theme use MyTheme</li>
   </ul>Diese Anweisungen können in Scids GUI eingebunden oder in Scid
   vs PCs Befehlszeilenstartfenster ausgegeben werden.
   </p>
@@ -6949,13 +6957,17 @@ set helpText(D,ComputerGame) {
   eingestellt ist, schwächt dies das Schachprogramm. Auf der anderen
   Seite könnte das Programm sofort ziehen, falls der Spieler den Zug
   macht, den es während seiner Bedenkzeit analysiert hatte.</li>
-  <li><b>Trainer schaut zu (Coach is Watching)</b> öffnet ein
-  Dialogfenster, in welchem die Rücknahme eines Zuges angeboten wird,
-  falls der Spieler einen groben Fehler gemacht hat (laut den
-  Bewertungen des Schachprogramms für seinen letzten Zug).</li>
+
+  <li><b>Trainer schaut zu</b> bietet dem Spieler an, einen Zug
+  zurückzunehmen, falls der Computer meint, es sei ein grober
+  Fehler. Der benutzte Fehlerwert ist derjenige, der vom Informator
+  als "Schwacher Zug" (und nicht als "Fehler") bezeichnet wird. Dies
+  kann im Informatorfenster konfiguriert werden, wo man auch die
+  Einstellung für "Partie wird gewonnen" verändern kann. Oberhalb
+  dieser Schwelle werden grobe Fehler nicht mehr beachtet.</li>
   </ul>
 
-  <p><footer>Aktualisiert: Scid vs. PC 4.7 Januar 2012</footer></p>
+  <p><footer>Aktualisiert: Scid vs. PC 4.21 Dezember 2019</footer></p>
 }
 
 set helpTitle(D,Correspondence) "Fernschach"
@@ -7824,7 +7836,7 @@ set helpText(D,TacticsTrainer) {<h1>"Matt in ..n.."-Puzzle</h1>
   ist, um dort Ihre eigenen Datenbanken aufzubewahren. Dies führt
   beim Start zu einem langsamen Ablauf oder das Programm bleibt
   hängen.</i></p>
-	
+  
   <h3>Konfiguration</h3>
   <p>Der Schieberegler für die <term>Analysezeit der Engine</term>
   begrenzt die Zeit für Toga, um das Puzzle (das spontan erstellt
@@ -8214,7 +8226,7 @@ set helpText(D,FICSwidget) {<h1>FICS benutzen</h1>
   macht. "Bedenkzeiten speichern" speichert die Zugzeiten als
   Kommentare (in der <a Graphs Score>Bewertungsgrafik</a> sichtbar).
   </p>
-	
+  
   <p>Es gibt auch Optionen, um Initialisierungsbefehle zu
   konfigurieren und um die obersten drei Schaltflächen
   anzupassen. Diese letztere Möglichkeit erfordert ein kleines bißchen
@@ -8608,9 +8620,9 @@ set helpText(D,InputEngine) {<h1>Konsole DGT/Input Engine</h1>
   sollte das Brett natürlich Züge für beide Seiten senden. Für ein
   aktuelles Spiel jedoch sollten die vom Gegner gemachten Züge
   ignoriert werden, da Scid sie sonst als "illegal moves" meldet.</p>
-	
+  
   <p>Das kleine Brett rechts zeigt die aktuelle Stellung.</p>
-	
+  
   <p>Wenn ein Zug ausgeführt wurde, wird im Bereich zwischen den
   Schaltflächen und dem kleinen Brett der auf dem externen Brett
   ausgeführte Zug in figuriner langer algebraischer Notation
@@ -8628,7 +8640,7 @@ set helpText(D,InputEngine) {<h1>Konsole DGT/Input Engine</h1>
   als <term>FEN</term>, was dann mit Scids interner Darstellung
   verglichen wird. Abweichuungen werden in der Konsole angezeigt und
   lösen einen Warnton aus.</p>
-	
+  
   <p>Im Falle daß Scid und externes Brett nicht synchronisieren, kann
   die Schaltfläche <term>Synchronisieren</term> verwendet werden. Eine
   neue Partie wird erstellt und die Ausgangsstellung wird gemäß der
@@ -8653,11 +8665,11 @@ set helpText(D,InputEngine) {<h1>Konsole DGT/Input Engine</h1>
   <p>Der Stellungsaufbaumodus wird durch das Entfernen beider Könige
   vom Brett aufgerufen. In diesem Modus ist der <b>Zugbereich</b> gelb
   gefärbt und zeigt den weißen König und den Text <b>Setup</b>.</p>
-	
+  
   <p>Im Einrichtungsmodus kann jede gültige Stellung auf dem externen
   Brett aufgebaut werden. Scids interne Darstellung wird jedoch nicht
   aktualisiert, bis sie beendet ist.</p>
-	
+  
   <p>Um den Einrichtungsmodus zu beenden, müssen beide Könige auf das
   Brett zurückgestellt werden. Beachten Sie, daß der König der am Zug
   befindlichen Seite <b>zuletzt</b> zurückgestellt werden muß, das
@@ -8685,13 +8697,13 @@ set helpText(D,InputEngine) {<h1>Konsole DGT/Input Engine</h1>
   Reihenfolge. Der Zugbereich wird schwarz und weiß gefärbt und zeigt
   das Ergebnis.</li>
   </ul>
-  
+
   <p>In jedem Fall erscheint der Dialog <term>Speichern/Partie
   hinzufügen</term>, um die Partiekennzeichen anzugeben und die Partie
   in der aktuellen Datenbank zu speichern.</p>
 
   <h3>Eine neue Partie beginnen</h3>
-	
+
   <p>Eine neue Partie kann durch Aufruf des Einrichtungsmodus' (d.h.,
   durch Entfernen beider Könige) und durch Erstellen der
   Anfangsposition begonnen werden. Um anzuzeigen, daß Scid den Aufruf
