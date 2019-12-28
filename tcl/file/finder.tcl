@@ -26,7 +26,7 @@ proc ::file::finder::Open {} {
 
   $w.menu add cascade -label FinderFile -menu $w.menu.file
   menu $w.menu.file
-  $w.menu.file add command -label {Open Directory} -command ::file::finder::OpenDIR
+  $w.menu.file add command -label "$::tr(FinderCtxOpen) $::tr(FinderDir)" -command ::file::finder::OpenDIR
   $w.menu.file add command -label FinderFileClose -command "destroy $w"
 
   bind $w <Control-o> ::file::finder::OpenDIR
@@ -136,7 +136,6 @@ proc ::file::finder::Refresh {{newdir ""}} {
   $w.b.help configure -state disabled
   $w.b.sub configure -state disabled
   $w.b.stop configure -state normal
-  catch {grab $w.b.stop}
   $t configure -state normal
   update
 
@@ -279,13 +278,11 @@ proc ::file::finder::Refresh {{newdir ""}} {
 
   $w.d.label configure -text $data(dir)
 
-  catch {grab release $w.b.stop}
   $w.b.stop configure -state disabled
   $w.b.help configure -state normal
   $w.b.close configure -state normal
   $w.b.sub configure -state normal
   unbusyCursor .
-
 }
 
 proc ::file::finder::contextMenu {win fullPath x y} {
@@ -516,8 +513,12 @@ proc ::file::finder::GetFiles {dir {len -1}} {
   if {$len < 0} {
     set len [expr {[string length $dir] + 1} ]
   }
-
-  foreach f [glob -nocomplain [file join $dir *]] {
+  set files {}
+  # No read permissions throw errors :(
+  catch {
+    set files [glob -nocomplain [file join $dir *]]
+  }
+  foreach f $files {
     if {[file isdir $f]} {
       lappend dlist $f
     } elseif {[file isfile $f]} {
@@ -575,20 +576,8 @@ proc ::file::finder::GetFiles {dir {len -1}} {
 }
 
 proc ::file::finder::OpenDIR {} {
-  # borrowed from file/maint.tcl
-  set w .finderdir ;#.bdesc
-  if {[winfo exists $w]} { return }
-  toplevel $w
-  wm title $w "Scid: Open"
-  wm withdraw $w
-
-  set font font_Small
-  entry $w.entry -width 50 -relief sunken 
-  pack $w.entry -side top -pady 4
-  frame $w.b
-  dialogbutton $w.b.ok -text OK -command {
-    if {[file isdir [.finderdir.entry get]]} {
-      set dir [.finderdir.entry get]
+  set dir [tk_chooseDirectory -parent .finder -initialdir $::initialDir(file) -title "$::tr(FinderCtxOpen) $::tr(FinderDir)"]
+  if {$dir != ""} {
       # silly hacks to fix up finder bug with "~"
       if {$dir == {~}} {
         set dir $::env(HOME)
@@ -597,20 +586,6 @@ proc ::file::finder::OpenDIR {} {
       }
       ::file::finder::Refresh $dir
     }
-    grab release .finderdir
-    destroy .finderdir
-  }
-  dialogbutton $w.b.cancel -text $::tr(Cancel) -command "grab release $w; destroy $w"
-  pack $w.b -side bottom -fill x
-  pack $w.b.cancel $w.b.ok -side right -padx 2 -pady 2
-  bind $w.entry <Return> "$w.b.ok invoke"
-  bind $w <Escape> "$w.b.cancel invoke"
-  focus $w.entry
-
-  placeWinOverParent $w .finder
-  wm state $w normal
-  wm resizable $w 0 0
-  catch {grab $w}
 }
 
 ### end of finder.tcl

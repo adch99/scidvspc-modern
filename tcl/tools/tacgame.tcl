@@ -499,7 +499,7 @@ namespace eval tacgame {
 
     pack [label $w.fbuttons.space -text {}]
 
-    button $w.fbuttons.resign -text [tr Resign] -command {
+    button $w.fbuttons.resign -text [tr CCResign] -command {
       if {[::board::opponentColor] == {white}} {
         sc_game tags set -result 1
       } else {

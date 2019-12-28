@@ -328,7 +328,7 @@ proc ::maint::ChangeBaseDescription {} {
   set font font_Small
   entry $w.entry -width 50 -relief sunken 
   $w.entry insert end [sc_base description]
-  pack $w.entry -side top -pady 4
+  pack $w.entry -side top -pady 5 -padx 5
   frame $w.b
   dialogbutton $w.b.ok -text OK -command {
     catch {sc_base description [.bdesc.entry get]}
