@@ -531,7 +531,7 @@ namespace eval epd {
     set w .epdAnnotateConfig
 
     toplevel $w
-    wm title $w "Annotate EPD"
+    wm title $w "Analyze EPD"
     placeWinOverParent $w .epd$id
 
     frame $w.seconds
@@ -566,7 +566,7 @@ namespace eval epd {
       set i \[$w.engine.combo current\]
       set isUCI \[lindex \[lindex \$engines(list) \$i\] 7\]
       if {!\$isUCI} {
-        tk_messageBox -type ok -icon info -title Oops -message {Only UCI engines supported}
+        tk_messageBox -type ok -icon info -title Oops -message {Only UCI engines supported} -parent .epdAnnotateConfig
         return
       }
       set name \[$w.engine.combo get\]
@@ -576,7 +576,7 @@ namespace eval epd {
     "
     dialogbutton $w.buttons.cancel -text $tr(Cancel) -command "destroy $w"
     pack $w.buttons -side bottom -padx 5 -pady 5
-    pack $w.buttons.ok $w.buttons.cancel -side left -padx 5
+    pack $w.buttons.ok $w.buttons.cancel -side left -padx 10
     bind $w <F1> { helpWindow EPD }
     bind $w <Escape> "$w.buttons.cancel invoke"
   }
@@ -671,9 +671,12 @@ namespace eval epd {
     }
 
     if {$epdAnnotation && $epdAnnotateMode > 0} {
-      set result "Result: $epdEngineName ($epdDelay secs/move): Best moves found $bestMovesFound / $bestMovesNoted"
+      set result "Result $epdEngineName ($epdDelay secs/move): Best moves found $bestMovesFound / $bestMovesNoted"
       puts $result
       $w.bottom.status configure -text $result
+      if {$epdAnnotateMode == 2} {
+	$w.text insert end "\n$result"
+      }
       set epdAnnotation 0
     }
   }
