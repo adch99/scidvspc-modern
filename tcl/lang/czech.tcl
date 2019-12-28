@@ -722,6 +722,8 @@ translate C FinderCtxCopy {Copy}
 translate C FinderCtxMove {Move}
 # ====== TODO To be translated ======
 translate C FinderCtxDelete {Delete}
+# ====== TODO To be translated ======
+translate C FinderDirOpen {Open Directory}
 
 # Player finder:
 menuText C PListFile "Soubor" 0
@@ -2137,6 +2139,8 @@ translate C AnalPosition {Analyze Positions}
 translate C StripOpcodes {Strip Opcodes}
 # ====== TODO To be translated ======
 translate C NoMoves {No moves from this position}
+# ====== TODO To be translated ======
+translate C CountBestMoves {Count Best Moves}
 
 }
 

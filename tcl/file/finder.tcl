@@ -26,7 +26,7 @@ proc ::file::finder::Open {} {
 
   $w.menu add cascade -label FinderFile -menu $w.menu.file
   menu $w.menu.file
-  $w.menu.file add command -label "$::tr(FinderCtxOpen) $::tr(FinderDir)" -command ::file::finder::OpenDIR
+  $w.menu.file add command -label "$::tr(FinderDirOpen)" -command ::file::finder::OpenDIR
   $w.menu.file add command -label FinderFileClose -command "destroy $w"
 
   bind $w <Control-o> ::file::finder::OpenDIR

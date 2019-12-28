@@ -655,6 +655,8 @@ translate D FinderCtxBackup {Sicherungskopie}
 translate D FinderCtxCopy {Kopieren}
 translate D FinderCtxMove {Verschieben}
 translate D FinderCtxDelete {Löschen}
+# ====== TODO To be translated ======
+translate D FinderDirOpen {Open Directory}
 
 # Player finder:
 menuText D PListFile "Datei" 0
@@ -1756,6 +1758,8 @@ translate D FindPos {Tiefste Partiestellung finden}
 translate D AnalPosition {Stellungen analysieren}
 translate D StripOpcodes {Opcodes entfernen}
 translate D NoMoves {Keine Züge ab dieser Stellung}
+# ====== TODO To be translated ======
+translate D CountBestMoves {Count Best Moves}
 
 }
 

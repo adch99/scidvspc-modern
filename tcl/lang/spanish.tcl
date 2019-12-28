@@ -692,6 +692,8 @@ translate S FinderCtxBackup {Copia de seguridad (Backup)}
 translate S FinderCtxCopy {Copia}
 translate S FinderCtxMove {Jugada}
 translate S FinderCtxDelete {Borrar}
+# ====== TODO To be translated ======
+translate S FinderDirOpen {Open Directory}
 
 # Player finder:
 menuText S PListFile "Archivo" 0
@@ -1798,6 +1800,8 @@ translate S AnalPosition {Analyze Positions}
 translate S StripOpcodes {Strip Opcodes}
 # ====== TODO To be translated ======
 translate S NoMoves {No moves from this position}
+# ====== TODO To be translated ======
+translate S CountBestMoves {Count Best Moves}
 
 }
 # end of spanish.tcl
