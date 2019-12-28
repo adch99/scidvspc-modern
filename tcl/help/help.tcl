@@ -3089,19 +3089,19 @@ set helpText(EPD) {<h1>EPD Files</h1>
   the current game and setting the scratch game's start position.
   </p>
 
-  <h3>Annotating EPD Files</h3>
+  <h3>Analyzgin EPD Files</h3>
   <p>
   EPD files can be analyzed with <b>Tools--<gt>Analyze Positions</b>.
   A dialogue will ask for the Engine, Analysis Time and Analysis Mode, which will start.
   Pausing the analysis engine will terminate analysis.
   </p>
-  <p>The two modes are <b>Evaluate Best Moves</b>, and <b>Annotate</b>. Both modes involve running through
-  all positions with an engine. In Best Moves - the existing comments are scanned for a 'bm' field, and
+  <p>The two modes are <b>Count Best Moves</b> and <b>Annotate</b>. Both modes involve analyzing
+  all positions with an engine. In Best Moves - the existing comments are scanned for 'bm' or 'am' fields, and
 seeing if this matches the computer evaluation, showing a tally of correct bestmoves at the completion.
   Annotate mode simply stores the engines evaluation in several opcodes, without checking the best move.
   The opcodes used are <b>acd</b>, <b>acn</b>, <b>ce</b>, <b>dm</b> and <b>pv</b>.
   Finally, both these modes can be run together, in which event an additional
-  'engine' opcode will be written, indicating test success, fail or no-result.
+  'engine' opcode will be written - indicating test success, fail or no-result - and the result stored in the last EPD position.
   </p>
   <p><i>
   Annotate mode will first strip out the above opcodes from all positions.
