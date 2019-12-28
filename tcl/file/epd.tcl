@@ -53,32 +53,37 @@ namespace eval epd {
     set find [$entry get]
     set i [$lb curselect]
     set size [$lb size]
-    set found {}
-    busyCursor . ; update
-    while {$i < $size && $found == {}} {
-      $lb selection clear 0 end
-      $lb selection set [incr i]
-      event generate $lb <<ListboxSelect>>     
-      update idletasks
-      # puts [sc_epd get $id]
-	set found [$text search -regexp -nocase -- $find 0.0]
+    set found 0
+    # busyCursor . ; update
+    while {[incr i] < $size && !$found} {
+      sc_epd load $id $i
+      set found [regexp $find [sc_epd get $id]]
     }
-    unbusyCursor .
-    $text tag remove Highlight 1.0 end
+    # unbusyCursor .
 
-    if {$found == {}} {
-      flashEntryBox $entry
+    if {!$found} {
+      set i 0
+      # allows us to find matches in entry 0 
     } else {
-      if {[ regexp {(.*)\.(.*)} $found t1 line char]} {
-	$text see $found
-	# find the length of matching text
-	regexp -nocase -- $find [$text get $line.0 $line.end] matchVar
-	set length [string length $matchVar]
-	if {$length < 1} {
-	  set length 1
-	}
-	$text tag add Highlight $found $line.[expr $char + $length]
+      incr i -1
+    }
+    $text tag remove Highlight 1.0 end
+    $lb selection clear 0 end
+    $lb selection set $i
+    event generate $lb <<ListboxSelect>>
+    update idletasks
+    set found [$text search -regexp -nocase -- $find 0.0]
+    if {[ regexp {(.*)\.(.*)} $found t1 line char]} {
+      $text see $found
+      # find the length of matching text
+      regexp -nocase -- $find [$text get $line.0 $line.end] matchVar
+      set length [string length $matchVar]
+      if {$length < 1} {
+	set length 1
       }
+      $text tag add Highlight $found $line.[expr $char + $length]
+    } else {
+      flashEntryBox $entry
     }
   }
 
@@ -206,7 +211,7 @@ namespace eval epd {
     $w.menu.help add command -label "EPD [tr Help]" -underline 0 -acc "F1" -command "helpWindow EPD"
     $w.menu.help add command -label [tr HelpIndex] -underline 0 -command "helpWindow Index"
 
-    pack $w.bottom -side bottom -fill x
+    pack $w.bottom -side bottom -fill x -padx 5 -pady 3
     pack $w.grid -fill both -expand yes
     grid $w.text -in $w.grid -row 0 -column 0 -sticky news
     grid $w.ybar -in $w.grid -row 0 -column 1 -sticky news
