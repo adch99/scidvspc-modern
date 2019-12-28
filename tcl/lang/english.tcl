@@ -228,7 +228,7 @@ menuText E CCRetrieve "Retrieve Games" 0 {Retrieve games via external (Xfcc-)hel
 menuText E CCInbox "Process Inbox" 8 {Process all files in scids Inbox}
 menuText E CCSend "Send Move" 0 {Send your move via eMail or external (Xfcc-)helper}
 
-menuText E CCResign "Resign" 1 {Resign (not via eMail)}
+menuText E CCResign "Resign" 1 {Resign}
 menuText E CCClaimDraw "Claim Draw" 6 {Send move and claim a draw (not via eMail)}
 menuText E CCOfferDraw "Offer Draw" 1 {Send move and offer a draw (not via eMail)}
 menuText E CCAcceptDraw "Accept Draw" 0 {Accept a draw offer (not via eMail)}
