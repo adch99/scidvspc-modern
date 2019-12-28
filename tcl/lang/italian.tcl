@@ -754,6 +754,8 @@ translate I FinderCtxCopy {Copy}
 translate I FinderCtxMove {Move}
 # ====== TODO To be translated ======
 translate I FinderCtxDelete {Delete}
+# ====== TODO To be translated ======
+translate I FinderDirOpen {Open Directory}
 
 # Player finder:
 menuText I PListFile "File" 0
@@ -1974,6 +1976,8 @@ translate I AnalPosition {Analyze Positions}
 translate I StripOpcodes {Strip Opcodes}
 # ====== TODO To be translated ======
 translate I NoMoves {No moves from this position}
+# ====== TODO To be translated ======
+translate I CountBestMoves {Count Best Moves}
 
 }
 

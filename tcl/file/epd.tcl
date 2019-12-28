@@ -29,6 +29,7 @@ namespace eval epd {
   variable maxEpd
   variable stripField {}
   variable epdTimer
+  variable epdEngineName
   variable bestMoves {}
   variable epdNames
 
@@ -522,7 +523,7 @@ namespace eval epd {
   }
 
   proc configAnnotateEpd {id} {
-    global analysis engines epdAnnotateMode
+    global analysis engines epdAnnotateMode tr
 
     if {! [winfo exists .epd$id.text]} { return }
 
@@ -537,7 +538,7 @@ namespace eval epd {
     frame $w.engine
     frame $w.mode
 
-    label $w.seconds.label -text $::tr(AnnotateTime)
+    label $w.seconds.label -text $tr(AnnotateTime)
     spinbox $w.seconds.spDelay  -width 8 -textvariable ::epdDelay -from 1 -to 300 -increment 1 -validate all -vcmd {string is int %P}
 
     set values {}
@@ -548,11 +549,11 @@ namespace eval epd {
     ttk::combobox  $w.engine.combo -width 20 -state readonly -values $values
     # Todo - restore previous engine 
     $w.engine.combo current 0
-    label $w.engine.label -textvar ::tr(Engine)
+    label $w.engine.label -textvar tr(Engine)
 
-    radiobutton $w.mode.tally -variable epdAnnotateMode -value 1 -text "Eval Best Moves"
-    radiobutton $w.mode.annot -variable epdAnnotateMode -value 0 -text "Annotate"
-    radiobutton $w.mode.both  -variable epdAnnotateMode -value 2 -text "Both"
+    radiobutton $w.mode.tally -variable epdAnnotateMode -value 1 -text $tr(CountBestMoves)
+    radiobutton $w.mode.annot -variable epdAnnotateMode -value 0 -text $tr(Annotate)
+    radiobutton $w.mode.both  -variable epdAnnotateMode -value 2 -text $tr(Both)
 
     pack $w.engine $w.seconds $w.mode -side top -pady 5 -padx 5
 
@@ -563,12 +564,17 @@ namespace eval epd {
     frame $w.buttons
     dialogbutton $w.buttons.ok -text OK -command "
       set i \[$w.engine.combo current\]
+      set isUCI \[lindex \[lindex \$engines(list) \$i\] 7\]
+      if {!\$isUCI} {
+        tk_messageBox -type ok -icon info -title Oops -message {Only UCI engines supported}
+        return
+      }
       set name \[$w.engine.combo get\]
       destroy $w
       update
       ::epd::launchAnnotateEpd $id \$i \$name
     "
-    dialogbutton $w.buttons.cancel -text $::tr(Cancel) -command "destroy $w"
+    dialogbutton $w.buttons.cancel -text $tr(Cancel) -command "destroy $w"
     pack $w.buttons -side bottom -padx 5 -pady 5
     pack $w.buttons.ok $w.buttons.cancel -side left -padx 5
     bind $w <F1> { helpWindow EPD }
@@ -580,14 +586,16 @@ namespace eval epd {
 
   proc launchAnnotateEpd {id win name} {
     variable epdTimer
+    variable epdEngineName
     variable bestPV
     variable bestMoves
     global epdAnnotateMode epdAnnotation epdDelay
 
     set w .epd$id
+    set epdEngineName [string map {{ } _} $name]
 
     set epdAnnotation 1
-    $w.bottom.status configure -text "Analyzing with $name ($epdDelay secs/move)"
+    $w.bottom.status configure -text "Analyzing with $epdEngineName ($epdDelay secs/move)"
     update
 
     if {$epdAnnotateMode != 1} {
@@ -623,22 +631,33 @@ namespace eval epd {
       if {$epdAnnotateMode > 0} {
         # find Best PV. (bestMoves is updated in updateEpdWin)
         # TODO xboard
-	set bestPV [lindex $::analysis(lastHistory$win) 0]
-	if {$bestMoves != ""} {
-	  incr bestMovesNoted
-	}
-        if {[string match avoid* $bestMoves]} {
-          # Avoid moves
-          set bestMoves [string range $bestMoves 6 end] 
-	  if {[lsearch -exact $bestMoves $bestPV] == -1} {incr bestMovesFound}
-        } else {
-	  if {[lsearch -exact $bestMoves $bestPV] > -1} {incr bestMovesFound}
+        set status no-result
+        set bestPV [lindex $::analysis(lastHistory$win) 0]
+        if {$bestMoves != ""} {
+          incr bestMovesNoted
+          if {[string match avoid* $bestMoves]} {
+            # Avoid moves
+            set bestMoves [string range $bestMoves 6 end] 
+            if {[lsearch -exact $bestMoves $bestPV] == -1} {
+              incr bestMovesFound
+              set status success
+            } else {
+              set status fail
+            }
+          } else {
+            if {[lsearch -exact $bestMoves $bestPV] > -1} {
+              incr bestMovesFound
+              set status success
+            } else {
+              set status fail
+            }
+          }
         }
       }
       if {$epdAnnotateMode != 1} {
-	pasteAnalysis $id $win
-	storeEpdText $id
-	updateEpdWin $id
+        pasteAnalysis $id $win $status
+        storeEpdText $id
+        updateEpdWin $id
       }
 
       # Check analysis window has not been destroyed/paused
@@ -652,7 +671,7 @@ namespace eval epd {
     }
 
     if {$epdAnnotation && $epdAnnotateMode > 0} {
-      set result "Result: $name ($epdDelay secs/move): Best moves found $bestMovesFound / $bestMovesNoted"
+      set result "Result: $epdEngineName ($epdDelay secs/move): Best moves found $bestMovesFound / $bestMovesNoted"
       puts $result
       $w.bottom.status configure -text $result
       set epdAnnotation 0
@@ -673,7 +692,8 @@ namespace eval epd {
   ################################################################################
   ###  Annotate a single (current) EPD line in compliance with the EPD spec.
   ################################################################################
-  proc pasteAnalysis {id {win -1}} {
+  proc pasteAnalysis {id {win -1} {status {}}} {
+    variable epdEngineName
     global analysis
 
     set textwidget .epd$id.text
@@ -716,6 +736,9 @@ namespace eval epd {
     $textwidget insert insert "ce $ce\n"
     $textwidget insert insert "dm $dm\n"
     $textwidget insert insert "pv $analysis(lastHistory$win)\n"
+    if {$::epdAnnotateMode == 2 && $status != {}} {
+      $textwidget insert insert "$epdEngineName $status"
+    }
   }
 
   ################################################################################

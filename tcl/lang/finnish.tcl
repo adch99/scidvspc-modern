@@ -615,6 +615,8 @@ translate L FinderCtxBackup {Varmuuskopio}
 translate L FinderCtxCopy {Kopioi}
 translate L FinderCtxMove {Siirrä}
 translate L FinderCtxDelete {Poista}
+# ====== TODO To be translated ======
+translate L FinderDirOpen {Open Directory}
 
 # Player finder:
 menuText L PListFile "Pelaajan hakulaite" 0
@@ -1737,6 +1739,8 @@ translate L AnalPosition {Analyze Positions}
 translate L StripOpcodes {Strip Opcodes}
 # ====== TODO To be translated ======
 translate L NoMoves {No moves from this position}
+# ====== TODO To be translated ======
+translate L CountBestMoves {Count Best Moves}
 
 }
 # end of finnish.tcl

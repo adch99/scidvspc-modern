@@ -642,6 +642,8 @@ translate O FinderCtxBackup {Sikkerhetskopi}
 translate O FinderCtxCopy {Kopier}
 translate O FinderCtxMove {Flytt}
 translate O FinderCtxDelete {Slett}
+# ====== TODO To be translated ======
+translate O FinderDirOpen {Open Directory}
 
 # Player finder:
 menuText O PListFile "Fil" 0
@@ -1759,6 +1761,8 @@ translate O AnalPosition {Analyze Positions}
 translate O StripOpcodes {Strip Opcodes}
 # ====== TODO To be translated ======
 translate O NoMoves {No moves from this position}
+# ====== TODO To be translated ======
+translate O CountBestMoves {Count Best Moves}
 
 }
 # end of norsk.tcl

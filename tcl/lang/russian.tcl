@@ -660,6 +660,8 @@ translate R FinderCtxBackup {Дублировать}
 translate R FinderCtxCopy {Копировать}
 translate R FinderCtxMove {Передвинуть}
 translate R FinderCtxDelete {Удалить}
+# ====== TODO To be translated ======
+translate R FinderDirOpen {Open Directory}
 
 # Player finder:
 menuText R PListFile "Файл" 0
@@ -1820,6 +1822,8 @@ translate R AnalPosition {Analyze Positions}
 translate R StripOpcodes {Strip Opcodes}
 # ====== TODO To be translated ======
 translate R NoMoves {No moves from this position}
+# ====== TODO To be translated ======
+translate R CountBestMoves {Count Best Moves}
 
 }
 # end of russian.tcl

@@ -630,6 +630,7 @@ translate E FinderCtxBackup {Backup}
 translate E FinderCtxCopy {Copy}
 translate E FinderCtxMove {Move}
 translate E FinderCtxDelete {Delete}
+translate E FinderDirOpen {Open Directory}
 
 # Player finder:
 menuText E PListFile "Player Finder" 0
@@ -1732,6 +1733,7 @@ translate E FindPos {Find Deepest Game Position}
 translate E AnalPosition {Analyze Positions}
 translate E StripOpcodes {Strip Opcodes}
 translate E NoMoves {No moves from this position}
+translate E CountBestMoves {Count Best Moves}
 
 }
 # end of english.tcl

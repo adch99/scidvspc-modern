@@ -3100,7 +3100,8 @@ set helpText(EPD) {<h1>EPD Files</h1>
 seeing if this matches the computer evaluation, showing a tally of correct bestmoves at the completion.
   Annotate mode simply stores the engines evaluation in several opcodes, without checking the best move.
   The opcodes used are <b>acd</b>, <b>acn</b>, <b>ce</b>, <b>dm</b> and <b>pv</b>.
-  Finally, both these modes can be run together.
+  Finally, both these modes can be run together, in which event an additional
+  'engine' opcode will be written, indicating test success, fail or no-result.
   </p>
   <p><i>
   Annotate mode will first strip out the above opcodes from all positions.

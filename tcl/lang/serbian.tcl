@@ -800,6 +800,8 @@ translate Y FinderCtxCopy {Copy}
 translate Y FinderCtxMove {Move}
 # ====== TODO To be translated ======
 translate Y FinderCtxDelete {Delete}
+# ====== TODO To be translated ======
+translate Y FinderDirOpen {Open Directory}
 
 # Player finder:
 menuText Y PListFile "Fajl" 0
@@ -2286,6 +2288,8 @@ translate Y AnalPosition {Analyze Positions}
 translate Y StripOpcodes {Strip Opcodes}
 # ====== TODO To be translated ======
 translate Y NoMoves {No moves from this position}
+# ====== TODO To be translated ======
+translate Y CountBestMoves {Count Best Moves}
 
 }
 # end of serbian.tcl

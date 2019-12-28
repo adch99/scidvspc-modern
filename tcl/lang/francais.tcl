@@ -632,6 +632,8 @@ translate F FinderCtxBackup {Sauvegarder}
 translate F FinderCtxCopy {Copier}
 translate F FinderCtxMove {Déplacer}
 translate F FinderCtxDelete {Supprimer}
+# ====== TODO To be translated ======
+translate F FinderDirOpen {Open Directory}
 
 # Player finder:
 menuText F PListFile "Fichier" 0
@@ -1726,6 +1728,8 @@ translate F AnalPosition {Analyze Positions}
 translate F StripOpcodes {Strip Opcodes}
 # ====== TODO To be translated ======
 translate F NoMoves {No moves from this position}
+# ====== TODO To be translated ======
+translate F CountBestMoves {Count Best Moves}
 
 ##########
 #

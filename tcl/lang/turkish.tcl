@@ -613,6 +613,8 @@ translate T FinderCtxBackup {Yedekleme}
 translate T FinderCtxCopy {Kopyasını}
 translate T FinderCtxMove {hamle}
 translate T FinderCtxDelete {sil}
+# ====== TODO To be translated ======
+translate T FinderDirOpen {Open Directory}
 
 # Player finder:
 menuText T PListFile "Oyuncu Ara" 0
@@ -1738,6 +1740,8 @@ translate T AnalPosition {Analyze Positions}
 translate T StripOpcodes {Strip Opcodes}
 # ====== TODO To be translated ======
 translate T NoMoves {No moves from this position}
+# ====== TODO To be translated ======
+translate T CountBestMoves {Count Best Moves}
 
 }
 

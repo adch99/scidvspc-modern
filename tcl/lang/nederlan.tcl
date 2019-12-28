@@ -690,6 +690,8 @@ translate N FinderCtxBackup {Back-up}
 translate N FinderCtxCopy {Kopiëren}
 translate N FinderCtxMove {Verplaatsen}
 translate N FinderCtxDelete {Verwijderen}
+# ====== TODO To be translated ======
+translate N FinderDirOpen {Open Directory}
 
 # Player finder:
 menuText N PListFile "Bestand" 0
@@ -1874,6 +1876,8 @@ translate N AnalPosition {Analyze Positions}
 translate N StripOpcodes {Strip Opcodes}
 # ====== TODO To be translated ======
 translate N NoMoves {No moves from this position}
+# ====== TODO To be translated ======
+translate N CountBestMoves {Count Best Moves}
 }
 
 # end of nederlan.tcl

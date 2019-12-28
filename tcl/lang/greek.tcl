@@ -700,6 +700,8 @@ translate G FinderCtxBackup {Backup}
 translate G FinderCtxCopy {Αντιγραφή}
 translate G FinderCtxMove {Μετακίνηση}
 translate G FinderCtxDelete {Διαγραφή}
+# ====== TODO To be translated ======
+translate G FinderDirOpen {Open Directory}
 
 # Player finder:
 menuText G PListFile "Ευρετήριο Παικτών" 0
@@ -1868,6 +1870,8 @@ translate G AnalPosition {Analyze Positions}
 translate G StripOpcodes {Strip Opcodes}
 # ====== TODO To be translated ======
 translate G NoMoves {No moves from this position}
+# ====== TODO To be translated ======
+translate G CountBestMoves {Count Best Moves}
 
 }
 # end of greek.tcl
