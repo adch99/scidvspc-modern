@@ -480,7 +480,7 @@ if {0} {
     button $w.left.remline -text $::tr(RemLine) -relief flat -command ::book::remLine
     
     # frame $w.left.space1 -height 60
-    dialogbutton $w.left.export -text $::tr(Export) -command ::book::export
+    dialogbutton $w.left.export -text $::tr(Import) -command ::book::export
     dialogbutton $w.left.save -text $::tr(Save) -command ::book::save
     frame $w.left.space2 -height 10
     dialogbutton $w.left.help -text $::tr(Help) -command {helpWindow BookTuning}
@@ -788,14 +788,15 @@ if {0} {
     updateTitle
 
     set reply [
-      tk_dialog .export_ok Scid {Export will attempt to insert all book moves (from the current position) into this game.} question 1 $::tr(Export) $::tr(Cancel)
+      tk_dialog .export_ok Scid {Import will attempt to insert all book moves (from the current position) into this game.} question 1 $::tr(Import) $::tr(Cancel)
     ]
     if {$reply != 0} {return}
 
     # set reply [ tk_messageBox -title $::tr(Export) -type okcancel -icon info -parent .bookTuningWin -message {Export will attempt to insert all book moves (from the current position) into this game.} ]
     # if {$reply != {ok}} {return}
 
-    progressWindow Scid "ExportingBook..." $::tr(Cancel) "::book::sc_progressBar"
+    sc_game undoPoint
+    progressWindow "$::tr(Import) $::tr(Book)" {} $::tr(Cancel) "::book::sc_progressBar"
     set ::book::cancelBookExport 0
     set ::book::exportCount 0
     ::book::book2pgn
@@ -822,33 +823,56 @@ if {0} {
     set hash [sc_pos hash]
     if {[lsearch -sorted -integer -exact $hashList $hash] != -1} {
       return
-    } else  {
-      lappend hashList $hash
-      set hashList [lsort -integer -unique $hashList]
     }
 
-    updateBoard -pgn
+    lappend hashList $hash
+    set hashList [lsort -integer -unique $hashList]
+
+    # wtf updateBoard -pgn
 
     set bookMoves [sc_book moves $::book::bookTuningSlot]
+
+    # todo - alter this count ?
     incr ::book::exportCount
     if {[expr $::book::exportCount % 50] == 0} {
       updateProgressWindow $::book::exportCount $::book::exportMax
       update
     }
-    if {[llength $bookMoves] == 0} { return }
+    if {[llength $bookMoves] == 0} {
+      return
+    }
 
+    # bookmoves  d5 74% e5 26%
     for {set i 0} {$i<[llength $bookMoves]} {incr i 2} {
       set move [lindex $bookMoves $i]
-      if {$i == 0} {
-        sc_move addSan $move
-        book2pgn
-        sc_move back
-      } else  {
-        sc_var create
-        sc_move addSan $move
-        book2pgn
-        sc_var exit
-      }
+	if {$i == 0} {
+	  if {[set pos [lsearch $bookMoves [sc_game info nextMove]]] > 1} {
+	    sc_move forward
+	    book2pgn
+	    sc_move back
+	    # move the 'next' move to front of list
+	    set bookMoves "a b [lrange $bookMoves 0 [expr $pos -1]] [lrange $bookMoves [expr $pos + 2] end]" 
+	    puts forward
+	    puts bookmoves\ $bookMoves
+	  } else {
+	    if {[sc_pos isAt vend]} {
+	      sc_move addSan $move
+	      book2pgn
+	      sc_move back
+            } else {
+	      sc_var create
+	      sc_move addSan $move
+	      book2pgn
+	      sc_var exit
+            }
+	  }
+	} else {
+          # Hmm - we don't check for existsing var ?
+	  sc_var create
+	  sc_move addSan $move
+	  book2pgn
+	  sc_var exit
+	}
     }
 
   }
