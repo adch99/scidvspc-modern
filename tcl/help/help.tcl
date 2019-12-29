@@ -5839,23 +5839,23 @@ set helpText(BookTuning) {<h1>Book Tuning</h1>
    than 1%, and most likely happens with books automatically generated
    from game collections. One should also note that all values should add up to 100%.
    </p>
-<h3>Exporting Books</h3>
-   <p><i>For information about exporting multiple games to Polyglot Books, see
+<h3>Importing Books</h3>
+   <p><i>For information about exporting games to Polyglot Books, see
    the <a Book Polyglot>Polyglot</a> section.
    </i></p>
    <p>
-   Choosing <b>Export</b> will export a branch of the book from
+   Choosing <b>Import</b> will import a branch of the book from
    the current position onwards <b>into a single game</b>. The continuation
-   with the highest probability will make up the main line while all
-   others are stored in variations. This allows for semi manually
-   selecting lines to be included in a new book to be created. Note,
-   that Scid can handle 3000 moves in a single game, therefore it will
-   most likely not be possible (nor will it be very sensible) to
-   export a whole opening book into one game. Also note that export
+   with the highest probability will make up the main line (or first variation).
+   This allows to cherry-pick
+   selected lines a new book created from the PGN (using polyglot). Note,
+   Scid can only handle 3000 moves in a single game (todo - verify/alter this limit),
+   therefore it will most likely not be possible (or sensible) to
+   export a whole opening book into one game. Also note that import
    can be done incrementally. That is, new lines are added to already
-   existing ones. This also allows to merge several books.
+   existing ones.
    </p>
-  <p><footer>Updated: Scid vs. PC 4.4 April, 2011 </footer></p>
+  <p><footer>Updated: Scid vs. PC 4.21 December, 2019 </footer></p>
 }
 
 set helpTitle(Novag) "Novag Citrine"
