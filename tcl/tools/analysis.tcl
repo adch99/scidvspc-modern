@@ -3669,16 +3669,25 @@ proc updateAnalysisBoard {n {moves {}}} {
   }
 
   # New feature to show arrows for UCI engines
-  if {$analysis(boardShowsVar$n) && $analysis(uci$n)} {
-    if {!$analysis(lockEngine$n)} {::board::update $bd [sc_pos board]}
+  if {$analysis(boardShowsVar$n)} {
+    set move [lindex $moves 0]
+    if {!$analysis(uci$n)} {
+      sc_game push copyfast
+      moveAdd $move $n
+      set move [sc_game info previousMoveUCI]
+      sc_game pop
+    }
+    if {!$analysis(lockEngine$n)} {
+      ::board::update $bd [sc_pos board]
+    }
     $bd.bd delete var
-      set var 0
-      if {$moves != ""} {
-	set sq_start [ ::board::sq [ string range $moves 0 1 ] ]
-	set sq_end [ ::board::sq [ string range $moves 2 3 ] ]
-	::board::mark::add $bd varComment $sq_start $sq_end $::engineLineColor
-	incr var
-      }
+    set var 0
+    if {$move != ""} {
+      set sq_start [::board::sq [string range $move 0 1]]
+      set sq_end   [::board::sq [string range $move 2 3]]
+      ::board::mark::add $bd varComment $sq_start $sq_end $::engineLineColor
+      incr var
+    }
   } else {
     if {$analysis(lockEngine$n)} {
       return
