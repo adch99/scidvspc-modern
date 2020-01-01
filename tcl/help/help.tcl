@@ -3089,7 +3089,7 @@ set helpText(EPD) {<h1>EPD Files</h1>
   the current game and setting the scratch game's start position.
   </p>
 
-  <h3>Analyzgin EPD Files</h3>
+  <h3>Analyzing EPD Files</h3>
   <p>
   EPD files can be analyzed with <b>Tools--<gt>Analyze Positions</b>.
   A dialogue will ask for the Engine, Analysis Time and Analysis Mode, which will start.
