@@ -47,6 +47,7 @@ project is authored by <ref name="Stevenaaus" id="contact_"> and numerous contri
 <item> Rewritten Gamelist widget with convenient context menus and buttons, and integrated Database Switcher.
 <item> Improved Computer Game and FICS features, including premove, and simultaneous observed games.
 <item> Many chess engine improvements, including max-ply option, an unlimited number of engines running, and the function hot-keys can be explicitly set..
+<item> New EPD search and analyze features.
 <item> Tri-coloured Tree bar-graphs, and options for more or less statistics.
 <item> Ratings Graph can show multiple players, and Score graph is an attractive bar graph.
 <item> Improved Book windows, including book compare, and remove move features.
@@ -318,8 +319,9 @@ work may not be too hard.  https://github.com/sshivaji/ctgexporter
 
 <sect1> known issues <p>
 <itemize>
+<item> macOS Catalina and later are only supported by the buggy and slow 64 bit version.
 <item> Linux sound playback is buggy/broken. The Wish sound package (Snack) needs maintenance.
-<item> Tcl/Tk-8.5.10 is buggy.
+<item> Tcl/Tk-8.5.10 is buggy. 8.6.10 has a bug which breaks moving Tabs.
 <item> Some versions of Tk-8.6.x have *severe* memory leaks. To avoid, compile with Gregor's tk::text (patches/gregors_tktext_inline.patch).
 <item> OS X docked mode has some issues due to it's poor Tcl/Tk.
 <item> <bf>Focus Issues</bf>. KDE users can allow Tcl apps to properly raise themselves by
@@ -403,6 +405,54 @@ Chessbase databases and many chess variants.</p>
 
 <label id="changes_">
 <sect> changes <p>
+
+<sect2> Scid vs. PC 4.21<p>
+<itemize>
+<item>Gamelist (and Best Games) can now show 'Next Moves' instead of just the 'Opening Moves' if the tree is open and adjusting filter.
+<item>Text foreground colour option for listboxes and text windows. (and remove the 'global' colour option which is too rough).
+<item>Fics: allow moves made by examiners to be seen by other examiners/observers, and fix longstanding init fail.
+<item>Mac: 64 bit macOS port. Poor performance but mostly working.
+<newline><newline>
+
+Engines
+<item>Allow multiple engine logs at once, which can be nicely updated in real-time (and bind 'space' to engine stop/start).
+<item>Small engine boards now have an alternative display mode: Arrow shows best move.
+<item>Free up right-click for windows 'copy text'. (Use middle click instead for toggling analysis modes).
+<item>Can now always show 'Infos' via an option in the main Engine config widget.
+<item>Low level support for alternative "GO" modes for UCI engines. (::uci::goCommand).
+<item>Give transient engine popup buttons the same bindings as their originals.
+<newline><newline>
+
+EPD Window
+<item>New annotaion/analyze features (UCI only): Count best moves and (optionally) show/store results.  Allow selecting the engine.
+<item>New 'find' entrybox searches EPD file for matching text.
+<item>Basic EPD/FEN export feature.
+<item>Menu rearranges, including enabling more translations, and changing menubuttons to standard menu widgets.
+<item>Paste analysis now removes previous analysis opcodes.
+<item>Bind space in listbox to start/stop engine.
+<newline><newline>
+
+Minor
+<item>Tree window - options to hide buttonbar, and always 'Adjust' filter.
+<item>Display a board in the Player Report (if applicable).
+<item>Full German help update from Christian.
+<item>Improve Gamelist 'see' issues.
+<item>Brazil-Portuguese language update from Gilberto de Almeida Peres.
+<item>Opening Books - don't clobber existing game mainline with book import (was 'export'). Unneeded 'update -pgn' was slowing everything down too.
+<item>Refresh score graph at end of fics game.
+<item>Pressing End key twice always goes to game end.
+<item>Show Tux in the comment editor, and update the gifs.
+<item>Update chess 960 patch.
+<item>New flip board button.
+<item>scidt reverse sort feature. Also - don't accept empty sort criteria, and accept 'si4' filenames.
+<item>Don't ask to 'Save Game' if the game length is zero, and try to stop ECO window clobbering (any) game changes (New 'sc_game info halfmoves' command).
+<newline><newline>
+
+Bugfixes
+<item>PGN - Properly handle all level of var indentation.
+<item>Windows: Fix extra text in the Player Info windows.
+<item>Fix Tree cache getting saved with app close.
+</itemize></p>
 
 <sect2> Scid vs. PC 4.20<p>
 <itemize>

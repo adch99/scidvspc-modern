@@ -6177,6 +6177,58 @@ set helpText(Sound) {<h1>Sound</h1>
 set helpTitle(Changelog) "Scid vs PC Changelog"
 set helpText(Changelog) {<h1>Changelog</h1>
 
+<h4>4.21 (Jan 7, 2019)</h4>
+<ul>
+<li>Gamelist (and Best Games) can now show 'Next Moves' instead of just the 'Opening Moves' if the tree is open and adjusting filter</li>
+<li>Text foreground colour option for listboxes and text windows. (and remove the 'global' colour option which is too rough)</li>
+<li>Fics: allow moves made by examiners to be seen by other examiners/observers, and fix longstanding init fail</li>
+<li>Mac: 64 bit macOS port. Poor performance but mostly working</li>
+</ul><br>
+
+<b>Engines</b>
+<ul>
+<li>Allow multiple engine logs at once, which can be nicely updated in real-time (and bind 'space' to engine stop/start)</li>
+<li>Small engine boards now have an alternative display mode: Arrow shows best move</li>
+<li>Free up right-click for windows 'copy text'. (Use middle click instead for toggling analysis modes)</li>
+<li>Can now always show 'Infos' via an option in the main Engine config widget</li>
+<li>Low level support for alternative "GO" modes for UCI engines. (::uci::goCommand)</li>
+<li>Give transient engine popup buttons the same bindings as their originals</li>
+</ul><br>
+
+<b>EPD Window</b>
+<ul>
+<li>New annotaion/analyze features (UCI only): Count best moves and (optionally) show/store results.  Allow selecting the engine</li>
+<li>New 'find' entrybox searches EPD file for matching text</li>
+<li>Basic EPD/FEN export feature</li>
+<li>Menu rearranges, including enabling more translations, and changing menubuttons to standard menu widgets</li>
+<li>Paste analysis now removes previous analysis opcodes</li>
+<li>Bind space in listbox to start/stop engine</li>
+</ul><br>
+
+<b>Minor</b>
+<ul>
+<li>Tree window - options to hide buttonbar, and always 'Adjust' filter</li>
+<li>Display a board in the Player Report (if applicable)</li>
+<li>Full German help update from Christian</li>
+<li>Improve Gamelist 'see' issues</li>
+<li>Brazil-Portuguese language update from Gilberto de Almeida Peres</li>
+<li>Opening Books - don't clobber existing game mainline with book import (was 'export'). Unneeded 'update -pgn' was slowing everything down too</li>
+<li>Refresh score graph at end of fics game</li>
+<li>Pressing End key twice always goes to game end</li>
+<li>Show Tux in the comment editor, and update the gifs</li>
+<li>Update chess 960 patch</li>
+<li>New flip board button</li>
+<li>scidt reverse sort feature. Also - don't accept empty sort criteria, and accept 'si4' filenames</li>
+<li>Don't ask to 'Save Game' if the game length is zero, and try to stop ECO window clobbering (any) game changes (New 'sc_game info halfmoves' command)</li>
+</ul><br>
+
+<b>Bug Fixes</b>
+<ul>
+<li>PGN - Properly handle all level of var indentation.</li>
+<li>Windows: Fix extra text in the Player Info windows</li>
+<li>Fix Tree cache getting saved with app close</li>
+</ul>
+
 <h4>4.20 (Apr 7, 2019)</h4>
 <li>The Score Graph can now display move-times (using "%emt" and "%clk" pgn values)</li>
 <li>Option to display a black rectangle for the "selected square" instead of a coloured square (Options-<gt>Moves-<gt>ColorSelected)</li>
@@ -7042,52 +7094,6 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li>Remove 'newlines' from Mask Search results</li>
 <li>When addAnalysisVariation fails due to bad moves, don't move back N moves</li>
 <li>Theory table incorrectly started from start position</li>
-</ul>
-
-<h4>4.4.1 (May 24, 2011)</h4>
-<ul>
-<li>Fix nasty flicker bug when board is flipped</li>
-<li>Fix fics bug that graph sometimes doesn't stop when new game starts</li>
-<li>Add Burnett chess pieces</li>
-</ul>
-
-<h4>4.4 (May 22, 2011)</h4>
-<ul>
-<li>Implement SCID's interruptable tree processing</li>
-<li>Implement SCID's custom flags </li>
-<li>Gamelist is much faster (don't call compactGamesNull, *insert* into treeview, and use tk::scale and "-bigincrement")</li>
-<li>Add widgets to the gamelist for manipulating flags and browsing first/last/next/previous games</li>
-<li>Opening Book and Book Tuning overhaul - allow two books to be opened with side-by-side sorting, and various interface improvements</li>
-<li>Overhaul Annotate widget - allow choice of scores/variation/both and remember annotation options </li>
-<li>Crosstable sort by Country feature</li>
-<li>Update FICS to allow for different Port/IP Address (using SCID code)</li>
-<li>Graph changes - remember widget settings, change colours+dot size, fix up half-move bug and a title misallignment, add 2010 decade</li>
-<li>Fix up the progress window grab when opening bases</li>
-<li>Add "Half moves" (moves since capture or pawn move) to setup board</li>
-<li>ECO Browser changes - add "update" and "up" buttons, when clicking on "Start ECO" open browser at top level, make statistics more readable</li>
-<li>Add the "Last Move Color" to the main board colours widget</li>
-<li>Restructure "Tools" menu</li>
-<li>Icons - remove the large gameinfo and togglemenu buttons, add a "comment editor" icon to the toolbar and tidy up various icons</li>
-<li>Busy cursor when sorting database via Gamelist column click</li>
-<li>For OSX (esp. single button mice) - bind <Control-Button-1> to context menu for main window and pgn window</li>
-<li>Make the 'paste variation' feature work a bit better at var/game end</li>
-<li>Make variation popup remember it's location instead of being centered</li>
-<li>Add "Read-only" button to maintenance window</li>
-<li>A nice PGN/htext performance tweak that smooths out large game edits</li>
-<li>When using "-fast", perform fast database opens also. Otherwise, update the progressbar to show "Calculating name frequencies"</li>
-<br>
-<li>Bugfixes</li>
-<ul>
-<li>Ubuntu 11 have put libX11.so somewhere stupid. Update configure script</li>
-<li>Paste FEN bug involving fen validation</li>
-<li>Fix promotion bug involving busy CPU and missed grab</li>
-<li>Fix off-screen window placement on windows</li>
-<li>Fix up buggy Control+ bindings to quick switch to open databases</li>
-<li>On Macs, dont place the window at top of screen, as it's then stuck under the main menubar</li>
-<li>Make the game save dialog center and resize properly</li>
-<li>Fix up file loading (and bookmarks) of DBs with dots (.) in their name</li>
-<li>Statusbar shows correct value after Crosstable update</li>
-<li>Don't perform logical ANDs in the "Find" widget using "+". Too slow</li>
 </ul>
 
 }
