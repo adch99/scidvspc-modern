@@ -12,8 +12,8 @@
 # The next line restarts using tkscid: \
 exec "`dirname "$0"`"/tkscid "$0" "$@"
 
-set scidVersion 4.20
-set scidVersionDate {Apr 7, 2019}
+set scidVersion 4.21
+set scidVersionDate {Jan 7, 2020}
 
 package require Tcl 8.5
 package require Tk  8.5
@@ -1917,7 +1917,7 @@ proc ::splash::add {text {tag {indent}}} {
 ::splash::add "$::scidName $::scidVersion ($::scidVersionDate)"
 ::splash::add "http://scidvspc.sourceforge.net"
 ::splash::add ""
-::splash::add "(C) Steven Atkinson (stevenaaus@yahoo.com) 2008-2019"
+::splash::add "(C) Steven Atkinson (stevenaaus@yahoo.com) 2008-2020"
 ::splash::add "(C) Pascal Georges 2006-2008"
 ::splash::add "(C) Shane Hudson 1999-2004"
 ::splash::add "(C) Gregor Cramer, Fulvio Benini and others."
