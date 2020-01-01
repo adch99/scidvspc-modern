@@ -96,6 +96,7 @@ project is authored by
 <LI> Rewritten Gamelist widget with convenient context menus and buttons, and integrated Database Switcher.</LI>
 <LI> Improved Computer Game and FICS features, including premove, and simultaneous observed games.</LI>
 <LI> Many chess engine improvements, including max-ply option, an unlimited number of engines running, and the function hot-keys can be explicitly set..</LI>
+<LI> New EPD search and analyze features.</LI>
 <LI> Tri-coloured Tree bar-graphs, and options for more or less statistics.</LI>
 <LI> Ratings Graph can show multiple players, and Score graph is an attractive bar graph.</LI>
 <LI> Improved Book windows, including book compare, and remove move features.</LI>
@@ -121,13 +122,15 @@ project is authored by
 
 
 <P>Source 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.20.tgz/download">scid_vs_pc-4.20.tgz</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.21.tgz/download">scid_vs_pc-4.21.tgz</A></P>
 <P>Windows 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.20.exe/download">Scid vs PC-4.20.exe</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.21.exe/download">Scid vs PC-4.21.exe</A></P>
 <P>Windows 64 bit 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.20.x64.exe/download">Scid vs PC-4.20.x64.exe</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.21.x64.exe/download">Scid vs PC-4.21.x64.exe</A></P>
 <P>Mac 
-<A HREF="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.20.dmg/download">ScidvsMac-4.20.dmg</A></P>
+<A HREF="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.21.dmg/download">ScidvsMac-4.21.dmg</A></P>
+<P>Mac 64bit (beta) 
+<A HREF="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.21.x64.dmg/download">ScidvsMac-4.21.x64.dmg</A></P>
 <P>
 <H3>Other resources</H3>
 
@@ -158,8 +161,8 @@ use <B>./configure BINDIR=/usr/bin/ SHAREDIR=/usr/share/scid/</B></EM></P>
 <P>Installing from source:</P>
 <HR>
 <PRE>
-tar -xzf scid_vs_pc-4.20.tgz
-cd scid_vs_pc-4.20
+tar -xzf scid_vs_pc-4.21.tgz
+cd scid_vs_pc-4.21
 ./configure
 make
 sudo make install
@@ -187,13 +190,14 @@ C:\Users\[USERNAME]\AppData\Local\VirtualStore\Program Files\Scid vs PC</P>
 
 
 <P>The 
-<A HREF="#download_">ScidvsMac-4.20 app</A> should include everything you need. Simply drag and drop the App into /Applications (or similar).</P>
-<P>Due to complicated build reasons, it seems only Yosemite (OS X 10.10) and later are now supported. </P>
+<A HREF="#download_">ScidvsMac-4.21 app</A> should include everything you need. Simply drag and drop the App into /Applications (or similar). It cannot be run from the dmg disk image.</P>
+<P>Due to complicated build reasons, only Yosemite (OS X 10.10) and
+later are now supported.  Additionally, Catalina has removed 32-bit app
+support, and it is only supported by our beta ScidvsMac-x64 app,
+as 64-bit Wish is not as robust as the old version.</P>
+<P>To compile from source - once you have XCode installed - please read <B>ScidvsMac-HowTo.rtfd</B> in the source tarball for some older information.</P>
 <P><EM>Users upgrading may have to remove (or edit) <B>$HOME/.scidvspc/config/engines.dat</B>
 to properly configure the chess engines.</EM></P>
-
-<P>OS X  has a relatively poor implementation of Tcl/Tk, and we use a 32 bit carbon build of Tcl 8.5 - which is the least buggy version. Cocoa Wish 8.6 has made progress, and is now a useable alternative for those able to compile from source and seeking a little more speed, but it is still not recommended due to numerous rendering anomalies.
-To compile from source - once you have XCode installed - please read <B>ScidvsMac-HowTo.rtfd</B> in the source tarball.</P>
 <H2><A NAME="s5">5.</A> <A HREF="#toc5">news </A></H2>
 
 
@@ -338,8 +342,9 @@ work may not be too hard.  https://github.com/sshivaji/ctgexporter</LI>
 
 <P>
 <UL>
+<LI> macOS Catalina and later are only supported by the buggy and slow 64 bit version.</LI>
 <LI> Linux sound playback is buggy/broken. The Wish sound package (Snack) needs maintenance.</LI>
-<LI> Tcl/Tk-8.5.10 is buggy.</LI>
+<LI> Tcl/Tk-8.5.10 is buggy. 8.6.10 has a bug which breaks moving Tabs.</LI>
 <LI> Some versions of Tk-8.6.x have *severe* memory leaks. To avoid, compile with Gregor's tk::text (patches/gregors_tktext_inline.patch).</LI>
 <LI> OS X docked mode has some issues due to it's poor Tcl/Tk.</LI>
 <LI> <B>Focus Issues</B>. KDE users can allow Tcl apps to properly raise themselves by
@@ -436,6 +441,52 @@ Chessbase databases and many chess variants.</P>
 
 
 <P>
+<H3>Scid vs. PC 4.21</H3>
+
+<P>
+<UL>
+<LI>Gamelist (and Best Games) can now show 'Next Moves' instead of just the 'Opening Moves' if the tree is open and adjusting filter.</LI>
+<LI>Text foreground colour option for listboxes and text windows. (and remove the 'global' colour option which is too rough).</LI>
+<LI>Fics: allow moves made by examiners to be seen by other examiners/observers, and fix longstanding init fail.</LI>
+<LI>Mac: 64 bit macOS port. Poor performance but mostly working.<BR><BR>
+
+Engines</LI>
+<LI>Allow multiple engine logs at once, which can be nicely updated in real-time (and bind 'space' to engine stop/start).</LI>
+<LI>Small engine boards now have an alternative display mode: Arrow shows best move.</LI>
+<LI>Free up right-click for windows 'copy text'. (Use middle click instead for toggling analysis modes).</LI>
+<LI>Can now always show 'Infos' via an option in the main Engine config widget.</LI>
+<LI>Low level support for alternative "GO" modes for UCI engines. (::uci::goCommand).</LI>
+<LI>Give transient engine popup buttons the same bindings as their originals.<BR><BR>
+
+EPD Window</LI>
+<LI>New annotaion/analyze features (UCI only): Count best moves and (optionally) show/store results.  Allow selecting the engine.</LI>
+<LI>New 'find' entrybox searches EPD file for matching text.</LI>
+<LI>Basic EPD/FEN export feature.</LI>
+<LI>Menu rearranges, including enabling more translations, and changing menubuttons to standard menu widgets.</LI>
+<LI>Paste analysis now removes previous analysis opcodes.</LI>
+<LI>Bind space in listbox to start/stop engine.<BR><BR>
+
+Minor</LI>
+<LI>Tree window - options to hide buttonbar, and always 'Adjust' filter.</LI>
+<LI>Display a board in the Player Report (if applicable).</LI>
+<LI>Full German help update from Christian.</LI>
+<LI>Improve Gamelist 'see' issues.</LI>
+<LI>Brazil-Portuguese language update from Gilberto de Almeida Peres.</LI>
+<LI>Opening Books - don't clobber existing game mainline with book import (was 'export'). Unneeded 'update -pgn' was slowing everything down too.</LI>
+<LI>Refresh score graph at end of fics game.</LI>
+<LI>Pressing End key twice always goes to game end.</LI>
+<LI>Show Tux in the comment editor, and update the gifs.</LI>
+<LI>Update chess 960 patch.</LI>
+<LI>New flip board button.</LI>
+<LI>scidt reverse sort feature. Also - don't accept empty sort criteria, and accept 'si4' filenames.</LI>
+<LI>Don't ask to 'Save Game' if the game length is zero, and try to stop ECO window clobbering (any) game changes (New 'sc_game info halfmoves' command).<BR><BR>
+
+Bugfixes</LI>
+<LI>PGN - Properly handle all level of var indentation.</LI>
+<LI>Windows: Fix extra text in the Player Info windows.</LI>
+<LI>Fix Tree cache getting saved with app close.</LI>
+</UL>
+</P>
 <H3>Scid vs. PC 4.20</H3>
 
 <P>
