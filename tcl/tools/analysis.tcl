@@ -3673,7 +3673,10 @@ proc updateAnalysisBoard {n {moves {}}} {
     set move [lindex $moves 0]
     if {!$analysis(uci$n)} {
       sc_game push copyfast
-      moveAdd $move $n
+      if {$analysis(lockEngine$n)} {
+	sc_game startBoard $analysis(lockFen$n)
+      }
+      catch {sc_move addSan $move}
       set move [sc_game info previousMoveUCI]
       sc_game pop
     }
@@ -3681,12 +3684,10 @@ proc updateAnalysisBoard {n {moves {}}} {
       ::board::update $bd [sc_pos board]
     }
     $bd.bd delete var
-    set var 0
     if {$move != ""} {
       set sq_start [::board::sq [string range $move 0 1]]
       set sq_end   [::board::sq [string range $move 2 3]]
       ::board::mark::add $bd varComment $sq_start $sq_end $::engineLineColor
-      incr var
     }
   } else {
     if {$analysis(lockEngine$n)} {
