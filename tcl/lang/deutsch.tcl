@@ -655,8 +655,7 @@ translate D FinderCtxBackup {Sicherungskopie}
 translate D FinderCtxCopy {Kopieren}
 translate D FinderCtxMove {Verschieben}
 translate D FinderCtxDelete {Löschen}
-# ====== TODO To be translated ======
-translate D FinderDirOpen {Open Directory}
+translate D FinderDirOpen {Verzeichnis öffnen}
 
 # Player finder:
 menuText D PListFile "Datei" 0
@@ -1758,8 +1757,7 @@ translate D FindPos {Tiefste Partiestellung finden}
 translate D AnalPosition {Stellungen analysieren}
 translate D StripOpcodes {Opcodes entfernen}
 translate D NoMoves {Keine Züge ab dieser Stellung}
-# ====== TODO To be translated ======
-translate D CountBestMoves {Count Best Moves}
+translate D CountBestMoves {Beste Züge zählen}
 
 }
 
@@ -5470,7 +5468,7 @@ set helpText(D,EPD) {<h1>EPD-Dateien</h1>
   der Datei, verwerfen etwaige Änderungen an der aktuellen Partie und
   setzen die Anfangsstellung der Testpartie.</p>
 
-  <h3>Kommentierung</h3>
+  <h3>EPD-Dateien analysieren</h3>
 	
   <p>EPD-Dateien können im EPD-Fenster über das
   Menü <green><b>Werkzeuge--<gt>Stellungen analysieren</b></green>
@@ -5478,17 +5476,20 @@ set helpText(D,EPD) {<h1>EPD-Dateien</h1>
   und dem Analysemodus, der gestartet wird. Ein Anhalten der Engine
   beendet die Analyse.</p>
 
-  <p>Die beiden Modi sind <b>Eval Best Moves</b> (Beste Züge bewerten)
+  <p>Die beiden Modi sind <b>Count Best Moves</b> (Beste Züge zählen)
   und <b>Annotate</b> (Kommentieren). Beide Modi bedeuten, daß mit
-  einer Engine alle Stellungen durchlaufen werden. Bei "Beste Züge" -
-  die vorhandenen Kommentare werden nach einem "bm"-Eintrag abgesucht
-  - wird geschaut, ob diese mit der Computerbewertung
+  einer Engine alle Stellungen analysiert werden. Bei "Beste Züge" -
+  die vorhandenen Kommentare werden nach einem "bm"- oder "am"-Feld
+  abgesucht - wird geschaut, ob diese mit der Computerbewertung
   übereinstimmen. Es wird dann bei der Ergänzung eine Anzahl von
   korrekten besten Zügen angezeigt. Der Modus "Kommentieren" speichert
   einfach die Engine-Bewertung in verschiedenen Opcodes, ohne daß der
   beste Zug geprüft wird. Die verwendeten Opcodes sind <b>acd</b>,
   <b>acn</b>, <b>ce</b>, <b>dm</b> und <b>pv</b>. Und zu guter Letzt
-  können diese beiden Modi auch zusammen laufen.</p>
+  können diese beiden Modi auch zusammen laufen. In diesem Fall wird
+  ein zusätzlicher "Engine"-Opcode geschrieben. Dieser zeigt folgendes
+  an: Test erfolgreich, fehlgeschlagen oder kein Ergebnis sowie das in
+  der letzten EPD-Stellung gespeicherte Resultat.</p>
 
   <p><i>Der Kommentierungsmodus entfernt zuerst obige Opcodes aus
   allen Stellungen. Um irgendwelche durchgeführten Änderungen
@@ -8436,27 +8437,26 @@ set helpText(D,BookTuning) {<h1>Eröffnungsbuch anpassen</h1>
   erzeugten Eröffnungsbüchern. Man sollte auch beachten, daß sich alle
   Werte auf 100% aufaddieren.</p>
 
-  <h3>Eröffnungsbücher exportieren</h3>
+  <h3>Eröffnungsbücher importieren</h3>
   
   <p><i>Für Informationen bezüglich des Exports mehrerer Partien in
   PolyGlot-Bücher siehe den Abschnitt <a Book
   Polyglot>PolyGlot</a></i>.</p>
   
-  <p>Wenn man <b>Export</b> wählt, dann wird ein Zweig des Buches ab
+  <p>Wenn man <b>Import</b> wählt, dann wird ein Zweig des Buches ab
   der aktuellen Stellung aufwärts <b>in eine einzelne Partie</b>
-  exportiert. Die Fortsetzung mit der höchsten Wahrscheinlichkeit
-  bildet die Hauptfortsetzung, während alle anderen in Varianten
-  gespeichert werden. Dies gestattet eine halbmanuelle Auswahl an
-  Fortsetzungen, die in ein neu zu erstellendes Buch
-  eingehen. Beachten Sie, daß Scid 3.000 Züge in einer einzelnen
-  Partie handhaben kann. Deshalb wird es sehr wahrscheinlich nicht
-  möglich sein (noch wird es sehr vernünftig sein), ein ganzes
-  Eröffnungsbuch in eine einzige Partie zu exportieren. Beachten Sie
-  auch, daß der Export schrittweise erfolgen kann. Das heißt, neue
-  Fortsetzungen werden zu bereits bestehenden hinzugefügt. Dies
-  erlaubt es auch, verschiedene Eröffnungsbücher zu vermischen.</p>
-  
-  <p><footer>Aktualisiert: Scid vs. PC 4.4 April, 2011 </footer></p>
+  importiert. Die Fortsetzung mit der höchsten Wahrscheinlichkeit
+  bildet die Hauptfortsetzung (oder erste Variante). Dies erlaubt es,
+  aus einem Buch, das (unter Benutzung von polyglot) aus PGN erstellt
+  wurde, die besten Fortsetzungen herauszupicken. Beachten Sie, daß
+  Scid nur 3.000 Züge in einer einzigen Partie verarbeiten kann (noch
+  zu erledigen: dieses Limit überprüfen/ändern). Deshalb wird es sehr
+  wahrscheinlich nicht möglich (oder sinnvoll) sein, ein ganzes
+  Eröffnungsbuch in eine Partie zu exportieren. Beachten Sie auch, daß
+  der Import schrittweise erfolgen kann. Das heißt, neue Fortsetzungen
+  werden zu bereits bestehenden hinzugefügt.</p>
+
+  <p><footer>Aktualisiert: Scid vs. PC 4.21, Dezember 2019 </footer></p>
 }
 
 set helpTitle(D,Novag) "Novag Citrine"
@@ -8762,6 +8762,58 @@ set helpText(D,Sound) {<h1>Ton</h1>
 
 set helpTitle(D,Changelog) "Scid vs PC Änderungshistorie"
 set helpText(D,Changelog) {<h1>Änderungshistorie</h1>
+
+<h4>4.21 (Jan 7, 2019)</h4>
+<ul>
+<li>Gamelist (and Best Games) can now show 'Next Moves' instead of just the 'Opening Moves' if the tree is open and adjusting filter</li>
+<li>Text foreground colour option for listboxes and text windows. (and remove the 'global' colour option which is too rough)</li>
+<li>Fics: allow moves made by examiners to be seen by other examiners/observers, and fix longstanding init fail</li>
+<li>Mac: 64 bit macOS port. Poor performance but mostly working</li>
+</ul><br>
+
+<b>Engines</b>
+<ul>
+<li>Allow multiple engine logs at once, which can be nicely updated in real-time (and bind 'space' to engine stop/start)</li>
+<li>Small engine boards now have an alternative display mode: Arrow shows best move</li>
+<li>Free up right-click for windows 'copy text'. (Use middle click instead for toggling analysis modes)</li>
+<li>Can now always show 'Infos' via an option in the main Engine config widget</li>
+<li>Low level support for alternative "GO" modes for UCI engines. (::uci::goCommand)</li>
+<li>Give transient engine popup buttons the same bindings as their originals</li>
+</ul><br>
+
+<b>EPD Window</b>
+<ul>
+<li>New annotaion/analyze features (UCI only): Count best moves and (optionally) show/store results.  Allow selecting the engine</li>
+<li>New 'find' entrybox searches EPD file for matching text</li>
+<li>Basic EPD/FEN export feature</li>
+<li>Menu rearranges, including enabling more translations, and changing menubuttons to standard menu widgets</li>
+<li>Paste analysis now removes previous analysis opcodes</li>
+<li>Bind space in listbox to start/stop engine</li>
+</ul><br>
+
+<b>Minor</b>
+<ul>
+<li>Tree window - options to hide buttonbar, and always 'Adjust' filter</li>
+<li>Display a board in the Player Report (if applicable)</li>
+<li>Full German help update from Christian</li>
+<li>Improve Gamelist 'see' issues</li>
+<li>Brazil-Portuguese language update from Gilberto de Almeida Peres</li>
+<li>Opening Books - don't clobber existing game mainline with book import (was 'export'). Unneeded 'update -pgn' was slowing everything down too</li>
+<li>Refresh score graph at end of fics game</li>
+<li>Pressing End key twice always goes to game end</li>
+<li>Show Tux in the comment editor, and update the gifs</li>
+<li>Update chess 960 patch</li>
+<li>New flip board button</li>
+<li>scidt reverse sort feature. Also - don't accept empty sort criteria, and accept 'si4' filenames</li>
+<li>Don't ask to 'Save Game' if the game length is zero, and try to stop ECO window clobbering (any) game changes (New 'sc_game info halfmoves' command)</li>
+</ul><br>
+
+<b>Bug Fixes</b>
+<ul>
+<li>PGN - Properly handle all level of var indentation.</li>
+<li>Windows: Fix extra text in the Player Info windows</li>
+<li>Fix Tree cache getting saved with app close</li>
+</ul>
 
 <h4>4.20 (April 7, 2019)</h4>
 <li>The Score Graph can now display move-times (using "%emt" and "%clk" pgn values)</li>
@@ -9633,82 +9685,6 @@ set helpText(D,Changelog) {<h1>Änderungshistorie</h1>
 <li>Theory table incorrectly started from start position</li>
 </ul>
 
-<h4>4.4.1 (May 24, 2011)</h4>
-<ul>
-<li>Fix nasty flicker bug when board is flipped</li>
-<li>Fix fics bug that graph sometimes doesn't stop when new game starts</li>
-<li>Add Burnett chess pieces</li>
-</ul>
-
-<h4>4.4 (May 22, 2011)</h4>
-<ul>
-<li>Implement SCID's interruptable tree processing</li>
-<li>Implement SCID's custom flags </li>
-<li>Gamelist is much faster (don't call compactGamesNull, *insert* into treeview, and use tk::scale and "-bigincrement")</li>
-<li>Add widgets to the gamelist for manipulating flags and browsing first/last/next/previous games</li>
-<li>Opening Book and Book Tuning overhaul - allow two books to be opened with side-by-side sorting, and various interface improvements</li>
-<li>Overhaul Annotate widget - allow choice of scores/variation/both and remember annotation options </li>
-<li>Crosstable sort by Country feature</li>
-<li>Update FICS to allow for different Port/IP Address (using SCID code)</li>
-<li>Graph changes - remember widget settings, change colours+dot size, fix up half-move bug and a title misallignment, add 2010 decade</li>
-<li>Fix up the progress window grab when opening bases</li>
-<li>Add "Half moves" (moves since capture or pawn move) to setup board</li>
-<li>ECO Browser changes - add "update" and "up" buttons, when clicking on "Start ECO" open browser at top level, make statistics more readable</li>
-<li>Add the "Last Move Color" to the main board colours widget</li>
-<li>Restructure "Tools" menu</li>
-<li>Icons - remove the large gameinfo and togglemenu buttons, add a "comment editor" icon to the toolbar and tidy up various icons</li>
-<li>Busy cursor when sorting database via Gamelist column click</li>
-<li>For OSX (esp. single button mice) - bind <Control-Button-1> to context menu for main window and pgn window</li>
-<li>Make the 'paste variation' feature work a bit better at var/game end</li>
-<li>Make variation popup remember it's location instead of being centered</li>
-<li>Add "Read-only" button to maintenance window</li>
-<li>A nice PGN/htext performance tweak that smooths out large game edits</li>
-<li>When using "-fast", perform fast database opens also. Otherwise, update the progressbar to show "Calculating name frequencies"</li>
-<br>
-<li>Bugfixes</li>
-<ul>
-<li>Ubuntu 11 have put libX11.so somewhere stupid. Update configure script</li>
-<li>Paste FEN bug involving fen validation</li>
-<li>Fix promotion bug involving busy CPU and missed grab</li>
-<li>Fix off-screen window placement on windows</li>
-<li>Fix up buggy Control+ bindings to quick switch to open databases</li>
-<li>On Macs, dont place the window at top of screen, as it's then stuck under the main menubar</li>
-<li>Make the game save dialog center and resize properly</li>
-<li>Fix up file loading (and bookmarks) of DBs with dots (.) in their name</li>
-<li>Statusbar shows correct value after Crosstable update</li>
-<li>Don't perform logical ANDs in the "Find" widget using "+". Too slow</li>
-</ul>
-
-<h4>4.3 (März 10, 2011)</h4>
-<ul>
-<li> Clickable Variation arrows</li>
-<li> Paste Variation feature</li>
-<li> Database Switcher has been moved to the Gamelist Widget (and has some new icons)</li>
-<li> Gamelist can now perform logical ANDs in the search widget using "+", and include the date</li>
-<li> Gamelist now has remove-above and remove-below buttons</li>
-<li> FICS improvements, including a ping feature to indicate network health (*nix only), and player communications are saved as PGN comments</li>
-<li> FICS bug-fix: don't automatically accept rematches</li>
-<li> FICS "Opponent Info" button</li>
-<li> New Toolbar buttons: "Load First Game" , "Load Last Game"</li>
-<li> Bookmark Widget has been overhauled</li>
-<li> Analysis Engine's move history doesn't get spammed by "Mate in 1" (for eg) messages</li>
-<li> An engine can now be run in the Statusbar</li>
-<li> Allow engines to be reordered</li>
-<li> Simplify the Bestgames Widget : Remove the PGN pane, nice-ify the widget, and enable graph and best widgets to remember size</li>
-<li> Several interface speed-ups from Fulvio</li>
-<li> Other SCID C++ changes from Gerd and Fulvio, including "Don't decode games when copying games"</li>
-<li> Some Tree Search optimisations from SCID</li>
-<li> Sort by number of Variations and Comments from Gerd</li>
-<li> Help Widget has a search entrybox</li>
-<li> Help Widget font size (and Pgn Window) can be easily increased by control+wheelmouse </li>
-<li> When pasting FEN directly, do a castling sanity check</li>
-<li> Bugfix: When user starts scidvspc for the first time, Clipbase is left closed</li>
-<li> Browser widget has a nicer button bar, and windows wheel-mouse bindings</li>
-<li> Overhaul the Edit Menus</li>
-<li> Numerous GUI fixes</li>
-<li> Revert PlayerInfo to old format, but add a "Won Drawn Lost" header</li>
-<li> Tweak crosstable knock-out format</li>
-</ul>
 }
 
 set helpTitle(D,ShortCuts) "Abkürzungen"
