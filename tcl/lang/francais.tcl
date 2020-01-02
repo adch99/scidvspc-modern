@@ -39,7 +39,7 @@ menuText F FileExit "Quitter" 0 {Quitter Scid}
 # Edit menu:
 menuText F Edit "Éditer" 0
 menuText F EditAdd "Ajouter variante" 0 {Ajouter une variante}
-menuText F EditPasteVar "Variation Coller" 0
+menuText F EditPasteVar "Coller variante" 0
 menuText F EditDelete "Effacer variante" 0 {Effacer cette variante}
 menuText F EditFirst "Déplacer en tête" 0 \
   {Déplacer cette variante en tête de liste}
@@ -212,8 +212,7 @@ menuText F ToolsExpFilterHTML "Dans un fichier HTML..." 16 \
 menuText F ToolsExpFilterHTMLJS "Dans un fichier HTML et JavaScript..." 16 {Écrire le filtre dans un fichier HTML et JavaScript}  
 menuText F ToolsExpFilterLaTeX "Dans un fichier LaTeX..." 16 \
   {Écrire le filtre dans un fichier LaTeX}
-# ====== TODO To be translated ======
-menuText F ToolsExpFilterEPD "Export Filter to EPD/FEN" 17 {Write all filtered games to an EPD File}
+menuText F ToolsExpFilterEPD "Dans un fichier EPD/FEN" 17 {Écrire le filtre dans un fichier EPD/FEN}
 menuText F ToolsExpFilterGames "Exporter une liste de parties vers un fichier texte" 19 {Écrire une liste de parties vers un fichier texte formaté}
 menuText F ToolsImportOne "Importer une partie en PGN..." 0 \
   {Importer une partie à partir d'un texte PGN}
@@ -247,8 +246,7 @@ menuText F OptionsColour "Couleurs" 0 {Default text widget color}
 menuText F OptionsBackColour "Arrière-plan" 0 {Default text widget color}
 menuText F OptionsMainLineColour "Flèche coup principal" 0 {Mainline arrows}
 menuText F OptionsVarLineColour "Flèche coup variante" 0 {Variation arrows}
-# ====== TODO To be translated ======
-menuText F OptionsEngineLineColour "Engine Arrows" 0 {Engine arrows}
+menuText F OptionsEngineLineColour "Flèche moteur" 0 {Flèche moteur}
 menuText F OptionsRowColour "Surlignage coup bibliothèque" 0 {Default tree/book row color}
 menuText F OptionsSwitcherColour "Surlignage db switcher" 0 {Default db switcher color}
 menuText F OptionsProgressColour "Barre de progression" 0 {Default progressbar color}
@@ -264,8 +262,7 @@ menuText F OptionsFontsFixed "Fixe" 0 {Changer les polices de chasse fixe}
 menuText F OptionsGInfo "Informations de la partie" 7 {Options d'information de la partie}
 menuText F OptionsFics "FICS" 0
 menuText F OptionsFicsAuto "Autopromote Reine" 0
-# ====== TODO To be translated ======
-menuText F OptionsFicsClk "Store Clock times" 0
+menuText F OptionsFicsClk "Sauver la pendule" 0
 menuText F OptionsFicsColour "Couleur du texte" 0
 menuText F OptionsFicsSize "Taille de l'échiquier" 0
 menuText F OptionsFicsButtons "Boutons paramétrables" 0
@@ -386,7 +383,7 @@ translate F MergeGames {Fusionner les parties}
 translate F Preview {Prévisualiser}
 translate F Revert {Revenir}
 translate F Save {Enregistrer}
-translate F DontSave {Ne pas sauve}
+translate F DontSave {Ne pas sauver}
 translate F Search {Rechercher}
 translate F Stop {Arrêter}
 translate F Store {Enregistrer}
@@ -552,8 +549,7 @@ menuText F TreeOptAutosave "Sauver le cache automatiquement" 0
 menuText F TreeOptAutomask "Auto-chargement Mask" 0 "Auto-Load most recent mask with a tree open."
 menuText F TreeOptCacheSize "Taille du cache" 0 {Taille du cache}
 menuText F TreeOptShowBar "Affichage barre de progression" 0 "Show tree progress bar."
-# ====== TODO To be translated ======
-menuText F TreeOptShowFrame "Show Button Bar" 0 "Show tree button bar."
+menuText F TreeOptShowFrame "Affichage fenêtre boutons" 0 "Afficher la fenêtre de boutons."
 menuText F TreeOptSortBest "Tri des meilleurs jeux" 0 "Tri des meilleurs jeux selon ELO."
 menuText F TreeHelp "Aide" 0
 menuText F TreeHelpTree "Aide Arbre" 0
@@ -600,8 +596,7 @@ translate F CommentMove {Annoter coup}
 translate F CommentPosition {Annoter position}
 translate F AddMoveToMaskFirst {Ajoutez d'abord le coup au masque}
 translate F OpenAMaskFileFirst {Ouvrez d'abord un masque}
-# ====== TODO To be translated ======
-translate F positions {positions}
+translate F positions {Positions}
 translate F Moves {Coups}
 
 # Finder window:
@@ -632,8 +627,7 @@ translate F FinderCtxBackup {Sauvegarder}
 translate F FinderCtxCopy {Copier}
 translate F FinderCtxMove {Déplacer}
 translate F FinderCtxDelete {Supprimer}
-# ====== TODO To be translated ======
-translate F FinderDirOpen {Open Directory}
+translate F FinderDirOpen {Ouvrir Répertoire}
 
 # Player finder:
 menuText F PListFile "Fichier" 0
@@ -1124,12 +1118,9 @@ Voulez vous vraiment passer cette base en lecture seule?}
 translate F ExitDialog {Voulez-vous réellement quitter Scid?}
 translate F ClearGameDialog {Ce jeu a été modifié.\nVoulez-vous le sauvegarder?}
 translate F ExitUnsaved {Les bases de données suivantes ont des parties modifiées non sauvegardées. Si vous quittez maintenant, ces modifications seront perdues.}
-# ====== TODO To be translated ======
-translate F ChangeTextDialog {Enabling text colour globally requires restart.}
-# ====== TODO To be translated ======
-translate F ChangeDockDialog {Changing Docking requires a restart.}
-# ====== TODO To be translated ======
-translate F ExitNow {Exit now ?}
+translate F ChangeTextDialog {Changer les couleurs du texte nécessite un redémarrage.}
+translate F ChangeDockDialog {Changer le mode d'affichage nécessite un redémarrage.}
+translate F ExitNow {Quitter maintenant ?}
 
 # Import window:
 translate F PasteCurrentGame {Coller la partie courante}
@@ -1352,10 +1343,9 @@ translate F WhitePieces {Pièces blanches}
 translate F BlackPieces {Pièces noires}
 translate F WhiteBorder {Bordure des pièces blanches}
 translate F BlackBorder {Bordure des pièces noires}
-translate F ArrowMain   {Main Arrow}
-translate F ArrowVar    {Var Arrows}
-# ====== TODO To be translated ======
-translate F ShowArrows  {Show Arrows}
+translate F ArrowMain   {Flèche pricipale}
+translate F ArrowVar    {Flèches variantes}
+translate F ShowArrows  {Montrer les flèches}
 
 # Novelty window:
 translate F FindNovelty {Trouver la nouveauté}
@@ -1714,22 +1704,14 @@ translate F UriRejected	{Les fichiers suivant sont rejetés:}
 translate F UriRejectedDetail {Seuls les types de fichiers listés seront gérés:}
 translate F EmptyUriList {Le contenu déposé est vide.}
 translate F SelectionOwnerDidntRespond {Timeout durant l'envoi: absence de réponse.}
-# ====== TODO To be translated ======
-translate F PasteAnal {Paste Analysis}
-# ====== TODO To be translated ======
-translate F SortOpcodes {Sort Opcodes}
-# ====== TODO To be translated ======
-translate F AddPosition {Add Position}
-# ====== TODO To be translated ======
-translate F FindPos {Find Deepest Game Position}
-# ====== TODO To be translated ======
-translate F AnalPosition {Analyze Positions}
-# ====== TODO To be translated ======
-translate F StripOpcodes {Strip Opcodes}
-# ====== TODO To be translated ======
-translate F NoMoves {No moves from this position}
-# ====== TODO To be translated ======
-translate F CountBestMoves {Count Best Moves}
+translate F PasteAnal {Coller l'analyse}
+translate F SortOpcodes {Tri des Opcodes}
+translate F AddPosition {Ajout d'une position}
+translate F FindPos {Recherche position profonde}
+translate F AnalPosition {Analyse des positions}
+translate F StripOpcodes {Élimination des Opcodes}
+translate F NoMoves {Déplacement interdit depuis position}
+translate F CountBestMoves {Compteur des meilleurs déplacements}
 
 ##########
 #
