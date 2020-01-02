@@ -1515,11 +1515,8 @@ translate B NameEditReplace {Substituir}
 translate B NameEditWith {com}
 translate B NameEditMatches {Confere: Pressione Ctrl+1 a Ctrl+9 para selecionar}
 
-translate B CheckGamesWhich {Marcar jogos}
 
-translate B CheckAll {Todos os jogos}
 
-translate B CheckSelectFilterGames {Somente jogos filtrados}
 
 # Classify window:
 translate B Classify {Classificar}

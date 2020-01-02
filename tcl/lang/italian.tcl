@@ -1432,11 +1432,8 @@ translate I NameEditReplace {Sostituisci}
 translate I NameEditWith {con}
 translate I NameEditMatches {Corrispondenze: Digita da Ctrl+1 ad Ctrl+9 per scegliere}
 # ====== TODO To be translated ======
-translate I CheckGamesWhich {Check games}
 # ====== TODO To be translated ======
-translate I CheckAll {All games}
 # ====== TODO To be translated ======
-translate I CheckSelectFilterGames {Only games in filter}
 
 # Classify window:
 translate I Classify {Classifica}

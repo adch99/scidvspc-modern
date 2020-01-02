@@ -1289,9 +1289,6 @@ translate O NameEditWith {med}
 translate O NameEditMatches {Treff: Trykk Ctrl+1 til Ctrl+9 for å velge}
 
 # Check games window:
-translate O CheckGamesWhich {Sjekk partier}
-translate O CheckAll {Alle partier}
-translate O CheckSelectFilterGames {Kun partier i filteret}
 
 # Classify window:
 translate O Classify {Klassifiser}

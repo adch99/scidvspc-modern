@@ -1367,9 +1367,6 @@ translate N NameEditWith {met}
 translate N NameEditMatches {Gelijken: Druk Ctrl+1 tot Ctrl+9 om te selecteren}
 
 # Check games window:
-translate N CheckGamesWhich {Controleer partijen met}
-translate N CheckAll {Alle partijen}
-translate N CheckSelectFilterGames {Alleen partijen binnen het filter}
 
 # Classify window:
 translate N Classify {Classificeren}

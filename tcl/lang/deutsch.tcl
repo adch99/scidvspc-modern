@@ -1307,9 +1307,6 @@ translate D NameEditWith {durch}
 translate D NameEditMatches {Entsprechungen: Drücke Strg+1 bis Strg+9 zum Auswählen}
 
 # Check games window:
-translate D CheckGamesWhich {Konsistenzprüfung}
-translate D CheckAll {Alle Partien}
-translate D CheckSelectFilterGames {Partien im Filter}
 
 # Classify window:
 translate D Classify {Klassifiziere}

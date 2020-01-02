@@ -1335,9 +1335,6 @@ translate S NameEditSelect {Partidas a editar}
 translate S NameEditReplace {Reemplazar}
 translate S NameEditWith {Con}
 translate S NameEditMatches {Partidas: Presionar Ctrl+1 a Ctrl+9 para seleccionarla}
-translate S CheckGamesWhich {Revisar partidas}
-translate S CheckAll {Todas las partidas}
-translate S CheckSelectFilterGames {Solo partidas en filtro}
 
 # Classify window:
 translate S Classify {Clasificar}

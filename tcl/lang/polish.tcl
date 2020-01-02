@@ -1341,9 +1341,6 @@ translate P NameEditSelect {Partie do edycji}
 translate P NameEditReplace {Zastąp}
 translate P NameEditWith {przez}
 translate P NameEditMatches {Pasujące: Ctrl+1 do Ctrl+9 wybiera}
-translate P CheckGamesWhich {Sprawdź partie}
-translate P CheckAll {Wszystkie}
-translate P CheckSelectFilterGames {Tylko partie z filtra}
 
 # Classify window:
 translate P Classify {Przyporządkowanie ECO}

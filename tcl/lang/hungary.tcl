@@ -1469,11 +1469,8 @@ translate H NameEditReplace {Cserél}
 translate H NameEditWith {Erre}
 translate H NameEditMatches {Egyezések: Ctrl+1...Ctrl+9 választ.}
 # ====== TODO To be translated ======
-translate H CheckGamesWhich {Check games}
 # ====== TODO To be translated ======
-translate H CheckAll {All games}
 # ====== TODO To be translated ======
-translate H CheckSelectFilterGames {Only games in filter}
 
 # Classify window:
 translate H Classify {Osztályoz}

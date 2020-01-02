@@ -1267,9 +1267,6 @@ translate F NameEditSelect {Parties à éditer}
 translate F NameEditReplace {Remplacer}
 translate F NameEditWith {avec}
 translate F NameEditMatches {Correspondances: Presser Alt+1 à Alt+9 pour sélectionner}
-translate F CheckGamesWhich {Vérifier les parties}
-translate F CheckAll {Toutes les parties}
-translate F CheckSelectFilterGames {Jeux filtrés uniquement}
 
 # Classify window:
 translate F Classify {Classer}

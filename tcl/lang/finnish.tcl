@@ -1265,9 +1265,6 @@ translate L NameEditWith {Kanssa}
 translate L NameEditMatches {Vastaa: Paina Ctrl+1:sta  Ctrl+9:een valitaksesi}
 
 # Check games window:
-translate L CheckGamesWhich {Tarkista pelit}
-translate L CheckAll {Kaikki pelit}
-translate L CheckSelectFilterGames {Suodata pelit}
 
 # Classify window:
 translate L Classify {Luokittele}

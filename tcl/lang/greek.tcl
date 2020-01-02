@@ -1381,9 +1381,6 @@ translate G NameEditWith {Με}
 translate G NameEditMatches {Ομοιότητες: Πατήστε Ctrl+1 έως Ctrl+9 για επιλογή}
 
 # Check games window:
-translate G CheckGamesWhich {Έλεγχος Παρτίδων}
-translate G CheckAll {Όλες οι παρτίδες}
-translate G CheckSelectFilterGames {Παρτίδες Φίλτρου}
 
 # Classify window:
 translate G Classify {Κατάταξη}

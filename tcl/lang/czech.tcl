@@ -1459,11 +1459,8 @@ translate C NameEditReplace {Nahradit}
 translate C NameEditWith {}
 translate C NameEditMatches {Shoduje se: Stiskni Ctrl+1 a¾ Ctrl+9 pro výbìr}
 # ====== TODO To be translated ======
-translate C CheckGamesWhich {Check games}
 # ====== TODO To be translated ======
-translate C CheckAll {All games}
 # ====== TODO To be translated ======
-translate C CheckSelectFilterGames {Only games in filter}
 
 # Classify window:
 translate C Classify {Klasifikace}
