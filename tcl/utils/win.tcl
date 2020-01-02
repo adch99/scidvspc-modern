@@ -244,6 +244,10 @@ proc ::docking::move_tab {srctab dsttab {x {}} {y {}}} {
   # move tab
   set f [$srctab select]
   set o [$srctab tab $f]
+  if {[info patchlevel] == {8.6.10}} {
+    # hack to fix wish 8.6.10 bug https://core.tcl-lang.org/tk/tktview/077d49828b995ed700f9210c1c1789a90cff4d37
+    set o [regsub {compound {}} $o {compound none}]
+  }
   $srctab forget $f
   eval $dsttab add $f $o
 
