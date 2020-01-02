@@ -7,6 +7,7 @@
 # Massive update for Scid vs PC 4.19. Translated missing strings, 
 # fixed some inconsistencies and aligned with english.tcl. 180815 MS
 # Updated for Scid vs PC 4.20 190324 MS
+# Updated for Scid vs PC 4.21 200102 MS
 #
 # (1) Choose a letter code for the language. Currently assigned codes are:
 #      E=English, D=Deutsch, F=Francais, S=Spanish, B=Brasil Portuguese, U=Portuguese
@@ -213,8 +214,7 @@ menuText O ToolsExpFilterHTML "Eksporter filter til HTML-fil..." 0 \
   {Skriv alle partier i filteret til en HTML-fil}
 menuText O ToolsExpFilterHTMLJS "Eksporter filter til HTML/Javascript..." 0 {Lagre alle filtrerte partier til HTML/Javascript}
 menuText O ToolsExpFilterLaTeX "Eksporter filter til LaTeX-fil..." 0 {Skriv alle partier i filteret til en LaTeX-fil}
-# ====== TODO To be translated ======
-menuText O ToolsExpFilterEPD "Export Filter to EPD/FEN" 17 {Write all filtered games to an EPD File}
+menuText O ToolsExpFilterEPD "Eksporter filter som EPD/FEN" 17 {Lagrer alle filtrerte partier til en EPD-fil}
 menuText O ToolsExpFilterGames "Eksporter liste over partier som tekst" 0 {Lagrer en formatert liste over partiene}
 menuText O ToolsImportOne "Importer ett PGN-parti..." 0 \
   {Importer ett parti fra en PGN-fil}
@@ -257,8 +257,7 @@ menuText O OptionsColour "Farge" 0 {Standard tekstfarge}
 menuText O OptionsBackColour "Bakgrunn" 0 {Standard bakgrunnsfarge}
 menuText O OptionsMainLineColour "Hovedlinje piler" 0 {}
 menuText O OptionsVarLineColour "Variant piler" 0 {}
-# ====== TODO To be translated ======
-menuText O OptionsEngineLineColour "Engine Arrows" 0 {Engine arrows}
+menuText O OptionsEngineLineColour "Motorpiler" 0 {Motorpiler}
 menuText O OptionsRowColour "Rader" 0 {}
 menuText O OptionsSwitcherColour "Databasevelger" 0 {}
 menuText O OptionsProgressColour "Fremdriftslinje" 0 {Standard farge for fremdriftslinje}
@@ -274,7 +273,6 @@ menuText O OptionsFontsFixed "Fastbredde" 0 {Endre fastbreddeskrifttypen}
 menuText O OptionsGInfo "Partiinformasjon" 0 {Informasjonsinnstillinger}
 menuText O OptionsFics "FICS" 0
 menuText O OptionsFicsAuto "Automatisk dronning" 0
-# ====== TODO To be translated ======
 menuText O OptionsFicsClk "Store klokker" 0
 menuText O OptionsFicsColour "Tekstfarge" 0
 menuText O OptionsFicsSize "Brettstørrelse" 0
@@ -564,8 +562,7 @@ menuText O TreeOptAutosave "Autolagre hurtigbuffer" 0 {Autolagrer hurtigbufferet
 menuText O TreeOptAutomask "Åpne maske automatisk" 0 "Åpner siste maske med et åpent tre."
 menuText O TreeOptCacheSize "Mellomlager" 0 {Størrelse på mellomlager}
 menuText O TreeOptShowBar "Vis fremdrift" 0 "Viser fremdrift."
-# ====== TODO To be translated ======
-menuText O TreeOptShowFrame "Show Button Bar" 0 "Show tree button bar."
+menuText O TreeOptShowFrame "Vis knapperad" 0 "Vis knapperad."
 menuText O TreeOptSortBest "Sorter beste partier" 0 "Sorter beste partier etter ELO."
 menuText O TreeHelp "Hjelp" 0
 menuText O TreeHelpTree "Tre hjelp" 0
@@ -610,8 +607,7 @@ translate O CommentMove {Kommenter trekk}
 translate O CommentPosition {Kommenter stilling}
 translate O AddMoveToMaskFirst {Legg trekk til masken først}
 translate O OpenAMaskFileFirst {Åpne en maskefil først}
-# ====== TODO To be translated ======
-translate O positions {positions}
+translate O positions {stillinger}
 translate O Moves {Trekk}
 
 # Finder window:
@@ -642,8 +638,7 @@ translate O FinderCtxBackup {Sikkerhetskopi}
 translate O FinderCtxCopy {Kopier}
 translate O FinderCtxMove {Flytt}
 translate O FinderCtxDelete {Slett}
-# ====== TODO To be translated ======
-translate O FinderDirOpen {Open Directory}
+translate O FinderDirOpen {Åpne mappe}
 
 # Player finder:
 menuText O PListFile "Fil" 0
@@ -1135,12 +1130,9 @@ translate O ReadOnlyDialog {Ønsker du å skrivebeskytte databasen?
 translate O ExitDialog {Vil du virkelig avslutte Scid?}
 translate O ClearGameDialog {Partiet er endret.\nVil du lagre det?}
 translate O ExitUnsaved {Følgende baser har ulagrede endringer i partier. Hvis du avslutter nå vil disse endringene gå tapt.}
-# ====== TODO To be translated ======
-translate O ChangeTextDialog {Enabling text colour globally requires restart.}
-# ====== TODO To be translated ======
-translate O ChangeDockDialog {Changing Docking requires a restart.}
-# ====== TODO To be translated ======
-translate O ExitNow {Exit now ?}
+translate O ChangeTextDialog {Skru på farger globalt krever omstart.}
+translate O ChangeDockDialog {Endre dokking krever omstart.}
+translate O ExitNow {Avslutte nå?}
 
 # Import window:
 translate O PasteCurrentGame {Lim inn gjeldende parti}
@@ -1288,8 +1280,6 @@ translate O NameEditReplace {Erstatt}
 translate O NameEditWith {med}
 translate O NameEditMatches {Treff: Trykk Ctrl+1 til Ctrl+9 for å velge}
 
-# Check games window:
-
 # Classify window:
 translate O Classify {Klassifiser}
 translate O ClassifyWhich {ECO-klassifiser hvilke partier}
@@ -1362,8 +1352,7 @@ translate O WhiteBorder {Hvit ramme}
 translate O BlackBorder {Sort ramme}
 translate O ArrowMain   {Hovedpil}
 translate O ArrowVar    {Andre piler}
-# ====== TODO To be translated ======
-translate O ShowArrows  {Show Arrows}
+translate O ShowArrows  {Vis piler}
 
 # Novelty window:
 translate O FindNovelty {Finn nyhet}
@@ -1489,14 +1478,10 @@ translate O FixedDepth {Låst dybde}
 translate O Nodes {Noder}
 translate O Depth {Dybde}
 translate O Time {Tid}
-# ====== TODO To be translated ======
 translate O Auto {Auto}
-# ====== TODO To be translated ======
-translate O Score {Score}
-# ====== TODO To be translated ======
-translate O {Score Combo} {Score Combo}
-# ====== TODO To be translated ======
-translate O {Time Combo} {Time Combo}
+translate O Score {Poeng}
+translate O {Score Combo} {Kombinert poeng}
+translate O {Time Combo} {Kombinert tid}
 translate O SecondsPerMove {Sekunder per trekk}
 translate O DepthPerMove {Dybde per trekk}
 translate O MoveControl {Trekk-kontroll}
@@ -1598,8 +1583,7 @@ translate O FICSTimeseal {Tidsstempel}
 translate O FICSTimesealPort {Tidsstempel port}
 translate O FICSSilence {Konsoll-filter}
 translate O FICSOffers {Tilbud}
-# ====== TODO To be translated ======
-translate O FICSMakeOffer {Make Offer}
+translate O FICSMakeOffer {Tilby}
 translate O FICSGames {Partier}
 translate O FICSFindOpponent {Finn motstander}
 translate O FICSTakeback {Angre}
@@ -1744,22 +1728,14 @@ translate O UriRejected	{Disse filene er avvist:}
 translate O UriRejectedDetail {Kun følgende filtyper kan håndteres:}
 translate O EmptyUriList {Innholdet er tomt.}
 translate O SelectionOwnerDidntRespond {Tidsavbrudd under slipp: eier av utvalg svarte ikke.}
-# ====== TODO To be translated ======
-translate O PasteAnal {Paste Analysis}
-# ====== TODO To be translated ======
-translate O SortOpcodes {Sort Opcodes}
-# ====== TODO To be translated ======
-translate O AddPosition {Add Position}
-# ====== TODO To be translated ======
-translate O FindPos {Find Deepest Game Position}
-# ====== TODO To be translated ======
-translate O AnalPosition {Analyze Positions}
-# ====== TODO To be translated ======
-translate O StripOpcodes {Strip Opcodes}
-# ====== TODO To be translated ======
-translate O NoMoves {No moves from this position}
-# ====== TODO To be translated ======
-translate O CountBestMoves {Count Best Moves}
+translate O PasteAnal {Lim inn analyse}
+translate O SortOpcodes {Sorter Opcoder}
+translate O AddPosition {Legg til stilling}
+translate O FindPos {Finn dypeste stilling i parti}
+translate O AnalPosition {Analyser stillinger}
+translate O StripOpcodes {Strip Opcoder}
+translate O NoMoves {Ingen trekk fra denne stillingen}
+translate O CountBestMoves {Tell beste trekk}
 
 }
 # end of norsk.tcl
