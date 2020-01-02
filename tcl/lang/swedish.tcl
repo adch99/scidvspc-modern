@@ -1363,9 +1363,6 @@ translate W NameEditSelect {Partier att redigera}
 translate W NameEditReplace {Ersätt}
 translate W NameEditWith {med}
 translate W NameEditMatches {Matchar: Tryck Ctrl+1 till Ctrl+9 för att välja}
-translate W CheckGamesWhich {Kontrollera partier}
-translate W CheckAll {Alla partier}
-translate W CheckSelectFilterGames {Bara partier i filter}
 
 # Classify window:
 translate W Classify {Klassificera}

@@ -1334,9 +1334,6 @@ translate R NameEditWith {с}
 translate R NameEditMatches {Совпадения: нажмите Ctrl+1 - Ctrl+9 для выбора}
 
 # Check games window:
-translate R CheckGamesWhich {Проверенные партии}
-translate R CheckAll {Все партии}
-translate R CheckSelectFilterGames {Только фильтрованные партии}
 
 # Classify window:
 translate R Classify {Классифицировать}

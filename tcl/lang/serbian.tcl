@@ -1542,11 +1542,8 @@ translate Y NameEditReplace {Zameni}
 translate Y NameEditWith {sa}
 translate Y NameEditMatches {Podudara se: Pritisni Ctrl+1 do Ctrl+9 za izbor}
 # ====== TODO To be translated ======
-translate Y CheckGamesWhich {Check games}
 # ====== TODO To be translated ======
-translate Y CheckAll {All games}
 # ====== TODO To be translated ======
-translate Y CheckSelectFilterGames {Only games in filter}
 
 # Classify window:
 translate Y Classify {Klasifikuj}

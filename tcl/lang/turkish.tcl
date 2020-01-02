@@ -1267,9 +1267,6 @@ translate T NameEditWith {İle}
 translate T NameEditMatches {Eşleşmeler: Seçmek için Ctrl + 1 ile Ctrl + 9 tuşlarına basın.}
 
 # Check games window:
-translate T CheckGamesWhich {Oyunları kontrol et}
-translate T CheckAll {Bütün oyunlar}
-translate T CheckSelectFilterGames {Filtre oyunları}
 
 # Classify window:
 translate T Classify {Sınıflandır}

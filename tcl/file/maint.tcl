@@ -772,14 +772,14 @@ proc checkAllGames {} {
   }
   toplevel $w
   wm withdraw $w
-  wm title $w "[tr CheckGamesWhich]"
+  wm title $w "[tr CheckGames]"
   
   pack [frame $w.f] -side top -expand 1
   
-  label $w.f.label -font font_Bold -textvar ::tr(CheckGamesWhich)
+  label $w.f.label -font font_Bold -textvar ::tr(CheckGames)
   frame $w.f.g
-  radiobutton $w.f.g.all -textvar ::tr(CheckAll) -variable checkOption(AllGames) -value all
-  radiobutton $w.f.g.filter -textvar ::tr(CheckSelectFilterGames) -variable checkOption(AllGames) -value filter
+  radiobutton $w.f.g.all -textvar ::tr(SelectAllGames) -variable checkOption(AllGames) -value all
+  radiobutton $w.f.g.filter -textvar ::tr(SelectFilterGames) -variable checkOption(AllGames) -value filter
 
   pack $w.f.g.all $w.f.g.filter -side left  -padx 5
 
@@ -799,7 +799,7 @@ proc checkAllGames {} {
       unbusyCursor .
       .checkGames.f.progress delete time
       .checkGames.f.progress create text 295 10 -anchor e -font font_Regular -tags time \
-      -fill black -text "[tr Game]s Ok"
+      -fill black -text "[tr FICSGames] Ok"
     }
     .checkGames.f.b.cancel configure -command {focus .main ; destroy .checkGames}
     .checkGames.f.b.cancel configure -textvar ::tr(Close)
@@ -846,8 +846,8 @@ proc stripCommentsVars {arg {parent .}} {
   
   label $w.f.label -text "Stripping $arg cannot be undone."
   frame $w.f.g
-  radiobutton $w.f.g.all -textvar ::tr(CheckAll) -variable checkOption(AllGames) -value all
-  radiobutton $w.f.g.filter -textvar ::tr(CheckSelectFilterGames) -variable checkOption(AllGames) -value filter
+  radiobutton $w.f.g.all -textvar ::tr(SelectAllGames) -variable checkOption(AllGames) -value all
+  radiobutton $w.f.g.filter -textvar ::tr(SelectFilterGames) -variable checkOption(AllGames) -value filter
   set ::checkOption(AllGames) filter
   pack $w.f.g.all $w.f.g.filter -side left  -padx 5
   
@@ -2078,8 +2078,8 @@ proc stripExtraTags {{parent .}} {
   addHorizontalRule $w
 
   frame $w.filter
-  radiobutton $w.filter.all -textvar ::tr(CheckAll) -variable checkOption(AllGames) -value all
-  radiobutton $w.filter.filter -textvar ::tr(CheckSelectFilterGames) -variable checkOption(AllGames) -value filter
+  radiobutton $w.filter.all -textvar ::tr(SelectAllGames) -variable checkOption(AllGames) -value all
+  radiobutton $w.filter.filter -textvar ::tr(SelectFilterGames) -variable checkOption(AllGames) -value filter
 
   pack $w.filter.all $w.filter.filter -side left  -padx 5
   pack $w.filter -side top -expand 1
@@ -2158,8 +2158,8 @@ proc zeroTags {{parent .}} {
   addHorizontalRule $w
 
   frame $w.filter
-  radiobutton $w.filter.all -textvar ::tr(CheckAll) -variable checkOption(AllGames) -value all
-  radiobutton $w.filter.filter -textvar ::tr(CheckSelectFilterGames) -variable checkOption(AllGames) -value filter
+  radiobutton $w.filter.all -textvar ::tr(SelectAllGames) -variable checkOption(AllGames) -value all
+  radiobutton $w.filter.filter -textvar ::tr(SelectFilterGames) -variable checkOption(AllGames) -value filter
 
   pack $w.filter.all $w.filter.filter -side left  -padx 5
   pack $w.filter -side top -expand 1

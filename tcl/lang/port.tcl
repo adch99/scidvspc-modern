@@ -1272,9 +1272,6 @@ translate U NameEditSelect {Jogos para editar}
 translate U NameEditReplace {Substituir}
 translate U NameEditWith {com}
 translate U NameEditMatches {Confere: Pressione Ctrl+1 a Ctrl+9 para selecionar}
-translate U CheckGamesWhich {Verificar jogos}
-translate U CheckAll {Todos os jogos}
-translate U CheckSelectFilterGames {Apenas jogos no filtro}
 
 # Classify window:
 translate U Classify {Classificar}
