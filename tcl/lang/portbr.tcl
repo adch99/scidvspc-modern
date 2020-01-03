@@ -671,8 +671,7 @@ menuText B TreeOptAutosave "Salvar automaticamente arquivo de cache" 0 \
 menuText B TreeOptAutomask "Auto carregar mascara" 0 "Auto carrega a mascara mais recente com a arvore aberta."
 menuText B TreeOptCacheSize "Tamanho do Cache" 0 {Define o tamanho do cache}
 menuText B TreeOptShowBar "Mostra barra de Progresso" 0 "Mostra a barra de progresso da arvore."
-# ====== TODO To be translated ======
-menuText B TreeOptShowFrame "Show Button Bar" 0 "Show tree button bar."
+menuText B TreeOptShowFrame "Exibe Barra de Botoes" 0 "Exibe a barra de botoes da arvore."
 
 
 
@@ -723,8 +722,7 @@ translate B CommentMove {Comentar movimento}
 translate B CommentPosition {Comentar posição}
 translate B AddMoveToMaskFirst {Adicionar movimento à máscara primeiro}
 translate B OpenAMaskFileFirst {Abrir uma máscara primeiro}
-# ====== TODO To be translated ======
-translate B positions {positions}
+translate B positions {posicoes}
 translate B Moves {Movimentos}
 
 # Finder window:
@@ -760,8 +758,7 @@ translate B FinderCtxCopy {Copiar}
 translate B FinderCtxMove {Mover}
 
 translate B FinderCtxDelete {Apagar}
-# ====== TODO To be translated ======
-translate B FinderDirOpen {Open Directory}
+translate B FinderDirOpen {Diretorio Aberto}
 
 # Player finder:
 menuText B PListFile "Arquivo" 0
@@ -1354,12 +1351,9 @@ translate B ExitDialog {Voce quer realmente sair do Scid?}
 
 translate B ClearGameDialog {Este jogo foi alterado.\nVoce quer salva-lo?}
 translate B ExitUnsaved {As bases a seguir tem mudanças nos jogos que não foram salvas. Se você sair agora, essas mudanças serão perdidas.} 
-# ====== TODO To be translated ======
-translate B ChangeTextDialog {Enabling text colour globally requires restart.}
-# ====== TODO To be translated ======
-translate B ChangeDockDialog {Changing Docking requires a restart.}
-# ====== TODO To be translated ======
-translate B ExitNow {Exit now ?}
+translate B ChangeTextDialog {Habilitar cor do texto globalmente exige reinicio.}
+translate B ChangeDockDialog {Alterar a docagem exige reinicio.}
+translate B ExitNow {Sair agora ?}
 
 
 # Import window:
@@ -2011,7 +2005,6 @@ translate B KingsIndianMainLine {India do Rei Linha Principal}
 
 
 # FICS
-# TODO
 translate B ConfigureFics {Configurar FICS}
 translate B FICSLogin {Login}
 translate B FICSGuest {Login como convidado}
@@ -2126,7 +2119,6 @@ translate B CCDlgConfigRelay {Observar jogos}
 translate B CCDlgConfigRelayHelp {Consulta a pagina de jogos em http://www.iccf-webchess.com e mostra o jogo a ser observado.  Se voce enxergar o tabuleiro, copie a URL do seu navegador para a lista abaixo. Apenas uma URL por linha!\nExemplo: http://www.iccf-webchess.com/MakeAMove.aspx?id=266452  }
 
 # Connect Hardware dialoges
-# TODO....
 translate B ExtHWConfigConnection {Configurar hardware externo}
 translate B ExtHWPort {Porta}
 translate B ExtHWEngineCmd {Comando do Engine}
@@ -2138,7 +2130,6 @@ translate B ExtHWInputEngine {Entrar com o Engine}
 translate B ExtHWNoBoard {Nenhum tabuleiro}
 
 # Input Engine dialogs
-# TODO....
 translate B IEConsole {Entrar na console do Engine}
 translate B IESending {Movimentos enviados para}
 translate B IESynchronise {Sincronizar}
@@ -2173,22 +2164,14 @@ translate B UriRejectedDetail {Somente os tipos de arquivo listados podem ser tr
 translate B EmptyUriList {Conteudo informado está vazio.}
 
 translate B SelectionOwnerDidntRespond {Timeout durante o envio: proprietario da seleção não responde.}
-# ====== TODO To be translated ======
-translate B PasteAnal {Paste Analysis}
-# ====== TODO To be translated ======
-translate B SortOpcodes {Sort Opcodes}
-# ====== TODO To be translated ======
-translate B AddPosition {Add Position}
-# ====== TODO To be translated ======
-translate B FindPos {Find Deepest Game Position}
-# ====== TODO To be translated ======
-translate B AnalPosition {Analyze Positions}
-# ====== TODO To be translated ======
-translate B StripOpcodes {Strip Opcodes}
-# ====== TODO To be translated ======
-translate B NoMoves {No moves from this position}
-# ====== TODO To be translated ======
-translate B CountBestMoves {Count Best Moves}
+translate B PasteAnal {Colar Analise}
+translate B SortOpcodes {Codigos Operacionais de Ordenacao}
+translate B AddPosition {Inserir posicao}
+translate B FindPos {Procurar posicao mais profunda no jogo}
+translate B AnalPosition {Analisar posicoes}
+translate B StripOpcodes {Remover Codigos Operacionais}
+translate B NoMoves {Nenhum movimento a partir desta posicao}
+translate B CountBestMoves {Contar os melhores movimentos}
 
 }
 
