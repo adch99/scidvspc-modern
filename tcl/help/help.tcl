@@ -5806,56 +5806,54 @@ or
 set helpTitle(BookTuning) "Book tuning"
 set helpText(BookTuning) {<h1>Book Tuning</h1>
    <p><i>
-   Opening Books are small databases recording moves at the start of a game and how often each move occurs. For more information, see 
-<a Book>Book Window</a>.</i></p>
+   For general Polyglot Book information, see <a Book>Book Window</a>.</i></p>
 
    <p>
    Using Scid's <run ::book::tuning><green>Book Tuning</green></run> feature, one
    can adjust the value associated with any move in an opening book.
-</p>
-   <p>
    To navigate through the branches of the book one can just click on
-   the line in the book tuning window or move around the game as usual
-   in Scid.
-   </p>
-   <p>
-   To adjust the probability, e.g. rise the probability of a certain
-   variation, one can just increase its value. Though the other values
-   stay the same, Scid will recalculate once <b>Save</b> is
+   the line in the book tuning window or move around the game as usual.
+   Adjusting a probability via the spinbox - the other values
+   stay the same until being recalculated once <b>Save</b> is
    pressed.
+   </p>
+   <p><i>
+   Only integer values are shown - a zero may signify that this move has a probability of less
+   than 1%, and most likely happens with books automatically generated
+   from game collections. One should also note that all values should add up to 100%.
    </p>
 <h3>Adding Lines</h3>
    <p>
    Scid vs. PC includes <b>Add Line</b> and <b>Remove Line</b> features. The first will add
-   all moves (or all White or Black moves) <b>to</b> the current position, the latter removes all moves <b>from</b> then current move till the game/var end.
-   </p>
-   
-  <p>
-  <i>Due to implementation, these routines are not terribly optimal, and can be slow with large books/move sequences</i>.
-   </p>
-<h3>Note</h3>
-<p>
-   Only integer values are shown; a zero may signify that this move has a probability of less
-   than 1%, and most likely happens with books automatically generated
-   from game collections. One should also note that all values should add up to 100%.
-   </p>
+   all moves (or all White or Black moves) <b>to</b> the current position, the latter removes
+   all moves <b>from</b> then current move till the game/var end. </p>
+   <p><i>
+   Unlike adding and removing single moves , these line features ARE automatically saved
+   to the book. And - due to implementation - they are not terribly optimal and may
+   be slow with large books/move sequences</i>.</p>
 <h3>Importing Books</h3>
-   <p><i>For information about exporting games to Polyglot Books, see
-   the <a Book Polyglot>Polyglot</a> section.
-   </i></p>
    <p>
-   Choosing <b>Import</b> will import a branch of the book from
-   the current position onwards <b>into a single game</b>. The continuation
-   with the highest probability will make up the main line (or first variation).
-   This allows to cherry-pick
-   selected lines a new book created from the PGN (using polyglot). Note,
-   Scid can only handle 3000 moves in a single game (todo - verify/alter this limit),
-   therefore it will most likely not be possible (or sensible) to
-   export a whole opening book into one game. Also note that import
-   can be done incrementally. That is, new lines are added to already
-   existing ones.
-   </p>
-  <p><footer>Updated: Scid vs. PC 4.21 December, 2019 </footer></p>
+   The <b>Import</b> button imports a branch of the book, from
+   the current position onwards, <b>into a single game</b>.
+   (The continuation with the highest probability will make up the first variation 
+   , or main-line if adding on to the end of a game/variation).
+   This allows to cherry-pick selected lines, and create a new book (exported from the PGN using the full version of <a Book Polyglot>polyglot</a>).
+   </p><p>
+   Scid's default limit for importing books is 3000 moves.
+   This value is assigned by ::book::exportMax , and can be altered from the <a Console>console</a>
+   if desired (eg 'set ::book::exportMax 10000'), but doing so requires caution as higher limits
+   are not properly tested (todo) and PGN limits may also apply.
+   Books can consist of tens or hundreds of thousands of positions.
+   </p><p>
+   Moreover - in general it is not possible to import a whole book into a single game.
+   Polyglot books are simply chess positions (and probabilities), with no requirement
+   for them to be continuous or inclusive.
+   Consider a book with entries for both White King and Queen-side castling. There is obviously no
+   way to import both these positions into a single game. Additionaly - the number of book positions
+   from any one position is not easy to discern (todo), though the total number of entries
+   is it's size in bytes divided by 16.
+  </p>
+  <p><footer>Updated: Scid vs. PC 4.21 January, 2020 </footer></p>
 }
 
 set helpTitle(Novag) "Novag Citrine"

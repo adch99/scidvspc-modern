@@ -481,7 +481,10 @@ if {0} {
     
     # frame $w.left.space1 -height 60
     dialogbutton $w.left.export -text $::tr(Import) -command ::book::export
-    dialogbutton $w.left.save -text $::tr(Save) -command ::book::save
+    dialogbutton $w.left.save -text $::tr(Save) -command {
+      ::book::save 
+      ::book::refreshTuning
+    }
     frame $w.left.space2 -height 10
     dialogbutton $w.left.help -text $::tr(Help) -command {helpWindow BookTuning}
     dialogbutton $w.left.close -text $::tr(Close) -command "destroy $w"
