@@ -245,6 +245,10 @@ if {[llength $engines(list)] == 0} {
   }
 
   if {$macOS} {
+    engine "Name Critter
+            Cmd  $scidShareDir/engines/critter-16a
+            Dir  $scidUserDir
+            UCI  1"
     engine "Name Stockfish
             Cmd  $scidShareDir/engines/stockfish
             Dir  $scidUserDir
