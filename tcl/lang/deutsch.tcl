@@ -1622,7 +1622,7 @@ translate D FICSTimesealPort {Timeseal Port}
 translate D FICSSilence {Konsolenfilter}
 translate D FICSOffers {Angebot}
 translate D FICSMakeOffer {Angebot machen}
-translate D FICSGames {laufende Partien}
+translate D FICSGames {Partien}
 translate D FICSFindOpponent {Gegner suchen}
 translate D FICSTakeback {Zurücknehmen}
 translate D FICSTakeback2 {Zwei zurücknehmen}
@@ -8395,65 +8395,72 @@ set helpText(D,FICScommands) {<h1>FICS-Befehle und -Variablen</h1>
   # Book tuning
 set helpTitle(D,BookTuning) "Eröffnungsbuch anpassen"
 set helpText(D,BookTuning) {<h1>Eröffnungsbuch anpassen</h1>
-  <p><i>Eröffnungsbücher sind kleine Datenbanken, die ab Partiebeginn
-  die Spielzüge und ihre Häufigkeit aufzeichnen. Für weitere
-  Informationen siehe <a Book>Eröffnungsbuchfenster</a></i>.</p>
+
+  <p><i>Für allgemeine Informationen zu Polyglot
+  siehe <a Book>Eröffnungsbuchfenster</a></i>.</p>
 
   <p>Bei Verwendung von
-  Scids <run ::book::tuning><green>Eröffnungsbuch
-  Tuning</green></run> kann man den Wert anpassen, der irgendeinem
-  Zug in einem Eröffnungsbuch zugeordnet ist.</p>
-  
-  <p>Um durch die Verästelungen des Eröffnungsbuches zu navigieren,
-  kann man auf die Fortsetzung im Eröffnungsbuchfenster klicken oder
-  sich wie in Scid üblich in der Partie bewegen.</p>
-  
-  <p>Um die Wahrscheinlichkeit anzupassen, d.h., die
-  Wahrscheinlichkeit einer gewissen Variante zu erhöhen, kann man
-  einfach ihren Wert erhöhen. Obwohl die anderen Werte gleich bleiben,
-  wird Scid neu berechnen, wenn einmal <b>Speichern</b> gedrückt
+  Scids <run ::book::tuning><green>Eröffnungsbuch Tuning</green></run>
+  kann man den Wert anpassen, der irgendeinem Zug in einem
+  Eröffnungsbuch zugeordnet ist. Um durch die Verästelungen des
+  Eröffnungsbuches zu navigieren, kann man auf die Fortsetzung im
+  Fenster "Eröffnungsbuch Tuning" klicken oder sich wie üblich in der
+  Partie bewegen. Die Wahrscheinlichkeit kann über die Spinbox
+  (Drehfeld) angepaßt werden. Die anderen Werte bleiben gleich bis sie
+  neu berechnet werden, wenn einmal <b>Speichern</b> gedrückt
   wurde.</p>
-  
+
+  <p><i>Es werden nur Integerwerte angezeigt. Eine Null kann bedeuten,
+  daß dieser Zug eine Wahrscheinlichkeit von weniger als 1% hat und
+  sehr wahrscheinlich passiert dies mit Büchern, die aus
+  Partiensammlungen erstellt wurden. Man sollte auch darauf achten,
+  daß sich alle Werte auf 100% aufaddieren sollten.</i></p>
+
   <h3>Fortsetzungen hinzufügen</h3>
-  
+
   <p>ScidvsPC enthält die Funktionen <b>Zugfolge hinzufügen</b>
   und <b>Zugfolge entfernen</b>. Erstere fügt alle Züge (oder alle
   Weiß- oder Schwarzzüge) <b>zur</b> aktuellen Stellung
   hinzu. Letztere entfernt alle Züge <b>ab</b> dem aktuellen Zug bis
-  zum Partie-/Variantenende.
-  </p>
-  <p><i>Aufgrund der Implementation sind diese Routinen nicht optimal
-  und können bei großen Eröffnungsbüchern/Zugfolgen langsam
+  zum Partie-/Variantenende.</p>
+
+  <p><i>Anders als beim Hinzufügen und Entfernen einzelner Züge WERDEN
+  diese Fortsetzungsmöglichkeiten automatisch im Eröffnungsbuch
+  gespeichert. Und - aufgrund der Implementation - sind sie nicht
+  besonders optimal und können mit großen Büchern/Zugfolgen langsam
   sein.</i></p>
 
-  <h3>Hinweis</h3>
-
-  <p>Es werden nur Integerwerte angezeigt. Eine Null kann bedeuten,
-  daß dieser Zug eine Wahrscheinlichkeit von weniger als 1% hat. Dies
-  passiert sehr wahrscheinlich mit aus Partiensammlungen automatisch
-  erzeugten Eröffnungsbüchern. Man sollte auch beachten, daß sich alle
-  Werte auf 100% aufaddieren.</p>
-
   <h3>Eröffnungsbücher importieren</h3>
-  
-  <p><i>Für Informationen bezüglich des Exports mehrerer Partien in
-  PolyGlot-Bücher siehe den Abschnitt <a Book
-  Polyglot>PolyGlot</a></i>.</p>
-  
-  <p>Wenn man <b>Import</b> wählt, dann wird ein Zweig des Buches ab
-  der aktuellen Stellung aufwärts <b>in eine einzelne Partie</b>
-  importiert. Die Fortsetzung mit der höchsten Wahrscheinlichkeit
-  bildet die Hauptfortsetzung (oder erste Variante). Dies erlaubt es,
-  aus einem Buch, das (unter Benutzung von polyglot) aus PGN erstellt
-  wurde, die besten Fortsetzungen herauszupicken. Beachten Sie, daß
-  Scid nur 3.000 Züge in einer einzigen Partie verarbeiten kann (noch
-  zu erledigen: dieses Limit überprüfen/ändern). Deshalb wird es sehr
-  wahrscheinlich nicht möglich (oder sinnvoll) sein, ein ganzes
-  Eröffnungsbuch in eine Partie zu exportieren. Beachten Sie auch, daß
-  der Import schrittweise erfolgen kann. Das heißt, neue Fortsetzungen
-  werden zu bereits bestehenden hinzugefügt.</p>
 
-  <p><footer>Aktualisiert: Scid vs. PC 4.21, Dezember 2019 </footer></p>
+  <p>Wenn man <b>Importieren</b> wählt, dann wird ein Zweig des Buches
+  ab der aktuellen Stellung aufwärts <b>in eine einzelne Partie</b>
+  importiert (die Fortsetzung mit der höchsten Wahrscheinlichkeit
+  bildet die erste Variante oder Hauptfortsetzung, wenn man sie ans
+  Ende einer Partie/Variante hinzufügt). Dies erlaubt es, die besten
+  Fortsetzungen herauszupicken und ein neues Buch zu erstellen (das
+  von PGN exportiert wurde unter Benutzung der vollständigen Version
+  von <a Book Polyglot>polyglot</a>).</p>
+
+  <p>Scids Standardlimit für das Importieren von Büchern beträgt 3.000
+  Züge. Dieser Wert wird über ::book::exportMax zugewiesen und kann,
+  falls gewünscht, von der <a Console>Konsole</a> aus geändert
+  werden. Falls man dies macht, ist Vorsicht angebracht, da höhere
+  Limits nicht ausreichend getestet sind (todo - noch zu erledigen)
+  und PGN-Limits können ebenfalls betroffen sein. Bücher können aus
+  zehn- oder hunderttausenden von Stellungen bestehen.</p>
+
+  <p>Außerdem - im Allgemeinen ist es nicht möglich, ein ganzes Buch
+  in eine einzelne Partie zu importieren. Polyglot-Bücher sind einfach
+  Schachstellungen (und -wahrscheinlichkeiten) ohne Anspruch darauf,
+  daß sie fortfolgend oder mitinbegriffen sind. Betrachten Sie ein
+  Buch mit Einträgen sowohl für den weißen König als auch für die
+  große Rochade. Es gibt offensichtlich keinen Weg, diese beiden
+  Stellungen in eine einzelne Partie zu importieren. Zusätzlich - die
+  Anzahl der Buchstellungen von irgendeiner Stellung ist nicht einfach
+  zu unterscheiden (todo - noch zu erledigen), obwohl die Gesamtzahl
+  an Einträgen ihre Größe in Bytes dividiert durch 16 ist.</p>
+
+  <p><footer>Aktualisiert: Scid vs. PC 4.21, Januar 2020 </footer></p>
 }
 
 set helpTitle(D,Novag) "Novag Citrine"
