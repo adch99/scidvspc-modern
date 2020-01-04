@@ -1,4 +1,4 @@
-Rebased by Steven, 17/12/2019. Bugs ??
+Rebased by Steven, 4/1/2020. Bugs ??
 To apply the patch, use "patch --dry-run -p0 <THISFILE"
 then repeat without the "--dry-run" if previous results seem satisfactory.
 Do a make clean, then rerun ./configure before make && make install
@@ -13,7 +13,7 @@ Future work is here: https://github.com/brittonf/scid-vs-variants
 
 Index: Makefile.conf
 ===================================================================
---- Makefile.conf	(revision 3055)
+--- Makefile.conf	(revision 3091)
 +++ Makefile.conf	(working copy)
 @@ -292,7 +292,7 @@
  	install -m 755 -d $(SHAREDIR)
@@ -24,7 +24,7 @@ Index: Makefile.conf
  	install -m 644 -p scid.eco $(SHAREDIR)/data/
  	install -m 644 -p spelling.ssp $(SHAREDIR)
  	install -m 755 -d $(SHAREDIR)/books
-@@ -268,7 +268,7 @@
+@@ -349,7 +349,7 @@
  	rm -rf $(SHAREDIR)/bases
  	rm -rf $(SHAREDIR)/data/
  	rm -f $(SHAREDIR)/spelling.ssp
@@ -33,7 +33,7 @@ Index: Makefile.conf
  	rm -f $(BINDIR)/sc_spell $(BINDIR)/sc_eco $(BINDIR)/sc_import
  	rm -f $(BINDIR)/sc_remote $(BINDIR)/sc_tree $(BINDIR)/scidpgn
  	rm -f $(BINDIR)/pgnfix $(BINDIR)/spliteco
-@@ -316,9 +316,9 @@
+@@ -397,9 +397,9 @@
  
  
  scid: $(TCLS)
@@ -48,9 +48,9 @@ Index: Makefile.conf
  
 Index: Makefile.conf.darwin
 ===================================================================
---- Makefile.conf.darwin	(revision 2727)
+--- Makefile.conf.darwin	(revision 3091)
 +++ Makefile.conf.darwin	(working copy)
-@@ -207,7 +207,7 @@
+@@ -288,7 +288,7 @@
  	install -m 755 -d $(SHAREDIR)
  	install -m 755 -d $(BINDIR)
  	install -m 755 -d $(SHAREDIR)/data/
@@ -59,7 +59,7 @@ Index: Makefile.conf.darwin
  	install -m 644 -p scid.eco $(SHAREDIR)/data/
  	install -m 644 -p spelling.ssp $(SHAREDIR)
  	install -m 755 -d $(SHAREDIR)/books
-@@ -246,7 +246,7 @@
+@@ -327,7 +327,7 @@
  	rm -rf $(SHAREDIR)/bases
  	rm -rf $(SHAREDIR)/data/
  	rm -f $(SHAREDIR)/spelling.ssp
@@ -68,7 +68,7 @@ Index: Makefile.conf.darwin
  	rm -f $(BINDIR)/sc_spell $(BINDIR)/sc_eco $(BINDIR)/sc_import
  	rm -f $(BINDIR)/sc_remote $(BINDIR)/sc_tree $(BINDIR)/scidpgn
  	rm -f $(BINDIR)/pgnfix $(BINDIR)/spliteco
-@@ -274,9 +274,9 @@
+@@ -355,9 +355,9 @@
  
  
  scid: $(TCLS)
@@ -83,7 +83,7 @@ Index: Makefile.conf.darwin
  
 Index: src/game.cpp
 ===================================================================
---- src/game.cpp	(revision 3055)
+--- src/game.cpp	(revision 3091)
 +++ src/game.cpp	(working copy)
 @@ -444,7 +444,8 @@
  void
@@ -362,7 +362,7 @@ Index: src/game.cpp
  
 Index: src/gfile.h
 ===================================================================
---- src/gfile.h	(revision 3055)
+--- src/gfile.h	(revision 3091)
 +++ src/gfile.h	(working copy)
 @@ -28,8 +28,7 @@
  #else
@@ -376,7 +376,7 @@ Index: src/gfile.h
  // The block structure type:
 Index: src/index.h
 ===================================================================
---- src/index.h	(revision 3055)
+--- src/index.h	(revision 3091)
 +++ src/index.h	(working copy)
 @@ -30,8 +30,8 @@
  //////////////////////////////////////////////////////////////////////
@@ -391,7 +391,7 @@ Index: src/index.h
  // max. number of games is 2^(3*8)-1-1,
 Index: src/movelist.h
 ===================================================================
---- src/movelist.h	(revision 3055)
+--- src/movelist.h	(revision 3091)
 +++ src/movelist.h	(working copy)
 @@ -46,6 +46,11 @@
      squareT  epSquare;       // pre-move information
@@ -407,7 +407,7 @@ Index: src/movelist.h
  inline bool isNullMove (simpleMoveT * sm)
 Index: src/namebase.cpp
 ===================================================================
---- src/namebase.cpp	(revision 3055)
+--- src/namebase.cpp	(revision 3091)
 +++ src/namebase.cpp	(working copy)
 @@ -111,24 +111,7 @@
      fileNameT fname;
@@ -445,7 +445,7 @@ Index: src/namebase.cpp
      Header.numNames[NAME_EVENT] = readThreeBytes (FilePtr);
 Index: src/namebase.h
 ===================================================================
---- src/namebase.h	(revision 3055)
+--- src/namebase.h	(revision 3091)
 +++ src/namebase.h	(working copy)
 @@ -55,8 +55,7 @@
  const caseFlagT
@@ -459,7 +459,7 @@ Index: src/namebase.h
  
 Index: src/position.cpp
 ===================================================================
---- src/position.cpp	(revision 3055)
+--- src/position.cpp	(revision 3091)
 +++ src/position.cpp	(working copy)
 @@ -14,6 +14,7 @@
  
@@ -1270,7 +1270,7 @@ Index: src/position.cpp
  
 Index: src/position.h
 ===================================================================
---- src/position.h	(revision 3055)
+--- src/position.h	(revision 3091)
 +++ src/position.h	(working copy)
 @@ -24,6 +24,8 @@
  #include "sqset.h"
@@ -1329,7 +1329,7 @@ Index: src/position.h
      squareT *   GetList (colorT c)    { return List[c]; }
 Index: src/tkscid.cpp
 ===================================================================
---- src/tkscid.cpp	(revision 3055)
+--- src/tkscid.cpp	(revision 3091)
 +++ src/tkscid.cpp	(working copy)
 @@ -505,8 +505,8 @@
      clipbase->backupCache->SetPolicy (TREECACHE_Oldest);
@@ -1466,7 +1466,7 @@ Index: src/tkscid.cpp
      return TCL_OK;
  }
  
-@@ -15348,6 +15242,7 @@
+@@ -15350,6 +15244,7 @@
          char cboard [40];
          pos->PrintCompactStrFlipped (cboard);
          posFlip->ReadFromCompactStr ((byte *) cboard);
@@ -1476,7 +1476,7 @@ Index: src/tkscid.cpp
      }
 Index: tcl/edit.tcl
 ===================================================================
---- tcl/edit.tcl	(revision 3055)
+--- tcl/edit.tcl	(revision 3091)
 +++ tcl/edit.tcl	(working copy)
 @@ -67,6 +67,9 @@
        set fenStr "$s1 $s2 [lrange $fenStr 2 end]"
@@ -1529,7 +1529,7 @@ Index: tcl/edit.tcl
    pack $sr.b.invert	-side top -padx 5 -pady 1
 Index: tcl/file/bookmark.tcl
 ===================================================================
---- tcl/file/bookmark.tcl	(revision 3055)
+--- tcl/file/bookmark.tcl	(revision 3091)
 +++ tcl/file/bookmark.tcl	(working copy)
 @@ -243,7 +243,7 @@
      if {[string compare -nocase [string range $fname end-3 end] .pgn] == 0} {
@@ -1542,9 +1542,9 @@ Index: tcl/file/bookmark.tcl
    # Find and load the best database game matching the bookmark:
 Index: tcl/file/finder.tcl
 ===================================================================
---- tcl/file/finder.tcl	(revision 3055)
+--- tcl/file/finder.tcl	(revision 3091)
 +++ tcl/file/finder.tcl	(working copy)
-@@ -319,8 +319,8 @@
+@@ -316,8 +316,8 @@
  
    busyCursor .
    update
@@ -1555,7 +1555,7 @@ Index: tcl/file/finder.tcl
        unbusyCursor .
        tk_messageBox -title Scid -icon error -type ok -message "File copy error $err"
        return
-@@ -345,8 +345,8 @@
+@@ -342,8 +342,8 @@
    }
    set dir [tk_chooseDirectory -initialdir [file dirname $f] -parent .finder]
    if {$dir != ""} {
@@ -1566,7 +1566,7 @@ Index: tcl/file/finder.tcl
          tk_messageBox -title Scid -icon error -type ok -message "File copy error $err" -parent .finder
          return
        }
-@@ -369,9 +369,9 @@
+@@ -366,9 +366,9 @@
    }
    set dir [tk_chooseDirectory -initialdir [file dirname $f] -parent .finder ]
    if {$dir != ""} {
@@ -1578,7 +1578,7 @@ Index: tcl/file/finder.tcl
          tk_messageBox -title Scid -icon error -type ok -message "File rename error $err" -parent .finder
          return
        }
-@@ -411,15 +411,15 @@
+@@ -408,15 +408,15 @@
  
    set n "[file dirname $f]/$newname"
  
@@ -1599,7 +1599,7 @@ Index: tcl/file/finder.tcl
  	 } err ] } {
        tk_messageBox -title Scid -icon error -type ok -message "File copy error $err"
        return
-@@ -480,8 +480,8 @@
+@@ -477,8 +477,8 @@
    set answer [tk_messageBox -title Scid -icon warning -type yesno -parent .finder \
                  -message "Do you want to permanently delete $f ?"]
    if {$answer == "yes"} {
@@ -1610,7 +1610,7 @@ Index: tcl/file/finder.tcl
      }
      file delete $f
    }
-@@ -526,10 +526,10 @@
+@@ -527,10 +527,10 @@
        set showFile 0
        set rootname [file rootname $f]
        set type PGN
@@ -1625,7 +1625,7 @@ Index: tcl/file/finder.tcl
        } elseif {$ext == ".epd"} {
 Index: tcl/file/maint.tcl
 ===================================================================
---- tcl/file/maint.tcl	(revision 3055)
+--- tcl/file/maint.tcl	(revision 3091)
 +++ tcl/file/maint.tcl	(working copy)
 @@ -12,7 +12,7 @@
  ################################################################################
@@ -1638,7 +1638,7 @@ Index: tcl/file/maint.tcl
    if {$fName == ""} { return }
 Index: tcl/file/recent.tcl
 ===================================================================
---- tcl/file/recent.tcl	(revision 3055)
+--- tcl/file/recent.tcl	(revision 3091)
 +++ tcl/file/recent.tcl	(working copy)
 @@ -75,7 +75,7 @@
  
@@ -1651,7 +1651,7 @@ Index: tcl/file/recent.tcl
    for {set i 1} {$i <= [sc_base count total]} {incr i} {
 Index: tcl/file.tcl
 ===================================================================
---- tcl/file.tcl	(revision 3055)
+--- tcl/file.tcl	(revision 3091)
 +++ tcl/file.tcl	(working copy)
 @@ -87,8 +87,8 @@
      return
@@ -1902,9 +1902,9 @@ Index: tcl/file.tcl
  
 Index: tcl/help/help.tcl
 ===================================================================
---- tcl/help/help.tcl	(revision 3055)
+--- tcl/help/help.tcl	(revision 3091)
 +++ tcl/help/help.tcl	(working copy)
-@@ -4318,6 +4318,7 @@
+@@ -4326,6 +4326,7 @@
    <li>Project page  <url http://sourceforge.net/projects/scidvspc>http://sourceforge.net/projects/scidvspc</url></li>
    <li>Online documentation <url http://scidvspc.sourceforge.net/doc/Contents.htm>http://scidvspc.sourceforge.net/doc/Contents.htm</url></li>
    <br>
@@ -1914,9 +1914,9 @@ Index: tcl/help/help.tcl
    <li>FICS <url http://www.freechess.org>www.freechess.org</url></li>
 Index: tcl/lang/english.tcl
 ===================================================================
---- tcl/lang/english.tcl	(revision 3055)
+--- tcl/lang/english.tcl	(revision 3091)
 +++ tcl/lang/english.tcl	(working copy)
-@@ -1368,15 +1368,13 @@
+@@ -1364,15 +1364,13 @@
  # Upgrading databases:
  translate E Upgrading {Upgrading}
  translate E ConfirmOpenNew {
@@ -1936,7 +1936,7 @@ Index: tcl/lang/english.tcl
  
 Index: tcl/main.tcl
 ===================================================================
---- tcl/main.tcl	(revision 3055)
+--- tcl/main.tcl	(revision 3091)
 +++ tcl/main.tcl	(working copy)
 @@ -1322,6 +1322,7 @@
  #   piece from the user.
@@ -1995,7 +1995,7 @@ Index: tcl/main.tcl
        # dont add null move in check or mate
 Index: tcl/misc/misc.tcl
 ===================================================================
---- tcl/misc/misc.tcl	(revision 3055)
+--- tcl/misc/misc.tcl	(revision 3091)
 +++ tcl/misc/misc.tcl	(working copy)
 @@ -1125,4 +1125,187 @@
    unbusyCursor .  
@@ -2187,7 +2187,7 @@ Index: tcl/misc/misc.tcl
  # end of misc.tcl
 Index: tcl/start.tcl
 ===================================================================
---- tcl/start.tcl	(revision 3055)
+--- tcl/start.tcl	(revision 3091)
 +++ tcl/start.tcl	(working copy)
 @@ -41,7 +41,7 @@
  if {![catch {tk windowingsystem} wsystem] && $wsystem == "aqua"} {
@@ -2198,7 +2198,7 @@ Index: tcl/start.tcl
    if {[file isdirectory /usr/local/bin]} {
      # Wish does not use the Bash path for some reason
      set env(PATH) $env(PATH):/usr/local/bin
-@@ -48,7 +48,7 @@
+@@ -52,7 +52,7 @@
    }
  } else {
    set macOS 0
@@ -2207,7 +2207,7 @@ Index: tcl/start.tcl
  }
  
  # Check that on Unix, the version of tkscid matches the version of this
-@@ -289,7 +289,7 @@
+@@ -296,7 +296,7 @@
    # so choose something dumb
    set scidLogDir {C:\log}
  } else {
@@ -2216,7 +2216,7 @@ Index: tcl/start.tcl
    set scidLogDir [file nativename [file join $scidUserDir "log"]]
  }
  
-@@ -1410,8 +1410,8 @@
+@@ -1421,8 +1421,8 @@
        if {$ext == ".sg4" || $ext == ".sn4"} {
          set file "[file rootname $file].si4"
        }
@@ -2227,19 +2227,19 @@ Index: tcl/start.tcl
        }
  
        # Check if base is already opened
-@@ -1910,6 +1910,7 @@
- ::splash::add "$::scidName $::scidVersion ($::scidVersionDate)"
+@@ -1922,6 +1922,7 @@
  ::splash::add "http://scidvspc.sourceforge.net"
  ::splash::add ""
+ ::splash::add "(C) Steven Atkinson (stevenaaus@yahoo.com) 2008-2020"
 +::splash::add "(C) Britton Farrar (brittonfarrar@gmail.com) 2016"
- ::splash::add "(C) Steven Atkinson (stevenaaus@yahoo.com) 2008-2019"
  ::splash::add "(C) Pascal Georges 2006-2008"
  ::splash::add "(C) Shane Hudson 1999-2004"
+ ::splash::add "(C) Gregor Cramer, Fulvio Benini and others."
 Index: tcl/tools/analysis.tcl
 ===================================================================
---- tcl/tools/analysis.tcl	(revision 3055)
+--- tcl/tools/analysis.tcl	(revision 3091)
 +++ tcl/tools/analysis.tcl	(working copy)
-@@ -3817,6 +3817,7 @@
+@@ -3831,6 +3831,7 @@
      # proc is called for any change in board position (including new games, and simple moves)
      set nonStdStart [sc_game startBoard]
      if {$nonStdStart} {
@@ -2249,7 +2249,7 @@ Index: tcl/tools/analysis.tcl
        set analysis(startpos$n) startpos
 Index: tcl/tools/fics.tcl
 ===================================================================
---- tcl/tools/fics.tcl	(revision 3055)
+--- tcl/tools/fics.tcl	(revision 3091)
 +++ tcl/tools/fics.tcl	(working copy)
 @@ -2203,6 +2203,7 @@
        wm title $::dot_w "$::scidName: $white - $black (game $game: $::fics::timecontrol)"
@@ -2285,9 +2285,9 @@ Index: tcl/tools/fics.tcl
        ### Stop clock
 Index: tcl/tools/sergame.tcl
 ===================================================================
---- tcl/tools/sergame.tcl	(revision 3055)
+--- tcl/tools/sergame.tcl	(revision 3091)
 +++ tcl/tools/sergame.tcl	(working copy)
-@@ -325,6 +325,10 @@
+@@ -327,6 +327,10 @@
        ::sergame::sendToEngine $n "setoption name Ponder value false"
      }
  
@@ -2298,7 +2298,7 @@ Index: tcl/tools/sergame.tcl
      # if will follow a specific opening line
      if {$isOpening} {
        set fields [split [lindex $openingList $chosenOpening] ":"]
-@@ -365,7 +369,10 @@
+@@ -367,7 +371,10 @@
      }
  
      if {$::uci::uciInfo(skill) != ""} {
@@ -2312,7 +2312,7 @@ Index: tcl/tools/sergame.tcl
      updateBoard -pgn
 Index: tcl/tools/tactics.tcl
 ===================================================================
---- tcl/tools/tactics.tcl	(revision 3055)
+--- tcl/tools/tactics.tcl	(revision 3091)
 +++ tcl/tools/tactics.tcl	(working copy)
 @@ -153,7 +153,7 @@
      # go through all bases and take descriptions
