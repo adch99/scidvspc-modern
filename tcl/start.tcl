@@ -468,7 +468,11 @@ proc initFICSDefaults {} {
     if {$::macOS} {
       set timeseal_exec "$::scidExeDir/timeseal"
     } else {
-      set timeseal_exec "timeseal"
+      if {$::windowsOS} {
+	set timeseal_exec "$::scidExeDir\timeseal.exe"
+      } else {
+	set timeseal_exec "timeseal"
+      }
     }
     set server        freechess.org
     set port_fics     5000
