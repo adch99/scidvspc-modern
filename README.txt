@@ -158,7 +158,8 @@
   <http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.21.dmg/download>
 
   Mac 64bit (beta) ScidvsMac-4.21.x64.dmg
-  <http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.21.x64.dmg/download>
+  <https://sourceforge.net/projects/scidvspc/files/mac-64bit-
+  unsupported/ScidvsMac-4.21.x64.dmg/download>
 
   3.0.1.  Other resources
 
@@ -404,33 +405,22 @@
 
   o  Translation updates are always welcome
 
-  o  Fischer Chess (Chess 960) is not really implemented.  The latest
-     code is in ScidvsPC's source patches/chess960.patch , with code
-     from the (now-defunct) http://www.wtfai.me.uk/scid960.html , but it
-     is only a hack.
-
-  o  The Tree code works reasonably well, but i have never found the
-     time to overhaul the Slow/Fast/Slow modes. These were (for a long
-     time) negelected when Fulvio wrote the interuptible tree code. Scid
-     now has the Modes removed, so doing this in ScidvsPC probably
-     wouldnt be terribly hard to do.
-
   o  There are two engine types - UCI and XBoard. Pascal's UCI code is
      in some ways inferior to Shane's Xboard code.  Though this is
      mostly mitigated by the speed of modern processors, it'd be nice to
      make use of the UCI ponder feature in analysis mode (Comp mode
      already does so).
 
-  o  I've never had a chance to verify/update the Novag Citrine drivers
-     and interface due to lack of hardware.
+  o  Verify/update the Novag Citrine drivers and interface, and
+     Correspondence / XFCC feature.
 
   o  Our Windows port needs a little overhaul to properly use Users home
      directory to store all the various data.  I will get around to
      doing it one day though.
 
   o  A lot of people use chessbase books (.ctg). Scid can only read
-     polyglot opening books, but inlining this project's work may not be
-     too hard. https://github.com/sshivaji/ctgexporter
+     polyglot opening books, but inlining Scidb's support for ctg may
+     not be too hard.
 
   6.4.  known issues
 
@@ -441,9 +431,9 @@
   o  Linux sound playback is buggy/broken. The Wish sound package
      (Snack) needs maintenance.
 
-  o  Tcl/Tk-8.5.10 is buggy. 8.6.10 has a bug which breaks moving Tabs.
+  o  Tcl/Tk-8.5.10 is buggy.
 
-  o  Some versions of Tk-8.6.x have *severe* memory leaks. To avoid,
+  o  Some versions of Tk-8.6.x have severe memory leaks. To avoid,
      compile with Gregor's tk::text
      (patches/gregors_tktext_inline.patch).
 
