@@ -179,6 +179,26 @@ proc ::gbrowser::new {base gnum {ply -1} {w {}}} {
   set moves [sc_game summary -base $base -game $gnum moves]
 
   $t insert end "$header" header
+
+  # Player tags *hack*
+  # Find Playernames in the text, removing elos. offset is set above when finding "--"
+  if {[string match {* ([0-9][0-9][0-9][0-9])} $white] || [string match {* ([0-9][0-9][0-9])} $white]} {
+    set white [string range $white 0 [expr [string last " (" $white] - 1]]
+  }
+  if {[string match {* ([0-9][0-9][0-9][0-9])} $black] || [string match {* ([0-9][0-9][0-9])} $black]} {
+    set black [string range $black 0 [expr [string last " (" $black] - 1]]
+  }
+
+  $t tag add White 1.0 1.[string length $white]
+  $t tag bind White <ButtonRelease-1> [list playerInfo $white raise]
+  $t tag bind White <Any-Enter> "$t configure -cursor hand2"
+  $t tag bind White <Any-Leave> "$t configure -cursor {}"
+
+  $t tag add Black 1.$offset 1.[expr $offset + [string length $black]]
+  $t tag bind Black <ButtonRelease-1> [list playerInfo $black raise]
+  $t tag bind Black <Any-Enter> "$t configure -cursor hand2"
+  $t tag bind Black <Any-Leave> "$t configure -cursor {}"
+
   $t insert end "\n\n"
 
   set m 1
