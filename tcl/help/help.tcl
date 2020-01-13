@@ -257,6 +257,7 @@ append helpText(Index) {
   <li><a Analysis>Chess Engines</a></li>
   <li><a Analysis List>Chess Engine</a> configuration</li>
   <li><a Analysis Debugging>Chess Engine</a>  debugging</li>
+  <li><a Board>Chess Pieces</a></li>
   <li><a Maintenance Cleaner>Cleaner</a></li>
   <li><a Clipbase>Clipbase</a></li>
   <li><a Options Colours>Colours</a> (various colour options)</li>
@@ -7291,14 +7292,6 @@ The window manager may interfere with some shortcuts.
 
 set helpTitle(Board) "Board Customisation"
 set helpText(Board) {<h1>Board Customisation</h1>
-<p>
-   Tk (and Scid) only support the GIF image format by default -
-   but PNG and JPG images (and pieces) are supported by the TkImg
-   package. TkImg is included with  Windows and OS X, and can be compiled
-   from the
-   <url https://sourceforge.net/project/downloading.php?group_id=263836&filename=tkimg1.3.tar.bz2>source tarball</url>
-   on Linux (if not already installed).
-</p>
 <h3><name Textures>Custom Textures</name></h3>
 <p>
    Up to ten custom board textures can be loaded.
@@ -7322,9 +7315,17 @@ Paul's also include instructions for making high detail pieces from svg using In
 You can find the older instructions to make Scid pieces in scid_chess_pieces.tgz.
 </p>
 <p><i>
-   Examine the <a Console>Splash Window</a> for the status of loading user textures and pieces.
+The keyboard sequence control-shift-F7 (or F8) dumps all Scid images to files, and may be useful for editing existing chess pieces.
+Examine the <a Console>Splash Window</a> for the status of loading user textures and pieces.
 </i></p>
-<p><footer>Updated: Scid vs. PC 4.17 October 2016</footer></p>
+<p><i>
+   Tk 8.5 (used by Windows and OS X) only supports the GIF image format by default,
+   but PNG and JPG images (and pieces) are supported by the TkImg package, which we package with ScidvsPC on these two OS.
+   On Linux, most systems will be using Tk 8.6 (which has inbuilt image support),
+   but it is also possible to compile and install TkImg from the
+   <url https://sourceforge.net/project/downloading.php?group_id=263836&filename=tkimg1.3.tar.bz2>source tarball</url>
+</i></p>
+<p><footer>Updated: Scid vs. PC 4.21 Jan 2019</footer></p>
 }
 
 set helpTitle(Console) "Startup Window / Console"

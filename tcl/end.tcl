@@ -2140,11 +2140,10 @@ proc getTopLevel {{type {}}} {
 ### Hack to extract gif images out of Scid
 
 proc dumpImagesBase64 {dir} {
-  puts "Dumping images as base64 to $dir"
+  ::splash::add "Dumping images as base64 to $dir" error
   package require base64
   file mkdir $dir
   set images [image names]
-  puts "dumpImagesBase64: found images $images"
 
   foreach i $images {
     set data [string trim [$i cget -data]]
@@ -2161,10 +2160,9 @@ proc dumpImagesBase64 {dir} {
 }
 
 proc dumpImages {dir} {
-  puts "Dumping images to $dir"
+  ::splash::add "Dumping images to $dir" error
   file mkdir $dir
   set images [image names]
-  puts "dumpImagesGif: found images $images"
   foreach i $images {
     if {$::windowsOS} {
       # windows doesnt like stray ':' in filenames
