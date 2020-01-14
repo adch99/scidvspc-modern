@@ -469,7 +469,7 @@ proc initFICSDefaults {} {
       set timeseal_exec "$::scidExeDir/timeseal"
     } else {
       if {$::windowsOS} {
-	set timeseal_exec "$::scidExeDir\timeseal.exe"
+	set timeseal_exec "$::scidExeDir/timeseal.exe"
       } else {
 	set timeseal_exec "timeseal"
       }
