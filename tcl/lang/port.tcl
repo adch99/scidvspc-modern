@@ -1,6 +1,6 @@
 # port.tcl:
 # Scid in Portuguese.
-# Translated by R. Silva (martinus at FICS)
+# Translated by G. Silva (martinus at FICS)
 # Last edited 2019-03-24
 
 addLanguage U {Portuguese} 0 ;#iso8859-1
@@ -205,11 +205,10 @@ menuText U ToolsExpFilterPGN "Exporta jogos filtrados - PGN..." 17 \
   {Exporta todos os jogos filtrados para um arquivo PGN}
 menuText U ToolsExpFilterHTML "Exporta jogos filtrados - HTML..." 17 \
   {Exporta todos os jogos filtrados para um arquivo HTML}
-menuText U ToolsExpFilterHTMLJS "Exporta filtrados como HTML e JavaScript..." 17 {Write all filtered games to a HTML and JavaScript file}  
+menuText U ToolsExpFilterHTMLJS "Exporta jogos filtrados - HTML e JavaScript..." 17 {Write all filtered games to a HTML and JavaScript file}  
 menuText U ToolsExpFilterLaTeX "Exporta jogos filtrados - LaTex..." 17 \
   {Exporta todos os jogos filtrados para um arquivo LaTex}
-# ====== TODO To be translated ======
-menuText U ToolsExpFilterEPD "Export Filter to EPD/FEN" 17 {Write all filtered games to an EPD File}
+menuText U ToolsExpFilterEPD "Exporta jogos filtrados - EPD/FEN" 17 {Write all filtered games to an EPD File}
 menuText U ToolsExpFilterGames "Export a Lista de Jogos como Texto" 19 {Print a formatted Gamelist.}
 menuText U ToolsImportOne "Importa PGN texto..." 0 \
   {Importa jogo de um texto em PGN}
@@ -243,8 +242,7 @@ menuText U OptionsColour "Cor do Fundo" 0 {Default text widget color}
 menuText U OptionsBackColour "Fundo" 0 {Default text widget color}
 menuText U OptionsMainLineColour "Setas da Linha Principal" 0 {Mainline arrows}
 menuText U OptionsVarLineColour "Setas da Variante" 0 {Variation arrows}
-# ====== TODO To be translated ======
-menuText U OptionsEngineLineColour "Engine Arrows" 0 {Engine arrows}
+menuText U OptionsEngineLineColour "Setas do Programa" 0 {Engine arrows}
 menuText U OptionsRowColour "Linhas" 0 {Default tree/book row color}
 menuText U OptionsSwitcherColour "Alternador" 0 {Default db switcher color}
 menuText U OptionsProgressColour "Barra de Progresso" 0 {Default progressbar color}
@@ -260,8 +258,7 @@ menuText U OptionsFontsFixed "Fixo" 0 {Fonte de largura fixa}
 menuText U OptionsGInfo "Informações do Jogo" 0 {Opções de informacao do jogo}
 menuText U OptionsFics "FICS" 0
 menuText U OptionsFicsAuto "Promover sempre a Dama" 0
-# ====== TODO To be translated ======
-menuText U OptionsFicsClk "Store Clock times" 0
+menuText U OptionsFicsClk "Registar tempo no Relógio" 0
 menuText U OptionsFicsColour "Cor do Texto" 0
 menuText U OptionsFicsSize "Tamanho do Tabuleiro" 0
 menuText U OptionsFicsButtons "Botões do Utilizador" 0
@@ -285,11 +282,11 @@ menuText U OptionsMovesDelay "Tempo de atraso p/ Jogo automático..." 1 \
   {Define o tempo de espera antes de entrar no modo de jogo automatico}
 menuText U OptionsMovesCoord "Entrada de movimentos por coordenadas" 0 \
   {Aceita o estilo de entrada de movimentos por coordenadas ("g1f3")}
-menuText U OptionsShowVarPopup "Mostrar janela de Variantes" 0 {Turn on/off the display of a variations window}  
+menuText U OptionsShowVarPopup "Mostrar janela de variantes" 0 {Turn on/off the display of a variations window}  
 menuText U OptionsMovesSpace "Adicionar um espaço depois do número do lance" 0 {Add spaces after move number}  
 menuText U OptionsMovesKey "Auto completar" 0 \
   {Liga/desliga auto completar a partir do que for digitado}
-menuText U OptionsMovesShowVarArrows "Mostrar Setas para variantes" 0 {Liga/Desliga as setas que mostram movimentos em variantes}
+menuText U OptionsMovesShowVarArrows "Mostrar setas para variantes" 0 {Liga/Desliga as setas que mostram movimentos em variantes}
 menuText U OptionsNumbers "Formato de Números" 0 {Selecione o formato usado para números}
 menuText U OptionsStartup "Iniciar" 1 \
   {Seleciona janelas que serao abertas ao iniciar o programa}
@@ -529,7 +526,7 @@ menuText U TreeMask "Máscara" 0
 menuText U TreeMaskNew "Nova" 0 {Nova máscara}
 menuText U TreeMaskOpen "Abrir" 0 {Abrir máscara}
 menuText U TreeMaskOpenRecent "Abrir recente" 0 {Abre máscara recente}
-menuText U TreeMaskSave "Salvar" 0 {Salva máscara}
+menuText U TreeMaskSave "Guardar" 0 {Grava máscara}
 menuText U TreeMaskClose "Fechar" 0 {Fecha máscara}
 menuText U TreeMaskFillWithLine "Preencher com variante" 0 {Fill mask with all previous moves}
 menuText U TreeMaskFillWithGame "Preencher com jogo" 0 {Preenche máscara com jogo}
@@ -551,14 +548,13 @@ menuText U TreeOptLock "Lock" 0 {Trava/Destrava a arvore para o banco corrente}
 menuText U TreeOptTraining "Treinamento" 0 \
   {Liga/Desliga o modo treinamento na arvore}
 menuText U TreeOptShort "Visualisação sumária" 0 {Não mostra Elo}
-menuText U TreeOptAutosave "Salvar automaticamente arquivo de cache" 0 \
+menuText U TreeOptAutosave "Guardar automaticamente arquivo de cache" 0 \
   {Salvar automaticamente o arquivo de cache quando fechar a janela de arvore}
 menuText U TreeOptAutomask "Abrir máscara automaticamente" 0 "Auto-Load most recent mask with a tree open."
 menuText U TreeOptCacheSize "Tamanho da Cache" 0 {Define o tamanho do cache}
 menuText U TreeOptShowBar "Mostrar Barra de Progresso" 0 "Mostrar barra de progresso da árvore."
-# ====== TODO To be translated ======
-menuText U TreeOptShowFrame "Show Button Bar" 0 "Show tree button bar."
-menuText U TreeOptSortBest "Ordenar melhores jogos" 0 "Ordena lhores josgos por ELO."
+menuText U TreeOptShowFrame "Mostrar Menu Inferior" 0 "Mostra a barra de menu inferior."
+menuText U TreeOptSortBest "Ordenar melhores jogos" 0 "Ordena melhores jogos por ELO."
 menuText U TreeHelp "Ajuda" 0
 menuText U TreeHelpTree "Ajuda para árvore" 0
 menuText U TreeHelpIndex "Índice da Ajuda" 0
@@ -602,8 +598,7 @@ translate U CommentMove {Comentar movimento}
 translate U CommentPosition {Comentar posição}
 translate U AddMoveToMaskFirst {Adicionar movimento à máscara primeiro}
 translate U OpenAMaskFileFirst {Abrir uma máscara primeiro}
-# ====== TODO To be translated ======
-translate U positions {positions}
+translate U positions {Posições}
 translate U Moves {Movimentos}
 
 # Finder window:
@@ -634,8 +629,7 @@ translate U FinderCtxBackup {Guardar}
 translate U FinderCtxCopy {Copiar}
 translate U FinderCtxMove {Mover}
 translate U FinderCtxDelete {Apagar}
-# ====== TODO To be translated ======
-translate U FinderDirOpen {Open Directory}
+translate U FinderDirOpen {Abrir Pasta}
 
 # Player finder:
 menuText U PListFile "Arquivo" 0
@@ -1118,14 +1112,11 @@ Você realmente quer que esta base de dados seja apenas de leitura?}
 
 # Exit dialog:
 translate U ExitDialog {Você quer realmente sair do Scid?}
-translate U ClearGameDialog {Este jogo foi alterado.  Você realmente quer continuar e descartar as mudanças feitas?  }
+translate U ClearGameDialog {Este jogo foi alterado.  Você realmente quer continuar e descartar as mudanças feitas?}
 translate U ExitUnsaved {As seguintes bases têm alterações não gravadas. Se sair agora, essas alterações serão perdidas.} ;# ***
-# ====== TODO To be translated ======
-translate U ChangeTextDialog {Enabling text colour globally requires restart.}
-# ====== TODO To be translated ======
-translate U ChangeDockDialog {Changing Docking requires a restart.}
-# ====== TODO To be translated ======
-translate U ExitNow {Exit now ?}
+translate U ChangeTextDialog {Configurar a cor geral do texto obriga a recomeçar o Scid.}
+translate U ChangeDockDialog {Mudar ligação a hardware obriga a recomeçar o Scid.}
+translate U ExitNow {Sair agora?}
 
 # Import window:
 translate U PasteCurrentGame {Colar jogo corrente}
@@ -1347,8 +1338,7 @@ translate U WhiteBorder {Borda Branca}
 translate U BlackBorder {Borda Preta}
 translate U ArrowMain   {Main Arrow}
 translate U ArrowVar    {Var Arrows}
-# ====== TODO To be translated ======
-translate U ShowArrows  {Show Arrows}
+translate U ShowArrows  {Mostrar Setas}
 
 # Novelty window:
 translate U FindNovelty {Buscar Novidade}
@@ -1478,14 +1468,10 @@ translate U FixedDepth {Fixar profundidade de análise}
 translate U Nodes {Posições} 
 translate U Depth {Profundidade}
 translate U Time {Tempo} 
-# ====== TODO To be translated ======
-translate U Auto {Auto}
-# ====== TODO To be translated ======
-translate U Score {Score}
-# ====== TODO To be translated ======
-translate U {Score Combo} {Score Combo}
-# ====== TODO To be translated ======
-translate U {Time Combo} {Time Combo}
+translate U Auto {Automático}
+translate U Score {Pontuação}
+translate U {Score Combo} {Pontuação Combinada}
+translate U {Time Combo} {Tempo Combinado}
 translate U SecondsPerMove {Segundos por movimento}
 translate U DepthPerMove {Número de lances}
 translate U MoveControl {Analisar por}
@@ -1586,8 +1572,7 @@ translate U FICSTimeseal {Timeseal}
 translate U FICSTimesealPort {Timeseal port}
 translate U FICSSilence {Console filter}
 translate U FICSOffers {Ofertas}
-# ====== TODO To be translated ======
-translate U FICSMakeOffer {Make Offer}
+translate U FICSMakeOffer {Propor}
 translate U FICSGames {Games}
 translate U FICSFindOpponent {Desafiar}
 translate U FICSTakeback {Voltar atrás}
@@ -1717,22 +1702,15 @@ translate U UriRejected	{Os seguintes ficheiros são recusados:}
 translate U UriRejectedDetail {Apenas os ficheiros do tipo listado podem ser despachados:}
 translate U EmptyUriList {O conteúdo a largar está vazio.}
 translate U SelectionOwnerDidntRespond {O tempo esgotou durante a entrega: o dono da seleção não respondeu.}
-# ====== TODO To be translated ======
-translate U PasteAnal {Paste Analysis}
-# ====== TODO To be translated ======
-translate U SortOpcodes {Sort Opcodes}
-# ====== TODO To be translated ======
-translate U AddPosition {Add Position}
-# ====== TODO To be translated ======
-translate U FindPos {Find Deepest Game Position}
-# ====== TODO To be translated ======
-translate U AnalPosition {Analyze Positions}
-# ====== TODO To be translated ======
-translate U StripOpcodes {Strip Opcodes}
-# ====== TODO To be translated ======
-translate U NoMoves {No moves from this position}
-# ====== TODO To be translated ======
-translate U CountBestMoves {Count Best Moves}
+
+translate U PasteAnal {Colar Análises}
+translate U SortOpcodes {Ordenar Códigos}
+translate U AddPosition {Adicionar Posição}
+translate U FindPos {Encontrar Posição mais Avançada}
+translate U AnalPosition {Analisar Posições}
+translate U StripOpcodes {Apagar Códigos}
+translate U NoMoves {Apagar movimentos a partir desta posição}
+translate U CountBestMoves {Contar os Melhores Movimentos}
 
 }
 
