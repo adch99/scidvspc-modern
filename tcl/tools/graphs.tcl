@@ -176,7 +176,7 @@ proc tools::graphs::filter::Open {} {
 
   frame $w.b
   pack $w.b -side bottom -fill x
-  label $w.b.status -width 1 -font font_Small -anchor w
+  label $w.b.status -width 1 -font font_Small
   frame $w.sep -height 2 -borderwidth 2 -relief sunken 
   pack $w.sep -side bottom -fill x -pady 4
 
@@ -204,7 +204,7 @@ proc tools::graphs::filter::Open {} {
   dialogbutton $w.b.close -text $::tr(Close) -command "destroy $w"
   pack $w.b.decade $w.b.elo -side left -padx 1 -pady 2
   pack $w.b.close $w.b.setup -side right -padx 2 -pady 2
-  pack $w.b.status -side left -padx 2 -pady 2 -fill x -expand yes
+  pack $w.b.status -side right -padx 5 -pady 2 -fill x -expand yes
 
   ::tools::graphs::filter::Refresh
   setWinLocation $w
@@ -271,9 +271,7 @@ proc ::tools::graphs::filter::Refresh {} {
   ::utils::graph::create filter -width $width -height $height -xtop 40 -ytop 35 \
     -ytick 1 -xtick 1 -font font_Small -canvas $w.c -textcolor black \
     -vline $vlines -tickcolor black -xmin 0 -xmax 1
-  ::utils::graph::redraw filter
-  busyCursor .
-  update
+  #::utils::graph::redraw filter
 
   set count 0
   set dlist {}
@@ -380,11 +378,12 @@ proc ::tools::graphs::filter::Refresh {} {
   ::utils::graph::configure filter -xlabels $xlabels -ytick $ytick \
     -hline $hlines -ymin 0 -xmin 0.5 -xmax [expr {$count + 0.5}]
   ::utils::graph::redraw filter
-  $w.c itemconfigure title -text $::tr(GraphFilterTitle)
+  set title $::tr(GraphFilterTitle)
+  regsub 1000 $title 100 title
+  $w.c itemconfigure title -text $title
+
   $w.c itemconfigure type -text $typeName
-  $w.b.status configure -text "  $::tr(Filter): [filterText]"
-  unbusyCursor .
-  update
+  $w.b.status configure -text "$::tr(Filter): [filterText]"
 }
 
 #Klimmek: Invert white/black Score in Score graph
@@ -908,7 +907,6 @@ proc ::tools::graphs::rating::Refresh {{player {}}} {
       ::utils::graph::configure ratings -width [expr {[winfo width .rgraph.c] - 70} ]
       ::utils::graph::configure ratings -logy 10
       ::utils::graph::redraw ratings
-      update
       recordWinSize .rgraph
     }
     bind $w.c <Button-3> ::tools::graphs::rating::Refresh
@@ -933,8 +931,6 @@ proc ::tools::graphs::rating::Refresh {{player {}}} {
     -hline {{gray90 1 each 25} {steelBlue 1 each 100}} \
     -vline {{gray90 1 each 1} {steelBlue 1 each 5}}
   ::utils::graph::redraw ratings
-  busyCursor $w
-  update
 
   set title "[tr ToolsRating] \[[file tail [sc_base filename]]\]"
 
@@ -984,7 +980,6 @@ proc ::tools::graphs::rating::Refresh {{player {}}} {
   if {[expr {$maxYear - $minYear} ] > 10} {::utils::graph::configure ratings -xtick 5}
   ::utils::graph::redraw ratings
   $w.c itemconfigure text -text $title
-  unbusyCursor $w
 }
 
 proc ::tools::graphs::SetScoreColour {} {
@@ -1046,7 +1041,7 @@ proc tools::graphs::absfilter::Open {} {
 
   frame $w.b
   pack $w.b -side bottom -fill x
-  label $w.b.status -width 1 -font font_Small -anchor w
+  label $w.b.status -width 1 -font font_Small
   frame $w.sep -height 2 -borderwidth 2 -relief sunken 
   pack $w.sep -side bottom -fill x -pady 4
 
@@ -1073,7 +1068,7 @@ proc tools::graphs::absfilter::Open {} {
   dialogbutton $w.b.close -text $::tr(Close) -command "destroy $w"
   pack $w.b.decade $w.b.elo -side left -padx 1 -pady 2
   pack $w.b.close $w.b.setup -side right -padx 2 -pady 2
-  pack $w.b.status -side left -padx 2 -pady 2 -fill x -expand yes
+  pack $w.b.status -side right -padx 5 -pady 2 -fill x -expand yes
 
   ::tools::graphs::absfilter::Refresh
   setWinLocation $w
@@ -1149,8 +1144,6 @@ proc ::tools::graphs::absfilter::Refresh {} {
     -ytick 1 -xtick 1 -font font_Small -canvas $w.c -textcolor black \
     -vline $vlines -tickcolor black -xmin 0 -xmax 1
   ::utils::graph::redraw absfilter
-  busyCursor .
-  update
 
   set count 0
   set dlist {}
@@ -1263,8 +1256,6 @@ proc ::tools::graphs::absfilter::Refresh {} {
   ::utils::graph::redraw absfilter
   $w.c itemconfigure title -text $::tr(GraphAbsFilterTitle)
   $w.c itemconfigure type -text $typeName
-  $w.b.status configure -text "  $::tr(Filter): [filterText]"
-  unbusyCursor .
-  update
+  $w.b.status configure -text "$::tr(Filter): [filterText]"
 }
 ### End of file: graph.tcl
