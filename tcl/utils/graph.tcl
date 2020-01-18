@@ -74,8 +74,10 @@ proc ::utils::graph::create args {
   set graph [lindex $args 0]
   lappend ::utils::graph::_graphs $graph
   
-  # Remove any existing data for this graph name:
-  catch {unset ::utils::graph::prevMove}
+  # Remove any existing data for this graph name
+  if {$graph == "score"} {
+    catch {unset ::utils::graph::prevMove}
+  }
   foreach key [array names ::utils::graph::_data] {
     if {[string match "$graph,*" $key]} { unset ::utils::graph::_data($key) }
   }
@@ -145,9 +147,6 @@ proc ::utils::graph::data args {
   if {$ncoords % 2 != 0} {
     error "Error: coordinates list must have an even length"
   }
-
-  # Redraw graph: do we want to do this here?
-  #::utils::graph::redraw $graph
 }
 
 
@@ -390,8 +389,22 @@ proc ::utils::graph::plot_axes {graph} {
       $canvas create line [expr {$xmaxc - $ticksize}] $yc $xmaxc $yc \
         -tag $tag -fill $tickcolor
       if {$nylabels == 0} {
+
+if {$graph != "filter"} {
+  set tmp [::utils::graph::round $y]
+} else {
+  set tmp [expr [::utils::graph::round $y]/10.0]
+  # no decimal place if over 10%
+  if {$ymax > 100} {
+    set tmp [expr int($tmp)]
+  }
+  # under 1%, we have to round as [expr 1.4 / 10.0] = 0.13999999999999999 :(
+  if {$ymax < 10} {
+    set tmp [format %.2f $tmp]
+  }
+}
         $canvas create text [expr {$xminc - $textgap}] $yc -font $font \
-          -text [::utils::graph::round $y] -anchor e -tag $tag -fill $textcolor
+          -text $tmp -anchor e -tag $tag -fill $textcolor
       }
       set y [expr {$y + $ytick}]
     }

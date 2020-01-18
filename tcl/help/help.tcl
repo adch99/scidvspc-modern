@@ -3436,7 +3436,7 @@ set helpText(Graphs) {<h1>Graph Windows</h1>
   in popularity in recent years, or whether it is especially
   popular among higher-rated players.
   Each point on the graph represents the number of games in the filter
-  per 1000 games in the entire database, for a particular date or Elo
+  per 100 games in the entire database, for a particular date or Elo
   rating range.
   </p><p>
   <b>Absolute Filter Graph</b>
