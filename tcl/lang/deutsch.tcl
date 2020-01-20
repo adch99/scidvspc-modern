@@ -868,7 +868,7 @@ translate D HeaderSearch {Partiedatensuche}
 translate D EndSideToMove {Wer ist beim Partieende am Zug?}
 translate D GamesWithNoECO {Partien ohne ECO?}
 translate D GameLength {Partielänge}
-translate D FindGamesWith {Finde Partien mit den Markierungen (Flags)}
+translate D FindGamesWith {Finde Partien mit Markierungen (Flags)}
 translate D StdStart {Standardausgangsposition}
 translate D Promotions {Umwandlungen}
 translate D UnderPromo {Unterverwandlung}
@@ -1236,7 +1236,7 @@ translate D OprepEndClass {Materialklassifikation von Endspielstellungen}
 translate D OprepTheoryTable {Theorietabelle}
 translate D OprepTableComment {Erzeugt aus %u Partien mit höchster ELO-Zahl.}
 translate D OprepExtraMoves {Zusätzliche Züge in Anmerkungen zur Theorietabelle}
-translate D OprepMaxGames {Maximum an Partien in Theorietabelle}
+translate D OprepMaxGames {Maximum an Partien in der Theorietabelle}
 translate D OprepViewHTML {Zeige HTML}
 translate D OprepViewLaTeX {Zeige LaTeX}
 
@@ -2433,6 +2433,7 @@ append helpText(D,Index) {
   <ul>
   <li><a Analysis Debugging>Schach-Engine: Fehlersuche</a></li>
   <li><a Analysis>Schach-Engines</a></li>
+  <li><a Board>Schachfiguren</a></li>
   <li><a Cmdline>Schnellstartmodus</a>
   <li><a Maintenance Spellfile>Schreibkorrekturdatei</a></li>
   <li><a Options Fonts>Schriftarten</a></li>
@@ -5661,7 +5662,7 @@ set helpText(D,Reports) {<h1>Berichte</h1>
 
   <h2><name Opening>Eröffnungsberichte</name></h2>
   <p>Scids <run ::optable::makeReportWin><green>Eröffnungsbericht</green></run>
-  zeigt unterschiedlichen Informationen über die aktuelle Stellung.
+  zeigt unterschiedliche Informationen über die aktuelle Stellung.
   </p>
   <p><i>Einige Funktionen sind von einer internen Beschränkung von
   10.000 Partien betroffen. Für große Berichte sind Statistiken
@@ -5866,7 +5867,7 @@ set helpText(D,Graphs) {<h1>Grafikfenster</h1>
   Jahren ihre Beliebtheit verändert hat oder ob sie unter Elo-höheren
   Spielern besonders beliebt ist. Jeder Punkt in der Grafik
   repräsentiert für ein bestimmtes Datum oder für einen Bereich der
-  Elo-Wertungszahlen die Anzahl der Filterpartien pro tausend Partien
+  Elo-Wertungszahlen die Anzahl der Filterpartien pro hundert Partien
   in der ganzen Datenbank.
   </p>
 
@@ -6870,17 +6871,16 @@ set helpText(D,Book) {<h1>Eröffnungsbuchfenster</h1>
   </p>
 
   <h4>Eröffnungsbücher erstellen</h4>
+
   <p>Entfernen Sie zuerst Partien. die keine Standardausgangsposition
   aufweisen. Man kann diese mit der <a Searches
   Header>Partiedatensuche</a> finden, indem das Merkmal
   Standardausgangsposition gesetzt wird (im Bereich "Finde Partien mit
-  den Markierungen (Flags)"). Dann werden der Filter negiert, die
-  Partien nach PGN <a Export>exportiert</a> und auf der Befehlszeile
-  gibt man dann an:
-  <br>
-  <b>polyglot make-book -pgn GAMES.PGN -bin BOOK.BIN -min-game 1 -max-ply 30</b>
-  <br>Siehe die PolyGlot-Dokumentation für weitere Optionen.
-  </p>
+  Markierungen (Flags)"). Dann werden der Filter negiert, die Partien
+  nach PGN <a Export>exportiert</a> und auf der Befehlszeile gibt man
+  dann an: <br> <b>polyglot make-book -pgn GAMES.PGN -bin BOOK.BIN
+  -min-game 1 -max-ply 30</b> <br>Siehe die PolyGlot-Dokumentation für
+  weitere Optionen.  </p>
 
   <h4>Zwei Eröffnungsbücher vermischen</h4>
   <p>
@@ -9888,13 +9888,6 @@ set helpText(D,ShortCuts) {<h1>Tastaturkurzbefehle</h1>
 set helpTitle(D,Board) "Brett- und Figureneinstellungen"
 set helpText(D,Board) {<h1>Brett- und Figureneinstellungen</h1>
 
-  <p>Tk (und Scid) unterstützt standardmäßig nur das GIF-Bildformat,
-  aber PNG- und JPG-Bilder (und Figuren) werden vom Paket TkImg
-  unterstützt. TkImg ist bei Windows und OS X enthalten und kann für
-  Linux von
-  <url https://sourceforge.net/project/downloading.php?group_id=263836&filename=tkimg1.3.tar.bz2>https://sourceforge.net/project/downloading.php?group_id=263836&filename=tkimg1.3.tar.bz2</url>
-  kompiliert werden (falls nicht bereits installiert).</p>
-
   <h3><name Textures>Benutzerspezifische Texturen</name></h3>
 
   <p>Es können bis zu zehn Bretttexturen geladen werden. Diese müssen
@@ -9926,10 +9919,23 @@ set helpText(D,Board) {<h1>Brett- und Figureneinstellungen</h1>
   Anweisungen für die Erstellung von Scid-Figuren in
   scid_chess_pieces.tgz finden.</p>
 
-  <p><i>Sehen Sie bezüglich des Ladens von Texturen und
-  Figuren im <a Console>Willkommensfenster</a> nach.</i></p>
+  <p><i>Die Tastenkombination Strg-Umschalt-F7 (oder F8) gibt alle
+  Scid-Bilder in Dateien aus. Dies kann für das Editieren von
+  Schachfiguren hilfreich sein. Sehen Sie bezüglich des Ladens von
+  Texturen und Figuren im <a Console>Willkommensfenster</a>
+  nach.</i></p>
 
-  <p><footer>Aktualisiert: Scid vs. PC 4.17 Oktober 2016</footer></p>
+  <p><i>Tk 8.5 (von Windows und OS X verwendet) unterstützt
+  standardmäßig nur das GIF-Bildformat, aber PNG- und JPG-Bilder (und
+  -figuren) werden vom TKImg-Paket unterstützt, das wir mit ScidvsPC
+  für diese beiden Betriebssysteme bündeln. Unter Linux verwenden die
+  meisten Systeme Tk 8.6 (welches eine eingebaute Bildunterstützung
+  hat), aber es ist auch möglich, TkImg aus
+  <url https://sourceforge.net/project/downloading.php?group_id=263836&filename=tkimg1.3.tar.bz2>tkimg1.3.tar.bz2</url>
+  zu kompilieren und zu installieren.
+  </i></p>
+
+  <p><footer>Aktualisiert: Scid vs. PC 4.21 Januar 2020</footer></p>
 }
 
 set helpTitle(Console) "Willkommensfenster/Konsole"

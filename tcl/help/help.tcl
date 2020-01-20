@@ -1637,15 +1637,15 @@ set helpText(Import) {<h1>The Import Window</h1>
   <p>
   The <run importPgnGame><green>Import Window</green></run> provides an easy way for you to paste a game
   into Scid from some other application or window.
-  </p>
-  <p>
   The top-most frame is where to enter or paste
   the game in PGN format, and the lower frame 
   provides feedback of any errors or warnings.
   </p>
 
   <p>
-  <i>Scid provides several ways to access games in PGN. As well as the Import
+  <i>Imported PGN must be in English notation.</p>
+  <p>
+  Scid provides several ways to access games in PGN. As well as the Import
   Window, games can be opened via <run ::file::Open><green>File-<gt>Open</green></run>.
   Large PGN archives can sometimes give Scid problems. A more reliable import method is the
   <a Pgnscid>Pgnscid</a> utility</i>
@@ -7323,7 +7323,7 @@ Examine the <a Console>Splash Window</a> for the status of loading user textures
    but PNG and JPG images (and pieces) are supported by the TkImg package, which we package with ScidvsPC on these two OS.
    On Linux, most systems will be using Tk 8.6 (which has inbuilt image support),
    but it is also possible to compile and install TkImg from the
-   <url https://sourceforge.net/project/downloading.php?group_id=263836&filename=tkimg1.3.tar.bz2>source tarball</url>
+   <url https://sourceforge.net/projects/scidvspc/files/support%20files/tkimg1.3.scidvspc.tar.bz2/download>source tarball</url>
 </i></p>
 <p><footer>Updated: Scid vs. PC 4.21 Jan 2019</footer></p>
 }
