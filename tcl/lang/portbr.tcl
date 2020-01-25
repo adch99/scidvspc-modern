@@ -564,6 +564,8 @@ translate B altered {alterado}
 translate B tagsDescript {Tags extras (ex: Anotador "Anand")}
 
 translate B prevTags {Use anterior}
+# ====== TODO To be translated ======
+translate B value {Value}
 
 # Standard error messages:
 translate B ErrNotOpen {Esta base não está aberta.} 

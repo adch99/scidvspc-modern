@@ -16684,6 +16684,8 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     char * sEvent = NULL;
     char * sSite  = NULL;
     char * sRound = NULL;
+    char * sTag   = NULL;
+    char * sTagValue = NULL;
 
     bool * mWhite = NULL;
     bool * mBlack = NULL;
@@ -16773,7 +16775,7 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         "fAnnotations", "fDelete", "fWhiteOpening", "fBlackOpening",
         "fMiddlegame", "fEndgame", "fNovelty", "fPawnStructure",
         "fTactics", "fKingside", "fQueenside", "fBrilliancy", "fBlunder",
-        "fUser", "fCustom1" , "fCustom2" , "fCustom3" ,
+        "fUser", "fCustom1" , "fCustom2" , "fCustom3" , "extratag", "tagvalue",
         "fCustom4" , "fCustom5" , "fCustom6" , "pgn", "ignoreCase", "gameend", "preComment", "postComment", NULL
     };
     enum {
@@ -16785,7 +16787,7 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         OPT_FANNOTATIONS, OPT_FDELETE, OPT_FWHITEOP, OPT_FBLACKOP,
         OPT_FMIDDLEGAME, OPT_FENDGAME, OPT_FNOVELTY, OPT_FPAWNSTRUCT,
         OPT_FTACTICS, OPT_FKSIDE, OPT_FQSIDE, OPT_FBRILLIANCY, OPT_FBLUNDER,
-        OPT_FUSER, OPT_FCUSTOM1, OPT_FCUSTOM2, OPT_FCUSTOM3,
+        OPT_FUSER, OPT_FCUSTOM1, OPT_FCUSTOM2, OPT_FCUSTOM3, OPT_TAG, OPT_TAGVALUE,
         OPT_FCUSTOM4,  OPT_FCUSTOM5, OPT_FCUSTOM6, OPT_PGN, OPT_PGNCASE, OPT_GAMEEND, OPT_PRECOMMENT, OPT_POSTCOMMENT
     };
 
@@ -16818,6 +16820,14 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
         case OPT_ROUND:
             sRound = strDuplicate (value);
+            break;
+
+        case OPT_TAG:
+            sTag = strDuplicate (value);
+            break;
+
+        case OPT_TAGVALUE:
+            sTagValue = strDuplicate (value);
             break;
 
         case OPT_DATE:
@@ -17177,6 +17187,8 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         filterOp = FILTEROP_AND;
     }
 
+    bool readGame = ((sTag && sTag[0]) || pgnTextCount > 0 || gameEnd == 'S' || gameEnd == 'C' || preComment || postComment);
+
     // Here is the loop that searches on each game:
     for (uint i=0; i < db->numGames; i++) {
         if (showProgress) {  // Update the percentage done bar:
@@ -17266,10 +17278,42 @@ sc_search_header (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         // profiling showed most that most of the time is spent
         // generating the PGN representation of each game.
 
-        if (match  &&  (pgnTextCount > 0 || gameEnd == 'S' || gameEnd == 'C' || preComment || postComment)) {
+        if (match  &&  readGame) {
             if (db->gfile->ReadGame (db->bbuf, ie->GetOffset(), ie->GetLength()) != OK) {
                 match = false;
             }
+
+            // Extra Tag search feature S.A.
+
+            if (match && sTag && sTag[0]) {
+                scratchGame->Clear();
+                if (scratchGame->DecodeTags (db->bbuf, GAME_DECODE_ALL) != OK)
+                    match = false;
+                if (match) {
+                    match = false;
+                    uint numtags = scratchGame->GetNumExtraTags();
+                    tagT *tag = scratchGame->GetExtraTags();
+
+                    for (uint j=0; j<numtags; j++, tag++) {
+                        if (!strcmp(tag->tag, sTag)) {
+                            match = true;
+                            // We have a match for the tag, now does it match the second pgnText
+                            if (sTagValue && sTagValue[0]) {
+                                // tag search does a prefix search for ascii, but exact search for numbers
+                                if (isdigit(sTagValue[0]))
+				    match = (strcmp(tag->value, sTagValue) == 0);
+                                else
+				    match = strIsPrefix(sTagValue, tag->value);
+                            }
+                            break;
+                        }
+                    }
+                }
+		scratchGame->Clear();
+		db->bbuf->BackToStart();
+            }
+
+
             if (match  &&  scratchGame->Decode (db->bbuf, GAME_DECODE_ALL) != OK) {
                 match = false;
             }

@@ -476,6 +476,8 @@ translate D readonly {schreibgeschützt}
 translate D altered {geändert}
 translate D tagsDescript {Extramarkierungen (z.B.: Annotator "Anand")}
 translate D prevTags {Verwende vorherige}
+# ====== TODO To be translated ======
+translate D value {Value}
 
 # Standard error messages:
 translate D ErrNotOpen {Dies ist keine geöffnete Datenbank.}

@@ -454,6 +454,8 @@ translate U readonly {apenas leitura}
 translate U altered {alterado}
 translate U tagsDescript {Etiqueta Extra (eg: Anotador "Anand")}
 translate U prevTags {Usar o anterior}
+# ====== TODO To be translated ======
+translate U value {Value}
 
 # Standard error messages:
 translate U ErrNotOpen {Esta base não está aberta.} ;# ***

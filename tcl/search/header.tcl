@@ -31,6 +31,8 @@ foreach i [ concat $sHeaderFlagList $sHeaderCustomFlagList ] {
 set sPgntext(1) ""
 set sPgntext(2) ""
 set sPgntext(3) ""
+set sTag ""
+set sTagValue ""
 
 trace variable sDateMin w ::utils::validate::Date
 trace variable sDateMax w ::utils::validate::Date
@@ -70,7 +72,7 @@ proc checkDates {} {
 proc ::search::header::defaults {} {
   global sWhite sBlack sEvent sSite sRound sDateMin sDateMax sIgnoreCol sSideToMove
   global sWhiteEloMin sWhiteEloMax sBlackEloMin sBlackEloMax
-  global sEloDiffMin sEloDiffMax
+  global sEloDiffMin sEloDiffMax sTag sTagValue
   global sEco sEcoMin sEcoMax sHeaderFlags sGlMin sGlMax
   global sGnumMin sGnumMax
   global sResWin sResLoss sResDraw sResOther glstart
@@ -93,6 +95,8 @@ proc ::search::header::defaults {} {
   set sGameEnd Any
   set preComment 0
   set postComment 0
+  set sTag ""
+  set sTagValue ""
   foreach flag  [ concat $::sHeaderFlagList $::sHeaderCustomFlagList ] { set sHeaderFlags($flag) both }
   foreach i [array names sPgntext] { set sPgntext($i) "" }
   foreach i $::sTitleList {
@@ -109,7 +113,7 @@ set sHeaderFlagFrame 0
 #   (General Search)
 
 proc search::header {} {
-  global sWhite sBlack sEvent sSite sRound sDateMin sDateMax sIgnoreCol
+  global tr sWhite sBlack sEvent sSite sRound sDateMin sDateMax sIgnoreCol
   global sWhiteEloMin sWhiteEloMax sBlackEloMin sBlackEloMax
   global sEloDiffMin sEloDiffMax sSideToMove
   global sEco sEcoMin sEcoMax sHeaderFlags sGlMin sGlMax sTitleList sTitles
@@ -123,7 +127,7 @@ proc search::header {} {
 
   toplevel $w
   wm withdraw $w
-  wm title $w "$::tr(HeaderSearch)"
+  wm title $w "$tr(HeaderSearch)"
   foreach frame {cWhite cBlack ignore tw tb eventsite dateround res gl ends eco} {
     frame $w.$frame
   }
@@ -137,7 +141,7 @@ proc search::header {} {
 
   foreach color {White Black} {
     pack $w.c$color -side top -fill x -pady 3
-    label $w.c$color.lab -textvar ::tr($color) -font $bold -width 9 -anchor w
+    label $w.c$color.lab -textvar tr($color) -font $bold -width 9 -anchor w
 
     set tmp [set s[set color]]
     ttk::combobox $w.c$color.e -textvariable "s$color" -width 40
@@ -146,7 +150,7 @@ proc search::header {} {
 
     bind $w.c$color.e <Return> { .sh.b.search invoke; break }
     label $w.c$color.space
-    label $w.c$color.elo1 -textvar ::tr(Rating) -font $bold
+    label $w.c$color.elo1 -textvar tr(Rating) -font $bold
     entry $w.c$color.elomin -textvar s${color}EloMin -width 6 -justify right \
         -font $regular
     label $w.c$color.elo2 -text "-" -font $regular
@@ -161,13 +165,13 @@ proc search::header {} {
   }
 
   pack $w.ignore -side top -fill x  -pady 2
-  label $w.ignore.l -textvar ::tr(IgnoreColors) -font $bold
-  radiobutton $w.ignore.yes -variable sIgnoreCol -value Yes -textvar ::tr(Yes) -font $regular
-  radiobutton $w.ignore.no  -variable sIgnoreCol -value No -textvar ::tr(No) -font $regular
+  label $w.ignore.l -textvar tr(IgnoreColors) -font $bold
+  radiobutton $w.ignore.yes -variable sIgnoreCol -value Yes -textvar tr(Yes) -font $regular
+  radiobutton $w.ignore.no  -variable sIgnoreCol -value No -textvar tr(No) -font $regular
   pack $w.ignore.l $w.ignore.yes $w.ignore.no -side left
 
   # RatingDiff shortened for english only S.A.
-  label $w.ignore.rdiff -textvar ::tr(RatingDiff) -font $bold
+  label $w.ignore.rdiff -textvar tr(RatingDiff) -font $bold
   entry $w.ignore.rdmin -width 6 -textvar sEloDiffMin -justify right -font $regular
   label $w.ignore.rdto -text "-" -font $regular
   entry $w.ignore.rdmax -width 6 -textvar sEloDiffMax -justify right -font $regular
@@ -180,7 +184,7 @@ proc search::header {} {
   if {[lindex [sc_name read] 0] == 0} { set spellstate disabled }
   foreach c {w b} name {White Black} {
     pack $w.t$c -side top -fill x
-    label $w.t$c.label -text "$::tr($name) FIDE title" -font $bold -width 18 -anchor w
+    label $w.t$c.label -text "$tr($name) FIDE title" -font $bold -width 18 -anchor w
     pack $w.t$c.label -side left
     foreach i $sTitleList {
       set name [string toupper $i]
@@ -202,7 +206,7 @@ proc search::header {} {
   set f $w.eventsite
   pack $f -side top -fill x
   foreach i {Event Site} {
-    label $f.l$i -textvar ::tr(${i}) -font $bold
+    label $f.l$i -textvar tr(${i}) -font $bold
 
     set tmp [set s[set i]]
     ttk::combobox $f.e$i -textvariable s$i -width 25
@@ -219,7 +223,7 @@ proc search::header {} {
 
   set f $w.dateround
   pack $f -side top -fill x
-  label $f.l1 -text "$::tr(Date)  " -font $bold
+  label $f.l1 -text "$tr(Date)  " -font $bold
   label $f.l2 -text "-" -font $regular
   label $f.l3 -text " " -font $regular
   entry $f.emin -textvariable sDateMin -width 10 -font $regular
@@ -242,14 +246,14 @@ proc search::header {} {
   bindFocusColors $f.emax
   bind $f.emin <FocusOut> +checkDates
   bind $f.emax <FocusOut> +checkDates
-  button $f.lyear -textvar ::tr(YearToToday) -font $regular -pady 2 -command {
+  button $f.lyear -textvar tr(YearToToday) -font $regular -pady 2 -command {
     set sDateMin "[expr [::utils::date::today year]-1].[::utils::date::today month].[::utils::date::today day]"
     set sDateMax [::utils::date::today]
   }
   pack $f.l1 $f.emin $f.eminCal $f.l2 $f.emax $f.emaxCal $f.l3 $f.lyear \
     -side left -padx 3 -pady 3
 
-  label $f.lRound -textvar ::tr(Round) -font $bold
+  label $f.lRound -textvar tr(Round) -font $bold
   spinbox $f.eRound -from 1 -to 20 -increment 1 -textvariable sRound -width 10 -font $regular
   # entry $f.eRound -textvariable sRound -width 10 -font $regular
   set sRound {}
@@ -261,7 +265,7 @@ proc search::header {} {
   ### Result
 
   pack .sh.res -side top -fill x
-  label $w.res.l1 -textvar ::tr(Result) -font $bold
+  label $w.res.l1 -textvar tr(Result) -font $bold
   pack $w.res.l1 -side left -padx 3
   foreach i { win     loss     draw     other    } \
           v { sResWin sResLoss sResDraw sResOther} \
@@ -270,9 +274,9 @@ proc search::header {} {
     pack $w.res.e$i -side left -padx 3
   }
 
-  label $w.gl.l1 -textvar ::tr(GameLength) -font $bold
+  label $w.gl.l1 -textvar tr(GameLength) -font $bold
   label $w.gl.l2 -text {-} -font $regular
-  label $w.gl.l3 -text "($::tr(HalfMoves))" -font $regular
+  label $w.gl.l3 -text "($tr(HalfMoves))" -font $regular
   entry $w.gl.emin -textvariable sGlMin -justify right -width 6 -font $regular
   entry $w.gl.emax -textvariable sGlMax -justify right -width 6 -font $regular
   bindFocusColors $w.gl.emin
@@ -282,10 +286,10 @@ proc search::header {} {
 
   ### ECO
 
-  label $w.eco.l1 -textvar ::tr(ECOCode) -font $bold
+  label $w.eco.l1 -textvar tr(ECOCode) -font $bold
   label $w.eco.l2 -text "-" -font $regular
   label $w.eco.l3 -text " " -font $regular
-  label $w.eco.l4 -textvar ::tr(GamesWithNoECO) -font $bold
+  label $w.eco.l4 -textvar tr(GamesWithNoECO) -font $bold
   entry $w.eco.emin -textvariable sEcoMin -width 5 -font $regular
   entry $w.eco.emax -textvariable sEcoMax -width 5 -font $regular
   bindFocusColors $w.eco.emin
@@ -298,9 +302,9 @@ proc search::header {} {
     }
     unset tempResult
   }
-  radiobutton $w.eco.yes -variable sEco -value Yes -textvar ::tr(Yes) \
+  radiobutton $w.eco.yes -variable sEco -value Yes -textvar tr(Yes) \
       -font $regular
-  radiobutton $w.eco.no -variable sEco -value No -textvar ::tr(No) \
+  radiobutton $w.eco.no -variable sEco -value No -textvar tr(No) \
       -font $regular
   pack $w.eco -side top -fill x
   pack $w.eco.l1 $w.eco.emin $w.eco.l2 $w.eco.emax $w.eco.range -side left -padx 3
@@ -308,19 +312,19 @@ proc search::header {} {
 
   ### Side to move
 
-  label $w.ends.label -textvar ::tr(EndSideToMove) -font $bold
+  label $w.ends.label -textvar tr(EndSideToMove) -font $bold
   frame $w.ends.sep1 -width 5
   frame $w.ends.sep2 -width 5
-  radiobutton $w.ends.white -textvar ::tr(White) -variable sSideToMove -value w -font $regular
-  radiobutton $w.ends.black -textvar ::tr(Black) -variable sSideToMove -value b -font $regular
-  radiobutton $w.ends.both -textvar ::tr(Both) -variable sSideToMove -value wb -font $regular
+  radiobutton $w.ends.white -textvar tr(White) -variable sSideToMove -value w -font $regular
+  radiobutton $w.ends.black -textvar tr(Black) -variable sSideToMove -value b -font $regular
+  radiobutton $w.ends.both -textvar tr(Both) -variable sSideToMove -value wb -font $regular
   pack $w.ends.label $w.ends.white $w.ends.sep1 \
       $w.ends.black $w.ends.sep2 $w.ends.both -side left
   pack $w.ends -side top -fill x
 
   # Checkmate ?
 
-  label $w.ends.endslabel -textvar ::tr(GameEnd) -font $bold
+  label $w.ends.endslabel -textvar tr(GameEnd) -font $bold
   ttk::combobox $w.ends.ending -font $regular -width 12 -values {Any Checkmate Stalemate} -textvariable sGameEnd -state readonly
   pack $w.ends.ending -side right
   pack $w.ends.endslabel -side right -padx 3
@@ -329,18 +333,19 @@ proc search::header {} {
 
   set f [frame $w.gnum]
   pack $f -side top -fill x
-  label $f.l1 -text "$::tr(GlistGameNumber)    " -font $bold
+  label $f.l1 -text "$tr(GlistGameNumber)     " -font $bold
   entry $f.emin -textvariable sGnumMin -width 8 -justify right -font $regular
   label $f.l2 -text {-} -font $regular
   entry $f.emax -textvariable sGnumMax -width 8 -justify right -font $regular
-  pack $f.l1 $f.emin $f.l2 $f.emax -side left -padx 3
+  pack $f.l1 -side left
+  pack $f.emin $f.l2 $f.emax -side left -padx 3
   bindFocusColors $f.emin
   bindFocusColors $f.emax
-  button $f.all -text [::utils::string::Capital $::tr(all)] -pady 2 -font $regular \
+  button $f.all -text [::utils::string::Capital $tr(all)] -pady 2 -font $regular \
       -command {set sGnumMin 1; set sGnumMax -1} -width 7
-  menubutton $f.first -textvar ::tr(First) -pady 2 -font $regular \
+  menubutton $f.first -textvar tr(First) -pady 2 -font $regular \
       -menu $f.first.m -indicatoron 1 -relief flat
-  menubutton $f.last -textvar ::tr(Last) -pady 2 -font $regular \
+  menubutton $f.last -textvar tr(Last) -pady 2 -font $regular \
       -menu $f.last.m -indicatoron 1 -relief flat
   menu $f.first.m -font $regular
   menu $f.last.m -font $regular
@@ -353,19 +358,29 @@ proc search::header {} {
   pack $f.first $f.last $f.all -side left -padx 5
 
   # Pre game comment
-  checkbutton $f.preComment -textvar ::tr(PreComment) -variable preComment -font $bold 
-  checkbutton $f.postComment -textvar ::tr(PostComment) -variable postComment -font $bold 
+  checkbutton $f.preComment -textvar tr(PreComment) -variable preComment -font $bold 
+  checkbutton $f.postComment -textvar tr(PostComment) -variable postComment -font $bold 
   pack $f.postComment $f.preComment -side right
+
+  set f [frame $w.tags]
+  pack $f -side top -fill x -pady 2
+  # requires " (" to be in the translated tagsDescript eg {Extra tags (eg: Annotator "Anand")}
+  label $f.label -text "[string range $tr(tagsDescript) 0 [string first " (" $tr(tagsDescript)]]           " -font $bold
+  entry $f.tag -textvariable sTag -width 15 -font $regular
+  label $f.label2 -text "  ($tr(value))"
+  entry $f.tagvalue -textvariable sTagValue -width 15 -font $regular
+  pack $f.label -side left
+  pack $f.tag $f.label2 $f.tagvalue -side left -padx 5
 
   set f [frame $w.pgntext]
   pack $f -side top -fill x
-  label $f.l1 -textvar ::tr(PgnContains) -font $bold
+  label $f.l1 -textvar tr(PgnContains) -font $bold
   entry $f.e1 -textvariable sPgntext(1) -width 15 -font $regular
-  label $f.l2 -text { and } -font $regular
+  label $f.l2 -text " + " -font $regular
   entry $f.e2 -textvariable sPgntext(2) -width 15 -font $regular
-  label $f.l3 -text { and } -font $regular
+  label $f.l3 -text " + " -font $regular
   entry $f.e3 -textvariable sPgntext(3) -width 15 -font $regular
-  checkbutton $f.case -textvar ::tr(IgnoreCase) -variable sPgncase -font $regular 
+  checkbutton $f.case -textvar tr(IgnoreCase) -variable sPgncase -font $regular 
   bindFocusColors $f.e1
   bindFocusColors $f.e2
   bindFocusColors $f.e3
@@ -373,7 +388,7 @@ proc search::header {} {
 
   addHorizontalRule $w
 
-  button $w.flagslabel -textvar ::tr(FindGamesWith) -font $bold -command {
+  button $w.flagslabel -textvar tr(FindGamesWith) -font $bold -command {
     if {$sHeaderFlagFrame} {
       set sHeaderFlagFrame 0
       pack forget .sh.flags
@@ -393,21 +408,21 @@ proc search::header {} {
   set row 0
   set col 0
   foreach var $::sHeaderFlagList {
-    set lab [label $w.flags.l$var -textvar ::tr($var) -font font_Small]
+    set lab [label $w.flags.l$var -textvar tr($var) -font font_Small]
     grid $lab -row $row -column $col -sticky e
     incr col
     grid [radiobutton $w.flags.yes$var -variable sHeaderFlags($var) \
-        -ind 0 -value yes -text $::tr(Yes) -padx 2 -pady 0 \
+        -ind 0 -value yes -text $tr(Yes) -padx 2 -pady 0 \
         -font font_Small] \
         -row $row -column $col
     incr col
     grid [radiobutton $w.flags.no$var -variable sHeaderFlags($var) \
-        -ind 0 -value no -text $::tr(No) -padx 2 -pady 0 \
+        -ind 0 -value no -text $tr(No) -padx 2 -pady 0 \
         -font font_Small] \
         -row $row -column $col
     incr col
     grid [radiobutton $w.flags.both$var -variable sHeaderFlags($var) \
-        -ind 0 -value both -text $::tr(Both) -padx 2 -pady 0 \
+        -ind 0 -value both -text $tr(Both) -padx 2 -pady 0 \
         -font font_Small] \
         -row $row -column $col
     if {$::macOS} {
@@ -436,11 +451,11 @@ proc search::header {} {
     set lab [label $w.flags.l$var -text $lb -font font_Small]
     grid $lab -row $row -column $col -sticky e
     incr col
-    grid [radiobutton $w.flags.yes$var -variable sHeaderFlags($var) -value yes -text $::tr(Yes) -ind 0 -padx 2 -pady 0 -font font_Small] -row $row -column $col
+    grid [radiobutton $w.flags.yes$var -variable sHeaderFlags($var) -value yes -text $tr(Yes) -ind 0 -padx 2 -pady 0 -font font_Small] -row $row -column $col
     incr col
-    grid [radiobutton $w.flags.no$var -variable sHeaderFlags($var) -value no -text $::tr(No) -ind 0 -padx 2 -pady 0 -font font_Small] -row $row -column $col
+    grid [radiobutton $w.flags.no$var -variable sHeaderFlags($var) -value no -text $tr(No) -ind 0 -padx 2 -pady 0 -font font_Small] -row $row -column $col
     incr col
-    grid [radiobutton $w.flags.both$var -variable sHeaderFlags($var) -value both -text $::tr(Both) -ind 0 -padx 2 -pady 0 -font font_Small] -row $row -column $col
+    grid [radiobutton $w.flags.both$var -variable sHeaderFlags($var) -value both -text $tr(Both) -ind 0 -padx 2 -pady 0 -font font_Small] -row $row -column $col
     incr col 2
     incr count
     if {$count == 4} { set col 0; set row 8 }
@@ -461,13 +476,13 @@ proc search::header {} {
   ### Search and Cancel buttons
 
   frame $w.b
-  button $w.b.defaults -textvar ::tr(Defaults) -padx 20 \
+  button $w.b.defaults -textvar tr(Defaults) -padx 20 \
       -command ::search::header::defaults
-  button $w.b.save -textvar ::tr(Save) -padx 20 -command ::search::header::save
-  button $w.b.stop -textvar ::tr(Stop) -command sc_progressBar
-  button $w.b.help -textvar ::tr(Help) -command {helpWindow Searches Header}
+  button $w.b.save -textvar tr(Save) -padx 20 -command ::search::header::save
+  button $w.b.stop -textvar tr(Stop) -command sc_progressBar
+  button $w.b.help -textvar tr(Help) -command {helpWindow Searches Header}
 
-  button $w.b.search -textvar ::tr(Search) -padx 20 -command {
+  button $w.b.search -textvar tr(Search) -padx 20 -command {
     checkDates
     ::utils::history::AddEntry HeaderSearchWhite $sWhite
     ::utils::history::AddEntry HeaderSearchBlack $sBlack
@@ -533,6 +548,7 @@ proc search::header {} {
 	-fCustom4 $sHeaderFlags(CustomFlag4) \
 	-fCustom5 $sHeaderFlags(CustomFlag5) \
 	-fCustom6 $sHeaderFlags(CustomFlag6) \
+        -extratag $sTag -tagvalue $sTagValue \
         -pgn $sPgnlist -wtitles $wtitles -btitles $btitles \
         -ignoreCase $sPgncase -gameend $sGameEnd \
         ]
@@ -549,7 +565,7 @@ proc search::header {} {
     ::windows::stats::Refresh
   }
 
-  button $w.b.cancel -textvar ::tr(Close) -padx 20 \
+  button $w.b.cancel -textvar tr(Close) -padx 20 \
       -command {focus .main ; destroy .sh}
 
   foreach i {defaults save help cancel search stop} {

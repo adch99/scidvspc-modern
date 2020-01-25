@@ -533,6 +533,8 @@ translate C altered {altered}
 translate C tagsDescript {Extra tags (eg: Annotator "Anand")}
 # ====== TODO To be translated ======
 translate C prevTags {Use previous}
+# ====== TODO To be translated ======
+translate C value {Value}
 
 # Standard error messages:
 translate C ErrNotOpen {To není otevøená databáze.}

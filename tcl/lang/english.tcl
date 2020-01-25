@@ -460,6 +460,7 @@ translate E readonly {read-only}
 translate E altered {altered}
 translate E tagsDescript {Extra tags (eg: Annotator "Anand")}
 translate E prevTags {Use previous}
+translate E value {Value}
 
 # Standard error messages:
 translate E ErrNotOpen {This is not an open database.}

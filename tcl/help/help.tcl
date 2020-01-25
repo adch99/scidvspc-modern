@@ -964,7 +964,7 @@ set helpText(Searches) {<h1>Searches in Scid</h1>
 
   <h3><name Header>General (Header) Search</name></h3>
   <p>
-  This search is for information stored in the game header (such as Player Names, Date etc) or PGN text of a game.
+  The General Search is for information stored in the Game Header (such as Player Names, Date, etc), or in the PGN text of a game.
   <br>
   For a successful match, <b>all fields must match</b>.
   </p>
@@ -987,20 +987,27 @@ set helpText(Searches) {<h1>Searches in Scid</h1>
   </p>
   <p>
   A search can also be done for a pre-game comment or final move comment.
-  But these searches will *not* match hidden comments (ie - those starting with '[' *and* ending with ']').
+  These searches will *not* match hidden comments (ie - those starting with '[' *and* ending with ']').
   </p>
   <p>
+  The <b>Extra Tags</b> search matches common tags such as "Annotator" and "PlyCount" found in the game header,
+  and is quicker than a full PGN text search (see below).
+  The "Value" field is optional. If the value starts with a digit, only exact matches are made, but
+  otherwise the match searches for prefixes - eg "Rogers" will match "Rogers, Ian".
+  </p><p>
+  <i>Extra Tags does *not* match normal tags such as White, Event and EventDate</i>.
+  </p><p>
   Finally, the Header search can be used to find any text
-  (case-sensitive and without wildcards) in the PGN representation of
-  each game.  You may enter up to three text phrases, and they must
-  all appear in a game for it to be a match.  This search is very
-  useful for searching in the comments or extra tags of a game (such
-  as <b>lost on time</b> or <b>Annotator</b>), or for a move sequence
-  like <b>Bxh7+</b> and <b>Kxh7</b> for a bishop sacrifice on h7 that
-  was accepted.  However, this type of search can be <i>very</i> slow
-  since all the games that match other criteria must be decoded and
-  scanned for the text phrases.  So it is a good idea to limit these
-  searches as much as possible.  Here are some examples.  To find
+  (case-sensitive and without wildcards) in the PGN of
+  a game.  You may enter up to three phrases which must all appear
+  for it to be a match.  This search is very
+  useful for searching the comments of a game (such
+  as "lost on time" or "novelty"), or for move sequences
+  (eg "Bxh7+" and "Kxh7").  However, it is generally very slow
+  as all games (that match the other criteria) must be decoded and
+  scanned - so it is a good idea to limit these searches as much as possible.
+  </p><p>
+  Here are some examples.  To find
   games with under-promotions to a rook, search for <b>=R</b> and also
   set the <b>Promotions</b> flag to Yes.  When searching for text that
   would appear in comments, set the <b>Comments</b> flag to Yes.  If
@@ -1099,7 +1106,7 @@ set helpText(Searches) {<h1>Searches in Scid</h1>
   <a Formats>file formats</a> for more information.
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.15 June 2015</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.22 Fan 2020</footer></p>
 }
 
 set helpTitle(CQL) "CQL"

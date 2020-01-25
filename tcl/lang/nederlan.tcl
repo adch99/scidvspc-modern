@@ -506,6 +506,8 @@ translate N altered {altered}
 translate N tagsDescript {Extra tags (eg: Annotator "Anand")}
 # ====== TODO To be translated ======
 translate N prevTags {Use previous}
+# ====== TODO To be translated ======
+translate N value {Value}
 
 # Standard error messages:
 translate N ErrNotOpen {Deze database is niet geopend.}

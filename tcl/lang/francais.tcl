@@ -457,6 +457,8 @@ translate F readonly {lecture seule}
 translate F altered {changé}
 translate F tagsDescript {Extra tags (ex: Annotator "Anand")}
 translate F prevTags {Précédent}
+# ====== TODO To be translated ======
+translate F value {Value}
 
 # Standard error messages:
 translate F ErrNotOpen {Ceci n'est pas une base ouverte.}

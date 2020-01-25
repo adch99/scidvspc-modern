@@ -501,6 +501,8 @@ translate W altered {altered}
 translate W tagsDescript {Extra tags (eg: Annotator "Anand")}
 # ====== TODO To be translated ======
 translate W prevTags {Use previous}
+# ====== TODO To be translated ======
+translate W value {Value}
 
 # Standard error messages:
 translate W ErrNotOpen {Databasen är inte öppen.}

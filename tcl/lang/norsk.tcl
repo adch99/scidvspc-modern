@@ -468,6 +468,8 @@ translate O readonly {skrivebeskyttet}
 translate O altered {endret}
 translate O tagsDescript {Ekstra tagger (f.eks.: Annotator "Anand")}
 translate O prevTags {Bruk forrige}
+# ====== TODO To be translated ======
+translate O value {Value}
 
 # Standard error messages:
 translate O ErrNotOpen {Dette er ikke en åpnet database.}
