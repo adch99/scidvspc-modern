@@ -443,6 +443,8 @@ translate L readonly {kirjoitussuojattu}
 translate L altered {muutettu}
 translate L tagsDescript {Lisätagit (Esimerkiksi: kommentoija "Anand")}
 translate L prevTags {Käytä edellistä}
+# ====== TODO To be translated ======
+translate L value {Value}
 
 # Standard error messages:
 translate L ErrNotOpen {Tämä ei ole avoin tietokanta.}

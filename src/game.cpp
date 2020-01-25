@@ -4624,6 +4624,7 @@ Game::Decode (ByteBuffer * buf, byte flags)
     ASSERT (buf != NULL);
     errorT err;
 
+    NumTags =  0;
     Clear();
 
     // First the nonstandard tags: decode or skip them.

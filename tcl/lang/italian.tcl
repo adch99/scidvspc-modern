@@ -520,6 +520,8 @@ translate I altered {altered}
 translate I tagsDescript {Extra tags (eg: Annotator "Anand")}
 # ====== TODO To be translated ======
 translate I prevTags {Use previous}
+# ====== TODO To be translated ======
+translate I value {Value}
 
 # Standard error messages:
 translate I ErrNotOpen {Questo database non � aperto.}

@@ -502,6 +502,8 @@ translate S readonly {sólo lectura}
 translate S altered {alterado}
 translate S tagsDescript {Etiquetas adicionales (p.e.: Annotator "Anand")}
 translate S prevTags {Usar el anterior}
+# ====== TODO To be translated ======
+translate S value {Value}
 
 # Standard error messages:
 translate S ErrNotOpen {Esta base de datos no está abierta.}

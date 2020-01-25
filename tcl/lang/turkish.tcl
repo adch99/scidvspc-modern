@@ -440,6 +440,8 @@ translate T readonly {salt okunur}
 translate T altered {değiştirilebilir}
 translate T tagsDescript {Ekstra etiketler (örneğin: Yorumcu "Anand")}
 translate T prevTags {Önceki etiketleri kullan}
+# ====== TODO To be translated ======
+translate T value {Value}
 
 # Standard error messages:
 translate T ErrNotOpen {Bu açık bir veritabanı değil.}
