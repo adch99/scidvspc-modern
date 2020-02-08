@@ -93,7 +93,6 @@ proc resetEngine {n} {
   set analysis(waitForBestMove$n) 0
   set analysis(waitForReadyOk$n) 0
   set analysis(waitForUciOk$n) 0
-  set analysis(movesDisplay$n) 1      ;# 0 hide engine lines, 1 no word wrap, 2 word wrap
   set analysis(lastHistory$n) {}      ;# last best line
   set analysis(maxmovenumber$n) 0     ;# the number of moves in this position
   set analysis(lockEngine$n) 0        ;# the engine is locked to current position
@@ -440,7 +439,7 @@ proc ::enginelist::choose {} {
   entry $w.buttons2.logmax            -textvar analysis(logMax) -width 6
   label $w.buttons2.ply               -textvar tr(MaxPly)
   spinbox $w.buttons2.maxply -width 4 -textvar analysis(maxPly) -from 0 -to 20 -increment 1
-  checkbutton $w.buttons2.logname     -variable analysis(logName) -textvar tr(LogName)
+  checkbutton $w.buttons2.wrap   -text [tr GInfoWrap] -variable analysis(wrapPV)
   dialogbutton $w.buttons2.start -textvar tr(Start) -command {
     makeAnalysisWin [lindex [.enginelist.list.list curselection] 0] settime
   }
@@ -452,6 +451,7 @@ proc ::enginelist::choose {} {
   checkbutton $w.buttons3.showVar -textvar tr(ShowArrows) -variable analysis(boardShowsVar) -command "
     catch \{$w.frame.bd.bd delete var\}"
   checkbutton $w.buttons3.lowpriority -variable analysis(lowPriority) -textvar tr(LowPriority)
+  checkbutton $w.buttons3.logname     -variable analysis(logName) -textvar tr(LogName)
 
   # Right-click inits engine but doesn't start
   bind $w.buttons2.start <Button-3> {
@@ -464,10 +464,10 @@ proc ::enginelist::choose {} {
 
   pack $w.buttons.up $w.buttons.down $w.buttons.log $w.buttons.uci $w.buttons.edit $w.buttons.add $w.buttons.copy $w.buttons.delete -side left -expand yes
 
-  pack $w.buttons3.info $w.buttons3.showBoard $w.buttons3.space $w.buttons3.sizeLabel $w.buttons3.size $w.buttons3.showVar $w.buttons3.lowpriority  -side left -padx 4
+  pack $w.buttons3.info $w.buttons3.showBoard $w.buttons3.space $w.buttons3.sizeLabel $w.buttons3.size $w.buttons3.showVar $w.buttons3.lowpriority $w.buttons3.logname -side left -padx 5
 
   pack $w.buttons2.close $w.buttons2.start -side right -padx 5 
-  pack $w.buttons2.logengines $w.buttons2.logmax $w.buttons2.ply $w.buttons2.maxply $w.buttons2.logname -side left -padx 4
+  pack $w.buttons2.logengines $w.buttons2.logmax $w.buttons2.ply $w.buttons2.maxply $w.buttons2.wrap -side left -padx 5
 
   focus $w.buttons2.start
   # Focus is now set to listbox (in ::enginelist::listEngines) for keyboard shortcuts
@@ -2276,6 +2276,9 @@ proc makeAnalysisWin {{n 0} {options {}}} {
     set analysis(multiPVCount$n) 1
   }
 
+  # 0 hide engine lines, 1 no word wrap, 2 word wrap
+  set analysis(movesDisplay$n) [expr $analysis(wrapPV) + 1]
+
   # Try to execute the analysis program:
   if {[catch {set analysis(pipe$n) [open "| [list $analysisCommand] $analysisArgs" "r+"]} result]} {
     if {$oldpwd != {}} { catch {cd $oldpwd} }
@@ -2506,6 +2509,9 @@ proc makeAnalysisWin {{n 0} {options {}}} {
   scrollbar $w.hist.xbar -command "$w.hist.text xview" -orient horizontal
   if { $analysis(showEngineInfo$n) } {
     pack $w.text -side bottom -fill both 
+  }
+  if {$analysis(movesDisplay$n) == 2} {
+    $w.hist.text configure -wrap word
   }
   pack $w.hist -side top -expand 1 -fill both
   initAnalysisBoard $n ; # Init board early to accomodate early engine startups
