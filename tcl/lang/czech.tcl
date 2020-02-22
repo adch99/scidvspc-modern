@@ -275,6 +275,8 @@ menuText C OptionsEngineLineColour "Engine Arrows" 0 {Engine arrows}
 # ====== TODO To be translated ======
 menuText C OptionsRowColour "Rows" 0 {Default tree/book row color}
 # ====== TODO To be translated ======
+menuText C OptionsHighlightColour "Highlight" 0 {Default text highlight color}
+# ====== TODO To be translated ======
 menuText C OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 # ====== TODO To be translated ======
 menuText C OptionsProgressColour "Progressbar" 0 {Default progressbar color}

@@ -767,8 +767,8 @@ proc updateMatchList { tw nametype maxMatches name el op } {
     if {[string trim $string] != {}} {
       set nameMatches($i) $string
       $tw tag bind tag$i <ButtonRelease-1> [list set $name $string]
-      $tw tag bind focus$i <Any-Enter> "$tw tag configure focus$i -font font_Bold"
-      $tw tag bind focus$i <Any-Leave> "$tw tag configure focus$i -font font_Regular"
+      $tw tag bind focus$i <Any-Enter> "$tw tag configure focus$i -back $::highlightcolor"
+      $tw tag bind focus$i <Any-Leave> "$tw tag configure focus$i -back {}"
 
       $tw insert end "$count\t$string\n" [list tag$i focus$i]
     }
@@ -930,7 +930,7 @@ proc nameEditor {} {
   eval tk_optionMenu $w.g.rtype editNameRType [sc_info ratings]
   $w.g.rtype configure -pady 2 -relief flat
 
-  text $w.g.list -height 9 -width 40 -relief sunken -tabs {2c left} -wrap none -cursor hand2
+  text $w.g.list -height 9 -width 40 -relief sunken -tabs {2c left} -wrap none
 
   grid $w.g.list -row 2 -column 1 -rowspan 9 -columnspan 2 -sticky n -pady 5
 
@@ -1182,7 +1182,7 @@ proc gameSave {gnum {focus {}}} {
 
   # Autocomplete text widget and label
 
-  text $f.list -height 9 -width 30 -relief sunken -tabs {2c left} -wrap none -cursor hand2
+  text $f.list -height 9 -width 30 -relief sunken -tabs {2c left} -wrap none -cursor arrow
   clearMatchList $f.list
 
   # label $f.title -textvar ::tr(NameEditMatches) -font font_Italic

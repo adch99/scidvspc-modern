@@ -379,7 +379,7 @@ proc ::htext::display {w helptext {section {}} {fixed 1}} {
         $w tag bind $goTag <ButtonRelease-1> \
             "catch {$w see \[lindex \[$w tag nextrange $goName 1.0\] 0\]}"
         $w tag bind $goTag <Any-Enter> \
-            "$w tag configure \"$goTag\" -fore gray
+            "$w tag configure \"$goTag\" -fore \$::highlightcolor
              $w tag configure \"$goTag\" -back maroon
              $w configure -cursor hand2"
         $w tag bind $goTag <Any-Leave> \
@@ -387,7 +387,7 @@ proc ::htext::display {w helptext {section {}} {fixed 1}} {
              $w tag configure \"$goTag\" -back {}
              $w configure -cursor {}"
       } elseif {[strIsPrefix {pi } $tagName]} {
-        # Player info tag
+        # Player info tag (Gameinfo and Crosstable player)
         set playerTag $tagName
         set playerName [string range $playerTag 3 end]
         set tagName pi
@@ -395,7 +395,7 @@ proc ::htext::display {w helptext {section {}} {fixed 1}} {
         $w tag bind $playerTag <ButtonRelease-1> [list playerInfo $playerName raise]
         ### Hmmm - seen pgn that have the ELO in the playername like "surname [1234] christian"
         $w tag bind $playerTag <Any-Enter> \
-            "catch {$w tag configure \"$playerTag\" -back gray85}
+            "catch {$w tag configure \"$playerTag\" -back \$::highlightcolor}
              $w configure -cursor hand2"
         $w tag bind $playerTag <Any-Leave> \
             "catch {$w tag configure \"$playerTag\" -back {}}
@@ -411,7 +411,7 @@ proc ::htext::display {w helptext {section {}} {fixed 1}} {
         # $w tag bind $gameTag <ButtonPress-3>  "::gbrowser::new [sc_base current] $gnum"
         $w tag bind $gameTag <Any-Enter> \
             "$w tag configure $gameTag
-             $w tag configure $gameTag -back gray85
+             $w tag configure $gameTag -back \$::highlightcolor
              $w configure -cursor hand2"
         $w tag bind $gameTag <Any-Leave> \
             "$w tag configure $gameTag -fore {}
@@ -560,7 +560,7 @@ proc ::htext::display {w helptext {section {}} {fixed 1}} {
 # bh - background+hand
 
 proc u1 {w tag} {
-  $w tag configure $tag -background gray80
+  $w tag configure $tag -background $::highlightcolor
 }
 proc u0 {w tag} {
   $w tag configure $tag -background {}
@@ -574,7 +574,7 @@ proc uh0 {w tag} {
   $w configure -cursor {}
 }
 proc bh1 {w tag} {
-  $w tag configure $tag -back gray85
+  $w tag configure $tag -back $::highlightcolor
   $w configure -cursor hand2
 }
 proc bh0 {w tag} {

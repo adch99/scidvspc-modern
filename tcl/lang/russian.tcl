@@ -256,6 +256,8 @@ menuText R OptionsEngineLineColour "Engine Arrows" 0 {Engine arrows}
 # ====== TODO To be translated ======
 menuText R OptionsRowColour "Rows" 0 {Default tree/book row color}
 # ====== TODO To be translated ======
+menuText R OptionsHighlightColour "Highlight" 0 {Default text highlight color}
+# ====== TODO To be translated ======
 menuText R OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 # ====== TODO To be translated ======
 menuText R OptionsProgressColour "Progressbar" 0 {Default progressbar color}

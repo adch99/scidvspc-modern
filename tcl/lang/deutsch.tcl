@@ -267,6 +267,8 @@ menuText D OptionsMainLineColour "Pfeilfarbe für Partiezug" 0 {Mainline arrows}
 menuText D OptionsVarLineColour "Pfeilfarbe für Variante" 0 {Variation arrows}
 menuText D OptionsEngineLineColour "Engine-Pfeile" 0 {Engine-Pfeile}
 menuText D OptionsRowColour "Farbe für eine Zeile" 0 {Default tree/book row color}
+# ====== TODO To be translated ======
+menuText D OptionsHighlightColour "Highlight" 0 {Default text highlight color}
 menuText D OptionsSwitcherColour "Datenbankwechselfarbe" 0 {Default db switcher color}
 menuText D OptionsProgressColour "Fortschrittsbalken" 0 {Default progressbar color}
 menuText D OptionsScoreColour "Farbe für alle Zugbewertungen" 0 {}

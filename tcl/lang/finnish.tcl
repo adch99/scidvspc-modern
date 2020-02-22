@@ -229,6 +229,8 @@ menuText L OptionsVarLineColour "Muunnelman nuolet" 0 {Muunnelman nuolet}
 # ====== TODO To be translated ======
 menuText L OptionsEngineLineColour "Engine Arrows" 0 {Engine arrows}
 menuText L OptionsRowColour "Rivit" 0 {Oletus puu/kirja-rivin väri}
+# ====== TODO To be translated ======
+menuText L OptionsHighlightColour "Highlight" 0 {Default text highlight color}
 menuText L OptionsSwitcherColour "Katkaisin" 0 {Oletus db-valitsijan väri}
 menuText L OptionsProgressColour "Edistymispalkki" 0 {Edistymispalkin oletusväri}
 menuText L OptionsScoreColour "Tulosgrafiikka" 0 {}

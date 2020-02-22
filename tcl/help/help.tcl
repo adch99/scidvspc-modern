@@ -3880,6 +3880,10 @@ set helpText(Options) {<h1>Options and Preferences</h1>
   The <b>Rows</b> colour is for the highlighted row in the Tree, Books, Finder, PlayerFinder and TournamentFinder windows.
   The Board arrows and drawables' colours are set in the <a Comment Diagrams>Comment Editor</a>.
   </p>
+  <p> The <b>Highlight</b> colour is for a few Name, Game and PGN window mouse-over highlights.
+  These include the Name Editor and Game Saves autocomplete entries, the
+  Crosstable and GameInfo Player Names mouse-over highlighting, and the Crosstable and Report's Game highlighting.
+  </p>
   <p>
   The <b>Background Colour</b> feature enables a bg colour for various text-like windows.
   Likewise, <b>Text Colour</b> enables a text fg colour for the same/simliar windows, though this change requires ScidvsPC restart.
@@ -3933,7 +3937,7 @@ Basic installation is of the form:
 These instructions can be included into Scid's GUI, or issued in ScidvsPC's startup window command line.
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.20 Nov 2018</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.22 Feb 2020</footer></p>
 }
 
 set helpTitle(NAGs) "NAG values"

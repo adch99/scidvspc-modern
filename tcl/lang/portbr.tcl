@@ -303,6 +303,8 @@ menuText B OptionsVarLineColour "Setas de Variantes" 0 {Setas de Variantes}
 menuText B OptionsEngineLineColour "Setas do motor" 0 {Setas do motor}
 
 menuText B OptionsRowColour "Linhas" 0 {Cor padrao da linha para arvore/livro}
+# ====== TODO To be translated ======
+menuText B OptionsHighlightColour "Highlight" 0 {Default text highlight color}
 
 menuText B OptionsSwitcherColour "Chaveador" 0 {Cor padrao para o chaveador de base}
 
