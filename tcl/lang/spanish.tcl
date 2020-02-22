@@ -281,6 +281,8 @@ menuText S OptionsVarLineColour "Flechas de variación" 0 {Flechas de variación}
 # ====== TODO To be translated ======
 menuText S OptionsEngineLineColour "Engine Arrows" 0 {Engine arrows}
 menuText S OptionsRowColour "Filas" 0 {Color predeterminado de la columna de árbol/libro}
+# ====== TODO To be translated ======
+menuText S OptionsHighlightColour "Highlight" 0 {Default text highlight color}
 menuText S OptionsSwitcherColour "Conmutador" 0 {Color del conmutador db predeterminado}
 menuText S OptionsProgressColour "Barra de progreso" 0 {Color predeterminado de la barra de progreso}
 menuText S OptionsScoreColour "Gráfico de puntuación" 0 {}

@@ -1020,7 +1020,7 @@ $m add command -label OptionsSave -command {
     puts $optionF ""
     puts $optionF "set analysisCommand [list $analysisCommand]"
     puts $optionF ""
-    foreach i {lite dark highcolor bgcolor maincolor varcolor engineLineColor rowcolor progcolor crosscolor scorecolor scorebarcolor switchercolor borderwidth \
+    foreach i {lite dark highcolor bgcolor maincolor varcolor engineLineColor rowcolor highlightcolor progcolor crosscolor scorecolor scorebarcolor switchercolor borderwidth \
           pgnColor(Header) pgnColor(Main) pgnColor(Var) \
           pgnColor(Nag) pgnColor(Comment) pgnColor(Background) \
           pgnColor(Current) pgnColor(NextMove) } {
@@ -1334,6 +1334,8 @@ $m add command -label OptionsEngineLineColour -command SetEngineLineColour
 set helpMessage($m,1) OptionsEngineLineColour
 $m add command -label OptionsRowColour -command SetRowBackgroundColour
 set helpMessage($m,1) OptionsRowColour
+$m add command -label OptionsHighlightColour -command SetHighlightColour
+set helpMessage($m,1) OptionsHighlightColour
 $m add command -label OptionsSwitcherColour -command SetRowSwitcherColour
 set helpMessage($m,1) OptionsSwitcherColour
 $m add command -label OptionsProgressColour -command SetProgressColour
@@ -1428,6 +1430,15 @@ proc SetRowBackgroundColour {} {
     # if {[winfo exists .crosstabWin.f.text]} {.crosstabWin.f.text tag configure rowColor -background $::rowcolor}
     if {[winfo exists .bookTuningWin]} {::book::refreshTuning}
     if {[winfo exists .bookWin] } {::book::refresh}
+  }
+}
+
+proc SetHighlightColour {} {
+  global highlightcolor
+  set temp [tk_chooseColor -initialcolor $highlightcolor -title [tr OptionsHighlightColour]]
+  if {$temp != {}} {
+    set highlightcolor $temp
+    # todo non-trivial - Refreshing crosstable, gameinfo widgets, pgn
   }
 }
 
@@ -1814,7 +1825,7 @@ proc setLanguageMenus {{lang ""}} {
     configMenuText .menu.options [tr Options$tag $oldLang] Options$tag $lang
   }
 
-  foreach tag {BackColour MainLineColour VarLineColour EngineLineColour RowColour SwitcherColour ProgressColour} {
+  foreach tag {BackColour MainLineColour VarLineColour EngineLineColour RowColour HighlightColour SwitcherColour ProgressColour} {
     configMenuText .menu.options.colour [tr Options$tag $oldLang] Options$tag $lang
   }
   configMenuText .menu.options.colour [tr OptionsFicsColour $oldLang] OptionsFicsColour $lang

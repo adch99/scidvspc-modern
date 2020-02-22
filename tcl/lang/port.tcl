@@ -244,6 +244,8 @@ menuText U OptionsMainLineColour "Setas da Linha Principal" 0 {Mainline arrows}
 menuText U OptionsVarLineColour "Setas da Variante" 0 {Variation arrows}
 menuText U OptionsEngineLineColour "Setas do Programa" 0 {Engine arrows}
 menuText U OptionsRowColour "Linhas" 0 {Default tree/book row color}
+# ====== TODO To be translated ======
+menuText U OptionsHighlightColour "Highlight" 0 {Default text highlight color}
 menuText U OptionsSwitcherColour "Alternador" 0 {Default db switcher color}
 menuText U OptionsProgressColour "Barra de Progresso" 0 {Default progressbar color}
 menuText U OptionsScoreColour "Gráfico dos Pontos" 0 {}

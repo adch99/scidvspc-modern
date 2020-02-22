@@ -248,6 +248,8 @@ menuText F OptionsMainLineColour "Flèche coup principal" 0 {Mainline arrows}
 menuText F OptionsVarLineColour "Flèche coup variante" 0 {Variation arrows}
 menuText F OptionsEngineLineColour "Flèche moteur" 0 {Flèche moteur}
 menuText F OptionsRowColour "Surlignage coup bibliothèque" 0 {Default tree/book row color}
+# ====== TODO To be translated ======
+menuText F OptionsHighlightColour "Highlight" 0 {Default text highlight color}
 menuText F OptionsSwitcherColour "Surlignage db switcher" 0 {Default db switcher color}
 menuText F OptionsProgressColour "Barre de progression" 0 {Default progressbar color}
 menuText F OptionsScoreColour "Barres graphiques de score" 0 {}

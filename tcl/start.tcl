@@ -422,6 +422,7 @@ set maincolor   black		;# Main line arrow color
 set varcolor    grey80		;# Variation arrow colors
 set engineLineColor $maincolor  ;# Engine arrows
 set rowcolor    lightsteelblue1 ;# Tree/Crosstab/Book line/row bg color
+set highlightcolor gray85       ;# Nameditor /playerinfo/ crosstable player name highlight colour
 set switchercolor lightsteelblue3 ;# DB switcher
 set crosscolor  grey80		;# Crosstable line colouring
 set scorecolor  steelblue	;# Score Graph bars

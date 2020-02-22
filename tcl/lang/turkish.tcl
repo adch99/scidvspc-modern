@@ -229,6 +229,8 @@ menuText T OptionsVarLineColour "Varyasyant Okları" 0 {Variation arrows}
 # ====== TODO To be translated ======
 menuText T OptionsEngineLineColour "Engine Arrows" 0 {Engine arrows}
 menuText T OptionsRowColour "Satır rengi" 0 {Varsayılan ağaç / kitap satır rengi}
+# ====== TODO To be translated ======
+menuText T OptionsHighlightColour "Highlight" 0 {Default text highlight color}
 menuText T OptionsSwitcherColour "db anahtarlayıcı" 0 {Varsayılan db anahtarlayıcı rengi}
 menuText T OptionsProgressColour "İlerleme çubuğu" 0 {Varsayılan ilerleme çubuğu rengi}
 menuText T OptionsScoreColour "Puan Grafiği" 0 {}

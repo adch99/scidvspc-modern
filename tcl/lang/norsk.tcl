@@ -259,6 +259,8 @@ menuText O OptionsMainLineColour "Hovedlinje piler" 0 {}
 menuText O OptionsVarLineColour "Variant piler" 0 {}
 menuText O OptionsEngineLineColour "Motorpiler" 0 {Motorpiler}
 menuText O OptionsRowColour "Rader" 0 {}
+# ====== TODO To be translated ======
+menuText O OptionsHighlightColour "Highlight" 0 {Default text highlight color}
 menuText O OptionsSwitcherColour "Databasevelger" 0 {}
 menuText O OptionsProgressColour "Fremdriftslinje" 0 {Standard farge for fremdriftslinje}
 menuText O OptionsScoreColour "Poeng-graf" 0 {}

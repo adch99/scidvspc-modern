@@ -280,6 +280,8 @@ menuText G OptionsEngineLineColour "Engine Arrows" 0 {Engine arrows}
 # ====== TODO To be translated ======
 menuText G OptionsRowColour "Rows" 0 {Default tree/book row color}
 # ====== TODO To be translated ======
+menuText G OptionsHighlightColour "Highlight" 0 {Default text highlight color}
+# ====== TODO To be translated ======
 menuText G OptionsSwitcherColour "Switcher" 0 {Default db switcher color}
 # ====== TODO To be translated ======
 menuText G OptionsProgressColour "Progressbar" 0 {Default progressbar color}
