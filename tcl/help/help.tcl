@@ -1106,7 +1106,7 @@ set helpText(Searches) {<h1>Searches in Scid</h1>
   <a Formats>file formats</a> for more information.
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.22 Fan 2020</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.22 Jan 2020</footer></p>
 }
 
 set helpTitle(CQL) "CQL"
