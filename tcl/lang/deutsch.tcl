@@ -261,16 +261,15 @@ menuText D CCEditCopy "Partienliste in Ablage" 0 {Kopiert die Partienliste als C
 # Options menu:
 menuText D Options "Optionen" 0
 menuText D OptionsBoard "Schachbrett" 6 {Schachbrettoptionen}
-menuText D OptionsColour "Farben" 0 {Default text widget color}
-menuText D OptionsBackColour "Hintergrund" 0 {Default text widget color}
-menuText D OptionsMainLineColour "Pfeilfarbe für Partiezug" 0 {Mainline arrows}
-menuText D OptionsVarLineColour "Pfeilfarbe für Variante" 0 {Variation arrows}
+menuText D OptionsColour "Farben" 0 {Standardfarbe für Textelemente}
+menuText D OptionsBackColour "Hintergrund" 0 {Standardhintergrundfarbe für Textelemente}
+menuText D OptionsMainLineColour "Pfeilfarbe für Partiezug" 0 {Partiezugpfeilfarbe}
+menuText D OptionsVarLineColour "Pfeilfarbe für Variante" 0 {Variantenpfeilfarbe}
 menuText D OptionsEngineLineColour "Engine-Pfeile" 0 {Engine-Pfeile}
-menuText D OptionsRowColour "Farbe für eine Zeile" 0 {Default tree/book row color}
-# ====== TODO To be translated ======
-menuText D OptionsHighlightColour "Highlight" 0 {Default text highlight color}
-menuText D OptionsSwitcherColour "Datenbankwechselfarbe" 0 {Default db switcher color}
-menuText D OptionsProgressColour "Fortschrittsbalken" 0 {Default progressbar color}
+menuText D OptionsRowColour "Farbe für eine Zeile" 0 {Standardfarbe für Zeilen im Baum/Buch}
+menuText D OptionsHighlightColour "Hervorhebung" 0 {Standardfarbe für Texthervorhebungen}
+menuText D OptionsSwitcherColour "Datenbankwechselfarbe" 0 {Standardfarbe für Datenbankwechsel}
+menuText D OptionsProgressColour "Fortschrittsbalken" 0 {Standardfarbe für Fortschrittsbalken}
 menuText D OptionsScoreColour "Farbe für alle Zugbewertungen" 0 {}
 menuText D OptionsScoreBarColour "Farbe für Bewertung aktueller Zug" 0 {}
 menuText D OptionsNames "Meine Spielernamen..." 0 {Editiere meine Spielernamen}
@@ -478,8 +477,7 @@ translate D readonly {schreibgeschützt}
 translate D altered {geändert}
 translate D tagsDescript {Extramarkierungen (z.B.: Annotator "Anand")}
 translate D prevTags {Verwende vorherige}
-# ====== TODO To be translated ======
-translate D value {Value}
+translate D value {Wert}
 
 # Standard error messages:
 translate D ErrNotOpen {Dies ist keine geöffnete Datenbank.}
@@ -3028,54 +3026,70 @@ set helpText(D,Searches) {<h1>In Scid suchen</h1>
   </p>
 
   <h3><name Header>Partiedatensuche</name></h3>
-  <p>Diese Suche betrifft Informationen, die im Partiekopf gespeichert
-  sind (wie Spielername, Datum usw.) oder den PGN-Text einer Partie.
-  <br>Für eine erfolgreiche Suche müssen <b>alle Felder</b> passen.
-  </p>
+
+  <p>Die allgemeine Suche betrifft Informationen, die im Partiekopf
+  gespeichert sind (wie Spielernamen, Datum usw.) oder im PGN-Text
+  einer Partie.
+  <br>Für eine erfolgreiche Suche müssen <b>alle Felder</b>
+  passen.</p>
+
   <p>Die Namensfelder (Weiß, Schwarz, Turnier, Ort und Runde) passen
   auf jeden Text. Sie sind unabhängig von Groß-/Kleinschreibung und
   berücksichtigen keine Leerzeichen. Beispiel: <b>Michael</b> paßt auf
   viele Vor- und Nachnamen. Genauere Ergebnisse erhält man mit
-  Platzhalterzeichen (<b>?</b> für ein Zeichen, <b> * </b> für
-  null oder mehr Zeichen) und Einschließen in
+  Platzhalterzeichen (<b>?</b> für ein Zeichen, <b> * </b> für null
+  oder mehr Zeichen) und Einschließen in
   Anführungszeichen. Beispielsweise findet eine Suche nach dem
   Ort <b>USA</b> amerikanische Städte, aber auch <b>Lausanne SUI</b>,
   was vermutlich nicht das ist, was Sie wollten. <b>"*USA"</b>
   (beachten Sie die Anführungszeichen) findet die Orte, die auf USA
   enden. Ein anderes Beispiel: um nur Partien zu finden, die in Runde
   1 gespielt wurden, benutzen Sie <b>"1"</b>. Ohne die
-  Anführungszeichen werden auch 10, 21 usw. gefunden.
-  </p>
+  Anführungszeichen werden auch 10, 21 usw. gefunden.</p>
+
   <p>Wenn Sie nach einem bestimmten Spieler suchen (oder einem
   Spielerpaar) mit Weiß oder Schwarz und es spielt keine Rolle, mit
   welcher Farbe gespielt wurde, dann wählen Sie die Option <b>Farben
   ignorieren</b>.
   </p>
+
   <p>Eine Suche kann auch nach einem Anfangs- oder Schlußkommentar
-  durchgeführt werden. Diese Suchen passen aber *nicht* auf versteckte
-  Kommentare (d.h. solche, die mit '[’ beginnen und mit ']' enden).
-  </p>
+  durchgeführt werden.  Diese Suchen passen *nicht* auf versteckte
+  Kommentare (d.h. solche, die mit '[’ beginnen und mit ']'
+  enden).</p>
+
+  <p>Die Suche nach <b>Extramarkierungen</b> paßt auf allgemeine
+  Markierungen wie "Annotator" (Kommentator) und "PlyCount"
+  (Halbzügezahl), die im Partiekopf gefunden werden. Sie sind
+  schneller als eine volle PGN-Textsuche (siehe unten). Das
+  "Wert"-Feld ist optional. Falls der Wert mit einer Ziffer beginnt,
+  dann werden nur exakte Treffer gefunden, ansonsten wird nach einem
+  Vorspann gesucht, z.B. "Rogers" wird "Rogers, Ian" finden.</p>
+
+  <p><i>Die Extramarkierungen beziehen sich *nicht* auf normale
+  Markierungen wie Weiß, Turnier und Datum.</i></p>
+
   <p>Und schließlich kann die Partiedatensuche auch verwendet werden
   für irgendeinen Text (mit Berücksichtigung von Groß-/Kleinschreibung
-  und ohne Platzhalterzeichen) in der PGN-Darstellung jeder
-  Partie. Man kann bis zu drei Textteile eingeben. Diese müssen für
-  einen Fund in einer Partie alle vorhanden sein. Diese Suche ist sehr
-  hilfreich in Kommentaren oder besonderen Kennzeichnungen
-  (wie <b>Zeitüberschreitung</b> oder <b>Annotator</b>) oder für
-  eine Zugfolge wie <b>Bxh7+</b> und <b>Kxh7</b> für ein Läuferopfer
-  auf h7, das angenommen wurde. Diese Form des Suchens kann
-  jedoch <i>sehr</i> langsam sein, da alle Partien, auf die weitere
-  Kriterien zutreffen, für die Textteile dekodiert und eingelesen
-  werden müssen. Deshalb ist es eine gute Idee, diese Suchen so weit
-  als möglich zu begrenzen. Hier sind ein paar Beispiele. Um Partien
-  mit einer Unterverwandlung in einen Turm zu finden, suchen Sie
-  nach <b>=R</b> und setzen auch die Markierung <b>Umwandlungen</b>
-  auf Ja. Wenn Sie nach den Zügen <b>Bxh7+</b> und <b>Kxh7</b> suchen,
-  dann könnten Sie z.B. die Suche auf Partien mit dem Ergebnis 1-0 und
-  mindestens 40 Halbzügen beschränken. Oder Sie führen eine
-  Material-/Mustersuche durch, um Partien zu finden, in denen der
-  weiße Läufer nach h7 zieht.
-  </p>
+  und ohne Platzhalterzeichen) in der PGN-Notation einer Partie. Man
+  kann bis zu drei Textteile eingeben. Diese müssen für einen Fund in
+  einer Partie alle vorhanden sein. Diese Suche ist sehr hilfreich in
+  Kommentaren oder besonderen Kennzeichnungen (wie
+  "Zeitüberschreitung" oder "Neuerung") oder für eine Zugfolge wie
+  "Bxh7+" und "Kxh7". Diese Form des Suchens kann jedoch sehr langsam
+  sein, da alle Partien, auf die weitere Kriterien zutreffen, für die
+  Textteile dekodiert und eingelesen werden müssen. Deshalb ist es
+  eine gute Idee, diese Suchen so weit als möglich zu begrenzen.</p>
+
+  <p>Hier sind ein paar Beispiele. Um Partien mit einer
+  Unterverwandlung in einen Turm zu finden, suchen Sie nach <b>=R</b>
+  und setzen auch die Markierung <b>Umwandlungen</b> auf Ja. Wenn Sie
+  nach den Zügen <b>Bxh7+</b> und <b>Kxh7</b> suchen, dann könnten Sie
+  z.B. die Suche auf Partien mit dem Ergebnis 1-0 und mindestens 40
+  Halbzügen beschränken. Oder Sie führen eine Material-/Mustersuche
+  durch, um Partien zu finden, in denen der weiße Läufer nach h7
+  zieht.</p>
+
   <p><i>Beachte - wenn eine Suche nach dem <a ECO>ECO</a>-Code
   durchgeführt wird, dann werden Partien, die keinen ECO-Code haben,
   ausgelassen.</i>
@@ -3169,7 +3183,7 @@ set helpText(D,Searches) {<h1>In Scid suchen</h1>
   zu <a Formats>Dateiformaten</a>.
   </p>
 
-  <p><footer>Aktualisiert: Scid vs. PC 4.15 Juni 2015</footer></p>
+  <p><footer>Aktualisiert: Scid vs. PC 4.22 Januar 2020</footer></p>
 }
 
 set helpTitle(D,CQL) "CQL"
@@ -4084,7 +4098,7 @@ set helpText(D,LaTeX) {<h1>LaTeX mit Scid benutzen</h1>
   Also ...  add "PATH=$PATH:/Library/TeX/Root/bin/x86_64-darwin" to the startup scripts.</li></ul>
   </p>
 
-  <p><footer>Aktualisiert: Scid vs. PC 4.17, Sept 2016</footer></p>
+  <p><footer>Aktualisiert: Scid vs. PC 4.17, September 2016</footer></p>
 }
 
 set helpTitle(D,PGN) "PGN-Fenster"
@@ -4963,7 +4977,7 @@ set helpText(D,Flags) {<h1>Partiekennzeichen</h1>
   finden</a> (wertet das T-Kennzeichen aus)
   </ul>
 
-  <p><footer>Aktualisiert: Scid vs. PC 4.19, Jan 2018</footer></p>
+  <p><footer>Aktualisiert: Scid vs. PC 4.19, Januar 2018</footer></p>
 }
 
 set helpTitle(D,Analysis) "Analysefenster"
@@ -6144,30 +6158,35 @@ set helpText(D,Bookmarks) {<h1>Lesezeichen</h1>
   <p><footer>Aktualisiert: Scid vs. PC 4.10, Juli 2013</footer></p>
 }
 
-set helpTitle(D,Cmdline) "Command Line Options"
-set helpText(D,Cmdline) {<h1>Command Line Options</h1>
+set helpTitle(D,Cmdline) "Kommandozeilenoptionen"
+set helpText(D,Cmdline) {<h1>Kommandozeilenoptionen</h1>
   <p>
   <ul>
-  <li>-xtb : turn off <a TB>Endspieldatenbanken</a></li>
-  <li>-xspell : don't load the <a Maintenance Spellcheck>spelling</a> file.</li>
-  <li>-xeco : don't load the <a ECO>ECO openings classification</a> file.</li>
-  <li>-fast | -f : Start in fast mode (see below).</li>
+  <li>-xtb : <a TB>Endspieldatenbanken</a> ausschalten</li>
+  <li>-xspell : die Datei für <a Maintenance Spellcheck>Schreibweisen</a>
+  nicht laden.</li>
+  <li>-xeco : die Datei für <a ECO>ECO-Codes</a> nicht laden.</li>
+  <li>-fast | -f : Start im schnellen Modus (siehe unten).</li>
   </ul>
 
-  <p>Other args given on the command line are expected to be databases, pgn files or search files.
-  For databases, the file suffix ".si4" is optional.
-  </p>
-  <p> Example: <b>scid -fast mybase newgames.pgn</b>
-  will start in fast mode, opening "mybase.si4" and the "newgames.pgn".
-  </p>
+  <p>Bei weiteren Argumenten, die auf der Kommandozeile angegeben
+  werden, wird angenommen, daß es sich um Datenbanken, PGN-Dateien
+  oder Suchdateien handelt. Bei Datenbanken ist die
+  Dateinamenserweiterung ".si4" optional.</p>
 
-  <h3>Fast Mode</h3>
-  <p>Scid vs. PC's fast mode skips loading the
-  spelling (or ratings) file, and recalculating name frequencies (as well as
-  flag counts and estimated ratings). Scid vs. PC has recently reduced the bugs in name frequency handling,
-  so using fast mode may now be fine, but is still not generally recommended.
-  </p>
-  <p><footer>Aktualisiert: Scid vs. PC 4.19 Feb 2018</footer></p>
+  <p>Beispiel: <b>scid -fast mybase newgames.pgn</b> startet im
+  schnellen Modus mit Öffnen von "mybase.si4" und "newgames.pgn".
+
+  <h3>Schneller Modus</h3>
+  <p>Der schnelle Modus überspringt das Laden der Schreibweisendatei
+  (oder der Ratingdatei) und das Neuberechnen von Namenshäufigkeiten
+  (sowohl Kennzeichenzähler als auch geschätzte Ratings). Scid vs. PC
+  hat kürzlich die Fehler in der Behandlung von Namenshäufigkeiten
+  reduziert, so daß die Verwendung des schnellen Modus' jetzt in
+  Ordnung sein sollte, er wird aber noch nicht allgemein
+  empfohlen.</p>
+
+  <p><footer>Aktualisiert: Scid vs. PC 4.19 Februar 2018</footer></p>
 }
 
 set helpTitle(D,Pgnscid) "Pgnscid"
@@ -6354,11 +6373,20 @@ set helpText(D,Options) {<h1>Optionen und Einstellungen</h1>
   Feldfarben werden im <a Comment Diagrams>Kommentareditor</a>
   eingestellt.
   </p>
+
+  <p>Die Farbe für <b>Hervorhebungen</b> ist für ein paar
+  Hervorhebungen bei Name, Partie und PGN-Fenster, wenn man mit der
+  Maus über die betreffende Stelle fährt. Dies schließt Einträge im
+  Namenseditor, bei der automatischen Ergänzung von Einträgen im
+  Fenster für das Speichern/Ersetzen einer Partie, bei den
+  Spielernamen in der Kreuztabelle und im Partieinformationsbereich
+  (unterhalb des Hauptbrettes) sowie Partiehervorhebungen in der
+  Kreuztabelle und in den Berichten ein.</p>
+
   <p>Die Funktion <b>Hintergrundfarbe</b> setzt eine Hintergrundfarbe
   für verschiedene textähnliche Fenster. Ebenso setzt <b>Textfarbe</b>
   eine Vordergrundfarbe für die gleichen/ähnlichen Fenster. Diese
-  Änderung erfordert einen Neustart von Scid vs PC.
-  </p>
+  Änderung erfordert einen Neustart von Scid vs PC.</p>
 
   <h3><name MyPlayerNames>Meine Spielernamen</name></h3>
   <p><green><run editMyPlayerNames>Meine Spielernamen</run></green>
@@ -6413,7 +6441,7 @@ set helpText(D,Options) {<h1>Optionen und Einstellungen</h1>
   vs PCs Befehlszeilenstartfenster ausgegeben werden.
   </p>
 
-  <p><footer>Aktualisiert: Scid vs. PC 4.20 Nov 2018</footer></p>
+  <p><footer>Aktualisiert: Scid vs. PC 4.22 Februar 2020</footer></p>
 }
 
 set helpTitle(D,NAGs) "NAG-Werte"
@@ -6890,7 +6918,7 @@ set helpText(D,Book) {<h1>Eröffnungsbuchfenster</h1>
   <p>
   <b>polyglot merge-book -in1 w.bin -in2 b.bin out book.bin</b>
   </p>
-  <p><footer>Aktualisiert: Scid vs. PC 4.19 June, 2018</footer></p>
+  <p><footer>Aktualisiert: Scid vs. PC 4.19 Juni, 2018</footer></p>
   }
 
 # Tactical game window help
