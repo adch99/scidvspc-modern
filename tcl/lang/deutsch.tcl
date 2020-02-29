@@ -1239,6 +1239,8 @@ translate D OprepTheoryTable {Theorietabelle}
 translate D OprepTableComment {Erzeugt aus %u Partien mit höchster ELO-Zahl.}
 translate D OprepExtraMoves {Zusätzliche Züge in Anmerkungen zur Theorietabelle}
 translate D OprepMaxGames {Maximum an Partien in der Theorietabelle}
+# ====== TODO To be translated ======
+translate D OprepMaxLines {Maximum games for statistics}
 translate D OprepViewHTML {Zeige HTML}
 translate D OprepViewLaTeX {Zeige LaTeX}
 

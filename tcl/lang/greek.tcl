@@ -1318,6 +1318,8 @@ translate G OprepTheoryTable {Πίνακας Θεωρίας}
 translate G OprepTableComment {Δημιουργήθηκε από τις %u παρτίδες με την υψηλότερη Βαθμολογία Elo.}
 translate G OprepExtraMoves {Συμπληρωματικές κινήσεις για τον Πίνακα Θεωρίας}
 translate G OprepMaxGames {Μέγιστος αριθμός παρτίδων για τον Πίνακα Θεωρίας}
+# ====== TODO To be translated ======
+translate G OprepMaxLines {Maximum games for statistics}
 translate G OprepViewHTML {Προβολή HTML}
 translate G OprepViewLaTeX {Προβολή LaTeX}
 

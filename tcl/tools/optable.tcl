@@ -106,7 +106,7 @@ proc ::optable::makeReportWin {args} {
     }
     sc_progressBar $w.c2 bar 401 21 time
   }
-  sc_report opening create $::optable(ExtraMoves) $::optable(MaxGames) $::optable::_data(exclude)
+  sc_report opening create $::optable(ExtraMoves) $::optable(MaxGames) $::optable(MaxLines) $::optable::_data(exclude)
   if {$showProgress} {
     unbusyCursor .
     grab release $w.b.cancel
@@ -303,7 +303,7 @@ proc ::optable::setOptions {} {
   set right 1
   set from 0
   set to 10
-  foreach i {OprepStatsHist   Stats Oldest Newest Popular MostFrequent sep \
+  foreach i {OprepStatsHist   MaxLines Stats Oldest Newest Popular MostFrequent sep \
              OprepRatingsPerf AvgPerf HighRating sep \
              OprepTrends      Results Shortest sep \
              OprepMovesThemes MoveOrders MovesFrom Themes Endgames sep \
@@ -332,10 +332,8 @@ proc ::optable::setOptions {} {
       label $w.f.f$i -textvar ::tr($i) -font font_Bold
       grid $w.f.f$i -row $row -column $left -columnspan 4 ;# -sticky e
     } else {
-      # Pascal Georges : changed combobox to spinbox to widen choices
-      if {$i == "MaxGames"} {
-        spinbox $w.f.s$i -textvariable ::optable($i) -from 0 -to 5000 -increment 50 \
-            -width 5 -justify right
+      if {$i == "MaxGames" || $i == "MaxLines"} {
+        spinbox $w.f.s$i -textvariable ::optable($i) -from 0 -to 25000 -increment 500 -width 6 -justify right
       } else  {
         spinbox $w.f.s$i -textvariable ::optable($i) -width 3 -from $from -to $to -justify right
       }
@@ -863,7 +861,7 @@ proc ::optable::report {fmt withTable {flipPos 0}} {
     # A latex f-me - underscores throw errors
     set baseName [string map {_ -} $baseName]
   }
-  append r "$tr(Database):$next $baseName "
+  append r "$n$tr(Database):$next $baseName "
 
   append r "([::utils::thousands [sc_base numGames]] $games)$n"
   if {$fmt == "latex"} {
@@ -883,6 +881,7 @@ proc ::optable::report {fmt withTable {flipPos 0}} {
   }
 
   append r "$::tr(OprepGenerated):$next $::scidName [sc_info version], [::utils::date::today]$n"
+
   append r "$postText"
   if {$rgames == 0} {
     append r $::optable::_docEnd($fmt)
@@ -896,6 +895,9 @@ proc ::optable::report {fmt withTable {flipPos 0}} {
     ($::optable(MostFrequent) > 0 &&
     ($::optable(MostFrequentWhite) || $::optable(MostFrequentBlack)))} {
     append r [::optable::_sec $tr(OprepStatsHist)]
+    if {$tgames > $::optable(MaxLines)} {
+      append r "$n[format $tr(OprepTableComment) $::optable(MaxLines)]$n"
+    }
   }
   if {$::optable(Stats)} {
     append r [::optable::_subsec $tr(OprepStats)]

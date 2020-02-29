@@ -3259,9 +3259,8 @@ set helpText(Reports) {<h1>Reports</h1>
   displays various information about the current position.
   </p>
   <p><i>
-  Some features are affected by an internal limit of 10,000 games.
-  For large reports statistics will be complete, but clicking on hyperlinks (for example)
-  may not always show *all* matching games.
+  Some features are affected by the "Maximum games for statistics" Option, which is 10,000 by default
+  but can now be increased to 25,000 in the Options Window.
   </i></p>
   <p>
   The <b>first few sections</b> show matching games and subsequent moves.
@@ -3334,7 +3333,7 @@ set helpText(Reports) {<h1>Reports</h1>
   or for games matching the current position.
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.13, August 2014</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.22, Feb 2020</footer></p>
 }
 
 

@@ -1370,6 +1370,8 @@ translate I OprepTheoryTable {Tabella della Teoria}
 translate I OprepTableComment {Generato da %u partite piu' quotate.}
 translate I OprepExtraMoves {Mosse Extra note nella tabella della teoria}
 translate I OprepMaxGames {Numero massimo di partite nella tabella della teoria}
+# ====== TODO To be translated ======
+translate I OprepMaxLines {Maximum games for statistics}
 translate I OprepViewHTML {Vedi HTML}
 translate I OprepViewLaTeX {Vedi LaTeX}
 

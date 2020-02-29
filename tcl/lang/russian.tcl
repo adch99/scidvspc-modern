@@ -1271,6 +1271,8 @@ translate R OprepTheoryTable {Теоретическая таблица}
 translate R OprepTableComment {Генерировано из %u высокорейтинговых партий.}
 translate R OprepExtraMoves {Внешние заметки к ходам в теоретической таблице}
 translate R OprepMaxGames {Максимум партий в теоретической таблице}
+# ====== TODO To be translated ======
+translate R OprepMaxLines {Maximum games for statistics}
 translate R OprepViewHTML {Просмотр HTML}
 translate R OprepViewLaTeX {Просмотр LaTeX}
 

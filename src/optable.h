@@ -27,8 +27,8 @@ const uint OPTABLE_MAX_ROWS = 20;
 const uint OPTABLE_DEFAULT_ROWS = 10;
 const uint OPTABLE_MAX_EXTRA_MOVES = 10;
 const uint OPLINE_MOVES = (OPTABLE_COLUMNS + OPTABLE_MAX_EXTRA_MOVES) * 2;
-const uint OPTABLE_MAX_LINES = 10000;       //2000
-const uint OPTABLE_MAX_TABLE_LINES = 25000; //5000
+const uint OPTABLE_MAX_LINES = 25000;
+const uint OPTABLE_MAX_TABLE_LINES = 25000;
 const uint OPTABLE_MAX_STARTLINE = 100;
 
 const uint OPTABLE_Text  = 0;
@@ -153,6 +153,7 @@ class OpTable
     uint        FilterCount;
     uint        NumTableLines;
     uint        MaxTableLines;
+    uint        MaxLines;
     uint        MaxNoteLength;
     uint        MaxThemeMoveNumber;
     uint        NumNotes;
@@ -239,12 +240,20 @@ class OpTable
     const char * GetEco (void) { return (EcoStr != NULL ? EcoStr : ""); }
     void   SetNumRows (uint nrows) { TargetRows = nrows; }
     void   GuessNumRows (void);
+    void   SetMaxLines (uint nlines) {
+        if (nlines <= OPTABLE_MAX_LINES) {
+            MaxLines = nlines;
+        }
+    }
     void   SetMaxTableLines (uint nlines) {
         if (nlines <= OPTABLE_MAX_TABLE_LINES) {
             MaxTableLines = nlines;
         }
     }
-    uint   GetMaxTableLines (void) { return MaxTableLines; }
+    // Unused - S.A. Feb 2020
+    // uint   GetMaxLines (void) { return MaxLines; }
+    // uint   GetMaxTableLines (void) { return MaxTableLines; }
+
     void   SetMaxExtraMoves (uint nmoves) {
         MaxNoteLength = (OPTABLE_COLUMNS + nmoves) * 2;
     }

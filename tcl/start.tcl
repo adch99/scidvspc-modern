@@ -770,6 +770,7 @@ array set optable {
   Themes 1
   Endgames 1
   MaxGames 500
+  MaxLines 10000
   ExtraMoves 1
 }
 array set optableDefaults [array get optable]
