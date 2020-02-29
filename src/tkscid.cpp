@@ -13999,9 +13999,10 @@ sc_report_create (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 {
     uint maxThemeMoveNumber = 20;
     uint maxExtraMoves = 1;
-    uint maxLines = OPTABLE_MAX_TABLE_LINES;
+    uint maxTableLines = OPTABLE_MAX_TABLE_LINES;
+    uint maxLines = OPTABLE_MAX_LINES;
     static const char * usage =
-        "Usage: sc_report opening|player create [maxExtraMoves] [maxLines] [excludeMove]";
+        "Usage: sc_report opening|player create [maxExtraMoves] [maxTableLines] [maxGames] [excludeMove]";
 
     uint reportType = 0;
     if (argc < 2) {
@@ -14019,14 +14020,23 @@ sc_report_create (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         maxExtraMoves = strGetUnsigned (argv[3]);
     }
     if (argc > 4) {
-        maxLines = strGetUnsigned (argv[4]);
-        if (maxLines > OPTABLE_MAX_TABLE_LINES) {
-            maxLines = OPTABLE_MAX_TABLE_LINES;
+        maxTableLines = strGetUnsigned (argv[4]);
+        if (maxTableLines > OPTABLE_MAX_TABLE_LINES) {
+            maxTableLines = OPTABLE_MAX_TABLE_LINES;
+            printf ("maxTableLines %u reduced to limit of %u\n",maxTableLines,OPTABLE_MAX_TABLE_LINES);
+        }
+        if (maxTableLines == 0) { maxTableLines = 1; }
+    }
+    if (argc > 5) {
+        maxLines = strGetUnsigned (argv[5]);
+        if (maxLines > OPTABLE_MAX_LINES) {
+            maxLines = OPTABLE_MAX_LINES;
+            printf ("maxLines %u reduced to limit of %u\n",maxLines,OPTABLE_MAX_LINES);
         }
         if (maxLines == 0) { maxLines = 1; }
     }
     const char * excludeMove = "";
-    if (argc > 5) { excludeMove = argv[5]; }
+    if (argc > 6) { excludeMove = argv[6]; }
 
     if (strcmp (excludeMove, "none") == 0) { excludeMove = ""; }
 
@@ -14036,7 +14046,8 @@ sc_report_create (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     }
     OpTable * report = new OpTable (currentBase, reportTypeName[reportType], db->game, ecoBook);
     reports[reportType] = report;
-    report->SetMaxTableLines (maxLines);
+    report->SetMaxTableLines (maxTableLines);
+    report->SetMaxLines (maxLines);
     report->SetExcludeMove (excludeMove);
     report->SetDecimalChar (decimalPointChar);
     report->SetMaxThemeMoveNumber (maxThemeMoveNumber);
@@ -14056,8 +14067,7 @@ sc_report_create (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
         byte ply = db->dbFilter->Get(gnum);
         IndexEntry * ie = db->idx->FetchEntry (gnum);
         if (ply != 0) {
-            if (db->gfile->ReadGame (db->bbuf, ie->GetOffset(),
-                                     ie->GetLength()) != OK) {
+            if (db->gfile->ReadGame (db->bbuf, ie->GetOffset(), ie->GetLength()) != OK) {
                 return errorResult (ti, "Error reading game file.");
             }
             if (scratchGame->Decode (db->bbuf, GAME_DECODE_ALL) != OK) {
@@ -14071,8 +14081,7 @@ sc_report_create (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             }
             if (ply != 0) {
                 uint moveOrderID = report->AddMoveOrder (scratchGame);
-                OpLine * line = new OpLine (scratchGame, ie, gnum+1,
-                                            maxExtraMoves, maxThemeMoveNumber);
+                OpLine * line = new OpLine (scratchGame, ie, gnum+1, maxExtraMoves, maxThemeMoveNumber);
                 report->Add (line);
                 line->SetMoveOrderID (moveOrderID);
             }

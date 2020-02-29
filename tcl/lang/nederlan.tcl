@@ -1304,6 +1304,8 @@ translate N OprepTheoryTable {Theorie tabel}
 translate N OprepTableComment {Samengesteld uit de %u partijen met de hoogste Elo classificatie.}
 translate N OprepExtraMoves {Extra zetten in theorie tabel}
 translate N OprepMaxGames {Maximaal aantal partijen in theorie tabel}
+# ====== TODO To be translated ======
+translate N OprepMaxLines {Maximum games for statistics}
 translate N OprepViewHTML { HTML zicht} ;
 translate N OprepViewLaTeX {LaTeX zicht} ;
 

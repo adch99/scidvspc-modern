@@ -1207,6 +1207,8 @@ translate F OprepTheoryTable {Table de Théorie}
 translate F OprepTableComment {Généré à partir des %u parties au classement le plus élevé.}
 translate F OprepExtraMoves {Nombre de coups additionnels dans la table de théorie}
 translate F OprepMaxGames {Nombre maximum de parties dans la table de théorie}
+# ====== TODO To be translated ======
+translate F OprepMaxLines {Maximum games for statistics}
 translate F OprepViewHTML {Voir en HTML}
 translate F OprepViewLaTeX {Voir en LaTeX}
 

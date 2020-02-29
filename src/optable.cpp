@@ -497,6 +497,7 @@ OpTable::Init (uint base, const char * type, Game * g, PBook * ebook)
     Type = strDuplicate (type);
     TargetRows = OPTABLE_DEFAULT_ROWS;
     MaxTableLines = OPTABLE_MAX_TABLE_LINES;
+    MaxLines = OPTABLE_MAX_LINES;
     NumRows = 0;
     NumLines = NumTableLines = 0;
     SetMaxExtraMoves (1);
@@ -705,7 +706,7 @@ OpTable::Add (OpLine * line)
 
     TheoryCount++;
     TheoryResults[line->Result]++;
-    if (NumLines < OPTABLE_MAX_LINES) {
+    if (NumLines < MaxLines) {
         Line[NumLines] = line;
         NumLines++;
         if (NumTableLines < MaxTableLines) { NumTableLines++; }
@@ -2035,7 +2036,7 @@ OpTable::AddMoveOrder (Game * g)
     // Add as a new move order if it was not found:
 
     if (index < 0) {
-        if (NumMoveOrders == OPTABLE_MAX_LINES) { return 0; }
+        if (NumMoveOrders == MaxLines) { return 0; }
         MoveOrder[NumMoveOrders].count = 1;
         MoveOrder[NumMoveOrders].moves = strDuplicate (dstr->Data());
         MoveOrder[NumMoveOrders].id = NumMoveOrders + 1;

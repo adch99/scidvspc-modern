@@ -1397,6 +1397,8 @@ translate C OprepTheoryTable {Tabulka teorie}
 translate C OprepTableComment {Generováno z %u partií s nejvy¹¹ím prùmìrným ratingem.}
 translate C OprepExtraMoves {Extra poznámkové tahy v tabulce teorie}
 translate C OprepMaxGames {Maximum tahù v tabulce teorie}
+# ====== TODO To be translated ======
+translate C OprepMaxLines {Maximum games for statistics}
 translate C OprepViewHTML {Zobrazit HTML}
 translate C OprepViewLaTeX {Zobrazit LaTeX}
 
