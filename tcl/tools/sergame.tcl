@@ -545,7 +545,7 @@ namespace eval sergame {
 
     if {$::sergame::useBook && ! $::sergame::wentOutOfBook && [::book::getMove $::sergame::bookToUse $::sergame::bookSlot] == ""} {
       if {[lsearch $::sergame::bookMovesLeft [sc_game info previousMove]] == -1} {
-
+	::gameclock::pauseGameClock
         set answer [tk_messageBox -icon question -parent .main.board -title $::tr(MoveOutOfBook) -type yesno \
               -message "$::tr(MoveOutOfBook) [file rootname $::sergame::bookToUse]\n $::tr(DoYouWantContinue)" ]
 
@@ -553,16 +553,7 @@ namespace eval sergame {
           sc_move back 1
           sc_game truncate 
           updateBoard -pgn
-          if {0} {
-            # todo - handle time
-            if { [::board::opponentColor] == "black" } {
-              ::gameclock::stop 2
-              ::gameclock::start 1
-            } else {
-              ::gameclock::stop 1
-              ::gameclock::start 2
-            }
-          }
+	  ::gameclock::resumeGameClock
           after 1000 ::sergame::engineGo
           return
         } 
@@ -602,19 +593,14 @@ namespace eval sergame {
         }
         
         if { [lsearch $openingMovesHash [sc_pos hash]] == -1 && [llength $openingMovesList] >= $ply} {
+	  ::gameclock::pauseGameClock
           set answer [tk_messageBox -icon question -parent .main.board -title $::tr(OutOfOpening) -type yesno \
               -message "$::tr(NotFollowedLine) $openingMoves\n $::tr(DoYouWantContinue)" ]
           if {$answer == no} {
             sc_move back 1
             sc_game truncate
             updateBoard -pgn
-	    if { [::board::opponentColor] == "black" } {
-	      ::gameclock::stop 2
-	      ::gameclock::start 1
-            } else {
-	      ::gameclock::stop 1
-	      ::gameclock::start 2
-            }
+	    ::gameclock::resumeGameClock
             after 1000 ::sergame::engineGo
             return
           }  else  {
@@ -754,19 +740,14 @@ puts OUTOFBOOK!!!!!!!!!!!!!!!!!!
       if {$delta >  $informant("?") && [::board::opponentColor] == "white" ||
           $delta < -$informant("?") && [::board::opponentColor] == "black" } {
 
+        ::gameclock::pauseGameClock
         set answer [tk_messageBox -icon question -parent .main.board -title Scid -type yesno \
                       -message "$::tr(WeakMovePlayedTakeBack) Material +/- [format %.2f [expr abs($delta)]]" ]
         if {$answer == yes} {
           sc_move back 1
           sc_game truncate 
           updateBoard -pgn
-	  if { [::board::opponentColor] == "black" } {
-	    ::gameclock::stop 2
-	    ::gameclock::start 1
-	  } else {
-	    ::gameclock::stop 1
-	    ::gameclock::start 2
-	  }
+	  ::gameclock::resumeGameClock
           after 1000 ::sergame::engineGo
           return
         }
