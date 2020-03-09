@@ -601,6 +601,20 @@ namespace eval gameclock {
     after cancel [set ::gameclock::after$n]
   }
 
+  # Used in tacgame, sergame
+  proc pauseGameClock {} {
+       ::gameclock::stop 1
+       ::gameclock::stop 2
+  }
+
+  proc resumeGameClock {} {
+    if { [::board::opponentColor] == "black" } {
+       ::gameclock::start 1
+     } else {
+       ::gameclock::start 2
+     }
+  }
+
   proc toggleClock { n } {
     if { $::gameclock::data(running$n) } {
       stop $n

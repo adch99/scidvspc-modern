@@ -862,19 +862,14 @@ namespace eval tacgame {
         }
         
         if { [lsearch $openingMovesHash [sc_pos hash]] == -1 && [llength $openingMovesList] >= $ply} {
+	  ::gameclock::pauseGameClock
           set answer [tk_messageBox -icon question -parent .main.board -title $::tr(OutOfOpening) -type yesno \
               -message "$::tr(NotFollowedLine) $openingMoves\n $::tr(DoYouWantContinue)" ]
           if {$answer == no} {
             sc_move back 1
             sc_game truncate 
             updateBoard -pgn
-	    if {[sc_pos side] == "white"} {
-	      ::gameclock::stop 2
-	      ::gameclock::start 1
-            } else {
-	      ::gameclock::stop 1
-	      ::gameclock::start 2
-            }
+            ::gameclock::resumeGameClock
             after 1000 ::tacgame::phalanxGo
             return
           }  else  {
