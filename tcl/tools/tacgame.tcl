@@ -866,6 +866,7 @@ namespace eval tacgame {
               -message "$::tr(NotFollowedLine) $openingMoves\n $::tr(DoYouWantContinue)" ]
           if {$answer == no} {
             sc_move back 1
+            sc_game truncate 
             updateBoard -pgn
 	    if {[sc_pos side] == "white"} {
 	      ::gameclock::stop 2

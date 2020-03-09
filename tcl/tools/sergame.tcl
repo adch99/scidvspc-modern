@@ -545,6 +545,27 @@ namespace eval sergame {
 
     if {$::sergame::useBook && ! $::sergame::wentOutOfBook && [::book::getMove $::sergame::bookToUse $::sergame::bookSlot] == ""} {
       if {[lsearch $::sergame::bookMovesLeft [sc_game info previousMove]] == -1} {
+
+        set answer [tk_messageBox -icon question -parent .main.board -title $::tr(MoveOutOfBook) -type yesno \
+              -message "$::tr(MoveOutOfBook) [file rootname $::sergame::bookToUse]\n $::tr(DoYouWantContinue)" ]
+
+        if {$answer == no} {
+          sc_move back 1
+          sc_game truncate 
+          updateBoard -pgn
+          if {0} {
+            # todo - handle time
+            if { [::board::opponentColor] == "black" } {
+              ::gameclock::stop 2
+              ::gameclock::start 1
+            } else {
+              ::gameclock::stop 1
+              ::gameclock::start 2
+            }
+          }
+          after 1000 ::sergame::engineGo
+          return
+        } 
         sc_pos setComment "[tr MoveOutOfBook] [file rootname $::sergame::bookToUse]"
       } else {
         sc_pos setComment "[tr LastBookMove] [file rootname $::sergame::bookToUse]"
@@ -585,6 +606,7 @@ namespace eval sergame {
               -message "$::tr(NotFollowedLine) $openingMoves\n $::tr(DoYouWantContinue)" ]
           if {$answer == no} {
             sc_move back 1
+            sc_game truncate
             updateBoard -pgn
 	    if { [::board::opponentColor] == "black" } {
 	      ::gameclock::stop 2
@@ -736,6 +758,7 @@ puts OUTOFBOOK!!!!!!!!!!!!!!!!!!
                       -message "$::tr(WeakMovePlayedTakeBack) Material +/- [format %.2f [expr abs($delta)]]" ]
         if {$answer == yes} {
           sc_move back 1
+          sc_game truncate 
           updateBoard -pgn
 	  if { [::board::opponentColor] == "black" } {
 	    ::gameclock::stop 2
