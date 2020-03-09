@@ -108,10 +108,12 @@ proc ::optable::makeReportWin {args} {
   }
   sc_report opening create $::optable(ExtraMoves) $::optable(MaxGames) $::optable(MaxLines) $::optable::_data(exclude)
   if {$showProgress} {
-    unbusyCursor .
     grab release $w.b.cancel
     destroy $w
-    if {$::optable::_interrupt} { return }
+    if {$::optable::_interrupt} {
+      unbusyCursor .
+      return
+    }
   }
   set ::optable::_data(tree) $newTreeData
   # We latexifyTree here and not when we request "View Latex" to assure the report tree and latex tree are the same.
@@ -233,6 +235,7 @@ proc ::optable::makeReportWin {args} {
     set ::optable::_data(exclude) "none"
   }
   busyCursor .
+  update idletasks
   $w.text configure -state normal
   $w.text delete 1.0 end
   regsub -all "\n" $report "<br>" report
