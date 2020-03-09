@@ -59,18 +59,24 @@ namespace eval book {
     set ::book::isReadonly [sc_book load $bn $slot]
   }
 
-  ################################################################################
-  # Return a move in book for position fen. If there is no move in book, returns ""
-  # Is used by engines, not book windows
-  ################################################################################
-  proc getMove {book fen slot {n 1}} {
+  ### ::book::getMove Only used by sergame and comp.tcl
+  # Args changed by S.A. 2020 - they were broken, and "no moves" returned without closing book. What a fucking mess.
+  # Todo - remove "all" and the constant opening/closing (and use sc_book moves instead). Also sergame slot clashes with book tuning.
+
+  proc getMove {book slot {all {}}} {
     set tprob 0
-    ### Hmmm - why is book opened and closed every move ?
     ::book::scBookOpen $book $slot
     set bookmoves [sc_book moves $slot]
     if {[llength $bookmoves] == 0} {
+      sc_book close $slot
       return ""
     }
+
+    if {$all == "all"} {
+      sc_book close $slot
+      return $bookmoves
+    }
+    
     set r [expr {(int (rand() * 100))} ]
     for {set i 0} {$i<[llength $bookmoves]} {incr i 2} {
       set m [lindex $bookmoves $i]
@@ -83,6 +89,7 @@ namespace eval book {
     sc_book close $slot
     return $m
   }
+
   ################################################################################
   #  Show moves leading to book positions
   ################################################################################
