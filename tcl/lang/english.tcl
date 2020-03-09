@@ -1416,7 +1416,7 @@ translate E Resume {Resume}
 translate E Restart {Restart}
 translate E OutOfOpening {Out of opening}
 translate E NotFollowedLine {You did not follow the line}
-translate E DoYouWantContinue {Do you want yo continue ?}
+translate E DoYouWantContinue {Do you want to continue ?}
 translate E CoachIsWatching {Coach is watching}
 translate E Ponder {Permanent thinking}
 translate E LimitELO {Limit ELO strength}

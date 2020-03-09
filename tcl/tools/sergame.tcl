@@ -15,7 +15,8 @@ namespace eval sergame {
   array set engineListBox {}
   set coachIsWatching 0
   set engineName ""
-  set bookSlot 2
+  # todo - this clashes with ::book::bookTuningSlot
+  set bookSlot 2 
   set depth 0
   set nodes 0
   set ponder 0
@@ -458,6 +459,9 @@ namespace eval sergame {
     }
 
     set ::sergame::wentOutOfBook 0
+    if {$::sergame::useBook} {
+      set ::sergame::bookMovesLeft [::book::getMove $::sergame::bookToUse $::sergame::bookSlot all]
+    }
     ::sergame::engineGo
   }
 
@@ -538,6 +542,16 @@ namespace eval sergame {
     }
 
     # The player moved : add clock time
+
+    if {$::sergame::useBook && ! $::sergame::wentOutOfBook && [::book::getMove $::sergame::bookToUse $::sergame::bookSlot] == ""} {
+      if {[lsearch $::sergame::bookMovesLeft [sc_game info previousMove]] == -1} {
+        sc_pos setComment "[tr MoveOutOfBook] [file rootname $::sergame::bookToUse]"
+      } else {
+        sc_pos setComment "[tr LastBookMove] [file rootname $::sergame::bookToUse]"
+      }
+      set ::sergame::wentOutOfBook 1
+    }
+
 
     if { [::board::opponentColor] == "black" } {
       if {$timeMode == "timebonus" } {
@@ -642,8 +656,11 @@ namespace eval sergame {
     # -------------------------------------------------------------
     # use a book
     if {$::sergame::useBook && ! $::sergame::wentOutOfBook} {
-      set move [ ::book::getMove $::sergame::bookToUse [sc_pos fen] $::sergame::bookSlot]
+      set move [::book::getMove $::sergame::bookToUse $::sergame::bookSlot]
       if {$move == ""} {
+        # Doesn't occur ?
+puts OUTOFBOOK!!!!!!!!!!!!!!!!!!
+	sc_pos setComment "[tr MoveOutOfBook] [file rootname $::sergame::bookToUse]"
         set ::sergame::wentOutOfBook 1
       } else  {
         sc_move addSan $move
@@ -664,10 +681,15 @@ namespace eval sergame {
           }
 	  ::gameclock::start 2
 	}
-        if {[checkRepetition]} {
-	  return
+	# check for still exists book moves
+        set ::sergame::bookMovesLeft [::book::getMove $::sergame::bookToUse $::sergame::bookSlot all]
+        if  {$::sergame::bookMovesLeft == ""} {
+          set ::sergame::wentOutOfBook 1
+          # Computer takes last book move
+          sc_pos setComment "[tr LastBookMove] [file rootname $::sergame::bookToUse]"
         }
-	after 1000 ::sergame::engineGo
+
+        after 1000 ::sergame::engineGo
         return
       }
     }

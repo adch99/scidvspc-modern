@@ -709,7 +709,7 @@ proc compNM {n m k name1 name2} {
       if {$comp(inbook) && $comp(book) != ""} {
         catch {
           # KomodoVariety.bin has bugs
-	  set comp(bookmove) [::book::getMove $comp(book) [sc_pos fen] $::sergame::bookSlot]
+	  set comp(bookmove) [::book::getMove $comp(book) $::sergame::bookSlot]
         }
         if {$comp(bookmove) == ""} {
           set comp(inbook) 0
