@@ -1,0 +1,42 @@
+Do not enable enpassant flag if pawn is pinned.
+
+Author Mike Curtis
+  https://sourceforge.net/p/scid/code/ci/7e7b4c66439b8057e2b6f42d59a0b82b946f14ac/
+Thanks to Mark
+  https://sourceforge.net/p/scidvspc/tickets/23/
+
+Index: src/position.cpp
+===================================================================
+--- src/position.cpp	(revision 3106)
++++ src/position.cpp	(working copy)
+@@ -1918,19 +1918,24 @@
+ 
+     // Set the EPTarget square, if a pawn advanced two squares and an
+     // enemy pawn is on a square where en passant may be possible.
++    ToMove = enemy;
+     EPTarget = NULL_SQUARE;
+     if (ptype == PAWN) {
+         rankT fromRank = square_Rank(from);
+         rankT toRank = square_Rank(to);
++        squareT left = square_Move(to,LEFT);
++        squareT right = square_Move(to,RIGHT);
++        squareT targ = square_Move(from, UP);
+         if (fromRank == RANK_2  &&  toRank == RANK_4
+-              &&  (Board[square_Move(to,LEFT)] == BP
+-                     ||  Board[square_Move(to,RIGHT)] == BP)) {
+-            EPTarget = square_Move(from, UP);
++              && ((Board[left] == BP && IsValidEnPassant(left,targ))
++                  || (Board[right] == BP && IsValidEnPassant(right,targ)))) {
++            EPTarget = targ;
+         }
++        targ = square_Move(from, DOWN);
+         if (fromRank == RANK_7  &&  toRank == RANK_5
+-              &&  (Board[square_Move(to,LEFT)] == WP
+-                     ||  Board[square_Move(to,RIGHT)] == WP)) {
+-            EPTarget = square_Move(from, DOWN);
++              && ((Board[left] == WP && IsValidEnPassant(left,targ))
++                  || (Board[right] == WP && IsValidEnPassant(right,targ)))) {
++            EPTarget = targ;
+         }
+         HalfMoveClock = 0; // 50-move clock resets on pawn moves.
+     }
