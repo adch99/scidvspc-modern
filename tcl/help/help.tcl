@@ -2864,6 +2864,13 @@ with the format "stat01: time nodes ply mvleft mvtot mvname". The results can be
 <p><i>
   Informant values are also <run configInformant><green>configurable</green></run>.                     
 </i></p>
+  <h3>Threat Analysis</h3>
+  <p>
+  By making use of the <a Variations Null>null move</a> feature, it is possible
+  to use the engine to see immediate threats. This idea is further developed by
+  right-clicking the <a Moves Trial>Trial Mode</a> button, which automatically adds a null move and
+  enters trial mode.
+  </p>
 
   <h3><name Training>Training</name></h3>
   <p>
@@ -5748,7 +5755,7 @@ for info about specific commands and variables.
     <li><term>-notify</term> PLAYER - Remove player to your notify list</li>
     <li><term>examine</term> GAME/PLAYER - Load a game into the main board in examine mode</li>
     <li><term>play</term> GAMENUMBER - Respond to a game request from another player</li>
-    <li><term>match</term> PLAYER - Issue game request to a specific person</li>
+    <li><term>match</term> PLAYER [rated|unrated] [TIME] [INC] - Issue game request to a specific person</li>
     <li><term>seek</term>   Seek a new game</li>
     <li><term>moretime</term> NUMBER - Give you opponent NUMBER more seconds</li>
     <li><term>help</term> TOPIC - Get help about some topic</li>
