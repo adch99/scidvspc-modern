@@ -1174,7 +1174,7 @@ translate D ECOFrequency {Häufigkeit der Untercodes für}
 translate D OprepTitle {Eröffnungsbericht}
 translate D OprepReport {Bericht}
 translate D OprepGenerated {Erzeugt durch}
-translate D OprepStatsHist {Statistiken und Geschichte}
+translate D OprepStatsHist {Statistiken und Historie}
 translate D OprepStats {Statistiken}
 translate D OprepStatAll {Alle Berichtspartien}
 translate D OprepStatBoth {Beide Spieler}
@@ -1239,8 +1239,7 @@ translate D OprepTheoryTable {Theorietabelle}
 translate D OprepTableComment {Erzeugt aus %u Partien mit höchster ELO-Zahl.}
 translate D OprepExtraMoves {Zusätzliche Züge in Anmerkungen zur Theorietabelle}
 translate D OprepMaxGames {Maximum an Partien in der Theorietabelle}
-# ====== TODO To be translated ======
-translate D OprepMaxLines {Maximum games for statistics}
+translate D OprepMaxLines {Maximum an Partien für Statistiken}
 translate D OprepViewHTML {Zeige HTML}
 translate D OprepViewLaTeX {Zeige LaTeX}
 
@@ -5198,6 +5197,14 @@ set helpText(D,Analysis) {<h1>Das Analysefenster</h1>
   <p><i>Informatorwerte sind
   ebenfalls <run configInformant><green>konfigurierbar</green></run>.</i></p>
 
+  <h3>Analyse von Drohungen</h3>
+  <p>Durch Verwendung der Funktion des <a Variations
+  Null>Nullzuges</a> kann man die Engine benutzen, um unmittelbare
+  Drohungen zu erkennen. Diese Idee wurde weiterentwickelt durch
+  Rechtsklick auf die Schaltfläche <a Moves Trial>Züge
+  ausprobieren</a>, was automatisch einen Nullzug hinzufügt und in den
+  Probiermodus wechselt.</p>
+
   <h3><name Training>Training</name></h3>
   <p>Training <button tb_training> ist eine dürftig implementierte
   Funktion Schachprogramm gegen Spieler und nur für das zweite und
@@ -5682,13 +5689,12 @@ set helpText(D,Reports) {<h1>Berichte</h1>
 
   <h2><name Opening>Eröffnungsberichte</name></h2>
   <p>Scids <run ::optable::makeReportWin><green>Eröffnungsbericht</green></run>
-  zeigt unterschiedliche Informationen über die aktuelle Stellung.
-  </p>
-  <p><i>Einige Funktionen sind von einer internen Beschränkung von
-  10.000 Partien betroffen. Für große Berichte sind Statistiken
-  unvollständig. Ein Klick auf einen Querverweis (beispielsweise) wird
-  nicht *alle* passenden Partien anzeigen.
-  </i></p>
+  zeigt unterschiedliche Informationen über die aktuelle Stellung.</p>
+
+  <p><i>Einige Funktionen sind von der Option "Maximum an Partien für
+  Statistiken", die standardmäßig 10.000 ist, betroffen. Sie kann
+  jetzt aber im Optionenfenster auf 25.000 erhöht werden.</i></p>
+
   <p>Die <b>ersten Abschnitte</b> zeigen passende Partien und
   nachfolgende Partiezüge. Man sieht, ob eine Eröffnung beliebter
   wird, wenn sie viele Kurzremisen aufweist und welche (anderen)
@@ -5764,7 +5770,7 @@ set helpText(D,Reports) {<h1>Berichte</h1>
   angegebenen Spieler) oder für Partien, die auf die aktuelle Stellung passen.
   </p>
 
-  <p><footer>Aktualisiert: Scid vs. PC 4.13, August 2014</footer></p>
+  <p><footer>Aktualisiert: Scid vs. PC 4.22, Februar 2020</footer></p>
 }
 
 
@@ -6177,7 +6183,7 @@ set helpText(D,Cmdline) {<h1>Kommandozeilenoptionen</h1>
   Dateinamenserweiterung ".si4" optional.</p>
 
   <p>Beispiel: <b>scid -fast mybase newgames.pgn</b> startet im
-  schnellen Modus mit Öffnen von "mybase.si4" und "newgames.pgn".
+  schnellen Modus mit Öffnen von "mybase.si4" und "newgames.pgn".</p>
 
   <h3>Schneller Modus</h3>
   <p>Der schnelle Modus überspringt das Laden der Schreibweisendatei
@@ -8352,8 +8358,8 @@ set helpText(D,FICScommands) {<h1>FICS-Befehle und -Variablen</h1>
   Hauptbrett im Beobachtungsmodus</li>
   <li><term>play</term> PARTIENUMMER - Antwortet auf eine
   Partieaufforderung eines anderen Spielers</li>
-  <li><term>match</term> SPIELER - Sendet an einen bestimmten Spieler
-  eine Partieaufforderung</li>
+  <li><term>match</term> SPIELER [rated (gewertet)|unrated (ungewertet)] [Zeit] [Inkrement] -
+  Sendet an einen bestimmten Spieler eine Partieaufforderung</li>
   <li><term>seek</term> Sucht nach einer neuen Partie</li>
   <li><term>moretime</term> NUMMER - Gibt Ihrem Gegner NUMMER mehr Sekunden</li>
   <li><term>help</term> THEMA - Holt Hilfe zu einigen Themen</li>
