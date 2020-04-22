@@ -3924,23 +3924,25 @@ set helpText(Options) {<h1>Options and Preferences</h1>
   </p>
   <h3><name Themes>Themes</name></h3>
   <p>
-Tk has a feature known as "themes" (or "Themed Tk - ttk), which allow for
-custom graphics and colours for some specific GUI elements (or widgets).
+Tk has a feature known as "Themes" (or "Themed Tk" - ttk), which allow for
+custom graphics and colours for some specific GUI elements.
 Tk comes with a few themes installed by default, and these can be
 selected in <b>Options-<gt>Themes</b>. 
 </p><p>Installing extra themes can be tricky - and most custom themes are not terribly mature/complete.
 ScidvsPC does not make extensive use of the themes features, prefering instead the 
-mature (though boring) default Tk widgets.
+mature (though boring) default Tk widgets; though there are some good extra themes available in our "support files" downloads.
   </p>
 <p>
-Basic installation is of the form:
+Theme installation is not quite trivial:
+    Copy the theme(s) to one of Tk library directories (eg, on linux /usr/lib/tk8.6 or /usr/local/lib).
+    If the theme is one of "tilegtk tileq keramik keramik_alt plastik dark", it will appear in the Themes Menu upon restart.
+</p><p>
+    Otherwise, add the theme name to the above names (in the gui), or issue these commands from ScidvsPC's startup window command line.
 <ul>
-    <li>Copy the theme to one of Tk library directories (eg /usr/lib/tk8.6).</li>
-    <li>(or) source myThemes.tcl</li>
-    <li>package require ttk::theme::MyTheme</li>
-    <li>ttk::style theme use MyTheme</li>
+    <li>"source myThemes.tcl"</li>
+    <li>"package require ttk::theme::MyTheme"</li>
+    <li>"ttk::style theme use MyTheme"</li>
 </ul>
-These instructions can be included into Scid's GUI, or issued in ScidvsPC's startup window command line.
   </p>
 
   <p><footer>Updated: Scid vs. PC 4.22 Feb 2020</footer></p>

@@ -311,7 +311,7 @@ menuText S OptionsMovesTranslatePieces "Traducir piezas" 0 {Traducir la primera 
 menuText S OptionsMovesHighlightLastMove "Resalta última jugada" 0 {Resalta la última jugada}
 menuText S OptionsMovesHighlightLastMoveDisplay "Mostrar" 0 {Muestra la última jugada iluminada}
 menuText S OptionsMovesHighlightLastMoveWidth "Ancho" 0 {Espesor de la línea}
-menuText S OptionsMovesHighlightLastMoveColor "Color" 0 {Color de línea}
+menuText S OptionsMovesHighlightLastMoveColor "Select Color" 0 {Color de línea}
 # ====== TODO To be translated ======
 menuText S OptionsMovesColorSelected "Color Selected Square" 0 {Color move}
 menuText S OptionsMoves "Movimientos" 0 {Opciones de la entrada de movimientos}

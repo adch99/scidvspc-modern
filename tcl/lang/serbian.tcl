@@ -341,7 +341,7 @@ menuText Y OptionsMovesHighlightLastMoveDisplay "Show" 0 {Display last move High
 # ====== TODO To be translated ======
 menuText Y OptionsMovesHighlightLastMoveWidth "Width" 0 {Thickness of line}
 # ====== TODO To be translated ======
-menuText Y OptionsMovesHighlightLastMoveColor "Color" 0 {Color of line}
+menuText Y OptionsMovesHighlightLastMoveColor "Select Color" 0 {Color of line}
 # ====== TODO To be translated ======
 menuText Y OptionsMovesColorSelected "Color Selected Square" 0 {Color move}
 menuText Y OptionsMoves "Potezi" 0 {Opcije uno¹enja poteza}

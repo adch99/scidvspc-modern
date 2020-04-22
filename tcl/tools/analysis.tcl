@@ -2520,7 +2520,14 @@ proc makeAnalysisWin {{n 0} {options {}}} {
   pack $w.hist.text -side left -expand 1 -fill both
   bind $w.hist.text <ButtonPress-2> "toggleMovesDisplay $n"
   $w.text tag configure blue -foreground blue ; # this only seems used in toggleAutomove ???
-  $w.hist.text tag configure gray -foreground grey50 -lmargin2 [font measure font_Small xxxxxxxxxxxxxxxxxx]
+
+  if {$::enableForeground == 1} {
+    set color [gradient $::defaultForeground .6 .]
+  } else {
+    set color grey50
+  }
+  $w.hist.text tag configure gray -foreground $color -lmargin2 [font measure font_Small xxxxxxxxxxxxxxxxxx]
+
   $w.hist.text tag configure blue -foreground darkblue
   $w.text insert end "Please wait a few seconds for engine initialisation \
       (with some engines, you will not see any analysis until the board \

@@ -1361,7 +1361,6 @@ set helpMessage($m,1) OptionsFicsColour
 
 $m.fore add command -label OptionsMovesHighlightLastMoveColor -command SetForegroundColour
 $m.fore add checkbutton -label OptionsFicsColour -variable enableForeground
-$m.fore add separator
 
 proc SetBackgroundColour {} {
   global defaultBackground enableBackground

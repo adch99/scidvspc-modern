@@ -280,7 +280,7 @@ menuText E OptionsMovesTranslatePieces "Translate Pieces" 0 {Translate first let
 menuText E OptionsMovesHighlightLastMove "Highlight Last Move" 0 {Highlight last move}
 menuText E OptionsMovesHighlightLastMoveDisplay "Show" 0 {Display last move Highlight}
 menuText E OptionsMovesHighlightLastMoveWidth "Width" 0 {Thickness of line}
-menuText E OptionsMovesHighlightLastMoveColor "Color" 0 {Color of line}
+menuText E OptionsMovesHighlightLastMoveColor "Select Color" 0 {Color of line}
 menuText E OptionsMovesColorSelected "Color Selected Square" 0 {Color move}
 menuText E OptionsMoves "Moves" 0 {Move entry options}
 menuText E OptionsMovesAsk "Ask Before Replacing Moves" 0 \

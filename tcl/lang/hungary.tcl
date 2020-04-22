@@ -325,7 +325,7 @@ menuText H OptionsMovesHighlightLastMoveDisplay "Show" 0 {Display last move High
 # ====== TODO To be translated ======
 menuText H OptionsMovesHighlightLastMoveWidth "Width" 0 {Thickness of line}
 # ====== TODO To be translated ======
-menuText H OptionsMovesHighlightLastMoveColor "Color" 0 {Color of line}
+menuText H OptionsMovesHighlightLastMoveColor "Select Color" 0 {Color of line}
 # ====== TODO To be translated ======
 menuText H OptionsMovesColorSelected "Color Selected Square" 0 {Color move}
 menuText H OptionsMoves "Lépések" 0 {Lépések bevitelének beállításai}
