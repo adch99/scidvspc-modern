@@ -320,7 +320,7 @@ menuText C OptionsMovesHighlightLastMoveDisplay "Show" 0 {Display last move High
 # ====== TODO To be translated ======
 menuText C OptionsMovesHighlightLastMoveWidth "Width" 0 {Thickness of line}
 # ====== TODO To be translated ======
-menuText C OptionsMovesHighlightLastMoveColor "Color" 0 {Color of line}
+menuText C OptionsMovesHighlightLastMoveColor "Select Color" 0 {Color of line}
 # ====== TODO To be translated ======
 menuText C OptionsMovesColorSelected "Color Selected Square" 0 {Color move}
 menuText C OptionsMoves "Tahy" 0 {Volby pro zadávání tahù}

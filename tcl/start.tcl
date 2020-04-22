@@ -682,8 +682,7 @@ if {$::windowsOS} {
   set lookTheme default
 }
 
-# set board piece style
-foreach i {tilegtk tileq keramik keramik_alt plastik} {
+foreach i {tilegtk tileq keramik keramik_alt plastik dark} {
   catch {package require ttk::theme::$i}
 }
 # catch {ttk::style theme use $lookTheme}

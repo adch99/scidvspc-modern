@@ -308,7 +308,7 @@ menuText I OptionsMovesHighlightLastMoveDisplay "Show" 0 {Display last move High
 # ====== TODO To be translated ======
 menuText I OptionsMovesHighlightLastMoveWidth "Width" 0 {Thickness of line}
 # ====== TODO To be translated ======
-menuText I OptionsMovesHighlightLastMoveColor "Color" 0 {Color of line}
+menuText I OptionsMovesHighlightLastMoveColor "Select Color" 0 {Color of line}
 # ====== TODO To be translated ======
 menuText I OptionsMovesColorSelected "Color Selected Square" 0 {Color move}
 menuText I OptionsMoves "Mosse" 0 {Opzioni di immissione di mosse}
