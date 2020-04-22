@@ -1829,6 +1829,8 @@ proc cancelAutoplay {} {
       foreach b $disableButtons {
         .analysisWin$n.b.$b configure -state normal
       }
+     # Little hack to stop <Configure> from making the analysis widget big (and making the main board tiny) while the App is iconifed
+     update idletasks
     }
   }
   set annotate(Engine) -1
