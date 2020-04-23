@@ -1211,6 +1211,8 @@ namespace eval fics {
             after [expr {2 * $::animateDelay}] "
 	      tk_messageBox -title \"Game result\" -icon info -type ok -message \"$res\"
             "
+	    # Game can end while dragging a piece, this can carry over, so try to handle
+	    clearAllMoves
 	  }
 	}
 	# &&& do we need ::fics::remove_observedGame $num (todo check)
