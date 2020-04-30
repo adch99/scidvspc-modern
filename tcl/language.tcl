@@ -39,7 +39,8 @@ set   transPieces(G) { P S K P Q B R [ B A N I }
 set untransPieces(G) { S P P K B Q [ R A B I N }
 set   transPieces(T) { P P K S Q V R K B F N A }
 set untransPieces(T) { P P S K V Q K R F B A N }
-
+set   transPieces(U) { P P K R Q D R T B B N C }
+set untransPieces(U) { P P R K D Q T R B B C N }
 
 proc trans {msg} {
   if { $::language == "E" || ! $::translatePieces || $msg == {[end]} } {
@@ -85,8 +86,8 @@ array set langTable {
   N {nederlan Nederlands 0 iso8859-1 ne}
   O {norsk    Norsk      1 utf-8     no}
   P {polish   Polish     0 utf-8     {}}
-  B {portbr   {Brazil Portuguese} 0 iso8859-1 {}}
-  U {port     Portuguese 0 iso8859-1 {}}
+  B {portbr   {Brazil Portuguese} 0 iso8859-1 po}
+  U {port     Portuguese 0 iso8859-1 po}
   R {russian  Russian    0 utf-8     {}}
   Y {serbian  Serbian    2 iso8859-2 {}}
   S {spanish  Spanish    1 iso8859-1 es}

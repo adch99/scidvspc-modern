@@ -41,15 +41,17 @@ int language = 0; // default to english
 //  0 = en,
 //  1 = fr, 2 = es, 3 = de,
 //  4 = it, 5 = ne, 6 = cz
-//  7 = hu, 8 = no, 9 = sw, 10 = gk, 11 = tr
+//  7 = hu, 8 = no, 9 = sw,
+// 10 = gk, 11 = tr, 12 = po
 //  format is P?K?Q?R?B?N?  (Pawn King Queen Rook Bishop kNight)
 //  where ? is replaced by an ascii char in the new language
-//  see 'case INFO_LANGUAGE' in tkscid.cpp
+//  see 'case INFO_LANGUAGE' in tkscid.cpp and langTable array in language.tcl
 
 const char * langPieces[] = { "",
 "PPKRQDRTBFNC", "PPKRQDRTBANC", "PBKKQDRTBLNS",
 "PPKRQDRTBANC", "PpKKQDRTBLNP", "PPKKQDRVBSNJ",
-"PGKKQVRBBFNH", "PBKKQDRTBLNS", "PBKKQDRTBLNS", "PSKPQBR[BANI", "PPKSQVRKBFNA" };
+"PGKKQVRBBFNH", "PBKKQDRTBLNS", "PBKKQDRTBLNS",
+"PSKPQBR[BANI", "PPKSQVRKBFNA", "PPKRQDRTBBNC"};
 
 // Translate pieces (moves) from english to another language
 
