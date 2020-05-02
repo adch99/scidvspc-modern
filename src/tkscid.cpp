@@ -7837,7 +7837,7 @@ sc_game_list (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                           if (gameNonStd || ie->GetStartFlag())
                               g->GetPartialMoveList (moveStr, db->filter->Get(index) - 1, 6);
                           else 
-                              g->GetPartialMoveList (moveStr, gamePly, 6);
+                              g->GetPartialMoveList (moveStr, db->treeFilter->Get(index) - 1, 6);
                         }
                     }
                 }
@@ -14336,7 +14336,7 @@ sc_tree_best (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                   if (gameNonStd || ie->GetStartFlag())
                       g->GetPartialMoveList (moveStr, base->treeFilter->Get(bestIndex[i]) - 1, 6);
                   else 
-                      g->GetPartialMoveList (moveStr, gamePly, 6);
+                      g->GetPartialMoveList (moveStr, base->treeFilter->Get(bestIndex[i]) - 1, 6);
                 }
             }
         }
