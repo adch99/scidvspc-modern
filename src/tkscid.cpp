@@ -7830,14 +7830,19 @@ sc_game_list (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                           printf ("mybad decoding game %u\n", index);
                         } else {
                           moveStr->Clear();
-                          // Use treeFilter instead of GetCurrentPly to better handle games with NonStandardStart
-                          //   don't always use treeFilter because of wrong value when position repeats
                           // Show arbitary 3 moves (6 ply)
                           // Todo! - Make this work with position searches, where each game has it's own ply according to search result.
-                          if (gameNonStd || ie->GetStartFlag())
-                              g->GetPartialMoveList (moveStr, db->filter->Get(index) - 1, 6);
-                          else 
-                              g->GetPartialMoveList (moveStr, db->treeFilter->Get(index) - 1, 6);
+                          // Cases to consider
+                          // * NonStandardStart
+                          // * Move repetition means db->treeFilter->Get(index) may not be accurate as it gives the first pos occurence
+                          // * Transpsotion at different depth means we should generally use treeFilter
+                          // Simplest solution is to use treeFilter unless currentGame
+                          // but this means duplicate ganes with repetition will have different 'Moves' entries.
+
+                          if (index == db->gameNumber)
+			    g->GetPartialMoveList (moveStr, gamePly, 6);
+			  else
+			    g->GetPartialMoveList (moveStr, db->treeFilter->Get(index) - 1, 6);
                         }
                     }
                 }
@@ -14333,10 +14338,11 @@ sc_tree_best (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                   printf ("mybadbest decoding game %u\n", bestIndex[i]);
                 } else {
                   moveStr->Clear();
-                  if (gameNonStd || ie->GetStartFlag())
-                      g->GetPartialMoveList (moveStr, base->treeFilter->Get(bestIndex[i]) - 1, 6);
-                  else 
-                      g->GetPartialMoveList (moveStr, base->treeFilter->Get(bestIndex[i]) - 1, 6);
+                  // See "Cases to consider" above
+		  if (bestIndex[i] == db->gameNumber)
+		    g->GetPartialMoveList (moveStr, gamePly, 6);
+		  else
+		    g->GetPartialMoveList (moveStr, base->treeFilter->Get(bestIndex[i]) - 1, 6);
                 }
             }
         }
