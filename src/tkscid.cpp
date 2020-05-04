@@ -7830,41 +7830,34 @@ sc_game_list (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                           printf ("mybad decoding game %u\n", index);
                         } else {
                           moveStr->Clear();
-                          // Todo! - Make this work with position searches, where each game has it's own ply according to search result.
+                          // Todo! - Make this work with position searches,
+                          // where each game has it's own ply according to search result.
+
                           // Cases to consider
                           // * NonStandardStart
                           // * Move repetition means db->treeFilter->Get(index) may not be accurate as it gives the first pos occurence
                           // * Transpostion at different depth means we should generally use treeFilter
-                          // Simplest solution is to use treeFilter unless currentGame
-                          // but this means duplicate ganes with repetition will have different 'Moves' entries.
+
                           uint ply;
 
-                          if (gameNonStd || ie->GetStartFlag()) {
-                            ply = db->treeFilter->Get(index) - 1;
+                          if ((int)index == db->gameNumber) {
+                            ply = gamePly;
                           } else {
-                            if ((int)index == db->gameNumber || gamePly == db->treeFilter->Get(index) - 1) {
-                              ply = gamePly;
-                            } else {
-                              // Allow for repetition - move to gamePly and check if position is the same
-                              Position tempPos;
-                              tempPos.CopyFrom(db->game->GetCurrentPos());
-
-                              g->MoveToPly(gamePly);
-                              if (gamePly != g->GetCurrentPly()) {
-                                // MoveToPly failed
-                                ply = db->treeFilter->Get(index) - 1;
-                              } else {
-                                if (g->GetCurrentPos()->Compare(&tempPos) == EQUAL_TO)
+                            ply = db->treeFilter->Get(index) - 1;
+                            if (!(gameNonStd || ie->GetStartFlag() || ply == gamePly)) {
+                                // Check for repetition - move to gamePly and check if position is the same
+                                Position tempPos;
+                                tempPos.CopyFrom(db->game->GetCurrentPos());
+                                g->MoveToPly(gamePly);
+                                if (gamePly == g->GetCurrentPly() &&  \
+                                    g->GetCurrentPos()->Compare(&tempPos) == EQUAL_TO) {
                                   ply = gamePly;
-                                else
-                                  ply = db->treeFilter->Get(index) - 1;
-                              }
-                            }
+                                }
+                             }
                           }
 
                           // Show arbitary 3 moves (6 ply)
                           g->GetPartialMoveList (moveStr, ply, 6);
-
                         }
                     }
                 }
@@ -14365,27 +14358,20 @@ sc_tree_best (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                   uint index = bestIndex[i];
                   uint ply;
 
-                  if (gameNonStd || ie->GetStartFlag()) {
-                    ply = base->treeFilter->Get(index) - 1;
+		  if ((int)index == base->gameNumber) {
+		    ply = gamePly;
                   } else {
-                    if ((int)index == base->gameNumber || gamePly == base->treeFilter->Get(index) - 1) {
-                      ply = gamePly;
-                    } else {
-                      // Allow for repetition - move to gamePly and check if position is the same
-                      Position tempPos;
-                      tempPos.CopyFrom(base->game->GetCurrentPos());
-
-                      g->MoveToPly(gamePly);
-                      if (gamePly != g->GetCurrentPly()) {
-                        // MoveToPly failed
-                        ply = base->treeFilter->Get(index) - 1;
-                      } else {
-                        if (g->GetCurrentPos()->Compare(&tempPos) == EQUAL_TO)
+                    ply = base->treeFilter->Get(index) - 1;
+                    if (!(gameNonStd || ie->GetStartFlag() || ply == gamePly)) {
+                        // Check for repetition - move to gamePly and check if position is the same
+                        Position tempPos;
+                        tempPos.CopyFrom(base->game->GetCurrentPos());
+                        g->MoveToPly(gamePly);
+                        if (gamePly == g->GetCurrentPly() &&  \
+                            g->GetCurrentPos()->Compare(&tempPos) == EQUAL_TO) {
                           ply = gamePly;
-                        else
-                          ply = base->treeFilter->Get(index) - 1;
-                      }
-                    }
+                        }
+                     }
                   }
 
                   // Show arbitary 3 moves (6 ply)
