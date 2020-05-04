@@ -7830,19 +7830,41 @@ sc_game_list (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                           printf ("mybad decoding game %u\n", index);
                         } else {
                           moveStr->Clear();
-                          // Show arbitary 3 moves (6 ply)
                           // Todo! - Make this work with position searches, where each game has it's own ply according to search result.
                           // Cases to consider
                           // * NonStandardStart
                           // * Move repetition means db->treeFilter->Get(index) may not be accurate as it gives the first pos occurence
-                          // * Transpsotion at different depth means we should generally use treeFilter
+                          // * Transpostion at different depth means we should generally use treeFilter
                           // Simplest solution is to use treeFilter unless currentGame
                           // but this means duplicate ganes with repetition will have different 'Moves' entries.
+                          uint ply;
 
-                          if (index == db->gameNumber)
-			    g->GetPartialMoveList (moveStr, gamePly, 6);
-			  else
-			    g->GetPartialMoveList (moveStr, db->treeFilter->Get(index) - 1, 6);
+                          if (gameNonStd || ie->GetStartFlag()) {
+                            ply = db->treeFilter->Get(index) - 1;
+                          } else {
+                            if ((int)index == db->gameNumber || gamePly == db->treeFilter->Get(index) - 1) {
+                              ply = gamePly;
+                            } else {
+                              // Allow for repetition - move to gamePly and check if position is the same
+                              Position tempPos;
+                              tempPos.CopyFrom(db->game->GetCurrentPos());
+
+                              g->MoveToPly(gamePly);
+                              if (gamePly != g->GetCurrentPly()) {
+                                // MoveToPly failed
+                                ply = db->treeFilter->Get(index) - 1;
+                              } else {
+                                if (g->GetCurrentPos()->Compare(&tempPos) == EQUAL_TO)
+                                  ply = gamePly;
+                                else
+                                  ply = db->treeFilter->Get(index) - 1;
+                              }
+                            }
+                          }
+
+                          // Show arbitary 3 moves (6 ply)
+                          g->GetPartialMoveList (moveStr, ply, 6);
+
                         }
                     }
                 }
@@ -14338,11 +14360,36 @@ sc_tree_best (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                   printf ("mybadbest decoding game %u\n", bestIndex[i]);
                 } else {
                   moveStr->Clear();
-                  // See "Cases to consider" above
-		  if (bestIndex[i] == db->gameNumber)
-		    g->GetPartialMoveList (moveStr, gamePly, 6);
-		  else
-		    g->GetPartialMoveList (moveStr, base->treeFilter->Get(bestIndex[i]) - 1, 6);
+                  // Copied from "Cases to consider" above
+
+                  uint index = bestIndex[i];
+                  uint ply;
+
+                  if (gameNonStd || ie->GetStartFlag()) {
+                    ply = base->treeFilter->Get(index) - 1;
+                  } else {
+                    if ((int)index == base->gameNumber || gamePly == base->treeFilter->Get(index) - 1) {
+                      ply = gamePly;
+                    } else {
+                      // Allow for repetition - move to gamePly and check if position is the same
+                      Position tempPos;
+                      tempPos.CopyFrom(base->game->GetCurrentPos());
+
+                      g->MoveToPly(gamePly);
+                      if (gamePly != g->GetCurrentPly()) {
+                        // MoveToPly failed
+                        ply = base->treeFilter->Get(index) - 1;
+                      } else {
+                        if (g->GetCurrentPos()->Compare(&tempPos) == EQUAL_TO)
+                          ply = gamePly;
+                        else
+                          ply = base->treeFilter->Get(index) - 1;
+                      }
+                    }
+                  }
+
+                  // Show arbitary 3 moves (6 ply)
+                  g->GetPartialMoveList (moveStr, ply, 6);
                 }
             }
         }
