@@ -337,6 +337,8 @@ proc ::tree::closeTree {baseNumber} {
   # Hack to stop rare coredump (closing tree2 when base2 is not open and base1 is)
   if {![sc_base inUse $baseNumber]} {
     sc_base switch clipbase
+    refreshWindows
+    updateBoard -pgn
   }
   ::tree::mask::close .treeWin$baseNumber
   # needs closing explicitly if based open as tree and bestgames is open
@@ -550,7 +552,7 @@ proc ::tree::dorefresh { baseNumber } {
   global tree glstart glistSize
   set w .treeWin$baseNumber
 
-  if { ! $tree(autorefresh$baseNumber) || $::annotate(Engine) > -1 || $::comp(playing) || $::epdAnnotation} {
+  if {! $tree(autorefresh$baseNumber) || $::annotate(Engine) > -1 || $::comp(playing) || $::epdAnnotation || ![sc_base inUse $baseNumber]} {
     return
   }
 
