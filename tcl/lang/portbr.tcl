@@ -90,7 +90,7 @@ menuText B EditPasteBoard "Colar Posicao" 12 \
 
 # Game menu:
 menuText B Game "Jogo" 0
-menuText B GameNew "Limpar Jogo" 0 \
+menuText B GameNew "Novo Jogo" 0 \
   {Limpa o jogo corrente, descartando qualquer alteracao}
 menuText B GameFirst "Primeiro Jogo" 5 {Carrega o primeiro jogo filtrado}
 menuText B GamePrev "Jogo Anterior" 5 {Carrega o jogo anterior}
@@ -303,8 +303,8 @@ menuText B OptionsVarLineColour "Setas de Variantes" 0 {Setas de Variantes}
 menuText B OptionsEngineLineColour "Setas do motor" 0 {Setas do motor}
 
 menuText B OptionsRowColour "Linhas" 0 {Cor padrao da linha para arvore/livro}
-# ====== TODO To be translated ======
-menuText B OptionsHighlightColour "Highlight" 0 {Default text highlight color}
+# ====== Translated OK Gilberto ======
+menuText B OptionsHighlightColour "Destaque" 0 {Default text highlight color}
 
 menuText B OptionsSwitcherColour "Chaveador" 0 {Cor padrao para o chaveador de base}
 
@@ -362,7 +362,7 @@ menuText B OptionsMovesCoord "Entrada de movimentos por coordenadas" 0 \
 
 menuText B OptionsShowVarPopup "Mostrar janela de variantes" 0 {Liga/Desliga a janela de variantes}  
 
-menuText B OptionsMovesSpace "Add spaces after move number" 0 {Add spaces after move number}  
+menuText B OptionsMovesSpace "Adiciona espacos apos o numero do movimento" 0 {Adiciona espacos apos o numero do movimento}  
 menuText B OptionsMovesKey "Auto completar" 0 \
   {Liga/desliga auto completar a partir do que for digitado}
 menuText B OptionsMovesShowVarArrows "Mostrar Setas para variantes" 0 {Liga/Desliga as setas que mostram movimentos em variantes}
@@ -411,7 +411,7 @@ menuText B OptionsAutoSave "Salva Opcoes ao sair" 0 \
 
 # Help menu:
 menuText B Help "Ajuda" 0
-menuText B HelpContents "Conteudo" 0 {Show the help contents page} 
+menuText B HelpContents "Conteudo" 0 {Mostra a página de conteudo da Ajuda} 
 menuText B HelpIndex "Indice" 0 {Indice da Ajuda}
 menuText B HelpGuide "Consulta Rapida" 0 {Mostra a pagina de consulta rapida}
 menuText B HelpHints "Dicas" 0 {Mostra a pagina de dicas}
@@ -566,8 +566,8 @@ translate B altered {alterado}
 translate B tagsDescript {Tags extras (ex: Anotador "Anand")}
 
 translate B prevTags {Use anterior}
-# ====== TODO To be translated ======
-translate B value {Value}
+# ====== Translated OK Gilberto ======
+translate B value {Valor}
 
 # Standard error messages:
 translate B ErrNotOpen {Esta base não está aberta.} 
@@ -846,9 +846,9 @@ translate B AnnotateWhite {Apenas para movimentos das Brancas}
 translate B AnnotateBlack {Apenas para movimentos das Pretas}
 translate B AnnotateNotBest {Quando o movimento do jogo nao for o melhor movimento}
 
-translate B AnnotateBlundersOnly {Quando o mivimento for um erro crasso}
+translate B AnnotateBlundersOnly {Quando o movimento for um erro crasso}
 
-translate B BlundersNotBest {Erro crasso/Não Melhor}
+translate B BlundersNotBest {Erro crasso/Nao Melhor}
 
 
 translate B AnnotateTitle {Configurar Anotacao}
@@ -969,7 +969,7 @@ menuText B CrosstabOptColorHyper "Hipertexto" 0
 
 menuText B CrosstabOptTieWin "Tie-Break por vitorias" 1
 
-menuText B CrosstabOptTieHead "Tie-Break by cabeca" 1
+menuText B CrosstabOptTieHead "Tie-Break por cabeca" 1
 # todo
 menuText B CrosstabOptThreeWin "3 Pontos para vitoria" 1
 menuText B CrosstabOptAges "Idade em anos" 0
@@ -1442,8 +1442,8 @@ translate B OprepTheoryTable {Tabela de Teoria}
 translate B OprepTableComment {Gerada a partir dos %u jogos com rating mais alto.}
 translate B OprepExtraMoves {Movimentos com nota extra na Tabela de Teoria}
 translate B OprepMaxGames {Qtde. Maxima de jogos na tabela de teoria}
-# ====== TODO To be translated ======
-translate B OprepMaxLines {Maximum games for statistics}
+# ====== Translated OK Gilberto ======
+translate B OprepMaxLines {Máximo de jogos para estatisticas}
 translate B OprepViewHTML {Visualizar HTML} 
 translate B OprepViewLaTeX {Visualizar LaTeX} 
 
@@ -1545,7 +1545,7 @@ translate B NoUnusedNames "Não há nomes não utilizados, então o arquivo já está 
 
 translate B NoUnusedGames "O arquivo de jogo já está totalmente compactado."
 
-translate B NameFileCompacted {The name file for "[file tail [sc_base filename]]" was compacted.}
+translate B NameFileCompacted {O arquivo de nomes para "[file tail [sc_base filename]]" foi compactado.}
 
 translate B GameFileCompacted {O arquivo de jogos para a base está compactado.}
 
@@ -1591,7 +1591,7 @@ translate B LightSquares {Casas Brancas}
 translate B DarkSquares {Casas Pretas}
 translate B SelectedSquares {Casas selecionadas}
 # todo
-translate B Grid {Grid}
+translate B Grid {Grade}
 translate B Previous {Escolhas}
 translate B WhitePieces {Pecas Brancas}
 translate B BlackPieces {Pecas Pretas}
