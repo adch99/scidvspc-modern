@@ -1,0 +1,123 @@
+Hack to show Win/Draw/Loss percentiles in the analysis info (uci option UCI_ShowWDL)
+Author Michael Brown
+
+Index: tcl/tools/analysis.tcl
+===================================================================
+--- tcl/tools/analysis.tcl	(revision 3123)
++++ tcl/tools/analysis.tcl	(working copy)
+@@ -105,6 +105,11 @@
+   set analysis(logAuto$n) 0
+   set analysis(logWait$n) 0
+   set analysis(logUpdate$n) {}
++  # MJB - inserted for win/draw/lose data:-
++  set analysis(win_pc$n) 0
++  set analysis(draw_pc$n) 0
++  set analysis(lose_pc$n) 0  
++  set analysis(WDL$n) ""
+ }
+ 
+ resetEngines
+@@ -1792,7 +1797,9 @@
+   set isAt_vend [sc_pos isAt vend]
+ 
+   set moves $analysis(moves$n)
+-  set text [formatAnalysisScore $n]
++  # set text [concat [formatAnalysisScore $n]   
++  # MJB - Add WDL probability, if any produced by engine, to conventional centipawns score:-
++  set text [concat [formatAnalysisScore $n] $analysis(WDL$n)]
+ 
+   if {$isAt_vend} {
+     # get the last move of the game
+@@ -3441,12 +3448,17 @@
+       $t insert end "[tr Nodes]: "
+       $t insert end [ format "%6uK (%u kn/s) " $analysis(nodes$n) $nps ]
+       $t insert end "[tr Time]: "
+-      $t insert end [ format "%6.2f s" $analysis(time$n) ]
++      $t insert end [ format "%6.2fs" $analysis(time$n) ]
++      $t insert end " NPS: [format "%u " $analysis(nps$n)] "
++      # MJB - new line change (there is also some tweaking of format in above lines to get good layout) : -
+       $t insert end \n
+-      $t insert end "NPS: [format "%u " $analysis(nps$n)] "
++      #
+       $t insert end "Hash: $::uci::uciInfo(hashfull$n)  "
+       $t insert end "Load: $::uci::uciInfo(cpuload$n) "
+       $t insert end "TB hits: $::uci::uciInfo(tbhits$n) "
++      # MJB - inserted for win/draw/lose data:-
++      $t insert end "$analysis(WDL$n) "
++      #
+       $t insert end "[tr Current]: "
+       $t insert end [ format "%s (%s/%s) " [::trans $analysis(currmove$n)] $analysis(currmovenumber$n) $analysis(maxmovenumber$n)]
+     } else {
+Index: tcl/tools/uci.tcl
+===================================================================
+--- tcl/tools/uci.tcl	(revision 3123)
++++ tcl/tools/uci.tcl	(working copy)
+@@ -17,11 +17,13 @@
+   array set check ""
+ 
+   # infoToken contains a list of known info tokens (used to find the end of "pv" tokens)
+-  set infoToken {depth seldepth time nodes pv multipv score cp mate lowerbound upperbound currmove currmovenumber hashfull nps tbhits sbhits cpuload string refutation currline}
++  set infoToken {depth seldepth time nodes pv multipv score cp wdl mate lowerbound upperbound currmove currmovenumber hashfull nps tbhits sbhits cpuload string refutation currline}
++  # MJB - inserted "wdl" for win/draw/lose data
+ 
+   set optionToken {name type default min max var }
+   set optionImportant {MultiPV Hash OwnBook BookFile UCI_LimitStrength UCI_Elo Ponder Threads {Skill Level}}
+-  set optionToKeep { UCI_LimitStrength UCI_Elo UCI_ShredderbasesPath }
++  set optionToKeep { UCI_LimitStrength UCI_Elo UCI_ShredderbasesPath UCI_ShowWDL}
++  # MJB - inserted UCI_ShowWDL 
+   array set uciInfo {}
+   ################################################################################
+   #
+@@ -38,6 +40,11 @@
+     set uciInfo(currmovenumber$n) 0
+     # hmmm
+     # set uciInfo(score$n) ""
++    #
++    # MJB - inserted for win/draw/lose data:-
++    set uciInfo(win_pc$n) ""
++    set uciInfo(draw_pc$n) ""
++    set uciInfo(lose_pc$n) ""
+   }
+ 
+   proc resetUciInfo2 {n} {
+@@ -57,6 +64,10 @@
+     set uciInfo(bestmove$n) ""
+     set uciInfo(searchmoves$n) ""
+     set uciInfo(skill) ""
++    # MJB - inserted for win/draw/lose data:-	
++    set uciInfo(win_pc$n) ----
++    set uciInfo(draw_pc$n) ----
++    set uciInfo(lose_pc$n) ----
+   }
+ 
+   ### if gui = 0 -> engine mode,   pipe used is $uciInfo(pipe$n)
+@@ -258,6 +269,16 @@
+            incr i
+            set uciInfo(cpuload$n) [format "%u%%" [expr {round( [lindex $data $i] / 10)}]]
+            continue}
++	# MJB - inserted for win/draw/lose data:-
++        if { $t == "wdl" } {
++           incr i
++           set uciInfo(win_pc$n)  [format "%.1f" [expr {[lindex $data $i] / 10.0}]]
++           incr i
++           set uciInfo(draw_pc$n) [format "%.1f" [expr {[lindex $data $i] / 10.0}]]
++           incr i
++           set uciInfo(lose_pc$n) [format "%.1f" [expr {[lindex $data $i] / 10.0}]]				   
++           continue}		   
++	#
+         if { $t == "string" } {
+           # uciInfo(string) seems unused
+           incr i
+@@ -303,6 +324,12 @@
+         set analysis(time$n) [expr {double($uciInfo(time$n)) / 1000.0} ]
+         set analysis(nodesraw$n) $uciInfo(nodes$n)
+         set analysis(nodes$n) [calculateNodes $uciInfo(nodes$n)]
++	# MJB - inserted for win/draw/lose data:-
++	set analysis(win_pc$n) $uciInfo(win_pc$n)
++	set analysis(draw_pc$n) $uciInfo(draw_pc$n)
++	set analysis(lose_pc$n) $uciInfo(lose_pc$n)
++	if {[string first UCI_ShowWDL $::analysis(uciOptions$n)] > -1} \
++	{ set analysis(WDL$n) [concat "W: " $analysis(win_pc$n)% "D: " $analysis(draw_pc$n)% "L: " $analysis(lose_pc$n)%]}
+       }
+       
+       set pvRaw $uciInfo(pv$n)
