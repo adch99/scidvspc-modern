@@ -5,7 +5,7 @@ Index: tcl/tools/analysis.tcl
 ===================================================================
 --- tcl/tools/analysis.tcl	(revision 3123)
 +++ tcl/tools/analysis.tcl	(working copy)
-@@ -105,6 +105,11 @@
+@@ -105,6 +105,12 @@
    set analysis(logAuto$n) 0
    set analysis(logWait$n) 0
    set analysis(logUpdate$n) {}
@@ -14,10 +14,11 @@ Index: tcl/tools/analysis.tcl
 +  set analysis(draw_pc$n) 0
 +  set analysis(lose_pc$n) 0  
 +  set analysis(WDL$n) ""
++  set analysis(WDL_prob$n) ""		;# work in progress!
  }
  
  resetEngines
-@@ -1792,7 +1797,9 @@
+@@ -1792,7 +1798,9 @@
    set isAt_vend [sc_pos isAt vend]
  
    set moves $analysis(moves$n)
@@ -28,7 +29,7 @@ Index: tcl/tools/analysis.tcl
  
    if {$isAt_vend} {
      # get the last move of the game
-@@ -3441,12 +3448,17 @@
+@@ -3441,12 +3449,17 @@
        $t insert end "[tr Nodes]: "
        $t insert end [ format "%6uK (%u kn/s) " $analysis(nodes$n) $nps ]
        $t insert end "[tr Time]: "
@@ -108,7 +109,7 @@ Index: tcl/tools/uci.tcl
          if { $t == "string" } {
            # uciInfo(string) seems unused
            incr i
-@@ -303,6 +324,12 @@
+@@ -303,6 +324,20 @@
          set analysis(time$n) [expr {double($uciInfo(time$n)) / 1000.0} ]
          set analysis(nodesraw$n) $uciInfo(nodes$n)
          set analysis(nodes$n) [calculateNodes $uciInfo(nodes$n)]
@@ -116,8 +117,16 @@ Index: tcl/tools/uci.tcl
 +	set analysis(win_pc$n) $uciInfo(win_pc$n)
 +	set analysis(draw_pc$n) $uciInfo(draw_pc$n)
 +	set analysis(lose_pc$n) $uciInfo(lose_pc$n)
++	# MJB - If Black to move, show absolute W/D/L position, i.e.from White's point of view:-
++        if { $analysis(side$n) == "black"} {
++	  set analysis(win_pc$n) $uciInfo(lose_pc$n)
++	  set analysis(lose_pc$n) $uciInfo(win_pc$n)
++	}
++	# MJB - If engine has W/D/L, show probability percentages for White/Draw/Black:- 
++
 +	if {[string first UCI_ShowWDL $::analysis(uciOptions$n)] > -1} \
-+	{ set analysis(WDL$n) [concat "W: " $analysis(win_pc$n)% "D: " $analysis(draw_pc$n)% "L: " $analysis(lose_pc$n)%]}
++	  { set analysis(WDL$n) [concat "W: " $analysis(win_pc$n)% "D: " $analysis(draw_pc$n)% "B: " $analysis(lose_pc$n)%]}
++   
        }
        
        set pvRaw $uciInfo(pv$n)
