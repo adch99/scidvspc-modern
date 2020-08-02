@@ -2779,7 +2779,7 @@ proc excludeMovePopup {n} {
 
   # OS X doesnt manage the transient properly
   catch {wm withdraw .tooltip}
-  set w [toplevel .excludeMove]
+  set w [toplevel .excludeMoveWin]
   wm title $w Scid
   wm state $w withdrawn
 
@@ -2787,8 +2787,8 @@ proc excludeMovePopup {n} {
   pack $w.label -side top -pady 5 -padx 5
 
   entry $w.entry  -width 10 -textvar excludeMove
-  bind $w.entry <Escape> { .excludeMove.buttons.cancel invoke }
-  bind $w.entry <Return> { .excludeMove.buttons.load invoke }
+  bind $w.entry <Escape> "$w.buttons.cancel invoke"
+  bind $w.entry <Return> "$w.buttons.load invoke"
   pack $w.entry -side top -pady 5
 
   if {$analysis(exclude$n) != ""} {
@@ -2799,13 +2799,15 @@ proc excludeMovePopup {n} {
   set b [frame $w.buttons]
   pack $b -side top -fill x
   dialogbutton $b.load -text "OK" -command "
-    excludeMove $n
+    global excludeMove
+    set excludeMove \[string map {{,} { }} \$excludeMove\]
+    excludeMove $n \$excludeMove
+    destroy .excludeMoveWin
     focus .main
-    destroy .excludeMove
     return
   "
   dialogbutton $b.cancel -text $tr(Cancel) -command {
-    destroy .excludeMove
+    destroy .excludeMoveWin
     focus .main
     return
   }
@@ -2813,14 +2815,13 @@ proc excludeMovePopup {n} {
 
   wm geometry $w +[expr {[winfo pointerx .] - 60}]+[expr {[winfo pointery .] - 40}]
   wm state $w normal
-  update
-  focus $w.entry
+  update idletasks
+  catch {focus $w.entry}
 }
 
-proc excludeMove {n} {
-  global analysis ::uci::uciInfo excludeMove
+proc excludeMove {n exclude} {
+  global analysis ::uci::uciInfo
 
-  set exclude $excludeMove
   if {$exclude == ""} {
     set allmoves ""
     set exclude ""
@@ -2847,11 +2848,11 @@ proc excludeMove {n} {
 }
 
 proc excludeToolTip {n args} {
-    if {$::analysis(exclude$n) == ""} {
-      ::utils::tooltip::Set .analysisWin$n.b.exclude $::tr(ExcludeMove)
-    } else {
-      ::utils::tooltip::Set .analysisWin$n.b.exclude $::analysis(exclude$n)
-    }
+  if {$::analysis(exclude$n) == ""} {
+    ::utils::tooltip::Set .analysisWin$n.b.exclude $::tr(ExcludeMove)
+  } else {
+    ::utils::tooltip::Set .analysisWin$n.b.exclude $::analysis(exclude$n)
+  }
 }
     
 
