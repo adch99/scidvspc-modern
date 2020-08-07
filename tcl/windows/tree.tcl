@@ -63,14 +63,15 @@ proc ::tree::Open {{baseNumber 0}} {
     return
   }
 
+  set tree(base$baseNumber) $baseNumber
+  set tree(adjustfilter$baseNumber) $::tree::autoAdjust
+
   ::createToplevel $w
   setWinLocation $w
   setWinSize $w
 
   ::setTitle $w "[lindex "[tr WindowsTree]" 0] \[[file tail [sc_base filename $baseNumber]]\]"
 
-  set tree(base$baseNumber) $baseNumber
-  set tree(adjustfilter$baseNumber) $::tree::autoAdjust
   if {$::tree::sortBest} {
     set tree(sortBest$baseNumber) Best
   } else {
