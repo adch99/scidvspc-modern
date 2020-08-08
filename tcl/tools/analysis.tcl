@@ -1214,6 +1214,9 @@ proc okAnnotation {n} {
   bind .configAnnotation <Destroy> {}
   destroy .configAnnotation
 
+  # One undo point at the start of every game
+  sc_game undoPoint
+
   if {[sc_pos isAt vend]} {
     # Starting analysis from game end - probably want to be at start
     sc_move start
