@@ -1787,6 +1787,10 @@ proc nextgameAutoplay {n} {
 
     ### Skip games not in filter (dont autoraise main window)
     ::game::LoadNextPrev next 0
+
+    # One undo point at the start of every game
+    sc_game undoPoint
+
     # avoid loading at ply
     sc_move start
     updateBoard
