@@ -17,11 +17,12 @@ namespace eval uci {
   array set check ""
 
   # infoToken contains a list of known info tokens (used to find the end of "pv" tokens)
-  set infoToken {depth seldepth time nodes pv multipv score cp mate lowerbound upperbound currmove currmovenumber hashfull nps tbhits sbhits cpuload string refutation currline}
+  set infoToken {depth seldepth time nodes pv multipv score cp wdl mate lowerbound upperbound currmove currmovenumber hashfull nps tbhits sbhits cpuload string refutation currline}
+  # MJB - inserted "wdl" for win/draw/lose data
 
   set optionToken {name type default min max var }
   set optionImportant {MultiPV Hash OwnBook BookFile UCI_LimitStrength UCI_Elo Ponder Threads {Skill Level}}
-  set optionToKeep { UCI_LimitStrength UCI_Elo UCI_ShredderbasesPath }
+  set optionToKeep { UCI_LimitStrength UCI_Elo UCI_ShredderbasesPath UCI_ShowWDL}
   array set uciInfo {}
   ################################################################################
   #
@@ -258,6 +259,16 @@ namespace eval uci {
            incr i
            set uciInfo(cpuload$n) [format "%u%%" [expr {round( [lindex $data $i] / 10)}]]
            continue}
+        if { $t == "wdl" } {
+	   # "wdl" is Stockfish's win/draw/lose infos, configured by UCI_ShowWDL option
+           set analysis(seenWDL$n) 1
+           incr i
+           set uciInfo(win_pc$n)  [expr {int([lindex $data $i]/10)}]
+           incr i
+           set uciInfo(draw_pc$n)  [expr {int([lindex $data $i]/10)}]
+           incr i
+           set uciInfo(lose_pc$n)  [expr {int([lindex $data $i]/10)}]
+           continue}		   
         if { $t == "string" } {
           # uciInfo(string) seems unused
           incr i
@@ -314,7 +325,25 @@ namespace eval uci {
       }
 
       set idx [ expr $uciInfo(multipv$n) -1 ]
-      
+
+      if {$analysis(seenWDL$n)} {
+	### Show Win/Draw/Lose
+	set draw_pc $uciInfo(draw_pc$n)
+	# MJB - If Black to move, show absolute W/D/L position, i.e.from White's point of view:-
+        if { $analysis(side$n) == "black"} {
+	  set win_pc $uciInfo(lose_pc$n)
+	  set lose_pc $uciInfo(win_pc$n)
+	} else {
+	  set win_pc  $uciInfo(win_pc$n)
+	  set lose_pc $uciInfo(lose_pc$n)
+        }
+	set analysis(WDL$n,$idx) "W: $win_pc% D: $draw_pc% B: $lose_pc%"
+      }
+ 
+      ### Process MultiPV data array
+      #   Note - $uciInfo(scoremate$n) is an integer or ""
+      #   in which case it does not get added to the list and in analysis.tcl, [lindex $pv 3] is {} - S.A
+
       if { $idx < $analysis(multiPVCount$n) } {
         if {$idx < [llength $analysis(multiPV$n)]} {
           lset analysis(multiPV$n) $idx "$uciInfo(depth$n) $uciInfo(tmp_score$n) [list $uciInfo(pv$n)] $uciInfo(scoremate$n)"

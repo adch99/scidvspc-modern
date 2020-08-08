@@ -105,6 +105,7 @@ proc resetEngine {n} {
   set analysis(logAuto$n) 0
   set analysis(logWait$n) 0
   set analysis(logUpdate$n) {}
+  set analysis(seenWDL$n) 0
 }
 
 resetEngines
@@ -1794,6 +1795,11 @@ proc addAnalysisVariation {{n -1}} {
   set moves $analysis(moves$n)
   set text [formatAnalysisScore $n]
 
+  # MJB - Add WDL probability, if any produced by engine, to conventional centipawns score:-
+  if {$analysis(seenWDL$n) && [info exists analysis(WDL$n,0)] } {
+    append text " $analysis(WDL$n,0)"
+  }
+
   if {$isAt_vend} {
     # get the last move of the game
     set lastMove [sc_game info previousMoveUCI]
@@ -1899,6 +1905,7 @@ proc addAllVariations {{n 1} {rightclick 0}} {
     set v2 $analysis(multiPV$n)
   }
 
+  set idx 0
   foreach i $v1 j $v2 {
     set moves [lindex $i 2]
 
@@ -1908,6 +1915,10 @@ proc addAllVariations {{n 1} {rightclick 0}} {
       set text [format "\[%s\] %d:%s" $analysis(name$n) [lindex $i 0] $tmp_scoremate]
     } else {
       set text $tmp_scoremate
+    }
+
+    if {$analysis(seenWDL$n) && [info exists analysis(WDL$n,$idx)] } {
+      append text " $analysis(WDL$n,$idx)"
     }
 
     if {$addAtEnd} {
@@ -1937,6 +1948,7 @@ proc addAllVariations {{n 1} {rightclick 0}} {
       sc_move forward
     }
 
+    incr idx
   }
 
   ::pgn::Refresh 1 
@@ -3442,11 +3454,24 @@ proc updateAnalysisText {n} {
       $t insert end "[tr Nodes]: "
       $t insert end [ format "%6uK (%u kn/s) " $analysis(nodes$n) $nps ]
       $t insert end "[tr Time]: "
-      $t insert end [ format "%6.2f s" $analysis(time$n) ]
-      $t insert end \n
-      $t insert end "NPS: [format "%u " $analysis(nps$n)] "
+      $t insert end [ format "%6.2fs" $analysis(time$n) ]
+
+      # Different padding if seenWDL (Win/Draw/Loss)
+      if {$analysis(seenWDL$n)} {
+	$t insert end " NPS: [format "%u " $analysis(nps$n)]"
+	$t insert end \n
+      } else {
+	$t insert end \n
+	$t insert end "NPS: [format "%u " $analysis(nps$n)] "
+      }
+
       $t insert end "Hash: $::uci::uciInfo(hashfull$n)  "
       $t insert end "Load: $::uci::uciInfo(cpuload$n) "
+
+      if {$analysis(seenWDL$n) && [info exists analysis(WDL$n,0)] } {
+        $t insert end "$analysis(WDL$n,0) "
+      }
+
       $t insert end "TB hits: $::uci::uciInfo(tbhits$n) "
       $t insert end "[tr Current]: "
       $t insert end [ format "%s (%s/%s) " [::trans $analysis(currmove$n)] $analysis(currmovenumber$n) $analysis(maxmovenumber$n)]
