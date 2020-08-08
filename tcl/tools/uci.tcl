@@ -263,11 +263,11 @@ namespace eval uci {
 	   # "wdl" is Stockfish's win/draw/lose infos, configured by UCI_ShowWDL option
            set analysis(seenWDL$n) 1
            incr i
-           set uciInfo(win_pc$n)  [expr {int([lindex $data $i]/10)}]
+           set uciInfo(win_pc$n)  [expr {[lindex $data $i] / 10}]
            incr i
-           set uciInfo(draw_pc$n)  [expr {int([lindex $data $i]/10)}]
+           set uciInfo(draw_pc$n)  [expr {[lindex $data $i] / 10}]
            incr i
-           set uciInfo(lose_pc$n)  [expr {int([lindex $data $i]/10)}]
+           set uciInfo(lose_pc$n)  [expr {[lindex $data $i] / 10}]
            continue}		   
         if { $t == "string" } {
           # uciInfo(string) seems unused
