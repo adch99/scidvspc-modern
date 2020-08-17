@@ -1192,7 +1192,7 @@ proc ::windows::gamelist::Refresh {{see {}}} {
     # - convertFrom will destroy the content
     # - standard figurine pieces are looking ugly
     set values [string map $glPieceMapping $values]
-    set values [encoding convertfrom $values]
+    # set values [encoding convertfrom $values]
 
     if {[catch {set thisindex [lindex $values 0]}]} {
       ### Mismatched brace in game values. Bad!

@@ -1340,7 +1340,7 @@ proc ::tree::best {baseNumber} {
     set values [lrange $values 1 end]
 
     # Gregors encoding conversion
-    set values [encoding convertfrom $values]
+    # set values [encoding convertfrom $values]
 
     if {[catch {set thisindex [lindex $values 0]}]} {
       ### Mismatched brace in game values. Bad!
