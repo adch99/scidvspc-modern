@@ -1437,7 +1437,7 @@ set helpText(Switcher) {<h1>The Database Switcher</h1>
   </p>
   <p>
   Right-clicking a database produces a popup menu. From this, one can perform <a Filter>filter</a> ops, mark base as Read-Only or
-  close the database. There is also an extra menu which shows <a Tree>Tree</a> or <a Tree Best>Best Games</a>, or changes the icon.
+  close the database. There is also an extra menu which shows <a Tree>Tree</a> or <a Tree Best>Best Games</a>, (and includes un-implemented filter-save functions), or changes the icon.
   Middle clicking a base will show/hide the icons.
   </p>
   <h2><name draganddrop>Drag and Drop</name></h2>
