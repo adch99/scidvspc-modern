@@ -2336,3 +2336,32 @@ Index: tcl/tools/tactics.tcl
      foreach file  $fileList {
        if {[sc_base slot $file] == 0} {
          sc_base open [file rootname $file]
+Index: tcl/tools/uci.tcl
+===================================================================
+--- tcl/tools/uci.tcl	(revision 3130)
++++ tcl/tools/uci.tcl	(working copy)
+@@ -22,7 +22,7 @@
+ 
+   set optionToken {name type default min max var }
+   set optionImportant {MultiPV Hash OwnBook BookFile UCI_LimitStrength UCI_Elo Ponder Threads {Skill Level}}
+-  set optionToKeep { UCI_LimitStrength UCI_Elo UCI_ShredderbasesPath UCI_ShowWDL}
++  set optionToKeep { UCI_LimitStrength UCI_Elo UCI_ShredderbasesPath UCI_ShowWDL UCI_Chess960}
+   array set uciInfo {}
+   ################################################################################
+   #
+@@ -868,6 +868,15 @@
+         set ::uci::uciInfo(skill) [list UCI_Elo $value]
+       }
+     }
++    # Set UCI_Chess960 if it is an engine option, and not already explicitly set
++    if {[string match *UCI_Chess960* $analysis(uciOptions$n)]} {
++      if {[lsearch $options UCI_Chess960] == -1} {
++	::splash::add "Enabling UCI_Chess960 for [lindex $engineData 0] (by default)."
++	::sendToEngine $n "setoption name UCI_Chess960 value 1"
++      }
++    } else {
++      ::splash::add "Warning, UCI engine [lindex $engineData 0] does not support option UCI_Chess960" error
++    }
+   }
+ 
+   ### Start an engine silently (for playing, not analysis)
