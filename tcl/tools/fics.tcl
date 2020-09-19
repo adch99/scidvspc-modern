@@ -695,6 +695,10 @@ namespace eval fics {
 	  return
       }
 
+      unfol {
+	  writechan unfollow [lindex $l 1]
+	  return
+      }
       upload {
           # upload current game to examine mode
           if {$::fics::playing == 2} {
