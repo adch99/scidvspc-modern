@@ -829,10 +829,7 @@ proc changeBaseType {baseNum {parent .}} {
 
   placeWinOverParent $w $parent
   wm state $w normal
-
   focus $w.t
-  grab $w
-  update
   selectBaseType $temp_dbtype
 }
 
@@ -959,7 +956,7 @@ proc ::windows::switcher::Open {} {
       $f.menu.show add command -label "[tr LoadGame] [tr Filter]"  -command "loadFilter $i"
       $f.menu.show add command -label "[tr Save] [tr Filter]" -command "saveFilter $i"
       $f.menu.show add separator
-      $f.menu.show add command -label [tr ChangeIcon] -command "changeBaseType $i $w"
+      $f.menu.show add command -label [tr ChangeIcon] -command "changeBaseType $i .glistWin"
       $f.menu.show add checkbutton -label [tr ShowIcons] -variable ::windows::switcher::icons -command ::windows::switcher::Refresh
       $f.menu.show add checkbutton -label [tr ConfirmCopy] -variable ::windows::switcher::confirmCopy 
       $f.menu.show add separator
