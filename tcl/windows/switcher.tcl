@@ -956,12 +956,14 @@ proc ::windows::switcher::Open {} {
       $f.menu.show add command -label WindowsTree  -command "::tree::Open $i"
       $f.menu.show add command -label TreeFileBest -command "::tree::OpenBest $i"
       $f.menu.show add separator
-      $f.menu.show add command -label LoadFilter  -command "loadFilter $i"
-      $f.menu.show add command -label SaveFile -command "saveFilter $i"
+      $f.menu.show add command -label "[tr LoadGame] [tr Filter]"  -command "loadFilter $i"
+      $f.menu.show add command -label "[tr Save] [tr Filter]" -command "saveFilter $i"
       $f.menu.show add separator
       $f.menu.show add command -label [tr ChangeIcon] -command "changeBaseType $i $w"
       $f.menu.show add checkbutton -label [tr ShowIcons] -variable ::windows::switcher::icons -command ::windows::switcher::Refresh
       $f.menu.show add checkbutton -label [tr ConfirmCopy] -variable ::windows::switcher::confirmCopy 
+      $f.menu.show add separator
+      $f.menu.show add checkbutton -label [tr TreeOptShowFrame] -variable ::windows::gamelist::showButtons -command ::windows::gamelist::displayButtons
 
       configMenuText $f.menu.show 0 WindowsTree  $::language
       configMenuText $f.menu.show 1 TreeFileBest $::language
