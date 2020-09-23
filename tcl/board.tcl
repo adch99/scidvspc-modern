@@ -1841,18 +1841,13 @@ proc ::board::mark::DrawText {pathName square char color {size 0} {shadowColor "
       {-tag  [list mark text text$square mark$square p$square]}
 }
 
-set board::mark::arrowWidth 2
-set board::mark::arrowLength 0.6
-
-# ::board::mark::DrawArrow --
-
 proc ::board::mark::DrawArrow {pathName from to color} {
   if {$from < 0  ||  $from > 63} { return }
   if {$to   < 0  ||  $to   > 63} { return }
-  set coord [GetArrowCoords $pathName $from $to $::board::mark::arrowLength]
+  set coord [GetArrowCoords $pathName $from $to $::board::arrowLength]
   eval $pathName \
       {create line $coord} \
-      -fill $color -arrow last -width $::board::mark::arrowWidth \
+      -fill $color -arrow last -width $::board::arrowWidth \
       {-tag [list mark arrows "mark${from}:${to}"]}
 }
 

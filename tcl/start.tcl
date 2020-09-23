@@ -420,6 +420,9 @@ set progcolor   rosybrown	;# progress bar
 set buttoncolor #b0c0d0		;# (below)
 set maincolor   black		;# Main line arrow color
 set varcolor    grey80		;# Variation arrow colors
+# arrowWidth/Length is no longer under ::mark namespace to avoid version conflict when sourcing options.dat
+set ::board::arrowWidth 2
+set ::board::arrowLength 0.6
 set engineLineColor $maincolor  ;# Engine arrows
 set rowcolor    lightsteelblue1 ;# Tree/Crosstab/Book line/row bg color
 set highlightcolor gray85       ;# Nameditor /playerinfo/ crosstable player name highlight colour

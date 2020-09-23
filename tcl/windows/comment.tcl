@@ -287,11 +287,11 @@ proc ::commenteditor::Open {} {
 
   ### Arrow options
 
-  label   $arrowOptions.l1 -text {Arrow: Width}
-  spinbox $arrowOptions.width -textvariable ::board::mark::arrowWidth -from 1 -to 10 -increment 1 -width 3 -command updateBoard
+  label   $arrowOptions.l1 -text "Arrow: [tr OptionsMovesHighlightLastMoveWidth]"
+  spinbox $arrowOptions.width -textvariable ::board::arrowWidth -from 1 -to 10 -increment 1 -width 3 -command updateBoard
   label   $arrowOptions.space -width 1
-  label   $arrowOptions.l2 -text {Length}
-  spinbox $arrowOptions.length -textvariable ::board::mark::arrowLength -from 0.0 -to 0.9 -increment .1 -width 3 -command updateBoard
+  label   $arrowOptions.l2 -text [tr Length]
+  spinbox $arrowOptions.length -textvariable ::board::arrowLength -from 0.0 -to 0.9 -increment .1 -width 3 -command updateBoard
   pack $arrowOptions.l1 $arrowOptions.width $arrowOptions.space $arrowOptions.l2 $arrowOptions.length -side left -padx 2
 
   ### Start editing

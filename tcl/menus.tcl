@@ -1002,6 +1002,7 @@ $m add command -label OptionsSave -command {
     ::tools::graphs::filter::type  ::tools::graphs::absfilter::type ::tools::graphs::showpoints ::tools::graphs::showbar ::tools::graphs::type
     maintFlag useGraphFigurine photosMinimized bookmarks(gamehistory) playerInfoHistory defaultDBs
     glistSize glexport glistColOrder glistColWidth glistColAnchor addRatings(overwrite) addRatings(filter)
+    ::board::arrowWidth ::board::arrowLength
     blistColOrder blistColWidth blistColAnchor macWheelMouse epdAnnotateMode epdDelay} {
 
       puts $optionF "set $i [list [set $i]]"
