@@ -878,7 +878,7 @@ proc stripCommentsVars {arg {parent .}} {
   pack $w.f.b.cancel -side right -pady 5 -padx 5
 
   wm resizable $w 0 0
-  bind $w <F1> {helpWindow Maintenance}
+  bind $w <F1> {helpWindow Maintenance CV}
   bind $w <Escape> "$w.f.b.cancel invoke"
   placeWinOverParent $w $parent
   wm state $w normal

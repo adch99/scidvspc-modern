@@ -9305,6 +9305,28 @@ sc_game_strip (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
 	}
 
+// New namefile/flush code (from backend of sc_game_save) for batch stripping comments/vars
+// Some names will get altered by our bastard method of writing to pgn and then rereading the game
+// eg those with " in a name, and [White "Kramnik,V] is now [White "Kramnik, V"]
+// 
+// !!!!!!!!!!!!!!!!!!! S.A. 28/9/2020
+    if (! db->memoryOnly  &&  db->nb->WriteNameFile() != OK) {
+        return errorResult (ti, "Error writing name file.");
+    }
+
+    db->gameAltered = false;
+
+    // We must ensure that the Index is still all in memory:
+    db->idx->ReadEntireFile();
+
+    recalcFlagCounts (db);
+    // Finally, saving a game makes the treeCache out of date:
+    db->treeCache->Clear();
+    db->backupCache->Clear();
+    if (! db->memoryOnly) { removeFile (db->fileName, TREEFILE_SUFFIX); }
+
+// !!!!!!!!!!!!!!!!!!!
+
 	if (showProgress) { updateProgressBar (ti, 1, 1); }
 
 	// hmmm scratchGame is static. Maybe we should reset its style
