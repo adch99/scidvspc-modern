@@ -176,15 +176,17 @@ proc ::ptrack::make {} {
     # canvas $b -height $::ptrack::psize -width $::ptrack::psize -bg lemonchiffon
     label $b -image b$p$::ptrack::psize -border 1 -relief raised
     grid $b -row 10 -column $c
-    bind $b <1> "::ptrack::select $sq"
+    bind $b <Button-1> "::ptrack::select $sq"
+    bind $b <Double-Button-1> "::ptrack::select $sq ; ::ptrack::refresh"
   }
   foreach file {a b c d e f g h} c {1 2 3 4 5 6 7 8} p {p p p p p p p p} {
     set sq ${file}7
     set b $w.bd.p$sq
     label $b -image b$p$::ptrack::psize -border 1 -relief raised
     grid $b -row 11 -column $c
-    bind $b <1> "::ptrack::select $sq"
-    bind $b <3> "::ptrack::select {a7 b7 c7 d7 e7 f7 g7 h7}"
+    bind $b <Button-1> "::ptrack::select $sq"
+    bind $b <Double-Button-1> "::ptrack::select $sq ; ::ptrack::refresh"
+    bind $b <Button-3> "::ptrack::select {a7 b7 c7 d7 e7 f7 g7 h7}"
   }
   grid [frame $w.bd.gap2 -height 5] -row 12 -column 0
   foreach file {a b c d e f g h} c {1 2 3 4 5 6 7 8} p {p p p p p p p p} {
@@ -192,8 +194,9 @@ proc ::ptrack::make {} {
     set b $w.bd.p$sq
     label $b -image w$p$::ptrack::psize -border 1 -relief raised
     grid $b -row 13 -column $c
-    bind $b <ButtonPress-1> "::ptrack::select $sq"
-    bind $b <3> "::ptrack::select {a2 b2 c2 d2 e2 f2 g2 h2}"
+    bind $b <Button-1> "::ptrack::select $sq"
+    bind $b <Double-Button-1> "::ptrack::select $sq ; ::ptrack::refresh"
+    bind $b <Button-3> "::ptrack::select {a2 b2 c2 d2 e2 f2 g2 h2}"
   }
   foreach file {a b c d e f g h} c {1 2 3 4 5 6 7 8} p {r n b q k b n r} {
     set sq ${file}1
@@ -201,6 +204,7 @@ proc ::ptrack::make {} {
     label $b -image w$p$::ptrack::psize -border 1 -relief raised
     grid $b -row 14 -column $c
     bind $b <Button-1> "::ptrack::select $sq"
+    bind $b <Double-Button-1> "::ptrack::select $sq ; ::ptrack::refresh"
   }
 
   # Both-piece bindings:
@@ -242,7 +246,7 @@ proc ::ptrack::make {} {
 
   set f $w.t.text
   pack [frame $f] -side top -fill both -expand yes -padx 2 -pady 2
-  text $f.text -width 28 -height 1 -foreground black  \
+  text $f.text -width 28 -height 1 \
     -yscrollcommand "$f.ybar set" -relief sunken -takefocus 0 \
     -wrap none -font font_Small
   set xwidth [font measure [$f.text cget -font] "x"]
