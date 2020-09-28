@@ -2538,9 +2538,11 @@ For example - the first two examples remove four digit ELOs from player names. T
   </p>
   </p>
 
-  <h3><name Tags>Strip Comments/Variations</name></h3>
+  <h3><name CV>Strip Comments/Variations</name></h3>
   <p>
   <b>Use with caution</b>. Bulk stripping Comments and Variations cannot be undone.
+  Additionally, because of our implementation, some poorly defined names (eg Events/White/Black) can be changed -
+ eg those with a '"' in a name, and the missing space in "Kramnik,V" will get converted to "Kramnik, V"
   </p>
 
   <h3><name Tags>Strip Extra Tags</name></h3>
@@ -2576,7 +2578,7 @@ For example - the first two examples remove four digit ELOs from player names. T
   back in a consistent and usable state.
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.17, August 2016</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.22, September 2020</footer></p>
 }
 
 set helpTitle(Sorting) "Sorting a database"
