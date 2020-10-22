@@ -4908,10 +4908,13 @@ sc_eco_summary (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     if (!ecoBook) { return TCL_OK; }
     DString * dstr = new DString;
     DString * temp = new DString;
+    DString * thisEco = new DString;
     bool inMoveList = false;
+    bool inThisEco = true;
     ecoBook->EcoSummary (argv[2], temp);
     translateECO (ti, temp->Data(), dstr);
     temp->Clear();
+    thisEco->Clear();
     if (color) {
         DString * oldstr = dstr;
         dstr = new DString;
@@ -4920,6 +4923,7 @@ sc_eco_summary (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             char ch = *s;
             switch (ch) {
             case '[':
+                inThisEco = false;
                 dstr->Append ("<tab>");
                 dstr->AddChar (ch);
                 break;
@@ -4933,14 +4937,17 @@ sc_eco_summary (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                 break;
             case '\n':
                 if (inMoveList) {
-                    dstr->Append ("}>", temp->Data());
+                    dstr->Append ("} ", thisEco->Data(), ">", temp->Data());
+                    thisEco->Clear();
+                    inThisEco = true;
                     inMoveList = false;
                 }
                 dstr->Append ("</run></blue></tab><br>");
                 break;
             default:
                 dstr->AddChar (ch);
-                if (inMoveList) { temp->AddChar (transPiecesChar(ch)); }//{ temp->AddChar (ch); }
+                if (inThisEco) { thisEco->AddChar (ch); }
+                if (inMoveList) { temp->AddChar (transPiecesChar(ch)); }
             }
             s++;
         }
@@ -4968,10 +4975,13 @@ sc_eco_find (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     DString * dstr = new DString;
     DString * temp = new DString;
+    DString * thisEco = new DString;
     bool inMoveList = false;
+    bool inThisEco = true;
     ecoBook->EcoFind (argv[2], temp);
     translateECO (ti, temp->Data(), dstr);
     temp->Clear();
+    thisEco->Clear();
     if (color) {
         DString * oldstr = dstr;
         dstr = new DString;
@@ -4980,6 +4990,7 @@ sc_eco_find (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
             char ch = *s;
             switch (ch) {
             case '[':
+                inThisEco = false;
                 dstr->Append ("<tab>");
                 dstr->AddChar (ch);
                 break;
@@ -4991,14 +5002,17 @@ sc_eco_find (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
                 break;
             case '\n':
                 if (inMoveList) {
-                    dstr->Append ("}>", temp->Data());
+                    dstr->Append ("} ", thisEco->Data(), ">", temp->Data());
+                    thisEco->Clear();
+                    inThisEco = true;
                     inMoveList = false;
                 }
                 dstr->Append ("</run></blue></tab><br>");
                 break;
             default:
                 dstr->AddChar (ch);
-                if (inMoveList) { temp->AddChar (transPiecesChar(ch)); }//{ temp->AddChar (ch); }
+                if (inThisEco) { thisEco->AddChar (ch); }
+                if (inMoveList) { temp->AddChar (transPiecesChar(ch)); }
             }
             s++;
         }
@@ -5007,6 +5021,7 @@ sc_eco_find (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
     Tcl_AppendResult (ti, dstr->Data(), NULL);
     delete temp;
     delete dstr;
+    delete thisEco;
     return TCL_OK;
 }
 
