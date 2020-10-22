@@ -1394,7 +1394,7 @@ translate E showblundervalue {show blunder value}
 translate E showscore {show score}
 translate E coachgame {coach game}
 translate E configurecoachgame {Configure Tactical game}
-translate E configuregame {Configure UCi game}
+translate E configuregame {Configure UCI game}
 translate E Phalanxengine {Phalanx engine}
 translate E Coachengine {Coach engine}
 translate E difficulty {difficulty}

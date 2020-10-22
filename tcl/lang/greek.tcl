@@ -1511,7 +1511,8 @@ translate G showblundervalue {ένδειξη αξίας Σοβαρού Σφάλ�
 translate G showscore {ένδειξη σκορ}
 translate G coachgame {παρτίδα διδασκαλίας}
 translate G configurecoachgame {Ρυθμίσεις Παρτίδας Τακτικής}
-translate G configuregame {Configure UCi game}
+#todo
+translate G configuregame {Configure UCI game}
 translate G Phalanxengine {Ρυθμίσεις Παρτίδας UCI}
 translate G Coachengine {Μηχανή Προπόνησης}
 translate G difficulty {επίπεδο δυσκολίας}
