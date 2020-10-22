@@ -4191,27 +4191,22 @@ set helpText(ECO) {<h1>ECO Codes</h1>
   <p>
   Scid's
   <run ::windows::eco::Open><green>ECO Browser</green></run> shows information
-  about ECO codes and their frequency and performance for <b>ECO classified games</b> in the current database. 
+  about ECO codes and their frequency and performance for ECO classified games in the current database. 
   </p>
   <p>
-  The upper pane shows a bar graph with three sections: the lowest
-  (light blue) represents White wins, the middle represents draws, and the top (dark blue), the number of Black wins.
-  The graph illustrates at a glance an openings characteristics - whether
+  The upper pane shows a bar graph with three sections (representing White wins, draws and Black wins),
+  and illustrates at a glance an openings characteristics - whether
   draws are common or White or Black is winning.
-  To go to a deeper ECO level click on a bar in the graph, or to go higher
-  right-click, press the <button bookmark_up> button, or left-arrow.
   </p>
-  <p>
-  You can also navigate with keys, writing the ECO code you are interesting in. For instance, if you want to see the ECO code B75
-  (for the Yugoslav Attack in the Sicilian Dragon), you just press the key combination 'b75' (or 'B75'). 
-  If you want to go up to a more general code, like B7, you can just press Left-Arrow. 
+  To go to a deeper ECO level click on a bar in the graph. To go higher press the <button bookmark_up> button.
+  You can also browse ECO codes and Opening names by typing them into the bottom entry box and pressing 'Enter'.
   </p>
   <p>
   The bottom pane shows the positions for a particular ECO code according to the ECO file loaded.
   </p>
-  <p>
-  The <b>ECO classify games</b> button will permanently add ECO classifications to selected games in the current database.
-  </p>
+  <p><i>
+  Note - Games not ECO classified will not contribute to the statistics graph. To ECO classify games, go to the <a Maintenance>Maintenance Window</a>
+  </i></p>
 
   <h3>Loading an ECO File</h3>
   <p>
@@ -4311,7 +4306,7 @@ set helpText(ECO) {<h1>ECO Codes</h1>
   <li>  <b>E9</b>  E7 + 4...d6 5.Nf3: <i>King's Indian, main lines</i> </li>
   </ul>
 
-  <p><footer>Updated: Scid vs. PC 4.18, Dec 2016</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.22, Oct 2020</footer></p>
 }
 
 

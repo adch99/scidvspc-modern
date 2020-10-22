@@ -94,8 +94,8 @@ proc ::utils::pane::Leave {win} {
 }
 
 proc ::utils::pane::Grab {win} {
-  $win.pane_sash configure -background red
-  $win.pane_grip configure -background red
+  $win.pane_sash configure -background SkyBlue
+  $win.pane_grip configure -background SkyBlue
 }
 
 proc ::utils::pane::Drag {win y} {
