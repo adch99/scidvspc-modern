@@ -53,7 +53,7 @@ proc ::windows::eco::Refresh {{code "x"}} {
       }
     }
 
-    button $w.b.up -image bookmark_up -command { ::windows::eco::KeyPress "<" }
+    button $w.b.up -image bookmark_up -command { ::windows::eco::Up }
     dialogbutton $w.b.refresh -textvar ::tr(Update) -command "::windows::eco::Refresh"
     dialogbutton $w.b.help -textvar ::tr(Help) -command {helpWindow ECO Browser}
     dialogbutton $w.b.close -textvar ::tr(Close) -command "destroy $w"
@@ -67,7 +67,6 @@ proc ::windows::eco::Refresh {{code "x"}} {
     canvas $graph.c -width 500 -height 250
     pack $graph.c -side top -fill both -expand yes
     text $text.text -height 12 -width 75 -wrap word -font font_Regular \
-       -selectbackground lightBlue \
       -yscroll "$text.ybar set" -xscroll "$text.xbar set"
     $text.text tag configure bold -font font_Bold
     $text.text tag configure indent -lmargin2 20
@@ -92,7 +91,7 @@ proc ::windows::eco::Refresh {{code "x"}} {
     bindMouseWheel $w $w.pane.text.text
 
     bind $graph.c <1> { ::windows::eco::Select %x }
-    bind $graph.c <3> { ::windows::eco::KeyPress "<" }
+    # bind $graph.c <3> { ::windows::eco::Up }
 
     bind $graph <Configure> {
       ::utils::graph::configure eco -height [expr {[winfo height .ecograph.pane.graph.c] - 50} ]
@@ -169,11 +168,12 @@ proc ::windows::eco::Refresh {{code "x"}} {
   ::utils::graph::create eco -width $width -height $height -xtop 50 -ytop 20 \
     -xmin 0.5 -xtick 1 -ytick $hline -font font_Small -canvas $graph.c
   # Tree colours are grey10 grey75 white
-  ::utils::graph::data eco data -color SteelBlue4 -points 0 -lines 0 -bars 1 \
+  # Used to be SteelBlue4 , SteelBlue3 , SteelBlue1
+  ::utils::graph::data eco data -color grey15 -points 0 -lines 0 -bars 1 \
     -barwidth 0.8 -outline black -coords $data
-  ::utils::graph::data eco draws -color SteelBlue3 -points 0 -lines 0 -bars 1 \
+  ::utils::graph::data eco draws -color grey75 -points 0 -lines 0 -bars 1 \
     -barwidth 0.8 -outline black -coords $draws
-  ::utils::graph::data eco wins -color SteelBlue1 -points 0 -lines 0 -bars 1 \
+  ::utils::graph::data eco wins -color white -points 0 -lines 0 -bars 1 \
     -barwidth 0.8 -outline black -coords $wins
   ::utils::graph::data eco bounds -points 0 -lines 0 -bars 0 -coords {1 0 1 1}
   ::utils::graph::configure eco -ymin 0 -xmin 0.4 -xmax [expr {$count + 0.6} ] \
@@ -234,52 +234,11 @@ proc ::windows::eco::Select {xc} {
 #    Handle keyboard events in ECO browser window
 #  Mostly unused now - S.A.
 
-proc ::windows::eco::KeyPress {key} {
+proc ::windows::eco::Up {} {
   set code $::windows::eco::code
   set len [string length $code]
-  if {$key == "<"} {
-    set ::windows::eco::code [string range $code 0 [expr {$len - 2} ]]
-    ::windows::eco::Refresh
-    return
-  }
-  if {$key == "top"} {
-    set ::windows::eco::code ""
-    ::windows::eco::Refresh
-    return
-  }
-
-  if {$len == 0} {
-    set key [string toupper $key]
-    switch $key {
-      A - B - C - D - E {
-        # nothing
-      }
-      default { set key "" }
-    }
-  } elseif {$len == 1 || $len == 2} {
-    switch $key {
-      0 - 1 - 2 - 3 - 4 - 5 - 6 - 7 - 8 - 9 {
-        # nothing
-      }
-      default { set key "" }
-    }
-  } elseif {$len == 3} {
-    set key [string tolower $key]
-    switch $key {
-      a - b - c - d - e - f - g - h - i - j - k - l - m - n - o - p - q - r -
-      s - t - u - v - w - x - y - z {
-        # nothing
-      }
-      default { set key "" }
-    }
-  } else {
-      set key ""
-  }
-
-  if {$key != ""} {
-    set ::windows::eco::code "$code$key"
-    ::windows::eco::Refresh
-  }
+  set ::windows::eco::code [string range $code 0 [expr {$len - 2} ]]
+  ::windows::eco::Refresh
 }
 
 proc ::windows::eco::LoadFile {} {
@@ -302,7 +261,7 @@ proc ::windows::eco::LoadFile {} {
   }
 }
 
-proc ::windows::eco::importMoveList {line} {
+proc ::windows::eco::importMoveList {line {eco {}}} {
   # if game num is 0, discard it, as it is probably just another eco line.
   if {[sc_game number] != 0} {
     set confirm [::game::ConfirmDiscard]
@@ -315,5 +274,8 @@ proc ::windows::eco::importMoveList {line} {
   sc_game new
   ::windows::gamelist::Refresh
   ::importMoveList $line
+  if {$eco != ""} {
+    set ::windows::eco::code [string trim $eco]
+  }
 }
 
