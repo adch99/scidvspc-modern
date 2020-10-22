@@ -42,17 +42,9 @@ DString::Extend (uint neededLength)
     // Double the capacity of the string until it is long enough:
     uint newCapacity = Capacity;
     while (newCapacity <= neededLength) { newCapacity += newCapacity; }
-#ifdef WINCE
-    char * newStart = (char*) my_Tcl_Alloc(sizeof (char [newCapacity]));
-#else
     char * newStart = new char [newCapacity];
-#endif
     for (uint i=0; i <= Len; i++) { newStart[i] = Start[i]; }
-#ifdef WINCE
-    my_Tcl_Free( Start);
-#else
     delete[] Start;
-#endif
     Start = newStart;
     Capacity = newCapacity;
     return;
