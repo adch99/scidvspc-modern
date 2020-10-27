@@ -116,6 +116,7 @@ proc ::windows::eco::Refresh {{code "x"}} {
   set width [expr {[winfo width $graph.c] - 60} ]
 
   set code $::windows::eco::code
+  set ::windows::eco::usedcode $code
   # Collect data:
   set len [string length $code]
   set subcodes {}

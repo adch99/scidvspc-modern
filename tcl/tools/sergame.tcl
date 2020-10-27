@@ -222,13 +222,29 @@ namespace eval sergame {
 
     # Choose a specific opening
 
-    checkbutton $w.fopening.cbOpening -text $::tr(SpecificOpening) -variable ::sergame::isOpening -command {
+    frame $w.fopening.frame
+    checkbutton $w.fopening.frame.cbOpening -text $::tr(SpecificOpening) -variable ::sergame::isOpening -command {
       if {$::sergame::isOpening} {
 	catch {
 	  .configSerGameWin.fopening.fOpeningList.lbOpening selection set $::sergame::chosenOpening
 	  .configSerGameWin.fopening.fOpeningList.lbOpening see $::sergame::chosenOpening
 	  set ::sergame::startFromCurrent 0
 	}
+      }
+    }
+    button $w.fopening.frame.importEco -text "[tr Import] [tr ECO]" -command {
+      if {[winfo exists .ecograph] && [info exists ::windows::eco::usedcode]} {
+        # Import ECO list
+
+        .configSerGameWin.fopening.fOpeningList.lbOpening delete 0 end
+        foreach i [split [sc_eco summary $::windows::eco::usedcode 0] \n] {
+          # Remove "[",":" from name and replace "]" with ":"
+          set i [string trim [string map {[ {} : {} ] :} $i]]
+          # Dont add missing null/missing moves
+          if {$i != {} && ![string match *: $i]} {
+            .configSerGameWin.fopening.fOpeningList.lbOpening insert end $i
+          }
+        }
       }
     }
     frame $w.fopening.fOpeningList -relief raised -borderwidth 1
@@ -238,7 +254,9 @@ namespace eval sergame {
     scrollbar $w.fopening.fOpeningList.ybar -command "$w.fopening.fOpeningList.lbOpening yview"
     pack $w.fopening.fOpeningList.lbOpening -side right -fill both -expand 1
     pack $w.fopening.fOpeningList.ybar -side right -fill y
-    pack $w.fopening.cbOpening -fill x -side top
+    pack $w.fopening.frame -fill x -side top
+    pack $w.fopening.frame.cbOpening -side left
+    pack $w.fopening.frame.importEco -side right -padx 20
     pack $w.fopening.fOpeningList -expand yes -fill both -side top -expand 1 -padx 3
 
     if {$::sergame::isOpening} {
@@ -367,9 +385,16 @@ namespace eval sergame {
       sc_game tags set -date [::utils::date::today]
     }
 
+    set extratags {}
+
     if {$::uci::uciInfo(skill) != ""} {
-      sc_game tags set -extra [list "[lindex $::uci::uciInfo(skill) 0] \"[lindex $::uci::uciInfo(skill) 1]\""]
+      lappend extratags "[lindex $::uci::uciInfo(skill) 0] \"[lindex $::uci::uciInfo(skill) 1]\""
+    } 
+    if {$isOpening} {
+      lappend extratags "Opening \"$openingName\""
     }
+
+    sc_game tags set -extra $extratags
 
     updateBoard -pgn
     ::windows::gamelist::Refresh
@@ -382,7 +407,11 @@ namespace eval sergame {
     }
 
     toplevel $w
-    wm title $w "$::sergame::engineName"
+    if {$isOpening} {
+      wm title $w "$::sergame::engineName ($openingName)"
+    } else {
+      wm title $w "$::sergame::engineName"
+    }
 
     setWinLocation $w
 
