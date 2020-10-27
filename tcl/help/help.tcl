@@ -4458,6 +4458,9 @@ limited the coach is allowed to think in the background.</i></p>
   Engine parameters may be configured - to tune performance or utilize engine features.
   <b>Opening Books</b> and <b>Specific Openings</b> to follow can also be selected.
   </p>
+  <p><i>
+  It is now possible to play (or train with) any opening found in the ECO window,  using the "Import ECO" button.
+  </i></p>
   <p>
   Other configuration items are straight forward except:
   </p>
