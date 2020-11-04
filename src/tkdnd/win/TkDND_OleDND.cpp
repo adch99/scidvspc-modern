@@ -283,7 +283,7 @@ int TkDND_DoDragDropObjCmd(ClientData clientData, Tcl_Interp *interp,
              * Finally, add an additional null terminator, as per CF_HDROP
              * Format specs.
              */
-            CurPosition = '\0';
+            *CurPosition = '\0';
             GlobalUnlock(m_pstgmed[i].hGlobal);
           }
           break;
