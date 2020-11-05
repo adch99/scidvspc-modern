@@ -1568,6 +1568,8 @@ translate W WinWonGame {Vinn vunnet parti}
 translate W Lines {Variationer}
 translate W ConfigureUCIengine {Konfigurera UCI-schackmotor}
 translate W SpecificOpening {Specifik öppning}
+# ====== TODO To be translated ======
+translate W ImportECO {Import ECO}
 translate W StartNewGame {Starta nytt parti}
 translate W FixedLevel {Fast nivå}
 translate W Opening {Öppning}

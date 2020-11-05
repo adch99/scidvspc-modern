@@ -1540,6 +1540,8 @@ translate R WinWonGame {Победа в выигрышной партии}
 translate R Lines {Планы}
 translate R ConfigureUCIengine {Настройка UCI движка}
 translate R SpecificOpening {Особый дебют}
+# ====== TODO To be translated ======
+translate R ImportECO {Import ECO}
 translate R StartNewGame {Начать новую партию}
 translate R FixedLevel {Фиксированный уровень}
 translate R Opening {Дебют}

@@ -1582,6 +1582,8 @@ translate G WinWonGame {Η παρτίδα κερδήθηκε}
 translate G Lines {Γραμμές}
 translate G ConfigureUCIengine {Ρύθμιση Μηχανής}
 translate G SpecificOpening {Συγκεκριμένο Άνοιγμα}
+# ====== TODO To be translated ======
+translate G ImportECO {Import ECO}
 translate G StartNewGame {Έναρξη νέας παρτίδας}
 translate G FixedLevel {Σταθερό επίπεδο}
 translate G Opening {Άνοιγμα}

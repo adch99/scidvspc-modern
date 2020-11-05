@@ -1759,6 +1759,8 @@ translate H ConfigureUCIengine {Configure UCI engine}
 # ====== TODO To be translated ======
 translate H SpecificOpening {Specific opening}
 # ====== TODO To be translated ======
+translate H ImportECO {Import ECO}
+# ====== TODO To be translated ======
 translate H StartNewGame {Start new game}
 # ====== TODO To be translated ======
 translate H FixedLevel {Fixed level}

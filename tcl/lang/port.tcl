@@ -1465,6 +1465,8 @@ translate U WinWonGame {Jogar até ao mate}
 translate U Lines {Linhas}
 translate U ConfigureUCIengine {Configurar programa UCI}
 translate U SpecificOpening {Escolher abertura}
+# ====== TODO To be translated ======
+translate U ImportECO {Import ECO}
 translate U StartNewGame {Iniciar novo jogo}
 translate U FixedLevel {Nível fixo}
 translate U Opening {Abertura}

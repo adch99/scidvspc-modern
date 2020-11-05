@@ -1475,6 +1475,8 @@ translate O WinWonGame {Vinn vunnet parti}
 translate O Lines {Linjer}
 translate O ConfigureUCIengine {Konfigurer UCI-motor}
 translate O SpecificOpening {Spesifikk åpning}
+# ====== TODO To be translated ======
+translate O ImportECO {Import ECO}
 translate O StartNewGame {Start nytt parti}
 translate O FixedLevel {Fast nivå}
 translate O Opening {Åpning}

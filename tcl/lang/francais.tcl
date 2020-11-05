@@ -1470,6 +1470,8 @@ translate F WinWonGame {Terminer partie gagnée}
 translate F Lines {Lignes}
 translate F ConfigureUCIengine {Configurer moteur UCI}
 translate F SpecificOpening {Ouverture spécifique}
+# ====== TODO To be translated ======
+translate F ImportECO {Import ECO}
 translate F StartNewGame {Nouvelle partie}
 translate F FixedLevel {Niveau fixe}
 translate F Opening {Ouverture}

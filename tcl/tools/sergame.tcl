@@ -29,7 +29,7 @@ namespace eval sergame {
   #   ::sergame::config
   # ================================
   proc config {} {
-    global ::sergame::configWin ::sergame::chosenOpening
+    global tr ::sergame::configWin ::sergame::chosenOpening
 
     # Abort previous game if exists
     if {[winfo exists .serGameWin]} {
@@ -45,7 +45,7 @@ namespace eval sergame {
 
     toplevel $w
     wm state $w withdrawn
-    wm title $w "$::tr(configuregame)"
+    wm title $w "$tr(configuregame)"
 
     bind $w <F1> {helpWindow ComputerGame UCIGame}
 
@@ -65,7 +65,7 @@ namespace eval sergame {
 
     ### UCI engine listbox
 
-    label $w.fengines.label -text $::tr(Engine)
+    label $w.fengines.label -text $tr(Engine)
     frame $w.fengines.fEnginesList -relief raised -borderwidth 1
     listbox $w.fengines.fEnginesList.lbEngines -yscrollcommand "$w.fengines.fEnginesList.ybar set" \
         -height 5 -width 50 -exportselection 0 -font font_Small
@@ -103,7 +103,7 @@ namespace eval sergame {
 
     ### Engine config button (limit strength for example)
 
-    button $w.fengines.bEngineConfig -text $::tr(ConfigureUCIengine) -command {
+    button $w.fengines.bEngineConfig -text $tr(ConfigureUCIengine) -command {
       set sel [.configSerGameWin.fengines.fEnginesList.lbEngines curselection]
       set index $::sergame::engineListBox($sel)
       set engineData [lindex $::engines(list) $index]
@@ -122,34 +122,34 @@ namespace eval sergame {
 
     grid  $w.ftime.timebonus -row 0 -column 0 -columnspan 2
 
-    # label $w.ftime.timebonus.label -text $::tr(TimeMode)
+    # label $w.ftime.timebonus.label -text $tr(TimeMode)
     # grid $w.ftime.timebonus.label -row $row -column 2 -columnspan 2
     # incr row
 
-    radiobutton $w.ftime.timebonus.rb1 -text $::tr(TimeBonus) -value "timebonus" -variable ::sergame::timeMode
+    radiobutton $w.ftime.timebonus.rb1 -text $tr(TimeBonus) -value "timebonus" -variable ::sergame::timeMode
     grid $w.ftime.timebonus.rb1 -row $row -column 0 -sticky w -rowspan 2
 
-    label $w.ftime.timebonus.whitelabel -text $::tr(White)
+    label $w.ftime.timebonus.whitelabel -text $tr(White)
     grid $w.ftime.timebonus.whitelabel -row $row -column 1 -padx 10
     spinbox $w.ftime.timebonus.whitespminutes  -width 4 -from 1 -to 120 -increment 1 -validate all -vcmd {string is int %P}
     grid $w.ftime.timebonus.whitespminutes -row $row -column 2
-    label $w.ftime.timebonus.whitelminutes -text $::tr(TimeMin)
+    label $w.ftime.timebonus.whitelminutes -text $tr(TimeMin)
     grid $w.ftime.timebonus.whitelminutes -row $row -column 3
     spinbox $w.ftime.timebonus.whitespseconds  -width 4 -from 0 -to 60 -increment 1 -validate all -vcmd {string is int %P}
     grid $w.ftime.timebonus.whitespseconds -row $row -column 4
-    label $w.ftime.timebonus.whitelseconds -text $::tr(TimeSec)
+    label $w.ftime.timebonus.whitelseconds -text $tr(TimeSec)
     grid $w.ftime.timebonus.whitelseconds -row $row -column 5
 
     incr row
-    label $w.ftime.timebonus.blacklabel -text $::tr(Black)
+    label $w.ftime.timebonus.blacklabel -text $tr(Black)
     grid $w.ftime.timebonus.blacklabel -row $row -column 1 -padx 10
     spinbox $w.ftime.timebonus.blackspminutes  -width 4 -from 1 -to 120 -increment 1 -validate all -vcmd {string is int %P}
     grid $w.ftime.timebonus.blackspminutes -row $row -column 2
-    label $w.ftime.timebonus.blacklminutes -text $::tr(TimeMin)
+    label $w.ftime.timebonus.blacklminutes -text $tr(TimeMin)
     grid $w.ftime.timebonus.blacklminutes -row $row -column 3
     spinbox $w.ftime.timebonus.blackspseconds  -width 4 -from 0 -to 60 -increment 1 -validate all -vcmd {string is int %P}
     grid $w.ftime.timebonus.blackspseconds -row $row -column 4
-    label $w.ftime.timebonus.blacklseconds -text $::tr(TimeSec)
+    label $w.ftime.timebonus.blacklseconds -text $tr(TimeSec)
     grid $w.ftime.timebonus.blacklseconds -row $row -column 5
 
     $w.ftime.timebonus.whitespminutes set $::sergame::wtime
@@ -158,21 +158,21 @@ namespace eval sergame {
     $w.ftime.timebonus.blackspseconds set $::sergame::binc
 
     # Fixed depth
-    radiobutton $w.ftime.depthbutton -text $::tr(FixedDepth) -value "depth" -variable ::sergame::timeMode
+    radiobutton $w.ftime.depthbutton -text $tr(FixedDepth) -value "depth" -variable ::sergame::timeMode
     spinbox $w.ftime.depthvalue  -width 4 -from 1 -to 20 -increment 1 -validate all -vcmd {string is int %P}
     $w.ftime.depthvalue set 3
 
     grid $w.ftime.depthbutton -row 1 -column 0 -sticky w
     grid $w.ftime.depthvalue -row 1 -column 1 -sticky w
 
-    radiobutton $w.ftime.nodesbutton -text "$::tr(Nodes) (x1000)" -value "nodes" -variable ::sergame::timeMode
+    radiobutton $w.ftime.nodesbutton -text "$tr(Nodes) (x1000)" -value "nodes" -variable ::sergame::timeMode
     spinbox $w.ftime.nodesvalue  -width 4 -from 5 -to 10000 -increment 5 -validate all -vcmd {string is int %P}
     $w.ftime.nodesvalue set 10
 
     grid $w.ftime.nodesbutton -row 2 -column 0 -sticky w
     grid $w.ftime.nodesvalue -row 2 -column 1 -sticky w
 
-    radiobutton $w.ftime.movetimebutton -text $::tr(SecondsPerMove) -value "movetime" -variable ::sergame::timeMode
+    radiobutton $w.ftime.movetimebutton -text $tr(SecondsPerMove) -value "movetime" -variable ::sergame::timeMode
     spinbox $w.ftime.movetimevalue  -width 4 -from 1 -to 120 -increment 1 -validate all -vcmd {string is int %P}
     $w.ftime.movetimevalue set $::sergame::movetime
 
@@ -180,22 +180,23 @@ namespace eval sergame {
     grid $w.ftime.movetimevalue -row 3 -column 1 -sticky w
 
     # New game or use current position ?
-    checkbutton $w.fconfig.cbPosition -text $::tr(StartFromCurrentPosition) \
+    checkbutton $w.fconfig.cbPosition -text $tr(StartFromCurrentPosition) \
       -variable ::sergame::startFromCurrent -command {set ::sergame::isOpening 0}
     pack $w.fconfig.cbPosition  -side top -anchor w
 
     # Permanent thinking
-    checkbutton $w.fconfig.cbPonder -text $::tr(Ponder) -variable ::sergame::ponder
+    checkbutton $w.fconfig.cbPonder -text $tr(Ponder) -variable ::sergame::ponder
     pack $w.fconfig.cbPonder  -side top -anchor w
 
     # Coach is watching (warn if the user makes weak/bad moves)
-    checkbutton $w.fcoach.cbCoach -text $::tr(CoachIsWatching) -variable ::sergame::coachIsWatching
+    checkbutton $w.fcoach.cbCoach -text $tr(CoachIsWatching) -variable ::sergame::coachIsWatching
     button $w.fcoach.bCoach -text [tr OptionsInformant] -command configInformant
-    pack $w.fcoach.cbCoach $w.fcoach.bCoach -side left -padx 10
+    pack $w.fcoach.cbCoach -side left
+    pack $w.fcoach.bCoach -side right -padx 20
 
     # Book checkbutton and combobox
 
-    checkbutton $w.fbook.cbUseBook -text $::tr(UseBook) -variable ::sergame::useBook
+    checkbutton $w.fbook.cbUseBook -text $tr(UseBook) -variable ::sergame::useBook
     set bookPath $::scidBooksDir
     set bookList [ lsort -dictionary [ glob -nocomplain -directory $bookPath *.bin ] ]
     ttk::combobox $w.fbook.combo -width 12 -state readonly
@@ -223,7 +224,7 @@ namespace eval sergame {
     # Choose a specific opening
 
     frame $w.fopening.frame
-    checkbutton $w.fopening.frame.cbOpening -text $::tr(SpecificOpening) -variable ::sergame::isOpening -command {
+    checkbutton $w.fopening.frame.cbOpening -text $tr(SpecificOpening) -variable ::sergame::isOpening -command {
       if {$::sergame::isOpening} {
 	catch {
 	  .configSerGameWin.fopening.fOpeningList.lbOpening selection set $::sergame::chosenOpening
@@ -232,7 +233,7 @@ namespace eval sergame {
 	}
       }
     }
-    button $w.fopening.frame.importEco -text "[tr Import] [tr ECO]" -command {
+    button $w.fopening.frame.importEco -textvar tr(ImportECO) -command {
       if {[winfo exists .ecograph] && [info exists ::windows::eco::usedcode]} {
         # Import ECO list
 
@@ -247,6 +248,10 @@ namespace eval sergame {
         }
       }
     }
+    if {![winfo exists .ecograph]} {
+      $w.fopening.frame.importEco configure -state disabled
+    }
+
     frame $w.fopening.fOpeningList -relief raised -borderwidth 1
     listbox $w.fopening.fOpeningList.lbOpening -yscrollcommand "$w.fopening.fOpeningList.ybar set" \
         -height 5 -width 50 -list ::tacgame::openingList -exportselection 0 -font font_Small -selectmode single
@@ -273,7 +278,7 @@ namespace eval sergame {
     }
     bind $w.fopening.fOpeningList.lbOpening <Double-Button-1> "$w.fbuttons.play invoke"
 
-    dialogbutton $w.fbuttons.play -text $::tr(Play) -command {
+    dialogbutton $w.fbuttons.play -text $tr(Play) -command {
       set sel [.configSerGameWin.fengines.fEnginesList.lbEngines curselection]
       set ::sergame::current $sel
       set ::sergame::engineName [.configSerGameWin.fengines.fEnginesList.lbEngines get $sel]
@@ -301,8 +306,8 @@ namespace eval sergame {
     }
     bind $w.fengines.fEnginesList.lbEngines <Double-Button-1> "$w.fbuttons.play invoke"
 
-    dialogbutton $w.fbuttons.help -textvar ::tr(Help) -command {helpWindow ComputerGame UCIGame}
-    dialogbutton $w.fbuttons.cancel -textvar ::tr(Cancel) -command "destroy $w"
+    dialogbutton $w.fbuttons.help -textvar tr(Help) -command {helpWindow ComputerGame UCIGame}
+    dialogbutton $w.fbuttons.cancel -textvar tr(Cancel) -command "destroy $w"
 
     pack $w.fbuttons.play $w.fbuttons.help $w.fbuttons.cancel -expand yes -side left -pady 3
 
@@ -316,12 +321,10 @@ namespace eval sergame {
     wm minsize $w 45 0
   }
 
-
   ### ::sergame::play
 
   proc play {n} {
-    global ::sergame::chosenOpening ::sergame::isOpening ::tacgame::openingList ::sergame::openingMovesList \
-        ::sergame::openingMovesHash ::sergame::openingMoves ::sergame::outOfOpening
+    global tr ::sergame::chosenOpening ::sergame::isOpening ::tacgame::openingList ::sergame::openingMovesList ::sergame::openingMovesHash ::sergame::openingMoves ::sergame::outOfOpening
 
     set ::sergame::engine $n
 
@@ -439,7 +442,7 @@ namespace eval sergame {
 
     set ::pause 0
 
-    button $w.fbuttons.resume -state disabled -textvar ::tr(Resume) -command {
+    button $w.fbuttons.resume -state disabled -textvar tr(Resume) -command {
       set ::pause 0
       .serGameWin.fbuttons.resume configure -state disabled
       ::uci::sendToEngine $::sergame::engine {setoption name Clear Hash}
@@ -472,7 +475,7 @@ namespace eval sergame {
     }
     pack $w.fbuttons.restart -expand yes -fill both -padx 10 -pady 2
 
-    button $w.fbuttons.abort -textvar ::tr(Abort) -command ::sergame::abortGame
+    button $w.fbuttons.abort -textvar tr(Abort) -command ::sergame::abortGame
     pack $w.fbuttons.abort -expand yes -fill both -padx 10 -pady 2
 
     bind $w <F1> {helpWindow ComputerGame UCIGame}

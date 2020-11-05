@@ -1647,6 +1647,8 @@ translate I Lines {Linee}
 translate I ConfigureUCIengine {Configura il motore UCI}
 translate I SpecificOpening {Apertura Specifica}
 # ====== TODO To be translated ======
+translate I ImportECO {Import ECO}
+# ====== TODO To be translated ======
 translate I StartNewGame {Start new game}
 # ====== TODO To be translated ======
 translate I FixedLevel {Fixed level}

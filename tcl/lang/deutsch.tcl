@@ -1512,6 +1512,8 @@ translate D WinWonGame {Übungen zu Ende spielen}
 translate D Lines {Variantenzahl}
 translate D ConfigureUCIengine {UCI-Engine konfigurieren}
 translate D SpecificOpening {Ausgewählte Eröffnung}
+# ====== TODO To be translated ======
+translate D ImportECO {Import ECO}
 translate D StartNewGame {Neue Partie}
 translate D FixedLevel {Festgelegte Spielstärke}
 translate D Opening {Eröffnung}

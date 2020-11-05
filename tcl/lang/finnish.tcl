@@ -1462,6 +1462,8 @@ translate L WinWonGame {Voita voittopeli}
 translate L Lines {Muunnelmat}
 translate L ConfigureUCIengine {Konfiguroi ohjelma}
 translate L SpecificOpening {Tietty avaus}
+# ====== TODO To be translated ======
+translate L ImportECO {Import ECO}
 translate L StartNewGame {Aloita uusi peli}
 translate L FixedLevel {M‰‰r‰tty taso}
 translate L Opening {Avaus}
