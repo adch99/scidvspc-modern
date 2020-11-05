@@ -1802,6 +1802,8 @@ translate B Lines {Linhas}
 translate B ConfigureUCIengine {Configurar engine UCI}
 
 translate B SpecificOpening {Abertura especifica}
+# ====== TODO To be translated ======
+translate B ImportECO {Import ECO}
 
 translate B StartNewGame {Iniciar novo jogo}
 

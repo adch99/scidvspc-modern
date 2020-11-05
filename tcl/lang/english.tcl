@@ -1464,6 +1464,7 @@ translate E WinWonGame {Playout exercises}
 translate E Lines {Lines}
 translate E ConfigureUCIengine {Configure Engine}
 translate E SpecificOpening {Specific opening}
+translate E ImportECO {Import ECO}
 translate E StartNewGame {Start new game}
 translate E FixedLevel {Fixed level}
 translate E Opening {Opening}

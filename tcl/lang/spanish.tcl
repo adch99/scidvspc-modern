@@ -1540,6 +1540,8 @@ translate S WinWonGame {Gana la partida ganada}
 translate S Lines {Líneas}
 translate S ConfigureUCIengine {Configurar motor}
 translate S SpecificOpening {Apertura específica}
+# ====== TODO To be translated ======
+translate S ImportECO {Import ECO}
 translate S StartNewGame {Empezar partida nueva}
 translate S FixedLevel {Nivel fijado}
 translate S Opening {Abriendo}

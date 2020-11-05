@@ -1465,6 +1465,8 @@ translate T WinWonGame {Kazandı oyunu kazandı}
 translate T Lines {satırlar}
 translate T ConfigureUCIengine {Motoru Yapılandır}
 translate T SpecificOpening {belirli açılışlar}
+# ====== TODO To be translated ======
+translate T ImportECO {Import ECO}
 translate T StartNewGame {Yeni oyuna Başla}
 translate T FixedLevel {Sabit düzey}
 translate T Opening {açılış}

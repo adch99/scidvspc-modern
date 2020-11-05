@@ -1547,6 +1547,8 @@ translate P WinWonGame {Wygraj wygraną partię}
 translate P Lines {Warianty}
 translate P ConfigureUCIengine {Konfiguruj program UCI}
 translate P SpecificOpening {Wybrany program}
+# ====== TODO To be translated ======
+translate P ImportECO {Import ECO}
 translate P StartNewGame {Rozpocznij nową partię}
 translate P FixedLevel {Stały poziom}
 translate P Opening {Debiut}

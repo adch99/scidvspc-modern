@@ -1603,6 +1603,8 @@ translate N Lines {Varianten}
 translate N ConfigureUCIengine {Configureer UCI engine}
 
 translate N SpecificOpening {Specifieke opening}
+# ====== TODO To be translated ======
+translate N ImportECO {Import ECO}
 translate N StartNewGame {Start nieuwe partij}
 translate N FixedLevel {Vast niveau}
 translate N Opening {Opening}
