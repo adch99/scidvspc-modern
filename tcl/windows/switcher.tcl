@@ -779,6 +779,10 @@ proc changeBaseType {baseNum {parent .}} {
   set temp_dbtype [sc_base type $baseNum]
   if {$temp_dbtype >= $numBaseTypeIcons} { set temp_dbtype 0 }
   set w .btypeWin
+  if {[winfo exists $w]} {
+    raiseWin $w
+    return
+  }
   toplevel $w
   wm withdraw $w
   wm title $w "Choose database type"
