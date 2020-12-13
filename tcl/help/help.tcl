@@ -401,9 +401,10 @@ append helpText(Index) {
   <h3><name O>O</name></h3>
   <ul>
   <li><a Book>Opening Books</a></li>
+  <li><a ECO>Opening Classification</a> (ECO)</li>
   <li><a Repertoire>Opening Repertoires</a></li>
-  <li><a ECO>Opening classification</a> (ECO)</li>
   <li><a Reports Opening>Opening Reports</a></li>
+  <li>Tree <a Tree Training>Opening Trainer</a></li>
   <li><a Options>Options</a></li>
   <li>Command line <a Cmdline>options</a></li>
   </ul>
@@ -2138,13 +2139,12 @@ search for games that do not reach this position!
 
   <h3><name Training>Training</name></h3>
   <p>
-  When the Training button <button tb_training> is selected,
-  Scid will randomly make a move every time you add a move to the game.
-  The move Scid chooses depends on database statistics, so a move played
-  in 80% of database games will be chosen by Scid with 80% probability.
-  Turning on this feature, then hiding (or iconifying) the Tree window and
-  playing openings against a large database, is a great way to test your
-  knowledge of your opening repertoire.
+  The Training button <button tb_training> enables a basic Opening Trainer feature.
+  Moves in the tree are hidden, trial mode is engaged, and
+  Scid replies to <b>in-tree</b> player moves with one of it's own, according to database weight.
+  So a move existing in 80% of database games will be played 80% of the time.
+  </p><p>
+  <i>There are addition functions associated with Tree Masks, but these are untested by this author.</i>
   </p>
 
   <h3>Caching for Faster Results</h3>
@@ -2191,7 +2191,7 @@ search for games that do not reach this position!
 <br><br>https://sourceforge.net/p/scid/mailman/scid-users/thread/48103F94.1010408%40free.fr/
   </p>
 
-  <p><footer>Updated: Scid vs. PC 4.21, December 2019</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.22, December 2020</footer></p>
 }
 
 set helpTitle(TreeMasks) "Tree Masks"
