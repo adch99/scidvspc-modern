@@ -1392,6 +1392,7 @@ proc addMove { sq1 sq2 {animate ""}} {
 	  [string compare -nocase $moveUCI_rev $move] == 0) && ! $nullmove } {
       sc_move forward
       updateBoard
+      ::tree::doTraining
       return
     }
 
@@ -1399,9 +1400,10 @@ proc addMove { sq1 sq2 {animate ""}} {
     set i 0
     foreach { move } $varList {
 	 if { [ string compare -nocase $moveUCI $move] == 0 } {
-		 sc_var moveInto $i
-		 updateBoard
-		 return
+	   sc_var moveInto $i
+	   updateBoard
+	   ::tree::doTraining
+	   return
 	 }
 	 incr i
     }

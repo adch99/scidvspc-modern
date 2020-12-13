@@ -413,8 +413,10 @@ proc ::tree::refreshTraining { baseNumber } {
 
   if {$tree(training$baseNumber)} {
     set ::tree::trainingBase $baseNumber
+    if {!$::trialMode} {setTrialMode 1 0}
   } else {
     set ::tree::trainingBase 0
+    if {$::trialMode} {setTrialMode 0 1}
   }
   ::tree::refresh $baseNumber
 }
@@ -444,14 +446,13 @@ proc ::tree::doTraining {{n 0}} {
     return
   }
 
-  if {! [winfo exists .treeWin$::tree::trainingBase]} {
+  if {! [winfo exists .treeWin$::tree::trainingBase] || $::tree::trainingBase == 0 } {
     return
   }
 
-  if { $::tree::trainingBase == 0 } {
-    return
-  }
+  ### Tree training
 
+  # Mask only features !? - untested S.A.
   # Before issuing a training move, annotate player's move
   if { $::tree::mask::maskFile != ""  } {
     set move_done [sc_game info previousMoveNT]
