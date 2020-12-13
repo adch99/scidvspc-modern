@@ -741,6 +741,8 @@ translate R BlundersNotBest {Blunders/Not Best}
 translate R AnnotateTitle {Настроить аннотацию}
 # ====== TODO To be translated ======
 translate R AnnotateMissedMates {Missed/shorter mates}
+# ====== TODO To be translated ======
+translate R AnnotateEnd {At end of game}
 translate R BlundersThreshold {Порог}
 # ====== TODO To be translated ======
 translate R ScoreFormat {Score format}

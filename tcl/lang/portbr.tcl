@@ -854,6 +854,8 @@ translate B BlundersNotBest {Erro crasso/Nao Melhor}
 translate B AnnotateTitle {Configurar Anotacao}
 
 translate B AnnotateMissedMates {Mates perdidos/menores}
+# ====== TODO To be translated ======
+translate B AnnotateEnd {At end of game}
 translate B BlundersThreshold {Limite}
 
 translate B ScoreFormat {Formato do Score}

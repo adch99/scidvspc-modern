@@ -767,6 +767,8 @@ translate W BlundersNotBest {Blunders/Not Best}
 translate W AnnotateTitle {Konfigurera Anteckningar}
 # ====== TODO To be translated ======
 translate W AnnotateMissedMates {Missed/shorter mates}
+# ====== TODO To be translated ======
+translate W AnnotateEnd {At end of game}
 translate W BlundersThreshold {Tröskelvärde}
 # ====== TODO To be translated ======
 translate W ScoreFormat {Score format}

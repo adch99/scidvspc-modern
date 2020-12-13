@@ -714,6 +714,8 @@ translate O AnnotateBlundersOnly {Når trekket er en åpenbar bukk}
 translate O BlundersNotBest {Bukk/ikke best}
 translate O AnnotateTitle {Konfigurer annotasjon}
 translate O AnnotateMissedMates {Mistet/kortere matt}
+# ====== TODO To be translated ======
+translate O AnnotateEnd {At end of game}
 translate O BlundersThreshold {Grense}
 translate O ScoreFormat {Score-format}
 translate O CutOff {Cut Off}

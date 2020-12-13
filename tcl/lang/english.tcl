@@ -704,6 +704,7 @@ translate E AnnotateBlundersOnly {When move is a blunder}
 translate E BlundersNotBest {Blunders/Not Best}
 translate E AnnotateTitle {Configure Annotation}
 translate E AnnotateMissedMates {Missed/shorter mates}
+translate E AnnotateEnd {At end of game}
 translate E BlundersThreshold {Threshold}
 translate E ScoreFormat {Score format}
 translate E CutOff {Cut Off}

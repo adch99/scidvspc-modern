@@ -1016,18 +1016,20 @@ proc initAnnotation {n} {
   ### Annotate Variations
 
   label $w.anlabel -textvar tr(AddVars)
-  radiobutton $w.notbest -textvar tr(AnnotateNotBest) -variable annotate(WithVars) -value notbest -anchor w
   radiobutton $w.blunders -textvar tr(AnnotateBlundersOnly) -variable annotate(WithVars) -value blunders -anchor w
+  radiobutton $w.notbest -textvar tr(AnnotateNotBest) -variable annotate(WithVars) -value notbest -anchor w
   radiobutton $w.allmoves -textvar tr(AnnotateAllMoves) -variable annotate(WithVars) -value allmoves -anchor w
   radiobutton $w.none -textvar tr(No) -variable annotate(WithVars) -value no -anchor w
 
   pack $w.anlabel -side top
-  pack $w.notbest $w.blunders -side top -fill x
+  pack $w.blunders $w.notbest -side top -fill x
   pack $w.allmoves $w.none -side top -fill x
 
   checkbutton $w.missedmates -textvar tr(AnnotateMissedMates) -variable annotate(MissedMates) -anchor w
+  checkbutton $w.varAtEnd -textvar tr(AnnotateEnd) -variable annotate(VarAtEnd) -anchor w
 
   pack $w.missedmates -side top -anchor w
+  pack $w.varAtEnd -side top -anchor w
 
   addHorizontalRule $w
 

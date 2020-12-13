@@ -703,6 +703,8 @@ translate F AnnotateBlundersOnly {Quand le coup est une erreur}
 translate F BlundersNotBest {Erreurs/Imprécissions}
 translate F AnnotateTitle {Configurer Annotation}
 translate F AnnotateMissedMates {Occasion manquée/Mat en moins de coups}
+# ====== TODO To be translated ======
+translate F AnnotateEnd {At end of game}
 translate F BlundersThreshold {Seuil de l'erreur}
 translate F ScoreFormat {Format du score}
 translate F CutOff {Interruption}

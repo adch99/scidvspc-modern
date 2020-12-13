@@ -782,6 +782,8 @@ translate G BlundersNotBest {Blunders/Not Best}
 translate G AnnotateTitle {Ρυθμίσεις Σχολιαστή}
 # ====== TODO To be translated ======
 translate G AnnotateMissedMates {Missed/shorter mates}
+# ====== TODO To be translated ======
+translate G AnnotateEnd {At end of game}
 translate G BlundersThreshold {Threshold}
 # ====== TODO To be translated ======
 translate G ScoreFormat {Score format}

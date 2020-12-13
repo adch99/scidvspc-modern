@@ -729,6 +729,8 @@ translate D AnnotateBlundersOnly {Wenn der Partiezug ein offensichtlicher Fehler
 translate D BlundersNotBest {Patzer/nicht bester Zug}
 translate D AnnotateTitle {Kommentare konfigurieren}
 translate D AnnotateMissedMates {Verpaßte/kürzere Mattführungen}
+# ====== TODO To be translated ======
+translate D AnnotateEnd {At end of game}
 translate D BlundersThreshold {Schwelle}
 translate D ScoreFormat {Format für die Bewertung}
 translate D CutOff {Abschneiden}

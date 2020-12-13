@@ -819,6 +819,8 @@ translate C AnnotateTitle {Konfigurace Anotace}
 # ====== TODO To be translated ======
 translate C AnnotateMissedMates {Missed/shorter mates}
 # ====== TODO To be translated ======
+translate C AnnotateEnd {At end of game}
+# ====== TODO To be translated ======
 translate C BlundersThreshold {Threshold}
 # ====== TODO To be translated ======
 translate C ScoreFormat {Score format}
