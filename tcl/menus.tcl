@@ -963,7 +963,7 @@ $m add command -label OptionsSave -command {
     ::pgn::symbolicNags ::pgn::moveNumberSpaces ::pgn::columnFormat ::pgn::showScrollbar
     myPlayerNames optionsAutoSave ::tree::mask::recentMask ::tree::mask::autoLoadMask ::tree::showBar ::tree::short ::tree::sortBest ::tree::autoAdjust
     ::tree::autoSave ::tree::order ::tree::showFrame ecoFile showVarPopup showVarArrows colorActiveSquare
-    annotate(blunder) annotate(addTag) annotate(Moves) annotate(WithVars) annotate(WithScore) useAnalysisBook annotate(isVar) annotate(scoreType) annotate(cutoff) annotate(MissedMates)
+    annotate(blunder) annotate(addTag) annotate(Moves) annotate(WithVars) annotate(WithScore) useAnalysisBook annotate(isVar) annotate(scoreType) annotate(cutoff) annotate(MissedMates) annotate(VarAtEnd)
     annotate(WantedDepth) annotate(Depth) autoplayDelay animateDelay boardCoords boardSTM 
     moveEntry(AutoExpand) moveEntry(Coord)
     translatePieces highlightLastMove highlightLastMoveWidth highlightLastMoveColor 

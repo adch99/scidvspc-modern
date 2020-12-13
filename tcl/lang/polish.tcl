@@ -754,6 +754,8 @@ translate P BlundersNotBest {Blunders/Not Best}
 translate P AnnotateTitle {Konfiguracja komentarza}
 # ====== TODO To be translated ======
 translate P AnnotateMissedMates {Missed/shorter mates}
+# ====== TODO To be translated ======
+translate P AnnotateEnd {At end of game}
 translate P BlundersThreshold {Granica błędu}
 # ====== TODO To be translated ======
 translate P ScoreFormat {Score format}

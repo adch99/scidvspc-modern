@@ -692,6 +692,8 @@ translate L AnnotateBlundersOnly {Kun siirto on möhläys}
 translate L BlundersNotBest {Möhläykset/ei paras siirto}
 translate L AnnotateTitle {Konfiguroi kommentti}
 translate L AnnotateMissedMates {Huomaamatta jääneet/lyhyemmät matit}
+# ====== TODO To be translated ======
+translate L AnnotateEnd {At end of game}
 translate L BlundersThreshold {Raja-arvo}
 translate L ScoreFormat {Lopputuloksen formaatti}
 translate L CutOff {Katkaise}

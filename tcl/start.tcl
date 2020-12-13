@@ -169,6 +169,7 @@ set annotate(Moves) all
 set annotate(WithVars) blunders
 set annotate(WithScore) allmoves
 set annotate(MissedMates) 1
+set annotate(VarAtEnd) 1
 set annotate(WantedDepth) 13
 set annotate(Depth) 1
 set useAnalysisBook 0

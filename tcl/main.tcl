@@ -1689,7 +1689,7 @@ proc autoplay {} {
   }
 
   if { $::isOpeningOnly && [sc_pos moveNumber] > $::isOpeningOnlyMoves} {
-      if {$::annotate(isBatch)} {
+      if {$annotate(isBatch)} {
 	nextgameAutoplay $n
       } else {
 	toggleEngineAnalysis $n
@@ -1708,7 +1708,7 @@ proc autoplay {} {
       return
     }
     set move_done [sc_game info previousMoveNT]
-    if { [string index $move_done end] != "#" && $::annotate(WithVars) != "no"} {
+    if {$annotate(VarAtEnd) && [string index $move_done end] != "#" && $annotate(WithVars) != "no" && $annotate(WithVars) != "allmoves"} {
       # Add a variation for the last move of the game
       set text [format "%d:%+.2f" $analysis(depth$n) $analysis(score$n)]
       set moves $analysis(moves$n)
@@ -1721,7 +1721,7 @@ proc autoplay {} {
       sc_move end
       updateBoard -pgn
     }
-    if {$::annotate(isBatch) && [sc_game number] != 0} {
+    if {$annotate(isBatch) && [sc_game number] != 0} {
       nextgameAutoplay $n
     } else {
       toggleEngineAnalysis $n
@@ -1732,7 +1732,7 @@ proc autoplay {} {
 
   ### Annotate variations
 
-  if {$::annotate(isVar)} {
+  if {$annotate(isVar)} {
     if { [sc_pos isAt vend] } {
       sc_var exit
       set lastVar [::popAnalysisData $n]
@@ -1759,7 +1759,7 @@ proc autoplay {} {
   }
 
   if {[sc_pos matchMoves {}] == ""} {
-    if {$::annotate(isBatch) && [sc_game number] != 0} {
+    if {$annotate(isBatch) && [sc_game number] != 0} {
       nextgameAutoplay $n
     } else {
       toggleEngineAnalysis $n

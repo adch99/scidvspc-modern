@@ -690,6 +690,8 @@ translate T AnnotateBlundersOnly {Hareket bir gaf olduğunda}
 translate T BlundersNotBest {Gaf / En iyi değil}
 translate T AnnotateTitle {Açıklamayı Yapılandır}
 translate T AnnotateMissedMates {gözden kaçırdı/kısa matı}
+# ====== TODO To be translated ======
+translate T AnnotateEnd {At end of game}
 translate T BlundersThreshold {eşik}
 translate T ScoreFormat {Puan biçimi}
 translate T CutOff {limit}

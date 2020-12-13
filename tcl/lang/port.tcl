@@ -705,6 +705,8 @@ translate U AnnotateBlundersOnly {Quando a jogada é um grande erro}
 translate U BlundersNotBest {Apenas grandes erros}
 translate U AnnotateTitle {Configurar Anotação}
 translate U AnnotateMissedMates {Quando há xequemate mais rápido}
+# ====== TODO To be translated ======
+translate U AnnotateEnd {At end of game}
 translate U BlundersThreshold {Limiar}
 translate U ScoreFormat {Formato da avaliação}
 translate U CutOff {Não anotar:}

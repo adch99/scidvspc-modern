@@ -769,6 +769,8 @@ translate S AnnotateBlundersOnly {Cuando el movimiento es un disparate}
 translate S BlundersNotBest {Fallo/No Mejor}
 translate S AnnotateTitle {Configurar anotación}
 translate S AnnotateMissedMates {Mates omitidos/más cortos}
+# ====== TODO To be translated ======
+translate S AnnotateEnd {At end of game}
 translate S BlundersThreshold {(Umbral)}
 translate S ScoreFormat {Formato de puntuación}
 translate S CutOff {Corte}
