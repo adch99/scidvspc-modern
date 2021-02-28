@@ -633,166 +633,178 @@ If Scid fails to start, use the </i><b>-nodock</b><i> command-line option to sta
 <p><footer>Updated: Scid vs. PC 4.14, Dec 2014</footer></p> }
 
 set helpTitle(Menus) "Menus"
-set helpText(Menus) {<h1>Scid Menus</h1>
-
+set helpText(Menus) "<h1> $::scidName Main Menus</h1>"
+append helpText(Menus) {
   <h3><name File>File</name></h3>
   <ul>
-  <li><green>New</green>  Creates a new empty Scid Database.</li>
-  <li><green>Open</green>  Opens an existing Scid Database.</li>
-  <li><green>Save Pgn</green>  Save this game as a PGN file.</li>
-  <li><green>Close</green>  Closes the current Scid Database.</li>
-  <li><green>Read-Only</green>  Makes the current database read-only.</li>
-  <li><green>Finder</green>  Opens the <a Finder>File Finder</a>.</li>
-  <li><green>Bookmarks</green>  Show and edit <a Bookmarks>Bookmarks</a>.</li>
+  <li><b>New</b>  Creates a new empty Scid database.</li>
+  <li><b>Open</b>  Opens an existing database/file.</li>
+  <li><b>Save Pgn</b>  Save this game as a PGN file.</li>
+  <li><b>Close</b>  Closes the current database/file.</li>
+  <li><b>Read-Only</b>  Makes the current database read-only.</li>
+  <li><b>Finder</b>  Opens the <a Finder>File Finder</a>.</li>
+  <li><b>Bookmarks</b>  Show and edit <a Bookmarks>Bookmarks</a>.</li>
   <br>
-  <li><green>Switch to Base</green>  Switch between the nine available databases (including the <a Clipbase>Clipbase</a>).</li>
-  <li><green>Open Base as Tree</green></li>
-  <li><green>Open Recent as Tree</green>  Open database in a <a Tree>tree window</a>. The databases will be closed when the tree is closed.</li>
+  <li><b>Switch to Base</b>  Switch between the nine available databases (including the <a Clipbase>Clipbase</a>).</li>
+  <li><b>Open Base as Tree</b></li>
+  <li><b>Open Recent as Tree</b>  Open database in a <a Tree>tree window</a>. The databases will be closed when the tree is closed.</li>
   <br>
-  <li><green>Exit</green>  Exit Scid. </li>
+  <li><b>Exit</b>  Exit Scid. </li>
+  </ul>
+
+  <h3><name Edit>Play</name></h3>
+  <ul>
+  <li> Play against computer, online, and training.</li>
   </ul>
 
   <h3><name Edit>Edit</name></h3>
   <ul>
-  <li><green>Setup Board</green>  Set a (non-standard) start position for the current game.</li>
-  <li><green>Copy FEN</green>  Set the clipboard to the FEN representing current position.</li>
-  <li><green>Copy PGN</green>  Set the clipboard to the game PGN.</li>
-  <li><green>Paste FEN</green>  Set-up board according to FEN in clipboard.</li>
-  <li><green>Paste PGN</green>  Import a game from PGN in clipboard.</li>
+  <li><b>Setup Board</b>  Set a (non-standard) start position for the current game.</li>
+  <li><b>Copy FEN</b>  Set the clipboard to the FEN representing current position.</li>
+  <li><b>Copy PGN</b>  Set the clipboard to the game PGN.</li>
+  <li><b>Paste FEN</b>  Set-up board according to FEN in clipboard.</li>
+  <li><b>Paste PGN</b>  Import a game from PGN in clipboard.</li>
   <br>
-  <li><green>Empty Clipbase</green>  Clear the temporary database (<a Clipbase>Clipbase</a>).</li>
-  <li><green>Copy to Clipbase</green>  Copies the current game to the <a Clipbase>Clipbase</a> database.</li>
-  <li><green>Paste from Clipbase</green>  Pastes the active game of the <a Clipbase>Clipbase</a> to be the active game of the current database.</li>
+  <li><b>Empty Clipbase</b>  Clear the temporary database (<a Clipbase>Clipbase</a>).</li>
+  <li><b>Copy to Clipbase</b>  Copies the current game to the <a Clipbase>Clipbase</a> database.</li>
+  <li><b>Paste from Clipbase</b>  Pastes the active game of the <a Clipbase>Clipbase</a> to be the active game of the current database.</li>
   <br>
-  <li><green>Strip</green>  Strips all comments or variations from the current game.</li>
-  <li><green>Undo</green>  Undo changes to this game. The undo buffer holds 20 positions.</li>
-  <li><green>Redo</green>  Redo changes.</li>
+  <li><b>Strip</b>  Strips all comments or variations from the current game.</li>
+  <li><b>Undo</b>  Undo changes to this game. The undo buffer holds 20 positions.</li>
+  <li><b>Redo</b>  Redo changes.</li>
   <br>
-  <li><green>Add Variation</green>  Adds a new empty variation for the
+  <li><b>Add Variation</b>  Adds a new empty variation for the
   next move, or for the previous move if there is no next move yet.</li>
-  <li><green>Paste Variation</green>  Pastes the current text selection as a variation.</li>
-  <li><green>Delete Variation</green>  Provides a submenu of variations for
+  <li><b>Paste Variation</b>  Pastes the current text selection as a variation.</li>
+  <li><b>Delete Variation</b>  Provides a submenu of variations for
   the current move, so one can be deleted.</li>
-  <li><green>Make First Variation</green>  Promotes a variation to be the
+  <li><b>Make First Variation</b>  Promotes a variation to be the
   first variation of the current move.</li>
-  <li><green>Promote Variation to Main line</green>  Promotes a variation
+  <li><b>Promote Variation to Main line</b>  Promotes a variation
   to be the main line, swapping it with its parent.</li>
-  <li><green>Try Variation</green>  Enters <a Moves Trial>trial mode</a> for
+  <li><b>Try Variation</b>  Enters <a Moves Trial>trial mode</a> for
   testing a temporary variation without altering the current game.</li>
   </ul>
 
   <h3><name Game>Game</name></h3>
   <ul>
-  <li><green>New Game</green>  Resets the active game to an empty state, discarding any unsaved changes.</li>
-  <li><green>Replace Game</green>  Saves the current game, replacing it in the database.</li>
-  <li><green>Add Game</green>  Save this game, adding one to the database.</li>
+  <li><b>New Game</b>  Resets the scratch game.
+  <li><b>Replace Game</b>  Saves the current game, replacing it in the database.</li>
+  <li><b>Add Game</b>  Save this game, adding one to the database.</li>
   <br>
-  <li><green>Set Game Info</green>  Set various detials about the current game.</li>
-  <li><green>Browse Games</green>  Show a list of games in this database.</li>
+  <li><b>Set Game Info</b>  Set various details about the current game.</li>
+  <li><b>Browse Game</b> Popup a small Game Browser window.</li>
+  <li><b>List all Games</b>  Show the <a GameList>list of games</a> in this database.</li>
   <br>
-  <li><green>Delete Game</green>  Mark as deleted (for removal during compaction).</li>
-  <li><green>Reload this game</green>  Reloads the current game, discarding any changes made.</li>
+  <li><b>Delete Game</b>  Mark as deleted (for removal during compaction).</li>
+  <li><b>Reload this game</b>  Reloads the current game, discarding any changes made.</li>
   <br>
-  <li><green>Load First/Previous/Next/Last Game</green>  These load the first, previous, next or last game in the <a Filter>filter</a>.</li>
-  <li><green>Load Game Number</green>  Loads the game given its game number
+  <li><b>Load First/Previous/Next/Last Game</b>  These load the first, previous, next or last game in the <a Filter>filter</a>.</li>
+  <li><b>Load Game Number</b>  Loads the game given its game number
   in the current database.</li>
   <br>
-  <li><green>Identify opening</green>  Finds the deepest
+  <li><b>Identify opening</b>  Finds the deepest
   position in the current game that is in the ECO file.</li>
-  <li><green>Goto move number</green>  Goes to the specified move number in
-  the current game.</li>
-  <li><green>Find novelty</green>  Finds the first move of the current game
+  <li><b>Goto move number</b>  Goes to the specified move number in the current game.</li>
+  <li><b>Find novelty</b>  Finds the first move of the current game
   that has not been played before.</li>
   </ul>
 
   <h3><name Search>Search</name></h3>
   <ul>
-  <li><green>Reset Filter</green>  Resets the <a Filter>filter</a> so all games are included.</li>
-  <li><green>Negate filter</green>  Inverts the filter to only include games that were excluded.</li>
-  <li><green>Filter to Last Move</green>  Make all games show the last move when loaded.</li>
+  <li><b>Reset Filter</b>  Resets the <a Filter>filter</a> so all games are included.</li>
+  <li><b>Negate filter</b>  Inverts/toggles the game filter.</li>
+  <li><b>Filter to Last Move</b>  Make all games show the last move when loaded.</li>
   <br>
-  <li><green>General</green>  Searches by <a Searches Header>header</a> information such as player names.</li>
-  <li><green>Current board</green>  Searches for the <a Searches Board>current board</a> position.</li>
-  <li><green>Material/Pattern</green>  Searches by <a Searches Material>material</a> or chessboard patterns.</li>
-  <li><green>Move</green> Find a certain move or <a Searches Move>move combination</a>.</li>
+  <li><b>General</b>  Searches by <a Searches Header>header</a> information such as player names.</li>
+  <li><b>Current board</b>  Searches for the <a Searches Board>current board</a> position.</li>
+  <li><b>Material/Pattern</b>  Searches by <a Searches Material>material</a> or chessboard patterns.</li>
+  <li><b>Move</b> Find a certain move or <a Searches Move>move combination</a>.</li>
+  <li><b>CQL</b> Show the (technical) CQL game search window.</li>
   <br>
-  <li><green>Player Finder</green>  Search for a player name.</li>
-  <li><green>Tournament Finder</green>  Search for a tournament by date or name.</li>
+  <li><b>Player Finder</b>  Search for a player name.</li>
+  <li><b>Tournament Finder</b>  Search for a tournament by date or name.</li>
   <br>
-  <li><green>Load search file</green>  Searches using
+  <li><b>Load search file</b>  Searches using
   <a Searches Settings>settings</a> from a SearchOptions file.</li>
   </ul>
 
   <h3><name Windows>Windows</name></h3>
   <ul>
-  <li><green>Game Info</green>  Show/Hide the Game information window.</li>
-  <li><green>Comment Editor</green>  Opens/closes the <a Comment>Comment Editor</a>.</li>
-  <li><green>Game List window</green>  Opens/closes the <a GameList>Game List</a>.</li>
-  <li><green>PGN window</green>  Opens/closes the <a PGN>PGN window</a>.</li>
-  <li><green>Crosstable</green>  Constructs a tournament <a Crosstable>crosstable</a> for the current game. </li>
-  <li><green>Player Finder</green>  Opens/closes the <a PList>Player Finder</a> window.</li>
-  <li><green>Tournament Finder</green>  Opens/closes the <a Tmt>Tournament Finder</a> window.</li>
+  <li><b>Game Info</b>  Show/hide the Game Information window.</li>
+  <li><b>Comment Editor</b>  Opens/reveals the <a Comment>Comment Editor</a>.</li>
+  <li><b>Game List window</b>  Opens/reveals the <a GameList>Game List</a>.</li>
+  <li><b>PGN window</b>  Opens/reveals the <a PGN>PGN window</a>.</li>
+  <li><b>Crosstable</b>  Constructs a tournament <a Crosstable>crosstable</a> for the current game. </li>
+  <li><b>Player Finder</b>  Opens/reveals the <a PList>Player Finder</a> window.</li>
+  <li><b>Tournament Finder</b>  Opens/reveals the <a Tmt>Tournament Finder</a> window.</li>
   <br>
-  <li><green>Maintenance window</green>  Opens/closes the <a Maintenance>Maintenance</a> Window.</li>
+  <li><b>Maintenance window</b>  Opens/reveals the <a Maintenance>Maintenance</a> Window.</li>
   <br>
-  <li><green>ECO Browser</green>  Opens/closes the <a ECO browser>ECO Browser</a> window.</li>
-  <li><green>Statistics window</green>  Opens/closes the
-  <term>Filter statistics window</term> which gives a win/loss summary
+  <li><b>ECO Browser</b>  Opens/closes the <a ECO browser>ECO Browser</a> window.</li>
+  <li><b>Statistics window</b>  Opens/reveals the <b>Filter statistics window</b> which gives a win/loss summary
   of the games in the <a Filter>filter.</a></li>
-  <li><green>Tree window</green>  Opens/closes the <a Tree>tree window</a>.</li>
-  <li><green>Tablebase window</green>  Opens/closes the endgame <a TB>tablebase</a> information.</li>
-  <li><green>Book Window</green>  Opens/closes the Book window.</li>
-  <li><green>Correspondence Window</green>  Opens/closes the Correspondence window.</li>
+  <li><b>Tree window</b>  Opens/reveals the <a Tree>tree window</a>.</li>
+  <li><b>Tablebase window</b>  Opens/reveals the endgame <a TB>tablebase</a> information.</li>
+  <li><b>Book Window</b>  Opens/reveals the Book window.</li>
+  <li><b>Correspondence Window</b>  Opens/reveals the Correspondence window.</li>
   </ul>
 
   <h3><name Tools>Tools</name></h3>
   <ul>
-  <li><green>Analysis Engines</green>  Configure Analysis Engines.</li>
-  <li><green>Analysis engine #1</green>
-  <li><green>Analysis engine #2</green>  Start/stops <a Analysis>analysis engines</a>,
+  <li><b>Analysis Engines</b>  Configure Analysis Engines.</li>
+  <li><b>Analysis engine #1</b>
+  <li><b>Analysis engine #2</b>  Start/stops <a Analysis>analysis engines</a>,
  displaying the evaluation of the current position.</li>
   <br>
-  <li><green>Maintenance</green>  Database <a Maintenance>maintenance</a> functions.</li>
+  <li><b>Maintenance</b>  Database <a Maintenance>maintenance</a> functions.</li>
   <ul>
-  <li><green>Maintenance window</green>  Opens/closes the database maintenance window.</li>
-  <li><green>Name editor</green>  Replaces all occurrences of a player,
-  <li><green>Compact Database</green>  Perform database compaction.</li>
-  <li><green>Sort</green>  Sort base by name, rating, etc.</li>
-  <li><green>Spellcheck</green>  Search the spelling file for possible Name corrections.</li>
-  <li><green>Delete twin games</green>  Finds <a Maintenance Twins>twin</a> games in the database.</li>
+  <li><b>Maintenance window</b>  Opens/closes the database maintenance window.</li>
+  <li><b>Name editor</b>  Replaces all occurrences of a player,
+  <li><b>Compact Database</b>  Perform database compaction.</li>
+  <li><b>Sort</b>  Sort base by name, rating, etc.</li>
+  <li><b>Spellcheck</b>  Search the spelling file for possible Name corrections.</li>
+  <li><b>Delete twin games</b>  Finds <a Maintenance Twins>twin</a> games in the database.</li>
   event site or round name.</li>
-  <li><green>Repair Base</green>  Repair broken database.</li>
+  <li><b>Repair Base</b>  Repair broken database.</li>
   </ul>
 
-  <li><green>Book Tuning</green>  For editing Polyglot books.</li>
-  <li><green>Player report</green>  Generates an <a Reports Player>opening report</a>.</li>
-  <li><green>Opening report</green>  Generates an <a Reports Opening>opening report</a> for the current position.</li>
-  <li><green>Piece Tracker</green>  Opens the <a PTracker>piece tracker</a> window.</li>
-  <li><green>Email manager</green>  Opens/closes the <a Email>email manager</a> window, for managing email correspondence games.</li>
-  <li><green>Connect Hardware</green>  ... Configure external hardware devices.</li>
+  <li><b>Book Tuning</b>  For editing Polyglot books.</li>
+  <li><b>Player report</b>  Generates an <a Reports Player>opening report</a>.</li>
+  <li><b>Opening report</b>  Generates an <a Reports Opening>opening report</a> for the current position.</li>
+  <li><b>Piece Tracker</b>  Opens the <a PTracker>piece tracker</a> window.</li>
+  <li><b>Email manager</b>  Opens/closes the <a Email>email manager</a> window, for managing email correspondence games.</li>
+  <li><b>Connect Hardware</b>  ... Configure external hardware devices.</li>
   <br>
-  <li><green>Rel Filter Graph Ratings</green></li>
-  <li><green>Abd Filter Graph Ratings</green>  Displays the <a Graphs Filter>filter graphs</a>.</li>
-  <li><green>Player Ratings</green>  Displays the <a Graphs Rating>rating graph</a>.</li>
-  <li><green>Score Graph</green>  Displays the <a Graphs Score>score graph</a>.</li>
+  <li><b>Rel Filter Graph Ratings</b></li>
+  <li><b>Abd Filter Graph Ratings</b>  Displays the <a Graphs Filter>filter graphs</a>.</li>
+  <li><b>Player Ratings</b>  Displays the <a Graphs Rating>rating graph</a>.</li>
+  <li><b>Score Graph</b>  Displays the <a Graphs Score>score graph</a>.</li>
   <br>
-  <li><green>Export current game</green>  Saves the current game to a text
+  <li><b>Export current game</b>  Saves the current game to a text
   file in PGN, HTML or LaTeX format. See the <a Export>export</a> help
   page.</li>
-  <li><green>Export all filter games</green>  Saves all games in the
+  <li><b>Export all filter games</b>  Saves all games in the
   search <a Filter>filter</a> to a text file in PGN, HTML or
   LaTeX format. See the <a Export>export</a> help page.</li>
   <br>
-  <li><green>Import PGN text</green>  Opens the <a Import>Import window</a>
+  <li><b>Import PGN text</b>  Opens the <a Import>Import window</a>
   for entering a game by typing or pasting its text in
   <a PGN>PGN format</a>.</li>
-  <li><green>Import PGN file</green>  Imports a whole file containing
+  <li><b>Import PGN file</b>  Imports a whole file containing
   games in PGN format to the current database. Note, that several PGN
   files can be selected in this dialogue at once.</li>
   <br>
-  <li><green>Board Screenshot</green>  Save a screenshot of the board to a file.</li>
+  <li><b>Board Screenshot</b>  Save a screenshot of the board to a file.</li>
   </ul>
-  <p><footer>Updated: Scid vs. PC 4.17, Mar 2016</footer></p>
+
+  <h3><name Options>Options</name></h3>
+  <ul>
+  <li>Various <a Options>Options</a> settings.</li>
+
+  </ul>
+
+  <p><footer>Updated: Scid vs. PC 4.22, Feb 2021</footer></p>
 }
 
 
