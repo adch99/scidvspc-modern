@@ -1514,8 +1514,7 @@ translate D WinWonGame {Übungen zu Ende spielen}
 translate D Lines {Variantenzahl}
 translate D ConfigureUCIengine {UCI-Engine konfigurieren}
 translate D SpecificOpening {Ausgewählte Eröffnung}
-# ====== TODO To be translated ======
-translate D ImportECO {Import ECO}
+translate D ImportECO {ECO importieren}
 translate D StartNewGame {Neue Partie}
 translate D FixedLevel {Festgelegte Spielstärke}
 translate D Opening {Eröffnung}
@@ -2657,193 +2656,198 @@ set helpText(D,Docking) {<h1>Angedockte Fenster</h1>
 <p><footer>Aktualisiert: Scid vs. PC 4.14, Dezember 2014</footer></p> }
 
 set helpTitle(D,Menus) "Menüs"
-set helpText(D,Menus) {<h1>Menüs</h1>
-
+set helpText(D,Menus) "<h1>$::scidName Hauptmenü</h1>"
+append helpText(D,Menus) {
   <h3><name File>Datei</name></h3>
   <ul>
-  <li><green>Neu...</green>  Erstellt eine neue leere Scid-Datenbank.</li>
-  <li><green>Öffnen...</green>  Öffnet eine Scid-Datenbank.</li>
-  <li><green>Speichere PGN...</green>  Speichert die Partie in eine PGN-Datei.</li>
-  <li><green>Schließen</green>  Schließt die aktuelle Scid-Datenbank.</li>
-  <li><green>Schreibschutz...</green>  Setzt die aktuelle Datenbank in
+  <li><b>Neu...</b>  Erstellt eine neue leere Scid-Datenbank.</li>
+  <li><b>Öffnen...</b>  Öffnet eine Scid-Datenbank.</li>
+  <li><b>Speichere PGN...</b>  Speichert die Partie in eine PGN-Datei.</li>
+  <li><b>Schließen</b>  Schließt die aktuelle Scid-Datenbank.</li>
+  <li><b>Schreibschutz...</b>  Setzt die aktuelle Datenbank in
   den Nur-Lese-Modus.</li>
-  <li><green>Finder</green>  Öffnet den <a Finder>Dateifinder</a>.</li>
-  <li><green>Lesezeichen</green>  Zeigt und bearbeitet <a Bookmarks>Lesezeichen</a>.</li>
+  <li><b>Finder</b>  Öffnet den <a Finder>Dateifinder</a>.</li>
+  <li><b>Lesezeichen</b>  Zeigt und bearbeitet <a Bookmarks>Lesezeichen</a>.</li>
   <br>
-  <li><green>Datenbank wechseln...</green>  Wechselt zwischen neun
+  <li><b>Datenbank wechseln...</b>  Wechselt zwischen neun
   verfügbaren Datenbanken (einschließlich der <a Clipbase>Ablagedatenbank</a>).</li>
-  <li><green>Öffne Datenbank als Baum</green></li>
-  <li><green>Letzte Datenbank als Baum</green>  Öffnet eine Datenbank
+  <li><b>Öffne Datenbank als Baum</b></li>
+  <li><b>Letzte Datenbank als Baum</b>  Öffnet eine Datenbank
   in einem <a Tree>Zugbaumfenster</a>. Die Datenbanken werden
   geschlossen, wenn der Zugbaum geschlossen wird.</li>
   <br>
-  <li><green>Ende</green>  Beendet Scid. </li>
+  <li><b>Ende</b>  Beendet Scid. </li>
   </ul>
 
   <h3><name Edit>Bearbeiten</name></h3>
-  <li><green>Stellungseingabe...</green>  Eine beliebige Brettstellung setzen</li>
-  <li><green>Stellung kopieren</green>  Kopiert die FEN-Werte der
+  <li><b>Stellungseingabe...</b>  Eine beliebige Brettstellung setzen</li>
+  <li><b>Stellung kopieren</b>  Kopiert die FEN-Werte der
   aktuellen Brettstellung in die Zwischenablage.</li>
-  <li><green>PGN-Stellung kopieren</green>  Kopiert die Zwischenablage auf die PGN-Partie.</li>
-  <li><green>Stellung einfügen</green>  Erstellt eine Brettposition gemäß FEN
+  <li><b>PGN-Stellung kopieren</b>  Kopiert die Zwischenablage auf die PGN-Partie.</li>
+  <li><b>Stellung einfügen</b>  Erstellt eine Brettposition gemäß FEN
   in der Zwischenablage.</li>
-  <li><green>PGN-Partie aus Ablage einfügen...</green>  Importiert eine Partie aus PGN in der Zwischenablage.</li>
+  <li><b>PGN-Partie aus Ablage einfügen...</b>  Importiert eine Partie aus PGN in der Zwischenablage.</li>
   <br>
-  <li><green>Ablage leeren</green>  Löscht die temporäre Datenbank (<a Clipbase>Ablagedatenbank</a>).</li>
-  <li><green>Partie in Ablage kopieren</green>  Kopiert die aktuelle Partie zur <a Clipbase>Ablagedatenbank</a>.</li>
-  <li><green>Partie aus Ablage einfügen</green>  Fügt die aktive Partie in der <a Clipbase>Ablagedatenbank</a> als aktive Partie in die aktuelle Datenbank ein.</li>
+  <li><b>Ablage leeren</b>  Löscht die temporäre Datenbank (<a Clipbase>Ablagedatenbank</a>).</li>
+  <li><b>Partie in Ablage kopieren</b>  Kopiert die aktuelle Partie zur <a Clipbase>Ablagedatenbank</a>.</li>
+  <li><b>Partie aus Ablage einfügen</b>  Fügt die aktive Partie in der <a Clipbase>Ablagedatenbank</a> als aktive Partie in die aktuelle Datenbank ein.</li>
   <br>
-  <li><green>Entfernen</green>  Entfernt alle Kommentare und Varianten aus der aktuellen Partie.</li>
-  <li><green>Rückgängig</green>  Macht Änderungen zu dieser Partie
+  <li><b>Entfernen</b>  Entfernt alle Kommentare und Varianten aus der aktuellen Partie.</li>
+  <li><b>Rückgängig</b>  Macht Änderungen zu dieser Partie
   rückgängig. Der Puffer für das Rückgängigmachen kann 20 Stellungen halten.</li>
-  <li><green>Wiederherstellen</green>  Stellt Änderungen wieder her.</li>
+  <li><b>Wiederherstellen</b>  Stellt Änderungen wieder her.</li>
   <br>
-  <li><green>Variante hinzufügen</green>  Fügt eine neue leere
+  <li><b>Variante hinzufügen</b>  Fügt eine neue leere
   Variante für den nächsten Zug hinzu oder für den vorhergehenden Zug,
   falls es noch keinen nächsten Zug gibt.</li>
-  <li><green>Variante einfügen</green>  Fügt die aktuelle Textauswahl
+  <li><b>Variante einfügen</b>  Fügt die aktuelle Textauswahl
   als Variante ein.</li>
-  <li><green>Variante löschen</green>  Bietet für den aktuellen Zug
+  <li><b>Variante löschen</b>  Bietet für den aktuellen Zug
   ein Variantenuntermenü, so daß eine Variante gelöscht werden kann.</li>
-  <li><green>Als erste Variante setzen</green>  Bietet eine Variante,
+  <li><b>Als erste Variante setzen</b>  Bietet eine Variante,
   die zur ersten Variante des aktuellen Zuges wird.</li>
-  <li><green>Variante als Partiefortsetzung</green>  Bietet eine
+  <li><b>Variante als Partiefortsetzung</b>  Bietet eine
   Variante als Hauptfortsetzung im Tausch mit ihrem Vorgänger.</li>
-  <li><green>Variante testen</green>  Ermöglicht einen <a Moves
+  <li><b>Variante testen</b>  Ermöglicht einen <a Moves
   Trial>Versuchsmodus</a>, um eine temporäre Variante auszuprobieren,
   ohne die aktuelle Partie zu ändern.</li>
 
   <h3><name Game>Partie</name></h3>
   <ul>
-  <li><green>Neue Partie</green>  Setzt die aktive Partie in einen
+  <li><b>Neue Partie</b>  Setzt die aktive Partie in einen
   neuen Zustand. Ungesicherte Änderungen gehen verloren.</li>
-  <li><green>Partie ersetzen...</green>  Speichert und ersetzt die
+  <li><b>Partie ersetzen...</b>  Speichert und ersetzt die
   aktuelle Partie in der Datenbank.</li>
-  <li><green>Partie speichern...</green>  Speichert diese Partie und
+  <li><b>Partie speichern...</b>  Speichert diese Partie und
   fügt sie der Datenbank hinzu.</li>
   <br>
-  <li><green>Partieinformationen setzen...</green>  Setzt verschiedene
+  <li><b>Partieinformationen setzen...</b>  Setzt verschiedene
   Angaben zur aktuellen Partie.</li>
-  <li><green>Partien durchsuchen</green>  Zeigt eine einzelne Partie
+  <li><b>Partien durchsuchen</b>  Zeigt eine einzelne Partie
   in einem separaten Fenster an. In diesem können weitere Partien angezeigt werden.</li>
-  <li><green>Alle Spiele</green>  Zeigt eine Liste mit allen Partien an.</li>
+  <li><b>Alle Spiele</b>  Zeigt eine Liste mit allen Partien an.</li>
   <br>
-  <li><green>Partie löschen</green>  Partie als gelöscht kennzeichnen
+  <li><b>Partie löschen</b>  Partie als gelöscht kennzeichnen
   (für ein endgültiges Löschen während einer Datenbankkomprimierung).</li>
-  <li><green>Partie neu laden</green>  Lädt die aktuelle Partie unter Wegfall bisher durchgeführter Änderungen.</li>
+  <li><b>Partie neu laden</b>  Lädt die aktuelle Partie unter Wegfall bisher durchgeführter Änderungen.</li>
   <br>
-  <li><green>Erste/Letzte/Nächste/Vorherige/Zufällige Partie laden</green>  Lädt die im <a Filter>Filter</a> enthaltene
+  <li><b>Erste/Letzte/Nächste/Vorherige/Zufällige Partie laden</b>  Lädt die im <a Filter>Filter</a> enthaltene
   erste/letzte/nächste/vorherige oder eine zufällige Partie.</li>
-  <li><green>Lade Partie Nummer...</green>  Lädt die Partie mit der
+  <li><b>Lade Partie Nummer...</b>  Lädt die Partie mit der
   gegebenen Nummer aus der aktuellen Datenbank.</li>
   <br>
-  <li><green>Eröffnung identifizieren</green>  Findet die am weitesten
+  <li><b>Eröffnung identifizieren</b>  Findet die am weitesten
   entfernte Position in der aktuellen Partie, die in der ECO-Datei
   enthalten ist.</li>
-  <li><green>Zugnummer...</green>  Geht in der aktuellen Partie zur
+  <li><b>Zugnummer...</b>  Geht in der aktuellen Partie zur
   angegebenen Zugnummer.</li>
-  <li><green>Finde Neuerung...</green>  Findet in der aktuellen Partie
+  <li><b>Finde Neuerung...</b>  Findet in der aktuellen Partie
   den ersten Zug, der bisher nicht gespielt wurde.</li>
   </ul>
 
   <h3><name Search>Suchen</name></h3>
   <ul>
-  <li><green>Filter zurücksetzen</green>  Setzt
+  <li><b>Filter zurücksetzen</b>  Setzt
   den <a Filter>Filter</a> zurück, so daß alle Partien enthalten sind.</li>
-  <li><green>Filter invertieren</green>  Kehrt den Filter um, um nur
+  <li><b>Filter invertieren</b>  Kehrt den Filter um, um nur
   die Partien anzuzeigen, die bisher ausgeschlossen waren.</li>
-  <li><green>Filterpartien mit Schlußstellung laden</green>  Zeigt
+  <li><b>Filterpartien mit Schlußstellung laden</b>  Zeigt
   alle Partien mit ihrem letzten Zug.</li>
   <br>
-  <li><green>Partiedaten...</green>  Führt eine <a Searches Header>Partiedatensuche</a> durch wie z.B. Spielernamen.</li>
-  <li><green>Brett...</green>  Führt eine <a Searches Board>Brettsuche</a> durch.</li>
-  <li><green>Material/Muster...</green>  Führt eine Muster- oder <a Searches Material>Materialsuche</a> durch.</li>
-  <li><green>Züge</green> Findet einen bestimmten Zug oder <a Searches Move>Zugkombination</a>.</li>
-  <li><green>CQL</green> Die Schachabfragesprache. Details siehe <url http://www.gadycosteff.com/cql>http://www.gadycosteff.com/cql</url>.</li>
+  <li><b>Partiedaten...</b>  Führt eine <a Searches Header>Partiedatensuche</a> durch wie z.B. Spielernamen.</li>
+  <li><b>Brett...</b>  Führt eine <a Searches Board>Brettsuche</a> durch.</li>
+  <li><b>Material/Muster...</b>  Führt eine Muster- oder <a Searches Material>Materialsuche</a> durch.</li>
+  <li><b>Züge</b> Findet einen bestimmten Zug oder <a Searches Move>Zugkombination</a>.</li>
+  <li><b>CQL</b> Die Schachabfragesprache. Details siehe <url http://www.gadycosteff.com/cql>http://www.gadycosteff.com/cql</url>.</li>
   <br>
-  <li><green>Spielersuche</green>  Sucht nach einem Spielernamen.</li>
-  <li><green>Turniersuche</green>  Sucht nach einem Turner mittels
+  <li><b>Spielersuche</b>  Sucht nach einem Spielernamen.</li>
+  <li><b>Turniersuche</b>  Sucht nach einem Turner mittels
   Datum oder Name.</li>
   <br>
-  <li><green>Mit Suchoptionsdatei...</green>  Führt eine Suche durch
+  <li><b>Mit Suchoptionsdatei...</b>  Führt eine Suche durch
   anhand Kriterien, die in einer <a Searches Settings>Suchoptionsdatei</a> gespeichert sind.</li>
   </ul>
 
   <h3><name Windows>Fenster</name></h3>
   <ul>
-  <li><green>Partieinformationen</green>  Zeigt/versteckt Partieinformationen.</li>
-  <li><green>Kommentareditor</green>  Öffnet den <a Comment>Kommentareditor</a>.</li>
-  <li><green>Partienliste</green>  Öffnet die <a GameList>Partienliste</a>.</li>
-  <li><green>PGN-Fenster</green>  Öffnet das <a PGN>PGN-Fenster</a>.</li>
-  <li><green>Kreuztabelle</green>  Erstellt für die aktuelle Partie eine <a Crosstable>Kreuztabelle</a>.</li>
-  <li><green>Spielersuche</green>  Öffnet das Fenster <a PList>Spielersuche</a>.</li>
-  <li><green>Turniersuche</green>  Öffnet das Fenster <a Tmt>Turniersuche</a>.</li>
-  <li><green>Wartungsfenster</green>  Öffnet das Fenster <a Maintenance>Wartung</a>.</li>
-  <li><green>ECO-Auswertung</green>  Öffnet das Fenster <a ECO browser>ECO-Auswertung</a>.</li>
-  <li><green>Statistik</green> Öffnet das
+  <li><b>Partieinformationen</b>  Zeigt/versteckt Partieinformationen.</li>
+  <li><b>Kommentareditor</b>  Öffnet den <a Comment>Kommentareditor</a>.</li>
+  <li><b>Partienliste</b>  Öffnet die <a GameList>Partienliste</a>.</li>
+  <li><b>PGN-Fenster</b>  Öffnet das <a PGN>PGN-Fenster</a>.</li>
+  <li><b>Kreuztabelle</b>  Erstellt für die aktuelle Partie eine <a Crosstable>Kreuztabelle</a>.</li>
+  <li><b>Spielersuche</b>  Öffnet das Fenster <a PList>Spielersuche</a>.</li>
+  <li><b>Turniersuche</b>  Öffnet das Fenster <a Tmt>Turniersuche</a>.</li>
+  <li><b>Wartungsfenster</b>  Öffnet das Fenster <a Maintenance>Wartung</a>.</li>
+  <li><b>ECO-Auswertung</b>  Öffnet das Fenster <a ECO browser>ECO-Auswertung</a>.</li>
+  <li><b>Statistik</b> Öffnet das
   Fenster <term>Statistik</term>, das eine Zusammenfassung von Gewinn- und Verlustpartien im <a Filter>Filter</a> liefert.</li>
-  <li><green>Zugbaum</green>  Öffnet das <a Tree>Zugbaumfenster</a>.</li>
-  <li><green>Endspieltabellen</green>  Öffnet das Fenster mit <a TB>Endspiel</a>informationen.</li>
-  <li><green>Eröffnungsbuch</green>  Öffnet das Fenster mit Eröffnungsbüchern.</li>
-  <li><green>Fernschach</green>  Öffnet das Fernschachfenster.</li>
+  <li><b>Zugbaum</b>  Öffnet das <a Tree>Zugbaumfenster</a>.</li>
+  <li><b>Endspieltabellen</b>  Öffnet das Fenster mit <a TB>Endspiel</a>informationen.</li>
+  <li><b>Eröffnungsbuch</b>  Öffnet das Fenster mit Eröffnungsbüchern.</li>
+  <li><b>Fernschach</b>  Öffnet das Fernschachfenster.</li>
   </ul>
 
   <h3><name Tools>Werkzeuge</name></h3>
   <ul>
-  <li><green>Analyse-Engine</green>  Konfiguriert die Analyse-Engine</li>
-  <li><green>Analyse-Engine #1</green>  Startet/stoppt
+  <li><b>Analyse-Engine</b>  Konfiguriert die Analyse-Engine</li>
+  <li><b>Analyse-Engine #1</b>  Startet/stoppt
   die <a Analysis>Analyse-Engine Nr. 1 und zeigt die Bewertung der
   aktuellen Stellung</a>.
-  <li><green>Analyse-Engine #2</green>  wie vorstehend
+  <li><b>Analyse-Engine #2</b>  wie vorstehend
   <br>
-  <li><green>Wartung</green>  Funktionen zur <a Maintenance>Datenbankwartung</a>.</li>
+  <li><b>Wartung</b>  Funktionen zur <a Maintenance>Datenbankwartung</a>.</li>
   <ul>
-  <li><green>Wartungsfenster</green>  Öffnet/schließt das Datenbankwartungsfenster.</li>
-  <li><green>Namenseditor</green>  Erlaubt das Ändern von Partiedaten
+  <li><b>Wartungsfenster</b>  Öffnet/schließt das Datenbankwartungsfenster.</li>
+  <li><b>Namenseditor</b>  Erlaubt das Ändern von Partiedaten
   wie Namen von Spielern, Turnierbezeichnung, Ort, Runde, Elo, Tagesdatum
   und Turnierdatum</li>
-  <li><green>Datenbank komprimieren...</green>  Führt eine
+  <li><b>Datenbank komprimieren...</b>  Führt eine
   Datenbankkomprimierung durch.</li>
-  <li><green>Sortieren...</green>  Sortiert die Datenbank nach Namen,
+  <li><b>Sortieren...</b>  Sortiert die Datenbank nach Namen,
   Wertungszahl usw.</li>
-  <li><green>Schreibkorrektur Spieler/Ereignis/Ort/Runde...</green>
+  <li><b>Schreibkorrektur Spieler/Ereignis/Ort/Runde...</b>
   Durchsucht die Schreibkorrekturdatei für mögliche Namenskorrekturen.</li>
-  <li><green>Dubletten löschen...</green>  Findet <a Maintenance Twins>Dubletten</a> in der Datenbank.</li>
-  <li><green>Dubletten prüfen...</green>  Repariert eine fehlerhafte Datenbank.</li>
+  <li><b>Dubletten löschen...</b>  Findet <a Maintenance Twins>Dubletten</a> in der Datenbank.</li>
+  <li><b>Dubletten prüfen...</b>  Repariert eine fehlerhafte Datenbank.</li>
   </ul>
-  <li><green>Buch abstimmen</green>  Zum Editieren von PolyGlot-Eröffnungsbüchern.</li>
-  <li><green>Spielerbericht</green>  Erstellt für einen Spieler einen <a Reports Player>Eröffnungsbericht</a>.</li>
-  <li><green>Eröffnungsbericht</green>  Erstellt für die aktuelle Brettstellung einen <a Reports Opening>Eröffnungsbericht</a>.</li>
-  <li><green>Figurenverteilung</green>  Öffnet ein Fenster für die Ermittlung der <a PTracker>Figurenverteilung</a>.</li>
-  <li><green>E-Mail-Manager</green>  Öffnet/schließt das Fenster <a Email>E-Mail-Manager</a> für die Verwaltung von Fernschachpartien.</li>
-  <li><green>Hardware verbinden</green>  Ermöglicht das Einrichten externer Hardwaregeräte.</li>
+  <li><b>Buch abstimmen</b>  Zum Editieren von PolyGlot-Eröffnungsbüchern.</li>
+  <li><b>Spielerbericht</b>  Erstellt für einen Spieler einen <a Reports Player>Eröffnungsbericht</a>.</li>
+  <li><b>Eröffnungsbericht</b>  Erstellt für die aktuelle Brettstellung einen <a Reports Opening>Eröffnungsbericht</a>.</li>
+  <li><b>Figurenverteilung</b>  Öffnet ein Fenster für die Ermittlung der <a PTracker>Figurenverteilung</a>.</li>
+  <li><b>E-Mail-Manager</b>  Öffnet/schließt das Fenster <a Email>E-Mail-Manager</a> für die Verwaltung von Fernschachpartien.</li>
+  <li><b>Hardware verbinden</b>  Ermöglicht das Einrichten externer Hardwaregeräte.</li>
   <br>
-  <li><green>Rel. Filtergrafik</green>  Zeigt für <a Graphs Filter>gefilterte Partien</a> die Häufigkeit pro
+  <li><b>Rel. Filtergrafik</b>  Zeigt für <a Graphs Filter>gefilterte Partien</a> die Häufigkeit pro
   1.000 Partien bezüglich Dekaden, Jahren, Elo und Anzahl der Spielzüge grafisch an.</li>
-  <li><green>Abs. Filtergrafik</green>  Wie vorstehend, jedoch in absoluten Zahlen.</li>
-  <li><green>Ratingveränderung</green>  Zeigt eine <a Graphs Rating>Ratinggrafik</a> an.</li>
-  <li><green>Score Graph</green>  Zeigt für die aktuelle Partie eine <a Graphs Score>Grafik mit Bewertungszahlen</a>an.</li>
+  <li><b>Abs. Filtergrafik</b>  Wie vorstehend, jedoch in absoluten Zahlen.</li>
+  <li><b>Ratingveränderung</b>  Zeigt eine <a Graphs Rating>Ratinggrafik</a> an.</li>
+  <li><b>Score Graph</b>  Zeigt für die aktuelle Partie eine <a Graphs Score>Grafik mit Bewertungszahlen</a>an.</li>
   <br>
-  <li><green>Partie exportieren</green>  Speichert die aktuelle Partie
+  <li><b>Partie exportieren</b>  Speichert die aktuelle Partie
   in eine Textdatei im Format PGN, HTML oder LaTeX. Siehe die
   Hilfeseite über das <a Export>Exportieren von Partien</a>.</li>
-  <li><green>Alles im Filter exportieren</green>  Speichert
+  <li><b>Alles im Filter exportieren</b>  Speichert
   alle <a Filter>Filterpartien</a> in eine Textdatei im Format PGN,
   HTML oder LaTeX. Siehe die Hilfeseite über das <a Export>Exportieren
   von Partien</a>.</li>
   <br>
-  <li><green>Eine PGN-Partie importieren...</green>  Öffnet
+  <li><b>Eine PGN-Partie importieren...</b>  Öffnet
   ein <a Import>PGN-Importfenster</a> für das manuelle Eingeben von
   Partiezügen bzw. Einfügen von Text im <a PGN>PGN-Format</a>.</li>
-  <li><green>PGN-Partien importieren...</green>  Importiert eine
+  <li><b>PGN-Partien importieren...</b>  Importiert eine
   Datei, die Partien im PGN-Format enthält, in die aktuelle
   Datenbank. Beachten Sie, daß in diesem Dialog mehrere Dateien
   gleichzeitig ausgewählt werden können.</li>
   <br>
-  <li><green>Bildschirmfoto</green>  Speichert ein Bildschirmfoto
+  <li><b>Bildschirmfoto</b>  Speichert ein Bildschirmfoto
   des Schachbretts in eine Datei.</li>
   </ul>
-  <p><footer>Aktualisiert: Scid vs. PC 4.17, März 2016</footer></p>
+  <h3><name Options>Optionen</name></h3>
+  <ul>
+  <li>Verschiedene <a Options>Optionen und Einstellungen</a>.</li>
+  </ul>
+  
+  <p><footer>Aktualisiert: Scid vs. PC 4.22, Februar 2021</footer></p>
 }
 
 
@@ -3578,15 +3582,17 @@ set helpText(D,Switcher) {<h1>Der Datenbankwechsler</h1>
   zweite Symbol von links ist eine Schaltfläche
   für <a Bookmarks>Lesezeichen</a>.
   </p>
+
   <p>Ein Rechtsklick auf eine Datenbank liefert ein Kontextmenü. Hier
   kann man <a Filter>Filteroperationen</a> durchführen, die Datenbank
   in den Nur-Lese-Zustand versetzen oder die Datenbank schließen. Es
-  gibt auch ein Untermenü <green>Mehr</green>, wo man einen
-  <a Tree>Zugbaum</a> oder die <a Tree Best>besten Partien</a>
-  anzeigen lassen kann. Man kann hier auch das Datenbanksymbol
-  ändern. Ein Klick mit der mittleren Maustaste versteckt die
-  Datenbanksymbole oder zeigt sie wieder an.
-  </p>
+  gibt auch ein Untermenü <green>Mehr</green>, wo man einen <a
+  Tree>Zugbaum</a> oder die <a Tree Best>besten Partien</a> anzeigen
+  lassen kann  (die Funktionen "Partie laden Filter" und "Partie
+  speichern Filter" sind nicht implementiert). Man kann hier auch das
+  Datenbanksymbol ändern. Ein Klick mit der mittleren Maustaste
+  versteckt die Datenbanksymbole oder zeigt sie wieder an.</p>
+
   <h2><name draganddrop>Ziehen und Fallenlassen</name></h2>
   <p>Zwei getrennte Formen des Ziehen und Fallenlassens sind möglich.
   <br> <br>
@@ -4825,8 +4831,13 @@ set helpText(D,Maintenance) {<h1>Datenbankwartung</h1>
   </p>
 
   <h3><name Tags>Kommentare/Varianten entfernen</name></h3>
-  <p><b>Mit Vorsicht verwenden</b> Das massenweise Entfernen von
-  Kommentaren und Varianten kann nicht rückgängig gemacht werden.
+  <p><b>Mit Vorsicht verwenden</b>. Das massenweise Entfernen von
+  Kommentaren und Varianten kann nicht rückgängig gemacht
+  werden. Außerdem können sich aufgrund unserer Implementierung einige
+  mangelhaft definierte Namen (z.B. bei Veranstaltung/Weiß/Schwarz)
+  verändern, beispielsweise jene mit einem Apostroph im Namen und das
+  fehlende Leerzeichen in "Kramnik,V" wird zu "Kramnik, V"
+  umgewandelt.
   </p>
 
   <h3><name Tags>Zusätzliche Markierungen entfernen</name></h3>
@@ -4860,7 +4871,7 @@ set helpText(D,Maintenance) {<h1>Datenbankwartung</h1>
   zurückzubringen.
   </p>
 
-  <p><footer>Aktualisiert: Scid vs. PC 4.17, August 2016</footer></p>
+  <p><footer>Aktualisiert: Scid vs. PC 4.22, September 2020</footer></p>
 }
 
 set helpTitle(D,Sorting) "Sortieren einer Datenbank"
@@ -5850,7 +5861,7 @@ set helpText(D,PInfo) {<h1>Spielerinformationen</h1>
   <h3><name Photos>Spielerfotos</name></h3>
   <p>Um Spielerfotos zu sehen, platzieren Sie die Scid-Fotodateien
   (wie sie enthalten sind in "FIDE_photos_png.zip" von
-  <url https://sourceforge.net/projects/scid/files/Player%20Data/>https://sourceforge.net/projects/scid/files/Player
+  <url https://sourceforge.net/projects/scid/files/Player Data/>https://sourceforge.net/projects/scid/files/Player
   Data/</url>) in das Benutzerverzeichnis von Scid vs. PC. In Linux
   und Macs ist dies "$HOME/.scidvspc", in Windows "Scid vs
   PC/bin". Das <a Console>Willkommensfenster</a> zeigt Ihnen diesen
@@ -6438,20 +6449,31 @@ set helpText(D,Options) {<h1>Optionen und Einstellungen</h1>
   unter <green>Optionen--<gt>Design</green> ausgewählt werden.
   </p>
   <p>Das Installieren von zusätzlichen Themen kann trickreich sein.
-  Die meisten sind nicht besonders ausgereift oder vollständig. Scid
-  vs PC macht von den Themenfunktionen keinen ausgiebigen Gebrauch,
-  sondern bevorzugt stattdessen (obwohl langweilig) die
-  Standard-Tk-Elemente.
-  </p>
-  <p>Die Basisinstallation hat die Form:
-  <ul>
-  <li>Kopieren Sie das Thema in eines der Tk-Bibliotheksverzeichnisse (z.B. /usr/lib/tk8.6).</li>
-  <li>(oder) source myThemes.tcl</li>
-  <li>package require ttk::theme::MyTheme</li>
-  <li>ttk::style theme use MyTheme</li>
-  </ul>Diese Anweisungen können in Scids GUI eingebunden oder in Scid
-  vs PCs Befehlszeilenstartfenster ausgegeben werden.
-  </p>
+  Die meisten sind nicht besonders ausgereift oder
+  vollständig. ScidvsPC macht von den Themenfunktionen keinen
+  ausgiebigen Gebrauch, sondern bevorzugt stattdessen (obwohl
+  langweilig) die Standard-Tk-Elemente. Dennoch sind einige gute
+  zusätzliche Themen verfügbar (auf
+  <url https://sourceforge.net/projects/scidvspc/files/support
+  files>https://sourceforge.net/projects/scidvspc/files/support
+  files).</url></p>
+
+  <p>Die Themeninstallation ist nicht ganz trivial: kopieren Sie das
+  Thema/die Themen in eines der Tk-Bibliotheksverzeichnisse
+  (z.B. unter Linux /usr/lib/tk8.6 oder /usr/local/lib). Falls das
+  Thema eines von "tilegtk tileq keramik keramik_alt plastik dark"
+  ist, erscheint es bei einem Neustart im
+  Menü <green>Optionen--<gt>Design</green>.</p>
+
+ <p>Ansonsten fügen Sie den Namen des Themas zu den obigen Namen hinzu (in der
+  grafischen Oberfläche) oder Sie geben diese Befehle in der
+  Befehlszeile des Startfensters von ScidvsPc an:
+ <ul>
+    <li>"source myThemes.tcl"</li>
+    <li>"package require ttk::theme::MyTheme"</li>
+    <li>"ttk::style theme use MyTheme"</li>
+ </ul>
+ </p>
 
   <p><footer>Aktualisiert: Scid vs. PC 4.22 Februar 2020</footer></p>
 }
@@ -6693,33 +6715,28 @@ set helpText(D,ECO) {<h1>ECO-Codes</h1>
   <h3><name Browser>Das ECO-Auswertungsfenster</name></h3>
   <p>Scids
   <run ::windows::eco::Open><green>ECO-Auswertung</green></run>
-  zeigt für die <b>ECO-klassifizierten Partien</b> in der aktuellen
+  zeigt für die ECO-klassifizierten Partien in der aktuellen
   Datenbank Informationen über ECO-Codes und ihre Häufigkeit und
   Leistung.
   </p>
-  <p>Der obere Bereich zeigt eine Balkengrafik mit drei Abschnitten:
-  der untere (hellblau) zeigt die Siege von Weiß, der mittlere stellt
-  die Remispartien dar und der obere (dunkelblau) zeigt die Siege von
-  Schwarz. Die Grafik zeigt auf einen Blick die
-  Eröffnungscharakteristiken - ob Remisen häufig sind oder ob mehr
-  Weiß oder ob mehr Schwarz gewinnt. Um in eine tiefere ECO-Ebene
-  hineinzugehen, klicken Sie auf einen Balken in der Grafik. Um auf
-  eine höhere Ebene zurückzugelangen, führen Sie auf einem solchen
-  Balken einen Rechtsklick mit der Maus durch.
-  </p>
-  <p>Sie können auch mit der Tastatur navigieren, indem Sie den Sie
-  interessierenden ECO-Code schreiben. Wenn Sie zum Beispiel den
-  ECO-Code B75 (für den jugoslawischen Angriff im sizilianischen
-  Drachen) sehen wollen, tippen Sie einfach B75.
+  <p>Der obere Bereich zeigt eine Balkengrafik mit drei Abschnitten
+  (die Siege von Weiß, Remisen und Siege von Schwarz darstellen) und
+  zeigt auf einen Blick die Eröffnungscharakteristiken - ob Remisen
+  häufig sind oder ob mehr Weiß oder mehr Schwarz gewinnt. Um in eine
+  tiefere ECO-Ebene hineinzugehen, klicken Sie auf einen Balken in der
+  Grafik. Um auf eine höhere Ebene zurückzugelangen, klicken Sie auf
+  die Schaltfläche <button bookmark_up>. Sie können auch durch
+  ECO-Codes und Eröffnungsnamen navigieren, indem Sie sie in das
+  untere Eingabefeld schreiben und 'Enter' drücken.
   </p>
   <p>Der untere Bereich zeigt die Stellungen für einen bestimmten
   ECO-Code gemäß der geladenen ECO-Datei an.
   </p>
-  <p>Die Schaltfläche <b>Partien ECO-klassifizieren</b> im
-  Wartungsfenster (unter der Rubrik "Datenbankoperationen") fügt in
-  der aktuellen Datenbank den ausgewählten Partien die
-  ECO-Klassifizierungen dauerhaft hinzu.
-  </p>
+  <p><i>Beachte: Partien, die nicht nach ECO klassifiziert sind,
+  werden in der Statistikgrafik nicht berücksichtigt. Um Partien nach
+  ECO zu klassifizieren, benutzen Sie
+  das <a Maintenance>Wartungsfenster</a>.
+  </i></p>
 
   <h3>Eine ECO-Datei laden</h3>
   <p>Scid versucht beim Programmstart, die vorgegebene
@@ -6819,7 +6836,7 @@ set helpText(D,ECO) {<h1>ECO-Codes</h1>
   <li>  <b>E9</b>  E7 + 4...d6 5.Nf3: <i>Königsindisch, Hauptfortsetzungen</i> </li>
   </ul>
 
-  <p><footer>Aktualisiert: Scid vs. PC 4.18, Dezember 2016</footer></p>
+  <p><footer>Aktualisiert: Scid vs. PC 4.22, Oktober 2020</footer></p>
 }
 
 
@@ -6981,6 +6998,11 @@ set helpText(D,ComputerGame) {
   (unter anderem) <b>Engine-Buch verwenden</b>
   und <b>Eröffnungsbuch</b> aktiviert werden.
   </p>
+
+  <p><i>Man kann jetzt mittels der Schaltfläche "Importieren ECO"
+  jede Eröffnung spielen (oder trainieren), die man im ECO-Fenster
+  findet.</i></p>
+
   <p>Andere Konfigurationsabschnitte sind einfach, ausgenommen:
   </p>
   <ul>
