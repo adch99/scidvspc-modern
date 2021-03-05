@@ -1126,6 +1126,8 @@ translate F ClearGameDialog {Ce jeu a été modifié.\nVoulez-vous le sauvegarder?}
 translate F ExitUnsaved {Les bases de données suivantes ont des parties modifiées non sauvegardées. Si vous quittez maintenant, ces modifications seront perdues.}
 translate F ChangeTextDialog {Changer les couleurs du texte nécessite un redémarrage.}
 translate F ChangeDockDialog {Changer le mode d'affichage nécessite un redémarrage.}
+# ====== TODO To be translated ======
+translate F FontSelectDialog "This is some sample text\nDouble click above to change font, then select 'ok'\nAaBbCcDdEeFfGgHhIiJjKkLlMm 0123456789. +=-"
 translate F ExitNow {Quitter maintenant ?}
 
 # Import window:

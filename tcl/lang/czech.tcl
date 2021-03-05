@@ -1315,6 +1315,8 @@ translate C ChangeTextDialog {Enabling text colour globally requires restart.}
 # ====== TODO To be translated ======
 translate C ChangeDockDialog {Changing Docking requires a restart.}
 # ====== TODO To be translated ======
+translate C FontSelectDialog "This is some sample text\nDouble click above to change font, then select 'ok'\nAaBbCcDdEeFfGgHhIiJjKkLlMm 0123456789. +=-"
+# ====== TODO To be translated ======
 translate C ExitNow {Exit now ?}
 
 # Import window:

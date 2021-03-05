@@ -1158,6 +1158,8 @@ translate D ClearGameDialog {Diese Partie wurde geändert.\nWollen Sie sie speic
 translate D ExitUnsaved {Die folgenden Datenbanken haben ungesicherte Partieänderungen. Wenn Sie jetzt beenden, gehen diese Änderungen verloren.}
 translate D ChangeTextDialog {Das globale Aktivieren der Textfarbe erfordert einen Neustart.}
 translate D ChangeDockDialog {Das Andocken ändern erfordert einen Neustart.}
+# ====== TODO To be translated ======
+translate D FontSelectDialog "This is some sample text\nDouble click above to change font, then select 'ok'\nAaBbCcDdEeFfGgHhIiJjKkLlMm 0123456789. +=-"
 translate D ExitNow {Jetzt beenden?}
 
 # Import window:

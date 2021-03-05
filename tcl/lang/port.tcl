@@ -1122,6 +1122,8 @@ translate U ClearGameDialog {Este jogo foi alterado.  Você realmente quer contin
 translate U ExitUnsaved {As seguintes bases têm alterações não gravadas. Se sair agora, essas alterações serão perdidas.} ;# ***
 translate U ChangeTextDialog {Configurar a cor geral do texto obriga a recomeçar o Scid.}
 translate U ChangeDockDialog {Mudar ligação a hardware obriga a recomeçar o Scid.}
+# ====== TODO To be translated ======
+translate U FontSelectDialog "This is some sample text\nDouble click above to change font, then select 'ok'\nAaBbCcDdEeFfGgHhIiJjKkLlMm 0123456789. +=-"
 translate U ExitNow {Sair agora?}
 
 # Import window:

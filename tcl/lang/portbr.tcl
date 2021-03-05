@@ -1359,6 +1359,8 @@ translate B ClearGameDialog {Este jogo foi alterado.\nVoce quer salva-lo?}
 translate B ExitUnsaved {As bases a seguir tem mudanças nos jogos que não foram salvas. Se você sair agora, essas mudanças serão perdidas.} 
 translate B ChangeTextDialog {Habilitar cor do texto globalmente exige reinicio.}
 translate B ChangeDockDialog {Alterar a docagem exige reinicio.}
+# ====== TODO To be translated ======
+translate B FontSelectDialog "This is some sample text\nDouble click above to change font, then select 'ok'\nAaBbCcDdEeFfGgHhIiJjKkLlMm 0123456789. +=-"
 translate B ExitNow {Sair agora ?}
 
 

@@ -1190,6 +1190,8 @@ translate R ChangeTextDialog {Enabling text colour globally requires restart.}
 # ====== TODO To be translated ======
 translate R ChangeDockDialog {Changing Docking requires a restart.}
 # ====== TODO To be translated ======
+translate R FontSelectDialog "This is some sample text\nDouble click above to change font, then select 'ok'\nAaBbCcDdEeFfGgHhIiJjKkLlMm 0123456789. +=-"
+# ====== TODO To be translated ======
 translate R ExitNow {Exit now ?}
 
 # Import window:

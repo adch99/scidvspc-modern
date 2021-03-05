@@ -1117,7 +1117,6 @@ translate E ReplaceMoveMessage {Move Already Exists.
 Please Enter Choice.
 Replace Move will discard all subsequent moves.}
 
-# Make database read-only dialog:
 translate E ReadOnlyDialog {Do you want to make this database read-only?
 
 (You can make the database writable again by closing and reopening it.)}
@@ -1127,6 +1126,8 @@ translate E ClearGameDialog {This game has been altered.\nDo you wish to save it
 translate E ExitUnsaved {The following databases have unsaved games. If you exit now, these changes will be lost.}
 translate E ChangeTextDialog {Enabling text colour globally requires restart.}
 translate E ChangeDockDialog {Changing Docking requires a restart.}
+translate E FontSelectDialog "This is some sample text\nDouble click above to change font, then select 'ok'\nAaBbCcDdEeFfGgHhIiJjKkLlMm 0123456789. +=-"
+
 translate E ExitNow {Exit now ?}
 
 # Import window:
