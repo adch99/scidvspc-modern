@@ -1138,6 +1138,8 @@ translate O ClearGameDialog {Partiet er endret.\nVil du lagre det?}
 translate O ExitUnsaved {Følgende baser har ulagrede endringer i partier. Hvis du avslutter nå vil disse endringene gå tapt.}
 translate O ChangeTextDialog {Skru på farger globalt krever omstart.}
 translate O ChangeDockDialog {Endre dokking krever omstart.}
+# ====== TODO To be translated ======
+translate O FontSelectDialog "This is some sample text\nDouble click above to change font, then select 'ok'\nAaBbCcDdEeFfGgHhIiJjKkLlMm 0123456789. +=-"
 translate O ExitNow {Avslutte nå?}
 
 # Import window:

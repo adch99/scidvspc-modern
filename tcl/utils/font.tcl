@@ -156,13 +156,13 @@ proc FontDialog {name {parent .}} {
 
   bind $w.size_list.list <Double-Button-1> "FontDialogSize $w.size_list.list $font_name $w.size_entry"
 
-  pack $w.family_list.scroll -side right -expand 1 -fill y
+  pack $w.family_list.scroll -side right -expand 0 -fill y -padx 3
   pack $w.family_list.list   -side left  -expand 1 -fill both
 
-  pack $w.style_list.scroll  -side right -expand 1 -fill y
+  pack $w.style_list.scroll  -side right -expand 0 -fill y -padx 3
   pack $w.style_list.list    -side left  -expand 1 -fill both
 
-  pack $w.size_list.scroll   -side right -expand 1 -fill y
+  pack $w.size_list.scroll   -side right -expand 0 -fill y -padx 3
   pack $w.size_list.list     -side left  -expand 1 -fill both
 
   grid config $w.family_list -column 0 -row 2 -rowspan 16 -sticky nsew
@@ -206,8 +206,7 @@ proc FontDialog {name {parent .}} {
   frame $w.sample -bd 3 -relief groove
   label $w.sample.l_sample -text "Sample" -anchor w
 
-  label $w.sample.sample -font $font_name -bd 2 -relief sunken -text \
-    "This is some sample text\nAaBbCcDdEeFfGgHhIiJjKkLlMm\n 0123456789. +=-"
+  label $w.sample.sample -font $font_name -relief sunken -text $::tr(FontSelectDialog)
 
   pack  $w.sample.l_sample -side top -fill x -pady 4
   pack  $w.sample.sample -side top -pady 4 -ipadx 10 -ipady 10
