@@ -5915,25 +5915,26 @@ set helpText(HardwareConfig) {<h1>Connecting External Hardware</h1>
 
   <ul>
 
-    <li><term>Novag Citrine</term> (<a Novag>and compatible boards</a>) use an
+    <li><b>Novag Citrine</b> (<a Novag>and compatible boards</a>) use an
     internal driver that was developed specifically for the Novag
     Citrine board, but may also support other boards.
     This driver allows to enter moves but the boards
     logic does not recognise the position set-up, nor the
     pieces as such.
     </li>
-    <li><term>Input Engine</term> Drivers are meant to be a free,
+    <li><b>Input Engine</b> Drivers are meant to be a free,
     open interface to hook up any hardware to Chess GUIs. They
     are modeled after the usual style of a chess engine. The
-    specifications of the protocol as well as a driver suitable for
-    the <b>DGT</b> Electronic Chess boards can be found at the <url
-    http://dgtdrv.sourceforge.net>Dgtdrv Website</url>.  Depending on
-    the hardware the board may know the position set-up and the
+    specifications of the protocol can be found at the <url
+    http://dgtdrv.sourceforge.net>Dgtdrv Website</url>, while Ozkan has patched an <url https://sourceforge.net/projects/scidvspc/files/support files/dgtdrv2_oz.zip/download>updated version</url> of the <b>serial driver</b> suitable for the <b>DGT Electronic Chessboard</b>.
+    Depending on the hardware the board may know the position set-up and the
     pieces by their move (eg DGT boards).
-  
-  <b>Note</b>: Scid does not include any input engine by default. Input
-  engines are meant to be independent programs that can be used with a
-  variety of GUIs.
+  </li>
+  <li><b>Other UCB Boards</b>
+  Note - Scid does not include any input engine by default. Input engines are
+meant to be independent programs that can be used with a variety of GUIs.
+ There is a great modern effort to provide an easy way to access many hardware devices
+at <url https://goneill.co.nz/chess.php>Graham's Chess page</url>, where he has drivers for <b>Millennium Chesslink, Certabo and Novag</b> UCB boards, as well as great documentation (at the bottom of the page) for a relatively easy way to implement in Scid (or any chess GUI).
   </li>
   </ul>
 
@@ -6074,8 +6075,8 @@ set helpText(InputEngine) {<h1>DGT / Input Engine console</h1>
    If a move is made, in the area between the buttons and the small
    board the move performed (<term>move area</term>) on the external
    board is shown in figurine long algebraic notation. Valid moves
-   show up on a <green>green</green> background while illegal moves
-   show up on a <red>red</red> background. Additionally, illegal moves
+   show up on a green background while illegal moves
+   show up on a red background. Additionally, illegal moves
    are announced by the alert sound, if Scid has sound enabled.
    Depending on the settings, the moves are additionally announced.
    </p>
@@ -7354,7 +7355,7 @@ Examine the <a Console>Splash Window</a> for the status of loading user textures
    but PNG and JPG images (and pieces) are supported by the TkImg package, which we package with ScidvsPC on these two OS.
    On Linux, most systems will be using Tk 8.6 (which has inbuilt image support),
    but it is also possible to compile and install TkImg from the
-   <url https://sourceforge.net/projects/scidvspc/files/support%20files/tkimg1.3.scidvspc.tar.bz2/download>source tarball</url>
+   <url https://sourceforge.net/projects/scidvspc/files/support files/tkimg1.3.scidvspc.tar.bz2/download>source tarball</url>
 </i></p>
 <p><footer>Updated: Scid vs. PC 4.21 Jan 2019</footer></p>
 }
