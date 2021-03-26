@@ -303,7 +303,6 @@ menuText B OptionsVarLineColour "Setas de Variantes" 0 {Setas de Variantes}
 menuText B OptionsEngineLineColour "Setas do motor" 0 {Setas do motor}
 
 menuText B OptionsRowColour "Linhas" 0 {Cor padrao da linha para arvore/livro}
-# ====== Translated OK Gilberto ======
 menuText B OptionsHighlightColour "Destaque" 0 {Default text highlight color}
 
 menuText B OptionsSwitcherColour "Chaveador" 0 {Cor padrao para o chaveador de base}
@@ -566,7 +565,6 @@ translate B altered {alterado}
 translate B tagsDescript {Tags extras (ex: Anotador "Anand")}
 
 translate B prevTags {Use anterior}
-# ====== Translated OK Gilberto ======
 translate B value {Valor}
 
 # Standard error messages:
@@ -854,8 +852,7 @@ translate B BlundersNotBest {Erro crasso/Nao Melhor}
 translate B AnnotateTitle {Configurar Anotacao}
 
 translate B AnnotateMissedMates {Mates perdidos/menores}
-# ====== TODO To be translated ======
-translate B AnnotateEnd {At end of game}
+translate B AnnotateEnd {No fim do jogo}
 translate B BlundersThreshold {Limite}
 
 translate B ScoreFormat {Formato do Score}
@@ -1359,8 +1356,7 @@ translate B ClearGameDialog {Este jogo foi alterado.\nVoce quer salva-lo?}
 translate B ExitUnsaved {As bases a seguir tem mudanças nos jogos que não foram salvas. Se você sair agora, essas mudanças serão perdidas.} 
 translate B ChangeTextDialog {Habilitar cor do texto globalmente exige reinicio.}
 translate B ChangeDockDialog {Alterar a docagem exige reinicio.}
-# ====== TODO To be translated ======
-translate B FontSelectDialog "This is some sample text\nDouble click above to change font, then select 'ok'\nAaBbCcDdEeFfGgHhIiJjKkLlMm 0123456789. +=-"
+translate B FontSelectDialog "Este e um texto de exemplo\nDuplo clique acima para mudar a fonte, depois selecione 'ok'\nAaBbCcDdEeFfGgHhIiJjKkLlMm 0123456789. +=-"
 translate B ExitNow {Sair agora ?}
 
 
@@ -1446,7 +1442,6 @@ translate B OprepTheoryTable {Tabela de Teoria}
 translate B OprepTableComment {Gerada a partir dos %u jogos com rating mais alto.}
 translate B OprepExtraMoves {Movimentos com nota extra na Tabela de Teoria}
 translate B OprepMaxGames {Qtde. Maxima de jogos na tabela de teoria}
-# ====== Translated OK Gilberto ======
 translate B OprepMaxLines {Máximo de jogos para estatisticas}
 translate B OprepViewHTML {Visualizar HTML} 
 translate B OprepViewLaTeX {Visualizar LaTeX} 
@@ -1806,8 +1801,7 @@ translate B Lines {Linhas}
 translate B ConfigureUCIengine {Configurar engine UCI}
 
 translate B SpecificOpening {Abertura especifica}
-# ====== TODO To be translated ======
-translate B ImportECO {Import ECO}
+translate B ImportECO {Importar ECO}
 
 translate B StartNewGame {Iniciar novo jogo}
 
