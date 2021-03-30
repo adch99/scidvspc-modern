@@ -976,7 +976,6 @@ proc updateGameinfo {} {
       -fen $gameInfo(showFEN) -tb $gameInfo(showTB)]
   if {$gameInfo(wrap)} {
     .main.gameInfo configure -wrap word
-    .main.gameInfo tag configure wrap -lmargin2 10
     .main.gameInfo tag add wrap 1.0 end
   } else {
     .main.gameInfo configure -wrap none
