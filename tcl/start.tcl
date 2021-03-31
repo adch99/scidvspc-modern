@@ -801,6 +801,7 @@ set exportFlags(space) 1
 set exportFlags(indentc) 0
 set exportFlags(vars) 1
 set exportFlags(indentv) 1
+set exportFlags(newlines) 1
 set exportFlags(column) 0
 set exportFlags(append) 0
 set exportFlags(symbols) 0

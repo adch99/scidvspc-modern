@@ -1430,6 +1430,8 @@ translate G ExportComments {Εξαγωγή Σχολίων;}
 translate G ExportVariations {Εξαγωγή Βαριάντων;}
 translate G IndentComments {Εσοχές Σχολίων;}
 translate G IndentVariations {Εσοχές Βαριάντων;}
+# ====== TODO To be translated ======
+translate G InsertNewlines {Insert newlines every 80 chars?}
 translate G ExportColumnStyle {Μορφή Στήλης (κίνηση ανά γραμμή);}
 translate G ExportSymbolStyle {Μορφή Συμβολισμού Σχολιασμού:}
 translate G ExportStripMarks {Αφαίρεση τετραγώνων/τόξων από Σχόλια;}

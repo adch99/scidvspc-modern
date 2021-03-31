@@ -1390,6 +1390,8 @@ translate P ExportComments {Eksportować komentarze?}
 translate P ExportVariations {Eksportować warianty?}
 translate P IndentComments {Wcinaj komentarze?}
 translate P IndentVariations {Wcinaj warianty?}
+# ====== TODO To be translated ======
+translate P InsertNewlines {Insert newlines every 80 chars?}
 translate P ExportColumnStyle {Kolumny (jedno posunięcie w wierszu)?}
 translate P ExportSymbolStyle {Styl znaków komentarza:}
 translate P ExportStripMarks {Usuwać z komentarzy kody kolorowania pól/strzałek?} 

@@ -1483,6 +1483,8 @@ translate I ExportComments {Esporta commenti?}
 translate I ExportVariations {Esporta varianti?}
 translate I IndentComments {Indenta commenti?}
 translate I IndentVariations {Indenta varianti?}
+# ====== TODO To be translated ======
+translate I InsertNewlines {Insert newlines every 80 chars?}
 translate I ExportColumnStyle {Stile colonna (una mossa per riga)?}
 translate I ExportSymbolStyle {Stile annotazione simbolica:}
 translate I ExportStripMarks {Togliere i codici di casella/freccia dai commenti?}

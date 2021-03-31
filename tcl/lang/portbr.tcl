@@ -1560,6 +1560,8 @@ translate B ExportComments {Exportar comentarios?}
 translate B ExportVariations {Exportar variantes?}
 translate B IndentComments {Identar Comentarios?}
 translate B IndentVariations {Identar Variantes?}
+# ====== TODO To be translated ======
+translate B InsertNewlines {Insert newlines every 80 chars?}
 translate B ExportColumnStyle {Estilo Coluna (um movimento por linha)?}
 translate B ExportSymbolStyle {Estilo de anotacao simbolica:}
 translate B ExportStripMarks {Remover códigos de marca de casa/seta dos comentários?} 

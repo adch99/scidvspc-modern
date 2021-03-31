@@ -1328,6 +1328,8 @@ translate O ExportComments {Eksporter kommentarer}
 translate O ExportVariations {Eksporter variasjoner}
 translate O IndentComments {Rykk inn kommentarer}
 translate O IndentVariations {Rykk inn variasjoner}
+# ====== TODO To be translated ======
+translate O InsertNewlines {Insert newlines every 80 chars?}
 translate O ExportColumnStyle {Bruk kolonner (ett trekk per linje)}
 translate O ExportSymbolStyle {Symbolnotasjoner}
 translate O ExportStripMarks {Fjern alle fargekoder og piler fra kommentarer?}

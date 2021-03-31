@@ -1514,6 +1514,8 @@ translate C ExportComments {Exportovat komentáøe?}
 translate C ExportVariations {Exportovat varianty?}
 translate C IndentComments {Odsazovat komentáøe?}
 translate C IndentVariations {Odsazovat varianty?}
+# ====== TODO To be translated ======
+translate C InsertNewlines {Insert newlines every 80 chars?}
 translate C ExportColumnStyle {Sloupcovı styl (jeden tah na øádek)?}
 translate C ExportSymbolStyle {Styl pro symbolické anotace:}
 translate C ExportStripMarks {Odstranit kódové znaèky polí/¹ipek z komentáøù?}

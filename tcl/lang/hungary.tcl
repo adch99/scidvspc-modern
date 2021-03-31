@@ -1524,6 +1524,8 @@ translate H ExportComments {Megjegyzések exportálása?}
 translate H ExportVariations {Változatok exportálása?}
 translate H IndentComments {Megjegyzések igazítása?}
 translate H IndentVariations {Változatok igazítása?}
+# ====== TODO To be translated ======
+translate H InsertNewlines {Insert newlines every 80 chars?}
 translate H ExportColumnStyle {Oszlop stílusa (soronként egy lépés)?}
 translate H ExportSymbolStyle {Szimbólumok stílusa:}
 translate H ExportStripMarks {Kivegye a megjegyzésekbõl a mezõ- és nyílmegjelöléseket?}

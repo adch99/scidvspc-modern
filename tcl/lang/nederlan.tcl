@@ -1416,6 +1416,8 @@ translate N ExportComments {Exporteren commentaar?}
 translate N ExportVariations {Exporteren varianten?}
 translate N IndentComments {Inspringen commentaar?}
 translate N IndentVariations {Inspringen varianten?}
+# ====== TODO To be translated ======
+translate N InsertNewlines {Insert newlines every 80 chars?}
 translate N ExportColumnStyle {Kolomstijl (een zet per regel)?}
 translate N ExportSymbolStyle {Symbolische annotatie stijl:}
 translate N ExportStripMarks {Wis vierkante haken/pijlen markeer codes uit de commentaar?}

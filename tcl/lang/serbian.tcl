@@ -1597,6 +1597,8 @@ translate Y ExportComments {Izvezi komentare?}
 translate Y ExportVariations {Izvezi varijante?}
 translate Y IndentComments {Uvuci pasus kod komentara?}
 translate Y IndentVariations {Uvuci pasus kod varijanata?}
+# ====== TODO To be translated ======
+translate Y InsertNewlines {Insert newlines every 80 chars?}
 translate Y ExportColumnStyle {Pasus stil (jedan potez po liniji)?}
 translate Y ExportSymbolStyle {Stil simbolièkih napomena:}
 translate Y ExportStripMarks {Strip square/arrow mark codes from comments?} ;# ***

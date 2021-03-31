@@ -1312,6 +1312,8 @@ translate U ExportComments {Exportar comentarios?}
 translate U ExportVariations {Exportar variantes?}
 translate U IndentComments {Alinhar Comentarios?}
 translate U IndentVariations {Alinhar Variantes?}
+# ====== TODO To be translated ======
+translate U InsertNewlines {Insert newlines every 80 chars?}
 translate U ExportColumnStyle {Estilo Coluna (um movimento por linha)?}
 translate U ExportSymbolStyle {Estilo de anotação simbólica:}
 translate U ExportStripMarks {Apagar dos comentários as marcas de casa/seta?} ;# ***

@@ -1412,6 +1412,7 @@ sc_base_export (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     bool exportFilter = false;
     bool appendToFile = false;
+    bool newlines = true;
     gameFormatT outputFormat = PGN_FORMAT_Plain;
     const char * startText = "";
     const char * endText = "";
@@ -1420,12 +1421,12 @@ sc_base_export (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     const char * options[] = {
         "-append", "-starttext", "-endtext", "-comments", "-variations",
-        "-spaces", "-symbols", "-indentComments", "-indentVariations",
+        "-spaces", "-symbols", "-indentComments", "-indentVariations", "-newlines",
         "-column", "-noMarkCodes", "-scidFlags", "-convertNullMoves", "-utf8", NULL
     };
     enum {
         OPT_APPEND, OPT_STARTTEXT, OPT_ENDTEXT, OPT_COMMENTS, OPT_VARIATIONS,
-        OPT_SPACES, OPT_SYMBOLS, OPT_INDENTC, OPT_INDENTV,
+        OPT_SPACES, OPT_SYMBOLS, OPT_INDENTC, OPT_INDENTV, OPT_NEWLINES,
         OPT_COLUMN, OPT_NOMARKS, OPT_SCIDFLAGS, OPT_CONVERTNULL, OPT_UTF8
     };
 
@@ -1494,6 +1495,10 @@ sc_base_export (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
         case OPT_INDENTV:
             if (flag) { pgnStyle |= PGN_STYLE_INDENT_VARS; }
+            break;
+
+        case OPT_NEWLINES:
+            newlines = flag;
             break;
 
         case OPT_COLUMN:
@@ -1568,7 +1573,12 @@ sc_base_export (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 
     if (outputFormat == PGN_FORMAT_Plain || useUTF8) {
         charsetConverter = new CharsetConverter(useUTF8 ? "utf-8" : "iso8859-1");
-	db->tbuf->SetWrapColumn (75);
+        // This 75 from the original... but Gregor moved it slightly. WTF ?
+        // Note, we now reset this if no newlines... it never gets reset elsewhere - S.A
+        if (newlines)
+          db->tbuf->SetWrapColumn (75);
+        else
+          db->tbuf->SetWrapColumn (99999);
     }
 
     if (!exportFilter) {
