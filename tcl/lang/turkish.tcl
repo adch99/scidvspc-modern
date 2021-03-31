@@ -1316,6 +1316,8 @@ translate T ExportComments {Yorumlar gönderilsin mi?}
 translate T ExportVariations {Varyantlar gönderilsinmi?}
 translate T IndentComments {Satırbaşlarınımı mi yazıyorsunuz?}
 translate T IndentVariations {Satırbaşlarına varyantlar?}
+# ====== TODO To be translated ======
+translate T InsertNewlines {Insert newlines every 80 chars?}
 translate T ExportColumnStyle {Sütun stili (satır başına bir hareket))?}
 translate T ExportSymbolStyle {Sembolik açıklama stili:}
 translate T ExportStripMarks {Yorumlardaki kare / ok işareti kodlarını kaldırın mı?}

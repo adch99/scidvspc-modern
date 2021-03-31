@@ -419,6 +419,10 @@ proc exportOptions {exportType {fName {}}} {
   radiobutton $w.o.indentvOn -text $::tr(Yes) -variable exportFlags(indentv) -value 1
   radiobutton $w.o.indentvOff -text $::tr(No) -variable exportFlags(indentv) -value 0
 
+  label $w.o.newlines -text $::tr(InsertNewlines)
+  radiobutton $w.o.newlinesOn -text $::tr(Yes) -variable exportFlags(newlines) -value 1
+  radiobutton $w.o.newlinesOff -text $::tr(No) -variable exportFlags(newlines) -value 0
+
   label $w.o.column -text $::tr(ExportColumnStyle)
   radiobutton $w.o.columnOn -text $::tr(Yes) -variable exportFlags(column) -value 1
   radiobutton $w.o.columnOff -text $::tr(No) -variable exportFlags(column) -value 0
@@ -427,7 +431,7 @@ proc exportOptions {exportType {fName {}}} {
   radiobutton $w.o.symbolsOn -text "! +=" -variable exportFlags(symbols) -value 1
   radiobutton $w.o.symbolsOff -text {$2 $14} -variable exportFlags(symbols) -value 0
 
-  foreach i {space comments stripMarks scidFlags indentc vars indentv column} {
+  foreach i {space comments stripMarks scidFlags indentc vars indentv newlines column} {
     grid $w.o.${i}    -row $row -column 0 -sticky w
     grid $w.o.${i}On  -row $row -column 1 -sticky w
     grid $w.o.${i}Off -row $row -column 2 -sticky w
@@ -587,7 +591,7 @@ proc exportGames {selection exportType {fName {}}} {
       -endtext $exportEndFile($exportType) \
       -comments $exportFlags(comments) -variations $exportFlags(vars) \
       -space $exportFlags(space) -symbols $exportFlags(symbols) \
-      -indentC $exportFlags(indentc) -indentV $exportFlags(indentv) \
+      -indentC $exportFlags(indentc) -indentV $exportFlags(indentv) -newlines $exportFlags(newlines) \
       -column $exportFlags(column) -noMarkCodes $exportFlags(stripMarks) -scidFlags $exportFlags(scidFlags) \
       -convertNullMoves $exportFlags(convertNullMoves) -utf8 $exportFlags(utf8)
   }]

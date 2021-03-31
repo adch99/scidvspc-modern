@@ -1412,6 +1412,8 @@ translate W ExportComments {Exportera kommentarer?}
 translate W ExportVariations {Exportera variationer?}
 translate W IndentComments {Dra in kommentarer?}
 translate W IndentVariations {Dra in variationer?}
+# ====== TODO To be translated ======
+translate W InsertNewlines {Insert newlines every 80 chars?}
 translate W ExportColumnStyle {Kolumnstil (ett drag per rad)?}
 translate W ExportSymbolStyle {Symbolbaserade kommentarer:}
 translate W ExportStripMarks {Avlägsna koder för fält och pilar från kommentarerna?}

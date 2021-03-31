@@ -1384,6 +1384,8 @@ translate S ExportComments {¿Exportar comentarios?}
 translate S ExportVariations {¿Exportar variaciones?}
 translate S IndentComments {¿Sangrar comentarios?}
 translate S IndentVariations {¿Sangrar variaciones?}
+# ====== TODO To be translated ======
+translate S InsertNewlines {Insert newlines every 80 chars?}
 translate S ExportColumnStyle {¿Estilo de columna (un movimiento por línea)?}
 translate S ExportSymbolStyle {Estilo de anotación simbólico:}
 translate S ExportStripMarks {¿Quitar marca de códigos de casilla/flecha de los comentarios?}

@@ -1315,6 +1315,7 @@ translate E ExportComments {Export comments?}
 translate E ExportVariations {Export variations?}
 translate E IndentComments {Indent comments?}
 translate E IndentVariations {Indent variations?}
+translate E InsertNewlines {Insert newlines every 80 chars?}
 translate E ExportColumnStyle {Column style (one move per line)?}
 translate E ExportSymbolStyle {Symbolic annotation style:}
 translate E ExportStripMarks {Strip square/arrow mark codes from comments?}

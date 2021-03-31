@@ -1353,6 +1353,8 @@ translate D ExportComments {Kommentare exportieren?}
 translate D ExportVariations {Varianten exportieren?}
 translate D IndentComments {Kommentare einrücken?}
 translate D IndentVariations {Varianten einrücken?}
+# ====== TODO To be translated ======
+translate D InsertNewlines {Insert newlines every 80 chars?}
 translate D ExportColumnStyle {Tabellarisch (ein Zug pro Zeile)?}
 translate D ExportSymbolStyle {Symbolische Notation:}
 translate D ExportStripMarks \

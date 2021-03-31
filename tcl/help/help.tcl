@@ -1741,6 +1741,9 @@ set helpText(Export) {<h1>Exporting Games</h1>
   , with null moves preserved, disable this option.
   </p>
   <p>
+  Exporting PGN is normally formatted (for readability) to around 80 characters line width. To disable this, deselect <b>Insert newlines</b>.
+  </p>
+  <p>
   Scid's use of Ascii strings (such as <b>+=</b> to represent annotations is also against the PGN standard.
   For compatability, <b>Symbolic annotation style</b> should be set to <b>$2 $14</b>.
   </p>

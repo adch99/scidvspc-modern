@@ -1314,6 +1314,8 @@ translate L ExportComments {Vie kommentit?}
 translate L ExportVariations {Vie muunnelmat?}
 translate L IndentComments {Sisennä kommentit?}
 translate L IndentVariations {Sisennä muunnelmat?}
+# ====== TODO To be translated ======
+translate L InsertNewlines {Insert newlines every 80 chars?}
 translate L ExportColumnStyle {Sarakkeen tyyli (yksi siirto riviä kohden)?}
 translate L ExportSymbolStyle {Symbolinen huomautustyyli:}
 translate L ExportStripMarks {Poista ruutu/nuoli-merkkikoodit kommenteista?}

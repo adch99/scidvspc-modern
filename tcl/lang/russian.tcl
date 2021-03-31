@@ -1383,6 +1383,8 @@ translate R ExportComments {Экспортировать комментарии?
 translate R ExportVariations {Экспортировать варианты?}
 translate R IndentComments {Комментарии с отступом?}
 translate R IndentVariations {Варианты с отступом?}
+# ====== TODO To be translated ======
+translate R InsertNewlines {Insert newlines every 80 chars?}
 translate R ExportColumnStyle {В колонку (один ход на строку)?}
 translate R ExportSymbolStyle {Стиль символьной аннотации:}
 translate R ExportStripMarks {Удалить маркированные коды полей/стрелок из комментариев?}

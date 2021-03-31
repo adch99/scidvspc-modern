@@ -1316,6 +1316,8 @@ translate F ExportComments {Exporter les commentaires?}
 translate F ExportVariations {Exporter les variantes?}
 translate F IndentComments {Indenter les commentaires?}
 translate F IndentVariations {Indenter les variantes?}
+# ====== TODO To be translated ======
+translate F InsertNewlines {Insert newlines every 80 chars?}
 translate F ExportColumnStyle {Style en colonne (un coup par ligne)?}
 translate F ExportSymbolStyle {Style d'annotation symbolique:}
 translate F ExportStripMarks {Enlever les codes de marquages de flèches et de coloration de cases des commentaires?}
