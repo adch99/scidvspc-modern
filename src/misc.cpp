@@ -607,6 +607,8 @@ strTrimMarkCodes (char * str)
             } else if (ch == ']') {
                 // See a code-ending ']', so end the code.
                 inCode = false;
+                while (isspace(in[1]))
+                  in++;
             }
             // For all other characters in a code, just ignore it.
         } else {
