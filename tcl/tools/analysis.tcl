@@ -1275,22 +1275,27 @@ proc bookAnnotation { {n 1} } {
   # update
 
   set bookName [file rootname $::useAnalysisBookName]
-  set verboseMoveOutOfBook " $tr(MoveOutOfBook)"
-  set verboseLastBookMove " $tr(LastBookMove)"
 
   ### Wrong. Compares c4 Bc4
   # if { [ string match -nocase "*[sc_game info previousMoveNT]*" $prevbookmoves ] != 1 }
 
   if {![sc_game startBoard]} {
-  if {[lsearch -exact $prevbookmoves [sc_game info previousMoveNT]] == -1} {
-    if {$prevbookmoves != {}} {
-      sc_pos setComment "[sc_pos getComment]$verboseMoveOutOfBook ($bookName: $prevbookmoves)"
-    } else  {
-      sc_pos setComment "[sc_pos getComment]$verboseMoveOutOfBook ($bookName)"
+    set verboseMoveOutOfBook $tr(MoveOutOfBook)
+    set verboseLastBookMove  $tr(LastBookMove)
+    set prev_comment [sc_pos getComment]
+    if {$prev_comment != ""} {
+      set verboseMoveOutOfBook "$prev_comment $verboseMoveOutOfBook"
+      set verboseLastBookMove  "$prev_comment $verboseLastBookMove"
     }
-  } else  {
-    sc_pos setComment "[sc_pos getComment]$verboseLastBookMove ($bookName)"
-  }
+    if {[lsearch -exact $prevbookmoves [sc_game info previousMoveNT]] == -1} {
+      if {$prevbookmoves != {}} {
+        sc_pos setComment "$verboseMoveOutOfBook ($bookName: $prevbookmoves)"
+      } else  {
+        sc_pos setComment "$verboseMoveOutOfBook ($bookName)"
+      }
+    } else  {
+      sc_pos setComment "$verboseLastBookMove ($bookName)"
+    }
   }
 
   # last move was out of book or the last move in book : it needs to be analyzed, so take back
