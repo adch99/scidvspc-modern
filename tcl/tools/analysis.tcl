@@ -1970,7 +1970,6 @@ proc makeAnalysisMove {n} {
   global analysis comp
 
   set s $analysis(moves$n)
-  set res 1
 
   # Scan over any leading number/etc. This is ugly
   while {1} {
@@ -1983,7 +1982,9 @@ proc makeAnalysisMove {n} {
     if {$s == {}} {return 0}
     set s [string range $s 1 end]
   }
-  if {[scan $s %s move] != 1} { set res 0 }
+  if {[scan $s %s move] != 1} {
+    return 0
+  }
 
   if {$move == [sc_game info nextMoveUCI]} {
     ::move::Forward
@@ -2010,9 +2011,10 @@ proc makeAnalysisMove {n} {
   set analysis(automoveThinking$n) 0
   if { [moveAdd $move $n] } {
     ### Move fail
-    set res 0
     # puts "Error adding move $move"
     set analysis(waitForBestMove$n) 1
+    sc_game undo
+    return 0
   } else {
     ::fics::checkAdd
     if {$action == "mainline"} {
@@ -2032,9 +2034,9 @@ proc makeAnalysisMove {n} {
     }  
   } else {
     updateBoard -pgn -animate
-    ::utils::sound::AnnounceNewMove $move
+    ::utils::sound::AnnounceNewMove [sc_game info previousMove]
   }
-  return $res
+  return 1
 }
 
 ### Close an engine, because its analysis window is being destroyed.
