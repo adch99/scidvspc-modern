@@ -211,6 +211,7 @@ proc ::plist::refresh {} {
   }
   $t insert end "\n"
   $t configure -state disabled
+  wm title $w "[tr WindowsPList]: [file tail [sc_base filename]], $count [tr Players]"
   unbusyCursor .
 }
 
