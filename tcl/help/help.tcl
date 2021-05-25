@@ -907,6 +907,12 @@ set helpText(Moves) {<h1>Move Entry and Options</h1>
   is disabled.
   </p>
 
+  <h4>Suggested Moves</h4>
+  <p>
+  The Suggested Move feature, if enabled, highlights all squares
+  to which there is a legal move. This can be confusing at times, as is disabled by default in Scid vs. PC.
+  </p> 
+
   <h3><name Null>Entering Null Moves</name></h3>
   <p>
   <a Variations Null>Null Moves</a> (or empty moves) can be useful in variations where
