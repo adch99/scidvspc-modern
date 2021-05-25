@@ -1501,6 +1501,7 @@ proc drawArrow {sq color} {
 # Todo: change pressSquare to "pressSquare $w" and make it usable by other boards.
 for {set i 0} { $i < 64 } { incr i } {
   ::board::bind .main.board $i <Enter> "enterSquare $i"
+  ::board::bind .main.board $i <Leave> "leaveSquare $i"
   ::board::bind .main.board $i <ButtonPress-1> "pressSquare $i 0"
   ::board::bind .main.board $i <ButtonPress-2> "pressSquare $i 1"
   ::board::bind .main.board $i <Control-ButtonPress-1> "drawArrow $i \$::::commenteditor::State(markColor)"

@@ -1,13 +1,6 @@
-This feature was removed because it crashes When Options->Moves->Color Selected Square is deselected
-(ie when the new rectangle for selected square is used).
-And it sucks besides. This position
-r1bqkbnr/pppppppp/2n5/4P3/8/8/PPPP1PPP/RNBQKBNR b KQkq - 0 2 
-, the suggested knight move is retreat. wtf.
-This patch reinistates feature (english only) S.A
-
 Index: tcl/board.tcl
 ===================================================================
---- tcl/board.tcl	(revision 3054)
+--- tcl/board.tcl	(revision 3163)
 +++ tcl/board.tcl	(working copy)
 @@ -7,21 +7,21 @@
  array set ::board::letterToPiece \
@@ -106,7 +99,7 @@ Index: tcl/board.tcl
      bind  $f.b$c <Button-1> "chooseAColor $w $c"
 Index: tcl/edit.tcl
 ===================================================================
---- tcl/edit.tcl	(revision 3054)
+--- tcl/edit.tcl	(revision 3163)
 +++ tcl/edit.tcl	(working copy)
 @@ -769,7 +769,7 @@
  
@@ -119,9 +112,9 @@ Index: tcl/edit.tcl
    set square [::board::getSquare $w $x $y]
 Index: tcl/end.tcl
 ===================================================================
---- tcl/end.tcl	(revision 3054)
+--- tcl/end.tcl	(revision 3163)
 +++ tcl/end.tcl	(working copy)
-@@ -1499,6 +1499,7 @@
+@@ -1501,6 +1501,7 @@
  # Todo: change pressSquare to "pressSquare $w" and make it usable by other boards.
  for {set i 0} { $i < 64 } { incr i } {
    ::board::bind .main.board $i <Enter> "enterSquare $i"
@@ -131,9 +124,9 @@ Index: tcl/end.tcl
    ::board::bind .main.board $i <Control-ButtonPress-1> "drawArrow $i \$::::commenteditor::State(markColor)"
 Index: tcl/help/help.tcl
 ===================================================================
---- tcl/help/help.tcl	(revision 3054)
+--- tcl/help/help.tcl	(revision 3163)
 +++ tcl/help/help.tcl	(working copy)
-@@ -893,6 +893,12 @@
+@@ -907,6 +907,12 @@
    is disabled.
    </p>
  
@@ -148,9 +141,9 @@ Index: tcl/help/help.tcl
    <a Variations Null>Null Moves</a> (or empty moves) can be useful in variations where
 Index: tcl/lang/english.tcl
 ===================================================================
---- tcl/lang/english.tcl	(revision 3054)
+--- tcl/lang/english.tcl	(revision 3163)
 +++ tcl/lang/english.tcl	(working copy)
-@@ -290,6 +290,8 @@
+@@ -291,6 +291,8 @@
    {Set the time delay for autoplay mode}
  menuText E OptionsMovesCoord "Coordinate Move Entry" 0 \
    {Accept coordinate-style move entry (e.g. "g1f3")}
@@ -159,7 +152,7 @@ Index: tcl/lang/english.tcl
  menuText E OptionsShowVarPopup "Show Variation Window" 0 {Turn on/off the display of a variations window}  
  menuText E OptionsMovesSpace "Add Spaces after Move Number" 0 {Add spaces after move number}  
  menuText E OptionsMovesKey "Keyboard Completion" 0 \
-@@ -1340,6 +1342,7 @@
+@@ -1342,6 +1344,7 @@
  translate E LightSquares {Light squares}
  translate E DarkSquares {Dark squares}
  translate E SelectedSquares {Selected}
@@ -169,9 +162,9 @@ Index: tcl/lang/english.tcl
  translate E WhitePieces {White pieces}
 Index: tcl/main.tcl
 ===================================================================
---- tcl/main.tcl	(revision 3054)
+--- tcl/main.tcl	(revision 3163)
 +++ tcl/main.tcl	(working copy)
-@@ -1222,6 +1222,7 @@
+@@ -1221,6 +1221,7 @@
  # These three should be ::board::_selectedSq($w) etc instead of globals
  set selectedSq -1
  set currentSq -1
@@ -179,7 +172,7 @@ Index: tcl/main.tcl
  
  set EMPTY 0
  set KING 1
-@@ -1507,12 +1508,36 @@
+@@ -1508,12 +1509,36 @@
    }
  }
  
@@ -218,7 +211,7 @@ Index: tcl/main.tcl
  #    Called when the left mouse button is pressed on a square.
  #    Sets that square to be the selected square.
  
-@@ -1560,7 +1585,7 @@
+@@ -1561,7 +1586,7 @@
  
    if { [winfo exists .calvarWin] } { return }
  
@@ -227,7 +220,7 @@ Index: tcl/main.tcl
  
    ::board::setDragSquare $w -1
    set square [::board::getSquare $w $x $y]
-@@ -1570,7 +1595,18 @@
+@@ -1571,7 +1596,18 @@
    }
  
    if {$square == $selectedSq} {
@@ -249,7 +242,7 @@ Index: tcl/main.tcl
        return
 Index: tcl/menus.tcl
 ===================================================================
---- tcl/menus.tcl	(revision 3054)
+--- tcl/menus.tcl	(revision 3163)
 +++ tcl/menus.tcl	(working copy)
 @@ -962,7 +962,7 @@
      ::pgn::shortHeader ::pgn::boldMainLine ::pgn::stripMarks 
@@ -257,30 +250,34 @@ Index: tcl/menus.tcl
      myPlayerNames optionsAutoSave ::tree::mask::recentMask ::tree::mask::autoLoadMask ::tree::showBar ::tree::short ::tree::sortBest ::tree::autoAdjust
 -    ::tree::autoSave ::tree::order ::tree::showFrame ecoFile showVarPopup showVarArrows colorActiveSquare
 +    ::tree::autoSave ::tree::order ::tree::showFrame ecoFile suggestMoves showVarPopup showVarArrows colorActiveSquare
-     annotate(blunder) annotate(addTag) annotate(Moves) annotate(WithVars) annotate(WithScore) useAnalysisBook annotate(isVar) annotate(scoreType) annotate(cutoff) annotate(MissedMates)
+     annotate(blunder) annotate(addTag) annotate(Moves) annotate(WithVars) annotate(WithScore) useAnalysisBook annotate(isVar) annotate(scoreType) annotate(cutoff) annotate(MissedMates) annotate(VarAtEnd)
      annotate(WantedDepth) annotate(Depth) autoplayDelay animateDelay boardCoords boardSTM 
      moveEntry(AutoExpand) moveEntry(Coord)
-@@ -1020,7 +1020,7 @@
+@@ -1021,7 +1021,7 @@
      puts $optionF ""
      puts $optionF "set analysisCommand [list $analysisCommand]"
      puts $optionF ""
--    foreach i {lite dark highcolor bgcolor maincolor varcolor engineLineColor rowcolor progcolor crosscolor scorecolor scorebarcolor switchercolor borderwidth \
-+    foreach i {lite dark highcolor bestcolor bgcolor maincolor varcolor engineLineColor rowcolor progcolor crosscolor scorecolor scorebarcolor switchercolor borderwidth \
+-    foreach i {lite dark highcolor bgcolor maincolor varcolor engineLineColor rowcolor highlightcolor progcolor crosscolor scorecolor scorebarcolor switchercolor borderwidth \
++    foreach i {lite dark highcolor bestcolor bgcolor maincolor varcolor engineLineColor rowcolor highlightcolor progcolor crosscolor scorecolor scorebarcolor switchercolor borderwidth \
            pgnColor(Header) pgnColor(Main) pgnColor(Var) \
            pgnColor(Nag) pgnColor(Comment) pgnColor(Background) \
            pgnColor(Current) pgnColor(NextMove) } {
-@@ -1199,6 +1199,10 @@
+@@ -1200,6 +1200,14 @@
      -variable moveEntry(AutoExpand) -offvalue 0 -onvalue 1
  set helpMessage($m.entry,4) OptionsMovesKey
  
 +$m.entry add checkbutton -label OptionsMovesSuggest \
-+    -variable suggestMoves -offvalue 0 -onvalue 1
++    -variable suggestMoves -offvalue 0 -onvalue 1 -command {
++       if {$suggestMoves} {
++         set colorActiveSquare 1
++       }
++    }
 +set helpMessage($m.entry,5) OptionsMovesSuggest
 +
  $m.entry add checkbutton -label OptionsMovesSpace \
      -variable ::pgn::moveNumberSpaces -offvalue 0 -onvalue 1
  set helpMessage($m.entry,7) OptionsMovesSpace
-@@ -1839,7 +1843,7 @@
+@@ -1850,7 +1858,7 @@
    }
    configMenuText .menu.options.entry [tr OptionsShowVarPopup $oldLang] OptionsShowVarPopup $lang
    # S.A. here's how to fix these f-ing menus. &&&
@@ -291,9 +288,9 @@ Index: tcl/menus.tcl
    }
 Index: tcl/start.tcl
 ===================================================================
---- tcl/start.tcl	(revision 3054)
+--- tcl/start.tcl	(revision 3163)
 +++ tcl/start.tcl	(working copy)
-@@ -407,6 +407,7 @@
+@@ -416,6 +416,7 @@
  set lite        #f3f3f3
  set dark        #7389b6		;# dark and lite square colors
  set highcolor   #b0d0e0		;# color when something is selected
@@ -301,7 +298,7 @@ Index: tcl/start.tcl
  set bgcolor     grey20		;# board (canvas) bg color, appears as the lines between the squares
  set progcolor   rosybrown	;# progress bar
  set buttoncolor #b0c0d0		;# (below)
-@@ -645,6 +646,9 @@
+@@ -662,6 +663,9 @@
  # Ask before replacing existing moves: on by default
  set askToReplaceMoves 1
  
@@ -313,7 +310,7 @@ Index: tcl/start.tcl
  set showVarArrows 1
 Index: tcl/tools/calvar.tcl
 ===================================================================
---- tcl/tools/calvar.tcl	(revision 3054)
+--- tcl/tools/calvar.tcl	(revision 3163)
 +++ tcl/tools/calvar.tcl	(working copy)
 @@ -214,8 +214,10 @@
  
