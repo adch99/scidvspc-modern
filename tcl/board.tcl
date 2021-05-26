@@ -2638,6 +2638,8 @@ proc ::board::animate {w oldboard newboard} {
 
   set from -1
   set to -1
+  set from2 -1
+  set to2 -1
   set captured -1
   set capturedPiece {.}
 
@@ -2655,17 +2657,20 @@ proc ::board::animate {w oldboard newboard} {
 	    [string index $newlower $rto] == {r}} {
           # A castling move animation.
           # Move the rook back to initial square until animation is complete:
-          # TODO: It may look nicer if the rook was animated as well...
           eval $w.bd coords p$rto [::board::midSquare $w $rfrom]
           set from $kfrom
           set to $kto
+          set from2 $rfrom
+          set to2 $rto
         } elseif {[string index $newlower $kfrom] == {k}  &&
 	    [string index $newlower $rfrom] == {r}  &&
 	    [string index $oldlower $kto] == {k}  &&
 	    [string index $oldlower $rto] == {r}} {
-          # An undo-castling animation. No need to move the rook.
+          eval $w.bd coords p$rfrom [::board::midSquare $w $rto]
           set from $kto
           set to $kfrom
+          set from2 $rto
+          set to2 $rfrom
         }
       }
     }
@@ -2764,6 +2769,8 @@ proc ::board::animate {w oldboard newboard} {
   set ::board::_animate($w,end) [expr {$start + $::animateDelay} ]
   set ::board::_animate($w,from) $from
   set ::board::_animate($w,to) $to
+  set ::board::_animate($w,from2) $from2
+  set ::board::_animate($w,to2) $to2
   ::board::_animate $w
 }
 
@@ -2794,6 +2801,22 @@ proc ::board::_animate {w} {
   set y [expr {$fromY + round(($toY - $fromY) * $ratio)} ]
   $w.bd coords p$to $x $y
   $w.bd raise p$to
+  # Currently only used by castling (author Uwe Klimmek)
+  if { $::board::_animate($w,from2) >= 0 } {
+      # move second piece
+      set from $::board::_animate($w,from2)
+      set to $::board::_animate($w,to2)
+      set fromMid [::board::midSquare $w $from]
+      set toMid [::board::midSquare $w $to]
+      set fromX [lindex $fromMid 0]
+      set fromY [lindex $fromMid 1]
+      set toX [lindex $toMid 0]
+      set toY [lindex $toMid 1]
+      set x [expr {$fromX + round(($toX - $fromX) * $ratio)} ]
+      set y [expr {$fromY + round(($toY - $fromY) * $ratio)} ]
+      $w.bd coords p$to $x $y
+      $w.bd raise p$to
+  }
 
   # Schedule another animation update in a few milliseconds:
   after 5 "::board::_animate $w"
