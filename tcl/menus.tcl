@@ -1114,7 +1114,11 @@ $m.ginfo add checkbutton -label GInfoFEN -variable gameInfo(showFEN) -offvalue 0
   }
 }
 $m.ginfo add checkbutton -label GInfoMarks \
-    -variable gameInfo(showMarks) -offvalue 0 -onvalue 1 -command updateBoard
+    -variable gameInfo(showMarks) -offvalue 0 -onvalue 1 \
+    -command {
+       ::board::showMarks .main.board $gameInfo(showMarks)
+       updateBoard
+    }
 $m.ginfo add checkbutton -label GInfoWrap \
     -variable gameInfo(wrap) -offvalue 0 -onvalue 1 -command updateBoard
 $m.ginfo add checkbutton -label GInfoFullComment -variable gameInfo(fullComment) -offvalue 0 -onvalue 1 -command {
