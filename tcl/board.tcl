@@ -1618,8 +1618,6 @@ proc ::board::mark::getEmbeddedCmds {comment} {
   return $result
 }
 
-# ::board::mark::drawAll --
-#
 #	Draws all kind of marks for the board.
 #
 # Arguments:
@@ -1627,12 +1625,13 @@ proc ::board::mark::getEmbeddedCmds {comment} {
 # Results:
 #	Reads the current marked square information of the
 #	board and adds (i.e. draws) them to the board.
-#
+# (does not actually update the board widget though - S.A).
+
 proc ::board::mark::drawAll {win} {
   if {![info exists ::board::_mark($win)]} {return}
   foreach mark $::board::_mark($win) {
     # 'mark' is a list: {type arg1 ?arg2? color}
-    eval add $win $mark "false"
+    eval add $win $mark false
   }
 }
 
@@ -1677,8 +1676,6 @@ proc ::board::mark::clear {win} {
   }
 }
 
-# ::board::mark::add --
-#
 #	Draws arrow or mark on the specified square(s).
 #
 # Arguments:

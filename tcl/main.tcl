@@ -417,7 +417,7 @@ pack .main.button.start .main.button.back .main.button.forward .main.button.end 
 
 ::board::new .main.board $boardSize 1
 #.main.board.bd configure -relief solid -border 2
-::board::showMarks .main.board 1
+::board::showMarks .main.board $::gameInfo(showMarks)
 if {$boardCoords} {
   set ::board::_coords(.main.board) $boardCoords
   ::board::coords .main.board
@@ -841,9 +841,10 @@ proc updateBoard {args} {
 set updateBoard3_id {}
 
 proc updateBoard2 {} {
-
   # Draw arrows and marks, color squares:
+  # (program flow  between here and ::board::mark::drawAll is a little convolute)
 
+if  {$::gameInfo(showMarks)} {
   foreach {cmd discard} [::board::mark::getEmbeddedCmds [sc_pos getComment]] {
     set type   [lindex $cmd 0]
     set square [::board::sq [lindex $cmd 1]]
@@ -854,6 +855,7 @@ proc updateBoard2 {} {
     # add mark to board
     ::board::mark::add .main.board $type $square $dest $color
   }
+}
 
   # Update the status of each navigation button:
   if {[sc_pos isAt start]} {
