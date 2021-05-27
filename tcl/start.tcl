@@ -416,7 +416,6 @@ set analysis(boardShowsVar) 1
 set lite        #f3f3f3
 set dark        #7389b6		;# dark and lite square colors
 set highcolor   #b0d0e0		;# color when something is selected
-set bestcolor   #bebebe		;# suggested move square
 set bgcolor     grey20		;# board (canvas) bg color, appears as the lines between the squares
 set progcolor   rosybrown	;# progress bar
 set buttoncolor #b0c0d0		;# (below)
@@ -662,9 +661,6 @@ set highlightLastMovePattern {} ; # this option is not saved
 
 # Ask before replacing existing moves: on by default
 set askToReplaceMoves 1
-
-# Show suggested moves
-set suggestMoves 0
 
 # Show variations popup window, arrows
 set showVarPopup 0

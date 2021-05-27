@@ -214,10 +214,8 @@ namespace eval calvar {
 
     set ::analysis(multiPVCount$n) 10
     ::uci::sendToEngine $n "setoption name MultiPV value $::analysis(multiPVCount$n)"
-    set ::calvar::suggestMoves_old $::suggestMoves
     set ::calvar::hideNextMove_old $::gameInfo(hideNextMove)
 
-    set ::suggestMoves 0
     set ::gameInfo(hideNextMove) 1
     updateBoard
 
@@ -240,7 +238,6 @@ namespace eval calvar {
     ::uci::closeUCIengine $n
     focus .main
     destroy .calvarWin
-    set ::suggestMoves $::calvar::suggestMoves_old
     set ::gameInfo(hideNextMove) $::calvar::hideNextMove_old
     updateBoard
   }

@@ -769,7 +769,7 @@ proc setupBoard {} {
 
 proc releaseSetupSquare {w x y} {
 
-  global selectedSq bestSq setupBd pastePiece setupboardSize
+  global selectedSq setupBd pastePiece setupboardSize
 
   ::board::setDragSquare $w -1
   set square [::board::getSquare $w $x $y]
