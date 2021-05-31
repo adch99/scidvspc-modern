@@ -437,11 +437,11 @@ namespace eval tacgame {
 
     toplevel $w
     if {$::tacgame::openingType == "fischer"} {
-      wm title $w "Fischer Elo $level"
+      wm title $w "Phalanx (Fischer $level)"
     } elseif {$::tacgame::openingType == "pawn"} {
-      wm title $w "Random Pawns Elo $level"
+      wm title $w "Phalanx (Random Pawns $level)"
     } else {
-      wm title $w "Elo $level"
+      wm title $w "Phalanx ($level)"
     }
     wm protocol $w WM_DELETE_WINDOW ::tacgame::abortGame
 

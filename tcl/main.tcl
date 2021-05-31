@@ -1381,6 +1381,7 @@ proc addMove { sq1 sq2 {animate ""}} {
       # we can't easily decide if isPromotion until the move is made,
       # so add the squares to ::premove and check then.
       set ::startArrowSquare $san2
+      set ::gameInfo(showMarks) 1
       drawArrow $sq1 $::commenteditor::State(markColor)
       set ::fics::premove [list ${san2}${san1} $sq1 $sq2]
       return
