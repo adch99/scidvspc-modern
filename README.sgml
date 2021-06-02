@@ -395,6 +395,38 @@ Chessbase databases and many chess variants.</p>
 <label id="changes_">
 <sect> changes <p>
 
+<sect2> Scid vs. PC 4.22<p>
+<itemize>
+<item>Show Stockfish Win/Draw/Loss (as White/Draw/Black) infos in information window.
+<item>Add an 'Extra Tags' field to the header search (eg 'Annotator').
+<item>New 'Highlight' colour option (affects crosstable, reports, pgn moves and name-editor).
+<item>Animate the Rook in Castling. (author Uwe - Nice).
+<item>Engine analysis: option to wrap long lines.
+<item>Engine annotation: option to disable adding an end-of-game variation.
+<item>Playing an opening against an UCI engine - openings can be imported from the ECO Window.
+<item>Improve the tree training feature by automatically enabling Trial mode.
+<item>Minor tweaks to the spacing in long comments in the PGN and Gameinfo windows..
+<item>Export Games: add option to disable inserting newlines every 80 chars or so.
+<item>Serious game: When using book, leave a comment when book is exited / exhausted.
+<item>Add an undo point at the start of every annotation game.
+<item>Add a Switcher menu item to show/hide the gamelist buttonbar.
+<newline><newline>
+
+<item>Help and translation updates.
+<item>Book tuning tweaks.
+<item>Graph window tweaks.
+<item>ECO window tweaks.
+<newline><newline>
+
+Bug Fixes
+<item>The Gamelist 'next moves' feature didn't work for transpositions at differing depths.
+<item>Remember arrow lengths/widths.
+<item>Batch stripping comments/vars could sometimes break the namebase.
+<item>Fix / enable hiding of 'Colored Squares and Arrows' on the main board.
+<item>Windows drag and drop typo/fix from Oz.
+</itemize></p>
+
+
 <sect2> Scid vs. PC 4.21<p>
 <itemize>
 <item>Gamelist (and Best Games) can now show 'Next Moves' instead of just the 'Opening Moves' if the tree is open and adjusting filter.
