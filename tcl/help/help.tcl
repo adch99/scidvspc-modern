@@ -6211,7 +6211,41 @@ set helpText(Sound) {<h1>Sound</h1>
 set helpTitle(Changelog) "Scid vs PC Changelog"
 set helpText(Changelog) {<h1>Changelog</h1>
 
-<h4>4.21 (Jan 7, 2019)</h4>
+<h4>4.22 (June 10, 2021)</h4>
+<ul>
+<li>Show Stockfish Win/Draw/Loss (as White/Draw/Black) infos in information window</li>
+<li>Add an 'Extra Tags' field to the header search (eg 'Annotator')</li>
+<li>New 'Highlight' colour option (affects crosstable, reports, pgn moves and name-editor)</li>
+<li>Animate the Rook in Castling. (author Uwe - Nice)</li>
+<li>Engine analysis: option to wrap long lines</li>
+<li>Engine annotation: option to disable adding an end-of-game variation</li>
+<li>Playing an opening against an UCI engine - openings can be imported from the ECO Window</li>
+<li>Improve the tree training feature by automatically enabling Trial mode</li>
+<li>Minor tweaks to the spacing in long comments in the PGN and Gameinfo windows.</li>
+<li>Export Games: add option to disable inserting newlines every 80 chars or so</li>
+<li>Serious game: When using book, leave a comment when book is exited / exhausted</li>
+<li>Add an undo point at the start of every annotation game</li>
+<li>Add a Switcher menu item to show/hide the gamelist buttonbar</li>
+</ul><br>
+
+<ul>
+<li>Help and translation updates</li>
+<li>Book tuning tweaks</li>
+<li>Graph window tweaks</li>
+<li>ECO window tweaks</li>
+</ul><br>
+
+<b>Bug Fixes</b>
+<ul>
+<li>The Gamelist 'next moves' feature didn't work for transpositions at differing depths</li>
+<li>Remember arrow lengths/widths</li>
+<li>Batch stripping comments/vars could sometimes break the namebase</li>
+<li>Fix / enable hiding of 'Colored Squares and Arrows' on the main board</li>
+<li>Windows drag and drop typo/fix from Oz</li>
+</ul>
+
+
+<h4>4.21 (Jan 7, 2020)</h4>
 <ul>
 <li>Gamelist (and Best Games) can now show 'Next Moves' instead of just the 'Opening Moves' if the tree is open and adjusting filter</li>
 <li>Text foreground colour option for listboxes and text windows. (and remove the 'global' colour option which is too rough)</li>
@@ -7066,70 +7100,6 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li>Update Spanish and Polish translations</li>
 <li>Update FICS , PGN and Menu  language translations</li>
 </ul>
-
-<h4>4.5 (August 10, 2011)</h4>
-<ul>
-<li>PGN chess font support (but font installation on Windows isn't great)</li>
-<br>
-<li>Computer Tournament:</li>
-<ul>
-<li>Per-game time control</li>
-<li>Clock widgets for remaining time</li>
-<li>Manual adjudication buttons, and a Restart button</li>
-</ul>
-<li>General:</li>
-<ul>
-<li>Game List remembers it's view when switching between bases</li>
-<li>Game Browser has new buttons and functionality</li>
-<li>Tournament Finder is more readable</li>
-<li>Restore PGN scrollbar (pgn option)</li>
-<li>Phalanx now reads enpassant and 50 move field from FEN (thanks Bernhard Prümmer)</li>
-<li>FICS console fg and bg colours are now configurable</li>
-<li>Name Editor tidy up and documentation review</li>
-<li>Player Info: add a 'Refine Filter' result group</li>
-<li>Typing 'OO' castles (previously only 'OK','OQ')</li>
-<li>Mask Search widget fixes</li>
-<li>Annotation: Dont add nags when annotating score. Don't repeat previous nag if annotating all moves</li>
-<li>Crosstable shows current game in green</li>
-<li>Use translations for Game List column titles (if available)</li>
-<li>Add a 'Game Delete' menu</li>
-<li>Improve ./configure and Makefile, and CC FLAGS are propagated to all targets</li>
-<li>Game Save autocomplete now uses mouse instead of clumsy keyboard bindings</li>
-<li>Restrict Game List sort to valid columns, and add a 'confirm sort' widget for bases <gt> 200000 games</li>
-
-
-</ul>
-<li>MS Windows tweaks:</li>
-<ul>
-<li>Windows Crosstable transparency glitch is fixed</li>
-<li>Fix wheelmouse support in a few places</li>
-<li>Add a 'make-scidgui.bat' hack for assembling a new 'scid.gui' from subversion</li>
-<li>Computer Tournament buttons padding fixed</li>
-</ul>
-<li>OSX:</li>
-<ul>
-<li>Make an OSX app with a working ;<gt> version of Tcl (thanks Gilles)</li>
-<li>Many OSX wheelmouse and graphical fixes</li>
-</ul>
-<li>Bug fixes:</li>
-<ul>
-<li>Null move fixes including - analysis engines can append variations</li>
-<li>Tree training feature fixes</li>
-<li>Show Progressbar for loading bases with a dot (.) in their name</li>
-<li>If Scid crashes, Game List could be left with zero size</li>
-<li>PGN middle-click move preview feature fixed for variations</li>
-<li>PGN text tabstops are now dynamic to allow for correct column allignment in column mode</li>
-<li>Remember position of custom ecoFile if loaded</li>
-<li>Change the second book slot to avoid conflict with Annotation feature</li>
-<li>Catch unmatched braces in gamelist values</li>
-<li>Fix 'Paste FEN' castling sanity check</li>
-<li>Browser previously highlighted Next move instead of Current move</li>
-<li>Fix scid.eco unicode bug</li>
-<li>Remove 'newlines' from Mask Search results</li>
-<li>When addAnalysisVariation fails due to bad moves, don't move back N moves</li>
-<li>Theory table incorrectly started from start position</li>
-</ul>
-
 }
 
 set helpTitle(ShortCuts) "Shortcuts"
