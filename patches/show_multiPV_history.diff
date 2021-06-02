@@ -1,0 +1,13 @@
+Index: tcl/tools/analysis.tcl
+===================================================================
+--- tcl/tools/analysis.tcl	(revision 3168)
++++ tcl/tools/analysis.tcl	(working copy)
+@@ -3552,7 +3552,7 @@
+       } else {
+ 	# MultiPV
+ 
+-	$h delete 1.0 end
++	# $h delete 1.0 end
+ 	# First line is in bold. Other diffs ??
+ 	set pv [lindex $analysis(multiPV$n) 0]
+ 	catch { set newStr [format "%2d \[%s\]  " [lindex $pv 0] [scoreToMate $score [lindex $pv 3]] ] }
