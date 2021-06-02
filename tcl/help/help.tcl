@@ -162,7 +162,7 @@ set helpText(Scid) {<h1>Databases and General Use</h1>
   </i></p>
 
   <p><i>
-  Kingbase free database <url http://www.kingbase-chess.net/>http://www.kingbase-chess.net/</url>
+  Caïssabase free database <url http://caissabase.co.uk/>http://caissabase.co.uk/</url>
   </i></p>
 
   <h4>Using Databases</h4>
