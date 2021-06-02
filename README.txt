@@ -2686,7 +2686,7 @@
   o  Online documentation
      <http://scidvspc.sourceforge.net/doc/Contents.htm>
 
-  o  Kingbase database  <http://www.kingbase-chess.net/ >
+  o  Cassabase database  <http://caissabase.co.uk/>
 
   o  Player Information resources
      <http://sourceforge.net/projects/scid/files/Player Data/>
