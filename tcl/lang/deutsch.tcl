@@ -729,8 +729,7 @@ translate D AnnotateBlundersOnly {Wenn der Partiezug ein offensichtlicher Fehler
 translate D BlundersNotBest {Patzer/nicht bester Zug}
 translate D AnnotateTitle {Kommentare konfigurieren}
 translate D AnnotateMissedMates {Verpaßte/kürzere Mattführungen}
-# ====== TODO To be translated ======
-translate D AnnotateEnd {At end of game}
+translate D AnnotateEnd {Am Partieende}
 translate D BlundersThreshold {Schwelle}
 translate D ScoreFormat {Format für die Bewertung}
 translate D CutOff {Abschneiden}
@@ -1158,8 +1157,7 @@ translate D ClearGameDialog {Diese Partie wurde geändert.\nWollen Sie sie speic
 translate D ExitUnsaved {Die folgenden Datenbanken haben ungesicherte Partieänderungen. Wenn Sie jetzt beenden, gehen diese Änderungen verloren.}
 translate D ChangeTextDialog {Das globale Aktivieren der Textfarbe erfordert einen Neustart.}
 translate D ChangeDockDialog {Das Andocken ändern erfordert einen Neustart.}
-# ====== TODO To be translated ======
-translate D FontSelectDialog "This is some sample text\nDouble click above to change font, then select 'ok'\nAaBbCcDdEeFfGgHhIiJjKkLlMm 0123456789. +=-"
+translate D FontSelectDialog "Dies ist ein Beispieltext\nDoppelklicken Sie oben, um die Schriftart zu ändern und wählen dann 'ok'\nAaBbCcDdEeFfGgHhIiJjKkLlMm 0123456789. +=-"
 translate D ExitNow {Jetzt beenden?}
 
 # Import window:
@@ -1353,8 +1351,7 @@ translate D ExportComments {Kommentare exportieren?}
 translate D ExportVariations {Varianten exportieren?}
 translate D IndentComments {Kommentare einrücken?}
 translate D IndentVariations {Varianten einrücken?}
-# ====== TODO To be translated ======
-translate D InsertNewlines {Insert newlines every 80 chars?}
+translate D InsertNewlines {Nach jeweils 80 Zeichen neue Zeile einfügen?}
 translate D ExportColumnStyle {Tabellarisch (ein Zug pro Zeile)?}
 translate D ExportSymbolStyle {Symbolische Notation:}
 translate D ExportStripMarks \
@@ -3917,6 +3914,11 @@ set helpText(D,Export) {<h1>Partien exportieren</h1>
   Kommentare umwandeln</b> aktivieren. Falls Sie natürlich später die
   PGN-Datei unter Beibehaltung der Nullzüge zurückimportieren
   wollen, deaktivieren Sie diese Option.
+  </p>
+  <p>Der PGN-Export ist normalerweise (wegen der Lesbarkeit) auf eine
+  Zeilenlänge von ungefähr 80 Zeichen formatiert. Um dies
+  abzuschalten, setzen Sie <b>Nach jeweils 80 Zeichen neue Zeile
+  einfügen?</b> auf Nein.
   </p>
   <p>Scids Verwendung von Ascii-Texten (wie <b>+=</b>), um Anmerkungen
   darzustellen, ist ebenfalls gegen den PGN-Standard. Aus
@@ -8560,25 +8562,36 @@ set helpText(D,HardwareConfig) {<h1>Mit externer Hardware verbinden</h1>
   verbinden--<gt>Konfigurieren...</run></green> konfiguriert werden.</p>
 
   <ul>
-  <li><term>Novag Citrine</term> (<a Novag>und kompatible
+  <li><b>Novag Citrine</b> (<a Novag>und kompatible
   Schachbretter</a>) benutzt einen internen Treiber, der extra für das
   Novag Citrine-Schachbrett entwickelt wurde, kann aber auch andere
   Schachbretter unterstützen. Dieser Treiber erlaubt die Eingabe von
   Zügen, aber die Brettlogik erkennt weder den Stellungsaufbau noch
   die Figuren als solche.</li>
-  <li><term>Input Engine</term> Die Treiber sind für eine freie,
-  offene Schnittstelle bestimmt, um mit jeder Hardware zu grafischen
+  <li><b>Input Engine</b> Die Treiber sind für eine freie, offene
+  Schnittstelle bestimmt, um mit jeder Hardware zu grafischen
   Benutzerschnittstellen für Schach zu verbinden. Sie sind nach dem
   üblichen Stil für Schachprogramme entwickelt. Die
-  Protokollspezifikationen und auch ein passender Treiber für
-  das <b>DGT</b> Electronic Chess Board kann man auf der Seite
-  <url http://dgtdrv.sourceforge.net>http://dgtdrv.sourceforge.net</url>
-  finden. Abhängig von der Hardware kann das Schachbrett den
-  Stellungsaufbau sowie die Figuren durch ihre Gangart erkennen
-  (z.B. DGT-Bretter). <b>Hinweis</b>: Scid enthält standardmäßig keine
-  Input Engine. Input Engines sind als unabhängige Programme für die
-  Verwendung mit einer Vielzahl an grafischen Benutzeroberflächen
-  bestimmt.</li>
+  Protokollspezifikationen kann man auf der
+  <url http://dgtdrv.sourceforge.net>Dgtdrv Website</url> finden,
+  während Ozkan eine
+  <url https://sourceforge.net/projects/scidvspc/files/support
+  files/dgtdrv2_oz.zip/download>aktualisierte Version</url>
+  des <b>seriellen Treibers</b>, der für das <b>DGT Electronic
+  Chessboard</b> geeignet ist, gepatcht hat.  Abhängig von der
+  Hardware kann das Schachbrett den Stellungsaufbau sowie die Figuren
+  durch ihre Gangart erkennen (z.B. DGT-Bretter).</li>
+
+  <li><b>Weitere UCB-Bretter</b> Beachte: Scid enthält standardmäßig
+  keine Input Engine. Input Engines sind als unabhängige Programme für
+  die Verwendung mit einer Vielzahl an grafischen Benutzeroberflächen
+  bestimmt. Auf <url https://goneill.co.nz/chess.php>Grahams
+  Schachseite</url> gibt es große Anstrengungen, um einen einfachen
+  Zugang zu vielen Geräten zu ermöglichen. Am unteren Ende der Seite
+  gibt es sowohl Treiber für UCB-Bretter von <b>Millennium Chesslink,
+  Certabo und Novag</b> als auch eine umfangreiche Dokumentation für
+  einen vergleichsweise einfachen Weg, um sie in Scid (oder eine
+  andere grafische Oberfläche für Schach) zu integrieren.</li>
   </ul>
 
   <h3>Einstellungen</h3>
@@ -8704,12 +8717,12 @@ set helpText(D,InputEngine) {<h1>Konsole DGT/Input Engine</h1>
   <p>Wenn ein Zug ausgeführt wurde, wird im Bereich zwischen den
   Schaltflächen und dem kleinen Brett der auf dem externen Brett
   ausgeführte Zug in figuriner langer algebraischer Notation
-  angezeigt. Gültige Züge werden auf einem <green>grünen</green>
-  Hintergrund, ungültige Züge auf einem <red>roten</red> Hintergrund
-  angezeigt. Außerdem werden ungültige Züge durch einen Warnton
-  angekündigt, falls für Scid der Ton aktiviert ist. Abhängig von den
-  Einstellungen werden die Züge zusätzlich angekündigt.</p>
-  
+  angezeigt. Gültige Züge werden auf einem grünen Hintergrund,
+  ungültige Züge auf einem roten Hintergrund angezeigt. Außerdem
+  werden ungültige Züge durch einen Warnton angekündigt, falls für
+  Scid der Ton aktiviert ist. Abhängig von den Einstellungen werden
+  die Züge zusätzlich angekündigt.</p>
+
   <p>Die <term>Info</term>-Schaltfläche holt Informationen vom
   Treiberprogramm. Der Umfang dieser Informationen hängt vom Programm
   ab, sollte aber normalerweise soviel wie möglich über die externe
@@ -10001,7 +10014,8 @@ set helpText(D,Board) {<h1>Brett- und Figureneinstellungen</h1>
   für diese beiden Betriebssysteme bündeln. Unter Linux verwenden die
   meisten Systeme Tk 8.6 (welches eine eingebaute Bildunterstützung
   hat), aber es ist auch möglich, TkImg aus
-  <url https://sourceforge.net/project/downloading.php?group_id=263836&filename=tkimg1.3.tar.bz2>tkimg1.3.tar.bz2</url>
+  <url https://sourceforge.net/projects/scidvspc/files/support
+  files/tkimg1.3.scidvspc.tar.bz2/download>tkimg1.3.scidvspc.tar.bz2</url>
   zu kompilieren und zu installieren.
   </i></p>
 
