@@ -1,16 +1,16 @@
---- spelling.uwe.altered2.orig	2018-11-12 18:26:57.579125089 +1000
-+++ spelling.uwe.altered2	2018-11-12 18:37:30.253011666 +1000
+--- spelling.new.orig	2021-06-03 12:01:01.784291414 +1000
++++ spelling.ssp	2021-06-03 12:25:14.618306898 +1000
 @@ -5,6 +5,9 @@
  # Spellcheck file for Scid with the
- # FiDE ratings 10-2018 Last modified at 02.11.2018
+ # FIDE ratings APR-2021 Last modified at 04.04.2021
  #
-+# Modified for Scid vs. PC by Stevenaaus, 12/06/2015
++# Modified for Scid vs. PC by Stevenaaus, 03/06/2021
 +# egrep -v 'Bio VIAF|Bio PND|Bio DSB|Bio BornCity|Bio Title|Bio ch-NED' spelling.ssp
 +#
  # Copyright (C) 2001-2015.
  # Franz Nagl
  # Heinz van Saanen
-@@ -104,6 +107,17 @@
+@@ -107,6 +110,16 @@
  @PLAYER "., -_*"
  
  ### START OF PLAYER SECTION
@@ -24,113 +24,128 @@
 +%Prefix " " ""
 +%Suffix " " ""
 +
-+
- A.f.m., Mahfuzul Haque #-  BAN [1645] 0000  i
-    %Bio FIDEID 10201971
-    = A F M, Mahfuzul Haque
-@@ -16399,8 +16413,9 @@
- Anand, Viswanathan #GM IND [2771] 1969
-    %Bio World Junior Champion (U20), 1987
+ A, N M Ziaul Islam Mithu #-  BAN [1473] 1974
+    %Bio FIDEID 10247360
+ A, Sohita #-  IND [1447] 1995 wi
+@@ -1754,7 +1767,7 @@
+    %Bio FIDEID 10643931
+ Abdelbaset, Taqieddin #-  PLE [1529] 1968
+    %Bio FIDEID 11501430
+-Abdel Dayem	, Adel #-  EGY [1842] 1959
++Abdel Dayem, Adel #-  EGY [1842] 1959
+    %Bio FIDEID 10668071
+    = Abdel Dayem , Adel
+ Abdel Dayem, Mohamed #-  EGY [1504] 1999 i
+@@ -28865,6 +28878,7 @@
     %Bio FIDE World Champion 2000-2002
--   %Bio World Champion 2007-
-+   %Bio World Champion 2007-2013
+    %Bio World Champion 2007-2013
     %Bio FIDEID 5000017
 +   = Anand, V
- Ananda Kr. Sahu #-  IND [1682] 1975  i
-    %Bio FIDEID 35005006
- Ananda Kumar Krishnamoorthy #-  IND [1874] 1973  i
-@@ -36522,6 +36537,8 @@
-    %Bio FIDEID 616150
- Baron, Jens #-  GER [1830] 1990
+ Ananda, Astri H #WFM INA [1807] 2004 wi
+    %Bio FIDEID 7104235
+ Ananda, Subramaniam #-  IND [1607] 1993 i
+@@ -62122,6 +62136,8 @@
     %Bio FIDEID 24664413
+ Baron, Marek #-  GER [1924] 1972
+    %Bio FIDEID 16208196
 +Baron, Michael #fm  AUS [2352] 1976
 +   %Bio FIDEID 3202283
- Baron, Marek #-  GER [1850] 1972
-    %Bio FIDEID 16208196
- Baron, Maria Camila #-  COL [1633] 1999  wi
-@@ -42648,6 +42665,7 @@
- Bellin, Jana M #WGM ENG [2021] 1947  w
+ Baron, Maria Camila #-  COL [1633] 1999 wi
+    %Bio FIDEID 4418140
+ Baron, Marian-Ovidiu #-   FRA [....] ????
+@@ -71213,6 +71229,7 @@
+ Bellin, Jana M #WGM ENG [2013] 1947 w
     %Bio FIDEID 402168
     = Hartston-Miles-Bellin, Jana M
 +   = Hartston, Jana
-    = Miles, Jana2
+    = Miles2, Jana
     = Bellin, Jana
     = Malypetrova, Jana
-@@ -55337,6 +55355,8 @@
-    %Bio FIDEID 229199
- Bonhomme, Jean-Christophe #-  FRA [1739] 1973
+@@ -90257,6 +90274,8 @@
     %Bio FIDEID 26082160
+ Bonhomme, Marcel #-  FRA [1485] 1960
+    %Bio FIDEID 45153795
 +Bonham, Kevin          #-   AUS [1910] 1972
 +   %Bio FIDEID 3205649
- Boni De Aristizabal, Marco #-  ESP [1667] 1968
-    %Bio FIDEID 22219552
-    = Boni de Aristizabal, Marco
-@@ -71399,6 +71419,7 @@
-    %Bio FIDEID 1506870
- Carlsen, Magnus #GM NOR [2839] 1990
-    %Bio FIDEID 1503014
-+   %Bio World Champion 2013-
- Carlsen, Tonny #-  DEN [1819] 1985  i
-    %Bio FIDEID 1434160
- Carlsen, Torben Erik #cim BRA [....] ????
-@@ -154465,6 +154486,7 @@
+ Boni, Carl #-  PHI [1852] 1975 i
+    %Bio FIDEID 5207770
+ Boni, Gianni #-  ITA [1679] 1970
+@@ -233464,7 +233483,7 @@
+    %Bio FIDEID 356409
+ Gemsova, Tereza #-  CZE [1515] 2002 w
+    %Bio FIDEID 366579
+-Gemy	, Kareem #-  EGY [1281] 1987 i
++Gemy, Kareem #-  EGY [1281] 1987 i
+    %Bio FIDEID 10668136
+    = Gemy  , Kareem
+ Gemy, Jose Daniel #IM BOL [2380] 1992
+@@ -242068,6 +242087,7 @@
     %Bio FIDEID 2800713
- Gluzman, Mikhail #IM AUS [2403] 1967  i
+ Gluzman, Mikhail #IM AUS [2403] 1967 i
     %Bio FIDEID 3201783
 +   = Gluzman, Michael
- Gluzman, Sam #-  AUS [1752] 1998  i
+ Gluzman, Sam #-  AUS [1752] 1998 i
     %Bio FIDEID 3215210
- Glyakin, Andrei #-  RUS [1560] 2003  i
-@@ -175476,6 +175498,7 @@
+ Glyakin, Andrei #-  RUS [1560] 2003 i
+@@ -273806,6 +273826,7 @@
     %Bio FIDEID 400262
     = Hartston, William Roland
     = Hartston, W R
 +   = Hartston
- Hartung, Jerry #-  LUX [2152] 1979
-    %Bio FIDEID 4000480
- Hartung, Katja #-  GER [1916] 1982  wi
-@@ -188386,6 +188409,7 @@
- Hughes, Steve #-  USA [2116] 1961  i
+ Hartung, Christian, Dr. #-  GER [1777] 1960
+    %Bio FIDEID 16252829
+ Hartung, Franko #-  GER [1763] 1962
+@@ -293281,6 +293302,7 @@
+ Hughes, Steve #-  USA [2116] 1961 i
     %Bio FIDEID 2017130
     = Hughes, Stephen
 +Hughes, Steven #-   AUS [1490]
- Hughes, Tyler B #FM USA [2252] 1990  i
+ Hughes, Tyler B #FM USA [2252] 1990 i
     %Bio FIDEID 2026775
- Hughey, Leah #-  CAN [1642] 0000  w
-@@ -203770,6 +203794,7 @@
- Jordan, William #FM AUS [2203] 1957
+ Hughes Jr, Arthur #-  USA [1657] 1955 i
+@@ -317277,6 +317299,7 @@
+ Jordan, William #FM AUS [2123] 1957
     %Bio FIDEID 3200876
     = Jordan, William J
 +   = Jordan, Bill
- Jordan, Wolfgang #-  GER [2147] 1955  i
+ Jordan, Wolfgang #-  GER [2147] 1955 i
     %Bio FIDEID 4650956
- Jordana Vargas, Julio #-  ESP [1889] 1974
-@@ -246209,6 +246234,7 @@
+ Jordan-Mazzoleni, Artemidorio #-  FRA [1058] 2001
+@@ -339975,7 +339998,7 @@
+    %Bio FIDEID 623679
+ Khalilabadegan, Hosien #-  GER [1635] 1967 i
+    %Bio FIDEID 16250001
+-Khalil Aziz	, Murad #-  EGY [1632] 1955 i
++Khalil Aziz, Murad #-  EGY [1632] 1955 i
+    %Bio FIDEID 10668152
+    = Khalil Aziz , Murad
+ Khalilbayov, Sabirbay #-  AZE [1620] 1994 i
+@@ -382416,6 +382439,7 @@
  Lane, Gary W #IM AUS [2353] 1964
     %Bio FIDEID 3203301
     = Lane, Gary William
 +   = Lane, Gary
     = Lane, G W
- Lane, Hakan #-  DEN [1993] 1975
+ Lane, Hakan #-  DEN [1995] 1975
     %Bio FIDEID 1433695
-@@ -308685,6 +308711,7 @@
+@@ -480122,6 +480146,7 @@
     %Bio FIDEID 2610981
- Murray, Bruce D #CM AUS [2008] 1959
+ Murray, Bruce D #CM AUS [1956] 1959
     %Bio FIDEID 3205177
 +   = Murray, Bruce
- Murray, Burn #-  USA [2078] 1930  i
+ Murray, Burn #-  USA [2078] 1930 i
     %Bio FIDEID 2017296
- Murray, David #-  IRL [2222] 1984
-@@ -456192,6 +456219,8 @@
+ Murray, David #-  IRL [2142] 1984
+@@ -707238,6 +707263,8 @@
     %Bio FIDEID 30907616
- Thomas, Ben #-  WLS [1935] 2000
+ Thomas, Ben #-  WLS [1935] 2000 i
     %Bio FIDEID 1801252
 +Thomas, Brian           #-   AUS [1764] 1979
 +   %Bio FIDEID 3212351
- Thomas, Benjamin #-  NZL [2038] 1946  i
+ Thomas, Benjamin #-  NZL [2038] 1946 i
     %Bio FIDEID 4304144
- Thomas, Daniel #-  SCO [1786] 1996  i
-@@ -694001,6 +694030,9 @@
+ Thomas, Carson #-  JAM [1490] 2001
+@@ -791681,6 +791708,9 @@
  #   AUT  Austria
  #   AZE  Azerbaijan
  
@@ -140,7 +155,7 @@
  Curacao AHO
  Willemstad AHO
  
-@@ -695479,28 +695511,14 @@
+@@ -793159,28 +793189,14 @@
  %Prefix "08. " "8. "
  %Prefix "09. " "9. "
  
@@ -177,7 +192,7 @@
  
  # Standardize playoff/women/team/etc suffixes:
  
-@@ -695537,6 +695555,9 @@
+@@ -793217,6 +793233,9 @@
  %Suffix " jr"   " junior"
  %Suffix " Jr"   " junior"
  
@@ -187,7 +202,7 @@
  Corr
     = corr
     = cr
-@@ -695739,6 +695760,10 @@
+@@ -793419,6 +793438,10 @@
  @ROUND ""
  
  ### START OF ROUND SECTION
