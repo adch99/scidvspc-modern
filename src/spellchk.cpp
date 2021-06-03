@@ -152,9 +152,14 @@ spellingT titleTable[] = {
 {"wgm","Woman Grandmaster"},
 {"wim","Woman International Master"},
 {"wfm","Woman FIDE Master"},
+{"wcm","Woman Candidate Master"},
 {"cgm","Correspondence GM"},
 {"cim","Correspondence IM"},
+{"csm","Correspondence Senior Master"},
+{"clg","Correspondence Woman Grandmaster"},
+{"clm","Correspondence Woman Master"},
 {"hgm","Honorary Grandmaster"},
+// W: Woman
 {"comp","Computer"},
 {"",""}
 };
