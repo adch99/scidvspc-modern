@@ -1850,11 +1850,9 @@ proc ::board::mark::DrawArrow {pathName from to color} {
   set arrow [
     eval $pathName {create line $coord} -fill $color -arrow last $arrowshape {-tag [list mark arrows "mark${from}:${to}"]}
   ]
-  # Raise piece above all textures (br$from)
-  # Raise arrow above all textures , then below piece on from square
-  $pathName raise p$from all
+  # Raise arrow above all textures (br$from), then raise piece on from square
   $pathName raise $arrow all
-  $pathName lower $arrow p$from
+  $pathName raise p$from all
 }
 
 proc ::board::mark::DrawVar {pathName from to color varnum {small 0}} {
@@ -1873,9 +1871,8 @@ proc ::board::mark::DrawVar {pathName from to color varnum {small 0}} {
       -activewidth 4 -tag [list mark var "mark${from}:${to}" var$varnum]
     ]
   }
-  $pathName raise p$from all
   $pathName raise $arrow all
-  $pathName lower $arrow p$from
+  $pathName raise p$from all
 
   # Create arrow binding
   $pathName bind var$varnum <Button-1> "enterVar $varnum"
