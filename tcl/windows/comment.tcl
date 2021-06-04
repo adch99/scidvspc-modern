@@ -8,8 +8,8 @@ namespace eval ::commenteditor {
   # List of colors and types used to mark a square
 
   variable  colorList {}  markTypeList {}
-  set colorList {red orange yellow green blue skyBlue purple white black}
-  set colorRegsub {(red|orange|yellow|green|blue|skyBlue|purple|white|black)}
+  set colorList {cornsilk2 wheat2 burlyWood3 grey50 gray10 rosyBrown mediumPurple1 royalBlue3 skyBlue cadetBlue2 paleGreen2 yellow3 darkOrange1 indianRed2 }
+  set   colorRegsub "([join $colorList {|}])"
   # Each list is a set of buttons in the dialog menu:
   set markTypeList {{tux circle disk full + - = ? !} {1 2 3 4 5 6 7 8 9}}
 
@@ -217,8 +217,8 @@ proc ::commenteditor::Open {} {
   ### Color (radio)buttons
 
   foreach color $colorList {
-    image create photo markColor_$color -width 18 -height 18
-    markColor_$color put $color -to 0 0 18 18
+    image create photo markColor_$color -width 10 -height 18
+    markColor_$color put $color -to 0 0 10 18
     radiobutton $colorButtons.c$color \
         -image markColor_$color \
         -variable [namespace current]::State(markColor) \
@@ -227,7 +227,7 @@ proc ::commenteditor::Open {} {
         -takefocus 0 \
 	-relief flat \
         -command [namespace code [list SetMarkColor $color]]
-    pack $colorButtons.c$color -side left -padx 1 -pady 4
+    pack $colorButtons.c$color -side left -pady 4
   }
 
   ### A small board
