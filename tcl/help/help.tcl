@@ -1365,8 +1365,8 @@ set helpText(Comment) {<h1>The Comment Editor</h1>
 
   <h4>Drawing Arrows</h4>
   <p>
-  Arrows can be drawn in two ways. In the Main Board, hold Control and click on the start square and then end square.
-  Or in the Comment Editor arrows can be drawn (and erased) by dragging between two squares.
+  Arrows can be drawn in two ways - In the Main Board, hold Control then click on the start square and then end square.
+  Or in the Comment Editor, arrows can be drawn (and erased) by dragging between two squares. The arrow width and length can be altered in the Comment Editor.
   </p>
   <h4>Colouring Squares</h4>
   <p>
@@ -1377,7 +1377,7 @@ set helpText(Comment) {<h1>The Comment Editor</h1>
 window, but can be hidden by selecting "Hide Square/Arrow Codes" in the PGN window
 Options.</p>
 
-  <p><footer>Updated: Scid vs. PC 4.21, Oct 2019</footer></p>
+  <p><footer>Updated: Scid vs. PC 4.22, Jun 2021</footer></p>
 }
 
 set helpTitle(Crosstable) "Crosstable Window"
@@ -6226,8 +6226,8 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <li>Serious game: When using book, leave a comment when book is exited / exhausted</li>
 <li>Add an undo point at the start of every annotation game</li>
 <li>Add a Switcher menu item to show/hide the gamelist buttonbar</li>
-</ul><br>
-
+<li>Update Player Data (spelling) file<li>
+</ul>
 <ul>
 <li>Help and translation updates</li>
 <li>Book tuning tweaks</li>

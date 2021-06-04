@@ -287,7 +287,7 @@ proc ::commenteditor::Open {} {
 
   ### Arrow options
 
-  label   $arrowOptions.l1 -text "Arrow: [tr OptionsMovesHighlightLastMoveWidth]"
+  label   $arrowOptions.l1 -text "[tr ArrowMain]: [tr OptionsMovesHighlightLastMoveWidth]"
   spinbox $arrowOptions.width -textvariable ::board::arrowWidth -from 1 -to 10 -increment 1 -width 3 -command updateBoard
   label   $arrowOptions.space -width 1
   label   $arrowOptions.l2 -text [tr Length]

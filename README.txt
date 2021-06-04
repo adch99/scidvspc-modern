@@ -146,21 +146,21 @@
 
   3.  download
 
-  Source scid_vs_pc-4.21.tgz
-  <http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.21.tgz/download>
+  Source scid_vs_pc-4.22.tgz
+  <http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.22.tgz/download>
 
-  Windows Scid vs PC-4.21.exe
-  <http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.21.exe/download>
+  Windows Scid vs PC-4.22.exe
+  <http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.22.exe/download>
 
-  Windows 64 bit Scid vs PC-4.21.x64.exe
-  <http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.21.x64.exe/download>
+  Windows 64 bit Scid vs PC-4.22.x64.exe
+  <http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.22.x64.exe/download>
 
-  Mac ScidvsMac-4.21.dmg
-  <http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.21.dmg/download>
+  Mac ScidvsMac-4.22.dmg
+  <http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.22.dmg/download>
 
-  Mac 64bit (beta) ScidvsMac-4.21.x64.dmg
+  Mac 64bit (beta) ScidvsMac-4.22.x64.dmg
   <https://sourceforge.net/projects/scidvspc/files/mac-64bit-
-  unsupported/ScidvsMac-4.21.x64.dmg/download>
+  unsupported/ScidvsMac-4.22.x64.dmg/download>
 
   3.0.1.  Other resources
 
@@ -196,8 +196,8 @@
   Installing from source:
 
   ______________________________________________________________________
-  tar -xzf scid_vs_pc-4.21.tgz
-  cd scid_vs_pc-4.21
+  tar -xzf scid_vs_pc-4.22.tgz
+  cd scid_vs_pc-4.22
   ./configure
   make
   sudo make install
@@ -237,7 +237,7 @@
 
   4.0.3.  Mac OS X
 
-  The ``ScidvsMac-4.21 app'' should include everything you need. Simply
+  The ``ScidvsMac-4.22 app'' should include everything you need. Simply
   drag and drop the App into /Applications (or similar). It cannot be
   run from the dmg disk image.
 
@@ -476,13 +476,14 @@
 
   Thanks to Shane Hudson and the authors of Tcl/Tk <http://tcl.tk>.  To
   Gregor Cramer <http://scidb.sf.net> for new features and technical
-  support.  Ozkan for his Win64 builds and knowledgable help.
-  Sourceforge.net <http://sourceforge.net> for their great hosting, Jiri
-  Pavlovsky for the windows installer
-  <http://www.jrsoftware.org/isinfo.php>.  Thanks to Pascal Georges for
-  his many technical contributions to mainline Scid, and also Fulvio,
-  Gerd and the language translators.  To Gilles, Dorothy and Steve for
-  OS X support, to Michal Rudolf for early encouragement, and H.G.Muller
+  support.  Ozkan for his Win64 builds and knowledgable help.  Christian
+  Opitz for his comprehensive German translation.  Sourceforge.net
+  <http://sourceforge.net> for their great hosting, Jiri Pavlovsky for
+  the windows installer <http://www.jrsoftware.org/isinfo.php>.  Thanks
+  to Pascal Georges for his many technical contributions to mainline
+  Scid, and also Fulvio, Gerd and the language translators.  To Gilles,
+  Dorothy and Steve for OS X support, to Michal Rudolf for early
+  encouragement, and H.G.Muller
   <http://home.hccnet.nl/h.g.muller/chess.html> for technical feedback.
 
   6.7.  scid's history
@@ -576,6 +577,8 @@
   o  Add an undo point at the start of every annotation game.
 
   o  Add a Switcher menu item to show/hide the gamelist buttonbar.
+
+  o  Update Player Data (spelling) file.
 
   o  Help and translation updates.
 

@@ -12342,7 +12342,7 @@ sc_name_info (ClientData cd, Tcl_Interp * ti, int argc, const char ** argv)
 	    char *mark,*mark2;
 	    int count;
 
-	    // Comment format is " TITLE, COUNTRY{/COUNTRY}, [ELO], YEAR-BORN"
+	    // Comment format is " TITLE COUNTRY{/COUNTRY} [ELO] YEAR-BORN"
 
 	    // For debugging
 	    // Tcl_AppendResult (ti, "  ", text, newline, NULL);

@@ -1842,10 +1842,12 @@ proc ::board::mark::DrawArrow {pathName from to color} {
   if {$from < 0  ||  $from > 63} { return }
   if {$to   < 0  ||  $to   > 63} { return }
   set coord [GetArrowCoords $pathName $from $to $::board::arrowLength]
-  eval $pathName \
-      {create line $coord} \
-      -fill $color -arrow last -width $::board::arrowWidth \
-      {-tag [list mark arrows "mark${from}:${to}"]}
+  if {$pathName == ".main.board.bd"} {
+    set arrowshape "-width $::board::arrowWidth -arrowshape {[expr $::board::arrowWidth * 2.5] [expr $::board::arrowWidth * sqrt (6.25 + 2.25)] [expr int($::board::arrowWidth * 1.5)]}"
+  } else {
+    set arrowshape "-width [expr $::board::arrowWidth / 2]"
+  }
+  eval $pathName {create line $coord} -fill $color -arrow last $arrowshape {-tag [list mark arrows "mark${from}:${to}"]}
 }
 
 proc ::board::mark::DrawVar {pathName from to color varnum {small 0}} {

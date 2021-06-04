@@ -70,15 +70,15 @@ project is authored by <ref name="Stevenaaus" id="contact_"> and numerous contri
 <label id="download_">
 <sect> download <p>
 
-Source <url url="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.21.tgz/download" name="scid_vs_pc-4.21.tgz">
+Source <url url="http://sourceforge.net/projects/scidvspc/files/source/scid_vs_pc-4.22.tgz/download" name="scid_vs_pc-4.22.tgz">
 
-Windows <url url="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.21.exe/download" name="Scid vs PC-4.21.exe">
+Windows <url url="http://sourceforge.net/projects/scidvspc/files/windows/Scid%20vs%20PC-4.22.exe/download" name="Scid vs PC-4.22.exe">
 
-Windows 64 bit <url url="http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.21.x64.exe/download" name="Scid vs PC-4.21.x64.exe">
+Windows 64 bit <url url="http://sourceforge.net/projects/scidvspc/files/windows-64bit/Scid%20vs%20PC-4.22.x64.exe/download" name="Scid vs PC-4.22.x64.exe">
 
-Mac <url url="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.21.dmg/download" name="ScidvsMac-4.21.dmg">
+Mac <url url="http://sourceforge.net/projects/scidvspc/files/mac/ScidvsMac-4.22.dmg/download" name="ScidvsMac-4.22.dmg">
 
-Mac 64bit (beta) <url url="https://sourceforge.net/projects/scidvspc/files/mac-64bit-unsupported/ScidvsMac-4.21.x64.dmg/download" name="ScidvsMac-4.21.x64.dmg">
+Mac 64bit (beta) <url url="https://sourceforge.net/projects/scidvspc/files/mac-64bit-unsupported/ScidvsMac-4.22.x64.dmg/download" name="ScidvsMac-4.22.x64.dmg">
 
 <sect2> Other resources<p>
 <P>Fedora Packages (unofficial) <url url="https://copr.fedorainfracloud.org/coprs/awood/scid_vs_pc/">
@@ -112,8 +112,8 @@ use <bf>./configure BINDIR=/usr/bin/ SHAREDIR=/usr/share/scid/</bf></em></p>
   <p>Installing from source:</p>
 
 <code>
-tar -xzf scid_vs_pc-4.21.tgz
-cd scid_vs_pc-4.21
+tar -xzf scid_vs_pc-4.22.tgz
+cd scid_vs_pc-4.22
 ./configure
 make
 sudo make install
@@ -144,7 +144,7 @@ C:\Users\[USERNAME]\AppData\Local\VirtualStore\Program Files\Scid vs PC
 
 <sect2> Mac OS X <p>
 
-The <ref name="ScidvsMac-4.21 app" id="download_"> should include everything you need. Simply drag and drop the App into /Applications (or similar). It cannot be run from the dmg disk image.</p>
+The <ref name="ScidvsMac-4.22 app" id="download_"> should include everything you need. Simply drag and drop the App into /Applications (or similar). It cannot be run from the dmg disk image.</p>
 
 <p>Due to complicated build reasons, only Yosemite (OS X 10.10) and
 later are now supported.  Additionally, Catalina has removed 32-bit app
@@ -346,6 +346,7 @@ to create large databases from pgn. Typing "pgnscid somefile.pgn" creates a new 
 Thanks to Shane Hudson and the authors of <url url="http://tcl.tk" name="Tcl/Tk">.
 To <url url="http://scidb.sf.net" name="Gregor Cramer"> for new features and technical support.
 Ozkan for  his Win64 builds and knowledgable help.
+Christian Opitz for his comprehensive German translation.
 <url url="http://sourceforge.net" name="Sourceforge.net"> for their great hosting,
 Jiri Pavlovsky for the <url url="http://www.jrsoftware.org/isinfo.php" name="windows installer">.
 Thanks to Pascal Georges for his many technical contributions to mainline Scid, and also Fulvio, Gerd and the language translators.
@@ -410,6 +411,7 @@ Chessbase databases and many chess variants.</p>
 <item>Serious game: When using book, leave a comment when book is exited / exhausted.
 <item>Add an undo point at the start of every annotation game.
 <item>Add a Switcher menu item to show/hide the gamelist buttonbar.
+<item>Update Player Data (spelling) file.
 <newline><newline>
 
 <item>Help and translation updates.

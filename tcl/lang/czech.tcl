@@ -1552,7 +1552,7 @@ translate C WhitePieces {Bílé figury}
 translate C BlackPieces {Èerné figury}
 translate C WhiteBorder {Obrys bílých figur}
 translate C BlackBorder {Obrys èerných figur}
-translate C ArrowMain   {Main Arrow}
+translate C ArrowMain   {Arrow}
 translate C ArrowVar    {Var Arrows}
 # ====== TODO To be translated ======
 translate C ShowArrows  {Show Arrows}

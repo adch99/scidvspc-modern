@@ -1521,7 +1521,7 @@ translate I WhitePieces {Pezzi Bianchi}
 translate I BlackPieces {Pezzi Neri}
 translate I WhiteBorder {Bordi del Bianco}
 translate I BlackBorder {Bordi del Nero}
-translate I ArrowMain   {Main Arrow}
+translate I ArrowMain   {Arrow}
 translate I ArrowVar    {Var Arrows}
 # ====== TODO To be translated ======
 translate I ShowArrows  {Show Arrows}
