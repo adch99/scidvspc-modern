@@ -1847,20 +1847,35 @@ proc ::board::mark::DrawArrow {pathName from to color} {
   } else {
     set arrowshape "-width [expr $::board::arrowWidth / 2]"
   }
-  eval $pathName {create line $coord} -fill $color -arrow last $arrowshape {-tag [list mark arrows "mark${from}:${to}"]}
+  set arrow [
+    eval $pathName {create line $coord} -fill $color -arrow last $arrowshape {-tag [list mark arrows "mark${from}:${to}"]}
+  ]
+  # Raise piece above all textures (br$from)
+  # Raise arrow above all textures , then below piece on from square
+  $pathName raise p$from all
+  $pathName raise $arrow all
+  $pathName lower $arrow p$from
 }
 
 proc ::board::mark::DrawVar {pathName from to color varnum {small 0}} {
   if {$from < 0  ||  $from > 63} { return }
   if {$to   < 0  ||  $to   > 63} { return }
-  set coord [GetArrowCoords $pathName $from $to]
+  set coord [GetArrowCoords $pathName $from $to $::board::arrowLength]
   if {$small == "0"} {
-    $pathName create line $coord -fill $color -arrow last -width 5 -arrowshape {15 18 5} \
+    set arrow [
+    $pathName create line $coord -fill $color -arrow last -width $::board::arrowWidth \
+      -width $::board::arrowWidth -arrowshape "[expr $::board::arrowWidth * 2.5] [expr $::board::arrowWidth * sqrt (6.25 + 2.25)] [expr int($::board::arrowWidth * 1.5)]" \
       -activewidth 8 -tag [list mark var "mark${from}:${to}" var$varnum]
+    ]
   } else {
+    set arrow [
     $pathName create line $coord -fill $color -arrow last -width 2 -arrowshape {9 12 3} \
       -activewidth 4 -tag [list mark var "mark${from}:${to}" var$varnum]
+    ]
   }
+  $pathName raise p$from all
+  $pathName raise $arrow all
+  $pathName lower $arrow p$from
 
   # Create arrow binding
   $pathName bind var$varnum <Button-1> "enterVar $varnum"
