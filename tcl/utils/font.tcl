@@ -271,7 +271,7 @@ proc FontDialogRegular {parent} {
   font configure font_H2 -family $font -size [expr {$fontsize + 6} ]
   font configure font_H3 -family $font -size [expr {$fontsize + 4} ]
   font configure font_H4 -family $font -size [expr {$fontsize + 2} ]
-  font configure font_H5 -family $font -size [expr {$fontsize + 0} ]
+  font configure font_Large -family $font -size [expr {$fontsize + 3} ]
   if {$graphFigurineAvailable} {
     global graphFigurineFamily graphFigurineWeight
     font configure font_Figurine(normal) -family $graphFigurineFamily(normal) -weight $graphFigurineWeight(normal) -size $fontsize
@@ -407,6 +407,7 @@ proc FontBiggerSmaller {incr} {
   font configure font_H2 -size [expr $fd_size + 6]
   font configure font_H3 -size [expr $fd_size + 4]
   font configure font_H4 -size [expr $fd_size + 2]
+  font configure font_Large -size [expr $fd_size + 3]
   if {$graphFigurineAvailable} {
     font configure font_Figurine(normal) -size $fd_size
     font configure font_Figurine(bold) -size $fd_size
