@@ -1348,7 +1348,7 @@ translate E WhitePieces {White pieces}
 translate E BlackPieces {Black pieces}
 translate E WhiteBorder {White border}
 translate E BlackBorder {Black border}
-translate E ArrowMain   {Main Arrow}
+translate E ArrowMain   {Arrow}
 translate E ArrowVar    {Var Arrows}
 translate E ShowArrows  {Show Arrows}
 

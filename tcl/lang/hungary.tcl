@@ -1562,7 +1562,7 @@ translate H WhitePieces {Világos figurák}
 translate H BlackPieces {Sötét figurák}
 translate H WhiteBorder {Világos körvonal}
 translate H BlackBorder {Sötét körvonal}
-translate H ArrowMain   {Main Arrow}
+translate H ArrowMain   {Arrow}
 translate H ArrowVar    {Var Arrows}
 # ====== TODO To be translated ======
 translate H ShowArrows  {Show Arrows}

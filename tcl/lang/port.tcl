@@ -1348,7 +1348,7 @@ translate U WhitePieces {Peças Brancas}
 translate U BlackPieces {Peças Pretas}
 translate U WhiteBorder {Borda Branca}
 translate U BlackBorder {Borda Preta}
-translate U ArrowMain   {Main Arrow}
+translate U ArrowMain   {Arrow}
 translate U ArrowVar    {Var Arrows}
 translate U ShowArrows  {Mostrar Setas}
 
