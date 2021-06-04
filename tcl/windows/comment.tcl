@@ -8,8 +8,9 @@ namespace eval ::commenteditor {
   # List of colors and types used to mark a square
 
   variable  colorList {}  markTypeList {}
-  set colorList {cornsilk2 wheat2 burlyWood3 grey50 gray10 rosyBrown mediumPurple1 royalBlue3 skyBlue cadetBlue2 paleGreen2 yellow3 darkOrange1 indianRed2 }
+  set colorList {cornsilk2 wheat2 burlyWood3 grey50 gray10 rosyBrown mediumPurple1 royalBlue3 skyBlue cadetBlue2 paleGreen2 yellow3 darkOrange1 indianRed3 }
   set   colorRegsub "([join $colorList {|}])"
+
   # Each list is a set of buttons in the dialog menu:
   set markTypeList {{tux circle disk full + - = ? !} {1 2 3 4 5 6 7 8 9}}
 
@@ -217,8 +218,8 @@ proc ::commenteditor::Open {} {
   ### Color (radio)buttons
 
   foreach color $colorList {
-    image create photo markColor_$color -width 10 -height 18
-    markColor_$color put $color -to 0 0 10 18
+    image create photo markColor_$color -width 15 -height 18
+    markColor_$color put $color -to 0 0 15 18
     radiobutton $colorButtons.c$color \
         -image markColor_$color \
         -variable [namespace current]::State(markColor) \
@@ -232,7 +233,7 @@ proc ::commenteditor::Open {} {
 
   ### A small board
 
-  set board [::board::new $insertBoard.board 25]
+  set board [::board::new $insertBoard.board 35]
   if {[::board::isFlipped .main.board]} {
     ::board::flip  $insertBoard.board
   }
@@ -254,7 +255,7 @@ proc ::commenteditor::Open {} {
 
   ### Type/Shape (pseudo-radio)buttons
 
-  set size 20	;# button/rectangle size
+  set size 25	;# button/rectangle size
   pack [set types [frame $typeButtons.all]] -side left -padx 10
   set row 0
 
