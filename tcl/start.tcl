@@ -2002,7 +2002,7 @@ font create font_H1 -family $font -size [expr {$fontsize + 16} ] -weight bold
 font create font_H2 -family $font -size [expr {$fontsize + 6} ] -weight bold
 font create font_H3 -family $font -size [expr {$fontsize + 4} ] -weight bold
 font create font_H4 -family $font -size [expr {$fontsize + 2} ] -weight bold
-font create font_H5 -family $font -size [expr {$fontsize + 0} ] -weight bold
+font create font_Large -family $font -size [expr {$fontsize + 3} ]
 
 set fontsize [font configure font_Small -size]
 set font [font configure font_Small -family]

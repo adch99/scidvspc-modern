@@ -1222,15 +1222,15 @@ proc ::board::new {w {psize 40} {showmat 0} {flip 0}} {
 
   # Set up coordinate labels:
   for {set i 1} {$i <= 8} {incr i} {
-    label $w.lrank$i -text [expr {9 - $i}]
+    label $w.lrank$i -text [expr {9 - $i}] -font font_Large
     grid $w.lrank$i -row $i -column 2 -sticky e
-    label $w.rrank$i -text [expr {9 - $i}]
+    label $w.rrank$i -text [expr {9 - $i}] -font font_Large
     grid $w.rrank$i -row $i -column 11 -sticky w
   }
   foreach i {1 2 3 4 5 6 7 8} file {a b c d e f g h} {
-    label $w.tfile$file -text $file
+    label $w.tfile$file -text $file -font font_Large
     grid $w.tfile$file -row 0 -column [expr $i + 2] -sticky s
-    label $w.bfile$file -text $file
+    label $w.bfile$file -text $file -font font_Large
     grid $w.bfile$file -row 9 -column [expr $i + 2] -sticky n
   }
 
