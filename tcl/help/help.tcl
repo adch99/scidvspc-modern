@@ -6215,6 +6215,7 @@ set helpText(Changelog) {<h1>Changelog</h1>
 <ul>
 <li>Show Stockfish Win/Draw/Loss (as White/Draw/Black) infos in information window</li>
 <li>Add an 'Extra Tags' field to the header search (eg 'Annotator')</li>
+<li>Revamp colours and size of the Comment Editor</li>
 <li>New 'Highlight' colour option (affects crosstable, reports, pgn moves and name-editor)</li>
 <li>Animate the Rook in Castling. (author Uwe - Nice)</li>
 <li>Engine analysis: option to wrap long lines</li>
