@@ -2167,7 +2167,7 @@ set helpText(D,Scid) {<h1>Datenbanken und allgemeine Nutzung</h1>
   Ablagedatenbank als Mittel zum Ausschneiden und Einfügen.
   </i></p>
 
-  <p><i>Freie Datenbank Kingbase <url http://www.kingbase-chess.net/>http://www.kingbase-chess.net/</url>
+  <p><i>Freie Datenbank Caissabase <url http://caissabase.co.uk/>http://caissabase.co.uk/</url>
   </i></p>
 
   <h4>Datenbanken benutzen</h4>
@@ -3470,11 +3470,12 @@ set helpText(D,Comment) {<h1>Der Kommentareditor</h1>
   </p>
 
   <h4>Pfeile zeichnen</h4>
-  <p>Pfeile können auf zwei Arten gezeichnet werden. Im Hauptbrett,
+  <p>Pfeile können auf zwei Arten gezeichnet werden - im Hauptbrett,
   während man die Strg-Taste gedrückt hält, auf das Startfeld klicken
   und dann auf das Zielfeld. Alternativ können im Kommentareditor
   durch Ziehen zwischen zwei Feldern Pfeile gezeichnet (und entfernt)
-  werden.
+  werden. Länge und Breite des Pfeils können im Kommentareditor
+  geändert werden.
   </p>
 
   <h4>Felder einfärben</h4>
@@ -3489,7 +3490,7 @@ set helpText(D,Comment) {<h1>Der Kommentareditor</h1>
   werden.
   </p>
 
-  <p><footer>Aktualisiert: Scid vs. PC 4.21, Oktober 2019</footer></p>
+  <p><footer>Aktualisiert: Scid vs. PC 4.22, Juni 2021</footer></p>
 }
 
 set helpTitle(D,Crosstable) "Fenster Kreuztabelle"
@@ -6878,7 +6879,7 @@ set helpText(D,Related) {<h1>Links</h1>
   <li>Projektseite  <url http://sourceforge.net/projects/scidvspc>http://sourceforge.net/projects/scidvspc</url></li>
   <li>Online-Dokumentation <url http://scidvspc.sourceforge.net/doc/Contents.htm>http://scidvspc.sourceforge.net/doc/Contents.htm</url></li>
   <br>
-  <li>Datenbank Kingbase <url http://www.kingbase-chess.net/>http://www.kingbase-chess.net/</url></li>
+  <li>Datenbank Caissabase <url http://caissabase.co.uk/>http://caissabase.co.uk/</url></li>
   <li>Spielerinformationsdaten  <url http://sourceforge.net/projects/scid/files/Player Data/>http://sourceforge.net/projects/scid/files/Player Data/</url></li>
   <li>FICS <url http://www.freechess.org>www.freechess.org</url></li>
   <li>FICS-Partienarchive <url http://ficsgames.org>http://ficsgames.org</url></li>
@@ -8850,7 +8851,41 @@ set helpText(D,Sound) {<h1>Ton</h1>
 set helpTitle(D,Changelog) "Scid vs PC Änderungshistorie"
 set helpText(D,Changelog) {<h1>Änderungshistorie</h1>
 
-<h4>4.21 (Jan 7, 2019)</h4>
+<h4>4.22 (Juni 10, 2021)</h4>
+<ul>
+<li>Show Stockfish Win/Draw/Loss (as White/Draw/Black) infos in information window</li>
+<li>Add an 'Extra Tags' field to the header search (eg 'Annotator')</li>
+<li>Revamp colours and size of the Comment Editor</li>
+<li>New 'Highlight' colour option (affects crosstable, reports, pgn moves and name-editor)</li>
+<li>Animate the Rook in Castling. (author Uwe - Nice)</li>
+<li>Engine analysis: option to wrap long lines</li>
+<li>Engine annotation: option to disable adding an end-of-game variation</li>
+<li>Playing an opening against an UCI engine - openings can be imported from the ECO Window</li>
+<li>Improve the tree training feature by automatically enabling Trial mode</li>
+<li>Minor tweaks to the spacing in long comments in the PGN and Gameinfo windows.</li>
+<li>Export Games: add option to disable inserting newlines every 80 chars or so</li>
+<li>Serious game: When using book, leave a comment when book is exited / exhausted</li>
+<li>Add an undo point at the start of every annotation game</li>
+<li>Add a Switcher menu item to show/hide the gamelist buttonbar</li>
+<li>Update Player Data (spelling) file<li>
+</ul>
+<ul>
+<li>Help and translation updates</li>
+<li>Book tuning tweaks</li>
+<li>Graph window tweaks</li>
+<li>ECO window tweaks</li>
+</ul><br>
+
+<b>Bug Fixes</b>
+<ul>
+<li>The Gamelist 'next moves' feature didn't work for transpositions at differing depths</li>
+<li>Remember arrow lengths/widths</li>
+<li>Batch stripping comments/vars could sometimes break the namebase</li>
+<li>Fix / enable hiding of 'Colored Squares and Arrows' on the main board</li>
+<li>Windows drag and drop typo/fix from Oz</li>
+</ul>
+
+<h4>4.21 (Januar 7, 2020)</h4>
 <ul>
 <li>Gamelist (and Best Games) can now show 'Next Moves' instead of just the 'Opening Moves' if the tree is open and adjusting filter</li>
 <li>Text foreground colour option for listboxes and text windows. (and remove the 'global' colour option which is too rough)</li>

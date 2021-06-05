@@ -400,6 +400,7 @@ Chessbase databases and many chess variants.</p>
 <itemize>
 <item>Show Stockfish Win/Draw/Loss (as White/Draw/Black) infos in information window.
 <item>Add an 'Extra Tags' field to the header search (eg 'Annotator').
+<item>Revamp colours and size of the Comment Editor.
 <item>New 'Highlight' colour option (affects crosstable, reports, pgn moves and name-editor).
 <item>Animate the Rook in Castling. (author Uwe - Nice).
 <item>Engine analysis: option to wrap long lines.

@@ -549,6 +549,8 @@
 
   o  Add an 'Extra Tags' field to the header search (eg 'Annotator').
 
+  o  Revamp colours and size of the Comment Editor.
+
   o  New 'Highlight' colour option (affects crosstable, reports, pgn
      moves and name-editor).
 
