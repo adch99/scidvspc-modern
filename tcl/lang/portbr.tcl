@@ -269,7 +269,7 @@ menuText B ToolsImportFile "Importa arquivo de jogos PGN..." 7 \
 
 menuText B ToolsStartEngine1 "Iniciar engine 1" 0  {Inicia engine 1}
 menuText B ToolsStartEngine2 "Iniciar engine 2" 0  {Inicia engine 2}
-menuText B ToolsScreenshot "Captura de tela" 0
+menuText B ToolsScreenshot "Copia Imagem Tabuleiro" 0
 menuText B Play "Jogar" 0
 menuText B CorrespondenceChess "Xadrez por correspondência" 0 {Funções para jogar xadrez por correspondência usando eMail e Xfcc}
 menuText B CCConfigure "Configurar..." 0 {Configura ferramentas externas e configuração geral}
@@ -548,6 +548,7 @@ translate B Database {Base de dados}
 translate B Filter {Filtro}
 
 translate B Reset {Reiniciar}
+# todo - OK
 translate B IgnoreCase {Ignorar maiusc/minusculas}
 translate B noGames {nenhum jogo}
 translate B allGames {todos os jogos}
