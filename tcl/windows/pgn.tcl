@@ -314,13 +314,21 @@ namespace eval pgn {
     }
 
     ### Only suggest a filename if this is not a multiple pgn file
-    if {[info exists initialDir(file)] && [sc_filter count] <= 1} {
-      set tail $initialDir(file)
+
+    ## Is this DB a single pgn ?
+    set currentFilename [sc_base filename [sc_base current]]
+    if {[string match -nocase *pgn $currentFilename] && [sc_base numGames] <= 1} {
+      set initialDir(pgn) [file dirname $currentFilename]
+      set tail  [file tail $currentFilename]
     } else {
-      set tail {}
-    }
-    if {! [file isdirectory $initialDir(pgn)] } {
-      set initialDir(pgn) $env(HOME)
+      if {[info exists initialDir(file)] && [sc_base numGames] <= 1} {
+	set tail $initialDir(file)
+      } else {
+	set tail {}
+      }
+      if {! [file isdirectory $initialDir(pgn)] } {
+	set initialDir(pgn) $env(HOME)
+      }
     }
     set fname [tk_getSaveFile -parent $parent \
                  -initialdir $initialDir(pgn) -initialfile $tail \
