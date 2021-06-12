@@ -248,8 +248,7 @@ menuText F OptionsMainLineColour "Flèche coup principal" 0 {Mainline arrows}
 menuText F OptionsVarLineColour "Flèche coup variante" 0 {Variation arrows}
 menuText F OptionsEngineLineColour "Flèche moteur" 0 {Flèche moteur}
 menuText F OptionsRowColour "Surlignage coup bibliothèque" 0 {Default tree/book row color}
-# ====== TODO To be translated ======
-menuText F OptionsHighlightColour "Highlight" 0 {Default text highlight color}
+menuText F OptionsHighlightColour "Surbrillance" 0 {Default text highlight color}
 menuText F OptionsSwitcherColour "Surlignage db switcher" 0 {Default db switcher color}
 menuText F OptionsProgressColour "Barre de progression" 0 {Default progressbar color}
 menuText F OptionsScoreColour "Barres graphiques de score" 0 {}
@@ -459,8 +458,7 @@ translate F readonly {lecture seule}
 translate F altered {changé}
 translate F tagsDescript {Extra tags (ex: Annotator "Anand")}
 translate F prevTags {Précédent}
-# ====== TODO To be translated ======
-translate F value {Value}
+translate F value {Valeur}
 
 # Standard error messages:
 translate F ErrNotOpen {Ceci n'est pas une base ouverte.}
@@ -703,8 +701,7 @@ translate F AnnotateBlundersOnly {Quand le coup est une erreur}
 translate F BlundersNotBest {Erreurs/Imprécissions}
 translate F AnnotateTitle {Configurer Annotation}
 translate F AnnotateMissedMates {Occasion manquée/Mat en moins de coups}
-# ====== TODO To be translated ======
-translate F AnnotateEnd {At end of game}
+translate F AnnotateEnd {À la fin du jeu}
 translate F BlundersThreshold {Seuil de l'erreur}
 translate F ScoreFormat {Format du score}
 translate F CutOff {Interruption}
@@ -1126,8 +1123,7 @@ translate F ClearGameDialog {Ce jeu a été modifié.\nVoulez-vous le sauvegarder?}
 translate F ExitUnsaved {Les bases de données suivantes ont des parties modifiées non sauvegardées. Si vous quittez maintenant, ces modifications seront perdues.}
 translate F ChangeTextDialog {Changer les couleurs du texte nécessite un redémarrage.}
 translate F ChangeDockDialog {Changer le mode d'affichage nécessite un redémarrage.}
-# ====== TODO To be translated ======
-translate F FontSelectDialog "This is some sample text\nDouble click above to change font, then select 'ok'\nAaBbCcDdEeFfGgHhIiJjKkLlMm 0123456789. +=-"
+translate F FontSelectDialog "Ce sont des exemples de texte\nDouble-cliquez dessus pour changer de police, puis choisissez 'ok'\nAaBbCcDdEeFfGgHhIiJjKkLlMm 0123456789. +=-"
 translate F ExitNow {Quitter maintenant ?}
 
 # Import window:
@@ -1211,8 +1207,7 @@ translate F OprepTheoryTable {Table de Théorie}
 translate F OprepTableComment {Généré à partir des %u parties au classement le plus élevé.}
 translate F OprepExtraMoves {Nombre de coups additionnels dans la table de théorie}
 translate F OprepMaxGames {Nombre maximum de parties dans la table de théorie}
-# ====== TODO To be translated ======
-translate F OprepMaxLines {Maximum games for statistics}
+translate F OprepMaxLines {Nombre maximum de parties pour statistiques}
 translate F OprepViewHTML {Voir en HTML}
 translate F OprepViewLaTeX {Voir en LaTeX}
 
@@ -1316,8 +1311,7 @@ translate F ExportComments {Exporter les commentaires?}
 translate F ExportVariations {Exporter les variantes?}
 translate F IndentComments {Indenter les commentaires?}
 translate F IndentVariations {Indenter les variantes?}
-# ====== TODO To be translated ======
-translate F InsertNewlines {Insert newlines every 80 chars?}
+translate F InsertNewlines {Passez à la ligne après 80 cars?}
 translate F ExportColumnStyle {Style en colonne (un coup par ligne)?}
 translate F ExportSymbolStyle {Style d'annotation symbolique:}
 translate F ExportStripMarks {Enlever les codes de marquages de flèches et de coloration de cases des commentaires?}
@@ -1476,8 +1470,7 @@ translate F WinWonGame {Terminer partie gagnée}
 translate F Lines {Lignes}
 translate F ConfigureUCIengine {Configurer moteur UCI}
 translate F SpecificOpening {Ouverture spécifique}
-# ====== TODO To be translated ======
-translate F ImportECO {Import ECO}
+translate F ImportECO {Importer ECO}
 translate F StartNewGame {Nouvelle partie}
 translate F FixedLevel {Niveau fixe}
 translate F Opening {Ouverture}
