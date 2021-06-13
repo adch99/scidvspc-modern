@@ -268,7 +268,7 @@ namespace eval uci {
            set uciInfo(draw_pc$n)  [expr {[lindex $data $i] / 10}]
            incr i
            set uciInfo(lose_pc$n)  [expr {[lindex $data $i] / 10}]
-           continue}		   
+           continue}   
         if { $t == "string" } {
           # uciInfo(string) seems unused
           incr i
@@ -337,6 +337,20 @@ namespace eval uci {
 	  set win_pc  $uciInfo(win_pc$n)
 	  set lose_pc $uciInfo(lose_pc$n)
         }
+	# Michael J Brown - Set WDL percentages so that the highest percentage receives any final
+	# adjustment in order to ensure that the three values total 100%.
+	#
+	set temp_list_WDL [lsort -increasing -real [list $win_pc $draw_pc $lose_pc]]
+	#
+	if { $win_pc == [lindex $temp_list_WDL 2]} {
+	    set win_pc [expr 100 - $draw_pc - $lose_pc]
+	}
+	if { $draw_pc == [lindex $temp_list_WDL 2]} {
+	    set draw_pc [expr 100 - $win_pc - $lose_pc]
+	}
+	if { $lose_pc == [lindex $temp_list_WDL 2]} {
+	    set lose_pc [expr 100 - $win_pc - $draw_pc]    
+	}		
 	set analysis(WDL$n,$idx) "W: $win_pc% D: $draw_pc% B: $lose_pc%"
       }
  
