@@ -1,0 +1,24 @@
+# Ignore all .o files
+*.o
+
+# Ignore the make file
+Makefile
+
+# Ignore the executables
+tkscid
+tcscid
+pgnscid
+sc_remote
+scid
+scidlet
+scidpgn
+scidt
+scmerge
+tcl/sharedir.tcl
+
+# Ignore executables in the engines dir
+engines/phalanx/phalanx
+engines/toga/src/.depend
+engines/toga/src/a.out
+engines/toga/src/fruit
+
