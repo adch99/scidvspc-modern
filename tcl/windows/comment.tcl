@@ -137,7 +137,8 @@ proc ::commenteditor::Open {} {
 
   frame $w.cf
   text $w.cf.text -width 16 -height 3 -wrap word -font font_Regular \
-    -yscrollcommand {.commentWin.cf.scroll set} -setgrid 1 -borderwidth 2 -relief groove -highlightthickness 0
+    -yscrollcommand {.commentWin.cf.scroll set} -setgrid 1 -borderwidth 2 \
+    -relief groove -highlightthickness 0 -padx 10 -pady 10
   scrollbar $w.cf.scroll -command ".commentWin.cf.text yview"
   # bindFocusColors $w.cf.text
   # "break" stops subsequent built-in bindings from executing

@@ -1850,7 +1850,8 @@ proc ::splash::make {} {
 
   text $w.t -height 15 -width 55 -cursor top_left_arrow \
        -font font_Regular -wrap word \
-      -yscrollcommand [list $w.ybar set] -setgrid 1
+      -yscrollcommand [list $w.ybar set] -setgrid 1 \
+      -padx 10 -pady 10
   scrollbar $w.ybar -command [list $w.t yview]
 
   # Translations aren't set up yet, but these are handled in setLanguage

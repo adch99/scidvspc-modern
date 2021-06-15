@@ -223,7 +223,8 @@ proc ::tree::Open {{baseNumber 0}} {
   ::tree::doConfigMenus $baseNumber
 
   # Main move widget
-  autoscrollframe $w.f text $w.f.tl -wrap none -font font_Fixed -setgrid 1 -exportselection 1 -height 5
+  autoscrollframe $w.f text $w.f.tl -wrap none -font font_Fixed -setgrid 1 -exportselection 1 -height 5 \
+    -padx 10 -pady 10
 
   # default tags
   $w.f.tl tag configure greybg -background #fa1cfa1cfa1c

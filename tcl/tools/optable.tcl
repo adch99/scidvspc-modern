@@ -168,7 +168,8 @@ proc ::optable::makeReportWin {args} {
     bind $w <Key-End> "$w.text yview moveto 0.99"
     bindMouseWheel $w $w.text
 
-    text $w.text -setgrid 1 -wrap word  -yscrollcommand "$w.ybar set" -cursor top_left_arrow
+    text $w.text -setgrid 1 -wrap word  -yscrollcommand "$w.ybar set" -cursor top_left_arrow \
+        -padx 10 -pady 10
     ::htext::init $w.text
     scrollbar $w.ybar -command "$w.text yview"
     frame $w.b

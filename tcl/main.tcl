@@ -430,7 +430,8 @@ if {$boardSTM} {
 
 autoscrollframe .main.gameInfoFrame text .main.gameInfo
 
-.main.gameInfo configure -width 20 -wrap none -state disabled -cursor top_left_arrow -setgrid 1
+.main.gameInfo configure -width 20 -wrap none -state disabled -cursor top_left_arrow -setgrid 1 \
+    -padx 10 -pady 10
 
 ::htext::init .main.gameInfo
 

@@ -267,7 +267,7 @@ proc ::crosstab::Open {{game {}}} {
   # -width $::winWidth($w) -height $::winHeight($w) &&&
   set text $w.f.text
   text $text -wrap none -font font_Fixed -setgrid 1 -cursor top_left_arrow \
-     -yscroll "$w.f.ybar set" -xscroll "$w.f.xbar set"
+     -yscroll "$w.f.ybar set" -xscroll "$w.f.xbar set" -padx 10 -pady 10
   ::htext::init $text
 
   $text tag configure rowColor -background $::crosscolor

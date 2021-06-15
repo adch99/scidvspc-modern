@@ -218,7 +218,7 @@ namespace eval pgn {
     ::pgn::ConfigMenus
 
     text $w.text -width $::winWidth($w) -height $::winHeight($w) -wrap word \
-        -cursor {} -setgrid 1 -yscrollcommand "$w.ybar set"
+        -cursor {} -setgrid 1 -yscrollcommand "$w.ybar set" -padx 10 -pady 10
     configTabs
     if {$pgnColor(Background) != {white} && $pgnColor(Background) != {#ffffff}} {
 	$w.text configure -background $pgnColor(Background)

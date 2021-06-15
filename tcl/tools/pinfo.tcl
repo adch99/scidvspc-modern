@@ -90,7 +90,7 @@ proc playerInfo {{player ""} {raise 0}} {
     grid $w.b.update  -row 1 -column 2 -padx 3 -pady 1 -sticky ew
     grid $w.b.close   -row 1 -column 3 -padx 3 -pady 1 -sticky ew
 
-    autoscrollframe $w.frame text $w.text -font font_Regular -wrap none
+    autoscrollframe $w.frame text $w.text -font font_Regular -wrap none -padx 10 -pady 10
 
     pack $w.frame -side top -fill both -expand yes
     ::htext::init $w.text
