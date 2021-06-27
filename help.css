@@ -1,0 +1,16 @@
+body {
+    margin: 10% 20%;
+}
+
+p {
+    font-family: Open Sans, sans-serif;
+}
+
+h1, h2, h3, h4 {
+    font-family: Open Sans, sans-serif;
+}
+
+.banner {
+    width: 100%;
+}
+
