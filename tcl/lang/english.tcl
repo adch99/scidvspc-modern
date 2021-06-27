@@ -35,7 +35,7 @@ proc setLanguage_E {} {
 
 # File menu:
 menuText E File "File" 0
-menuText E FileNew "New" 0 {Create a new Scid database}
+menuText E FileNew "New Database" 0 {Create a new Scid database}
 menuText E FileOpen "Open" 0 {Open an existing Scid database}
 menuText E FileClose "Close" 0 {Close the active Scid database}
 menuText E FileFinder "Finder" 0 {Open the File Finder window}
