@@ -22,3 +22,5 @@ engines/toga/src/.depend
 engines/toga/src/a.out
 engines/toga/src/fruit
 
+# Ignore the added Cerebellum book
+books/Cerebellum*
