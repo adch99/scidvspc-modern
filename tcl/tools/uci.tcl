@@ -732,7 +732,7 @@ namespace eval uci {
       
       if { $col > 3 } { set col 0 ; incr row}
       if {$elt(default) != ""} {
-        set default "\n($elt(default))"
+        set default " ($elt(default))"
       } else  {
         set default ""
       }
@@ -748,7 +748,8 @@ namespace eval uci {
         checkbutton $w.fopt.opt$optnbr -text "$name$default" -onvalue true -offvalue false -variable ::uci::check($optnbr)
         if { $value == true } { $w.fopt.opt$optnbr select }
         if { $value == false } { $w.fopt.opt$optnbr deselect }
-        grid $w.fopt.opt$optnbr -row $row -column $col -sticky w
+        grid $w.fopt.opt$optnbr -row $row -column $col -sticky "" -columnspan 2 -padx 10 -pady 10
+        incr col
       }
       if { $elt(type) == "spin"} {
         label $w.fopt.label$optnbr -text "$name$default"
@@ -758,9 +759,11 @@ namespace eval uci {
           spinbox $w.fopt.opt$optnbr -from $elt(min) -to $elt(max) -width 5 -validate all -vcmd {string is int %P}
         }
         $w.fopt.opt$optnbr set $value
-        grid $w.fopt.label$optnbr -row $row -column $col -sticky e
+        grid $w.fopt.label$optnbr -row $row -column $col -sticky e \
+            -padx 10 -pady 10
         incr col
-        grid $w.fopt.opt$optnbr -row $row -column $col -sticky w
+        grid $w.fopt.opt$optnbr -row $row -column $col -sticky w \
+            -padx 10 -pady 10
       }
       if { $elt(type) == "combo"} {
         label $w.fopt.label$optnbr -text "$name$default"
@@ -775,22 +778,28 @@ namespace eval uci {
 	ttk::combobox $w.fopt.opt$optnbr -values $tmp
 
 	$w.fopt.opt$optnbr current $idx
-        grid $w.fopt.label$optnbr -row $row -column $col -sticky e
+        grid $w.fopt.label$optnbr -row $row -column $col -sticky e \
+            -padx 10 -pady 10
         incr col
-        grid $w.fopt.opt$optnbr -row $row -column $col -sticky w
+        grid $w.fopt.opt$optnbr -row $row -column $col -sticky w \
+            -padx 10 -pady 10
       }
       if { $elt(type) == "button"} {
         button $w.fopt.opt$optnbr -text "$name$default" \
           -command "::uci::sendToEngine $n \"setoption name $elt(name)\" "
-        grid $w.fopt.opt$optnbr -row $row -column $col -sticky w
+        grid $w.fopt.opt$optnbr -row $row -column $col -sticky "" \
+            -columnspan 2 -padx 10 -pady 10
+        incr col
       }
       if { $elt(type) == "string"} {
         label $w.fopt.label$optnbr -text "$name$default"
         entry $w.fopt.opt$optnbr
         $w.fopt.opt$optnbr insert 0 $value
-        grid $w.fopt.label$optnbr -row $row -column $col -sticky e
+        grid $w.fopt.label$optnbr -row $row -column $col -sticky e \
+            -padx 10 -pady 10
         incr col
-        grid $w.fopt.opt$optnbr -row $row -column $col -sticky w
+        grid $w.fopt.opt$optnbr -row $row -column $col -sticky w \
+            -padx 10 -pady 10
       }
       incr col
       incr optnbr
