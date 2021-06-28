@@ -81,6 +81,7 @@ menuText E EditStripBegin "Moves from Start" 11 \
   {Strip moves from the beginning of the game}
 menuText E EditStripEnd "Moves to End" 9 \
   {Strip moves to the end of the game}
+menuText E EditFlip "Flip Board" 0 {Flip the board} 
 menuText E EditReset "Empty Clipbase" 0 \
   {Reset the clipbase to be completely empty}
 menuText E EditCopy "Copy to Clipbase" 1 \

@@ -331,7 +331,7 @@ if {0} {
 
 ###### Main Button Bar ########
 
-frame .main.button -relief raised -border 1
+frame .main.button -relief flat -border 1
 button .main.button.start -image tb_start -command ::move::Start
 button .main.button.back -image tb_prev -command ::move::Back
 button .main.button.forward -image tb_next -command ::move::Forward

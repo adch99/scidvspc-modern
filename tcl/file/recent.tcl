@@ -127,7 +127,11 @@ proc ::recentFiles::show {menu} {
     set underline -1
     if {$num <= 9} { set underline 0 }
     if {$num == 10} { set underline 1 }
-    $menu add command -label "$num: [file tail $fname]" -underline $underline \
+    set fnameNoPath [file tail $fname]
+    if {[string length $fnameNoPath] < 25} { 
+        set name $fnameNoPath
+    } else { set name [string range $fnameNoPath 0 18]...[string range $fnameNoPath end-4 end] }
+    $menu add command -label "$num: $name" -underline $underline \
         -command [list ::recentFiles::load $fname]
     set ::helpMessage($menu,$idx) "  [file nativename $fname]"
     incr idx
