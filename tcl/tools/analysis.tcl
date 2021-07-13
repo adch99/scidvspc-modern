@@ -3639,7 +3639,8 @@ proc addMoveNumbers { e pv } {
   }
   set start 0
   if {$turn == {black}} {
-    set ret "$n.$spc... [lindex $pv 0] "
+    set m [lindex $pv 0]
+    set ret "$n.$spc... [format "%-4s" $m] "
     incr start 
     incr n
   } else {
@@ -3648,10 +3649,13 @@ proc addMoveNumbers { e pv } {
 
   for {set i $start} {$i < [llength $pv]} {incr i} {
     set m [lindex $pv $i]
+    # Set a fixed width of 4 characters for each move.
+    # This fails for 0-0-0 but 5 character fixed width would waste too much space
+    set padm [format "%-4s" $m]
     if { [expr $i % 2] == 0 && $start == 0 || [expr $i % 2] == 1 && $start == 1 } {
-      append ret "$n.$spc$m "
+      append ret "$n.$spc$padm "
     } else  {
-      append ret "$m "
+      append ret "$padm "
       incr n
     }
   }
