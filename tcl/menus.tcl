@@ -67,7 +67,7 @@ if {$::gameInfo(showMenu)} {
 .menu add cascade -label Help -menu .menu.help
 
 foreach menuname { file edit game search windows play tools options help } {
-  menu .menu.$menuname -borderwidth 5 -relief flat
+  menu .menu.$menuname
 }
 
 # Why were these menus set to be torn off?
