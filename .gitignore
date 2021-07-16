@@ -15,6 +15,9 @@ scidpgn
 scidt
 scmerge
 tcl/sharedir.tcl
+*.exe
+scid.gui
+scid.res
 
 # Ignore executables in the engines dir
 engines/phalanx/phalanx
@@ -24,3 +27,9 @@ engines/toga/src/fruit
 
 # Ignore the added Cerebellum book
 books/Cerebellum*
+
+# Ignore configs, pieces, user data
+config
+data
+pieces
+Release
