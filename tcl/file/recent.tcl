@@ -44,7 +44,7 @@ proc ::recentFiles::remove {fname} {
 
 proc ::recentFiles::add {fname {delete 0}} {
   global recentFiles
-  set list $recentFiles(data) 
+  set list $recentFiles(data)
 
   # Remove file to be added from its current place in the list (if any)
   while {1} {
@@ -100,7 +100,8 @@ proc ::recentFiles::treeshow {menu} {
 
   for {set i 0} {$i<$menuLength} {incr i} {
     set name [lindex $list $i]
-    $menu add command -label "[file tail $name]" -command [list ::file::openBaseAsTree $name]
+    set displayname [shortenName $name]
+    $menu add command -label $displayname -command [list ::file::openBaseAsTree $name]
   }
 }
 
@@ -128,9 +129,11 @@ proc ::recentFiles::show {menu} {
     if {$num <= 9} { set underline 0 }
     if {$num == 10} { set underline 1 }
     set fnameNoPath [file tail $fname]
-    if {[string length $fnameNoPath] < 25} { 
-        set name $fnameNoPath
-    } else { set name [string range $fnameNoPath 0 18]...[string range $fnameNoPath end-4 end] }
+
+    # If the filename is too long, show only the start
+    # and the ending part
+    set name [shortenName $fname]
+
     $menu add command -label "$num: $name" -underline $underline \
         -command [list ::recentFiles::load $fname]
     set ::helpMessage($menu,$idx) "  [file nativename $fname]"
@@ -152,7 +155,11 @@ proc ::recentFiles::show {menu} {
   for {set extra 0} {$extra < $secondMenuLength} {incr extra} {
     set fname [lindex $list $i]
     incr i
-    $menu.recentFiles add command -label "[file tail $fname]" -command [list ::recentFiles::load $fname]
+
+    # If the filename is too long, show only the start and end
+    set name [shortenName $fname]
+
+    $menu.recentFiles add command -label $name -command [list ::recentFiles::load $fname]
     set ::helpMessage($menu.recentFiles,$extra) "  $fname"
   }
   return [expr {$menuLength + 1} ]
@@ -223,3 +230,14 @@ proc ::recentFiles::configure {} {
   wm state $w normal
 }
 
+proc shortenName {fname} {
+    set fnameNoPath [file tail $fname]
+    if {[string length $fnameNoPath] < 25} {
+        set name $fnameNoPath
+    } else {
+        set nameStart [string range $fnameNoPath 0 18]
+        set nameEnd [string range $fnameNoPath end-4 end]
+        set name $nameStart...$nameEnd
+    }
+    return $name
+}
