@@ -206,7 +206,7 @@ set defaultDBs {}
 proc ::docking::init_layout_list {{recover 0}} {
   # Default window docking layouts
   array set ::docking::layout_list {}
-  
+
   # Basic layout : PGN window with main board
   set ::docking::layout_list(1) {{MainWindowGeometry 834x640+80+50} {{.pw vertical {}} {TPanedwindow {{.pw.pw0 horizontal 564} {TNotebook .nb .fdockmain} {TNotebook .tb1 .fdockpgnWin}}}}}
 
@@ -254,7 +254,7 @@ set cleaner(tree) 0
 set scidExecutable [info nameofexecutable]
 
 if {$scidExecutable == {}} {
-  ### Shit. Wish8.6b2 returns {} 
+  ### Shit. Wish8.6b2 returns {}
   if {$macOS} {
     set scidExecutable /Applications/ScidvsMac.app/Contents/MacOS/scid
     puts "scidExecutable is null. Now is \"$scidExecutable\""
@@ -262,9 +262,9 @@ if {$scidExecutable == {}} {
     catch {
       set scidExecutable [exec readlink /proc/[pid]/exe]
     }
-    puts "scidExecutable is null. Now is \"$scidExecutable\"" 
+    puts "scidExecutable is null. Now is \"$scidExecutable\""
   } else {
-    puts "scidExecutable is null" 
+    puts "scidExecutable is null"
   }
 }
 
@@ -362,11 +362,11 @@ proc reinitFont {name} {
 }
 
 if {$windowsOS} {
-  set fontOptions(Regular) { Arial           10 normal roman}
-  set fontOptions(Menu)    { {MS Sans Serif}  9 normal roman}
-  set fontOptions(Small)   { Arial            9 normal roman}
-  set fontOptions(Tiny)    { Arial            7 normal roman}
-  set fontOptions(Fixed)   { Courier          9 normal roman}
+  set fontOptions(Regular) { Calibri           13 normal roman}
+  set fontOptions(Menu)    { Calibri           12 normal roman}
+  set fontOptions(Small)   { Calibri           11 normal roman}
+  set fontOptions(Tiny)    { Calibri           9 normal roman}
+  set fontOptions(Fixed)   { {Consolas}        13 normal roman}
 } elseif {$macOS} {
   set fontOptions(Regular) { {Lucida Grande} 12 normal roman}
   set fontOptions(Menu)    { {Lucida Grande} 14 normal roman}
@@ -413,14 +413,14 @@ set analysis(boardShowsVar) 1
 
 # Colors
 
-set lite        #f3f3f3
-set dark        #7389b6		;# dark and lite square colors
-set highcolor   #b0d0e0		;# color when something is selected
+set lite        #d0e0d0
+set dark        #80a0a0		;# dark and lite square colors
+set highcolor   #7e5f7e		;# color when something is selected
 set bgcolor     grey20		;# board (canvas) bg color, appears as the lines between the squares
 set progcolor   rosybrown	;# progress bar
 set buttoncolor #b0c0d0		;# (below)
-set maincolor   black		;# Main line arrow color
-set varcolor    grey80		;# Variation arrow colors
+set maincolor   #7e5f7e		;# Main line arrow color
+set varcolor    #7e7e5f		;# Variation arrow colors
 # arrowWidth/Length is no longer under ::mark namespace to avoid version conflict when sourcing options.dat
 set ::board::arrowWidth 2
 set ::board::arrowLength 0.6
@@ -429,10 +429,10 @@ set rowcolor    lightsteelblue1 ;# Tree/Crosstab/Book line/row bg color
 set highlightcolor gray85       ;# Nameditor /playerinfo/ crosstable player name highlight colour
 set switchercolor lightsteelblue3 ;# DB switcher
 set crosscolor  grey80		;# Crosstable line colouring
-set scorecolor  steelblue	;# Score Graph bars
+set scorecolor  #ff8000	;# Score Graph bars
 set scorebarcolor  grey10	;# Score Graph current move
 
-set borderwidth 1
+set borderwidth 0
 
 # Set the radiobutton and checkbutton background color if desired.
 # I find the maroon color on Unix ugly!
@@ -452,16 +452,16 @@ set ::pgn::indentComments 1
 set ::pgn::symbolicNags 1
 set ::pgn::moveNumberSpaces 0
 set ::pgn::shortHeader 0
-set ::pgn::boldMainLine 0
+set ::pgn::boldMainLine 1
 set ::pgn::columnFormat 0
-set ::pgn::stripMarks 0
-set ::pgn::showScrollbar 1
+set ::pgn::stripMarks 1
+set ::pgn::showScrollbar 0
 set ::pgn::prevOffset 0
-set pgnColor(Header) "\#00008b"
+set pgnColor(Header) "\#494949"
 set pgnColor(Main) "\#000000"
-set pgnColor(Var) "\#0000ee"
+set pgnColor(Var) "\#313131"
 set pgnColor(Nag) "\#aa2c2c" ;# ee0000
-set pgnColor(Comment) "\#008b00"
+set pgnColor(Comment) "\#408080"
 set pgnColor(Current) lightSteelBlue
 set pgnColor(NextMove) "\#fefe80"
 set pgnColor(Background) "\#ffffff"
@@ -681,7 +681,7 @@ array set geometry {}
 
 # Default theme
 if {$::windowsOS} {
-  set lookTheme clam
+  set lookTheme winnative
 } else {
   set lookTheme default
 }
@@ -869,18 +869,18 @@ set default_exportStartFile(Latex) {\documentclass[10pt,DIV=20]{scrreprt}
 \definecolor{BlackPiecesGraphColor}{RGB}{101,37,37}
 \definecolor{WhitePiecesGraphColor}{RGB}{189,183,107}
 
-\setlength{\extrarowheight}{3pt}  
-  
+\setlength{\extrarowheight}{3pt}
+
 \newcommand{\win}{1-0}
-\newcommand{\loss}{0-1}  
-\newcommand{\draw}{=-=}  
+\newcommand{\loss}{0-1}
+\newcommand{\draw}{=-=}
 \newcommand{\p}{\figsymbol{p}}
 \newcommand{\N}{\figsymbol{N}}
 \newcommand{\B}{\figsymbol{B}}
 \newcommand{\R}{\figsymbol{R}}
-\newcommand{\Q}{\figsymbol{Q}}  
-\newcommand{\K}{\figsymbol{K}}    
-  
+\newcommand{\Q}{\figsymbol{Q}}
+\newcommand{\K}{\figsymbol{K}}
+
 \renewcommand*\thesection{\arabic{section}}
 \addtokomafont{section}{\color{blue}}
 \addtokomafont{subsection}{\color{red}}
@@ -930,9 +930,9 @@ proc raiseWin {w} {
       if {[catch {::docking::raiseTab $w}]} {
         # dammit, undocked windows aren't raising. fixme
 	catch {wm deiconify $w}
-	raise $w 
+	raise $w
 	focus $w
-      } 
+      }
     } else {
       if {$autoRaise} {
 	catch {wm deiconify $w}
@@ -976,7 +976,7 @@ proc setTitle { w title } {
     if { [catch {set nb [ ::docking::find_tbn $f ]} ]} {
       set nb ""
     }
-    
+
     if { $nb == "" } {
       wm title $w $title
     } else  {
@@ -996,7 +996,7 @@ proc setTitle { w title } {
     if { [winfo exists $wdock ] } { set w $wdock }
     wm title $w $title
   }
-  
+
 }
 ################################################################################
 # Creates a toplevel window depending of the docking option
@@ -1027,7 +1027,7 @@ proc createToplevel { w } {
     frame $f  -container 1
     toplevel .$name -use [ winfo id $f ]
     ::docking::add_tab $f
-    
+
     # auto focus mode : when the mouse enters a toplevel, it gets a forced focus to handle mouse wheel
     # only the highest stacked window can get the focus forced or on windows any time the mouse enters the main window, it will be raised
     bind .$name <Enter> {
@@ -1049,11 +1049,11 @@ proc createToplevel { w } {
         }
       }
     }
-    
+
   } else  {
     toplevel $w
   }
-  
+
 }
 
 ################################################################################
@@ -1082,13 +1082,13 @@ proc resizeMainBoard {} {
   global gameInfo board
 
   if { ! $::docking::USE_DOCKING } { return }
-  
+
   bind .main <Configure> {}
-  
+
   set w [winfo width .main]
   set h [winfo height .main]
   set bd .main.board
-  
+
   ### calculate available height
 
   set height_used 0
@@ -1121,12 +1121,12 @@ proc resizeMainBoard {} {
     set min_game_info_height [expr int([font configure font_Regular -size] * 1.5 * 2.5)]
   }
   incr height_used $min_game_info_height
-  
+
   # status bar
   incr height_used [ lindex [grid bbox .main 0 4] 3]
-  
+
   set availh [expr $h - $height_used]
-  
+
   ### calculate available width
 
   set width_used 12
@@ -1146,8 +1146,8 @@ proc resizeMainBoard {} {
     incr width_used 30
   }
   # Not quite perfect for some reason (-16)
-  set availw [expr $w - $width_used -16] 
-  
+  set availw [expr $w - $width_used -16]
+
   if {$availh < $availw} {
     set min $availh
   } else  {
@@ -1176,7 +1176,7 @@ proc resizeMainBoard {} {
     set new_game_info_lines [expr $new_game_info_lines - 1]
   }
   .main.gameInfo configure -height $new_game_info_lines
-  
+
   update idletasks
   bind .main <Configure> {::docking::handleConfigureEvent %W}
 }
@@ -1543,10 +1543,10 @@ set optionsFile [scidConfigFile options]
 ::splash::add "Command line is \"$::argv0 $::argv\""
 ::splash::add "User directory is \"$scidUserDir\""
 
-if {[info tclversion] >= "8.6"} { 
+if {[info tclversion] >= "8.6"} {
   ::splash::add "png image support is available."
   set png_image_support 1
-  set boardStyle Merida1
+  set boardStyle Merida3
 } elseif { [catch { package require img::png } ] } {
   ::splash::add "TkImg not found. Most piece sets are disabled."
   set png_image_support 0
@@ -1729,7 +1729,7 @@ proc  configHistory {namespace entrybox} {
       variable history_pos
       variable history_current
       variable entrybox
-      
+
       if {[lindex $history end] != $text} {
 	lappend history $text
       }
@@ -1741,7 +1741,7 @@ proc  configHistory {namespace entrybox} {
       variable history_pos
       variable history_current
       variable entrybox
-      
+
       set t $entrybox
 
       if {$action == "up" && $history_pos > 0} {
@@ -1757,7 +1757,7 @@ proc  configHistory {namespace entrybox} {
 	  $t delete 0 end
 	  incr history_pos
 	  if {$history_pos == [llength $history]} {
-	    set  entry $history_current 
+	    set  entry $history_current
 	  } else {
 	    set entry [lindex $history $history_pos]
 	  }
@@ -1806,7 +1806,7 @@ proc  configHistory {namespace entrybox} {
 ### Start up splash window
 
 proc ::splash::make {} {
-  ### windows hack 
+  ### windows hack
   # Dont withdraw toplevel if windows and docked mode, because of rendering bugs in paned windows/tabs
   if {!($::windowsOS && $::docking::USE_DOCKING)} {
      wm withdraw .
@@ -2029,7 +2029,7 @@ switch "_$::ttk::currentTheme" {
 if {[llength $fbg]} {
    ttk::style map TCombobox -fieldbackground $fbg
    ttk::style map TEntry -fieldbackground $fbg
-   if {[info tclversion] >= "8.6"} { 
+   if {[info tclversion] >= "8.6"} {
       ttk::style map TSpinbox -fieldbackground $fbg
    }
 }
