@@ -287,7 +287,9 @@ if {$scidExecutable == {}} {
 # This is "~/.scid" on Unix, and the Scid exectuable dir on Windows.
 
 if {$windowsOS} {
-  set scidUserDir $scidExeDir
+  #set username $::tcl_platform(user)
+  #set rootPath {C:\Users}
+  set scidUserDir [file nativename [file join $env(APPDATA) scidvspc]]
 
   # Need to cd here to open eco and spellfiles
   #   Probably only has any effect when opening a pgn/si4 file by double clicking on it,
@@ -295,7 +297,7 @@ if {$windowsOS} {
   cd $scidExeDir
   # Windows has problems with "cmd.exe /c start" and spaces in file names "Documents and Settings"
   # so choose something dumb
-  set scidLogDir {C:\log}
+  set scidLogDir [file nativename [file join $env(HOME) Documents "$scidName $scidVersion" logs]]
 } else {
   set scidUserDir [file nativename "~/.scidvspc"]
   set scidLogDir [file nativename [file join $scidUserDir "log"]]
@@ -422,8 +424,8 @@ set buttoncolor #b0c0d0		;# (below)
 set maincolor   #7e5f7e		;# Main line arrow color
 set varcolor    #7e7e5f		;# Variation arrow colors
 # arrowWidth/Length is no longer under ::mark namespace to avoid version conflict when sourcing options.dat
-set ::board::arrowWidth 2
-set ::board::arrowLength 0.6
+set ::board::arrowWidth 10
+set ::board::arrowLength 0.0
 set engineLineColor $maincolor  ;# Engine arrows
 set rowcolor    lightsteelblue1 ;# Tree/Crosstab/Book line/row bg color
 set highlightcolor gray85       ;# Nameditor /playerinfo/ crosstable player name highlight colour
