@@ -655,8 +655,8 @@ set colorActiveSquare 1
 
 # Hightlight the last move played
 set highlightLastMove 1
-set highlightLastMoveWidth 2
-set highlightLastMoveColor grey
+set highlightLastMoveWidth 5
+set highlightLastMoveColor "\#7e5f7e"
 set highlightLastMovePattern {} ; # this option is not saved
 
 # Ask before replacing existing moves: on by default
@@ -1546,7 +1546,7 @@ set optionsFile [scidConfigFile options]
 if {[info tclversion] >= "8.6"} {
   ::splash::add "png image support is available."
   set png_image_support 1
-  set boardStyle Merida3
+  set boardStyle Alpha
 } elseif { [catch { package require img::png } ] } {
   ::splash::add "TkImg not found. Most piece sets are disabled."
   set png_image_support 0
