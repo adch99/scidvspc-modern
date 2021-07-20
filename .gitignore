@@ -33,3 +33,6 @@ config
 data
 pieces
 Release
+
+# Ignore backup language files
+tcl/lang/*.bak
