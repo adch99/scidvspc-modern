@@ -4,7 +4,7 @@
 # Hypertext display module for Scid
 #
 # Implements html-like display in a text widget.
-# It is used in Scid for the help, crosstable, game information area and 
+# It is used in Scid for the help, crosstable, game information area and
 # *importantly*, the PGN window. Slowdown occurs with large PGN files,
 # and is probably due to the rendering of Tk::text widget with 4000+ char lines.
 
@@ -120,9 +120,9 @@ proc updateHelpWindow {name {heading {}}} {
         -padx 10 -pady 10
     scrollbar $w.scroll -relief sunken -command "$w.text yview" -width 12
 
-    frame $w.b -relief raised 
+    frame $w.b -relief raised
     pack $w.b -side bottom -fill x
-    button $w.b.contents -textvar ::tr(Contents) -width 6 -command { helpWindow Contents }
+    button $w.b.contents -textvar ::tr(Contents) -width 9 -command { helpWindow Contents }
     button $w.b.index -textvar ::tr(Index) -width 6 -command { helpWindow Index }
     button $w.b.back -text "  << " -command { help_PopStack }
     button $w.b.forward -text "  >> " -command { help_MoveForward }
@@ -334,12 +334,12 @@ proc ::htext::display {w helptext {section {}} {fixed 1}} {
     # starting tag (no "/" at the start)
 
     if {![strIsPrefix {/} $tagName]} {
-      
+
       if {[strIsPrefix m_ $tagName]} {
         # Move tag &&&
         set moveTag $tagName
         set tagName m
-        # Too many bindings! 
+        # Too many bindings!
         $w tag bind $moveTag <ButtonPress-1> [list ::pgn::move $moveTag]
         $w tag bind $moveTag <ButtonPress-3> [list ::pgn::move $moveTag]
         $w tag bind $moveTag <Any-Enter> [list u1 $w $moveTag]
@@ -434,7 +434,7 @@ proc ::htext::display {w helptext {section {}} {fixed 1}} {
         set margin [expr {25 * $margin}]
         $w tag configure $tagName -lmargin1 $margin -lmargin2 $margin
       }
-      
+
       if {$tagName == {h1}} {$w insert end \n}
     }
 
@@ -531,7 +531,7 @@ proc ::htext::display {w helptext {section {}} {fixed 1}} {
 
     # Used to cause unicode bug in eco string, but scid.eco is now utf8
     # and this is faster for the crosstable (some tcl bug i think S.A)
-    set str [string range $str $endPos+1 end] 
+    set str [string range $str $endPos+1 end]
     # set str [string replace $str 0 $endPos]
     incr count
 
@@ -601,19 +601,19 @@ proc openURL {url} {
       catch {exec /bin/sh -c "open -a Safari \"$url\"" &}
     }
   } else {
-    # The problem with the code commented out is it will leave two tabs  
+    # The problem with the code commented out is it will leave two tabs
     # open as the first will start firefox but fail the tab because of
-    # the invalid switch and string. 
-    # then the second call will open a second tab in the already 
+    # the invalid switch and string.
+    # then the second call will open a second tab in the already
     # running firefox. - R.A.
 
     #if {[catch {exec /bin/sh -c "firefox -remote 'openURL($url)'"}]} {
     #  # Now try a new firefox process
     #  catch {exec /bin/sh -c "firefox '$url'" &}
     #}
-    
+
     # This implementation ... seems broke to me :( S.A.
-    # if {[catch {exec /bin/sh -c "xdg-open '$url'" &}]} 
+    # if {[catch {exec /bin/sh -c "xdg-open '$url'" &}]}
 
     catch {exec /bin/sh -c "firefox '$url'" &}
   }

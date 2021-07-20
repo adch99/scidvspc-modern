@@ -12,7 +12,7 @@ AppVersion={# AppVersion}
 AppPublisher=Steven Atkinson
 AppPublisherURL=http://scidvspc.sourceforge.net
 AppCopyright=Steven Atkinson (C) 2009 - 2021  Steven Atkinson (and others)
-DefaultDirName={sd}\{# AppName}-{# AppVersion}
+DefaultDirName={commonpf64}\{# AppName}-{# AppVersion}
 UsePreviousAppDir=no
 DefaultGroupName={# AppName}
 DisableStartupPrompt=yes
@@ -45,13 +45,13 @@ Root: "HKCU"; Subkey: "Software\Classes\scid"; Flags: uninsdeletevalue; Tasks: a
 Root: "HKCU"; Subkey: "Software\Classes\scid\shell\open\command"; ValueType: string; ValueData: """{app}\bin\scid"" ""%1"""; Flags: uninsdeletevalue; Tasks: associate_si4
 
 [Files]
-Source: "bin\*";  DestDir: "{app}\bin"; CopyMode: normal; Flags: recursesubdirs createallsubdirs
-Source: "lib\*"; DestDir: "{app}\lib";  CopyMode: normal; Flags: recursesubdirs
-Source: "doc\*"; DestDir: "{app}\doc";  CopyMode: normal; Flags: recursesubdirs
-Source: "COPYING.txt"; DestDir: "{app}";  CopyMode: normal; Flags: recursesubdirs
-Source: "README.txt"; DestDir: "{app}";  CopyMode: normal; Flags: recursesubdirs
-Source: "README.html"; DestDir: "{app}";  CopyMode: normal; Flags: recursesubdirs
-Source: "images\*"; DestDir: "{app}\images";  CopyMode: normal; Flags: recursesubdirs
+Source: "bin\*";  DestDir: "{app}\bin"; Flags: recursesubdirs createallsubdirs promptifolder
+Source: "lib\*"; DestDir: "{app}\lib";  Flags: recursesubdirs promptifolder
+Source: "doc\*"; DestDir: "{app}\doc";  Flags: recursesubdirs promptifolder
+Source: "COPYING.txt"; DestDir: "{app}"; Flags: recursesubdirs promptifolder
+Source: "README.txt"; DestDir: "{app}"; Flags: recursesubdirs promptifolder
+Source: "README.html"; DestDir: "{app}"; Flags: recursesubdirs promptifolder
+Source: "images\*"; DestDir: "{app}\images"; Flags: recursesubdirs promptifolder
 
 [Icons]
 Name: "{group}\{# AppName}"; Filename: "{app}\bin\scid.exe"; Comment: "{# AppName}!"; WorkingDir: {app}\bin
@@ -77,13 +77,3 @@ procedure InitializeWizard();
 begin
 
 end;
-
-
-
-
-
-
-
-
-
-

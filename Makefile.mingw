@@ -43,7 +43,7 @@ endif
 endif
 
 # Tcl/Tk version: 8.5 / 8.6 / ...
-TCL_VERSION=8.5
+TCL_VERSION=8.6
 TCL_VERSION_NODOT=$(subst .,,$(TCL_VERSION))
 
 ### Compiler and linker
@@ -283,13 +283,13 @@ scid.gui: $(TCLS)
 	$(call CAT,$(TCLS)) > scid.gui
 
 scmerge.exe: src/scmerge.o $(OBJS)
-	$(LINK) $(LDFLAGS) -o scmerge.exe src/scmerge.o $(OBJS) $(CHARSETCONVOBJS) -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION_NODOT)
+	$(LINK) $(LDFLAGS) -o scmerge.exe src/scmerge.o $(OBJS) $(CHARSETCONVOBJS) -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION_NODOT)t
 
 pgnscid.exe: src/pgnscid.o $(OBJS) $(CHARSETCONVOBJS)
-	$(LINK) $(LDFLAGS) -o pgnscid.exe src/pgnscid.o $(OBJS) $(CHARSETCONVOBJS) -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION_NODOT)
+	$(LINK) $(LDFLAGS) -o pgnscid.exe src/pgnscid.o $(OBJS) $(CHARSETCONVOBJS) -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION_NODOT)t
 
 scidt.exe: src/scidt.o $(OBJS) $(CHARSETCONVOBJS)
-	$(LINK) $(LDFLAGS) -o scidt.exe src/scidt.o $(OBJS) $(CHARSETCONVOBJS) -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION_NODOT)
+	$(LINK) $(LDFLAGS) -o scidt.exe src/scidt.o $(OBJS) $(CHARSETCONVOBJS) -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION_NODOT)t
 
 scidlet.exe: src/scidlet.o src/engine.o src/recog.o $(OBJS)
 	$(LINK) $(LDFLAGS) -o scidlet.exe src/scidlet.o src/engine.o src/recog.o \
@@ -297,17 +297,17 @@ scidlet.exe: src/scidlet.o src/engine.o src/recog.o $(OBJS)
 
 scid.exe: src/scid.o $(OBJS) $(CQLOBJS_I) $(CHARSETCONVOBJS) $(SCID_XOBJS) $(SCID_TK_OBJS) scid.res
 	$(LINK) $(LDFLAGS) -o scid.exe src/scid.o $(OBJS) $(CQLOBJS_I) $(CHARSETCONVOBJS) $(SCID_XOBJS) $(SCID_TK_OBJS) scid.res \
-	    -mwindows -lole32 -luuid -L$(TCL_DIR)/lib -ltk$(TCL_VERSION_NODOT) -ltcl$(TCL_VERSION_NODOT)
+	    -mwindows -lole32 -luuid -L$(TCL_DIR)/lib -ltk$(TCL_VERSION_NODOT)t -ltcl$(TCL_VERSION_NODOT)t
 
 tcscid.exe: src/tcscid.o $(OBJS) $(CQLOBJS_I) $(SCID_XOBJS) $(CHARSETCONVOBJS)
 	$(LINK) $(LDFLAGS) -o tcscid.exe src/tcscid.o $(OBJS) $(CQLOBJS_I) $(CHARSETCONVOBJS) $(SCID_XOBJS) \
-	    -ltcl$(TCL_VERSION_NODOT) -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION_NODOT)
+	    -ltcl$(TCL_VERSION_NODOT)t -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION_NODOT)t
 
 scql.exe: $(CQLOBJS_S) $(CHARSETCONVOBJS) $(ZLIBOBJS)
-	$(LINK) $(LDFLAGS) -o scql.exe $(CQLOBJS_S) $(CHARSETCONVOBJS) $(ZLIBOBJS) -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION_NODOT)
+	$(LINK) $(LDFLAGS) -o scql.exe $(CQLOBJS_S) $(CHARSETCONVOBJS) $(ZLIBOBJS) -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION_NODOT)t
 
 eco2epd.exe: src/eco2epd.o src/pbook.o $(OBJS) $(CHARSETCONVOBJS)
-	$(LINK) $(LDFLAGS) -o eco2epd.exe src/eco2epd.o src/pbook.o $(OBJS) $(CHARSETCONVOBJS) -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION_NODOT)
+	$(LINK) $(LDFLAGS) -o eco2epd.exe src/eco2epd.o src/pbook.o $(OBJS) $(CHARSETCONVOBJS) -L$(TCL_DIR)/lib -ltcl$(TCL_VERSION_NODOT)t
 
 scid.res: scid.rc
 	$(RC) $(RCFLAGS) -o scid.res scid.rc
