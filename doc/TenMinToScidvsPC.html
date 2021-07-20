@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Aditya Chincholi" />
+  <title>10 Minutes to Scid vs PC</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      word-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">10 Minutes to Scid vs PC</h1>
+<p class="author">Aditya Chincholi</p>
+<p class="date">20 July, 2021</p>
+</header>
+<h1 id="minutes-to-scid-vs-pc">10 Minutes to Scid vs PC</h1>
+<p>Scid vs PC is a program that lets you analyse your games, learn theory from databases, and prepare for your opponents. What we are going to do now is analyse a game with Scid vs PC.</p>
+<h2 id="get-a-game">Get a Game</h2>
+<p>We need a game to analyse. We can download the PGN file if we played a game online <a href="www.example.com">(Download PGN from Lichess and chess.com)</a>. Open the PGN file from File &gt; Open. We can also copy-paste the PGN text into Scid with Edit &gt; Paste PGN &gt; Import. If we played over the board and have the moves, we go to Game &gt; New Game and then start playing the moves on the board.</p>
+<h2 id="human-analysis-and-annotation">Human Analysis and Annotation</h2>
+<p>Now we can analyse our game manually by moving through the game. We can move through the game by the arrow buttons above the board. The normal arrow keys and mouse scrolling also works. Hold Ctrl and click on two squares to create arrows, hold Shift and click on a square to highlight the square. To add a comment on a move, we right-click the move in the PGN window and select Comment Editor. We can write our comments here and add manual annotation symbols. Arrows, highlights, labels can all be added from here as well <a href="www.example.com">(See Comment Editor)</a>.</p>
+<h2 id="engine-analysis">Engine Analysis</h2>
+<p>An engine is a program that analyses the board position, gives a score to each move and recommends the best move. Scid vs PC comes Stockfish 9 by default, but there are many free and open source engines out there and we can download and add them to Scid vs PC. We go to Tools &gt; Analysis Engines, select Stockfish and click Start. Now Stockfish begins to analyse the current position on the board. It will open in a new tab on the right. It will output a lot of lines, which are irrelevant for us. We only want to look at the top lines, so increase the 1 beside the book icon to 3 or 4. This controls the number of lines. The topmost line is the best move as per the engine and the score is taken as the score for the position. Let us take a particular line:</p>
+<pre><code>1. 27 [+0.26] 3.Bb5  Nf6  4.O-O  Nxe4</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th>depth</th>
+<th>score</th>
+<th>moves</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>27</code></td>
+<td><code>[+0.26]</code></td>
+<td><code>3.Bb5  Nf6  4.O-O  Nxe4</code></td>
+</tr>
+</tbody>
+</table>
+<p>We can also annotate the whole game at once. Go to the first move by clicking the arrow buttons above the board. Now in the engine (Stockfish) tab, click the annotate button <img src="www.example.com/image.png" alt="annotateicon" />. We leave most of the values as defaults, but change the depth to around 20 for a quick run. Higher depths give more accurate analysis but also take more time. We can also run this for multiple games together. Once it is done, we can see the score along with the moves in the PGN window. We can generate an interactive graph using Tools &gt; Score Graph. The graph can show both time taken per move (if your PGN file has it) and the engine score. To switch between them, left-click on the little arrow beside the Graph tab label to open a menu. We can select the graph type in Options in this menu. As we move through the game, we also see arrows added by engine to show the best move wherever the actual move is a blunder.</p>
+<h2 id="databases">Databases</h2>
+<p>The place where Scid vs PC really shines in comparison to online websites which will also do game analysis for you is in it’s database capabilities. A database simply is a collection of chess games. Like many simple things, it is a fairly powerful tool when used properly. Suppose we have a database of a 10,000 chess games played by GMs in the past year. We can open up a game of our own, and look at what moves were played by these GMs in the same position as us. This allows us to learn from their games and improve our openings. Suppose we have a large collection of our own games, we can look at what openings are performing better for us, which endgames are we weak at, which moves do we face the most in a certain position etc. Having a collection of our opponents games tells us what they do in certain lines and openings.</p>
+<p>Most of these can be done using a simple tree window. We download a large collection of our games from a website in PGN or if they were played over the board, then we can add them by hand. In any case, we create a new database from File &gt; New Database. Give it an appropriate name and location. Now open the PGN file from File &gt; Open. Open the game list window from Windows &gt; Game List. At the bottom, we see three boxes: Clipbase, the PGN file and the newly created Database. Drag and drop the PGN box onto the Database to copy the games to it. To add games manually, we go to Game &gt; New Game, input the moves and then Game &gt; Add Game (or Ctrl-S).</p>
+<p>Now, we go to File &gt; Open Base as Tree and select our new database. This shows us the frequency of the moves played by/against us and their win rates. So when if we now analyse a new game, we can see all this for each move in the tree window.</p>
+<h2 id="tldr">TL;DR</h2>
+<p>Scid vs PC has 3 major parts:</p>
+<ol type="1">
+<li>Game Data: Game Data is what the user has to bring, Scid vs PC can’t help with this:
+<ul>
+<li>User’s and opponent’s games can be brought from wherever they play. Most websites give an option to download this.</li>
+<li>Master’s games: Caissabase is a large, good and free database.</li>
+</ul></li>
+<li>Analysis Engines and Tools: Analysis engines and tools are all present in Scid vs PC already. You can download more and add them too.</li>
+<li>Databases: Databases are what store the game data and allow analysis tools to work fast and accurately.</li>
+</ol>
+</body>
+</html>
