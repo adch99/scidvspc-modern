@@ -287,8 +287,6 @@ if {$scidExecutable == {}} {
 # This is "~/.scid" on Unix, and the Scid exectuable dir on Windows.
 
 if {$windowsOS} {
-  #set username $::tcl_platform(user)
-  #set rootPath {C:\Users}
   set scidUserDir [file nativename [file join $env(APPDATA) scidvspc]]
 
   # Need to cd here to open eco and spellfiles
