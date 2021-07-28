@@ -80,7 +80,7 @@ TMP_DIR		= $(OUT_DIR)\Temp
 ##	TCL_VERSION: Tcl/Tk version
 #	This should be "84" for Tcl/Tk 8.4, etc.
 
-TCL_VERSION	= 85
+TCL_VERSION	= 86
 
 ##	SCID_INCLUDES: included files from Tcl/Tk
 #	This will try to find your Tcl/Tk installation.
@@ -109,10 +109,10 @@ MSG =^
 !endif
 
 TCL_INCLUDES	= -I"$(TCL_DIR)\include"
-TCL_LIB		= "$(TCL_DIR)\lib\tcl$(TCL_VERSION).lib"
+TCL_LIB		= "$(TCL_DIR)\lib\tcl$(TCL_VERSION)t.lib"
 TK_INCLUDES	= -I"$(TCL_DIR)\include"
 SCID_INCLUDES	= $(TCL_INCLUDES) $(TK_INCLUDES)
-TK_LIB		= "$(TCL_DIR)\lib\tk$(TCL_VERSION).lib" $(TCL_LIB)
+TK_LIB		= "$(TCL_DIR)\lib\tk$(TCL_VERSION)t.lib" $(TCL_LIB)
 
 ##	Needed to link clipboard, drag and drop deps (others?)
 DND_LIBS	= user32.lib shell32.lib ole32.lib
@@ -219,7 +219,7 @@ SCID_OBJS= \
       $(TMP_DIR)\dstring.obj \
       $(TMP_DIR)\pgnparse.obj \
       $(TMP_DIR)\stored.obj \
-      $(TMP_DIR)\movelist.obj 
+      $(TMP_DIR)\movelist.obj
 
 CHARSETCONVOBJS= $(TMP_DIR)\charsetdetector.obj \
       $(TMP_DIR)\charsetconverter.obj \
@@ -365,7 +365,7 @@ CFLAGS		= $(PROFILE) $(OPTIMIZE) $(EHFLAGS) $(WARNINGS) $(SCID_FLAGS) \
 #	-LTCG	:Link-time Code Generation
 
 LDFLAGS		= -opt:icf,3
-LDFLAGS		= $(LDFLAGS) -nologo -libpath:"$(VS_DIR)\VC\lib" -libpath:"$(VS_SDK_DIR)\Lib" 
+LDFLAGS		= $(LDFLAGS) -nologo -libpath:"$(VS_DIR)\VC\lib" -libpath:"$(VS_SDK_DIR)\Lib"
 
 
 #--------------------------------------------------------------------
@@ -423,7 +423,7 @@ tcscid.exe: $(TMP_DIR)\tcscid.obj $(SCID_XOBJS) $(CHARSETCONVOBJS)
 
 ## Currently unused ?
 
-tkscid.exe: $(TMP_DIR)\tkscid.obj $(SCID_XOBJS) $(CHARSETCONVOBJS) $(SCID_TK_OBJS) 
+tkscid.exe: $(TMP_DIR)\tkscid.obj $(SCID_XOBJS) $(CHARSETCONVOBJS) $(SCID_TK_OBJS)
 	@echo *** tkscid.exe
 	$(LD) $(LDFLAGS) $(TMP_DIR)\tkscid.obj $(SCID_XOBJS) $(CHARSETCONVOBJS) $(SCID_TK_OBJS) $(TK_LIB) $(DND_LIBS) \
 		/out:$(OUT_DIR)\tkscid.exe
