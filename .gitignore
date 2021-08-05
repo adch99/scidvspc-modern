@@ -34,5 +34,8 @@ data
 pieces
 Release
 
+# Ignore the installer creation files
+installer
+
 # Ignore backup language files
 tcl/lang/*.bak

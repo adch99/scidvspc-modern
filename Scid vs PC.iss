@@ -1,6 +1,6 @@
 
-#define AppVersion '4.22'
-#define AppName    'Scid vs PC'
+#define AppVersion '4.22.1'
+#define AppName    'Scid vs PC Modern (Testing)'
 #define ActiveTclUrl 'http://www.activestate.com/activetcl/downloads'
 
 
@@ -44,6 +44,10 @@ Root: "HKCU"; Subkey: "Software\Classes\.si4"; ValueType: string; ValueData: "sc
 Root: "HKCU"; Subkey: "Software\Classes\scid"; Flags: uninsdeletevalue; Tasks: associate_si4
 Root: "HKCU"; Subkey: "Software\Classes\scid\shell\open\command"; ValueType: string; ValueData: """{app}\bin\scid"" ""%1"""; Flags: uninsdeletevalue; Tasks: associate_si4
 
+[Dirs]
+Name: "{userappdata}\scidvspc"
+Name: "{userdocs}\{# AppName}"
+
 [Files]
 Source: "bin\*";  DestDir: "{app}\bin"; Flags: recursesubdirs createallsubdirs promptifolder
 Source: "lib\*"; DestDir: "{app}\lib";  Flags: recursesubdirs promptifolder
@@ -52,6 +56,7 @@ Source: "COPYING.txt"; DestDir: "{app}"; Flags: recursesubdirs promptifolder
 Source: "README.txt"; DestDir: "{app}"; Flags: recursesubdirs promptifolder
 Source: "README.html"; DestDir: "{app}"; Flags: recursesubdirs promptifolder
 Source: "images\*"; DestDir: "{app}\images"; Flags: recursesubdirs promptifolder
+Source: "conf\*"; DestDir: "{userappdata}\scidvspc"; Flags: recursesubdirs createallsubdirs promptifolder
 
 [Icons]
 Name: "{group}\{# AppName}"; Filename: "{app}\bin\scid.exe"; Comment: "{# AppName}!"; WorkingDir: {app}\bin

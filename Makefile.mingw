@@ -12,6 +12,8 @@
 #  (do not omit the trailing '-' :  it _is_ necessary)
 #
 
+W64=1
+
 # default cross-toolchain prefixes :
 ifeq ($(W64),1)
 DEF_CROSS=x86_64-w64-mingw32-
