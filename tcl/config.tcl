@@ -4,7 +4,7 @@
 namespace eval ::config {}
 
 if {$windowsOS} {
-  set scidShareDir $scidExeDir
+  set scidShareDir $scidUserDir
 } elseif {$macOS} {
   set scidShareDir [file normalize [file join $scidExeDir "../Resources"]]
 } else {
@@ -104,4 +104,3 @@ if {$graphFigurineAvailable} {
 }
 
 ### end of config.tcl
-

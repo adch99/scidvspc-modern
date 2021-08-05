@@ -1546,7 +1546,7 @@ set optionsFile [scidConfigFile options]
 if {[info tclversion] >= "8.6"} {
   ::splash::add "png image support is available."
   set png_image_support 1
-  set boardStyle Alpha
+  set boardStyle Merida
 } elseif { [catch { package require img::png } ] } {
   ::splash::add "TkImg not found. Most piece sets are disabled."
   set png_image_support 0
