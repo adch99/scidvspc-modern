@@ -62,11 +62,12 @@ if {$::gameInfo(showMenu)} {
 .menu add cascade -label Game -menu .menu.game
 .menu add cascade -label Search -menu .menu.search
 .menu add cascade -label Windows -menu .menu.windows
+.menu add cascade -label Analyse -menu .menu.analyse
 .menu add cascade -label Tools -menu .menu.tools
 .menu add cascade -label Options -menu .menu.options
 .menu add cascade -label Help -menu .menu.help
 
-foreach menuname { file edit game search windows play tools options help } {
+foreach menuname { file edit game search windows play analyse tools options help } {
   menu .menu.$menuname
 }
 
@@ -273,7 +274,7 @@ set helpMessage($m,[incr menuindex]) GameInfo
 $m add command -label GameBrowse -command {::gbrowser::new [sc_base current] [sc_game number] [sc_pos location]}
 set helpMessage($m,[incr menuindex]) GameBrowse
 
-$m add command -label GameList -accel "Ctrl-l" -command ::windows::gamelist::Open 
+$m add command -label GameList -accel "Ctrl-l" -command ::windows::gamelist::Open
 set helpMessage($m,[incr menuindex]) GameList
 
 $m add separator
@@ -287,7 +288,7 @@ if {$::macOS} {
   bind .main <Control-Delete> ::game::Delete
 }
 
-$m add command -label GameReload -command ::game::Reload 
+$m add command -label GameReload -command ::game::Reload
 set helpMessage($m,[incr menuindex]) GameReload
 
 $m add separator
@@ -318,7 +319,7 @@ set helpMessage($m,[incr menuindex]) GameNumber
 $m add separator
 incr menuindex
 
-$m add command -label GameDeepest -command IdentifyOpening 
+$m add command -label GameDeepest -command IdentifyOpening
 
 proc IdentifyOpening {} {
   sc_move ply [sc_eco game ply]
@@ -434,7 +435,7 @@ $m.correspondence add command -label CCConfigRelay   -command {::CorrespondenceC
 set helpMessage($m.correspondence,1) CCConfigRelay
 
 $m.correspondence add separator
-$m.correspondence add command -label CCOpenDB      -command {::CorrespondenceChess::OpenCorrespondenceDB; ::CorrespondenceChess::ReadInbox} 
+$m.correspondence add command -label CCOpenDB      -command {::CorrespondenceChess::OpenCorrespondenceDB; ::CorrespondenceChess::ReadInbox}
 set helpMessage($m.correspondence,3) CCOpenDB
 
 $m.correspondence add separator
@@ -468,7 +469,7 @@ set helpMessage($m.correspondence,16) CCMailMove
 set menuindex 0
 set m .menu.windows
 
-$m  add command -label WindowsGameinfo -accelerator "Ctrl-i" -command toggleGameInfo 
+$m  add command -label WindowsGameinfo -accelerator "Ctrl-i" -command toggleGameInfo
 bind .main <Control-i> toggleGameInfo
 set helpMessage($m,[incr menuindex]) WindowsGameinfo
 
@@ -513,7 +514,32 @@ set helpMessage($m,[incr menuindex]) WindowsTB
 $m add command -label WindowsBook -command ::book::Open -accelerator "Ctrl-b"
 set helpMessage($m,[incr menuindex]) WindowsBook
 
-$m add command -label WindowsCorrChess -command ::CorrespondenceChess::CCWindow 
+$m add command -label WindowsCorrChess -command ::CorrespondenceChess::CCWindow
+
+### Analyse menu:
+set menuindex -1
+set m .menu.analyse
+
+$m add command -label AnalyseEngineList -command ::enginelist::choose
+#bind .main <Control-A> ::enginelist::choose
+set helpMessage($m,[incr menuindex]) ToolsAnalysis
+
+#Add Menu for Start Engine 1 and Engine 2
+$m add command -label AnalyseStartEngine1 -command "startAnalysisWin F2"
+#bind .main <F2> "startAnalysisWin F2"
+set helpMessage($m,[incr menuindex]) ToolsStartEngine1
+
+$m add command -label AnalyseStartEngine2 -command "startAnalysisWin F3"
+#bind .main <F3> "startAnalysisWin F3"
+set helpMessage($m,[incr menuindex]) ToolsStartEngine2
+
+$m add command -label AnalyseRating -command {::tools::graphs::rating::Refresh both}
+set helpMessage($m,[incr menuindex]) ToolsRating
+
+$m add command -label AnalyseScore -command ::tools::graphs::score::Raise
+#bind .main <Control-Z> ::tools::graphs::score::Raise
+set helpMessage($m,[incr menuindex]) ToolsScore
+
 
 ### Tools menu:
 
@@ -547,7 +573,7 @@ set helpMessage($m,[incr menuindex]) ToolsMaint
 $m.utils add command -label ToolsMaintWin -accelerator "Ctrl-m" -command ::maint::Open
 set helpMessage($m.utils,0) ToolsMaintWin
 
-$m.utils add command -label ToolsMaintNameEditor -command nameEditor 
+$m.utils add command -label ToolsMaintNameEditor -command nameEditor
 set helpMessage($m.utils,0) ToolsMaintNameEditor
 
 $m.utils add command -label ToolsMaintCompact -command makeCompactWin
@@ -684,10 +710,10 @@ set helpMessage($m.exportfilter,3) ToolsExpFilterLaTeX
 $m.exportfilter add command -label ToolsExpFilterLatex -command {
   if {[sc_filter count] > 5} {
     tk_messageBox -type ok -icon info -title "Scid: Latex Preview" \
-	-message {Latex Preview has a maximum of 5 games.}
+    -message {Latex Preview has a maximum of 5 games.}
   } else {
     set latexFilename Games-Preview
-    if {[exportGames filter Latex [file join $::scidLogDir $latexFilename.tex]] != "0"} { 
+    if {[exportGames filter Latex [file join $::scidLogDir $latexFilename.tex]] != "0"} {
       update
       previewLatex $latexFilename {} .
     }
@@ -698,12 +724,12 @@ $m.exportfilter add command -label ToolsExpFilterEPD -command {
   # Check that we have some games to export:
   if {![sc_base inUse]} {
     tk_messageBox -title "Scid: Empty database" -type ok -icon info \
-	-message "This is an empty database, there are no games to export."
+    -message "This is an empty database, there are no games to export."
     return
   }
   if {[sc_filter count] == 0} {
     tk_messageBox -title "Scid: Filter empty" -type ok -icon info \
-	-message "The filter contains no games."
+    -message "The filter contains no games."
     return
   }
   set confirm [::game::ConfirmDiscard]
@@ -726,9 +752,9 @@ $m.exportfilter add command -label ToolsExpFilterEPD -command {
 
   if {[catch {open $fName w} epdFile]} {
     tk_messageBox -title "Scid: Unable to write file" -type ok -icon warning \
-	-message "Unable to write file: $fName"
+    -message "Unable to write file: $fName"
     return
-  } 
+  }
 
   busyCursor .
   update
@@ -778,7 +804,7 @@ $m add command -label ToolsScreenshot -command {boardToFile {} {}} -accelerator 
 set helpMessage($m,[incr menuindex]) {Board Screenshot}
 if {$windowsOS} {
   # Screenshot is broken on windows
-  $m entryconfigure 23 -state disabled 
+  $m entryconfigure 23 -state disabled
 } else {
   bind .main <Control-Shift-F12> {boardToFile {} {}}
 }
@@ -965,45 +991,45 @@ $m add command -label OptionsSave -command {
     puts $optionF "# format or it will not set your Scid options properly."
     puts $optionF ""
 
-  foreach i {boardSize boardStyle language ::pgn::showColor 
+  foreach i {boardSize boardStyle language ::pgn::showColor
     ::pgn::indentVars ::pgn::indentComments ::defaultBackground ::defaultForeground ::::defaultGraphBackgroud ::enableBackground ::enableForeground
-    ::pgn::shortHeader ::pgn::boldMainLine ::pgn::stripMarks 
+    ::pgn::shortHeader ::pgn::boldMainLine ::pgn::stripMarks
     ::pgn::symbolicNags ::pgn::moveNumberSpaces ::pgn::columnFormat ::pgn::showScrollbar
     myPlayerNames optionsAutoSave ::tree::mask::recentMask ::tree::mask::autoLoadMask ::tree::showBar ::tree::short ::tree::sortBest ::tree::autoAdjust
     ::tree::autoSave ::tree::order ::tree::showFrame ecoFile showVarPopup showVarArrows colorActiveSquare
     annotate(blunder) annotate(addTag) annotate(Moves) annotate(WithVars) annotate(WithScore) useAnalysisBook annotate(isVar) annotate(scoreType) annotate(cutoff) annotate(MissedMates) annotate(VarAtEnd)
-    annotate(WantedDepth) annotate(Depth) autoplayDelay animateDelay boardCoords boardSTM 
+    annotate(WantedDepth) annotate(Depth) autoplayDelay animateDelay boardCoords boardSTM
     moveEntry(AutoExpand) moveEntry(Coord)
-    translatePieces highlightLastMove highlightLastMoveWidth highlightLastMoveColor 
-    askToReplaceMoves ::windows::switcher::icons ::windows::switcher::confirmCopy locale(numeric) 
+    translatePieces highlightLastMove highlightLastMoveWidth highlightLastMoveColor
+    askToReplaceMoves ::windows::switcher::icons ::windows::switcher::confirmCopy locale(numeric)
     spellCheckFile ::splash::keepopen autoRaise autoIconify windowsDock autoLoadLayout
     exportFlags(comments) exportFlags(space) exportFlags(vars) exportFlags(indentc)
     exportFlags(indentv) exportFlags(newlines) exportFlags(column) exportFlags(htmldiag) exportFlags(utf8)
-    email(smtp) email(smproc) email(server) 
+    email(smtp) email(smproc) email(server)
     email(from) email(bcc) ::windows::gamelist::findcase ::windows::gamelist::showButtons
-    gameInfo(show) gameInfo(photos) gameInfo(wrap) gameInfo(showStatus) 
-    gameInfo(fullComment) gameInfo(showMarks) gameInfo(showMenu) gameInfo(showTool) 
-    gameInfo(showMaterial) gameInfo(showFEN) gameInfo(showButtons) gameInfo(showTB) 
+    gameInfo(show) gameInfo(photos) gameInfo(wrap) gameInfo(showStatus)
+    gameInfo(fullComment) gameInfo(showMarks) gameInfo(showMenu) gameInfo(showTool)
+    gameInfo(showMaterial) gameInfo(showFEN) gameInfo(showButtons) gameInfo(showTB)
     analysis(mini) engines(F2) engines(F3) engines(F4) analysis(logMax) analysis(logName) analysis(maxPly) analysis(lowPriority) analysis(boardSize) analysis(boardShowsVar) analysis(showBoard) analysis(showEngineInfo) analysis(wrapPV)
-    scidBooksDir scidBasesDir 
-    ::book::lastBook1 ::book::lastBook2 ::book::lastTuning ::book::sortAlpha 
-    ::book::showTwo ::book::oppMovesVisible ::gbrowser::size 
+    scidBooksDir scidBasesDir
+    ::book::lastBook1 ::book::lastBook2 ::book::lastTuning ::book::sortAlpha
+    ::book::showTwo ::book::oppMovesVisible ::gbrowser::size
     crosstab(type) crosstab(ages) crosstab(countries) crosstab(ratings) crosstab(titles) crosstab(breaks) crosstab(colorrows)
     crosstab(deleted) crosstab(colors) crosstab(cnumbers) crosstab(groups) crosstab(sort) crosstab(tallies) crosstab(tiewin) crosstab(tiehead)
     ::utils::sound::soundFolder ::utils::sound::announceNew ::utils::sound::announceTock
     ::utils::sound::announceForward ::utils::sound::announceBack ::utils::sound::device
-    ::tacgame::threshold ::tacgame::levelMin  ::tacgame::levelMax  ::tacgame::levelFixed ::tacgame::randomLevel 
-    ::tacgame::showblunder ::tacgame::showblundervalue 
-    ::tacgame::showblunderfound ::tacgame::showmovevalue ::tacgame::showevaluation 
+    ::tacgame::threshold ::tacgame::levelMin  ::tacgame::levelMax  ::tacgame::levelFixed ::tacgame::randomLevel
+    ::tacgame::showblunder ::tacgame::showblundervalue
+    ::tacgame::showblunderfound ::tacgame::showmovevalue ::tacgame::showevaluation
     ::tacgame::isLimitedAnalysisTime ::tacgame::analysisTime ::tacgame::openingType ::tacgame::chosenOpening
-    ::sergame::bookToUse ::sergame::useBook ::sergame::startFromCurrent 
+    ::sergame::bookToUse ::sergame::useBook ::sergame::startFromCurrent
     ::sergame::winc ::sergame::wtime ::sergame::binc ::sergame::btime
     ::sergame::timeMode ::sergame::movetime ::sergame::current ::sergame::chosenOpening ::sergame::isOpening
-    ::commenteditor::showBoard ::commenteditor::State(markColor) ::commenteditor::State(markType) boardfile_lite boardfile_dark 
+    ::commenteditor::showBoard ::commenteditor::State(markColor) ::commenteditor::State(markType) boardfile_lite boardfile_dark
     ::file::finder::data(dir) ::file::finder::data(sort)
-    ::file::finder::data(Scid) ::file::finder::data(PGN) 
-    ::file::finder::data(EPD) ::file::finder::data(Old) 
-    FilterMaxMoves FilterMinMoves FilterStepMoves FilterMaxElo FilterMinElo FilterStepElo 
+    ::file::finder::data(Scid) ::file::finder::data(PGN)
+    ::file::finder::data(EPD) ::file::finder::data(Old)
+    FilterMaxMoves FilterMinMoves FilterStepMoves FilterMaxElo FilterMinElo FilterStepElo
     FilterMaxYear FilterMinYear FilterStepYear FilterGuessELO lookTheme autoResizeBoard
     comp(timecontrol) comp(seconds) comp(base) comp(incr) comp(timeout) comp(name) comp(usebook) comp(book)
     comp(rounds) comp(showclock) comp(debug) comp(animate) comp(type) comp(ponder) comp(scoreType)
@@ -1096,7 +1122,7 @@ $m add checkbutton -label OptionsAutoSave -variable optionsAutoSave
 set helpMessage($m,[incr menuindex]) OptionsAutoSave
 
 if {$::macOS} {
-# God-fucking-awful hack to fix broken OS X non-handling of magic mouse wheel 
+# God-fucking-awful hack to fix broken OS X non-handling of magic mouse wheel
 # The hardware has a very sensitive wheel, but nowhere to disable it. S.A
 $m add checkbutton -label "Enable Wheelmouse " -variable macWheelMouse -command {
   if {$::macWheelMouse} {
@@ -1158,7 +1184,7 @@ foreach i {GInfoTBNothing GInfoTBResult GInfoTBAll} j {0 1 2} {
 menu $m.entry -tearoff 1
 $m.entry add checkbutton -label OptionsMovesAsk \
     -variable askToReplaceMoves -offvalue 0 -onvalue 1
-set helpMessage($m.entry,0) OptionsMovesAsk 
+set helpMessage($m.entry,0) OptionsMovesAsk
 
 $m.entry add checkbutton -label OptionsMovesShowVarArrows \
     -variable showVarArrows -offvalue 0 -onvalue 1
@@ -1289,7 +1315,7 @@ $m add checkbutton -label OptionsWindowsDock -variable windowsDock -command {
 set helpMessage($m,2) OptionsWindowsDock
 
 if {$::docking::USE_DOCKING} {
-  $m add checkbutton -label OptionsWindowsAutoLoadLayout -variable autoLoadLayout 
+  $m add checkbutton -label OptionsWindowsAutoLoadLayout -variable autoLoadLayout
   set helpMessage($m,4) OptionsWindowsAutoLoadLayout
 
   $m add checkbutton -label OptionsWindowsAutoResize -variable ::autoResizeBoard -command {
@@ -1496,7 +1522,7 @@ proc recurseBackgroundColour {w colour} {
          $w configure -background $colour
      } else {
        foreach c [winfo children $w] {
-	   recurseBackgroundColour $c $colour
+           recurseBackgroundColour $c $colour
        }
      }
 }
@@ -1561,7 +1587,7 @@ incr menuindex
 # set helpMessage($m,[incr menuindex]) HelpGuide
 # $m add command -label HelpHints -command {helpWindow Hints}
 # set helpMessage($m,[incr menuindex]) HelpHints
-# 
+#
 # $m add separator
 # incr menuindex
 
@@ -1591,9 +1617,9 @@ bind .main <Control-f> {if {!$tree(refresh)} {toggleRotateBoard}}
 
 catch {
   if {$windowsOS} {
-    bind .main <Shift-Tab> {::file::SwitchToNextBase -1} 
+    bind .main <Shift-Tab> {::file::SwitchToNextBase -1}
   } else {
-    bind .main <ISO_Left_Tab> {::file::SwitchToNextBase -1} 
+    bind .main <ISO_Left_Tab> {::file::SwitchToNextBase -1}
   }
 }
 
@@ -1608,19 +1634,19 @@ proc updateMenuStates {} {
 
   set m .menu
   $m.file.switch delete 0 9
-  
+
   for {set i 1} { $i <= $totalBaseSlots } { incr i } {
     set fname [file tail [sc_base filename $i]]
 
     # Only show menu items for open database slots
     if {$fname != {[empty]} } {
       $m.file.switch add command -command "set ::currentSlot $i" \
-	  -label "$fname" -underline 5 -accelerator "Ctrl-$i" \
-          -command "::file::SwitchToBase $i"
+        -label "$fname" -underline 5 -accelerator "Ctrl-$i" \
+        -command "::file::SwitchToBase $i"
       bind .main <Control-Key-$i> "::file::SwitchToBase $i"
 
       if {$i == $current} {
-	$m.file.switch entryconfig $i -state disabled
+        $m.file.switch entryconfig $i -state disabled
       }
     }
   }
@@ -1774,7 +1800,7 @@ proc setLanguageMenus {{lang ""}} {
     configMenuText .menu.play.correspondence [tr $tag $oldLang] $tag $lang
   }
 
-  foreach tag {File Edit Game Search Play Windows Tools Options Help} {
+  foreach tag {File Edit Game Search Play Windows Analyse Tools Options Help} {
     configMenuText .menu [tr $tag $oldLang] $tag $lang
   }
 
@@ -1792,7 +1818,7 @@ proc setLanguageMenus {{lang ""}} {
   foreach tag {Reset Negate End Material Moves Current Header Using} {
     configMenuText .menu.search [tr Search$tag $oldLang] Search$tag $lang
   }
-  
+
   # These two items still appear in windows menu
   configMenuText .menu.search [tr WindowsPList $oldLang] WindowsPList $lang
   configMenuText .menu.search [tr WindowsTmt $oldLang] WindowsTmt $lang
@@ -1804,6 +1830,10 @@ proc setLanguageMenus {{lang ""}} {
 
   foreach tag {Gameinfo Comment GList PGN Cross PList Tmt Maint ECO Stats Tree TB Book CorrChess } {
     configMenuText .menu.windows [tr Windows$tag $oldLang] Windows$tag $lang
+  }
+
+  foreach tag {EngineList StartEngine1 StartEngine2 Rating Score} {
+      configMenuText .menu.analyse [tr Analysis$tag $oldLang] Analyse$tag $lang
   }
 
   foreach tag {Analysis Maint Email FilterGraph AbsFilterGraph OpReport Tracker
@@ -1891,8 +1921,7 @@ proc setLanguageMenus {{lang ""}} {
     }
     # and the single save layout menu at the bottom
     configMenuText .menu.options [tr OptionsWindowsSaveLayout $oldLang] \
-	OptionsWindowsSaveLayout $lang
-
+    OptionsWindowsSaveLayout $lang
   }
 
   foreach tag {Contents Index Tip Startup About} {
@@ -1904,7 +1933,7 @@ proc setLanguageMenus {{lang ""}} {
 
   # Should sort out what the Delete , Mark menus did.
   # Its' proably tied in with my half-baked Gamelist Widget, and FLAGS
-  #  foreach tag {HideNext Show Coords Material FEN Marks Wrap FullComment Photos TBNothing TBResult TBAll Delete Mark} 
+  #  foreach tag {HideNext Show Coords Material FEN Marks Wrap FullComment Photos TBNothing TBResult TBAll Delete Mark}
 
   foreach tag {HideNext Show Coords Material FEN MenuBar ToolBar ButtonBar StatusBar} {
     configMenuText .main.gameInfo.menu [tr GInfo$tag $oldLang] GInfo$tag $lang
@@ -1926,7 +1955,7 @@ proc setLanguageMenus {{lang ""}} {
 
   # Check for duplicate menu underline characters in this language
   if {0} {
-    foreach m {file edit game search windows tools options help} {
+    foreach m {file edit game search windows analyse tools options help} {
       set list [checkMenuUnderline .menu.$m]
       if {[llength $list] > 0} {
         ::splash::add "Menu $m has duplicate underline letters: $list" error
@@ -1985,7 +2014,7 @@ proc configInformant {} {
     label $w.main.label$row -text [string trim $i {"}]
     spinbox $w.main.value$row -textvariable informant($i) -width 4 -from 0.0 -to 9.9 -increment 0.1 \
         -validate all -vcmd {string is double %P} -justify center
-    grid $w.main.explanation$row -row $row -column 0 -sticky w 
+    grid $w.main.explanation$row -row $row -column 0 -sticky w
     grid $w.main.label$row -row $row -column 1 -sticky w -padx 5 -pady 3
     grid $w.main.value$row -row $row -column 2 -sticky w -padx 5 -pady 3
     incr row
@@ -2005,4 +2034,3 @@ proc configInformant {} {
 }
 
 ### End of file: menus.tcl
-
