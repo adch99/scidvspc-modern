@@ -86,14 +86,14 @@ set m .menu.file
 $m add command -label FileNew -command ::file::New
 set helpMessage($m,[incr menuindex]) FileNew
 
-$m add command -label FileOpen -acc "Ctrl-o" -command ::file::Open
+$m add command -label FileOpen -acc "Ctrl-O" -command ::file::Open
 bind .main <Control-o> ::file::Open
 set helpMessage($m,[incr menuindex]) FileOpen
 
 $m add command -label FileSavePgn  -command {::pgn::savePgn .}
 set helpMessage($m,[incr menuindex]) FileSavePgn
 
-$m add command -label FileClose -acc "Ctrl-w" -command ::file::Close
+$m add command -label FileClose -acc "Ctrl-W" -command ::file::Close
 bind .main <Control-w> ::file::Close
 set helpMessage($m,[incr menuindex]) FileClose
 
@@ -136,7 +136,7 @@ set currentSlot [sc_base current]
 $m add separator
 incr menuindex
 
-$m add command -label FileExit -accelerator "Ctrl-q" -command ::file::Exit
+$m add command -label FileExit -accelerator "Ctrl-Q" -command ::file::Exit
 bind .main <Control-q> ::file::Exit
 set helpMessage($m,[incr menuindex]) FileExit
 
@@ -146,23 +146,23 @@ set helpMessage($m,[incr menuindex]) FileExit
 set menuindex -1
 set m .menu.edit
 
-$m add command -label EditSetup -command setupBoard -accelerator "Ctrl-B"
+$m add command -label EditSetup -command setupBoard -accelerator "Ctrl-Shift-B"
 set helpMessage($m,[incr menuindex]) EditSetup
 
-$m add command -label EditCopyBoard -accelerator "Ctrl-C" -command copyFEN
+$m add command -label EditCopyBoard -accelerator "Ctrl-Shift-C" -command copyFEN
 set helpMessage($m,[incr menuindex]) EditCopyBoard
 
 $m add command -label EditCopyPGN -command ::pgn::copyPgn
 set helpMessage($m,[incr menuindex]) EditCopyPGN
 
-$m add command -label EditPasteBoard -accelerator "Ctrl-V" -command pasteFEN
+$m add command -label EditPasteBoard -accelerator "Ctrl-Shift-V" -command pasteFEN
 set helpMessage($m,[incr menuindex]) EditPasteBoard
 
-$m add command -label EditPastePGN -command importPgnGame -accelerator "Ctrl-I"
+$m add command -label EditPastePGN -command importPgnGame -accelerator "Ctrl-Shift-I"
 set helpMessage($m,[incr menuindex]) EditPastePGN
 
 
-$m add command -label EditFlip -command {::board::flip .main.board} -accelerator "Ctrl-f"
+$m add command -label EditFlip -command {::board::flip .main.board} -accelerator "Ctrl-F"
 #bind main <Control-f> {::board::flip .main.board}
 set helpMessage($m,[incr menuIndex]) EditFlip
 
@@ -179,11 +179,11 @@ $m add command -label EditReset -command {
 set helpMessage($m,[incr menuindex]) EditReset
 
 
-$m add command -label EditCopy -accelerator "Ctrl-c" -command copyGame
+$m add command -label EditCopy -accelerator "Ctrl-C" -command copyGame
 bind .main <Control-c> copyGame
 set helpMessage($m,[incr menuindex]) EditCopy
 
-$m add command -label EditPaste -accelerator "Ctrl-v" -command pasteGame
+$m add command -label EditPaste -accelerator "Ctrl-V" -command pasteGame
 bind .main <Control-v> pasteGame
 set helpMessage($m,[incr menuindex]) EditPaste
 
@@ -215,7 +215,7 @@ proc menuUndo {action} {
 $m add separator
 incr menuindex
 
-$m add command -label EditAdd -accel "Ctrl-a" -command {sc_var create; updateBoard -pgn}
+$m add command -label EditAdd -accel "Ctrl-A" -command {sc_var create; updateBoard -pgn}
 set helpMessage($m,[incr menuindex]) EditAdd
 
 $m add command -label EditPasteVar -command importVar
@@ -234,7 +234,7 @@ $m add cascade -label EditMain -menu $m.main
 set helpMessage($m,[incr menuindex]) EditMain
 
 $m add checkbutton -label EditTrial -variable trialMode \
-    -accelerator "Ctrl-space" -command {setTrialMode menu}
+    -accelerator "Ctrl-Space" -command {setTrialMode menu}
 bind .main <Control-space> { setTrialMode toggle }
 set helpMessage($m,[incr menuindex]) EditTrial
 
@@ -253,15 +253,15 @@ set helpMessage($m.strip,1) EditStripVars
 ### Game menu:
 set menuindex -1
 set m .menu.game
-$m add command -label GameNew -accelerator "Ctrl-N" -command ::game::Clear
+$m add command -label GameNew -accelerator "Ctrl-Shift-N" -command ::game::Clear
 bind .main <Control-N> ::game::Clear
 set helpMessage($m,[incr menuindex]) GameNew
 
-$m add command -label GameReplace -command gameReplace -accelerator "Ctrl-s"
+$m add command -label GameReplace -command gameReplace -accelerator "Ctrl-S"
 bind .main <Control-s> { .menu.game invoke [tr GameReplace] }
 set helpMessage($m,[incr menuindex]) GameReplace
 
-$m  add command -label GameAdd -command gameAdd  -accelerator "Ctrl-S"
+$m  add command -label GameAdd -command gameAdd  -accelerator "Ctrl-Shift-S"
 bind .main <Control-S> gameAdd
 set helpMessage($m,[incr menuindex]) GameAdd
 
@@ -274,13 +274,13 @@ set helpMessage($m,[incr menuindex]) GameInfo
 $m add command -label GameBrowse -command {::gbrowser::new [sc_base current] [sc_game number] [sc_pos location]}
 set helpMessage($m,[incr menuindex]) GameBrowse
 
-$m add command -label GameList -accel "Ctrl-l" -command ::windows::gamelist::Open
+$m add command -label GameList -accel "Ctrl-L" -command ::windows::gamelist::Open
 set helpMessage($m,[incr menuindex]) GameList
 
 $m add separator
 incr menuindex
 
-$m  add command -label GameDelete -accel "Ctrl-delete" -command ::game::Delete -underline 0
+$m  add command -label GameDelete -accel "Ctrl-Del" -command ::game::Delete -underline 0
 set helpMessage($m,[incr menuindex]) GameDelete
 if {$::macOS} {
   bind .main <Control-BackSpace> ::game::Delete
@@ -294,26 +294,26 @@ set helpMessage($m,[incr menuindex]) GameReload
 $m add separator
 incr menuindex
 
-$m add command -label GameFirst -accelerator "Ctrl-home" \
+$m add command -label GameFirst -accelerator "Ctrl-Home" \
     -command {::game::LoadNextPrev first}
 set helpMessage($m,[incr menuindex]) GameFirst
 
-$m add command -label GameLast -accelerator "Ctrl-end" \
+$m add command -label GameLast -accelerator "Ctrl-End" \
     -command {::game::LoadNextPrev last}
 set helpMessage($m,[incr menuindex]) GameLast
 
-$m add command -label GameNext -accelerator "Ctrl-down" \
+$m add command -label GameNext -accelerator "Ctrl-Down" \
     -command {::game::LoadNextPrev next}
 set helpMessage($m,[incr menuindex]) GameNext
 
-$m add command -label GamePrev -accelerator "Ctrl-up" \
+$m add command -label GamePrev -accelerator "Ctrl-Up" \
     -command {::game::LoadNextPrev previous}
 set helpMessage($m,[incr menuindex]) GamePrev
 
 $m add command -label GameRandom -command ::game::LoadRandom -accelerator "Ctrl-?"
 set helpMessage($m,[incr menuindex]) GameRandom
 
-$m add command -label GameNumber -command ::game::LoadNumber -accelerator "Ctrl-u"
+$m add command -label GameNumber -command ::game::LoadNumber -accelerator "Ctrl-U"
 set helpMessage($m,[incr menuindex]) GameNumber
 
 $m add separator
@@ -331,7 +331,7 @@ proc IdentifyOpening {} {
 
 set helpMessage($m,[incr menuindex]) GameDeepest
 
-$m add command -label GameGotoMove -accelerator "Ctrl-g" \
+$m add command -label GameGotoMove -accelerator "Ctrl-G" \
     -command ::game::GotoMoveNumber
 set helpMessage($m,[incr menuindex]) GameGotoMove
 bind .main <Control-g> ::game::GotoMoveNumber
@@ -343,12 +343,12 @@ set helpMessage($m,[incr menuindex]) GameNovelty
 ### Search menu:
 set menuindex -1
 set m .menu.search
-$m  add command -label SearchReset -acc "Ctrl-r" \
+$m  add command -label SearchReset -acc "Ctrl-R" \
     -command ::search::filter::reset
 bind .main <Control-r> ::search::filter::reset
 set helpMessage($m,[incr menuindex]) SearchReset
 
-$m  add command -label SearchNegate -acc "Ctrl-n" \
+$m  add command -label SearchNegate -acc "Ctrl-N" \
     -command ::search::filter::negate
 bind .main <Control-n> ::search::filter::negate
 set helpMessage($m,[incr menuindex]) SearchNegate
@@ -360,14 +360,14 @@ $m  add separator
 incr menuindex
 
 $m  add command -label SearchHeader \
-    -command ::search::header -accelerator "Ctrl-G"
+    -command ::search::header -accelerator "Ctrl-Shift-G"
 set helpMessage($m,[incr menuindex]) SearchHeader
 
 $m  add command -label SearchCurrent -command ::search::board
 set helpMessage($m,[incr menuindex]) SearchCurrent
 
 $m  add command -label SearchMaterial \
-    -command ::search::material -accelerator "Ctrl-M"
+    -command ::search::material -accelerator "Ctrl-Shift-M"
 bind .main <Control-M> ::search::material
 set helpMessage($m,[incr menuindex]) SearchMaterial
 
@@ -380,10 +380,10 @@ set helpMessage($m,[incr menuindex]) CQL
 $m  add separator
 incr menuindex
 
-$m add command -label WindowsPList -command ::plist::Open -accelerator "Ctrl-P"
+$m add command -label WindowsPList -command ::plist::Open -accelerator "Ctrl-Shift-P"
 set helpMessage($m,[incr menuindex]) WindowsPList
 
-$m add command -label WindowsTmt -command ::tourney::Open -accelerator "Ctrl-T"
+$m add command -label WindowsTmt -command ::tourney::Open -accelerator "Ctrl-Shift-T"
 set helpMessage($m,[incr menuindex]) WindowsTmt
 
 $m  add separator
@@ -469,29 +469,29 @@ set helpMessage($m.correspondence,16) CCMailMove
 set menuindex -1
 set m .menu.windows
 
-$m  add command -label WindowsGameinfo -accelerator "Ctrl-i" -command toggleGameInfo
+$m  add command -label WindowsGameinfo -accelerator "Ctrl-I" -command toggleGameInfo
 bind .main <Control-i> toggleGameInfo
 set helpMessage($m,[incr menuindex]) WindowsGameinfo
 
-$m  add command -label WindowsComment -command ::commenteditor::Open -accelerator "Ctrl-e"
+$m  add command -label WindowsComment -command ::commenteditor::Open -accelerator "Ctrl-E"
 set helpMessage($m,[incr menuindex]) WindowsComment
 
-$m  add command -label WindowsGList -command ::windows::gamelist::Open -accelerator "Ctrl-l"
+$m  add command -label WindowsGList -command ::windows::gamelist::Open -accelerator "Ctrl-L"
 set helpMessage($m,[incr menuindex]) WindowsGList
 
-$m  add command -label WindowsPGN -command ::pgn::Open  -accelerator "Ctrl-p"
+$m  add command -label WindowsPGN -command ::pgn::Open  -accelerator "Ctrl-P"
 set helpMessage($m,[incr menuindex]) WindowsPGN
 
-$m  add command -label WindowsCross -command ::crosstab::Open  -accelerator "Ctrl-X"
+$m  add command -label WindowsCross -command ::crosstab::Open  -accelerator "Ctrl-Shift-X"
 set helpMessage($m,[incr menuindex]) WindowsCross
 
-$m add command -label WindowsPList -command ::plist::Open -accelerator "Ctrl-P"
+$m add command -label WindowsPList -command ::plist::Open -accelerator "Ctrl-Shift-P"
 set helpMessage($m,[incr menuindex]) WindowsPList
 
-$m add command -label WindowsTmt -command ::tourney::Open -accelerator "Ctrl-T"
+$m add command -label WindowsTmt -command ::tourney::Open -accelerator "Ctrl-Shift-T"
 set helpMessage($m,[incr menuindex]) WindowsTmt
 
-$m add command -label WindowsMaint -accelerator "Ctrl-m" -command ::maint::Open
+$m add command -label WindowsMaint -accelerator "Ctrl-M" -command ::maint::Open
 set helpMessage($m,[incr menuindex]) WindowsMaint
 
 $m add separator
@@ -504,14 +504,14 @@ $m add command -label WindowsStats -command ::windows::stats::Open
 bind .main <Control-i> ::windows::stats::Open
 set helpMessage($m,[incr menuindex]) WindowsStats
 
-$m add command -label WindowsTree -command ::tree::Open -accelerator "Ctrl-t"
+$m add command -label WindowsTree -command ::tree::Open -accelerator "Ctrl-T"
 set helpMessage($m,[incr menuindex]) WindowsTree
 
 $m add command -label WindowsTB -command ::tb::Open -accelerator "Ctrl-="
 bind .main <Control-equal> ::tb::Open
 set helpMessage($m,[incr menuindex]) WindowsTB
 
-$m add command -label WindowsBook -command ::book::Open -accelerator "Ctrl-b"
+$m add command -label WindowsBook -command ::book::Open -accelerator "Ctrl-B"
 set helpMessage($m,[incr menuindex]) WindowsBook
 
 $m add command -label WindowsCorrChess -command ::CorrespondenceChess::CCWindow
@@ -521,49 +521,55 @@ $m add command -label WindowsCorrChess -command ::CorrespondenceChess::CCWindow
 set menuindex -1
 set m .menu.analyse
 
-$m add command -label AnalyseEngineList -command ::enginelist::choose -accelerator "Ctrl-A"
-#bind .main <Control-A> ::enginelist::choose
+$m add command -label AnalyseEngineList -command ::enginelist::choose -accelerator "Ctrl-Shift-A"
+bind .main <Control-A> ::enginelist::choose
 set helpMessage($m,[incr menuindex]) AnalyseAnalysis
 
 #Add Menu for Start Engine 1 and Engine 2
 $m add command -label AnalyseStartEngine1 -command "startAnalysisWin F2" -accelerator "F2"
-#bind .main <F2> "startAnalysisWin F2"
+bind .main <F2> "startAnalysisWin F2"
 set helpMessage($m,[incr menuindex]) AnalyseStartEngine1
 
 $m add command -label AnalyseStartEngine2 -command "startAnalysisWin F3" -accelerator "F3"
-#bind .main <F3> "startAnalysisWin F3"
+bind .main <F3> "startAnalysisWin F3"
 set helpMessage($m,[incr menuindex]) AnalyseStartEngine2
 
 $m add command -label AnalyseRating -command {::tools::graphs::rating::Refresh both}
 set helpMessage($m,[incr menuindex]) AnalyseRating
 
-$m add command -label AnalyseScore -command ::tools::graphs::score::Raise
-#bind .main <Control-Z> ::tools::graphs::score::Raise
+$m add command -label AnalyseScore -command ::tools::graphs::score::Raise -accelerator "Ctrl-Shift-Z"
+bind .main <Control-Z> ::tools::graphs::score::Raise
 set helpMessage($m,[incr menuindex]) AnalyseScore
+
+$m add command -label AnalysePlayerReport -command ::preport::preportDlg
+set helpMessage($m,[incr menuindex]) AnalysePlayerReport
+
+$m add command -label AnalyseOpReport -command ::optable::makeReportWin
+set helpMessage($m,[incr menuindex]) AnalyseOpReport
 
 
 ### Tools menu:
 
 set menuindex -1
 set m .menu.tools
-$m  add command -label ToolsAnalysis \
-    -command ::enginelist::choose -accelerator "Ctrl-A"
-bind .main <Control-A> ::enginelist::choose
-set helpMessage($m,[incr menuindex]) ToolsAnalysis
+#$m  add command -label ToolsAnalysis \
+#    -command ::enginelist::choose -accelerator "Ctrl-Shift-A"
+#bind .main <Control-A> ::enginelist::choose
+#set helpMessage($m,[incr menuindex]) ToolsAnalysis
 
 #Add Menu for Start Engine 1 and Engine 2
-$m  add command -label ToolsStartEngine1 \
-    -command "startAnalysisWin F2" -accelerator "F2"
-bind .main <F2> "startAnalysisWin F2"
-set helpMessage($m,[incr menuindex]) ToolsStartEngine1
+#$m  add command -label ToolsStartEngine1 \
+#    -command "startAnalysisWin F2" -accelerator "F2"
+#bind .main <F2> "startAnalysisWin F2"
+#set helpMessage($m,[incr menuindex]) ToolsStartEngine1
 
-$m  add command -label ToolsStartEngine2 \
-    -command "startAnalysisWin F3" -accelerator "F3"
-bind .main <F3> "startAnalysisWin F3"
-set helpMessage($m,[incr menuindex]) ToolsStartEngine2
+#$m  add command -label ToolsStartEngine2 \
+#    -command "startAnalysisWin F3" -accelerator "F3"
+#bind .main <F3> "startAnalysisWin F3"
+#set helpMessage($m,[incr menuindex]) ToolsStartEngine2
 
-$m add separator
-incr menuindex
+#$m add separator
+#incr menuindex
 
 # **********
 
@@ -571,7 +577,7 @@ menu $m.utils
 $m add cascade -label ToolsMaint -menu .menu.tools.utils
 set helpMessage($m,[incr menuindex]) ToolsMaint
 
-$m.utils add command -label ToolsMaintWin -accelerator "Ctrl-m" -command ::maint::Open
+$m.utils add command -label ToolsMaintWin -accelerator "Ctrl-M" -command ::maint::Open
 set helpMessage($m.utils,0) ToolsMaintWin
 
 $m.utils add command -label ToolsMaintNameEditor -command nameEditor
@@ -616,12 +622,6 @@ set helpMessage($m.utils,10) ToolsMaintFixBase
 $m add command -label ToolsBookTuning -command ::book::tuning
 set helpMessage($m,[incr menuindex]) ToolsBookTuning
 
-$m add command -label ToolsPlayerReport -command ::preport::preportDlg
-set helpMessage($m,[incr menuindex]) ToolsPlayerReport
-
-$m add command -label ToolsOpReport -command ::optable::makeReportWin
-set helpMessage($m,[incr menuindex]) ToolsOpReport
-
 $m add command -label ToolsTracker -command ::ptrack::make
 set helpMessage($m,[incr menuindex]) ToolsTracker
 
@@ -648,17 +648,17 @@ incr menuindex
 $m add command -label ToolsFilterGraph -command tools::graphs::filter::Open
 set helpMessage($m,[incr menuindex]) ToolsFilterGraph
 
-$m add command -label ToolsAbsFilterGraph -accelerator "Ctrl-J" -command ::tools::graphs::absfilter::Open
+$m add command -label ToolsAbsFilterGraph -accelerator "Ctrl-Shift-J" -command ::tools::graphs::absfilter::Open
 bind .main <Control-J> ::tools::graphs::absfilter::Open
 set helpMessage($m,[incr menuindex]) ToolsAbsFilterGraph
 
-$m add command -label ToolsRating -command {::tools::graphs::rating::Refresh both}
-set helpMessage($m,[incr menuindex]) ToolsRating
+#$m add command -label ToolsRating -command {::tools::graphs::rating::Refresh both}
+#set helpMessage($m,[incr menuindex]) ToolsRating
 
-$m add command -label ToolsScore \
-    -accelerator "Ctrl-Z" -command ::tools::graphs::score::Raise
-bind .main <Control-Z> ::tools::graphs::score::Raise
-set helpMessage($m,[incr menuindex]) ToolsScore
+#$m add command -label ToolsScore \
+#    -accelerator "Ctrl-Shift-Z" -command ::tools::graphs::score::Raise
+#bind .main <Control-Z> ::tools::graphs::score::Raise
+#set helpMessage($m,[incr menuindex]) ToolsScore
 
 $m add separator
 incr menuindex
@@ -791,7 +791,7 @@ set helpMessage($m.exportfilter,3) ToolsExpFilterGames
 $m add separator
 incr menuindex
 
-$m add command -label ToolsImportOne -accelerator "Ctrl-I" -command importPgnGame
+$m add command -label ToolsImportOne -accelerator "Ctrl-Shift-I" -command importPgnGame
 bind .main <Control-I> importPgnGame
 set helpMessage($m,[incr menuindex]) ToolsImportOne
 
@@ -1673,7 +1673,7 @@ proc updateMenuStates {} {
   }
   set idx [$m.file index end]
   incr idx
-  $m.file add command -label [tr FileExit] -accelerator "Ctrl-q" \
+  $m.file add command -label [tr FileExit] -accelerator "Ctrl-Q" \
       -command ::file::Exit
   set helpMessage($m.file,$idx) FileExit
 
@@ -1835,13 +1835,14 @@ proc setLanguageMenus {{lang ""}} {
     configMenuText .menu.windows [tr Windows$tag $oldLang] Windows$tag $lang
   }
 
-  foreach tag {EngineList StartEngine1 StartEngine2 Rating Score} {
+  foreach tag {EngineList StartEngine1 StartEngine2 Rating Score PlayerReport
+    OpReport} {
     configMenuText .menu.analyse [tr Analyse$tag $oldLang] Analyse$tag $lang
   }
 
-  foreach tag {Analysis Maint Email FilterGraph AbsFilterGraph OpReport Tracker
-    Rating Score ExpCurrent ExpFilter ImportOne ImportFile StartEngine1 StartEngine2 BookTuning
-    PlayerReport ConnectHardware Screenshot} {
+  foreach tag {Maint Email FilterGraph AbsFilterGraph Tracker
+    ExpCurrent ExpFilter ImportOne ImportFile BookTuning ConnectHardware
+    Screenshot} {
     configMenuText .menu.tools [tr Tools$tag $oldLang] Tools$tag $lang
   }
 

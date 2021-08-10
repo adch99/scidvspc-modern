@@ -168,6 +168,10 @@ menuText B AnalyseScore "Score Graph" 0 {Show the score graph window}
 menuText B AnalyseStartEngine1 "Start engine 1" 0  {Start engine 1}
 # ====== TODO To be translated ======
 menuText B AnalyseStartEngine2 "Start engine 2" 0  {Start engine 2}
+# ====== TODO To be translated ======
+menuText B AnalysePlayerReport "Player Report" 3 {Generate a player report}
+# ====== TODO To be translated ======
+menuText B AnalyseOpReport "Opening Report" 0 {Generate an opening report for the current position}
 
 
 

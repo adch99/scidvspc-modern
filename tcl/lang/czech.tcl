@@ -145,6 +145,10 @@ menuText C AnalyseScore "Graf sk�re" 6  {Zobrazit okno grafu sk�re}
 menuText C AnalyseStartEngine1 "Start engine 1" 0  {Start engine 1}
 # ====== TODO To be translated ======
 menuText C AnalyseStartEngine2 "Start engine 2" 0  {Start engine 2}
+# ====== TODO To be translated ======
+menuText C AnalysePlayerReport "Player Report" 3 {Generate a player report}
+# ====== TODO To be translated ======
+menuText C AnalyseOpReport "Opening Report" 0 {Generate an opening report for the current position}
 
 
 # Tools menu:

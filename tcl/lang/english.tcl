@@ -154,7 +154,9 @@ menuText E AnalyseEngineList "Analysis Engines" 0 {Configure analysis engines}
 menuText E AnalyseRating "Player Ratings" 0 {Graph the rating history of the current game players}
 menuText E AnalyseScore "Score Graph" 0 {Show the score graph window}
 menuText E AnalyseStartEngine1 "Start engine 1" 1  {Start engine 1}
-menuText E AnalyseStartEngine2 "Start engine 2" 4  {Start engine 2}
+menuText E AnalyseStartEngine2 "Start engine 2" 3  {Start engine 2}
+menuText E AnalysePlayerReport "Player Report" 3 {Generate a player report}
+menuText E AnalyseOpReport "Opening Report" 0 {Generate an opening report for the current position}
 
 # Tools menu:
 menuText E Tools "Tools" 0

@@ -149,6 +149,10 @@ menuText H AnalyseScore "Score Graph" 0 {Show the score graph window}
 menuText H AnalyseStartEngine1 "Start engine 1" 0  {Start engine 1}
 # ====== TODO To be translated ======
 menuText H AnalyseStartEngine2 "Start engine 2" 0  {Start engine 2}
+# ====== TODO To be translated ======
+menuText H AnalysePlayerReport "Player Report" 3 {Generate a player report}
+# ====== TODO To be translated ======
+menuText H AnalyseOpReport "Opening Report" 0 {Generate an opening report for the current position}
 
 # Tools menu:
 menuText H Tools "Eszk�z�k" 0

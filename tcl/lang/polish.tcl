@@ -149,6 +149,10 @@ menuText P AnalyseScore "Score Graph" 0 {Show the score graph window}
 menuText P AnalyseStartEngine1 "Start engine 1" 0  {Start engine 1}
 # ====== TODO To be translated ======
 menuText P AnalyseStartEngine2 "Start engine 2" 0  {Start engine 2}
+# ====== TODO To be translated ======
+menuText P AnalysePlayerReport "Player Report" 3 {Generate a player report}
+# ====== TODO To be translated ======
+menuText P AnalyseOpReport "Opening Report" 0 {Generate an opening report for the current position}
 
 menuText P Tools "Narzędzia" 0
 menuText P ToolsAnalysis "Program analizujący..." 8 \

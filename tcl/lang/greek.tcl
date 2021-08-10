@@ -164,6 +164,10 @@ menuText G AnalyseScore "Score Graph" 0 {Show the score graph window}
 menuText G AnalyseStartEngine1 "Start engine 1" 0  {Start engine 1}
 # ====== TODO To be translated ======
 menuText G AnalyseStartEngine2 "Start engine 2" 0  {Start engine 2}
+# ====== TODO To be translated ======
+menuText G AnalysePlayerReport "Player Report" 3 {Generate a player report}
+# ====== TODO To be translated ======
+menuText G AnalyseOpReport "Opening Report" 0 {Generate an opening report for the current position}
 
 # Tools menu:
 menuText G Tools "Εργαλεία" 0
