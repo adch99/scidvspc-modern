@@ -3,7 +3,7 @@
 #
 # Οδηγίες για προσθήκη νέας Γλώσσας:
 #
-# (1) Διαλέξτε ένα γράμμα ως κωδικός για την γλώσσα. Τρέχοντες κωδικοί είναι: 
+# (1) Διαλέξτε ένα γράμμα ως κωδικός για την γλώσσα. Τρέχοντες κωδικοί είναι:
 #      E=English, D=Deutsch, F=Francais, S=Spanish, B=Brasil Portuguese,
 #      P=Polish, N=Nederlands, W=Swedish, O=Norsk, C=Czech, H=Hungarian,
 #      Y=Serbian, G=Greek.
@@ -82,6 +82,8 @@ menuText G EditStripBegin "Κινήσεων από Αρχή" 13 \
   {Διαγραφή κινήσεων από την αρχή της παρτίδας}
 menuText G EditStripEnd "Κινήσεων μέχρι Τέλος" 15 \
   {Διαγραφή κινήσεων μέχρι το τέλος της παρτίδας}
+# ====== TODO To be translated ======
+menuText G EditFlip "Flip Board" 0 {Flip the board}
 menuText G EditReset "Άδειασμα Clipbase" 6 \
   {Άδειασμα Προσωρινής Βάσης Δεδομένων (Clipbase)}
 menuText G EditCopy "Αντιγραφή στην Clipbase" 0 \
@@ -150,6 +152,18 @@ menuText G WindowsTree "Δένδρο Κινήσεων" 0 {Άνοιγμα/κλε�
 menuText G WindowsTB "Φινάλε" 0 {Άνοιγμα/κλείσιμο παραθύρου Βάσης Δεδομένων για Φινάλε (Tablebase)}
 menuText G WindowsBook "Ανοίγματα" 0 {Άνοιγμα/κλείσιμο παραθύρου Βιβλίου Ανοιγμάτων}
 menuText G WindowsCorrChess "Αλληλογραφίας" 1 {Άνοιγμα/κλείσιμο παραθύρου Αλληλογραφίας}
+# ====== TODO To be translated ======
+menuText G Analyse "Analyse" 0
+# ====== TODO To be translated ======
+menuText G AnalyseEngineList "Analysis Engines" 0 {Configure analysis engines}
+# ====== TODO To be translated ======
+menuText G AnalyseRating "Player Ratings" 0 {Graph the rating history of the current game players}
+# ====== TODO To be translated ======
+menuText G AnalyseScore "Score Graph" 0 {Show the score graph window}
+# ====== TODO To be translated ======
+menuText G AnalyseStartEngine1 "Start engine 1" 0  {Start engine 1}
+# ====== TODO To be translated ======
+menuText G AnalyseStartEngine2 "Start engine 2" 0  {Start engine 2}
 
 # Tools menu:
 menuText G Tools "Εργαλεία" 0
@@ -212,7 +226,7 @@ menuText G ToolsExpCurrentPGN "Εξαγωγή σε PGN" 0 \
   {Εγγραφή παρτίδας σε αρχείο PGN}
 menuText G ToolsExpCurrentHTML "Εξαγωγή σε HTML" 1 \
   {Εγγραφή παρτίδας σε αρχείο HTML}
-menuText G ToolsExpCurrentHTMLJS "Εξαγωγή σε HTML με JavaScript" 2 {Εγγραφή παρτίδας σε αρχείο HTML με υποστήριξη JavaScript}  
+menuText G ToolsExpCurrentHTMLJS "Εξαγωγή σε HTML με JavaScript" 2 {Εγγραφή παρτίδας σε αρχείο HTML με υποστήριξη JavaScript}
 menuText G ToolsExpCurrentLaTeX "Εξαγωγή σε LaTeX" 3 \
   {Εγγραφή παρτίδας σε αρχείο LaTeX}
 # ====== TODO To be translated ======
@@ -222,7 +236,7 @@ menuText G ToolsExpFilterPGN "Εξαγωγή σε PGN" 0 \
   {Εγγραφή Όλων των φιλτραρισμένων παρτίδων σε αρχείο PGN}
 menuText G ToolsExpFilterHTML "Εξαγωγή σε HTML" 1 \
   {Εγγραφή Όλων των φιλτραρισμένων παρτίδων σε αρχείο HTM}
-menuText G ToolsExpFilterHTMLJS "Εξαγωγή σε HTML με JavaScript" 2 {Εγγραφή Όλων των φιλτραρισμένων παρτίδων σε αρχείο HTML με υποστήριξη JavaScript}  
+menuText G ToolsExpFilterHTMLJS "Εξαγωγή σε HTML με JavaScript" 2 {Εγγραφή Όλων των φιλτραρισμένων παρτίδων σε αρχείο HTML με υποστήριξη JavaScript}
 menuText G ToolsExpFilterLaTeX "Εξαγωγή σε LaTeX" 3 \
   {Εγγραφή Όλων των φιλτραρισμένων παρτίδων σε αρχείο LaTeX}
 # ====== TODO To be translated ======
@@ -330,8 +344,8 @@ menuText G OptionsMovesDelay "Χρ.Καθυστέρηση Αναπαραγωγή
   {Ορισμός χρόνου καθυστέρησης της Αναπαραγωγής}
 menuText G OptionsMovesCoord "Κίνηση με Συντεταγμένες" 11 \
   {Αποδοχή Κινήσεων με Συντεταγμένες (πχ "g1f3")}
-menuText G OptionsShowVarPopup "Εμφάνιση Παραθύρου Βαριάντων" 9 {Εμφάνιση ή μη Παραθύρου Βαριάντων}  
-menuText G OptionsMovesSpace "Προσθ.Κενού Μετά Αριθμ.Κίνησης" 6 {Προσθήκη κενού μετά από τον αριθμό της κίνησης}  
+menuText G OptionsShowVarPopup "Εμφάνιση Παραθύρου Βαριάντων" 9 {Εμφάνιση ή μη Παραθύρου Βαριάντων}
+menuText G OptionsMovesSpace "Προσθ.Κενού Μετά Αριθμ.Κίνησης" 6 {Προσθήκη κενού μετά από τον αριθμό της κίνησης}
 menuText G OptionsMovesKey "Αυτόματη Συμπλήρωση" 0 \
   {Ενεργοποίηση/Απενεργοποίηση αυτόματης συμπλήρωσης εισαγωγής από το πληκτρολόγιο}
 menuText G OptionsMovesShowVarArrows "Εμφάνιση Τόξων Βαριάντων" 9 {Ενεργοποίηση/Απενεργοποίηση Εμφάνισης Τόξων Βαριάντων}
@@ -364,7 +378,7 @@ menuText G OptionsTacticsBasesDir "Κατάλογος Βάσεων" 10 {Επιλ
 menuText G OptionsInformant "Ρύθμιση Αξιών Χαρακτηρισμών" 1
 menuText G OptionsSave "Αποθήκευση Ρυθμίσεων" 18 "Αποθήκευση όλων των ρυθμίσεων στο αρχείο $::optionsFile"
 # ====== TODO To be translated ======
-menuText G OptionsSaveBases "Save Bases as Default" 0 
+menuText G OptionsSaveBases "Save Bases as Default" 0
 menuText G OptionsAutoSave "Αυτομ.Αποθηκ.στην Έξοδο" 11 \
   {Αυτόματη αποθήκευση όλων των ρυθμίσεων κατά την έξοδο του προγράμματος Scid}
 
@@ -1001,13 +1015,13 @@ translate G GlistColor {Χρώμα}
 # ====== TODO To be translated ======
 translate G GlistSort {Sort database}
 
-# menu shown with right mouse button down on game list. 
+# menu shown with right mouse button down on game list.
 translate G GlistRemoveThisGameFromFilter  {Αφαίρεση}
 translate G GlistRemoveGameAndAboveFromFilter  {Αφαίρεση παρτίδας (και όλες οι παραπάνω)}
 translate G GlistRemoveGameAndBelowFromFilter  {Aφαίρεση παρτίδας (και όλες οι παρακάτω)}
-translate G GlistDeleteGame {Διαγραφή ή Μη Παρτίδας} 
-translate G GlistDeleteAllGames {Διαγραφή φιλτραρισμένων} 
-translate G GlistUndeleteAllGames {Μη Διαγραφή φιλτραρισμένων} 
+translate G GlistDeleteGame {Διαγραφή ή Μη Παρτίδας}
+translate G GlistDeleteAllGames {Διαγραφή φιλτραρισμένων}
+translate G GlistUndeleteAllGames {Μη Διαγραφή φιλτραρισμένων}
 # ====== TODO To be translated ======
 translate G GlistAlignL {Align left}
 # ====== TODO To be translated ======
@@ -1598,7 +1612,7 @@ translate G StartFromCurrentPosition {Έναρξη από την τρέχουσ�
 translate G FixedDepth {Σταθερό βάθος}
 translate G Nodes {Nodes}
 translate G Depth {Βάθος}
-translate G Time {Χρόνος} 
+translate G Time {Χρόνος}
 # ====== TODO To be translated ======
 translate G Auto {Auto}
 # ====== TODO To be translated ======

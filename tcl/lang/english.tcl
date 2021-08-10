@@ -81,7 +81,7 @@ menuText E EditStripBegin "Moves from Start" 11 \
   {Strip moves from the beginning of the game}
 menuText E EditStripEnd "Moves to End" 9 \
   {Strip moves to the end of the game}
-menuText E EditFlip "Flip Board" 0 {Flip the board} 
+menuText E EditFlip "Flip Board" 0 {Flip the board}
 menuText E EditReset "Empty Clipbase" 0 \
   {Reset the clipbase to be completely empty}
 menuText E EditCopy "Copy to Clipbase" 1 \
@@ -148,6 +148,14 @@ menuText E WindowsTB "Tablebase Window" 1 {Open/close the Tablebase window}
 menuText E WindowsBook "Book Window" 0 {Open/close the Book window}
 menuText E WindowsCorrChess "Correspondence Window" 1 {Open/close the Correspondence window}
 
+# Analyse menu:
+menuText E Analyse "Analyse" 0
+menuText E AnalyseEngineList "Analysis Engines" 0 {Configure analysis engines}
+menuText E AnalyseRating "Player Ratings" 0 {Graph the rating history of the current game players}
+menuText E AnalyseScore "Score Graph" 0 {Show the score graph window}
+menuText E AnalyseStartEngine1 "Start engine 1" 1  {Start engine 1}
+menuText E AnalyseStartEngine2 "Start engine 2" 4  {Start engine 2}
+
 # Tools menu:
 menuText E Tools "Tools" 0
 menuText E ToolsAnalysis "Analysis Engines" 0 {Configure analysis engines}
@@ -198,7 +206,7 @@ menuText E ToolsExpCurrentPGN "Export Game to PGN" 15 \
   {Write current game to a PGN file}
 menuText E ToolsExpCurrentHTML "Export Game to HTML" 15 \
   {Write current game to a HTML file}
-menuText E ToolsExpCurrentHTMLJS "Export Game to HTML and JavaScript" 15 {Write current game to a HTML and JavaScript file}  
+menuText E ToolsExpCurrentHTMLJS "Export Game to HTML and JavaScript" 15 {Write current game to a HTML and JavaScript file}
 menuText E ToolsExpCurrentLaTeX "Export Game to LaTeX" 15 {Write current game to a LaTeX file using xSkak}
 menuText E ToolsExpFilter "Export All Filter Games" 1 \
   {Write all filtered games to a text file}
@@ -206,7 +214,7 @@ menuText E ToolsExpFilterPGN "Export Filter to PGN" 17 \
   {Write all filtered games to a PGN file}
 menuText E ToolsExpFilterHTML "Export Filter to HTML" 17 \
   {Write all filtered games to a HTML file}
-menuText E ToolsExpFilterHTMLJS "Export Filter to HTML and JavaScript" 17 {Write all filtered games to a HTML and JavaScript file}  
+menuText E ToolsExpFilterHTMLJS "Export Filter to HTML and JavaScript" 17 {Write all filtered games to a HTML and JavaScript file}
 menuText E ToolsExpFilterLaTeX "Export Filter to LaTeX" 17  {Write all filtered games to a LaTeX file}
 menuText E ToolsExpFilterEPD "Export Filter to EPD/FEN" 17 {Write all filtered games to an EPD File}
 menuText E ToolsExpFilterGames "Export Gamelist to Text" 19 {Print a formatted Gamelist.}
@@ -292,8 +300,8 @@ menuText E OptionsMovesDelay "Autoplay Time Delay" 1 \
   {Set the time delay for autoplay mode}
 menuText E OptionsMovesCoord "Coordinate Move Entry" 0 \
   {Accept coordinate-style move entry (e.g. "g1f3")}
-menuText E OptionsShowVarPopup "Show Variation Window" 0 {Turn on/off the display of a variations window}  
-menuText E OptionsMovesSpace "Add Spaces after Move Number" 0 {Add spaces after move number}  
+menuText E OptionsShowVarPopup "Show Variation Window" 0 {Turn on/off the display of a variations window}
+menuText E OptionsMovesSpace "Add Spaces after Move Number" 0 {Add spaces after move number}
 menuText E OptionsMovesKey "Keyboard Completion" 0 \
   {Turn on/off keyboard move auto-completion}
 menuText E OptionsMovesShowVarArrows "Show Variation Arrows" 0 {Turn on/off arrows showing moves in variations}
@@ -324,7 +332,7 @@ menuText E OptionsBooksDir "Books Directory" 0 {Sets the opening books directory
 menuText E OptionsTacticsBasesDir "Bases Directory" 0 {Sets the tactics (training) bases directory}
 menuText E OptionsInformant "Configure Informant Values" 0
 menuText E OptionsSave "Save Options" 0 "Save all settable options to the file $::optionsFile"
-menuText E OptionsSaveBases "Save Bases as Default" 0 
+menuText E OptionsSaveBases "Save Bases as Default" 0
 menuText E OptionsAutoSave "Auto-Save Options on Exit" 0 \
   {Auto-save all options when exiting Scid}
 
@@ -904,13 +912,13 @@ translate E GlistDeleteField {Delete}
 translate E GlistColor {Color}
 translate E GlistSort {Sort database}
 
-# menu shown with right mouse button down on game list. 
+# menu shown with right mouse button down on game list.
 translate E GlistRemoveThisGameFromFilter  {Remove}
 translate E GlistRemoveGameAndAboveFromFilter  {Remove all above}
 translate E GlistRemoveGameAndBelowFromFilter  {Remove all below}
-translate E GlistDeleteGame {Delete this game} 
-translate E GlistDeleteAllGames {Delete all games in filter} 
-translate E GlistUndeleteAllGames {Undelete all games in filter} 
+translate E GlistDeleteGame {Delete this game}
+translate E GlistDeleteAllGames {Delete all games in filter}
+translate E GlistUndeleteAllGames {Undelete all games in filter}
 
 translate E GlistAlignL {Align left}
 translate E GlistAlignR {Align right}
@@ -1477,7 +1485,7 @@ translate E StartFromCurrentPosition {Start from current position}
 translate E FixedDepth {Fixed depth}
 translate E Nodes {Nodes}
 translate E Depth {Depth}
-translate E Time {Time} 
+translate E Time {Time}
 translate E Auto {Auto}
 translate E Score {Score}
 translate E {Score Combo} {Score Combo}

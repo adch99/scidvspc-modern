@@ -466,7 +466,7 @@ set helpMessage($m.correspondence,16) CCMailMove
 
 
 ### Windows menu:
-set menuindex 0
+set menuindex -1
 set m .menu.windows
 
 $m  add command -label WindowsGameinfo -accelerator "Ctrl-i" -command toggleGameInfo
@@ -515,30 +515,31 @@ $m add command -label WindowsBook -command ::book::Open -accelerator "Ctrl-b"
 set helpMessage($m,[incr menuindex]) WindowsBook
 
 $m add command -label WindowsCorrChess -command ::CorrespondenceChess::CCWindow
+#set helpMessage($m,[incr menuindex]) WindowsCorrChess
 
 ### Analyse menu:
 set menuindex -1
 set m .menu.analyse
 
-$m add command -label AnalyseEngineList -command ::enginelist::choose
+$m add command -label AnalyseEngineList -command ::enginelist::choose -accelerator "Ctrl-A"
 #bind .main <Control-A> ::enginelist::choose
-set helpMessage($m,[incr menuindex]) ToolsAnalysis
+set helpMessage($m,[incr menuindex]) AnalyseAnalysis
 
 #Add Menu for Start Engine 1 and Engine 2
-$m add command -label AnalyseStartEngine1 -command "startAnalysisWin F2"
+$m add command -label AnalyseStartEngine1 -command "startAnalysisWin F2" -accelerator "F2"
 #bind .main <F2> "startAnalysisWin F2"
-set helpMessage($m,[incr menuindex]) ToolsStartEngine1
+set helpMessage($m,[incr menuindex]) AnalyseStartEngine1
 
-$m add command -label AnalyseStartEngine2 -command "startAnalysisWin F3"
+$m add command -label AnalyseStartEngine2 -command "startAnalysisWin F3" -accelerator "F3"
 #bind .main <F3> "startAnalysisWin F3"
-set helpMessage($m,[incr menuindex]) ToolsStartEngine2
+set helpMessage($m,[incr menuindex]) AnalyseStartEngine2
 
 $m add command -label AnalyseRating -command {::tools::graphs::rating::Refresh both}
-set helpMessage($m,[incr menuindex]) ToolsRating
+set helpMessage($m,[incr menuindex]) AnalyseRating
 
 $m add command -label AnalyseScore -command ::tools::graphs::score::Raise
 #bind .main <Control-Z> ::tools::graphs::score::Raise
-set helpMessage($m,[incr menuindex]) ToolsScore
+set helpMessage($m,[incr menuindex]) AnalyseScore
 
 
 ### Tools menu:
@@ -814,7 +815,7 @@ if {$windowsOS} {
 set m .menu.options
 set optMenus {windows theme colour entry fonts ginfo fics startup language numbers export}
 set optLabels {Windows Theme Colour Moves Fonts GInfo Fics Startup Language Numbers Export}
-set menuindex 0
+set menuindex -1
 
 $m add command -label OptionsBoard -command chooseBoardColors
 set helpMessage($m,[incr menuindex]) OptionsBoard
@@ -1571,7 +1572,7 @@ $m add checkbutton -label FICS -variable startup(fics)
 
 
 ### Help menu:
-set menuindex 0
+set menuindex -1
 set m .menu.help
 $m add command -label HelpContents -command {helpWindow Contents} -accelerator "F1"
 set helpMessage($m,[incr menuindex]) HelpContents
@@ -1772,11 +1773,13 @@ proc updateMenuStates {} {
 
 proc configMenuText {menu entry tag lang} {
   global menuLabel menuUnder
+  puts stdout $menuLabel($lang,$tag)
+  puts stdout $menuUnder($lang,$tag)
   if {[info exists menuLabel($lang,$tag)] && [info exists menuUnder($lang,$tag)]} {
-    $menu entryconfig $entry -label $menuLabel($lang,$tag) \
+    $menu entryconfigure $entry -label $menuLabel($lang,$tag) \
         -underline $menuUnder($lang,$tag)
   } else {
-    $menu entryconfig $entry -label $menuLabel(E,$tag) \
+    $menu entryconfigure $entry -label $menuLabel(E,$tag) \
         -underline $menuUnder(E,$tag)
   }
 }
@@ -1833,7 +1836,7 @@ proc setLanguageMenus {{lang ""}} {
   }
 
   foreach tag {EngineList StartEngine1 StartEngine2 Rating Score} {
-      configMenuText .menu.analyse [tr Analysis$tag $oldLang] Analyse$tag $lang
+    configMenuText .menu.analyse [tr Analyse$tag $oldLang] Analyse$tag $lang
   }
 
   foreach tag {Analysis Maint Email FilterGraph AbsFilterGraph OpReport Tracker

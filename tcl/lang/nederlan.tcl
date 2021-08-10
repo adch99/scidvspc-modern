@@ -34,7 +34,7 @@ menuText N FileBookmarksSub "Weergeven bladwijzers als submenu's" 0 \
 menuText N FileReadOnly "Alleen lezen..." 7 \
   {Zet huidige database op alleen-lezen en voorkom wijzigingen}
 menuText N FileSwitch "Schakel naar andere database" 1 \
-  {Schakel naar een andere geopende database} 
+  {Schakel naar een andere geopende database}
 menuText N FileExit "Programma afsluiten" 3 {Einde ScidvsPC programma}
 
 # Edit menu:
@@ -60,6 +60,8 @@ menuText N EditStripBegin "- zetten vanaf begin" 1 \
   {Verwijder alle zetten vanaf begin van de partij}
 menuText N EditStripEnd "- zetten tot het einde" 0 \
   {Verwijder alle volgende zetten tot het einde van de partij}
+# ====== TODO To be translated ======
+menuText N EditFlip "Flip Board" 0 {Flip the board}
 menuText N EditReset "Clipbase leegmaken" 0  {Maak Clipbase helemaal leeg}
 menuText N EditCopy "Partij naar Clipbase" 7  {Kopieer deze partij naar het Clipbase}
 menuText N EditPaste "Partij vanuit Clipbase" 7  {Plak actieve Clipbase-partij hier}
@@ -71,7 +73,7 @@ menuText N EditCopyBoard "Kopieer stelling " 0 \
   {Kopieer de huidige stelling in FEN notatie naar het geheugen (klembord)}
 menuText N EditCopyPGN "Kopieer PGN " 9 {Kopieer de PGN naar het geheugen (klembord)}
 menuText N EditPasteBoard "Invoegen start stelling" 0 \
-  {Creëer een beginstelling van de huidige tekst selectie (van klembord)}
+  {Creï¿½er een beginstelling van de huidige tekst selectie (van klembord)}
 
 # Game menu:
 menuText N Game "Partij" 0
@@ -142,6 +144,18 @@ menuText N WindowsTB "Tablebase venster" 1 \
   {Open/sluit het Tablebase venster}
 menuText N WindowsBook "Boek venster" 0 {Open/sluit het boek venster}
 menuText N WindowsCorrChess "Correspondentievenster" 0 {Openen/Sluiten van het correspondentievenster}
+# ====== TODO To be translated ======
+menuText N Analyse "Analyse" 0
+# ====== TODO To be translated ======
+menuText N AnalyseEngineList "Analysis Engines" 0 {Configure analysis engines}
+# ====== TODO To be translated ======
+menuText N AnalyseRating "Player Ratings" 0 {Graph the rating history of the current game players}
+# ====== TODO To be translated ======
+menuText N AnalyseScore "Score Graph" 0 {Show the score graph window}
+# ====== TODO To be translated ======
+menuText N AnalyseStartEngine1 "Start engine 1" 0  {Start engine 1}
+# ====== TODO To be translated ======
+menuText N AnalyseStartEngine2 "Start engine 2" 0  {Start engine 2}
 
 # Tools menu:
 menuText N Tools "Gereedschappen" 0
@@ -205,7 +219,7 @@ menuText N ToolsExpCurrentPGN "Partij in PGN-formaat exporteren..." 11 \
   {Schrijf huidige partij naar PGN-bestand}
 menuText N ToolsExpCurrentHTML "Partij in HTML-formaat exporteren..." 11 \
   {Schrijf huidige partij naar HTML-bestand}
-menuText N ToolsExpCurrentHTMLJS "Exporteer partij als HTML/JavaScript bestand..." 15 {De huidige partij opslaan als een HTML/JavaScript bestand}  
+menuText N ToolsExpCurrentHTMLJS "Exporteer partij als HTML/JavaScript bestand..." 15 {De huidige partij opslaan als een HTML/JavaScript bestand}
 menuText N ToolsExpCurrentLaTeX "Partij in LaTeX-formaat exporteren..." 11 \
   {Schrijf huidige partij naar LaTex-bestand}
 # ====== TODO To be translated ======
@@ -314,8 +328,8 @@ menuText N OptionsMovesDelay "Tijdinstelling voor auto-spelen" 10 \
   {Stel de tijd in voor het automatisch spelen van de zetten}
 menuText N OptionsMovesCoord "Zet-ingave" 0 \
   {Accepteer de volgende manier van zetten invoeren ("g1f3")}
-menuText N OptionsShowVarPopup "Toon variantenvenster" 0 {In-/Uitschakelen weergeven van het variantenvenster} 
-menuText N OptionsMovesSpace "Spaties zetten achter zetnummer" 0 {Zet spaties na het zetnummer}  
+menuText N OptionsShowVarPopup "Toon variantenvenster" 0 {In-/Uitschakelen weergeven van het variantenvenster}
+menuText N OptionsMovesSpace "Spaties zetten achter zetnummer" 0 {Zet spaties na het zetnummer}
 menuText N OptionsMovesKey "Auto-aanvullen" 0 \
   {Aan/uitschakelen van toetsenbordzet auto-aanvullen}
 menuText N OptionsMovesShowVarArrows "Toon pijlen voor varianten" 0 {Aan-/Uitzetten weergave pijlen van varianten}
@@ -353,7 +367,7 @@ menuText N OptionsInformant "Configureer informant waarden" 0
 menuText N OptionsSave "Opties bewaren" 9 \
   "Bewaar alle instellingen in het bestand $::optionsFile"
 # ====== TODO To be translated ======
-menuText N OptionsSaveBases "Save Bases as Default" 0 
+menuText N OptionsSaveBases "Save Bases as Default" 0
 menuText N OptionsAutoSave "Automatisch bewaren opties tijdens afsluiten" 1 \
   {Automatisch bewaren alle gewijzigde opties bij het afsluiten van ScidvsPC}
 
@@ -371,7 +385,7 @@ menuText N HelpAbout "Over ScidvsPC" 0 {Informatie over ScidvsPC}
 # Game info box popup menu:
 menuText N GInfoHideNext "Verberg volgende zet" 0
 menuText N GInfoShow "Kleur aan zet" 0
-menuText N GInfoCoords "Coördinaten aan/uit" 0
+menuText N GInfoCoords "Coï¿½rdinaten aan/uit" 0
 menuText N GInfoMaterial "Materiaalverhouding" 0
 menuText N GInfoFEN "FEN" 0
 menuText N GInfoMarks "Toon gekleurde velden en pijlen. " 5
@@ -430,7 +444,7 @@ translate N Search {Zoeken}
 translate N Stop {Stop}
 translate N Store {Opbergen}
 translate N Update {Bijwerken}
-translate N ChangeOrient {Wijzigen venster oriëntatie}
+translate N ChangeOrient {Wijzigen venster oriï¿½ntatie}
 translate N ShowIcons {Toon iconen} ;
 # ====== TODO To be translated ======
 translate N ConfirmCopy {Confirm Copy}
@@ -548,7 +562,7 @@ translate N stalemate {Pat}
 # ====== TODO To be translated ======
 translate N checkmate {checkmate}
 translate N withAllMoves {met alle zetten}
-translate N withAllButOneMove {alle zetten behalve één}
+translate N withAllButOneMove {alle zetten behalve ï¿½ï¿½n}
 translate N with {met}
 translate N only {alleen}
 translate N lose {verliezen}
@@ -577,7 +591,7 @@ menuText N TreeFileBest "Lijst beste partijen" 0 {Weergeven van de lijst met bes
 menuText N TreeFileGraph "Grafiek-venster" 0 \
   {Weergeven van de grafiek voor deze tak}
 menuText N TreeFileCopy "Kopieer boom tekst naar klembord" 0 \
-  {Kopiëren van de boomstatistieken naar het klembord}
+  {Kopiï¿½ren van de boomstatistieken naar het klembord}
 menuText N TreeFileClose "Zoekboom venster sluiten" 0 {Sluiten van het zoekboom venster}
 menuText N TreeMask "Masker" 0
 menuText N TreeMaskNew "Nieuw" 0 {Nieuw masker}
@@ -691,7 +705,7 @@ translate N FinderFiles {Bestanden}
 translate N FinderUpDir {Hogere map}
 translate N FinderCtxOpen {Openen}
 translate N FinderCtxBackup {Back-up}
-translate N FinderCtxCopy {Kopiëren}
+translate N FinderCtxCopy {Kopiï¿½ren}
 translate N FinderCtxMove {Verplaatsen}
 translate N FinderCtxDelete {Verwijderen}
 # ====== TODO To be translated ======
@@ -721,7 +735,7 @@ menuText N TmtSortSite "Plaats" 0
 menuText N TmtSortEvent "Evenement" 1
 menuText N TmtSortWinner "Winnaar" 0
 translate N TmtLimit "Lijst grootte"
-translate N TmtMeanElo "Laagste gem. Elo" 
+translate N TmtMeanElo "Laagste gem. Elo"
 translate N TmtNone "Geen toernooien gevonden."
 
 # Graph windows:
@@ -751,7 +765,7 @@ translate N AddMove {Toevoegen zet}
 translate N Annotate {Annotatie}
 translate N ShowAnalysisBoard {Toon analysebord}
 translate N ShowInfo {Toon engine informatie}
-translate N FinishGame {Beëindig partij}
+translate N FinishGame {Beï¿½indig partij}
 translate N StopEngine {Stop de engine}
 translate N StartEngine {Start de engine}
 # ====== TODO To be translated ======
@@ -992,9 +1006,9 @@ translate N GlistSort {Sort database}
 translate N GlistRemoveThisGameFromFilter  {Verwijder}
 translate N GlistRemoveGameAndAboveFromFilter  {Verwijder alle hiervoor}
 translate N GlistRemoveGameAndBelowFromFilter  {Verwijder alle hierna}
-translate N GlistDeleteGame {Verwijder/Herstel deze partij} 
-translate N GlistDeleteAllGames {Verwijder alle gefilterde partijen} 
-translate N GlistUndeleteAllGames {Herstellen alle partijen in het filter} 
+translate N GlistDeleteGame {Verwijder/Herstel deze partij}
+translate N GlistDeleteAllGames {Verwijder alle gefilterde partijen}
+translate N GlistUndeleteAllGames {Herstellen alle partijen in het filter}
 # ====== TODO To be translated ======
 translate N GlistAlignL {Align left}
 # ====== TODO To be translated ======
@@ -1048,7 +1062,7 @@ translate N StripTag {Verwijder label}
 translate N CheckGames {Controleer partijen}
 translate N Cleaner {Reiniger}
 translate N CleanerHelp {
-De ScidvsPC Reiniger zal alle onderhoudsactiviteiten die u selecteert uit onderstaande lijst, uitvoeren op de huidige database. 
+De ScidvsPC Reiniger zal alle onderhoudsactiviteiten die u selecteert uit onderstaande lijst, uitvoeren op de huidige database.
 De dialogen van de huidige instellingen in de ECO classificatie en verwijderen van dubbelen zullen worden toegepast indien u deze functies selecteert.
 }
 translate N CleanerConfirm {
@@ -1160,11 +1174,11 @@ translate N EndingQueenPawnVsQueen {Dame en pion tegen Dame}
 translate N BishopPairVsKnightPair {Loperpaar tegen 2 Paarden middenspel}
 
 # Common patterns in material search:
-translate N PatternWhiteIQP {Witte geïsoleerde pion}
-translate N PatternWhiteIQPBreakE6 {Witte geïsoleerde pion: d4-d5 doorbraak vs e6}
-translate N PatternWhiteIQPBreakC6 {Witte geïsoleerde pion: d4-d5 doorbraak vs c6}
-translate N PatternBlackIQP {Zwarte geïsoleerde pion}
-translate N PatternWhiteBlackIQP {Witte geïsoleerde pion vs Zwarte geïsoleerde pion}
+translate N PatternWhiteIQP {Witte geï¿½soleerde pion}
+translate N PatternWhiteIQPBreakE6 {Witte geï¿½soleerde pion: d4-d5 doorbraak vs e6}
+translate N PatternWhiteIQPBreakC6 {Witte geï¿½soleerde pion: d4-d5 doorbraak vs c6}
+translate N PatternBlackIQP {Zwarte geï¿½soleerde pion}
+translate N PatternWhiteBlackIQP {Witte geï¿½soleerde pion vs Zwarte geï¿½soleerde pion}
 translate N PatternCoupleC3D4 {Witte hangende pionnen c3+d4}
 translate N PatternHangingC5D5 {Zwarte hangende pionnen c5+d5}
 translate N PatternMaroczy {Maroczy Centrum (Pionnen op c4 en e4)}
@@ -1196,7 +1210,7 @@ translate N GoBack {Terug}
 translate N ReplaceMove {Zet vervangen}
 translate N AddNewVar {Voeg nieuwe variant toe}
 translate N NewMainLine {Nieuwe hoofdvariant}
-translate N ReplaceMoveMessage {Hier is al een zet.  
+translate N ReplaceMoveMessage {Hier is al een zet.
 
 U kunt hem vervangen en alle volgende zetten wissen, of uw zet toevoegen als een nieuwe variant.
 
@@ -1294,8 +1308,8 @@ translate N OprepThemeOppCastling {Tegengestelde rokades}
 translate N OprepThemeNoCastling {Beide zijden niet gerokeerd}
 translate N OprepThemeKPawnStorm {Pionnenstorm op koningsvleugel}
 translate N OprepThemeQueenswap {Dameruil}
-translate N OprepThemeWIQP {Witte geïsoleerde damepion} ;
-translate N OprepThemeBIQP {Zwarte geïsoleerde damepion} ;
+translate N OprepThemeWIQP {Witte geï¿½soleerde damepion} ;
+translate N OprepThemeBIQP {Zwarte geï¿½soleerde damepion} ;
 translate N OprepThemeWP567 {Witte pion op de 5/6/7de rij}
 translate N OprepThemeBP234 {Zwarte pion op de 2/3/4de rij}
 translate N OprepThemeOpenCDE {Open c/d/e lijn}
@@ -1429,14 +1443,14 @@ translate N LoadGameNumber {Geef het nummer van de te laden partij:}
 translate N GotoMoveNumber {Ga naar zetnummer:}
 
 # Copy games dialog:
-translate N CopyGames {Kopiëren partijen}
+translate N CopyGames {Kopiï¿½ren partijen}
 translate N CopyConfirm {
- Wilt u echt kopiëren
+ Wilt u echt kopiï¿½ren
  de [::utils::thousands $nGamesToCopy] geselecteerde partijen
  van database "$fromName"
  naar database "$targetName"?
 }
-translate N CopyErr {Kan partijen niet kopiëren}
+translate N CopyErr {Kan partijen niet kopiï¿½ren}
 translate N CopyErrSource {de bron database}
 translate N CopyErrTarget {de doel database}
 translate N CopyErrNoGames {heeft geen partijen in het filter}
@@ -1485,7 +1499,7 @@ Wilt u de database in het nieuwe formaat openen?
 translate N ConfirmUpgrade {
 Dit is een oud formaat "SI3" database. Een versie in het nieuwe formaat moet worden gemaakt, voordat het in ScidvsPC 4 kan worden gebruikt.
 
-Bijwerken creëert een nieuwe versie van de database. De originele bestanden blijven bestaan en worden niet gewijzigd.
+Bijwerken creï¿½ert een nieuwe versie van de database. De originele bestanden blijven bestaan en worden niet gewijzigd.
 
 Dit kan enige tijd duren, maar het hoeft slechts eenmalig plaats te vinden. U kunt het afbreken indien het te lang duurt.
 
@@ -1619,7 +1633,7 @@ translate N StartFromCurrentPosition {Start vanuit de huidige stelling}
 translate N FixedDepth {Vaste diepte}
 translate N Nodes {Knooppunten}
 translate N Depth {Diepte}
-translate N Time {Tijd} 
+translate N Time {Tijd}
 # ====== TODO To be translated ======
 translate N Auto {Auto}
 # ====== TODO To be translated ======
@@ -1714,9 +1728,9 @@ translate N QGDExchange {Damegambiet ruilvariant}
 translate N SemiSlav {Half-Slavisch}
 translate N QGDwithBg5 {Damegambiet met Lg5}
 translate N QGDOrthodox {Damegambiet Orthodox}
-translate N Grunfeld {Grünfeld}
-translate N GrunfeldExchange {Grünfeld ruilvariant}
-translate N GrunfeldRussian {Grünfeld Russisch}
+translate N Grunfeld {Grï¿½nfeld}
+translate N GrunfeldExchange {Grï¿½nfeld ruilvariant}
+translate N GrunfeldRussian {Grï¿½nfeld Russisch}
 translate N Catalan {Catalaans}
 translate N CatalanOpen {Catalaans open}
 translate N CatalanClosed {Catalaans gesloten}
@@ -1725,7 +1739,7 @@ translate N NimzoIndian {Nimzo-Indisch}
 translate N NimzoIndianClassical {Nimzo-Indisch klassiek Dc2}
 translate N NimzoIndianRubinstein {Nimzo-Indisch Rubinstein}
 translate N KingsIndian {Koning-Indisch}
-translate N KingsIndianSamisch {Koning-Indisch Sämisch}
+translate N KingsIndianSamisch {Koning-Indisch Sï¿½misch}
 translate N KingsIndianMainLine {Koning-Indisch hoofdvariant}
 
 translate N ConfigureFics {Configureer FICS}
@@ -1744,7 +1758,7 @@ translate N FICSGames {Partijen}
 translate N FICSFindOpponent {Zoek tegenstander}
 translate N FICSTakeback {Terugnemen}
 translate N FICSTakeback2 {Terugnemen 2}
-translate N FICSInitTime {Initiële tijd (min)}
+translate N FICSInitTime {Initiï¿½le tijd (min)}
 translate N FICSIncrement {Toename (sec)}
 translate N FICSRatedGame {De betreffende partij}
 translate N FICSAutoColour {Automatisch}
@@ -1828,7 +1842,7 @@ translate N CCDlgPassword   {Wachtwoord:}
 translate N CCDlgURL        {Xfcc-URL:}
 translate N CCDlgRatingType {Klassering type:}
 translate N CCDlgDuplicateGame {Niet-unieke partij ID}
-translate N CCDlgDuplicateGameError {Deze partij bestaat meer dan één keer in de database. Graag duplicaten verwijderen en partijenbestand comprimeren (Bestand/Onderhoud/Comprimeer database).}
+translate N CCDlgDuplicateGameError {Deze partij bestaat meer dan ï¿½ï¿½n keer in de database. Graag duplicaten verwijderen en partijenbestand comprimeren (Bestand/Onderhoud/Comprimeer database).}
 translate N CCDlgSortOption {Rangschikken:}
 translate N CCDlgListOnlyOwnMove {De enige partijen waarvan ik de zet heb}
 translate N CCOrderClassicTxt {Plaats, Wedstrijd, Ronde, Resultaat, Wit, Zwart}

@@ -8,143 +8,158 @@ proc setLanguage_C {} {
 
 # File menu:
 menuText C File "Soubor" 0
-menuText C FileNew "Nový..." 0 {Vytvoøit novou Scid databázi}
-menuText C FileOpen "Otevøít..." 0 {Otevøít existující Scid databázi}
-menuText C FileClose "Zavøít" 0 {Zavøít aktivní Scid databázi}
-menuText C FileFinder "Vyhledávaè" 2 {Otevøít okno vyhledávaèe souborù}
+menuText C FileNew "Novï¿½..." 0 {Vytvoï¿½it novou Scid databï¿½zi}
+menuText C FileOpen "Otevï¿½ï¿½t..." 0 {Otevï¿½ï¿½t existujï¿½cï¿½ Scid databï¿½zi}
+menuText C FileClose "Zavï¿½ï¿½t" 0 {Zavï¿½ï¿½t aktivnï¿½ Scid databï¿½zi}
+menuText C FileFinder "Vyhledï¿½vaï¿½" 2 {Otevï¿½ï¿½t okno vyhledï¿½vaï¿½e souborï¿½}
 menuText C FileSavePgn "Save Pgn..." 0 {}
 # ====== TODO To be translated ======
 menuText C FileOpenBaseAsTree "Open Base as Tree" 13   {Open a base and use it in Tree window}
 # ====== TODO To be translated ======
 menuText C FileOpenRecentBaseAsTree "Open Recent as Tree" 0   {Open a recent base and use it in Tree window}
-menuText C FileBookmarks "Zálo¾ky" 2 {Menu zálo¾ek (klávesa: Ctrl+B)}
-menuText C FileBookmarksAdd "Pøidat zálo¾ku" 0 \
-  {Zálo¾ka aktuální pozice a partie z databáze}
-menuText C FileBookmarksFile "Zaøadit zálo¾ku" 0 \
-  {Zaøadit zálo¾ku pro aktuální partii a pozici}
-menuText C FileBookmarksEdit "Editovat zálo¾ky..." 0 \
-  {Editovat menu zálo¾ek}
-menuText C FileBookmarksList "Zobrazit slo¾ky jako jediný seznam" 0 \
-  {Zobrazit slo¾ky se zálo¾kami jako jediný seznam, bez podnabídek}
-menuText C FileBookmarksSub "Zobrazit slo¾ky jako podnabídky" 9 \
-  {Zobrazit zálo¾kové slo¾ky jako podnabídky, ne jako jediný seznam}
-menuText C FileReadOnly "Pouze pro ètení..." 0 \
-  {Nastavit aktuální databázi jako jen ke ètení, a zabránit tak zmìnám}
-menuText C FileSwitch "Pøepnout se do databáze" 15 \
-  {Pøepnout se do jiné otevøené databáze}
-menuText C FileExit "Ukonèit" 0 {Ukonèit Scid}
+menuText C FileBookmarks "Zï¿½loï¿½ky" 2 {Menu zï¿½loï¿½ek (klï¿½vesa: Ctrl+B)}
+menuText C FileBookmarksAdd "Pï¿½idat zï¿½loï¿½ku" 0 \
+  {Zï¿½loï¿½ka aktuï¿½lnï¿½ pozice a partie z databï¿½ze}
+menuText C FileBookmarksFile "Zaï¿½adit zï¿½loï¿½ku" 0 \
+  {Zaï¿½adit zï¿½loï¿½ku pro aktuï¿½lnï¿½ partii a pozici}
+menuText C FileBookmarksEdit "Editovat zï¿½loï¿½ky..." 0 \
+  {Editovat menu zï¿½loï¿½ek}
+menuText C FileBookmarksList "Zobrazit sloï¿½ky jako jedinï¿½ seznam" 0 \
+  {Zobrazit sloï¿½ky se zï¿½loï¿½kami jako jedinï¿½ seznam, bez podnabï¿½dek}
+menuText C FileBookmarksSub "Zobrazit sloï¿½ky jako podnabï¿½dky" 9 \
+  {Zobrazit zï¿½loï¿½kovï¿½ sloï¿½ky jako podnabï¿½dky, ne jako jedinï¿½ seznam}
+menuText C FileReadOnly "Pouze pro ï¿½tenï¿½..." 0 \
+  {Nastavit aktuï¿½lnï¿½ databï¿½zi jako jen ke ï¿½tenï¿½, a zabrï¿½nit tak zmï¿½nï¿½m}
+menuText C FileSwitch "Pï¿½epnout se do databï¿½ze" 15 \
+  {Pï¿½epnout se do jinï¿½ otevï¿½enï¿½ databï¿½ze}
+menuText C FileExit "Ukonï¿½it" 0 {Ukonï¿½it Scid}
 
 # Edit menu:
 menuText C Edit "Editace" 0
-menuText C EditAdd "Pøidat variantu" 0 {Pøidat variantu k tomuto tahu v partii}
+menuText C EditAdd "Pï¿½idat variantu" 0 {Pï¿½idat variantu k tomuto tahu v partii}
 menuText C EditPasteVar "Vlozit variace" 0
 menuText C EditDelete "Vymazat variantu" 0 {Vymazat variantu k tomuto tahu}
-menuText C EditFirst "Zaøadit jako první variantu" 0 \
-  {Zaøadit variantu na první místo v seznamu variant}
-menuText C EditMain "Pový¹it stávající variantu na hlavní" 30 \
-  {Pový¹it stávající variantu na hlavní variantu}
+menuText C EditFirst "Zaï¿½adit jako prvnï¿½ variantu" 0 \
+  {Zaï¿½adit variantu na prvnï¿½ mï¿½sto v seznamu variant}
+menuText C EditMain "Povï¿½ï¿½it stï¿½vajï¿½cï¿½ variantu na hlavnï¿½" 30 \
+  {Povï¿½ï¿½it stï¿½vajï¿½cï¿½ variantu na hlavnï¿½ variantu}
 menuText C EditTrial "Zkusit variantu" 1 \
-    {Spustit/Ukonèit zku¹ební mód pro testování my¹lenky na ¹achovnici}
-menuText C EditStrip "Odstranit" 0 {Odstranit komentáøe nebo varianty z této partie}
-menuText C EditUndo "Vzít zpìt" 0 {Vzít zpìt poslední zmìnu v partii}
+    {Spustit/Ukonï¿½it zkuï¿½ebnï¿½ mï¿½d pro testovï¿½nï¿½ myï¿½lenky na ï¿½achovnici}
+menuText C EditStrip "Odstranit" 0 {Odstranit komentï¿½ï¿½e nebo varianty z tï¿½to partie}
+menuText C EditUndo "Vzï¿½t zpï¿½t" 0 {Vzï¿½t zpï¿½t poslednï¿½ zmï¿½nu v partii}
 # todo
 menuText C EditRedo "Redo" 0
-menuText C EditStripComments "Komentáøe" 0 \
-  {Odstranit v¹echny poznámky a anotace z této partie}
-menuText C EditStripVars "Varianty" 0 {Odstranit v¹echny varianty z této partie}
-menuText C EditStripBegin "Tahy ze zaèátku" 5 \
-  {Odstranit tahy ze zaèátku partie}
+menuText C EditStripComments "Komentï¿½ï¿½e" 0 \
+  {Odstranit vï¿½echny poznï¿½mky a anotace z tï¿½to partie}
+menuText C EditStripVars "Varianty" 0 {Odstranit vï¿½echny varianty z tï¿½to partie}
+menuText C EditStripBegin "Tahy ze zaï¿½ï¿½tku" 5 \
+  {Odstranit tahy ze zaï¿½ï¿½tku partie}
 menuText C EditStripEnd "Tahy do konce" 5 \
   {Odstranit tahy do konce partie}
-menuText C EditReset "Vyprázdnit schránku" 11 \
-  {Kompletní vyprázdnìní databáze schránka}
-menuText C EditCopy "Zkopírovat tuto partii do schránky" 23 \
-  {Zkopírovat tuto partií do databáze schránka}
-menuText C EditPaste "Vlo¾it poslední partii ze schránky" 24 \
-  {Vlo¾it aktivní partii z databáze schránka}
+# ====== TODO To be translated ======
+menuText C EditFlip "Flip Board" 0 {Flip the board}
+menuText C EditReset "Vyprï¿½zdnit schrï¿½nku" 11 \
+  {Kompletnï¿½ vyprï¿½zdnï¿½nï¿½ databï¿½ze schrï¿½nka}
+menuText C EditCopy "Zkopï¿½rovat tuto partii do schrï¿½nky" 23 \
+  {Zkopï¿½rovat tuto partiï¿½ do databï¿½ze schrï¿½nka}
+menuText C EditPaste "Vloï¿½it poslednï¿½ partii ze schrï¿½nky" 24 \
+  {Vloï¿½it aktivnï¿½ partii z databï¿½ze schrï¿½nka}
 menuText C EditPastePGN "Paste Clipboard text as PGN game..." 10 \
   {Interpret the clipboard text as a game in PGN notation and paste it here} ;# ***
-menuText C EditSetup "Nastavit výchozí pozici..." 0 \
-  {Nastavit výchozí pozici pro tuto partii}
-menuText C EditCopyBoard "Kopírovat pozici" 4 \
-  {Kopírovat aktuální pozici ve FEN notaci do textového výbìru (do clipboardu)}
-menuText C EditCopyPGN "Kopírovat PGN" 0 {} 
-menuText C EditPasteBoard "Vlo¾it poèáteèní pozici" 1 \
-  {Nastavit poèáteèní pozici z aktuálního textového výbìru (z clipboardu)}
+menuText C EditSetup "Nastavit vï¿½chozï¿½ pozici..." 0 \
+  {Nastavit vï¿½chozï¿½ pozici pro tuto partii}
+menuText C EditCopyBoard "Kopï¿½rovat pozici" 4 \
+  {Kopï¿½rovat aktuï¿½lnï¿½ pozici ve FEN notaci do textovï¿½ho vï¿½bï¿½ru (do clipboardu)}
+menuText C EditCopyPGN "Kopï¿½rovat PGN" 0 {}
+menuText C EditPasteBoard "Vloï¿½it poï¿½ï¿½teï¿½nï¿½ pozici" 1 \
+  {Nastavit poï¿½ï¿½teï¿½nï¿½ pozici z aktuï¿½lnï¿½ho textovï¿½ho vï¿½bï¿½ru (z clipboardu)}
 
 # Game menu:
 menuText C Game "Partie" 0
-menuText C GameNew "Nová partie" 0 \
-  {Nastavit novou partii, v¹echny provedené zmìny budou ztraceny}
-menuText C GameFirst "Natáhnout první partii" 10 {Natáhnout první partii z filtrovaných partií}
-menuText C GamePrev "Natáhnout pøedchozí partii" 13 {Natáhnout pøedchozí partii z filtrovaných partií}
-menuText C GameReload "Znovunatáhnout aktuální partii" 0 \
-  {Znovunata¾ení aktuální partie, v¹echny doposud provedené zmìny budou ztraceny}
-menuText C GameNext "Natáhnout následující partii" 14 {Natáhnout následující partii z filtrovaných partií}
-menuText C GameLast "Natáhnout poslední partii" 11 {Natáhnout poslední partii z filtrovaných partií}
-menuText C GameRandom "Natáhnout partii náhodnì" 1 {Natáhnout náhodnì vybranou partii z filtru}
-menuText C GameNumber "Natáhnout partii èíslo..." 19 \
-  {Natáhnout partii èíslo...}
-menuText C GameReplace "Ulo¾it: pøepsání partie..." 0 \
-  {Ulo¾it tuto partii - pøepí¹e pùvodní verzi}
-menuText C GameAdd "Ulo¾it: pøidání nové partie..." 1 \
-  {Ulo¾it tuto partii jako novou partii v databázi}
+menuText C GameNew "Novï¿½ partie" 0 \
+  {Nastavit novou partii, vï¿½echny provedenï¿½ zmï¿½ny budou ztraceny}
+menuText C GameFirst "Natï¿½hnout prvnï¿½ partii" 10 {Natï¿½hnout prvnï¿½ partii z filtrovanï¿½ch partiï¿½}
+menuText C GamePrev "Natï¿½hnout pï¿½edchozï¿½ partii" 13 {Natï¿½hnout pï¿½edchozï¿½ partii z filtrovanï¿½ch partiï¿½}
+menuText C GameReload "Znovunatï¿½hnout aktuï¿½lnï¿½ partii" 0 \
+  {Znovunataï¿½enï¿½ aktuï¿½lnï¿½ partie, vï¿½echny doposud provedenï¿½ zmï¿½ny budou ztraceny}
+menuText C GameNext "Natï¿½hnout nï¿½sledujï¿½cï¿½ partii" 14 {Natï¿½hnout nï¿½sledujï¿½cï¿½ partii z filtrovanï¿½ch partiï¿½}
+menuText C GameLast "Natï¿½hnout poslednï¿½ partii" 11 {Natï¿½hnout poslednï¿½ partii z filtrovanï¿½ch partiï¿½}
+menuText C GameRandom "Natï¿½hnout partii nï¿½hodnï¿½" 1 {Natï¿½hnout nï¿½hodnï¿½ vybranou partii z filtru}
+menuText C GameNumber "Natï¿½hnout partii ï¿½ï¿½slo..." 19 \
+  {Natï¿½hnout partii ï¿½ï¿½slo...}
+menuText C GameReplace "Uloï¿½it: pï¿½epsï¿½nï¿½ partie..." 0 \
+  {Uloï¿½it tuto partii - pï¿½epï¿½ï¿½e pï¿½vodnï¿½ verzi}
+menuText C GameAdd "Uloï¿½it: pï¿½idï¿½nï¿½ novï¿½ partie..." 1 \
+  {Uloï¿½it tuto partii jako novou partii v databï¿½zi}
 menuText C GameInfo "Set Informace o hre" 0
-menuText C GameBrowse "Procházet hry" 0
+menuText C GameBrowse "Prochï¿½zet hry" 0
 menuText C GameList "Seznam vsech her" 0
 # ====== TODO To be translated ======
 menuText C GameDelete "Delete Game" 0
-menuText C GameDeepest "Identifikace zahájení" 0 \
-  {Pøejít na koncovou pozici z ECO knihovny, která odpovídá zvolenému zahájení}
-menuText C GameGotoMove "Pøejít na tah èíslo..." 10 \
-  {Pøejít v aktuální partii do pozice udané èíslem tahu}
+menuText C GameDeepest "Identifikace zahï¿½jenï¿½" 0 \
+  {Pï¿½ejï¿½t na koncovou pozici z ECO knihovny, kterï¿½ odpovï¿½dï¿½ zvolenï¿½mu zahï¿½jenï¿½}
+menuText C GameGotoMove "Pï¿½ejï¿½t na tah ï¿½ï¿½slo..." 10 \
+  {Pï¿½ejï¿½t v aktuï¿½lnï¿½ partii do pozice udanï¿½ ï¿½ï¿½slem tahu}
 menuText C GameNovelty "Hledat novinku..." 0 \
-  {Hledat první tah této partie, který doposud nebyl hrán}
+  {Hledat prvnï¿½ tah tï¿½to partie, kterï¿½ doposud nebyl hrï¿½n}
 
 # Search Menu:
 menuText C Search "Hledat" 0
-menuText C SearchReset "Vyèistit filtr" 0 {Vyèistit filtr - vybrány budou v¹echny partie}
-menuText C SearchNegate "Negace filtru" 0 {Negace filtru -  vybrány budou pouze partie vyòaté pøedcházejícím filtrem}
-menuText C SearchEnd "Presun na poslední filtr" 0
-menuText C SearchCurrent "Aktuální pozice..." 0 {Hledat aktuální pozici}
-menuText C SearchHeader "Hlavièka..." 0 {Hledat podle hlavièky partie (hráè, turnaj apod.)}
-menuText C SearchMaterial "Materiál/Vzor..." 0 {Hledat podle materiálu nebo podle vzoru}
+menuText C SearchReset "Vyï¿½istit filtr" 0 {Vyï¿½istit filtr - vybrï¿½ny budou vï¿½echny partie}
+menuText C SearchNegate "Negace filtru" 0 {Negace filtru -  vybrï¿½ny budou pouze partie vyï¿½atï¿½ pï¿½edchï¿½zejï¿½cï¿½m filtrem}
+menuText C SearchEnd "Presun na poslednï¿½ filtr" 0
+menuText C SearchCurrent "Aktuï¿½lnï¿½ pozice..." 0 {Hledat aktuï¿½lnï¿½ pozici}
+menuText C SearchHeader "Hlaviï¿½ka..." 0 {Hledat podle hlaviï¿½ky partie (hrï¿½ï¿½, turnaj apod.)}
+menuText C SearchMaterial "Materiï¿½l/Vzor..." 0 {Hledat podle materiï¿½lu nebo podle vzoru}
 menuText C SearchMoves {Tahy} 0 {}
-menuText C SearchUsing "Hledat pomocí souboru voleb..." 14 {Hledat s pou¾itím voleb zapsaných v souboru}
+menuText C SearchUsing "Hledat pomocï¿½ souboru voleb..." 14 {Hledat s pouï¿½itï¿½m voleb zapsanï¿½ch v souboru}
 
 # Windows menu:
 menuText C Windows "Okna" 0
 menuText C WindowsGameinfo "Game Info" 0 {Show/hide the game info panel}
-menuText C WindowsComment "Editor komentáøù" 0 {Otevøít/zavøít editor komentáøù}
-menuText C WindowsGList "Seznam partií" 2 {Otevøít/zavøít okno se seznamem partií}
-menuText C WindowsPGN "Okno PGN" 5 {Otevøít/zavøít okno PGN}
-menuText C WindowsCross "Turnajová tabulka" 0 {Ukázat turnajovou tabulku pro tuto partii}
-menuText C WindowsPList "Vyhledávaè hráèù" 11 {Otevøít/zavøít okno vyhledávaèe hráèù}
-menuText C WindowsTmt "Vyhledávaè turnajù" 11 {Otevøít/zavøít okno vyhledávaèe turnajù}
-menuText C WindowsSwitcher "Výbìr databáze" 0 {Otevøít/zavøít okno pro výbìr databází}
-menuText C WindowsMaint "Okno údr¾by" 6 {Otevøít/zavøít okno údr¾by}
-menuText C WindowsECO "ECO prohlí¾eè" 1 {Otevøít/zavøít okno ECO prohlí¾eèe}
-menuText C WindowsStats "Statistické okno" 0 {Otevøít/zavøít statistické okno filtru}
-menuText C WindowsTree "Stromové okno" 4 {Otevøít/zavøít stromové okno}
-menuText C WindowsTB "Okno tabulky koncovek" 13 {Otevøít/zavøít okno tabulek koncovek}
+menuText C WindowsComment "Editor komentï¿½ï¿½ï¿½" 0 {Otevï¿½ï¿½t/zavï¿½ï¿½t editor komentï¿½ï¿½ï¿½}
+menuText C WindowsGList "Seznam partiï¿½" 2 {Otevï¿½ï¿½t/zavï¿½ï¿½t okno se seznamem partiï¿½}
+menuText C WindowsPGN "Okno PGN" 5 {Otevï¿½ï¿½t/zavï¿½ï¿½t okno PGN}
+menuText C WindowsCross "Turnajovï¿½ tabulka" 0 {Ukï¿½zat turnajovou tabulku pro tuto partii}
+menuText C WindowsPList "Vyhledï¿½vaï¿½ hrï¿½ï¿½ï¿½" 11 {Otevï¿½ï¿½t/zavï¿½ï¿½t okno vyhledï¿½vaï¿½e hrï¿½ï¿½ï¿½}
+menuText C WindowsTmt "Vyhledï¿½vaï¿½ turnajï¿½" 11 {Otevï¿½ï¿½t/zavï¿½ï¿½t okno vyhledï¿½vaï¿½e turnajï¿½}
+menuText C WindowsSwitcher "Vï¿½bï¿½r databï¿½ze" 0 {Otevï¿½ï¿½t/zavï¿½ï¿½t okno pro vï¿½bï¿½r databï¿½zï¿½}
+menuText C WindowsMaint "Okno ï¿½drï¿½by" 6 {Otevï¿½ï¿½t/zavï¿½ï¿½t okno ï¿½drï¿½by}
+menuText C WindowsECO "ECO prohlï¿½ï¿½eï¿½" 1 {Otevï¿½ï¿½t/zavï¿½ï¿½t okno ECO prohlï¿½ï¿½eï¿½e}
+menuText C WindowsStats "Statistickï¿½ okno" 0 {Otevï¿½ï¿½t/zavï¿½ï¿½t statistickï¿½ okno filtru}
+menuText C WindowsTree "Stromovï¿½ okno" 4 {Otevï¿½ï¿½t/zavï¿½ï¿½t stromovï¿½ okno}
+menuText C WindowsTB "Okno tabulky koncovek" 13 {Otevï¿½ï¿½t/zavï¿½ï¿½t okno tabulek koncovek}
 # ====== TODO To be translated ======
 menuText C WindowsBook "Book Window" 0 {Open/close the Book window}
 # ====== TODO To be translated ======
 menuText C WindowsCorrChess "Correspondence Window" 0 {Open/close the Correspondence window}
 
+# Analyse menu:
+menuText C Analyse "Analyse" 0 {"analï¿½zu"}
+menuText C AnalyseEngineList "Program pro analï¿½zu..." 0 \
+  {Spustit/zastavit ï¿½achovï¿½ program pro analï¿½zu pozice}
+menuText C AnalyseRating "Graf ratingu" 5 \
+  {Zobrazit graf vï¿½voje ratingu hrï¿½ï¿½ï¿½ aktuï¿½lnï¿½ partie}
+menuText C AnalyseScore "Graf skï¿½re" 6  {Zobrazit okno grafu skï¿½re}
+# ====== TODO To be translated ======
+menuText C AnalyseStartEngine1 "Start engine 1" 0  {Start engine 1}
+# ====== TODO To be translated ======
+menuText C AnalyseStartEngine2 "Start engine 2" 0  {Start engine 2}
+
+
 # Tools menu:
-menuText C Tools "Nástroje" 3
-menuText C ToolsAnalysis "Program pro analýzu..." 0 \
-  {Spustit/zastavit ¹achový program pro analýzu pozice}
-menuText C ToolsEmail "Email mana¾er" 1 \
-  {Otevøít/zavøít okno emailového mana¾era}
+menuText C Tools "Nï¿½stroje" 3
+menuText C ToolsAnalysis "Program pro analï¿½zu..." 0 \
+  {Spustit/zastavit ï¿½achovï¿½ program pro analï¿½zu pozice}
+menuText C ToolsEmail "Email manaï¿½er" 1 \
+  {Otevï¿½ï¿½t/zavï¿½ï¿½t okno emailovï¿½ho manaï¿½era}
 menuText C ToolsFilterGraph "Graf filtru" 0 \
-  {Otevøít/zavøít okno grafu filtru}
+  {Otevï¿½ï¿½t/zavï¿½ï¿½t okno grafu filtru}
 # ====== TODO To be translated ======
 menuText C ToolsAbsFilterGraph "Abs. Filter Graph" 7 {Open/close the filter graph window for absolute values}
-menuText C ToolsOpReport "Profil zahájení" 7 \
-  {Generovat profil zahájení pro aktuální pozicí}
-menuText C ToolsTracker "Stopaø figur"  0 {Otevøít okno stopaøe figur}
+menuText C ToolsOpReport "Profil zahï¿½jenï¿½" 7 \
+  {Generovat profil zahï¿½jenï¿½ pro aktuï¿½lnï¿½ pozicï¿½}
+menuText C ToolsTracker "Stopaï¿½ figur"  0 {Otevï¿½ï¿½t okno stopaï¿½e figur}
 # ====== TODO To be translated ======
 menuText C ToolsTraining "Training"  0 {Training tools (tactics, openings,...) }
 menuText C ToolsComp "Tournament" 2 {Chess engine tournament}
@@ -162,29 +177,29 @@ menuText C ToolsTrainFindBestMove "Find best move"  0 {Find best move}
 menuText C ToolsTrainFics "Internet"  0 {Play on freechess.org}
 # ====== TODO To be translated ======
 menuText C ToolsBookTuning "Book tuning" 0 {Book tuning}
-menuText C ToolsMaint "Údr¾ba" 2 {Nástroje pro údr¾bu databáze Scidu}
-menuText C ToolsMaintWin "Okno údr¾by" 0 \
-  {Otevøít/zavøít okno pro údr¾bu Scid databáze}
-menuText C ToolsMaintCompact "Kompaktování databáze..." 13 \
-  {Kompaktování databázových souborù, odstranìní vymazaných partií a nepou¾ívaných jmen}
-menuText C ToolsMaintClass "ECO klasifikace partií..." 0 \
-  {Pøepoèítání ECO kódù v¹ech partií}
-menuText C ToolsMaintSort "Setøídit databázi..." 0 \
-  {Setøídit v¹echny partie v databázi}
-menuText C ToolsMaintDelete "Vymazání zdvojených partií..." 0 \
-  {Hledat zdvojené partie a oznaèit je pro vymazání}
-menuText C ToolsMaintTwin "Kontrola zdvojených partií" 0 \
-  {Otevøít/aktualizovat okno pro kontrolu zdvojených partií}
+menuText C ToolsMaint "ï¿½drï¿½ba" 2 {Nï¿½stroje pro ï¿½drï¿½bu databï¿½ze Scidu}
+menuText C ToolsMaintWin "Okno ï¿½drï¿½by" 0 \
+  {Otevï¿½ï¿½t/zavï¿½ï¿½t okno pro ï¿½drï¿½bu Scid databï¿½ze}
+menuText C ToolsMaintCompact "Kompaktovï¿½nï¿½ databï¿½ze..." 13 \
+  {Kompaktovï¿½nï¿½ databï¿½zovï¿½ch souborï¿½, odstranï¿½nï¿½ vymazanï¿½ch partiï¿½ a nepouï¿½ï¿½vanï¿½ch jmen}
+menuText C ToolsMaintClass "ECO klasifikace partiï¿½..." 0 \
+  {Pï¿½epoï¿½ï¿½tï¿½nï¿½ ECO kï¿½dï¿½ vï¿½ech partiï¿½}
+menuText C ToolsMaintSort "Setï¿½ï¿½dit databï¿½zi..." 0 \
+  {Setï¿½ï¿½dit vï¿½echny partie v databï¿½zi}
+menuText C ToolsMaintDelete "Vymazï¿½nï¿½ zdvojenï¿½ch partiï¿½..." 0 \
+  {Hledat zdvojenï¿½ partie a oznaï¿½it je pro vymazï¿½nï¿½}
+menuText C ToolsMaintTwin "Kontrola zdvojenï¿½ch partiï¿½" 0 \
+  {Otevï¿½ï¿½t/aktualizovat okno pro kontrolu zdvojenï¿½ch partiï¿½}
 menuText C ToolsMaintNameEditor "Editor jmen" 0 \
-  {Otevøít/zavøít editor jmen}
-menuText C ToolsMaintNamePlayer "Kontrola pravopisu hráèù..." 19 \
-  {Kontrola pravopisu jmen hráèù s vyu¾itím souboru pro kontrolu pravopisu}
-menuText C ToolsMaintNameEvent "Kontrola pravopisu turnajù..." 19 \
-  {Kontrola pravopisu názvù turnajù s vyu¾itím souboru pro kontrolu pravopisu}
-menuText C ToolsMaintNameSite "Kontrola pravopisu míst..." 19 \
-  {Kontrola pravopisu míst turnajù s vyu¾itím souboru pro kontrolu pravopisu}
+  {Otevï¿½ï¿½t/zavï¿½ï¿½t editor jmen}
+menuText C ToolsMaintNamePlayer "Kontrola pravopisu hrï¿½ï¿½ï¿½..." 19 \
+  {Kontrola pravopisu jmen hrï¿½ï¿½ï¿½ s vyuï¿½itï¿½m souboru pro kontrolu pravopisu}
+menuText C ToolsMaintNameEvent "Kontrola pravopisu turnajï¿½..." 19 \
+  {Kontrola pravopisu nï¿½zvï¿½ turnajï¿½ s vyuï¿½itï¿½m souboru pro kontrolu pravopisu}
+menuText C ToolsMaintNameSite "Kontrola pravopisu mï¿½st..." 19 \
+  {Kontrola pravopisu mï¿½st turnajï¿½ s vyuï¿½itï¿½m souboru pro kontrolu pravopisu}
 menuText C ToolsMaintNameRound "Kontrola pravopisu kol..." 19 \
-  {Kontrola pravopisu kol s vyu¾itím souboru pro kontrolu pravopisu}
+  {Kontrola pravopisu kol s vyuï¿½itï¿½m souboru pro kontrolu pravopisu}
 # ====== TODO To be translated ======
 menuText C ToolsMaintFixBase "Repair base" 0 {Try to repair a corrupted base}
 # ====== TODO To be translated ======
@@ -198,42 +213,42 @@ menuText C ToolsConnectHardwareInputEngineConnect "Connect Input Engine" 0 {Conn
 # ====== TODO To be translated ======
 # ====== TODO To be translated ======
 # ====== TODO To be translated ======
-menuText C ToolsPInfo "Informace o hráèích"  0 \
-  {Otevøít/aktualizovat okno s informacemi o hráèích}
-menuText C ToolsPlayerReport "Profil hráèe" 7 \
-  {Generovat profil hráèe}
+menuText C ToolsPInfo "Informace o hrï¿½ï¿½ï¿½ch"  0 \
+  {Otevï¿½ï¿½t/aktualizovat okno s informacemi o hrï¿½ï¿½ï¿½ch}
+menuText C ToolsPlayerReport "Profil hrï¿½ï¿½e" 7 \
+  {Generovat profil hrï¿½ï¿½e}
 menuText C ToolsRating "Graf ratingu" 5 \
-  {Zobrazit graf vývoje ratingu hráèù aktuální partie}
-menuText C ToolsScore "Graf skóre" 6  {Zobrazit okno grafu skóre}
-menuText C ToolsExpCurrent "Export aktuální partie" 7 \
-  {Zapsat aktuální partii do textového souboru}
+  {Zobrazit graf vï¿½voje ratingu hrï¿½ï¿½ï¿½ aktuï¿½lnï¿½ partie}
+menuText C ToolsScore "Graf skï¿½re" 6  {Zobrazit okno grafu skï¿½re}
+menuText C ToolsExpCurrent "Export aktuï¿½lnï¿½ partie" 7 \
+  {Zapsat aktuï¿½lnï¿½ partii do textovï¿½ho souboru}
 menuText C ToolsExpCurrentPGN "Export partie do PGN souboru..." 17 \
-  {Zapsat aktuální partii do PGN souboru}
+  {Zapsat aktuï¿½lnï¿½ partii do PGN souboru}
 menuText C ToolsExpCurrentHTML "Export partie do HTML souboru..." 17 \
-  {Zapsat aktuální partii do HTML souboru}
+  {Zapsat aktuï¿½lnï¿½ partii do HTML souboru}
 # ====== TODO To be translated ======
-menuText C ToolsExpCurrentHTMLJS "Export Game to HTML and JavaScript File..." 15 {Write current game to a HTML and JavaScript file}  
+menuText C ToolsExpCurrentHTMLJS "Export Game to HTML and JavaScript File..." 15 {Write current game to a HTML and JavaScript file}
 menuText C ToolsExpCurrentLaTeX "Export partie do LaTeX souboru..." 17 \
-  {Zapsat aktuální partii do LaTeX souboru}
+  {Zapsat aktuï¿½lnï¿½ partii do LaTeX souboru}
 # ====== TODO To be translated ======
-menuText C ToolsExpFilter "Export filtrovaných partií" 7 \
-  {Zapsat v¹echny filtrované partie do textového souboru}
-menuText C ToolsExpFilterPGN "Export filtrovaných partií do PGN souboru..." 30 \
-  {Zapsat v¹echny filtrované partie do PGN souboru}
-menuText C ToolsExpFilterHTML "Export filtrovaných partií do HTML souboru..." 30 \
-  {Zapsat v¹echny filtrované partie do HTML souboru}
+menuText C ToolsExpFilter "Export filtrovanï¿½ch partiï¿½" 7 \
+  {Zapsat vï¿½echny filtrovanï¿½ partie do textovï¿½ho souboru}
+menuText C ToolsExpFilterPGN "Export filtrovanï¿½ch partiï¿½ do PGN souboru..." 30 \
+  {Zapsat vï¿½echny filtrovanï¿½ partie do PGN souboru}
+menuText C ToolsExpFilterHTML "Export filtrovanï¿½ch partiï¿½ do HTML souboru..." 30 \
+  {Zapsat vï¿½echny filtrovanï¿½ partie do HTML souboru}
 # ====== TODO To be translated ======
-menuText C ToolsExpFilterHTMLJS "Export Filter to HTML and JavaScript File..." 17 {Write all filtered games to a HTML and JavaScript file}  
-menuText C ToolsExpFilterLaTeX "Export filtrovaných partií do LaTeX souboru..." 30 \
-  {Zapsat v¹echny filtrované partie do LaTeX souboru}
+menuText C ToolsExpFilterHTMLJS "Export Filter to HTML and JavaScript File..." 17 {Write all filtered games to a HTML and JavaScript file}
+menuText C ToolsExpFilterLaTeX "Export filtrovanï¿½ch partiï¿½ do LaTeX souboru..." 30 \
+  {Zapsat vï¿½echny filtrovanï¿½ partie do LaTeX souboru}
 # ====== TODO To be translated ======
 menuText C ToolsExpFilterEPD "Export Filter to EPD/FEN" 17 {Write all filtered games to an EPD File}
 # ====== TODO To be translated ======
 # ====== TODO To be translated ======
 menuText C ToolsExpFilterGames "Export Gamelist to Text" 19 {Print a formatted Gamelist.}
-menuText C ToolsImportOne "Import jedné PGN partie..." 7 \
-  {Importovat partii z PGN zápisu}
-menuText C ToolsImportFile "Import souboru PGN partií..." 10 \
+menuText C ToolsImportOne "Import jednï¿½ PGN partie..." 7 \
+  {Importovat partii z PGN zï¿½pisu}
+menuText C ToolsImportFile "Import souboru PGN partiï¿½..." 10 \
   {Importovat partie z PGN souboru}
 # ====== TODO To be translated ======
 menuText C ToolsStartEngine1 "Start engine 1" 0  {Start engine 1}
@@ -242,26 +257,26 @@ menuText C ToolsStartEngine2 "Start engine 2" 0  {Start engine 2}
 # ====== TODO To be translated ======
 menuText C ToolsScreenshot "desce Screenshot" 0
 menuText C Play "Hra" 0
-menuText C CorrespondenceChess "Korespondenèní ¹ach" 0 {Funkce pro korespondenèní ¹ach zalo¾ený na e-mailu a Xfcc}
-menuText C CCConfigure "Konfigurovat..." 0 {Konfigurovat externí nástroje a obecná nastavení}
-menuText C CCConfigRelay "Konfigurovat sledování..." 10 {Konfigurovat partie ke sledování}
-menuText C CCOpenDB "Otevøít databázi..." 0 {Otevøít výchozí korespondenèní databázi}
-menuText C CCRetrieve "Stáhnout partie" 0 {Stáhnout partie s pomocí externího (Xfcc-)nástroje}
-menuText C CCInbox "Zpracovat pøíchozí schránku" 0 {Zpracovat v¹echny soubory v pøíchozí schránce scidu}
-menuText C CCSend "Poslat tah" 0 {Poslat tah prostøednictvím e-mailu nebo externího (Xfcc-)nástroje}
-menuText C CCResign "Vzdát" 0 {Vzdát (nikoliv prostøednictvím e-mailu)}
-menuText C CCClaimDraw "Reklamovat remízu" 0 {Poslat tah a reklamovat remízu (nikoliv prostøednictvím e-mailu)}
-menuText C CCOfferDraw "Nabídnout remízu" 0 {Odeslat tah a nabídnout remízu (nikoliv prostøednictvím e-mailu)}
-menuText C CCAcceptDraw "Pøijmout remízu" 0 {Pøijmout nabídku remízy (nikoliv prostøednictvím e-mailu)}
-menuText C CCNewMailGame "Nová e-mailová partie..." 0 {Zaèít novou e-mailovou partii}
-menuText C CCMailMove "Mailovat tah..." 0 {Odeslat tah soupeøi prostøednictvím e-mailu}
-menuText C CCGamePage "Stránka partie..." 0 {Vyvolat partii pomocí webového prohlí¾eèe}
-menuText C CCEditCopy "Zkopírovat seznam partií do schránky" 0 {Zkopírovat partie jako CVS seznam do schránky}
+menuText C CorrespondenceChess "Korespondenï¿½nï¿½ ï¿½ach" 0 {Funkce pro korespondenï¿½nï¿½ ï¿½ach zaloï¿½enï¿½ na e-mailu a Xfcc}
+menuText C CCConfigure "Konfigurovat..." 0 {Konfigurovat externï¿½ nï¿½stroje a obecnï¿½ nastavenï¿½}
+menuText C CCConfigRelay "Konfigurovat sledovï¿½nï¿½..." 10 {Konfigurovat partie ke sledovï¿½nï¿½}
+menuText C CCOpenDB "Otevï¿½ï¿½t databï¿½zi..." 0 {Otevï¿½ï¿½t vï¿½chozï¿½ korespondenï¿½nï¿½ databï¿½zi}
+menuText C CCRetrieve "Stï¿½hnout partie" 0 {Stï¿½hnout partie s pomocï¿½ externï¿½ho (Xfcc-)nï¿½stroje}
+menuText C CCInbox "Zpracovat pï¿½ï¿½chozï¿½ schrï¿½nku" 0 {Zpracovat vï¿½echny soubory v pï¿½ï¿½chozï¿½ schrï¿½nce scidu}
+menuText C CCSend "Poslat tah" 0 {Poslat tah prostï¿½ednictvï¿½m e-mailu nebo externï¿½ho (Xfcc-)nï¿½stroje}
+menuText C CCResign "Vzdï¿½t" 0 {Vzdï¿½t (nikoliv prostï¿½ednictvï¿½m e-mailu)}
+menuText C CCClaimDraw "Reklamovat remï¿½zu" 0 {Poslat tah a reklamovat remï¿½zu (nikoliv prostï¿½ednictvï¿½m e-mailu)}
+menuText C CCOfferDraw "Nabï¿½dnout remï¿½zu" 0 {Odeslat tah a nabï¿½dnout remï¿½zu (nikoliv prostï¿½ednictvï¿½m e-mailu)}
+menuText C CCAcceptDraw "Pï¿½ijmout remï¿½zu" 0 {Pï¿½ijmout nabï¿½dku remï¿½zy (nikoliv prostï¿½ednictvï¿½m e-mailu)}
+menuText C CCNewMailGame "Novï¿½ e-mailovï¿½ partie..." 0 {Zaï¿½ï¿½t novou e-mailovou partii}
+menuText C CCMailMove "Mailovat tah..." 0 {Odeslat tah soupeï¿½i prostï¿½ednictvï¿½m e-mailu}
+menuText C CCGamePage "Strï¿½nka partie..." 0 {Vyvolat partii pomocï¿½ webovï¿½ho prohlï¿½ï¿½eï¿½e}
+menuText C CCEditCopy "Zkopï¿½rovat seznam partiï¿½ do schrï¿½nky" 0 {Zkopï¿½rovat partie jako CVS seznam do schrï¿½nky}
 
 
 # Options menu:
 menuText C Options "Volby" 0
-menuText C OptionsBoard "©achovnice" 1 {Volby zobrazení ¹achovnice}
+menuText C OptionsBoard "ï¿½achovnice" 1 {Volby zobrazenï¿½ ï¿½achovnice}
 menuText C OptionsColour "Background Colour" 0 {Default text widget color}
 # ====== TODO To be translated ======
 menuText C OptionsBackColour "Background" 0 {Default text widget color}
@@ -284,16 +299,16 @@ menuText C OptionsProgressColour "Progressbar" 0 {Default progressbar color}
 menuText C OptionsScoreColour "Score Graph" 0 {}
 # ====== TODO To be translated ======
 menuText C OptionsScoreBarColour "Score Graph current" 0 {}
-menuText C OptionsNames "Jména mých hráèù..." 0 {Editovat jména mých hráèù}
-menuText C OptionsExport "Volby exportu" 7 {Zmìnit volby pro textový export}
-menuText C OptionsFonts "Fonty" 2 {Zmìnit fonty}
-menuText C OptionsFontsRegular "Základní" 0 {Zmìnit základní font}
-menuText C OptionsFontsMenu "Menu" 1 {Zmìnit font pro menu}
-menuText C OptionsFontsSmall "Malé" 0 {Zmìnit malý font}
-menuText C OptionsFontsFixed "Fixní" 0 {Zmìnit font fixní ¹íøky}
+menuText C OptionsNames "Jmï¿½na mï¿½ch hrï¿½ï¿½ï¿½..." 0 {Editovat jmï¿½na mï¿½ch hrï¿½ï¿½ï¿½}
+menuText C OptionsExport "Volby exportu" 7 {Zmï¿½nit volby pro textovï¿½ export}
+menuText C OptionsFonts "Fonty" 2 {Zmï¿½nit fonty}
+menuText C OptionsFontsRegular "Zï¿½kladnï¿½" 0 {Zmï¿½nit zï¿½kladnï¿½ font}
+menuText C OptionsFontsMenu "Menu" 1 {Zmï¿½nit font pro menu}
+menuText C OptionsFontsSmall "Malï¿½" 0 {Zmï¿½nit malï¿½ font}
+menuText C OptionsFontsFixed "Fixnï¿½" 0 {Zmï¿½nit font fixnï¿½ ï¿½ï¿½ï¿½ky}
 menuText C OptionsGInfo "Informace o partii" 0 {Volby pro informace o partii}
 menuText C OptionsFics "FICS" 0
-menuText C OptionsFicsAuto "Autopromote královna" 0
+menuText C OptionsFicsAuto "Autopromote krï¿½lovna" 0
 # ====== TODO To be translated ======
 menuText C OptionsFicsClk "Store Clock times" 0
 # ====== TODO To be translated ======
@@ -323,90 +338,90 @@ menuText C OptionsMovesHighlightLastMoveWidth "Width" 0 {Thickness of line}
 menuText C OptionsMovesHighlightLastMoveColor "Select Color" 0 {Color of line}
 # ====== TODO To be translated ======
 menuText C OptionsMovesColorSelected "Color Selected Square" 0 {Color move}
-menuText C OptionsMoves "Tahy" 0 {Volby pro zadávání tahù}
-menuText C OptionsMovesAsk "Ptát se pøed nahrazením tahù" 0 \
-  {Ptát se v¾dy pøed pøepsáním existujícího tahu}
-menuText C OptionsMovesAnimate "Èas animace" 4 \
-  {Nastavit èas pou¾itý na animaci tahù}
-menuText C OptionsMovesDelay "Prodleva pøi automatickém pøehrávání..." 1 \
-  {Nastavit èasovou prodlevu pøi automatickém pøehrávání}
-menuText C OptionsMovesCoord "Souøadnicové zadávání tahù" 0 \
-  {Povolit zadávání tahù pomocí souøadnic (napø. "g1f3")}
+menuText C OptionsMoves "Tahy" 0 {Volby pro zadï¿½vï¿½nï¿½ tahï¿½}
+menuText C OptionsMovesAsk "Ptï¿½t se pï¿½ed nahrazenï¿½m tahï¿½" 0 \
+  {Ptï¿½t se vï¿½dy pï¿½ed pï¿½epsï¿½nï¿½m existujï¿½cï¿½ho tahu}
+menuText C OptionsMovesAnimate "ï¿½as animace" 4 \
+  {Nastavit ï¿½as pouï¿½itï¿½ na animaci tahï¿½}
+menuText C OptionsMovesDelay "Prodleva pï¿½i automatickï¿½m pï¿½ehrï¿½vï¿½nï¿½..." 1 \
+  {Nastavit ï¿½asovou prodlevu pï¿½i automatickï¿½m pï¿½ehrï¿½vï¿½nï¿½}
+menuText C OptionsMovesCoord "Souï¿½adnicovï¿½ zadï¿½vï¿½nï¿½ tahï¿½" 0 \
+  {Povolit zadï¿½vï¿½nï¿½ tahï¿½ pomocï¿½ souï¿½adnic (napï¿½. "g1f3")}
 # ====== TODO To be translated ======
-menuText C OptionsShowVarPopup "Show Variation Window" 0 {Turn on/off the display of a variations window}  
+menuText C OptionsShowVarPopup "Show Variation Window" 0 {Turn on/off the display of a variations window}
 # ====== TODO To be translated ======
-menuText C OptionsMovesSpace "Add spaces after move number" 0 {Add spaces after move number}  
-menuText C OptionsMovesKey "Klávesnicové doplòování" 13 \
-  {Zapnout/vypnout automatické doplòování tahù zadávaných klávesnicí}
-menuText C OptionsMovesShowVarArrows "Zobrazit ¹ipky pro varianty" 0 {Zapnout/vypnout zobrazování ¹ipek ukazujících tahy variant}
-menuText C OptionsNumbers "Formát èísel" 0 {Zvolit formát èísel}
-menuText C OptionsStartup "Pøi spu¹tìní" 4 {Zvolit okna, která se otevøou pøi spu¹tìní}
-menuText C OptionsTheme "Téma" 0 {Zmìnit vzhled u¾ivatelského rozhraní}
+menuText C OptionsMovesSpace "Add spaces after move number" 0 {Add spaces after move number}
+menuText C OptionsMovesKey "Klï¿½vesnicovï¿½ doplï¿½ovï¿½nï¿½" 13 \
+  {Zapnout/vypnout automatickï¿½ doplï¿½ovï¿½nï¿½ tahï¿½ zadï¿½vanï¿½ch klï¿½vesnicï¿½}
+menuText C OptionsMovesShowVarArrows "Zobrazit ï¿½ipky pro varianty" 0 {Zapnout/vypnout zobrazovï¿½nï¿½ ï¿½ipek ukazujï¿½cï¿½ch tahy variant}
+menuText C OptionsNumbers "Formï¿½t ï¿½ï¿½sel" 0 {Zvolit formï¿½t ï¿½ï¿½sel}
+menuText C OptionsStartup "Pï¿½i spuï¿½tï¿½nï¿½" 4 {Zvolit okna, kterï¿½ se otevï¿½ou pï¿½i spuï¿½tï¿½nï¿½}
+menuText C OptionsTheme "Tï¿½ma" 0 {Zmï¿½nit vzhled uï¿½ivatelskï¿½ho rozhranï¿½}
 menuText C OptionsWindows "Okna" 0 {Volby oken}
-menuText C OptionsWindowsIconify "Automatická minimalizace" 12 \
-   {Minimalizovat v¹echna okna pøi minimalizování hlavního okna}
-menuText C OptionsWindowsRaise "Automaticky do popøedí" 15 \
-  {Dát do popøedí jistá okna, jsou-li zakrytá}
+menuText C OptionsWindowsIconify "Automatickï¿½ minimalizace" 12 \
+   {Minimalizovat vï¿½echna okna pï¿½i minimalizovï¿½nï¿½ hlavnï¿½ho okna}
+menuText C OptionsWindowsRaise "Automaticky do popï¿½edï¿½" 15 \
+  {Dï¿½t do popï¿½edï¿½ jistï¿½ okna, jsou-li zakrytï¿½}
 menuText C OptionsSounds "Sounds..." 2 {Configure move announcement sounds} ;# ***
 menuText C OptionsWindowsDock "Zaparkovat okna" 0 {Zaparkovat okna}
-menuText C OptionsWindowsSaveLayout "Ulo¾it rozlo¾ení" 0 {Ulo¾it rozlo¾ení}
-menuText C OptionsWindowsRestoreLayout "Obnovit rozlo¾ení" 0 {Obnovit rozlo¾ení}
-menuText C OptionsWindowsShowGameInfo "Ukázat informace o partii" 0 {Ukázat informace o partii}
-menuText C OptionsWindowsAutoLoadLayout "Automaticky natáhnout první rozlo¾ení" 0 {Automaticky na zaèátku natáhnout první rozlo¾ení}
+menuText C OptionsWindowsSaveLayout "Uloï¿½it rozloï¿½enï¿½" 0 {Uloï¿½it rozloï¿½enï¿½}
+menuText C OptionsWindowsRestoreLayout "Obnovit rozloï¿½enï¿½" 0 {Obnovit rozloï¿½enï¿½}
+menuText C OptionsWindowsShowGameInfo "Ukï¿½zat informace o partii" 0 {Ukï¿½zat informace o partii}
+menuText C OptionsWindowsAutoLoadLayout "Automaticky natï¿½hnout prvnï¿½ rozloï¿½enï¿½" 0 {Automaticky na zaï¿½ï¿½tku natï¿½hnout prvnï¿½ rozloï¿½enï¿½}
 # todo
 menuText C OptionsWindowsAutoResize "Auto resize board" 0 {}
 # ====== TODO To be translated ======
 menuText C OptionsWindowsFullScreen "Fullscreen" 0 {Toggle fullscreen mode}
-menuText C OptionsToolbar "Nástrojová li¹ta..." 11 \
-  {Konfigurovat nástrojovou li¹tu hlavního okna}
-menuText C OptionsECO "Natáhnout ECO soubor..." 10 {Natáhnout soubor s klasifikací ECO}
-menuText C OptionsSpell "Natáhnout soubor pro kontrolu pravopisu..." 21 \
-  {Natáhnout soubor Scidu pro kontrolu pravopisu}
-menuText C OptionsTable "Adresáø pro tabulky koncovek..." 14 \
-  {Vybrat soubor s tabulkami koncovek; v¹echny tabulky koncovek v jeho adresáøi budou pou¾ity}
-menuText C OptionsRecent "Nedávné soubory..." 0 \
-  {Zmìnit poèet nedávných souborù zobrazovaných v menu Soubor}
+menuText C OptionsToolbar "Nï¿½strojovï¿½ liï¿½ta..." 11 \
+  {Konfigurovat nï¿½strojovou liï¿½tu hlavnï¿½ho okna}
+menuText C OptionsECO "Natï¿½hnout ECO soubor..." 10 {Natï¿½hnout soubor s klasifikacï¿½ ECO}
+menuText C OptionsSpell "Natï¿½hnout soubor pro kontrolu pravopisu..." 21 \
+  {Natï¿½hnout soubor Scidu pro kontrolu pravopisu}
+menuText C OptionsTable "Adresï¿½ï¿½ pro tabulky koncovek..." 14 \
+  {Vybrat soubor s tabulkami koncovek; vï¿½echny tabulky koncovek v jeho adresï¿½ï¿½i budou pouï¿½ity}
+menuText C OptionsRecent "Nedï¿½vnï¿½ soubory..." 0 \
+  {Zmï¿½nit poï¿½et nedï¿½vnï¿½ch souborï¿½ zobrazovanï¿½ch v menu Soubor}
 # ====== TODO To be translated ======
 menuText C OptionsBooksDir "Books directory..." 0 {Sets the opening books directory}
 # ====== TODO To be translated ======
 menuText C OptionsTacticsBasesDir "Bases directory..." 0 {Sets the tactics (training) bases directory}
 # ====== TODO To be translated ======
 menuText C OptionsInformant "Configure informant values" 0
-menuText C OptionsSave "Ulo¾it volby" 0 \
-  "Ulo¾it v¹echny nastavitelné volby do souboru $::optionsFile"
+menuText C OptionsSave "Uloï¿½it volby" 0 \
+  "Uloï¿½it vï¿½echny nastavitelnï¿½ volby do souboru $::optionsFile"
 # ====== TODO To be translated ======
-menuText C OptionsSaveBases "Save Bases as Default" 0 
-menuText C OptionsAutoSave "Automaticky ukládat volby pøi ukonèení" 20 \
-  {Automaticky ukládat v¹echny volby pøi ukonèení Scidu}
+menuText C OptionsSaveBases "Save Bases as Default" 0
+menuText C OptionsAutoSave "Automaticky uklï¿½dat volby pï¿½i ukonï¿½enï¿½" 20 \
+  {Automaticky uklï¿½dat vï¿½echny volby pï¿½i ukonï¿½enï¿½ Scidu}
 
 # Help menu:
-menuText C Help "Nápovìda" 0
-menuText C HelpContents "Obsah" 0 {Zobrazit stránku nápovìdy s obsahem}
-menuText C HelpIndex "Index" 0 {Zobrazit stránku nápovìdy s indexem}
-menuText C HelpGuide "Rychlý prùvodce" 7 {Zobrazit stránku nápovìdy s rychlým prùvodcem}
-menuText C HelpHints "Rady" 0 {Zobrazit stránku nápovìdy s radami}
-menuText C HelpContact "Kontakt" 0 {Zobrazit stránku nápovìdy s kontaktními informacemi}
-menuText C HelpTip "Tip dne" 4 {Zobrazit u¾iteèný tip Scidu}
-menuText C HelpStartup "Startovací okno" 0 {Zobrazit startovací okno}
+menuText C Help "Nï¿½povï¿½da" 0
+menuText C HelpContents "Obsah" 0 {Zobrazit strï¿½nku nï¿½povï¿½dy s obsahem}
+menuText C HelpIndex "Index" 0 {Zobrazit strï¿½nku nï¿½povï¿½dy s indexem}
+menuText C HelpGuide "Rychlï¿½ prï¿½vodce" 7 {Zobrazit strï¿½nku nï¿½povï¿½dy s rychlï¿½m prï¿½vodcem}
+menuText C HelpHints "Rady" 0 {Zobrazit strï¿½nku nï¿½povï¿½dy s radami}
+menuText C HelpContact "Kontakt" 0 {Zobrazit strï¿½nku nï¿½povï¿½dy s kontaktnï¿½mi informacemi}
+menuText C HelpTip "Tip dne" 4 {Zobrazit uï¿½iteï¿½nï¿½ tip Scidu}
+menuText C HelpStartup "Startovacï¿½ okno" 0 {Zobrazit startovacï¿½ okno}
 menuText C HelpAbout "O aplikaci Scid" 2 {Informace o aplikaci Scid}
 
 # Game info box popup menu:
-menuText C GInfoHideNext "Skrýt následující tah" 0
+menuText C GInfoHideNext "Skrï¿½t nï¿½sledujï¿½cï¿½ tah" 0
 # ====== TODO To be translated ======
 menuText C GInfoShow "Side to Move" 0
 # ====== TODO To be translated ======
 menuText C GInfoCoords "Toggle Coords" 0
-menuText C GInfoMaterial "Ukázat hodnoty materiálu" 15
-menuText C GInfoFEN "Ukázat FEN" 7
-menuText C GInfoMarks "Zobrazovat barevná pole a ¹ipky" 11
-menuText C GInfoWrap "Zalamovat dlouhé øádky" 0
-menuText C GInfoFullComment "Zobrazit úplný komentáø" 15
+menuText C GInfoMaterial "Ukï¿½zat hodnoty materiï¿½lu" 15
+menuText C GInfoFEN "Ukï¿½zat FEN" 7
+menuText C GInfoMarks "Zobrazovat barevnï¿½ pole a ï¿½ipky" 11
+menuText C GInfoWrap "Zalamovat dlouhï¿½ ï¿½ï¿½dky" 0
+menuText C GInfoFullComment "Zobrazit ï¿½plnï¿½ komentï¿½ï¿½" 15
 menuText C GInfoPhotos "Zobrazit fotky" 10
 menuText C GInfoTBNothing "Tabulky koncovek: nic" 19
-menuText C GInfoTBResult "Tabulky koncovek: jen výsledek" 23
-menuText C GInfoTBAll "Tabulky koncovek: výsledek a nejlep¹í tahy" 39
+menuText C GInfoTBResult "Tabulky koncovek: jen vï¿½sledek" 23
+menuText C GInfoTBAll "Tabulky koncovek: vï¿½sledek a nejlepï¿½ï¿½ tahy" 39
 menuText C GInfoDelete "Vymazat/Nemazat tuto partii" 0
-menuText C GInfoMark "Oznaèit/Odznaèit tuto partii" 0
+menuText C GInfoMark "Oznaï¿½it/Odznaï¿½it tuto partii" 0
 # ====== TODO To be translated ======
 menuText C GInfoMenuBar "Menu Bar"  0
 # ====== TODO To be translated ======
@@ -429,42 +444,42 @@ translate C KeepOpen {Keep open after startup}
 # General buttons:
 # ====== TODO To be translated ======
 translate C Apply {Apply}
-translate C Back {Zpìt}
-translate C Browse {Prohlí¾et}
-translate C Cancel {Zru¹it}
+translate C Back {Zpï¿½t}
+translate C Browse {Prohlï¿½ï¿½et}
+translate C Cancel {Zruï¿½it}
 # ====== TODO To be translated ======
 translate C Continue {Continue}
-translate C Clear {Vyèistit}
-translate C Close {Zavøít}
+translate C Clear {Vyï¿½istit}
+translate C Close {Zavï¿½ï¿½t}
 translate C Contents {Obsah}
-translate C Defaults {Pøedvolené}
+translate C Defaults {Pï¿½edvolenï¿½}
 translate C Delete {Vymazat}
 translate C Graph {Graf}
-translate C Help {Nápovìda}
+translate C Help {Nï¿½povï¿½da}
 translate C Import {Import}
 translate C Index {Index}
-translate C LoadGame {Natáhnout partii}
-translate C BrowseGame {Prohlédnout partii}
-translate C MergeGame {Pøipojit partii}
+translate C LoadGame {Natï¿½hnout partii}
+translate C BrowseGame {Prohlï¿½dnout partii}
+translate C MergeGame {Pï¿½ipojit partii}
 # ====== TODO To be translated ======
 translate C MergeGames {Merge Games}
-translate C Preview {Náhled}
-translate C Revert {Vrátit se}
-translate C Save {Ulo¾it}
+translate C Preview {Nï¿½hled}
+translate C Revert {Vrï¿½tit se}
+translate C Save {Uloï¿½it}
 # ====== TODO To be translated ======
 translate C DontSave {Don't Save}
 translate C Search {Hledat}
 translate C Stop {Stop}
 translate C Store {Uschovat}
 translate C Update {Aktualizovat}
-translate C ChangeOrient {Zmìnit orientaci okna}
+translate C ChangeOrient {Zmï¿½nit orientaci okna}
 translate C ShowIcons {Show Icons} ;# ***
 # ====== TODO To be translated ======
 translate C ConfirmCopy {Confirm Copy}
 translate C None {Nic}
-translate C First {První}
-translate C Current {Aktuální}
-translate C Last {Poslední}
+translate C First {Prvnï¿½}
+translate C Current {Aktuï¿½lnï¿½}
+translate C Last {Poslednï¿½}
 # ====== TODO To be translated ======
 translate C Font {Font}
 # ====== TODO To be translated ======
@@ -477,56 +492,56 @@ translate C game {partie}
 translate C games {partie}
 translate C move {tah}
 translate C moves {tahy}
-translate C all {v¹e}
+translate C all {vï¿½e}
 translate C Yes {Ano}
 translate C No {Ne}
 translate C Both {Oba}
-translate C King {Král}
-translate C Queen {Dáma}
-translate C Rook {Vì¾}
-translate C Bishop {Støelec}
+translate C King {Krï¿½l}
+translate C Queen {Dï¿½ma}
+translate C Rook {Vï¿½ï¿½}
+translate C Bishop {Stï¿½elec}
 translate C Knight {Jezdec}
-translate C Pawn {Pì¹ec}
-translate C White {Bílý}
-translate C Black {Èerný}
-translate C Player {Hráè}
+translate C Pawn {Pï¿½ï¿½ec}
+translate C White {Bï¿½lï¿½}
+translate C Black {ï¿½ernï¿½}
+translate C Player {Hrï¿½ï¿½}
 translate C Rating {Rating}
-translate C RatingDiff {Rozdíl v ratingu (Bílý - Èerný)}
-translate C AverageRating {Prùmìrný rating}
+translate C RatingDiff {Rozdï¿½l v ratingu (Bï¿½lï¿½ - ï¿½ernï¿½)}
+translate C AverageRating {Prï¿½mï¿½rnï¿½ rating}
 translate C Event {Turnaj}
-translate C Site {Místo}
-translate C Country {Zemì}
+translate C Site {Mï¿½sto}
+translate C Country {Zemï¿½}
 translate C IgnoreColors {Ignorovat barvy}
 # ====== TODO To be translated ======
 translate C MatchEnd {End pos only}
 translate C Date {Datum}
 translate C EventDate {Datum turnaje}
-translate C Decade {Dekáda}
+translate C Decade {Dekï¿½da}
 translate C Year {Rok}
-translate C Month {Mìsíc}
-translate C Months {Leden Únor Bøezen Duben Kvìten Èerven Èervenec Srpen Záøí Øíjen Listopad Prosinec}
-translate C Days {Ned Pon Úte Stø Ètv Pát Sob}
-translate C YearToToday {Rok zpìt}
-translate C Result {Výsledek}
+translate C Month {Mï¿½sï¿½c}
+translate C Months {Leden ï¿½nor Bï¿½ezen Duben Kvï¿½ten ï¿½erven ï¿½ervenec Srpen Zï¿½ï¿½ï¿½ ï¿½ï¿½jen Listopad Prosinec}
+translate C Days {Ned Pon ï¿½te Stï¿½ ï¿½tv Pï¿½t Sob}
+translate C YearToToday {Rok zpï¿½t}
+translate C Result {Vï¿½sledek}
 translate C Round {Kolo}
-translate C Length {Délka}
-translate C ECOCode {ECO kód}
+translate C Length {Dï¿½lka}
+translate C ECOCode {ECO kï¿½d}
 translate C ECO {ECO}
-translate C Deleted {Vymazán(a)}
-translate C SearchResults {Hledat výsledky}
-translate C OpeningTheDatabase {Databáze zahájení}
-translate C Database {Databáze}
+translate C Deleted {Vymazï¿½n(a)}
+translate C SearchResults {Hledat vï¿½sledky}
+translate C OpeningTheDatabase {Databï¿½ze zahï¿½jenï¿½}
+translate C Database {Databï¿½ze}
 translate C Filter {Filtr}
 # ====== TODO To be translated ======
 translate C Reset {Reset}
 translate C IgnoreCase {Ignorovat Pouzdro}
-translate C noGames {¾ádné partie}
-translate C allGames {v¹echny partie}
-translate C empty {prázdná}
-translate C clipbase {schránka}
-translate C score {skóre}
-translate C Start {Poèáteèní}
-translate C StartPos {Poèáteèní pozice}
+translate C noGames {ï¿½ï¿½dnï¿½ partie}
+translate C allGames {vï¿½echny partie}
+translate C empty {prï¿½zdnï¿½}
+translate C clipbase {schrï¿½nka}
+translate C score {skï¿½re}
+translate C Start {Poï¿½ï¿½teï¿½nï¿½}
+translate C StartPos {Poï¿½ï¿½teï¿½nï¿½ pozice}
 translate C Total {Celkem}
 translate C readonly {read-only} ;# ***
 # ====== TODO To be translated ======
@@ -539,28 +554,28 @@ translate C prevTags {Use previous}
 translate C value {Value}
 
 # Standard error messages:
-translate C ErrNotOpen {To není otevøená databáze.}
-translate C ErrReadOnly {Tato databáze je jen ke ètení; nemù¾e být zmìnìna.}
-translate C ErrSearchInterrupted {Hledání bylo pøeru¹eno; výsledky nejsou kompletní.}
+translate C ErrNotOpen {To nenï¿½ otevï¿½enï¿½ databï¿½ze.}
+translate C ErrReadOnly {Tato databï¿½ze je jen ke ï¿½tenï¿½; nemï¿½ï¿½e bï¿½t zmï¿½nï¿½na.}
+translate C ErrSearchInterrupted {Hledï¿½nï¿½ bylo pï¿½eruï¿½eno; vï¿½sledky nejsou kompletnï¿½.}
 
 # Game information:
-translate C twin {zdvojená}
-translate C deleted {vymazaná}
-translate C comment {komentáø}
-translate C hidden {skrytá}
-translate C LastMove {Poslední tah}
-translate C NextMove {Následující tah}
-translate C GameStart {Zaèátek partie}
-translate C LineStart {Zaèátek série tahù}
+translate C twin {zdvojenï¿½}
+translate C deleted {vymazanï¿½}
+translate C comment {komentï¿½ï¿½}
+translate C hidden {skrytï¿½}
+translate C LastMove {Poslednï¿½ tah}
+translate C NextMove {Nï¿½sledujï¿½cï¿½ tah}
+translate C GameStart {Zaï¿½ï¿½tek partie}
+translate C LineStart {Zaï¿½ï¿½tek sï¿½rie tahï¿½}
 translate C GameEnd {Konec partie}
-translate C LineEnd {Konec série tahù}
+translate C LineEnd {Konec sï¿½rie tahï¿½}
 
 # Player information:
-translate C PInfoAll {v¹ech partií}
-translate C PInfoFilter {filtrovaných partií}
-translate C PInfoAgainst {Výsledky proti}
-translate C PInfoMostWhite {Nejèastìj¹í zahájení za bílé}
-translate C PInfoMostBlack {Nejèastìj¹í zahájení za èerné}
+translate C PInfoAll {vï¿½ech partiï¿½}
+translate C PInfoFilter {filtrovanï¿½ch partiï¿½}
+translate C PInfoAgainst {Vï¿½sledky proti}
+translate C PInfoMostWhite {Nejï¿½astï¿½jï¿½ï¿½ zahï¿½jenï¿½ za bï¿½lï¿½}
+translate C PInfoMostBlack {Nejï¿½astï¿½jï¿½ï¿½ zahï¿½jenï¿½ za ï¿½ernï¿½}
 translate C PInfoRating {Historie ratingu}
 translate C PInfoBio {Biografie}
 translate C PInfoEditRatings {Editovat ratingy}
@@ -570,71 +585,71 @@ translate C PinfoEditName {Edit Name}
 translate C PinfoLookupName {Lookup Name}
 
 # Tablebase information:
-translate C Draw {Remíza}
+translate C Draw {Remï¿½za}
 translate C stalemate {pat}
 # ====== TODO To be translated ======
 translate C checkmate {checkmate}
-translate C withAllMoves {se v¹emi tahy}
-translate C withAllButOneMove {se v¹emi tahy kromì posledního}
+translate C withAllMoves {se vï¿½emi tahy}
+translate C withAllButOneMove {se vï¿½emi tahy kromï¿½ poslednï¿½ho}
 translate C with {s}
 translate C only {jen}
-translate C lose {prohrát}
-translate C loses {prohrává}
-translate C allOthersLose {v¹echny ostatní prohrávají}
-translate C matesIn {matuje bìhem}
-translate C longest {nejdel¹í}
-translate C WinningMoves {vyhrávající tahy}
-translate C DrawingMoves {remizující tahy}
-translate C LosingMoves {prohrávající tahy}
-translate C UnknownMoves {tahy s neznámým výsledkem}
+translate C lose {prohrï¿½t}
+translate C loses {prohrï¿½vï¿½}
+translate C allOthersLose {vï¿½echny ostatnï¿½ prohrï¿½vajï¿½}
+translate C matesIn {matuje bï¿½hem}
+translate C longest {nejdelï¿½ï¿½}
+translate C WinningMoves {vyhrï¿½vajï¿½cï¿½ tahy}
+translate C DrawingMoves {remizujï¿½cï¿½ tahy}
+translate C LosingMoves {prohrï¿½vajï¿½cï¿½ tahy}
+translate C UnknownMoves {tahy s neznï¿½mï¿½m vï¿½sledkem}
 
 # Tip of the day:
 translate C Tip {Tip}
-translate C TipAtStartup {Tip pøi spu¹tìní}
+translate C TipAtStartup {Tip pï¿½i spuï¿½tï¿½nï¿½}
 
 # Tree window menus:
 menuText C TreeFile "Soubor" 0
-menuText C TreeFileFillWithBase "Naplnit cache z databáze" 0 {Naplnit cachovací soubor v¹emi partiemi z aktuální databáze}
-menuText C TreeFileFillWithGame "Naplnit cache partií" 0 {Naplnit cachovací soubor aktuální partií z aktuální databáze}
-menuText C TreeFileCacheInfo "Informace o cache" 0 {Získat informaci o vyu¾ití cache}
-menuText C TreeFileSave "Ulo¾it cache soubor" 0 \
-  {Ulo¾it stromový cache (.stc) soubor}
+menuText C TreeFileFillWithBase "Naplnit cache z databï¿½ze" 0 {Naplnit cachovacï¿½ soubor vï¿½emi partiemi z aktuï¿½lnï¿½ databï¿½ze}
+menuText C TreeFileFillWithGame "Naplnit cache partiï¿½" 0 {Naplnit cachovacï¿½ soubor aktuï¿½lnï¿½ partiï¿½ z aktuï¿½lnï¿½ databï¿½ze}
+menuText C TreeFileCacheInfo "Informace o cache" 0 {Zï¿½skat informaci o vyuï¿½itï¿½ cache}
+menuText C TreeFileSave "Uloï¿½it cache soubor" 0 \
+  {Uloï¿½it stromovï¿½ cache (.stc) soubor}
 menuText C TreeFileFill "Naplnit cache soubor" 0 \
-  {Naplnit cache soubor nejbì¾nìj¹ími pozicemi zahájení}
-menuText C TreeFileBest "Seznam nejlep¹ích partií" 0 {Zobrazit seznam nejlep¹ích partií  stromu}
-menuText C TreeFileGraph "Okno grafu" 0 {Zobrazit graf pro tuto vìtev stromu}
-menuText C TreeFileCopy "Kopírovat text stromu do clipboardu" 0 \
-  {Kopírovat stromové statistiky do textového výbìru}
-menuText C TreeFileClose "Zavøít stromové okno" 0 {Zavøít stromové okno}
+  {Naplnit cache soubor nejbï¿½ï¿½nï¿½jï¿½ï¿½mi pozicemi zahï¿½jenï¿½}
+menuText C TreeFileBest "Seznam nejlepï¿½ï¿½ch partiï¿½" 0 {Zobrazit seznam nejlepï¿½ï¿½ch partiï¿½  stromu}
+menuText C TreeFileGraph "Okno grafu" 0 {Zobrazit graf pro tuto vï¿½tev stromu}
+menuText C TreeFileCopy "Kopï¿½rovat text stromu do clipboardu" 0 \
+  {Kopï¿½rovat stromovï¿½ statistiky do textovï¿½ho vï¿½bï¿½ru}
+menuText C TreeFileClose "Zavï¿½ï¿½t stromovï¿½ okno" 0 {Zavï¿½ï¿½t stromovï¿½ okno}
 menuText C TreeMask "Maska" 0
-menuText C TreeMaskNew "New" 0 {Nová maska}
-menuText C TreeMaskOpen "Open" 0 {Otevøít masku}
-menuText C TreeMaskOpenRecent "Open recent" 0 {Otevøít nedávnou masku}
-menuText C TreeMaskSave "Save" 0 {Ulo¾it masku}
-menuText C TreeMaskClose "Close" 0 {Uzavøit masku}
+menuText C TreeMaskNew "New" 0 {Novï¿½ maska}
+menuText C TreeMaskOpen "Open" 0 {Otevï¿½ï¿½t masku}
+menuText C TreeMaskOpenRecent "Open recent" 0 {Otevï¿½ï¿½t nedï¿½vnou masku}
+menuText C TreeMaskSave "Save" 0 {Uloï¿½it masku}
+menuText C TreeMaskClose "Close" 0 {Uzavï¿½it masku}
 # ====== TODO To be translated ======
 menuText C TreeMaskFillWithLine "Fill with line" 0 {Fill mask with all previous moves}
-menuText C TreeMaskFillWithGame "Naplnit partií" 0 {Naplnit masku partií}
-menuText C TreeMaskFillWithBase "Naplnit databází" 0 {Naplnit masku v¹emi partiemi z databáze}
-menuText C TreeMaskInfo "Info" 0 {Ukázat statistiku aktuální masky}
-menuText C TreeMaskDisplay "Display mask map" 0 {Ukázat data masky ve formì stromu}
-menuText C TreeMaskSearch "Search" 0 {Hledat v aktuální masce}
-menuText C TreeSort "Øadit" 2
-menuText C TreeSortAlpha "Abecednì" 0
-menuText C TreeSortECO "ECO kód" 0
+menuText C TreeMaskFillWithGame "Naplnit partiï¿½" 0 {Naplnit masku partiï¿½}
+menuText C TreeMaskFillWithBase "Naplnit databï¿½zï¿½" 0 {Naplnit masku vï¿½emi partiemi z databï¿½ze}
+menuText C TreeMaskInfo "Info" 0 {Ukï¿½zat statistiku aktuï¿½lnï¿½ masky}
+menuText C TreeMaskDisplay "Display mask map" 0 {Ukï¿½zat data masky ve formï¿½ stromu}
+menuText C TreeMaskSearch "Search" 0 {Hledat v aktuï¿½lnï¿½ masce}
+menuText C TreeSort "ï¿½adit" 2
+menuText C TreeSortAlpha "Abecednï¿½" 0
+menuText C TreeSortECO "ECO kï¿½d" 0
 menuText C TreeSortFreq "Frekvence" 0
-menuText C TreeSortScore "Skóre" 0
+menuText C TreeSortScore "Skï¿½re" 0
 menuText C TreeOpt "Volby" 0
-menuText C TreeOptSlowmode "pomalý re¾im" 0 {Pomalý re¾im aktualizace (vysoká pøesnost)}
-menuText C TreeOptFastmode "Rychlý re¾im" 0 {Rychlý re¾im aktualizace (beze zmìny poøadí tahù)}
-menuText C TreeOptFastAndSlowmode "Rychlý a pomalý re¾im" 0 {Rychlý re¾im a potom pomalý re¾im aktualizace}
-menuText C TreeOptStartStop "Automatické aktualizace" 0 {Pøepnout automatické aktualizace stromového okna}
-menuText C TreeOptLock "Zamknout" 0 {Zamknout/Odemknout strom k aktuální databázi}
-menuText C TreeOptTraining "Trénink" 0 {Zapnout/Vypnout stromový tréninkový mód}
+menuText C TreeOptSlowmode "pomalï¿½ reï¿½im" 0 {Pomalï¿½ reï¿½im aktualizace (vysokï¿½ pï¿½esnost)}
+menuText C TreeOptFastmode "Rychlï¿½ reï¿½im" 0 {Rychlï¿½ reï¿½im aktualizace (beze zmï¿½ny poï¿½adï¿½ tahï¿½)}
+menuText C TreeOptFastAndSlowmode "Rychlï¿½ a pomalï¿½ reï¿½im" 0 {Rychlï¿½ reï¿½im a potom pomalï¿½ reï¿½im aktualizace}
+menuText C TreeOptStartStop "Automatickï¿½ aktualizace" 0 {Pï¿½epnout automatickï¿½ aktualizace stromovï¿½ho okna}
+menuText C TreeOptLock "Zamknout" 0 {Zamknout/Odemknout strom k aktuï¿½lnï¿½ databï¿½zi}
+menuText C TreeOptTraining "Trï¿½nink" 0 {Zapnout/Vypnout stromovï¿½ trï¿½ninkovï¿½ mï¿½d}
 # ====== TODO To be translated ======
 menuText C TreeOptShort "Short Display" 0 {Don't show ELO information}
-menuText C TreeOptAutosave "Automatické ukládání cache souboru" 0 \
-  {Automatické ukládání cache souboru pøi uzavøení stromového okna}
+menuText C TreeOptAutosave "Automatickï¿½ uklï¿½dï¿½nï¿½ cache souboru" 0 \
+  {Automatickï¿½ uklï¿½dï¿½nï¿½ cache souboru pï¿½i uzavï¿½enï¿½ stromovï¿½ho okna}
 # ====== TODO To be translated ======
 menuText C TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
 menuText C TreeOptCacheSize "Velikost cache" 0 {Nastavit velikost cache}
@@ -644,76 +659,76 @@ menuText C TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 menuText C TreeOptShowFrame "Show Button Bar" 0 "Show tree button bar."
 # ====== TODO To be translated ======
 menuText C TreeOptSortBest "Sort Best Games" 0 "Sort Best Games by ELO."
-menuText C TreeHelp "Nápovìda" 0
-menuText C TreeHelpTree "Nápovìda - Strom" 11
-menuText C TreeHelpIndex "Index nápovìdy" 0
+menuText C TreeHelp "Nï¿½povï¿½da" 0
+menuText C TreeHelpTree "Nï¿½povï¿½da - Strom" 11
+menuText C TreeHelpIndex "Index nï¿½povï¿½dy" 0
 
-translate C SaveCache {Ulo¾it cache}
-translate C Training {Trénink}
+translate C SaveCache {Uloï¿½it cache}
+translate C Training {Trï¿½nink}
 translate C LockTree {Zamknout}
 translate C TreeLocked {Zamknuto}
-translate C TreeBest {Nejlep¹í}
-translate C TreeBestGames {Nejlep¹í partie stromu}
+translate C TreeBest {Nejlepï¿½ï¿½}
+translate C TreeBestGames {Nejlepï¿½ï¿½ partie stromu}
 # ====== TODO To be translated ======
 translate C TreeAdjust {Adjust Filter}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
-translate C TreeTitleRow {    Tah       Frekvence    Skóre Remíz PrElo Perf PrRok ECO}
-translate C TreeTitleRowShort {    Tah       Frekvence    Skóre Remíz}
+translate C TreeTitleRow {    Tah       Frekvence    Skï¿½re Remï¿½z PrElo Perf PrRok ECO}
+translate C TreeTitleRowShort {    Tah       Frekvence    Skï¿½re Remï¿½z}
 translate C TreeTotal: {CELKEM:}
-translate C DoYouWantToSaveFirst {Chcete nejprve ulo¾it}
-translate C AddToMask {Pøidat do masky}
+translate C DoYouWantToSaveFirst {Chcete nejprve uloï¿½it}
+translate C AddToMask {Pï¿½idat do masky}
 translate C RemoveFromMask {Odstranit z masky}
-translate C AddThisMoveToMask {Pøidat tento tah do masky}
+translate C AddThisMoveToMask {Pï¿½idat tento tah do masky}
 translate C SearchMask {Hledat v masce}
 translate C DisplayMask {Zobrazit masku}
-translate C Nag {Nag kód}
-translate C Marker {Znaèka}
+translate C Nag {Nag kï¿½d}
+translate C Marker {Znaï¿½ka}
 translate C Include {Zahrnout}
-translate C Exclude {Vylouèit}
-translate C MainLine {Hlavní varianta}
-translate C Bookmark {Zálo¾ka}
-translate C NewLine {Nová varianta}
-translate C ToBeVerified {K provìøení}
-translate C ToTrain {Trénovat}
-translate C Dubious {Pochybné}
+translate C Exclude {Vylouï¿½it}
+translate C MainLine {Hlavnï¿½ varianta}
+translate C Bookmark {Zï¿½loï¿½ka}
+translate C NewLine {Novï¿½ varianta}
+translate C ToBeVerified {K provï¿½ï¿½enï¿½}
+translate C ToTrain {Trï¿½novat}
+translate C Dubious {Pochybnï¿½}
 translate C ToRemove {Odstranit}
-translate C NoMarker {®ádná znaèka}
+translate C NoMarker {ï¿½ï¿½dnï¿½ znaï¿½ka}
 translate C ColorMarker {Barva}
-translate C WhiteMark {Bílá}
-translate C GreenMark {Zelená}
-translate C YellowMark {®lutá}
-translate C BlueMark {Modrá}
-translate C RedMark {Èervená}
+translate C WhiteMark {Bï¿½lï¿½}
+translate C GreenMark {Zelenï¿½}
+translate C YellowMark {ï¿½lutï¿½}
+translate C BlueMark {Modrï¿½}
+translate C RedMark {ï¿½ervenï¿½}
 translate C CommentMove {Okomentovat tah}
 translate C CommentPosition {Okomentovat pozici}
-translate C AddMoveToMaskFirst {Nejprve pøidejte tah do masky}
-translate C OpenAMaskFileFirst {Nejprve otevøete soubor masky}
+translate C AddMoveToMaskFirst {Nejprve pï¿½idejte tah do masky}
+translate C OpenAMaskFileFirst {Nejprve otevï¿½ete soubor masky}
 # ====== TODO To be translated ======
 translate C positions {positions}
 translate C Moves {Tahy}
 
 # Finder window:
 menuText C FinderFile "Soubor" 0
-menuText C FinderFileSubdirs "Hledat v podadresáøích" 0
-menuText C FinderFileClose "Zavøít vyhledávaè souborù" 0
-menuText C FinderSort "Øadit" 2
+menuText C FinderFileSubdirs "Hledat v podadresï¿½ï¿½ï¿½ch" 0
+menuText C FinderFileClose "Zavï¿½ï¿½t vyhledï¿½vaï¿½ souborï¿½" 0
+menuText C FinderSort "ï¿½adit" 2
 menuText C FinderSortType "Typ" 0
 menuText C FinderSortSize "Velikost" 0
-menuText C FinderSortMod "Zmìnìno" 0
-menuText C FinderSortName "Jméno" 0
+menuText C FinderSortMod "Zmï¿½nï¿½no" 0
+menuText C FinderSortName "Jmï¿½no" 0
 menuText C FinderSortPath "Cesta" 0
 menuText C FinderTypes "Typy" 0
-menuText C FinderTypesScid "Databáze Scidu" 0
-menuText C FinderTypesOld "Databáze Scidu starého formátu" 15
+menuText C FinderTypesScid "Databï¿½ze Scidu" 0
+menuText C FinderTypesOld "Databï¿½ze Scidu starï¿½ho formï¿½tu" 15
 menuText C FinderTypesPGN "PGN soubory" 0
 menuText C FinderTypesEPD "EPD soubory" 0
-menuText C FinderHelp "Nápovìda" 0
-menuText C FinderHelpFinder "Nápovìda - Vyhledávaè souborù" 11
-menuText C FinderHelpIndex "Index nápovìdy" 0
-translate C FileFinder {Vyhledávaè souborù}
-translate C FinderDir {Adresáø}
-translate C FinderDirs {Adresáøe}
+menuText C FinderHelp "Nï¿½povï¿½da" 0
+menuText C FinderHelpFinder "Nï¿½povï¿½da - Vyhledï¿½vaï¿½ souborï¿½" 11
+menuText C FinderHelpIndex "Index nï¿½povï¿½dy" 0
+translate C FileFinder {Vyhledï¿½vaï¿½ souborï¿½}
+translate C FinderDir {Adresï¿½ï¿½}
+translate C FinderDirs {Adresï¿½ï¿½e}
 translate C FinderFiles {Soubory}
 translate C FinderUpDir {nahoru}
 # ====== TODO To be translated ======
@@ -732,45 +747,45 @@ translate C FinderDirOpen {Open Directory}
 # Player finder:
 menuText C PListFile "Soubor" 0
 menuText C PListFileUpdate "Aktualizovat" 0
-menuText C PListFileClose "Zavøít vyhledávaè hráèù" 0
-menuText C PListSort "Øadit" 2
-menuText C PListSortName "Jméno" 0
+menuText C PListFileClose "Zavï¿½ï¿½t vyhledï¿½vaï¿½ hrï¿½ï¿½ï¿½" 0
+menuText C PListSort "ï¿½adit" 2
+menuText C PListSortName "Jmï¿½no" 0
 menuText C PListSortElo "ELO" 0
 menuText C PListSortGames "Partie" 0
-menuText C PListSortOldest "Nejstar¹í" 3
-menuText C PListSortNewest "Nejnovìj¹í" 3
+menuText C PListSortOldest "Nejstarï¿½ï¿½" 3
+menuText C PListSortNewest "Nejnovï¿½jï¿½ï¿½" 3
 
 # Tournament finder:
 menuText C TmtFile "Soubor" 0
 menuText C TmtFileUpdate "Aktualizovat" 0
-menuText C TmtFileClose "Zavøít vyhledávaè souborù" 0
-menuText C TmtSort "Øadit" 2
+menuText C TmtFileClose "Zavï¿½ï¿½t vyhledï¿½vaï¿½ souborï¿½" 0
+menuText C TmtSort "ï¿½adit" 2
 menuText C TmtSortDate "Datum" 0
-menuText C TmtSortPlayers "Hráèi" 0
+menuText C TmtSortPlayers "Hrï¿½ï¿½i" 0
 menuText C TmtSortGames "Partie" 0
 menuText C TmtSortElo "ELO" 0
-menuText C TmtSortSite "Místo" 0
+menuText C TmtSortSite "Mï¿½sto" 0
 menuText C TmtSortEvent "Turnaj" 0
-menuText C TmtSortWinner "Vítìz" 0
+menuText C TmtSortWinner "Vï¿½tï¿½z" 0
 translate C TmtLimit "Limit seznamu"
-translate C TmtMeanElo "Prùmìrné ELO"
-translate C TmtNone "®ádné odpovídající turnaje nebyly nalezeny."
+translate C TmtMeanElo "Prï¿½mï¿½rnï¿½ ELO"
+translate C TmtNone "ï¿½ï¿½dnï¿½ odpovï¿½dajï¿½cï¿½ turnaje nebyly nalezeny."
 
 # Graph windows:
 menuText C GraphFile "Soubor" 0
-menuText C GraphFileColor "Ulo¾it jako barevný Postscript..." 12
-menuText C GraphFileGrey "Ulo¾it jako èernobílý Postscript..." 13
-menuText C GraphFileClose "Zavøít okno" 0
+menuText C GraphFileColor "Uloï¿½it jako barevnï¿½ Postscript..." 12
+menuText C GraphFileGrey "Uloï¿½it jako ï¿½ernobï¿½lï¿½ Postscript..." 13
+menuText C GraphFileClose "Zavï¿½ï¿½t okno" 0
 menuText C GraphOptions "Volby" 0
-menuText C GraphOptionsWhite "Bílý" 0
-menuText C GraphOptionsBlack "Èerný" 1
+menuText C GraphOptionsWhite "Bï¿½lï¿½" 0
+menuText C GraphOptionsBlack "ï¿½ernï¿½" 1
 # ====== TODO To be translated ======
 menuText C GraphOptionsDots "Show Dots" 0
 # ====== TODO To be translated ======
 menuText C GraphOptionsBar "Highlight Current Move" 0
 menuText C GraphOptionsBoth "Oba" 0
-menuText C GraphOptionsPInfo "Informace o hráèi" 0
-translate C GraphFilterTitle "Graf filtru: èetnost na 1000 partií"
+menuText C GraphOptionsPInfo "Informace o hrï¿½ï¿½i" 0
+translate C GraphFilterTitle "Graf filtru: ï¿½etnost na 1000 partiï¿½"
 # ====== TODO To be translated ======
 translate C GraphAbsFilterTitle "Filter Graph: frequency of the games"
 # ====== TODO To be translated ======
@@ -781,10 +796,10 @@ translate C FilterEstimate "Estimate"
 translate C TitleFilterGraph "Scid: Filter Graph"
 
 # Analysis window:
-translate C AddVariation {Pøidat variantu}
+translate C AddVariation {Pï¿½idat variantu}
 # ====== TODO To be translated ======
 translate C AddAllVariations {Add All Variations}
-translate C AddMove {Pøidat tah}
+translate C AddMove {Pï¿½idat tah}
 translate C Annotate {Anotace}
 # ====== TODO To be translated ======
 translate C ShowAnalysisBoard {Show analysis board}
@@ -800,16 +815,16 @@ translate C StartEngine {Start engine}
 translate C ExcludeMove {Exclude Move}
 # ====== TODO To be translated ======
 translate C LockEngine {Lock engine to current position}
-translate C AnalysisCommand {Program pro analýzu}
-translate C PreviousChoices {Pøedchozí vybrané programy}
-translate C AnnotateTime {Nastavit èas mezi tahy v sekundách}
-translate C AnnotateWhich {Pøidat varianty}
+translate C AnalysisCommand {Program pro analï¿½zu}
+translate C PreviousChoices {Pï¿½edchozï¿½ vybranï¿½ programy}
+translate C AnnotateTime {Nastavit ï¿½as mezi tahy v sekundï¿½ch}
+translate C AnnotateWhich {Pï¿½idat varianty}
 translate C AnnotateAll {Pro tahy obou stran}
 # ====== TODO To be translated ======
 translate C AnnotateAllMoves {Annotate all moves}
-translate C AnnotateWhite {Pouze pro tahy bílého}
-translate C AnnotateBlack {Pouze pro tahy èerného}
-translate C AnnotateNotBest {Pokud tah v partii není nejlep¹ím tahem}
+translate C AnnotateWhite {Pouze pro tahy bï¿½lï¿½ho}
+translate C AnnotateBlack {Pouze pro tahy ï¿½ernï¿½ho}
+translate C AnnotateNotBest {Pokud tah v partii nenï¿½ nejlepï¿½ï¿½m tahem}
 # ====== TODO To be translated ======
 translate C AnnotateBlundersOnly {When game move is an obvious blunder}
 # ====== TODO To be translated ======
@@ -826,7 +841,7 @@ translate C BlundersThreshold {Threshold}
 translate C ScoreFormat {Score format}
 # ====== TODO To be translated ======
 translate C CutOff {Cut Off}
-translate C LowPriority {Nízká CPU priorita}
+translate C LowPriority {Nï¿½zkï¿½ CPU priorita}
 # ====== TODO To be translated ======
 translate C LogEngines {Log Size}
 # ====== TODO To be translated ======
@@ -863,73 +878,73 @@ translate C Alphabetical {Alphabetical}
 translate C TwoBooks {Two Books}
 
 # Analysis Engine open dialog:
-translate C EngineList {Seznam programù pro analýzu}
+translate C EngineList {Seznam programï¿½ pro analï¿½zu}
 # ====== TODO To be translated ======
 translate C EngineKey {Key}
 # ====== TODO To be translated ======
 translate C EngineType {Type}
-translate C EngineName {Jméno}
-translate C EngineCmd {Pøíkaz}
+translate C EngineName {Jmï¿½no}
+translate C EngineCmd {Pï¿½ï¿½kaz}
 translate C EngineArgs {Parametry}
-translate C EngineDir {Adresáø}
+translate C EngineDir {Adresï¿½ï¿½}
 translate C EngineElo {ELO}
 translate C EngineTime {Datum}
-translate C EngineNew {Nový}
+translate C EngineNew {Novï¿½}
 translate C EngineEdit {Editace}
-translate C EngineRequired {Tuènì vyznaèené polo¾ky jsou povinné; ostatní jsou volitelné}
+translate C EngineRequired {Tuï¿½nï¿½ vyznaï¿½enï¿½ poloï¿½ky jsou povinnï¿½; ostatnï¿½ jsou volitelnï¿½}
 
 # Stats window menus:
 menuText C StatsFile "Soubor" 0
 menuText C StatsFilePrint "Vytisknout do souboru..." 0
-menuText C StatsFileClose "Zavøít okno" 0
+menuText C StatsFileClose "Zavï¿½ï¿½t okno" 0
 menuText C StatsOpt "Volby" 0
 
 # PGN window menus:
 menuText C PgnFile "Soubor" 0
-menuText C PgnFileCopy "Kopírovat partii do clipboardu" 0
+menuText C PgnFileCopy "Kopï¿½rovat partii do clipboardu" 0
 menuText C PgnFilePrint "Vytisknout do souboru..." 0
-menuText C PgnFileClose "Zavøít okno PGN" 0
+menuText C PgnFileClose "Zavï¿½ï¿½t okno PGN" 0
 menuText C PgnOpt "Zobrazit" 0
-menuText C PgnOptColor "Barevné zobrazení" 0
-menuText C PgnOptShort "Krátká (tøíøádková) hlavièka" 20
-menuText C PgnOptSymbols "Symbolické anotace" 0
-menuText C PgnOptIndentC "Odsazovat komentáøe" 10
+menuText C PgnOptColor "Barevnï¿½ zobrazenï¿½" 0
+menuText C PgnOptShort "Krï¿½tkï¿½ (tï¿½ï¿½ï¿½ï¿½dkovï¿½) hlaviï¿½ka" 20
+menuText C PgnOptSymbols "Symbolickï¿½ anotace" 0
+menuText C PgnOptIndentC "Odsazovat komentï¿½ï¿½e" 10
 menuText C PgnOptIndentV "Odsazovat varianty" 10
-menuText C PgnOptColumn "Sloupcový styl (jeden tah na øádek)" 1
-menuText C PgnOptSpace "Mezera za èíslem tahu" 0
-menuText C PgnOptStripMarks "Odstranit kódy barevných polí a ¹ipek" 0
-menuText C PgnOptChess "Sachové figurky" 0
-menuText C PgnOptScrollbar "Posuvník" 0
+menuText C PgnOptColumn "Sloupcovï¿½ styl (jeden tah na ï¿½ï¿½dek)" 1
+menuText C PgnOptSpace "Mezera za ï¿½ï¿½slem tahu" 0
+menuText C PgnOptStripMarks "Odstranit kï¿½dy barevnï¿½ch polï¿½ a ï¿½ipek" 0
+menuText C PgnOptChess "Sachovï¿½ figurky" 0
+menuText C PgnOptScrollbar "Posuvnï¿½k" 0
 menuText C PgnOptBoldMainLine "Use Bold Text for Main Line Moves" 4 ;# ***
 menuText C PgnColor "Barvy" 0
-menuText C PgnColorHeader "Hlavièka..." 0
+menuText C PgnColorHeader "Hlaviï¿½ka..." 0
 menuText C PgnColorAnno "Anotace..." 0
-menuText C PgnColorComments "Komentáøe..." 0
+menuText C PgnColorComments "Komentï¿½ï¿½e..." 0
 menuText C PgnColorVars "Varianty..." 0
-menuText C PgnColorBackground "Pozadí..." 0
+menuText C PgnColorBackground "Pozadï¿½..." 0
 # ====== TODO To be translated ======
 menuText C PgnColorMain "Main line..." 0
 # ====== TODO To be translated ======
 menuText C PgnColorCurrent "Current move background..." 1
 # ====== TODO To be translated ======
 menuText C PgnColorNextMove "Next move background..." 0
-menuText C PgnHelp "Nápovìda" 0
-menuText C PgnHelpPgn "Nápovìda - Okno PGN " 16
-menuText C PgnHelpIndex "Index nápovìdy" 0
+menuText C PgnHelp "Nï¿½povï¿½da" 0
+menuText C PgnHelpPgn "Nï¿½povï¿½da - Okno PGN " 16
+menuText C PgnHelpIndex "Index nï¿½povï¿½dy" 0
 translate C PgnWindowTitle {Game Notation - game %u} ;# ***
 
 # Crosstable window menus:
 menuText C CrosstabFile "Soubor" 0
-menuText C CrosstabFileText "Vytisknout do textového souboru..." 14
+menuText C CrosstabFileText "Vytisknout do textovï¿½ho souboru..." 14
 menuText C CrosstabFileHtml "Vytisknout do HTML souboru..." 14
 menuText C CrosstabFileLaTeX "Vytisknout do LaTeX souboru..." 14
-menuText C CrosstabFileClose "Zavøít okno turnajové tabulky" 0
+menuText C CrosstabFileClose "Zavï¿½ï¿½t okno turnajovï¿½ tabulky" 0
 menuText C CrosstabEdit "Editovat" 0
 menuText C CrosstabEditEvent "Turnaj" 0
-menuText C CrosstabEditSite "Místo" 0
+menuText C CrosstabEditSite "Mï¿½sto" 0
 menuText C CrosstabEditDate "Datum" 0
 menuText C CrosstabOpt "Zobrazit" 0
-menuText C CrosstabOptColorPlain "Prostý text" 0
+menuText C CrosstabOptColorPlain "Prostï¿½ text" 0
 menuText C CrosstabOptColorHyper "Hypertext" 0
 # ====== TODO To be translated ======
 menuText C CrosstabOptTieWin "Tie-Break by wins" 1
@@ -937,80 +952,80 @@ menuText C CrosstabOptTieWin "Tie-Break by wins" 1
 menuText C CrosstabOptTieHead "Tie-Break by head-head" 1
 # todo
 menuText C CrosstabOptThreeWin "3 Points for Win" 1
-menuText C CrosstabOptAges "Vìk" 0
-menuText C CrosstabOptNats "Národnost" 0
+menuText C CrosstabOptAges "Vï¿½k" 0
+menuText C CrosstabOptNats "Nï¿½rodnost" 0
 # todo
 menuText C CrosstabOptTallies "Win/Loss/Draw" 0
 menuText C CrosstabOptRatings "Rating" 0
 menuText C CrosstabOptTitles "Titul" 0
-menuText C CrosstabOptBreaks "Výsledky tie-breaku" 10
-menuText C CrosstabOptDeleted "Vèetnì vymazaných partií" 9
-menuText C CrosstabOptColors "Barvy (jen pro ¹výcarský systém)" 0
+menuText C CrosstabOptBreaks "Vï¿½sledky tie-breaku" 10
+menuText C CrosstabOptDeleted "Vï¿½etnï¿½ vymazanï¿½ch partiï¿½" 9
+menuText C CrosstabOptColors "Barvy (jen pro ï¿½vï¿½carskï¿½ systï¿½m)" 0
 # ====== TODO To be translated ======
 menuText C CrosstabOptColorRows "Color Rows" 0
 menuText C CrosstabOptRowsColor "Row Color" 0 {Default crosstable row color}
-menuText C CrosstabOptColumnNumbers "Èíslované sloupce (jen v tabulkách 'ka¾dý s ka¾dým')" 3
-menuText C CrosstabOptGroup "Skupiny podle skóre" 0
-menuText C CrosstabSort "Øadit" 2
-menuText C CrosstabSortName "Jméno" 0
+menuText C CrosstabOptColumnNumbers "ï¿½ï¿½slovanï¿½ sloupce (jen v tabulkï¿½ch 'kaï¿½dï¿½ s kaï¿½dï¿½m')" 3
+menuText C CrosstabOptGroup "Skupiny podle skï¿½re" 0
+menuText C CrosstabSort "ï¿½adit" 2
+menuText C CrosstabSortName "Jmï¿½no" 0
 menuText C CrosstabSortRating "Rating" 0
-menuText C CrosstabSortScore "Skóre" 0
-menuText C CrosstabSortCountry "Zemì" 0
+menuText C CrosstabSortScore "Skï¿½re" 0
+menuText C CrosstabSortCountry "Zemï¿½" 0
 # todo
 menuText C CrosstabType "Format" 0
-menuText C CrosstabTypeAll "Ka¾dý s ka¾dým" 0
-menuText C CrosstabTypeSwiss "©výcarský systém" 3
-menuText C CrosstabTypeKnockout "Vyøazovací" 4
+menuText C CrosstabTypeAll "Kaï¿½dï¿½ s kaï¿½dï¿½m" 0
+menuText C CrosstabTypeSwiss "ï¿½vï¿½carskï¿½ systï¿½m" 3
+menuText C CrosstabTypeKnockout "Vyï¿½azovacï¿½" 4
 menuText C CrosstabTypeAuto "Auto" 0
-menuText C CrosstabHelp "Nápovìda" 0
-menuText C CrosstabHelpCross "Nápovìda - Turnajovou tabulku" 11
-menuText C CrosstabHelpIndex "Index nápovìdy" 0
+menuText C CrosstabHelp "Nï¿½povï¿½da" 0
+menuText C CrosstabHelpCross "Nï¿½povï¿½da - Turnajovou tabulku" 11
+menuText C CrosstabHelpIndex "Index nï¿½povï¿½dy" 0
 translate C SetFilter {Nastavit filtr}
-translate C AddToFilter {Pøidat do filtru}
-translate C Swiss {©výcarský systém}
+translate C AddToFilter {Pï¿½idat do filtru}
+translate C Swiss {ï¿½vï¿½carskï¿½ systï¿½m}
 translate C Category {Kategorie}
 
 # Opening report window menus:
 menuText C OprepFile "Soubor" 0
-menuText C OprepFileText "Vytisknout do textového souboru..." 14
+menuText C OprepFileText "Vytisknout do textovï¿½ho souboru..." 14
 menuText C OprepFileHtml "Vytisknout do HTML souboru..." 14
 menuText C OprepFileLaTeX "Vytisknout do LaTeX souboru..." 14
 menuText C OprepFileOptions "Volby" 0
-menuText C OprepFileClose "Zavøít okno s profilem" 0
-menuText C OprepFavorites "Oblíbené" 0
-menuText C OprepFavoritesAdd "Pøidat profil..." 0
-menuText C OprepFavoritesEdit "Editovat oblíbené profily..." 0
+menuText C OprepFileClose "Zavï¿½ï¿½t okno s profilem" 0
+menuText C OprepFavorites "Oblï¿½benï¿½" 0
+menuText C OprepFavoritesAdd "Pï¿½idat profil..." 0
+menuText C OprepFavoritesEdit "Editovat oblï¿½benï¿½ profily..." 0
 menuText C OprepFavoritesGenerate "Generovat profil..." 0
-menuText C OprepHelp "Nápovìda" 0
-menuText C OprepHelpReport "Nápovìda - Profil zahájení" 11
-menuText C OprepHelpIndex "Index nápovìdy" 11
+menuText C OprepHelp "Nï¿½povï¿½da" 0
+menuText C OprepHelpReport "Nï¿½povï¿½da - Profil zahï¿½jenï¿½" 11
+menuText C OprepHelpIndex "Index nï¿½povï¿½dy" 11
 
 # Header search:
-translate C HeaderSearch {Hledat podle hlavièky}
+translate C HeaderSearch {Hledat podle hlaviï¿½ky}
 translate C EndSideToMove {Side to move at end of game} ;# ***
 translate C GamesWithNoECO {Partie bez ECO?}
-translate C GameLength {Délka Partie}
-translate C FindGamesWith {Najít partie s pøíznaky}
-translate C StdStart {Nestandardní start}
-translate C Promotions {Promìny}
+translate C GameLength {Dï¿½lka Partie}
+translate C FindGamesWith {Najï¿½t partie s pï¿½ï¿½znaky}
+translate C StdStart {Nestandardnï¿½ start}
+translate C Promotions {Promï¿½ny}
 # ====== TODO To be translated ======
 translate C UnderPromo {Under Prom.}
-translate C Comments {Komentáøe}
+translate C Comments {Komentï¿½ï¿½e}
 translate C Variations {Varianty}
 translate C Annotations {Anotace}
-translate C DeleteFlag {Mazací pøíznak}
-translate C WhiteOpFlag {Zahájení bílého}
-translate C BlackOpFlag {Zahájení èerného}
-translate C MiddlegameFlag {Støední hra}
+translate C DeleteFlag {Mazacï¿½ pï¿½ï¿½znak}
+translate C WhiteOpFlag {Zahï¿½jenï¿½ bï¿½lï¿½ho}
+translate C BlackOpFlag {Zahï¿½jenï¿½ ï¿½ernï¿½ho}
+translate C MiddlegameFlag {Stï¿½ednï¿½ hra}
 translate C EndgameFlag {Koncovka}
 translate C NoveltyFlag {Novinka}
-translate C PawnFlag {Pì¹cová struktura}
+translate C PawnFlag {Pï¿½ï¿½covï¿½ struktura}
 translate C TacticsFlag {Taktika}
-translate C QsideFlag {Hra na dámském køídle}
-translate C KsideFlag {Hra na královském køídle}
-translate C BrilliancyFlag {Brilantní}
+translate C QsideFlag {Hra na dï¿½mskï¿½m kï¿½ï¿½dle}
+translate C KsideFlag {Hra na krï¿½lovskï¿½m kï¿½ï¿½dle}
+translate C BrilliancyFlag {Brilantnï¿½}
 translate C BlunderFlag {Hrubka}
-translate C UserFlag {U¾ivatel}
+translate C UserFlag {Uï¿½ivatel}
 translate C PgnContains {PGN obsahuje text}
 # ====== TODO To be translated ======
 translate C PreComment {Pre-game Comment}
@@ -1018,34 +1033,34 @@ translate C PreComment {Pre-game Comment}
 translate C PostComment {End Comment}
 
 # Game list window:
-translate C GlistNumber {Èíslo}
-translate C GlistWhite {Bílý}
-translate C GlistBlack {Èerný}
+translate C GlistNumber {ï¿½ï¿½slo}
+translate C GlistWhite {Bï¿½lï¿½}
+translate C GlistBlack {ï¿½ernï¿½}
 translate C GlistWElo {B-ELO}
-translate C GlistBElo {È-ELO}
+translate C GlistBElo {ï¿½-ELO}
 translate C GlistEvent {Turnaj}
-translate C GlistSite {Místo}
+translate C GlistSite {Mï¿½sto}
 translate C GlistRound {Kolo}
 translate C GlistDate {Datum}
 translate C GlistYear {Rok}
 translate C GlistEventDate {Datum turnaje}
-translate C GlistResult {Výsledek}
-translate C GlistLength {Délka}
-translate C GlistCountry {Zemì}
+translate C GlistResult {Vï¿½sledek}
+translate C GlistLength {Dï¿½lka}
+translate C GlistCountry {Zemï¿½}
 translate C GlistECO {ECO}
 translate C GlistOpening {Tahy}
-translate C GlistEndMaterial {Materiál na konci}
-translate C GlistDeleted {Vymazán(a)}
-translate C GlistFlags {Pøíznak}
+translate C GlistEndMaterial {Materiï¿½l na konci}
+translate C GlistDeleted {Vymazï¿½n(a)}
+translate C GlistFlags {Pï¿½ï¿½znak}
 translate C GlistVariations {Varianty}
-translate C GlistComments {Komentáøe}
+translate C GlistComments {Komentï¿½ï¿½e}
 translate C GlistAnnos {Anotace}
-translate C GlistStart {Poèáteèní pozice}
-translate C GlistGameNumber {Èíslo partie}
+translate C GlistStart {Poï¿½ï¿½teï¿½nï¿½ pozice}
+translate C GlistGameNumber {ï¿½ï¿½slo partie}
 translate C GlistFindText {Hledat text}
-translate C GlistMoveField {Pøesunout}
+translate C GlistMoveField {Pï¿½esunout}
 translate C GlistEditField {Konfigurovat}
-translate C GlistAddField {Pøidat}
+translate C GlistAddField {Pï¿½idat}
 translate C GlistDeleteField {Odebrat}
 translate C GlistColor {Barva}
 # ====== TODO To be translated ======
@@ -1057,11 +1072,11 @@ translate C GlistRemoveGameAndAboveFromFilter  {Remove game (and all above it)}
 # ====== TODO To be translated ======
 translate C GlistRemoveGameAndBelowFromFilter  {Remove game (and all below it)}
 # ====== TODO To be translated ======
-translate C GlistDeleteGame {(Un)Delete this game} 
+translate C GlistDeleteGame {(Un)Delete this game}
 # ====== TODO To be translated ======
-translate C GlistDeleteAllGames {Delete all games in filter} 
+translate C GlistDeleteAllGames {Delete all games in filter}
 # ====== TODO To be translated ======
-translate C GlistUndeleteAllGames {Undelete all games in filter} 
+translate C GlistUndeleteAllGames {Undelete all games in filter}
 # ====== TODO To be translated ======
 translate C GlistAlignL {Align left}
 # ====== TODO To be translated ======
@@ -1070,29 +1085,29 @@ translate C GlistAlignR {Align right}
 translate C GlistAlignC {Align center}
 
 # Maintenance window:
-translate C DatabaseName {Jméno databáze:}
+translate C DatabaseName {Jmï¿½no databï¿½ze:}
 translate C TypeIcon {Symbol}
 translate C NumOfGames {Partie:}
-translate C NumDeletedGames {Vymazané partie:}
+translate C NumDeletedGames {Vymazanï¿½ partie:}
 translate C NumFilterGames {Partie ve filtru:}
-translate C YearRange {Rozsah rokù:}
+translate C YearRange {Rozsah rokï¿½:}
 translate C RatingRange {Rozsah ratingu:}
 translate C Description {Popis}
-translate C Flag {Pøíznak}
-translate C CustomFlags {U¾ivatelské pøíznaky}
-translate C DeleteCurrent {Vymazat aktuální partii}
-translate C DeleteFilter {Vymazat filtrované partie}
-translate C DeleteAll {Vymazat v¹echny partie}
-translate C UndeleteCurrent {Obnovit aktuální partie po vymazání}
-translate C UndeleteFilter {Obnovit filtrované partie po vymazání}
-translate C UndeleteAll {Obnovit v¹echny partie po vymazání}
-translate C DeleteTwins {Vymazat zdvojené partie}
-translate C MarkCurrent {Oznaèit aktivní partii}
-translate C MarkFilter {Oznaèit filtrované partie}
-translate C MarkAll {Oznaèit v¹echny partie}
-translate C UnmarkCurrent {Odznaèit aktuální partii}
-translate C UnmarkFilter {Odznaèit filtrované partie}
-translate C UnmarkAll {Odznaèit v¹echny partie}
+translate C Flag {Pï¿½ï¿½znak}
+translate C CustomFlags {Uï¿½ivatelskï¿½ pï¿½ï¿½znaky}
+translate C DeleteCurrent {Vymazat aktuï¿½lnï¿½ partii}
+translate C DeleteFilter {Vymazat filtrovanï¿½ partie}
+translate C DeleteAll {Vymazat vï¿½echny partie}
+translate C UndeleteCurrent {Obnovit aktuï¿½lnï¿½ partie po vymazï¿½nï¿½}
+translate C UndeleteFilter {Obnovit filtrovanï¿½ partie po vymazï¿½nï¿½}
+translate C UndeleteAll {Obnovit vï¿½echny partie po vymazï¿½nï¿½}
+translate C DeleteTwins {Vymazat zdvojenï¿½ partie}
+translate C MarkCurrent {Oznaï¿½it aktivnï¿½ partii}
+translate C MarkFilter {Oznaï¿½it filtrovanï¿½ partie}
+translate C MarkAll {Oznaï¿½it vï¿½echny partie}
+translate C UnmarkCurrent {Odznaï¿½it aktuï¿½lnï¿½ partii}
+translate C UnmarkFilter {Odznaï¿½it filtrovanï¿½ partie}
+translate C UnmarkAll {Odznaï¿½it vï¿½echny partie}
 translate C Spellchecking {Kontrola pravopisu}
 # ====== TODO To be translated ======
 translate C MakeCorrections {Make Corrections}
@@ -1100,32 +1115,32 @@ translate C MakeCorrections {Make Corrections}
 translate C Ambiguous {Ambiguous}
 # ====== TODO To be translated ======
 translate C Surnames {Surnames}
-translate C Players {Hráèi}
+translate C Players {Hrï¿½ï¿½i}
 translate C Events {Turnaje}
-translate C Sites {Místa}
+translate C Sites {Mï¿½sta}
 translate C Rounds {Kola}
-translate C DatabaseOps {Databázové operace}
-translate C ReclassifyGames {ECO klasifikace partií}
-translate C CompactDatabase {Kompaktovat databázi}
-translate C SortDatabase {Øadit databázi}
-translate C AddEloRatings {Pøidat ELO rating}
-translate C AutoloadGame {Automaticky otevírat partii è.}
-translate C StripTags {Odstranit PGN znaèky}
-translate C StripTag {Odstranit znaèku}
+translate C DatabaseOps {Databï¿½zovï¿½ operace}
+translate C ReclassifyGames {ECO klasifikace partiï¿½}
+translate C CompactDatabase {Kompaktovat databï¿½zi}
+translate C SortDatabase {ï¿½adit databï¿½zi}
+translate C AddEloRatings {Pï¿½idat ELO rating}
+translate C AutoloadGame {Automaticky otevï¿½rat partii ï¿½.}
+translate C StripTags {Odstranit PGN znaï¿½ky}
+translate C StripTag {Odstranit znaï¿½ku}
 # ====== TODO To be translated ======
 translate C CheckGames {Check games}
-translate C Cleaner {Èi¹tìní databáze}
+translate C Cleaner {ï¿½iï¿½tï¿½nï¿½ databï¿½ze}
 translate C CleanerHelp {
-    Èi¹tìním databáze Scid provede u aktuální databáze v¹echny údr¾báøské akce, které zvolíte v seznamu.
+    ï¿½iï¿½tï¿½nï¿½m databï¿½ze Scid provede u aktuï¿½lnï¿½ databï¿½ze vï¿½echny ï¿½drï¿½bï¿½ï¿½skï¿½ akce, kterï¿½ zvolï¿½te v seznamu.
 
-    Pokud zvolíte ECO klasifikaci a mazání zdvojených partií pou¾ijí se aktuální nastavení z pøíslu¹ných dialogù.
+    Pokud zvolï¿½te ECO klasifikaci a mazï¿½nï¿½ zdvojenï¿½ch partiï¿½ pouï¿½ijï¿½ se aktuï¿½lnï¿½ nastavenï¿½ z pï¿½ï¿½sluï¿½nï¿½ch dialogï¿½.
 }
 translate C CleanerConfirm {
-Jakmile je èi¹tìní jednou spu¹tìno, nemù¾e ji¾ být pøeru¹eno!
+Jakmile je ï¿½iï¿½tï¿½nï¿½ jednou spuï¿½tï¿½no, nemï¿½ï¿½e jiï¿½ bï¿½t pï¿½eruï¿½eno!
 
-Tato akce mù¾e pro velké databáze trvat dlouhou dobu v závislosti na funkcích, které jste zvolili, a v závislosti na jejich stávajícím nastavení.
+Tato akce mï¿½ï¿½e pro velkï¿½ databï¿½ze trvat dlouhou dobu v zï¿½vislosti na funkcï¿½ch, kterï¿½ jste zvolili, a v zï¿½vislosti na jejich stï¿½vajï¿½cï¿½m nastavenï¿½.
 
-Jste si jisti, ¾e chcete zaèít s údr¾báøskými funkcemi, které jste zvolili?
+Jste si jisti, ï¿½e chcete zaï¿½ï¿½t s ï¿½drï¿½bï¿½ï¿½skï¿½mi funkcemi, kterï¿½ jste zvolili?
 }
 # ====== TODO To be translated ======
 translate C TwinCheckUndelete {to flip; "u" undeletes both)}
@@ -1171,9 +1186,9 @@ translate C AddedRatings {Scid added $r Elo ratings in $g games.}
 translate C NewSubmenu "New submenu"
 
 # Comment editor:
-translate C AnnotationSymbols  {Anotaèní symboly:}
-translate C Comment {Komentáø:}
-translate C InsertMark {Vlo¾it znaèku}
+translate C AnnotationSymbols  {Anotaï¿½nï¿½ symboly:}
+translate C Comment {Komentï¿½ï¿½:}
+translate C InsertMark {Vloï¿½it znaï¿½ku}
 translate C InsertMarkHelp {
 Insert/remove mark: Select color, type, square.
 Insert/remove arrow: Right-click two squares.
@@ -1198,17 +1213,17 @@ translate C Diagram {Diagram} ;# ***
 
 # Board search:
 translate C BoardSearch {Hledat pozici}
-translate C FilterOperation {Operace s aktuálním filtrem:}
+translate C FilterOperation {Operace s aktuï¿½lnï¿½m filtrem:}
 translate C FilterAnd {A (Omezit filtr)}
-translate C FilterOr {NEBO (Pøidat k filtru)}
+translate C FilterOr {NEBO (Pï¿½idat k filtru)}
 translate C FilterIgnore {IGNOROVAT (Ignoruj filtr)}
-translate C SearchType {Typ hledání:}
-translate C SearchBoardExact {Pøesná pozice (v¹echny figury na stejných polích)}
-translate C SearchBoardPawns {Pì¹ci (tentý¾ materiál, v¹ichni pì¹ci na stejných polích)}
-translate C SearchBoardFiles {Sloupce (tentý¾ materiál, v¹ichni pì¹ci na stejných sloupcích)}
-translate C SearchBoardAny {Jakákoliv (tentý¾ materiál, pì¹ci a figury kdekoliv)}
-translate C SearchInRefDatabase { Hledat v databázi }
-translate C LookInVars {Dívat se do variant}
+translate C SearchType {Typ hledï¿½nï¿½:}
+translate C SearchBoardExact {Pï¿½esnï¿½ pozice (vï¿½echny figury na stejnï¿½ch polï¿½ch)}
+translate C SearchBoardPawns {Pï¿½ï¿½ci (tentï¿½ï¿½ materiï¿½l, vï¿½ichni pï¿½ï¿½ci na stejnï¿½ch polï¿½ch)}
+translate C SearchBoardFiles {Sloupce (tentï¿½ï¿½ materiï¿½l, vï¿½ichni pï¿½ï¿½ci na stejnï¿½ch sloupcï¿½ch)}
+translate C SearchBoardAny {Jakï¿½koliv (tentï¿½ï¿½ materiï¿½l, pï¿½ï¿½ci a figury kdekoliv)}
+translate C SearchInRefDatabase { Hledat v databï¿½zi }
+translate C LookInVars {Dï¿½vat se do variant}
 # ====== TODO To be translated ======
 translate C CQLLabel {CQL Script}
 # ====== TODO To be translated ======
@@ -1217,22 +1232,22 @@ translate C CQLComments {Allow Comments}
 translate C CQLStrip {Strip Match Comments}
 
 # Material search:
-translate C MaterialSearch {Hledat materiál}
-translate C Material {Materiál}
+translate C MaterialSearch {Hledat materiï¿½l}
+translate C Material {Materiï¿½l}
 translate C Patterns {Vzory}
 translate C Zero {Nic}
 translate C Any {Cokoliv}
-translate C CurrentBoard {Aktuální pozice}
-translate C CommonEndings {Typické koncovky}
-translate C CommonPatterns {Typické vzory}
-translate C MaterialDiff {Rozdíl v materiálu}
+translate C CurrentBoard {Aktuï¿½lnï¿½ pozice}
+translate C CommonEndings {Typickï¿½ koncovky}
+translate C CommonPatterns {Typickï¿½ vzory}
+translate C MaterialDiff {Rozdï¿½l v materiï¿½lu}
 translate C squares {pole}
-translate C SameColor {Stejnobarevné}
-translate C OppColor {Nestejnobarevné}
-translate C Either {Obojí}
-translate C MoveNumberRange {Rozsah tahù}
-translate C MatchForAtLeast {Shoda pro minimálnì}
-translate C HalfMoves {pùltahù}
+translate C SameColor {Stejnobarevnï¿½}
+translate C OppColor {Nestejnobarevnï¿½}
+translate C Either {Obojï¿½}
+translate C MoveNumberRange {Rozsah tahï¿½}
+translate C MatchForAtLeast {Shoda pro minimï¿½lnï¿½}
+translate C HalfMoves {pï¿½ltahï¿½}
 
 # Common endings in material search:
 translate C EndingPawns {Pawn endings} ;# ***
@@ -1270,14 +1285,14 @@ translate C Today {Dnes}
 translate C ClassifyGame {Klasifikovat partii}
 
 # Setup position:
-translate C EmptyBoard {Vyprázdnit ¹achovnici}
-translate C InitialBoard {Výchozí pozice}
+translate C EmptyBoard {Vyprï¿½zdnit ï¿½achovnici}
+translate C InitialBoard {Vï¿½chozï¿½ pozice}
 translate C SideToMove {Na tahu je}
-translate C MoveNumber {Èíslo tahu}
-translate C Castling {Ro¹áda}
+translate C MoveNumber {ï¿½ï¿½slo tahu}
+translate C Castling {Roï¿½ï¿½da}
 translate C EnPassantFile {En Passant sloupec}
-translate C ClearFen {Vyèistit FEN}
-translate C PasteFen {Vlo¾it FEN}
+translate C ClearFen {Vyï¿½istit FEN}
+translate C PasteFen {Vloï¿½it FEN}
 # ====== TODO To be translated ======
 translate C SaveAndContinue {Save and continue}
 # ====== TODO To be translated ======
@@ -1287,29 +1302,29 @@ translate C GoBack {Go back}
 
 # Replace move dialog:
 translate C ReplaceMove {Nahradit tah}
-translate C AddNewVar {Pøidat novou variantu}
+translate C AddNewVar {Pï¿½idat novou variantu}
 # ====== TODO To be translated ======
 translate C NewMainLine {New Main Line}
-translate C ReplaceMoveMessage {Zde ji¾ existuje tah.
+translate C ReplaceMoveMessage {Zde jiï¿½ existuje tah.
 
-Mù¾ete ho nahradit, a zru¹it tak i v¹echny následující tahy, nebo mù¾ete vá¹ tah pøidat jako novou variantu.
+Mï¿½ï¿½ete ho nahradit, a zruï¿½it tak i vï¿½echny nï¿½sledujï¿½cï¿½ tahy, nebo mï¿½ï¿½ete vï¿½ï¿½ tah pï¿½idat jako novou variantu.
 
-(Zobrazení této zprávy mù¾ete v budoucnu potlaèit pøepnutím volby "Ptát se pøed nahrazením tahù" v menu Volby:Tahy.)}
+(Zobrazenï¿½ tï¿½to zprï¿½vy mï¿½ï¿½ete v budoucnu potlaï¿½it pï¿½epnutï¿½m volby "Ptï¿½t se pï¿½ed nahrazenï¿½m tahï¿½" v menu Volby:Tahy.)}
 
 # Make database read-only dialog:
-translate C ReadOnlyDialog {Pokud databázi nastavíte jako jen ke ètení, nebudou povoleny ¾ádné zmìny.
-®ádné partie nebude mo¾no ulo¾it ani pøepsat a ¾ádný mazací pøíznak nebude mo¾no zmìnit.
-V¹echny výsledky operace øazení èi ECO klasifikace budou pouze doèasné.
+translate C ReadOnlyDialog {Pokud databï¿½zi nastavï¿½te jako jen ke ï¿½tenï¿½, nebudou povoleny ï¿½ï¿½dnï¿½ zmï¿½ny.
+ï¿½ï¿½dnï¿½ partie nebude moï¿½no uloï¿½it ani pï¿½epsat a ï¿½ï¿½dnï¿½ mazacï¿½ pï¿½ï¿½znak nebude moï¿½no zmï¿½nit.
+Vï¿½echny vï¿½sledky operace ï¿½azenï¿½ ï¿½i ECO klasifikace budou pouze doï¿½asnï¿½.
 
-Databázi mù¾ete uèinit opìt zapisovatelnou pomocí jejího zavøení a opìtovného otevøení.
+Databï¿½zi mï¿½ï¿½ete uï¿½init opï¿½t zapisovatelnou pomocï¿½ jejï¿½ho zavï¿½enï¿½ a opï¿½tovnï¿½ho otevï¿½enï¿½.
 
-Pøejete si skuteènì nastavit tuto databázi jako jen ke ètení?}
+Pï¿½ejete si skuteï¿½nï¿½ nastavit tuto databï¿½zi jako jen ke ï¿½tenï¿½?}
 
 # Exit dialog:
-translate C ExitDialog {Opravdu si pøejete ukonèit Scid?}
+translate C ExitDialog {Opravdu si pï¿½ejete ukonï¿½it Scid?}
 # ====== TODO To be translated ======
 translate C ClearGameDialog {This game has been altered.\nDo you wish to save it?}
-translate C ExitUnsaved {Následující databáze obsahují partie s neulo¾enými zmìnami. Pokud nyní skonèíte, budou tyto zmìny ztraceny.}
+translate C ExitUnsaved {Nï¿½sledujï¿½cï¿½ databï¿½ze obsahujï¿½ partie s neuloï¿½enï¿½mi zmï¿½nami. Pokud nynï¿½ skonï¿½ï¿½te, budou tyto zmï¿½ny ztraceny.}
 # ====== TODO To be translated ======
 translate C ChangeTextDialog {Enabling text colour globally requires restart.}
 # ====== TODO To be translated ======
@@ -1320,179 +1335,179 @@ translate C FontSelectDialog "This is some sample text\nDouble click above to ch
 translate C ExitNow {Exit now ?}
 
 # Import window:
-translate C PasteCurrentGame {Vlo¾it aktuální partii}
-translate C ImportHelp1 {Zapsat nebo vlo¾it partii ve formátu PGN do rámce nahoøe.}
-translate C ImportHelp2 {Jakékoli chyby pøi importu partie budou zobrazeny zde.}
+translate C PasteCurrentGame {Vloï¿½it aktuï¿½lnï¿½ partii}
+translate C ImportHelp1 {Zapsat nebo vloï¿½it partii ve formï¿½tu PGN do rï¿½mce nahoï¿½e.}
+translate C ImportHelp2 {Jakï¿½koli chyby pï¿½i importu partie budou zobrazeny zde.}
 # ====== TODO To be translated ======
 translate C OverwriteExistingMoves {Overwrite existing moves ?}
 
 # ECO Browser:
-translate C ECOAllSections {v¹echny ECO sekce}
+translate C ECOAllSections {vï¿½echny ECO sekce}
 translate C ECOSection {ECO sekce}
 translate C ECOSummary {Souhrn pro}
-translate C ECOFrequency {Frekvence subkódù pro}
+translate C ECOFrequency {Frekvence subkï¿½dï¿½ pro}
 
 # Opening Report:
-translate C OprepTitle {Profil zahájení}
+translate C OprepTitle {Profil zahï¿½jenï¿½}
 translate C OprepReport {Profil}
-translate C OprepGenerated {Generován}
+translate C OprepGenerated {Generovï¿½n}
 translate C OprepStatsHist {Statistika a historie}
 translate C OprepStats {Statistika}
-translate C OprepStatAll {V¹echny partie profilu}
-translate C OprepStatBoth {Oba ratingovaní}
+translate C OprepStatAll {Vï¿½echny partie profilu}
+translate C OprepStatBoth {Oba ratingovanï¿½}
 translate C OprepStatSince {Od}
-translate C OprepOldest {Nejstar¹í partie}
-translate C OprepNewest {Nejnovìj¹í partie}
-translate C OprepPopular {Stávající popularita}
-translate C OprepFreqAll {Frekvence za v¹echny roky: }
-translate C OprepFreq1   {Bìhem posledního roku:     }
-translate C OprepFreq5   {Bìhem posledních 5 let:    }
-translate C OprepFreq10  {Bìhem posledních 10 let:   }
-translate C OprepEvery {jednou z %u partií}
-translate C OprepUp {více o %u%s v porovnání se v¹emi roky}
-translate C OprepDown {ménì o %u%s v porovnání se v¹emi roky}
-translate C OprepSame {¾ádná zmìna pøi porovnání se v¹emi roky}
-translate C OprepMostFrequent {Nejèastìj¹í hráèi}
-translate C OprepMostFrequentOpponents {Nejèastìj¹í soupeøi}
+translate C OprepOldest {Nejstarï¿½ï¿½ partie}
+translate C OprepNewest {Nejnovï¿½jï¿½ï¿½ partie}
+translate C OprepPopular {Stï¿½vajï¿½cï¿½ popularita}
+translate C OprepFreqAll {Frekvence za vï¿½echny roky: }
+translate C OprepFreq1   {Bï¿½hem poslednï¿½ho roku:     }
+translate C OprepFreq5   {Bï¿½hem poslednï¿½ch 5 let:    }
+translate C OprepFreq10  {Bï¿½hem poslednï¿½ch 10 let:   }
+translate C OprepEvery {jednou z %u partiï¿½}
+translate C OprepUp {vï¿½ce o %u%s v porovnï¿½nï¿½ se vï¿½emi roky}
+translate C OprepDown {mï¿½nï¿½ o %u%s v porovnï¿½nï¿½ se vï¿½emi roky}
+translate C OprepSame {ï¿½ï¿½dnï¿½ zmï¿½na pï¿½i porovnï¿½nï¿½ se vï¿½emi roky}
+translate C OprepMostFrequent {Nejï¿½astï¿½jï¿½ï¿½ hrï¿½ï¿½i}
+translate C OprepMostFrequentOpponents {Nejï¿½astï¿½jï¿½ï¿½ soupeï¿½i}
 translate C OprepRatingsPerf {Ratingy a performance}
-translate C OprepAvgPerf {Prùmìrné ratingy a performance}
-translate C OprepWRating {Rating bílý}
-translate C OprepBRating {Rating èerný}
-translate C OprepWPerf {Performance bílý}
-translate C OprepBPerf {Performance èerný}
-translate C OprepHighRating {Partie s nejvy¹¹ím prùmìrným ratingem}
-translate C OprepTrends {Výsledkový trend}
-translate C OprepResults {Délka partií a frekvence}
-translate C OprepLength {Délka partií}
+translate C OprepAvgPerf {Prï¿½mï¿½rnï¿½ ratingy a performance}
+translate C OprepWRating {Rating bï¿½lï¿½}
+translate C OprepBRating {Rating ï¿½ernï¿½}
+translate C OprepWPerf {Performance bï¿½lï¿½}
+translate C OprepBPerf {Performance ï¿½ernï¿½}
+translate C OprepHighRating {Partie s nejvyï¿½ï¿½ï¿½m prï¿½mï¿½rnï¿½m ratingem}
+translate C OprepTrends {Vï¿½sledkovï¿½ trend}
+translate C OprepResults {Dï¿½lka partiï¿½ a frekvence}
+translate C OprepLength {Dï¿½lka partiï¿½}
 translate C OprepFrequency {Frekvence}
-translate C OprepWWins {Výhry bílý: }
-translate C OprepBWins {Výhry èerný: }
-translate C OprepDraws {Remízy:      }
-translate C OprepWholeDB {celá databáze}
-translate C OprepShortest {Nejkrat¹í výhry}
-translate C OprepMovesThemes {Tahy a témata}
-translate C OprepMoveOrders {Posloupnosti tahù vedoucí k profilované pozici}
+translate C OprepWWins {Vï¿½hry bï¿½lï¿½: }
+translate C OprepBWins {Vï¿½hry ï¿½ernï¿½: }
+translate C OprepDraws {Remï¿½zy:      }
+translate C OprepWholeDB {celï¿½ databï¿½ze}
+translate C OprepShortest {Nejkratï¿½ï¿½ vï¿½hry}
+translate C OprepMovesThemes {Tahy a tï¿½mata}
+translate C OprepMoveOrders {Posloupnosti tahï¿½ vedoucï¿½ k profilovanï¿½ pozici}
 translate C OprepMoveOrdersOne \
-  {Nalezena pouze jedna posloupnost tahù vedoucích k této pozici:}
+  {Nalezena pouze jedna posloupnost tahï¿½ vedoucï¿½ch k tï¿½to pozici:}
 translate C OprepMoveOrdersAll \
-  {Nalezeno %u posloupností tahù vedoucích k této pozici:}
+  {Nalezeno %u posloupnostï¿½ tahï¿½ vedoucï¿½ch k tï¿½to pozici:}
 translate C OprepMoveOrdersMany \
-  {Nalezeno %u posloupností tahù vedoucích k této pozici. Prvních %u jsou:}
-translate C OprepMovesFrom {Tahy z profilované pozice}
-translate C OprepMostFrequentEcoCodes {Nejèastìj¹í ECO kódy}
-translate C OprepThemes {Pozièní témata}
-translate C OprepThemeDescription {Frekvence témat v prvních %u tazích ka¾dé partie}
-translate C OprepThemeSameCastling {Ro¹ády na stejnou stranu}
-translate C OprepThemeOppCastling {Ro¹ády na rùzné strany}
-translate C OprepThemeNoCastling {Obì strany bez ro¹ády}
-translate C OprepThemeKPawnStorm {Pì¹cový útok na královském køídle}
-translate C OprepThemeQueenswap {Vymìnìné dámy}
-translate C OprepThemeWIQP {Bílý izolovaný dámský pì¹ec}
-translate C OprepThemeBIQP {Èerný izolovaný dámský pì¹ec}
-translate C OprepThemeWP567 {Bílý pì¹ec na 5., 6. nebo 7. øadì}
-translate C OprepThemeBP234 {Èerný pì¹ec na 2., 3. nebo 4. øadì}
-translate C OprepThemeOpenCDE {Otevøený sloupec C, D nebo E}
-translate C OprepTheme1BishopPair {Jedna strana má dvojici støelcù}
+  {Nalezeno %u posloupnostï¿½ tahï¿½ vedoucï¿½ch k tï¿½to pozici. Prvnï¿½ch %u jsou:}
+translate C OprepMovesFrom {Tahy z profilovanï¿½ pozice}
+translate C OprepMostFrequentEcoCodes {Nejï¿½astï¿½jï¿½ï¿½ ECO kï¿½dy}
+translate C OprepThemes {Poziï¿½nï¿½ tï¿½mata}
+translate C OprepThemeDescription {Frekvence tï¿½mat v prvnï¿½ch %u tazï¿½ch kaï¿½dï¿½ partie}
+translate C OprepThemeSameCastling {Roï¿½ï¿½dy na stejnou stranu}
+translate C OprepThemeOppCastling {Roï¿½ï¿½dy na rï¿½znï¿½ strany}
+translate C OprepThemeNoCastling {Obï¿½ strany bez roï¿½ï¿½dy}
+translate C OprepThemeKPawnStorm {Pï¿½ï¿½covï¿½ ï¿½tok na krï¿½lovskï¿½m kï¿½ï¿½dle}
+translate C OprepThemeQueenswap {Vymï¿½nï¿½nï¿½ dï¿½my}
+translate C OprepThemeWIQP {Bï¿½lï¿½ izolovanï¿½ dï¿½mskï¿½ pï¿½ï¿½ec}
+translate C OprepThemeBIQP {ï¿½ernï¿½ izolovanï¿½ dï¿½mskï¿½ pï¿½ï¿½ec}
+translate C OprepThemeWP567 {Bï¿½lï¿½ pï¿½ï¿½ec na 5., 6. nebo 7. ï¿½adï¿½}
+translate C OprepThemeBP234 {ï¿½ernï¿½ pï¿½ï¿½ec na 2., 3. nebo 4. ï¿½adï¿½}
+translate C OprepThemeOpenCDE {Otevï¿½enï¿½ sloupec C, D nebo E}
+translate C OprepTheme1BishopPair {Jedna strana mï¿½ dvojici stï¿½elcï¿½}
 translate C OprepEndgames {Koncovky}
-translate C OprepReportGames {Profilované partie}
-translate C OprepAllGames {V¹echny partie}
-translate C OprepEndClass {Materiálu na konci ka¾dé partie}
+translate C OprepReportGames {Profilovanï¿½ partie}
+translate C OprepAllGames {Vï¿½echny partie}
+translate C OprepEndClass {Materiï¿½lu na konci kaï¿½dï¿½ partie}
 translate C OprepTheoryTable {Tabulka teorie}
-translate C OprepTableComment {Generováno z %u partií s nejvy¹¹ím prùmìrným ratingem.}
-translate C OprepExtraMoves {Extra poznámkové tahy v tabulce teorie}
-translate C OprepMaxGames {Maximum tahù v tabulce teorie}
+translate C OprepTableComment {Generovï¿½no z %u partiï¿½ s nejvyï¿½ï¿½ï¿½m prï¿½mï¿½rnï¿½m ratingem.}
+translate C OprepExtraMoves {Extra poznï¿½mkovï¿½ tahy v tabulce teorie}
+translate C OprepMaxGames {Maximum tahï¿½ v tabulce teorie}
 # ====== TODO To be translated ======
 translate C OprepMaxLines {Maximum games for statistics}
 translate C OprepViewHTML {Zobrazit HTML}
 translate C OprepViewLaTeX {Zobrazit LaTeX}
 
 # Player Report:
-translate C PReportTitle {Profil hráèe}
-translate C PReportColorWhite {bílými figurami}
-translate C PReportColorBlack {èernými figurami}
+translate C PReportTitle {Profil hrï¿½ï¿½e}
+translate C PReportColorWhite {bï¿½lï¿½mi figurami}
+translate C PReportColorBlack {ï¿½ernï¿½mi figurami}
 # ====== TODO To be translated ======
 translate C PReportBeginning {Beginning with}
 translate C PReportMoves {po %s}
-translate C PReportOpenings {Zahájení}
-translate C PReportClipbase {Vyprázdnit schránku a zkopírovat do ní odpovídající partie}
+translate C PReportOpenings {Zahï¿½jenï¿½}
+translate C PReportClipbase {Vyprï¿½zdnit schrï¿½nku a zkopï¿½rovat do nï¿½ odpovï¿½dajï¿½cï¿½ partie}
 
 # Piece Tracker window:
-translate C TrackerSelectSingle {Levým tlaèítkem my¹i se tato figura vybere.}
-translate C TrackerSelectPair {Levým tlaèítkem se tato figura vybere; pravým se vyberou obì stejné figury.}
-translate C TrackerSelectPawn {Levým tlaèítkem se vybere tento pì¹ec; pravým se vybere v¹ech 8 pì¹cù.}
+translate C TrackerSelectSingle {Levï¿½m tlaï¿½ï¿½tkem myï¿½i se tato figura vybere.}
+translate C TrackerSelectPair {Levï¿½m tlaï¿½ï¿½tkem se tato figura vybere; pravï¿½m se vyberou obï¿½ stejnï¿½ figury.}
+translate C TrackerSelectPawn {Levï¿½m tlaï¿½ï¿½tkem se vybere tento pï¿½ï¿½ec; pravï¿½m se vybere vï¿½ech 8 pï¿½ï¿½cï¿½.}
 translate C TrackerStat {Statistika}
-translate C TrackerGames {% partií s tahem na pole}
-translate C TrackerTime {% èasu na ka¾dém poli}
+translate C TrackerGames {% partiï¿½ s tahem na pole}
+translate C TrackerTime {% ï¿½asu na kaï¿½dï¿½m poli}
 translate C TrackerMoves {Tahy}
-translate C TrackerMovesStart {Vlo¾te èíslo tahu, kterým má stopování zaèít.}
-translate C TrackerMovesStop {Vlo¾te èíslo tahu, kterým má stopování skonèit.}
+translate C TrackerMovesStart {Vloï¿½te ï¿½ï¿½slo tahu, kterï¿½m mï¿½ stopovï¿½nï¿½ zaï¿½ï¿½t.}
+translate C TrackerMovesStop {Vloï¿½te ï¿½ï¿½slo tahu, kterï¿½m mï¿½ stopovï¿½nï¿½ skonï¿½it.}
 
 # Game selection dialogs:
-translate C SelectAllGames {V¹echny partie v databázi}
-translate C SelectFilterGames {Jen filtrované partie}
-translate C SelectTournamentGames {Jen partie z aktuálního turnaje}
-translate C SelectOlderGames {Jen star¹í partie}
+translate C SelectAllGames {Vï¿½echny partie v databï¿½zi}
+translate C SelectFilterGames {Jen filtrovanï¿½ partie}
+translate C SelectTournamentGames {Jen partie z aktuï¿½lnï¿½ho turnaje}
+translate C SelectOlderGames {Jen starï¿½ï¿½ partie}
 
 # Delete Twins window:
-translate C TwinsNote {Aby byly dvì partie vyhodnoceny jako zdvojené, musí být hrány tými¾ dvìma hráèi a dále musí splòovat kritéria, která nastavíte ní¾e. Pokud jsou nalezeny zdvojené partie, pak je krat¹í z nich vymazána. Rada: je vhodné provést pøed vymazáním zdvojených partií kontrolu pravopisu, nebo» to zdokonalí detekci zdvojených partií.}
-translate C TwinsCriteria {Kritéria: Zdvojené partie musí mít...}
-translate C TwinsWhich {Jaké partie prozkoumat}
-translate C TwinsColors {Tyté¾ barvy u hráèù?}
-translate C TwinsEvent {Tentý¾ turnaj?}
-translate C TwinsSite {Toté¾ místo?}
-translate C TwinsRound {Toté¾ kolo?}
-translate C TwinsYear {Tentý¾ rok?}
-translate C TwinsMonth {Tentý¾ mìsíc?}
-translate C TwinsDay {Tentý¾ den?}
-translate C TwinsResult {Tentý¾ výsledek?}
-translate C TwinsECO {Tentý¾ ECO kód?}
-translate C TwinsMoves {Tyté¾ tahy?}
-translate C TwinsPlayers {Porovnání jmen:}
-translate C TwinsPlayersExact {Pøesná shoda}
-translate C TwinsPlayersPrefix {Jen první 4 znaky}
-translate C TwinsWhen {Pokud se budou mazat zdvojené partie}
-translate C TwinsSkipShort {Ignorovat v¹echny partie krat¹í ne¾ 5 tahù?}
-translate C TwinsUndelete {Obnovit nejprve v¹echny partie?}
-translate C TwinsSetFilter {Nastavit filtr na v¹echny vymazané zdvojené partie?}
-translate C TwinsComments {V¾dy zachovat partie s komentáøi?}
-translate C TwinsVars {V¾dy zachovat partie s variantami?}
+translate C TwinsNote {Aby byly dvï¿½ partie vyhodnoceny jako zdvojenï¿½, musï¿½ bï¿½t hrï¿½ny tï¿½miï¿½ dvï¿½ma hrï¿½ï¿½i a dï¿½le musï¿½ splï¿½ovat kritï¿½ria, kterï¿½ nastavï¿½te nï¿½ï¿½e. Pokud jsou nalezeny zdvojenï¿½ partie, pak je kratï¿½ï¿½ z nich vymazï¿½na. Rada: je vhodnï¿½ provï¿½st pï¿½ed vymazï¿½nï¿½m zdvojenï¿½ch partiï¿½ kontrolu pravopisu, neboï¿½ to zdokonalï¿½ detekci zdvojenï¿½ch partiï¿½.}
+translate C TwinsCriteria {Kritï¿½ria: Zdvojenï¿½ partie musï¿½ mï¿½t...}
+translate C TwinsWhich {Jakï¿½ partie prozkoumat}
+translate C TwinsColors {Tytï¿½ï¿½ barvy u hrï¿½ï¿½ï¿½?}
+translate C TwinsEvent {Tentï¿½ï¿½ turnaj?}
+translate C TwinsSite {Totï¿½ï¿½ mï¿½sto?}
+translate C TwinsRound {Totï¿½ï¿½ kolo?}
+translate C TwinsYear {Tentï¿½ï¿½ rok?}
+translate C TwinsMonth {Tentï¿½ï¿½ mï¿½sï¿½c?}
+translate C TwinsDay {Tentï¿½ï¿½ den?}
+translate C TwinsResult {Tentï¿½ï¿½ vï¿½sledek?}
+translate C TwinsECO {Tentï¿½ï¿½ ECO kï¿½d?}
+translate C TwinsMoves {Tytï¿½ï¿½ tahy?}
+translate C TwinsPlayers {Porovnï¿½nï¿½ jmen:}
+translate C TwinsPlayersExact {Pï¿½esnï¿½ shoda}
+translate C TwinsPlayersPrefix {Jen prvnï¿½ 4 znaky}
+translate C TwinsWhen {Pokud se budou mazat zdvojenï¿½ partie}
+translate C TwinsSkipShort {Ignorovat vï¿½echny partie kratï¿½ï¿½ neï¿½ 5 tahï¿½?}
+translate C TwinsUndelete {Obnovit nejprve vï¿½echny partie?}
+translate C TwinsSetFilter {Nastavit filtr na vï¿½echny vymazanï¿½ zdvojenï¿½ partie?}
+translate C TwinsComments {Vï¿½dy zachovat partie s komentï¿½ï¿½i?}
+translate C TwinsVars {Vï¿½dy zachovat partie s variantami?}
 translate C TwinsDeleteWhich {Kterou partii vymazat:}
-translate C TwinsDeleteShorter {Krat¹í partii}
-translate C TwinsDeleteOlder {Partii s ni¾¹ím èíslem}
-translate C TwinsDeleteNewer {Partii s vy¹¹ím èíslem}
+translate C TwinsDeleteShorter {Kratï¿½ï¿½ partii}
+translate C TwinsDeleteOlder {Partii s niï¿½ï¿½ï¿½m ï¿½ï¿½slem}
+translate C TwinsDeleteNewer {Partii s vyï¿½ï¿½ï¿½m ï¿½ï¿½slem}
 translate C TwinsDelete {Vymazat partie}
 
 # Name editor window:
-translate C NameEditType {Typ jména pro editaci}
+translate C NameEditType {Typ jmï¿½na pro editaci}
 translate C NameEditSelect {Partie k editaci}
 translate C NameEditReplace {Nahradit}
 translate C NameEditWith {}
-translate C NameEditMatches {Shoduje se: Stiskni Ctrl+1 a¾ Ctrl+9 pro výbìr}
+translate C NameEditMatches {Shoduje se: Stiskni Ctrl+1 aï¿½ Ctrl+9 pro vï¿½bï¿½r}
 # ====== TODO To be translated ======
 # ====== TODO To be translated ======
 # ====== TODO To be translated ======
 
 # Classify window:
 translate C Classify {Klasifikace}
-translate C ClassifyWhich {ECO klasifikace kterých partií}
-translate C ClassifyAll {V¹echny partie (pøepsat staré ECO kódy)}
-translate C ClassifyYear {V¹echny partie hrané za poslední rok}
-translate C ClassifyMonth {V¹echny partie hrané za poslední mìsíc}
-translate C ClassifyNew {Jen partie, které jsou zatím bez ECO kódu}
-translate C ClassifyCodes {Pou¾ít tyto ECO kódy}
-translate C ClassifyBasic {Jen základní kódy ("B12", ...)}
-translate C ClassifyExtended {Roz¹íøení Scidu  ("B12j", ...)}
+translate C ClassifyWhich {ECO klasifikace kterï¿½ch partiï¿½}
+translate C ClassifyAll {Vï¿½echny partie (pï¿½epsat starï¿½ ECO kï¿½dy)}
+translate C ClassifyYear {Vï¿½echny partie hranï¿½ za poslednï¿½ rok}
+translate C ClassifyMonth {Vï¿½echny partie hranï¿½ za poslednï¿½ mï¿½sï¿½c}
+translate C ClassifyNew {Jen partie, kterï¿½ jsou zatï¿½m bez ECO kï¿½du}
+translate C ClassifyCodes {Pouï¿½ï¿½t tyto ECO kï¿½dy}
+translate C ClassifyBasic {Jen zï¿½kladnï¿½ kï¿½dy ("B12", ...)}
+translate C ClassifyExtended {Rozï¿½ï¿½ï¿½enï¿½ Scidu  ("B12j", ...)}
 
 # Compaction:
-translate C NameFile {Jmenný soubor}
-translate C GameFile {Partiový soubor}
-translate C Names {Jména}
-translate C Unused {Nepou¾ito}
+translate C NameFile {Jmennï¿½ soubor}
+translate C GameFile {Partiovï¿½ soubor}
+translate C Names {Jmï¿½na}
+translate C Unused {Nepouï¿½ito}
 translate C SizeKb {Velikost (kb)}
-translate C CurrentState {Aktuální stav}
-translate C AfterCompaction {Po kompaktování}
-translate C CompactNames {Kompaktovat jmenný soubor}
-translate C CompactGames {Kompaktovat partiový soubor}
+translate C CurrentState {Aktuï¿½lnï¿½ stav}
+translate C AfterCompaction {Po kompaktovï¿½nï¿½}
+translate C CompactNames {Kompaktovat jmennï¿½ soubor}
+translate C CompactGames {Kompaktovat partiovï¿½ soubor}
 # ====== TODO To be translated ======
 translate C NoUnusedNames "There are no unused names, so the name file is already fully compacted."
 # ====== TODO To be translated ======
@@ -1503,55 +1518,55 @@ translate C NameFileCompacted {The name file for "[file tail [sc_base filename]]
 translate C GameFileCompacted {The game file for "[file tail [sc_base filename]]" was compacted.}
 
 # Sorting:
-translate C SortCriteria {Kritéria}
-translate C AddCriteria {Pøidat kritéria}
-translate C CommonSorts {Bì¾ná øazení}
-translate C Sort {Setøídit}
+translate C SortCriteria {Kritï¿½ria}
+translate C AddCriteria {Pï¿½idat kritï¿½ria}
+translate C CommonSorts {Bï¿½ï¿½nï¿½ ï¿½azenï¿½}
+translate C Sort {Setï¿½ï¿½dit}
 
 # Exporting:
-translate C AddToExistingFile {Pøidat partie do existujícího souboru?}
-translate C ExportComments {Exportovat komentáøe?}
+translate C AddToExistingFile {Pï¿½idat partie do existujï¿½cï¿½ho souboru?}
+translate C ExportComments {Exportovat komentï¿½ï¿½e?}
 translate C ExportVariations {Exportovat varianty?}
-translate C IndentComments {Odsazovat komentáøe?}
+translate C IndentComments {Odsazovat komentï¿½ï¿½e?}
 translate C IndentVariations {Odsazovat varianty?}
 # ====== TODO To be translated ======
 translate C InsertNewlines {Insert newlines every 80 chars?}
-translate C ExportColumnStyle {Sloupcový styl (jeden tah na øádek)?}
-translate C ExportSymbolStyle {Styl pro symbolické anotace:}
-translate C ExportStripMarks {Odstranit kódové znaèky polí/¹ipek z komentáøù?}
+translate C ExportColumnStyle {Sloupcovï¿½ styl (jeden tah na ï¿½ï¿½dek)?}
+translate C ExportSymbolStyle {Styl pro symbolickï¿½ anotace:}
+translate C ExportStripMarks {Odstranit kï¿½dovï¿½ znaï¿½ky polï¿½/ï¿½ipek z komentï¿½ï¿½ï¿½?}
 # ====== TODO To be translated ======
 translate C ExportFlags {Export Scid Flags}
 
 # Goto game/move dialogs:
-translate C LoadGameNumber {Vlo¾te èíslo partie:}
-translate C GotoMoveNumber {Pøejít na tah èíslo:}
+translate C LoadGameNumber {Vloï¿½te ï¿½ï¿½slo partie:}
+translate C GotoMoveNumber {Pï¿½ejï¿½t na tah ï¿½ï¿½slo:}
 
 # Copy games dialog:
-translate C CopyGames {Kopírovat partie}
+translate C CopyGames {Kopï¿½rovat partie}
 translate C CopyConfirm {
- Skuteènì chcete kopírovat
- [::utils::thousands $nGamesToCopy] filtrovaných partií
- z databáze "$fromName"
- do databáze "$targetName"?
+ Skuteï¿½nï¿½ chcete kopï¿½rovat
+ [::utils::thousands $nGamesToCopy] filtrovanï¿½ch partiï¿½
+ z databï¿½ze "$fromName"
+ do databï¿½ze "$targetName"?
 }
-translate C CopyErr {Nelze zkopírovat partie}
-translate C CopyErrSource {zdrojová databáze}
-translate C CopyErrTarget {cílová databáze}
-translate C CopyErrNoGames {nemá ¾ádné partie ve filtru}
-translate C CopyErrReadOnly {je pouze ke ètení}
-translate C CopyErrNotOpen {není otevøena}
+translate C CopyErr {Nelze zkopï¿½rovat partie}
+translate C CopyErrSource {zdrojovï¿½ databï¿½ze}
+translate C CopyErrTarget {cï¿½lovï¿½ databï¿½ze}
+translate C CopyErrNoGames {nemï¿½ ï¿½ï¿½dnï¿½ partie ve filtru}
+translate C CopyErrReadOnly {je pouze ke ï¿½tenï¿½}
+translate C CopyErrNotOpen {nenï¿½ otevï¿½ena}
 
 # Colors:
-translate C LightSquares {Bílá pole}
-translate C DarkSquares {Èerná pole}
-translate C SelectedSquares {Vybraná pole}
+translate C LightSquares {Bï¿½lï¿½ pole}
+translate C DarkSquares {ï¿½ernï¿½ pole}
+translate C SelectedSquares {Vybranï¿½ pole}
 # todo
 translate C Grid {Grid}
-translate C Previous {Pøedchozí}
-translate C WhitePieces {Bílé figury}
-translate C BlackPieces {Èerné figury}
-translate C WhiteBorder {Obrys bílých figur}
-translate C BlackBorder {Obrys èerných figur}
+translate C Previous {Pï¿½edchozï¿½}
+translate C WhitePieces {Bï¿½lï¿½ figury}
+translate C BlackPieces {ï¿½ernï¿½ figury}
+translate C WhiteBorder {Obrys bï¿½lï¿½ch figur}
+translate C BlackBorder {Obrys ï¿½ernï¿½ch figur}
 translate C ArrowMain   {Arrow}
 translate C ArrowVar    {Var Arrows}
 # ====== TODO To be translated ======
@@ -1560,10 +1575,10 @@ translate C ShowArrows  {Show Arrows}
 # Novelty window:
 translate C FindNovelty {Hledat novinku}
 translate C Novelty {Novinka}
-translate C NoveltyInterrupt {Hledání novinky pøeru¹eno}
-translate C NoveltyNone {V této partii nebyla nalezena ¾ádná novinka}
+translate C NoveltyInterrupt {Hledï¿½nï¿½ novinky pï¿½eruï¿½eno}
+translate C NoveltyNone {V tï¿½to partii nebyla nalezena ï¿½ï¿½dnï¿½ novinka}
 translate C NoveltyHelp {
-Scid bude hledat první tah aktuální partie, který dosáhne pozice, která se nevyskytla ve vybrané databázi ani v knihovnì zahájení ECO.
+Scid bude hledat prvnï¿½ tah aktuï¿½lnï¿½ partie, kterï¿½ dosï¿½hne pozice, kterï¿½ se nevyskytla ve vybranï¿½ databï¿½zi ani v knihovnï¿½ zahï¿½jenï¿½ ECO.
 }
 
 # Sounds configuration:
@@ -1577,29 +1592,29 @@ translate C SoundsAnnounceBack {Announce when retracting or moving back one move
 # Upgrading databases:
 translate C Upgrading {Upgrade}
 translate C ConfirmOpenNew {
-Toto je starý formát (Scid 2) databáze, jen¾ není mo¾no otevøít ve Scidu 3. Verze s novým formátem (Scid 3) pøitom ji¾ byla vytvoøena.
+Toto je starï¿½ formï¿½t (Scid 2) databï¿½ze, jenï¿½ nenï¿½ moï¿½no otevï¿½ï¿½t ve Scidu 3. Verze s novï¿½m formï¿½tem (Scid 3) pï¿½itom jiï¿½ byla vytvoï¿½ena.
 
-Chcete otevøít verzi s novým formátem datábáze?
+Chcete otevï¿½ï¿½t verzi s novï¿½m formï¿½tem datï¿½bï¿½ze?
 }
 translate C ConfirmUpgrade {
-Toto je starý formát (Scid 2) databáze. K otevøení ve Scidu 3 je nutno databázi nejprve zkonvertovat do nového formátu.
+Toto je starï¿½ formï¿½t (Scid 2) databï¿½ze. K otevï¿½enï¿½ ve Scidu 3 je nutno databï¿½zi nejprve zkonvertovat do novï¿½ho formï¿½tu.
 
-Upgrade vytvoøí novou verzi databáze; originální soubory se nebudou ani editovat, ani mazat.
+Upgrade vytvoï¿½ï¿½ novou verzi databï¿½ze; originï¿½lnï¿½ soubory se nebudou ani editovat, ani mazat.
 
-Tento úkon mù¾e zabrat trochu èasu, ale je tøeba jej provést pouze jednou. Mù¾ete ho pøeru¹it, pokud bude trvat pøíli¹ dlouho.
+Tento ï¿½kon mï¿½ï¿½e zabrat trochu ï¿½asu, ale je tï¿½eba jej provï¿½st pouze jednou. Mï¿½ï¿½ete ho pï¿½eruï¿½it, pokud bude trvat pï¿½ï¿½liï¿½ dlouho.
 
-Chcete tuto databázi upgradovat nyní?
+Chcete tuto databï¿½zi upgradovat nynï¿½?
 }
 
 # Recent files options:
-translate C RecentFilesMenu {Poèet nedávných souborù v menu Soubor}
-translate C RecentFilesExtra {Poèet nedávných souborù v extra podmenu}
+translate C RecentFilesMenu {Poï¿½et nedï¿½vnï¿½ch souborï¿½ v menu Soubor}
+translate C RecentFilesExtra {Poï¿½et nedï¿½vnï¿½ch souborï¿½ v extra podmenu}
 
 # My Player Names options:
 translate C MyPlayerNamesDescription {
-Otevøe seznam se jmény preferovaných hráèù, ka¾dé jméno na jeden øádek. Zástupné znaky (tj. "?" pro jakýkoliv jeden znak, "*" pro jakoukoliv sekvenci znakù) jsou povoleny.
+Otevï¿½e seznam se jmï¿½ny preferovanï¿½ch hrï¿½ï¿½ï¿½, kaï¿½dï¿½ jmï¿½no na jeden ï¿½ï¿½dek. Zï¿½stupnï¿½ znaky (tj. "?" pro jakï¿½koliv jeden znak, "*" pro jakoukoliv sekvenci znakï¿½) jsou povoleny.
 
-V¾dy, kdy¾ se natáhne partie hráèe uvedeného v seznamu, ¹achovnice v hlavním oknì se otoèí, jestli¾e je to nutné k zobrazení partie z perspektivy tohoto hráèe.
+Vï¿½dy, kdyï¿½ se natï¿½hne partie hrï¿½ï¿½e uvedenï¿½ho v seznamu, ï¿½achovnice v hlavnï¿½m oknï¿½ se otoï¿½ï¿½, jestliï¿½e je to nutnï¿½ k zobrazenï¿½ partie z perspektivy tohoto hrï¿½ï¿½e.
 }
 # ====== TODO To be translated ======
 translate C showblunderexists {show blunder exists}
@@ -1769,11 +1784,11 @@ translate C StartFromCurrentPosition {Start from current position}
 # ====== TODO To be translated ======
 translate C FixedDepth {Fixed depth}
 # ====== TODO To be translated ======
-translate C Nodes {Nodes} 
+translate C Nodes {Nodes}
 # ====== TODO To be translated ======
 translate C Depth {Depth}
 # ====== TODO To be translated ======
-translate C Time {Time} 
+translate C Time {Time}
 # ====== TODO To be translated ======
 translate C Auto {Auto}
 # ====== TODO To be translated ======
@@ -1937,11 +1952,11 @@ translate C QGDwithBg5 {QGD with Bg5}
 # ====== TODO To be translated ======
 translate C QGDOrthodox {QGD Orthodox}
 # ====== TODO To be translated ======
-translate C Grunfeld {Grünfeld}
+translate C Grunfeld {Grï¿½nfeld}
 # ====== TODO To be translated ======
-translate C GrunfeldExchange {Grünfeld Exchange}
+translate C GrunfeldExchange {Grï¿½nfeld Exchange}
 # ====== TODO To be translated ======
-translate C GrunfeldRussian {Grünfeld Russian}
+translate C GrunfeldRussian {Grï¿½nfeld Russian}
 # ====== TODO To be translated ======
 translate C Catalan {Catalan}
 # ====== TODO To be translated ======
@@ -1959,14 +1974,14 @@ translate C NimzoIndianRubinstein {Nimzo-Indian Rubinstein}
 # ====== TODO To be translated ======
 translate C KingsIndian {King's Indian}
 # ====== TODO To be translated ======
-translate C KingsIndianSamisch {King's Indian Sämisch}
+translate C KingsIndianSamisch {King's Indian Sï¿½misch}
 # ====== TODO To be translated ======
 translate C KingsIndianMainLine {King's Indian Main Line}
 # ====== TODO To be translated ======
 
 translate C ConfigureFics {Konfigurovat FICS}
-translate C FICSLogin {Pøihlásit}
-translate C FICSGuest {Pøihlásit jako host}
+translate C FICSLogin {Pï¿½ihlï¿½sit}
+translate C FICSGuest {Pï¿½ihlï¿½sit jako host}
 translate C FICSServerPort {Port serveru}
 translate C FICSServerAddress {IP adresa}
 translate C FICSRefresh {Obnovit}
@@ -1974,19 +1989,19 @@ translate C FICSRefresh {Obnovit}
 translate C FICSTimeseal {Timeseal}
 translate C FICSTimesealPort {Port timesealu}
 translate C FICSSilence {Ticho}
-translate C FICSOffers {Nabídky}
+translate C FICSOffers {Nabï¿½dky}
 # ====== TODO To be translated ======
 translate C FICSMakeOffer {Make Offer}
 translate C FICSGames {Hry}
-translate C FICSFindOpponent {Najít soupeøe}
-translate C FICSTakeback {Vrátit tah}
-translate C FICSTakeback2 {Vrátit tah 2}
-translate C FICSInitTime {Poèáteèní èas (min)}
+translate C FICSFindOpponent {Najï¿½t soupeï¿½e}
+translate C FICSTakeback {Vrï¿½tit tah}
+translate C FICSTakeback2 {Vrï¿½tit tah 2}
+translate C FICSInitTime {Poï¿½ï¿½teï¿½nï¿½ ï¿½as (min)}
 translate C FICSIncrement {Inkrement (s)}
-translate C FICSRatedGame {Partie zapoèítaná do ratingu}
-translate C FICSAutoColour {automatické}
-translate C FICSManualConfirm {potvrdit ruènì}
-translate C FICSFilterFormula {Filtrovat formulí}
+translate C FICSRatedGame {Partie zapoï¿½ï¿½tanï¿½ do ratingu}
+translate C FICSAutoColour {automatickï¿½}
+translate C FICSManualConfirm {potvrdit ruï¿½nï¿½}
+translate C FICSFilterFormula {Filtrovat formulï¿½}
 # ====== TODO To be translated ======
 translate C FICSIssueSeek {Issue seek}
 # ====== TODO To be translated ======
@@ -1996,7 +2011,7 @@ translate C FICSDecline {decline}
 translate C FICSColour {Barva}
 # ====== TODO To be translated ======
 translate C FICSSend {send}
-translate C FICSConnect {Pøipojit}
+translate C FICSConnect {Pï¿½ipojit}
 # ====== TODO To be translated ======
 translate C FICSShouts {Shouts}
 # ====== TODO To be translated ======
@@ -2014,71 +2029,71 @@ translate C FICSQuit {Quit FICS}
 # ====== TODO To be translated ======
 translate C FICSCensor {Censor}
 
-translate C CCDlgConfigureWindowTitle {Konfigurovat korespondenèní ¹ach}
-translate C CCDlgCGeneraloptions {Obecná nastavení}
-translate C CCDlgDefaultDB {Výchozí databáze:}
-translate C CCDlgInbox {Pøíchozí schránka (cesta):}
-translate C CCDlgOutbox {Odchozí schránka (cesta):}
+translate C CCDlgConfigureWindowTitle {Konfigurovat korespondenï¿½nï¿½ ï¿½ach}
+translate C CCDlgCGeneraloptions {Obecnï¿½ nastavenï¿½}
+translate C CCDlgDefaultDB {Vï¿½chozï¿½ databï¿½ze:}
+translate C CCDlgInbox {Pï¿½ï¿½chozï¿½ schrï¿½nka (cesta):}
+translate C CCDlgOutbox {Odchozï¿½ schrï¿½nka (cesta):}
 translate C CCDlgXfcc {Konfigurace Xfcc:}
-translate C CCDlgExternalProtocol {Externí nástroj pro protokoly (napø. Xfcc)}
-translate C CCDlgFetchTool {Stahovací nástroj:}
-translate C CCDlgSendTool {Odesílací nástroj:}
-translate C CCDlgEmailCommunication {E-mailová komunikace}
-translate C CCDlgMailPrg {E-mailový program:}
+translate C CCDlgExternalProtocol {Externï¿½ nï¿½stroj pro protokoly (napï¿½. Xfcc)}
+translate C CCDlgFetchTool {Stahovacï¿½ nï¿½stroj:}
+translate C CCDlgSendTool {Odesï¿½lacï¿½ nï¿½stroj:}
+translate C CCDlgEmailCommunication {E-mailovï¿½ komunikace}
+translate C CCDlgMailPrg {E-mailovï¿½ program:}
 translate C CCDlgBCCAddr {(B)CC adresa:}
-translate C CCDlgMailerMode {Re¾im:}
-translate C CCDlgThunderbirdEg {napø. Thunderbird, Mozilla Mail, Icedove...}
-translate C CCDlgMailUrlEg {napø. Evolution}
-translate C CCDlgClawsEg {napø. Sylpheed Claws}
-translate C CCDlgmailxEg {napø. mailx, mutt, nail...}
-translate C CCDlgAttachementPar {Parametr pøílohy:}
-translate C CCDlgInternalXfcc {Pou¾ít vystavìnou podporu Xfcc}
+translate C CCDlgMailerMode {Reï¿½im:}
+translate C CCDlgThunderbirdEg {napï¿½. Thunderbird, Mozilla Mail, Icedove...}
+translate C CCDlgMailUrlEg {napï¿½. Evolution}
+translate C CCDlgClawsEg {napï¿½. Sylpheed Claws}
+translate C CCDlgmailxEg {napï¿½. mailx, mutt, nail...}
+translate C CCDlgAttachementPar {Parametr pï¿½ï¿½lohy:}
+translate C CCDlgInternalXfcc {Pouï¿½ï¿½t vystavï¿½nou podporu Xfcc}
 translate C CCDlgConfirmXfcc {Potvrdit tahy}
-translate C CCDlgSubjectPar {Pøedmìt:}
-translate C CCDlgDeleteBoxes {Prázdná pøíchozí/odchozí schránka}
-translate C CCDlgDeleteBoxesText {Opravdu chcete vyprázdnit pøíchozí a odchozí schránky pro korespondeèní ¹ach? To vy¾aduje novou synchronizaci, aby mohl být zobrazen poslední stav va¹ich partií.}
+translate C CCDlgSubjectPar {Pï¿½edmï¿½t:}
+translate C CCDlgDeleteBoxes {Prï¿½zdnï¿½ pï¿½ï¿½chozï¿½/odchozï¿½ schrï¿½nka}
+translate C CCDlgDeleteBoxesText {Opravdu chcete vyprï¿½zdnit pï¿½ï¿½chozï¿½ a odchozï¿½ schrï¿½nky pro korespondeï¿½nï¿½ ï¿½ach? To vyï¿½aduje novou synchronizaci, aby mohl bï¿½t zobrazen poslednï¿½ stav vaï¿½ich partiï¿½.}
 translate C CCDlgConfirmMove {Potvrdit tah}
-translate C CCDlgConfirmMoveText {Pokud potvrdíte, následující tah a komentáø bude zaslán na server:}
-translate C CCDlgDBGameToLong {Nekonzistentní hlavní varianta}
-translate C CCDlgDBGameToLongError {Hlavní varianta v databázi je del¹í ne¾ partie v pøíchozí schránce. Jestli¾e pøíchozí schránka obsahuje aktuální partie, tj. èerstvì po synchronizaci, nìkteré tahy byly do hlavní varianty v databázi pøidány chybnì.\nV takovém pøípadì prosím zkra»te hlavní variantu do (max.) tahu\n}
-translate C CCDlgStartEmail {Zaèít novou e-mailovou partii}
-translate C CCDlgYourName {Va¹e jména:}
-translate C CCDlgYourMail {Va¹e e-mailová adresa:}
-translate C CCDlgOpponentName {Jméno soupeøe:}
-translate C CCDlgOpponentMail {E-mailová adresa soupeøe:}
-translate C CCDlgGameID {Identifikátor partie (jednoznaèný):}
-translate C CCDlgTitNoOutbox {Scid: Odchozí schránka korespondenèního ¹achu}
-translate C CCDlgTitNoInbox {Scid: Pøíchozí schránka korespondenèního ¹achu}
-translate C CCDlgTitNoGames {Scid: ®ádné korespondenèní partie}
-translate C CCErrInboxDir {Adresáø pøíchozí schránky korespondenèního ¹achu:}
-translate C CCErrOutboxDir {Adresáø odchozí schránky korespondenèního ¹achu:}
-translate C CCErrDirNotUsable {neexistuje nebo není pøístupná!\nProsím zkontrolujte a opravte nastavení.}
-translate C CCErrNoGames {neobsahuje ¾ádné partie!\nNejprve je prosím stáhnìte.}
-translate C CCDlgTitNoCCDB {Scid: ®ádná korespondenèní databáze.}
-translate C CCErrNoCCDB {®ádná korespondenèní databáze není otevøena. Prosím otevøete nìjakou ne¾ budete pou¾ívat funkce korespondenèního ¹achu.}
-translate C CCFetchBtn {Stáhnout partie ze serveru a zpracovat pøíchozí schránku}
-translate C CCPrevBtn {Jít na pøedchozí partii}
-translate C CCNextBtn {Jít na následující partii}
+translate C CCDlgConfirmMoveText {Pokud potvrdï¿½te, nï¿½sledujï¿½cï¿½ tah a komentï¿½ï¿½ bude zaslï¿½n na server:}
+translate C CCDlgDBGameToLong {Nekonzistentnï¿½ hlavnï¿½ varianta}
+translate C CCDlgDBGameToLongError {Hlavnï¿½ varianta v databï¿½zi je delï¿½ï¿½ neï¿½ partie v pï¿½ï¿½chozï¿½ schrï¿½nce. Jestliï¿½e pï¿½ï¿½chozï¿½ schrï¿½nka obsahuje aktuï¿½lnï¿½ partie, tj. ï¿½erstvï¿½ po synchronizaci, nï¿½kterï¿½ tahy byly do hlavnï¿½ varianty v databï¿½zi pï¿½idï¿½ny chybnï¿½.\nV takovï¿½m pï¿½ï¿½padï¿½ prosï¿½m zkraï¿½te hlavnï¿½ variantu do (max.) tahu\n}
+translate C CCDlgStartEmail {Zaï¿½ï¿½t novou e-mailovou partii}
+translate C CCDlgYourName {Vaï¿½e jmï¿½na:}
+translate C CCDlgYourMail {Vaï¿½e e-mailovï¿½ adresa:}
+translate C CCDlgOpponentName {Jmï¿½no soupeï¿½e:}
+translate C CCDlgOpponentMail {E-mailovï¿½ adresa soupeï¿½e:}
+translate C CCDlgGameID {Identifikï¿½tor partie (jednoznaï¿½nï¿½):}
+translate C CCDlgTitNoOutbox {Scid: Odchozï¿½ schrï¿½nka korespondenï¿½nï¿½ho ï¿½achu}
+translate C CCDlgTitNoInbox {Scid: Pï¿½ï¿½chozï¿½ schrï¿½nka korespondenï¿½nï¿½ho ï¿½achu}
+translate C CCDlgTitNoGames {Scid: ï¿½ï¿½dnï¿½ korespondenï¿½nï¿½ partie}
+translate C CCErrInboxDir {Adresï¿½ï¿½ pï¿½ï¿½chozï¿½ schrï¿½nky korespondenï¿½nï¿½ho ï¿½achu:}
+translate C CCErrOutboxDir {Adresï¿½ï¿½ odchozï¿½ schrï¿½nky korespondenï¿½nï¿½ho ï¿½achu:}
+translate C CCErrDirNotUsable {neexistuje nebo nenï¿½ pï¿½ï¿½stupnï¿½!\nProsï¿½m zkontrolujte a opravte nastavenï¿½.}
+translate C CCErrNoGames {neobsahuje ï¿½ï¿½dnï¿½ partie!\nNejprve je prosï¿½m stï¿½hnï¿½te.}
+translate C CCDlgTitNoCCDB {Scid: ï¿½ï¿½dnï¿½ korespondenï¿½nï¿½ databï¿½ze.}
+translate C CCErrNoCCDB {ï¿½ï¿½dnï¿½ korespondenï¿½nï¿½ databï¿½ze nenï¿½ otevï¿½ena. Prosï¿½m otevï¿½ete nï¿½jakou neï¿½ budete pouï¿½ï¿½vat funkce korespondenï¿½nï¿½ho ï¿½achu.}
+translate C CCFetchBtn {Stï¿½hnout partie ze serveru a zpracovat pï¿½ï¿½chozï¿½ schrï¿½nku}
+translate C CCPrevBtn {Jï¿½t na pï¿½edchozï¿½ partii}
+translate C CCNextBtn {Jï¿½t na nï¿½sledujï¿½cï¿½ partii}
 translate C CCSendBtn {Poslat tah}
-translate C CCEmptyBtn {Vyprázdnit pøíchozí a odchozí schránku}
-translate C CCHelpBtn {Nápovìda k ikonám a stavovým indikátorùm.\nPro obecnou nápovìdu stisknìte F1!}
-translate C CCDlgServerName {Jméno serveru:}
-translate C CCDlgLoginName  {Pøihla¹ovací jméno:}
+translate C CCEmptyBtn {Vyprï¿½zdnit pï¿½ï¿½chozï¿½ a odchozï¿½ schrï¿½nku}
+translate C CCHelpBtn {Nï¿½povï¿½da k ikonï¿½m a stavovï¿½m indikï¿½torï¿½m.\nPro obecnou nï¿½povï¿½du stisknï¿½te F1!}
+translate C CCDlgServerName {Jmï¿½no serveru:}
+translate C CCDlgLoginName  {Pï¿½ihlaï¿½ovacï¿½ jmï¿½no:}
 translate C CCDlgPassword   {Heslo:}
 translate C CCDlgURL        {URL Xfcc:}
 translate C CCDlgRatingType {Typ ratingu:}
-translate C CCDlgDuplicateGame {Nejednoznaèný identifikátor partie}
-translate C CCDlgDuplicateGameError {Tato partie se v databázi vyskytuje více ne¾ jednou. Prosím sma¾te v¹echny duplikáty a soubor partií zhutnìte (Soubor/Údr¾ba/Zhutnit databázi).}
-translate C CCDlgSortOption {Tøídìní:}
+translate C CCDlgDuplicateGame {Nejednoznaï¿½nï¿½ identifikï¿½tor partie}
+translate C CCDlgDuplicateGameError {Tato partie se v databï¿½zi vyskytuje vï¿½ce neï¿½ jednou. Prosï¿½m smaï¿½te vï¿½echny duplikï¿½ty a soubor partiï¿½ zhutnï¿½te (Soubor/ï¿½drï¿½ba/Zhutnit databï¿½zi).}
+translate C CCDlgSortOption {Tï¿½ï¿½dï¿½nï¿½:}
 # ====== TODO To be translated ======
 translate C CCDlgListOnlyOwnMove {Only games I have the move}
-translate C CCOrderClassicTxt {Místo, událost, kolo, výsledek, bílý, èerný}
-translate C CCOrderMyTimeTxt {Mé hodiny}
-translate C CCOrderTimePerMoveTxt {Èas na ka¾dý tah do pøí¹tí èasové kontroly}
-translate C CCOrderStartDate {Poèáteèní datum}
-translate C CCOrderOppTimeTxt {Soupeøovy hodiny}
-translate C CCDlgConfigRelay {Konfigurovat sledování ICCF}
-translate C CCDlgConfigRelayHelp {Bì¾te na stránku partií na http://www.iccf-webchess.com a zobrazte partii, která má být sledována. Pokud vidíte ¹achovnici, zkopírujte URL z prohlí¾eèe do seznamu ní¾e. Pouze jediné URL na ka¾dém øádku!\nPøíklad: http://www.iccf-webchess.com/MakeAMove.aspx?id=266452}
+translate C CCOrderClassicTxt {Mï¿½sto, udï¿½lost, kolo, vï¿½sledek, bï¿½lï¿½, ï¿½ernï¿½}
+translate C CCOrderMyTimeTxt {Mï¿½ hodiny}
+translate C CCOrderTimePerMoveTxt {ï¿½as na kaï¿½dï¿½ tah do pï¿½ï¿½ï¿½tï¿½ ï¿½asovï¿½ kontroly}
+translate C CCOrderStartDate {Poï¿½ï¿½teï¿½nï¿½ datum}
+translate C CCOrderOppTimeTxt {Soupeï¿½ovy hodiny}
+translate C CCDlgConfigRelay {Konfigurovat sledovï¿½nï¿½ ICCF}
+translate C CCDlgConfigRelayHelp {Bï¿½ï¿½te na strï¿½nku partiï¿½ na http://www.iccf-webchess.com a zobrazte partii, kterï¿½ mï¿½ bï¿½t sledovï¿½na. Pokud vidï¿½te ï¿½achovnici, zkopï¿½rujte URL z prohlï¿½ï¿½eï¿½e do seznamu nï¿½ï¿½e. Pouze jedinï¿½ URL na kaï¿½dï¿½m ï¿½ï¿½dku!\nPï¿½ï¿½klad: http://www.iccf-webchess.com/MakeAMove.aspx?id=266452}
 
 # ====== TODO To be translated ======
 translate C ExtHWConfigConnection {Configure external hardware}
@@ -2110,16 +2125,16 @@ translate C IERotate  {Rotate}
 translate C IEUnableToStart {Unable to start Input Engine:}
 # ====== TODO To be translated ======
 translate C DoneWithPosition {Done with position}
-translate C Board {©achovnice}
-translate C showGameInfo {Ukázat informace o partii}
-translate C autoResizeBoard {Automatická zmìna velikosti ¹achovnice}
-translate C DockTop {Pøesunout nahoru}
-translate C DockBottom {Pøesunout dolù}
-translate C DockLeft {Pøesunout doleva}
-translate C DockRight {Pøesunout doprava}
+translate C Board {ï¿½achovnice}
+translate C showGameInfo {Ukï¿½zat informace o partii}
+translate C autoResizeBoard {Automatickï¿½ zmï¿½na velikosti ï¿½achovnice}
+translate C DockTop {Pï¿½esunout nahoru}
+translate C DockBottom {Pï¿½esunout dolï¿½}
+translate C DockLeft {Pï¿½esunout doleva}
+translate C DockRight {Pï¿½esunout doprava}
 # ====== TODO To be translated ======
 translate C Undock {Undock}
-translate C ChangeIcon {Zmìnit ikonu}
+translate C ChangeIcon {Zmï¿½nit ikonu}
 # ====== TODO To be translated ======
 translate C More {More}
 

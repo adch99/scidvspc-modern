@@ -57,6 +57,8 @@ menuText I EditStripBegin "Mosse dall'inizio" 1 \
   {Elimina le mosse dall'inizio della partita}
 menuText I EditStripEnd "Mosse rimanenti" 0 \
   {Elimina le mosse rimanenti}
+# ====== TODO To be translated ======
+menuText I EditFlip "Flip Board" 0 {Flip the board}
 menuText I EditReset "Vuota la Clipbase" 0 \
   {Svuota completamente la clipbase}
 menuText I EditCopy "Copia questa partita nella Clipbase" 1 \
@@ -131,6 +133,18 @@ menuText I WindowsTB "Finestra di Tablebase di finale" 12 \
   {Apre/chiude la finestra Tablebase}
 menuText I WindowsBook "Libro delle aperture" 0 {Apre/chiude la finestra del libro delle aperture}
 menuText I WindowsCorrChess "Gioco per corrispondenza" 0 {Apre/chiude la finestra per il gioco per corrispondenza}
+# ====== TODO To be translated ======
+menuText I Analyse "Analyse" 0
+# ====== TODO To be translated ======
+menuText I AnalyseEngineList "Analysis Engines" 0 {Configure analysis engines}
+# ====== TODO To be translated ======
+menuText I AnalyseRating "Player Ratings" 0 {Graph the rating history of the current game players}
+# ====== TODO To be translated ======
+menuText I AnalyseScore "Score Graph" 0 {Show the score graph window}
+# ====== TODO To be translated ======
+menuText I AnalyseStartEngine1 "Start engine 1" 0  {Start engine 1}
+# ====== TODO To be translated ======
+menuText I AnalyseStartEngine2 "Start engine 2" 0  {Start engine 2}
 
 # Tools menu:
 menuText I Tools "Strumenti" 0
@@ -364,7 +378,7 @@ menuText I OptionsInformant "Configura i valori informativi" 0
 menuText I OptionsSave "Salva Opzioni" 0 \
   "Salva tutte le opzioni definibili nel file $::optionsFile"
 # ====== TODO To be translated ======
-menuText I OptionsSaveBases "Save Bases as Default" 0 
+menuText I OptionsSaveBases "Save Bases as Default" 0
 menuText I OptionsAutoSave "Salva Opzioni all'uscita" 0 \
   {Salva automaticamente tutte le opzioni quando si esce da Scid}
 
@@ -1998,7 +2012,7 @@ translate I CountBestMoves {Count Best Moves}
 
 set tips(I) {
   {
-    SCID ha oltre 30 <a Index>pagine di help</a>, e in molte finestre 
+    SCID ha oltre 30 <a Index>pagine di help</a>, e in molte finestre
     premendo il tasto funzionale <b>F1</b> apparira' una pagina di help
     relativa alla finestra.
   }
@@ -2011,7 +2025,7 @@ set tips(I) {
     SCID ti consente piu' di una modalit� per inserire le mosse, scegli
     quale preferisci. Puoi utilizzare il mouse (con o senza il suggerimento
     della mossa) o la tastiera (con o senza il completamento della mossa).
-    Leggi la pagina di help <a Moves>inserire le mosse</a> per maggiori dettagli. 
+    Leggi la pagina di help <a Moves>inserire le mosse</a> per maggiori dettagli.
   }
   {
     Se utilizzi pochi database che apri spesso, aggiungi un
@@ -2027,7 +2041,7 @@ set tips(I) {
   }
   {
     Puoi copiare partite da un database ad un'altro usando la tecnica del
-    drag and drop utilizzando il tasto sinistro del mouse nella finestra 
+    drag and drop utilizzando il tasto sinistro del mouse nella finestra
     <a Switcher>database switcher</a>.
   }
   {
@@ -2059,15 +2073,15 @@ set tips(I) {
     Quando studi un'apertura puo' essere utile effettuare una
     <a Searches Board>ricerca su scacchiera</a> con le opzioni
     <b>Pedoni</b> oppure <b>Colonne</b> sulla posizione che ti
-    interessa, in maniera da evidenziarti se altre aperture 
+    interessa, in maniera da evidenziarti se altre aperture
     raggiungono la stessa struttura di pedoni.
   }
   {
     Nell'Area di informazioni sulla partita (sotto la scacchiera) tu puoi
-    premere il tasto destro del mouse per ottenere un menu' per 
+    premere il tasto destro del mouse per ottenere un menu' per
     personalizzarla. Per esempio puoi nascondere la prossima mossa e cio'
     e' utile quando visualizzi una partita per allenamento e vuoi pensare
-    le mosse successive. 
+    le mosse successive.
   }
   {
     Se tu effettui spesso <a Maintenance>manutenzione</a> di un database
@@ -2135,7 +2149,7 @@ set tips(I) {
     nella finestra <a Searches Material>Materiale/Schema</a> e'
     spesso utile restringere la ricerca a partite che permangono
     nella posizione voluta almeno qualche mezza mossa eliminando
-    partite che raggiungono la posizione voluta solo una volta. 
+    partite che raggiungono la posizione voluta solo una volta.
   }
   {
     Se tu hai un importante database e non vuoi correre il rischio
@@ -2149,7 +2163,7 @@ set tips(I) {
     standard FEN) e vuoi copiare la tua posizione su SCID, il modo piu'
     facile e veloce e' selezionare <b>Copia Positione</b> dal menu File
     in XBoard/WinBoard e poi <b>Copia come posizione di partenza</b> dal
-    menu Edita in SCID.  
+    menu Edita in SCID.
   }
   {
     In una <a Searches Header>ricerca per intestazione</a>,

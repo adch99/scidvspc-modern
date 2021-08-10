@@ -29,7 +29,7 @@ menuText P FileBookmarksSub "Wyświetl katalogi jako menu" 0 \
 menuText P FileReadOnly "Tylko do odczytu..." 0 \
   {Zabezpiecz bazę przed zapisem}
 menuText P FileSwitch "Przełącz bazę" 1 \
-  {Przełącz na inną otwartą bazę} 
+  {Przełącz na inną otwartą bazę}
 menuText P FileExit "Koniec" 0 {Zamknij Scida}
 
 menuText P Edit "Edytuj" 0
@@ -54,6 +54,8 @@ menuText P EditStripBegin "Poprzednie posunięcia" 0 \
   {Usuń wszystkie posunięcia do bieżącej pozycji}
 menuText P EditStripEnd "Następne posunięcia" 0 \
   {Usuń wszystkie posunięcia od bieżącej pozycji do końca partii}
+# ====== TODO To be translated ======
+menuText P EditFlip "Flip Board" 0 {Flip the board}
 menuText P EditReset "Opróżnij schowek" 0 \
   {Opróżnij schowek bazy}
 menuText P EditCopy "Kopiuj partię do schowka" 0 \
@@ -135,6 +137,18 @@ menuText P WindowsTB "Tablica końcówek" 8 \
   {Otwórz/zamknij okno tablicy końcówek}
 menuText P WindowsBook "Książka debiutowa" 0 {Otwórz/zamknij książkę debiutową}
 menuText P WindowsCorrChess "Gra korespondencyjna" 0 {Otwórz/zamknij okno gry korespondencyjnej}
+# ====== TODO To be translated ======
+menuText P Analyse "Analyse" 0
+# ====== TODO To be translated ======
+menuText P AnalyseEngineList "Analysis Engines" 0 {Configure analysis engines}
+# ====== TODO To be translated ======
+menuText P AnalyseRating "Player Ratings" 0 {Graph the rating history of the current game players}
+# ====== TODO To be translated ======
+menuText P AnalyseScore "Score Graph" 0 {Show the score graph window}
+# ====== TODO To be translated ======
+menuText P AnalyseStartEngine1 "Start engine 1" 0  {Start engine 1}
+# ====== TODO To be translated ======
+menuText P AnalyseStartEngine2 "Start engine 2" 0  {Start engine 2}
 
 menuText P Tools "Narzędzia" 0
 menuText P ToolsAnalysis "Program analizujący..." 8 \
@@ -146,7 +160,7 @@ menuText P ToolsFilterGraph "Uśredniony wykres filtra" 7 \
 menuText P ToolsAbsFilterGraph "Wykres filtra" 7 {Otwórz/zamknij wykres filtra}
 menuText P ToolsOpReport "Raport debiutowy" 0 \
   {Utwórz raport debiutowy dla aktualnej pozycji}
-menuText P ToolsTracker "Śledzenie figur"  1 {Otwórz/zamknij okno śledzenia figur} 
+menuText P ToolsTracker "Śledzenie figur"  1 {Otwórz/zamknij okno śledzenia figur}
 menuText P ToolsTraining "Trening"  0 {Narzędzia do treningu taktyki i debiutów}
 menuText P ToolsComp "Turniej komputerowy" 2 {Turniej programów komputerowych}
 menuText P ToolsTacticalGame "Partia taktyczna"  0 {Rozegraj partię z taktyką}
@@ -189,7 +203,7 @@ menuText P ToolsConnectHardwareInputEngineConnect "Podłącz urządzenie wejści
 menuText P ToolsPInfo "Informacje o zawodniku"  0 \
   {Otwórz/odśwież okno informacji o zawodniku}
 menuText P ToolsPlayerReport "Raport o graczu" 9 \
-  {Utwórz raport o graczu} 
+  {Utwórz raport o graczu}
 menuText P ToolsRating "Wykres rankingu" 0 \
   {Wykres historii rankingu grających partię}
 menuText P ToolsScore "Wykres wyników" 1 {Pokaż wykres wyników}
@@ -199,7 +213,7 @@ menuText P ToolsExpCurrentPGN "Do pliku PGN..." 9 \
   {Zapisz partię do pliku PGN}
 menuText P ToolsExpCurrentHTML "Do pliku HTML..." 9 \
   {Zapisz partię do pliku HTML}
-menuText P ToolsExpCurrentHTMLJS "Eksportuj partię do HTML z JavaScriptem..." 15 {Zapisz aktualną partię do pliku HTML z JavaScriptem}  
+menuText P ToolsExpCurrentHTMLJS "Eksportuj partię do HTML z JavaScriptem..." 15 {Zapisz aktualną partię do pliku HTML z JavaScriptem}
 menuText P ToolsExpCurrentLaTeX "Do pliku LaTeX-a..." 9 \
   {Zapisz partię do pliku LaTeX-a}
 # ====== TODO To be translated ======
@@ -209,7 +223,7 @@ menuText P ToolsExpFilterPGN "Do pliku PGN..." 9 \
   {Zapisz wyszukane partie do pliku PGN}
 menuText P ToolsExpFilterHTML "Do pliku HTML..." 9 \
   {Zapisz wyszukane partie do pliku HTML}
-menuText P ToolsExpFilterHTMLJS "Eksportuj filtr do HTML z Javascriptem..." 17 {Zapisz wszystkie partie w filtrze do pliku HTML z Javascriptem}  
+menuText P ToolsExpFilterHTMLJS "Eksportuj filtr do HTML z Javascriptem..." 17 {Zapisz wszystkie partie w filtrze do pliku HTML z Javascriptem}
 menuText P ToolsExpFilterLaTeX "Do pliku LaTeX..." 9 \
   {Zapisz wyszukane partie do pliku LaTeX}
 # ====== TODO To be translated ======
@@ -270,7 +284,7 @@ menuText P OptionsNames "Moje nazwiska" 0 {Modyfikuj listę moich graczy}
 menuText P OptionsExport "Eksport" 0 {Zmień opcje eksportu tekstu}
 menuText P OptionsFonts "Czcionka" 0 {Zmień czcionkę}
 menuText P OptionsFontsRegular "Podstawowa" 0 {Zmień podstawową czcionkę}
-menuText P OptionsFontsMenu "Menu" 0 {Zmień czcionkę menu} 
+menuText P OptionsFontsMenu "Menu" 0 {Zmień czcionkę menu}
 menuText P OptionsFontsSmall "Mała" 0 {Zmień małą czcionkę}
 menuText P OptionsFontsFixed "Stała" 0 {Zmień czcionkę stałej szerokości}
 menuText P OptionsGInfo "Informacje o partii" 0 {Sposób wyświetlania informacji o partii}
@@ -301,13 +315,13 @@ menuText P OptionsMoves "Posunięcia" 0 {Wprowadzanie posunięć}
 menuText P OptionsMovesAsk "Zapytaj przed zastąpieniem posunięć" 0 \
   {Zapytaj przed zastąpieniem aktualnych posunięć}
 menuText P OptionsMovesAnimate "Szybkość animacji" 1 \
-  {Ustaw czas przeznaczony na animację jednego posunięcia} 
+  {Ustaw czas przeznaczony na animację jednego posunięcia}
 menuText P OptionsMovesDelay "Automatyczne przeglądanie..." 0 \
   {Ustaw opóźnienie przy automatycznym przeglądaniu partii}
 menuText P OptionsMovesCoord "Posunięcia w formacie \"g1f3\"" 0 \
   {Akceptuj posunięcia wprowadzone w formacie "g1f3"}
-menuText P OptionsShowVarPopup "Pokaż okno wariantów" 0 {Włącz/wyłącz wyświetlanie okna wariantów}  
-menuText P OptionsMovesSpace "Dodaj spację po numerze posunięcia" 0 {Dodawaj spację po numerze posunięcia}  
+menuText P OptionsShowVarPopup "Pokaż okno wariantów" 0 {Włącz/wyłącz wyświetlanie okna wariantów}
+menuText P OptionsMovesSpace "Dodaj spację po numerze posunięcia" 0 {Dodawaj spację po numerze posunięcia}
 menuText P OptionsMovesKey "Automatyczne dopełnianie posunięć" 1 \
   {Wącz/wyłącz automatyczne dopełnianie posunięć wprowadzanych z klawiatury}
 menuText P OptionsMovesShowVarArrows "Pokaż strzałki wariantów" 0 {Włącz/wyłącz strzałki pokazujące ruchy wariantów}
@@ -336,7 +350,7 @@ menuText P OptionsSpell "Wczytaj plik sprawdzania pisowni..." 13 \
 menuText P OptionsTable "Katalog z bazą końcówek..." 10 \
   {Wybierz bazę końcówek; użyte zostaną wszystkie bazy z tego katalogu}
 menuText P OptionsRecent "Ostatnie pliki..." 0 \
-  {Zmień liczbę ostatnio otwartych plików, wyświetlanych w menu Plik} 
+  {Zmień liczbę ostatnio otwartych plików, wyświetlanych w menu Plik}
 
 menuText P OptionsBooksDir "Katalog książek debiutowych..." 0 {Ustaw katalog książek debiutowych}
 menuText P OptionsTacticsBasesDir "Katalog baz..." 0 {Ustaw katalog baz treningowych}
@@ -344,12 +358,12 @@ menuText P OptionsInformant "Konfiguruj oceny Informatora" 0
 menuText P OptionsSave "Zapamiętaj opcje" 0 \
   "Zapamiętaj wszystkie ustawienia w pliku $::optionsFile"
 # ====== TODO To be translated ======
-menuText P OptionsSaveBases "Save Bases as Default" 0 
+menuText P OptionsSaveBases "Save Bases as Default" 0
 menuText P OptionsAutoSave "Automatycznie zapisuj opcje" 0 \
   {Automatycznie zapisz opcje przy zamykaniu programu}
 
 menuText P Help "Pomoc" 2
-menuText P HelpContents "Spis treści" 0 {Pokaż spis treści pomocy} 
+menuText P HelpContents "Spis treści" 0 {Pokaż spis treści pomocy}
 menuText P HelpIndex "Spis treści" 0 {Pokaż indeks pomocy}
 menuText P HelpGuide "Krótki przewodnik" 0 {Pokaż krótki przewodnik}
 menuText P HelpHints "Podpowiedzi" 0 {Pokaż podpowiedzi}
@@ -365,7 +379,7 @@ menuText P GInfoShow "Strona na posunięciu" 0
 menuText P GInfoCoords "Przełącz koordynaty" 0
 menuText P GInfoMaterial "Pokaż materiał" 0
 menuText P GInfoFEN "Pokaż pozycję w formacie FEN" 16
-menuText P GInfoMarks "Pokazuj kolorowe pola i strzałki" 5 
+menuText P GInfoMarks "Pokazuj kolorowe pola i strzałki" 5
 menuText P GInfoWrap "Zawijaj długie linie" 0
 menuText P GInfoFullComment "Pokaż cały komentarz" 6
 menuText P GInfoPhotos "Pokaż zdjęcia" 5
@@ -463,7 +477,7 @@ translate P IgnoreColors {Ignoruj kolory}
 translate P MatchEnd {End pos only}
 translate P Date {Data}
 translate P EventDate {Turniej data}
-translate P Decade {Dekada} 
+translate P Decade {Dekada}
 translate P Year {Rok}
 translate P Month {Miesiąc}
 translate P Months {Styczeń Luty Marzec Kwiecień Maj Czerwiec Lipiec Sierpień Wrzesień Październik Listopad Grudzień}
@@ -499,7 +513,7 @@ translate P prevTags {Use previous}
 translate P value {Value}
 
 # Standard error messages:
-translate P ErrNotOpen {To nie jest otwarta baza.} 
+translate P ErrNotOpen {To nie jest otwarta baza.}
 translate P ErrReadOnly {Ta baza jest tylko do odczytu; nie można jej zmienić.}
 translate P ErrSearchInterrupted {Wyszukiwanie zostało przerwane. Wyniki będą niepełne.}
 
@@ -523,7 +537,7 @@ translate P PInfoMostWhite {Najczęstsze debiuty białymi}
 translate P PInfoMostBlack {Najczęstsze debiuty czarnymi}
 translate P PInfoRating {Historia rankingu}
 translate P PInfoBio {Biografia}
-translate P PInfoEditRatings {Modyfikuj rankingi} 
+translate P PInfoEditRatings {Modyfikuj rankingi}
 translate P PinfoEditName {Edytuj Nazwisko}
 translate P PinfoLookupName {Wyszukaj Nazwisko}
 
@@ -542,9 +556,9 @@ translate P allOthersLose {inne posunięcia przegrywają}
 translate P matesIn {matują w}
 translate P longest {najlepsze}
 translate P WinningMoves {Wygrywające posunięcia}
-translate P DrawingMoves {Remisujące posunięcia} 
-translate P LosingMoves {Przegrywające posunięcia} 
-translate P UnknownMoves {Posunięcia o nieznanej ocenie} 
+translate P DrawingMoves {Remisujące posunięcia}
+translate P LosingMoves {Przegrywające posunięcia}
+translate P UnknownMoves {Posunięcia o nieznanej ocenie}
 
 # Tip of the day:
 translate P Tip {Porada}
@@ -720,7 +734,7 @@ menuText P GraphOptionsDots "Show Dots" 0
 menuText P GraphOptionsBar "Highlight Current Move" 0
 menuText P GraphOptionsBoth "Oba kolory" 1
 menuText P GraphOptionsPInfo "Gracz z Informacji o graczu" 0
-translate P GraphFilterTitle "Filtr: częstość na 1000 partii" 
+translate P GraphFilterTitle "Filtr: częstość na 1000 partii"
 translate P GraphAbsFilterTitle "Wykres filtra: częstość partii"
 translate P ConfigureFilter {Konfiguruj oś X: rok, ranking i posunięcia}
 translate P FilterEstimate "Oszacuj"
@@ -760,7 +774,7 @@ translate P BlundersThreshold {Granica błędu}
 # ====== TODO To be translated ======
 translate P ScoreFormat {Score format}
 translate P CutOff {Odcięcie}
-translate P LowPriority {Niski priorytet CPU} 
+translate P LowPriority {Niski priorytet CPU}
 translate P LogEngines {Loguj enginy}
 translate P LogName {Dodaj Nazwisko}
 # ====== TODO To be translated ======
@@ -791,13 +805,13 @@ translate P EngineKey {Key}
 translate P EngineType {Type}
 translate P EngineName {Nazwa}
 translate P EngineCmd {Polecenie}
-translate P EngineArgs {Parametry} 
+translate P EngineArgs {Parametry}
 translate P EngineDir {Katalog}
 translate P EngineElo {Elo}
 translate P EngineTime {Data}
 translate P EngineNew {Dodaj}
 translate P EngineEdit {Edytuj}
-translate P EngineRequired {Pola wytłuszczone są konieczne; reszta opcjonalna} 
+translate P EngineRequired {Pola wytłuszczone są konieczne; reszta opcjonalna}
 
 # Stats window menus:
 menuText P StatsFile "Plik" 0
@@ -885,7 +899,7 @@ menuText P CrosstabHelpIndex "Spis treści" 0
 translate P SetFilter {Ustaw filtr}
 translate P AddToFilter {Dodaj do filtra}
 translate P Swiss {Szwajcar}
-translate P Category {Kategoria} 
+translate P Category {Kategoria}
 
 # Opening report window menus:
 menuText P OprepFile "Plik" 0
@@ -894,10 +908,10 @@ menuText P OprepFileHtml "Zapisz w pliku HTML..." 15
 menuText P OprepFileLaTeX "Zapisz w pliku LaTeX-a..." 15
 menuText P OprepFileOptions "Opcje" 2
 menuText P OprepFileClose "Zamknij okno raportu" 0
-menuText P OprepFavorites "Ulubione" 1 
-menuText P OprepFavoritesAdd "Dodaj raport..." 0 
+menuText P OprepFavorites "Ulubione" 1
+menuText P OprepFavoritesAdd "Dodaj raport..." 0
 menuText P OprepFavoritesEdit "Modyfikuj ulubione..." 0
-menuText P OprepFavoritesGenerate "Twórz raporty..." 0 
+menuText P OprepFavoritesGenerate "Twórz raporty..." 0
 menuText P OprepHelp "Pomoc" 2
 menuText P OprepHelpReport "Pomoc raportu debiutowego" 0
 menuText P OprepHelpIndex "Spis treści" 0
@@ -970,9 +984,9 @@ translate P GlistSort {Sort database}
 translate P GlistRemoveThisGameFromFilter  {Usuń}
 translate P GlistRemoveGameAndAboveFromFilter  {Usuń tę i poprzednie partie}
 translate P GlistRemoveGameAndBelowFromFilter  {Usuń tę i następne partie}
-translate P GlistDeleteGame {Usuń/przywróć tę partię} 
-translate P GlistDeleteAllGames {Usuń wszystkie partie z filtra} 
-translate P GlistUndeleteAllGames {Przywróć wszystkie partie z filtra} 
+translate P GlistDeleteGame {Usuń/przywróć tę partię}
+translate P GlistDeleteAllGames {Usuń wszystkie partie z filtra}
+translate P GlistUndeleteAllGames {Przywróć wszystkie partie z filtra}
 # ====== TODO To be translated ======
 translate P GlistAlignL {Align left}
 # ====== TODO To be translated ======
@@ -988,7 +1002,7 @@ translate P NumDeletedGames {Liczba usuniętych partii:}
 translate P NumFilterGames {Liczba partii w filtrze:}
 translate P YearRange {Data:}
 translate P RatingRange {Ranking:}
-translate P Description {Opis} 
+translate P Description {Opis}
 translate P Flag {Oznaczenie:}
 translate P CustomFlags {Flagi użytkownika}
 translate P DeleteCurrent {Usuń aktualną partię}
@@ -1021,7 +1035,7 @@ translate P CompactDatabase {Uporządkuj bazę}
 translate P SortDatabase {Sortuj bazę}
 translate P AddEloRatings {Dodaj rankingi ELO}
 translate P AutoloadGame {Domyślna partia}
-translate P StripTags {Usuń znaczniki PGN} 
+translate P StripTags {Usuń znaczniki PGN}
 translate P StripTag {Usuń znacznik}
 translate P CheckGames {Sprawdź partie}
 translate P Cleaner {Zestaw zadań}
@@ -1064,7 +1078,7 @@ translate P InsertMark {Wstaw znak}
 translate P InsertMarkHelp {
 Dodaj/usuń znacznik: wybierz kolor, typ i pole.
 Dodaj/usuń strzałkę: kliknij prawym przyciskiem na dwóch polach.
-} 
+}
 
 # Nag buttons in comment editor:
 translate P GoodMove {Silne posunięcie}
@@ -1073,13 +1087,13 @@ translate P ExcellentMove {Znakomite posunięcie}
 translate P Blunder {Podstawka}
 translate P InterestingMove {Ciekawe posunięcie}
 translate P DubiousMove {Wątpliwe posunięcie}
-translate P WhiteDecisiveAdvantage {Białe mają decydującą przewagę} 
-translate P BlackDecisiveAdvantage {Czarne mają decydującą przewagę} 
-translate P WhiteClearAdvantage {Białe mają wyraźną przewagę} 
-translate P BlackClearAdvantage {Czarne  mają wyraźną przewagę} 
-translate P WhiteSlightAdvantage {Białe mają niewielką przewagę} 
+translate P WhiteDecisiveAdvantage {Białe mają decydującą przewagę}
+translate P BlackDecisiveAdvantage {Czarne mają decydującą przewagę}
+translate P WhiteClearAdvantage {Białe mają wyraźną przewagę}
+translate P BlackClearAdvantage {Czarne  mają wyraźną przewagę}
+translate P WhiteSlightAdvantage {Białe mają niewielką przewagę}
 translate P BlackSlightAdvantage {Czarne mają niewielką przewagę}
-translate P Equality {Równowaga} 
+translate P Equality {Równowaga}
 translate P Unclear {Niejasna pozycja}
 translate P Diagram {Diagram}
 
@@ -1122,8 +1136,8 @@ translate P MatchForAtLeast {Pasuje min.}
 translate P HalfMoves {półruchy}
 
 # Common endings in material search:
-translate P EndingPawns {Końcówki pionowe} 
-translate P EndingRookVsPawns {Wieża na pion(y)} 
+translate P EndingPawns {Końcówki pionowe}
+translate P EndingRookVsPawns {Wieża na pion(y)}
 translate P EndingRookPawnVsRook {Wieża i pion na wieżę}
 translate P EndingRookPawnsVsRook {Wieża i pion(y) na wieżę}
 translate P EndingRooks {Końcówki wieżowe}
@@ -1137,14 +1151,14 @@ translate P EndingQueenPawnVsQueen {Hetman i pion na hetmana}
 translate P BishopPairVsKnightPair {Dwa gońce na dwa skoczki w grze środkowej}
 
 # Common patterns in material search:
-translate P PatternWhiteIQP {Izolowany pion u białych} 
+translate P PatternWhiteIQP {Izolowany pion u białych}
 translate P PatternWhiteIQPBreakE6 {Izolowowany pion u białych: przełom d4-d5 przy pionku e6}
 translate P PatternWhiteIQPBreakC6 {Izolowowany pion u białych: przełom d4-d5 przy pionku c6}
 translate P PatternBlackIQP {Izolowany pion u czarnych}
 translate P PatternWhiteBlackIQP {Izolowane piony u obu stron}
 translate P PatternCoupleC3D4 {Wiszące białe piony c3+d4}
 translate P PatternHangingC5D5 {Wiszące czarne piony c5+d5}
-translate P PatternMaroczy {Struktura Maroczego (piony na c4 i e4)} 
+translate P PatternMaroczy {Struktura Maroczego (piony na c4 i e4)}
 translate P PatternRookSacC3 {Ofiara wieży na c3}
 translate P PatternKc1Kg8 {Różnostronne roszady (Kc1 i Kg8)}
 translate P PatternKg1Kc8 {Różnostronne roszady (Kg1 i Kc8)}
@@ -1193,7 +1207,7 @@ Na pewno zabezpieczyć bazę przed zapisem?}
 translate P ExitDialog {Na pewno zakończyć pracę z programem?}
 # ====== TODO To be translated ======
 translate P ClearGameDialog {This game has been altered.\nDo you wish to save it?}
-translate P ExitUnsaved {Następujące bazy zawierają niezapisane zmiany. Jeśli zamkniesz program teraz, zmiany zostaną utracone.} 
+translate P ExitUnsaved {Następujące bazy zawierają niezapisane zmiany. Jeśli zamkniesz program teraz, zmiany zostaną utracone.}
 # ====== TODO To be translated ======
 translate P ChangeTextDialog {Enabling text colour globally requires restart.}
 # ====== TODO To be translated ======
@@ -1236,7 +1250,7 @@ translate P OprepUp {więcej o %u%s niż w całej bazie}
 translate P OprepDown {mniej o %u%s niż w całej bazie}
 translate P OprepSame {jak w całej bazie}
 translate P OprepMostFrequent {Gracze najczęściej stosujący wariant}
-translate P OprepMostFrequentOpponents {Przeciwnicy} 
+translate P OprepMostFrequentOpponents {Przeciwnicy}
 translate P OprepRatingsPerf {Rankingi i wyniki}
 translate P OprepAvgPerf {średnie rankingi i wyniki}
 translate P OprepWRating {Ranking białych}
@@ -1262,15 +1276,15 @@ translate P OprepMoveOrdersAll \
 translate P OprepMoveOrdersMany \
   {Badana pozycja powstawała na %u sposobów. Najczęstsze %u to:}
 translate P OprepMovesFrom {Posunięcia w badanej pozycji}
-translate P OprepMostFrequentEcoCodes {Najczęstsze kody ECO} 
+translate P OprepMostFrequentEcoCodes {Najczęstsze kody ECO}
 translate P OprepThemes {Motywy pozycyjne}
-translate P OprepThemeDescription {Częstość motywów w pierwszych %u posunięciach partii} 
+translate P OprepThemeDescription {Częstość motywów w pierwszych %u posunięciach partii}
 translate P OprepThemeSameCastling {Jednostronne roszady}
 translate P OprepThemeOppCastling {Różnostronne roszady}
 translate P OprepThemeNoCastling {Obie strony bez roszady}
 translate P OprepThemeKPawnStorm {Atak pionowy na skrzydle królewskim}
 translate P OprepThemeQueenswap {Wymiana hetmanów}
-translate P OprepThemeWIQP {Izolowany pion białych} 
+translate P OprepThemeWIQP {Izolowany pion białych}
 translate P OprepThemeBIQP {Izolowany pion czarnych}
 translate P OprepThemeWP567 {Biały pion na 5/6/7 linii}
 translate P OprepThemeBP234 {Czarny pion na 2/3/4 linii}
@@ -1286,8 +1300,8 @@ translate P OprepExtraMoves {Dodatkowe posunięcia w przypisach}
 translate P OprepMaxGames {Maksymalna liczba partii w teorii}
 # ====== TODO To be translated ======
 translate P OprepMaxLines {Maximum games for statistics}
-translate P OprepViewHTML {Źródło HTML} 
-translate P OprepViewLaTeX {Źródło LaTeX} 
+translate P OprepViewHTML {Źródło HTML}
+translate P OprepViewLaTeX {Źródło LaTeX}
 
 # Player Report:
 translate P PReportTitle {Raport o graczu}
@@ -1339,8 +1353,8 @@ translate P TwinsUndelete {Odzyskać wszystkie partie przed poszukiwaniem?}
 translate P TwinsSetFilter {Wstawić wszystkie usunięte partie do filtra?}
 translate P TwinsComments {Zawsze zachowywać partie komentowane?}
 translate P TwinsVars {Zawsze zachowywać partie z wariantami?}
-translate P TwinsDeleteWhich {Którą partię usunąć:} 
-translate P TwinsDeleteShorter {Krótszą} 
+translate P TwinsDeleteWhich {Którą partię usunąć:}
+translate P TwinsDeleteShorter {Krótszą}
 translate P TwinsDeleteOlder {O niższym numerze}
 translate P TwinsDeleteNewer {O wyższym numerze}
 translate P TwinsDelete {Usuń partie}
@@ -1394,7 +1408,7 @@ translate P IndentVariations {Wcinaj warianty?}
 translate P InsertNewlines {Insert newlines every 80 chars?}
 translate P ExportColumnStyle {Kolumny (jedno posunięcie w wierszu)?}
 translate P ExportSymbolStyle {Styl znaków komentarza:}
-translate P ExportStripMarks {Usuwać z komentarzy kody kolorowania pól/strzałek?} 
+translate P ExportStripMarks {Usuwać z komentarzy kody kolorowania pól/strzałek?}
 # ====== TODO To be translated ======
 translate P ExportFlags {Export Scid Flags}
 
@@ -1468,8 +1482,8 @@ Przekonwertować bazę?
 }
 
 # Recent files options:
-translate P RecentFilesMenu {Liczba ostatnich plików w menu Plik} 
-translate P RecentFilesExtra {Liczba ostatnich plików w dodatkowym podmenu} 
+translate P RecentFilesMenu {Liczba ostatnich plików w menu Plik}
+translate P RecentFilesExtra {Liczba ostatnich plików w dodatkowym podmenu}
 
 # My Player Names options:
 translate P MyPlayerNamesDescription {
@@ -1561,9 +1575,9 @@ translate P Opening {Debiut}
 translate P RandomLevel {Losowy poziom}
 translate P StartFromCurrentPosition {Rozpocznij od aktualnej pozycji}
 translate P FixedDepth {Stała głębokość}
-translate P Nodes {Pozycje} 
+translate P Nodes {Pozycje}
 translate P Depth {Głębokość}
-translate P Time {Czas} 
+translate P Time {Czas}
 # ====== TODO To be translated ======
 translate P Auto {Auto}
 # ====== TODO To be translated ======

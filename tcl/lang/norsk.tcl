@@ -4,7 +4,7 @@
 # Text for menu names and status bar help messages in Norwegian.
 # First created for Scid 3.2.beta2
 # Thanks to Martin Skjöldebrand, swedish.tcl was of great help to me.
-# Massive update for Scid vs PC 4.19. Translated missing strings, 
+# Massive update for Scid vs PC 4.19. Translated missing strings,
 # fixed some inconsistencies and aligned with english.tcl. 180815 MS
 # Updated for Scid vs PC 4.20 190324 MS
 # Updated for Scid vs PC 4.21 200102 MS
@@ -88,6 +88,8 @@ menuText O EditStripBegin "Trekk fra begynnelsen" 1 \
   {Fjern trekk fra begynnelsen av partiet}
 menuText O EditStripEnd "Trekk til slutten" 0 \
   {Fjern trekk til slutten av partiet}
+# ====== TODO To be translated ======
+menuText O EditFlip "Flip Board" 0 {Flip the board}
 menuText O EditReset "Rensk utklippsbase" 0 \
   {Tømmer utklippsbasen fullstendig}
 menuText O EditCopy "Kopier partiet til utklippsbasen" 0 \
@@ -153,6 +155,18 @@ menuText O WindowsTree "Trevindu" 0 {Åpne/lukk trevinduet}
 menuText O WindowsTB "Sluttspilltabellvindu" 0 {Åpne/lukk sluttspilltabellen}
 menuText O WindowsBook "Bokvindu" 0 {Åpne/lukke bok-vinduet}
 menuText O WindowsCorrChess "Fjernsjakk" 0 {Åpne/lukke fjernsjakk-vinduet}
+# ====== TODO To be translated ======
+menuText O Analyse "Analyse" 0
+# ====== TODO To be translated ======
+menuText O AnalyseEngineList "Analysis Engines" 0 {Configure analysis engines}
+# ====== TODO To be translated ======
+menuText O AnalyseRating "Player Ratings" 0 {Graph the rating history of the current game players}
+# ====== TODO To be translated ======
+menuText O AnalyseScore "Score Graph" 0 {Show the score graph window}
+# ====== TODO To be translated ======
+menuText O AnalyseStartEngine1 "Start engine 1" 0  {Start engine 1}
+# ====== TODO To be translated ======
+menuText O AnalyseStartEngine2 "Start engine 2" 0  {Start engine 2}
 
 # Tools menu: TODO: snarveier
 menuText O Tools "Verktøy" 0
@@ -332,7 +346,7 @@ menuText O OptionsBooksDir "Mappe med åpningsbøker..." 0 {Angir mappe med åpn
 menuText O OptionsTacticsBasesDir "Mappe med oppgaver..." 0 {Angir mappe med taktiske oppgaver}
 menuText O OptionsInformant "Kvalitetsverdier" 0
 menuText O OptionsSave "Lagre innstillinger" 0 "Lagre alle instillinger til $::optionsFile"
-menuText O OptionsSaveBases "Lagre baser som standard" 0 
+menuText O OptionsSaveBases "Lagre baser som standard" 0
 menuText O OptionsAutoSave "Autolagre innstillinger ved avslutning" 0 \
   {Autolagre alle innstillinger når Scid avsluttes}
 
@@ -914,11 +928,11 @@ translate O GlistDeleteField {Slett}
 translate O GlistColor {Farge}
 translate O GlistSort {Sorter database}
 
-# menu shown with right mouse button down on game list. 
+# menu shown with right mouse button down on game list.
 translate O GlistRemoveThisGameFromFilter  {Fjern}
 translate O GlistRemoveGameAndAboveFromFilter  {Fjern alle over}
 translate O GlistRemoveGameAndBelowFromFilter  {Fjern alle under}
-translate O GlistDeleteGame {(Angre) Sletting av partiet} 
+translate O GlistDeleteGame {(Angre) Sletting av partiet}
 translate O GlistDeleteAllGames {Slett alle partier i filteret}
 translate O GlistUndeleteAllGames {Gjenopprett alle partier i filteret}
 
@@ -1342,7 +1356,7 @@ translate O GotoMoveNumber {Gå til trekk nummer:}
 # Copy games dialog:
 translate O CopyGames {Kopier partier}
 translate O CopyConfirm {
-Vil du virkelig kopiere de [::utils::thousands $nGamesToCopy] filtrerte partiene 
+Vil du virkelig kopiere de [::utils::thousands $nGamesToCopy] filtrerte partiene
 fra "$fromName" til "$targetName"?
 }
 translate O CopyErr {Kan ikke kopiere partiene}

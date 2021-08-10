@@ -56,6 +56,8 @@ menuText T EditStripBegin "Baştan çıkart" 11 \
   {Strip moves from the beginning of the game}
 menuText T EditStripEnd "son hamlelere kadar" 9 \
   {Strip moves to the end of the game}
+# ====== TODO To be translated ======
+menuText T EditFlip "Flip Board" 0 {Flip the board}
 menuText T EditReset "Boş Oynatma panosu" 0 \
   {Reset the clipbase to be completely empty}
 menuText T EditCopy "Oynatma panosu Üzerine Kopyala" 1 \
@@ -121,6 +123,18 @@ menuText T WindowsTree "Ağaç Pencere" 0 {Open/close the Tree window}
 menuText T WindowsTB "Teorik oyun sonu verileri Penceresi" 1 {Open/close the Tablebase window}
 menuText T WindowsBook "Kitap Penceresi" 0 {Open/close the Book window}
 menuText T WindowsCorrChess "Yazışmalı oyun Penceresi" 1 {Yazışmalar penceresini aç / kapat}
+# ====== TODO To be translated ======
+menuText T Analyse "Analyse" 0
+# ====== TODO To be translated ======
+menuText T AnalyseEngineList "Analysis Engines" 0 {Configure analysis engines}
+# ====== TODO To be translated ======
+menuText T AnalyseRating "Player Ratings" 0 {Graph the rating history of the current game players}
+# ====== TODO To be translated ======
+menuText T AnalyseScore "Score Graph" 0 {Show the score graph window}
+# ====== TODO To be translated ======
+menuText T AnalyseStartEngine1 "Start engine 1" 0  {Start engine 1}
+# ====== TODO To be translated ======
+menuText T AnalyseStartEngine2 "Start engine 2" 0  {Start engine 2}
 
 # Tools menu:
 menuText T Tools "Araçlar" 0
@@ -172,7 +186,7 @@ menuText T ToolsExpCurrentPGN "Geçerli oyunu bir PGN dosyasına yazın" 15 \
   {Geçerli oyunu bir PGN dosyasına yazın}
 menuText T ToolsExpCurrentHTML "Oyunu yaz HTML" 15 \
   {Geçerli oyunu bir HTML dosyasına yazın}
-menuText T ToolsExpCurrentHTMLJS "Oyunu yaz HTML veya JavaScript" 15 {Geçerli oyunu bir HTML ve JavaScript dosyasına yazın}  
+menuText T ToolsExpCurrentHTMLJS "Oyunu yaz HTML veya JavaScript" 15 {Geçerli oyunu bir HTML ve JavaScript dosyasına yazın}
 menuText T ToolsExpCurrentLaTeX "Oyunu yaz LaTeX" 15 {Geçerli oyunu xSkak kullanarak bir LaTeX dosyasına yazın}
 menuText T ToolsExpFilter "Filtrelenen oyunları bir metin dosyasına yazın" 1 \
   {Filtrelenen oyunları bir metin dosyasına yazın}
@@ -180,7 +194,7 @@ menuText T ToolsExpFilterPGN "Filtrelenen oyunları bir PGN dosyasına yazın" 1
   {Filtrelenen oyunları bir PGN dosyasına yazın}
 menuText T ToolsExpFilterHTML "Filtrelenen oyunları bir HTML dosyasına yazın" 17 \
   {Filtrelenen oyunları bir HTML dosyasına yazın}
-menuText T ToolsExpFilterHTMLJS "Filtrelenen oyunları bir HTML ve JavaScript dosyasına yazın" 17 {Filtrelenen oyunları bir HTML ve JavaScript dosyasına yazın}  
+menuText T ToolsExpFilterHTMLJS "Filtrelenen oyunları bir HTML ve JavaScript dosyasına yazın" 17 {Filtrelenen oyunları bir HTML ve JavaScript dosyasına yazın}
 menuText T ToolsExpFilterLaTeX "Filtrelenen oyunları bir LaTeX dosyasına yazın" 17  {Filtrelenen oyunları bir LaTeX dosyasına yazın}
 # ====== TODO To be translated ======
 menuText T ToolsExpFilterEPD "Export Filter to EPD/FEN" 17 {Write all filtered games to an EPD File}
@@ -272,8 +286,8 @@ menuText T OptionsMovesDelay "Otomatik Oynatma Zamanı Gecikmesi" 1 \
   {Otomatik oynatma modu için zaman gecikmesini ayarlayın}
 menuText T OptionsMovesCoord "Klavyeden Oynama" 0 \
   {Koordinat stili oynama girişini kabul edin (ör. "g1f3")}
-menuText T OptionsShowVarPopup "Varyant Penceresini Aç/Kapat" 0 {Turn on/off the display of a variations window}  
-menuText T OptionsMovesSpace "Hamle numarasından sonra boşluk ekle" 0 {Hamle numarasından sonra boşluk ekle}  
+menuText T OptionsShowVarPopup "Varyant Penceresini Aç/Kapat" 0 {Turn on/off the display of a variations window}
+menuText T OptionsMovesSpace "Hamle numarasından sonra boşluk ekle" 0 {Hamle numarasından sonra boşluk ekle}
 menuText T OptionsMovesKey "Klavye Tamamlama" 0 \
   {Klavyeyi otomatik tamamlama hareketini açma / kapatma}
 menuText T OptionsMovesShowVarArrows "Varyant Oklarını Göster" 0 {varyant hamlelerini gösteren okları açma / kapama }
@@ -305,7 +319,7 @@ menuText T OptionsTacticsBasesDir "taktik tesisi rehberi" 0 {Taktik (eğitim) te
 menuText T OptionsInformant "Bilgilendirici Değerleri Yapılandırma" 0
 menuText T OptionsSave "Kaydetme Seçenekleri" 0 "Ayarlanabilir tüm seçenekleri dosyaya kaydedin $::optionsFile"
 # ====== TODO To be translated ======
-menuText T OptionsSaveBases "Save Bases as Default" 0 
+menuText T OptionsSaveBases "Save Bases as Default" 0
 menuText T OptionsAutoSave "Çıkışta Otomatik Kaydetme Seçenekleri" 0 \
   {-otomatik Scid'den çıkarken tüm seçenekleri kaydedin}
 
@@ -895,13 +909,13 @@ translate T GlistDeleteField {silmek}
 translate T GlistColor {renk}
 translate T GlistSort {Veritabanını sıralama}
 
-# menu shown with right mouse button down on game list. 
+# menu shown with right mouse button down on game list.
 translate T GlistRemoveThisGameFromFilter  {Kaldır}
 translate T GlistRemoveGameAndAboveFromFilter  {yukarıdakilerin tümünü kaldır}
 translate T GlistRemoveGameAndBelowFromFilter  {Aşağıdakilerin tümünü kaldır}
-translate T GlistDeleteGame {Bu oyunu sil} 
-translate T GlistDeleteAllGames {Filtredeki tüm oyunları sil} 
-translate T GlistUndeleteAllGames {Tüm oyunları süzgeçte geri al} 
+translate T GlistDeleteGame {Bu oyunu sil}
+translate T GlistDeleteAllGames {Filtredeki tüm oyunları sil}
+translate T GlistUndeleteAllGames {Tüm oyunları süzgeçte geri al}
 
 translate T GlistAlignL {Sola hizala}
 translate T GlistAlignR {sağa hizala}
@@ -1481,7 +1495,7 @@ translate T StartFromCurrentPosition {Geçerli konumdan başla}
 translate T FixedDepth {Sabit derinlik}
 translate T Nodes {Düğümler}
 translate T Depth {derinlik}
-translate T Time {Zaman} 
+translate T Time {Zaman}
 # ====== TODO To be translated ======
 translate T Auto {Auto}
 # ====== TODO To be translated ======

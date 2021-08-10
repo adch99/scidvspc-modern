@@ -13,208 +13,222 @@ menuText L File "Tiedosto" 0
 menuText L FileNew "Uusi" 0 {Luo uusi Scid-tietokanta}
 menuText L FileOpen "Avaa" 0 {Avaa olemassaoleva Scid-tietokanta}
 menuText L FileClose "Sulje" 0 {Sulje aktiivisena oleva Scid-tietokanta}
-menuText L FileFinder "Löydä" 0 {Avaa tiedoston hakuikkuna}
-menuText L FileSavePgn "Tallenna PGN" 0 {Tallenna tämä peli tiedostoon}
-menuText L FileOpenBaseAsTree "Avaa tietokanta puuna" 13   {Avaa tietokanta ja käytä sitä puuikkunassa}
-menuText L FileOpenRecentBaseAsTree "Avaa viimeisin tietokanta puuna" 0   {Avaa viimeisin tietokanta ja käytä sitä puuikkunassa}
+menuText L FileFinder "Lï¿½ydï¿½" 0 {Avaa tiedoston hakuikkuna}
+menuText L FileSavePgn "Tallenna PGN" 0 {Tallenna tï¿½mï¿½ peli tiedostoon}
+menuText L FileOpenBaseAsTree "Avaa tietokanta puuna" 13   {Avaa tietokanta ja kï¿½ytï¿½ sitï¿½ puuikkunassa}
+menuText L FileOpenRecentBaseAsTree "Avaa viimeisin tietokanta puuna" 0   {Avaa viimeisin tietokanta ja kï¿½ytï¿½ sitï¿½ puuikkunassa}
 menuText L FileBookmarks "Kirjanmerkkivalikko" 0 {Kirjanmerkkivalikko}
-menuText L FileBookmarksAdd "Lisää kirjanmerkki" 0 \
+menuText L FileBookmarksAdd "Lisï¿½ï¿½ kirjanmerkki" 0 \
   {Kirjanmerkitse nykyinen tietokanta ja asema}
 menuText L FileBookmarksFile "Tiedosto kirjanmerkki" 0 \
   {Kirjainmerkitse nykyinen peli ja asema}
-menuText L FileBookmarksEdit "Käsittele kirjanmerkki" 0 \
+menuText L FileBookmarksEdit "Kï¿½sittele kirjanmerkki" 0 \
   {Muokkaa kirjanmerkkivalikoita}
-menuText L FileBookmarksList "Esitä kansiot yhtenä listana" 0 \
-  {Esitä kirjanmerkkivalikot yhtenä listana eikä alivalikkoina}
-menuText L FileBookmarksSub "Esitä kansiot alavalikkona" 0 \
-  {Esitä kirjainmerkkikansiot alivalikkoina eikä yhtenä listana}
+menuText L FileBookmarksList "Esitï¿½ kansiot yhtenï¿½ listana" 0 \
+  {Esitï¿½ kirjanmerkkivalikot yhtenï¿½ listana eikï¿½ alivalikkoina}
+menuText L FileBookmarksSub "Esitï¿½ kansiot alavalikkona" 0 \
+  {Esitï¿½ kirjainmerkkikansiot alivalikkoina eikï¿½ yhtenï¿½ listana}
 
 menuText L FileReadOnly "Kirjoitussuojattu" 0 \
-  {Kohtele nykyistä tietokantaa kirjoitussuojattuna estäen muutokset}
+  {Kohtele nykyistï¿½ tietokantaa kirjoitussuojattuna estï¿½en muutokset}
 menuText L FileSwitch "Vaihda tietokantaan" 1 \
   {Vaihda eri avattuun tietokantaan}
-menuText L FileExit "Poistu" 1 {Poistu Scidistä}
+menuText L FileExit "Poistu" 1 {Poistu Scidistï¿½}
 
 # Edit menu:
 menuText L Edit "Muokkaa" 0
-menuText L EditAdd "Lisää muunnelma" 0 {Lisää muunnelma pelin tähän siirtoon}
-menuText L EditPasteVar "Liitä muunnelma" 0
-menuText L EditDelete "Poista muunnelma" 0 {Poista tätä siirtoa varten oleva muunnelma}
-menuText L EditFirst "Tee ensimmäinen muunnelma" 5 \
-  {Ylennä muunnelma listan ensimmäiseksi}
-menuText L EditMain "Ylennä muunnelma" 21 \
-  {Ylennä muunnelma päämuunnelmaksi}
-menuText L EditTrial "Yritä muunnelmaa" 0 \
+menuText L EditAdd "Lisï¿½ï¿½ muunnelma" 0 {Lisï¿½ï¿½ muunnelma pelin tï¿½hï¿½n siirtoon}
+menuText L EditPasteVar "Liitï¿½ muunnelma" 0
+menuText L EditDelete "Poista muunnelma" 0 {Poista tï¿½tï¿½ siirtoa varten oleva muunnelma}
+menuText L EditFirst "Tee ensimmï¿½inen muunnelma" 5 \
+  {Ylennï¿½ muunnelma listan ensimmï¿½iseksi}
+menuText L EditMain "Ylennï¿½ muunnelma" 21 \
+  {Ylennï¿½ muunnelma pï¿½ï¿½muunnelmaksi}
+menuText L EditTrial "Yritï¿½ muunnelmaa" 0 \
   {Aloita/lopeta kokeilumoodi idean testaamiseksi laudalla}
-menuText L EditStrip "Poista" 0 {Poista kommentit tai muunnelmat tästä pelistä}
+menuText L EditStrip "Poista" 0 {Poista kommentit tai muunnelmat tï¿½stï¿½ pelistï¿½}
 menuText L EditUndo "Peru" 0 {Peru viimeinen pelin muutos}
 menuText L EditRedo "Tee uudestaan" 0 {Tee uudestaan viimeinen pelin muutos}
 menuText L EditStripComments "Kommentit" 0 \
-  {Poista kaikki kommentit ja huomautukset tästä pelistä}
-menuText L EditStripVars "Muunnelmat" 0 {Poista kaikki muunnelmat tästä pelistä}
+  {Poista kaikki kommentit ja huomautukset tï¿½stï¿½ pelistï¿½}
+menuText L EditStripVars "Muunnelmat" 0 {Poista kaikki muunnelmat tï¿½stï¿½ pelistï¿½}
 menuText L EditStripBegin "Siirrot alusta" 11 \
-  {Poista siirrot tämän pelin alusta}
+  {Poista siirrot tï¿½mï¿½n pelin alusta}
 menuText L EditStripEnd "Siirrot loppuun asti" 9 \
   {Poista siirrot pelin loppuun asti}
-menuText L EditReset "Tyhjennä leikepöytä" 0 \
-  {Alusta leikepöytä kokonaan tyhjäksi}
-menuText L EditCopy "Kopioi leikepöydälle" 1 \
-  {Kopioi tämä peli leikepöydän tietokantaan}
-menuText L EditPaste "Liitä leikepöydältä" 1 \
-  {Liitä aktiivinen leikepöydän peli tähän}
-menuText L EditPastePGN "Liitä PGN" 0 \
-  {Tulkitse leikepöydän teksti PGN-tiedostona ja liitä se tähän}
+# ====== TODO To be translated ======
+menuText L EditFlip "Flip Board" 0 {Flip the board}
+menuText L EditReset "Tyhjennï¿½ leikepï¿½ytï¿½" 0 \
+  {Alusta leikepï¿½ytï¿½ kokonaan tyhjï¿½ksi}
+menuText L EditCopy "Kopioi leikepï¿½ydï¿½lle" 1 \
+  {Kopioi tï¿½mï¿½ peli leikepï¿½ydï¿½n tietokantaan}
+menuText L EditPaste "Liitï¿½ leikepï¿½ydï¿½ltï¿½" 1 \
+  {Liitï¿½ aktiivinen leikepï¿½ydï¿½n peli tï¿½hï¿½n}
+menuText L EditPastePGN "Liitï¿½ PGN" 0 \
+  {Tulkitse leikepï¿½ydï¿½n teksti PGN-tiedostona ja liitï¿½ se tï¿½hï¿½n}
 menuText L EditSetup "Aseta aloitusasema" 6 \
-  {Aseta aloitusasema tätä peliä varten}
+  {Aseta aloitusasema tï¿½tï¿½ peliï¿½ varten}
 menuText L EditCopyBoard "Kopioi FEN" 5 \
-  {Kopio nykyinen asema FEN-notaationa tekstivalintaan (leikepöytä)}
+  {Kopio nykyinen asema FEN-notaationa tekstivalintaan (leikepï¿½ytï¿½)}
 menuText L EditCopyPGN "Kopioi PGN" 0 \
-  {Kopioi nykyinen PGN-tiedosto tekstivalintaan (leikepöytä)}
-menuText L EditPasteBoard "Liitä FEN" 6 \
-  {Aseta aloitusasema nykyisestä tekstivalinnasta (leikepöytä)}
+  {Kopioi nykyinen PGN-tiedosto tekstivalintaan (leikepï¿½ytï¿½)}
+menuText L EditPasteBoard "Liitï¿½ FEN" 6 \
+  {Aseta aloitusasema nykyisestï¿½ tekstivalinnasta (leikepï¿½ytï¿½)}
 
 # Game menu:
 menuText L Game "Peli" 0
-menuText L GameNew "Uusi peli" 0 {Palauta peli alkutilaan hyläten mitkä tahansa muutokset}
-menuText L GameFirst "Lataa ensimmäinen" 5 {Lataa ensimmäinen suodatettu peli}
+menuText L GameNew "Uusi peli" 0 {Palauta peli alkutilaan hylï¿½ten mitkï¿½ tahansa muutokset}
+menuText L GameFirst "Lataa ensimmï¿½inen" 5 {Lataa ensimmï¿½inen suodatettu peli}
 menuText L GamePrev "Lataa edellinen" 5 {Lataa edellinen suodatettu peli}
-menuText L GameReload "Lataa peli uudelleen" 2 {Lataa uudelleeen tämä peli hyläten kaikki tehdyt muutokset}
+menuText L GameReload "Lataa peli uudelleen" 2 {Lataa uudelleeen tï¿½mï¿½ peli hylï¿½ten kaikki tehdyt muutokset}
 menuText L GameNext "Lataa seuraava" 7 {Lataa seuraava suodatettu peli}
 menuText L GameLast "Lataa viimeinen" 8 {Lataa viimeinen suodatettu peli}
 menuText L GameRandom "Lataa satunnainen peli" 8 {Lataa satunnainen suodatettu peli}
-menuText L GameNumber "Lataa numeroitu peli" 5 {Lataa peli syöttämällä sen numero}
-menuText L GameReplace "Korvaa peli" 0 {Tallenna tämä peli korvaten vanhan version}
-menuText L GameAdd "Lisää peli" 0 {Tallenna tämä peli uutena pelinä tietokantaan}
+menuText L GameNumber "Lataa numeroitu peli" 5 {Lataa peli syï¿½ttï¿½mï¿½llï¿½ sen numero}
+menuText L GameReplace "Korvaa peli" 0 {Tallenna tï¿½mï¿½ peli korvaten vanhan version}
+menuText L GameAdd "Lisï¿½ï¿½ peli" 0 {Tallenna tï¿½mï¿½ peli uutena pelinï¿½ tietokantaan}
 menuText L GameInfo "Aseta pelin tiedot" 9
-menuText L GameBrowse "Selaa pelejä" 0
+menuText L GameBrowse "Selaa pelejï¿½" 0
 menuText L GameList "Listaa kaikki pelit" 0
 menuText L GameDelete "Poista peli" 0
-menuText L GameDeepest "Identifoi avaus" 0 {Siirry syvimpään ECO-avauskirjassa listattuun peliasemaan}
-menuText L GameGotoMove "Siirry tiettyyn pelisiirtoon" 5 {Siirry tiettyyn pelisiirtoon tässä pelissä}
-menuText L GameNovelty "Löydä uutuus" 7 {Löydä ensimmäinen aikaisemmin pelaamaton siirto tässä pelissä}
+menuText L GameDeepest "Identifoi avaus" 0 {Siirry syvimpï¿½ï¿½n ECO-avauskirjassa listattuun peliasemaan}
+menuText L GameGotoMove "Siirry tiettyyn pelisiirtoon" 5 {Siirry tiettyyn pelisiirtoon tï¿½ssï¿½ pelissï¿½}
+menuText L GameNovelty "Lï¿½ydï¿½ uutuus" 7 {Lï¿½ydï¿½ ensimmï¿½inen aikaisemmin pelaamaton siirto tï¿½ssï¿½ pelissï¿½}
 
 # Search Menu:
 menuText L Search "Etsi" 0
-menuText L SearchReset "Nollaa suodatin" 0 {Nollaa suodatin jotta kaikki pelit voidaan sisällyttää}
-menuText L SearchNegate "Kiellä suodatin" 0 {Kiellä suodatin sisältämään vain hylätyt pelit}
+menuText L SearchReset "Nollaa suodatin" 0 {Nollaa suodatin jotta kaikki pelit voidaan sisï¿½llyttï¿½ï¿½}
+menuText L SearchNegate "Kiellï¿½ suodatin" 0 {Kiellï¿½ suodatin sisï¿½ltï¿½mï¿½ï¿½n vain hylï¿½tyt pelit}
 menuText L SearchEnd "Aseta suodatin viimeiseen siirtoon" 15 {Kaikki suodatetut pelit latautuvat loppuasemassa}
-menuText L SearchCurrent "Nykyinen asema" 0 {Etsi nykyistä laudan asemaa}
+menuText L SearchCurrent "Nykyinen asema" 0 {Etsi nykyistï¿½ laudan asemaa}
 menuText L SearchHeader "Yleinen" 0 {Etsi otsikkoinformaatio perusteella (pelaaja, tapahtuma, jne.)}
 menuText L SearchMaterial "Materiaali/asema" 0 {Etsi materiaalin tai aseman malleja}
 menuText L SearchMoves "Siirrot" 0 {}
-menuText L SearchUsing "Lataa etsi-tiedosto" 0 {Etsi käyttäen etsi-vaihtoehdot tiedostoa}
+menuText L SearchUsing "Lataa etsi-tiedosto" 0 {Etsi kï¿½yttï¿½en etsi-vaihtoehdot tiedostoa}
 
 # Windows menu:
 menuText L Windows "Ikkunat" 0
-menuText L WindowsGameinfo "Pelin tiedot" 0 {Näytä/piilota pelitietopaneeli}
+menuText L WindowsGameinfo "Pelin tiedot" 0 {Nï¿½ytï¿½/piilota pelitietopaneeli}
 menuText L WindowsComment "Kommenttieditori" 9 {Avaa/sulje kommenttieditori}
 menuText L WindowsGList "Pelilista" 0 {Avaa/sulje pelilistaikkuna}
 menuText L WindowsPGN "PGN-ikkuna" 0 {Avaa/sulje PGN (pelinotaatio)-ikkuna}
 menuText L WindowsCross "Turnaustaulukko" 0 {Avaa/sulje turnaustaulukko}
-menuText L WindowsPList "Etsi pelaaja" 2 {Avaa/sulje pelaajanlöytäjä}
-menuText L WindowsTmt "Turnaukset" 2 {Avaa/sulje turnauslöytäjä}
+menuText L WindowsPList "Etsi pelaaja" 2 {Avaa/sulje pelaajanlï¿½ytï¿½jï¿½}
+menuText L WindowsTmt "Turnaukset" 2 {Avaa/sulje turnauslï¿½ytï¿½jï¿½}
 menuText L WindowsSwitcher "Tietokannat" 0  {Avaa/sulje tietokantavaihtajaikkuna}
-menuText L WindowsMaint "Ylläpitoikkuna" 0 {Avaa/sulje ylläpitoikkuna}
+menuText L WindowsMaint "Yllï¿½pitoikkuna" 0 {Avaa/sulje yllï¿½pitoikkuna}
 menuText L WindowsECO "ECO-selain" 0 {Avaa/sulje ECO-selainikkuna}
 menuText L WindowsStats "Tilastoikkuna" 0 {Avaa/sulje suodatintilastoikkuna}
 menuText L WindowsTree "Puuikkuna" 0 {Avaa/sulje puuikkkuna}
 menuText L WindowsTB "Loppupelitietokantaikkuna" 1 {Avaa/sulje loppupelitietokantaikkuna}
 menuText L WindowsBook "Avauskirjastoikkuna" 0 {Avaa/sulje avauskirjastoikkuna}
 menuText L WindowsCorrChess "Kirjeenvaihtoikkuna" 1 {Avaa/sulje kirjeenvaihtoikkuna}
+# ====== TODO To be translated ======
+menuText L Analyse "Analyse" 0
+# ====== TODO To be translated ======
+menuText L AnalyseEngineList "Analysis Engines" 0 {Configure analysis engines}
+# ====== TODO To be translated ======
+menuText L AnalyseRating "Player Ratings" 0 {Graph the rating history of the current game players}
+# ====== TODO To be translated ======
+menuText L AnalyseScore "Score Graph" 0 {Show the score graph window}
+# ====== TODO To be translated ======
+menuText L AnalyseStartEngine1 "Start engine 1" 0  {Start engine 1}
+# ====== TODO To be translated ======
+menuText L AnalyseStartEngine2 "Start engine 2" 0  {Start engine 2}
 
 # Tools menu:
-menuText L Tools "Työkalut" 0
+menuText L Tools "Tyï¿½kalut" 0
 menuText L ToolsAnalysis "Analyysiohjelma" 0 {Konfiguroi analyysiohjelmat}
-menuText L ToolsEmail "Sähköpostimanageri" 0 {Avaa/sulje sähköpostin shakkimanageri-ikkuna}
+menuText L ToolsEmail "Sï¿½hkï¿½postimanageri" 0 {Avaa/sulje sï¿½hkï¿½postin shakkimanageri-ikkuna}
 menuText L ToolsFilterGraph "Suhteellinen suodatingrafiikka" 12 {Avaa/sulje suodatingrafiikkaikkkuna suhteellisia arvoja varten}
 menuText L ToolsAbsFilterGraph "Absoluuttinen suodatingrafiikka" 7 {Avaa/sulje suodatingrafiikkaikkuna absoluuttisia arvoja varten}
-menuText L ToolsOpReport "Avausraportti" 0 {Luo avausraportti nykyistä asemaa varten}
-menuText L ToolsTracker "Upseerinjäljittäjä"  6 {Avaa upseerinjäljittäjäikkuna}
-menuText L ToolsTraining "Harjoitus"  7 {Harjoitustyökalut (taktiikat,avaukset,...) }
+menuText L ToolsOpReport "Avausraportti" 0 {Luo avausraportti nykyistï¿½ asemaa varten}
+menuText L ToolsTracker "Upseerinjï¿½ljittï¿½jï¿½"  6 {Avaa upseerinjï¿½ljittï¿½jï¿½ikkuna}
+menuText L ToolsTraining "Harjoitus"  7 {Harjoitustyï¿½kalut (taktiikat,avaukset,...) }
 menuText L ToolsComp "Turnaus" 0 {Shakkiohjelmaturnaus}
 menuText L ToolsTacticalGame "Shakkiohjelma - Phalanx"  0 {Pelaa taktinen peli}
 menuText L ToolsSeriousGame "Shakkiohjelma - UCI-ohjelma"  11 {Pelaa UCI-ohjelmaa vastaan}
-menuText L ToolsTrainTactics "#N shakkitehtävä"  0 {Ratkaise "#N" tehtäviä}
+menuText L ToolsTrainTactics "#N shakkitehtï¿½vï¿½"  0 {Ratkaise "#N" tehtï¿½viï¿½}
 menuText L ToolsTrainCalvar "Muunnelmien laskeminen"  0 {Stoyko-harjoitus}
-menuText L ToolsTrainFindBestMove "Löydä paras siirto"  0 {Löydä paras siirto}
+menuText L ToolsTrainFindBestMove "Lï¿½ydï¿½ paras siirto"  0 {Lï¿½ydï¿½ paras siirto}
 menuText L ToolsTrainFics "Internet (FICS)"  0 {Pelaa freechess.orgissa}
-menuText L ToolsBookTuning "Avauskirjaston virittäminen" 0 {Avauskirjaston virittäminen}
+menuText L ToolsBookTuning "Avauskirjaston virittï¿½minen" 0 {Avauskirjaston virittï¿½minen}
 
-menuText L ToolsMaint "Ylläpito" 0 {Scid-tietokannan ylläpitotyökalut}
-menuText L ToolsMaintWin "Ylläpitoikkuna" 0 {Avaa/sulje Scid-tietokannan ylläpitoikkuna}
-menuText L ToolsMaintCompact "Kompakti tietokanta" 0 {Kompaktin tietokannnan tiedostot joista on poistettu hävitetyt pelit ja käyttämättömät nimet}
+menuText L ToolsMaint "Yllï¿½pito" 0 {Scid-tietokannan yllï¿½pitotyï¿½kalut}
+menuText L ToolsMaintWin "Yllï¿½pitoikkuna" 0 {Avaa/sulje Scid-tietokannan yllï¿½pitoikkuna}
+menuText L ToolsMaintCompact "Kompakti tietokanta" 0 {Kompaktin tietokannnan tiedostot joista on poistettu hï¿½vitetyt pelit ja kï¿½yttï¿½mï¿½ttï¿½mï¿½t nimet}
 menuText L ToolsMaintClass "ECO-luokittele pelit" 2 {Laske uudestaan ECO-koodit kaikille peleille}
 menuText L ToolsMaintSort "Lajittele tietokanta" 0 {Lajittele kaikki pelit tietokannassa}
-menuText L ToolsMaintDelete "Poista kaksoispelit" 0 {Löydä kaksoispelit ja aseta ne hävitettäväksi}
-menuText L ToolsMaintTwin "Kaksoispelien tarkastusikkuna" 0 {Avaa/päivitä kaksoispelien tarkastusikkuna}
+menuText L ToolsMaintDelete "Poista kaksoispelit" 0 {Lï¿½ydï¿½ kaksoispelit ja aseta ne hï¿½vitettï¿½vï¿½ksi}
+menuText L ToolsMaintTwin "Kaksoispelien tarkastusikkuna" 0 {Avaa/pï¿½ivitï¿½ kaksoispelien tarkastusikkuna}
 menuText L ToolsMaintNameEditor "Nimieditori" 0 {Avaa/sulje nimieditori-ikkuna}
-menuText L ToolsMaintNamePlayer "Tarkasta pelaajien nimien tavutus" 11 {Tarkasta pelaajien nimien tavutus käyttäen tavutuksen tarkastustiedostoa}
-menuText L ToolsMaintNameEvent "Tarkasta tapahtumien nimien tavutus" 11 {Tarkasta tapahtumien nimien tavutus käyttäen tavutuksen tarkastustiedostoa}
-menuText L ToolsMaintNameSite "Tarkasta paikannimien tavutus" 11 {Tarkasta paikannimien tavutus käyttäen tavutuksen tarkastustiedostoa}
-menuText L ToolsMaintNameRound "Tarkista kierroksen nimien tavutus" 11 {Tarkasta kierroksen nimien tavutus käyttäen tavutuksen tarkastustiedostoa}
-menuText L ToolsMaintFixBase "Korjaa tietokanta" 0 {Yritä korjata vahingoittunut tietokanta}
+menuText L ToolsMaintNamePlayer "Tarkasta pelaajien nimien tavutus" 11 {Tarkasta pelaajien nimien tavutus kï¿½yttï¿½en tavutuksen tarkastustiedostoa}
+menuText L ToolsMaintNameEvent "Tarkasta tapahtumien nimien tavutus" 11 {Tarkasta tapahtumien nimien tavutus kï¿½yttï¿½en tavutuksen tarkastustiedostoa}
+menuText L ToolsMaintNameSite "Tarkasta paikannimien tavutus" 11 {Tarkasta paikannimien tavutus kï¿½yttï¿½en tavutuksen tarkastustiedostoa}
+menuText L ToolsMaintNameRound "Tarkista kierroksen nimien tavutus" 11 {Tarkasta kierroksen nimien tavutus kï¿½yttï¿½en tavutuksen tarkastustiedostoa}
+menuText L ToolsMaintFixBase "Korjaa tietokanta" 0 {Yritï¿½ korjata vahingoittunut tietokanta}
 
-menuText L ToolsConnectHardware "Yhdistä hardware" 0 {Yhditä ulkoinen hardware}
+menuText L ToolsConnectHardware "Yhdistï¿½ hardware" 0 {Yhditï¿½ ulkoinen hardware}
 menuText L ToolsConnectHardwareConfigure "Konfiguroi..." 0 {Konfiguroi ulkoinen hardware ja yhteys}
-menuText L ToolsConnectHardwareNovagCitrineConnect "Yhdistä Novag Citrine" 9 {Yhditä Novag Citrine Scidin kanssa}
-menuText L ToolsConnectHardwareInputEngineConnect "Yhdistä syöttöohjelma" 9 {Yhdistä syöttöohjelma (esim. DGT-lauta) Scidin kanssa}
+menuText L ToolsConnectHardwareNovagCitrineConnect "Yhdistï¿½ Novag Citrine" 9 {Yhditï¿½ Novag Citrine Scidin kanssa}
+menuText L ToolsConnectHardwareInputEngineConnect "Yhdistï¿½ syï¿½ttï¿½ohjelma" 9 {Yhdistï¿½ syï¿½ttï¿½ohjelma (esim. DGT-lauta) Scidin kanssa}
 
 menuText L ToolsPInfo "Pelaajan tiedot"  0 \
-  {Avaa/päivitä pelaajainformaatioikkuna}
+  {Avaa/pï¿½ivitï¿½ pelaajainformaatioikkuna}
 menuText L ToolsPlayerReport "Pelaajaraportti" 3 \
   {Luo pelaajaraportti}
 menuText L ToolsRating "Pelaajan ELO-luku" 0 \
   {Luo grafiikka nykyisen pelin pelaajien ELO-lukujen historiasta}
-menuText L ToolsScore "Tulosgrafiikka" 0 {Näytä tulosgrafiikkaikkuna}
+menuText L ToolsScore "Tulosgrafiikka" 0 {Nï¿½ytï¿½ tulosgrafiikkaikkuna}
 menuText L ToolsExpCurrent "Vie nykyinen peli" 8 \
   {Kirjoita nykyinen peli tekstitiedostoon}
 menuText L ToolsExpCurrentPGN "Vie peli PGN-muotoon" 15 \
   {Kirjoita nykyinen peli PGN-tiedostoksi}
 menuText L ToolsExpCurrentHTML "Vie peli HTML-muotoon" 15 \
   {Kirjoita nykyinen peli HTML-tiedostoksi}
-menuText L ToolsExpCurrentHTMLJS "Vie peli HTML- ja JavaScript-muotoon" 15 {Kirjoita nykyinen peli HTML- ja JavaScript-tiedostoksi}  
-menuText L ToolsExpCurrentLaTeX "Vie Peli LaTeX-muotoon" 15 {Kirjoita nykyinen peli LaTex-tiedostoksi käyttäen xSkakää}
+menuText L ToolsExpCurrentHTMLJS "Vie peli HTML- ja JavaScript-muotoon" 15 {Kirjoita nykyinen peli HTML- ja JavaScript-tiedostoksi}
+menuText L ToolsExpCurrentLaTeX "Vie Peli LaTeX-muotoon" 15 {Kirjoita nykyinen peli LaTex-tiedostoksi kï¿½yttï¿½en xSkakï¿½ï¿½}
 menuText L ToolsExpFilter "Vie kaikki suodatetut pelit" 1 \
   {Kirjoita kaikki suodatetut pelit tekstitiedostoksi}
 menuText L ToolsExpFilterPGN "Vie suodatin PGN-muotoon" 17 \
   {Kirjoita kaikki suodatetut pelit PGN-tiedostoksi}
 menuText L ToolsExpFilterHTML "Vie suodatin HTML-muotoon" 17 \
   {Kirjoita kaikki suodatetut pelit HTML-tiedostoksi}
-menuText L ToolsExpFilterHTMLJS "Vie suodatin HTML ja JavaScript-muotoon" 17 {Kirjoita kaikki suodatetut pelit HTML- ja JavaScrip-tiedostoksi}  
+menuText L ToolsExpFilterHTMLJS "Vie suodatin HTML ja JavaScript-muotoon" 17 {Kirjoita kaikki suodatetut pelit HTML- ja JavaScrip-tiedostoksi}
 menuText L ToolsExpFilterLaTeX "Vie suodatin LaTeX-muotoon" 17  {Kirjoita kaikki suodatetut pelit LaTex-tiedostoksi}
 # ====== TODO To be translated ======
 menuText L ToolsExpFilterEPD "Export Filter to EPD/FEN" 17 {Write all filtered games to an EPD File}
 menuText L ToolsExpFilterGames "Vie pelilista tekstiksi" 19 {Tulosta muotoiltu pelilista}
 menuText L ToolsImportOne "Tuo PGN-teksti" 0 \
-  {Tuo peli PGN-tekstistä}
+  {Tuo peli PGN-tekstistï¿½}
 menuText L ToolsImportFile "Tuo PGN-tiedosto" 7 {Tuo pelit PGN-tiedostosta}
-menuText L ToolsStartEngine1 "Käynnistä ohjelma 1" 0  {Käynnistä ohjelma 1}
-menuText L ToolsStartEngine2 "Käynnistä ohjelma 2" 0  {Käynnistä ohjelma 2}
+menuText L ToolsStartEngine1 "Kï¿½ynnistï¿½ ohjelma 1" 0  {Kï¿½ynnistï¿½ ohjelma 1}
+menuText L ToolsStartEngine2 "Kï¿½ynnistï¿½ ohjelma 2" 0  {Kï¿½ynnistï¿½ ohjelma 2}
 menuText L ToolsScreenshot "Kuvankaappaus laudasta" 0  {Ota kuvankaappaus}
 
 # Play menue
-menuText L Play "Pelaa" 0 {Pelaa pelejä}
+menuText L Play "Pelaa" 0 {Pelaa pelejï¿½}
 
 # --- Correspondence Chess
-menuText L CorrespondenceChess "Kirjeshakki" 0 {Toiminnot sähköpostia ja Xfcc:ää varten perustuen kirjeshakkiin}
-menuText L CCConfigure "Konfiguroi" 0 {Konfiguroi ulkoiset työkalut ja yleiset asetukset}
-menuText L CCConfigRelay "Tarkkaile pelejä" 10 {Konfiguroi tarkkailtavat pelit}
+menuText L CorrespondenceChess "Kirjeshakki" 0 {Toiminnot sï¿½hkï¿½postia ja Xfcc:ï¿½ï¿½ varten perustuen kirjeshakkiin}
+menuText L CCConfigure "Konfiguroi" 0 {Konfiguroi ulkoiset tyï¿½kalut ja yleiset asetukset}
+menuText L CCConfigRelay "Tarkkaile pelejï¿½" 10 {Konfiguroi tarkkailtavat pelit}
 menuText L CCOpenDB "Avaa tietokanta" 0 {Avaa oletuskirjeshakkitietokanta}
 menuText L CCRetrieve "Palauta pelit" 0 {Palauta pelit ulkoisen (Xfcc-) avustajan kautta}
-menuText L CCInbox "Käsittele saapuneet-laatikko" 8 {Käsittele kaikki tiedostot Scidin saapuneet-laatikossa}
-menuText L CCSend "Lähetä siirto" 0 {Lähetä siirtosi sähköpostin tai ulkoisen (Xfcc-) avustajan kautta}
+menuText L CCInbox "Kï¿½sittele saapuneet-laatikko" 8 {Kï¿½sittele kaikki tiedostot Scidin saapuneet-laatikossa}
+menuText L CCSend "Lï¿½hetï¿½ siirto" 0 {Lï¿½hetï¿½ siirtosi sï¿½hkï¿½postin tai ulkoisen (Xfcc-) avustajan kautta}
 
-menuText L CCResign "Antaudu" 1 {Antaudu (ei sähköpostin kautta)}
-menuText L CCClaimDraw "Vaadi tasapeliä" 6 {Lähetä siirto ja vaadi tasapeliä (ei sähköpostin kautta)}
-menuText L CCOfferDraw "Tarjoa tasapeliä" 1 {Lähetä siirto ja tarjoa tasapeliä (ei sähköpostin kautta)}
-menuText L CCAcceptDraw "Hyväksy tasapeli" 0 {Hyväksy tasapelitarjous (ei sähköpostin kautta)}
+menuText L CCResign "Antaudu" 1 {Antaudu (ei sï¿½hkï¿½postin kautta)}
+menuText L CCClaimDraw "Vaadi tasapeliï¿½" 6 {Lï¿½hetï¿½ siirto ja vaadi tasapeliï¿½ (ei sï¿½hkï¿½postin kautta)}
+menuText L CCOfferDraw "Tarjoa tasapeliï¿½" 1 {Lï¿½hetï¿½ siirto ja tarjoa tasapeliï¿½ (ei sï¿½hkï¿½postin kautta)}
+menuText L CCAcceptDraw "Hyvï¿½ksy tasapeli" 0 {Hyvï¿½ksy tasapelitarjous (ei sï¿½hkï¿½postin kautta)}
 
-menuText L CCNewMailGame "Uusi sähköpostipeli" 2 {Aloita uusi sähköpostipeli}
-menuText L CCMailMove "Postita siirto" 0 {Lähetä siirto sähköpostin kautta vastustajalle}
+menuText L CCNewMailGame "Uusi sï¿½hkï¿½postipeli" 2 {Aloita uusi sï¿½hkï¿½postipeli}
+menuText L CCMailMove "Postita siirto" 0 {Lï¿½hetï¿½ siirto sï¿½hkï¿½postin kautta vastustajalle}
 menuText L CCGamePage "Pelisivu" 0 {Kutsu peli verkkoselaimen kautta}
 
 # menu in cc window:
-menuText L CCEditCopy "Kopio pelilista leikepöydälle" 0 {Kopio pelit CSV-listana leikepöydälle}
+menuText L CCEditCopy "Kopio pelilista leikepï¿½ydï¿½lle" 0 {Kopio pelit CSV-listana leikepï¿½ydï¿½lle}
 
 
 #  B    GHiJKL    Q  TUV XYZ
@@ -222,45 +236,45 @@ menuText L CCEditCopy "Kopio pelilista leikepöydälle" 0 {Kopio pelit CSV-listana
 # Options menu:
 menuText L Options "Vaihtoehdot" 0
 menuText L OptionsBoard "Shakkilauta/nappulat" 0 {Shakkilaudan ulkoasu}
-menuText L OptionsColour "Värit" 0 {Oletustekstiwidgetin väri}
-menuText L OptionsBackColour "Tausta" 0 {Oletustekstiwidgetin väri}
-menuText L OptionsMainLineColour "Päämuunnelman nuolet" 0 {Päämuunnelman nuolet}
+menuText L OptionsColour "Vï¿½rit" 0 {Oletustekstiwidgetin vï¿½ri}
+menuText L OptionsBackColour "Tausta" 0 {Oletustekstiwidgetin vï¿½ri}
+menuText L OptionsMainLineColour "Pï¿½ï¿½muunnelman nuolet" 0 {Pï¿½ï¿½muunnelman nuolet}
 menuText L OptionsVarLineColour "Muunnelman nuolet" 0 {Muunnelman nuolet}
 # ====== TODO To be translated ======
 menuText L OptionsEngineLineColour "Engine Arrows" 0 {Engine arrows}
-menuText L OptionsRowColour "Rivit" 0 {Oletus puu/kirja-rivin väri}
+menuText L OptionsRowColour "Rivit" 0 {Oletus puu/kirja-rivin vï¿½ri}
 # ====== TODO To be translated ======
 menuText L OptionsHighlightColour "Highlight" 0 {Default text highlight color}
-menuText L OptionsSwitcherColour "Katkaisin" 0 {Oletus db-valitsijan väri}
-menuText L OptionsProgressColour "Edistymispalkki" 0 {Edistymispalkin oletusväri}
+menuText L OptionsSwitcherColour "Katkaisin" 0 {Oletus db-valitsijan vï¿½ri}
+menuText L OptionsProgressColour "Edistymispalkki" 0 {Edistymispalkin oletusvï¿½ri}
 menuText L OptionsScoreColour "Tulosgrafiikka" 0 {}
 menuText L OptionsScoreBarColour "Nykyinen tulosgrafiikka" 0 {}
-menuText L OptionsNames "Oman pelaajan nimet" 3 {Muokkaa oman pelaajan nimiä}
+menuText L OptionsNames "Oman pelaajan nimet" 3 {Muokkaa oman pelaajan nimiï¿½}
 menuText L OptionsExport "Vienti" 0 {Muuta tekstinviennin vaihtoehtoja}
-menuText L OptionsFonts "Kirjasintyypit" 0 {Muuta kirjasintyyppejä}
+menuText L OptionsFonts "Kirjasintyypit" 0 {Muuta kirjasintyyppejï¿½}
 menuText L OptionsFontsRegular "Vakinainen" 0 {Muuta yleiskirjaisintyyppi}
 menuText L OptionsFontsMenu "Valikko" 0 {Vaihda valikon kirjaisintyyppi}
 menuText L OptionsFontsSmall "Pieni" 0 {Muuta pieni kirjaisintyyppi}
-menuText L OptionsFontsFixed "Pysyvä" 0 {Muuta vakiolevyinen kirjaisintyyppi}
+menuText L OptionsFontsFixed "Pysyvï¿½" 0 {Muuta vakiolevyinen kirjaisintyyppi}
 menuText L OptionsGInfo "Pelin tiedot" 0 {Pelitietojen vaihtoehdot}
 menuText L OptionsFics "FICS" 0 {Free Chess Internet Server}
 menuText L OptionsFicsAuto "Korota automaattisesti kuningattareksi" 0
 # ====== TODO To be translated ======
 menuText L OptionsFicsClk "Store Clock times" 0
-menuText L OptionsFicsColour "Tekstin väri" 0
+menuText L OptionsFicsColour "Tekstin vï¿½ri" 0
 menuText L OptionsFicsSize "Laudan koko" 0
-menuText L OptionsFicsButtons "Käyttäjän painikkeet" 0
-menuText L OptionsFicsCommands "Alusta käskyt" 0
+menuText L OptionsFicsButtons "Kï¿½yttï¿½jï¿½n painikkeet" 0
+menuText L OptionsFicsCommands "Alusta kï¿½skyt" 0
 menuText L OptionsFicsNoRes "Ei tuloksia" 0
-menuText L OptionsFicsNoReq "Ei pyyntöjä" 0
-menuText L OptionsFicsPremove "Salli etukäteissiirto" 0
+menuText L OptionsFicsNoReq "Ei pyyntï¿½jï¿½" 0
+menuText L OptionsFicsPremove "Salli etukï¿½teissiirto" 0
 
 menuText L OptionsLanguage "Kieli" 0 {Valitse valikon kieli}
-menuText L OptionsMovesTranslatePieces "Käännä nappulat" 0 {Käännä nappuloiden ensimmäinen kirjain}
+menuText L OptionsMovesTranslatePieces "Kï¿½ï¿½nnï¿½ nappulat" 0 {Kï¿½ï¿½nnï¿½ nappuloiden ensimmï¿½inen kirjain}
 menuText L OptionsMovesHighlightLastMove "Korosta viimeisin siirto" 0 {Korosta viimeisin siirto}
-menuText L OptionsMovesHighlightLastMoveDisplay "Näytä" 0 {Näytä viimeisin siirto korostettuna}
+menuText L OptionsMovesHighlightLastMoveDisplay "Nï¿½ytï¿½" 0 {Nï¿½ytï¿½ viimeisin siirto korostettuna}
 menuText L OptionsMovesHighlightLastMoveWidth "Leveys" 0 {Viivan leveys}
-menuText L OptionsMovesHighlightLastMoveColor "Väri" 0 {Viivan väri}
+menuText L OptionsMovesHighlightLastMoveColor "Vï¿½ri" 0 {Viivan vï¿½ri}
 # ====== TODO To be translated ======
 menuText L OptionsMovesColorSelected "Color Selected Square" 0 {Color move}
 menuText L OptionsMoves "Siirrot" 0 {Siirron suorittamisen vaihtoehdot}
@@ -268,57 +282,57 @@ menuText L OptionsMovesAsk "Kysy ennen siirtojen korvaamista" 0 \
   {Kysy ennen olemassaolevien siirtojen korvaamista}
 menuText L OptionsMovesAnimate "Animaation aika" 1 \
   {Aseta animaatiosiirtojen aika}
-menuText L OptionsMovesDelay "Automaattisen pelaamisen viivästys" 1 \
-  {Aseta aikaviivästys automaattisen pelaamisen moodille}
+menuText L OptionsMovesDelay "Automaattisen pelaamisen viivï¿½stys" 1 \
+  {Aseta aikaviivï¿½stys automaattisen pelaamisen moodille}
 menuText L OptionsMovesCoord "Koordinoi siirron tekeminen" 0 \
-  {Hyväksy koordinaattityylinen siirron suoritus (esim. "g1f3")}
-menuText L OptionsShowVarPopup "Näytä muunnelmaikkuna" 0 {Käännä päälle/pois muunnelmaikkunan näyttö}  
-menuText L OptionsMovesSpace "Lisää välilyöntejä siirron numeron jälkeen" 0 {Lisää välilyöntejä siirron numeron jälkeen}  
-menuText L OptionsMovesKey "Näppäimistön täydentäminen" 0 \
-  {Käännä päälle/pois näppäimistösiirron automaattinen täydennys}
-menuText L OptionsMovesShowVarArrows "Näytä muunnelman nuolet" 0 {Käännä päälle/pois muunnelmien siirtoja näyttävät nuolet}
+  {Hyvï¿½ksy koordinaattityylinen siirron suoritus (esim. "g1f3")}
+menuText L OptionsShowVarPopup "Nï¿½ytï¿½ muunnelmaikkuna" 0 {Kï¿½ï¿½nnï¿½ pï¿½ï¿½lle/pois muunnelmaikkunan nï¿½yttï¿½}
+menuText L OptionsMovesSpace "Lisï¿½ï¿½ vï¿½lilyï¿½ntejï¿½ siirron numeron jï¿½lkeen" 0 {Lisï¿½ï¿½ vï¿½lilyï¿½ntejï¿½ siirron numeron jï¿½lkeen}
+menuText L OptionsMovesKey "Nï¿½ppï¿½imistï¿½n tï¿½ydentï¿½minen" 0 \
+  {Kï¿½ï¿½nnï¿½ pï¿½ï¿½lle/pois nï¿½ppï¿½imistï¿½siirron automaattinen tï¿½ydennys}
+menuText L OptionsMovesShowVarArrows "Nï¿½ytï¿½ muunnelman nuolet" 0 {Kï¿½ï¿½nnï¿½ pï¿½ï¿½lle/pois muunnelmien siirtoja nï¿½yttï¿½vï¿½t nuolet}
 menuText L OptionsNumbers "Numeroformaatti" 0 {Valitse numeroformaatti}
-menuText L OptionsStartup "Käynnistys" 3 {Valitse käynnistyksessä avattavat ikkunat}
+menuText L OptionsStartup "Kï¿½ynnistys" 3 {Valitse kï¿½ynnistyksessï¿½ avattavat ikkunat}
 menuText L OptionsTheme "Teema" 0 {Ttk-teema}
 menuText L OptionsWindows "Ikkunat" 0 {Ikkunavaihtoehdot}
 menuText L OptionsWindowsIconify "Automaattinen ikonisointi" 5 \
-  {Ikonisoi kaikki ikkunat kun pääikkuna ikonisoidaan}
+  {Ikonisoi kaikki ikkunat kun pï¿½ï¿½ikkuna ikonisoidaan}
 menuText L OptionsWindowsRaise "Automaattinen nosto" 5 \
   {Nosta tietyt ikkunat (esim. edistymispalkit) aina kun ne ovat piilotetut}
-menuText L OptionsSounds "Äänet" 2 {Konfiguroi siirtoilmoituksen äänet}
-menuText L OptionsWindowsDock "Kiinnitä ikkunat" 0 {Kiinnitä ikkunat (tarvitsee uudelleenkäynnistyksen)}
+menuText L OptionsSounds "ï¿½ï¿½net" 2 {Konfiguroi siirtoilmoituksen ï¿½ï¿½net}
+menuText L OptionsWindowsDock "Kiinnitï¿½ ikkunat" 0 {Kiinnitï¿½ ikkunat (tarvitsee uudelleenkï¿½ynnistyksen)}
 menuText L OptionsWindowsSaveLayout "Tallenna ulkoasu" 0 {Tallenna ulkoasu}
 menuText L OptionsWindowsRestoreLayout "Palauta ulkoasu" 0 {Palauta ulkoasu}
-menuText L OptionsWindowsShowGameInfo "Näytä pelin tiedot" 0 {Näytä pelin tiedot}
-menuText L OptionsWindowsAutoLoadLayout "Lataa automaattisesti ensimmäinen ulkoasu" 0 {Lataa käynnistettäessä automaattisesti ensimmäinen ulkoasu}
+menuText L OptionsWindowsShowGameInfo "Nï¿½ytï¿½ pelin tiedot" 0 {Nï¿½ytï¿½ pelin tiedot}
+menuText L OptionsWindowsAutoLoadLayout "Lataa automaattisesti ensimmï¿½inen ulkoasu" 0 {Lataa kï¿½ynnistettï¿½essï¿½ automaattisesti ensimmï¿½inen ulkoasu}
 menuText L OptionsWindowsAutoResize "Muuta automaattisesti laudan koko" 0 {}
-menuText L OptionsWindowsFullScreen "Kokonäyttö" 0 {Vaihtele kokonäyttö-moodi}
-menuText L OptionsToolbar "Työkalupalkki" 0 {Konfiguroi pääikkunan työkalupalkki}
+menuText L OptionsWindowsFullScreen "Kokonï¿½yttï¿½" 0 {Vaihtele kokonï¿½yttï¿½-moodi}
+menuText L OptionsToolbar "Tyï¿½kalupalkki" 0 {Konfiguroi pï¿½ï¿½ikkunan tyï¿½kalupalkki}
 menuText L OptionsECO "Lataa ECO-tiedosto" 7 {Lataa ECO-luokittelutiedosto}
 menuText L OptionsSpell "Lataa tavutuksen tarkastustiedosto" 11 \
   {Lataa Scid-tavutuksen tarkistustiedosto}
 menuText L OptionsTable "Loppupelitietokannan hakemisto" 10 \
-  {Valitse loppupelitietokantatiedosto; kaikkia loppupelitietokantoja tullaan käyttämään omassa hakemistossaan}
-menuText L OptionsRecent "Äskeiset merkinnät" 0 {Muuta tiedosto/peli-historia valikoiden kirjauksien määrä}
+  {Valitse loppupelitietokantatiedosto; kaikkia loppupelitietokantoja tullaan kï¿½yttï¿½mï¿½ï¿½n omassa hakemistossaan}
+menuText L OptionsRecent "ï¿½skeiset merkinnï¿½t" 0 {Muuta tiedosto/peli-historia valikoiden kirjauksien mï¿½ï¿½rï¿½}
 menuText L OptionsBooksDir "Avauskirjaston hakemisto" 0 {Aseta avauskirjaston hakemisto}
 menuText L OptionsTacticsBasesDir "Tietokantojen hakemisto" 0 {Aseta taktiikka (harjoitus)tietokantojen hakemisto}
 menuText L OptionsInformant "Konfiguroi informantin arvot" 0
 menuText L OptionsSave "Tallenna vaihtoehdot" 0 "Tallenna kaikki asetettavissa olevat vaihtoehdot $::optionsFile"
 # ====== TODO To be translated ======
-menuText L OptionsSaveBases "Save Bases as Default" 0 
+menuText L OptionsSaveBases "Save Bases as Default" 0
 menuText L OptionsAutoSave "Tallenna automaattisesti vaihtoehdot poistuessa" 0 \
-  {Tallenna automaattisesti kaikki vaihtoehdot poistuttaessa Scidistä}
+  {Tallenna automaattisesti kaikki vaihtoehdot poistuttaessa Scidistï¿½}
 
 # Help menu:
 menuText L Help "Apu" 0
-menuText L HelpContents "Apu" 0 {Näytä apusisällön sivu}
-menuText L HelpIndex "Indeksi" 0 {Näytä apuindeksin sivu}
-menuText L HelpGuide "Nopea opas" 0 {Näytä pikaoppaan apusivu}
-menuText L HelpHints "Vihjeet" 1 {Näytä vihjeiden apusivu}
-menuText L HelpContact "Yhteydenoton tiedot" 1 {Näytä yhteysinformaation apusivu}
-menuText L HelpTip "Päivän vinkki" 0 {Näytä hyödyllinen Scid-vinkki}
-menuText L HelpStartup "Käynnistysikkuna" 0 {Näytä käynnistysikkuna}
-menuText L HelpAbout "Ohjelman tiedot" 0 {Tietoja Scid Vs PCstä}
+menuText L HelpContents "Apu" 0 {Nï¿½ytï¿½ apusisï¿½llï¿½n sivu}
+menuText L HelpIndex "Indeksi" 0 {Nï¿½ytï¿½ apuindeksin sivu}
+menuText L HelpGuide "Nopea opas" 0 {Nï¿½ytï¿½ pikaoppaan apusivu}
+menuText L HelpHints "Vihjeet" 1 {Nï¿½ytï¿½ vihjeiden apusivu}
+menuText L HelpContact "Yhteydenoton tiedot" 1 {Nï¿½ytï¿½ yhteysinformaation apusivu}
+menuText L HelpTip "Pï¿½ivï¿½n vinkki" 0 {Nï¿½ytï¿½ hyï¿½dyllinen Scid-vinkki}
+menuText L HelpStartup "Kï¿½ynnistysikkuna" 0 {Nï¿½ytï¿½ kï¿½ynnistysikkuna}
+menuText L HelpAbout "Ohjelman tiedot" 0 {Tietoja Scid Vs PCstï¿½}
 
 # Game info box popup menu:
 menuText L GInfoHideNext "Piilota seuraava siirto" 0
@@ -326,22 +340,22 @@ menuText L GInfoShow "Siirtovuorossa oleva puoli" 0
 menuText L GInfoCoords "Vaihtele koordinaatteja" 0
 menuText L GInfoMaterial "Vaihtele materiaalia" 7
 menuText L GInfoFEN "FEN" 5
-menuText L GInfoMarks "Näytä väritetyt ruudut ja nuolet" 5
-menuText L GInfoWrap "Pakkaa pitkät muunnelmat" 0
-menuText L GInfoFullComment "Näytä koko kommentti" 10
-menuText L GInfoPhotos "Näytä valokuvat" 5
-menuText L GInfoTBNothing "Loppupelitietokannat: ei mitään" 12
+menuText L GInfoMarks "Nï¿½ytï¿½ vï¿½ritetyt ruudut ja nuolet" 5
+menuText L GInfoWrap "Pakkaa pitkï¿½t muunnelmat" 0
+menuText L GInfoFullComment "Nï¿½ytï¿½ koko kommentti" 10
+menuText L GInfoPhotos "Nï¿½ytï¿½ valokuvat" 5
+menuText L GInfoTBNothing "Loppupelitietokannat: ei mitï¿½ï¿½n" 12
 menuText L GInfoTBResult "Loppupelitietokannat: ainoastaan tulos" 12
 menuText L GInfoTBAll "Loppupelitietokannat: tulos ja parhaat siirrot" 19
 menuText L GInfoDelete "Palauta poistettu peli" 4
-menuText L GInfoMark "Poista tämän pelin merkintä" 4
+menuText L GInfoMark "Poista tï¿½mï¿½n pelin merkintï¿½" 4
 menuText L GInfoMenuBar "Valikkorivi"  0
-menuText L GInfoToolBar "Työkalurivi"  0
+menuText L GInfoToolBar "Tyï¿½kalurivi"  0
 menuText L GInfoButtonBar "Painikerivi"  0
 # TODO
 menuText L GInfoStatusBar "Status Bar"  0
 
-translate L FlipBoard {Käännä lauta}
+translate L FlipBoard {Kï¿½ï¿½nnï¿½ lauta}
 translate L RaiseWindows {Nosta ikkunat}
 translate L AutoPlay {Automaattinen peli}
 translate L TrialMode {Kokeilumoodi}
@@ -354,9 +368,9 @@ translate L Back {Takaisin}
 translate L Browse {Selaa}
 translate L Cancel {Peruuta}
 translate L Continue {Jatka}
-translate L Clear {Tyhjennä}
+translate L Clear {Tyhjennï¿½}
 translate L Close {Sulje}
-translate L Contents {Sisällöt}
+translate L Contents {Sisï¿½llï¿½t}
 translate L Defaults {Oletukset}
 translate L Delete {Poista}
 translate L Graph {Grafiikka}
@@ -365,22 +379,22 @@ translate L Import {Tuo}
 translate L Index {Indeksi}
 translate L LoadGame {Lataa}
 translate L BrowseGame {Selaa}
-translate L MergeGame {Yhdistä}
-translate L MergeGames {Yhdistä pelit}
+translate L MergeGame {Yhdistï¿½}
+translate L MergeGames {Yhdistï¿½ pelit}
 # translate E Ok {Ok}
 translate L Preview {Esikatselu}
 translate L Revert {Palautus}
 translate L Save {Tallenna}
-translate L DontSave {Älä tallenna}
+translate L DontSave {ï¿½lï¿½ tallenna}
 translate L Search {Etsi}
-translate L Stop {Pysäytä}
+translate L Stop {Pysï¿½ytï¿½}
 translate L Store {Varastoi}
-translate L Update {Päivitä}
+translate L Update {Pï¿½ivitï¿½}
 translate L ChangeOrient {Muuta ikkunan suunta}
-translate L ShowIcons {Näytä kuvakkeet}
+translate L ShowIcons {Nï¿½ytï¿½ kuvakkeet}
 translate L ConfirmCopy {Vahvista kopionti}
-translate L None {Ei mikään}
-translate L First {Ensimmäinen}
+translate L None {Ei mikï¿½ï¿½n}
+translate L First {Ensimmï¿½inen}
 translate L Current {Nykyinen}
 translate L Last {Viimeinen}
 translate L Font {Kirjasin}
@@ -393,13 +407,13 @@ translate L games {pelit}
 translate L move {siirto}
 translate L moves {siirrot}
 translate L all {kaikki}
-translate L Yes {Kyllä}
+translate L Yes {Kyllï¿½}
 translate L No {Ei}
 translate L Both {Molemmat}
 translate L King {Kuningas}
 translate L Queen {Kuningatar}
 translate L Rook {Torni}
-translate L Bishop {Lähetti}
+translate L Bishop {Lï¿½hetti}
 translate L Knight {Ratsu}
 translate L Pawn {Sotilas}
 translate L White {Valkoinen}
@@ -407,20 +421,20 @@ translate L Black {Musta}
 translate L Player {Pelaaja}
 translate L Rating {Elo-luku}
 translate L RatingDiff {Elo-luvun ero}
-translate L AverageRating {Keskimääräinen Elo-luku}
+translate L AverageRating {Keskimï¿½ï¿½rï¿½inen Elo-luku}
 translate L Event {Tapahtuma}
 translate L Site {Paikka}
 translate L Country {Maa}
-translate L IgnoreColors {Sivuuta värit}
+translate L IgnoreColors {Sivuuta vï¿½rit}
 translate L MatchEnd {Ainoastaan loppuasema}
-translate L Date {Päivämäärä}
-translate L EventDate {Tapahtuman päivämäärä}
+translate L Date {Pï¿½ivï¿½mï¿½ï¿½rï¿½}
+translate L EventDate {Tapahtuman pï¿½ivï¿½mï¿½ï¿½rï¿½}
 translate L Decade {Vuosikymmen}
 translate L Year {Vuosi}
 translate L Month {Kuukausi}
-translate L Months {Tammikuu Helmikuu Maaliskuu Huhtikuu Toukokuu Kesäkuu Heinäkuu Elokuu Syyskuu Lokakuu Marraskuu Joulukuu}
+translate L Months {Tammikuu Helmikuu Maaliskuu Huhtikuu Toukokuu Kesï¿½kuu Heinï¿½kuu Elokuu Syyskuu Lokakuu Marraskuu Joulukuu}
 translate L Days {Ma Ti Ke To Pe La Su}
-translate L YearToToday {Vuosi tähän päivään}
+translate L YearToToday {Vuosi tï¿½hï¿½n pï¿½ivï¿½ï¿½n}
 translate L Result {Lopputulos}
 translate L Round {Kierros}
 translate L Length {Pituus}
@@ -433,9 +447,9 @@ translate L Database {Tietokanta}
 translate L Filter {Suodatin}
 translate L Reset {Nollaa}
 translate L IgnoreCase {Sivuuta tapaus}
-translate L noGames {tyhjä}
+translate L noGames {tyhjï¿½}
 translate L allGames {kaikki}
-translate L empty {tyhjä}
+translate L empty {tyhjï¿½}
 translate L clipbase {leiketietokanta}
 translate L score {tulos}
 translate L Start {Alku}
@@ -443,14 +457,14 @@ translate L StartPos {Alkuasema}
 translate L Total {Summa}
 translate L readonly {kirjoitussuojattu}
 translate L altered {muutettu}
-translate L tagsDescript {Lisätagit (Esimerkiksi: kommentoija "Anand")}
-translate L prevTags {Käytä edellistä}
+translate L tagsDescript {Lisï¿½tagit (Esimerkiksi: kommentoija "Anand")}
+translate L prevTags {Kï¿½ytï¿½ edellistï¿½}
 # ====== TODO To be translated ======
 translate L value {Value}
 
 # Standard error messages:
-translate L ErrNotOpen {Tämä ei ole avoin tietokanta.}
-translate L ErrReadOnly {Tämä tietokanta on kirjoitussuojattu ja sitä ei voi muuttaa}
+translate L ErrNotOpen {Tï¿½mï¿½ ei ole avoin tietokanta.}
+translate L ErrReadOnly {Tï¿½mï¿½ tietokanta on kirjoitussuojattu ja sitï¿½ ei voi muuttaa}
 translate L ErrSearchInterrupted {Haku keskeytetty}
 
 # Game information:
@@ -469,12 +483,12 @@ translate L LineEnd {Muunnelman loppu}
 translate L PInfoAll {Kaikki pelit}
 translate L PInfoFilter {Suodata pelit}
 translate L PInfoAgainst {Vastaan}
-translate L PInfoMostWhite {Yleisimmät avaukset valkeilla nappuloilla}
-translate L PInfoMostBlack {Yleisimmät avaukset mustilla nappuloilla}
+translate L PInfoMostWhite {Yleisimmï¿½t avaukset valkeilla nappuloilla}
+translate L PInfoMostBlack {Yleisimmï¿½t avaukset mustilla nappuloilla}
 translate L PInfoRating {Elo-luvun historia}
-translate L PInfoBio {Elämäkerta}
+translate L PInfoBio {Elï¿½mï¿½kerta}
 translate L PInfoEditRatings {Muokkaa Elo-lukuja}
-translate L PinfoEditName {Muokkaa nimeä}
+translate L PinfoEditName {Muokkaa nimeï¿½}
 translate L PinfoLookupName {Etsi nimi}
 
 # Tablebase information:
@@ -482,72 +496,72 @@ translate L Draw {Tasapeli}
 translate L stalemate {patti}
 translate L checkmate {matti}
 translate L withAllMoves {kaikilla siirroilla}
-translate L withAllButOneMove {kaikilla paitsi yhdellä siirrolla}
+translate L withAllButOneMove {kaikilla paitsi yhdellï¿½ siirrolla}
 translate L with {kanssa}
 translate L only {ainoastaan}
 translate L lose {tappio}
-translate L loses {häviää}
-translate L allOthersLose {kaikki muut häviävä}
-translate L matesIn {tekee matin tietyn siirtomäärän jälkeen}
+translate L loses {hï¿½viï¿½ï¿½}
+translate L allOthersLose {kaikki muut hï¿½viï¿½vï¿½}
+translate L matesIn {tekee matin tietyn siirtomï¿½ï¿½rï¿½n jï¿½lkeen}
 translate L longest {pisin}
 translate L WinningMoves {Voittavat siirrot}
 translate L DrawingMoves {Tasapeliin johtavat siirrot}
-translate L LosingMoves {Häviävät siirrot}
+translate L LosingMoves {Hï¿½viï¿½vï¿½t siirrot}
 translate L UnknownMoves {Tuntemattomaan lopputulokseen johtavat siirrot}
 
 # Tip of the day:
 translate L Tip {Vinkki}
-translate L TipAtStartup {Näytä vinkki käynnistettäessä}
+translate L TipAtStartup {Nï¿½ytï¿½ vinkki kï¿½ynnistettï¿½essï¿½}
 
 # Tree window menus:
 menuText L TreeFile "Puu" 0
-menuText L TreeFileFillWithBase "Täytä välimuisti tietokannalla" 0 {Täytä välimuisti kaikilla nykyisessä tietokannassa olevilla peleillä}
-menuText L TreeFileFillWithGame "Täytä välimuisti pelillä" 0 {Täytä välimuistitiedosto nykyisen tietokannan nykyisellä pelillä}
-menuText L TreeFileCacheInfo "Välimuistin tiedot" 0 {Hanki tietoa välimuistin käytöstä}
-menuText L TreeFileSave "Tallenna välimuistitiedosto" 0 {Tallenna puuvälimuisti (.stc)tiedosto}
-menuText L TreeFileFill "Täytä välimuistitiedosto" 0 \
-  {Täytä välimuistitiedosto yleisillä avausasemilla}
-menuText L TreeFileBest "Parhaat pelit" 0 {Näytä parhaiten yhteensopivat pelit}
-menuText L TreeFileGraph "Grafiikkaikkuna" 0 {Näytä grafiikka tälle puuhaaralle}
-menuText L TreeFileCopy "Kopioi puuteksti leikepöydälle" 1 \
-  {Kopioi puutilastot leikepöydälle}
+menuText L TreeFileFillWithBase "Tï¿½ytï¿½ vï¿½limuisti tietokannalla" 0 {Tï¿½ytï¿½ vï¿½limuisti kaikilla nykyisessï¿½ tietokannassa olevilla peleillï¿½}
+menuText L TreeFileFillWithGame "Tï¿½ytï¿½ vï¿½limuisti pelillï¿½" 0 {Tï¿½ytï¿½ vï¿½limuistitiedosto nykyisen tietokannan nykyisellï¿½ pelillï¿½}
+menuText L TreeFileCacheInfo "Vï¿½limuistin tiedot" 0 {Hanki tietoa vï¿½limuistin kï¿½ytï¿½stï¿½}
+menuText L TreeFileSave "Tallenna vï¿½limuistitiedosto" 0 {Tallenna puuvï¿½limuisti (.stc)tiedosto}
+menuText L TreeFileFill "Tï¿½ytï¿½ vï¿½limuistitiedosto" 0 \
+  {Tï¿½ytï¿½ vï¿½limuistitiedosto yleisillï¿½ avausasemilla}
+menuText L TreeFileBest "Parhaat pelit" 0 {Nï¿½ytï¿½ parhaiten yhteensopivat pelit}
+menuText L TreeFileGraph "Grafiikkaikkuna" 0 {Nï¿½ytï¿½ grafiikka tï¿½lle puuhaaralle}
+menuText L TreeFileCopy "Kopioi puuteksti leikepï¿½ydï¿½lle" 1 \
+  {Kopioi puutilastot leikepï¿½ydï¿½lle}
 menuText L TreeFileClose "Sulje puuikkuna" 0 {Sulje puuikkuna}
 menuText L TreeMask "Naamio" 0
 menuText L TreeMaskNew "Uusi" 0 {Uusi naamio}
 menuText L TreeMaskOpen "Avaa" 0 {Avaa naamio}
-menuText L TreeMaskOpenRecent "Avaa äskettäinen" 0 {Avaa äskettäinen naamio}
+menuText L TreeMaskOpenRecent "Avaa ï¿½skettï¿½inen" 0 {Avaa ï¿½skettï¿½inen naamio}
 menuText L TreeMaskSave "Tallenna" 0 {Tallenna naamio}
 menuText L TreeMaskClose "Sulje" 0 {Sulje naaamio}
-menuText L TreeMaskFillWithLine "Täytä muunnelmalla" 0 {Täytä naamio kaikilla edellisillä siirroilla}
-menuText L TreeMaskFillWithGame "Täytä pelillä" 0 {Täytä naamio pelillä}
-menuText L TreeMaskFillWithBase "Täytä tietokannalla" 0 {Täytä naamio tietokannan kaikilla peleillä}
-menuText L TreeMaskInfo "Info" 0 {Näytä tilastot nykyiselle naamiolle}
-menuText L TreeMaskDisplay "Näytä naamion kartta" 0 {Näytä naamion tiedot puumuodossa}
-menuText L TreeMaskSearch "Etsi" 0 {Etsi nykyisessä naamiossa}
+menuText L TreeMaskFillWithLine "Tï¿½ytï¿½ muunnelmalla" 0 {Tï¿½ytï¿½ naamio kaikilla edellisillï¿½ siirroilla}
+menuText L TreeMaskFillWithGame "Tï¿½ytï¿½ pelillï¿½" 0 {Tï¿½ytï¿½ naamio pelillï¿½}
+menuText L TreeMaskFillWithBase "Tï¿½ytï¿½ tietokannalla" 0 {Tï¿½ytï¿½ naamio tietokannan kaikilla peleillï¿½}
+menuText L TreeMaskInfo "Info" 0 {Nï¿½ytï¿½ tilastot nykyiselle naamiolle}
+menuText L TreeMaskDisplay "Nï¿½ytï¿½ naamion kartta" 0 {Nï¿½ytï¿½ naamion tiedot puumuodossa}
+menuText L TreeMaskSearch "Etsi" 0 {Etsi nykyisessï¿½ naamiossa}
 menuText L TreeSort "Lajittele" 0
 menuText L TreeSortAlpha "Aakkosellinen" 0
 menuText L TreeSortECO "ECO-koodi" 0
 menuText L TreeSortFreq "Yleisyys" 0
 menuText L TreeSortScore "Tulos" 0
 menuText L TreeOpt "Vaihtoehdot" 0
-menuText L TreeOptSlowmode "Hidas moodi" 0 {Hidas moodi päivityksiä varten (korkea tarkkuus)}
-menuText L TreeOptFastmode "Nopea moodi" 0 {Nopea moodi päivityksiä varten (ei siirtovaihtoa)}
-menuText L TreeOptFastAndSlowmode "Nopea ja hidas moodi" 0 {Nopea moodi ja sitten hidas moodi päivityksiä varten}
-menuText L TreeOptStartStop "Automaattinen virkistäminen" 0 {Vaihtelee puuikkunan automaattista virkistämistä}
+menuText L TreeOptSlowmode "Hidas moodi" 0 {Hidas moodi pï¿½ivityksiï¿½ varten (korkea tarkkuus)}
+menuText L TreeOptFastmode "Nopea moodi" 0 {Nopea moodi pï¿½ivityksiï¿½ varten (ei siirtovaihtoa)}
+menuText L TreeOptFastAndSlowmode "Nopea ja hidas moodi" 0 {Nopea moodi ja sitten hidas moodi pï¿½ivityksiï¿½ varten}
+menuText L TreeOptStartStop "Automaattinen virkistï¿½minen" 0 {Vaihtelee puuikkunan automaattista virkistï¿½mistï¿½}
 menuText L TreeOptLock "Lukitse" 0 {Lukitse/vapauta puu nykyiseen tietokantaan}
-menuText L TreeOptTraining "Harjoitus" 0 {Käännä päälle/pois puuharjoitusmoodi}
-menuText L TreeOptShort "Lyhyt näyttö" 0 {Älä näytä ELO-informaatiota}
-menuText L TreeOptAutosave "Tallenna automaattisesti välimuisti" 0 {Tallenna automaattisesti välimuistitiedosto puuikkunaa suljettaessa}
-menuText L TreeOptAutomask "Lataa automaattisesti naamio" 0 "Lataa automaattisesti äskettäisin naamio auki olevalla puulla."
-menuText L TreeOptCacheSize "Välimuistin koko" 0 {Aseta välimuistin koko}
-menuText L TreeOptShowBar "Näytä edistymispalkki" 0 "Näytä puun edistymispalkki."
+menuText L TreeOptTraining "Harjoitus" 0 {Kï¿½ï¿½nnï¿½ pï¿½ï¿½lle/pois puuharjoitusmoodi}
+menuText L TreeOptShort "Lyhyt nï¿½yttï¿½" 0 {ï¿½lï¿½ nï¿½ytï¿½ ELO-informaatiota}
+menuText L TreeOptAutosave "Tallenna automaattisesti vï¿½limuisti" 0 {Tallenna automaattisesti vï¿½limuistitiedosto puuikkunaa suljettaessa}
+menuText L TreeOptAutomask "Lataa automaattisesti naamio" 0 "Lataa automaattisesti ï¿½skettï¿½isin naamio auki olevalla puulla."
+menuText L TreeOptCacheSize "Vï¿½limuistin koko" 0 {Aseta vï¿½limuistin koko}
+menuText L TreeOptShowBar "Nï¿½ytï¿½ edistymispalkki" 0 "Nï¿½ytï¿½ puun edistymispalkki."
 # ====== TODO To be translated ======
 menuText L TreeOptShowFrame "Show Button Bar" 0 "Show tree button bar."
 menuText L TreeOptSortBest "Lajittele parhaat pelit" 0 "Lajittele parhaat pelit ECOn mukaan."
 menuText L TreeHelp "Apu" 0
 menuText L TreeHelpTree "Puuapu" 0
 menuText L TreeHelpIndex "Apuindeksi" 0
-translate L SaveCache {Tallenna välimuisti}
+translate L SaveCache {Tallenna vï¿½limuisti}
 translate L Training {Harjoittelu}
 translate L LockTree {Lukitse}
 translate L TreeLocked {lukittu}
@@ -556,36 +570,36 @@ translate L TreeBestGames {Parhaat pelit}
 translate L TreeAdjust {Mukauta suodatin}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
-translate L TreeTitleRow      {    Siirto      Yleisyys    Tulos  Tasapeli Keskimä.Elo Perf Keskimä.Vuosi ECO}
+translate L TreeTitleRow      {    Siirto      Yleisyys    Tulos  Tasapeli Keskimï¿½.Elo Perf Keskimï¿½.Vuosi ECO}
 translate L TreeTitleRowShort {    Siirto      Yleisyys    Tulos  Tasapeli}
 translate L TreeTotal: {SUMMA:}
 translate L DoYouWantToSaveFirst {Haluatko tallentaa}
-translate L AddToMask {Lisää naamioon}
+translate L AddToMask {Lisï¿½ï¿½ naamioon}
 translate L RemoveFromMask {Poista naamiosta}
-translate L AddThisMoveToMask {Lisää siirto naamioon}
+translate L AddThisMoveToMask {Lisï¿½ï¿½ siirto naamioon}
 translate L SearchMask {Etsi naamiosta}
-translate L DisplayMask {Näytä naamio}
+translate L DisplayMask {Nï¿½ytï¿½ naamio}
 translate L Nag {Nalkuta-koodi}
 translate L Marker {Merkki}
-translate L Include {Sisällytä}
+translate L Include {Sisï¿½llytï¿½}
 translate L Exclude {Poissulje}
-translate L MainLine {Päämuunnelma}
+translate L MainLine {Pï¿½ï¿½muunnelma}
 translate L Bookmark {Kirjanmerkki}
 translate L NewLine {Uusi muunnelma}
 translate L ToBeVerified {Todenna}
 translate L ToTrain {Harjoittele}
 translate L Dubious {Kyseenalainen}
 translate L ToRemove {Poista}
-translate L NoMarker {Ei merkkiä}
-translate L ColorMarker {Väri}
+translate L NoMarker {Ei merkkiï¿½}
+translate L ColorMarker {Vï¿½ri}
 translate L WhiteMark {Valkoinen}
-translate L GreenMark {Vihreä}
+translate L GreenMark {Vihreï¿½}
 translate L YellowMark {Keltainen}
 translate L BlueMark {Sininen}
 translate L RedMark {Punainen}
 translate L CommentMove {Kommenttisiirto}
 translate L CommentPosition {Kommenttiasema}
-translate L AddMoveToMaskFirst {Lisää siirto ensiksi naamioon}
+translate L AddMoveToMaskFirst {Lisï¿½ï¿½ siirto ensiksi naamioon}
 translate L OpenAMaskFileFirst {Avaa ensiksi naamiotiedosto}
 # ====== TODO To be translated ======
 translate L positions {positions}
@@ -613,18 +627,18 @@ translate L FileFinder {Tiedostohakija}
 translate L FinderDir {Hakemisto}
 translate L FinderDirs {Hakemistot}
 translate L FinderFiles {Tiedostot}
-translate L FinderUpDir {ylös}
+translate L FinderUpDir {ylï¿½s}
 translate L FinderCtxOpen {Avaa}
 translate L FinderCtxBackup {Varmuuskopio}
 translate L FinderCtxCopy {Kopioi}
-translate L FinderCtxMove {Siirrä}
+translate L FinderCtxMove {Siirrï¿½}
 translate L FinderCtxDelete {Poista}
 # ====== TODO To be translated ======
 translate L FinderDirOpen {Open Directory}
 
 # Player finder:
 menuText L PListFile "Pelaajan hakulaite" 0
-menuText L PListFileUpdate "Päivitä" 0
+menuText L PListFileUpdate "Pï¿½ivitï¿½" 0
 menuText L PListFileClose "Sulje" 0
 menuText L PListSort "Lajittele" 0
 menuText L PListSortName "Nimi" 0
@@ -635,10 +649,10 @@ menuText L PListSortNewest "Uusin" 2
 
 # Tournament finder:
 menuText L TmtFile "Turnaushakulaite" 0
-menuText L TmtFileUpdate "Päivitä" 0
+menuText L TmtFileUpdate "Pï¿½ivitï¿½" 0
 menuText L TmtFileClose "Sulje" 0
 menuText L TmtSort "Lajittele" 0
-menuText L TmtSortDate "Päivämäärä" 0
+menuText L TmtSortDate "Pï¿½ivï¿½mï¿½ï¿½rï¿½" 0
 menuText L TmtSortPlayers "Pelaajat" 0
 menuText L TmtSortGames "Pelit" 0
 menuText L TmtSortElo "Elo" 0
@@ -646,40 +660,40 @@ menuText L TmtSortSite "Sijainti" 0
 menuText L TmtSortEvent "Tapahtuma" 1
 menuText L TmtSortWinner "Voittaja" 0
 translate L TmtLimit "Listan koko"
-translate L TmtMeanElo "Keskimääräinen Elo"
-translate L TmtNone "Sopivia turnauksia ei löytynyt."
+translate L TmtMeanElo "Keskimï¿½ï¿½rï¿½inen Elo"
+translate L TmtNone "Sopivia turnauksia ei lï¿½ytynyt."
 
 # Graph windows:
 menuText L GraphFile "Tiedosto" 0
-menuText L GraphFileColor "Tallenna PostScript-värinä" 8
-menuText L GraphFileGrey "Tallenna mustavalkoisena PostScriptinä" 8
+menuText L GraphFileColor "Tallenna PostScript-vï¿½rinï¿½" 8
+menuText L GraphFileGrey "Tallenna mustavalkoisena PostScriptinï¿½" 8
 menuText L GraphFileClose "Sulje" 0
 menuText L GraphOptions "Vaihtoehdot" 0
 menuText L GraphOptionsWhite "Valkoinen" 0
 menuText L GraphOptionsBlack "Musta" 0
-menuText L GraphOptionsDots "Näytä pisteet" 0
+menuText L GraphOptionsDots "Nï¿½ytï¿½ pisteet" 0
 menuText L GraphOptionsBar "Korosta nykyinen siirto" 0
 menuText L GraphOptionsBoth "Molemmat" 1
 menuText L GraphOptionsPInfo "Pelaaja Tieto pelaaja" 0
-translate L GraphFilterTitle "Yleisyys 1000:ssa pelissä"
+translate L GraphFilterTitle "Yleisyys 1000:ssa pelissï¿½"
 translate L GraphAbsFilterTitle "Pelin yleisyys"
 translate L ConfigureFilter "Konfiguroi X-akseli"
 translate L FilterEstimate "Arvioi"
 translate L TitleFilterGraph "Scid: Suodatingrafiikka"
 
 # Analysis window:
-translate L AddVariation {Lisää muunnelma}
-translate L AddAllVariations {Lisää kaikki muunnelmat}
-translate L AddMove {Lisää siirto}
+translate L AddVariation {Lisï¿½ï¿½ muunnelma}
+translate L AddAllVariations {Lisï¿½ï¿½ kaikki muunnelmat}
+translate L AddMove {Lisï¿½ï¿½ siirto}
 translate L Annotate {Kommentoi}
-translate L ShowAnalysisBoard {Näyty analyysilauta}
-translate L ShowInfo {Näytä ohjelman tiedot}
+translate L ShowAnalysisBoard {Nï¿½yty analyysilauta}
+translate L ShowInfo {Nï¿½ytï¿½ ohjelman tiedot}
 translate L FinishGame {Lopeta peli}
-translate L StopEngine {Pysäytä ohjelma}
-translate L StartEngine {Käynnistä ohjelma}
-translate L ExcludeMove {Hylkää siirto}
+translate L StopEngine {Pysï¿½ytï¿½ ohjelma}
+translate L StartEngine {Kï¿½ynnistï¿½ ohjelma}
+translate L ExcludeMove {Hylkï¿½ï¿½ siirto}
 translate L LockEngine {Lukitse ohjelma nykyiseen asemaan}
-translate L AnalysisCommand {Analyysikäsky}
+translate L AnalysisCommand {Analyysikï¿½sky}
 translate L PreviousChoices {Edelliset vaihtoehdot}
 translate L AnnotateTime {Sekunnit siirtoa kohden}
 translate L AnnotateWhich {Kumpi puoli}
@@ -688,10 +702,10 @@ translate L AnnotateAllMoves {Kaikki siirrot}
 translate L AnnotateWhite {Ainoastaan valkoisen siirrot}
 translate L AnnotateBlack {Ainoastaan mustan siirrot}
 translate L AnnotateNotBest {Kun siirto ei ole paras}
-translate L AnnotateBlundersOnly {Kun siirto on möhläys}
-translate L BlundersNotBest {Möhläykset/ei paras siirto}
+translate L AnnotateBlundersOnly {Kun siirto on mï¿½hlï¿½ys}
+translate L BlundersNotBest {Mï¿½hlï¿½ykset/ei paras siirto}
 translate L AnnotateTitle {Konfiguroi kommentti}
-translate L AnnotateMissedMates {Huomaamatta jääneet/lyhyemmät matit}
+translate L AnnotateMissedMates {Huomaamatta jï¿½ï¿½neet/lyhyemmï¿½t matit}
 # ====== TODO To be translated ======
 translate L AnnotateEnd {At end of game}
 translate L BlundersThreshold {Raja-arvo}
@@ -699,13 +713,13 @@ translate L ScoreFormat {Lopputuloksen formaatti}
 translate L CutOff {Katkaise}
 translate L LowPriority {Matala CPU-prioriteetti}
 translate L LogEngines {Lokin koko}
-translate L LogName {Lisää nimi}
+translate L LogName {Lisï¿½ï¿½ nimi}
 translate L MaxPly {Maksimipuolisiirto}
-translate L ClickHereToSeeMoves {Klikkaa tähän nähdäksesi siirrot}
+translate L ClickHereToSeeMoves {Klikkaa tï¿½hï¿½n nï¿½hdï¿½ksesi siirrot}
 translate L ConfigureInformant {Konfiguroi Informartti}
 translate L Informant!? {Mielenkiintoinen siirto}
 translate L Informant? {Huono siirto}
-translate L Informant?? {Möhläys}
+translate L Informant?? {Mï¿½hlï¿½ys}
 translate L Informant?! {Kyseenalainen siirto}
 translate L Informant+= {Valkealla on hienoinen etu}
 translate L Informant+/- {Valkoisella on kohtuullinen etu}
@@ -726,14 +740,14 @@ translate L EngineList {Analyysiohjelmat}
 translate L EngineKey {Avain}
 translate L EngineType {Tyyppi}
 translate L EngineName {Nimi}
-translate L EngineCmd {Käsky}
+translate L EngineCmd {Kï¿½sky}
 translate L EngineArgs {Parametrit}
 translate L EngineDir {Hakemisto}
 translate L EngineElo {Elo}
-translate L EngineTime {Päivämäärä}
+translate L EngineTime {Pï¿½ivï¿½mï¿½ï¿½rï¿½}
 translate L EngineNew {Uusi}
 translate L EngineEdit {Muokkaa}
-translate L EngineRequired {Lihavoidut kentät vaaditaan; muut ovat valinnaisia}
+translate L EngineRequired {Lihavoidut kentï¿½t vaaditaan; muut ovat valinnaisia}
 
 # Stats window menus:
 menuText L StatsFile "Tilastot" 0
@@ -743,28 +757,28 @@ menuText L StatsOpt "Vaihtoehdot" 0
 
 # PGN window menus:
 menuText L PgnFile "PGN" 0
-menuText L PgnFileCopy "Kopioi leikepöydälle" 0
-menuText L PgnFilePrint "Tallenna peli tietyssä muodossa" 0
+menuText L PgnFileCopy "Kopioi leikepï¿½ydï¿½lle" 0
+menuText L PgnFilePrint "Tallenna peli tietyssï¿½ muodossa" 0
 menuText L PgnFileClose "Sulje" 10
 menuText L PgnOpt "Vaihtoehdot" 0
-menuText L PgnOptColor "Värinäyttö" 0
-menuText L PgnOptShort "Lyhyt ylätunniste" 6
+menuText L PgnOptColor "Vï¿½rinï¿½yttï¿½" 0
+menuText L PgnOptShort "Lyhyt ylï¿½tunniste" 6
 menuText L PgnOptSymbols "Symboliset kommentit" 1
-menuText L PgnOptIndentC "Sisennä kommentit" 0
-menuText L PgnOptIndentV "Sisennä muunnelmat" 7
+menuText L PgnOptIndentC "Sisennï¿½ kommentit" 0
+menuText L PgnOptIndentV "Sisennï¿½ muunnelmat" 7
 menuText L PgnOptColumn "Saraketyyli" 1
-menuText L PgnOptSpace "Välilyönti siirron mumeron jälkeen" 18
+menuText L PgnOptSpace "Vï¿½lilyï¿½nti siirron mumeron jï¿½lkeen" 18
 menuText L PgnOptStripMarks "Piilota ruutu/nuoli-koodit" 1
 menuText L PgnOptChess "Nappulat" 6
 menuText L PgnOptScrollbar "Vierityspalkki" 6
-menuText L PgnOptBoldMainLine "Lihavoitu päämuunnelma" 4
-menuText L PgnColor "Värit" 0
-menuText L PgnColorHeader "Ylätunniste" 0
+menuText L PgnOptBoldMainLine "Lihavoitu pï¿½ï¿½muunnelma" 4
+menuText L PgnColor "Vï¿½rit" 0
+menuText L PgnColorHeader "Ylï¿½tunniste" 0
 menuText L PgnColorAnno "Huomautukset" 0
 menuText L PgnColorComments "Kommentit" 0
 menuText L PgnColorVars "Muunnelmat" 0
 menuText L PgnColorBackground "Tausta" 0
-menuText L PgnColorMain "Päämuunnelma" 0
+menuText L PgnColorMain "Pï¿½ï¿½muunnelma" 0
 menuText L PgnColorCurrent "Nykyinen siirto" 1
 menuText L PgnColorNextMove "Seuraava siirto" 0
 menuText L PgnHelp "Apu" 0
@@ -774,32 +788,32 @@ translate L PgnWindowTitle {PGN: peli %u}
 
 # Crosstable window menus:
 menuText L CrosstabFile "Turnaustaulukko" 0
-menuText L CrosstabFileText "Tallenna tekstinä" 8
+menuText L CrosstabFileText "Tallenna tekstinï¿½" 8
 menuText L CrosstabFileHtml "Tallenna HTML-muodossa" 8
 menuText L CrosstabFileLaTeX "Tallenna LaTeX-muodossa" 8
 menuText L CrosstabFileClose "Sulje" 0
 menuText L CrosstabEdit "Muokkaa" 0
 menuText L CrosstabEditEvent "Tapahtuma" 0
 menuText L CrosstabEditSite "Paikkakunta" 0
-menuText L CrosstabEditDate "Päivämäärä" 0
+menuText L CrosstabEditDate "Pï¿½ivï¿½mï¿½ï¿½rï¿½" 0
 menuText L CrosstabOpt "Vaihtoehdot" 0
-menuText L CrosstabOptColorPlain "Pelkkä teksti" 0
+menuText L CrosstabOptColorPlain "Pelkkï¿½ teksti" 0
 menuText L CrosstabOptColorHyper "Hyperteksti" 0
 menuText L CrosstabOptTieWin "Tiebreak-voittojen mukaan" 1
 menuText L CrosstabOptTieHead "Tiebreak vastakkain" 1
-menuText L CrosstabOptThreeWin "3 pistettä voitosta " 1
-menuText L CrosstabOptAges "Iät vuosina" 8
+menuText L CrosstabOptThreeWin "3 pistettï¿½ voitosta " 1
+menuText L CrosstabOptAges "Iï¿½t vuosina" 8
 menuText L CrosstabOptNats "Kansakunnat" 0
 menuText L CrosstabOptTallies "Voitto/tappio/tasapeli" 0
 menuText L CrosstabOptRatings "Ohjearvot" 0
 menuText L CrosstabOptTitles "Arvonimet" 0
 menuText L CrosstabOptBreaks "Tiebreak-tulokset" 4
-menuText L CrosstabOptDeleted "Sisällytä poistetut pelit" 8
-menuText L CrosstabOptColors "Väritiedot (Ainoastaan Swiss)" 0
-menuText L CrosstabOptColorRows "Rivien väri" 0
-menuText L CrosstabOptRowsColor "Turnaustaulukon rivit" 0 {Tulostaulukon rivin väri}
+menuText L CrosstabOptDeleted "Sisï¿½llytï¿½ poistetut pelit" 8
+menuText L CrosstabOptColors "Vï¿½ritiedot (Ainoastaan Swiss)" 0
+menuText L CrosstabOptColorRows "Rivien vï¿½ri" 0
+menuText L CrosstabOptRowsColor "Turnaustaulukon rivit" 0 {Tulostaulukon rivin vï¿½ri}
 menuText L CrosstabOptColumnNumbers "Numeroidut sarakkeet (Ainoastaan kaikki-pelaa-kaikki)" 2
-menuText L CrosstabOptGroup "Ryhmän tulokset" 0
+menuText L CrosstabOptGroup "Ryhmï¿½n tulokset" 0
 menuText L CrosstabSort "Lajittele tietyn kriteerin mukaan" 0
 menuText L CrosstabSortName "Nimi" 0
 menuText L CrosstabSortRating "Ohjearvo" 0
@@ -814,19 +828,19 @@ menuText L CrosstabHelp "Apu" 0
 menuText L CrosstabHelpCross "Turnaustaulukkoapu" 0
 menuText L CrosstabHelpIndex "Apuindeksi" 0
 translate L SetFilter {Aseta suodatin}
-translate L AddToFilter {Lisää suodattimeen}
+translate L AddToFilter {Lisï¿½ï¿½ suodattimeen}
 translate L Swiss {Swiss}
 translate L Category {Kategoria}
 
 # Opening report window menus:
 menuText L OprepFile "Raportti" 0
 menuText L OprepFileText "Tulosta tekstiksi" 9
-menuText L OprepFileHtml "Tulosta HTMLämmäksi" 9
+menuText L OprepFileHtml "Tulosta HTMLï¿½mmï¿½ksi" 9
 menuText L OprepFileLaTeX "Tulosta LaTeXsiksi" 9
 menuText L OprepFileOptions "Vaihtoehdot" 0
 menuText L OprepFileClose "Sulje raportti-ikkuna" 0
 menuText L OprepFavorites "Suosikit" 1
-menuText L OprepFavoritesAdd "Lisää raportti" 0
+menuText L OprepFavoritesAdd "Lisï¿½ï¿½ raportti" 0
 menuText L OprepFavoritesEdit "Muokkaa raportin suosikit" 0
 menuText L OprepFavoritesGenerate "Luo raportit" 0
 menuText L OprepHelp "Apu" 0
@@ -838,7 +852,7 @@ translate L HeaderSearch {Yleinen haku}
 translate L EndSideToMove {Siirtovuorossa oleva puoli pelin lopussa}
 translate L GamesWithNoECO {Pelit ilman ECOa?}
 translate L GameLength {Pelin pituus}
-translate L FindGamesWith {Löydä liputetut pelit}
+translate L FindGamesWith {Lï¿½ydï¿½ liputetut pelit}
 translate L StdStart {Ei standardialku}
 translate L Promotions {Korottuminen}
 translate L UnderPromo {Alikorotus}
@@ -856,9 +870,9 @@ translate L TacticsFlag {Taktiikat}
 translate L QsideFlag {Kuningatarsivustan peli}
 translate L KsideFlag {Kuningassivustan peli}
 translate L BrilliancyFlag {Loistokkuus}
-translate L BlunderFlag {Möhläys}
-translate L UserFlag {Käyttäjä}
-translate L PgnContains {PGN sisältää tekstiä}
+translate L BlunderFlag {Mï¿½hlï¿½ys}
+translate L UserFlag {Kï¿½yttï¿½jï¿½}
+translate L PgnContains {PGN sisï¿½ltï¿½ï¿½ tekstiï¿½}
 # ====== TODO To be translated ======
 translate L PreComment {Pre-game Comment}
 # ====== TODO To be translated ======
@@ -873,9 +887,9 @@ translate L GlistBElo {M-Elo}
 translate L GlistEvent {Tapahtuma}
 translate L GlistSite {Paikka}
 translate L GlistRound {Kierros}
-translate L GlistDate {Päivämäärä}
+translate L GlistDate {Pï¿½ivï¿½mï¿½ï¿½rï¿½}
 translate L GlistYear {Vuosi}
-translate L GlistEventDate {Tapahtuman päivämäärä}
+translate L GlistEventDate {Tapahtuman pï¿½ivï¿½mï¿½ï¿½rï¿½}
 translate L GlistResult {Tulos}
 translate L GlistLength {Pituus}
 translate L GlistCountry {Maa}
@@ -889,21 +903,21 @@ translate L GlistComments {Kommentit}
 translate L GlistAnnos {Huomautukset}
 translate L GlistStart {Alku}
 translate L GlistGameNumber {Pelin numero}
-translate L GlistFindText {Löydä}
+translate L GlistFindText {Lï¿½ydï¿½}
 translate L GlistMoveField {Siirto}
 translate L GlistEditField {Konfiguroi}
-translate L GlistAddField {Lisää}
+translate L GlistAddField {Lisï¿½ï¿½}
 translate L GlistDeleteField {Poista}
-translate L GlistColor {Väri}
+translate L GlistColor {Vï¿½ri}
 translate L GlistSort {Lajittele tietokanta}
 
-# menu shown with right mouse button down on game list. 
+# menu shown with right mouse button down on game list.
 translate L GlistRemoveThisGameFromFilter  {Poista}
-translate L GlistRemoveGameAndAboveFromFilter  {Poista kaikki ylhäällä}
+translate L GlistRemoveGameAndAboveFromFilter  {Poista kaikki ylhï¿½ï¿½llï¿½}
 translate L GlistRemoveGameAndBelowFromFilter  {Poista kaikki alhaalla}
-translate L GlistDeleteGame {Poista tämä peli} 
-translate L GlistDeleteAllGames {Poista suodattimen kaikki pelit} 
-translate L GlistUndeleteAllGames {Palauta suodattimen kaikki pelit} 
+translate L GlistDeleteGame {Poista tï¿½mï¿½ peli}
+translate L GlistDeleteAllGames {Poista suodattimen kaikki pelit}
+translate L GlistUndeleteAllGames {Palauta suodattimen kaikki pelit}
 
 translate L GlistAlignL {Tasaa vasemmalle}
 translate L GlistAlignR {Tasaa oikealle}
@@ -915,8 +929,8 @@ translate L TypeIcon {Tietokannan tyyppi}
 translate L NumOfGames {Pelit:}
 translate L NumDeletedGames {Poistetut pelit:}
 translate L NumFilterGames {Suodattimen pelit:}
-translate L YearRange {Vuoden vaihteluväli:}
-translate L RatingRange {Elo-luvun vaihteluväli:}
+translate L YearRange {Vuoden vaihteluvï¿½li:}
+translate L RatingRange {Elo-luvun vaihteluvï¿½li:}
 translate L Description {Kuvaus}
 translate L Flag {Lippu}
 translate L CustomFlags {Mukautetut liput}
@@ -930,9 +944,9 @@ translate L DeleteTwins {Poista kaksoispelit}
 translate L MarkCurrent {Merkitse nykyinen peli}
 translate L MarkFilter {Merkitse suodatinpeli}
 translate L MarkAll {Merkitse kaikki pelit}
-translate L UnmarkCurrent {Poista merkintä nykyisestä pelistä}
-translate L UnmarkFilter {Poista merkintä suodatinpelistä}
-translate L UnmarkAll {Poista merkintä kaikista peleistä}
+translate L UnmarkCurrent {Poista merkintï¿½ nykyisestï¿½ pelistï¿½}
+translate L UnmarkFilter {Poista merkintï¿½ suodatinpelistï¿½}
+translate L UnmarkAll {Poista merkintï¿½ kaikista peleistï¿½}
 translate L Spellchecking {Tavutuksen tarkastus}
 translate L MakeCorrections {Tee korjaukset}
 translate L Ambiguous {Moniselitteinen}
@@ -945,21 +959,21 @@ translate L DatabaseOps {Tietokantatoiminnat}
 translate L ReclassifyGames {ECO-luokittele pelit}
 translate L CompactDatabase {Kompakti tietokanta}
 translate L SortDatabase {Lajittele tietokanta}
-translate L AddEloRatings {Lisää Elo-luvut}
+translate L AddEloRatings {Lisï¿½ï¿½ Elo-luvut}
 translate L AutoloadGame {Lataa peli automaattisesti}
-translate L StripTags {Poista ylimääräiset tagit}
+translate L StripTags {Poista ylimï¿½ï¿½rï¿½iset tagit}
 translate L StripTag {Poista tag}
 translate L CheckGames {Tarkista pelit}
 translate L Cleaner {Puhdistaja}
 translate L CleanerHelp {
-Puhdistaja suorittaa kaikki alla valitut toiminnot nykyisessä tietokannassa.
+Puhdistaja suorittaa kaikki alla valitut toiminnot nykyisessï¿½ tietokannassa.
 
-Nykyiset asetukset ECO-luokituksessa ja kaksoispelien poistossa pätevät jos ne on valittu.
+Nykyiset asetukset ECO-luokituksessa ja kaksoispelien poistossa pï¿½tevï¿½t jos ne on valittu.
 }
 translate L CleanerConfirm {
-Kun puhdistajan huolto on aloitettu sitä ei voi keskeyttää.
+Kun puhdistajan huolto on aloitettu sitï¿½ ei voi keskeyttï¿½ï¿½.
 
-Tämä voi viedä pitkään. Oletko varma, että haluat suorittaa valitut huoltotoiminnot?
+Tï¿½mï¿½ voi viedï¿½ pitkï¿½ï¿½n. Oletko varma, ettï¿½ haluat suorittaa valitut huoltotoiminnot?
 }
 # Twinchecker
 translate L TwinCheckUndelete {vaihtele)}
@@ -968,64 +982,64 @@ translate L TwinChecknextPair {Seuraava pari}
 translate L TwinChecker {Kaksoispelien tarkastaja}
 translate L TwinCheckTournament {Turnauksen pelit:}
 translate L TwinCheckNoTwin {Ei kaksonen}
-translate L TwinCheckNoTwinfound {Tähän peliin ei havaittu kaksosta.\nTo käytä ensin "Poista kaksoispelit" toimintoa näyttääksesi kaksoset käyttäen tätä ikkunaa.}
+translate L TwinCheckNoTwinfound {Tï¿½hï¿½n peliin ei havaittu kaksosta.\nTo kï¿½ytï¿½ ensin "Poista kaksoispelit" toimintoa nï¿½yttï¿½ï¿½ksesi kaksoset kï¿½yttï¿½en tï¿½tï¿½ ikkunaa.}
 translate L TwinCheckTag {Jaa tagit...}
-translate L TwinCheckFound1 {Scid löysi $result kaksoispeliä}
+translate L TwinCheckFound1 {Scid lï¿½ysi $result kaksoispeliï¿½}
 translate L TwinCheckFound2 {ja aseta niiden poistoliput}
-translate L TwinCheckNoDelete {Tässä tietokannassa ei ole pelejä poistettavaksi.}
+translate L TwinCheckNoDelete {Tï¿½ssï¿½ tietokannassa ei ole pelejï¿½ poistettavaksi.}
 # bug here... can't use \n\n
 translate L TwinCriteria1 {Heikko kriteerivaroitus\n}
-translate L TwinCriteria2 {Olet valinnut "Ei" "Samat siirrot" varten, joka on erittäin huono.\n
+translate L TwinCriteria2 {Olet valinnut "Ei" "Samat siirrot" varten, joka on erittï¿½in huono.\n
 Jatka kuitenkin?}
-translate L TwinCriteria3 {Sinun täytyy määritellä "Kyllä" vähintään kahdelle "Sama Puoli", "Sama Kierros" ja "Sama Vuosi"-asetuksille.\n
+translate L TwinCriteria3 {Sinun tï¿½ytyy mï¿½ï¿½ritellï¿½ "Kyllï¿½" vï¿½hintï¿½ï¿½n kahdelle "Sama Puoli", "Sama Kierros" ja "Sama Vuosi"-asetuksille.\n
 Jatka kuitenkin?}
 translate L TwinCriteriaConfirm {Scid: Vahvista kaksoisasetukset}
 translate L TwinChangeTag "Vaihda seuraavat pelitagit:\n\n"
-translate L AllocRatingDescription "Lisää pelaajan Elo-luvut asiaankuuluville peleille käyttäen tietoja tavutus (Elo-luvut)-tiedostoa."
-translate L RatingOverride "Kirjoita olemassaolevien Elo-lukujen päälle?"
-translate L AddRatings "Lisää Elo-luvut"
-translate L AddedRatings {Scid lisäsi $r Elo-lukua $g peliin.}
+translate L AllocRatingDescription "Lisï¿½ï¿½ pelaajan Elo-luvut asiaankuuluville peleille kï¿½yttï¿½en tietoja tavutus (Elo-luvut)-tiedostoa."
+translate L RatingOverride "Kirjoita olemassaolevien Elo-lukujen pï¿½ï¿½lle?"
+translate L AddRatings "Lisï¿½ï¿½ Elo-luvut"
+translate L AddedRatings {Scid lisï¿½si $r Elo-lukua $g peliin.}
 
 #Bookmark editor
-translate L NewSubmenu "Lisää valikko"
+translate L NewSubmenu "Lisï¿½ï¿½ valikko"
 
 # Comment editor:
 translate L AnnotationSymbols  {Huomautukset}
 translate L Comment {Kommentit}
 translate L InsertMark {Merkit}
 translate L InsertMarkHelp {
-Liitä/poista-merkki: Valitse väri, tyyppi, ruutu.
-Liitä/poista-nuoli: Napauta hiiren oikealla näppäimellä kahta ruutua.
+Liitï¿½/poista-merkki: Valitse vï¿½ri, tyyppi, ruutu.
+Liitï¿½/poista-nuoli: Napauta hiiren oikealla nï¿½ppï¿½imellï¿½ kahta ruutua.
 }
 
 # Nag buttons in comment editor:
-translate L GoodMove {Hyvä siirto}
+translate L GoodMove {Hyvï¿½ siirto}
 translate L PoorMove {Huono siirto}
 translate L ExcellentMove {Erinomainen siirto}
-translate L Blunder {Möhläys}
+translate L Blunder {Mï¿½hlï¿½ys}
 translate L InterestingMove {Mielenkiintoinen siirto}
 translate L DubiousMove {Kyseenalainen siirto}
 translate L WhiteDecisiveAdvantage {Valkoisella on ratkaiseva etu}
 translate L BlackDecisiveAdvantage {Mustalla on ratkaiseva etu}
-translate L WhiteClearAdvantage {Valkealla on selvä etu}
-translate L BlackClearAdvantage {Mustalla on selvä etu}
-translate L WhiteSlightAdvantage {Valkealla on lievä etu}
-translate L BlackSlightAdvantage {Mustalla on lievä etu}
+translate L WhiteClearAdvantage {Valkealla on selvï¿½ etu}
+translate L BlackClearAdvantage {Mustalla on selvï¿½ etu}
+translate L WhiteSlightAdvantage {Valkealla on lievï¿½ etu}
+translate L BlackSlightAdvantage {Mustalla on lievï¿½ etu}
 translate L Equality {Tasa-asema}
-translate L Unclear {Epäselvä}
+translate L Unclear {Epï¿½selvï¿½}
 translate L Diagram {Kuvio}
 
 # Board search:
-translate L BoardSearch {Laudan etsintä}
+translate L BoardSearch {Laudan etsintï¿½}
 translate L FilterOperation {Suodattimen asetus}
 translate L FilterAnd {Rajoita suodatin (JA)}
-translate L FilterOr {Lisää suodattimeen (TAI)}
+translate L FilterOr {Lisï¿½ï¿½ suodattimeen (TAI)}
 translate L FilterIgnore {Nollaa suodatin}
-translate L SearchType {Etsi tyyppiä}
+translate L SearchType {Etsi tyyppiï¿½}
 translate L SearchBoardExact {Tarkka asema (kaikki nappulat samoissa ruuduissa)}
 translate L SearchBoardPawns {Sotilaat (sama materiaali, kaikki sotilaat samoissa ruuduissa)}
 translate L SearchBoardFiles {Linjat (sama materiaali, kaikki sotilaat samoilla linjoilla)}
-translate L SearchBoardAny {Mikä tahansa (sama materiaali, sotilaat ja upseerit missä tahansa)}
+translate L SearchBoardAny {Mikï¿½ tahansa (sama materiaali, sotilaat ja upseerit missï¿½ tahansa)}
 translate L SearchInRefDatabase {Etsi tietokannasta }
 translate L LookInVars {Katso muunnelmista}
 # ====== TODO To be translated ======
@@ -1040,17 +1054,17 @@ translate L MaterialSearch {Materiaalihaku}
 translate L Material {Materiaali}
 translate L Patterns {Kuviot}
 translate L Zero {Nolla}
-translate L Any {Mikä tahansa}
+translate L Any {Mikï¿½ tahansa}
 translate L CurrentBoard {Nykyinen lauta}
 translate L CommonEndings {Yleiset loppupelit}
 translate L CommonPatterns {Yleiset kuviot}
 translate L MaterialDiff {Materiaaliero}
 translate L squares {ruudut}
-translate L SameColor {Sama väri}
-translate L OppColor {Vastakkainen väri}
+translate L SameColor {Sama vï¿½ri}
+translate L OppColor {Vastakkainen vï¿½ri}
 translate L Either {Jompikumpi}
-translate L MoveNumberRange {Siirtonumeron vaihteluväli}
-translate L MatchForAtLeast {Täsmätä vähintään}
+translate L MoveNumberRange {Siirtonumeron vaihteluvï¿½li}
+translate L MatchForAtLeast {Tï¿½smï¿½tï¿½ vï¿½hintï¿½ï¿½n}
 translate L HalfMoves {Puolisiirrot}
 
 # Common endings in material search:
@@ -1061,12 +1075,12 @@ translate L EndingRookPawnsVsRook {Torni ja sotilas/sotilaat vastaan torni}
 translate L EndingRooks {Torni vastaan torni -loppupelit}
 translate L EndingRooksPassedA {Torni vastaan torni -loppupelit a-linjan vapaasotilaan kanssa}
 translate L EndingRooksDouble {Kahden tornin loppupelit}
-translate L EndingBishops {Lähetti vastaan lähetti-loppupelit}
-translate L EndingBishopVsKnight {Lähetti vastaan ratsu -loppupelit}
+translate L EndingBishops {Lï¿½hetti vastaan lï¿½hetti-loppupelit}
+translate L EndingBishopVsKnight {Lï¿½hetti vastaan ratsu -loppupelit}
 translate L EndingKnights {Ratsu vastaan ratsu -loppupelit}
 translate L EndingQueens {Kuningatar vastaan kuningatar -loppupelit}
 translate L EndingQueenPawnVsQueen {Kuningatar ja 1 sotilas vastaan kuningatar}
-translate L BishopPairVsKnightPair {Kaksi lähettiä vastaan kaksi ratsua -keskipeli}
+translate L BishopPairVsKnightPair {Kaksi lï¿½hettiï¿½ vastaan kaksi ratsua -keskipeli}
 
 # Common patterns in material search:
 translate L PatternWhiteIQP {Valkoinen eristetty kuningatarsotilas}
@@ -1075,48 +1089,48 @@ translate L PatternWhiteIQPBreakC6 {Valkoinen eristetty kuningatarsotilas: d4-d5
 translate L PatternBlackIQP {Musta eristetty kuningatarsotilas}
 translate L PatternWhiteBlackIQP {Valkoinen eristetty kuningatarsotilas vastaan musta rristetty kuningatarsotilas}
 translate L PatternCoupleC3D4 {Valkoinen c3+d4 eristetty sotilaspari}
-translate L PatternHangingC5D5 {Mustan riippuvat sotilaat c5:ssä ja d5:ssä}
+translate L PatternHangingC5D5 {Mustan riippuvat sotilaat c5:ssï¿½ ja d5:ssï¿½}
 translate L PatternMaroczy {Maroczy-keskusta (Sotilaat c4 ja e4-ruuduissa)}
 translate L PatternRookSacC3 {Torninuhraus c3:ssa}
 translate L PatternKc1Kg8 {O-O-O vastaan O-O (Kc1 vastaan Kg8)}
 translate L PatternKg1Kc8 {O-O vastaan O-O-O (Kg1 vastaan Kc8)}
-translate L PatternLightFian {Valkean ruudun sivustointi (Lähetti-g2 vastaan lähetti-b7)}
-translate L PatternDarkFian {Mustan ruudun sivustointi (Lähetti-b2 vastaan lähetti-g7)}
-translate L PatternFourFian {Neljä sivustointia (Lähetit b2:ssa,g2:ssa,b7:ssa ja g7:ssa)}
+translate L PatternLightFian {Valkean ruudun sivustointi (Lï¿½hetti-g2 vastaan lï¿½hetti-b7)}
+translate L PatternDarkFian {Mustan ruudun sivustointi (Lï¿½hetti-b2 vastaan lï¿½hetti-g7)}
+translate L PatternFourFian {Neljï¿½ sivustointia (Lï¿½hetit b2:ssa,g2:ssa,b7:ssa ja g7:ssa)}
 
 # Game saving:
-translate L Today {Tänään}
+translate L Today {Tï¿½nï¿½ï¿½n}
 translate L ClassifyGame {Luokittele peli}
 
 # Setup position:
-translate L EmptyBoard {Tyhjennä lauta}
+translate L EmptyBoard {Tyhjennï¿½ lauta}
 translate L InitialBoard {Alkuasema}
 translate L SideToMove {Siirtovuorossa oleva puoli}
 translate L MoveNumber {Siirron numero}
 translate L Castling {Linnoitus}
-translate L EnPassantFile {Ohestalyönnin linja}
-translate L ClearFen {Tyhjennä FEN}
-translate L PasteFen {Liitä FEN}
+translate L EnPassantFile {Ohestalyï¿½nnin linja}
+translate L ClearFen {Tyhjennï¿½ FEN}
+translate L PasteFen {Liitï¿½ FEN}
 
 translate L SaveAndContinue {Tallenna ja jatka}
-translate L DiscardChangesAndContinue {Hylkää muutokset}
+translate L DiscardChangesAndContinue {Hylkï¿½ï¿½ muutokset}
 translate L GoBack {Mene takaisin}
 
 # Replace move dialog:
 translate L ReplaceMove {Korvaa siirto}
-translate L AddNewVar {Lisää muunnelma}
-translate L NewMainLine {Uusi päämuunnelma}
-translate L ReplaceMoveMessage {Siirto on jo olemassa. Ole hyvä ja syötä valinta.
-Korvaa siirto hylkää kaikki seuraavat siirrot.}
+translate L AddNewVar {Lisï¿½ï¿½ muunnelma}
+translate L NewMainLine {Uusi pï¿½ï¿½muunnelma}
+translate L ReplaceMoveMessage {Siirto on jo olemassa. Ole hyvï¿½ ja syï¿½tï¿½ valinta.
+Korvaa siirto hylkï¿½ï¿½ kaikki seuraavat siirrot.}
 
 # Make database read-only dialog:
-translate L ReadOnlyDialog {Haluatko tehdä tästä tietokannasta kirjoitussuojatun?
+translate L ReadOnlyDialog {Haluatko tehdï¿½ tï¿½stï¿½ tietokannasta kirjoitussuojatun?
 
-(Voit tehdä tietokannasta uudelleen kirjoituskelpoisen sulkemalla ja uudelleenavaamalla sen.)}
+(Voit tehdï¿½ tietokannasta uudelleen kirjoituskelpoisen sulkemalla ja uudelleenavaamalla sen.)}
 
 translate L ExitDialog {Haluatko todella poistua Scid-ohjelmasta?}
-translate L ClearGameDialog {Tätä peliä on muutettu.\nDo haluatko tallentaa sen?}
-translate L ExitUnsaved {Seuraavissa tietokannoissa on tallentamattomia pelejä. Jos poistut nyt niin nämä muutokset häviävät.}
+translate L ClearGameDialog {Tï¿½tï¿½ peliï¿½ on muutettu.\nDo haluatko tallentaa sen?}
+translate L ExitUnsaved {Seuraavissa tietokannoissa on tallentamattomia pelejï¿½. Jos poistut nyt niin nï¿½mï¿½ muutokset hï¿½viï¿½vï¿½t.}
 # ====== TODO To be translated ======
 translate L ChangeTextDialog {Enabling text colour globally requires restart.}
 # ====== TODO To be translated ======
@@ -1127,10 +1141,10 @@ translate L FontSelectDialog "This is some sample text\nDouble click above to ch
 translate L ExitNow {Exit now ?}
 
 # Import window:
-translate L PasteCurrentGame {Liitä nykyinen peli}
-translate L ImportHelp1 {Kirjoita tai liitä PGN yläpuolella olevaan kehykseen}
-translate L ImportHelp2 {Peliä tuotaessa ilmenneet virheet näytetään tässä}
-translate L OverwriteExistingMoves {Kirjoita olomassaolevien siirtojen päälle?}
+translate L PasteCurrentGame {Liitï¿½ nykyinen peli}
+translate L ImportHelp1 {Kirjoita tai liitï¿½ PGN ylï¿½puolella olevaan kehykseen}
+translate L ImportHelp2 {Peliï¿½ tuotaessa ilmenneet virheet nï¿½ytetï¿½ï¿½n tï¿½ssï¿½}
+translate L OverwriteExistingMoves {Kirjoita olomassaolevien siirtojen pï¿½ï¿½lle?}
 
 # ECO Browser:
 translate L ECOAllSections {Kaikki ECO-osat}
@@ -1146,27 +1160,27 @@ translate L OprepStatsHist {Tilastot ja historia}
 translate L OprepStats {Tilastot}
 translate L OprepStatAll {Kaikki raportin pelit}
 translate L OprepStatBoth {Molemmat arvioitu}
-translate L OprepStatSince {Siitä lähtien}
+translate L OprepStatSince {Siitï¿½ lï¿½htien}
 translate L OprepOldest {Vanhimmat pelit}
 translate L OprepNewest {Uusimmat pelit}
 translate L OprepPopular {Nykyinen suosio}
 translate L OprepFreqAll {Yleisyys kaikkina vuosina:   }
-translate L OprepFreq1   {Viimeisimmän vuoden aikana: }
+translate L OprepFreq1   {Viimeisimmï¿½n vuoden aikana: }
 translate L OprepFreq5   {Viimeisten viiden vuoden aikana: }
 translate L OprepFreq10  {Viimeisten kymmenen vuoden aikana: }
 translate L OprepEvery {kerran joka %u pelit}
-translate L OprepUp {ylös %u%s kaikista vuosista}
+translate L OprepUp {ylï¿½s %u%s kaikista vuosista}
 translate L OprepDown {alas %u%s kaikista vuosista}
 translate L OprepSame {ei muutosta kaikista vuosista}
-translate L OprepMostFrequent {Yleisimmät pelaajat}
-translate L OprepMostFrequentOpponents {Yleisimmät vastustajat}
+translate L OprepMostFrequent {Yleisimmï¿½t pelaajat}
+translate L OprepMostFrequentOpponents {Yleisimmï¿½t vastustajat}
 translate L OprepRatingsPerf {Elo-luvut ja suoritus}
-translate L OprepAvgPerf {Keskimääräiset Elo-luvut ja suoritus}
+translate L OprepAvgPerf {Keskimï¿½ï¿½rï¿½iset Elo-luvut ja suoritus}
 translate L OprepWRating {Valkean Elo-luku}
 translate L OprepBRating {Mustan Elo-luku}
 translate L OprepWPerf {Valkean suoritus}
 translate L OprepBPerf {Mustan suoritus}
-translate L OprepHighRating {Korkeimpien keskimääräisten Elo-lukujen pelit}
+translate L OprepHighRating {Korkeimpien keskimï¿½ï¿½rï¿½isten Elo-lukujen pelit}
 translate L OprepTrends {Tuloksen trendit}
 translate L OprepResults {Tuloksen pituudet ja yleisyydet}
 translate L OprepLength {Pelin pituus}
@@ -1175,62 +1189,62 @@ translate L OprepWWins {Valkoinen voittaa: }
 translate L OprepBWins {Musta voittaa: }
 translate L OprepDraws {Pelit:      }
 translate L OprepWholeDB {koko tietokanta}
-translate L OprepShortest {Lyhyimmät voitot}
+translate L OprepShortest {Lyhyimmï¿½t voitot}
 translate L OprepMovesThemes {Siirrot ja teemat}
 translate L OprepMoveOrders {Siirtovaihdot raportin asemaan saapuessa}
 translate L OprepMoveOrdersOne \
-  {Tähän asemaan saavuttaessa oli vain yksi siirtovaihto:}
+  {Tï¿½hï¿½n asemaan saavuttaessa oli vain yksi siirtovaihto:}
 translate L OprepMoveOrdersAll \
-  {Tähän asemaan saavuttaessa oli %u siirtovaihtoa:}
+  {Tï¿½hï¿½n asemaan saavuttaessa oli %u siirtovaihtoa:}
 translate L OprepMoveOrdersMany \
-  {Tähän asemaan saavuttaessa oli %u siirtovaihtoa. Kärjessä %u ovat:}
+  {Tï¿½hï¿½n asemaan saavuttaessa oli %u siirtovaihtoa. Kï¿½rjessï¿½ %u ovat:}
 translate L OprepMovesFrom {Siirrot raportin asemasta}
-translate L OprepMostFrequentEcoCodes {Yleisimmät ECO-koodit}
+translate L OprepMostFrequentEcoCodes {Yleisimmï¿½t ECO-koodit}
 translate L OprepThemes {Asemalliset teemat}
-translate L OprepThemeDescription {Teemojen yleisyys jokaisen pelin ensimmäisissä %u siirroissa}
+translate L OprepThemeDescription {Teemojen yleisyys jokaisen pelin ensimmï¿½isissï¿½ %u siirroissa}
 translate L OprepThemeSameCastling {Saman puolen linnoittuminen}
 translate L OprepThemeOppCastling {Vastakkainen linnoittuminen}
 translate L OprepThemeNoCastling {Molemmat kuninkaat linnoittamatta}
-translate L OprepThemeKPawnStorm {Kuningassivustan sotilasruynnäkkö}
+translate L OprepThemeKPawnStorm {Kuningassivustan sotilasruynnï¿½kkï¿½}
 translate L OprepThemeQueenswap {Kuningattaret vaihdettu}
 translate L OprepThemeWIQP {Valkoisen eristetty kuningatarsotilas}
 translate L OprepThemeBIQP {Mustan eristetty kuningatarsotilas}
-translate L OprepThemeWP567 {Valkean sotilas 5/6/7:llä rivillä}
-translate L OprepThemeBP234 {Mustan sotilas 2/3/4:llä rivillä}
+translate L OprepThemeWP567 {Valkean sotilas 5/6/7:llï¿½ rivillï¿½}
+translate L OprepThemeBP234 {Mustan sotilas 2/3/4:llï¿½ rivillï¿½}
 translate L OprepThemeOpenCDE {Avoin c/d/e-linja}
-translate L OprepTheme1BishopPair {Vain yhdellä puolella on lähettipari}
+translate L OprepTheme1BishopPair {Vain yhdellï¿½ puolella on lï¿½hettipari}
 translate L OprepEndgames {Loppupelit}
 translate L OprepReportGames {Raportin pelit}
 translate L OprepAllGames    {Kaikki pelit}
 translate L OprepEndClass {Materiaali jokaisen pelin lopussa }
 translate L OprepTheoryTable {Teoriataulukko}
-translate L OprepTableComment {Luotu %u korkeimman Elo-luvun peleistä}
-translate L OprepExtraMoves {Ylimääräiset huomatussiirrot teoriataulukossa}
-translate L OprepMaxGames {Maksimimäärä pelejä teoriataulukossa}
+translate L OprepTableComment {Luotu %u korkeimman Elo-luvun peleistï¿½}
+translate L OprepExtraMoves {Ylimï¿½ï¿½rï¿½iset huomatussiirrot teoriataulukossa}
+translate L OprepMaxGames {Maksimimï¿½ï¿½rï¿½ pelejï¿½ teoriataulukossa}
 # ====== TODO To be translated ======
 translate L OprepMaxLines {Maximum games for statistics}
-translate L OprepViewHTML {Näytä HTML}
-translate L OprepViewLaTeX {Näytä LaTeX}
+translate L OprepViewHTML {Nï¿½ytï¿½ HTML}
+translate L OprepViewLaTeX {Nï¿½ytï¿½ LaTeX}
 
 # Player Report:
 translate L PReportTitle {Pelaajaraportti}
 translate L PReportColorWhite {Valkeilla nappuloilla}
 translate L PReportColorBlack {Mustilla nappuloilla}
-translate L PReportBeginning {Aloittamalla tämän kanssa}
-translate L PReportMoves {jälkeen %s}
+translate L PReportBeginning {Aloittamalla tï¿½mï¿½n kanssa}
+translate L PReportMoves {jï¿½lkeen %s}
 translate L PReportOpenings {Avaukset}
-translate L PReportClipbase {Tyhjennä leikepöytä ja kopioi sopivat pelit siihen}
+translate L PReportClipbase {Tyhjennï¿½ leikepï¿½ytï¿½ ja kopioi sopivat pelit siihen}
 
 # Piece Tracker window:
-translate L TrackerSelectSingle {Hiiren vasen näppäin valitsee tämän nappulan.}
-translate L TrackerSelectPair {Hiiren vasen näppäin valitsee tämän nappulan; oikea näppäin valitsee myös sen sisarukset}
-translate L TrackerSelectPawn {Hiiren vasen näppäin valitsee tämän sotilaan; oikea näppäin valitsee kaikki 8 sotilasta}
+translate L TrackerSelectSingle {Hiiren vasen nï¿½ppï¿½in valitsee tï¿½mï¿½n nappulan.}
+translate L TrackerSelectPair {Hiiren vasen nï¿½ppï¿½in valitsee tï¿½mï¿½n nappulan; oikea nï¿½ppï¿½in valitsee myï¿½s sen sisarukset}
+translate L TrackerSelectPawn {Hiiren vasen nï¿½ppï¿½in valitsee tï¿½mï¿½n sotilaan; oikea nï¿½ppï¿½in valitsee kaikki 8 sotilasta}
 translate L TrackerStat {Tilastotieto}
 translate L TrackerGames {% pelit, joissa siirto ruutuun}
 translate L TrackerTime {% aika jokaisessa ruudussa}
 translate L TrackerMoves {Siirrot}
-translate L TrackerMovesStart {Syötä siirtonumero jossa jäljityksen pitäisi alkaa}
-translate L TrackerMovesStop {Syötä siirtonumero jossa jäljityksen pitäisi pysähtyä}
+translate L TrackerMovesStart {Syï¿½tï¿½ siirtonumero jossa jï¿½ljityksen pitï¿½isi alkaa}
+translate L TrackerMovesStop {Syï¿½tï¿½ siirtonumero jossa jï¿½ljityksen pitï¿½isi pysï¿½htyï¿½}
 
 # Game selection dialogs:
 translate L SelectAllGames {Kaikki pelit}
@@ -1239,36 +1253,36 @@ translate L SelectTournamentGames {Vain nykyisen turnauksen pelit}
 translate L SelectOlderGames {Vain vanhemmat pelit}
 
 # Delete Twins window:
-translate L TwinsNote {Jotta pelit merkitään kaksoispeleiksi niillä täytyy olla samat pelaajat ja muita kriteerejä kuten alla. On parasta tehdä tietokannan tavutuksen tarkastus ennen kaksoispelien havaitsemista. }
+translate L TwinsNote {Jotta pelit merkitï¿½ï¿½n kaksoispeleiksi niillï¿½ tï¿½ytyy olla samat pelaajat ja muita kriteerejï¿½ kuten alla. On parasta tehdï¿½ tietokannan tavutuksen tarkastus ennen kaksoispelien havaitsemista. }
 translate L TwinsCriteria {Kaksoispelin kriteeri}
 translate L TwinsWhich {Tarkastele kaikki/suodata}
-translate L TwinsColors {Saman pelaajan värit}
+translate L TwinsColors {Saman pelaajan vï¿½rit}
 translate L TwinsEvent {Sama tapahtuma}
 translate L TwinsSite {Sama paikka}
 translate L TwinsRound {Sama kierros}
 translate L TwinsYear {Sama vuosi}
 translate L TwinsMonth {Sama kuukausi}
-translate L TwinsDay {Sama päivä}
+translate L TwinsDay {Sama pï¿½ivï¿½}
 translate L TwinsResult {Sama tulos}
 translate L TwinsECO {Sama ECO-koodi}
 translate L TwinsMoves {Samat siirrot}
 translate L TwinsPlayers {Pelaajien nimet}
-translate L TwinsPlayersExact {Täsmällinen vastaavuus}
-translate L TwinsPlayersPrefix {Ainoastaan ensimmäiset neljä kirjainta}
-translate L TwinsWhen {Poistettaessa kaksoispelejä}
-translate L TwinsSkipShort {Älä ota huomioon alle 5-siirtoisia pelejä}
+translate L TwinsPlayersExact {Tï¿½smï¿½llinen vastaavuus}
+translate L TwinsPlayersPrefix {Ainoastaan ensimmï¿½iset neljï¿½ kirjainta}
+translate L TwinsWhen {Poistettaessa kaksoispelejï¿½}
+translate L TwinsSkipShort {ï¿½lï¿½ ota huomioon alle 5-siirtoisia pelejï¿½}
 translate L TwinsUndelete {Palauta kaikki pelit ensiksi}
 translate L TwinsSetFilter {Aseta suodatin poistettaville kaksoispeleille}
-translate L TwinsComments {Pidä aina kommentoidut pelit}
-translate L TwinsVars {Pidä aina muunnelmia sisältävät pelit}
-translate L TwinsDeleteWhich {Poista mikä peli?}
+translate L TwinsComments {Pidï¿½ aina kommentoidut pelit}
+translate L TwinsVars {Pidï¿½ aina muunnelmia sisï¿½ltï¿½vï¿½t pelit}
+translate L TwinsDeleteWhich {Poista mikï¿½ peli?}
 translate L TwinsDeleteShorter {Lyhyempi peli}
 translate L TwinsDeleteOlder {Pienempi pelinumero}
 translate L TwinsDeleteNewer {Suurempi pelinumero}
 translate L TwinsDelete {Poista pelit}
 
 # Name editor window:
-translate L NameEditType {Nimeä muokattava tyyppi}
+translate L NameEditType {Nimeï¿½ muokattava tyyppi}
 translate L NameEditSelect {Muokattavat pelit}
 translate L NameEditReplace {Korvaa}
 translate L NameEditWith {Kanssa}
@@ -1279,44 +1293,44 @@ translate L NameEditMatches {Vastaa: Paina Ctrl+1:sta  Ctrl+9:een valitaksesi}
 # Classify window:
 translate L Classify {Luokittele}
 translate L ClassifyWhich {ECO-luokittele}
-translate L ClassifyAll {Kaikki pelit (kirjoita vanhojen ECO-koodien päälle)}
+translate L ClassifyAll {Kaikki pelit (kirjoita vanhojen ECO-koodien pï¿½ï¿½lle)}
 translate L ClassifyYear {Kaikki viime vuonna pelatut pelit}
 translate L ClassifyMonth {Kaikki viime kuukautena pelatut pelit}
-translate L ClassifyNew {Ainoastaan vielä ilman ECO -koodia olevat pelit}
-translate L ClassifyCodes {Käytettävät ECO-koodit}
+translate L ClassifyNew {Ainoastaan vielï¿½ ilman ECO -koodia olevat pelit}
+translate L ClassifyCodes {Kï¿½ytettï¿½vï¿½t ECO-koodit}
 translate L ClassifyBasic {Ainoastaan peruskoodit ("B12", ...)}
 translate L ClassifyExtended {Scidin laajennukset ("B12j", ...)}
 
 # Compaction:
-translate L NameFile {Nimeä tiedosto}
+translate L NameFile {Nimeï¿½ tiedosto}
 translate L GameFile {Pelitiedosto}
 translate L Names {Nimet}
-translate L Unused {Käyttämättömät}
+translate L Unused {Kï¿½yttï¿½mï¿½ttï¿½mï¿½t}
 translate L SizeKb {Koko (kb)}
 translate L CurrentState {Nykyinen tila}
-translate L AfterCompaction {Pakkaamisen jälkeen}
+translate L AfterCompaction {Pakkaamisen jï¿½lkeen}
 translate L CompactNames {Pakatun tiedoston nimi}
 translate L CompactGames {Pakatun pelin tiedosto}
-translate L NoUnusedNames "Käyttämättömiä nimiä ei ole joten nimi on jo täysin pakattu."
-translate L NoUnusedGames "Peli on jo täysin pakattu."
+translate L NoUnusedNames "Kï¿½yttï¿½mï¿½ttï¿½miï¿½ nimiï¿½ ei ole joten nimi on jo tï¿½ysin pakattu."
+translate L NoUnusedGames "Peli on jo tï¿½ysin pakattu."
 translate L NameFileCompacted {Nimitiedosto "[file tail [sc_base filename]]"a varten pakattiin.}
 translate L GameFileCompacted {Pelitiedosto "[file tail [sc_base filename]]"a varten pakattiin.}
 
 # Sorting:
 translate L SortCriteria {Kriteeri}
-translate L AddCriteria {Lisää kriteeri}
+translate L AddCriteria {Lisï¿½ï¿½ kriteeri}
 translate L CommonSorts {Yleset lajittelut}
 translate L Sort {Lajittele}
 
 # Exporting:
-translate L AddToExistingFile {Lisää pelit olemassaolevaan tiedostoon?}
+translate L AddToExistingFile {Lisï¿½ï¿½ pelit olemassaolevaan tiedostoon?}
 translate L ExportComments {Vie kommentit?}
 translate L ExportVariations {Vie muunnelmat?}
-translate L IndentComments {Sisennä kommentit?}
-translate L IndentVariations {Sisennä muunnelmat?}
+translate L IndentComments {Sisennï¿½ kommentit?}
+translate L IndentVariations {Sisennï¿½ muunnelmat?}
 # ====== TODO To be translated ======
 translate L InsertNewlines {Insert newlines every 80 chars?}
-translate L ExportColumnStyle {Sarakkeen tyyli (yksi siirto riviä kohden)?}
+translate L ExportColumnStyle {Sarakkeen tyyli (yksi siirto riviï¿½ kohden)?}
 translate L ExportSymbolStyle {Symbolinen huomautustyyli:}
 translate L ExportStripMarks {Poista ruutu/nuoli-merkkikoodit kommenteista?}
 # ====== TODO To be translated ======
@@ -1329,12 +1343,12 @@ translate L GotoMoveNumber {Mene siirtonumeroon}
 # Copy games dialog:
 translate L CopyGames {Pelien kopionti}
 translate L CopyConfirm {
-Kopioi [::hyödyt::tuhannet $nGamesToCopy] peli(t) jostakin "$fromName" johonkin "$targetName"?
+Kopioi [::hyï¿½dyt::tuhannet $nGamesToCopy] peli(t) jostakin "$fromName" johonkin "$targetName"?
 }
-translate L CopyErr {Pelejä ei voi kopioda}
-translate L CopyErrSource {Lähdetietokanta}
+translate L CopyErr {Pelejï¿½ ei voi kopioda}
+translate L CopyErrSource {Lï¿½hdetietokanta}
 translate L CopyErrTarget {Kohdetietokanta}
-translate L CopyErrNoGames {ei pelejä suodattimessa}
+translate L CopyErrNoGames {ei pelejï¿½ suodattimessa}
 translate L CopyErrReadOnly {Kirjoitussuojattu}
 translate L CopyErrNotOpen {ei avoinna}
 
@@ -1348,54 +1362,54 @@ translate L WhitePieces {Valkeat nappulat}
 translate L BlackPieces {Mustat nappulat}
 translate L WhiteBorder {Valkoinen raja}
 translate L BlackBorder {Musta raja}
-translate L ArrowMain   {Päänuoli}
+translate L ArrowMain   {Pï¿½ï¿½nuoli}
 translate L ArrowVar    {Muunnelmanuolet}
 # ====== TODO To be translated ======
 translate L ShowArrows  {Show Arrows}
 
 # Novelty window:
-translate L FindNovelty {Löydä uutuus}
+translate L FindNovelty {Lï¿½ydï¿½ uutuus}
 translate L Novelty {Uutuus}
-translate L NoveltyInterrupt {Uutuuden etsintä keskeytetty}
-translate L NoveltyNone {Uutuutta ei löydetty tähän peliin}
-translate L NoveltyHelp {Löydä ensimmäinen ainutlaatuinen siirto valitussa tietokannassa}
+translate L NoveltyInterrupt {Uutuuden etsintï¿½ keskeytetty}
+translate L NoveltyNone {Uutuutta ei lï¿½ydetty tï¿½hï¿½n peliin}
+translate L NoveltyHelp {Lï¿½ydï¿½ ensimmï¿½inen ainutlaatuinen siirto valitussa tietokannassa}
 
 # Sounds configuration:
-translate L SoundsFolder {Äänikansio}
-translate L SoundsFolderHelp {Kansion pitää sisältää tiedostot Kuningas.wav, 1.wav, jne}
+translate L SoundsFolder {ï¿½ï¿½nikansio}
+translate L SoundsFolderHelp {Kansion pitï¿½ï¿½ sisï¿½ltï¿½ï¿½ tiedostot Kuningas.wav, 1.wav, jne}
 translate L SoundsAnnounceOptions {Siirron ilmoitukset}
 translate L SoundsAnnounceNew {Ilmoita uudet siirrot}
-translate L SoundsAnnounceForward {Ilmoita siirryttäessä eteenpäin}
-translate L SoundsAnnounceBack {Ilmota siirryttäessä taaksepäin}
+translate L SoundsAnnounceForward {Ilmoita siirryttï¿½essï¿½ eteenpï¿½in}
+translate L SoundsAnnounceBack {Ilmota siirryttï¿½essï¿½ taaksepï¿½in}
 
 # Upgrading databases:
-translate L Upgrading {Päivitys}
+translate L Upgrading {Pï¿½ivitys}
 translate L ConfirmOpenNew {
-Tämä on vanhan formaatin (si3) tietokanta jota ei voi avata Scid 4.0:ssa, mutta uusi formaatti versio (si4) on jo luotu.
+Tï¿½mï¿½ on vanhan formaatin (si3) tietokanta jota ei voi avata Scid 4.0:ssa, mutta uusi formaatti versio (si4) on jo luotu.
 
 Haluatko avata tietokannan uuden formaatin version?
 }
 translate L ConfirmUpgrade {
-Tämä on "si3"-formaatti tietokanta. Se täytyy kääntää "si4"-formaatiksi ennen kuin sitä voi käyttää Scid vs. PC 4.0:ssä.
+Tï¿½mï¿½ on "si3"-formaatti tietokanta. Se tï¿½ytyy kï¿½ï¿½ntï¿½ï¿½ "si4"-formaatiksi ennen kuin sitï¿½ voi kï¿½yttï¿½ï¿½ Scid vs. PC 4.0:ssï¿½.
 
-Tämä prosessi on peruuttamaton ja se täytyy tehdä vain kerran. Voit peruuttaa sen jos se vie liian pitkän ajan.
+Tï¿½mï¿½ prosessi on peruuttamaton ja se tï¿½ytyy tehdï¿½ vain kerran. Voit peruuttaa sen jos se vie liian pitkï¿½n ajan.
 
-Haluatko päivittää tämän tietokannan nyt?
+Haluatko pï¿½ivittï¿½ï¿½ tï¿½mï¿½n tietokannan nyt?
 }
 
 # Recent files options:
-translate L RecentFilesMenu {Tiedostovalikossa olevien tiedostojen lukumäärä}
-translate L RecentFilesExtra {Alivalikossa olevien tiedostojen lukumäärä}
+translate L RecentFilesMenu {Tiedostovalikossa olevien tiedostojen lukumï¿½ï¿½rï¿½}
+translate L RecentFilesExtra {Alivalikossa olevien tiedostojen lukumï¿½ï¿½rï¿½}
 
 translate L MyPlayerNamesDescription {
-Syötä ensisijaisten pelaajien nimet alle, yksi nimi per rivi.
-Pääshakkilautaa käännetään tarvittaessa joka kerta kun listassa olevan pelaajan peli ladataan.
+Syï¿½tï¿½ ensisijaisten pelaajien nimet alle, yksi nimi per rivi.
+Pï¿½ï¿½shakkilautaa kï¿½ï¿½nnetï¿½ï¿½n tarvittaessa joka kerta kun listassa olevan pelaajan peli ladataan.
 }
 
 #Coach
-translate L showblunderexists {näytä falangin möhläys}
-translate L showblundervalue {näytä möhläyksen arvo}
-translate L showscore {näytä pistemäärä}
+translate L showblunderexists {nï¿½ytï¿½ falangin mï¿½hlï¿½ys}
+translate L showblundervalue {nï¿½ytï¿½ mï¿½hlï¿½yksen arvo}
+translate L showscore {nï¿½ytï¿½ pistemï¿½ï¿½rï¿½}
 translate L coachgame {valmennuspeli}
 translate L configurecoachgame {Konfiguroi taktinen peli}
 translate L configuregame {Konfiguroi UCI-peli}
@@ -1409,34 +1423,34 @@ translate L white {valkoinen}
 translate L black {musta}
 translate L both {molemmat}
 translate L Play {Pelaa}
-translate L Noblunder {Ei möhläys}
-translate L blunder {möhläys}
+translate L Noblunder {Ei mï¿½hlï¿½ys}
+translate L blunder {mï¿½hlï¿½ys}
 translate L Noinfo {-- Ei tietoja --}
-translate L moveblunderthreshold {siirto on möhläys jos menestys on suurempi kuin}
+translate L moveblunderthreshold {siirto on mï¿½hlï¿½ys jos menestys on suurempi kuin}
 translate L limitanalysis {Valmentajan analyysiaika}
 translate L seconds {sekunnit}
-translate L Abort {Keskeytä}
+translate L Abort {Keskeytï¿½}
 translate L Resume {Jatka}
 translate L Restart {Aloita uudelleen}
 translate L OutOfOpening {Avauksen ulkopuolella}
 translate L NotFollowedLine {Et seurannut muunnelmaa}
 translate L DoYouWantContinue {Haluatko jatkaa?}
 translate L CoachIsWatching {Valmentaja seuraa}
-translate L Ponder {Pysyvä pohdinta}
+translate L Ponder {Pysyvï¿½ pohdinta}
 translate L LimitELO {Rajaa ELO-vahvuus}
 translate L DubiousMovePlayedTakeBack {Pelasit kyseenalaisen siirron, haluatko perua?}
 translate L WeakMovePlayedTakeBack {Pelasit heikon siirron, haluatko perua?}
 translate L BadMovePlayedTakeBack {Pelasit huonon siirron, haluatko perua?}
 translate L Iresign {Antaudun}
-translate L yourmoveisnotgood {siirtosi ei ole hyvä}
+translate L yourmoveisnotgood {siirtosi ei ole hyvï¿½}
 translate L EndOfVar {Muunnelman loppu}
 translate L Openingtrainer {Avausvalmentaja}
-translate L DisplayCM {Näytä ehdokassiirrot}
-translate L DisplayCMValue {Näytä ehdokassiirtojen arvo}
-translate L DisplayOpeningStats {Näytä tilastot}
-translate L ShowReport {Näytä raportti}
-translate L NumberOfGoodMovesPlayed {pelatut hyvät siirrot}
-translate L NumberOfDubiousMovesPlayed {pelatut epäilyttävät siirrot}
+translate L DisplayCM {Nï¿½ytï¿½ ehdokassiirrot}
+translate L DisplayCMValue {Nï¿½ytï¿½ ehdokassiirtojen arvo}
+translate L DisplayOpeningStats {Nï¿½ytï¿½ tilastot}
+translate L ShowReport {Nï¿½ytï¿½ raportti}
+translate L NumberOfGoodMovesPlayed {pelatut hyvï¿½t siirrot}
+translate L NumberOfDubiousMovesPlayed {pelatut epï¿½ilyttï¿½vï¿½t siirrot}
 translate L NumberOfTimesPositionEncountered {aseman kohtaamiskerrat}
 translate L PlayerBestMove  {Salli ainoastaan parhaat siirrot}
 translate L OpponentBestMove {Vastustaja pelaa parhaat siirrot}
@@ -1446,18 +1460,18 @@ translate L Movesloaded {Ladatut siirrot}
 translate L PositionsNotPlayed {Pelaamattomat asemat}
 translate L PositionsPlayed {Pelatut asemat}
 translate L Success {Menestys}
-translate L DubiousMoves {Epäilyttävät siirrot}
+translate L DubiousMoves {Epï¿½ilyttï¿½vï¿½t siirrot}
 translate L ConfigureTactics {Valitse pulma}
 translate L ResetScores {Nollaa tulokset}
 translate L LoadingBase {Tietokannan lataus}
 translate L Tactics {Taktiikat}
-translate L ShowSolution {Näytä ratkaisu}
+translate L ShowSolution {Nï¿½ytï¿½ ratkaisu}
 translate L Next {Seuraava}
 translate L ResettingScore {Tuloksen nollaus}
 translate L LoadingGame {Pelin lataus}
-translate L MateFound {Matti löytynyt}
-translate L BestSolutionNotFound {Parasta ratkaisua EI löydetty!}
-translate L MateNotFound {Mattia ei löydetty}
+translate L MateFound {Matti lï¿½ytynyt}
+translate L BestSolutionNotFound {Parasta ratkaisua EI lï¿½ydetty!}
+translate L MateNotFound {Mattia ei lï¿½ydetty}
 translate L ShorterMateExists {Lyhyempi matti on olemassa}
 translate L ScorePlayed {Pelattu tulos}
 translate L Expected {odotettu}
@@ -1471,14 +1485,14 @@ translate L SpecificOpening {Tietty avaus}
 # ====== TODO To be translated ======
 translate L ImportECO {Import ECO}
 translate L StartNewGame {Aloita uusi peli}
-translate L FixedLevel {Määrätty taso}
+translate L FixedLevel {Mï¿½ï¿½rï¿½tty taso}
 translate L Opening {Avaus}
 translate L RandomLevel {Satunnainen taso}
-translate L StartFromCurrentPosition {Aloita nykyisestä asemasta}
-translate L FixedDepth {Määrätty syvyys}
+translate L StartFromCurrentPosition {Aloita nykyisestï¿½ asemasta}
+translate L FixedDepth {Mï¿½ï¿½rï¿½tty syvyys}
 translate L Nodes {Solmut}
 translate L Depth {Syvyys}
-translate L Time {Aika} 
+translate L Time {Aika}
 # ====== TODO To be translated ======
 translate L Auto {Auto}
 # ====== TODO To be translated ======
@@ -1491,31 +1505,31 @@ translate L SecondsPerMove {Sekunnit per siirto}
 translate L DepthPerMove {Syvyys per siirto}
 translate L MoveControl {Siirtokontrolli}
 translate L TimeLabel {Aika per siirto}
-translate L AddVars {Lisää muunnelmat}
-translate L AddScores {Lisää tulokset}
+translate L AddVars {Lisï¿½ï¿½ muunnelmat}
+translate L AddScores {Lisï¿½ï¿½ tulokset}
 translate L Engine {Ohjelma}
 translate L TimeMode {Aikamoodi}
-translate L TimeBonus {Aika + lisäys}
+translate L TimeBonus {Aika + lisï¿½ys}
 translate L TimeMin {minuutti}
 translate L TimeSec {sekunti}
 translate L AllExercisesDone {Kaikki harjoitukset tehty}
 translate L MoveOutOfBook {Avauskirjaston ulkopuolinen siirto}
 translate L LastBookMove {Avauskirjaston viimeinen siirto}
-translate L AnnotateSeveralGames {Joukkohuomautus\nFrom nykyisestä johonkin :}
+translate L AnnotateSeveralGames {Joukkohuomautus\nFrom nykyisestï¿½ johonkin :}
 translate L FindOpeningErrors {Vain avausvirheet}
 translate L MarkTacticalExercises {Merkitse taktiset harjoitukset}
-translate L UseBook {Käytä avauskirjastoa}
+translate L UseBook {Kï¿½ytï¿½ avauskirjastoa}
 translate L MultiPV {Useat muunnelmat}
 translate L Hash {Hash-muisti}
-translate L OwnBook {Käytä ohjelman avauskirjastoa}
+translate L OwnBook {Kï¿½ytï¿½ ohjelman avauskirjastoa}
 translate L BookFile {Avauskirjasto}
 translate L AnnotateVariations {Prosessoi muunnelmat}
 translate L ShortAnnotations {Lyhyet huomautukset}
-translate L addAnnotatorTag {Lisää huomautuksen tekijän merkki}
-translate L AddScoreToShortAnnotations {Lisää tulos huomautuksiin}
+translate L addAnnotatorTag {Lisï¿½ï¿½ huomautuksen tekijï¿½n merkki}
+translate L AddScoreToShortAnnotations {Lisï¿½ï¿½ tulos huomautuksiin}
 translate L Export {Vie}
 translate L BookPartiallyLoaded {Avauskirjasto osittain ladattu}
-translate L AddLine {Lisää muunnelma}
+translate L AddLine {Lisï¿½ï¿½ muunnelma}
 translate L RemLine {Poista muunnelma}
 translate L Calvar {Muunnelmien laskeminen}
 translate L ConfigureCalvar {Asetukset}
@@ -1523,10 +1537,10 @@ translate L ConfigureCalvar {Asetukset}
 translate L Reti {Retin avaus}
 translate L English {Englantilainen peli}
 translate L d4Nf6Miscellaneous {1.d4 Nf6 Sekalaiset avaukset}
-translate L Trompowsky {Trompowskyn hyökkäys}
+translate L Trompowsky {Trompowskyn hyï¿½kkï¿½ys}
 translate L Budapest {Budapestin gambiitti}
 translate L OldIndian {Vanhaintialainen}
-translate L BenkoGambit {Benkö-gambiitti}
+translate L BenkoGambit {Benkï¿½-gambiitti}
 translate L ModernBenoni {Moderni Benoni}
 translate L DutchDefence {Hollantilainen puolustus}
 translate L Scandinavian {Skandinaavilainen avaus}
@@ -1538,13 +1552,13 @@ translate L Sicilian {Sisilialainen puolustus}
 translate L SicilianAlapin {Sisilialaisen puolustuksen Alapinin muunnelma}
 translate L SicilianClosed {Suljettu sisilialainen}
 translate L SicilianRauzer {Sisilialaisen puolustuksen Rauzerin muunnelma}
-translate L SicilianDragon {Sicilian puolustuksen lohikäärmemuunnelma}
+translate L SicilianDragon {Sicilian puolustuksen lohikï¿½ï¿½rmemuunnelma}
 translate L SicilianScheveningen {Sicilian puolustuksen Scheveningenin muunnelma}
 translate L SicilianNajdorf {Sicilian puolustuksen Najdorfin muunnelma}
 translate L OpenGame {Avopeli}
-translate L Vienna {Wieniläinen peli}
+translate L Vienna {Wienilï¿½inen peli}
 translate L KingsGambit {Kuningasgambiitti}
-translate L RussianGame {Venäläinen peli}
+translate L RussianGame {Venï¿½lï¿½inen peli}
 translate L ItalianTwoKnights {Italialainen peli/Kaksiratsupeli}
 translate L Spanish {Espanjalainen peli}
 translate L SpanishExchange {Espanjalaisen pelin vaihtomuunnelma}
@@ -1558,14 +1572,14 @@ translate L FrenchExchange {Ranskalainen puolustuksen vaihtomuunnelma}
 translate L QueensPawn {Kuningatarsotilaspelit}
 translate L Slav {Slaavilainen puolustus}
 translate L QGA {Vastaanotettu kuningatargambiitti}
-translate L QGD {Hylätty kuningatargambiitti}
-translate L QGDExchange {Hylätyn kuningatargambiitin vaihtomuunnelma}
+translate L QGD {Hylï¿½tty kuningatargambiitti}
+translate L QGDExchange {Hylï¿½tyn kuningatargambiitin vaihtomuunnelma}
 translate L SemiSlav {Semi-slaavilainen puolustus}
-translate L QGDwithBg5 {Hylätyn kuningatargambiitin Lg5-muunnelma}
-translate L QGDOrthodox {Hylätyn kuningatargambiitin perinteinen muunnelma}
-translate L Grunfeld {Grünfeldin puolustus}
-translate L GrunfeldExchange {Grünfeldin puolustuksen vaihtomuunnelma}
-translate L GrunfeldRussian {Grünfeldin puolustuksen venäläinen muunnelma}
+translate L QGDwithBg5 {Hylï¿½tyn kuningatargambiitin Lg5-muunnelma}
+translate L QGDOrthodox {Hylï¿½tyn kuningatargambiitin perinteinen muunnelma}
+translate L Grunfeld {Grï¿½nfeldin puolustus}
+translate L GrunfeldExchange {Grï¿½nfeldin puolustuksen vaihtomuunnelma}
+translate L GrunfeldRussian {Grï¿½nfeldin puolustuksen venï¿½lï¿½inen muunnelma}
 translate L Catalan {Katalonialainen avaus}
 translate L CatalanOpen {Katalonialaisen avauksen avoin muunnelma}
 translate L CatalanClosed {Katalonialaisen avauksen suljettu muunnelma}
@@ -1574,13 +1588,13 @@ translate L NimzoIndian {Nimzo-intialainen puolustus}
 translate L NimzoIndianClassical {Nimzo-intialainen puolustuksen klassinen muunnelma}
 translate L NimzoIndianRubinstein {Nimzo-intialainen puolustuksen Rubinsteinin muunnelma}
 translate L KingsIndian {Kuningasintialainen puolustus}
-translate L KingsIndianSamisch {Kuningasintialainen puolustuksen Sämischin muunnelma}
-translate L KingsIndianMainLine {Kuningasintialainen puolustuksen päämuunnelma}
+translate L KingsIndianSamisch {Kuningasintialainen puolustuksen Sï¿½mischin muunnelma}
+translate L KingsIndianMainLine {Kuningasintialainen puolustuksen pï¿½ï¿½muunnelma}
 
 # FICS
 translate L ConfigureFics {Konfiguroi FICS}
-translate L FICSLogin {Sisäänkirjautuminen}
-translate L FICSGuest {Kirjaudu sisään vieraana}
+translate L FICSLogin {Sisï¿½ï¿½nkirjautuminen}
+translate L FICSGuest {Kirjaudu sisï¿½ï¿½n vieraana}
 translate L FICSServerPort {Palvelinportti}
 translate L FICSServerAddress {IP-osoite}
 translate L FICSRefresh {Lataa uudelleen}
@@ -1591,26 +1605,26 @@ translate L FICSOffers {Tarjoukset}
 # ====== TODO To be translated ======
 translate L FICSMakeOffer {Make Offer}
 translate L FICSGames {Pelit}
-translate L FICSFindOpponent {Löydä vastustaja}
+translate L FICSFindOpponent {Lï¿½ydï¿½ vastustaja}
 translate L FICSTakeback {Peru}
 translate L FICSTakeback2 {Peru 2}
 translate L FICSInitTime {Aika (minuutti)}
-translate L FICSIncrement {Lisäys (sekunti)}
+translate L FICSIncrement {Lisï¿½ys (sekunti)}
 translate L FICSRatedGame {Pisteytetty peli}
 translate L FICSAutoColour {Automaattinen}
 translate L FICSManualConfirm {Vahvista manuaalisesti}
 translate L FICSFilterFormula {Suodata kaavalla}
 translate L FICSIssueSeek {Julkaise haku}
-translate L FICSAccept {Hyväksy}
-translate L FICSDecline {Kieltäydy}
-translate L FICSColour {Väri}
-translate L FICSSend {Lähetä}
-translate L FICSConnect {Yhdistä}
+translate L FICSAccept {Hyvï¿½ksy}
+translate L FICSDecline {Kieltï¿½ydy}
+translate L FICSColour {Vï¿½ri}
+translate L FICSSend {Lï¿½hetï¿½}
+translate L FICSConnect {Yhdistï¿½}
 translate L FICSShouts {Huudot}
 translate L FICSTells {Kehoitukset}
 translate L FICSOpponent {Vastustajan tiedot}
 translate L FICSInfo {Tiedot}
-translate L FICSDraw {Ehdota tasapeliä}
+translate L FICSDraw {Ehdota tasapeliï¿½}
 translate L FICSRematch {Revanssi}
 translate L FICSQuit {Lopeta FICS}
 translate L FICSCensor {Sensori}
@@ -1621,12 +1635,12 @@ translate L CCDlgConfigureWindowTitle {Konfiguroi kirjeshakki}
 translate L CCDlgCGeneraloptions {Yleiset vaihtoehdot}
 translate L CCDlgDefaultDB {Oletustietokanta:}
 translate L CCDlgInbox {Saapuneet-laatikko (polku):}
-translate L CCDlgOutbox {Lähetetyt-laatikko (polku):}
+translate L CCDlgOutbox {Lï¿½hetetyt-laatikko (polku):}
 translate L CCDlgXfcc {Xfcc-konfiguraatio:}
 translate L CCDlgExternalProtocol {Ulkoinen protokolla-ajuri (esim. Xfcc)}
-translate L CCDlgFetchTool {Hakutyökalu:}
-translate L CCDlgSendTool {Lähetystyökalu:}
-translate L CCDlgEmailCommunication {Sähköpostikommunikaatio}
+translate L CCDlgFetchTool {Hakutyï¿½kalu:}
+translate L CCDlgSendTool {Lï¿½hetystyï¿½kalu:}
+translate L CCDlgEmailCommunication {Sï¿½hkï¿½postikommunikaatio}
 translate L CCDlgMailPrg {Postiohjelma:}
 translate L CCDlgBCCAddr {(B)CC-osoite:}
 translate L CCDlgMailerMode {Moodi:}
@@ -1635,43 +1649,43 @@ translate L CCDlgMailUrlEg {esim. Evolution}
 translate L CCDlgClawsEg {esim. Sylpheed Claws}
 translate L CCDlgmailxEg {esim. mailx, mutt, nail...}
 translate L CCDlgAttachementPar {Liiteparametri:}
-translate L CCDlgInternalXfcc {Käytä sisäistä Xfcc-tukea}
+translate L CCDlgInternalXfcc {Kï¿½ytï¿½ sisï¿½istï¿½ Xfcc-tukea}
 translate L CCDlgConfirmXfcc {Vahvista siirrot}
 translate L CCDlgSubjectPar {Kohdeparametri:}
-translate L CCDlgDeleteBoxes {Tyhjennä saapuneet/lähteneet-laatikko}
-translate L CCDlgDeleteBoxesText {Haluatko todella tyhjentää kirjeshakin saapuneet- ja lähteneet-laatikoiden kansiot?\nTämä vaatii uuden tahdistuksen näyttääkseen peliesi viimeisen vaiheen.}
+translate L CCDlgDeleteBoxes {Tyhjennï¿½ saapuneet/lï¿½hteneet-laatikko}
+translate L CCDlgDeleteBoxesText {Haluatko todella tyhjentï¿½ï¿½ kirjeshakin saapuneet- ja lï¿½hteneet-laatikoiden kansiot?\nTï¿½mï¿½ vaatii uuden tahdistuksen nï¿½yttï¿½ï¿½kseen peliesi viimeisen vaiheen.}
 translate L CCDlgConfirmMove {Vahvista siirto}
-translate L CCDlgConfirmMoveText {Jos vahvistat niin seuraava siirto ja kommentti lähetetään palvelimelle:}
-translate L CCDlgDBGameToLong {Epäjohdonmukainen päämuunnelma}
-translate L CCDlgDBGameToLongError {Tietokannassasi oleva päämuunnelma on pidempi kuin peli saapuneet-laatikossasi. Jos saapuneet-laatikko sisältää nykyisiä pelejä t.s. juuri tahdistuksen jälkeen niin jotkut siirrot lisättiin tietokannan päämuunnelmaan virheellisesti.
+translate L CCDlgConfirmMoveText {Jos vahvistat niin seuraava siirto ja kommentti lï¿½hetetï¿½ï¿½n palvelimelle:}
+translate L CCDlgDBGameToLong {Epï¿½johdonmukainen pï¿½ï¿½muunnelma}
+translate L CCDlgDBGameToLongError {Tietokannassasi oleva pï¿½ï¿½muunnelma on pidempi kuin peli saapuneet-laatikossasi. Jos saapuneet-laatikko sisï¿½ltï¿½ï¿½ nykyisiï¿½ pelejï¿½ t.s. juuri tahdistuksen jï¿½lkeen niin jotkut siirrot lisï¿½ttiin tietokannan pï¿½ï¿½muunnelmaan virheellisesti.
 
-Tässä tapauksessa ole hyvä ja lyhennä päämuunnelma (maksimi)-siirtoon
+Tï¿½ssï¿½ tapauksessa ole hyvï¿½ ja lyhennï¿½ pï¿½ï¿½muunnelma (maksimi)-siirtoon
 }
 
-translate L CCDlgStartEmail {Aloita uusi sähköpostipeli}
+translate L CCDlgStartEmail {Aloita uusi sï¿½hkï¿½postipeli}
 translate L CCDlgYourName {Nimesi:}
-translate L CCDlgYourMail {Sähköpostiosoitteesi:}
+translate L CCDlgYourMail {Sï¿½hkï¿½postiosoitteesi:}
 translate L CCDlgOpponentName {Vastustajan nimi:}
-translate L CCDlgOpponentMail {Vastustajan sähköpostiosoite:}
+translate L CCDlgOpponentMail {Vastustajan sï¿½hkï¿½postiosoite:}
 translate L CCDlgGameID {Pelin ID (ainutkertainen):}
 
-translate L CCDlgTitNoOutbox {Scid: Kirjeshakin lähteneet-laatikko}
+translate L CCDlgTitNoOutbox {Scid: Kirjeshakin lï¿½hteneet-laatikko}
 translate L CCDlgTitNoInbox {Scid: Kirjeshakin saapuneet-laatikko}
-translate L CCDlgTitNoGames {Scid: Ei kirjeshakkipelejä}
+translate L CCDlgTitNoGames {Scid: Ei kirjeshakkipelejï¿½}
 translate L CCErrInboxDir {Kirjeshakin saapuneet-laatikon hakemisto:}
-translate L CCErrOutboxDir {Kirjeshakin lähtevät-laatikon hakemisto:}
-translate L CCErrDirNotUsable {ei ole olemassa tai ei ole luoksepäästävä!\nOle hyvä ja tarkista ja korjaa asetukset}
-translate L CCErrNoGames {ei sisällä yhtään peliä!\nOle hyvä ja nouda ne ensin}
+translate L CCErrOutboxDir {Kirjeshakin lï¿½htevï¿½t-laatikon hakemisto:}
+translate L CCErrDirNotUsable {ei ole olemassa tai ei ole luoksepï¿½ï¿½stï¿½vï¿½!\nOle hyvï¿½ ja tarkista ja korjaa asetukset}
+translate L CCErrNoGames {ei sisï¿½llï¿½ yhtï¿½ï¿½n peliï¿½!\nOle hyvï¿½ ja nouda ne ensin}
 
 translate L CCDlgTitNoCCDB {Scid: Ei kirjeshakkitietokantaa}
-translate L CCErrNoCCDB {Yhtään kirjeshakkitietokantaa ei ole avattu. Ole hyvä ja avaa yksi ennenkuin käytät kirjeshakkitoimintoja}
+translate L CCErrNoCCDB {Yhtï¿½ï¿½n kirjeshakkitietokantaa ei ole avattu. Ole hyvï¿½ ja avaa yksi ennenkuin kï¿½ytï¿½t kirjeshakkitoimintoja}
 
-translate L CCFetchBtn {Nouda pelit palvelimelta ja käsittele saapuneet-laatikko}
+translate L CCFetchBtn {Nouda pelit palvelimelta ja kï¿½sittele saapuneet-laatikko}
 translate L CCPrevBtn {Mene edelliseen peliin}
 translate L CCNextBtn {Mene seuraavaan peliin}
-translate L CCSendBtn {Lähetä siirto}
-translate L CCEmptyBtn {Tyhjennä saapuneet- ja lähtevät-kansiot}
-translate L CCHelpBtn {Kuvakkeiden ja tilaindikaattorien apu.\nYleistä apua varten paina F1!}
+translate L CCSendBtn {Lï¿½hetï¿½ siirto}
+translate L CCEmptyBtn {Tyhjennï¿½ saapuneet- ja lï¿½htevï¿½t-kansiot}
+translate L CCHelpBtn {Kuvakkeiden ja tilaindikaattorien apu.\nYleistï¿½ apua varten paina F1!}
 
 translate L CCDlgServerName {Palvelimen nimi}
 translate L CCDlgLoginName  {Kirjautumisen nimi}
@@ -1680,61 +1694,61 @@ translate L CCDlgURL        {Xfcc-URL}
 translate L CCDlgRatingType {Luokittamisen tyyppi}
 
 translate L CCDlgDuplicateGame {Ei-ainutlaatuinen pelin ID}
-translate L CCDlgDuplicateGameError {Tämä peli on olemassa enemmän kuin kerran teitokannassa. Ole hyvä ja
-poista kaksoispelit ja tiivistä pelitiedostosi (Tiedosto/huolto/tiivistetty tietokanta)}
+translate L CCDlgDuplicateGameError {Tï¿½mï¿½ peli on olemassa enemmï¿½n kuin kerran teitokannassa. Ole hyvï¿½ ja
+poista kaksoispelit ja tiivistï¿½ pelitiedostosi (Tiedosto/huolto/tiivistetty tietokanta)}
 
 translate L CCDlgSortOption {Lajittelu:}
-translate L CCDlgListOnlyOwnMove {Vain pelit jotka minun pitää siirtää}
+translate L CCDlgListOnlyOwnMove {Vain pelit jotka minun pitï¿½ï¿½ siirtï¿½ï¿½}
 translate L CCOrderClassicTxt {Paikka, Tapahtuma, Kierros, Tulos, Valkoinen, Musta}
 translate L CCOrderMyTimeTxt {Kelloni}
 translate L CCOrderTimePerMoveTxt {Aika siirtoa kohden seuraavaan ajantarkistukseen}
-translate L CCOrderStartDate {Aloituspäivämäärä}
+translate L CCOrderStartDate {Aloituspï¿½ivï¿½mï¿½ï¿½rï¿½}
 translate L CCOrderOppTimeTxt {Vastustajien kello}
 
-translate L CCDlgConfigRelay {Tarkkaile pelejä}
-translate L CCDlgConfigRelayHelp {Mene pelisivustolle http://www.iccf-webchess.com ja näytä tarkkailtava peli.  
-Jos näet shakkilaudan, niin kopioi URL-osoite selaimestasi allaolevaan listaan. Vain yksi URL-osoite riviä kohti!\nEsimerkki: http://www.iccf-webchess.com/MakeAMove.aspx?id=266452}
+translate L CCDlgConfigRelay {Tarkkaile pelejï¿½}
+translate L CCDlgConfigRelayHelp {Mene pelisivustolle http://www.iccf-webchess.com ja nï¿½ytï¿½ tarkkailtava peli.
+Jos nï¿½et shakkilaudan, niin kopioi URL-osoite selaimestasi allaolevaan listaan. Vain yksi URL-osoite riviï¿½ kohti!\nEsimerkki: http://www.iccf-webchess.com/MakeAMove.aspx?id=266452}
 
 
 # Connect Hardware dialoges
 translate L ExtHWConfigConnection {Konfiguroi ulkoinen hardware}
 translate L ExtHWPort {Portti}
-translate L ExtHWEngineCmd {Ohjelman käsky}
+translate L ExtHWEngineCmd {Ohjelman kï¿½sky}
 translate L ExtHWEngineParam {Ohjelman parametri}
-translate L ExtHWShowButton {Näytä painike pääikkunassa}
+translate L ExtHWShowButton {Nï¿½ytï¿½ painike pï¿½ï¿½ikkunassa}
 translate L ExtHWHardware {Hardware}
 translate L ExtHWNovag {Novag Citrine}
-translate L ExtHWInputEngine {Syöttöohjelma}
+translate L ExtHWInputEngine {Syï¿½ttï¿½ohjelma}
 translate L ExtHWNoBoard {Ei shakkilautaa}
 
 # Input Engine dialogs
-translate L IEConsole {Syöttöohjelman konsoli}
-translate L IESending {Lähetetyt siirrot jotakin varten}
+translate L IEConsole {Syï¿½ttï¿½ohjelman konsoli}
+translate L IESending {Lï¿½hetetyt siirrot jotakin varten}
 translate L IESynchronise {Tahdista}
-translate L IERotate  {Käännä}
-translate L IEUnableToStart {Syöttöohjelmaa ei voida käynnistää:}
+translate L IERotate  {Kï¿½ï¿½nnï¿½}
+translate L IEUnableToStart {Syï¿½ttï¿½ohjelmaa ei voida kï¿½ynnistï¿½ï¿½:}
 # Calculation of Variations
-translate L DoneWithPosition {Asema käsitelty}
+translate L DoneWithPosition {Asema kï¿½sitelty}
 
 translate L Board {Shakkilauta}
-translate L showGameInfo {Näytä pelin tiedot}
+translate L showGameInfo {Nï¿½ytï¿½ pelin tiedot}
 translate L autoResizeBoard {Shakkilaudan koon automaattinen muutos}
-translate L DockTop {Siirry ylös}
+translate L DockTop {Siirry ylï¿½s}
 translate L DockBottom {Siirry alas}
 translate L DockLeft {Siirry vasemmalle}
 translate L DockRight {Siirry oikealle}
-translate L Undock {Poista kiinnityksestä}
+translate L Undock {Poista kiinnityksestï¿½}
 
 # Switcher window
 translate L ChangeIcon {Vaihda kuvake}
-translate L More {Enemmän}
+translate L More {Enemmï¿½n}
 
 # Drag & Drop
-translate L CannotOpenUri {Seuraavaa URI-osoitetta ei pystytä avaamaan:}
-translate L InvalidUri {Pudotussisältö ei ole pätevä URI-lista.}
-translate L UriRejected	{Seuraavat tiedostot hylätään:}
-translate L UriRejectedDetail {Vain listatut tiedostotyypit voidaan käsitellä:}
-translate L EmptyUriList {Pudotussisältö on tyhjä.}
+translate L CannotOpenUri {Seuraavaa URI-osoitetta ei pystytï¿½ avaamaan:}
+translate L InvalidUri {Pudotussisï¿½ltï¿½ ei ole pï¿½tevï¿½ URI-lista.}
+translate L UriRejected	{Seuraavat tiedostot hylï¿½tï¿½ï¿½n:}
+translate L UriRejectedDetail {Vain listatut tiedostotyypit voidaan kï¿½sitellï¿½:}
+translate L EmptyUriList {Pudotussisï¿½ltï¿½ on tyhjï¿½.}
 translate L SelectionOwnerDidntRespond {Aikakatkaisu pudotustoiminnon aikana: valinnan omistaja ei vastannut}
 # ====== TODO To be translated ======
 translate L PasteAnal {Paste Analysis}

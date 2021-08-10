@@ -1,7 +1,7 @@
 # swedish.tcl:
 # Text for menu names and status bar help messages in Swedish.
 # Part of Scid (Shane's Chess Information Database).
-# Contributed by Martin Skjöldebrand, martin@skjoldebrand.org
+# Contributed by Martin Skjï¿½ldebrand, martin@skjoldebrand.org
 # Thanks to: Hans Eriksson, for looking over the translation file
 
 addLanguage W Swedish 1 ;#iso8859-1
@@ -11,184 +11,198 @@ proc setLanguage_W {} {
 # File menu:
 menuText W File "Arkiv" 0
 menuText W FileNew "Ny..." 0 {Skapa en ny Scid databas}
-menuText W FileOpen "Öppna..." 0 {Öppna en befintlig Scid databas}
-menuText W FileClose "Stäng" 0 {Stäng den aktiva Scid databasen}
-menuText W FileFinder "Sök filer" 4 {Öppna sökdialogen}
+menuText W FileOpen "ï¿½ppna..." 0 {ï¿½ppna en befintlig Scid databas}
+menuText W FileClose "Stï¿½ng" 0 {Stï¿½ng den aktiva Scid databasen}
+menuText W FileFinder "Sï¿½k filer" 4 {ï¿½ppna sï¿½kdialogen}
 menuText W FileSavePgn "Spara PGN..." 0 {}
-menuText W FileOpenBaseAsTree "Öppna databas som träd" 0   {Öppna en databas och använd den i Trädfönstret}
-menuText W FileOpenRecentBaseAsTree "Öppna senaste databasen som träd" 0   {Öppna den senaste databasen och använd den i Trädfönstret}
-menuText W FileBookmarks "Bokmärken" 0 {Hantera bokmärken (kortkommando: Ctrl+B)}
-menuText W FileBookmarksAdd "Nytt bokmärke" 0 \
-  {Markera den aktiva ställningen i partiet}
-menuText W FileBookmarksFile "Spara bokmärke" 0 \
-  {Spara bokmärket för den aktiva ställningen i partiet}
-menuText W FileBookmarksEdit "Redigera bokmärken..." 0 \
-  {Redigera bokmärken}
-menuText W FileBookmarksList "Visa bokmärken som lista" 19 \
-  {Visar bokmärkena som lista, inte undermenyer}
-menuText W FileBookmarksSub "Visa bokmärken i undermenyer" 17 \
-  {Visar bokmärkena som undermenyer, inte lista}
-menuText W FileReadOnly "Enbart läsbar..." 8 \
-  {Avlägsna temporärt redigeringsmöjligheterna till databasen}
+menuText W FileOpenBaseAsTree "ï¿½ppna databas som trï¿½d" 0   {ï¿½ppna en databas och anvï¿½nd den i Trï¿½dfï¿½nstret}
+menuText W FileOpenRecentBaseAsTree "ï¿½ppna senaste databasen som trï¿½d" 0   {ï¿½ppna den senaste databasen och anvï¿½nd den i Trï¿½dfï¿½nstret}
+menuText W FileBookmarks "Bokmï¿½rken" 0 {Hantera bokmï¿½rken (kortkommando: Ctrl+B)}
+menuText W FileBookmarksAdd "Nytt bokmï¿½rke" 0 \
+  {Markera den aktiva stï¿½llningen i partiet}
+menuText W FileBookmarksFile "Spara bokmï¿½rke" 0 \
+  {Spara bokmï¿½rket fï¿½r den aktiva stï¿½llningen i partiet}
+menuText W FileBookmarksEdit "Redigera bokmï¿½rken..." 0 \
+  {Redigera bokmï¿½rken}
+menuText W FileBookmarksList "Visa bokmï¿½rken som lista" 19 \
+  {Visar bokmï¿½rkena som lista, inte undermenyer}
+menuText W FileBookmarksSub "Visa bokmï¿½rken i undermenyer" 17 \
+  {Visar bokmï¿½rkena som undermenyer, inte lista}
+menuText W FileReadOnly "Enbart lï¿½sbar..." 8 \
+  {Avlï¿½gsna temporï¿½rt redigeringsmï¿½jligheterna till databasen}
 menuText W FileSwitch "Byt databas" 0 \
-  {Byt till en annan öppnad databas}
+  {Byt till en annan ï¿½ppnad databas}
 menuText W FileExit "Avsluta" 0 {Avsluta Scid}
 
 # Edit menu:
 menuText W Edit "Redigera" 0
-menuText W EditAdd "Lägg till variant" 0 {Skapa en variant vid denna ställning}
+menuText W EditAdd "Lï¿½gg till variant" 0 {Skapa en variant vid denna stï¿½llning}
 menuText W EditPasteVar "Klistra Variation" 0
-menuText W EditDelete "Radera variant" 0 {Radera en variant vid denna ställning}
+menuText W EditDelete "Radera variant" 0 {Radera en variant vid denna stï¿½llning}
 menuText W EditFirst "Skapa huvudvariant" 6 \
-  {Gör en av varianterna till huvudvariant}
+  {Gï¿½r en av varianterna till huvudvariant}
 menuText W EditMain "Skapa nytt textdrag" 11 \
-  {Gör en av varianterna till partifortsättning}
+  {Gï¿½r en av varianterna till partifortsï¿½ttning}
 menuText W EditTrial "Testa variant" 6 \
-  {Starta/ stoppa testläge, undersök en idé på brädet}
-menuText W EditStrip "Ta bort" 3 {Avlägsna kommentarer eller varianter från partiet}
-menuText W EditUndo "Ångra" 0 {Ångra senaste ändring i parti}
+  {Starta/ stoppa testlï¿½ge, undersï¿½k en idï¿½ pï¿½ brï¿½det}
+menuText W EditStrip "Ta bort" 3 {Avlï¿½gsna kommentarer eller varianter frï¿½n partiet}
+menuText W EditUndo "ï¿½ngra" 0 {ï¿½ngra senaste ï¿½ndring i parti}
 menuText W EditRedo "Repetera" 0
 menuText W EditStripComments "Kommentarer" 0 \
-  {Avlägsna alla kommentarer och noteringar från partiet}
-menuText W EditStripVars "Varianter" 0 {Avlägsna alla varianter från partiet}
-menuText W EditStripBegin "Avlägsna tidigare drag" 9 \
-  {Avlägsna dragen fram till den aktuella ställningen}
-menuText W EditStripEnd "Avlägsna resterande drag" 0 \
-  {Avlägsna partiets resterande drag}
-menuText W EditReset "Töm Clipbase" 1 \
-  {Tömmer den temporära databasen}
+  {Avlï¿½gsna alla kommentarer och noteringar frï¿½n partiet}
+menuText W EditStripVars "Varianter" 0 {Avlï¿½gsna alla varianter frï¿½n partiet}
+menuText W EditStripBegin "Avlï¿½gsna tidigare drag" 9 \
+  {Avlï¿½gsna dragen fram till den aktuella stï¿½llningen}
+menuText W EditStripEnd "Avlï¿½gsna resterande drag" 0 \
+  {Avlï¿½gsna partiets resterande drag}
+# ====== TODO To be translated ======
+menuText W EditFlip "Flip Board" 0 {Flip the board}
+menuText W EditReset "Tï¿½m Clipbase" 1 \
+  {Tï¿½mmer den temporï¿½ra databasen}
 menuText W EditCopy "Kopiera partiet till Clipbase" 21 \
   {Kopierar det aktuella partiet till Clipbase}
 menuText W EditPaste "Klistra in det senaste Clipbasepartiet" 8 \
   {Klistrar in det senaste tillagda i Clipbase i den aktiva databasen}
 menuText W EditPastePGN "Klistra in Clipbasetext som PGNparti..." 10 \
-  {Tolka Clipbasetexten som ett parti i PGN notation och klistra in det här}
-menuText W EditSetup "Skapa ställning..." 0 \
-  {Skapa en utgångsställning för aktuellt parti}
-menuText W EditCopyBoard "Kopiera ställning" 0 \
-  {Kopiera den aktuella ställningen i FEN kod till urklippshanteraren}
+  {Tolka Clipbasetexten som ett parti i PGN notation och klistra in det hï¿½r}
+menuText W EditSetup "Skapa stï¿½llning..." 0 \
+  {Skapa en utgï¿½ngsstï¿½llning fï¿½r aktuellt parti}
+menuText W EditCopyBoard "Kopiera stï¿½llning" 0 \
+  {Kopiera den aktuella stï¿½llningen i FEN kod till urklippshanteraren}
 menuText W EditCopyPGN "Kopiera PGN" 0 {}
-menuText W EditPasteBoard "Klistra in utgångsställning" 10 \
-  {Klistra in ställningen från aktuellt parti i den temporära databasen}
+menuText W EditPasteBoard "Klistra in utgï¿½ngsstï¿½llning" 10 \
+  {Klistra in stï¿½llningen frï¿½n aktuellt parti i den temporï¿½ra databasen}
 
 # Game menu:
 menuText W Game "Partier" 0
 menuText W GameNew "Nytt parti" 0 \
-  {Återställ brädet inför ett nytt parti (raderar alla ändringar)}
-menuText W GameFirst "Ladda det första partiet" 10 {Laddar det första partiet i filtret}
-menuText W GamePrev "Ladda föregående parti" 7 {Ladda föregående parti i filtret}
-menuText W GameReload "Börja om partiet" 0 \
-  {Återställ partiet (raderar alla ändringar)}
-menuText W GameNext "Ladda nästa parti" 6 {Ladda nästa parti i filtret}
+  {ï¿½terstï¿½ll brï¿½det infï¿½r ett nytt parti (raderar alla ï¿½ndringar)}
+menuText W GameFirst "Ladda det fï¿½rsta partiet" 10 {Laddar det fï¿½rsta partiet i filtret}
+menuText W GamePrev "Ladda fï¿½regï¿½ende parti" 7 {Ladda fï¿½regï¿½ende parti i filtret}
+menuText W GameReload "Bï¿½rja om partiet" 0 \
+  {ï¿½terstï¿½ll partiet (raderar alla ï¿½ndringar)}
+menuText W GameNext "Ladda nï¿½sta parti" 6 {Ladda nï¿½sta parti i filtret}
 menuText W GameLast "Ladda det sista partiet" 10 {Ladda det sista partiet i filtret}
-menuText W GameRandom "Ladda parti slumpmässigt" 14 \
-  {Ladda ett av datorn slumpmässigt valt parti}
+menuText W GameRandom "Ladda parti slumpmï¿½ssigt" 14 \
+  {Ladda ett av datorn slumpmï¿½ssigt valt parti}
 menuText W GameNumber "Ladda parti nummer..." 6 \
   {Ladda ett parti genom att ange dess nummer}
-menuText W GameReplace "Spara: Ersätt parti..." 7 \
-  {Spara partiet och ersätt tidigare version}
+menuText W GameReplace "Spara: Ersï¿½tt parti..." 7 \
+  {Spara partiet och ersï¿½tt tidigare version}
 menuText W GameAdd "Spara: Nytt parti..." 1 \
   {Spara ett nytt parti}
-menuText W GameInfo "Ställ Spelinformation" 0
-menuText W GameBrowse "Bläddra bland spel" 0
+menuText W GameInfo "Stï¿½ll Spelinformation" 0
+menuText W GameBrowse "Blï¿½ddra bland spel" 0
 menuText W GameList "Visa alla spel" 0
 # ====== TODO To be translated ======
 menuText W GameDelete "Delete Game" 0
-menuText W GameDeepest "Identifiera öppningen" 0 \
-  {Gå till den mest detaljerade ställningen i ECO boken}
-menuText W GameGotoMove "Gå till drag nummer..." 8 \
-  {Gå till ett specifikt drag i partiet}
+menuText W GameDeepest "Identifiera ï¿½ppningen" 0 \
+  {Gï¿½ till den mest detaljerade stï¿½llningen i ECO boken}
+menuText W GameGotoMove "Gï¿½ till drag nummer..." 8 \
+  {Gï¿½ till ett specifikt drag i partiet}
 menuText W GameNovelty "Hitta nyhet..." 7 \
-  {Hitta det första draget i partiet som inte spelats tidigare}
+  {Hitta det fï¿½rsta draget i partiet som inte spelats tidigare}
 
 # Search Menu:
-menuText W Search "Sök" 0
-menuText W SearchReset "Återställ sökfilter" 0 {Återställ sökfiltret så att alla partiet ingår}
-menuText W SearchNegate "Omvänt filter" 0 {Ta med partier som utesluts av filtret}
+menuText W Search "Sï¿½k" 0
+menuText W SearchReset "ï¿½terstï¿½ll sï¿½kfilter" 0 {ï¿½terstï¿½ll sï¿½kfiltret sï¿½ att alla partiet ingï¿½r}
+menuText W SearchNegate "Omvï¿½nt filter" 0 {Ta med partier som utesluts av filtret}
 menuText W SearchEnd "Flytta till sista filter" 0
-menuText W SearchCurrent "Aktuell position..." 8 {Sök partier med aktuell position på brädet}
-menuText W SearchHeader "I huvud..." 2 {Använd fast information (spelare, evenemang, plats, mm)}
-menuText W SearchMaterial "Material/ställning..." 0 {Sökning baserad på material eller ställning}
+menuText W SearchCurrent "Aktuell position..." 8 {Sï¿½k partier med aktuell position pï¿½ brï¿½det}
+menuText W SearchHeader "I huvud..." 2 {Anvï¿½nd fast information (spelare, evenemang, plats, mm)}
+menuText W SearchMaterial "Material/stï¿½llning..." 0 {Sï¿½kning baserad pï¿½ material eller stï¿½llning}
 menuText W SearchMoves {Drag} 0 {}
-menuText W SearchUsing "Använd sökfil..." 10 {Använd en fil med lagrade sökvillkor}
+menuText W SearchUsing "Anvï¿½nd sï¿½kfil..." 10 {Anvï¿½nd en fil med lagrade sï¿½kvillkor}
 
 # Windows menu:
-menuText W Windows "Fönster" 0
+menuText W Windows "Fï¿½nster" 0
 menuText W WindowsGameinfo "Visa partiinformation" 0 {Show/hide the game info panel}
-menuText W WindowsComment "Kommentarseditor" 0 {Öppna/ stäng kommentarseditorn}
-menuText W WindowsGList "Partilista" 5 {Öppna/ stäng partilistan}
-menuText W WindowsPGN "PGN fönster" 0 {Öppna/ stäng PGN fönstret}
-menuText W WindowsCross "Resultattabell" 0 {Visa en resultattabell för den aktuella turneringen}
-menuText W WindowsPList "Spelarförteckning" 7 {Öppna/ stäng en förteckning över spelarna i den aktiva databasen}
+menuText W WindowsComment "Kommentarseditor" 0 {ï¿½ppna/ stï¿½ng kommentarseditorn}
+menuText W WindowsGList "Partilista" 5 {ï¿½ppna/ stï¿½ng partilistan}
+menuText W WindowsPGN "PGN fï¿½nster" 0 {ï¿½ppna/ stï¿½ng PGN fï¿½nstret}
+menuText W WindowsCross "Resultattabell" 0 {Visa en resultattabell fï¿½r den aktuella turneringen}
+menuText W WindowsPList "Spelarfï¿½rteckning" 7 {ï¿½ppna/ stï¿½ng en fï¿½rteckning ï¿½ver spelarna i den aktiva databasen}
 menuText W WindowsTmt "Turneringar" 0 {Lista turneringar}
-menuText W WindowsSwitcher "Databasväxlaren" 0 \
-  {Öppna/ stäng databasväxlaren}
-menuText W WindowsMaint "Verktygsfönster" 0 \
-  {Öppna/ stäng verktygsfönstret}
-menuText W WindowsECO "ECO fönster" 0 {Öppna/ stäng ECO bläddraren}
-menuText W WindowsStats "Statistikfönster" 0 \
-  {Öppna/ stäng statistikfönstret}
-menuText W WindowsTree "Trädfönster" 2 {Öppna/ stäng variantträdets fönster}
+menuText W WindowsSwitcher "Databasvï¿½xlaren" 0 \
+  {ï¿½ppna/ stï¿½ng databasvï¿½xlaren}
+menuText W WindowsMaint "Verktygsfï¿½nster" 0 \
+  {ï¿½ppna/ stï¿½ng verktygsfï¿½nstret}
+menuText W WindowsECO "ECO fï¿½nster" 0 {ï¿½ppna/ stï¿½ng ECO blï¿½ddraren}
+menuText W WindowsStats "Statistikfï¿½nster" 0 \
+  {ï¿½ppna/ stï¿½ng statistikfï¿½nstret}
+menuText W WindowsTree "Trï¿½dfï¿½nster" 2 {ï¿½ppna/ stï¿½ng varianttrï¿½dets fï¿½nster}
 menuText W WindowsTB "Slutspelsdatabas" 2 \
-  {Öppna/ stäng slutspelsdatabasfönstret}
-menuText W WindowsBook "Bokfönster" 0 {Öppna/stäng Bokfönstret}
-menuText W WindowsCorrChess "Korrespondensfönster" 0 {Öppna/stäng Korrespondensfönstret}
+  {ï¿½ppna/ stï¿½ng slutspelsdatabasfï¿½nstret}
+menuText W WindowsBook "Bokfï¿½nster" 0 {ï¿½ppna/stï¿½ng Bokfï¿½nstret}
+menuText W WindowsCorrChess "Korrespondensfï¿½nster" 0 {ï¿½ppna/stï¿½ng Korrespondensfï¿½nstret}
+# ====== TODO To be translated ======
+menuText W Analyse "Analyse" 0
+# ====== TODO To be translated ======
+menuText W AnalyseEngineList "Analysis Engines" 0 {Configure analysis engines}
+# ====== TODO To be translated ======
+menuText W AnalyseRating "Player Ratings" 0 {Graph the rating history of the current game players}
+# ====== TODO To be translated ======
+menuText W AnalyseScore "Score Graph" 0 {Show the score graph window}
+# ====== TODO To be translated ======
+menuText W AnalyseStartEngine1 "Start engine 1" 0  {Start engine 1}
+# ====== TODO To be translated ======
+menuText W AnalyseStartEngine2 "Start engine 2" 0  {Start engine 2}
 
 # Tools menu:
 menuText W Tools "Verktyg" 0
 menuText W ToolsAnalysis "Analysmotor..." 6 \
   {Starta/ stoppa en analysmotor}
 menuText W ToolsEmail "Eposthanterare" 0 \
-  {Öppna/ stäng eposthanteraren}
+  {ï¿½ppna/ stï¿½ng eposthanteraren}
 menuText W ToolsFilterGraph "Filterdiagram" 7 \
-  {Öppna/ stäng filterdiagramfönstret}
-menuText W ToolsAbsFilterGraph "Absolut Filtergraf" 7 {Öppna/stäng filtergraffönstret för absolutvärden}
-menuText W ToolsOpReport "Öppningsrapport" 0 \
-  {Skapa en öppningsrapport utifrån den aktuella ställningen}
-menuText W ToolsTracker "Sök material"  0 {Öppnar dialog för att söka efter en viss materiell balans}
-menuText W ToolsTraining "Träning"  0 {Träningsverktyg (taktik, öppningar,...) }
+  {ï¿½ppna/ stï¿½ng filterdiagramfï¿½nstret}
+menuText W ToolsAbsFilterGraph "Absolut Filtergraf" 7 {ï¿½ppna/stï¿½ng filtergraffï¿½nstret fï¿½r absolutvï¿½rden}
+menuText W ToolsOpReport "ï¿½ppningsrapport" 0 \
+  {Skapa en ï¿½ppningsrapport utifrï¿½n den aktuella stï¿½llningen}
+menuText W ToolsTracker "Sï¿½k material"  0 {ï¿½ppnar dialog fï¿½r att sï¿½ka efter en viss materiell balans}
+menuText W ToolsTraining "Trï¿½ning"  0 {Trï¿½ningsverktyg (taktik, ï¿½ppningar,...) }
 menuText W ToolsComp "Turnering" 2 {Schackmotorturnering}
 menuText W ToolsTacticalGame "Taktiskt parti"  0 {Spela ett parti med taktik}
-menuText W ToolsSeriousGame "Seriöst parti"  0 {Spela ett seriöst parti}
-menuText W ToolsTrainTactics "Taktik"  0 {Lösa taktik}
-menuText W ToolsTrainCalvar "Variantberäkning"  0 {Variantberäkningsträning}
-menuText W ToolsTrainFindBestMove "Hitta bäst drag"  0 {Hitta bästa draget}
-menuText W ToolsTrainFics "Spela på Internet"  0 {Spela på freechess.org}
-menuText W ToolsBookTuning "Bokfininställning" 0 {Bokfininställning}
+menuText W ToolsSeriousGame "Seriï¿½st parti"  0 {Spela ett seriï¿½st parti}
+menuText W ToolsTrainTactics "Taktik"  0 {Lï¿½sa taktik}
+menuText W ToolsTrainCalvar "Variantberï¿½kning"  0 {Variantberï¿½kningstrï¿½ning}
+menuText W ToolsTrainFindBestMove "Hitta bï¿½st drag"  0 {Hitta bï¿½sta draget}
+menuText W ToolsTrainFics "Spela pï¿½ Internet"  0 {Spela pï¿½ freechess.org}
+menuText W ToolsBookTuning "Bokfininstï¿½llning" 0 {Bokfininstï¿½llning}
 menuText W ToolsMaint "Databasverktyg" 0 {Scids databasverktyg}
-menuText W ToolsMaintWin "Verktygsfönster" 0 \
-  {Öppna/ stäng verktygsfönstret}
+menuText W ToolsMaintWin "Verktygsfï¿½nster" 0 \
+  {ï¿½ppna/ stï¿½ng verktygsfï¿½nstret}
 menuText W ToolsMaintCompact "Komprimera databasen..." 0 \
-  {Komprimera databasen, avlägsna raderade partier och oanvända namn}
+  {Komprimera databasen, avlï¿½gsna raderade partier och oanvï¿½nda namn}
 menuText W ToolsMaintClass "Klassificera partier enligt ECO..." 2 \
   {Klassificera om alla partier enligt ECO-systemet}
 menuText W ToolsMaintSort "Sortera databasen..." 0 \
   {Sortera partierna i den aktiva databasen}
 menuText W ToolsMaintDelete "Radera dubbletter..." 0 \
-  {Sök dubbletter och markera dem som raderingsbara}
-menuText W ToolsMaintTwin "Sök dubbletter" 0 \
-  {Öppna/ stäng dubblettfönstret för att söka dubblettpartier}
+  {Sï¿½k dubbletter och markera dem som raderingsbara}
+menuText W ToolsMaintTwin "Sï¿½k dubbletter" 0 \
+  {ï¿½ppna/ stï¿½ng dubblettfï¿½nstret fï¿½r att sï¿½ka dubblettpartier}
 menuText W ToolsMaintNameEditor "Redigera namn" 0 \
-  {Redigera spelarnamn utifrån rättstavningsfilen}
+  {Redigera spelarnamn utifrï¿½n rï¿½ttstavningsfilen}
 menuText W ToolsMaintNamePlayer "Stavningskontrollera namn..." 22 \
-  {Stavningskontrollera namn utifrån rättstavningsfilen}
+  {Stavningskontrollera namn utifrï¿½n rï¿½ttstavningsfilen}
 menuText W ToolsMaintNameEvent "Stavningskontrollera evenemang..." 21 \
-  {Stavningskontrollera evenemang utifrån rättstavningsfilen}
+  {Stavningskontrollera evenemang utifrï¿½n rï¿½ttstavningsfilen}
 menuText W ToolsMaintNameSite "Stavningskontrollera platser..." 21 \
-  {Stavningskontrollera platser utifrån rättstavningsfilen}
+  {Stavningskontrollera platser utifrï¿½n rï¿½ttstavningsfilen}
 menuText W ToolsMaintNameRound "Stavningskontrollera ronder..." 21 \
-  {Stavningskontrollera ronder utifrån rättstavningsfilen}
-menuText W ToolsMaintFixBase "Fixa trasig databas" 0 {Försök att fixa en trasig databas}
-menuText W ToolsConnectHardware "Anslut hårdvara" 0 {Anslut extern hårdvara}
-menuText W ToolsConnectHardwareConfigure "Konfigurera..." 0 {Konfigurera extern hårdvara och anslutning}
+  {Stavningskontrollera ronder utifrï¿½n rï¿½ttstavningsfilen}
+menuText W ToolsMaintFixBase "Fixa trasig databas" 0 {Fï¿½rsï¿½k att fixa en trasig databas}
+menuText W ToolsConnectHardware "Anslut hï¿½rdvara" 0 {Anslut extern hï¿½rdvara}
+menuText W ToolsConnectHardwareConfigure "Konfigurera..." 0 {Konfigurera extern hï¿½rdvara och anslutning}
 menuText W ToolsConnectHardwareNovagCitrineConnect "Anslut Novag Citrine" 0 {Anslut Novag Citrine}
 menuText W ToolsConnectHardwareInputEngineConnect "Anslut Inmatningsmotor" 0 {Anslut Inmatningsmotor (t ex DGT)}
 menuText W ToolsPInfo "Spelarinformation"  0 \
-  {Öppna/ uppdatera spelarinformation}
+  {ï¿½ppna/ uppdatera spelarinformation}
 menuText W ToolsPlayerReport "Spelarrapport" 3 \
   {Skapa en spelarrapport}
 menuText W ToolsRating "Ratingdiagram" 0 \
-  {Skapa ett ratingdiagram för spelarna i partiet}
+  {Skapa ett ratingdiagram fï¿½r spelarna i partiet}
 menuText W ToolsScore "Resultatdiagram" 8 {Visa resultatdiagrammet}
 menuText W ToolsExpCurrent "Exportera aktuellt parti" 1 \
   {Spara aktuellt parti till en textfil}
@@ -196,7 +210,7 @@ menuText W ToolsExpCurrentPGN "Exportera till PGN..." 15 \
   {Spara aktuellt parti till en PGN-fil}
 menuText W ToolsExpCurrentHTML "Exportera till HTML..." 15 \
   {Spara aktuellt parti till en HTML-fil}
-menuText W ToolsExpCurrentHTMLJS "Exportera till HTML och JavaScript-fil..." 15 {Spara aktuellt parti till en HTML och JavaScript-fil} 
+menuText W ToolsExpCurrentHTMLJS "Exportera till HTML och JavaScript-fil..." 15 {Spara aktuellt parti till en HTML och JavaScript-fil}
 menuText W ToolsExpCurrentLaTeX "Exportera till LaTeX..." 15 \
   {Spara aktuellt parti till en LaTeX-fil}
 # ====== TODO To be translated ======
@@ -206,7 +220,7 @@ menuText W ToolsExpFilterPGN "Exportera till PGN..." 15 \
   {Spara alla filterade partier till en PGN-fil}
 menuText W ToolsExpFilterHTML "Exportera till HTML..." 15 \
   {Spara alla filterade partier till en HTML-fil}
-menuText W ToolsExpFilterHTMLJS "Exportera filtrerade till HTML och JavaScript-fil..." 17 {Spara alla filtrerade partier till en HTML och JavaScript-fil} 
+menuText W ToolsExpFilterHTMLJS "Exportera filtrerade till HTML och JavaScript-fil..." 17 {Spara alla filtrerade partier till en HTML och JavaScript-fil}
 menuText W ToolsExpFilterLaTeX "Exportera till LaTeX..." 15 \
   {Spara alla filterade partier till en LaTeX-fil}
 # ====== TODO To be translated ======
@@ -217,32 +231,32 @@ menuText W ToolsExpFilterGames "Export Gamelist to Text" 19 {Print a formatted G
 menuText W ToolsImportOne "Importera ett parti i PGN-format..." 0 \
   {Importera ett parti i PGN-format}
 menuText W ToolsImportFile "Importera flera partier i PGN-format..." 16 \
-  {Importera flera partier i PGN-format från en fil}
+  {Importera flera partier i PGN-format frï¿½n en fil}
 menuText W ToolsStartEngine1 "Starta schackmotor 1" 0  {Starta schackmotor 1}
 menuText W ToolsStartEngine2 "Starta schackmotor 2" 0  {Starta schackmotor 2}
-menuText W ToolsScreenshot "Skapa en Skärmdump" 0
+menuText W ToolsScreenshot "Skapa en Skï¿½rmdump" 0
 menuText W Play "Spela" 0
-menuText W CorrespondenceChess "Korrespondensschack" 0 {Funktioner för eMail och Xfcc baserad Korrespondensschack}
-menuText W CCConfigure "Konfigurera..." 0 {Konfigurera externa verktyg och generella inställningar}
+menuText W CorrespondenceChess "Korrespondensschack" 0 {Funktioner fï¿½r eMail och Xfcc baserad Korrespondensschack}
+menuText W CCConfigure "Konfigurera..." 0 {Konfigurera externa verktyg och generella instï¿½llningar}
 menuText W CCConfigRelay "Konfigurera observationer..." 10 {Konfigurera partier att observera}
-menuText W CCOpenDB "Öppna Databas..." 0 {Öppna standardkorrespondensdatabasen}
-menuText W CCRetrieve "Hämta Partier" 0 {Hämta partier via extern (Xfcc-)hjälpare}
+menuText W CCOpenDB "ï¿½ppna Databas..." 0 {ï¿½ppna standardkorrespondensdatabasen}
+menuText W CCRetrieve "Hï¿½mta Partier" 0 {Hï¿½mta partier via extern (Xfcc-)hjï¿½lpare}
 menuText W CCInbox "Hantera Inkorg" 0 {Hantera alla filer i Scids Inkorg}
-menuText W CCSend "Skicka Drag" 0 {Skicka ditt drag via eMail eller extern (Xfcc-)hjälpare}
+menuText W CCSend "Skicka Drag" 0 {Skicka ditt drag via eMail eller extern (Xfcc-)hjï¿½lpare}
 menuText W CCResign "Ge upp" 0 {Ge upp (inte via eMail)}
-menuText W CCClaimDraw "Hävda Remi" 0 {Skicka drag och hävda Remi (inte via eMail)}
+menuText W CCClaimDraw "Hï¿½vda Remi" 0 {Skicka drag och hï¿½vda Remi (inte via eMail)}
 menuText W CCOfferDraw "Erbjud Remi" 0 {Skicka drag och erbjud Remi (inte via eMail)}
 menuText W CCAcceptDraw "Acceptera Remi" 0 {Acceptera en erbjuden Remi (inte via eMail)}
 menuText W CCNewMailGame "Nytt eMail-parti..." 0 {Starta ett nytt eMail-parti}
-menuText W CCMailMove "Skicka Drag..." 0 {Skicka draget via eMail till motståndaren}
-menuText W CCGamePage "Partisida..." 0 {Starta upp partiet via webläsaren}
+menuText W CCMailMove "Skicka Drag..." 0 {Skicka draget via eMail till motstï¿½ndaren}
+menuText W CCGamePage "Partisida..." 0 {Starta upp partiet via weblï¿½saren}
 menuText W CCEditCopy "Kopiera partilista till Clipbase" 0 {Kopiera partierna som CSV-lista till Clipbase}
 
 
 # Options menu:
 menuText W Options "Alternativ" 2
-menuText W OptionsBoard "Brädet" 0 {Ändra brädets utseende}
-menuText W OptionsColour "Bakgrundsfärg" 0 {Standardtextfärg}
+menuText W OptionsBoard "Brï¿½det" 0 {ï¿½ndra brï¿½dets utseende}
+menuText W OptionsColour "Bakgrundsfï¿½rg" 0 {Standardtextfï¿½rg}
 # ====== TODO To be translated ======
 menuText W OptionsBackColour "Background" 0 {Default text widget color}
 # ====== TODO To be translated ======
@@ -265,13 +279,13 @@ menuText W OptionsScoreColour "Score Graph" 0 {}
 # ====== TODO To be translated ======
 menuText W OptionsScoreBarColour "Score Graph current" 0 {}
 menuText W OptionsNames "Spelarnamn..." 0 {Redigera spelares namn}
-menuText W OptionsExport "Export" 0 {Ändra exportalternativ}
-menuText W OptionsFonts "Typsnitt" 0 {Ändra typsnitt}
-menuText W OptionsFontsRegular "Normal" 0 {Ändra det normala typsnittet}
-menuText W OptionsFontsMenu "Menu" 0 {Ändra menytypsnittet}
-menuText W OptionsFontsSmall "Liten" 0 {Ändra det lilla typsnittet}
-menuText W OptionsFontsFixed "Fixerad" 0 {Ändra det fixerade typsnittet}
-menuText W OptionsGInfo "Partiinformation" 0 {Alternativ för partiinformation}
+menuText W OptionsExport "Export" 0 {ï¿½ndra exportalternativ}
+menuText W OptionsFonts "Typsnitt" 0 {ï¿½ndra typsnitt}
+menuText W OptionsFontsRegular "Normal" 0 {ï¿½ndra det normala typsnittet}
+menuText W OptionsFontsMenu "Menu" 0 {ï¿½ndra menytypsnittet}
+menuText W OptionsFontsSmall "Liten" 0 {ï¿½ndra det lilla typsnittet}
+menuText W OptionsFontsFixed "Fixerad" 0 {ï¿½ndra det fixerade typsnittet}
+menuText W OptionsGInfo "Partiinformation" 0 {Alternativ fï¿½r partiinformation}
 menuText W OptionsFics "FICS" 0
 menuText W OptionsFicsAuto "Autopronomera Drottningen" 0
 # ====== TODO To be translated ======
@@ -290,92 +304,92 @@ menuText W OptionsFicsNoRes "No Results" 0
 menuText W OptionsFicsNoReq "No Requests" 0
 # ====== TODO To be translated ======
 menuText W OptionsFicsPremove "Allow Premove" 0
-menuText W OptionsLanguage "Språk" 0 {Välj språk}
-menuText W OptionsMovesTranslatePieces "Översätt pjäser" 0 {Översätt första bokstaven för pjäser}
+menuText W OptionsLanguage "Sprï¿½k" 0 {Vï¿½lj sprï¿½k}
+menuText W OptionsMovesTranslatePieces "ï¿½versï¿½tt pjï¿½ser" 0 {ï¿½versï¿½tt fï¿½rsta bokstaven fï¿½r pjï¿½ser}
 menuText W OptionsMovesHighlightLastMove "Markera senaste draget" 0 {Markera senaste draget}
 menuText W OptionsMovesHighlightLastMoveDisplay "Visa" 0 {Visa senaste markerade draget}
-menuText W OptionsMovesHighlightLastMoveWidth "Bredd" 0 {Tjockhet på rad}
-menuText W OptionsMovesHighlightLastMoveColor "Färg" 0 {Färg på rad}
+menuText W OptionsMovesHighlightLastMoveWidth "Bredd" 0 {Tjockhet pï¿½ rad}
+menuText W OptionsMovesHighlightLastMoveColor "Fï¿½rg" 0 {Fï¿½rg pï¿½ rad}
 # ====== TODO To be translated ======
 menuText W OptionsMovesColorSelected "Color Selected Square" 0 {Color move}
-menuText W OptionsMoves "Drag" 0 {Alternativ för dragangivelse}
-menuText W OptionsMovesAsk "Fråga före ersätt drag" 0 \
-  {Fråga innan du ersätter befintliga drag}
-menuText W OptionsMovesAnimate "Fördröjning vid manuellt spel" 1 \
-  {Ange tid mellan varje drag när dragen görs automatiskt}
-menuText W OptionsMovesDelay "Fördröjning vid automatspel..." 1 \
-  {Ange fördröjning mellan dragen när datorn spelar själv}
+menuText W OptionsMoves "Drag" 0 {Alternativ fï¿½r dragangivelse}
+menuText W OptionsMovesAsk "Frï¿½ga fï¿½re ersï¿½tt drag" 0 \
+  {Frï¿½ga innan du ersï¿½tter befintliga drag}
+menuText W OptionsMovesAnimate "Fï¿½rdrï¿½jning vid manuellt spel" 1 \
+  {Ange tid mellan varje drag nï¿½r dragen gï¿½rs automatiskt}
+menuText W OptionsMovesDelay "Fï¿½rdrï¿½jning vid automatspel..." 1 \
+  {Ange fï¿½rdrï¿½jning mellan dragen nï¿½r datorn spelar sjï¿½lv}
 menuText W OptionsMovesCoord "Koordinater" 0 \
   {Acceptera koordinater ("g1f3") vid dragangivelse}
-menuText W OptionsShowVarPopup "Visa Variantfönster" 0 {Starta/Avsluta visningen av ett Variantfönster} 
-menuText W OptionsMovesSpace "Lägg till mellanslag efter dragnummer" 0 {Lägg till mellanslag efter dragnummer} 
+menuText W OptionsShowVarPopup "Visa Variantfï¿½nster" 0 {Starta/Avsluta visningen av ett Variantfï¿½nster}
+menuText W OptionsMovesSpace "Lï¿½gg till mellanslag efter dragnummer" 0 {Lï¿½gg till mellanslag efter dragnummer}
 menuText W OptionsMovesKey "Tangentkomplettering" 0 \
-  {Starta/ stäng av dragkomplettering vid tangentinmatning}
-menuText W OptionsMovesShowVarArrows "Visa pilar för variationer" 0 {Växlar på/av pilar som visar drag i variationer}
-menuText W OptionsNumbers "Talformat" 3 {Välj hur tal visas}
-menuText W OptionsStartup "Start" 3 {Välj vilka fönster som ska öppnas vid start}
-menuText W OptionsTheme "Tema" 0 {Ändra utseende på gränssnitt}
-menuText W OptionsWindows "Fönster" 1 {Fönsteralternativ}
+  {Starta/ stï¿½ng av dragkomplettering vid tangentinmatning}
+menuText W OptionsMovesShowVarArrows "Visa pilar fï¿½r variationer" 0 {Vï¿½xlar pï¿½/av pilar som visar drag i variationer}
+menuText W OptionsNumbers "Talformat" 3 {Vï¿½lj hur tal visas}
+menuText W OptionsStartup "Start" 3 {Vï¿½lj vilka fï¿½nster som ska ï¿½ppnas vid start}
+menuText W OptionsTheme "Tema" 0 {ï¿½ndra utseende pï¿½ grï¿½nssnitt}
+menuText W OptionsWindows "Fï¿½nster" 1 {Fï¿½nsteralternativ}
 menuText W OptionsWindowsIconify "Minimera automatiskt" 5 \
-  {Minimera alla fönster när huvudfönstret minimeras}
+  {Minimera alla fï¿½nster nï¿½r huvudfï¿½nstret minimeras}
 menuText W OptionsWindowsRaise "Autofokus" 0 \
-  {Visa åter vissa fönster (t ex. resultaträknare) automatiskt när de döljs}
-menuText W OptionsSounds "Ljud..." 2 {Konfigurera ljud för att annonsera drag}
-menuText W OptionsWindowsDock "Dockningsfönster" 0 {Dockningsfönster}
+  {Visa ï¿½ter vissa fï¿½nster (t ex. resultatrï¿½knare) automatiskt nï¿½r de dï¿½ljs}
+menuText W OptionsSounds "Ljud..." 2 {Konfigurera ljud fï¿½r att annonsera drag}
+menuText W OptionsWindowsDock "Dockningsfï¿½nster" 0 {Dockningsfï¿½nster}
 menuText W OptionsWindowsSaveLayout "Spara layout" 0 {Sparar layout}
-menuText W OptionsWindowsRestoreLayout "Återställ layout" 0 {Återställer layout}
+menuText W OptionsWindowsRestoreLayout "ï¿½terstï¿½ll layout" 0 {ï¿½terstï¿½ller layout}
 menuText W OptionsWindowsShowGameInfo "Visa partiinformation" 0 {Visar partiinformation}
-menuText W OptionsWindowsAutoLoadLayout "Automatiskt öppna första layouten" 0 {Öppnar automatiskt första layouten vid uppstart}
+menuText W OptionsWindowsAutoLoadLayout "Automatiskt ï¿½ppna fï¿½rsta layouten" 0 {ï¿½ppnar automatiskt fï¿½rsta layouten vid uppstart}
 # todo
 menuText W OptionsWindowsAutoResize "Auto resize board" 0 {}
 # ====== TODO To be translated ======
 menuText W OptionsWindowsFullScreen "Fullscreen" 0 {Toggle fullscreen mode}
-menuText W OptionsToolbar "Verktygsfält" 0 \
-  {Visa/ dölj huvudfönstrets verktygsfält}
+menuText W OptionsToolbar "Verktygsfï¿½lt" 0 \
+  {Visa/ dï¿½lj huvudfï¿½nstrets verktygsfï¿½lt}
 menuText W OptionsECO "Ladda ECO fil..." 7 {Ladda ECO-klassificeringen vid start}
-menuText W OptionsSpell "Ladda Rättstavningsfil..." 7 \
-  {Ladda rättstavningsfilen vid start}
-menuText W OptionsTable "Katalog för slutspelsdatabaser..." 0 \
-  {Välj en fil som innehåller en slutspelsdatabas; alla övriga filer i samma katalog kommer att användas}
-menuText W OptionsRecent "Senast använda filer..." 16 \
-  {Ãndra antalet senast använda filer som visas i Arkivmenyn}
-menuText W OptionsBooksDir "Öppningsbokskatalog..." 0 {Anger Öppningsbokskatalogen}
-menuText W OptionsTacticsBasesDir "Taktikbaskatalog..." 0 {Anger Taktikbaskatalog (för träning)}
+menuText W OptionsSpell "Ladda Rï¿½ttstavningsfil..." 7 \
+  {Ladda rï¿½ttstavningsfilen vid start}
+menuText W OptionsTable "Katalog fï¿½r slutspelsdatabaser..." 0 \
+  {Vï¿½lj en fil som innehï¿½ller en slutspelsdatabas; alla ï¿½vriga filer i samma katalog kommer att anvï¿½ndas}
+menuText W OptionsRecent "Senast anvï¿½nda filer..." 16 \
+  {ï¿½ndra antalet senast anvï¿½nda filer som visas i Arkivmenyn}
+menuText W OptionsBooksDir "ï¿½ppningsbokskatalog..." 0 {Anger ï¿½ppningsbokskatalogen}
+menuText W OptionsTacticsBasesDir "Taktikbaskatalog..." 0 {Anger Taktikbaskatalog (fï¿½r trï¿½ning)}
 menuText W OptionsInformant "Konfigurera Informant-parametrar" 0
 menuText W OptionsSave "Spara alternativ" 7 \
-  "Spara alla alternativ till en inställningsfil"
+  "Spara alla alternativ till en instï¿½llningsfil"
 # ====== TODO To be translated ======
-menuText W OptionsSaveBases "Save Bases as Default" 0 
+menuText W OptionsSaveBases "Save Bases as Default" 0
 menuText W OptionsAutoSave "Autospara vid avslut" 1 \
-  {Spara alla alternativ när du avslutar Scid}
+  {Spara alla alternativ nï¿½r du avslutar Scid}
 
 # Help menu:
-menuText W Help "Hjälp" 0
-menuText W HelpContents "Innehåll" 0 {Visa innehåll}
-menuText W HelpIndex "Index" 0 {Hjälpsystemets indexsida}
+menuText W Help "Hjï¿½lp" 0
+menuText W HelpContents "Innehï¿½ll" 0 {Visa innehï¿½ll}
+menuText W HelpIndex "Index" 0 {Hjï¿½lpsystemets indexsida}
 menuText W HelpGuide "Snabbguide" 0 {Visa snabbguiden}
 menuText W HelpHints "Tips" 0 {Visa tips}
 menuText W HelpContact "Kontaktinformation" 0 {Visa kontaktinformation}
-menuText W HelpTip "Dagens tips" 0 {Användbara Scid tips}
-menuText W HelpStartup "Startfönster" 5 {Visa startfönstret}
+menuText W HelpTip "Dagens tips" 0 {Anvï¿½ndbara Scid tips}
+menuText W HelpStartup "Startfï¿½nster" 5 {Visa startfï¿½nstret}
 menuText W HelpAbout "Om Scid" 0 {Information om Scid}
 
 # Game info box popup menu:
-menuText W GInfoHideNext "Dölj nästa drag" 0
+menuText W GInfoHideNext "Dï¿½lj nï¿½sta drag" 0
 # ====== TODO To be translated ======
 menuText W GInfoShow "Side to Move" 0
 # ====== TODO To be translated ======
 menuText W GInfoCoords "Toggle Coords" 0
-menuText W GInfoMaterial "Visa materialvärden" 0
+menuText W GInfoMaterial "Visa materialvï¿½rden" 0
 menuText W GInfoFEN "Visa FEN" 5
-menuText W GInfoMarks "Visa färgade fält och pilar" 22
+menuText W GInfoMarks "Visa fï¿½rgade fï¿½lt och pilar" 22
 menuText W GInfoWrap "Radbrytning" 0
-menuText W GInfoFullComment "Visa fullständiga kommentarer" 18
+menuText W GInfoFullComment "Visa fullstï¿½ndiga kommentarer" 18
 menuText W GInfoPhotos "Visa bilder" 5 ;
 menuText W GInfoTBNothing "Slutspelsdatabaser: inget" 20
 menuText W GInfoTBResult "Slutspelsdatabaser: endast resultat" 28
-menuText W GInfoTBAll "Slutspelsdatabaser: resultat och bästa drag" 33
-menuText W GInfoDelete "Återta/Radera detta parti" 0
+menuText W GInfoTBAll "Slutspelsdatabaser: resultat och bï¿½sta drag" 33
+menuText W GInfoDelete "ï¿½terta/Radera detta parti" 0
 menuText W GInfoMark "(Av-)Markera detta parti" 5
 # ====== TODO To be translated ======
 menuText W GInfoMenuBar "Menu Bar"  0
@@ -400,37 +414,37 @@ translate W KeepOpen {Keep open after startup}
 # ====== TODO To be translated ======
 translate W Apply {Apply}
 translate W Back {Tillbaka}
-translate W Browse {Bläddra}
+translate W Browse {Blï¿½ddra}
 translate W Cancel {Avbryt}
-translate W Continue {Fortsätt}
+translate W Continue {Fortsï¿½tt}
 translate W Clear {Rensa}
-translate W Close {Stäng}
-translate W Contents {Innehåll}
+translate W Close {Stï¿½ng}
+translate W Contents {Innehï¿½ll}
 translate W Defaults {Standard}
 translate W Delete {Radera}
 translate W Graph {Diagram}
-translate W Help {Hjälp}
+translate W Help {Hjï¿½lp}
 translate W Import {Importera}
 translate W Index {Index}
 translate W LoadGame {Ladda parti}
-translate W BrowseGame {Bläddra genom partier}
-translate W MergeGame {Slå samman parti}
-translate W MergeGames {Slå samman partier}
-translate W Preview {Förhandsgranska}
-translate W Revert {Ångra inmatning}
+translate W BrowseGame {Blï¿½ddra genom partier}
+translate W MergeGame {Slï¿½ samman parti}
+translate W MergeGames {Slï¿½ samman partier}
+translate W Preview {Fï¿½rhandsgranska}
+translate W Revert {ï¿½ngra inmatning}
 translate W Save {Spara}
 # ====== TODO To be translated ======
 translate W DontSave {Don't Save}
-translate W Search {Sök}
+translate W Search {Sï¿½k}
 translate W Stop {Stoppa}
 translate W Store {Spara}
 translate W Update {Uppdatera}
-translate W ChangeOrient {Ãndra fönstrets orientering}
+translate W ChangeOrient {ï¿½ndra fï¿½nstrets orientering}
 translate W ShowIcons {Visa Ikoner} ;# ***
 # ====== TODO To be translated ======
 translate W ConfirmCopy {Confirm Copy}
 translate W None {Ingen}
-translate W First {Första}
+translate W First {Fï¿½rsta}
 translate W Current {Aktuella}
 translate W Last {Sista}
 # ====== TODO To be translated ======
@@ -448,11 +462,11 @@ translate W moves {drag}
 translate W all {alla}
 translate W Yes {Ja}
 translate W No {Nej}
-translate W Both {Båda}
+translate W Both {Bï¿½da}
 translate W King {Kung}
 translate W Queen {Dam}
 translate W Rook {Torn}
-translate W Bishop {Löpare}
+translate W Bishop {Lï¿½pare}
 translate W Knight {Springare}
 translate W Pawn {Bonde}
 translate W White {Vit}
@@ -464,25 +478,25 @@ translate W AverageRating {Medelrating}
 translate W Event {Evenemang}
 translate W Site {Plats}
 translate W Country {Land}
-translate W IgnoreColors {Ignorera färger}
+translate W IgnoreColors {Ignorera fï¿½rger}
 # ====== TODO To be translated ======
 translate W MatchEnd {End pos only}
 translate W Date {Datum}
 translate W EventDate {Evenemangsdatum}
 translate W Decade {Decennium}
-translate W Year {År}
-translate W Month {Månad}
+translate W Year {ï¿½r}
+translate W Month {Mï¿½nad}
 translate W Months {Januari Februari Mars April Maj Juni Juli Augusti September Oktober November December}
-translate W Days {Sön Mån Tis Ons Tor Fre Lör}
+translate W Days {Sï¿½n Mï¿½n Tis Ons Tor Fre Lï¿½r}
 translate W YearToToday {Idag}
 translate W Result {Resultat}
 translate W Round {Rond}
-translate W Length {Längd}
+translate W Length {Lï¿½ngd}
 translate W ECOCode {ECO kod}
 translate W ECO {ECO}
 translate W Deleted {Raderad}
-translate W SearchResults {Sökresultat}
-translate W OpeningTheDatabase {Öppnar databas}
+translate W SearchResults {Sï¿½kresultat}
+translate W OpeningTheDatabase {ï¿½ppnar databas}
 translate W Database {Databas}
 translate W Filter {Filter}
 # ====== TODO To be translated ======
@@ -491,12 +505,12 @@ translate W IgnoreCase {Ignorera textstorlek}
 translate W noGames {inga partier}
 translate W allGames {alla partier}
 translate W empty {tom}
-translate W clipbase {temporär databas}
+translate W clipbase {temporï¿½r databas}
 translate W score {resultat}
 translate W Start {Start}
-translate W StartPos {Utgångsställning}
+translate W StartPos {Utgï¿½ngsstï¿½llning}
 translate W Total {Totalt}
-translate W readonly {bara läsbar} ;# ***
+translate W readonly {bara lï¿½sbar} ;# ***
 # ====== TODO To be translated ======
 translate W altered {altered}
 # ====== TODO To be translated ======
@@ -507,9 +521,9 @@ translate W prevTags {Use previous}
 translate W value {Value}
 
 # Standard error messages:
-translate W ErrNotOpen {Databasen är inte öppen.}
-translate W ErrReadOnly {Databasen är skrivskyddad. Du kan inte ändra i den.}
-translate W ErrSearchInterrupted {Sökningen avbröts; resultatet är inte fullständigt.}
+translate W ErrNotOpen {Databasen ï¿½r inte ï¿½ppen.}
+translate W ErrReadOnly {Databasen ï¿½r skrivskyddad. Du kan inte ï¿½ndra i den.}
+translate W ErrSearchInterrupted {Sï¿½kningen avbrï¿½ts; resultatet ï¿½r inte fullstï¿½ndigt.}
 
 # Game information:
 translate W twin {dubblett}
@@ -517,18 +531,18 @@ translate W deleted {raderad}
 translate W comment {kommentar}
 translate W hidden {dold}
 translate W LastMove {Senaste draget}
-translate W NextMove {Nästa}
-translate W GameStart {Utgångsställning}
-translate W LineStart {Varianten börjar}
-translate W GameEnd {Slutställning}
+translate W NextMove {Nï¿½sta}
+translate W GameStart {Utgï¿½ngsstï¿½llning}
+translate W LineStart {Varianten bï¿½rjar}
+translate W GameEnd {Slutstï¿½llning}
 translate W LineEnd {Varianten slut}
 
 # Player information:
 translate W PInfoAll {alla partier}
 translate W PInfoFilter {filtrerade partier}
 translate W PInfoAgainst {Resultat mot}
-translate W PInfoMostWhite {De vanligaste öppningarna som vit}
-translate W PInfoMostBlack {De vanligaste öppningarna som svart}
+translate W PInfoMostWhite {De vanligaste ï¿½ppningarna som vit}
+translate W PInfoMostBlack {De vanligaste ï¿½ppningarna som svart}
 translate W PInfoRating {Ratinghistoria}
 translate W PInfoBio {Biografisk information}
 translate W PInfoEditRatings {Redigera rating}
@@ -546,15 +560,15 @@ translate W withAllMoves {med alla drag}
 translate W withAllButOneMove {med alla drag utom ett}
 translate W with {med}
 translate W only {bara}
-translate W lose {förlust}
-translate W loses {förluster}
-translate W allOthersLose {alla andra drag förlorar}
+translate W lose {fï¿½rlust}
+translate W loses {fï¿½rluster}
+translate W allOthersLose {alla andra drag fï¿½rlorar}
 translate W matesIn {med matt i}
-translate W longest {längst}
+translate W longest {lï¿½ngst}
 translate W WinningMoves {Vinstdrag}
 translate W DrawingMoves {Remidrag}
-translate W LosingMoves {Förlustdrag}
-translate W UnknownMoves {Okänt resultat}
+translate W LosingMoves {Fï¿½rlustdrag}
+translate W UnknownMoves {Okï¿½nt resultat}
 
 # Tip of the day:
 translate W Tip {Tips}
@@ -564,44 +578,44 @@ translate W TipAtStartup {Tips vid start}
 menuText W TreeFile "Fil" 0
 menuText W TreeFileFillWithBase "Fyll Cache med databas" 0 {Fyll Cachefilen med alla partier i den aktuella databasen}
 menuText W TreeFileFillWithGame "Fyll Cache med parti" 0 {Fyll Cachefilen med aktuellt parti i den aktuella databasen}
-menuText W TreeFileCacheInfo "Cacheinformation" 0 {Få information om Cacheanvändning}
-menuText W TreeFileSave "Spara cachefil" 0 {Spara trädcache (*.stc)-filen}
+menuText W TreeFileCacheInfo "Cacheinformation" 0 {Fï¿½ information om Cacheanvï¿½ndning}
+menuText W TreeFileSave "Spara cachefil" 0 {Spara trï¿½dcache (*.stc)-filen}
 menuText W TreeFileFill "Fyll cachefil" 0 \
-{Fyll cachefilen med vanliga öppningar}
-menuText W TreeFileBest "Lista bästa partier" 0 {Visa lista över de bästa partierna i trädet}
-menuText W TreeFileGraph "Diagramfönster" 0 {Visa diagrammet för denna gren i trädet}
-menuText W TreeFileCopy "Kopiera träd till urklipp" 1 \
-  {Kopierar trädrelaterad statistik till urklipp}
-menuText W TreeFileClose "Stäng trädfönstret" 0 {Stäng trädfönstret}
-menuText W TreeMask "Sökmask" 0
-menuText W TreeMaskNew "Ny" 0 {Ny sökmask}
-menuText W TreeMaskOpen "Öppna" 0 {Öppna sökmask}
-menuText W TreeMaskOpenRecent "Öppna senaste" 0 {Öppna senaste sökmasken}
-menuText W TreeMaskSave "Spara" 0 {Spara sökmask}
-menuText W TreeMaskClose "Stäng" 0 {Stäng sökmask}
+{Fyll cachefilen med vanliga ï¿½ppningar}
+menuText W TreeFileBest "Lista bï¿½sta partier" 0 {Visa lista ï¿½ver de bï¿½sta partierna i trï¿½det}
+menuText W TreeFileGraph "Diagramfï¿½nster" 0 {Visa diagrammet fï¿½r denna gren i trï¿½det}
+menuText W TreeFileCopy "Kopiera trï¿½d till urklipp" 1 \
+  {Kopierar trï¿½drelaterad statistik till urklipp}
+menuText W TreeFileClose "Stï¿½ng trï¿½dfï¿½nstret" 0 {Stï¿½ng trï¿½dfï¿½nstret}
+menuText W TreeMask "Sï¿½kmask" 0
+menuText W TreeMaskNew "Ny" 0 {Ny sï¿½kmask}
+menuText W TreeMaskOpen "ï¿½ppna" 0 {ï¿½ppna sï¿½kmask}
+menuText W TreeMaskOpenRecent "ï¿½ppna senaste" 0 {ï¿½ppna senaste sï¿½kmasken}
+menuText W TreeMaskSave "Spara" 0 {Spara sï¿½kmask}
+menuText W TreeMaskClose "Stï¿½ng" 0 {Stï¿½ng sï¿½kmask}
 # ====== TODO To be translated ======
 menuText W TreeMaskFillWithLine "Fill with line" 0 {Fill mask with all previous moves}
-menuText W TreeMaskFillWithGame "Fyll med parti" 0 {Fyll sökmask med parti}
-menuText W TreeMaskFillWithBase "Fyll med databas" 0 {Fyll sökmask med alla partier i databasen}
-menuText W TreeMaskInfo "Info om sökmask" 0 {Visa statistik för aktuell sökmask}
-menuText W TreeMaskDisplay "Visa sökmaskkarta" 0 {Visa sökmaskdata i trädform}
-menuText W TreeMaskSearch "Sök" 0 {Sök i aktuell sökmask}
+menuText W TreeMaskFillWithGame "Fyll med parti" 0 {Fyll sï¿½kmask med parti}
+menuText W TreeMaskFillWithBase "Fyll med databas" 0 {Fyll sï¿½kmask med alla partier i databasen}
+menuText W TreeMaskInfo "Info om sï¿½kmask" 0 {Visa statistik fï¿½r aktuell sï¿½kmask}
+menuText W TreeMaskDisplay "Visa sï¿½kmaskkarta" 0 {Visa sï¿½kmaskdata i trï¿½dform}
+menuText W TreeMaskSearch "Sï¿½k" 0 {Sï¿½k i aktuell sï¿½kmask}
 menuText W TreeSort "Sortera" 0
 menuText W TreeSortAlpha "Alfabetiskt" 0
 menuText W TreeSortECO "ECO kod" 0
 menuText W TreeSortFreq "Frekvens" 0
 menuText W TreeSortScore "Resultat" 0
 menuText W TreeOpt "Alternativ" 0
-menuText W TreeOptSlowmode "Långsam mod" 0 {Långsam mod för uppdateringar (hög noggrannhet)}
-menuText W TreeOptFastmode "Snabb mod" 0 {Snabb mod för uppdateringar (ingen dragtranspositionering)}
-menuText W TreeOptFastAndSlowmode "Snabb och långsam mod" 0 {Snabb mod sedan långsam mod för uppdateringar}
-menuText W TreeOptStartStop "Automatisk uppdatering" 0 {Växlar automatisk uppdatering av trädfönstret}
-menuText W TreeOptLock "Lås" 0 {Lås/ lås upp trädet för den aktuella databasen}
-menuText W TreeOptTraining "Träna" 0 {Starta/ stäng av träningsläge}
+menuText W TreeOptSlowmode "Lï¿½ngsam mod" 0 {Lï¿½ngsam mod fï¿½r uppdateringar (hï¿½g noggrannhet)}
+menuText W TreeOptFastmode "Snabb mod" 0 {Snabb mod fï¿½r uppdateringar (ingen dragtranspositionering)}
+menuText W TreeOptFastAndSlowmode "Snabb och lï¿½ngsam mod" 0 {Snabb mod sedan lï¿½ngsam mod fï¿½r uppdateringar}
+menuText W TreeOptStartStop "Automatisk uppdatering" 0 {Vï¿½xlar automatisk uppdatering av trï¿½dfï¿½nstret}
+menuText W TreeOptLock "Lï¿½s" 0 {Lï¿½s/ lï¿½s upp trï¿½det fï¿½r den aktuella databasen}
+menuText W TreeOptTraining "Trï¿½na" 0 {Starta/ stï¿½ng av trï¿½ningslï¿½ge}
 # ====== TODO To be translated ======
 menuText W TreeOptShort "Short Display" 0 {Don't show ELO information}
 menuText W TreeOptAutosave "Spara cache filen automatiskt" 0 \
-  {Spara cachefilen automatiskt när trädfönstret stängs}
+  {Spara cachefilen automatiskt nï¿½r trï¿½dfï¿½nstret stï¿½ngs}
 # ====== TODO To be translated ======
 menuText W TreeOptAutomask "Auto-Load Mask" 0 "Auto-Load most recent mask with a tree open."
 menuText W TreeOptCacheSize "Cachestorlek" 0 {Ange Cachestorleken}
@@ -611,80 +625,80 @@ menuText W TreeOptShowBar "Show Progress Bar" 0 "Show tree progress bar."
 menuText W TreeOptShowFrame "Show Button Bar" 0 "Show tree button bar."
 # ====== TODO To be translated ======
 menuText W TreeOptSortBest "Sort Best Games" 0 "Sort Best Games by ELO."
-menuText W TreeHelp "Hjälp" 0
-menuText W TreeHelpTree "Trädhjälp" 0
-menuText W TreeHelpIndex "Hjälpindex" 0
+menuText W TreeHelp "Hjï¿½lp" 0
+menuText W TreeHelpTree "Trï¿½dhjï¿½lp" 0
+menuText W TreeHelpIndex "Hjï¿½lpindex" 0
 
 translate W SaveCache {Spara cache}
-translate W Training {Träna}
-translate W LockTree {Lås}
-translate W TreeLocked {Låst}
-translate W TreeBest {Bäst}
-translate W TreeBestGames {Bästa partier i trädet}
+translate W Training {Trï¿½na}
+translate W LockTree {Lï¿½s}
+translate W TreeLocked {Lï¿½st}
+translate W TreeBest {Bï¿½st}
+translate W TreeBestGames {Bï¿½sta partier i trï¿½det}
 # ====== TODO To be translated ======
 translate W TreeAdjust {Adjust Filter}
 # Note: the next message is the tree window title row. After editing it,
 # check the tree window to make sure it lines up with the actual columns.
-translate W TreeTitleRow      { Drag       Frekvens         Res. Remi Elo~  Nivå   År~ ECO}
+translate W TreeTitleRow      { Drag       Frekvens         Res. Remi Elo~  Nivï¿½   ï¿½r~ ECO}
 translate W TreeTitleRowShort { Drag       Frekvens         Res. Remi}
 translate W TreeTotal: {TOTALT:}
-translate W DoYouWantToSaveFirst {Vill du spara först}
-translate W AddToMask {Lägg till i Sökmask}
-translate W RemoveFromMask {Ta bort från Sökmask}
+translate W DoYouWantToSaveFirst {Vill du spara fï¿½rst}
+translate W AddToMask {Lï¿½gg till i Sï¿½kmask}
+translate W RemoveFromMask {Ta bort frï¿½n Sï¿½kmask}
 # TODO
 translate W AddThisMoveToMask {Add Move to Mask}
-translate W SearchMask {Sök i sökmask}
-translate W DisplayMask {Visa sökmask}
+translate W SearchMask {Sï¿½k i sï¿½kmask}
+translate W DisplayMask {Visa sï¿½kmask}
 translate W Nag {NAG-kod}
 translate W Marker {Markera}
 translate W Include {Inkludera}
 translate W Exclude {Exkludera}
 translate W MainLine {Huvudvariant}
-translate W Bookmark {Bokmärke}
+translate W Bookmark {Bokmï¿½rke}
 translate W NewLine {Ny variant}
 translate W ToBeVerified {Att bli verifierad}
-translate W ToTrain {Att träna}
+translate W ToTrain {Att trï¿½na}
 translate W Dubious {Tveksam}
 translate W ToRemove {Att ta bort}
 translate W NoMarker {Ingen markering}
-translate W ColorMarker {Färg}
+translate W ColorMarker {Fï¿½rg}
 translate W WhiteMark {Vit}
-translate W GreenMark {Grön}
+translate W GreenMark {Grï¿½n}
 translate W YellowMark {Gul}
-translate W BlueMark {Blå}
-translate W RedMark {Röd}
+translate W BlueMark {Blï¿½}
+translate W RedMark {Rï¿½d}
 translate W CommentMove {Kommentera drag}
 translate W CommentPosition {Kommentera position}
-translate W AddMoveToMaskFirst {Lägg till drag till sökmask först}
-translate W OpenAMaskFileFirst {Öppna en sökmaskmaskfil först}
+translate W AddMoveToMaskFirst {Lï¿½gg till drag till sï¿½kmask fï¿½rst}
+translate W OpenAMaskFileFirst {ï¿½ppna en sï¿½kmaskmaskfil fï¿½rst}
 # ====== TODO To be translated ======
 translate W positions {positions}
 translate W Moves {Drag}
 
 # Finder window:
 menuText W FinderFile "Fil" 0
-menuText W FinderFileSubdirs "Sök i underkataloger" 0
-menuText W FinderFileClose "Stäng Filsökaren" 0
+menuText W FinderFileSubdirs "Sï¿½k i underkataloger" 0
+menuText W FinderFileClose "Stï¿½ng Filsï¿½karen" 0
 menuText W FinderSort "Sortera" 0
 menuText W FinderSortType "Typ" 0
 menuText W FinderSortSize "Storlek" 0
-menuText W FinderSortMod "Förändrad" 0
+menuText W FinderSortMod "Fï¿½rï¿½ndrad" 0
 menuText W FinderSortName "Namn" 0
-menuText W FinderSortPath "Sökväg" 0
+menuText W FinderSortPath "Sï¿½kvï¿½g" 0
 menuText W FinderTypes "Typer" 0
 menuText W FinderTypesScid "Sciddatabaser" 0
-menuText W FinderTypesOld "Sciddatabaser i äldre format" 0
+menuText W FinderTypesOld "Sciddatabaser i ï¿½ldre format" 0
 menuText W FinderTypesPGN "PGN-filer" 0
 menuText W FinderTypesEPD "EPD-filer" 0
-menuText W FinderHelp "Hjälp" 0
-menuText W FinderHelpFinder "Hjälp för Filsökaren" 0
-menuText W FinderHelpIndex "Hjälpindex" 0
-translate W FileFinder {Filsökaren}
+menuText W FinderHelp "Hjï¿½lp" 0
+menuText W FinderHelpFinder "Hjï¿½lp fï¿½r Filsï¿½karen" 0
+menuText W FinderHelpIndex "Hjï¿½lpindex" 0
+translate W FileFinder {Filsï¿½karen}
 translate W FinderDir {Katalog}
 translate W FinderDirs {Kataloger}
 translate W FinderFiles {Filer}
 translate W FinderUpDir {upp}
-translate W FinderCtxOpen {Öppna}
+translate W FinderCtxOpen {ï¿½ppna}
 translate W FinderCtxBackup {Spara}
 translate W FinderCtxCopy {Kopiera}
 translate W FinderCtxMove {Flytta}
@@ -695,18 +709,18 @@ translate W FinderDirOpen {Open Directory}
 # Player finder:
 menuText W PListFile "Fil" 0
 menuText W PListFileUpdate "Uppdatera" 0
-menuText W PListFileClose "Stäng spelarförteckningen" 1
+menuText W PListFileClose "Stï¿½ng spelarfï¿½rteckningen" 1
 menuText W PListSort "Sortera" 0
 menuText W PListSortName "Namn" 0
 menuText W PListSortElo "Elo" 0
 menuText W PListSortGames "Partier" 0
-menuText W PListSortOldest "Äldst" 0
+menuText W PListSortOldest "ï¿½ldst" 0
 menuText W PListSortNewest "Yngst" 0
 
 # Tournament finder:
 menuText W TmtFile "Fil" 0
 menuText W TmtFileUpdate "Uppdatera" 0
-menuText W TmtFileClose "Stäng turneringshanteraren" 0
+menuText W TmtFileClose "Stï¿½ng turneringshanteraren" 0
 menuText W TmtSort "Sortera" 0
 menuText W TmtSortDate "Datum" 0
 menuText W TmtSortPlayers "Spelare" 0
@@ -715,15 +729,15 @@ menuText W TmtSortElo "Elo" 0
 menuText W TmtSortSite "Plats" 0
 menuText W TmtSortEvent "Evenemang" 1
 menuText W TmtSortWinner "Vinnare" 0
-translate W TmtLimit "Listbegränsningar"
-translate W TmtMeanElo "Lägsta snitt Elo"
+translate W TmtLimit "Listbegrï¿½nsningar"
+translate W TmtMeanElo "Lï¿½gsta snitt Elo"
 translate W TmtNone "Inga turneringar hittades."
 
 # Graph windows:
 menuText W GraphFile "Fil" 0
-menuText W GraphFileColor "Spara som Postscript (i färg)" 8
-menuText W GraphFileGrey "Spara som Postscript (i gråskala)" 8
-menuText W GraphFileClose "Stäng fönster" 6
+menuText W GraphFileColor "Spara som Postscript (i fï¿½rg)" 8
+menuText W GraphFileGrey "Spara som Postscript (i grï¿½skala)" 8
+menuText W GraphFileClose "Stï¿½ng fï¿½nster" 6
 menuText W GraphOptions "Alternativ" 0
 menuText W GraphOptionsWhite "Vit" 0
 menuText W GraphOptionsBlack "Svart" 0
@@ -731,37 +745,37 @@ menuText W GraphOptionsBlack "Svart" 0
 menuText W GraphOptionsDots "Show Dots" 0
 # ====== TODO To be translated ======
 menuText W GraphOptionsBar "Highlight Current Move" 0
-menuText W GraphOptionsBoth "Båda" 1
+menuText W GraphOptionsBoth "Bï¿½da" 1
 menuText W GraphOptionsPInfo "Spelarinformation" 0
 translate W GraphFilterTitle "Filterdiagram: antal per 1000 partier"
-translate W GraphAbsFilterTitle "Filtergraf: frekvens för partierna"
-translate W ConfigureFilter {Konfigurera X-axlar för År, Rating och Drag}
+translate W GraphAbsFilterTitle "Filtergraf: frekvens fï¿½r partierna"
+translate W ConfigureFilter {Konfigurera X-axlar fï¿½r ï¿½r, Rating och Drag}
 translate W FilterEstimate "Uppskatta"
 translate W TitleFilterGraph "Scid: Filtergraf"
 
 # Analysis window:
-translate W AddVariation {Lägg till variation}
-translate W AddAllVariations {Lägg till alla variationer}
-translate W AddMove {Lägg till drag}
+translate W AddVariation {Lï¿½gg till variation}
+translate W AddAllVariations {Lï¿½gg till alla variationer}
+translate W AddMove {Lï¿½gg till drag}
 translate W Annotate {Kommentera}
-translate W ShowAnalysisBoard {Visa Analysbräde}
+translate W ShowAnalysisBoard {Visa Analysbrï¿½de}
 translate W ShowInfo {Visa schackmotorinformation}
 translate W FinishGame {Avsluta parti}
 translate W StopEngine {Stoppa schackmotor}
 translate W StartEngine {Starta schackmotor}
 # ====== TODO To be translated ======
 translate W ExcludeMove {Exclude Move}
-translate W LockEngine {Lås schackmotor vid nuvarande position}
+translate W LockEngine {Lï¿½s schackmotor vid nuvarande position}
 translate W AnalysisCommand {Analysera}
-translate W PreviousChoices {Föregående val}
+translate W PreviousChoices {Fï¿½regï¿½ende val}
 translate W AnnotateTime {Ange tid mellan drag i sekunder}
-translate W AnnotateWhich {Lägg till variationer}
-translate W AnnotateAll {För båda sidors drag}
+translate W AnnotateWhich {Lï¿½gg till variationer}
+translate W AnnotateAll {Fï¿½r bï¿½da sidors drag}
 translate W AnnotateAllMoves {Kommentera alla drag}
 translate W AnnotateWhite {Endast vits drag}
 translate W AnnotateBlack {Endast svarts drag}
-translate W AnnotateNotBest {När partidraget inte är det bästa}
-translate W AnnotateBlundersOnly {När partidraget är en uppenbar blunder}
+translate W AnnotateNotBest {Nï¿½r partidraget inte ï¿½r det bï¿½sta}
+translate W AnnotateBlundersOnly {Nï¿½r partidraget ï¿½r en uppenbar blunder}
 # ====== TODO To be translated ======
 translate W BlundersNotBest {Blunders/Not Best}
 translate W AnnotateTitle {Konfigurera Anteckningar}
@@ -769,27 +783,27 @@ translate W AnnotateTitle {Konfigurera Anteckningar}
 translate W AnnotateMissedMates {Missed/shorter mates}
 # ====== TODO To be translated ======
 translate W AnnotateEnd {At end of game}
-translate W BlundersThreshold {Tröskelvärde}
+translate W BlundersThreshold {Trï¿½skelvï¿½rde}
 # ====== TODO To be translated ======
 translate W ScoreFormat {Score format}
 # ====== TODO To be translated ======
 translate W CutOff {Cut Off}
-translate W LowPriority {Kör som lågprioriterad process}
+translate W LowPriority {Kï¿½r som lï¿½gprioriterad process}
 # ====== TODO To be translated ======
 translate W LogEngines {Log Size}
 # ====== TODO To be translated ======
 translate W LogName {Add Name}
 # ====== TODO To be translated ======
 translate W MaxPly {Max Ply}
-translate W ClickHereToSeeMoves {Klicka här för att se drag}
+translate W ClickHereToSeeMoves {Klicka hï¿½r fï¿½r att se drag}
 translate W ConfigureInformant {Konfigurera Informant-parametrar}
 translate W Informant!? {Intressant drag}
-translate W Informant? {Dåligt drag}
+translate W Informant? {Dï¿½ligt drag}
 translate W Informant?? {Blunder}
 translate W Informant?! {Tveksamt drag}
-translate W Informant+= {Vit har en mindre fördel}
-translate W Informant+/- {Vit har en liten fördel}
-translate W Informant+- {Vit har en avgörande fördel}
+translate W Informant+= {Vit har en mindre fï¿½rdel}
+translate W Informant+/- {Vit har en liten fï¿½rdel}
+translate W Informant+- {Vit har en avgï¿½rande fï¿½rdel}
 translate W Informant++- {Partiet anses vara vunnet}
 translate W Book {Bok}
 # ====== TODO To be translated ======
@@ -800,7 +814,7 @@ translate W Alphabetical {Alphabetical}
 translate W TwoBooks {Two Books}
 
 # Analysis Engine open dialog:
-translate W EngineList {Lista över schackprogram}
+translate W EngineList {Lista ï¿½ver schackprogram}
 # ====== TODO To be translated ======
 translate W EngineKey {Key}
 # ====== TODO To be translated ======
@@ -813,32 +827,32 @@ translate W EngineElo {Elo}
 translate W EngineTime {Datum}
 translate W EngineNew {Ny}
 translate W EngineEdit {Redigera}
-translate W EngineRequired {Fet stil indikerar obligatoriska fält; övriga fält är frivilliga}
+translate W EngineRequired {Fet stil indikerar obligatoriska fï¿½lt; ï¿½vriga fï¿½lt ï¿½r frivilliga}
 
 # Stats window menus:
 menuText W StatsFile "Fil" 0
 menuText W StatsFilePrint "Skriv ut till fil..." 0
-menuText W StatsFileClose "Stäng fönster" 0
+menuText W StatsFileClose "Stï¿½ng fï¿½nster" 0
 menuText W StatsOpt "Alternativ" 0
 
 # PGN window menus:
 menuText W PgnFile "Fil" 0
 menuText W PgnFileCopy "Kopiera partiet till Clipbase" 0
 menuText W PgnFilePrint "Skriv ut till..." 0
-menuText W PgnFileClose "Stäng PGN-fönster" 0
+menuText W PgnFileClose "Stï¿½ng PGN-fï¿½nster" 0
 menuText W PgnOpt "Presentation" 0
-menuText W PgnOptColor "Färg" 0
+menuText W PgnOptColor "Fï¿½rg" 0
 menuText W PgnOptShort "Kort (3-raders) huvud" 0
 menuText W PgnOptSymbols "Symbolbaserad kommentar" 1
 menuText W PgnOptIndentC "Indragna kommentarer" 0
 menuText W PgnOptIndentV "Indragna variationer" 7
 menuText W PgnOptColumn "Spaltstil (ett drag per rad)" 1
 menuText W PgnOptSpace "Utrymme efter dragnummer" 1
-menuText W PgnOptStripMarks "Avlägsna koder för färgade fält och pilar" 1
+menuText W PgnOptStripMarks "Avlï¿½gsna koder fï¿½r fï¿½rgade fï¿½lt och pilar" 1
 menuText W PgnOptChess "Schack Pieces" 0
 menuText W PgnOptScrollbar "Rullningslist" 0
-menuText W PgnOptBoldMainLine "Använd Fet Text för Huvudvariationsdrag" 4
-menuText W PgnColor "Färger" 0
+menuText W PgnOptBoldMainLine "Anvï¿½nd Fet Text fï¿½r Huvudvariationsdrag" 4
+menuText W PgnColor "Fï¿½rger" 0
 menuText W PgnColorHeader "Huvud..." 0
 menuText W PgnColorAnno "Noteringar..." 0
 menuText W PgnColorComments "Kommentarer..." 0
@@ -846,9 +860,9 @@ menuText W PgnColorVars "Variationer..." 0
 menuText W PgnColorBackground "Bakgrund..." 0
 menuText W PgnColorMain "Huvudvariation..." 0
 menuText W PgnColorCurrent "Aktuellt drag bakgrund..." 1
-menuText W PgnColorNextMove "Nästa drag bakgrund..." 0
-menuText W PgnHelp "Hjälp" 0
-menuText W PgnHelpPgn "PGN-hjälp" 0
+menuText W PgnColorNextMove "Nï¿½sta drag bakgrund..." 0
+menuText W PgnHelp "Hjï¿½lp" 0
+menuText W PgnHelpPgn "PGN-hjï¿½lp" 0
 menuText W PgnHelpIndex "Index" 0
 translate W PgnWindowTitle {PGN-version av partiet %u}
 
@@ -857,7 +871,7 @@ menuText W CrosstabFile "Fil" 0
 menuText W CrosstabFileText "Skriv ut till textfil..." 9
 menuText W CrosstabFileHtml "Skriv ut till HTML-fil..." 9
 menuText W CrosstabFileLaTeX "Skriv ut till LaTeX-fil..." 9
-menuText W CrosstabFileClose "Stäng resultattabellsfönstret" 0
+menuText W CrosstabFileClose "Stï¿½ng resultattabellsfï¿½nstret" 0
 menuText W CrosstabEdit "Redigera" 0
 menuText W CrosstabEditEvent "Evenemang" 0
 menuText W CrosstabEditSite "Plats" 0
@@ -869,16 +883,16 @@ menuText W CrosstabOptColorHyper "Hypertext" 0
 menuText W CrosstabOptTieWin "Tie-Break by wins" 1
 # ====== TODO To be translated ======
 menuText W CrosstabOptTieHead "Tie-Break by head-head" 1
-menuText W CrosstabOptThreeWin "3 poäng för vinst" 1
-menuText W CrosstabOptAges "Ålder i år" 8
+menuText W CrosstabOptThreeWin "3 poï¿½ng fï¿½r vinst" 1
+menuText W CrosstabOptAges "ï¿½lder i ï¿½r" 8
 menuText W CrosstabOptNats "Nationalitet" 0
 # todo
 menuText W CrosstabOptTallies "Win/Loss/Draw" 0
 menuText W CrosstabOptRatings "Rating" 0
 menuText W CrosstabOptTitles "Titlar" 0
-menuText W CrosstabOptBreaks "Tie-break poäng" 4
+menuText W CrosstabOptBreaks "Tie-break poï¿½ng" 4
 menuText W CrosstabOptDeleted "Inkludera raderade partier" 8
-menuText W CrosstabOptColors "Färg (endast Schweizer)" 0
+menuText W CrosstabOptColors "Fï¿½rg (endast Schweizer)" 0
 # ====== TODO To be translated ======
 menuText W CrosstabOptColorRows "Color Rows" 0
 # ====== TODO To be translated ======
@@ -892,15 +906,15 @@ menuText W CrosstabSortScore "Resultat" 0
 menuText W CrosstabSortCountry "Land" 0
 # todo
 menuText W CrosstabType "Format" 0
-menuText W CrosstabTypeAll "Alla-möter-alla" 0
+menuText W CrosstabTypeAll "Alla-mï¿½ter-alla" 0
 menuText W CrosstabTypeSwiss "Schweizer" 0
 menuText W CrosstabTypeKnockout "Knock Out" 0
 menuText W CrosstabTypeAuto "Auto" 1
-menuText W CrosstabHelp "Hjälp" 0
-menuText W CrosstabHelpCross "Hjälp för resultattabell" 0
-menuText W CrosstabHelpIndex "Hjälpindex" 0
-translate W SetFilter {Bestäm filter}
-translate W AddToFilter {Utöka filter}
+menuText W CrosstabHelp "Hjï¿½lp" 0
+menuText W CrosstabHelpCross "Hjï¿½lp fï¿½r resultattabell" 0
+menuText W CrosstabHelpIndex "Hjï¿½lpindex" 0
+translate W SetFilter {Bestï¿½m filter}
+translate W AddToFilter {Utï¿½ka filter}
 translate W Swiss {Schweizer}
 translate W Category {Kategori}
 
@@ -910,42 +924,42 @@ menuText W OprepFileText "Skriv ut till textfil..." 9
 menuText W OprepFileHtml "Skriv ut till HTML-fil..." 9
 menuText W OprepFileLaTeX "Skriv ut till LaTeX-fil..." 9
 menuText W OprepFileOptions "Alternativ..." 0
-menuText W OprepFileClose "Stäng rapportfönstret" 0
+menuText W OprepFileClose "Stï¿½ng rapportfï¿½nstret" 0
 menuText W OprepFavorites "Favoriter" 1
-menuText W OprepFavoritesAdd "Lägg till rapport..." 0
+menuText W OprepFavoritesAdd "Lï¿½gg till rapport..." 0
 menuText W OprepFavoritesEdit "Redigera favoritrapport..." 0
 menuText W OprepFavoritesGenerate "Skapa rapport..." 0
-menuText W OprepHelp "Hjälp" 0
-menuText W OprepHelpReport "Hjälp för öppningsrapporter" 0
-menuText W OprepHelpIndex "Hjälpindex" 0
+menuText W OprepHelp "Hjï¿½lp" 0
+menuText W OprepHelpReport "Hjï¿½lp fï¿½r ï¿½ppningsrapporter" 0
+menuText W OprepHelpIndex "Hjï¿½lpindex" 0
 
 # Header search:
-translate W HeaderSearch {Sök i partihuvud}
+translate W HeaderSearch {Sï¿½k i partihuvud}
 translate W EndSideToMove {Sida vid draget vid slutet av partiet}
 translate W GamesWithNoECO {Partier utan ECO-kod?}
-translate W GameLength {Partilängd}
+translate W GameLength {Partilï¿½ngd}
 translate W FindGamesWith {Hitta flaggade partier}
-translate W StdStart {Normal utgångsställning}
-translate W Promotions {Förvandlingar}
+translate W StdStart {Normal utgï¿½ngsstï¿½llning}
+translate W Promotions {Fï¿½rvandlingar}
 # ====== TODO To be translated ======
 translate W UnderPromo {Under Prom.}
 translate W Comments {Kommentarer}
 translate W Variations {Variationer}
 translate W Annotations {Noteringar}
 translate W DeleteFlag {Raderingsflagga}
-translate W WhiteOpFlag {Vits öppning}
-translate W BlackOpFlag {Svarts öppning}
+translate W WhiteOpFlag {Vits ï¿½ppning}
+translate W BlackOpFlag {Svarts ï¿½ppning}
 translate W MiddlegameFlag {Mittspel}
 translate W EndgameFlag {Slutspel}
 translate W NoveltyFlag {Nyhet}
 translate W PawnFlag {Bondestruktur}
-translate W TacticsFlag {Taktiska ställningar}
+translate W TacticsFlag {Taktiska stï¿½llningar}
 translate W QsideFlag {Damflygelsinitiativ}
 translate W KsideFlag {Kungsflygelsinitiativ}
-translate W BrilliancyFlag {Utmärkt parti}
-translate W BlunderFlag {Bortsättningar}
-translate W UserFlag {Användare}
-translate W PgnContains {PGN innehåller text}
+translate W BrilliancyFlag {Utmï¿½rkt parti}
+translate W BlunderFlag {Bortsï¿½ttningar}
+translate W UserFlag {Anvï¿½ndare}
+translate W PgnContains {PGN innehï¿½ller text}
 # ====== TODO To be translated ======
 translate W PreComment {Pre-game Comment}
 # ====== TODO To be translated ======
@@ -961,10 +975,10 @@ translate W GlistEvent {Evenemang}
 translate W GlistSite {Plats}
 translate W GlistRound {Rond}
 translate W GlistDate {Datum}
-translate W GlistYear {År}
+translate W GlistYear {ï¿½r}
 translate W GlistEventDate {Startdatum}
 translate W GlistResult {Resultat}
-translate W GlistLength {Längd}
+translate W GlistLength {Lï¿½ngd}
 translate W GlistCountry {Land}
 translate W GlistECO {ECO}
 translate W GlistOpening {Drag}
@@ -976,17 +990,17 @@ translate W GlistComments {Kommentarer}
 translate W GlistAnnos {Noteringar}
 translate W GlistStart {Start}
 translate W GlistGameNumber {Partinummer}
-translate W GlistFindText {Sök text}
+translate W GlistFindText {Sï¿½k text}
 translate W GlistMoveField {Drag}
 translate W GlistEditField {Konfiguration}
-translate W GlistAddField {Lägg till}
+translate W GlistAddField {Lï¿½gg till}
 translate W GlistDeleteField {Ta bort}
-translate W GlistColor {Färg}
+translate W GlistColor {Fï¿½rg}
 # ====== TODO To be translated ======
 translate W GlistSort {Sort database}
 translate W GlistRemoveThisGameFromFilter  {Ta bort}
-translate W GlistRemoveGameAndAboveFromFilter  {Ta bort parti (och alla ovanför det)}
-translate W GlistRemoveGameAndBelowFromFilter  {Ta bort parti (och alla nedanför det)}
+translate W GlistRemoveGameAndAboveFromFilter  {Ta bort parti (och alla ovanfï¿½r det)}
+translate W GlistRemoveGameAndBelowFromFilter  {Ta bort parti (och alla nedanfï¿½r det)}
 translate W GlistDeleteGame {Ta tillbaka detta parti}
 translate W GlistDeleteAllGames {Ta bort alla partier i filtret}
 translate W GlistUndeleteAllGames {Ta tillbaka alla partier i filtret}
@@ -1011,9 +1025,9 @@ translate W CustomFlags {Anpassade flaggor}
 translate W DeleteCurrent {Ta bort aktuellt parti}
 translate W DeleteFilter {Ta bort partierna i filtret}
 translate W DeleteAll {Ta bort alla partier}
-translate W UndeleteCurrent {Återta aktuellt parti}
-translate W UndeleteFilter {Återta partierna i filtret}
-translate W UndeleteAll {Återta alla partier}
+translate W UndeleteCurrent {ï¿½terta aktuellt parti}
+translate W UndeleteFilter {ï¿½terta partierna i filtret}
+translate W UndeleteAll {ï¿½terta alla partier}
 translate W DeleteTwins {Ta bort dubbletter}
 translate W MarkCurrent {Markera aktuellt parti}
 translate W MarkFilter {Markera partierna i filtret}
@@ -1021,7 +1035,7 @@ translate W MarkAll {Markera alla partier}
 translate W UnmarkCurrent {Avmarkera aktuellt parti}
 translate W UnmarkFilter {Avmarkera partierna i filtret}
 translate W UnmarkAll {Avmarkera alla partier}
-translate W Spellchecking {Rättstava}
+translate W Spellchecking {Rï¿½ttstava}
 # ====== TODO To be translated ======
 translate W MakeCorrections {Make Corrections}
 # ====== TODO To be translated ======
@@ -1036,43 +1050,43 @@ translate W DatabaseOps {Databashantering}
 translate W ReclassifyGames {ECO-klassificera partier}
 translate W CompactDatabase {Komprimera databasen}
 translate W SortDatabase {Sortera databasen}
-translate W AddEloRatings {Lägg till Elorating}
+translate W AddEloRatings {Lï¿½gg till Elorating}
 translate W AutoloadGame {Ladda partinummer automatiskt}
-translate W StripTags {Avlägsna PGN-taggar}
-translate W StripTag {Avlägsna taggar}
+translate W StripTags {Avlï¿½gsna PGN-taggar}
+translate W StripTag {Avlï¿½gsna taggar}
 translate W CheckGames {Kontrollera partier}
 translate W Cleaner {Snygga till databasen}
 translate W CleanerHelp {
-Databasstädaren i Scid genomför allt det underhåll av databasen du väljer nedan på den aktiva databasen.
+Databasstï¿½daren i Scid genomfï¿½r allt det underhï¿½ll av databasen du vï¿½ljer nedan pï¿½ den aktiva databasen.
 
-De nuvarande inställningarna i ECO-klassificering och Radera dubbletter kommer att appliceras om du väljer dessa åtgärder.
+De nuvarande instï¿½llningarna i ECO-klassificering och Radera dubbletter kommer att appliceras om du vï¿½ljer dessa ï¿½tgï¿½rder.
 }
 translate W CleanerConfirm {
-När du väl startat Databasstädaren kan du inte avbryta den!
+Nï¿½r du vï¿½l startat Databasstï¿½daren kan du inte avbryta den!
 
-På en stor databas kan detta ta ett bra tag. Tidsåtgången beror på valda åtgärder och deras inställningar.
+Pï¿½ en stor databas kan detta ta ett bra tag. Tidsï¿½tgï¿½ngen beror pï¿½ valda ï¿½tgï¿½rder och deras instï¿½llningar.
 
-Ãr du säker på att du vill påbörja databasunderhållet nu?
+ï¿½r du sï¿½ker pï¿½ att du vill pï¿½bï¿½rja databasunderhï¿½llet nu?
 }
-translate W TwinCheckUndelete {att växla; "u" tar tillbaka båda)}
+translate W TwinCheckUndelete {att vï¿½xla; "u" tar tillbaka bï¿½da)}
 translate W TwinCheckprevPair {Tidigare par}
-translate W TwinChecknextPair {Nästa par}
+translate W TwinChecknextPair {Nï¿½sta par}
 translate W TwinChecker {Scid: Dublettpartikontrollerare}
 translate W TwinCheckTournament {Partier i turnering:}
 translate W TwinCheckNoTwin {Ingen dublett  }
-translate W TwinCheckNoTwinfound {Ingen dublett detekterades för detta parti.\nFör att visa dubletter med detta fönster, måste du först använda "Ta bort dublettpartier..."-funktionen. }
+translate W TwinCheckNoTwinfound {Ingen dublett detekterades fï¿½r detta parti.\nFï¿½r att visa dubletter med detta fï¿½nster, mï¿½ste du fï¿½rst anvï¿½nda "Ta bort dublettpartier..."-funktionen. }
 translate W TwinCheckTag {Dela taggar...}
 translate W TwinCheckFound1 {Scid hittade $result dublettpartier}
 translate W TwinCheckFound2 { och ange deras borttagningsflaggor}
 translate W TwinCheckNoDelete {Det finns inga partier i denna databas att ta bort.}
-translate W TwinCriteria1 { Dina inställningar för att hitta dublettpartier är potentiellt sannorlika att\norsaka att icke-dublettpartier med liknande drag blir markerade som dubletter.}
-translate W TwinCriteria2 {Det är rekommenderat att om du väljer "Nej" för "samma drag" och att du väljer "Ja" för Färger, Evenemang, Plats, Runda, År och Månads inställningar.\nVill du fortsätta och ta bort dubletter ändå? }
-translate W TwinCriteria3 {Det är rekommenderat att du specificerar "Ja" för åtminstonde två av "samma plats", "samma runda" och "samma år" inställningar.\nVill du fortsätta och ta bort dubletter ändå?}
-translate W TwinCriteriaConfirm {Scid: Bekräfta dublettinställningar}
-translate W TwinChangeTag "Ändra följande partitaggar:\n\n"
-translate W AllocRatingDescription "Detta kommando kommer att använda den aktuella stavningskontrollfilen för att lägga till Elo-rating till partier i denna databas. Där en spelare inte har en aktuell rating men hans/hennes rating vid tiden för partiet är listat i stavningskontrollfilen, kommer denna rating att läggas till."
-translate W RatingOverride "Skriv över existerande inte-noll rating?"
-translate W AddRatings "Lägg till rating till:"
+translate W TwinCriteria1 { Dina instï¿½llningar fï¿½r att hitta dublettpartier ï¿½r potentiellt sannorlika att\norsaka att icke-dublettpartier med liknande drag blir markerade som dubletter.}
+translate W TwinCriteria2 {Det ï¿½r rekommenderat att om du vï¿½ljer "Nej" fï¿½r "samma drag" och att du vï¿½ljer "Ja" fï¿½r Fï¿½rger, Evenemang, Plats, Runda, ï¿½r och Mï¿½nads instï¿½llningar.\nVill du fortsï¿½tta och ta bort dubletter ï¿½ndï¿½? }
+translate W TwinCriteria3 {Det ï¿½r rekommenderat att du specificerar "Ja" fï¿½r ï¿½tminstonde tvï¿½ av "samma plats", "samma runda" och "samma ï¿½r" instï¿½llningar.\nVill du fortsï¿½tta och ta bort dubletter ï¿½ndï¿½?}
+translate W TwinCriteriaConfirm {Scid: Bekrï¿½fta dublettinstï¿½llningar}
+translate W TwinChangeTag "ï¿½ndra fï¿½ljande partitaggar:\n\n"
+translate W AllocRatingDescription "Detta kommando kommer att anvï¿½nda den aktuella stavningskontrollfilen fï¿½r att lï¿½gga till Elo-rating till partier i denna databas. Dï¿½r en spelare inte har en aktuell rating men hans/hennes rating vid tiden fï¿½r partiet ï¿½r listat i stavningskontrollfilen, kommer denna rating att lï¿½ggas till."
+translate W RatingOverride "Skriv ï¿½ver existerande inte-noll rating?"
+translate W AddRatings "Lï¿½gg till rating till:"
 translate W AddedRatings {Scid lade till $r Elo-ratingar i $g partier.}
 translate W NewSubmenu "Ny undermeny"
 
@@ -1081,40 +1095,40 @@ translate W AnnotationSymbols  {Symboler:}
 translate W Comment {Kommentar:}
 translate W InsertMark {Infoga symbol}
 translate W InsertMarkHelp {
-Infoga/ta bort markering: Välj färg, typ av markering samt ruta.
-Infoga/ta bort pil: Höger-klicka två rutor.
+Infoga/ta bort markering: Vï¿½lj fï¿½rg, typ av markering samt ruta.
+Infoga/ta bort pil: Hï¿½ger-klicka tvï¿½ rutor.
 }
 
 # Nag buttons in comment editor:
 translate W GoodMove {Bra drag}
-translate W PoorMove {Dåligt drag}
-translate W ExcellentMove {Utmärkt drag}
+translate W PoorMove {Dï¿½ligt drag}
+translate W ExcellentMove {Utmï¿½rkt drag}
 translate W Blunder {Blunder}
 translate W InterestingMove {Intressant drag}
 translate W DubiousMove {Tveksamt drag}
-translate W WhiteDecisiveAdvantage {Vit har en avgörande fördel}
-translate W BlackDecisiveAdvantage {Svart har en avgörande fördel}
-translate W WhiteClearAdvantage {Vit har en klar fördel}
-translate W BlackClearAdvantage {Svart har en klar fördel}
-translate W WhiteSlightAdvantage {Vit har en liten fördel}
-translate W BlackSlightAdvantage {Svart har en liten fördel}
-translate W Equality {Jämnvikt}
+translate W WhiteDecisiveAdvantage {Vit har en avgï¿½rande fï¿½rdel}
+translate W BlackDecisiveAdvantage {Svart har en avgï¿½rande fï¿½rdel}
+translate W WhiteClearAdvantage {Vit har en klar fï¿½rdel}
+translate W BlackClearAdvantage {Svart har en klar fï¿½rdel}
+translate W WhiteSlightAdvantage {Vit har en liten fï¿½rdel}
+translate W BlackSlightAdvantage {Svart har en liten fï¿½rdel}
+translate W Equality {Jï¿½mnvikt}
 translate W Unclear {Oklar}
 translate W Diagram {Diagram}
 
 # Board search:
-translate W BoardSearch {Positionssökningar}
+translate W BoardSearch {Positionssï¿½kningar}
 translate W FilterOperation {Hantering av aktuellt filter:}
 translate W FilterAnd {AND (Restriktivt filter)}
 translate W FilterOr {OR (Ackumulativt filter)}
-translate W FilterIgnore {IGNORE (Använd ej filter)}
-translate W SearchType {Söktyp:}
-translate W SearchBoardExact {Exakt position (alla pjäser på samma rutor)}
-translate W SearchBoardPawns {Bönder (samma material, alla bönder på samma rutor)}
-translate W SearchBoardFiles {Filer (samma material, alla bönder på samma filer)}
-translate W SearchBoardAny {Obestämt (samma material, bönder och pjäser på valfria rutor)}
-translate W SearchInRefDatabase {Sök i databas}
-translate W LookInVars {Sök i variationer}
+translate W FilterIgnore {IGNORE (Anvï¿½nd ej filter)}
+translate W SearchType {Sï¿½ktyp:}
+translate W SearchBoardExact {Exakt position (alla pjï¿½ser pï¿½ samma rutor)}
+translate W SearchBoardPawns {Bï¿½nder (samma material, alla bï¿½nder pï¿½ samma rutor)}
+translate W SearchBoardFiles {Filer (samma material, alla bï¿½nder pï¿½ samma filer)}
+translate W SearchBoardAny {Obestï¿½mt (samma material, bï¿½nder och pjï¿½ser pï¿½ valfria rutor)}
+translate W SearchInRefDatabase {Sï¿½k i databas}
+translate W LookInVars {Sï¿½k i variationer}
 # ====== TODO To be translated ======
 translate W CQLLabel {CQL Script}
 # ====== TODO To be translated ======
@@ -1123,37 +1137,37 @@ translate W CQLComments {Allow Comments}
 translate W CQLStrip {Strip Match Comments}
 
 # Material search:
-translate W MaterialSearch {Materialsökning}
+translate W MaterialSearch {Materialsï¿½kning}
 translate W Material {Material}
-translate W Patterns {Ställningar}
+translate W Patterns {Stï¿½llningar}
 translate W Zero {Inga/-en}
 translate W Any {Flera}
-translate W CurrentBoard {Aktuell ställning}
+translate W CurrentBoard {Aktuell stï¿½llning}
 translate W CommonEndings {Vanliga slutspel}
-translate W CommonPatterns {Vanliga ställningar}
+translate W CommonPatterns {Vanliga stï¿½llningar}
 translate W MaterialDiff {Skillnad i material}
 translate W squares {rutor}
-translate W SameColor {Samma färg}
-translate W OppColor {Motsatt färg}
+translate W SameColor {Samma fï¿½rg}
+translate W OppColor {Motsatt fï¿½rg}
 translate W Either {Antingen eller}
 translate W MoveNumberRange {Dragintervall}
-translate W MatchForAtLeast {Träffa minst}
+translate W MatchForAtLeast {Trï¿½ffa minst}
 translate W HalfMoves {halvdrag}
 
 # Common endings in material search:
 translate W EndingPawns {Bondeslutspel}
-translate W EndingRookVsPawns {Torn mot Bonde (Bönder)}
+translate W EndingRookVsPawns {Torn mot Bonde (Bï¿½nder)}
 translate W EndingRookPawnVsRook {Torn och 1 Bonde mot Torn}
-translate W EndingRookPawnsVsRook {Torn och Bonde (Bönder) mot Torn}
+translate W EndingRookPawnsVsRook {Torn och Bonde (Bï¿½nder) mot Torn}
 translate W EndingRooks {Torn mot Torn slutspel}
 translate W EndingRooksPassedA {Torn mot Torn slutspel med en fri a-bonde}
 translate W EndingRooksDouble {Dubbla Torn slutspel}
-translate W EndingBishops {Löpare mot Löpare slutspel}
-translate W EndingBishopVsKnight {Löpare mot Springare slutspel}
+translate W EndingBishops {Lï¿½pare mot Lï¿½pare slutspel}
+translate W EndingBishopVsKnight {Lï¿½pare mot Springare slutspel}
 translate W EndingKnights {Springare mot Springare slutspel}
 translate W EndingQueens {Dam mot Dam slutspel}
 translate W EndingQueenPawnVsQueen {Dam och 1 Bonde mot Dam}
-translate W BishopPairVsKnightPair {Två Löpare mot Två Springare mittspel}
+translate W BishopPairVsKnightPair {Tvï¿½ Lï¿½pare mot Tvï¿½ Springare mittspel}
 
 # Common patterns in material search:
 translate W PatternWhiteIQP {Vit Isolerad dambonde}
@@ -1162,56 +1176,56 @@ translate W PatternWhiteIQPBreakC6 {Vit Isolerad dambonde: d4-d5 brott mot c6}
 translate W PatternBlackIQP {Svart Isolerad dambonde}
 translate W PatternWhiteBlackIQP {Vit Isolerad dambonde mot Svart Isolerad dambonde}
 translate W PatternCoupleC3D4 {Vit c3+d4 Isolaterat Bondepar}
-translate W PatternHangingC5D5 {Svart Hängande Bönder på c5 och d5}
-translate W PatternMaroczy {Maroczycenter (med Bönder på c4 och e4)}
-translate W PatternRookSacC3 {Tornoffer på c3}
+translate W PatternHangingC5D5 {Svart Hï¿½ngande Bï¿½nder pï¿½ c5 och d5}
+translate W PatternMaroczy {Maroczycenter (med Bï¿½nder pï¿½ c4 och e4)}
+translate W PatternRookSacC3 {Tornoffer pï¿½ c3}
 translate W PatternKc1Kg8 {O-O-O mot O-O (Kc1 mot Kg8)}
 translate W PatternKg1Kc8 {O-O mot O-O-O (Kg1 mot Kc8)}
-translate W PatternLightFian {Ljus-Ruta Fianchetton (Löpare-g2 mot Löpare-b7)}
-translate W PatternDarkFian {Mörk-Ruta Fianchetton (Löpare-b2 mot Löpare-g7)}
-translate W PatternFourFian {Fyra Fianchetton (Löpare på b2,g2,b7,g7)}
+translate W PatternLightFian {Ljus-Ruta Fianchetton (Lï¿½pare-g2 mot Lï¿½pare-b7)}
+translate W PatternDarkFian {Mï¿½rk-Ruta Fianchetton (Lï¿½pare-b2 mot Lï¿½pare-g7)}
+translate W PatternFourFian {Fyra Fianchetton (Lï¿½pare pï¿½ b2,g2,b7,g7)}
 
 # Game saving:
 translate W Today {Idag}
 translate W ClassifyGame {Klassificera parti}
 
 # Setup position:
-translate W EmptyBoard {Töm brädet}
-translate W InitialBoard {Utgångsställning}
-translate W SideToMove {Färg vid draget}
+translate W EmptyBoard {Tï¿½m brï¿½det}
+translate W InitialBoard {Utgï¿½ngsstï¿½llning}
+translate W SideToMove {Fï¿½rg vid draget}
 translate W MoveNumber {Antal drag}
 translate W Castling {Rockad}
 translate W EnPassantFile {En Passant fil}
 translate W ClearFen {Rensa FEN}
 translate W PasteFen {Klistra in FEN}
-translate W SaveAndContinue {Spara och fortsätt}
-translate W DiscardChangesAndContinue {Ignorera Ändringar}
-translate W GoBack {Gå tillbaka}
+translate W SaveAndContinue {Spara och fortsï¿½tt}
+translate W DiscardChangesAndContinue {Ignorera ï¿½ndringar}
+translate W GoBack {Gï¿½ tillbaka}
 
 # Replace move dialog:
-translate W ReplaceMove {Ersätt drag}
-translate W AddNewVar {Lägg till ny variation}
+translate W ReplaceMove {Ersï¿½tt drag}
+translate W AddNewVar {Lï¿½gg till ny variation}
 translate W NewMainLine {Ny huvudvariation}
-translate W ReplaceMoveMessage {Det finns redan ett drag i denna ställning.
+translate W ReplaceMoveMessage {Det finns redan ett drag i denna stï¿½llning.
 
-Du kan ersätta detta drag, och förlora samtliga följande, eller lägga till ditt drag som en ny variation.
+Du kan ersï¿½tta detta drag, och fï¿½rlora samtliga fï¿½ljande, eller lï¿½gga till ditt drag som en ny variation.
 
-(Om du stänger av "Fråga före ersätt drag" i Alternativ:Drag menyn slipper du denna fråga i framtiden.)}
+(Om du stï¿½nger av "Frï¿½ga fï¿½re ersï¿½tt drag" i Alternativ:Drag menyn slipper du denna frï¿½ga i framtiden.)}
 
 # Make database read-only dialog:
-translate W ReadOnlyDialog {Om du ger denna databas endast läsbar kan du inte göra några ändringar i den.
-Inga partier kan sparas eller ersättas, och du kan inte ändra flaggor för raderbara partier.
-Alla sorteringsinställningar eller ECO-klassificeringar kommer att vara temporära.
+translate W ReadOnlyDialog {Om du ger denna databas endast lï¿½sbar kan du inte gï¿½ra nï¿½gra ï¿½ndringar i den.
+Inga partier kan sparas eller ersï¿½ttas, och du kan inte ï¿½ndra flaggor fï¿½r raderbara partier.
+Alla sorteringsinstï¿½llningar eller ECO-klassificeringar kommer att vara temporï¿½ra.
 
-Du kan göra den skrivbar igen genom att helt enkelt stänga och öppna den igen.
+Du kan gï¿½ra den skrivbar igen genom att helt enkelt stï¿½nga och ï¿½ppna den igen.
 
-Vill du verkligen ange att databasen endast ska vara läsbar?}
+Vill du verkligen ange att databasen endast ska vara lï¿½sbar?}
 
 # Exit dialog:
 translate W ExitDialog {Vill du verkligen avsluta Scid?}
 # ====== TODO To be translated ======
 translate W ClearGameDialog {This game has been altered.\nDo you wish to save it?}
-translate W ExitUnsaved {De följande databaserna har osparade förändringar. Om du avslutar nu, kommer dessa förändringar att gå förlorade.}
+translate W ExitUnsaved {De fï¿½ljande databaserna har osparade fï¿½rï¿½ndringar. Om du avslutar nu, kommer dessa fï¿½rï¿½ndringar att gï¿½ fï¿½rlorade.}
 # ====== TODO To be translated ======
 translate W ChangeTextDialog {Enabling text colour globally requires restart.}
 # ====== TODO To be translated ======
@@ -1223,48 +1237,48 @@ translate W ExitNow {Exit now ?}
 
 # Import window:
 translate W PasteCurrentGame {Klistra in aktuellt parti}
-translate W ImportHelp1 {Ange eller klistra in ett parti i PGN-format i området ovan.}
-translate W ImportHelp2 {Eventuella felaktigheter kommer att anges här.}
-translate W OverwriteExistingMoves {Skriv över existerande drag ?}
+translate W ImportHelp1 {Ange eller klistra in ett parti i PGN-format i omrï¿½det ovan.}
+translate W ImportHelp2 {Eventuella felaktigheter kommer att anges hï¿½r.}
+translate W OverwriteExistingMoves {Skriv ï¿½ver existerande drag ?}
 
 # ECO Browser:
 translate W ECOAllSections {alla ECO avdelningar}
 translate W ECOSection {ECO avdelning}
-translate W ECOSummary {Sammanfattning för}
-translate W ECOFrequency {Underkodsfrekvens för}
+translate W ECOSummary {Sammanfattning fï¿½r}
+translate W ECOFrequency {Underkodsfrekvens fï¿½r}
 
 # Opening Report:
-translate W OprepTitle {Öppningsrapport}
+translate W OprepTitle {ï¿½ppningsrapport}
 translate W OprepReport {Rapport}
 translate W OprepGenerated {Skapad av}
 translate W OprepStatsHist {Statistik och historik}
 translate W OprepStats {Statistik}
 translate W OprepStatAll {Rapporterade partier}
-translate W OprepStatBoth {Båda med rating}
+translate W OprepStatBoth {Bï¿½da med rating}
 translate W OprepStatSince {Sedan}
-translate W OprepOldest {De äldsta partierna}
+translate W OprepOldest {De ï¿½ldsta partierna}
 translate W OprepNewest {De yngsta partierna}
 translate W OprepPopular {Aktuell popularitet}
 translate W OprepFreqAll {Frekvens totalt:   }
-translate W OprepFreq1   {Under det senaste året: }
-translate W OprepFreq5   {Under de 5 senaste åren: }
-translate W OprepFreq10  {Under de 10 senaste åren: }
-translate W OprepEvery {en gång var %u parti}
-translate W OprepUp {ökat %u%s gentemot samtliga år}
-translate W OprepDown {minskat %u%s gentemot samtliga år}
-translate W OprepSame {ingen förändring gentemot samtliga år}
+translate W OprepFreq1   {Under det senaste ï¿½ret: }
+translate W OprepFreq5   {Under de 5 senaste ï¿½ren: }
+translate W OprepFreq10  {Under de 10 senaste ï¿½ren: }
+translate W OprepEvery {en gï¿½ng var %u parti}
+translate W OprepUp {ï¿½kat %u%s gentemot samtliga ï¿½r}
+translate W OprepDown {minskat %u%s gentemot samtliga ï¿½r}
+translate W OprepSame {ingen fï¿½rï¿½ndring gentemot samtliga ï¿½r}
 translate W OprepMostFrequent {Spelas mest av}
-translate W OprepMostFrequentOpponents {Vanligaste motståndaren}
+translate W OprepMostFrequentOpponents {Vanligaste motstï¿½ndaren}
 translate W OprepRatingsPerf {Rating och resultat}
 translate W OprepAvgPerf {Genomsnittrating och resultat}
 translate W OprepWRating {Vits rating}
 translate W OprepBRating {Svarts rating}
 translate W OprepWPerf {Vits resultat}
 translate W OprepBPerf {Svarts resultat}
-translate W OprepHighRating {Partierna med högst genomsnittsrating}
+translate W OprepHighRating {Partierna med hï¿½gst genomsnittsrating}
 translate W OprepTrends {Resultattrender}
-translate W OprepResults {Längd och frekvens}
-translate W OprepLength {Partiets längd}
+translate W OprepResults {Lï¿½ngd och frekvens}
+translate W OprepLength {Partiets lï¿½ngd}
 translate W OprepFrequency {Frekvens}
 translate W OprepWWins {Vita vinster: }
 translate W OprepBWins {Svarta vinster: }
@@ -1274,37 +1288,37 @@ translate W OprepShortest {Kortaste vinster}
 # translate W OprepShortWhite {De kortaste vita vinsterna}
 # translate W OprepShortBlack {De kortaste svarta vinsterna}
 translate W OprepMovesThemes {Drag och teman}
-translate W OprepMoveOrders {Dragordning för att nå rapportställningen}
+translate W OprepMoveOrders {Dragordning fï¿½r att nï¿½ rapportstï¿½llningen}
 translate W OprepMoveOrdersOne \
-  {Ställningen nåddes bara genom en dragordning:}
+  {Stï¿½llningen nï¿½ddes bara genom en dragordning:}
 translate W OprepMoveOrdersAll \
-  {Det fanns %u dragordningar som ledde fram denna ställning:}
+  {Det fanns %u dragordningar som ledde fram denna stï¿½llning:}
 translate W OprepMoveOrdersMany \
-  {Det fanns %u dragordningar som ledde fram denna ställning. De %u vanligaste är:}
-translate W OprepMovesFrom {Drag från rapportställningen}
-translate W OprepMostFrequentEcoCodes {De mest förekommande ECO-koderna}
+  {Det fanns %u dragordningar som ledde fram denna stï¿½llning. De %u vanligaste ï¿½r:}
+translate W OprepMovesFrom {Drag frï¿½n rapportstï¿½llningen}
+translate W OprepMostFrequentEcoCodes {De mest fï¿½rekommande ECO-koderna}
 translate W OprepThemes {Positionella teman}
-translate W OprepThemeDescription {Temanfrekvens de första %u dragen av varje parti}
+translate W OprepThemeDescription {Temanfrekvens de fï¿½rsta %u dragen av varje parti}
 # translate W OprepThemeDescription {Antal teman vid drag %u}
-translate W OprepThemeSameCastling {Rockad på samma flygel}
-translate W OprepThemeOppCastling {Rockad på olika flyglar}
+translate W OprepThemeSameCastling {Rockad pï¿½ samma flygel}
+translate W OprepThemeOppCastling {Rockad pï¿½ olika flyglar}
 translate W OprepThemeNoCastling {Ingen har gjort rockad}
-translate W OprepThemeKPawnStorm {Bondestorm på kungsflygeln}
+translate W OprepThemeKPawnStorm {Bondestorm pï¿½ kungsflygeln}
 translate W OprepThemeQueenswap {Dambyte}
 translate W OprepThemeWIQP {Isolerad vit dambonde}
 translate W OprepThemeBIQP {Isolerad svart dambonde}
-translate W OprepThemeWP567 {Vit bonde på 5e/6e/7e raden}
-translate W OprepThemeBP234 {Svart bonde på 2a/3e/4e raden}
-translate W OprepThemeOpenCDE {Öppen c/d/e linje}
-translate W OprepTheme1BishopPair {Endast den ena sidan har löparparet}
+translate W OprepThemeWP567 {Vit bonde pï¿½ 5e/6e/7e raden}
+translate W OprepThemeBP234 {Svart bonde pï¿½ 2a/3e/4e raden}
+translate W OprepThemeOpenCDE {ï¿½ppen c/d/e linje}
+translate W OprepTheme1BishopPair {Endast den ena sidan har lï¿½parparet}
 translate W OprepEndgames {Slutspel}
 translate W OprepReportGames {Antal partier i rapporten}
 translate W OprepAllGames    {Samtliga partier}
-translate W OprepEndClass {Material i slutställningen}
-translate W OprepTheoryTable {Teorisammanställning}
-translate W OprepTableComment {Skapad från de %u högst rankade partierna.}
-translate W OprepExtraMoves {Ytterligare antal drag i notförteckningen}
-translate W OprepMaxGames {Maximalt antal partier i sammanställningen}
+translate W OprepEndClass {Material i slutstï¿½llningen}
+translate W OprepTheoryTable {Teorisammanstï¿½llning}
+translate W OprepTableComment {Skapad frï¿½n de %u hï¿½gst rankade partierna.}
+translate W OprepExtraMoves {Ytterligare antal drag i notfï¿½rteckningen}
+translate W OprepMaxGames {Maximalt antal partier i sammanstï¿½llningen}
 # ====== TODO To be translated ======
 translate W OprepMaxLines {Maximum games for statistics}
 translate W OprepViewHTML {Visa HTML}
@@ -1312,76 +1326,76 @@ translate W OprepViewLaTeX {Visa LaTeX}
 
 # Player Report:
 translate W PReportTitle {Spelarrapport}
-translate W PReportColorWhite {med de vita pjäserna}
-translate W PReportColorBlack {med de svarta pjäserna}
+translate W PReportColorWhite {med de vita pjï¿½serna}
+translate W PReportColorBlack {med de svarta pjï¿½serna}
 # ====== TODO To be translated ======
 translate W PReportBeginning {Beginning with}
 translate W PReportMoves {efter %s}
-translate W PReportOpenings {Öppningar}
-translate W PReportClipbase {Töm Clipbase och kopiera liknande partier dit}
+translate W PReportOpenings {ï¿½ppningar}
+translate W PReportClipbase {Tï¿½m Clipbase och kopiera liknande partier dit}
 
 
 # Piece Tracker window:
-translate W TrackerSelectSingle {Vänsterklicka för att välja denna pjäs.}
-translate W TrackerSelectPair {Vänsterklicka för att välja denna pjäs; använd höger musknapp för att också välja den relaterade pjäsen.}
-translate W TrackerSelectPawn {Vänsterklicka för att välja denna pjäs; använd höger musknapp för att välja alla åtta bönder.}
+translate W TrackerSelectSingle {Vï¿½nsterklicka fï¿½r att vï¿½lja denna pjï¿½s.}
+translate W TrackerSelectPair {Vï¿½nsterklicka fï¿½r att vï¿½lja denna pjï¿½s; anvï¿½nd hï¿½ger musknapp fï¿½r att ocksï¿½ vï¿½lja den relaterade pjï¿½sen.}
+translate W TrackerSelectPawn {Vï¿½nsterklicka fï¿½r att vï¿½lja denna pjï¿½s; anvï¿½nd hï¿½ger musknapp fï¿½r att vï¿½lja alla ï¿½tta bï¿½nder.}
 translate W TrackerStat {Statistik}
 translate W TrackerGames {% partier med drag till rutan}
-translate W TrackerTime {% tid på varje ruta}
+translate W TrackerTime {% tid pï¿½ varje ruta}
 translate W TrackerMoves {Drag}
-translate W TrackerMovesStart {Ange vid vilket drag sökningen ska börja.}
-translate W TrackerMovesStop {Ange vid vilket drag sökningen ska sluta.}
+translate W TrackerMovesStart {Ange vid vilket drag sï¿½kningen ska bï¿½rja.}
+translate W TrackerMovesStop {Ange vid vilket drag sï¿½kningen ska sluta.}
 
 # Game selection dialogs:
 translate W SelectAllGames {Alla partier i databasen}
 translate W SelectFilterGames {Endast partierna i filtret}
 translate W SelectTournamentGames {Endast partierna i den aktuella turneringen}
-translate W SelectOlderGames {Endast äldre partier}
+translate W SelectOlderGames {Endast ï¿½ldre partier}
 
 # Delete Twins window:
-translate W TwinsNote {Partier måste minst ha samma spelare för att kunna identifieras som dubbletter samt uppfylla andra kriterier du kan ange nedan. När dubbletter hittas raderas det kortare partiet. Tips: det bästa är att använda rättstavningen innan dubblettjämförelsen eftersom detta förbättrar möjligheten för upptäckt av dubbletter.}
-translate W TwinsCriteria {Kriterium: Dubbletter måste ha...}
-translate W TwinsWhich {Ange vilka partier som ska jämföras}
-translate W TwinsColors {Samma färger?}
+translate W TwinsNote {Partier mï¿½ste minst ha samma spelare fï¿½r att kunna identifieras som dubbletter samt uppfylla andra kriterier du kan ange nedan. Nï¿½r dubbletter hittas raderas det kortare partiet. Tips: det bï¿½sta ï¿½r att anvï¿½nda rï¿½ttstavningen innan dubblettjï¿½mfï¿½relsen eftersom detta fï¿½rbï¿½ttrar mï¿½jligheten fï¿½r upptï¿½ckt av dubbletter.}
+translate W TwinsCriteria {Kriterium: Dubbletter mï¿½ste ha...}
+translate W TwinsWhich {Ange vilka partier som ska jï¿½mfï¿½ras}
+translate W TwinsColors {Samma fï¿½rger?}
 translate W TwinsEvent {Samma evenemang?}
 translate W TwinsSite {Samma plats?}
 translate W TwinsRound {Samma rond?}
-translate W TwinsYear {Samma år?}
-translate W TwinsMonth {Samma månad?}
+translate W TwinsYear {Samma ï¿½r?}
+translate W TwinsMonth {Samma mï¿½nad?}
 translate W TwinsDay {Samma dag?}
 translate W TwinsResult {Samma resultat?}
 translate W TwinsECO {Samma ECO-kod?}
 translate W TwinsMoves {Samma drag?}
-translate W TwinsPlayers {Jämför spelarnas namn:}
+translate W TwinsPlayers {Jï¿½mfï¿½r spelarnas namn:}
 translate W TwinsPlayersExact {Exakt kopia}
-translate W TwinsPlayersPrefix {Endast de 4 första bokstäverna}
-translate W TwinsWhen {När dubbletter tas bort}
-translate W TwinsSkipShort {Ignorera alla partier som är kortare än 5 drag?}
-translate W TwinsUndelete {Återta alla partier först?}
+translate W TwinsPlayersPrefix {Endast de 4 fï¿½rsta bokstï¿½verna}
+translate W TwinsWhen {Nï¿½r dubbletter tas bort}
+translate W TwinsSkipShort {Ignorera alla partier som ï¿½r kortare ï¿½n 5 drag?}
+translate W TwinsUndelete {ï¿½terta alla partier fï¿½rst?}
 translate W TwinsSetFilter {Filtrera alla borttagna dubbletter?}
 translate W TwinsComments {Spara alltid partier med kommentarer?}
 translate W TwinsVars {Spara alltid partier med variationer?}
 translate W TwinsDeleteWhich {Ange vilket parti som ska tas bort:}
 translate W TwinsDeleteShorter {Det kortare partiet}
-translate W TwinsDeleteOlder {Partiet med lägst nummer}
-translate W TwinsDeleteNewer {Partiet med högst nummer}
+translate W TwinsDeleteOlder {Partiet med lï¿½gst nummer}
+translate W TwinsDeleteNewer {Partiet med hï¿½gst nummer}
 translate W TwinsDelete {Ta bort partier}
 
 # Name editor window:
 translate W NameEditType {Typ av namn att redigera}
 translate W NameEditSelect {Partier att redigera}
-translate W NameEditReplace {Ersätt}
+translate W NameEditReplace {Ersï¿½tt}
 translate W NameEditWith {med}
-translate W NameEditMatches {Matchar: Tryck Ctrl+1 till Ctrl+9 för att välja}
+translate W NameEditMatches {Matchar: Tryck Ctrl+1 till Ctrl+9 fï¿½r att vï¿½lja}
 
 # Classify window:
 translate W Classify {Klassificera}
 translate W ClassifyWhich {ECO-klassificera vilka partier?}
-translate W ClassifyAll {Alla partier (skriv över gamla ECO-koder)}
-translate W ClassifyYear {Alla partier spelade under det senaste året}
-translate W ClassifyMonth {Alla partier spelade den senaste månaden}
-translate W ClassifyNew {Endast partier som ännu ej klassificerats}
-translate W ClassifyCodes {ECO-koder som ska användas}
+translate W ClassifyAll {Alla partier (skriv ï¿½ver gamla ECO-koder)}
+translate W ClassifyYear {Alla partier spelade under det senaste ï¿½ret}
+translate W ClassifyMonth {Alla partier spelade den senaste mï¿½naden}
+translate W ClassifyNew {Endast partier som ï¿½nnu ej klassificerats}
+translate W ClassifyCodes {ECO-koder som ska anvï¿½ndas}
 translate W ClassifyBasic {Enbart standardkoder ("B12", ...)}
 translate W ClassifyExtended {Scidextensioner ("B12j", ...)}
 
@@ -1389,25 +1403,25 @@ translate W ClassifyExtended {Scidextensioner ("B12j", ...)}
 translate W NameFile {Namnfil}
 translate W GameFile {Partifil}
 translate W Names {Namn}
-translate W Unused {Ej använd}
+translate W Unused {Ej anvï¿½nd}
 translate W SizeKb {Storlek (kb)}
 translate W CurrentState {Aktuell status}
 translate W AfterCompaction {Efter komprimering}
 translate W CompactNames {Namn, komprimera namnfil}
 translate W CompactGames {Partier, komprimera partifil}
-translate W NoUnusedNames "Det finns inga oanvända namn, så namnfilen är redan fullt komprimerad."
-translate W NoUnusedGames "Partifilen är redan fullt komprimerad."
-translate W NameFileCompacted {Namnfilen för databasen "[file tail [sc_base filename]]" blev komprimerad.}
-translate W GameFileCompacted {Partifilen för databasen "[file tail [sc_base filename]]" blev komprimerad.}
+translate W NoUnusedNames "Det finns inga oanvï¿½nda namn, sï¿½ namnfilen ï¿½r redan fullt komprimerad."
+translate W NoUnusedGames "Partifilen ï¿½r redan fullt komprimerad."
+translate W NameFileCompacted {Namnfilen fï¿½r databasen "[file tail [sc_base filename]]" blev komprimerad.}
+translate W GameFileCompacted {Partifilen fï¿½r databasen "[file tail [sc_base filename]]" blev komprimerad.}
 
 # Sorting:
 translate W SortCriteria {Kriterium}
-translate W AddCriteria {Lägg till kriterium}
+translate W AddCriteria {Lï¿½gg till kriterium}
 translate W CommonSorts {Normal sortering}
 translate W Sort {Sortering}
 
 # Exporting:
-translate W AddToExistingFile {Lägg till partier till en existerande fil?}
+translate W AddToExistingFile {Lï¿½gg till partier till en existerande fil?}
 translate W ExportComments {Exportera kommentarer?}
 translate W ExportVariations {Exportera variationer?}
 translate W IndentComments {Dra in kommentarer?}
@@ -1416,13 +1430,13 @@ translate W IndentVariations {Dra in variationer?}
 translate W InsertNewlines {Insert newlines every 80 chars?}
 translate W ExportColumnStyle {Kolumnstil (ett drag per rad)?}
 translate W ExportSymbolStyle {Symbolbaserade kommentarer:}
-translate W ExportStripMarks {Avlägsna koder för fält och pilar från kommentarerna?}
+translate W ExportStripMarks {Avlï¿½gsna koder fï¿½r fï¿½lt och pilar frï¿½n kommentarerna?}
 # ====== TODO To be translated ======
 translate W ExportFlags {Export Scid Flags}
 
 # Goto game/move dialogs:
 translate W LoadGameNumber {Ange partiets nummer:}
-translate W GotoMoveNumber {Gå till drag nummer:}
+translate W GotoMoveNumber {Gï¿½ till drag nummer:}
 
 # Copy games dialog:
 translate W CopyGames {kopiera partier}
@@ -1433,20 +1447,20 @@ ur databasen "$fromName"
 till databasen "$targetName"?
 }
 translate W CopyErr {Kan ej kopiera partier}
-translate W CopyErrSource {källdatabasen}
-translate W CopyErrTarget {måldatabasen}
+translate W CopyErrSource {kï¿½lldatabasen}
+translate W CopyErrTarget {mï¿½ldatabasen}
 translate W CopyErrNoGames {har inga partier i filtret}
-translate W CopyErrReadOnly {kan bara läsas}
-translate W CopyErrNotOpen {är ej öppen}
+translate W CopyErrReadOnly {kan bara lï¿½sas}
+translate W CopyErrNotOpen {ï¿½r ej ï¿½ppen}
 
 # Colors:
-translate W LightSquares {Ljusa fält}
-translate W DarkSquares {Mörka fält}
-translate W SelectedSquares {Valda fält}
+translate W LightSquares {Ljusa fï¿½lt}
+translate W DarkSquares {Mï¿½rka fï¿½lt}
+translate W SelectedSquares {Valda fï¿½lt}
 translate W Grid {Ruta}
-translate W Previous {Föregående}
-translate W WhitePieces {Vita pjäser}
-translate W BlackPieces {Svarta pjäser}
+translate W Previous {Fï¿½regï¿½ende}
+translate W WhitePieces {Vita pjï¿½ser}
+translate W BlackPieces {Svarta pjï¿½ser}
 translate W WhiteBorder {Vit kantlinje}
 translate W BlackBorder {Svart kantlinje}
 translate W ArrowMain   {Huvudpil}
@@ -1457,133 +1471,133 @@ translate W ShowArrows  {Show Arrows}
 # Novelty window:
 translate W FindNovelty {Hitta nyhet}
 translate W Novelty {Nyhet}
-translate W NoveltyInterrupt {Nyhetssökningen avbröts}
+translate W NoveltyInterrupt {Nyhetssï¿½kningen avbrï¿½ts}
 translate W NoveltyNone {Inga nyheter hittades i detta parti}
 translate W NoveltyHelp {
-Scid kommer att försöka hitta det första draget som leder till en position som inte annars finns i denna databas eller i spelöppingsboken baserad på ECO.
+Scid kommer att fï¿½rsï¿½ka hitta det fï¿½rsta draget som leder till en position som inte annars finns i denna databas eller i spelï¿½ppingsboken baserad pï¿½ ECO.
 }
 
 # Sounds configuration:
 translate W SoundsFolder {Ljudfilskatalog}
 translate W SoundsFolderHelp {Katalogen ska ha filerna King.wav, a.wav, 1.wav, etc}
-translate W SoundsAnnounceOptions {Inställningar för Dragannonsering}
-translate W SoundsAnnounceNew {Annonsera nya drag när de görs}
-translate W SoundsAnnounceForward {Annonsera drag när du går fram ett drag}
-translate W SoundsAnnounceBack {Annonsera drag när du går fram eller tillbaka ett drag}
+translate W SoundsAnnounceOptions {Instï¿½llningar fï¿½r Dragannonsering}
+translate W SoundsAnnounceNew {Annonsera nya drag nï¿½r de gï¿½rs}
+translate W SoundsAnnounceForward {Annonsera drag nï¿½r du gï¿½r fram ett drag}
+translate W SoundsAnnounceBack {Annonsera drag nï¿½r du gï¿½r fram eller tillbaka ett drag}
 
 # Upgrading databases:
 translate W Upgrading {Uppdaterar}
 translate W ConfirmOpenNew {
-Denna databas är i ett gammal format (Scid 2) och kan inte öppnas i Scid 3, men en databas i det nya formatet (Scid 3) har redan skapats.
+Denna databas ï¿½r i ett gammal format (Scid 2) och kan inte ï¿½ppnas i Scid 3, men en databas i det nya formatet (Scid 3) har redan skapats.
 
-Vill du öppna den senare databasen istället?
+Vill du ï¿½ppna den senare databasen istï¿½llet?
 }
 translate W ConfirmUpgrade {
-Denna databas är i ett gammal format (Scid 2). En databas i det nyare formatet måste skapas innan den kan användas i Scid 3.
+Denna databas ï¿½r i ett gammal format (Scid 2). En databas i det nyare formatet mï¿½ste skapas innan den kan anvï¿½ndas i Scid 3.
 
-Genom att uppdatera skapas en databas i det nya formatet med samma innehåll; uppdateringen ändrar ingenting i den gamla databasen.
+Genom att uppdatera skapas en databas i det nya formatet med samma innehï¿½ll; uppdateringen ï¿½ndrar ingenting i den gamla databasen.
 
-Detta kan ta ett tag men behöver bara göras en gång. Om du tycker det tar alltför lång tid kan du avbryta processen.
+Detta kan ta ett tag men behï¿½ver bara gï¿½ras en gï¿½ng. Om du tycker det tar alltfï¿½r lï¿½ng tid kan du avbryta processen.
 
 Vill du uppdatera denna databas nu?
 }
 
 # Recent files options:
-translate W RecentFilesMenu {Antal senast öppnade filer i Arkivmenyn}
-translate W RecentFilesExtra {Antal senast öppnade filer i extra undermeny}
+translate W RecentFilesMenu {Antal senast ï¿½ppnade filer i Arkivmenyn}
+translate W RecentFilesExtra {Antal senast ï¿½ppnade filer i extra undermeny}
 
 # My Player Names options:
 translate W MyPlayerNamesDescription {
-Ange en lista på dina favoritspelare här nedanför. Skriv ett namn per rad. Jokertecken ("?", t ex, motsvarar ett enstaka tecken medan "*" står för flera tecken) är tillåtna.
+Ange en lista pï¿½ dina favoritspelare hï¿½r nedanfï¿½r. Skriv ett namn per rad. Jokertecken ("?", t ex, motsvarar ett enstaka tecken medan "*" stï¿½r fï¿½r flera tecken) ï¿½r tillï¿½tna.
 
-Varje gång ett parti med en spelare vars namn står i denna lista öppnas kommer brädet automatiskt att vridas så att partiet visas från spelarens perspektiv.
+Varje gï¿½ng ett parti med en spelare vars namn stï¿½r i denna lista ï¿½ppnas kommer brï¿½det automatiskt att vridas sï¿½ att partiet visas frï¿½n spelarens perspektiv.
 }
 translate W showblunderexists {visa blunder finns}
-translate W showblundervalue {visa blundervärde}
-translate W showscore {visa värdering}
-translate W coachgame {tränarparti}
-translate W configurecoachgame {konfigurera tränarparti}
+translate W showblundervalue {visa blundervï¿½rde}
+translate W showscore {visa vï¿½rdering}
+translate W coachgame {trï¿½narparti}
+translate W configurecoachgame {konfigurera trï¿½narparti}
 translate W configuregame {Konfigurera parti}
 translate W Phalanxengine {Phalanx schackmotor}
-translate W Coachengine {Tränarschackmotor}
-translate W difficulty {svårighetsgrad}
-translate W hard {svår}
-translate W easy {lätt}
+translate W Coachengine {Trï¿½narschackmotor}
+translate W difficulty {svï¿½righetsgrad}
+translate W hard {svï¿½r}
+translate W easy {lï¿½tt}
 translate W Playwith {Spela med}
 translate W white {vit}
 translate W black {svart}
-translate W both {båda}
+translate W both {bï¿½da}
 translate W Play {Spela}
 translate W Noblunder {Ingen blunder}
 translate W blunder {blunder}
 translate W Noinfo {-- Ingen information --}
-translate W moveblunderthreshold {drag är en blunder om förlust är större än}
-translate W limitanalysis {begränsa schackmotors analystid}
+translate W moveblunderthreshold {drag ï¿½r en blunder om fï¿½rlust ï¿½r stï¿½rre ï¿½n}
+translate W limitanalysis {begrï¿½nsa schackmotors analystid}
 translate W seconds {sekunder}
 translate W Abort {Avbryt}
-translate W Resume {Fortsätt}
+translate W Resume {Fortsï¿½tt}
 # TODO
 translate W Restart {Restart}
-translate W OutOfOpening {utanför öppning}
-translate W NotFollowedLine {Du följde inte variationen}
-translate W DoYouWantContinue {Vill du fortsätta ?}
-translate W CoachIsWatching {Tränaren observerar}
-translate W Ponder {Permanent tänkande}
-translate W LimitELO {Begränsa ELO-styrka}
+translate W OutOfOpening {utanfï¿½r ï¿½ppning}
+translate W NotFollowedLine {Du fï¿½ljde inte variationen}
+translate W DoYouWantContinue {Vill du fortsï¿½tta ?}
+translate W CoachIsWatching {Trï¿½naren observerar}
+translate W Ponder {Permanent tï¿½nkande}
+translate W LimitELO {Begrï¿½nsa ELO-styrka}
 translate W DubiousMovePlayedTakeBack {Ett tveksamt drag spelades, vill du ta tillbaka det ?}
 translate W WeakMovePlayedTakeBack {Ett svagt drag spelades, vill du ta tillbaka det ?}
-translate W BadMovePlayedTakeBack {Ett dåligt drag spelades, vill du ta tillbaka det ?}
+translate W BadMovePlayedTakeBack {Ett dï¿½ligt drag spelades, vill du ta tillbaka det ?}
 translate W Iresign {Jag ger upp}
-translate W yourmoveisnotgood {ditt drag är inte bra}
-translate W EndOfVar {Slut på variation}
-translate W Openingtrainer {Öppningstränare}
+translate W yourmoveisnotgood {ditt drag ï¿½r inte bra}
+translate W EndOfVar {Slut pï¿½ variation}
+translate W Openingtrainer {ï¿½ppningstrï¿½nare}
 translate W DisplayCM {Visa kandidatdrag}
-translate W DisplayCMValue {Visa kandidatdragens värden}
+translate W DisplayCMValue {Visa kandidatdragens vï¿½rden}
 translate W DisplayOpeningStats {Visa statistik}
 translate W ShowReport {Visa rapport}
 translate W NumberOfGoodMovesPlayed {bra drag spelade}
 translate W NumberOfDubiousMovesPlayed {tveksamma drag spelade}
-translate W NumberOfTimesPositionEncountered {gånger positionen påträffats}
-translate W PlayerBestMove  {Tillåt bara bästa dragen}
-translate W OpponentBestMove {Motståndare spelar bästa dragen}
+translate W NumberOfTimesPositionEncountered {gï¿½nger positionen pï¿½trï¿½ffats}
+translate W PlayerBestMove  {Tillï¿½t bara bï¿½sta dragen}
+translate W OpponentBestMove {Motstï¿½ndare spelar bï¿½sta dragen}
 translate W OnlyFlaggedLines {Bara markerade variationer}
-translate W resetStats {Nollställ statistik}
-translate W Movesloaded {Öppnat drag}
+translate W resetStats {Nollstï¿½ll statistik}
+translate W Movesloaded {ï¿½ppnat drag}
 translate W PositionsNotPlayed {Positioner inte spelade}
 translate W PositionsPlayed {Positioner spelade}
-translate W Success {Framgång}
+translate W Success {Framgï¿½ng}
 translate W DubiousMoves {Tveksamma drag}
 translate W ConfigureTactics {Konfigurera taktik}
-translate W ResetScores {Nollställ poäng}
-translate W LoadingBase {Öppnar bas}
+translate W ResetScores {Nollstï¿½ll poï¿½ng}
+translate W LoadingBase {ï¿½ppnar bas}
 translate W Tactics {Taktik}
-translate W ShowSolution {Visa lösning}
-translate W Next {Nästa}
-translate W ResettingScore {Nollställer poäng}
-translate W LoadingGame {Öppnar parti}
+translate W ShowSolution {Visa lï¿½sning}
+translate W Next {Nï¿½sta}
+translate W ResettingScore {Nollstï¿½ller poï¿½ng}
+translate W LoadingGame {ï¿½ppnar parti}
 translate W MateFound {Matt hittad}
-translate W BestSolutionNotFound {Bästa lösningen hittades INTE !}
+translate W BestSolutionNotFound {Bï¿½sta lï¿½sningen hittades INTE !}
 translate W MateNotFound {Matt hittades inte}
 translate W ShorterMateExists {En kortare matt finns}
-translate W ScorePlayed {Poäng spelad}
-translate W Expected {förväntat}
-translate W ChooseTrainingBase {Välj träningsbas}
-translate W Thinking {Tänker}
+translate W ScorePlayed {Poï¿½ng spelad}
+translate W Expected {fï¿½rvï¿½ntat}
+translate W ChooseTrainingBase {Vï¿½lj trï¿½ningsbas}
+translate W Thinking {Tï¿½nker}
 translate W AnalyzeDone {Analys klar}
 translate W WinWonGame {Vinn vunnet parti}
 translate W Lines {Variationer}
 translate W ConfigureUCIengine {Konfigurera UCI-schackmotor}
-translate W SpecificOpening {Specifik öppning}
+translate W SpecificOpening {Specifik ï¿½ppning}
 # ====== TODO To be translated ======
 translate W ImportECO {Import ECO}
 translate W StartNewGame {Starta nytt parti}
-translate W FixedLevel {Fast nivå}
-translate W Opening {Öppning}
-translate W RandomLevel {Slumpmässig nivå}
-translate W StartFromCurrentPosition {Starta från den aktuella positionen}
-translate W FixedDepth {Fast sökdjup}
+translate W FixedLevel {Fast nivï¿½}
+translate W Opening {ï¿½ppning}
+translate W RandomLevel {Slumpmï¿½ssig nivï¿½}
+translate W StartFromCurrentPosition {Starta frï¿½n den aktuella positionen}
+translate W FixedDepth {Fast sï¿½kdjup}
 translate W Nodes {Noder}
-translate W Depth {Sökdjup}
+translate W Depth {Sï¿½kdjup}
 translate W Time {Tid}
 # ====== TODO To be translated ======
 translate W Auto {Auto}
@@ -1609,28 +1623,28 @@ translate W TimeMode {Tidsmod}
 translate W TimeBonus {Tid + bonus}
 translate W TimeMin {min}
 translate W TimeSec {sek}
-translate W AllExercisesDone {Alla övningar gjorda}
-translate W MoveOutOfBook {Drag utanför bok}
+translate W AllExercisesDone {Alla ï¿½vningar gjorda}
+translate W MoveOutOfBook {Drag utanfï¿½r bok}
 translate W LastBookMove {Sista bokdrag}
-translate W AnnotateSeveralGames {Kommentera flera partier\nfrån aktuellt till :}
-translate W FindOpeningErrors {Hitta öppningsfel}
-translate W MarkTacticalExercises {Markera taktiska övningar}
-translate W UseBook {Använd bok}
+translate W AnnotateSeveralGames {Kommentera flera partier\nfrï¿½n aktuellt till :}
+translate W FindOpeningErrors {Hitta ï¿½ppningsfel}
+translate W MarkTacticalExercises {Markera taktiska ï¿½vningar}
+translate W UseBook {Anvï¿½nd bok}
 translate W MultiPV {Flera variationer}
 translate W Hash {Hashminne}
-translate W OwnBook {Använd schackmotorbok}
-translate W BookFile {Öppningsbok}
+translate W OwnBook {Anvï¿½nd schackmotorbok}
+translate W BookFile {ï¿½ppningsbok}
 translate W AnnotateVariations {Kommentera variationer}
 translate W ShortAnnotations {Korta kommentarer}
-translate W addAnnotatorTag {Lägg till kommentator-tagg}
-translate W AddScoreToShortAnnotations {Lägg till värdering till korta kommentarer}
+translate W addAnnotatorTag {Lï¿½gg till kommentator-tagg}
+translate W AddScoreToShortAnnotations {Lï¿½gg till vï¿½rdering till korta kommentarer}
 translate W Export {Exportera}
-translate W BookPartiallyLoaded {Bok delvis öppnad}
+translate W BookPartiallyLoaded {Bok delvis ï¿½ppnad}
 # ====== TODO To be translated ======
 translate W AddLine {Add Line}
 # ====== TODO To be translated ======
 translate W RemLine {Remove Line}
-translate W Calvar {Beräkning av variationer}
+translate W Calvar {Berï¿½kning av variationer}
 translate W ConfigureCalvar {Konfiguration}
 translate W Reti {Reti}
 translate W English {Engelsk}
@@ -1640,29 +1654,29 @@ translate W Budapest {Budapest}
 translate W OldIndian {Gammalindisk}
 translate W BenkoGambit {Benko-gambit}
 translate W ModernBenoni {Modern Benoni}
-translate W DutchDefence {Holländskt försvar}
+translate W DutchDefence {Hollï¿½ndskt fï¿½rsvar}
 translate W Scandinavian {Skandinaviskt}
-translate W AlekhineDefence {Alekhines försvar}
+translate W AlekhineDefence {Alekhines fï¿½rsvar}
 translate W Pirc {Pirc}
 translate W CaroKann {Caro-Kann}
 translate W CaroKannAdvance {Caro-Kann Avancemang}
 translate W Sicilian {Siciliansk}
 translate W SicilianAlapin {Siciliansk Alapin}
-translate W SicilianClosed {Stängd Siciliansk}
+translate W SicilianClosed {Stï¿½ngd Siciliansk}
 translate W SicilianRauzer {Siciliansk Rauzer}
 translate W SicilianDragon {Siciliansk Drake}
 translate W SicilianScheveningen {Siciliansk Scheveningen}
 translate W SicilianNajdorf {Siciliansk Najdorf}
-translate W OpenGame {Öppet parti}
+translate W OpenGame {ï¿½ppet parti}
 translate W Vienna {Wiener}
 translate W KingsGambit {Kungsgambit}
 translate W RussianGame {Ryskt parti}
-translate W ItalianTwoKnights {Italianskt/Tvåspringar}
+translate W ItalianTwoKnights {Italianskt/Tvï¿½springar}
 translate W Spanish {Spanskt}
 translate W SpanishExchange {Spanskt Avbytesvariant}
-translate W SpanishOpen {Öpett Spanskt}
-translate W SpanishClosed {Stängt Spanskt}
-translate W FrenchDefence {Franskt Försvar}
+translate W SpanishOpen {ï¿½pett Spanskt}
+translate W SpanishClosed {Stï¿½ngt Spanskt}
+translate W FrenchDefence {Franskt Fï¿½rsvar}
 translate W FrenchAdvance {Fransk Avancemang}
 translate W FrenchTarrasch {Fransk Tarrasch}
 translate W FrenchWinawer {Fransk Winawer}
@@ -1670,29 +1684,29 @@ translate W FrenchExchange {Fransk Avbytesvariant}
 translate W QueensPawn {Dambonde}
 translate W Slav {Slav}
 translate W QGA {Antagen Damgambit}
-translate W QGD {Avböjd Damgambit}
-translate W QGDExchange {Avböjd Damgambit Avbytesvariant}
+translate W QGD {Avbï¿½jd Damgambit}
+translate W QGDExchange {Avbï¿½jd Damgambit Avbytesvariant}
 translate W SemiSlav {Semi-Slav}
-translate W QGDwithBg5 {Avböjd Damgambit med Bg5}
-translate W QGDOrthodox {Avböjd Damgambit Ortodox}
-translate W Grunfeld {Grünfeld}
-translate W GrunfeldExchange {Grünfeld Avbytesvariant}
-translate W GrunfeldRussian {Grünfeld Ryskt}
+translate W QGDwithBg5 {Avbï¿½jd Damgambit med Bg5}
+translate W QGDOrthodox {Avbï¿½jd Damgambit Ortodox}
+translate W Grunfeld {Grï¿½nfeld}
+translate W GrunfeldExchange {Grï¿½nfeld Avbytesvariant}
+translate W GrunfeldRussian {Grï¿½nfeld Ryskt}
 translate W Catalan {Catalan}
-translate W CatalanOpen {Öppen Catalan}
-translate W CatalanClosed {Stängd Catalan}
+translate W CatalanOpen {ï¿½ppen Catalan}
+translate W CatalanClosed {Stï¿½ngd Catalan}
 translate W QueensIndian {Damindiskt}
 translate W NimzoIndian {Nimzo-Indiskt}
 translate W NimzoIndianClassical {Nimzo-Indiskt Klassiskt}
 translate W NimzoIndianRubinstein {Nimzo-Indiskt Rubinstein}
 translate W KingsIndian {Kungsindiskt}
-translate W KingsIndianSamisch {Kungsindiskt Sämisch}
+translate W KingsIndianSamisch {Kungsindiskt Sï¿½misch}
 translate W KingsIndianMainLine {Kungsindiskt Huvudvariation}
 
 # FICS
 translate W ConfigureFics {Konfigurera FICS}
 translate W FICSLogin {Logga in}
-translate W FICSGuest {Logga in som Gäst}
+translate W FICSGuest {Logga in som Gï¿½st}
 translate W FICSServerPort {Serverport}
 translate W FICSServerAddress {IP-address}
 translate W FICSRefresh {Uppdatera}
@@ -1703,19 +1717,19 @@ translate W FICSOffers {Erbjudanden}
 # ====== TODO To be translated ======
 translate W FICSMakeOffer {Make Offer}
 translate W FICSGames {Partier}
-translate W FICSFindOpponent {Sök motståndare}
+translate W FICSFindOpponent {Sï¿½k motstï¿½ndare}
 translate W FICSTakeback {Ta tillbaka}
 translate W FICSTakeback2 {Ta tillbaka 2}
 translate W FICSInitTime {Tid (min)}
-translate W FICSIncrement {Ökning (sek)}
+translate W FICSIncrement {ï¿½kning (sek)}
 translate W FICSRatedGame {Ratat parti}
 translate W FICSAutoColour {Automatisk}
-translate W FICSManualConfirm {Bekräfta manuellt}
+translate W FICSManualConfirm {Bekrï¿½fta manuellt}
 translate W FICSFilterFormula {Filtrera med format}
-translate W FICSIssueSeek {Sök Issue}
+translate W FICSIssueSeek {Sï¿½k Issue}
 translate W FICSAccept {Acceptera}
-translate W FICSDecline {Avböj}
-translate W FICSColour {Färg}
+translate W FICSDecline {Avbï¿½j}
+translate W FICSColour {Fï¿½rg}
 translate W FICSSend {Skicka}
 translate W FICSConnect {Anslut}
 # ====== TODO To be translated ======
@@ -1736,14 +1750,14 @@ translate W FICSQuit {Quit FICS}
 translate W FICSCensor {Censor}
 
 translate W CCDlgConfigureWindowTitle {Konfigurera Korrespondensschack}
-translate W CCDlgCGeneraloptions {Generella inställningar}
+translate W CCDlgCGeneraloptions {Generella instï¿½llningar}
 translate W CCDlgDefaultDB {Standarddatabas:}
-translate W CCDlgInbox {Inkorg (sökväg):}
-translate W CCDlgOutbox {Utkorg (sökväg):}
+translate W CCDlgInbox {Inkorg (sï¿½kvï¿½g):}
+translate W CCDlgOutbox {Utkorg (sï¿½kvï¿½g):}
 translate W CCDlgXfcc {Xfcc-Konfiguration:}
 translate W CCDlgExternalProtocol {Extern Protokollhanterare (t.ex. Xfcc)}
-translate W CCDlgFetchTool {Hämtningsverktyg:}
-translate W CCDlgSendTool {Sändverktyg:}
+translate W CCDlgFetchTool {Hï¿½mtningsverktyg:}
+translate W CCDlgSendTool {Sï¿½ndverktyg:}
 translate W CCDlgEmailCommunication {eMail-kommunikation}
 translate W CCDlgMailPrg {eMail-program:}
 translate W CCDlgBCCAddr {(B)CC-address:}
@@ -1753,86 +1767,86 @@ translate W CCDlgMailUrlEg {t.ex. Evolution}
 translate W CCDlgClawsEg {t.ex Sylpheed Claws}
 translate W CCDlgmailxEg {t.ex. mailx, mutt, nail...}
 translate W CCDlgAttachementPar {Bilage-parameter:}
-translate W CCDlgInternalXfcc {Använd internt Xfcc-stöd}
-translate W CCDlgConfirmXfcc {Bekräfta drag}
-translate W CCDlgSubjectPar {Ämnes-parameter:}
-translate W CCDlgDeleteBoxes {Töm In-/Utkorg}
-translate W CCDlgDeleteBoxesText {Vill du verkligen tömma dina In- och Utkorgskataloger för Korrespondensschack? Detta kräver en ny synkronisering för att visa den seanaste statusen på dina partier}
-translate W CCDlgConfirmMove {Bekräfta drag}
-translate W CCDlgConfirmMoveText {Om du bekräftar, kommer följande drag och kommentar att skickas till servern:}
+translate W CCDlgInternalXfcc {Anvï¿½nd internt Xfcc-stï¿½d}
+translate W CCDlgConfirmXfcc {Bekrï¿½fta drag}
+translate W CCDlgSubjectPar {ï¿½mnes-parameter:}
+translate W CCDlgDeleteBoxes {Tï¿½m In-/Utkorg}
+translate W CCDlgDeleteBoxesText {Vill du verkligen tï¿½mma dina In- och Utkorgskataloger fï¿½r Korrespondensschack? Detta krï¿½ver en ny synkronisering fï¿½r att visa den seanaste statusen pï¿½ dina partier}
+translate W CCDlgConfirmMove {Bekrï¿½fta drag}
+translate W CCDlgConfirmMoveText {Om du bekrï¿½ftar, kommer fï¿½ljande drag och kommentar att skickas till servern:}
 translate W CCDlgDBGameToLong {Inkonsekvent huvudvariation}
-translate W CCDlgDBGameToLongError {Huvudvariationen i din databas är längre än partiet i din Inkorg. Om Inkorgen innehåller aktuella partier, dvs precis efter en synkronisering, lades några drag felaktigt till i huvudvariationen i databasen.\nI detta fall var god och förkorta huvudvariationen till (maximalt) drag\n}
+translate W CCDlgDBGameToLongError {Huvudvariationen i din databas ï¿½r lï¿½ngre ï¿½n partiet i din Inkorg. Om Inkorgen innehï¿½ller aktuella partier, dvs precis efter en synkronisering, lades nï¿½gra drag felaktigt till i huvudvariationen i databasen.\nI detta fall var god och fï¿½rkorta huvudvariationen till (maximalt) drag\n}
 translate W CCDlgStartEmail {Starta ett nytt eMail-parti}
 translate W CCDlgYourName {Ditt Namn:}
 translate W CCDlgYourMail {Din eMail-address:}
-translate W CCDlgOpponentName {Motståndarnamn:}
-translate W CCDlgOpponentMail {Motståndarens eMail-address:}
+translate W CCDlgOpponentName {Motstï¿½ndarnamn:}
+translate W CCDlgOpponentMail {Motstï¿½ndarens eMail-address:}
 translate W CCDlgGameID {Parti-ID (unikt):}
 translate W CCDlgTitNoOutbox {Scid: Korrespondensschackutkorg}
 translate W CCDlgTitNoInbox {Scid: Korrespondensschackinkorg}
 translate W CCDlgTitNoGames {Scid: Inga Korrespondensschackpartier}
 translate W CCErrInboxDir {Korrespondensschacksinkorgskatalog:}
 translate W CCErrOutboxDir {Korrespondensschacksutkorgskatalog:}
-translate W CCErrDirNotUsable {finns inte eller är inte möjlig att använda!\nVar god och kontrollera och korrigera inställningarna.}
-translate W CCErrNoGames {innehåller inga partier!\nVar god och hämta dem först.}
+translate W CCErrDirNotUsable {finns inte eller ï¿½r inte mï¿½jlig att anvï¿½nda!\nVar god och kontrollera och korrigera instï¿½llningarna.}
+translate W CCErrNoGames {innehï¿½ller inga partier!\nVar god och hï¿½mta dem fï¿½rst.}
 translate W CCDlgTitNoCCDB {Scid: Ingen Korrespondensdatabas}
-translate W CCErrNoCCDB {Ingen Databas av typ 'Korrespondens' är öppnad. Var god och öppna en innan du använder Korrespondensschackfunktioner.}
-translate W CCFetchBtn {Hämta partier från servern och bearbeta Inkorgen}
-translate W CCPrevBtn {Gå till tidigare parti}
-translate W CCNextBtn {Gå till nästa parti}
+translate W CCErrNoCCDB {Ingen Databas av typ 'Korrespondens' ï¿½r ï¿½ppnad. Var god och ï¿½ppna en innan du anvï¿½nder Korrespondensschackfunktioner.}
+translate W CCFetchBtn {Hï¿½mta partier frï¿½n servern och bearbeta Inkorgen}
+translate W CCPrevBtn {Gï¿½ till tidigare parti}
+translate W CCNextBtn {Gï¿½ till nï¿½sta parti}
 translate W CCSendBtn {Skicka drag}
-translate W CCEmptyBtn {Töm Inkorgen och Utkorgen}
-translate W CCHelpBtn {Hjälp med ikoner och statusindikatorer.\nFör generell Hjälp tryck på F1!}
+translate W CCEmptyBtn {Tï¿½m Inkorgen och Utkorgen}
+translate W CCHelpBtn {Hjï¿½lp med ikoner och statusindikatorer.\nFï¿½r generell Hjï¿½lp tryck pï¿½ F1!}
 translate W CCDlgServerName {Servernamn:}
 translate W CCDlgLoginName  {Inloggningsnamn:}
-translate W CCDlgPassword   {Lösenord:}
+translate W CCDlgPassword   {Lï¿½senord:}
 translate W CCDlgURL        {Xfcc-URL:}
 translate W CCDlgRatingType {Ratingtyp:}
 translate W CCDlgDuplicateGame {Icke unikt parti-ID}
-translate W CCDlgDuplicateGameError {Detta parti finns fler än en gång i din databas. Var god och ta bort alla dubbletter och komprimera din partifil (Arkiv/Underhåll/Komprimera Databas).}
+translate W CCDlgDuplicateGameError {Detta parti finns fler ï¿½n en gï¿½ng i din databas. Var god och ta bort alla dubbletter och komprimera din partifil (Arkiv/Underhï¿½ll/Komprimera Databas).}
 translate W CCDlgSortOption {Sorterar:}
-translate W CCDlgListOnlyOwnMove {Bara partier där jag är vid draget}
+translate W CCDlgListOnlyOwnMove {Bara partier dï¿½r jag ï¿½r vid draget}
 translate W CCOrderClassicTxt {Plats, Evenemang, Runda, Resultat, Vit, Svart}
 translate W CCOrderMyTimeTxt {Min klocka}
-translate W CCOrderTimePerMoveTxt {Tid per drag till nästa tidskontroll}
+translate W CCOrderTimePerMoveTxt {Tid per drag till nï¿½sta tidskontroll}
 translate W CCOrderStartDate {Startdatum}
-translate W CCOrderOppTimeTxt {Motståndarens klocka}
+translate W CCOrderOppTimeTxt {Motstï¿½ndarens klocka}
 translate W CCDlgConfigRelay {Konfigurera ICCF-observationer}
-translate W CCDlgConfigRelayHelp {Gå till partisidan på http://www.iccf-webchess.com och visa partiet att observera.  Om du ser schackbräder kopiera webadressen från din webläsare till listan nedanför. Bara en webadress per rad!\nExempel: http://www.iccf-webchess.com/MakeAMove.aspx?id=266452}
+translate W CCDlgConfigRelayHelp {Gï¿½ till partisidan pï¿½ http://www.iccf-webchess.com och visa partiet att observera.  Om du ser schackbrï¿½der kopiera webadressen frï¿½n din weblï¿½sare till listan nedanfï¿½r. Bara en webadress per rad!\nExempel: http://www.iccf-webchess.com/MakeAMove.aspx?id=266452}
 
-translate W ExtHWConfigConnection {Konfigurera extern hårdvara}
+translate W ExtHWConfigConnection {Konfigurera extern hï¿½rdvara}
 translate W ExtHWPort {Port}
 translate W ExtHWEngineCmd {Schackmotorkommando}
 translate W ExtHWEngineParam {Schackmotorparameter}
 translate W ExtHWShowButton {Visa knapp}
-translate W ExtHWHardware {Hårdvara}
+translate W ExtHWHardware {Hï¿½rdvara}
 translate W ExtHWNovag {Novag Citrine}
 translate W ExtHWInputEngine {Inmatningsmotor}
-translate W ExtHWNoBoard {Inget bräde}
+translate W ExtHWNoBoard {Inget brï¿½de}
 translate W IEConsole {Inmatningsmotorkonsol}
-translate W IESending {Drag skickade för}
+translate W IESending {Drag skickade fï¿½r}
 translate W IESynchronise {Synkronisera}
 translate W IERotate  {Rotera}
 translate W IEUnableToStart {Kan inte starta Inmatningsmotor:}
 translate W DoneWithPosition {Klar med position}
-translate W Board {Bräde}
+translate W Board {Brï¿½de}
 translate W showGameInfo {Visa partiinformation}
-translate W autoResizeBoard {Ändra storleken på brädet automatiskt}
-translate W DockTop {Drag överst}
+translate W autoResizeBoard {ï¿½ndra storleken pï¿½ brï¿½det automatiskt}
+translate W DockTop {Drag ï¿½verst}
 translate W DockBottom {Drag nederst}
-translate W DockLeft {Drag till vänster}
-translate W DockRight {Drag till höger}
+translate W DockLeft {Drag till vï¿½nster}
+translate W DockRight {Drag till hï¿½ger}
 translate W Undock {Avdocka}
-translate W ChangeIcon {Ändra ikon...}
+translate W ChangeIcon {ï¿½ndra ikon...}
 # ====== TODO To be translated ======
 translate W More {More}
 
 # Drag & Drop
-translate W CannotOpenUri {Åtkomst nekad för foldern '%s'.}
-translate W InvalidUri {Innehåll som släpps är inte en giltig URI-lista.}
-translate W UriRejected	{Följande filer är förkastade:}
+translate W CannotOpenUri {ï¿½tkomst nekad fï¿½r foldern '%s'.}
+translate W InvalidUri {Innehï¿½ll som slï¿½pps ï¿½r inte en giltig URI-lista.}
+translate W UriRejected	{Fï¿½ljande filer ï¿½r fï¿½rkastade:}
 translate W UriRejectedDetail {Bara listade filtyper kan behandlas:}
-translate W EmptyUriList {Innehåll som släpps är tomt.}
+translate W EmptyUriList {Innehï¿½ll som slï¿½pps ï¿½r tomt.}
 # ====== TODO To be translated ======
 translate W SelectionOwnerDidntRespond {Timeout during drop action: selection owner didn't respond.}
 # ====== TODO To be translated ======
@@ -1866,27 +1880,27 @@ translateECO W {
   Advance Avancemang
   {as Black} {som Svart}
   Attack Angrepp
-  Bishop Löpare
-  Bishop's Löpar
+  Bishop Lï¿½pare
+  Bishop's Lï¿½par
   Classical Klassisk
-  Closed Stängd
-  {Closed System} {Stängt system}
+  Closed Stï¿½ngd
+  {Closed System} {Stï¿½ngt system}
   Counterattack Motangrepp
   Countergambit Motgambit
-  Declined {, Avböjd}
-  Defence Försvar
-  deferred förvägrad
-  Deferred {, förvägrad}
+  Declined {, Avbï¿½jd}
+  Defence Fï¿½rsvar
+  deferred fï¿½rvï¿½grad
+  Deferred {, fï¿½rvï¿½grad}
   Early Tidig
   Exchange Avbyte
   Game Parti
-  Improved förbättrad
+  Improved fï¿½rbï¿½ttrad
   King's Kung
   Knight Springar
   Line Variant
   {Main Line} Huvudvariant
-  Open Öppen
-  Opening Öppning
+  Open ï¿½ppen
+  Opening ï¿½ppning
   Queen's Dam
   Queenswap Damavbyte
   Symmetrical Symmetrisk
@@ -1903,12 +1917,12 @@ translateECO W {
   Rauzer Rauzer
   Sveshnikov Sveschnikov
 
-  Austrian Österrikisk
+  Austrian ï¿½sterrikisk
   Berlin Berlin
   Bremen Bremen
   Catalan Katalansk
   Czech Tjeckisk
-  Dutch Holländsk
+  Dutch Hollï¿½ndsk
   English Engelsk
   French Fransk
   Hungarian Ungersk
@@ -1933,34 +1947,34 @@ translateECO W {
 
   {Accelerated Fianchetto} {Accelererad Fianchetto}
   {Accelerated Pterodactyl} {Accelererad Pterodactyl}
-  {Alekhine Defence} Aljechins Försvar
+  {Alekhine Defence} Aljechins Fï¿½rsvar
   {Alekhine Variation} Aljechin-Variant
-  {Alekhine: Sämisch Attack} {Aljechin: Wiener-system (Sämisch-Angrepp)}
-  {Anderssen Opening} Anderssen-Öppning
+  {Alekhine: Sï¿½misch Attack} {Aljechin: Wiener-system (Sï¿½misch-Angrepp)}
+  {Anderssen Opening} Anderssen-ï¿½ppning
   {Anti-King's Indian} Anti-Kungsindisk
-  {Austrian Attack} {Österrikiskt Angrepp}
+  {Austrian Attack} {ï¿½sterrikiskt Angrepp}
   {Benko Gambit} Volga-Gambit
-  {Benko Opening} Benkö-Öppning
-  {Berlin Defence} {Berlinförsvar}
+  {Benko Opening} Benkï¿½-ï¿½ppning
+  {Berlin Defence} {Berlinfï¿½rsvar}
   Chameleon Chamaleon
   Chelyabinsk Chelyabinsk
-  {Classical Defence} {Klassiskt försvar}
-  {Spanish: Classical Defence} {Spanskt: Klassiskt (Cordel-) försvar}
+  {Classical Defence} {Klassiskt fï¿½rsvar}
+  {Spanish: Classical Defence} {Spanskt: Klassiskt (Cordel-) fï¿½rsvar}
   {Classical Exchange} {Klassiskt Avbyte}
   {Classical Variation} {Klassisk Variant}
-  {Closed Berlin} {Stängd Berlin}
-  {Open Berlin} {Öppen Berlin}
+  {Closed Berlin} {Stï¿½ngd Berlin}
+  {Open Berlin} {ï¿½ppen Berlin}
   {Bird's,} {Bird,}
-  {Bird's Defence} Birds försvar
-  {Bird's Deferred} {Förvägrad Bird}
-  {Bishop's Opening} Löparspel
+  {Bird's Defence} Birds fï¿½rsvar
+  {Bird's Deferred} {Fï¿½rvï¿½grad Bird}
+  {Bishop's Opening} Lï¿½parspel
   {Botvinnik System} Botvinnik-system
   {Central Variation} Centralvariant
   {Centre Attack} Centrumsangrepp
   {Centre Game} Mittgambit
   {Danish Gambit} {Nordisk Gambit}
   Dragon Drake
-  {Dutch Variation} {Holländsk Variant}
+  {Dutch Variation} {Hollï¿½ndsk Variant}
   {Early Exchange} {Tidigt Avbyte}
   {Early Queenswap} {Tidigt Dambyte}
   {English Attack} {Engelskt Angrepp}
@@ -1976,16 +1990,16 @@ translateECO W {
   {Four Pawns Attack} Fyrbondeangrepp
   {French Variation} {Fransk Variant}
   {From Gambit} {From-Gambit}
-  {Goring Gambit} {Göring-Gambit}
+  {Goring Gambit} {Gï¿½ring-Gambit}
   {Grob Gambit} {Grobs Gambit}
-  {Hungarian Defence} {Ungerskt försvar}
+  {Hungarian Defence} {Ungerskt fï¿½rsvar}
   {Indian Variation} {Indisk Variant}
   {Italian Game} {Italienskt Parti}
-  KGD {Avböjd Kungssgambit}
-  {Classical KGD} {Klassisk avböjd Kungsgambit}
+  KGD {Avbï¿½jd Kungssgambit}
+  {Classical KGD} {Klassisk avbï¿½jd Kungsgambit}
   {Keres Variation} Keres-Variant
   KGA {Antagen Kungsgambit}
-  {KGA: Bishop's Gambit} Kungslöpargambit
+  {KGA: Bishop's Gambit} Kungslï¿½pargambit
   {KGA: King's Knight Gambit} Kungsspringargambit
   {King's Gambit} Kungsgambit
   {King's Gambit Accepted} {Antagen Kungsgambit}
@@ -2006,40 +2020,40 @@ translateECO W {
   {Old Benoni} {Klassisk Benoni}
   {Old Indian} Gammalindisk
   {Old Indian Attack} {Gammalindisk Indisk attack}
-  {Old Steinitz} Gammal Steinitz-öppning
-  {Open Game} {Öppet Parti}
-  {Poisoned Pawn} {Förgiftad Bonde}
+  {Old Steinitz} Gammal Steinitz-ï¿½ppning
+  {Open Game} {ï¿½ppet Parti}
+  {Poisoned Pawn} {Fï¿½rgiftad Bonde}
   {Polish Variation} {Polsk Variant}
   {Polugaevsky Variation} {Polugajevski-Variant}
   {Queen's Gambit} Damgambit
   {Queen's Gambit Accepted} {Antagen Damgambit}
   QGA {Antagen Damgambit}
   {Queen's Gambit Accepted (QGA)} {Antagen Damgambit}
-  {Reversed QGA} {Omvänd antagen Damgambit}
-  QGD {Avböjd Damgambit}
-  {Queen's Gambit Declined (QGD)} {Avböjd Damgambit}
-  {Reversed QGD} {Omvänd avböjd Damgambit}
+  {Reversed QGA} {Omvï¿½nd antagen Damgambit}
+  QGD {Avbï¿½jd Damgambit}
+  {Queen's Gambit Declined (QGD)} {Avbï¿½jd Damgambit}
+  {Reversed QGD} {Omvï¿½nd avbï¿½jd Damgambit}
   {Queen's Indian} Damindisk
   {Queen's Pawn} Dambonde
   {Queen's Pawn Game} Dambondespel
-  {Reversed Slav} {Omvänd Slavisk}
+  {Reversed Slav} {Omvï¿½nd Slavisk}
   {Rubinstein Variation} Rubinstein-Variant
   {Russian Game} {Ryskt Parti}
   {Russian Game (Petroff Defence)} {Ryskt Parti}
   {Russian-Three Knights Game} {Ryskt trespringarspel}
   {Scandinavian (Centre Counter)} Skandinavisk
-  Schliemann Jänisch
-  {Schliemann (Jänisch)} {Jänisch-Gambit (Schliemann)}
-  {Scotch Opening} {Skottsk öppning}
-  {Sicilian Defence} {Sicilianskt försvar}
+  Schliemann Jï¿½nisch
+  {Schliemann (Jï¿½nisch)} {Jï¿½nisch-Gambit (Schliemann)}
+  {Scotch Opening} {Skottsk ï¿½ppning}
+  {Sicilian Defence} {Sicilianskt fï¿½rsvar}
   {Sicilian Variation} {Siciliansk Variant}
-  {Slav Defence} {Slaviskt försvar}
+  {Slav Defence} {Slaviskt fï¿½rsvar}
   Smith-Morra Morra
   {Smith-Morra Accepted} {Antagen Morra-Gambit}
   {Smith-Morra Gambit} Morra-Gambit
   {Spanish (Ruy Lopez)} {Spanskt Parti}
-  {Start position} Utgångsställning
-  {Steinitz Deferred} Förvägrad Rubinstein
+  {Start position} Utgï¿½ngsstï¿½llning
+  {Steinitz Deferred} Fï¿½rvï¿½grad Rubinstein
   {Swedish Variation} {Svensk Variant}
   {Swiss Variation} {Schweizisk Variant}
   {Tarrasch's Gambit} {Tarrasch-Gambit}
@@ -2047,11 +2061,11 @@ translateECO W {
   {3 Knights} Trespringar
   {Three Knights Game} Trespringarspel
   {Three Pawns Attack} Trebondeangrepp
-  {Two Knights} Tvåspringar
-  {Two Knights Defence} Tvåspringar-försvar
-  {Two Knights Variation} Tvåspringar-variant
-  {Two Pawns} Tvåbonde
-  {Two Pawns Attack} Tvåbondeangrepp
+  {Two Knights} Tvï¿½springar
+  {Two Knights Defence} Tvï¿½springar-fï¿½rsvar
+  {Two Knights Variation} Tvï¿½springar-variant
+  {Two Pawns} Tvï¿½bonde
+  {Two Pawns Attack} Tvï¿½bondeangrepp
   {Wing Gambit} Flygel-Gambit
   {Yugoslav Attack} {Jugoslaviskt Angrepp}
 }
@@ -2062,180 +2076,180 @@ translateECO W {
 
 set tips(W) {
   {
-    Scid har över 30 <a Index>Hjälpsidor</a>, och i de flesta fönster kan du
-    genom att trycka <b>F1</b> få hjälp om det fönster du för tillfället har
+    Scid har ï¿½ver 30 <a Index>Hjï¿½lpsidor</a>, och i de flesta fï¿½nster kan du
+    genom att trycka <b>F1</b> fï¿½ hjï¿½lp om det fï¿½nster du fï¿½r tillfï¿½llet har
     aktivt.
   }
   {
-    Vissa fönster (t ex Partiinformation och <a Switcher>Databasväljaren</a>)
-    har en meny för höger musknapp. Prova att högerklicka i varje fönster så
-    ser du vilka som har det och vilka funktioner du kommer åt den vägen.
+    Vissa fï¿½nster (t ex Partiinformation och <a Switcher>Databasvï¿½ljaren</a>)
+    har en meny fï¿½r hï¿½ger musknapp. Prova att hï¿½gerklicka i varje fï¿½nster sï¿½
+    ser du vilka som har det och vilka funktioner du kommer ï¿½t den vï¿½gen.
   }
   {
-    Du kan ange drag på mer än ett sätt, så du kan välja vilket som passar dig
-    bäst. Du kan använda musen (med eller utan dragförslag) eller tangentbordet
-    (med eller utan autokomplettering). Läs hjälpsidan för
-    <a Moves>Att ange drag</a> för mer information.
+    Du kan ange drag pï¿½ mer ï¿½n ett sï¿½tt, sï¿½ du kan vï¿½lja vilket som passar dig
+    bï¿½st. Du kan anvï¿½nda musen (med eller utan dragfï¿½rslag) eller tangentbordet
+    (med eller utan autokomplettering). Lï¿½s hjï¿½lpsidan fï¿½r
+    <a Moves>Att ange drag</a> fï¿½r mer information.
   }
   {
-    Om du har databaser du ofta öppnar så kan du lägga till ett
-    <a Bookmarks>Bokmärke</a> för varje databas. Du kommer då att kunna öppna
-    databaserna snabbare via bokmärkesmenyn.
+    Om du har databaser du ofta ï¿½ppnar sï¿½ kan du lï¿½gga till ett
+    <a Bookmarks>Bokmï¿½rke</a> fï¿½r varje databas. Du kommer dï¿½ att kunna ï¿½ppna
+    databaserna snabbare via bokmï¿½rkesmenyn.
   }
   {
     Du kan se alla drag i det aktuella partiet (inklusive varianter och kommentarer)
-    genom att öppna <a PGN>PGN-fönstret</a>.
-    Du navigerar igenom partiet i PGN-fönstret genom att klicka på valfritt drag med
-    vänster musknapp. Genom att klicka på draget med mellan- eller högermusknapp så
-    får du en förhandsvisning av just den ställningen.
+    genom att ï¿½ppna <a PGN>PGN-fï¿½nstret</a>.
+    Du navigerar igenom partiet i PGN-fï¿½nstret genom att klicka pï¿½ valfritt drag med
+    vï¿½nster musknapp. Genom att klicka pï¿½ draget med mellan- eller hï¿½germusknapp sï¿½
+    fï¿½r du en fï¿½rhandsvisning av just den stï¿½llningen.
   }
   {
-    Du kan kopiera partier mellan databaserna i <a Switcher>Databasväljaren</a> genom
-    att dra-och-släppa dem mellan respektive databas.
+    Du kan kopiera partier mellan databaserna i <a Switcher>Databasvï¿½ljaren</a> genom
+    att dra-och-slï¿½ppa dem mellan respektive databas.
   }
   {
-    Om du ofta använder <a Tree>Trädfönstret</a> med stora databaser, är det värt att välja
-    <b>Fyll cachefil</b> från Arkivmenyn i Trädfönstret. Detta innebär att trädstatistik för
-    många av de vanligare ställningarna sparas, vilket ger en snabbare trädåtkomst för databasen
-    ifråga.
+    Om du ofta anvï¿½nder <a Tree>Trï¿½dfï¿½nstret</a> med stora databaser, ï¿½r det vï¿½rt att vï¿½lja
+    <b>Fyll cachefil</b> frï¿½n Arkivmenyn i Trï¿½dfï¿½nstret. Detta innebï¿½r att trï¿½dstatistik fï¿½r
+    mï¿½nga av de vanligare stï¿½llningarna sparas, vilket ger en snabbare trï¿½dï¿½tkomst fï¿½r databasen
+    ifrï¿½ga.
   }
   {
-    <a Tree>Trädfönstret</a> kan visa alla drag från den aktuella ställningen. Men om också vill
-    se alla dragföljder som har lett till denna ställning kan du få fram det genom att skapa en
-   <a OpReport>Öppningsrapport</a>.
+    <a Tree>Trï¿½dfï¿½nstret</a> kan visa alla drag frï¿½n den aktuella stï¿½llningen. Men om ocksï¿½ vill
+    se alla dragfï¿½ljder som har lett till denna stï¿½llning kan du fï¿½ fram det genom att skapa en
+   <a OpReport>ï¿½ppningsrapport</a>.
   }
   {
-    Du kan vänster- eller högerklicka i en kolumn i <a GameList>Partilistan</a> för att ändra
+    Du kan vï¿½nster- eller hï¿½gerklicka i en kolumn i <a GameList>Partilistan</a> fï¿½r att ï¿½ndra
     dess bredd.
   }
   {
-    Med <a PInfo>Spelarinformationen</a> aktuell (klicka på endera spelarens namn under brädet i
-    huvudfönstret för att få fram den) är det enkelt att <a Searches filtret>Filtrera</a> fram partier
-    av en särskild spelares enskilda resultat. Klicka bara på valfritt värde som har angivits med
-    <red>röd text</red>.
+    Med <a PInfo>Spelarinformationen</a> aktuell (klicka pï¿½ endera spelarens namn under brï¿½det i
+    huvudfï¿½nstret fï¿½r att fï¿½ fram den) ï¿½r det enkelt att <a Searches filtret>Filtrera</a> fram partier
+    av en sï¿½rskild spelares enskilda resultat. Klicka bara pï¿½ valfritt vï¿½rde som har angivits med
+    <red>rï¿½d text</red>.
   }
   {
-    När du studerar öppningar kan det vara en poäng att markera valen <b>Bönder</b> eller <b>Filer</b> i
-    <a Searches Board>Sök aktuell position</a>. Genom dessa val kan du hitta andra öppningar som ger
+    Nï¿½r du studerar ï¿½ppningar kan det vara en poï¿½ng att markera valen <b>Bï¿½nder</b> eller <b>Filer</b> i
+    <a Searches Board>Sï¿½k aktuell position</a>. Genom dessa val kan du hitta andra ï¿½ppningar som ger
     liknande bondestrukturer.
   }
   {
-    Du kan högerklicka i partiinformationsdelen av huvudfönstret (under brädet) för att få fram en
-    kontextmeny. Du kan t ex göra så att Scid döljer nästa drag i ett parti, vilket kan vara användbart
-    om du vill träna genom att "gissa" nästa drag.
+    Du kan hï¿½gerklicka i partiinformationsdelen av huvudfï¿½nstret (under brï¿½det) fï¿½r att fï¿½ fram en
+    kontextmeny. Du kan t ex gï¿½ra sï¿½ att Scid dï¿½ljer nï¿½sta drag i ett parti, vilket kan vara anvï¿½ndbart
+    om du vill trï¿½na genom att "gissa" nï¿½sta drag.
   }
   {
-    Om du ofta <a Maintenance>Underhåller</a> stora databaser kan du utföra flera underhållsuppgifter
-    vid samma tillfälle via <a Maintenance Cleaner>Databasverktyget</a>.
+    Om du ofta <a Maintenance>Underhï¿½ller</a> stora databaser kan du utfï¿½ra flera underhï¿½llsuppgifter
+    vid samma tillfï¿½lle via <a Maintenance Cleaner>Databasverktyget</a>.
   }
   {
-    Om du har en stor databas där de flesta partierna har ett evenemangsdatum och du vill ha partierna i
-    datumordning bör du överväga att <a Sorting>Sortera</a> den på evenemangsdatum i första hand och
-    evenemang i andra hand, istället för datum och evenemang, då detta kommer att hålla turneringspartierna
-    från olika datum samman. (Under förutsättning att alla partier har samma evenemangsdatum naturligtvis).
-    Alternativt kan du se till att fälten evenemang, rond och datum är så enhetliga och korrekta som möjligt.
+    Om du har en stor databas dï¿½r de flesta partierna har ett evenemangsdatum och du vill ha partierna i
+    datumordning bï¿½r du ï¿½vervï¿½ga att <a Sorting>Sortera</a> den pï¿½ evenemangsdatum i fï¿½rsta hand och
+    evenemang i andra hand, istï¿½llet fï¿½r datum och evenemang, dï¿½ detta kommer att hï¿½lla turneringspartierna
+    frï¿½n olika datum samman. (Under fï¿½rutsï¿½ttning att alla partier har samma evenemangsdatum naturligtvis).
+    Alternativt kan du se till att fï¿½lten evenemang, rond och datum ï¿½r sï¿½ enhetliga och korrekta som mï¿½jligt.
     (ms).
   }
   {
-    Det kan vara en bra idé att <a Maintenance Spellcheck>Stavningskontrollera</a> din databas innan du
-    <a Maintenance Twins>Tar bort dubbletter</a> då Scid har större möjlighet att hitta dubbletterna och
-    markera dessa för borttagning.
+    Det kan vara en bra idï¿½ att <a Maintenance Spellcheck>Stavningskontrollera</a> din databas innan du
+    <a Maintenance Twins>Tar bort dubbletter</a> dï¿½ Scid har stï¿½rre mï¿½jlighet att hitta dubbletterna och
+    markera dessa fï¿½r borttagning.
   }
   {
-    <a Flags>Flaggor</a> är användbara för att markera upp partier med karaktäristika du vill söka på senare,
-    såsom bondeställning, taktiska finesser, osv. Du kan söka på flaggor när du söker på fält i partihuvudet.
+    <a Flags>Flaggor</a> ï¿½r anvï¿½ndbara fï¿½r att markera upp partier med karaktï¿½ristika du vill sï¿½ka pï¿½ senare,
+    sï¿½som bondestï¿½llning, taktiska finesser, osv. Du kan sï¿½ka pï¿½ flaggor nï¿½r du sï¿½ker pï¿½ fï¿½lt i partihuvudet.
   }
   {
-    Om du går igenom ett parti, och helt enkelt vill testa en ny variant utan att förändra partiet i sig, kan
-    du slå på Försöksläget (Trial mode) genom att trycka <b>Ctrl+Mellanslag</b> eller från verktygsraden. Återgå till
-    ursprungspartiet när du är klar.
+    Om du gï¿½r igenom ett parti, och helt enkelt vill testa en ny variant utan att fï¿½rï¿½ndra partiet i sig, kan
+    du slï¿½ pï¿½ Fï¿½rsï¿½kslï¿½get (Trial mode) genom att trycka <b>Ctrl+Mellanslag</b> eller frï¿½n verktygsraden. ï¿½tergï¿½ till
+    ursprungspartiet nï¿½r du ï¿½r klar.
   }
   {
-    Om du vill hitta det mest betydelsefulla partiet (med högst rankade spelare) i en viss position kan du
-    öppna <a Tree>Trädfönstret</a> och i denna öppna listan med de bästa partierna. I trädfönstret kan du till
-    och med begränsa partierna till endast ett särskilt resultat.
+    Om du vill hitta det mest betydelsefulla partiet (med hï¿½gst rankade spelare) i en viss position kan du
+    ï¿½ppna <a Tree>Trï¿½dfï¿½nstret</a> och i denna ï¿½ppna listan med de bï¿½sta partierna. I trï¿½dfï¿½nstret kan du till
+    och med begrï¿½nsa partierna till endast ett sï¿½rskilt resultat.
   }
   {
-    Ett bra sätt att studera en öppning är att i en stor databas slå på träningsläget i <a Tree>Trädfönstret</a>,
-    och sedan spela igenom databasen för att se vilka varianter som förekommer oftast.
+    Ett bra sï¿½tt att studera en ï¿½ppning ï¿½r att i en stor databas slï¿½ pï¿½ trï¿½ningslï¿½get i <a Tree>Trï¿½dfï¿½nstret</a>,
+    och sedan spela igenom databasen fï¿½r att se vilka varianter som fï¿½rekommer oftast.
   }
   {
-    Om du har två databaser öppna, och vill ha ett variantträd att studera medan du går igenom ett parti
-    i den andra databasen kan du <b>Låsa</b> trädet i den databasen och sedan byta till den andra.
+    Om du har tvï¿½ databaser ï¿½ppna, och vill ha ett varianttrï¿½d att studera medan du gï¿½r igenom ett parti
+    i den andra databasen kan du <b>Lï¿½sa</b> trï¿½det i den databasen och sedan byta till den andra.
   }
   {
-    <a Tmt>Turneringssökaren</a> är inte bara användbar för att lokalisera en särskild
-    turnering. Du kan också använda den för att söka efter turneringar en specifik spelare nyligen deltagit
-    i, eller att bläddra genom turneringar som genomförts i ett visst land.
+    <a Tmt>Turneringssï¿½karen</a> ï¿½r inte bara anvï¿½ndbar fï¿½r att lokalisera en sï¿½rskild
+    turnering. Du kan ocksï¿½ anvï¿½nda den fï¿½r att sï¿½ka efter turneringar en specifik spelare nyligen deltagit
+    i, eller att blï¿½ddra genom turneringar som genomfï¿½rts i ett visst land.
   }
   {
-    Det finns ett antal vanliga ställningstyper definierade i <a Searches Material>Sök Material/Ställning</a>
-    fönstret som du kan ha nytta av när du studerar öppningar och mittspel.
+    Det finns ett antal vanliga stï¿½llningstyper definierade i <a Searches Material>Sï¿½k Material/Stï¿½llning</a>
+    fï¿½nstret som du kan ha nytta av nï¿½r du studerar ï¿½ppningar och mittspel.
   }
   {
-    När du söker på <a Searches Material>Material eller Ställning</a> kan det ofta vara fördelaktigt att begränsa
-    sökningen till sådana partier där ställningen eller materialet förekommit i åtminstone några drag. Du slipper
-    du få med träffar där situationen du söker uppkom helt tillfälligt.
+    Nï¿½r du sï¿½ker pï¿½ <a Searches Material>Material eller Stï¿½llning</a> kan det ofta vara fï¿½rdelaktigt att begrï¿½nsa
+    sï¿½kningen till sï¿½dana partier dï¿½r stï¿½llningen eller materialet fï¿½rekommit i ï¿½tminstone nï¿½gra drag. Du slipper
+    du fï¿½ med trï¿½ffar dï¿½r situationen du sï¿½ker uppkom helt tillfï¿½lligt.
   }
   {
-    Om du har en viktig databas du inte vill radera av misstag kan du välja  <b>Enbart läsbar</b> från <b>Arkiv</b>
-    menyn efter att du har öppnat den. Alternativt kan du sätta dess filrättigheter till enbart läsrättigheter.
+    Om du har en viktig databas du inte vill radera av misstag kan du vï¿½lja  <b>Enbart lï¿½sbar</b> frï¿½n <b>Arkiv</b>
+    menyn efter att du har ï¿½ppnat den. Alternativt kan du sï¿½tta dess filrï¿½ttigheter till enbart lï¿½srï¿½ttigheter.
   }
   {
-    Om du använder XBoard eller WinBoard (eller något annat program som kan hantera FEN-notation via Urklippshanteraren)
-    och vill kopiera den aktuella ställningen från ditt program är det snabbaste sättet att göra det så här:
-    Välj <b>Kopiera position</b> från <b>Arkiv</b>-menyn i Xboard/Winboard, välj sedan <b>Klistra i utgångsställning</b>
+    Om du anvï¿½nder XBoard eller WinBoard (eller nï¿½got annat program som kan hantera FEN-notation via Urklippshanteraren)
+    och vill kopiera den aktuella stï¿½llningen frï¿½n ditt program ï¿½r det snabbaste sï¿½ttet att gï¿½ra det sï¿½ hï¿½r:
+    Vï¿½lj <b>Kopiera position</b> frï¿½n <b>Arkiv</b>-menyn i Xboard/Winboard, vï¿½lj sedan <b>Klistra i utgï¿½ngsstï¿½llning</b>
     i Redigera menyn i Scid.
   }
   {
-    I <a Searches Header>Sök i huvud</a>, är spelare-, evenemang-, plats-, och rondnamn okänsliga för VERSALER och
-    gemener och ger träffar varhelst de finns i ett namn. Om du vill kan du ange att du istället vill att sökningen <b>ska</b>
-    ta VERSALER/gemener i beaktande. Genom att använda jokertecken inom citationstecken (där "?" = motsvarar obestämt
-    enskilt tecken och "*" = noll eller flera tecken). Om du exempelvis anger "*BEL" (med citationstecken) i det platsfältet
+    I <a Searches Header>Sï¿½k i huvud</a>, ï¿½r spelare-, evenemang-, plats-, och rondnamn okï¿½nsliga fï¿½r VERSALER och
+    gemener och ger trï¿½ffar varhelst de finns i ett namn. Om du vill kan du ange att du istï¿½llet vill att sï¿½kningen <b>ska</b>
+    ta VERSALER/gemener i beaktande. Genom att anvï¿½nda jokertecken inom citationstecken (dï¿½r "?" = motsvarar obestï¿½mt
+    enskilt tecken och "*" = noll eller flera tecken). Om du exempelvis anger "*BEL" (med citationstecken) i det platsfï¿½ltet
     hittar du alla partier spelade i Belgien, men exkluderar de som spelats i Belgrad.
   }
   {
-    Om du vill redigera ett drag i ett parti utan att förlora alla de drag som spelats efter detta kan du öppna
-    <a Import>Importera ett parti i PGN-format</a> fönstret i Verktygsmenyn. Klicka där på <b>Klistra i aktuellt parti</b>
+    Om du vill redigera ett drag i ett parti utan att fï¿½rlora alla de drag som spelats efter detta kan du ï¿½ppna
+    <a Import>Importera ett parti i PGN-format</a> fï¿½nstret i Verktygsmenyn. Klicka dï¿½r pï¿½ <b>Klistra i aktuellt parti</b>
     , redigera partiet och avsluta med <b>Importera</b>.
   }
   {
-    Om du har en ECO klassificeringsfil laddad, kan du nå den mest exakt klassificerade ställningen för det aktuella partiet
-    genom att välja <b>Identifiera öppning</b> i <b>Partier</b> menyn (kortkommando: <b>Ctrl+Shift+D</b>).
+    Om du har en ECO klassificeringsfil laddad, kan du nï¿½ den mest exakt klassificerade stï¿½llningen fï¿½r det aktuella partiet
+    genom att vï¿½lja <b>Identifiera ï¿½ppning</b> i <b>Partier</b> menyn (kortkommando: <b>Ctrl+Shift+D</b>).
   }
   {
-    När du vill se hur stor en fil är, eller vill se när den senast redigerades innan du öppnar den kan du använda
-    <a Finder>Sök filer</a> (Arkiv - Sök filer).
+    Nï¿½r du vill se hur stor en fil ï¿½r, eller vill se nï¿½r den senast redigerades innan du ï¿½ppnar den kan du anvï¿½nda
+    <a Finder>Sï¿½k filer</a> (Arkiv - Sï¿½k filer).
   }
   {
-    En <a repetoire>Repetoarfil</a> är ett utmärkt sätt att hålla koll på dina favoritöppningar, eller hitta partier där
-    där de har spelats. När du väl har skapat en repetoarfil kan du genomsöka nya filer utifrån repetoarfilen, och titta
-    igenom alla partier med just dina öppningar.
+    En <a repetoire>Repetoarfil</a> ï¿½r ett utmï¿½rkt sï¿½tt att hï¿½lla koll pï¿½ dina favoritï¿½ppningar, eller hitta partier dï¿½r
+    dï¿½r de har spelats. Nï¿½r du vï¿½l har skapat en repetoarfil kan du genomsï¿½ka nya filer utifrï¿½n repetoarfilen, och titta
+    igenom alla partier med just dina ï¿½ppningar.
   }
   {
-    Genom att skapa en <a OpReport>Öppningsrapport</a> har du en utmärkt möjlighet att lära dig en ny spelöppning. Du kan få
-    information om resultat, hur remiaktig den är, vilka vanliga positionella teman som dyker upp, och mycket mer.
+    Genom att skapa en <a OpReport>ï¿½ppningsrapport</a> har du en utmï¿½rkt mï¿½jlighet att lï¿½ra dig en ny spelï¿½ppning. Du kan fï¿½
+    information om resultat, hur remiaktig den ï¿½r, vilka vanliga positionella teman som dyker upp, och mycket mer.
   }
   {
-    Du kan kommentera den aktuella ställningen med de vanligaste symbolerna (!, !?, +=, etc) utan att behöva använda
-    <a Comment>Kommentarseditorn<a>. Där du exempelvis vill ange ett bra drag skriver du "!" och trycker sedan ENTER
-    så läggs "!" symbolen till draget. Se även hjälpsidan <a Moves>Ange drag</a> för mer detaljerad information.
+    Du kan kommentera den aktuella stï¿½llningen med de vanligaste symbolerna (!, !?, +=, etc) utan att behï¿½va anvï¿½nda
+    <a Comment>Kommentarseditorn<a>. Dï¿½r du exempelvis vill ange ett bra drag skriver du "!" och trycker sedan ENTER
+    sï¿½ lï¿½ggs "!" symbolen till draget. Se ï¿½ven hjï¿½lpsidan <a Moves>Ange drag</a> fï¿½r mer detaljerad information.
   }
   {
-    Om du bläddrar igenom öppningarna i en databas i <a Tree>Trädfönstret</a>, får du en användbar överblick över hur
-    väl öppningen fungerar i sentida partier mellan högratade spelare om du öppnar statistikfönstret (kortkommando: Ctrl+I).
+    Om du blï¿½ddrar igenom ï¿½ppningarna i en databas i <a Tree>Trï¿½dfï¿½nstret</a>, fï¿½r du en anvï¿½ndbar ï¿½verblick ï¿½ver hur
+    vï¿½l ï¿½ppningen fungerar i sentida partier mellan hï¿½gratade spelare om du ï¿½ppnar statistikfï¿½nstret (kortkommando: Ctrl+I).
   }
   {
-    Du ändrar enkelt huvudfönstrets brädstorlek genom att hålla nere <b>Ctrl</b> och <b>Shift</b> tangenterna, samtidigt
-    som du trycker höger- eller vänster piltangent.
+    Du ï¿½ndrar enkelt huvudfï¿½nstrets brï¿½dstorlek genom att hï¿½lla nere <b>Ctrl</b> och <b>Shift</b> tangenterna, samtidigt
+    som du trycker hï¿½ger- eller vï¿½nster piltangent.
   }
   {
-    Efter genomförd <a Searches>Sökning</a>, är det enkelt att navigera genom urvalet genom att hålla nere <b>Ctrl</b>
-    tangenten samtidigt som du trycker upp- eller nerpiltangenterna för att gå till föregående eller nästa parti i
+    Efter genomfï¿½rd <a Searches>Sï¿½kning</a>, ï¿½r det enkelt att navigera genom urvalet genom att hï¿½lla nere <b>Ctrl</b>
+    tangenten samtidigt som du trycker upp- eller nerpiltangenterna fï¿½r att gï¿½ till fï¿½regï¿½ende eller nï¿½sta parti i
     <a Searches filtret>Urvalet</a>.
   }
 {
-  Du kan relativt enkelt rita pilar och färga rutor till dina kommentarer. Öppna <b>Kommentarseditorn</b>, klicka på <b>Infoga symbol</b> och välj önskad färg. Om du nu klickar på en första ruta, och därefter klickar på en andra så dras en pil i önskad färg från den första till den andra rutan. Klickar du bara på en ruta, blir den färgad.
+  Du kan relativt enkelt rita pilar och fï¿½rga rutor till dina kommentarer. ï¿½ppna <b>Kommentarseditorn</b>, klicka pï¿½ <b>Infoga symbol</b> och vï¿½lj ï¿½nskad fï¿½rg. Om du nu klickar pï¿½ en fï¿½rsta ruta, och dï¿½refter klickar pï¿½ en andra sï¿½ dras en pil i ï¿½nskad fï¿½rg frï¿½n den fï¿½rsta till den andra rutan. Klickar du bara pï¿½ en ruta, blir den fï¿½rgad.
   }
 }
 

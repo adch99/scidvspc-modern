@@ -56,6 +56,8 @@ menuText R EditStripBegin "Двигаться от начала" 1 \
   {Вырезает ходы от начала партии}
 menuText R EditStripEnd "Двигаться к концу" 0 \
   {Вырезает ходы к концу партии}
+# ====== TODO To be translated ======
+menuText R EditFlip "Flip Board" 0 {Flip the board}
 menuText R EditReset "Очистить " 0 \
   {Полностью очистить буферную базу}
 menuText R EditCopy "Скопировать эту партию в буферную базу" 1 \
@@ -132,6 +134,18 @@ menuText R WindowsTree "Окно дерева" 10 {Открыть/закрыть
 menuText R WindowsTB "Окно таблиц эндшпиля" 10 {Открыть/закрыть окно таблиц эндшпиля}
 menuText R WindowsBook "Окно книги" 0 {Открыть/закрыть окно книги}
 menuText R WindowsCorrChess "Окно переписки" 0 {Открыть/закрыть окно переписки}
+# ====== TODO To be translated ======
+menuText R Analyse "Analyse" 0
+# ====== TODO To be translated ======
+menuText R AnalyseEngineList "Analysis Engines" 0 {Configure analysis engines}
+# ====== TODO To be translated ======
+menuText R AnalyseRating "Player Ratings" 0 {Graph the rating history of the current game players}
+# ====== TODO To be translated ======
+menuText R AnalyseScore "Score Graph" 0 {Show the score graph window}
+# ====== TODO To be translated ======
+menuText R AnalyseStartEngine1 "Start engine 1" 0  {Start engine 1}
+# ====== TODO To be translated ======
+menuText R AnalyseStartEngine2 "Start engine 2" 0  {Start engine 2}
 
 # Tools menu:
 menuText R Tools "Инструменты" 2
@@ -336,7 +350,7 @@ menuText R OptionsTacticsBasesDir "Директория баз..." 0 {Устан
 menuText R OptionsInformant "Настройка значений подсказчика" 0
 menuText R OptionsSave "Сохранить установки" 0 "Сохранить все установки в файл $::optionsFile"
 # ====== TODO To be translated ======
-menuText R OptionsSaveBases "Save Bases as Default" 0 
+menuText R OptionsSaveBases "Save Bases as Default" 0
 menuText R OptionsAutoSave "Автосохранение установок при выходе" 0 \
   {Автосохранение всех установок при выходе из программы}
 
